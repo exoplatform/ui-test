@@ -645,6 +645,7 @@ public class EcmsBase extends ManageAccount {
 	
 	//Function to select home path
 	public void selectHomePathForCategoryTree(String homePath){
+		button = new Button(driver);
 		String[] temp;
 		/* delimiter */
 		String delimiter = "/";
@@ -660,6 +661,9 @@ public class EcmsBase extends ManageAccount {
 		if (waitForAndGetElement(element_select1, 5000, 0) != null){
 			click(element_select1);
 		}else if (waitForAndGetElement(element_select2, 5000, 0) != null){
+			click(element_select2);
+		}else if (waitForAndGetElement(button.ELEMENT_NEXT_ARROW_BUTTON, 5000, 0) != null){
+			click(button.ELEMENT_NEXT_ARROW_BUTTON);
 			click(element_select2);
 		}
 		Utils.pause(500);

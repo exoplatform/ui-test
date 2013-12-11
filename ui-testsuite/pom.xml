@@ -104,6 +104,12 @@
 				<testSuite>cloud-sniff-plf-navigation.xml</testSuite>
 			</properties>
 		</profile>
+		<profile>
+			<id>cloud-sniff-plf-unifiedsearch</id>
+			<properties>
+				<testSuite>cloud-sniff-plf-unifiedsearch.xml</testSuite>
+			</properties>
+		</profile>
 		
 		<!-- End of Cloud Applications -->
 

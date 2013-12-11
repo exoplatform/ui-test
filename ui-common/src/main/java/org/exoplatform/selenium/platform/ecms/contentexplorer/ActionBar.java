@@ -652,6 +652,7 @@ public class ActionBar extends EcmsBase{
 		}
 		assert getValue(ELEMENT_SYMLINK_NAME).equalsIgnoreCase(name);
 		click(button.ELEMENT_SAVE_BUTTON); 
+		Utils.pause(500);
 	}
 
 	//Add symlink to action bar in site explorer if it does not exited

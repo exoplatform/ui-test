@@ -7,7 +7,7 @@
 			</run>
 		</groups>
 		<classes>
-			<class name="org.exoplatform.selenium.platform.plf.sniff.PLF_UnifiedSearch"/>
+			<!-- <class name="org.exoplatform.selenium.platform.plf.sniff.PLF_UnifiedSearch"/> -->
 			<class name="org.exoplatform.selenium.platform.plf.sniff.PLF_HomepageGadget_CalendarGadget"/>
             <class name="org.exoplatform.selenium.platform.plf.sniff.PLF_HomePageGadget_SuggestionsGadget"/>
             <class name="org.exoplatform.selenium.platform.plf.sniff.PLF_HomePageGadget_InvitationGadget"/>

@@ -17,6 +17,7 @@ public class Button extends TestBase{
 	}
 
 	public final By ELEMENT_SHOW_MORE_BUTTON = By.xpath("//*[contains(text(), 'Show More')]"); 
+	public final By ELEMENT_NEXT_ARROW_BUTTON = By.className("uiIconNextArrow");
 	
 	//public final By ELEMENT_CONFIRM_BUTTON = By.xpath("//*[text()='Confirm']");
 	public final By ELEMENT_SAVE_CLOSE_BUTTON = By.xpath("//*[text()='Save & Close']");

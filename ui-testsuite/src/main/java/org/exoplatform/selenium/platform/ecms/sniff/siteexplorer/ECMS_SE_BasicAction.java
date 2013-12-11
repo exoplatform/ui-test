@@ -306,7 +306,7 @@ public class ECMS_SE_BasicAction extends PlatformBase {
 	/**caseID: 65852: - Paste Clipboard
 	 * Step 1: Paste Clipboard
 	 */
-	@Test
+	@Test (priority = 0)
 	public void test09_PasteClipboard() {
 		String node1= "test09PasteClipboard1";
 		String node2= "test09PasteClipboard2";
@@ -323,6 +323,7 @@ public class ECMS_SE_BasicAction extends PlatformBase {
 		cMenu.cutNode(bNode2);
 
 		//Open clipboard
+		click(siteExp.ELEMENT_CLIPBOARD_ICON);
 		click(siteExp.ELEMENT_CLIPBOARD_ICON);
 		waitForAndGetElement(siteExp.ELEMENT_CLIPBOARD_NODE.replace("{$node}", node1.toLowerCase()));
 		waitForAndGetElement(siteExp.ELEMENT_CLIPBOARD_NODE.replace("{$node}", node2.toLowerCase()));
@@ -342,8 +343,6 @@ public class ECMS_SE_BasicAction extends PlatformBase {
 		dialog.deleteInDialog();
 		cMenu.deleteDocument(bNode1);
 		cMenu.deleteDocument(bNode2);
-		
-
 	}
 
 	/**caseID: 65870: - Rename a node

@@ -15,6 +15,9 @@
 			<class name="org.exoplatform.selenium.platform.forum.sniff.Forum_Answers_Search"/>
 			<class name="org.exoplatform.selenium.platform.forum.sniff.Forum_Answers_Setting"/>
 			<class name="org.exoplatform.selenium.platform.forum.sniff.Forum_FAQ"/>
+			<class name="org.exoplatform.selenium.platform.forum.sniff.Forum_Search"/>
+			<class name="org.exoplatform.selenium.platform.forum.sniff.Forum_Setting"/>
+			<class name="org.exoplatform.selenium.platform.forum.sniff.Forum_Administration"/>
 		</classes>
 	</test>
 	<listeners>

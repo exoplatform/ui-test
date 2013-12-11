@@ -215,7 +215,7 @@ public class ECMS_SE_Admin extends PlatformBase {
 		actBar.addCategoryForNode(catePath, false, "Defense", "Healing");
 
 		//Delete category
-		actBar.deleteCategory(catePath + "/Defense/Healing");
+		actBar.deleteCategory(catePath + "/defense/healing");
 
 		//Delete data
 		cMenu.deleteDocument(bNode);
