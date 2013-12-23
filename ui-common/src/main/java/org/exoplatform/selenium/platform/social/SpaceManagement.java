@@ -43,15 +43,16 @@ public class SpaceManagement extends SocialBase {
 	//Go to My Spaces	> 
 	//Add space Form
 	protected  int DEFAULT_TIMEOUT = 60000;
-			//("//a[@class='AddSpaceIcon']");
+	public final By     ELEMENT_ADDNEWSPACE_BUTTON      = By.xpath("//button[text()='Add New Space']");
+	//("//a[@class='AddSpaceIcon']");
 	public final By     ELEMENT_ADDNEWSPACE_FORM        = By.xpath("//span[@class='PopupTitle popupTitle' and text()='Add New Space']");
-			//("//span[@class='PopupTitle' and text()='Add New Space']");
+	//("//span[@class='PopupTitle' and text()='Add New Space']");
 	public final By     ELEMENT_SPACE_NAME_INPUT        = By.xpath("//input[contains(@name,'displayName')]");
 	public final By     ELEMENT_SPACE_DESCRIPTION_INPUT = By.xpath("//textarea[contains(@name,'description')]");
 	public final By     ELEMENT_ACCESS_TAB              = By.xpath("//*[text()='Access & Edit']");
-			//("//div[contains(@class,'MiddleTab') and text()='Access & Edit']");
+	//("//div[contains(@class,'MiddleTab') and text()='Access & Edit']");
 	public final By     ELEMENT_USER_GROUP_TAB          = By.xpath("//*[text()='Invite users from group']");
-			//("//div[contains(@class,'MiddleTab') and text()='Invite users from group']");
+	//("//div[contains(@class,'MiddleTab') and text()='Invite users from group']");
 	public final By     ELEMENT_USER_GROUP_CHECKBOX     = By.xpath("//*[@id='useExistingGroup']");
 
 	//Edit space
@@ -62,8 +63,9 @@ public class SpaceManagement extends SocialBase {
 	public final String MESSAGE_DELETE_SPACE            = "Cannot undo one deleted space with all its page navigations and group. Are you sure to delete this space?";
 	public final String ELEMENT_VERIFY_SPACE_NAME_ACTIVITY = "//div[@class='author']/a[contains(text(),'${spaceName}')]";
 	public final String ELEMENT_SPACE_MENU_ITEM = "//span[contains(text(),'${menuItem}')]";
+	public final String ELEMENT_SPACE_MENU_ITEM_41 = "//span[@class='tabName' and contains(text(),'${menuItem}')]";
 	public final String ELEMENT_SPACE_CURRENT_MENU_ITEM = "//li[@class='active item']//span[text()='${menuItem}']";
-	
+
 	//Space access
 	public final By		ELEMENT_ACCESS_EDIT_VISIBLE 	= By.xpath("//span[text()='Visible']/../input[@name='UIVisibility']");
 	public final By		ELEMENT_ACCESS_EDIT_HIDDEN 	= By.xpath("//span[text()='Hidden']/../input[@name='UIVisibility']");
@@ -79,10 +81,10 @@ public class SpaceManagement extends SocialBase {
 	//Documents
 	public final By ELEMENT_DOCUMENTS_TAB = By.id("documents");
 	public final By ELEMENT_SPACE_SETTING_MENU = By.id("settings");
-	
+
 	//All space form
 	public final String ELEMENT_SPACE_TITLE = "//*[@class='spaceTitle']/a[text()='${spaceName}']";
-	
+
 	//Space information
 	public final String ELEMENT_SPACE_CURRENT_AVATAR = "//*[@id='UIBreadCrumbsNavigationPortlet']/*[@class='userAvt pull-left']/img[@title='${spaceName}']";
 	public final String ELEMENT_SPACE_CURRENT_NAME = "//*[@id='UIBreadCrumbsNavigationPortlet']//*[@class='name' and text()='${spaceName}']";
@@ -120,7 +122,7 @@ public class SpaceManagement extends SocialBase {
 	 */
 	public void clickButton(String label) {
 		By button = By.xpath("//div[@class='uiAction']/*[text()='" + label + "']");
-				//("//*[contains(@class,'ActionButton') and text()='" + label + "']");
+		//("//*[contains(@class,'ActionButton') and text()='" + label + "']");
 		waitForAndGetElement(button);
 		click(button);
 	}
@@ -205,9 +207,9 @@ public class SpaceManagement extends SocialBase {
 		if (visibility != "") {
 			info("-- Set visibility --");
 			if (visibility.equals("Visible")){
-					check(ELEMENT_ACCESS_EDIT_VISIBLE,2);
+				check(ELEMENT_ACCESS_EDIT_VISIBLE,2);
 			}else if (visibility.equals("Hidden")){
-					check(ELEMENT_ACCESS_EDIT_HIDDEN,2);
+				check(ELEMENT_ACCESS_EDIT_HIDDEN,2);
 			}	
 		}
 
@@ -351,12 +353,12 @@ public class SpaceManagement extends SocialBase {
 		actBar.goToViewMode(view);
 		if(!(actBar.isActionsOnActionBarPresent(eItem))){
 			actBar.addItem2ActionBar(item, eItem, view, tab);
-			 goToMySpacePage();
-			 click(By.linkText(spacename));
-			 waitForAndGetElement(ELEMENT_DOCUMENTS_TAB);
-			 click(ELEMENT_DOCUMENTS_TAB);
-			 actBar.goToViewMode(view);
-		 }
+			goToMySpacePage();
+			click(By.linkText(spacename));
+			waitForAndGetElement(ELEMENT_DOCUMENTS_TAB);
+			click(ELEMENT_DOCUMENTS_TAB);
+			actBar.goToViewMode(view);
+		}
 	}
 
 	/**
@@ -366,20 +368,27 @@ public class SpaceManagement extends SocialBase {
 	 */
 	public void goToSpaceMenu(String menuItem){
 		info("-- Go To " + menuItem + " --");
-		if(waitForAndGetElement(ELEMENT_SPACE_MENU_ITEM.replace("${menuItem}", menuItem),DEFAULT_TIMEOUT,0)!=null)
-			click(By.xpath(ELEMENT_SPACE_MENU_ITEM.replace("${menuItem}", menuItem)));
+		String eMenuItem = "";
+		if(this.plfVersion.equalsIgnoreCase("4.1")){
+			eMenuItem = ELEMENT_SPACE_MENU_ITEM_41;
+		}else
+			eMenuItem = ELEMENT_SPACE_MENU_ITEM;
+
+		if(waitForAndGetElement(eMenuItem.replace("${menuItem}", menuItem),DEFAULT_TIMEOUT,0)!=null)
+			click(By.xpath(eMenuItem.replace("${menuItem}", menuItem)));
 		else{
-			click(By.xpath(ELEMENT_SPACE_MENU_ITEM.replace("${menuItem}", "More")));
+			click(By.xpath(eMenuItem.replace("${menuItem}", "More")));
 			String []items = menuItem.split(" ");
 			if(items.length>1){
-				click(By.xpath(ELEMENT_SPACE_MENU_ITEM.replace("${menuItem}", menuItem.split(" ")[0]+" ...")));
+				click(By.xpath(eMenuItem.replace("${menuItem}", menuItem.split(" ")[0]+" ...")));
 			}
 			else{
-				click(By.xpath(ELEMENT_SPACE_MENU_ITEM.replace("${menuItem}", menuItem)));
+				click(By.xpath(eMenuItem.replace("${menuItem}", menuItem)));
 			}
-		}
+		}	
+
 	}
-	
+
 	/**
 	 * Verify space menu item
 	 * @author phuongdt
@@ -397,7 +406,7 @@ public class SpaceManagement extends SocialBase {
 				waitForAndGetElement(ELEMENT_SPACE_MENU_ITEM.replace("${menuItem}", menuItem));
 		}
 	}
-	
+
 	/** go to a space from my space navigation
 	 * @author phuongdt
 	 * @param spaceName

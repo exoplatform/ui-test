@@ -88,7 +88,7 @@ public class Gatein_Dashboard_ManageGadget extends DashBoard{
 		click(ELEMENT_CLOSE_ADD_GADGET_WINDOW);
 
 		info("Edit RSS Reader gadget preferences");
-		editRSSReaderGadgetonDashboard("3");
+		editRSSReaderGadgetonDashboard(gadgetName,"3");
 
 		info("Restore data");
 		actionOnGadgetOnDashboard(gadgetName,"Delete Gadget");		

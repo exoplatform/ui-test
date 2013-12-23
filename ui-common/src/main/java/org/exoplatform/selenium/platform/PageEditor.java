@@ -69,6 +69,7 @@ public class PageEditor extends PlatformBase {
 	public final By ELEMENT_CHECK_BOX_WORD_PHRASE_EDIT_MODE = By.xpath("//input[@id='content' and @type='radio']");
 	public final By ELEMENT_INPUT_NAME_SEARCH_WORD_PHRASE_EDIT_MODE = By.xpath("//input[@id='content' and @type='text']");
 	public final By ELEMENT_CONTENT_SEARCH_FORM_TAB = By.xpath("//div[@class='MiddleTab' and text() = 'Content Search Form']");
+	public final By ELEMENT_MULTI_CONTENT_SELECT_POPUP = By.xpath("//span[@class='PopupTitle popupTitle' and text()='Multiple Content Selector Pane']");
 
 	//Add Path > Right Workspace 
 	public final String ELEMENT_RIGHT_WORKSPACE_NODE = "//*[@class='rightWorkspace']//*[text()='${node}']";
@@ -301,34 +302,43 @@ public class PageEditor extends PlatformBase {
 					click(ELEMENT_SELECT_CONTENT_PATH_LINK);
 				}
 			}
-			info("-- Load frame 1 --");
+			waitForAndGetElement(By.xpath("//*[@id='BreadcumbsContainer']//*[@class='uiIconHome uiIconLightGray']"));
+			/*info("-- Load frame 1 --");
 			if(waitForAndGetElement(By.id("UIContentSelectorOne"),DEFAULT_TIMEOUT,0)==null){
 				info("-- Load frame 2 --");
 				if(waitForAndGetElement(By.id("CorrectContentSelectorPopupWindow"),DEFAULT_TIMEOUT,0)==null){
 					info("-- Load frame 3 --");
 					waitForAndGetElement(By.id("UIContentSelectorFolder"));
 				}
-			}
+			}*/
 			for(int i = 0; i < pathNames.length - 1; i ++ ){
-				String pathToSelect = ELEMENT_SELECT_CONTENT_FOLDER_PATHS.replace("${pathName}", pathNames[i])+"/../../../div[@class='expandIcon']";
-				String pathToSelectA = ELEMENT_SELECT_CONTENT_FOLDER_PATHS_A.replace("${pathName}", pathNames[i])+"/../../div[@class='expandIcon']";
+				String pathToSelect = ELEMENT_SELECT_CONTENT_FOLDER_PATHS.replace("${pathName}", pathNames[i])+"/../../../div";
+				String pathToSelectA = ELEMENT_SELECT_CONTENT_FOLDER_PATHS_A.replace("${pathName}", pathNames[i])+"/../../div";				
+				
+				boolean isExpandIcon = false;
+				boolean isExpandIconA = false;
+				
 				if(waitForAndGetElement(pathToSelect,DEFAULT_TIMEOUT,0)!=null)
-					click(pathToSelect);
+					 isExpandIcon = waitForAndGetElement(pathToSelect).getAttribute("class").equalsIgnoreCase("expandIcon");
 				else if(waitForAndGetElement(pathToSelectA,DEFAULT_TIMEOUT,0)!=null)
-					click(pathToSelectA);
-				else
-					waitForAndGetElement(ELEMENT_SELECT_CONTENT_FOLDER_PATHS.replace("${pathName}", pathNames[i])+"/../../../div[@class='collapseIcon']");
+					 isExpandIconA = waitForAndGetElement(pathToSelectA).getAttribute("class").equalsIgnoreCase("expandIcon");
+				
+				if(isExpandIcon || isExpandIconA)
+					click(By.linkText(pathNames[i]));				
 			}
 			click(ELEMENT_RIGHT_WORKSPACE_NODE.replace("${node}", pathNames[pathNames.length - 1]));
 			//wait 1s
 			Utils.pause(1000);
 			button.save();
+			waitForElementNotPresent(ELEMENT_MULTI_CONTENT_SELECT_POPUP);
 			if (contentMode){
+				waitForAndGetElement("//*[contains(@value,'"+(pathNames[pathNames.length - 1])+"')]");
 				button.save();
-				waitForTextPresent(pathNames[pathNames.length - 1]);
+				Utils.pause(2000);
 			}
 			if (nClose){
 				button.close();
+				waitForElementNotPresent(button.ELEMENT_CLOSE_BUTTON);
 			}
 		}
 		else{

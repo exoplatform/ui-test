@@ -7,7 +7,6 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import org.exoplatform.selenium.platform.calendar.CalendarBase;
-
 import org.exoplatform.selenium.platform.calendar.Event;
 import org.exoplatform.selenium.platform.calendar.Task;
 
@@ -123,18 +122,26 @@ public class Calendar_Calendar extends CalendarBase{
 		String[] user = {"mary"};
 		boolean[] canEdit = {true};
 
-		info("Add/Delete Shared Calendar");
+		info("Add Calendar");
 		addCalendar(calendar,calendar,"red");
+		info("Share Calendar");
 		shareCalendar(calendar,user,canEdit);
+
+		info("Confirm shared Calendar");
 		acc.signOut();
 		acc.signIn(DATA_USER2,DATA_PASS);
 		goToCalendarPage();
-
-		deleteSharedCalendar(calendar);
+		driver.navigate().refresh();
+		waitForAndGetElement(ELEMENT_CALENDAR_GET_BY_TAG_LI.replace("${calendar}",calendar));
+		
+		info("Delete shared Calendar");
 		acc.signOut();
 		acc.signIn(DATA_USER1,DATA_PASS);
 		goToCalendarPage();
-		deleteCalendar(calendar);
+		driver.navigate().refresh();
+		deleteCalendar(calendar,true);
+		
+		
 	}
 
 	/**Edit Shared Calendar, 

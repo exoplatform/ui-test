@@ -136,7 +136,7 @@ public class CalendarBase extends PlatformBase {
 	//-----------Event/Task -----------
 	public String ELEMENT_EVENT_TASK_ALL_DAY = "//*[@id='UIWeekViewGridAllDay']//div[contains(text(),'${event}')]";
 	public String ELEMENT_EVENT_TASK_ONE_DAY = "//*[@id='UIWeekViewGrid']//div[contains(text(),'${taskName}')]/parent::div[@class='clearfix']/div[@class='eventContainerBar eventTitle pull-left']";
-	public String ELEMENT_EVENT_TASK_WORKING_PANE = "//div[contains(@class,'eventContainer') and contains(text(),'${event}')]";
+	public String ELEMENT_EVENT_TASK_WORKING_PANE = "//*[@id='UIWeekViewGrid']//div[@class='eventContainer' and contains(text(),'${event}')]";
 	public By ELEMENT_EVENT_TASK_DELETE_MENU = By.xpath("//div[@id='tmpMenuElement']//a[@class='eventAction' and contains(@href,'Delete')]");
 	public String MSG_EVENT_TASK_DELETE = "Are you sure you want to delete this event/task?";
 
@@ -187,11 +187,11 @@ public class CalendarBase extends PlatformBase {
 	public String ELEMENT_BUTTON_VIEW_ACTIVE = "//li[@class='btn active']/a[text()='${view}']";
 	public String ELEMENT_BUTTON_MORE = "//*[@class='btn-group containerMoreItem']/*[@data-toggle='dropdown']";
 
-	public String EVENT_WEEK_VIEW = "//*[@id='UIWeekViewGridAllDay']//div[contains(text(),'${eventTitle}')]";
+	//public String EVENT_WEEK_VIEW = "//*[@id='UIWeekViewGridAllDay']//div[contains(text(),'${eventTitle}')]";
 	public String EVENT_DAY_VIEW = "//*[@id='UIDayView']//div[contains(text(),'${eventTitle}')]";
 	public String EVENT_MONTH_VIEW = "//*[@id='UIMonthView']//span[contains(text(),'${eventTitle}')]";
 	public String EVENT_LIST_VIEW = "//*[@id='UIListUsers']//span[contains(text(),'${eventTitle}')]";
-	public String EVENT_WORK_WEEK_VIEW = "//*[@id='UIWeekViewGridAllDay']//div[contains(text(),'${eventTitle}')]";
+//	public String EVENT_WORK_WEEK_VIEW = "//*[@id='UIWeekViewGridAllDay']//div[contains(text(),'${eventTitle}')]";
 
 	//----------------Group calendar---------------------------------
 	public String ELEMENT_GROUP_CAL = "//*[@id='UICalendars']//a[contains(text(),'${calName}')]";
@@ -333,6 +333,7 @@ public class CalendarBase extends PlatformBase {
 	 */
 	public void goToAddCalendar(){
 		click(ELEMENT_CALENDAR_ACTIONS_ICON);
+		Utils.pause(3000);
 		click(ELEMENT_CALENDAR_ADD_MENU);
 	}
 
@@ -583,7 +584,7 @@ public class CalendarBase extends PlatformBase {
 			break;
 		}
 		click(ELEMENT_EVENT_TASK_DELETE_MENU);
-		alert.waitForConfirmation(MSG_EVENT_TASK_DELETE);
+		//alert.waitForConfirmation(MSG_EVENT_TASK_DELETE);
 		driver.navigate().refresh();
 		Utils.pause(1000);
 		if (optDay.equals(selectDayOption.ALLDAY)){

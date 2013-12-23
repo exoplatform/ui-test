@@ -7,6 +7,7 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import org.exoplatform.selenium.Button;
+import org.exoplatform.selenium.Utils;
 import org.exoplatform.selenium.platform.HomePageActivity;
 import org.exoplatform.selenium.platform.ManageAccount;
 import org.exoplatform.selenium.platform.NavigationToolbar;
@@ -55,6 +56,7 @@ public class Calendar_PublishActivities_Task extends CalendarBase{
 		//Add space
 		sp.goToAllSpaces();
 		sp.addNewSpace(space,space);
+		Utils.pause(3000);
 		sp.goToSpaceMenu("Agenda");
 
 		//Add task
@@ -92,16 +94,18 @@ public class Calendar_PublishActivities_Task extends CalendarBase{
 		//Add space
 		sp.goToAllSpaces();
 		sp.addNewSpace(space,space);
+		Utils.pause(3000);
 		sp.goToSpaceMenu("Agenda");
 
 		//Add task
 		tsk.addQuickTask(task, task, null, null, false);
 		
 		//Edit task- add attachment
-		tsk.editTask(task,null, null, null, null, true,path);
+		tsk.editTask(task,null, null, null, null, false,path);
 
 		//Check activity
 		toolBar.goToHomePage();
+		driver.navigate().refresh();
 		homeAct.checkTaskActivity(task);
 		waitForAndGetElement(homeAct.ELEMENT_ACTIVITY_COMMENT_CONTENT.replace("${title}", task).replace("${comment}", homeAct.MSG_TASK_COMMENT_UPDATE_ATTACHMENT));
 
@@ -132,7 +136,8 @@ public class Calendar_PublishActivities_Task extends CalendarBase{
 		//Check activity
 		toolBar.goToHomePage();
 		driver.navigate().refresh();
-		waitForAndGetElement(homeAct.ELEMENT_ACTIVITY_COMMENT_CONTENT.replace("${title}", note).replace("${comment}", homeAct.MSG_TASK_COMMENT_UPDATE_NOTE.replace("${note}",note)),50000);
+		waitForAndGetElement(homeAct.ELEMENT_ACTIVITY_COMMENT_CONTENT.replace("${title}", note).replace("${comment}", 
+				homeAct.MSG_TASK_COMMENT_UPDATE_NOTE.replace("${note}",note)),50000);
 		
 		//Delete data
 		sp.goToAllSpaces();
@@ -181,6 +186,7 @@ public class Calendar_PublishActivities_Task extends CalendarBase{
 		//Add space
 		sp.goToAllSpaces();
 		sp.addNewSpace(space,space);
+		Utils.pause(3000);
 		sp.goToSpaceMenu("Agenda");
 
 		//Add task

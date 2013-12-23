@@ -53,17 +53,17 @@ public class Social_HomePage_Activity extends Activity {
 		initSeleniumTest();
 		driver.get(baseUrl);
 		info("Login with " + DATA_USER1);
-		magAcc = new ManageAccount(driver);
-		activity = new HomePageActivity(driver);
-		navToolBar = new NavigationToolbar(driver);
-		peoConn = new PeopleConnection(driver);
-		magMember = new ManageMember(driver);
+		magAcc = new ManageAccount(driver,this.plfVersion);
+		activity = new HomePageActivity(driver,this.plfVersion);
+		navToolBar = new NavigationToolbar(driver,this.plfVersion);
+		peoConn = new PeopleConnection(driver,this.plfVersion);
+		magMember = new ManageMember(driver,this.plfVersion);
 		peoPro = new PeopleProfile(driver);
-		actBar = new ActionBar(driver);
-		ecms = new EcmsBase(driver);
-		conTemp = new ContentTemplate(driver);
-		cMenu= new ContextMenu(driver);
-		siteExp = new SitesExplorer(driver);
+		actBar = new ActionBar(driver,this.plfVersion);
+		ecms = new EcmsBase(driver,this.plfVersion);
+		conTemp = new ContentTemplate(driver,this.plfVersion);
+		cMenu= new ContextMenu(driver,this.plfVersion);
+		siteExp = new SitesExplorer(driver,this.plfVersion);
 		magAcc.signIn(DATA_USER1, DATA_PASS);
 	}
 

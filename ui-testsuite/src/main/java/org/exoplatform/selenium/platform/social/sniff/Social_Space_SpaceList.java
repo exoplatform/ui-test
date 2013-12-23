@@ -27,9 +27,9 @@ public class Social_Space_SpaceList extends SocialBase {
 		initSeleniumTest();
 		driver.get(baseUrl);
 		info("Login with " + DATA_USER1);
-		magAcc = new ManageAccount(driver);
-		magMember = new ManageMember(driver);
-		spaceMag = new SpaceManagement(driver);
+		magAcc = new ManageAccount(driver,this.plfVersion);
+		magMember = new ManageMember(driver,this.plfVersion);
+		spaceMag = new SpaceManagement(driver,this.plfVersion);
 		magAcc.signIn(DATA_USER1, DATA_PASS);
 	}
 

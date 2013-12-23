@@ -54,6 +54,7 @@ public class ForumManageTopic extends ForumBase {
 	public final By ELEMENT_MORE_ACTION = By.xpath("//form[@id='UITopicDetail']//*[@data-toggle='dropdown']/*[@class='uiIconSettings uiIconLightGray']");
 
 	public String ELEMENT_CATEGORY_BREAD = "//a[@data-original-title='${category}']"; 
+//	public By ELEMENT_TOPIC_ON_FORUM_HOMEPAGE = By.xpath("//*[contains(@data-original-title,'${topic}')]");
 
 	//----------------start topic screen--------------------------------------------------
 

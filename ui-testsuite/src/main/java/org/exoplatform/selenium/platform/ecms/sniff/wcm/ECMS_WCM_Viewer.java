@@ -207,8 +207,10 @@ public class ECMS_WCM_Viewer extends PlatformBase{
 		String cContent = "Edit Preference of Content List Viewer";
 		String contentPath = "acme/web contents/Events";
 		String image = "TestData/Winter.jpg";
-
-		String pCLVPath = "General Drives/Sites Management/acme/web contents/Events";
+		String pCLVPath = "General Drives/Sites Management/acme/web contents/Events/"+cName;
+		String pCLVContent = "New: Speed";
+		String pCLVPathRestore = "General Drives/Sites Management/acme/web contents/News/"+pCLVContent;
+		
 
 		info("-- Create a new web content --");
 		navToolBar.goToSiteExplorer();
@@ -235,12 +237,11 @@ public class ECMS_WCM_Viewer extends PlatformBase{
 		pEditor.selectContentPathInEditMode(pCLVPath, true, false, false);
 		waitForAndGetElement(ecms.ELEMENT_CLV_TITLE.replace("${title}", cName), DEFAULT_TIMEOUT, 0, 2);
 		waitForAndGetElement(ecms.ELEMENT_CLV_PUBLISH_DATE.replace("${date}", pDate), DEFAULT_TIMEOUT, 0, 2);
-
 		info("-- Restore original data--");
+		ecms.goToOverviewPage();
 		cList.goToContentListPreference(ecms.ELEMENT_RSS_ICON, cList.ELEMENT_PREFERENCE_LATEST_NEWS_ICON);
 		click(ELEMENT_SELECT_CONTENT_PATH_LINK);
-		click(pEditor.ELEMENT_RIGHT_WORKSPACE_NODE.replace("${node}", "News"));
-		button.save();
+		pEditor.selectContentPathInEditMode(pCLVPathRestore, true, false,false);
 		navToolBar.goToSiteExplorer();
 		cMenu.deleteDocument(By.linkText(cName));
 	}

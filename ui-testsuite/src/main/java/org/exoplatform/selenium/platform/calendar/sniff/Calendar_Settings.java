@@ -121,7 +121,7 @@ public class Calendar_Settings extends CalendarBase{
 		String newfeed = "newtest";
 	
 		info("--Add event--");
-		evt.addQuickEvent(eventName,eventName,null,null,true);
+		evt.addQuickEvent(eventName,eventName,getDate(1,"MM/dd/yyyy"),getDate(1,"MM/dd/yyyy"),false);
 		
 		info("--Add new feeds --");
 		addFeeds(namefeed, userGroup,2);
@@ -133,7 +133,7 @@ public class Calendar_Settings extends CalendarBase{
 		deleteFeeds(newfeed);
 		
 		info("--Delete event--");
-		deleteEventTask(eventName);
+		deleteEventTask(eventName, selectDayOption.ONEDAY);
 	}
 	
 	/**

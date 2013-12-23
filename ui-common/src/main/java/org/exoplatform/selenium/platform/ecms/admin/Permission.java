@@ -100,7 +100,7 @@ public class Permission extends EcmsPermission{
 				if (waitForAndGetElement(By.xpath("//div[@id='UITabContent' and @style='display: block;;']//*[@title='" + user + "']/../..//*[@class='SelectPageIcon']"), 5000, 0) != null){
 					click(By.xpath("//div[@id='UITabContent' and @style='display: block;;']//*[@title='" + user + "']/../..//*[@class='SelectPageIcon']"));
 				}else {
-					click(By.xpath("//div[@id='UITabContent' and @style='display: block;;']//*[@data-original-title='" + user + "']/../..//*[contains(@class, 'uiIconPlus')]"));
+					click(By.xpath("//div[@id='UITabContent' and @style='display: block;;']//*[text()='" + user + "']/../..//*[contains(@class, 'uiIconPlus')]"));
 				}
 			}	
 		}

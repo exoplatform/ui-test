@@ -32,6 +32,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 
@@ -100,7 +101,11 @@ public class TestBase {
 			driver = new InternetExplorerDriver();
 			ieFlag = true;
 		} else {
-			driver = new FirefoxDriver();
+			FirefoxProfile profile = new FirefoxProfile();
+            profile.setPreference("plugins.hide_infobar_for_missing_plugin", true);
+            DesiredCapabilities capabilities = DesiredCapabilities.firefox();
+            capabilities.setCapability(FirefoxDriver.PROFILE, profile);
+			driver = new FirefoxDriver(capabilities);
 		}
 		baseUrl = System.getProperty("baseUrl");
 		if (baseUrl==null) baseUrl = DEFAULT_BASEURL;
@@ -119,6 +124,7 @@ public class TestBase {
 			driver.manage().window().maximize();
 			driver.navigate().refresh();
 			Utils.pause(2000);
+
 
 			ManageAccount acc = new ManageAccount(driver);
 			acc.signOut();
@@ -534,6 +540,7 @@ public class TestBase {
 		Utils.pause(500);
 		//waitForTextPresent(message, waitTime);
 		waitForAndGetElement("//*[contains(text(),'"+message+"')]",waitTime);
+
 	}
 
 	public void type(Object locator, String value, boolean validate, Object...opParams) {	

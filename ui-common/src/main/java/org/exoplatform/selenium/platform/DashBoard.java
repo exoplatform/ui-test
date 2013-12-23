@@ -38,7 +38,7 @@ public class DashBoard extends PlatformBase {
 
 	public final By ELEMENT_RSS_READER_EDIT_BUTTON = By.xpath("//span[@class='gadgetTitle' and text()='RSS Reader']/parent::h5[@class='title gadgetControl clearfix']/span[@class='pull-right']//*[@class='uiIconEdit uiIconLightGray']");
 	public final By ELEMENT_RSS_READER_NUM_INPUT = By.id("m_0_0");
-	public final By ELEMENT_RESS_READER_SAVE_BUTTON = By.xpath("//input[@value='Save']");
+	public final By ELEMENT_RESS_READER_SAVE_BUTTON = By.xpath("//input[@value='#{word.save}']");
 
 	/*------------- Data for Dashboard tab --------------------------------*/
 	public final String ELEMENT_DASHBOARD_NEW_ICON = "//*[@id='UITabPaneDashboard']//*[@class='uiIconSimplePlusMini uiIconLightGray']";
@@ -197,7 +197,7 @@ public class DashBoard extends PlatformBase {
 			waitForAndGetElement(By.xpath(ELEMENT_ACTION_ON_GADGET.replace("${gadgetTitleDisplay}", gadgetTitleDisplay).replace("${action}", "Restore Down")));
 		}
 		else if (action.contains("Edit Gadget")){
-			waitForAndGetElement(button.ELEMENT_SAVE_BUTTON);
+			waitForAndGetElement(ELEMENT_RESS_READER_SAVE_BUTTON);
 		}
 		else{//(action.contains("Restore Down"))
 			waitForAndGetElement(By.xpath(ELEMENT_ACTION_ON_GADGET.replace("${gadgetTitleDisplay}", gadgetTitleDisplay).replace("${action}", "Maximize")));
@@ -211,10 +211,9 @@ public class DashBoard extends PlatformBase {
 	 * 
 	 * @param numRSSdisplay
 	 */
-	public void editRSSReaderGadgetonDashboard(String numRSSdisplay){
-		info("----Open edit form of RSS reader gadget----");
-		waitForAndGetElement(ELEMENT_GADGET_LOCATOR.replace("${gadgetName}", "RSS Reader"));
-		click(ELEMENT_RSS_READER_EDIT_BUTTON);
+	public void editRSSReaderGadgetonDashboard(String gadgetTitleDisplay,String numRSSdisplay){
+		info("----Open edit form of gadget----");
+		actionOnGadgetOnDashboard(gadgetTitleDisplay,"Edit Gadget");
 		Utils.pause(3000);
 		info("----Edit number of RSS displayed----");
 		type(ELEMENT_RSS_READER_NUM_INPUT,numRSSdisplay, true);

@@ -24,7 +24,7 @@ public class ForumManageCategory extends ForumBase {
 
 	ForumPermission frumPer;
 	ManageAccount account;
-
+	ManageAlert magAlert;
 	public ForumManageCategory(WebDriver dr,String...plfVersion){
 		this.plfVersion = plfVersion.length>0?plfVersion[0]:"4.0";
 		driver = dr;
@@ -33,6 +33,7 @@ public class ForumManageCategory extends ForumBase {
 		alert = new ManageAlert(driver,this.plfVersion);
 		per = new PlatformPermission(driver,this.plfVersion);
 		account = new ManageAccount(driver,this.plfVersion);
+		magAlert = new ManageAlert(dr, plfVersion);
 	}
 
 	//------------category home screen----------------------------------------------------------------------
@@ -47,7 +48,7 @@ public class ForumManageCategory extends ForumBase {
 	//------------Manage category menu---------------------------------------------------------------------
 	public final By ELEMENT_MANAGE_CATEGORY = By.xpath("//*[@class='uiIconForumManageCategory uiIconForumLightGray']");
 	public final By ELEMENT_EDIT_CATEGORY = By.xpath("//*[contains(@href, 'EditCategory')]");
-	public final By ELEMENT_DELETE_CATEGORY = By.xpath("//a[@id='UICategoryConfirm0' and contains(text(),'Delete')]");
+	public final By ELEMENT_DELETE_CATEGORY = By.className("uiIconDelete");//By.xpath("//a[@id='UICategoryConfirm0' and contains(text(),'Delete')]");
 	public final By ELEMENT_DELETE_CATEGORY_PLF4_1 = By.xpath("//a[@class='confirm' and contains(text(),'Delete')]");
 	public final By ELEMENT_EXPORT_FORUM_IN_CATEGORY = By.xpath("//*[contains(@href, 'ExportCategory')]");
 	public final By ELEMENT_IMPORT_FORUM_IN_CATEGORY = By.xpath("//*[contains(@href, 'ImportForum')]");

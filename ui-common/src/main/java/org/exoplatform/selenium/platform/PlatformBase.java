@@ -226,11 +226,16 @@ public class PlatformBase extends TestBase {
 	 * Context menu
 	 * */
 //	public final By ELEMENT_CUT_NODE = By.className("uiIconEcmsCut");
-	public final By ELEMENT_CUT_NODE = By.xpath("//i[contains(@class,'uiIcon') and contains(@class,'Cut')]");
+	public final By ELEMENT_CUT_NODE = By.className("uiIconCutNode");
+	public final By ELEMENT_ECMS_CUT_NODE = By.className("uiIconEcmsCut");
+	//By.xpath("//*[@class='uiContextMenuContainer']//*[@class='uiIconEcmsCut']"); 
 //	public final By ELEMENT_PASTE_NODE = By.className("uiIconEcmsPaste");
-	public final By ELEMENT_PASTE_NODE = By.xpath("//i[contains(@class,'uiIcon') and contains(@class,'Paste')]");
+	public final By ELEMENT_PASTE_NODE = By.className("uiIconPasteNode");
+	public final By ELEMENT_ECMS_PASTE_NODE = By.className("uiIconEcmsPaste");
+	//By.xpath("//*[@class='uiContextMenuContainer']//*[@class='uiIconEcmsPaste']"); 
 //	public final By ELEMENT_COPY_NODE = By.className("uiIconEcmsCopy");
-	public final By ELEMENT_COPY_NODE = By.xpath("//i[contains(@class,'uiIcon') and contains(@class,'Copy')]");
+	public final By ELEMENT_COPY_NODE = By.className("uiIconCopyNode");
+	public final By ELEMENT_ECMS_COPY_NODE = By.className("uiIconEcmsCopy");
 	//By.xpath("//*[@class='uiContextMenuContainer']//*[@class='uiIconEcmsCopy']"); 
 	public final By ELEMENT_CLONE_NODE = By.xpath("//a[contains(text(),'Clone')]");
 	public final By ELEMENT_EDIT_NODE_PAGE = By.className("uiIconEcmsEditDocument");
@@ -394,9 +399,9 @@ public class PlatformBase extends TestBase {
 	
 	public final By ELEMENT_SWITCH_VIEW_MODE = By.linkText("Switch View mode");
 	public final String ELEMENT_PAGE_COLUMN = "//tr[@class='TRContainer']//td['${index}']";
-	public final By ELEMENT_VIEW_PAGE_PROPERTIES = By.linkText("View Page properties");
-	
+	public final By ELEMENT_VIEW_PAGE_PROPERTIES = By.linkText("View Page properties");	
 	public final By ELEMENT_PAGE_EXIST_WARNING_MSG = By.xpath("//*[contains(text(),'This page name already exists')]");
+
 	
 	//PortalNavigation - http://localhost:8080/portal/g/:platform:administrators/portalnavigation
 	public final String ELEMENT_NODE_LINK = "//*[@class='node']//*[@title='${nodeLabel}']";
@@ -467,6 +472,7 @@ public class PlatformBase extends TestBase {
 	public final By ELEMENT_SELECT_CONTENT_PATH_LINK = By.xpath("//a[@data-original-title='Add Path']");
 	public final By ELEMENT_SELECT_CONTENT_PATH_LINK_AUX = By.xpath("//*[contains(@class, 'uiIconAddPath')]");
 	public final String ELEMENT_CONTENT_IN_CONTENT_DETAIL_PORTLET = "//*[contains(@id, 'UISingleContentViewerPortlet')]//*[@class='Title' and text()='${contentName}']";
+	public final String ELEMENT_CONTENT_IN_CONTENT_DETAIL_PORTLET_41 = "//*[contains(@id, 'UISingleContentViewerPortlet')]//*[@class='topTitle' and text()='${contentName}']";
 	public final String ELEMENT_GADGET_APPLICATION_PAGE_EDITOR = "//div[@id='UIApplicationList0']//div[contains(text(),'${gadget}')]";
 	public final String ELEMENT_PORTLET_TITLE = "//*[@class='portletLayoutDecorator' and contains(text(), '${portletTitle}')]";
 
@@ -965,6 +971,9 @@ public class PlatformBase extends TestBase {
 			}else if (waitForAndGetElement(ELEMENT_NAVIGATION_CUT_NODE, 5000, 0) != null){
 				click(ELEMENT_NAVIGATION_CUT_NODE);
 				return;
+			}else if (waitForAndGetElement(ELEMENT_ECMS_CUT_NODE, 5000, 0) != null){
+				click(ELEMENT_ECMS_CUT_NODE);
+				return;
 			}
 			Utils.pause(WAIT_INTERVAL);
 		}
@@ -979,9 +988,12 @@ public class PlatformBase extends TestBase {
 			if (waitForAndGetElement(ELEMENT_COPY_NODE, 5000, 0) != null){
 				click((ELEMENT_COPY_NODE));
 				return;
-			/*}else if (waitForAndGetElement(ELEMENT_NAVIGATION_COPY_NODE, 5000, 0) != null){
+			}else if (waitForAndGetElement(ELEMENT_NAVIGATION_COPY_NODE, 5000, 0) != null){
 				click(ELEMENT_NAVIGATION_COPY_NODE);
-				return;*/
+				return;
+			} else if (waitForAndGetElement(ELEMENT_ECMS_COPY_NODE, 5000, 0) != null){
+				click(ELEMENT_ECMS_COPY_NODE);
+				return;
 			}
 			Utils.pause(WAIT_INTERVAL);
 		}
@@ -998,6 +1010,13 @@ public class PlatformBase extends TestBase {
 				return;
 			}else if (waitForAndGetElement(ELEMENT_NAVIGATION_PASTE_NODE, 5000, 0) != null){
 				click(ELEMENT_NAVIGATION_PASTE_NODE);
+				return;
+			} else if(waitForAndGetElement(ELEMENT_ECMS_PASTE_NODE, 5000, 0) != null){
+				click(ELEMENT_ECMS_PASTE_NODE);
+				return;
+			}
+			else if (waitForAndGetElement(ELEMENT_ECMS_PASTE_NODE, 5000, 0) != null){
+				click(ELEMENT_ECMS_PASTE_NODE);
 				return;
 			}
 			Utils.pause(WAIT_INTERVAL);
@@ -1090,11 +1109,10 @@ public class PlatformBase extends TestBase {
 				if (repeat >= DEFAULT_TIMEOUT/WAIT_INTERVAL) {
 					Assert.fail("Fail to input data to frame " + framelocator);
 				}
-				driver.switchTo().frame(waitForAndGetElement(framelocator));
+				WebElement e = waitForAndGetElement(framelocator,DEFAULT_TIMEOUT,1,2);
+				driver.switchTo().frame(e);
 				inputsummary = driver.switchTo().activeElement();
-
 				inputsummary.click();
-
 				inputsummary.clear();
 
 				if (validate.length >0)
@@ -1196,12 +1214,27 @@ public class PlatformBase extends TestBase {
 		String[] lines = content.split("/");
 
 		if (lines.length > 0){
-			driver.switchTo().frame(waitForAndGetElement(cke_frame));
+			
+			WebElement e = waitForAndGetElement(cke_frame,DEFAULT_TIMEOUT,1,2);
+			driver.switchTo().frame(e);
 			inputsummary = driver.switchTo().activeElement();
 			inputsummary.click();
+			inputsummary.clear();
+
 			for (int i = 0; i < lines.length; i++){
-				inputsummary.sendKeys(lines[i]);
-				inputsummary.sendKeys(Keys.ENTER);
+				if(this.plfVersion.equalsIgnoreCase("4.0")){
+					inputsummary.sendKeys(lines[i]);
+					inputsummary.sendKeys(Keys.ENTER);
+				} else if(this.plfVersion.equalsIgnoreCase("4.1")){
+					String newStr = "<p>" + lines[i]+"</p>";;
+					if(i==0)
+						newStr = "<p>" + lines[i]+"</p>";
+					else{
+						newStr = "<p>"+inputsummary.getText().replace("\n","</p><p>")+ "</p>";
+						newStr +="<p>" + lines[i]+"</p>";
+					}
+					((JavascriptExecutor) driver).executeScript("document.body.innerHTML='" + newStr + "'");
+				}
 				Utils.pause(500);
 			}
 		}

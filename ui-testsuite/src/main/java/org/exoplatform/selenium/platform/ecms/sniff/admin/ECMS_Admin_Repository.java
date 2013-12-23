@@ -154,7 +154,7 @@ public class ECMS_Admin_Repository extends PlatformBase{
 		//Open form to add permission for Users/Group (unlock node)
 		//Add permission for group to unlock node
 		ecMain.goToManageLockTab();
-		userGroup.selectGroup(ELEMENT_GROUP_TO_SELECT);
+		userGroup.selectGroup(ELEMENT_GROUP_TO_SELECT,true);
 		click(ELEMENT_GROUP_MEMBERSHIP);
 
 		//Groups are listed on the table

@@ -26,9 +26,9 @@ public class ForumManagePoll extends ForumBase {
 
 	ForumManagePost mngPost;
 	
-	public ForumManagePoll(WebDriver dr, String...plfVersion){
-		this.plfVersion = plfVersion.length>0?plfVersion[0]:"4.0";
+	public ForumManagePoll(WebDriver dr,String...plfVersion){
 		driver = dr;
+		this.plfVersion = plfVersion.length>0?plfVersion[0]:"4.0";
 		magTopic = new ForumManageTopic(driver);
 		app = new ManageApplications(driver);
 		userGroup = new UserGroupManagement(driver);
@@ -46,7 +46,7 @@ public class ForumManagePoll extends ForumBase {
 	public final By ELEMENT_POLL_DELETE_LINK = By.xpath("//i[@class='uiIconDelete uiIconLightGray']");
 	public final By ELEMENT_POLL_CATEGORY = By.xpath("//a[@title='poll']");
 	public final By ELEMENT_POLL_PORTLET = By.id("poll/local._poll.PollPortlet");
-	public final By ELEMENT_ADDMORE_ITEMS = By.xpath("//img[@title='Add Item']");
+	public final By ELEMENT_ADDMORE_ITEMS = By.xpath("//a[@data-original-title='Add Item']");
 	public final By ELEMENT_PUBLIC_DATA = By.id("PublicData");
 	public final By ELEMENT_TIMEOUT = By.id("TimeOut");
 	public final By ELEMENT_CHANGEVOTE = By.id("VoteAgain");
@@ -77,6 +77,8 @@ public class ForumManagePoll extends ForumBase {
 	public final String ELEMENT_POLL_QUESTION_LINK = "//div[text()='${pollQuestion} ?']";
 	public final String ELEMENT_POLL_TITLE = "//div[@class='textTitlePoll pull-left']";
 	public final String ELEMENT_OPTION = "//tbody[@class='contentVoting']//span[contains(text(),'${option}')]";
+	public String ELEMENT_OPTION_RADIO = "//tbody[@class='contentVoting']//span[contains(text(),'${option}')]/parent::label[@class='uiRadio']/input[@class='radio']";
+	public String ELEMENT_OPTION_CHECKBOX = "//tbody[@class='contentVoting']//span[contains(text(),'${option}')]/parent::span[@class='uiCheckbox']/input[@class='checkbox']";
 	public final String ELEMENT_OPTION_CLOSED = "//td[text()='${option}']/../td//div[@class='progress']";
 	public final String WARNING_MESSAGE_NO_PERMISSION = "You have no permission to view this poll or the poll has been deleted.";
 	public final String MSG_POLL_DELETE = "Are you sure you want to delete this poll ?";
@@ -85,6 +87,7 @@ public class ForumManagePoll extends ForumBase {
 	public By ELEMENT_POLL_REOPEN_LINK = By.xpath("//div[@class='UITopicPoll uiBox uiTopicPoll uiCollapExpand']//i[@class='uiIconOpen']");
 	public final By ELEMENT_MORE_ACTION_POLL = By.xpath("//form[@id='UITopicPoll']//*[@data-toggle='dropdown']/*[@class='uiIconSettings uiIconLightGray']");
 	
+	public String ELEMENT_WARNING_ADD_MORE_OPTS = "//span[@class='warningIcon' and contains(text(),'Please add more options.')]";
 
 	/*------------------------------------Common function------------------------------*/
 	/**
@@ -257,6 +260,16 @@ public class ForumManagePoll extends ForumBase {
 			check(ELEMENT_POLL_MULTI_VOTE,2);	
 	}
 
+	/**
+	 * Add poll from Top Navigation bar
+	 * 
+	 * @param pollQuestion
+	 * @param options
+	 * @param timeout
+	 * @param changeVote
+	 * @param multi
+	 * @param option
+	 */
 	public void addPoll(String pollQuestion, String[] options, String timeout, boolean changeVote, boolean multi, boolean... option){
 		boolean check = option.length > 0 ? option[0]: true;
 		boolean loginByTopNavigation = option.length > 1 ? option[1]: false;
@@ -282,8 +295,8 @@ public class ForumManagePoll extends ForumBase {
 		//Check after add poll
 		//waitForTextPresent(pollQuestion);
 	} 
-	/** function: go to add poll for topic from More action/Add poll
-	 * @author lientm
+	/** 
+	 * Go to "add poll" for Forum topic from More action/Add poll
 	 */
 	public void goToAddPoll(){
 		info("Go to add poll for topic");
@@ -295,7 +308,7 @@ public class ForumManagePoll extends ForumBase {
 	}
 
 	/** Edit a poll in topic
-	 * @author thuntn  
+	 *
 	 * @param pollQuestion
 	 * @param options
 	 * @param timeout
@@ -322,7 +335,7 @@ public class ForumManagePoll extends ForumBase {
 	} 
 
 	/**Delete a poll in a topic
-	 * @author thuntn
+	 * 
 	 * @param poll
 	 */
 	public void deletePollInTopic(String poll){

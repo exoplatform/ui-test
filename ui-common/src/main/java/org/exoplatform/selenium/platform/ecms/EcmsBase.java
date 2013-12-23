@@ -32,9 +32,9 @@ public class EcmsBase extends ManageAccount {
 	 * */
 
 	public final String ELEMENT_OVERVIEW_LINK = "//i[@class='uiIconFile uiIconExt-overview']";
-	public final String ELEMENT_DRAFT_ACME= "//div[text()='${content}']/../..//span[text()='Draft']";
+	public final String ELEMENT_DRAFT_ACME= "//h4[text()='${content}']/..//span[text()='Draft']";
 	public final String ELEMENT_ACME_TITLE= "//*[text()='${content}']";
-	public final String ELEMENT_PUBLISH_ACME = "//div[text()='${content}']/../..//span[@class='publishText']";
+	public final String ELEMENT_PUBLISH_ACME = "//h4[text()='${content}']/..//span[@class='publishText']";
 	public final By ELEMENT_ACME_WELCOME_TEXT = By.xpath("//div[contains(text(),'Welcome to Acme')]");
 	public final By ELEMENT_ACME_SEARCH_INPUT = By.name("keyword");
 	public final String ELEMENT_ACME_SEARCH_RESULT = "//a[text()='${result}']";
@@ -333,6 +333,7 @@ public class EcmsBase extends ManageAccount {
 	public final By ELEMENT_ADD_COMMENT_LINK = By.xpath("//a[contains(text(), 'Comment')]");
 	public final By ELEMENT_ADD_COMMENT_POPUP = By.xpath("//*[@id='UIPopupWindow']//span[text()='Comment']");
 	public final By ELEMENT_ADD_COMMENT_FRAME = By.xpath("//*[@id='cke_contents_comment']/iframe");
+	public final By ELEMENT_ADD_COMMENT_FRAME_41 = By.xpath("//*[@id='cke_comment']//iframe"); 
 	public final By ELEMENT_SHOW_COMMENT_LINK = By.linkText("Show comments");
 	public final String ELEMENT_SHOW_COMMENT_CONTENT = "//*[@class='commentBox uiBox']//p[contains(text(), '${comment}')]";
 	public final String ELEMENT_EDIT_COMMENT_ICON = "//*[contains(text(), '${comment}')]/..//a[@data-original-title='Edit this comment']";
@@ -357,7 +358,7 @@ public class EcmsBase extends ManageAccount {
 
 	//Acme site > Overview page
 	public final By ELEMENT_OVERVIEW_PAGE = By.xpath("//*[@class = 'uiIconFile uiIconExt-overview']");
-	public final By ELEMENT_RSS_ICON = By.className("RssIcon");
+	public final By ELEMENT_RSS_ICON = By.xpath("//*[@data-original-title='RSS Feed']");
 	public final String ELEMENT_CLV_TITLE = "//*[@class='Title' and contains(text(), '${title}')]";
 	public final String ELEMENT_CLV_PUBLISH_DATE = ELEMENT_CLV_TITLE + "/../div[contains(text(), '${date}')]";
 
@@ -476,18 +477,15 @@ public class EcmsBase extends ManageAccount {
 
 	//Function to select user to set permission on permission management popup
 	public void selectUser(String user){
-		By ELEMENT_USER = By.xpath("//*[@data-original-title = '"+user+"']/../../td//*[@class='uiIconPlus uiIconLightGray']"); 
+		By ELEMENT_USER = By.xpath("//*[text() = '"+user+"']/../../td//*[@class='uiIconPlus uiIconLightGray']"); 
 		info("Set permission for user "+ user);
 		if (isElementPresent(By.xpath("//*[@title = 'Select User']"))){
 			click(By.xpath("//*[@title = 'Select User']"));
 		}else if (isElementPresent(By.xpath("//*[@data-original-title = 'Select User']"))){
 			click(By.xpath("//*[@data-original-title = 'Select User']"));
 		}
-		if (waitForAndGetElement(ELEMENT_USER) != null){
 			click(ELEMENT_USER);
-		}else{
-			info("User is not found");
-		}
+		
 		Utils.pause(1000);
 	}
 
@@ -498,12 +496,12 @@ public class EcmsBase extends ManageAccount {
 	 * @param anchor: link icon to open select memebership form
 	 */
 	public void selectMembership(String groupPath, String membership, String anchor){
-		if (isElementPresent(By.xpath("//*[@data-original-title = '" + anchor + "']"))){
-			click(By.xpath("//*[@data-original-title = '" + anchor + "']"));
-		}else if (isElementPresent(By.xpath("//*[@title = '" + anchor + "']"))){
-			click(By.xpath("//*[@title = '" + anchor + "']"));
+		if (isElementPresent(By.xpath("//*[contains(@data-original-title,'" + anchor + "')]"))){
+			click(By.xpath("//*[contains(@data-original-title,'" + anchor + "')]"));
+		}else if (isElementPresent(By.xpath("//*[contains(@title,'" + anchor + "')]"))){
+			click(By.xpath("//*[contains(@title,'" + anchor + "')]"));
 		}
-		userGroup.selectGroup(groupPath, false);
+		userGroup.selectGroup(groupPath, true);
 		click(By.linkText(membership));
 		Utils.pause(1000);
 	}

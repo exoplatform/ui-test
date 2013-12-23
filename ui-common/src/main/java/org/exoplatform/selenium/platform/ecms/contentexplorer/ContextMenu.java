@@ -7,6 +7,7 @@ import org.exoplatform.selenium.Dialog;
 import org.exoplatform.selenium.Utils;
 import org.exoplatform.selenium.platform.ecms.EcmsBase;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
@@ -43,7 +44,7 @@ public class ContextMenu extends EcmsBase{
 	public final By ELEMENT_MENU_CHECKOUT = By.className("uiIconEcmsCheckOut");
 	public final By ELEMENT_MENU_RENAME_NODE = By.linkText("Rename");
 	public final By ELEMENT_MENU_PASTE = By.xpath("//a[contains(text(),'Paste')]");
-	public final By ELEMENT_MENU_DELETE = By.xpath("//*[@class='uiContextMenuContainer']//i[@class='uiIconEcmsDelete']");
+	public final By ELEMENT_MENU_DELETE = By.className("uiIconEcmsDelete");
 			//By.className("uiIconEcmsDelete");
 	public final By ELEMENT_MENU_DELETE_RIGHT_CLICK_POPUP = By.xpath("//*[@id='JCRContextMenu']/div/ul/li[7]/a");
 	public final By ELEMENT_MENU_EDIT = By.className("uiIconEcmsEditDocument");
@@ -90,7 +91,10 @@ public class ContextMenu extends EcmsBase{
 		//	}
 		rightClickOnElement(loc);
 		if (waitForAndGetElement(actionItem, 5000, 1) != null) {
-			click(actionItem);
+			if(this.plfVersion.equalsIgnoreCase("4.0"))
+				click(actionItem);
+			else if(this.plfVersion.equalsIgnoreCase("4.1"))
+				((JavascriptExecutor)driver).executeScript("arguments[0].click();", waitForAndGetElement(actionItem));
 		}
 		if (!nodeName.isEmpty()){
 			//if (waitForAndGetElement(ELEMENT_MENU_RENAME_NODE, 5000, 1) != null){
@@ -195,7 +199,7 @@ public class ContextMenu extends EcmsBase{
 	public void deleteData(By data){
 		goToNode(data);
 		deleteDocument(data);
-		Utils.pause(1000);
-		waitForElementNotPresent(data);
+		/*Utils.pause(1000);
+		waitForElementNotPresent(data);*/
 	}
 }

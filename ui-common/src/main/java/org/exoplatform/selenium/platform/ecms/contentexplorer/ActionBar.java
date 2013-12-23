@@ -899,12 +899,15 @@ public class ActionBar extends EcmsBase{
 	//Undo deleted Items
 	public void undoDeletion(String...nodeName){
 		String node = nodeName.length > 0 ? nodeName[0]: "";
-
+		
 		info("-- Undo deletion --");
 		if (node != ""){
 			waitForTextPresent("\'" + node + "' was deleted succesfully.");
 		}
-		click(ELEMENT_UNDO_DELETED_ITEM);
+		if(this.plfVersion.equalsIgnoreCase("4.1"))
+			((JavascriptExecutor)driver).executeScript("arguments[0].click();",waitForAndGetElement(ELEMENT_UNDO_DELETED_ITEM));
+		else if(this.plfVersion.equalsIgnoreCase("4.0"))
+			click(ELEMENT_UNDO_DELETED_ITEM);
 		if (waitForAndGetElement(button.ELEMENT_OK_BUTTON, 3000, 0) != null){
 			click(button.ELEMENT_OK_BUTTON);
 		}
@@ -1006,7 +1009,10 @@ public class ActionBar extends EcmsBase{
 	 */
 	public void addComment(String comment){
 		goToAddComment();
-		inputDataToFrame(ELEMENT_ADD_COMMENT_FRAME, comment, false);
+		if(this.plfVersion.equalsIgnoreCase("4.1"))
+			inputDataToFrame(ELEMENT_ADD_COMMENT_FRAME_41, comment, false);
+		else if(this.plfVersion.equalsIgnoreCase("4.0"))
+			inputDataToFrame(ELEMENT_ADD_COMMENT_FRAME, comment, false);
 		switchToParentWindow();
 		button.save();
 		waitForElementNotPresent(ELEMENT_ADD_COMMENT_POPUP);
@@ -1023,7 +1029,10 @@ public class ActionBar extends EcmsBase{
 		click(ELEMENT_SHOW_COMMENT_LINK);
 		click(By.xpath(ELEMENT_EDIT_COMMENT_ICON.replace("${comment}", oldComment)));
 		waitForAndGetElement(ELEMENT_ADD_COMMENT_POPUP);
-		inputDataToFrame(ELEMENT_ADD_COMMENT_FRAME, newComment, false);
+		if(this.plfVersion.equalsIgnoreCase("4.1"))
+			inputDataToFrame(ELEMENT_ADD_COMMENT_FRAME_41, newComment, false);
+		else if(this.plfVersion.equalsIgnoreCase("4.0"))
+			inputDataToFrame(ELEMENT_ADD_COMMENT_FRAME, newComment, false);
 		switchToParentWindow();
 		button.save();
 		waitForElementNotPresent(ELEMENT_ADD_COMMENT_POPUP);

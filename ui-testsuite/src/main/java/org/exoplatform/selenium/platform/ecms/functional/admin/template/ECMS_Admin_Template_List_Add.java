@@ -50,7 +50,6 @@ public class ECMS_Admin_Template_List_Add extends PlatformBase{
 	@AfterMethod
 	public void afterMethod(){
 		info("Logout ECMS");
-		//logoutEcms();
 		driver.manage().deleteAllCookies();
 		driver.quit();
 	}
@@ -65,13 +64,9 @@ public class ECMS_Admin_Template_List_Add extends PlatformBase{
 		String templateTitle = "List_Template_02";
 		String templateName  = "List_Template_02";
 		String templateType  = "Navigation";
-
 		ecMain.goToListTemplateTab();
-
 		click(magTem.ELEMENT_ADD_TEMPLATE_BUTTON);
-
 		magTem.addNewListTemplate(templateTitle, templateName, templateType, true, "List_Template_Content");
-
 		magTem.deleleTemplate(templateTitle);
 	}
 
@@ -80,13 +75,17 @@ public class ECMS_Admin_Template_List_Add extends PlatformBase{
 	 * <li>Step 1: Go to List templates</li>
 	 * <li>Step 2: Open Add List Template form</li>
 	 * <li>Step 3: Add List template with blank content</li>
-	 * ======= Pending ECMS-5096 =========
 	 */
-	//@Test
+	@Test
 	public void test02_AddListTemplateWhenContentFieldIsBlank(){
+		String templateTitle = "test02_AddListTemplate";
+		String templateName  = "test02_AddListTemplate";
+		String templateType  = "Content";
+		String content = "";
 		ecMain.goToListTemplateTab();
 		click(magTem.ELEMENT_ADD_TEMPLATE_BUTTON);
-		//Pending
+		magTem.addNewListTemplate(templateTitle, templateName, templateType, false, content, false, true);
+		magTem.deleleTemplate(templateName);
 	}
 
 	/**
@@ -100,13 +99,9 @@ public class ECMS_Admin_Template_List_Add extends PlatformBase{
 		String templateTitle = "";
 		String templateName  = "List_Template_03";
 		String templateType  = "Paginator";
-
 		ecMain.goToListTemplateTab();
-
 		click(magTem.ELEMENT_ADD_TEMPLATE_BUTTON);
-
 		magTem.addNewListTemplate(templateTitle, templateName, templateType, true, "List_Template_Content");
-
 		magTem.deleleTemplate(templateName);
 	}
 
@@ -115,23 +110,18 @@ public class ECMS_Admin_Template_List_Add extends PlatformBase{
 	 * <li>Step 1: Go to List templates</li>
 	 * <li>Step 2: Open Add List Template form</li>
 	 * <li>Step 3: Add List template when Template Name field is blank</li>
-	 * =========== Pending ECMS-5097 ============
 	 */
-	//@Test
+	@Test
 	public void test04_AddListTemplateWhenTemplateNameFieldIsBlank(){
 		String templateTitle = "List_Template_04";
 		String templateName  = "";
 		String templateType  = "Content";
-
+		String message = "The field \"Template Name\" is required.";
 		ecMain.goToListTemplateTab();
-
 		click(magTem.ELEMENT_ADD_TEMPLATE_BUTTON);
-
 		magTem.addNewListTemplate(templateTitle, templateName, templateType, true, "List_Template_Content", false, false);
-
-		//alt.waitForMessage("");
-
-		click(button.ELEMENT_OK_BUTTON);
+		alt.verifyAlertMessage(message);
+		button.cancel();
 	}
 
 	/**
@@ -147,11 +137,8 @@ public class ECMS_Admin_Template_List_Add extends PlatformBase{
 		String templateType  = "Content";
 
 		ecMain.goToListTemplateTab();
-
 		click(magTem.ELEMENT_ADD_TEMPLATE_BUTTON);
-
 		magTem.addNewListTemplate(templateTitle, templateName, templateType, true, "List_Template_Content", false, true);
-
 		magTem.deleleTemplate(templateName);
 	}
 
@@ -166,14 +153,11 @@ public class ECMS_Admin_Template_List_Add extends PlatformBase{
 		String templateContent = "List_Template_Content";
 
 		ecMain.goToListTemplateTab();
-
 		click(magTem.ELEMENT_ADD_TEMPLATE_BUTTON);
-
 		type(magTem.ELEMENT_LIST_TEMPLATE_CONTENT, templateContent, true);
 		type(magTem.ELEMENT_LIST_TEMPLATE_TITLE, templateTitle, false);
 		type(magTem.ELEMENT_LIST_TEMPLATE_NAME, templateName, false);
 		select(magTem.ELEMENT_LIST_TEMPLATE_TYPE, templateType);
-
 		click(button.ELEMENT_RESET_BUTTON);
 
 		//Verify that added values are reset to blank
@@ -182,8 +166,7 @@ public class ECMS_Admin_Template_List_Add extends PlatformBase{
 		assert !magTem.ELEMENT_LIST_TEMPLATE_TITLE.equals(templateTitle): "Cannot reset data (Name)";
 		assert !magTem.ELEMENT_LIST_TEMPLATE_NAME.equals(templateName): "Cannot reset data (Template Name)";
 		assert !magTem.ELEMENT_LIST_TEMPLATE_TYPE.equals(templateType): "Cannot reset data (Template Type)";
-
-		waitForTextNotPresent(templateTitle);
+		waitForElementNotPresent(magTem.ELEMENT_DELETE_TEMPLATE_ICON.replace("${templateName}", templateName));
 	}
 
 	/**
@@ -198,19 +181,14 @@ public class ECMS_Admin_Template_List_Add extends PlatformBase{
 		String templateTitle = "List_Template_10";
 		String templateName  = "List_Template_10";
 		String templateType  = "Content";
-
 		ecMain.goToListTemplateTab();
-
 		click(magTem.ELEMENT_ADD_TEMPLATE_BUTTON);
-
 		type(magTem.ELEMENT_LIST_TEMPLATE_CONTENT, "templateContent", true);
 		type(magTem.ELEMENT_LIST_TEMPLATE_TITLE, templateTitle, false);
 		type(magTem.ELEMENT_LIST_TEMPLATE_NAME, templateName, false);
 		select(magTem.ELEMENT_LIST_TEMPLATE_TYPE, templateType);
-
 		button.cancel();
-
-		waitForTextNotPresent(templateTitle);
+		waitForElementNotPresent(magTem.ELEMENT_DELETE_TEMPLATE_ICON.replace("${templateName}", templateName));
 	}
 
 	/**
@@ -222,13 +200,9 @@ public class ECMS_Admin_Template_List_Add extends PlatformBase{
 		String templateTitle = "List_Template_08";
 		String templateName  = "List_Template_08";
 		String templateType  = "Navigation";
-
 		ecMain.goToListTemplateTab();
-
 		click(magTem.ELEMENT_ADD_TEMPLATE_BUTTON);
-
 		magTem.addNewListTemplate(templateTitle, templateName, templateType, true, "List_Template_Content", false, true);
-
 		magTem.deleleTemplate(templateTitle);
 	}
 
@@ -241,13 +215,9 @@ public class ECMS_Admin_Template_List_Add extends PlatformBase{
 		String templateTitle = "List_Template_09";
 		String templateName  = "List_Template_09";
 		String templateType  = "Paginator";
-
 		ecMain.goToListTemplateTab();
-
 		click(magTem.ELEMENT_ADD_TEMPLATE_BUTTON);
-
 		magTem.addNewListTemplate(templateTitle, templateName, templateType, true, "List_Template_Content", false, true);
-
 		magTem.deleleTemplate(templateTitle);
 	}
 
@@ -262,36 +232,25 @@ public class ECMS_Admin_Template_List_Add extends PlatformBase{
 		String templateTitle = "Announcement";
 		String templateName  = "List_Template_06";
 		String templateType  = "Content";
-
 		ecMain.goToListTemplateTab();
-
 		click(magTem.ELEMENT_ADD_TEMPLATE_BUTTON);
-
 		magTem.addNewListTemplate(templateTitle, templateName, templateType, true, "List_Template_Content", false, true);
-
 		magTem.deleleTemplate("List_Template_06.gtmpl");
 	}
 
 	/**
 	 * Add List template with Template Name is same as existing one
-	 * =========== Pending ECMS-5101 =============
 	 */
-	//@Test
+	@Test
 	public void test11_AddListTemplateWithTemplateNameIsSameAsExistingOne(){
 		String templateTitle = "List_Template_07";
 		String templateName  = "Documents.gtmpl";
 		String templateType  = "Content";
-
+		String message = "This template name already exists. Please select another one";
 		ecMain.goToListTemplateTab();
-
 		click(magTem.ELEMENT_ADD_TEMPLATE_BUTTON);
-
 		magTem.addNewListTemplate(templateTitle, templateName, templateType, true, "List_Template_Content", false, false);
-
-		//alt.waitForMessage("");
-
-		click(button.ELEMENT_OK_BUTTON);
-
-		magTem.deleleTemplate(templateTitle);
+		alt.verifyAlertMessage(message);
+		button.cancel();
 	} 
 }

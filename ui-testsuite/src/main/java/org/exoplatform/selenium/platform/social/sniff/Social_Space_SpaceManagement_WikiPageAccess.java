@@ -32,9 +32,9 @@ public class Social_Space_SpaceManagement_WikiPageAccess extends Permalink{
 		initSeleniumTest();
 		driver.get(baseUrl);
 		info("Login with " + DATA_USER1);
-		magAcc = new ManageAccount(driver);
-		magMember = new ManageMember(driver);
-		spaceMag = new SpaceManagement(driver);
+		magAcc = new ManageAccount(driver,this.plfVersion);
+		magMember = new ManageMember(driver,this.plfVersion);
+		spaceMag = new SpaceManagement(driver,this.plfVersion);
 		dialog = new Dialog(driver);
 		magAcc.signIn(DATA_USER1, DATA_PASS);
 	}

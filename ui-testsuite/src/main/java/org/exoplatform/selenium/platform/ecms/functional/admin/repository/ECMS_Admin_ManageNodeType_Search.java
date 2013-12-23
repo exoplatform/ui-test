@@ -4,6 +4,7 @@ import static org.exoplatform.selenium.TestLogger.info;
 import java.util.List;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.exoplatform.selenium.Button;
+import org.exoplatform.selenium.ManageAlert;
 import org.exoplatform.selenium.Utils;
 import org.exoplatform.selenium.platform.ManageAccount;
 import org.exoplatform.selenium.platform.PlatformBase;
@@ -47,6 +48,7 @@ public class ECMS_Admin_ManageNodeType_Search extends PlatformBase {
 		ecMain = new ECMainFunction(driver);
 		magNode = new ManageNodeType(driver);
 		magAcc.signIn(DATA_USER, DATA_PASS);
+		alert = new ManageAlert(driver, this.plfVersion);
 		ecMain.goToNodeTypeTab();
 	}
 
@@ -63,14 +65,14 @@ public class ECMS_Admin_ManageNodeType_Search extends PlatformBase {
 		info("Search Node Type when don't input keyword");
 		magNode.doNodeTypeSearch("");	
 		waitForTextPresent(magNode.MESSAGE_FOR_NO_INPUT_KEYWORD);
-		click(button.ELEMENT_OK_BUTTON);
+		alert.verifyAlertMessage(magNode.MESSAGE_FOR_NO_INPUT_KEYWORD);
 	}
 
 	@Test
 	public void test02_SearchNodeTypeWithSpecialChars(){
 		info("Search node type with a set of special characters");
 		magNode.doNodeTypeSearch("!@#$%^&()_{}[]|\"/?><,~`");
-		waitForTextPresent(magNode.MESSAGE_FOR_SPECIAL_KEYWORD);
+		alert.verifyAlertMessage(magNode.MESSAGE_FOR_SPECIAL_KEYWORD);
 	}
 
 	@Test
@@ -78,7 +80,7 @@ public class ECMS_Admin_ManageNodeType_Search extends PlatformBase {
 		String keyword = RandomStringUtils.randomAlphabetic(20);
 		info("Search Node Type when no Node type match with keyword");
 		magNode.doNodeTypeSearch(keyword);
-		waitForTextPresent(magNode.MESSAGE_FOR_NOT_MATCH_KEYWORD);
+		waitForAndGetElement(magNode.MESSAGE_FOR_NOT_MATCH_KEYWORD);
 	}
 
 	@Test

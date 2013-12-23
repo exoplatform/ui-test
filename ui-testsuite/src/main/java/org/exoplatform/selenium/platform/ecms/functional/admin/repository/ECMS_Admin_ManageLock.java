@@ -252,8 +252,10 @@ public class ECMS_Admin_ManageLock extends PlatformBase{
 
 		//Copy locked node to intranet
 		rightClickOnElement(elementLockedArticleIcon);
-
-		click(ELEMENT_COPY_NODE);
+		if(waitForAndGetElement(ELEMENT_COPY_NODE,5000,0)!=null)
+			click(ELEMENT_COPY_NODE);
+		else
+			click(ELEMENT_ECMS_COPY_NODE);
 
 		ecms.goToNode("intranet");
 

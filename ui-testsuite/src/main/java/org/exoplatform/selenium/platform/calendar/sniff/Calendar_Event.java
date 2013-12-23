@@ -52,13 +52,14 @@ public class Calendar_Event extends CalendarBase {
 		goToCalendarPage();
 
 		info("Add a new event in Personal calendar");
-		evt.addQuickEvent(EVENT_01, EVENT_01,getDate(0,"MM/dd/yyyy"), getDate(0,"MM/dd/yyyy"), true);
+		Utils.pause(5000);
+		evt.addQuickEvent(EVENT_01, EVENT_01,getDate(0,"MM/dd/yyyy"), getDate(0,"MM/dd/yyyy"), false);
 
 		info("Confirm added event displays in the calendar");
-		waitForAndGetElement(By.xpath(ELEMENT_EVENT_TASK_ALL_DAY.replace("${event}", EVENT_01)));
+		waitForAndGetElement(By.xpath(ELEMENT_EVENT_TASK_ONE_DAY.replace("${taskName}", EVENT_01)));
 
 		info("restore data");
-		deleteEventTask(EVENT_01);
+		deleteEventTask(EVENT_01, selectDayOption.ONEDAY);
 	}
 
 	/**
@@ -79,6 +80,7 @@ public class Calendar_Event extends CalendarBase {
 		goToCalendarPage();
 
 		info("==Create and share a calendar with User root==");
+		Utils.pause(5000);
 		addCalendar(CAL_02, CAL_02, "pink");
 		Utils.pause(3000);
 		shareCalendar(CAL_02, USER_SHARED, EDITABLE);
@@ -91,11 +93,12 @@ public class Calendar_Event extends CalendarBase {
 
 		info("==Add event on shared calendar==");
 		goToCalendarPage();
-		evt.addQuickEvent(EVENT_02,EVENT_02,getDate(0,"MM/dd/yyyy"), getDate(0,"MM/dd/yyyy"), true, EVENT_SHARED_CALENDAR, EVENT_CATEGORY);
-		waitForAndGetElement(By.xpath(ELEMENT_EVENT_TASK_ALL_DAY.replace("${event}", EVENT_02)));
+		Utils.pause(5000);
+		evt.addQuickEvent(EVENT_02,EVENT_02,getDate(0,"MM/dd/yyyy"), getDate(0,"MM/dd/yyyy"), false, EVENT_SHARED_CALENDAR, EVENT_CATEGORY);
+		waitForAndGetElement(By.xpath(ELEMENT_EVENT_TASK_ONE_DAY.replace("${taskName}", EVENT_02)));
 
 		info("==Restore data==");
-		deleteEventTask(EVENT_02);
+		deleteEventTask(EVENT_02,selectDayOption.ONEDAY);
 		deleteCalendar(CAL_02,true);
 	}
 
@@ -116,6 +119,7 @@ public class Calendar_Event extends CalendarBase {
 		goToCalendarPage();
 
 		info("==Create a group calendar==");
+		Utils.pause(5000);
 		addCalendar(CAL_03, CAL_03, "black", CAL_GROUP);
 		Utils.pause(3000);
 		changeEditPermissionForCalShowInGroup(CAL_03, USER_GROUP, CAL_GROUP);
@@ -129,11 +133,11 @@ public class Calendar_Event extends CalendarBase {
 
 		info("==Add event on group calendar==");
 		goToCalendarPage();
-		evt.addQuickEvent(EVENT_03,EVENT_03,getDate(0,"MM/dd/yyyy"), getDate(0,"MM/dd/yyyy"), true, CAL_03, EVENT_CATEGORY);
-		waitForAndGetElement(By.xpath(ELEMENT_EVENT_TASK_ALL_DAY.replace("${event}", EVENT_03)));
+		evt.addQuickEvent(EVENT_03,EVENT_03,getDate(0,"MM/dd/yyyy"), getDate(0,"MM/dd/yyyy"), false, CAL_03, EVENT_CATEGORY);
+		waitForAndGetElement(By.xpath(ELEMENT_EVENT_TASK_ONE_DAY.replace("${taskName}", EVENT_03)));
 
 		info("==Restore data==");
-		deleteEventTask(EVENT_03);
+		deleteEventTask(EVENT_03, selectDayOption.ONEDAY);
 		deleteCalendar(CAL_03,true);
 	}
 
@@ -151,14 +155,16 @@ public class Calendar_Event extends CalendarBase {
 		goToCalendarPage();
 
 		info("Add a new task");
-		evt.addQuickEvent(EVENT04,EVENT04,getDate(0,"MM/dd/yyyy"),getDate(0,"MM/dd/yyyy"),true);
+		Utils.pause(3000);
+		evt.addQuickEvent(EVENT04,EVENT04,getDate(0,"MM/dd/yyyy"),getDate(0,"MM/dd/yyyy"),false);
 
 		info("Edit a task");
+		Utils.pause(3000);
 		evt.editEvent(EVENT04,TITLE,DESCRIPTION, null,null,null,false);
 
 		info("Restore data");
-		waitForAndGetElement(By.xpath(ELEMENT_EVENT_TASK_ALL_DAY.replace("${event}", EVENT04)));
-		deleteEventTask(EVENT04);
+		waitForAndGetElement(By.xpath(ELEMENT_EVENT_TASK_ONE_DAY.replace("${taskName}", EVENT04)));
+		deleteEventTask(EVENT04, selectDayOption.ONEDAY);
 	}
 
 	/**
@@ -173,6 +179,7 @@ public class Calendar_Event extends CalendarBase {
 		goToCalendarPage();
 
 		info("Add a new event");
+		Utils.pause(3000);
 		evt.addQuickEvent(EVENT05,EVENT05,getDate(0,"MM/dd/yyyy"),getDate(0,"MM/dd/yyyy"),false);
 
 		info("Delete an event");
@@ -193,6 +200,7 @@ public class Calendar_Event extends CalendarBase {
 		goToCalendarPage();
 
 		info("Add a new task");
+		Utils.pause(5000);
 		evt.addQuickEvent(EVENT06,EVENT06,getDate(0,"MM/dd/yyyy"),getDate(0,"MM/dd/yyyy"),false);
 
 		info("Drag & drop a task");
@@ -223,6 +231,7 @@ public class Calendar_Event extends CalendarBase {
 		goToCalendarPage();
 
 		info("==Create a group calendar==");
+		driver.navigate().refresh();
 		addCalendar(CAL_07, CAL_07, "green", CAL_GROUP);
 		Utils.pause(3000);
 		changeEditPermissionForCalShowInGroup(CAL_07, USER_GROUP, CAL_GROUP);
@@ -236,14 +245,16 @@ public class Calendar_Event extends CalendarBase {
 
 		info("==Add a new event on group calendar==");
 		goToCalendarPage();
-		evt.addQuickEvent(EVENT07,EVENT07,getDate(0,"MM/dd/yyyy"),getDate(0,"MM/dd/yyyy"),true, CAL_07, EVENT_CATEGORY);
+		Utils.pause(5000);
+		evt.addQuickEvent(EVENT07,EVENT07,getDate(0,"MM/dd/yyyy"),getDate(0,"MM/dd/yyyy"),false, CAL_07, EVENT_CATEGORY);
 
 		info("==Edit an event==");
+		Utils.pause(5000);
 		evt.editEvent(EVENT07,TITLE,DESCRIPTION, null,null,null,false);
 
 		info("==Restore data==");
-		waitForAndGetElement(By.xpath(ELEMENT_EVENT_TASK_ALL_DAY.replace("${event}", EVENT07)));
-		deleteEventTask(EVENT07);
+		waitForAndGetElement(By.xpath(ELEMENT_EVENT_TASK_ONE_DAY.replace("${taskName}", EVENT07)));
+		deleteEventTask(EVENT07, selectDayOption.ONEDAY);
 		deleteCalendar(CAL_07,true);
 	}
 
@@ -264,6 +275,7 @@ public class Calendar_Event extends CalendarBase {
 		goToCalendarPage();
 
 		info("==Create a group calendar==");
+		driver.navigate().refresh();
 		addCalendar(CAL_08, CAL_08, "green", CAL_GROUP);
 		Utils.pause(3000);
 		changeEditPermissionForCalShowInGroup(CAL_08, USER_GROUP, CAL_GROUP);
@@ -277,11 +289,12 @@ public class Calendar_Event extends CalendarBase {
 
 		info("==Add a new event on group calendar==");
 		goToCalendarPage();
-		evt.addQuickEvent(EVENT08,EVENT08,getDate(0,"MM/dd/yyyy"),getDate(0,"MM/dd/yyyy"),true, CAL_08, EVENT_CATEGORY);
+		Utils.pause(5000);
+		evt.addQuickEvent(EVENT08,EVENT08,getDate(0,"MM/dd/yyyy"),getDate(0,"MM/dd/yyyy"),false, CAL_08, EVENT_CATEGORY);
 
 		info("==Delete an event on group calendar==");
-		waitForAndGetElement(By.xpath(ELEMENT_EVENT_TASK_ALL_DAY.replace("${event}", EVENT08)));
-		deleteEventTask(EVENT08);
+		waitForAndGetElement(By.xpath(ELEMENT_EVENT_TASK_ONE_DAY.replace("${taskName}", EVENT08)));
+		deleteEventTask(EVENT08, selectDayOption.ONEDAY);
 		deleteCalendar(CAL_08,true);
 	}
 
@@ -304,6 +317,7 @@ public class Calendar_Event extends CalendarBase {
 		goToCalendarPage();
 
 		info("==Create and share a calendar with User root==");
+		driver.navigate().refresh();
 		addCalendar(CAL_09, CAL_09, "pink");
 		Utils.pause(3000);
 		shareCalendar(CAL_09, USER_SHARED, EDITABLE);
@@ -316,15 +330,16 @@ public class Calendar_Event extends CalendarBase {
 
 		info("==Add event on shared calendar==");
 		goToCalendarPage();
-		evt.addQuickEvent(EVENT09,EVENT09,getDate(0,"MM/dd/yyyy"), getDate(0,"MM/dd/yyyy"), true, CAL_09, EVENT_CATEGORY);
-		waitForAndGetElement(By.xpath(ELEMENT_EVENT_TASK_ALL_DAY.replace("${event}", EVENT09)));
+		Utils.pause(5000);
+		evt.addQuickEvent(EVENT09,EVENT09,getDate(0,"MM/dd/yyyy"), getDate(0,"MM/dd/yyyy"), false, CAL_09, EVENT_CATEGORY);
+		waitForAndGetElement(By.xpath(ELEMENT_EVENT_TASK_ONE_DAY.replace("${taskName}", EVENT09)));
 
 		info("==Edit an event==");
 		evt.editEvent(EVENT09,TITLE,DESCRIPTION, null,null,null,false);
 
 		info("==Restore data==");
-		waitForAndGetElement(By.xpath(ELEMENT_EVENT_TASK_ALL_DAY.replace("${event}", EVENT09)));
-		deleteEventTask(EVENT09);
+		waitForAndGetElement(By.xpath(ELEMENT_EVENT_TASK_ONE_DAY.replace("${taskName}", EVENT09)));
+		deleteEventTask(EVENT09, selectDayOption.ONEDAY);
 		deleteCalendar(CAL_09,true);
 	}
 
@@ -345,6 +360,7 @@ public class Calendar_Event extends CalendarBase {
 		goToCalendarPage();
 
 		info("==Create a shared calendar==");
+		driver.navigate().refresh();
 		addCalendar(CAL_10, CAL_10, "blue");
 		Utils.pause(3000);
 		shareCalendar(CAL_10, USER_SHARED, EDITABLE);
@@ -357,11 +373,12 @@ public class Calendar_Event extends CalendarBase {
 
 		info("==Add a new event on shared calendar==");
 		goToCalendarPage();
-		evt.addQuickEvent(EVENT10,EVENT10,getDate(0,"MM/dd/yyyy"),getDate(0,"MM/dd/yyyy"),true, CAL_10, EVENT_CATEGORY);
+		Utils.pause(5000);
+		evt.addQuickEvent(EVENT10,EVENT10,getDate(0,"MM/dd/yyyy"),getDate(0,"MM/dd/yyyy"),false, CAL_10, EVENT_CATEGORY);
 
 		info("==Delete an event on shared calendar==");
-		waitForAndGetElement(By.xpath(ELEMENT_EVENT_TASK_ALL_DAY.replace("${event}", EVENT10)));
-		deleteEventTask(EVENT10);
+		waitForAndGetElement(By.xpath(ELEMENT_EVENT_TASK_ONE_DAY.replace("${taskName}", EVENT10)));
+		deleteEventTask(EVENT10, selectDayOption.ONEDAY);
 
 		info("==Restore data==");
 		deleteCalendar(CAL_10,true);

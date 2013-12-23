@@ -25,16 +25,16 @@ public class SocialBase extends PlatformBase {
 	public final By ELEMENT_REQUESTS_PENDING_LINK = By.linkText("Requests Pending");
 
 	// Go to My Space > All Spaces Tab
-    public final String ELEMENT_SEND_REQUEST_LINK = "//*[@id='UIManageAllSpaces']//*[text()='${spaceName}']/../../ul//*[text()='Request to Join']";
-    public final String ELEMENT_INVITATION_LEAVE_LINK_IN_ALL_SPACES = "//*[@id='UIManageAllSpaces']//*[text()='${spaceName}']/../../ul//*[text()='Leave']";
-    public final String ELEMENT_INVITATION_ACCEPT_LINK_IN_ALL_SPACES = "//*[@id='UIManageAllSpaces']//*[text()='${spaceName}']/../../ul//*[text()='Accept']";
+	public final String ELEMENT_SEND_REQUEST_LINK = "//*[@id='UIManageAllSpaces']//*[text()='${spaceName}']/../../ul//*[text()='Request to Join']";
+	public final String ELEMENT_INVITATION_LEAVE_LINK_IN_ALL_SPACES = "//*[@id='UIManageAllSpaces']//*[text()='${spaceName}']/../../ul//*[text()='Leave']";
+	public final String ELEMENT_INVITATION_ACCEPT_LINK_IN_ALL_SPACES = "//*[@id='UIManageAllSpaces']//*[text()='${spaceName}']/../../ul//*[text()='Accept']";
 	public final String ELEMENT_INVITATION_IGNORE_LINK_IN_ALL_SPACES = "//*[@id='UIManageAllSpaces']//*[text()='${spaceName}']/../../ul//*[text()='Ignore']";
 	public final By     ELEMENT_ADDNEWSPACE_BUTTON      = By.xpath("//button[text()='Add New Space']");
     
     // Go to My Space > My Spaces Tab
  	public final String ELEMENT_INVITATION_LEAVE_LINK = "//*[@id='UIManageMySpaces']//*[text()='${spaceName}']/../../ul//*[text()='Leave']";
 
-    // Go to My Space > Invitation Receives Tab
+	// Go to My Space > Invitation Receives Tab
 	public final String ELEMENT_INVITATION_ACCEPT_LINK = "//*[@id='UIManageInvitationSpaces']//*[text()='${spaceName}']/../../ul//*[text()='Accept']";
 	public final String ELEMENT_INVITATION_IGNORE_LINK = "//*[@id='UIManageInvitationSpaces']//*[text()='${spaceName}']/../../ul//*[text()='Ignore']";
 
@@ -61,14 +61,14 @@ public class SocialBase extends PlatformBase {
 	public final By ELEMENT_APPLICATIONS_TAB = By.linkText("Applications");
 
 	// Go to Account Name link	
-//	public final By ELEMENT_MY_PROFILE_LINK = By.linkText("My Profile");
-//	public final By ELEMENT_FIND_CONNECTIONS_LINK = By.linkText("Find Connections");
-//	public final By ELEMENT_MY_CONNECTIONS_LINK = By.linkText("My Connections");
+	//	public final By ELEMENT_MY_PROFILE_LINK = By.linkText("My Profile");
+	//	public final By ELEMENT_FIND_CONNECTIONS_LINK = By.linkText("Find Connections");
+	//	public final By ELEMENT_MY_CONNECTIONS_LINK = By.linkText("My Connections");
 
-//	public final By ELEMENT_TOOLBAR_PROFILE_ICON = By.xpath("//*[@id='UserNavigationTabsContainer']/ul/li[2]/ul/li[1]/a[@class='ToolBarProfileIcon']");
-//	public final By ELEMENT_TOOLBAR_NETWORKS_ICON = By.xpath("//*[@id='UserNavigationTabsContainer']/ul/li[2]/ul/li[1]/a[@class='ToolBarNetworkIcon']");
-//	public final By ELEMENT_FIND_PEOPLE_ICON = By.xpath("//*[@id='UserNavigationTabsContainer']/ul/li[2]/ul/li[2]/a[@class='FindPeopleIcon']");
-//	public final By ELEMENT_TOOLBAR_ACTIVITY_ICON = By.xpath("//*[@id='UserNavigationTabsContainer']/ul/li[2]/ul/li[2]/a[@class='ToolBarActivityIcon']");
+	//	public final By ELEMENT_TOOLBAR_PROFILE_ICON = By.xpath("//*[@id='UserNavigationTabsContainer']/ul/li[2]/ul/li[1]/a[@class='ToolBarProfileIcon']");
+	//	public final By ELEMENT_TOOLBAR_NETWORKS_ICON = By.xpath("//*[@id='UserNavigationTabsContainer']/ul/li[2]/ul/li[1]/a[@class='ToolBarNetworkIcon']");
+	//	public final By ELEMENT_FIND_PEOPLE_ICON = By.xpath("//*[@id='UserNavigationTabsContainer']/ul/li[2]/ul/li[2]/a[@class='FindPeopleIcon']");
+	//	public final By ELEMENT_TOOLBAR_ACTIVITY_ICON = By.xpath("//*[@id='UserNavigationTabsContainer']/ul/li[2]/ul/li[2]/a[@class='ToolBarActivityIcon']");
 	public final By ELEMENT_TITLEBAR_BOLD = By.xpath("//div[@class='TitleBar Bold']");
 
 	///
@@ -92,7 +92,7 @@ public class SocialBase extends PlatformBase {
 
 	// Activity Stream tab	
 	public final By ELEMENT_ACTIVITY_STREAM_TAB = By.xpath("//div[@id='UIProfileNavigationPortlet']//a[text()='Activity Stream']");
-	
+
 	/*------------------- End of parameters ---------------------*/	
 
 	/**
@@ -107,10 +107,10 @@ public class SocialBase extends PlatformBase {
 		info("--Go to My Space Page--");
 		//waitForElementPresent(ELEMENT_MY_SPACES_LINK);
 		//click(ELEMENT_MY_SPACES_LINK);
-//		Utils.pause(500);
-//		click(ELEMENT_JOIN_SPACE_LINK);
-//		waitForTextPresent("Add New Space");
-//		goToMySpacePage();
+		//		Utils.pause(500);
+		//		click(ELEMENT_JOIN_SPACE_LINK);
+		//		waitForTextPresent("Add New Space");
+		//		goToMySpacePage();
 		goToAllSpaces();
 		waitForAndGetElement(ELEMENT_MY_SPACES_LINK);
 		click(ELEMENT_MY_SPACES_LINK);

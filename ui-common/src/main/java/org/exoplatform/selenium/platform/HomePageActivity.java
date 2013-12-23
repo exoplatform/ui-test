@@ -41,7 +41,6 @@ public class HomePageActivity extends PlatformBase{
 	public final String ELEMENT_ACTIVITY = "//*[contains(text(),'${activityText}')]";
 	public final String ELEMENT_DOWNLOAD_ICON = "//*[contains(text(),'${activityText}')]/../../../..//i[@class='uiIconDownload uiIconLightGray']"; 
 	public final String ELEMENT_ACTIVITY_ORDER = "//div[contains(@id,'activityContainer')][${index}]//*[contains(text(),'${activityText}')]";
-	
 
 	//Comment box
 	public final String ELEMENT_COMMENT_LINK = "//div[@class='text' or @class = 'description'or @class='linkSource' or contains(@id, 'ContextBox')]/*[contains(text(), '${activityText}')]//ancestor::div[contains(@id,'ActivityContextBox')]//*[starts-with(@id, 'CommentLink')]";
@@ -61,14 +60,21 @@ public class HomePageActivity extends PlatformBase{
 
 	//Content activity
 	public final String ELEMENT_CONTENT_NAME = "//a[@title='@{fileName}']";
+	public final String ELEMENT_CONTENT_NAME_41 = "//a[@data-original-title='@{fileName}']";
 	public final String ELEMENT_CONTENT_TYPE_ICON = "//a[@title='@{fileName}']/../..//*[@class='${icon}']";
+	public final String ELEMENT_CONTENT_TYPE_ICON_41 = "//a[@data-original-title='@{fileName}']/../..//*[@class='${icon}']";
 	public final String ELEMENT_CONTENT_TYPE = "//a[@title='@{fileName}']/..//*[@class='versionFile' and contains(text(), '${type}')]";
 	public final String ELEMENT_CONTENT_TYPE_PLF41 = "//*[contains(text(),'${activityText}')]/..//*[@class='versionFile' and contains(text(), '${type}')]";
 	public final String ELEMENT_CONTENT_DESCRIPTION = "//a[@title='@{fileName}']/..//*[@class='descriptionText' and text()='${des}']";
+	public final String ELEMENT_CONTENT_DESCRIPTION_41 = "//a[@data-original-title='@{fileName}']/..//*[@class='descriptionText' and text()='${des}']";
 	public final String ELEMENT_CONTENT_VERSION = "//a[@title='@{fileName}']/..//*[contains(text(), '${version} -')]";
+	public final String ELEMENT_CONTENT_VERSION_41 = "//a[@data-original-title='@{fileName}']/..//*[contains(text(), '${version} -')]";
 	public final String ELEMENT_CONTENT_STATUS = "//a[@title='@{fileName}']/..//*[contains(text(), '${status}')]";
-	public final String ELEMENT_CONTENT_SUMMARY = "//*[@title='@{fileName}']/..//p[1 or 2]";
+	public final String ELEMENT_CONTENT_STATUS_41 = "//a[@data-original-title='@{fileName}']/..//*[contains(text(), '${status}')]";
+	public final String ELEMENT_CONTENT_SUMMARY = "//*[@title='@{fileName}']/..//p[2]";
+	public final String ELEMENT_CONTENT_SUMMARY_41 = "//*[@data-original-title='@{fileName}']/..//p[2]";
 	public final String ELEMENT_CONTENT_SUMMARY_WEBCONTENT = "//*[@title='@{fileName}']/../../div[@class='text']//p[${index}]";
+	public final String eLEMENT_CONTENT_SUMMARY_WEBCONTENT_41 = "//*[@data-original-title='@{fileName}']/../../div[@class='text']//p[${index}]";
 	//	public final String ELEMENT_CONTENT_COMMENT_EDIT_TITLE = "//*[@title='@{fileName}']/../../../..//*[@class='commentRight']//*[contains(text(),'Title has been updated to: ${title}')]";
 	public final String ELEMENT_CONTENT_COMMENT_EDIT_TITLE = "//*[contains(text(), '@{fileName}')]/../../../..//*[@class='commentRight']//*[contains(text(),'Title has been updated to: ${title}')]";
 	public final String ELEMENT_CONTENT = "//a[@title='@{fileName}']/..//*[contains(text(), '${text}')]";
@@ -82,10 +88,13 @@ public class HomePageActivity extends PlatformBase{
 	public final String ELEMENT_CONTENT_COMMENT_RESTORE_VERSION = "//*[@title='@{fileName}']/../../../..//*[@class='commentBox']//*[text()='Publication has been restored to version: ${version}']";
 	public final String ELEMENT_CONTENT_COMMENT_PUBLISH_1 = "//*[@title='@{fileName}']/../../../..//*[@class='commentBox']//*[text()='Document has been published.']";
 	public final String ELEMENT_CONTENT_EDIT_LINK = "//a[@title='@{fileName}']/../../../..//*[@class='uiIconEdit uiIconLightGray']";
+	public final String ELEMENT_CONTENT_EDIT_LINK_41 = "//a[@data-original-title='@{fileName}']/../../../..//*[@class='uiIconEdit uiIconLightGray']";
 	public final String ELEMENT_CONTENT_VIEW_LINK = "//a[@title='@{fileName}']/../../../..//*[@class='uiIconWatch uiIconLightGray']";
+	public final String ELEMENT_CONTENT_VIEW_LINK_41 = "//a[@data-original-title='@{fileName}']/../../../..//*[@class='uiIconWatch uiIconLightGray']";
 	public final String ELEMENT_CONTENT_VIEW_LINK_PLF41 = "//*[contains(text(),'${activityText}')]/../../../..//*[@class='uiIconWatch uiIconLightGray']";
 	public final String ELEMENT_CONTENT_EDIT_LINK_PLF41 = "//*[contains(text(),'${activityText}')]/../../../..//*[@class='uiIconEdit uiIconLightGray']"; 
 	public final String ELEMENT_CONTENT_COMMENT_MOVING = "//*[@title='@{fileName}']/../../../..//*[@class='commentBox']//*[text()='Publication has been moved to: ${path}']";
+	public final String ELEMENT_CONTENT_COMMENT_MOVING_41 = "//*[@data-original-title='@{fileName}']/../../../..//*[@class='commentBox']//*[text()='Publication has been moved to: ${path}']";
 	public final String ELEMENT_CONTENT_COMMENT_RENAME_SPACE = "//div[@class='author']/a[contains(text(), '${spacename}')]//ancestor::div[contains(@id,'ContextBox')]/div[contains(@id,'CommentBlockBound')]//p[contains(text(),'Name has been updated to: ${spacename}.')]";
 	public final String ELEMENT_CONTENT_COMMENT_USER_JOIN_SPACE="//div[@class='author']/a[contains(text(), '${spacename}')]//ancestor::div[contains(@id,'ContextBox')]/div[contains(@id,'CommentBlockBound')]//div[@class='author']/a[text()='${username}']/../../p[contains(text(),'Has joined the space')]";
 	public final String ELEMENT_CONTENT_COMMENT_USER_CHANGE_AVATAR="//div[@class='author']/a[contains(text(), '${username}')]//ancestor::div[contains(@id,'ContextBox')]/div[contains(@id,'CommentBlockBound')]//div[@class='author']/a[text()='${username}']/../../p[contains(text(),'Avatar has been updated.')]";
@@ -93,11 +102,14 @@ public class HomePageActivity extends PlatformBase{
 
 	//File activity
 	public final String ELEMENT_FILE_SIZE = "//a[@title='@{fileName}']/..//*[@class='versionFile' and contains(text(), '${size}')]";
+	public final String ELEMENT_FILE_SIZE_41 = "//a[@data-original-title='@{fileName}']/..//*[@class='versionFile' and contains(text(), '${size}')]";
 	public final String ELEMENT_FILE_COMMENT_ADD_CATEGORY = "//*[@title='@{fileName}']/../../../..//*[@class='commentBox']//*[text()='Category: ${category} has been added.']";
+	public final String ELEMENT_FILE_COMMENT_ADD_CATEGORY_41 = "//*[@data-original-title='@{fileName}']/../../../..//*[@class='commentBox']//*[text()='Category: ${category} has been added.']";
 	public final String ELEMENT_FILE_COMMENT_REMOVE_CATEGORY = "//*[@title='@{fileName}']/../../../..//*[@class='commentBox']//*[text()='Category: ${category} has been removed.']";
 	public final By ELEMENT_FILE_VIEW_POPUP = By.id("UISocialPopupWindow");
 	public final String ELEMENT_FILE_VIEW_NAME = "//*[@id='UISocialPopupWindow']//*[text()='${fileName}']";
 	public final String ELEMENT_FILE_COMMENT_MOVING = "//*[@title='@{fileName}']/../../../..//*[@class='commentBox']//*[text()='File has been moved to: ${path}']";
+	public final String ELEMENT_FILE_COMMENT_MOVING_41 = "//*[@data-original-title='@{fileName}']/../../../..//*[@class='commentBox']//*[text()='File has been moved to: ${path}']";
 
 	//Attach file
 	public final String ELEMENT_FILE_COMMENT_ADD_ATTACH_FILE = "//*[@title='@{fileName}']/../../../..//*[@class='commentBox']//*[text()='File(s) has been attached.']";
@@ -163,11 +175,11 @@ public class HomePageActivity extends PlatformBase{
 	public final String ELEMENT_EVENT_MONTH_ICON = "//a[text()='${event}']/../..//div[@class='pull-left calendarBox']/div[@class='heading' and contains(text(),'${month}')]";
 	public final String ELEMENT_EVENT_DATE_ICON = "//a[text()='${event}']/../..//div[@class='pull-left calendarBox']/div[@class='content' and contains(text(),'${date}')]";
 	public final String MSG_EVENT_COMMENT_UPDATE_ALL_DAY = "Event is now an all-day event.";
-	public final String MSG_EVENT_COMMENT_UPDATE_SUMMARY = "Summary has been updated to: ${newTitle}.";
-	public final String MSG_EVENT_COMMENT_UPDATE_DESC = "Description has been updated to: ${description}.";
-	public final String MSG_EVENT_COMMENT_UPDATE_LOCATION = "Location has been updated to: ${location}.";
+	public final String MSG_EVENT_COMMENT_UPDATE_SUMMARY = "Summary has been updated: ${newTitle}.";
+	public final String MSG_EVENT_COMMENT_UPDATE_DESC = "Description has been updated: ${description}.";
+	public final String MSG_EVENT_COMMENT_UPDATE_LOCATION = "Location has been updated: ${location}.";
 	public final String MSG_TASK_COMMENT_UPDATE_ATTACHMENT = "Attachment(s) has been added to the task.";
-	public final String MSG_TASK_COMMENT_UPDATE_NOTE = "Note has been updated to: ${note}.";
+	public final String MSG_TASK_COMMENT_UPDATE_NOTE = "Note has been updated: ${note}.";
 	public final String MSG_TASK_COMMENT_UPDATE_STATUS = "Task has been completed.";
 
 
@@ -191,18 +203,26 @@ public class HomePageActivity extends PlatformBase{
 	public void checkInforAfterAddingDocument(String name, String iconType, String contentType, String size, String content, 
 			String version, String des, String status){
 		info("Check name of content");
-		waitForAndGetElement(ELEMENT_CONTENT_NAME.replace("@{fileName}", name));
+		if(waitForAndGetElement(ELEMENT_CONTENT_NAME.replace("@{fileName}", name), 5000, 0,2) == null)
+			waitForAndGetElement(ELEMENT_CONTENT_NAME_41.replace("@{fileName}", name));
 		if (iconType != ""){
 			info("Check icon content type");
-			waitForAndGetElement(ELEMENT_CONTENT_TYPE_ICON.replace("@{fileName}", name).replace("${icon}", iconType));	
+			if(waitForAndGetElement(ELEMENT_CONTENT_TYPE_ICON.replace("@{fileName}", name).replace("${icon}", iconType), 10000, 0,2) == null)
+				waitForAndGetElement(ELEMENT_CONTENT_TYPE_ICON_41.replace("@{fileName}", name).replace("${icon}", iconType));
 		}
 		if (contentType != ""){
 			info("Check content type");
-			waitForAndGetElement(ELEMENT_CONTENT_TYPE.replace("@{fileName}", name).replace("${type}", contentType));
+			if(waitForAndGetElement(ELEMENT_CONTENT_TYPE.replace("@{fileName}", name).replace("${type}", contentType), 5000, 0,2) == null)
+				waitForAndGetElement(ELEMENT_CONTENT_TYPE_PLF41.replace("${activityText}", name).replace("${type}", contentType));
 		}
 		if (content != ""){
 			info("Check content summary");
-			String[] sum = getText(ELEMENT_CONTENT_SUMMARY.replace("@{fileName}", name)).split("\n");
+			String[] sum = null;
+			if(waitForAndGetElement(ELEMENT_CONTENT_SUMMARY.replace("@{fileName}", name),5000,0,2)!=null)
+				sum = getText(ELEMENT_CONTENT_SUMMARY.replace("@{fileName}", name)).split("\n");
+			else //if(waitForAndGetElement(ELEMENT_CONTENT_SUMMARY_41.replace("@{fileName}", name),5000,0,2)!=null)
+				sum = getText(ELEMENT_CONTENT_SUMMARY_41.replace("@{fileName}", name)).split("\n");
+			
 			String[] cont = content.split("/");
 			if(sum.length>2){
 				if (cont.length > 4){
@@ -227,7 +247,10 @@ public class HomePageActivity extends PlatformBase{
 				}else {
 					int contentIndex = 2;
 					for (int i = 0; i < cont.length; i ++){
-						assert getText(ELEMENT_CONTENT_SUMMARY_WEBCONTENT.replace("@{fileName}", name).replace("${index}", String.valueOf(contentIndex))).equalsIgnoreCase(cont[i]);
+						if(waitForAndGetElement(ELEMENT_CONTENT_SUMMARY_WEBCONTENT.replace("@{fileName}", name).replace("${index}", String.valueOf(contentIndex)),5000,0,2)!=null)
+							assert getText(ELEMENT_CONTENT_SUMMARY_WEBCONTENT.replace("@{fileName}", name).replace("${index}", String.valueOf(contentIndex))).equalsIgnoreCase(cont[i]);
+						else //if(waitForAndGetElement(eLEMENT_CONTENT_SUMMARY_WEBCONTENT_41.replace("@{fileName}", name).replace("${index}", String.valueOf(contentIndex)),5000,0,2)!=null)
+							assert getText(eLEMENT_CONTENT_SUMMARY_WEBCONTENT_41.replace("@{fileName}", name).replace("${index}", String.valueOf(contentIndex))).equalsIgnoreCase(cont[i]);
 						contentIndex++;
 					}
 				}
@@ -235,19 +258,23 @@ public class HomePageActivity extends PlatformBase{
 		}
 		if (size != ""){
 			info("Check content size");
-			waitForAndGetElement(ELEMENT_FILE_SIZE.replace("@{fileName}", name).replace("${size}", size));
+			if(waitForAndGetElement(ELEMENT_FILE_SIZE.replace("@{fileName}", name).replace("${size}", size), 5000, 0,2) == null)
+				waitForAndGetElement(ELEMENT_FILE_SIZE_41.replace("@{fileName}", name).replace("${size}", size));
 		}
 		if (version != ""){
 			info("Check content version");
-			waitForAndGetElement(ELEMENT_CONTENT_VERSION.replace("@{fileName}", name).replace("${version}", version));
+			if(waitForAndGetElement(ELEMENT_CONTENT_VERSION.replace("@{fileName}", name).replace("${version}", version), 5000, 0,2) == null)
+				waitForAndGetElement(ELEMENT_CONTENT_VERSION_41.replace("@{fileName}", name).replace("${version}", version));
 		}
 		if (des != ""){
 			info("Check content description");
-			waitForAndGetElement(ELEMENT_CONTENT_DESCRIPTION.replace("@{fileName}", name).replace("${des}", des));
+			if(waitForAndGetElement(ELEMENT_CONTENT_DESCRIPTION.replace("@{fileName}", name).replace("${des}", des), 5000, 0,2) == null)
+				waitForAndGetElement(ELEMENT_CONTENT_DESCRIPTION_41.replace("@{fileName}", name).replace("${des}", des));
 		}
 		if (status != ""){
 			info("Check content status");
-			waitForAndGetElement(ELEMENT_CONTENT_STATUS.replace("@{fileName}", name).replace("${status}", status));
+			if(waitForAndGetElement(ELEMENT_CONTENT_STATUS.replace("@{fileName}", name).replace("${status}", status), 5000, 0,2) == null)
+				waitForAndGetElement(ELEMENT_CONTENT_STATUS_41.replace("@{fileName}", name).replace("${status}", status));
 		}
 	}
 
@@ -335,7 +362,10 @@ public class HomePageActivity extends PlatformBase{
 	 * @param category
 	 */
 	public void checkCategoryAfterAddingToContent(String name, String category){
-		waitForAndGetElement(ELEMENT_FILE_COMMENT_ADD_CATEGORY.replace("@{fileName}", name).replace("${category}", category));
+		if(this.plfVersion.equalsIgnoreCase("4.0"))
+			waitForAndGetElement(ELEMENT_FILE_COMMENT_ADD_CATEGORY.replace("@{fileName}", name).replace("${category}", category));
+		else if(this.plfVersion.equalsIgnoreCase("4.1"))
+			waitForAndGetElement(ELEMENT_FILE_COMMENT_ADD_CATEGORY_41.replace("@{fileName}", name).replace("${category}", category));
 	}
 
 	/** function check add comment in activity after remove category for a content/file
@@ -377,7 +407,10 @@ public class HomePageActivity extends PlatformBase{
 	 */
 	public void goToEditFromContentActivity(String name){
 		button = new Button(driver);
-		click(ELEMENT_CONTENT_EDIT_LINK.replace("@{fileName}", name));
+		if(waitForAndGetElement(ELEMENT_CONTENT_EDIT_LINK.replace("@{fileName}", name), 5000,0,2)!=null)
+			click(ELEMENT_CONTENT_EDIT_LINK.replace("@{fileName}", name));
+		else if (waitForAndGetElement(ELEMENT_CONTENT_EDIT_LINK_41.replace("@{fileName}", name), 5000,0,2)!=null)
+			click(ELEMENT_CONTENT_EDIT_LINK_41.replace("@{fileName}", name));
 		waitForAndGetElement(ELEMENT_CONTENT_EDIT_SCREEN_FROM_ACTIVITY);
 		waitForAndGetElement(button.ELEMENT_SAVE_CLOSE_BUTTON);
 	}
@@ -406,7 +439,10 @@ public class HomePageActivity extends PlatformBase{
 	 */
 	public void goToViewFromFileActivity(String name){
 		dialog = new Dialog(driver);
-		click(ELEMENT_CONTENT_VIEW_LINK.replace("@{fileName}", name));
+		if(waitForAndGetElement(ELEMENT_CONTENT_VIEW_LINK.replace("@{fileName}", name), 5000,0,2)!=null)
+			click(ELEMENT_CONTENT_VIEW_LINK.replace("@{fileName}", name));
+		else //if(waitForAndGetElement(ELEMENT_CONTENT_VIEW_LINK_41.replace("@{fileName}", name), 5000,0,2)!=null)
+			click(ELEMENT_CONTENT_VIEW_LINK_41.replace("@{fileName}", name));
 		waitForAndGetElement(ELEMENT_FILE_VIEW_POPUP);
 		waitForAndGetElement(ELEMENT_FILE_VIEW_NAME.replace("${fileName}", name));
 		dialog.closeMessageDialog();
@@ -420,9 +456,23 @@ public class HomePageActivity extends PlatformBase{
 	 */
 	public void checkContentAfterMovingANode(String name, String path, boolean content){
 		if (content){
-			waitForAndGetElement(ELEMENT_CONTENT_COMMENT_MOVING.replace("@{fileName}", name).replace("${path}", path + name));
+			String e40 = ELEMENT_CONTENT_COMMENT_MOVING.replace("@{fileName}", name).
+					replace("${path}", path + name.replace("_", "").toLowerCase());
+			String e41 = ELEMENT_CONTENT_COMMENT_MOVING_41.replace("@{fileName}", name).
+					replace("${path}", path + name.replace("_", "").toLowerCase());
+			if(this.plfVersion.equalsIgnoreCase("4.0"))
+				waitForAndGetElement(e40);
+			else if(this.plfVersion.equalsIgnoreCase("4.1"))
+				waitForAndGetElement(e41);
 		}else {
-			waitForAndGetElement(ELEMENT_FILE_COMMENT_MOVING.replace("@{fileName}", name).replace("${path}", path + name));
+			String e40 = ELEMENT_FILE_COMMENT_MOVING.replace("@{fileName}", name).
+					replace("${path}", path + name.replace("_", "").toLowerCase());
+			String e41 = ELEMENT_FILE_COMMENT_MOVING_41.replace("@{fileName}", name).
+					replace("${path}", path + name.replace("_", "").toLowerCase());
+			if(this.plfVersion.equalsIgnoreCase("4.0"))
+				waitForAndGetElement(e40);
+			else if(this.plfVersion.equalsIgnoreCase("4.1"))
+				waitForAndGetElement(e41);
 		}
 	}
 

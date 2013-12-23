@@ -48,7 +48,7 @@ public class ManageNodeType extends EcmsBase{
 	//Message
 	public final String MESSAGE_FOR_NO_INPUT_KEYWORD = "The value of the field is empty.";
 	public final String MESSAGE_FOR_SPECIAL_KEYWORD = "There are some invalid characters. Please enter another value.";
-	public final String MESSAGE_FOR_NOT_MATCH_KEYWORD = "There isn't any node type with condition search.";
+	public final By MESSAGE_FOR_NOT_MATCH_KEYWORD = By.xpath("//*[contains(text(),'There is no node type matching your search.')]");
 	public final String MESSAGE_NODE_REGISTERED_SUCCESSFULLY = "The '${nodeName}' node type was registered successfully.";
 	
 	//Do a search in Node Types Tab

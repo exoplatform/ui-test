@@ -49,11 +49,13 @@ public class Calendar_Category extends CalendarBase{
 		goToCalendarPage();
 
 		info("Add new Event category");
+		driver.navigate().refresh();
 		gotoAddEventCategory();
 		addEventCategory(EVENT_CATEGORY_01);
 
 		info("Restore data");
 		gotoAddEventCategory();
+		driver.navigate().refresh();
 		deleteEventCategory(EVENT_CATEGORY_01);
 
 	}

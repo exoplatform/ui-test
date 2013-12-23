@@ -46,7 +46,7 @@ public class ECMS_Admin_ManageCategories_CategoryAction extends PlatformBase{
 	//String username = "john";
 	String groupID = "Platform/Administration"; 
 	String actionName = "test";
-	String optionLifeCycle = "User Action/Content Addition"; 
+	String optionLifeCycle = "Content Addition"; 
 	String nodeTargetPath = "jcr:system/exo:namespaces";	
 	//By ELEMENT_SELECTED_CATEGORY_NAME = By.xpath(cMenu.ELEMENT_FILE_TITLE.replace("${titleOfFile}", categoryName));
 	//By ELEMENT_SELECTED_CATEGORY_CHILD_NAME = By.xpath(cMenu.ELEMENT_FILE_TITLE.replace("${titleOfFile}", newCategoryName));

@@ -87,7 +87,7 @@ public class ECMS_Admin_ManageCategories_Display extends PlatformBase {
 
 		String[] DATA1 = {DATA_CATEGORY_TREE_NAME, "collaboration","sites/intranet"};
 		String[] DATA2 = {"",""};
-		String[] DATA3 = {DATA_ACTION_NAME,"User Action/Content Addition","jcr:system/exo:namespaces"};
+		String[] DATA3 = {DATA_ACTION_NAME,"Content Addition","jcr:system/exo:namespaces"};
 		boolean[] setPermission = {true, false, false};
 		
 		//add new category tree
@@ -129,7 +129,7 @@ public class ECMS_Admin_ManageCategories_Display extends PlatformBase {
 		By ELEMENT_ARTICLE = By.linkText(DATA_ARTICLE);
 		String[] DATA1 = {DATA_CATEGORY_TREE_NAME, "collaboration","sites/intranet"};
 		String[] DATA2 = {"",""};
-		String[] DATA3 = {DATA_ACTION_NAME,"User Action/Content Addition","jcr:system/exo:namespaces"};
+		String[] DATA3 = {DATA_ACTION_NAME,"Content Addition","jcr:system/exo:namespaces"};
 		boolean[] setPermission = {true, false, false};
 		
 		//add new category tree
@@ -176,7 +176,7 @@ public class ECMS_Admin_ManageCategories_Display extends PlatformBase {
 		By ELEMENT_ARTICLE = By.linkText(DATA_ARTICLE);
 		String[] DATA1 = {DATA_CATEGORY_TREE_NAME, "collaboration","sites/intranet"};
 		String[] DATA2 = {"",""};
-		String[] DATA3 = {DATA_ACTION_NAME,"User Action/Content Addition","jcr:system/exo:namespaces"};
+		String[] DATA3 = {DATA_ACTION_NAME,"Content Addition","jcr:system/exo:namespaces"};
 		boolean[] setPermission = {true, false, false};
 		
 		//add new category tree
@@ -236,7 +236,7 @@ public class ECMS_Admin_ManageCategories_Display extends PlatformBase {
 		String DATA_UPLOAD_FILE_LINK = "TestData/ECMS_Admin_ManageCategories_Display.jpg";
 		String[] DATA1 = {DATA_CATEGORY_TREE_NAME, "collaboration","sites/intranet"};
 		String[] DATA2 = {"",""};
-		String[] DATA3 = {DATA_ACTION_NAME,"User Action/Content Addition","jcr:system/exo:namespaces"};
+		String[] DATA3 = {DATA_ACTION_NAME,"Content Addition","jcr:system/exo:namespaces"};
 		boolean[] setPermission = {true, false, false};
 		
 		//add new category tree
@@ -280,7 +280,7 @@ public class ECMS_Admin_ManageCategories_Display extends PlatformBase {
 		String DATA_ACTION_NAME = "ECMS_Admin_ManageCategories_Display_action_04_2";
 		String[] DATA1 = {DATA_CATEGORY_TREE_NAME, "collaboration","sites/intranet"};
 		String[] DATA2 = {"",""};
-		String[] DATA3 = {DATA_ACTION_NAME,"User Action/Content Addition","jcr:system/exo:namespaces"};
+		String[] DATA3 = {DATA_ACTION_NAME,"Content Addition","jcr:system/exo:namespaces"};
 		boolean[] setPermission = {true, false, false};
 		
 		//add new category tree
@@ -315,7 +315,7 @@ public class ECMS_Admin_ManageCategories_Display extends PlatformBase {
 		String DATA_ACTION_NAME = "ECMS_Admin_ManageCategories_Display_action_05";
 		String[] DATA1 = {DATA_CATEGORY_TREE_NAME, "collaboration","sites/intranet"};
 		String[] DATA2 = {"",""};
-		String[] DATA3 = {DATA_ACTION_NAME,"User Action/Content Addition","jcr:system/exo:namespaces"};
+		String[] DATA3 = {DATA_ACTION_NAME,"Content Addition","jcr:system/exo:namespaces"};
 		boolean[] setPermission = {true, false, false};
 		
 		//add new category tree
@@ -349,7 +349,7 @@ public class ECMS_Admin_ManageCategories_Display extends PlatformBase {
 		String DATA_ACTION_NAME = "ECMS_Admin_ManageCategories_Display_action_06";
 		String[] DATA1 = {DATA_CATEGORY_TREE_NAME, "collaboration","sites/intranet"};
 		String[] DATA2 = {"",""};
-		String[] DATA3 = {DATA_ACTION_NAME,"User Action/Content Addition","jcr:system/exo:namespaces"};
+		String[] DATA3 = {DATA_ACTION_NAME,"Content Addition","jcr:system/exo:namespaces"};
 		boolean[] setPermission = {true, false, false};
 		
 		//add new category tree
@@ -399,7 +399,7 @@ public class ECMS_Admin_ManageCategories_Display extends PlatformBase {
 		String DATA_CATEGORY_TREE_CHILD_01 = "ECMS_Admin_ManageCategories_Create_tree_child_01";
 		String[] DATA1 = {DATA_CATEGORY_TREE_NAME, "collaboration","sites/intranet"};
 		String[] DATA2 = {"",""};
-		String[] DATA3 = {DATA_ACTION_NAME,"User Action/Content Addition","jcr:system/exo:namespaces"};
+		String[] DATA3 = {DATA_ACTION_NAME,"Content Addition","jcr:system/exo:namespaces"};
 		boolean[] setPermission = {true, false, false};
 		
 		//add new category tree

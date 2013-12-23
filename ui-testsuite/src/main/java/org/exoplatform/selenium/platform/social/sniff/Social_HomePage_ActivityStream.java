@@ -49,7 +49,7 @@ public class Social_HomePage_ActivityStream extends Activity {
 		magAcc = new ManageAccount(driver);
 		activity = new HomePageActivity(driver);
 		navToolBar = new NavigationToolbar(driver);
-		magMember = new ManageMember(driver);
+		magMember = new ManageMember(driver,this.plfVersion);
 		actBar = new ActionBar(driver);
 		peoConn = new PeopleConnection(driver);
 		peoPro = new PeopleProfile(driver);
@@ -464,7 +464,7 @@ public class Social_HomePage_ActivityStream extends Activity {
 		navToolBar.goToConnectionPage();
 		peoConn.removeConnection(user1);
 
-		/*Step 1: Goto social homepage*/ 
+		//Step 1: Goto social homepage 
 		//- Goto homepage
 		//- Home page is displayed
 		navToolBar.goToHomePage();
@@ -477,7 +477,6 @@ public class Social_HomePage_ActivityStream extends Activity {
 		waitForActivityPresent(activityOfUser+user,false);
 		waitForActivityPresent(activityComment+user1,false);
 		waitForActivityPresent(activityLike+user1,false);
-		waitForActivityPresent(activityMention+user1,false);
 		waitForActivityPresent(activityOfSpace + spacename,false);
 		waitForActivityNotPresent(activityOfUser+user1,false);
 
@@ -485,11 +484,11 @@ public class Social_HomePage_ActivityStream extends Activity {
 		info("clear data");
 		magAcc.userSignIn(userType.PUBLISHER);
 		activity.deleteActivity(activityComment+user1);
-		activity.deleteActivity(activityMention+user1);
 		activity.deleteActivity(activityLike+user1);
 		activity.deleteActivity(activityOfUser+user1);
 		magAcc.userSignIn(userType.ADMIN);
 		selectFileter("All Activities");
+		activity.deleteActivity(activityMention+user1);
 		magMember.goToMySpacePage();
 		magMember.deleteSpace(spacename,300000);
 		navToolBar.goToHomePage();
