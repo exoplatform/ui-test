@@ -174,10 +174,11 @@ public class HomePageActivity extends SocialBase{
 	public final String MSG_TASK_COMMENT_UPDATE_STATUS = "Task has been completed.";
 
 
-	public HomePageActivity(WebDriver dr){
+	public HomePageActivity(WebDriver dr, String...plfVersion) {
 		driver = dr;
 		post = new ForumManagePost(driver);
 		button = new Button(driver);
+		this.plfVersion = plfVersion.length>0?plfVersion[0]:"4.0";
 	}
 	/** function check info in activity of a content/file
 	 * @author lientm

@@ -35,13 +35,8 @@ public class WikiBase extends PlatformBase{
 	public final String ELEMENT_WIKI_HEADER = "//*[@id='H${header}']"; 
 
 	//Company/Left panel > Wiki Link
-<<<<<<< HEAD
-	public final By ELEMENT_WIKI_LINK = By.xpath("//ul[@class='uiCompanyNavigations']//li/a[text()='Wiki']");
-	public final By ELEMENT_WIKI_LINK_PLF41 = By.xpath("//*[@data-original-title='Wiki']");
-=======
 	public final By ELEMENT_WIKI_LINK=By.xpath("//ul[@class='uiCompanyNavigations']//li/a[text()='Wiki']");
 	public final By ELEMENT_WIKI_LINK_PLF41=By.xpath("//*[@data-original-title='Wiki']");
->>>>>>> fd95065... FQA-1550: PLF4.1/Sniff/Wiki/Migrate from PLF4.0 (Attachment + Basic Action)
 
 	//Add page menu
 	public final By ELEMENT_ADD_PAGE_LINK = By.xpath("//*[@id='UIWikiPageControlArea_PageToolBar']//div[contains(text(),'Add Page')]");
@@ -289,11 +284,7 @@ public class WikiBase extends PlatformBase{
 	public void goToWiki(){
 		info("--Go to Wiki--");
 		Utils.pause(1000);
-<<<<<<< HEAD
-		if(waitForAndGetElement(ELEMENT_WIKI_LINK, 5000, 0)!= null)
-=======
 		if(waitForAndGetElement(ELEMENT_WIKI_LINK, 5000,0)!=null)
->>>>>>> fd95065... FQA-1550: PLF4.1/Sniff/Wiki/Migrate from PLF4.0 (Attachment + Basic Action)
 			click(ELEMENT_WIKI_LINK);
 		else
 			click(ELEMENT_WIKI_LINK_PLF41);
@@ -606,13 +597,13 @@ public class WikiBase extends PlatformBase{
 		info("Attach a file: " + path);
 		//driver.switchTo().frame(waitForAndGetElement(ELEMENT_FRAME_UPLOAD));
 		//ELEMENT_UPLOAD_FILE = By.xpath("//input[@id='WikiUploadFile']");
-
 		try{
 			for(int i =0; i<=4; i++){
 				if(waitForAndGetElement(ELEMENT_UPLOAD_NAME, 5000, 0, notDisplay)!=null)
 					break;
 				else{
-					((JavascriptExecutor) driver).executeScript("arguments[0].scrollTop = arguments[0].scrollHeight;", waitForAndGetElement(ELEMENT_BODY_CONTAINER));
+					((JavascriptExecutor) driver).executeScript("arguments[0].scrollTop = arguments[0].scrollHeight;", 
+							waitForAndGetElement(ELEMENT_BODY_CONTAINER));
 				}
 			}
 			WebElement upload = waitForAndGetElement(ELEMENT_UPLOAD_NAME, 5000, 1, notDisplay);

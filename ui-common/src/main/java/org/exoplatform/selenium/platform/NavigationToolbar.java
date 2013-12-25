@@ -23,7 +23,8 @@ public class NavigationToolbar extends PlatformBase {
 	public final By ELEMENT_SEO_MENU = By.xpath("//span[text()='SEO']");
 	public final By ELEMENT_PAGE_ID = By.xpath("//*[contains(@id, 'UIPage-')]");
 
-	public NavigationToolbar(WebDriver dr){
+	public NavigationToolbar(WebDriver dr, String...plfVersion) {
+		this.plfVersion = plfVersion.length>0?plfVersion[0]:"4.0";
 		driver = dr;
 		brandMag = new BrandingManagement(driver);
 		button = new Button(driver);

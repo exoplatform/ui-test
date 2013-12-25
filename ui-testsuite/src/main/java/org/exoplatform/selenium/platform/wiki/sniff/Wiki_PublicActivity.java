@@ -25,9 +25,9 @@ public class Wiki_PublicActivity extends BasicAction {
 	public void setUpBeforeTest(){
 		initSeleniumTest();
 		driver.get(baseUrl);
-		magAc = new ManageAccount(driver);
-		naTool = new NavigationToolbar(driver);
-		activity = new HomePageActivity(driver);
+		magAc = new ManageAccount(driver,this.plfVersion);
+		naTool = new NavigationToolbar(driver,this.plfVersion);
+		activity = new HomePageActivity(driver,this.plfVersion);
 		magAc.signIn("john", DATA_PASS);
 		goToWiki();
 	}
