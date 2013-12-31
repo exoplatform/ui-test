@@ -62,7 +62,7 @@ public class ECMS_Admin_Advanced extends PlatformBase{
 	String nodeHomePath = "sites/intranet";
 	String groupID = "Platform/Administration"; 
 	String actionName = "test";
-	String optionLifeCycle = "User Action/Content Addition"; 
+	String optionLifeCycle = "Content Addition"; 
 	String nodeTargetPath = "jcr:system/exo:namespaces";
 
 	@BeforeMethod

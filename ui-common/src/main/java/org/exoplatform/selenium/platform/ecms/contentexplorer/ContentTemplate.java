@@ -59,10 +59,10 @@ public class ContentTemplate extends EcmsBase{
 	public final By ELEMENT_MAXIMIZE_ICON = By.xpath("//*[contains(@class, 'uiIconEcmsExpand')]");
 	public final By ELEMENT_MINIMIZE_ICON = By.xpath("//*[contains(@class, 'uiIconEcmsCollapse')]");
 	public final By ELEMENT_CHANGE_CONTENT_TYPE = By.xpath("//*[contains(@class, 'ChangeTypeLink')]");
-	
+
 	//Accessible Media
 	public final By ELEMENT_ACCESSIBLEMEDIA_LINK = By.xpath("//*[@class='templateLabel']//*[text()='Accessible Media']");
-	
+
 
 	/*
 	 * Added by PhuongDT
@@ -106,6 +106,7 @@ public class ContentTemplate extends EcmsBase{
 	public final By ELEMENT_NEWFILE_NAME_TEXTBOX = By.id("name");
 	public final By ELEMENT_NEWFILE_CONTENT_FRAME = By.xpath("//*[@id='cke_contents_contentHtml']/iframe");
 	public final By ELEMENT_NEWFILE_CONTENT_FRAME_41 = By.xpath("//*[@id='cke_contentHtml']//iframe");
+	//public final By ELEMENT_NEWFILE_CONTENT_FRAME = By.xpath("//*[@id='cke_1_contents']/iframe");
 	public final By ELEMENT_NEWFILE_TITLE_TEXTBOX = By.id("title0");
 	//public final By ELEMENT_NEWFILE_DESC_TEXTBOX = By.id("description0");
 	public final By ELEMENT_NEWFILE_DESCRIPTION_TEXTBOX = By.id("description0");
@@ -118,7 +119,7 @@ public class ContentTemplate extends EcmsBase{
 	public final By ELEMENT_NEWFILE_TEXT_TAB_XPATH = By.xpath("//*[contains(text(),'View as Plain text')]");
 	public final String ELEMENT_NEWFILE_TEXT_TAB_P_CSS = ".textContent>pre";
 	public final By ELEMENT_NEWFILE_MIME_COMBOX_ID = By.name("mimetype") ;
-	public final By ELEMENT_NEWFILE_TEXTAREA_ID = By.id("contentPlain") ;
+	public final By ELEMENT_NEWFILE_TEXTAREA_ID = By.id("contentHtml") ;
 	public final String ELEMENT_NEWFILE_PRE_CSS = ".content>pre";	
 
 	//Picture on Head Layout
@@ -326,9 +327,10 @@ public class ContentTemplate extends EcmsBase{
 		if (!lines){
 			if (waitForAndGetElement(ELEMENT_NEWFILE_CONTENT_FRAME, 3000, 0) != null){
 				inputDataToFrame(ELEMENT_NEWFILE_CONTENT_FRAME, cont, true);
-			}else if (waitForAndGetElement(ELEMENT_NEWFILE_TEXTAREA_ID, 3000, 0) != null){
-				type(ELEMENT_NEWFILE_TEXTAREA_ID, cont, true);
 			}
+			//			else //if (waitForAndGetElement(ELEMENT_NEWFILE_TEXTAREA_ID, 3000, 0) != null){
+			//				type(ELEMENT_NEWFILE_TEXTAREA_ID, cont, true);
+			//			}
 			else{ //(waitForAndGetElement(ELEMENT_NEWFILE_CONTENT_FRAME_41, 3000, 0) != null){
 				inputDataToFrame(ELEMENT_NEWFILE_CONTENT_FRAME_41, cont, true);
 			}
@@ -692,7 +694,7 @@ public class ContentTemplate extends EcmsBase{
 		waitForElementNotPresent(button.ELEMENT_SAVE_CLOSE_BUTTON);
 		Utils.pause(1000);
 	}
-	
+
 	/**
 	 * @author phuongdt
 	 * @date 17/09/2013
@@ -703,24 +705,24 @@ public class ContentTemplate extends EcmsBase{
 		String title = (String) (params.length > 0 ? params[0]: "");
 		String lang = (String) (params.length > 1 ? params[1]: "");
 		String content = (String) (params.length > 2 ? params[2]: "");
-		
+
 		info("-- new Accessible Media --");
 		type(ELEMENT_ACCESSIBLE_MAIN_TAB_NAME, name, true);
-		
+
 		if (!title.isEmpty()){
 			type(ELEMENT_ACCESSIBLE_MAIN_TAB_TITLE, title, true);
 		}
-		
+
 		if (!lang.isEmpty()){
 			selectOption(ELEMENT_ACCESSIBLE_MAIN_TAB_LANGUAGE, lang);
 		}
-		
+
 		if (!content.isEmpty()){
 			inputDataToFrame(ELEMENT_HTML_FILE_CKEDITOR_FRAME, content, true);
 			switchToParentWindow();
 		}
-		
-		
+
+
 		click(button.ELEMENT_SAVE_CLOSE_BUTTON);
 		waitForElementNotPresent(button.ELEMENT_SAVE_CLOSE_BUTTON);
 		Utils.pause(1000);
@@ -1053,7 +1055,7 @@ public class ContentTemplate extends EcmsBase{
 
 		info("Create an accessible media" + name);
 		click(ELEMENT_ACCESSIBLE_MEDIA_LINK);
-		
+
 		if(name != null)
 			type(ELEMENT_LINK_NAME, name, false);
 		if(lang != null)
