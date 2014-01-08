@@ -6,6 +6,7 @@ import org.exoplatform.selenium.ManageAlert;
 import org.exoplatform.selenium.Utils;
 import org.exoplatform.selenium.platform.ManageAccount;
 import org.exoplatform.selenium.platform.NavigationToolbar;
+import org.exoplatform.selenium.platform.PageEditor;
 import org.exoplatform.selenium.platform.ecms.EcmsBase;
 import org.exoplatform.selenium.platform.ecms.admin.ECMainFunction;
 import org.exoplatform.selenium.platform.ecms.admin.ManageView;
@@ -27,8 +28,9 @@ import static org.exoplatform.selenium.TestLogger.info;
  */
 public class ActionBar extends EcmsBase{
 
-	public ActionBar(WebDriver dr) {
+	public ActionBar(WebDriver dr, String...plfVersion) {
 		super(dr);
+		this.plfVersion = plfVersion.length>0?plfVersion[0]:"4.0";
 		// TODO Auto-generated constructor stub
 	}
 
@@ -36,11 +38,12 @@ public class ActionBar extends EcmsBase{
 	Dialog dialog = new Dialog(driver);
 	ManageAlert alt = new ManageAlert(driver);
 	NavigationToolbar navToolBar = new NavigationToolbar(driver);
-	ManageAccount magAcc = new ManageAccount(driver);
+	ManageAccount magAcc = new ManageAccount(driver,this.plfVersion);
 	ManageView magView = new ManageView(driver);
 	ContextMenu cMenu = new ContextMenu(driver);
 	ManageAlert alert = new ManageAlert(driver);
 	ECMainFunction ecMain = new ECMainFunction(driver);
+	PageEditor ePage = new PageEditor(driver, this.plfVersion);
 
 	/*
 	 * Added by PhuongDT
@@ -1007,9 +1010,9 @@ public class ActionBar extends EcmsBase{
 	public void addComment(String comment){
 		goToAddComment();
 		if(this.plfVersion.equalsIgnoreCase("4.1"))
-			inputDataToFrame(ELEMENT_ADD_COMMENT_FRAME_41, comment, true);
-		else// if(this.plfVersion.equalsIgnoreCase("4.0"))
-			inputDataToFrame(ELEMENT_ADD_COMMENT_FRAME, comment, true);
+			inputDataToFrame(ELEMENT_ADD_COMMENT_FRAME_41, comment, false);
+		else //if(this.plfVersion.equalsIgnoreCase("4.0"))
+			inputDataToFrame(ELEMENT_ADD_COMMENT_FRAME, comment, false);
 		switchToParentWindow();
 		button.save();
 		waitForElementNotPresent(ELEMENT_ADD_COMMENT_POPUP);
@@ -1026,7 +1029,10 @@ public class ActionBar extends EcmsBase{
 		click(ELEMENT_SHOW_COMMENT_LINK);
 		click(By.xpath(ELEMENT_EDIT_COMMENT_ICON.replace("${comment}", oldComment)));
 		waitForAndGetElement(ELEMENT_ADD_COMMENT_POPUP);
-		inputDataToFrame(ELEMENT_ADD_COMMENT_FRAME, newComment, false);
+		if(this.plfVersion.equalsIgnoreCase("4.1"))
+			inputDataToFrame(ELEMENT_ADD_COMMENT_FRAME_41, newComment, false);
+		else if(this.plfVersion.equalsIgnoreCase("4.0"))
+			inputDataToFrame(ELEMENT_ADD_COMMENT_FRAME, newComment, false);
 		switchToParentWindow();
 		button.save();
 		waitForElementNotPresent(ELEMENT_ADD_COMMENT_POPUP);

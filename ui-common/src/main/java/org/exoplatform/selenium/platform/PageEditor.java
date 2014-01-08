@@ -14,9 +14,10 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class PageEditor extends PlatformBase {
 
-	public PageEditor (WebDriver dr){
+	public PageEditor (WebDriver dr, String...plfVersion){
 		driver = dr;
 		magAlert = new ManageAlert(driver);
+		this.plfVersion = plfVersion.length>0?plfVersion[0]:"4.0";
 	}
 
 	NavigationToolbar nav = new NavigationToolbar(driver);

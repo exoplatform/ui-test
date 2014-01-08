@@ -12,8 +12,9 @@ import org.openqa.selenium.WebDriver;
  */
 public class Button extends TestBase{
 
-	public Button(WebDriver dr) {
+	public Button(WebDriver dr,String...plfVersion) {
 		driver = dr;
+		this.plfVersion = plfVersion.length > 0 ? plfVersion[0]:"4.0";
 	}
 
 	public final By ELEMENT_SHOW_MORE_BUTTON = By.xpath("//*[contains(text(), 'Show More')]"); 

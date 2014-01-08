@@ -40,16 +40,15 @@ public class ECMS_SE_Collaboration extends PlatformBase {
 	public void beforeMethods() {
 		initSeleniumTest();
 		driver.get(baseUrl);
-		magAcc = new ManageAccount(driver);
-		navToolBar = new NavigationToolbar(driver);
-		actBar = new ActionBar(driver);
-		ecms = new EcmsBase(driver);
-		cTemplate = new ContentTemplate(driver);
-		cMenu = new ContextMenu(driver);
-		siteExp = new SitesExplorer(driver);
-		pageE = new PageEditor(driver);
-		button = new Button(driver);
-
+		magAcc = new ManageAccount(driver,this.plfVersion);
+		navToolBar = new NavigationToolbar(driver,this.plfVersion);
+		actBar = new ActionBar(driver,this.plfVersion);
+		ecms = new EcmsBase(driver,this.plfVersion);
+		cTemplate = new ContentTemplate(driver,this.plfVersion);
+		cMenu = new ContextMenu(driver,this.plfVersion);
+		siteExp = new SitesExplorer(driver,this.plfVersion);
+		pageE = new PageEditor(driver,this.plfVersion);
+		button = new Button(driver,this.plfVersion);
 		magAcc.signIn(DATA_USER, DATA_PASS);
 	}
 
@@ -237,12 +236,16 @@ public class ECMS_SE_Collaboration extends PlatformBase {
 		String fileFrench = "File_document_French";
 		String fileContentFrench = "File_document_content_French";
 		By elementFileFrench = By.linkText(fileFrench);
-
+		String eContentDetail ;
+		if(this.plfVersion.equalsIgnoreCase("4.1"))
+			eContentDetail = ELEMENT_CONTENT_IN_CONTENT_DETAIL_PORTLET_41;
+		else
+			eContentDetail = ELEMENT_CONTENT_IN_CONTENT_DETAIL_PORTLET;
 
 		navToolBar.goToSiteExplorer();
 		actBar.goToAddNewContent();
 
-		info("Create new file with English language then public its");
+		info("Create new file with English language then public its");		
 		cTemplate.createNewFile(fileEnglish, fileContentEnglish, fileEnglish);
 		actBar.publishDocument();
 		ecms.goToNode(siteExp.ELEMENT_SIDEBAR_SITES_MANAGEMENT);
@@ -267,14 +270,13 @@ public class ECMS_SE_Collaboration extends PlatformBase {
 		//waitForElementNotPresent(ELEMENT_PAGE_EDIT_FINISH_OTHER, 60000);
 		click(ELEMENT_PAGE_FINISH_BUTTON);
 		waitForElementNotPresent(ELEMENT_PAGE_FINISH_BUTTON, 60000);
-		waitForAndGetElement(By.xpath(ELEMENT_CONTENT_IN_CONTENT_DETAIL_PORTLET.replace("${contentName}", fileEnglish)));
+		waitForAndGetElement(By.xpath(eContentDetail.replace("${contentName}", fileEnglish)));
 
 		info("Change view language to French");
 		magAcc.changeLanguageForUser("French");
 
 		info("When change language, the French file will display replace English file");
-		waitForAndGetElement(By.xpath(ELEMENT_CONTENT_IN_CONTENT_DETAIL_PORTLET.replace("${contentName}", fileFrench)));
-
+		waitForAndGetElement(By.xpath(eContentDetail.replace("${contentName}", fileFrench)));
 		info("Delete data");
 		magAcc.changeLanguageForUser("Anglais");
 		navToolBar.goToEditPageEditor();
@@ -284,13 +286,17 @@ public class ECMS_SE_Collaboration extends PlatformBase {
 		cMenu.deleteData(elementFileEnglish);
 	}
 
-	//@Test
+	@Test
 	public void test41_AddTranslation_UploadedFile(){
 		String fileEnglish = "English.docx";
 		By elementFileEnglish = By.linkText(fileEnglish);
 		String fileFrench = "French.docx";
 		By elementFileFrench = By.linkText(fileFrench);
-
+		String eContentDetail ;
+		if(this.plfVersion.equalsIgnoreCase("4.1"))
+			eContentDetail = ELEMENT_CONTENT_IN_CONTENT_DETAIL_PORTLET_41;
+		else
+			eContentDetail = ELEMENT_CONTENT_IN_CONTENT_DETAIL_PORTLET;
 
 		navToolBar.goToSiteExplorer();
 
@@ -321,13 +327,13 @@ public class ECMS_SE_Collaboration extends PlatformBase {
 		//waitForElementNotPresent(ELEMENT_PAGE_EDIT_FINISH_OTHER, 60000);
 		click(ELEMENT_PAGE_FINISH_BUTTON);
 		waitForElementNotPresent(ELEMENT_PAGE_FINISH_BUTTON, 60000);
-		waitForAndGetElement(By.xpath(ELEMENT_CONTENT_IN_CONTENT_DETAIL_PORTLET.replace("${contentName}", fileEnglish)));
+		waitForAndGetElement(By.xpath(eContentDetail.replace("${contentName}", fileEnglish)));
 
 		info("Change view language to French");
 		magAcc.changeLanguageForUser("French");
 
 		info("When change language, the French file will display replace English file");
-		waitForAndGetElement(By.xpath(ELEMENT_CONTENT_IN_CONTENT_DETAIL_PORTLET.replace("${contentName}", fileFrench)));
+		waitForAndGetElement(By.xpath(eContentDetail.replace("${contentName}", fileFrench)));
 
 		info("Delete data");
 		magAcc.changeLanguageForUser("Anglais");
