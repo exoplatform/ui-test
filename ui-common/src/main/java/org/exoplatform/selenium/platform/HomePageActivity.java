@@ -67,7 +67,7 @@ public class HomePageActivity extends PlatformBase{
 	public final String ELEMENT_CONTENT_DESCRIPTION = "//a[@title='@{fileName}']/..//*[@class='descriptionText' and text()='${des}']";
 	public final String ELEMENT_CONTENT_VERSION = "//a[@title='@{fileName}']/..//*[contains(text(), '${version} -')]";
 	public final String ELEMENT_CONTENT_STATUS = "//a[@title='@{fileName}']/..//*[contains(text(), '${status}')]";
-	public final String ELEMENT_CONTENT_SUMMARY = "//*[@title='@{fileName}']/..//p[2]";
+	public final String ELEMENT_CONTENT_SUMMARY = "//*[@title='@{fileName}']/..//p[1 or 2]";
 	public final String ELEMENT_CONTENT_SUMMARY_WEBCONTENT = "//*[@title='@{fileName}']/../../div[@class='text']//p[${index}]";
 	//	public final String ELEMENT_CONTENT_COMMENT_EDIT_TITLE = "//*[@title='@{fileName}']/../../../..//*[@class='commentRight']//*[contains(text(),'Title has been updated to: ${title}')]";
 	public final String ELEMENT_CONTENT_COMMENT_EDIT_TITLE = "//*[contains(text(), '@{fileName}')]/../../../..//*[@class='commentRight']//*[contains(text(),'Title has been updated to: ${title}')]";

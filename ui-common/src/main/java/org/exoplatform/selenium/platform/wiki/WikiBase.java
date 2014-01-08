@@ -217,8 +217,8 @@ public class WikiBase extends PlatformBase{
 	public final By ELEMENT_COMPARE_TEXT = By.xpath("//div[contains(text(),'Compared With')]");
 	public final By ELEMENT_REVISION_LINK = By.xpath("//*[@id='UIWikiPageInfoArea']//a[contains(text(), 'V')]");
 	public final String ELEMENT_VERSION_LINK= "//a[contains(text(),'V{$version}')]";
-	public final String ELEMENT_VERSION_LINK_AUX= "//a[contains(text(),'v. {$version}')]";
-	public final String ELEMENT_RESTORE_LINK = "//td/label/a[contains(text(), 'v. {$version}')]/../../..//*[@class='uiIconRestore']";
+	public final String ELEMENT_VERSION_LINK_AUX= "//a[contains(text(),'v.{$version}')]";
+	public final String ELEMENT_RESTORE_LINK = "//td/label/a[contains(text(), 'v.{$version}')]/../../..//*[@class='uiIconRestore']";
 	public final By ELEMENT_COMPARE_BUTTON = By.xpath("//*[text()='Compare the selected versions']");	
 	public final By ELEMENT_VIEW_CHANGE = By.linkText("(View Change)");
 	public String ELEMENT_ATTACHMENT_NUMBER = "//*[@id='UIWikiPageInfoArea']//a[contains(text(),'${No}')]/*[@class='uiIconAttach']";

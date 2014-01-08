@@ -325,7 +325,8 @@ public class Wiki_Version_View extends Version{
 
 		goToRevisionsPage();
 
-		waitForAndGetElement(ELEMENT_VERSION_LINK.replace("{$version}","2"));
+		if(isElementNotPresent(ELEMENT_VERSION_LINK.replace("{$version}","2")))
+			waitForAndGetElement(ELEMENT_VERSION_LINK_AUX.replace("{$version}","2"));
 		
 		waitForAndGetElement(ELEMENT_CURRENT_VERSION.replace("${version}", "3"));
 

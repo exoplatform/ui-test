@@ -11,10 +11,12 @@ import org.exoplatform.selenium.platform.PlatformBase;
 import org.exoplatform.selenium.platform.ecms.EcmsBase;
 import org.exoplatform.selenium.platform.ecms.admin.ECMainFunction;
 import org.exoplatform.selenium.platform.ecms.admin.ManageCategory;
+import org.exoplatform.selenium.platform.ecms.admin.ManageDrive;
 import org.exoplatform.selenium.platform.ecms.contentexplorer.ActionBar;
 import org.exoplatform.selenium.platform.ecms.contentexplorer.ContentTemplate;
 import org.exoplatform.selenium.platform.ecms.contentexplorer.ContextMenu;
 import org.exoplatform.selenium.platform.ecms.contentexplorer.SitesExplorer;
+import org.openqa.selenium.By;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -40,6 +42,7 @@ public class ECMS_SE_CreateNode_Category extends PlatformBase{
 	ContentTemplate cTemplate;
 	SitesExplorer sitesExp;
 	ManageCategory magCa;
+	ManageDrive magDrv;
 
 	public String DATA_USER = "john";
 	public String DATA_PASS = "gtn";
@@ -59,6 +62,7 @@ public class ECMS_SE_CreateNode_Category extends PlatformBase{
 		sitesExp = new SitesExplorer(driver);
 		magCa = new ManageCategory(driver);
 		dialog = new Dialog(driver);
+		magDrv = new ManageDrive(driver);
 		magAcc.signIn(DATA_USER, DATA_PASS);
 	}
 
@@ -77,23 +81,29 @@ public class ECMS_SE_CreateNode_Category extends PlatformBase{
 	@Test
 	public void test01_CheckTheDisplayingOfCategoryInECMAdmin(){
 		String categoryName = "checkdisplaycategory01";
+		By bNode1= By.xpath(sitesExp.ELEMENT_SE_NODE.replace("{$node}","definition"));
+		By bNode2= By.xpath(sitesExp.ELEMENT_SE_NODE.replace("{$node}","intranet"));
+		By bNode3= By.xpath(sitesExp.ELEMENT_SE_NODE.replace("{$node}",categoryName));
 
 		info("Add a new drive [DMS Administration]");
 		navToolBar.goToSiteExplorer();
 		actBar.showDrives();	
 		sitesExp.createDriverInSitesExplorer("DMS Administration", "dms-system", "exo:ecm/exo:taxonomyTrees", "Platform/Administration", 
-				"*", "Non-document Nodes/Sidebar", "Admin/Icons");
+				"*", "Non-document Nodes/Sidebar", "Web");
 
 		info("Go to [DMS Administration] drive");
 		click(ecms.ELEMENT_DMS_ADMIN_DRIVE);
-		ecms.goToNode("definition/intranet", true);
+		ecms.goToNode(bNode1);
+		ecms.goToNode(bNode2);
 
 		info("Add a new category");
-		actBar.addItem2ActionBar("addCategory", ecms.ELEMENT_BUTTON_ADD_CATEGORY, "Admin", "Admin");
+		actBar.addItem2ActionBar("addCategory", ecms.ELEMENT_BUTTON_ADD_CATEGORY, "Web", "Web");
 		actBar.showDrives();
 		click(ecms.ELEMENT_DMS_ADMIN_DRIVE);
-		ecms.goToNode("definition/intranet", true);
-		actBar.addCategoryInSimpleView(categoryName);
+		ecms.goToNode(bNode1);
+		ecms.goToNode(bNode2);
+		actBar.addCategoryInSimpleView(categoryName,false);
+		waitForAndGetElement(bNode3);
 
 		info("Go to Manage Category in Content Administration");
 		ecMain.goToCategoriesTabInContentAdmin();
@@ -104,9 +114,9 @@ public class ECMS_SE_CreateNode_Category extends PlatformBase{
 
 		info("Restore data");
 		magCa.deleteCategory(categoryName);
-		button.close();
-		navToolBar.goToSiteExplorer();
-		waitForElementNotPresent(ecms.ELEMENT_NODE_ADMIN_VIEW.replace("${nodeName}", categoryName));
+		info("Delete drive");
+		ecMain.goToManageDrive();
+		magDrv.deleteDrive("DMS Administration");
 	}
 	
 	/**
@@ -118,33 +128,38 @@ public class ECMS_SE_CreateNode_Category extends PlatformBase{
 	public void test02_AddNewCategoryWhenPutSomeSpecialCharacters(){
 		String categoryName = "checkcategorywithcharacters02";
 		String categorySpecialName = cTemplate.DATA_SPECIAL_CHARACTER_STRING + categoryName;
+		By bNode1= By.xpath(sitesExp.ELEMENT_SE_NODE.replace("{$node}","definition"));
+		By bNode2= By.xpath(sitesExp.ELEMENT_SE_NODE.replace("{$node}","intranet"));
+		By bNode3= By.xpath(sitesExp.ELEMENT_SE_NODE.replace("{$node}",categorySpecialName));
 
 		info("Add a new drive [DMS Administration]");
 		navToolBar.goToSiteExplorer();
 		actBar.showDrives();	
-		//sitesExp.createDriverInSitesExplorer("DMS Administration", "dms-system", "exo:ecm/exo:taxonomyTrees", "Platform/Administration", 
-		//		"*", "Non-document Nodes/Sidebar", "Admin/Icons");
+		sitesExp.createDriverInSitesExplorer("DMS Administration", "dms-system", "exo:ecm/exo:taxonomyTrees", "Platform/Administration", 
+				"*", "Non-document Nodes/Sidebar", "Web");
 
 		info("Go to [DMS Administration] drive");
 		click(ecms.ELEMENT_DMS_ADMIN_DRIVE);
-		ecms.goToNode("definition/intranet", true);
+		ecms.goToNode(bNode1);
+		ecms.goToNode(bNode2);
 
 		info("Add a new category with special characters");
-		//actBar.addItem2ActionBar("addCategory", ecms.ELEMENT_BUTTON_ADD_CATEGORY, "Admin", "Admin");
-		//actBar.showDrives();
-		//click(ecms.ELEMENT_DMS_ADMIN_DRIVE);
-		//ecms.goToNode("definition/intranet", true);
+		actBar.addItem2ActionBar("addCategory", ecms.ELEMENT_BUTTON_ADD_CATEGORY, "Web", "Web");
+		actBar.showDrives();
+		click(ecms.ELEMENT_DMS_ADMIN_DRIVE);
+		ecms.goToNode(bNode1);
+		ecms.goToNode(bNode2);
 		actBar.addCategoryInSimpleView(categorySpecialName, false);
-		waitForAndGetElement(ecms.ELEMENT_NODE_ADMIN_VIEW.replace("${nodeName}", categoryName));
+		waitForAndGetElement(bNode3);
 		
 		info("Restore data");
-		click(ecms.ELEMENT_UI_CHECKBOX.replace("${element}", categoryName), 2);
-		click(cMenu.ELEMENT_MENU_DELETE);
-		dialog.deleteInDialog();
-		if (waitForAndGetElement(button.ELEMENT_OK_BUTTON, 3000, 0) != null){
-			click(button.ELEMENT_OK_BUTTON);
-		}
-		waitForElementNotPresent(ecms.ELEMENT_UI_CHECKBOX.replace("${element}", categoryName));
+		magCa.deleteCategory(categoryName);
+		navToolBar.goToSiteExplorer();
+		waitForElementNotPresent(ecms.ELEMENT_NODE_ADMIN_VIEW.replace("${nodeName}", categoryName));
 		warn("Exception: delete Category with special characters");	
+		info("Delete drive");
+		ecMain.goToManageDrive();
+		magDrv.deleteDrive("DMS Administration");
+		info("Delete driver successfully");
 	}
 }

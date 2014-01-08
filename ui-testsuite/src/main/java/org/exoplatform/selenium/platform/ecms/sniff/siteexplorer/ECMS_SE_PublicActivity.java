@@ -161,7 +161,7 @@ public class ECMS_SE_PublicActivity extends PlatformBase {
 		
 		info("Check activity in Home page");
 		navTool.goToHomePage();
-		activity.checkInforAfterAddingDocument(name, "uiIcon64x64Templateacme_product", "Product", "", sum, "0", "", "Draft");
+		activity.checkInforAfterAddingDocument(name, "uiIcon64x64Templateacme_product", "Product", "", sum, "1", "", "Draft");
 		
 		//delete data
 		navTool.goToSiteExplorer();

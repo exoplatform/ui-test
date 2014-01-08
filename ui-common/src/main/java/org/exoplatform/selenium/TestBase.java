@@ -525,7 +525,8 @@ public class TestBase {
 		int waitTime = wait.length > 0 ? wait[0] : DEFAULT_TIMEOUT;
 		//info("--Verify message: " + message);
 		Utils.pause(500);
-		waitForTextPresent(message, waitTime);
+		//waitForTextPresent(message, waitTime);
+		waitForAndGetElement("//*[contains(text(),'"+message+"')]",waitTime);
 	}
 
 	public void type(Object locator, String value, boolean validate, Object...opParams) {	

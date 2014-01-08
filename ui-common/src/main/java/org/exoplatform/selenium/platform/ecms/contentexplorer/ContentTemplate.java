@@ -175,7 +175,7 @@ public class ContentTemplate extends EcmsBase{
 	//Data test
 	public final String[] DATA_SPECIAL_CHARACTER = {"@","`","~","!","#","$","%","^","&","*","(",")","-","_","+","=","{","}","[","]","|","\\",";",":","'","\"","<",",",".","/","?"};
 	public final String[] DATA_SPECIAL_CHARACTER_2 = {"`", "~", "!", "#", "$", "&", "*", "(", ")", "=", "{", "}", "+", ";", "<", ">", "/", "?","\"","\\"};
-	public final String DATA_SPECIAL_CHARACTER_STRING = "~`!@#$%^&*()-_=+[]{}\\|;:'\",<.>?/";
+	public final String DATA_SPECIAL_CHARACTER_STRING = "~`!@#$%^&*()-_=+[]{}\\|;:\",<.>?/";
 
 	//Add New Folder
 	public final By ELEMENT_CREATE_FOLDER_BUTTON = By.xpath("//*[text()='Create Folder']");

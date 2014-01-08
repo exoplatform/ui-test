@@ -18,16 +18,17 @@ public class ManageAlert extends TestBase{
 		this.plfVersion = plfVersion.length>0?plfVersion[0]:"4.0";
 		driver = dr;
 	}
-	
+
 	Button button = new Button(driver);
 
 	//ECMS > Symlink
 	public final By ELEMENT_ALERT = By.xpath("//*[contains(@class, 'popupTitle') and contains(text(), 'Warning')]");
 	public final By ELEMENT_MESSAGE = By.xpath("//*[contains(@class, 'warningIcon')]");
 	public final By ELEMENT_INFO = By.xpath("//*[contains(@class, 'infoIcon')]");
+	public final By ELEMENT_CONFIRM = By.xpath("//*[contains(@class, 'confirmationIcon')]");
 
-	//Accept an alert
-	public void acceptAlert() {
+			//Accept an alert
+			public void acceptAlert() {
 		try {
 			Alert alert = driver.switchTo().alert();
 			alert.accept();
@@ -82,7 +83,7 @@ public class ManageAlert extends TestBase{
 			if (message.equals(confirmationText)) {
 				break;
 			}
-			
+
 			Utils.pause(100);
 		}
 		Alert alert = driver.switchTo().alert();
@@ -100,12 +101,15 @@ public class ManageAlert extends TestBase{
 		}else if (isElementPresent(ELEMENT_INFO)){
 			assert getText(ELEMENT_INFO).contains(message):"Message is wrong";	
 		}
+		else if (isElementPresent(ELEMENT_CONFIRM)){
+			assert getText(ELEMENT_CONFIRM).contains(message):"Message is wrong";        
+		}
 		if (waitForAndGetElement(button.ELEMENT_OK_BUTTON, 3000, 0) != null){
 			click(button.ELEMENT_OK_BUTTON);
 		}
 		Utils.pause(1000);
 	}
-	
+
 	//Input text
 	public void inputAlertText(String text){
 		try {

@@ -267,9 +267,9 @@ public class ECMS_SE_CreateNode_Folder extends PlatformBase{
 	/**
 	 * Qmetry ID: 67347
 	 * Add folder with special characters in 'Name' field like !,@,#
-	 * 
+	 * PENDING: Refer https://jira.exoplatform.org/browse/ECMS-5954
 	 */
-	@Test
+	@Test (groups="pending")
 	public void test07_AddFolderWithSpecialCharactersInNameField(){
 		String cTitle = "ECMS_SE_ContentFolder_07";
 		String dTitle = "ECMS_SE_DocumentFolder_07";
