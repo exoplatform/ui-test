@@ -63,18 +63,18 @@ public class TestBase {
 	public final String DEFAULT_BASEURL="http://localhost:8080/portal";
 
 	/*======= Welcome Screen (Term and Conditions) =====*/
-	By ELEMENT_FIRSTNAME_ACCOUNT = By.name("firstNameAccount");
-	By ELEMENT_LASTNAME_ACCOUNT = By.name("lastNameAccount");
-	By ELEMENT_EMAIL_ACCOUNT = By.name("emailAccount");
-	By ELEMENT_CONFIRM_PASS_ACCOUNT = By.name("confirmUserPasswordAccount");
-	By ELEMENT_ROOT_PASS_ACCOUNT = By.name("adminPassword");
-	By ELEMENT_ROOT_CONFIRM_PASS_ACCOUNT = By.name("confirmAdminPassword");
+	public final By ELEMENT_FIRSTNAME_ACCOUNT = By.name("firstNameAccount");
+	public final By ELEMENT_LASTNAME_ACCOUNT = By.name("lastNameAccount");
+	public final By ELEMENT_EMAIL_ACCOUNT = By.name("emailAccount");
+	public final By ELEMENT_CONFIRM_PASS_ACCOUNT = By.name("confirmUserPasswordAccount");
+	public final By ELEMENT_ROOT_PASS_ACCOUNT = By.name("adminPassword");
+	public final By ELEMENT_ROOT_CONFIRM_PASS_ACCOUNT = By.name("confirmAdminPassword");
 	public final By ELEMENT_AGREEMENT_CHECKBOX = By.xpath("//*[@id = 'agreement']");
-	By ELEMENT_INPUT_USERNAME = By.name("username"); 
+	public final By ELEMENT_INPUT_USERNAME = By.name("username"); 
 	public final By ELEMENT_CONTINUE_BUTTON = By.xpath("//button[text()='Continue' and @class='btn active']");
 	public final By ELEMENT_START_BUTTON = By.xpath("//button[text()='Start']");
-	By ELEMENT_SUBMIT_BUTTON = By.xpath("//*[text()='Submit']");
-	By ELEMENT_INPUT_PASSWORD = By.name("password");
+	public final By ELEMENT_SUBMIT_BUTTON = By.xpath("//*[text()='Submit']");
+	public final By ELEMENT_INPUT_PASSWORD = By.name("password");
 	By ELEMENT_ACCOUNT_NAME_LINK = By.xpath("//*[@id='UIUserPlatformToolBarPortlet']/a");
 	By ELEMENT_PLF_INFORMATION = By.id("platformInfoDiv");
 
@@ -82,7 +82,14 @@ public class TestBase {
 	public final By ELEMENT_CONTINUE_BUTTON_DISABLE = By.xpath("//button[text()='Continue' and @class='btn inactive']");
 	public final By ELEMENT_TERM_CONDITION_CONTENT = By.xpath("//div[@id='AccountSetup' and @class='content']");
 
-	/*======== End of Term and conditions =====*/
+	public final By ELEMENT_ACCOUNT_SETUP = By.xpath("//div[@class='header' and text()='Account Setup']");
+	public final By ELEMENT_USER_ADMIN = By.id("adminFirstName");
+	public final By ELEMENT_SKIP_BUTTON = By.xpath("//button[text()='Skip']");
+	public final By ELEMENT_YOUR_ACCOUNT_LABEL = By.xpath("//h5[contains(text(), 'Create your account')]");
+	public final By ELEMENT_ADMIN_PASS_LABEL = By.xpath("//h5[contains(text(), 'Admin Password')]");
+	public final By ELEMENT_ACCOUNT_ERROR = By.xpath("//*[@class='accountSetupError']");
+
+	/*======== End of Term and conditions =====*/	
 
 	public void initSeleniumTestWithOutTermAndCondition(Object... opParams){
 		String browser = System.getProperty("browser");
@@ -105,7 +112,7 @@ public class TestBase {
 		info("Term and conditions");
 		termsAndConditions(opParams);
 		info("End of term and conditions");
-		
+
 		if(!firstTimeLogin)
 			checkPLFVersion();
 		else{
@@ -195,9 +202,9 @@ public class TestBase {
 			info("Unknown platform version. Set to default version 4.0.x.");
 			this.plfVersion="4.0";
 		}
-		
+
 	}
-	
+
 	public void accountSetupWithoutGreeting(){
 		type(ELEMENT_INPUT_USERNAME, "fqa", true);
 		type(ELEMENT_FIRSTNAME_ACCOUNT, "FQA", true);
