@@ -30,8 +30,8 @@ public class HomePageActivity extends PlatformBase{
 	public final String ELEMENT_ACTIVITY_DELETE = "//*[contains(text(),'${activityText}')]/../../../../..//a[contains(@id, 'DeleteActivityButton')]";
 	public final By ELEMENT_LOADMORE = By.xpath("//div[@class='boxLoadMore']");
 	//like and unlike icon
-	public final String ELEMENT_LIKE_ICON = "//*[contains(text(),'${activityText}')]/../../../..//*[starts-with(@id, 'LikeLink')]";
-	public final String ELEMENT_UNLIKE_ICON = "//*[contains(text(),'${activityText}')]/../../../..//*[starts-with(@id, 'UnLikeLink')]";
+	public final String ELEMENT_LIKE_ICON = "//*[contains(text(),'${activityText}')]/ancestor::div[@class='boxContainer']//*[starts-with(@id, 'LikeLink')]";
+	public final String ELEMENT_UNLIKE_ICON = "//*[contains(text(),'${activityText}')]/ancestor::div[@class='boxContainer']//*[starts-with(@id, 'UnLikeLink')]";
 
 	//activity layout
 	public final String ELEMENT_ACTIVITY_AUTHOR_NAME = "//div[contains(@id,'activityContainer')][${index}]//div[@class='author']//a[text()='${author}']";
