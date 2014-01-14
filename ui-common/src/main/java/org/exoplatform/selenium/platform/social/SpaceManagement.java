@@ -54,6 +54,7 @@ public class SpaceManagement extends SocialBase {
 	public final By     ELEMENT_USER_GROUP_TAB          = By.xpath("//*[text()='Invite users from group']");
 			//("//div[contains(@class,'MiddleTab') and text()='Invite users from group']");
 	public final By     ELEMENT_USER_GROUP_CHECKBOX     = By.xpath("//*[@id='useExistingGroup']");
+	public final String ELEMENT_SPACE_ACTIVTY = "//a[contains(@onclick,'${space}')]/span[text()='Activity Stream']";
 
 	//Edit space
 	public final By     ELEMENT_SPACE_SETTING_TAB       = By.xpath("//div[contains(@class,'MiddleTab') and text()='Settings']");

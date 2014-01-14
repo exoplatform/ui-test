@@ -55,7 +55,7 @@ public class TestBase {
 	//public final String AJAX_LOADING_MASK = "//div[@id='AjaxLoadingMask']";
 
 
-	public final String DEFAULT_BASEURL = "http://dispostable.wks-acc.exoplatform.org/portal";
+	public final String DEFAULT_BASEURL = "http://demo.fqa.exocloud.vn/portal";
 
 
 	//"http://yopmail.netstg.exoplatform.org/portal";

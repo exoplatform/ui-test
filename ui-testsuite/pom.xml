@@ -181,6 +181,20 @@
 				<testSuite>social.xml</testSuite>
 			</properties>
 		</profile>
+		
+		<profile>
+			<id>social-sniff-part2</id>
+			<properties>
+				<testSuite>social-sniff-part2.xml</testSuite>
+			</properties>
+		</profile>
+		
+		<profile>
+			<id>social-sniff-part1</id>
+			<properties>
+				<testSuite>social-sniff-part1.xml</testSuite>
+			</properties>
+		</profile>
 
 		<profile>
 			<id>social-sniff</id>
