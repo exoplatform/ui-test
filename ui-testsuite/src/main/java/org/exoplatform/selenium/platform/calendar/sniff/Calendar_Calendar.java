@@ -3,8 +3,11 @@ package org.exoplatform.selenium.platform.calendar.sniff;
 import static org.exoplatform.selenium.TestLogger.info;
 
 import org.exoplatform.selenium.Button;
+import java.util.List;
 import org.exoplatform.selenium.Utils;
 import org.exoplatform.selenium.platform.ManageAccount;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -50,29 +53,24 @@ public class Calendar_Calendar extends CalendarBase{
 	 */
 	@Test
 	public void test01_CheckHighlightedMiniCalendar() {
-		String eventName1 = "1event68653";
-		String eventName2 = "2event68653";
-		String taskName = "task 68653";
+		String eventName = "event68653";
+		String taskName = "task68653";
 		info("Check highlighted mini calendar");
-		String month = getDate(0, "MM");
-		String year = getDate(0, "yyyy");
-		evt.addQuickEvent(eventName1,eventName1,month + "/15/" + year,month + "/15/" + year,true);
-		evt.addQuickEvent(eventName2,eventName2,month + "/16/" + year,month + "/16/" + year,true);
-		tsk.addQuickTask(taskName,taskName,month + "/17/" + year,month + "/17/" + year,true);
+
+		evt.addQuickEvent(eventName,eventName,getDate(1,"MM/dd/yyyy"),getDate(1,"MM/dd/yyyy"),false);
+		tsk.addQuickTask(taskName,taskName,getDate(2,"MM/dd/yyyy"),getDate(2,"MM/dd/yyyy"),false);
 		driver.navigate().refresh();
 
-		waitForAndGetElement(ELEMENT_MINI_CALENDAR_DATE_HIGHLIGHT.replace("${date}", "15"));
-		waitForAndGetElement(ELEMENT_MINI_CALENDAR_DATE_HIGHLIGHT.replace("${date}", "16"));
-		waitForAndGetElement(ELEMENT_MINI_CALENDAR_DATE_HIGHLIGHT.replace("${date}", "17"));
-
-		click(ELEMENT_MINI_CALENDAR_DATE_HIGHLIGHT.replace("${date}", "15"));
-		deleteEventTask(eventName1);
-		
-		click(ELEMENT_MINI_CALENDAR_DATE_HIGHLIGHT.replace("${date}", "16"));
-		deleteEventTask(eventName2);
-		
-		click(ELEMENT_MINI_CALENDAR_DATE_HIGHLIGHT.replace("${date}", "17"));
-		deleteEventTask(taskName);
+		List <WebElement> highLight = driver.findElements(By.xpath("//td[@class='highLight']"));
+		for(WebElement we:highLight){
+			boolean verify = we.getText().equals(getDate(1,"dd")) || we.getText().equals(getDate(2,"dd"));
+			assert verify;
+		}
+		Utils.pause(3000);
+		deleteEventTask(eventName,selectDayOption.ONEDAY);
+		info("Event deleted successfully");
+		deleteEventTask(taskName,selectDayOption.ONEDAY);
+		info("Task deleted successfully");
 	}
 
 	/**Export calendar, Import calendar
@@ -132,18 +130,26 @@ public class Calendar_Calendar extends CalendarBase{
 		String[] user = {"mary"};
 		boolean[] canEdit = {true};
 
-		info("Add/Delete Shared Calendar");
+		info("Add Calendar");
 		addCalendar(calendar,calendar,"red");
+		info("Share Calendar");
 		shareCalendar(calendar,user,canEdit);
+
+		info("Confirm shared Calendar");
 		acc.signOut();
 		acc.signIn(DATA_USER_MARY,DATA_PASS);
 		goToCalendarPage();
-
-		deleteSharedCalendar(calendar);
+		driver.navigate().refresh();
+		waitForAndGetElement(ELEMENT_CALENDAR_GET_BY_TAG_LI.replace("${calendar}",calendar));
+		
+		info("Delete shared Calendar");
 		acc.signOut();
 		acc.signIn(DATA_USER_JOHN,DATA_PASS);
 		goToCalendarPage();
-		deleteCalendar(calendar);
+		driver.navigate().refresh();
+		deleteCalendar(calendar,true);
+		
+		
 	}
 
 	/**Edit Shared Calendar, 

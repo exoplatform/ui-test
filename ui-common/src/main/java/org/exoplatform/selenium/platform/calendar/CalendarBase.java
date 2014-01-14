@@ -145,8 +145,9 @@ public class CalendarBase extends PlatformBase {
 	public String ELEMENT_EVENT_TASK_ALL_DAY_PLF41 = "//*[@id='UIWeekViewGridAllDay']//div[contains(@class,'eventAlldayContent') and contains(.,'${event}')]";
 	public String ELEMENT_EVENT_TASK_ONE_DAY = "//*[@id='UIWeekViewGrid']//div[contains(text(),'${taskName}')]/parent::div[@class='clearfix']/div[@class='eventContainerBar eventTitle pull-left']";
 	public String ELEMENT_EVENT_TASK_ONE_DAY_PLF41 = "//*[contains(@id, 'UIWeekView')]//div[contains(text(),'${taskName}')]";
-	public String ELEMENT_EVENT_TASK_WORKING_PANE = "//div[contains(@class,'eventContainer') and contains(text(),'${event}')]";
+	//public String ELEMENT_EVENT_TASK_WORKING_PANE = "//div[contains(@class,'eventContainer') and contains(text(),'${event}')]";
 	public String ELEMENT_EVENT_TASK_WORKING_PANE_PLF41 = "//*[@id='UIWeekViewGrid']//div[contains(@class,'eventAlldayContent') and contains(.,'${event}')]";
+	public String ELEMENT_EVENT_TASK_WORKING_PANE = "//*[@id='UIWeekViewGrid']//div[@class='eventContainer' and contains(text(),'${event}')]";
 	public By ELEMENT_EVENT_TASK_DELETE_MENU = By.xpath("//div[@id='tmpMenuElement']//a[@class='eventAction' and contains(@href,'Delete')]");
 	public String MSG_EVENT_TASK_DELETE = "Are you sure you want to delete this event/task?";
 
