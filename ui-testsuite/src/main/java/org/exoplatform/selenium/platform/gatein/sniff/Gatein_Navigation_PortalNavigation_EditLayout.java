@@ -128,9 +128,8 @@ public class Gatein_Navigation_PortalNavigation_EditLayout extends PortalManagem
 		goToPortalEditLayout(portalName);
 		click(ELEMENT_CATEGORY_COLLABORATION);
 		WebElement e = waitForAndGetElement("//div[@class='popupContent']");
-		((JavascriptExecutor) (driver)).executeScript("arguments[0].scrollTop(0);",e);
+		((JavascriptExecutor) (driver)).executeScript("arguments[0].scrollIntoView(false);",e);
 		dragAndDropToObject(ELEMENT_ANWSER_PORTLET, By.xpath("//*[text() = 'Portal Page']/.."));
-		waitForAndGetElement("//div[@class='CONTROL-PORTLET CONTROL-BLOCK uiInfoBar']/span[text()='Answers Portlet']");
 		click(ELEMENT_SWITCH_VIEW_MODE_PORTAL);
 		waitForAndGetElement(ELEMENT_ANWSER_PORTLET_IN_VIEW_PAGE);
 		click(ELEMENT_SWITCH_VIEW_MODE_PORTAL);

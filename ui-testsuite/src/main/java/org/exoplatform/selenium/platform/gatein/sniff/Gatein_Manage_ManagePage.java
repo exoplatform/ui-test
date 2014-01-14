@@ -149,7 +149,7 @@ public class Gatein_Manage_ManagePage extends DashBoard {
 	public void test04_AddEditDeletePageForGroup_InPageManagement(){
 		String pageName = "SniffManagePageName04";
 		String pageTitle = "SniffManagePageTitle04";
-		String ownerId = "/organization/management/executive-board";
+		String ownerId = "/platform/administrators";
 		String groupPath = "Platform/Content Management";
 		String membership = "*";
 		
