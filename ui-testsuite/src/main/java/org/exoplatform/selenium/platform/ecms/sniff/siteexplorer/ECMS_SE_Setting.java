@@ -57,14 +57,13 @@ public class ECMS_SE_Setting extends PlatformBase {
 		waitForAndGetElement(siteExp.ELEMENT_DMS_STRUCTURE);
 		
 		//Delete data
+		click(siteExp.ELEMENT_SIDEBAR_FILE_EXPLORER);
 		cMenu.deleteDocument(bNode1);
 	}
 	
 	@BeforeMethod
 	public void beforeMethod(){
 		initSeleniumTest();
-		driver.close();
-		getDriverAutoOpenWindow();
 		driver.get(baseUrl);
 		navToolBar = new NavigationToolbar(driver);
 		magAcc = new ManageAccount(driver);

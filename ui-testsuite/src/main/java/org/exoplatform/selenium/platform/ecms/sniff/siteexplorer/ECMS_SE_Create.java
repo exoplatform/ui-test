@@ -46,16 +46,16 @@ public class ECMS_SE_Create extends PlatformBase {
 	public void beforeMethods() {
 		initSeleniumTest();
 		driver.get(baseUrl);
-		template = new ContentTemplate(driver);
-		actBar = new ActionBar(driver);
-		magAcc = new ManageAccount(driver);
-		navToolBar = new NavigationToolbar(driver);
-		cMenu = new ContextMenu(driver);
-		cTemp = new ContentTemplate(driver);
-		button = new Button(driver);
-		ecms = new EcmsBase(driver);
+		template = new ContentTemplate(driver,this.plfVersion);
+		actBar = new ActionBar(driver,this.plfVersion);
+		magAcc = new ManageAccount(driver,this.plfVersion);
+		navToolBar = new NavigationToolbar(driver,this.plfVersion);
+		cMenu = new ContextMenu(driver,this.plfVersion);
+		cTemp = new ContentTemplate(driver,this.plfVersion);
+		button = new Button(driver,this.plfVersion);
+		ecms = new EcmsBase(driver,this.plfVersion);
 		magAcc.signIn(DATA_USER, DATA_PASS);
-        magMember = new ManageMember(driver);
+        magMember = new ManageMember(driver,this.plfVersion);
 	}
 
 	@AfterMethod
@@ -154,9 +154,8 @@ public class ECMS_SE_Create extends PlatformBase {
 	}
 
 	/**CaseId: 65877 + 67860: Upload files then delete in site explorer
-	 * pending: upload multi file simultaneously, check upload component
 	 */
-	//@Test
+	@Test(groups="pending")
 	public void test23_24_UploadDeleteFileInSiteExplorer(){	
 		info("Upload files in site explorer");
 		navToolBar.goToSiteExplorer();
@@ -168,9 +167,8 @@ public class ECMS_SE_Create extends PlatformBase {
 	}
 	
 	/**CaseId: 75241 + 75244: Upload then delete uploaded files in persional document
-	 * pending: upload multi file simultaneously, check upload component
 	 */
-	//@Test
+	@Test(groups="pending")
 	public void test23_24_UploadDeleteFileInPersonalDocument(){
 		info("Upload files in personal document");
 		navToolBar.goToPersonalDocuments();
@@ -217,7 +215,7 @@ public class ECMS_SE_Create extends PlatformBase {
 	 * Create content link when add new a document that contains FCK Editor
 	 * Pending: following issue ECMS-5283
 	 */
-	@Test
+	//@Test
 	public void test27_CheckFCKEditor(){
 		//String file1 = "KS_Wiki_Attachment_AllMyLove.mp3";
 		String file2 = "Winter.jpg";

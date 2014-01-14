@@ -892,7 +892,7 @@ public class ActionBar extends EcmsBase{
 	//Undo deleted Items
 	public void undoDeletion(String...nodeName){
 		String node = nodeName.length > 0 ? nodeName[0]: "";
-
+		
 		info("-- Undo deletion --");
 		if (node != ""){
 			String message = "\'" + node + "' was deleted succesfully";

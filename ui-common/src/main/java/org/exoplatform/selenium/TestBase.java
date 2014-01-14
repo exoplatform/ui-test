@@ -113,7 +113,7 @@ public class TestBase {
 			ieFlag = true;
 		} else {
 			driver = new FirefoxDriver(fp);
-		}
+	}
 		baseUrl = System.getProperty("baseUrl");
 		if (baseUrl==null) baseUrl = DEFAULT_BASEURL;
 		action = new Actions(driver);

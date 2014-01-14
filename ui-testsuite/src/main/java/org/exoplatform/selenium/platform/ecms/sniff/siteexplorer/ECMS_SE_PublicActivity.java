@@ -41,16 +41,16 @@ public class ECMS_SE_PublicActivity extends PlatformBase {
 	public void beforeMethods(){
 		initSeleniumTest();
 		driver.get(baseUrl);
-		magAcc = new ManageAccount(driver);
-		navTool = new NavigationToolbar(driver);
-		actBar = new ActionBar(driver);
-		temp = new ContentTemplate(driver);
-		button = new Button(driver);
-		cMenu = new ContextMenu(driver);
-		activity = new HomePageActivity(driver);
-		ecms = new EcmsBase(driver);
-		siteExp = new SitesExplorer(driver);
-		navToolBar = new NavigationToolbar(driver);
+		magAcc = new ManageAccount(driver,this.plfVersion);
+		navTool = new NavigationToolbar(driver,this.plfVersion);
+		actBar = new ActionBar(driver,this.plfVersion);
+		temp = new ContentTemplate(driver,this.plfVersion);
+		button = new Button(driver,this.plfVersion);
+		cMenu = new ContextMenu(driver,this.plfVersion);
+		activity = new HomePageActivity(driver,this.plfVersion);
+		ecms = new EcmsBase(driver,this.plfVersion);
+		siteExp = new SitesExplorer(driver,this.plfVersion);
+		navToolBar = new NavigationToolbar(driver,this.plfVersion);
 		
 		magAcc.signIn(DATA_USER, DATA_PASS);
 	}
@@ -70,7 +70,7 @@ public class ECMS_SE_PublicActivity extends PlatformBase {
 		actBar.goToViewMode("Web");
 		actBar.goToAddNewContent();
 		temp.createNewWebContent(name, "", "", sum, "", "", true);
-		navTool.goToHomePage();
+		navTool.goToHomePage(); 					  
 		activity.checkInforAfterAddingDocument(name, "uiIcon64x64Templateexo_webContent", "Web Content", "", sum, "0", "", "Draft");
 	}
 	
@@ -110,8 +110,10 @@ public class ECMS_SE_PublicActivity extends PlatformBase {
 		
 		info("Check activity info is displayed in home page");
 		navTool.goToHomePage();
-		activity.checkInforAfterAddingDocument(fileName, "uiIcon64x64FileDefault uiIcon64x64nt_file uiIcon64x64texthtml", "File", "", "", "1", desc, "");
-		
+		if(this.plfVersion.equalsIgnoreCase("4.0"))
+			activity.checkInforAfterAddingDocument(fileName, "uiIcon64x64FileDefault uiIcon64x64nt_file uiIcon64x64texthtml", "File", "", "", "1", desc, "");
+		else if(this.plfVersion.equalsIgnoreCase("4.1"))
+			activity.checkInforAfterAddingDocument(fileName, "uiIcon64x64FileHtml uiIcon64x64nt_file", "File", "", "", "1", desc, "");
 		//delete data
 		navTool.goToSiteExplorer();
 		cMenu.deleteData(elementFile);
@@ -202,7 +204,10 @@ public class ECMS_SE_PublicActivity extends PlatformBase {
 		actBar.goToAddNewContent();
 		temp.createNewFile(name, sum, title);
 		navTool.goToHomePage();
-		activity.checkInforAfterAddingDocument(name, "uiIcon64x64FileDefault uiIcon64x64nt_file uiIcon64x64texthtml", "File", "", "", "", "", "");
+		if(this.plfVersion.equalsIgnoreCase("4.0"))
+			activity.checkInforAfterAddingDocument(name, "uiIcon64x64FileDefault uiIcon64x64nt_file uiIcon64x64texthtml", "File", "", "", "", "", "");
+		else if(this.plfVersion.equalsIgnoreCase("4.1"))
+			activity.checkInforAfterAddingDocument(name, "uiIcon64x64FileHtml uiIcon64x64nt_file", "File", "", "", "", "", "");
 		
 		info("Edit title of content");
 		navTool.goToSiteExplorer();
@@ -413,9 +418,9 @@ public class ECMS_SE_PublicActivity extends PlatformBase {
 	}
 	
 	/**CaseID: 75294 -> Edit a content from the Content activity
-	 * 
+	 * ERROR: Refer ECMS-5342: Content summary in content activity display wrong
 	 */
-	@Test
+	@Test(groups="error")
 	public void test12_EditAContentFromContentActivity(){
 		String name = "Public_activity_web_content_11";
 		String sum = "line1/line2/line3";
@@ -440,7 +445,7 @@ public class ECMS_SE_PublicActivity extends PlatformBase {
 	 */
 	@Test
 	public void test13_ViewContentFromContentActivity(){
-		String name = "Public_activity_web_content_12";
+		String name = "publicactivitywebcontent12";
 		String cont = "Public_activity_content_12";
 		String sum = "line1/line2/line3/line4/line5";
 		By elementWeb = By.xpath(siteExp.ELEMENT_SE_NODE.replace("{$node}", name));
@@ -452,7 +457,7 @@ public class ECMS_SE_PublicActivity extends PlatformBase {
 		actBar.addItem2ActionBar("addDocument", actBar.ELEMENT_NEW_CONTENT_LINK, "Web");
 		actBar.goToViewMode("Web");
 		actBar.goToAddNewContent();
-		temp.createNewWebContent(name, cont, "", sum, "", "", true);
+		temp.createNewWebContent(name, sum, "", cont, "", "", true);
 		
 		info("Click View icon in activity");
 		navTool.goToHomePage();
@@ -542,8 +547,12 @@ public class ECMS_SE_PublicActivity extends PlatformBase {
 	}
 	
 	/**CaseId: 75299 -> Update Content activity after moving a content
+<<<<<<< HEAD
 	 * ERROR: Update Content activity after move a content (check comment)
 	 * Note: This issue is still created on jira
+=======
+	 * ERROR: Refer ECMS-5342: Content summary in content activity display wrong
+>>>>>>> 577bc94... FQA-1556: Migrate commons and test cases (Ecms/Sites Explorer/Create, Publish Activity, Search and Settings)
 	 */
 	@Test (groups="error")
 	public void test17_CheckIntranetHomePage_AfterMovingContent(){
