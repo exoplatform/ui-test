@@ -52,16 +52,15 @@ public class Calendar_Search extends CalendarBase{
 		goToCalendarPage();
 
 		info("Add new event");
-		evt.addQuickEvent(EVENT_NAME_01,EVENT_NAME_01,getDate(1,"MM/dd/yyyy"),getDate(1,"MM/dd/yyyy"),true);
+		evt.addQuickEvent(EVENT_NAME_01,EVENT_NAME_01,getDate(1,"MM/dd/yyyy"),getDate(1,"MM/dd/yyyy"),false);
 
 		info("Search an event");
 		quickSearchCalendar(EVENT_NAME_01);
 		Utils.pause(10000);
 		info("Restore data");
 		click(ELEMENT_BUTTON_CLOSE_QUICK_SEARCH_RESULT);
-		waitForAndGetElement(ELEMENT_WEEK_TAB_ACTIVE);
-
-		deleteEventTask(EVENT_NAME_01);
+		goToCalendarPage();
+		deleteEventTask(EVENT_NAME_01, selectDayOption.ONEDAY);
 	}
 
 	/**Calendar Advance Search
@@ -75,7 +74,7 @@ public class Calendar_Search extends CalendarBase{
 		goToCalendarPage();
 
 		info("Add new event");
-		evt.addQuickEvent(EVENT_NAME_02,EVENT_NAME_02,getDate(1,"MM/dd/yyyy"),getDate(1,"MM/dd/yyyy"),true);
+		evt.addQuickEvent(EVENT_NAME_02,EVENT_NAME_02,getDate(1,"MM/dd/yyyy"),getDate(1,"MM/dd/yyyy"),false);
 
 		info("Quick Search an event");
 		quickSearchCalendar(EVENT_NAME_02);
@@ -85,10 +84,7 @@ public class Calendar_Search extends CalendarBase{
 
 		info("Restore data");
 		click(ELEMENT_BUTTON_CLOSE_QUICK_SEARCH_RESULT);
-		
-		//goToCalendarPage();
-		waitForAndGetElement(ELEMENT_WEEK_TAB_ACTIVE);
-		
-		deleteEventTask(EVENT_NAME_02);
+		goToCalendarPage();
+		deleteEventTask(EVENT_NAME_02, selectDayOption.ONEDAY);
 	}
 }
