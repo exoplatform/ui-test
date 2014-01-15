@@ -68,6 +68,9 @@ public class PeopleConnection extends SocialBase {
 		if (waitForAndGetElement(ELEMENT_CANCEL_REQUEST_BUTTON.replace("${peopleName}", peopleName), 10000, 0) != null){
 			click(ELEMENT_CANCEL_REQUEST_BUTTON.replace("${peopleName}", peopleName));
 		}
+		if (waitForAndGetElement(ELEMENT_REMOVE_CONNECTION_BUTTON.replace("${peopleName}", peopleName), 5000, 0) != null){
+			click(ELEMENT_REMOVE_CONNECTION_BUTTON.replace("${peopleName}", peopleName));
+		}
 		waitForAndGetElement(ELEMENT_CONNECTION_BUTTON.replace("${peopleName}", peopleName));
 		click(ELEMENT_CONNECTION_BUTTON.replace("${peopleName}", peopleName));
 		info("---Verify Connect button is disappeared----");

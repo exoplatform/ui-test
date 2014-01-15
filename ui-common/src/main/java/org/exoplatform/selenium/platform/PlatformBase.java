@@ -49,7 +49,7 @@ public class PlatformBase extends TestBase {
 	/*
 	 * Company Navigation
 	 */
-	public final By ELEMENT_PERSONAL_DOCUMENTS = By.className("uiIconPLFDocuments");
+	public final By ELEMENT_PERSONAL_DOCUMENTS = By.xpath("//a[contains(@href,'documents')]/i[@class='uiIconPLFDocuments']");
 	public final By ELEMENT_HOME_PAGE = By.className("uiIconHome");
 	public final By ELEMENT_CONNECTION_PAGE = By.className("uiIconUser");
 	public final By ELEMENT_WIKI_PAGE = By.className("uiIconWiki");

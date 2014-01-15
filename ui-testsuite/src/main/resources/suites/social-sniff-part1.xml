@@ -12,7 +12,6 @@
             <class name="org.exoplatform.selenium.platform.social.sniff.Social_Dashboard"/>
             <class name="org.exoplatform.selenium.platform.social.sniff.Social_People"/>
             <class name="org.exoplatform.selenium.platform.social.sniff.Social_HomePage_ActivityComposer"/>
-            <class name="org.exoplatform.selenium.platform.social.sniff.Social_HomePage_ActivityStream"/>
            
         </classes>
 	</test>
