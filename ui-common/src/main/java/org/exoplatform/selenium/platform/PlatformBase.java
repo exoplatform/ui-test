@@ -19,10 +19,9 @@ import static org.exoplatform.selenium.TestLogger.debug;
 import static org.exoplatform.selenium.TestLogger.info;
 
 public class PlatformBase extends TestBase {
-
-	public final String DATA_USER_JOHN = "john";
+	public final String DATA_USER1 = "john";
 	public final String DATA_PASS = "gtngtn";
-	public final String DATA_USER_MARY = "mary";
+	public final String DATA_USER2= "mary";
 	public ManageAlert alert = new ManageAlert(driver);
 	public Button button = new Button(driver);
 	PlatformPermission per;

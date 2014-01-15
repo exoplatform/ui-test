@@ -31,7 +31,7 @@ public class Calendar_Settings extends CalendarBase{
 		evt = new Event(driver);
 		tsk = new Task(driver);
 		btn = new Button(driver);
-		acc.signIn(DATA_USER_JOHN, DATA_PASS);
+		acc.signIn(DATA_USER1, DATA_PASS);
 		goToCalendarPage();
 		goToCalendarSettings();
 		settingCalendar("Week", "mm/dd/yyyy", null, null, "Monday", null, null);
@@ -162,7 +162,7 @@ public class Calendar_Settings extends CalendarBase{
 		settingCalendar("Month", "dd/mm/yyyy", "24 Hours", "(GMT +07:00) Asia/Ho_Chi_Minh", "Tuesday", "08:30", "17:30", 2);
 		
 		acc.signOut();
-		acc.signIn(DATA_USER_JOHN, DATA_PASS);
+		acc.signIn(DATA_USER1, DATA_PASS);
 		goToCalendarPage();
 		waitForAndGetElement(ELEMENT_MONTH_TAB_ACTIVE);
 		goToCalendarSettings();

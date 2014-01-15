@@ -33,12 +33,12 @@ public class Social_Dashboard extends DashBoard {
 	public void beforeMethods() {
 		initSeleniumTest();
 		driver.get(baseUrl);
-		info("Login with " + DATA_USER_JOHN);
+		info("Login with " + DATA_USER1);
 		magAcc = new ManageAccount(driver);
 		navToolBar = new NavigationToolbar(driver);
 		activity = new HomePageActivity(driver);
 		app = new ManageApplications(driver);
-		magAcc.signIn(DATA_USER_JOHN, DATA_PASS);
+		magAcc.signIn(DATA_USER1, DATA_PASS);
 	}
 
 	@AfterMethod
@@ -90,7 +90,7 @@ public class Social_Dashboard extends DashBoard {
 	public void test02_ShareLinkInRSSFetcher(){
 		//Declare variable
 		String gadgetName = "Social Rss Reader";
-		//String newUrl = "http://feeds.feedburner.com/eXo-Platform";
+		String newUrl = "http://feeds.feedburner.com/eXo-Platform";
 
 		/*Step 1: Share link in RSS fetcher*/ 
 		//Import all applications (gadget)
@@ -105,6 +105,9 @@ public class Social_Dashboard extends DashBoard {
 		//- Drag/drop Social Rss Reader
 		dragDropGadget(gadgetName);
 		click(ELEMENT_CLOSE_ADD_GADGET_WINDOW);
+		
+		//Edit url link of gadget
+		editRSSReaderGadgetonDashboard(gadgetName,newUrl);
 
 		//Edit url link of gadget
 		//editRSSReaderGadgetonDashboard(gadgetName,newUrl);
@@ -145,7 +148,7 @@ public class Social_Dashboard extends DashBoard {
 	public void test03_ViewALinkInRSSFetcher(){
 		//Declare variable
 		String gadgetName = "Social Rss Reader";
-		//String newUrl = "http://feeds.feedburner.com/eXo-Platform";
+		String newUrl = "http://feeds.feedburner.com/eXo-Platform";
 
 		/*Step 1: Share link in RSS fetcher*/ 
 		//Import all applications (gadget)
@@ -163,10 +166,10 @@ public class Social_Dashboard extends DashBoard {
 		//- Drag/drop Social Rss Reader
 		dragDropGadget(gadgetName);
 		click(ELEMENT_CLOSE_ADD_GADGET_WINDOW);
-
+		
 		//Edit url link of gadget
-		//editRSSReaderGadgetonDashboard(gadgetName,newUrl);
-
+		editRSSReaderGadgetonDashboard(gadgetName,newUrl);
+		
 		//- Click on icon of maximize view
 		//- Show content of gadget at maximize
 		actionOnGadgetOnDashboard(gadgetName,"Maximize");
@@ -174,7 +177,11 @@ public class Social_Dashboard extends DashBoard {
 		//- Select a link on list in gadget and click View link
 		driver.switchTo().frame(waitForAndGetElement(ELEMENT_DASHBOARD_FRAME));
 		Utils.pause(1000);
-		click(By.xpath("//*[@id='link_0']/a[text()='view link »']"));
+		if(waitForAndGetElement(By.xpath("//*[@id='link_0']/a[text()='view link »']"),5000,0)==null){
+			click(By.xpath("//*[@id='link_0']/a[text()='view link']"));
+		}
+		else
+			click(By.xpath("//*[@id='link_0']/a[text()='view link »']"));
 		Utils.pause(1000);
 
 		//- This link is displayed on other tab of browser

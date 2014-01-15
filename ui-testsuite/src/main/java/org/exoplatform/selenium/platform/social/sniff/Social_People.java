@@ -44,14 +44,14 @@ public class Social_People extends SocialBase {
 	public void beforeMethods() {
 		initSeleniumTest();
 		driver.get(baseUrl);
-		info("Login with " + DATA_USER_JOHN);
+		info("Login with " + DATA_USER1);
 		magAcc = new ManageAccount(driver);
 		navToolBar = new NavigationToolbar(driver);
 		activity = new HomePageActivity(driver);
 		peoConn = new PeopleConnection(driver);
 		peoPro = new PeopleProfile(driver);
 		peoSearch = new PeopleSearch(driver);
-		magAcc.signIn(DATA_USER_JOHN, DATA_PASS);
+		magAcc.signIn(DATA_USER1, DATA_PASS);
 	}
 
 	@AfterMethod
