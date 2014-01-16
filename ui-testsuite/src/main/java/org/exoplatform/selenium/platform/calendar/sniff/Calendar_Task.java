@@ -5,7 +5,6 @@ import static org.exoplatform.selenium.TestLogger.info;
 import org.exoplatform.selenium.Utils;
 import org.exoplatform.selenium.platform.ManageAccount;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -52,15 +51,16 @@ public class Calendar_Task extends CalendarBase {
 
 		info("Go to Intranet Calendar");
 		goToCalendarPage();
+		driver.navigate().refresh();
 
 		info("Add a new task");
-		tsk.addQuickTask(CALENDAR01,CALENDAR01,getDate(0,"MM/dd/yyyy"),getDate(0,"MM/dd/yyyy"),true);
+		tsk.addQuickTask(CALENDAR01,CALENDAR01,getDate(0,"MM/dd/yyyy"),getDate(0,"MM/dd/yyyy"),false);
 
 		info("Confirm added task displays in the calendar");
-		waitForAndGetElement(By.xpath(ELEMENT_EVENT_TASK_ALL_DAY.replace("${event}", CALENDAR01)));
+		waitForAndGetElement(By.xpath(ELEMENT_EVENT_TASK_ONE_DAY.replace("${taskName}", CALENDAR01)));
 
 		info("restore data");
-		deleteEventTask(CALENDAR01);
+		deleteEventTask(CALENDAR01,selectDayOption.ONEDAY);
 	}
 
 	/** 
@@ -75,11 +75,12 @@ public class Calendar_Task extends CalendarBase {
 
 		info("Go to Intranet Calendar");
 		goToCalendarPage();
+		driver.navigate().refresh();
 
 		info("Add a new task");
 		tsk.goToAddTask();
 		tsk.inputBasicQuickTask(CALENDAR02,CALENDAR02);
-		tsk.inputFromToTask(getDate(0,"MM/dd/yyyy"),getDate(0,"MM/dd/yyyy"),true);
+		tsk.inputFromToTask(getDate(0,"MM/dd/yyyy"),getDate(0,"MM/dd/yyyy"),false);
 		info("Setting reminder for task");
 		tsk.gotoSetPopupReminder();
 		click(tsk.ELEMENT_BUTTON_TASK_SAVE);
@@ -89,7 +90,7 @@ public class Calendar_Task extends CalendarBase {
 
 		info("Restore data");
 		waitForAndGetElement(By.xpath(ELEMENT_EVENT_TASK_ALL_DAY.replace("${taskTitle}", CALENDAR02)));
-		deleteEventTask(CALENDAR02);
+		deleteEventTask(CALENDAR02,selectDayOption.ONEDAY);
 	}
 
 	/** 
@@ -109,11 +110,12 @@ public class Calendar_Task extends CalendarBase {
 
 		info("Go to Intranet Calendar");
 		goToCalendarPage();
+		driver.navigate().refresh();
 
 		info("Add a new task");
 		tsk.goToAddTask();
 		tsk.inputBasicQuickTask(CALENDAR03,CALENDAR03);
-		tsk.inputFromToTask(FROM_TIME,TO_TIME,true);
+		tsk.inputFromToTask(FROM_TIME,TO_TIME,false);
 		info("Setting reminder for task");
 		tsk.gotoSetEmailReminder();
 		//TO-DO: update after finishing setting reminder methods
@@ -128,7 +130,7 @@ public class Calendar_Task extends CalendarBase {
 
 		info("Restore data");
 		waitForAndGetElement(By.xpath(ELEMENT_EVENT_TASK_ALL_DAY.replace("${taskTitle}", CALENDAR03)));
-		deleteEventTask(CALENDAR03);
+		deleteEventTask(CALENDAR03,selectDayOption.ONEDAY);
 	}
 
 	/** 
@@ -144,17 +146,17 @@ public class Calendar_Task extends CalendarBase {
 
 		info("Go to Intranet Calendar");
 		goToCalendarPage();
+		driver.navigate().refresh();
 
 		info("Add a new task");
-		tsk.addQuickTask(CALENDAR04,CALENDAR04,getDate(0,"MM/dd/yyyy"),getDate(0,"MM/dd/yyyy"),true);
+		tsk.addQuickTask(CALENDAR04,CALENDAR04,getDate(0,"MM/dd/yyyy"),getDate(0,"MM/dd/yyyy"),false);
 
 		info("Edit a task");
-
 		tsk.editTask(CALENDAR04,TITLE,DESCRIPTION,null,null, false,"");
 		
 		info("Restore data");
-		waitForAndGetElement(By.xpath(ELEMENT_EVENT_TASK_ALL_DAY.replace("${event}", CALENDAR04)));
-		deleteEventTask(CALENDAR04);
+		waitForAndGetElement(By.xpath(ELEMENT_EVENT_TASK_ONE_DAY.replace("${taskName}", CALENDAR04)));
+		deleteEventTask(CALENDAR04, selectDayOption.ONEDAY);
 	}
 
 	/** 
@@ -166,6 +168,8 @@ public class Calendar_Task extends CalendarBase {
 		String CALENDAR05 = "CALENDAR_05";
 
 		info("Go to Intranet Calendar");
+		goToCalendarPage();
+		driver.navigate().refresh();
 		info("Add a new task");
 		tsk.addQuickTask(CALENDAR05,CALENDAR05,getDate(0,"MM/dd/yyyy"),getDate(0,"MM/dd/yyyy"),false);
 		//waitForAndGetElement(ELEMENT_EVENT_TASK_ONE_DAY.replace("${taskName}", CALENDAR05),50000);
@@ -187,9 +191,11 @@ public class Calendar_Task extends CalendarBase {
 		String CALENDAR06 = "CALENDAR_06";
 
 		info("Go to Intranet Calendar");
-		Long ab = (Long) ((JavascriptExecutor) driver).executeScript("return arguments[0].scrollTop;", waitForAndGetElement(ELEMENT_WORKING_PANE));
-		info("Add a new task " + ab);
-		tsk.addQuickTask(CALENDAR06,CALENDAR06, getDate(0,"MM/dd/yyyy"), getDate(0,"MM/dd/yyyy"), false);
+		goToCalendarPage();
+		driver.navigate().refresh();
+
+		info("Add a new task");
+		tsk.addQuickTask(CALENDAR06,CALENDAR06,getDate(0,"MM/dd/yyyy"),getDate(0,"MM/dd/yyyy"),false);
 
 		info("Drag & drop a task");
 		waitForAndGetElement(By.xpath(ELEMENT_EVENT_TASK_ONE_DAY.replace("${taskName}", CALENDAR06)), 50000);

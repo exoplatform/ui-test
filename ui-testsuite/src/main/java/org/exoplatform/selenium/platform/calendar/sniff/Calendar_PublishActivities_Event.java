@@ -120,8 +120,8 @@ public class Calendar_PublishActivities_Event extends CalendarBase{
 	 */
 	@Test
 	public void test03_UpdateActivityForEventWhenUpdateSummary() {
-		String space = "Space74736";
-		String event = "Event74736";
+		String space = "Space747361";
+		String event = "Event747361";
 		String newEvent = "new Event74736";
 		info("Update activity for event of Space Calendar - event summary");
 		
