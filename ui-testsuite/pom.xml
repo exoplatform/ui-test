@@ -118,7 +118,12 @@
 		</profile>
 		
 		<!-- End of Cloud Applications -->
-
+		<profile>
+			<id>ecms-func-advanced</id>
+			<properties>
+				<testSuite>ecms-advance-test.xml</testSuite>
+			</properties>
+		</profile>
 		<profile>
 			<id>ecms-se</id>
 			<properties>

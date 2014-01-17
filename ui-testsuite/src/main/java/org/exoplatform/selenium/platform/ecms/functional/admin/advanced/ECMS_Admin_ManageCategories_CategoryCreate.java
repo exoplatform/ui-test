@@ -52,7 +52,7 @@ public class ECMS_Admin_ManageCategories_CategoryCreate extends PlatformBase{
 	//String username = "john";
 	String groupID = "Platform/Administration";
 	String actionName = "test";
-	String optionLifeCycle = "User Action/Content Addition"; 
+	String optionLifeCycle = "Content Addition"; 
 	String nodeTargetPath = "jcr:system/exo:namespaces";
 
 	@BeforeMethod
@@ -496,7 +496,7 @@ public class ECMS_Admin_ManageCategories_CategoryCreate extends PlatformBase{
 
 		String[] DATA1 = {DATA_CATEGORY_TREE_NAME, "collaboration","sites/intranet"};
 		String[] DATA2 = {"",""};
-		String[] DATA3 = {DATA_ACTION_NAME,"User Action/Content Addition","jcr:system/exo:namespaces"};
+		String[] DATA3 = {DATA_ACTION_NAME,"Content Addition","jcr:system/exo:namespaces"};
 		boolean[] setPermission = {true, false, false};
 		
 		//go to add new category tree
