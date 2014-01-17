@@ -47,7 +47,7 @@ public class ForumPermission extends ForumBase {
 	public final String ELEMENT_START_TOPIC_FORUM_FORUM_CHECKBOX = "//*[contains(text(), '${user}')]/../../td[4]//input[@type='checkbox']";
 	public final String ELEMENT_POST_FORUM_FORUM_CHECKBOX = "//*[contains(text(), '${user}')]/../../td[5]//input[@type='checkbox']";
 	public final By ELEMENT_FORUM_FORUM_PERMISSION = By.id("forumPermission");
-	
+
 	//Set permission for topic
 	public final String ELEMENT_WHO_CAN_VIEW_CHECKBOX = "//*[contains(text(), '${user}')]/../../td[2]//input[@type='checkbox']";
 	public final String ELEMENT_WHO_CAN_POST_CHECKBOX = "//*[contains(text(), '${user}')]/../../td[3]//input[@type='checkbox']";
@@ -63,14 +63,22 @@ public class ForumPermission extends ForumBase {
 	 * @param userGroup
 	 */
 	public void setPermissionWithOption(int type, String[] userGroup){
-//		per = new PlatformPermission(driver);
+		//		per = new PlatformPermission(driver);
 		click(ELEMENT_PERMISSION_TAB);
 		switch (type){
 		case 1:
 			info("Set permission by type directly");
-//			type(per.ELEMENT_PERMISSION_INPUT, userGroup[0], true);
-			waitForAndGetElement(per.ELEMENT_PERMISSION_INPUT).sendKeys(userGroup[0]);
-			break;
+			//			type(per.ELEMENT_PERMISSION_INPUT, userGroup[0], true);
+			if(this.plfVersion.equals("4.0"))
+			{
+				waitForAndGetElement(per.ELEMENT_PERMISSION_INPUT).sendKeys(userGroup[0]);
+				break;
+			}
+			else if(this.plfVersion.equals("4.1")){
+				waitForAndGetElement(per.ELEMENT_PERMISSION_INPUT_PLF4_1).sendKeys(userGroup[0]);
+				break;			
+			}
+
 		case 2:	
 			info("Set permission for user " + userGroup[0]);
 			click(per.ELEMENT_SELECT_USER_ICON);
@@ -174,7 +182,7 @@ public class ForumPermission extends ForumBase {
 		if (userGroup.length > 2){
 			check = userGroup[2];
 		}
-		
+
 		if (permission.length > 0){
 			if (permission[0]){
 				check(ELEMENT_MODERATOR_FORUM_CATEGORY_CHECKBOX.replace("${user}", check), 2);
@@ -231,7 +239,7 @@ public class ForumPermission extends ForumBase {
 		}
 		else
 			check = userGroup[0].toLowerCase();
-		
+
 		//String check = userGroup[0];
 		if (userGroup.length > 2){
 			check = userGroup[2];

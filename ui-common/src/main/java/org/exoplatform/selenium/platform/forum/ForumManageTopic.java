@@ -306,7 +306,7 @@ public class ForumManageTopic extends ForumBase {
 	 * @param canpost
 	 * @param options
 	 */
-	public void startTopic(String title, String message, String file, int type, String[] userGroup, boolean canview, boolean canpost, boolean... options){
+	public void startTopic(String title, String message, String file, int type, String[] userGroup, boolean canview, boolean canpost, boolean...options){
 		info("Start a topic");
 		goToStartTopic();
 		inputDataStartTopic(title, message, file, type, userGroup, canview, canpost, options);
