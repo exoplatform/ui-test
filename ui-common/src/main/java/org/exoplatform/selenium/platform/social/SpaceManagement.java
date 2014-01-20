@@ -41,8 +41,9 @@ public class SpaceManagement extends SocialBase {
 	ActionBar actBar;
 	SpaceSearch spSearch;
 	
-	public SpaceManagement(WebDriver dr){
+	public SpaceManagement(WebDriver dr, String...plfVersion){
 		driver = dr;
+		this.plfVersion = plfVersion.length>0?plfVersion[0]:"4.0";
 		userGroup = new UserGroupManagement(driver);
 		dialog = new Dialog(driver);
 		button = new Button(driver);

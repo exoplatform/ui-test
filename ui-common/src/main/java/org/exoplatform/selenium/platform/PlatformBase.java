@@ -396,8 +396,8 @@ public class PlatformBase extends TestBase {
 	public final By ELEMENT_TITLE_NAVIGATION_MANAGEMENT = By.xpath("//*[contains(@class, 'popupTitle') and text() = 'Navigation Management']");
 	public final By ELEMENT_ADD_NODE_LINK = By.linkText("Add Node");
 	public final By ELEMENT_PAGE_SELECTOR_TAB = By.linkText("Page Selector");
-	public final By ELEMENT_INPUT_PAGE_NAME = By.xpath("//*[@id='pageName']");
-	public final By ELEMENT_INPUT_PAGE_TITLE = By.xpath("//*[@id='pageTitle']");
+	public final By ELEMENT_INPUT_PAGE_NAME = By.name("pageName");
+	public final By ELEMENT_INPUT_PAGE_TITLE = By.id("pageTitle");
 	public final By ELEMENT_CREATE_PAGE_LINK = By.xpath("//*[contains(@class, 'uiIconAddPage')]");
 	public final By ELEMENT_SEARCH_SELECTOR_PAGE_LINK = By.className("uiIconSelectPage");
 	public final By ELEMENT_CLEAR_SELECTOR_PAGE = By.className("uiIconDelete");

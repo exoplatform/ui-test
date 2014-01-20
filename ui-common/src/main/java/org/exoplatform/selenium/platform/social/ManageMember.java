@@ -52,7 +52,9 @@ public class ManageMember extends SpaceManagement {
 	public final String ELEMENT_MEMBERS_TABLE = "//th[contains(text(),'Members')]/ancestor::table";
 	public final String ELEMENT_PENDING_TABLE = "//th[contains(text(),'Pending')]/ancestor::table";
 	public final String ELEMENT_INVITED_TABLE = "//th[contains(text(),'Invited')]/ancestor::table";
-	public final String ELEMENT_SELECTED_USER_BOX = "//span[@data-original-title='${username}']/../..//input[@class='checkbox']";
+	public final String ELEMENT_SELECTED_USER_BOX = "//span[text()='${username}']/../..//input[@class='checkbox']";
+	//Adapt to plf4.1.0
+	public final String ELEMENT_SELECTED_USER_BOX_PLF4_1 = "//span[@class='text' and contains(text(),'${username}')]/../..//input[@class='checkbox']";	
 	public final String ELEMENT_GRAND_MANAGER_BUTTON = ELEMENT_MEMBERS_TABLE + "/..//td[contains(text(),'${username}')]/..//*[@class='iPhoneCheckHandle']";
 	public final String ELEMENT_IS_MANAGER_ICON = ELEMENT_MEMBERS_TABLE + "/..//td[contains(text(),'${username}')]/..//*[@class='iPhoneCheckHandle' and @style='left: 41px;']";
 	public final String ELEMENT_IS_NOT_MANAGER_ICON = ELEMENT_MEMBERS_TABLE + "/..//td[contains(text(),'${username}')]/..//*[@class='iPhoneCheckHandle' and @style='left: 1px;']";
@@ -62,9 +64,6 @@ public class ManageMember extends SpaceManagement {
 	public final String ELEMENT_REMOVE_USER_BUTTON = ELEMENT_MEMBERS_TABLE + "/..//td[contains(text(),'${userName}')]/..//i[@class='uiIconDelete uiIconLightGray']";
 	public final String ELEMENT_PENDING_VALIDATE_BUTTON = ELEMENT_PENDING_TABLE+ "/..//td[contains(text(),'${userName}')]/..//i[@class='uiIconValidate uiIconLightGray']";
 	public final String ELEMENT_PENDING_DECLINE_BUTTON = ELEMENT_PENDING_TABLE+ "/..//td[contains(text(),'${userName}')]/..//i[@class='uiIconRemove uiIconLightGray']";
-
-	//Adapt to plf4.1.0
-	public final String ELEMENT_SELECTED_USER_BOX_PLF4_1 = "//span[@class='text' and contains(text(),'${username}')]/../..//input[@class='checkbox']";
 
 	//Verify message for user is manager of space  
 	public final String VERIFY_MESSAGE = "You are the last manager of this space. You need to promote another member as manager of the space before you can leave it.";
