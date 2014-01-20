@@ -48,6 +48,7 @@ public class ForumManageCategory extends ForumBase {
 	public final By ELEMENT_MANAGE_CATEGORY = By.xpath("//*[@class='uiIconForumManageCategory uiIconForumLightGray']");
 	public final By ELEMENT_EDIT_CATEGORY = By.xpath("//*[contains(@href, 'EditCategory')]");
 	public final By ELEMENT_DELETE_CATEGORY = By.xpath("//a[@id='UICategoryConfirm0' and contains(text(),'Delete')]");
+	public final By ELEMENT_DELETE_CATEGORY_PLF4_1 = By.xpath("//a[@class='confirm' and contains(text(),'Delete')]");
 	public final By ELEMENT_EXPORT_FORUM_IN_CATEGORY = By.xpath("//*[contains(@href, 'ExportCategory')]");
 	public final By ELEMENT_IMPORT_FORUM_IN_CATEGORY = By.xpath("//*[contains(@href, 'ImportForum')]");
 	public final String MSG_CATEGORY_NO_EXIST = "This category no longer exists.";
@@ -244,8 +245,14 @@ public class ForumManageCategory extends ForumBase {
 
 		click(ELEMENT_MANAGE_CATEGORY);
 		info("Delete category");
-		click(ELEMENT_DELETE_CATEGORY);
-		click(ELEMENT_OK_DELETE_CATEGORY);
+		if(plfVersion =="4.0"){
+			click(ELEMENT_DELETE_CATEGORY);
+			click(ELEMENT_OK_DELETE_CATEGORY);
+		}
+		else if (plfVersion =="4.1"){
+			click (ELEMENT_DELETE_CATEGORY_PLF4_1);
+			alert.acceptAlert();
+		}		
 		if(check == true){
 			//waitForTextNotPresent(title);
 			waitForElementNotPresent(By.linkText(title));

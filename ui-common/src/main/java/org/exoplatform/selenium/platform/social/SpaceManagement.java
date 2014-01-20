@@ -98,6 +98,9 @@ public class SpaceManagement extends SocialBase {
 	public final By ELEMENT_SPACE_FAQ_PORTLET = By.id("UIFAQPortlet");
 	public final By ELEMENT_SPACE_MEMBER_PORTLET = By.id("UIMembersPortlet");
 	
+	//Space action bar
+	public final String ELEMENT_SPACE_TAB_NAME = "//*[@id='spaceMenuTab']/li['${index}']/a/span[text()='${tabName}']";
+	
 	public SpaceManagement(WebDriver dr, String...plfVersion){
 		driver = dr;
 		this.plfVersion = plfVersion.length>0?plfVersion[0]:"4.0";

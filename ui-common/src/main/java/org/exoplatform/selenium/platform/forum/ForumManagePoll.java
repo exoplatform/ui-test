@@ -26,7 +26,8 @@ public class ForumManagePoll extends ForumBase {
 
 	ForumManagePost mngPost;
 	
-	public ForumManagePoll(WebDriver dr){
+	public ForumManagePoll(WebDriver dr, String...plfVersion){
+		this.plfVersion = plfVersion.length>0?plfVersion[0]:"4.0";
 		driver = dr;
 		magTopic = new ForumManageTopic(driver);
 		app = new ManageApplications(driver);
@@ -40,9 +41,9 @@ public class ForumManagePoll extends ForumBase {
 	//Poll Manage
 	public By ELEMENT_POLL = By.id("UITopicPoll");
 	public By ELEMENT_ADD_POLL = By.linkText("Add Poll"); 
-	public final By ELEMENT_POLL_MORE_ACTION = By.xpath("//form[@id='UITopicPoll']//i[@class='uiIconSettings uiIconLightGray']");
-	public final By ELEMENT_POLL_EDIT_LINK = By.xpath("//form[@id='UITopicPoll']//i[@class='uiIconEdit uiIconLightGray']");
-	public final By ELEMENT_POLL_DELETE_LINK = By.xpath("//form[@id='UITopicPoll']//i[@class='uiIconDelete uiIconLightGray']");
+	public final By ELEMENT_POLL_MORE_ACTION = By.xpath("//i[@class='uiIconSettings uiIconLightGray']");
+	public final By ELEMENT_POLL_EDIT_LINK = By.xpath("//i[@class='uiIconEdit uiIconLightGray']");
+	public final By ELEMENT_POLL_DELETE_LINK = By.xpath("//i[@class='uiIconDelete uiIconLightGray']");
 	public final By ELEMENT_POLL_CATEGORY = By.xpath("//a[@title='poll']");
 	public final By ELEMENT_POLL_PORTLET = By.id("poll/local._poll.PollPortlet");
 	public final By ELEMENT_ADDMORE_ITEMS = By.xpath("//img[@title='Add Item']");
@@ -74,7 +75,7 @@ public class ForumManagePoll extends ForumBase {
 	public String ELEMENT_POLL_DELETE_OK = "//span[contains(text(),'Are you sure you want to delete this poll ?')]/../../..//button[text()='OK']";
 
 	public final String ELEMENT_POLL_QUESTION_LINK = "//div[text()='${pollQuestion} ?']";
-	public final String ELEMENT_POLL_TITLE = "//div[@class='textTitlePoll pull-left' and contains(text(),'${poll}')]";
+	public final String ELEMENT_POLL_TITLE = "//div[@class='textTitlePoll pull-left']";
 	public final String ELEMENT_OPTION = "//tbody[@class='contentVoting']//span[contains(text(),'${option}')]";
 	public final String ELEMENT_OPTION_CLOSED = "//td[text()='${option}']/../td//div[@class='progress']";
 	public final String WARNING_MESSAGE_NO_PERMISSION = "You have no permission to view this poll or the poll has been deleted.";
@@ -330,9 +331,9 @@ public class ForumManagePoll extends ForumBase {
 		click(ELEMENT_POLL_MORE_ACTION);
 		click(ELEMENT_POLL_DELETE_LINK);
 		waitForMessage(MSG_POLL_DELETE);
+		Utils.pause(500);
 		click(ELEMENT_POLL_DELETE_OK);
-
-		//waitForTextNotPresent(poll);
+		waitForTextNotPresent(poll);
 		waitForElementNotPresent(By.linkText(poll));
 	} 
 
