@@ -225,9 +225,13 @@ public class CalendarBase extends PlatformBase {
 	 * @author thuntn
 	 */
 	public void goToCalendarPage(){	
+		hpAct = new HomePageActivity(driver);
 		info("--Go to calendar--");
 		hpAct = new HomePageActivity(driver);
 		click(ELEMENT_CALENDAR_LINK);
+		if(waitForElementNotPresent(hpAct.ELEMENT_ACTIVITY_TEXTBOX,DEFAULT_TIMEOUT,0) != null){
+			clearCache();
+		}
 		waitForAndGetElement(ELEMENT_CALENDAR_PANEL);
 		ID_CALENDAR_PAGE = waitForAndGetElement(ELEMENT_GET_ID_PAGE).getAttribute("id");
 		Utils.pause(3000);

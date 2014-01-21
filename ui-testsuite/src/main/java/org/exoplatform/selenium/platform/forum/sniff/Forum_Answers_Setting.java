@@ -97,7 +97,7 @@ public class Forum_Answers_Setting extends AnswerBase {
 		pageE.finishEditLayout();
 		
 		info("Category of answer is not displayed");
-		assert magCat.getElementFromTextByJquery(categoryName2) == null;
+		assert waitForAndGetElement(ELEMENT_CATEGORY_LINK.replace("${category}", categoryName2),10000,0) == null;
 		
 		info("Check question of answer app is discussed in forum");
 		magCat.openCategoryInAnswer(categoryName1);

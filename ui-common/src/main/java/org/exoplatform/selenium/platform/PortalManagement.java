@@ -71,7 +71,7 @@ public class PortalManagement extends PlatformBase {
 		Utils.pause(1000);
 		button.save();
 		if (waitForAndGetElement(ELEMENT_POPUP_ADD_PORTAL,10000,0) == null)
-			waitForElementNotPresent(ELEMENT_EDIT_PERMISSION_SETTING);
+			waitForElementNotPresent(ELEMENT_EDIT_PERMISSION_SETTING,60000);
 	}
 
 	//Add new portal

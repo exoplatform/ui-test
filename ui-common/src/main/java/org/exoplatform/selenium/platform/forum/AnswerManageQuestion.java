@@ -55,7 +55,8 @@ public class AnswerManageQuestion extends AnswerBase {
 	public final By ELEMENT_APPROVE_QUESTION_EDIT = By.id("IsApproved");
 	public final By ELEMENT_ACTIVATE_QUESTION_EDIT = By.id("IsActivated");
 	public final By ELEMENT_QUESTION_CONTENTFRAME_1= By.xpath("//iframe[@id='Question___Frame']");
-	public final By ELEMENT_QUESTION_CONTENTFRAME_2= By.xpath("//td[@id='xEditingArea']/iframe");	
+	public final By ELEMENT_QUESTION_CONTENTFRAME_2= By.xpath("//td[@id='xEditingArea']/iframe");
+	public final By ELEMENT_QUESTION_CONTENTFRAME_41 = By.xpath("//*[@id='cke_Question']//iframe");
 	public final By ELEMENT_QUESTION_AUTHOR = By.id("Author");
 	public final By ELEMENT_QUESTION_EMAIL = By.id("EmailAddress");
 	public final String ELEMENT_RATE_QUESTION = "//*[contains(@class, 'avgRatingImages')]/i[@data-index='${rate}']";

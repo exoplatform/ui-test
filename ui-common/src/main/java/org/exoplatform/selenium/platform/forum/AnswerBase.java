@@ -34,6 +34,7 @@ public class AnswerBase extends ForumBase {
 	public final By ELEMENT_UP_LEVEL = By.xpath("//i[@class='uiIconUpLevel uiIconLightGray']");
 	public final By ELEMENT_PRINT_ICON = By.xpath("//i[@class='uiIconPrint uiIconLightGray']");
 	public final By ELEMENT_HOME_ICON = By.xpath("//*[@class='uiIconHome uiIconLightGray']");
+	public final String ELEMENT_CATEGORY_LINK = "//a[contains(.,'${category}')]";
 
 	//Add answer page
 	public final String DATA_ANSWER_PAGE_NAME = "Answer";

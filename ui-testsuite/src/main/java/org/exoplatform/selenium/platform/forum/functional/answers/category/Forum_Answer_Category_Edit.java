@@ -58,19 +58,19 @@ public class Forum_Answer_Category_Edit extends AnswerBase{
 		info("Edit category in case valid data entry for Moderator field");
 		mCat.addNewCategoryInAnswer(category, "1", category, 0, null, true, true);
 		mCat.editCategoryInAnswer(category, newCategory, null, null, 1, userGroup, true, true);
-		assert (getElementFromTextByJquery(category) != null) ;
+		waitForAndGetElement(ELEMENT_CATEGORY_LINK.replace("${category}", category));
 		mCat.openCategoryInAnswer(category);
 
 		//Check if demo can see the category
 		Acc.userSignIn(userType.DEVELOPER);
 		goToAnswer();
-		assert (getElementFromTextByJquery(category) == null) ;
+		assert (waitForAndGetElement(ELEMENT_CATEGORY_LINK.replace("${category}", category),5000,0) == null) ;
 		Acc.signOut();
 
 		//Check if mary can access
 		Acc.userSignIn(userType.PUBLISHER);
 		goToAnswer();
-		assert (getElementFromTextByJquery(category) != null) ;
+		waitForAndGetElement(ELEMENT_CATEGORY_LINK.replace("${category}", category));
 		mCat.openCategoryInAnswer(category);
 
 		//Check moderator right of mary
@@ -100,12 +100,12 @@ public class Forum_Answer_Category_Edit extends AnswerBase{
 		//Check right of demo
 		Acc.userSignIn(userType.DEVELOPER);
 		goToAnswer();
-		assert (getElementFromTextByJquery(newCategory) == null) ;
+		assert (waitForAndGetElement(ELEMENT_CATEGORY_LINK.replace("${category}", category),5000,0) == null) ;
 
 		//Check right of mary
 		Acc.userSignIn(userType.PUBLISHER);
 		goToAnswer();
-		assert (getElementFromTextByJquery(newCategory) != null) ;
+		waitForAndGetElement(ELEMENT_CATEGORY_LINK.replace("${category}", category));
 		mCat.openCategoryInAnswer(newCategory);
 		waitForElementNotPresent(mQuest.ELEMENT_MANAGE_QUESTIONS);
 		waitForElementNotPresent(mCat.ELEMENT_CATEGORY_BUTTON);
@@ -135,7 +135,7 @@ public class Forum_Answer_Category_Edit extends AnswerBase{
 		//Check right of demo
 		Acc.userSignIn(userType.DEVELOPER);
 		goToAnswer();
-		assert (getElementFromTextByJquery(newCategory) != null) ;
+		waitForAndGetElement(ELEMENT_CATEGORY_LINK.replace("${category}", category));
 		mCat.openCategoryInAnswer(newCategory);
 		waitForElementNotPresent(mQuest.ELEMENT_MANAGE_QUESTIONS);
 		waitForElementNotPresent(mCat.ELEMENT_CATEGORY_BUTTON);
@@ -143,7 +143,7 @@ public class Forum_Answer_Category_Edit extends AnswerBase{
 		//Check right of mary and delete data
 		Acc.userSignIn(userType.PUBLISHER);
 		goToAnswer();
-		assert (getElementFromTextByJquery(newCategory) != null) ;
+		waitForAndGetElement(ELEMENT_CATEGORY_LINK.replace("${category}", category));
 		mCat.openCategoryInAnswer(newCategory);
 		waitForAndGetElement(mQuest.ELEMENT_MANAGE_QUESTIONS);
 		mCat.editCategoryInAnswer(newCategory, category,null,null, 0, userGroup, true, true);
@@ -171,7 +171,7 @@ public class Forum_Answer_Category_Edit extends AnswerBase{
 		Acc.userSignIn(userType.PUBLISHER);
 		goToAnswer();
 
-		assert (getElementFromTextByJquery(newCategory) != null) ;
+		waitForAndGetElement(ELEMENT_CATEGORY_LINK.replace("${category}", category));
 		mCat.openCategoryInAnswer(newCategory);
 		waitForElementNotPresent(mQuest.ELEMENT_MANAGE_QUESTIONS);
 		waitForElementNotPresent(mCat.ELEMENT_CATEGORY_BUTTON);

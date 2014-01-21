@@ -168,10 +168,10 @@ public class Forum_Answers_Category extends AnswerBase {
 		magCat.addNewCategoryInAnswer(categoryName2, null, description2, 3, userGroup2, true, true, true, true, true);
 
 		magCat.dragDropAnswerCategory(categoryName1, categoryName2);
-		assert magCat.getElementFromTextByJquery(categoryName1) == null;
+		waitForElementNotPresent(ELEMENT_CATEGORY_LINK.replace("${category}", categoryName1));
 		
 		magCat.openCategoryInAnswer(categoryName2);
-		assert magCat.getElementFromTextByJquery(categoryName1) != null;
+		waitForAndGetElement(ELEMENT_CATEGORY_LINK.replace("${category}", categoryName1));
 		
 		magCat.goToAnwserHome();
 		magCat.deleteCategoryInAnswer(categoryName2);

@@ -227,6 +227,12 @@ public class ForumBase extends PlatformBase {
 	public final String ELEMENT_DELETE_WATCH = "//label/a[contains(text(),'${item}')]/following::div[@class='DeleteIcon']";
 	public final String ELEMENT_FEED_URL = "//a[@title='{$item}']/ancestor::tr/following::input[contains(@id,'RSS')]";
 
+	public final By ELEMENT_RSS_PAGE = By.id("feedSubscribeLine");
+	public final By ELEMENT_FEED_TITLE_TEXT = By.id("feedTitleText");
+	public final By ELEMENT_FEED_SUBTITLE_TEXT = By.id("feedSubtitleText");
+	public final By ELEMENT_FEED_CONTENT = By.id("feedContent");
+	public final String ELEMENT_MY_SUBSCRIPTION_OBJECT_WATCH = "//div[@id='UIForumUserSettingForm']//a[contains(text(),'${object}')]" ;
+
 	//---------------------Notifications------------------
 	public final By ELEMENT_NOTIFICATION_LINK = By.xpath("//*[@id='Administrations']//*[@class='uiIconNotification']"); 
 	public final By ELEMENT_NOTIFY_FRAME=By.xpath("//*[@id='xEditingArea']/iframe");
