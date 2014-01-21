@@ -7,6 +7,7 @@ import java.awt.event.KeyEvent;
 import org.exoplatform.selenium.Button;
 import org.exoplatform.selenium.ManageAlert;
 import org.exoplatform.selenium.Utils;
+import org.exoplatform.selenium.platform.HomePageActivity;
 import org.exoplatform.selenium.platform.PlatformBase;
 import org.exoplatform.selenium.platform.PlatformPermission;
 import org.openqa.selenium.By;
@@ -23,6 +24,7 @@ import org.openqa.selenium.WebElement;
 public class CalendarBase extends PlatformBase {
 
 	PlatformPermission per;
+	HomePageActivity hpAct;
 
 	//Go to the calendar's page
 	public String ID_CALENDAR_PAGE = "";
@@ -214,8 +216,12 @@ public class CalendarBase extends PlatformBase {
 	 * @author thuntn
 	 */
 	public void goToCalendarPage(){	
+		hpAct = new HomePageActivity(driver);
 		info("--Go to calendar--");
 		click(ELEMENT_CALENDAR_LINK);
+		if(waitForElementNotPresent(hpAct.ELEMENT_ACTIVITY_TEXTBOX,DEFAULT_TIMEOUT,0) != null){
+			clearCache();
+		}
 		waitForAndGetElement(ELEMENT_CALENDAR_PANEL);
 		ID_CALENDAR_PAGE = waitForAndGetElement(ELEMENT_GET_ID_PAGE).getAttribute("id");
 	}

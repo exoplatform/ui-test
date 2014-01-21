@@ -232,7 +232,7 @@ public class ForumBase extends PlatformBase {
 	public final By ELEMENT_FEED_SUBTITLE_TEXT = By.id("feedSubtitleText");
 	public final By ELEMENT_FEED_CONTENT = By.id("feedContent");
 	public final String ELEMENT_MY_SUBSCRIPTION_OBJECT_WATCH = "//div[@id='UIForumUserSettingForm']//a[contains(text(),'${object}')]" ;
-	public final String ELEMENT_RSS_TOPIC_LINK = "//xhtml:span[text()='${topic}']";
+
 	
 	//---------------------Notifications------------------
 	public final By ELEMENT_NOTIFICATION_LINK = By.xpath("//*[@id='Administrations']//*[@class='uiIconNotification']"); 

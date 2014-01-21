@@ -41,6 +41,7 @@ public class PageEditor extends PlatformBase {
 	//View Page Properties form -> Page Setting tab
 	public final By ELEMENT_VIEW_PAGE_PROPERTIES = By.linkText("View Page properties");
 	public final String ELEMENT_OWNERTYPE_SELECTED = "//*[@id='PageSetting-tab']//select[@name='ownerType']/option[@selected = 'selected' and text()='${ownerType}']";
+	public final By ELEMENT_PAGE_EDITOR_COMPOSER = By.xpath("//span[@class='PopupTitle popupTitle' and text()='Page Editor']");
 
 	//View Page Properties form (there are 2 tabs in this form)
 	//Page Setting Tab

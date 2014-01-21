@@ -80,7 +80,7 @@ public class Forum_Answers_AnswersPortletSettings extends AnswerBase{
 		//Check mary cannot see category cateName1
 		acc.userSignIn(userType.PUBLISHER);
 		goToAnswer();
-		assert (getElementFromTextByJquery(cateName1)== null);
+		assert (waitForAndGetElement(ELEMENT_CATEGORY_LINK.replace("${category}", cateName1),5000,0)== null);
 		
 		//Delete data
 		acc.userSignIn(userType.ADMIN);

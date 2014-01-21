@@ -78,10 +78,11 @@ public class AnswerManageCategory extends AnswerBase {
 	public void openCategoryInAnswer(String categoryName){
 		info("Open category " + categoryName);
 		for (int i = 0; i < ACTION_REPEAT; i ++){
-			if (getElementFromTextByJquery(categoryName) != null) break;
+			if (waitForAndGetElement(ELEMENT_CATEGORY_LINK.replace("${category}", categoryName),DEFAULT_TIMEOUT,0) != null) break;
 			else Utils.pause(1000);
 		}
-		getElementFromTextByJquery(categoryName).click();
+//		getElementFromTextByJquery(categoryName).click();
+		click(ELEMENT_CATEGORY_LINK.replace("${category}", categoryName));
 		Utils.pause(1000);
 	}
 
@@ -173,9 +174,9 @@ public class AnswerManageCategory extends AnswerBase {
 			boolean restricted, boolean moderator, boolean... opt){
 		action = new Actions(driver);
 		
-		if (getElementFromTextByJquery(categoryName) != null){
+		if (waitForAndGetElement(ELEMENT_CATEGORY_LINK.replace("${category}", categoryName),20000,0) != null){
 			info("Edit category by right click");
-			action.contextClick(getElementFromTextByJquery(categoryName)).perform();
+			rightClickOnElement(ELEMENT_CATEGORY_LINK.replace("${category}", categoryName));
 			click(ELEMENT_EDIT_CATEGORY_RIGHT_CLICK);
 		} else {
 			info("Edit category while opening category");
@@ -199,9 +200,9 @@ public class AnswerManageCategory extends AnswerBase {
 	public void deleteCategoryInAnswer(String categoryName, boolean...verify){
 		boolean check = verify.length > 0 ? verify[0]:true;
 		action = new Actions(driver);
-		if (getElementFromTextByJquery(categoryName) != null){
+		if (waitForAndGetElement(ELEMENT_CATEGORY_LINK.replace("${category}", categoryName),DEFAULT_TIMEOUT,0) != null){
 			info("Delete category by right click");
-			action.contextClick(getElementFromTextByJquery(categoryName)).perform();
+			rightClickOnElement(ELEMENT_CATEGORY_LINK.replace("${category}", categoryName));
 			click(ELEMENT_DELETE_CATEGORY_LINK);
 		}else {
 			info("Delete category while opening category");
@@ -225,7 +226,7 @@ public class AnswerManageCategory extends AnswerBase {
 	public void moveCategory(String source, String destination){
 		action = new Actions(driver);
 		info("Move category " + source + "to category " + destination);
-		action.contextClick(getElementFromTextByJquery(source)).perform();
+		rightClickOnElement(ELEMENT_CATEGORY_LINK.replace("${category}", source));
 		click(ELEMENT_MOVE_CATEGORY_LINK);
 		doubleClickOnElement(ELEMENT_CATEGORY_IN_MOVE_FORM.replace("${category}", destination));
 		waitForElementNotPresent(ELEMENT_CATEGORY_IN_MOVE_FORM.replace("${category}", destination));
@@ -273,7 +274,7 @@ public class AnswerManageCategory extends AnswerBase {
 	 */
 	public void watchAnswerCategory(String categoryName, boolean watch){
 		action = new Actions(driver);
-		action.contextClick(getElementFromTextByJquery(categoryName)).perform();
+		rightClickOnElement(ELEMENT_CATEGORY_LINK.replace("${category}", categoryName));
 		if (watch){
 			if (waitForAndGetElement(ELEMENT_WATCH_CATEGORY_LINK, 5000, 0) != null){
 				click(ELEMENT_WATCH_CATEGORY_LINK);
@@ -300,8 +301,11 @@ public class AnswerManageCategory extends AnswerBase {
 	 */
 	public void dragDropAnswerCategory(String source, String target){
 		action = new Actions(driver);
+		WebElement eSource = waitForAndGetElement(ELEMENT_CATEGORY_LINK.replace("${category}", source));
+		WebElement eTarget = waitForAndGetElement(ELEMENT_CATEGORY_LINK.replace("${category}", target));
+		
 		info("Drag category " + source + " to category " + target);
-		action.dragAndDrop(getElementFromTextByJquery(source), getElementFromTextByJquery(target)).build().perform();
+		action.dragAndDrop(eSource, eTarget).build().perform();
 		Utils.pause(2000);
 	}
 	

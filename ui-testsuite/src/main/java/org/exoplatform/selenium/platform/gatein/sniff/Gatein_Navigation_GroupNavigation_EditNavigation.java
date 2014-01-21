@@ -66,7 +66,7 @@ public class Gatein_Navigation_GroupNavigation_EditNavigation extends GroupNavig
 	 * Edit priority for group navigation
 	 * 
 	 */
-	@Test
+	@Test(priority=0)
 	public void test01_EditPriorityForGroupNavigation(){
 		String groupAdmin = "/platform/administrators";
 		String groupAdminDisplayName = "Administration";

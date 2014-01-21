@@ -7,7 +7,6 @@ import org.exoplatform.selenium.Utils;
 import org.exoplatform.selenium.platform.HomePageActivity;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.JavascriptExecutor;
 
 /**
  * @author lientm
@@ -32,11 +31,15 @@ public class AnswerManageComment extends AnswerBase {
 	public final By ELEMENT_COMMENT_LINK_IN_QUESTION = By.xpath("//*[@class='questionAction']//*[contains(text(),'Comment')]");
 	public final By ELEMENT_COMMENT_CONTENT_FRAME_1 = By.id("CommentContent___Frame");
 	public final By ELEMENT_COMMENT_CONTENT_FRAME_2 = By.xpath("//*[@id ='xEditingArea']/iframe");
+	public final By ELEMENT_COMMENT_CONTENT_FRAME_41 = By.xpath("//*[@id='cke_CommentContent']//iframe");
 	public final String ELEMENT_COMMENT_IN_QUESTION = "//*[contains(@id, 'Comment')]//*[text()='${comment}']";
 	public final By ELEMENT_GET_COMMENT = By.xpath("//*[contains(@id, 'Comment')]//p");
 
 	//More action
 	public final String ELEMENT_COMMENT_MORE_ACTION_LINK = "//*[text()='${comment}']/../../../../..//*[contains(text(), 'More Actions')]";
+	public final By ELEMENT_EDIT_COMMENT_MENU = By.xpath("//a[contains(.,'Edit Comment')]"); 
+	public final String ELEMENT_DELETE_COMMENT_MENU = "//*[contains(text(),'${comment}')]/ancestor::div[contains(@id,'Comment')]//a[contains(.,'Delete Comment')]";
+	public final String ELEMENT_PROMOTE_COMMENT_MENU = "//*[contains(text(),'${comment}')]/ancestor::div[contains(@id,'Comment')]//a[contains(.,'Promote as Answer')]";
 
 	//message
 	public final String MSG_DELETE_COMMENT = "Are you sure you want to delete this comment ?";
@@ -74,7 +77,7 @@ public class AnswerManageComment extends AnswerBase {
 	public void editComment4Question(String comment, String newComment){
 		click(ELEMENT_COMMENT_MORE_ACTION_LINK.replace("${comment}", comment));
 		Utils.pause(2000);
-		getElementFromTextByJquery("Edit Comment").click();
+		click(ELEMENT_EDIT_COMMENT_MENU);
 		inputDataToFrameInFrame(ELEMENT_COMMENT_CONTENT_FRAME_1, ELEMENT_COMMENT_CONTENT_FRAME_2, newComment, true);
 		switchToParentWindow();
 		button.save();
@@ -88,7 +91,7 @@ public class AnswerManageComment extends AnswerBase {
 	public void deleteCommentInQuestion(String comment){
 		click(ELEMENT_COMMENT_MORE_ACTION_LINK.replace("${comment}", comment));
 		Utils.pause(2000);
-		getElementFromTextByJquery("Delete Comment").click();
+		click(ELEMENT_DELETE_COMMENT_MENU.replace("${comment}", comment));
 		waitForMessage(MSG_DELETE_COMMENT);
 		click(ELEMENT_CONFIMATION_OK_POPUP);
 		waitForElementNotPresent(ELEMENT_COMMENT_MORE_ACTION_LINK.replace("${comment}", comment));
@@ -99,9 +102,9 @@ public class AnswerManageComment extends AnswerBase {
 	 * @param comment
 	 */
 	public void promoteAsAnswer(String comment){
-		//		click(ELEMENT_COMMENT_MORE_ACTION_LINK.replace("${comment}", comment));
+		click(ELEMENT_COMMENT_MORE_ACTION_LINK.replace("${comment}", comment));
 		Utils.pause(2000);
-		((JavascriptExecutor) driver).executeScript("$(\"a:contains('Promote as Answer')\").get(0).click();");
+		click(ELEMENT_PROMOTE_COMMENT_MENU.replace("${comment}", comment));
 		waitForElementNotPresent(ELEMENT_COMMENT_IN_QUESTION.replace("${comment}", comment));
 		if(!comment.contains("<br/>"))
 			waitForAndGetElement(magAns.ELEMENT_ANSWER_IN_QUESTION.replace("${answer}", comment));
