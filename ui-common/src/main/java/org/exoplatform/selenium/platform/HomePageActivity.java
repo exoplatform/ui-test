@@ -823,7 +823,7 @@ public class HomePageActivity extends PlatformBase{
 
 		viewActivity(topic, reply);
 		waitForAndGetElement(post.ELEMENT_POST_REPLY_BUTTON);
-		waitForAndGetElement(post.ELEMENT_POST_CONTENT.replace("${postContent}", reply));
+		waitForAndGetElement(post.ELEMENT_POST_CONTENT_TEXT.replace("${post}", reply));
 	}
 
 	/**

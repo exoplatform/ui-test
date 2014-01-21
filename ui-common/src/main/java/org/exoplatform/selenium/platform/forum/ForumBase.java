@@ -56,7 +56,7 @@ public class ForumBase extends PlatformBase {
 	public final By ELEMENT_HOME_BUTTON = By.xpath("//*[@id='UIBreadcumbs']//*[text()='Home']");
 	public final String ELEMENT_HOME_FORUM = "Forum Home";
 	public final By ELEMENT_USER_MANAGEMENT = By.xpath("//*[@id='ManageModerator']//*[@class='uiIconUser uiIconLightGray']");
-	public final By ELEMENT_MORE_BUTTON = By.xpath("//div[contains(text(),'More')]");
+	public final By ELEMENT_MORE_BUTTON = By.xpath("//li[@class='dropdown moreItem pull-right']");
 	public final By ELEMENT_PENDING = By.id("PendingJob");
 
 	//Administration menu
@@ -225,12 +225,15 @@ public class ForumBase extends PlatformBase {
 	public final By ELEMENT_SETTING_EMAIL_ADDRESS = By.id("EmailAddress");
 	public final String ELEMENT_CHECKBOX_EMAIL = "//*[contains(text(), '${name}')]/../..//input[contains(@id, 'EMAILforumCategory')]";
 	public final By ELEMENT_SETTING_EMAIL_UPDATE = By.xpath("//button[text()='Update']");
-	public final String ELEMENT_DELETE_WATCH = "//label/a[contains(text(),'${item}')]/following::div[@class='DeleteIcon']";
-	public final String ELEMENT_FEED_URL = "//a[@title='{$item}']/ancestor::tr/following::input[contains(@id,'RSS')]";
+	public final String ELEMENT_DELETE_WATCH = "//a[contains(text(),'${item}')]/../..//i[@class='uiIconDelete uiIconLightGray']";
+	public final String ELEMENT_FEED_URL = "//a[contains(text(),'${item}')]/../..//input[contains(@id,'RSS')]";
 	public final By ELEMENT_RSS_PAGE = By.id("feedSubscribeLine");
 	public final By ELEMENT_FEED_TITLE_TEXT = By.id("feedTitleText");
 	public final By ELEMENT_FEED_SUBTITLE_TEXT = By.id("feedSubtitleText");
 	public final By ELEMENT_FEED_CONTENT = By.id("feedContent");
+	public final String ELEMENT_MY_SUBSCRIPTION_OBJECT_WATCH = "//div[@id='UIForumUserSettingForm']//a[contains(text(),'${object}')]" ;
+	public final String ELEMENT_RSS_TOPIC_LINK = "//xhtml:span[text()='${topic}']";
+	
 	//---------------------Notifications------------------
 	public final By ELEMENT_NOTIFICATION_LINK = By.xpath("//*[@id='Administrations']//*[@class='uiIconNotification']"); 
 	public final By ELEMENT_NOTIFY_FRAME=By.xpath("//*[@id='xEditingArea']/iframe");
@@ -1018,7 +1021,9 @@ public class ForumBase extends PlatformBase {
 	 */
 	public void goToSetting(){
 		info("---Go to settings---");
-		waitForAndGetElement(ELEMENT_SETTING);
+		if(waitForAndGetElement(ELEMENT_SETTING,DEFAULT_TIMEOUT,0) == null){
+			click(ELEMENT_MORE_BUTTON);
+		}
 		click(ELEMENT_SETTING);
 		waitForAndGetElement(ELEMENT_SETTING_POPUP);
 	}
@@ -1139,8 +1144,9 @@ public class ForumBase extends PlatformBase {
 	}
 
 	public void deleteWatches (String item) {
+		alert = new ManageAlert(driver);
 		click(ELEMENT_DELETE_WATCH.replace("${item}", item));
-		alert.waitForConfirmation("Are you sure to delete this subscription?");
+		alert.waitForConfirmation("Are you sure you want to delete this subscription?");
 		waitForElementNotPresent(ELEMENT_DELETE_WATCH.replace("${item}", item));
 
 	}

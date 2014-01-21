@@ -37,11 +37,11 @@ public class ForumManageForum extends ForumBase {
 	public By ELEMENT_DELETE_FORUM = By.xpath("//*[contains(@data-action, 'RemoveForum')]");
 	public By ELEMENT_EDIT_FORUM = By.xpath("//*[contains(@href, 'EditForum')]");
 	public By ELEMENT_MOVE_FORUM = By.xpath("//*[contains(@href, 'MoveForum')]");
-	public By ELEMENT_START_TOPIC = By.xpath("//a[@class='ItemIcon PostnewThreadIcon' and contains(text(),'Start Topic')]");
+	public By ELEMENT_START_TOPIC = By.xpath("//button[contains(@onclick,'AddTopic')][1]");
 	public By ELEMENT_CENSOR_TOPIC =By.linkText("Censor");
 	public By ELEMENT_MODERATOR_PANEL = By.xpath("//*[@id='uicomponent.id' and @class='UIForumModerator']");
 	public By ELEMENT_RULE_PANEL = By.id("UIPostRules");
-	public String ELEMENT_TOPIC_LINK = "//a[contains(text(),'${topic}')]";
+	public String ELEMENT_TOPIC_LINK = "//a[@data-original-title='${topic}']";
 	public String ELEMENT_CATEGORY_FORUM_BREAD = "//*[text()='${category}']/../../*[text()='${forum}']";
 	public By ELEMENT_LOCK_FORUM = By.className("uiIconLockMedium");
 	public By ELEMENT_UNLOCK_FORUM = By.className("uiIconUnlockMedium");
@@ -51,6 +51,7 @@ public class ForumManageForum extends ForumBase {
 	public By ELEMENT_NO_FORUM = By.xpath("//td[@class='noticeEmpty' and text()='No Forums']");
 	public By ELEMENT_BAN_IP_FORUM = By.xpath("//a[contains(@href,'BanIpForumTools')]"); 
 	public final By ELEMENT_MORE_ACTION = By.xpath("//form[@id='UITopicContainer']//*[@data-toggle='dropdown']/*[@class='uiIconSettings uiIconLightGray']");
+	public String ELEMENT_FORUM_DESCRIPTION_TEXT = "//span[@class='description' and contains(text(),'${forum}')]"; 
 
 	//-------------------add forum form---------------------------------------------------
 	public By ELEMENT_POPUP_ADD_FORUM = By.xpath("//span[@class='PopupTitle popupTitle' and text()='Forum']");

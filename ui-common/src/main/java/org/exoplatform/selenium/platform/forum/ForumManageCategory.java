@@ -414,7 +414,7 @@ public class ForumManageCategory extends ForumBase {
 		tmpDriver.findElement(By.linkText(catName)).click();
 		Utils.pause(WAIT_INTERVAL);
 		//Delete category
-		
+
 		tmpDriver.findElement(ELEMENT_MANAGE_CATEGORY).click();
 		Utils.pause(WAIT_INTERVAL);
 		tmpDriver.findElement(ELEMENT_DELETE_CATEGORY).click();;
@@ -435,9 +435,11 @@ public class ForumManageCategory extends ForumBase {
 	 * @param rightOfView: true, if the user has right to view the category, and vice versa
 	 */
 	public void checkRightOfViewCategory(String username, String password, String categoryName, String description, boolean rightOfView){
-		account.signOut();
-		account.signIn(username,password);
-		goToForums();
+		if((username != "") & (username != null)){
+			account.signOut();
+			account.signIn(username,password);
+			goToForums();
+		}
 
 		if(rightOfView){
 			click(By.linkText(categoryName));
