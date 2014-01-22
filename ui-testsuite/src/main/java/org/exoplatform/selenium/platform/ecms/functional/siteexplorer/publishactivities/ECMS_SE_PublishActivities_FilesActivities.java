@@ -79,7 +79,8 @@ public class ECMS_SE_PublishActivities_FilesActivities  extends PlatformBase {
 	public void test01_NotUpdateFileActivityAfterCreatingANewFolder(){
 		//Declare variable
 		String folder = "folder01";
-		By elementFolder = By.linkText(folder);
+		By elementFolder = By.xpath(siteExp.ELEMENT_SE_NODE.replace("{$node}", folder));
+
 		//Open Sites Explorer
 		info("-- Open Sites Explorer --");
 		navToolBar.goToSiteExplorer();
@@ -157,7 +158,7 @@ public class ECMS_SE_PublishActivities_FilesActivities  extends PlatformBase {
 	public void test03_DisplayingOfFileFormatImagePdfOfficeInTheFileActivity1(){
 		//Declare variable
 		String file = "KS_Wiki_Attachment_pdffile.pdf";
-		By elementfile = By.linkText(file);
+		By elementfile = By.xpath(siteExp.ELEMENT_SE_NODE.replace("{$node}", file));
 				
 		//Go to SE
 		navToolBar.goToSiteExplorer();
@@ -190,7 +191,7 @@ public class ECMS_SE_PublishActivities_FilesActivities  extends PlatformBase {
 	public void test04_DisplayTheContentOfTheFileActivity(){
 		//Declare variable
 		String file = "KS_Wiki_Attachment_pdffile.pdf";
-		By elementfile = By.linkText(file);
+		By elementfile = By.xpath(siteExp.ELEMENT_SE_NODE.replace("{$node}", file));
 		String title = "Title of uploaded file";
 		String desc = "Description of uploaded file";
 		
@@ -204,6 +205,10 @@ public class ECMS_SE_PublishActivities_FilesActivities  extends PlatformBase {
 		//File description if exist
 		info("Edit title of uploaded file");
 		navToolBar.goToSiteExplorer();
+		if(isElementNotPresent(elementfile) && isElementPresent(By.xpath(actBar.ELEMENT_VIEW_MODE_LINK.replace("${viewName}", "Web")))){
+			actBar.goToViewMode("Web");
+			click(siteExp.ELEMENT_SIDEBAR_FILE_EXPLORER);
+		}
 		ecms.goToNode(elementfile);
 		actBar.goToEditDocument(file);
 		ecms.editUploadedFile(file, "", title, desc, "", "");
@@ -236,7 +241,7 @@ public class ECMS_SE_PublishActivities_FilesActivities  extends PlatformBase {
 	public void test05_EditAFileFromTheFileActivityFromIntranetHomePage(){
 		//Declare variable
 		String file = "KS_Wiki_Attachment_pdffile.pdf";
-		By elementfile = By.linkText(file);
+		By elementfile = By.xpath(siteExp.ELEMENT_SE_NODE.replace("{$node}", file));
 				
 		/*Step 1: Create file activity*/
 		//Go to SE
@@ -276,7 +281,7 @@ public class ECMS_SE_PublishActivities_FilesActivities  extends PlatformBase {
 	public void test06_RemoveTheFileActivityAfterDeletingAFileInContentExplorer(){
 		//Declare variable
 		String file = "KS_Wiki_Attachment_pdffile.pdf";
-		By elementfile = By.linkText(file);
+		By elementfile = By.xpath(siteExp.ELEMENT_SE_NODE.replace("{$node}", file));
 				
 		/*Step 1: Create file activity*/
 		//Go to SE
@@ -318,7 +323,7 @@ public class ECMS_SE_PublishActivities_FilesActivities  extends PlatformBase {
 	public void test07_DeleteAFileActivityFromIntranetActivityStreamByOwner(){
 		//Declare variable
 		String file = "KS_Wiki_Attachment_pdffile.pdf";
-		By elementfile = By.linkText(file);
+		By elementfile = By.xpath(siteExp.ELEMENT_SE_NODE.replace("{$node}", file));
 				
 		/*Step 1: Create file activity*/
 		//Go to SE
@@ -364,8 +369,8 @@ public class ECMS_SE_PublishActivities_FilesActivities  extends PlatformBase {
 		//Declare variable
 		String file1 = "portrait08.jpg";
 		String file2 = "landscape08.jpg";
-		By elementfile1 = By.linkText(file1);
-		By elementfile2 = By.linkText(file2);
+		By elementfile1 = By.xpath(siteExp.ELEMENT_SE_NODE.replace("{$node}", file1));
+		By elementfile2 = By.xpath(siteExp.ELEMENT_SE_NODE.replace("{$node}", file2));
 				
 		//Go to SE
 		navToolBar.goToSiteExplorer();
@@ -465,7 +470,7 @@ public class ECMS_SE_PublishActivities_FilesActivities  extends PlatformBase {
 	public void test10_RemoveTheFileActivityAfterDeletingAFileInSpaceDocument(){
 		//Declare variable
 		String file = "KS_Wiki_Attachment_pdffile.pdf";
-		By elementfile = By.linkText(file);
+		By elementfile = By.xpath(siteExp.ELEMENT_SE_NODE.replace("{$node}", file));
 		String spacename = "Space10";
 		String spacedesc = "Description Of Space10";
 				
@@ -522,7 +527,7 @@ public class ECMS_SE_PublishActivities_FilesActivities  extends PlatformBase {
 	public void test11_AddFileActivityAfterUploadingAFileInCE(){
 		//Declare variable
 		String file = "KS_Wiki_Attachment_pdffile.pdf";
-		By elementfile = By.linkText(file);
+		By elementfile = By.xpath(siteExp.ELEMENT_SE_NODE.replace("{$node}", file));
 						
 		//Go to SE
 		navToolBar.goToSiteExplorer();

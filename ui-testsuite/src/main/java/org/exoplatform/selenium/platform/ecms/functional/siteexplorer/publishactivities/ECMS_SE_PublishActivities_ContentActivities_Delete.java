@@ -9,6 +9,7 @@ import org.exoplatform.selenium.platform.PlatformBase;
 import org.exoplatform.selenium.platform.ecms.contentexplorer.ActionBar;
 import org.exoplatform.selenium.platform.ecms.contentexplorer.ContentTemplate;
 import org.exoplatform.selenium.platform.ecms.contentexplorer.ContextMenu;
+import org.exoplatform.selenium.platform.ecms.contentexplorer.SitesExplorer;
 import org.exoplatform.selenium.platform.HomePageActivity;
 import org.openqa.selenium.By;
 import org.testng.annotations.AfterMethod;
@@ -30,6 +31,7 @@ public class ECMS_SE_PublishActivities_ContentActivities_Delete extends Platform
 	ManageAccount magAcc;
 	NavigationToolbar navToolBar;
 	ActionBar actBar;
+	SitesExplorer SE;
 
 	//Ecms
 	ContextMenu cMenu;
@@ -49,6 +51,7 @@ public class ECMS_SE_PublishActivities_ContentActivities_Delete extends Platform
 		sActivity = new HomePageActivity(driver);
 		cMenu = new ContextMenu(driver);
 		cTemplate = new ContentTemplate(driver);
+		SE = new SitesExplorer(driver);
 		magAcc.signIn(DATA_USER, DATA_PASS);
 
 	}
@@ -69,6 +72,7 @@ public class ECMS_SE_PublishActivities_ContentActivities_Delete extends Platform
 	@Test
 	public void test01_CheckContentActivityAfterDeleteContent(){
 		String FILE_TITLE_01 = "ECMS_SE_Content_01";
+		By bNode = By.xpath(SE.ELEMENT_SE_NODE.replace("{$node}", FILE_TITLE_01));
 
 		info("Go to Content Explorer");
 		navToolBar.goToSiteExplorer();
@@ -76,10 +80,9 @@ public class ECMS_SE_PublishActivities_ContentActivities_Delete extends Platform
 		info("Create a node in root path");
 		actBar.goToAddNewContent();
 		cTemplate.createNewWebContent(FILE_TITLE_01, FILE_TITLE_01, "", "", "", "");
-		waitForAndGetElement(By.linkText(FILE_TITLE_01));
 
 		info("Delete a node in Site Explorer");
-		cMenu.deleteDocument(By.linkText(FILE_TITLE_01));
+		cMenu.deleteDocument(bNode);
 
 		info("Go to Intranet Homepage");
 		navToolBar.goToHomePage();
@@ -96,6 +99,7 @@ public class ECMS_SE_PublishActivities_ContentActivities_Delete extends Platform
 	@Test
 	public void test02_DeleteContentActivity(){
 		String FILE_TITLE_02 = "ECMS_SE_Content_02";
+		By bNode = By.xpath(SE.ELEMENT_SE_NODE.replace("{$node}", FILE_TITLE_02));
 
 		info("Go to Content Explorer");
 		navToolBar.goToSiteExplorer();
@@ -103,7 +107,6 @@ public class ECMS_SE_PublishActivities_ContentActivities_Delete extends Platform
 		info("Create a node in root path");
 		actBar.goToAddNewContent();
 		cTemplate.createNewWebContent(FILE_TITLE_02, FILE_TITLE_02, "", "", "", "");
-		waitForAndGetElement(By.linkText(FILE_TITLE_02));
 
 		info("Go to Intranet Homepage");
 		navToolBar.goToHomePage();
@@ -116,8 +119,7 @@ public class ECMS_SE_PublishActivities_ContentActivities_Delete extends Platform
 
 		info("Restore data");
 		navToolBar.goToSiteExplorer();
-		waitForAndGetElement(By.linkText(FILE_TITLE_02));
-		cMenu.deleteDocument(By.linkText(FILE_TITLE_02));
+		cMenu.deleteDocument(bNode);
 
 	}
 }

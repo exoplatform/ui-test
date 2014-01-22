@@ -33,7 +33,7 @@ public class ManageMember extends SpaceManagement {
 	public ManageMember(WebDriver dr, String...plfVersion){
 		super(dr);
 		this.plfVersion = plfVersion.length>0?plfVersion[0]:"4.0";
-		magAcc = new ManageAccount(driver);
+		magAcc = new ManageAccount(driver,this.plfVersion);
 		nav = new NavigationToolbar(driver);
 	}
 
@@ -252,7 +252,7 @@ public class ManageMember extends SpaceManagement {
 	 * @param params
 	 */
 	public void joinOpenSpace(ManageAccount.userType user, String spaceName, int...params){
-		magAcc = new ManageAccount(driver);
+		magAcc = new ManageAccount(driver,this.plfVersion);
 		info("-- Joining the open space: " + spaceName);
 		int iTimeout = params.length > 0 ? params[0] : DEFAULT_TIMEOUT;
 		if (isElementNotPresent(ELEMENT_SIGN_IN_LINK) && isElementNotPresent(ELEMENT_GO_TO_PORTAL) ){
@@ -366,7 +366,7 @@ public class ManageMember extends SpaceManagement {
 	 * @param user: name of the invited (type: Root, Admin, Author, Developer or Publisher)
 	 */
 	public void managerInviteUserToJoinSpace(ManageAccount.userType manager, String spaceName, ManageAccount.userType user, Boolean... params){
-		magAcc = new ManageAccount(driver);
+		magAcc = new ManageAccount(driver,this.plfVersion);
 		Boolean isLogin = params.length > 0 ? params[0] : true; 
 		info("-- Invite an user to join: " + spaceName);
 		if (isLogin){
@@ -417,7 +417,7 @@ public class ManageMember extends SpaceManagement {
 	 */
 	public void managerAcceptRequestFromUser(boolean accept, ManageAccount.userType manager, ManageAccount.userType user, String spaceName,Boolean... params){
 		Boolean isLogin = params.length > 0 ? params[0] : true;  
-		magAcc = new ManageAccount(driver);
+		magAcc = new ManageAccount(driver,this.plfVersion);
 		if (isLogin){
 			magAcc.signOut();
 			magAcc.userSignIn(manager);
@@ -456,7 +456,7 @@ public class ManageMember extends SpaceManagement {
 	 * @param memberName
 	 */
 	public void managerRemoveMemberFromSpace(ManageAccount.userType userTypeManager, String spaceName, String memberName){
-		magAcc = new ManageAccount(driver);
+		magAcc = new ManageAccount(driver,this.plfVersion);
 		info("-- Removing the member: " + memberName + " from the space: " + spaceName);
 		magAcc.signOut();
 		magAcc.userSignIn(userTypeManager);
@@ -498,7 +498,7 @@ public class ManageMember extends SpaceManagement {
 	 * @param userName: String (eg, Mary, Jack, James, etc...)
 	 */
 	public void managerReInviteUser(ManageAccount.userType manager, String spaceName, boolean userRoot, String userName){
-		magAcc = new ManageAccount(driver);
+		magAcc = new ManageAccount(driver,this.plfVersion);
 		if (isElementNotPresent(ELEMENT_SIGN_IN_LINK) && isElementNotPresent(ELEMENT_GO_TO_PORTAL) ){
 			magAcc.signOut();
 		}else{
@@ -635,7 +635,7 @@ public class ManageMember extends SpaceManagement {
 	 * @param spaceName: name of space (String)
 	 */
 	public void managerGoToMemberListTab(ManageAccount.userType manager, ManageAccount.userType user, String spaceName){
-		magAcc = new ManageAccount(driver);
+		magAcc = new ManageAccount(driver,this.plfVersion);
 		if (isElementNotPresent(ELEMENT_SIGN_IN_LINK) && isElementNotPresent(ELEMENT_GO_TO_PORTAL) ){
 			magAcc.signOut();
 		}else{
@@ -672,7 +672,7 @@ public class ManageMember extends SpaceManagement {
 	 * @param spaceName: name of space (String)
 	 */
 	public void managerGoToMembersTab(ManageAccount.userType manager, String spaceName){
-		magAcc = new ManageAccount(driver);
+		magAcc = new ManageAccount(driver,this.plfVersion);
 		if (isElementNotPresent(ELEMENT_SIGN_IN_LINK) && isElementNotPresent(ELEMENT_GO_TO_PORTAL) ){
 			magAcc.signOut();
 		}else{
@@ -744,7 +744,7 @@ public class ManageMember extends SpaceManagement {
 	 * @param spaceName: name of space (String)
 	 */
 	public void userAcceptInvitationToJoinSpace(boolean accept, ManageAccount.userType user, String spaceName){
-		magAcc = new ManageAccount(driver);
+		magAcc = new ManageAccount(driver,this.plfVersion);
 		magAcc.signOut();
 		magAcc.userSignIn(user);
 		if (accept){
@@ -788,7 +788,7 @@ public class ManageMember extends SpaceManagement {
 	 */
 	public void userRequestToJoinSpace(ManageAccount.userType user, String spaceName,Boolean... params){
 		Boolean isLogin = params.length > 0 ? params[0] : true;  
-		magAcc = new ManageAccount(driver);
+		magAcc = new ManageAccount(driver,this.plfVersion);
 		if(isLogin){
 			magAcc.signOut();
 			magAcc.userSignIn(user);
@@ -803,7 +803,7 @@ public class ManageMember extends SpaceManagement {
 	 * @param spaceName: name of space (String)
 	 */
 	public void userCancelRequest(ManageAccount.userType user, String spaceName){
-		magAcc = new ManageAccount(driver);
+		magAcc = new ManageAccount(driver,this.plfVersion);
 		if (isElementNotPresent(ELEMENT_SIGN_IN_LINK) && isElementNotPresent(ELEMENT_GO_TO_PORTAL) ){
 			magAcc.signOut();
 		}else{
@@ -827,7 +827,7 @@ public class ManageMember extends SpaceManagement {
 	 * @param imageFileName: input a name of captured image (String)
 	 */
 	public void checkInvitation(ManageAccount.userType user, String spaceName, boolean capture, String imageFileName){
-		magAcc = new ManageAccount(driver);
+		magAcc = new ManageAccount(driver,this.plfVersion);
 		if (isElementNotPresent(ELEMENT_SIGN_IN_LINK) && isElementNotPresent(ELEMENT_GO_TO_PORTAL) ){
 			magAcc.signOut();
 		}else{
@@ -850,7 +850,7 @@ public class ManageMember extends SpaceManagement {
 	 * @param user: (type: Root, Admin, Author, Developer or Publisher)
 	 */
 	public void userGoToAllSpacesPage(ManageAccount.userType user){
-		magAcc = new ManageAccount(driver);
+		magAcc = new ManageAccount(driver,this.plfVersion);
 		if (isElementNotPresent(ELEMENT_SIGN_IN_LINK) && isElementNotPresent(ELEMENT_GO_TO_PORTAL) ){
 			magAcc.signOut();
 		}else{

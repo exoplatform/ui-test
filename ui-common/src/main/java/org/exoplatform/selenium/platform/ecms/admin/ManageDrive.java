@@ -34,7 +34,7 @@ public class ManageDrive extends EcmsBase{
 	NavigationToolbar navToolbar = new NavigationToolbar(driver);
 	ECMainFunction ecMain = new ECMainFunction(driver);
 	ManageAlert alt = new ManageAlert(driver);
-	ManageAccount magAcc = new ManageAccount(driver);
+	ManageAccount magAcc = new ManageAccount(driver,this.plfVersion);
 
 	/*Manage Drive Page */
 	//Add a drive

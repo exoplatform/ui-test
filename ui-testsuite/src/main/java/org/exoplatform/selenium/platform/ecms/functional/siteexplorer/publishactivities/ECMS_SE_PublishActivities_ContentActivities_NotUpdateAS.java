@@ -78,6 +78,7 @@ public class ECMS_SE_PublishActivities_ContentActivities_NotUpdateAS extends Pla
 	@Test
 	public void test01_NotUpdateASafterUpdateContentPermission(){
 		String FILE_TITLE_01 = "ECMS_SE_Content_AS_01";
+		By bNode = By.xpath(SE.ELEMENT_SE_NODE.replace("{$node}", FILE_TITLE_01));
 
 		//Step 1: Create a new content in Site Explorer
 		info("Go to Content Explorer");
@@ -86,7 +87,6 @@ public class ECMS_SE_PublishActivities_ContentActivities_NotUpdateAS extends Pla
 		info("Create a node in root path");
 		actBar.goToAddNewContent();
 		cTemplate.createNewWebContent(FILE_TITLE_01, FILE_TITLE_01, "", "", "", "");
-		waitForAndGetElement(By.linkText(FILE_TITLE_01));
 
 		info("Go to Intranet Homepage");
 		navToolBar.goToHomePage();
@@ -100,6 +100,10 @@ public class ECMS_SE_PublishActivities_ContentActivities_NotUpdateAS extends Pla
 		navToolBar.goToSiteExplorer();
 
 		info("Change permission of a node/content");
+		if(isElementNotPresent(bNode) && isElementPresent(By.xpath(actBar.ELEMENT_VIEW_MODE_LINK.replace("${viewName}", "Web")))){
+			actBar.goToViewMode("Web");
+			click(SE.ELEMENT_SIDEBAR_FILE_EXPLORER);
+		}
 		ecms.goToNode(FILE_TITLE_01);
 		//click(ecms.ELEMENT_PERMISSION_LINK);
 		actBar.goToNodePermissionManagement();
@@ -116,8 +120,7 @@ public class ECMS_SE_PublishActivities_ContentActivities_NotUpdateAS extends Pla
 		//Step 3: Restore data
 		info("Restore data");
 		navToolBar.goToSiteExplorer();
-		waitForAndGetElement(By.linkText(FILE_TITLE_01));
-		cMenu.deleteDocument(By.linkText(FILE_TITLE_01));
+		cMenu.deleteDocument(bNode);
 
 	}
 	/**
@@ -128,6 +131,7 @@ public class ECMS_SE_PublishActivities_ContentActivities_NotUpdateAS extends Pla
 	@Test
 	public void test02_NotUpdateASafterUpdateContentSchedule(){
 		String FILE_TITLE_02 = "ECMS_SE_Content_AS_02";
+		By bNode = By.xpath(SE.ELEMENT_SE_NODE.replace("{$node}", FILE_TITLE_02));
 		String STAGE = "Staged";
 		//This variable should be reset each time Test suite is run
 		String DATE = getCurrentDate("MM/dd/yyyy hh:mm:ss");
@@ -139,7 +143,6 @@ public class ECMS_SE_PublishActivities_ContentActivities_NotUpdateAS extends Pla
 		info("Create a node in root path");
 		actBar.goToAddNewContent();
 		cTemplate.createNewWebContent(FILE_TITLE_02, FILE_TITLE_02, "", "", "", "");
-		waitForAndGetElement(By.linkText(FILE_TITLE_02));
 
 		info("Go to Intranet Homepage");
 		navToolBar.goToHomePage();
@@ -155,7 +158,11 @@ public class ECMS_SE_PublishActivities_ContentActivities_NotUpdateAS extends Pla
 		navToolBar.goToSiteExplorer();
 
 		info("Set schedule setting of a node/content");
-		ecms.goToNode(FILE_TITLE_02);
+		if(isElementNotPresent(bNode) && isElementPresent(By.xpath(actBar.ELEMENT_VIEW_MODE_LINK.replace("${viewName}", "Web")))){
+			actBar.goToViewMode("Web");
+			click(SE.ELEMENT_SIDEBAR_FILE_EXPLORER);
+		}
+		ecms.goToNode(bNode);
 		actBar.managePublication(STAGE,DATE);
 
 		info("Check if content activity is updated or not");
@@ -169,8 +176,7 @@ public class ECMS_SE_PublishActivities_ContentActivities_NotUpdateAS extends Pla
 		//Step 3: restore data
 		info("Restore data");
 		navToolBar.goToSiteExplorer();
-		waitForAndGetElement(By.linkText(FILE_TITLE_02));
-		cMenu.deleteDocument(By.linkText(FILE_TITLE_02));
+		cMenu.deleteDocument(bNode);
 	}
 
 	/**
@@ -181,7 +187,7 @@ public class ECMS_SE_PublishActivities_ContentActivities_NotUpdateAS extends Pla
 	@Test
 	public void test03_NotUpdateASafterCheckoutContent(){
 		String FILE_TITLE_03 = "ECMS_SE_Content_AS_03";
-
+		By bNode = By.xpath(SE.ELEMENT_SE_NODE.replace("{$node}", FILE_TITLE_03));
 
 		//Step 1: Create a new content in Site Explorer
 		info("Go to Content Explorer");
@@ -190,7 +196,6 @@ public class ECMS_SE_PublishActivities_ContentActivities_NotUpdateAS extends Pla
 		info("Create a node in root path");
 		actBar.goToAddNewContent();
 		cTemplate.createNewWebContent(FILE_TITLE_03, FILE_TITLE_03, "", "", "", "");
-		waitForAndGetElement(By.linkText(FILE_TITLE_03));
 
 		info("Go to Intranet Homepage");
 		navToolBar.goToHomePage();
@@ -201,14 +206,12 @@ public class ECMS_SE_PublishActivities_ContentActivities_NotUpdateAS extends Pla
 		//Step 2: Check out a node in Site Explorer
 		info("Go to Content Explorer");
 		navToolBar.goToSiteExplorer();
-		ecms.goToNode(FILE_TITLE_03);
-		By NODE_NAME = By.linkText(FILE_TITLE_03);
 
 		info("Checkin a node/content");
-		cMenu.contextMenuAction(NODE_NAME, cMenu.ELEMENT_MENU_CHECKIN);
+		cMenu.contextMenuAction(bNode, cMenu.ELEMENT_MENU_CHECKIN);
 
 		info("Checkout a node/content");
-		cMenu.contextMenuAction(NODE_NAME, cMenu.ELEMENT_MENU_CHECKOUT);
+		cMenu.contextMenuAction(bNode, cMenu.ELEMENT_MENU_CHECKOUT);
 
 		info("Go to Intranet Homepage");
 		navToolBar.goToHomePage();
@@ -221,7 +224,6 @@ public class ECMS_SE_PublishActivities_ContentActivities_NotUpdateAS extends Pla
 		//Step 3: Restore data
 		info("Restore data");
 		navToolBar.goToSiteExplorer();
-		waitForAndGetElement(By.linkText(FILE_TITLE_03));
-		cMenu.deleteDocument(By.linkText(FILE_TITLE_03));
+		cMenu.deleteDocument(bNode);
 	}
 }

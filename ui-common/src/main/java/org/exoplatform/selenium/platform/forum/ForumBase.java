@@ -58,6 +58,10 @@ public class ForumBase extends PlatformBase {
 	public final By ELEMENT_USER_MANAGEMENT = By.xpath("//*[@id='ManageModerator']//*[@class='uiIconUser uiIconLightGray']");
 	public final By ELEMENT_MORE_BUTTON = By.xpath("//li[@class='dropdown moreItem pull-right']");
 	public final By ELEMENT_PENDING = By.id("PendingJob");
+	
+	public String ELEMENT_FORUM_BREADCUMB = "//*[@id='UIBreadcumbs']/div[@class='pull-left']//a[@class='Selected' and contains(text(),'${forumName}')]";
+	public String ELEMENT_LATEST_TOPIC = "//a[contains(text(),'${forum}')]/ancestor::tr[@class='oncontextmenu']//a[contains(text(),'${topic}')]";
+	public String ELEMENT_FORUM_ON_HOMEPAGE = "//a[contains(text(),'${category}')]/ancestor::div[@id='UICategories']//tr[@class='oncontextmenu']//a[contains(text(),'${forum}')]";
 
 	//Administration menu
 	//	public final By ELEMENT_ADMINISTRATION = By.className("uiIconForumAdmin");

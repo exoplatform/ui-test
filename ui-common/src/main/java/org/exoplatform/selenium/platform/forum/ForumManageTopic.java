@@ -112,12 +112,19 @@ public class ForumManageTopic extends ForumBase {
 	public By ELEMENT_ADD_TAG_BUTTON = By.xpath("//a[contains(text(),'Add Tag')]");
 	public String ELEMENT_TAG_NUMBER = "//*[@id='searchTagName']/div/font[text()='(${No})']";
 	public By ELEMENT_MANAGE_TAG = By.linkText("Manage Tag");
-	public By ELEMENT_UNTAG = By.xpath("//a[contains(text(), 'Untag')]");
+//	public By ELEMENT_UNTAG = By.xpath("//a[contains(text(), 'Untag')]");
+	public By ELEMENT_UNTAG = By.id("UITopicsTagConfirm0");
 	public String ELEMENT_CHECKBOX_UNTAG = "//input[@type='checkbox' and @title='${topic}']";
-	public String MESSAGE_UNTAG = "Are you sure to remove this tag from the topic?";
+	public String MESSAGE_UNTAG = "//*[@id='UIForumPopupConfirmation']//span[contains(text(),'Are you sure you want to remove this tag from the topic ?')]";
+	public String ELEMENT_UNTAG_CONFIRMATION_BUTTON_OK = "//*[@id='UIForumPopupConfirmation']//button[@class='btn actionOK']";
 	public String MESSAGE_ADD_TAG_BLANK_NAME = "The field must not be blank.";
-	public String ELEMENT_UNTAG_ICON = "//a[text()='${tag}']/../span[@title='Untag this topic.']";
+	public String ELEMENT_UNTAG_ICON = "//a[text()='${tag}']/parent::span/i[@class='uiIconClose uiIconLightGray']";
 	public String ELEMENT_suggestion = "#searchTagName div:contains('${tag}') font:contains('(${No})')";
+	
+	public String ELEMENT_WARNING_MSG = "//span[@class='warningIcon' and contains(text(),'The field must not be blank.')]";
+//	public String ELEMENT_TOPIC_CHECKBOX = "//a[contains(text(),'${topic}')]/ancestor::table[@class='uiGrid table no-border-cell rounded-corners-bottom table-hover table-striped']//span[@class='uiCheckbox']/input[@class='checkbox' and starts-with(@name,'topic')]";
+	public String ELEMENT_TOPIC_CHECKBOX = "//span[@class='uiCheckbox']/input[@class='checkbox' and starts-with(@name,'topic')]";
+	public String ELEMENT_TAG_SUGGESTED = "//div[@class='searchTagName']//a[contains(text(),'${tagName}')]";
 
 	//-------------------censor topic list form-----------------------------------------------
 	public By ELEMENT_POPUP_CENSOR_TOPIC = By.xpath("//span[@class='PopupTitle popupTitle' and text()='Censor Topics List']");
@@ -416,17 +423,17 @@ public class ForumManageTopic extends ForumBase {
 	 * function add tag for topic
 	 * @param tagName: name of tag
 	 */
-	public void addTagForTopic(String tagName){
-		String[] tag = tagName.split(" ");
+		public void addTagForTopic(String tagName){
+			String[] tag = tagName.split(" ");
 
-		goToAddTagForTopic();
-		type(ELEMENT_ADD_TAG, tagName, true);
-		click(ELEMENT_ADD_TAG_BUTTON);
-		for(int i = 0; i < tag.length; i ++){
-			waitForAndGetElement(By.linkText(tag[i]));
+			goToAddTagForTopic();
+			type(ELEMENT_ADD_TAG, tagName, true);
+			click(ELEMENT_ADD_TAG_BUTTON);
+			for(int i = 0; i < tag.length; i ++){
+				waitForAndGetElement(By.linkText(tag[i]));
+			}
+			info("Add tag for topic successfully");
 		}
-		info("Add tag for topic successfully");
-	}
 
 	/**function untag for many topics
 	 * @author lientm

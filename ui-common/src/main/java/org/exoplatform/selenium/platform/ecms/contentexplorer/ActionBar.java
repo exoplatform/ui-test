@@ -38,7 +38,7 @@ public class ActionBar extends EcmsBase{
 	Dialog dialog = new Dialog(driver);
 	ManageAlert alt = new ManageAlert(driver);
 	NavigationToolbar navToolBar = new NavigationToolbar(driver);
-	ManageAccount magAcc = new ManageAccount(driver);
+	ManageAccount magAcc = new ManageAccount(driver,this.plfVersion);
 	ManageView magView = new ManageView(driver);
 	ContextMenu cMenu = new ContextMenu(driver);
 	ManageAlert alert = new ManageAlert(driver);
@@ -1201,6 +1201,8 @@ public class ActionBar extends EcmsBase{
 	 */
 	public void managePublication(String state, String...date){
 		By bState = By.xpath(ELEMENT_PUBLICATION_STATE.replace("{$state}", state));
+		String date1 = (String) (date.length > 0 ? date[0]:"");
+		String date2 = (String) (date.length > 1 ? date[1]:"");
 
 		info("Manage publication state");
 		openManagePublicationForm();
@@ -1208,10 +1210,10 @@ public class ActionBar extends EcmsBase{
 		waitForAndGetElement(ELEMENT_CURRENT_SPECIFIC_STATUS.replace("${status}", state));
 		if (state.equals("Staged") & (date.length > 0)){
 			click(ELEMENT_SCHEDULE_TAB);
-			if((date.length > 0) & (date[0] != null))
-				type(ELEMENT_PUB_FROM_INPUT,date[0],true);
-			if((date.length > 1) & (date[1] != null))
-				type(ELEMENT_PUB_TO_INPUT,date[1],true);
+			if((date1!=""))
+				type(ELEMENT_PUB_FROM_INPUT,date1,true);
+			if((date2!=""))
+				type(ELEMENT_PUB_TO_INPUT,date2,true);
 			button.save();
 			if(date.length > 2){
 				waitForMessage(MSG_INVALID_DATE_TIME);

@@ -28,7 +28,7 @@ public class AnswerManageQuestion extends AnswerBase {
 		cat = new AnswerManageCategory(driver);
 		button = new Button(driver);
 		alert = new ManageAlert(driver);
-		magAc = new ManageAccount(driver);
+		magAc = new ManageAccount(driver,this.plfVersion);
 	}
 
 	//Manage Question

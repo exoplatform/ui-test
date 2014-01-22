@@ -172,7 +172,7 @@ public class Permission extends WikiBase{
 	 * @see ManageAccount#signOut()
 	 */
 	public void addEditPagePermission(ManageAccount.userType userType, String user, By elementPage){
-		magAcc = new ManageAccount(driver);
+		magAcc = new ManageAccount(driver,this.plfVersion);
 		info("Add edit page permission for " + user);
 		//magAc.signIn(DATA_USER_ADMIN, DATA_PASS_ADMIN);
 		magAcc.userSignIn(userType);
@@ -197,7 +197,7 @@ public class Permission extends WikiBase{
 	 * @see WikiBase#goToWiki()
 	 */
 	public void removePagePermission(ManageAccount.userType userType, By elementPage, String user){
-		magAcc = new ManageAccount(driver);
+		magAcc = new ManageAccount(driver,this.plfVersion);
 		info("remove view/edit page permission");
 		//magAc.signIn(DATA_USER_ADMIN, DATA_PASS_ADMIN);
 		magAcc.userSignIn(userType);
@@ -457,7 +457,7 @@ public class Permission extends WikiBase{
 	 * @see ManageAccount#signOut()
 	 */
 	public void deletePermissionWithUserAdmin(String user, By element_page){
-		magAcc = new ManageAccount(driver);
+		magAcc = new ManageAccount(driver,this.plfVersion);
 		info("Delete page permission of user/group " + user);
 		//magAcc.signIn(DATA_USER_ADMIN, DATA_PASS_ADMIN);
 		magAcc.userSignIn(ManageAccount.userType.ADMIN);
@@ -480,7 +480,7 @@ public class Permission extends WikiBase{
 	 * @see ManageAccount#signOut()
 	 */
 	public void checkViewPage(ManageAccount.userType user, By element_page){
-		magAcc = new ManageAccount(driver);
+		magAcc = new ManageAccount(driver,this.plfVersion);
 		info("Check user/group " + user + " does not have view/edit page permission");
 		//magAcc.signIn(user, DATA_PASS_ADMIN);
 		magAcc.userSignIn(user);
@@ -504,7 +504,7 @@ public class Permission extends WikiBase{
 	 * @see ManageAccount#signOut()
 	 */
 	public void checkEditPage(ManageAccount.userType user, By elementPage, String content){
-		magAcc = new ManageAccount(driver);
+		magAcc = new ManageAccount(driver,this.plfVersion);
 		info("Check user can view page but does not have edit page");
 		//magAc.signIn(user, DATA_PASS_ADMIN);
 		magAcc.userSignIn(user);

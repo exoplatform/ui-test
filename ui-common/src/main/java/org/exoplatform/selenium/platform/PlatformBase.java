@@ -1334,8 +1334,8 @@ public class PlatformBase extends TestBase {
 	 * @author havtt
 	 */
 	public void switchToNewBrowserWindow(String user, String pass){
-		ManageAccount magAcc = new ManageAccount(driver);
-		magAcc = new ManageAccount(driver);
+		ManageAccount magAcc = new ManageAccount(driver,this.plfVersion);
+		magAcc = new ManageAccount(driver,this.plfVersion);
 
 		this.openNewBrowser();
 		if (user != null){

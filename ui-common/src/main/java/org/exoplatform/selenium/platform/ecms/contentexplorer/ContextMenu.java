@@ -20,13 +20,11 @@ import org.testng.Assert;
  *
  */
 public class ContextMenu extends EcmsBase{
-
 	public ContextMenu(WebDriver dr, String...plfVersion) {
 		super(dr);
 		this.plfVersion = plfVersion.length>0?plfVersion[0]:"4.0";
 		// TODO Auto-generated constructor stub
 	}
-
 	Dialog dialog = new Dialog(driver);
 	Button button = new Button(driver);
 
@@ -89,6 +87,11 @@ public class ContextMenu extends EcmsBase{
 		//	if (repeat >= ACTION_REPEAT) {
 		//		Assert.fail("Cannot perform this action after " + ACTION_REPEAT + " tries");
 		//	}
+		if(isElementPresent(By.xpath(ELEMENT_VIEW_MODE_LINK.replace("${viewName}", "Web")))){
+			click(By.xpath(ELEMENT_VIEW_MODE_LINK.replace("${viewName}", "Web")));
+			Utils.pause(1000);
+			click(By.xpath("//*[@data-original-title = 'File Explorer']"));
+		}
 		rightClickOnElement(loc);
 		if (waitForAndGetElement(actionItem, 5000, 0) != null) {
 			if(this.plfVersion.equalsIgnoreCase("4.0"))
@@ -117,6 +120,11 @@ public class ContextMenu extends EcmsBase{
 		By by = locator instanceof By ? (By)locator : By.xpath((String)locator);
 		//		actions.contextClick(unlock).build().perform();
 		try{
+			if(isElementPresent(By.xpath(ELEMENT_VIEW_MODE_LINK.replace("${viewName}", "Web")))){
+				click(By.xpath(ELEMENT_VIEW_MODE_LINK.replace("${viewName}", "Web")));
+				Utils.pause(1000);
+				click(By.xpath("//*[@data-original-title = 'File Explorer']"));
+			}
 			rightClickOnElement(by);
 			Utils.pause(500);
 			if (isElementPresent(ELEMENT_MENU_UNLOCK)) {
@@ -170,6 +178,11 @@ public class ContextMenu extends EcmsBase{
 		{
 			if (repeat > ACTION_REPEAT) {
 				Assert.fail("Cannot perform this action after " + ACTION_REPEAT + " tries");
+			}
+			if(isElementPresent(By.xpath(ELEMENT_VIEW_MODE_LINK.replace("${viewName}", "Web")))){
+				click(By.xpath(ELEMENT_VIEW_MODE_LINK.replace("${viewName}", "Web")));
+				Utils.pause(1000);
+				click(By.xpath("//*[@data-original-title = 'File Explorer']"));
 			}
 			rightClickOnElement(locator);
 			if (waitForAndGetElement(ELEMENT_MENU_DELETE, 10000, 0)!=null) 

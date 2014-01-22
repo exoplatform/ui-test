@@ -42,7 +42,7 @@ public class Permalink extends BasicAction {
 	 * @param content The content of Wiki page.
 	 */
 	public void goToWikiByPermalink(String user, String permalink, boolean permission, String content){
-		magAc = new ManageAccount(driver);
+		magAc = new ManageAccount(driver,this.plfVersion);
 		
 		info("Check permalink with user " + user);
 		driver.get(permalink);

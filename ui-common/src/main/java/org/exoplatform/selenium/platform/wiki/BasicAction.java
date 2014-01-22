@@ -482,7 +482,7 @@ public class BasicAction extends Permission{
 	 * 
 	 */
 	public void resetDataByDeleteWikiPage(ManageAccount.userType user, String[] wikiPath){
-		magAcc = new ManageAccount(driver);
+		magAcc = new ManageAccount(driver,this.plfVersion);
 		if (isElementNotPresent(ELEMENT_INPUT_USERNAME)){
 			magAcc.signOut();
 		}else{
