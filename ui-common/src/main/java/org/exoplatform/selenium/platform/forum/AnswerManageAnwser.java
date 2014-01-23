@@ -40,6 +40,7 @@ public class AnswerManageAnwser extends AnswerBase {
 	public final By ELEMENT_ANSWER_CONTENTFRAME_1 = By.xpath("//iframe[@id='QuestionRespone___Frame']");
 	public final By ELEMENT_ANSWER_CONTENTFRAME_2 = By.xpath("//td[@id='xEditingArea']/iframe");
 	public final By ELEMENT_ANSWER_MESSAGE_FRAME_CKEDITOR = By.xpath("//iframe[@class='cke_wysiwyg_frame cke_reset']");//By.id("scayt_0");
+	public final By ELEMENT_ANSWER_CONTENTFRAME_41 = By.xpath("//*[@id='cke_QuestionRespone']//iframe");
 	public final By ELEMENT_APPROVED_ANSWER = By.id("QuestionApproved");
 	public final By ELEMENT_ACTIVATED_ANSWER = By.id("QuestionShowAnswer");
 	public final String ELEMENT_NUMBER_ANSWER = "//a[text()='${question}']/../../../*//a[2]/p[text()='1']";
@@ -58,6 +59,10 @@ public class AnswerManageAnwser extends AnswerBase {
 	//More action menu
 	public final String ELEMENT_MORE_ANSWER_ACTION = "//*[text()='${answer}']/../../../../..//*[contains(text(), 'More Actions')]";
 	public final String ELEMENT_ACTION_ANSWER = "//a[contains(.,'${action}')]";
+	public final By ELEMENT_APPROVE_ANSWER_MENU = By.xpath("//a[contains(.,'Approve')]");
+	public final By ELEMENT_DISAPPROVE_ANSWER_MENU = By.xpath("//a[contains(.,'Disapprove')]");
+	public final By ELEMENT_ACTIVATE_ANSWER_MENU = By.xpath("//a[contains(.,'Activate')]");
+	public final By ELEMENT_DEACTIVATE_ANSWER_MENU = By.xpath("//a[contains(.,'Deactivate')]");
 
 	//vote answer
 	public final String ELEMENT_ANSWER_VOTE_ICON = "//*[text()='${answer}']/../../..//*[contains(@id, 'FAQVoteAnswerUp')]";
@@ -125,6 +130,7 @@ public class AnswerManageAnwser extends AnswerBase {
 			else//(this.plfVersion.equalsIgnoreCase("4.0"))
 				inputDataToFrameInFrame(ELEMENT_ANSWER_CONTENTFRAME_1, ELEMENT_ANSWER_CONTENTFRAME_2, answerContent,true,false);
 			switchToParentWindow();	
+
 		}
 		if (waitForAndGetElement(ELEMENT_APPROVED_ANSWER, 5000, 0, 2) != null){
 			if (approved){
@@ -248,7 +254,7 @@ public class AnswerManageAnwser extends AnswerBase {
 	public void approveAnswer(String answer, boolean approve){
 		click(ELEMENT_MORE_ANSWER_ACTION.replace("${answer}", answer));
 		if (approve){
-			WebElement app = waitForAndGetElement(ELEMENT_ACTION_ANSWER.replace("${action}", "Approve"));
+			WebElement app = waitForAndGetElement(ELEMENT_APPROVE_ANSWER_MENU);
 			if (app != null){
 				app.click();
 				Utils.pause(1000);
@@ -256,7 +262,7 @@ public class AnswerManageAnwser extends AnswerBase {
 				info("Answer has already approved");
 			}
 		} else {
-			WebElement dis_app = waitForAndGetElement(ELEMENT_ACTION_ANSWER.replace("${action}", "Disapprove"));
+			WebElement dis_app = waitForAndGetElement(ELEMENT_DISAPPROVE_ANSWER_MENU);
 			if (dis_app != null){
 				dis_app.click();
 				Utils.pause(1000);
@@ -274,7 +280,7 @@ public class AnswerManageAnwser extends AnswerBase {
 	public void activeAnswer(String answer, boolean active){
 		click(ELEMENT_MORE_ANSWER_ACTION.replace("${answer}", answer));
 		if (active){
-			WebElement act = waitForAndGetElement(ELEMENT_ACTION_ANSWER.replace("${action}", "Activate"));
+			WebElement act = waitForAndGetElement(ELEMENT_ACTIVATE_ANSWER_MENU);
 			if (act != null){
 				act.click();
 				Utils.pause(1000);
@@ -282,7 +288,7 @@ public class AnswerManageAnwser extends AnswerBase {
 				info("Answer has already activated");
 			}
 		} else {
-			WebElement de_act = waitForAndGetElement(ELEMENT_ACTION_ANSWER.replace("${action}", "Deactivate"));
+			WebElement de_act = waitForAndGetElement(ELEMENT_DEACTIVATE_ANSWER_MENU);
 			if (de_act != null){
 				de_act.click();
 				Utils.pause(1000);

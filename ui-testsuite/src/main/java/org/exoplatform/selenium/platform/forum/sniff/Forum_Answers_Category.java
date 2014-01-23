@@ -92,7 +92,7 @@ public class Forum_Answers_Category extends AnswerBase {
 	/**CaseId: 68955 -> Export/Import category
 	 * 
 	 */
-	@Test (groups = "pending")
+	@Test 
 	public void test03_ExportImportCategory(){
 		String categoryName = "Answercategory3";
 		String description = "Add new category for answer";
@@ -100,7 +100,7 @@ public class Forum_Answers_Category extends AnswerBase {
 		String questionName = "QuestionCategory3";
 		String questionContent = "Question of Answercategory3";
 		String fileName = "Answercategory3";
-		String fileFull = "fileName" + ".zip";
+		String fileFull = fileName + ".zip";
 		
 		info("Add new category and new question");
 		magCat.addNewCategoryInAnswer(categoryName, null, description, 2, userGroup, true, false);
@@ -110,9 +110,9 @@ public class Forum_Answers_Category extends AnswerBase {
 		info("Export category and new question");
 		magCat.exportAnswerCategory(fileName);
 		Utils.pause(3000);
-		assert checkFileExisted(fileFull);
+		assert checkFileExisted("TestOutput/" +fileFull);
 		
-		info("Deletet category and question");
+		info("Delete category and question");
 		magCat.deleteCategoryInAnswer(categoryName);
 		
 		info("Cut/paste file from TestOutput folder to TestData folder");

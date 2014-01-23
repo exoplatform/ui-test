@@ -26,8 +26,8 @@ public class Forum_Answers_Search extends AnswerBase {
 		initSeleniumTest();
 		driver.get(baseUrl);
 		magAc = new ManageAccount(driver);
-		magCat = new AnswerManageCategory(driver);
 		magQuest = new AnswerManageQuestion(driver, this.plfVersion);
+		magCat = new AnswerManageCategory(driver,this.plfVersion);
 		
 		magAc.signIn(DATA_USER1, DATA_PASS);
 		goToAnswer();

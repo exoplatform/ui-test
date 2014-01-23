@@ -58,7 +58,10 @@ public class AnswerManageComment extends AnswerBase {
 			rightClickOnElement(By.linkText(question));
 			click(magQuest.ELEMENT_COMMENT_LINK_IN_CONTEXT_MENU);
 		}
-		inputDataToFrameInFrame(ELEMENT_COMMENT_CONTENT_FRAME_1, ELEMENT_COMMENT_CONTENT_FRAME_2, comment, true);
+		if(this.plfVersion.equalsIgnoreCase("4.0"))
+			inputDataToFrameInFrame(ELEMENT_COMMENT_CONTENT_FRAME_1, ELEMENT_COMMENT_CONTENT_FRAME_2, comment, true);
+		else
+			inputDataToFrame(ELEMENT_COMMENT_CONTENT_FRAME_41, comment, true);
 		switchToParentWindow();
 		button.save();
 		if(!comment.contains("<br/>"))
@@ -78,7 +81,10 @@ public class AnswerManageComment extends AnswerBase {
 		click(ELEMENT_COMMENT_MORE_ACTION_LINK.replace("${comment}", comment));
 		Utils.pause(2000);
 		click(ELEMENT_EDIT_COMMENT_MENU);
-		inputDataToFrameInFrame(ELEMENT_COMMENT_CONTENT_FRAME_1, ELEMENT_COMMENT_CONTENT_FRAME_2, newComment, true);
+		if(this.plfVersion.equalsIgnoreCase("4.0"))
+			inputDataToFrameInFrame(ELEMENT_COMMENT_CONTENT_FRAME_1, ELEMENT_COMMENT_CONTENT_FRAME_2, newComment, true);
+		else
+			inputDataToFrame(ELEMENT_COMMENT_CONTENT_FRAME_41,newComment,true);
 		switchToParentWindow();
 		button.save();
 		waitForAndGetElement(ELEMENT_COMMENT_IN_QUESTION.replace("${comment}", newComment));

@@ -19,11 +19,11 @@ import org.openqa.selenium.interactions.Actions;
 public class AnswerManageCategory extends AnswerBase {
 
 	ForumPermission forumPer;
-	public AnswerManageCategory(WebDriver dr){
+	public AnswerManageCategory(WebDriver dr,String...plfVersion){
 		driver = dr;
 		button = new Button(driver);
 		alert = new ManageAlert(driver);
-		forumPer = new ForumPermission(driver);
+		forumPer = new ForumPermission(driver,plfVersion);
 	}
 
 
@@ -175,7 +175,7 @@ public class AnswerManageCategory extends AnswerBase {
 			boolean restricted, boolean moderator, boolean... opt){
 		action = new Actions(driver);
 		if(categoryName != null){
-			if (waitForAndGetElement(ELEMENT_CATEGORY_LINK.replace("${category}", categoryName),20000,0) != null){
+			if (waitForAndGetElement(ELEMENT_CATEGORY_LINK.replace("${category}", categoryName), DEFAULT_TIMEOUT,0) != null){
 				info("Edit category by right click");
 				rightClickOnElement(ELEMENT_CATEGORY_LINK.replace("${category}", categoryName));
 				click(ELEMENT_EDIT_CATEGORY_RIGHT_CLICK);
@@ -308,10 +308,9 @@ public class AnswerManageCategory extends AnswerBase {
 	 */
 	public void dragDropAnswerCategory(String source, String target){
 		action = new Actions(driver);
+		info("Drag category " + source + " to category " + target);
 		WebElement eSource = waitForAndGetElement(ELEMENT_CATEGORY_LINK.replace("${category}", source));
 		WebElement eTarget = waitForAndGetElement(ELEMENT_CATEGORY_LINK.replace("${category}", target));
-
-		info("Drag category " + source + " to category " + target);
 		action.dragAndDrop(eSource, eTarget).build().perform();
 		Utils.pause(2000);
 	}
