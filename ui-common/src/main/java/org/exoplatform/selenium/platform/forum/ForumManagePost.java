@@ -4,10 +4,8 @@ import static org.exoplatform.selenium.TestLogger.info;
 
 import org.exoplatform.selenium.Button;
 import org.exoplatform.selenium.ManageAlert;
-import org.exoplatform.selenium.Utils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 
 /**
  * Migrate from plf3.5
@@ -16,10 +14,10 @@ import org.openqa.selenium.WebElement;
  */
 
 public class ForumManagePost extends ForumBase {
-	
+
 	ForumPermission per;
 	ForumManageTopic magTopic;
-	
+
 	public ForumManagePost(WebDriver dr,String...plfVersion){
 		driver = dr;
 		this.plfVersion = plfVersion.length>0?plfVersion[0]:"4.0";
@@ -28,22 +26,23 @@ public class ForumManagePost extends ForumBase {
 		alert = new ManageAlert(driver,this.plfVersion);
 		magTopic = new ForumManageTopic(driver,this.plfVersion);
 	}
-	
+
 	//--------------post home screen--------------------------------------------------------
 
 	public By ELEMENT_REPLY_LOCK_BUTTON = By.xpath("//*[@class='clearfix topContainer']//div[@class='uiLockIcon btn disabled' and text()='Post Reply']");
 
 	public By ELEMENT_POST_REPLY_BUTTON = By.linkText("Post Reply");
 	public String ELEMENT_POST_EDIT_BUTTON = "//*[text()='${postContent}']/../../../..//a[text()='Edit' and @class='btn']";
-	
+
 	public String ELEMENT_POST_CHECKBOX = "//*[text()='${postContent}']/../../../../*//input[@type='checkbox']";
-	public By ELEMENT_MOVE_POST = By.xpath("//a[@class='ItemIcon MovePostIcon' and text()='Move']");
+	//public By ELEMENT_MOVE_POST = By.xpath("//a[@class='ItemIcon MovePostIcon' and text()='Move']");
+	public By ELEMENT_MOVE_POST = By.xpath("//*[@class='dropdown uiDropdownWithIcon actionIcon pull-right open']//*[@class='uiIconMove']");
 	public String ELEMENT_GO_TO_THE_LASTS_READ_POST_FORUM = "//a[text()='${forum}']/../..//a[@title='Go to the last read post']";
 	public String ELEMENT_PRIVATE_POST_BUTTON = "//*[text()='${topic}  ']/../../..//a[text()='Private']";
 
 	public By ELEMENT_APPROVE_POST = By.xpath("//a[text()='Approve']");
 	public String ELEMENT_APPROVE_POST_CHECK = "//a[@title='{$topic}']/ancestor::tr//input";
-	
+
 	public By ELEMENT_APPROVE_POST_BUTTON = By.linkText("Approve");
 	public By ELEMENT_CENSOR_POST = By.linkText("Censor");
 	public String ELEMENT_CENSOR_POST_CHECK = "//a[@title='{$post}']/ancestor::tr//input";
@@ -55,8 +54,8 @@ public class ForumManagePost extends ForumBase {
 	public String ELEMENT_PRIVATE_POST_MESSAGE = "//div[@class='uiForumPortlet forumBoxNotification']//div[@class='content' and contains(text(),'${post}')]";
 	public By ELEMENT_PRIVATE_POST_CLOSE_NOTIFICATION = By.xpath("//div[@class='uiForumPortlet forumBoxNotification']//i[@class='uiIconClose']");
 	public String ELEMENT_POST_QUOTE_TEXT = "//div[@class='contentQuote']/div[@class='textContent']/p[contains(text(),'${post}')]";
-	
-	
+
+
 	//--------------post reply screen-----------------------------------------------------------
 	public By ELEMENT_POST_TITLE = By.id("PostTitle");
 	public By ELEMENT_POST_MESSAGE_FRAME_1 = By.id("MessageContent___Frame");
@@ -64,9 +63,10 @@ public class ForumManagePost extends ForumBase {
 	public By ELEMENT_POST_POPUP_NEW = By.xpath("//span[@class='PopupTitle popupTitle' and text()='New Post']");
 	public By ELEMENT_POST_ICONS_TAB = By.xpath("//a[contains(text(), 'Icons and Smileys')]");
 	public By ELEMENT_POST_PRIVATE_POPUP = By.xpath("//span[@class='PopupTitle popupTitle' and text()='Private Post']");
-
+	public By ELEMENT_POST_PREVIEW_BUTTON = By.xpath("//button[text()='Preview']");
+	public By ELEMENT_POST_CLOSE_BUTTON = By.xpath("//*[@id='UIAddPostContainer']//button[text()='Close']");
 	public By ELEMENT_POST_CANCEL_BUTTON = By.xpath("//form[@id='UIPostForm']//button[text()='Cancel']");
-	
+
 	//--------------quick reply form-----------------------------------------------------------
 	public By ELEMENT_POST_QUICK_MESSAGE = By.id("UITopicDetail.label.Message");
 	public By ELEMENT_PREVIEW_BUTTON = By.linkText("Preview");
@@ -74,24 +74,24 @@ public class ForumManagePost extends ForumBase {
 	public By ELEMENT_POST_PREVIEW_POPUP = By.xpath("//span[@class='PopupTitle' and text()='ViewPost']");
 	public By ELEEMENT_QUICK_REPLY_FORM = By.id("QuickReply");
 
-	
+
 	//--------------edit post screen-----------------------------------------------------------
 	public By ELEMENT_POST_POPUP_EDIT = By.xpath("//span[@class='PopupTitle popupTitle' and text()='Edit Post']");
 	public By ELEMENT_POST_REASON = By.id("editReason");
-	
+
 	//--------------move post screen-----------------------------------------------------------
-	public By ELEMENT_POPUP_MOVE_POST = By.xpath("//span[@class='PopupTitle' and text()='Move Posts']");
-	
+	public By ELEMENT_POPUP_MOVE_POST = By.id("UIForumPopupWindow");
+
 	//Delete post
 	public String MSG_DELETE_POST = "Are you sure you want to delete this post ?";
 	public String ELEMENT_POST_DELETE_BUTTON = "//*[text()='${postContent}']/../../../..//a[text()='Delete' and @class='btn confirm']";
 	public By ELEMENT_POST_OK_DELETE = By.xpath("//span[text()='Are you sure you want to delete this post ?']/../../..//button[@class='btn actionOK' and text()='OK']");
 
 	//Quote post
-	
+
 	public String ELEMENT_QUOTE_POST = "//*[text()='${post}']/../../../..//a[text()='Quote' and @class='btn']";
 	/*-------------------------------Common function-------------------------------*/
-	
+
 	/** function: post new reply
 	 * @author lientm
 	 * @param title: title of reply
@@ -100,13 +100,13 @@ public class ForumManagePost extends ForumBase {
 	 * @param iconClass: icon
 	 * @param file: file attach
 	 */
-	public void postReply(String title, String message, String groupName, String iconClass, String... file){
+	public void postReply(String title, String message, String groupName, String iconClass, Object... opParams){
 		info("Make a post");
 		click(ELEMENT_POST_REPLY_BUTTON);
 		waitForAndGetElement(ELEMENT_POST_POPUP_NEW);
-		putDataPost(title, message, groupName, iconClass, file);
+		putDataPost(title, message, groupName, iconClass, opParams);
 	}
-	
+
 	/** Function make a private post
 	 * @author lientm
 	 * @param topic: topic that need add post
@@ -116,15 +116,15 @@ public class ForumManagePost extends ForumBase {
 	 * @param iconClass: icon
 	 * @param file: file attach
 	 */
-	public void privatePost(String topic, String title, String message, String groupName, String iconClass, String... file){
+	public void privatePost(String topic, String title, String message, String groupName, String iconClass, Object... opParams){
 		By private_but = By.xpath(ELEMENT_PRIVATE_POST_BUTTON.replace("${topic}", topic));
-		
+
 		info("Make a private post");
 		click(private_but);
 		waitForAndGetElement(ELEMENT_POST_PRIVATE_POPUP);
-		putDataPost(title, message, groupName, iconClass, file);
+		putDataPost(title, message, groupName, iconClass, opParams);
 	}
-	
+
 	/**function put data into add Post
 	 * @author lientm
 	 * @param title: title of reply
@@ -133,10 +133,11 @@ public class ForumManagePost extends ForumBase {
 	 * @param iconClass: icon
 	 * @param file: file attach
 	 */
-	public void putDataPost(String title, String message, String groupName, String iconClass, String... file){
+	public void putDataPost(String title, String message, String groupName, String iconClass, Object... opParams){
 		//magTopic = new ForumManageTopic(driver);
-		
-		
+
+		Boolean check = (Boolean)(opParams.length > 1 ? opParams[1] : false);
+		String file = (String) (opParams.length > 0 ? opParams[0]: "");		
 		if (title != null) {
 			type(ELEMENT_POST_TITLE, title, true);
 		}
@@ -147,10 +148,17 @@ public class ForumManagePost extends ForumBase {
 				inputDataToFrameInFrame(ELEMENT_POST_MESSAGE_FRAME_1, ELEMENT_POST_MESSAGE_FRAME_2, message,true,false);
 			switchToParentWindow();	
 		}
-		if(file.length > 0 && file[0] != "" && file[0] != null){
+		if (message != null) {
+			if(waitForAndGetElement(ELEMENT_POST_MESSAGE_FRAME_CKEDITOR, 5000,0)!=null)
+				inputDataToFrame(ELEMENT_POST_MESSAGE_FRAME_CKEDITOR, message, true);
+			else// if(this.plfVersion.equalsIgnoreCase("4.0"))
+				inputDataToFrameInFrame(ELEMENT_POST_MESSAGE_FRAME_1, ELEMENT_POST_MESSAGE_FRAME_2, message,true);
+			switchToParentWindow();	
+		}
+		if(file!=""){
 			click(ELEMENT_ATTACH_FILE);
 			waitForAndGetElement(ELEMENT_POPUP_UPLOAD_FILE);
-			attachFile(file[0]);
+			attachFile(file);
 			waitForElementNotPresent(ELEMENT_POPUP_UPLOAD_FILE);
 		}	
 		if (groupName != "" && groupName != null && iconClass != "" && iconClass != null){
@@ -158,11 +166,16 @@ public class ForumManagePost extends ForumBase {
 			magTopic.chooseIcon(groupName, iconClass);
 		}
 		//magTopic = new ForumManageTopic(driver);
-		click(magTopic.ELEMENT_SUBMIT_BUTTON);
-		waitForElementNotPresent(ELEMENT_POST_POPUP_NEW);
-		
-		waitForAndGetElement(ELEMENT_POST_CONTENT_TEXT.replace("${post}", message));
-		info("Post reply successfully");
+		if(check==true){
+			click(ELEMENT_POST_PREVIEW_BUTTON);
+		}
+		else{
+			click(magTopic.ELEMENT_SUBMIT_BUTTON);
+			waitForElementNotPresent(ELEMENT_POST_POPUP_NEW);
+
+			waitForAndGetElement(ELEMENT_POST_CONTENT_TEXT.replace("${post}", message));
+			info("Post reply successfully");
+		}
 	}
 
 	/** function: quick add new Reply
@@ -178,12 +191,12 @@ public class ForumManagePost extends ForumBase {
 			waitForTextPresent(message);
 		}
 	}
-	
+
 	/** function:  Review add new Reply
 	 * @author lientm
 	 * @param message: review content of reply
 	 */
-	
+
 	public void quickReplyAndPreview(String message, By...view){
 		type(ELEMENT_POST_QUICK_MESSAGE, message, true);
 		click(ELEMENT_PREVIEW_BUTTON);
@@ -203,7 +216,7 @@ public class ForumManagePost extends ForumBase {
 			info("Quick reply successfully");
 		}
 	}
-	
+
 	/** function: Edit a Post
 	 * @author lientm
 	 * @param postContent: content of post that needs to edit
@@ -216,7 +229,7 @@ public class ForumManagePost extends ForumBase {
 	 */	
 	public void editPost(String postContent, String title, String reason, String message, String groupName, String iconClass, String... file){
 		By EDIT_POST = By.xpath(ELEMENT_POST_EDIT_BUTTON.replace("${postContent}", postContent));
-		
+
 		info("Edit a post");
 		click(EDIT_POST);
 		waitForAndGetElement(ELEMENT_POST_POPUP_EDIT);
@@ -252,24 +265,24 @@ public class ForumManagePost extends ForumBase {
 		waitForAndGetElement(ELEMENT_POST_CONTENT_TEXT.replace("${post}", message));
 		info("Edit post successfully");
 	}
-	
+
 	/**function: delete a post
 	 * @author lientm
 	 * @param content: content of post that needs to delete
 	 */
 	public void deletePost(String content){
 		By DELETE_POST = By.xpath(ELEMENT_POST_DELETE_BUTTON.replace("${postContent}", content));
-		
+
 		info("Delete a post");
 		click(DELETE_POST);
 		waitForMessage(MSG_DELETE_POST);
 		click(ELEMENT_POST_OK_DELETE);
-		
+
 		waitForElementNotPresent(DELETE_POST);
 		waitForElementNotPresent(ELEMENT_POST_CONTENT_TEXT.replace("${post}", content));
 		info("Delete post successfully");
 	}
-	
+
 	/** function: mode a post to other topic
 	 * @author lientm
 	 * @param content: content of post
@@ -277,37 +290,18 @@ public class ForumManagePost extends ForumBase {
 	 */
 	public void movePost(String content, String destination){
 		By element_checkbox = By.xpath(ELEMENT_POST_CHECKBOX.replace("${postContent}", content));
-		
-		WebElement element = waitForAndGetElement(element_checkbox);
-		if (element.isSelected() == false){
-			click(element_checkbox);
-		}
+		check(element_checkbox,2);
 		info("Move post to topic " + destination);
-		waitForAndGetElement(ELEMENT_MODERATION);
 		click(ELEMENT_MODERATION);
-		waitForAndGetElement(ELEMENT_MOVE_POST);
 		click(ELEMENT_MOVE_POST);
 		waitForAndGetElement(ELEMENT_POPUP_MOVE_POST);
-		String[] temp;			 
-		/* Delimiter */
-		String delimiter = "/";
-
-		temp = destination.split(delimiter);
-		/* Go to group */
-		for(int i =0; i < temp.length ; i++){
-			info("Go to " + temp[i]);
-			click(By.xpath("//div[@class='NodeLabel']//a[text()='"+temp[i]+"']"));
-			Utils.pause(500);
-		}
-		
+		click(ELEMENT_DATA_ORIGINAL_TITLE.replace("${title}",destination));
 		waitForElementNotPresent(ELEMENT_POPUP_MOVE_POST);
-		String links[] = destination.split("/");
-		int length = links.length;
-		waitForAndGetElement(By.xpath("//a[@title='" + links[length - 2] + "']/../div[@title='" + links[length - 1] + "']"));
+		waitForElementNotPresent(element_checkbox);
 		info("Move post successfully");
 	}
-	
-	
+
+
 	/** function approve a post
 	 * @author thuntn
 	 */
@@ -338,7 +332,7 @@ public class ForumManagePost extends ForumBase {
 		waitForElementNotPresent(ELEMENT_APPROVE_POST_BUTTON);
 		info("--Approve a topic successfully--");
 	}
-	
+
 	/**Quote a post
 	 * @author thuntn
 	 * @param title
@@ -346,15 +340,15 @@ public class ForumManagePost extends ForumBase {
 	 */
 	public void quotePost(String post, String title, String content){
 		info("Quote a post");
-		
+
 		click(ELEMENT_QUOTE_POST.replace("${post}", post));
-		
+
 		type(ELEMENT_POST_TITLE, title,true);
 		inputDataToFrameInFrame(ELEMENT_POST_MESSAGE_FRAME_1, ELEMENT_POST_MESSAGE_FRAME_2, content, false);
 		switchToParentWindow();	
-		
+
 		click(magTopic.ELEMENT_SUBMIT_BUTTON);
-		
+
 		waitForElementNotPresent(magTopic.ELEMENT_SUBMIT_BUTTON);
 		waitForAndGetElement(ELEMENT_POST_CONTENT_TEXT.replace("${post}", content));
 		waitForAndGetElement(ELEMENT_POST_QUOTE_TEXT.replace("${post}", post));

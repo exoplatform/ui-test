@@ -118,9 +118,12 @@ public class TestBase {
 		termsAndConditions(opParams);
 		info("End of term and conditions");
 
-		if(!firstTimeLogin)
+		if(!firstTimeLogin){
+			info("This is not the first time login");
 			checkPLFVersion();
+		}
 		else{
+			info("This is the first time login");
 			driver.manage().window().maximize();
 			driver.navigate().refresh();
 			Utils.pause(2000);

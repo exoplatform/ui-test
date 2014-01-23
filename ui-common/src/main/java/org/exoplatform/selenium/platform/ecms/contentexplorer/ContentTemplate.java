@@ -52,7 +52,7 @@ public class ContentTemplate extends EcmsBase{
 	public final By ELEMENT_WEBCONTENT_ILLUSTRATION_TAB = By.xpath("//*[contains(text(),'Illustration')]");
 	public final By ELEMENT_WEBCONTENT_UPLOAD_FRAME = By.xpath("//*[contains(@name,'uploadIFrame')]");
 	//public final By ELEMENT_WEBCONTENT_FILE_IMAGE = By.name("file");
-	public final By ELEMENT_WEBCONTENT_SUMMARY_FRAME = By.xpath("//div[@id='cke_exo:summary']//iframe");
+	public final By ELEMENT_WEBCONTENT_SUMMARY_FRAME = By.xpath("//*[@id='cke_exo:summary']//iframe");
 	public final By ELEMENT_WEBCONTENT_SUMMARY_FRAME_41 = By.xpath("//div[contains(@id,'cke_htmlData')]//iframe");
 	public final By ELEMENT_WEBCONTENT_ADVANCE_TAB = By.xpath("//*[contains(text(),'Advanced')]");
 	public final By ELEMENT_WEBCONTENT_CSS_TEXTAREA = By.xpath("//textarea[contains(@id,'ContentCSS')]");
@@ -261,15 +261,13 @@ public class ContentTemplate extends EcmsBase{
 			selectOption(ELEMENT_PIC_LANG, optionLang);
 		}
 		if (cont != ""){
-			if(this.plfVersion.equalsIgnoreCase("4.0"))
-				inputDataToFrame(ELEMENT_WEBCONTENT_CONTENT_FRAME,cont);
-			else if(this.plfVersion.equalsIgnoreCase("4.1"))
-				inputDataToFrame(ELEMENT_WEBCONTENT_CONTENT_FRAME,cont,true);
+			inputDataToFrame(ELEMENT_WEBCONTENT_CONTENT_FRAME,cont,true);
 			switchToParentWindow();
 		}
 		if (sum!="" || img !=""){
+			click(ELEMENT_WEBCONTENT_ILLUSTRATION_TAB);
+			Utils.pause(3000);
 			if (img!=""){
-				click(ELEMENT_WEBCONTENT_ILLUSTRATION_TAB);
 				//driver.switchTo().frame(waitForAndGetElement(ELEMENT_WEBCONTENT_UPLOAD_FRAME, 3000, 1, 2));
 				//type(ELEMENT_WEBCONTENT_FILE_IMAGE, Utils.getAbsoluteFilePath(img), false);			
 				WebElement upload = waitForAndGetElement(ELEMENT_UPLOAD_NAME, DEFAULT_TIMEOUT, 0, 2);

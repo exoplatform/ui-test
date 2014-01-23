@@ -88,12 +88,13 @@ public class ManageAccount extends PlatformBase {
 	public void signOut(){
 		//mouseOverAndClick(ELEMENT_ACCOUNT_NAME_LINK);
 		//mouseOver(ELEMENT_ACCOUNT_NAME_LINK, true);
+		info("Sign out");
 		for(int repeat=0;; repeat ++){
 			if (repeat > 1){
 				mouseOverAndClick(ELEMENT_ACCOUNT_NAME_LINK);
 				break;
 			}
-			mouseOver(ELEMENT_ACCOUNT_NAME_LINK, true);
+			click(ELEMENT_ACCOUNT_NAME_LINK);
 			if (waitForAndGetElement(ELEMENT_SIGN_OUT_LINK, 5000, 0) != null){
 				info("Element " + ELEMENT_SIGN_OUT_LINK + "... is displayed");
 				break;
