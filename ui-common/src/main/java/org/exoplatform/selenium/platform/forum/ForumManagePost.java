@@ -20,13 +20,14 @@ public class ForumManagePost extends ForumBase {
 	ForumPermission per;
 	ForumManageTopic magTopic;
 	
-	public ForumManagePost(WebDriver dr){
+	public ForumManagePost(WebDriver dr,String...plfVersion){
 		driver = dr;
-		per = new ForumPermission(driver);
-		button = new Button(driver);
-		alert = new ManageAlert(driver);
-		magTopic = new ForumManageTopic(driver);
-	}
+		this.plfVersion = plfVersion.length>0?plfVersion[0]:"4.0";
+		per = new ForumPermission(driver,this.plfVersion);
+		button = new Button(driver,this.plfVersion);
+		alert = new ManageAlert(driver,this.plfVersion);
+		magTopic = new ForumManageTopic(driver,this.plfVersion);
+	} 
 	
 	//--------------post home screen--------------------------------------------------------
 

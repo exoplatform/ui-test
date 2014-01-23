@@ -28,13 +28,13 @@ public class Forum_Answers_Setting extends AnswerBase {
 	
 	@BeforeMethod
 	public void setUpBeforeTest(){
-		getDriverAutoOpenWindow();
+		initSeleniumTest();
 		driver.get(baseUrl);
-		magAc = new ManageAccount(driver);
+		magAc = new ManageAccount(driver, this.plfVersion);
 		magCat = new AnswerManageCategory(driver);
-		forumCat = new ForumManageCategory(driver);
-		forum = new ForumManageForum(driver);
-		question = new AnswerManageQuestion(driver);
+		forumCat = new ForumManageCategory(driver, this.plfVersion);
+		forum = new ForumManageForum(driver, this.plfVersion);
+		question = new AnswerManageQuestion(driver, this.plfVersion);
 		pageE = new PageEditor(driver);
 		magAc.signIn("john", DATA_PASS);
 		goToAnswer();
@@ -52,23 +52,23 @@ public class Forum_Answers_Setting extends AnswerBase {
 	@Test
 	public void test01_SettingAnswerPortlet(){
 		//category1 in answer
-		String categoryName1 = "Answersetting1";
+		String categoryName1 = "Answersetting689451";
 		String description1 = "Add new category for answer";
 		String[] userGroup1 = {"demo"};
 		
 		//category2 in answer
-		String categoryName2 = "Answersetting2";
+		String categoryName2 = "Answersetting689452";
 		String description2 = "Add new category2 for answer";
 		String[] userGroup2 = {"Platform/Content Management"};
 		
 		//question in category1
-		String questionName = "Questionsetting1";
+		String questionName = "Questionsetting689451";
 		String questionContent = "Question of Questionsetting1";
 		
 		//category and forum in forum
-		String title = "ForumCat1";
+		String title = "ForumCat689451";
 		String descriptionForum = "Add new category for forum";
-		String forumName = "Forum1";
+		String forumName = "Forum689451";
 		String content = "Question move";		
 	
 		info("Add 2 category at root ans submit a question for category1");

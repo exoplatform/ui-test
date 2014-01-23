@@ -29,13 +29,13 @@ public class Forum_FAQ extends FAQ {
 	@BeforeMethod
 	public void setUpBeforeTest(){
 		initSeleniumTest();
-		magAc = new ManageAccount(driver);
+		magAc = new ManageAccount(driver, this.plfVersion);
 		magCat = new AnswerManageCategory(driver);
-		magQuest = new AnswerManageQuestion(driver);
-		magAns = new AnswerManageAnwser(driver);
-		button = new Button(driver);
-		pageE = new PageEditor(driver);
-		magAc.signIn("john", DATA_PASS);
+		magQuest = new AnswerManageQuestion(driver,this.plfVersion);
+		magAns = new AnswerManageAnwser(driver,this.plfVersion);
+		button = new Button(driver, this.plfVersion);
+		pageE = new PageEditor(driver, this.plfVersion);
+		magAc.signIn(DATA_USER1,DATA_PASS);
 		goToAnswer();
 	}
 
@@ -70,8 +70,8 @@ public class Forum_FAQ extends FAQ {
 		waitForAndGetElement(elementQuest);
 		
 		info("Click question to view answer");
-		goToFQAHome();
-		click(elementQuest);
+		//goToFQAHome();
+		//click(elementQuest);
 		waitForAndGetElement(ELEMENT_FAQ_ANSWER.replace("${ans}", answerContent));
 		
 		deleteFaqPortlet();

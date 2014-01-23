@@ -16,7 +16,8 @@ import org.testng.Assert;
 
 public class UserGroupManagement extends PlatformBase {
 
-	public UserGroupManagement(WebDriver dr){
+	public UserGroupManagement(WebDriver dr,String...plfVersion){
+		this.plfVersion = plfVersion.length>0?plfVersion[0]:"4.0";
 		driver = dr;
 		naviTool = new NavigationToolbar(driver);
 

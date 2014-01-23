@@ -22,7 +22,8 @@ public class AnswerManageAnwser extends AnswerBase {
 	ManageAccount magAc;
 
 	HomePageActivity hpAct;
-	public AnswerManageAnwser(WebDriver dr){
+	public AnswerManageAnwser(WebDriver dr,String...plfVersion){
+		this.plfVersion = plfVersion.length>0?plfVersion[0]:"4.0";
 		driver = dr;
 		button = new Button(driver);
 		alert = new ManageAlert(driver);
@@ -38,7 +39,7 @@ public class AnswerManageAnwser extends AnswerBase {
 	public final By ELEMENT_ANSWER_LINK_IN_QUESTION = By.xpath("//*[@class='questionAction']//*[contains(text(),'Answer')]");
 	public final By ELEMENT_ANSWER_CONTENTFRAME_1 = By.xpath("//iframe[@id='QuestionRespone___Frame']");
 	public final By ELEMENT_ANSWER_CONTENTFRAME_2 = By.xpath("//td[@id='xEditingArea']/iframe");
-	public final By ELEMENT_ANSWER_CONTENTFRAME_41 = By.xpath("//*[@id='cke_QuestionRespone']//iframe");
+	public final By ELEMENT_ANSWER_MESSAGE_FRAME_CKEDITOR = By.xpath("//iframe[@class='cke_wysiwyg_frame cke_reset']");//By.id("scayt_0");
 	public final By ELEMENT_APPROVED_ANSWER = By.id("QuestionApproved");
 	public final By ELEMENT_ACTIVATED_ANSWER = By.id("QuestionShowAnswer");
 	public final String ELEMENT_NUMBER_ANSWER = "//a[text()='${question}']/../../../*//a[2]/p[text()='1']";
@@ -119,8 +120,11 @@ public class AnswerManageAnwser extends AnswerBase {
 				selectOption(ELEMENT_ANSWER_LANGUAGE, language);
 		}
 		if (answerContent != null){
-			inputDataToFrameInFrame(ELEMENT_ANSWER_CONTENTFRAME_1, ELEMENT_ANSWER_CONTENTFRAME_2, answerContent, true);
-			switchToParentWindow();
+			if(this.plfVersion.equalsIgnoreCase("4.1"))
+				inputDataToFrame(ELEMENT_ANSWER_MESSAGE_FRAME_CKEDITOR, answerContent, true,false);
+			else//(this.plfVersion.equalsIgnoreCase("4.0"))
+				inputDataToFrameInFrame(ELEMENT_ANSWER_CONTENTFRAME_1, ELEMENT_ANSWER_CONTENTFRAME_2, answerContent,true,false);
+			switchToParentWindow();	
 		}
 		if (waitForAndGetElement(ELEMENT_APPROVED_ANSWER, 5000, 0, 2) != null){
 			if (approved){

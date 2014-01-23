@@ -24,17 +24,18 @@ public class ForumManageTopic extends ForumBase {
 	ForumManageCategory magCat;
 	UserGroupManagement userGroup;
 	ForumManagePost mngPost;
-
-	public ForumManageTopic(WebDriver dr){
+	NavigationToolbar naviToolbar;
+	public ForumManageTopic(WebDriver dr,String...plfVersion){
+		this.plfVersion = plfVersion.length>0?plfVersion[0]:"4.0";
 		driver = dr;
-
-		userGroup = new UserGroupManagement(driver);
-		per = new ForumPermission(driver);
-		magCat = new ForumManageCategory(driver);
-		magFor = new ForumManageForum(driver);
-		button = new Button(driver);
-		alert = new ManageAlert(driver);
-		navTool = new NavigationToolbar(driver);
+		userGroup = new UserGroupManagement(driver,this.plfVersion);
+		per = new ForumPermission(driver,this.plfVersion);
+		magCat = new ForumManageCategory(driver,this.plfVersion);
+		magFor = new ForumManageForum(driver,this.plfVersion);
+		button = new Button(driver,this.plfVersion);
+		alert = new ManageAlert(driver,this.plfVersion);
+		naviToolbar = new NavigationToolbar(driver,this.plfVersion);
+		navTool = new NavigationToolbar(driver,this.plfVersion);
 	}
 
 	//----------------topic home screen---------------------------------------------------
@@ -89,6 +90,7 @@ public class ForumManageTopic extends ForumBase {
 	public By ELEMENT_TOPIC_ADD_TYPE_POPUP = By.xpath("//span[@class='PopupTitle' and text()='Topic Type']");
 	public By ELEMENT_TOPIC_TYPE_NAME = By.id("topicTypeName");
 	public By ELEMENT_CANCEL_ADD_TYPE = By.xpath(".//*[@id='UIAddTopicTypeForm']/div[3]/a[text()='Cancel']");
+	public By ELEMENT_TOPIC_MESSAGE_FRAME_CKEDITOR = By.xpath("//iframe[@class='cke_wysiwyg_frame cke_reset']");//By.id("scayt_0");
 
 	//------------------edit topic screen------------------------------------------------------
 	public By ELEMENT_TOPIC_EDIT_POPUP = By.xpath("//span[@class='PopupTitle popupTitle' and text()='Edit Topic']");
@@ -191,7 +193,10 @@ public class ForumManageTopic extends ForumBase {
 		}
 
 		if (message != "" && message != null){
-			inputDataToFrameInFrame(ELEMENT_TOPIC_MESSAGE_FRAME_1, ELEMENT_TOPIC_MESSAGE_FRAME_2, message, true,false);
+			if(this.plfVersion.equalsIgnoreCase("4.1"))
+				inputDataToFrame(ELEMENT_TOPIC_MESSAGE_FRAME_CKEDITOR, message, true,false);
+			else//(this.plfVersion.equalsIgnoreCase("4.0"))
+				inputDataToFrameInFrame(ELEMENT_TOPIC_MESSAGE_FRAME_1, ELEMENT_TOPIC_MESSAGE_FRAME_2, message,true,false);
 			switchToParentWindow();	
 		}
 		if(file.length > 0 && file[0] != "" && file[0] != null){

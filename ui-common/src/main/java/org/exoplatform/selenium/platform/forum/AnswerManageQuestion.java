@@ -23,7 +23,8 @@ public class AnswerManageQuestion extends AnswerBase {
 	AnswerManageCategory cat;
 	ManageAccount magAc;
 
-	public AnswerManageQuestion(WebDriver dr){
+	public AnswerManageQuestion(WebDriver dr,String...plfVersion){
+		this.plfVersion = plfVersion.length>0?plfVersion[0]:"4.0";
 		driver = dr;
 		cat = new AnswerManageCategory(driver);
 		button = new Button(driver);
@@ -55,8 +56,8 @@ public class AnswerManageQuestion extends AnswerBase {
 	public final By ELEMENT_APPROVE_QUESTION_EDIT = By.id("IsApproved");
 	public final By ELEMENT_ACTIVATE_QUESTION_EDIT = By.id("IsActivated");
 	public final By ELEMENT_QUESTION_CONTENTFRAME_1= By.xpath("//iframe[@id='Question___Frame']");
-	public final By ELEMENT_QUESTION_CONTENTFRAME_2= By.xpath("//td[@id='xEditingArea']/iframe");
-	public final By ELEMENT_QUESTION_CONTENTFRAME_41 = By.xpath("//*[@id='cke_Question']//iframe");
+	public final By ELEMENT_QUESTION_CONTENTFRAME_2= By.xpath("//td[@id='xEditingArea']/iframe");	
+	public final By ELEMENT_QUESTION_MESSAGE_FRAME_CKEDITOR = By.xpath("//iframe[@class='cke_wysiwyg_frame cke_reset']");//By.id("scayt_0");
 	public final By ELEMENT_QUESTION_AUTHOR = By.id("Author");
 	public final By ELEMENT_QUESTION_EMAIL = By.id("EmailAddress");
 	public final String ELEMENT_RATE_QUESTION = "//*[contains(@class, 'avgRatingImages')]/i[@data-index='${rate}']";
@@ -173,8 +174,11 @@ public class AnswerManageQuestion extends AnswerBase {
 			type(ELEMENT_QUESTION_NAME, questionName, true);
 		}
 		if (content != null){
-			inputDataToFrameInFrame(ELEMENT_QUESTION_CONTENTFRAME_1, ELEMENT_QUESTION_CONTENTFRAME_2, content, true,false);
-			switchToParentWindow();
+			if(this.plfVersion.equalsIgnoreCase("4.1"))
+				inputDataToFrame(ELEMENT_QUESTION_MESSAGE_FRAME_CKEDITOR, content, true,false);
+			else//(this.plfVersion.equalsIgnoreCase("4.0"))
+				inputDataToFrameInFrame(ELEMENT_QUESTION_CONTENTFRAME_1, ELEMENT_QUESTION_CONTENTFRAME_2, content,true,false);
+			switchToParentWindow();	
 		}
 		if (author != null ){
 			type(ELEMENT_QUESTION_AUTHOR, author, true);

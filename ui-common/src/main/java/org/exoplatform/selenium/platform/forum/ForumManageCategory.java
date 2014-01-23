@@ -24,15 +24,18 @@ public class ForumManageCategory extends ForumBase {
 
 	ForumPermission frumPer;
 	ManageAccount account;
-
-	public ForumManageCategory(WebDriver dr){
+	ManageAlert magAlert;
+	public ForumManageCategory(WebDriver dr,String...plfVersion){
+		this.plfVersion = plfVersion.length>0?plfVersion[0]:"4.0";
 		driver = dr;
-		frumPer = new ForumPermission(driver);
-		button = new Button(driver);
-		alert = new ManageAlert(driver);
-		per = new PlatformPermission(driver);
-		account = new ManageAccount(driver);
+		frumPer = new ForumPermission(driver,this.plfVersion);
+		button = new Button(driver,this.plfVersion);
+		alert = new ManageAlert(driver,this.plfVersion);
+		per = new PlatformPermission(driver,this.plfVersion);
+		account = new ManageAccount(driver,this.plfVersion);
+		magAlert = new ManageAlert(dr, plfVersion);
 	}
+
 
 	//------------category home screen----------------------------------------------------------------------
 	public final String ELEMENT_CATEGORY = "//*[@class='nameForum']//strong[text()='${categoryName}']";	
@@ -52,6 +55,7 @@ public class ForumManageCategory extends ForumBase {
 	public final String MSG_CATEGORY_NO_EXIST = "This category no longer exists.";
 	public final By ELEMENT_CATEGORY_NO_EXIST_OK_BUTTON = By.xpath("//span[contains(text(),'This category no longer exists.')]/../../..//*[text()='OK']");
 	public final By ELEMENT_CHECKBOX_ALL_CATEGORY = By.name("checkAll");
+	public final By ELEMENT_DELETE_CATEGORY_PLF4_1 = By.xpath("//a[@class='confirm' and contains(text(),'Delete')]");
 
 	//------------add category form------------------------------------------------------------------------
 	public final By ELEMENT_POPUP_ADD_CATEGORY = By.xpath("//span[@class='PopupTitle popupTitle' and text()='Category']");
@@ -246,9 +250,14 @@ public class ForumManageCategory extends ForumBase {
 		click(ELEMENT_MANAGE_CATEGORY);
 		Utils.pause(1000);
 		info("Delete category");
-		click(ELEMENT_DELETE_CATEGORY);
-		Utils.pause(1000);
-		click(ELEMENT_OK_DELETE_CATEGORY);
+		if(plfVersion =="4.0"){
+			click(ELEMENT_DELETE_CATEGORY);
+			click(ELEMENT_OK_DELETE_CATEGORY);
+		}
+		else{// if (plfVersion =="4.1"){
+			click (ELEMENT_DELETE_CATEGORY_PLF4_1);
+			click(ELEMENT_OK_DELETE_CATEGORY);
+		}		
 		if(check == true){
 			//waitForTextNotPresent(title);
 			waitForElementNotPresent(By.linkText(title));

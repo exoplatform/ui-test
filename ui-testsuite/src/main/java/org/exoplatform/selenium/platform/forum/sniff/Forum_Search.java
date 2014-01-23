@@ -29,11 +29,11 @@ public class Forum_Search extends ForumBase {
 	@BeforeMethod
 	public void setUpBeforeTest(){
 		initSeleniumTest();
-		magAc = new ManageAccount(driver);
-		cat = new ForumManageCategory(driver);
-		forum = new ForumManageForum(driver);
-		magtopic = new ForumManageTopic(driver);
-		post = new ForumManagePost(driver);
+		magAc = new ManageAccount(driver, this.plfVersion);
+		cat = new ForumManageCategory(driver, this.plfVersion);
+		forum = new ForumManageForum(driver, this.plfVersion);
+		magtopic = new ForumManageTopic(driver, this.plfVersion);
+		post = new ForumManagePost(driver, this.plfVersion);
 		
 		magAc.signIn("john", DATA_PASS);
 		goToForums();
