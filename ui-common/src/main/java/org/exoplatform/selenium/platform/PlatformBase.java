@@ -410,7 +410,7 @@ public class PlatformBase extends TestBase {
 	public final By ELEMENT_ADD_NODE_LINK = By.linkText("Add Node");
 	public final By ELEMENT_PAGE_SELECTOR_TAB = By.linkText("Page Selector");
 	public final By ELEMENT_INPUT_PAGE_NAME = By.name("pageName");
-	public final By ELEMENT_INPUT_PAGE_TITLE = By.id("title");
+	public final By ELEMENT_INPUT_PAGE_TITLE = By.id("pageTitle");
 	public final By ELEMENT_CREATE_PAGE_LINK = By.xpath("//*[contains(@class, 'uiIconAddPage')]");
 	public final By ELEMENT_SEARCH_SELECTOR_PAGE_LINK = By.className("uiIconSelectPage");
 	public final By ELEMENT_CLEAR_SELECTOR_PAGE = By.className("uiIconDelete");
@@ -636,35 +636,37 @@ public class PlatformBase extends TestBase {
 	public final By ELEMENT_GETTING_SUGGESTIONS = By.xpath("//div[@class='uiBox uiSuggestions']");
 
 	//Calendar gadget
-	public static By ELEMENT_CALENDAR_GADGET_SETTING_ICON = By.xpath("//a[@class='settingsLink actionIcon pull-right ']//i[@class='uiIconSetting uiIconLightGray']");
-	public static By ELEMENT_SEARCH_IN_CALENDAR_GADGET_SETTING = By.xpath("//input[@class='PLFcalendarSearchKey']");
-	public static By ELEMENT_CALENDAR_GADGET_TODAY_LABEL = By.xpath("//div[@class='currentDateContainer']//a[contains(text(), 'Today')]");
-	public static By ELEMENT_CALENDAR_GADGET_NEXTDAY_ARROW = By.xpath("//a[@class='actionIcon nextDate pull-right']//*[@class='uiIconMiniArrowRight uiIconLightGray']");
-	public static By ELEMENT_CALENDAR_GADGET_PREVIOUSDAY_ARROW = By.xpath("//*[@class='actionIcon prevDate pull-left']//*[@class='uiIconMiniArrowLeft uiIconLightGray']");
-	public static By ELEMENT_CALENDAR_GADGET_TOMORROW_LABEL = By.xpath("//*[@class='currentDateContainer']//a[contains(text(),Tomorrow)]");
-	public static By ELEMENT_CALENDAR_GADGET_YESTERDAY_LABEL = By.xpath("//div[@class='currentDateContainer']//a[contains(text(),Yesterday)]");
-	public static String ELEMENT_CALENDAR_GADGET_SETTING_LINK_ITEM = "//span[contains(text(),'${calendar}')]";
-	public static By ELEMENT_CALENDAR_GADGET_VERIFIED_TEXT_LABEL = By.xpath("//*[ text()='Displayed Calendars:']");
-	public static By ELEMENT_ADD_CALENDAR_IN_ADDITION_LIST = By.xpath("//i[contains(@class,'uiIconAdd')]");
-	public static String ELEMENT_CALENDAR_IN_CALENDAR_GADGET = "//span[@class='calendarName asparagus' and@title='${calendar}']";
-	public static String ELEMENT_DELETE_CALENDAR_ICON = "//span[contains(text(),'${calendar}')] /..//*[@class='uiIconDel']";
-	public static String ELEMENT_CALENDAR_IN_ADDITIONAL_LIST = "//a[text()='${calendar}']";
+	public final By ELEMENT_CALENDAR_GADGET_SETTING_ICON = By.xpath("//a[@class='settingsLink actionIcon pull-right ']//i[@class='uiIconSetting uiIconLightGray']");
+	public final By ELEMENT_SEARCH_IN_CALENDAR_GADGET_SETTING = By.xpath("//input[@class='PLFcalendarSearchKey']");
+	public final By ELEMENT_CALENDAR_GADGET_TODAY_LABEL = By.xpath("//div[@class='currentDateContainer']//a[contains(text(), 'Today')]");
+	public final By ELEMENT_CALENDAR_GADGET_NEXTDAY_ARROW = By.xpath("//a[@class='actionIcon nextDate pull-right']//*[@class='uiIconMiniArrowRight uiIconLightGray']");
+	public final By ELEMENT_CALENDAR_GADGET_PREVIOUSDAY_ARROW = By.xpath("//*[@class='actionIcon prevDate pull-left']//*[@class='uiIconMiniArrowLeft uiIconLightGray']");
+	public final By ELEMENT_CALENDAR_GADGET_TOMORROW_LABEL = By.xpath("//*[@class='currentDateContainer']//a[contains(text(),Tomorrow)]");
+	public final By ELEMENT_CALENDAR_GADGET_YESTERDAY_LABEL = By.xpath("//div[@class='currentDateContainer']//a[contains(text(),Yesterday)]");
+	public final String ELEMENT_CALENDAR_GADGET_SETTING_LINK_ITEM = "//span[contains(text(),'${calendar}')]";
+	public final By ELEMENT_CALENDAR_GADGET_VERIFIED_TEXT_LABEL = By.xpath("//*[ text()='Displayed Calendars:']");
+	public final By ELEMENT_ADD_CALENDAR_IN_ADDITION_LIST = By.xpath("//i[contains(@class,'uiIconAdd')]");
+	public final String ELEMENT_CALENDAR_IN_CALENDAR_GADGET = "//span[@class='calendarName asparagus' and@title='${calendar}']";
+	public final String ELEMENT_DELETE_CALENDAR_ICON = "//span[contains(text(),'${calendar}')] /..//*[@class='uiIconDel']";
+	public final String ELEMENT_CALENDAR_IN_ADDITIONAL_LIST = "//a[text()='${calendar}']";
 
 	//Create functions
-	public static By ELEMENT_ADD_ICON = By.xpath("//*[@class='uiIconPLF24x24Add']");
-	public static By ELEMENT_ADD_EVENT_TASK_ICON = By.xpath("//*[@class='ToolBarActivityIcon']/*[@class='uiIconPLFEventTask']");
-	public static By ELEMENT_ADD_POLL_ICON = By.xpath("//*[@class='ToolBarActivityIcon']/*[@class='uiIconPoll']");
-	public static By ELEMENT_ADD_TOPIC_ICON = By.xpath("//*[@class='ToolBarActivityIcon']/*[@class='uiIconUIForms']");
-	public static By ELEMENT_ADD_UPLOAD_FILE_ICON = By.xpath("//*[@class='ToolBarActivityIcon']/*[@class='uiIconUpload']");
-	public static By ELEMENT_ADD_WIKI_ICON = By.xpath("//*[@class='ToolBarActivityIcon']/*[@class='uiIconWikiWiki']");
-	public static By ELEMENT_ADD_EVENT_TASK_FORM = By.id("UICreateEvent");
-	public static By ELEMENT_ADD_POLL_FORM = By.id("UICreatePoll");
-	public static By ELEMENT_ADD_TOPIC_FORM = By.id("UICreateTopic");
-	public static By ELEMENT_ADD_WIKI_FORM = By.id("UICreateForm");
-	public static By ELEMENT_UPLOAD_FILE_FORM = By.id("UploadFileSelectorPopUpWindow");
+	public final By ELEMENT_ADD_ICON = By.xpath("//*[@class='uiIconPLF24x24Add']");
+	public final By ELEMENT_ADD_EVENT_TASK_ICON = By.xpath("//*[@class='ToolBarActivityIcon']/*[@class='uiIconPLFEventTask']");
+	public final By ELEMENT_ADD_POLL_ICON = By.xpath("//*[@class='ToolBarActivityIcon']/*[@class='uiIconPoll']");
+	public final By ELEMENT_ADD_TOPIC_ICON = By.xpath("//*[@class='ToolBarActivityIcon']/*[@class='uiIconUIForms']");
+	public final By ELEMENT_ADD_UPLOAD_FILE_ICON = By.xpath("//*[@class='ToolBarActivityIcon']/*[@class='uiIconUpload']");
+	public final By ELEMENT_ADD_WIKI_ICON = By.xpath("//*[@class='ToolBarActivityIcon']/*[@class='uiIconWikiWiki']");
+	public final By ELEMENT_ADD_EVENT_TASK_FORM = By.id("UICreateEvent");
+	public final By ELEMENT_ADD_POLL_FORM = By.id("UICreatePoll");
+	public final By ELEMENT_ADD_TOPIC_FORM = By.id("UICreateTopic");
+	public final By ELEMENT_ADD_WIKI_FORM = By.id("UICreateForm");
+	public final By ELEMENT_UPLOAD_FILE_FORM = By.id("UploadFileSelectorPopUpWindow");
+	public final By ELEMENT_SELECT_FORUM = By.xpath("//*[@class='titleForum' and (contains(text(),'Select Forum') or contains(text(),'Select a Forum'))]");
+	public final String ELEMENT_SELECT_FORUM_ITEM = "//*[@class='item forum']//*[text()='${forumName}']";
 
 	//Help functions
-	public static By ELEMENT_HELP_ICON = By.xpath("//*[@class='uiIconPLF24x24Help']");
+	public final By ELEMENT_HELP_ICON = By.xpath("//*[@class='uiIconPLF24x24Help']");
 
 	//Upload file
 	public final By ELEMENT_FILE_LINK = By.xpath("//i[@class='uiIconSocUIDocActivityComposer uiIconSocLightGray']");

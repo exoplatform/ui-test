@@ -69,16 +69,12 @@ public class ForumPermission extends ForumBase {
 		case 1:
 			info("Set permission by type directly");
 			//			type(per.ELEMENT_PERMISSION_INPUT, userGroup[0], true);
-			if(this.plfVersion.equals("4.0"))
-			{
-				waitForAndGetElement(per.ELEMENT_PERMISSION_INPUT).sendKeys(userGroup[0]);
-				break;
-			}
-			else if(this.plfVersion.equals("4.1")){
-				waitForAndGetElement(per.ELEMENT_PERMISSION_INPUT_PLF4_1).sendKeys(userGroup[0]);
-				break;			
-			}
 
+			if(isElementPresent(per.ELEMENT_PERMISSION_INPUT))
+				waitForAndGetElement(per.ELEMENT_PERMISSION_INPUT).sendKeys(userGroup[0]);
+			else
+				waitForAndGetElement(per.ELEMENT_PERMISSION_INPUT_PLF4_1).sendKeys(userGroup[0]);
+			break;
 		case 2:	
 			info("Set permission for user " + userGroup[0]);
 			click(per.ELEMENT_SELECT_USER_ICON);

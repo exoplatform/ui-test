@@ -80,7 +80,6 @@ public class PLF_HomePageGadget_GettingStartedGadget extends Activity{
 	public void test01_GettingStartedGadget() { 
 
 		String uploadFileName = "PLF_Upload_pdffile.pdf";
-		String folder = "folder70413";
 		String driverName = "Personal Drives";
 		String folderPath = "Personal Documents";
 		String spaceName = "space70413";
@@ -114,7 +113,7 @@ public class PLF_HomePageGadget_GettingStartedGadget extends Activity{
 		navToolBar.goToHomePage();
 		
 		// Perform an action on Getting started Gadget (upload file)
-		selectFile(driverName,true,folderPath,"",uploadFileName,folder);
+		selectFile(driverName,true,folderPath,"",uploadFileName);
 		driver.navigate().refresh();
 		waitForAndGetElement(homeGad.ELEMENT_FINISH_UPLOAD_FILE.replace("${status}", "done"));
 		//Join a space
@@ -150,6 +149,6 @@ public class PLF_HomePageGadget_GettingStartedGadget extends Activity{
 		magMember.deleteSpace(spaceName,300000);
 		navToolBar.goToSiteExplorer();
 		actBar.chooseDrive(ecms.ELEMENT_PERSONAL_DRIVE);
-		actBar.actionsOnElement(folder, actionType.DELETE,true,true);
+		actBar.actionsOnElement(uploadFileName, actionType.DELETE,true,true);
 	}
 }

@@ -47,8 +47,8 @@ public class PLF_Navigation_LeftNavigation extends GroupNavigation {
 	@AfterMethod
 	public void afterMethods() {
 		info("Logout portal");
-		driver.manage().deleteAllCookies();
-		driver.quit();
+//		driver.manage().deleteAllCookies();
+//		driver.quit();
 	}
 
 	/**

@@ -266,10 +266,14 @@ public class ForumBase extends PlatformBase {
 	public final By ELEMENT_FORUM_PORTLET_SAVE_BUTTON = By.cssSelector("#UISettingEditModeForm.UIForm div.uiAction button.btn");
 
 	//attach file popup
-	public final By ELEMENT_POPUP_UPLOAD_FILE = By.xpath("//span[@class='PopupTitle' and text()='Attach File']");
-	public final By ELEMENT_ATTACH_FILE = By.linkText("Attach files");
+//	public final By ELEMENT_POPUP_UPLOAD_FILE = By.xpath("//span[@class='PopupTitle' and text()='Attach File']");
+	public final By ELEMENT_POPUP_UPLOAD_FILE = By.xpath("//span[@class='PopupTitle popupTitle' and text()='Attach File']");
+//	public final By ELEMENT_ATTACH_FILE = By.linkText("Attach Files");
+//	public final By ELEMENT_ATTACH_FILE =By.xpath("//button[@class='btn' and text()='Attach Files']");
+	public final By ELEMENT_ATTACH_FILE =By.xpath("//*[@id='ThreadContent']/div/div[3]/div/button");
 	public final By ELEMENT_ATTACHMENT_FILE_INPUT = By.name("file");
-	public final By ELEMENT_ATTACHMENT_SAVE_BUTTON = By.xpath("//*[@id='UIAttachmentForm']//*[text()='Save']");
+//	public final By ELEMENT_ATTACHMENT_SAVE_BUTTON = By.xpath("//*[@id='UIAttachmentForm']//*[text()='Save']");
+	public final By ELEMENT_ATTACHMENT_SAVE_BUTTON = By.xpath("//button[@class='btn' and text()='Save'");
 
 	//-----------------------User Management--------------------------------------------//
 	public final By ELEMENT_USER_MANAGEMENT_POPUP = By.xpath("//span[@class='PopupTitle popupTitle' and text()='User Management']");
@@ -381,8 +385,9 @@ public class ForumBase extends PlatformBase {
 			element.sendKeys(Utils.getAbsoluteFilePath("TestData/" + file[i]));
 			waitForAndGetElement("//*[@class='fileNameLabel' and contains(text(),'" + file[i] + "')]");
 		}
-		click(ELEMENT_ATTACHMENT_SAVE_BUTTON);
-		waitForElementNotPresent(ELEMENT_ATTACHMENT_SAVE_BUTTON);
+//		click(ELEMENT_ATTACHMENT_SAVE_BUTTON);
+		button.save();
+//		waitForElementNotPresent(ELEMENT_ATTACHMENT_SAVE_BUTTON);
 	}
 
 	public void goToForums(){

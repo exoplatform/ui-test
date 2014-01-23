@@ -50,7 +50,8 @@ public class ForumManagePost extends ForumBase {
 	public String MSG_POST_CENSOR = "This post may contain offensive content. It will be displayed after moderation.";
 	public String MSG_POST_APPROVE = "Your post is pending for moderation. It will be displayed after approval.";
 	public String ELEMENT_POST_TITLE_TEXT = "//div[@class='postViewTitle pull-left' and contains(text(),'${post}')]";
-	public String ELEMENT_POST_CONTENT_TEXT = "//div[@class='postContent']//p[contains(text(),'${post}')]";
+//	public String ELEMENT_POST_CONTENT_TEXT = "//div[@class='postContent']//p[contains(text(),'${post}')]";
+	public String ELEMENT_POST_CONTENT_TEXT = "//div[@class='containerQuote']//p[contains(text(),'${post}')]";
 	public String ELEMENT_PRIVATE_POST_MESSAGE = "//div[@class='uiForumPortlet forumBoxNotification']//div[@class='content' and contains(text(),'${post}')]";
 	public By ELEMENT_PRIVATE_POST_CLOSE_NOTIFICATION = By.xpath("//div[@class='uiForumPortlet forumBoxNotification']//i[@class='uiIconClose']");
 	public String ELEMENT_POST_QUOTE_TEXT = "//div[@class='contentQuote']/div[@class='textContent']/p[contains(text(),'${post}')]";
@@ -59,7 +60,7 @@ public class ForumManagePost extends ForumBase {
 	//--------------post reply screen-----------------------------------------------------------
 	public By ELEMENT_POST_TITLE = By.id("PostTitle");
 	public By ELEMENT_POST_MESSAGE_FRAME_1 = By.id("MessageContent___Frame");
-	public By ELEMENT_TOPIC_MESSAGE_FRAME_CKEDITOR = By.xpath("//iframe[@class='cke_wysiwyg_frame cke_reset']");
+	public By ELEMENT_POST_MESSAGE_FRAME_CKEDITOR = By.xpath("//iframe[@class='cke_wysiwyg_frame cke_reset']");
 	public By ELEMENT_POST_POPUP_NEW = By.xpath("//span[@class='PopupTitle popupTitle' and text()='New Post']");
 	public By ELEMENT_POST_ICONS_TAB = By.xpath("//a[contains(text(), 'Icons and Smileys')]");
 	public By ELEMENT_POST_PRIVATE_POPUP = By.xpath("//span[@class='PopupTitle popupTitle' and text()='Private Post']");
@@ -141,16 +142,9 @@ public class ForumManagePost extends ForumBase {
 		}
 		if (message != "" && message != null){
 			if(this.plfVersion.equalsIgnoreCase("4.1"))
-				inputDataToFrame(ELEMENT_TOPIC_MESSAGE_FRAME_CKEDITOR, message, true,false);
-			else if(this.plfVersion.equalsIgnoreCase("4.0"))
+				inputDataToFrame(ELEMENT_POST_MESSAGE_FRAME_CKEDITOR, message, true,false);
+			else //if(this.plfVersion.equalsIgnoreCase("4.0"))
 				inputDataToFrameInFrame(ELEMENT_POST_MESSAGE_FRAME_1, ELEMENT_POST_MESSAGE_FRAME_2, message,true,false);
-			switchToParentWindow();	
-		}
-		if (message != null) {
-			if(this.plfVersion.equalsIgnoreCase("4.1"))
-				inputDataToFrame(ELEMENT_TOPIC_MESSAGE_FRAME_CKEDITOR, message, true);
-			else if(this.plfVersion.equalsIgnoreCase("4.0"))
-				inputDataToFrameInFrame(ELEMENT_POST_MESSAGE_FRAME_1, ELEMENT_POST_MESSAGE_FRAME_2, message,true);
 			switchToParentWindow();	
 		}
 		if(file.length > 0 && file[0] != "" && file[0] != null){
@@ -233,7 +227,10 @@ public class ForumManagePost extends ForumBase {
 			type(ELEMENT_POST_REASON, reason, true);
 		}
 		if (message != "" && message != null) {
-			inputDataToFrameInFrame(ELEMENT_POST_MESSAGE_FRAME_1, ELEMENT_POST_MESSAGE_FRAME_2, message, true);
+			if(this.plfVersion.equalsIgnoreCase("4.1"))
+				inputDataToFrame(ELEMENT_POST_MESSAGE_FRAME_CKEDITOR, message, true,false);
+			else//(this.plfVersion.equalsIgnoreCase("4.0"))
+				inputDataToFrameInFrame(ELEMENT_POST_MESSAGE_FRAME_1, ELEMENT_POST_MESSAGE_FRAME_2, message,true,false);
 			switchToParentWindow();	
 		} 
 		if(file.length > 0 && file[0] != "" && file[0] != null){

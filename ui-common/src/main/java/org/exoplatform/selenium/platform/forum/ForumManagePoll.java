@@ -29,13 +29,13 @@ public class ForumManagePoll extends ForumBase {
 	public ForumManagePoll(WebDriver dr,String...plfVersion){
 		driver = dr;
 		this.plfVersion = plfVersion.length>0?plfVersion[0]:"4.0";
-		magTopic = new ForumManageTopic(driver);
+		magTopic = new ForumManageTopic(driver,this.plfVersion);
 		app = new ManageApplications(driver);
-		userGroup = new UserGroupManagement(driver);
+		userGroup = new UserGroupManagement(driver,this.plfVersion);
 		button = new Button(driver);
-		naviToolbar = new NavigationToolbar(driver);
-		alert = new ManageAlert(driver);
-		mngPost = new ForumManagePost(driver);
+		naviToolbar = new NavigationToolbar(driver,this.plfVersion);
+		alert = new ManageAlert(driver,this.plfVersion);
+		mngPost = new ForumManagePost(driver,this.plfVersion);
 	}
 
 	//Poll Manage
@@ -65,7 +65,7 @@ public class ForumManagePoll extends ForumBase {
 	public final By ELEMENT_SELECT_THIS_GROUP_LINK = By.linkText("Select this Group");
 	public final By ELEMENT_EDIT_POLL_FORM = By.xpath("//span[text()='Edit Poll']");
 	public final String ELEMENT_POLL_OPTION = "//input[@id='Option${index}']";
-	public By ELEMENT_POLL_POPUP = By.xpath("//span[@class='PopupTitle popupTitle' and text()='Poll']");
+	public final By ELEMENT_POLL_POPUP = By.xpath("//span[@class='PopupTitle popupTitle' and text()='Poll']");
 
 	public By ELEMENT_POLL_OPTION1 = By.id("Option1");
 	public By ELEMENT_POLL_CLOSE = By.id("TimeOut");
@@ -270,13 +270,21 @@ public class ForumManagePoll extends ForumBase {
 	 * @param multi
 	 * @param option
 	 */
-	public void addPoll(String pollQuestion, String[] options, String timeout, boolean changeVote, boolean multi, boolean... option){
-		boolean check = option.length > 0 ? option[0]: true;
-		boolean loginByTopNavigation = option.length > 1 ? option[1]: false;
+	public void addPoll(String pollQuestion, String[] options, String timeout, boolean changeVote, boolean multi, Object... option){
+		boolean check = (Boolean)(option.length > 0 ? option[0]: true);
+		boolean loginByTopNavigation = (Boolean)(option.length > 1 ? option[1]: false);
+		String forumName = (String)(option.length > 2 ? option[2]: "");
 
 		if(loginByTopNavigation){
 			info("Add a poll in a topic from top navigation");
 			naviToolbar.goToPoll();
+			if(isElementPresent(naviToolbar.ELEMENT_SELECT_FORUM)){
+				click(naviToolbar.ELEMENT_SELECT_FORUM);
+				if(forumName!="")
+					click(ELEMENT_SELECT_FORUM_ITEM.replace("${forumName}", forumName));
+				Utils.pause(500);
+				button.next();
+			}
 		}
 		else{
 			info("Add a poll in a topic from calendar form");

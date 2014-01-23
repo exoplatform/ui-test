@@ -525,12 +525,21 @@ public class NavigationToolbar extends PlatformBase {
 	 * Select the item "Topic"
 	 * @author phuongdt
 	 */
-	public void goToTopic(){
+	public void goToTopic(Object... option){
+		String forumName = (String)(option.length > 0 ? option[0]: "");
 		info("--Go to Add Topic--");		
 		goToCreateMenu();
 		click(ELEMENT_ADD_TOPIC_ICON);
 		waitForAndGetElement(ELEMENT_ADD_TOPIC_FORM);
 		button.next();
+		if(isElementPresent(ELEMENT_SELECT_FORUM)){
+			info("Select forum");
+			click(ELEMENT_SELECT_FORUM);
+			if(forumName!="")
+				click(ELEMENT_SELECT_FORUM_ITEM.replace("${forumName}", forumName));
+			Utils.pause(500);
+			button.next();
+		}
 	}
 	
 	/** Go to Wiki

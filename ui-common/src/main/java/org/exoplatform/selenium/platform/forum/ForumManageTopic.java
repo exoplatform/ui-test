@@ -24,6 +24,7 @@ public class ForumManageTopic extends ForumBase {
 	ForumManageCategory magCat;
 	UserGroupManagement userGroup;
 	ForumManagePost mngPost;
+	NavigationToolbar naviToolbar;
 
 	public ForumManageTopic(WebDriver dr,String...plfVersion){
 		this.plfVersion = plfVersion.length>0?plfVersion[0]:"4.0";
@@ -34,6 +35,7 @@ public class ForumManageTopic extends ForumBase {
 		magFor = new ForumManageForum(driver,this.plfVersion);
 		button = new Button(driver,this.plfVersion);
 		alert = new ManageAlert(driver,this.plfVersion);
+		naviToolbar = new NavigationToolbar(driver,this.plfVersion);
 		navTool = new NavigationToolbar(driver,this.plfVersion);
 	}
 
@@ -197,7 +199,7 @@ public class ForumManageTopic extends ForumBase {
 		if (message != "" && message != null){
 			if(this.plfVersion.equalsIgnoreCase("4.1"))
 				inputDataToFrame(ELEMENT_TOPIC_MESSAGE_FRAME_CKEDITOR, message, true,false);
-			else if(this.plfVersion.equalsIgnoreCase("4.0"))
+			else// if(this.plfVersion.equalsIgnoreCase("4.0"))
 				inputDataToFrameInFrame(ELEMENT_TOPIC_MESSAGE_FRAME_1, ELEMENT_TOPIC_MESSAGE_FRAME_2, message,true,false);
 			switchToParentWindow();	
 		}
@@ -733,8 +735,8 @@ public class ForumManageTopic extends ForumBase {
 	 * @param topic
 	 * @param descTopic
 	 */
-	public void addTopicFromTopNavigation(String topic, String descTopic){
-		navTool.goToTopic();
+	public void addTopicFromTopNavigation(String topic, String descTopic,Object... option){
+		navTool.goToTopic(option);
 		String[] permission = {};
 		inputDataStartTopic(topic, descTopic, "", 0, permission,false, false, false);
 		click(ELEMENT_SUBMIT_BUTTON);
