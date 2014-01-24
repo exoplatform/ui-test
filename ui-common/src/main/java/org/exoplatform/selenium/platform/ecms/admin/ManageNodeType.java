@@ -112,8 +112,6 @@ public class ManageNodeType extends EcmsBase{
 		click(ELEMENT_ADD_TYPE_BUTTON);
 		button.save();
 		alt.verifyAlertMessage(MESSAGE_NODE_REGISTERED_SUCCESSFULLY.replace("${nodeName}", nodeTypeName));
-		click(button.ELEMENT_OK_BUTTON);
-		Utils.pause(500);
 	}
 	
 	/**

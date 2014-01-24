@@ -142,6 +142,7 @@ public class PlatformBase extends TestBase {
 	public final By ELEMENT_LINK_IDE = By.linkText("IDE");
 	public final By ELEMENT_IDE_WORKSPACE_FRAME = By.id("remote_iframe_0");
 	public final By ELEMENT_IDE_WORKSPACE_DEFAULT = By.xpath("//nobr[text()='dev-monit']");
+	public final By ELEMENT_WORKSPACE_FRAME_2 = By.id("remote_iframe_2");
 	/* End Setting Icon*/
 
 	/*--------------- User account Management (Click from user name) ---------------------*/
@@ -476,6 +477,29 @@ public class PlatformBase extends TestBase {
 	public final String ELEMENT_GADGET_APPLICATION_PAGE_EDITOR = "//div[@id='UIApplicationList0']//div[contains(text(),'${gadget}')]";
 	public final String ELEMENT_PORTLET_TITLE = "//*[@class='portletLayoutDecorator' and contains(text(), '${portletTitle}')]";
 
+	/*Tools application*/
+	public final By ELEMENT_CATEGORY_TOOLS = By.linkText("Tools");
+	public final By ELEMENT_APPLICATION_FAVORITEDOCUMENT = By.id("Tools/FavoriteDocument");
+	public final By ELEMENT_RIGHT_CONTAINER = By.xpath("//div[@id='OfficeRight']//div[@class='NormalContainerBlock UIComponentBlock']");
+	public final By ELEMENT_MIDDLE_CONTAINER = By.xpath("//div[@id='OfficeMiddle']//div[@class='NormalContainerBlock UIComponentBlock']");
+	public final By ELEMENT_FAVORITEDOCUMENT_ICON_HOMEPAGE = By.xpath("//i[@class='uiIconFavoriteDocument uiIconLightGray']");
+	public final By ELEMENT_GADGET_PORLET_IN_MIDDLE_HOME_PAGE = By.xpath("//div[@id='OfficeMiddle']//div[@class='NormalContainerBlock UIComponentBlock']//*[@id='UIGadgetPortlet']");
+	public final By ELEMENT_DELETE_ICON_GADGET_PORLET_IN_MIDDLE_HOME_PAGE = By.xpath("//div[@id='OfficeMiddle']//div[@class='NormalContainerBlock UIComponentBlock']//*[@id='UIGadgetPortlet']/../../../..//*[@data-original-title='Delete Portlet']");
+	public final By ELEMENT_SUGGESTION_GADGET = By.xpath("//div[@id='OfficeRight']//div[@class='NormalContainerBlock UIComponentBlock']//*[@id='content']");
+	
+	/*Feature Poll porlet*/
+	public final By ELEMENT_CATEGORY_GADGETS = By.linkText("Gadgets");
+	public final By ELEMENT_APPLICATION_POLL = By.id("Gadgets/FeaturedPoll"); 
+	public final By ELEMENT_SETTING_POLL_GADGET = By.xpath("//*[contains(text(),'Featured Poll')]//*[@class='uiIconSetting']");
+	public final By ELEMENT_SELECT_BOX_FEATURED_POLL = By.xpath("//*[@class='selectbox']");
+	public final String ELEMENT_SELECT_BOX_FEATURED_ITEM = "//option[text()='${pollName}']";
+	public final String ELEMENT_POLL_NAME_ITEM = "//*[@title='${pollOption}' or @data-original-title='${pollOption}']";
+	
+	/*My profile gadget*/
+	public final By ELEMENT_APPLICATION_MY_PROFILE = By.id("Gadgets/Profile");
+	public final By ELEMENT_PROFILE_PICTURE_IN_MY_PROFILE_GADGET = By.xpath("//*[@class='GadCont ProfilePicture']");
+	public final By ELEMENT_PROFILE_INFO_IN_MY_PROFILE_GADGET = By.xpath("//*[@class='GadCont ProfileInfo']");
+	
 	public final By ELEMENT_CONTENTS_BY_QUERY_PORTLET = By.xpath("//div[contains(text(),'Content By Query')]");
 	public final By ELEMENT_CATEGORY_CONTENT = By.linkText("Content");
 	public final By ELEMENT_CATEGORY_COLLABORATION = By.linkText("Collaboration");
@@ -1228,9 +1252,21 @@ public class PlatformBase extends TestBase {
 
 			for (int i = 0; i < lines.length; i++){
 				if(this.plfVersion.equalsIgnoreCase("4.0")){
-					inputsummary.sendKeys(lines[i]);
-					inputsummary.sendKeys(Keys.ENTER);
-				} else if(this.plfVersion.equalsIgnoreCase("4.1")){
+					info("type multi line 4.0");
+//					inputsummary.sendKeys(lines[i]);
+//					inputsummary.sendKeys(Keys.ENTER);
+//					Utils.pause(500);
+					String newStr = "<p>" + lines[i]+"</p>";;
+					if(i==0)
+						newStr = "<p>" + lines[i]+"</p>";
+					else{
+						newStr = "<p>"+inputsummary.getText().replace("\n","</p><p>")+ "</p>";
+						newStr +="<p>" + lines[i]+"</p>";
+					}
+					((JavascriptExecutor) driver).executeScript("document.body.innerHTML='" + newStr + "'");
+					
+				} else{ //if(this.plfVersion.equalsIgnoreCase("4.1")){
+					info("type multi line 4.1");
 					String newStr = "<p>" + lines[i]+"</p>";;
 					if(i==0)
 						newStr = "<p>" + lines[i]+"</p>";

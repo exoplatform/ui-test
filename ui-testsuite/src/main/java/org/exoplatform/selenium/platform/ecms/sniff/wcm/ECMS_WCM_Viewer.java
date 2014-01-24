@@ -184,7 +184,6 @@ public class ECMS_WCM_Viewer extends PlatformBase{
 
 		info("-- Edit a content list viewer page --");
 		navToolBar.goToEditPageEditor();
-		pEditor.openAddContentPathForm();
 		pEditor.selectContentPathInEditMode(editCLVPath, true, true);
 		click(ELEMENT_PAGE_FINISH_BUTTON);
 		waitForTextPresent(cName);
@@ -192,7 +191,7 @@ public class ECMS_WCM_Viewer extends PlatformBase{
 		info("-- Restore original data--");
 		pMag.deletePageAtManagePageAndPortalNavigation(pCLVName, true, "acme", false, "");
 		navToolBar.goToSiteExplorer();
-		//ecms.goToNode(contentPath);
+		ecms.goToNode(contentPath);
 		cMenu.deleteDocument(By.linkText(cName));
 	}
 

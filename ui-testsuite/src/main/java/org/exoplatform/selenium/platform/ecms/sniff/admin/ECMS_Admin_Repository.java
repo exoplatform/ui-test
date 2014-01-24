@@ -220,7 +220,7 @@ public class ECMS_Admin_Repository extends PlatformBase{
 	 */
 	@Test
 	public void test04_AddAndViewNodeType(){
-		String nodeTypeName = "exoplatform";
+		String nodeTypeName = "exoplatform65857";
 		String superTypes = "app:application/app:category";
 
 		info("-- Add a new node type --");

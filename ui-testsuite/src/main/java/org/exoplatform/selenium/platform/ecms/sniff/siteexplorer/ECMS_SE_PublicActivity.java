@@ -391,9 +391,9 @@ public class ECMS_SE_PublicActivity extends PlatformBase {
 	}
 	
 	/**CaseID: 75294 -> Edit a content from the Content activity
-	 * ERROR: Refer ECMS-5342: Content summary in content activity display wrong
+	 * 
 	 */
-	@Test(groups="error")
+	@Test
 	public void test12_EditAContentFromContentActivity(){
 		String name = "Public_activity_web_content_11";
 		String sum = "line1/line2/line3";
@@ -424,7 +424,7 @@ public class ECMS_SE_PublicActivity extends PlatformBase {
 		
 		info("Add new web content ");
 		actBar.goToAddNewContent();
-		temp.createNewWebContent(name, sum, "", cont, "", "", true);
+		temp.createNewWebContent(name, cont, "", sum, "", "", true);
 		
 		info("Click View icon in activity");
 		navTool.goToHomePage();
@@ -479,7 +479,7 @@ public class ECMS_SE_PublicActivity extends PlatformBase {
 	 */
 	@Test
 	public void test16_CheckIntranetHomePage_AfterMovingFile(){
-		String fileUpload = "Sniff_public_activity_16.jpg";
+		String fileUpload = "landscape08.jpg";
 		By elementUploadFile = By.linkText(fileUpload);
 		String folder = "contentfolder16";
 		By elementFolder = By.linkText(folder);
@@ -509,7 +509,7 @@ public class ECMS_SE_PublicActivity extends PlatformBase {
 	 */
 	@Test
 	public void test17_CheckIntranetHomePage_AfterMovingContent(){
-		String name = "Public_activity_web_content_17";
+		String name = "publicactivitywebcontent17";
 		String sum = "line1/line2/line3";
 		By elementWeb = By.linkText(name);
 		String folder = "contentfolder17";

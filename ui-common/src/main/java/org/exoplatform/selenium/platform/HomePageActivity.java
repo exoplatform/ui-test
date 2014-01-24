@@ -247,7 +247,7 @@ public class HomePageActivity extends PlatformBase{
 				}else {
 					int contentIndex = 2;
 					for (int i = 0; i < cont.length; i ++){
-						if(waitForAndGetElement(ELEMENT_CONTENT_SUMMARY_WEBCONTENT.replace("@{fileName}", name).replace("${index}", String.valueOf(contentIndex)),5000,0,2)!=null)
+						if(this.plfVersion.equalsIgnoreCase("4.0"))
 							assert getText(ELEMENT_CONTENT_SUMMARY_WEBCONTENT.replace("@{fileName}", name).replace("${index}", String.valueOf(contentIndex))).equalsIgnoreCase(cont[i]);
 						else //if(waitForAndGetElement(eLEMENT_CONTENT_SUMMARY_WEBCONTENT_41.replace("@{fileName}", name).replace("${index}", String.valueOf(contentIndex)),5000,0,2)!=null)
 							assert getText(eLEMENT_CONTENT_SUMMARY_WEBCONTENT_41.replace("@{fileName}", name).replace("${index}", String.valueOf(contentIndex))).equalsIgnoreCase(cont[i]);
@@ -456,22 +456,18 @@ public class HomePageActivity extends PlatformBase{
 	 */
 	public void checkContentAfterMovingANode(String name, String path, boolean content){
 		if (content){
-			String e40 = ELEMENT_CONTENT_COMMENT_MOVING.replace("@{fileName}", name).
-					replace("${path}", path + name.replace("_", "").toLowerCase());
-			String e41 = ELEMENT_CONTENT_COMMENT_MOVING_41.replace("@{fileName}", name).
-					replace("${path}", path + name.replace("_", "").toLowerCase());
+			String e40 = ELEMENT_CONTENT_COMMENT_MOVING.replace("@{fileName}", name).replace("${path}", path + name);
+			String e41 = ELEMENT_CONTENT_COMMENT_MOVING_41.replace("@{fileName}", name).replace("${path}", path + name);
 			if(this.plfVersion.equalsIgnoreCase("4.0"))
 				waitForAndGetElement(e40);
-			else if(this.plfVersion.equalsIgnoreCase("4.1"))
+			else// if(this.plfVersion.equalsIgnoreCase("4.1"))
 				waitForAndGetElement(e41);
 		}else {
-			String e40 = ELEMENT_FILE_COMMENT_MOVING.replace("@{fileName}", name).
-					replace("${path}", path + name.replace("_", "").toLowerCase());
-			String e41 = ELEMENT_FILE_COMMENT_MOVING_41.replace("@{fileName}", name).
-					replace("${path}", path + name.replace("_", "").toLowerCase());
+			String e40 = ELEMENT_FILE_COMMENT_MOVING.replace("@{fileName}", name).replace("${path}", path + name);
+			String e41 = ELEMENT_FILE_COMMENT_MOVING_41.replace("@{fileName}", name).replace("${path}", path + name);
 			if(this.plfVersion.equalsIgnoreCase("4.0"))
 				waitForAndGetElement(e40);
-			else if(this.plfVersion.equalsIgnoreCase("4.1"))
+			else// if(this.plfVersion.equalsIgnoreCase("4.1"))
 				waitForAndGetElement(e41);
 		}
 	}

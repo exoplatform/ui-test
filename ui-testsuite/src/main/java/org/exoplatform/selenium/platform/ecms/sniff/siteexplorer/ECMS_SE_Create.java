@@ -102,8 +102,8 @@ public class ECMS_SE_Create extends PlatformBase {
 	 */
 	@Test
 	public void test20_21_22_CreateEditDeleteWebContent(){
-		String name = "Web_content_name";
-		String content = "Web_content";
+		String name = "name65836";
+		String content = "content65836";
 		By elementWeb = By.linkText(name);
 		String contentEdit = "Web_content_edit";
 		

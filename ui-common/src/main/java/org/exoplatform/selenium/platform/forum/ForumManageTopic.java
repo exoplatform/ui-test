@@ -366,7 +366,6 @@ public class ForumManageTopic extends ForumBase {
 
 		waitForAndGetElement(ELEMENT_TOPIC_EDIT_POPUP);
 	}
-
 	/**
 	 * 
 	 * @param title

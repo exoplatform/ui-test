@@ -28,18 +28,6 @@
 	</dependencies>
 
 	<profiles>
-			<profile>
-			<id>ecms-func-advanced</id>
-			<properties>
-				<testSuite>ecms-advance-test.xml</testSuite>
-			</properties>
-		</profile>
-		<profile>
-			<id>ecms-admin-test</id>
-			<properties>
-				<testSuite>ecms-admin-test.xml</testSuite>
-			</properties>
-		</profile>
 		<profile>
 			<id>ecms-se</id>
 			<properties>

@@ -247,6 +247,27 @@ public class ManageDrive extends EcmsBase{
 			Utils.pause(500);
 		}
 	}
+	
+	/**
+	 * remove a view from drive
+	 * @param view
+	 * @param drive
+	 */
+	public void removeViewFromDrive(String view, String drive){
+		info("-- Remove [Web View] to Action Bar --");
+		if (waitForAndGetElement(ELEMENT_VIEW_MODE_LINK.replace("${viewName}", view), 3000, 0) != null){
+			ecMain.goToManageDrive();
+			click(By.xpath(ELEMENT_DRIVE_EDIT_AUX.replace("${driveName}", drive)));
+			waitForAndGetElement(ELEMENT_DRIVE_EDIT_POPUP);
+			click(ELEMENT_APPLY_VIEW_TAB);
+			unSelectCheckBoxList(view);
+			button.save();
+			magAcc.signOut();
+			magAcc.signIn("john", "gtn");
+		}else {
+			info("-- Web View is not displayed --");
+		}
+	}
 
 	//Option to select [Folder Creation] 
 	public void selectTypeOfFolderCreation(String folderType, Object...params){

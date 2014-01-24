@@ -10,7 +10,6 @@ import org.exoplatform.selenium.platform.NavigationToolbar;
 import org.exoplatform.selenium.platform.UserGroupManagement;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 
 /**
  * Migrate from plf3.5
@@ -25,8 +24,8 @@ public class ForumManagePoll extends ForumBase {
 	NavigationToolbar naviToolbar;
 
 	ForumManagePost mngPost;
-	
-	public ForumManagePoll(WebDriver dr,String...plfVersion){
+
+	public ForumManagePoll(WebDriver dr, String...plfVersion){
 		driver = dr;
 		this.plfVersion = plfVersion.length>0?plfVersion[0]:"4.0";
 		magTopic = new ForumManageTopic(driver,this.plfVersion);
@@ -66,6 +65,8 @@ public class ForumManagePoll extends ForumBase {
 	public final By ELEMENT_EDIT_POLL_FORM = By.xpath("//span[text()='Edit Poll']");
 	public final String ELEMENT_POLL_OPTION = "//input[@id='Option${index}']";
 	public final By ELEMENT_POLL_POPUP = By.xpath("//span[@class='PopupTitle popupTitle' and text()='Poll']");
+	public final By ELEMENT_TOTAL_VOTE = By.xpath("//*[@class='totalVotes']");
+	public final String ELEMENT_VOTE_POLL_NUMBER = "//*[text()='${pollOption}']/../*[text()='${voteNumber}']";
 
 	public By ELEMENT_POLL_OPTION1 = By.id("Option1");
 	public By ELEMENT_POLL_CLOSE = By.id("TimeOut");
@@ -86,7 +87,6 @@ public class ForumManagePoll extends ForumBase {
 	public By ELEMENT_POLL_CLOSE_LINK = By.xpath("//a[contains(@href,'ClosedPoll')]");
 	public By ELEMENT_POLL_REOPEN_LINK = By.xpath("//div[@class='UITopicPoll uiBox uiTopicPoll uiCollapExpand']//i[@class='uiIconOpen']");
 	public final By ELEMENT_MORE_ACTION_POLL = By.xpath("//form[@id='UITopicPoll']//*[@data-toggle='dropdown']/*[@class='uiIconSettings uiIconLightGray']");
-	
 	public String ELEMENT_WARNING_ADD_MORE_OPTS = "//span[@class='warningIcon' and contains(text(),'Please add more options.')]";
 
 	/*------------------------------------Common function------------------------------*/
@@ -159,11 +159,14 @@ public class ForumManagePoll extends ForumBase {
 	 * @param pollOptions
 	 */
 	public void votePollSingleChoice (boolean changeVote, String pollOption) {
-		By ELEMENT_POLL_OPTION_PATH = By.id("option_"+pollOption+"");
-		WebElement e = waitForAndGetElement(ELEMENT_POLL_OPTION_PATH);
-		if (!e.isSelected())
-			click(ELEMENT_POLL_OPTION_PATH);
-
+		By ELEMENT_POLL_OPTION_PATH1 = By.id("option_"+pollOption+"");
+		String ELEMENT_POLL_OPTION_PATH2 = "//span[contains(text(),'${pollOption}')]/../*[@name='option']";
+		if(isElementPresent(ELEMENT_POLL_OPTION_PATH1)){
+			if (!waitForAndGetElement(ELEMENT_POLL_OPTION_PATH1).isSelected())
+				click(ELEMENT_POLL_OPTION_PATH1);
+		}else{
+			check(ELEMENT_POLL_OPTION_PATH2.replace("${pollOption}", pollOption),2);
+		}
 		click(ELEMENT_VOTE_NOW_BUTTON);
 		if (changeVote) {
 			waitForAndGetElement(ELEMENT_VOTE_AGAIN);

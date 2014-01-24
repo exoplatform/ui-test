@@ -1010,9 +1010,9 @@ public class ActionBar extends EcmsBase{
 	public void addComment(String comment){
 		goToAddComment();
 		if(this.plfVersion.equalsIgnoreCase("4.1"))
-			inputDataToFrame(ELEMENT_ADD_COMMENT_FRAME_41, comment, false);
-		else if(this.plfVersion.equalsIgnoreCase("4.0"))
-			inputDataToFrame(ELEMENT_ADD_COMMENT_FRAME, comment, false);
+			inputDataToFrame(ELEMENT_ADD_COMMENT_FRAME_41, comment, true);
+		else// if(this.plfVersion.equalsIgnoreCase("4.0"))
+			inputDataToFrame(ELEMENT_ADD_COMMENT_FRAME, comment, true);
 		switchToParentWindow();
 		button.save();
 		waitForElementNotPresent(ELEMENT_ADD_COMMENT_POPUP);

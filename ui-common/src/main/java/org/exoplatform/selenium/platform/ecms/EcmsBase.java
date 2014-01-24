@@ -32,9 +32,9 @@ public class EcmsBase extends ManageAccount {
 	 * */
 
 	public final String ELEMENT_OVERVIEW_LINK = "//i[@class='uiIconFile uiIconExt-overview']";
-	public final String ELEMENT_DRAFT_ACME= "//h4[text()='${content}']/..//span[text()='Draft']";
+	public final String ELEMENT_DRAFT_ACME= "//*[text()='${content}']/../..//span[text()='Draft']";
 	public final String ELEMENT_ACME_TITLE= "//*[text()='${content}']";
-	public final String ELEMENT_PUBLISH_ACME = "//h4[text()='${content}']/..//span[@class='publishText']";
+	public final String ELEMENT_PUBLISH_ACME = "//*[text()='${content}']/../..//span[@class='publishText']";
 	public final By ELEMENT_ACME_WELCOME_TEXT = By.xpath("//div[contains(text(),'Welcome to Acme')]");
 	public final By ELEMENT_ACME_SEARCH_INPUT = By.name("keyword");
 	public final String ELEMENT_ACME_SEARCH_RESULT = "//a[text()='${result}']";
@@ -456,6 +456,7 @@ public class EcmsBase extends ManageAccount {
 		//waitForAndGetElement(ELEMENT_MENU_CONTENT_LINK);
 		if ((enable == true && isElementPresent(ELEMENT_MENU_EDIT_CONTENT) == true) || 
 				(enable == false && isElementPresent(ELEMENT_MENU_EDIT_CONTENT) == true)){
+			info("Change edit mode");
 			click(ELEMENT_MENU_EDIT_CONTENT, 2); 
 		}
 		Utils.pause(1000);
@@ -673,6 +674,26 @@ public class EcmsBase extends ManageAccount {
 			for (int i=0; i < temp.length ; i++ ){
 				if (waitForAndGetElement(By.id(temp[i]), DEFAULT_TIMEOUT, 0, 2) != null){
 						check(By.id(temp[i]), 2);
+						info("Select checkbox with id " + temp[i]);
+				}else{
+					info("Can not found checkbox with id " + temp[i]);
+				}
+			}
+		}else{
+			info("Input checkbox list wrong");
+		}
+	}
+	
+	/**
+	 * Function to uncheck check-box list using id of check-box
+	 * @param viewList
+	 */
+	public void unSelectCheckBoxList(String viewList){
+		String[] temp = viewList.split("/");
+		if (temp.length != 0){
+			for (int i=0; i < temp.length ; i++ ){
+				if (waitForAndGetElement(By.id(temp[i]), DEFAULT_TIMEOUT, 0, 2) != null){
+						uncheck(By.id(temp[i]), 2);
 						info("Select checkbox with id " + temp[i]);
 				}else{
 					info("Can not found checkbox with id " + temp[i]);

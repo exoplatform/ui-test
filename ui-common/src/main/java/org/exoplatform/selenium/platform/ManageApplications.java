@@ -138,7 +138,8 @@ public class ManageApplications extends PlatformBase {
 	//Delete gadget
 	public void deleteGadget (String gadgetTitle) {
 		alt = new ManageAlert(driver);
-		waitForAndGetElement(ELEMENT_GADGET_LINK).click();
+		if(isElementPresent(ELEMENT_GADGET_LINK))
+			waitForAndGetElement(ELEMENT_GADGET_LINK).click();
 		click(ELEMENT_GADGET_DELETE_ICON.replace("${title}", gadgetTitle));
 		alt.waitForConfirmation(ELEMENT_GADGET_CONFIRM_DELETE);
 		Utils.pause(1000);

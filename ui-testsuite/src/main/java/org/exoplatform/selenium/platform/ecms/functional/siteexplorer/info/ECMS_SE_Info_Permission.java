@@ -114,7 +114,8 @@ public class ECMS_SE_Info_Permission  extends PlatformBase {
 		btn.close();
 
 		/*Clear data*/
-		actBar.goToViewMode("Web");
+		mDrive.removeViewFromDrive("Admin", "Managed Sites");
+		navToolBar.goToSiteExplorer();
 		click(siteExp.ELEMENT_SIDEBAR_FILE_EXPLORER);
 		cMenu.deleteDocument(bFolder);
 	}
@@ -129,7 +130,7 @@ public class ECMS_SE_Info_Permission  extends PlatformBase {
 	@Test
 	public void test02_ViewPermissionOfLockedNodeByLocker(){
 		/*Declare variable*/
-		String folder = "folder02";
+		String folder = "folder66067";
 		By bFolder = By.xpath(cMenu.ELEMENT_FILE_TITLE.replace("${titleOfFile}", folder));
 		By bFolderLocked = By.linkText(folder);
 
@@ -138,8 +139,6 @@ public class ECMS_SE_Info_Permission  extends PlatformBase {
 		cTemplate.createNewFolder(folder,folderType.None);
 
 		/* Step 2: Lock node*/
-		actBar.goToViewMode("Web");
-		click(siteExp.ELEMENT_SIDEBAR_FILE_EXPLORER);
 		info("Lock node");
 		cMenu.contextMenuAction(bFolder, cMenu.ELEMENT_CONTEXT_MENU_LOCK);
 
@@ -167,7 +166,8 @@ public class ECMS_SE_Info_Permission  extends PlatformBase {
 		btn.close();
 
 		/*Clear data*/
-		actBar.goToViewMode("Web");
+		mDrive.removeViewFromDrive("Admin", "Managed Sites");
+		navToolBar.goToSiteExplorer();
 		click(siteExp.ELEMENT_SIDEBAR_FILE_EXPLORER);
 		cMenu.deleteDocument(bFolderLocked);
 	}
@@ -227,7 +227,8 @@ public class ECMS_SE_Info_Permission  extends PlatformBase {
 		btn.close();
 
 		/*Clear data*/
-		actBar.goToViewMode("Web");
+		mDrive.removeViewFromDrive("Admin", "Managed Sites");
+		navToolBar.goToSiteExplorer();
 		click(siteExp.ELEMENT_SIDEBAR_FILE_EXPLORER);
 		cMenu.deleteDocument(bFolderLocked);
 	}
@@ -264,7 +265,8 @@ public class ECMS_SE_Info_Permission  extends PlatformBase {
 		btn.close();
 
 		/*Clear data*/
-		actBar.goToViewMode("Web");
+		mDrive.removeViewFromDrive("Admin", "Managed Sites");
+		navToolBar.goToSiteExplorer();
 		click(siteExp.ELEMENT_SIDEBAR_FILE_EXPLORER);
 		cMenu.deleteDocument(bDocument);
 	}
@@ -283,9 +285,6 @@ public class ECMS_SE_Info_Permission  extends PlatformBase {
 
 		/*Step 1: Select node to view permission of node*/
 		//Upload a file [Detail]
-		mDrive.addView2Drive("Web", "Managed Sites");
-		actBar.goToViewMode("Web");
-		click(siteExp.ELEMENT_SIDEBAR_FILE_EXPLORER);
 		//Check if upload button is shown on action bar
 		actBar.addItem2ActionBar("upload", actBar.ELEMENT_UPLOAD_FILE_LINK);
 		//Add permission button to action bar if it is not on action bar
@@ -303,7 +302,8 @@ public class ECMS_SE_Info_Permission  extends PlatformBase {
 		btn.close();
 
 		/*Clear data*/
-		actBar.goToViewMode("Web");
+		mDrive.removeViewFromDrive("Admin", "Managed Sites");
+		navToolBar.goToSiteExplorer();
 		click(siteExp.ELEMENT_SIDEBAR_FILE_EXPLORER);
 		cMenu.deleteDocument(bFile);
 	}
@@ -365,7 +365,8 @@ public class ECMS_SE_Info_Permission  extends PlatformBase {
 		magAcc.signOut();
 		magAcc.signIn(DATA_USER1, DATA_PASS);
 		navToolBar.goToSiteExplorer();
-		actBar.goToViewMode("Web");
+		mDrive.removeViewFromDrive("Admin", "Managed Sites");
+		navToolBar.goToSiteExplorer();
 		click(siteExp.ELEMENT_SIDEBAR_FILE_EXPLORER);
 		cMenu.deleteDocument(bFolder);
 	}
@@ -416,7 +417,8 @@ public class ECMS_SE_Info_Permission  extends PlatformBase {
 		btn.close();
 
 		/*Clear data*/
-		actBar.goToViewMode("Web");
+		mDrive.removeViewFromDrive("Admin", "Managed Sites");
+		navToolBar.goToSiteExplorer();
 		click(siteExp.ELEMENT_SIDEBAR_FILE_EXPLORER);
 		cMenu.deleteDocument(bFolder);
 	}
@@ -465,7 +467,8 @@ public class ECMS_SE_Info_Permission  extends PlatformBase {
 		btn.close();
 
 		/*Clear data*/
-		actBar.goToViewMode("Web");
+		mDrive.removeViewFromDrive("Admin", "Managed Sites");
+		navToolBar.goToSiteExplorer();
 		click(siteExp.ELEMENT_SIDEBAR_FILE_EXPLORER);
 		cMenu.deleteDocument(bFolder);
 	}
@@ -512,7 +515,8 @@ public class ECMS_SE_Info_Permission  extends PlatformBase {
 		waitForElementNotPresent(ePerm.ELEMENT_DELETE_USER_PERMISSION_1.replace("${userOrGroupName}", DATA_USER1));
 
 		/*Clear data*/
-		actBar.goToViewMode("Web");
+		mDrive.removeViewFromDrive("Admin", "Managed Sites");
+		navToolBar.goToSiteExplorer();
 		click(siteExp.ELEMENT_SIDEBAR_FILE_EXPLORER);
 		cMenu.deleteDocument(bFolder);
 	}
@@ -537,8 +541,6 @@ public class ECMS_SE_Info_Permission  extends PlatformBase {
 		cTemplate.createNewFolder(folder,folderType.None);
 
 		/* Step 2: Lock node*/
-		actBar.goToViewMode("Web");
-		click(siteExp.ELEMENT_SIDEBAR_FILE_EXPLORER);
 		info("Lock node");
 		cMenu.contextMenuAction(bFolder, cMenu.ELEMENT_CONTEXT_MENU_LOCK);
 
@@ -605,7 +607,8 @@ public class ECMS_SE_Info_Permission  extends PlatformBase {
 		magAcc.signOut();
 		magAcc.signIn(DATA_USER1, DATA_PASS);
 		navToolBar.goToSiteExplorer();
-		actBar.goToViewMode("Web");
+		mDrive.removeViewFromDrive("Admin", "Managed Sites");
+		navToolBar.goToSiteExplorer();
 		click(siteExp.ELEMENT_SIDEBAR_FILE_EXPLORER);
 		cMenu.deleteDocument(bFolderLocked);
 	}
@@ -630,8 +633,6 @@ public class ECMS_SE_Info_Permission  extends PlatformBase {
 		cTemplate.createNewFolder(folder,folderType.None);
 
 		/* Step 2: Lock node*/
-		actBar.goToViewMode("Web");
-		click(siteExp.ELEMENT_SIDEBAR_FILE_EXPLORER);
 		info("Lock node");
 		cMenu.contextMenuAction(bFolder, cMenu.ELEMENT_CONTEXT_MENU_LOCK);
 
@@ -667,7 +668,6 @@ public class ECMS_SE_Info_Permission  extends PlatformBase {
 		/*Clear data*/
 		magAcc.signIn(DATA_USER1, DATA_PASS);
 		navToolBar.goToSiteExplorer();
-		actBar.goToViewMode("Web");
 		click(siteExp.ELEMENT_SIDEBAR_FILE_EXPLORER);
 		cMenu.deleteDocument(bFolderLocked);
 	}
@@ -729,7 +729,8 @@ public class ECMS_SE_Info_Permission  extends PlatformBase {
 		btn.close();
 
 		/*Clear data*/
-		actBar.goToViewMode("Web");
+		mDrive.removeViewFromDrive("Admin", "Managed Sites");
+		navToolBar.goToSiteExplorer();
 		click(siteExp.ELEMENT_SIDEBAR_FILE_EXPLORER);
 		cMenu.contextMenuAction(bDocument, cMenu.ELEMENT_MENU_CHECKOUT);
 		cMenu.deleteDocument(bDocument);
@@ -751,11 +752,12 @@ public class ECMS_SE_Info_Permission  extends PlatformBase {
 		By bSubDocument = By.xpath(cMenu.ELEMENT_FILE_TITLE.replace("${titleOfFile}", subdocument));
 		String user = "*:/platform/web-contributors";
 
+		mDrive.addView2Drive("Admin", "Managed Sites");
+		actBar.goToViewMode("Admin");
+		
 		/*Step 1: Select node to view permission of node*/
 		//Create node (folder, document) or upload file
-		actBar.goToViewMode("Web");
-		click(siteExp.ELEMENT_SIDEBAR_FILE_EXPLORER);
-		actBar.addItem2ActionBar("addDocument", actBar.ELEMENT_NEW_CONTENT_LINK, "Admin", "Admin");
+		actBar.addItem2ActionBar("addDocument", actBar.ELEMENT_NEW_CONTENT_LINK);
 		//Add permission button to action bar if it is not on action bar
 		actBar.addItem2ActionBar("viewPermissions", actBar.ELEMENT_PERMISSION_LINK);	
 		//Create parent node
@@ -788,7 +790,8 @@ public class ECMS_SE_Info_Permission  extends PlatformBase {
 		btn.close();
 
 		/*Clear data*/
-		actBar.goToViewMode("Web");
+		mDrive.removeViewFromDrive("Admin", "Managed Sites");
+		navToolBar.goToSiteExplorer();
 		click(siteExp.ELEMENT_SIDEBAR_FILE_EXPLORER);
 		cMenu.contextMenuAction(bDocument, cMenu.ELEMENT_MENU_CHECKOUT);
 		cMenu.deleteDocument(bDocument);
@@ -866,7 +869,8 @@ public class ECMS_SE_Info_Permission  extends PlatformBase {
 		magAcc.signOut();
 		magAcc.signIn(DATA_USER1, DATA_PASS);
 		navToolBar.goToSiteExplorer();
-		actBar.goToViewMode("Web");
+		mDrive.removeViewFromDrive("Admin", "Managed Sites");
+		navToolBar.goToSiteExplorer();
 		click(siteExp.ELEMENT_SIDEBAR_FILE_EXPLORER);
 		cMenu.deleteDocument(bFolder);
 	}
@@ -921,7 +925,8 @@ public class ECMS_SE_Info_Permission  extends PlatformBase {
 		btn.close();
 
 		/*Clear data*/
-		actBar.goToViewMode("Web");
+		mDrive.removeViewFromDrive("Admin", "Managed Sites");
+		navToolBar.goToSiteExplorer();
 		click(siteExp.ELEMENT_SIDEBAR_FILE_EXPLORER);
 		cMenu.deleteDocument(bFolder);
 	}
@@ -982,7 +987,8 @@ public class ECMS_SE_Info_Permission  extends PlatformBase {
 		btn.close();
 
 		/*Clear data*/
-		actBar.goToViewMode("Web");
+		mDrive.removeViewFromDrive("Admin", "Managed Sites");
+		navToolBar.goToSiteExplorer();
 		click(siteExp.ELEMENT_SIDEBAR_FILE_EXPLORER);
 		cMenu.deleteDocument(bFolder);
 	}
@@ -1043,7 +1049,8 @@ public class ECMS_SE_Info_Permission  extends PlatformBase {
 		btn.close();
 
 		/*Clear data*/
-		actBar.goToViewMode("Web");
+		mDrive.removeViewFromDrive("Admin", "Managed Sites");
+		navToolBar.goToSiteExplorer();
 		click(siteExp.ELEMENT_SIDEBAR_FILE_EXPLORER);
 		cMenu.deleteDocument(bFolder);
 	}
@@ -1102,7 +1109,8 @@ public class ECMS_SE_Info_Permission  extends PlatformBase {
 		btn.close();
 
 		/*Clear data*/
-		actBar.goToViewMode("Web");
+		mDrive.removeViewFromDrive("Admin", "Managed Sites");
+		navToolBar.goToSiteExplorer();
 		click(siteExp.ELEMENT_SIDEBAR_FILE_EXPLORER);
 		cMenu.deleteDocument(bFolder);
 	}

@@ -424,6 +424,7 @@ public class TestBase {
 		} finally {
 			loopCount = 0;
 		}
+		Utils.pause(300);
 	}
 
 	public void clearCache(){
@@ -735,6 +736,7 @@ public class TestBase {
 		if (baseUrl==null) baseUrl = DEFAULT_BASEURL;
 		action = new Actions(driver);
 		termsAndConditions();
+		checkPLFVersion();
 	}
 
 	/**function set driver to auto open new window when click link

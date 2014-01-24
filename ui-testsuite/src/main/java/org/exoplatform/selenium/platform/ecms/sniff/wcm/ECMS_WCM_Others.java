@@ -168,10 +168,14 @@ public class ECMS_WCM_Others extends PlatformBase{
 		
 		//Switch to public mode
 		ecms.enableEditMode(false);
+		type(ecms.ELEMENT_ACME_SEARCH_INPUT,searchText, true);
+		waitForAndGetElement(ecms.ELEMENT_ACME_SEARCH_INPUT).sendKeys(Keys.RETURN);
 		waitForElementNotPresent(ecms.ELEMENT_ACME_SEARCH_RESULT.replace("${result}", node1));
+		waitForElementNotPresent(ecms.ELEMENT_ACME_SEARCH_RESULT.replace("${result}", node4));
 		
 		//Delete data
 		navToolBar.goToSiteExplorer();
+		actBar.goToNode("acme");
 		cMenu.deleteDocument(bNode);
 		cMenu.deleteDocument(By.linkText(node2));
 		cMenu.deleteDocument(By.linkText(node3));
