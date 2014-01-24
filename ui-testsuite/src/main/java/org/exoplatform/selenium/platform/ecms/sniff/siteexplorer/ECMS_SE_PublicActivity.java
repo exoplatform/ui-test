@@ -106,7 +106,7 @@ public class ECMS_SE_PublicActivity extends PlatformBase {
 		navTool.goToHomePage();
 		if(this.plfVersion.equalsIgnoreCase("4.0"))
 			activity.checkInforAfterAddingDocument(fileName, "uiIcon64x64FileDefault uiIcon64x64nt_file uiIcon64x64texthtml", "File", "", "", "1", desc, "");
-		else if(this.plfVersion.equalsIgnoreCase("4.1"))
+		else //(this.plfVersion.equalsIgnoreCase("4.1"))
 			activity.checkInforAfterAddingDocument(fileName, "uiIcon64x64FileHtml uiIcon64x64nt_file", "File", "", "", "1", desc, "");
 		//delete data
 		navTool.goToSiteExplorer();
@@ -190,7 +190,7 @@ public class ECMS_SE_PublicActivity extends PlatformBase {
 		navTool.goToHomePage();
 		if(this.plfVersion.equalsIgnoreCase("4.0"))
 			activity.checkInforAfterAddingDocument(name, "uiIcon64x64FileDefault uiIcon64x64nt_file uiIcon64x64texthtml", "File", "", "", "", "", "");
-		else if(this.plfVersion.equalsIgnoreCase("4.1"))
+		else// if(this.plfVersion.equalsIgnoreCase("4.1"))
 			activity.checkInforAfterAddingDocument(name, "uiIcon64x64FileHtml uiIcon64x64nt_file", "File", "", "", "", "", "");
 		
 		info("Edit title of content");

@@ -361,7 +361,10 @@ public class ContentTemplate extends EcmsBase{
 
 		click(ELEMENT_NEWFILE_LINK);	
 		type(ELEMENT_NEWFILE_NAME_TEXTBOX, name, true);
-		inputDataToFrame(ELEMENT_NEWFILE_CONTENT_FRAME, cont, true);
+		if(isElementPresent(ELEMENT_NEWFILE_CONTENT_FRAME))
+			inputDataToFrame(ELEMENT_NEWFILE_CONTENT_FRAME, cont, true);
+		else
+			inputDataToFrame(ELEMENT_NEWFILE_CONTENT_FRAME_41, cont, true);
 		switchToParentWindow();
 		if (title != ""){
 			type(ELEMENT_NEWFILE_TITLE_TEXTBOX, title, true);

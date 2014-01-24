@@ -636,19 +636,22 @@ public class PlatformBase extends TestBase {
 	public final By ELEMENT_GETTING_SUGGESTIONS = By.xpath("//div[@class='uiBox uiSuggestions']");
 
 	//Calendar gadget
-	public final By ELEMENT_CALENDAR_GADGET_SETTING_ICON = By.xpath("//a[@class='settingsLink actionIcon pull-right ']//i[@class='uiIconSetting uiIconLightGray']");
-	public final By ELEMENT_SEARCH_IN_CALENDAR_GADGET_SETTING = By.xpath("//input[@class='PLFcalendarSearchKey']");
-	public final By ELEMENT_CALENDAR_GADGET_TODAY_LABEL = By.xpath("//div[@class='currentDateContainer']//a[contains(text(), 'Today')]");
-	public final By ELEMENT_CALENDAR_GADGET_NEXTDAY_ARROW = By.xpath("//a[@class='actionIcon nextDate pull-right']//*[@class='uiIconMiniArrowRight uiIconLightGray']");
-	public final By ELEMENT_CALENDAR_GADGET_PREVIOUSDAY_ARROW = By.xpath("//*[@class='actionIcon prevDate pull-left']//*[@class='uiIconMiniArrowLeft uiIconLightGray']");
-	public final By ELEMENT_CALENDAR_GADGET_TOMORROW_LABEL = By.xpath("//*[@class='currentDateContainer']//a[contains(text(),Tomorrow)]");
-	public final By ELEMENT_CALENDAR_GADGET_YESTERDAY_LABEL = By.xpath("//div[@class='currentDateContainer']//a[contains(text(),Yesterday)]");
-	public final String ELEMENT_CALENDAR_GADGET_SETTING_LINK_ITEM = "//span[contains(text(),'${calendar}')]";
-	public final By ELEMENT_CALENDAR_GADGET_VERIFIED_TEXT_LABEL = By.xpath("//*[ text()='Displayed Calendars:']");
-	public final By ELEMENT_ADD_CALENDAR_IN_ADDITION_LIST = By.xpath("//i[contains(@class,'uiIconAdd')]");
-	public final String ELEMENT_CALENDAR_IN_CALENDAR_GADGET = "//span[@class='calendarName asparagus' and@title='${calendar}']";
-	public final String ELEMENT_DELETE_CALENDAR_ICON = "//span[contains(text(),'${calendar}')] /..//*[@class='uiIconDel']";
-	public final String ELEMENT_CALENDAR_IN_ADDITIONAL_LIST = "//a[text()='${calendar}']";
+	public static By ELEMENT_CALENDAR_GADGET_SETTING_ICON = By.xpath("//a[@class='settingsLink actionIcon pull-right ']//i[@class='uiIconSetting uiIconLightGray']");
+	public static By ELEMENT_SEARCH_IN_CALENDAR_GADGET_SETTING = By.xpath("//input[@class='PLFcalendarSearchKey']");
+	public static By ELEMENT_CALENDAR_GADGET_TODAY_LABEL = By.xpath("//div[@class='currentDateContainer']//a[contains(text(), 'Today')]");
+	public static By ELEMENT_CALENDAR_GADGET_NEXTDAY_ARROW = By.xpath("//a[@class='actionIcon nextDate pull-right']//*[@class='uiIconMiniArrowRight uiIconLightGray']");
+	public static By ELEMENT_CALENDAR_GADGET_PREVIOUSDAY_ARROW = By.xpath("//*[@class='actionIcon prevDate pull-left']//*[@class='uiIconMiniArrowLeft uiIconLightGray']");
+	public static By ELEMENT_CALENDAR_GADGET_TOMORROW_LABEL = By.xpath("//*[@class='currentDateContainer']//a[contains(text(),Tomorrow)]");
+	public static By ELEMENT_CALENDAR_GADGET_YESTERDAY_LABEL = By.xpath("//div[@class='currentDateContainer']//a[contains(text(),Yesterday)]");
+	public static String ELEMENT_CALENDAR_GADGET_SETTING_LINK_ITEM = "//span[contains(text(),'${calendar}')]";
+	public static By ELEMENT_CALENDAR_GADGET_VERIFIED_TEXT_LABEL = By.xpath("//*[ text()='Displayed Calendars:']");
+	public static By ELEMENT_ADD_CALENDAR_IN_ADDITION_LIST = By.xpath("//i[contains(@class,'uiIconAdd')]");
+	public static By ELEMENT_ADD_CALENDAR_IN_ADDITION_LIST_PLF_41 = By.xpath("//i[contains(@class,'uiIconSimplePlusMini uiIconLightGray')]");
+	public static String ELEMENT_CALENDAR_IN_CALENDAR_GADGET = "//span[@class='calendarName asparagus' and@title='${calendar}']";
+	public static String ELEMENT_DELETE_CALENDAR_ICON = "//span[contains(text(),'${calendar}')] /..//*[@class='uiIconDel']";
+	public static String ELEMENT_CALENDAR_IN_ADDITIONAL_LIST = "//a[text()='${calendar}']";
+	public static By ELEMENT_CALENDAR_GADGET_SETTINGS = By.xpath("//h6[@class='title center']//a[contains(text(),Settings)]");
+	public static By ELEMENT_CALENDAR_GADGET_ADDITIONAL_DISPLAY = By.xpath("//*[ text()='Display Additional Calendar:']");
 
 	//Create functions
 	public final By ELEMENT_ADD_ICON = By.xpath("//*[@class='uiIconPLF24x24Add']");

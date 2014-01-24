@@ -25,10 +25,10 @@ public class Forum_Forum_Poll_AddEditDelete extends ForumBase {
 	ForumManageForum fmForum;
 	ForumManageTopic fmTopic;
 	ForumManagePoll fmPoll;
-	@Parameters({"platform","version","url","hub"})
+	
 	@BeforeMethod
-	public void setUpBeforeTest(String platform,String version,String url,String hub) {
-		initSeleniumTest(true,platform,version,url,hub);
+	public void setUpBeforeTest() {
+		initSeleniumTest();
 		driver.get(baseUrl);
 		fmCat = new ForumManageCategory(driver,this.plfVersion);
 		fmForum = new ForumManageForum(driver,this.plfVersion);
@@ -36,7 +36,6 @@ public class Forum_Forum_Poll_AddEditDelete extends ForumBase {
 		fmTopic = new ForumManageTopic(driver,this.plfVersion);
 		acc = new ManageAccount(driver,this.plfVersion);
 		acc.signIn(DATA_USER1, DATA_PASS);
-		fmForum = new ForumManageForum(driver,this.plfVersion);
 	}
 
 	@AfterMethod
@@ -302,5 +301,84 @@ public class Forum_Forum_Poll_AddEditDelete extends ForumBase {
 	@Test(groups={"pending"})
 	public void test07_AddPollWithClosingTimeSetting() {
 		//Wait for issue: FQA-1612
+	}
+	
+	/**
+	 * Case ID: 72313
+	 * Edit Poll
+	 */
+	@Test
+	public void test08_EditPoll() {
+		String categoryName = "category72313";
+		String forumName = "forum72313";
+		String topicName = "topic72313";
+		String pollQuestion = "Do you love me?";
+		String pollQuestion_edited = "Do you love me, sweety?";
+		String[] pollOption = {"Yes", "No"};
+		String timeout = "1";
+		String timeout_edited = "2";
+		
+		info("Go to Forum");
+		goToForums();
+		
+		info("Create a new category and forum inside");
+		fmForum.addCategoryForum(categoryName, forumName);
+		
+		info("Creat a new topic");
+		fmTopic.startTopic(topicName, topicName, "", 0, null, true, true);
+		waitForAndGetElement(By.linkText(topicName)).click();
+		
+		info("Add a new poll with 2 options into topic");
+		fmPoll.addPoll(pollQuestion,pollOption,timeout,false, false);
+		driver.navigate().refresh();
+		
+		info("Verify 2 options are displayed");
+		waitForAndGetElement(fmPoll.ELEMENT_OPTION.replace("${option}",pollOption[0]));
+		waitForAndGetElement(fmPoll.ELEMENT_OPTION.replace("${option}",pollOption[1]));
+		
+		info("Edit poll");
+		fmPoll.editPoll(pollQuestion_edited, pollOption, timeout_edited, false, true);
+		
+		info("Restore data");
+		goToForumHome();
+		click(By.linkText(categoryName));
+		fmCat.deleteCategoryInForum(categoryName, true);	
+	}
+	
+	
+	/**
+	 * Case ID: 72314
+	 * Add Poll in case only have 2 options
+	 */
+	@Test
+	public void test09_DeletePoll() {
+		String categoryName = "category72314";
+		String forumName = "forum72314";
+		String topicName = "topic72314";
+		String pollQuestion = "Do you love me?";
+		String[] pollOption = {"Yes", "No"};
+		String timeout = "1";
+		
+		info("Go to Forum");
+		goToForums();
+		
+		info("Create a new category and forum inside");
+		fmForum.addCategoryForum(categoryName, forumName);
+		
+		info("Creat a new topic");
+		fmTopic.startTopic(topicName, topicName, "", 0, null, true, true);
+		waitForAndGetElement(By.linkText(topicName)).click();
+		
+		info("Add a new poll with 2 options into topic");
+		fmPoll.addPoll(pollQuestion,pollOption,timeout,false, false);
+		driver.navigate().refresh();
+		
+		info("Delete poll");
+		fmPoll.deletePollInTopic(pollQuestion);
+		
+		info("Restore data");
+		goToForumHome();
+		click(By.linkText(categoryName));
+		fmCat.deleteCategoryInForum(categoryName, true);	
 	}
 }

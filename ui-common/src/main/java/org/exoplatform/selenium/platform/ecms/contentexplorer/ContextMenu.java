@@ -90,10 +90,10 @@ public class ContextMenu extends EcmsBase{
 		//		Assert.fail("Cannot perform this action after " + ACTION_REPEAT + " tries");
 		//	}
 		rightClickOnElement(loc);
-		if (waitForAndGetElement(actionItem, 5000, 1) != null) {
+		if (waitForAndGetElement(actionItem, 5000, 0) != null) {
 			if(this.plfVersion.equalsIgnoreCase("4.0"))
 				click(actionItem);
-			else if(this.plfVersion.equalsIgnoreCase("4.1"))
+			else// if(this.plfVersion.equalsIgnoreCase("4.1"))
 				((JavascriptExecutor)driver).executeScript("arguments[0].click();", waitForAndGetElement(actionItem));
 		}
 		if (!nodeName.isEmpty()){
