@@ -445,22 +445,19 @@ public class ECMS_SE_BasicAction_Delete extends PlatformBase {
 		cTemplate.createNewWebContent(webContentName_1, content_1, "", "", "", "");
 
 		info("-- Create a relation between 2 nodes --");
-		//actBar.addRelationToActionBar();
-		//actBar.addItem2ActionBar("manageRelations", actBar.ELEMENT_ADD_RELATION_LINK);
+		actBar.addItem2ActionBar("manageRelations", actBar.ELEMENT_ADD_RELATION_LINK);
+		actBar.chooseDrive(ecms.ELEMENT_COLLABORATION_DRIVE);
 		actBar.createRelation(webContentName_0, webContentName_1);
 
 		info("-- Delete a document --");
-		click(siteExp.ELEMENT_SIDEBAR_COLLABORATION);
 		WebElement file1 = waitForAndGetElement(siteExp.ELEMENT_DOCUMENT_TITLE.replace("${title}", webContentName_0));
 		WebElement file2 = waitForAndGetElement(siteExp.ELEMENT_DOCUMENT_TITLE.replace("${title}", webContentName_1));
-
 		Actions actions = new Actions(driver);
-		actions.keyDown(file1, Keys.CONTROL).moveToElement(file2).release().build().perform();		
+		actions.keyDown(Keys.CONTROL).click(file1).click(file2).keyUp(Keys.CONTROL).build().perform();
 		rightClickOnElement(siteExp.ELEMENT_DOCUMENT_TITLE.replace("${title}", webContentName_0));
 
 		//click(cMenu.ELEMENT_MENU_DELETE_RIGHT_CLICK_POPUP);
 		((JavascriptExecutor)driver).executeScript("arguments[0].click();", waitForAndGetElement(cMenu.ELEMENT_MENU_DELETE_RIGHT_CLICK_POPUP, DEFAULT_TIMEOUT, 1));
-
 		magAlert.verifyAlertMessage("Are you sure you want to delete the 2 selected items and their references?");
 		Utils.captureScreen("Delete_multiple_document_with_references");
 		//dialog.deleteInDialog();
@@ -494,10 +491,11 @@ public class ECMS_SE_BasicAction_Delete extends PlatformBase {
 
 		info("-- Add a relation for File --");
 		//actBar.addRelationToActionBar();
-		//actBar.addItem2ActionBar("manageRelations", actBar.ELEMENT_ADD_RELATION_LINK);
+		actBar.addItem2ActionBar("manageRelations", actBar.ELEMENT_ADD_RELATION_LINK);
+		actBar.chooseDrive(ecms.ELEMENT_COLLABORATION_DRIVE);
 		actBar.createRelation(data1, data2);
 		click(siteExp.ELEMENT_SIDEBAR_COLLABORATION);
-
+		Utils.pause(1000);
 		info("-- Delete multiple items with reference --");
 		WebElement folder = waitForAndGetElement(siteExp.ELEMENT_DOCUMENT_TITLE.replace("${title}", folderName));
 		WebElement file1 = waitForAndGetElement(siteExp.ELEMENT_DOCUMENT_TITLE.replace("${title}", data1));
@@ -543,13 +541,14 @@ public class ECMS_SE_BasicAction_Delete extends PlatformBase {
 		//actBar.addItem2ActionBar("manageRelations", actBar.ELEMENT_ADD_RELATION_LINK);
 		actBar.createRelation(data1, data2);
 		click(siteExp.ELEMENT_SIDEBAR_COLLABORATION);
+		Utils.pause(1000);
 
 		info("-- Delete files with reference --");
 		WebElement file1 = waitForAndGetElement(siteExp.ELEMENT_DOCUMENT_TITLE.replace("${title}", data1));
 		WebElement file2 = waitForAndGetElement(siteExp.ELEMENT_DOCUMENT_TITLE.replace("${title}", data2));
 
 		Actions actions = new Actions(driver);
-		actions.keyDown(file1, Keys.CONTROL).moveToElement(file2).release().build().perform();		
+		actions.keyDown(Keys.CONTROL).click(file1).click(file2).keyUp(Keys.CONTROL).build().perform();
 		rightClickOnElement(siteExp.ELEMENT_DOCUMENT_TITLE.replace("${title}", data1));
 
 		//click(cMenu.ELEMENT_MENU_DELETE_RIGHT_CLICK_POPUP);
@@ -595,6 +594,7 @@ public class ECMS_SE_BasicAction_Delete extends PlatformBase {
 		//actBar.addItem2ActionBar("manageRelations", actBar.ELEMENT_ADD_RELATION_LINK);
 		actBar.createRelation(data1, data2);
 		click(siteExp.ELEMENT_SIDEBAR_COLLABORATION);
+		Utils.pause(1000);
 
 		info("-- Delete multiple files and folder with relation --");
 

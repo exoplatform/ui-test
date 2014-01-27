@@ -882,7 +882,13 @@ public class ContentTemplate extends EcmsBase{
 		Utils.pause(500);
 		//type(ELEMENT_NEWFILE_NAME_TEXTBOX, nameEdit, true);
 		if (contentEdit != ""){
-			inputDataToFrame(ELEMENT_NEWFILE_CONTENT_FRAME, contentEdit, true);
+			if (waitForAndGetElement(ELEMENT_NEWFILE_CONTENT_FRAME, 5000, 0,2) != null){
+				inputDataToFrame(ELEMENT_NEWFILE_CONTENT_FRAME, contentEdit, true);
+			}else if (waitForAndGetElement(ELEMENT_NEWFILE_TEXTAREA_ID, 3000, 0) != null){
+				type(ELEMENT_NEWFILE_TEXTAREA_ID, contentEdit, true);
+			} else{// if(waitForAndGetElement(ELEMENT_NEWFILE_CONTENT_FRAME_41, 3000, 0) != null){
+				inputDataToFrame(ELEMENT_NEWFILE_CONTENT_FRAME_41, contentEdit, true);
+			}
 			switchToParentWindow();
 		}
 		if (titleEdit != ""){
@@ -1018,7 +1024,10 @@ public class ContentTemplate extends EcmsBase{
 				int length = links.length;
 				waitForAndGetElement(By.xpath("//div[contains(text(),'" + links[length-1]+ "..." +"')]"));
 			}
-			inputDataToFrame(ELEMENT_WEBCONTENT_SUMMARY_FRAME,sum,true);
+			if(waitForAndGetElement(ELEMENT_WEBCONTENT_SUMMARY_FRAME_41,5000,0,1)!=null)
+				typeMultiLineInCkeContent(ELEMENT_WEBCONTENT_SUMMARY_FRAME_41, sum);
+			else //if(waitForAndGetElement(ELEMENT_WEBCONTENT_SUMMARY_FRAME,5000,0,1)!=null)
+				typeMultiLineInCkeContent(ELEMENT_WEBCONTENT_SUMMARY_FRAME, sum);		
 			switchToParentWindow();
 		}
 

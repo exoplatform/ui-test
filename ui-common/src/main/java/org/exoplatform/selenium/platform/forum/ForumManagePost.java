@@ -4,6 +4,7 @@ import static org.exoplatform.selenium.TestLogger.info;
 
 import org.exoplatform.selenium.Button;
 import org.exoplatform.selenium.ManageAlert;
+import org.exoplatform.selenium.Utils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -33,19 +34,22 @@ public class ForumManagePost extends ForumBase {
 
 	public By ELEMENT_POST_REPLY_BUTTON = By.linkText("Post Reply");
 	public String ELEMENT_POST_EDIT_BUTTON = "//*[text()='${postContent}']/../../../..//a[text()='Edit' and @class='btn']";
-
-	public String ELEMENT_POST_CHECKBOX = "//*[text()='${postContent}']/../../../../*//input[@type='checkbox']";
-	//public By ELEMENT_MOVE_POST = By.xpath("//a[@class='ItemIcon MovePostIcon' and text()='Move']");
-	public By ELEMENT_MOVE_POST = By.xpath("//*[@class='dropdown uiDropdownWithIcon actionIcon pull-right open']//*[@class='uiIconMove']");
+	
+	public String ELEMENT_POST_CHECKBOX = "//*[contains(text(),'${postContent}')]/../../../../*//input[@type='checkbox']";
+//	public By ELEMENT_MOVE_POST = By.xpath("//a[@class='ItemIcon MovePostIcon' and text()='Move']");
+	public By ELEMENT_MOVE_POST = By.linkText("Move");
 	public String ELEMENT_GO_TO_THE_LASTS_READ_POST_FORUM = "//a[text()='${forum}']/../..//a[@title='Go to the last read post']";
 	public String ELEMENT_PRIVATE_POST_BUTTON = "//*[text()='${topic}  ']/../../..//a[text()='Private']";
+	public final String ELEMENT_POST_CONTENT = "//*[@class='postContent']//*[text()='${postContent}']";
+	public By ELEMENT_APPROVE_FORM = By.xpath("//span[@class='PopupTitle popupTitle' and contains(text(),'Posts to Approve')]");
+	public By ELEMENT_APPROVE_POST = By.linkText("Approve");
+//	public String ELEMENT_APPROVE_POST_CHECK = "//a[@data-original-title='${topic}']/../../../../..//*[@class='uiCheckbox']";
+	public String ELEMENT_APPROVE_POST_CHECK = "//a[@data-original-title='${post}']/../../..//input[@type='checkbox']";
+	
+	public By ELEMENT_APPROVE_POST_BUTTON = By.xpath("//button[text()='Approve']");
 
-	public By ELEMENT_APPROVE_POST = By.xpath("//a[text()='Approve']");
-	public String ELEMENT_APPROVE_POST_CHECK = "//a[@title='{$topic}']/ancestor::tr//input";
-
-	public By ELEMENT_APPROVE_POST_BUTTON = By.linkText("Approve");
 	public By ELEMENT_CENSOR_POST = By.linkText("Censor");
-	public String ELEMENT_CENSOR_POST_CHECK = "//a[@title='{$post}']/ancestor::tr//input";
+	public String ELEMENT_CENSOR_POST_CHECK = "//a[@data-original-title='${post}']/../../..//input[@type='checkbox']";
 	public String MSG_POST_CENSOR = "This post may contain offensive content. It will be displayed after moderation.";
 	public String MSG_POST_APPROVE = "Your post is pending for moderation. It will be displayed after approval.";
 	public String ELEMENT_POST_TITLE_TEXT = "//div[@class='postViewTitle pull-left' and contains(text(),'${post}')]";
@@ -80,7 +84,8 @@ public class ForumManagePost extends ForumBase {
 	public By ELEMENT_POST_REASON = By.id("editReason");
 
 	//--------------move post screen-----------------------------------------------------------
-	public By ELEMENT_POPUP_MOVE_POST = By.id("UIForumPopupWindow");
+	//public By ELEMENT_POPUP_MOVE_POST = By.id("UIForumPopupWindow");
+	public By ELEMENT_POPUP_MOVE_POST = By.xpath("//span[@class='PopupTitle popupTitle' and text()='Move Posts']");
 
 	//Delete post
 	public String MSG_DELETE_POST = "Are you sure you want to delete this post ?";
@@ -295,9 +300,27 @@ public class ForumManagePost extends ForumBase {
 		click(ELEMENT_MODERATION);
 		click(ELEMENT_MOVE_POST);
 		waitForAndGetElement(ELEMENT_POPUP_MOVE_POST);
-		click(ELEMENT_DATA_ORIGINAL_TITLE.replace("${title}",destination));
+
+//		click(ELEMENT_DATA_ORIGINAL_TITLE.replace("${title}",destination));
+//		waitForElementNotPresent(ELEMENT_POPUP_MOVE_POST);
+//		waitForElementNotPresent(element_checkbox);
+
+		String[] temp;			 
+		/* Delimiter */
+		String delimiter = "/";
+
+		temp = destination.split(delimiter);
+		/* Go to group */
+		for(int i =0; i < temp.length ; i++){
+			info("Go to " + temp[i]);
+			click(By.xpath("//div[@class='lastNode']//a[contains(text(),'"+temp[i]+"')]"));
+			Utils.pause(500);
+		}
+		
 		waitForElementNotPresent(ELEMENT_POPUP_MOVE_POST);
-		waitForElementNotPresent(element_checkbox);
+//		String links[] = destination.split("/");
+//		int length = links.length;
+//		waitForAndGetElement(By.xpath("//a[@title='" + links[length - 2] + "']/../div[@title='" + links[length - 1] + "']"));
 		info("Move post successfully");
 	}
 
@@ -310,24 +333,25 @@ public class ForumManagePost extends ForumBase {
 		info("--Approve post--");
 		waitForAndGetElement(ELEMENT_APPROVE_POST);
 		click(ELEMENT_APPROVE_POST);
-		waitForAndGetElement(ELEMENT_APPROVE_POST_BUTTON);
-		click(ELEMENT_APPROVE_POST_CHECK.replace("{$topic}", post));
+		waitForAndGetElement(ELEMENT_APPROVE_FORM);
+		check(By.xpath(ELEMENT_APPROVE_POST_CHECK.replace("${post}", post)), 2);
+		Utils.pause(100);
 		click(ELEMENT_APPROVE_POST_BUTTON);
-		waitForElementNotPresent(ELEMENT_APPROVE_POST_BUTTON);
 	}
+	
 	/** Censor a post
 	 * @author thuntn
 	 * @param post
 	 */
 	public void censorPost(String post){
-		By postCheck = By.xpath(ELEMENT_CENSOR_POST_CHECK.replace("{$post}", post));
+		By postCheck = By.xpath(ELEMENT_CENSOR_POST_CHECK.replace("${post}", post));
 
 		info("--Approve a post that is pending by censor--");
 		waitForAndGetElement(ELEMENT_MODERATION);
 		click(ELEMENT_MODERATION);
 		click(ELEMENT_CENSOR_POST);
 		waitForAndGetElement(ELEMENT_APPROVE_POST_BUTTON);
-		check(postCheck);
+		check(postCheck,2);
 		click(ELEMENT_APPROVE_POST_BUTTON);
 		waitForElementNotPresent(ELEMENT_APPROVE_POST_BUTTON);
 		info("--Approve a topic successfully--");

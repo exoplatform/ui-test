@@ -4,6 +4,7 @@ import static org.exoplatform.selenium.TestLogger.info;
 
 import org.exoplatform.selenium.Button;
 import org.exoplatform.selenium.Dialog;
+import org.exoplatform.selenium.ManageAlert;
 import org.exoplatform.selenium.platform.ManageAccount;
 import org.exoplatform.selenium.platform.NavigationToolbar;
 import org.exoplatform.selenium.platform.PlatformBase;
@@ -56,13 +57,14 @@ public class ECMS_Admin_ManageCategories_CategoryAction extends PlatformBase{
 		initSeleniumTest();
 		driver.get(baseUrl);
 		info("Login ECMS with " + DATA_USER);
-		nav = new NavigationToolbar(driver);
-		magAcc = new ManageAccount(driver);
-		button = new Button(driver);
+		nav = new NavigationToolbar(driver, this.plfVersion);
+		magAcc = new ManageAccount(driver, this.plfVersion);
+		button = new Button(driver, this.plfVersion);
 		dialog = new Dialog(driver);
-		ecms = new EcmsBase(driver);
+		ecms = new EcmsBase(driver, this.plfVersion);
 		magCa = new ManageCategory(driver);
-		cMenu = new ContextMenu(driver);
+		cMenu = new ContextMenu(driver, this.plfVersion);
+		alert = new ManageAlert(driver, this.plfVersion);
 		magAcc.signIn(DATA_USER, DATA_PASS);
 	}
 
@@ -338,9 +340,7 @@ public class ECMS_Admin_ManageCategories_CategoryAction extends PlatformBase{
 
 		info("-- Step 3: Paste cut Category into itself --");
 		click(magCa.ELEMENT_PASTE_TO_CATEGORY_ICON.replace("${categoryName}", categoryName));
-		waitForMessage(magCa.MESSAGE_INFO_CUT_TO_CATEGORY.replace("${pathCategory}", "/sites/intranet/"+ categoryTreeName +"/"+ categoryName +""));
-		//dialog.closeMessageDialog();
-		click(button.ELEMENT_OK_BUTTON);
+		alert.verifyAlertMessage(magCa.MESSAGE_INFO_CUT_TO_CATEGORY.replace("${pathCategory}", "/sites/intranet/"+ categoryTreeName +"/"+ categoryName +""));
 
 		info("-- Restore original data --");
 		button.close();

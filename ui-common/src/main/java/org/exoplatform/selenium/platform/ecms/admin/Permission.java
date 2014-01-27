@@ -20,7 +20,7 @@ public class Permission extends EcmsPermission{
 		super(dr);
 		// TODO Auto-generated constructor stub
 	}
-	
+
 	ManageAlert magAlert = new ManageAlert(driver);
 	Button button = new Button(driver);
 
@@ -33,23 +33,23 @@ public class Permission extends EcmsPermission{
 	public final By ELEMENT_REMOVE_CHEKBOX = By.xpath("//div[@id='UITabContent' and @style='display: block;;']//*[@id='remove']");
 	public final By ELEMENT_SELECT_USER_IN_PERMISSION_MANAGEMENT = By.xpath("//div[@id='UITabContent' and @style='display: block;;']//*[@title='Select User']");
 	public final By ELEMENT_SELECT_USER_IN_PERMISSION_MANAGEMENT_2 = By.xpath("//div[@id='UITabContent' and @style='display: block;;']//*[@data-original-title='Select User']");
-	
+
 	public final By ELEMENT_SELECT_MEMBERSHIP_IN_PERMISSION_MANAGEMENT = By.xpath("//div[@id='UITabContent' and @style='display: block;;']//*[@title='Select Membership']");
 	public final By ELEMENT_SELECT_EVERYONE_IN_PERMISSION_MANAGEMENT = By.xpath("//div[@id='UITabContent' and @style='display: block;;']//*[@title='Select Everyone']");
 	public final By ELEMENT_SELECT_EVERYONE_IN_PERMISSION_MANAGEMENT_2 = By.xpath("//div[@id='UITabContent' and @style='display: block;;']//*[@data-original-title='Select Everyone']");
 	public final By ELEMENT_SELECT_EVERYONE_IN_PERMISSION_MANAGEMENT_3 = By.xpath("//div[@id='UITabContent' and @style='display: block;;']//*[@data-original-title='Everyone']");
 	public final By ELEMENT_SAVE_BUTTON_IN_PERMISSION_MANAGEMENT = By.xpath("//div[@id='UITabContent' and @style='display: block;;']//*[contains(text(),'Save')]");
-                                                              
+
 	public final String ELEMENT_PERMISSION_MANAGEMENT_READ = "//div[@id='UITabContent' and @style='display: block;;']//*[@data-original-title='${userOrGroupName}']/../..//input[contains(@id, 'read')]";
 	public final String ELEMENT_PERMISSION_MANAGEMENT_MODIFY = "//div[@id='UITabContent' and @style='display: block;;']//*[@data-original-title='${userOrGroupName}']/../..//input[contains(@id, 'add')]";
 	public final String ELEMENT_PERMISSION_MANAGEMENT_REMOVE = "//div[@id='UITabContent' and @style='display: block;;']//*[@data-original-title='${userOrGroupName}']/../..//input[contains(@id, 'remove')]"; 
-	
+
 	//"//*[text()='Add permission to that node']/ancestor::div[contains(@id, 'Permission')]//*[@title='*:/platform/users']/../..//input[contains(@id, 'read')]";
 	//public final String ELEMENT_EDIT_USER_PERMISSION = "//*[@title='${userOrGroupName}']/../..//*[@class='uiIconEdit']";
 	//public final String ELEMENT_EDIT_USER_PERMISSION_AUX = "//div[@id='UITabContent' and @style='display: block;;']//*[@title='${userOrGroupName}']/../..//*[@class='uiIconEdit']";
 	public final String ELEMENT_DELETE_SELECTED_GROUP = "//*[contains(text(), '${selectedGroup}')]/../..//*[contains(@class, 'uiIconDelete')]";
 	public final String ELEMENT_TEXT_ADD_PERMISSION = "//*[@class='UIPermissionManager']//*[contains(text(), '${text}')]";
-	
+
 	/*============== Explorer/Tags Permission Manager ================*/
 	/**
 	 * Remove permission 
@@ -88,7 +88,7 @@ public class Permission extends EcmsPermission{
 			}else {
 				click(ELEMENT_SELECT_USER_IN_PERMISSION_MANAGEMENT_2);
 			}
-			
+
 			if (waitForAndGetElement(ELEMENT_TEXT_ADD_PERMISSION.replace("${text}", "Add permissions to this node"), 5000, 0) != null){
 				if (waitForAndGetElement(By.xpath("//*[@title='" + user + "']/../..//*[@class='SelectPageIcon']"), 5000, 0) !=null ){
 					click(By.xpath("//*[@title='" + user + "']/../..//*[@class='SelectPageIcon']"));
@@ -136,7 +136,7 @@ public class Permission extends EcmsPermission{
 	//Edit a permission for user or group
 	public void editPermissionUserOrGroup(String userOrGroupName, boolean read, boolean add, boolean remove, Object...params){
 		Boolean closeWindow = (Boolean) (params.length > 0 ? params[0]: false);
-		
+
 		info("-- Edit a permission for user/group: "+ userOrGroupName +" --");
 		waitForTextPresent("Permission Management");
 		/*if (isTextPresent("Add permissions to this node")){
@@ -145,28 +145,13 @@ public class Permission extends EcmsPermission{
 			click(ELEMENT_EDIT_USER_PERMISSION_AUX.replace("${userOrGroupName}", userOrGroupName));
 		}*/
 		if (read){
-			//click(ELEMENT_READ_CHEKBOX, 2);
-			if (isElementPresent(ELEMENT_PERMISSION_MANAGEMENT_READ.replace("${userOrGroupName}", userOrGroupName) + "/../../../div[@title='true']")){
-				info("-- Permission has already been selected... --");
-			}else{
-				click(ELEMENT_PERMISSION_MANAGEMENT_READ.replace("${userOrGroupName}", userOrGroupName), 2);
-			}
+			check(ELEMENT_PERMISSION_MANAGEMENT_READ.replace("${userOrGroupName}", userOrGroupName), 2);
 		}
 		if (add){
-			//click(ELEMENT_ADDNODE_CHECKBOX, 2);
-			if (isElementPresent(ELEMENT_PERMISSION_MANAGEMENT_MODIFY.replace("${userOrGroupName}", userOrGroupName) + "/../../../div[@title='true']")){
-				info("-- Permission has already been selected... --");
-			}else{
-				click(ELEMENT_PERMISSION_MANAGEMENT_MODIFY.replace("${userOrGroupName}", userOrGroupName), 2);
-			}
+			check(ELEMENT_PERMISSION_MANAGEMENT_MODIFY.replace("${userOrGroupName}", userOrGroupName), 2);
 		}
 		if (remove){
-			//click(ELEMENT_REMOVE_CHEKBOX, 2);
-			if (isElementPresent(ELEMENT_PERMISSION_MANAGEMENT_REMOVE.replace("${userOrGroupName}", userOrGroupName) + "/../../../div[@title='true']")){
-				info("-- Permission has already been selected... --");
-			}else{
-				click(ELEMENT_PERMISSION_MANAGEMENT_REMOVE.replace("${userOrGroupName}", userOrGroupName), 2);
-			}
+			check(ELEMENT_PERMISSION_MANAGEMENT_REMOVE.replace("${userOrGroupName}", userOrGroupName), 2);
 		}
 		if (closeWindow){
 			//click(ELEMENT_SAVE_BUTTON_IN_PERMISSION_MANAGEMENT);

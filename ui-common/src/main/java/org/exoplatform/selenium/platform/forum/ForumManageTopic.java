@@ -142,6 +142,7 @@ public class ForumManageTopic extends ForumBase {
 	public By ELEMENT_RATE_TOPIC_EXCELLENT = By.xpath("//i[@data-original-title='Good']");
 	public String ELEMENT_TOPIC_VOTED = "//div[@class='avgRatingImages']/i[@class='voted'][${rate}]";
 	public String ELEMENT_RATE_CLOSE_BUTTON = "//form[@id='UIRatingForm']//*[text()='Close']";
+	public By ELEMENT_RATE_RATING = By.xpath("//div[contains(text(),'Rating')]");
 
 	//------------Watch/Unwatch Topic---------------
 	public By ELEMENT_WATCH_TOPIC = By.linkText(" Watch");

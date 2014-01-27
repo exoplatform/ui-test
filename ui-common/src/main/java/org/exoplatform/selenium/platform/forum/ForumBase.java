@@ -123,7 +123,7 @@ public class ForumBase extends PlatformBase {
 	public final By ELEMENT_SORT_TOPIC_DIRECTION = By.id("topicSortByType");
 
 	//----------------Set Censor keywords form----------------------------------
-	public final By ELEMENT_CENSOR_POPUP = By.xpath("//span[@class='PopupTitle popupTitle' and text()='Censor Keyword']");
+	public final By ELEMENT_CENSOR_POPUP = By.xpath("//span[@class='PopupTitle popupTitle' and text()='Censor Keywords']");
 	public final By ELEMENT_CENSOR_POPUP_PLF4_1 = By.xpath("//span[@class='PopupTitle popupTitle' and text()='Censor Keywords']");
 	public final By ELEMENT_CENSORED_KEYWORDS =  By.id("censorKeyword");
 	
