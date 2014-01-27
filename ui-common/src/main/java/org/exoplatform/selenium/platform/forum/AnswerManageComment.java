@@ -16,7 +16,9 @@ public class AnswerManageComment extends AnswerBase {
 
 	HomePageActivity hpAct;
 	AnswerManageAnwser mAns;
-	public AnswerManageComment(WebDriver dr){
+	
+	public AnswerManageComment(WebDriver dr,String...plfVersion){
+		this.plfVersion = plfVersion.length>0?plfVersion[0]:"4.0";
 		driver = dr;
 		button = new Button(driver);
 		alert = new ManageAlert(driver);
@@ -58,11 +60,13 @@ public class AnswerManageComment extends AnswerBase {
 			rightClickOnElement(By.linkText(question));
 			click(magQuest.ELEMENT_COMMENT_LINK_IN_CONTEXT_MENU);
 		}
-		if(this.plfVersion.equalsIgnoreCase("4.0"))
-			inputDataToFrameInFrame(ELEMENT_COMMENT_CONTENT_FRAME_1, ELEMENT_COMMENT_CONTENT_FRAME_2, comment, true);
-		else
-			inputDataToFrame(ELEMENT_COMMENT_CONTENT_FRAME_41, comment, true);
-		switchToParentWindow();
+		if (comment != null){
+			if(this.plfVersion.equalsIgnoreCase("4.1"))
+				inputDataToFrame(ELEMENT_COMMENT_CONTENT_FRAME_41, comment, true,false);
+			else//(this.plfVersion.equalsIgnoreCase("4.0"))
+				inputDataToFrameInFrame(ELEMENT_COMMENT_CONTENT_FRAME_1, ELEMENT_COMMENT_CONTENT_FRAME_2, comment, true);
+			switchToParentWindow();	
+		}
 		button.save();
 		if(!comment.contains("<br/>"))
 			waitForAndGetElement(ELEMENT_COMMENT_IN_QUESTION.replace("${comment}", comment));

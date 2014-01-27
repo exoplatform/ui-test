@@ -30,7 +30,7 @@ public class Forum_Answers_Questions extends AnswerBase {
 		driver.get(baseUrl);
 		magAc = new ManageAccount(driver);
 		magCat = new AnswerManageCategory(driver);
-		magQuest = new AnswerManageQuestion(driver);
+		magQuest = new AnswerManageQuestion(driver, this.plfVersion);
 		magAc.signIn(DATA_USER1, DATA_PASS);
 		button = new Button(driver);
 		goToAnswer();

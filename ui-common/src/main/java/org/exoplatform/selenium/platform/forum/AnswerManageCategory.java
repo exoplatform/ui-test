@@ -68,7 +68,7 @@ public class AnswerManageCategory extends AnswerBase {
 
 	//move page
 	public final String ELEMENT_CATEGORY_IN_MOVE_FORM = "//*[@id='UIMoveCategoryForm']//*[text()='${category}']";
-
+	public final String ELEMENT_CATEGORY_LINK = "//a[contains(.,'${category}')]";
 	/*----------------------------------common function----------------------------------*/
 
 	/**
@@ -83,7 +83,6 @@ public class AnswerManageCategory extends AnswerBase {
 		}
 		//		getElementFromTextByJquery(categoryName).click();
 		click(ELEMENT_CATEGORY_LINK.replace("${category}", categoryName));
-		Utils.pause(1000);
 	}
 
 	/**

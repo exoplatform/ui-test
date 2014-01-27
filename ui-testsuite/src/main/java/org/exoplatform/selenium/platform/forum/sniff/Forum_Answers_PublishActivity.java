@@ -35,10 +35,10 @@ public class Forum_Answers_PublishActivity extends AnswerBase{
 		driver.get(baseUrl);
 		Acc = new ManageAccount(driver);
 		mCat = new AnswerManageCategory(driver);
-		mQuest = new AnswerManageQuestion(driver);
-		mAns = new AnswerManageAnwser(driver);
-		mCom = new AnswerManageComment(driver);
-		HPAct = new HomePageActivity(driver);
+		mQuest = new AnswerManageQuestion(driver, this.plfVersion);
+		mAns = new AnswerManageAnwser(driver, this.plfVersion);
+		mCom = new AnswerManageComment(driver, this.plfVersion);
+		HPAct = new HomePageActivity(driver, this.plfVersion);
 		navTool = new NavigationToolbar(driver);
 		Acc.signIn(DATA_USER1, DATA_PASS);
 		button = new Button(driver);
@@ -54,10 +54,7 @@ public class Forum_Answers_PublishActivity extends AnswerBase{
 		String categoryName = "Category74754";
 		String description = "Add new category for answer";	
 		String questionName = "Question 74754" ;
-		String questionContent = "This is your activity stream. It will help you to keep an eye on important things happening in your social intranet." +
-				"Connect and discuss with others" +
-				"Build your network by connecting with colleagues in Connections. They will be able to follow, comment on or like all the ideas, moods, status updates, links or documents that you share above. Let the discussion begin! Discover the power of social collaboration" +
-				"You can do a lot of useful things with Documents, Wikis, Forums and Calendars applications. The important things you do with them will be summarized automatically in the activity stream with just the right level of information to keep you and your network updated.";
+		String questionContent = "line1<br>line2<br>line3<br>line4<br>line5<br>";
 		String answerContent = "AnswerQuestion1";
 		String comment = "Comment for this question: good";
 
@@ -96,6 +93,7 @@ public class Forum_Answers_PublishActivity extends AnswerBase{
 
 		info("Create a question");
 		mQuest.quickAddCategoryAndQuestion(categoryName, description, questionName, questionContent);
+		
 		click(By.linkText(questionName));
 
 
@@ -140,7 +138,7 @@ public class Forum_Answers_PublishActivity extends AnswerBase{
 		driver.navigate().refresh();
 		waitForAndGetElement(By.linkText(questionName));
 
-		click(By.linkText("View all 3 comments."));
+		/**click(By.linkText("View all 3 comments."));*/
 
 		HPAct.checkAnswerOfQuestion(questionName, answerContent1, answerContent2);
 		HPAct.checkCommentOfQuestion(questionName, comment);

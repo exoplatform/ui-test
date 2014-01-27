@@ -95,6 +95,8 @@ public class PlatformBase extends TestBase {
 	public final By ELEMENT_MENU_SEO_LINK = By.linkText("SEO");
 	public final By ELEMENT_MENU_ADD_PAGE_LINK = By.linkText("Add Page");
 
+	//Add page
+	public final By ELEMENT_PAGE_NAME = By.id("pageName");
 
 	//site
 	public final By ELEMENT_MENU_EDIT_SITES = By.xpath("//*[@id='UIAdminToolbarContainer']//a[contains(text(),'Site')]");
@@ -220,16 +222,14 @@ public class PlatformBase extends TestBase {
 	/*
 	 * Context menu
 	 * */
-
-//	public final By ELEMENT_CUT_NODE = By.className("uiIconEcmsCut");
 	public final By ELEMENT_CUT_NODE = By.className("uiIconCutNode");
 	public final By ELEMENT_ECMS_CUT_NODE = By.className("uiIconEcmsCut");
 	//By.xpath("//*[@class='uiContextMenuContainer']//*[@class='uiIconEcmsCut']"); 
-//	public final By ELEMENT_PASTE_NODE = By.className("uiIconEcmsPaste");
+	//	public final By ELEMENT_PASTE_NODE = By.className("uiIconEcmsPaste");
 	public final By ELEMENT_PASTE_NODE = By.className("uiIconPasteNode");
 	public final By ELEMENT_ECMS_PASTE_NODE = By.className("uiIconEcmsPaste");
 	//By.xpath("//*[@class='uiContextMenuContainer']//*[@class='uiIconEcmsPaste']"); 
-//	public final By ELEMENT_COPY_NODE = By.className("uiIconEcmsCopy");
+	//	public final By ELEMENT_COPY_NODE = By.className("uiIconEcmsCopy");
 	public final By ELEMENT_COPY_NODE = By.className("uiIconCopyNode");
 	public final By ELEMENT_ECMS_COPY_NODE = By.className("uiIconEcmsCopy");
 
@@ -336,6 +336,13 @@ public class PlatformBase extends TestBase {
 	public final String ELEMENT_SELECT_SESSION_ALIVE= "//select[@name='sessionAlive']"; 
 	public final By ELEMENT_PROPERTIES_TAB = By.linkText("Properties");
 
+	//Page layout TAB
+	public final By ELEMENT_PAGE_LAYOUT_TAB = By.linkText("Page Layout");
+	public final String ELEMENT_PAGE_LAYOUT_SETTING_COMBOBOX = "//*[@id='UIDropDownPageTemp']/div[@class='btn dropdown-toggle']";
+	public final String ELEMENT_PAGE_LAYOUT_SETTING_COMBOBOX_OPTION = "//*[@id='UIDropDownPageTemp']/ul[@class='dropdown-menu']/li/a[text()='${PageConfigOpt}']";
+	public final By ELEMENT_PAGE_LAYOUT_OPTION_EMPTY = By.xpath("//*[@id='UIPageTemplateOptions']//a[contains(text(),'Empty Layout')]");
+	public final By ELEMENT_PAGE_LAYOUT_OPTION_DASHBOARD = By.xpath("//*[@id='UIPageTemplateOptions']//a[contains(text(),'Dashboard Layout')]");
+
 	//Permission Setting TAB
 	public final By ELEMENT_PERMISSION_SETTING_TAB= By.linkText("Permission Settings");
 	public final By ELEMENT_CHECKBOX_PUBLIC_MODE = By.id("publicMode");
@@ -389,6 +396,10 @@ public class PlatformBase extends TestBase {
 	public final String ELEMENT_PAGE_FINISH_BUTTON = "//*[@data-original-title='Finish']";
 	public final By ELEMENT_PAGE_CLOSE = By.xpath("//a[@title='Abort']");
 	public final By ELEMENT_SWITCH_VIEW_MODE = By.linkText("Switch View mode");
+	public final String ELEMENT_PAGE_COLUMN = "//tr[@class='TRContainer']//td['${index}']";
+	public final By ELEMENT_VIEW_PAGE_PROPERTIES = By.linkText("View Page properties");
+
+	public final By ELEMENT_PAGE_EXIST_WARNING_MSG = By.xpath("//*[contains(text(),'This page name already exists')]");
 
 	//PortalNavigation - http://localhost:8080/portal/g/:platform:administrators/portalnavigation
 	public final String ELEMENT_NODE_LINK = "//*[@class='node']//*[@title='${nodeLabel}']";
@@ -525,6 +536,7 @@ public class PlatformBase extends TestBase {
 	public final By ELEMENT_SELECT_ICON_TAB = By.xpath("//*[text()='Select Icon']");
 	public final By ELEMENT_DECORATION_THEMES_TAB = By.xpath("//*[text()='Decoration Themes']");
 	public final By ELEMENT_ACCESS_PERMISSION_TAB = By.xpath("//*[text()='Access Permission']");
+	public final By ELEMENT_ACCESS_PERMISSION_MAKEITPUBLIC = By.id("publicMode");
 
 	/*
 	 * END Page Management
@@ -1115,9 +1127,9 @@ public class PlatformBase extends TestBase {
 	 * = false, not clear old data, not verify that new data is input correctly
 	 */
 	public void inputDataToFrame(By framelocator, String data, boolean...validate){
+		boolean isValid = validate.length > 0 ? validate[0] : false;
 		try {
 			WebElement inputsummary = null;
-
 			for (int repeat = 0;; repeat++) {
 				if (repeat >= DEFAULT_TIMEOUT/WAIT_INTERVAL) {
 					Assert.fail("Fail to input data to frame " + framelocator);
@@ -1127,24 +1139,14 @@ public class PlatformBase extends TestBase {
 				inputsummary = driver.switchTo().activeElement();
 				inputsummary.click();
 				inputsummary.clear();
-				if (validate.length >0)
-					if (validate[0]){
-						info("clear old data of frame, verify that new data is input correctly");
-						((JavascriptExecutor) driver).executeScript("document.body.innerHTML='" + data + "'");
-						info(data);
-						info(inputsummary.getText());
-						if (inputsummary.getText().contains(data)) break;
-					}
-					else{
-						info("not clear old data, not verify that new data is input correctly");
-						((JavascriptExecutor) driver).executeScript("document.body.innerHTML='" + data + "' + document.body.innerHTML;");
+				((JavascriptExecutor) driver).executeScript("document.body.innerHTML='" + data + "'");
+				if (isValid){
+					if (data.equals(inputsummary.getText())) 
 						break;
-					}
-				else {
-					((JavascriptExecutor) driver).executeScript("document.body.innerHTML='" + data + "' + document.body.innerHTML;");
-					if (inputsummary.getText().contains(data)) break;
 				}
-
+				else{
+					break;
+				}
 				switchToParentWindow();
 			}
 		} catch (StaleElementReferenceException e) {
@@ -1230,7 +1232,7 @@ public class PlatformBase extends TestBase {
 		String[] lines = content.split("/");
 
 		if (lines.length > 0){
-			
+
 			WebElement e = waitForAndGetElement(cke_frame,DEFAULT_TIMEOUT,1,2);
 			driver.switchTo().frame(e);
 			inputsummary = driver.switchTo().activeElement();
