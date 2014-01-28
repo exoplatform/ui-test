@@ -10,12 +10,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 /**
- * @Date 10 Oct 2013
- * @author thuntn
- *
+ * Provides all methods of managing Task in Calendar portlet 
+ * 
  */
 public class Task extends CalendarBase{
-
 
 	//------------------------Task Menu-------------------------------------------------------
 	public String ELEMENT_TASK_MENU_DELETE = "//*[@id='tmpMenuElement']//i[@class='uiIconDelete uiIconLightGray']";
@@ -75,8 +73,8 @@ public class Task extends CalendarBase{
 
 	/*============== Go to Task =============*/
 	/**
-	 * Open form Add a task
-	 * @author thuntn
+	 * Open "Add new task" form
+	 * 
 	 */
 	public void goToAddTask(){
 		info("Go to Add Task page"); 
@@ -84,8 +82,10 @@ public class Task extends CalendarBase{
 	}
 
 	/**
-	 * Open Edit task form
-	 * @param oldName: old name of task
+	 * Open "Edit task" form
+	 * 
+	 * @param oldName
+	 * 				old name of task
 	 */
 	public void goToEditTaskForm(String oldName){
 		info("Open Edit Task form");
@@ -99,8 +99,8 @@ public class Task extends CalendarBase{
 	}
 
 	/**
-	 * Setting Pop-up reminder for task on Quick Add Task form
-	 * @author havtt
+	 * Go to "Setting Pop-up reminder" for task on "Quick Add Task" form
+	 * 
 	 */
 	public void gotoSetPopupReminder() {
 
@@ -112,8 +112,8 @@ public class Task extends CalendarBase{
 	}
 
 	/**
-	 * Setting E-mail reminder for task on Quick Add Task form
-	 * @author havtt
+	 * Go to "Setting E-mail reminder" for task on "Quick Add Task" form
+	 * 
 	 */
 	public void gotoSetEmailReminder() {
 		click(ELEMENT_BUTTON_TASK_MORE_DETAILS);
@@ -124,12 +124,17 @@ public class Task extends CalendarBase{
 
 	
 	/*==========Input data form =========*/
-	/**Input into basic fields of Quick task form and tab details of Add task form
+	/**
+	 * Input into basic fields of Quick task form and tab details of Add task form
 	 * 
-	 * @param name: name of a task
-	 * @param note: note of a task 
-	 * @param opt: opt[0]: calendar
-	 * opt[1]: category
+	 * @param name
+	 * 			name of a task
+	 * @param note
+	 * 			note of a task 
+	 * @param opt
+	 * 			optional parameter
+	 * 			opt[0]: calendar
+	 * 			opt[1]: category
 	 */
 	public void inputBasicQuickTask(String name, String note, String...opt){
 		boolean quick = (waitForAndGetElement(ELEMENT_QUICK_ADD_TASK_POPUP,5000,0) != null) ? true : false;
@@ -166,10 +171,14 @@ public class Task extends CalendarBase{
 	}
 
 	/**
-	 * Input into From, To fields of a task
-	 * @param from: from date, time, eg: 11/06/2013 14:00
-	 * @param to: To date, time fields, eg: 11/06/2013 14:00
-	 * @param allDay: all day field of task
+	 * Input into "From, To" fields of a task
+	 * 
+	 * @param from
+	 * 			From date, time of a task i.e.: 11/06/2013 14:00
+	 * @param to
+	 * 			To date, time of a task, i.e.: 11/06/2013 14:00
+	 * @param allDay
+	 * 			Option "all day" of a task
 	 */
 	public void inputFromToTask(String from, String to, boolean allDay){
 		boolean quick = (waitForAndGetElement(ELEMENT_QUICK_ADD_TASK_POPUP,5000,0) != null) ? true : false; 
@@ -231,9 +240,11 @@ public class Task extends CalendarBase{
 		}
 	}
 	
-	/**Input into other fields in tab details of a task
+	/**
+	 * Input into other fields in tab details of a task
 	 * 
-	 * @param status: Task Status of a task 
+	 * @param status
+	 * 				"status" of a task 
 	 * 
 	 */
 	public void inputOtherFieldsTabDetailsTask(String status){
@@ -243,15 +254,23 @@ public class Task extends CalendarBase{
 		}
 	}
 
-	/** Input into tab Detail of Add task form
-	 * @author thuntn
-	 * @param name: name of a task
-	 * @param note: note of a task 
-	 * @param from: from of a task
-	 * @param to: to of a task
-	 * @param allDay: all day of a task
-	 * @param path: path of attachment of a task
+	/** 
+	 * Input into tab Detail of Add task form
+	 * 
+	 * @param name
+	 * 				name of a task
+	 * @param note
+	 * 				note of a task 
+	 * @param from
+	 * 				From date, time of a task
+	 * @param to
+	 * 				To date, time of a task
+	 * @param allDay
+	 * 				option "All day" of a task
+	 * @param path
+	 * 				path of attachment of a task
 	 * @param opt
+	 * 				optional parameter to choose whether to input Details for task or not
 	 */
 	public void inputDataTabDetailTask(String name, String note, String from, String to, boolean allDay, String path,  String...opt){
 		inputBasicQuickTask(name, note, opt);
@@ -265,9 +284,11 @@ public class Task extends CalendarBase{
 		
 	}
 
-	/**Attach file in Add task form
-	 * @author thuntn
-	 * @param path: path of attachment of a task
+	/**
+	 * Attach file in "Add new task" form
+	 * 
+	 * @param path
+	 * 				path of attachment of a task
 	 */
 	public void attachFileToTask(String path){
 
@@ -281,17 +302,24 @@ public class Task extends CalendarBase{
 		switchToParentWindow();
 
 	}
-	/*======End of Input data*/
+	/*======End of Input data========*/
 
 	/*==========Add/Edit/Delete a Task======*/
-	/** Quick add task
-	 * @author thuntn
+	/** 
+	 * Quick add task
+	 * 
 	 * @param name
+	 * 			name of a task
 	 * @param note
+	 * 			note information for a task
 	 * @param from
+	 * 			From date,time of a task
 	 * @param to
+	 * 			To date.time of a task
 	 * @param allDay
+	 * 			option "All day" of a task
 	 * @param opt
+	 * 			optional parameter
 	 */
 	public void addQuickTask(String name, String note, String from, String to, boolean allDay, String...opt){
 		goToAddTask();
@@ -300,35 +328,38 @@ public class Task extends CalendarBase{
 		click(ELEMENT_BUTTON_TASK_SAVE);
 
 	}
-	/**Edit a task by right click (just edit some fields, pls write more)
+	
+	/**
+	 * Edit some informations of a task by right click
 	 * 
-	 * @param oldName: old name of a task
-	 * @param name: new name of a task
-	 * @param note: new note of a task 
-	 * @param from: new from of a task
-	 * @param to: new to of a task
-	 * @param allDay: new all day of a task
-	 * @param path: new path of attachment of a task
+	 * @param oldName
+	 * 				old name of a task
+	 * @param name
+	 * 				new name of a task
+	 * @param note
+	 * 				new note of a task 
+	 * @param from
+	 * 				new value of From date,time of a task
+	 * @param to
+	 * 				new value of To date,time of a task
+	 * @param allDay
+	 * 				new value of "all day" option of a task
+	 * @param path
+	 * 				new path of attachment file of a task
 	 * @param opt
+	 * 				optional parameter
 	 */
 	public void editTask(String oldName, String name, String note,String from, String to, boolean allDay, String path, String...opt) {
 		info("Edit a task");
 		goToEditTaskForm(oldName);
 		inputDataTabDetailTask(name, note, from, to, allDay, path, opt);
-
 		click(ELEMENT_BUTTON_TASK_SAVE_EDIT);
 	}
 
-
 	/*================End of ....======================*/
 
-
-
-	/**Set time for Pop-up reminder on current date
-	 * 
-	 * @author havtt
-	 * 
-	 * @param fromTime Start time of a task
+	/**
+	 * Set time for Pop-up reminder on current date
 	 */
 	public void setTimePopupReminder() {
 		int CURRENT_MIN = getMinute();

@@ -9,9 +9,8 @@ import org.exoplatform.selenium.ManageAlert;
 import org.exoplatform.selenium.Utils;
 
 /**
- * @Date 10 Oct 2013
- * @author thuntn
- *
+ * Provides all methods of managing Event in Calendar portlet
+ * 
  */
 public class Event extends CalendarBase{
 
@@ -28,7 +27,6 @@ public class Event extends CalendarBase{
 	public By ELEMENT_BUTTON_EVENT = By.id("UIActionBarQuickAddEvent");
 	public By ELEMENT_MENU_EVENT_EDIT = By.xpath("//*[@id='tmpMenuElement']//i[@class='uiIconEdit uiIconLightGray']");
 	public By ELEMENT_ADD_EVENT_POPUP = By.xpath("//span[@class='PopupTitle popupTitle' and text()='Quick Add Event']");
-
 
 	//Preview form
 	public String ELEMENT_EVENT_PREVIEW_TITLE = "//form[@id='UIPreviewPopup']//div[@class='titleList']/strong[text()='${event}']";
@@ -55,8 +53,8 @@ public class Event extends CalendarBase{
 	
 	/******************Go to******************************/
 	/**
-	 * Open form Add event
-	 * @author thuntn
+	 * Open "Add event" form 
+	 *
 	 */
 	public void goToAddEvent(){
 		info("Go to Add Event page");
@@ -65,8 +63,9 @@ public class Event extends CalendarBase{
 	}
 	
 	/**
-	 * Open Edit Event form 
-	 * @param oldEvent: old name of event
+	 * Open "Edit Event" form 
+	 * @param oldEvent
+	 * 				Name of event that need editing
 	 */
 	public void goToEditEventForm(String oldEvent){
 		if(waitForAndGetElement(ELEMENT_EVENT_TASK_ONE_DAY.replace("${taskName}", oldEvent),15000,0) != null)
@@ -76,15 +75,20 @@ public class Event extends CalendarBase{
 		click(ELEMENT_MENU_EVENT_EDIT);
 		waitForAndGetElement(ELEMENT_EDIT_EVENT_POPUP);
 	}
-	/******************End of go to**********************/
+	//---------------End of go to------------------------//
 
-	/**************Input data form***************/
+	//---------------Input data form--------------//
 	/**
-	 * Input into basic fields of Add quick event and tab details of Add/Edit event
-	 * @param name: name of event
-	 * @param description: description of event
-	 * @param opt: opt[0]: calendar name of this event (optional)
-	 * opt[1]: category name of this event (optional)
+	 * Input into basic fields of "Add quick event" and tab "Details" of "Add/Edit event"
+	 * 
+	 * @param name
+	 * 			name of event
+	 * @param description
+	 * 			description of event
+	 * @param opt
+	 * 			optional parameter
+	 * 			opt[0]: calendar name of this event
+	 * 			opt[1]: category name of this event
 	 */
 	public void inputBasicQuickEvent(String name, String description, String...opt){
 		boolean quick = (waitForAndGetElement(ELEMENT_ADD_EVENT_POPUP,5000,0) != null) ? true : false; 
@@ -116,11 +120,16 @@ public class Event extends CalendarBase{
 			}
 		}
 	}
+	
 	/**
-	 * Input into From, To fields of Add quick event and tab details of Add/Edit event
-	 * @param from: from date, time, eg: 11/06/2013 14:00
-	 * @param to: To date, time fields, eg: 11/06/2013 14:00
-	 * @param allDay: all day
+	 * Input into "From", "To" fields of "Add quick event" and tab "Details" of "Add/Edit event"
+	 * 
+	 * @param from
+	 * 			From date, time, eg: 11/06/2013 14:00
+	 * @param to
+	 * 			To date, time fields, eg: 11/06/2013 14:00
+	 * @param allDay
+	 * 			Choose option "All-Day event" or not
 	 */
 	public void inputFromToEvent(String from, String to, boolean allDay){
 		boolean quick = (waitForAndGetElement(ELEMENT_ADD_EVENT_POPUP,5000,0) != null) ? true : false; 
@@ -179,8 +188,9 @@ public class Event extends CalendarBase{
 	
 	/**
 	 * Input into other fields of tab Details of Add/Edit event
-	 * @param location: location of event
 	 * 
+	 * @param location
+	 * 				location of event
 	 */
 	public void inputOtherFieldsTabDetailsEvent(String location){
 		if(location != null){
@@ -188,15 +198,25 @@ public class Event extends CalendarBase{
 		}
 	}
 	
-	/**Input into Add/Edit Event form
-	 * @param name: name of event
-	 * @param description: description of event
-	 * @param location: location of event
-	 * @param from: from date, time of event
-	 * @param to: to date, time of event
-	 * @param allDay: allDay of event
-	 * @param opt: opt[0]: calendar name of this event (optional)
-	 * opt[1]: category of this event (optional)
+	/**
+	 * Input into Add/Edit Event form
+	 * 
+	 * @param name
+	 * 				name of event
+	 * @param description
+	 * 				description of event
+	 * @param location
+	 * 				location of event
+	 * @param from
+	 * 				from date, time of event
+	 * @param to
+	 * 				to date, time of event
+	 * @param allDay
+	 * 				option "allDay" of event
+	 * @param opt
+	 * 				optional parameter	
+	 * 				opt[0]: calendar name of this event (optional)
+	 * 				opt[1]: category of this event (optional)
 	 */
 	public void inputAddEventForm(String name, String description, String location, String from, String to, boolean allDay, String...opt){
 		inputBasicQuickEvent(name, description, opt);
@@ -208,14 +228,23 @@ public class Event extends CalendarBase{
 
 	
     /******************Add/Edit Event*************************/
-	/** Quick add event
-	 * @param name: name of event
-	 * @param description: description of event
-	 * @param from: from date, time of event
-	 * @param to: to date, time of event
-	 * @param allDay: allDay of event
-	 * @param opt: opt[0]: calendar name of this event (optional)
-	 * opt[1]: category of this event (optional)
+	/** 
+	 * Quick add event
+	 * 
+	 * @param name
+	 * 				name of event
+	 * @param description
+	 * 				description of event
+	 * @param from
+	 * 				from date, time of event
+	 * @param to
+	 * 				to date, time of event
+	 * @param allDay
+	 * 				option "allDay" of event
+	 * @param opt
+	 * 				optional parameter
+	 * 				opt[0]: calendar name of this event (optional)
+	 * 				opt[1]: category of this event (optional)
 	 */
 	public void addQuickEvent(String name, String description, String from, String to, boolean allDay, String...opt){
 		info("--Add an event--");
@@ -227,31 +256,27 @@ public class Event extends CalendarBase{
 		Utils.pause(1000);
 	}
 
-
-	/**Choose category opt for Add event
-	 * @author havtt
-	 * @date 23-Oct-2013
-	 * This method is not necessary. There is a command "select(ELEMENT_INPUT_EVENT_CATEGORY, opt[1]);" in the method inputQuickAddEventForm
-	 */
-
-	/*public void chooseCategorywhenAddEvent(String categoryName){
-		info("----Choose category opt----");
-		waitForAndGetElement(ELEMENT_EVENT_CATEGORY_OPT_COMBOBOX.replace("${categoryName}", categoryName));
-		click(ELEMENT_EVENT_CATEGORY_OPT_COMBOBOX.replace("${categoryName}", categoryName));
-	}
-	}*/
-
-	/**Edit an event
-	 * @author thuntn
-	 * @param oldEvent: old name of event
-	 * @param name: new name of event
-	 * @param description: new description of event
-	 * @param location: new location of event
-	 * @param from: new from date, time of event
-	 * @param to: new to date, time of event
-	 * @param allDay: new allDay of event
-	 * @param opt: opt[0]: new calendar name of this event (optional)
-	 * opt[1]: new category of this event (optional)
+	/**
+	 * Edit an event
+	 *
+	 * @param oldEvent
+	 * 				old name of event
+	 * @param name
+	 * 				new name of event
+	 * @param description
+	 * 				new description of event
+	 * @param location
+	 * 				new location of event
+	 * @param from
+	 * 				new from date, time of event
+	 * @param to
+	 * 				new to date, time of event
+	 * @param allDay
+	 * 				new value of "allDay" option of event
+	 * @param opt
+	 * 				optional parameter
+	 * 				opt[0]: new calendar name of this event (optional)
+	 * 				opt[1]: new category of this event (optional)
 	 */
 	public void editEvent(String oldEvent, String name, String description, String location,String from, String to, boolean allDay, String...opt){
 		info("Edit an event");
@@ -263,4 +288,3 @@ public class Event extends CalendarBase{
 	
 	/****************End of Add/Edit Event*******************/
 }
-

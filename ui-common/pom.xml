@@ -40,7 +40,7 @@
 						<configuration>
 							<sourcepath>${source.folder}</sourcepath>
 							<doctitle>eXo Platform - Java Selenium Test Framework
-								Documentation 4.0</doctitle>
+								Documentation</doctitle>
 							<sourceFileIncludes>
 								<!-- Wiki -->
 								<include>org/exoplatform/selenium/platform/wiki/*.java</include>

@@ -1,9 +1,7 @@
 package org.exoplatform.selenium.platform.calendar;
 
 import static org.exoplatform.selenium.TestLogger.info;
-
 import java.awt.event.KeyEvent;
-
 import org.exoplatform.selenium.Button;
 import org.exoplatform.selenium.ManageAlert;
 import org.exoplatform.selenium.Utils;
@@ -17,9 +15,8 @@ import org.openqa.selenium.WebElement;
 //import org.openqa.selenium.internal.seleniumemulation.KeyEvent;
 
 /**
+ * Provides all basic actions of managing Calendar portlet 
  * 
- * @author thuntn
- * @date 10 Oct 2013
  */
 public class CalendarBase extends PlatformBase {
 
@@ -212,8 +209,9 @@ public class CalendarBase extends PlatformBase {
 	public final String ELEMENT_CREATE_TASK_MESSAGE = "//*[contains(text(),'The Task was added to ${userName}')]";
 	/*================== Common functions for Calendar =================*/
 
-	/** Go to calendar
-	 * @author thuntn
+	/** 
+	 * Go to Intranet Calendar
+	 * 
 	 */
 	public void goToCalendarPage(){	
 		hpAct = new HomePageActivity(driver);
@@ -226,13 +224,18 @@ public class CalendarBase extends PlatformBase {
 		ID_CALENDAR_PAGE = waitForAndGetElement(ELEMENT_GET_ID_PAGE).getAttribute("id");
 	}
 
-	/** Get Property of a calendar
-	 * @author thuntn
+	/** 
+	 * Get Property of a calendar
+	 * 
 	 * @param calendar
-	 * @param property = 1: ID
+	 * 				the target calendar of which property will be get
+	 * @param property 
+	 * 				the calendar property option.
+	 * 				   = 1: ID
 	 *                 = 2: type
 	 *                 = 3: color
-	 * @return: property of calendar
+	 *                 
+	 * @return property of calendar
 	 */
 	public String getPropertyOfCalendar(String calendar,int property){
 		try{
@@ -253,10 +256,13 @@ public class CalendarBase extends PlatformBase {
 		}
 	}
 
-	/**Execute action of calendar: Edit, Delete, Share, export....
-	 * @author thuntn
-	 * @param calendar: name of calendar
-	 * @param action: action need to be done, eg: "ShareCalendar"
+	/**
+	 * Execute action of calendar: Edit, Delete, Share, export....
+	 * 
+	 * @param calendar
+	 * 				name of calendar
+	 * @param action
+	 * 				action that needs to be done, e.g.: "ShareCalendar"
 	 */
 	public void executeActionCalendar(String calendar, String action){
 		String idCal = getPropertyOfCalendar(calendar,1);
@@ -265,12 +271,17 @@ public class CalendarBase extends PlatformBase {
 		((JavascriptExecutor)driver).executeScript("javascript:eXo.webui.UIForm.submitEvent('"+ID_CALENDAR_PAGE+"#UICalendars','"+action+"','&objectId="+idCal+"&calType="+type+"&calColor="+color+"')");
 	}
 
-	/** Share a calendar
-	 * @author thuntn
-	 * @param calendar: name of calendar
-	 * @param userGroup: array of users or groups that are shared with
-	 * @param canEdit: array of canEdit permission of users, groups respectively inputed by userGroup variable 
-	 * @param mode: way to input users, groups
+	/** 
+	 * Share a calendar
+	 * 
+	 * @param calendar
+	 * 				name of calendar
+	 * @param userGroup
+	 * 				array of users or groups that are shared with
+	 * @param canEdit
+	 * 				array of "canEdit" permissions for users, groups respectively inputed by userGroup variable 
+	 * @param mode
+	 * 				way to input users, groups.
 	 *            =0: type directly
 	 *            =1: select user
 	 *            =2: select group
@@ -306,10 +317,11 @@ public class CalendarBase extends PlatformBase {
 		click(ELEMENT_CAL_SHARE_SAVE_BUTTON);
 	}
 
-
-	/** Open export calendar form
-	 * @author thuntn
-	 * @param calendar: name of calendar
+	/** 
+	 * Open export calendar form
+	 * 
+	 * @param calendar
+	 * 				name of calendar
 	 */
 	public void goToExportCalendar(String calendar){
 
@@ -320,9 +332,11 @@ public class CalendarBase extends PlatformBase {
 
 	/**
 	 * Export calendar
-	 * @author thuntn
-	 * @param calendar: name of calendar
-	 * @param name: file name of exported file
+	 * 
+	 * @param calendar
+	 * 				name of calendar
+	 * @param name
+	 * 				filename of exported calendar
 	 */
 	public void exportCalendar(String calendar, String name){
 		info("Export calendar");
@@ -334,8 +348,9 @@ public class CalendarBase extends PlatformBase {
 		Utils.pause(3000);
 	}
 
-	/** Open Add calendar form
-	 * @author thuntn
+	/** 
+	 * Open "Add calendar" form
+	 * 
 	 */
 	public void goToAddCalendar(){
 		click(ELEMENT_CALENDAR_ACTIONS_ICON);
@@ -343,23 +358,29 @@ public class CalendarBase extends PlatformBase {
 		click(ELEMENT_CALENDAR_ADD_MENU);
 	}
 
-	/** Open Calendar Settings form
-	 * @author HangNTT
+	/** 
+	 * Open "Calendar Settings" form
+	 * 
 	 */
 	public void goToCalendarSettings(){
 		click(ELEMENT_CALENDAR_ACTIONS_ICON);
 		click(ELEMENT_CALENDAR_SETTINGS);
 	}
 
-	/** Input into Add calendar form
-	 * @author thuntn
-	 * @param name: name of calendar
-	 * @param description: description of calendar
-	 * @param color: color of calendar
-	 * @param groups: optional. If not pass this parameter, this function will create a personal calendar
-	 * vice versa, the function will create a group calendar, based on:
-	 * 		+ groups[0]: name of group, eg: /platform/administrators,  
-	 * 		+ groups[1]: if not "0", type directly groups into the textbox "Select group"
+	/** 
+	 * Input into Add calendar form
+	 * 
+	 * @param name
+	 * 			name of calendar
+	 * @param description
+	 * 			description of calendar
+	 * @param color
+	 * 			color of calendar
+	 * @param groups
+	 * 			optional parameter. If the value of this parameter is not set, this function will create a personal calendar.
+	 * 			Vice versa, the function will create a group calendar, based on:
+	 * 				+ groups[0]: name of group, eg: /platform/administrators,  
+	 * 				+ groups[1]: if not "0", type directly groups into the textbox "Select group"
 	 * 			if not pass group[1], the function will click on "Select group" icon
 	 */
 	public void inputAddCalendarForm(String name, String description, String color, String...groups){
@@ -389,11 +410,14 @@ public class CalendarBase extends PlatformBase {
 
 	/*================== Calendar Feeds ====================*/
 	/** 
-	 * Input into feeds form
-	 * @author hangntt
-	 * @param name: name of feeds
-	 * @param calendar: array of calendars that you want to add feeds for
-	 * @param url: optional
+	 * Input into calendar feeds form
+	 * 
+	 * @param name
+	 * 			name of feeds
+	 * @param calendar
+	 * 			array of calendars that you want to add feeds for
+	 * @param url
+	 * 			optional parameter. URL feed that will be generated if requested.
 	 *           = 1: click Reset url icon
 	 *           = 2: click Generate url icon
 	 *           else: leave the Url field by default
@@ -423,11 +447,15 @@ public class CalendarBase extends PlatformBase {
 		waitForAndGetElement("//*[contains(text(),'"+name+"')]");
 	}
 
-	/** Add feeds
-	 * @author hangntt
-	 * @param name: name of feeds
-	 * @param calendar: array of calendars that you want to add feeds for
-	 * @param url: optional
+	/** 
+	 * Add calendar feeds
+	 * 
+	 * @param name
+	 * 			name of feeds
+	 * @param userGroup
+	 * 			array of calendars that you want to add feeds for
+	 * @param url
+	 * 			optional parameter. URL feed that will be generated if requested.
 	 *           = 1: click Reset url icon
 	 *           = 2: click Generate url icon
 	 *           else: leave the Url field by default
@@ -442,12 +470,17 @@ public class CalendarBase extends PlatformBase {
 
 	}
 
-	/** Edit feeds
-	 * @author hangntt
-	 * @param oldName: old name of feed
-	 * @param name: new name of feeds
-	 * @param calendar: array of new calendars that you want to add feeds for
-	 * @param url: optional
+	/** 
+	 * Edit calendar feeds
+	 * 
+	 * @param oldName 
+	 * 			old name of feed
+	 * @param name
+	 * 			new name of feeds
+	 * @param userGroup
+	 * 			array of new calendars that you want to add feeds for
+	 * @param url
+	 * 			optional parameter. URL feed that will be generated if requested.
 	 *           = 1: click Reset url icon
 	 *           = 2: click Generate url icon
 	 *           else: leave the Url field by default
@@ -458,8 +491,9 @@ public class CalendarBase extends PlatformBase {
 		inputFeedsData(name, userGroup, url);
 	}
 
-	/** delete feeds
-	 * @author hangntt
+	/** 
+	 * Delete calendar feeds
+	 * 
 	 */
 	public void deleteFeeds(String name){
 		alert = new ManageAlert(driver);
@@ -472,9 +506,11 @@ public class CalendarBase extends PlatformBase {
 
 	/*============== End of Feeds ===============*/
 
-	/** Upload calendar
-	 * @author thuntn
-	 * @param path: path of a file which is for upload
+	/** 
+	 * Upload calendar
+	 * 
+	 * @param path
+	 * 			path of a file which will be uploaded.
 	 */
 	public void uploadCalendar(String path){
 		info("--Upload Calendar--");
@@ -490,8 +526,8 @@ public class CalendarBase extends PlatformBase {
 	}
 
 	/**
-	 * Open form Import calendar
-	 * @author thuntn
+	 * Open "Import calendar" form
+	 * 
 	 */
 	public void goToImportCalendar(){
 		click(ELEMENT_CALENDAR_ACTIONS_ICON);
@@ -499,12 +535,17 @@ public class CalendarBase extends PlatformBase {
 		waitForAndGetElement(ELEMENT_CAL_IMPORT_POPUP);
 	}
 
-	/** Import calendar
-	 * @author thuntn
-	 * @param path: path of a file which is for upload
-	 * @param name: name of calendar
-	 * @param description: description of calendar
-	 * @param color: color of calendar
+	/** 
+	 * Import calendar
+	 * 
+	 * @param path
+	 * 				path of a file which is for upload
+	 * @param name
+	 * 				name of calendar
+	 * @param description
+	 * 				description of calendar
+	 * @param color
+	 * 				color of calendar
 	 */
 	public void importCalendar(String path, String name, String description, String color){
 		goToImportCalendar();
@@ -524,47 +565,49 @@ public class CalendarBase extends PlatformBase {
 		waitForAndGetElement(By.linkText(name));
 	}
 
-	/** 
-	 * Delete event/task
-	 * @author thuntn, havtt edited
-	 * @param String event
-	 * @param boolean allDay
-	 */
-	/*public void deleteEventTask(String event, boolean allDay){
-		alert = new ManageAlert(driver);
-		if (allDay == true)
-		{
-			info("--Delete event--");
-			rightClickOnElement(ELEMENT_EVENT_TASK_ALL_DAY.replace("${event}", event),2);
-			click(ELEMENT_EVENT_TASK_DELETE_MENU);
-			alert.waitForConfirmation(MSG_EVENT_TASK_DELETE);
-			waitForElementNotPresent(ELEMENT_EVENT_TASK_ALL_DAY.replace("${event}", event));
-			waitForElementNotPresent(ELEMENT_EVENT_TASK_WORKING_PANE.replace("${event}", event));
-		}
-		else
-		{        
-			info("--Delete event--");
-			rightClickOnElement(ELEMENT_EVENT_TASK_ONE_DAY.replace("${taskName}", event),2);
-			click(ELEMENT_EVENT_TASK_DELETE_MENU);
-			info("--Confirm deleted event--");
-			alert.waitForConfirmation(MSG_EVENT_TASK_DELETE);
-			alert.acceptAlert();
-			waitForElementNotPresent(ELEMENT_EVENT_TASK_ONE_DAY.replace("${taskName}", event));
-		}
-	}*/
+//	/** 
+//	 * Delete event/task
+//	 * @author thuntn, havtt edited
+//	 * @param String event
+//	 * @param boolean allDay
+//	 */
+//	public void deleteEventTask(String event, boolean allDay){
+//		alert = new ManageAlert(driver);
+//		if (allDay == true)
+//		{
+//			info("--Delete event--");
+//			rightClickOnElement(ELEMENT_EVENT_TASK_ALL_DAY.replace("${event}", event),2);
+//			click(ELEMENT_EVENT_TASK_DELETE_MENU);
+//			alert.waitForConfirmation(MSG_EVENT_TASK_DELETE);
+//			waitForElementNotPresent(ELEMENT_EVENT_TASK_ALL_DAY.replace("${event}", event));
+//			waitForElementNotPresent(ELEMENT_EVENT_TASK_WORKING_PANE.replace("${event}", event));
+//		}
+//		else
+//		{        
+//			info("--Delete event--");
+//			rightClickOnElement(ELEMENT_EVENT_TASK_ONE_DAY.replace("${taskName}", event),2);
+//			click(ELEMENT_EVENT_TASK_DELETE_MENU);
+//			info("--Confirm deleted event--");
+//			alert.waitForConfirmation(MSG_EVENT_TASK_DELETE);
+//			alert.acceptAlert();
+//			waitForElementNotPresent(ELEMENT_EVENT_TASK_ONE_DAY.replace("${taskName}", event));
+//		}
+//	}
 
 	/**
-	 * Select an option when creating an Event/Task 
-	 * ONE DAY
-	 * ALL DAY  
+	 * Select an option when creating an Event/Task: ONE DAY or ALL DAY  
 	 */
 	public enum selectDayOption{
 		ONEDAY, ALLDAY;
 	}
+	
 	/**
 	 * Delete an event or task
-	 * @param event: name of event or task
-	 * @param options: optional, if not pass, this function consider the event/task as all day
+	 * 
+	 * @param event
+	 * 				name of event or task
+	 * @param options
+	 * 				optional parameter, if not be set, the event/task will be automatically set as "all day" event/task
 	 * 				= selectDayOption.ALLDAY: this function consider the event/task as all day
 	 * 				= selectDayOption.ONEDAY: this function consider the event/task as one day
 	 */
@@ -603,16 +646,21 @@ public class CalendarBase extends PlatformBase {
 
 	/*============Add, Edit, Delete a Calendar ===========*/
 	/** 
-	 * Add calendar
-	 * @author thuntn
-	 * @param name: name of calendar
-	 * @param description: description of calendar
-	 * @param color: name of color which is used in @class of the color element, eg: hot_pink
-	 * @param groups: optional. If not pass this parameter, this function will create a personal calendar
-	 * vice versa, the function will create a group calendar, based on:
-	 * 		+ groups[0]: name of group, eg: /platform/administrators,  
-	 * 		+ groups[1]: if not "0", type directly groups into the textbox "Select group"
-	 * 			if not pass group[1], the function will click on "Select group" icon	 */
+	 * Add a calendar
+	 * 
+	 * @param name
+	 * 			name of calendar
+	 * @param description
+	 * 			description of calendar
+	 * @param color
+	 * 			name of color which is used in @class of the color element, eg: hot_pink
+	 * @param groups
+	 * 			optional parameter. If the value of this parameter is not set, this function will create a personal calendar.
+	 * 			Vice versa, the function will create a group calendar, based on:
+	 * 				+ groups[0]: name of group, eg: /platform/administrators,  
+	 * 				+ groups[1]: if not "0", type directly groups into the textbox "Select group"
+	 * 			if not pass group[1], the function will click on "Select group" icon	 
+	 */
 	public void addCalendar(String name, String description, String color, String...groups){
 		info("Add calendar");
 		goToAddCalendar();
@@ -621,10 +669,13 @@ public class CalendarBase extends PlatformBase {
 		waitForAndGetElement(By.linkText(name));
 	}
 
-	/** Delete calendar
-	 * @author thuntn
-	 * @param name: name of calendar
-	 * @param verify: optional, if not pass this parameter, by default, verify that calendar is deleted 
+	/** 
+	 * Delete a calendar
+	 * 
+	 * @param name
+	 * 				name of calendar
+	 * @param verify
+	 * 				optional parameter. If not be set, by default, it is considered that calendar is deleted 
 	 * 				= true: verify that calendar is deleted, 
 	 * 				= false: not verify that calendar is deleted, 
 	 */
@@ -642,16 +693,22 @@ public class CalendarBase extends PlatformBase {
 		}
 	}
 
-	/** Edit a calendar
-	 * @author thuntn
-	 * @param oldName: old name of calendar
-	 * @param name: new name of calendar
-	 * @param description: new description of calendar
-	 * @param color: new color of calendar
-	 * @param groups: optional. If not pass this parameter, this function will create a personal calendar
-	 * vice versa, the function will create a group calendar, based on:
-	 * 		+ groups[0]: name of group, eg: /platform/administrators,  
-	 * 		+ groups[1]: if not "0", type directly groups into the textbox "Select group"
+	/** 
+	 * Edit a calendar
+	 * 
+	 * @param oldName
+	 * 				old name of calendar
+	 * @param name
+	 * 				new name of calendar
+	 * @param description
+	 * 				new description of calendar
+	 * @param color
+	 * 				new color of calendar
+	 * @param groups
+	 * 			optional parameter. If the value of this parameter is not set, this function will create a personal calendar.
+	 * 			Vice versa, the function will create a group calendar, based on:
+	 * 				+ groups[0]: name of group, eg: /platform/administrators,  
+	 * 				+ groups[1]: if not "0", type directly groups into the textbox "Select group"
 	 * 			if not pass group[1], the function will click on "Select group" icon
 	 */
 	public void editCalendar(String oldName,String name, String description, String color, String...groups){
@@ -662,9 +719,11 @@ public class CalendarBase extends PlatformBase {
 		waitForAndGetElement(By.linkText(name));
 	}
 
-	/**Delete shared calendar
-	 * @author thuntn
-	 * @param calendar: name of shared calendar
+	/**
+	 * Delete a shared calendar
+	 * 
+	 * @param calendar
+	 * 				name of shared calendar
 	 */
 	public void deleteSharedCalendar(String calendar){
 
@@ -676,8 +735,10 @@ public class CalendarBase extends PlatformBase {
 	/*========== End of Add a Calendar ==========*/
 
 	/**
-	 * @author thuntn
-	 * @param calendar: name of calendar
+	 * Open context menu of Calendar
+	 * 
+	 * @param calendar
+	 * 				name of calendar
 	 */
 	public void openMenuOfCalendar(String calendar){
 		WebElement element = waitForAndGetElement(ELEMENT_CALENDAR_SETTING_ICON.replace("${calendar}", calendar), DEFAULT_TIMEOUT, 0, 2);
@@ -685,10 +746,13 @@ public class CalendarBase extends PlatformBase {
 		((JavascriptExecutor)driver).executeScript("arguments[0].click();", element);
 	}
 
-	/** Show working time on working pane
-	 * @author vuna2
-	 * @param beginTime: start time, eg: 03:00
-	 * @param endTime: end time, eg: 10:00
+	/** 
+	 * Show working time on working pane
+	 * 
+	 * @param beginTime
+	 * 				start time, e.g.: 03:00
+	 * @param endTime
+	 * 				end time, e.g.: 10:00
 	 */
 	public void showWorkingTimes(String beginTime, String endTime){
 		info("Show Working Times");
@@ -703,10 +767,11 @@ public class CalendarBase extends PlatformBase {
 		Utils.pause(500);
 	}
 
-	/** Setting timezone for Calendar
-	 * @author havtt
-	 * @date 18-Oct-2013
-	 * @param timezoneOpt: time zone of calendar, eg: (GMT -11:00) Pacific/Samoa
+	/** 
+	 * Set timezone for Calendar
+	 * 
+	 * @param timezoneOpt
+	 * 				time zone of calendar, e.g.: (GMT -11:00) Pacific/Samoa
 	 */
 	public void setTimezoneForCalendar(String timezoneOpt){
 		click(ELEMENT_CAL_SETTING_MENU);
@@ -718,10 +783,11 @@ public class CalendarBase extends PlatformBase {
 		Utils.pause(3000);
 	}
 
-	/** Quick search in Calendar
-	 * @author havtt
-	 * @date 22-Oct-2013
-	 * @param keyword: keyword which is to input into search box 
+	/** 
+	 * Quick search in Calendar
+	 * 
+	 * @param keyword
+	 * 			keyword which is to input into search box 
 	 */
 	public void quickSearchCalendar(String keyword){
 		info("----Type in quick search box----");
@@ -735,10 +801,11 @@ public class CalendarBase extends PlatformBase {
 		waitForAndGetElement(ELEMENT_BUTTON_CLOSE_QUICK_SEARCH_RESULT);
 	}
 
-	/** Advance search in Calendar
-	 * @author havtt
-	 * @date 22-Oct-2013
-	 * @param keyword: keyword which is to input into search box 
+	/** 
+	 * Advance search in Calendar
+	 * 
+	 * @param keyword
+	 * 			keyword which is to input into search box 
 	 */
 	public void advanceSearchCalendar(String keyword){
 		info("----Open Advance Search window----");
@@ -753,10 +820,11 @@ public class CalendarBase extends PlatformBase {
 		waitForAndGetElement(ELEMENT_BUTTON_CLOSE_QUICK_SEARCH_RESULT);
 	}
 
-	/** Go to Calendar Actions> Add Event Category
-	 * @author havtt
-	 * @date 22-Oct-2013
-	 * @param categoryName: category name
+	/** 
+	 * Go to Calendar Actions> Add Event Category
+	 * 
+	 * @param categoryName
+	 * 				category name of Calendar
 	 */
 	public void addEventCategory(String categoryName){
 		info("----Add new event category----");
@@ -767,10 +835,11 @@ public class CalendarBase extends PlatformBase {
 		click(ELEMENT_ADD_EVENT_CATEGORY_BUTTON_CLOSE);	 
 	}
 
-	/** Choose event category in Categories combo box for filter  
-	 * @author havtt
-	 * @date 22-Oct-2013
-	 * @param categoryName: category name
+	/** 
+	 * Choose event category in Categories combo box for filter  
+	 * 
+	 * @param categoryName
+	 * 				category name of calendar
 	 */
 	public void chooseEventCategoryOpt(String categoryName){
 		info("----Verify if new category is displayed in Category option or not----");
@@ -781,10 +850,11 @@ public class CalendarBase extends PlatformBase {
 
 	}
 
-	/** Delete Event Category
-	 * @author havtt
-	 * @date 23-Oct-2013
-	 * @param categoryName: category name
+	/** 
+	 * Delete Event Category
+	 * 
+	 * @param categoryName
+	 * 				category name of calendar
 	 */
 	public void deleteEventCategory(String categoryName){
 		alert = new ManageAlert(driver);
@@ -795,11 +865,13 @@ public class CalendarBase extends PlatformBase {
 		click(ELEMENT_ADD_EVENT_CATEGORY_BUTTON_CLOSE);	
 	}
 
-	/** Edit Event Category
-	 * @author havtt
-	 * @date 23-Oct-2013
-	 * @param categoryName: old category name
-	 * @param editedCategoryName: new category name
+	/** 
+	 * Edit Event Category
+	 * 
+	 * @param categoryName
+	 * 						old category name
+	 * @param editedCategoryName
+	 * 						new category name
 	 */
 
 	public void editEventCategory(String categoryName, String editedCategoryName){
@@ -811,9 +883,9 @@ public class CalendarBase extends PlatformBase {
 		click(ELEMENT_ADD_EVENT_CATEGORY_BUTTON_CLOSE);
 	}
 
-	/** Go to Add Event Category
-	 * @author havtt
-	 * @date 23-Oct-2013
+	/** 
+	 * Go to Add Event Category
+	 * 
 	 */
 	public void gotoAddEventCategory(){
 		click(ELEMENT_CALENDAR_ACTIONS_ICON);
@@ -823,14 +895,16 @@ public class CalendarBase extends PlatformBase {
 	}	 
 
 
-	/** Change "Edit Permission" for acc in Add New Calendar>Show In Group
-	 * @author havtt
-	 * @date 28-Oct-2013
+	/** 
+	 * Change "Edit Permission" for acc in Add New Calendar>Show In Group
 	 * 
-	 * @param editAcc	account that will be set Edit permission
-	 * @param Group		group name in Show in Group Calendar
+	 * @param calName
+	 * 			calendar name
+	 * @param editAcc	
+	 * 			account that will be set Edit permission
+	 * @param Group		
+	 * 			group name in Show in Group Calendar
 	 */
-
 	public void changeEditPermissionForCalShowInGroup (String calName, String editAcc, String Group){
 		info("==Open calendar actions menu==");
 		executeActionCalendar(calName, "EditCalendar");
@@ -842,14 +916,24 @@ public class CalendarBase extends PlatformBase {
 		click(ELEMENT_CAL_ADD_SAVE_BUTTON);
 		Utils.pause(3000);
 	}
-	/**addEventTaskFromToolbarNavigation
-	 * Mouse over on the button "Create" (+) --> Select the item "Event/Task"
-	 * @author phuongdt
+	/**
+	 * Add Event/Task from ToolbarNavigation by mousing over on the button "Create" (+) --> Select the item "Event/Task"
+	 *
 	 * @param title
+	 * 			title of event/task
 	 * @param from
+	 * 			start date of event/task
 	 * @param to
-	 * @param opt
+	 * 			end date of event/task
+	 * @param allDay
+	 * 			if true, the event/task will be set to "All Day" event/task
+	 * @param verify
+	 * 			if true, the Add Event/Task action's result will be verified			
 	 * @param isEvent
+	 * 			if true, Event will be added. Otherwise, task will be added instead.
+	 * @param opt 
+	 * 			optional parameter to choose the calendar group.
+	 * 			
 	 */
 	public void addEventTaskFromToolbarNavigation(Boolean isEvent, String title, String from, String to, boolean allDay, boolean verify, String...opt){
 		button = new Button(driver);
