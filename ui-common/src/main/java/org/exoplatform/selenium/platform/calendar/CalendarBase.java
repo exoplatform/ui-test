@@ -186,7 +186,7 @@ public class CalendarBase extends PlatformBase {
 	public String ELEMENT_BUTTON_MORE = "//*[@class='btn-group containerMoreItem']/*[@data-toggle='dropdown']";
 
 	//public String EVENT_WEEK_VIEW = "//*[@id='UIWeekViewGridAllDay']//div[contains(text(),'${eventTitle}')]";
-	public String EVENT_DAY_VIEW = "//*[@id='UIDayView']//div[contains(text(),'${eventTitle}')]";
+	public String EVENT_DAY_VIEW = "//*[@id='UIDayView']//div[contains(text(),'${eventTitle}')]/..";
 	public String EVENT_MONTH_VIEW = "//*[@id='UIMonthView']//span[contains(text(),'${eventTitle}')]";
 	public String EVENT_LIST_VIEW = "//*[@id='UIListUsers']//span[contains(text(),'${eventTitle}')]";
 //	public String EVENT_WORK_WEEK_VIEW = "//*[@id='UIWeekViewGridAllDay']//div[contains(text(),'${eventTitle}')]";
@@ -441,7 +441,7 @@ public class CalendarBase extends PlatformBase {
 		default: break;
 		}
 		click(ELEMENT_FEEDS_SAVE_BUTTON);
-		waitForAndGetElement("//*[contains(text(),'"+VERIFY_MESSAGE_URL.replace("${name}", name)+"')]");
+		waitForAndGetElement("//*[contains(text(),'"+VERIFY_MESSAGE_URL.replace("${name}", name)+"')]",60000);
 		click(ELEMENT_OK_POPUP_BUTTON);
 		waitForAndGetElement("//*[contains(text(),'"+name+"')]");
 	}

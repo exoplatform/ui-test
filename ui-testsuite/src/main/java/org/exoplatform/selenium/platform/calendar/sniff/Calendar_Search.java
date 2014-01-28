@@ -56,7 +56,7 @@ public class Calendar_Search extends CalendarBase{
 
 		info("Restore data");
 		click(ELEMENT_BUTTON_CLOSE_QUICK_SEARCH_RESULT);
-		goToCalendarPage();
+		waitForAndGetElement(ELEMENT_EVENT_TASK_ONE_DAY.replace("${taskName}", EVENT_NAME_01));
 		deleteEventTask(EVENT_NAME_01, selectDayOption.ONEDAY);
 	}
 
@@ -81,7 +81,7 @@ public class Calendar_Search extends CalendarBase{
 
 		info("Restore data");
 		click(ELEMENT_BUTTON_CLOSE_QUICK_SEARCH_RESULT);
-		goToCalendarPage();
+		waitForAndGetElement(ELEMENT_EVENT_TASK_ONE_DAY.replace("${taskName}", EVENT_NAME_02));
 		deleteEventTask(EVENT_NAME_02, selectDayOption.ONEDAY);
 	}
 }

@@ -254,6 +254,10 @@ public class Event extends CalendarBase{
 		button.save();
 		waitForElementNotPresent(ELEMENT_ADD_EVENT_POPUP);
 		Utils.pause(1000);
+		if(allDay)
+			waitForAndGetElement(ELEMENT_EVENT_TASK_ALL_DAY.replace("${event}", name));
+		else
+			waitForAndGetElement(ELEMENT_EVENT_TASK_ONE_DAY.replace("${taskName}", name));
 	}
 
 	/**

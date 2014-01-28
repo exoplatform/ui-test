@@ -1,4 +1,4 @@
-package org.exoplatform.selenium.platform.plf.functional.hompagegadgets.calendargadget;
+package org.exoplatform.selenium.platform.plf.functional.homepagegadgets.calendargadget;
 
 import static org.exoplatform.selenium.TestLogger.info;
 import org.exoplatform.selenium.Button;

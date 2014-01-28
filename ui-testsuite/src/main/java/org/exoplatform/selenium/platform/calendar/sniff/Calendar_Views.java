@@ -61,11 +61,11 @@ public class Calendar_Views extends CalendarBase{
 
 		info("Switch to Day view");
 		click(ELEMENT_BUTTON_DAY_VIEW);
-		waitForAndGetElement(EVENT_DAY_VIEW.replace("${eventTitle}",EVENT_NAME_01),DEFAULT_TIMEOUT,1,2);
+		waitForAndGetElement(EVENT_DAY_VIEW.replace("${eventTitle}",EVENT_NAME_01),DEFAULT_TIMEOUT,1);
 
 		info("Switch to Month view");
 		click(ELEMENT_BUTTON_MONTH_VIEW);
-		waitForAndGetElement(EVENT_MONTH_VIEW.replace("${eventTitle}",EVENT_NAME_01));
+		waitForAndGetElement(EVENT_MONTH_VIEW.replace("${eventTitle}",EVENT_NAME_01),60000);
 
 		info("Switch to List view");
 		click(ELEMENT_BUTTON_LIST_VIEW);
@@ -80,7 +80,7 @@ public class Calendar_Views extends CalendarBase{
 
 		info("Restore data");
 		click(ELEMENT_BUTTON_WEEK_VIEW);
-		deleteEventTask(EVENT_NAME_01, selectDayOption.ONEDAY);
+		deleteEventTask(EVENT_NAME_01);
 	}
 
 	/** Check category filter in Week view

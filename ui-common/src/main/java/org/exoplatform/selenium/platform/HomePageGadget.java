@@ -61,7 +61,10 @@ public class HomePageGadget extends PlatformBase{
 	public String ELEMENT_ONLINE_USER_ACC_IMG = "//*[@id='tipName']//a[@href='/portal/intranet/activities/${acc}']/img";
 	public String ELEMENT_ONLINE_USER_TITLE = "//*[@id='tipName']//td[2]/a[@href='/portal/intranet/activities/${acc}']";
 	public String ELEMENT_ONLINE_USER_AVATAR = "//ul[@id='onlineList']//a[@class='avatarXSmall' and @href='/portal/intranet/profile/${acc}']";
-	public String ELEMENT_WHOISONLINE_CONNECT_BUTTON = "//*[@id='tiptip_content']//div[@class='connect btn btn-primary' and @data-action='Invite:${acc}']";
+	public String ELEMENT_ONLINE_USER_STATUS = ".//*[@id='tiptip_content']/blockquote[contains(text(),'${status}')]";
+	public String ELEMENT_ONLINE_USER_STATUS_TRUNCATED = "//*[@id='tiptip_content']/blockquote/span[@class='truncate_ellipsis']";
+	public String ELEMENT_WHOISONLINE_CONNECT_BUTTON_INVITE = "//*[@id='tiptip_content']//div[@data-action='Invite:${acc}']";
+	public String ELEMENT_WHOISONLINE_CONNECT_BUTTON_ACCEPT = "//*[@id='tiptip_content']//div[@data-action='Accept:${acc}']";
 	//My Profile tab
 	public String ELEMENT_PROFILE_TAB_USER_INFO = "//*[@id='UIUserNavigationPortlet']/ul[@class='nav nav-tabs userNavigation']//a[@href='/portal/intranet/profile/${acc}']";
 	//My activity stream tab
@@ -160,7 +163,7 @@ public class HomePageGadget extends PlatformBase{
 	public void connectPeoplefromWhoisOnlineGadget(String username){
 		info("--Connecting from Who's Online gadget--");
 		mouseOver(ELEMENT_ONLINE_USER_AVATAR.replace("${acc}",username),true);
-		WebElement element = waitForAndGetElement(ELEMENT_WHOISONLINE_CONNECT_BUTTON.replace("${acc}",username), DEFAULT_TIMEOUT,1,2);
+		WebElement element = waitForAndGetElement(ELEMENT_WHOISONLINE_CONNECT_BUTTON_INVITE.replace("${acc}",username), DEFAULT_TIMEOUT,1,2);
 		((JavascriptExecutor)driver).executeScript("arguments[0].click();", element);
 		Utils.pause(3000);
 	}
@@ -183,11 +186,18 @@ public class HomePageGadget extends PlatformBase{
 
 	/**
 	 * Check info of user displayed on Who's online Gadget
-	 * @author havtt
-	 * @date 06-Nov-2013
-	 * @param userName
+	 * 
+	 * @param userName 
+	 * 				name of user who is online
+	 * @param activity
+	 * 				value is "true" if online user has his activity posted on AS
+	 * @param activityPosted
+	 * 				activity content posted on AS of online user
+	 * @param connected
+	 * 				connection status of online user with the logged-in user. 
+	 * 				value is "true" if online user and logged-in user are connected already.
 	 */
-	public void checkUserInfoOnWhoisOnlineGadget(String userName){
+	public void checkUserInfoOnWhoisOnlineGadget(String userName, boolean activity, String activityPosted, boolean connected, boolean invited){
 		waitForAndGetElement(ELEMENT_WHOISONLINE_GADGET);
 		mouseOver(ELEMENT_ONLINE_USER_AVATAR.replace("${acc}",userName),true);
 		info("Confirm user avatar");
@@ -227,4 +237,16 @@ public class HomePageGadget extends PlatformBase{
 		click(ELEMENT_SPACE_REMOVE_BUTTON.replace("${namespace}", spaceName));
 		waitForElementNotPresent(ELEMENT_SHOW_CONNECTIONS_REQUEST_SPACE.replace("${namespace}", spaceName));		
 	} 
+
+
+	/**
+	 * Check status truncated of user on WhoIsOnline gadget
+	 * 
+	 * @param username
+	 * 				Name of user who is online on the gadget
+	 */
+	public void checkTruncatedStatusOnWhoIsOnlineGadget(String username) {
+		mouseOver(ELEMENT_ONLINE_USER_AVATAR.replace("${acc}",username),true);
+		waitForAndGetElement(ELEMENT_ONLINE_USER_STATUS_TRUNCATED);
+	}
 }

@@ -70,6 +70,7 @@ public class Calendar_PublishActivities_Task extends CalendarBase{
 		sp.goToAllSpaces();
 		sp.accessSpace(space);
 		sp.goToSpaceMenu("Agenda");
+		waitForAndGetElement(ELEMENT_EVENT_TASK_ONE_DAY.replace("${taskName}", task));
 		deleteEventTask(task, selectDayOption.ONEDAY);
 
 		//Check activity after deleting
@@ -93,7 +94,7 @@ public class Calendar_PublishActivities_Task extends CalendarBase{
 		
 		//Add space
 		sp.goToAllSpaces();
-		sp.addNewSpace(space,space);
+		sp.addNewSpace(space,space,60000);
 		Utils.pause(3000);
 		sp.goToSpaceMenu("Agenda");
 

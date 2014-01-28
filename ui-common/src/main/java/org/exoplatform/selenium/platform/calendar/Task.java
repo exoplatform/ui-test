@@ -122,7 +122,7 @@ public class Task extends CalendarBase{
 	}	
 	/*==============End of =================*/
 
-	
+
 	/*==========Input data form =========*/
 	/**
 	 * Input into basic fields of Quick task form and tab details of Add task form
@@ -239,7 +239,7 @@ public class Task extends CalendarBase{
 			}
 		}
 	}
-	
+
 	/**
 	 * Input into other fields in tab details of a task
 	 * 
@@ -248,7 +248,7 @@ public class Task extends CalendarBase{
 	 * 
 	 */
 	public void inputOtherFieldsTabDetailsTask(String status){
-		
+
 		if ((status != null) & (status != "")){
 			select(ELEMENT_TASK_STATUS, status);
 		}
@@ -281,7 +281,7 @@ public class Task extends CalendarBase{
 		}
 		if((opt.length > 2) & (opt.length <= 3))
 			inputOtherFieldsTabDetailsTask(opt[2]);
-		
+
 	}
 
 	/**
@@ -326,9 +326,13 @@ public class Task extends CalendarBase{
 		inputBasicQuickTask(name, note, opt);
 		inputFromToTask(from, to, allDay);
 		click(ELEMENT_BUTTON_TASK_SAVE);
+		if(allDay)
+			waitForAndGetElement(ELEMENT_EVENT_TASK_ALL_DAY.replace("${event}", name));
+		else
+			waitForAndGetElement(ELEMENT_EVENT_TASK_ONE_DAY.replace("${taskName}", name));
 
 	}
-	
+
 	/**
 	 * Edit some informations of a task by right click
 	 * 

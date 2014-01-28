@@ -82,7 +82,7 @@ public class PLF_HomepageGadget_WhoIsOnlineGadget extends PlatformBase {
 		
 		info("Confirm if WhoisOnline gadget dislays or not with user1");
 		hg=new HomePageGadget(newDriver);
-		hg.checkUserInfoOnWhoisOnlineGadget(User1);
+		hg.checkUserInfoOnWhoisOnlineGadget(User1, false, "", false, false);
 		newDriver.manage().deleteAllCookies();
 		newDriver.quit();
 	}
@@ -99,7 +99,7 @@ public class PLF_HomepageGadget_WhoIsOnlineGadget extends PlatformBase {
 		info("Switch to other browser to login by user acc 2");
 		loginWithAnotherAccOnThesameBrowser(User2, Pass1);
 		hg=new HomePageGadget(newDriver);
-		hg.checkUserInfoOnWhoisOnlineGadget(User1);
+		hg.checkUserInfoOnWhoisOnlineGadget(User1, false , "", false, false);
 		
 		info("User 2 connect with user 1 from Who's Online gadget");
 		hg.connectPeoplefromWhoisOnlineGadget(User1);

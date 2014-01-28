@@ -56,7 +56,7 @@ public class Calendar_PublishActivities_Event extends CalendarBase{
 		
 		//Add space
 		sp.goToAllSpaces();
-		sp.addNewSpace(space,space);
+		sp.addNewSpace(space,space,60000);
 		sp.goToSpaceMenu("Agenda");
 		
 		//Add an event
@@ -121,7 +121,7 @@ public class Calendar_PublishActivities_Event extends CalendarBase{
 		
 		//Add a space
 		sp.goToAllSpaces();
-		sp.addNewSpace(space,space);
+		sp.addNewSpace(space,space,60000);
 		sp.goToSpaceMenu("Agenda");
 		
 		//Add an event
