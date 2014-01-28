@@ -39,7 +39,7 @@ public class ForumManagePost extends ForumBase {
 	public By ELEMENT_MOVE_POST = By.xpath("//a[@class='ItemIcon MovePostIcon' and text()='Move']");
 	public String ELEMENT_GO_TO_THE_LASTS_READ_POST_FORUM = "//a[text()='${forum}']/../..//a[@title='Go to the last read post']";
 	public String ELEMENT_PRIVATE_POST_BUTTON = "//*[text()='${topic}  ']/../../..//a[text()='Private']";
-	public final String ELEMENT_POST_CONTENT = "//*[@class='postContent']//*[text()='${postContent}']";
+	public final String ELEMENT_POST_CONTENT = "//*[@class='postContent']//*[contains(.,'${postContent}')]";
 
 	public By ELEMENT_APPROVE_POST = By.xpath("//a[text()='Approve']");
 	public String ELEMENT_APPROVE_POST_CHECK = "//a[@title='{$topic}']/ancestor::tr//input";

@@ -166,7 +166,7 @@ public class Social_Space_MemberManagement extends Activity{
 		//- Go to My space page
 		//- Select a space and Click on Leave button on space
 		//- Space is disappeared from list and moved to All spaces list, user is not member of space
-		magMember.leaveFromSpace(spaceName, user1);
+		magMember.leaveFromSpace(spaceName);
 
 		/*Clear data*/
 		magAcc.userSignIn(userType.ADMIN);

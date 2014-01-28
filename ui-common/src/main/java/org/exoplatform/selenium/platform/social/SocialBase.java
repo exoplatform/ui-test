@@ -2,6 +2,7 @@ package org.exoplatform.selenium.platform.social;
 
 import static org.exoplatform.selenium.TestLogger.info;
 
+import org.exoplatform.selenium.Button;
 import org.exoplatform.selenium.Utils;
 import org.exoplatform.selenium.platform.PlatformBase;
 import org.openqa.selenium.By;
@@ -29,6 +30,7 @@ public class SocialBase extends PlatformBase {
 	public final String ELEMENT_INVITATION_ACCEPT_LINK_IN_ALL_SPACES = "//*[@id='UIManageAllSpaces']//*[text()='${spaceName}']/../../ul//*[text()='Accept']";
 	public final String ELEMENT_INVITATION_IGNORE_LINK_IN_ALL_SPACES = "//*[@id='UIManageAllSpaces']//*[text()='${spaceName}']/../../ul//*[text()='Ignore']";
 	public final By     ELEMENT_ADDNEWSPACE_BUTTON      = By.xpath("//button[text()='Add New Space']");
+	public final String ELEMENT_SPACE_AVATAR = "//a[text()='${space}']/../../..//img[@src='${avatar}']";
 
 	// Go to My Space > My Spaces Tab
 	public final String ELEMENT_INVITATION_LEAVE_LINK = "//*[@id='UIManageMySpaces']//*[text()='${spaceName}']/../../ul//*[text()='Leave']";
@@ -88,6 +90,7 @@ public class SocialBase extends PlatformBase {
 	public String ELEMENT_PROFILE_FULLNAME = "//div[@id='UIProfile']//h2[contains(text(),'${name}')]";
 	public String ELEMENT_ACTIVITYSTREAM_TITLE = "//div[contains(@id,'ActivityContextBox')]/h5/a[@title='${name}']";
 	public String ELEMENT_ACTION_USER_ON_SPACE = "//a[text()='${spaceName}']/../../..//button[text()='${action}']";
+	public String ELEMENT_SPACE_DESCRIPTION = "//a[text()='${spaceName}']/../../..//div[@class='content' and contains(text(),'${description}')]";
 
 	// Activity Stream tab	
 	public final By ELEMENT_ACTIVITY_STREAM_TAB = By.xpath("//div[@id='UIProfileNavigationPortlet']//a[text()='Activity Stream']");
@@ -105,6 +108,7 @@ public class SocialBase extends PlatformBase {
 	 */
 	public void goToMySpacePage(){
 		info("--Go to My Space Page--");
+		button = new Button(driver);
 		//waitForElementPresent(ELEMENT_MY_SPACES_LINK);
 		//click(ELEMENT_MY_SPACES_LINK);
 		//		Utils.pause(500);
@@ -238,11 +242,11 @@ public class SocialBase extends PlatformBase {
 
 	// Access a space
 	public void accessSpace(String spaceName) {
-		goToMySpacePage();
+		goToAllSpaces();
 		if (waitForAndGetElement(button.ELEMENT_SHOW_MORE_BUTTON, 5000, 0) != null){
 			click(button.ELEMENT_SHOW_MORE_BUTTON);
 		}
-		click(By.xpath("//*[@id='UIManageMySpaces']//*[text()= '"+ spaceName +"']"));
+		click(By.xpath("//a[text()= '"+ spaceName +"']"));
 		waitForAndGetElement(ELEMENT_BLAST_SPACE);
 	}
 

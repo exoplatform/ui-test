@@ -757,7 +757,7 @@ public class ManageMember extends SpaceManagement {
 	 * Leave from Space
 	 * @author phuongdt
 	 */
-	public void leaveFromSpace(String spaceName,String userName){
+	public void leaveFromSpace(String spaceName){
 		goToMySpacePage();
 		doAction("Leave", spaceName);
 		waitForElementNotPresent(By.xpath(ELEMENT_LEFT_PANEL_SPACE_ITEM.replace("${spaceName}", spaceName)));

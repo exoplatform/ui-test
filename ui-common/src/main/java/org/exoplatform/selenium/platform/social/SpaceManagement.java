@@ -101,6 +101,7 @@ public class SpaceManagement extends SocialBase {
 	public final By ELEMENT_SPACE_FAQ_PORTLET = By.id("UIFAQPortlet");
 	public final By ELEMENT_SPACE_MEMBER_PORTLET = By.id("UIMembersPortlet");
 	
+	
 	public SpaceManagement(WebDriver dr){
 		driver = dr;
 		userGroup = new UserGroupManagement(driver);

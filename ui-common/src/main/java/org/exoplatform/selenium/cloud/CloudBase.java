@@ -98,10 +98,14 @@ public class CloudBase extends PlatformBase{
 	/*------------ Button for eXo Cloud ----------------------------*/
 	public final By ELEMENT_BUTTON_CREATE = By.xpath("//button[text()='Create']");
 	public final By ELEMENT_BUTTON_JOIN = By.xpath("//button[text()='Join']");
+	
 	public final By ELEMENT_BUTTON_NEXT_FIRST_PAGE = By.xpath("//div[1][@class = 'item']//button[text()='Next']");
 	public final By ELEMENT_BUTTON_NEXT_SECOND_PAGE = By.xpath("//div[2][@class = 'item']//button[text()='Next']");
 	public final By ELEMENT_BUTTON_FINISH_THIRD_PAGE = By.xpath("//div[3][@class = 'item']//button[text()='Finish']");
 	public final String ELEMENT_SEND_INVITE_BUTTON = "//*[@id='t_submit_email' and contains(text(),'Send (${number})')]";
+	
+	/*-------------------Default value--------------------------------*/
+	public final String ELEMENT_DEFAULT_SPACE = "Getting Started";
 
 	/*------------ Common methods for eXo Cloud test ---------------*/
 

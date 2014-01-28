@@ -32,6 +32,7 @@ public class WikiBase extends PlatformBase{
 	public final By ELEMENT_PAGE_TITLE_INFO = By.id("titleInfo");
 	public final By ELEMENT_PAGE_TITLE_EDIT_TEXTBOX = By.id("EdiableInput");
 	public final String ELEMENT_DISPLAY_MODE = "//*[@id='DisplayModesDropDown']//span[text()='${space}']";
+	public final String ELEMENT_WIKI_HEADER = "//*[@id='H${header}']"; 
 
 	//Company/Left panel > Wiki Link
 	public final By ELEMENT_WIKI_LINK=By.xpath("//ul[@class='uiCompanyNavigations']//li/a[text()='Wiki']");
