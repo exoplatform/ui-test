@@ -334,6 +334,9 @@ public class Cloud_Features_DefaultSpace extends SocialBase{
 
 		click(frm.ELEMENT_TOPIC_LINK.replace("${topic}", "What do you think about eXo?"));
 		waitForAndGetElement(post.ELEMENT_POST_CONTENT.replace("${postContent}", "Give us your opinion and feature requests at cloud@exoplatform.com!"));
+		
+		goToAllSpaces();
+		mngMem.leaveFromSpace(cloudBase.ELEMENT_DEFAULT_SPACE);
 	}
 
 
