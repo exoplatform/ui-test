@@ -37,6 +37,9 @@ public class HomePageActivity extends PlatformBase{
 	public final String ELEMENT_ACTIVITY_AUTHOR_NAME = "//div[contains(@id,'activityContainer')][${index}]//div[@class='author']//a[text()='${author}']";
 	public final String ELEMENT_ACTIVITY_AUTHOR_AVATAR = "//div[contains(@id,'activityContainer')][${index}]//div[@class='activityAvatar avatarCircle']//img[@alt='${author}']";
 	public final By ELEMENT_ACTIVITY_TEXTBOX = By.id("DisplaycomposerInput");
+	public final String ELEMENT_ACTIVITY_AUTHOR_AVATAR_BUBBLE="//*[@id='tiptip_content']//td[${index}]//img";
+	public final String ELEMENT_ACTIVITY_AUTHOR_BUBBLE="//*[@id='tiptip_content']//td[${index}]//a";
+	public final String ELEMENT_ACTIVITY_CONTENT_INDEX = "//div[${index}][contains(@id,'activityContainer')]//div[@class='text']";
 
 	//Comment box
 	public final String ELEMENT_COMMENT_LINK = "//div[@class='text' or @class = 'description'or @class='linkSource' or contains(@id, 'ContextBox')]/*[contains(text(), '${activityText}')]//ancestor::div[contains(@id,'ActivityContextBox')]//*[starts-with(@id, 'CommentLink')]";

@@ -8,8 +8,10 @@
 			</run>
 		</groups>
 		<classes>
-			<class name="org.exoplatform.selenium.cloud.features.Cloud_Features_InvitationGadget"/>
 			<class name="org.exoplatform.selenium.cloud.features.Cloud_Features_FirstLoginWizard"/>
+			<class name="org.exoplatform.selenium.cloud.features.Cloud_Features_DefaultSpace"/>
+			<class name="org.exoplatform.selenium.cloud.features.Cloud_Features_NewUserActivity"/>
+			<class name="org.exoplatform.selenium.cloud.features.Cloud_Features_InvitationGadget"/>
 		</classes>
 	</test>
 	<listeners>
