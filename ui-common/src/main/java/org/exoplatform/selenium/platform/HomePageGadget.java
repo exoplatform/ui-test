@@ -19,9 +19,15 @@ public class HomePageGadget extends PlatformBase{
 	public String ELEMENT_SHOW_CONNECTIONS_REQUEST_USER = "//div[@id='InvitationsPortlet']//div[@class='peopleInviteName']//div[text()='${nameinvitation}']";
 	public String ELEMENT_SHOW_CONNECTIONS_REQUEST_SPACE= "//div[@id='InvitationsPortlet']//div[@class='spaceInviteInfo']//div[text()='${namespace}']";
 	public String ELEMENT_VERIFY_STATUS_SPACE = "//div[@id='InvitationsPortlet']//div[@class='spaceInviteInfo']//div[text()='${namespace}']/../div[@class='spaceproperties']/div[@class='spacevisibility' and contains(text(),'${statusspace}')]";
-	public String ELEMENT_SHOW_ACCETPS_BUTTON = "//div[@id='InvitationsPortlet']//div[@class='peopleInviteInfo']//div[text()='${peopleName}']/..//a[text()='Accept']";
+	public String ELEMENT_SHOW_ACCEPTS_BUTTON = "//div[@id='InvitationsPortlet']//div[@class='peopleInviteInfo']//div[text()='${peopleName}']/..//a[text()='Accept']";
 	public String ELEMENT_REMOVE_INVITATION_BUTTON = "//div[@id='InvitationsPortlet']//div[@class='peopleInviteInfo']//div[text()='${peopleName}']/..//i[@class='uiIconClose']";
 	public String ELEMENT_TITLE_OF_GAGDET = "//div[@id='InvitationsPortlet']/..//span[text()='${number}']";
+	public By ELEMENT_PROFILE_PICTURE_GADGET = By.xpath("//div[@class='peopleInvitePicture pull-left avatarXSmall']");
+	public String ELEMENT_SPACE_ACCEPT_BUTTON = "//div[@id='InvitationsPortlet']//div[@class='spaceInviteInfo']//div[text()='${namespace}']/..//a[text()='Accept']";
+	public String ELEMENT_SPACE_REMOVE_BUTTON = "//div[@id='InvitationsPortlet']//div[@class='spaceInviteInfo']//div[text()='${namespace}']/..//i[@class='uiIconClose']";
+	public String ELEMENT_CONNECTIONS_REQUEST_USER_INDEX = "//ul[@id='requests']//li['${index}']/../../..//div[@class='peopleInviteName']//div[text()='${nameinvitation}']";
+	public String ELEMENT_CONNECTIONS_REQUEST_SPACE_INDEX = "//ul[@id='requests']//li['${index}']/../../..//div[@class='spaceInviteInfo']//div[text()='${namespace}']";
+	public By ELEMENT_ICON_SPACE_GADGET = By.xpath("//div[@class='spaceInvitePicture pull-left avatarXSmall']");
 
 	//-------Getting Started Gadget -------- 
 	public By ELEMENT_GETTING_STARTED_GADGET_FORM = By.id("GettingStartedContainer");
@@ -73,11 +79,11 @@ public class HomePageGadget extends PlatformBase{
 	 */
 	public void acceptInvitationGadget(String peopleName) {
 		info("-- Accept an invitation --");
-		mouseOver(ELEMENT_SHOW_ACCETPS_BUTTON.replace("${peopleName}", peopleName),true);
-		WebElement element = waitForAndGetElement(ELEMENT_SHOW_ACCETPS_BUTTON.replace("${peopleName}", peopleName), DEFAULT_TIMEOUT,1,2);
+		mouseOver(ELEMENT_SHOW_ACCEPTS_BUTTON.replace("${peopleName}", peopleName),true);
+		WebElement element = waitForAndGetElement(ELEMENT_SHOW_ACCEPTS_BUTTON.replace("${peopleName}", peopleName), DEFAULT_TIMEOUT,1,2);
 		((JavascriptExecutor)driver).executeScript("arguments[0].click();", element);
 		//click(SHOW_ACCETPS_BUTTON.replace("${peopleName}", peopleName));
-		waitForElementNotPresent(ELEMENT_SHOW_ACCETPS_BUTTON.replace("${peopleName}", peopleName));
+		waitForElementNotPresent(ELEMENT_SHOW_ACCEPTS_BUTTON.replace("${peopleName}", peopleName));
 		//waitForAndGetElement(REMOVE_INVITATION_BUTTON.replace("${peopleName}", peopleName));
 	}
 
@@ -188,5 +194,37 @@ public class HomePageGadget extends PlatformBase{
 		waitForAndGetElement(ELEMENT_ONLINE_USER_ACC_IMG.replace("${acc}",userName), DEFAULT_TIMEOUT,1,2);
 		info("Confirm user name");
 		waitForAndGetElement(ELEMENT_ONLINE_USER_TITLE.replace("${acc}",userName), DEFAULT_TIMEOUT,1,2);
-	}
+	}	
+
+	/**
+	 * Accept a space invitation 
+	 * @author chinhdtt
+	 * @date 07 Feb 2014
+	 * @param spaceName
+	 */
+	public void acceptSpaceInvitationGadget(String spaceName) {
+		info("-- Accept a space invitation --");
+		mouseOver(ELEMENT_SHOW_CONNECTIONS_REQUEST_SPACE.replace("${namespace}", spaceName), true);
+		waitForAndGetElement(ELEMENT_SPACE_ACCEPT_BUTTON.replace("${namespace}", spaceName));
+		waitForAndGetElement(ELEMENT_SPACE_REMOVE_BUTTON.replace("${namespace}", spaceName));
+		Utils.pause(1000);
+		click(ELEMENT_SPACE_ACCEPT_BUTTON.replace("${namespace}", spaceName));
+		waitForElementNotPresent(ELEMENT_SHOW_CONNECTIONS_REQUEST_SPACE.replace("${namespace}", spaceName));		
+	} 
+
+	/**
+	 * Remove a space invitation 
+	 * @author chinhdtt
+	 * @date 07 Feb 2014
+	 * @param spaceName
+	 */
+	public void removeSpaceInvitationGadget(String spaceName) {
+		info("-- Remove a space invitation --");
+		mouseOver(ELEMENT_SHOW_CONNECTIONS_REQUEST_SPACE.replace("${namespace}", spaceName), true);
+		waitForAndGetElement(ELEMENT_SPACE_ACCEPT_BUTTON.replace("${namespace}", spaceName));
+		waitForAndGetElement(ELEMENT_SPACE_REMOVE_BUTTON.replace("${namespace}", spaceName));
+		Utils.pause(1000);
+		click(ELEMENT_SPACE_REMOVE_BUTTON.replace("${namespace}", spaceName));
+		waitForElementNotPresent(ELEMENT_SHOW_CONNECTIONS_REQUEST_SPACE.replace("${namespace}", spaceName));		
+	} 
 }

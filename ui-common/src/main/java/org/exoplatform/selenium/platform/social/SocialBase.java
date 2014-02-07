@@ -105,6 +105,7 @@ public class SocialBase extends PlatformBase {
 	 * Migrate to PLF 4
 	 * <li> Update by @author vuna2 </li>
 	 */
+	
 	public void goToMySpacePage(){
 		info("--Go to My Space Page--");
 		//waitForElementPresent(ELEMENT_MY_SPACES_LINK);
