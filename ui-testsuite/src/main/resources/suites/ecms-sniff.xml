@@ -31,15 +31,16 @@
 			<class name="org.exoplatform.selenium.platform.ecms.sniff.admin.ECMS_Admin_Advanced" />
 		</classes>
 	</test>
-	<test name="ecms-sniff-wcm" enabled="true">
+	<test name="ecms-sniff-wcm" enabled="true" preserve-order="true">
 		<groups>
 			<run>
 				<exclude name="pending" />
 			</run>
 		</groups>
-		<packages>
-			<package name="org.exoplatform.selenium.platform.ecms.sniff.wcm.*" />
-		</packages>
+		<classes>
+			<class name="org.exoplatform.selenium.platform.ecms.sniff.wcm.ECMS_WCM_Others" />
+			<class name="org.exoplatform.selenium.platform.ecms.sniff.wcm.ECMS_WCM_Viewer" />
+		</classes>
 	</test>
 	<listeners>
 		<listener class-name="org.exoplatform.selenium.TestReportListener" />

@@ -59,7 +59,7 @@ public class Calendar_Event extends CalendarBase {
 		waitForAndGetElement(By.xpath(ELEMENT_EVENT_TASK_ONE_DAY.replace("${taskName}", EVENT_01)));
 
 		info("restore data");
-		deleteEventTask(EVENT_01, selectDayOption.ONEDAY);
+		deleteEventTask(EVENT_01);
 	}
 
 	/**
@@ -98,7 +98,6 @@ public class Calendar_Event extends CalendarBase {
 		waitForAndGetElement(By.xpath(ELEMENT_EVENT_TASK_ONE_DAY.replace("${taskName}", EVENT_02)));
 
 		info("==Restore data==");
-		deleteEventTask(EVENT_02,selectDayOption.ONEDAY);
 		deleteCalendar(CAL_02,true);
 	}
 
@@ -137,7 +136,6 @@ public class Calendar_Event extends CalendarBase {
 		waitForAndGetElement(By.xpath(ELEMENT_EVENT_TASK_ONE_DAY.replace("${taskName}", EVENT_03)));
 
 		info("==Restore data==");
-		deleteEventTask(EVENT_03, selectDayOption.ONEDAY);
 		deleteCalendar(CAL_03,true);
 	}
 
@@ -164,7 +162,7 @@ public class Calendar_Event extends CalendarBase {
 
 		info("Restore data");
 		waitForAndGetElement(By.xpath(ELEMENT_EVENT_TASK_ONE_DAY.replace("${taskName}", EVENT04)));
-		deleteEventTask(EVENT04, selectDayOption.ONEDAY);
+		deleteEventTask(EVENT04);
 	}
 
 	/**
@@ -184,7 +182,7 @@ public class Calendar_Event extends CalendarBase {
 
 		info("Delete an event");
 		Utils.pause(5000);
-		deleteEventTask(EVENT05, selectDayOption.ONEDAY);
+		deleteEventTask(EVENT05);
 	}
 
 
@@ -254,7 +252,6 @@ public class Calendar_Event extends CalendarBase {
 
 		info("==Restore data==");
 		waitForAndGetElement(By.xpath(ELEMENT_EVENT_TASK_ONE_DAY.replace("${taskName}", EVENT07)));
-		deleteEventTask(EVENT07, selectDayOption.ONEDAY);
 		deleteCalendar(CAL_07,true);
 	}
 
@@ -339,7 +336,6 @@ public class Calendar_Event extends CalendarBase {
 
 		info("==Restore data==");
 		waitForAndGetElement(By.xpath(ELEMENT_EVENT_TASK_ONE_DAY.replace("${taskName}", EVENT09)));
-		deleteEventTask(EVENT09, selectDayOption.ONEDAY);
 		deleteCalendar(CAL_09,true);
 	}
 

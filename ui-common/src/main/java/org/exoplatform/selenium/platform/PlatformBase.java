@@ -526,7 +526,7 @@ public class PlatformBase extends TestBase {
 	public final By ELEMENT_CONTAINER_SETTING_TAB = By.xpath("//*[text()='Container Setting']");
 	public final By ELEMENT_CONTAINER_PERMISSION_TAB = By.xpath("//*[text()='Access Permissions']");
 	public final By ELEMENT_PORTLET_LAYOUT_DECORATOR = By.className("portletLayoutDecorator");
-	public final String ELEMENT_COLUMN_CONTAINER = "//*[@class='UITableColumn']";
+	public final String ELEMENT_COLUMN_CONTAINER = "//*[@class='UITableColumn']//tr";
 	public final String ELEMENT_NAME_CONTAINER = ELEMENT_DRAG_CONTAINER + "/../*[text()='${nameContainer}']";
 	public final String ELEMENT_NAME_CURRENT_CONTAINER = "//*[text()='${nameContainer}']/ancestor::div[contains(@class, 'EdittingContainer')]";
 	public final String ELEMENT_DRAG_CURRENT_CONTAINER = "//*[text()='${nameContainer}']/../*[@title='Hold this area to drag this container']";

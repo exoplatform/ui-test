@@ -78,9 +78,8 @@ public class Social_Dashboard extends DashBoard {
 	 * == Share link in RSS fetcher ==
 	 * Test case ID: 67681
 	 * Step 1: Share link in RSS fetcher
-	 * https://jira.exoplatform.org/browse/SOC-2978 - Social RSS Reader is blank while adding to dashboard
 	 */	
-	@Test(groups={"error"})
+	@Test
 	public void test02_ShareLinkInRSSFetcher(){
 		//Declare variable
 		String gadgetName = "Social Rss Reader";
@@ -131,9 +130,8 @@ public class Social_Dashboard extends DashBoard {
 	 * Step 1: View a link in RSS fetcher
 	 * Note: Default: RSS reader is not displayed. 
 	 * To import this gadget, The user need to import all gadget by: Administration -> Application -> Import Applications
-	 * https://jira.exoplatform.org/browse/SOC-2978 - Social RSS Reader is blank while adding to dashboard
 	 */	
-	@Test(groups={"error"})
+	@Test
 	public void test03_ViewALinkInRSSFetcher(){
 		//Declare variable
 		String gadgetName = "Social Rss Reader";

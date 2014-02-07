@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.exoplatform.selenium.Button;
+import org.exoplatform.selenium.Utils;
 import org.exoplatform.selenium.platform.GroupNavigation;
 import org.exoplatform.selenium.platform.ManageAccount;
 import org.exoplatform.selenium.platform.NavigationToolbar;
@@ -143,6 +144,7 @@ public class Gatein_Navigation_GroupNavigation_EditLayout extends GroupNavigatio
 
 		info("Edit title of container");
 		mouseOver(columnContainer, true);
+		Utils.pause(10000);
 		click(ELEMENT_CONTAINER_COLUMN_EDIT_ICON);
 		type(ELEMENT_CONTAINER_TITLE, title, true);
 		but.save();

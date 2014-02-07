@@ -352,8 +352,8 @@ public class Gatein_Navigation_PortalNavigation_EditNavigation extends PortalMan
 	public void test06_AddEditMoveAndRemoveApplicationWhenEditPagePropertiesOfNode(){
 		String portalName = "intranet";
 		String parentNode = "Home";
-		String nodeName = "test06EditNode";
-		String pageSelectorName = "test06pageSelector";
+		String nodeName = "test06EditNode2";
+		String pageSelectorName = "test06pageSelector4";
 		Map<String, String> languages = new HashMap<String, String>();
 		languages.put("English", "");
 		String nodeLinkToEdit = ELEMENT_NODE_LINK.replace("${nodeLabel}", nodeName);
@@ -403,9 +403,9 @@ public class Gatein_Navigation_PortalNavigation_EditNavigation extends PortalMan
 
 		info("Verify that the page is updated after moving...");
 		click(ELEMENT_SWITCH_VIEW_MODE);
-		waitForAndGetElement(ELEMENT_LIST_CONTAINER.replace("${number}", "1").replace("${nameContainer}", portletTitle));
-		waitForAndGetElement(ELEMENT_LIST_CONTAINER.replace("${number}", "2").replace("${nameContainer}", "Organization Portlet"));
-		waitForAndGetElement(ELEMENT_LIST_CONTAINER.replace("${number}", "3").replace("${nameContainer}", "Page Management Portlet"));
+		waitForAndGetElement(ELEMENT_LIST_CONTAINER.replace("${number}", "2").replace("${nameContainer}", portletTitle));
+		waitForAndGetElement(ELEMENT_LIST_CONTAINER.replace("${number}", "3").replace("${nameContainer}", "Organization Portlet"));
+		waitForAndGetElement(ELEMENT_LIST_CONTAINER.replace("${number}", "1").replace("${nameContainer}", "Page Management Portlet"));
 
 		info("Delete an application when edit page...");
 		click(ELEMENT_SWITCH_VIEW_MODE);

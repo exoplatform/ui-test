@@ -188,6 +188,12 @@
 			</properties>
 		</profile>
 		<profile>
+			<id>testng-failed</id>
+			<properties>
+				<testSuite>testng-failed.xml</testSuite>
+			</properties>
+		</profile>
+		<profile>
 			<id>forum-answer</id>
 			<properties>
 				<testSuite>forum-answer.xml</testSuite>

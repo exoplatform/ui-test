@@ -1,7 +1,6 @@
 package org.exoplatform.selenium.platform.calendar;
 
 import static org.exoplatform.selenium.TestLogger.info;
-import java.awt.event.KeyEvent;
 import org.exoplatform.selenium.Button;
 import org.exoplatform.selenium.ManageAlert;
 import org.exoplatform.selenium.Utils;
@@ -134,7 +133,7 @@ public class CalendarBase extends PlatformBase {
 
 	//-----------Event/Task -----------
 	public String ELEMENT_EVENT_TASK_ALL_DAY = "//*[@id='UIWeekViewGridAllDay']//div[contains(text(),'${event}')]";
-	public String ELEMENT_EVENT_TASK_ONE_DAY = "//*[@id='UIWeekViewGrid']//div[contains(text(),'${taskName}')]/parent::div[@class='clearfix']/div[@class='eventContainerBar eventTitle pull-left']";
+	public String ELEMENT_EVENT_TASK_ONE_DAY = "//*[@id='UIWeekViewGrid']//div[contains(@deschtml,'${taskName}')]";
 	public String ELEMENT_EVENT_TASK_WORKING_PANE = "//*[@id='UIWeekViewGrid']//div[@class='eventContainer' and contains(text(),'${event}')]";
 	public By ELEMENT_EVENT_TASK_DELETE_MENU = By.xpath("//div[@id='tmpMenuElement']//a[@class='eventAction' and contains(@href,'Delete')]");
 	public String MSG_EVENT_TASK_DELETE = "Are you sure you want to delete this event/task?";
@@ -344,7 +343,7 @@ public class CalendarBase extends PlatformBase {
 		type(ELEMENT_CAL_EXPORT_FILE_NAME,name,true);
 		click(ELEMENT_CAL_EXPORT_SAVE_BUTTON);
 		Utils.pause(3000);
-		driver.navigate().refresh();
+//		driver.navigate().refresh();
 		Utils.pause(3000);
 	}
 
@@ -619,12 +618,12 @@ public class CalendarBase extends PlatformBase {
 		info("--Delete an Event/Task--");
 		switch (optDay) {
 		case ALLDAY:
-			if(waitForAndGetElement(ELEMENT_EVENT_TASK_ALL_DAY.replace("${event}", event), 5000, 0) == null){
-				rightClickOnElement(ELEMENT_EVENT_TASK_WORKING_PANE.replace("${event}", event),2);
+			/*if(waitForAndGetElement(ELEMENT_EVENT_TASK_ALL_DAY.replace("${event}", event), 5000, 0) == null){
+				rightClickOnElement(ELEMENT_EVENT_TASK_ONE_DAY.replace("${taskName}", event),2);
 			}        
-			else{
+			else{*/
 				rightClickOnElement(ELEMENT_EVENT_TASK_ALL_DAY.replace("${event}", event),2);
-			}
+//			}
 			break;
 		case ONEDAY:
 			rightClickOnElement(ELEMENT_EVENT_TASK_ONE_DAY.replace("${taskName}", event),2);
@@ -794,8 +793,10 @@ public class CalendarBase extends PlatformBase {
 		type(By.xpath(ELEMENT_INPUT_QUICK_SEARCH), keyword, true);
 		info("----Send search request----");
 		Utils.pause(5000);
-		click(ELEMENT_INPUT_QUICK_SEARCH);
-		Utils.javaSimulateKeyPress(KeyEvent.VK_ENTER);
+		((JavascriptExecutor)driver).executeScript("javascript:eXo.webui.UIForm.submitForm('"+ID_CALENDAR_PAGE+"#UISearchForm','Search',true)");
+//		click(ELEMENT_INPUT_QUICK_SEARCH);
+		
+//		Utils.javaSimulateKeyPress(KeyEvent.VK_ENTER);
 		info("----Confirm search result page displayed----");
 		Utils.pause(3000);
 		waitForAndGetElement(ELEMENT_BUTTON_CLOSE_QUICK_SEARCH_RESULT);

@@ -58,10 +58,12 @@ public class DashBoard extends PlatformBase {
 		waitForAndGetElement(ELEMENT_DASHBOARD_NEW_INPUT).clear();
 		waitForAndGetElement(ELEMENT_DASHBOARD_NEW_INPUT).sendKeys(displayName);
 		for(int repeat=0;;repeat++){
-			click(ELEMENT_DASHBOARD_NEW_INPUT);
+			//			click(ELEMENT_DASHBOARD_NEW_INPUT);
 			Utils.javaSimulateKeyPress(KeyEvent.VK_ENTER);
-			if (waitForAndGetElement(ELEMENT_DASHBOARD_NEW_INPUT).getText().equals(displayName))
-				break;
+			if(waitForAndGetElement(ELEMENT_DASHBOARD_NEW_INPUT,5000,0) != null){
+				if (waitForAndGetElement(ELEMENT_DASHBOARD_NEW_INPUT).getText().equals(displayName))
+					break;
+			}else break;
 			if(repeat > 5) break;
 		}
 

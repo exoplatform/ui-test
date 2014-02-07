@@ -43,7 +43,7 @@ public class Gatein_Navigation_GroupNavigation_ManageNavigation extends GroupNav
 	/**CaseId: 68869 -> Manage group navigation
 	 * include 2 other cases in Qmetry (70446, 70450)
 	 */
-	@Test
+	@Test(priority = 1)
 	public void test01_ManageGroupNavigation(){
 		String groupName = "sniffgroup01";
 		

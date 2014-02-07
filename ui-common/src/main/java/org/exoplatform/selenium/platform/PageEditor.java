@@ -249,6 +249,7 @@ public class PageEditor extends PlatformBase {
 		}
 		click(button.ELEMENT_SAVE_BUTTON);
 		click(button.ELEMENT_CLOSE_BUTTON);
+		waitForElementNotPresent(button.ELEMENT_CLOSE_BUTTON);
 	}
 
 	/*-- Add common functions for Single Content Viewer/Add SCV
@@ -526,7 +527,7 @@ public class PageEditor extends PlatformBase {
 		info("Finish Editing PageLayout");
 		Utils.pause(1000);
 		click(ELEMENT_PAGE_FINISH_BUTTON);
-		waitForElementNotPresent(ELEMENT_PAGE_FINISH_BUTTON, 60000);
+		waitForElementNotPresent(ELEMENT_PAGE_FINISH_BUTTON, 100000);
 	}
 
 	/**
