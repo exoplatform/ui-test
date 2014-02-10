@@ -720,8 +720,8 @@ public class TestBase {
 		baseUrl = System.getProperty("baseUrl");
 		if (baseUrl==null) baseUrl = DEFAULT_BASEURL;
 		action = new Actions(driver);
-		driver.get(baseUrl);
-		//		termsAndConditions();
+		termsAndConditions();
+		checkPLFVersion();
 	}
 
 	/**function set driver to auto open new window when click link

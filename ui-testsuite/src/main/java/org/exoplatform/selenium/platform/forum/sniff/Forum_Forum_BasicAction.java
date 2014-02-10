@@ -28,8 +28,8 @@ public class Forum_Forum_BasicAction extends ForumBase{
 	public void setUpBeforeTest(){
 		initSeleniumTest();
 		magAc = new ManageAccount(driver);
-		mngCat = new ForumManageCategory(driver);
-		mngFru = new ForumManageForum(driver);
+		mngCat = new ForumManageCategory(driver, this.plfVersion);
+		mngFru = new ForumManageForum(driver, this.plfVersion);
 		mngTopic = new ForumManageTopic(driver);
 
 		magAc.signIn(DATA_USER1, DATA_PASS);
@@ -49,6 +49,7 @@ public class Forum_Forum_BasicAction extends ForumBase{
 	public void test01_AddForum() {
 		String category = "Category_71105";
 		String forum = "Forum_71105";
+		
 		String[] permission = {};
 		String[] addForum = {forum, "1","Open","Unlocked",forum};
 
@@ -61,9 +62,10 @@ public class Forum_Forum_BasicAction extends ForumBase{
 		mngFru.editForum(addForum, false, EMAIL_ADDRESS2, EMAIL_ADDRESS2, false, 0, permission);
 		
 		//Delete forum
-		mngFru.deleteForum(forum);
+	mngFru.deleteForum(forum);
 		
 		//Delete category
+		//click(By.linkText(category));
 		mngCat.deleteCategoryInForum(category);
 
 	}

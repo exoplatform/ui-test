@@ -29,8 +29,8 @@ public class Forum_Forum_MoreAction extends ForumBase{
 		initSeleniumTest();
 		driver.get(baseUrl);
 		acc = new ManageAccount(driver);
-		mngFru = new ForumManageForum(driver);
-		mngCat = new ForumManageCategory(driver);
+		mngFru = new ForumManageForum(driver,this.plfVersion);
+		mngCat = new ForumManageCategory(driver, this.plfVersion);
 		mngTopic = new ForumManageTopic(driver);
 
 		acc.signIn(DATA_USER1, DATA_PASS);

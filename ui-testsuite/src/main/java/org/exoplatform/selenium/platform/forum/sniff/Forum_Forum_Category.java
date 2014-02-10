@@ -28,8 +28,8 @@ public class Forum_Forum_Category extends ForumBase {
 	public void setUpBeforeTest(){
 		getDriverAutoSave();
 		magAc = new ManageAccount(driver);
-		magCat = new ForumManageCategory(driver);
-		magForum = new ForumManageForum(driver);
+		magCat = new ForumManageCategory(driver, this.plfVersion);
+		magForum = new ForumManageForum(driver, this.plfVersion);
 		magTopic = new ForumManageTopic(driver);
 		
 		magAc.signIn("john", DATA_PASS);
@@ -153,7 +153,12 @@ public class Forum_Forum_Category extends ForumBase {
 		checkAndDeleteMail(mail, REGISTER_MAIL_CONTENT);
 		
 		driver.switchTo().window(handlesBefore);
-		click(magForum.ELEMENT_CATEGORY_BREAD.replace("${category}", catName));
+		if(plfVersion =="4.1"){
+		click(magForum.ELEMENT_CATEGORY_BREAD41.replace("${category}", catName));
+		}
+		else {
+			click(magForum.ELEMENT_CATEGORY_BREAD.replace("${category}", catName));
+		}
 		Utils.pause(1000);
 		watchItem(false);
 		magCat.deleteCategoryInForum(catName);
