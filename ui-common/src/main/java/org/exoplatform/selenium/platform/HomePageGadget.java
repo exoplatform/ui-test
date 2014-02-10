@@ -2,6 +2,7 @@ package org.exoplatform.selenium.platform;
 
 import static org.exoplatform.selenium.TestLogger.info;
 
+import org.exoplatform.selenium.Button;
 import org.exoplatform.selenium.Utils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -69,11 +70,42 @@ public class HomePageGadget extends PlatformBase{
 	public String ELEMENT_PROFILE_TAB_USER_INFO = "//*[@id='UIUserNavigationPortlet']/ul[@class='nav nav-tabs userNavigation']//a[@href='/portal/intranet/profile/${acc}']";
 	//My activity stream tab
 	public String ELEMENT_MY_AS_TAB = "//*[@id='UIUserNavigationPortlet']//a[@href='/portal/intranet/activities/${acc}']";
+	
+	//-------------------Bookmarks gadget-----------------------------------
+	public final By ELEMENT_APPLICATION_BOOKMARKS = By.id("Gadgets/Bookmark");
+	public By ELEMENT_BOOKMARKS_GADGET_CONTENT_LIST = By.id("BookmarkList");
+	public By ELEMENT_BOOKMARKS_GADGET_ADDBOOKMARK_ICON = By.xpath("//*[@data-original-title='Add Bookmark']");
+	public static By ELEMENT_BOOKMARKS_GADGET_ADDNAME = By.xpath("//*[@class='editName' and @placeholder='Bookmarks']");
+	public static By ELEMENT_BOOKMARKS_GADGET_ADDURL = By.xpath("//*[@class='editLink' and @placeholder='URL']");
+	public String ELEMENT_BOOKMARKS_GADGET_DELETE_ICON = "//*[text()='${bookmarkName}']/..//*[@ data-original-title='Delete']/i";
+	
+	/*Feature Poll porlet*/
+	public final By ELEMENT_APPLICATION_POLL = By.id("Gadgets/FeaturedPoll"); 
+	public final By ELEMENT_SETTING_POLL_GADGET = By.xpath("//*[contains(text(),'Featured Poll')]//*[@class='uiIconSetting']");
+	public final By ELEMENT_SELECT_BOX_FEATURED_POLL = By.xpath("//*[@class='selectbox']");
+	public final String ELEMENT_SELECT_BOX_FEATURED_ITEM = "//option[text()='${pollName}']";
+	public final String ELEMENT_POLL_NAME_ITEM = "//*[@title='${pollOption}' or @data-original-title='${pollOption}']";
+	
+	/*My profile gadget*/
+	public final By ELEMENT_APPLICATION_MY_PROFILE = By.id("Gadgets/Profile");
+	public final By ELEMENT_PROFILE_PICTURE_IN_MY_PROFILE_GADGET = By.xpath("//*[@class='GadCont ProfilePicture']");
+	public final By ELEMENT_PROFILE_INFO_IN_MY_PROFILE_GADGET = By.xpath("//*[@class='GadCont ProfileInfo']");
+
+	/*Tools application*/
+	public final By ELEMENT_APPLICATION_FAVORITEDOCUMENT = By.id("Tools/FavoriteDocument");
+	public final By ELEMENT_RIGHT_CONTAINER = By.xpath("//div[@id='OfficeRight']//div[@class='NormalContainerBlock UIComponentBlock']");
+	public final By ELEMENT_MIDDLE_CONTAINER = By.xpath("//div[@id='OfficeMiddle']//div[@class='NormalContainerBlock UIComponentBlock']");
+	public final By ELEMENT_FAVORITEDOCUMENT_ICON_HOMEPAGE = By.xpath("//i[@class='uiIconFavoriteDocument uiIconLightGray']");
+	public final By ELEMENT_GADGET_PORLET_IN_MIDDLE_HOME_PAGE = By.xpath("//div[@id='OfficeMiddle']//div[@class='NormalContainerBlock UIComponentBlock']//*[@id='UIGadgetPortlet']");
+	public final By ELEMENT_DELETE_ICON_GADGET_PORLET_IN_MIDDLE_HOME_PAGE = By.xpath("//div[@id='OfficeMiddle']//div[@class='NormalContainerBlock UIComponentBlock']//*[@id='UIGadgetPortlet']/../../../..//*[@data-original-title='Delete Portlet']");
+	public final By ELEMENT_SUGGESTION_GADGET = By.xpath("//div[@id='OfficeRight']//div[@class='NormalContainerBlock UIComponentBlock']//*[@id='content']");
 
 	//-------------------------------------------------------------//
 
-	public HomePageGadget(WebDriver dr) {
+	public HomePageGadget(WebDriver dr, String...plfVersion){
 		driver = dr;
+		this.plfVersion = plfVersion.length>0?plfVersion[0]:"4.0";
+		button = new Button(driver, this.plfVersion);
 	}
 
 	/**
@@ -248,5 +280,34 @@ public class HomePageGadget extends PlatformBase{
 	public void checkTruncatedStatusOnWhoIsOnlineGadget(String username) {
 		mouseOver(ELEMENT_ONLINE_USER_AVATAR.replace("${acc}",username),true);
 		waitForAndGetElement(ELEMENT_ONLINE_USER_STATUS_TRUNCATED);
+	}
+	
+	/**
+	 * and new bookmark list gadget
+	 * @param name
+	 * @param url
+	 * @opParams: isAdd (true: click button "Add", fale: click button "Cancel")
+	 */
+	public void addNewBookmarkListGadget(String name, String url, Object...opParams){
+		Boolean isAdd = (Boolean) (opParams.length > 0 ? opParams[0]: true);
+		click(ELEMENT_BOOKMARKS_GADGET_ADDBOOKMARK_ICON);
+		if(name!="")
+			type(ELEMENT_BOOKMARKS_GADGET_ADDNAME,name, true);
+		if(url!="")
+			type(ELEMENT_BOOKMARKS_GADGET_ADDURL,url, true);
+		if(isAdd)
+			button.add();
+		else
+			button.cancel();
+	}
+	
+	/**
+	 * Delete bookmark item
+	 * @param bookmarName
+	 */
+	public void deleteBookmarkListGadget(String bookmarkName){
+		mouseOver(By.linkText(bookmarkName),true);
+		waitForAndGetElement(ELEMENT_BOOKMARKS_GADGET_DELETE_ICON.replace("${bookmarkName}", bookmarkName)).click();
+		waitForElementNotPresent(By.linkText(bookmarkName));
 	}
 }

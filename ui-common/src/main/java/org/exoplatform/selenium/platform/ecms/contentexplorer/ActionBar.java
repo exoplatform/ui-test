@@ -55,7 +55,7 @@ public class ActionBar extends EcmsBase{
 	public final By ELEMENT_ADD_TO_FAVORITE_NODE = By.className("uiIconEcmsAddToFavourite");
 	public final By ELEMENT_VIEW_DOCUMENT_NODE = By.className("uiIconEcmsViewDocument");
 	public final By ELEMENT_DELETE_NODE = By.xpath("//*[@id='ECMContextMenu']//*[@class='uiIconEcmsDelete']");
-	public final By ELEMENT_ADD_SYMLINK_NODE = By.className("uiIconEcmsAddSymLink");
+	public final By ELEMENT_ADD_SYMLINK_NODE = By.xpath("//*[@id='ECMContextMenu']//*[@class='uiIconEcmsAddSymLink']");
 	public final By ELEMENT_LOCK_NODE = By.xpath("//*[@id='ECMContextMenu']//i[@class='uiIconEcmsLock']");
 	public final By ELEMENT_UNLOCK_NODE = By.xpath("//*[@id='ECMContextMenu']//i[@class='uiIconEcmsUnlock']");
 	/*End added*/
@@ -150,6 +150,8 @@ public class ActionBar extends EcmsBase{
 	//Action bar 
 	public final By ELEMENT_ADD_ITEM = By.xpath("//*[@data-original-title='Add Item']");	
 	public final By ELEMENT_DELETE_NODE_ICON = By.xpath("//*[@id='JCRContextMenu']//*[@class='uiIconEcmsDelete']");
+	public final By ELEMENT_CUT_NODE_ICON = By.xpath("//*[@id='JCRContextMenu']//*[@class='uiIconEcmsCut']");
+	public final By ELEMENT_COPY_NODE_ICON = By.xpath("//*[@id='JCRContextMenu']//*[@class='uiIconEcmsCopy']");
 	public final By ELEMENT_ADD_SYMLINK_LIST_VIEW = By.xpath("//*[@id='JCRContextMenu']//i[@class='uiIconEcmsAddSymLink']");
 	public final By ELEMENT_LOCK_ICON = By.xpath("//*[@id='JCRContextMenu']//i[@class='uiIconEcmsLock']");
 	public final By ELEMENT_UNLOCK_ICON = By.xpath("//*[@id='JCRContextMenu']//i[@class='uiIconEcmsUnlock']");
@@ -1210,9 +1212,9 @@ public class ActionBar extends EcmsBase{
 		waitForAndGetElement(ELEMENT_CURRENT_SPECIFIC_STATUS.replace("${status}", state));
 		if (state.equals("Staged") & (date.length > 0)){
 			click(ELEMENT_SCHEDULE_TAB);
-			if((date1!=""))
+			if((date1!=""&& date1!= null))
 				type(ELEMENT_PUB_FROM_INPUT,date1,true);
-			if((date2!=""))
+			if((date2!="" && date2!= null))
 				type(ELEMENT_PUB_TO_INPUT,date2,true);
 			button.save();
 			if(date.length > 2){

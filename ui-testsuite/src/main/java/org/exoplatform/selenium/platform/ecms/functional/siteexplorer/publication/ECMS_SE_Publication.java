@@ -127,7 +127,7 @@ public class ECMS_SE_Publication extends PlatformBase{
 	@Test
 	public void test03_PublishContentWhenPutInvalidDateFormat(){
 
-		String doc_Name = "doc_test_66271";
+		String doc_Name = "doctest66271";
 		String doc_Content = "Content of File: Publish content when put invalid date format";
 		By file_locator = By.linkText(doc_Name);
 		String invalidDate = "10/10/2013";

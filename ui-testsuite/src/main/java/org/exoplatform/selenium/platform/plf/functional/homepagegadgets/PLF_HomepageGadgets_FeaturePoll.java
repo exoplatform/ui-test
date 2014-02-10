@@ -3,6 +3,7 @@ package org.exoplatform.selenium.platform.plf.functional.homepagegadgets;
 import static org.exoplatform.selenium.TestLogger.info;
 
 import org.exoplatform.selenium.platform.HomePageActivity;
+import org.exoplatform.selenium.platform.HomePageGadget;
 import org.exoplatform.selenium.platform.ManageAccount;
 import org.exoplatform.selenium.platform.ManageApplications;
 import org.exoplatform.selenium.platform.NavigationToolbar;
@@ -33,6 +34,7 @@ public class PLF_HomepageGadgets_FeaturePoll extends BasicAction{
 	ForumManageCategory mngCat;
 	ManageApplications app;
 	PageEditor pageEditor;
+	HomePageGadget hpGadget;
 
 	@BeforeMethod
 	public void beforeMethods(){	
@@ -43,9 +45,10 @@ public class PLF_HomepageGadgets_FeaturePoll extends BasicAction{
 		mngTopic = new ForumManageTopic(driver, this.plfVersion);
 		mngPoll = new ForumManagePoll(driver, this.plfVersion);
 		mngCat = new ForumManageCategory(driver, this.plfVersion);
-		app = new ManageApplications(driver);
+		app = new ManageApplications(driver, this.plfVersion);
 		pageEditor = new PageEditor(driver, this.plfVersion);
 		home = new HomePageActivity(driver, this.plfVersion);
+		hpGadget = new HomePageGadget(driver, this.plfVersion);
 		magAcc.signIn(DATA_USER1, DATA_PASS);
 	}
 
@@ -190,18 +193,18 @@ public class PLF_HomepageGadgets_FeaturePoll extends BasicAction{
 		naviToolbar.goToEditPageEditor();
 		click(ELEMENT_CATEGORY_GADGETS);
 		click(ELEMENT_SWITCH_VIEW_MODE);
-		dragAndDropToObject(ELEMENT_APPLICATION_POLL, ELEMENT_MIDDLE_CONTAINER);
+		dragAndDropToObject(hpGadget.ELEMENT_APPLICATION_POLL, hpGadget.ELEMENT_MIDDLE_CONTAINER);
 		pageEditor.finishEditLayout();	
 		naviToolbar.goToHomePage();
-		driver.switchTo().frame(waitForAndGetElement(ELEMENT_IDE_WORKSPACE_FRAME));
-		click(ELEMENT_SETTING_POLL_GADGET);
-		waitForAndGetElement(ELEMENT_SELECT_BOX_FEATURED_POLL);
-		String pollValue = waitForAndGetElement(ELEMENT_SELECT_BOX_FEATURED_ITEM.replace("${pollName}", poll2)).getAttribute("value");
-		selectOption(ELEMENT_SELECT_BOX_FEATURED_POLL, pollValue);
-		waitForAndGetElement(ELEMENT_POLL_NAME_ITEM.replace("${pollOption}", options2[0]));
-		waitForAndGetElement(ELEMENT_POLL_NAME_ITEM.replace("${pollOption}", options2[1]));
-		waitForElementNotPresent(ELEMENT_POLL_NAME_ITEM.replace("${pollOption}", options1[0]));
-		waitForElementNotPresent(ELEMENT_POLL_NAME_ITEM.replace("${pollOption}", options1[1]));
+		driver.switchTo().frame(waitForAndGetElement(ELEMENT_GADGET_WORKSPACE_FRAME));
+		click(hpGadget.ELEMENT_SETTING_POLL_GADGET);
+		waitForAndGetElement(hpGadget.ELEMENT_SELECT_BOX_FEATURED_POLL);
+		String pollValue = waitForAndGetElement(hpGadget.ELEMENT_SELECT_BOX_FEATURED_ITEM.replace("${pollName}", poll2)).getAttribute("value");
+		selectOption(hpGadget.ELEMENT_SELECT_BOX_FEATURED_POLL, pollValue);
+		waitForAndGetElement(hpGadget.ELEMENT_POLL_NAME_ITEM.replace("${pollOption}", options2[0]));
+		waitForAndGetElement(hpGadget.ELEMENT_POLL_NAME_ITEM.replace("${pollOption}", options2[1]));
+		waitForElementNotPresent(hpGadget.ELEMENT_POLL_NAME_ITEM.replace("${pollOption}", options1[0]));
+		waitForElementNotPresent(hpGadget.ELEMENT_POLL_NAME_ITEM.replace("${pollOption}", options1[1]));
 		driver.switchTo().defaultContent();
 		
 		/*Clear data*/
@@ -209,7 +212,7 @@ public class PLF_HomepageGadgets_FeaturePoll extends BasicAction{
 		naviToolbar.goToEditPageEditor();
 		click(ELEMENT_SWITCH_VIEW_MODE);
 		waitForAndGetElement(pageEditor.ELEMENT_VIEW_PAGE_PROPERTIES);
-		pageEditor.removePortlet(ELEMENT_GADGET_PORLET_IN_MIDDLE_HOME_PAGE, ELEMENT_DELETE_ICON_GADGET_PORLET_IN_MIDDLE_HOME_PAGE);
+		pageEditor.removePortlet(hpGadget.ELEMENT_GADGET_PORLET_IN_MIDDLE_HOME_PAGE, hpGadget.ELEMENT_DELETE_ICON_GADGET_PORLET_IN_MIDDLE_HOME_PAGE);
 		mngTopic.goToForums();
 		click(By.linkText(titleCat));
 		mngCat.deleteCategoryInForum(titleCat);

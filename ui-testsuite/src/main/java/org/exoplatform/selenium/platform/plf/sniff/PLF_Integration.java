@@ -83,7 +83,7 @@ public class PLF_Integration extends PlatformBase {
 		//Check look of IDE page
 		/*switch to ckeditor frame*/
 		Utils.pause(2000);
-		driver.switchTo().frame(waitForAndGetElement(ELEMENT_IDE_WORKSPACE_FRAME));
+		driver.switchTo().frame(waitForAndGetElement(ELEMENT_GADGET_WORKSPACE_FRAME));
 		//IDE page is shown correctly, dev-monit workspace is selected as default
 		waitForAndGetElement(ELEMENT_IDE_WORKSPACE_DEFAULT);
 		driver.switchTo().defaultContent();

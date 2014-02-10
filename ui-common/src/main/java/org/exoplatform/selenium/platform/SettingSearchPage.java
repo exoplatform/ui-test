@@ -75,12 +75,12 @@ public class SettingSearchPage extends PlatformBase {
 	public final String ELEMENT_RESULT_ITEM = "//div[@id='resultPage']//a[text()='${item}']/*[contains(text(),'${keySearch}')]";
 	public final String ELEMENT_RESULT_LOCATION_DATETIME = "//div[@id='resultPage']//a[text()='${item}']/*[contains(text(),'${keySearch}')]/../../../*[@class='detail']";
 	public final String ELEMENT_RESULT_EXCERPT = "//div[@id='resultPage']//a[text()='${item}']/*[contains(text(),'${keySearch}')]/../../../*[@class='excerpt']";
-	public final String ELEMENT_RESULT_ICON = "//div[@id='resultPage']//a[text()='${item}']/*[contains(text(),'${keySearch}')]/../../../../*[@class='avatar pull-left']";
+	public final String ELEMENT_RESULT_ICON = "//div[@id='resultPage']//a[text()='${item}']/*[contains(text(),'${keySearch}')]/../../../../*[contains(@class,'avatar pull-left')]";
 	public final String ELEMENT_RESULT_INDEX = "//*[@id='result']/div[${index}][contains(@class,'${title}')]";
 	public final By ELEMENT_RESULT_CONTENT_DETAIL = By.xpath("//*[@class='content']/*[@class='detail']");
 
 	//Task page result
-	public final String ELEMENT_RESULT_TASK_ICON = "//div[@id='resultPage']//a[text()='${item}']/*[contains(text(),'${keySearch}')]/../../../..//*[@class='uiIconStatus-64-needs-action']";
+	public final String ELEMENT_RESULT_TASK_ICON = "//div[@id='resultPage']//a[text()='${item}']/*[contains(text(),'${keySearch}')]/../../../..//*[@class='uiIconApp64x64TaskNeedActions']";
 
 	//Event page result
 	public final String ELEMENT_RESULT_EVENT_ICON = "//div[@id='resultPage']//a[text()='${item}']/*[contains(text(),'${keySearch}')]/../../../..//*[@class='calendarBox']";
@@ -90,7 +90,7 @@ public class SettingSearchPage extends PlatformBase {
 	public final By ELEMENT_RESULT_TITLE = By.xpath("//*[@class='content']//a");
 
 	//File page result
-	public final String ELEMENT_RESULT_FILE_ICON = "//div[@id='resultPage']//a[text()='${item}']/*[contains(text(),'${keySearch}')]/../../../..//*[@class='avatar pull-left']";
+	public final String ELEMENT_RESULT_FILE_ICON = "//div[@id='resultPage']//a[text()='${item}']/*[contains(text(),'${keySearch}')]/../../../..//*[contains(@class,'avatar pull-left')]";
 
 	//Forum page result
 	public final By ELEMENT_RESULT_FORUM_ICON = By.xpath("//*[@class='uiIconApp64x64Forum']");

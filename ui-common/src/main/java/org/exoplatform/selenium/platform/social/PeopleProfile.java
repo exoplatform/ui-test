@@ -73,9 +73,10 @@ public class PeopleProfile extends PlatformBase {
 	public final By ELEMENT_SAVE_UPDATE_INFO = By.xpath("//*[@id='UIProfile']//../*[contains(text(), 'Save')]");
 	public final By ELEMENT_CANCEL_UPDATE_INFO = By.xpath("//*[@id='UIProfile']//../*[contains(text(), 'Cancel')]");
 
-	public PeopleProfile(WebDriver dr){
+	public PeopleProfile(WebDriver dr, String...plfVersion) {
 		driver = dr;
-		button = new Button(driver);
+		this.plfVersion = plfVersion.length>0?plfVersion[0]:"4.0";
+		button = new Button(driver, this.plfVersion);
 	}
 
 	/**

@@ -126,14 +126,14 @@ public class ECMS_SE_FileManagementView_Actions_Select extends PlatformBase{
 
 		//Verify context menu
 		info("Verify menu");
-		assertTrue(actBar.isActionsOnActionBarPresent(actBar.ELEMENT_CUT_NODE));
-		assertTrue(actBar.isActionsOnActionBarPresent(actBar.ELEMENT_COPY_NODE));
-		assertTrue(actBar.isActionsOnActionBarPresent(actBar.ELEMENT_DELETE_NODE));
-		assertTrue(actBar.isActionsOnActionBarPresent(actBar.ELEMENT_LOCK_NODE));
-		assertTrue(actBar.isActionsOnActionBarPresent(actBar.ELEMENT_RENAME_NODE));
-		assertTrue(actBar.isActionsOnActionBarPresent(actBar.ELEMENT_ADD_SYMLINK_NODE));
-		assertTrue(actBar.isActionsOnActionBarPresent(cMenu.ELEMENT_VIEW_INFORMATION));
-		assertTrue(actBar.isActionsOnActionBarPresent(actBar.ELEMENT_DOWNLOAD_NODE));
+		waitForAndGetElement(actBar.ELEMENT_ECMS_CUT_NODE);
+		waitForAndGetElement(actBar.ELEMENT_ECMS_COPY_NODE);
+		waitForAndGetElement(actBar.ELEMENT_DELETE_NODE);
+		waitForAndGetElement(actBar.ELEMENT_LOCK_NODE);
+		waitForAndGetElement(actBar.ELEMENT_RENAME_NODE);
+		waitForAndGetElement(actBar.ELEMENT_ADD_SYMLINK_NODE);
+		waitForAndGetElement(cMenu.ELEMENT_VIEW_INFORMATION);
+		waitForAndGetElement(actBar.ELEMENT_DOWNLOAD_NODE);
 	}
 
 	/**CaseID: 74558
@@ -162,11 +162,11 @@ public class ECMS_SE_FileManagementView_Actions_Select extends PlatformBase{
 
 		//Verify context menu
 		info("Verify menu");
-		assertTrue(actBar.isActionsOnActionBarPresent(actBar.ELEMENT_CUT_NODE));
-		assertTrue(actBar.isActionsOnActionBarPresent(actBar.ELEMENT_COPY_NODE));
-		assertTrue(actBar.isActionsOnActionBarPresent(actBar.ELEMENT_DELETE_NODE_ICON));
-		assertTrue(actBar.isActionsOnActionBarPresent(actBar.ELEMENT_LOCK_ICON));
-		assertTrue(actBar.isActionsOnActionBarPresent(actBar.ELEMENT_ADD_SYMLINK_LIST_VIEW));
+		waitForAndGetElement(actBar.ELEMENT_CUT_NODE_ICON);
+		waitForAndGetElement(actBar.ELEMENT_COPY_NODE_ICON);
+		waitForAndGetElement(actBar.ELEMENT_DELETE_NODE_ICON);
+		waitForAndGetElement(actBar.ELEMENT_LOCK_ICON);
+		waitForAndGetElement(actBar.ELEMENT_ADD_SYMLINK_LIST_VIEW);
 		
 		waitForElementNotPresent(actBar.ELEMENT_RENAME_NODE);
 		waitForElementNotPresent(cMenu.ELEMENT_VIEW_INFORMATION);

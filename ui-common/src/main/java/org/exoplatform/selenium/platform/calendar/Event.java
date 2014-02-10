@@ -45,10 +45,11 @@ public class Event extends CalendarBase{
 	public By ELEMENT_ADD_EDIT_EVENT_LOCATION = By.id("place");
 	public By ELEMENT_EDIT_EVENT_POPUP = By.xpath("//span[@class='PopupTitle popupTitle' and text()='Add/Edit Event']");
 
-	public Event(WebDriver dr){
+	public Event(WebDriver dr, String...plfVersion){
 		driver = dr;
-		button = new Button(driver);
-		alert = new ManageAlert(driver);
+		this.plfVersion = plfVersion.length>0?plfVersion[0]:"4.0";
+		button = new Button(driver, this.plfVersion);
+		alert = new ManageAlert(driver, this.plfVersion);
 	}
 	
 	/******************Go to******************************/

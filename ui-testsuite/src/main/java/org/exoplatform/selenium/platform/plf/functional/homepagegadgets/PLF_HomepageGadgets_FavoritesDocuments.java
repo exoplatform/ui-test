@@ -1,5 +1,6 @@
 package org.exoplatform.selenium.platform.plf.functional.homepagegadgets;
 
+import org.exoplatform.selenium.platform.HomePageGadget;
 import org.exoplatform.selenium.platform.ManageAccount;
 import org.exoplatform.selenium.platform.ManageApplications;
 import org.exoplatform.selenium.platform.NavigationToolbar;
@@ -31,6 +32,7 @@ public class PLF_HomepageGadgets_FavoritesDocuments extends PlatformBase {
 	PageEditor pageEditor;
 	ManageApplications magApp;
 	SitesExplorer siteExp;
+	HomePageGadget hpGadget;
 
 	@BeforeMethod
 	public void beforeMethods() {
@@ -42,8 +44,9 @@ public class PLF_HomepageGadgets_FavoritesDocuments extends PlatformBase {
 		ecms = new EcmsBase(driver, this.plfVersion);
 		magAcc = new ManageAccount(driver, this.plfVersion);
 		pageEditor = new PageEditor(driver, this.plfVersion);
-		magApp = new ManageApplications(driver);
-		siteExp = new SitesExplorer(driver);
+		magApp = new ManageApplications(driver, this.plfVersion);
+		siteExp = new SitesExplorer(driver, this.plfVersion);
+		hpGadget = new HomePageGadget(driver, this.plfVersion);
 		magAcc.signIn(DATA_USER1, DATA_PASS);
 	}
 
@@ -74,7 +77,7 @@ public class PLF_HomepageGadgets_FavoritesDocuments extends PlatformBase {
 		navToolBar.goToEditLayout();
 		click(ELEMENT_CATEGORY_TOOLS);
 		click(ELEMENT_SWITCH_VIEW_MODE);
-		dragAndDropToObject(ELEMENT_APPLICATION_FAVORITEDOCUMENT, ELEMENT_MIDDLE_CONTAINER);
+		dragAndDropToObject(hpGadget.ELEMENT_APPLICATION_FAVORITEDOCUMENT, hpGadget.ELEMENT_MIDDLE_CONTAINER);
 		pageEditor.finishEditLayout();	
 
 		info("Test 1: Check all the favorite documents");
@@ -114,8 +117,8 @@ public class PLF_HomepageGadgets_FavoritesDocuments extends PlatformBase {
 		 *Expected Outcome: 
 			All favorite documents are shown*/
 		navToolBar.goToHomePage();
-		driver.switchTo().frame(waitForAndGetElement(ELEMENT_IDE_WORKSPACE_FRAME));
-		click(ELEMENT_FAVORITEDOCUMENT_ICON_HOMEPAGE);
+		driver.switchTo().frame(waitForAndGetElement(ELEMENT_GADGET_WORKSPACE_FRAME));
+		click(hpGadget.ELEMENT_FAVORITEDOCUMENT_ICON_HOMEPAGE);
 		waitForAndGetElement(ecms.ELEMENT_NODE_ADMIN_VIEW.replace("${nodeName}", namelink1));
 		actBar.goToNodeByAddressPath("/");
 		driver.switchTo().defaultContent();
@@ -154,8 +157,8 @@ public class PLF_HomepageGadgets_FavoritesDocuments extends PlatformBase {
 		 *Expected Outcome: 
 			All favorite documents are shown*/ 
 		navToolBar.goToHomePage();
-		driver.switchTo().frame(waitForAndGetElement(ELEMENT_IDE_WORKSPACE_FRAME));
-		click(ELEMENT_FAVORITEDOCUMENT_ICON_HOMEPAGE);
+		driver.switchTo().frame(waitForAndGetElement(ELEMENT_GADGET_WORKSPACE_FRAME));
+		click(hpGadget.ELEMENT_FAVORITEDOCUMENT_ICON_HOMEPAGE);
 		waitForAndGetElement(ecms.ELEMENT_NODE_ADMIN_VIEW.replace("${nodeName}", namelink1));
 		waitForAndGetElement(ecms.ELEMENT_NODE_ADMIN_VIEW.replace("${nodeName}", namelink2));
 		actBar.goToNodeByAddressPath("/");
@@ -167,7 +170,7 @@ public class PLF_HomepageGadgets_FavoritesDocuments extends PlatformBase {
 		navToolBar.goToEditPageEditor();
 		click(ELEMENT_SWITCH_VIEW_MODE);
 		waitForAndGetElement(pageEditor.ELEMENT_VIEW_PAGE_PROPERTIES);
-		pageEditor.removePortlet(ELEMENT_GADGET_PORLET_IN_MIDDLE_HOME_PAGE, ELEMENT_DELETE_ICON_GADGET_PORLET_IN_MIDDLE_HOME_PAGE);
+		pageEditor.removePortlet(hpGadget.ELEMENT_GADGET_PORLET_IN_MIDDLE_HOME_PAGE, hpGadget.ELEMENT_DELETE_ICON_GADGET_PORLET_IN_MIDDLE_HOME_PAGE);
 		driver.switchTo().defaultContent();
 		navToolBar.goToPersonalDocuments();
 		actBar.actionsOnElement(name2, actionType.DELETE);

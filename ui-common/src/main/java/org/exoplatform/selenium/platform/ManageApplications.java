@@ -24,10 +24,11 @@ public class ManageApplications extends PlatformBase {
 	ManageAccount magAc;
 	NavigationToolbar navTool;
 	
-	public ManageApplications(WebDriver dr){
+	public ManageApplications(WebDriver dr, String...plfVersion) {
 		driver = dr;
+		this.plfVersion = plfVersion.length>0?plfVersion[0]:"4.0";
 		magAc = new ManageAccount(driver,this.plfVersion);
-		navTool = new NavigationToolbar(driver);
+		navTool = new NavigationToolbar(driver, this.plfVersion);
 	}
 	
 	/* Manage Application Page */

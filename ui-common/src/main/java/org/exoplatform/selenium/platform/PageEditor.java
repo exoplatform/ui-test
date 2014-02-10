@@ -133,7 +133,6 @@ public class PageEditor extends PlatformBase {
 		finishEditLayout();
 	}
 
-
 	//Create empty layout SCV (Single Content Viewer) with content
 	//	public void createPage_EmptyLayout_ContentDetail_ContentPath(String pageName, String contentPath){
 	//		goToPageEditor_EmptyLayout(pageName);

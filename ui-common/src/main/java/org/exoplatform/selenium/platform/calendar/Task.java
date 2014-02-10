@@ -66,9 +66,10 @@ public class Task extends CalendarBase{
 	public int HAFL_HOUR = 30; //minutes
 	public int FULL_HOUR = 60; //minutes
 
-	public Task(WebDriver dr){
+	public Task(WebDriver dr, String...plfVersion){
 		driver = dr;
-		button = new Button(driver);
+		this.plfVersion = plfVersion.length>0?plfVersion[0]:"4.0";
+		button = new Button(driver, this.plfVersion);
 	}
 
 	/*============== Go to Task =============*/
