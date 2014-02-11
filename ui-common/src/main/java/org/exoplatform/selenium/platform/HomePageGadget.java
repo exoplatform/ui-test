@@ -31,7 +31,7 @@ public class HomePageGadget extends PlatformBase{
 	public By ELEMENT_ICON_SPACE_GADGET = By.xpath("//div[@class='spaceInvitePicture pull-left avatarXSmall']");
 
 	//-------Getting Started Gadget -------- 
-	public By ELEMENT_GETTING_STARTED_GADGET_FORM = By.id("GettingStartedContainer");
+	public By ELEMENT_GETTING_STARTED_GADGET_FORM = By.className("GettingStartedContainer");
 	public By ELEMENT_PROFILE_PICTURE = By.linkText("Add a profile picture");
 	public By ELEMENT_CONNECT_TO_COWORKERS = By.linkText("Connect to coworkers");
 	public By ELEMENT_JOIN_A_SPACE = By.linkText("Join a space");
@@ -45,6 +45,7 @@ public class HomePageGadget extends PlatformBase{
 	public String ELEMENT_FINISH_JOIN_TO_SPACE = "//ul[@id='gsList']//li[@class='${status}']/a[text()='Join a space']";
 	public By ELEMENT_INPROGRESS_COMPLETE = By.xpath("//div[@id='progress-block']//div[@id='progress-rate']/../../div[@id='progress-label' and contains(text(),'100 %')]");
 	public By ELEMENT_CLOSE_GADGET_GETTING_STARTED = By.xpath("//div[@id='DeleteLink']//button[text()='Close']");
+	public By ELEMENT_X_CLOSE_BUTTON_GADGET_GETTING_STARTED = By.xpath("//div[@class='UIGadgetThemes uiBox uiGettingStarted']//a[@class='uiIconClose pull-right']");
 
 	//-------Suggestions Gadget -------- 
 	public By ELEMENT_SUGGESTION_GADGET_FORM = By.xpath("//div[@class='uiBox uiSuggestions']//h6[@class='title center' and text()='Suggestions']");

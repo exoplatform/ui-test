@@ -274,7 +274,7 @@ public class EcmsBase extends ManageAccount {
 	public final By ELEMENT_UPLOAD_CREATOR = By.id("creator0");
 	public final By ELEMENT_UPLOAD_SOURCE = By.id("source0");
 	public final By ELEMENT_UPLOAD_LINK = By.id("MultiUploadInputFiles");
-	public final By ELEMENT_UPLOAD_FILE_LINK = By.className("uiIconEcmsUpload");
+	public final By ELEMENT_UPLOAD_FILE_LINK = By.id("UploadButtonDiv");
 	public final String ELEMENT_CANCEL_UPLOAD_FILE = "//*[text()='${title}']/ancestor::div[contains(@class, 'loadContent')]//*[contains(@id, 'cancel')]";
 	public final By ELEMENT_UPLOAD_CLOSE_TAB = By.id("MultiUploadClose");
 	public final By ELEMENT_UPLOAD_INFORMATION_ICON = By.id("MultiUploadHelp");

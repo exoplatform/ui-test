@@ -13,6 +13,12 @@ import org.exoplatform.selenium.platform.social.Activity;
 import org.exoplatform.selenium.platform.social.PeopleConnection;
 import org.exoplatform.selenium.platform.social.PeopleSearch;
 
+/**
+ * @author HaVTT
+ * date: 10/02/2014
+ *    
+ */
+
 public class PLF_HomepageGadgets_WhoIsOnline extends Activity {
 
 	ManageAccount acc;
