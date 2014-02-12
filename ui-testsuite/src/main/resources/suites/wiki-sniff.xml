@@ -6,9 +6,16 @@
 				<exclude name="pending" />
 			</run>
 		</groups>
-		<packages>
-			<package name="org.exoplatform.selenium.platform.wiki.sniff" />
-		</packages>
+		<classes>
+			<class name="org.exoplatform.selenium.platform.wiki.sniff.Wiki_Attachment" />
+			<class name="org.exoplatform.selenium.platform.wiki.sniff.Wiki_BasicAction_ManagePage" />
+			<class name="org.exoplatform.selenium.platform.wiki.sniff.Wiki_BasicAction_Other" />
+			<class name="org.exoplatform.selenium.platform.wiki.sniff.Wiki_Information" />
+			<class name="org.exoplatform.selenium.platform.wiki.sniff.Wiki_PublicActivity" />
+			<class name="org.exoplatform.selenium.platform.wiki.sniff.Wiki_Search" />
+			<class name="org.exoplatform.selenium.platform.wiki.sniff.Wiki_WikiSetting_ManagePermission" />
+			<class name="org.exoplatform.selenium.platform.wiki.sniff.Wiki_WikiSetting_ManageTemplate" />
+		</classes>
 	</test>
 	<listeners>
 		<listener class-name="org.exoplatform.selenium.TestReportListener" />
