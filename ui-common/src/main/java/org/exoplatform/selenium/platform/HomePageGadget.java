@@ -51,13 +51,15 @@ public class HomePageGadget extends PlatformBase{
 	public String ELEMENT_VERIFY_USER_SUGGESTIONS = "//*[@id='peopleSuggest']//*[@class='peopleName']/a[contains(text(),'${peopleName}')]";
 	public String ELEMENT_VERIFY_SPACE_SUGGESTIONS = "//*[@id='spaceSuggest']//*[@class='spaceInfo']/div[@class='spaceName' and text()='${spaceName}']";
 	public String ELEMENT_CONNECT_USER_SUGGESTIONS = "//*[@id='peopleSuggest']//*[@class='peopleName']/a[contains(text(),'${peopleName}')]/../..//a[text()='Connect']";
-	public String ELEMENT_CONNECT_SPACE_SUGGESTIONS = "//*[@id='spaceSuggest']//*[@class='spaceInfo']/div[@class='spaceName' and contains(text(),'${spaceName}')]/../..//a[text()='Request']";
+	public String ELEMENT_REQUEST_SPACE_SUGGESTIONS = "//*[@id='spaceSuggest']//*[@class='spaceInfo']/div[@class='spaceName' and contains(text(),'${spaceName}')]/../..//a[text()='Request']";
 	public String ELEMENT_REMOVE_USER_SUGGESTIONS = "//*[@id='peopleSuggest']//*[@class='peopleName']/a[contains(text(),'${peopleName}')]/../..//i[@class='uiIconClose']";
 	public String ELEMENT_REMOVE_SPACE_SUGGESTIONS="//*[@id='spaceSuggest']//*[@class='spaceInfo']/div[@class='spaceName' and contains(text(),'${spaceName}')]/../..//i[@class='uiIconClose']";
-	public String ELEMENT_VERIFY_USER_SUGGESTIONS_INDEX = "//*[@id='peopleSuggest']//li[${index}]//*[@class='peopleName']/a";
-	public String ELEMENT_VERIFY_SPACE_SUGGESTIONS_INDEX = "//*[@id='spaceSuggest']//li[${index}]//*[@class='spaceInfo']/*[@class='spaceName']";
+	public String ELEMENT_VERIFY_SPACE_SUGGESTIONS_INDEX = "//*[@id='spaceSuggest']//li['${index}']/../..//div[@class='spaceName' and text()='${spaceName}']";
+	public String ELEMENT_VERIFY_STATUS_SPACE_SUGGESTION = "//*[@class='spaceInfo']/div[@class='spaceName' and text()='${spaceName}']/../../../..//div[@class='spaceCommon']";
+	public String ELEMENT_JOIN_SPACE_SUGGESTIONS = "//*[@id='spaceSuggest']//*[@class='spaceInfo']/div[@class='spaceName' and contains(text(),'${spaceName}')]/../..//a[text()='Join']";
+	public String ELEMENT_VERIFY_USER_SUGGESTIONS_INDEX = "//*[@id='peopleSuggest']//li['${index}']//*[@class='peopleName']/a[contains(text(),'${peopleName}')]";
 
-	//-------------------Who'sOnline gadget-----------------------------------
+	//-------------------Who'sOnline Gadget-----------------------------------
 	public By ELEMENT_WHOISONLINE_GADGET = By.id("onlineContent");
 	public String ELEMENT_ONLINE_USER_ACC_IMG = "//*[@id='tipName']//a[@href='/portal/intranet/activities/${acc}']/img";
 	public String ELEMENT_ONLINE_USER_TITLE = "//*[@id='tipName']//td[2]/a[@href='/portal/intranet/activities/${acc}']";
@@ -167,10 +169,10 @@ public class HomePageGadget extends PlatformBase{
 	 */
 	public void connectSpaceSuggestionsGadget(String spaceName) {
 		info("-- Connect Suggestions user --");
-		mouseOver(ELEMENT_CONNECT_SPACE_SUGGESTIONS.replace("${Name}", spaceName),true);
-		WebElement element = waitForAndGetElement(ELEMENT_CONNECT_SPACE_SUGGESTIONS.replace("${spaceName}", spaceName), DEFAULT_TIMEOUT,1,2);
+		mouseOver(ELEMENT_VERIFY_SPACE_SUGGESTIONS.replace("${spaceName}", spaceName),true);
+		WebElement element = waitForAndGetElement(ELEMENT_REQUEST_SPACE_SUGGESTIONS.replace("${spaceName}", spaceName), DEFAULT_TIMEOUT,1,2);
 		((JavascriptExecutor)driver).executeScript("arguments[0].click();", element);
-		waitForElementNotPresent(ELEMENT_CONNECT_SPACE_SUGGESTIONS.replace("${spaceName}", spaceName));
+		waitForElementNotPresent(ELEMENT_REQUEST_SPACE_SUGGESTIONS.replace("${spaceName}", spaceName));
 
 	}
 	/**
@@ -179,7 +181,7 @@ public class HomePageGadget extends PlatformBase{
 	 */
 	public void removeSpaceSuggestionsGadget(String spaceName){
 		info("-- Remove an invitation --");
-		mouseOver(ELEMENT_REMOVE_SPACE_SUGGESTIONS.replace("${Name}", spaceName),true);
+		mouseOver(ELEMENT_VERIFY_SPACE_SUGGESTIONS.replace("${Name}", spaceName),true);
 		WebElement element = waitForAndGetElement(ELEMENT_REMOVE_SPACE_SUGGESTIONS.replace("${spaceName}", spaceName), DEFAULT_TIMEOUT,1,2);
 		((JavascriptExecutor)driver).executeScript("arguments[0].click();", element);
 		waitForElementNotPresent(ELEMENT_REMOVE_SPACE_SUGGESTIONS.replace("${spaceName}", spaceName));
