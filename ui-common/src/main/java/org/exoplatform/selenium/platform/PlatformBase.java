@@ -87,20 +87,20 @@ public class PlatformBase extends TestBase {
 	//By.xpath("//a[@class='ItemIcon QuickEditUnchecked']");
 
 	//Page
-//	public final By ELEMENT_MENU_PAGE_LINK = By.xpath("//li[@class='dropdown-submenu']/a[contains(text(),'Page')]");
-//	public final By ELEMENT_MENU_EDIT_LAYOUT = By.xpath("//a[contains(text(),'Edit Layout')]");
-//	public final By ELEMENT_MENU_SEO_LINK = By.xpath("//span[text()='SEO']");
-//	public final By ELEMENT_MENU_ADD_PAGE_LINK = By.xpath("//a[contains(text(),'Add Page')]");
-//	
+	//	public final By ELEMENT_MENU_PAGE_LINK = By.xpath("//li[@class='dropdown-submenu']/a[contains(text(),'Page')]");
+	//	public final By ELEMENT_MENU_EDIT_LAYOUT = By.xpath("//a[contains(text(),'Edit Layout')]");
+	//	public final By ELEMENT_MENU_SEO_LINK = By.xpath("//span[text()='SEO']");
+	//	public final By ELEMENT_MENU_ADD_PAGE_LINK = By.xpath("//a[contains(text(),'Add Page')]");
+	//	
 	public final By ELEMENT_MENU_PAGE_LINK = By.linkText("Page");
 	public final By ELEMENT_MENU_EDIT_LAYOUT = By.linkText("Edit Layout");
 	public final By ELEMENT_MENU_SEO_LINK = By.linkText("SEO");
 	public final By ELEMENT_MENU_ADD_PAGE_LINK = By.linkText("Add Page");
-	
+
 	//Add page
 	public final By ELEMENT_PAGE_NAME = By.id("pageName");
-	
-	
+
+
 	//site
 	public final By ELEMENT_MENU_EDIT_SITES = By.xpath("//*[@id='UIAdminToolbarContainer']//a[contains(text(),'Site')]");
 	public final By ELEMENT_MENU_EDIT_SITES_NAV = By.xpath("//*[@id='UIAdminToolbarContainer']//a[contains(text(),'Navigation')]");
@@ -229,9 +229,11 @@ public class PlatformBase extends TestBase {
 	public final By ELEMENT_CUT_NODE = By.className("uiIconCutNode");
 	public final By ELEMENT_ECMS_CUT_NODE = By.xpath("//*[@id='ECMContextMenu']//*[@class='uiIconEcmsCut']");
 	//By.xpath("//*[@class='uiContextMenuContainer']//*[@class='uiIconEcmsCut']"); 
+
 	public final By ELEMENT_PASTE_NODE = By.className("uiIconPasteNode");
 	public final By ELEMENT_ECMS_PASTE_NODE = By.xpath("//*[@id='ECMContextMenu']//*[@class='uiIconEcmsPaste']");
 	//By.xpath("//*[@class='uiContextMenuContainer']//*[@class='uiIconEcmsPaste']"); 
+
 	public final By ELEMENT_COPY_NODE = By.className("uiIconCopyNode");
 	public final By ELEMENT_ECMS_COPY_NODE = By.xpath("//*[@id='ECMContextMenu']//*[@class='uiIconEcmsCopy']");
 	//By.xpath("//*[@class='uiContextMenuContainer']//*[@class='uiIconEcmsCopy']"); 
@@ -250,7 +252,7 @@ public class PlatformBase extends TestBase {
 	public final String ELEMENT_SEARCH_ICON_USERS_MANAGEMENT = "//form[@id='UISearchForm']/div[2]/a";
 	public final String ELEMENT_USER_EDIT_ICON = "//*[@id='UIListUsersGird']//*[text()='${username}']/../..//*[@data-original-title='Edit User Info']";
 	public final By ELEMENET_USER_MANAGEMENT_GRID = By.id("UIListUsersGird");
-	
+
 	public String USER_REG_SAME_ACC_FAIL_MSG = "//span[@class='errorIcon' and contains(text(),'This user name already exists, please enter a different name.')]";
 	public String USER_REG_UPPER_LETTER_FAIL_MSG = "//span[@class='warningIcon' and contains(text(),'nly lowercase letters, digits, dot and underscore characters are allowed for the field')]";
 	public String USER_REG_COPYPASTE_PASSWORD_FAIL_MSG = "//span[@class='errorIcon' and contains(text(),'Password and Confirm Password must be the same.')]";
@@ -272,7 +274,7 @@ public class PlatformBase extends TestBase {
 
 	//Group Management tree
 	public String ELEMENT_GROUP_TREE = "//div[@class='groupNavigationContainer']//a[@title='${groupName}']";
-	
+
 	//Add Group Form
 	public final By ELEMENT_INPUT_GROUP_NAME = By.name("name");
 	public final By ELEMENT_INPUT_GROUP_NAME_2 = By.name("groupName");
@@ -280,7 +282,7 @@ public class PlatformBase extends TestBase {
 	public final By ELEMENT_INPUT_LABEL_1 = By.xpath("//*[contains(@id, 'Label')]");
 	public final String ELEMENT_TEXTAREA_DESCRIPTION = "//textarea[@id='description']";
 
-//	public final By ELEMENT_GROUP_SEARCH_USER_ICON = By.xpath("//form[@id='UIGroupMembershipForm']//*[contains(@class, 'uiIconSearch')]");
+	//	public final By ELEMENT_GROUP_SEARCH_USER_ICON = By.xpath("//form[@id='UIGroupMembershipForm']//*[contains(@class, 'uiIconSearch')]");
 	public final By ELEMENT_GROUP_SEARCH_USER_ICON = By.xpath("//*[@id='UIGroupMembershipForm']//a[@data-original-title='Select User']");
 	public final By ELEMENT_GROUP_SEARCH_USER_SEARCH_INPUT = By.xpath("//input[@name='Quick Search']"); //don't change to By.id because there is a space
 	public final By ELEMENT_GROUP_SEARCH_USER_SEARCH_ICON = By.xpath("//*[@id='UIUserSelector']//a[@data-original-title='Quick Search']");
@@ -290,7 +292,7 @@ public class PlatformBase extends TestBase {
 	public final String ELEMENT_GROUP_SEARCH_POPUP_ADD_ICON = "//form[@id='UIUserSelector']//div[@class='UIAction']//a[@class='ActionButton LightBlueStyle']";
 	public final String ELEMENT_SELECT_MEMBERSHIP = "//select[@name='membership']";
 	public final String ELEMENT_GROUP_USER_IN_TABLE = "//*[@class='UIUserInGroup']//*[text()='${username}']";
-//	public final String ELEMENT_GROUP_USER_IN_TABLE = "//*[@id='UIListUsers']//span[@data-original-title='fqa']";
+	//	public final String ELEMENT_GROUP_USER_IN_TABLE = "//*[@id='UIListUsers']//span[@data-original-title='fqa']";
 
 	//Membership Management
 	public final By ELEMENT_TAB_MEMBERSHIP_MANAGEMENT = By.xpath("//*[contains(@class, 'uiIconMembership')]/parent::a");
@@ -342,7 +344,7 @@ public class PlatformBase extends TestBase {
 	public final String ELEMENT_PAGE_LAYOUT_SETTING_COMBOBOX_OPTION = "//*[@id='UIDropDownPageTemp']/ul[@class='dropdown-menu']/li/a[text()='${PageConfigOpt}']";
 	public final By ELEMENT_PAGE_LAYOUT_OPTION_EMPTY = By.xpath("//*[@id='UIPageTemplateOptions']//a[contains(text(),'Empty Layout')]");
 	public final By ELEMENT_PAGE_LAYOUT_OPTION_DASHBOARD = By.xpath("//*[@id='UIPageTemplateOptions']//a[contains(text(),'Dashboard Layout')]");
-	
+
 	//Permission Setting TAB
 	public final By ELEMENT_PERMISSION_SETTING_TAB= By.linkText("Permission Settings");
 	public final By ELEMENT_CHECKBOX_PUBLIC_MODE = By.id("publicMode");
@@ -358,7 +360,7 @@ public class PlatformBase extends TestBase {
 	public final String ELEMENT_SELECT_ACCESS_GROUP_ITEM = "//*[@id='ListPermissionSelector']//a[@title='${group}']";
 	public final String ELEMENT_SELECT_EDIT_GROUP_ITEM = "//*[@id='UIPermissionSelector']//*[contains(text(), '${group}')]";
 	public final By ELEMENT_PERMISSION_GRID = By.id("PermissionGrid");
-	
+
 	//Portal Template TAB
 	public final By ELEMENT_PORTAL_TEMPLATE_TAB= By.linkText("Portal Templates");
 
@@ -394,13 +396,13 @@ public class PlatformBase extends TestBase {
 	public final String ELEMENT_PORTLET_LABEL = "//div[@class='CPortletLayoutDecorator' and contains(text(), '${portletName}')]";	
 	public final String ELEMENT_PAGE_FINISH_BUTTON = "//*[@data-original-title='Finish']";
 	public final By ELEMENT_PAGE_CLOSE = By.xpath("//a[@title='Abort']");
-	
+
 	public final By ELEMENT_SWITCH_VIEW_MODE = By.linkText("Switch View mode");
 	public final String ELEMENT_PAGE_COLUMN = "//tr[@class='TRContainer']//td['${index}']";
 	public final By ELEMENT_VIEW_PAGE_PROPERTIES = By.linkText("View Page properties");	
 	public final By ELEMENT_PAGE_EXIST_WARNING_MSG = By.xpath("//*[contains(text(),'This page name already exists')]");
 
-	
+
 	//PortalNavigation - http://localhost:8080/portal/g/:platform:administrators/portalnavigation
 	public final String ELEMENT_NODE_LINK = "//*[@class='node']//*[@title='${nodeLabel}']";
 	public final String ELEMENT_EDIT_NAVIGATION = "//*[text()='${navigation}']/../..//*[@class='uiIconNavigation uiIconLightGray']";
@@ -473,10 +475,31 @@ public class PlatformBase extends TestBase {
 	public final String ELEMENT_CONTENT_IN_CONTENT_DETAIL_PORTLET_41 = "//*[contains(@id, 'UISingleContentViewerPortlet')]//*[@class='topTitle' and text()='${contentName}']";
 	public final String ELEMENT_GADGET_APPLICATION_PAGE_EDITOR = "//div[@id='UIApplicationList0']//div[contains(text(),'${gadget}')]";
 	public final String ELEMENT_PORTLET_TITLE = "//*[@class='portletLayoutDecorator' and contains(text(), '${portletTitle}')]";
-	
+
+	/*Tools application*/
+	public final By ELEMENT_APPLICATION_FAVORITEDOCUMENT = By.id("Tools/FavoriteDocument");
+	public final By ELEMENT_RIGHT_CONTAINER = By.xpath("//div[@id='OfficeRight']//div[@class='NormalContainerBlock UIComponentBlock']");
+	public final By ELEMENT_MIDDLE_CONTAINER = By.xpath("//div[@id='OfficeMiddle']//div[@class='NormalContainerBlock UIComponentBlock']");
+	public final By ELEMENT_FAVORITEDOCUMENT_ICON_HOMEPAGE = By.xpath("//i[@class='uiIconFavoriteDocument uiIconLightGray']");
+	public final By ELEMENT_GADGET_PORLET_IN_MIDDLE_HOME_PAGE = By.xpath("//div[@id='OfficeMiddle']//div[@class='NormalContainerBlock UIComponentBlock']//*[@id='UIGadgetPortlet']");
+	public final By ELEMENT_DELETE_ICON_GADGET_PORLET_IN_MIDDLE_HOME_PAGE = By.xpath("//div[@id='OfficeMiddle']//div[@class='NormalContainerBlock UIComponentBlock']//*[@id='UIGadgetPortlet']/../../../..//*[@data-original-title='Delete Portlet']");
+	public final By ELEMENT_SUGGESTION_GADGET = By.xpath("//div[@id='OfficeRight']//div[@class='NormalContainerBlock UIComponentBlock']//*[@id='content']");
+
+	/*Feature Poll porlet*/
+	public final By ELEMENT_CATEGORY_GADGETS = By.linkText("Gadgets");
+	public final By ELEMENT_APPLICATION_POLL = By.id("Gadgets/FeaturedPoll"); 
+	public final By ELEMENT_SETTING_POLL_GADGET = By.xpath("//*[contains(text(),'Featured Poll')]//*[@class='uiIconSetting']");
+	public final By ELEMENT_SELECT_BOX_FEATURED_POLL = By.xpath("//*[@class='selectbox']");
+	public final String ELEMENT_SELECT_BOX_FEATURED_ITEM = "//option[text()='${pollName}']";
+	public final String ELEMENT_POLL_NAME_ITEM = "//*[@title='${pollOption}' or @data-original-title='${pollOption}']";
+
+	/*My profile gadget*/
+	public final By ELEMENT_APPLICATION_MY_PROFILE = By.id("Gadgets/Profile");
+	public final By ELEMENT_PROFILE_PICTURE_IN_MY_PROFILE_GADGET = By.xpath("//*[@class='GadCont ProfilePicture']");
+	public final By ELEMENT_PROFILE_INFO_IN_MY_PROFILE_GADGET = By.xpath("//*[@class='GadCont ProfileInfo']");
+
 	public final By ELEMENT_CONTENTS_BY_QUERY_PORTLET = By.xpath("//div[contains(text(),'Content By Query')]");
 	public final By ELEMENT_CATEGORY_TOOLS = By.linkText("Tools");
-	public final By ELEMENT_CATEGORY_GADGETS = By.linkText("Gadgets");
 	public final By ELEMENT_CATEGORY_CONTENT = By.linkText("Content");
 	public final By ELEMENT_CATEGORY_COLLABORATION = By.linkText("Collaboration");
 	public final By ELEMENT_CATEGORY_ADMINISTRATION = By.linkText("Administration");
@@ -531,14 +554,14 @@ public class PlatformBase extends TestBase {
 	public final String ELEMENT_NAME_CURRENT_CONTAINER = "//*[text()='${nameContainer}']/ancestor::div[contains(@class, 'EdittingContainer')]";
 	public final String ELEMENT_DRAG_CURRENT_CONTAINER = "//*[text()='${nameContainer}']/../*[@title='Hold this area to drag this container']";
 	public final String ELEMENT_LIST_CONTAINER = "//*[@class='UIRowContainer']/div[${number}]//*[contains(text(), '${nameContainer}')]";
-	
+
 	//Porlet setting
 	public final By ELEMENT_PORLET_SETTING_TAB = By.xpath("//*[text()='Portlet Setting']");
 	public final By ELEMENT_EDIT_MODE_TAB = By.xpath("//*[text()='Edit Mode']");
 	public final By ELEMENT_SELECT_ICON_TAB = By.xpath("//*[text()='Select Icon']");
 	public final By ELEMENT_DECORATION_THEMES_TAB = By.xpath("//*[text()='Decoration Themes']");
 	public final By ELEMENT_ACCESS_PERMISSION_TAB = By.xpath("//*[text()='Access Permission']");
-	
+
 	public final By ELEMENT_ACCESS_PERMISSION_MAKEITPUBLIC = By.id("publicMode");
 
 	/*
@@ -559,7 +582,7 @@ public class PlatformBase extends TestBase {
 	//Edit portlet Form
 	public final By ELEMENT_WINDOW_SETTINGS_TAB = By.xpath("//div[@id='UIMaskWorkspace']//div[text()='Window Settings']");
 	public final By ELEMENT_WINDOWS_TITLE = By.xpath("//*[@id='title']");
-	
+
 	public final By ELEMENT_PORTLET_ACCESS_PERMISSION_TAB = By.xpath("//*[@id='tab-UIPortletForm']//a[@data-target='#PortletPermission-tab']");
 	public final By ELEMENT_PORTLET_ADD_PERMISSION_BUTTON = By.xpath("//*[@id='PortletPermissionSelector']//a[contains(text(),'Add Permission')]");
 	public final By ELEMENT_PORTLET_LIST_PERMISSION_WINDOW = By.xpath("//*[@id='PortletPermissionSelectorPopup']//span[contains(text(),'ListPermissionSelector')]");
@@ -698,7 +721,7 @@ public class PlatformBase extends TestBase {
 	//public final By ELEMENT_MENU_USERS = By.xpath("//*[@id='UISetupPlatformToolBarPortlet']//a[@href='/portal/g/:platform:administrators/administration/newStaff' and text()='Users']");
 	//public final By ELEMENT_MENU_APPLICATONS = By.xpath("//*[@id='UISetupPlatformToolBarPortlet']//a[@href='/portal/g/:platform:administrators/administration/registry']");
 	//public final By ELEMENT_MENU_CONTENT = By.xpath("//*[@id='UISetupPlatformToolBarPortlet']//a[@href='/portal/g/:platform:web-contributors/siteExplorer' and text()='Content']");
-//	public final By ELEMENT_MENU_PORTAL = By.xpath("//*[@id='UISetupPlatformToolBarPortlet']//a[@href='/portal/g/:platform:administrators/administration/pageManagement' and text()='Portal']");
+	//	public final By ELEMENT_MENU_PORTAL = By.xpath("//*[@id='UISetupPlatformToolBarPortlet']//a[@href='/portal/g/:platform:administrators/administration/pageManagement' and text()='Portal']");
 	public final By ELEMENT_MENU_PORTAL = By.linkText("Portal");
 	public final By ELEMENT_MENU_PORTAL_PAGES_MANAGEMENT = By.linkText("Pages");
 	public final By ELEMENT_MENU_ADMININISTRATION = By.xpath("//*[@id='UISetupPlatformToolBarPortlet']//a[@href='/portal/g/:platform:administrators/servicesManagement' and text()='Administration']");
@@ -1105,7 +1128,14 @@ public class PlatformBase extends TestBase {
 		driver.switchTo().window(handlesBefore);
 	}
 
-	//Function to add data to frame
+	/**Function to add data to frame
+	 *
+	 * @param framelocator
+	 * @param data
+	 * @param validate: if not passed, then not clear old data of frame, verify that new data is input correctly
+	 * = true, clear old data of frame
+	 * = false, not clear old data, not verify that new data is input correctly
+	 */
 	public void inputDataToFrame(By framelocator, String data, boolean...validate){
 		try {
 			WebElement inputsummary = null;
@@ -1118,7 +1148,7 @@ public class PlatformBase extends TestBase {
 				driver.switchTo().frame(e);
 				inputsummary = driver.switchTo().activeElement();
 				inputsummary.click();
-				inputsummary.clear();
+				// inputsummary.clear();
 
 				if (validate.length >0)
 					if (validate[0]){
@@ -1126,12 +1156,12 @@ public class PlatformBase extends TestBase {
 						if (data.equals(inputsummary.getText())) break;
 					}
 					else{
-						inputsummary.sendKeys(data);
+						((JavascriptExecutor) driver).executeScript("document.body.innerHTML='" + data + "' + document.body.innerHTML;");
 						break;
 					}
 				else {
-					inputsummary.sendKeys(data);
-					if (data.equals(inputsummary.getText())) break;
+					((JavascriptExecutor) driver).executeScript("document.body.innerHTML='" + data + "' + document.body.innerHTML;");
+					if (inputsummary.getText().contains(data)) break;
 				}
 
 				switchToParentWindow();
@@ -1140,22 +1170,23 @@ public class PlatformBase extends TestBase {
 			checkCycling(e, DEFAULT_TIMEOUT/WAIT_INTERVAL);
 			Utils.pause(WAIT_INTERVAL);
 			driver.switchTo().defaultContent();
-			inputDataToFrame (framelocator, data);
+			inputDataToFrame (framelocator, data,validate);
 		} catch (ElementNotVisibleException e) {
 			checkCycling(e, DEFAULT_TIMEOUT/WAIT_INTERVAL);
 			Utils.pause(WAIT_INTERVAL);
 			driver.switchTo().defaultContent();
-			inputDataToFrame (framelocator,data);
+			inputDataToFrame (framelocator,data,validate);
 		}catch (WebDriverException e) {
 			checkCycling(e, DEFAULT_TIMEOUT/WAIT_INTERVAL);
 			Utils.pause(WAIT_INTERVAL);
 			driver.switchTo().defaultContent();
-			inputDataToFrame (framelocator,data);
+			inputDataToFrame (framelocator,data,validate);
 		}
 		finally {
 			loopCount = 0;
 		}
 	}
+
 
 	// Select option from combo box
 	public void selectOption(Object locator, String option) {
@@ -1219,7 +1250,7 @@ public class PlatformBase extends TestBase {
 		String[] lines = content.split("/");
 
 		if (lines.length > 0){
-			
+
 			WebElement e = waitForAndGetElement(cke_frame,DEFAULT_TIMEOUT,1,2);
 			driver.switchTo().frame(e);
 			inputsummary = driver.switchTo().activeElement();
@@ -1229,9 +1260,9 @@ public class PlatformBase extends TestBase {
 			for (int i = 0; i < lines.length; i++){
 				if(this.plfVersion.equalsIgnoreCase("4.0")){
 					info("type multi line 4.0");
-//					inputsummary.sendKeys(lines[i]);
-//					inputsummary.sendKeys(Keys.ENTER);
-//					Utils.pause(500);
+					//					inputsummary.sendKeys(lines[i]);
+					//					inputsummary.sendKeys(Keys.ENTER);
+					//					Utils.pause(500);
 					String newStr = "<p>" + lines[i]+"</p>";;
 					if(i==0)
 						newStr = "<p>" + lines[i]+"</p>";
@@ -1240,7 +1271,7 @@ public class PlatformBase extends TestBase {
 						newStr +="<p>" + lines[i]+"</p>";
 					}
 					((JavascriptExecutor) driver).executeScript("document.body.innerHTML='" + newStr + "'");
-					
+
 				} else{ //if(this.plfVersion.equalsIgnoreCase("4.1")){
 					info("type multi line 4.1");
 					String newStr = "<p>" + lines[i]+"</p>";;
@@ -1320,26 +1351,26 @@ public class PlatformBase extends TestBase {
 		String [] paths = folderPath.split("/");
 		for (String path : paths)
 			click(By.linkText(path));
-				if(newFolder!=""){
-					click(ELEMENT_CREATE_FOLDER_BUTTON);
-					alert.inputAlertText(newFolder);
-					click(By.linkText(newFolder));
-				}
-				if (upload)
-				{
-					info("-- Upload file --");
-					WebElement frame = waitForAndGetElement(ELEMENT_UPLOAD_FILE_FRAME_XPATH);
-					driver.switchTo().frame(frame);
-					WebElement upload2 = waitForAndGetElement(ELEMENT_UPLOAD_IMG_ID, DEFAULT_TIMEOUT,1,2);
-					((JavascriptExecutor)driver).executeScript("arguments[0].style.display = 'block';", upload2);
-					upload2.sendKeys(Utils.getAbsoluteFilePath("TestData/" +uploadFileName));	
-					info("Upload file " + Utils.getAbsoluteFilePath("TestData/" +uploadFileName));
-					switchToParentWindow();
-					waitForAndGetElement(By.linkText(uploadFileName));
-				}
-				button.cancel();
-				Utils.pause(1000);
-				waitForElementNotPresent(ELEMENT_SELECT_FILE_POPUP);	
+		if(newFolder!=""){
+			click(ELEMENT_CREATE_FOLDER_BUTTON);
+			alert.inputAlertText(newFolder);
+			click(By.linkText(newFolder));
+		}
+		if (upload)
+		{
+			info("-- Upload file --");
+			WebElement frame = waitForAndGetElement(ELEMENT_UPLOAD_FILE_FRAME_XPATH);
+			driver.switchTo().frame(frame);
+			WebElement upload2 = waitForAndGetElement(ELEMENT_UPLOAD_IMG_ID, DEFAULT_TIMEOUT,1,2);
+			((JavascriptExecutor)driver).executeScript("arguments[0].style.display = 'block';", upload2);
+			upload2.sendKeys(Utils.getAbsoluteFilePath("TestData/" +uploadFileName));	
+			info("Upload file " + Utils.getAbsoluteFilePath("TestData/" +uploadFileName));
+			switchToParentWindow();
+			waitForAndGetElement(By.linkText(uploadFileName));
+		}
+		button.cancel();
+		Utils.pause(1000);
+		waitForElementNotPresent(ELEMENT_SELECT_FILE_POPUP);	
 	}
 
 	/** Switch to new browser window
@@ -1392,7 +1423,7 @@ public class PlatformBase extends TestBase {
 		}
 	}
 
-/*	*//**
+	/*	*//**
 	 * function to restart browser
 	 * @param 
 	 * @return

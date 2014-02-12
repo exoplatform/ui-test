@@ -11,6 +11,9 @@
 		<packages>
 			<package name="org.exoplatform.selenium.platform.forum.functional.answers.*" />
 		</packages> 
+		<packages>
+			<package name="org.exoplatform.selenium.platform.forum.functional.faq" />
+		</packages> 
 	</test>
 	<listeners>
 		<listener class-name="org.exoplatform.selenium.TestReportListener" />

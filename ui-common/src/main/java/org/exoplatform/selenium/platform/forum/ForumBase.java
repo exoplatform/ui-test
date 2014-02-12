@@ -56,7 +56,7 @@ public class ForumBase extends PlatformBase {
 	public final By ELEMENT_HOME_BUTTON = By.xpath("//*[@id='UIBreadcumbs']//*[text()='Home']");
 	public final String ELEMENT_HOME_FORUM = "Forum Home";
 	public final By ELEMENT_USER_MANAGEMENT = By.xpath("//*[@id='ManageModerator']//*[@class='uiIconUser uiIconLightGray']");
-	public final By ELEMENT_MORE_BUTTON = By.xpath("//li[@class='dropdown moreItem pull-right']");
+	public final By ELEMENT_MORE_BUTTON = By.xpath("//li[@class='dropdown moreItem pull-right']/div");
 	public final By ELEMENT_PENDING = By.id("PendingJob");
 	
 	public String ELEMENT_FORUM_BREADCUMB = "//*[@id='UIBreadcumbs']/div[@class='pull-left']//a[@class='Selected' and contains(text(),'${forumName}')]";
@@ -91,7 +91,7 @@ public class ForumBase extends PlatformBase {
 	public final By ELEMENT_BOOKMARKS_POPUP = By.xpath("//span[@class='PopupTitle popupTitle' and text()='My Bookmarks']");
 	public final String ELEMENT_BOOKMARKS_OPTION = ".//a[text()='${item}']/..//*[@class='bookmark']";
 	public final String ELEMENT_BOOKMARKS_ITEM = "//form[@id='UIShowBookMarkForm']//a[@class='actionOpenLink' and text()='${item}']";
-	public final String ELEMENT_BOOKMARKS_REMOVE = "//a[@class='ActionLink' and text()='${item}']/../../*//div[@class='DeleteIcon']";
+	public final String ELEMENT_BOOKMARKS_REMOVE = "//a[@class='actionOpenLink' and text()='${item}']/../..//a[@data-original-title='Delete']";
 	public final By ELEMENT_BOOKMARKS_CANCEL_BUTTON = By.xpath("//form[@id='UIShowBookMarkForm']//*[text()='Cancel']");
 
 	//-----------------simple search screen-----------------------------------
@@ -435,6 +435,14 @@ public class ForumBase extends PlatformBase {
 		}
 	}
 
+	public void openBookmarkPopup(){
+		WebElement bookmark = waitForAndGetElement(ELEMENT_BOOKMARKS,DEFAULT_TIMEOUT,0);
+		if (bookmark == null){
+			click(ELEMENT_MORE_BUTTON);
+		}
+		click(ELEMENT_BOOKMARKS);
+		waitForAndGetElement(ELEMENT_BOOKMARKS_POPUP);
+	}
 	public void addBookmarksItem(String item){
 		By element_item = By.xpath(ELEMENT_BOOKMARKS_ITEM.replace("${item}", item));
 
@@ -453,11 +461,7 @@ public class ForumBase extends PlatformBase {
 		}
 		click(ELEMENT_BOOKMARKS_OPTION.replace("${item}", item));
 		//check bookmarks display
-		WebElement bookmark = waitForAndGetElement(ELEMENT_BOOKMARKS,DEFAULT_TIMEOUT,0);
-		if (bookmark == null)
-			click(ELEMENT_MORE_BUTTON);
-		click(ELEMENT_BOOKMARKS);
-		waitForAndGetElement(ELEMENT_BOOKMARKS_POPUP);
+		openBookmarkPopup();
 		waitForAndGetElement(element_item);
 
 		click(ELEMENT_BOOKMARKS_CANCEL_BUTTON);
@@ -469,12 +473,17 @@ public class ForumBase extends PlatformBase {
 	 * @param item: name of bookmark
 	 */
 	public void deleteBookmarkItem(String item){
+		openBookmarkPopup();
+		
 		By element_delete = By.xpath(ELEMENT_BOOKMARKS_REMOVE.replace("${item}", item));
 
 		info("Delete bookmark");
 		waitForAndGetElement(element_delete);
 		click(element_delete);
 		waitForElementNotPresent(element_delete);
+		
+		click(ELEMENT_BOOKMARKS_CANCEL_BUTTON);
+		waitForElementNotPresent(ELEMENT_BOOKMARKS_CANCEL_BUTTON);
 		info("Delete bookmark successfully");
 	}
 

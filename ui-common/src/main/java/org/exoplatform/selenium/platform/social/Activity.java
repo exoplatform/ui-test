@@ -294,8 +294,8 @@ public class Activity extends SocialBase {
 			info("----Click on Link----");
 			waitForAndGetElement(ELEMENT_LINK).click();
 			info("----Input link into link box-----");
-			waitForAndGetElement(ELEMENT_INPUT_LINK_BOX);
-			type(ELEMENT_INPUT_LINK_BOX, link, true);
+			waitForAndGetElement(ELEMENT_INPUT_LINK_BOX, DEFAULT_TIMEOUT,1,2);
+			type(ELEMENT_INPUT_LINK_BOX, link, true,2);
 			waitForAndGetElement(ELEMENT_ATTACH_BUTTON);
 			info("----Click attach button-----");
 			click(ELEMENT_ATTACH_BUTTON);

@@ -1,6 +1,7 @@
 package org.exoplatform.selenium.platform.forum.sniff;
 
 import static org.exoplatform.selenium.TestLogger.info;
+
 import org.exoplatform.selenium.platform.ManageAccount;
 import org.exoplatform.selenium.platform.forum.ForumBase;
 import org.exoplatform.selenium.platform.forum.ForumManageCategory;
@@ -55,6 +56,8 @@ public class Forum_Forum_Bookmark extends ForumBase{
 		//Add bookmark for a category
 		goToForumHome();
 		addBookmarksItem(category);
+		
+		deleteBookmarkItem(category);
 
 		//Delete data
 		click(By.linkText(category));
@@ -75,6 +78,8 @@ public class Forum_Forum_Bookmark extends ForumBase{
 		//Add bookmark for a forum
 		goToForumHome();
 		addBookmarksItem(forum);
+		
+		deleteBookmarkItem(forum);
 		
 		//Delete data
 		click(By.linkText(category));
@@ -97,6 +102,9 @@ public class Forum_Forum_Bookmark extends ForumBase{
 		goToForumHome();
 		addBookmarksItem(topic);
 
+		//Delete bookmark
+		deleteBookmarkItem(topic);
+		
 		//Delete data
 		click(By.linkText(category));
 		mngCat.deleteCategoryInForum(category);

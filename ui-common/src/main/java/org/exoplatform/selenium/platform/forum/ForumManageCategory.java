@@ -242,20 +242,24 @@ public class ForumManageCategory extends ForumBase {
 	 * @param title: title of category
 	 */
 	public void deleteCategoryInForum(String title, boolean...verify){
-		Boolean check = verify.length > 0 ? verify[0] : true;
+		boolean check = verify.length > 0 ? verify[0] : true;
 
 		click(ELEMENT_MANAGE_CATEGORY);
 		info("Delete category");
-		if(plfVersion =="4.0"){
-			click(ELEMENT_DELETE_CATEGORY);
-			click(ELEMENT_OK_DELETE_CATEGORY);
-		}
-		else if (plfVersion =="4.1"){
+		if(plfVersion =="4.1"){
 			click (ELEMENT_DELETE_CATEGORY_PLF4_1);
-			alert.acceptAlert();
-		}		
-		if(check == true){
+			//click(ELEMENT_OK_DELETE_CATEGORY);
+		}
+		else{// if (plfVersion =="4.0"){
+			click(ELEMENT_DELETE_CATEGORY);
+
+		}	
+		alert.waitForMessage("Are you sure you want to delete this category?");
+		click(ELEMENT_OK_DELETE_CATEGORY);
+		if(check){
 			//waitForTextNotPresent(title);
+
+			waitForElementNotPresent("//strong[text()='"+title+"']");
 			waitForElementNotPresent(By.linkText(title));
 		}
 		info("Delete category successfully");
