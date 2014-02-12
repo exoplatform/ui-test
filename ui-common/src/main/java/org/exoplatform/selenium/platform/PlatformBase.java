@@ -1119,17 +1119,26 @@ public class PlatformBase extends TestBase {
 	}
 
 	/**Function to add data to frame
+<<<<<<< HEAD
 	 *
 	 * @param framelocator
 	 * @param data
 	 * @param validate: if not passed, then not clear old data of frame, verify that new data is input correctly
 	 * = true, clear old data of frame
 	 * = false, not clear old data, not verify that new data is input correctly
+=======
+	 * 
+	 * @param framelocator
+	 * @param data
+	 * @param validate: if not passed, then not clear old data of frame, verify that new data is input correctly
+	 * 		           = true, clear old data of frame
+	 * 				   = false, not clear old data, not verify that new data is input correctly
+>>>>>>> 6b45792... FQA-1603: PLF4.1 - Migrate Sniff/Forum/Forum (Post, Private Message, Publish Activity, Topic)
 	 */
 	public void inputDataToFrame(By framelocator, String data, boolean...validate){
-		boolean isValid = validate.length > 0 ? validate[0] : false;
 		try {
 			WebElement inputsummary = null;
+
 			for (int repeat = 0;; repeat++) {
 				if (repeat >= DEFAULT_TIMEOUT/WAIT_INTERVAL) {
 					Assert.fail("Fail to input data to frame " + framelocator);
@@ -1138,15 +1147,22 @@ public class PlatformBase extends TestBase {
 				driver.switchTo().frame(e);
 				inputsummary = driver.switchTo().activeElement();
 				inputsummary.click();
-				inputsummary.clear();
-				((JavascriptExecutor) driver).executeScript("document.body.innerHTML='" + data + "'");
-				if (isValid){
-					if (data.equals(inputsummary.getText())) 
+				//				inputsummary.clear();
+
+				if (validate.length >0)
+					if (validate[0]){
+						((JavascriptExecutor) driver).executeScript("document.body.innerHTML='" + data + "'");
+						if (data.equals(inputsummary.getText())) break;
+					}
+					else{
+						((JavascriptExecutor) driver).executeScript("document.body.innerHTML='" + data + "' + document.body.innerHTML;");
 						break;
+					}
+				else {
+					((JavascriptExecutor) driver).executeScript("document.body.innerHTML='" + data + "' + document.body.innerHTML;");
+					if (inputsummary.getText().contains(data)) break;
 				}
-				else{
-					break;
-				}
+
 				switchToParentWindow();
 			}
 		} catch (StaleElementReferenceException e) {

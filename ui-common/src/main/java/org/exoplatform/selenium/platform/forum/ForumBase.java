@@ -296,6 +296,7 @@ public class ForumBase extends PlatformBase {
 	public final By ELEMENT_PRIVATE_MESSAGE_TITLE_INPUT = By.id("MailTitle");
 	public final By ELEMENT_PRIVATE_MESSAGE_FRAME1 = By.id("MailMessage___Frame");
 	public final By ELEMENT_POST_MESSAGE_FRAME_2 = By.xpath("//*[@id='xEditingArea']/iframe");
+	public final By ELEMENT_PRIVATE_MESSAGE_FRAME_41 = By.xpath("//*[@id='cke_MailMessage']//iframe");
 	public final By ELEMENT_PRIVATE_MESSAGE_SEND_BUTTON = By.xpath("//button[@class='btn' and text()='Send']");
 	public final By ELEMENT_PRIVATE_MESSAGE_POPUP = By.xpath("//span[@class='PopupTitle popupTitle' and text()='Private Messages']");
 	public final By ELEMENT_PRIVATE_MESSAGE_CANCEL_BUTTON = By.xpath("//form[@id='UIPrivateMessageForm']//button[text()='Cancel']");
@@ -307,7 +308,7 @@ public class ForumBase extends PlatformBase {
 	public final String ELEMENT_PRIVATE_MESSAGE_REPLY_ICON = "//*[text()='${message}']//ancestor::tr//i[@class='uiIconReply uiIconLightGray' and @data-original-title='Reply Message']";
 	public final String ELEMENT_PRIVATE_MESSAGE_DELETE_ICON = "//*[text()='${message}']//ancestor::td/../td/a/i[@class='uiIconDelete uiIconLightGray' and @data-original-title='Delete Message']";
 	public final String ELEMENT_PRIVATE_MESSAGE = "//form[@id='UIPrivateMessageForm']//td//*[text()='${message}']";
-	public final String ELEMENT_PRIVATE_MESSAGE_CONTENT = "//div[@class='uiContentBox']//p[text()='${message}']";
+	public final String ELEMENT_PRIVATE_MESSAGE_CONTENT = "//div[@class='uiContentBox']//p[contains(text(),'${message}')]";
 
 	public final String MSG_PRIVATE_MESSAGE_COMPOSE = "Your message was sent successfully.";
 	public final String MSG_PRIVATE_MESSAGE_DELETE = "Are you sure you want to delete this message ?";
@@ -1356,8 +1357,12 @@ public class ForumBase extends PlatformBase {
 			type(ELEMENT_PRIVATE_MESSAGE_SENDTO_INPUT,receiver,true);
 		if(title != null)
 			type(ELEMENT_PRIVATE_MESSAGE_TITLE_INPUT,title,true);
-		if(message != null)
+		if(message != null){
+			if(this.plfVersion.equalsIgnoreCase("4.0"))
 			inputDataToFrameInFrame(ELEMENT_PRIVATE_MESSAGE_FRAME1,ELEMENT_POST_MESSAGE_FRAME_2 , message, false);
+		else
+			inputDataToFrame(ELEMENT_PRIVATE_MESSAGE_FRAME_41, message);
+		}
 		switchToParentWindow();
 		click(ELEMENT_PRIVATE_MESSAGE_SEND_BUTTON);
 

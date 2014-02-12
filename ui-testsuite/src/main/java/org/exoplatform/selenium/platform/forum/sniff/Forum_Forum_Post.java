@@ -30,10 +30,10 @@ public class Forum_Forum_Post extends ForumBase{
 		initSeleniumTest();
 		driver.get(baseUrl);
 		acc = new ManageAccount(driver);
-		mngFru = new ForumManageForum(driver);
-		mngCat = new ForumManageCategory(driver);
-		mngTopic = new ForumManageTopic(driver);
-		mngPost = new ForumManagePost(driver);
+		mngFru = new ForumManageForum(driver,this.plfVersion);
+		mngCat = new ForumManageCategory(driver,this.plfVersion);
+		mngTopic = new ForumManageTopic(driver,this.plfVersion);
+		mngPost = new ForumManagePost(driver,this.plfVersion);
 
 		acc.signIn(DATA_USER1, DATA_PASS);
 		goToForums();

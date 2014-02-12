@@ -36,22 +36,32 @@ public class ForumManagePost extends ForumBase {
 	public By ELEMENT_POST_REPLY_BUTTON = By.linkText("Post Reply");
 	public String ELEMENT_POST_EDIT_BUTTON = "//*[text()='${postContent}']/../../../..//a[text()='Edit' and @class='btn']";
 	
-	public String ELEMENT_POST_CHECKBOX = "//*[text()='${postContent}']/../../../../*//input[@type='checkbox']";
-	public By ELEMENT_MOVE_POST = By.xpath("//a[@class='ItemIcon MovePostIcon' and text()='Move']");
+//	public String ELEMENT_POST_CHECKBOX = "//*[text()='${postContent}']/../../../../*//input[@type='checkbox']";
+//	public By ELEMENT_MOVE_POST = By.xpath("//a[@class='ItemIcon MovePostIcon' and text()='Move']");
+//	public String ELEMENT_GO_TO_THE_LASTS_READ_POST_FORUM = "//a[text()='${forum}']/../..//a[@title='Go to the last read post']";
+//	public String ELEMENT_PRIVATE_POST_BUTTON = "//*[text()='${topic}  ']/../../..//a[text()='Private']";
+//	public final String ELEMENT_POST_CONTENT = "//*[@class='postContent']//*[contains(.,'${postContent}')]";
+
+	public String ELEMENT_POST_CHECKBOX = "//*[contains(text(),'${postContent}')]/../../../../*//input[@type='checkbox']";
+	//	public By ELEMENT_MOVE_POST = By.xpath("//a[@class='ItemIcon MovePostIcon' and text()='Move']");
+	public By ELEMENT_MOVE_POST = By.linkText("Move");
 	public String ELEMENT_GO_TO_THE_LASTS_READ_POST_FORUM = "//a[text()='${forum}']/../..//a[@title='Go to the last read post']";
 	public String ELEMENT_PRIVATE_POST_BUTTON = "//*[text()='${topic}  ']/../../..//a[text()='Private']";
-	public final String ELEMENT_POST_CONTENT = "//*[@class='postContent']//*[contains(.,'${postContent}')]";
+	public final String ELEMENT_POST_CONTENT = "//*[@class='postContent']//*[text()='${postContent}']";
+	public By ELEMENT_APPROVE_FORM = By.xpath("//span[@class='PopupTitle popupTitle' and contains(text(),'Posts to Approve')]");
+	public By ELEMENT_APPROVE_POST = By.linkText("Approve");
+	//	public String ELEMENT_APPROVE_POST_CHECK = "//a[@data-original-title='${topic}']/../../../../..//*[@class='uiCheckbox']";
 
-	public By ELEMENT_APPROVE_POST = By.xpath("//a[text()='Approve']");
+	public By ELEMENT_APPROVE_POST_BUTTON = By.xpath("//button[text()='Approve']");
 	public String ELEMENT_APPROVE_POST_CHECK = "//a[@title='{$topic}']/ancestor::tr//input";
 	
-	public By ELEMENT_APPROVE_POST_BUTTON = By.linkText("Approve");
 	public By ELEMENT_CENSOR_POST = By.linkText("Censor");
 	public String ELEMENT_CENSOR_POST_CHECK = "//a[@title='{$post}']/ancestor::tr//input";
 	public String MSG_POST_CENSOR = "This post may contain offensive content. It will be displayed after moderation.";
 	public String MSG_POST_APPROVE = "Your post is pending for moderation. It will be displayed after approval.";
-	public String ELEMENT_POST_TITLE_TEXT = "//div[@class='postViewTitle pull-left' and contains(text(),'${post}')]";
-	public String ELEMENT_POST_CONTENT_TEXT = "//div[@class='postContent']//p[contains(text(),'${post}')]";
+	public String ELEMENT_POST_TITLE_TEXT = "//div[contains(@class,'postViewTitle') and contains(text(),'${post}')]";
+	//	public String ELEMENT_POST_CONTENT_TEXT = "//div[@class='postContent']//p[contains(text(),'${post}')]";
+	public String ELEMENT_POST_CONTENT_TEXT = "//div[@class='containerQuote']//p[contains(text(),'${post}')]";
 	public String ELEMENT_PRIVATE_POST_MESSAGE = "//div[@class='uiForumPortlet forumBoxNotification']//div[@class='content' and contains(text(),'${post}')]";
 	public By ELEMENT_PRIVATE_POST_CLOSE_NOTIFICATION = By.xpath("//div[@class='uiForumPortlet forumBoxNotification']//i[@class='uiIconClose']");
 	public String ELEMENT_POST_QUOTE_TEXT = "//div[@class='contentQuote']/div[@class='textContent']/p[contains(text(),'${post}')]";
@@ -63,7 +73,7 @@ public class ForumManagePost extends ForumBase {
 	public By ELEMENT_POST_POPUP_NEW = By.xpath("//span[@class='PopupTitle popupTitle' and text()='New Post']");
 	public By ELEMENT_POST_ICONS_TAB = By.xpath("//a[contains(text(), 'Icons and Smileys')]");
 	public By ELEMENT_POST_PRIVATE_POPUP = By.xpath("//span[@class='PopupTitle popupTitle' and text()='Private Post']");
-
+	public By ELEMENT_POST_MESSAGE_FRAME_CKEDITOR = By.xpath("//iframe[@class='cke_wysiwyg_frame cke_reset']");
 	public By ELEMENT_POST_CANCEL_BUTTON = By.xpath("//form[@id='UIPostForm']//button[text()='Cancel']");
 	
 	//--------------quick reply form-----------------------------------------------------------
@@ -291,11 +301,11 @@ public class ForumManagePost extends ForumBase {
 			click(By.xpath("//div[@class='NodeLabel']//a[text()='"+temp[i]+"']"));
 			Utils.pause(500);
 		}
-		
+
 		waitForElementNotPresent(ELEMENT_POPUP_MOVE_POST);
-		String links[] = destination.split("/");
-		int length = links.length;
-		waitForAndGetElement(By.xpath("//a[@title='" + links[length - 2] + "']/../div[@title='" + links[length - 1] + "']"));
+		//		String links[] = destination.split("/");
+		//		int length = links.length;
+		//		waitForAndGetElement(By.xpath("//a[@title='" + links[length - 2] + "']/../div[@title='" + links[length - 1] + "']"));
 		info("Move post successfully");
 	}
 	
@@ -342,7 +352,10 @@ public class ForumManagePost extends ForumBase {
 		click(ELEMENT_QUOTE_POST.replace("${post}", post));
 		
 		type(ELEMENT_POST_TITLE, title,true);
-		inputDataToFrameInFrame(ELEMENT_POST_MESSAGE_FRAME_1, ELEMENT_POST_MESSAGE_FRAME_2, content, false);
+		if(this.plfVersion.equalsIgnoreCase("4.0"))
+			inputDataToFrameInFrame(ELEMENT_POST_MESSAGE_FRAME_1, ELEMENT_POST_MESSAGE_FRAME_2, content, false);
+		else
+			inputDataToFrame(ELEMENT_POST_MESSAGE_FRAME_CKEDITOR, content);
 		switchToParentWindow();	
 		
 		click(magTopic.ELEMENT_SUBMIT_BUTTON);

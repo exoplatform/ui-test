@@ -193,8 +193,8 @@ public class ForumManageTopic extends ForumBase {
 		}
 
 		if (message != "" && message != null){
-			if(this.plfVersion.equalsIgnoreCase("4.1"))
-				inputDataToFrame(ELEMENT_TOPIC_MESSAGE_FRAME_CKEDITOR, message, true,false);
+			if(waitForAndGetElement(ELEMENT_TOPIC_MESSAGE_FRAME_CKEDITOR, 5000,0)!=null)
+				inputDataToFrame(ELEMENT_TOPIC_MESSAGE_FRAME_CKEDITOR, message,false);
 			else//(this.plfVersion.equalsIgnoreCase("4.0"))
 				inputDataToFrameInFrame(ELEMENT_TOPIC_MESSAGE_FRAME_1, ELEMENT_TOPIC_MESSAGE_FRAME_2, message,true,false);
 			switchToParentWindow();	

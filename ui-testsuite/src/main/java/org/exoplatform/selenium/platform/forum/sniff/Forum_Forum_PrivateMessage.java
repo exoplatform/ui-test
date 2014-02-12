@@ -78,7 +78,6 @@ public class Forum_Forum_PrivateMessage extends ForumBase{
 		loginForum(DATA_USER1);
 		goToPrivateMessage();
 		checkPrivateMessage("Reply:" + message, replyMessage);
-		waitForAndGetElement(ELEMENT_PRIVATE_MESSAGE_CONTENT.replace("${message}", contentMessage));
 
 		//Delete data
 		deletePrivateMessage("Reply:" + message);
@@ -112,7 +111,8 @@ public class Forum_Forum_PrivateMessage extends ForumBase{
 		//Check if the user2 can receive the forward message
 		loginForum(DATA_USER2);
 		goToPrivateMessage();
-		checkPrivateMessage("Forward:" + message, fwdMessage.concat(contentMessage));
+		checkPrivateMessage("Forward:" + message, fwdMessage);
+		waitForAndGetElement(ELEMENT_PRIVATE_MESSAGE_CONTENT.replace("${message}", contentMessage));
 
 		//Delete data
 		deletePrivateMessage("Forward:" + message);

@@ -42,7 +42,6 @@ public class ForumManageForum extends ForumBase {
 	public By ELEMENT_CENSOR_TOPIC = By.xpath("//a[@class='ItemIcon SetUnWaiting' and text()='Censor ']");
 	public By ELEMENT_MODERATOR_PANEL = By.xpath("//*[@id='uicomponent.id' and @class='UIForumModerator']");
 	public By ELEMENT_RULE_PANEL = By.id("UIPostRules");
-
 	public String ELEMENT_TOPIC_LINK = "//a[contains(.,'${topic}')]";
 	public String ELEMENT_CATEGORY_FORUM_BREAD = "//*[text()='${category}']/../../*[text()='${forum}']";
 	public By ELEMENT_LOCK_FORUM = By.className("uiIconLockMedium");

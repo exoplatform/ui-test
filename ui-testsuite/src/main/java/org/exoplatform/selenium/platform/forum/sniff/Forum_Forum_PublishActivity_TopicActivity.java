@@ -34,10 +34,10 @@ public class Forum_Forum_PublishActivity_TopicActivity extends ForumBase{
 		initSeleniumTest();
 		driver.get(baseUrl);
 		magAc = new ManageAccount(driver);
-		mngFru = new ForumManageForum(driver);
+		mngFru = new ForumManageForum(driver,this.plfVersion);
 		mngCat = new ForumManageCategory(driver);
-		mngPost = new ForumManagePost(driver);
-		mngTopic = new ForumManageTopic(driver);
+		mngPost = new ForumManagePost(driver,this.plfVersion);
+		mngTopic = new ForumManageTopic(driver,this.plfVersion);
 		hpgAct = new HomePageActivity(driver);
 		navTool = new NavigationToolbar(driver);
 
@@ -145,8 +145,7 @@ public class Forum_Forum_PublishActivity_TopicActivity extends ForumBase{
 		//create category, forum, topic
 		mngTopic.addCategoryForumTopic(titleCat, titleForum, titleTop,descTop);
 		click(mngFru.ELEMENT_TOPIC_LINK.replace("${topic}", titleTop));
-		mngTopic.editTopic(newTopic, descTop, "",  0, userGroup,false,false,false);
-
+		mngTopic.editTopic(newTopic, "", "",  0, userGroup,false,false,false);
 		navTool.goToHomePage();
 		if(waitForAndGetElement(By.linkText(newTopic),DEFAULT_TIMEOUT,0) == null){
 			driver.navigate().refresh();
@@ -171,7 +170,7 @@ public class Forum_Forum_PublishActivity_TopicActivity extends ForumBase{
 		String titleForum = "Forum75278";
 		String titleTop = "Topic75278";
 		String descTop = "line1<br>line2<br>line3<br>line4<br>line5";
-		String newDesc = "New line1<br>line2<br>line3<br>line4<br>line5<br>line6";
+		String newDesc = "New<br>";
 		String[] userGroup ={};
 
 		info("Update topic title");
@@ -181,12 +180,8 @@ public class Forum_Forum_PublishActivity_TopicActivity extends ForumBase{
 		mngTopic.editTopic(titleTop, newDesc, "",  0, userGroup,false,false,false);
 
 		navTool.goToHomePage();
-		if(waitForAndGetElement(By.linkText(titleTop),DEFAULT_TIMEOUT,0) == null){
-			driver.navigate().refresh();
-			waitForAndGetElement(By.linkText(titleTop),DEFAULT_TIMEOUT2);
-		}
-		hpgAct.checkUpdateTopic(titleTop, newDesc);
-
+		waitForAndGetElement(By.linkText(titleTop));
+		hpgAct.checkUpdateTopic(titleTop, newDesc + descTop);
 		//Delete data
 		goToForums();
 		click(By.linkText(titleCat));
