@@ -7,10 +7,9 @@
 				<exclude name="pending" />
 			</run>
 		</groups>
-		<packages>
-			<package
-				name="org.exoplatform.selenium.platform.ecms.functional.siteexplorer.collaboration.*" />
-		</packages>
+		<classes>
+			<class name="org.exoplatform.selenium.platform.ecms.functional.siteexplorer.collaboration.ECMS_SE_Collaboration_Manage_Tag" />
+		</classes>
 	</test>
 
 	<test name="ecms-func-se-filemanagementview" enabled="true">
@@ -19,10 +18,14 @@
 				<exclude name="pending" />
 			</run>
 		</groups>
-		<packages>
-			<package
-				name="org.exoplatform.selenium.platform.ecms.functional.siteexplorer.filemanagementview.*" />
-		</packages>
+		<classes>
+			<class name="org.exoplatform.selenium.platform.ecms.functional.siteexplorer.filemanagementview.ECMS_SE_FileManagementView_Actions_CreateEditDeleteNode" />
+			<class name="org.exoplatform.selenium.platform.ecms.functional.siteexplorer.filemanagementview.ECMS_SE_FileManagementView_Actions_OtherActions" />
+			<class name="org.exoplatform.selenium.platform.ecms.functional.siteexplorer.filemanagementview.ECMS_SE_FileManagementView_Actions_Select" />
+			<class name="org.exoplatform.selenium.platform.ecms.functional.siteexplorer.filemanagementview.ECMS_SE_FileManagementView_Actions_Sort" />
+			<class name="org.exoplatform.selenium.platform.ecms.functional.siteexplorer.filemanagementview.ECMS_SE_FileManagementView_Configure" />
+			<class name="org.exoplatform.selenium.platform.ecms.functional.siteexplorer.filemanagementview.ECMS_SE_FileManagementView_Display" />
+		</classes>
 	</test>
 	
 	<test name="ecms-func-se-friendly" enabled="true">
@@ -31,10 +34,9 @@
 				<exclude name="pending" />
 			</run>
 		</groups>
-		<packages>
-			<package
-				name="org.exoplatform.selenium.platform.ecms.functional.siteexplorer.friendly.*" />
-		</packages>
+		<classes>
+			<class name="org.exoplatform.selenium.platform.ecms.functional.siteexplorer.friendly.ECMS_SE_Friendly" />
+		</classes>
 	</test>
 	
 	<test name="ecms-func-se-publication" enabled="true">
@@ -43,10 +45,9 @@
 				<exclude name="pending" />
 			</run>
 		</groups>
-		<packages>
-			<package
-				name="org.exoplatform.selenium.platform.ecms.functional.siteexplorer.publication.*" />
-		</packages>
+		<classes>
+			<class name="org.exoplatform.selenium.platform.ecms.functional.siteexplorer.publication.ECMS_SE_Publication" />
+		</classes>
 	</test>
 	<test name="ecms-func-se-info" enabled="true">
 		<groups>
@@ -54,10 +55,9 @@
 				<exclude name="pending" />
 			</run>
 		</groups>
-		<packages>
-			<package
-				name="org.exoplatform.selenium.platform.ecms.functional.siteexplorer.info.*" />
-		</packages>
+		<classes>
+			<class name="org.exoplatform.selenium.platform.ecms.functional.siteexplorer.info.ECMS_SE_Info_Permission" />
+		</classes>
 	</test>
 	
 	<test name="ecms-func-se-otherchecks" enabled="true">
@@ -66,10 +66,9 @@
 				<exclude name="pending" />
 			</run>
 		</groups>
-		<packages>
-			<package
-				name="org.exoplatform.selenium.platform.ecms.functional.siteexplorer.otherchecks.*" />
-		</packages>
+		<classes>
+			<class name="org.exoplatform.selenium.platform.ecms.functional.siteexplorer.otherchecks.ECMS_SE_OtherChecks" />
+		</classes>
 	</test> 
 	
 	<listeners>

@@ -7,9 +7,16 @@
 				<exclude name="pending" />
 			</run>
 		</groups>
-		<packages>
-			<package name="org.exoplatform.selenium.platform.ecms.functional.siteexplorer.admin.*" />
-		</packages>
+		<classes>
+			<class name="org.exoplatform.selenium.platform.ecms.functional.siteexplorer.admin.ECMS_SE_Admin_Export" />
+			<class name="org.exoplatform.selenium.platform.ecms.functional.siteexplorer.admin.ECMS_SE_Admin_Import_Folder" />
+			<class name="org.exoplatform.selenium.platform.ecms.functional.siteexplorer.admin.ECMS_SE_Admin_Import_IllustratedWebContent" />
+			<class name="org.exoplatform.selenium.platform.ecms.functional.siteexplorer.admin.ECMS_SE_Admin_Import_WebContent" />
+			<class name="org.exoplatform.selenium.platform.ecms.functional.siteexplorer.admin.ECMS_SE_Admin_ManageAction" />
+			<class name="org.exoplatform.selenium.platform.ecms.functional.siteexplorer.admin.ECMS_SE_Admin_ManageCategories" />
+			<class name="org.exoplatform.selenium.platform.ecms.functional.siteexplorer.admin.ECMS_SE_Admin_ManageRelation" />
+			<class name="org.exoplatform.selenium.platform.ecms.functional.siteexplorer.admin.ECMS_SE_Admin_ManageVersions" />
+		</classes>
 	</test>
 	<listeners>
 		<listener class-name="org.exoplatform.selenium.TestReportListener" />

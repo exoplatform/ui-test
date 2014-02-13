@@ -7,10 +7,10 @@
 				<exclude name="pending" />
 			</run>
 		</groups>
-		<packages>
-			<package
-				name="org.exoplatform.selenium.platform.wiki.functional.attachment.*" />
-		</packages>
+		<classes>
+			<class name="org.exoplatform.selenium.platform.wiki.functional.attachment.Wiki_Attachment_Add" />
+			<class name="org.exoplatform.selenium.platform.wiki.functional.attachment.Wiki_Attachment_Delete" />
+		</classes>
 	</test>
 
 	<test name="wiki-func-basicaction" enabled="true">
@@ -19,10 +19,13 @@
 				<exclude name="pending" />
 			</run>
 		</groups>
-		<packages>
-			<package
-				name="org.exoplatform.selenium.platform.wiki.functional.basicaction.*" />
-		</packages>
+		<classes>
+			<class name="org.exoplatform.selenium.platform.wiki.functional.basicaction.Wiki_BasicAction_Add" />
+			<class name="org.exoplatform.selenium.platform.wiki.functional.basicaction.Wiki_BasicAction_Delete" />
+			<class name="org.exoplatform.selenium.platform.wiki.functional.basicaction.Wiki_BasicAction_Edit" />
+			<class name="org.exoplatform.selenium.platform.wiki.functional.basicaction.Wiki_BasicAction_Intergration" />
+			<class name="org.exoplatform.selenium.platform.wiki.functional.basicaction.Wiki_BasicAction_Move" />
+		</classes>
 	</test>
 
 	<test name="wiki-func-info" enabled="true">
@@ -31,10 +34,12 @@
 				<exclude name="pending" />
 			</run>
 		</groups>
-		<packages>
-			<package
-				name="org.exoplatform.selenium.platform.wiki.functional.information.*" />
-		</packages>
+		<classes>
+			<class name="org.exoplatform.selenium.platform.wiki.functional.information.Wiki_RelatedPage" />
+			<class name="org.exoplatform.selenium.platform.wiki.functional.information.Wiki_Version_Compare" />
+			<class name="org.exoplatform.selenium.platform.wiki.functional.information.Wiki_Version_Restore" />
+			<class name="org.exoplatform.selenium.platform.wiki.functional.information.Wiki_Version_View" />
+		</classes>
 	</test>
 
 	<listeners>
