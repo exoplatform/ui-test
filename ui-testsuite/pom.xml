@@ -212,6 +212,24 @@
 			</properties>
 		</profile>
 		<profile>
+			<id>gatein-func</id>
+			<properties>
+				<testSuite>gatein-func.xml</testSuite>
+			</properties>
+		</profile>
+		<profile>
+			<id>gatein-func-1</id>
+			<properties>
+				<testSuite>gatein-func-1.xml</testSuite>
+			</properties>
+		</profile>
+		<profile>
+			<id>gatein-func-2</id>
+			<properties>
+				<testSuite>gatein-func-2.xml</testSuite>
+			</properties>
+		</profile>
+		<profile>
 			<id>regression</id>
 			<properties>
 				<testSuite>regression.xml</testSuite>
