@@ -251,13 +251,13 @@ public class Gatein_Navigation_PortalNavigation_EditLayout extends PortalManagem
 		navTool.goToEditPageEditor();
 		
 		info("Add container");
-		pageE.addNewContainer("Rows Layout", "oneRow");
+//		pageE.addNewContainer("Rows Layout", "oneRow");
 		pageE.addNewContainer("Columns Layout", "twoColumns");
 		waitForAndGetElement(columnContainer);
-		waitForAndGetElement(rowContainer);
+//		waitForAndGetElement(rowContainer);
 		click(ELEMENT_SWITCH_VIEW_MODE);
 		waitForAndGetElement(columnContainer);
-		waitForAndGetElement(rowContainer);
+//		waitForAndGetElement(rowContainer);
 		click(ELEMENT_SWITCH_VIEW_MODE);
 
 		info("Edit title of container");
@@ -266,11 +266,13 @@ public class Gatein_Navigation_PortalNavigation_EditLayout extends PortalManagem
 		type(ELEMENT_CONTAINER_TITLE, title, true);
 		but.save();
 		mouseOver(columnContainer, true);
-		waitForAndGetElement(columnContainer + "/../../..//span[text()='" + title + "']");
+		waitForAndGetElement(columnContainer + "/ancestor::div//span[text()='" + title + "']");
 		
 		info("Move container");
+		pageE.addNewContainer("Rows Layout", "oneRow");
+		
 		mouseOver(columnContainer, true);
-		dragAndDropToObject(columnContainer + "/../../..//*[@title='Hold this area to drag this table']", rowContainer);
+		dragAndDropToObject(columnContainer + "/ancestor::div//*[@title='Hold this area to drag this table']", rowContainer);
 		click(ELEMENT_SWITCH_VIEW_MODE);
 		waitForAndGetElement("//*[@class='UIRowContainer']//span[text()='" + title + "']/../../../.." + columnContainer);
 		
