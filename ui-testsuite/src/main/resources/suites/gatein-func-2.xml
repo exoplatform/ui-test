@@ -1,0 +1,25 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="Platform functional Test" verbose="1" preserve-order="true">
+	<test name="gatein-functional-2" enabled="true">
+		<groups>
+			<run>
+				<exclude name="pending" />
+			</run>
+		</groups>
+		<classes>
+			<class name="org.exoplatform.selenium.platform.gatein.functional.authentication.Gatein_Authentication_SignIn"/>
+			<class name="org.exoplatform.selenium.platform.gatein.functional.basicportlets.administration.GateIn_BasicPortlets_Administration_ApplicationRegistry"/>
+			<class name="org.exoplatform.selenium.platform.gatein.functional.basicportlets.organization.Gatein_BasicPortlets_Organization_GroupManagement"/>
+			<class name="org.exoplatform.selenium.platform.gatein.functional.basicportlets.organization.Gatein_BasicPortlets_Organization_MembershipManagement"/>
+			<class name="org.exoplatform.selenium.platform.gatein.functional.basicportlets.organization.Gatein_BasicPortlets_Organization_UserManagement"/>
+			<class name="org.exoplatform.selenium.platform.gatein.functional.dashboard.Gatein_Dashboard_ManageGadget"/>
+			<class name="org.exoplatform.selenium.platform.gatein.functional.globalsettings.GateIn_GlobalSettings_LanguageSettings"/>
+			<class name="org.exoplatform.selenium.platform.gatein.functional.groupnavigation.Gatein_GroupNavigation_ManageNavigation"/>
+			<class name="org.exoplatform.selenium.platform.gatein.functional.groupnavigation.Gatein_GroupNavigation_ManageNode"/>
+		</classes>
+	</test>
+	<listeners>
+		<listener class-name="org.exoplatform.selenium.TestReportListener" />
+	</listeners>
+</suite>
