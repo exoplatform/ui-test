@@ -900,8 +900,9 @@ public class ContentTemplate extends EcmsBase{
 			//waitForElementNotPresent(button.ELEMENT_SAVE_BUTTON);
 			waitForAndGetElement(button.ELEMENT_SAVE_CLOSE_BUTTON);
 		} else if (option == 1){
-			button.close();
 			magAlert.acceptAlert();
+			button.ok();
+			button.close();
 			Utils.pause(500);
 		} else{
 			button.saveAndClose();

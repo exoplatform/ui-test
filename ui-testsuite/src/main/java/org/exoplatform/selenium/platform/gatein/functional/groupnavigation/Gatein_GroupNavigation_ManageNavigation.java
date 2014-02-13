@@ -69,7 +69,6 @@ public class Gatein_GroupNavigation_ManageNavigation extends GroupNavigation {
 		//Show Group navigation page with all navigation of group which user is manager
 		navTool.goToGroupSites();
 		waitForAndGetElement(ELEMENT_GROUP_NAME.replace("${groupName}", "Content Management"));
-		waitForAndGetElement(ELEMENT_GROUP_NAME.replace("${groupName}", "Development"));
 		waitForAndGetElement(ELEMENT_GROUP_NAME.replace("${groupName}", "Administration"));
 		waitForAndGetElement(ELEMENT_GROUP_NAME.replace("${groupName}", "Executive Board"));
 		waitForAndGetElement(ELEMENT_GROUP_NAME.replace("${groupName}", "Employees"));

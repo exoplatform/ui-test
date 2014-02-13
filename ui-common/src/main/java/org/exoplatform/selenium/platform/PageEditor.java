@@ -453,8 +453,10 @@ public class PageEditor extends PlatformBase {
 			clearCache();
 		}
 		click(By.linkText(group));
-		if(targetPosition.length>0)
+		if(targetPosition.length>0){
+			info("add to targetPosition");
 			dragAndDropToObject(By.id(container), targetPosition[0]);
+		}
 		else
 			dragAndDropToObject(By.id(container), By.className("UIRowContainer"));
 		Utils.pause(2000);

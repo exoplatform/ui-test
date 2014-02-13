@@ -104,10 +104,10 @@ public class Gatein_BasicPortlets_Organization_GroupManagement extends PlatformB
 		String groupLabel = "Group Label 03";
 		String groupDesc = "create new group";
 
-		String newUser = "test";
+		String newUser = getRandomString();
 		String membership = "member";
-		String email = "helloworld@gmail.com";
-		String password = "gtngtn";
+		String email = newUser+"@gmail.com";
+		String password = newUser;
 
 		info("Add new user");
 		navTool.goToNewStaff();
@@ -153,7 +153,7 @@ public class Gatein_BasicPortlets_Organization_GroupManagement extends PlatformB
 		user.addGroup(groupName, groupLabel, groupDesc, true);
 
 		info("Add Inexistent user to new group");
-		user.addUsersToGroup(newUser, membership, true, false);
+		user.addUsersToGroup(newUser, membership, false, false);
 		waitForAndGetElement(faildmsg);
 		but.ok();
 
@@ -196,10 +196,10 @@ public class Gatein_BasicPortlets_Organization_GroupManagement extends PlatformB
 		String groupLabel = "Group Label 06";
 		String groupDesc = "create new group";
 
-		String newUser = "test";
+		String newUser = getRandomString();
 		String membership = "member";
-		String email = "helloworld@gmail.com";
-		String password = "gtngtn";
+		String email = newUser+"@gmail.com";
+		String password = newUser;
 		
 		info("Add new user");
 		navTool.goToNewStaff();
@@ -240,10 +240,10 @@ public class Gatein_BasicPortlets_Organization_GroupManagement extends PlatformB
 		String groupLabel = "Group Label 07";
 		String groupDesc = "create new group";
 
-		String newUser = "tester";
+		String newUser = getRandomString();
 		String membership = "member";
-		String email = "helloworld@gmail.com";
-		String password = "gtngtn";
+		String email = newUser+"@gmail.com";
+		String password = newUser;
 
 		info("Add new user");
 		navTool.goToNewStaff();
@@ -399,10 +399,10 @@ public class Gatein_BasicPortlets_Organization_GroupManagement extends PlatformB
 		String groupLabel = "Group Label 11";
 		String groupDesc = "create new group";
 
-		String newUser = "tester";
+		String newUser = getRandomString();
 		String membership = "member";
-		String email = "helloworld@gmail.com";
-		String password = "gtngtn";
+		String email = newUser+"@gmail.com";
+		String password = newUser;
 
 		String ELEMENT_FAIL_ADD_DUPLICATED_USER_MSG = "//span[contains(text(),'has already the same membership in the group')]";
 

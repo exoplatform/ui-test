@@ -369,7 +369,7 @@ public class NavigationToolbar extends PlatformBase {
 	public void goToSeoManagement(){
 		info("Go to SEO management form");
 		Utils.pause(1000);
-		mouseOverAndClick(ELEMENT_MENU_EDIT_LINK);
+		click(ELEMENT_MENU_EDIT_LINK);
 		mouseOver(ELEMENT_MENU_PAGE_LINK, true);
 		WebElement seo = waitForAndGetElement(ELEMENT_SEO_MENU,10000,1,2);
 		((JavascriptExecutor)driver).executeScript("arguments[0].click()",seo);		

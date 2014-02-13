@@ -427,6 +427,7 @@ public class PlatformBase extends TestBase {
 	public final String ELEMENT_NODE_ADD_NEW_TOP_NODE = "//div[@id='UINavigationNodeSelectorPopupMenu']/div[@class='UIContextMenuContainer']//a[@class='ItemIcon AddNode16x16Icon']";
 	//public final By ELEMENT_NODE_ADD_NEW = By.xpath("//*[@class='uiContextMenuContainer']//*[@class='uiIconAddNode']");
 	public final By ELEMENT_NODE_ADD_NEW = By.xpath("//*[@id='NavigationNodePopupMenu']/*[@class='uiContextMenuContainer']//*[@class='uiIconAddNode']");
+	public final By ELEMENT_NODE_ADD_NEW_1 = By.xpath("//*[@id='UINavigationNodeSelectorPopupMenu']//*[@class='uiContextMenuContainer']//*[@class='uiIconAddNode']");
 	//public final String ELEMENT_NODE_EDIT = "//div[@id='NavigationNodePopupMenu']/div[@class='UIContextMenuContainer']//a[@class='ItemIcon EditSelectedNode16x16Icon']";
 	//	public final String ELEMENT_NAVIGATION_NODE_AREA= "//div[@class='Node']"; 
 
@@ -676,6 +677,8 @@ public class PlatformBase extends TestBase {
 	public static String ELEMENT_CALENDAR_IN_ADDITIONAL_LIST = "//a[text()='${calendar}']";
 	public static By ELEMENT_CALENDAR_GADGET_SETTINGS = By.xpath("//h6[@class='title center']//a[contains(text(),Settings)]");
 	public static By ELEMENT_CALENDAR_GADGET_ADDITIONAL_DISPLAY = By.xpath("//*[ text()='Display Additional Calendar:']");
+	public static String ELEMENT_EVENT_TASK_ITEM_IN_CALENDAR_GADGET = "//*[contains(@class,'eventsList')]//*[contains(text(),'${event}')]/../..//span[contains(text(),'${time}')]";
+	public static String ELEMENT_EVENT_TASK_MULTIDATE_ITEM_IN_CALENDAR_GADGET = "//*[contains(@class,'eventsList')]//*[contains(text(),'${event}')]/../..//span[contains(text(),'${totime}')]/../span[contains(text(),'${endtime}')]";
 	
 	//Create functions
 	public final By ELEMENT_ADD_ICON = By.xpath("//*[@class='uiIconPLF24x24Add']");

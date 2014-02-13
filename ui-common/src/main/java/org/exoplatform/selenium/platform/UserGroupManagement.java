@@ -192,7 +192,7 @@ public class UserGroupManagement extends PlatformBase {
 			}
 			waitForTextPresent("Select User");
 			for (String user : users) {
-				click("//input[@name='" + user + "']", 2);
+				check("//input[@name='" + user + "']", 2);
 			}
 			//click(ELEMENT_GROUP_SEARCH_POPUP_ADD_ICON);
 			click(button.ELEMENT_ADD_BUTTON);

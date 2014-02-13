@@ -16,34 +16,39 @@ import org.testng.Assert;
 
 public class ManageApplications extends PlatformBase {
 
-	NavigationToolbar nav = new NavigationToolbar(driver);
-	Dialog dialog = new Dialog(driver);
-	Button button = new Button(driver);
-	ManageAlert alt = new ManageAlert(driver);
-	PageEditor pageE = new PageEditor(driver);
+	NavigationToolbar nav;
+	Dialog dialog;
+	Button button;
+	ManageAlert alt;
+	PageEditor pageE;
 	ManageAccount magAc;
 	NavigationToolbar navTool;
-	
+
 	public ManageApplications(WebDriver dr, String...plfVersion) {
 		driver = dr;
 		this.plfVersion = plfVersion.length>0?plfVersion[0]:"4.0";
 		magAc = new ManageAccount(driver,this.plfVersion);
 		navTool = new NavigationToolbar(driver, this.plfVersion);
+		pageE = new PageEditor(driver,this.plfVersion);
+		alt = new ManageAlert(driver, this.plfVersion);
+		button = new Button(driver, this.plfVersion);
+		nav = new NavigationToolbar(driver, this.plfVersion);
+		dialog = new Dialog(driver);
 	}
-	
+
 	/* Manage Application Page */
 	public By ELEMENT_IMPORT_APPLICATION = By.linkText("Import Applications");
 	public By ELEMENT_CATEGORIES_AREA_TITLE = By.xpath("//div[text()='Categories']");
 	public By ELEMENT_SHOW_PORTLET_ICON = By.linkText("Portlet");
 	public By ELEMENT_SHOW_GADGET_ICON = By.linkText("Gadget");
 	public By ELEMENT_MANAGE_APPLICATION = By.linkText("Manage Applications");
-	
+
 	//Manage portlet
 	public String ELEMENT_PORTLET_IN_CATEGORY = "//*[text()='${group}']/../following-sibling::li/a[contains(text(), '${portletName}')]";
 	public String ELEMENT_PORTLET_INFO_NAME = "//*[@id='UIPortletInfo']//dt[contains(text(),'Display Name:')]/following-sibling::dd[1]/strong[contains(text(),'${portletName}')]";
 	public String ELEMENT_PORTLET_INFO_DESCRIPTION = "//*[@id='UIPortletInfo']//dt[contains(text(),'Description:')]/following-sibling::dd[1][contains(text(),'${description}')]";
 	public String ELEMENT_PORTLET_INFO_CATEGORY = "//*[@id='UIPortletInfo']//dt[contains(text(),'Categories:')]/following-sibling::dd[1][contains(text(),'${category}')]";
-	
+
 	//Manage Gadget
 	public By ELEMENT_GADGET_LINK = By.xpath("//div[@id='UIApplicationRegistryPortlet']//*[@class='uiIconGadgets uiIconLightGray']");
 	public By ELEMENT_ADD_REMOTE_GADGET_LINK = By.linkText("Add a remote gadget");
@@ -59,15 +64,15 @@ public class ManageApplications extends PlatformBase {
 	public String ELEMENT_GADGET_DELETE_ICON = "//*[text()='${title}']/../../../..//*[@data-original-title='Delete Gadget']";
 	public String ELEMENT_GADGET_CONFIRM_DELETE = "Are you sure to delete this gadget?";
 	public By MESSAGE_GADGET_INFO_EXISTING_GADGET = By.xpath("//*[contains(text(),'This url is existing, please select another one!')]");
-	
+
 	//Application Registry portlet -> Edit Portlet
 	public By ELEMENT_APPS_REG_PORTLET = By.xpath("//*[text()='Application Registry']/../../../../..");
 	public By ELEMENT_SHOW_IMPORT_CHECKBOX = By.id("showImport");
 	public By SHOW_IMPORT_CHECKED = By.xpath("//*[@id='showImport' and @checked='']");
 	public By SHOW_IMPORT_UNCHECK = By.xpath("//input[@id='showImport' and @value='false']");
 	public By ELEMENT_ACCESS_PERMISSION_TAB = By.xpath("//div[text()='Access Permission']");
-	
-	
+
+
 	//Category
 	public final By ELEMENT_ADD_NEW_CATEGORY = By.linkText("Add Category");
 	public final By ELEMENT_FIELD_CATEGORY_NAME = By.id("name");
@@ -83,7 +88,7 @@ public class ManageApplications extends PlatformBase {
 	public final String IMPORT_APPLICATION_CONFIRMATION= "This action will automatically create categories and import all the gadgets and portlets on it.";
 	public final By MESSAGE_CATEGORY_EXISTING = By.xpath("//*[contains(text(),'This category is existing, please enter another one')]");
 	public final By MESSAGE_CATEGORY_DELETE_UNEXIST_CATEGORY = By.xpath("//*[contains(text(),'It's not possible to save the changes because that category doesn't exist')]");
-	
+
 	//Add application to category
 	public final By ELEMENT_ADD_APPS_BUTTON = By.xpath("//*[@data-original-title='Add application to category']");
 	public final By ELEMENT_DISPLAY_APPS_NAME_TEXTBOX = By.id("displayName");
@@ -92,7 +97,7 @@ public class ManageApplications extends PlatformBase {
 	public final String ELEMENT_APPS_EXISTING = "//*[@id ='label' and text()='${appName}']/../..//input[@name='application']";
 	public final By ELEMNT_APPS_PUBLIC_OPTION = By.id("publicMode");
 	public final By ELEMENT_APPS_PUBLIC_CHECKED = By.xpath("//*[@id='publicMode' and @checked='']");
-	
+
 	// Gadget functions
 	public void addRemoteGadget (String Url) {
 		button = new Button(driver);
@@ -112,7 +117,7 @@ public class ManageApplications extends PlatformBase {
 			}
 		}
 	}
-	
+
 	//Add manual gadget
 	public void addManualGadget(String name, String source){
 		button = new Button(driver);
@@ -126,7 +131,7 @@ public class ManageApplications extends PlatformBase {
 		button.save();
 		waitForAndGetElement(ELEMENT_GADGET_INFO_NAME.replace("${gadgetName}", name));
 	}
-	
+
 	//Edit manual gadget
 	public void editManualGadget(String title, String newSource){
 		button = new Button(driver);
@@ -163,7 +168,7 @@ public class ManageApplications extends PlatformBase {
 		button.save();
 		waitForAndGetElement(ELEMENT_GADGET_INFO_CATEGORY.replace("${category}", cat[0]));
 	}
-	
+
 	//Category
 	//Add a new category in Manage Applications
 	public void addNewCategoryAtManageApplications(String categoryName, String displayName, String categoryDescription,
@@ -191,7 +196,7 @@ public class ManageApplications extends PlatformBase {
 			waitForAndGetElement(ELEMENT_CURRENT_CATEGORY_NAME);
 		}
 	}
-	
+
 	/** Go to Edit category form at manage application
 	 * @author phuongdt
 	 * @param categoryName
@@ -235,7 +240,7 @@ public class ManageApplications extends PlatformBase {
 	//Delete a category at Manage Applications
 	public void deleteCategoryAtManageApplications(String categoryName, boolean verify){
 		alt = new ManageAlert(driver);
-		
+
 		info("--Delete category (" + categoryName + ")--");
 		By ELEMENT_CURRENT_CATEGORY_NAME = By.xpath(ELEMENT_CATEGORY_NAME.replace("${categoryName}", categoryName));
 		click(ELEMENT_CURRENT_CATEGORY_NAME);
@@ -344,7 +349,7 @@ public class ManageApplications extends PlatformBase {
 			waitForElementNotPresent(ELEMENT_IMPORT_APPLICATION);
 		}
 	}
-	
+
 	public void importApplication () {
 		alt = new ManageAlert(driver);
 		if(waitForAndGetElement(ELEMENT_IMPORT_APPLICATION,DEFAULT_TIMEOUT,0)==null)
@@ -353,7 +358,7 @@ public class ManageApplications extends PlatformBase {
 		alt.waitForConfirmation(IMPORT_APPLICATION_CONFIRMATION);
 		Utils.pause(1000);
 	}
-	
+
 	/** View category at manage application
 	 * @author phuongdt
 	 * @param user

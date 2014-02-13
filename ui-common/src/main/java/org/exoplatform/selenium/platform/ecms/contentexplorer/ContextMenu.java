@@ -90,7 +90,8 @@ public class ContextMenu extends EcmsBase{
 		if(isElementPresent(By.xpath(ELEMENT_VIEW_MODE_LINK.replace("${viewName}", "Web")))){
 			click(By.xpath(ELEMENT_VIEW_MODE_LINK.replace("${viewName}", "Web")));
 			Utils.pause(1000);
-			click(By.xpath("//*[@data-original-title = 'File Explorer']"));
+			if(isElementPresent(By.xpath("//*[@data-original-title = 'File Explorer']")))
+				click(By.xpath("//*[@data-original-title = 'File Explorer']"));
 		}
 		rightClickOnElement(loc);
 		if (waitForAndGetElement(actionItem, 5000, 0) != null) {

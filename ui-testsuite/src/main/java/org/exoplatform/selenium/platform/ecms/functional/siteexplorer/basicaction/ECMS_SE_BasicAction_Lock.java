@@ -452,7 +452,6 @@ public class ECMS_SE_BasicAction_Lock extends PlatformBase {
 		Utils.pause(1800000);
 		
 		info("Check automatically unlock node");
-		click(button.ELEMENT_REFRESH_BUTTON);
 		driver.navigate().refresh();
 		Utils.pause(3000);
 		rightClickOnElement(FILE_PATH_LOCKED);

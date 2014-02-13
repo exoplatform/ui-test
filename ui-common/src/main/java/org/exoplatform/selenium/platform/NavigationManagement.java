@@ -52,11 +52,17 @@ public class NavigationManagement extends  PlatformBase{
 
 			click(currentNode);
 			Utils.pause(500);
-			rightClickOnElement(currentNode);
+			if(currentNodeLabel!="")
+				rightClickOnElement(currentNode);
+			else
+				rightClickOnElement("//*[@class='homeNode clearfix']");
 			if (currentNode.equals(ELEMENT_NAVIGATION_HOME_NODE)) {
 				click(ELEMENT_NODE_ADD_NEW_TOP_NODE);
 			} else {
-				click(ELEMENT_NODE_ADD_NEW);
+				if(currentNodeLabel!="")
+					click(ELEMENT_NODE_ADD_NEW);
+				else
+					click(ELEMENT_NODE_ADD_NEW_1);
 			}	
 		}
 		//waitForTextPresent("Page Node Settings");
@@ -180,7 +186,7 @@ public class NavigationManagement extends  PlatformBase{
 			waitForElementNotPresent(currentNodeName);
 			button.save();		
 		}else {
-			if (waitForAndGetElement(currentChildNodeName, 5000, 0) == null){
+			if (isElementNotPresent(currentChildNodeName) && isElementNotPresent(currentNodeName)){
 				click(currentNodeHome);
 			}
 			click(currentNodeName);

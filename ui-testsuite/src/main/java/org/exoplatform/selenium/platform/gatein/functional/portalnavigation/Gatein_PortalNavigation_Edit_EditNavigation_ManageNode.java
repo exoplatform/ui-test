@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.exoplatform.selenium.Button;
+import org.exoplatform.selenium.ManageAlert;
 import org.exoplatform.selenium.platform.ManageAccount;
 import org.exoplatform.selenium.platform.NavigationManagement;
 import org.exoplatform.selenium.platform.NavigationToolbar;
@@ -44,13 +45,14 @@ public class Gatein_PortalNavigation_Edit_EditNavigation_ManageNode extends Plat
 	public void setUpBeforeTest(){
 		initSeleniumTest();
 		driver.get(baseUrl);
-		button = new Button(driver);
-		magAc = new ManageAccount(driver);
-		navToolbar = new NavigationToolbar(driver);
-		userGroupMag = new UserGroupManagement(driver);
-		pageMag = new PageManagement(driver);
-		navMag = new NavigationManagement(driver);
-		pageEditor = new PageEditor(driver);
+		button = new Button(driver, this.plfVersion);
+		alert = new ManageAlert(driver, this.plfVersion);
+		magAc = new ManageAccount(driver, this.plfVersion);
+		navToolbar = new NavigationToolbar(driver, this.plfVersion);
+		userGroupMag = new UserGroupManagement(driver, this.plfVersion);
+		pageMag = new PageManagement(driver, this.plfVersion);
+		navMag = new NavigationManagement(driver, this.plfVersion);
+		pageEditor = new PageEditor(driver, this.plfVersion);
 		magAc.signIn(username, password);
 		driver.navigate().refresh();
 	}
@@ -161,6 +163,7 @@ public class Gatein_PortalNavigation_Edit_EditNavigation_ManageNode extends Plat
 		String pageSelectorName = "test04pageSelector";
 		Map<String, String> languages = new HashMap<String, String>();
 		languages.put("English", "");
+		String currentNodeName = "//*[@class='node']//*[@title='${parentNode}']/..//*[@class='node']//*[@title='${nodeName}']";
 
 		info("Go to Administration/Portal Sites");
 		navToolbar.goToPortalSites();
@@ -176,9 +179,17 @@ public class Gatein_PortalNavigation_Edit_EditNavigation_ManageNode extends Plat
 		waitForElementNotPresent(ELEMENT_WARNING_EXISTING_NODE);
 
 		info("Delete node for Portal");
+		editNavigation(portalName);
+		rightClickOnElement(currentNodeName.replace("${parentNode}", parentNode2).replace("${nodeName}", nodeName));
+		click(ELEMENT_NAVIGATION_DELETE_NODE);
+		alert.waitForConfirmation("Are you sure you want to delete this node?");
+		waitForElementNotPresent(currentNodeName);
+		button.save();		
+		
 		navMag.deleteNode(portalName, parentNode1, nodeName, true);
-		navMag.deleteNode(portalName, parentNode2, nodeName, false);
-
+		
+		navToolbar.goToManagePages();
+		pageMag.deletePage(PageType.PORTAL, pageSelectorName);
 	}
 
 	/**
@@ -212,7 +223,8 @@ public class Gatein_PortalNavigation_Edit_EditNavigation_ManageNode extends Plat
 
 		info("Delete node for Portal");
 		navMag.deleteNode(portalName, parentNode, nodeName1, false);
-		navMag.deleteNode(portalName, parentNode, nodeName2, false);
+		navToolbar.goToManagePages();
+		pageMag.deletePage(PageType.PORTAL, pageSelectorName);
 	}
 
 	/**
@@ -232,6 +244,7 @@ public class Gatein_PortalNavigation_Edit_EditNavigation_ManageNode extends Plat
 		waitForAndGetElement(ELEMENT_MENU_PAGE_LINK);
 		info("Click Edit/Page => OK");
 		navToolbar.goToEditLayout();
+		pageEditor.finishEditLayout();
 		info("Edit Layout displayed => OK");
 		navToolbar.goToSeoManagement();
 		info("SEO displayed => OK");
@@ -248,14 +261,13 @@ public class Gatein_PortalNavigation_Edit_EditNavigation_ManageNode extends Plat
 	public void test07_CheckEditRightofUseronPage(){
 		String groupName = "Platform";
 		String subgroupName = "Administration";
-		String username1 = "test";
-		String password1 = "123456";
+		String username1 = getRandomString();
+		String password1 = username1;
 		String email = "test@gmail.com";
 		String membership = "*";
 		
 		String pageName = "PageName07";
 		String pageTitle = "PageTitle07";
-		String pageTitleEdit = "EditedTitle07";
 		String groupPath = "Platform /Administration ";
 		String pagemembership = "*";
 		
@@ -288,7 +300,7 @@ public class Gatein_PortalNavigation_Edit_EditNavigation_ManageNode extends Plat
 		
 		info("=========Restore data=========");
 		//Delete page
-		pageMag.deletePage(PageType.PORTAL, pageTitleEdit);
+		pageMag.deletePage(PageType.PORTAL, pageTitle);
 		info("Delete page done");
 		magAc.signOut();
 		//Delete user
@@ -310,15 +322,14 @@ public class Gatein_PortalNavigation_Edit_EditNavigation_ManageNode extends Plat
 		//New user
 		String groupName = "Platform";
 		String subgroupName = "Administration";
-		String username1 = "enduser";
-		String password1 = "123456";
-		String email = "test@gmail.com";
+		String username1 = getRandomString();
+		String password1 = username1;
+		String email = username1+"@gmail.com";
 		String membership = "*";
 		
 		//New page
 		String pageName = "PageName08";
 		String pageTitle = "PageTitle08";
-		String pageTitleEdit = "EditedTitle08";
 		String groupPath = "Platform /Administration ";
 		String pagemembership = "*";
 		
@@ -354,7 +365,7 @@ public class Gatein_PortalNavigation_Edit_EditNavigation_ManageNode extends Plat
 		click(ELEMENT_EDIT_NAVIGATION.replace("${navigation}", portalName));
 
 		info("Add a new node by right click");
-		navMag.addNodeForPortal(portalName, parentNode, false, nodeName, true, languages, nodeName, "", "Profile", true, true);
+		navMag.addNodeForPortal(portalName, parentNode, true, nodeName, true, languages, nodeName, "", "Profile", true, true);
 		waitForElementNotPresent(button.ELEMENT_SAVE_BUTTON);
 
 		info("========Add page for that new node===========");
@@ -373,16 +384,8 @@ public class Gatein_PortalNavigation_Edit_EditNavigation_ManageNode extends Plat
 		
 		//Delete page
 		navToolbar.goToManagePages();
-		pageMag.deletePage(PageType.PORTAL, pageTitleEdit);
+		pageMag.deletePage(PageType.PORTAL, pageTitle);
 		info("Delete page done");
-		magAc.signOut();
-		
-		//Delete user
-		magAc.signIn(username, password);
-		navToolbar.goToUsersAndGroupsManagement();
-		userGroupMag.chooseUserTab();
-		userGroupMag.deleteUser(username1);
-		info("Delete user done");
 		
 		//Delete node
 		navToolbar.goToPortalSites();
