@@ -123,7 +123,7 @@ public class CalendarBase extends PlatformBase {
 	public By ELEMENT_CAL_DISPLAY_NAME_INPUT = By.id("displayName");
 	public By ELEMENT_CAL_DESC_INPUT = By.xpath("//*[@id='UICalendarForm']//*[@id='description']");
 	public By ELEMENT_CAL_COLOR = By.xpath("//*[contains(@class,'displayValue')]");
-	public String ELEMENT_CAL_COLOR_SELECT = "//form[@id='UICalendarForm']//a[contains(@class,'red colorCell')]";
+	public String ELEMENT_CAL_COLOR_SELECT = "//form[@id='UICalendarForm']//a[contains(@class,'${color}')]";
 	public By ELEMENT_CAL_ADD_SAVE_BUTTON = By.xpath("//*[@id='UICalendarForm']//*[text()='Save']");
 	public By ELEMENT_CAL_ADD_POPUP= By.xpath("//span[@class='PopupTitle popupTitle' and text()='Calendar']");
 	public By ELEMENT_CAL_GROUP_TAB = By.linkText("Show in Groups");
@@ -667,6 +667,7 @@ public class CalendarBase extends PlatformBase {
 		inputAddCalendarForm(name,description,color,groups);
 		click(ELEMENT_CAL_ADD_SAVE_BUTTON);
 		waitForAndGetElement(By.linkText(name));
+		
 	}
 
 	/** 

@@ -158,7 +158,7 @@ public class Forum_Setting extends ForumBase {
 		pageE.goToEditPortlet(ELEMENT_FRAME_CONTAIN_PORTLET);
 		
 		info("Setting to show/hire category");
-		selectDisplayCategoryAndForum(catName2, true, false);
+		selectDisplayCategoryAndForum(catName2,false);
 		info("Setting panel for forum portlet");
 		selectPanel(true, true, true, false);
 		info("Setting not user ajax for forum portlet");
@@ -175,7 +175,7 @@ public class Forum_Setting extends ForumBase {
 		info("Reset Data");
 		navTool.goToEditPageEditor();
 		pageE.goToEditPortlet(ELEMENT_FRAME_CONTAIN_PORTLET);
-		selectDisplayCategoryAndForum(catName2, true, true);
+		selectDisplayCategoryAndForum(catName2, true);
 		selectPanel(true, true, true, true);
 		selectOptions(true);
 		click(ELEMENT_FORUM_PORTLET_CLOSE_BUTTON);

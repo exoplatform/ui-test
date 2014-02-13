@@ -59,7 +59,7 @@ public class Forum_Forum_ForumPortletSettings_ShowHideForum extends ForumBase{
 	* Bug with plfent-4.0.x-20131118.122516-366: Forum-717
 	* Done with plfent-4.1.0-20131218.102100-253
 	*/
-	@Test
+	@Test(groups="error")
 	public  void test01_HideForumOfCategoryWhichShowingInForumPortletSettings() {
 		info("Test 1: Hide/show Forum of category which showing in Forum portlet settings"); 
 
@@ -74,7 +74,7 @@ public class Forum_Forum_ForumPortletSettings_ShowHideForum extends ForumBase{
 		pageE.goToEditPortlet(ELEMENT_FRAME_CONTAIN_PORTLET);
 		
 		info("Setting to show/hire category");
-		selectDisplayCategoryAndForum(fmName[0], false, false);
+		selectDisplayCategoryAndForum(catName + "/"+fmName[0], false);
 		click(ELEMENT_FORUM_PORTLET_CLOSE_BUTTON);
 		pageE.finishEditLayout();
 		acc.signOut();
@@ -89,7 +89,7 @@ public class Forum_Forum_ForumPortletSettings_ShowHideForum extends ForumBase{
 		navTool.goToEditPageEditor();
 		pageE.goToEditPortlet(ELEMENT_FRAME_CONTAIN_PORTLET);
 		
-		selectDisplayCategoryAndForum(fmName[0], false, true);
+		selectDisplayCategoryAndForum(catName + "/"+fmName[0], true);
 		click(ELEMENT_FORUM_PORTLET_CLOSE_BUTTON);
 		pageE.finishEditLayout();
 		acc.signOut();
@@ -127,14 +127,14 @@ public class Forum_Forum_ForumPortletSettings_ShowHideForum extends ForumBase{
 		navTool.goToEditPageEditor();
 		pageE.goToEditPortlet(ELEMENT_FRAME_CONTAIN_PORTLET);
 		info("Setting to hide category");
-		selectDisplayCategoryAndForum(catName, true, false);
+		selectDisplayCategoryAndForum(catName, false);
 		click(ELEMENT_FORUM_PORTLET_CLOSE_BUTTON);
 		pageE.finishEditLayout();
 		
 		navTool.goToEditPageEditor();
 		pageE.goToEditPortlet(ELEMENT_FRAME_CONTAIN_PORTLET);		
 		info("Setting to show forum");
-		selectDisplayCategoryAndForum(fmName[0], false, true);
+		selectDisplayCategoryAndForum(catName + "/"+fmName[0], true);
 		click(ELEMENT_FORUM_PORTLET_CLOSE_BUTTON);
 		pageE.finishEditLayout();
 		acc.signOut();

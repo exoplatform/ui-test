@@ -92,10 +92,10 @@ public class Forum_Forum_OtherAction_Search extends ForumBase{
 		pageE.goToEditPortlet(ELEMENT_FRAME_CONTAIN_PORTLET);
 		
 		info("Setting to show/hire category");
-		selectDisplayCategoryAndForum(catName1, true, true);
-		selectDisplayCategoryAndForum(catName2, true, true);
-		selectDisplayCategoryAndForum(catName3, true, false);
-		selectDisplayCategoryAndForum(catName4, true, false);
+		selectDisplayCategoryAndForum(catName1, true);
+		selectDisplayCategoryAndForum(catName2, true);
+		selectDisplayCategoryAndForum(catName3, false);
+		selectDisplayCategoryAndForum(catName4, false);
 		click(ELEMENT_FORUM_PORTLET_CLOSE_BUTTON);
 		pageE.finishEditLayout();
 		
@@ -130,8 +130,8 @@ public class Forum_Forum_OtherAction_Search extends ForumBase{
 		goToForums();
 		naviToolbar.goToEditPageEditor();
 		pageE.goToEditPortlet(ELEMENT_FRAME_CONTAIN_PORTLET);
-		selectDisplayCategoryAndForum(catName3, true, true);
-		selectDisplayCategoryAndForum(catName4, true, true);
+		selectDisplayCategoryAndForum(catName3, true);
+		selectDisplayCategoryAndForum(catName4, true);
 		click(ELEMENT_FORUM_PORTLET_CLOSE_BUTTON);
 		pageE.finishEditLayout();
 		
@@ -197,23 +197,18 @@ public class Forum_Forum_OtherAction_Search extends ForumBase{
 	    naviToolbar.goToEditPageEditor();
 		pageE.goToEditPortlet(ELEMENT_FRAME_CONTAIN_PORTLET);
 		
-		info("Setting to show/hire category");
-		selectDisplayCategoryAndForum(catName1, true, true);
-		click("//*[contains(text(), '" + catName1 + "')]/../..");
-		selectDisplayCategoryAndForum(forumName1, false, true);
-		click("//*[contains(text(), '" + catName1 + "')]/../..");
-		selectDisplayCategoryAndForum(forumName2, false, true);
+		info("Setting to show/hide category");
+		selectDisplayCategoryAndForum(catName1, true);
+		selectDisplayCategoryAndForum(catName1 + "/" + forumName1, true);
+		selectDisplayCategoryAndForum(catName1 + "/" + forumName2, true);
 		
-		selectDisplayCategoryAndForum(catName2, true, true);
-		click("//*[contains(text(), '" + catName2 + "')]/../..");
-		selectDisplayCategoryAndForum(forumName3, false, false);
-		click("//*[contains(text(), '" + catName2 + "')]/../..");
-		selectDisplayCategoryAndForum(forumName4, false, true);
+		selectDisplayCategoryAndForum(catName2, true);
+		selectDisplayCategoryAndForum(catName2 + "/" +forumName3, false);
+		selectDisplayCategoryAndForum(catName2 + "/" +forumName4, true);
 		
-		selectDisplayCategoryAndForum(catName3, true, false);
-		click("//*[contains(text(), '" + catName3 + "')]/../..");
-		selectDisplayCategoryAndForum(forumName5, false, false);
-		selectDisplayCategoryAndForum(catName4, true, false);
+		selectDisplayCategoryAndForum(catName3, false);
+		selectDisplayCategoryAndForum(catName3 + "/" + forumName5, false);
+		selectDisplayCategoryAndForum(catName4, false);
 		click(ELEMENT_FORUM_PORTLET_CLOSE_BUTTON);
 		pageE.finishEditLayout();
 		
@@ -250,12 +245,10 @@ public class Forum_Forum_OtherAction_Search extends ForumBase{
 		goToForums();
 		naviToolbar.goToEditPageEditor();
 		pageE.goToEditPortlet(ELEMENT_FRAME_CONTAIN_PORTLET);
-		click("//*[contains(text(), '" + catName2 + "')]/../..");
-		selectDisplayCategoryAndForum(forumName3, false, true);
-		selectDisplayCategoryAndForum(catName3, true, true);
-		click("//*[contains(text(), '" + catName3 + "')]/../..");
-		selectDisplayCategoryAndForum(forumName5, false, true);
-		selectDisplayCategoryAndForum(catName4, true, true);
+		selectDisplayCategoryAndForum(catName2 + "/" + forumName3, true);
+		selectDisplayCategoryAndForum(catName3, true);
+		selectDisplayCategoryAndForum(catName3 + "/" + forumName5, true);
+		selectDisplayCategoryAndForum(catName4, true);
 		click(ELEMENT_FORUM_PORTLET_CLOSE_BUTTON);
 		pageE.finishEditLayout();
 		
@@ -306,10 +299,10 @@ public class Forum_Forum_OtherAction_Search extends ForumBase{
 		pageE.goToEditPortlet(ELEMENT_FRAME_CONTAIN_PORTLET);
 		
 		info("Setting to show/hire category");
-		selectDisplayCategoryAndForum(catName1, true, true);
-		selectDisplayCategoryAndForum(catName2, true, true);
-		selectDisplayCategoryAndForum(catName3, true, false);
-		selectDisplayCategoryAndForum(catName4, true, false);
+		selectDisplayCategoryAndForum(catName1, true);
+		selectDisplayCategoryAndForum(catName2, true);
+		selectDisplayCategoryAndForum(catName3, false);
+		selectDisplayCategoryAndForum(catName4, false);
 		click(ELEMENT_FORUM_PORTLET_CLOSE_BUTTON);
 		pageE.finishEditLayout();
 		
@@ -344,8 +337,8 @@ public class Forum_Forum_OtherAction_Search extends ForumBase{
 		goToForums();
 		naviToolbar.goToEditPageEditor();
 		pageE.goToEditPortlet(ELEMENT_FRAME_CONTAIN_PORTLET);
-		selectDisplayCategoryAndForum(catName3, true, true);
-		selectDisplayCategoryAndForum(catName4, true, true);
+		selectDisplayCategoryAndForum(catName3, true);
+		selectDisplayCategoryAndForum(catName4, true);
 		click(ELEMENT_FORUM_PORTLET_CLOSE_BUTTON);
 		pageE.finishEditLayout();
 		
@@ -412,22 +405,17 @@ public class Forum_Forum_OtherAction_Search extends ForumBase{
 		pageE.goToEditPortlet(ELEMENT_FRAME_CONTAIN_PORTLET);
 		
 		info("Setting to show/hire category");
-		selectDisplayCategoryAndForum(catName1, true, true);
-		click("//*[contains(text(), '" + catName1 + "')]/../..");
-		selectDisplayCategoryAndForum(forumName1, false, true);
-		click("//*[contains(text(), '" + catName1 + "')]/../..");
-		selectDisplayCategoryAndForum(forumName2, false, true);
+		selectDisplayCategoryAndForum(catName1, true);
+		selectDisplayCategoryAndForum(catName1 + "/" + forumName1, true);
+		selectDisplayCategoryAndForum(catName1 + "/" + forumName2, true);
 		
-		selectDisplayCategoryAndForum(catName2, true, true);
-		click("//*[contains(text(), '" + catName2 + "')]/../..");
-		selectDisplayCategoryAndForum(forumName3, false, false);
-		click("//*[contains(text(), '" + catName2 + "')]/../..");
-		selectDisplayCategoryAndForum(forumName4, false, true);
+		selectDisplayCategoryAndForum(catName2, true);
+		selectDisplayCategoryAndForum(catName2 + "/" + forumName3, false);
+		selectDisplayCategoryAndForum(catName2 + "/" + forumName4, true);
 		
-		selectDisplayCategoryAndForum(catName3, true, false);
-		click("//*[contains(text(), '" + catName3 + "')]/../..");
-		selectDisplayCategoryAndForum(forumName5, false, false);
-		selectDisplayCategoryAndForum(catName4, true, false);
+		selectDisplayCategoryAndForum(catName3, false);
+		selectDisplayCategoryAndForum(catName3 + "/" + forumName5, false);
+		selectDisplayCategoryAndForum(catName4, false);
 		click(ELEMENT_FORUM_PORTLET_CLOSE_BUTTON);
 		pageE.finishEditLayout();
 		
@@ -471,12 +459,10 @@ public class Forum_Forum_OtherAction_Search extends ForumBase{
 		goToForums();
 		naviToolbar.goToEditPageEditor();
 		pageE.goToEditPortlet(ELEMENT_FRAME_CONTAIN_PORTLET);
-		click("//*[contains(text(), '" + catName2 + "')]/../..");
-		selectDisplayCategoryAndForum(forumName3, false, true);
-		selectDisplayCategoryAndForum(catName3, true, true);
-		click("//*[contains(text(), '" + catName3 + "')]/../..");
-		selectDisplayCategoryAndForum(forumName5, false, true);
-		selectDisplayCategoryAndForum(catName4, true, true);
+		selectDisplayCategoryAndForum(catName2 + "/" + forumName3, true);
+		selectDisplayCategoryAndForum(catName3, true);
+		selectDisplayCategoryAndForum(catName3 + "/" +forumName5, true);
+		selectDisplayCategoryAndForum(catName4, true);
 		click(ELEMENT_FORUM_PORTLET_CLOSE_BUTTON);
 		pageE.finishEditLayout();
 		

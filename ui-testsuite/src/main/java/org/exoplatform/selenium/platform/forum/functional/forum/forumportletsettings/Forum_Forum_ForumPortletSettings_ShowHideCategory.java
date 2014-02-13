@@ -73,7 +73,7 @@ public class Forum_Forum_ForumPortletSettings_ShowHideCategory extends ForumBase
 		pageE.goToEditPortlet(ELEMENT_FRAME_CONTAIN_PORTLET);
 		
 		info("Setting to show/hire category");
-		selectDisplayCategoryAndForum(catName1, true, false);
+		selectDisplayCategoryAndForum(catName1, false);
 		click(ELEMENT_FORUM_PORTLET_CLOSE_BUTTON);
 		pageE.finishEditLayout();
 		acc.signOut();
@@ -88,7 +88,7 @@ public class Forum_Forum_ForumPortletSettings_ShowHideCategory extends ForumBase
 		navTool.goToEditPageEditor();
 		pageE.goToEditPortlet(ELEMENT_FRAME_CONTAIN_PORTLET);
 		
-		selectDisplayCategoryAndForum(catName1, true, true);
+		selectDisplayCategoryAndForum(catName1, true);
 		click(ELEMENT_FORUM_PORTLET_CLOSE_BUTTON);
 		pageE.finishEditLayout();
 		acc.signOut();
