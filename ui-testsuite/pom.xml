@@ -212,6 +212,18 @@
 			</properties>
 		</profile>
 		<profile>
+			<id>forum-forum-1</id>
+			<properties>
+				<testSuite>forum-forum-1.xml</testSuite>
+			</properties>
+		</profile>
+		<profile>
+			<id>forum-forum-2</id>
+			<properties>
+				<testSuite>forum-forum-2.xml</testSuite>
+			</properties>
+		</profile>
+		<profile>
 			<id>gatein-func</id>
 			<properties>
 				<testSuite>gatein-func.xml</testSuite>
