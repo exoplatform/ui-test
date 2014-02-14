@@ -7,9 +7,10 @@
 				<exclude name="pending" />
 			</run>
 		</groups>
-		<packages>
-			<package name="org.exoplatform.selenium.platform.ecms.functional.admin.repository.*" />
-		</packages>
+		<classes>
+			<class name = "org.exoplatform.selenium.platform.ecms.functional.admin.repository.ECMS_Admin_ManageLock" />
+			<class name = "org.exoplatform.selenium.platform.ecms.functional.admin.repository.ECMS_Admin_ManageNodeType_Search" />
+		</classes>
 	</test>
 	<test name="ecms-func-advanced" enabled="true">
 		<groups>
@@ -17,9 +18,13 @@
 				<exclude name="pending" />
 			</run>
 		</groups>
-		<packages>
-			<package name="org.exoplatform.selenium.platform.ecms.functional.admin.advanced.*" />
-		</packages>
+		<classes>
+			<class name="org.exoplatform.selenium.platform.ecms.functional.admin.advanced.ECMS_Admin_ManageCategories_CategoryAction" />
+			<class name="org.exoplatform.selenium.platform.ecms.functional.admin.advanced.ECMS_Admin_ManageCategories_CategoryCreate" />
+			<class name="org.exoplatform.selenium.platform.ecms.functional.admin.advanced.ECMS_Admin_ManageCategories_Display" />
+			<class name="org.exoplatform.selenium.platform.ecms.functional.admin.advanced.ECMS_Admin_ManageQueries" />
+			<class name="org.exoplatform.selenium.platform.ecms.functional.admin.advanced.ECMS_Admin_ManageScripts" />
+		</classes>
 	</test>
 	<test name="ecms-func-template" enabled="true">
 		<groups>
@@ -27,9 +32,11 @@
 				<exclude name="pending" />
 			</run>
 		</groups>
-		<packages>
-			<package name="org.exoplatform.selenium.platform.ecms.functional.admin.template.*" />
-		</packages>
+		<classes>
+			<class name="org.exoplatform.selenium.platform.ecms.functional.admin.template.ECMS_Admin_Template_Document_Add" />
+			<class name="org.exoplatform.selenium.platform.ecms.functional.admin.template.ECMS_Admin_Template_List_Add" />
+			<class name="org.exoplatform.selenium.platform.ecms.functional.admin.template.ECMS_Admin_Template_List_Delete" />
+		</classes>
 	</test>
 	<test name="ecms-func-explorer" enabled="true">
 		<groups>
@@ -37,9 +44,12 @@
 				<exclude name="pending" />
 			</run>
 		</groups>
-		<packages>
-			<package name="org.exoplatform.selenium.platform.ecms.functional.admin.explorer.*" />
-		</packages>
+		<classes>
+			<class name="org.exoplatform.selenium.platform.ecms.functional.admin.explorer.ECMS_Admin_ManageDriver_Action" />
+			<class name="org.exoplatform.selenium.platform.ecms.functional.admin.explorer.ECMS_Admin_ManageDriver_Display" />
+			<class name="org.exoplatform.selenium.platform.ecms.functional.admin.explorer.ECMS_Admin_ManageTags_Management" />
+			<class name="org.exoplatform.selenium.platform.ecms.functional.admin.explorer.ECMS_Admin_ManageView" />
+		</classes>
 	</test>
 	<listeners>
 		<listener class-name="org.exoplatform.selenium.TestReportListener" />

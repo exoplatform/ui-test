@@ -193,6 +193,24 @@
 			</properties>
 		</profile>
 		<profile>
+ 			<id>plf-func-part1</id>
+ 			<properties>
+ 				<testSuite>plf-fnc-part1.xml</testSuite>
+ 			</properties>
+ 		</profile>
+ 		<profile>
+ 			<id>plf-func-part2</id>
+ 			<properties>
+ 				<testSuite>plf-fnc-part2.xml</testSuite>
+ 			</properties>
+ 		</profile>
+ 		<profile>
+ 			<id>plf-func-part3</id>
+ 			<properties>
+ 				<testSuite>plf-fnc-part3.xml</testSuite>
+ 			</properties>
+ 		</profile>
+		<profile>
 			<id>social</id>
 			<properties>
 				<testSuite>social.xml</testSuite>

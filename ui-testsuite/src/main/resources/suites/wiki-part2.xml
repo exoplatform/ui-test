@@ -7,9 +7,10 @@
 				<exclude name="pending" />
 			</run>
 		</groups>
-		<packages>
-			<package name="org.exoplatform.selenium.platform.wiki.functional.search.*" />
-		</packages>
+		<classes>
+ 			<class name="org.exoplatform.selenium.platform.wiki.functional.search.Wiki_Advanced_Search" />
+ 			<class name="org.exoplatform.selenium.platform.wiki.functional.search.Wiki_Quick_Search" />
+ 		</classes>
 	</test>
 
 	<test name="wiki-func-spacepermission" enabled="true">
@@ -18,10 +19,12 @@
 				<exclude name="pending" />
 			</run>
 		</groups>
-		<packages>
-			<package
-				name="org.exoplatform.selenium.platform.wiki.functional.spacepermission.*" />
-		</packages>
+		<classes>
+ 			<class name="org.exoplatform.selenium.platform.wiki.functional.spacepermission.Wiki_SpacePermission_Add" />
+ 			<class name="org.exoplatform.selenium.platform.wiki.functional.spacepermission.Wiki_SpacePermission_Delete" />
+ 			<class name="org.exoplatform.selenium.platform.wiki.functional.spacepermission.Wiki_SpacePermission_Edit" />
+ 			<class name="org.exoplatform.selenium.platform.wiki.functional.spacepermission.Wiki_SpacePermission_Others" />
+ 		</classes>
 	</test>
 
 	<test name="wiki-func-template" enabled="true">
@@ -30,10 +33,13 @@
 				<exclude name="pending" />
 			</run>
 		</groups>
-		<packages>
-			<package
-				name="org.exoplatform.selenium.platform.wiki.functional.template.*" />
-		</packages>
+		<classes>
+ 			<class name="org.exoplatform.selenium.platform.wiki.functional.template.Wiki_Template_Add" />
+ 			<class name="org.exoplatform.selenium.platform.wiki.functional.template.Wiki_Template_Delete" />
+ 			<class name="org.exoplatform.selenium.platform.wiki.functional.template.Wiki_Template_Edit" />
+ 			<class name="org.exoplatform.selenium.platform.wiki.functional.template.Wiki_Template_Other" />
+ 			<class name="org.exoplatform.selenium.platform.wiki.functional.template.Wiki_Template_Search" />
+ 		</classes>
 	</test>
 
 	<listeners>
