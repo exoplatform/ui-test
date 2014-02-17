@@ -61,8 +61,8 @@ public class PLF_HomePageGadget_SuggestionsGadget extends Activity{
 	 * ERROR: Don't display user in suggestion gadget
 	 * Note: This issue is not created on jira
 	 */
-	@Test (groups="error")
-	public void test01_GettingStartedGadget() { 
+	@Test
+	public void test01_NotShowOrAcceptOrCancelSuggestionGadget() { 
 		/*Declare variables*/
 		String user1="Support Bot";
 		String user2="Jack Miller";
@@ -90,7 +90,7 @@ public class PLF_HomePageGadget_SuggestionsGadget extends Activity{
 		//Login with user john
 		acc.userSignIn(userType.ADMIN);
 
-		/*CaseID 70591: Check Check display of Suggestion Gadget*/
+		//	CaseID 70591: Check Check display of Suggestion Gadget
 		//- This gadget is displayed at the right, as attachment SuggestionsGadget.png
 		//- The suggestion gadget always displays 2 people suggestions and 2 space suggestions.
 		//- The 2 people suggestions are people with the most common connections with the users and ordered by alphabet
@@ -101,11 +101,11 @@ public class PLF_HomePageGadget_SuggestionsGadget extends Activity{
 
 		//- The 2 space suggestions are spaces that have the most members who are user's connections and ordered by alphabet
 		waitForAndGetElement(homeGad.ELEMENT_SUGGESTION_GADGET_FORM);
-		waitForAndGetElement(homeGad.ELEMENT_VERIFY_SPACE_SUGGESTIONS.replace("${spaceName}", spaceName3));
 		waitForAndGetElement(homeGad.ELEMENT_VERIFY_SPACE_SUGGESTIONS.replace("${spaceName}", spaceName2));
+		waitForAndGetElement(homeGad.ELEMENT_VERIFY_SPACE_SUGGESTIONS.replace("${spaceName}", spaceName3));
 		waitForElementNotPresent(homeGad.ELEMENT_VERIFY_SPACE_SUGGESTIONS.replace("${spaceName}", spaceName1));
 
-		/* CaseID 70602: Accept a people suggestion*/
+		//	CaseID 70602: Accept a people suggestion
 		//Accept a people suggestions
 		waitForAndGetElement(By.xpath(homeGad.ELEMENT_VERIFY_USER_SUGGESTIONS.replace("${peopleName}", user2)));
 		homeGad.connectUserSuggestionsGadget(user2);
@@ -115,15 +115,15 @@ public class PLF_HomePageGadget_SuggestionsGadget extends Activity{
 		waitForAndGetElement(By.xpath(homeGad.ELEMENT_VERIFY_SPACE_SUGGESTIONS.replace("${spaceName}", spaceName3)));
 		homeGad.connectSpaceSuggestionsGadget(spaceName3);
 
-		/* CaseID 70729: Cancel a people connection*/
+		//		 CaseID 70729: Cancel a people connection
 		//Remove a people suggestions
 		homeGad.removeUserSuggestionsGadget(user3);
 		homeGad.removeUserSuggestionsGadget(user1);
 		homeGad.removeUserSuggestionsGadget(user4);
 
-		/*CaseID 70751: Cancel a space connection*/
+		//		CaseID 70751: Cancel a space connection
 		//Remove a space suggestion
-		homeGad.removeSpaceSuggestionsGadget(spaceName1);
+		homeGad.removeSpaceSuggestionsGadget(spaceName2);
 
 		//Login with mary and invite "John" to space
 		acc.userSignIn(userType.PUBLISHER);
@@ -172,8 +172,8 @@ public class PLF_HomePageGadget_SuggestionsGadget extends Activity{
 		magMember.goToAllSpaces();
 		magMember.deleteSpace(spaceName3,300000);
 	}
-	
-	 /* CaseID 70591
+
+	/* CaseID 70591
 	 * Check Check display of Suggestion Gadget
 	 * PENDING: Confirm display of suggestion Gadget by alphabe and the latest pepple and space
 	 * Refer: http://int.exoplatform.org/portal/g/:spaces:platform_40/platform_40/wiki/Homepage_Gadgets_Specification#HSuggestions
@@ -235,4 +235,5 @@ public class PLF_HomePageGadget_SuggestionsGadget extends Activity{
 		magMember.goToAllSpaces();
 		magMember.deleteSpace(spaceName3,300000);
 	}
+
 }

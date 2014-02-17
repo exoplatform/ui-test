@@ -2,6 +2,7 @@ package org.exoplatform.selenium.platform;
 
 import static org.exoplatform.selenium.TestLogger.info;
 
+import org.exoplatform.selenium.Button;
 import org.exoplatform.selenium.Utils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -20,10 +21,14 @@ public class HomePageGadget extends PlatformBase{
 	public By ELEMENT_INVITATION_GADGET_INDEX_DEFAULT_CLOUD = By.xpath("//*[@id='OfficeRight']//*[contains(@class,'UIRowContainer')]/div[2]//*[@class='UIGadgetPortlet']");
 	public By ELEMENT_INVITATION_GADGET = By.id("InvitationsPortlet");
 	public String ELEMENT_SHOW_CONNECTIONS_REQUEST_USER = "//div[@id='InvitationsPortlet']//div[@class='peopleInviteName']//div[text()='${nameinvitation}']";
+	public String ELEMENT_INVITATION_GADGET_USER_41 = "//div[@id='InvitationsPortlet']//div[@class='peopleInviteName']//a[contains(text(),'${nameinvitation}')]";
+	public String ELEMENT_SHOW_CONNECTIONS_REQUEST_USER_PLF41="//div[@id='InvitationsPortlet']//div[@class='peopleInvitePicture pull-left avatarXSmall']//a[@href='/portal/intranet/profile/james']";
 	public String ELEMENT_SHOW_CONNECTIONS_REQUEST_SPACE= "//div[@id='InvitationsPortlet']//div[@class='spaceInviteInfo']//div[text()='${namespace}']";
 	public String ELEMENT_VERIFY_STATUS_SPACE = "//div[@id='InvitationsPortlet']//div[@class='spaceInviteInfo']//div[text()='${namespace}']/../div[@class='spaceproperties']/div[@class='spacevisibility' and contains(text(),'${statusspace}')]";
-	public String ELEMENT_SHOW_ACCETPS_BUTTON = "//div[@id='InvitationsPortlet']//div[@class='peopleInviteInfo']//div[text()='${peopleName}']/..//a[text()='Accept']";
+	public String ELEMENT_SHOW_ACCEPTS_BUTTON = "//div[@id='InvitationsPortlet']//div[@class='peopleInviteInfo']//div[text()='${peopleName}']/..//a[text()='Accept']";
+	public String ELEMENT_INVITATION_GADGET_USER_ACCEPT_41 = "//div[@id='InvitationsPortlet']//div[@class='peopleInviteInfo']//a[text()='${peopleName}']/../..//a[contains(text(),'Accept')]";
 	public String ELEMENT_REMOVE_INVITATION_BUTTON = "//div[@id='InvitationsPortlet']//div[@class='peopleInviteInfo']//div[text()='${peopleName}']/..//i[@class='uiIconClose']";
+	public String ELEMENT_REMOVE_INVITATION_BUTTON_41 = "//div[@id='InvitationsPortlet']//div[@class='peopleInviteInfo']//a[text()='${peopleName}']/../..//i[@class='uiIconClose']";
 	public String ELEMENT_TITLE_OF_GAGDET = "//div[@id='InvitationsPortlet']/..//span[text()='${number}']";
 	public By ELEMENT_FRAME_INVITATION_GADGET_CLOUD = By.id("remote_iframe_0");
 	public By ELEMENT_MESSAGE_INVITATION_GADGET = By.id("Message");
@@ -54,6 +59,7 @@ public class HomePageGadget extends PlatformBase{
 	public String ELEMENT_VERIFY_SPACE_SUGGESTIONS = "//*[@id='spaceSuggest']//*[@class='spaceInfo']/div[@class='spaceName' and text()='${spaceName}']";
 	public String ELEMENT_CONNECT_USER_SUGGESTIONS = "//*[@id='peopleSuggest']//*[@class='peopleName']/a[contains(text(),'${peopleName}')]/../..//a[text()='Connect']";
 	public String ELEMENT_CONNECT_SPACE_SUGGESTIONS = "//*[@id='spaceSuggest']//*[@class='spaceInfo']/div[@class='spaceName' and contains(text(),'${spaceName}')]/../..//a[text()='Request']";
+	public String ELEMENT_REQUEST_SPACE_SUGGESTIONS = "//*[@id='spaceSuggest']//*[@class='spaceInfo']/div[@class='spaceName' and contains(text(),'${spaceName}')]/../..//a[text()='Request']";
 	public String ELEMENT_REMOVE_USER_SUGGESTIONS = "//*[@id='peopleSuggest']//*[@class='peopleName']/a[contains(text(),'${peopleName}')]/../..//i[@class='uiIconClose']";
 	public String ELEMENT_REMOVE_SPACE_SUGGESTIONS="//*[@id='spaceSuggest']//*[@class='spaceInfo']/div[@class='spaceName' and contains(text(),'${spaceName}')]/../..//i[@class='uiIconClose']";
 	public String ELEMENT_VERIFY_USER_SUGGESTIONS_INDEX = "//*[@id='peopleSuggest']//li[${index}]//*[@class='peopleName']/a";
@@ -72,8 +78,10 @@ public class HomePageGadget extends PlatformBase{
 
 	//-------------------------------------------------------------//
 
-	public HomePageGadget(WebDriver dr) {
+	public HomePageGadget(WebDriver dr, String...plfVersion){
 		driver = dr;
+		this.plfVersion = plfVersion.length>0?plfVersion[0]:"4.0";
+		button = new Button(driver, this.plfVersion);
 	}
 
 	/**
@@ -82,11 +90,16 @@ public class HomePageGadget extends PlatformBase{
 	 */
 	public void acceptInvitationGadget(String peopleName) {
 		info("-- Accept an invitation --");
-		mouseOver(ELEMENT_SHOW_ACCETPS_BUTTON.replace("${peopleName}", peopleName),true);
-		WebElement element = waitForAndGetElement(ELEMENT_SHOW_ACCETPS_BUTTON.replace("${peopleName}", peopleName), DEFAULT_TIMEOUT,1,2);
+		String elementAccept = "";
+		if(this.plfVersion.equalsIgnoreCase("4.0"))
+			elementAccept = ELEMENT_SHOW_ACCEPTS_BUTTON;
+		else
+			elementAccept = ELEMENT_INVITATION_GADGET_USER_ACCEPT_41;
+		mouseOver(elementAccept.replace("${peopleName}", peopleName),true);
+		WebElement element = waitForAndGetElement(elementAccept.replace("${peopleName}", peopleName), DEFAULT_TIMEOUT,1,2);
 		((JavascriptExecutor)driver).executeScript("arguments[0].click();", element);
 		//click(SHOW_ACCETPS_BUTTON.replace("${peopleName}", peopleName));
-		waitForElementNotPresent(ELEMENT_SHOW_ACCETPS_BUTTON.replace("${peopleName}", peopleName));
+		waitForElementNotPresent(elementAccept.replace("${peopleName}", peopleName));
 		//waitForAndGetElement(REMOVE_INVITATION_BUTTON.replace("${peopleName}", peopleName));
 	}
 
@@ -96,11 +109,16 @@ public class HomePageGadget extends PlatformBase{
 	 */
 	public void removeInvitationGadget(String peopleName){
 		info("-- Remove an invitation --");
+		String eRemove = "";
+		if(this.plfVersion.equalsIgnoreCase("4.0"))
+			eRemove = ELEMENT_REMOVE_INVITATION_BUTTON;
+		else
+			eRemove = ELEMENT_REMOVE_INVITATION_BUTTON_41;
 		//mouseOver(REMOVE_INVITATION_BUTTON.replace("${peopleName}", peopleName),true);
-		WebElement element = waitForAndGetElement(ELEMENT_REMOVE_INVITATION_BUTTON.replace("${peopleName}", peopleName), DEFAULT_TIMEOUT,1,2);
+		WebElement element = waitForAndGetElement(eRemove.replace("${peopleName}", peopleName), DEFAULT_TIMEOUT,1,2);
 		((JavascriptExecutor)driver).executeScript("arguments[0].click();", element);
 		//click(REMOVE_INVITATION_BUTTON.replace("${peopleName}", peopleName));
-		waitForElementNotPresent(ELEMENT_REMOVE_INVITATION_BUTTON.replace("${peopleName}", peopleName));
+		waitForElementNotPresent(eRemove.replace("${peopleName}", peopleName));
 	}
 
 
@@ -134,9 +152,9 @@ public class HomePageGadget extends PlatformBase{
 	 * @param peopleName
 	 */
 	public void connectSpaceSuggestionsGadget(String spaceName) {
-		info("-- Connect Suggestions user --");
-		mouseOver(ELEMENT_CONNECT_SPACE_SUGGESTIONS.replace("${Name}", spaceName),true);
-		WebElement element = waitForAndGetElement(ELEMENT_CONNECT_SPACE_SUGGESTIONS.replace("${spaceName}", spaceName), DEFAULT_TIMEOUT,1,2);
+		info("-- Connect Suggestions user --"); 
+//		mouseOver(ELEMENT_VERIFY_SPACE_SUGGESTIONS.replace("${spaceName}", spaceName),true);
+		WebElement element = waitForAndGetElement(ELEMENT_REQUEST_SPACE_SUGGESTIONS.replace("${spaceName}", spaceName), DEFAULT_TIMEOUT,1,2);
 		((JavascriptExecutor)driver).executeScript("arguments[0].click();", element);
 		waitForElementNotPresent(ELEMENT_CONNECT_SPACE_SUGGESTIONS.replace("${spaceName}", spaceName));
 

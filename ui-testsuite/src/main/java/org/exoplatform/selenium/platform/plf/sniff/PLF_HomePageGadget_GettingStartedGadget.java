@@ -86,8 +86,9 @@ public class PLF_HomePageGadget_GettingStartedGadget extends Activity{
 		String spaceName = "space70413";
 		String activity1 = "activity 70413";
 		String user1="Mary Williams";
-		String user_login1 = "mary";
+//		String user_login1 = "mary";
 		String user2="John Smith"; 
+//		String user_login2 = "john";
 		String file = "ECMS_DMS_SE_Upload_imgfile.jpg";
 
 		waitForAndGetElement(homeGad.ELEMENT_PROFILE_PICTURE);
@@ -130,7 +131,7 @@ public class PLF_HomePageGadget_GettingStartedGadget extends Activity{
 		click(peoConn.ELEMENT_EVERYONE_TAB);
 		peoConn.connectPeople(user1); 
 		acc.signOut();
-		acc.signIn(user_login1, DATA_PASS); 
+		acc.signIn(DATA_USER2, DATA_PASS); 
 		peoConn.acceptInvitation(user2);
 		acc.signOut(); 
 		acc.signIn(DATA_USER1,DATA_PASS); 

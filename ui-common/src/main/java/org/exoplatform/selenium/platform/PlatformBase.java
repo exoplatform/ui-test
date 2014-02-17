@@ -646,6 +646,7 @@ public class PlatformBase extends TestBase {
 	public static String ELEMENT_CALENDAR_GADGET_SETTING_LINK_ITEM = "//span[contains(text(),'${calendar}')]";
 	public static By ELEMENT_CALENDAR_GADGET_VERIFIED_TEXT_LABEL = By.xpath("//*[ text()='Displayed Calendars:']");
 	public static By ELEMENT_ADD_CALENDAR_IN_ADDITION_LIST = By.xpath("//i[contains(@class,'uiIconAdd')]");
+	public String ELEMENT_ADD_CALENDAR_IN_ADDITION_LIST_PLF_41 = "//a[text()='${calendar}']/..//i[@class ='uiIconSimplePlusMini uiIconLightGray']";
 	public static String ELEMENT_CALENDAR_IN_CALENDAR_GADGET = "//span[@class='calendarName asparagus' and@title='${calendar}']";
 	public static String ELEMENT_DELETE_CALENDAR_ICON = "//span[contains(text(),'${calendar}')] /..//*[@class='uiIconDel']";
 	public static String ELEMENT_CALENDAR_IN_ADDITIONAL_LIST = "//a[text()='${calendar}']";

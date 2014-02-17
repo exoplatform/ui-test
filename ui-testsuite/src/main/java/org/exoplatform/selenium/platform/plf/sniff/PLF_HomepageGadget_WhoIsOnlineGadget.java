@@ -115,14 +115,21 @@ public class PLF_HomepageGadget_WhoIsOnlineGadget extends PlatformBase {
 		info("Check if user 1 received connect invitation from user 2 or not");
 		acc.signIn(User1, Pass1);
 		Utils.pause(500);
-		newDriver.findElement(By.xpath(hg.ELEMENT_SHOW_CONNECTIONS_REQUEST_USER.replace("${nameinvitation}","Root Root")));
+		if(plfVersion =="4.1"){
+			
+			newDriver.findElement(By.xpath(hg.ELEMENT_SHOW_CONNECTIONS_REQUEST_USER_PLF41.replace("${peopleName}","root")));
+		}
+		else{// if (plfVersion =="4.0"){
+			newDriver.findElement(By.xpath(hg.ELEMENT_SHOW_CONNECTIONS_REQUEST_USER.replace("${nameinvitation}","Root Root")));
+		}	
+		
 		Utils.pause(500);
 		
 		info("-- Clear data --");
 		navToolBar = new NavigationToolbar(newDriver);
 		peopleC = new PeopleConnection(newDriver);
 		navToolBar.goToConnectionPage();
-		peopleC.ignoreInvitation(fullNameUser2);
+		peopleC.ignoreInvitation(User2);
 		newDriver.manage().deleteAllCookies();
 		newDriver.quit();
 	}

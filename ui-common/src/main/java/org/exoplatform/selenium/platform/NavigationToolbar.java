@@ -16,6 +16,7 @@ public class NavigationToolbar extends PlatformBase {
 	ManageAccount acc;
 	BrandingManagement brandMag;
 	PeopleConnection peoCon;
+	HomePageActivity hpAct;
 
 	public final By ELEMENT_MENU_EDIT_LINK = By.xpath("//i[@class='uiIconPLF24x24Edit']");
 	public final By ELEMENT_MENU_EDIT_CONTENT = By.xpath("//i[@class='quickEditChecked']");
@@ -60,7 +61,7 @@ public class NavigationToolbar extends PlatformBase {
 		waitForAndGetElement(button.ELEMENT_CANCEL_BUTTON);
 		waitForAndGetElement(button.ELEMENT_SAVE_BUTTON);
 	}
-	
+
 	//Go to portal sites
 	public void goToPortalSites() {
 		info("--Go to Portal Site Management--");
@@ -205,22 +206,22 @@ public class NavigationToolbar extends PlatformBase {
 			for(int repeat=0;; repeat ++){
 				if (repeat > 1){
 					driver.get(url);
+				break;
+			}
+			//mouseOverAndClick(ELEMENT_LINK_SETUP);
+			mouseOver(ELEMENT_LINK_SETUP, true);
+			if (waitForAndGetElement(ELEMENT_LINK_PORTAL, 5000, 0)!= null) {	
+				mouseOver(ELEMENT_LINK_PORTAL, false);
+				if (waitForAndGetElement(ELEMENT_LINK_SITES, 5000, 0)!= null){
+					click(ELEMENT_LINK_SITES);
 					break;
 				}
-				//mouseOverAndClick(ELEMENT_LINK_SETUP);
-				mouseOver(ELEMENT_LINK_SETUP, true);
-				if (waitForAndGetElement(ELEMENT_LINK_PORTAL, 5000, 0)!= null) {	
-					mouseOver(ELEMENT_LINK_PORTAL, false);
-					if (waitForAndGetElement(ELEMENT_LINK_SITES, 5000, 0)!= null){
-						click(ELEMENT_LINK_SITES);
-						break;
-					}
-				}
-				info("Retry...[" + repeat + "]");
 			}
+			info("Retry...[" + repeat + "]");
 		}
-	
-	
+	}
+
+
 	//Go to add page locator with Editor
 	//	public void goToAddPageEditor(){
 	//		info("Go to add page editor");
@@ -328,7 +329,7 @@ public class NavigationToolbar extends PlatformBase {
 		//click(ELEMENT_MENU_SITE_EXPLORER);
 		Utils.pause(2000);
 	}
-	
+
 	//Enter Search Form  (Administration > Content > Search menu)
 	public void goToSearch()
 	{
@@ -372,7 +373,7 @@ public class NavigationToolbar extends PlatformBase {
 		mouseOver(ELEMENT_MENU_PAGE_LINK, true);
 		click(ELEMENT_ADD_PAGE_MENU);
 		((JavascriptExecutor)driver).executeScript("javascript:ajaxGet(eXo.env.server.createPortalURL('UIWorkingWorkspace', 'PageCreationWizard', true));");
-		
+
 		//waitForTextPresent("Page Creation Wizard");
 		Utils.pause(500);
 	}
@@ -396,7 +397,7 @@ public class NavigationToolbar extends PlatformBase {
 		((JavascriptExecutor)driver).executeScript("arguments[0].click()",seo);		
 		Utils.pause(1000);
 	}
-	
+
 	/** Go to Edit/Page/Add Page
 	 * @author phuongdt
 	 */
@@ -419,7 +420,7 @@ public class NavigationToolbar extends PlatformBase {
 		}
 		Utils.pause(1000);
 	}
-	
+
 	/** Go to Edit/Page/Add Page
 	 * @author phuongdt
 	 */
@@ -440,8 +441,8 @@ public class NavigationToolbar extends PlatformBase {
 				}
 			}
 			else{
-                String editPageRequest = "ajaxGet(eXo.env.server.createPortalURL('" + getPageId() + "', 'EditCurrentPage', true))";
-                ((JavascriptExecutor)driver).executeScript(editPageRequest);
+				String editPageRequest = "ajaxGet(eXo.env.server.createPortalURL('" + getPageId() + "', 'EditCurrentPage', true))";
+				((JavascriptExecutor)driver).executeScript(editPageRequest);
 				Utils.pause(1000);
 				break;
 			}
@@ -461,15 +462,20 @@ public class NavigationToolbar extends PlatformBase {
 		waitForAndGetElement(ELEMENT_REFRESH);
 		Utils.pause(5000);
 	}
-	
+
 	/**
 	 * Function: Go to connection page
 	 * @author phuongdt
 	 * @date 24/09/2013
 	 */
 	public void goToConnectionPage(){
+		hpAct = new HomePageActivity(driver, this.plfVersion);
 		click(ELEMENT_CONNECTION_PAGE);
 		waitForAndGetElement(peoCon.ELEMENT_EVERYONE_TAB);
+		if(waitForElementNotPresent(hpAct.ELEMENT_ACTIVITY_TEXTBOX,DEFAULT_TIMEOUT,0) != null){
+			clearCache();
+			waitForAndGetElement(peoCon.ELEMENT_EVERYONE_TAB);
+		}
 	}
 
 	public void changeEditMode()
@@ -477,7 +483,7 @@ public class NavigationToolbar extends PlatformBase {
 		mouseOver(ELEMENT_MENU_EDIT_LINK,true);
 		mouseOverAndClick(ELEMENT_MENU_EDIT_CONTENT);
 	}
-	
+
 	// Go to My Profile
 	public void goToMyProfile(){
 		info("--Go to My Profile--");		
@@ -497,7 +503,7 @@ public class NavigationToolbar extends PlatformBase {
 		click(ELEMENT_MY_PROFILE_LINK);
 		waitForAndGetElement(ELEMENT_MY_PROFILE_TAB);
 	}	
-	
+
 	/** Go to IDE Page
 	 * @author phuongdt
 	 */
@@ -530,7 +536,7 @@ public class NavigationToolbar extends PlatformBase {
 		click(ELEMENT_ADD_EVENT_TASK_ICON);
 		waitForAndGetElement(ELEMENT_ADD_EVENT_TASK_FORM);
 	}
-	
+
 	/** Go to Poll
 	 * Mouse over on the button "Create" (+)
 	 * Select the item "Poll"
@@ -543,7 +549,7 @@ public class NavigationToolbar extends PlatformBase {
 		waitForAndGetElement(ELEMENT_ADD_POLL_FORM);
 		button.next();
 	}
-	
+
 	/** Go to Topic
 	 * Mouse over on the button "Create" (+)
 	 * Select the item "Topic"
@@ -565,7 +571,7 @@ public class NavigationToolbar extends PlatformBase {
 			button.next();
 		}
 	}
-	
+
 	/** Go to Wiki
 	 * Mouse over on the button "Create" (+)
 	 * Select the item "Wiki"
@@ -578,7 +584,7 @@ public class NavigationToolbar extends PlatformBase {
 		waitForAndGetElement(ELEMENT_ADD_WIKI_FORM);
 		button.next();
 	}
-	
+
 	/** Go to upload file
 	 * Mouse over on the button "Create" (+)
 	 * Select the item "Upload File"
@@ -590,7 +596,7 @@ public class NavigationToolbar extends PlatformBase {
 		click(ELEMENT_ADD_UPLOAD_FILE_ICON);
 		waitForAndGetElement(ELEMENT_UPLOAD_FILE_FORM);
 	}
-	
+
 	/** Go to upload file
 	 * Mouse over on the button "Create" (+)
 	 */
@@ -609,7 +615,7 @@ public class NavigationToolbar extends PlatformBase {
 			info("Retry...[" + repeat + "]");
 		}
 	}
-	
+
 	/**
 	 * Get pageID to edit layout
 	 * @author phuongdt
