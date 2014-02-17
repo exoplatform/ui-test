@@ -105,7 +105,6 @@ public class Forum_Answer_Category_Edit extends AnswerBase{
 		//Check right of mary
 		Acc.userSignIn(userType.PUBLISHER);
 		goToAnswer();
-		waitForAndGetElement(ELEMENT_CATEGORY_LINK.replace("${category}", category));
 		mCat.openCategoryInAnswer(newCategory);
 		waitForElementNotPresent(mQuest.ELEMENT_MANAGE_QUESTIONS);
 		waitForElementNotPresent(mCat.ELEMENT_CATEGORY_BUTTON);
@@ -124,7 +123,7 @@ public class Forum_Answer_Category_Edit extends AnswerBase{
 	@Test
 	public void test01_EditCategoryWithValidModeratorBySelectGroup() {
 		String category = "Category 3 72720";
-		String[] userGroup = {"Platform/web-contributors"};
+		String[] userGroup = {"Platform/Content Management"};
 		String newCategory = "New category 72720";
 
 		info("Edit category in case valid data entry for Moderator field by select group");
@@ -135,7 +134,6 @@ public class Forum_Answer_Category_Edit extends AnswerBase{
 		//Check right of demo
 		Acc.userSignIn(userType.DEVELOPER);
 		goToAnswer();
-		waitForAndGetElement(ELEMENT_CATEGORY_LINK.replace("${category}", category));
 		mCat.openCategoryInAnswer(newCategory);
 		waitForElementNotPresent(mQuest.ELEMENT_MANAGE_QUESTIONS);
 		waitForElementNotPresent(mCat.ELEMENT_CATEGORY_BUTTON);
@@ -143,7 +141,6 @@ public class Forum_Answer_Category_Edit extends AnswerBase{
 		//Check right of mary and delete data
 		Acc.userSignIn(userType.PUBLISHER);
 		goToAnswer();
-		waitForAndGetElement(ELEMENT_CATEGORY_LINK.replace("${category}", category));
 		mCat.openCategoryInAnswer(newCategory);
 		waitForAndGetElement(mQuest.ELEMENT_MANAGE_QUESTIONS);
 		mCat.editCategoryInAnswer(newCategory, category,null,null, 0, userGroup, true, true);
@@ -171,7 +168,6 @@ public class Forum_Answer_Category_Edit extends AnswerBase{
 		Acc.userSignIn(userType.PUBLISHER);
 		goToAnswer();
 
-		waitForAndGetElement(ELEMENT_CATEGORY_LINK.replace("${category}", category));
 		mCat.openCategoryInAnswer(newCategory);
 		waitForElementNotPresent(mQuest.ELEMENT_MANAGE_QUESTIONS);
 		waitForElementNotPresent(mCat.ELEMENT_CATEGORY_BUTTON);
@@ -190,7 +186,7 @@ public class Forum_Answer_Category_Edit extends AnswerBase{
 	 * CaseID 72795
 	 */
 	@Test
-	public void test02_EditCategoryWithValidModerator() {
+	public void test02_EditCategoryWithInvalidModerator() {
 		String category = "Category 72795";
 		String[] userGroup = {"test"};
 

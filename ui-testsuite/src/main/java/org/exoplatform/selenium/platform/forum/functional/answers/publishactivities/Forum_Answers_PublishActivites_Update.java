@@ -41,7 +41,7 @@ public class Forum_Answers_PublishActivites_Update extends AnswerBase{
 		acc.signIn(DATA_USER1, DATA_PASS);
 		hpAct = new HomePageActivity(driver);
 		navTool = new NavigationToolbar(driver);
-		act = new Activity();
+		act = new Activity(driver);
 		goToAnswer();
 	}
 	@AfterMethod

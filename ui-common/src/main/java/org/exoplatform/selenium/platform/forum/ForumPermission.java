@@ -7,6 +7,8 @@ import org.exoplatform.selenium.ManageAlert;
 import org.exoplatform.selenium.Utils;
 import org.exoplatform.selenium.platform.PlatformPermission;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 
 /**
@@ -114,9 +116,9 @@ public class ForumPermission extends ForumBase {
 	 */
 	public void configPermission4AnswerCategory(int type, String[] userGroup, boolean restricted, boolean moderator, boolean...notFound){
 		setPermissionWithOption(type, userGroup);
-		click(ELEMENT_CATEGORY_PERMISSION_BLANK);
-		Utils.pause(1000);
-		click(button.ELEMENT_ADD_BUTTON,2);
+		waitForAndGetElement(per.ELEMENT_PERMISSION_INPUT).sendKeys(Keys.TAB,Keys.TAB,Keys.TAB,Keys.TAB);
+		String script = waitForAndGetElement(button.ELEMENT_ADD_BUTTON).getAttribute("onclick");
+		((JavascriptExecutor) driver).executeScript(script);
 		boolean notF = notFound.length > 0 ? notFound[0] : false;
 		if (notF){
 			waitForMessage(userGroup[0]+MSG_PERMISSION_NOT_FOUND);
@@ -160,8 +162,10 @@ public class ForumPermission extends ForumBase {
 	 */
 	public void configPermission4ForumCategory(int type, String[] userGroup, boolean...permission){
 		setPermissionWithOption(type, userGroup);
-		click(ELEMENT_FORUM_CATEGORY_PERMISSION_GRID);
-		click(button.ELEMENT_ADD_BUTTON);
+		waitForAndGetElement(per.ELEMENT_PERMISSION_INPUT).sendKeys(Keys.TAB,Keys.TAB,Keys.TAB,Keys.TAB);
+		String script = waitForAndGetElement(button.ELEMENT_ADD_BUTTON).getAttribute("onclick");
+		((JavascriptExecutor) driver).executeScript(script);
+//		click(button.ELEMENT_ADD_BUTTON);
 		String check = "";
 		String[] groups = userGroup[0].split("/");
 		if ((type == 4) || (type == 3)){
@@ -218,7 +222,10 @@ public class ForumPermission extends ForumBase {
 	public void configPermission4Forum(int type, String[] userGroup, boolean...permission){
 		//click(button.ELEMENT_ADD_BUTTON);
 		setPermissionWithOption(type, userGroup);
-		click(ELEMENT_FORUM_FORUM_PERMISSION);
+		waitForAndGetElement(per.ELEMENT_PERMISSION_INPUT).sendKeys(Keys.TAB,Keys.TAB,Keys.TAB,Keys.TAB);
+		String script = waitForAndGetElement(button.ELEMENT_ADD_BUTTON).getAttribute("onclick");
+		((JavascriptExecutor) driver).executeScript(script);
+		
 		Utils.pause(1000);
 		click(button.ELEMENT_ADD_BUTTON,2);
 		Utils.pause(1000);

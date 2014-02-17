@@ -34,7 +34,10 @@ public class AnswerBase extends ForumBase {
 	public final By ELEMENT_UP_LEVEL = By.xpath("//i[@class='uiIconUpLevel uiIconLightGray']");
 	public final By ELEMENT_PRINT_ICON = By.xpath("//i[@class='uiIconPrint uiIconLightGray']");
 	public final By ELEMENT_HOME_ICON = By.xpath("//*[@class='uiIconHome uiIconLightGray']");
-	public final String ELEMENT_CATEGORY_LINK = "//a[contains(.,'${category}')]";
+	public final String ELEMENT_CATEGORY_LINK = "//*[@id='FAQViewCategoriesColumn']//a[contains(.,'${category}')]";
+	public final String ELEMENT_QUESTION_LINK = "//div[@id='UIAnswersPortlet']//a[contains(text(),'${question}')]";
+	public final By ELEMENT_TOTAL_PAGE = By.xpath("//span[@class='pagesTotalNumber']");
+	public final By ELEMENT_NEXT_PAGE = By.xpath("//a[@data-original-title='Next']");
 
 	//Add answer page
 	public final String DATA_ANSWER_PAGE_NAME = "Answer";
@@ -372,7 +375,7 @@ public class AnswerBase extends ForumBase {
 		Utils.pause(1000);
 	}
 
-	
+
 	//Set display Category
 	public void setDisplayCategory(String categoryScope, boolean display){
 		pageE = new PageEditor(driver);
@@ -380,9 +383,9 @@ public class AnswerBase extends ForumBase {
 		setDisplayCategoryScoping(categoryScope, display);
 		click(ELEMENT_CLOSE_SETTING_BUTTON);
 		pageE.finishEditLayout();
-		
+
 	}
-	
+
 	//Set Display mode in tab Display mode
 	public void setDisplayMode(boolean all, boolean date, boolean ascending, boolean...opts){
 		pageE = new PageEditor(driver);
@@ -390,5 +393,26 @@ public class AnswerBase extends ForumBase {
 		settingDisplayMode(all,date,ascending,opts);
 		click(ELEMENT_CLOSE_SETTING_BUTTON);
 		pageE.finishEditLayout();
+	}
+
+	/**
+	 * Switch page until the question is shown
+	 * @param questionName
+	 */
+	public void checkQuestionPresent(String questionName){
+		int page = 1;
+		if(waitForAndGetElement(ELEMENT_TOTAL_PAGE,10000,0) != null){
+			page = Integer.parseInt(waitForAndGetElement(ELEMENT_TOTAL_PAGE).getText());
+			for(int i = 1; i < page; i++){
+				if(waitForAndGetElement(ELEMENT_QUESTION_LINK.replace("${question}", questionName),5000,0) == null){
+
+					if(waitForAndGetElement(ELEMENT_NEXT_PAGE,5000,0) != null){
+						click(ELEMENT_NEXT_PAGE);
+					}
+				}else break;
+			}
+		}
+		waitForAndGetElement(ELEMENT_QUESTION_LINK.replace("${question}", questionName));
+
 	}
 }

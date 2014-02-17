@@ -220,16 +220,18 @@ public class Forum_Answers_PublishActivities_Display extends AnswerBase{
 		mQuest.submitQuestion(null, questName, questName, null, false, null);
 
 		//Check activity before approve or disapprove
+		navTool.goToHomePage();
 		hpAct.checkActivityAfterCreatingQuestion(questName, questName);
 
 		//Disapprove the question
 		goToAnswer();
-		click(By.linkText(questName));
+		click(ELEMENT_QUESTION_LINK.replace("${question}", questName));
 		mQuest.goToManageQuestions();
 		mQuest.approveQuestion(questName, false);
 		click(mQuest.ELEMENT_MANAGE_QUESTION_CLOSE_BUTTON);
 
 		//Check activity after approve or disapprove
+		navTool.goToHomePage();
 		hpAct.checkActivityAfterCreatingQuestion(questName, questName);
 
 		//Approve the question
@@ -239,6 +241,7 @@ public class Forum_Answers_PublishActivities_Display extends AnswerBase{
 		click(mQuest.ELEMENT_MANAGE_QUESTION_CLOSE_BUTTON);
 
 		//Check activity after approve or disapprove
+		navTool.goToHomePage();
 		hpAct.checkActivityAfterCreatingQuestion(questName, questName);
 
 		//Delete data

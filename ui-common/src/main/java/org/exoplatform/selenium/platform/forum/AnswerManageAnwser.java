@@ -168,19 +168,23 @@ public class AnswerManageAnwser extends AnswerBase {
 		switch (way) {
 		case 1:
 			info("Answer question by right click");
-			rightClickOnElement(By.linkText(questionName));
-			click(magQuest.ELEMENT_ANSWER_LINK_IN_CONTEXT_MENU);
+			checkQuestionPresent(questionName);
+			rightClickOnElement(ELEMENT_QUESTION_LINK.replace("${question}", questionName));
+			click(magQuest.ELEMENT_ANSWER_LINK_IN_CONTEXT_MENU.replace("${question}", questionName));
 			break;
 		case 2:
 			info("Answer question while opening question");
+			checkQuestionPresent(questionName);
 			click(ELEMENT_ANSWER_LINK_IN_QUESTION);
 			break;
 		case 3:
 			info("Answer question by click answer icon in manage question");
+			magQuest.checkQuestionPresentOnManageQuestion(questionName);
 			click(magQuest.ELEMENT_ANSWER_QUESTION_IN_LIST.replace("${question}", questionName));
 			break;
 		default:
 			info("Answer question from click language in manage question");
+			magQuest.checkQuestionPresentOnManageQuestion(questionName);
 			click(magQuest.ELEMENT_LANGUAGE_LINK_IN_LIST.replace("${question}", questionName).replace("${language}", language));
 			break;
 		}
@@ -214,7 +218,6 @@ public class AnswerManageAnwser extends AnswerBase {
 		info("Edit answer");	
 		goToMoreActionsOfAnswer(answerName, "Edit Answer");
 		modifyAnwser(language, answerContent, approved, activated, addRelation, questionToLink, removeRelation, questionRemove);
-		waitForElementNotPresent(ELEMENT_ANSWER_IN_QUESTION.replace("${answer}", answerName));
 		if(!answerContent.contains("<br/>"))
 			waitForAndGetElement(ELEMENT_ANSWER_IN_QUESTION.replace("${answer}", answerContent));
 		else{
@@ -314,7 +317,7 @@ public class AnswerManageAnwser extends AnswerBase {
 		magAc.userSignIn(user);
 		goToAnswer();
 		magCat.openCategoryInAnswer(categoryName);
-		click(By.linkText(questionName));
+		click(ELEMENT_QUESTION_LINK.replace("${question}", questionName));
 		if (view){
 			waitForAndGetElement(ELEMENT_ANSWER_IN_QUESTION.replace("${answer}", answerContent));
 		}else {

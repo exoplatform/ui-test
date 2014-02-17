@@ -10,6 +10,7 @@ import org.exoplatform.selenium.platform.HomePageActivity;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.internal.Locatable;
@@ -35,6 +36,12 @@ public class Activity extends SocialBase {
 
 	Dialog dialog = new Dialog(driver);
 	HomePageActivity hpActivity = new HomePageActivity(driver);
+	public Activity(WebDriver dr){
+		driver = dr;
+	}
+	public Activity(){
+		
+	}
 
 	//=====Element on space home page=======stash@{1}
 	// Go to My Spaces > Select a space
@@ -346,7 +353,6 @@ public class Activity extends SocialBase {
 	public void addComment(String activityText, String contentOfComment){
 		//Add a new comment following an activity 
 		hpActivity = new HomePageActivity(driver);
-
 		click(hpActivity.ELEMENT_ICON_COMMENT.replace("${title}", activityText));
 
 		WebElement commentText = waitForAndGetElement(hpActivity.ELEMENT_COMMENTBOX.replace("${title}", activityText));

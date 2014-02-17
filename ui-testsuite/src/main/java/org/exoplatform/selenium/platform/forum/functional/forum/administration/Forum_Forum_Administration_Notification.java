@@ -97,9 +97,10 @@ public class Forum_Forum_Administration_Notification extends ForumBase{
 		button.save();
 		click(By.linkText(catName));
 		click(By.linkText(addForum[0]));
-		topic.quickStartTopic(title, message); 
 		watchItem(true); 
 		alert.acceptAlert();
+		topic.quickStartTopic(title, message); 
+		
 		goToMail(EMAIL_ADDRESS1, EMAIL_PASS); 
 		checkAndDeleteMail(By.xpath(ELEMENT_GMAIL_EMAIL.replace("${category}",catName).replace("${forum}", addForum[0]).replace("${topic}", title)), content);
 		// Clean data test
@@ -173,7 +174,6 @@ public class Forum_Forum_Administration_Notification extends ForumBase{
 	public void test04_SetNotificationWithAddingAPrefixToNotificationSubject() {
 		/*Declare variables*/ 
 		String subject = "Change category Notification 004";
-		String content = "Content Notification 004"; 
 		String catName = "New Category 004"; 
 		String order = "1";
 		int chooseRestricted = 1;
@@ -184,6 +184,7 @@ public class Forum_Forum_Administration_Notification extends ForumBase{
 		String[] addForum = {"Title of forum 004", "1", "Open", "Unlocked", "Description of forum 004"}; 	
 		String title = "Title topic 004"; 
 		String message = "Topic 004"; 
+		String defaultSubject = "[$CATEGORY][$FORUM] $TOPIC";
 
 		/* Step 1: Open Notifications form */
 		//- Login by the Administrator
@@ -199,7 +200,7 @@ public class Forum_Forum_Administration_Notification extends ForumBase{
 		//- Input value as prefix into Notification subject template field
 		//- Click Save button
 		check (ELEMENT_NOTIFY_PREFIX,2);
-		type(ELEMENT_NOTIFY_SUBJECT,subject,true);
+		type(ELEMENT_NOTIFY_SUBJECT,subject,false);
 		button.save(); 
 
 		/* Step 3: Check notification mail with adding prefix to subject */
@@ -219,15 +220,21 @@ public class Forum_Forum_Administration_Notification extends ForumBase{
 		click(By.linkText(catName));
 		click(By.linkText(addForum[0]));
 		info("Create New Topic");
+		watchItem(true);
+		alert.acceptAlert();
 		topic.quickStartTopic(title, message); 
 
 		// - Or Add watch on specific forum/topic and then add 
-		watchItem(true);
-		alert.acceptAlert();
+	
 		goToMail(EMAIL_ADDRESS1, EMAIL_PASS); 
-		checkAndDeleteMail(By.xpath(ELEMENT_GMAIL_EMAIL.replace("${category}",catName).replace("${forum}", addForum[0]).replace("${topic}", title).replace("${subject}", subject)), content);
+		checkAndDeleteMail(By.xpath(ELEMENT_GMAIL_FORUM_PREFIX.replace("${category}",catName).replace("${forum}", addForum[0]).replace("${topic}", title).replace("${subject}", subject)), message);
 		// Clean data test
 		switchToParentWindow();
+		goToNotifications();
+		uncheck (ELEMENT_NOTIFY_PREFIX,2);
+		type(ELEMENT_NOTIFY_SUBJECT,defaultSubject,true);
+		button.save(); 
+		
 		click(By.linkText(catName));
 		cat.deleteCategoryInForum(catName, true);	
 	} 
@@ -283,13 +290,14 @@ public class Forum_Forum_Administration_Notification extends ForumBase{
 		button.save(); 
 		click(By.linkText(catName));
 		click(By.linkText(addForum[0]));
-		info("Create New Topic");
-		topic.quickStartTopic(title, message); 
 		watchItem(true);
 		alert.acceptAlert();
+		info("Create New Topic");
+		topic.quickStartTopic(title, message); 
+		
 		//Check email
 		goToMail(EMAIL_ADDRESS1, EMAIL_PASS); 
-		checkAndDeleteMail(By.xpath(ELEMENT_GMAIL_EMAIL.replace("${category}",catName).replace("${forum}", addForum[0]).replace("${topic}", title)), title);
+		checkAndDeleteMail(By.xpath(ELEMENT_GMAIL_EMAIL.replace("${category}",catName).replace("${forum}", addForum[0]).replace("${topic}", title)), message);
 		// Clean data test
 		switchToParentWindow();
 		click(By.linkText(catName));

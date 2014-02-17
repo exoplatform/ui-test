@@ -513,11 +513,11 @@ public class Forum_Forum_Post_BBCode extends ForumBase{
 		*Expected Outcome: 
 			- Post is created successfully with Size, Color and Bold effect.*/ 
 		mngPost.postReply(post1, "[b][size=10][color=red]"+post1+"[/color][/size][/b]", "", "","",true);
-		waitForAndGetElement(By.xpath("//strong/font[@size='10']/font[@color='red' and text()=''"+post1+"']"));
+		waitForAndGetElement(By.xpath("//strong/font[@size='10']/font[@color='red' and text()='"+post1+"']"));
 		click(mngPost.ELEMENT_POST_CLOSE_BUTTON);
 		click(mngPost.ELEMENT_SUBMIT_BUTTON);
 		waitForElementNotPresent(mngPost.ELEMENT_POST_POPUP_NEW);
-		waitForAndGetElement(By.xpath("//strong/font[@size='10']/font[@color='red' and text()=''"+post1+"']"));
+		waitForAndGetElement(By.xpath("//strong/font[@size='10']/font[@color='red' and text()='"+post1+"']"));
 		
 		//Clear data
 		info("Clear data");

@@ -635,7 +635,7 @@ public class PlatformBase extends TestBase {
 
 	//----------------------Gmail form ---------------------------------------------------
 	public final String GMAIL_URL = "https://mail.google.com";
-	public final String EMAIL_ADDRESS1 = "exomailtest01@gmail.com";
+	public final String EMAIL_ADDRESS1 = "fqaexovn@gmail.com";
 	public final String EMAIL_ADDRESS2 = "exoservice@gmail.com";
 	public final String EMAIL_PASS = "exoadmin";
 	//public final By ELEMENT_DELETE_MAIL = By.xpath("//*[@class='ar9 T-I-J3 J-J5-Ji']");
@@ -651,7 +651,7 @@ public class PlatformBase extends TestBase {
 	public final By ELEMENT_GMAIL_COMPOSE = By.xpath("//div[contains(text(),'COMPOSE')]");
 
 	public final By ELEMENT_FIRST_MAIL = By.xpath("//div[@class='iA g6' and contains(text(),'Hi')]/../../../../../table[@class='cf iB']");
-	public final String ELEMENT_GMAIL_CONTENT = "//*[@class='adn ads']//*[contains(text(),'${content}')]";
+	public final String ELEMENT_GMAIL_CONTENT = "//*[@class='adn ads']//*[contains(.,'${content}')]";
 	public final By ELEMENT_GMAIL_SIGN_IN_LINK = By.xpath("//a[@id='gmail-sign-in' and contains(text(),'Sign in')]");
 
 	//get url
@@ -1333,7 +1333,7 @@ public class PlatformBase extends TestBase {
 		waitForAndGetElement(mail,300000);
 
 		click(mail);	
-		if(waitForAndGetElement(ELEMENT_GMAIL_CONTENT.replace("${content}",content),20000,0) == null )
+		if(waitForAndGetElement(ELEMENT_GMAIL_CONTENT.replace("${content}",content),DEFAULT_TIMEOUT,0) == null )
 			click(ELEMENT_FIRST_MAIL);
 		waitForAndGetElement(ELEMENT_GMAIL_CONTENT.replace("${content}",content));
 		info("Found notify mail");

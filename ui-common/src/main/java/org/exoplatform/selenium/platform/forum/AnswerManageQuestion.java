@@ -42,8 +42,6 @@ public class AnswerManageQuestion extends AnswerBase {
 	public final String ELEMENT_MANAGE_QUESTION_EDIT = "//td[text()='${question}']/../*//div[@title='Edit']";
 	public final String ELEMENT_MANAGE_QUESTION_ANSWER_ICON = "//td[text()='${question}']/../*//div/div[@title='Answer']";
 	public final String ELEMENT_MANAGE_QUESTION_ANSWER_LANGUAGE = "//td[text()='${question}']/../td/div[@title='Answer' and contains(@onclick, '${language}')]";
-	public final By ELEMENT_MANAGE_QUESTION_OPEN_QUESTIONS_TAB = By.xpath("//div[@class='uiFormTabPane uiTabNormal uiTabPane']//*[contains(text(),'Open Questions')]");
-	public final By ELEMENT_MANAGE_QUESTION_ALL_QUESTIONS_TAB = By.xpath("//div[@class='uiFormTabPane uiTabNormal uiTabPane']//*[contains(text(),'All Questions')]");
 	public final By ELEMENT_MANAGE_QUESTION_CURRENT_OPEN_QUESTIONS_TAB = By.xpath("//div[@class='uiFormTabPane uiTabNormal uiTabPane']//*[contains(@class,'active')]/*[contains(text(),'Open Questions')]");
 	public final By ELEMENT_MANAGE_QUESTION_CURRENT_ALL_QUESTIONS_TAB = By.xpath("//div[@class='uiFormTabPane uiTabNormal uiTabPane']//*[contains(@class,'active')]/*[contains(text(),'All Questions')]");
 	public final By ELEMENT_QUESTION_LANGUAGE = By.name("AllLanguages");
@@ -88,13 +86,13 @@ public class AnswerManageQuestion extends AnswerBase {
 
 
 	//Context Menu
-	public final By ELEMENT_CONTEXT_MENU_EDIT_QUESTION = By.xpath("//*[@class='dropdown-menu dropdownArrowTop']//a[text()='Edit']");
-	public final By ELEMENT_CONTEXT_MENU_DELETE_QUESTION = By.xpath("//*[@class='dropdown-menu dropdownArrowTop']//a[text()='Delete']");
+	public final String ELEMENT_CONTEXT_MENU_EDIT_QUESTION = "//a[contains(text(),'${question}')]/../..//*[@class='dropdown-menu dropdownArrowTop']//a[text()='Edit']";
+	public final String ELEMENT_CONTEXT_MENU_DELETE_QUESTION = "//a[contains(text(),'${question}')]/../..//*[@class='dropdown-menu dropdownArrowTop']//a[text()='Delete']";
 	public final By ELEMENT_OK_DELETE_QUESTION = By.xpath("//*[@id='UIDeleteQuestion']//*[text()='OK']");
-	public final By ELEMENT_ANSWER_LINK_IN_CONTEXT_MENU = By.linkText("Answer Question");
-	public final By ELEMENT_COMMENT_LINK_IN_CONTEXT_MENU = By.linkText("Comment");
-	public final By ELEMENT_MOVE_LINK_IN_CONTEXT_MENU = By.xpath("//*[@class='dropdown-menu dropdownArrowTop']//a[text()='Move to']");
-	public final By ELEMENT_SEND_LINK_IN_CONTEXT_MENU = By.xpath("//*[@class='dropdown-menu dropdownArrowTop']//a[text()='Send']");
+	public final String ELEMENT_ANSWER_LINK_IN_CONTEXT_MENU = "//a[contains(text(),'${question}')]/../..//*[@class='dropdown-menu dropdownArrowTop']//a[text()='Answer Question']";
+	public final String ELEMENT_COMMENT_LINK_IN_CONTEXT_MENU = "//a[contains(text(),'${question}')]/../..//*[@class='dropdown-menu dropdownArrowTop']//a[text()='Comment']";;
+	public final String ELEMENT_MOVE_LINK_IN_CONTEXT_MENU = "//a[contains(text(),'${question}')]/../..//*[@class='dropdown-menu dropdownArrowTop']//a[text()='Move to']";;
+	public final String ELEMENT_SEND_LINK_IN_CONTEXT_MENU = "//a[contains(text(),'${question}')]/../..//*[@class='dropdown-menu dropdownArrowTop']//a[text()='Send']";;
 
 	//Attachment file popup
 	public final By ELEMENT_ATTACH_FILE_LINK = By.xpath("//a[contains(@href,'Attachment')]");
@@ -103,7 +101,8 @@ public class AnswerManageQuestion extends AnswerBase {
 	//Manage question popup
 	public final By ELEMENT_MANAGE_QUESTIONS = By.xpath("//*[contains(text(), 'Manage Questions')]");
 	public final By ELEMENT_MANAGE_QUESTIONS_POPUP = By.xpath("//*[@class='PopupTitle popupTitle' and text()='Manage Questions']");
-	public final By ELEMENT_OPEN_QUESTION_TAB = By.linkText("Open Questions");
+	public final String ELEMENT_OPEN_QUESTION_TAB = "//li[contains(@class,'${status}')]//a[text()='Open Questions']";
+	public final String ELEMENT_ALL_QUESTION_TAB = "//li[contains(@class,'${status}')]//a[text()='All Questions']";
 	public final String ELEMENT_ANSWER_QUESTION_IN_LIST = "//*[text()='${question}']/..//*[@data-original-title='Answer']";
 	public final String ELEMENT_EDIT_QUESTION_IN_LIST = "//*[text()='${question}']/..//*[@data-original-title='Edit']";
 	public final String ELEMENT_DELETE_QUESTION_IN_ALL_QUESTION_TAB_LIST = "//div[@id='QuestionManagerment-tab']//td[text()='${question}']/..//*[@data-original-title='Delete']";
@@ -112,6 +111,10 @@ public class AnswerManageQuestion extends AnswerBase {
 	public final By ELEMENT_MANAGE_QUESTION_CLOSE_BUTTON = By.xpath("//*[@id='FAQQuestionManagerment']//*[text()='Close']");
 	public final String ELEMENT_QUESTION_IN_ALL_TAB = "//*[@id='QuestionManagerment-tab']//*[text()='${question}']";
 	public final String ELEMENT_QUESTION_IN_OPEN_TAB = "//*[@id='QuestionNotAnswered-tab']//*[text()='${question}']";
+	public final By ELEMENT_ALL_QUESTION_NEXT = By.xpath("//div[@id='FAQUserPageIteratorTab1']//a[@data-original-title='Next']");
+	public final By ELEMENT_ALL_QUESTION_TOTAL_PAGE = By.xpath("//div[@id='FAQUserPageIteratorTab1']//span[@class='pagesTotalNumber']");
+	public final By ELEMENT_OPEN_QUESTION_TOTAL_PAGE = By.xpath("//*[@id='FAQUserPageIteratorTab2']//span[@class='pagesTotalNumber']");
+	public final By ELEMENT_OPEN_QUESTION_NEXT = By.xpath("//*[@id='FAQUserPageIteratorTab2']//a[@data-original-title='Next']");
 
 	//More action menu
 	public final By ELEMENT_MORE_ACTION_QUESTION = By.xpath("//*[contains(text(), 'More Actions')]");
@@ -235,7 +238,7 @@ public class AnswerManageQuestion extends AnswerBase {
 		if (check){
 			waitForMessage(MSG_SUBMIT_QUESTION);
 			click(ELEMENT_OK_INFOR_POPUP);
-			waitForAndGetElement(By.linkText(questionName));
+			checkQuestionPresent(questionName);
 		}
 	}
 
@@ -279,7 +282,7 @@ public class AnswerManageQuestion extends AnswerBase {
 		case 1:
 			info("Edit question by right click");
 			rightClickOnElement(By.linkText(questionName));
-			click(ELEMENT_CONTEXT_MENU_EDIT_QUESTION);
+			click(ELEMENT_CONTEXT_MENU_EDIT_QUESTION.replace("${question}", questionName));
 			break;
 		case 2:
 			info("Edit question while opening question");
@@ -310,7 +313,7 @@ public class AnswerManageQuestion extends AnswerBase {
 		case 1:
 			info("Delete question by right click");
 			rightClickOnElement(By.linkText(questionName));
-			click(ELEMENT_CONTEXT_MENU_DELETE_QUESTION);
+			click(ELEMENT_CONTEXT_MENU_DELETE_QUESTION.replace("${question}",questionName));
 			break;
 		case 2:
 			info("Delete question while opening question");
@@ -327,7 +330,7 @@ public class AnswerManageQuestion extends AnswerBase {
 		}
 		waitForMessage(MSG_DELETE_QUESTION);
 		click(ELEMENT_OK_DELETE_QUESTION);
-		waitForTextNotPresent(questionName);
+		waitForElementNotPresent(ELEMENT_QUESTION_LINK.replace("${question}", questionName));
 	}
 
 	//---------------------------Functions in Manage Question popup----------------------------//
@@ -343,7 +346,7 @@ public class AnswerManageQuestion extends AnswerBase {
 
 	public void goToOpenQuestionTab(){
 		info("Go to Open quesntion tab in manage question");
-		click(ELEMENT_OPEN_QUESTION_TAB);
+		click(ELEMENT_OPEN_QUESTION_TAB.replace("${status}", ""));
 	}
 
 	/**function: active/deactivate a question
@@ -487,5 +490,38 @@ public class AnswerManageQuestion extends AnswerBase {
 			waitForElementNotPresent(By.linkText(questionName));	
 		}
 		magAc.signOut();
+	}
+	/**
+	 * Switch page until the question is shown
+	 * @param questionName
+	 */
+	public void checkQuestionPresentOnManageQuestion(String questionName){
+		By bTotalPage;
+		By bNext;
+		String eQuestion = "";
+		int page = 0;
+		if(waitForAndGetElement(ELEMENT_OPEN_QUESTION_TAB.replace("${status}", "active"),5000,0) == null){
+			bTotalPage = ELEMENT_ALL_QUESTION_TOTAL_PAGE;
+			bNext = ELEMENT_ALL_QUESTION_NEXT;
+			eQuestion = ELEMENT_QUESTION_IN_ALL_TAB;
+
+		}else{
+			bTotalPage = ELEMENT_OPEN_QUESTION_TOTAL_PAGE;
+			bNext = ELEMENT_OPEN_QUESTION_NEXT;
+			eQuestion = ELEMENT_QUESTION_IN_OPEN_TAB;
+		}
+		if(waitForAndGetElement(bTotalPage,5000,0) != null){
+			page = Integer.parseInt(waitForAndGetElement(bTotalPage).getText());
+			for(int i = 1; i < page; i++){
+				if(waitForAndGetElement(eQuestion.replace("${question}", questionName),5000,0) == null){
+
+					if(waitForAndGetElement(bNext,5000,0) != null){
+						click(bNext);
+					}
+				}else break;
+			}
+		}
+		waitForAndGetElement(eQuestion.replace("${question}", questionName));
+
 	}
 }

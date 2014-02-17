@@ -55,8 +55,9 @@ public class Forum_Forum_UserSettings extends ForumBase {
 	 * Get feed URL from watch RSS list
 	 * https://jira.exoplatform.org/browse/FORUM-767
 	 * This bug happens in PLF 4.1.0
+	 * Bug on 4.0.5: https://jira.exoplatform.org/browse/FORUM-767
 	 */
-	@Test
+	@Test(groups="error")
 	public  void test01_02_03_CheckMySubscriptions() {
 
 		String category = "category 72363";
@@ -119,7 +120,7 @@ public class Forum_Forum_UserSettings extends ForumBase {
 	 * Remove RSS feed  from user setting
 	 */
 	//This case has error in PLF 4.1, (cannot right click on category, forum, topic) because the PLF 4.1 is not stable
-	@Test
+	@Test(groups="error")
 	public  void test04_05_CheckAndRemoveRSSFeed() {
 
 		String category = "category 72617";
@@ -215,11 +216,17 @@ public class Forum_Forum_UserSettings extends ForumBase {
 		info("Step 3, 4, 5: Show User setting main screen, Check RSS list, Check get feed URL");
 
 		goToMySubscriptions();
+		checkObjectOnMySubscriptionPresent(category);
 		check(ELEMENT_FEED_URL.replace("${item}", category),2);
+		checkObjectOnMySubscriptionPresent(category2);
 		check(ELEMENT_FEED_URL.replace("${item}", category2),2);
+		checkObjectOnMySubscriptionPresent(forum);
 		check(ELEMENT_FEED_URL.replace("${item}", forum),2);
+		checkObjectOnMySubscriptionPresent(forum2);
 		check(ELEMENT_FEED_URL.replace("${item}", forum2),2);
+		checkObjectOnMySubscriptionPresent(topic);
 		check(ELEMENT_FEED_URL.replace("${item}", topic),2);
+		checkObjectOnMySubscriptionPresent(topic2);
 		check(ELEMENT_FEED_URL.replace("${item}", topic2),2);
 		button.save();
 

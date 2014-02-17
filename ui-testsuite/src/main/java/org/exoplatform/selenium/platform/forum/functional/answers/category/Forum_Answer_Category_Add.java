@@ -107,7 +107,6 @@ public class Forum_Answer_Category_Add extends AnswerBase{
 		//Check right of mary
 		Acc.userSignIn(userType.PUBLISHER);
 		goToAnswer();
-		waitForAndGetElement(ELEMENT_CATEGORY_LINK.replace("${category}", category));
 		mCat.openCategoryInAnswer(category);
 		waitForElementNotPresent(mQuest.ELEMENT_MANAGE_QUESTIONS);
 		waitForElementNotPresent(mCat.ELEMENT_CATEGORY_BUTTON);
@@ -126,7 +125,7 @@ public class Forum_Answer_Category_Add extends AnswerBase{
 	@Test
 	public void test01_AddCategoryWithValidModeratorBySelectGroup() {
 		String category = "Category 3 72719";
-		String[] userGroup = {"Platform/web-contributors"};
+		String[] userGroup = {"Platform/Content Management"};
 		String newCategory = "New category 72719";
 
 		info("Add new category in case valid data entry for Moderator field by select a group into this field");
@@ -138,7 +137,6 @@ public class Forum_Answer_Category_Add extends AnswerBase{
 		//Check right of demo
 		Acc.userSignIn(userType.DEVELOPER);
 		goToAnswer();
-		waitForAndGetElement(ELEMENT_CATEGORY_LINK.replace("${category}", category));
 		mCat.openCategoryInAnswer(category);
 		waitForElementNotPresent(mQuest.ELEMENT_MANAGE_QUESTIONS);
 		waitForElementNotPresent(mCat.ELEMENT_CATEGORY_BUTTON);
@@ -146,10 +144,9 @@ public class Forum_Answer_Category_Add extends AnswerBase{
 		//Check right of mary and delete data
 		Acc.userSignIn(userType.PUBLISHER);
 		goToAnswer();
-		waitForAndGetElement(ELEMENT_CATEGORY_LINK.replace("${category}", category));
 		mCat.openCategoryInAnswer(category);
 		waitForAndGetElement(mQuest.ELEMENT_MANAGE_QUESTIONS);
-		mCat.editCategoryInAnswer(category, newCategory, "2",newCategory, 1, userGroup, true, true);
+		mCat.editCategoryInAnswer(category, newCategory, "2",newCategory, 0, userGroup, true, true);
 		mCat.deleteCategoryInAnswer(newCategory);
 
 	}
@@ -185,8 +182,8 @@ public class Forum_Answer_Category_Add extends AnswerBase{
 		goToAnswer();
 
 		waitForAndGetElement(mQuest.ELEMENT_MANAGE_QUESTIONS);
-		mCat.editCategoryInAnswer(category, newCategory, "2",newCategory, 1, userGroup, true, true);
-		mCat.deleteCategoryInAnswer(category);
+		mCat.editCategoryInAnswer(category, newCategory, "2",newCategory, 0, userGroup, true, true);
+		mCat.deleteCategoryInAnswer(newCategory);
 
 	}
 	/** Add new category in case invalid data entry for Moderator field 

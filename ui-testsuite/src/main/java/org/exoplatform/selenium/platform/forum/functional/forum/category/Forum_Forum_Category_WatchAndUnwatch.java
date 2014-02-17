@@ -93,7 +93,7 @@ public class Forum_Forum_Category_WatchAndUnwatch extends ForumBase{
 		topic.quickStartTopic(title, message); 
 		//Check email
 		goToMail(EMAIL_ADDRESS2, EMAIL_PASS);
-		checkAndDeleteMail(By.xpath(ELEMENT_GMAIL_EMAIL.replace("${category}",catName).replace("${forum}", addForum[0]).replace("${topic}", title)), title);
+		checkAndDeleteMail(By.xpath(ELEMENT_GMAIL_EMAIL.replace("${category}",catName).replace("${forum}", addForum[0]).replace("${topic}", title)), message);
 		// Clean data test
 		switchToParentWindow();
 		click(By.linkText(catName));
@@ -131,6 +131,7 @@ public class Forum_Forum_Category_WatchAndUnwatch extends ForumBase{
 		cat.inputDataCategoryInForum(catName, order, chooseRestricted, restricted,
 				description, setPermission, userGroup, true);
 		button.save();
+
 		info("Create New Forum checked Moderate Topics option");
 		forum.goToAddForum(); 
 		forum.inputDataInAddForumTab_addForum(catName, addForum); 
@@ -138,7 +139,7 @@ public class Forum_Forum_Category_WatchAndUnwatch extends ForumBase{
 		button.save(); 
 		magAc.signOut();
 
-		/* Step 2: Watch forum/category */
+		//		 Step 2: Watch forum/category 
 		// - Login by the normal user
 		// - On created category and select [Watch]
 		info("Login by the normal user");
@@ -149,11 +150,11 @@ public class Forum_Forum_Category_WatchAndUnwatch extends ForumBase{
 		cat.watchItem(true);
 		alert.acceptAlert();
 
-		/*Step 3: Add topic into forum/category that is being watched*/
+		//		Step 3: Add topic into forum/category that is being watched
 		// - Add new topic into above forum
 		click(By.linkText(addForum[0]));
 		info("Create New Topic");
-		topic.startTopic(title, message, null, 0, userGroup, true, true,true);
+		topic.startTopic(title, message, null, 0, userGroup, true, true);
 		alert.cancelAlert();
 		magAc.signOut();
 		magAc.signIn(DATA_USER1, DATA_PASS);
@@ -164,7 +165,7 @@ public class Forum_Forum_Category_WatchAndUnwatch extends ForumBase{
 		topic.approveTopic();
 		//Check email
 		goToMail(EMAIL_ADDRESS1, EMAIL_PASS);
-		checkAndDeleteMail(By.xpath(ELEMENT_GMAIL_EMAIL.replace("${category}",catName).replace("${forum}", addForum[0]).replace("${topic}", title)), title);
+		checkAndDeleteMail(By.xpath(ELEMENT_GMAIL_EMAIL.replace("${category}",catName).replace("${forum}", addForum[0]).replace("${topic}", title)), message);
 		//Clean data test
 		switchToParentWindow();
 		click(By.linkText(catName));
@@ -233,7 +234,7 @@ public class Forum_Forum_Category_WatchAndUnwatch extends ForumBase{
 		topic.censorTopic(key);
 		//Check email
 		goToMail(EMAIL_ADDRESS1, EMAIL_PASS);
-		checkAndDeleteMail(By.xpath(ELEMENT_GMAIL_EMAIL.replace("${category}",catName).replace("${forum}", addForum[0]).replace("${topic}", key)), key);
+		checkAndDeleteMail(By.xpath(ELEMENT_GMAIL_EMAIL.replace("${category}",catName).replace("${forum}", addForum[0]).replace("${topic}", key)), message);
 		//Clean data test
 		switchToParentWindow();
 		click(By.linkText(catName));
@@ -292,7 +293,7 @@ public class Forum_Forum_Category_WatchAndUnwatch extends ForumBase{
 		click(forum.ELEMENT_TOPIC_LINK.replace("${topic}", title));
 		topic.moveTopic(title, addForum1[0]); 
 		goToMail(EMAIL_ADDRESS2, EMAIL_PASS);
-		checkAndDeleteMail(By.xpath(ELEMENT_GMAIL_EMAIL.replace("${category}",catName).replace("${forum}", addForum2[0]).replace("${topic}", title)), title);
+		checkAndDeleteMail(By.xpath(ELEMENT_GMAIL_EMAIL.replace("${category}",catName).replace("${forum}", addForum1[0]).replace("${topic}", title)), title);
 		//Clean data test
 		switchToParentWindow();
 		click(By.linkText(catName));

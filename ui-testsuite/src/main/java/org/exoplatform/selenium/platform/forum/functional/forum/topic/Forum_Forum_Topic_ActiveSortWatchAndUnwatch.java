@@ -459,7 +459,7 @@ public class Forum_Forum_Topic_ActiveSortWatchAndUnwatch extends ForumBase{
 		info("Check email");
 		goToMail(EMAIL_ADDRESS1, EMAIL_PASS);
 		checkAndDeleteMail(By.xpath(ELEMENT_GMAIL_EMAIL.replace("${category}",catName).replace("${forum}", addForum[0]).replace("${topic}", title)), message);
-
+		
 		Utils.pause(500);
 		switchToParentWindow();
 		acc.signOut();
@@ -492,14 +492,16 @@ public class Forum_Forum_Topic_ActiveSortWatchAndUnwatch extends ForumBase{
 		Utils.pause(500);
 		//		goToMail(EMAIL_ADDRESS1, EMAIL_PASS);
 		info("Go to gmail");
-		driver.navigate().to(GMAIL_URL);
+		switchToNewWindow();
+		Utils.pause(5000);
 		waitForElementNotPresent(By.xpath(ELEMENT_GMAIL_EMAIL.replace("${category}",catNameEdit).replace("${forum}", addForum[0]).replace("${topic}", title)));
 
 		// Clean data test
 		switchToParentWindow();
 		acc.signOut();
 		acc.userSignIn(userType.ADMIN);
-		click(By.linkText(catName));
+		goToForums();
+		click(By.linkText(catNameEdit));
 		cat.deleteCategoryInForum(catNameEdit, true);	
 	}
 
@@ -526,6 +528,7 @@ public class Forum_Forum_Topic_ActiveSortWatchAndUnwatch extends ForumBase{
 		String title2 = "Topic2";
 		String titlePost = "Post 73014";
 		String message = "Message 73014";
+		String notify = "Your post: \"Post 73014\" has been moved to topic \"Topic2\"";
 
 		/*Step 1: Create categories, forums, topics and posts into
 		 *Input Data: 
@@ -551,7 +554,7 @@ public class Forum_Forum_Topic_ActiveSortWatchAndUnwatch extends ForumBase{
 		- Right click on created category/forum/topic and select [Watch]
 		 *Expected Outcome: 
 		- Alert message is shown to inform watching successfully.
-		- Category/Forum/topic is being watched		*/
+		- Category/Forum/topic is being watched*/		
 		info("Step 3: Watch topic/forum/category");
 		topic.watchItem(true);
 		alert.acceptAlert();		
@@ -560,13 +563,13 @@ public class Forum_Forum_Topic_ActiveSortWatchAndUnwatch extends ForumBase{
 		 *Input Data: 
 		- Move post in category/forum/topic which watching to a destination topic
 		 *Expected Outcome: Post is moved successful
-		- Move notify is sent to post's author that is moved and watcher		*/ 
+		- Move notify is sent to post's author that is moved and watcher*/		 
 		info("Move post");
 		post.movePost(titlePost, title2);
 
 		//Check email
 		goToMail(EMAIL_ADDRESS1, EMAIL_PASS);
-		checkAndDeleteMail(By.xpath(ELEMENT_GMAIL_EMAIL.replace("${category}",catName).replace("${forum}", addForum[0]).replace("${topic}", title1)), title2);
+		checkAndDeleteMail(By.xpath(ELEMENT_GMAIL_EMAIL.replace("${category}",catName).replace("${forum}", addForum[0]).replace("${topic}", title2)), notify);
 
 		// Clean data test
 		switchToParentWindow();

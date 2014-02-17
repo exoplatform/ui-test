@@ -76,16 +76,15 @@ public class Forum_Answers_Question_List extends AnswerBase {
 		magQuest.goToManageQuestions();
 		
 		//- Select [All questions] tab
-		click(magQuest.ELEMENT_MANAGE_QUESTION_ALL_QUESTIONS_TAB);
-		
+		magQuest.checkQuestionPresentOnManageQuestion(questionName1);
 		//- All questions created at step 1 are displayed in list (include answered question/not)
 		waitForAndGetElement(magQuest.ELEMENT_DELETE_QUESTION_IN_ALL_QUESTION_TAB_LIST.replace("${question}", questionName1));
+		magQuest.checkQuestionPresentOnManageQuestion(questionName2);
 		waitForAndGetElement(magQuest.ELEMENT_DELETE_QUESTION_IN_ALL_QUESTION_TAB_LIST.replace("${question}", questionName2));
 		click(magQuest.ELEMENT_MANAGE_QUESTION_CLOSE_BUTTON);
 
 		/*Clear data*/
 		info("-- Clear data --");
-		goToAnwserHome();
 		magCat.deleteCategoryInAnswer(categoryName);
 	}
 
@@ -124,11 +123,11 @@ public class Forum_Answers_Question_List extends AnswerBase {
 		magQuest.goToManageQuestions();
 		
 		//- Select [Pending questions] tab
-		click(magQuest.ELEMENT_MANAGE_QUESTION_OPEN_QUESTIONS_TAB);
+		magQuest.goToOpenQuestionTab();
 		
 		//- List questions that have not been answered or multi-languages questions that have not been answered in all supported language is displayed
 		//- The language that has not been answered will be displayed at language column 
-		waitForAndGetElement(magQuest.ELEMENT_DELETE_QUESTION_IN_PENDING_QUESTION_TAB_LIST.replace("${question}", questionName2));
+		checkQuestionPresent(questionName2);;
 		waitForElementNotPresent(magQuest.ELEMENT_DELETE_QUESTION_IN_PENDING_QUESTION_TAB_LIST.replace("${question}", questionName1));
 		click(magQuest.ELEMENT_MANAGE_QUESTION_CLOSE_BUTTON);
 		

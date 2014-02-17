@@ -276,7 +276,9 @@ public class ForumManageCategory extends ForumBase {
 		info("Import category");
 		WebElement element = waitForAndGetElement(ELEMENT_IMPORT_FILE, DEFAULT_TIMEOUT, 1, 2);
 		((JavascriptExecutor)driver).executeScript("arguments[0].style.display = 'block';", element);
+		info(Utils.getAbsoluteFilePath("TestData/" + file));
 		element.sendKeys(Utils.getAbsoluteFilePath("TestData/" + file));
+		
 		switchToParentWindow();
 		String[] links = file.split("/");
 		waitForAndGetElement("//*[contains(text(),'" + links[links.length-1] + "')]", DEFAULT_TIMEOUT, 1, 2);

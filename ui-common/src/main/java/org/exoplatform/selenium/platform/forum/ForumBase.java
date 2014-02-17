@@ -27,6 +27,8 @@ public class ForumBase extends PlatformBase {
 	public PageEditor pageE ;
 	public NavigationToolbar navTool ;
 	public PlatformPermission per ;
+	
+	public String FORUM_PAGE_ID = "";
 
 	public final By ELEMENT_FORUM_LINK = By.linkText("Forums");
 	public final By ELEMENT_OK_INFOR_POPUP = By.xpath("//div[@class='UIPopupWindow UIDragObject uiPopup']/.//a[text()='OK']");
@@ -58,7 +60,7 @@ public class ForumBase extends PlatformBase {
 	public final By ELEMENT_USER_MANAGEMENT = By.xpath("//*[@id='ManageModerator']//*[@class='uiIconUser uiIconLightGray']");
 	public final By ELEMENT_MORE_BUTTON = By.xpath("//li[@class='dropdown moreItem pull-right']/div");
 	public final By ELEMENT_PENDING = By.id("PendingJob");
-	
+
 	public String ELEMENT_FORUM_BREADCUMB = "//*[@id='UIBreadcumbs']/div[@class='pull-left']//a[@class='Selected' and contains(text(),'${forumName}')]";
 	public String ELEMENT_LATEST_TOPIC = "//a[contains(text(),'${forum}')]/ancestor::tr[@class='oncontextmenu']//a[contains(text(),'${topic}')]";
 	public String ELEMENT_FORUM_ON_HOMEPAGE = "//a[contains(text(),'${category}')]/ancestor::div[@id='UICategories']//tr[@class='oncontextmenu']//a[contains(text(),'${forum}')]";
@@ -79,7 +81,7 @@ public class ForumBase extends PlatformBase {
 	public final By ELEMENT_CENSOR_KEYWORDS = By.xpath("//*[@id='Administrations']//*[@class='uiIconForumCensor']");
 	public final By ELEMENT_BAN_IP = By.xpath("//*[@id='Administrations']//*[@class='uiIconForumBanIp']");
 	public final By ELEMENT_BBCODE = By.xpath("//*[@id='Administrations']//*[@class='uiIconForumBBCode']");
-	public final By ELEMENT_PRUNE = By.xpath("//*[@id='Administrations']//*[@class='Pruning']");
+	public final By ELEMENT_PRUNE = By.xpath("//a[contains(.,'Pruning')]");
 	public final By ELEMENT_IMPORT = By.xpath("//*[@id='Administrations']//*[@class='uiIconImport']");
 
 	//-----------------Watch/Unwatch screen-------------------------------------------
@@ -130,7 +132,7 @@ public class ForumBase extends PlatformBase {
 	public final By ELEMENT_CENSOR_POPUP = By.xpath("//span[@class='PopupTitle popupTitle' and text()='Censor Keywords']");
 	public final By ELEMENT_CENSOR_POPUP_PLF4_1 = By.xpath("//span[@class='PopupTitle popupTitle' and text()='Censor Keywords']");
 	public final By ELEMENT_CENSORED_KEYWORDS =  By.id("censorKeyword");
-	
+
 	//----------------Set Ban IP form--------------------------------------------
 	public final By ELEMENT_BAN_IP_POPUP = By.xpath("//span[@class='PopupTitle popupTitle' and text()='Banned IPs']");
 	public final By ELEMENT_BAN_IP_FILTER = By.id("searchIpBan");
@@ -236,8 +238,10 @@ public class ForumBase extends PlatformBase {
 	public final By ELEMENT_FEED_SUBTITLE_TEXT = By.id("feedSubtitleText");
 	public final By ELEMENT_FEED_CONTENT = By.id("feedContent");
 	public final String ELEMENT_MY_SUBSCRIPTION_OBJECT_WATCH = "//div[@id='UIForumUserSettingForm']//a[contains(text(),'${object}')]" ;
+	public final By ELEMENT_MY_SUBSCRIPTION_NEXT_PAGE = By.xpath("//div[@id='ForumUserWatches-tab']//*[@data-original-title='Next Page']");
+	public final By ELEMENT_MY_SUBSCRIPTION_TOTAL_PAGE = By.xpath("//div[@id='ForumUserWatches-tab']//span[@class='pagesTotalNumber']");
 
-	
+
 	//---------------------Notifications------------------
 	public final By ELEMENT_NOTIFICATION_LINK = By.xpath("//*[@id='Administrations']//*[@class='uiIconNotification']"); 
 	public final By ELEMENT_NOTIFY_FRAME=By.xpath("//*[@id='xEditingArea']/iframe");
@@ -270,13 +274,13 @@ public class ForumBase extends PlatformBase {
 	public final By ELEMENT_FORUM_PORTLET_SAVE_BUTTON = By.cssSelector("#UISettingEditModeForm.UIForm div.uiAction button.btn");
 
 	//attach file popup
-//	public final By ELEMENT_POPUP_UPLOAD_FILE = By.xpath("//span[@class='PopupTitle' and text()='Attach File']");
+	//	public final By ELEMENT_POPUP_UPLOAD_FILE = By.xpath("//span[@class='PopupTitle' and text()='Attach File']");
 	public final By ELEMENT_POPUP_UPLOAD_FILE = By.xpath("//span[@class='PopupTitle popupTitle' and text()='Attach File']");
-//	public final By ELEMENT_ATTACH_FILE = By.linkText("Attach Files");
-//	public final By ELEMENT_ATTACH_FILE =By.xpath("//button[@class='btn' and text()='Attach Files']");
+	//	public final By ELEMENT_ATTACH_FILE = By.linkText("Attach Files");
+	//	public final By ELEMENT_ATTACH_FILE =By.xpath("//button[@class='btn' and text()='Attach Files']");
 	public final By ELEMENT_ATTACH_FILE =By.xpath("//*[@id='ThreadContent']/div/div[3]/div/button");
 	public final By ELEMENT_ATTACHMENT_FILE_INPUT = By.name("file");
-//	public final By ELEMENT_ATTACHMENT_SAVE_BUTTON = By.xpath("//*[@id='UIAttachmentForm']//*[text()='Save']");
+	//	public final By ELEMENT_ATTACHMENT_SAVE_BUTTON = By.xpath("//*[@id='UIAttachmentForm']//*[text()='Save']");
 	public final By ELEMENT_ATTACHMENT_SAVE_BUTTON = By.xpath("//button[@class='btn' and text()='Save'");
 
 	//-----------------------User Management--------------------------------------------//
@@ -324,8 +328,9 @@ public class ForumBase extends PlatformBase {
 	public final String MSG_PRIVATE_MESSAGE_DELETE = "Are you sure you want to delete this message ?";
 
 	//Gmail
-	public String ELEMENT_GMAIL_EMAIL = "//span/b[text()='[${category}][${forum}] ${topic}']";
-		
+	public String ELEMENT_GMAIL_EMAIL = "//span/b[contains(text(),'[${category}][${forum}]') and contains(text(),'${topic}')]";
+	public String ELEMENT_GMAIL_FORUM_PREFIX = "//span/b[contains(text(),'${subject}[${category}][${forum}]') and contains(text(),'${topic}')]";
+
 	//Pending job
 	public final By ELEMENT_PENDING_JOB_POPUP = By.xpath("//span[@class='PopupTitle popupTitle' and text()='Waiting for Approval']");
 	public By ELEMENT_APPROVE_PENDING_JOB = By.xpath("//*[text()='Approve']");
@@ -378,7 +383,7 @@ public class ForumBase extends PlatformBase {
 			loopCount = 0;
 		}
 	}
-	
+
 	/** function: Attach file in attach popup
 	 * @author lientm
 	 * @param number: number of upload container that need upload file
@@ -392,15 +397,16 @@ public class ForumBase extends PlatformBase {
 			element.sendKeys(Utils.getAbsoluteFilePath("TestData/" + file[i]));
 			waitForAndGetElement("//*[@class='fileNameLabel' and contains(text(),'" + file[i] + "')]");
 		}
-//		click(ELEMENT_ATTACHMENT_SAVE_BUTTON);
+		//		click(ELEMENT_ATTACHMENT_SAVE_BUTTON);
 		button.save();
-//		waitForElementNotPresent(ELEMENT_ATTACHMENT_SAVE_BUTTON);
+		//		waitForElementNotPresent(ELEMENT_ATTACHMENT_SAVE_BUTTON);
 	}
 
 	public void goToForums(){
 		info("--Go to Forums--");
 		click(ELEMENT_FORUM_LINK);
 		waitForAndGetElement(ELEMENT_FORUM_STATE,DEFAULT_TIMEOUT,0);
+		FORUM_PAGE_ID = waitForAndGetElement("//div[@id='UIPage']/div[@class='UIRowContainer']/div").getAttribute("id");
 	}
 
 	public void goToForumHome(){
@@ -474,14 +480,14 @@ public class ForumBase extends PlatformBase {
 	 */
 	public void deleteBookmarkItem(String item){
 		openBookmarkPopup();
-		
+
 		By element_delete = By.xpath(ELEMENT_BOOKMARKS_REMOVE.replace("${item}", item));
 
 		info("Delete bookmark");
 		waitForAndGetElement(element_delete);
 		click(element_delete);
 		waitForElementNotPresent(element_delete);
-		
+
 		click(ELEMENT_BOOKMARKS_CANCEL_BUTTON);
 		waitForElementNotPresent(ELEMENT_BOOKMARKS_CANCEL_BUTTON);
 		info("Delete bookmark successfully");
@@ -1476,7 +1482,7 @@ public class ForumBase extends PlatformBase {
 		click(ELEMENT_PENDING);
 		waitForAndGetElement(ELEMENT_PENDING_JOB_POPUP);
 	}
-	
+
 	/**
 	 * Approve a pending job.
 	 * Created by khanhnt at Dec 11, 2013
@@ -1494,4 +1500,23 @@ public class ForumBase extends PlatformBase {
 		waitForElementNotPresent(ELEMENT_PENDING_JOB_POPUP);
 		info("Approve a peding job successfully");
 	}
+	/**
+	 * Switch page to show Object on My subscription
+	 * @param object
+	 */
+	public void checkObjectOnMySubscriptionPresent(String object){
+
+		int page = Integer.parseInt(waitForAndGetElement(ELEMENT_MY_SUBSCRIPTION_TOTAL_PAGE).getText());
+		for(int i = 1; i < page; i++){
+			if(waitForAndGetElement(ELEMENT_MY_SUBSCRIPTION_OBJECT_WATCH.replace("${object}", object),5000,0) == null){
+
+				if(waitForAndGetElement(ELEMENT_MY_SUBSCRIPTION_NEXT_PAGE,5000,0) != null){
+					click(ELEMENT_MY_SUBSCRIPTION_NEXT_PAGE);
+				}
+			}else break;
+		}
+		waitForAndGetElement(ELEMENT_MY_SUBSCRIPTION_OBJECT_WATCH.replace("${object}", object));
+
+	}
+
 }

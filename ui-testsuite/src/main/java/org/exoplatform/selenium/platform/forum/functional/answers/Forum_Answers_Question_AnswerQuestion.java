@@ -62,7 +62,7 @@ public class Forum_Answers_Question_AnswerQuestion extends AnswerBase{
 		magQuest.editQuestion(1, questionName, null, questionName, questionContent, null, null, true, true, false, null);
 		info("Normal user can view this question");
 		magQuest.viewQuestionWithOtherUser(userType.DEVELOPER,categoryName,questionName,true);
-		
+
 		/*Clear data*/
 		info("-- Clear data --");
 		magAcc.signIn(DATA_USER1, DATA_PASS);
@@ -113,6 +113,7 @@ public class Forum_Answers_Question_AnswerQuestion extends AnswerBase{
 		//- Click [Save] button
 		//- Answer the question successfully.
 		magAns.answerQuestion(3, questionName1, language, answerContent, true, true, false, null, false, null);
+		click(magQuest.ELEMENT_MANAGE_QUESTION_CLOSE_BUTTON);
 
 		/*Clear data*/
 		info("-- Clear data --");
@@ -210,6 +211,7 @@ public class Forum_Answers_Question_AnswerQuestion extends AnswerBase{
 		//- Click [Save] button
 		//- Answer the question successfully.
 		magAns.answerQuestion(4, questionName, language, answerContent, true, true, false, null, false, null);
+		click(magQuest.ELEMENT_MANAGE_QUESTION_CLOSE_BUTTON);
 
 		/*Clear data*/
 		info("-- Clear data --");
@@ -311,7 +313,7 @@ public class Forum_Answers_Question_AnswerQuestion extends AnswerBase{
 		magCat.openCategoryInAnswer(categoryName);
 		//- Click on [Approved] icon
 		//Or edit answer and tick [Approved]  checkbox
-		click(By.linkText(questionName));
+		click(ELEMENT_QUESTION_LINK.replace("${question}", questionName));
 		magAns.approveAnswer(answerContent, true);
 
 		//- This answer is visible for everyone
@@ -378,11 +380,11 @@ public class Forum_Answers_Question_AnswerQuestion extends AnswerBase{
 		//- Click on [Approved] icon
 		//Or edit answer and tick [Approved]  checkbox
 		click(By.linkText(questionName));
-		magAns.approveAnswer(answerContent, false);
+		magAns.approveAnswer(answerContent, true);
 
 		//- This answer is visible for everyone
 		info("Normal user can view approved answer");
-		magAns.viewAnswerWithOtherUser(userType.DEVELOPER,categoryName, questionName, answerContent, false);
+		magAns.viewAnswerWithOtherUser(userType.DEVELOPER,categoryName, questionName, answerContent, true);
 
 		/*Clear data*/
 		info("-- Clear data --");
@@ -416,7 +418,7 @@ public class Forum_Answers_Question_AnswerQuestion extends AnswerBase{
 		magQuest.submitQuestion(null, questionName, questionContent, null, false, null);
 		magQuest.editQuestion(1, questionName, null, questionName, questionContent, null, null, true, true, false, null);
 
-		/* Step 2: Open Answer question form */
+		/*Step 2: Open Answer question form*/ 
 		//- Login as demo
 		magAcc.userSignIn(userType.PUBLISHER);
 		goToAnswer();
@@ -426,21 +428,21 @@ public class Forum_Answers_Question_AnswerQuestion extends AnswerBase{
 		//- Answer question form appears
 		info("Answer this question");
 		magAns.answerQuestion(1, questionName, null, answerContent, true, true, false, null, false, null);
-		
-		/* Step 3: Answer question */
+
+		/*Step 3: Answer question */
 		//- Login as root
 		magAcc.userSignIn(userType.ADMIN);
 		goToAnswer();
 		magCat.openCategoryInAnswer(categoryName);
-		click(By.linkText(questionName));
-		
+		click(ELEMENT_QUESTION_LINK.replace("${question}", questionName));
+
 		//- Click on [Inactivated] icon
 		//Or editing answer and uncheck [Activated] check box
 		//- This question is not visible for everyone
 		magAns.editAnswer(answerContent, null, answerContent, true, false, false, null, false, null);
 		info("Normal user can view approved answer");
 		magAns.viewAnswerWithOtherUser(userType.DEVELOPER,categoryName, questionName, answerContent, false);
-		
+
 		/*Clear data*/
 		info("-- Clear data --");
 		magAcc.signIn(DATA_USER1, DATA_PASS);
@@ -485,41 +487,41 @@ public class Forum_Answers_Question_AnswerQuestion extends AnswerBase{
 		//- Answer question form appears
 		info("Answer this question");
 		magAns.answerQuestion(1, questionName, null, answerContent, true, true, false, null, false, null);
-		
+
 		/* Step 3: Inactivate answer */
 		//- Login as root
 		magAcc.userSignIn(userType.ADMIN);
 		goToAnswer();
 		magCat.openCategoryInAnswer(categoryName);
 		click(By.linkText(questionName));
-		
+
 		//- Click on [Activated] icon
 		//Or editing answer and uncheck [Activated] check box
 		//- This answer is not visible for everyone
 		magAns.editAnswer(answerContent, null, answerContent, true, false, false, null, false, null);
-		
+
 		/* Step 4: check if answer is invisible */
 		//- Login as demo
 		//- Go to answer
 		//Cannot see that answer
 		info("Normal user can view approved answer");
 		magAns.viewAnswerWithOtherUser(userType.DEVELOPER,categoryName, questionName, answerContent, false);
-		
+
 		/* Step 5: Activate answer */
 		//- Login as root
 		magAcc.signIn(DATA_USER1, DATA_PASS);
 		goToAnswer();
 		magCat.openCategoryInAnswer(categoryName);
 		click(By.linkText(questionName));
-		
+
 		//- Edit that answer, check Activated checkbox
 		magAns.editAnswer(answerContent, null, answerContent, true, true, false, null, false, null);
-		
+
 		//- Login as demo
 		//Can see that answer
 		info("Normal user can view approved answer");
 		magAns.viewAnswerWithOtherUser(userType.DEVELOPER,categoryName, questionName, answerContent, true);
-		
+
 		/*Clear data*/
 		info("-- Clear data --");
 		magAcc.signIn(DATA_USER1, DATA_PASS);

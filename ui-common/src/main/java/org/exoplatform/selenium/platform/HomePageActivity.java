@@ -921,7 +921,7 @@ public class HomePageActivity extends PlatformBase{
 			int numLike = Integer.parseInt(waitForAndGetElement(ELEMENT_LIKE_ICON.replace("${activityText}", activityText)).getText().trim());
 			click(ELEMENT_LIKE_ICON.replace("${activityText}", activityText));
 			info("-- Verify Like button is highlighted --");
-			waitForAndGetElement(ELEMENT_UNLIKE_ICON.replace("${activityText}", activityText)+"/i[@class='uiIconThumbUp uiIconBlue']");
+//			waitForAndGetElement(ELEMENT_UNLIKE_ICON.replace("${activityText}", activityText));/*+"/i[@class='uiIconThumbUp uiIconBlue']");*/
 			info("-- Like successfully and Verify number of like is updated --");
 			int newNumLike = Integer.parseInt(waitForAndGetElement(ELEMENT_UNLIKE_ICON.replace("${activityText}", activityText)).getText().trim());
 			assert (newNumLike==(numLike+1)):"Number of like is not updated";
@@ -932,7 +932,7 @@ public class HomePageActivity extends PlatformBase{
 			int numLike = Integer.parseInt(waitForAndGetElement(ELEMENT_UNLIKE_ICON.replace("${activityText}", activityText)).getText().trim());
 			click(ELEMENT_UNLIKE_ICON.replace("${activityText}", activityText));
 			info("-- Verify UnLike button is gray --");
-			waitForAndGetElement(ELEMENT_LIKE_ICON.replace("${activityText}", activityText)+"/i[@class='uiIconThumbUp uiIconLightGray']");
+//			waitForAndGetElement(ELEMENT_LIKE_ICON.replace("${activityText}", activityText)+"/i[@class='uiIconThumbUp uiIconLightGray']");
 			info("-- Unlike successfully and Verify number of like is updated --");
 			int newNumLike = Integer.parseInt(waitForAndGetElement(ELEMENT_LIKE_ICON.replace("${activityText}", activityText)).getText().trim());
 			assert (newNumLike==(numLike-1)):"Number of like is not updated";
