@@ -47,16 +47,16 @@ public class PLF_Navigation_TopNavigation extends BasicAction {
 		initSeleniumTest();
 		driver.get(baseUrl);
 		info("Login with " + DATA_USER1);
-		magAcc = new ManageAccount(driver);
-		naviToolbar = new NavigationToolbar(driver);
-		peoPro = new PeopleProfile(driver);
-		evt = new Event(driver);
-		mngTopic = new ForumManageTopic(driver);
-		mngPoll = new ForumManagePoll(driver);
-		mngCat = new ForumManageCategory(driver);
-		mngFru = new ForumManageForum(driver);
-		actBar = new ActionBar(driver);
-		ecms = new EcmsBase(driver);
+		magAcc = new ManageAccount(driver, this.plfVersion);
+		naviToolbar = new NavigationToolbar(driver, this.plfVersion);
+		peoPro = new PeopleProfile(driver, this.plfVersion);
+		evt = new Event(driver, this.plfVersion);
+		mngTopic = new ForumManageTopic(driver, this.plfVersion);
+		mngPoll = new ForumManagePoll(driver, this.plfVersion);
+		mngCat = new ForumManageCategory(driver, this.plfVersion);
+		mngFru = new ForumManageForum(driver, this.plfVersion);
+		actBar = new ActionBar(driver, this.plfVersion);
+		ecms = new EcmsBase(driver, this.plfVersion);
 		magAcc.signIn(DATA_USER1, DATA_PASS);
 	}
 

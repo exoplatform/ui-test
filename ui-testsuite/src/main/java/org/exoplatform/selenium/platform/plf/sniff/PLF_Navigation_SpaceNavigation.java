@@ -27,8 +27,8 @@ public class PLF_Navigation_SpaceNavigation extends PlatformBase {
 		initSeleniumTest();
 		driver.get(baseUrl);
 		info("Login with " + DATA_USER1);
-		magAcc = new ManageAccount(driver);
-		spaceMag = new SpaceManagement(driver);
+		magAcc = new ManageAccount(driver, this.plfVersion);
+		spaceMag = new SpaceManagement(driver, this.plfVersion);
 		appMag = new ApplicationManagement(driver);
 		magAcc.signIn(DATA_USER1, DATA_PASS);
 	}

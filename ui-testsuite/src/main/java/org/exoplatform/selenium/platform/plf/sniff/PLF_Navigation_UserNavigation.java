@@ -26,9 +26,9 @@ public class PLF_Navigation_UserNavigation extends PlatformBase {
 		initSeleniumTest();
 		driver.get(baseUrl);
 		info("Login with " + DATA_USER1);
-		magAcc = new ManageAccount(driver);
-		naviToolbar = new NavigationToolbar(driver);
-		peoPro = new PeopleProfile(driver);
+		magAcc = new ManageAccount(driver, this.plfVersion);
+		naviToolbar = new NavigationToolbar(driver, this.plfVersion);
+		peoPro = new PeopleProfile(driver, this.plfVersion);
 		magAcc.signIn(DATA_USER1, DATA_PASS);
 	}
 

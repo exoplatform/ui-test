@@ -26,15 +26,16 @@ public class ForumManagePoll extends ForumBase {
 
 	ForumManagePost mngPost;
 	
-	public ForumManagePoll(WebDriver dr){
+	public ForumManagePoll(WebDriver dr, String...plfVersion){
 		driver = dr;
-		magTopic = new ForumManageTopic(driver);
+		this.plfVersion = plfVersion.length>0?plfVersion[0]:"4.0";
+		magTopic = new ForumManageTopic(driver,this.plfVersion);
 		app = new ManageApplications(driver);
-		userGroup = new UserGroupManagement(driver);
+		userGroup = new UserGroupManagement(driver,this.plfVersion);
 		button = new Button(driver);
-		naviToolbar = new NavigationToolbar(driver);
-		alert = new ManageAlert(driver);
-		mngPost = new ForumManagePost(driver);
+		naviToolbar = new NavigationToolbar(driver,this.plfVersion);
+		alert = new ManageAlert(driver,this.plfVersion);
+		mngPost = new ForumManagePost(driver,this.plfVersion);
 	}
 
 	//Poll Manage

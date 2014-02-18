@@ -37,6 +37,8 @@ public class GroupNavigation extends PlatformBase {
 	//Home Page/Left Panel/Group Navigation
 	public final String ELEMENT_NODE_NAVIGATION_LEFT_PANEL = "//*[@class='groupNavigation']//*[contains(text(), '${groupName}')]";
 	public final String ELEMENT_GROUP_NAVIGATION_ICON_LEFT_PANEL = ELEMENT_NODE_NAVIGATION_LEFT_PANEL.replace("${groupName}", "${groupName}") + "/../*[contains(@class, 'arrowIcon')]";
+	public final String ELEMENT_GROUP_NAVIGATION_ICON_LEFT_PANEL_PLF41 = ELEMENT_NODE_NAVIGATION_LEFT_PANEL.replace("${groupName}", "${groupName}") + "/../*[contains(@class, 'uiIconArrowDown uiIconLightGray')]";
+
 
 	/*======================== Common Function ===========================*/
 
