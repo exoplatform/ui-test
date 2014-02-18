@@ -79,30 +79,30 @@ public class PLF_UnifiedSearch extends Template {
 		initSeleniumTest();
 		driver.get(baseUrl);
 		info("Login with " + DATA_USER1);
-		magAcc = new ManageAccount(driver);
-		naviToolbar = new NavigationToolbar(driver);
+		magAcc = new ManageAccount(driver, this.plfVersion);
+		naviToolbar = new NavigationToolbar(driver, this.plfVersion);
 		searchAdmin = new SearchAdministration(driver);
 		qsPage = new SettingSearchPage(driver);
-		pEditor = new PageEditor(driver);
-		pageMag = new PageManagement(driver);
-		actBar = new ActionBar(driver);
-		conTemp = new ContentTemplate(driver);
-		magMember = new ManageMember(driver);
-		cMenu = new ContextMenu(driver);
-		siteExp = new SitesExplorer(driver);
-		evt = new Event(driver);
-		tsk = new Task(driver);
-		button = new Button(driver);
-		peoPro = new PeopleProfile(driver);
-		spaceMag = new SpaceManagement(driver);
-		mngFru = new ForumManageForum(driver);
-		mngTopic = new ForumManageTopic(driver);
-		mngPost = new ForumManagePost(driver);
-		mngCat = new ForumManageCategory(driver);
-		ansMagAn = new AnswerManageAnwser(driver);
-		magQuest = new AnswerManageQuestion(driver);
-		navMag = new NavigationManagement(driver);
-		ecms = new EcmsBase(driver);
+		pEditor = new PageEditor(driver, this.plfVersion);
+		pageMag = new PageManagement(driver, this.plfVersion);
+		actBar = new ActionBar(driver, this.plfVersion);
+		conTemp = new ContentTemplate(driver, this.plfVersion);
+		magMember = new ManageMember(driver, this.plfVersion);
+		cMenu = new ContextMenu(driver, this.plfVersion);
+		siteExp = new SitesExplorer(driver, this.plfVersion);
+		evt = new Event(driver, this.plfVersion);
+		tsk = new Task(driver, this.plfVersion);
+		button = new Button(driver, this.plfVersion);
+		peoPro = new PeopleProfile(driver, this.plfVersion);
+		spaceMag = new SpaceManagement(driver, this.plfVersion);
+		mngFru = new ForumManageForum(driver, this.plfVersion);
+		mngTopic = new ForumManageTopic(driver, this.plfVersion);
+		mngPost = new ForumManagePost(driver, this.plfVersion);
+		mngCat = new ForumManageCategory(driver, this.plfVersion);
+		ansMagAn = new AnswerManageAnwser(driver, this.plfVersion);
+		magQuest = new AnswerManageQuestion(driver, this.plfVersion);
+		navMag = new NavigationManagement(driver, this.plfVersion);
+		ecms = new EcmsBase(driver, this.plfVersion);
 		magAcc.signIn(DATA_USER1, DATA_PASS);
 	}
 
@@ -445,7 +445,6 @@ public class PLF_UnifiedSearch extends Template {
 		/*Clear data*/
 		info("-- Clear data --");
 		mngFru.goToForums();
-		mngFru.goToForumHome();
 		click(By.linkText(category1));
 		mngCat.deleteCategoryInForum(category1, true);
 		click(By.linkText(category2));
@@ -960,6 +959,12 @@ public class PLF_UnifiedSearch extends Template {
 		waitForAndGetElement(qsPage.ELEMENT_RESULT_INDEX.replace("${index}", "2").replace("${title}", "event"));
 		waitForAndGetElement(qsPage.ELEMENT_RESULT_INDEX.replace("${index}", "3").replace("${title}", "answer"));
 
+		//Sort by Date
+		qsPage.sortByItem("Date");
+		waitForAndGetElement(qsPage.ELEMENT_RESULT_INDEX.replace("${index}", "1").replace("${title}", "answer"));
+		waitForAndGetElement(qsPage.ELEMENT_RESULT_INDEX.replace("${index}", "2").replace("${title}", "event"));
+		waitForAndGetElement(qsPage.ELEMENT_RESULT_INDEX.replace("${index}", "3").replace("${title}", "task"));
+		
 		//Search result will sorted by Relevancy, or date, or title respectively
 		//Sort by title
 		qsPage.sortByItem("Title");

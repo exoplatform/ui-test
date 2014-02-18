@@ -12,9 +12,10 @@ import org.openqa.selenium.WebElement;
 
 public class NavigationManagement extends  PlatformBase{
 
-	public NavigationManagement(WebDriver dr) {
+	public NavigationManagement(WebDriver dr, String...plfVersion){
 		driver = dr;
-		button = new Button(driver);
+		this.plfVersion = plfVersion.length>0?plfVersion[0]:"4.0";
+		button = new Button(driver, this.plfVersion);
 	}
 
 	ManageAlert alt = new ManageAlert(driver);

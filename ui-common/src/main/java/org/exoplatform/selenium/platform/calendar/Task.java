@@ -68,9 +68,10 @@ public class Task extends CalendarBase{
 	public int HAFL_HOUR = 30; //minutes
 	public int FULL_HOUR = 60; //minutes
 
-	public Task(WebDriver dr){
+	public Task(WebDriver dr, String...plfVersion){
 		driver = dr;
-		button = new Button(driver);
+		this.plfVersion = plfVersion.length>0?plfVersion[0]:"4.0";
+		button = new Button(driver, this.plfVersion);
 	}
 
 	/*============== Go to Task =============*/
@@ -300,8 +301,13 @@ public class Task extends CalendarBase{
 		inputBasicQuickTask(name, note, opt);
 		inputFromToTask(from, to, allDay);
 		click(ELEMENT_BUTTON_TASK_SAVE);
-		waitForElementNotPresent(ELEMENT_BUTTON_TASK_SAVE);
-
+		if(allDay)
+			if(this.plfVersion.contains("4.0"))
+				waitForAndGetElement(ELEMENT_EVENT_TASK_ALL_DAY.replace("${event}", name));
+			else
+				waitForAndGetElement(ELEMENT_EVENT_TASK_ALL_DAY_PLF41.replace("${event}", name));
+		else
+			waitForAndGetElement(ELEMENT_EVENT_TASK_ONE_DAY.replace("${taskName}", name));
 	}
 	/**Edit a task by right click (just edit some fields, pls write more)
 	 * 

@@ -144,10 +144,11 @@ public class CalendarBase extends PlatformBase {
 	public String ELEMENT_EVENT_TASK_ALL_DAY = "//*[@id='UIWeekViewGridAllDay']//div[contains(text(),'${event}')]";
 	public String ELEMENT_EVENT_TASK_ALL_DAY_PLF41 = "//*[@id='UIWeekViewGridAllDay']//div[contains(@class,'eventAlldayContent') and contains(.,'${event}')]";
 	public String ELEMENT_EVENT_TASK_ONE_DAY = "//*[@id='UIWeekViewGrid']//div[contains(text(),'${taskName}')]/parent::div[@class='clearfix']/div[@class='eventContainerBar eventTitle pull-left']";
+	public String ELEMENT_EVENT_TASK_ONE_DAY_1 = "//*[@id='UIWeekView']//div[contains(text(),'${taskName}')]";
 	public String ELEMENT_EVENT_TASK_ONE_DAY_PLF41 = "//*[contains(@id, 'UIWeekView')]//div[contains(text(),'${taskName}')]";
 	//public String ELEMENT_EVENT_TASK_WORKING_PANE = "//div[contains(@class,'eventContainer') and contains(text(),'${event}')]";
-	public String ELEMENT_EVENT_TASK_WORKING_PANE_PLF41 = "//*[@id='UIWeekViewGrid']//div[contains(@class,'eventAlldayContent') and contains(.,'${event}')]";
 	public String ELEMENT_EVENT_TASK_WORKING_PANE = "//*[@id='UIWeekViewGrid']//div[@class='eventContainer' and contains(text(),'${event}')]";
+	public String ELEMENT_EVENT_TASK_WORKING_PANE_PLF41 = "//*[@id='UIWeekViewGrid']//div[contains(@class,'eventAlldayContent') and contains(.,'${event}')]";
 	public By ELEMENT_EVENT_TASK_DELETE_MENU = By.xpath("//div[@id='tmpMenuElement']//a[@class='eventAction' and contains(@href,'Delete')]");
 	public String MSG_EVENT_TASK_DELETE = "Are you sure you want to delete this event/task?";
 
@@ -203,7 +204,7 @@ public class CalendarBase extends PlatformBase {
 	public String EVENT_DAY_VIEW_PLF41 = "//*[@id='UIDayView']//div[contains(text(),'${eventTitle}')]/..";
 	public String EVENT_MONTH_VIEW = "//*[@id='UIMonthView']//span[contains(text(),'${eventTitle}')]";
 	public String EVENT_LIST_VIEW = "//*[@id='UIListUsers']//span[contains(text(),'${eventTitle}')]";
-//	public String EVENT_WORK_WEEK_VIEW = "//*[@id='UIWeekViewGridAllDay']//div[contains(text(),'${eventTitle}')]";
+	//	public String EVENT_WORK_WEEK_VIEW = "//*[@id='UIWeekViewGridAllDay']//div[contains(text(),'${eventTitle}')]";
 
 	//----------------Group calendar---------------------------------
 	public String ELEMENT_GROUP_CAL = "//*[@id='UICalendars']//a[contains(text(),'${calName}')]";
@@ -512,35 +513,6 @@ public class CalendarBase extends PlatformBase {
 		waitForAndGetElement(By.linkText(name));
 	}
 
-	/** 
-	 * Delete event/task
-	 * @author thuntn, havtt edited
-	 * @param String event
-	 * @param boolean allDay
-	 */
-	/*public void deleteEventTask(String event, boolean allDay){
-		alert = new ManageAlert(driver);
-		if (allDay == true)
-		{
-			info("--Delete event--");
-			rightClickOnElement(ELEMENT_EVENT_TASK_ALL_DAY.replace("${event}", event),2);
-			click(ELEMENT_EVENT_TASK_DELETE_MENU);
-			alert.waitForConfirmation(MSG_EVENT_TASK_DELETE);
-			waitForElementNotPresent(ELEMENT_EVENT_TASK_ALL_DAY.replace("${event}", event));
-			waitForElementNotPresent(ELEMENT_EVENT_TASK_WORKING_PANE.replace("${event}", event));
-		}
-		else
-		{        
-			info("--Delete event--");
-			rightClickOnElement(ELEMENT_EVENT_TASK_ONE_DAY.replace("${taskName}", event),2);
-			click(ELEMENT_EVENT_TASK_DELETE_MENU);
-			info("--Confirm deleted event--");
-			alert.waitForConfirmation(MSG_EVENT_TASK_DELETE);
-			alert.acceptAlert();
-			waitForElementNotPresent(ELEMENT_EVENT_TASK_ONE_DAY.replace("${taskName}", event));
-		}
-	}*/
-
 	/**
 	 * Select an option when creating an Event/Task 
 	 * ONE DAY
@@ -570,21 +542,20 @@ public class CalendarBase extends PlatformBase {
 		info("--Delete an Event/Task--");
 		switch (optDay) {
 		case ALLDAY:
-			info("Deleting Event/Task by..." + optDay);
 			if(this.plfVersion.contains("4.0")){
 				if(waitForAndGetElement(ELEMENT_EVENT_TASK_ALL_DAY.replace("${event}", event), 5000, 0) == null){
-					rightClickOnElement(ELEMENT_EVENT_TASK_WORKING_PANE.replace("${event}", event), 2);
-				}
+					rightClickOnElement(ELEMENT_EVENT_TASK_WORKING_PANE.replace("${event}", event),2);
+				}        
 				else{
-					rightClickOnElement(ELEMENT_EVENT_TASK_ALL_DAY.replace("${event}", event), 2);
+					rightClickOnElement(ELEMENT_EVENT_TASK_ALL_DAY.replace("${event}", event),2);
 				}
 			}
 			else{ //this.plfVersion.contains("4.1")
 				if(waitForAndGetElement(ELEMENT_EVENT_TASK_ALL_DAY_PLF41.replace("${event}", event), 5000, 0) == null){
-					rightClickOnElement(ELEMENT_EVENT_TASK_WORKING_PANE_PLF41.replace("${event}", event), 2);
-				}
+					rightClickOnElement(ELEMENT_EVENT_TASK_WORKING_PANE_PLF41.replace("${event}", event),2);
+				}        
 				else{
-					rightClickOnElement(ELEMENT_EVENT_TASK_ALL_DAY_PLF41.replace("${event}", event), 2);
+					rightClickOnElement(ELEMENT_EVENT_TASK_ALL_DAY_PLF41.replace("${event}", event),2);
 				}
 			}
 			break;
@@ -607,12 +578,12 @@ public class CalendarBase extends PlatformBase {
 		Utils.pause(1000);
 		if (optDay.equals(selectDayOption.ALLDAY)){
 			if(this.plfVersion.contains("4.0")){
-				waitForElementNotPresent(ELEMENT_EVENT_TASK_ALL_DAY.replace("${event}", event), 5000);
-				waitForElementNotPresent(ELEMENT_EVENT_TASK_WORKING_PANE.replace("${event}", event), 5000);
+				waitForElementNotPresent(ELEMENT_EVENT_TASK_ALL_DAY.replace("${event}", event),5000);
+				waitForElementNotPresent(ELEMENT_EVENT_TASK_WORKING_PANE.replace("${event}", event),5000);
 			}
 			else{
-				waitForElementNotPresent(ELEMENT_EVENT_TASK_ALL_DAY_PLF41.replace("${event}", event), 5000);
-				waitForElementNotPresent(ELEMENT_EVENT_TASK_WORKING_PANE_PLF41.replace("${event}", event), 5000);
+				waitForElementNotPresent(ELEMENT_EVENT_TASK_ALL_DAY_PLF41.replace("${event}", event),5000);
+				waitForElementNotPresent(ELEMENT_EVENT_TASK_WORKING_PANE_PLF41.replace("${event}", event),5000);
 			}
 		}else if (optDay.equals(selectDayOption.ONEDAY)){
 			waitForElementNotPresent(ELEMENT_EVENT_TASK_ONE_DAY.replace("${taskName}", event));

@@ -94,7 +94,7 @@ public class SettingSearchPage extends PlatformBase {
 	public final String ELEMENT_RESULT_EVENT_ICON = "//div[@id='resultPage']//a[text()='${item}']/*[contains(text(),'${keySearch}')]/../../../..//*[@class='calendarBox']";
 
 	//People page result
-	public final String ELEMENT_RESULT_PEOPLE_ICON = "//*[@class='avatar pull-left userThumbnail']/img[contains(@src,'UserAvtDefault.png')]";
+	public final String ELEMENT_RESULT_PEOPLE_ICON = "//*[contains(@class,'avatar pull-left')]";
 	public final By ELEMENT_RESULT_TITLE = By.xpath("//*[@class='content']//a");
 
 	//File page result
@@ -299,7 +299,8 @@ public class SettingSearchPage extends PlatformBase {
 	 */
 	public void sortByItem(String sortItem){
 		info("-- Select sort "+sortItem+" --");
-		if(waitForAndGetElement(ELEMENT_SORT_ITEM_CURRENT.replace("${sortItem}", sortItem), DEFAULT_TIMEOUT, 0)==null){
+		if(waitForAndGetElement(ELEMENT_SORT_ITEM_CURRENT.replace("${sortItem}", sortItem), 5000, 0)==null){
+			info("-- Select sort "+sortItem+" from dropdown --");
 			click(ELEMENT_SORT_DROPDOWN,2);
 			click(ELEMENT_SORT_ITEM_OPTION.replace("${sortItem}", sortItem));
 			waitForAndGetElement(ELEMENT_SORT_ITEM_CURRENT.replace("${sortItem}", sortItem));

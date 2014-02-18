@@ -17,8 +17,9 @@ import org.testng.Assert;
 
 public class PageManagement extends PlatformBase {
 	
-	public PageManagement(WebDriver dr){
+	public PageManagement(WebDriver dr, String...plfVersion){
 		driver = dr;
+		this.plfVersion = plfVersion.length>0?plfVersion[0]:"4.0";
 	}
 
 	NavigationToolbar nav = new NavigationToolbar(driver);
