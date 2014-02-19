@@ -5,6 +5,7 @@ import org.exoplatform.selenium.Dialog;
 import org.exoplatform.selenium.ManageAlert;
 import org.exoplatform.selenium.Utils;
 import org.exoplatform.selenium.platform.NavigationToolbar;
+
 import static org.exoplatform.selenium.TestLogger.info;
 
 import java.awt.event.KeyEvent;
@@ -53,22 +54,23 @@ public class DashBoard extends PlatformBase {
 
 	//Add new page on Dashboard
 	public void addNewTabOnDashboard(String displayName, boolean verify) {
+
 		info("--Add new page on Dashboard--");
 		click(ELEMENT_DASHBOARD_NEW_ICON);
 		Utils.pause(1000);
 		waitForAndGetElement(ELEMENT_DASHBOARD_NEW_INPUT).clear();
 		waitForAndGetElement(ELEMENT_DASHBOARD_NEW_INPUT).sendKeys(displayName);
 		for(int repeat=0;;repeat++){
-			//click(ELEMENT_DASHBOARD_NEW_INPUT);
-			Utils.pause(200);
 			Utils.javaSimulateKeyPress(KeyEvent.VK_ENTER);
-			if (waitForAndGetElement(ELEMENT_DASHBOARD_NEW_INPUT_AUX.replace("${tabName}", displayName), 5000, 0) == null){
+			if(waitForAndGetElement(ELEMENT_DASHBOARD_NEW_INPUT,5000,0) != null){
 				if (waitForAndGetElement(ELEMENT_DASHBOARD_NEW_INPUT).getText().equals(displayName))
-					break;	
-			}
+					break;
+			}else
+				break;
 			if(repeat > 5) break;
 		}
 
+		
 		if (verify) {
 			waitForAndGetElement(ELEMENT_TAB_LINK.replace("${tabName}", displayName));
 		}
