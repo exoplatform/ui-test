@@ -1018,12 +1018,15 @@ public class PlatformBase extends TestBase {
 			}
 			rightClickOnElement(locator);
 			if (waitForAndGetElement(ELEMENT_COPY_NODE, 5000, 0) != null){
+				info("use element ELEMENT_COPY_NODE");
 				click((ELEMENT_COPY_NODE));
 				return;
 			}else if (waitForAndGetElement(ELEMENT_NAVIGATION_COPY_NODE, 5000, 0) != null){
+				info("use element ELEMENT_NAVIGATION_COPY_NODE");
 				click(ELEMENT_NAVIGATION_COPY_NODE);
 				return;
 			} else if (waitForAndGetElement(ELEMENT_ECMS_COPY_NODE, 5000, 0) != null){
+				info("use element ELEMENT_ECMS_COPY_NODE");
 				click(ELEMENT_ECMS_COPY_NODE);
 				return;
 			}
@@ -1038,19 +1041,18 @@ public class PlatformBase extends TestBase {
 			}
 			rightClickOnElement(locator);
 			if (waitForAndGetElement(ELEMENT_PASTE_NODE, 5000, 0) != null){
+				info("use element ELEMENT_PASTE_NODE");
 				click(ELEMENT_PASTE_NODE);
 				return;
 			}else if (waitForAndGetElement(ELEMENT_NAVIGATION_PASTE_NODE, 5000, 0) != null){
+				info("use element ELEMENT_NAVIGATION_PASTE_NODE");
 				click(ELEMENT_NAVIGATION_PASTE_NODE);
 				return;
 			} else if(waitForAndGetElement(ELEMENT_ECMS_PASTE_NODE, 5000, 0) != null){
+				info("use element ELEMENT_ECMS_PASTE_NODE");
 				click(ELEMENT_ECMS_PASTE_NODE);
 				return;
-			}
-			else if (waitForAndGetElement(ELEMENT_ECMS_PASTE_NODE, 5000, 0) != null){
-				click(ELEMENT_ECMS_PASTE_NODE);
-				return;
-			}
+			} 
 			Utils.pause(WAIT_INTERVAL);
 		}
 	}
@@ -1156,10 +1158,14 @@ public class PlatformBase extends TestBase {
 
 				if (validate.length >0)
 					if (validate[0]){
+						info("clear old data of frame, verify that new data is input correctly");
 						((JavascriptExecutor) driver).executeScript("document.body.innerHTML='" + data + "'");
-						if (data.equals(inputsummary.getText())) break;
+						info(data);
+						info(inputsummary.getText());
+						if (inputsummary.getText().contains(data)) break;
 					}
 					else{
+						info("not clear old data, not verify that new data is input correctly");
 						((JavascriptExecutor) driver).executeScript("document.body.innerHTML='" + data + "' + document.body.innerHTML;");
 						break;
 					}

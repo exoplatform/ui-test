@@ -45,6 +45,7 @@ public class ContentTemplate extends EcmsBase{
 	//public final By ELEMENT_WEBCONTENT_TITLE_TEXTBOX = By.id("title");	
 	public final By ELEMENT_WEBCONTENT_NAME_TEXTBOX = By.id("name");	
 	public final By ELEMENT_WEBCONTENT_CONTENT_FRAME = By.xpath("//td[contains(@id,'cke_contents_htmlData')]/iframe");
+	public final By ELEMENT_WEBCONTENT_CONTENT_FRAME_SOURCE_EDITOR = By.xpath("//*[contains(@id,'cke_contents_htmlData')]");
 	public final By ELEMENT_WEBCONTENT_CONTENT_FRAME_41 = By.xpath("//div[@id= 'cke_1_contents']/iframe");
 	public final By ELEMENT_WEBCONTENT_ADD_CONTENT_LINK = By.xpath("//*[@title='Insert Content Link']");
 	public final By ELEMENT_WEBCONTENT_ILLUSTRATION_TAB = By.xpath("//*[contains(text(),'Illustration')]");
@@ -119,6 +120,7 @@ public class ContentTemplate extends EcmsBase{
 	public final String ELEMENT_NEWFILE_TEXT_TAB_P_CSS = ".textContent>pre";
 	public final By ELEMENT_NEWFILE_MIME_COMBOX_ID = By.name("mimetype") ;
 	public final By ELEMENT_NEWFILE_TEXTAREA_ID = By.id("contentHtml") ;
+	public final By ELEMENT_NEWFILE_CONTENT_TEXT_PLAIN_ID = By.id("contentPlain");
 	public final String ELEMENT_NEWFILE_PRE_CSS = ".content>pre";	
 
 	//Picture on Head Layout
@@ -182,7 +184,7 @@ public class ContentTemplate extends EcmsBase{
 	//Data test
 	public final String[] DATA_SPECIAL_CHARACTER = {"@","`","~","!","#","$","%","^","&","*","(",")","-","_","+","=","{","}","[","]","|","\\",";",":","'","\"","<",",",".","/","?"};
 	public final String[] DATA_SPECIAL_CHARACTER_2 = {"`", "~", "!", "#", "$", "&", "*", "(", ")", "=", "{", "}", "+", ";", "<", ">", "/", "?","\"","\\"};
-	public final String DATA_SPECIAL_CHARACTER_STRING = "~`!@#$%^&*()-_=+[]{}\\|;:\",<.>?/";
+	public final String DATA_SPECIAL_CHARACTER_STRING = "~`!@#$%^&*()-_=+[]{}|;:\",<.>?/";
 
 	//Add New Folder
 	public final By ELEMENT_CREATE_FOLDER_BUTTON = By.xpath("//*[text()='Create Folder']");
@@ -259,9 +261,16 @@ public class ContentTemplate extends EcmsBase{
 		}
 		if (cont != ""){
 			if(this.plfVersion.equalsIgnoreCase("4.1"))
-				inputDataToFrame(ELEMENT_WEBCONTENT_CONTENT_FRAME_41,cont,true);
-			else
-				inputDataToFrame(ELEMENT_WEBCONTENT_CONTENT_FRAME,cont,true);
+				if(isElementPresent(ELEMENT_WEBCONTENT_CONTENT_FRAME_41))
+					inputDataToFrame(ELEMENT_WEBCONTENT_CONTENT_FRAME_41,cont,true);
+				else
+					inputDataToFrame(ELEMENT_WEBCONTENT_CONTENT_FRAME_SOURCE_EDITOR,cont,true);
+			else{
+				if(isElementPresent(ELEMENT_WEBCONTENT_CONTENT_FRAME))
+					inputDataToFrame(ELEMENT_WEBCONTENT_CONTENT_FRAME,cont,true);
+				else
+					inputDataToFrame(ELEMENT_WEBCONTENT_CONTENT_FRAME_SOURCE_EDITOR,cont,true);
+			}
 			switchToParentWindow();
 		}
 		if (sum!="" || img !=""){
@@ -327,12 +336,15 @@ public class ContentTemplate extends EcmsBase{
 		}
 		Utils.pause(300);
 		if (!lines){
-			if (waitForAndGetElement(ELEMENT_NEWFILE_CONTENT_FRAME, 5000, 0,2) != null){
+			if (isElementPresent(ELEMENT_NEWFILE_CONTENT_FRAME)){
 				inputDataToFrame(ELEMENT_NEWFILE_CONTENT_FRAME, cont, true);
-			}else if (waitForAndGetElement(ELEMENT_NEWFILE_TEXTAREA_ID, 3000, 0) != null){
-				type(ELEMENT_NEWFILE_TEXTAREA_ID, cont, true);
-			} else if(waitForAndGetElement(ELEMENT_NEWFILE_CONTENT_FRAME_41, 3000, 0) != null){
+			}else if (isElementPresent(ELEMENT_NEWFILE_CONTENT_TEXT_PLAIN_ID)){
+				type(ELEMENT_NEWFILE_CONTENT_TEXT_PLAIN_ID, cont, true);
+			}
+			else if(isElementPresent(ELEMENT_NEWFILE_CONTENT_FRAME_41)){
 				inputDataToFrame(ELEMENT_NEWFILE_CONTENT_FRAME_41, cont, true);
+			}else{// if (isElementPresent(ELEMENT_NEWFILE_TEXTAREA_ID)){
+				type(ELEMENT_NEWFILE_TEXTAREA_ID, cont, true);
 			}
 			switchToParentWindow();
 		}else {
@@ -900,9 +912,8 @@ public class ContentTemplate extends EcmsBase{
 			//waitForElementNotPresent(button.ELEMENT_SAVE_BUTTON);
 			waitForAndGetElement(button.ELEMENT_SAVE_CLOSE_BUTTON);
 		} else if (option == 1){
-			magAlert.acceptAlert();
-			button.ok();
-			button.close();
+			click(By.xpath("//*[text()='Close']"));
+			magAlert.waitForConfirmation("The changes you made will be lost if you close this form.");
 			Utils.pause(500);
 		} else{
 			button.saveAndClose();

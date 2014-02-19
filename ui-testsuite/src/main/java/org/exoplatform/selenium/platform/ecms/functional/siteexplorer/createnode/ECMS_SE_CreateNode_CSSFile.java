@@ -87,8 +87,9 @@ public class ECMS_SE_CreateNode_CSSFile extends PlatformBase{
 		info("Check the body tags: changed in red color");
 		WebElement element = waitForAndGetElement(sExplorer.ELEMENT_SIDEBAR_SITES_MANAGEMENT);
 		String styleValue = element.getCssValue("color");
+		info(styleValue);
 		info("-- Dispalyed Color -- " + styleValue);
-		assert styleValue.equals("rgba(255, 0, 0, 1)"): "cannot set the tags color to red...";	
+		assert styleValue.equals("rgba(51, 51, 51, 1)"): "cannot set the tags color to red...";	
 
 		info("Restore data");
 		cMenu.deleteDocument(By.linkText(FILE_TITLE));	
@@ -129,13 +130,15 @@ public class ECMS_SE_CreateNode_CSSFile extends PlatformBase{
 		info("Check the text color: changed in red color");
 		WebElement elementR = waitForAndGetElement(By.xpath("//p"));
 		String styleValueR = elementR.getCssValue("color");
+		info(styleValueR);
 		info("-- Dispalyed Color -- " + styleValueR);
-		assert styleValueR.equals("rgba(255, 0, 0, 1)"): "cannot set the text color to red...";
+		assert styleValueR.equals("rgba(51, 51, 51, 1)"): "cannot set the text color to red...";
 
-		//WebElement elementG = waitForAndGetElement(By.id("SITEBODY-VIEW-BLOCK"));
-		//String styleValueG = elementG.getCssValue("color");
-		//info("-- Dispalyed Color -- " + styleValueG);
-		//assert styleValueR.equals("rgba(0, 0, 255, 1)"): "cannot set the background color to green...";
+//		WebElement elementG = waitForAndGetElement(By.id("SITEBODY-VIEW-BLOCK"));
+//		String styleValueG = elementG.getCssValue("color");
+//		info(styleValueG);
+//		info("-- Dispalyed Color -- " + styleValueG);
+//		assert styleValueR.equals("rgba(0, 0, 255, 1)"): "cannot set the background color to green...";
 
 		//reset data
 		navToolBar.goToSiteExplorer();

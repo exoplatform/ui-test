@@ -86,6 +86,7 @@ public class NavigationManagement extends  PlatformBase{
 			type(ELEMENT_INPUT_PAGE_NAME, pageName, true);
 			type(ELEMENT_INPUT_PAGE_TITLE, pageTitle, true);
 			click(ELEMENT_CREATE_PAGE_LINK);
+			Utils.pause(500);
 			if (verifyPage) {
 				waitForElementNotPresent(ELEMENT_CREATE_PAGE_LINK);
 			} else {

@@ -278,7 +278,7 @@ public class UserGroupManagement extends PlatformBase {
 					click(By.xpath(groupName.replace("${groupName}", temp[i])));
 				}else if (isElementPresent(By.xpath(groupName_2.replace("${groupName}", temp[i])))){
 					click(By.xpath(groupName_2.replace("${groupName}", temp[i])));
-				}else if (isElementPresent(By.xpath(groupName_3.replace("${groupName}", temp[i])))){
+				}else{// if (isElementPresent(By.xpath(groupName_3.replace("${groupName}", temp[i])))){
 					click(By.xpath(groupName_3.replace("${groupName}", temp[i])));
 				}
 			}else{

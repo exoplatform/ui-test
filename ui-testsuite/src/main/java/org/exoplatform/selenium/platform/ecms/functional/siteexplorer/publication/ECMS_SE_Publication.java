@@ -108,15 +108,18 @@ public class ECMS_SE_Publication extends PlatformBase{
 		conTemp.createNewFile(doc_Name, doc_Content, null);
 
 		// Show Publication Form, change status to Staged and Set time in To Field and check status
-		String oneMinuteAfterCurrentTime = addMinuteToCurrentDateTime(3);
+		String oneMinuteAfterCurrentTime = addMinuteToCurrentDateTime(2);
 		actBar.managePublication("Staged","",oneMinuteAfterCurrentTime);
 		Utils.pause(90000);
 		actBar.openManagePublicationForm();
 		waitForAndGetElement(actBar.ELEMENT_CURRENT_PUBLIC_STATUS);
-		Utils.pause(90000);
-		waitForElementNotPresent(actBar.ELEMENT_CURRENT_STATUS);
 		button.close();
-
+		
+		Utils.pause(60000);
+		actBar.openManagePublicationForm();
+		waitForElementNotPresent(actBar.ELEMENT_CURRENT_PUBLIC_STATUS);
+		button.close();
+		
 		// Remove test data
 		conMenu.deleteDocument(file_locator);
 	}
@@ -164,15 +167,19 @@ public class ECMS_SE_Publication extends PlatformBase{
 
 		// Show Publication Form, change status to Staged, Set time in From and To Fields and check status
 		String oneMinuteAfterCurrentTime = addMinuteToCurrentDateTime(1);
-		String fourMinuteAfterCurrentTime = addMinuteToCurrentDateTime(4);
+		String fourMinuteAfterCurrentTime = addMinuteToCurrentDateTime(3);
 		actBar.managePublication("Staged",oneMinuteAfterCurrentTime,fourMinuteAfterCurrentTime);
-		Utils.pause(100000);
+		Utils.pause(90000);
 
 		//Check status of document
 		actBar.openManagePublicationForm();
 		waitForAndGetElement(actBar.ELEMENT_CURRENT_PUBLIC_STATUS);
-		Utils.pause(130000);
+		button.close();
+		
+		Utils.pause(180000);
+		actBar.openManagePublicationForm();
 		waitForElementNotPresent(actBar.ELEMENT_CURRENT_PUBLIC_STATUS);
+		button.close();
 
 		// Remove test data
 		conMenu.deleteDocument(file_locator);
@@ -366,10 +373,10 @@ public class ECMS_SE_Publication extends PlatformBase{
 
 		// Check Publish icon for child content
 		ecms.goToNode(parent_Name+"/"+child_Name);
-		if ((waitForAndGetElement(actBar.ELEMENT_PUBLICATION, 10000, 0) == null )){
+		if ((waitForAndGetElement(actBar.ELEMENT_PUBLISH_ICON, 10000, 0) == null )){
 			click(actBar.ELEMENT_MORE_LINK_WITHOUT_BLOCK);
 		}
-		waitForAndGetElement(actBar.ELEMENT_PUBLICATION);
+		waitForAndGetElement(actBar.ELEMENT_PUBLISH_ICON);
 
 		// Remove test data
 		conMenu.deleteDocument(file_locator);

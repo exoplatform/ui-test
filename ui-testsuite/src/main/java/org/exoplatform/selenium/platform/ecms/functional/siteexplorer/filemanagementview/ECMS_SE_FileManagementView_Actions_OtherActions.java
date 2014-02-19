@@ -1,7 +1,5 @@
 package org.exoplatform.selenium.platform.ecms.functional.siteexplorer.filemanagementview;
 
-import static org.testng.AssertJUnit.assertFalse;
-import static org.testng.AssertJUnit.assertTrue;
 import static org.exoplatform.selenium.TestLogger.info;
 
 import org.exoplatform.selenium.Button;
@@ -214,7 +212,7 @@ public class ECMS_SE_FileManagementView_Actions_OtherActions extends PlatformBas
 		//Create a document
 		info("-- Create a document --");
 		actBar.goToAddNewContent();
-		cTemplate.createNewFile(dnode, dnode, dnode);
+		cTemplate.createNewFile(dnode, dnode, dnode,"",false,true);
 
 		//Select a node
 		actBar.goToNodeByAddressPath("/");
@@ -224,27 +222,27 @@ public class ECMS_SE_FileManagementView_Actions_OtherActions extends PlatformBas
 
 		info("--Verify actions for this node are displayed on top of the top action bar --");
 		info("--Verify display action copy node --");
-		assertTrue(actBar.isActionsOnActionBarPresent(actBar.ELEMENT_COPY_NODE));
+		assert (actBar.isActionsOnActionBarPresent(actBar.ELEMENT_ECMS_COPY_NODE));
 		info("--Verify display action cut node --");
-		assertTrue(actBar.isActionsOnActionBarPresent(actBar.ELEMENT_CUT_NODE));
+		assert(actBar.isActionsOnActionBarPresent(actBar.ELEMENT_ECMS_CUT_NODE));
 		info("--Verify display action delete node --");
-		assertTrue(actBar.isActionsOnActionBarPresent(actBar.ELEMENT_DELETE_NODE));
+		assert(actBar.isActionsOnActionBarPresent(actBar.ELEMENT_DELETE_NODE));
 		info("--Verify display action lock node --");
-		assertTrue(actBar.isActionsOnActionBarPresent(actBar.ELEMENT_LOCK_NODE));
+		assert(actBar.isActionsOnActionBarPresent(actBar.ELEMENT_LOCK_NODE));
 		info("--Verify display action rename node --");
-		assertTrue(actBar.isActionsOnActionBarPresent(actBar.ELEMENT_RENAME_NODE));
+		assert(actBar.isActionsOnActionBarPresent(actBar.ELEMENT_RENAME_NODE));
 		info("--Verify display action add symlink node --");
-		assertTrue(actBar.isActionsOnActionBarPresent(actBar.ELEMENT_ADD_SYMLINK_NODE));
+		assert(actBar.isActionsOnActionBarPresent(actBar.ELEMENT_ADD_SYMLINK_NODE));
 		info("--Verify display action view information node --");
-		assertTrue(actBar.isActionsOnActionBarPresent(cMenu.ELEMENT_VIEW_INFORMATION));
+		assert(actBar.isActionsOnActionBarPresent(cMenu.ELEMENT_VIEW_INFORMATION));
 		info("--Verify display action add to favorite --");
-		assertTrue(actBar.isActionsOnActionBarPresent(actBar.ELEMENT_ADD_TO_FAVORITE_NODE));
+		assert(actBar.isActionsOnActionBarPresent(actBar.ELEMENT_ADD_TO_FAVORITE_NODE));
 		info("--Verify display action download --");
-		assertTrue(actBar.isActionsOnActionBarPresent(actBar.ELEMENT_DOWNLOAD_NODE));
+		assert(actBar.isActionsOnActionBarPresent(actBar.ELEMENT_DOWNLOAD_NODE));
 		info("--Verify display action copy to url --");
-		assertTrue(actBar.isActionsOnActionBarPresent(actBar.ELEMENT_COPY_TO_URL_NODE));
+		assert(actBar.isActionsOnActionBarPresent(actBar.ELEMENT_COPY_TO_URL_NODE));
 		info("--Verify display action view document --");
-		assertTrue(actBar.isActionsOnActionBarPresent(actBar.ELEMENT_VIEW_DOCUMENT_NODE));
+		assert(actBar.isActionsOnActionBarPresent(actBar.ELEMENT_VIEW_DOCUMENT_NODE));
 
 		/*Step 3: Not select a document node*/		
 		info("-- Not select a node --");
@@ -252,27 +250,27 @@ public class ECMS_SE_FileManagementView_Actions_OtherActions extends PlatformBas
 		Utils.pause(2000);
 		info("-- Actions are hidden --");
 		info("--Verify hidden action copy node --");
-		assertFalse(actBar.isActionsOnActionBarPresent(actBar.ELEMENT_COPY_NODE));
+		assert !(actBar.isActionsOnActionBarPresent(actBar.ELEMENT_COPY_NODE));
 		info("--Verify hidden action cut node --");
-		assertFalse(actBar.isActionsOnActionBarPresent(actBar.ELEMENT_CUT_NODE));
+		assert !(actBar.isActionsOnActionBarPresent(actBar.ELEMENT_CUT_NODE));
 		info("--Verify hidden action delete node --");
-		assertFalse(actBar.isActionsOnActionBarPresent(actBar.ELEMENT_DELETE_NODE));
+		assert !(actBar.isActionsOnActionBarPresent(actBar.ELEMENT_DELETE_NODE));
 		info("--Verify hidden action lock node --");
-		assertFalse(actBar.isActionsOnActionBarPresent(actBar.ELEMENT_LOCK_NODE));
+		assert !(actBar.isActionsOnActionBarPresent(actBar.ELEMENT_LOCK_NODE));
 		info("--Verify hidden action rename node --");
-		assertFalse(actBar.isActionsOnActionBarPresent(actBar.ELEMENT_RENAME_NODE));
+		assert !(actBar.isActionsOnActionBarPresent(actBar.ELEMENT_RENAME_NODE));
 		info("--Verify hidden action add symlink node --");
-		assertFalse(actBar.isActionsOnActionBarPresent(actBar.ELEMENT_ADD_SYMLINK_NODE));
+		assert !(actBar.isActionsOnActionBarPresent(actBar.ELEMENT_ADD_SYMLINK_NODE));
 		info("--Verify hidden action view information node --");
-		assertFalse(actBar.isActionsOnActionBarPresent(cMenu.ELEMENT_VIEW_INFORMATION));
+		assert !(actBar.isActionsOnActionBarPresent(cMenu.ELEMENT_VIEW_INFORMATION));
 		info("--Verify hidden action add to favorite --");
-		assertFalse(actBar.isActionsOnActionBarPresent(actBar.ELEMENT_ADD_TO_FAVORITE_NODE));
+		assert !(actBar.isActionsOnActionBarPresent(actBar.ELEMENT_ADD_TO_FAVORITE_NODE));
 		info("--Verify hidden action download --");
-		assertFalse(actBar.isActionsOnActionBarPresent(actBar.ELEMENT_DOWNLOAD_NODE));
+		assert !(actBar.isActionsOnActionBarPresent(actBar.ELEMENT_DOWNLOAD_NODE));
 		info("--Verify hidden action copy to url --");
-		assertFalse(actBar.isActionsOnActionBarPresent(actBar.ELEMENT_COPY_TO_URL_NODE));
+		assert !(actBar.isActionsOnActionBarPresent(actBar.ELEMENT_COPY_TO_URL_NODE));
 		info("--Verify hidden action view document --");
-		assertFalse(actBar.isActionsOnActionBarPresent(actBar.ELEMENT_VIEW_DOCUMENT_NODE));
+		assert !(actBar.isActionsOnActionBarPresent(actBar.ELEMENT_VIEW_DOCUMENT_NODE));
 
 		//Clear data
 		info("-- Clear data --");
@@ -683,8 +681,8 @@ public class ECMS_SE_FileManagementView_Actions_OtherActions extends PlatformBas
 
 		//From action bar, choose [Copy]
 		info("-- From action bar, choose [Copy] --");
-		waitForAndGetElement(ELEMENT_COPY_NODE);
-		click(ELEMENT_COPY_NODE);
+		waitForAndGetElement(actBar.ELEMENT_COPY_NODE_ICON);
+		click(actBar.ELEMENT_COPY_NODE_ICON);
 
 		//Choose target folder
 		info("-- Choose the target folder --");
@@ -694,8 +692,8 @@ public class ECMS_SE_FileManagementView_Actions_OtherActions extends PlatformBas
 
 		//Click on [Paste] from the action bar 
 		info("-- Click on [Paste] from the action bar  --");
-		waitForAndGetElement(ELEMENT_PASTE_NODE);
-		click(ELEMENT_PASTE_NODE);
+		waitForAndGetElement(ELEMENT_ECMS_PASTE_NODE);
+		click(ELEMENT_ECMS_PASTE_NODE);
 
 		//In the target folder, the parent and child nodes are shown
 		//Go to target folder
@@ -799,8 +797,8 @@ public class ECMS_SE_FileManagementView_Actions_OtherActions extends PlatformBas
 
 		//From action bar, choose [Cut]
 		info("-- From action bar, choose [Cut] --");
-		waitForAndGetElement(ELEMENT_CUT_NODE);
-		click(ELEMENT_CUT_NODE);
+		waitForAndGetElement(actBar.ELEMENT_CUT_NODE_ICON);
+		click(actBar.ELEMENT_CUT_NODE_ICON);
 
 		//Choose target folder
 		info("-- Choose the target folder --");
@@ -810,8 +808,8 @@ public class ECMS_SE_FileManagementView_Actions_OtherActions extends PlatformBas
 
 		//Click on [Paste] from the action bar 
 		info("-- Click on [Paste] from the action bar  --");
-		waitForAndGetElement(ELEMENT_PASTE_NODE);
-		click(ELEMENT_PASTE_NODE);
+		waitForAndGetElement(ELEMENT_ECMS_PASTE_NODE);
+		click(ELEMENT_ECMS_PASTE_NODE);
 
 		//In the target folder, the parent and child nodes are shown
 		//Go to target folder
@@ -1080,18 +1078,17 @@ public class ECMS_SE_FileManagementView_Actions_OtherActions extends PlatformBas
 		actBar.exportNode(true, true, false);
 
 		//Node is exported into your computer
-		assert checkFileExisted("sysview.zip");
+		assert checkFileExisted("TestOutput/"+"sysview.zip");
 
 		/*Clear data*/
 		//delete  node
-		click(ecms.ELEMENT_BACK_PREVIOUS_NODE);
+		actBar.goToNodeByAddressPath("/");
 		info("-- Delete folder node --");
 		actBar.actionsOnElement(folder, actionType.DELETE);
 		waitForElementNotPresent(ecms.ELEMENT_NODE_ADMIN_VIEW.replace("${nodeName}", folder));
 
 		//delete file on computer
 		deleteFile("TestOutput/"+"sysview.zip");
-		assert (!checkFileExisted("sysview.zip"));
 	}
 
 	/**
@@ -1135,7 +1132,7 @@ public class ECMS_SE_FileManagementView_Actions_OtherActions extends PlatformBas
 		actBar.exportNode(true, false, false);
 
 		//Node is exported into your computer
-		assert checkFileExisted("sysview.xml");
+		assert checkFileExisted("TestOutput/"+"sysview.xml");
 
 		/* Step 3: Open 'Import Node' pop-up */
 		/* Step 4: Browse an .xml file to import*/
@@ -1166,7 +1163,6 @@ public class ECMS_SE_FileManagementView_Actions_OtherActions extends PlatformBas
 
 		//delete file on computer
 		deleteFile("TestOutput/"+"sysview.xml");
-		assert (!checkFileExisted("sysview.xml"));
 	}
 
 	/**

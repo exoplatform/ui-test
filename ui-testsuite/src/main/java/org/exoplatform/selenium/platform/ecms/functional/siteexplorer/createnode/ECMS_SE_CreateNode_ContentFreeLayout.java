@@ -167,6 +167,7 @@ public class ECMS_SE_CreateNode_ContentFreeLayout extends PlatformBase{
 		
 		info("Add new [Free Layout Webcontent] with special characters in name field");
 		for (int i = 0 ; i < cTemplate.DATA_SPECIAL_CHARACTER_2.length; i++) { 
+			info("Special characters " + String.valueOf(i));
 			actBar.goToAddNewContent();
 			cTemplate.createNewWebContent(cTemplate.DATA_SPECIAL_CHARACTER_2[i], WEB_CONTENT_TITLE, "", "", "", "");
 			info("Verify showing message alerts: [Field Name contains invalid characters]");

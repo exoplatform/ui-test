@@ -106,7 +106,6 @@ public class ECMS_SE_CreateNode_PictureOnHeadLayout extends PlatformBase{
 	@Test
 	public void test02_AddPictureOnHeadLayoutContentInWebContentFolder(){
 		String WEB_CONTENT_TITLE = "ECMS_Picture_WebContent_02";
-		By wTitle = By.linkText(WEB_CONTENT_TITLE);
 		String path2Image = "TestData/Winter.jpg";
 		
 		info("Go to Site Explorer");
@@ -116,10 +115,10 @@ public class ECMS_SE_CreateNode_PictureOnHeadLayout extends PlatformBase{
 		info("Add new [Illustrated Webcontent]");
 		actBar.goToAddNewContent();
 		cTemplate.createNewIllustratedWebContent(WEB_CONTENT_TITLE, WEB_CONTENT_TITLE, path2Image, "", "", "", "");
-		waitForAndGetElement(wTitle);
+		waitForAndGetElement(By.xpath(cMenu.ELEMENT_FILE_TITLE.replace("${titleOfFile}", WEB_CONTENT_TITLE)));	
 
 		info("Restore data");
-		cMenu.deleteDocument(wTitle);		
+		cMenu.deleteDocument(By.xpath(cMenu.ELEMENT_FILE_TITLE.replace("${titleOfFile}", WEB_CONTENT_TITLE)));		
 	}
 	
 

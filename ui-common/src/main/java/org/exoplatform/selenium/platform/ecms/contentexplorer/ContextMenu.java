@@ -187,9 +187,16 @@ public class ContextMenu extends EcmsBase{
 					click(By.xpath("//*[@data-original-title = 'File Explorer']"));
 			}
 			rightClickOnElement(locator);
-			if (waitForAndGetElement(ELEMENT_MENU_DELETE, 10000, 0)!=null) 
+			if(isElementPresent("//*[@id='ECMContextMenu']//*[@class='uiIconEcmsDelete']")){
+				waitForAndGetElement("//*[@id='ECMContextMenu']//*[@class='uiIconEcmsDelete']").click();
+				//waitForTextPresent("Delete");
+				//click(By.linkText("OK"));
+				dialog.deleteInDialog();
+				break;
+			}
+			else if (waitForAndGetElement(ELEMENT_MENU_DELETE, 10000, 0)!=null) 
 			{	
-				click(ELEMENT_MENU_DELETE);
+				waitForAndGetElement(ELEMENT_MENU_DELETE).click();
 				//waitForTextPresent("Delete");
 				//click(By.linkText("OK"));
 				dialog.deleteInDialog();

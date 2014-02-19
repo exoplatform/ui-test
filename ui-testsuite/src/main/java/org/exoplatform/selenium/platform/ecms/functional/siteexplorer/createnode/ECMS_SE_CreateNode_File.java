@@ -199,7 +199,10 @@ public class ECMS_SE_CreateNode_File extends PlatformBase{
 		//with name field is blank
 		click(cTemplate.ELEMENT_NEWFILE_LINK);
 		type(cTemplate.ELEMENT_NEWFILE_NAME_TEXTBOX, "", false);
-		inputDataToFrame(cTemplate.ELEMENT_NEWFILE_CONTENT_FRAME, FILE_TITLE, true);
+		if(isElementPresent(cTemplate.ELEMENT_NEWFILE_CONTENT_FRAME))
+			inputDataToFrame(cTemplate.ELEMENT_NEWFILE_CONTENT_FRAME, FILE_TITLE, true);
+		else
+			inputDataToFrame(cTemplate.ELEMENT_NEWFILE_CONTENT_FRAME_41, FILE_TITLE, true);
 		switchToParentWindow();
 		type(cTemplate.ELEMENT_NEWFILE_TITLE_TEXTBOX, FILE_TITLE, false);
 		button.saveAndClose();
@@ -207,7 +210,10 @@ public class ECMS_SE_CreateNode_File extends PlatformBase{
 
 		//with content is blank
 		type(cTemplate.ELEMENT_NEWFILE_NAME_TEXTBOX, FILE_TITLE, false);
-		inputDataToFrame(cTemplate.ELEMENT_NEWFILE_CONTENT_FRAME, "", true);
+		if(isElementPresent(cTemplate.ELEMENT_NEWFILE_CONTENT_FRAME))
+			inputDataToFrame(cTemplate.ELEMENT_NEWFILE_CONTENT_FRAME, "", true);
+		else
+			inputDataToFrame(cTemplate.ELEMENT_NEWFILE_CONTENT_FRAME_41, "", true);
 		switchToParentWindow();
 		type(cTemplate.ELEMENT_NEWFILE_TITLE_TEXTBOX, FILE_TITLE, true);
 		button.saveAndClose();

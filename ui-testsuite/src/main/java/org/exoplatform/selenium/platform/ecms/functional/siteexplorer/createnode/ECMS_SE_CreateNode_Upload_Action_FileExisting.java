@@ -97,7 +97,7 @@ public class ECMS_SE_CreateNode_Upload_Action_FileExisting extends PlatformBase{
 	/**
 	 * Qmetry ID: 74417
 	 * Keep an existing file when uploading in Document
-	 * 
+	 * Error: Refer: https://jira.exoplatform.org/browse/ECMS-5117
 	 */
 	@Test
 	public void test02_KeepAnExistingFileWhenUploadingInDocument(){
@@ -183,7 +183,7 @@ public class ECMS_SE_CreateNode_Upload_Action_FileExisting extends PlatformBase{
 	/**
 	 * Qmetry ID: 74449
 	 * Keep existing files when uploading in Site Explorer
-	 * 
+	 * Error: Refer: https://jira.exoplatform.org/browse/ECMS-5117
 	 */
 	@Test
 	public void test04_KeepExistingFilesWhenUploadingInSiteExplorer(){

@@ -248,6 +248,7 @@ public class ECMS_SE_Info_Permission  extends PlatformBase {
 		/*Step 1: Select node to view permission of node*/
 		//Create a document [Detail]
 		mDrive.addView2Drive("Admin", "Managed Sites");
+		navToolBar.goToSiteExplorer();
 		actBar.goToViewMode("Admin");
 		actBar.addItem2ActionBar("addDocument", actBar.ELEMENT_NEW_CONTENT_LINK, "Admin", "Admin");
 		//Add permission button to action bar if it is not on action bar
@@ -623,7 +624,7 @@ public class ECMS_SE_Info_Permission  extends PlatformBase {
 	@Test
 	public void test11_AddEditDeletePermissionOfLockedNodeByUserIsNotLocker(){	
 		/*Declare variable*/
-		String folder = "folder11";
+		String folder = "folder67277";
 		By bFolder = By.xpath(cMenu.ELEMENT_FILE_TITLE.replace("${titleOfFile}", folder));
 		By bFolderLocked = By.linkText(folder);
 		String user = "any";
@@ -638,21 +639,16 @@ public class ECMS_SE_Info_Permission  extends PlatformBase {
 
 		info("Check locked node");
 		assert cMenu.isLockedNode(bFolderLocked);
-		driver.close();
 
 		/*Step 3: Open 'Permission Management' pop-up*/
 		//Login by user is not locker
-		initSeleniumTest();
-		driver.get(baseUrl);
-		magAcc = new ManageAccount(driver);
-		actBar= new ActionBar(driver);
-		navToolBar = new NavigationToolbar(driver);
-		ePerm = new EcmsPermission(driver);
-		btn = new Button(driver);
-		cMenu = new ContextMenu(driver);
-
-		info("Login ECMS with " + DATA_USER2);
-		magAcc.signIn(DATA_USER2, "gtn");
+		loginWithAnotherAccOnThesameBrowser(DATA_USER2, "gtn");
+		magAcc = new ManageAccount(newDriver);
+		actBar= new ActionBar(newDriver);
+		navToolBar = new NavigationToolbar(newDriver);
+		ePerm = new EcmsPermission(newDriver);
+		btn = new Button(newDriver);
+		cMenu = new ContextMenu(newDriver);
 		navToolBar.goToSiteExplorer();
 
 		//Click on 'View Permissions' icon 
@@ -670,6 +666,7 @@ public class ECMS_SE_Info_Permission  extends PlatformBase {
 		navToolBar.goToSiteExplorer();
 		click(siteExp.ELEMENT_SIDEBAR_FILE_EXPLORER);
 		cMenu.deleteDocument(bFolderLocked);
+		newDriver.close();
 	}
 
 	/**
@@ -689,6 +686,7 @@ public class ECMS_SE_Info_Permission  extends PlatformBase {
 		/*Step 1: Select node to view permission of node*/
 		//Create node (folder, document) or upload file
 		mDrive.addView2Drive("Admin", "Managed Sites");
+		navToolBar.goToSiteExplorer();
 		actBar.goToViewMode("Admin");
 		actBar.addItem2ActionBar("addDocument", actBar.ELEMENT_NEW_CONTENT_LINK, "Admin", "Admin");
 		//Add permission button to action bar if it is not on action bar

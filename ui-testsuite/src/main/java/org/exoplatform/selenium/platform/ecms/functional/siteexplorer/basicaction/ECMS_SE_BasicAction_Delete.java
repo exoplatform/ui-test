@@ -278,7 +278,8 @@ public class ECMS_SE_BasicAction_Delete extends PlatformBase {
 		doubleClickOnElement(CONTENT_FOLDER);
 		actBar.goToNodePermissionManagement();
 
-		ecms.selectMembership("Platform/Content Management", "*", "Select Membership");
+		ecmsPer.removeDefaultPermissionOfNode();
+		ecms.selectMembership("Organization/Employees", "member", "Select Membership");
 		ecmsPer.setPermissionForNode(true, true, false);
 
 		info("Save then close");
@@ -450,6 +451,8 @@ public class ECMS_SE_BasicAction_Delete extends PlatformBase {
 		actBar.createRelation(webContentName_0, webContentName_1);
 
 		info("-- Delete a document --");
+		navToolBar.goToSiteExplorer();
+		actBar.chooseDrive(ecms.ELEMENT_COLLABORATION_DRIVE);
 		WebElement file1 = waitForAndGetElement(siteExp.ELEMENT_DOCUMENT_TITLE.replace("${title}", webContentName_0));
 		WebElement file2 = waitForAndGetElement(siteExp.ELEMENT_DOCUMENT_TITLE.replace("${title}", webContentName_1));
 		Actions actions = new Actions(driver);
@@ -494,8 +497,8 @@ public class ECMS_SE_BasicAction_Delete extends PlatformBase {
 		actBar.addItem2ActionBar("manageRelations", actBar.ELEMENT_ADD_RELATION_LINK);
 		actBar.chooseDrive(ecms.ELEMENT_COLLABORATION_DRIVE);
 		actBar.createRelation(data1, data2);
-		click(siteExp.ELEMENT_SIDEBAR_COLLABORATION);
-		Utils.pause(1000);
+		navToolBar.goToSiteExplorer();
+		actBar.chooseDrive(ecms.ELEMENT_COLLABORATION_DRIVE);
 		info("-- Delete multiple items with reference --");
 		WebElement folder = waitForAndGetElement(siteExp.ELEMENT_DOCUMENT_TITLE.replace("${title}", folderName));
 		WebElement file1 = waitForAndGetElement(siteExp.ELEMENT_DOCUMENT_TITLE.replace("${title}", data1));
@@ -540,8 +543,8 @@ public class ECMS_SE_BasicAction_Delete extends PlatformBase {
 		//actBar.addRelationToActionBar();
 		//actBar.addItem2ActionBar("manageRelations", actBar.ELEMENT_ADD_RELATION_LINK);
 		actBar.createRelation(data1, data2);
-		click(siteExp.ELEMENT_SIDEBAR_COLLABORATION);
-		Utils.pause(1000);
+		navToolBar.goToSiteExplorer();
+		actBar.chooseDrive(ecms.ELEMENT_COLLABORATION_DRIVE);
 
 		info("-- Delete files with reference --");
 		WebElement file1 = waitForAndGetElement(siteExp.ELEMENT_DOCUMENT_TITLE.replace("${title}", data1));
@@ -593,9 +596,8 @@ public class ECMS_SE_BasicAction_Delete extends PlatformBase {
 		//actBar.addRelationToActionBar();
 		//actBar.addItem2ActionBar("manageRelations", actBar.ELEMENT_ADD_RELATION_LINK);
 		actBar.createRelation(data1, data2);
-		click(siteExp.ELEMENT_SIDEBAR_COLLABORATION);
-		Utils.pause(1000);
-
+		navToolBar.goToSiteExplorer();
+		actBar.chooseDrive(ecms.ELEMENT_COLLABORATION_DRIVE);
 		info("-- Delete multiple files and folder with relation --");
 
 		WebElement folder = waitForAndGetElement(siteExp.ELEMENT_DOCUMENT_TITLE.replace("${title}", folderName));

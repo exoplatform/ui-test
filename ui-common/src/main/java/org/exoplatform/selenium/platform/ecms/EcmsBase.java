@@ -308,7 +308,7 @@ public class EcmsBase extends ManageAccount {
 	public final String ELEMENT_NODE_ADMIN_VIEW = "//*[contains(@class, 'columnText')]//*[contains(text(), '${nodeName}')]";
 	public final String ELEMENT_NODE_ICON_ARROW_RIGHT = "//*[contains(text(), '${nodeName}')]/../..//*[contains(@class, 'columnArrow')]";
 	public final String ELEMENT_NODE_NAME_CONSECUTIVE = "//*[@class='uiListGrid']/div[contains(@mousedown, '${node1}')]/..//*[@class='nodeName' and contains(text(), '${node2}')]";
-	public final String ELEMENT_FILE_INFORMATION = ELEMENT_NODE_ADMIN_VIEW.replace("${nodeName}", "${node}") + "/../*[contains(@class, 'fileInfoBottom')]";
+	public final String ELEMENT_FILE_INFORMATION = ELEMENT_NODE_ADMIN_VIEW.replace("${nodeName}", "${node}") + "/../..//*[contains(@class, 'fileInfoBottom')]";
 	public final String ELEMENT_FILE_CLONE_CHECKBOX = ELEMENT_HREF_NODE_LINK.replace("${nodeName}", "${node}") + "/ancestor::div[contains(@class, 'rowView')]//*[@name='checkbox']";	
 	public final String ELEMENT_NODE_ROW_VIEW = "//*[@data-original-title='${nodeName}']/ancestor::div[contains(@class, 'rowView')]"; //HaVTT added
 	public final By ELEMENT_VIEW_CHECKBOX_ALL = By.id("UIFileViewCheckBox"); //HaVTT added

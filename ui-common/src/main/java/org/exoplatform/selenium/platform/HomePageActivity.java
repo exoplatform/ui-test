@@ -247,10 +247,19 @@ public class HomePageActivity extends PlatformBase{
 				}else {
 					int contentIndex = 2;
 					for (int i = 0; i < cont.length; i ++){
-						if(this.plfVersion.equalsIgnoreCase("4.0"))
-							assert getText(ELEMENT_CONTENT_SUMMARY_WEBCONTENT.replace("@{fileName}", name).replace("${index}", String.valueOf(contentIndex))).equalsIgnoreCase(cont[i]);
+						if(this.plfVersion.equalsIgnoreCase("4.0")){
+							if(isElementPresent(ELEMENT_CONTENT_SUMMARY_WEBCONTENT.replace("@{fileName}", name).replace("${index}", String.valueOf(contentIndex))))
+								assert getText(ELEMENT_CONTENT_SUMMARY_WEBCONTENT.replace("@{fileName}", name).replace("${index}", String.valueOf(contentIndex))).equalsIgnoreCase(cont[i]);
+							else
+								assert getText(ELEMENT_CONTENT_SUMMARY_WEBCONTENT.replace("@{fileName}", name).replace("${index}", String.valueOf(contentIndex-1))).equalsIgnoreCase(cont[i]);
+						}
 						else //if(waitForAndGetElement(eLEMENT_CONTENT_SUMMARY_WEBCONTENT_41.replace("@{fileName}", name).replace("${index}", String.valueOf(contentIndex)),5000,0,2)!=null)
-							assert getText(eLEMENT_CONTENT_SUMMARY_WEBCONTENT_41.replace("@{fileName}", name).replace("${index}", String.valueOf(contentIndex))).equalsIgnoreCase(cont[i]);
+						{
+							if(isElementPresent(eLEMENT_CONTENT_SUMMARY_WEBCONTENT_41.replace("@{fileName}", name).replace("${index}", String.valueOf(contentIndex))))
+								assert getText(eLEMENT_CONTENT_SUMMARY_WEBCONTENT_41.replace("@{fileName}", name).replace("${index}", String.valueOf(contentIndex))).equalsIgnoreCase(cont[i]);
+							else
+								assert getText(eLEMENT_CONTENT_SUMMARY_WEBCONTENT_41.replace("@{fileName}", name).replace("${index}", String.valueOf(contentIndex-1))).equalsIgnoreCase(cont[i]);
+						}
 						contentIndex++;
 					}
 				}

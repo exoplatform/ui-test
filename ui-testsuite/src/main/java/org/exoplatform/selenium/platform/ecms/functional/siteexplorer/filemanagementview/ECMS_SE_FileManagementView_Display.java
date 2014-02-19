@@ -322,13 +322,13 @@ public class ECMS_SE_FileManagementView_Display extends PlatformBase{
 	 */
 	@Test
 	public void test09_ClickMoreToSeeChildrenFolder(){
-		String Parent_Folder_Name="Parent_Folder_Case_74583";
-		String Child_Folder_1="Child_Folder_1";
-		String Child_Folder_2="Child_Folder_2";
-		String Child_Folder_3="Child_Folder_3";
-		String Child_Folder_4="Child_Folder_4";
-		String Child_Folder_5="Child_Folder_5";
-		String Child_Folder_6="Child_Folder_6";
+		String Parent_Folder_Name="parent74583";
+		String Child_Folder_1="child745831";
+		String Child_Folder_2="child745832";
+		String Child_Folder_3="child745833";
+		String Child_Folder_4="child745834";
+		String Child_Folder_5="child745835";
+		String Child_Folder_6="child745836";
 
 		navToolBar.goToPersonalDocuments();	
 
@@ -353,8 +353,9 @@ public class ECMS_SE_FileManagementView_Display extends PlatformBase{
 		contemp.createNewFolder(Child_Folder_6, folderType.None, false);
 
 		action.chooseDrive(ecmBase.ELEMENT_PERSONAL_DRIVE);
+		action.goToViewMode("Admin");
 		//rightClickOnElement(By.xpath(ELEMENT_PERSONAL_DOCUMENT_ARROW_RIGHT.replace("${content}", Parent_Folder_Name)));
-		rightClickOnElement(ecmBase.ELEMENT_ARROW_RIGHT.replace("${nodeName}", Parent_Folder_Name));
+		click(ecmBase.ELEMENT_ARROW_RIGHT.replace("${nodeName}", Parent_Folder_Name));
 		waitForAndGetElement(By.xpath(ecmBase.ELEMENT_PERSONAL_DOCUMENT_NODE.replace("${content}", Child_Folder_1)));
 		waitForAndGetElement(By.xpath(ecmBase.ELEMENT_PERSONAL_DOCUMENT_NODE.replace("${content}", Child_Folder_2)));
 		waitForAndGetElement(By.xpath(ecmBase.ELEMENT_PERSONAL_DOCUMENT_NODE.replace("${content}", Child_Folder_3)));

@@ -85,7 +85,7 @@ public class ActionBar extends EcmsBase{
 
 	//Export Form
 	public By ELEMENT_DOC_VIEW = By.xpath("//form[@id='UIExportNode']//input[@name='format' and @value='docview']");
-	public By ELEMENT_ZIP = By.name("zip");
+	public By ELEMENT_ZIP = By.id("zip");
 	public By ELEMENT_EXPORT_VERSION = By.xpath("//button[text()='Export Version History']");
 	public By ELEMENT_EXPORT = By.xpath("//button[text()='Export']");
 	public String ELEMENT_IMPORT_FILE_LABEL = "//div[@class='fileNameLabel' and contains(text(),'${fileName}')]";
@@ -383,7 +383,7 @@ public class ActionBar extends EcmsBase{
 
 		if (zip)
 		{
-			click(ELEMENT_ZIP,2);
+			check(ELEMENT_ZIP,2);
 		}
 
 		if (exportVersionHistory)
@@ -620,12 +620,16 @@ public class ActionBar extends EcmsBase{
 			info("-- Add Symlink tab is already displayed --");
 			if(isElementPresent(ELEMENT_ACTION_BAR_ADD_SYMLINK))
 				click(ELEMENT_ACTION_BAR_ADD_SYMLINK);
+			else if (isElementPresent(ELEMENT_ADD_SYMLINK_LIST_VIEW))
+				click(ELEMENT_ADD_SYMLINK_LIST_VIEW);
 			else
 				click(ELEMENT_ADD_SYMLINK_NODE);
 		}else{
 			click(ELEMENT_MORE_LINK_WITHOUT_BLOCK);
 			if(isElementPresent(ELEMENT_ACTION_BAR_ADD_SYMLINK))
 				click(ELEMENT_ACTION_BAR_ADD_SYMLINK);
+			else if (isElementPresent(ELEMENT_ADD_SYMLINK_LIST_VIEW))
+				click(ELEMENT_ADD_SYMLINK_LIST_VIEW);
 			else
 				click(ELEMENT_ADD_SYMLINK_NODE);
 		}
@@ -1032,9 +1036,9 @@ public class ActionBar extends EcmsBase{
 		click(By.xpath(ELEMENT_EDIT_COMMENT_ICON.replace("${comment}", oldComment)));
 		waitForAndGetElement(ELEMENT_ADD_COMMENT_POPUP);
 		if(this.plfVersion.equalsIgnoreCase("4.1"))
-			inputDataToFrame(ELEMENT_ADD_COMMENT_FRAME_41, newComment, false);
+			inputDataToFrame(ELEMENT_ADD_COMMENT_FRAME_41, newComment, true);
 		else if(this.plfVersion.equalsIgnoreCase("4.0"))
-			inputDataToFrame(ELEMENT_ADD_COMMENT_FRAME, newComment, false);
+			inputDataToFrame(ELEMENT_ADD_COMMENT_FRAME, newComment, true);
 		switchToParentWindow();
 		button.save();
 		waitForElementNotPresent(ELEMENT_ADD_COMMENT_POPUP);

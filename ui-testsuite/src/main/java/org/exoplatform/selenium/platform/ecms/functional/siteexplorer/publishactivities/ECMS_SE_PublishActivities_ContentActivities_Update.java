@@ -115,7 +115,7 @@ public class ECMS_SE_PublishActivities_ContentActivities_Update extends Platform
 	@Test
 	public void test02_UpdateContentActivityAfterEditSummaryOfContent(){
 		//Declare variable
-		String node = "node02";
+		String node = "node76963";
 		By bNode = By.xpath(siteExp.ELEMENT_SE_NODE.replace("{$node}", node));
 		String summary = "Summary of web content";
 		String comment = "Summary has been updated to:";
@@ -145,7 +145,7 @@ public class ECMS_SE_PublishActivities_ContentActivities_Update extends Platform
 
 		//A comment is added: Summary has been updated to: $value.
 		info("-- Verify comment --");
-		assertEquals(sumcomment,driver.findElement(By.xpath(activity.ELEMENT_ACTIVITY_COMMENT_CONTENT_2.replace("${title}", node).replace("${comment}", comment))).getText());
+		assert (driver.findElement(By.xpath(activity.ELEMENT_ACTIVITY_COMMENT_CONTENT_2.replace("${title}", node).replace("${comment}", comment))).getText().contains(sumcomment));
 
 		/*Clear data*/
 		info("clear data");

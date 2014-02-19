@@ -78,18 +78,13 @@ public class ECMS_SE_CreateNode_Upload_Action_Other extends PlatformBase{
 		cTemplate.createNewFolder(DOCUMENT_FOLDER_TITLE, folderType.Document);	
 		cMenu.contextMenuAction(By.linkText(DOCUMENT_FOLDER_TITLE), cMenu.ELEMENT_CONTEXT_MENU_LOCK);
 		assert cMenu.isLockedNode(By.linkText(DOCUMENT_FOLDER_TITLE)): "Failed to lock the node..." + DOCUMENT_FOLDER_TITLE;
-		driver.close();
 
 		info("Login by user is not locker");
-		initSeleniumTest();
-		driver.get(baseUrl);
-		magAcc = new ManageAccount(driver);
-		navToolBar = new NavigationToolbar(driver);
-		ecms = new EcmsBase(driver);
-		cMenu = new ContextMenu(driver);
-
-		info("Login to intranet with user... Mary");
-		magAcc.signIn("mary", DATA_PASS);
+		loginWithAnotherAccOnThesameBrowser("mary", DATA_PASS);
+		magAcc = new ManageAccount(newDriver);
+		navToolBar = new NavigationToolbar(newDriver);
+		ecms = new EcmsBase(newDriver);
+		cMenu = new ContextMenu(newDriver);
 
 		info("Checking... [Mary] can not see [Upload] icon on action bar");
 		navToolBar.goToSiteExplorer();
@@ -102,6 +97,8 @@ public class ECMS_SE_CreateNode_Upload_Action_Other extends PlatformBase{
 		//reset data
 		navToolBar.goToSiteExplorer();
 		cMenu.deleteDocument(By.linkText(DOCUMENT_FOLDER_TITLE));
+		newDriver.manage().deleteAllCookies();
+		newDriver.quit();
 	}
 
 	/**

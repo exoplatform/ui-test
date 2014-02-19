@@ -469,8 +469,8 @@ public class ECMS_SE_PublishActivities_FilesActivities  extends PlatformBase {
 	@Test
 	public void test10_RemoveTheFileActivityAfterDeletingAFileInSpaceDocument(){
 		//Declare variable
-		String file = "KS_Wiki_Attachment_pdffile.pdf";
-		By elementfile = By.xpath(siteExp.ELEMENT_SE_NODE.replace("{$node}", file));
+		String file = "landscape08.jpg";
+		String elementfile = "//*[contains(@data-original-title,'"+file+"')]";
 		String spacename = "Space10";
 		String spacedesc = "Description Of Space10";
 				
@@ -492,7 +492,7 @@ public class ECMS_SE_PublishActivities_FilesActivities  extends PlatformBase {
 				
 		//- The File activity is displayed in the activity stream
 		info("-- A File activity is added to the activity stream --");
-		activity.checkInforAfterAddingDocument(file, "", "File", "1 MB", "", "", "", "");
+		activity.checkInforAfterAddingDocument(file, "", "File", "5 KB", "", "", "", "");
 				
 		/*Step 2: Delete File*/
 		//Delete file from space
@@ -500,7 +500,7 @@ public class ECMS_SE_PublishActivities_FilesActivities  extends PlatformBase {
 		magMember.doAction("Edit", spacename);
 		waitForAndGetElement(magMember.ELEMENT_DOCUMENTS_TAB);
 		click(magMember.ELEMENT_DOCUMENTS_TAB);
-		cMenu.deleteData(elementfile);
+		cMenu.deleteData(By.xpath(elementfile));
 		
 		//Back to the Home page
 		info("-- Back to the Home page --");

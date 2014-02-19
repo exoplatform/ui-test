@@ -423,20 +423,8 @@ public class ECMS_SE_BasicAction_AddSymlink extends PlatformBase{
 
 		info("Add symlink with name contains special characters");
 		ecms.goToNode(ELEMENT_CONTENT_FOLDER);
-		actBar.goToAddSymlinkTab();
-		click(actBar.ELEMENT_ADD_ITEM);
-		actBar.selectHomePathForCategoryTree("sites/intranet/documents");
-		for(int i = 0; i < cTemplate.DATA_SPECIAL_CHARACTER.length; i++){
-			info("Input symlink name contains character: " + cTemplate.DATA_SPECIAL_CHARACTER[i]);
-			type(ecms.ELEMENT_SYMLINK_NAME, cTemplate.DATA_SPECIAL_CHARACTER[i], true);
-			button.save();
-
-			//check alert
-			magAlert.verifyAlertMessage("Please enter the symlink name.");
-			info("cannot add symlink with name contains qspecial characters");
-		}
-		button.cancel();
-
+		actBar.addSymlink("collaboration", "sites/intranet/documents", cTemplate.DATA_SPECIAL_CHARACTER_STRING);
+		waitForAndGetElement(ecms.ELEMENT_SYMLINK.replace("${symlinkTitle}", cTemplate.DATA_SPECIAL_CHARACTER_STRING));
 		//delete data
 		cMenu.deleteDocument(ELEMENT_CONTENT_FOLDER);
 	}
