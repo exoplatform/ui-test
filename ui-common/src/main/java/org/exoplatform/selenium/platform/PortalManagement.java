@@ -58,7 +58,7 @@ public class PortalManagement extends PlatformBase {
 		}
 		if (template.length > 0){
 			click(ELEMENT_PORTAL_TEMPLATE_TAB);
-			WebElement temp = getElementFromTextByJquery(template[0]);
+			WebElement temp = waitForAndGetElement(ELEMENT_PORTAL_TEMPLATE_NAME.replace("${portalName}", template[0]));
 			temp.click();
 //			click(By.linkText(template[0]));
 		}

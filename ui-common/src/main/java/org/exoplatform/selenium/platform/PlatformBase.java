@@ -363,6 +363,7 @@ public class PlatformBase extends TestBase {
 
 	//Portal Template TAB
 	public final By ELEMENT_PORTAL_TEMPLATE_TAB= By.linkText("Portal Templates");
+	public final String ELEMENT_PORTAL_TEMPLATE_NAME = "//a[contains(.,'${portalName}')]";
 
 	////
 	public final String ELEMENT_PAGINATOR_PAGE_LINK = "//a[contains(@class, 'Number') and text()='${number}']";
@@ -587,6 +588,7 @@ public class PlatformBase extends TestBase {
 
 	public final By ELEMENT_PORTLET_ACCESS_PERMISSION_TAB = By.xpath("//*[@id='tab-UIPortletForm']//a[@data-target='#PortletPermission-tab']");
 	public final By ELEMENT_PORTLET_ADD_PERMISSION_BUTTON = By.xpath("//*[@id='PortletPermissionSelector']//a[contains(text(),'Add Permission')]");
+	public final By ELEMENT_PORTLET_ADD_PERMISSION_BUTTON_1 = By.xpath("//*[@id='PortletPermission']//a[contains(text(),'Add Permission')]");
 	public final By ELEMENT_PORTLET_LIST_PERMISSION_WINDOW = By.xpath("//*[@id='PortletPermissionSelectorPopup']//span[contains(text(),'ListPermissionSelector')]");
 	public String ELEMENT_PORTLET_PERMISSION_GROUP = "//div[@class='uiGroupMembershipSelector']//a[@title='${groupName}']";
 	public String ELEMENT_PORTLET_PERMISSION_MEMBERSHIP = "//*[@class='uiBox noRounded childGoup']//a[@title='${membership}']";

@@ -189,7 +189,7 @@ public class PageManagement extends PlatformBase {
 		waitForTextPresent("Empty Layout");
 		click(ELEMENT_PAGE_EDITOR_NEXT_STEP);
 
-		if (categoryTitle != null){
+		if (categoryTitle != null && categoryTitle!=""){
 			String category = ELEMENT_EDIT_PAGE_CATEGORY_MENU.replace("${categoryLabel}", categoryTitle);
 			click(category);
 		}

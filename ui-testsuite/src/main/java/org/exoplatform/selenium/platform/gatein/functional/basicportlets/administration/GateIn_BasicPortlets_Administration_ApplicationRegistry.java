@@ -528,7 +528,9 @@ public class GateIn_BasicPortlets_Administration_ApplicationRegistry extends Das
 		//- Select category above from left pane and click Delete
 		//- Click OK to confirm
 		//The category is removed from left pane
-		loginWithAnotherAccOnThesameBrowser("root", "gtn");
+		loginWithAnotherAccOnThesameBrowser("root", "gtngtn");
+		navTool = new NavigationToolbar(newDriver);
+		magApp = new ManageApplications(newDriver);
 		navTool.goToApplicationRegistry();
 		magApp.deleteCategoryAtManageApplications(categoryName, true);
 		
@@ -540,6 +542,7 @@ public class GateIn_BasicPortlets_Administration_ApplicationRegistry extends Das
 		elemDisplayName.sendKeys(newDisplayName);
 		elemSave.click();
 		Utils.captureScreen(imageFileName);
+		newDriver.close();
 	}
 
 	/** Add a remote gadget with URL existing

@@ -433,7 +433,7 @@ public class NavigationToolbar extends PlatformBase {
 	public void goToHomePage(){
 		info("-- Go to home page --");
 		click(ELEMENT_HOME_PAGE);
-		Utils.pause(1000);
+		Utils.pause(7000);
 		driver.navigate().refresh();
 		waitForAndGetElement(ELEMENT_REFRESH);
 	}

@@ -546,8 +546,11 @@ public class PageEditor extends PlatformBase {
 		Utils.pause(2000);
 		click(ELEMENT_PORTLET_ACCESS_PERMISSION_TAB);
 		Utils.pause(2000);
-		click(ELEMENT_PORTLET_ADD_PERMISSION_BUTTON);
-		waitForAndGetElement(ELEMENT_PORTLET_LIST_PERMISSION_WINDOW);
+		if(isElementPresent(ELEMENT_PORTLET_ADD_PERMISSION_BUTTON))
+			click(ELEMENT_PORTLET_ADD_PERMISSION_BUTTON);
+		else
+			click(ELEMENT_PORTLET_ADD_PERMISSION_BUTTON_1);
+		Utils.pause(1000);
 		click(ELEMENT_PORTLET_PERMISSION_GROUP.replace("${groupName}", groupName));
 		click(ELEMENT_PORTLET_PERMISSION_MEMBERSHIP.replace("${membership}", membership));
 		Utils.pause(1000);

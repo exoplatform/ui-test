@@ -145,7 +145,7 @@ public class ECMS_SE_PublishActivities_ContentActivities_Update extends Platform
 
 		//A comment is added: Summary has been updated to: $value.
 		info("-- Verify comment --");
-		assert (driver.findElement(By.xpath(activity.ELEMENT_ACTIVITY_COMMENT_CONTENT_2.replace("${title}", node).replace("${comment}", comment))).getText().contains(sumcomment));
+		assert (sumcomment.contains(waitForAndGetElement(By.xpath(activity.ELEMENT_ACTIVITY_COMMENT_CONTENT_2.replace("${title}", node).replace("${comment}", comment))).getText()));
 
 		/*Clear data*/
 		info("clear data");

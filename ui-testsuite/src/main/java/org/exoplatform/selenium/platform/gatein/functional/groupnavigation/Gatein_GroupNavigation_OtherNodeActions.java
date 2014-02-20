@@ -582,7 +582,6 @@ public class Gatein_GroupNavigation_OtherNodeActions extends GroupNavigation{
 		String nodeLinkToEdit = ELEMENT_NODE_LINK.replace("${nodeLabel}", pageName);
 		String parentLinkToEdit = ELEMENT_NODE_LINK.replace("${nodeLabel}", nodeNameHome);
 		By elementLayout1 = By.xpath("//*[@class='UIRowContainer']/div[1]//div[@class='UIRowContainer EmptyContainer']");
-		By elementLayout2 = By.xpath("//*[@class='UIRowContainer']/div[2]//div[@class='UIRowContainer EmptyContainer']");
 
 		/* Step 1: Add page */
 		//Create new page by wizard
@@ -601,7 +600,6 @@ public class Gatein_GroupNavigation_OtherNodeActions extends GroupNavigation{
 		pageEditor.addNewContainer(categoryContainer, typeContainer1);
 		click(ELEMENT_SWITCH_VIEW_MODE);
 		waitForAndGetElement(elementLayout1);
-		waitForElementNotPresent(elementLayout2);
 		pageEditor.finishEditLayout();
 		
 		/* Step 2: Make change for page's container layout */
@@ -618,15 +616,13 @@ public class Gatein_GroupNavigation_OtherNodeActions extends GroupNavigation{
 		info("Edit node's page: " + pageName);
 		rightClickOnElement(nodeLinkToEdit);
 		click(ELEMENT_NAVIGATION_EDIT_PAGE_NODE);
-		pageEditor.addNewContainer(categoryContainer, typeContainer1);
-		click(ELEMENT_SWITCH_VIEW_MODE);
+		pageEditor.removeContainer(elementLayout1, ELEMENT_DELETE_CONTAINER_ICON);
 		
 		/* Step 3: Check Save & Finish */
 		//- Click Finish icon on Page editor
 		//- Page editor form is closed
 		//- Changes on container layout above was saved
-		waitForAndGetElement(elementLayout1);
-		waitForAndGetElement(elementLayout2);
+		waitForElementNotPresent(elementLayout1);
 		pageEditor.finishEditLayout();
 		button.save();
 		

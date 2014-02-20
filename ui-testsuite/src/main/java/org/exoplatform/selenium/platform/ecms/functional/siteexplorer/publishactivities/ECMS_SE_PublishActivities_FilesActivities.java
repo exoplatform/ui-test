@@ -429,7 +429,7 @@ public class ECMS_SE_PublishActivities_FilesActivities  extends PlatformBase {
 		/*Step 1: Create file activity*/
 		//Add new space
 		magMember.goToMySpacePage();
-		magMember.addNewSpace(spacename, spacedesc);
+		magMember.addNewSpace(spacename, spacedesc,60000);
 				
 		//Open Documents in this space
 		waitForAndGetElement(magMember.ELEMENT_DOCUMENTS_TAB);
@@ -565,7 +565,7 @@ public class ECMS_SE_PublishActivities_FilesActivities  extends PlatformBase {
 		/*Step 1: Create file activity*/
 		//Add new space
 		magMember.goToMySpacePage();
-		magMember.addNewSpace(spacename, spacedesc);
+		magMember.addNewSpace(spacename, spacedesc,60000);
 				
 		//Open Documents in this space
 		waitForAndGetElement(magMember.ELEMENT_DOCUMENTS_TAB);
