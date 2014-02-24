@@ -509,6 +509,7 @@ public class PlatformBase extends TestBase {
 
 	//Container setting
 	public final String ELEMENT_DRAG_CONTAINER = "//*[@title='Hold this area to drag this container']";
+	public final String ELEMENT_DRAG_CONTAINER_PLF41 = "//*[@data-original-title='Hold this area to drag this container']";
 	public final String ELEMENT_CONTAINER_ROW = "//*[@class='UIRowContainer ']/div[${No}]//*[@class='UIRowContainer EmptyContainer']";
 	public final String ELEMENT_CONTAINER_ROW_0 = "//*[@class='UIRowContainer']/div[1]//*[@class='UIRowContainer EmptyContainer']";
 	public final By ELEMENT_CONTAINER_ROW_1 = By.xpath("//*[@class='UIRowContainer']/div[1]");
@@ -528,8 +529,10 @@ public class PlatformBase extends TestBase {
 	public final By ELEMENT_PORTLET_LAYOUT_DECORATOR = By.className("portletLayoutDecorator");
 	public final String ELEMENT_COLUMN_CONTAINER = "//*[@class='UITableColumn']";
 	public final String ELEMENT_NAME_CONTAINER = ELEMENT_DRAG_CONTAINER + "/../*[text()='${nameContainer}']";
+	public final String ELEMENT_NAME_CONTAINER_PLF41 = ELEMENT_DRAG_CONTAINER_PLF41 + "/../*[text()='${nameContainer}']";
 	public final String ELEMENT_NAME_CURRENT_CONTAINER = "//*[text()='${nameContainer}']/ancestor::div[contains(@class, 'EdittingContainer')]";
 	public final String ELEMENT_DRAG_CURRENT_CONTAINER = "//*[text()='${nameContainer}']/../*[@title='Hold this area to drag this container']";
+	public final String ELEMENT_DRAG_CURRENT_CONTAINER_PLF41 = "//*[text()='${nameContainer}']/../*[@data-original-title='Hold this area to drag this container']";
 	public final String ELEMENT_LIST_CONTAINER = "//*[@class='UIRowContainer']/div[${number}]//*[contains(text(), '${nameContainer}')]";
 
 	//Porlet setting
@@ -550,10 +553,12 @@ public class PlatformBase extends TestBase {
 	//public final By ELEMENT_PORTLET_CONTAINER = By.className("PortletLayoutDecorator");
 	public final By ELEMENT_ABORTEDIT_BUTTON = By.xpath("//*[@data-original-title='Abort']");
 	public final String ELEMENT_PORTLET_DRAG_DROP_ICON = "//*[@title='Hold this area to drag this portlet']";
+	public final String ELEMENT_PORTLET_DRAG_DROP_ICON_PLF41 = "//*[@data-original-title='Hold this area to drag this portlet']";
 	public final String ELEMENT_NAME_PORTLET = "//*[@class='portletName' and contains(text(), '${portletName}')]";
 	public final String ELEMENT_PORTLET_FRAGMENT = "//*[@id='${portletName}']/ancestor::div[contains(@class, 'UIApplication')]";
 	public final String ELEMENT_LIST_PORTLET_LAYOUT_DECORATOR = "//*[@class='portletLayoutDecorator' and contains(text(), '${portletName}')]";
 	public final String ELEMENT_DRAG_CURRENT_PORTLET = "//*[text()='${portletName}']/../*[@title='Hold this area to drag this portlet']";
+	public final String eLEMENT_DRAG_CURRENT_PORTLET_PLF41 = "//*[text()='${portletName}']/../*[@data-original-title='Hold this area to drag this portlet']";
 
 	//Edit portlet Form
 	public final By ELEMENT_WINDOW_SETTINGS_TAB = By.xpath("//div[@id='UIMaskWorkspace']//div[text()='Window Settings']");

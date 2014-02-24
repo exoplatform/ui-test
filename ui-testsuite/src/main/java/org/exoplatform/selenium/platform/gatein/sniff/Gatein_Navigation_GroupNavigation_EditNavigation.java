@@ -43,23 +43,23 @@ public class Gatein_Navigation_GroupNavigation_EditNavigation extends GroupNavig
 	public void setUpBeforeTest(){
 		initSeleniumTest();
 		driver.get(baseUrl);
-		button = new Button(driver);
-		magAlert = new ManageAlert(driver);
-		magAc = new ManageAccount(driver);
-		navToolbar = new NavigationToolbar(driver);
-		userGroupMag = new UserGroupManagement(driver);
-		pageMag = new PageManagement(driver);
-		navMag = new NavigationManagement(driver);
-		pageEditor = new PageEditor(driver);
-		magAc.signIn("john", DATA_PASS);
+		button = new Button(driver, this.plfVersion);
+		magAlert = new ManageAlert(driver, this.plfVersion);
+		magAc = new ManageAccount(driver, this.plfVersion);
+		navToolbar = new NavigationToolbar(driver, this.plfVersion);
+		userGroupMag = new UserGroupManagement(driver, this.plfVersion);
+		pageMag = new PageManagement(driver, this.plfVersion);
+		navMag = new NavigationManagement(driver, this.plfVersion);
+		pageEditor = new PageEditor(driver, this.plfVersion);
+		magAc.signIn(DATA_USER1,DATA_PASS);
 		driver.navigate().refresh();
 	}
 
 	@AfterMethod
 	public void afterTest(){
-		info("Gatein_Navigation_GroupNavigation_EditNavigation: Finish testing");
-		driver.manage().deleteAllCookies();
-		driver.quit();
+				info("Gatein_Navigation_GroupNavigation_EditNavigation: Finish testing");
+				driver.manage().deleteAllCookies();
+				driver.quit();
 	}
 
 	/**
@@ -137,7 +137,10 @@ public class Gatein_Navigation_GroupNavigation_EditNavigation extends GroupNavig
 				pageSelectorName, pageSelectorName, true, true);
 		//button.save();	
 		waitForElementNotPresent(button.ELEMENT_SAVE_BUTTON);
-		click(ELEMENT_GROUP_NAVIGATION_ICON_LEFT_PANEL.replace("${groupName}", "Portal Admin"));
+		if(this.plfVersion.contains("4.0"))
+			click(ELEMENT_GROUP_NAVIGATION_ICON_LEFT_PANEL.replace("${groupName}", "Portal Admin"));
+		else
+			click(ELEMENT_GROUP_NAVIGATION_ICON_LEFT_PANEL_PLF41.replace("${groupName}", "Portal Admin"));
 		waitForTextPresent(nodeName);
 		info("A new node has been added...successful");
 
@@ -146,8 +149,10 @@ public class Gatein_Navigation_GroupNavigation_EditNavigation extends GroupNavig
 		Utils.pause(1000);
 		button.save();
 		waitForElementNotPresent(button.ELEMENT_SAVE_BUTTON);
-		Utils.pause(1000);
-		click(ELEMENT_GROUP_NAVIGATION_ICON_LEFT_PANEL.replace("${groupName}", "Portal Admin"));
+		if(this.plfVersion.contains("4.0"))
+			click(ELEMENT_GROUP_NAVIGATION_ICON_LEFT_PANEL.replace("${groupName}", "Portal Admin"));
+		else
+			click(ELEMENT_GROUP_NAVIGATION_ICON_LEFT_PANEL_PLF41.replace("${groupName}", "Portal Admin"));
 		click(ELEMENT_NODE_NAVIGATION_LEFT_PANEL.replace("${groupName}", nodeNameEdit));
 		waitForTextPresent("Basic information");
 		waitForTextPresent("Contact");
@@ -378,6 +383,7 @@ public class Gatein_Navigation_GroupNavigation_EditNavigation extends GroupNavig
 		String groupAdminDisplayName = "Administration";
 		String nodeLink = ELEMENT_NODE_LINK.replace("${nodeLabel}", "Add User");
 		String containerTitle = "test06ContainerTitle";
+		String newContainerPos = "//*[@class='UIRowContainer']/div[1]";
 
 		info("Go to Group Sites/Edit navigation");
 		navToolbar.goToGroupSites();
@@ -403,7 +409,10 @@ public class Gatein_Navigation_GroupNavigation_EditNavigation extends GroupNavig
 		type(ELEMENT_HEIGHT_TEXTBOX, "150px", true);
 		button.save();
 		mouseOver(ELEMENT_DROP_TARGET_HAS_LAYOUT, true);
-		waitForAndGetElement(ELEMENT_NAME_CONTAINER.replace("${nameContainer}", containerTitle));
+		if(this.plfVersion.contains("4.0"))
+			waitForAndGetElement(ELEMENT_NAME_CONTAINER.replace("${nameContainer}", containerTitle));
+		else
+			waitForAndGetElement(ELEMENT_NAME_CONTAINER_PLF41.replace("${nameContainer}", containerTitle));
 		click(ELEMENT_SWITCH_VIEW_MODE);
 		waitForAndGetElement(button.ELEMENT_SAVE_BUTTON);
 		WebElement element = waitForAndGetElement(ELEMENT_EDITING_CONTAINER);
@@ -414,19 +423,26 @@ public class Gatein_Navigation_GroupNavigation_EditNavigation extends GroupNavig
 		click(ELEMENT_SWITCH_VIEW_MODE);
 		waitForElementNotPresent(button.ELEMENT_SAVE_BUTTON);
 		pageEditor.addNewContainer("Rows Layout", "oneRow");
-		waitForAndGetElement(ELEMENT_LIST_CONTAINER.replace("${number}", "1").replace("${nameContainer}", "Container"), DEFAULT_TIMEOUT, 1, 2);
-		waitForAndGetElement(ELEMENT_LIST_CONTAINER.replace("${number}", "2").replace("${nameContainer}", containerTitle), DEFAULT_TIMEOUT, 1, 2);
+		waitForAndGetElement(ELEMENT_LIST_CONTAINER.replace("${number}", "2").replace("${nameContainer}", "Container"), DEFAULT_TIMEOUT, 1, 2);
+		waitForAndGetElement(ELEMENT_LIST_CONTAINER.replace("${number}", "1").replace("${nameContainer}", containerTitle), DEFAULT_TIMEOUT, 1, 2);
 
 		mouseOver(ELEMENT_NAME_CURRENT_CONTAINER.replace("${nameContainer}", "Container"), true);
-		dragAndDropToObject(ELEMENT_DRAG_CURRENT_CONTAINER.replace("${nameContainer}", "Container"), ELEMENT_PORTLET_LAYOUT_DECORATOR);
+		if(this.plfVersion.contains("4.0"))
+			dragAndDropToObject(ELEMENT_DRAG_CURRENT_CONTAINER.replace("${nameContainer}", "Container"), ELEMENT_PORTLET_LAYOUT_DECORATOR);
+		else
+			dragAndDropToObject(ELEMENT_DRAG_CURRENT_CONTAINER_PLF41.replace("${nameContainer}", "Container"), newContainerPos);
 		waitForAndGetElement(ELEMENT_LIST_CONTAINER.replace("${number}", "1").replace("${nameContainer}", containerTitle), DEFAULT_TIMEOUT, 1, 2);
-		waitForAndGetElement(ELEMENT_LIST_CONTAINER.replace("${number}", "2").replace("${nameContainer}", "Container"), DEFAULT_TIMEOUT, 1, 2);
+		waitForAndGetElement(ELEMENT_LIST_CONTAINER.replace("${number}", "1").replace("${nameContainer}", "Container"), DEFAULT_TIMEOUT, 1, 2);
+		click(ELEMENT_ABORTEDIT_BUTTON);
+		click(pageEditor.ELEMENT_CONFIRM_YES_BUTTON);
+		waitForElementNotPresent(pageEditor.ELEMENT_VIEW_PAGE_PROPERTIES);
 
 		info("Delete a container...");
+		rightClickOnElement(nodeLink);
+		click(ELEMENT_NAVIGATION_EDIT_PAGE_NODE);
+		waitForAndGetElement(pageEditor.ELEMENT_VIEW_PAGE_PROPERTIES);
+		pageEditor.addNewContainer("Rows Layout", "oneRow");
 		pageEditor.removeContainer(ELEMENT_NAME_CURRENT_CONTAINER.replace("${nameContainer}", "Container"), ELEMENT_DELETE_CONTAINER_ICON);
-		pageEditor.removeContainer(ELEMENT_NAME_CURRENT_CONTAINER.replace("${nameContainer}", containerTitle), ELEMENT_DELETE_CONTAINER_ICON);
-		waitForElementNotPresent(ELEMENT_LIST_CONTAINER.replace("${number}", "1").replace("${nameContainer}", containerTitle));
-		waitForElementNotPresent(ELEMENT_LIST_CONTAINER.replace("${number}", "2").replace("${nameContainer}", "Container"));
 		pageEditor.finishEditLayout();	
 		waitForElementNotPresent(pageEditor.ELEMENT_VIEW_PAGE_PROPERTIES);
 	}
@@ -453,7 +469,7 @@ public class Gatein_Navigation_GroupNavigation_EditNavigation extends GroupNavig
 		String portletTitle = "test07PortletTitle";
 		String nodeName = "test07NodeName";
 		String nodeLink = ELEMENT_NODE_LINK.replace("${nodeLabel}", nodeName);
-		
+
 		Map<String, String> languages = new HashMap<String, String>();
 		languages.put("English", "");
 
@@ -491,29 +507,30 @@ public class Gatein_Navigation_GroupNavigation_EditNavigation extends GroupNavig
 		WebElement element = waitForAndGetElement(ELEMENT_PORTLET_FRAGMENT.replace("${portletName}", "UIAccountPortlet"));
 		String valueStyle = element.getAttribute("style");
 		assert valueStyle.equals("width: 100%; height: 600px;"): "Failed to edit portlet: " + portletTitle;
-		
+
 		info("Move an application when edit page...");
 		click(ELEMENT_SWITCH_VIEW_MODE);
 		waitForAndGetElement(pageEditor.ELEMENT_VIEW_PAGE_PROPERTIES);
 		dragAndDropToObject(ELEMENT_PAGE_MANAGEMENT_PORTLET, ELEMENT_DROP_TARGET_NO_LAYOUT);
 		dragAndDropToObject(ELEMENT_ORGANIZATION_PORTLET, ELEMENT_DROP_TARGET_NO_LAYOUT);
 		mouseOver(ELEMENT_LIST_PORTLET_LAYOUT_DECORATOR.replace("${portletName}", portletTitle), true);
-		dragAndDropToObject(ELEMENT_DRAG_CURRENT_PORTLET.replace("${portletName}", portletTitle), ELEMENT_LIST_PORTLET_LAYOUT_DECORATOR.replace("${portletName}", "Organization Portlet"));
-		
+		if(this.plfVersion.contains("4.0"))
+			dragAndDropToObject(ELEMENT_DRAG_CURRENT_PORTLET.replace("${portletName}", portletTitle), ELEMENT_LIST_PORTLET_LAYOUT_DECORATOR.replace("${portletName}", "Organization Portlet"));
+		else
+			dragAndDropToObject(eLEMENT_DRAG_CURRENT_PORTLET_PLF41.replace("${portletName}", portletTitle), ELEMENT_LIST_PORTLET_LAYOUT_DECORATOR.replace("${portletName}", "Organization Portlet"));
+
 		info("Verify that the page is updated after moving...");
-		click(ELEMENT_SWITCH_VIEW_MODE);
-		waitForAndGetElement(ELEMENT_LIST_CONTAINER.replace("${number}", "1").replace("${nameContainer}", portletTitle));
-		waitForAndGetElement(ELEMENT_LIST_CONTAINER.replace("${number}", "2").replace("${nameContainer}", "Organization Portlet"));
-		waitForAndGetElement(ELEMENT_LIST_CONTAINER.replace("${number}", "3").replace("${nameContainer}", "Page Management Portlet"));
-		
+		waitForAndGetElement(ELEMENT_LIST_CONTAINER.replace("${number}", "2").replace("${nameContainer}", portletTitle));
+		waitForAndGetElement(ELEMENT_LIST_CONTAINER.replace("${number}", "3").replace("${nameContainer}", "Organization Portlet"));
+		waitForAndGetElement(ELEMENT_LIST_CONTAINER.replace("${number}", "1").replace("${nameContainer}", "Page Management Portlet"));
+
 		info("Delete an application when edit page...");
-		click(ELEMENT_SWITCH_VIEW_MODE);
 		waitForAndGetElement(pageEditor.ELEMENT_VIEW_PAGE_PROPERTIES);
 		pageEditor.removePortlet(ELEMENT_LIST_PORTLET_LAYOUT_DECORATOR.replace("${portletName}", portletTitle), ELEMENT_DELETE_PORTLET_ICON, false);
 		pageEditor.removePortlet(ELEMENT_LIST_PORTLET_LAYOUT_DECORATOR.replace("${portletName}", "Organization Portlet"), ELEMENT_DELETE_PORTLET_ICON, false);
 		pageEditor.removePortlet(ELEMENT_LIST_PORTLET_LAYOUT_DECORATOR.replace("${portletName}", "Page Management Portlet"), ELEMENT_DELETE_PORTLET_ICON, false);
 		pageEditor.finishEditLayout();
-		
+
 		info("Reset data");
 		rightClickOnElement(nodeLink);
 		Utils.pause(2000);
@@ -540,13 +557,13 @@ public class Gatein_Navigation_GroupNavigation_EditNavigation extends GroupNavig
 		String nodeLink = ELEMENT_NODE_LINK.replace("${nodeLabel}", nodeName);
 		String categoryContainer = "Rows Layout";
 		String typeContainer = "oneRow";
-		
+
 		Map<String, String> languages = new HashMap<String, String>();
 		languages.put("English", "");
 
 		info("Go to Group Sites/Edit navigation");
 		navToolbar.goToGroupSites();
-		
+
 		info("Add a node for group Sites Management");
 		addNodeForGroup(groupAdminDisplayName, nodeSitesManagement, false, 
 				nodeName, true, languages, nodeName, 
@@ -556,14 +573,14 @@ public class Gatein_Navigation_GroupNavigation_EditNavigation extends GroupNavig
 		Utils.pause(2000);
 		click(ELEMENT_NAVIGATION_EDIT_PAGE_NODE);
 		waitForAndGetElement(pageEditor.ELEMENT_VIEW_PAGE_PROPERTIES);
-		
+
 		info("Add an application into selected container");
 		pageEditor.addNewContainerAndPortlet(categoryContainer, typeContainer, "Collaboration", "Collaboration/AnswersPortlet", false);	
 		click(ELEMENT_SWITCH_VIEW_MODE);
 		waitForAndGetElement(ELEMENT_ANWSER_PORTLET_IN_VIEW_PAGE);
 		click(ELEMENT_SWITCH_VIEW_MODE);
 		pageEditor.finishEditLayout();
-		
+
 		info("Reset data");
 		rightClickOnElement(nodeLink);
 		Utils.pause(2000);

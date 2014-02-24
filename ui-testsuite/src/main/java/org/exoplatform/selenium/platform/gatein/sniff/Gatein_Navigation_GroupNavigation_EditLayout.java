@@ -12,7 +12,7 @@ import org.exoplatform.selenium.platform.ManageAccount;
 import org.exoplatform.selenium.platform.NavigationToolbar;
 import org.exoplatform.selenium.platform.PageEditor;
 import org.exoplatform.selenium.platform.PageManagement;
-import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -34,11 +34,11 @@ public class Gatein_Navigation_GroupNavigation_EditLayout extends GroupNavigatio
 	public void setUpBeforeTest(){
 		initSeleniumTest();
 		driver.get(baseUrl);
-		magAc = new ManageAccount(driver);
-		navTool = new NavigationToolbar(driver);
-		pageMag = new PageManagement(driver);
-		pageE = new PageEditor(driver);
-		but = new Button(driver);
+		magAc = new ManageAccount(driver, this.plfVersion);
+		navTool = new NavigationToolbar(driver, this.plfVersion);
+		pageMag = new PageManagement(driver, this.plfVersion);
+		pageE = new PageEditor(driver, this.plfVersion);
+		but = new Button(driver, this.plfVersion);
 		
 		magAc.signIn("john", DATA_PASS);
 	}
@@ -107,7 +107,10 @@ public class Gatein_Navigation_GroupNavigation_EditLayout extends GroupNavigatio
 		navTool.goToEditPageEditor();
 		waitForAndGetElement(ELEMENT_PORTLET_1 + "//div[contains(text(),'Wiki Portlet')]");
 		mouseOver(ELEMENT_PORTLET_2, true);
-		dragAndDropToObject(ELEMENT_PORTLET_2 + ELEMENT_PORTLET_DRAG_DROP_ICON, ELEMENT_PORTLET_1);
+		if(this.plfVersion.contains("4.0"))
+			dragAndDropToObject(ELEMENT_PORTLET_2 + ELEMENT_PORTLET_DRAG_DROP_ICON, ELEMENT_PORTLET_1);
+		else
+			dragAndDropToObject(ELEMENT_PORTLET_2 + ELEMENT_PORTLET_DRAG_DROP_ICON_PLF41, ELEMENT_PORTLET_1);
 		waitForAndGetElement(ELEMENT_PORTLET_1 + "//div[contains(text(),'Answers Portlet')]");
 		click(ELEMENT_SWITCH_VIEW_MODE);
 		waitForAndGetElement(ELEMENT_PORTLET_2 + "//*[@id='UIWikiPortlet']");
@@ -124,46 +127,56 @@ public class Gatein_Navigation_GroupNavigation_EditLayout extends GroupNavigatio
 	@Test
 	public void test03_AddEditMoveDeleteContainerWhenEditLayout_GroupPage(){
 		String pageName = "Sniffgroupnavigationlayout03";
-		String columnContainer = ELEMENT_COLUMN_CONTAINER;
-		By rowContainer = By.xpath("//*[text()='Container']/../../../..");
-		String title = "Container1";
+		String containerTitle = "test06ContainerTitle";
+		String newContainerPos = "//*[@class='UIRowContainer']/div[2]";
 		
 		navTool.goToSiteExplorer();
 		pageE.createNewPageEmptyLayout(pageName);
 		navTool.goToEditPageEditor();
 		
-		info("Add container");
+		info("Add a container...");
+		click(ELEMENT_SWITCH_VIEW_MODE);
 		pageE.addNewContainer("Rows Layout", "oneRow");
-		pageE.addNewContainer("Columns Layout", "twoColumns");
-		waitForAndGetElement(columnContainer);
-		waitForAndGetElement(rowContainer);
-		click(ELEMENT_SWITCH_VIEW_MODE);
-		waitForAndGetElement(columnContainer);
-		waitForAndGetElement(rowContainer);
-		click(ELEMENT_SWITCH_VIEW_MODE);
+		waitForAndGetElement(ELEMENT_DROP_TARGET_HAS_LAYOUT);
 
-		info("Edit title of container");
-		Utils.pause(1000);
-		mouseOver(columnContainer, true);
-		click(ELEMENT_CONTAINER_COLUMN_EDIT_ICON);
-		type(ELEMENT_CONTAINER_TITLE, title, true);
-		Utils.pause(1000);
+		info("Edit a container...");
+		mouseOver(ELEMENT_DROP_TARGET_HAS_LAYOUT, true);
+		click(ELEMENT_EDIT_CONTAINER_ICON);
+		type(ELEMENT_CONTAINER_TITLE, containerTitle, true);
+		type(ELEMENT_WIDTH_TEXTBOX, "150px", true);
+		type(ELEMENT_HEIGHT_TEXTBOX, "150px", true);
 		but.save();
-		Utils.pause(1000);
-		mouseOver(columnContainer, true);
-		waitForAndGetElement(columnContainer + "/../../..//span[text()='" + title + "']");
+		mouseOver(ELEMENT_DROP_TARGET_HAS_LAYOUT, true);
+		if(this.plfVersion.contains("4.0"))
+			waitForAndGetElement(ELEMENT_NAME_CONTAINER.replace("${nameContainer}", containerTitle));
+		else
+			waitForAndGetElement(ELEMENT_NAME_CONTAINER_PLF41.replace("${nameContainer}", containerTitle));
+		WebElement element = waitForAndGetElement(ELEMENT_EDITING_CONTAINER);
+		String valueStyle = element.getAttribute("style");
+		assert valueStyle.equals("width: 150px; height: 150px;"): "Failed to edit the value of container: " + containerTitle;
+
+		info("Move a container...");
+		pageE.addNewContainer("Rows Layout", "oneRow");
+		waitForAndGetElement(ELEMENT_LIST_CONTAINER.replace("${number}", "1").replace("${nameContainer}", "Container"), DEFAULT_TIMEOUT, 1, 2);
+		waitForAndGetElement(ELEMENT_LIST_CONTAINER.replace("${number}", "2").replace("${nameContainer}", containerTitle), DEFAULT_TIMEOUT, 1, 2);
+
+		mouseOver(ELEMENT_NAME_CURRENT_CONTAINER.replace("${nameContainer}", "Container"), true);
+		if(this.plfVersion.contains("4.0"))
+			dragAndDropToObject(ELEMENT_DRAG_CURRENT_CONTAINER.replace("${nameContainer}", "Container"), ELEMENT_PORTLET_LAYOUT_DECORATOR);
+		else
+			dragAndDropToObject(ELEMENT_DRAG_CURRENT_CONTAINER_PLF41.replace("${nameContainer}", "Container"), newContainerPos);
+		waitForAndGetElement(ELEMENT_LIST_CONTAINER.replace("${number}", "1").replace("${nameContainer}", containerTitle), DEFAULT_TIMEOUT, 1, 2);
+		waitForAndGetElement(ELEMENT_LIST_CONTAINER.replace("${number}", "1").replace("${nameContainer}", "Container"), DEFAULT_TIMEOUT, 1, 2);
+		click(ELEMENT_ABORTEDIT_BUTTON);
+		click(pageE.ELEMENT_CONFIRM_YES_BUTTON);
+		waitForElementNotPresent(pageE.ELEMENT_VIEW_PAGE_PROPERTIES);
 		
-		info("Move container");
-		mouseOver(columnContainer, true);
-		Utils.pause(1000);
-		dragAndDropToObject(columnContainer + "/../../..//*[@title='Hold this area to drag this table']", rowContainer);
-		click(ELEMENT_SWITCH_VIEW_MODE);
-		waitForAndGetElement("//*[@class='UIRowContainer']//span[text()='" + title + "']/../../../.." + columnContainer);
-		
-		info("Delete container");
-		pageE.removeContainer(ELEMENT_DROP_TARGET_HAS_LAYOUT, ELEMENT_DELETE_CONTAINER_ICON);
-		waitForElementNotPresent(ELEMENT_DROP_TARGET_HAS_LAYOUT);	
-		pageE.finishEditLayout();
+		info("Delete a container...");
+		navTool.goToEditPageEditor();
+		pageE.addNewContainer("Rows Layout", "oneRow");
+		pageE.removeContainer(ELEMENT_NAME_CURRENT_CONTAINER.replace("${nameContainer}", "Container"), ELEMENT_DELETE_CONTAINER_ICON);
+		pageE.finishEditLayout();	
+		waitForElementNotPresent(pageE.ELEMENT_VIEW_PAGE_PROPERTIES);
 		
 		info("Delete page");
 		pageMag.deletePageAtManagePageAndPortalNavigation(pageName, false, null, true, "Content Management");	

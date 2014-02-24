@@ -27,9 +27,9 @@ public class Gatein_Navigation_GroupNavigation_ManageNavigation extends GroupNav
 	public void setUpBeforeTest(){
 		initSeleniumTest();
 		driver.get(baseUrl);
-		magAc = new ManageAccount(driver);
-		navTool = new NavigationToolbar(driver);
-		group = new UserGroupManagement(driver);
+		magAc = new ManageAccount(driver, this.plfVersion);
+		navTool = new NavigationToolbar(driver, this.plfVersion);
+		group = new UserGroupManagement(driver, this.plfVersion);
 		
 		magAc.signIn("john", DATA_PASS);
 	}
