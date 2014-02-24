@@ -359,6 +359,7 @@ public class PlatformBase extends TestBase {
 	public final String ELEMENT_SELECT_PERMISSION_BUTTON = "//a[text()='Select Permission']";
 	public final String ELEMENT_SELECT_ACCESS_GROUP_ITEM = "//*[@id='ListPermissionSelector']//a[@title='${group}']";
 	public final String ELEMENT_SELECT_EDIT_GROUP_ITEM = "//*[@id='UIPermissionSelector']//*[contains(text(), '${group}')]";
+	public final By ELEMENT_BROWSE_GROUP = By.xpath("//h6[text()='Browse and select a group']");
 	public final By ELEMENT_PERMISSION_GRID = By.id("PermissionGrid");
 
 	//Portal Template TAB
@@ -735,7 +736,7 @@ public class PlatformBase extends TestBase {
 		String[] groups = groupId.split("/");
 		Utils.pause(500);
 		click(ELEMENT_ADD_PERMISSION_BUTTON);
-		waitForTextPresent("Browse and select a group");
+		waitForAndGetElement(ELEMENT_BROWSE_GROUP);
 		for (String group : groups) {
 			String groupToSelect = ELEMENT_SELECT_ACCESS_GROUP_ITEM.replace("${group}", group);
 			click(groupToSelect);
