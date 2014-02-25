@@ -666,8 +666,8 @@ public class CalendarBase extends PlatformBase {
 		goToAddCalendar();
 		inputAddCalendarForm(name,description,color,groups);
 		click(ELEMENT_CAL_ADD_SAVE_BUTTON);
-		waitForAndGetElement(By.linkText(name));
 		
+		waitForAndGetElement(ELEMENT_CALENDAR_GET_BY_TAG_LI.replace("${calendar}", name));
 	}
 
 	/** 

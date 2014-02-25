@@ -32,7 +32,8 @@ public class Task extends CalendarBase{
 	public By ELEMENT_INPUT_TASK_CATEGORY = By.xpath("//*[@id='UIQuickAddTask']//*[@name='category']");
 	public By ELEMENT_BUTTON_TASK = By.id("UIActionBarQuickAddTask");
 	public By ELEMENT_BUTTON_TASK_SAVE = By.xpath("//*[@id='UIQuickAddTaskPopupWindow']//*[text()='Save']");
-	public By ELEMENT_BUTTON_TASK_MORE_DETAILS = By.xpath("//*[@id='QuickAddEventContainer']//*[text()='More Details']");
+	public By ELEMENT_BUTTON_TASK_MORE_DETAILS = By.xpath("//*[@id='UIQuickAddTaskPopupWindow']//*[text()='More Details']");
+	public By ELEMENT_BUTTON_TASK_SAVE_DETAILS = By.xpath("//*[@id='UITaskForm']//*[text()='Save']");
 
 	//Task Form (details)
 	public By ELEMENT_ADD_EDIT_TASK_POPUP = By.xpath("//span[@class='PopupTitle popupTitle' and text()='Add/Edit Tasks']");
@@ -42,14 +43,19 @@ public class Task extends CalendarBase{
 	public By ELEMENT_ADD_EDIT_TASK_ALLDAY = By.xpath("//*[@id='UITaskForm']//*[@name='allDay']");
 	public By ELEMENT_ADD_EDIT_TASK_FROM = By.xpath("//*[@id='UITaskForm']//*[@name='from']");
 	public By ELEMENT_ADD_EDIT_TASK_TO = By.xpath("//*[@id='UITaskForm']//*[@name='to']");
-	public By ELEMENT_ADD_EDIT_TASK_FROM_TIME = By.xpath("//*[@id='UITaskForm'//input[@id='fromTime' and @style='visibility: visible;']");
-	public By ELEMENT_ADD_EDIT_TASK_TO_TIME = By.xpath("//*[@id='UITaskForm'//input[@id='fromTime' and @style='visibility: visible;']");
-	public By ELEMENT_ADD_EDIT_TASK_CALENDAR = By.xpath("//*[@id='UITaskForm'//*[@name='calendar']");
-	public By ELEMENT_ADD_EDIT_TASK_CATEGORY = By.xpath("//*[@id='UITaskForm'//*[@name='category']");
+	public By ELEMENT_ADD_EDIT_TASK_FROM_TIME = By.xpath("//*[@id='UITaskForm']//input[@id='fromTime' and @style='visibility: visible;']");
+	public By ELEMENT_ADD_EDIT_TASK_TO_TIME = By.xpath("//*[@id='UITaskForm']//input[@id='fromTime' and @style='visibility: visible;']");
+	public By ELEMENT_ADD_EDIT_TASK_CALENDAR = By.xpath("//*[@id='UITaskForm']//*[@name='calendar']");
+	public By ELEMENT_ADD_EDIT_TASK_CATEGORY = By.xpath("//*[@id='UITaskForm']//*[@name='category']");
 	public By ELEMENT_TASK_ADD_ATTACHMENT = By.xpath("//button[contains(@onclick,'AddAttachment')]");
 	public By ELEMENT_TASK_FILE_INPUT = By.xpath("//*[@id='upload']//*[@name='file']");
 	public By ELEMENT_TASK_STATUS = By.name("status");
 	public By ELEMENT_ATTACH_SAVE_BUTTON = By.xpath("//form[@id='UIAttachFileForm']//*[text()='Save']");
+	public By ELEMENT_ADD_EDIT_TASK_DELEGATION = By.xpath("//*[@id='UITaskForm']//*[@id='delegation']");
+	public By ELEMENT_ADD_EDIT_TASK_PRIORITY = By.xpath("//*[@id='UITaskForm']//*[@name='priority']");
+	public By ELEMENT_PREVIEW_TASK_POPUP = By.xpath("//span[@class='PopupTitle popupTitle' and text()='Preview']");
+	public String ELEMENT_TITLE_TASK_POPUP = "//div[@class='titleList'] //*[contains(text(),'${task}')]";
+
 
 	//----------------------- Task Reminder ---------------------------------------------
 	public By ELEMENT_TAB_REMINDER = By.xpath("//*[@id='UIPopupAddTaskContainer']//a[text()='Reminders']");
@@ -160,7 +166,6 @@ public class Task extends CalendarBase{
 			if (note != null){
 				type(ELEMENT_ADD_EDIT_TASK_NOTE, note, true);
 			}
-
 			if (opt.length > 0 && opt[0] != null){
 				select(ELEMENT_ADD_EDIT_TASK_CALENDAR, opt[0]);
 			}
@@ -273,6 +278,7 @@ public class Task extends CalendarBase{
 	 * @param opt
 	 * 				optional parameter to choose whether to input Details for task or not
 	 */
+
 	public void inputDataTabDetailTask(String name, String note, String from, String to, boolean allDay, String path,  String...opt){
 		inputBasicQuickTask(name, note, opt);
 		inputFromToTask(from, to, allDay);
@@ -281,8 +287,7 @@ public class Task extends CalendarBase{
 			click(ELEMENT_ATTACH_SAVE_BUTTON);
 		}
 		if((opt.length > 2) & (opt.length <= 3))
-			inputOtherFieldsTabDetailsTask(opt[2]);
-
+			inputOtherFieldsTabDetailsTask(opt[2]);	
 	}
 
 	/**
@@ -354,10 +359,11 @@ public class Task extends CalendarBase{
 	 * @param opt
 	 * 				optional parameter
 	 */
-	public void editTask(String oldName, String name, String note,String from, String to, boolean allDay, String path, String...opt) {
+
+	public void editTask(String oldName, String name, String users, String from, String to, boolean allDay, String path, String...opt) {
 		info("Edit a task");
 		goToEditTaskForm(oldName);
-		inputDataTabDetailTask(name, note, from, to, allDay, path, opt);
+		inputDataTabDetailTask(name, users, from, to, allDay, path, opt);
 		click(ELEMENT_BUTTON_TASK_SAVE_EDIT);
 	}
 

@@ -664,31 +664,35 @@ public class PlatformBase extends TestBase {
 	public final By ELEMENT_GETTING_SUGGESTIONS = By.xpath("//div[@class='uiBox uiSuggestions']");
 
 	//Calendar gadget
-	public static By ELEMENT_CALENDAR_GADGET_SETTING_ICON = By.xpath("//a[@class='settingsLink actionIcon pull-right ']//i[@class='uiIconSetting uiIconLightGray']");
-	public static By ELEMENT_SEARCH_IN_CALENDAR_GADGET_SETTING = By.xpath("//input[@class='PLFcalendarSearchKey']");
-	public static By ELEMENT_CALENDAR_GADGET_TODAY_LABEL = By.xpath("//div[@class='currentDateContainer']//a[contains(text(), 'Today')]");
-	public static By ELEMENT_CALENDAR_GADGET_NEXTDAY_ARROW = By.xpath("//a[@class='actionIcon nextDate pull-right']//*[@class='uiIconMiniArrowRight uiIconLightGray']");
-	public static By ELEMENT_CALENDAR_GADGET_PREVIOUSDAY_ARROW = By.xpath("//*[@class='actionIcon prevDate pull-left']//*[@class='uiIconMiniArrowLeft uiIconLightGray']");
-	public static By ELEMENT_CALENDAR_GADGET_TOMORROW_LABEL = By.xpath("//*[@class='currentDateContainer']//a[contains(text(),Tomorrow)]");
-	public static By ELEMENT_CALENDAR_GADGET_YESTERDAY_LABEL = By.xpath("//div[@class='currentDateContainer']//a[contains(text(),Yesterday)]");
-	public static String ELEMENT_CALENDAR_GADGET_SETTING_LINK_ITEM = "//span[contains(text(),'${calendar}')]";
-	public static By ELEMENT_CALENDAR_GADGET_VERIFIED_TEXT_LABEL = By.xpath("//*[ text()='Displayed Calendars:']");
-	public static String ELEMENT_ADD_CALENDAR_IN_ADDITION_LIST = "//a[text()='${calendar}']/..//i[contains(@class,'uiIconAdd')]";
+
+	public String ELEMENT_CALENDAR_GADGET_TASK_ITEM = "//ul[@class='tasksList']/..//a[contains(text(),'${task}')]";	
+	public By ELEMENT_CALENDAR_GADGET_TODAY_LABEL_FRENCH = By.xpath("//div[@class='currentDateContainer']//a[contains(text(), 'Aujourd')]");
+	public String ELEMENT_CALENDAR_GADGET_EVENT_TIME = "//div[@class='pull-left eventSummary']//a[contains(text(), '${event}')]/../..//div[@class='pull-right time']";	
+	public String ELEMENT_CALENDAR_GADGET_CALENDAR_COLOR = "//span[@class = '${color}' and contains(text(),'${calendar}')]";
+	public By ELEMENT_CALENDAR_GADGET_SETTING_ICON = By.xpath("//a[@class='settingsLink actionIcon pull-right ']//i[@class='uiIconSetting uiIconLightGray']");
+	public By ELEMENT_SEARCH_IN_CALENDAR_GADGET_SETTING = By.xpath("//input[@class='PLFcalendarSearchKey']");
+	public By ELEMENT_CALENDAR_GADGET_TODAY_LABEL = By.xpath("//div[@class='currentDateContainer']//a[contains(text(), 'Today')]");
+	public By ELEMENT_CALENDAR_GADGET_NEXTDAY_ARROW = By.xpath("//a[@class='actionIcon nextDate pull-right']//*[@class='uiIconMiniArrowRight uiIconLightGray']");
+	public By ELEMENT_CALENDAR_GADGET_PREVIOUSDAY_ARROW = By.xpath("//*[@class='actionIcon prevDate pull-left']//*[@class='uiIconMiniArrowLeft uiIconLightGray']");
+	public By ELEMENT_CALENDAR_GADGET_TOMORROW_LABEL = By.xpath("//*[@class='currentDateContainer']//a[contains(text(),Tomorrow)]");
+	public By ELEMENT_CALENDAR_GADGET_YESTERDAY_LABEL = By.xpath("//div[@class='currentDateContainer']//a[contains(text(),Yesterday)]");
+	public String ELEMENT_CALENDAR_GADGET_SETTING_LINK_ITEM = "//span[contains(text(),'${calendar}')]";
+	public By ELEMENT_CALENDAR_GADGET_VERIFIED_TEXT_LABEL = By.xpath("//*[ text()='Displayed Calendars:']");
+	public String ELEMENT_ADD_CALENDAR_IN_ADDITION_LIST = "//a[text()='${calendar}']/..//i[contains(@class,'uiIconAdd')]";
 	public static String ELEMENT_ADD_CALENDAR_IN_ADDITION_LIST_PLF_41 = "//a[text()='${calendar}']/..//i[@class ='uiIconSimplePlusMini uiIconLightGray']";
-	public static String ELEMENT_CALENDAR_IN_CALENDAR_GADGET = "//span[@class='calendarName asparagus' and@title='${calendar}']";
-	public static String ELEMENT_DELETE_CALENDAR_ICON = "//span[contains(text(),'${calendar}')] /..//*[@class='uiIconDel']";
-	public static String ELEMENT_CALENDAR_IN_ADDITIONAL_LIST = "//a[text()='${calendar}']";
-	public static By ELEMENT_CALENDAR_GADGET_SETTINGS = By.xpath("//h6[@class='title center']//a[contains(text(),Settings)]");
-	public static By ELEMENT_CALENDAR_GADGET_ADDITIONAL_DISPLAY = By.xpath("//*[ text()='Display Additional Calendar:']");
-	public static String ELEMENT_EVENT_TASK_ITEM_IN_CALENDAR_GADGET = "//*[contains(@class,'eventsList')]//*[contains(text(),'${event}')]/../..//span[contains(text(),'${time}')]";
-	public static String ELEMENT_EVENT_TASK_MULTIDATE_ITEM_IN_CALENDAR_GADGET = "//*[contains(@class,'eventsList')]//*[contains(text(),'${event}')]/../..//span[contains(text(),'${totime}')]/../span[contains(text(),'${endtime}')]";
-	public static String ELEMENT_CALENDAR_GADGET_EVENT_ITEM = "//div[@class='pull-left eventSummary']//a[contains(text(), '${event}')]";
-	public static By ELEMENT_CALENDAR_GADGET_EMPTY = By.xpath("//*[contains(text(),'Nothing Planned ')]");
-	public static By ELEMENT_CALENDAR_GADGET_TASK_LABEL = By.xpath("//*[@class='title taskTitle']");
-	public static String ELEMENT_CALENDAR_GADGET_TASK_ITEM = "//ul[@class='tasksList']/..//a[contains(text(),'${task}')]";	
-	public static By ELEMENT_CALENDAR_GADGET_TODAY_LABEL_FRENCH = By.xpath("//div[@class='currentDateContainer']//a[contains(text(), 'Aujourd')]");
-	public static String ELEMENT_CALENDAR_GADGET_EVENT_TIME = "//div[@class='pull-left eventSummary']//a[contains(text(), '${event}')]/../..//div[@class='pull-right time']";	
-	public static String ELEMENT_CALENDAR_GADGET_CALENDAR_COLOR = "//span[@class = '${color}' and contains(text(),'${calendar}')]";
+	public String ELEMENT_CALENDAR_IN_CALENDAR_GADGET = "//span[@class='calendarName asparagus' and@title='${calendar}']";
+	public String ELEMENT_DELETE_CALENDAR_ICON = "//span[contains(text(),'${calendar}')] /..//*[@class='uiIconDel']";
+	public String ELEMENT_CALENDAR_IN_ADDITIONAL_LIST = "//a[text()='${calendar}']";
+	public By ELEMENT_CALENDAR_GADGET_SETTINGS = By.xpath("//h6[@class='title center']//a[contains(text(),Settings)]");
+	public By ELEMENT_CALENDAR_GADGET_ADDITIONAL_DISPLAY = By.xpath("//*[ text()='Display Additional Calendar:']");
+	public String ELEMENT_EVENT_TASK_ITEM_IN_CALENDAR_GADGET = "//*[contains(@class,'eventsList')]//*[contains(text(),'${event}')]/../..//span[contains(text(),'${time}')]";
+	public String ELEMENT_EVENT_TASK_MULTIDATE_ITEM_IN_CALENDAR_GADGET = "//*[contains(@class,'eventsList')]//*[contains(text(),'${event}')]/../..//span[contains(text(),'${totime}')]/../span[contains(text(),'${endtime}')]";
+	public By ELEMENT_CALENDAR_GADGET_TASK_LABEL = By.xpath("//*[@class='title taskTitle']");
+	public String ELEMENT_CALENDAR_GADGET_TASK_NORMAL = "//ul[@class='tasksList']//li[@class='taskNotCompleted']//a[contains(text(),'${task}')]";
+	public String ELEMENT_CALENDAR_GADGET_TASK_COMPLETED = "//ul[@class='tasksList']//li[@class='taskCompleted']//a[contains(text(),'${task}')]";
+	public String ELEMENT_CALENDAR_GADGET_TASK_INDEX = "//ul[@class='tasksList']//li['${index}']//a[contains(text(),'${task}')]";
+	public By ELEMENT_CALENDAR_GADGET_EMPTY = By.xpath("//*[contains(text(),'Nothing Planned ')]");
+	public String ELEMENT_CALENDAR_GADGET_EVENT_ITEM = "//div[@class='pull-left eventSummary']//a[contains(text(), '${event}')]";
 	
 	//Create functions
 	public final By ELEMENT_ADD_ICON = By.xpath("//*[@class='uiIconPLF24x24Add']");
