@@ -341,8 +341,8 @@ public class Forum_Forum_Category_Add extends ForumBase {
 		int chooseRestricted = 1;
 		String[] restricted = { "" };
 		String description = "Description";
-		int setPermission = 1;
-		String[] userGroup = {"/developers"};
+		int setPermission = 4;
+		String[] userGroup = {"Development","*"};
 		boolean permission = false;
 		/*Step 1: Open Add new Category form
 		*Input Data: - Login as Administrator

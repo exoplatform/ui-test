@@ -161,7 +161,6 @@ public class Forum_Forum_Topic_Add extends ForumBase{
 		acc.updateUserProfile(null, null, null,EMAIL_ADDRESS1);
 		goToForums();
 		info("Step 1: Create forum");
-		cat.goToAddCategory();
 		cat.addNewCategoryInForum(catName, order, chooseRestricted, restricted, description, setPermission, userGroup, false);
 		forum.goToAddForum();
 		forum.inputDataInAddForumTab_addForum(catName, addForum);

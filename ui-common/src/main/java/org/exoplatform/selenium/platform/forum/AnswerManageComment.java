@@ -32,11 +32,11 @@ public class AnswerManageComment extends AnswerBase {
 	public final By ELEMENT_COMMENT_CONTENT_FRAME_1 = By.id("CommentContent___Frame");
 	public final By ELEMENT_COMMENT_CONTENT_FRAME_2 = By.xpath("//*[@id ='xEditingArea']/iframe");
 	public final By ELEMENT_COMMENT_CONTENT_FRAME_41 = By.xpath("//*[@id='cke_CommentContent']//iframe");
-	public final String ELEMENT_COMMENT_IN_QUESTION = "//*[contains(@id, 'Comment')]//*[text()='${comment}']";
+	public final String ELEMENT_COMMENT_IN_QUESTION = "//*[contains(@id, 'Comment')]//*[contains(text(),'${comment}')]";
 	public final By ELEMENT_GET_COMMENT = By.xpath("//*[contains(@id, 'Comment')]//p");
 
 	//More action
-	public final String ELEMENT_COMMENT_MORE_ACTION_LINK = "//*[text()='${comment}']/../../../../..//*[contains(text(), 'More Actions')]";
+	public final String ELEMENT_COMMENT_MORE_ACTION_LINK = "//*[contains(text(),'${comment}')]/../../../../..//*[contains(text(), 'More Actions')]";
 	public final By ELEMENT_EDIT_COMMENT_MENU = By.xpath("//a[contains(.,'Edit Comment')]"); 
 	public final String ELEMENT_DELETE_COMMENT_MENU = "//*[contains(text(),'${comment}')]/ancestor::div[contains(@id,'Comment')]//a[contains(.,'Delete Comment')]";
 	public final String ELEMENT_PROMOTE_COMMENT_MENU = "//*[contains(text(),'${comment}')]/ancestor::div[contains(@id,'Comment')]//a[contains(.,'Promote as Answer')]";
@@ -102,10 +102,11 @@ public class AnswerManageComment extends AnswerBase {
 	 * @param comment
 	 */
 	public void promoteAsAnswer(String comment){
-		click(ELEMENT_COMMENT_MORE_ACTION_LINK.replace("${comment}", comment));
+		String[] coms = comment.split("<br/>");
+		click(ELEMENT_COMMENT_MORE_ACTION_LINK.replace("${comment}", coms[0]));
 		Utils.pause(2000);
-		click(ELEMENT_PROMOTE_COMMENT_MENU.replace("${comment}", comment));
-		waitForElementNotPresent(ELEMENT_COMMENT_IN_QUESTION.replace("${comment}", comment));
+		click(ELEMENT_PROMOTE_COMMENT_MENU.replace("${comment}", coms[0]));
+		waitForElementNotPresent(ELEMENT_COMMENT_IN_QUESTION.replace("${comment}", coms[0]));
 		if(!comment.contains("<br/>"))
 			waitForAndGetElement(magAns.ELEMENT_ANSWER_IN_QUESTION.replace("${answer}", comment));
 		else

@@ -93,7 +93,6 @@ public class Forum_Forum_Forum_Add extends ForumBase {
 		acc.userSignIn(userType.ADMIN);
 		goToForums();		
 		fmCat.addNewCategoryInForum(catName, "1", 0,null, catName, 0,null);
-		
 		fmForum.goToAddForum();
 		info("Create new forum");
 		fmForum.inputDataForum(catName, fmName, true,null ,null, false, 1, userGroups);

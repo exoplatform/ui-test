@@ -42,6 +42,7 @@ public class PlatformPermission extends PlatformBase {
 	public final By ELEMENT_SELECT_SEARCH = By.name("filter");
 	public final By ELEMENT_PERMISSION_TAB = By.linkText("Permissions");
 	public final By ELEMENT_PERMISSION_INPUT = By.id("UIPermissionInput");
+	public final String ELEMENT_PERMISSION_INPUT_VALUE = "//*[@id='UIPermissionInput' and @value='${userGroup}']";
 	public final By ELEMENT_PERMISSION_INPUT_PLF4_1 = By.id("permissionInput");
 	public final By ELEMENT_SELECT_USER_ICON = By.xpath("//*[@id='PermissionTab']//*[@class='uiIconUser uiIconLightGray']");
 	public final By ELEMENT_SELECT_MEMBERSHIP_ICON = By.xpath("//*[@id='PermissionTab']//*[@class='uiIconMembership uiIconLightGray']");
@@ -113,7 +114,7 @@ public class PlatformPermission extends PlatformBase {
 	public void selectGroupMembership(String groupPath, String membership){
 		userGroup = new UserGroupManagement(driver);
 		userGroup.selectGroup(groupPath);	
-		WebElement elementMembership = waitForAndGetElement("//*[contains(text(), '" + membership + "')]", 5000, 0);
+		WebElement elementMembership = waitForAndGetElement("//*[contains(text(), '" + membership + "')]", 10000, 0);
 		WebElement elementMembership_1 = waitForAndGetElement(By.linkText(membership), 5000, 0);
 		//WebElement elementMembership_2 = waitForAndGetElement("//*[@title='" + membership + "']", 5000, 0);
 		if (elementMembership_1 != null){

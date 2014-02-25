@@ -34,18 +34,18 @@ public class ForumManagePost extends ForumBase {
 
 	public By ELEMENT_POST_REPLY_BUTTON = By.linkText("Post Reply");
 	public String ELEMENT_POST_EDIT_BUTTON = "//*[text()='${postContent}']/../../../..//a[text()='Edit' and @class='btn']";
-	
+
 	public String ELEMENT_POST_CHECKBOX = "//*[contains(text(),'${postContent}')]/../../../../*//input[@type='checkbox']";
-//	public By ELEMENT_MOVE_POST = By.xpath("//a[@class='ItemIcon MovePostIcon' and text()='Move']");
+	//	public By ELEMENT_MOVE_POST = By.xpath("//a[@class='ItemIcon MovePostIcon' and text()='Move']");
 	public By ELEMENT_MOVE_POST = By.linkText("Move");
 	public String ELEMENT_GO_TO_THE_LASTS_READ_POST_FORUM = "//a[text()='${forum}']/../..//a[@title='Go to the last read post']";
 	public String ELEMENT_PRIVATE_POST_BUTTON = "//*[text()='${topic}  ']/../../..//a[text()='Private']";
 	public final String ELEMENT_POST_CONTENT = "//*[@class='postContent']//*[text()='${postContent}']";
 	public By ELEMENT_APPROVE_FORM = By.xpath("//span[@class='PopupTitle popupTitle' and contains(text(),'Posts to Approve')]");
 	public By ELEMENT_APPROVE_POST = By.linkText("Approve");
-//	public String ELEMENT_APPROVE_POST_CHECK = "//a[@data-original-title='${topic}']/../../../../..//*[@class='uiCheckbox']";
+	//	public String ELEMENT_APPROVE_POST_CHECK = "//a[@data-original-title='${topic}']/../../../../..//*[@class='uiCheckbox']";
 	public String ELEMENT_APPROVE_POST_CHECK = "//a[@data-original-title='${post}']/../../..//input[@type='checkbox']";
-	
+
 	public By ELEMENT_APPROVE_POST_BUTTON = By.xpath("//button[text()='Approve']");
 
 	public By ELEMENT_CENSOR_POST = By.linkText("Censor");
@@ -53,7 +53,7 @@ public class ForumManagePost extends ForumBase {
 	public String MSG_POST_CENSOR = "This post may contain offensive content. It will be displayed after moderation.";
 	public String MSG_POST_APPROVE = "Your post is pending for moderation. It will be displayed after approval.";
 	public String ELEMENT_POST_TITLE_TEXT = "//div[@class='postViewTitle pull-left' and contains(text(),'${post}')]";
-//	public String ELEMENT_POST_CONTENT_TEXT = "//div[@class='postContent']//p[contains(text(),'${post}')]";
+	//	public String ELEMENT_POST_CONTENT_TEXT = "//div[@class='postContent']//p[contains(text(),'${post}')]";
 	public String ELEMENT_POST_CONTENT_TEXT = "//div[@class='containerQuote']//p[contains(text(),'${post}')]";
 	public String ELEMENT_PRIVATE_POST_MESSAGE = "//div[@class='uiForumPortlet forumBoxNotification']//div[@class='content' and contains(text(),'${post}')]";
 	public By ELEMENT_PRIVATE_POST_CLOSE_NOTIFICATION = By.xpath("//div[@class='uiForumPortlet forumBoxNotification']//i[@class='uiIconClose']");
@@ -70,6 +70,9 @@ public class ForumManagePost extends ForumBase {
 	public By ELEMENT_POST_PREVIEW_BUTTON = By.xpath("//button[text()='Preview']");
 	public By ELEMENT_POST_CLOSE_BUTTON = By.xpath("//*[@id='UIAddPostContainer']//button[text()='Close']");
 	public By ELEMENT_POST_CANCEL_BUTTON = By.xpath("//form[@id='UIPostForm']//button[text()='Cancel']");
+	public By ELEMENT_POST_CENSOR_OK = By.xpath("//span[contains(text(),'This post may contain offensive content. It will be displayed after moderation.')]/../../..//*[text()='OK']");
+	public String MSG_POST_CENSOR_REPLY = "This post may contain offensive content. It will be displayed after moderation.";
+
 
 	//--------------quick reply form-----------------------------------------------------------
 	public By ELEMENT_POST_QUICK_MESSAGE = By.id("UITopicDetail.label.Message");
@@ -178,7 +181,11 @@ public class ForumManagePost extends ForumBase {
 			click(magTopic.ELEMENT_SUBMIT_BUTTON);
 			waitForElementNotPresent(ELEMENT_POST_POPUP_NEW);
 
-			waitForAndGetElement(ELEMENT_POST_CONTENT_TEXT.replace("${post}", message));
+			if(waitForAndGetElement(ELEMENT_POST_CONTENT_TEXT.replace("${post}", message),DEFAULT_TIMEOUT,0) == null){
+				waitForMessage(MSG_POST_CENSOR_REPLY);
+				click(ELEMENT_POST_CENSOR_OK);
+				info("The post will be censored");
+			}
 			info("Post reply successfully");
 		}
 	}
@@ -301,9 +308,9 @@ public class ForumManagePost extends ForumBase {
 		click(ELEMENT_MOVE_POST);
 		waitForAndGetElement(ELEMENT_POPUP_MOVE_POST);
 
-//		click(ELEMENT_DATA_ORIGINAL_TITLE.replace("${title}",destination));
-//		waitForElementNotPresent(ELEMENT_POPUP_MOVE_POST);
-//		waitForElementNotPresent(element_checkbox);
+		//		click(ELEMENT_DATA_ORIGINAL_TITLE.replace("${title}",destination));
+		//		waitForElementNotPresent(ELEMENT_POPUP_MOVE_POST);
+		//		waitForElementNotPresent(element_checkbox);
 
 		String[] temp;			 
 		/* Delimiter */
@@ -316,11 +323,11 @@ public class ForumManagePost extends ForumBase {
 			click(By.xpath("//div[@class='lastNode']//a[contains(text(),'"+temp[i]+"')]"));
 			Utils.pause(500);
 		}
-		
+
 		waitForElementNotPresent(ELEMENT_POPUP_MOVE_POST);
-//		String links[] = destination.split("/");
-//		int length = links.length;
-//		waitForAndGetElement(By.xpath("//a[@title='" + links[length - 2] + "']/../div[@title='" + links[length - 1] + "']"));
+		//		String links[] = destination.split("/");
+		//		int length = links.length;
+		//		waitForAndGetElement(By.xpath("//a[@title='" + links[length - 2] + "']/../div[@title='" + links[length - 1] + "']"));
 		info("Move post successfully");
 	}
 
@@ -338,7 +345,7 @@ public class ForumManagePost extends ForumBase {
 		Utils.pause(100);
 		click(ELEMENT_APPROVE_POST_BUTTON);
 	}
-	
+
 	/** Censor a post
 	 * @author thuntn
 	 * @param post

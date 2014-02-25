@@ -44,7 +44,7 @@ public class AnswerManageAnwser extends AnswerBase {
 	public final String ELEMENT_NUMBER_ANSWER = "//a[text()='${question}']/../../../*//a[2]/p[text()='1']";
 	public final By ELEMENT_LAGUAGE_SELECTED = By.xpath("//*[@id='Language']/option[@selected='selected']");
 	public final By ELEMENT_ANSWER_LANGUAGE = By.id("Language");
-	public final String ELEMENT_ANSWER_IN_QUESTION = "//*[contains(@id, 'Answer')]//*[text()='${answer}']";
+	public final String ELEMENT_ANSWER_IN_QUESTION = "//*[contains(@id, 'Answer')]//*[contains(text(),'${answer}')]";
 	public final String ELEMENT_GET_ANSWER_IN_QUESTION = "//*[contains(@class, 'answerContent')]//p";
 	public final String ELEMENT_ANSWER_POSITION_IN_LIST = "//*[contains(@id, 'Answer')][${no}]//*[text()='${answer}']";
 	public final String MSG_ANSWER_PENDING = "Your answer is pending for moderation. It will be displayed after approval.";

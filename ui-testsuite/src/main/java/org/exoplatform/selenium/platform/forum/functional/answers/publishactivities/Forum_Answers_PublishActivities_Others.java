@@ -104,7 +104,7 @@ public class Forum_Answers_PublishActivities_Others extends AnswerBase{
 		info("Dislike an Answers activity from like icon");
 		
 		//Submit question
-//		mQuest.submitQuestion(null, questName, questName, null, false, null);
+		mQuest.submitQuestion(null, questName, questName, null, false, null);
 
 		//Like activity
 		navTool.goToHomePage();

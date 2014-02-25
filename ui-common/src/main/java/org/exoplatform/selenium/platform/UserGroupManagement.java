@@ -272,7 +272,7 @@ public class UserGroupManagement extends PlatformBase {
 		for(int i =0; i < temp.length ; i++){
 			info("Go to " + temp[i]);
 			if (isInPermissionTab){
-				if (isElementPresent(By.xpath(groupName_5.replace("${groupName}", temp[i])))){
+				if (waitForAndGetElement(By.xpath(groupName_5.replace("${groupName}", temp[i])),10000,0) != null){
 					click(By.xpath(groupName_5.replace("${groupName}", temp[i])));
 				}else if (isElementPresent(By.xpath(groupName.replace("${groupName}", temp[i])))){
 					click(By.xpath(groupName.replace("${groupName}", temp[i])));
