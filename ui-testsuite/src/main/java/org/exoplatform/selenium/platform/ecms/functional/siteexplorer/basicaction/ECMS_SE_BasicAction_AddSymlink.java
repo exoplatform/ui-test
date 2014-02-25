@@ -1,6 +1,7 @@
 package org.exoplatform.selenium.platform.ecms.functional.siteexplorer.basicaction;
 
 import static org.exoplatform.selenium.TestLogger.info;
+
 import org.exoplatform.selenium.Button;
 import org.exoplatform.selenium.Dialog;
 import org.exoplatform.selenium.ManageAlert;
@@ -15,6 +16,7 @@ import org.exoplatform.selenium.platform.ecms.contentexplorer.ContextMenu;
 import org.exoplatform.selenium.platform.ecms.contentexplorer.SitesExplorer;
 import org.exoplatform.selenium.platform.ecms.contentexplorer.ContentTemplate.folderType;
 import org.exoplatform.selenium.platform.ecms.contentexplorer.ContextMenu.actionType;
+import org.exoplatform.selenium.Utils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
@@ -736,7 +738,7 @@ public class ECMS_SE_BasicAction_AddSymlink extends PlatformBase{
 	@Test
 	public void test27_AddSymlinkForNodeIsLockedByUserIsNotLocker(){
 		String DATA_CONTENT_FOLDER = "contentfolder27";
-		By ELEMENT_CONTENT_FOLDER = By.linkText(DATA_CONTENT_FOLDER); 
+		By ELEMENT_CONTENT_FOLDER = By.xpath(siteExp.ELEMENT_SE_NODE.replace("{$node}", DATA_CONTENT_FOLDER));
 
 		cTemplate.createAndCheckContentFolder(DATA_CONTENT_FOLDER, ELEMENT_CONTENT_FOLDER);
 
@@ -744,37 +746,33 @@ public class ECMS_SE_BasicAction_AddSymlink extends PlatformBase{
 		ecms.goToNode(ELEMENT_CONTENT_FOLDER);
 		cMenu.contextMenuAction(ELEMENT_CONTENT_FOLDER, cMenu.ELEMENT_CONTEXT_MENU_LOCK);
 		assert cMenu.isLockedNode(ELEMENT_CONTENT_FOLDER): "Lock node unsuccessfully";
-		driver.close();
 
 		//login with mary
-		info("Init new session");
-		initSeleniumTest();
-		driver.get(baseUrl);
-		magAcc = new ManageAccount(driver);
-		navToolBar = new NavigationToolbar(driver);
-		ecms = new EcmsBase(driver);
-		cMenu = new ContextMenu(driver);
-
-		info("Login with Mary");
-		magAcc.signIn("mary", "gtn");
-
+		info("Init new session and Login with Mary");
+		loginWithAnotherAccOnThesameBrowser("mary", "gtn");
+		magAcc = new ManageAccount(newDriver);
+		navToolBar = new NavigationToolbar(newDriver);
+		ecms = new EcmsBase(newDriver);
+		cMenu = new ContextMenu(newDriver);
+		siteExp = new SitesExplorer(newDriver);
+		
 		//check cannot add symlink for node by user mary
 		navToolBar.goToSiteExplorer();
-		ecms.goToNode(ELEMENT_CONTENT_FOLDER);
-		waitForElementNotPresent(ecms.ELEMENT_ACTION_BAR_ADD_SYMLINK);
-		if (waitForAndGetElement(ecms.ELEMENT_MORE_LINK_WITHOUT_BLOCK, 5000, 0) != null){
-			click(ecms.ELEMENT_MORE_LINK_WITHOUT_BLOCK);
-			//waitForElementNotPresent(ecms.ELEMENT_ACTION_BAR_ADD_SYMLINK);
-		}
-		rightClickOnElement(ELEMENT_CONTENT_FOLDER);
-		waitForElementNotPresent(cMenu.ELEMENT_MENU_ADD_SYMLINK);
+		ELEMENT_CONTENT_FOLDER = By.xpath(siteExp.ELEMENT_SE_NODE.replace("{$node}", DATA_CONTENT_FOLDER));
+		Actions actions = new Actions(newDriver);
+		actions.click(newDriver.findElement(ELEMENT_CONTENT_FOLDER)).perform();
+		Utils.pause(5000);
+		WebElement element1 = getElement(By.xpath("//a[@class='actionIcon']/i[@class='uiIconEcmsAddSymLink']"),newDriver);
+		assert element1==null;
+
 		info("cannot add symlink for node by user is not locker");
 		magAcc.signOut();
 
 		//delete data
 		magAcc.signIn(DATA_USER, DATA_PASS);
 		navToolBar.goToSiteExplorer();
-		cMenu.deleteDocument(ELEMENT_CONTENT_FOLDER);			
+		cMenu.deleteDocument(ELEMENT_CONTENT_FOLDER);	
+		newDriver.close();
 	}
 
 	/**

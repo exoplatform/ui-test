@@ -106,6 +106,7 @@ public class ECMS_SE_CreateNode_PictureOnHeadLayout extends PlatformBase{
 	@Test
 	public void test02_AddPictureOnHeadLayoutContentInWebContentFolder(){
 		String WEB_CONTENT_TITLE = "ECMS_Picture_WebContent_02";
+		By bNode = By.xpath(sitesExp.ELEMENT_SE_NODE.replace("{$node}", WEB_CONTENT_TITLE));
 		String path2Image = "TestData/Winter.jpg";
 		
 		info("Go to Site Explorer");
@@ -118,7 +119,8 @@ public class ECMS_SE_CreateNode_PictureOnHeadLayout extends PlatformBase{
 		waitForAndGetElement(By.xpath(cMenu.ELEMENT_FILE_TITLE.replace("${titleOfFile}", WEB_CONTENT_TITLE)));	
 
 		info("Restore data");
-		cMenu.deleteDocument(By.xpath(cMenu.ELEMENT_FILE_TITLE.replace("${titleOfFile}", WEB_CONTENT_TITLE)));		
+		click(By.linkText("web contents"));
+		cMenu.deleteDocument(bNode);		
 	}
 	
 

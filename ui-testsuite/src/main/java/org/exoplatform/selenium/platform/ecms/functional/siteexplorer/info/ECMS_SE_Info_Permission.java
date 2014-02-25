@@ -751,6 +751,7 @@ public class ECMS_SE_Info_Permission  extends PlatformBase {
 		String user = "*:/platform/web-contributors";
 
 		mDrive.addView2Drive("Admin", "Managed Sites");
+		navToolBar.goToSiteExplorer();
 		actBar.goToViewMode("Admin");
 		
 		/*Step 1: Select node to view permission of node*/

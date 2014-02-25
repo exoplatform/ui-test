@@ -169,7 +169,7 @@ public class ECMS_SE_Publication extends PlatformBase{
 		String oneMinuteAfterCurrentTime = addMinuteToCurrentDateTime(1);
 		String fourMinuteAfterCurrentTime = addMinuteToCurrentDateTime(3);
 		actBar.managePublication("Staged",oneMinuteAfterCurrentTime,fourMinuteAfterCurrentTime);
-		Utils.pause(90000);
+		Utils.pause(95000);
 
 		//Check status of document
 		actBar.openManagePublicationForm();

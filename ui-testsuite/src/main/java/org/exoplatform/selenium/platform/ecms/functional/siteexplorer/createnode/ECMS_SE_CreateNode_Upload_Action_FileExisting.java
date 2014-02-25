@@ -128,6 +128,7 @@ public class ECMS_SE_CreateNode_Upload_Action_FileExisting extends PlatformBase{
 		waitForElementNotPresent(ecms.ELEMENT_FILE_CLONE_CHECKBOX.replace("${node}", FILE_MOFFICE_NAME + ".pdf[2]"));
 
 		info("Restore data");
+		actBar.goToViewMode("Admin");
 		actBar.actionsOnElement(FILE_MOFFICE_NAME, actionType.DELETE);	
 	}
 

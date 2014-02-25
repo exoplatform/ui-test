@@ -3,6 +3,7 @@ package org.exoplatform.selenium.platform.ecms.functional.siteexplorer.publishac
 import static org.exoplatform.selenium.TestLogger.info;
 
 import org.exoplatform.selenium.Button;
+import org.exoplatform.selenium.Utils;
 import org.exoplatform.selenium.platform.HomePageActivity;
 import org.exoplatform.selenium.platform.ManageAccount;
 import org.exoplatform.selenium.platform.NavigationToolbar;
@@ -280,7 +281,7 @@ public class ECMS_SE_PublishActivities_FilesActivities  extends PlatformBase {
 	@Test
 	public void test06_RemoveTheFileActivityAfterDeletingAFileInContentExplorer(){
 		//Declare variable
-		String file = "KS_Wiki_Attachment_pdffile.pdf";
+		String file = "Sniff_public_activity_08.jpg";
 		By elementfile = By.xpath(siteExp.ELEMENT_SE_NODE.replace("{$node}", file));
 				
 		/*Step 1: Create file activity*/
@@ -296,12 +297,13 @@ public class ECMS_SE_PublishActivities_FilesActivities  extends PlatformBase {
 				
 		//- The File activity is displayed in the activity stream
 		info("-- A File activity is added to the activity stream --");
-		activity.checkInforAfterAddingDocument(file, "", "File", "1 MB", "", "", "", "");
+		activity.checkInforAfterAddingDocument(file, "", "File", "103 KB", "", "", "", "");
 				
 		/*Step 2: Delete File*/
 		//Delete the file
 		navToolBar.goToSiteExplorer();
 		cMenu.deleteData(elementfile);
+		Utils.pause(1000);
 		
 		//Back to the Homepage
 		info("-- Back to the Home page --");
@@ -322,7 +324,7 @@ public class ECMS_SE_PublishActivities_FilesActivities  extends PlatformBase {
 	@Test
 	public void test07_DeleteAFileActivityFromIntranetActivityStreamByOwner(){
 		//Declare variable
-		String file = "KS_Wiki_Attachment_pdffile.pdf";
+		String file = "Sniff_public_activity_09.jpg";
 		By elementfile = By.xpath(siteExp.ELEMENT_SE_NODE.replace("{$node}", file));
 				
 		/*Step 1: Create file activity*/
@@ -338,7 +340,7 @@ public class ECMS_SE_PublishActivities_FilesActivities  extends PlatformBase {
 				
 		//- The File activity is displayed in the activity stream
 		info("-- A File activity is added to the activity stream --");
-		activity.checkInforAfterAddingDocument(file, "", "File", "1 MB", "", "", "", "");
+		activity.checkInforAfterAddingDocument(file, "", "File", "103 KB", "", "", "", "");
 				
 		/*Step 2: See delete activity icon*/
 		/*Step 3: Delete activity*/
@@ -422,7 +424,7 @@ public class ECMS_SE_PublishActivities_FilesActivities  extends PlatformBase {
 	@Test
 	public void test09_DeleteAFileActivityFromSpaceActivityStreamByOwner(){
 		//Declare variable
-		String file = "KS_Wiki_Attachment_pdffile.pdf";
+		String file = "Sniff_public_activity_10.jpg";
 		String spacename = "Space09";
 		String spacedesc = "Description Of Space09";
 				
@@ -444,7 +446,7 @@ public class ECMS_SE_PublishActivities_FilesActivities  extends PlatformBase {
 				
 		//- The File activity is displayed in the activity stream
 		info("-- A File activity is added to the activity stream --");
-		activity.checkInforAfterAddingDocument(file, "", "File", "1 MB", "", "", "", "");
+		activity.checkInforAfterAddingDocument(file, "", "File", "103 KB", "", "", "", "");
 				
 		/*Step 2: See delete activity icon*/
 		/*Step 3: Delete activity*/

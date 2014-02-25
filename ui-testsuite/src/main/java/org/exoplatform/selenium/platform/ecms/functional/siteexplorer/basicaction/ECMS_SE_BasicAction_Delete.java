@@ -161,7 +161,7 @@ public class ECMS_SE_BasicAction_Delete extends PlatformBase {
 	@Test
 	public void test07_DeleteLockedNodeByUserIsNotLocker(){
 		String DATA_CONTENT_FOLDER = "ECMS_DMS_SE_BasicAction_Delete_07";
-		By ELEMENT_CONTENT_FOLDER = By.linkText(DATA_CONTENT_FOLDER);
+		By ELEMENT_CONTENT_FOLDER = By.xpath(siteExp.ELEMENT_SE_NODE.replace("{$node}", DATA_CONTENT_FOLDER));
 
 		//create new content folder by John
 		navToolBar.goToSiteExplorer();
@@ -175,21 +175,26 @@ public class ECMS_SE_BasicAction_Delete extends PlatformBase {
 
 		info("Lock node successfully");
 		assert cMenu.isLockedNode(ELEMENT_CONTENT_FOLDER):"Lock node unsuccessfully";
-		driver.close();
 
 		//login with user mary
-		initSeleniumTest();
-		driver.get(baseUrl);
-		ecms = new EcmsBase(driver);
-		navToolBar = new NavigationToolbar(driver);
-		magAcc = new ManageAccount(driver);
-		cMenu = new ContextMenu(driver);
-		magAcc.signIn("mary", "gtn");
+		info("Initialize a new session and Login with Mary");
+		loginWithAnotherAccOnThesameBrowser("mary", "gtn");
+		ecms = new EcmsBase(newDriver);
+		navToolBar = new NavigationToolbar(newDriver);
+		magAcc = new ManageAccount(newDriver);
+		cMenu = new ContextMenu(newDriver);
 		navToolBar.goToSiteExplorer();
+		siteExp = new SitesExplorer(newDriver);
 
 		//check user mary can not delete node
-		rightClickOnElement(ELEMENT_CONTENT_FOLDER);
-		waitForElementNotPresent(cMenu.ELEMENT_MENU_DELETE);
+		Actions actions = new Actions(newDriver);
+		ELEMENT_CONTENT_FOLDER = By.xpath(siteExp.ELEMENT_SE_NODE.replace("{$node}", DATA_CONTENT_FOLDER));
+		actions.moveToElement(newDriver.findElement(ELEMENT_CONTENT_FOLDER));
+		actions.contextClick(newDriver.findElement(ELEMENT_CONTENT_FOLDER)).perform();
+		Utils.pause(5000);
+		WebElement element1 = getElement(By.xpath("//a[@class='actionIcon']/i[@class='uiIconEcmsDelete']"),newDriver);
+		assert element1==null;
+		
 		info("User mary cannot delete this locker node");
 		magAcc.signOut();
 
@@ -197,6 +202,7 @@ public class ECMS_SE_BasicAction_Delete extends PlatformBase {
 		magAcc.signIn("john", "gtn");
 		navToolBar.goToSiteExplorer();
 		cMenu.deleteDocument(ELEMENT_CONTENT_FOLDER);
+		newDriver.close();
 	}
 
 	/**

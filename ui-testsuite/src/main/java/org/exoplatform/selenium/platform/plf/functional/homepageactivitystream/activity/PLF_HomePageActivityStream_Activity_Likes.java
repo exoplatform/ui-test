@@ -212,16 +212,19 @@ public class PLF_HomePageActivityStream_Activity_Likes extends Activity {
 		magAcc.userSignIn(userType.PUBLISHER);
 		peoConn.acceptInvitation(user);
 		navToolBar.goToHomePage();
+		selectFileter("Connections");
 		hpActivity.likeOrUnlikeActivity(activity);
 
 		magAcc.userSignIn(userType.DEVELOPER);
 		peoConn.acceptInvitation(user);
 		navToolBar.goToHomePage();
+		selectFileter("Connections");
 		hpActivity.likeOrUnlikeActivity(activity);
 
 		magAcc.userSignIn(userType.AUTHOR);
 		peoConn.acceptInvitation(user);
 		navToolBar.goToHomePage();
+		selectFileter("Connections");
 		hpActivity.likeOrUnlikeActivity(activity);
 
 		magAcc.userSignIn(userType.ADMIN);
@@ -232,6 +235,7 @@ public class PLF_HomePageActivityStream_Activity_Likes extends Activity {
 		/* Step 1: Check message */
 		//- Connect to Intranet with User A
 		navToolBar.goToHomePage();
+		selectFileter("My Activities");
 		int newNumLike = Integer.parseInt(waitForAndGetElement(hpActivity.ELEMENT_LIKE_ICON.replace("${activityText}", activity)).getText().trim());
 		waitForAndGetElement(ELEMENT_USER_NAME_LIKE_THIS_ACTIVITY.replace("${activityText}", activity).replace("${userName}", user3 +" and "+String.valueOf(newNumLike-1)+" others"));
 

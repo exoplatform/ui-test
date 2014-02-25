@@ -231,11 +231,12 @@ public class TestBase {
 		waitForAndGetElement(ELEMENT_ACCOUNT_NAME_LINK);
 	}
 
-	public WebElement getElement(Object locator) {
+	public WebElement getElement(Object locator, Object... opParams) {
 		By by = locator instanceof By ? (By)locator : By.xpath(locator.toString());
+		WebDriver wDriver = (WebDriver) (opParams.length > 0 ? opParams[0]: driver);	
 		WebElement elem = null;
 		try {
-			elem = driver.findElement(by);
+			elem = wDriver.findElement(by);
 		} catch (NoSuchElementException e) {
 
 		}

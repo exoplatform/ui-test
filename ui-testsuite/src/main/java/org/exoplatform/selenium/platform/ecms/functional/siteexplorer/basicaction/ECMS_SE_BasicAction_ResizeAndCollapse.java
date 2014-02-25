@@ -296,13 +296,12 @@ public class ECMS_SE_BasicAction_ResizeAndCollapse extends PlatformBase {
 		info("Size of left container to maximum is" + left);
 
 		waitForAndGetElement(ecms.ELEMENT_MORE_LINK_WITHOUT_BLOCK);
+		waitForAndGetElement(ecms.ELEMENT_UPLOAD_FILE_LINK);
 		waitForElementNotPresent(actBar.ELEMENT_NEW_FOLDER_LINK);
-		waitForElementNotPresent(ecms.ELEMENT_UPLOAD_FILE_LINK);
 		waitForElementNotPresent(ecms.ELEMENT_PERMISSION_LINK);
 
 		click(ecms.ELEMENT_MORE_LINK_WITHOUT_BLOCK);
 		waitForAndGetElement(actBar.ELEMENT_NEW_FOLDER_LINK);
-		waitForAndGetElement(ecms.ELEMENT_UPLOAD_FILE_LINK, DEFAULT_TIMEOUT, 1, 2);
 		waitForAndGetElement(ecms.ELEMENT_PERMISSION_LINK);
 
 		// reset width of left panel  to default

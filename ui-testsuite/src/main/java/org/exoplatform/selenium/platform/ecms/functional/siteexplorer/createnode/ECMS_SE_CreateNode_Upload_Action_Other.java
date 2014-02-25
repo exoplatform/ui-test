@@ -3,6 +3,7 @@ package org.exoplatform.selenium.platform.ecms.functional.siteexplorer.createnod
 import static org.exoplatform.selenium.TestLogger.info;
 
 import org.exoplatform.selenium.Button;
+import org.exoplatform.selenium.Utils;
 import org.exoplatform.selenium.platform.ManageAccount;
 import org.exoplatform.selenium.platform.NavigationToolbar;
 import org.exoplatform.selenium.platform.PlatformBase;
@@ -13,7 +14,10 @@ import org.exoplatform.selenium.platform.ecms.contentexplorer.ContentTemplate;
 import org.exoplatform.selenium.platform.ecms.contentexplorer.ContextMenu;
 import org.exoplatform.selenium.platform.ecms.contentexplorer.ContentTemplate.folderType;
 import org.exoplatform.selenium.platform.ecms.contentexplorer.ContextMenu.actionType;
+import org.exoplatform.selenium.platform.ecms.contentexplorer.SitesExplorer;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -36,6 +40,7 @@ public class ECMS_SE_CreateNode_Upload_Action_Other extends PlatformBase{
 	ContentTemplate cTemplate;
 	ActionBar actBar;
 	EcmsPermission ecmsPer;
+	SitesExplorer siteExp;
 
 	public String DATA_USER = "john";
 	public String DATA_PASS = "gtn";
@@ -52,6 +57,7 @@ public class ECMS_SE_CreateNode_Upload_Action_Other extends PlatformBase{
 		actBar = new ActionBar(driver);
 		ecmsPer = new EcmsPermission(driver);
 		button = new Button(driver);
+		siteExp = new SitesExplorer(driver);
 		magAcc.signIn(DATA_USER, DATA_PASS);
 	}
 
@@ -70,6 +76,7 @@ public class ECMS_SE_CreateNode_Upload_Action_Other extends PlatformBase{
 	@Test
 	public void test01_UploadFileInLockedNodeByUserIsNotLockerInSiteExplorer(){
 		String DOCUMENT_FOLDER_TITLE = "ECMS_SE_Upload_Other_01";
+		By bNode = By.xpath(siteExp.ELEMENT_SE_NODE.replace("{$node}", DOCUMENT_FOLDER_TITLE));
 
 		info("Go to Content Explorer");
 		navToolBar.goToSiteExplorer();
@@ -85,18 +92,23 @@ public class ECMS_SE_CreateNode_Upload_Action_Other extends PlatformBase{
 		navToolBar = new NavigationToolbar(newDriver);
 		ecms = new EcmsBase(newDriver);
 		cMenu = new ContextMenu(newDriver);
+		siteExp = new SitesExplorer(newDriver);
 
 		info("Checking... [Mary] can not see [Upload] icon on action bar");
 		navToolBar.goToSiteExplorer();
-		ecms.goToNode(By.linkText(DOCUMENT_FOLDER_TITLE));
-		waitForElementNotPresent(ELEMENT_UPLOAD_LINK_XPATH);
+		bNode = By.xpath(siteExp.ELEMENT_SE_NODE.replace("{$node}", DOCUMENT_FOLDER_TITLE));
+		Actions actions = new Actions(newDriver);
+		actions.click(newDriver.findElement(bNode)).perform();
+		Utils.pause(5000);
+		WebElement element1 = getElement(ELEMENT_UPLOAD_LINK_XPATH,newDriver);
+		assert element1==null;
 
 		info("Restore data");
 		magAcc.signOut();
 		magAcc.signIn(DATA_USER, DATA_PASS);
 		//reset data
 		navToolBar.goToSiteExplorer();
-		cMenu.deleteDocument(By.linkText(DOCUMENT_FOLDER_TITLE));
+		cMenu.deleteDocument(bNode);
 		newDriver.manage().deleteAllCookies();
 		newDriver.quit();
 	}

@@ -36,6 +36,9 @@ public class ContextMenu extends EcmsBase{
 	/*End Added*/
 	
 	public final By ELEMENT_CONTEXT_MENU_LOCK = By.xpath("//*[@class='uiContextMenuContainer']//i[@class='uiIconEcmsLock']"); 
+	public final By ELEMENT_CONTEXT_MENU_EDIT = By.xpath("//*[@class='uiContextMenuContainer']//i[@class='uiIconEcmsEditDocument']");
+	public final By ELEMENT_CONTEXT_MENU_DELETE = By.xpath("//*[@class='uiContextMenuContainer']//i[@class='uiIconEcmsDelete']");
+	public final By ELEMENT_CONTEXT_MENU_ADD_SYMLINK = By.xpath("//*[@class='uiContextMenuContainer']//i[@class='uiIconEcmsAddSymLink']");
 			//By.className("uiIconEcmsLock");
 	public final By ELEMENT_MENU_UNLOCK = By.className("uiIconEcmsUnlock");
 	public final By ELEMENT_MENU_CHECKIN = By.className("uiIconEcmsCheckIn");
@@ -187,10 +190,12 @@ public class ContextMenu extends EcmsBase{
 					click(By.xpath("//*[@data-original-title = 'File Explorer']"));
 			}
 			rightClickOnElement(locator);
+			Utils.pause(500);
 			if(isElementPresent("//*[@id='ECMContextMenu']//*[@class='uiIconEcmsDelete']")){
 				waitForAndGetElement("//*[@id='ECMContextMenu']//*[@class='uiIconEcmsDelete']").click();
 				//waitForTextPresent("Delete");
 				//click(By.linkText("OK"));
+				Utils.pause(500);
 				dialog.deleteInDialog();
 				break;
 			}

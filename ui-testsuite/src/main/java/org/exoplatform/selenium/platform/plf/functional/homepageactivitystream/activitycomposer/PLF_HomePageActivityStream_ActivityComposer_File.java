@@ -294,7 +294,7 @@ public class PLF_HomePageActivityStream_ActivityComposer_File extends Activity {
 	 * Step 2: Select a file by double-clicking
 	 * ERROR: Refer https://jira.exoplatform.org/browse/COMMONS-278
 	 */
-	//@Test (groups="error")
+	@Test (groups="error")
 	public void test08_OpenSelectFilePopup(){
 		/*Declare variables*/
 		String uploadFileName = "ECMS_DMS_SE_Upload_pdffile.pdf";
@@ -331,7 +331,7 @@ public class PLF_HomePageActivityStream_ActivityComposer_File extends Activity {
 	@Test
 	public void test09_SelectAFileByASimpleClick(){
 		/*Declare variables*/
-		String uploadFileName = "ECMS_DMS_SE_Upload_pdffile.pdf";
+		String uploadFileName = "ECMS_Undo_Delete_1.txt";
 		String folder = "folder77802";
 		String driverName = "Personal Drives";
 		String folderPath = "Personal Documents";
@@ -358,6 +358,7 @@ public class PLF_HomePageActivityStream_ActivityComposer_File extends Activity {
 		activity.deleteActivity(uploadFileName);
 		navToolBar.goToSiteExplorer();
 		actBar.chooseDrive(ecms.ELEMENT_PERSONAL_DRIVE);
+		actBar.goToViewMode("Admin");
 		actBar.actionsOnElement(folder, actionType.DELETE,true,true);
 	}
 
@@ -369,7 +370,7 @@ public class PLF_HomePageActivityStream_ActivityComposer_File extends Activity {
 	@Test
 	public void test10_ShareAnAttachedFile(){
 		/*Declare variables*/
-		String uploadFileName = "ECMS_DMS_SE_Upload_pdffile.pdf";
+		String uploadFileName = "ECMS_Undo_Delete_2.txt";
 		String folder = "folder77811";
 		String driverName = "Personal Drives";
 		String folderPath = "Personal Documents";
@@ -383,7 +384,7 @@ public class PLF_HomePageActivityStream_ActivityComposer_File extends Activity {
 		//- From the [Activity Composer] box, click on [File] button
 		//- Select a drive from [Select drive] list
 		//- Click a folder, do this until there is a file in the current folder
-		goToFolderPath(driverName,folderPath);
+		goToFolderPath(driverName,folderPath+"/"+folder);
 
 		//- Double click this file
 		click(By.linkText(uploadFileName));
@@ -400,6 +401,7 @@ public class PLF_HomePageActivityStream_ActivityComposer_File extends Activity {
 		activity.deleteActivity(uploadFileName);
 		navToolBar.goToSiteExplorer();
 		actBar.chooseDrive(ecms.ELEMENT_PERSONAL_DRIVE);
+		actBar.goToViewMode("Admin");
 		actBar.actionsOnElement(folder, actionType.DELETE,true,true);
 	}
 
@@ -415,7 +417,7 @@ public class PLF_HomePageActivityStream_ActivityComposer_File extends Activity {
 	@Test
 	public void test11_ShareAnUploadedFile(){
 		/*Declare variables*/
-		String uploadFileName = "ECMS_DMS_SE_Upload_pdffile.pdf";
+		String uploadFileName = "ECMS_Undo_Delete_3.txt";
 		String folder = "folder77811";
 		String driverName = "Personal Drives";
 		String folderPath = "Personal Documents";
@@ -442,6 +444,7 @@ public class PLF_HomePageActivityStream_ActivityComposer_File extends Activity {
 		activity.deleteActivity(uploadFileName);
 		navToolBar.goToSiteExplorer();
 		actBar.chooseDrive(ecms.ELEMENT_PERSONAL_DRIVE);
+		actBar.goToViewMode("Admin");
 		actBar.actionsOnElement(folder, actionType.DELETE,true,true);
 	}
 
@@ -456,7 +459,7 @@ public class PLF_HomePageActivityStream_ActivityComposer_File extends Activity {
 	@Test
 	public void test12_ShowTheVerticalScrollBarForListOfFiles(){
 		/*Declare variables*/
-		String uploadFileName1 = "ECMS_DMS_SE_Upload_pdffile.pdf";
+		String uploadFileName1 = "ECMS_Undo_Delete_4.txt";
 		String uploadFileName2 = "ECMS_DMS_SE_File.jpg";
 		String folder1 = "778151";
 		String folder2 = "778152";
@@ -526,6 +529,7 @@ public class PLF_HomePageActivityStream_ActivityComposer_File extends Activity {
 		//Clear data
 		navToolBar.goToSiteExplorer();
 		actBar.chooseDrive(ecms.ELEMENT_PERSONAL_DRIVE);
+		actBar.goToViewMode("Admin");
 		actBar.actionsOnElement(folder1, actionType.DELETE,true,true);
 		actBar.actionsOnElement(folder2, actionType.DELETE,true,true);
 	}

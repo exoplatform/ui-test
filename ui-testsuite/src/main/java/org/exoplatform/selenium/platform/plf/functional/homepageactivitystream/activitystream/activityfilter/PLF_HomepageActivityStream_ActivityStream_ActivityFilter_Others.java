@@ -10,8 +10,6 @@ import org.exoplatform.selenium.platform.NavigationToolbar;
 import org.exoplatform.selenium.platform.social.Activity;
 import org.exoplatform.selenium.platform.social.ManageMember;
 import org.exoplatform.selenium.platform.social.PeopleConnection;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebElement;
 import org.testng.annotations.*;
 
 /**
@@ -394,9 +392,22 @@ public class PLF_HomepageActivityStream_ActivityStream_ActivityFilter_Others ext
 	public  void test10_DisplayTheComposerOnActivityStreamOfAConnectedUser() {
 		info("Test 10 Display the composer on activity stream of a connected user");
 		String text = "Activity 77697";
+		String username = getRandomString();
+		String password = username;
+		String firstName = "firstName";
+		String lastName = "lastName";
+		String displayName = firstName + " " + lastName;
+		String email = username+"@platform.com";
+		String userNameGiven = "";
+		String language = "English";
+		boolean verify = true;
+		nav.goToNewStaff();
+		acc.addNewUserAccount(username,password,password,firstName,lastName,displayName,email,userNameGiven,language,verify);
+		nav.goToHomePage();
 		nav.goToConnectionPage();
-		pConn.connectPeople(user1);
-		acc.userSignIn(userType.DEVELOPER);
+		pConn.connectPeople(displayName);
+		acc.signOut();
+		acc.signIn(username, password);
 		pConn.acceptInvitation(user);
 		/*
 		- Connect to Intranet with user A
@@ -411,20 +422,12 @@ public class PLF_HomepageActivityStream_ActivityStream_ActivityFilter_Others ext
 		click(pConn.ELEMENT_PEOPLE_SEARCH.replace("${peopleName}", user));
 		waitForAndGetElement(ELEMENT_MY_ACTIVITY_STREAM_TAB);
 		click(ELEMENT_MY_ACTIVITY_STREAM_TAB);
-		WebElement inputText = waitForAndGetElement(home.ELEMENT_ACTIVITY_TEXTBOX);
 		/*
 		- Post some activities on user B's activity stream
 		 *Input Data: 
 		 *Expected Outcome: 
 		- All activities posted by user A are well displayed on user B's activity stream		*/		
-		WebElement shareButton = waitForAndGetElement(ELEMENT_SHARE_BUTTON);
-		((JavascriptExecutor)driver).executeScript("arguments[0].textContent = '"+text+"';", inputText);
-		((JavascriptExecutor)driver).executeScript("arguments[0].disabled = false;", shareButton);
-		((JavascriptExecutor)driver).executeScript("arguments[0].className = 'pull-right btn btn-primary';", shareButton);
-		waitForAndGetElement(ELEMENT_SHARE_BUTTON);
-		info("----Click share button----");
-		click(ELEMENT_SHARE_BUTTON);
-		Utils.pause(1000);
+		addActivity(true, text, false,"");
 		nav.goToHomePage();
 		waitForAndGetElement(home.ELEMENT_ACTIVITY.replace("${activityText}",text));
 		acc.signOut();
@@ -434,7 +437,8 @@ public class PLF_HomepageActivityStream_ActivityStream_ActivityFilter_Others ext
 		acc.signOut();
 
 		//delete data
-		acc.userSignIn(userType.DEVELOPER);
+		acc.signOut();
+		acc.signIn(username, password);
 		home.deleteActivity(text);
 		nav.goToConnectionPage();
 		pConn.removeConnection(user);

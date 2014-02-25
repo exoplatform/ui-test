@@ -17,6 +17,7 @@ import org.exoplatform.selenium.platform.ecms.contentexplorer.SitesExplorer;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -286,8 +287,8 @@ public class ECMS_SE_BasicAction_Edit extends PlatformBase {
 	 */
 	@Test
 	public void test31_EditLockedDocumentByUserIsNotLocker(){
-		String DATA_FILE_TITLE = "FNC_ECMS_FEX_ACTION_09_31";
-		By bDocument = By.linkText(DATA_FILE_TITLE);
+		String DATA_FILE_TITLE = "node66434";
+		By bNode = By.xpath(siteExp.ELEMENT_SE_NODE.replace("{$node}", DATA_FILE_TITLE));
 
 		//create new document with John: FILE document
 		actBar.goToAddNewContent();
@@ -295,34 +296,35 @@ public class ECMS_SE_BasicAction_Edit extends PlatformBase {
 		info("Create new File document is successful");
 
 		//lock node with John
-		cMenu.contextMenuAction(bDocument, cMenu.ELEMENT_CONTEXT_MENU_LOCK);
+		cMenu.contextMenuAction(bNode, cMenu.ELEMENT_CONTEXT_MENU_LOCK);
 
 		//check lock node
-		assert cMenu.isLockedNode(bDocument): "Lock node unsuccessfully";
-		driver.close();
+		assert cMenu.isLockedNode(bNode): "Lock node unsuccessfully";
 
 		//login with mary
-		info("Initialize a new session");
-		initSeleniumTest();
-		driver.get(baseUrl);
-		magAcc = new ManageAccount(driver);
-		navToolBar = new NavigationToolbar(driver);
-		ecms = new EcmsBase(driver);
-		cMenu = new ContextMenu(driver);
-
-		info("Login with Mary");
-		magAcc.signIn("mary", "gtn");
+		info("Initialize a new session and Login with Mary");
+		loginWithAnotherAccOnThesameBrowser("mary", "gtn");
+		magAcc = new ManageAccount(newDriver);
+		navToolBar = new NavigationToolbar(newDriver);
+		ecms = new EcmsBase(newDriver);
+		cMenu = new ContextMenu(newDriver);
+		actBar = new ActionBar(newDriver);
+		siteExp = new SitesExplorer(newDriver);
 
 		//check can not edit this document with user Mary
 		navToolBar.goToSiteExplorer();
-		ecms.goToNode(DATA_FILE_TITLE);
-		waitForElementNotPresent(actBar.ELEMENT_EDIT_LINK);
-		info("Cannot edit a locked document with user is not locker");
+		bNode = By.xpath(siteExp.ELEMENT_SE_NODE.replace("{$node}", DATA_FILE_TITLE));
+		Actions actions = new Actions(newDriver);
+		actions.click(newDriver.findElement(bNode)).perform();
+		Utils.pause(5000);
+		WebElement element1 = getElement(By.xpath("//a[@class='actionIcon']/i[@class='uiIconEcmsEditDocument']"),newDriver);
+		assert element1==null;
 
 		magAcc.signOut();
 		magAcc.signIn(DATA_USER, DATA_PASS);
 		navToolBar.goToSiteExplorer();
-		cMenu.deleteDocument(bDocument);
+		cMenu.deleteDocument(bNode);
+		newDriver.close();
 	}
 
 	/**

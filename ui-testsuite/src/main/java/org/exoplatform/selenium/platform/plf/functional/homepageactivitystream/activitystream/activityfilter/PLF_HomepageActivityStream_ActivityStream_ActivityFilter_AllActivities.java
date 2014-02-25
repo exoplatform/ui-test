@@ -161,7 +161,8 @@ public class PLF_HomepageActivityStream_ActivityStream_ActivityFilter_AllActivit
 		// - Post an activity in the space stream
 		acc.userSignIn(userType.ADMIN);
 		mMember.goToMySpacePage();
-		goToActivityStream();
+		click(mMember.ELEMENT_SPACE_TITLE.replace("${spaceName}", spaceName));
+		mMember.goToSpaceMenu("Activity Stream");
 		addActivity(true, text, false, "");
 		acc.signOut();
 		// Step 5: Check activity on "All activities" stream by user B

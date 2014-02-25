@@ -133,7 +133,7 @@ public class ECMS_SE_FileManagementView_Actions_Select extends PlatformBase{
 		waitForAndGetElement(actBar.ELEMENT_RENAME_NODE);
 		waitForAndGetElement(actBar.ELEMENT_ADD_SYMLINK_NODE);
 		waitForAndGetElement(cMenu.ELEMENT_VIEW_INFORMATION);
-		waitForAndGetElement(actBar.ELEMENT_DOWNLOAD_NODE);
+		waitForAndGetElement(actBar.ELEMENT_ECMS_DOWNLOAD_NODE);
 	}
 
 	/**CaseID: 74558

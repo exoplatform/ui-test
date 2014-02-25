@@ -109,7 +109,7 @@ public class ECMS_SE_CreateNode_Category extends PlatformBase{
 		ecMain.goToCategoriesTabInContentAdmin();
 		click(magCa.ELEMENT_EDIT_CATEGORY_TREE.replace("${categoryTreeName}", "intranet"));
 		magCa.expandNode("intranet", true);
-		waitForAndGetElement(cMenu.ELEMENT_FILE_TITLE.replace("${titleOfFile}", categoryName));
+		waitForAndGetElement(bNode3);
 		info("Check the category " + categoryName + " in ECM Admin..." + "succesful!");
 
 		info("Restore data");
