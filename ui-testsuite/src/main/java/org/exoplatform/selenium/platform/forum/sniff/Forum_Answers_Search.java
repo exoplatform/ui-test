@@ -51,7 +51,7 @@ public class Forum_Answers_Search extends AnswerBase {
 		magCat.addNewCategoryInAnswer(categoryName, null, description, 2, userGroup, true, false);
 
 		quickSearchInAnswer(categoryName);
-		waitForAndGetElement(By.linkText(categoryName));
+		waitForElementNotPresent(By.linkText(categoryName));
 		click(ELEMENT_CLOSE_QUICK_SEARCH);
 		
 		magCat.deleteCategoryInAnswer(categoryName);

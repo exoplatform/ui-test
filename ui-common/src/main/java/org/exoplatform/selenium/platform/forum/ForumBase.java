@@ -77,6 +77,7 @@ public class ForumBase extends PlatformBase {
 
 	//-----------------Watch/Unwatch screen-------------------------------------------
 	public final String MESSAGE_WATCH = "You are now watching this item.";
+	
 	public final String MESSAGE_UNWATCH = "You are no longer watching this item.";	
 	public static String REGISTER_MAIL_CONTENT = "Hi, you received this email because you registered for the Forum and Topic Watching notification.";
 

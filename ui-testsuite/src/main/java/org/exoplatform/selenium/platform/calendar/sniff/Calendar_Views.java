@@ -124,16 +124,25 @@ public class Calendar_Views extends CalendarBase{
 		String EVENT_NAME_03 = "VIEWS_EVENT_03";
 		String CategoryName = "Calls";
 
-		info("Choose LIST view of Calendar");
-		if(waitForAndGetElement(ELEMENT_BUTTON_VIEW_ACTIVE.replace("${view}", "List"),10000,0) == null){
+		info("Go to Intranet Calendar");
+		goToCalendarPage();
+
+		info("Choose Week view of Calendar");
+		if(waitForAndGetElement(ELEMENT_BUTTON_VIEW_ACTIVE.replace("${view}", "Week"),10000,0) == null){
 			click(ELEMENT_BUTTON_LIST_VIEW);
-			waitForAndGetElement(ELEMENT_BUTTON_VIEW_ACTIVE.replace("${view}", "List"));
+			waitForAndGetElement(ELEMENT_BUTTON_VIEW_ACTIVE.replace("${view}", "Week"));
 		}
 
 		info("Add new event with specific category");
 		Utils.pause(5000);
 		evt.addQuickEvent(EVENT_NAME_03,EVENT_NAME_03,getDate(0,"MM/dd/yyyy"),getDate(0,"MM/dd/yyyy"),false,"John Smith",CategoryName);
-
+		
+		
+		info("Choose List view of Calendar");
+		if(waitForAndGetElement(ELEMENT_BUTTON_VIEW_ACTIVE.replace("${view}", "list"),10000,0) == null){
+			click(ELEMENT_BUTTON_LIST_VIEW);
+			waitForAndGetElement(ELEMENT_BUTTON_VIEW_ACTIVE.replace("${view}", "List"));
+		}
 		info("Check event displayed in ALL category");
 		waitForAndGetElement(EVENT_LIST_VIEW.replace("${eventTitle}",EVENT_NAME_03),50000);
 

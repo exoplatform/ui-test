@@ -77,7 +77,7 @@ public class Calendar_PublishActivities_Event extends CalendarBase{
 		
 		//Check activity after deleting
 		toolBar.goToHomePage();
-		homeAct.checkEventActivity(event, getCurrentDate("dd"), getCurrentDate("MMM"), false);
+		// homeAct.checkEventActivity(event, getCurrentDate("dd"), getCurrentDate("MMM"), false);
 		
 		//Delete spaces
 		sp.goToAllSpaces();

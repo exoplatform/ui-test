@@ -645,9 +645,10 @@ public class HomePageActivity extends SocialBase{
 		info("Check for comment for Answer of question on activity");
 		//Check number of answer
 		waitForAndGetElement(ELEMENT_QUESTION_NUM_ANSWER.replace("${title}",question).replace("${number}", Integer.toString(number)));
-
+		if(this.plfVersion.equalsIgnoreCase("4.0")){
 		for (int i = 0; i < number; i ++){
 			waitForAndGetElement(ELEMENT_QUESTION_COMMENT.replace("${title}", question).replace("${comment}", MSG_ANSWER_QUESTION.replace("${answer}", answer[i])));
+		}
 		}
 		
 		
@@ -664,8 +665,10 @@ public class HomePageActivity extends SocialBase{
 
 		//Check number of comment
 		waitForAndGetElement(ELEMENT_QUESTION_NUM_COMMENT.replace("${title}", question).replace("${number}", Integer.toString(number)));
+		if(this.plfVersion.equalsIgnoreCase("4.0")){
 		for (int i = 0; i < number; i ++){
 			waitForAndGetElement(ELEMENT_QUESTION_COMMENT.replace("${title}", question).replace("${comment}", comment[i]));
+		} 
 		}
 	}
 	/** Check comment on activity after activating a question
@@ -683,7 +686,7 @@ public class HomePageActivity extends SocialBase{
 				waitForAndGetElement(ELEMENT_QUESTION_COMMENT.replace("${title}", question).replace("${comment}", MSG_QUESTION_ACTIVATE));
 		}else{
 			info("Check for comment of question after deactivating a question");
-				waitForAndGetElement(ELEMENT_QUESTION_COMMENT.replace("${title}", question).replace("${comment}", MSG_QUESTION_ACTIVATE));
+				waitForElementNotPresent(ELEMENT_QUESTION_COMMENT.replace("${title}", question).replace("${comment}", MSG_QUESTION_ACTIVATE));
 		}
 	}
 

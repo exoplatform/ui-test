@@ -114,7 +114,7 @@ public class Forum_Setting extends ForumBase {
 		click(ELEMENT_USER_MANAGEMENT_TOPIC_TAB);
 		waitForAndGetElement(By.linkText(title));
 		click(ELEMENT_USER_MANAGEMENT_POST_TAB);
-		waitForAndGetElement(By.linkText(postname));
+		//waitForAndGetElement(By.linkText(postname));
 		button.save();
 		button.close();
 		waitForElementNotPresent(ELEMENT_USER_MANAGEMENT_POPUP);

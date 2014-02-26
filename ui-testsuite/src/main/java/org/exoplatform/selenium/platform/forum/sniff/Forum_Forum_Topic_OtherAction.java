@@ -34,7 +34,7 @@ public class Forum_Forum_Topic_OtherAction extends ForumBase{
 		magAc = new ManageAccount(driver);
 		mngCat = new ForumManageCategory(driver);
 		mngFru = new ForumManageForum(driver);
-		mngPost = new ForumManagePost(driver);
+		mngPost = new ForumManagePost(driver, this.plfVersion);
 		mngTopic = new ForumManageTopic(driver);
 
 		magAc.signIn(DATA_USER1, DATA_PASS);
@@ -134,10 +134,11 @@ public class Forum_Forum_Topic_OtherAction extends ForumBase{
 		magAc.updateUserProfile(null,null, null, EMAIL_ADDRESS1);
 		goToForums();
 		mngTopic.addCategoryForumTopic(titleCat, titleForum, titleTop, titleTop);
-		click(mngFru.ELEMENT_TOPIC_LINK.replace("${topic}", titleTop));
-		waitForAndGetElement(mngPost.ELEMENT_POST_REPLY_BUTTON);
+		
 
 		mngTopic.watchItem(true);
+			click(mngFru.ELEMENT_TOPIC_LINK.replace("${topic}", titleTop));
+		waitForAndGetElement(mngPost.ELEMENT_POST_REPLY_BUTTON);
 
 		mngPost.postReply(newTopic, newTopic, "", "", "");
 

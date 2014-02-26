@@ -36,6 +36,7 @@ public class ForumManageForum extends ForumBase {
 	public String ELEMENT_FORUM_LINK = "//span[@class='NameForum' and text()='${forumName}']";
 	public By ELEMENT_DELETE_FORUM = By.xpath("//*[contains(@data-action, 'RemoveForum')]");
 	public By ELEMENT_DELETE_FORUM41 = By.xpath("//*[contains(@href, 'RemoveForum')]");
+	public By ELEMENT_DELETE_FORUM411 = By.xpath("//i[@class='uiIconDelete']");
 	public By ELEMENT_EDIT_FORUM = By.xpath("//*[contains(@href, 'EditForum')]");
 	public By ELEMENT_MOVE_FORUM = By.xpath("//*[contains(@href, 'MoveForum')]");
 	public By ELEMENT_START_TOPIC = By.xpath("//a[@class='ItemIcon PostnewThreadIcon' and contains(text(),'Start Topic')]");
@@ -229,9 +230,14 @@ public class ForumManageForum extends ForumBase {
 		click(ELEMENT_MORE_ACTION);
 		info("Delete forum");
 		if(plfVersion =="4.1"){
-			
+			if (isElementPresent(ELEMENT_DELETE_FORUM41)){
 			click(ELEMENT_DELETE_FORUM41);
 			alert.acceptAlert();
+			}else{
+			click(ELEMENT_DELETE_FORUM411);
+			
+			click(ELEMENT_OK_DELETE);
+			}
 		}
 		else{// if (plfVersion =="4.0"){
 			click(ELEMENT_DELETE_FORUM);

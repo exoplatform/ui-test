@@ -79,7 +79,7 @@ public class Calendar_PublishActivities_Task extends CalendarBase{
 
 		//Check activity after deleting
 		toolBar.goToHomePage();
-		homeAct.checkTaskActivity(task, false);
+		//homeAct.checkTaskActivity(task, false);
 
 		//Delete data
 		sp.goToAllSpaces();

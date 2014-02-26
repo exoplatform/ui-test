@@ -33,9 +33,9 @@ public class Forum_Answers_Answers extends AnswerBase {
 		driver.get(baseUrl);
 		magAc = new ManageAccount(driver);
 		magCat = new AnswerManageCategory(driver);
-		magQuest = new AnswerManageQuestion(driver);
-		magAns = new AnswerManageAnwser(driver);
-		magCom = new AnswerManageComment(driver);
+		magQuest = new AnswerManageQuestion(driver, this.plfVersion);
+		magAns = new AnswerManageAnwser(driver, this.plfVersion);
+		magCom = new AnswerManageComment(driver, this.plfVersion);
 		
 		magAc.signIn("john", DATA_PASS);
 		goToAnswer();

@@ -77,6 +77,7 @@ public class SettingSearchPage extends PlatformBase {
 	//Search result form
 	public final By ELEMENT_RESULT_SEARCH_PAGE = By.id("resultPage");
 	public final String ELEMENT_RESULT_ITEM = "//div[@id='resultPage']//a[text()='${item}']/*[contains(text(),'${keySearch}')]";
+//	public final String ELEMENT_RESULT_ITEM = "//div[@id='resultPage']//a[text()='${item}']";
 	public final String ELEMENT_RESULT_LOCATION_DATETIME = "//div[@id='resultPage']//a[text()='${item}']/*[contains(text(),'${keySearch}')]/../../../*[@class='detail']";
 	public final String ELEMENT_RESULT_EXCERPT = "//div[@id='resultPage']//a[text()='${item}']/*[contains(text(),'${keySearch}')]/../../../*[@class='excerpt']";
 	public final String ELEMENT_RESULT_ICON = "//div[@id='resultPage']//a[text()='${item}']/*[contains(text(),'${keySearch}')]/../../../../*[contains(@class,'avatar pull-left')]";

@@ -29,7 +29,7 @@ public class Calendar_Calendar extends CalendarBase{
 	public void setUpBeforeTest(){
 		getDriverAutoSave();
 		acc = new ManageAccount(driver);
-		evt = new Event(driver);
+		evt = new Event(driver, this.plfVersion);
 		tsk = new Task(driver);
 		acc.signIn(DATA_USER1, DATA_PASS);
 		goToCalendarPage(); 

@@ -54,7 +54,7 @@ public class Wiki_Search extends Template {
 		info("Add new wiki page");		
 		addWikiPageWithContentMultiLine(title, content);
 		
-		quickSearch("line5");
+		quickSearch("Wiki_search_title_01");
 		assert getText(ELEMENT_SEARCH_RESULT) != "0";
 		waitForAndGetElement(result);
 		
@@ -78,7 +78,7 @@ public class Wiki_Search extends Template {
 		addWikiPageWithContentMultiLine(title, content);
 		
 		goToWiki();
-		advancedSearch("line5", spaceName);
+		advancedSearch("Wiki_search_title_02", spaceName);
 		assert getText(ELEMENT_SEARCH_RESULT) != "0";
 		waitForAndGetElement(ELEMENT_PAGE_RESULT.replace("${title}", title));
 		
