@@ -14,7 +14,7 @@
 			<package name="org.exoplatform.selenium.platform.forum.functional.forum.forumportletsettings" />
 			<package name="org.exoplatform.selenium.platform.forum.functional.forum.otheraction" />
 			<package name="org.exoplatform.selenium.platform.forum.functional.forum.poll" />
-			
+			<package name="org.exoplatform.selenium.platform.forum.functional.faq" />
 		</packages> 
 	</test>
 	<listeners>

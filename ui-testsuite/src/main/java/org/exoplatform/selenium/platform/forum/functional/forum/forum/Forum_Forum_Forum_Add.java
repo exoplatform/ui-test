@@ -83,7 +83,7 @@ public class Forum_Forum_Forum_Add extends ForumBase {
 		info("Test 2: Add new forum When select auto fill email moderators option"); 
 		String catName = "Test 2 Add new forum When select auto fill email moderators option";
 		String[] fmName={"Test 2 new forum",null,null,null,null};
-		String[] userGroups = {"mary,demo"};
+		String[] userGroups = {"mary/demo"};
 		acc.userSignIn(userType.DEVELOPER);
 		acc.updateUserProfile(null, null, null, "jack.miller@acme.exoplatform.com");
 		
@@ -95,7 +95,7 @@ public class Forum_Forum_Forum_Add extends ForumBase {
 		fmCat.addNewCategoryInForum(catName, "1", 0,null, catName, 0,null);
 		fmForum.goToAddForum();
 		info("Create new forum");
-		fmForum.inputDataForum(catName, fmName, true,null ,null, false, 1, userGroups);
+		fmForum.inputDataForum(catName, fmName, true,null ,null, false, 2, userGroups);
 		
 		fmForum.isEmailAutofillInModerator("mary.williams@acme.exoplatform.com, jack.miller@acme.exoplatform.com");
 		button.save();

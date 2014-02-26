@@ -255,7 +255,7 @@ public class Forum_Forum_Category_View extends ForumBase {
 
 		info("View a forum belong category which assigned moderator for specific user");
 		//Create category
-		cat.addNewCategoryInForum(category, "1", 0,null, descCate, 1,userGroup,true,false,false,false);
+		cat.addNewCategoryInForum(category, "1", 0,null, descCate, 2,userGroup,true,false,false,false);
 		mForum.addForum(category, addForum, false, null, null, false, 0, null);
 
 		mForum.checkRightOfCategoryForum(DATA_USER2,DATA_PASS, category, forumName, false);
@@ -348,7 +348,7 @@ public class Forum_Forum_Category_View extends ForumBase {
 		//Create category, assign moderator for user, role, group
 		cat.goToAddCategory();
 		cat.inputTitleOrderDescriptionCategory(category, "0", descCate);
-		forPermission.configPermission4ForumCategory(1, users, true,false,false,false);
+		forPermission.configPermission4ForumCategory(2, users, true,false,false,false);
 		forPermission.configPermission4ForumCategory(3, groups, true,false,false,false);
 		forPermission.configPermission4ForumCategory(4, membership, true,false,false,false);
 		button.save();

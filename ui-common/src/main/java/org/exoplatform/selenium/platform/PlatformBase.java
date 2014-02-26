@@ -1338,7 +1338,7 @@ public class PlatformBase extends TestBase {
 	 * @param content: mail content
 	 */
 	public void checkAndDeleteMail(By mail, String content){
-		waitForAndGetElement(mail,300000);
+		waitForAndGetElement(mail,360000);
 
 		click(mail);	
 		if(waitForAndGetElement(ELEMENT_GMAIL_CONTENT.replace("${content}",content),DEFAULT_TIMEOUT,0) == null )

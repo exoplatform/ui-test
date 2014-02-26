@@ -73,10 +73,10 @@ public class ForumPermission extends ForumBase {
 			//			type(per.ELEMENT_PERMISSION_INPUT, userGroup[0], true);
 
 			if(waitForAndGetElement(per.ELEMENT_PERMISSION_INPUT,10000,0) != null){
-				//waitForAndGetElement(per.ELEMENT_PERMISSION_INPUT).sendKeys(userGroup[0]);
+				waitForAndGetElement(per.ELEMENT_PERMISSION_INPUT).sendKeys(userGroup[0]);
 				
-				((JavascriptExecutor) driver).executeScript("document.getElementById('UIPermissionInput').setAttribute('placeholder', '')");
-				((JavascriptExecutor) driver).executeScript("document.getElementById('UIPermissionInput').value = '"+ userGroup[0] +"';");
+				/*((JavascriptExecutor) driver).executeScript("document.getElementById('UIPermissionInput').setAttribute('placeholder', '')");
+				((JavascriptExecutor) driver).executeScript("document.getElementById('UIPermissionInput').value = '"+ userGroup[0] +"';");*/
 				Utils.pause(2000);
 				if(!getText(per.ELEMENT_PERMISSION_INPUT).equals(userGroup[0])){
 					((JavascriptExecutor) driver).executeScript("document.getElementById('UIPermissionInput').value = '"+ userGroup[0] +"';");
@@ -124,6 +124,7 @@ public class ForumPermission extends ForumBase {
 	 */
 	public void configPermission4AnswerCategory(int type, String[] userGroup, boolean restricted, boolean moderator, boolean...notFound){
 		setPermissionWithOption(type, userGroup);
+
 		Utils.pause(3000);
 //		waitForAndGetElement(per.ELEMENT_PERMISSION_INPUT).sendKeys(Keys.TAB,Keys.TAB,Keys.TAB,Keys.TAB);
 		String script = waitForAndGetElement(button.ELEMENT_ADD_BUTTON).getAttribute("onclick");
@@ -171,11 +172,12 @@ public class ForumPermission extends ForumBase {
 	 */
 	public void configPermission4ForumCategory(int type, String[] userGroup, boolean...permission){
 		setPermissionWithOption(type, userGroup);
-		Utils.pause(3000);
+		
 		waitForAndGetElement(per.ELEMENT_PERMISSION_INPUT).sendKeys(Keys.TAB,Keys.TAB,Keys.TAB,Keys.TAB);
 		/*String script = waitForAndGetElement(button.ELEMENT_ADD_BUTTON).getAttribute("onclick");
 		((JavascriptExecutor) driver).executeScript(script);*/
-		
+
+		Utils.pause(3000);
 		click(button.ELEMENT_ADD_BUTTON);
 		String check = "";
 		String[] groups = userGroup[0].split("/");
@@ -233,6 +235,7 @@ public class ForumPermission extends ForumBase {
 	public void configPermission4Forum(int type, String[] userGroup, boolean...permission){
 		//click(button.ELEMENT_ADD_BUTTON);
 		setPermissionWithOption(type, userGroup);
+
 		Utils.pause(3000);
 		waitForAndGetElement(per.ELEMENT_PERMISSION_INPUT).sendKeys(Keys.TAB,Keys.TAB,Keys.TAB,Keys.TAB);
 		String script = waitForAndGetElement(button.ELEMENT_ADD_BUTTON).getAttribute("onclick");

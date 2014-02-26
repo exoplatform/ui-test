@@ -304,7 +304,7 @@ public class Forum_Forum_Topic_Tag extends ForumBase {
 		//Add category
 		fmCat.addNewCategoryInForum(titleCat, "1", 0,permissionCat, titleCat, 0,permissionCat);
 		//Add forum
-		fmForum.addForum(titleCat, addForum, true, "", "", false, 1, userGroup, true);
+		fmForum.addForum(titleCat, addForum, true, "", "", false, 2, userGroup, true);
 		//Add topic
 		click(fmTopic.ELEMENT_START_TOPIC_BUTTON);
 		fmTopic.startTopic(titleTop1, titleTop1, "", 0, userGroup,false, false, false);

@@ -67,7 +67,7 @@ public class Forum_Forum_Topic_ActiveSortWatchAndUnwatch extends ForumBase{
 		int chooseRestricted = 1;
 		String []restricted = {"john"};
 		String description = "Description Category 72677";
-		int setPermission = 1;
+		int setPermission = 2;
 		String []userGroup = {"john"};
 		String []addForum = {"Forum 72677", "1", "Open", "Unlocked", "Description of forum 001"};
 		String title = "Topic 72677";
@@ -402,7 +402,7 @@ public class Forum_Forum_Topic_ActiveSortWatchAndUnwatch extends ForumBase{
 		String titleEdit = "Edit Topic 72929";
 		String messageEdit = "Edit 72929";
 		String catNameEdit = "Update 72929";
-		int setPermissionEdit = 1;
+		int setPermissionEdit = 2;
 
 		/*Step 1: Create category, forum, topic
 		 *Input Data: 
