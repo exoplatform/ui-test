@@ -27,10 +27,10 @@ public class BrandingManagement extends PlatformBase {
 	public final By ELEMENT_LOGO_CONTAINER_PREVIEW = By.xpath("//div[@id='StylePreview']//a[@class='HomeLink']/img[@alt='Home']");
 	public final By ELEMENT_LOGO_CONTAINER_TOOLBAR = By.xpath("//div[contains(@class,'UIRowContainer')]/div[@id='PlatformAdminToolbarContainer']//a[@class='HomeLink']/img[@alt='Home']");
 	
-//	public final By SAVE_INFO_MSG = By.id("saveinfo");
-//	public final By CANCEL_INFO_MSG = By.id("cancelinfo");
-//	public final By INCORRECT_LOGO_MSG = By.id("mustpng");
-	public final String SAVE_INFO_MSG = "Changes in branding settings have been saved ";
+	public final By ELEMENT_SAVE_INFO_LOGO = By.id("saveinfo");
+	public final By ELEMENT_CANCEL_INFO_LOGO = By.id("cancelinfo");
+	public final By ELEMENT_INCORRECT_LOGO = By.id("mustpng");
+	public final String SAVE_INFO_MSG = "Changes in branding settings have been saved";
 	public final String CANCEL_INFO_MSG = "Changes in branding settings have been canceled";
 	public final String INCORRECT_LOGO_MSG = "The file must be in photo format png";
 

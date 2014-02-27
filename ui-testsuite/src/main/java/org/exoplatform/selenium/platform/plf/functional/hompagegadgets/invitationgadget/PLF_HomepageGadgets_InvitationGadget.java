@@ -199,10 +199,10 @@ public class PLF_HomepageGadgets_InvitationGadget extends Activity{
 	@Test
 	public  void test04_Display4Requests() {
 		info("Test 4: Display 4 requests");
-		String spaceName1 = "Space D";
-		String spaceName2 = "Space E";
-		String spaceName3 = "Space F";
-		String spaceName4 = "Space G";
+		String spaceName1 = "space796631";
+		String spaceName2 = "space796632";
+		String spaceName3 = "space796633";
+		String spaceName4 = "space796634";
 		/*
 		- Connect to Intranet with the User A
 		- Send more than 4 requests to the User B
@@ -212,28 +212,28 @@ public class PLF_HomepageGadgets_InvitationGadget extends Activity{
 		nav.goToConnectionPage();
 		pConn.connectPeople(user1);
 
-		info("Request2: Invite to space D");
+		info("Request2: Invite to space 1");
 		nav.goToHomePage();
 		mMember.goToMySpacePage();
 		mMember.addNewSpace(spaceName1, "");
 		goToMembers(spaceName1);
 		mMember.inviteSingleUser(userType.DEVELOPER);
 
-		info("Request3: Invite to space E");
+		info("Request3: Invite to space 2");
 		nav.goToHomePage();
 		mMember.goToMySpacePage();
 		mMember.addNewSpace(spaceName2, "");
 		goToMembers(spaceName2);
 		mMember.inviteSingleUser(userType.DEVELOPER);
 
-		info("Request4: Invite to space F");
+		info("Request4: Invite to space 3");
 		nav.goToHomePage();
 		mMember.goToMySpacePage();
 		mMember.addNewSpace(spaceName3, "");
 		goToMembers(spaceName3);
 		mMember.inviteSingleUser(userType.DEVELOPER);
 
-		info("Request5: Invite to space G");
+		info("Request5: Invite to space 4");
 		nav.goToHomePage();
 		mMember.goToMySpacePage();
 		mMember.addNewSpace(spaceName4, "");
@@ -248,9 +248,9 @@ public class PLF_HomepageGadgets_InvitationGadget extends Activity{
 		nav.goToHomePage();
 		waitForAndGetElement(hGadget.ELEMENT_INVITATION_GADGET);
 		waitForAndGetElement(hGadget.ELEMENT_SHOW_CONNECTIONS_REQUEST_USER.replace("${nameinvitation}", user));
-		waitForAndGetElement(hGadget.ELEMENT_SHOW_CONNECTIONS_REQUEST_SPACE.replace("${namespace}", spaceName1));
-		waitForAndGetElement(hGadget.ELEMENT_SHOW_CONNECTIONS_REQUEST_SPACE.replace("${namespace}", spaceName2));
+		waitForAndGetElement(hGadget.ELEMENT_SHOW_CONNECTIONS_REQUEST_SPACE.replace("${namespace}", spaceName4));
 		waitForAndGetElement(hGadget.ELEMENT_SHOW_CONNECTIONS_REQUEST_SPACE.replace("${namespace}", spaceName3));
+		waitForAndGetElement(hGadget.ELEMENT_SHOW_CONNECTIONS_REQUEST_SPACE.replace("${namespace}", spaceName2));
 		waitForElementNotPresent(hGadget.ELEMENT_SHOW_CONNECTIONS_REQUEST_SPACE.replace("${namespace}", spaceName1));
 
 		//Delete data test
@@ -323,9 +323,9 @@ public class PLF_HomepageGadgets_InvitationGadget extends Activity{
 	public  void test06_DisplayALongFirstNameInInvitationGadget() {
 		info("Test 6: Display a long first name in Invitation Gadget");
 		String username = getRandomString();
-		String password = "gtn123";
-		String firstName = "FirstName caseAAA ";
-		String lastName = "LastName BBB Invitation Gadget";
+		String password = username;
+		String firstName = username+username+username+username+username+username;
+		String lastName = username+username+username+username+username+username;
 		String email = username + "@exoplatform.com";
 
 		/*
@@ -421,7 +421,7 @@ public class PLF_HomepageGadgets_InvitationGadget extends Activity{
 	@Test
 	public  void test08_DisplayASpacesInformationsInInvitationGadget() {
 		info("Test 8: Display a space's informations in Invitation gadget");
-		String spaceName = "Space 79667";
+		String spaceName = "space79667";
 
 		//Create a space
 		mMember.goToMySpacePage();
@@ -536,10 +536,10 @@ public class PLF_HomepageGadgets_InvitationGadget extends Activity{
 	@Test
 	public  void test11_ReplaceARemovedInvitationByOther() {
 		info("Test 11 Replace a removed invitation by other");
-		String spaceName1 = "Space P";
-		String spaceName2 = "Space Q";
-		String spaceName3 = "Space R";
-		String spaceName4 = "Space T";
+		String spaceName1 = "space796701";
+		String spaceName2 = "space796702";
+		String spaceName3 = "space796703";
+		String spaceName4 = "space796704";
 
 		//Pre-condition: 
 		info("Request1: connect User");
@@ -620,7 +620,7 @@ public class PLF_HomepageGadgets_InvitationGadget extends Activity{
 	@Test
 	public  void test12_RemoveAllInvitationsFromTheGadgetInvitation() {
 		info("Test 12 Remove all invitations from the gadget Invitation");
-		String spaceNameA = "Space 79671";
+		String spaceNameA = "space79671";
 
 		//Pre-condition: 
 		info("Request1: connect User");
@@ -670,18 +670,18 @@ public class PLF_HomepageGadgets_InvitationGadget extends Activity{
 	@Test
 	public  void test13_DisplayTheNumberOfInvitationsInTheGadget() {
 		info("Test 13 Display the Number of invitations in the Gadget");
-		String spaceNameA = "Space A";
-		String spaceNameB = "Space B";
+		String spaceNameA = "space796721";
+		String spaceNameB = "space796722";
 
 		//Pre-Condition 
-		info("Request1: Invite to space A");
+		info("Request1: Invite to space 1");
 		nav.goToHomePage();
 		mMember.goToMySpacePage();
 		mMember.addNewSpace(spaceNameA, "");
 		goToMembers(spaceNameA);
 		mMember.inviteSingleUser(userType.DEVELOPER);
 
-		info("Request2: Invite to space B");
+		info("Request2: Invite to space 2");
 		nav.goToHomePage();
 		mMember.goToMySpacePage();
 		mMember.addNewSpace(spaceNameB, "");
@@ -795,7 +795,7 @@ public class PLF_HomepageGadgets_InvitationGadget extends Activity{
 	@Test
 	public  void test15_AcceptASpaceInvitationFromTheGadgetInvitation() {
 		info("Test 15 Accept a space invitation from the Gadget Invitation");
-		String spaceName = "Space 79674";
+		String spaceName = "space79674";
 		//Pre-Condition 
 		info("Request: Invite to space");
 		nav.goToHomePage();

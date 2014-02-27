@@ -81,8 +81,8 @@ public class PLF_Branding extends PlatformBase{
 
 		info("Upload an invalid logo");
 		brandMag.uploadLogo(urlFile, false, false);
-		waitForMessage(brandMag.INCORRECT_LOGO_MSG);
-
+		String alertMsg = waitForAndGetElement(brandMag.ELEMENT_INCORRECT_LOGO).getText();
+		assert alertMsg.contains(brandMag.INCORRECT_LOGO_MSG);
 	}
 
 	/**
@@ -145,7 +145,8 @@ public class PLF_Branding extends PlatformBase{
 
 		info("Upload a valid logo");
 		brandMag.uploadLogo(urlFile, true, true);	
-		waitForMessage(brandMag.SAVE_INFO_MSG);
+		String alertMsg = waitForAndGetElement(brandMag.ELEMENT_SAVE_INFO_LOGO).getText();
+		assert alertMsg.contains(brandMag.SAVE_INFO_MSG);
 	}
 
 	/**
@@ -161,8 +162,9 @@ public class PLF_Branding extends PlatformBase{
 
 		info("Upload a valid logo");
 		brandMag.uploadLogo(urlFile, true, false);	
-		button.cancel();
-		waitForMessage(brandMag.CANCEL_INFO_MSG);
+		btn.cancel();
+		String alertMsg = waitForAndGetElement(brandMag.ELEMENT_CANCEL_INFO_LOGO).getText();
+		assert alertMsg.contains(brandMag.CANCEL_INFO_MSG);
 	}
 
 	/**

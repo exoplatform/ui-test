@@ -89,6 +89,8 @@ public class PLF_HomepageActivityStream_ActivityStream_ActivityFilter_Others ext
 	@Test
 	public  void test02_DisplayTheListOfFilters() {
 		info("Test 2: Display the list of filters");
+		String text = "Activity 77660";
+		addActivity(true, text, false, "");
 		/*
 		- Connect to Intranet/Homepage
 		- Click on the arrow of the box "All activities"
@@ -98,7 +100,8 @@ public class PLF_HomepageActivityStream_ActivityStream_ActivityFilter_Others ext
 		click(ELEMENT_ACTIVITY_DROPDOWN,2);
 		waitForAndGetElement(ELEMENT_ACTIVITY_FILTER_OPTION.replace("${filterOption}", "Connections"));
 		waitForAndGetElement(ELEMENT_ACTIVITY_FILTER_OPTION.replace("${filterOption}", "My Spaces"));
-		waitForAndGetElement(ELEMENT_ACTIVITY_FILTER_OPTION.replace("${filterOption}", "My Activities")); 
+		waitForAndGetElement(ELEMENT_ACTIVITY_FILTER_OPTION.replace("${filterOption}", "My Activities"));
+		home.deleteActivity(text);
 	}
 
 	/**
@@ -148,6 +151,7 @@ public class PLF_HomepageActivityStream_ActivityStream_ActivityFilter_Others ext
 
 		//delete data
 		acc.userSignIn(userType.ADMIN);
+		selectFileter("All Activities");
 		mMember.goToAllSpaces();
 		mMember.deleteSpace(spaceName,300000);
 	}
@@ -195,6 +199,7 @@ public class PLF_HomepageActivityStream_ActivityStream_ActivityFilter_Others ext
 
 		//delete data
 		acc.userSignIn(userType.ADMIN);
+		selectFileter("All Activities");
 		home.deleteActivity(text);
 	}
 
@@ -236,7 +241,7 @@ public class PLF_HomepageActivityStream_ActivityStream_ActivityFilter_Others ext
 		waitForAndGetElement(home.ELEMENT_ACTIVITY.replace("${activityText}",text));
 
 		//delete data
-
+		selectFileter("All Activities");
 		home.deleteActivity(text);
 	}
 
@@ -320,6 +325,7 @@ public class PLF_HomepageActivityStream_ActivityStream_ActivityFilter_Others ext
 		 *Input Data: 
 		 *Expected Outcome: The choosen stream is displayed in Intranet		*/ 
 		acc.userSignIn(userType.ADMIN);
+		selectFileter("All Activities");
 		waitForAndGetElement(ELEMENT_ACTIVITY_FILTER_CURRENT.replace("${filterOption}", filterOption), DEFAULT_TIMEOUT, 0);
 	}
 
@@ -340,7 +346,19 @@ public class PLF_HomepageActivityStream_ActivityStream_ActivityFilter_Others ext
 		 *Expected Outcome: 
 		- The Homepage activity stream is displayed
 		- The dropdown list of stream is displayed		*/ 
+		String text = "Activity 77691";
+		addActivity(true, text, false, "");
+		/*
+		- Connect to Intranet/Homepage
+		- Click on the arrow of the box "All activities"
+		 *Input Data: 
+		 *Expected Outcome: The list of all streams is displayed: "All Activities, Connections, My spaces and My activities"		*/ 
 		waitForAndGetElement(ELEMENT_ACTIVITY_FILTER_CURRENT.replace("${filterOption}", "All Activities"));	
+		click(ELEMENT_ACTIVITY_DROPDOWN,2);
+		waitForAndGetElement(ELEMENT_ACTIVITY_FILTER_OPTION.replace("${filterOption}", "Connections"));
+		waitForAndGetElement(ELEMENT_ACTIVITY_FILTER_OPTION.replace("${filterOption}", "My Spaces"));
+		waitForAndGetElement(ELEMENT_ACTIVITY_FILTER_OPTION.replace("${filterOption}", "My Activities"));
+		home.deleteActivity(text);	
 	}
 
 	/**
@@ -394,8 +412,8 @@ public class PLF_HomepageActivityStream_ActivityStream_ActivityFilter_Others ext
 		String text = "Activity 77697";
 		String username = getRandomString();
 		String password = username;
-		String firstName = "firstName";
-		String lastName = "lastName";
+		String firstName = username;
+		String lastName = username;
 		String displayName = firstName + " " + lastName;
 		String email = username+"@platform.com";
 		String userNameGiven = "";

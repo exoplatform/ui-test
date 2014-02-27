@@ -10,14 +10,14 @@ import org.testng.annotations.Test;
 
 public class PLF_WelcomeScreens_Greeting_TermCondition extends PlatformBase{
 
-	@BeforeMethod(groups="terms")
+	@BeforeMethod
 	public void beforeMethods() {
 		info("Open browser and get base url");
 		initSeleniumTestWithOutTermAndCondition();
 		driver.get(DEFAULT_BASEURL);
 	}
 
-	@AfterMethod(groups="terms")
+	@AfterMethod
 	public void afterMethods() {
 		info("Quit");
 		driver.manage().deleteAllCookies();
@@ -43,7 +43,7 @@ public class PLF_WelcomeScreens_Greeting_TermCondition extends PlatformBase{
 	 * - Change the URL to other sites (intranet)
 	 * Check: - The screen "Terms and Conditions Agreement" still displayed
 	 */
-	@Test(groups="terms")
+	@Test(groups="pending")
 	public void test02_NotRemoveTermsConditionsScreenByChangeURL (){
 		String SPECIFIC_URL = "http://localhost:8080/portal/intranet";
 
@@ -63,7 +63,7 @@ public class PLF_WelcomeScreens_Greeting_TermCondition extends PlatformBase{
 	 * Check: - The screen "Terms and Conditions Agreement" is displayed.
 	          - The Legal Terms and conditions are displayed in a scrollbare lightbox
 	 */
-	@Test(groups="terms")
+	@Test(groups="pending")
 	public void test03_DisplayLegalTermsAndConditions(){
 
 		waitForAndGetElement(By.xpath(ELEMENT_TERM_CONDITION_BOX));
@@ -88,7 +88,7 @@ public class PLF_WelcomeScreens_Greeting_TermCondition extends PlatformBase{
 	 * Check: - The screen "Terms and Conditions Agreement" is displayed.
 			  - The button "Continue" is displayed disable by default
 	 */
-	@Test(groups="terms")
+	@Test(groups="pending")
 	public void test04_DisplayContinueButton(){
 
 		info("Check Continue button is disable.");
@@ -103,7 +103,7 @@ public class PLF_WelcomeScreens_Greeting_TermCondition extends PlatformBase{
 	 * Check: - The screen "Terms and Conditions Agreement" is displayed.
 			  - The button "Continue" becomes enabled
 	 */
-	@Test(groups="terms")
+	@Test(groups="pending")
 	public void test05_ActivateContinueButton(){
 
 		info("Check Continue button is disable.");
@@ -123,7 +123,7 @@ public class PLF_WelcomeScreens_Greeting_TermCondition extends PlatformBase{
 	 * Check: - The screen "Terms and Conditions Agreement" is displayed.
 			  - The checkbox: "I agree with these terms and conditions" is displayed in the bottom of the lightbox
 	 */
-	@Test(groups="terms")
+	@Test(groups="pending")
 	public void test06_DisplayCheckboxIAgreeWithTheseTermsAndConditions(){
 
 		info("Display the checkbox: I agree with these terms and conditions");
@@ -175,7 +175,7 @@ public class PLF_WelcomeScreens_Greeting_TermCondition extends PlatformBase{
 				- A text message is displayed:  "You are almost done. Add your colleagues to your new social intranet and start collaborating together."
 				- A button "Start" is displayed
 	 */
-	@Test(groups="terms")
+	@Test(groups="pending")
 	public void test09_DisplayGreetingScreen(){
 		By ELEMENT_GREETINGS_SCREEN = By.xpath("//div[@id='Greetings']");
 		By GREETING_TEXT_MESSAGE = By.xpath("//*[contains(text(),'You are almost done')]");

@@ -7,10 +7,10 @@ import junit.framework.Assert;
 
 import org.exoplatform.selenium.Button;
 import org.exoplatform.selenium.ManageAlert;
-import org.exoplatform.selenium.Utils;
 import org.exoplatform.selenium.platform.HomePageActivity;
 import org.exoplatform.selenium.platform.ManageAccount;
 import org.exoplatform.selenium.platform.social.Activity;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.*;
 
@@ -42,12 +42,16 @@ public class PLF_HomepageActivityStream_ActivityComposer_Link extends Activity{
 	}
 
 	/**
-	* Case ID:77775.
-	* Test Case Name: Attach a link.
-	* Created by chinhdt at 2013/12/16 09:28:47
-	*/
+	 * Case ID:77775.
+	 * Test Case Name: Attach a link.
+	 * Case ID:77790.
+	 * Test Case Name: Display the field to add a link.
+	 * Case ID:77796.
+	 * Test Case Name: Remove a link to share.
+	 * Created by chinhdt at 2013/12/16 09:28:47
+	 */
 	@Test
-	public  void test01_AttachALink() {
+	public  void test01_02_03_AttachALink() {
 		info("Test 1: Attach a link"); 
 
 		/*Declare variables*/ 
@@ -57,118 +61,39 @@ public class PLF_HomepageActivityStream_ActivityComposer_Link extends Activity{
 		//- From "Activity Composer" box, click on "Link"
 		//- Enter a valid URL (e.g  http://www.yahoo.com)
 		//- Click on the button [Attach]
-		info("----Click on Link----");
-		waitForAndGetElement(ELEMENT_LINK);
-		click(ELEMENT_LINK);
-		info("----Input link into link box-----");
-		waitForAndGetElement(ELEMENT_INPUT_LINK_BOX);
-		type(ELEMENT_INPUT_LINK_BOX, link, true);
-		waitForAndGetElement(ELEMENT_ATTACH_BUTTON);
-		click(ELEMENT_ATTACH_BUTTON);
-		waitForTextPresent("Loading...");
-		waitForTextNotPresent("Loading", 100000);
-		waitForAndGetElement(ELEMENT_SHARE_DISPLAY);
-		waitForAndGetElement(ELEMENT_URL_SHARE); 
-		waitForAndGetElement(ELEMENT_PICTURE_SHARE); 
-		waitForAndGetElement(ELEMENT_TITLE_SHARE); 	
- 	}
-
-
+		addActivity(false, "", true, link);
+		home.deleteActivity(link);
+	}
 
 	/**
-	* Case ID:77790.
-	* Test Case Name: Display the field to add a link.
-	* Created by chinhdt at 2013/12/16 09:28:47
-	*/
-	@Test
-	public  void test02_DisplayTheFieldToAddALink() {
-		info("Test 2: Display the field to add a link"); 
-
-		/* Step: Show a field to input a link */
-		//- Connect to Intranet
-		//- From [Activity Composer] box, click on [Link] button
-		info("----Click on Link----");
-		waitForAndGetElement(ELEMENT_LINK).click();
-		info("Link box is shown"); 
-		waitForAndGetElement(ELEMENT_INPUT_LINK_BOX);		
-		WebElement shareButton = waitForAndGetElement(ELEMENT_SHARE_BUTTON);
-		WebElement attachButton = waitForAndGetElement(ELEMENT_ATTACH_BUTTON); 
-		
-		Assert.assertEquals(shareButton.isEnabled(), false);
-		
-		Assert.assertEquals(attachButton.isDisplayed(), true);
- 	}
-
-
-
-	/**
-	* Case ID:77796.
-	* Test Case Name: Remove a link to share.
-	* Created by chinhdt at 2013/12/16 09:28:47
-	*/
-	@Test
-	public  void test03_RemoveALinkToShare() {
-		info("Test 3: Remove a link to share"); 
-
-		/*Declare variables*/ 
-		String link = "http://www.yahoo.com"; 
-
-		/* Step1: Open [Select File] popup */
-		//- Connect to Intranet
-		//- From [Activity Composer] box, click on [Link] button
-		info("----Click on Link----");
-		click(ELEMENT_LINK);
-		waitForAndGetElement(ELEMENT_INPUT_LINK_BOX);
-		/* Step2: Attach a link*/
-		// - Enter a valid URL (e.g http://www.yahoo.com)
-		//- Click on the button [Attach]
-		info("----Input link into link box-----");
-		type(ELEMENT_INPUT_LINK_BOX, link, true);
-		waitForAndGetElement(ELEMENT_ATTACH_BUTTON);
-		click(ELEMENT_ATTACH_BUTTON);
-		waitForTextPresent("Loading...");
-		waitForTextNotPresent("Loading", 100000);
-		waitForAndGetElement(ELEMENT_SHARE_DISPLAY);
-		waitForAndGetElement(ELEMENT_PICTURE_SHARE); 
-		waitForAndGetElement(ELEMENT_TITLE_SHARE); 
-		waitForAndGetElement(ELEMENT_CROSS_BUTTON); 
-		/* Step3: Cancel attaching file*/
-		// - Click on the cross [x] icon
-		Utils.pause(1000);
-		click(ELEMENT_CROSS_BUTTON);
-
-		info("Remove attach"); 		
- 	}
-
-
-
-	/**
-	* Case ID:77803.
-	* Test Case Name: Select an image from the link to share.
-	* Created by chinhdt at 2013/12/16 09:28:47
-	*/
+	 * Case ID:77803.
+	 * Test Case Name: Select an image from the link to share.
+	 * Created by chinhdt at 2013/12/16 09:28:47
+	 */
 	@Test
 	public  void test04_SelectAnImageFromTheLinkToShare() {
 		info("Test 4: Select an image from the link to share"); 
 
 		/*Declare variables*/ 
-		String link = "http://yahoo.com"; 
+		String link = "http://apple.com"; 
 
 		/* Step1: Show the field to input URL link */
 		//- Connect to Intranet
 		//- From [Activity Composer] box, click on [Link] button
-		info("----Click on Link----");
-		waitForAndGetElement(ELEMENT_LINK); 
-		click(ELEMENT_LINK);
-
 		/* Step2: Input an URL of page*/
 		// - Input an URL of page with multiple images (e.g http://yahoo.com) then click Attach button
+		waitForAndGetElement(ELEMENT_LINK).click();
+		if(waitForAndGetElement(ELEMNET_LINK_ROW, DEFAULT_TIMEOUT,0,2).getAttribute("style").contains("none")){
+			info("click second time");
+			click(ELEMENT_LINK,2);
+		}
 		info("----Input link into link box-----");
-		waitForAndGetElement(ELEMENT_INPUT_LINK_BOX);
-		type(ELEMENT_INPUT_LINK_BOX, link, true);
+		waitForAndGetElement(ELEMENT_INPUT_LINK_BOX, DEFAULT_TIMEOUT,1,2);
+		type(ELEMENT_INPUT_LINK_BOX, link, true,2);
 		waitForAndGetElement(ELEMENT_ATTACH_BUTTON);
 		info("----Click attach button-----");
 		click(ELEMENT_ATTACH_BUTTON);
+		waitForAndGetElement(By.id("LinkTitle"));
 
 		/* Step3: Share the link*/
 		// - Choose an image 
@@ -183,21 +108,18 @@ public class PLF_HomepageActivityStream_ActivityComposer_Link extends Activity{
 
 		//delete Activity
 		home.deleteActivity(link);
- 	}
-
-
+	}
 
 	/**
-	* Case ID:77807.
-	* Test Case Name: Share a link.
-	* Created by chinhdt at 2013/12/16 09:28:47
-	*/
+	 * Case ID:77807.
+	 * Test Case Name: Share a link.
+	 * Created by chinhdt at 2013/12/16 09:28:47
+	 */
 	@Test
 	public  void test05_ShareALink() {
 		info("Test 5: Share a link"); 
 
 		/*Declare variables*/ 
-		String text = "";
 		String link = "http://yahoo.com"; 
 		String workingLabelText = "What are you working on?";
 		String lighterColor = "rgba(153, 153, 153, 1)";
@@ -206,18 +128,14 @@ public class PLF_HomepageActivityStream_ActivityComposer_Link extends Activity{
 		//- From the [Activity Composer] box, click on [Link] button
 		//- Input a link
 		//- Click on the button [Share]
-		addActivity(false, text, true, link);
+		addActivity(false, "", true, link);
 		WebElement workingLabel = waitForAndGetElement(ELEMENT_ACTIVITY_WHAT_ARE_YOU_WORKING_LABEL);
 		//Check color
 		info("--Check color of string--");
-		
 		Assert.assertEquals(workingLabel.getText(), workingLabelText);
 		Assert.assertEquals(waitForAndGetElement(home.ELEMENT_ACTIVITY_TEXTBOX).getCssValue("color"), lighterColor);
-		
+
 		//delete Activity
 		home.deleteActivity(link);
- 	}
-
-
-
+	}
 }

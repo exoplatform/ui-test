@@ -397,7 +397,7 @@ public class PlatformBase extends TestBase {
 	public final String ELEMENT_EDIT_PAGE_PAGE = "//div[@id='UIPage']";
 	public final String ELEMENT_PORTLET_LABEL = "//div[@class='CPortletLayoutDecorator' and contains(text(), '${portletName}')]";	
 	public final String ELEMENT_PAGE_FINISH_BUTTON = "//*[@data-original-title='Finish']";
-	public final By ELEMENT_PAGE_CLOSE = By.xpath("//a[@title='Abort']");
+	public final By ELEMENT_PAGE_CLOSE = By.xpath("//a[@title='Abort' or @data-original-title='Abort']");
 
 	public final By ELEMENT_SWITCH_VIEW_MODE = By.linkText("Switch View mode");
 	public final String ELEMENT_PAGE_COLUMN = "//tr[@class='TRContainer']//td['${index}']";

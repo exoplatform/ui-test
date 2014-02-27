@@ -26,7 +26,8 @@ public class PLF_HomepageGadgets_WhoIsOnline extends Activity {
 	NavigationToolbar navToolBar;
 	PeopleConnection peopleC;
 	PeopleSearch peopleS;
-
+	String user = "John Smith"; 
+	String user1 = "Mary Williams";
 	
 	@BeforeMethod
 	public void setUpBeforeTest(){
@@ -69,7 +70,7 @@ public class PLF_HomepageGadgets_WhoIsOnline extends Activity {
 		
 		info("USER2: Connect with user acc 2");
 		peopleC = new PeopleConnection(newDriver);
-		peopleC.connectPeople(DATA_USER1);		
+		peopleC.connectPeople(user);		
 		
 		info("USER2: Go to Homepage Intranet");
 		navToolBar.goToHomePage();
@@ -80,7 +81,7 @@ public class PLF_HomepageGadgets_WhoIsOnline extends Activity {
 		
 		info("--Cancel Connection--");
 		navToolBar.goToConnectionPage();
-		peopleC.cancelRequest("john");
+		peopleC.cancelRequest(user);
 		info("--Close the 2nd browser window--");
 		Utils.pause(500);
 		newDriver.manage().deleteAllCookies();
@@ -106,7 +107,7 @@ public class PLF_HomepageGadgets_WhoIsOnline extends Activity {
 		navToolBar.goToConnectionPage();
 		
 		info("USER1: Connect with user acc 2");
-		peopleC.connectPeople(DATA_USER2);
+		peopleC.connectPeople(user1);
 						
 		info("USER2: Switch to other window to login");
 		loginWithAnotherAccOnThesameBrowser(DATA_USER2, DATA_PASS);
@@ -116,7 +117,7 @@ public class PLF_HomepageGadgets_WhoIsOnline extends Activity {
 		hg.checkUserInfoOnWhoisOnlineGadget(DATA_USER1, true, activity, true, true);
 		
 		info("USER2: Accept invitation from user acc 1");
-		hg.acceptInvitationGadget("John Smith");
+		hg.acceptInvitationGadget(user);
 	
 		info("USER2: 79685 - Check popup information of online user 1 when having a connection");
 		hg.checkUserInfoOnWhoisOnlineGadget(DATA_USER1, true, activity, true, true);
@@ -126,8 +127,7 @@ public class PLF_HomepageGadgets_WhoIsOnline extends Activity {
 		peopleC = new PeopleConnection(newDriver);
 		navToolBar = new NavigationToolbar(newDriver);
 		navToolBar.goToConnectionPage();
-		peopleS.searchPeople(true,DATA_USER1);
-		peopleC.removeConnection(DATA_USER1);
+		peopleC.removeConnection(user);
 		info("--Close the 2nd browser window--");
 		Utils.pause(500);
 		newDriver.manage().deleteAllCookies();
@@ -167,8 +167,7 @@ public class PLF_HomepageGadgets_WhoIsOnline extends Activity {
 		peopleC = new PeopleConnection(newDriver);
 		navToolBar = new NavigationToolbar(newDriver);
 		navToolBar.goToConnectionPage();
-		peopleS.searchPeople(true,DATA_USER1);
-		peopleC.removeConnection(DATA_USER1);
+		peopleC.cancelRequest(user);
 		info("--Close the 2nd browser window--");
 		Utils.pause(500);
 		newDriver.manage().deleteAllCookies();

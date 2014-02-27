@@ -25,7 +25,7 @@ public class PLF_HomepageActivityStream_ActivityComposer_General extends Activit
 
 	ManageAccount acc;
 	ManageAlert alert; 
-	HomePageActivity home; 
+	HomePageActivity hpActivity; 
 
 	@BeforeMethod
 	public void setUpBeforeTest(){
@@ -33,7 +33,7 @@ public class PLF_HomepageActivityStream_ActivityComposer_General extends Activit
 		acc = new ManageAccount(driver);
 		button = new Button(driver);
 		alert = new ManageAlert(driver); 
-		home = new HomePageActivity(driver); 
+		hpActivity = new HomePageActivity(driver); 
 		acc.signIn(DATA_USER1, DATA_PASS);
 	}
 
@@ -44,10 +44,10 @@ public class PLF_HomepageActivityStream_ActivityComposer_General extends Activit
 	}
 
 	/**
-	* Case ID:77777.
-	* Test Case Name: Can't share an empty message.
-	* Created by chinhdt at 2013/12/16 09:28:17
-	*/
+	 * Case ID:77777.
+	 * Test Case Name: Can't share an empty message.
+	 * Created by chinhdt at 2013/12/16 09:28:17
+	 */
 	@Test
 	public  void test01_CantShareAnEmptyMessage() {
 		info("Test 1: Can't share an empty message"); 
@@ -60,33 +60,33 @@ public class PLF_HomepageActivityStream_ActivityComposer_General extends Activit
 		//- Connect to Intranet
 		//- Click in the composer input box, don't type
 		info("----Add text into activity text box-----");
-		WebElement inputText = waitForAndGetElement(home.ELEMENT_ACTIVITY_TEXTBOX);
+		WebElement inputText = waitForAndGetElement(hpActivity.ELEMENT_ACTIVITY_TEXTBOX);
 		WebElement shareButton = waitForAndGetElement(ELEMENT_SHARE_BUTTON);
-		
+
 		Assert.assertEquals(shareButton.isEnabled(), false);
-		
+
 		/*Step 2: Input space characters into shared activity box */
 		//- Input space characters into shared activity box
 		((JavascriptExecutor)driver).executeScript("arguments[0].textContent = '"+text1+"';", inputText);
 		Assert.assertEquals(shareButton.isEnabled(), false);
-		
+
 
 		/* Step 3: Input letters into shared activity box */
 		// - in put "a" character
 		type(ELEMENT_ACTIVITY_WHAT_ARE_YOU_WORKING_LABEL, "   ", false);
-		type(home.ELEMENT_ACTIVITY_TEXTBOX, text2, false);
+		type(hpActivity.ELEMENT_ACTIVITY_TEXTBOX, text2, false);
 		Utils.pause(1000);
 		Assert.assertEquals(shareButton.isEnabled(), true);
 		info("-- Verify Share button --");
- 	}
+	}
 
 
 
 	/**
-	* Case ID:77797.
-	* Test Case Name: Remove the default value "What are you working on?".
-	* Created by chinhdt at 2013/12/16 09:28:17
-	*/
+	 * Case ID:77797.
+	 * Test Case Name: Remove the default value "What are you working on?".
+	 * Created by chinhdt at 2013/12/16 09:28:17
+	 */
 	@Test
 	public  void test02_RemoveTheDefaultValueWhatAreYouWorkingOn() {
 		info("Test 2: Remove the default value What are you working on?"); 
@@ -99,9 +99,9 @@ public class PLF_HomepageActivityStream_ActivityComposer_General extends Activit
 		/* Step 1: Connect to Intranet */
 		//- Connect to Intranet
 		info("----Add text into activity text box-----");
-		WebElement inputText = waitForAndGetElement(home.ELEMENT_ACTIVITY_TEXTBOX);
+		WebElement inputText = waitForAndGetElement(hpActivity.ELEMENT_ACTIVITY_TEXTBOX);
 		WebElement workingLabel = waitForAndGetElement(ELEMENT_ACTIVITY_WHAT_ARE_YOU_WORKING_LABEL);
-	
+
 		//Check color
 		info("--Check content and color of default string--");
 		Assert.assertEquals(workingLabel.getText(), workingLabelText);
@@ -110,46 +110,40 @@ public class PLF_HomepageActivityStream_ActivityComposer_General extends Activit
 		/*Step 2: Input data in Shared Activity box */
 		//((JavascriptExecutor)driver).executeScript("arguments[0].textContent = '';", workingLabel);
 		//((JavascriptExecutor)driver).executeScript("arguments[0].textContent = '"+text+"';", inputText);
-		
-		
+
+
 		type(ELEMENT_ACTIVITY_WHAT_ARE_YOU_WORKING_LABEL, " ", false);
-		type(home.ELEMENT_ACTIVITY_TEXTBOX, text, false);
-		
+		type(hpActivity.ELEMENT_ACTIVITY_TEXTBOX, text, false);
+
 		Utils.pause(1000);
 		Assert.assertEquals(workingLabel.isDisplayed(), false);
-		
+
 		info("Check string");
- 	}
+	}
 
 
 
 	/**
-	* Case ID:78038.
-	* Test Case Name: URL is able to be detected.
-	* Created by chinhdt at 2013/12/16 09:28:17
-	*/
+	 * Case ID:78038.
+	 * Test Case Name: URL is able to be detected.
+	 * Created by chinhdt at 2013/12/16 09:28:17
+	 */
 	@Test
 	public  void test03_URLIsAbleToBeDetected() {
 		info("Test 3: URL is able to be detected"); 
 
 		/*Declare variables*/ 
-		String text2 = "http://www.yahoo.com a";
+		String link = "https://www.google.com.vn/";
 
 		/* Step: Detect url */
 		//- - Connect to Intranet
 		//- Enter an URL in the Shared activity box
-		info("----Add link into activity text box-----");
-		type(ELEMENT_ACTIVITY_WHAT_ARE_YOU_WORKING_LABEL," ",false);
-		type(home.ELEMENT_ACTIVITY_TEXTBOX,text2,false);
-		
-		waitForTextPresent("Loading...");
-		waitForTextNotPresent("Loading", 100000);
-		waitForAndGetElement(ELEMENT_SHARE_DISPLAY);
-		waitForAndGetElement(ELEMENT_URL_SHARE); 
-		waitForAndGetElement(ELEMENT_PICTURE_SHARE); 
-		waitForAndGetElement(ELEMENT_TITLE_SHARE); 	
-		
- 	}
+		addActivity(false, "", true, link);
+
+		//Clear data
+		hpActivity.deleteActivity(link);
+
+	}
 
 
 

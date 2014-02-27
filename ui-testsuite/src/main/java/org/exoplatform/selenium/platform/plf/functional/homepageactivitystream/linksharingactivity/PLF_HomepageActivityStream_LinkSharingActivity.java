@@ -48,6 +48,7 @@ public class PLF_HomepageActivityStream_LinkSharingActivity extends Activity{
 	   * CaseId 77172: Verify the size of the content's image in the Link Sharing activity
 	   * CaseId 77176: Dislike a Link sharing activity from like icon in intranet
 	   * CaseId 77175: Delete a Link sharing activity from activity stream by its user in portal
+	   * Error: Verify the size of the content's image in the Link Sharing activity
 	   */
 
 	  @Test	

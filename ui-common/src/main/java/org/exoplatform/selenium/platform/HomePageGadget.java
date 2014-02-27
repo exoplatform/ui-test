@@ -66,7 +66,7 @@ public class HomePageGadget extends PlatformBase{
 	public String ELEMENT_ONLINE_USER_TITLE = "//*[@id='tipName']//td[2]/a[@href='/portal/intranet/activities/${acc}']";
 	public String ELEMENT_ONLINE_USER_AVATAR = "//ul[@id='onlineList']//a[@class='avatarXSmall' and @href='/portal/intranet/profile/${acc}']";
 	public String ELEMENT_ONLINE_USER_STATUS = ".//*[@id='tiptip_content']/blockquote[contains(text(),'${status}')]";
-	public String ELEMENT_ONLINE_USER_STATUS_TRUNCATED = "//*[@id='tiptip_content']/blockquote/span[@class='truncate_ellipsis']";
+	public String ELEMENT_ONLINE_USER_STATUS_TRUNCATED = "//*[@id='tiptip_content']/blockquote";
 	public String ELEMENT_WHOISONLINE_CONNECT_BUTTON_INVITE = "//*[@id='tiptip_content']//div[@data-action='Invite:${acc}']";
 	public String ELEMENT_WHOISONLINE_CONNECT_BUTTON_ACCEPT = "//*[@id='tiptip_content']//div[@data-action='Accept:${acc}']";
 	//My Profile tab
@@ -250,10 +250,8 @@ public class HomePageGadget extends PlatformBase{
 	public void acceptSpaceInvitationGadget(String spaceName) {
 		info("-- Accept a space invitation --");
 		mouseOver(ELEMENT_SHOW_CONNECTIONS_REQUEST_SPACE.replace("${namespace}", spaceName), true);
-		waitForAndGetElement(ELEMENT_SPACE_ACCEPT_BUTTON.replace("${namespace}", spaceName));
-		waitForAndGetElement(ELEMENT_SPACE_REMOVE_BUTTON.replace("${namespace}", spaceName));
-		Utils.pause(1000);
-		click(ELEMENT_SPACE_ACCEPT_BUTTON.replace("${namespace}", spaceName));
+		WebElement element = waitForAndGetElement(ELEMENT_SPACE_ACCEPT_BUTTON.replace("${namespace}",spaceName), DEFAULT_TIMEOUT,1,2);
+		((JavascriptExecutor)driver).executeScript("arguments[0].click();", element);
 		waitForElementNotPresent(ELEMENT_SHOW_CONNECTIONS_REQUEST_SPACE.replace("${namespace}", spaceName));		
 	} 
 
@@ -266,11 +264,9 @@ public class HomePageGadget extends PlatformBase{
 	public void removeSpaceInvitationGadget(String spaceName) {
 		info("-- Remove a space invitation --");
 		mouseOver(ELEMENT_SHOW_CONNECTIONS_REQUEST_SPACE.replace("${namespace}", spaceName), true);
-		waitForAndGetElement(ELEMENT_SPACE_ACCEPT_BUTTON.replace("${namespace}", spaceName));
-		waitForAndGetElement(ELEMENT_SPACE_REMOVE_BUTTON.replace("${namespace}", spaceName));
-		Utils.pause(1000);
-		click(ELEMENT_SPACE_REMOVE_BUTTON.replace("${namespace}", spaceName));
-		waitForElementNotPresent(ELEMENT_SHOW_CONNECTIONS_REQUEST_SPACE.replace("${namespace}", spaceName));		
+		WebElement element = waitForAndGetElement(ELEMENT_SPACE_REMOVE_BUTTON.replace("${namespace}",spaceName), DEFAULT_TIMEOUT,1,2);
+		((JavascriptExecutor)driver).executeScript("arguments[0].click();", element);
+		waitForElementNotPresent(ELEMENT_SHOW_CONNECTIONS_REQUEST_SPACE.replace("${namespace}", spaceName));	
 	} 
 
 
@@ -281,6 +277,7 @@ public class HomePageGadget extends PlatformBase{
 	 * 				Name of user who is online on the gadget
 	 */
 	public void checkTruncatedStatusOnWhoIsOnlineGadget(String username) {
+		waitForAndGetElement(ELEMENT_WHOISONLINE_GADGET);
 		mouseOver(ELEMENT_ONLINE_USER_AVATAR.replace("${acc}",username),true);
 		waitForAndGetElement(ELEMENT_ONLINE_USER_STATUS_TRUNCATED);
 	}

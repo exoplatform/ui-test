@@ -5,6 +5,7 @@ import org.exoplatform.selenium.Button;
 import org.exoplatform.selenium.ManageAlert;
 import org.exoplatform.selenium.platform.HomePageGadget;
 import org.exoplatform.selenium.platform.ManageAccount;
+import org.exoplatform.selenium.platform.ManageApplications;
 import org.exoplatform.selenium.platform.NavigationManagement;
 import org.exoplatform.selenium.platform.NavigationToolbar;
 import org.exoplatform.selenium.platform.PageEditor;
@@ -33,6 +34,7 @@ public class PLF_HomepageGadgets_Bookmarks extends WikiBase{
 	HomePageGadget hpGadget;
 	Button button;
 	Task tsk;
+	ManageApplications magApp;
 
 	@BeforeMethod
 	public void beforeMethods() {
@@ -47,6 +49,7 @@ public class PLF_HomepageGadgets_Bookmarks extends WikiBase{
 		alert = new ManageAlert(driver, this.plfVersion);
 		hpGadget = new HomePageGadget(driver, this.plfVersion);
 		tsk = new Task(driver, this.plfVersion);
+		magApp = new ManageApplications(driver, this.plfVersion);
 		magAc.signIn("john", "gtn");
 
 	}
@@ -76,6 +79,9 @@ public class PLF_HomepageGadgets_Bookmarks extends WikiBase{
 		String url = "/portal/intranet/connexions";
 		
 		//Add Bookmarks gadget to HomePage  
+		naviToolbar.goToApplicationRegistry();
+		magApp.importApplication();
+		naviToolbar.goToHomePage();
 		naviToolbar.goToEditLayout();
 		click(ELEMENT_CATEGORY_GADGETS);
 		dragAndDropToObject(hpGadget.ELEMENT_APPLICATION_BOOKMARKS,hpGadget.ELEMENT_MIDDLE_CONTAINER);

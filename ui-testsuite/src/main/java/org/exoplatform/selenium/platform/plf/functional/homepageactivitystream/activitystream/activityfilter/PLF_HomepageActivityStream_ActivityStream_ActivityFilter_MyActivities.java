@@ -88,7 +88,7 @@ import org.testng.annotations.*;
 	@Test
 	public  void test01_MentionFromCommentOnHomeShouldPushActivityInMyActivitiesOfTheMentionedUser() {
 		info("Test 1: Mention from comment on Home should push activity in My Activities of the mentioned user");
-		String text = "New Activity";
+		String text = "activity77666";
 		/*
 		- Connect to Intranet/Homepage with User A
 		- From the stream "All activities", add a comment in activity and mention the User B
@@ -152,6 +152,7 @@ import org.testng.annotations.*;
 		//remove data
 		acc.signOut();
 		acc.signIn(DATA_USER1, DATA_PASS);
+		selectFileter("All Activities");
 		home.deleteActivity(user1);
  	}
 
@@ -172,8 +173,8 @@ import org.testng.annotations.*;
 	@Test
 	public  void test03_MentionAMemberInCommentFromASpaceShouldPushActivityInMyActivitiesOfTheMember() {
 		info("Test 3: Mention a member in comment from a space should push activity in My Activities of the member");
-		String text = "Test 3 New Activity";
-		String spaceName = "Test";
+		String text = "activity77669";
+		String spaceName = "space77669";
 		/*
 		- Connect to Intranet/Homepage with User A
 		- Open the space "Test"
@@ -206,6 +207,7 @@ import org.testng.annotations.*;
 		//remove data
 		acc.signOut();
 		acc.signIn(DATA_USER1, DATA_PASS);
+		selectFileter("All Activities");
 		mMember.goToAllSpaces();
 		mMember.deleteSpace(spaceName);
  	}
@@ -225,7 +227,7 @@ import org.testng.annotations.*;
 	@Test
 	public  void test04_MentionAMemberFromASpaceShouldPushTheActivityInMyActivitiesOfTheMember() {
 		info("Test 4: Mention a member from a space should push the activity in My Activities of the member");
-		String spaceName = "Test";
+		String spaceName = "space77670";
 		mMember.goToMySpacePage();
 		mMember.addNewSpace(spaceName,"");
 		goToMembers(spaceName);
@@ -276,7 +278,7 @@ import org.testng.annotations.*;
 	@Test
 	public  void test05_MentionANonMemberFromASpaceShouldPushTheActivityInMyActivitiesOfTheMentionedUser() {
 		info("Test 5: Mention a non member from a space should push the activity in My Activities of the mentioned user");
-		String spaceName = "Test";
+		String spaceName = "space77671";
 		
 		mMember.goToMySpacePage();
 		mMember.addNewSpace(spaceName,"");
@@ -305,6 +307,7 @@ import org.testng.annotations.*;
 		//remove data
 		acc.signOut();
 		acc.signIn(DATA_USER1, DATA_PASS);
+		selectFileter("All Activities");
 		mMember.goToAllSpaces();
 		mMember.deleteSpace(spaceName);
  	}
@@ -324,8 +327,8 @@ import org.testng.annotations.*;
 	@Test
 	public  void test06_MentionANonMemberInACommentFromASpaceShouldPushTheActivityInMyActivitiesOfTheMentionedUser() {
 		info("Test 6: Mention a non member in a comment from a space should push the activity in My Activities of the mentioned user.");
-		String spaceName = "Test";
-		String text = "New activity";
+		String spaceName = "space77672";
+		String text = "activity77672";
 		
 		mMember.goToMySpacePage();
 		mMember.addNewSpace(spaceName,"");
@@ -353,6 +356,7 @@ import org.testng.annotations.*;
 		//remove data
 		acc.signOut();
 		acc.signIn(DATA_USER1, DATA_PASS);
+		selectFileter("All Activities");
 		mMember.goToAllSpaces();
 		mMember.deleteSpace(spaceName);
  	}
@@ -373,7 +377,7 @@ import org.testng.annotations.*;
 	@Test
 	public  void test07_MentionFromCommentInUserActivityStreamShouldPushTheActivityInMyActivitiesOfMentionedUser() {
 		info("Test 7: Mention from comment in user activity stream should push the activity in My Activities of mentioned user");
-		String text = "New activity";
+		String text = "activity77673";
 		/*
 		- Connect to Intranet/Homepage with User A
 		- Go to [My Profile] and choose [Activity stream] tab
@@ -398,7 +402,7 @@ import org.testng.annotations.*;
 		//remove data
 		acc.signOut();
 		acc.signIn(DATA_USER1, DATA_PASS);
-		goToActivityStream();
+		selectFileter("All Activities");
 		home.deleteActivity(text);
  	}
 
@@ -440,7 +444,8 @@ import org.testng.annotations.*;
 		//remove data
 		acc.signOut();
 		acc.signIn(DATA_USER1, DATA_PASS);
-		goToActivityStream();
+		selectFileter("All Activities");
+		home.deleteActivity(user1);
  	}
 
 
@@ -458,8 +463,8 @@ import org.testng.annotations.*;
 	@Test
 	public  void test09_CommentOnSomeoneElsesActivity() {
 		info("Test 9: Comment on someone else's activity");
-		String text="New Activity";
-		String comment = "New comment";
+		String text="activity77676";
+		String comment = "comment77676";
 		addActivity(true, text, false, "");
 		nav.goToConnectionPage();
 		pConn.connectPeople(user1);
@@ -494,7 +499,9 @@ import org.testng.annotations.*;
 		//remove data
 		acc.signOut();		
 		acc.userSignIn(userType.ADMIN);
+		selectFileter("All Activities");
 		home.deleteActivity(text);
+		nav.goToConnectionPage();
 		pConn.removeConnection(user1);
  	}
 
@@ -513,8 +520,8 @@ import org.testng.annotations.*;
 	@Test
 	public  void test10_CommentOnMyActivityFromMyActivityStream() {
 		info("Test 10 Comment on my activity from My Activity stream");
-		String text="New Activity";
-		String comment = "New comment";
+		String text="activity77680";
+		String comment = "comment77680";
 		/*
 		- Connect to Intranet/Homepage
 		- Go to [My Activity Stream]
@@ -533,7 +540,7 @@ import org.testng.annotations.*;
 		nav.goToHomePage();
 		selectFileter("My Activities");
 		waitForAndGetElement(home.ELEMENT_ACTIVITY_COMMENT_CONTENT.replace("${title}", text).replace("${comment}", comment));
-		goToActivityStream();
+		selectFileter("All Activities");
 		home.deleteActivity(text);
  	}
 
@@ -552,7 +559,7 @@ import org.testng.annotations.*;
 	@Test
 	public  void test11_ActivityLikedFromMyActivityStreamShouldBeVisibleInMyActivities() {
 		info("Test 11 Activity liked from my activity stream should be visible in My Activities");
-		String text="New Activity";
+		String text="activity77682";
 		/*
 		- Connect to intranet/Homepage
 		- Choose [My Activity Stream] filter
@@ -572,9 +579,8 @@ import org.testng.annotations.*;
 		nav.goToHomePage();
 		selectFileter("My Activities");
 		waitForActivityPresent(text, true);
-	
+		selectFileter("All Activities");
 		home.deleteActivity(text);
-		
  	}
 
 
@@ -592,7 +598,7 @@ import org.testng.annotations.*;
 	@Test
 	public  void test12_ActivityPostedFromMyActivityStreamShouldBeVisibleInMyActivities() {
 		info("Test 12 Activity posted from my activity stream  should be visible in My Activities");
-		String text="New Activity";
+		String text="activity77683 ";
 		/*
 		- Connect to Intranet
 		- Go to [My Profile]
@@ -611,7 +617,7 @@ import org.testng.annotations.*;
 		nav.goToHomePage();
 		selectFileter("My Activities");
 		waitForActivityPresent(text, true);
-		goToActivityStream();
+		selectFileter("All Activities");
 		home.deleteActivity(text);
  	}
 
@@ -631,7 +637,7 @@ import org.testng.annotations.*;
 	public  void test13_ActivityPostedFromASpaceShouldBeVisibleInMyActivities() {
 		info("Test 13 Activity posted from a space should be visible in My activities");
 		String spaceName = "Test";
-		String text = "New activity";
+		String text = "activity77684";
 		/*
 		- Connect to Intranet
 		- Click [join a space]
@@ -664,6 +670,7 @@ import org.testng.annotations.*;
 		waitForActivityPresent(text, true);
 		
 		//remove data
+		selectFileter("All Activities");
 		mMember.goToAllSpaces();
 		mMember.deleteSpace(spaceName);
  	}
@@ -711,7 +718,7 @@ import org.testng.annotations.*;
 	@Test
 	public  void test15_AddCommentToAnActivityOnActivityStreamOfOtherUser() {
 		info("Test 15 Add Comment to an activity on activity stream of other user");
-		String text="New Activity";
+		String text="activity77696";
 		nav.goToConnectionPage();
 		pConn.connectPeople(user1);
 		acc.signOut();
@@ -742,8 +749,9 @@ import org.testng.annotations.*;
 		//remove data
 		acc.signOut();
 		acc.userSignIn(userType.DEVELOPER);
-		goToActivityStream();
+		selectFileter("All Activities");
 		home.deleteActivity(text);
+		nav.goToConnectionPage();
 		pConn.removeConnection(user);
  	}
 

@@ -81,6 +81,8 @@ public class PLF_HomepageActivityStream_ActivityStream_ActivityFilter_Connection
 		//delete data
 		acc.userSignIn(userType.ADMIN);
 		home.deleteActivity(text);
+		nav.goToConnectionPage();
+		pConn.removeConnection(user1);
 	}
 
 	/** Activity posted from a space should not be visible in "Connections" of a connection

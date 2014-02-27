@@ -61,7 +61,8 @@ public class Activity extends SocialBase {
 	public final By ELEMENT_ACTIVITY_MENTION_USER_MENU = By.xpath("//div[@id='DisplaycomposerInput']/../div[@class='autocomplete-menu']");
 	public final String ELEMENT_ACTIVITY_MENTION_USER = ELEMENT_ACTIVITY_MENTION_USER_MENU+"//*[contains(text(),'${name}')]/../div[@class='avatarSmall']";
 	public final By ELEMENT_ACTIVITY_WHAT_ARE_YOU_WORKING_LABEL = By.xpath("//div[@id='DisplaycomposerInput']/../div[@class='placeholder']");
-	public final By ELEMENT_LINK = By.xpath("//i[@class='uiIconSocUILinkActivityComposer uiIconSocLightGray']");
+	public final By ELEMENT_LINK = By.xpath("//*[@class='uiIconSocUILinkActivityComposer uiIconSocLightGray']");
+	public final By ELEMNET_LINK_ROW = By.id("LinkExtensionContainer");
 	public final By ELEMENT_INPUT_LINK_BOX = By.id("InputLink");
 	public final By ELEMENT_SELECT_FILE_BUTTON = By.linkText("Select File"); 
 	public final By ELEMENT_SELECT_BUTTON = By.xpath("//button[text()='Select']");
@@ -300,6 +301,10 @@ public class Activity extends SocialBase {
 		{
 			info("----Click on Link----");
 			waitForAndGetElement(ELEMENT_LINK).click();
+			if(waitForAndGetElement(ELEMNET_LINK_ROW, DEFAULT_TIMEOUT,0,2).getAttribute("style").contains("none")){
+				info("click second time");
+				click(ELEMENT_LINK,2);
+			}
 			info("----Input link into link box-----");
 			waitForAndGetElement(ELEMENT_INPUT_LINK_BOX, DEFAULT_TIMEOUT,1,2);
 			type(ELEMENT_INPUT_LINK_BOX, link, true,2);

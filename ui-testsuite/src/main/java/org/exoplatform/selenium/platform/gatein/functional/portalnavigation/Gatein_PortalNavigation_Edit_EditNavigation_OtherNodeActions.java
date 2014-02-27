@@ -188,7 +188,6 @@ public class Gatein_PortalNavigation_Edit_EditNavigation_OtherNodeActions extend
 		
 		info("Delete node for Portal");
 		navMag.deleteNode(portalName, parentNode, nodeName2, false);
-		navMag.deleteNode(portalName, parentNode, nodeName1, false);
 	}
 
 

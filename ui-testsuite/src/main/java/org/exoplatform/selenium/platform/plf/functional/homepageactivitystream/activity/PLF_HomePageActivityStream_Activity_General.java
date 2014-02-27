@@ -10,7 +10,7 @@ import org.exoplatform.selenium.platform.ManageAccount.userType;
 import org.exoplatform.selenium.platform.ecms.EcmsBase;
 import org.exoplatform.selenium.platform.ecms.contentexplorer.ActionBar;
 import org.exoplatform.selenium.platform.ecms.contentexplorer.ContextMenu;
-import org.exoplatform.selenium.platform.ecms.contentexplorer.ContextMenu.actionType;
+import org.exoplatform.selenium.platform.ecms.contentexplorer.SitesExplorer;
 import org.exoplatform.selenium.platform.social.Activity;
 import org.exoplatform.selenium.platform.social.ManageMember;
 import org.exoplatform.selenium.platform.social.PeopleConnection;
@@ -36,6 +36,7 @@ public class PLF_HomePageActivityStream_Activity_General extends Activity{
 	String user = "John Smith"; 
 	String user1 = "Jack Miller";
 	SpaceManagement mSpace; 
+	SitesExplorer siteExp;
 
 	@BeforeMethod
 	public void setUpBeforeTest(){
@@ -50,6 +51,7 @@ public class PLF_HomePageActivityStream_Activity_General extends Activity{
 		actBar = new ActionBar(driver, this.plfVersion);
 		ecms = new EcmsBase(driver, this.plfVersion);
 		conMenu = new ContextMenu(driver, this.plfVersion);
+		siteExp = new SitesExplorer(driver, this.plfVersion);
 		mSpace = new SpaceManagement(driver, this.plfVersion);
 	}
 
@@ -217,6 +219,8 @@ public class PLF_HomePageActivityStream_Activity_General extends Activity{
 		//delete data
 		acc.userSignIn(userType.ADMIN);
 		home.deleteActivity(text);
+		nav.goToConnectionPage();
+		pConn.removeConnection(user1);
 		mMember.goToAllSpaces();
 		mMember.deleteSpace(spaceName,300000);
 	}
@@ -278,11 +282,8 @@ public class PLF_HomePageActivityStream_Activity_General extends Activity{
 	@Test
 	public  void test06_DisplayTypeIconOfActivityInTheTimeline() {
 		info("Test 6: Display type icon of activity in the timeline");
-		String driverName = "Personal Drives";
-		String folderPath = "Personal Documents";
-		String uploadFileName = "ECMS_DMS_SE_Upload_pdffile.pdf";
-		String folder = "Folder78611";
-		String contentType = ".pdf";
+		String file = "KS_Wiki_Attachment_pdffile.pdf";
+		By elementfile = By.xpath(siteExp.ELEMENT_SE_NODE.replace("{$node}", file));
 		/*
 		- Connect to Intranet with User A
 		- Share an activity
@@ -290,16 +291,18 @@ public class PLF_HomePageActivityStream_Activity_General extends Activity{
 		 *Expected Outcome: 
 		- The activity is displayed in the activity stream
 		- The icon type of the activity is displayed in the timeline		*/ 
-
-		selectFile(driverName,true,folderPath,"",uploadFileName,folder);
-		waitForAndGetElement(By.xpath(home.ELEMENT_ACTIVITY.replace("${activityText}", uploadFileName)));
-		//Activity type 
-		waitForAndGetElement(home.ELEMENT_CONTENT_TYPE_PLF41.replace("${activityText}", uploadFileName).replace("${type}", contentType));
-		//delete data
-		home.deleteActivity(uploadFileName);
+		//Go to SE
 		nav.goToSiteExplorer();
-		actBar.chooseDrive(ecms.ELEMENT_PERSONAL_DRIVE);
-		actBar.actionsOnElement(folder, actionType.DELETE, true, true);			
+		//Upload a file: image, pdf or office document (except personal document drive)
+		ecms.uploadFile("TestData/"+file);
+		//Back to the Home page
+		info("-- Back to the Home page --");
+		nav.goToHomePage();
+		home.checkInforAfterAddingDocument(file, "uiIcon64x64FileDefault uiIcon64x64nt_file uiIcon64x64applicationpdf", "File", "1 MB", "", "", "", "");
+
+		//delete data
+		nav.goToSiteExplorer();
+		conMenu.deleteData(elementfile);
 	}
 
 	/**
@@ -361,7 +364,6 @@ public class PLF_HomePageActivityStream_Activity_General extends Activity{
 		waitForAndGetElement(ELEMENT_ICON_SPACE_ACTIVITY);
 
 		//delete data
-		home.deleteActivity(text);
 		mMember.goToAllSpaces();
 		mMember.deleteSpace(spaceName, 300000);
 	}

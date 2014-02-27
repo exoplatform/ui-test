@@ -203,24 +203,22 @@ public class ActionBar extends EcmsBase{
 	
 	// Add site path
 	public final String ELEMENT_SITE_PATH = "//span[@class='nodeName' and text()='${title}']";
-	public final String ELEMENT_ACTIONS = "//*[contains(text(), '${action}')]";
-	public By ELEMENT_ADD_ACTION_LINK = By.linkText("Add Action");
-	public By ELEMENT_UPLOAD_FILE = By.linkText("Upload");
-	public By ELEMENT_PUBLISH_FILE = By.linkText("Publish");
-	public String ELEMENT_STATUS_FILE = "//span[@class='nodeName' and text()='${title}']/../../../..//div[@data-original-title= 'status' and text() = '${status}']";
-	public final By ELEMENT_MORE_LINK = By.linkText("More");
+	
+	//Content Navigation
 	public final By ELEMENT_NAVIGATION_LINK = By.linkText("Content Navigation");
 	public final By ELEMENT_MANAGE_ACTION_LINK = By.linkText("Actions");
 	public final By ELEMENT_VISIBLE_CHECKBOX = By.id("Visible");
 	public final By ELEMENT_NAVIGATION_NODE = By.id("NavigationNode");
 	public final By ELEMENT_CLICKABLE_CHECKBOX = By.id("Clickable");
+	public final By ELEMENT_CONTENT_NAVIGATION_FORM = By.id("UINavigationForm");
 	public final By ELEMENT_NAVIGATION_SELECT_NODE = By.xpath("//i[@class= 'uiIconSelectNavigationNode uiIconLightGray']");
 	public final String ELEMENT_NAVIGATION_PATH = "//td[contains(text(),'${path}')]/..//i[@class='uiIconSelectPage']";
 	public final By ELEMENT_NAVIGATION_SELECT_LIST = By.xpath("//i[@class='uiIconSelectListTargetPage uiIconLightGray']");
 	public final By ELEMENT_NAVIGATION_SELECT_DETAIL = By.xpath("//i[@class='uiIconSelectDetailTargetPage uiIconLightGray']");
 	public final String ELEMENT_NAVIGATION_LIST_PATH = "//div[contains(text(),'${path}')]/../..//div[@class='Select16x16Icon']";
 	public final By ELEMENT_NAVIGATION_DISPLAY_ORDER = By.id("Index");
-	public final By ELEMENT_REFRESH_BUTTON = By.xpath("//*[@class = 'uiIconRefresh']");
+	public final By ELEMENT_PARENT_FOLDER_NODE = By.id("Node");
+	public final By ELEMENT_NAVIGATION_SELECTION_FORM = By.id("NavigationSelectorPopupWindow");
 	/*==================================================================================*/
 	//Go to Sites Management
 	public void showDrives(){
@@ -586,6 +584,7 @@ public class ActionBar extends EcmsBase{
 		}else {
 			magView.setup2ShowViewAction(item, view, tab);
 			magAcc.signOut();
+			driver.get(baseUrl);
 			magAcc.signIn("john", "gtn");
 			navToolBar.goToSiteExplorer();
 		}
@@ -1683,27 +1682,34 @@ public class ActionBar extends EcmsBase{
 	}
 	
 	/**
-	 * 
+	 * Add content navigation in form
+	 * @param visible
+	 * @param path
+	 * @param displayOrder
+	 * @param clickable
+	 * @param forList
+	 * @param forDetail
+	 * @param verify
 	 */
 	public void addContentNavigation(boolean visible, String path, String displayOrder, boolean clickable, String forList, String forDetail, boolean verify){
 		info("Add Content Navigation");
 		if (!visible) check(ELEMENT_VISIBLE_CHECKBOX, 2);
 		else uncheck(ELEMENT_VISIBLE_CHECKBOX, 2);
-		if(path!=null){
+		if(path!=null && path!=""){
 			click(ELEMENT_NAVIGATION_SELECT_NODE);
 			check(By.xpath(ELEMENT_NAVIGATION_PATH.replace("${path}", path)),2);			
 		}
-		if(displayOrder!=null){
+		if(displayOrder!=null && displayOrder!="" ){
 			WebElement order = waitForAndGetElement(ELEMENT_NAVIGATION_DISPLAY_ORDER);
 			order.sendKeys(displayOrder);
 		}
 		if (clickable) check(ELEMENT_CLICKABLE_CHECKBOX, 2);
 		else uncheck(ELEMENT_CLICKABLE_CHECKBOX, 2);
-		if(forList!=null){
+		if(forList!=null && forList!=""){
 			click(ELEMENT_NAVIGATION_SELECT_LIST);
 			check(By.xpath(ELEMENT_NAVIGATION_LIST_PATH.replace("${path}", forList)),2);	
 		}
-		if(forDetail!=null){
+		if(forDetail!=null && forDetail!=""){
 			click(ELEMENT_NAVIGATION_SELECT_DETAIL);
 			check(By.xpath(ELEMENT_NAVIGATION_LIST_PATH.replace("${path}", forDetail)),2);	
 		}
@@ -1712,6 +1718,23 @@ public class ActionBar extends EcmsBase{
 		button.save();	
 		}
 		else button.cancel();
-			
+	}
+	
+	/**
+	 * Go to content navigation from action bar in SE
+	 */
+	public void goToContentNavigation(){
+		WebElement actionicon = waitForAndGetElement(ELEMENT_NAVIGATION_LINK, 5000, 0);
+		if (actionicon == null){
+			WebElement more = waitForAndGetElement(ELEMENT_MORE_LINK_WITHOUT_BLOCK, 5000, 0);
+			if (more != null){
+				click(ELEMENT_MORE_LINK_WITHOUT_BLOCK);
+			} else {
+				info("Do not have navigation icon in action bar");
+				return;
+			}
+		}
+		click(ELEMENT_NAVIGATION_LINK);
+		waitForAndGetElement(ELEMENT_CONTENT_NAVIGATION_FORM);
 	}
 }
