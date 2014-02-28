@@ -15,7 +15,6 @@ import org.exoplatform.selenium.platform.PageEditor;
 import org.exoplatform.selenium.platform.PageManagement;
 import org.exoplatform.selenium.platform.PortalManagement;
 import org.exoplatform.selenium.platform.UserGroupManagement;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -419,16 +418,17 @@ public class Gatein_Navigation_PortalNavigation_EditNavigation extends PortalMan
 		dragAndDropToObject(ELEMENT_PAGE_MANAGEMENT_PORTLET, ELEMENT_DROP_TARGET_NO_LAYOUT);
 		dragAndDropToObject(ELEMENT_ORGANIZATION_PORTLET, ELEMENT_DROP_TARGET_NO_LAYOUT);
 		mouseOver(ELEMENT_LIST_PORTLET_LAYOUT_DECORATOR.replace("${portletName}", portletTitle), true);
-		dragAndDropToObject(ELEMENT_DRAG_CURRENT_PORTLET.replace("${portletName}", portletTitle), ELEMENT_LIST_PORTLET_LAYOUT_DECORATOR.replace("${portletName}", "Organization Portlet"));
+		if(this.plfVersion.contains("4.0"))
+			dragAndDropToObject(ELEMENT_DRAG_CURRENT_PORTLET.replace("${portletName}", portletTitle), ELEMENT_LIST_PORTLET_LAYOUT_DECORATOR.replace("${portletName}", "Organization Portlet"));
+		else
+			dragAndDropToObject(eLEMENT_DRAG_CURRENT_PORTLET_PLF41.replace("${portletName}", portletTitle), ELEMENT_LIST_PORTLET_LAYOUT_DECORATOR.replace("${portletName}", "Organization Portlet"));
 
 		info("Verify that the page is updated after moving...");
-		click(ELEMENT_SWITCH_VIEW_MODE);
-		waitForAndGetElement(ELEMENT_LIST_CONTAINER.replace("${number}", "1").replace("${nameContainer}", portletTitle));
-		waitForAndGetElement(ELEMENT_LIST_CONTAINER.replace("${number}", "2").replace("${nameContainer}", "Organization Portlet"));
-		waitForAndGetElement(ELEMENT_LIST_CONTAINER.replace("${number}", "3").replace("${nameContainer}", "Page Management Portlet"));
+		waitForAndGetElement(ELEMENT_LIST_CONTAINER.replace("${number}", "2").replace("${nameContainer}", portletTitle));
+		waitForAndGetElement(ELEMENT_LIST_CONTAINER.replace("${number}", "3").replace("${nameContainer}", "Organization Portlet"));
+		waitForAndGetElement(ELEMENT_LIST_CONTAINER.replace("${number}", "1").replace("${nameContainer}", "Page Management Portlet"));
 
 		info("Delete an application when edit page...");
-		click(ELEMENT_SWITCH_VIEW_MODE);
 		waitForAndGetElement(pageEditor.ELEMENT_VIEW_PAGE_PROPERTIES);
 		pageEditor.removePortlet(ELEMENT_LIST_PORTLET_LAYOUT_DECORATOR.replace("${portletName}", portletTitle), ELEMENT_DELETE_PORTLET_ICON, false);
 		pageEditor.removePortlet(ELEMENT_LIST_PORTLET_LAYOUT_DECORATOR.replace("${portletName}", "Organization Portlet"), ELEMENT_DELETE_PORTLET_ICON, false);
@@ -482,7 +482,6 @@ public class Gatein_Navigation_PortalNavigation_EditNavigation extends PortalMan
 		editNavigation(portalName);
 		rightClickOnElement(nodeLink);
 		click(ELEMENT_NAVIGATION_EDIT_PAGE_NODE);
-//		clearCache();
 		waitForAndGetElement(pageEditor.ELEMENT_VIEW_PAGE_PROPERTIES);
 
 		info("Add a container...");
@@ -501,8 +500,11 @@ public class Gatein_Navigation_PortalNavigation_EditNavigation extends PortalMan
 		button.save();
 		waitForElementNotPresent(ELEMENT_CONTAINER_SETTING_TAB);
 		mouseOver(ELEMENT_DROP_TARGET_HAS_LAYOUT, true);
-		waitForAndGetElement(ELEMENT_NAME_CONTAINER.replace("${nameContainer}", containerTitle));
-	//	click(ELEMENT_SWITCH_VIEW_MODE);
+		if(this.plfVersion.contains("4.0"))
+			waitForAndGetElement(ELEMENT_NAME_CONTAINER.replace("${nameContainer}", containerTitle));
+		else
+			waitForAndGetElement(ELEMENT_NAME_CONTAINER_PLF41.replace("${nameContainer}", containerTitle));
+		click(ELEMENT_SWITCH_VIEW_MODE);
 		WebElement element = waitForAndGetElement(ELEMENT_EDITING_CONTAINER);
 		String valueStyle = element.getAttribute("style");
 		assert valueStyle.equals("width: 150px; height: 150px;"): "Failed to edit the value of container: " + containerTitle;
@@ -510,12 +512,16 @@ public class Gatein_Navigation_PortalNavigation_EditNavigation extends PortalMan
 		info("Move a container...");
 		click(ELEMENT_SWITCH_VIEW_MODE);
 		pageEditor.addNewContainer("Rows Layout", "oneRow");
-		waitForAndGetElement(ELEMENT_LIST_CONTAINER.replace("${number}", "1").replace("${nameContainer}", "Container"), DEFAULT_TIMEOUT, 1, 2);
-		waitForAndGetElement(ELEMENT_LIST_CONTAINER.replace("${number}", "2").replace("${nameContainer}", containerTitle), DEFAULT_TIMEOUT, 1, 2);
+		waitForAndGetElement(ELEMENT_LIST_CONTAINER.replace("${number}", "2").replace("${nameContainer}", "Container"), DEFAULT_TIMEOUT, 1, 2);
+		waitForAndGetElement(ELEMENT_LIST_CONTAINER.replace("${number}", "1").replace("${nameContainer}", containerTitle), DEFAULT_TIMEOUT, 1, 2);
 
 		mouseOver(ELEMENT_NAME_CURRENT_CONTAINER.replace("${nameContainer}", "Container"), true);
-		dragAndDropToObject(ELEMENT_DRAG_CURRENT_CONTAINER.replace("${nameContainer}", "Container"), By.xpath("//*[@class='UIRowContainer']"));
-		waitForAndGetElement(ELEMENT_LIST_CONTAINER.replace("${number}", "2").replace("${nameContainer}", containerTitle), DEFAULT_TIMEOUT, 1, 2);
+		if(this.plfVersion.contains("4.0"))
+			dragAndDropToObject(ELEMENT_DRAG_CURRENT_CONTAINER.replace("${nameContainer}", "Container"), ELEMENT_PORTLET_LAYOUT_DECORATOR);
+		else
+			dragAndDropToObject(ELEMENT_DRAG_CURRENT_CONTAINER_PLF41.replace("${nameContainer}", "Container"), ELEMENT_PORTLET_LAYOUT_DECORATOR);
+		waitForAndGetElement(ELEMENT_LIST_CONTAINER.replace("${number}", "1").replace("${nameContainer}", containerTitle), DEFAULT_TIMEOUT, 1, 2);
+
 		waitForAndGetElement(ELEMENT_LIST_CONTAINER.replace("${number}", "1").replace("${nameContainer}", "Container"), DEFAULT_TIMEOUT, 1, 2);
 
 		info("Delete a container...");
@@ -523,9 +529,9 @@ public class Gatein_Navigation_PortalNavigation_EditNavigation extends PortalMan
 		pageEditor.removeContainer(ELEMENT_NAME_CURRENT_CONTAINER.replace("${nameContainer}", containerTitle), ELEMENT_DELETE_CONTAINER_ICON);
 		waitForElementNotPresent(ELEMENT_LIST_CONTAINER.replace("${number}", "1").replace("${nameContainer}", containerTitle));
 		waitForElementNotPresent(ELEMENT_LIST_CONTAINER.replace("${number}", "2").replace("${nameContainer}", "Container"));
+
 		pageEditor.finishEditLayout();	
 		//waitForElementNotPresent(pageEditor.ELEMENT_VIEW_PAGE_PROPERTIES);	
 		navToolbar.goToPortalSites();
-		deletePortal(portalName);
-	}
+		deletePortal(portalName);	}
 }

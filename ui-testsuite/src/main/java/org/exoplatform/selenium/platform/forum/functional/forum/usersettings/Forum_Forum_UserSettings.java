@@ -56,7 +56,7 @@ public class Forum_Forum_UserSettings extends ForumBase {
 	 * https://jira.exoplatform.org/browse/FORUM-767
 	 * This bug happens in PLF 4.1.0
 	 */
-	@Test
+	@Test(groups="error")
 	public  void test01_02_03_CheckMySubscriptions() {
 
 		String category = "category 72363";

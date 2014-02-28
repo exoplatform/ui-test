@@ -239,7 +239,7 @@ public class AnswerBase extends ForumBase {
 		Utils.pause(1000);
 	}
 
-	/**Function setting discussion in answert portlet
+	/**Function setting discussion in answer portlet
 	 * @author lientm
 	 * @param discuss
 	 * @param forumPath
