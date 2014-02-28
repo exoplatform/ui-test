@@ -326,7 +326,7 @@ public class AnswerManageQuestion extends AnswerBase {
 		}
 		waitForMessage(MSG_DELETE_QUESTION);
 		click(ELEMENT_OK_DELETE_QUESTION);
-		waitForTextNotPresent(questionName);
+		waitForTextNotPresent(questionName,60000);
 	}
 
 	//---------------------------Functions in Manage Question popup----------------------------//

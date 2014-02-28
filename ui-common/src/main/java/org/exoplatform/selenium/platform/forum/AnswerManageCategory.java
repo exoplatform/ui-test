@@ -154,7 +154,7 @@ public class AnswerManageCategory extends AnswerBase {
 		}
 		button.save();
 		Utils.pause(2000);
-		waitForElementNotPresent(ELEMENT_CATEGORY_NAME);
+		waitForElementNotPresent(ELEMENT_CATEGORY_NAME,100000);
 	}
 	
 	/**

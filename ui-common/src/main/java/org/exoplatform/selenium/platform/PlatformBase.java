@@ -25,10 +25,11 @@ public class PlatformBase extends TestBase {
 	public final String DATA_USER_MARY = "mary";
 	public ManageAlert alert = new ManageAlert(driver);
 	public Button button = new Button(driver);
+	PlatformPermission per;
 
 	/****************Common Elements*******************/
 	public final String ELEMENT_CONTAINS_TEXT = "//*[contains(text(),'${text}')]"; 
-
+	
 	/*
 	 * Default Page - http://localhost:8080/portal/default/
 	 * */
@@ -604,7 +605,7 @@ public class PlatformBase extends TestBase {
 	public final String ELEMENT_GMAIL_INVITE_COWORKER_CONTENT = "//*[@class='adn ads']/..";
 	public final String ELEMENT_GMAIL_FROM_USER = "//*[@class='gD' and @name ='${user}']";
 	public final By ELEMENT_GMAIL_TITLE_COWORKER = By.id(":xu");
-	
+
 	//get url
 	public final String ELEMENT_GET_URL_IMAGE = "//img[@alt='${name}']";
 
@@ -1372,4 +1373,6 @@ public class PlatformBase extends TestBase {
 //		}
 		driver.navigate().to(baseUrl);
 	}*/
+	
+
 }

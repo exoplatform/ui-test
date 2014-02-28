@@ -2,12 +2,13 @@ package org.exoplatform.selenium.platform.calendar.sniff;
 
 import static org.exoplatform.selenium.TestLogger.info;
 
+import org.exoplatform.selenium.Button;
+import org.exoplatform.selenium.Utils;
 import org.exoplatform.selenium.platform.ManageAccount;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import org.exoplatform.selenium.platform.calendar.CalendarBase;
-
 import org.exoplatform.selenium.platform.calendar.Event;
 import org.exoplatform.selenium.platform.calendar.Task;
 
@@ -20,6 +21,7 @@ public class Calendar_Calendar extends CalendarBase{
 	ManageAccount acc;
 	Event evt;
 	Task tsk;
+	
 	@BeforeMethod
 	public void setUpBeforeTest(){
 		getDriverAutoSave();
@@ -27,7 +29,12 @@ public class Calendar_Calendar extends CalendarBase{
 		evt = new Event(driver);
 		tsk = new Task(driver);
 		acc.signIn(DATA_USER_JOHN, DATA_PASS);
-		goToCalendarPage();
+		goToCalendarPage(); 
+		Utils.pause(5000);
+		
+		
+		button = new Button(driver);
+		
 		goToCalendarSettings();
 		settingCalendar("Week", "mm/dd/yyyy", null, null, "Monday", null, null);
 	}
@@ -101,7 +108,7 @@ public class Calendar_Calendar extends CalendarBase{
 		editCalendar(calendar,newCalendar, newCalendar,"light_purple");
 		deleteCalendar(newCalendar);
 	}
-
+	
 	/** Add Group Calendar, Edit Group Calendar, Delete Group Calendar
 	 * CaseID 69649, 69660, 69661
 	 */

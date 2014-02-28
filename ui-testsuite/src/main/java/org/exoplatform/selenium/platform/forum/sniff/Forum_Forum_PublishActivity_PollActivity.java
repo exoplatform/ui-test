@@ -190,6 +190,7 @@ public class Forum_Forum_PublishActivity_PollActivity extends ForumBase{
 		
 		//Check activity
 		navTool.goToHomePage();
+		driver.navigate().refresh();
 		waitForAndGetElement(By.linkText(titleTop));
 		
 		hpgAct.openVoteFromActivity(pollQuestion);

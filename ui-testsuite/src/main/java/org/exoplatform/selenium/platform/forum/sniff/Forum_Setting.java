@@ -124,7 +124,7 @@ public class Forum_Setting extends ForumBase {
 		magAc.signIn("demo", DATA_PASS);
 		goToForums();
 		click(By.linkText(forumName));
-		waitForAndGetElement(ELEMENT_START_TOPIC_DISABLE);
+		waitForAndGetElement(ELEMENT_START_TOPIC_DISABLE,60000);
 		magAc.signOut();
 		
 		info("Reset data");

@@ -71,6 +71,7 @@ public class Forum_Answers_PublishActivity extends AnswerBase{
 
 		info("Check activity on homepage");
 		navTool.goToHomePage();
+		driver.navigate().refresh();
 		waitForAndGetElement(By.linkText(questionName));
 		
 		HPAct.checkNumberOfLineOfContent(getText(HPAct.ELEMENT_QUESTION_CONTENT.replace("${title}", questionName)), questionContent);
@@ -100,6 +101,7 @@ public class Forum_Answers_PublishActivity extends AnswerBase{
 
 		info("Check activity on homepage");
 		navTool.goToHomePage();
+		driver.navigate().refresh();
 		waitForAndGetElement(By.linkText(questionName));
 		
 		HPAct.checkNumberOfLineOfContent(getText(HPAct.ELEMENT_QUESTION_CONTENT.replace("${title}", questionName)), questionContent);
@@ -135,6 +137,7 @@ public class Forum_Answers_PublishActivity extends AnswerBase{
 
 		info("Check activity on homepage");
 		navTool.goToHomePage();
+		driver.navigate().refresh();
 		waitForAndGetElement(By.linkText(questionName));
 
 		click(By.linkText("View all 3 comments."));

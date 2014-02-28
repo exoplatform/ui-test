@@ -94,7 +94,7 @@ public class Forum_Administration extends ForumBase {
 		magAc.signIn("demo", DATA_PASS);
 		goToForums();
 		click(By.linkText(forumName));
-		waitForAndGetElement(ELEMENT_START_TOPIC_DISABLE);
+		waitForAndGetElement(ELEMENT_START_TOPIC_DISABLE,60000);
 		waitForTextPresent(MSG_BLOCK_CREATE_TOPIC);
 		waitForTextPresent(MSG_BLOCK_POST);
 		waitForTextPresent(MSG_BLOCK_POST_ATTACHMENT);

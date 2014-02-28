@@ -100,6 +100,7 @@ public class Forum_Forum_PublishActivity_TopicActivity extends ForumBase{
 		String titleTop = "Topic 02";
 		String descTop = "line1<br>line2<br>line3<br>line4<br>line5";
 		String reply = "Reply on this topic";
+		String comment = "Rated the topic: 1.0";
 		
 		info("Create new Topic");
 //		create category, forum, topic
@@ -110,10 +111,11 @@ public class Forum_Forum_PublishActivity_TopicActivity extends ForumBase{
 		mngTopic.voteTopic(1);
 			
 		navTool.goToHomePage();
+		driver.navigate().refresh();
 		waitForAndGetElement(By.linkText(titleTop));
 		hpgAct.checkNumberOfLineOfContent(getText(hpgAct.ELEMENT_FORUM_ACT_CONTENT.replace("${title}", titleTop)), descTop);
 		hpgAct.checkRateTopic(titleTop, 1.0);
-		hpgAct.checkReplyForum(titleTop, reply);
+		hpgAct.checkReplyForum(titleTop, reply,comment);
 		
 		//Delete data
 		goToForums();
@@ -141,6 +143,7 @@ public class Forum_Forum_PublishActivity_TopicActivity extends ForumBase{
 		mngTopic.editTopic(newTopic, descTop, "",  0, userGroup,false,false,false);
 			
 		navTool.goToHomePage();
+		driver.navigate().refresh();
 		waitForAndGetElement(By.linkText(newTopic));
 		hpgAct.checkTitleAfterEditing(titleTop,newTopic);
 		
@@ -238,6 +241,7 @@ public class Forum_Forum_PublishActivity_TopicActivity extends ForumBase{
 		mngTopic.deleteTopic(titleTop);
 		
 		navTool.goToHomePage();
+		driver.navigate().refresh();
 		assert waitForAndGetElement(By.linkText(titleTop),5000,0) == null;
 		
 		//Delete data

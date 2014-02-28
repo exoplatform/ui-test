@@ -50,10 +50,12 @@ public class ManageAlert extends TestBase{
 
 	//Get Text
 	public String getTextFromAlert() {
+		String text = "";
 		Utils.pause(1000);
 		try {
 			Alert alert = driver.switchTo().alert();
-			return alert.getText();
+			text = alert.getText();
+			return text;
 		} catch (NoAlertPresentException e) {
 			return "";
 		}
@@ -63,7 +65,6 @@ public class ManageAlert extends TestBase{
 	public void waitForConfirmation(String confirmationText,int...wait) {
 		String message = getTextFromAlert();
 		int timeOut = wait.length > 0 ? wait[0] : DEFAULT_TIMEOUT;
-
 		//log("confirmation: " + message);
 		if (message.isEmpty()) {
 			if (loopCount > timeOut/500) {

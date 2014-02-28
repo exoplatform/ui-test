@@ -54,7 +54,7 @@ public class TestBase {
 	//public final By ELEMENT_MENU_PAGE_LINK = By.linkText("Page");
 	//public final String AJAX_LOADING_MASK = "//div[@id='AjaxLoadingMask']";
 
-	public final String DEFAULT_BASEURL = "http://demo.fqa.exocloud.vn/portal";
+	public final String DEFAULT_BASEURL = "http://cloudtest02.exocloud.testlab1.exoplatform.vn/portal";
 
 	//"http://yopmail.netstg.exoplatform.org/portal";
 	//"http://hushmail.wks-acc.exoplatform.org/portal";
@@ -686,7 +686,8 @@ public class TestBase {
 		baseUrl = System.getProperty("baseUrl");
 		if (baseUrl==null) baseUrl = DEFAULT_BASEURL;
 		action = new Actions(driver);
-		termsAndConditions();
+		driver.get(baseUrl);
+//		termsAndConditions();
 	}
 
 	/**function set driver to auto open new window when click link

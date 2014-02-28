@@ -5,6 +5,7 @@ import static org.exoplatform.selenium.TestLogger.info;
 import org.exoplatform.selenium.Button;
 import org.exoplatform.selenium.ManageAlert;
 import org.exoplatform.selenium.Utils;
+import org.exoplatform.selenium.platform.HomePageActivity;
 import org.exoplatform.selenium.platform.PlatformBase;
 import org.exoplatform.selenium.platform.PlatformPermission;
 import org.openqa.selenium.By;
@@ -21,6 +22,7 @@ import org.openqa.selenium.WebElement;
 public class CalendarBase extends PlatformBase {
 
 	PlatformPermission per;
+	HomePageActivity hpAct;
 
 	//Go to the calendar's page
 	public String ID_CALENDAR_PAGE = "";
@@ -30,17 +32,35 @@ public class CalendarBase extends PlatformBase {
 	public String ELEMENT_CALENDAR_MINI_DATE= "//td[@class='highLight' and contains(text(),'${date}')]";
 	//public String ELEMENT_CALENDAR_SETTING_ICON = "//a[text()='${calendar}']/ancestor::li[contains(@class, 'calendarItem')]/div[contains(@id,'UICalendars')]";
 	public String ELEMENT_CALENDAR_SETTING_ICON = "//a[text()='${calendar}']/ancestor::li[contains(@class, 'calendarItem')]/div[@class='uiIconCalSettingMini uiIconLightGray pull-right']";
-	public By ELEMENT_CALENDAR_ACTIONS_ICON = By.xpath("//*[@class='uiIconCalSimplePlus uiIconLightGray']");
 	public By ELEMENT_CALENDAR_ADD_MENU = By.xpath("//*[@id='tmpMenuElement']//a[contains(@href,'AddCalendar')]");
+	public By ELEMENT_CALENDAR_ACTIONS_ICON = By.xpath("//*[@class='uiIconCalSimplePlus uiIconLightGray']");
+	public By ELEMENT_WORKING_PANE = By.xpath("//div[@class='eventWeekContent eventWeekContent mainWorkingPanel']");
+
+	//---------- Add calendar-------------------
+	public By ELEMENT_CAL_DISPLAY_NAME_INPUT = By.xpath("//*[@id='displayName']");
+	public By ELEMENT_CAL_DESC_INPUT = By.xpath("//*[@id='UICalendarForm']//*[@id='description']");
+	public By ELEMENT_CAL_COLOR = By.xpath("//*[contains(@class,'displayValue')]");
+	public String ELEMENT_CAL_COLOR_SELECT = "//form[@id='UICalendarForm']//a[normalize-space(@class) = '${color} colorCell']";
+	public By ELEMENT_CAL_ADD_SAVE_BUTTON = By.xpath("//*[@id='UICalendarForm']//*[text()='Save']");
+	public By ELEMENT_CAL_ADD_POPUP= By.xpath("//span[@class='PopupTitle popupTitle' and text()='Calendar']");
+	public By ELEMENT_CAL_GROUP_TAB = By.linkText("Show in Groups");
+	public By ELEMENT_CAL_GROUP_INPUT = By.id("AddGroupInput");
+	public By ELEMENT_CAL_SELECT_GROUP_ICON = By.xpath("//*[@class='uiIconGroup uiIconLightGray']");
+	public String ELEMENT_EDIT_PERMISSION_INPUT = "//*[contains(@id,'${groupName}_permission')]";
+	public By ELEMENT_BLANK_SHOW_IN_GROUP = By.xpath("//th[text()='Groups']");
+
+	public String ELEMENT_ADD_CALENDAR_GROUP_DELETE_ICON = "//a[@title='Delete Permission' and contains(@href,'${group}')]";
+
 	public By ELEMENT_CALENDAR_SETTINGS = By.xpath("//*[@id='tmpMenuElement']//a[contains(@href,'CalendarSetting')]");
+	public By ELEMENT_CALENDAR_SETTINGS_ICON = By.xpath("//a[@data-original-title='Settings']");
 	public By ELEMENT_CALENDAR_IMPORT_MENU = By.xpath("//*[@id='tmpMenuElement']//a[contains(@href,'ImportCalendar')]");
 	public String ELEMENT_CALENDAR_GET_BY_TAG_LI = "//a[@class='calendarName' and contains(text(), '${calendar}')]/../..";
 	public By ELEMENT_CALENDAR_POPUP_WINDOW = By.xpath("//*[@id='UICalendarPopupWindow']/div[2]");
 	public String ELEMENT_VERIFY_CALENDAR_FORM = "//*[@id='defaultCalendarTab'] //div[@class='myCalendar']/*[@class='calendarTitle']/..//li[contains(@class,'calendarItem' )]//*[text()='${UserName}']/../a[@class='${CheckboxColor}']";
-	
+
 	//--------------Mini calendar-------------------
 	public String ELEMENT_MINI_CALENDAR_DATE_HIGHLIGHT = "//td[contains(@class,'highLight') and contains(text(),'${date}')]";
-	
+
 	//---------------Working pane---------------------
 	public String ELEMENT_WORKING_PANE_23H = "//td[@class='tdTime center']/div[contains(text(),'23:00')]";
 
@@ -119,22 +139,7 @@ public class CalendarBase extends PlatformBase {
 	public By ELEMENT_DELETE_FEEDS = By.xpath("//a[@class='actionIcon']//i[@class='uiIconDelete uiIconLightGray']");
 	public String MSG_FEEDS_DELETE = "Are you sure you want to delete this feed from the list?";
 
-	//---------- Add calendar-------------------
-	public By ELEMENT_CAL_DISPLAY_NAME_INPUT = By.xpath("//*[@id='displayName']");
-	public By ELEMENT_CAL_DESC_INPUT = By.xpath("//*[@id='UICalendarForm']//*[@id='description']");
-	public By ELEMENT_CAL_COLOR = By.xpath("//*[contains(@class,'displayValue')]");
-	public String ELEMENT_CAL_COLOR_SELECT = "//form[@id='UICalendarForm']//a[contains(@class,'red colorCell')]";
-	public By ELEMENT_CAL_ADD_SAVE_BUTTON = By.xpath("//*[@id='UICalendarForm']//*[text()='Save']");
-	public By ELEMENT_CAL_ADD_POPUP= By.xpath("//span[@class='PopupTitle popupTitle' and text()='Calendar']");
-	public By ELEMENT_CAL_GROUP_TAB = By.linkText("Show in Groups");
-	public By ELEMENT_CAL_GROUP_INPUT = By.id("AddGroupInput");
-	public By ELEMENT_CAL_SELECT_GROUP_ICON = By.xpath("//*[@class='uiIconGroup uiIconLightGray']");
-	public String ELEMENT_EDIT_PERMISSION_INPUT = "//*[contains(@id,'${groupName}_permission')]";
-	public By ELEMENT_BLANK_SHOW_IN_GROUP = By.xpath("//th[text()='Groups']");
 
-	public String ELEMENT_ADD_CALENDAR_GROUP_DELETE_ICON = "//a[@title='Delete Permission' and contains(@href,'${group}')]";
-
-	
 	//-----------Event/Task -----------
 	public String ELEMENT_EVENT_TASK_ALL_DAY = "//*[@id='UIWeekViewGridAllDay']//div[contains(text(),'${event}')]";
 	public String ELEMENT_EVENT_TASK_ONE_DAY = "//*[@id='UIWeekViewGrid']//div[contains(text(),'${taskName}')]/parent::div[@class='clearfix']/div[@class='eventContainerBar eventTitle pull-left']";
@@ -210,10 +215,10 @@ public class CalendarBase extends PlatformBase {
 	public final By ELEMENT_TOOLBAR_SELECT_CALENDAR = By.name("Calendar");
 	public final String ELEMENT_CREATE_EVENT_MESSAGE = "//*[contains(text(),'The Event was added to ${userName}')]";
 	public final String ELEMENT_CREATE_TASK_MESSAGE = "//*[contains(text(),'The Task was added to ${userName}')]";
-	
+
 	//---------------------List view --------------------------
 	public final String ELEMENT_FILTER_CATEGORY_SELECTED = "//option[@selected='selected' and text()='${category}']";
-	
+
 	/*================== Common functions for Calendar =================*/
 
 	/** Go to calendar
@@ -221,11 +226,16 @@ public class CalendarBase extends PlatformBase {
 	 */
 	public void goToCalendarPage(){	
 		info("--Go to calendar--");
+		hpAct = new HomePageActivity(driver);
 		click(ELEMENT_CALENDAR_LINK);
 		waitForAndGetElement(ELEMENT_CALENDAR_PANEL);
 		ID_CALENDAR_PAGE = waitForAndGetElement(ELEMENT_GET_ID_PAGE).getAttribute("id");
 		Utils.pause(3000);
-		driver.navigate().refresh();
+		if(waitForElementNotPresent(hpAct.ELEMENT_ACTIVITY_TEXTBOX,DEFAULT_TIMEOUT,0) != null){
+			driver.navigate().refresh();
+		}
+
+		waitForAndGetElement(ELEMENT_CALENDAR_PANEL);
 	}
 
 	/** Get Property of a calendar
@@ -264,7 +274,15 @@ public class CalendarBase extends PlatformBase {
 		String idCal = getPropertyOfCalendar(calendar,1);
 		String color = getPropertyOfCalendar(calendar,3);
 		String type = getPropertyOfCalendar(calendar,2);
-		((JavascriptExecutor)driver).executeScript("javascript:eXo.webui.UIForm.submitEvent('"+ID_CALENDAR_PAGE+"#UICalendars','"+action+"','&objectId="+idCal+"&calType="+type+"&calColor="+color+"')");
+
+		if(action.equals("RemoveCalendar"))
+			((JavascriptExecutor)driver).executeScript("javascript:if(confirm('Are%20you%20sure%20you%20want%20to%20delete%20this%20calendar%20and%20all%20its%20events?'))"
+					+ "eXo.webui.UIForm.submitEvent('"+ID_CALENDAR_PAGE+"#UICalendars','RemoveCalendar',"
+					+ "'&subComponentId=UICalendars&objectId="+idCal+"&calType="+type+"&calColor="+color+"')");
+		else
+			((JavascriptExecutor)driver).executeScript("javascript:eXo.webui.UIForm.submitEvent('"+ID_CALENDAR_PAGE+"#UICalendars','"+action+"','&objectId="+idCal+"&calType="+type+"&calColor="+color+"')");
+
+
 	}
 
 	/** Share a calendar
@@ -336,60 +354,18 @@ public class CalendarBase extends PlatformBase {
 		Utils.pause(3000);
 	}
 
-	/** Open Add calendar form
-	 * @author thuntn
-	 */
-	public void goToAddCalendar(){
-		click(ELEMENT_CALENDAR_ACTIONS_ICON);
-		click(ELEMENT_CALENDAR_ADD_MENU);
-	}
+
 
 	/** Open Calendar Settings form
 	 * @author HangNTT
 	 */
 	public void goToCalendarSettings(){
-		click(ELEMENT_CALENDAR_ACTIONS_ICON);
-		click(ELEMENT_CALENDAR_SETTINGS);
+		/*click(ELEMENT_CALENDAR_ACTIONS_ICON);
+		click(ELEMENT_CALENDAR_SETTINGS);*/
+		click(ELEMENT_CALENDAR_SETTINGS_ICON);
 	}
 
-	/** Input into Add calendar form
-	 * @author thuntn
-	 * @param name: name of calendar
-	 * @param description: description of calendar
-	 * @param color: color of calendar
-	 * @param groups: optional. If not pass this parameter, this function will create a personal calendar
-	 * vice versa, the function will create a group calendar, based on:
-	 * 		+ groups[0]: name of group, eg: /platform/administrators,  
-	 * 		+ groups[1]: if not "0", type directly groups into the textbox "Select group"
-	 * 			if not pass group[1], the function will click on "Select group" icon
-	 */
-	public void inputAddCalendarForm(String name, String description, String color, String...groups){
-		String type = groups.length > 1 ? (String) groups[1]: "0";
-		per = new PlatformPermission(driver);
-		button = new Button(driver);
 
-		if(name != null)
-			type(ELEMENT_CAL_DISPLAY_NAME_INPUT,name,true);
-		if(description != null)
-			type(ELEMENT_CAL_DESC_INPUT, description,true);
-		if(color != null){
-			click(ELEMENT_CAL_COLOR);
-			click(ELEMENT_CAL_COLOR_SELECT.replace("${color}", color));
-		}
-		if(groups.length > 0){
-			click(ELEMENT_CAL_GROUP_TAB);
-			if(type.equals("0")){
-				click(ELEMENT_CAL_SELECT_GROUP_ICON);
-				click(ELEMENT_DATA_ORIGINAL_TITLE.replace("${title}", groups[0]));
-			}else
-				type(ELEMENT_CAL_GROUP_INPUT,groups[0],true);
-			click(ELEMENT_BLANK_SHOW_IN_GROUP);
-			Utils.pause(1000);
-			click(button.ELEMENT_ADD_BUTTON);
-			waitForAndGetElement(ELEMENT_ADD_CALENDAR_GROUP_DELETE_ICON.replace("${group}", groups[0]));
-		}
-		Utils.pause(1000);
-	}
 
 	/*================== Calendar Feeds ====================*/
 	/** 
@@ -596,35 +572,17 @@ public class CalendarBase extends PlatformBase {
 		}
 		click(ELEMENT_EVENT_TASK_DELETE_MENU);
 		alert.waitForConfirmation(MSG_EVENT_TASK_DELETE);
-		driver.navigate().refresh();
 		Utils.pause(3000);
 		if (optDay.equals(selectDayOption.ALLDAY)){
-			waitForElementNotPresent(ELEMENT_EVENT_TASK_ALL_DAY.replace("${event}", event));
-			waitForElementNotPresent(ELEMENT_EVENT_TASK_WORKING_PANE.replace("${event}", event));
+			waitForElementNotPresent(ELEMENT_EVENT_TASK_ALL_DAY.replace("${event}", event),60000);
+			waitForElementNotPresent(ELEMENT_EVENT_TASK_WORKING_PANE.replace("${event}", event),60000);
 		}else if (optDay.equals(selectDayOption.ONEDAY)){
-			waitForElementNotPresent(ELEMENT_EVENT_TASK_ONE_DAY.replace("${taskName}", event));
+			waitForElementNotPresent(ELEMENT_EVENT_TASK_ONE_DAY.replace("${taskName}", event),60000);
 		}	
 	}
 
 	/*============Add, Edit, Delete a Calendar ===========*/
-	/** 
-	 * Add calendar
-	 * @author thuntn
-	 * @param name: name of calendar
-	 * @param description: description of calendar
-	 * @param color: name of color which is used in @class of the color element, eg: hot_pink
-	 * @param groups: optional. If not pass this parameter, this function will create a personal calendar
-	 * vice versa, the function will create a group calendar, based on:
-	 * 		+ groups[0]: name of group, eg: /platform/administrators,  
-	 * 		+ groups[1]: if not "0", type directly groups into the textbox "Select group"
-	 * 			if not pass group[1], the function will click on "Select group" icon	 */
-	public void addCalendar(String name, String description, String color, String...groups){
-		info("Add calendar");
-		goToAddCalendar();
-		inputAddCalendarForm(name,description,color,groups);
-		click(ELEMENT_CAL_ADD_SAVE_BUTTON);
-		waitForAndGetElement(By.linkText(name));
-	}
+
 
 	/** Delete calendar
 	 * @author thuntn
@@ -640,9 +598,9 @@ public class CalendarBase extends PlatformBase {
 		info("--Delete a Calendar-");
 
 		executeActionCalendar(name,"RemoveCalendar");
-
+		alert.waitForConfirmation("Are%20you%20sure%20you%20want%20to%20delete%20this%20calendar%20and%20all%20its%20events?");
 		if (check){
-			waitForElementNotPresent(ELEMENT_CALENDAR_GET_BY_TAG_LI.replace("{$calendar}", name));
+			assert (waitForAndGetElement(ELEMENT_CALENDAR_GET_BY_TAG_LI.replace("{$calendar}", name), 10000,0) == null) : "Cannot delete the calendar!" ;
 			info("Remove calendar successfully");
 		}
 	}
@@ -660,7 +618,6 @@ public class CalendarBase extends PlatformBase {
 	 * 			if not pass group[1], the function will click on "Select group" icon
 	 */
 	public void editCalendar(String oldName,String name, String description, String color, String...groups){
-
 		executeActionCalendar(oldName,"EditCalendar");
 		inputAddCalendarForm(name,description,color,groups);
 		click(ELEMENT_CAL_ADD_SAVE_BUTTON);
@@ -737,8 +694,8 @@ public class CalendarBase extends PlatformBase {
 		/*Utils.pause(5000);
 		click(ELEMENT_INPUT_QUICK_SEARCH);
 		Utils.javaSimulateKeyPress(KeyEvent.VK_ENTER);*/
-		((JavascriptExecutor)(driver)).executeScript("javascript:eXo.webui.UIForm.submitForm('3f1c6848-2dde-4a06-80b7-9d00c72fb0ad#UISearchForm','Search',true)");
-		
+		((JavascriptExecutor)(driver)).executeScript("javascript:eXo.webui.UIForm.submitForm('"+ID_CALENDAR_PAGE+"#UISearchForm','Search',true)");
+
 		info("----Confirm search result page displayed----");
 		Utils.pause(3000);
 		waitForAndGetElement(ELEMENT_BUTTON_CLOSE_QUICK_SEARCH_RESULT);
@@ -978,7 +935,7 @@ public class CalendarBase extends PlatformBase {
 		if ((workingTimeFrom != null) & (workingTimeFrom != "")){
 			showWorkingTimes(workingTimeFrom, workingTimeTo);
 		}
-		
+
 		switch (invitation){
 		case 1: check(ELEMENT_SEND_EVENT_INVITATION.replace("${option}", "Always"), 2);
 		break;
@@ -990,5 +947,74 @@ public class CalendarBase extends PlatformBase {
 
 		click(ELEMENT_SETTINGS_FORM_SAVE_BUTTON);
 		waitForElementNotPresent(ELEMENT_SETTINGS_FORM_SAVE_BUTTON);
+	}
+
+	/** Open Add calendar form
+	 * @author thuntn
+	 */
+	public void goToAddCalendar(){
+		click(ELEMENT_CALENDAR_ACTIONS_ICON);
+		Utils.pause(10000);
+		click(ELEMENT_CALENDAR_ADD_MENU);
+	}
+
+
+	/** 
+	 * Add calendar
+	 * @author thuntn
+	 * @param name: name of calendar
+	 * @param description: description of calendar
+	 * @param color: name of color which is used in @class of the color element, eg: hot_pink
+	 * @param groups: optional. If not pass this parameter, this function will create a personal calendar
+	 * vice versa, the function will create a group calendar, based on:
+	 * 		+ groups[0]: name of group, eg: /platform/administrators,  
+	 * 		+ groups[1]: if not "0", type directly groups into the textbox "Select group"
+	 * 			if not pass group[1], the function will click on "Select group" icon	 */
+	public void addCalendar(String name, String description, String color, String...groups){
+
+		info("Add calendar");
+		goToAddCalendar();
+		inputAddCalendarForm(name,description,color,groups);
+		click(ELEMENT_CAL_ADD_SAVE_BUTTON);
+		waitForAndGetElement(By.linkText(name));
+	}
+
+	/** Input into Add calendar form
+	 * @author thuntn
+	 * @param name: name of calendar
+	 * @param description: description of calendar
+	 * @param color: color of calendar
+	 * @param groups: optional. If not pass this parameter, this function will create a personal calendar
+	 * vice versa, the function will create a group calendar, based on:
+	 * 		+ groups[0]: name of group, eg: /platform/administrators,  
+	 * 		+ groups[1]: if not "0", type directly groups into the textbox "Select group"
+	 * 			if not pass group[1], the function will click on "Select group" icon
+	 */
+	public void inputAddCalendarForm(String name, String description, String color, String...groups){
+		String type = groups.length > 1 ? (String) groups[1]: "0";
+		per = new PlatformPermission(driver);
+		button = new Button(driver);
+
+		if(name != null)
+			type(ELEMENT_CAL_DISPLAY_NAME_INPUT,name,true);
+		if(description != null)
+			type(ELEMENT_CAL_DESC_INPUT, description,true);
+		if(color != null){
+			click(ELEMENT_CAL_COLOR);
+			click(ELEMENT_CAL_COLOR_SELECT.replace("${color}", color));
+		}
+		if(groups.length > 0){
+			click(ELEMENT_CAL_GROUP_TAB);
+			if(type.equals("0")){
+				click(ELEMENT_CAL_SELECT_GROUP_ICON);
+				click(ELEMENT_DATA_ORIGINAL_TITLE.replace("${title}", groups[0]));
+			}else
+				type(ELEMENT_CAL_GROUP_INPUT,groups[0],true);
+			click(ELEMENT_BLANK_SHOW_IN_GROUP);
+			Utils.pause(1000);
+			click(button.ELEMENT_ADD_BUTTON);
+			waitForAndGetElement(ELEMENT_ADD_CALENDAR_GROUP_DELETE_ICON.replace("${group}", groups[0]));
+		}
+		Utils.pause(1000);
 	}
 }

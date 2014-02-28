@@ -391,7 +391,7 @@ public class Social_People extends SocialBase {
 	 * Test case ID: 67685
 	 * Step 1: View profile 
 	 */
-	@Test
+	@Test(priority=10)
 	public void test09_ViewProfileOfOtherUser(){
 		//Declare variable
 		String firstName="Mary update";
@@ -421,7 +421,7 @@ public class Social_People extends SocialBase {
 		peoPro.editUserContact(typeOfGender,true,typeOfAddPhone,numberOfPhone,true,typeOfIMS,nameOfIMS,true,nameOfURLS);
 		peoPro.editUserExperience(nameOfOrganization, nameOfPosition, nameOfSkill);
 
-		/*Step 1: View profile*/ 
+//		Step 1: View profile 
 		magAcc.userSignIn(userType.ADMIN);
 		//magAcc.signIn(DATA_USER1, DATA_PASS);
 

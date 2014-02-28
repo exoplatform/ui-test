@@ -113,7 +113,7 @@ public class Calendar_Event extends CalendarBase {
 		String CAL_GROUP = "/platform/administrators";
 
 		info("==Create a group calendar==");
-		addCalendar(CAL_03, CAL_03, "black", CAL_GROUP);
+		addCalendar(CAL_03, CAL_03, "gray", CAL_GROUP);
 		Utils.pause(3000);
 		changeEditPermissionForCalShowInGroup(CAL_03, USER_GROUP, CAL_GROUP);
 
@@ -224,7 +224,6 @@ public class Calendar_Event extends CalendarBase {
 
 		info("==Restore data==");
 		waitForAndGetElement(By.xpath(ELEMENT_EVENT_TASK_ALL_DAY.replace("${event}", TITLE)));
-		deleteEventTask(TITLE);
 		deleteCalendar(CAL_07,true);
 	}
 
@@ -259,7 +258,6 @@ public class Calendar_Event extends CalendarBase {
 
 		info("==Delete an event on group calendar==");
 		waitForAndGetElement(By.xpath(ELEMENT_EVENT_TASK_ALL_DAY.replace("${event}", EVENT08)));
-		deleteEventTask(EVENT08);
 		deleteCalendar(CAL_08,true);
 	}
 
@@ -299,7 +297,6 @@ public class Calendar_Event extends CalendarBase {
 
 		info("==Restore data==");
 		waitForAndGetElement(By.xpath(ELEMENT_EVENT_TASK_ALL_DAY.replace("${event}", TITLE)));
-		deleteEventTask(TITLE);
 		deleteCalendar(CAL_09,true);
 	}
 
@@ -317,7 +314,7 @@ public class Calendar_Event extends CalendarBase {
 		boolean[] EDITABLE = {true};
 
 		info("==Create a shared calendar==");
-		addCalendar(CAL_10, CAL_10, "blue");
+		addCalendar(CAL_10, CAL_10, "sky_blue");
 		Utils.pause(3000);
 		shareCalendar(CAL_10, USER_SHARED, EDITABLE);
 
@@ -333,10 +330,9 @@ public class Calendar_Event extends CalendarBase {
 
 		info("==Delete an event on shared calendar==");
 		waitForAndGetElement(By.xpath(ELEMENT_EVENT_TASK_ALL_DAY.replace("${event}", EVENT10)));
-		deleteEventTask(EVENT10);
 
 		info("==Restore data==");
-		deleteCalendar(CAL_10,true);
+		deleteCalendar(CAL_10);
 
 	}
 
