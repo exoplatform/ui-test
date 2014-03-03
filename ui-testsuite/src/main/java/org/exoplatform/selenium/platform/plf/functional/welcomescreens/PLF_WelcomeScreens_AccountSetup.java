@@ -19,7 +19,7 @@ public class PLF_WelcomeScreens_AccountSetup extends PlatformBase{
 	@BeforeMethod
 	public void beforeMethod(){
 		info("Get Browser");
-		initSeleniumTestWithOutTermAndCondition(driver);
+		initSeleniumTestWithOutTermAndCondition();
 		driver.get(DEFAULT_BASEURL);
 		acc = new ManageAccount(driver, this.plfVersion);
 	}
@@ -77,7 +77,8 @@ public class PLF_WelcomeScreens_AccountSetup extends PlatformBase{
 		 *Expected Outcome: 
 		- The Acount Setup screen is displayed
 		- 2 Blocs are displayed:"Create your acoount" and "Admin password"
-		- The button "Submit" is displayed		*/ 
+		- The button "Submit" is displayed		*/
+		Utils.pause(1000);
 		waitForAndGetElement(By.xpath(ELEMENT_TERM_CONDITION_BOX ));
 		Utils.pause(500);
 		info("Check the checkbox: I agree with these terms and conditions");

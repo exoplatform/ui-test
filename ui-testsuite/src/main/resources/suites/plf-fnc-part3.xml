@@ -8,6 +8,7 @@
 			</run>
 		</groups>
 		<classes>
+			<class name = "org.exoplatform.selenium.platform.plf.functional.welcomescreens.PLF_WelcomeScreens_Greeting_TermCondition" />
 		</classes>
 	</test>
 	<listeners>

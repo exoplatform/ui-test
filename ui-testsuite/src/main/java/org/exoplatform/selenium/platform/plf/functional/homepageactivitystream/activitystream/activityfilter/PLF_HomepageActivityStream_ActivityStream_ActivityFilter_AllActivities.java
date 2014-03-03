@@ -201,6 +201,7 @@ public class PLF_HomepageActivityStream_ActivityStream_ActivityFilter_AllActivit
 		selectFileter("My Activities");
 		waitForAndGetElement(home.ELEMENT_TOPIC_COMMENT.replace("${title}",text).replace("${comment}", comment));
 		//delete data
+		selectFileter("All Activities");
 		home.deleteActivity(text);
 	}
 

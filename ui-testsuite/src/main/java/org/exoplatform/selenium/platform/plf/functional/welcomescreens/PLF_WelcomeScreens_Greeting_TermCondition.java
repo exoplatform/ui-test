@@ -1,5 +1,6 @@
 package org.exoplatform.selenium.platform.plf.functional.welcomescreens;
 
+import org.exoplatform.selenium.Utils;
 import org.exoplatform.selenium.platform.PlatformBase;
 import static org.exoplatform.selenium.TestLogger.info;
 import org.openqa.selenium.By;
@@ -30,9 +31,9 @@ public class PLF_WelcomeScreens_Greeting_TermCondition extends PlatformBase{
 	 * Launch the app for the first time (/portal)
 	 * Check: The screen "Terms and Conditions Agreement" is displayed.
 	 */
-	@Test(groups="terms")
+	@Test
 	public void test01_DisplayTermsConditionsScreenAtTheFirstFaunch(){
-
+		Utils.pause(1000);
 		waitForAndGetElement(By.xpath(ELEMENT_TERM_CONDITION_BOX));
 	}
 
@@ -43,9 +44,9 @@ public class PLF_WelcomeScreens_Greeting_TermCondition extends PlatformBase{
 	 * - Change the URL to other sites (intranet)
 	 * Check: - The screen "Terms and Conditions Agreement" still displayed
 	 */
-	@Test(groups="pending")
+	@Test
 	public void test02_NotRemoveTermsConditionsScreenByChangeURL (){
-		String SPECIFIC_URL = "http://localhost:8080/portal/intranet";
+		String SPECIFIC_URL = DEFAULT_BASEURL+"/intranet";
 
 		info("Open Base URL");
 		driver.get(DEFAULT_BASEURL);
@@ -63,7 +64,7 @@ public class PLF_WelcomeScreens_Greeting_TermCondition extends PlatformBase{
 	 * Check: - The screen "Terms and Conditions Agreement" is displayed.
 	          - The Legal Terms and conditions are displayed in a scrollbare lightbox
 	 */
-	@Test(groups="pending")
+	@Test
 	public void test03_DisplayLegalTermsAndConditions(){
 
 		waitForAndGetElement(By.xpath(ELEMENT_TERM_CONDITION_BOX));
@@ -88,7 +89,7 @@ public class PLF_WelcomeScreens_Greeting_TermCondition extends PlatformBase{
 	 * Check: - The screen "Terms and Conditions Agreement" is displayed.
 			  - The button "Continue" is displayed disable by default
 	 */
-	@Test(groups="pending")
+	@Test
 	public void test04_DisplayContinueButton(){
 
 		info("Check Continue button is disable.");
@@ -123,7 +124,7 @@ public class PLF_WelcomeScreens_Greeting_TermCondition extends PlatformBase{
 	 * Check: - The screen "Terms and Conditions Agreement" is displayed.
 			  - The checkbox: "I agree with these terms and conditions" is displayed in the bottom of the lightbox
 	 */
-	@Test(groups="pending")
+	@Test
 	public void test06_DisplayCheckboxIAgreeWithTheseTermsAndConditions(){
 
 		info("Display the checkbox: I agree with these terms and conditions");
