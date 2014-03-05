@@ -2,6 +2,7 @@ package org.exoplatform.selenium.platform.wiki.sniff;
 
 import static org.exoplatform.selenium.TestLogger.info;
 
+import org.exoplatform.selenium.Utils;
 import org.exoplatform.selenium.platform.HomePageActivity;
 import org.exoplatform.selenium.platform.ManageAccount;
 import org.exoplatform.selenium.platform.NavigationToolbar;
@@ -62,7 +63,7 @@ public class Wiki_PublicActivity extends BasicAction {
 	public void test02_EditWikiPageTitle(){
 		String title = "Wiki_activity_title_02";
 		String content = "Wiki_activity_content_02";
-		String newTitle = "Wiki_activity_title_01_update";
+		String newTitle = "Wiki_activity_title_02_update";
 		
 		info("Add new wiki page");		
 		addBlankWikiPage(title, content, 0);
@@ -103,6 +104,8 @@ public class Wiki_PublicActivity extends BasicAction {
 		editPageWithCheckPublicActivity(null, newContent2);
 		naTool.goToHomePage();
 		activity.checkActivityInfoOfWiki(title, newContent2, "3");
+		driver.navigate().refresh();
+		Utils.pause(3000);
 		waitForAndGetElement(activity.ELEMENT_WIKI_COMMENT_EDIT_CONTENT.replace("${title}", title));
 		
 		click(By.linkText(title));
@@ -127,6 +130,8 @@ public class Wiki_PublicActivity extends BasicAction {
 		deleteCurrentWikiPage();
 		
 		naTool.goToHomePage();
+		driver.navigate().refresh();
+		Utils.pause(3000);
 		waitForElementNotPresent(activity.ELEMENT_ACTIVITY_WIKI_TITLE.replace("${title}", title));
 	}
 	

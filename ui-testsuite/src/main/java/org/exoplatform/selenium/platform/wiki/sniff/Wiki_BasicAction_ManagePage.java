@@ -294,6 +294,8 @@ public class Wiki_BasicAction_ManagePage extends ManageDraft{
 		click(By.linkText(newTitle));
 		editPageWithCheckPublicActivity(null, newContent);
 		naTool.goToHomePage();
+		driver.navigate().refresh();
+		Utils.pause(5000);
 		waitForAndGetElement(activity.ELEMENT_WIKI_COMMENT_EDIT_CONTENT.replace("${title}", newTitle));
 
 		click(By.linkText(newTitle));
@@ -316,12 +318,16 @@ public class Wiki_BasicAction_ManagePage extends ManageDraft{
 		info("Edit title of page -> check comment in activity");
 		editWikiPage(newTitle, null, 0);
 		naTool.goToHomePage();
+		driver.navigate().refresh();
+		Utils.pause(5000);
 		waitForElementNotPresent(activity.ELEMENT_WIKI_COMMENT_EDIT_TITLE.replace("${title}", newTitle));
 
 		info("Edit content of page -> check comment in activity");
 		click(By.linkText(newTitle));
 		editWikiPage(null, newContent, 0);
 		naTool.goToHomePage();
+		driver.navigate().refresh();
+		Utils.pause(5000);
 		waitForElementNotPresent(activity.ELEMENT_WIKI_COMMENT_EDIT_CONTENT.replace("${title}", newTitle));
 
 		click(By.linkText(newTitle));

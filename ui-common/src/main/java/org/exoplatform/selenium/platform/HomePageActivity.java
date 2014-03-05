@@ -426,7 +426,11 @@ public class HomePageActivity extends PlatformBase{
 	 * @param version
 	 */
 	public void checkActivityInfoOfWiki(String title, String content, String version){
-		waitForAndGetElement(ELEMENT_ACTIVITY_WIKI_TITLE.replace("${title}", title));
+		if (waitForAndGetElement(ELEMENT_ACTIVITY_WIKI_TITLE.replace("${title}", title)) == null ){
+			info("Refesh Browser...");
+			driver.navigate().refresh();
+			Utils.pause(5000);
+		}
 		if (content != ""){
 			info("Check content");
 			String[] sum = getText(ELEMENT_ACTIVITY_WIKI_CONTENT.replace("${title}", title)).split("\n");
