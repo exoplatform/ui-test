@@ -161,6 +161,10 @@ public class ContextMenu extends EcmsBase{
 	//Delete a node at level 1
 	public void deleteDocument(Object locator, int...timeout){
 		int iTimeout = timeout.length > 0 ? timeout[0] : DEFAULT_TIMEOUT;
+		if(isElementNotPresent(locator) && isElementPresent(ELEMENT_NEXT_PAGE_ICON_SE))
+			click(ELEMENT_NEXT_PAGE_ICON_SE);
+		else
+			waitForAndGetElement(locator);
 		for(int repeat=1;; repeat ++)
 		{
 			if (repeat > ACTION_REPEAT) {
@@ -185,7 +189,12 @@ public class ContextMenu extends EcmsBase{
 			click(button.ELEMENT_REFRESH_BUTTON);
 			Utils.pause(2000);
 		}
-		waitForElementNotPresent(locator, iTimeout);
+		if(isElementNotPresent(locator) && isElementPresent(ELEMENT_NEXT_PAGE_ICON_SE)){
+			click(ELEMENT_NEXT_PAGE_ICON_SE);
+			waitForElementNotPresent(locator, iTimeout);
+		}
+		else
+			waitForElementNotPresent(locator, iTimeout);
 		info(locator.toString() + " is deleted successfully");		
 		Utils.pause(1000);
 	}

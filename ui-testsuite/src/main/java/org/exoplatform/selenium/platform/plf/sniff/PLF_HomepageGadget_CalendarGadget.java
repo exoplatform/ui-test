@@ -147,24 +147,21 @@ public class PLF_HomepageGadget_CalendarGadget extends CalendarBase{
 		info("Go to calendar gadget");
 		naviToolbar.goToHomePage();
 		waitForAndGetElement(By.xpath(Calendar_In_Calendar_Gadget));
-		mouseOver(ELEMENT_CALENDAR_GADGET, true);
-		Utils.pause(5000);
 
-		click(ELEMENT_CALENDAR_GADGET_SETTING_ICON, 2);
+		click(ELEMENT_CALENDAR_GADGET_SETTING_ICON);
 		Utils.pause(5000);
 
 		click(By.xpath(Delete_Calendar_1_Path));
 		button.ok();
 		waitForElementNotPresent(By.xpath(Calendar_In_Calendar_Gadget));
 
-		mouseOver(ELEMENT_CALENDAR_GADGET, true);
 		Utils.pause(5000);
-		click(ELEMENT_CALENDAR_GADGET_SETTING_ICON, 2);
+		click(ELEMENT_CALENDAR_GADGET_SETTING_ICON);
 		Utils.pause(5000);
 
 		mouseOver(By.xpath(Calendar_In_Additional_List), true);
 		Utils.pause(10000);
-		click(ELEMENT_ADD_CALENDAR_IN_ADDITION_LIST);
+		click(ELEMENT_ADD_CALENDAR_IN_ADDITION_LIST,2);
 		button.ok();
 		driver.navigate().refresh();
 		waitForAndGetElement(By.xpath(Calendar_In_Calendar_Gadget));

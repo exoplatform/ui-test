@@ -183,9 +183,9 @@ public class ECMS_SE_BasicAction extends PlatformBase {
 		By bNode1= By.xpath(siteExp.ELEMENT_SE_NODE.replace("{$node}",node1));
 		info("Drag and drop a node");
 
-		//Create node1, node2
-		cTemplate.createNewFolder(node1, folderType.Content);
-		cTemplate.createNewFolder(node2, folderType.Content);
+//		//Create node1, node2
+//		cTemplate.createNewFolder(node1, folderType.Content);
+//		cTemplate.createNewFolder(node2, folderType.Content);
 
 		//Drag and drop node2 into node1
 		dragAndDropToObject(siteExp.ELEMENT_SE_NODE.replace("{$node}",node2), siteExp.ELEMENT_SE_NODE.replace("{$node}",node1));

@@ -289,6 +289,7 @@ public class PlatformBase extends TestBase {
 	public final String ELEMENT_MEMBERSHIP_EDIT_ICON = "//*[text()='${membership}']/../..//*[@data-original-title='Edit Membership']";
 	public final String ELEMENT_MEMBERSHIP_DELETE_ICON = "//*[text()='${membership}']/../..//*[@data-original-title='Delete Membership']";
 	public final String ELEMENT_NEXT_PAGE_ICON = "//a[@title='Next Page']";
+	public final String ELEMENT_NEXT_PAGE_ICON_SE = "//*[@id='UITreeExplorer']//*[@data-original-title='Next Page']";
 	public final By ELEMENT_INPUT_NAME = By.id("name");
 	public final By ELEMENT_MEMBERSHIP_MANAGEMENT_GRID = By.xpath("//*[@class='UIListMembershipType']");
 	/*
@@ -641,6 +642,8 @@ public class PlatformBase extends TestBase {
 	public static By ELEMENT_ADD_TOPIC_FORM = By.id("UICreateTopic");
 	public static By ELEMENT_ADD_WIKI_FORM = By.id("UICreateForm");
 	public static By ELEMENT_UPLOAD_FILE_FORM = By.id("UploadFileSelectorPopUpWindow");
+	public final By ELEMENT_SELECT_FORUM = By.xpath("//*[@class='titleForum' and (contains(text(),'Select Forum') or contains(text(),'Select a Forum'))]");
+	public final String ELEMENT_SELECT_FORUM_ITEM = "//*[@class='item forum']//*[text()='${forumName}']";
 
 	//Help functions
 	public static By ELEMENT_HELP_ICON = By.xpath("//*[@class='uiIconPLF24x24Help']");
@@ -1198,10 +1201,19 @@ public class PlatformBase extends TestBase {
 			driver.switchTo().frame(waitForAndGetElement(cke_frame));
 			inputsummary = driver.switchTo().activeElement();
 			inputsummary.click();
+			inputsummary.clear();
 			for (int i = 0; i < lines.length; i++){
-				inputsummary.sendKeys(lines[i]);
-				inputsummary.sendKeys(Keys.ENTER);
-				Utils.pause(500);
+//				inputsummary.sendKeys(lines[i]);
+//				inputsummary.sendKeys(Keys.ENTER);
+//				Utils.pause(500);
+				String newStr = "<p>" + lines[i]+"</p>";;
+				if(i==0)
+					newStr = "<p>" + lines[i]+"</p>";
+				else{
+					newStr = "<p>"+inputsummary.getText().replace("\n","</p><p>")+ "</p>";
+					newStr +="<p>" + lines[i]+"</p>";
+				}
+				((JavascriptExecutor) driver).executeScript("document.body.innerHTML='" + newStr + "'");
 			}
 		}
 		switchToParentWindow();

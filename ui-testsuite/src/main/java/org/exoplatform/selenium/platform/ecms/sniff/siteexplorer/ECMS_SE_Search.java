@@ -67,7 +67,6 @@ public class ECMS_SE_Search extends PlatformBase {
 		
 		//Delete data
 		click(siteExp.ELEMENT_SIDEBAR_FILE_EXPLORER);
-		waitForAndGetElement(bNode1);
 		cMenu.deleteDocument(bNode1);
 		
 	}
@@ -140,7 +139,6 @@ public class ECMS_SE_Search extends PlatformBase {
 		
 		//Delete data
 		click(siteExp.ELEMENT_SIDEBAR_FILE_EXPLORER);
-		waitForAndGetElement(bNode1);
 		cMenu.deleteDocument(bNode1);
 	}
 	

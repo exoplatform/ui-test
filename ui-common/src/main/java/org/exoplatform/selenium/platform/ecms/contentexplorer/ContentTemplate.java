@@ -35,7 +35,7 @@ public class ContentTemplate extends EcmsBase{
 	//Announcement
 	public final By ELEMENT_ANNOUNCEMENT_LINK = By.xpath("//*[@class='templateLabel']//*[text()='Announcement']");
 	public final By ELEMENT_ANNOUNCEMENT_NAME_TEXTBOX = By.id("name");
-	public final By ELEMENT_ANNOUNCEMENT_SUMMARY_FRAME = By.xpath("//td[@id='cke_contents_exo:summary']/iframe");
+	public final By ELEMENT_ANNOUNCEMENT_SUMMARY_FRAME = By.xpath("//*[@id='cke_contents_exo:summary']/iframe");
 
 	//WebLink
 	public final By ELEMENT_WEBLINK_LINK = By.xpath("//*[@class='templateLabel']//*[text()='Web Link']");
@@ -229,7 +229,7 @@ public class ContentTemplate extends EcmsBase{
 	public void createNewAnnouncement (String name, String sum){
 		click(ELEMENT_ANNOUNCEMENT_LINK);
 		type(ELEMENT_ANNOUNCEMENT_NAME_TEXTBOX, name, true);
-		inputDataToFrame(ELEMENT_ANNOUNCEMENT_SUMMARY_FRAME,sum);
+		inputDataToFrame(ELEMENT_ANNOUNCEMENT_SUMMARY_FRAME,sum,true);
 		switchToParentWindow();
 		click(button.ELEMENT_SAVE_CLOSE_BUTTON);
 	}
@@ -514,7 +514,10 @@ public class ContentTemplate extends EcmsBase{
 		click(ELEMENT_CREATE_FOLDER_BUTTON);
 		//waitForElementPresent(By.xpath("//*[contains(text(),'"+ title +"')]"));
 		if (checkFolder){
-			waitForAndGetElement(By.xpath(ELEMENT_VERIFY_FILE_CONTENT.replace("${content}", title)));
+			if(isElementNotPresent(ELEMENT_VERIFY_FILE_CONTENT.replace("${content}", title)) && isElementPresent(ELEMENT_NEXT_PAGE_ICON_SE))
+				click(ELEMENT_NEXT_PAGE_ICON_SE);
+			else
+				waitForAndGetElement(By.xpath(ELEMENT_VERIFY_FILE_CONTENT.replace("${content}", title)));
 		}
 		Utils.pause(1000);
 	}

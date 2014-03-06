@@ -431,12 +431,20 @@ public class EcmsBase extends ManageAccount {
 			}
 		}else{
 			if (locator instanceof By){
+				if(isElementNotPresent(locator) && isElementPresent(ELEMENT_NEXT_PAGE_ICON_SE))
+					click(ELEMENT_NEXT_PAGE_ICON_SE);
+				else
+					waitForAndGetElement(locator);
 				click(locator);
 			}else if (locator instanceof String){
 				String[] nodes = ((String) locator).split("/");
 				for (String node: nodes)
 				{
 					//goToNode(By.xpath("//a[@title='" + node + " ']"));
+					if(isElementNotPresent(By.xpath("//*[@title='" + node + "']")) && isElementPresent(ELEMENT_NEXT_PAGE_ICON_SE))
+						click(ELEMENT_NEXT_PAGE_ICON_SE);
+					else
+						waitForAndGetElement(By.xpath("//*[@title='" + node + "']"));
 					click(By.xpath("//*[@title='" + node + "']"));
 					Utils.pause(500);
 				}

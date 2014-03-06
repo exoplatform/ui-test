@@ -433,7 +433,7 @@ public class PLF_UnifiedSearch extends Template {
 		info("-- Verify the forum name --");
 		assert waitForAndGetElement(qsPage.ELEMENT_RESULT_CONTENT_DETAIL).getText().contains(forum1);
 		info("-- Verify the post date --");
-		assert waitForAndGetElement(qsPage.ELEMENT_RESULT_CONTENT_DETAIL).getText().contains("AM");
+		assert (waitForAndGetElement(qsPage.ELEMENT_RESULT_CONTENT_DETAIL).getText().contains("AM")||waitForAndGetElement(qsPage.ELEMENT_RESULT_CONTENT_DETAIL).getText().contains("PM"));
 		info("-- Verify the rating --");
 		waitForAndGetElement(qsPage.ELEMENT_RESULT_FORUM_VOTE);
 		info("-- Verify the the number of replies in the topic --");
@@ -708,6 +708,7 @@ public class PLF_UnifiedSearch extends Template {
 		//Create data
 		naviToolbar.goToMyProfile();
 		peoPro.editUserContact(typeOfGender,true,typeOfAddPhone,numberOfPhone,false,"","",false,"");
+		peoPro.editUserBasicInformation("","",email);
 
 		/*Step 1: Search people*/
 		//- Login and connect to intranet home page

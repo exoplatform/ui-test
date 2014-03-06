@@ -44,7 +44,7 @@ public class ECMS_SE_Admin extends PlatformBase {
 	 */
 	@Test
 	public void test01_ExportNode() {
-		String node1 = "test01_ExportNode";
+		String node1 = "test01_ExportNode65844";
 		By bNode = By.xpath(siteExp.ELEMENT_SE_NODE.replace("{$node}", node1));
 
 		info("Export a node");
