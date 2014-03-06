@@ -166,7 +166,7 @@ public class ManageMember extends SpaceManagement {
 		String actionName = "Request to Join";
 		doAction(actionName, spaceName);
 		By actionLink = By.xpath(ELEMENT_ACTION_USER_ON_SPACE.replace("${spaceName}", spaceName).replace("${action}", actionName));
-		waitForElementNotPresent(actionLink, DEFAULT_TIMEOUT,1);
+		waitForElementNotPresent(actionLink, 120000);
 	}
 
 	/**

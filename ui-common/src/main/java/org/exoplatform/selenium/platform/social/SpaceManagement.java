@@ -171,8 +171,8 @@ public class SpaceManagement extends SocialBase {
 		waitForAndGetElement(By.linkText(name), iTimeout);
 		//waitForElementPresent(By.xpath("//div[contains(@class,'UISpaceName')]/a[@title='" + name + "']"),iTimeout);
 		Utils.pause(1000);
-		waitForElementNotPresent(ELEMENT_SPACE_NAME_INPUT,200000);
-		waitForAndGetElement(ELEMENT_BLAST_SPACE, DEFAULT_TIMEOUT2);
+		waitForElementNotPresent(ELEMENT_SPACE_NAME_INPUT,iTimeout);
+		waitForAndGetElement(ELEMENT_BLAST_SPACE, iTimeout);
 	}
 
 	/**

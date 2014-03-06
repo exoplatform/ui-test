@@ -58,7 +58,7 @@ public class Social_Space_SpaceManagement_SpaceAccess  extends SocialBase{
 		/*Step 1: Access space*/ 
 		//- Create new space
 		magMember.goToMySpacePage();
-		magMember.addNewSpace(spaceName, "");
+		magMember.addNewSpace(spaceName, "",200000);
 
 		//- On Space list, click on space's name or avatar of space
 		goToMySpacePage();

@@ -264,7 +264,7 @@ public class Activity extends SocialBase {
 		Utils.pause(1000);
 		info("-- Verify that an activity has been added --");
 		if (addText) {
-			waitForAndGetElement(By.xpath(ELEMENT_ACTIVITY_AUTHOR_ACTIVITY.replace("${activityText}", text)));
+			waitForAndGetElement(By.xpath(ELEMENT_ACTIVITY_AUTHOR_ACTIVITY.replace("${activityText}", text)),100000);
 		}
 		if (addLink){
 			waitForAndGetElement(By.linkText(link));

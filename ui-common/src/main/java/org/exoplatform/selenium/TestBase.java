@@ -56,6 +56,7 @@ public class TestBase {
 
 	public final String DEFAULT_BASEURL = "http://yopmail.exocloud.testlab1.exoplatform.vn/portal";
 
+
 	//"http://yopmail.netstg.exoplatform.org/portal";
 	//"http://hushmail.wks-acc.exoplatform.org/portal";
 	//"http://gmail.wks-acc.exoplatform.org/portal";

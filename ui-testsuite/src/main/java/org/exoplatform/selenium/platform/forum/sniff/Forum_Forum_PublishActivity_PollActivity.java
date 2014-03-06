@@ -60,11 +60,11 @@ public class Forum_Forum_PublishActivity_PollActivity extends ForumBase{
 	 */
 	@Test
 	public void test01_EditPoll(){
-		String titleCat = "Category 01";
-		String titleForum = "Forum 01";
-		String titleTop = "Topic 01";
+		String titleCat = "Category75281";
+		String titleForum = "Forum75281";
+		String titleTop = "Topic75281";
 		String descTop = "line1<br>line2<br>line3<br>line4<br>line5";
-		String pollQuestion = "Poll 01";
+		String pollQuestion = "Poll75281";
 		String[] pollOptions = {"Option 01", "Option 02"};
 		String[] newOptions = {"new Option 01", "new Option 02"};
 		
@@ -96,11 +96,11 @@ public class Forum_Forum_PublishActivity_PollActivity extends ForumBase{
 	 */
 	@Test
 	public void test02_AddPoll(){
-		String titleCat = "Category 02";
-		String titleForum = "Forum 02";
-		String titleTop = "Topic 02";
+		String titleCat = "Category75283";
+		String titleForum = "Forum75283";
+		String titleTop = "Topic75283";
 		String descTop = "line1<br>line2<br>line3<br>line4<br>line5";
-		String pollQuestion = "Poll 02";
+		String pollQuestion = "Poll75283";
 		String[] pollOptions = {"Option 01", "Option 02"};
 		String[] rate = {"0","0"};
 		
@@ -129,11 +129,11 @@ public class Forum_Forum_PublishActivity_PollActivity extends ForumBase{
 	 */
 	@Test
 	public void test03_DeletePoll(){
-		String titleCat = "Category 03";
-		String titleForum = "Forum 03";
-		String titleTop = "Topic 03";
+		String titleCat = "Category75284";
+		String titleForum = "Forum75284";
+		String titleTop = "Topic75284";
 		String descTop = "line1<br>line2<br>line3<br>line4<br>line5";
-		String pollQuestion = "Poll 03";
+		String pollQuestion = "Poll75284";
 		String[] pollOptions = {"Option 01", "Option 02"};
 		String[] rate = {"0","0"};
 		
@@ -148,6 +148,7 @@ public class Forum_Forum_PublishActivity_PollActivity extends ForumBase{
 		
 		//Check activity
 		navTool.goToHomePage();
+		driver.navigate().refresh();
 		waitForAndGetElement(By.linkText(titleTop));
 		hpgAct.checkAddPoll(titleTop,pollQuestion,pollOptions,rate);
 		
@@ -171,11 +172,11 @@ public class Forum_Forum_PublishActivity_PollActivity extends ForumBase{
 	 */
 	@Test
 	public void test04_RedirectToPollByClickingVote(){
-		String titleCat = "Category 04";
-		String titleForum = "Forum 04";
-		String titleTop = "Topic 04";
+		String titleCat = "Category75285";
+		String titleForum = "Forum75285";
+		String titleTop = "Topic75285";
 		String descTop = "line1<br>line2<br>line3<br>line4<br>line5";
-		String pollQuestion = "Poll 04";
+		String pollQuestion = "Poll75285";
 		String[] pollOptions = {"Option 01", "Option 02"};
 		
 		info("Redirect to the poll by clicking on Vote");

@@ -121,8 +121,9 @@ public class Forum_Forum_MoreAction extends ForumBase{
 	/**
 	 * CaseID 93510
 	 * Ban IP for a forum
+	 * Bug: [Forum] Ban ip not working - https://jira.exoplatform.org/browse/CLDINT-1409
 	 */
-	@Test
+	@Test(groups="error")
 	public void test03_BanIPForForum() {
 		info("Ban IP for a forum");
 		

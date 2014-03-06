@@ -239,7 +239,7 @@ public class Social_HomePage_ActivityStream extends Activity {
 		//Create Space
 		//Add new space
 		magMember.goToMySpacePage();
-		magMember.addNewSpace(spacename, spacedesc);
+		magMember.addNewSpace(spacename, spacedesc,200000);
 
 		//add activity space
 		addActivity(true, activityOfSpace+spacename, false,"");

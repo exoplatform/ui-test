@@ -281,6 +281,7 @@ public class ForumBase extends PlatformBase {
 	public final By ELEMENT_BAN_USER_REASON = By.id("BanReason");
 	public final By ELEMENT_USER_MANAGEMENT_TOPIC_TAB = By.linkText("Topics");
 	public final By ELEMENT_USER_MANAGEMENT_POST_TAB = By.linkText("Posts");
+	public final String ELEMENT_USER_MANAGEMENT_PROFILE_SELECT_CATEGORY = "//*[@id='UISelectItemForum']//a[contains(.,'${category}')]";
 
 	//Private message
 	public final By ELEMENT_PRIVATE_MESSAGE_ICON = By.xpath("//a[@class='actionIcon']/i[@class='uiIconMail uiIconLightGray']");
@@ -1284,6 +1285,7 @@ public class ForumBase extends PlatformBase {
 		}
 		if (forum != null){
 			click(ELEMENT_ADD_MODERATOR_FORUM_ICON);
+			click(ELEMENT_USER_MANAGEMENT_PROFILE_SELECT_CATEGORY.replace("${category}", category));
 			check(ELEMENT_CATEGORY_SELECT_CHECKBOX.replace("${cat}", forum), 2);
 			click(button.ELEMENT_ADD_BUTTON);
 			Utils.pause(1000);
@@ -1384,7 +1386,7 @@ public class ForumBase extends PlatformBase {
 		waitForMessage(MSG_PRIVATE_MESSAGE_DELETE);
 		click(ELEMENT_PRIVATE_MESSAGE_DELETE_OK);
 		waitForElementNotPresent(ELEMENT_PRIVATE_MESSAGE_DELETE_OK);
-		waitForElementNotPresent(ELEMENT_PRIVATE_MESSAGE_DELETE_ICON.replace("${message}",titleMessage ));
+		waitForElementNotPresent(ELEMENT_PRIVATE_MESSAGE_DELETE_ICON.replace("${message}",titleMessage ),60000);
 	}
 
 	/** Forward a private message
