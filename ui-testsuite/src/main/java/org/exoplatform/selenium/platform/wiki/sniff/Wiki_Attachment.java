@@ -13,22 +13,21 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 /**
- * 
+ *
  * @author lientm
  * @date: 1-July-2013
  */
 public class Wiki_Attachment extends BasicAction {
-	
+
 	ManageAccount magAc;
 	ManageAlert magAlert;
-	
 	@BeforeMethod
 	public void setUpBeforeTest(){
 		getDriverAutoSave();
 		driver.get(baseUrl);
 		magAc = new ManageAccount(driver);
 		magAlert = new ManageAlert(driver);
-		magAc.signIn("john", DATA_PASS); 
+		magAc.signIn(DATA_USER1, DATA_PASS); 
 		goToWiki();
 	}
 
@@ -38,9 +37,9 @@ public class Wiki_Attachment extends BasicAction {
 		driver.manage().deleteAllCookies();
 		driver.quit();
 	}
-	
-	/**CaseId: 68842 + 70032 + 70033 -> Upload file while adding/editing wiki page 
-	 * + download attachment + delete attachment
+
+	/**CaseId: 68842 + 70032 + 70033 -> Upload file while adding/editing wiki page
+	 * + download attachment + delete attachment (attachment are .doc & an image)
 	 * Need to update qmetry for caseid 70033 - Delete Attachment
 	 * Base on issue: https://jira.exoplatform.org/browse/WIKI-736: Version of attachment file will not updated after deleting
 	 */
@@ -49,14 +48,14 @@ public class Wiki_Attachment extends BasicAction {
 		String title = "Wiki_sniff_attachment_page_title_01";
 		String content = "Wiki_sniff_attachment_page_content_01";
 		String link = "Wiki_Sniff_Attachment_01.doc";
-		
+
 		String newTitle = "Wiki_sniff_attachment_page_title_01_update";
 		String newContent = "Wiki_sniff_attachment_page_content_01_update";
 		String newLink = "Wiki_Sniff_Attachment_01.jpg";
-		
+		By imgElement = By.xpath("//img[contains(@src,"+newLink+")]");
 		info("Add new wiki page having attachment");
 		addBlankWikiPageHasAttachment(title, content, link);
-		
+
 		info("Edit wiki page having attachment");
 		mouseOverAndClick(ELEMENT_EDIT_PAGE_LINK);
 		addWikiPageSourceEditor(newTitle, newContent);
@@ -69,14 +68,20 @@ public class Wiki_Attachment extends BasicAction {
 
 		info("Check download attachment successfully");
 		click(ELEMENT_ATTACHMENT_ICON);
+		click(By.linkText(newLink));
+		switchToNewWindow();
+		waitForAndGetElement(imgElement);
+		switchToParentWindow();
+		assert checkFileExisted(newLink);
+
 		click(By.linkText(link));
 		Utils.pause(3000);
 		assert checkFileExisted(link);
-		
+
 		info("Delete attachment");
 		deleteAnAttachment(link);
 		//waitForAndGetElement(ELEMENT_ATTACHMENT_NUMBER.replace("${No}", "1"));
-		
-		deleteCurrentWikiPage();		
+
+		deleteCurrentWikiPage();	
 	}
 }

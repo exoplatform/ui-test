@@ -237,6 +237,10 @@ public class WikiBase extends PlatformBase{
 	public String ELEMENT_UPDATER_PAGE_INFO = "//*[@id='UIWikiPageInfoArea']//a[2][text()='${fullName}']";
 	public final By ELEMENT_ADD_MORE_RELATION_BUTTON = By.xpath("//button[text()='Add More Relations']");
 
+	public final String ELEMENT_PAGE_INFO_TITLE = "//h6[@class='pageInfoTitle' and contains(text(),'${infoTitle}')]";
+public final String ELEMENT_VERIFY_INFO_SUMMARY = "//div[@class='uiPageInfoItem uiPageInfoSummary']//b[contains(text(),'${infoSummary}')]/ancestor::tr/td[contains(text(),'${item}')]";
+public final String ELEMENT_VERIFY_HIERARCHY = "//div[text()='${page}']/..//*//*//a[@href='/portal/intranet/wiki/${pageTitle}']";
+	
 	// Wiki page > View Change
 	public final String ELEMENT_CHANGES_COMPARE_VERSION = "//*[text()='${1stNumber}']/../b[text()='${2ndNumber}']/../..//a[@class='changes']";
 	public final String ELEMENT_VERSION_CHECKBOX="//input[@id='version_{$version}']";
