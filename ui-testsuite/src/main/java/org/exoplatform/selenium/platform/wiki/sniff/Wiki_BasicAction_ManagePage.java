@@ -326,14 +326,14 @@ public class Wiki_BasicAction_ManagePage extends ManageDraft{
 		deleteCurrentWikiPage();
 	}
 
-	/**CaseID: 68839 -> Rename Page in line
+	/**CaseID: 109190 -> Rename Page
 	 * 
 	 */
 	@Test
-	public void test12_RenamePageInLine(){
-		String title = "Wiki_manage_page_title_12";
-		String content = "Wiki_manage_page_content_12";
-		String newTitle = "Wiki_manage_page_title_12_update";
+	public void test12_01_RenamePageInLine(){
+		String title = "Wiki_manage_page_title_12_01";
+		String content = "Wiki_manage_page_content_12_01";
+		String newTitle = "Wiki_manage_page_title_12_01_update";
 
 		info("Add new wiki page");		
 		addBlankWikiPage(title, content, 0);
@@ -343,6 +343,25 @@ public class Wiki_BasicAction_ManagePage extends ManageDraft{
 		type(ELEMENT_PAGE_TITLE_EDIT_TEXTBOX, newTitle, true);
 		Utils.javaSimulateKeyPress(KeyEvent.VK_ENTER);
 
+		waitForTextPresent(newTitle);
+		deleteCurrentWikiPage();	
+	}
+	@Test
+	public void test12_02_RenamePageByEditingPage(){
+		String title = "Wiki_manage_page_title_12_02";
+		String content = "Wiki_manage_page_content_12_02";
+		String newTitle = "Wiki_manage_page_title_12_02_update";
+
+		info("Add new wiki page");		
+		addBlankWikiPage(title, content, 0);
+
+		info("Rename page by editing page");
+		
+		info("Edit wiki page having attachment");
+		mouseOverAndClick(ELEMENT_EDIT_PAGE_LINK);
+		addWikiPageSourceEditor(newTitle, content);
+		click(ELEMENT_SAVE_BUTTON_ADD_PAGE);
+		waitForElementNotPresent(ELEMENT_SAVE_BUTTON_ADD_PAGE);
 		waitForTextPresent(newTitle);
 		deleteCurrentWikiPage();	
 	}

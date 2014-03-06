@@ -174,4 +174,28 @@ public class Wiki_PublicActivity extends BasicAction {
 		waitForTextPresent("Wiki Home");
 		deleteCurrentWikiPage();
 	}
+	
+	/**CaseId: 109195 -> No comment is added to the activity when edit page not checking Publish activiy
+	 * 
+	 */
+	@Test
+	public void test07_NoCommentAddedOnActivityStreamWhenNotTickPublishActivity(){
+		String title = "Wiki_activity_title_07";
+		String content = "Wiki_activity_content_07";
+		String newTitle = "Wiki_activity_title_07_update";
+		String newContent = "Wiki_activity_content_07_update";
+		
+		info("Add new wiki page");		
+		addBlankWikiPage(title, content, 0);
+		
+		info("Edit title of page -> not check comment in activity");
+		editWikiPage(newTitle, newContent, 0);
+		naTool.goToHomePage();
+		waitForAndGetElement(By.linkText(newTitle));
+		waitForElementNotPresent(activity.ELEMENT_WIKI_COMMENT_EDIT_TITLE.replace("${title}", newTitle));
+		waitForElementNotPresent(activity.ELEMENT_WIKI_COMMENT_EDIT_CONTENT.replace("${title}", newContent));
+		
+		click(By.linkText(newTitle));
+		deleteCurrentWikiPage();
+	}
 }

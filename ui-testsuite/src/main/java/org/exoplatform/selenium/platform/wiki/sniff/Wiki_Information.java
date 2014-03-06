@@ -42,10 +42,10 @@ public class Wiki_Information extends Version {
 		driver.quit();
 	}
 	
-	/**CaseId: 68843 -> Show Page Information
+	/**CaseId: 109192 -> View Page General information
 	 */
 	@Test
-	public void test01_PageInformation(){
+	public void test01_ViewPageGeneralInformation(){
 		String title = "Wiki_sniff_infor_page_title_01";
 		String content = "Wiki_sniff_infor_page_content_01";
 		String link = "Wiki_Sniff_Attachment_01.doc";
@@ -65,11 +65,11 @@ public class Wiki_Information extends Version {
 		deleteCurrentWikiPage();
 	}
 	
-	/**CaseId: 70047 -> Show Page History
+	/**CaseId: 109193 -> View Page history to compare versions
 	 * 
 	 */
 	@Test
-	public void test02_PageHistory(){
+	public void test02_ViewPageHistoryToCompareVersions(){
 		String title = "Wiki_sniff_infor_page_title_02";
 		String content = "Wiki_sniff_infor_page_content_02";
 		String newTitle = "Wiki_sniff_infor_page_title_02_update";
@@ -216,6 +216,49 @@ public class Wiki_Information extends Version {
 		click(By.linkText(title1));
 		deleteCurrentWikiPage();
 		click(By.linkText(title2));
+		deleteCurrentWikiPage();
+	}
+	
+	/**CaseId: 109191 -> View Page info
+	 * 
+	 */
+	@Test
+	public void test08_ViewPageInfo(){
+		String title = "Wiki_sniff_infor_page_title_08";
+		String content = "Wiki_sniff_infor_page_content_08";
+		
+		String child1Title = "Wiki_sniff_infor_page_title_08_child1";
+		String child2Title = "Wiki_sniff_infor_page_title_08_child2";
+		
+		info("Add wiki page");
+		addBlankWikiPage(title, content, 0);
+		
+		info("Add 2 wiki child page");
+		addBlankWikiPage(child1Title, "", 0);
+		goToWikiPage("Wiki Home/" + title);
+		addBlankWikiPage(child2Title, "", 0);
+		goToWikiPage("Wiki Home/" + title);
+		
+		info("Open Page Information");
+		goToPageInfoFromCurrentPage();
+		
+		info("Verify page information");
+		waitForAndGetElement(By.xpath(ELEMENT_PAGE_INFO_TITLE.replace("${infoTitle}", "Summary")));
+		waitForAndGetElement(By.xpath(ELEMENT_PAGE_INFO_TITLE.replace("${infoTitle}", "Related Pages")));
+		waitForAndGetElement(By.xpath(ELEMENT_PAGE_INFO_TITLE.replace("${infoTitle}", "Hierarchy")));
+		waitForAndGetElement(By.xpath(ELEMENT_PAGE_INFO_TITLE.replace("${infoTitle}", "Recent Changes")));
+		waitForAndGetElement(By.xpath("//*[contains(text(),'View Page History')]"));
+		waitForAndGetElement(ELEMENT_ADD_MORE_RELATION_BUTTON);
+		
+		waitForAndGetElement(By.xpath(ELEMENT_VERIFY_INFO_SUMMARY.replace("${infoSummary}", "Title").replace("${item}", title)));
+		waitForAndGetElement(By.xpath(ELEMENT_VERIFY_INFO_SUMMARY.replace("${infoSummary}", "Author").replace("${item}", "John Smith")));
+		waitForAndGetElement(By.xpath(ELEMENT_VERIFY_INFO_SUMMARY.replace("${infoSummary}", "Last changed by").replace("${item}", "John Smith")));
+		
+		waitForAndGetElement(By.xpath(ELEMENT_VERIFY_HIERARCHY.replace("${page}", "Parent Page").replace("${pageTitle}", "WikiHome")));
+		waitForAndGetElement(By.xpath(ELEMENT_VERIFY_HIERARCHY.replace("${page}", "Child Pages").replace("${pageTitle}", child1Title)));
+		waitForAndGetElement(By.xpath(ELEMENT_VERIFY_HIERARCHY.replace("${page}", "Child Pages").replace("${pageTitle}", child2Title)));
+		
+		click(By.linkText(title));
 		deleteCurrentWikiPage();
 	}
 }
