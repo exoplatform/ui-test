@@ -240,7 +240,6 @@ public class Forum_Answers_Questions extends AnswerBase {
 		String description = "Description for category6";
 		String questionName = "Question6";
 		String questionContent = "Content of question 6";
-		String email = "exomailtest01@gmail.com";
 		By mail = By.xpath("//b[text()= 'Question6']");
 		String contentMail = "Hi,/You may be interested in this question:/Question Question6/Details/Content of question 6/Click here for more details.";
 		
@@ -250,7 +249,7 @@ public class Forum_Answers_Questions extends AnswerBase {
 		
 		info("Send question");
 		
-		magQuest.sendQuestion(1, questionName, null, null, email, null, null);
+		magQuest.sendQuestion(1, questionName, null, null, EMAIL_ADDRESS1, null, null);
 		
 		info ("Get windownHandle of current browser");
 		
@@ -260,7 +259,7 @@ public class Forum_Answers_Questions extends AnswerBase {
 	    
 	    goToMail(EMAIL_ADDRESS1, EMAIL_PASS);
 	    
-	    waitForAndGetElement(mail,150000);
+	    waitForAndGetElement(mail,300000);
 	    
 		click(mail);
 		

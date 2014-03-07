@@ -59,7 +59,7 @@ public class Calendar_Task extends CalendarBase {
 		waitForAndGetElement(By.xpath(ELEMENT_EVENT_TASK_ONE_DAY.replace("${taskName}", CALENDAR01)));
 
 		info("restore data");
-		deleteEventTask(CALENDAR01,selectDayOption.ONEDAY);
+		deleteEventTask(CALENDAR01);
 	}
 
 	/** 

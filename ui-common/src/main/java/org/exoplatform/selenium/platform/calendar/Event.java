@@ -249,12 +249,19 @@ public class Event extends CalendarBase{
 	 */
 	public void addQuickEvent(String name, String description, String from, String to, boolean allDay, String...opt){
 		info("--Add an event--");
+		String date = "";
 		goToAddEvent();
 		inputBasicQuickEvent(name, description, opt);
 		inputFromToEvent(from, to, allDay);
 		button.save();
 		waitForElementNotPresent(ELEMENT_ADD_EVENT_POPUP);
 		Utils.pause(1000);
+		
+		if((from != null) & (from != "")){
+			date = from.split("/")[1];
+			click(ELEMENT_MINI_CALENDAR_DATE_HIGHLIGHT.replace("${date}", date));
+		}
+			
 		if(allDay)
 			waitForAndGetElement(ELEMENT_EVENT_TASK_ALL_DAY.replace("${event}", name));
 		else{

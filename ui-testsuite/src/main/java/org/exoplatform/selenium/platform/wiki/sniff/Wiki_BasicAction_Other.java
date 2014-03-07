@@ -430,7 +430,7 @@ public class Wiki_BasicAction_Other extends Permalink {
 	public void test14_ChangePermissionOfPageInPermalink_SelectGroup(){
 		String title = "Wiki_sniff_permalink_title_14_2";
 		String content = "Wiki_sniff_permalink_content_14_2";
-		String userGroup2 = "Development/Select this Group";
+		String userGroup2 = "Development";
 		
 		addBlankWikiPage(title, content, 0);
 		deletePagePermission("any");
@@ -488,7 +488,7 @@ public class Wiki_BasicAction_Other extends Permalink {
 		String newTitle = "Wiki_watch_title_15_update";
 		String newContent = "Wiki_watch_content_15_update";
 			
-		magAc.updateUserProfile(null, null, null, "exomailtest01@gmail.com");
+		magAc.updateUserProfile(null, null, null, EMAIL_ADDRESS1);
 		
 		goToWiki();
 		addBlankWikiPage(title, content, 0);	

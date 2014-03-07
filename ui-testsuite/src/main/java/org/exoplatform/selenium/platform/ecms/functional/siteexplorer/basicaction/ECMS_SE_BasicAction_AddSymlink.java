@@ -441,6 +441,79 @@ public class ECMS_SE_BasicAction_AddSymlink extends PlatformBase{
 	public void test19_CheckDisplayWorkspaceWhenUserHasNotPermission(){
 		String DATA_CONTENT_FOLDER = "ECMS_AddSymlink_Content_folder_19";
 		By ELEMENT_CONTENT_FOLDER = By.linkText(DATA_CONTENT_FOLDER);
+		By ELEMENT_INACCESSIBLE_WORKSPACE = By.xpath("//*[@id='UIWorkspaceList']//select[@name='workspaceName']/option[@value='portal-system']");
+
+		//login with mary
+		magAcc.signOut();
+		info("Login ECMS with user: mary");
+		magAcc.signIn("mary", "gtn");
+		navToolBar.goToSiteExplorer();
+
+		info("create new content folder");
+		cTemplate.createNewFolder(DATA_CONTENT_FOLDER, folderType.Content);
+
+		//check cannot add symlink for this node with system workspace
+		ecms.goToNode(ELEMENT_CONTENT_FOLDER);
+		actBar.goToAddSymlinkTab();
+		waitForAndGetElement(ecms.ELEMENT_ADD_SYMLINK_POPUP);
+		click(actBar.ELEMENT_ADD_ITEM);
+		waitForElementNotPresent(ELEMENT_INACCESSIBLE_WORKSPACE);
+		click(ecms.ELEMENT_ADD_SYMLINK_CLOSE_WINDOWS);
+		//
+		//		//check alert
+		//		boolean checkMessage = isTextPresent("Access denied! You do not have the permission to add symlink to this node.");
+		//		if (checkMessage){
+		//			magAlert.verifyAlertMessage("Access denied! You do not have the permission to add symlink to this node.");
+		//		}else{
+		//			magAlert.verifyAlertMessage("Access denied. You do not have permission to add symlink to this node.");
+		//		}
+		//		info("cannot add symlink with user has not permission to view it");
+		//		button.cancel();
+
+		//delete data
+		cMenu.deleteDocument(ELEMENT_CONTENT_FOLDER);
+	}
+
+	/** CaseId: 67138
+	 * case20: Check the displaying of node when user dose not permission to view it when add Symlink 
+	 * login with john
+	 * create new node - content folder
+	 * set permission for this node: user mary does not have permission view node
+	 * login with mary
+	 * add symlink and choose target node
+	 * check user does not see that content node
+	 */
+	@Test
+	public void test20_CheckDisplayNodeWhenUserNotHaveViewPermission(){	  
+		String DATA_CONTENT_FOLDER = "ECMS_AddSymlink_Content_folder_20";
+		By ELEMENT_CONTENT_FOLDER = By.linkText(DATA_CONTENT_FOLDER);
+
+		//		//create new content folder
+		//		cTemplate.createAndCheckContentFolder(DATA_CONTENT_FOLDER, ELEMENT_CONTENT_FOLDER);
+		//
+		//		//set permission for this node: user mary does not have permission view node 
+		//		info("Set for user mary does not have view permission");
+		//		ecms.goToNode(ELEMENT_CONTENT_FOLDER);
+		//		actBar.goToNodePermissionManagement();
+		//		ecmsPer.removeDefaultPermissionOfNode();
+		//		button.close();
+		//		magAcc.signOut();
+		//
+		//		info("Login with mary");
+		//		magAcc.signIn("mary", "gtn");
+		//		navToolBar.goToSiteExplorer();
+		//
+		//		//check user does not see that content node
+		//		actBar.goToTargetNodeWhenAddSymlink("sites");
+		//		waitForElementNotPresent(By.xpath(ecms.ELEMENT_SYMLINK_PATH_NODE_TITLE.replace("${node}", DATA_CONTENT_FOLDER)));
+		//		info("cannot see node when user does not have view permission");
+		//		click(ecms.ELEMENT_ADD_SYMLINK_CLOSE_WINDOWS);
+		//
+		//		//delete data
+		//		magAcc.signOut();
+		//		magAcc.signIn(DATA_USER, DATA_PASS);
+		//		navToolBar.goToSiteExplorer();
+		//		cMenu.deleteDocument(ELEMENT_CONTENT_FOLDER);
 
 		//login with mary
 		magAcc.signOut();
@@ -468,49 +541,7 @@ public class ECMS_SE_BasicAction_AddSymlink extends PlatformBase{
 		//delete data
 		cMenu.deleteDocument(ELEMENT_CONTENT_FOLDER);
 	}
-
-	/** CaseId: 67138
-	 * case20: Check the displaying of node when user dose not permission to view it when add Symlink 
-	 * login with john
-	 * create new node - content folder
-	 * set permission for this node: user mary does not have permission view node
-	 * login with mary
-	 * add symlink and choose target node
-	 * check user does not see that content node
-	 */
-	@Test
-	public void test20_CheckDisplayNodeWhenUserNotHaveViewPermission(){	  
-		String DATA_CONTENT_FOLDER = "ECMS_AddSymlink_Content_folder_20";
-		By ELEMENT_CONTENT_FOLDER = By.linkText(DATA_CONTENT_FOLDER);
-
-		//create new content folder
-		cTemplate.createAndCheckContentFolder(DATA_CONTENT_FOLDER, ELEMENT_CONTENT_FOLDER);
-
-		//set permission for this node: user mary does not have permission view node 
-		info("Set for user mary does not have view permission");
-		ecms.goToNode(ELEMENT_CONTENT_FOLDER);
-		actBar.goToNodePermissionManagement();
-		ecmsPer.removeDefaultPermissionOfNode();
-		button.close();
-		magAcc.signOut();
-
-		info("Login with mary");
-		magAcc.signIn("mary", "gtn");
-		navToolBar.goToSiteExplorer();
-
-		//check user does not see that content node
-		actBar.goToTargetNodeWhenAddSymlink("sites");
-		waitForElementNotPresent(By.xpath(ecms.ELEMENT_SYMLINK_PATH_NODE_TITLE.replace("${node}", DATA_CONTENT_FOLDER)));
-		info("cannot see node when user does not have view permission");
-		click(ecms.ELEMENT_ADD_SYMLINK_CLOSE_WINDOWS);
-
-		//delete data
-		magAcc.signOut();
-		magAcc.signIn(DATA_USER, DATA_PASS);
-		navToolBar.goToSiteExplorer();
-		cMenu.deleteDocument(ELEMENT_CONTENT_FOLDER);
-	}
-
+	
 	/** CaseId: 67407
 	 * case21: Add new Symlink has the same name with existing Symlink in Content Folder
 	 * create new content folder
@@ -755,7 +786,7 @@ public class ECMS_SE_BasicAction_AddSymlink extends PlatformBase{
 		ecms = new EcmsBase(newDriver);
 		cMenu = new ContextMenu(newDriver);
 		siteExp = new SitesExplorer(newDriver);
-		
+
 		//check cannot add symlink for node by user mary
 		navToolBar.goToSiteExplorer();
 		ELEMENT_CONTENT_FOLDER = By.xpath(siteExp.ELEMENT_SE_NODE.replace("{$node}", DATA_CONTENT_FOLDER));

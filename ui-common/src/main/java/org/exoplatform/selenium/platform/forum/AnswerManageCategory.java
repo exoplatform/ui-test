@@ -233,7 +233,7 @@ public class AnswerManageCategory extends AnswerBase {
 		action = new Actions(driver);
 		info("Move category " + source + "to category " + destination);
 		rightClickOnElement(ELEMENT_CATEGORY_LINK.replace("${category}", source));
-		click(ELEMENT_MOVE_CATEGORY_LINK);
+		click(ELEMENT_MOVE_CATEGORY_LINK.replace("${category}", source));
 		doubleClickOnElement(ELEMENT_CATEGORY_IN_MOVE_FORM.replace("${category}", destination));
 		waitForElementNotPresent(ELEMENT_CATEGORY_IN_MOVE_FORM.replace("${category}", destination));
 	}

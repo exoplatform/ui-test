@@ -34,16 +34,15 @@ public class AnswerManageQuestion extends AnswerBase {
 	//Manage Question
 	public final By ELEMENT_SUBMIT_QUESTION_BUTTON = By.xpath("//*[contains(text(),'Submit Question')]");
 	public final By ELEMENT_SUBMIT_QUESTION_BUTTON_AUX = By.xpath("//*[@id='UIQuestions']//*[contains(text(),'Submit Question')]");
-	public final String ELEMENT_MANAGE_QUESTION_DEACTIVATE = "//*[text()='${question}']/..//*[@data-original-title='Deactivate']";
-	public final String ELEMENT_MANAGE_QUESTION_ACTIVATE = "//*[text()='${question}']/..//*[@data-original-title='Activate']";
-	public final String ELEMENT_MANAGE_QUESTION_APPROVE = "//*[text()='${question}']/..//*[@data-original-title='Approve']";
-	public final String ELEMENT_MANAGE_QUESTION_DISAPPROVE = "//*[text()='${question}']/..//*[@data-original-title='Disapprove']";
+	public final String ELEMENT_MANAGE_QUESTION_DEACTIVATE = "//td[text()='${question}']/parent::tr//td[@class='center']/div[@class='anable']//input[@id='allDay']";
+	public final String ELEMENT_MANAGE_QUESTION_ACTIVATE = "//td[text()='${question}']/parent::tr//td[@class='center']/div[@class='disable']//input[@id='allDay']";
+	public final String ELEMENT_MANAGE_QUESTION_APPROVE = "//td[text()='${question}']/parent::tr//td[@class='center actionContainer']/div[@class='disable']//input[@id='allDay']";
+	public final String ELEMENT_MANAGE_QUESTION_DISAPPROVE = "//td[text()='${question}']/parent::tr//td[@class='center actionContainer']/div[@class='anable']//input[@id='allDay']";
 	public final String ELEMENT_MANAGE_QUESTION_DELETE = "//*[@id= 'UITabContent' and contains(@style,'display:block')]/*//td[text()='${question}']/../*//div[@title='Delete']";
 	public final String ELEMENT_MANAGE_QUESTION_EDIT = "//td[text()='${question}']/../*//div[@title='Edit']";
 	public final String ELEMENT_MANAGE_QUESTION_ANSWER_ICON = "//td[text()='${question}']/../*//div/div[@title='Answer']";
 	public final String ELEMENT_MANAGE_QUESTION_ANSWER_LANGUAGE = "//td[text()='${question}']/../td/div[@title='Answer' and contains(@onclick, '${language}')]";
-	public final By ELEMENT_MANAGE_QUESTION_CURRENT_OPEN_QUESTIONS_TAB = By.xpath("//div[@class='uiFormTabPane uiTabNormal uiTabPane']//*[contains(@class,'active')]/*[contains(text(),'Open Questions')]");
-	public final By ELEMENT_MANAGE_QUESTION_CURRENT_ALL_QUESTIONS_TAB = By.xpath("//div[@class='uiFormTabPane uiTabNormal uiTabPane']//*[contains(@class,'active')]/*[contains(text(),'All Questions')]");
+//	public final By ELEMENT_MANAGE_QUESTION_CURRENT_ALL_QUESTIONS_TAB = By.xpath("//div[@class='uiFormTabPane uiTabNormal uiTabPane']//*[contains(@class,'active')]/*[contains(text(),'All Questions')]");
 	public final By ELEMENT_QUESTION_LANGUAGE = By.name("AllLanguages");
 	public final By ELEMENT_QUESTION_NAME = By.id("QuestionTitle");
 	public final By ELEMENT_APPROVED_QUESTION = By.xpath("//div[@data-original-title='Disapprove']//span");
@@ -101,8 +100,8 @@ public class AnswerManageQuestion extends AnswerBase {
 	//Manage question popup
 	public final By ELEMENT_MANAGE_QUESTIONS = By.xpath("//*[contains(text(), 'Manage Questions')]");
 	public final By ELEMENT_MANAGE_QUESTIONS_POPUP = By.xpath("//*[@class='PopupTitle popupTitle' and text()='Manage Questions']");
-	public final String ELEMENT_OPEN_QUESTION_TAB = "//li[contains(@class,'${status}')]//a[text()='Open Questions']";
 	public final String ELEMENT_ALL_QUESTION_TAB = "//li[contains(@class,'${status}')]//a[text()='All Questions']";
+	public final String ELEMENT_OPEN_QUESTION_TAB = "//li[contains(@class,'${status}')]//a[text()='Open Questions']";
 	public final String ELEMENT_ANSWER_QUESTION_IN_LIST = "//*[text()='${question}']/..//*[@data-original-title='Answer']";
 	public final String ELEMENT_EDIT_QUESTION_IN_LIST = "//*[text()='${question}']/..//*[@data-original-title='Edit']";
 	public final String ELEMENT_DELETE_QUESTION_IN_ALL_QUESTION_TAB_LIST = "//div[@id='QuestionManagerment-tab']//td[text()='${question}']/..//*[@data-original-title='Delete']";
@@ -322,7 +321,7 @@ public class AnswerManageQuestion extends AnswerBase {
 			break;
 		default:
 			info("Delete question from manage question");
-			if(waitForAndGetElement(ELEMENT_MANAGE_QUESTION_CURRENT_ALL_QUESTIONS_TAB,DEFAULT_TIMEOUT,0)!=null)
+			if(waitForAndGetElement(ELEMENT_ALL_QUESTION_TAB.replace("${status}", "active"),DEFAULT_TIMEOUT,0)!=null)
 				click(ELEMENT_DELETE_QUESTION_IN_ALL_QUESTION_TAB_LIST.replace("${question}", questionName));
 			else
 				click(ELEMENT_DELETE_QUESTION_IN_PENDING_QUESTION_TAB_LIST.replace("${question}", questionName));
@@ -346,7 +345,8 @@ public class AnswerManageQuestion extends AnswerBase {
 
 	public void goToOpenQuestionTab(){
 		info("Go to Open quesntion tab in manage question");
-		click(ELEMENT_OPEN_QUESTION_TAB.replace("${status}", ""));
+		click(ELEMENT_OPEN_QUESTION_TAB);
+		Utils.pause(3000);
 	}
 
 	/**function: active/deactivate a question
@@ -403,7 +403,7 @@ public class AnswerManageQuestion extends AnswerBase {
 		if (way == 1){
 			info("Move question by right click -> select Move to");
 			rightClickOnElement(By.linkText(question));
-			click(ELEMENT_MOVE_LINK_IN_CONTEXT_MENU);
+			click(ELEMENT_MOVE_LINK_IN_CONTEXT_MENU.replace("${question}", question));
 		}else {
 			info("Move question by select More action -> Move to");
 			click(ELEMENT_MORE_ACTION_QUESTION);
@@ -420,7 +420,7 @@ public class AnswerManageQuestion extends AnswerBase {
 		if (way == 1){
 			info("Send question by right click -> select Move to");
 			rightClickOnElement(By.linkText(question));
-			click(ELEMENT_SEND_LINK_IN_CONTEXT_MENU);
+			click(ELEMENT_SEND_LINK_IN_CONTEXT_MENU.replace("${question}", question));
 		}else {
 			info("Send question by select More action -> Move to");
 			click(ELEMENT_MORE_ACTION_QUESTION);

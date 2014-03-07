@@ -53,17 +53,17 @@ public class Forum_Forum_ForumPortletSettings_EnableDisablePanel extends ForumBa
 		driver.quit();
 	}
 
-	/**
-	* Case ID:72295, Case ID:73315.
-	* Test Case Name: Disable/enable Forum Jump panel in Forum porlet setting.
-	* Created by khanhnt at 2013/12/17 17:40:54
-	* Test case is needed to be removed 
-	*//*
-	@Test
-	public  void test01_DisableForumJumpPanelInForumPorletSetting() {
-		info("Test 1: Disable/Enable Forum Jump panel in Forum porlet setting"); 
-
- 	}*/
+//	/**
+//	* Case ID:72295, Case ID:73315.
+//	* Test Case Name: Disable/enable Forum Jump panel in Forum porlet setting.
+//	* Created by khanhnt at 2013/12/17 17:40:54
+//	* THIS CASE IS REMOVED
+//	*//*
+//	@Test
+//	public  void test01_DisableForumJumpPanelInForumPorletSetting() {
+//		info("Test 1: Disable/Enable Forum Jump panel in Forum porlet setting"); 
+//
+// 	}*/
 
 	/**
 	* Case ID:72576 and 72673

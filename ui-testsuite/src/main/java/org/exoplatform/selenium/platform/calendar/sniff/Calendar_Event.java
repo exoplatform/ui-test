@@ -119,7 +119,7 @@ public class Calendar_Event extends CalendarBase {
 
 		info("==Create a group calendar==");
 		Utils.pause(5000);
-		addCalendar(CAL_03, CAL_03, "black", CAL_GROUP);
+		addCalendar(CAL_03, CAL_03, "red", CAL_GROUP);
 		Utils.pause(3000);
 		changeEditPermissionForCalShowInGroup(CAL_03, USER_GROUP, CAL_GROUP);
 

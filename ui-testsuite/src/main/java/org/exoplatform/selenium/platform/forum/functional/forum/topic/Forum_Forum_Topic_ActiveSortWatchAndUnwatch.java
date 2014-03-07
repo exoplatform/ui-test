@@ -177,6 +177,7 @@ public class Forum_Forum_Topic_ActiveSortWatchAndUnwatch extends ForumBase{
 		 *Expected Outcome: 
 		- Private post is added
 		- Notify mail is sent to registered email addresses (if they register at step 2). Only watching user receive email, the poster will not receive email.		*/ 
+		info("Step 3: Add private post");
 		acc.userSignIn(userType.DEVELOPER);
 		info("Add post into topic");
 		goToForums();

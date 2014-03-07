@@ -199,7 +199,7 @@ public class Forum_Answers_Question_AnswerQuestion extends AnswerBase{
 		magQuest.goToManageQuestions();
 
 		/* Step 3: Show list of questions that have not been answered */
-		//- Click [Pending questions] tab
+		//- Click [Open questions] tab
 		//- All questions that waiting for being answered are displayed in list
 		magQuest.goToOpenQuestionTab();
 
