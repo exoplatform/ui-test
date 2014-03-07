@@ -211,14 +211,14 @@ public class Cloud_Features_DefaultSpace extends SocialBase{
 		magAccount.signIn(DATA_USER_JOHN, DATA_PASS);
 		mngMem.joinOpenSpace(cloudBase.ELEMENT_DEFAULT_SPACE);
 		accessSpace(cloudBase.ELEMENT_DEFAULT_SPACE);
-		waitForAndGetElement(spMng.ELEMENT_SPACE_MENU_ITEM.replace("${menuItem}","Activity Stream" ));
-		waitForAndGetElement(spMng.ELEMENT_SPACE_MENU_ITEM.replace("${menuItem}","Forums" ));
-		waitForAndGetElement(spMng.ELEMENT_SPACE_MENU_ITEM.replace("${menuItem}","Wiki" ));
-		waitForAndGetElement(spMng.ELEMENT_SPACE_MENU_ITEM.replace("${menuItem}","Documents" ));
-		waitForAndGetElement(spMng.ELEMENT_SPACE_MENU_ITEM.replace("${menuItem}","Agenda" ));
-		waitForAndGetElement(spMng.ELEMENT_SPACE_MENU_ITEM.replace("${menuItem}","Answer" ));
-		waitForAndGetElement(spMng.ELEMENT_SPACE_MENU_ITEM.replace("${menuItem}","FAQ" ));
-		waitForAndGetElement(spMng.ELEMENT_SPACE_MENU_ITEM.replace("${menuItem}","Members" ));
+		mngMem.verifySpaceMenu("Activity Stream");
+		mngMem.verifySpaceMenu("Forums");
+		mngMem.verifySpaceMenu("Wiki");
+		mngMem.verifySpaceMenu("Documents");
+		mngMem.verifySpaceMenu("Agenda");
+		mngMem.verifySpaceMenu("Answer");
+		mngMem.verifySpaceMenu("FAQ");
+		mngMem.verifySpaceMenu("Members");
 		
 		goToAllSpaces();
 		mngMem.leaveFromSpace(cloudBase.ELEMENT_DEFAULT_SPACE);
