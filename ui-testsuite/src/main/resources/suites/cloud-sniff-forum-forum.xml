@@ -8,6 +8,8 @@
 			</run>
 		</groups>
 		<classes>
+			<class name="org.exoplatform.selenium.platform.forum.sniff.Forum_Forum_PublishActivity_PollActivity"/>
+			<class name="org.exoplatform.selenium.platform.forum.sniff.Forum_Forum_PublishActivity_TopicActivity"/>
 			<class name="org.exoplatform.selenium.platform.forum.sniff.Forum_Forum_BasicAction"/>
 			<class name="org.exoplatform.selenium.platform.forum.sniff.Forum_Forum_Bookmark"/>
 			<class name="org.exoplatform.selenium.platform.forum.sniff.Forum_Forum_Category"/>
@@ -17,8 +19,7 @@
 			<class name="org.exoplatform.selenium.platform.forum.sniff.Forum_Forum_Topic_BasicAction"/>
 			<class name="org.exoplatform.selenium.platform.forum.sniff.Forum_Forum_Topic_ManagePoll"/>
 			<class name="org.exoplatform.selenium.platform.forum.sniff.Forum_Forum_Topic_OtherAction"/>
-			<class name="org.exoplatform.selenium.platform.forum.sniff.Forum_Forum_PublishActivity_PollActivity"/>
-			<class name="org.exoplatform.selenium.platform.forum.sniff.Forum_Forum_PublishActivity_TopicActivity"/>
+
 		</classes>
 	</test>
 	<listeners>

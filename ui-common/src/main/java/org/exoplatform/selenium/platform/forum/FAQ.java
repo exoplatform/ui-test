@@ -85,7 +85,7 @@ public class FAQ extends AnswerBase {
 			navTool.goToEditPageEditor();
 			click(By.linkText("Collaboration"));
 			dragAndDropToObject(ELEMENT_FAQ_PORLET, ELEMENT_ANSWER_PAGE);
-			waitForAndGetElement("//*[@class='portletLayoutDecorator' and contains(text(), 'FAQPortlet')]");
+			waitForAndGetElement("//*[contains(@class,'portletLayoutDecorator') and contains(text(), 'FAQPortlet')]");
 			info("drag and drop FAQ");
 			pageE.finishEditLayout();
 		}

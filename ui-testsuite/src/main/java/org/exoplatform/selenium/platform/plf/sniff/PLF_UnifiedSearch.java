@@ -572,8 +572,9 @@ public class PLF_UnifiedSearch extends Template {
 	 * == Search files ==
 	 * Test case ID: 71610
 	 * Step 1: Search files (nt:file)
+	 * ECMS-5418 - [Unified search] No File icon in search result
 	 */
-	@Test(priority=9)
+	@Test(priority=9, groups="error")
 	public void test10_SearchFiles(){
 		/*Declare variables*/
 		String searchText = "Search71610";
@@ -672,7 +673,7 @@ public class PLF_UnifiedSearch extends Template {
 
 		//- Search results should display: page icon, page title, the excerpt, the site that the page belongs to, and the url
 		info("-- Verify page icon --");
-		waitForAndGetElement(qsPage.ELEMENT_RESULT_ICON.replace("${keySearch}", searchText).replace("${item}", "Pa"), DEFAULT_TIMEOUT,1,2);
+		waitForAndGetElement(qsPage.ELEMENT_PAGE_RESULT_ICON.replace("${keySearch}", searchText).replace("${item}", "Pa"), DEFAULT_TIMEOUT,1,2);
 		info("-- Verify page title --");
 		waitForAndGetElement(qsPage.ELEMENT_RESULT_ITEM.replace("${keySearch}", searchText).replace("${item}", "Pa"));
 		info("-- Verify the excerpt --");
@@ -696,7 +697,7 @@ public class PLF_UnifiedSearch extends Template {
 	 * Test case ID: 71618
 	 * Step 1: Search people
 	 */
-	@Test(priority=10)
+	@Test(priority=10, groups="error")
 	public void test12_SearchPeople(){
 		/*Declare variables*/
 		String searchText = "John Smith";
@@ -770,7 +771,7 @@ public class PLF_UnifiedSearch extends Template {
 
 		//- Search results should display: the space avatar, the space name, the space description, the members count, the validation status
 		info("-- Verify space avatar --");
-		waitForAndGetElement(qsPage.ELEMENT_RESULT_ICON.replace("${keySearch}", searchText).replace("${item}", "Space"), DEFAULT_TIMEOUT,1,2);
+		waitForAndGetElement(qsPage.ELEMENT_SPACE_RESULT_ICON.replace("${keySearch}", searchText).replace("${item}", "Space"), DEFAULT_TIMEOUT,1,2);
 		info("-- Verify space name --");
 		waitForAndGetElement(qsPage.ELEMENT_RESULT_ITEM.replace("${keySearch}", searchText).replace("${item}", "Space"));
 		info("-- Verify space description --");

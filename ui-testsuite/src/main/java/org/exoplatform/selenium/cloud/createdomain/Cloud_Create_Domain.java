@@ -37,8 +37,8 @@ public class Cloud_Create_Domain extends PlatformBase{
 	
 	@Test
 	public void Create_Domain(){
-		String email = "cloudtest021@cloudtest02.vn";
-		String pass = "12345678";
+		String email = (System.getProperty("email") != null) ? System.getProperty("email"):"cloudtest021@cloudtest02.vn";
+		String pass = (System.getProperty("pass") != null) ? System.getProperty("pass"): "12345678";
 		String linkText = baseUrl+"registration";
 		String linkUrl = "//a[contains(text(),'${linkText}')]";
 		By ELEMENT_MAIL_CONTENT = By.xpath("//iframe[@id='messagecontframe']");

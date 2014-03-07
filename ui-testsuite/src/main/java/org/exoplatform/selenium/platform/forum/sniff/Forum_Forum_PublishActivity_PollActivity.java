@@ -22,7 +22,7 @@ import org.testng.annotations.Test;
  * @date 05 Sep 2013
  */
 public class Forum_Forum_PublishActivity_PollActivity extends ForumBase{
-	
+
 	ManageAccount magAc;
 	ForumManageCategory mngCat;
 	ForumManageForum mngFru;
@@ -30,7 +30,7 @@ public class Forum_Forum_PublishActivity_PollActivity extends ForumBase{
 	ForumManagePost mngPost;
 	HomePageActivity hpgAct;
 	ForumManagePoll mngPoll;
-	
+
 	@BeforeMethod
 	public void setUpBeforeTest(){
 		initSeleniumTest();
@@ -43,7 +43,7 @@ public class Forum_Forum_PublishActivity_PollActivity extends ForumBase{
 		hpgAct = new HomePageActivity(driver);
 		mngPoll = new ForumManagePoll(driver);
 		navTool = new NavigationToolbar(driver);
-		
+
 		magAc.signIn(DATA_USER_JOHN, DATA_PASS);
 		goToForums();
 	}
@@ -53,7 +53,7 @@ public class Forum_Forum_PublishActivity_PollActivity extends ForumBase{
 		driver.manage().deleteAllCookies();
 		driver.quit();
 	}
-	
+
 	/**
 	 * CaseID: 75281
 	 * Edit a poll
@@ -67,7 +67,7 @@ public class Forum_Forum_PublishActivity_PollActivity extends ForumBase{
 		String pollQuestion = "Poll75281";
 		String[] pollOptions = {"Option 01", "Option 02"};
 		String[] newOptions = {"new Option 01", "new Option 02"};
-		
+
 		info("Edit a poll");
 		//create category, forum, topic
 		mngTopic.addCategoryForumTopic(titleCat, titleForum, titleTop,descTop);
@@ -75,21 +75,24 @@ public class Forum_Forum_PublishActivity_PollActivity extends ForumBase{
 
 		//Add a poll
 		mngPoll.addPoll(pollQuestion, pollOptions, "2", true, true);
-		
+
 		//Edit a poll
 		mngPoll.editPoll(pollQuestion, newOptions, "3", false);
-		
+
 		//Check activity
 		navTool.goToHomePage();
-		waitForAndGetElement(By.linkText(titleTop));
+		if(waitForAndGetElement(By.linkText(titleTop),DEFAULT_TIMEOUT,0) == null){
+			driver.navigate().refresh();
+			waitForAndGetElement(By.linkText(titleTop));
+		}
 		hpgAct.checkEditPoll(pollQuestion);
-		
+
 		//Delete data
 		goToForums();
 		click(By.linkText(titleCat));
 		mngCat.deleteCategoryInForum(titleCat, true);	
 	}
-	
+
 	/**
 	 * CaseID: 75283
 	 * Add a new poll
@@ -103,26 +106,29 @@ public class Forum_Forum_PublishActivity_PollActivity extends ForumBase{
 		String pollQuestion = "Poll75283";
 		String[] pollOptions = {"Option 01", "Option 02"};
 		String[] rate = {"0","0"};
-		
+
 		info("Add a new poll");
 		//create category, forum, topic
 		mngTopic.addCategoryForumTopic(titleCat, titleForum, titleTop,descTop);
 		click(mngFru.ELEMENT_TOPIC_LINK.replace("${topic}", titleTop));
-		
+
 		//Add a poll
 		mngPoll.addPoll(pollQuestion, pollOptions, "2", true, true);
-		
+
 		//Check activity
 		navTool.goToHomePage();
-		waitForAndGetElement(By.linkText(titleTop));
+		if(waitForAndGetElement(By.linkText(titleTop),DEFAULT_TIMEOUT,0) == null){
+			driver.navigate().refresh();
+			waitForAndGetElement(By.linkText(titleTop));
+		}
 		hpgAct.checkAddPoll(titleTop,pollQuestion,pollOptions,rate);
-		
+
 		//Delete data
 		goToForums();
 		click(By.linkText(titleCat));
 		mngCat.deleteCategoryInForum(titleCat, true);	
 	}
-	
+
 	/**
 	 * CaseID: 75284
 	 * Delete a poll
@@ -136,36 +142,38 @@ public class Forum_Forum_PublishActivity_PollActivity extends ForumBase{
 		String pollQuestion = "Poll75284";
 		String[] pollOptions = {"Option 01", "Option 02"};
 		String[] rate = {"0","0"};
-		
+
 		info("Delete a poll");
-		
+
 		//create category, forum, topic
 		mngTopic.addCategoryForumTopic(titleCat, titleForum, titleTop,descTop);
 		click(mngFru.ELEMENT_TOPIC_LINK.replace("${topic}", titleTop));
-		
+
 		//Add a poll
 		mngPoll.addPoll(pollQuestion, pollOptions, "2", true, true);
-		
+
 		//Check activity
 		navTool.goToHomePage();
-		driver.navigate().refresh();
-		waitForAndGetElement(By.linkText(titleTop));
+		if(waitForAndGetElement(By.linkText(titleTop),DEFAULT_TIMEOUT,0) == null){
+			driver.navigate().refresh();
+			waitForAndGetElement(By.linkText(titleTop));
+		}
 		hpgAct.checkAddPoll(titleTop,pollQuestion,pollOptions,rate);
-		
+
 		//Delete this poll
 		goToForums();
 		mngPoll.deletePollInTopic(pollQuestion);
-		
+
 		//Check activity after deleting the poll
 		navTool.goToHomePage();
 		assert (waitForAndGetElement(By.linkText(pollQuestion),5000,0) == null);
-		
+
 		//Delete data
 		goToForums();
 		click(By.linkText(titleCat));
 		mngCat.deleteCategoryInForum(titleCat, true);		
 	}
-	
+
 	/**
 	 * CaseID: 75285
 	 * Redirect to the poll by clicking on "Vote"
@@ -178,27 +186,29 @@ public class Forum_Forum_PublishActivity_PollActivity extends ForumBase{
 		String descTop = "line1<br>line2<br>line3<br>line4<br>line5";
 		String pollQuestion = "Poll75285";
 		String[] pollOptions = {"Option 01", "Option 02"};
-		
+
 		info("Redirect to the poll by clicking on Vote");
-		
+
 		//create category, forum, topic
 		mngTopic.addCategoryForumTopic(titleCat, titleForum, titleTop,descTop);
 		click(mngFru.ELEMENT_TOPIC_LINK.replace("${topic}", titleTop));
 		waitForAndGetElement(mngPost.ELEMENT_POST_REPLY_BUTTON);
-		
+
 		//Add a poll
 		mngPoll.addPoll(pollQuestion, pollOptions, "2", true, true);
-		
+
 		//Check activity
 		navTool.goToHomePage();
-		driver.navigate().refresh();
-		waitForAndGetElement(By.linkText(titleTop));
-		
+		if(waitForAndGetElement(By.linkText(titleTop),DEFAULT_TIMEOUT,0) == null){
+			driver.navigate().refresh();
+			waitForAndGetElement(By.linkText(titleTop));
+		}
+
 		hpgAct.openVoteFromActivity(pollQuestion);
-		
+
 		//Delete data
 		click(By.linkText(titleCat));
 		mngCat.deleteCategoryInForum(titleCat, true);	
 	}
-	
+
 }

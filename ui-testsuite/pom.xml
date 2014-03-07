@@ -36,6 +36,12 @@
 			</properties>
 		</profile>
 		<profile>
+			<id>create-tenant</id>
+			<properties>
+				<testSuite>create-tenant.xml</testSuite>
+			</properties>
+		</profile>
+		<profile>
 			<id>cloud-signup</id>
 			<properties>
 				<testSuite>cloud-signup.xml</testSuite>

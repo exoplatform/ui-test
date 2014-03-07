@@ -15,7 +15,7 @@
             <class name="org.exoplatform.selenium.platform.plf.sniff.PLF_Navigation_TopNavigation"/>
             <class name="org.exoplatform.selenium.platform.plf.sniff.PLF_Navigation_SpaceNavigation"/>
             <class name="org.exoplatform.selenium.platform.plf.sniff.PLF_Navigation_LeftNavigation"/>
-            <class name="org.exoplatform.selenium.platform.plf.sniff.PLF_HomePageGadget_SuggestionsGadget"/>
+            <!--<class name="org.exoplatform.selenium.platform.plf.sniff.PLF_HomePageGadget_SuggestionsGadget"/>-->
             <class name="org.exoplatform.selenium.platform.plf.sniff.PLF_HomePageGadget_InvitationGadget"/>
             <class name="org.exoplatform.selenium.platform.plf.sniff.PLF_HomePageGadget_GettingStartedGadget"/>   
             <class name="org.exoplatform.selenium.platform.plf.sniff.PLF_Branding"/>

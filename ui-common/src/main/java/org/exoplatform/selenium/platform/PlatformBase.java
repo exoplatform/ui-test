@@ -29,7 +29,7 @@ public class PlatformBase extends TestBase {
 
 	/****************Common Elements*******************/
 	public final String ELEMENT_CONTAINS_TEXT = "//*[contains(text(),'${text}')]"; 
-	
+
 	/*
 	 * Default Page - http://localhost:8080/portal/default/
 	 * */
@@ -1084,7 +1084,14 @@ public class PlatformBase extends TestBase {
 		driver.switchTo().window(handlesBefore);
 	}
 
-	//Function to add data to frame
+	/**Function to add data to frame
+	 *
+	 * @param framelocator
+	 * @param data
+	 * @param validate: if not passed, then not clear old data of frame, verify that new data is input correctly
+	 * = true, clear old data of frame
+	 * = false, not clear old data, not verify that new data is input correctly
+	 */
 	public void inputDataToFrame(By framelocator, String data, boolean...validate){
 		try {
 			WebElement inputsummary = null;
@@ -1093,25 +1100,28 @@ public class PlatformBase extends TestBase {
 				if (repeat >= DEFAULT_TIMEOUT/WAIT_INTERVAL) {
 					Assert.fail("Fail to input data to frame " + framelocator);
 				}
-				driver.switchTo().frame(waitForAndGetElement(framelocator));
+				WebElement e = waitForAndGetElement(framelocator,DEFAULT_TIMEOUT,1,2);
+				driver.switchTo().frame(e);
 				inputsummary = driver.switchTo().activeElement();
-
 				inputsummary.click();
-
-				inputsummary.clear();
+				// inputsummary.clear();
 
 				if (validate.length >0)
 					if (validate[0]){
+						info("clear old data of frame, verify that new data is input correctly");
 						((JavascriptExecutor) driver).executeScript("document.body.innerHTML='" + data + "'");
-						if (data.equals(inputsummary.getText())) break;
+						info(data);
+						info(inputsummary.getText());
+						if (inputsummary.getText().contains(data)) break;
 					}
 					else{
-						inputsummary.sendKeys(data);
+						info("not clear old data, not verify that new data is input correctly");
+						((JavascriptExecutor) driver).executeScript("document.body.innerHTML='" + data + "' + document.body.innerHTML;");
 						break;
 					}
 				else {
-					inputsummary.sendKeys(data);
-					if (data.equals(inputsummary.getText())) break;
+					((JavascriptExecutor) driver).executeScript("document.body.innerHTML='" + data + "' + document.body.innerHTML;");
+					if (inputsummary.getText().contains(data)) break;
 				}
 
 				switchToParentWindow();
@@ -1120,17 +1130,17 @@ public class PlatformBase extends TestBase {
 			checkCycling(e, DEFAULT_TIMEOUT/WAIT_INTERVAL);
 			Utils.pause(WAIT_INTERVAL);
 			driver.switchTo().defaultContent();
-			inputDataToFrame (framelocator, data);
+			inputDataToFrame (framelocator, data,validate);
 		} catch (ElementNotVisibleException e) {
 			checkCycling(e, DEFAULT_TIMEOUT/WAIT_INTERVAL);
 			Utils.pause(WAIT_INTERVAL);
 			driver.switchTo().defaultContent();
-			inputDataToFrame (framelocator,data);
+			inputDataToFrame (framelocator,data,validate);
 		}catch (WebDriverException e) {
 			checkCycling(e, DEFAULT_TIMEOUT/WAIT_INTERVAL);
 			Utils.pause(WAIT_INTERVAL);
 			driver.switchTo().defaultContent();
-			inputDataToFrame (framelocator,data);
+			inputDataToFrame (framelocator,data,validate);
 		}
 		finally {
 			loopCount = 0;
@@ -1204,9 +1214,9 @@ public class PlatformBase extends TestBase {
 			inputsummary.click();
 			inputsummary.clear();
 			for (int i = 0; i < lines.length; i++){
-//				inputsummary.sendKeys(lines[i]);
-//				inputsummary.sendKeys(Keys.ENTER);
-//				Utils.pause(500);
+				//				inputsummary.sendKeys(lines[i]);
+				//				inputsummary.sendKeys(Keys.ENTER);
+				//				Utils.pause(500);
 				String newStr = "<p>" + lines[i]+"</p>";;
 				if(i==0)
 					newStr = "<p>" + lines[i]+"</p>";
@@ -1386,6 +1396,6 @@ public class PlatformBase extends TestBase {
 //		}
 		driver.navigate().to(baseUrl);
 	}*/
-	
+
 
 }

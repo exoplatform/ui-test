@@ -54,7 +54,7 @@ public class TestBase {
 	//public final By ELEMENT_MENU_PAGE_LINK = By.linkText("Page");
 	//public final String AJAX_LOADING_MASK = "//div[@id='AjaxLoadingMask']";
 
-	public final String DEFAULT_BASEURL = "http://gmail.netstg.exoplatform.org/portal";
+	public final String DEFAULT_BASEURL = "http://cloudtest06.exocloud.testlab1.exoplatform.vn/portal";
 
 
 	//"http://yopmail.netstg.exoplatform.org/portal";
@@ -89,6 +89,11 @@ public class TestBase {
 
 	public void initSeleniumTestWithOutTermAndCondition(Object... opParams){
 		String browser = System.getProperty("browser");
+		FirefoxProfile fp = new FirefoxProfile();	
+		fp.setPreference("browser.cache.disk.enable", false);
+		fp.setPreference("browser.cache.memory.enable", false);
+		fp.setPreference("browser.cache.offline.enable", false);
+		fp.setPreference("network.http.use-cache", false);
 		if("chrome".equals(browser)){
 			driver = new ChromeDriver();
 			chromeFlag = true;
@@ -96,7 +101,7 @@ public class TestBase {
 			driver = new InternetExplorerDriver();
 			ieFlag = true;
 		} else {
-			driver = new FirefoxDriver();
+			driver = new FirefoxDriver(fp);
 		}
 		baseUrl = System.getProperty("baseUrl");
 		if (baseUrl==null) baseUrl = DEFAULT_BASEURL;
@@ -684,6 +689,7 @@ public class TestBase {
 				"application/x-jpg;image/pjpeg;image/pipeg;image/vnd.swiftview-jpeg;image/x-xbitmap;image/png;application/xml;text/xml;text/icalendar;");
 
 		fp.setPreference("browser.helperApps.alwaysAsk.force", false);
+		fp.setPreference("network.http.use-cache", false);
 		driver = new FirefoxDriver(fp);
 		baseUrl = System.getProperty("baseUrl");
 		if (baseUrl==null) baseUrl = DEFAULT_BASEURL;
