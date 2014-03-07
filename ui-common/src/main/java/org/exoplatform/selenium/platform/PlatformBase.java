@@ -889,6 +889,7 @@ public class PlatformBase extends TestBase {
 			}else {
 				click(button.ELEMENT_NEXT_PAGE_BUTTON);
 			}
+			i++;
 			Utils.pause(500);
 		}
 	}

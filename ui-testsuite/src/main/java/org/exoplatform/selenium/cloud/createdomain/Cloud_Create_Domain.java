@@ -37,7 +37,7 @@ public class Cloud_Create_Domain extends PlatformBase{
 	
 	@Test
 	public void Create_Domain(){
-		String email = "fqaexovn@cloudtest07.com";
+		String email = "cloudtest021@cloudtest02.vn";
 		String pass = "12345678";
 		String linkText = baseUrl+"registration";
 		String linkUrl = "//a[contains(text(),'${linkText}')]";

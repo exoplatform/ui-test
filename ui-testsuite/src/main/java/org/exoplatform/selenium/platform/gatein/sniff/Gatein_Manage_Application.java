@@ -143,7 +143,7 @@ public class Gatein_Manage_Application extends PlatformBase {
 		click(app.ELEMENT_GADGET_REFRESH_ICON);
 		
 		info("Add gadget to category");
-		app.addGadgetToCategory("Administration/answer");
+		app.addGadgetToCategory("Administration");
 		
 		info("Delete gadget");
 		app.deleteGadget(newTitle);
