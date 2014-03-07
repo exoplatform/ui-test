@@ -56,10 +56,7 @@ public class AnswerManageAnwser extends AnswerBase {
 
 	//More action menu
 	public final String ELEMENT_MORE_ANSWER_ACTION = "//*[text()='${answer}']/../../../../..//*[contains(text(), 'More Actions')]";
-	public final By ELEMENT_APPROVE_ANSWER_MENU = By.xpath("//a[contains(.,'Approve')]");
-	public final By ELEMENT_DISAPPROVE_ANSWER_MENU = By.xpath("//a[contains(.,'Disapprove')]");
-	public final By ELEMENT_ACTIVATE_ANSWER_MENU = By.xpath("//a[contains(.,'Activate')]");
-	public final By ELEMENT_DEACTIVATE_ANSWER_MENU = By.xpath("//a[contains(.,'Deactivate')]");
+	public final String ELEMENT_ACTION_ANSWER = "//a[contains(.,'${action}')]";
 
 	//vote answer
 	public final String ELEMENT_ANSWER_VOTE_ICON = "//*[text()='${answer}']/../../..//*[contains(@id, 'FAQVoteAnswerUp')]";
@@ -198,7 +195,7 @@ public class AnswerManageAnwser extends AnswerBase {
 	 */
 	public void goToMoreActionsOfAnswer(String answer, String action){
 		click(ELEMENT_MORE_ANSWER_ACTION.replace("${answer}", answer));
-		getElementFromTextByJquery(action).click();
+		click(ELEMENT_ACTION_ANSWER.replace("${action}",action));
 	}
 	/**
 	 * function edit a answer
@@ -247,7 +244,7 @@ public class AnswerManageAnwser extends AnswerBase {
 	public void approveAnswer(String answer, boolean approve){
 		click(ELEMENT_MORE_ANSWER_ACTION.replace("${answer}", answer));
 		if (approve){
-			WebElement app = waitForAndGetElement(ELEMENT_APPROVE_ANSWER_MENU);
+			WebElement app = waitForAndGetElement(ELEMENT_ACTION_ANSWER.replace("${action}", "Approve"));
 			if (app != null){
 				app.click();
 				Utils.pause(1000);
@@ -255,7 +252,7 @@ public class AnswerManageAnwser extends AnswerBase {
 				info("Answer has already approved");
 			}
 		} else {
-			WebElement dis_app = waitForAndGetElement(ELEMENT_DISAPPROVE_ANSWER_MENU);
+			WebElement dis_app = waitForAndGetElement(ELEMENT_ACTION_ANSWER.replace("${action}", "Disapprove"));
 			if (dis_app != null){
 				dis_app.click();
 				Utils.pause(1000);
@@ -273,7 +270,7 @@ public class AnswerManageAnwser extends AnswerBase {
 	public void activeAnswer(String answer, boolean active){
 		click(ELEMENT_MORE_ANSWER_ACTION.replace("${answer}", answer));
 		if (active){
-			WebElement act = waitForAndGetElement(ELEMENT_ACTIVATE_ANSWER_MENU);
+			WebElement act = waitForAndGetElement(ELEMENT_ACTION_ANSWER.replace("${action}", "Activate"));
 			if (act != null){
 				act.click();
 				Utils.pause(1000);
@@ -281,7 +278,7 @@ public class AnswerManageAnwser extends AnswerBase {
 				info("Answer has already activated");
 			}
 		} else {
-			WebElement de_act = waitForAndGetElement(ELEMENT_DEACTIVATE_ANSWER_MENU);
+			WebElement de_act = waitForAndGetElement(ELEMENT_ACTION_ANSWER.replace("${action}", "Deactivate"));
 			if (de_act != null){
 				de_act.click();
 				Utils.pause(1000);

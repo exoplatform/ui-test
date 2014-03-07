@@ -25,8 +25,8 @@ public class AnswerManageCategory extends AnswerBase {
 		alert = new ManageAlert(driver);
 		forumPer = new ForumPermission(driver);
 	}
-	
-	
+
+
 	//Manage Category
 	public final By ELEMENT_CATEGORY_BUTTON = By.className("uiIconAnsManageCategory");
 	public final By ELEMENT_ADD_CATEGORY_LINK = By.linkText("Add Category");
@@ -40,35 +40,35 @@ public class AnswerManageCategory extends AnswerBase {
 	public final By ELEMENT_MODERATOR = By.id("moderator");
 	public final By ELEMENT_EDIT_CATEGORY_MENU = By.xpath("//*[@class='uiIconEditCategory']");
 	public final By ELEMENT_EDIT_CATEGORY_RIGHT_CLICK = By.linkText(" Edit");
-	
-	
+
+
 	//Delete category
 	public final By ELEMENT_DELETE_CATEGORY_ON_MENU = By.linkText("Delete");
 	public final String MSG_DELETE_CATEGORY = "Are you sure you want to delete this category ?";
 	public final By ELEMENT_OK_DELETE_BUTTON = By.xpath("//*[@id='UIForumPopupConfirmation']//button[text()='OK']");
-	
+
 	//Export category
 	public final By ELEMENT_EXPORT_CATEGORY_LINK = By.linkText("Export");
 	public final By ELEMENT_FILE_NAME_EXPORT = By.id("FileName");
-	
+
 	//Import category
 	public final By ELEMENT_IMPORT_CATEGORY_LINK = By.linkText("Import");
 	public final By ELEMENT_IMPORT_CATEGORY_INPUT = By.name("file");
 	public final String ELEMENT_IMPORT_SUCCESS_MESSAGE = "The file has been imported.";
-	
+
 	//context menu
 	public final By ELEMENT_MOVE_CATEGORY_LINK = By.linkText(" Move");
 	public final By ELEMENT_DELETE_CATEGORY_LINK = By.linkText(" Delete");
 	public final By ELEMENT_WATCH_CATEGORY_LINK = By.linkText(" Watch");
 	public final By ELEMENT_UNWATCH_CATEGORY_LINK = By.linkText(" Unwatch");
-	
+
 	//watch/unwatch category
 	public final String MESSAGE_WATCH_CATEGORY = "You are watching this category. You will be notified about all changes.";
 	public final By WATCH_CATEGORY_ICON = By.xpath("//*[@class='uiIconWatch uiIconLightGray']");
-	
+
 	//move page
 	public final String ELEMENT_CATEGORY_IN_MOVE_FORM = "//*[@id='UIMoveCategoryForm']//*[text()='${category}']";
-	
+
 	/*----------------------------------common function----------------------------------*/
 
 	/**
@@ -81,7 +81,7 @@ public class AnswerManageCategory extends AnswerBase {
 			if (waitForAndGetElement(ELEMENT_CATEGORY_LINK.replace("${category}", categoryName),DEFAULT_TIMEOUT,0) != null) break;
 			else Utils.pause(1000);
 		}
-//		getElementFromTextByJquery(categoryName).click();
+		//		getElementFromTextByJquery(categoryName).click();
 		click(ELEMENT_CATEGORY_LINK.replace("${category}", categoryName));
 		Utils.pause(1000);
 	}
@@ -98,7 +98,7 @@ public class AnswerManageCategory extends AnswerBase {
 	 * @param opt: option to check
 	 */
 	public void modifyDataInCategory(String name_edit, String order, String description, boolean... opt){
-		
+
 		if (name_edit != null){
 			type(ELEMENT_CATEGORY_NAME, name_edit ,true);
 		}
@@ -129,7 +129,7 @@ public class AnswerManageCategory extends AnswerBase {
 				uncheck(ELEMENT_MODERATE_ANSWER, 2);
 			}
 		}
-		
+
 	}
 
 	/**
@@ -157,7 +157,7 @@ public class AnswerManageCategory extends AnswerBase {
 		Utils.pause(2000);
 		waitForElementNotPresent(ELEMENT_CATEGORY_NAME,100000);
 	}
-	
+
 	/**
 	 * function edit category in answer
 	 * @param wayEdit
@@ -174,18 +174,24 @@ public class AnswerManageCategory extends AnswerBase {
 	public void editCategoryInAnswer(String categoryName, String name_edit, String order, String description, int permission, String[] userGroup,
 			boolean restricted, boolean moderator, boolean... opt){
 		action = new Actions(driver);
-		
-		if (waitForAndGetElement(ELEMENT_CATEGORY_LINK.replace("${category}", categoryName),20000,0) != null){
-			info("Edit category by right click");
-			rightClickOnElement(ELEMENT_CATEGORY_LINK.replace("${category}", categoryName));
-			click(ELEMENT_EDIT_CATEGORY_RIGHT_CLICK);
-		} else {
+		if(categoryName != null){
+			if (waitForAndGetElement(ELEMENT_CATEGORY_LINK.replace("${category}", categoryName),20000,0) != null){
+				info("Edit category by right click");
+				rightClickOnElement(ELEMENT_CATEGORY_LINK.replace("${category}", categoryName));
+				click(ELEMENT_EDIT_CATEGORY_RIGHT_CLICK);
+			} else {
+				info("Edit category while opening category");
+				click(ELEMENT_CATEGORY_BUTTON);
+				click(ELEMENT_EDIT_CATEGORY_MENU);
+			}
+		}else{
 			info("Edit category while opening category");
 			click(ELEMENT_CATEGORY_BUTTON);
 			click(ELEMENT_EDIT_CATEGORY_MENU);
 		}
+			
 		modifyDataInCategory(name_edit, order, description, opt);
-		
+
 		if (permission != 0){
 			forumPer.configPermission4AnswerCategory(permission, userGroup, restricted, moderator);
 		}
@@ -218,7 +224,7 @@ public class AnswerManageCategory extends AnswerBase {
 		}
 		Utils.pause(1000);
 	}
-	
+
 	/**
 	 * function move category source to category destination
 	 * @param source
@@ -232,7 +238,7 @@ public class AnswerManageCategory extends AnswerBase {
 		doubleClickOnElement(ELEMENT_CATEGORY_IN_MOVE_FORM.replace("${category}", destination));
 		waitForElementNotPresent(ELEMENT_CATEGORY_IN_MOVE_FORM.replace("${category}", destination));
 	}
-	
+
 	/**
 	 * function export category in answer
 	 * @param fileName
@@ -245,18 +251,18 @@ public class AnswerManageCategory extends AnswerBase {
 		button.save();
 		Utils.pause(1000);		
 	}
-	
+
 	/**
 	 * function import category in answer
 	 * @param fileName
 	 */
 	public void importAnswerCategory(String fileName){
 		info("Import category from file " + fileName);
-		
+
 		String[] links = fileName.split("/");
 		click(ELEMENT_CATEGORY_BUTTON);
 		click(ELEMENT_IMPORT_CATEGORY_LINK);
-		
+
 		WebElement element = waitForAndGetElement(ELEMENT_IMPORT_CATEGORY_INPUT, DEFAULT_TIMEOUT, 1, 2);
 		((JavascriptExecutor)driver).executeScript("arguments[0].style.display = 'block';", element);
 		element.sendKeys(Utils.getAbsoluteFilePath("TestData/" + fileName));
@@ -267,7 +273,7 @@ public class AnswerManageCategory extends AnswerBase {
 		click(ELEMENT_OK_INFOR_POPUP);
 		Utils.pause(2000);
 	}
-	
+
 	/**
 	 * function watch/unwatch a category in answer
 	 * @param  watch
@@ -294,7 +300,7 @@ public class AnswerManageCategory extends AnswerBase {
 			}
 		}
 	}
-	
+
 	/**
 	 * function drag drop category in answer
 	 * @param source
@@ -304,10 +310,10 @@ public class AnswerManageCategory extends AnswerBase {
 		action = new Actions(driver);
 		WebElement eSource = waitForAndGetElement(ELEMENT_CATEGORY_LINK.replace("${category}", source));
 		WebElement eTarget = waitForAndGetElement(ELEMENT_CATEGORY_LINK.replace("${category}", target));
-		
+
 		info("Drag category " + source + " to category " + target);
 		action.dragAndDrop(eSource, eTarget).build().perform();
 		Utils.pause(2000);
 	}
-	
+
 }
