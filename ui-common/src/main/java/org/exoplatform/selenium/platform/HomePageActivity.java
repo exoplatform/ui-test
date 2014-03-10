@@ -99,7 +99,8 @@ public class HomePageActivity extends PlatformBase{
 	public final String ELEMENT_CONTENT_COMMENT_USER_JOIN_SPACE="//div[@class='author']/a[contains(text(), '${spacename}')]//ancestor::div[contains(@id,'ContextBox')]/div[contains(@id,'CommentBlockBound')]//div[@class='author']/a[text()='${username}']/../../p[contains(text(),'Has joined the space')]";
 	public final String ELEMENT_CONTENT_COMMENT_USER_CHANGE_AVATAR="//div[@class='author']/a[contains(text(), '${username}')]//ancestor::div[contains(@id,'ContextBox')]/div[contains(@id,'CommentBlockBound')]//div[@class='author']/a[text()='${username}']/../../p[contains(text(),'Avatar has been updated.')]";
 	public final String ELEMENT_CONTENT_COMMENT_USER_EDIT_BASIC_INFO="//div[@class='author']/a[contains(text(), '${username}')]//ancestor::div[contains(@id,'ContextBox')]/div[contains(@id,'CommentBlockBound')]//div[@class='author']/a[text()='${username}']/../../p[contains(text(),'Basic information has been updated.')]";
-
+	public final By ELEMENT_CONTENT_WIKI_VIEW_CHANGE = By.xpath("//*[@class='uiIconViewChange uiIconLightGray']");
+	
 	//File activity
 	public final String ELEMENT_FILE_SIZE = "//a[@title='@{fileName}']/..//*[@class='versionFile' and contains(text(), '${size}')]";
 	public final String ELEMENT_FILE_SIZE_41 = "//a[@data-original-title='@{fileName}']/..//*[@class='versionFile' and contains(text(), '${size}')]";
@@ -488,12 +489,13 @@ public class HomePageActivity extends PlatformBase{
 	 * @param version
 	 */
 	public void checkActivityInfoOfWiki(String title, String content, String version){
-		waitForAndGetElement(ELEMENT_ACTIVITY_WIKI_TITLE.replace("${title}", title));
+		waitForAndGetElement(By.xpath(ELEMENT_ACTIVITY_WIKI_TITLE.replace("${title}", title)));
 		if (content != ""){
 			info("Check content");
 			String[] sum = getText(ELEMENT_ACTIVITY_WIKI_CONTENT.replace("${title}", title)).split("\n");
 			String[] cont = content.split("/");
 			if (cont.length > 4){
+				info("Check multiline content");
 				assert sum[4].equalsIgnoreCase("...");
 				for (int i = 0; i < 4; i++){
 					assert sum[i].equalsIgnoreCase(cont[i]);
@@ -506,7 +508,7 @@ public class HomePageActivity extends PlatformBase{
 		}
 		if (version != ""){
 			info("Check version");
-			waitForAndGetElement(ELEMENT_ACTIVITY_WIKI_VERSION.replace("${title}", title).replace("${version}", version));
+			waitForAndGetElement(By.xpath(ELEMENT_ACTIVITY_WIKI_VERSION.replace("${title}", title).replace("${version}", version)));
 		}
 	}
 

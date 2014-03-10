@@ -37,15 +37,18 @@ public class WikiBase extends PlatformBase{
 	//Company/Left panel > Wiki Link
 	public final By ELEMENT_WIKI_LINK=By.xpath("//ul[@class='uiCompanyNavigations']//li/a[text()='Wiki']");
 	public final By ELEMENT_WIKI_LINK_PLF41=By.xpath("//*[@data-original-title='Wiki']");
-
+	
 	//Add page menu
 	public final By ELEMENT_ADD_PAGE_LINK = By.xpath("//*[@id='UIWikiPageControlArea_PageToolBar']//div[contains(text(),'Add Page')]");
-	public final By ELEMENT_BLANK_PAGE_LINK = By.linkText("Blank Page");
+//	public final By ELEMENT_BLANK_PAGE_LINK = By.linkText("Blank Page");
+	public final By ELEMENT_BLANK_PAGE_LINK = By.xpath("//*[@class='uiIconAddPage']");
 	public final By ELEMENT_FROM_TEMPLATE_LINK = By.linkText("From Template...");
 
 	//Edit menu
 	public final By ELEMENT_EDIT_PAGE_LINK= By.xpath("//*[@id='UIWikiPageControlArea_PageToolBar']//li/div[contains(text(), 'Edit')]");;
-
+	public final By ELEMENT_EDIT_COMPARE_CHANGE = By.xpath("//*[contains(text(), 'Compare Revisions')]");
+	public final String ELEMENT_EDIT_COMPARE_VERSION = "//*[@class = 'changeVersionInfo' and contains(text(), '${version}')]";
+	
 	//More menu
 	public final By ELEMENT_MORE_LINK = By.xpath("//*[@id='UIWikiPageControlArea_PageToolBar']//div[contains(text(), 'More')]");
 	public final By ELEMENT_DELETE_LINK = By.linkText("Delete Page");
@@ -254,7 +257,10 @@ public class WikiBase extends PlatformBase{
 	/*-----------------------Watch/UnWatch page-------------------------------*/
 	public final String MESSAGE_WATCH_PAGE = "You have started watching this page now.";
 	public final String MESSAGE_UNWATCH_PAGE = "You have stopped watching this page now.";
-
+	
+	//Wiki location
+	public final By ELEMENT_WIKI_LOCATION_DROPDOWN = By.xpath("//div[@class='btn dropdown-toggle']");
+	public final By ELEMENT_WIKI_TITLE_PREVIEW = By.xpath("//div[@class='uiWikiPageTitle']");
 
 	//================== PLF4/Common function for Wiki ==================//
 	//////
@@ -406,18 +412,16 @@ public class WikiBase extends PlatformBase{
 	 */
 	public void movePage(String pageName1, String pageName2, Object...opts){
 		String space = (String) (opts.length > 0 ? opts[0] : "");
-		Boolean verify = (Boolean) (opts.length > 1 ? opts[1] : true);
-
+		Boolean verify = (Boolean)(opts.length > 1 ? opts[1] : true);
 		button = new Button(driver);
 		//By ELEMENT_VERIFY_CURRENT_LOCATION = By.xpath("//label[text()='Current Location :']/../..//*[contains(text(), '"+ pageName1 +"')]");
 		//By ELEMENT_VERIFY_NEW_LOCATION = By.xpath("//label[text()='New Location :']/../..//*[contains(text(), '"+ pageName2 +"')]");
 		By ELEMENT_VERIFY_CURRENT_LOCATION = By.xpath("//label[contains(text(), 'Current Location')]/../..//*[contains(text(), '"+ pageName1 +"')]");
 		By ELEMENT_VERIFY_NEW_LOCATION = By.xpath("//label[contains(text(), 'New Location')]/../..//*[contains(text(), '"+ pageName2 +"')]");
-		By ELEMENT_VERIFY_AFTER_MOVE_PAGE = By.xpath("//*[contains(text(), '"+pageName2+"')]/ancestor::li[@class='node']//ul//*[contains(text(), '"+pageName1+"')]");
 		//("//a[@data-original-title='"+ pageName2 +"']/ancestor::div[@id = 'UITreeExplorer']//*[@data-original-title = '"+pageName1+"']");
 		By ELEMENT_NEW_LOCATION = By.xpath("//*[contains(@class, 'popupContent')]//*[contains(@onclick, 'event')]//a[contains(text(), '"+ pageName2 +"')]");
 		//("//*[@id='iconTreeExplorer' and contains(@onclick, 'event')]//a[@data-original-title = '"+ pageName2 +"']");
-
+		By ELEMENT_VERIFY_AFTER_MOVE_PAGE = By.xpath("//*[contains(text(), '"+pageName2+"')]/ancestor::li[@class='node']//ul//*[contains(text(), '"+pageName1+"')]");
 		info("Move a page");
 		goToMovePage();
 		waitForAndGetElement(ELEMENT_MOVE_PAGE_POPUP);

@@ -27,9 +27,9 @@ public class BasicAction extends Permission{
 	Button button = new Button(driver);
 	ManageAlert magAlert = new ManageAlert(driver);
 
-	public String ELEMENT_RESTRICTED_WIKI = "//*[@id='UIWikiPageInfoArea']//a[@data-original-title='This page is restricted. Click to share.']";
-	public String ELEMENT_MAKE_PUBLIC_BUTTON = "//*[@id='UIWikiPermalinkForm']//button[contains(text(),'Make Public')]";
-	public String ELEMENT_PERMISSION_WINDOW_CLOSE_BUTTON = "//*[@id='UIWikiPopupWindowL1']//a[@title='Close Window']";
+	public final String ELEMENT_RESTRICTED_WIKI = "//*[@id='UIWikiPageInfoArea']//a[@data-original-title='This page is restricted. Click to share.']";
+	public final String ELEMENT_MAKE_PUBLIC_BUTTON = "//*[@id='UIWikiPermalinkForm']//button[contains(text(),'Make Public')]";
+	public final String ELEMENT_PERMISSION_WINDOW_CLOSE_BUTTON = "//*[@id='UIWikiPopupWindowL1']//a[@title='Close Window']";
 
 	// Wiki page
 	/*===================== Add Page ====================*/	
@@ -195,8 +195,10 @@ public class BasicAction extends Permission{
 	 * 					mode =1: edit a wiki page in richtext
 	 * 
 	 */
-	public void editWikiPage(String title, String content, int mode)
+	public void editWikiPage(String title, String content, int mode, Object... opParams)
 	{
+		Boolean isEditMultiLine = (Boolean)(opParams.length>0 ? opParams[0]:false);
+		
 		info("--Edit a wiki page--");
 		Utils.pause(1000);
 		mouseOverAndClick(ELEMENT_EDIT_PAGE_LINK);
@@ -204,8 +206,12 @@ public class BasicAction extends Permission{
 		driver.navigate().refresh();
 		Utils.pause(2000);
 		if(mode == 0){
-			addWikiPageSourceEditor(title, content);
-		}else{
+			if(isEditMultiLine)
+				editWikiPageWithContentMultiLine(title, content);
+			else
+				addWikiPageSourceEditor(title, content);
+		}		
+		else{
 			addWikiPageRichText(title, content);
 		}
 		//In PLF4, there is no more Minor Edit Option
@@ -672,5 +678,19 @@ public class BasicAction extends Permission{
 		Utils.pause(1000);
 		click(ELEMENT_SAVE_BUTTON_ADD_PAGE);
 		waitForElementNotPresent(ELEMENT_SAVE_BUTTON_ADD_PAGE);
+	}
+
+	public void editWikiPageWithContentMultiLine(String title, String content){
+		if(title != null)
+			type(ELEMENT_TITLE_WIKI_INPUT, title, true);
+		if(content != null){
+			waitForAndGetElement(ELEMENT_CONTENT_WIKI_INPUT).clear();
+			String[] line = content.split("/");
+			for (int i = 0; i < line.length; i ++){
+				type(ELEMENT_CONTENT_WIKI_INPUT, line[i] , false);
+				type(ELEMENT_CONTENT_WIKI_INPUT, Keys.ENTER.toString(), false);
+			}
+		}
+		Utils.pause(1000);
 	}
 }
