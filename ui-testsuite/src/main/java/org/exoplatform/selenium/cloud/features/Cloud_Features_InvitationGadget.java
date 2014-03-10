@@ -330,7 +330,7 @@ public class Cloud_Features_InvitationGadget extends CloudBase{
 		info("Test 11 User should receive an invitation Email from user of other domain 1");
 		/*Declare variable*/
 		String successful_message = "Invitation sent";
-		String email = "fqa-exo@yopmail.com";
+		String email = "fqa-exo-vn@hushmail.com";
 		String invited_email = "exoservice@gmail.com";
 		String pass = "exoadmin";
 		String userName = "";
@@ -403,7 +403,7 @@ public class Cloud_Features_InvitationGadget extends CloudBase{
 		info("Test 12 User should receive an invitation Email from user of other domain 2");
 		/*Declare variable*/
 		String successful_message = "Invitation sent";
-		String email = "fqa-exo@yopmail.com";
+		String email = "fqa-exo-vn@hushmail.com";
 		String invited_email = "exoservice@gmail.com";
 		String pass = "exoadmin";
 		String userName = "";

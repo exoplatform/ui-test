@@ -69,7 +69,7 @@ public class Cloud_Features_FirstLoginWizard extends CloudBase{
 		 *	- The user is connected to the Intranet Homepage
 		 */
 		initCloudUrl(0);
-		driver.get(cloudInternalUrl);
+		driver.get(cloudAcceptanceUrl);
 		enterEmail2Signup("fqaexovn"+"@"+baseUrl.substring(baseUrl.indexOf("//")+2,baseUrl.indexOf("."))+".com");
 		waitForAndGetElement(ELEMENT_REFRESH);
 

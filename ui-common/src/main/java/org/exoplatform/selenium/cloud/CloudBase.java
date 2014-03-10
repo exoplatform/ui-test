@@ -16,7 +16,7 @@ import org.openqa.selenium.WebElement;
 public class CloudBase extends PlatformBase{
 
 	/*-------------- base Url for eXo Cloud test -------------------*/
-	public final String cloudAcceptanceUrl = "http://wks-acc.exoplatform.org/";
+	public final String cloudAcceptanceUrl = "http://netstg.exoplatform.org/";
 	public final String tenantAcceptanceUrl = "http://yopmail.wks-acc.exoplatform.org";
 	public final String cloudInternalUrl = "http://exocloud.testlab1.exoplatform.vn/";
 	public final String cloudPreProdUrl = "";

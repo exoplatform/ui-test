@@ -54,7 +54,7 @@ public class TestBase {
 	//public final By ELEMENT_MENU_PAGE_LINK = By.linkText("Page");
 	//public final String AJAX_LOADING_MASK = "//div[@id='AjaxLoadingMask']";
 
-	public final String DEFAULT_BASEURL = "http://cloudtest02.exocloud.testlab1.exoplatform.vn/portal";
+	public final String DEFAULT_BASEURL = "http://gmail.netstg.exoplatform.org/portal";
 
 
 	//"http://yopmail.netstg.exoplatform.org/portal";
