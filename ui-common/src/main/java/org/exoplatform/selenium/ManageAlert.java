@@ -27,8 +27,8 @@ public class ManageAlert extends TestBase{
 	public final By ELEMENT_INFO = By.xpath("//*[contains(@class, 'infoIcon')]");
 	public final By ELEMENT_CONFIRM = By.xpath("//*[contains(@class, 'confirmationIcon')]");
 
-			//Accept an alert
-			public void acceptAlert() {
+	//Accept an alert
+	public void acceptAlert() {
 		try {
 			Alert alert = driver.switchTo().alert();
 			alert.accept();

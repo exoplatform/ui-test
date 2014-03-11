@@ -138,19 +138,38 @@ public class BasicAction extends Permission{
 	 * 
 	 */
 	public void addWikiPageRichText(String title, String content){
-		if(title != null)
-			type(ELEMENT_TITLE_WIKI_INPUT, title, true);
-		if(waitForAndGetElement(ELEMENT_RICHTEXT_BUTTON,5000,0)!=null){
-			click(ELEMENT_RICHTEXT_BUTTON);
-			waitForAndGetElement(ELEMENT_SOURCE_EDITOR_BUTTON);
-		}
-		if (content != null){
-			inputDataToFrame(ELEMENT_CONTENT_WIKI_FRAME, content,true);
+		
+		if(this.plfVersion=="4.0"){
+			if(title != null)
+				type(ELEMENT_TITLE_WIKI_INPUT, title, true);
+			if(waitForAndGetElement(ELEMENT_RICHTEXT_BUTTON,5000,0)!=null){
+				click(ELEMENT_RICHTEXT_BUTTON);
+				waitForAndGetElement(ELEMENT_SOURCE_EDITOR_BUTTON);
+			}
+			if (content != null){
+				inputDataToFrame(ELEMENT_CONTENT_WIKI_FRAME, content,true);
+				Utils.pause(1000);
+				driver.switchTo().defaultContent();
+			}
+			//waitForAndGetElement(ELEMENT_SAVE_BUTTON_ADD_PAGE);
 			Utils.pause(1000);
-			driver.switchTo().defaultContent();
 		}
-		//waitForAndGetElement(ELEMENT_SAVE_BUTTON_ADD_PAGE);
-		Utils.pause(1000);
+		else if(this.plfVersion == "4.1"){
+			if(waitForAndGetElement(ELEMENT_RICHTEXT_BUTTON_PL4_1,5000,0)!=null){
+				click(ELEMENT_RICHTEXT_BUTTON);
+				waitForAndGetElement(ELEMENT_SOURCE_EDITOR_BUTTON);
+			}
+			if(title != null)
+				type(ELEMENT_TITLE_WIKI_INPUT, title, true);
+			if (content != null){
+				inputDataToFrame(ELEMENT_CONTENT_WIKI_FRAME, content,true);
+				Utils.pause(1000);
+				driver.switchTo().defaultContent();
+			}
+			//waitForAndGetElement(ELEMENT_SAVE_BUTTON_ADD_PAGE);
+			Utils.pause(1000);
+		}		
+		
 	}
 
 	/**

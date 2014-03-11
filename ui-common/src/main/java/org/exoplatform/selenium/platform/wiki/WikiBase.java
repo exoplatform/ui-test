@@ -90,6 +90,7 @@ public class WikiBase extends PlatformBase{
 	public final By ELEMENT_TITLE_WIKI_INPUT = By.id("titleInput");
 	public final By ELEMENT_CONTENT_WIKI_INPUT = By.id("Markup");
 	public final By ELEMENT_RICHTEXT_BUTTON = By.xpath("//*[@id='UIEditorTabs']/button[1]");
+	public final By ELEMENT_RICHTEXT_BUTTON_PL4_1 = By.xpath("//button[contains(text(),'Rich Text')]");
 	public final By ELEMENT_PREVIEW_BUTTON = By.xpath("//*[@id='UIEditorTabs']/button[2]");
 	public final By ELEMENT_PREVIEW_SCREEN = By.xpath("//div[@class='popupTitle' and text()='Preview']");
 	public final By ELEMENT_PUBLISH_ACTIVITY_CHECKBOX = By.id("PublishActivityUpper");
@@ -108,6 +109,7 @@ public class WikiBase extends PlatformBase{
 
 	//Richtext mode
 	public final By ELEMENT_SOURCE_EDITOR_BUTTON= By.xpath("//*[contains(text(),'Source Editor')]");
+	public final By ELEMENT_SOURCE_EDITOR_BUTTON_PLF4_1 = By.xpath("//button[contains(text(),'Source Editor')]");
 	public final By ELEMENT_CONTENT_WIKI_FRAME = By.xpath("//div[@class='xRichTextEditor']/iframe");
 
 	//Upload file area

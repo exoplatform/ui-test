@@ -23,13 +23,15 @@ public class Button extends TestBase{
 	//By.linkText("Save & Close");
 
 	public final By ELEMENT_OK_BUTTON = By.xpath("//*[text()='OK']");
+	public final By ELEMENT_NO_BUTTON = By.xpath("//*[text()='No']");
+	public final By ELEMENT_YES_BUTTON = By.xpath("//*[text()='Yes']");
 	public final By ELEMENT_APPLY_FRENCH_BUTTON = By.linkText("Appliquer");
 	public final By ELEMENT_APPLY_GERMAN_BUTTON = By.linkText("Anwenden");
 	public final By ELEMENT_APPLY_BUTTON = By.xpath("//*[text()='Apply']");
 			//By.linkText("Apply");
 	public final By ELEMENT_SAVE_BUTTON = By.xpath("//*[text()='Save']"); 
 	public final By ELEMENT_SAVE_BUTTON_POPUP_WINDOWS = By.xpath("//*[contains(@class, 'popup')]//*[text()='Save']");
-	public final By ELEMENT_CANCEL_BUTTON = By.xpath("//*[text()='Cancel']");
+	public final By ELEMENT_CANCEL_BUTTON = By.xpath("//*[contains(text(),'Cancel')]");
 	public final By ELEMENT_CANCEL_BUTTON_AUX = By.xpath("//*[@data-original-title='Cancel']");
 	public final By ELEMENT_CLOSE_BUTTON = By.xpath("//*[text()='Close']");
 	public final By ELEMENT_ADD_BUTTON = By.xpath("//*[text()='Add']");
@@ -76,7 +78,16 @@ public class Button extends TestBase{
 		click(ELEMENT_OK_BUTTON);
 		Utils.pause(500);
 	}
-
+	public void no() {
+		waitForAndGetElement(ELEMENT_NO_BUTTON);
+		click(ELEMENT_NO_BUTTON);
+		Utils.pause(500);
+	}
+	public void yes() {
+		waitForAndGetElement(ELEMENT_YES_BUTTON);
+		click(ELEMENT_YES_BUTTON);
+		Utils.pause(500);
+	}
 	public void close(){
 		waitForAndGetElement(ELEMENT_CLOSE_BUTTON);
 		click(ELEMENT_CLOSE_BUTTON);

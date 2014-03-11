@@ -6,6 +6,7 @@ import org.exoplatform.selenium.Button;
 import org.exoplatform.selenium.Utils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.ElementNotVisibleException;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriverException;
@@ -18,11 +19,11 @@ import org.openqa.selenium.WebElement;
  */
 public class RichTextMode extends Template {
 	Button but = new Button(driver);
-	
+
 	//Link menu
 	public By ELEMENT_LINK = By.xpath("//*[text()='Link']");
 	public By ELEMENT_WIKI_PAGE_LINK = By.xpath("//*[text()='Wiki Page...']");
-	
+
 	//Add wiki page link popup
 	public By ELEMENT_SEARCH_TAB = By.xpath("//div[text()='Search']");
 	public By ELEMENT_SEARCH_TEXTBOX = By.xpath("//input[@title='Type a keyword to search for a wiki page']");
@@ -31,27 +32,46 @@ public class RichTextMode extends Template {
 	public String ELEMENT_PAGE_SELECTED_PLF41 = "//*[@class='xPagesSelector xPagesSearch' and @aria-hidden='false']//*[@class='xPagePreview' and @title='${page}']";
 	public By ELEMENT_LABEL_LINK_TEXTBOX = By.xpath("//input[@title='Type the label of the created link.']");
 	public By ELEMENT_TOOLTIP_LINK_TEXTBOX = By.xpath("//input[@title='Type the tooltip of the created link, which appears when mouse is over the link.']");
-	
+	public By ELEMENT_REMOVE_LINK = By.xpath("//div[text()='Remove Link']");
+
 	//Table
 	public By ELEMENT_TABLE_LINK = By.xpath("//*[text()='Table']");
 	public By ELEMENT_INSERT_TABLE_LINK = By.xpath("//*[text()='Insert Table...']");
 	public By ELEMENT_ROW_TEXTBOX = By.xpath("//*[@title='Row count']");
 	public By ELEMENT_COLUMN_TEXTBOX = By.xpath("//*[@title='Column count']");
-	
+
 	//Macro
 	public By ELEMENT_MACRO_LINK = By.xpath("//*[text()='Macro']");
 	public By ELEMENT_INSERT_MACRO_LINK = By.xpath("//*[text()='Insert Macro...']");
 	public By ELEMENT_MACRO_CATEGORY_SELECT = By.xpath("//select[@title='Select a macro category']");
 	public String ELEMENT_MACRO_LABEL = "//*[text()='${macro}']";
-	
+
 	//Macro: Tip message
 	public By ELEMENT_CONTENT_MESSAGE_TEXTAREA = By.id("pd-content-input");
 	public String ELEMENT_TIP_MESSAGE_MACRO = "//*[@class='box tipmessage' and text()='${message}']";
-	
+
 	//Macro: Color
 	public By ELEMENT_COLOR_TEXTBOX = By.id("pd-name-input");
 	public By ELEMENT_COLOR_MESSAGE = By.id("pd-content-input");
+
+	//Image
+	public By ELEMENT_IMAGE_LINK = By.xpath("//*[text()='Image']");
+	public By ELEMENT_IMAGE_LINK_ATTACH = By.xpath("//*[text()='Attached Image...']");
+	public By ELEMENT_IMAGE_LINK_REMOVE = By.xpath("//*[text()='Remove Image']");
+	public By ELEMENT_IMAGE_LINK_INSERT = By.xpath("//*[text()='Insert Image']");
+
+	//WebPage
+	public By ELEMENT_WEBPAGE_LINK = By.xpath("//*[text()='Web Page...']");
+	public By ELEMENT_WEBPAGE_TEXTBOX = By.xpath("//input[@title='Web page address']");
+
+	//WebEmail
+	public By ELEMENT_EMAIL_LINK = By.xpath("//*[text()='Email Address...']");
+	public By ELEMENT_EMAIL_TEXTBOX = By.xpath("//input[@title='Email address']");
 	
+	//Attach file 
+	public By ELEMENT_ATTACH_FILE_LINK = By.xpath("//*[text()='Attached File...']");
+	public By ELEMENT_ATTACH_FILE_PATH = By.xpath("//input[@name='filepath']");
+
 	/**
 	 * Add link to a Wiki page
 	 * 
@@ -85,7 +105,7 @@ public class RichTextMode extends Template {
 		click(but.ELEMENT_CREATE_LINK_BUTTON);
 		waitForElementNotPresent(but.ELEMENT_CREATE_LINK_BUTTON);
 	}
-	
+
 	/**
 	 * Select a macro in a Wiki page editor
 	 * 
@@ -107,7 +127,7 @@ public class RichTextMode extends Template {
 		click(but.ELEMENT_SELECT_BUTTON);
 		Utils.pause(3000);
 	}
-	
+
 	/**
 	 * Add macro: "Tip Message"
 	 * 
@@ -120,7 +140,7 @@ public class RichTextMode extends Template {
 		click(but.ELEMENT_CREATE_MACRO_BUTTON);
 		waitForAndGetElement(ELEMENT_TIP_MESSAGE_MACRO.replace("${message}", message));
 	}
-	
+
 	/**
 	 * Add macro: "color" into a Wiki page
 	 * 
@@ -135,7 +155,7 @@ public class RichTextMode extends Template {
 		type(ELEMENT_COLOR_MESSAGE, message, true);
 		click(but.ELEMENT_CREATE_MACRO_BUTTON);
 	}
-	
+
 	/**
 	 * Add table to a Wiki page
 	 * 
@@ -152,7 +172,7 @@ public class RichTextMode extends Template {
 		click(but.ELEMENT_INSERT_TABLE);
 		waitForAndGetElement("//table");
 	}
-	
+
 	/**
 	 * Click End then Enter in content frame in Rich text mode of Wiki page editor
 	 */
@@ -186,5 +206,99 @@ public class RichTextMode extends Template {
 		finally {
 			loopCount = 0;
 		}
+	}
+
+	/**
+	 * @author ChinhDT
+	 * Add webpage link to a Wiki page
+	 * 
+	 * @param webpage
+	 * 			web page that will be the target link
+	 * @param label
+	 * 			label of link that will be added into Wiki page
+	 * @param tooltip
+	 * 			
+	 */
+	public void insertwebpageLink2WikiPage(String webpage, String label, String tooltip){
+		mouseOverAndClick(ELEMENT_LINK);
+		mouseOverAndClick(ELEMENT_WEBPAGE_LINK);
+		Utils.pause(500);
+		info("Create link to the webpage " + webpage);
+		type(ELEMENT_WEBPAGE_TEXTBOX, webpage, true);
+		type(ELEMENT_LABEL_LINK_TEXTBOX, label, true);
+		type(ELEMENT_TOOLTIP_LINK_TEXTBOX, tooltip, true);
+		Utils.pause(500);
+		click(but.ELEMENT_CREATE_LINK_BUTTON);
+		waitForElementNotPresent(but.ELEMENT_CREATE_LINK_BUTTON);
+	}
+
+	/**
+	 * @author ChinhDT
+	 * Add email link to a Wiki page
+	 * 
+	 * @param email
+	 * 			email address that will be the target link
+	 * @param label
+	 * 			label of link that will be added into Wiki page
+	 * @param tooltip
+	 * 			
+	 */
+	public void insertEmailLink2WikiPage(String email, String label, String tooltip){
+		mouseOverAndClick(ELEMENT_LINK);
+		mouseOverAndClick(ELEMENT_EMAIL_LINK);
+		Utils.pause(500);
+		info("Create link to the email " + email);
+		type(ELEMENT_EMAIL_TEXTBOX, email, true);
+		type(ELEMENT_LABEL_LINK_TEXTBOX, label, true);
+		type(ELEMENT_TOOLTIP_LINK_TEXTBOX, tooltip, true);
+		Utils.pause(500);
+		click(but.ELEMENT_CREATE_LINK_BUTTON);
+		waitForElementNotPresent(but.ELEMENT_CREATE_LINK_BUTTON);
+	}
+	
+	/**
+	 * attach a file to wiki page
+	 * @param file
+	 */
+	public void insertAttachFile(String file){
+		String path = Utils.getAbsoluteFilePath("TestData/"+file);
+		mouseOverAndClick(ELEMENT_LINK);
+		mouseOverAndClick(ELEMENT_ATTACH_FILE_LINK);
+		Utils.pause(500);
+		click(but.ELEMENT_SELECT_BUTTON);
+		waitForElementNotPresent(but.ELEMENT_SELECT_BUTTON);
+		click(ELEMENT_ATTACH_FILE_PATH);
+		WebElement upload = waitForAndGetElement(ELEMENT_ATTACH_FILE_PATH, 5000, 1, 2);
+		((JavascriptExecutor)driver).executeScript("arguments[0].style.visibility = 'visible'; arguments[0].style.height = '1px'; " +
+				"arguments[0].style.width = '1px'; arguments[0].style.opacity = 1", upload);
+		((JavascriptExecutor)driver).executeScript("arguments[0].style.display = 'block';", upload);
+		upload.sendKeys(path);
+		
+		Utils.pause(500);
+		click(but.ELEMENT_CREATE_LINK_BUTTON);
+		waitForElementNotPresent(but.ELEMENT_CREATE_LINK_BUTTON);			
+	}
+	
+	/**
+	 * insert an image to wiki page
+	 * @param file
+	 */
+	public void insertImageFile(String file){
+		String path = Utils.getAbsoluteFilePath("TestData/"+file);
+		mouseOverAndClick(ELEMENT_IMAGE_LINK);
+		mouseOverAndClick(ELEMENT_IMAGE_LINK_ATTACH);
+		Utils.pause(500);
+		click(but.ELEMENT_SELECT_BUTTON);
+		waitForElementNotPresent(but.ELEMENT_SELECT_BUTTON);
+		click(ELEMENT_ATTACH_FILE_PATH);
+		WebElement upload = waitForAndGetElement(ELEMENT_ATTACH_FILE_PATH, 5000, 1, 2);
+		((JavascriptExecutor)driver).executeScript("arguments[0].style.visibility = 'visible'; arguments[0].style.height = '1px'; " +
+				"arguments[0].style.width = '1px'; arguments[0].style.opacity = 1", upload);
+		((JavascriptExecutor)driver).executeScript("arguments[0].style.display = 'block';", upload);
+		upload.sendKeys(path);
+		
+		Utils.pause(500);
+		click(ELEMENT_IMAGE_LINK_INSERT);
+		waitForElementNotPresent(ELEMENT_IMAGE_LINK_INSERT);			
 	}
 }

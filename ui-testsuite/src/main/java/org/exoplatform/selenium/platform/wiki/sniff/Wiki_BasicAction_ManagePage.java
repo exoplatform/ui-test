@@ -21,6 +21,7 @@ import org.testng.annotations.Test;
  */
 
 public class Wiki_BasicAction_ManagePage extends ManageDraft{
+
 	ManageAccount magAc;
 	Button but;
 	NavigationToolbar naTool;
@@ -77,7 +78,6 @@ public class Wiki_BasicAction_ManagePage extends ManageDraft{
 
 		addBlankWikiPage(pageLink, "Create page with RTE", 0);
 		goToWikiHome();
-
 		info("Add new wiki page at Rich Text mode");
 		goToAddBlankPage();
 		addWikiPageRichText(title, content);
