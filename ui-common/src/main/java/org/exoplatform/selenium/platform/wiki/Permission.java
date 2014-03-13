@@ -15,12 +15,12 @@ import org.openqa.selenium.By;
  *
  */
 public class Permission extends WikiBase{
-	
+
 	//ManageAccount magAc = new ManageAccount(driver);
 	Dialog dialog;
 	PlatformPermission per;
 	//Button button = new Button(driver);
-	
+
 	public final String ELEMENT_PERMISSION = "//*[@id='UIPermissionGrid']//*[contains(text(),'${user}')]";
 
 	/////
@@ -69,8 +69,10 @@ public class Permission extends WikiBase{
 			}		
 			Utils.pause(1000);
 			click(button.ELEMENT_ADD_BUTTON);
+			Utils.pause(1000);
 			button.save();
 		}
+		waitForElementNotPresent(button.ELEMENT_ADD_BUTTON);
 	}
 
 	/** 
@@ -94,34 +96,25 @@ public class Permission extends WikiBase{
 		By VIEW_PAGE = By.xpath(ELEMENT_VIEW_PAGE_PERMISSIONS.replace("${user}", user));
 		By DELETE_PERMISSION = By.xpath(ELEMENT_DELETE_PERMISSIONS.replace("${user}", user));
 		boolean deletePermission = (Boolean) (option.length > 0 ? option[0] : false);
-		int notDisplay = (Integer) (option.length > 1 ? option[1] : 0);
-		
+
 		if (waitForAndGetElement(EDIT_PAGE, 5000, 0) == null){
 			driver.navigate().refresh();
 			Utils.pause(200);
 			goToPagePermission();
 		}
-		
+
 		info("--Add page permissions--");
 		if (edit){
-			if(!waitForAndGetElement(EDIT_PAGE, 5000, 1, notDisplay).isSelected()){
-				click(EDIT_PAGE, notDisplay);
-			}
-		}
+			check(EDIT_PAGE, 2);		}
 		else{
-			if(waitForAndGetElement(EDIT_PAGE, 5000, 1, notDisplay).isSelected())
-				click(EDIT_PAGE, notDisplay);
+			uncheck(EDIT_PAGE, 2);
 		}
 		if (viewPage){
-			if(!waitForAndGetElement(VIEW_PAGE, 5000, 1, notDisplay).isSelected()){
-				click(VIEW_PAGE, notDisplay);
-			}
+			check(VIEW_PAGE, 2);
 		}
 		else{
-			if(waitForAndGetElement(VIEW_PAGE, 5000, 1, notDisplay).isSelected())
-				click(VIEW_PAGE, notDisplay);
+			uncheck(VIEW_PAGE, 2);
 		}
-		
 		if (deletePermission){
 			click(DELETE_PERMISSION);
 			waitForElementNotPresent(DELETE_PERMISSION);
@@ -129,7 +122,7 @@ public class Permission extends WikiBase{
 		button.save();
 		Utils.pause(1000);
 	}
-	
+
 	/** 
 	 * Delete permission for an user
 	 * 
@@ -232,13 +225,13 @@ public class Permission extends WikiBase{
 		button = new Button(driver);
 		dialog = new Dialog(driver);
 		per = new PlatformPermission(driver);
-//		if (type.length > 0){
-//			if (!(type[0] instanceof Integer)) {
-//				throw new IllegalArgumentException("-- Argument should be an Integer --");
-//			}
-//			notDisplay = (Integer)type[0];
-//		}
-		
+		//		if (type.length > 0){
+		//			if (!(type[0] instanceof Integer)) {
+		//				throw new IllegalArgumentException("-- Argument should be an Integer --");
+		//			}
+		//			notDisplay = (Integer)type[0];
+		//		}
+
 		goToSpacePermission();
 
 		info("--Add space permission--");
@@ -396,7 +389,7 @@ public class Permission extends WikiBase{
 			}
 			notDisplay = (Integer)optional[0];
 		}
-		
+
 		if (pageOrSpace[0]){
 			goToPagePermission();
 		}else if (pageOrSpace[1]){
@@ -489,7 +482,7 @@ public class Permission extends WikiBase{
 		info("User/group can not view page");
 		magAcc.signOut();
 	}
-	
+
 	/**
 	 * Check edit Wiki page
 	 * 
@@ -514,7 +507,7 @@ public class Permission extends WikiBase{
 		waitForElementNotPresent(ELEMENT_EDIT_PAGE_LINK);
 		magAcc.signOut();
 	}
-	
+
 	/**
 	 * Check if user/group permission is not listed in Wiki page permission list
 	 * 

@@ -102,7 +102,7 @@ public class WikiBase extends PlatformBase{
 	public final String MESSAGE_PAGE_ALREADY_EXISTS = "The page title already exists. Please select another one.";
 	public final String MESSAGE_CANCEL_CREATE_PAGE = "to leave this page?";
 	public final By ELEMENT_UPLOAD_NAME = By.name("file");
-	public final By ELEMENT_UPLOAD_NEW_FILE_BUTTON = By.xpath("//*[text()='Upload New File']");
+	public final By ELEMENT_UPLOAD_NEW_FILE_BUTTON = By.xpath("//*[text()='Upload New File' or text()='Upload new file']");
 	public final By ELEMENT_BODY_CONTAINER = By.xpath("//*[@class='uiRightContainerArea']");
 	//"Are you sure to leave this page?";
 	public final By ELEMENT_OK_BUTTON_WIKI_PAGE = By.xpath("//div[contains(@class, 'uiAction')]/a[text()='OK']");
@@ -150,6 +150,7 @@ public class WikiBase extends PlatformBase{
 	public final By ELEMENT_SELECT_INPUT = By.id("PermissionOwner");
 	public final By ELEMENT_SELECT_GROUP = By.className("uiIconGroup");
 	public final By ELEMENT_SELECT_MEMBERSHIP = By.className("uiIconMembership");
+	public final String ELEMENT_USER_PERMISSIONS = "//*[contains(text(), '${user}')]";
 	public final String ELEMENT_EDIT_PAGE_PERMISSIONS = "//*[contains(text(), '${user}')]/../..//input[contains(@id, 'EDITPAGE')]";
 	public final String ELEMENT_VIEW_PAGE_PERMISSIONS = "//*[contains(text(), '${user}')]/../..//input[contains(@id, 'VIEWPAGE')]";
 	public final String ELEMENT_DELETE_PERMISSIONS = "//*[contains(text(), '${user}')]/../..//*[contains(@class, 'uiIconDelete')]";
@@ -157,6 +158,16 @@ public class WikiBase extends PlatformBase{
 	public final By ELEMENT_SELECT_THIS_GROUP = By.linkText("Select this Group");
 	public final By ELEMENT_SELECT_ROLE_POPUP = By.xpath("//span[@class='PopupTitle popupTitle' and text()='Select a role']");
 	public final By ELEMENT_SELECT_GROUP_POPUP = By.xpath("//span[@class='PopupTitle popupTitle' and text()='Select a group']");
+	public final By ELEMENT_ALERT_MESSAGE_PERMISSION = By.xpath("//*[contains(text(), 'Your version is outdated. A version of this content has been updated by another user.')]");
+	public final By ELEMENT_VIEW_CHANGE_LINK = By.linkText("View your Changes");
+	public final By ELEMENT_DRAFT_CONTINUE_EDIT_LINK = By.linkText("Continue Editing");
+	public final By ELEMENT_DELETE_DRAFT_LINK = By.linkText("Delete");
+	public final By EMEMENT_DRAFT_CHANGE_VIEW = By.xpath("//div[contains(text(), 'Draft Changes')]");
+	public final By ELEMENT_DRAFT_CLOSE = By.xpath("//div[text()='Draft Changes']/..//*[@class='uiIconClose']");
+	public final By ELEMENT_DRAFT_MESSAGE = By.xpath("//*[contains(text(), 'A draft of this page was saved on')]");
+	public final By ELEMENT_DRAFT_RESUME__LINK = By.linkText("Resume the Draft");
+	public final String ELEMENT_DRAFT_STRING_ALERT = "This page is currently being edited by ${userName}";
+	public final By ELEMENT_DRAFT_ALERT = By.xpath("//*[contains(@class, 'uiIconWarning')]/..");
 
 	/*----------------------Manage Template----------------------*/
 	public final By ELEMENT_TEMPLATE_LINK = By.linkText("Template");
@@ -270,15 +281,15 @@ public class WikiBase extends PlatformBase{
 
 	//================== PLF4/Common function for Wiki ==================//
 	//////
-//	/**
-//	 * @author vuna2
-//	 */
-//  REDUNDANT METHOD (see: NavigationToolbar#goToHomePage() method)
-//	public void goToIntranetHomePage(){
-//		Utils.pause(500);
-//		click(ELEMENT_INTRANET_HOME_PAGE);
-//		waitForTextPresent("Join a space");
-//	}
+	//	/**
+	//	 * @author vuna2
+	//	 */
+	//  REDUNDANT METHOD (see: NavigationToolbar#goToHomePage() method)
+	//	public void goToIntranetHomePage(){
+	//		Utils.pause(500);
+	//		click(ELEMENT_INTRANET_HOME_PAGE);
+	//		waitForTextPresent("Join a space");
+	//	}
 
 	/**
 	 * Go to Wiki portlet

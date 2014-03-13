@@ -156,7 +156,7 @@ public class BasicAction extends Permission{
 		}
 		else if(this.plfVersion == "4.1"){
 			if(waitForAndGetElement(ELEMENT_RICHTEXT_BUTTON_PL4_1,5000,0)!=null){
-				click(ELEMENT_RICHTEXT_BUTTON);
+				click(ELEMENT_RICHTEXT_BUTTON_PL4_1);
 				waitForAndGetElement(ELEMENT_SOURCE_EDITOR_BUTTON);
 			}
 			if(title != null)
