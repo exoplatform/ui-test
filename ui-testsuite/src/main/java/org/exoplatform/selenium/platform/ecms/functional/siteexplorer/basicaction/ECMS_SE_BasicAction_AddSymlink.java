@@ -55,9 +55,6 @@ public class ECMS_SE_BasicAction_AddSymlink extends PlatformBase{
 	ContextMenu cMenu;
 	SitesExplorer siteExp;
 
-	public final String DATA_USER = "john";
-	public final String DATA_PASS = "gtn";
-
 	@BeforeMethod
 	public void beforeMethods() {
 		initSeleniumTest();
@@ -73,7 +70,7 @@ public class ECMS_SE_BasicAction_AddSymlink extends PlatformBase{
 		cTemplate = new ContentTemplate(driver);
 		cMenu = new ContextMenu(driver);
 		siteExp = new SitesExplorer(driver);
-		magAcc.signIn(DATA_USER, DATA_PASS);
+		magAcc.signIn(DATA_USER1, DATA_PASS);
 
 		info("Add symlink for action bar if it does not existed");
 		navToolBar.goToSiteExplorer();
@@ -455,7 +452,7 @@ public class ECMS_SE_BasicAction_AddSymlink extends PlatformBase{
 		//login with mary
 		magAcc.signOut();
 		info("Login ECMS with user: mary");
-		magAcc.signIn("mary", "gtn");
+		magAcc.signIn(DATA_USER2, DATA_PASS);
 		navToolBar.goToSiteExplorer();
 
 		info("create new content folder");
@@ -495,7 +492,6 @@ public class ECMS_SE_BasicAction_AddSymlink extends PlatformBase{
 
 		//create new content folder
 		cTemplate.createAndCheckContentFolder(DATA_CONTENT_FOLDER, ELEMENT_CONTENT_FOLDER);
-
 		//set permission for this node: user mary does not have permission view node 
 		info("Set for user mary does not have view permission");
 		ecms.goToNode(ELEMENT_CONTENT_FOLDER);
@@ -503,9 +499,8 @@ public class ECMS_SE_BasicAction_AddSymlink extends PlatformBase{
 		ecmsPer.removeDefaultPermissionOfNode();
 		button.close();
 		magAcc.signOut();
-
-		info("Login with mary");
-		magAcc.signIn("mary", "gtn");
+		info("Login ECMS with user: mary");
+		magAcc.signIn(DATA_USER2, DATA_PASS);
 		navToolBar.goToSiteExplorer();
 
 		//check user does not see that content node
@@ -516,7 +511,7 @@ public class ECMS_SE_BasicAction_AddSymlink extends PlatformBase{
 
 		//delete data
 		magAcc.signOut();
-		magAcc.signIn(DATA_USER, DATA_PASS);
+		magAcc.signIn(DATA_USER1, DATA_PASS);
 		navToolBar.goToSiteExplorer();
 		cMenu.deleteDocument(ELEMENT_CONTENT_FOLDER);
 	}
@@ -673,14 +668,14 @@ public class ECMS_SE_BasicAction_AddSymlink extends PlatformBase{
 		ecms.goToNode(ELEMENT_CONTENT_FOLDER);
 		actBar.goToNodePermissionManagement();
 		ecmsPer.removeDefaultPermissionOfNode();
-		ecms.selectUser("mary");
+		ecms.selectUser(DATA_USER2);
 		ecmsPer.setPermissionForNode(true, false, false);
 
 		button.save();
 		magAcc.signOut();
 
 		info("Login with mary");
-		magAcc.signIn("mary", "gtn");
+		magAcc.signIn(DATA_USER2, DATA_PASS);
 		navToolBar.goToSiteExplorer();
 		ecms.goToNode(ELEMENT_CONTENT_FOLDER);
 
@@ -696,7 +691,7 @@ public class ECMS_SE_BasicAction_AddSymlink extends PlatformBase{
 		magAcc.signOut();
 
 		//delete data
-		magAcc.signIn(DATA_USER, DATA_PASS);
+		magAcc.signIn(DATA_USER1, DATA_PASS);
 		navToolBar.goToSiteExplorer();
 		cMenu.deleteData(ELEMENT_CONTENT_FOLDER);
 	}
@@ -759,16 +754,13 @@ public class ECMS_SE_BasicAction_AddSymlink extends PlatformBase{
 		driver.close();
 
 		//login with mary
-		info("Init new session");
-		initSeleniumTest();
-		driver.get(baseUrl);
-		magAcc = new ManageAccount(driver);
-		navToolBar = new NavigationToolbar(driver);
-		ecms = new EcmsBase(driver);
-		cMenu = new ContextMenu(driver);
-
-		info("Login with Mary");
-		magAcc.signIn("mary", "gtn");
+		info("Init new session and Login with Mary");
+		loginWithAnotherAccOnThesameBrowser(DATA_USER2, DATA_PASS);
+		magAcc = new ManageAccount(newDriver);
+		navToolBar = new NavigationToolbar(newDriver);
+		ecms = new EcmsBase(newDriver);
+		cMenu = new ContextMenu(newDriver);
+		siteExp = new SitesExplorer(newDriver);
 
 		//check cannot add symlink for node by user mary
 		navToolBar.goToSiteExplorer();
@@ -784,7 +776,7 @@ public class ECMS_SE_BasicAction_AddSymlink extends PlatformBase{
 		magAcc.signOut();
 
 		//delete data
-		magAcc.signIn(DATA_USER, DATA_PASS);
+		magAcc.signIn(DATA_USER1, DATA_PASS);
 		navToolBar.goToSiteExplorer();
 		cMenu.deleteDocument(ELEMENT_CONTENT_FOLDER);			
 	}

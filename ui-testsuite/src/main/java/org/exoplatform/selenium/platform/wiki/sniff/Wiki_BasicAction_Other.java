@@ -36,8 +36,8 @@ public class Wiki_BasicAction_Other extends Permalink {
 		button = new Button(driver);
 		magMem = new ManageMember(driver);
 		per = new PlatformPermission(driver);
-		
-		magAc.signIn(DATA_USER1, DATA_PASS);
+
+		magAc.signIn(DATA_USER1, DATA_PASS); 
 		goToWiki();
 	}
 
@@ -249,7 +249,7 @@ public class Wiki_BasicAction_Other extends Permalink {
 		addBlankWikiPage(title1, content1, 0);		
 		magAc.signOut();
 		
-		magAc.signIn("mary", "gtn");
+		magAc.signIn(DATA_USER2, DATA_PASS);
 		addWikiForSpace(spaceName, title2, content2);
 		
 		info("Move page2 of space to page1 of Intranet");
@@ -279,7 +279,7 @@ public class Wiki_BasicAction_Other extends Permalink {
 		dialog.closeMessageDialog();
 		magAc.signOut();
 		
-		goToWikiByPermalink("demo", permalink, true, content);
+		goToWikiByPermalink(DATA_USER4, permalink, true, content);
 		
 		goToWikiPage("Wiki Home/" + title, ManageAccount.userType.ADMIN);
 		deleteCurrentWikiPage();		
@@ -300,7 +300,7 @@ public class Wiki_BasicAction_Other extends Permalink {
 		dialog.closeMessageDialog();
 		magAc.signOut();
 		
-		goToWikiByPermalink("demo", permalink, false, content);
+		goToWikiByPermalink(DATA_USER4, permalink, false, content);
 		
 		goToWikiPage("Wiki Home/" + title, ManageAccount.userType.ADMIN);
 		deleteCurrentWikiPage();
@@ -320,7 +320,7 @@ public class Wiki_BasicAction_Other extends Permalink {
 		magAc.signOut();
 		
 		info("User demo joint in space");
-		magAc.signIn("demo", "gtn");
+		magAc.signIn(DATA_USER4, DATA_PASS);
 		magMem.joinOpenSpace(spaceName);
 		magAc.signOut();
 		
@@ -334,7 +334,7 @@ public class Wiki_BasicAction_Other extends Permalink {
 		dialog.closeMessageDialog();
 		magAc.signOut();
 		
-		goToWikiByPermalink("demo", permalink, true, content);
+		goToWikiByPermalink(DATA_USER4, permalink, true, content);
 		
 		magAc.signIn(DATA_USER1, DATA_PASS);
 		magMem.goToAllSpaces();
@@ -356,7 +356,7 @@ public class Wiki_BasicAction_Other extends Permalink {
 		dialog.closeMessageDialog();
 		magAc.signOut();
 		
-		goToWikiByPermalink("demo", permalink, false, content);
+		goToWikiByPermalink(DATA_USER4, permalink, false, content);
 		
 		magAc.signIn(DATA_USER1, DATA_PASS);
 		magMem.goToAllSpaces();
@@ -370,7 +370,7 @@ public class Wiki_BasicAction_Other extends Permalink {
 	public void test13_CheckWhenChangePermalinkStatus(){
 		String title = "Wiki_sniff_permalink_title_13";
 		String content = "Wiki_sniff_permalink_content_13";
-		String user = "demo";
+		String user = DATA_USER4;
 		
 		info("Create new page at restricted status");
 		addBlankWikiPage(title, content, 0);
@@ -406,7 +406,7 @@ public class Wiki_BasicAction_Other extends Permalink {
 	public void test14_ChangePermissionOfPageInPermalink_SelectUser(){
 		String title = "Wiki_sniff_permalink_title_14_1";
 		String content = "Wiki_sniff_permalink_content_14_1";
-		String[] userGroup1 = {"mary"};
+		String[] userGroup1 = {DATA_USER2};
 		
 		addBlankWikiPage(title, content, 0);
 		deletePagePermission("any");

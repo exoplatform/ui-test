@@ -155,6 +155,7 @@ public class Forum_Forum_Category_ImportExport extends ForumBase {
   /*
    * CaseID: 109059, 109054 -> Export, import category with mode Only category
    */
+
   @Test
   public void test02_ExportImportCategory_ModeOnlyCategory(){
 	String catName1 = "Category_01_109059";

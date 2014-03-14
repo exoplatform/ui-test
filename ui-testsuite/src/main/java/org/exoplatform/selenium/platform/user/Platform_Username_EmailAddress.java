@@ -38,17 +38,14 @@ public class Platform_Username_EmailAddress extends PlatformBase{
 
 	//Default users of platform
 	String USER_DEFAULT_ROOT = "root";
-	String PASS_DEFAULT_ROOT = "gtn";
-	
+	String PASS_DEFAULT_ROOT = "gtn";	
 	@Test
 	public void test01_CreateUser(){
 		info("== Signin to Platform with user... Root");
-		magAccount.signIn(USER_DEFAULT_ROOT, PASS_DEFAULT_ROOT);
+		magAccount.signIn(USER_DEFAULT_ROOT, PASS_ROOT);
 		navBar.goToNewStaff();
 		//Publisher
 		magAccount.addNewUserAccount(DATA_USER2, DATA_PASS, DATA_PASS, "Mary", "Williams", "", "mary@maryacme.com", "", "", true);
-		//Root
-		magAccount.addNewUserAccount(USER_ROOT, DATA_PASS, DATA_PASS, "Root", "Root", "", "root@rootacme.com", "", "", true);
 		//Admin
 		magAccount.addNewUserAccount(DATA_USER1, DATA_PASS, DATA_PASS, "John", "Smith", "", "john@johnacme.com", "", "", true);
 		//Redactor
@@ -76,6 +73,7 @@ public class Platform_Username_EmailAddress extends PlatformBase{
 		userGroup.selectGroup("Platform/Content Management", true);
 		userGroup.addUsersToGroup(USER_ROOT, "*", false, false);
 		userGroup.addUsersToGroup(DATA_USER1, "*", false, true);
+		userGroup.addUsersToGroup(DATA_USER2, "*", false, true);
 		userGroup.addUsersToGroup(DATA_USER2, "manager", false, true);
 		userGroup.addUsersToGroup(DATA_USER2, "editor", false, true);
 		userGroup.addUsersToGroup(DATA_USER3, "author", false, false);
@@ -84,11 +82,10 @@ public class Platform_Username_EmailAddress extends PlatformBase{
 		upLevel();
 		//Organization/Employees
 		userGroup.selectGroup("Organization/Employees", true);
-		userGroup.addUsersToGroup(USER_ROOT, "*", false, false);
 		userGroup.addUsersToGroup(DATA_USER1, "*", false, false);
-		userGroup.addUsersToGroup(DATA_USER2, "member", true, false);
-		userGroup.addUsersToGroup(DATA_USER3, "member", true, false);
-		userGroup.addUsersToGroup(DATA_USER4, "member", true, false);
+		userGroup.addUsersToGroup(DATA_USER2, "member", true, true);
+		userGroup.addUsersToGroup(DATA_USER3, "member", true, true);
+		userGroup.addUsersToGroup(DATA_USER4, "member", true, true);
 
 		upLevel();
 		//Organization/Management/Executive Board

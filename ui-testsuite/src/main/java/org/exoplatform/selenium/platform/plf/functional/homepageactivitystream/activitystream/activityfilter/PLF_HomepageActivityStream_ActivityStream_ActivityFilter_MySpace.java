@@ -238,10 +238,9 @@ import org.testng.annotations.*;
 		- Connect to Intranet with the User B
 		- From [My Connections], choose [Everyone] tab and select the User A
 		- Open the "Activity Stream" of the User A
-		*Input Data: 
-		*Expected Outcome: The User B can't view the activity posted by the user A from his space		*/ 
-		
-		acc.signIn("demo", DATA_PASS);
+		 *Input Data: 
+		 *Expected Outcome: The User B can't view the activity posted by the user A from his space		*/ 
+		acc.signIn(DATA_USER4, DATA_PASS);
 		nav.goToConnectionPage();
 		click(By.linkText(user));
 		waitForAndGetElement(ELEMENT_MY_PROFILE_TAB);
@@ -287,9 +286,9 @@ import org.testng.annotations.*;
 		/*
 		- Connect to Intranet with the User B
 		- Open the stream "All activities"
-		*Input Data: 
-		*Expected Outcome: The activity which user B is mentioned is displayed		*/
-		acc.signIn("demo", DATA_PASS);
+		 *Input Data: 
+		 *Expected Outcome: The activity which user B is mentioned is displayed		*/
+		acc.signIn(DATA_USER4, DATA_PASS);
 		nav.goToHomePage();
 		selectFileter("My Activities");
 		waitForAndGetElement(ELEMENT_USER_MENTION_BY_OTHER_USER.replace("${author}",user).replace("${userName}", user1));
@@ -410,7 +409,7 @@ import org.testng.annotations.*;
 		*Input Data: 
 		*Expected Outcome: 
 		- Non of the space's activity is displayed in the stream activityof the user A		*/ 
-		acc.signIn("demo", DATA_PASS);
+		acc.signIn(DATA_USER4, DATA_PASS);
 		nav.goToConnectionPage();
 		click(By.linkText(user));
 		waitForAndGetElement(ELEMENT_MY_PROFILE_TAB);

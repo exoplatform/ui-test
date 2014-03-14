@@ -63,14 +63,13 @@ public class Forum_Forum_Category_WatchAndUnwatch extends ForumBase{
 		/*Declare variables*/ 
 		String catName = "Category 109103"; 
 		String order = "1";
-		String[] restricted = {"john"}; 
-		String description = "Description of Category 001";
-		int setPermission = 2; 
-		String[] userGroup = {"john"};
 		String forumName = "Forum 109103";
 		String title = "Title topic 109103"; 
 		String message = "Topic 109103"; 
-
+		String[] restricted = {DATA_USER1}; 
+		String description = "Description of Category 001";
+		int setPermission = 2; 
+		String[] userGroup = {DATA_USER1}; 
 		/* Step 1: Create category, forum*/
 		//- Login by the administrator to create new category, forum
 		magAc.updateUserProfile(null,null, null, EMAIL_ADDRESS1);
@@ -108,7 +107,7 @@ public class Forum_Forum_Category_WatchAndUnwatch extends ForumBase{
 		String catName = "Category 109104"; 
 		String order = "1";
 		int chooseRestricted = 1;
-		String[] restricted = {DATA_USER2}; 
+		String[] restricted = {DATA_USER4}; 
 		String description = "Description of Category 002";
 		String[] addForum = {"Forum 109104", "1", "Open", "Unlocked", "Description of forum 002"}; 	
 		String title = "Title topic 109104"; 
@@ -128,7 +127,7 @@ public class Forum_Forum_Category_WatchAndUnwatch extends ForumBase{
 		// - Login by the normal user
 		// - On created category and select [Watch]
 		info("Login by the normal user");
-		magAc.signIn(DATA_USER2, DATA_PASS);
+		magAc.signIn(DATA_USER4, DATA_PASS);
 		magAc.updateUserProfile(null,null, null, EMAIL_ADDRESS1);
 		goToForums(); 
 		click(By.linkText(catName));
@@ -183,7 +182,6 @@ public class Forum_Forum_Category_WatchAndUnwatch extends ForumBase{
 		String message = "Topic 109105"; 
 		String key = "Censor Topic 109105"; 
 		By mail = By.xpath(ELEMENT_GMAIL_EMAIL2.replace("${category}",catName).replace("${forum}", forumName).replace("${topic}", key));
-
 		/* Step 1: Create category, forum */
 		//- Login by the administrator to create new category, forum
 		//- Define Censored word from Administration form	
@@ -243,6 +241,7 @@ public class Forum_Forum_Category_WatchAndUnwatch extends ForumBase{
 	@Test
 	public void test04_CheckSendNotify_MoveTopic_WatchCategory() {
 		/*Declare variables*/ 
+
 		String catName1 = "Category 109106 1"; 
 		String catName2 = "Category 109106 2";
 		String order = "1";  
@@ -251,7 +250,6 @@ public class Forum_Forum_Category_WatchAndUnwatch extends ForumBase{
 		String forum2 = "Forum 109106 2"; 	
 		String title = "Title topic 109106"; 
 		String message = "Topic 109106"; 
-
 		/* Step 1: Create category, forum*/
 		//- Login by the administrator to create new category, forum, topics
 		magAc.updateUserProfile(null,null, null, EMAIL_ADDRESS1);

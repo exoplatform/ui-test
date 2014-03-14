@@ -89,7 +89,8 @@ public class Gatein_Navigation_GroupNavigation_EditNavigation extends GroupNavig
 		info("Verify position of Administration after changing order");
 		waitForAndGetElement(groupAdminNewPosition);
 		magAc.signOut();
-		magAc.signIn(DATA_USER1,DATA_PASS);;
+
+		magAc.signIn(DATA_USER1, DATA_PASS);
 		navToolbar.goToGroupSites();
 		//Verify position of Administration after SignOut and SignIn  
 		waitForElementNotPresent(groupAdminOldPosition);

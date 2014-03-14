@@ -70,14 +70,11 @@ public class PLF_HomePageGadget_InvitationGadget extends Activity{
 		String spaceName2 = "space705792";
 		String user2="Jack Miller";
 		String user3="James Davis";
-		String user_login2 = "demo";
-		String user_login4 = "james";
-//		String user_login5 = "john";
-		String eInvitationUser = "";
-
+		String user_login2 = DATA_USER4;
+		String user_login4 = DATA_USER3;
 		String number_gadget = "4";
 		String status = "Private Space";
-		
+		String eInvitationUser;
 		String username = "test75079";
 		String pass = "gtngtn";
 		String name = "TestMot";

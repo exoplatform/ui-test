@@ -86,7 +86,6 @@ public class PLF_HomePageGadget_GettingStartedGadget extends Activity{
 		String spaceName = "space70413";
 		String activity1 = "activity 70413";
 		String user1="Mary Williams";
-//		String user_login1 = "mary";
 		String user2="John Smith"; 
 //		String user_login2 = "john";
 		String file = "ECMS_DMS_SE_Upload_imgfile.jpg";

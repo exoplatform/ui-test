@@ -42,7 +42,7 @@ public class Gatein_Navigation_PortalNavigation_EditLayout extends PortalManagem
 		but = new Button(driver, this.plfVersion);
 		
 		magAc.signIn(DATA_USER1,DATA_PASS);;
-	}
+		}
 
 	@AfterMethod
 	public void afterTest(){

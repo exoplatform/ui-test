@@ -114,7 +114,6 @@ public class Calendar_Event extends CalendarBase {
 		String color = "sky_blue";
 		String[] sharedUser = {"mary"};
 		boolean[] edit = {true};
-
 		goToCalendarPage();
 		info("Create new calendar then share its");
 		addCalendar(calendar, "calendar to share", color);
@@ -333,8 +332,170 @@ public class Calendar_Event extends CalendarBase {
 		dragAndDropToObject(By.xpath(ELEMENT_EVENT_TASK_ONE_DAY.replace("${taskName}", EVENT06)),ELEMENT_TARGET_DATE);
 
 		info("Restore data");
+		deleteEventTask(EVENT06);
+	}
+
+
+	/**
+	 * Edit event in Group Calendar
+	 * CaseID 69288
+	 */
+	@Test
+	public void test07_editEventinGroupCal() {
+		String EVENT07 = "EVENT_07";
+		String CAL_07 = "CAL_07";
+		String CAL_GROUP = "/platform/web-contributors";
+		String TITLE = "EVENT_07_edited";
+		String DESCRIPTION = "EVENT_07_description_edited";
+		String EVENT_CATEGORY = "All";
+		String USER_GROUP = USER_ROOT;
+		String USER_GROUP_PASS = PASS_ROOT;
+
+		info("==Go to Intranet Calendar==");
+		goToCalendarPage();
+
+		info("==Create a group calendar==");
+		driver.navigate().refresh();
+		addCalendar(CAL_07, CAL_07, "green", CAL_GROUP);
+		Utils.pause(3000);
+		changeEditPermissionForCalShowInGroup(CAL_07, USER_GROUP, CAL_GROUP);
+
+		info("==User fqa log out==");
+		acc.signOut();
+
+		info("==Login by shared user==");
+		acc.signIn(USER_GROUP, USER_GROUP_PASS);
 		Utils.pause(5000);
-		deleteEventTask(EVENT06, selectDayOption.ONEDAY);
+
+		info("==Add a new event on group calendar==");
+		goToCalendarPage();
+		Utils.pause(5000);
+		evt.addQuickEvent(EVENT07,EVENT07,getDate(0,"MM/dd/yyyy"),getDate(0,"MM/dd/yyyy"),false, CAL_07, EVENT_CATEGORY);
+
+		info("==Edit an event==");
+		Utils.pause(5000);
+		evt.editEvent(EVENT07,TITLE,DESCRIPTION, null,null,null,false);
+
+		info("==Restore data==");
+		waitForAndGetElement(By.xpath(ELEMENT_EVENT_TASK_ONE_DAY.replace("${taskName}", EVENT07)));
+		deleteCalendar(CAL_07,true);
+	}
+
+	/**
+	 * Delete event in group Calendar
+	 * CaseID 69289
+	 */
+	@Test
+	public void test08_deleteEventinGroupCal() {
+		String EVENT08 = "EVENT_08";
+		String CAL_08 = "CAL_08";
+		String CAL_GROUP = "/platform/web-contributors";
+		String EVENT_CATEGORY = "All";
+		String USER_GROUP = USER_ROOT;
+		String USER_GROUP_PASS = PASS_ROOT;
+
+		info("==Go to Intranet Calendar==");
+		goToCalendarPage();
+
+		info("==Create a group calendar==");
+		driver.navigate().refresh();
+		addCalendar(CAL_08, CAL_08, "green", CAL_GROUP);
+		Utils.pause(3000);
+		changeEditPermissionForCalShowInGroup(CAL_08, USER_GROUP, CAL_GROUP);
+
+		info("==User fqa log out==");
+		acc.signOut();
+
+		info("==Login by shared user==");
+		acc.signIn(USER_GROUP, USER_GROUP_PASS);
+		Utils.pause(5000);
+
+		info("==Add a new event on group calendar==");
+		goToCalendarPage();
+		Utils.pause(5000);
+		evt.addQuickEvent(EVENT08,EVENT08,getDate(0,"MM/dd/yyyy"),getDate(0,"MM/dd/yyyy"),false, CAL_08, EVENT_CATEGORY);
+
+		info("==Delete an event on group calendar==");
+		waitForAndGetElement(By.xpath(ELEMENT_EVENT_TASK_ONE_DAY.replace("${taskName}", EVENT08)));
+		deleteEventTask(EVENT08, selectDayOption.ONEDAY);
+		deleteCalendar(CAL_08,true);
+	}
+
+	/**
+	 * Edit event in shared Calendar
+	 * CaseID 69292
+	 */
+	@Test
+	public void test09_editEventinSharedCal() {
+		String EVENT09 = "EVENT_09";
+		String CAL_09 = "CAL_09";
+		String TITLE = "EVENT_09_edited";
+		String DESCRIPTION = "EVENT_09_description_edited";
+		String EVENT_CATEGORY = "All";
+		String[] USER_SHARED = {USER_ROOT};
+		String USER_SHARED_PASS = PASS_ROOT;
+		boolean[] EDITABLE = {true};
+
+		info("==Go to Intranet Calendar==");
+		goToCalendarPage();
+
+		info("==Create and share a calendar with User root==");
+		driver.navigate().refresh();
+		addCalendar(CAL_09, CAL_09, "pink");
+		Utils.pause(3000);
+		shareCalendar(CAL_09, USER_SHARED, EDITABLE);
+
+		info("==User fqa sign out==");
+		acc.signOut();
+
+		info("==Login by shared user - root==");
+		acc.signIn(USER_SHARED[0], USER_SHARED_PASS);
+
+		info("==Add event on shared calendar==");
+		goToCalendarPage();
+		Utils.pause(5000);
+		evt.addQuickEvent(EVENT09,EVENT09,getDate(0,"MM/dd/yyyy"), getDate(0,"MM/dd/yyyy"), false, CAL_09, EVENT_CATEGORY);
+		waitForAndGetElement(By.xpath(ELEMENT_EVENT_TASK_ONE_DAY.replace("${taskName}", EVENT09)));
+
+		info("==Edit an event==");
+		evt.editEvent(EVENT09,TITLE,DESCRIPTION, null,null,null,false);
+
+		info("==Restore data==");
+		waitForAndGetElement(By.xpath(ELEMENT_EVENT_TASK_ONE_DAY.replace("${taskName}", EVENT09)));
+		deleteCalendar(CAL_09,true);
+	}
+
+	/**
+	 * Delete event in shared Calendar
+	 * CaseID 69291
+	 */
+	@Test
+	public void test10_deleteEventinSharedCal() {
+		String EVENT10 = "EVENT_10";
+		String CAL_10 = "CAL_10";
+		String[] USER_SHARED = {USER_ROOT};
+		String USER_SHARED_PASS = PASS_ROOT;
+		boolean[] EDITABLE = {true};
+
+		info("==Go to Intranet Calendar==");
+		goToCalendarPage();
+
+		info("==Create a shared calendar==");
+		driver.navigate().refresh();
+		addCalendar(CAL_10, CAL_10, "blue");
+		Utils.pause(3000);
+		shareCalendar(CAL_10, USER_SHARED, EDITABLE);
+
+		info("==User fqa sign out==");
+		acc.signOut();
+
+		info("==Login by shared user - root==");
+		acc.signIn(USER_SHARED[0], USER_SHARED_PASS);
+
+		info("==Add a new event on shared calendar==");
+		goToCalendarPage();
+		Utils.pause(5000);
+		deleteEventTask(EVENT10, selectDayOption.ONEDAY);
 	}
 //
 //	/**
