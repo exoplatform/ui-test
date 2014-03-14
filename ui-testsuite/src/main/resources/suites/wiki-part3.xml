@@ -8,14 +8,16 @@
 			</run>
 		</groups>
 		<classes>
-			<class name="org.exoplatform.selenium.platform.wiki.functional.pagepermission.Wiki_PagePermission_Add" />
-			<class name="org.exoplatform.selenium.platform.wiki.functional.pagepermission.Wiki_PagePermission_Delete" />
-			<class name="org.exoplatform.selenium.platform.wiki.functional.pagepermission.Wiki_PagePermission_Edit" />
-			<class name="org.exoplatform.selenium.platform.wiki.functional.pagepermission.Wiki_PagePermission_Other" />
-			<class name="org.exoplatform.selenium.platform.wiki.functional.spaceswitcher.Wiki_SpaceSwitcher_Display" />
-			<class name="org.exoplatform.selenium.platform.wiki.functional.Activity.Wiki_Activity_Add" />
-			<class name="org.exoplatform.selenium.platform.wiki.functional.Activity.Wiki_Activity_Delete" />
-			<class name="org.exoplatform.selenium.platform.wiki.functional.Activity.Wiki_Activity_Update" />
+ 			<class name="org.exoplatform.selenium.platform.wiki.functional.pagepermission.Wiki_PagePermission_Add" />
+ 			<class name="org.exoplatform.selenium.platform.wiki.functional.pagepermission.Wiki_PagePermission_Delete" />
+ 			<class name="org.exoplatform.selenium.platform.wiki.functional.pagepermission.Wiki_PagePermission_Edit" />
+ 			<class name="org.exoplatform.selenium.platform.wiki.functional.pagepermission.Wiki_PagePermission_Other" />
+ 			<class name="org.exoplatform.selenium.platform.wiki.functional.spaceswitcher.Wiki_SpaceSwitcher_Display" />
+ 			<class name="org.exoplatform.selenium.platform.wiki.functional.activities.Wiki_Activity_Add" />
+			<class name="org.exoplatform.selenium.platform.wiki.functional.activities.Wiki_Activity_Delete" />
+			<class name="org.exoplatform.selenium.platform.wiki.functional.activities.Wiki_Activity_Update" />
+			<class name="org.exoplatform.selenium.platform.wiki.functional.activities.Wiki_Activity_Dislike" />
+			<class name="org.exoplatform.selenium.platform.wiki.functional.activities.Wiki_Activity_Display" />
 		</classes>
 	</test>
 
