@@ -88,7 +88,7 @@ public class Forum_Forum_Forum_WatchUnWatch extends ForumBase {
 		
 		goToMail(EMAIL_ADDRESS1, EMAIL_PASS);
 		checkAndDeleteMail(By.xpath(ELEMENT_GMAIL_EMAIL.replace("${category}",catName).replace("${forum}",
-				fmName).replace(" ${topic}", tpName)), tpName);
+				fmName).replace("${topic}", tpName)), tpName);
 		
 		switchToParentWindow();
 		
@@ -146,7 +146,7 @@ public class Forum_Forum_Forum_WatchUnWatch extends ForumBase {
 		
 		goToMail(EMAIL_ADDRESS1, EMAIL_PASS);
 		checkAndDeleteMail(By.xpath(ELEMENT_GMAIL_EMAIL.replace("${category}",catName).replace("${forum}",
-				fmName[0]).replace(" ${topic}", tpName)), tpName);
+				fmName[0]).replace("${topic}", tpName)), tpName);
 		
 		switchToParentWindow();
 		

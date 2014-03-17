@@ -519,13 +519,14 @@ public class CalendarBase extends PlatformBase {
 		button = new Button(driver);
 		info("--Delete event--");
 		click(ELEMENT_DELETE_FEEDS);
-		
+
 		if(isElementPresent(button.ELEMENT_YES_BUTTON_AUX)){
 			click(button.ELEMENT_YES_BUTTON_AUX);
 		}else{
 			assert alert.getTextFromAlert().contains(MSG_FEEDS_DELETE);
 			alert.acceptAlert();
 		}
+
 		//alert.verifyAlertMessage(MSG_FEEDS_DELETE);
 		waitForElementNotPresent(By.linkText(name));
 		click(ELEMENT_SETTINGS_FORM_SAVE_BUTTON);
@@ -668,6 +669,7 @@ public class CalendarBase extends PlatformBase {
 			}
 			break;
 		case ONEDAY:
+
 			if(isElementNotPresent(By.xpath(ELEMENT_EVENT_TASK_ONE_DAY.replace("${taskName}", event))))
 				rightClickOnElement(By.xpath(ELEMENT_EVENT_TASK_ONE_DAY_1.replace("${taskName}", event)));
 			else
@@ -739,7 +741,7 @@ public class CalendarBase extends PlatformBase {
 
 		info("--Delete a Calendar-");
 		executeActionCalendar(name,"RemoveCalendar");
-        
+
 		if (isElementPresent(button.ELEMENT_YES_BUTTON_AUX)){
 			click(button.ELEMENT_YES_BUTTON_AUX);
 			Utils.pause(3000);
@@ -1041,7 +1043,7 @@ public class CalendarBase extends PlatformBase {
 		}
 		else{
 			button.save();
-			
+
 			String userFirstName = waitForAndGetElement(ELEMENT_ACCOUNT_NAME_LINK).getText();
 			String calendarUserName = "";
 			if (userFirstName.contains(USER_JOHN)){

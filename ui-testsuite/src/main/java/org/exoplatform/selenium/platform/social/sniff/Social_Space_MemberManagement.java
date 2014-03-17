@@ -37,6 +37,7 @@ public class Social_Space_MemberManagement extends Activity{
 		magAcc = new ManageAccount(driver,this.plfVersion);
 		magMember = new ManageMember(driver,this.plfVersion);
 		spaceMag = new SpaceManagement(driver,this.plfVersion);
+
 		magAcc.signIn(DATA_USER1, DATA_PASS);
 	}
 

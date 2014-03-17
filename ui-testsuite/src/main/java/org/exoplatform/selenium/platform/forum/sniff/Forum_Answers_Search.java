@@ -25,7 +25,7 @@ public class Forum_Answers_Search extends AnswerBase {
 	public void setUpBeforeTest(){
 		initSeleniumTest();
 		driver.get(baseUrl);
-		magAc = new ManageAccount(driver);
+		magAc = new ManageAccount(driver,this.plfVersion);
 		magQuest = new AnswerManageQuestion(driver, this.plfVersion);
 		magCat = new AnswerManageCategory(driver,this.plfVersion);
 		
@@ -46,9 +46,9 @@ public class Forum_Answers_Search extends AnswerBase {
 	public void test01_QuickSearch(){
 		String categoryName = "Answersearch1";
 		String description = "Add new category for answer";
-		String[] userGroup = {"demo"};
+		String[] userGroup = {"demo","1"};
 		
-		magCat.addNewCategoryInAnswer(categoryName, null, description, 2, userGroup, true, false);
+		magCat.addNewCategoryInAnswer(categoryName, null, description, 2, userGroup, false, false);
 
 		quickSearchInAnswer(categoryName);
 		waitForAndGetElement(By.linkText(categoryName));
@@ -64,7 +64,7 @@ public class Forum_Answers_Search extends AnswerBase {
 	public void test02_AdvancedSearch(){
 		String categoryName = "Answersearch2";
 		String description = "Add new category for answer";
-		String[] userGroup = {"demo"};		
+		String[] userGroup = {"demo","1"};		
 		String questionName = "Questionsearch2";
 		String questionContent = "Add new question2 for category";
 		

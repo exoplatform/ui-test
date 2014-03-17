@@ -57,7 +57,7 @@ public class ForumManagePost extends ForumBase {
 	public String ELEMENT_POST_CONTENT_TEXT = "//div[@class='containerQuote']//p[contains(text(),'${post}')]";
 	public String ELEMENT_PRIVATE_POST_MESSAGE = "//div[@class='uiForumPortlet forumBoxNotification']//div[@class='content' and contains(text(),'${post}')]";
 	public By ELEMENT_PRIVATE_POST_CLOSE_NOTIFICATION = By.xpath("//div[@class='uiForumPortlet forumBoxNotification']//i[@class='uiIconClose']");
-	public String ELEMENT_POST_QUOTE_TEXT = "//div[@class='contentQuote']/div[@class='textContent']/p[contains(text(),'${post}')]";
+	public String ELEMENT_POST_QUOTE_TEXT = "//div[@class='postContent']/div[@class='containerQuote']/p[contains(text(),'${post}')]";
 
 
 	//--------------post reply screen-----------------------------------------------------------
@@ -147,10 +147,11 @@ public class ForumManagePost extends ForumBase {
 			type(ELEMENT_POST_TITLE, title, true);
 		}
 		if (message != "" && message != null){
-			if(this.plfVersion.equalsIgnoreCase("4.1"))
-				inputDataToFrame(ELEMENT_POST_MESSAGE_FRAME_CKEDITOR, message, true,false);
-			else //if(this.plfVersion.equalsIgnoreCase("4.0"))
+			if(this.plfVersion.equalsIgnoreCase("4.0"))
 				inputDataToFrameInFrame(ELEMENT_POST_MESSAGE_FRAME_1, ELEMENT_POST_MESSAGE_FRAME_2, message,true,false);
+			else 
+				inputDataToFrame(ELEMENT_POST_MESSAGE_FRAME_CKEDITOR, message, true,false);
+				
 			switchToParentWindow();	
 		}
 		if (message != null) {
@@ -245,10 +246,11 @@ public class ForumManagePost extends ForumBase {
 			type(ELEMENT_POST_REASON, reason, true);
 		}
 		if (message != "" && message != null) {
-			if(this.plfVersion.equalsIgnoreCase("4.1"))
-				inputDataToFrame(ELEMENT_POST_MESSAGE_FRAME_CKEDITOR, message, true,false);
-			else//(this.plfVersion.equalsIgnoreCase("4.0"))
+			if(this.plfVersion.equalsIgnoreCase("4.0"))
 				inputDataToFrameInFrame(ELEMENT_POST_MESSAGE_FRAME_1, ELEMENT_POST_MESSAGE_FRAME_2, message,true,false);
+			else//(this.plfVersion.equalsIgnoreCase("4.0"))
+				inputDataToFrame(ELEMENT_POST_MESSAGE_FRAME_CKEDITOR, message, true,false);
+				
 			switchToParentWindow();	
 		} 
 		if(file.length > 0 && file[0] != "" && file[0] != null){

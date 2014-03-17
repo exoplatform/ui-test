@@ -53,6 +53,7 @@ public class Permalink extends BasicAction {
 		Utils.pause(1000);
 		//driver.navigate().refresh();
 		//Utils.pause(1000);
+
 		if (permission){
 			waitForTextPresent(content);
 		}else {

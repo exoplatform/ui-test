@@ -47,14 +47,13 @@ public class Forum_Answers_Setting extends AnswerBase {
 	}
 	
 	/**CaseId: 68945 + 71099 -> setting for answer portlet
-	 * https://jira.exoplatform.org/browse/FORUM-827 (Cannot show forum in Discussion of Answer portlet setting)
 	 */
-	@Test(groups="error")
+	@Test
 	public void test01_SettingAnswerPortlet(){
 		//category1 in answer
 		String categoryName1 = "Answersetting689451";
 		String description1 = "Add new category for answer";
-		String[] userGroup1 = {"demo"};
+		String[] userGroup1 = {"demo","1"};
 		
 		//category2 in answer
 		String categoryName2 = "Answersetting689452";
@@ -78,7 +77,7 @@ public class Forum_Answers_Setting extends AnswerBase {
 		question.submitQuestion(null, questionName, questionContent, null, false, null);
 		
 		goToForums();
-		forumCat.addNewCategoryInForum(title, null, 0, null, descriptionForum, 0, null);
+		forumCat.addNewCategoryInForum(title, null, 0,null, descriptionForum, 0, null);
 		forum.quickAddForum(forumName);
 		
 		goToEditAnswerPortlet();
@@ -97,7 +96,7 @@ public class Forum_Answers_Setting extends AnswerBase {
 		pageE.finishEditLayout();
 		
 		info("Category of answer is not displayed");
-		assert magCat.getElementFromTextByJquery(categoryName2) == null;
+		assert waitForAndGetElement(ELEMENT_CATEGORY_LINK.replace("${categoryName2}", categoryName2),10000,0) == null;
 		
 		info("Check question of answer app is discussed in forum");
 		magCat.openCategoryInAnswer(categoryName1);

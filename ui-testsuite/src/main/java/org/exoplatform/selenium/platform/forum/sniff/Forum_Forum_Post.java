@@ -29,7 +29,7 @@ public class Forum_Forum_Post extends ForumBase{
 	public void setUpBeforeTest(){
 		initSeleniumTest();
 		driver.get(baseUrl);
-		acc = new ManageAccount(driver);
+		acc = new ManageAccount(driver,this.plfVersion);
 		mngFru = new ForumManageForum(driver,this.plfVersion);
 		mngCat = new ForumManageCategory(driver,this.plfVersion);
 		mngTopic = new ForumManageTopic(driver,this.plfVersion);
@@ -120,7 +120,6 @@ public class Forum_Forum_Post extends ForumBase{
 		mngTopic.addCategoryForumTopic(category, forum, topic, topic);
 		click(By.linkText(topic));
 		mngPost.postReply(post, post, "", "");
-		
 		//Add private post
 		mngPost.quotePost(post, titleQuote, contentQuote);
 		

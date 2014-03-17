@@ -66,7 +66,6 @@ public class Forum_Forum_Topic_Add extends ForumBase{
 		String []addForum = {"Forum 73018", "1", "Open", "Unlocked", "Description of forum 001"};
 		String title = "Topic 73018";
 		String message = "Topic 73018";
-		String notification = "Content of Notification 001";
 
 		/*Step 1: Create forum
 		 *Input Data: 
@@ -88,7 +87,7 @@ public class Forum_Forum_Topic_Add extends ForumBase{
 		- Select forum
 		 *Expected Outcome: 
 		- Show a blank forum
-		- 'Start topic' is enabled		*/
+		- 'Start topic' is enabled	*/	
 		click(By.linkText(catName));
 		click(By.linkText(addForum[0]));
 		info("Step 2: Select forum to create new topic");
@@ -96,16 +95,16 @@ public class Forum_Forum_Topic_Add extends ForumBase{
 		 *Input Data: 
 		- Click [Start topic]
 		 *Expected Outcome: 
-		- New topic Form is shown properly		*/
+		- New topic Form is shown properly		
 
-		/*Step 4: Add new topic with 'Post Notification' option
+		Step 4: Add new topic with 'Post Notification' option
 		 *Input Data: 
 		- Choose 'Posts notification' option in Option tab
 		- Input value for other fields
 		- Click [Submit]
 		 *Expected Outcome: 
 		- New topic is added.
-		- If the added topic is the latest topic in its forum, its information is updated at Last post column.		*/
+		- If the added topic is the latest topic in its forum, its information is updated at Last post column.*/		
 		info("Step 4: Add new topic with 'Post Notification' option");
 		topic.startTopic(title, message, "", 0, userGroup, false, false, false, false, false, false, true);
 		waitForAndGetElement(By.linkText(title));
@@ -124,7 +123,7 @@ public class Forum_Forum_Topic_Add extends ForumBase{
 		//check email
 		Utils.pause(1000);
 		goToMail(EMAIL_ADDRESS1, EMAIL_PASS);
-		checkAndDeleteMail(By.xpath(ELEMENT_GMAIL_EMAIL.replace("${category}",catName).replace("${forum}", addForum[0]).replace("${topic}", title)), notification);
+		checkAndDeleteMail(By.xpath(ELEMENT_GMAIL_EMAIL.replace("${category}",catName).replace("${forum}", addForum[0]).replace("${topic}", title)), message);
 
 		// Clean data test
 		switchToParentWindow();
@@ -724,7 +723,6 @@ public class Forum_Forum_Topic_Add extends ForumBase{
 		- then click on Submit button
 		 *Expected Outcome: New Category is added successful with limit viewer topics inside its		*/
 		goToForums();
-		cat.goToAddCategory();
 		cat.addNewCategoryInForum(catName, order, chooseRestricted, restricted, description, setPermission, userGroup, false, false, false, true);
 
 		/*Step 3: Show form to create forum
@@ -739,7 +737,6 @@ public class Forum_Forum_Topic_Add extends ForumBase{
 		- Click on Permission tab: input/select user(s)/membership(s)/group(s) for â€œWho can view post field
 		- then click on Submit button
 		 *Expected Outcome: New forum is added successful with limit viewer topics inside its		*/
-		forum.goToAddForum();
 		forum.addForum(catName, addForum, false, "", "", false, 1, userGroup, false, true, false, false);
 
 		/*Step 5: Add new topic

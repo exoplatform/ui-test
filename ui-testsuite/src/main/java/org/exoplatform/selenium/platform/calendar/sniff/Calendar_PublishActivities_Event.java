@@ -575,6 +575,7 @@ public class Calendar_PublishActivities_Event extends CalendarBase{
 		/*Clear data*/
 		info("Clear data");
 		sp.goToMySpacePage();
+
 		sp.deleteSpace(space);
 	}
 }

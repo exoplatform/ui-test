@@ -61,11 +61,12 @@ public class TestBase {
 	//public final By ELEMENT_MENU_EDIT_LINK = By.xpath("//i[@class='uiIconPLF24x24Edit']");
 	//public final By ELEMENT_MENU_PAGE_LINK = By.linkText("Page");
 	//public final String AJAX_LOADING_MASK = "//div[@id='AjaxLoadingMask']";
-	public final String DEFAULT_BASEURL = "http://localhost:8080/portal";
+	public final String DEFAULT_BASEURL = "http://192.168.1.60:8080/portal";
 
 	//"http://community-4.1.x-snapshot.acceptance4.exoplatform.org/portal"; 
 	//"http://localhost:8080/portal";
 	//"http://192.168.3.50:8080/portal";
+
 
 	/*======= Welcome Screen (Term and Conditions) =====*/
 	public final By ELEMENT_FIRSTNAME_ACCOUNT = By.name("firstNameAccount");
@@ -98,7 +99,7 @@ public class TestBase {
 	public final By ELEMENT_COMMUNITY_ADD_ONS = By.xpath("//*[contains(text(), 'Community Add-ons')]");
 	public final By ELEMENT_COMMUNITY_SIGN_IN = By.xpath("//h5[text()='eXo Community Sign in']");
 	public final String ELEMENT_COMMUNITY_SIGN_IN_LINK = "//a[contains(text(),'Sign in')]";
-     
+
 	/*======== End of Term and conditions =====*/	
 
 	public void initSeleniumTestWithOutTermAndCondition(Object... opParams){
@@ -116,6 +117,7 @@ public class TestBase {
 //			capabilities.setCapability(FirefoxDriver.PROFILE, profile);
 //			driver = new FirefoxDriver(capabilities);
 			driver = new FirefoxDriver();
+
 		}
 		baseUrl = System.getProperty("baseUrl");
 		if (baseUrl==null) baseUrl = DEFAULT_BASEURL;
@@ -158,6 +160,7 @@ public class TestBase {
 		}	
     }
     
+
 	/**
 	 * Check term and conditions
 	 * 

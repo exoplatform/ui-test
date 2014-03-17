@@ -34,11 +34,14 @@ public class AnswerBase extends ForumBase {
 	public final By ELEMENT_UP_LEVEL = By.xpath("//i[@class='uiIconUpLevel uiIconLightGray']");
 	public final By ELEMENT_PRINT_ICON = By.xpath("//i[@class='uiIconPrint uiIconLightGray']");
 	public final By ELEMENT_HOME_ICON = By.xpath("//*[@class='uiIconHome uiIconLightGray']");
-	public final String ELEMENT_CATEGORY_LINK = "//a[contains(.,'${category}')]";
+	public final String ELEMENT_CATEGORY_LINK = "//*[@id='FAQViewCategoriesColumn']//a[contains(.,'${category}')]";
+	public final String ELEMENT_QUESTION_LINK = "//div[@id='UIAnswersPortlet']//a[contains(text(),'${question}')]";
+	public final By ELEMENT_TOTAL_PAGE = By.xpath("//span[@class='pagesTotalNumber']");
+	public final By ELEMENT_NEXT_PAGE = By.xpath("//a[@data-original-title='Next']");
 
 	//Add answer page
 	public final String DATA_ANSWER_PAGE_NAME = "Answer";
-	public final String CATEGORY_TITLE = "Collaboration";
+	public final String CATEGORY_TITLE = "answer";
 	public final String MSG_SAVE_ANSWER_PORTLET_SETTING = "The settings have been saved.";
 
 	//Search in answer
@@ -87,6 +90,9 @@ public class AnswerBase extends ForumBase {
 	public final By ELEMENT_MAIL_NEW_QUESTION_TAB = By.xpath("//button[text()='New Question']");
 	public final By ELEMENT_MAIL_EDIT_ANSWER_TAB = By.xpath("//button[text()='Edit/Answer']");
 	public final By ELEMENT_MAIL_MOVE_QUESTION_TAB = By.xpath("//button[text()='Move Question']");
+	public final By ELEMENT_ANSWER_SETTING_NEW_MAIL_FRAME41 = By.xpath(".//*[@id='cke_EmailAddNewQuestion']//iframe");
+	public final By ELEMENT_ANSWER_SETTING_EDIT_MAIL_FRAME41 = By.xpath(".//*[@id='cke_EmailEditQuestion']//iframe");
+	public final By ELEMENT_ANSWER_SETTING_MOVE_MAIL_FRAME41 = By.xpath("//*[@id='cke_EmailMoveQuestion']//iframe");
 	public final By ELEMENT_MAIL_CONTENT_FRAME1 = By.id("EmailMoveQuestion___Frame");
 	public final By ELEMENT_MAIL_CONTENT_FRAME2 = By.xpath("//*[@id='xEditingArea']/iframe");
 	public final By ELEMENT_CLOSE_SETTING_BUTTON = By.id("Close");
@@ -123,7 +129,7 @@ public class AnswerBase extends ForumBase {
 		page = new PageManagement(driver);
 
 		Map<String, String> ANSWER_PORTLET_ID = new HashMap<String, String>();
-		ANSWER_PORTLET_ID.put("Collaboration/AnswersPortlet", "");
+		ANSWER_PORTLET_ID.put("answer/local._faq.AnswersPortlet", "");
 
 		info("--Go to intranet--");
 		navTool.goToHomePage();
@@ -266,20 +272,26 @@ public class AnswerBase extends ForumBase {
 	 * @param content
 	 */
 	public void settingEmailTemplate(int tab, String content){
+		button = new Button(driver);
 		click(ELEMENT_MAIL_NOTIFICATION_TEMPLATE_TAB);
 		switch (tab) {
 		case 1:
 			click(ELEMENT_MAIL_NEW_QUESTION_TAB);
+			inputDataToFrame(ELEMENT_ANSWER_SETTING_NEW_MAIL_FRAME41, content);
 			break;
 		case 2:
 			click(ELEMENT_MAIL_EDIT_ANSWER_TAB);
+			inputDataToFrame(ELEMENT_ANSWER_SETTING_EDIT_MAIL_FRAME41, content);
 			break;
 		default:
 			click(ELEMENT_MAIL_MOVE_QUESTION_TAB);
+			inputDataToFrame(ELEMENT_ANSWER_SETTING_MOVE_MAIL_FRAME41, content);
 			break;
 		}
-
-		inputDataToFrameInFrame(ELEMENT_MAIL_CONTENT_FRAME1, ELEMENT_MAIL_CONTENT_FRAME2, content, true);
+		/*if(this.plfVersion.equals("4.0"))
+			inputDataToFrameInFrame(ELEMENT_MAIL_CONTENT_FRAME1, ELEMENT_MAIL_CONTENT_FRAME2, content, true);
+		else*/
+			
 		switchToParentWindow();
 		button.save();
 		click(ELEMENT_OK_INFOR_POPUP);
@@ -372,7 +384,7 @@ public class AnswerBase extends ForumBase {
 		Utils.pause(1000);
 	}
 
-	
+
 	//Set display Category
 	public void setDisplayCategory(String categoryScope, boolean display){
 		pageE = new PageEditor(driver);
@@ -380,9 +392,9 @@ public class AnswerBase extends ForumBase {
 		setDisplayCategoryScoping(categoryScope, display);
 		click(ELEMENT_CLOSE_SETTING_BUTTON);
 		pageE.finishEditLayout();
-		
+
 	}
-	
+
 	//Set Display mode in tab Display mode
 	public void setDisplayMode(boolean all, boolean date, boolean ascending, boolean...opts){
 		pageE = new PageEditor(driver);
@@ -390,5 +402,29 @@ public class AnswerBase extends ForumBase {
 		settingDisplayMode(all,date,ascending,opts);
 		click(ELEMENT_CLOSE_SETTING_BUTTON);
 		pageE.finishEditLayout();
+	}
+
+	/**
+	 * Switch page until the question is shown
+	 * @param questionName
+	 */
+	public void checkQuestionPresent(String questionName){
+		int page = 1;
+		if(waitForAndGetElement(ELEMENT_TOTAL_PAGE,10000,0) != null){
+			page = Integer.parseInt(waitForAndGetElement(ELEMENT_TOTAL_PAGE).getText());
+			for(int i = 1; i < page; i++){
+				if(waitForAndGetElement(ELEMENT_QUESTION_LINK.replace("${question}", questionName),5000,0) == null){
+
+					if(waitForAndGetElement(ELEMENT_NEXT_PAGE,5000,0) != null){
+						click(ELEMENT_NEXT_PAGE);
+					}
+				}else {
+					info("The question is found at the page " + i);
+					break;
+				}
+			}
+		}
+		waitForAndGetElement(ELEMENT_QUESTION_LINK.replace("${question}", questionName));
+
 	}
 }

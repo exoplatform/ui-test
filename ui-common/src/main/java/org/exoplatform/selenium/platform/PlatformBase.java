@@ -29,19 +29,19 @@ public class PlatformBase extends TestBase {
 	public final String DATA_USER4 = "jack";
 	public final String DATA_USER5 = "demo";
 	public final String DATA_PASS = "gtngtn";
-	
 	public final String USER_JOHN = "John";
 	public final String USER_MARY = "Mary";
 	public final String USER_JAMES = "James";
 	public final String USER_JACK = "Jack";
-	
 	public ManageAlert alert = new ManageAlert(driver);
 	public Button button = new Button(driver);
 	public Dialog dialog = new Dialog(driver);
 
 	/****************Common Elements*******************/
+	
+	
 	public final String ELEMENT_CONTAINS_TEXT = "//*[contains(text(),'${text}')]"; 
-
+	
 	/*
 	 * Default Page - http://localhost:8080/portal/default/
 	 * */
@@ -52,6 +52,7 @@ public class PlatformBase extends TestBase {
 	 * */
 	public final String ELEMENT_SIGN_IN_LINK = "//b[contains(text(),'Sign in')]";
 	public final By ELEMENT_REFRESH = By.xpath("//div[@class='activityStreamStatus pull-left']");
+
 	/*
 	 * Log in Form - Sign-out 
 	 */
@@ -77,6 +78,8 @@ public class PlatformBase extends TestBase {
 	public final By ELEMENT_LEFT_NAVIGATION_SEARCH_SPACE=By.xpath("//*[@id='UISpaceNavigationPortlet']//*[@value='Search Spaces']");
 	public final By ELEMENT_LEFT_NAVIGATION_COMPANY = By.className("uiCompanyNavigationPortlet");
 	public By ELEMENT_CALENDAR_PANEL = By.xpath("//div[@class='uiBox uiCalendars']");
+	public final By ELEMENT_COMMUNITY_BRAND = By.xpath("//h5[@class='title' and contains(text(),'Community')]");
+
 	/*
 	 * Navigation Bar
 	 */
@@ -224,7 +227,7 @@ public class PlatformBase extends TestBase {
 	public final By ELEMENT_EDIT_BASIC_INFORMATION = By.xpath("//*[@id='UIBasicInfoSection']//*[@class='uiIconEdit']");
 	public final By ELEMENT_FIRST_NAME_TEXTBOX_EDIT = By.id("firstName");
 	public final By ELEMENT_LAST_NAME_TEXTBOX_EDIT = By.id("lastName");
-	public final By ELEMENT_EMAIL_TEXTBOX_EDIT = By.id("email");
+	public final By ELEMENT_EMAIL_TEXTBOX_EDIT = By.xpath("//form[@id='UIBasicInfoSection']//*[@id='email']");
 	public final By ELEMENT_EDIT_BASIC_INFO_SAVE_BUTTON = By.xpath("//*[@id='UIBasicInfoSection']//button[contains(text(), 'Save')]");
 
 	//User-> Setting
@@ -343,11 +346,13 @@ public class PlatformBase extends TestBase {
 	public final String ELEMENT_MEMBERSHIP_EDIT_ICON = "//*[text()='${membership}']/../..//*[@data-original-title='Edit Membership']";
 	public final String ELEMENT_MEMBERSHIP_DELETE_ICON = "//*[text()='${membership}']/../..//*[@data-original-title='Delete Membership']";
 	public final String ELEMENT_NEXT_PAGE_ICON = "//a[@title='Next Page' or @data-original-title='Next Page']";
+
 	public final By ELEMENT_INPUT_NAME = By.id("name");
 	public final By ELEMENT_MEMBERSHIP_MANAGEMENT_GRID = By.xpath("//*[@class='UIListMembershipType']");
 	/*
 	 * Manage Account
 	 * */
+
 	public final By ELEMENT_COMMUNITY_SIGN_IN_BUTTON = By.xpath("//*[@type='submit']");
 	public final By ELEMENT_SIGN_IN_BUTTON = By.xpath("//*[@class='loginButton']/*");
 
@@ -435,6 +440,7 @@ public class PlatformBase extends TestBase {
 	public final String ELEMENT_LINK_EDITOR_PAGE_LAYOUT="//a[@class='ItemIcon EditPageIcon' and text()='Layout']";
 
 	public final By ELEMENT_UP_LEVEL=By.xpath("//a[@title='Up Level' or @data-original-title='Up Level']");
+
 	public final String ELEMENT_SELECT_LANGUAGE = "//select[@name='languages']";
 	public final String ELEMENT_INPUT_PAGE_DISPLAY_NAME = "//input[@id='pageDisplayName']";
 	public final String ELEMENT_PAGE_EDITOR_NEXT_STEP = "//button[text()='Next']";
@@ -666,7 +672,7 @@ public class PlatformBase extends TestBase {
 
 	//----------------------Gmail form ---------------------------------------------------
 	public final String GMAIL_URL = "https://mail.google.com";
-	public final String EMAIL_ADDRESS1 = "exomailtest01@gmail.com";
+	public final String EMAIL_ADDRESS1 = "fqaexovn@gmail.com";
 	public final String EMAIL_ADDRESS2 = "exoservice@gmail.com";
 	public final String EMAIL_PASS = "exoadmin";
 	//public final By ELEMENT_DELETE_MAIL = By.xpath("//*[@class='ar9 T-I-J3 J-J5-Ji']");
@@ -682,7 +688,7 @@ public class PlatformBase extends TestBase {
 	public final By ELEMENT_GMAIL_COMPOSE = By.xpath("//div[contains(text(),'COMPOSE')]");
 
 	public final By ELEMENT_FIRST_MAIL = By.xpath("//div[@class='iA g6' and contains(text(),'Hi')]/../../../../../table[@class='cf iB']");
-	public final String ELEMENT_GMAIL_CONTENT = "//*[@class='adn ads']//*[contains(text(),'${content}')]";
+	public final String ELEMENT_GMAIL_CONTENT = "//*[@class='adn ads']//*[contains(.,'${content}')]";
 	public final By ELEMENT_GMAIL_SIGN_IN_LINK = By.xpath("//a[@id='gmail-sign-in' and contains(text(),'Sign in')]");
 
 	//get url
@@ -1225,11 +1231,14 @@ public class PlatformBase extends TestBase {
 						if (data.equals(inputsummary.getText())) break;
 					}
 					else{
-						((JavascriptExecutor) driver).executeScript("document.body.innerHTML='" + data + "' + document.body.innerHTML;");
+						String text = (String)((JavascriptExecutor) driver).executeScript("return document.body.innerHTML;");
+						((JavascriptExecutor) driver).executeScript("document.body.innerHTML='" + data + text + "' ;");
 						break;
 					}
 				else {
-					((JavascriptExecutor) driver).executeScript("document.body.innerHTML='" + data + "' + document.body.innerHTML;");
+					String text = (String)((JavascriptExecutor) driver).executeScript("return document.body.innerHTML;");
+					((JavascriptExecutor) driver).executeScript("document.body.innerHTML='" + data + text + "' ;");
+//					((JavascriptExecutor) driver).executeScript("document.body.innerHTML='" + data + "' + document.body.innerHTML;");
 					if (inputsummary.getText().contains(data)) break;
 				}
 
@@ -1389,7 +1398,7 @@ public class PlatformBase extends TestBase {
 		waitForAndGetElement(mail,300000);
 
 		click(mail);	
-		if(waitForAndGetElement(ELEMENT_GMAIL_CONTENT.replace("${content}",content),20000,0) == null )
+		if(waitForAndGetElement(ELEMENT_GMAIL_CONTENT.replace("${content}",content),DEFAULT_TIMEOUT,0) == null )
 			click(ELEMENT_FIRST_MAIL);
 		waitForAndGetElement(ELEMENT_GMAIL_CONTENT.replace("${content}",content));
 		info("Found notify mail");

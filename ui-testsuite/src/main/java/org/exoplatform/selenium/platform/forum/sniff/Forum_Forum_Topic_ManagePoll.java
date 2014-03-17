@@ -30,7 +30,7 @@ public class Forum_Forum_Topic_ManagePoll extends ForumBase{
 	@BeforeMethod
 	public void setUpBeforeTest(){
 		initSeleniumTest();
-		magAc = new ManageAccount(driver);
+		magAc = new ManageAccount(driver,this.plfVersion);
 		mngCat = new ForumManageCategory(driver);
 		mngFru = new ForumManageForum(driver);
 		mngTopic = new ForumManageTopic(driver);
@@ -52,10 +52,10 @@ public class Forum_Forum_Topic_ManagePoll extends ForumBase{
 	 */
 	@Test
 	public void test01_AddPoll() {
-		String titleCat = "Category 01";
-		String titleForum = "Forum 01";
-		String titleTop = "Topic 01";
-		String poll = "Poll of topic 01";
+		String titleCat = "Category 74762";
+		String titleForum = "Forum 74762";
+		String titleTop = "Topic 74762";
+		String poll = "Poll of topic 74762";
 		String[] options =  {"Option 01","Option 02"};
 		mngTopic.addCategoryForumTopic(titleCat, titleForum, titleTop,titleTop); 
 		click(mngFru.ELEMENT_TOPIC_LINK.replace("${topic}", titleTop));
@@ -72,12 +72,12 @@ public class Forum_Forum_Topic_ManagePoll extends ForumBase{
 	 */
 	@Test
 	public void test02_EditPoll() {
-		String titleCat = "Category 02";
-		String titleForum = "Forum 02";
-		String titleTop = "Topic 02";
-		String poll = "Poll of topic 02";
-		String newPoll = "New Poll of topic 02";
-		String[] options =  {"Option 01","Option 02"};
+		String titleCat = "Category 71202";
+		String titleForum = "Forum 71202";
+		String titleTop = "Topic 71202";
+		String poll = "Poll of topic 71202";
+		String newPoll = "New Poll of topic 71202";
+		String[] options =  {"Option 01","Option 71202"};
 		String[] newOptions = {"New Option 01", "New Option 02"};
 		
 		

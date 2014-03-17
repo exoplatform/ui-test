@@ -42,7 +42,7 @@ public class Forum_Forum_Forum_Activities extends ForumBase{
 		fmPost = new ForumManagePost(driver);
 		homePage = new HomePageActivity(driver);
 		spaceMan = new SpaceManagement(driver);
-		activity = new Activity();
+		activity = new Activity(driver);
 		manMember = new ManageMember(driver);
 		acc = new ManageAccount(driver);
 		acc.signIn(DATA_USER1, DATA_PASS);

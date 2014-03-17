@@ -26,7 +26,7 @@ public class Wiki_Search extends Template {
 	public void setUpBeforeTest(){
 		initSeleniumTest();
 		driver.get(baseUrl);
-		magAc = new ManageAccount(driver);
+		magAc = new ManageAccount(driver,this.plfVersion);
 		naTool = new NavigationToolbar(driver);
 		activity = new HomePageActivity(driver);
 		magMem = new ManageMember(driver);

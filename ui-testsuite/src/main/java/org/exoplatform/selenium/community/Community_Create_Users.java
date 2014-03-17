@@ -33,6 +33,7 @@ public class Community_Create_Users extends PlatformBase{
 		userGroup = new UserGroupManagement(driver);
 		button = new Button(driver, plfVersion);
 		info("== Updating users for Community Sites ==");
+
 	}
 
 	@AfterMethod
@@ -43,6 +44,7 @@ public class Community_Create_Users extends PlatformBase{
 
 	@Test
 	public void test01_CreateUser(){
+
 		info("== Signin to Community with user fqa");
 		magAccount.signIn("fqa", "gtngtn");
 		navBar.goToNewStaff();                
@@ -63,7 +65,7 @@ public class Community_Create_Users extends PlatformBase{
 		userGroup.addUsersToGroup("john", "*", false, false);
 		userGroup.addUsersToGroup("john", "manager", false, false);
 		click(ELEMENT_UP_LEVEL);
-	
+
 		//platform/users
 		userGroup.selectGroup("Platform/Users", true);
 		userGroup.addUsersToGroup("john", "*", false, false);
@@ -100,12 +102,15 @@ public class Community_Create_Users extends PlatformBase{
 		userGroup.addUsersToGroup("demo", "member", true, true);
 		userGroup.addUsersToGroup("john", "member", true, true);
 	}
-	
-	@Test
+
+
+	@Test(priority=0)
 	public void test02_UpdateUserAccount(){
+
 		String userEditIcon;
 		info("== Signin to Community with user fqa");
 		magAccount.signIn("fqa", "gtngtn");
+
 		navBar.goToUsersAndGroupsManagement();                
 		info("Change password of users");
 		info("--Editing user john ");
@@ -117,7 +122,7 @@ public class Community_Create_Users extends PlatformBase{
 		button.save();
 		waitForMessage(userGroup.MSG_UPDATE_USER_ACCOUNT);
 		button.ok();
-		
+
 		userEditIcon = ELEMENT_USER_EDIT_ICON.replace("${username}", "mary");
 		userGroup.searchUser("mary@localhost", "Email");
 		click(userEditIcon);
@@ -126,13 +131,13 @@ public class Community_Create_Users extends PlatformBase{
 		button.save();
 		waitForMessage(userGroup.MSG_UPDATE_USER_ACCOUNT);
 		button.ok();
-		
-//		userGroup.goToEditUserInfo("james");
-//		userGroup.editUserInfo_AccountTab("James", "Davis", "James Davis", "james.davis@acme.exoplatform.com", "gtngtn");
-//		button.save();
-//		waitForMessage(userGroup.MSG_UPDATE_USER_ACCOUNT);
-//		button.ok();
-				
+
+		//		userGroup.goToEditUserInfo("james");
+		//		userGroup.editUserInfo_AccountTab("James", "Davis", "James Davis", "james.davis@acme.exoplatform.com", "gtngtn");
+		//		button.save();
+		//		waitForMessage(userGroup.MSG_UPDATE_USER_ACCOUNT);
+		//		button.ok();
+
 		userEditIcon = ELEMENT_USER_EDIT_ICON.replace("${username}", "demo");
 		userGroup.searchUser("demo@localhost", "Email");
 		click(userEditIcon);
@@ -141,7 +146,7 @@ public class Community_Create_Users extends PlatformBase{
 		button.save();
 		waitForMessage(userGroup.MSG_UPDATE_USER_ACCOUNT);
 		button.ok();
-		
+
 		userEditIcon = ELEMENT_USER_EDIT_ICON.replace("${username}", "root");
 		userGroup.searchUser("admin@exoplatform.com", "Email");
 		click(userEditIcon);
@@ -162,6 +167,7 @@ public class Community_Create_Users extends PlatformBase{
 		magAccount.addNewUserAccount("james", DATA_PASS, DATA_PASS, "James", "Davis", "James Davis", "james.davis@acme.exoplatform.com", "", "", false);
 	}
 	
+
 	@Test(priority=1)
 	public void test03_UpdateMembership(){
 		info("== Signin to Community with user root");
@@ -170,44 +176,62 @@ public class Community_Create_Users extends PlatformBase{
 		userGroup.chooseGroupTab();
 		userGroup.selectGroup("Platform/Administrators", true);
 		if(!userGroup.checkUserInGroup("john", "*")){
+
+			userGroup.goToFirstPage();
 			userGroup.addUsersToGroup("john", "*", false, false);
 		}
 
 		click(ELEMENT_UP_LEVEL);
-		userGroup.selectGroup("Platform/Content Management", true);
+
+		userGroup.selectGroup("Platform/Web Contributors", true);
 		if(!userGroup.checkUserInGroup("john", "*")){
+			userGroup.goToFirstPage();
 			userGroup.addUsersToGroup("john", "*", false, false);
 		}
 		if(!userGroup.checkUserInGroup("mary", "manager")){
+			userGroup.goToFirstPage();
 			userGroup.addUsersToGroup("mary", "manager", false, false);
 		}
 
 		if(!userGroup.checkUserInGroup("mary", "editor")){
+
+			userGroup.goToFirstPage();
 			userGroup.addUsersToGroup("mary", "editor", false, false);
 		}
 		if(!userGroup.checkUserInGroup("james", "author")){
+			userGroup.goToFirstPage();
 			userGroup.addUsersToGroup("james", "author", false, false);
 		}
 
 		if(!userGroup.checkUserInGroup("james", "redactor")){
+
+			userGroup.goToFirstPage();
 			userGroup.addUsersToGroup("james", "redactor", false, false);
 		}
 		click(ELEMENT_UP_LEVEL);
 		userGroup.selectGroup("Organization/Employees", true);
 
 		if(!userGroup.checkUserInGroup("john", "*")){
+
+			userGroup.goToFirstPage();
 			userGroup.addUsersToGroup("john", "*", false, false);
 		}
 
 		if(!userGroup.checkUserInGroup("mary", "member")){
+
+			userGroup.goToFirstPage();
 			userGroup.addUsersToGroup("mary", "member", false, false);
 		}
 
 		if(!userGroup.checkUserInGroup("james", "member")){
+
+			userGroup.goToFirstPage();
 			userGroup.addUsersToGroup("james", "member", false, false);
 		}
 
 		if(!userGroup.checkUserInGroup("demo", "member")){
+
+			userGroup.goToFirstPage();
 			userGroup.addUsersToGroup("demo", "member", false, false);
 		}
 
@@ -215,6 +239,8 @@ public class Community_Create_Users extends PlatformBase{
 		//Organization/Management/Executive Board
 		userGroup.selectGroup("Organization/Management/Executive Board", true);
 		if(!userGroup.checkUserInGroup("john", "*")){
+
+			userGroup.goToFirstPage();
 			userGroup.addUsersToGroup("john", "*", false, false);
 		}
 
@@ -225,10 +251,14 @@ public class Community_Create_Users extends PlatformBase{
 
 		userGroup.selectGroup("Development", true);
 		if(!userGroup.checkUserInGroup("demo", "member")){
+
+			userGroup.goToFirstPage();
 			userGroup.addUsersToGroup("demo", "member", false, false);
 		}
 
 		if(!userGroup.checkUserInGroup("john", "member")){
+
+			userGroup.goToFirstPage();
 			userGroup.addUsersToGroup("john", "member", false, false);
 		}
 

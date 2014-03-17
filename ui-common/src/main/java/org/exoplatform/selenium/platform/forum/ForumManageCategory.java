@@ -26,7 +26,7 @@ public class ForumManageCategory extends ForumBase {
 	ManageAccount account;
 	ManageAlert magAlert;
 	public ForumManageCategory(WebDriver dr,String...plfVersion){
-		this.plfVersion = plfVersion.length>0?plfVersion[0]:"4.0";
+		this.plfVersion = plfVersion.length>0?plfVersion[0]:"4.1";
 		driver = dr;
 		frumPer = new ForumPermission(driver,this.plfVersion);
 		button = new Button(driver,this.plfVersion);
@@ -128,7 +128,10 @@ public class ForumManageCategory extends ForumBase {
 			break;
 		case 2:
 			click(ELEMENT_RESTRICTED_SELECT_USER);
-			per.selectUserPermission(restricted[0]);
+			if(restricted.length > 1)
+				per.selectUserPermission(restricted[0],Integer.parseInt(restricted[1]));
+			else
+				per.selectUserPermission(restricted[0]);
 			break;
 		case 3:
 			click(ELEMENT_RESTRICTED_SELECT_GROUP);
@@ -246,21 +249,22 @@ public class ForumManageCategory extends ForumBase {
 
 		click(ELEMENT_MANAGE_CATEGORY);
 		info("Delete category");
-		if(plfVersion =="4.1"){
-			click (ELEMENT_DELETE_CATEGORY_PLF4_1);
+		if(plfVersion =="4.0"){
+			click(ELEMENT_DELETE_CATEGORY);
+
 			//click(ELEMENT_OK_DELETE_CATEGORY);
 		}
-		else{// if (plfVersion =="4.0"){
-			click(ELEMENT_DELETE_CATEGORY);
-			
+		else{
+			click (ELEMENT_DELETE_CATEGORY_PLF4_1);
+
 		}		
 		alert.waitForMessage("Are you sure you want to delete this category?");
 		click(ELEMENT_OK_DELETE_CATEGORY);
 		if(check){
 			//waitForTextNotPresent(title);
-			
+
 			waitForElementNotPresent("//strong[text()='"+title+"']");
-			waitForElementNotPresent(By.linkText(title));
+			waitForElementNotPresent(By.linkText(title),60000);
 		}
 		info("Delete category successfully");
 	}
@@ -276,24 +280,26 @@ public class ForumManageCategory extends ForumBase {
 		info("Import category");
 		WebElement element = waitForAndGetElement(ELEMENT_IMPORT_FILE, DEFAULT_TIMEOUT, 1, 2);
 		((JavascriptExecutor)driver).executeScript("arguments[0].style.display = 'block';", element);
+		info(Utils.getAbsoluteFilePath("TestData/" + file));
 		element.sendKeys(Utils.getAbsoluteFilePath("TestData/" + file));
+
 		switchToParentWindow();
 		String[] links = file.split("/");
 		waitForAndGetElement("//*[contains(text(),'" + links[links.length-1] + "')]", DEFAULT_TIMEOUT, 1, 2);
 		button.save();
 		//click(ELEMENT_ADMINISTRATION);
 		//click(ELEMENT_IMPORT);
-		if(plfVersion =="4.0"){
+//		if(plfVersion =="4.0"){
 			waitForMessage(MSG_IMPORT_CATEGORY);
-			
+
 			info("Import file " + file + "successfully");
 			click(ELEMENT_OK_INFOR_POPUP);
 			Utils.pause(1000);
-		}
-		else{// if (plfVersion =="4.1"){
+//		}
+		/*else{// if (plfVersion =="4.1"){
 			info("Import file " + file + "successfully");
-		}		
-	
+		}*/		
+
 	}
 
 	/** function: export a category

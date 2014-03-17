@@ -64,18 +64,17 @@ public class Forum_Answers_Question_DeleteQuestion extends AnswerBase {
 		
 		//- Click on [All questions] tab
 		//- All question tab is shown
-		click(magQuest.ELEMENT_MANAGE_QUESTION_ALL_QUESTIONS_TAB);
-		waitForAndGetElement(magQuest.ELEMENT_DELETE_QUESTION_IN_ALL_QUESTION_TAB_LIST.replace("${question}", questionName));
+		magQuest.checkQuestionPresentOnManageQuestion(questionName);
 		
 		//Step 3:Delete question
 		//- Click on Deletion icon corresponding to the question you want to delete
 		//- Click OK in confirm message
 		//- Question is deleted successfully and not shown at Category
 		magQuest.deleteQuestion(3, questionName);
+		click(magQuest.ELEMENT_MANAGE_QUESTION_CLOSE_BUTTON);
 
 		/*Clear data*/
 		info("-- Clear data --");
-		goToAnwserHome();
 		magCat.deleteCategoryInAnswer(categoryName);
 	}
 
@@ -104,7 +103,8 @@ public class Forum_Answers_Question_DeleteQuestion extends AnswerBase {
 		
 		//- Click on [Open questions] tab
 		//- Pending questions tab is shown
-		click(magQuest.ELEMENT_MANAGE_QUESTION_OPEN_QUESTIONS_TAB);
+		magQuest.goToOpenQuestionTab();
+		magQuest.checkQuestionPresentOnManageQuestion(questionName);
 		waitForAndGetElement(magQuest.ELEMENT_DELETE_QUESTION_IN_PENDING_QUESTION_TAB_LIST.replace("${question}", questionName));
 		
 		//Step 3:Delete question

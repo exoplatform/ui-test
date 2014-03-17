@@ -7,6 +7,8 @@ import org.exoplatform.selenium.ManageAlert;
 import org.exoplatform.selenium.Utils;
 import org.exoplatform.selenium.platform.PlatformPermission;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 
 /**
@@ -35,7 +37,8 @@ public class ForumPermission extends ForumBase {
 	public final By ELEMENT_CATEGORY_PERMISSION_BLANK = By.xpath("//div[@id='PermissionTab']");
 
 	//Set permission for category of forum
-	public final String ELEMENT_MODERATOR_FORUM_CATEGORY_CHECKBOX = "//*[contains(text(), '${user}')]/../../td[2]//input[@type='checkbox']";
+	public final String ELEMENT_MODERATOR_FORUM_CATEGORY_CHECKBOX = "//*[contains(text(), '${user}')]/../../td[3]//input[@type='checkbox']";
+	public final String ELEMENT_RESTRICT_FORUM_CATEGORY_CHECKBOX = "//*[contains(text(), '${user}')]/../../td[2]//input[@type='checkbox']";
 	public final String ELEMENT_START_TOPIC_FORUM_CATEGORY_CHECKBOX = "//*[contains(text(), '${user}')]/../../td[3]//input[@type='checkbox']";
 	public final String ELEMENT_POST_FORUM_CATEGORY_CHECKBOX = "//*[contains(text(), '${user}')]/../../td[4]//input[@type='checkbox']";
 	public final String ELEMENT_VIEW_POST_FORUM_CATEGORY_CHECKBOX = "//*[contains(text(), '${user}')]/../../td[5]//input[@type='checkbox']";
@@ -63,7 +66,7 @@ public class ForumPermission extends ForumBase {
 	 * @param userGroup
 	 */
 	public void setPermissionWithOption(int type, String[] userGroup){
-		//		per = new PlatformPermission(driver);
+		per = new PlatformPermission(driver);
 		click(ELEMENT_PERMISSION_TAB);
 		switch (type){
 		case 1:
@@ -113,9 +116,11 @@ public class ForumPermission extends ForumBase {
 	 */
 	public void configPermission4AnswerCategory(int type, String[] userGroup, boolean restricted, boolean moderator, boolean...notFound){
 		setPermissionWithOption(type, userGroup);
-		click(ELEMENT_CATEGORY_PERMISSION_BLANK);
-		Utils.pause(1000);
-		click(button.ELEMENT_ADD_BUTTON,2);
+		//		waitForAndGetElement(per.ELEMENT_PERMISSION_INPUT).sendKeys(Keys.TAB,Keys.TAB,Keys.TAB,Keys.TAB);
+		//		String script = waitForAndGetElement(button.ELEMENT_ADD_BUTTON).getAttribute("onclick");
+		//		((JavascriptExecutor) driver).executeScript(script);
+		click(button.ELEMENT_ADD_BUTTON);
+
 		boolean notF = notFound.length > 0 ? notFound[0] : false;
 		if (notF){
 			waitForMessage(userGroup[0]+MSG_PERMISSION_NOT_FOUND);
@@ -159,8 +164,10 @@ public class ForumPermission extends ForumBase {
 	 */
 	public void configPermission4ForumCategory(int type, String[] userGroup, boolean...permission){
 		setPermissionWithOption(type, userGroup);
-		click(ELEMENT_FORUM_CATEGORY_PERMISSION_GRID);
-		click(button.ELEMENT_ADD_BUTTON);
+		waitForAndGetElement(per.ELEMENT_PERMISSION_INPUT).sendKeys(Keys.TAB,Keys.TAB,Keys.TAB,Keys.TAB);
+		String script = waitForAndGetElement(button.ELEMENT_ADD_BUTTON).getAttribute("onclick");
+		((JavascriptExecutor) driver).executeScript(script);
+		//		click(button.ELEMENT_ADD_BUTTON);
 		String check = "";
 		String[] groups = userGroup[0].split("/");
 		if ((type == 4) || (type == 3)){
@@ -178,6 +185,7 @@ public class ForumPermission extends ForumBase {
 			check = userGroup[2];
 		}
 
+		//Set moderator or not
 		if (permission.length > 0){
 			if (permission[0]){
 				check(ELEMENT_MODERATOR_FORUM_CATEGORY_CHECKBOX.replace("${user}", check), 2);
@@ -185,7 +193,15 @@ public class ForumPermission extends ForumBase {
 				uncheck(ELEMENT_MODERATOR_FORUM_CATEGORY_CHECKBOX.replace("${user}", check), 2);
 			}
 		}
-		if (permission.length > 1){
+		//Set restrict or not
+		if(permission.length > 1){
+			if (permission[1]){
+				check(ELEMENT_RESTRICT_FORUM_CATEGORY_CHECKBOX.replace("${user}", check), 2);
+			} else {
+				uncheck(ELEMENT_RESTRICT_FORUM_CATEGORY_CHECKBOX.replace("${user}", check), 2);
+			}
+		}
+		/*if (permission.length > 1){
 			if (permission[1]){
 				check(ELEMENT_START_TOPIC_FORUM_CATEGORY_CHECKBOX.replace("${user}", check), 2);
 			} else {
@@ -205,7 +221,7 @@ public class ForumPermission extends ForumBase {
 			} else {
 				uncheck(ELEMENT_VIEW_POST_FORUM_CATEGORY_CHECKBOX.replace("${user}", check), 2);
 			}
-		}
+		}*/
 	}
 
 	/**
@@ -217,7 +233,10 @@ public class ForumPermission extends ForumBase {
 	public void configPermission4Forum(int type, String[] userGroup, boolean...permission){
 		//click(button.ELEMENT_ADD_BUTTON);
 		setPermissionWithOption(type, userGroup);
-		click(ELEMENT_FORUM_FORUM_PERMISSION);
+		waitForAndGetElement(per.ELEMENT_PERMISSION_INPUT).sendKeys(Keys.TAB,Keys.TAB,Keys.TAB,Keys.TAB);
+		String script = waitForAndGetElement(button.ELEMENT_ADD_BUTTON).getAttribute("onclick");
+		((JavascriptExecutor) driver).executeScript(script);
+
 		Utils.pause(1000);
 		click(button.ELEMENT_ADD_BUTTON,2);
 		Utils.pause(1000);

@@ -39,7 +39,6 @@ public class AnswerManageCategory extends AnswerBase {
 	public final By ELEMENT_MODERATE_ANSWER = By.id("moderateAnswers");
 	public final By ELEMENT_MODERATOR = By.id("moderator");
 	public final By ELEMENT_EDIT_CATEGORY_MENU = By.xpath("//*[@class='uiIconEditCategory']");
-	public final By ELEMENT_EDIT_CATEGORY_RIGHT_CLICK = By.linkText(" Edit");
 
 
 	//Delete category
@@ -57,10 +56,11 @@ public class AnswerManageCategory extends AnswerBase {
 	public final String ELEMENT_IMPORT_SUCCESS_MESSAGE = "The file has been imported.";
 
 	//context menu
-	public final By ELEMENT_MOVE_CATEGORY_LINK = By.linkText(" Move");
-	public final By ELEMENT_DELETE_CATEGORY_LINK = By.linkText(" Delete");
-	public final By ELEMENT_WATCH_CATEGORY_LINK = By.linkText(" Watch");
-	public final By ELEMENT_UNWATCH_CATEGORY_LINK = By.linkText(" Unwatch");
+	public final String ELEMENT_MOVE_CATEGORY_LINK = "//a[contains(.,'${category}')]/..//a[contains(.,'Move')]";
+	public final String ELEMENT_DELETE_CATEGORY_LINK = "//a[contains(.,'${category}')]/..//a[contains(.,'Delete')]";
+	public final String ELEMENT_WATCH_CATEGORY_LINK = "//a[contains(.,'${category}')]/..//a[contains(.,'Watch')]";
+	public final String ELEMENT_UNWATCH_CATEGORY_LINK = "//a[contains(.,'${category}')]/..//a[contains(.,'Unwatch')]";
+	public final String ELEMENT_EDIT_CATEGORY_RIGHT_CLICK = "//a[contains(.,'${category}')]/..//a[contains(.,'Edit')]";
 
 	//watch/unwatch category
 	public final String MESSAGE_WATCH_CATEGORY = "You are watching this category. You will be notified about all changes.";
@@ -68,7 +68,7 @@ public class AnswerManageCategory extends AnswerBase {
 
 	//move page
 	public final String ELEMENT_CATEGORY_IN_MOVE_FORM = "//*[@id='UIMoveCategoryForm']//*[text()='${category}']";
-	public final String ELEMENT_CATEGORY_LINK = "//a[contains(.,'${category}')]";
+	public final String ELEMENT_CATEGORY_LINK = "//*[@id='UICategories']//a[contains(.,'${category}')]";
 	/*----------------------------------common function----------------------------------*/
 
 	/**
@@ -77,9 +77,16 @@ public class AnswerManageCategory extends AnswerBase {
 	 */
 	public void openCategoryInAnswer(String categoryName){
 		info("Open category " + categoryName);
+
+
 		for (int i = 0; i < ACTION_REPEAT; i ++){
 			if (waitForAndGetElement(ELEMENT_CATEGORY_LINK.replace("${category}", categoryName),DEFAULT_TIMEOUT,0) != null) break;
-			else Utils.pause(1000);
+			else{ 
+				if(waitForAndGetElement(ELEMENT_ANSWER_HOME_LINK,3000,0) != null) 
+					goToAnwserHome();
+				else break;
+			}
+
 		}
 		//		getElementFromTextByJquery(categoryName).click();
 		click(ELEMENT_CATEGORY_LINK.replace("${category}", categoryName));
@@ -153,6 +160,7 @@ public class AnswerManageCategory extends AnswerBase {
 			forumPer.configPermission4AnswerCategory(permission, userGroup, restricted, moderator);
 		}
 		button.save();
+		waitForElementNotPresent(button.ELEMENT_SAVE_BUTTON,60000,0);
 		Utils.pause(2000);
 	}
 
@@ -176,7 +184,7 @@ public class AnswerManageCategory extends AnswerBase {
 			if (waitForAndGetElement(ELEMENT_CATEGORY_LINK.replace("${category}", categoryName), DEFAULT_TIMEOUT,0) != null){
 				info("Edit category by right click");
 				rightClickOnElement(ELEMENT_CATEGORY_LINK.replace("${category}", categoryName));
-				click(ELEMENT_EDIT_CATEGORY_RIGHT_CLICK);
+				click(ELEMENT_EDIT_CATEGORY_RIGHT_CLICK.replace("${category}", categoryName));
 			} else {
 				info("Edit category while opening category");
 				click(ELEMENT_CATEGORY_BUTTON);
@@ -207,7 +215,7 @@ public class AnswerManageCategory extends AnswerBase {
 		if (waitForAndGetElement(ELEMENT_CATEGORY_LINK.replace("${category}", categoryName),DEFAULT_TIMEOUT,0) != null){
 			info("Delete category by right click");
 			rightClickOnElement(ELEMENT_CATEGORY_LINK.replace("${category}", categoryName));
-			click(ELEMENT_DELETE_CATEGORY_LINK);
+			click(ELEMENT_DELETE_CATEGORY_LINK.replace("${category}", categoryName));
 		}else {
 			info("Delete category while opening category");
 			click(ELEMENT_CATEGORY_BUTTON);
@@ -217,7 +225,7 @@ public class AnswerManageCategory extends AnswerBase {
 		click(ELEMENT_OK_DELETE_BUTTON);
 		if (check){
 			//waitForTextNotPresent(categoryName);
-			waitForElementNotPresent(By.linkText(categoryName));
+			waitForElementNotPresent(ELEMENT_CATEGORY_LINK.replace("${category}", categoryName),60000);
 		}
 		Utils.pause(1000);
 	}
@@ -231,7 +239,7 @@ public class AnswerManageCategory extends AnswerBase {
 		action = new Actions(driver);
 		info("Move category " + source + "to category " + destination);
 		rightClickOnElement(ELEMENT_CATEGORY_LINK.replace("${category}", source));
-		click(ELEMENT_MOVE_CATEGORY_LINK);
+		click(ELEMENT_MOVE_CATEGORY_LINK.replace("${category}", source));
 		doubleClickOnElement(ELEMENT_CATEGORY_IN_MOVE_FORM.replace("${category}", destination));
 		waitForElementNotPresent(ELEMENT_CATEGORY_IN_MOVE_FORM.replace("${category}", destination));
 	}
@@ -280,8 +288,8 @@ public class AnswerManageCategory extends AnswerBase {
 		action = new Actions(driver);
 		action.contextClick(getElementFromTextByJquery(categoryName)).perform();
 		if (watch){
-			if (waitForAndGetElement(ELEMENT_WATCH_CATEGORY_LINK, 5000, 0) != null){
-				click(ELEMENT_WATCH_CATEGORY_LINK);
+			if (waitForAndGetElement(ELEMENT_WATCH_CATEGORY_LINK.replace("${category}", categoryName), 5000, 0) != null){
+				click(ELEMENT_WATCH_CATEGORY_LINK.replace("${category}", categoryName));
 				waitForMessage(MESSAGE_WATCH_CATEGORY);
 				click(ELEMENT_OK_INFOR_POPUP);	
 				waitForAndGetElement(WATCH_CATEGORY_ICON);
@@ -289,8 +297,8 @@ public class AnswerManageCategory extends AnswerBase {
 				info("Category has already watched");
 			}
 		}else {
-			if (waitForAndGetElement(ELEMENT_UNWATCH_CATEGORY_LINK, 5000, 0) != null) {
-				click(ELEMENT_UNWATCH_CATEGORY_LINK);
+			if (waitForAndGetElement(ELEMENT_UNWATCH_CATEGORY_LINK.replace("${category}", categoryName), 5000, 0) != null) {
+				click(ELEMENT_UNWATCH_CATEGORY_LINK.replace("${category}", categoryName));
 				waitForElementNotPresent(WATCH_CATEGORY_ICON);
 			}else {
 				info("Category has not watched to unwatch");

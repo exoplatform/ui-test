@@ -25,6 +25,7 @@ import org.exoplatform.selenium.platform.ManageAccount;
 import org.exoplatform.selenium.platform.ManageAccount.userType;
 import org.exoplatform.selenium.platform.social.ManageMember;
 import org.exoplatform.selenium.platform.wiki.ManageDraft;
+
 import org.openqa.selenium.By;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -50,6 +51,7 @@ public class Wiki_BasicAction_Add extends ManageDraft{
 		driver.get(baseUrl);
 		driver.manage().window().maximize();
 		magAcc = new ManageAccount(driver);
+
 		dialog = new Dialog(driver);	
 		button = new Button(driver, this.plfVersion);	
 		mMember = new ManageMember(driver, this.plfVersion);	

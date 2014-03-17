@@ -33,7 +33,7 @@ public class Forum_Forum_PublishActivity_TopicActivity extends ForumBase{
 	public void setUpBeforeTest(){
 		initSeleniumTest();
 		driver.get(baseUrl);
-		magAc = new ManageAccount(driver);
+		magAc = new ManageAccount(driver,this.plfVersion);
 		mngFru = new ForumManageForum(driver,this.plfVersion);
 		mngCat = new ForumManageCategory(driver);
 		mngPost = new ForumManagePost(driver,this.plfVersion);
@@ -56,10 +56,10 @@ public class Forum_Forum_PublishActivity_TopicActivity extends ForumBase{
 	 */
 	@Test
 	public void test01_CheckTopicASafterMoveTopic(){
-		String titleCat = "Category 01";
-		String titleForum = "Forum 01";
-		String titleTop = "Topic 01";
-		String forum2 = "Forum 02";
+		String titleCat = "Category 75275";
+		String titleForum = "Forum 75275 1";
+		String titleTop = "Topic 75275";
+		String forum2 = "Forum 75275 2";
 		String[] addForum2 = {forum2, "1",null,null,forum2};
 		String[] permission = {};
 		
@@ -77,7 +77,7 @@ public class Forum_Forum_PublishActivity_TopicActivity extends ForumBase{
 		click(By.linkText(titleForum));
 		click(mngFru.ELEMENT_TOPIC_LINK.replace("${topic}", titleTop));
 		waitForAndGetElement(mngPost.ELEMENT_POST_REPLY_BUTTON);
-		mngTopic.moveTopic(titleTop, forum2);
+		mngTopic.moveTopic(titleTop, titleCat+"/"+forum2);
 		
 		//Check activity
 		navTool.goToHomePage();
@@ -95,9 +95,9 @@ public class Forum_Forum_PublishActivity_TopicActivity extends ForumBase{
 	 */
 	@Test
 	public void test02_CheckTopicASafterCreateTopic(){
-		String titleCat = "Category 02";
-		String titleForum = "Forum 02";
-		String titleTop = "Topic 02";
+		String titleCat = "Category 75276";
+		String titleForum = "Forum 75276";
+		String titleTop = "Topic 75276";
 		String descTop = "line1<br>line2<br>line3<br>line4<br>line5";
 		String reply = "Reply on this topic";
 		
@@ -127,11 +127,11 @@ public class Forum_Forum_PublishActivity_TopicActivity extends ForumBase{
 	 */
 	@Test
 	public void test03_CheckTopicASafterUpdateTopicTitle(){
-		String titleCat = "Category 03";
-		String titleForum = "Forum 03";
-		String titleTop = "Topic 03";
+		String titleCat = "Category 75277";
+		String titleForum = "Forum 75277";
+		String titleTop = "Topic 75277";
 		String descTop = "line1<br>line2<br>line3<br>line4<br>line5";
-		String newTopic = "New Topic 03";
+		String newTopic = "Topic New 75277";
 		String[] userGroup ={};
 		
 		info("Update topic title");
@@ -142,7 +142,7 @@ public class Forum_Forum_PublishActivity_TopicActivity extends ForumBase{
 			
 		navTool.goToHomePage();
 		waitForAndGetElement(By.linkText(newTopic));
-		hpgAct.checkTitleAfterEditing(titleTop,newTopic);
+		hpgAct.checkTitleAfterEditQuestion(newTopic);
 		
 		//Delete data
 		goToForums();
@@ -156,9 +156,9 @@ public class Forum_Forum_PublishActivity_TopicActivity extends ForumBase{
 	 */
 	@Test
 	public void test04_CheckTopicASafterUpdateTopicContent(){
-		String titleCat = "Category 04";
-		String titleForum = "Forum 04";
-		String titleTop = "Topic 04";
+		String titleCat = "Category 75278";
+		String titleForum = "Forum 75278";
+		String titleTop = "Topic 75278";
 		String descTop = "line1<br>line2<br>line3<br>line4<br>line5";
 		String newDesc = "New<br>";
 		String[] userGroup ={};
@@ -185,9 +185,9 @@ public class Forum_Forum_PublishActivity_TopicActivity extends ForumBase{
 	 */
 	@Test
 	public void test05_CheckTopicASafterLockUnlockTopic(){
-		String titleCat = "Category 05";
-		String titleForum = "Forum 05";
-		String titleTop = "Topic 05";
+		String titleCat = "Category 75279";
+		String titleForum = "Forum 75279";
+		String titleTop = "Topic 75279";
 		String descTop = "line1<br>line2<br>line3<br>line4<br>line5";
 		
 		info("Lock/Unlock a topic");
@@ -221,9 +221,9 @@ public class Forum_Forum_PublishActivity_TopicActivity extends ForumBase{
 	 */
 	@Test
 	public void test06_CheckTopicASafterDeleteTopic(){
-		String titleCat = "Category 06";
-		String titleForum = "Forum 06";
-		String titleTop = "Topic 06";
+		String titleCat = "Category 75280";
+		String titleForum = "Forum 75280";
+		String titleTop = "Topic 75280";
 		String descTop = "line1<br>line2<br>line3<br>line4<br>line5";
 		
 		info("Delete topic");
@@ -252,9 +252,9 @@ public class Forum_Forum_PublishActivity_TopicActivity extends ForumBase{
 	 */
 	@Test
 	public void test07_OpenReplyFormByClickReplyOnActivity(){
-		String titleCat = "Category 07";
-		String titleForum = "Forum 07";
-		String titleTop = "Topic 07";
+		String titleCat = "Category 75286";
+		String titleForum = "Forum 75286";
+		String titleTop = "Topic 75286";
 		String descTop = "line1<br>line2<br>line3<br>line4<br>line5";
 		
 		info("Jump into Reply form by clicking on Reply action");
@@ -280,9 +280,9 @@ public class Forum_Forum_PublishActivity_TopicActivity extends ForumBase{
 	 */
 	@Test
 	public void test08_OpenLastReplyOfTopic(){
-		String titleCat = "Category 08";
-		String titleForum = "Forum 08";
-		String titleTop = "Topic 08";
+		String titleCat = "Category 75287";
+		String titleForum = "Forum 75287";
+		String titleTop = "Topic 75287";
 		String descTop = "line1<br>line2<br>line3<br>line4<br>line5";
 		String reply1 = "Reply to this topic 1";
 		String reply2 = "Reply to this topic 2";
@@ -313,9 +313,9 @@ public class Forum_Forum_PublishActivity_TopicActivity extends ForumBase{
 	 */
 	@Test
 	public void test09_OpenRelatedReply(){
-		String titleCat = "Category 09";
-		String titleForum = "Forum 09";
-		String titleTop = "Topic 09";
+		String titleCat = "Category 75288";
+		String titleForum = "Forum 75288";
+		String titleTop = "Topic 75288";
 		String descTop = "line1<br>line2<br>line3<br>line4<br>line5";
 		String reply = "Reply to this topic 1";
 		

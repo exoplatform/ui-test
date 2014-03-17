@@ -186,6 +186,7 @@ public class ECMS_Admin_Advanced extends PlatformBase{
 
 		//Edit a category
 		magCa.addNewCategoryTree_Step4(categoryTreeName, categoryName_2, newCategoryName_2, DATA_USER2, true, true, true);
+
 		click(magCa.ELEMENT_EDIT_CATEGORY_TREE.replace("${categoryTreeName}", categoryTreeName));
 		click(button.ELEMENT_PREVIOUS_BUTTON_ADMIN_4);
 		click(button.ELEMENT_PREVIOUS_BUTTON_ADMIN_3);
@@ -196,6 +197,7 @@ public class ECMS_Admin_Advanced extends PlatformBase{
 
 		//create a node by user who hasn't [read] permission
 		magAcc.signIn(DATA_USER2, DATA_PASS);
+
 		nav.goToSiteExplorer();
 		actBar.addItem2ActionBar("addDocument", actBar.ELEMENT_NEW_CONTENT_LINK);
 		magAcc.userSignIn(userType.PUBLISHER);

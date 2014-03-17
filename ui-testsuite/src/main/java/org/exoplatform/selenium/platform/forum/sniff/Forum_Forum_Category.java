@@ -27,7 +27,7 @@ public class Forum_Forum_Category extends ForumBase {
 	@BeforeMethod
 	public void setUpBeforeTest(){
 		getDriverAutoSave();
-		magAc = new ManageAccount(driver);
+		magAc = new ManageAccount(driver,this.plfVersion);
 		magCat = new ForumManageCategory(driver, this.plfVersion);
 		magForum = new ForumManageForum(driver, this.plfVersion);
 		magTopic = new ForumManageTopic(driver);
@@ -47,17 +47,17 @@ public class Forum_Forum_Category extends ForumBase {
 	 */
 	@Test
 	public void test01_AddEditDeleteCategory(){
-		String catName = "CategoryForum_01";
-		String[] restricted = {"demo"};
+		String catName = "CategoryForum_71117";
+		String[] restrict = {"demo","1"};
 		String description = "Add new category in forum";
 		
-		String catEdit = "ForumCategory_01Edit";
+		String catEdit = "ForumCategory_71117Edit";
 		String[] restrictedUpdate = {"Platform/Content Management"};
 		String descriptionEdit = "Add new category in forum update";
-		String[] userGroup = {"Development", "*", "developers"};
+		String[] userGroup = {"Development"};
 		
-		magCat.addNewCategoryInForum(catName, "1", 2, restricted, description, 0, null);
-		magCat.editCategoryInForum(catEdit, "2", 3, restrictedUpdate, descriptionEdit, 4, userGroup, true, true, true, true);
+		magCat.addNewCategoryInForum(catName, "1", 2, restrict, description, 0, null);
+		magCat.editCategoryInForum(catEdit, "2", 3, restrictedUpdate, descriptionEdit, 3, userGroup, true, true, true, true);
 		magCat.deleteCategoryInForum(catEdit);
 	}
 	
@@ -67,12 +67,11 @@ public class Forum_Forum_Category extends ForumBase {
 	@Test
 	public void test02_ExportImportCategory(){
 		String catName = "Category71120";
-		String[] restricted = {"demo"};
 		String description = "Add new category in forum";
 		String forumName = "Forum02";
 		String fileName = "Category71120";
 		
-		magCat.addNewCategoryInForum(catName, "1", 2, restricted, description, 0, null);
+		magCat.addNewCategoryInForum(catName, "1", 0, null, description, 0, null);
 		magForum.quickAddForum(forumName);
 		magCat.exportCategoryInForum(fileName, false, catName);
 		Utils.pause(3000);
@@ -96,13 +95,12 @@ public class Forum_Forum_Category extends ForumBase {
 	@Test
 	public void test03_ExportImportForum(){
 		String catName = "Category71121";
-		String[] restricted = {"demo"};
 		String description = "Add new category in forum";
 		String forumName1 = "Forum03_1";
 		String forumName2 = "Forum03_2";
 		String fileName = "Category71121";
 		
-		magCat.addNewCategoryInForum(catName, "1", 2, restricted, description, 0, null);
+		magCat.addNewCategoryInForum(catName, "1", 0, null, description, 0, null);
 		magForum.quickAddForum(forumName1);
 		click(By.linkText(catName));
 		magForum.quickAddForum(forumName2);

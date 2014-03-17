@@ -31,7 +31,7 @@ public class Forum_Forum_Topic_OtherAction extends ForumBase{
 	@BeforeMethod
 	public void setUpBeforeTest(){
 		initSeleniumTest();
-		magAc = new ManageAccount(driver);
+		magAc = new ManageAccount(driver,this.plfVersion);
 		mngCat = new ForumManageCategory(driver);
 		mngFru = new ForumManageForum(driver);
 		mngPost = new ForumManagePost(driver, this.plfVersion);
@@ -56,9 +56,9 @@ public class Forum_Forum_Topic_OtherAction extends ForumBase{
 	 */
 	@Test
 	public void test01_OpenCloseTopic() {
-		String titleCat = "Category 01";
-		String titleForum = "Forum 01";
-		String titleTop = "Topic 01";
+		String titleCat = "Category 71208";
+		String titleForum = "Forum 71208";
+		String titleTop = "Topic 71208";
 
 		info("Lock/Unlock a topic");
 		//create category, forum, topic

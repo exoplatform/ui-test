@@ -33,7 +33,7 @@ public class Forum_Answers_PublishActivity extends AnswerBase{
 	public void setUpBeforeTest(){
 		initSeleniumTest();
 		driver.get(baseUrl);
-		Acc = new ManageAccount(driver);
+		Acc = new ManageAccount(driver,this.plfVersion);
 		mCat = new AnswerManageCategory(driver);
 		mQuest = new AnswerManageQuestion(driver, this.plfVersion);
 		mAns = new AnswerManageAnwser(driver, this.plfVersion);
@@ -154,8 +154,8 @@ public class Forum_Answers_PublishActivity extends AnswerBase{
 	 */
 	@Test
 	public void test03_UnactivateQuestion(){
-		String questionName = "Question03";
-		String questionContent = "Content of question 03";
+		String questionName = "Question74756";
+		String questionContent = "Content of question 74756";
 
 		info("Unactivate a question");
 		//Create a question
@@ -163,6 +163,7 @@ public class Forum_Answers_PublishActivity extends AnswerBase{
 
 		//Deactivate the question
 		mQuest.goToManageQuestions();
+		mQuest.checkQuestionPresentOnManageQuestion(questionName);
 		mQuest.activeQuestion(questionName, false);
 		
 		info("Check activity on homepage");
@@ -214,9 +215,9 @@ public class Forum_Answers_PublishActivity extends AnswerBase{
 	 */
 	@Test
 	public void test05_EditTitleOfQuestion(){
-		String questionName = "Question05";
-		String questionContent = "Content of question 05";
-		String newName= "New Question 05";
+		String questionName = "Question74761";
+		String questionContent = "Content of question 74761";
+		String newName= "New Question 74761";
 
 		info("Edit question title");
 		//Create a question
@@ -240,8 +241,8 @@ public class Forum_Answers_PublishActivity extends AnswerBase{
 	 */
 	@Test
 	public void test06_OpenAnswersFromActivity(){
-		String questionName = "Question06";
-		String questionContent = "Content of question 06";
+		String questionName = "Question74761";
+		String questionContent = "Content of question 74761";
 
 		info("Open Answers application from Answer's activity");
 

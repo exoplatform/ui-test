@@ -45,7 +45,7 @@ public class Forum_Answers_PublishActivites_Add extends AnswerBase{
 		acc.signIn(DATA_USER1, DATA_PASS);
 		hpAct = new HomePageActivity(driver);
 		navTool = new NavigationToolbar(driver);
-		act = new Activity();
+		act = new Activity(driver);
 		goToAnswer();
 	}
 	@AfterMethod
@@ -113,7 +113,8 @@ public class Forum_Answers_PublishActivites_Add extends AnswerBase{
 
 		//Delete data
 		goToAnswer();
-		mQuest.deleteQuestion(2, questName);
+		checkQuestionPresent(questName);
+		mQuest.deleteQuestion(1, questName);
 	}
 
 	/** Add a comment from activity

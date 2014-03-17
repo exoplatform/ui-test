@@ -10,6 +10,7 @@
 		</groups>
 		<packages>
 			<package name="org.exoplatform.selenium.platform.forum.functional.forum.*" />
+			<package name = "org.exoplatform.selenium.platform.forum.functional.faq" />
 		</packages> 
 	</test>
 	<listeners>

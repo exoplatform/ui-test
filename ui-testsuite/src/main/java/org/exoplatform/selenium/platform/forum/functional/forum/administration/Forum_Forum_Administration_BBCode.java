@@ -18,7 +18,7 @@ import org.testng.annotations.Test;
  * @date
  * 
  */
-public class Forum_Forum_Administration_BBCode extends ForumManageAdministration{
+public class Forum_Forum_Administration_BBCode extends ForumBase{
 
 	ManageAccount acc;
 

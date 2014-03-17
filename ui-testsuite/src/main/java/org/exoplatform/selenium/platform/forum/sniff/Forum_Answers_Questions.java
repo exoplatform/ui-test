@@ -28,7 +28,7 @@ public class Forum_Answers_Questions extends AnswerBase {
 	public void setUpBeforeTest(){
 		initSeleniumTest();
 		driver.get(baseUrl);
-		magAc = new ManageAccount(driver);
+		magAc = new ManageAccount(driver,this.plfVersion);
 		magCat = new AnswerManageCategory(driver);
 		magQuest = new AnswerManageQuestion(driver, this.plfVersion);
 		magAc.signIn(DATA_USER1, DATA_PASS);
@@ -47,10 +47,10 @@ public class Forum_Answers_Questions extends AnswerBase {
 	 */
 	@Test
 	public void test01_AddEditDeleteQuestion(){
-		String categoryName = "Category1";
+		String categoryName = "Category70980";
 		String description = "Add new category for answer";	
-		String questionName = "Question1";
-		String newQuestionName = "New Question name 1";
+		String questionName = "Question70980";
+		String newQuestionName = "New Question name 70980";
 		String questionContent = "Add new question for category";
 		String questionNewContent = "New content for question";
 
@@ -80,7 +80,7 @@ public class Forum_Answers_Questions extends AnswerBase {
 		magQuest.quickAddCategoryAndQuestion(categoryName, description, questionName, questionContent);
 		
 		magQuest.goToManageQuestions();
-		
+		magQuest.checkQuestionPresentOnManageQuestion(questionName);
 		magQuest.editQuestion(3, questionName, null, newQuestioName, questionNewContent, null, null, true, true, false, null);
 			
 		magQuest.deleteQuestion(3, newQuestioName);
@@ -97,17 +97,17 @@ public class Forum_Answers_Questions extends AnswerBase {
 	 */
 	@Test
 	public void test03_ActiveDeactiveQuestion() {
-		String categoryName = "Category3";
-		String description = "Description for category3";
-		String questionName = "Question3";
-		String questionContent = "Content of question 3";
+		String categoryName = "Category71094";
+		String description = "Description for category71094";
+		String questionName = "Question71094";
+		String questionContent = "Content of question 71094";
 		
 		magQuest.quickAddCategoryAndQuestion(categoryName, description, questionName, questionContent);
 		
 		magQuest.goToManageQuestions();
 		
 		info("Deactive question");
-		
+		magQuest.checkQuestionPresentOnManageQuestion(questionName);
 		magQuest.activeQuestion(questionName, false);
 		button.close();
 		
@@ -124,7 +124,7 @@ public class Forum_Answers_Questions extends AnswerBase {
 		magQuest.goToManageQuestions();
 		
 		info("Active question");
-		
+		magQuest.checkQuestionPresentOnManageQuestion(questionName);
 		magQuest.activeQuestion(questionName, true);
 		button.close();
 		
@@ -148,17 +148,17 @@ public class Forum_Answers_Questions extends AnswerBase {
 	 */
 	@Test
 	public void test04_ApproveDisapproveQuestion() {
-		String categoryName = "Category4";
-		String description = "Description for category4";
-		String questionName = "Question4";
-		String questionContent = "Content of question 4";
+		String categoryName = "Category71095";
+		String description = "Description for category71095";
+		String questionName = "Question71095";
+		String questionContent = "Content of question 71095";
 		
 		magQuest.quickAddCategoryAndQuestion(categoryName, description, questionName, questionContent);
 		
 		magQuest.goToManageQuestions();
 		
 		info("Disapprove question");
-		
+		magQuest.checkQuestionPresentOnManageQuestion(questionName);
 		magQuest.approveQuestion(questionName, false);
 		button.close();
 		magAc.signOut();
@@ -174,7 +174,7 @@ public class Forum_Answers_Questions extends AnswerBase {
 		magQuest.goToManageQuestions();
 		
 		info("Active question");
-		
+		magQuest.checkQuestionPresentOnManageQuestion(questionName);
 		magQuest.approveQuestion(questionName, true);
 		button.close();
 		
@@ -198,13 +198,13 @@ public class Forum_Answers_Questions extends AnswerBase {
 	 */
 	@Test
 	public void test05_MoveQuestion () {
-		String categoryName1 = "Category5";
-		String description1 = "Description for category5";
-		String questionName = "Question5";
-		String questionContent = "Content of question 5";
-		String categoryName2 = "Category6";
-		String description2 = "Description for category6";
-		String[] userGroup1 = {"demo"};
+		String categoryName1 = "Category709831";
+		String description1 = "Description for category70983";
+		String questionName = "Question709831";
+		String questionContent = "Content of question 709831";
+		String categoryName2 = "Category709832";
+		String description2 = "Description for category709832";
+		String[] userGroup1 = {"demo","1"};
 		
 		info("Add category and question");
 		
@@ -240,7 +240,6 @@ public class Forum_Answers_Questions extends AnswerBase {
 		String description = "Description for category6";
 		String questionName = "Question6";
 		String questionContent = "Content of question 6";
-		String email = "exomailtest01@gmail.com";
 		By mail = By.xpath("//b[text()= 'Question6']");
 		String contentMail = "Hi,/You may be interested in this question:/Question Question6/Details/Content of question 6/Click here for more details.";
 		
@@ -250,7 +249,7 @@ public class Forum_Answers_Questions extends AnswerBase {
 		
 		info("Send question");
 		
-		magQuest.sendQuestion(1, questionName, null, null, email, null, null);
+		magQuest.sendQuestion(1, questionName, null, null, EMAIL_ADDRESS1, null, null);
 		
 		info ("Get windownHandle of current browser");
 		
@@ -259,16 +258,7 @@ public class Forum_Answers_Questions extends AnswerBase {
 	  //check mail content
 	    
 	    goToMail(EMAIL_ADDRESS1, EMAIL_PASS);
-	    
-	    waitForAndGetElement(mail,150000);
-	    
-		click(mail);
-		
-	    checkContentMail(contentMail);
-	    
-	    info("delete mail");
-	    
-		click(ELEMENT_DELETE_MAIL_2);
+	    checkAndDeleteMail(mail, contentMail);
 		
 		Utils.pause(2000);
 		

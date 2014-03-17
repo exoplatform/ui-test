@@ -127,7 +127,7 @@ public class Forum_Setting extends ForumBase {
 		magAc.signOut();
 		
 		info("Reset data");
-		magAc.signIn("john", DATA_PASS);
+		magAc.signIn(DATA_USER1, DATA_PASS);
 		goToForums();
 		click(By.linkText(catName));
 		cat.deleteCategoryInForum(catName);
@@ -170,7 +170,7 @@ public class Forum_Setting extends ForumBase {
 		waitForElementNotPresent(ELEMENT_LEGEN_PANEL);
 		click(By.linkText(catName1));
 		String url = driver.getCurrentUrl();
-		assert url.contains("http://localhost:8080/portal/intranet/forum/category/forumCategory");
+		assert url.contains(baseUrl + "/intranet/forum/category/forumCategory");
 		
 		info("Reset Data");
 		navTool.goToEditPageEditor();

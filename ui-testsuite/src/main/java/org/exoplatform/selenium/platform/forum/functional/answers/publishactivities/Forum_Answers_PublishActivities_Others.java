@@ -39,7 +39,7 @@ public class Forum_Answers_PublishActivities_Others extends AnswerBase{
 		hpAct = new HomePageActivity(driver);
 		navTool = new NavigationToolbar(driver);
 		mAns = new AnswerManageAnwser(driver);
-		act = new Activity();
+		act = new Activity(driver);
 		mCom = new AnswerManageComment(driver);
 		goToAnswer();
 	}
@@ -104,7 +104,7 @@ public class Forum_Answers_PublishActivities_Others extends AnswerBase{
 		info("Dislike an Answers activity from like icon");
 		
 		//Submit question
-		mQuest.submitQuestion(null, questName, questName, null, false, null);
+//		mQuest.submitQuestion(null, questName, questName, null, false, null);
 
 		//Like activity
 		navTool.goToHomePage();

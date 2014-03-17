@@ -28,7 +28,10 @@ public class ForumBase extends PlatformBase {
 	public NavigationToolbar navTool ;
 	public PlatformPermission per ;
 
-	public final By ELEMENT_FORUM_LINK = By.linkText("Forums");
+	public String FORUM_PAGE_ID = "";
+
+	public final By ELEMENT_FORUM_LINK = By.xpath("//a[@href='/portal/intranet/forum']");
+	public final By ELEMENT_COMMUNITY_FORUM_LINK = By.xpath("//span[@data-original-title='Support Forums']");
 	public final By ELEMENT_OK_INFOR_POPUP = By.xpath("//div[@class='UIPopupWindow UIDragObject uiPopup']/.//a[text()='OK']");
 	public final By ELEMENT_OK_DELETE = By.xpath("//*[@id='UIForumPopupConfirmation']//*[text()='OK']");
 	public final By ELEMENT_CANCEL_DELETE = By.xpath("//*[@id='UIForumPopupConfirmation']//*[text()='Cancel']");
@@ -56,9 +59,9 @@ public class ForumBase extends PlatformBase {
 	public final By ELEMENT_HOME_BUTTON = By.xpath("//*[@id='UIBreadcumbs']//*[text()='Home']");
 	public final String ELEMENT_HOME_FORUM = "Forum Home";
 	public final By ELEMENT_USER_MANAGEMENT = By.xpath("//*[@id='ManageModerator']//*[@class='uiIconUser uiIconLightGray']");
-	public final By ELEMENT_MORE_BUTTON = By.xpath("//li[@class='dropdown moreItem pull-right']");
+	public final By ELEMENT_MORE_BUTTON = By.xpath("//li[@class='dropdown moreItem pull-right']/div[contains(.,'More')]");
 	public final By ELEMENT_PENDING = By.id("PendingJob");
-	
+
 	public String ELEMENT_FORUM_BREADCUMB = "//*[@id='UIBreadcumbs']/div[@class='pull-left']//a[@class='Selected' and contains(text(),'${forumName}')]";
 	public String ELEMENT_LATEST_TOPIC = "//a[contains(text(),'${forum}')]/ancestor::tr[@class='oncontextmenu']//a[contains(text(),'${topic}')]";
 	public String ELEMENT_FORUM_ON_HOMEPAGE = "//a[contains(text(),'${category}')]/ancestor::div[@id='UICategories']//tr[@class='oncontextmenu']//a[contains(text(),'${forum}')]";
@@ -79,12 +82,12 @@ public class ForumBase extends PlatformBase {
 	public final By ELEMENT_CENSOR_KEYWORDS = By.xpath("//*[@id='Administrations']//*[@class='uiIconForumCensor']");
 	public final By ELEMENT_BAN_IP = By.xpath("//*[@id='Administrations']//*[@class='uiIconForumBanIp']");
 	public final By ELEMENT_BBCODE = By.xpath("//*[@id='Administrations']//*[@class='uiIconForumBBCode']");
-	public final By ELEMENT_PRUNE = By.xpath("//*[@id='Administrations']//*[@class='Pruning']");
+	public final By ELEMENT_PRUNE = By.xpath("//a[contains(.,'Pruning')]");
 	public final By ELEMENT_IMPORT = By.xpath("//*[@id='Administrations']//*[@class='uiIconImport']");
 
 	//-----------------Watch/Unwatch screen-------------------------------------------
 	public final String MESSAGE_WATCH = "You are now watching this item.";
-	
+
 	public final String MESSAGE_UNWATCH = "You are no longer watching this item.";	
 	public static String REGISTER_MAIL_CONTENT = "Hi, you received this email because you registered for the Forum and Topic Watching notification.";
 
@@ -131,7 +134,7 @@ public class ForumBase extends PlatformBase {
 	public final By ELEMENT_CENSOR_POPUP = By.xpath("//span[@class='PopupTitle popupTitle' and text()='Censor Keywords']");
 	public final By ELEMENT_CENSOR_POPUP_PLF4_1 = By.xpath("//span[@class='PopupTitle popupTitle' and text()='Censor Keywords']");
 	public final By ELEMENT_CENSORED_KEYWORDS =  By.id("censorKeyword");
-	
+
 	//----------------Set Ban IP form--------------------------------------------
 	public final By ELEMENT_BAN_IP_POPUP = By.xpath("//span[@class='PopupTitle popupTitle' and text()='Banned IPs']");
 	public final By ELEMENT_BAN_IP_FILTER = By.id("searchIpBan");
@@ -238,9 +241,10 @@ public class ForumBase extends PlatformBase {
 	public final By ELEMENT_FEED_CONTENT = By.id("feedContent");
 	public final String ELEMENT_MY_SUBSCRIPTION_OBJECT_WATCH = "//div[@id='UIForumUserSettingForm']//a[contains(text(),'${object}')]" ;
 	public final String ELEMENT_RSS_TOPIC_LINK = "//xhtml:span[text()='${topic}']";
-	
+
 	public final By ELEMENT_MY_SUBSCRIPTION_NEXT_PAGE = By.xpath("//div[@id='ForumUserWatches-tab']//*[@data-original-title='Next Page']");
 	public final By ELEMENT_MY_SUBSCRIPTION_TOTAL_PAGE = By.xpath("//div[@id='ForumUserWatches-tab']//span[@class='pagesTotalNumber']");
+
 
 	//---------------------Notifications------------------
 	public final By ELEMENT_NOTIFICATION_LINK = By.xpath("//*[@id='Administrations']//*[@class='uiIconNotification']"); 
@@ -260,7 +264,9 @@ public class ForumBase extends PlatformBase {
 	public final By ELEMENT_FORUM_PORTLET_EDIT_ICON = By.xpath("//div[text()='Forum Portlet']/../a[@class='EditIcon']");
 	public final By ELEMENT_FORUM_PORTLET_EDITMODE_TAB = By.linkText("Edit Mode");
 	public final By ELEMENT_FORUM_PORTLET_PANEL_TAB = By.xpath("//*[contains(text(), 'Panels')]");
+	public final By ELEMENT_FORUM_PORTLET_PANEL_ACTIVE_TAB = By.xpath("//button[normalize-space(@class)='btn active' and normalize-space(text())='Panels']");
 	public final By ELEMENT_FORUM_PORTLET_OPTIONS_TAB = By.xpath("//*[contains(text(), 'Options')]");
+	public final By ELEMENT_FORUM_PORTLET_OPTIONS_ACTIVE_TAB = By.xpath("//button[normalize-space(@class)='btn active' and normalize-space(text())='Options']");
 	public final By ELEMENT_SHOW_MODERATOR_CHECKBOX = By.id("isShowModerator");
 	public final By ELEMENT_SHOW_POLL_CHECKBOX = By.id("IsShowPoll");
 	public final By ELEMENT_SHOW_QUICK_REPLY_CHECKBOX = By.id("isShowQuickReply");
@@ -274,13 +280,13 @@ public class ForumBase extends PlatformBase {
 	public final By ELEMENT_FORUM_PORTLET_SAVE_BUTTON = By.cssSelector("#UISettingEditModeForm.UIForm div.uiAction button.btn");
 
 	//attach file popup
-//	public final By ELEMENT_POPUP_UPLOAD_FILE = By.xpath("//span[@class='PopupTitle' and text()='Attach File']");
+	//	public final By ELEMENT_POPUP_UPLOAD_FILE = By.xpath("//span[@class='PopupTitle' and text()='Attach File']");
 	public final By ELEMENT_POPUP_UPLOAD_FILE = By.xpath("//span[@class='PopupTitle popupTitle' and text()='Attach File']");
-//	public final By ELEMENT_ATTACH_FILE = By.linkText("Attach Files");
-//	public final By ELEMENT_ATTACH_FILE =By.xpath("//button[@class='btn' and text()='Attach Files']");
+	//	public final By ELEMENT_ATTACH_FILE = By.linkText("Attach Files");
+	//	public final By ELEMENT_ATTACH_FILE =By.xpath("//button[@class='btn' and text()='Attach Files']");
 	public final By ELEMENT_ATTACH_FILE =By.xpath("//*[@id='ThreadContent']/div/div[3]/div/button");
 	public final By ELEMENT_ATTACHMENT_FILE_INPUT = By.name("file");
-//	public final By ELEMENT_ATTACHMENT_SAVE_BUTTON = By.xpath("//*[@id='UIAttachmentForm']//*[text()='Save']");
+	//	public final By ELEMENT_ATTACHMENT_SAVE_BUTTON = By.xpath("//*[@id='UIAttachmentForm']//*[text()='Save']");
 	public final By ELEMENT_ATTACHMENT_SAVE_BUTTON = By.xpath("//button[@class='btn' and text()='Save'");
 
 	//-----------------------User Management--------------------------------------------//
@@ -294,6 +300,7 @@ public class ForumBase extends PlatformBase {
 	public final By ELEMENT_ADD_MODERATOR_CATEGORY_ICON = By.xpath("//*[@id='ForumUserProfile']//*[@data-original-title='Select Categories']");
 	public final By ELEMENT_ADD_MODERATOR_FORUM_ICON = By.xpath("//*[@id='ForumUserProfile']//*[@data-original-title='Select Forums']");
 	public final String ELEMENT_CATEGORY_SELECT_CHECKBOX = "//*[contains(text(),'${cat}')]/..//*[@type='checkbox']";
+	public final String ELEMENT_USER_MANAGEMENT_CATEGORY_SELECT = "//form[@id='UISelectItemForum']//a[contains(.,'${category}')]";	
 	public final By ELEMENT_USER_MANAGEMENT_SETTING_TAB = By.xpath("//*[@id='UIModeratorManagementForm']//a[text()='Settings']");
 	public final By ELEMENT_USER_MANAGEMENT_BAN_USER_TAB = By.linkText("Ban User");
 	public final By ELEMENT_BAN_USER_CHECKBOX = By.id("IsBanned");
@@ -329,8 +336,10 @@ public class ForumBase extends PlatformBase {
 	public final String MSG_PRIVATE_MESSAGE_DELETE = "Are you sure you want to delete this message ?";
 
 	//Gmail
-	public String ELEMENT_GMAIL_EMAIL = "//span/b[text()='[${category}][${forum}] ${topic}']";
-		
+
+	public String ELEMENT_GMAIL_EMAIL = "//span/b[contains(text(),'[${category}][${forum}]') and contains(text(),'${topic}')]";
+	public String ELEMENT_GMAIL_FORUM_PREFIX = "//span/b[contains(text(),'${subject}[${category}][${forum}]') and contains(text(),'${topic}')]";
+
 	//Pending job
 	public final By ELEMENT_PENDING_JOB_POPUP = By.xpath("//span[@class='PopupTitle popupTitle' and text()='Waiting for Approval']");
 	public By ELEMENT_APPROVE_PENDING_JOB = By.xpath("//*[text()='Approve']");
@@ -383,7 +392,7 @@ public class ForumBase extends PlatformBase {
 			loopCount = 0;
 		}
 	}
-	
+
 	/** function: Attach file in attach popup
 	 * @author lientm
 	 * @param number: number of upload container that need upload file
@@ -397,15 +406,19 @@ public class ForumBase extends PlatformBase {
 			element.sendKeys(Utils.getAbsoluteFilePath("TestData/" + file[i]));
 			waitForAndGetElement("//*[@class='fileNameLabel' and contains(text(),'" + file[i] + "')]");
 		}
-//		click(ELEMENT_ATTACHMENT_SAVE_BUTTON);
+		//		click(ELEMENT_ATTACHMENT_SAVE_BUTTON);
 		button.save();
-//		waitForElementNotPresent(ELEMENT_ATTACHMENT_SAVE_BUTTON);
+		//		waitForElementNotPresent(ELEMENT_ATTACHMENT_SAVE_BUTTON);
 	}
 
 	public void goToForums(){
 		info("--Go to Forums--");
-		click(ELEMENT_FORUM_LINK);
+		if(this.plfVersion.equals("com"))
+			click(ELEMENT_COMMUNITY_FORUM_LINK);
+		else
+			click(ELEMENT_FORUM_LINK);
 		waitForAndGetElement(ELEMENT_FORUM_STATE,DEFAULT_TIMEOUT,0);
+		FORUM_PAGE_ID = waitForAndGetElement("//div[@id='UIPage']/div[@class='UIRowContainer']/div").getAttribute("id");
 	}
 
 	public void goToForumHome(){
@@ -458,15 +471,22 @@ public class ForumBase extends PlatformBase {
 		}
 		click(ELEMENT_BOOKMARKS_OPTION.replace("${item}", item));
 		//check bookmarks display
-		WebElement bookmark = waitForAndGetElement(ELEMENT_BOOKMARKS,DEFAULT_TIMEOUT,0);
-		if (bookmark == null)
-			click(ELEMENT_MORE_BUTTON);
-		click(ELEMENT_BOOKMARKS);
-		waitForAndGetElement(ELEMENT_BOOKMARKS_POPUP);
+		openBookmarkPopup();
 		waitForAndGetElement(element_item);
 
 		click(ELEMENT_BOOKMARKS_CANCEL_BUTTON);
 		info("Add bookmark successfully");
+	}
+	/**
+	 * Open bookmark popup
+	 */
+	public void openBookmarkPopup(){
+		WebElement bookmark = waitForAndGetElement(ELEMENT_BOOKMARKS,DEFAULT_TIMEOUT,0);
+		if (bookmark == null){
+			click(ELEMENT_MORE_BUTTON);
+		}
+		click(ELEMENT_BOOKMARKS);
+		waitForAndGetElement(ELEMENT_BOOKMARKS_POPUP);
 	}
 
 	/** function: delete bookmark
@@ -474,12 +494,18 @@ public class ForumBase extends PlatformBase {
 	 * @param item: name of bookmark
 	 */
 	public void deleteBookmarkItem(String item){
+
+		openBookmarkPopup();
+
 		By element_delete = By.xpath(ELEMENT_BOOKMARKS_REMOVE.replace("${item}", item));
 
 		info("Delete bookmark");
 		waitForAndGetElement(element_delete);
 		click(element_delete);
 		waitForElementNotPresent(element_delete);
+
+		click(ELEMENT_BOOKMARKS_CANCEL_BUTTON);
+		waitForElementNotPresent(ELEMENT_BOOKMARKS_CANCEL_BUTTON);
 		info("Delete bookmark successfully");
 	}
 
@@ -598,7 +624,7 @@ public class ForumBase extends PlatformBase {
 		click(ELEMENT_CENSOR_KEYWORDS);
 		if(this.plfVersion.equalsIgnoreCase("4.0"))
 			waitForAndGetElement(ELEMENT_CENSOR_POPUP);
-		else if(this.plfVersion.equalsIgnoreCase("4.1"))
+		else 
 			waitForAndGetElement(ELEMENT_CENSOR_POPUP_PLF4_1);
 		if (key != null){
 			type(ELEMENT_CENSORED_KEYWORDS, key, true);
@@ -1200,6 +1226,7 @@ public class ForumBase extends PlatformBase {
 	public void selectPanel(boolean... show){
 		button = new Button(driver);
 		click(ELEMENT_FORUM_PORTLET_PANEL_TAB);
+		waitForAndGetElement(ELEMENT_FORUM_PORTLET_PANEL_ACTIVE_TAB);
 		if (show.length > 0){
 			if (show[0]){
 				check(ELEMENT_SHOW_POLL_CHECKBOX, 2);
@@ -1244,6 +1271,7 @@ public class ForumBase extends PlatformBase {
 		}
 		button.save();
 		click(ELEMENT_OK_INFOR_POPUP);
+		waitForElementNotPresent(ELEMENT_OK_INFOR_POPUP);
 		Utils.pause(1000);
 	}
 
@@ -1270,12 +1298,14 @@ public class ForumBase extends PlatformBase {
 		//button.save();
 		click(ELEMENT_FORUM_PORTLET_SAVE_BUTTON);
 		click(ELEMENT_OK_INFOR_POPUP);
+		waitForElementNotPresent(ELEMENT_OK_INFOR_POPUP);
 		Utils.pause(1000);
 	}	
 
 	public void selectOptions(boolean ajax){
 		button = new Button(driver);
 		click(ELEMENT_FORUM_PORTLET_OPTIONS_TAB);
+		waitForAndGetElement(ELEMENT_FORUM_PORTLET_OPTIONS_ACTIVE_TAB);
 		if (ajax){
 			check(ELEMENT_USE_AJAX_CHECKBOX, 2);
 		}else {
@@ -1283,6 +1313,7 @@ public class ForumBase extends PlatformBase {
 		}
 		button.save();
 		click(ELEMENT_OK_INFOR_POPUP);
+		waitForElementNotPresent(ELEMENT_OK_INFOR_POPUP);
 		Utils.pause(1000);
 	}
 
@@ -1315,6 +1346,7 @@ public class ForumBase extends PlatformBase {
 		}
 		if (forum != null){
 			click(ELEMENT_ADD_MODERATOR_FORUM_ICON);
+			click(ELEMENT_USER_MANAGEMENT_CATEGORY_SELECT.replace("${category}", category));
 			check(ELEMENT_CATEGORY_SELECT_CHECKBOX.replace("${cat}", forum), 2);
 			click(button.ELEMENT_ADD_BUTTON);
 			Utils.pause(1000);
@@ -1381,9 +1413,9 @@ public class ForumBase extends PlatformBase {
 			type(ELEMENT_PRIVATE_MESSAGE_TITLE_INPUT,title,true);
 		if(message != null){
 			if(this.plfVersion.equalsIgnoreCase("4.0"))
-			inputDataToFrameInFrame(ELEMENT_PRIVATE_MESSAGE_FRAME1,ELEMENT_POST_MESSAGE_FRAME_2 , message, false);
-		else
-			inputDataToFrame(ELEMENT_PRIVATE_MESSAGE_FRAME_41, message);
+				inputDataToFrameInFrame(ELEMENT_PRIVATE_MESSAGE_FRAME1,ELEMENT_POST_MESSAGE_FRAME_2 , message, false);
+			else
+				inputDataToFrame(ELEMENT_PRIVATE_MESSAGE_FRAME_41, message);
 		}
 		switchToParentWindow();
 		click(ELEMENT_PRIVATE_MESSAGE_SEND_BUTTON);
@@ -1477,7 +1509,7 @@ public class ForumBase extends PlatformBase {
 		click(ELEMENT_PENDING);
 		waitForAndGetElement(ELEMENT_PENDING_JOB_POPUP);
 	}
-	
+
 	/**
 	 * Approve a pending job.
 	 * Created by khanhnt at Dec 11, 2013
@@ -1513,6 +1545,7 @@ public class ForumBase extends PlatformBase {
 					}
 				}else break;
 			}
+
 		}
 		waitForAndGetElement(ELEMENT_MY_SUBSCRIPTION_OBJECT_WATCH.replace("${object}", object));
 

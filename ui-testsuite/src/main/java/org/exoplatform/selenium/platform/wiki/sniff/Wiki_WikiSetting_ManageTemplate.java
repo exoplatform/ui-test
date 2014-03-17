@@ -22,7 +22,7 @@ public class Wiki_WikiSetting_ManageTemplate extends Template {
 	public void setUpBeforeTest(){
 		initSeleniumTest();
 		driver.get(baseUrl);
-		magAc = new ManageAccount(driver);
+		magAc = new ManageAccount(driver,this.plfVersion);
 		but = new Button(driver);
 		magAc.signIn("john", DATA_PASS); 
 		goToWiki();

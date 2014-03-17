@@ -25,7 +25,7 @@ public class Forum_Answers_BBC extends AnswerBase{
 	public void setUpBeforeTest(){
 		initSeleniumTest();
 		driver.get(baseUrl);
-		acc = new ManageAccount(driver);
+		acc = new ManageAccount(driver,this.plfVersion);
 		mCat = new AnswerManageCategory(driver);
 		mQuest = new AnswerManageQuestion(driver);
 		acc.signIn(DATA_USER1, DATA_PASS);

@@ -31,8 +31,10 @@ public class LoginTest extends TestBase{
 	
 	@Test(groups = {"platform", "LoginTest"})
 	public void testLoginasRoot(){
-		magAcc.signIn("root", "12345");
-		waitForTextPresent("Root");
+
+		magAcc.signIn("fqa", "gtngtn");
+		waitForTextPresent("fqa");
+
 		magAcc.signOut();
 	}
 	@Test(groups = {"platform", "LoginTest"})

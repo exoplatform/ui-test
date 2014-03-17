@@ -56,7 +56,7 @@ public class ForumManageTopic extends ForumBase {
 	public final By ELEMENT_MORE_ACTION = By.xpath("//form[@id='UITopicDetail']//*[@data-toggle='dropdown']/*[@class='uiIconSettings uiIconLightGray']");
 
 	public String ELEMENT_CATEGORY_BREAD = "//a[@data-original-title='${category}']"; 
-//	public By ELEMENT_TOPIC_ON_FORUM_HOMEPAGE = By.xpath("//*[contains(@data-original-title,'${topic}')]");
+	//	public By ELEMENT_TOPIC_ON_FORUM_HOMEPAGE = By.xpath("//*[contains(@data-original-title,'${topic}')]");
 
 	//----------------start topic screen--------------------------------------------------
 
@@ -104,7 +104,7 @@ public class ForumManageTopic extends ForumBase {
 	//-------------------move topic screen----------------------------------------------------
 
 	public By ELEMENT_POPUP_MOVE_TOPIC = By.xpath("//span[@class='PopupTitle popupTitle' and text()='Move Topics']"); 
-	public String ELEMENT_FORUM_SELECT = "//a[contains(text(),'${forum}')]"; 
+	public String ELEMENT_FORUM_SELECT = "//form[@id='UIMoveTopicForm']//a[contains(.,'${forum}')]"; 
 
 	//-------------------Add tag--------------------------------------------------------------
 	public By ELEMENT_TAG = By.xpath("//i[@class='uiIconTag uiIconLightGray']");
@@ -112,7 +112,7 @@ public class ForumManageTopic extends ForumBase {
 	public By ELEMENT_ADD_TAG_BUTTON = By.xpath("//a[contains(text(),'Add Tag')]");
 	public String ELEMENT_TAG_NUMBER = "//*[@id='searchTagName']/div/font[text()='(${No})']";
 	public By ELEMENT_MANAGE_TAG = By.linkText("Manage Tag");
-//	public By ELEMENT_UNTAG = By.xpath("//a[contains(text(), 'Untag')]");
+	//	public By ELEMENT_UNTAG = By.xpath("//a[contains(text(), 'Untag')]");
 	public By ELEMENT_UNTAG = By.id("UITopicsTagConfirm0");
 	public String ELEMENT_CHECKBOX_UNTAG = "//input[@type='checkbox' and @title='${topic}']";
 	public String MESSAGE_UNTAG = "//*[@id='UIForumPopupConfirmation']//span[contains(text(),'Are you sure you want to remove this tag from the topic ?')]";
@@ -120,9 +120,9 @@ public class ForumManageTopic extends ForumBase {
 	public String MESSAGE_ADD_TAG_BLANK_NAME = "The field must not be blank.";
 	public String ELEMENT_UNTAG_ICON = "//a[text()='${tag}']/parent::span/i[@class='uiIconClose uiIconLightGray']";
 	public String ELEMENT_suggestion = "#searchTagName div:contains('${tag}') font:contains('(${No})')";
-	
+
 	public String ELEMENT_WARNING_MSG = "//span[@class='warningIcon' and contains(text(),'The field must not be blank.')]";
-//	public String ELEMENT_TOPIC_CHECKBOX = "//a[contains(text(),'${topic}')]/ancestor::table[@class='uiGrid table no-border-cell rounded-corners-bottom table-hover table-striped']//span[@class='uiCheckbox']/input[@class='checkbox' and starts-with(@name,'topic')]";
+	//	public String ELEMENT_TOPIC_CHECKBOX = "//a[contains(text(),'${topic}')]/ancestor::table[@class='uiGrid table no-border-cell rounded-corners-bottom table-hover table-striped']//span[@class='uiCheckbox']/input[@class='checkbox' and starts-with(@name,'topic')]";
 	public String ELEMENT_TOPIC_CHECKBOX = "//span[@class='uiCheckbox']/input[@class='checkbox' and starts-with(@name,'topic')]";
 	public String ELEMENT_TAG_SUGGESTED = "//div[@class='searchTagName']//a[contains(text(),'${tagName}')]";
 
@@ -393,15 +393,15 @@ public class ForumManageTopic extends ForumBase {
 	 * @param destination: path go to forum
 	 */
 	public void moveTopic(String topic, String destination){
-
+		String[] paths = destination.split("/");
 		info("Move topic to forum " + destination);
 		waitForAndGetElement(ELEMENT_MORE_ACTION);
 		click(ELEMENT_MORE_ACTION);
 		waitForAndGetElement(ELEMENT_MOVE_TOPIC);
 		click(ELEMENT_MOVE_TOPIC);
 		waitForAndGetElement(ELEMENT_POPUP_MOVE_TOPIC);
-
-		click(ELEMENT_FORUM_SELECT.replace("${forum}", destination)); 
+		for(int i = 0; i < paths.length; i++)
+			click(ELEMENT_FORUM_SELECT.replace("${forum}", paths[i]));
 		waitForElementNotPresent(ELEMENT_POPUP_MOVE_TOPIC);
 		String links[] = destination.split("/");
 		int length = links.length;
@@ -422,17 +422,17 @@ public class ForumManageTopic extends ForumBase {
 	 * function add tag for topic
 	 * @param tagName: name of tag
 	 */
-		public void addTagForTopic(String tagName){
-			String[] tag = tagName.split(" ");
+	public void addTagForTopic(String tagName){
+		String[] tag = tagName.split(" ");
 
-			goToAddTagForTopic();
-			type(ELEMENT_ADD_TAG, tagName, true);
-			click(ELEMENT_ADD_TAG_BUTTON);
-			for(int i = 0; i < tag.length; i ++){
-				waitForAndGetElement(By.linkText(tag[i]));
-			}
-			info("Add tag for topic successfully");
+		goToAddTagForTopic();
+		type(ELEMENT_ADD_TAG, tagName, true);
+		click(ELEMENT_ADD_TAG_BUTTON);
+		for(int i = 0; i < tag.length; i ++){
+			waitForAndGetElement(By.linkText(tag[i]));
 		}
+		info("Add tag for topic successfully");
+	}
 
 	/**function untag for many topics
 	 * @author lientm

@@ -17,6 +17,7 @@ public class LogSeleniumTest extends EcmsBase{
 		// TODO Auto-generated constructor stub
 	}
 	
+
 	public static final String ELEMENT_USER = "root";
 	public static final String ELEMENT_PASS = "12345";
 	

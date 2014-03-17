@@ -48,6 +48,7 @@ public class ManageAccount extends PlatformBase {
 		Boolean verify = (Boolean) (opParams.length > 0 ? opParams[0]: true);
 		Boolean maxWin = (Boolean) (opParams.length > 1 ? opParams[1]: true);
 		boolean community = (waitForAndGetElement(ELEMENT_COMMUNITY_SIGN_IN_LINK, 3000, 0) != null) ? true :false;
+
 		if(maxWin){
 			driver.manage().window().maximize();
 			//driver.navigate().refresh();
@@ -58,6 +59,7 @@ public class ManageAccount extends PlatformBase {
 			firstTimeLogin = false;
 		}
 		info("--Sign in as " + username + "--");
+
 		if(community)
 			click(ELEMENT_COMMUNITY_SIGN_IN_LINK);
 		Utils.pause(1000);
@@ -105,6 +107,7 @@ public class ManageAccount extends PlatformBase {
 			info("Retry...[" + repeat + "]");
 		}
 		click(ELEMENT_SIGN_OUT_LINK);
+		waitForElementNotPresent(ELEMENT_ACCOUNT_NAME_LINK);
 		Utils.pause(1000);
 		if ( ExpectedConditions.alertIsPresent() != null ){
 			magAlert = new ManageAlert(driver);
@@ -188,13 +191,13 @@ public class ManageAccount extends PlatformBase {
 			if (language != null){
 				select(ELEMENT_SELECT_USER_LANGUAGE, language);
 			}
-			click(ELEMENT_ACCOUNT_SETTING_TAB);
 		}
 		button.save();
 
 		if (verify) {
 			Utils.pause(10000);
 			waitForMessage("You have registered a new account.",300000);
+
 			dialog.closeMessageDialog();
 		}
 		Utils.pause(10000);
@@ -338,6 +341,7 @@ public class ManageAccount extends PlatformBase {
 	 */
 	public void userSignIn(userType user){
 		if (isElementNotPresent(ELEMENT_INPUT_USERNAME) && isElementNotPresent(ELEMENT_COMMUNITY_ADD_ONS)){
+//		if (waitForAndGetElement(ELEMENT_ACCOUNT_NAME_LINK,3000,0) != null){
 			signOut();
 		}else{
 			info("-- User.logIn: " + user);

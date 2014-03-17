@@ -250,6 +250,13 @@
 				<activeByDefault>true</activeByDefault>
 			</activation>
 		</profile>
+		<profile>
+			<id>testng-failed</id>
+			<properties>
+				<testSuite>testng-failed.xml</testSuite>
+			</properties>
+			
+		</profile>
 	</profiles>
 
 	<build>

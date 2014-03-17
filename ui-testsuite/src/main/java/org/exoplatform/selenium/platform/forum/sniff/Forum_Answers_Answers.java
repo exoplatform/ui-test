@@ -31,7 +31,7 @@ public class Forum_Answers_Answers extends AnswerBase {
 	public void setUpBeforeTest(){
 		initSeleniumTest();
 		driver.get(baseUrl);
-		magAc = new ManageAccount(driver);
+		magAc = new ManageAccount(driver,this.plfVersion);
 		magCat = new AnswerManageCategory(driver);
 		magQuest = new AnswerManageQuestion(driver, this.plfVersion);
 		magAns = new AnswerManageAnwser(driver, this.plfVersion);

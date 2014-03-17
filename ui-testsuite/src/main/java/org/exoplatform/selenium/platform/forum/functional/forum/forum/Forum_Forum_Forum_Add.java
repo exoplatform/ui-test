@@ -6,6 +6,7 @@ import static org.exoplatform.selenium.TestLogger.info;
 
 import org.exoplatform.selenium.Button;
 import org.exoplatform.selenium.platform.ManageAccount;
+import org.exoplatform.selenium.platform.ManageAccount.userType;
 import org.exoplatform.selenium.platform.forum.ForumBase;
 import org.exoplatform.selenium.platform.forum.ForumManageCategory;
 import org.exoplatform.selenium.platform.forum.ForumManageForum;
@@ -83,6 +84,13 @@ public class Forum_Forum_Forum_Add extends ForumBase {
 		String catName = "Test 2 Add new forum When select auto fill email moderators option";
 		String[] fmName={"Test 2 new forum",null,null,null,null};
 		String[] userGroups = {"mary,demo"};
+		acc.userSignIn(userType.DEVELOPER);
+		acc.updateUserProfile(null, null, null, "jack.miller@acme.exoplatform.com");
+		
+		acc.userSignIn(userType.PUBLISHER);
+		acc.updateUserProfile(null, null, null, "mary.williams@acme.exoplatform.com");
+		
+		acc.userSignIn(userType.ADMIN);
 		goToForums();		
 		fmCat.addNewCategoryInForum(catName, "1", 0,null, catName, 0,null);
 		

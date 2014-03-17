@@ -18,7 +18,7 @@ public class Forum_Forum_PrivateMessage extends ForumBase{
 	@BeforeMethod
 	public void setUpBeforeTest(){
 		initSeleniumTest();
-		magAc = new ManageAccount(driver);
+		magAc = new ManageAccount(driver,this.plfVersion);
 
 		magAc.signIn(DATA_USER1, DATA_PASS);
 		goToForums();

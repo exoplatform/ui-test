@@ -266,7 +266,8 @@ public class Forum_Forum_Category_Add extends ForumBase {
 		acc.signOut();
 		acc.signIn(DATA_USER2, DATA_PASS);
 		goToForums();
-		fmCat.checkRightOfViewCategory(DATA_USER2, DATA_PASS, catName, description, false);
+
+		fmCat.checkRightOfViewCategory(DATA_USER2, DATA_PASS, catName, description, true);
 
 		acc.signOut();
 		acc.signIn(DATA_USER1, DATA_PASS);
@@ -294,7 +295,7 @@ public class Forum_Forum_Category_Add extends ForumBase {
 		String[] restricted = { "invlaidUser" };
 		String description = "Description";
 		int setPermission = 1;
-		String[] userGroup = {"/invalidUser"};
+		String[] userGroup = {"invalidUser"};
 		/*- Login as Administrator
 		- Go to Forum Application
 		- Click on [Add Category] in main toolbar
@@ -350,7 +351,6 @@ public class Forum_Forum_Category_Add extends ForumBase {
 		- Click on [Add Category] in main toolbar
 		*Expected Outcome: - Add new Category form is shown properly*/
 		goToForums();
-		fmCat.goToAddCategory();
 		/*Step 2: Set Moderate permission
 		*Input Data: - Select Permission tab
 		- Input/select valid User/Membership(s)/Group(s) for Moderator(s) field

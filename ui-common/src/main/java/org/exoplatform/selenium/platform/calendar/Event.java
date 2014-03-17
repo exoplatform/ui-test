@@ -49,7 +49,6 @@ public class Event extends CalendarBase{
 	public By ELEMENT_EDIT_EVENT_POPUP = By.xpath("//span[@class='PopupTitle popupTitle' and text()='Add/Edit Event']");
 	public By ELEMENT_EDIT_EVENT_CONFIRM_POPUP = By.xpath("//*[@id='UIConfirmFormUpdate']//*[text()='Save']");
 
-
 	/*Recurring event form*/
 	public By ELEMENT_BUTTON_EVENT_MORE_DETAILS = By.xpath("//*[@id='UIQuickAddEventPopupWindow']//*[text()='More Details']");
 	public By ELEMENT_RECURRING_TYPE_SELECT_BOX = By.xpath("//*[@name='repeatType']");
@@ -87,6 +86,7 @@ public class Event extends CalendarBase{
 	public By ELEMENT_RECURRING_TEXT_RECURRING_EVENT = By.xpath("//*[@class='popover-content']/*[@class='time clearfix']//*[@class='uiIconCalRecurring']/../../*[@class='text']");
 	public By ELEMENT_EDITED_RECURRING_TEXT_RECURRING_EVENT = By.xpath("//*[@class='popover-content']/*[@class='time clearfix']//*[@class='uiIconCalEditRecurring']/../../*[@class='text']");
 	public By ELEMENT_DESCRIPTION_EVENT = By.xpath("//*[@class='popover-content']/*[@class='description']");
+
 
 	public Event(WebDriver dr, String...plfVersion){
 		driver = dr;

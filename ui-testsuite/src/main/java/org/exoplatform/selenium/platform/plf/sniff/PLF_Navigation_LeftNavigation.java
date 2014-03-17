@@ -42,6 +42,7 @@ public class PLF_Navigation_LeftNavigation extends GroupNavigation {
 		pageMag = new PageManagement(driver, this.plfVersion);
 		navMag = new NavigationManagement(driver, this.plfVersion);
 		magAcc.signIn(DATA_USER1, DATA_PASS);
+
 	}
 
 	@AfterMethod

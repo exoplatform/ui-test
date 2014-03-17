@@ -113,6 +113,7 @@ public class Calendar_Calendar extends CalendarBase{
 		addCalendar(calendar,calendar,"red","/organization/management/executive-board");
 		changeEditPermissionForCalShowInGroup(calendar, "root", "/organization/management/executive-board");
 		editCalendar(calendar, newCalendar, newCalendar,"light_purple");
+
 		deleteCalendar(newCalendar);
 	}
 

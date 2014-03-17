@@ -2,6 +2,7 @@ package org.exoplatform.selenium.platform.forum.functional.answers;
 
 import static org.exoplatform.selenium.TestLogger.info;
 
+import org.exoplatform.selenium.Button;
 import org.exoplatform.selenium.platform.ManageAccount;
 import org.exoplatform.selenium.platform.ManageAccount.userType;
 import org.exoplatform.selenium.platform.forum.AnswerBase;
@@ -26,10 +27,11 @@ public class Forum_Answers_Question_EditQuestion extends AnswerBase {
 	public void setUpBeforeTest(){
 		initSeleniumTest();
 		driver.get(baseUrl);
-		magAc = new ManageAccount(driver);
+		magAc = new ManageAccount(driver,this.plfVersion);
 		magCat = new AnswerManageCategory(driver);
 		magQuest = new AnswerManageQuestion(driver);
 		magAc.signIn(DATA_USER1, DATA_PASS);
+		button = new Button(driver);
 		goToAnswer();
 	}
 
@@ -70,9 +72,8 @@ public class Forum_Answers_Question_EditQuestion extends AnswerBase {
 
 		//- Select [All questions] tab
 		//- All questions created at step 1 are displayed in list (include answered question/not)
-		click(magQuest.ELEMENT_MANAGE_QUESTION_ALL_QUESTIONS_TAB);
-		waitForAndGetElement(magQuest.ELEMENT_DELETE_QUESTION_IN_ALL_QUESTION_TAB_LIST.replace("${question}", questionName1));
-		waitForAndGetElement(magQuest.ELEMENT_DELETE_QUESTION_IN_ALL_QUESTION_TAB_LIST.replace("${question}", questionName2));
+		magQuest.checkQuestionPresentOnManageQuestion(questionName1);
+		magQuest.checkQuestionPresentOnManageQuestion(questionName2);
 
 		/*Step 3: Inactivate question*/
 		//- Click on 'Yes' link in Activated column to inactivate question
@@ -90,6 +91,7 @@ public class Forum_Answers_Question_EditQuestion extends AnswerBase {
 		magAc.signIn(DATA_USER1, DATA_PASS);
 		goToAnswer();
 		magQuest.goToManageQuestions();
+		magQuest.checkQuestionPresentOnManageQuestion(questionName1);
 		magQuest.activeQuestion(questionName1, true);
 		button.close();
 		
@@ -134,14 +136,14 @@ public class Forum_Answers_Question_EditQuestion extends AnswerBase {
 		
 		//- Select [All questions] tab
 		//- All questions created at step 1 are displayed in list (include answered question/not)
-		click(magQuest.ELEMENT_MANAGE_QUESTION_ALL_QUESTIONS_TAB);
-		waitForAndGetElement(magQuest.ELEMENT_DELETE_QUESTION_IN_ALL_QUESTION_TAB_LIST.replace("${question}", questionName1));
-		waitForAndGetElement(magQuest.ELEMENT_DELETE_QUESTION_IN_ALL_QUESTION_TAB_LIST.replace("${question}", questionName2));
+		magQuest.checkQuestionPresentOnManageQuestion(questionName1);
+		
 
 		/*Step 3: Disapprove question*/
 		//- Click on 'Yes' link in Approved column to disapprove question
 		//- 'Yes' link is changed into 'No'
 		magQuest.approveQuestion(questionName1, false);
+		magQuest.checkQuestionPresentOnManageQuestion(questionName2);
 		
 		//- The question is disapproved. It is invisible to normal user in case Answers mode is set 'approved'
 		info("Normal user cannot view this question");
@@ -153,6 +155,7 @@ public class Forum_Answers_Question_EditQuestion extends AnswerBase {
 		magAc.signIn(DATA_USER1, DATA_PASS);
 		goToAnswer();
 		magQuest.goToManageQuestions();
+		magQuest.checkQuestionPresentOnManageQuestion(questionName1);
 		magQuest.approveQuestion(questionName1, true);
 		
 		//- The question is approved. It is visible to normal user (in case it is not checked for activated or inactivated)
@@ -194,7 +197,7 @@ public class Forum_Answers_Question_EditQuestion extends AnswerBase {
 		//- Click [Manage questions] button
 		magQuest.goToManageQuestions();
 		//- [Manage questions] screen is displayed with All questions tab by default, list all existing questions
-		click(magQuest.ELEMENT_MANAGE_QUESTION_ALL_QUESTIONS_TAB);
+		magQuest.checkQuestionPresentOnManageQuestion(questionName);
 		waitForAndGetElement(magQuest.ELEMENT_DELETE_QUESTION_IN_ALL_QUESTION_TAB_LIST.replace("${question}", questionName));
 		
 		/*Step 3: Show Edit Question form*/
@@ -247,9 +250,10 @@ public class Forum_Answers_Question_EditQuestion extends AnswerBase {
 		magQuest.goToManageQuestions();
 		
 		//- Click [Pending questions] tab
-		click(magQuest.ELEMENT_MANAGE_QUESTION_OPEN_QUESTIONS_TAB);
+		magQuest.goToOpenQuestionTab();
 		
 		//- Pending questions tab of [Manage questions] screen is displayed, list all existing questions
+		magQuest.checkQuestionPresentOnManageQuestion(questionName);
 		waitForAndGetElement(magQuest.ELEMENT_DELETE_QUESTION_IN_PENDING_QUESTION_TAB_LIST.replace("${question}", questionName));
 		
 		/*Step 3: Show Edit Question form*/
@@ -261,6 +265,8 @@ public class Forum_Answers_Question_EditQuestion extends AnswerBase {
 		//- Click Save button
 		//- Question is edited successfully with new value.
 		//- Question status is updated if activated and approved check box is ticked or not.
+		click(magQuest.ELEMENT_ALL_QUESTION_TAB.replace("${status}", ""));
+		magQuest.checkQuestionPresentOnManageQuestion(questionName);
 		magQuest.editQuestion(3, questionName, null, newQuestionName, questionNewContent, null, null, false, false, false, null);
 		waitForElementNotPresent(magQuest.ELEMENT_DELETE_QUESTION_IN_ALL_QUESTION_TAB_LIST.replace("${question}", questionName));
 		waitForAndGetElement(magQuest.ELEMENT_DELETE_QUESTION_IN_ALL_QUESTION_TAB_LIST.replace("${question}", newQuestionName));

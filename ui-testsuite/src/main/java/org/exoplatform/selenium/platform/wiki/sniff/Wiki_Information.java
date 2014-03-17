@@ -27,7 +27,7 @@ public class Wiki_Information extends Version {
 	public void setUpBeforeTest(){
 		initSeleniumTest();
 		driver.get(baseUrl);
-		magAc = new ManageAccount(driver);
+		magAc = new ManageAccount(driver,this.plfVersion);
 		but = new Button(driver);
 		magMem = new ManageMember(driver);
 		
@@ -176,7 +176,7 @@ public class Wiki_Information extends Version {
 	}
 
 	/**CaseId: 70342 -> Add relation in the case there is no space
-	 * 
+	 * This case must run firstly => wiki must run before social
 	 */
 	@Test(priority=0)
 	public void test06_AddRelation_NoSpace(){

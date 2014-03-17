@@ -47,7 +47,7 @@ public class Forum_Administration extends ForumBase {
 	/**CaseId: 70926 + 70932 + 70936 -> Add, edit, delete bbCode
 	 * 
 	 */
-	@Test
+	@Test(priority=1)
 	public void test01_AddEditDeleteBBCode(){
 		String tag = "TAGMOT";
 		String replace = "<TAGMOT>{replace}</TAGMOT>";
@@ -71,7 +71,7 @@ public class Forum_Administration extends ForumBase {
 	/**CaseId: 68917 -> Ban IP
 	 * 
 	 */
-	@Test
+	@Test(priority=2)
 	public void test02_BanIP(){
 		String catName = "CategoryBanIP_02";
 		String description = "Add new category in forum";

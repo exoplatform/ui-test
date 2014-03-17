@@ -55,7 +55,7 @@ public class Forum_Answers_PublishActivities_Delete extends AnswerBase{
 		
 		waitForElementNotPresent(By.linkText(questName));
 		goToAnswer();
-		click(By.linkText(questName));
+		click(ELEMENT_QUESTION_LINK.replace("${question}", questName));
 		mQuest.deleteQuestion(2, questName);
 	}
 
@@ -73,7 +73,7 @@ public class Forum_Answers_PublishActivities_Delete extends AnswerBase{
 		waitForAndGetElement(By.linkText(questName));
 		
 		goToAnswer();
-		click(By.linkText(questName));
+		click(ELEMENT_QUESTION_LINK.replace("${question}", questName));
 		mQuest.deleteQuestion(2, questName);
 		
 		navTool.goToHomePage();

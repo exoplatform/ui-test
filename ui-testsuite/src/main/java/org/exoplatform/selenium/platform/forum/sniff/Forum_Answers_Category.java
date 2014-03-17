@@ -27,8 +27,8 @@ public class Forum_Answers_Category extends AnswerBase {
 	public void setUpBeforeTest(){
 		getDriverAutoSave();
 		driver.get(baseUrl);
-		magAc = new ManageAccount(driver);
-		magCat = new AnswerManageCategory(driver);
+		magAc = new ManageAccount(driver,this.plfVersion);
+		magCat = new AnswerManageCategory(driver,this.plfVersion);
 		magQuest = new AnswerManageQuestion(driver, this.plfVersion);
 		
 		magAc.signIn("john", DATA_PASS);
@@ -48,7 +48,7 @@ public class Forum_Answers_Category extends AnswerBase {
 	public void test01_AddEditDeleteCategory(){
 		String categoryName = "Answercategory1";
 		String description = "Add new category for answer";
-		String[] userGroup = {"demo"};
+		String[] userGroup = {"demo","1"};
 		
 		String name_edit = "Category1_Edit";
 		String des_edit = "Edit category 1";
@@ -70,7 +70,7 @@ public class Forum_Answers_Category extends AnswerBase {
 	public void test02_MoveCategory(){
 		String categoryName1 = "Answercategory2_1";
 		String description1 = "Add new category1 for answer";
-		String[] userGroup1 = {"demo"};
+		String[] userGroup1 = {"demo","1"};
 		
 		String categoryName2 = "Answercategory2_2";
 		String description2 = "Add new category2 for answer";
@@ -96,7 +96,7 @@ public class Forum_Answers_Category extends AnswerBase {
 	public void test03_ExportImportCategory(){
 		String categoryName = "Answercategory3";
 		String description = "Add new category for answer";
-		String[] userGroup = {"demo"};		
+		String[] userGroup = {"demo","1"};		
 		String questionName = "QuestionCategory3";
 		String questionContent = "Question of Answercategory3";
 		String fileName = "Answercategory3";
@@ -117,8 +117,9 @@ public class Forum_Answers_Category extends AnswerBase {
 		
 		info("Cut/paste file from TestOutput folder to TestData folder");
 		cutPasteFileFromOutputToTestData(fileFull);
-		
+		Utils.pause(3000);
 		magCat.importAnswerCategory(fileFull);
+		Utils.pause(3000);
 		deleteFile(fileFull);
 		magCat.openCategoryInAnswer(categoryName);
 		waitForAndGetElement(By.linkText(questionName));
@@ -133,7 +134,7 @@ public class Forum_Answers_Category extends AnswerBase {
 	public void test04_WatchUnwatchCategory(){
 		String categoryName = "Answercategory4";
 		String description = "Add new category for answer";
-		String[] userGroup = {"demo"};		
+		String[] userGroup = {"demo","1"};		
 		String questionName = "QuestionCategory4";
 		String questionContent = "Question of Answercategory4";
 		
@@ -157,7 +158,7 @@ public class Forum_Answers_Category extends AnswerBase {
 	public void test05_DragDropCategory(){
 		String categoryName1 = "Answercategory5_1";
 		String description1 = "Add new category1 for answer";
-		String[] userGroup1 = {"demo"};
+		String[] userGroup1 = {"demo","1"};
 		
 		String categoryName2 = "Answercategory5_2";
 		String description2 = "Add new category2 for answer";

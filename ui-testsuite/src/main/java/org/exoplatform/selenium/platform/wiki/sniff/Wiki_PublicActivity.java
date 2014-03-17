@@ -158,6 +158,12 @@ public class Wiki_PublicActivity extends BasicAction {
 			activity.checkCommentAfterMoveWikiPage(title2, "eXo Community Wiki > " + title1 + " > " + title2);
 		}
 		
+/*=======
+		if(this.plfVersion.equalsIgnoreCase("com"))
+			activity.checkCommentAfterMoveWikiPage(title2, "eXo Community Wiki > " + title1 + " > " + title2);
+		else
+			activity.checkCommentAfterMoveWikiPage(title2, "Wiki Home > " + title1 + " > " + title2);
+*/
 		click(By.linkText(title2));
 		click(By.linkText(title1));
 		deleteCurrentWikiPage();
@@ -178,7 +184,11 @@ public class Wiki_PublicActivity extends BasicAction {
 		activity.checkActivityInfoOfWiki(title, content, "1");
 
 		click(By.linkText(title));
-		//waitForTextPresent("Wiki Home");
+
+		/*if(this.plfVersion.equalsIgnoreCase("com"))
+			waitForTextPresent("eXo Community Wiki");
+		else
+			waitForTextPresent("Wiki Home");*/
 		deleteCurrentWikiPage();
 	}
 

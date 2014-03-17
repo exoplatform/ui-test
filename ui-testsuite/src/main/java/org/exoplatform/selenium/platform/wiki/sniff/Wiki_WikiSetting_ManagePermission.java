@@ -23,7 +23,7 @@ public class Wiki_WikiSetting_ManagePermission extends BasicAction {
 	public void setUpBeforeTest(){
 		initSeleniumTest();
 		driver.get(baseUrl);
-		magAc = new ManageAccount(driver);
+		magAc = new ManageAccount(driver,this.plfVersion);
 		but = new Button(driver);
 		magAc.signIn("john", DATA_PASS); 
 		goToWiki();
@@ -31,7 +31,7 @@ public class Wiki_WikiSetting_ManagePermission extends BasicAction {
 
 	@AfterMethod
 	public void afterTest(){
-		//magAc.signOut();
+
 		driver.manage().deleteAllCookies();
 		driver.quit();
 	}
