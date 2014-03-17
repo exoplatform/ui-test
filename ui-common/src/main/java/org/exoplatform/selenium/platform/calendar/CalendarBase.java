@@ -797,7 +797,7 @@ public class CalendarBase extends PlatformBase {
 	 */
 	public void gotoAddEventCategory(){
 		click(ELEMENT_CALENDAR_ACTIONS_ICON);
-		info("----GO to Add Event Category form----");
+		info("----Go to Add Event Category form----");
 		click(ELEMENT_ADD_EVENT_CATEGORY_ICON);
 		Utils.pause(3000);
 	}	 

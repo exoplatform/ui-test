@@ -356,7 +356,7 @@ public class Calendar_Event extends CalendarBase {
 		deleteEventTask(EVENT10, selectDayOption.ONEDAY);
 
 		info("==Restore data==");
-		deleteCalendar(CAL_10);
+		deleteCalendar(CAL_10,true);
 	}
 
 	/** 

@@ -58,7 +58,6 @@ public class Calendar_Category extends CalendarBase{
 		gotoAddEventCategory();
 		driver.navigate().refresh();
 		deleteEventCategory(EVENT_CATEGORY_01);
-
 	}
 
 	/** 
