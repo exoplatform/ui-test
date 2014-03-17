@@ -536,7 +536,7 @@ public class Wiki_BasicAction_Edit extends ManageDraft {
 		Utils.pause(500);
 		goToAddBlankPage();
 		addWikiPageRichText(title, "");
-		insertAttachFile(file1,true);
+		insertAttachNewFile(file1,"","",true);
 		Utils.pause(500);		
 
 		/*

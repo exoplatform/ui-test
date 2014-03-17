@@ -37,10 +37,10 @@ public class WikiBase extends PlatformBase{
 	//Company/Left panel > Wiki Link
 	public final By ELEMENT_WIKI_LINK=By.xpath("//ul[@class='uiCompanyNavigations']//li/a[text()='Wiki']");
 	public final By ELEMENT_WIKI_LINK_PLF41=By.xpath("//*[@data-original-title='Wiki']");
-	
+
 	//Add page menu
 	public final By ELEMENT_ADD_PAGE_LINK = By.xpath("//*[@id='UIWikiPageControlArea_PageToolBar']//div[contains(text(),'Add Page')]");
-//	public final By ELEMENT_BLANK_PAGE_LINK = By.linkText("Blank Page");
+	//	public final By ELEMENT_BLANK_PAGE_LINK = By.linkText("Blank Page");
 	public final By ELEMENT_BLANK_PAGE_LINK = By.xpath("//*[@class='uiIconAddPage']");
 	public final By ELEMENT_FROM_TEMPLATE_LINK = By.linkText("From Template...");
 
@@ -48,7 +48,7 @@ public class WikiBase extends PlatformBase{
 	public final By ELEMENT_EDIT_PAGE_LINK= By.xpath("//*[@id='UIWikiPageControlArea_PageToolBar']//li/div[contains(text(), 'Edit')]");;
 	public final By ELEMENT_EDIT_COMPARE_CHANGE = By.xpath("//*[contains(text(), 'Compare Revisions')]");
 	public final String ELEMENT_EDIT_COMPARE_VERSION = "//*[@class = 'changeVersionInfo' and contains(text(), '${version}')]";
-	
+
 	//More menu
 	public final By ELEMENT_MORE_LINK = By.xpath("//*[@id='UIWikiPageControlArea_PageToolBar']//div[contains(text(), 'More')]");
 	public final By ELEMENT_DELETE_LINK = By.linkText("Delete Page");
@@ -111,6 +111,15 @@ public class WikiBase extends PlatformBase{
 	public final By ELEMENT_SOURCE_EDITOR_BUTTON= By.xpath("//*[contains(text(),'Source Editor')]");
 	public final By ELEMENT_SOURCE_EDITOR_BUTTON_PLF4_1 = By.xpath("//button[contains(text(),'Source Editor')]");
 	public final By ELEMENT_CONTENT_WIKI_FRAME = By.xpath("//div[@class='xRichTextEditor']/iframe");
+	public final By ELEMENT_CONTENT_WIKI_IMG = By.xpath("//div[@id='UIViewContentDisplay']/../..//img");
+	public final By ELEMENT_TWO_LAYOUT_RIGHT = By.xpath("//div[@style='float:left;width:49.2%;padding-right:1.5%;']");
+	public final By ELEMENT_TWO_LAYOUT_LEFT = By.xpath("//div[@style='float:left;width:49.2%;']");
+	public final By ELEMENT_THREE_LAYOUT_RIGHT = By.xpath("//div[@style='float:left;width:32.300000000000004%;padding-right:1.5%;'][1]");
+	public final By ELEMENT_THREE_LAYOUT_MID = By.xpath("//div[@style='float:left;width:32.300000000000004%;padding-right:1.5%;'][2]");
+	public final By ELEMENT_THREE_LAYOUT_LEFT = By.xpath("//div[@style='float:left;width:32.300000000000004%;']");
+	public final String EMENENT_STATUS_LAYOUT = "//th[contains(text(), '${title}')]";
+	public final String EMENENT_HOW_LAYOUT = "//a[contains(text(), '${title}')]";
+	public final By EMENENT_LEAVE_PLANING_LAYOUT = By.xpath("//*[contains(text(), 'The Confluence team uses tables to communicate scheduled leave times')]"); 
 
 	//Upload file area
 	public By ELEMENT_UPLOAD_FILE = By.xpath("//div[@class='uiUploadInput']//*[@type='file']"); 
@@ -242,7 +251,7 @@ public class WikiBase extends PlatformBase{
 	public String ELEMENT_CREATOR_PAGE_INFO = "//*[@id='UIWikiPageInfoArea']//a[1][text()='${fullName}']";
 	public String ELEMENT_UPDATER_PAGE_INFO = "//*[@id='UIWikiPageInfoArea']//a[2][text()='${fullName}']";
 	public final By ELEMENT_ADD_MORE_RELATION_BUTTON = By.xpath("//button[text()='Add More Relations']");
-	
+
 	public final String ELEMENT_PAGE_INFO_TITLE = "//h6[@class='pageInfoTitle' and contains(text(),'${infoTitle}')]";
 	public final String ELEMENT_VERIFY_INFO_SUMMARY = "//div[@class='uiPageInfoItem uiPageInfoSummary']//b[contains(text(),'${infoSummary}')]/ancestor::tr/td[contains(text(),'${item}')]";
 	public final String ELEMENT_VERIFY_HIERARCHY = "//div[text()='${page}']/..//*//*//a[@href='/portal/intranet/wiki/${pageTitle}']";
@@ -274,7 +283,7 @@ public class WikiBase extends PlatformBase{
 	/*-----------------------Watch/UnWatch page-------------------------------*/
 	public final String MESSAGE_WATCH_PAGE = "You have started watching this page now.";
 	public final String MESSAGE_UNWATCH_PAGE = "You have stopped watching this page now.";
-	
+
 	//Wiki location
 	public final By ELEMENT_WIKI_LOCATION_DROPDOWN = By.xpath("//div[@class='btn dropdown-toggle']");
 	public final By ELEMENT_WIKI_TITLE_PREVIEW = By.xpath("//div[@class='uiWikiPageTitle']");

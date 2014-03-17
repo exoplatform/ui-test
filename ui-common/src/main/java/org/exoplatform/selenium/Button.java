@@ -11,7 +11,7 @@ import org.openqa.selenium.WebDriver;
  *
  */
 public class Button extends TestBase{
-	
+
 	public Button(WebDriver dr,String...plfVersion) {
 		driver = dr;
 		this.plfVersion = plfVersion.length>0?plfVersion[0]:"4.0";
@@ -28,7 +28,7 @@ public class Button extends TestBase{
 	public final By ELEMENT_APPLY_FRENCH_BUTTON = By.linkText("Appliquer");
 	public final By ELEMENT_APPLY_GERMAN_BUTTON = By.linkText("Anwenden");
 	public final By ELEMENT_APPLY_BUTTON = By.xpath("//*[text()='Apply']");
-			//By.linkText("Apply");
+	//By.linkText("Apply");
 	public final By ELEMENT_SAVE_BUTTON = By.xpath("//*[text()='Save']"); 
 	public final By ELEMENT_SAVE_BUTTON_POPUP_WINDOWS = By.xpath("//*[contains(@class, 'popup')]//*[text()='Save']");
 	public final By ELEMENT_CANCEL_BUTTON = By.xpath("//*[contains(text(),'Cancel')]");
@@ -38,7 +38,7 @@ public class Button extends TestBase{
 	public final By ELEMENT_SELECT_BUTTON = By.xpath("//*[text()='Select']");
 	public final By ELEMENT_CONFIRM_BUTTON = By.xpath("//*[text()='Confirm']");
 	public final By ELEMENT_CLOSE_WINDOW = By.xpath("//*[contains(@class, 'uiIconClose') and @title = 'Close Window']");
-			//By.className("uiIconClose"); 
+	//By.className("uiIconClose"); 
 	public final By ELEMENT_MOVE_BUTTON = By.xpath("//button[contains(text(), 'Move')]");
 	public final By ELEMENT_FINISH_ICON = By.xpath("//a[@title='Finish']"); //Finish editing portlet icon
 	public final By ELEMENT_NEXT_BUTTON = By.xpath("//*[text()='Next']");	
@@ -48,6 +48,7 @@ public class Button extends TestBase{
 	public final By ELEMENT_CREATE_LINK_BUTTON = By.xpath("//*[text()='Create Link']");
 	public final By ELEMENT_CREATE_MACRO_BUTTON = By.xpath("//button[text()='Insert Macro']");
 	public final By ELEMENT_INSERT_TABLE = By.xpath("//button[text()='Insert Table']");
+	public final By ELEMENT_SETTING_LINK_BUTTON = By.xpath("//*[text()='Link Settings']");
 
 	//ECMS Admin > Category > Add Category
 	public final By ELEMENT_PREVIOUS_BUTTON_ADMIN_4 = By.xpath("//*[@class='UITaxonomyTreeCreateChild']//*[text()='Previous']");
@@ -102,7 +103,7 @@ public class Button extends TestBase{
 			click(ELEMENT_CANCEL_BUTTON_AUX);
 		}
 	}
-	
+
 	public void add(){
 		waitForAndGetElement(ELEMENT_ADD_BUTTON);
 		click(ELEMENT_ADD_BUTTON);
@@ -156,5 +157,5 @@ public class Button extends TestBase{
 		}
 		Utils.pause(1000);
 	}
-	
+
 }

@@ -34,6 +34,9 @@ public class RichTextMode extends Template {
 	public By ELEMENT_TOOLTIP_LINK_TEXTBOX = By.xpath("//input[@title='Type the tooltip of the created link, which appears when mouse is over the link.']");
 	public By ELEMENT_REMOVE_LINK = By.xpath("//div[text()='Remove Link']");
 	public By ELEMENT_EDIT_LINK = By.xpath("//div[text()='Edit Link...']");
+	public By ELEMENT_ADD_NEW_LINKPAGE_TEXTBOX =  By.xpath("//input[@title='Type the name of the page to be created. The final name of the page may vary since some characters are filtered.']");
+	public By ELEMENT_ALL_PAGE_TAB = By.xpath("//div[contains(text(), 'All pages')]");
+	public By ELEMENT_ADD_NEW_PAGE_LINK = By.xpath("//*[@class='gwt-Label xNewPagePreview']");
 
 	//Table
 	public By ELEMENT_TABLE_LINK = By.xpath("//*[text()='Table']");
@@ -64,6 +67,9 @@ public class RichTextMode extends Template {
 	public By ELEMENT_IMAGE_HEIGHT = By.xpath("//div[contains(text(), 'Height')]/..//input[2]");
 	public By ELEMENT_IMAGE_ALTERNATIVE_TEXT = By.xpath("//div[contains(text(), 'Alternative text')]/..//input[1]");
 	public final By ELEMENT_IMAGE_INSERT_BUTTON = By.xpath("//*[text()='Insert Image']");
+	public By ELEMENT_IMAGE_EXTERNAL_LINK = By.xpath("//*[text()='External Image...']");
+	public By ELEMENT_IMAGE_SETTING_BUTTON = By.xpath("//*[text()='Image Settings']");
+	public By ELEMENT_IMAGE_LOCATION = By.xpath("//input[@title='Image location']");
 
 	//WebPage
 	public By ELEMENT_WEBPAGE_LINK = By.xpath("//*[text()='Web Page...']");
@@ -76,6 +82,7 @@ public class RichTextMode extends Template {
 	//Attach file 
 	public By ELEMENT_ATTACH_FILE_LINK = By.xpath("//*[text()='Attached File...']");
 	public By ELEMENT_ATTACH_FILE_PATH = By.xpath("//input[@name='filepath']");
+	public String ELEMENT_ATTACH_FILE_CEL = "//*[@class='cell']//*[contains(text(), '${file}')]/../..//img[1]";
 
 	/**
 	 * Add link to a Wiki page
@@ -306,38 +313,6 @@ public class RichTextMode extends Template {
 	}
 
 	/**
-	 * attach a file to wiki page
-	 * @param file
-	 * @param opParam
-	 * 			 verify - true: verify result
-	 * 			 veriry - false: not verify result 
-	 */
-	public void insertAttachFile(String file, Object...opParam){
-		Boolean verify =(Boolean)(opParam.length>0?opParam[0]:false);
-		String path = Utils.getAbsoluteFilePath("TestData/"+file);
-		mouseOverAndClick(ELEMENT_LINK);
-		mouseOverAndClick(ELEMENT_ATTACH_FILE_LINK);
-		Utils.pause(500);
-		click(but.ELEMENT_SELECT_BUTTON);
-		waitForElementNotPresent(but.ELEMENT_SELECT_BUTTON);
-		click(ELEMENT_ATTACH_FILE_PATH);
-		WebElement upload = waitForAndGetElement(ELEMENT_ATTACH_FILE_PATH, 5000, 1, 2);
-		((JavascriptExecutor)driver).executeScript("arguments[0].style.visibility = 'visible'; arguments[0].style.height = '1px'; " +
-				"arguments[0].style.width = '1px'; arguments[0].style.opacity = 1", upload);
-		((JavascriptExecutor)driver).executeScript("arguments[0].style.display = 'block';", upload);
-		upload.sendKeys(path);
-		Utils.pause(500);
-		click(but.ELEMENT_CREATE_LINK_BUTTON);
-		waitForElementNotPresent(but.ELEMENT_CREATE_LINK_BUTTON);	
-		if(verify){
-			WebElement e = waitForAndGetElement(ELEMENT_CONTENT_WIKI_FRAME,DEFAULT_TIMEOUT,1,2);
-			driver.switchTo().frame(e);
-			waitForAndGetElement(By.linkText(file));
-			switchToParentWindow();
-		}
-	}
-
-	/**
 	 * edit a link (attach link, web page link, email link) on wiki: go to richtext mode -> Link -> Edit link
 	 * @param file
 	 * @param label
@@ -513,7 +488,7 @@ public class RichTextMode extends Template {
 			switchToParentWindow();
 		}
 	}
-	
+
 	/**
 	 * Define a alignment of image link 
 	 * LEFT
@@ -526,4 +501,184 @@ public class RichTextMode extends Template {
 	public enum alignmentType {
 		LEFT, CENTER, RIGHT,TOP, MIDDLE, BOTTOM;
 	}
+
+	/**
+	 * Add link to a new Wiki page
+	 * 
+	 * @param pageName
+	 * 			pageName that will be the target link
+	 * @param label
+	 * 			label of link that will be added into Wiki page
+	 * @param tooltip
+	 * 			
+	 * @param opParam
+	 * 			 verify - true: verify result
+	 * 			 veriry - false: not verify result 
+	 */
+	public void insertnewPageLink2WikiPage(String pageName, String label, String tooltip,Object...opParam){
+		Boolean verify =(Boolean)(opParam.length>0?opParam[0]:false);
+		mouseOverAndClick(ELEMENT_LINK);
+		mouseOverAndClick(ELEMENT_WIKI_PAGE_LINK);
+		Utils.pause(500);
+		info("Create link to the webpage " + pageName);
+		if(pageName!=null && pageName!=""){
+			click(ELEMENT_ADD_NEW_PAGE_LINK);
+			Utils.pause(500);
+			click(button.ELEMENT_SELECT_BUTTON);
+			Utils.pause(500);
+			type(ELEMENT_ADD_NEW_LINKPAGE_TEXTBOX,pageName,true);
+		}
+		else
+			click(button.ELEMENT_SELECT_BUTTON);
+		Utils.pause(500);
+		click(button.ELEMENT_SETTING_LINK_BUTTON);
+		Utils.pause(500);
+		if(label!=null && label!="")
+			type(ELEMENT_LABEL_LINK_TEXTBOX,label,true);
+		if(tooltip!=null && tooltip!="")
+			type(ELEMENT_TOOLTIP_LINK_TEXTBOX,tooltip,true);
+		Utils.pause(500);
+		click(but.ELEMENT_CREATE_LINK_BUTTON);
+		waitForElementNotPresent(but.ELEMENT_CREATE_LINK_BUTTON);	
+		if(verify){
+			WebElement e = waitForAndGetElement(ELEMENT_CONTENT_WIKI_FRAME,DEFAULT_TIMEOUT,1,2);
+			driver.switchTo().frame(e);
+			if(label!=null && label!="")
+				waitForAndGetElement(By.linkText(label));
+			if(tooltip!=null && tooltip!="")
+				waitForAndGetElement(By.xpath("//*[@title='"+tooltip+"']"));		
+			switchToParentWindow();
+		}
+	}
+
+	/**
+	 * attach a file to wiki page
+	 * @param file
+	 * @param opParam
+	 * 			 verify - true: verify result
+	 * 			 veriry - false: not verify result 
+	 */
+	public void insertAttachFileExits(String file, String fileattach, String tooltip, Object...opParam){
+		Boolean verify =(Boolean)(opParam.length>0?opParam[0]:false);
+		mouseOverAndClick(ELEMENT_LINK);
+		mouseOverAndClick(ELEMENT_ATTACH_FILE_LINK);
+		Utils.pause(500);
+		click(ELEMENT_ALL_PAGE_TAB);
+		Utils.pause(1000);
+		mouseOverAndClick(ELEMENT_ATTACH_FILE_CEL.replace("${file}", "WikiHome"));
+		Utils.pause(500);
+		mouseOverAndClick(ELEMENT_ATTACH_FILE_CEL.replace("${file}", file));
+		Utils.pause(500);
+		mouseOverAndClick(ELEMENT_ATTACH_FILE_CEL.replace("${file}", "Attachments"));
+		Utils.pause(500);
+		mouseOverAndClick(ELEMENT_ATTACH_FILE_CEL.replace("${file}", fileattach));
+		Utils.pause(500);
+		click(but.ELEMENT_SELECT_BUTTON);
+		waitForElementNotPresent(but.ELEMENT_SELECT_BUTTON);
+		if(tooltip!=null && tooltip!="")
+			type(ELEMENT_TOOLTIP_LINK_TEXTBOX,tooltip,true);
+		Utils.pause(500);
+		Utils.pause(500);
+		click(but.ELEMENT_CREATE_LINK_BUTTON);
+		waitForElementNotPresent(but.ELEMENT_CREATE_LINK_BUTTON);	
+		if(verify){
+			WebElement e = waitForAndGetElement(ELEMENT_CONTENT_WIKI_FRAME,DEFAULT_TIMEOUT,1,2);
+			driver.switchTo().frame(e);
+			waitForAndGetElement(By.linkText(fileattach));
+			if(tooltip!=null && tooltip!="")
+				waitForAndGetElement(By.xpath("//*[@title='"+tooltip+"']"));	
+			switchToParentWindow();
+		}
+	}
+
+	/**
+	 * attach a file to wiki page
+	 * @param file
+	 * @param label
+	 * 			label of link that will be added into Wiki page
+	 * @param tooltip
+	 * @param opParam
+	 * 			 verify - true: verify result
+	 * 			 veriry - false: not verify result 
+	 */
+	public void insertAttachNewFile(String file, String label, String tooltip,Object...opParam){
+		Boolean verify =(Boolean)(opParam.length>0?opParam[0]:false);
+		String path = Utils.getAbsoluteFilePath("TestData/"+file);
+		mouseOverAndClick(ELEMENT_LINK);
+		mouseOverAndClick(ELEMENT_ATTACH_FILE_LINK);
+		Utils.pause(500);
+		click(but.ELEMENT_SELECT_BUTTON);
+		waitForElementNotPresent(but.ELEMENT_SELECT_BUTTON);
+		click(ELEMENT_ATTACH_FILE_PATH);
+		WebElement upload = waitForAndGetElement(ELEMENT_ATTACH_FILE_PATH, 5000, 1, 2);
+		((JavascriptExecutor)driver).executeScript("arguments[0].style.visibility = 'visible'; arguments[0].style.height = '1px'; " +
+				"arguments[0].style.width = '1px'; arguments[0].style.opacity = 1", upload);
+		((JavascriptExecutor)driver).executeScript("arguments[0].style.display = 'block';", upload);
+		upload.sendKeys(path);
+		Utils.pause(500);
+		click(button.ELEMENT_SETTING_LINK_BUTTON);
+		Utils.pause(500);
+		if(label!=null && label!="")
+			type(ELEMENT_LABEL_LINK_TEXTBOX,label,true);
+		if(tooltip!=null && tooltip!="")
+			type(ELEMENT_TOOLTIP_LINK_TEXTBOX,tooltip,true);
+		Utils.pause(500);
+		click(but.ELEMENT_CREATE_LINK_BUTTON);
+		waitForElementNotPresent(but.ELEMENT_CREATE_LINK_BUTTON);	
+		if(verify){
+			WebElement e = waitForAndGetElement(ELEMENT_CONTENT_WIKI_FRAME,DEFAULT_TIMEOUT,1,2);
+			driver.switchTo().frame(e);
+			if(label!=null && label!="")
+				waitForAndGetElement(By.linkText(label));
+			if(tooltip!=null && tooltip!="")
+				waitForAndGetElement(By.xpath("//*[@title='"+tooltip+"']"));	
+			switchToParentWindow();
+		}
+	}
+
+	/**
+	 * add an image file to wiki
+	 * @param imageLocation
+	 * @param opParam
+	 * 			 verify - true: verify result
+	 * 			 veriry - false: not verify result 
+	 */
+	public void insertExternalImage(String imageLocation, String width, String height, String text, alignmentType alignment, Object...opParam){
+		Boolean verify =(Boolean)(opParam.length>0?opParam[0]:false);
+		mouseOverAndClick(ELEMENT_IMAGE_LINK);
+		mouseOverAndClick(ELEMENT_IMAGE_EXTERNAL_LINK);
+		Utils.pause(500);
+		if(imageLocation!=null && imageLocation!="")
+			type(ELEMENT_IMAGE_LOCATION,imageLocation,true);
+		Utils.pause(500);
+		click(ELEMENT_IMAGE_SETTING_BUTTON);
+		info("input width and height");
+		if(width!=null && width!="")
+			type(ELEMENT_IMAGE_WIDTH,width,true);
+		if(height!=null && height!="")
+			type(ELEMENT_IMAGE_HEIGHT,height,true);
+		if(text!=null && text!="")
+			type(ELEMENT_IMAGE_ALTERNATIVE_TEXT,text,true);
+		if(alignment!=null)
+			click(By.xpath("//*[@value='"+String.valueOf(alignment)+"']"));
+		click(ELEMENT_IMAGE_INSERT_BUTTON);
+		waitForElementNotPresent(ELEMENT_IMAGE_INSERT_BUTTON);	
+		if(verify){
+			WebElement e = waitForAndGetElement(ELEMENT_CONTENT_WIKI_FRAME,DEFAULT_TIMEOUT,1,2);
+			driver.switchTo().frame(e);
+			if(width!=null && width!=""){
+				String widthImage = waitForAndGetElement(By.xpath("//*[@id='body']/img")).getAttribute("width");
+				assert widthImage.equalsIgnoreCase(width);
+			}
+			if(text!=null && text!=""){
+				String alt = waitForAndGetElement(By.xpath("//*[@id='body']/img")).getAttribute("alt");
+				assert alt.equalsIgnoreCase(text);
+			}
+			if(alignment!=null){
+				String alignmentImage = waitForAndGetElement(By.xpath("//*[@id='body']/img")).getAttribute("style");
+				assert alignmentImage.toLowerCase().contains(String.valueOf(alignment).toLowerCase());
+			}
+			switchToParentWindow();
+		}
+	}	
 }

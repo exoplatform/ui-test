@@ -16,7 +16,7 @@ public class ManageDraft extends RichTextMode {
 			//By.xpath("//*[@class='uiWikiPageEditForm_MessageArea pull-left' and contains(text(), 'Draft saved at')]");
 	
 	//Manage Draft screen
-	public String ELEMENT_DRAFT_OF_NEW_PAGE = "//*[@id='UIWikiDraftGrid']//*[text()='${title} (New Page)']";
+	public String ELEMENT_DRAFT_OF_NEW_PAGE = "//*[@id='UIWikiDraftGrid']//*[contains(text(),'${title} (New Page)')]";
 	public String ELEMENT_DELETE_DRAFT = "//*[contains(text(), '${title}')]/../../..//*[@class='uiIconDeleteDraft']";
 	public String ELEMENT_DRAFT_OF_EDIT_PAGE = "//*[@id='UIWikiDraftGrid']//*[text()='${title}']";
 	public By ELEMENT_DRAFT_CONFIRM_POPUP = By.xpath("//div[@class='confirmMessage' and contains(text(), 'The draft has been created. Do you want to keep it?')]");

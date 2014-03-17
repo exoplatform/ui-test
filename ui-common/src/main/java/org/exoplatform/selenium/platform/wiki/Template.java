@@ -15,10 +15,11 @@ import org.openqa.selenium.WebElement;
  * 
  */
 public class Template extends BasicAction{
+	public String ELEMENT_WIKI_TITLE_PREVIEW = "//*[@class='uiWikiPageTitlePreview' and contains(text(), '${title}')]"; 
 
 	//Dialog dialog = new Dialog(driver);
 	//Button button = new Button(driver);
-	
+
 	/** 
 	 * Add a wiki page from template
 	 * 
@@ -49,10 +50,13 @@ public class Template extends BasicAction{
 		}	
 		switchToParentWindow();
 		Utils.pause(1000);
+		info("Preview the page");
+		click(ELEMENT_PREVIEW_BUTTON);
+		waitForAndGetElement(ELEMENT_WIKI_TITLE_PREVIEW.replace("${title}", title));
+		click(ELEMENT_CLOSE_PREVIEW_WINDOW);
+		Utils.pause(1000);
 		click(ELEMENT_SAVE_BUTTON_ADD_PAGE);
-		waitForElementNotPresent(ELEMENT_SAVE_BUTTON_ADD_PAGE);
-		//save();
-		//waitForElementNotPresent(ELEMENT_SAVE_BUTTON);
+		waitForElementNotPresent(ELEMENT_SAVE_BUTTON_ADD_PAGE);		
 	}
 
 	/**
@@ -85,7 +89,7 @@ public class Template extends BasicAction{
 		dialog.closeMessageDialog();
 		waitForElementNotPresent(ELEMENT_SAVE_TEMPLATE_INPUT);
 	}
-	
+
 	/**
 	 *
 	 *Edit a wiki page template
@@ -122,7 +126,7 @@ public class Template extends BasicAction{
 		click(ELEMENT_SAVE_TEMPLATE_INPUT);
 		waitForElementNotPresent(ELEMENT_SAVE_TEMPLATE_INPUT);
 	}
-	
+
 	/** 
 	 * Delete a wiki page template
 	 * 
@@ -138,7 +142,7 @@ public class Template extends BasicAction{
 		waitForElementNotPresent(ELEMENT_DELETE_TEMPLATE_ICON.replace("{$template}", title));
 		Utils.pause(500);
 	}
-	
+
 	/** 
 	 * Search for templates
 	 * 
@@ -147,13 +151,13 @@ public class Template extends BasicAction{
 	 */
 	public void searchTemplate(String keyword){
 		type(ELEMENT_SEARCH_TEMPLATE_INPUT, keyword, true);
-//		click(ELEMENT_SEARCH_BUTTON);
-//		Utils.javaSimulateKeyPress(KeyEvent.VK_ENTER);
-		
+		//		click(ELEMENT_SEARCH_BUTTON);
+		//		Utils.javaSimulateKeyPress(KeyEvent.VK_ENTER);
+
 		WebElement searchButton = waitForAndGetElement(ELEMENT_SEARCH_BUTTON, DEFAULT_TIMEOUT, 1, 2);
 		((JavascriptExecutor)driver).executeScript("arguments[0].click();", searchButton);
 		//click(ELEMENT_SEARCH_BUTTON);
-		
+
 		Utils.pause(1000);
 	}
 }

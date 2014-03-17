@@ -287,7 +287,7 @@ public class Wiki_BasicAction_Delete extends ManageDraft {
 		Utils.pause(500);
 		goToAddBlankPage();
 		addWikiPageRichText(title, "");
-		insertAttachFile(file);
+		insertAttachNewFile(file,"","",true);
 		Utils.pause(500);
 		info("remove attach link");
 		mouseOverAndClick(ELEMENT_LINK);
