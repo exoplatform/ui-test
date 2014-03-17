@@ -123,7 +123,7 @@ public class GroupNavigation extends PlatformBase {
 		if (verifyNode) {
 			waitForAndGetElement(ELEMENT_NAVIGATION_NODE.replace("${nodeName}", nodeName));
 			button.save();
-			waitForElementNotPresent(ELEMENT_MANAGE_NAVIGATION_POPUP);
+			waitForElementNotPresent(ELEMENT_MANAGE_NAVIGATION_POPUP,180000);
 		}
 	}
 

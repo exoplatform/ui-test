@@ -126,10 +126,10 @@ public class Gatein_Manage_Application extends PlatformBase {
 	 */
 	@Test
 	public void test05_ManageManualGadget(){
-		String name = "Gateinsniff_gadget05";
-		String title = "gadget title 05";
+		String name = "name68911";
+		String title = "title68911";
 		String source = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><Module><ModulePrefs title=\"${title}\" description=\"The hello world gadget.\"/><Content type=\"html\"> <![CDATA[    Hello, world! ]]></Content></Module>";
-		String newTitle = "gadget title 05 update";		
+		String newTitle = "newtitle68911";		
 		
 		navTool.goToApplicationRegistry();
 		click(app.ELEMENT_SHOW_GADGET_ICON);

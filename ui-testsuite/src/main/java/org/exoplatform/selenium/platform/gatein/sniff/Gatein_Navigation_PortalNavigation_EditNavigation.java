@@ -278,8 +278,8 @@ public class Gatein_Navigation_PortalNavigation_EditNavigation extends PortalMan
 	public void test05_CopyCutCloneAndPasteNode(){
 		String portalName = "intranet";
 		String parentNode = "Home";
-		String nodeName = "test05EditNode";
-		String pageSelectorName = "test05pageSelector";
+		String nodeName = "node70599";
+		String pageSelectorName = "page70599";
 		Map<String, String> languages = new HashMap<String, String>();
 		languages.put("English", "");
 		String nodeParentLink = ELEMENT_NODE_LINK.replace("${nodeLabel}", parentNode);

@@ -7,6 +7,7 @@ import org.exoplatform.selenium.platform.ManageAccount.userType;
 import org.exoplatform.selenium.platform.social.ManageMember;
 import org.exoplatform.selenium.platform.social.SocialBase;
 import org.exoplatform.selenium.platform.social.SpaceManagement;
+import org.exoplatform.selenium.platform.social.SpaceSearch;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -23,7 +24,8 @@ public class Social_Space_SpaceManagement_ManageSpace extends SocialBase{
 
 	//Space
 	SpaceManagement spaceMag;
-
+	SpaceSearch spSeach;
+	
 	@BeforeMethod
 	public void beforeMethods() {
 		initSeleniumTest();
@@ -32,6 +34,7 @@ public class Social_Space_SpaceManagement_ManageSpace extends SocialBase{
 		magAcc = new ManageAccount(driver);
 		magMember = new ManageMember(driver);
 		spaceMag = new SpaceManagement(driver);
+		spSeach = new SpaceSearch(driver);
 		magAcc.signIn(DATA_USER1, DATA_PASS);
 	}
 
@@ -95,7 +98,7 @@ public class Social_Space_SpaceManagement_ManageSpace extends SocialBase{
 		//- New space is displayed on Publics space list of other user.
 		magAcc.userSignIn(userType.PUBLISHER);
 		magMember.goToAllSpaces();
-		waitForTextPresent(spaceName);
+		spSeach.searchSpaceByName(spaceName,true);
 		
 		/*Step 2: Edit a space*/
 		magAcc.userSignIn(userType.ADMIN);

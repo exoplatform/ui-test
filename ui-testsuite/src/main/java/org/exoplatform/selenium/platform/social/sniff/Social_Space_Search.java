@@ -57,9 +57,9 @@ public class Social_Space_Search extends SocialBase {
 		//Add new space
 		info("Create data");
 		magMember.goToMySpacePage();
-		magMember.addNewSpace(spaceName1, "");
+		magMember.addNewSpace(spaceName1, "",300000);
 		magMember.goToMySpacePage();
-		magMember.addNewSpace(spaceName2, "");
+		magMember.addNewSpace(spaceName2, "",300000);
 
 		/*Step 1: Search Space*/ 
 		//- Click on My space on Admin bar

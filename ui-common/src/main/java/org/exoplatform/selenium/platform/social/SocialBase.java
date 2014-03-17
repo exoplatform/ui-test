@@ -91,7 +91,6 @@ public class SocialBase extends PlatformBase {
 
 	// Activity Stream tab	
 	public final By ELEMENT_ACTIVITY_STREAM_TAB = By.xpath("//div[@id='UIProfileNavigationPortlet']//a[text()='Activity Stream']");
-
 	/*------------------- End of parameters ---------------------*/	
 
 	/**
@@ -295,6 +294,8 @@ public class SocialBase extends PlatformBase {
 	 * @param spaceName : Space name
 	 */
 	public void doAction(String action, String spaceName){
+		SpaceSearch spSeach = new SpaceSearch(driver);
+		spSeach.searchSpaceByName(spaceName,true);
 		By actionLink = By.xpath(ELEMENT_ACTION_USER_ON_SPACE.replace("${spaceName}", spaceName).replace("${action}", action));
 		waitForAndGetElement(actionLink, DEFAULT_TIMEOUT,1);
 		click(actionLink);

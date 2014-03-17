@@ -322,7 +322,7 @@ public class Social_People extends SocialBase {
 		waitForAndGetElement("//*[contains(text(),'"+email+"')]");
 
 		//User has new avatar
-		element = waitForAndGetElement(By.xpath(ELEMENT_GET_URL_IMAGE.replace("${name}", firstName+" "+lastName)));
+		element = waitForAndGetElement(By.xpath(ELEMENT_GET_URL_IMAGE.replace("${name}", oldFirstnName+" "+oldLastName)));
 		String newsrc = element.getAttribute("src");
 		assert (!oldsrc.contentEquals(newsrc));
 
@@ -359,7 +359,7 @@ public class Social_People extends SocialBase {
 		click(peoConn.ELEMENT_MY_CONNECTIONS_TAB);
 
 		//Verify there is not any user in my network tab
-		waitForElementNotPresent(peoConn.ELEMENT_PEOPLE_SEARCH.replace("${peopleName}", user1));
+		waitForElementNotPresent(peoConn.ELEMENT_PEOPLE_SEARCH.replace("${peopleName}", user1),180000);
 		waitForElementNotPresent(peoConn.ELEMENT_PEOPLE_SEARCH.replace("${peopleName}", user2));
 
 		//An user click on Confirm button
@@ -380,7 +380,7 @@ public class Social_People extends SocialBase {
 		click(peoConn.ELEMENT_MY_CONNECTIONS_TAB);
 
 		//Display user's relation
-		waitForAndGetElement(peoConn.ELEMENT_PEOPLE_SEARCH.replace("${peopleName}", user1));
+		waitForAndGetElement(peoConn.ELEMENT_PEOPLE_SEARCH.replace("${peopleName}", user1),180000);
 		waitForAndGetElement(peoConn.ELEMENT_PEOPLE_SEARCH.replace("${peopleName}", user2));
 
 		/*Clear data*/

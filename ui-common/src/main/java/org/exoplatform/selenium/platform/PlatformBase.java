@@ -248,6 +248,7 @@ public class PlatformBase extends TestBase {
 	public final By ELEMENT_INPUT_LASTNAME = By.id("lastName");
 	public final By ELEMENT_INPUT_DISPLAY_NAME = By.id("displayName");
 	public final By ELEMENT_INPUT_EMAIL = By.id("email");
+	public final By ELEMENT_INPUT_EDIT_EMAIL_TEXTBOX = By.xpath("//*[@id='UIBasicInfoSection']//*[@id='email']");
 	public final By ELEMENT_INPUT_EMAIL_PROFILE_FORM= By.xpath("//*[@id='UIAccountProfiles']//*[@id='email']");
 	public final By ELEMENT_CHANGE_PASSWORD = By.id("changePassword");
 	public final By ELEMENT_INPUT_EMAIL_UPDATE = By.xpath("//*[@class='UIFormInputSet']//*[@id='email']");

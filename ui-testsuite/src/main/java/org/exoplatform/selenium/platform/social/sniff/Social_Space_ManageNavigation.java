@@ -37,8 +37,8 @@ public class Social_Space_ManageNavigation extends SocialBase {
 	@AfterMethod
 	public void afterMethods() {
 		info("Logout portal");
-		driver.manage().deleteAllCookies();
-		driver.quit();
+//		driver.manage().deleteAllCookies();
+//		driver.quit();
 	}
 
 	/**
@@ -84,9 +84,9 @@ public class Social_Space_ManageNavigation extends SocialBase {
 	public void test02_EditANode(){
 		//Declare variable
 		String spaceName = "space67689";
-		String nodeName = "nodeName67689";
+		String nodeName = "node67689";
 		String nodeLabel = "nodeLabel67689";
-		String pageName = "pageName67689";
+		String pageName = "page67689";
 		String newNodeLabel = "newNodeLabel67689";
 		String newPageTitle = "Register";
 

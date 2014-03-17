@@ -23,8 +23,8 @@ import org.openqa.selenium.WebElement;
  */
 
 public class PeopleProfile extends PlatformBase {
-	PeopleSearch peoSearch;
 	Button button;
+	PeopleSearch peoSearch;
 
 	// Go to Account Name link > My Profile	
 	// Edit user in My Profile
@@ -97,7 +97,7 @@ public class PeopleProfile extends PlatformBase {
 		if(lastName!="")
 			type(ELEMENT_INPUT_LASTNAME, lastName, true);
 		if(email!="")
-			type(ELEMENT_INPUT_EMAIL, email, true);
+			type(ELEMENT_INPUT_EDIT_EMAIL_TEXTBOX, email, true);
 		click(ELEMENT_SAVE_UPDATE_INFO);
 		waitForElementNotPresent(ELEMENT_SAVE_UPDATE_INFO);
 		Utils.pause(1000);

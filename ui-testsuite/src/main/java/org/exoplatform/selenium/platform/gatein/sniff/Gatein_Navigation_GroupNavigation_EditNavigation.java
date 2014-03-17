@@ -159,9 +159,9 @@ public class Gatein_Navigation_GroupNavigation_EditNavigation extends GroupNavig
 	public void test02_AddEditDeleteNodeForGroup(){
 		String groupAdminDisplayName = "/platform/administrators";
 		String nodePortalAdministration = "Portal Administration";
-		String nodeName = "node70581";
-		String nodeNameEdit = "node70581";
-		String pageSelectorName = "page70581";
+		String nodeName = "node688772";
+		String nodeNameEdit = "node688772";
+		String pageSelectorName = "page688772";
 
 		Map<String, String> languages = new HashMap<String, String>();
 		languages.put("English", "");
@@ -174,7 +174,7 @@ public class Gatein_Navigation_GroupNavigation_EditNavigation extends GroupNavig
 				nodeName, true, languages, nodeName, 
 				pageSelectorName, pageSelectorName, true, false);
 		button.save();	
-		waitForElementNotPresent(button.ELEMENT_SAVE_BUTTON);
+		waitForElementNotPresent(button.ELEMENT_SAVE_BUTTON,180000);
 		if(this.plfVersion.contains("4.0"))
 			click(ELEMENT_GROUP_NAVIGATION_ICON_LEFT_PANEL.replace("${groupName}", "Portal Admin"));
 		else
@@ -339,9 +339,9 @@ public class Gatein_Navigation_GroupNavigation_EditNavigation extends GroupNavig
 	 */
 	@Test
 	public void test05_EditNodePageProperties(){
-		String nodeName = "nodeTest05";
-		String pageSelectorName = "test05page1Selector";
-		String pageSelectorNameEdit = "test05page1SelectorEdit";
+		String nodeName = "nodeTest688792";
+		String pageSelectorName = "page688792";
+		String pageSelectorNameEdit = "page688792Edit";
 		String groupAdminDisplayName = "/platform/administrators";
 		String nodeSitesManagement = "Sites Management";
 		String nodeLink = ELEMENT_NODE_LINK.replace("${nodeLabel}", nodeSitesManagement);
@@ -355,9 +355,7 @@ public class Gatein_Navigation_GroupNavigation_EditNavigation extends GroupNavig
 		info("Add a node for group Sites Management");
 		addNodeForGroup(groupAdminDisplayName, nodeSitesManagement, false, 
 				nodeName, true, languages, nodeName, 
-				pageSelectorName, pageSelectorName, true, false);
-		button.save();
-		waitForElementNotPresent(button.ELEMENT_SAVE_BUTTON);
+				pageSelectorName, pageSelectorName, true, true);
 
 		info("Edit node's page properties");
 		editNavigation(groupAdminDisplayName);

@@ -72,7 +72,7 @@ public class SpaceManagement extends SocialBase {
 	public final By		ELEMENT_ACCESS_EDIT_HIDDEN 	= By.xpath("//span[text()='Hidden']/../input[@name='UIVisibility']");
 	public final By		ELEMENT_ACCESS_EDIT_REGISTRATION_OPEN 	= By.xpath("//span[text()='Open']/../input[@name='UIRegistration']");
 	public final By		ELEMENT_ACCESS_EDIT_REGISTRATION_VALIDATION 	= By.xpath("//span[text()='Validation']/../input[@name='UIRegistration']");
-	public final By		ELEMENT_ACCESS_EDIT_REGISTRATION_CLOSE 	= By.xpath("//span[text()='Close']/../input[@name='UIRegistration']");
+	public final By		ELEMENT_ACCESS_EDIT_REGISTRATION_CLOSE 	= By.xpath("//span[contains(text(),'Close')]/../input[@name='UIRegistration']");
 	public final By		ELEMENT_SPACE_ACCESS_INFO = By.xpath("//div[@class='spaceAccessInfo']");
 	public final By		ELEMENT_SPACE_ACCESS_ALERT_SUCCESS = By.xpath("//div[@class='alert alert-success']");
 	public final By 	ELEMENT_RESTRICT_SPACE_PAGE = By.xpath("//div[@class='spaceAccessBlock lockIcon']/*[text()='Restricted Area']");
@@ -257,7 +257,6 @@ public class SpaceManagement extends SocialBase {
 	public void deleteSpace(String name, int... params){
 		info("-- Deleting Space..." + name);
 		int iTimeout = params.length > 0 ? params[0] : DEFAULT_TIMEOUT;
-		spSeach.searchSpaceByName(name,true);
 		doAction("Delete", name);    
 		magAlert = new ManageAlert(driver);
 		magAlert.acceptAlert();

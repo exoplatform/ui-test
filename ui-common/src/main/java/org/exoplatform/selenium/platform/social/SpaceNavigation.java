@@ -209,9 +209,14 @@ public class SpaceNavigation extends SocialBase{
 			type(ELEMENT_INPUT_PAGE_TITLE, pageTitle, true);
 			select(ELEMENT_SELECT_SEARCH_OPTION, option);
 			click(pageMag.ELEMENT_PAGE_MANAGEMENT_SEARCH_BUTTON);
-			click(ELEMENT_SELECT_SEARCHED_PAGE);
+			Utils.pause(1000);
+			if(isElementPresent(ELEMENT_SELECT_SEARCHED_PAGE_BY_PAGETITLE.replace("${pageTitle}", pageTitle)))
+				click(ELEMENT_SELECT_SEARCHED_PAGE_BY_PAGETITLE.replace("${pageTitle}", pageTitle));
+			else
+				click(ELEMENT_SELECT_SEARCHED_PAGE);
 		}	
 		click(SAVE_PAGE_BUTTON);
+		Utils.pause(1000);
 		if(!nodeLabel.isEmpty()){
 			waitForAndGetElement(ELEMENT_NODE_LINK.replace("${nodeLabel}", nodeLabel));
 		}

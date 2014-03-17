@@ -39,7 +39,7 @@ public class DashBoard extends PortalManagement {
 
 	public final By ELEMENT_RSS_READER_EDIT_BUTTON = By.xpath("//span[@class='gadgetTitle' and text()='RSS Reader']/parent::h5[@class='title gadgetControl clearfix']/span[@class='pull-right']//*[@class='uiIconEdit uiIconLightGray']");
 	public final By ELEMENT_RSS_READER_NUM_INPUT = By.id("m_0_0");
-	public final By ELEMENT_RESS_READER_SAVE_BUTTON = By.xpath("//input[@value='#{word.save}']");
+	public final By ELEMENT_RESS_READER_SAVE_BUTTON = By.xpath("//input[@value='Save']");
 
 	/*------------- Data for Dashboard tab --------------------------------*/
 	public final String ELEMENT_DASHBOARD_NEW_ICON = "//*[@id='UITabPaneDashboard']//*[@class='uiIconSimplePlusMini uiIconLightGray']";

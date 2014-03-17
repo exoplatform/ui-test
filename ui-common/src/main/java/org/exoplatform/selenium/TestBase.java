@@ -62,6 +62,7 @@ public class TestBase {
 	//public final By ELEMENT_MENU_PAGE_LINK = By.linkText("Page");
 	//public final String AJAX_LOADING_MASK = "//div[@id='AjaxLoadingMask']";
 	public final String DEFAULT_BASEURL = "http://localhost:8080/portal";
+
 	//"http://community-4.1.x-snapshot.acceptance4.exoplatform.org/portal"; 
 	//"http://localhost:8080/portal";
 	//"http://192.168.3.50:8080/portal";

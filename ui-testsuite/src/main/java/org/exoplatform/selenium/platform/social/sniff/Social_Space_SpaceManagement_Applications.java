@@ -51,8 +51,8 @@ public class Social_Space_SpaceManagement_Applications extends SocialBase{
 	public void test01_AddApplicationOnSpace(){
 		//Declare variable
 		String spaceName = "space67663";
-		String categoryName = "Adoption";
-		String applicationTitle = "Forum Statistics";
+		String categoryName = "Content";
+		String applicationTitle = "Authoring Dashboard";
 
 		//- Create new space
 		magMember.goToMySpacePage();
@@ -80,8 +80,8 @@ public class Social_Space_SpaceManagement_Applications extends SocialBase{
 	public void test02_RemoveApplicationOnSpace(){
 		//Declare variable
 		String spaceName = "space67901";
-		String categoryName = "Adoption";
-		String applicationTitle = "Forum Statistics";
+		String categoryName = "Content";
+		String applicationTitle = "Authoring Dashboard";
 
 		//- Create new space
 		magMember.goToMySpacePage();
