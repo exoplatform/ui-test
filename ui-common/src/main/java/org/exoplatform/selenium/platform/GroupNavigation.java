@@ -35,8 +35,10 @@ public class GroupNavigation extends PlatformBase {
 	public final String ELEMENT_GROUP_SELECT_ADD_NAVIGATION = "//*[contains(text(), '${groupName}')]/..//*[text()='Add Navigation']";
 
 	//Home Page/Left Panel/Group Navigation
-	public final String ELEMENT_NODE_NAVIGATION_LEFT_PANEL = "//*[@class='groupNavigation']//*[contains(text(), '${groupName}')]";
+	public final String ELEMENT_NODE_NAVIGATION_LEFT_PANEL = "//*[@class='groupNavigation']/..//*[contains(text(), '${groupName}')]";
 	public final String ELEMENT_GROUP_NAVIGATION_ICON_LEFT_PANEL = ELEMENT_NODE_NAVIGATION_LEFT_PANEL.replace("${groupName}", "${groupName}") + "/../*[contains(@class, 'arrowIcon')]";
+	public final String ELEMENT_GROUP_SUB_NAVIGATION_UNFOLD = ELEMENT_NODE_NAVIGATION_LEFT_PANEL.replace("${groupName}", "${groupName}") + "/../*[contains(@class, 'arrowIcon')]/..//ul[@style='display: none']";
+	public final String ELEMENT_GROUP_SUB_NAVIGATION_FOLD = ELEMENT_NODE_NAVIGATION_LEFT_PANEL.replace("${groupName}", "${groupName}") + "/../*[contains(@class, 'arrowIcon')]/..//ul[@style='display: block;']";
 
 	/*======================== Common Function ===========================*/
 
@@ -46,17 +48,33 @@ public class GroupNavigation extends PlatformBase {
 		button = new Button(driver);
 		//String node = ELEMENT_NODE_LINK.replace("${nodeLabel}", nodeLabel);
 		String currentNode="";
-		if(currentNodeLabel!="")
-			currentNode = ELEMENT_NODE_LINK.replace("${nodeLabel}", currentNodeLabel);
-		else
+		String []nodes = null;
+		nodes = currentNodeLabel.split("/");
+		if(currentNodeLabel=="")
 			currentNode = "//*[@class='uiIconUpLevel uiIconLightGray']";
 		editNavigation(currentNavigation);
 		info("-- Add a new node for portal/group navigation --");		
 		if (useAddNodeLink){
-			click(currentNode);
+			info("use add node link");
+			if(currentNodeLabel!=""){
+				for(int i = 0; i<nodes.length; i++){
+					currentNode = ELEMENT_NODE_LINK.replace("${nodeLabel}", nodes[i]);
+					click(currentNode);
+				}
+			}
+			else
+				click(currentNode);
 			click(ELEMENT_ADD_NODE_LINK);
 		}else{
-			click(currentNode);
+			info("use right click");
+			if(currentNodeLabel!=""){
+				for(int i = 0; i<nodes.length; i++){
+					currentNode = ELEMENT_NODE_LINK.replace("${nodeLabel}", nodes[i]);
+					click(currentNode);
+				}
+			}
+			else
+				click(currentNode);
 			Utils.pause(500);
 			rightClickOnElement(currentNode);
 			if (currentNode.equals(ELEMENT_NAVIGATION_HOME_NODE)) {
@@ -99,7 +117,7 @@ public class GroupNavigation extends PlatformBase {
 		}
 
 		info("-- Save to add node for portal/group --");
-		Utils.pause(1000);
+		Utils.pause(2000);
 		button.save();
 		if (verifyNode) {
 			waitForAndGetElement(ELEMENT_NAVIGATION_NODE.replace("${nodeName}", nodeName));

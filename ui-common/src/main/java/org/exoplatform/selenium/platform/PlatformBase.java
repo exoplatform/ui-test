@@ -55,14 +55,15 @@ public class PlatformBase extends TestBase {
 	public final By ELEMENT_HOME_PAGE = By.className("uiIconHome");
 	public final By ELEMENT_CONNECTION_PAGE = By.className("uiIconUser");
 	public final By ELEMENT_WIKI_PAGE = By.className("uiIconWiki");
-	public final By ELEMENT_FORUM_PAGE = By.className("uiIconUIForms");
+	public final By ELEMENT_FORUM_PAGE = By.xpath("//ul[@class='uiCompanyNavigations']//*[@class='uiIconUIForms']");
 	public final By ELEMENT_CALENDAR_PAGE = By.className("uiIconPLFCalendar");
 	public final String ELEMENT_LEFT_NAVIGATION_ITEM_INDEX="//ul[@class='uiCompanyNavigations']//li[${index}]/a[text()='${menuItem}']";
 	public final By ELEMENT_SPACE_NAVIGATION = By.className("spaceNavigation");
 	public final String ELEMENT_SPACE_NAVIGATION_SPACE_ITEM = "//*[@class='spaceNavigation']//*[contains(text(),'${spaceName}')]";
 	public final String ELEMENT_SPACE_NAVIGATION_SPACE_ITEM_INDEX = "//*[@class='spaceNavigation']/li[${index}]/a[contains(text(),'${spaceName}')]";
 	public final By ELEMENT_LEFT_NAVIGATION_SEARCH_SPACE=By.xpath("//*[@id='UISpaceNavigationPortlet']//*[@value='Search Spaces']");
-
+	public final By ELEMENT_LEFT_NAVIGATION_COMPANY = By.className("uiCompanyNavigationPortlet");
+	public By ELEMENT_CALENDAR_PANEL = By.xpath("//div[@class='uiBox uiCalendars']");
 	/*
 	 * Navigation Bar
 	 */
@@ -77,6 +78,8 @@ public class PlatformBase extends TestBase {
 	public final By ELEMENT_INTRANET_SITE_LINK = By.linkText("intranet");
 
 	// My spaces
+	public final By ELEMENT_MY_SPACES_LINK  = By.xpath("//a[text()='My Spaces']");
+
 	// Dashboard
 
 	/* Edit */
@@ -558,7 +561,7 @@ public class PlatformBase extends TestBase {
 	public final String ELEMENT_DRAG_CURRENT_CONTAINER = "//*[text()='${nameContainer}']/../*[@title='Hold this area to drag this container']";
 	//public final String ELEMENT_LIST_CONTAINER = "//*[@class='UIRowContainer']/div[${number}]//*[contains(text(), '${nameContainer}')]";
 	public final String ELEMENT_LIST_CONTAINER = "//*[@class='UIRowContainer']/div[${number}]//div[contains(text(), '${nameContainer}')]";
-	
+
 	//Porlet setting
 	public final By ELEMENT_PORLET_SETTING_TAB = By.xpath("//*[text()='Portlet Setting']");
 	public final By ELEMENT_EDIT_MODE_TAB = By.xpath("//*[text()='Edit Mode']");
@@ -693,7 +696,7 @@ public class PlatformBase extends TestBase {
 	public String ELEMENT_CALENDAR_GADGET_TASK_INDEX = "//ul[@class='tasksList']//li['${index}']//a[contains(text(),'${task}')]";
 	public By ELEMENT_CALENDAR_GADGET_EMPTY = By.xpath("//*[contains(text(),'Nothing Planned ')]");
 	public String ELEMENT_CALENDAR_GADGET_EVENT_ITEM = "//div[@class='pull-left eventSummary']//a[contains(text(), '${event}')]";
-	
+
 	//Create functions
 	public final By ELEMENT_ADD_ICON = By.xpath("//*[@class='uiIconPLF24x24Add']");
 	public final By ELEMENT_ADD_EVENT_TASK_ICON = By.xpath("//*[@class='ToolBarActivityIcon']/*[@class='uiIconPLFEventTask']");
