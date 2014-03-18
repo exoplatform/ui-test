@@ -30,7 +30,7 @@ public class SocialBase extends PlatformBase {
 	public final String ELEMENT_INVITATION_ACCEPT_LINK_IN_ALL_SPACES = "//*[@id='UIManageAllSpaces']//*[text()='${spaceName}']/../../ul//*[text()='Accept']";
 	public final String ELEMENT_INVITATION_IGNORE_LINK_IN_ALL_SPACES = "//*[@id='UIManageAllSpaces']//*[text()='${spaceName}']/../../ul//*[text()='Ignore']";
 	public final By     ELEMENT_ADDNEWSPACE_BUTTON      = By.xpath("//button[text()='Add New Space']");
-	public final String ELEMENT_SPACE_AVATAR = "//a[text()='${space}']/../../..//img[@src='${avatar}']";
+	public final String ELEMENT_SPACE_AVATAR = "//a[text()='${space}']/../../..//img[contains(@alt,'${avatar}')]";
 
 	// Go to My Space > My Spaces Tab
 	public final String ELEMENT_INVITATION_LEAVE_LINK = "//*[@id='UIManageMySpaces']//*[text()='${spaceName}']/../../ul//*[text()='Leave']";

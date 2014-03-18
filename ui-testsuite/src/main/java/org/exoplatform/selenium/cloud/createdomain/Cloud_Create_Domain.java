@@ -75,7 +75,7 @@ public class Cloud_Create_Domain extends PlatformBase{
 		//Switch back to original browser (first window)
 		driver.switchTo().window(winHandleBefore);
 		//continue with original browser (first window)
-		String newUrl = "http://"+email.substring(email.indexOf('@')+1, email.indexOf('.'))+"."+baseUrl.substring(baseUrl.indexOf("//")+2)+"/portal";
+		String newUrl = "http://"+email.substring(email.indexOf('@')+1, email.indexOf('.'))+"."+baseUrl.substring(baseUrl.indexOf("//")+2)+"portal";
 		info(newUrl);
 		baseUrl=newUrl;
 		driver.get(newUrl);

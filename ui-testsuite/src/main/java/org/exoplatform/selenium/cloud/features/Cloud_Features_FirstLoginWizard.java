@@ -2,6 +2,7 @@ package org.exoplatform.selenium.cloud.features;
 
 import static org.exoplatform.selenium.TestLogger.info;
 
+import org.exoplatform.selenium.Utils;
 import org.exoplatform.selenium.cloud.CloudBase;
 import org.exoplatform.selenium.platform.ManageAccount;
 import org.exoplatform.selenium.platform.NavigationToolbar;
@@ -69,9 +70,13 @@ public class Cloud_Features_FirstLoginWizard extends CloudBase{
 		 *	- The user is connected to the Intranet Homepage
 		 */
 		initCloudUrl(0);
-		driver.get(cloudAcceptanceUrl);
+		info(baseUrl);
+		String url = "http://"+baseUrl.substring(baseUrl.indexOf(".")+1, baseUrl.lastIndexOf("/"));
+		info(url);
+		driver.get(url);
 		enterEmail2Signup("fqaexovn"+"@"+baseUrl.substring(baseUrl.indexOf("//")+2,baseUrl.indexOf("."))+".com");
-		waitForAndGetElement(ELEMENT_REFRESH);
+		Utils.pause(5000);
+		assert (isElementPresent(ELEMENT_HOME_PAGE) || isElementPresent(ELEMENT_INPUT_USERNAME));
 
 	}
 
@@ -363,7 +368,9 @@ public class Cloud_Features_FirstLoginWizard extends CloudBase{
 		 *Expected Outcome: 
 		 *	- The user is connected to the Intranet Homepage
 		 **/ 
+		Utils.pause(5000);
 		click(ELEMENT_SKIP_STEP1);
+		Utils.pause(5000);
 		waitForAndGetElement(ELEMENT_HOME_PAGE);
 
 	}
@@ -409,6 +416,7 @@ public class Cloud_Features_FirstLoginWizard extends CloudBase{
 		 *	- The Second Step 2 is displayed "Join Spaces"
 		 *	- The button "Next" is displayed 
 		 */
+		Utils.pause(5000);
 		click(ELEMENT_BUTTON_NEXT_FIRST_PAGE);
 
 		/*
@@ -417,6 +425,7 @@ public class Cloud_Features_FirstLoginWizard extends CloudBase{
 		 *Expected Outcome: 
 		 *	- The user is connected to the Intranet Homepage
 		 **/ 
+		Utils.pause(5000);
 		click(ELEMENT_SKIP_STEP2);
 		waitForAndGetElement(ELEMENT_HOME_PAGE);
 
@@ -463,6 +472,7 @@ public class Cloud_Features_FirstLoginWizard extends CloudBase{
 		 *	- The Second Step 2 is displayed "Join Spaces"
 		 *	- The button "Next" is displayed 
 		 */
+		Utils.pause(5000);
 		click(ELEMENT_BUTTON_NEXT_FIRST_PAGE);
 
 		/*
@@ -473,6 +483,7 @@ public class Cloud_Features_FirstLoginWizard extends CloudBase{
 		 *	- The field to invite user is displayed
 		 *	- The button "Finish" is displayed
 		 */
+		Utils.pause(5000);
 		click(ELEMENT_BUTTON_NEXT_SECOND_PAGE);
 
 		/*
@@ -481,6 +492,7 @@ public class Cloud_Features_FirstLoginWizard extends CloudBase{
 		 *Expected Outcome: 
 		 *	- The user is connected to the Intranet Homepage
 		 **/ 
+		Utils.pause(5000);
 		click(ELEMENT_SKIP_STEP3);
 		waitForAndGetElement(ELEMENT_HOME_PAGE);
 

@@ -100,7 +100,7 @@ public class Cloud_Features_InvitationGadget extends CloudBase{
 		 *Expected Outcome: 
 			- In the right panel, a gagdet "Invite Coworkers" is displayed bekow rge Getting Started Gadget
 			- The input field is displayed with a label "name@domain.com"*/ 
-		assert getValue(ELEMENT_INPUT_EMAIL_ADDRESS).contains("name@domain.com");
+		assert (waitForAndGetElement(ELEMENT_INPUT_EMAIL_ADDRESS).getAttribute("class")=="light_message");
 
 		info("Test 4: Label in the Field Email should be removed");
 		/*Step number: 2
@@ -112,7 +112,7 @@ public class Cloud_Features_InvitationGadget extends CloudBase{
 		 *Expected Outcome: 
 			- The label "name@doamin.com" is removed*/ 
 		click(ELEMENT_INPUT_EMAIL_ADDRESS);
-		assert !(getValue(ELEMENT_INPUT_EMAIL_ADDRESS).contains("name@domain.com"));
+		assert (waitForAndGetElement(ELEMENT_INPUT_EMAIL_ADDRESS).getAttribute("class")=="" || waitForAndGetElement(ELEMENT_INPUT_EMAIL_ADDRESS).getAttribute("class")==null);
 
 		info("Test 5: Label in the Field Email should remain");
 		/*Step number: 3
@@ -126,7 +126,7 @@ public class Cloud_Features_InvitationGadget extends CloudBase{
 		switchToParentWindow();
 		click(hpGadget.ELEMENT_INVITATION_GADGET_INDEX_DEFAULT_CLOUD);
 		driver.switchTo().frame(waitForAndGetElement(hpGadget.ELEMENT_FRAME_INVITATION_GADGET_CLOUD));
-		assert getValue(ELEMENT_INPUT_EMAIL_ADDRESS).contains("name@domain.com");
+		assert (waitForAndGetElement(ELEMENT_INPUT_EMAIL_ADDRESS).getAttribute("class")=="light_message");
 
 		info("Test 7: A message should be displayed for an invalid email address");
 		/*Step number: 2

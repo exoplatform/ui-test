@@ -202,7 +202,7 @@ public class DashBoard extends PlatformBase {
 			waitForAndGetElement(By.xpath(ELEMENT_ACTION_ON_GADGET.replace("${gadgetTitleDisplay}", gadgetTitleDisplay).replace("${action}", "Restore Down")));
 		}
 		else if (action.contains("Edit Gadget")){
-			waitForAndGetElement(button.ELEMENT_SAVE_BUTTON);
+			waitForAndGetElement(ELEMENT_RESS_READER_SAVE_BUTTON);
 		}
 		else{//(action.contains("Restore Down"))
 			waitForAndGetElement(By.xpath(ELEMENT_ACTION_ON_GADGET.replace("${gadgetTitleDisplay}", gadgetTitleDisplay).replace("${action}", "Maximize")));
@@ -216,10 +216,9 @@ public class DashBoard extends PlatformBase {
 	 * 
 	 * @param numRSSdisplay
 	 */
-	public void editRSSReaderGadgetonDashboard(String numRSSdisplay){
-		info("----Open edit form of RSS reader gadget----");
-		waitForAndGetElement(ELEMENT_GADGET_LOCATOR.replace("${gadgetName}", "RSS Reader"));
-		click(ELEMENT_RSS_READER_EDIT_BUTTON);
+	public void editRSSReaderGadgetonDashboard(String gadgetTitleDisplay,String numRSSdisplay){
+		info("----Open edit form of gadget----");
+		actionOnGadgetOnDashboard(gadgetTitleDisplay,"Edit Gadget");
 		Utils.pause(3000);
 		info("----Edit number of RSS displayed----");
 		type(ELEMENT_RSS_READER_NUM_INPUT,numRSSdisplay, true);

@@ -48,6 +48,8 @@ public class Cloud_Create_DataTest extends PlatformBase{
 	@Test
 	public void Create_Data_Test(){
 		String file = "metro.pdf";
+		String file1 = "offices.jpg";
+		String file2 = "conditions.doc";
 		info("Create Cateogry: Intranet/Defense/Healing");
 		String categoryTreeName = "intranet";
 		String categoryName = "Defense";
@@ -77,6 +79,7 @@ public class Cloud_Create_DataTest extends PlatformBase{
 		ecms.goToNode("intranet");
 		ecms.goToNode("documents");
 		ecms.uploadFile("TestData/" + file, true);
-		
+		ecms.uploadFile("TestData/" + file1, true);
+		ecms.uploadFile("TestData/" + file2, true);
 	}
 }

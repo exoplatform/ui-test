@@ -66,7 +66,7 @@ public class Social_Space_SpaceList extends SocialBase {
 
 		/*Clear data*/
 		magAcc.userSignIn(userType.ADMIN);
-		magMember.goToAllSpaces();
+		magMember.goToMySpacePage();
 		magMember.deleteSpace(spaceName,300000);
 	}
 
@@ -103,7 +103,7 @@ public class Social_Space_SpaceList extends SocialBase {
 
 		/*Clear data*/
 		magAcc.userSignIn(userType.ADMIN);
-		magMember.goToAllSpaces();
+		magMember.goToMySpacePage();
 		magMember.deleteSpace(spaceName1,300000);
 		magMember.deleteSpace(spaceName2,300000);
 	}

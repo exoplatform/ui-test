@@ -86,10 +86,11 @@ public class Social_Dashboard extends DashBoard {
 	 * Step 1: Share link in RSS fetcher
 	 * https://jira.exoplatform.org/browse/SOC-2978 - Social RSS Reader is blank while adding to dashboard
 	 */	
-	@Test(groups={"error"})
+	@Test()
 	public void test02_ShareLinkInRSSFetcher(){
 		//Declare variable
 		String gadgetName = "Social Rss Reader";
+		//String newUrl = "http://feeds.feedburner.com/eXo-Platform";
 
 		/*Step 1: Share link in RSS fetcher*/ 
 		//Import all applications (gadget)
@@ -104,6 +105,9 @@ public class Social_Dashboard extends DashBoard {
 		//- Drag/drop Social Rss Reader
 		dragDropGadget(gadgetName);
 		click(ELEMENT_CLOSE_ADD_GADGET_WINDOW);
+
+		//Edit url link of gadget
+		//editRSSReaderGadgetonDashboard(gadgetName,newUrl);
 
 		//- Select a summary of News
 		//- Click on Share Link
@@ -137,10 +141,11 @@ public class Social_Dashboard extends DashBoard {
 	 * To import this gadget, The user need to import all gadget by: Administration -> Application -> Import Applications
 	 * https://jira.exoplatform.org/browse/SOC-2978 - Social RSS Reader is blank while adding to dashboard
 	 */	
-	@Test(groups={"error"})
+	@Test()
 	public void test03_ViewALinkInRSSFetcher(){
 		//Declare variable
 		String gadgetName = "Social Rss Reader";
+		//String newUrl = "http://feeds.feedburner.com/eXo-Platform";
 
 		/*Step 1: Share link in RSS fetcher*/ 
 		//Import all applications (gadget)
@@ -158,6 +163,9 @@ public class Social_Dashboard extends DashBoard {
 		//- Drag/drop Social Rss Reader
 		dragDropGadget(gadgetName);
 		click(ELEMENT_CLOSE_ADD_GADGET_WINDOW);
+
+		//Edit url link of gadget
+		//editRSSReaderGadgetonDashboard(gadgetName,newUrl);
 
 		//- Click on icon of maximize view
 		//- Show content of gadget at maximize

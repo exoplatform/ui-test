@@ -244,7 +244,7 @@ public class Social_Space_MemberManagement extends Activity{
 		magMember.managerAcceptRequestFromUser(false,userType.ADMIN, userType.PUBLISHER,spaceName2,false);
 
 		/*Clear data*/
-		magMember.goToAllSpaces();
+		magMember.goToMySpacePage();
 		magMember.deleteSpace(spaceName1,300000);
 		magMember.deleteSpace(spaceName2,300000);
 	}

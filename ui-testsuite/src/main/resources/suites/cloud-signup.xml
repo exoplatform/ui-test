@@ -9,6 +9,7 @@
 		</groups>
 		<classes>
 			<class name="org.exoplatform.selenium.cloud.signup.Cloud_Signup"/>
+			<class name="oorg.exoplatform.selenium.cloud.createdomain.Cloud_Create_DataTest"/>
 		</classes>
 	</test>
 	<listeners>

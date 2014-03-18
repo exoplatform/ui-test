@@ -63,13 +63,18 @@ public class PeopleConnection extends SocialBase {
 			click(ELEMENT_EVERYONE_TAB);
 		}
 		waitForAndGetElement(ELEMENT_EVERYONE_TAB_ACTIVE,80000);
+		peoSearch.searchPeople(false,peopleName);
 		waitForAndGetElement(By.linkText(peopleName));
 		info("-----Click connect to people-----");
 		if (waitForAndGetElement(ELEMENT_CANCEL_REQUEST_BUTTON.replace("${peopleName}", peopleName), 10000, 0) != null){
+			info("cancel connection request");
 			click(ELEMENT_CANCEL_REQUEST_BUTTON.replace("${peopleName}", peopleName));
+			Utils.pause(1000);
 		}
-		if (waitForAndGetElement(ELEMENT_REMOVE_CONNECTION_BUTTON.replace("${peopleName}", peopleName), 5000, 0) != null){
+		if (waitForAndGetElement(ELEMENT_REMOVE_CONNECTION_BUTTON.replace("${peopleName}", peopleName), 10000, 0) != null){
+			info("remove connection");
 			click(ELEMENT_REMOVE_CONNECTION_BUTTON.replace("${peopleName}", peopleName));
+			Utils.pause(1000);
 		}
 		waitForAndGetElement(ELEMENT_CONNECTION_BUTTON.replace("${peopleName}", peopleName));
 		click(ELEMENT_CONNECTION_BUTTON.replace("${peopleName}", peopleName));

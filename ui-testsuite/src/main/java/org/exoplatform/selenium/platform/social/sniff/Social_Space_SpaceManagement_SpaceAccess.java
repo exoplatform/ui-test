@@ -78,7 +78,7 @@ public class Social_Space_SpaceManagement_SpaceAccess  extends SocialBase{
 		spaceMag.verifySpaceMenu("Members");
 
 		/*Clear data*/
-		magMember.goToAllSpaces();
+		magMember.goToMySpacePage();
 		magMember.deleteSpace(spaceName,300000);
 	}
 
@@ -125,7 +125,7 @@ public class Social_Space_SpaceManagement_SpaceAccess  extends SocialBase{
 		/*Clear data*/
 		info("-- Clear data --");
 		magAcc.userSignIn(userType.ADMIN);
-		magMember.goToAllSpaces();
+		magMember.goToMySpacePage();
 		magMember.deleteSpace(spaceName,300000);
 	}
 	
@@ -165,7 +165,7 @@ public class Social_Space_SpaceManagement_SpaceAccess  extends SocialBase{
 		/*Clear data*/
 		info("-- Clear data --");
 		magAcc.userSignIn(userType.ADMIN);
-		magMember.goToAllSpaces();
+		magMember.goToMySpacePage();
 		magMember.deleteSpace(spaceName,300000);
 	}
 	
@@ -212,7 +212,7 @@ public class Social_Space_SpaceManagement_SpaceAccess  extends SocialBase{
 		/*Clear data*/
 		info("-- Clear data --");
 		magAcc.userSignIn(userType.ADMIN);
-		magMember.goToAllSpaces();
+		magMember.goToMySpacePage();
 		magMember.deleteSpace(spaceName,300000);
 	}
 	
@@ -260,7 +260,7 @@ public class Social_Space_SpaceManagement_SpaceAccess  extends SocialBase{
 		/*Clear data*/
 		info("-- Clear data --");
 		magAcc.userSignIn(userType.ADMIN);
-		magMember.goToAllSpaces();
+		magMember.goToMySpacePage();
 		magMember.deleteSpace(spaceName,300000);
 	}
 }

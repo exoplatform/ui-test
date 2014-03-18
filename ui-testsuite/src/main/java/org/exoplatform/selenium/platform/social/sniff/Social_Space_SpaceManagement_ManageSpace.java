@@ -64,7 +64,7 @@ public class Social_Space_SpaceManagement_ManageSpace extends SocialBase{
 		
 		/*Clear data*/
 		magAcc.userSignIn(userType.ADMIN);
-		magMember.goToAllSpaces();
+		magMember.goToMySpacePage();
 		magMember.deleteSpace(spaceName,300000);
 	}
 	
@@ -108,11 +108,14 @@ public class Social_Space_SpaceManagement_ManageSpace extends SocialBase{
 		//- Go to My Space page,  select the space 
 		//- Click on Delete Space icon
 		//- Click on OK button to confirm
-		magMember.goToAllSpaces();
+		magMember.goToMySpacePage();
 		magMember.deleteSpace(newSpaceName,300000);
 		//Space is removed. It doesn't display on My space list of user and all spaces list of other user.
 		magAcc.userSignIn(userType.PUBLISHER);
 		magMember.goToAllSpaces();
+		waitForTextNotPresent(newSpaceName);
+		waitForTextNotPresent(spaceName);
+		magMember.goToMySpacePage();
 		waitForTextNotPresent(newSpaceName);
 		waitForTextNotPresent(spaceName);
 	}
