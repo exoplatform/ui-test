@@ -71,7 +71,9 @@ public class PageEditor extends PlatformBase {
 	public final By ELEMENT_INPUT_NAME_SEARCH_WORD_PHRASE_EDIT_MODE = By.xpath("//input[@id='content' and @type='text']");
 	public final By ELEMENT_CONTENT_SEARCH_FORM_TAB = By.xpath("//div[@class='MiddleTab' and text() = 'Content Search Form']");
 	public final By ELEMENT_MULTI_CONTENT_SELECT_POPUP = By.xpath("//span[@class='PopupTitle popupTitle' and text()='Multiple Content Selector Pane']");
-
+	public final By ELEMENT_CONTENT_ADD_PATH = By.xpath("//i[@class='uiIconAddPath uiIconLightGray']");
+	public final String ELEMENT_CONTENT_BROWSER_NODE = "//span[@class='nodeName' and contains(text(), '${node}')]";
+		
 	//Add Path > Right Workspace 
 	public final String ELEMENT_RIGHT_WORKSPACE_NODE = "//*[@class='rightWorkspace']//*[text()='${node}']";
 

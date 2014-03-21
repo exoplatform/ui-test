@@ -68,6 +68,7 @@ public class PlatformBase extends TestBase {
 	 * Navigation Bar
 	 */
 	public final By ELEMENT_NAVIGATION_TOOLBAR_HOMEPAGE = By.xpath("//*[@class='VIEW-CONTAINER ToolbarContainer VIEW-BLOCK']");
+	public final By ELEMENT_LOGO_CONTAINER_TOOLBAR = By.xpath("//div[contains(@class,'UIRowContainer')]/div[@id='PlatformAdminToolbarContainer']//a[@class='HomeLink']/img[@alt='Home']");
 
 	//My site
 	public final By ELEMENT_MYSITE = By.linkText("My Sites");
@@ -97,7 +98,7 @@ public class PlatformBase extends TestBase {
 	//	
 	public final By ELEMENT_MENU_PAGE_LINK = By.linkText("Page");
 	public final By ELEMENT_MENU_EDIT_LAYOUT = By.linkText("Edit Layout");
-	public final By ELEMENT_MENU_SEO_LINK = By.linkText("SEO");
+	public final By ELEMENT_MENU_SEO_LINK = By.xpath("//span[contains(text(), 'SEO')]");
 	public final By ELEMENT_MENU_ADD_PAGE_LINK = By.linkText("Add Page");
 
 	//Add page
@@ -107,6 +108,9 @@ public class PlatformBase extends TestBase {
 	//site
 	public final By ELEMENT_MENU_EDIT_SITES = By.xpath("//*[@id='UIAdminToolbarContainer']//a[contains(text(),'Site')]");
 	public final By ELEMENT_MENU_EDIT_SITES_NAV = By.xpath("//*[@id='UIAdminToolbarContainer']//a[contains(text(),'Navigation')]");
+	public final By ELEMENT_MENU_EDIT_SITE_LAYOUT = By.linkText("Layout");
+	public final By ELEMENT_MENU_EDIT_ADDSITE = By.linkText("Add Site");
+	public final By ELEMENT_MENU_EDIT_CONTENT_TEXT = By.linkText("Content");
 
 	/* End Edit*/
 
@@ -122,6 +126,8 @@ public class PlatformBase extends TestBase {
 	public final By ELEMENT_MENU_CONTENT_LINK = By.xpath("//li[@class='dropdown-submenu']/a[text()='Content']");
 	public final By ELEMENT_MENU_SITE_EXPLORER = By.linkText("Sites Explorer");
 	public final By ELEMENT_SITE_EXPLORER_HOME = By.className("uiIconEcmsHome");
+	public final By ELEMENT_NEW_FOLDER_LINK = By.xpath("//*[@class='actionIcon']//*[@class='uiIconEcmsAddFolder']");
+
 	//By.linkText("Sites Explorer");
 	public final By ELEMENT_LINK_CONTENT_ADMIN = By.xpath("//*[text()='Content Administration']");
 	//By.linkText("Content administration");
@@ -141,6 +147,18 @@ public class PlatformBase extends TestBase {
 	public final String ELEMENT_LINK_BRANDING = "//a[text()='Branding']";
 
 	//Administration
+	public final By ELEMENT_TOP_NAVIGATION_MANAGEMENT = By.xpath("//*[@id='UISetupPlatformToolBarPortlet']//a[@href='/portal/g/:platform:administrators/servicesManagement' and text()='Management']");
+	public final By ELEMENT_TOP_NAVIGATION_MONITORING = By.xpath("//*[@id='UISetupPlatformToolBarPortlet']//a[@href='/portal/g/:platform:administrators/monitoring' and text()='Monitoring']");
+	public final By ELEMENT_MENU_CONTENT = By.xpath("//*[@id='UISetupPlatformToolBarPortlet']//a[@href='/portal/g/:platform:web-contributors/siteExplorer' and text()='Content']");
+	public final By ELEMENT_MENU_CONTENT_SITE_EXPLORER = By.xpath("//*[@id='UISetupPlatformToolBarPortlet']//a[@href='/portal/g/:platform:web-contributors/siteExplorer' and text()='Sites Explorer']");
+	public final By ELEMENT_MENU_CONTENT_ADMIN = By.xpath("//*[@id='UISetupPlatformToolBarPortlet']//a[@href='/portal/g/:platform:web-contributors/wcmAdmin' and text()='Content Administration']");
+	public final By ELEMENT_MENU_CONTENT_SEARCH = By.xpath("//*[@id='UISetupPlatformToolBarPortlet']//a[@href='/portal/g/:platform:administrators/search' and text()='Search']");
+	public final By ELEMENT_MENU_ADMIN_ICON = By.className("uiIconPLF24x24Setup");
+	public final By ELEMENT_MENU_EDIT_ICON = By.className("uiIconPLF24x24Edit");
+	public final By ELEMENT_MENU_ADD_ICON = By.className("uiIconPLF24x24Add");
+	public final By ELEMENT_MENU_SEARCH_ICON = By.className("uiIconPLF24x24Search");
+	public final By ELEMENT_MENU_HELP_ICON = By.className("uiIconPLF24x24Help");
+
 	//IDE
 	public final By ELEMENT_LINK_IDE = By.linkText("IDE");
 	public final By ELEMENT_GADGET_WORKSPACE_FRAME = By.id("remote_iframe_0");
@@ -256,6 +274,8 @@ public class PlatformBase extends TestBase {
 	public final String ELEMENT_SEARCH_ICON_USERS_MANAGEMENT = "//form[@id='UISearchForm']/div[2]/a";
 	public final String ELEMENT_USER_EDIT_ICON = "//*[@id='UIListUsersGird']//*[text()='${username}']/../..//*[@data-original-title='Edit User Info']";
 	public final By ELEMENET_USER_MANAGEMENT_GRID = By.id("UIListUsersGird");
+	public final By ELEMENT_USER_MANAGEMENT_GROUP = By.xpath("//*[@id='UIOrganizationPortlet']//ul[@class='managementIconContainer clearfix']/li[2]/a");
+	public final String ELEMENT_USER_MANAGEMENT_GROUP_NODE = "//*[@class='uiIconNode collapseIcon' and contains(text(), '${node}')]";
 
 	public String USER_REG_SAME_ACC_FAIL_MSG = "//span[@class='errorIcon' and contains(text(),'This user name already exists, please enter a different name.')]";
 	public String USER_REG_UPPER_LETTER_FAIL_MSG = "//span[@class='warningIcon' and contains(text(),'nly lowercase letters, digits, dot and underscore characters are allowed for the field')]";
@@ -401,6 +421,7 @@ public class PlatformBase extends TestBase {
 	public final String ELEMENT_PORTLET_LABEL = "//div[@class='CPortletLayoutDecorator' and contains(text(), '${portletName}')]";	
 	public final String ELEMENT_PAGE_FINISH_BUTTON = "//*[@data-original-title='Finish']";
 	public final By ELEMENT_PAGE_CLOSE = By.xpath("//a[@title='Abort' or @data-original-title='Abort']");
+	public final By ELEMENT_EDIT_MODE_PAGE = By.xpath("//i[@data-original-title='Edit in Content Explorer']");
 
 	public final By ELEMENT_SWITCH_VIEW_MODE = By.linkText("Switch View mode");
 	public final String ELEMENT_PAGE_COLUMN = "//tr[@class='TRContainer']//td['${index}']";
@@ -759,6 +780,7 @@ public class PlatformBase extends TestBase {
 	public By PRODUCTS_LABEL_ENGLISH = By.xpath("//*[text()='Products']");
 	public By PRODUCTS_LABEL_FRENCH = By.xpath("//*[text()='Produits']");
 	public By PRODUCTS_LABEL_GERMAN = By.xpath("//*[text()='Produkte']");
+
 
 	///////////////////
 	//Set view permissions for portal
@@ -1379,9 +1401,16 @@ public class PlatformBase extends TestBase {
 		for (String path : paths)
 			click(By.linkText(path));
 		if(newFolder!=""){
-			click(ELEMENT_CREATE_FOLDER_BUTTON);
-			alert.inputAlertText(newFolder);
-			click(By.linkText(newFolder));
+			if(plfVersion.equalsIgnoreCase("4.0")){
+				click(ELEMENT_CREATE_FOLDER_BUTTON);
+				alert.inputAlertText(newFolder);
+				click(By.linkText(newFolder));
+			}
+			else if(plfVersion.equalsIgnoreCase("4.1")){
+				click(ELEMENT_CREATE_FOLDER_BUTTON_PLF41);
+				alert.inputAlertText(newFolder);
+				click(By.linkText(newFolder));
+			}
 		}
 		if (upload)
 		{
@@ -1395,7 +1424,7 @@ public class PlatformBase extends TestBase {
 			switchToParentWindow();
 			waitForAndGetElement(By.linkText(uploadFileName));
 		}
-		button.cancel();
+		button.close();
 		Utils.pause(1000);
 		waitForElementNotPresent(ELEMENT_SELECT_FILE_POPUP);	
 	}
@@ -1468,4 +1497,5 @@ public class PlatformBase extends TestBase {
 //		}
 		driver.navigate().to(baseUrl);
 	}*/
+
 }
