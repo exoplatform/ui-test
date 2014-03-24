@@ -168,6 +168,7 @@ public class PlatformBase extends TestBase {
 
 	/*--------------- User account Management (Click from user name) ---------------------*/
 	public final By ELEMENT_ACCOUNT_NAME_LINK = By.xpath("//*[@id='UIUserPlatformToolBarPortlet']/a");
+	public final By ELEMENT_NAVIGATION_ACCOUNT_AVATAR = By.xpath("//*[@id='UIUserPlatformToolBarPortlet']/a/img[@alt='avatar']");
 	public final By ELEMENT_SIGN_OUT_LINK = By.className("uiIconPLFLogout");
 	public final By ELEMENT_CHANGE_LANGUAGE_LINK_ACME = By.className("LanguageIcon");
 	public final By ELEMENT_CHANGE_LANGUAGE_LINK = By.xpath("//a[text()='Change Language']");
@@ -182,8 +183,12 @@ public class PlatformBase extends TestBase {
 
 	public final By ELEMENT_MY_PROFILE_LINK = By.xpath("//i[@class='uiIconPLFProfile']/..");
 	public final By ELEMENT_DASHBROARD_LINK = By.className("uiIconPLFDashboard");
-	public final By ELEMENT_MY_SETTING = By.linkText("Settings");
-
+	public final By ELEMENT_MY_SETTING = By.className("uiIconSetting");
+	public final By ELEMENT_MY_ACTIVITY_STREAM = By.className("uiIconPLFActivityStream");
+	public final By ELEMENT_MY_CONNECTIONS = By.className("uiIconPLFMyConnection");
+	public final By ELEMENT_MY_WIKI = By.className("uiIconWikiWiki");
+	public final String ELEMENT_LINE_BETWEEN_MENU = "//*[@class='divider'][${index}]";
+	
 	//User -> Change Language
 	public final By ELEMENT_CHANGE_LANGUAGE_POPUP = By.xpath("//*[@id='UIMaskWorkspace']//*[text()='Interface Language Setting']");
 	public final By ELEMENT_CHANGE_LANGUAGE_POPUP_FRENCH = By.xpath("//*[@id='UIMaskWorkspace']//*[text()='Langues Disponibles']");
@@ -752,6 +757,9 @@ public class PlatformBase extends TestBase {
 	public final By ELEMENT_QUICK_SEARCH_ICON = By.xpath("//i[@class='uiIconPLF24x24Search']");
 	public final By ELEMENT_QUICK_SEARCH_TEXTBOX = By.name("adminkeyword");
 	public final By ELEMENT_SEE_ALL_SEARCH_RESULTS = By.linkText("See All Search Results");
+	public final By ELEMENT_RESULT_SEARCH_PAGE = By.id("resultPage");
+	public final By ELEMENT_RESULT_CONTENT_DETAIL = By.xpath("//*[@class='content']/*[@class='detail']");
+	public final By ELEMENT_TOOLBAR_SEARCH = By.id("ToolBarSearch");
 
 	//Search porlet
 	public final By ELEMENT_SEARCH_APPLICATION = By.xpath("//a[@title='Search']");
