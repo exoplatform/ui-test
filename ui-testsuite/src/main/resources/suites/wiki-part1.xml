@@ -20,12 +20,14 @@
 			</run>
 		</groups>
 		<classes>
-			<class name="org.exoplatform.selenium.platform.wiki.functional.basicaction.Wiki_BasicAction_Add" />
-			<class name="org.exoplatform.selenium.platform.wiki.functional.basicaction.Wiki_BasicAction_Delete" />
-			<class name="org.exoplatform.selenium.platform.wiki.functional.basicaction.Wiki_BasicAction_Edit" />
-			<class name="org.exoplatform.selenium.platform.wiki.functional.basicaction.Wiki_BasicAction_Intergration" />
-			<class name="org.exoplatform.selenium.platform.wiki.functional.basicaction.Wiki_BasicAction_Move" />
-		</classes>
+ 			<class name="org.exoplatform.selenium.platform.wiki.functional.basicaction.Wiki_BasicAction_Add" />
+ 			<class name="org.exoplatform.selenium.platform.wiki.functional.basicaction.Wiki_BasicAction_Delete" />
+ 			<class name="org.exoplatform.selenium.platform.wiki.functional.basicaction.Wiki_BasicAction_Edit" />
+ 			<class name="org.exoplatform.selenium.platform.wiki.functional.basicaction.Wiki_BasicAction_Intergration" />
+ 			<class name="org.exoplatform.selenium.platform.wiki.functional.basicaction.Wiki_BasicAction_Move_MoveControl" />
+ 			<class name="org.exoplatform.selenium.platform.wiki.functional.basicaction.Wiki_BasicAction_MoveAPage" />
+ 			<class name="org.exoplatform.selenium.platform.wiki.functional.basicaction.Wiki_BasicAction_Move_MoveLayout" />
+ 		</classes>
 	</test>
 
 	<test name="wiki-func-info" enabled="true">

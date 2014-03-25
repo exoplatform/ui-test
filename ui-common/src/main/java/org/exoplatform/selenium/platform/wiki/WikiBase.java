@@ -155,6 +155,11 @@ public class WikiBase extends PlatformBase{
 	public final String ELEMENT_MOVE_PAGE_MESSAGE = "//div[${index}][@class='alert']";
 	public final String ELEMENT_MOVE_PAGE_RENAME_LINK = "//div[${index}][@class='alert']/..//a";
 	public final By ELEMENT_MY_WIKI_NAME_SELECTED = By.xpath("//*[@title='My Wiki']");
+	public final By ELEMENT_MOVE_PAGE_POPUP_DESTINATION_LABEL = By.xpath("//*[@class='sideBarContent']/div[1][text()='Destination:']");
+	public final By ELEMENT_MOVE_PAGE_POPUP_UI_MOVETREE = By.xpath("//*[@class='sideBarContent']/div[2][@class='sideContent']/*[@id='UIMoveTree']");
+	public final String ELEMENT_MOVE_PAGE_CURRENT_DESTINATION = "//*[@id='DisplayModesDropDown']//span[1][text()='{$item}']";
+	public final By ELEMENT_DESTINATION_LIST_SCROLLBAR = By.xpath("//*[@id='UIWikiPopupContainerL1']//*[@class='spaceChooserPopup']");
+	public final String ELEMENT_DESTINATION_TREE_ITEM = "//*[@id='iconTreeExplorer']/*[contains(.,'${treeItem}')]";
 	
 	/*-------------------------Permission page--------------------*/
 	public final By ELEMENT_SELECT_USER = By.xpath("//a[contains(@onclick, 'OpenSelectUserForm')]");
@@ -430,6 +435,7 @@ public class WikiBase extends PlatformBase{
 		//mouseOver(ELEMENT_MORE_LINK,true);
 		mouseOverAndClick(ELEMENT_MORE_LINK);
 		mouseOverAndClick(ELEMENT_MOVE_PAGE_LINK);
+		waitForAndGetElement(ELEMENT_MOVE_PAGE_POPUP);
 	}
 
 	/**
@@ -454,7 +460,6 @@ public class WikiBase extends PlatformBase{
 		By ELEMENT_VERIFY_AFTER_MOVE_PAGE = By.xpath("//*[contains(text(), '"+pageName2+"')]/ancestor::li[@class='node']//ul//*[contains(text(), '"+pageName1+"')]");
 		info("Move a page");
 		goToMovePage();
-		waitForAndGetElement(ELEMENT_MOVE_PAGE_POPUP);
 
 		if (space != ""){
 			click(ELEMENT_SELECT_SPACE_DESTINATION);
