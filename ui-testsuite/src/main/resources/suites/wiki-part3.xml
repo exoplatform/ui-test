@@ -12,12 +12,44 @@
  			<class name="org.exoplatform.selenium.platform.wiki.functional.pagepermission.Wiki_PagePermission_Delete" />
  			<class name="org.exoplatform.selenium.platform.wiki.functional.pagepermission.Wiki_PagePermission_Edit" />
  			<class name="org.exoplatform.selenium.platform.wiki.functional.pagepermission.Wiki_PagePermission_Other" />
+		</classes>
+	</test>
+
+	<test name="wiki-func-spaceswitcher" enabled="true">
+		<groups>
+			<run>
+				<exclude name="pending" />
+			</run>
+		</groups>
+		<classes>
  			<class name="org.exoplatform.selenium.platform.wiki.functional.spaceswitcher.Wiki_SpaceSwitcher_Display" />
+		</classes>
+	</test>
+
+	<test name="wiki-func-activities" enabled="true">
+		<groups>
+			<run>
+				<exclude name="pending" />
+			</run>
+		</groups>
+		<classes>
  			<class name="org.exoplatform.selenium.platform.wiki.functional.activities.Wiki_Activity_Add" />
 			<class name="org.exoplatform.selenium.platform.wiki.functional.activities.Wiki_Activity_Delete" />
 			<class name="org.exoplatform.selenium.platform.wiki.functional.activities.Wiki_Activity_Update" />
 			<class name="org.exoplatform.selenium.platform.wiki.functional.activities.Wiki_Activity_Dislike" />
 			<class name="org.exoplatform.selenium.platform.wiki.functional.activities.Wiki_Activity_Display" />
+		</classes>
+	</test>
+
+	<test name="wiki-func-navigationacrossspace" enabled="true">
+		<groups>
+			<run>
+				<exclude name="pending" />
+			</run>
+		</groups>
+		<classes>
+
+			<class name="org.exoplatform.selenium.platform.wiki.functional.navigationacrossspace.Wiki_Navigation_Across_Space" />
 		</classes>
 	</test>
 

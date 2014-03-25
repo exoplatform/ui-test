@@ -17,6 +17,8 @@
 			<class name = "org.exoplatform.selenium.platform.plf.functional.homepagegadgets.PLF_HomepageGadgets_WhoIsOnline" />
 			<class name = "org.exoplatform.selenium.platform.plf.functional.homepagegadgets.calendargadget.PLF_HomepageGadgets_CalendarGadget_Settings" />
 			<class name = "org.exoplatform.selenium.platform.plf.functional.hompagegadgets.invitationgadget.PLF_HomepageGadgets_InvitationGadget" />
+			<class name = "org.exoplatform.selenium.platform.plf.functional.homepagegadgets.suggestiongadget.PLF_HomepageGadgets_SuggestionGadget" />
+			<class name = "org.exoplatform.selenium.platform.plf.functional.homepageactivitystream.activitystream_activitypost.PLF_HomepageActivityStream_ActivityStream_ActivityPost" />
 		</classes>
 	</test>
 	<listeners>

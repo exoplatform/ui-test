@@ -23,7 +23,7 @@ import org.openqa.selenium.WebElement;
  */
 
 public class PeopleProfile extends PlatformBase {
-
+	PeopleSearch peoSearch;
 	Button button;
 
 	// Go to Account Name link > My Profile	
@@ -77,6 +77,7 @@ public class PeopleProfile extends PlatformBase {
 		driver = dr;
 		this.plfVersion = plfVersion.length>0?plfVersion[0]:"4.0";
 		button = new Button(driver, this.plfVersion);
+		peoSearch = new PeopleSearch(driver);
 	}
 
 	/**
@@ -241,6 +242,7 @@ public class PeopleProfile extends PlatformBase {
 	 */
 	public void goToUserProfile(String userName){
 		info("--Go to User's Profile--");
+		peoSearch.searchPeople(false,userName);
 		click(By.linkText(userName));
 		waitForAndGetElement(ELEMENT_MY_PROFILE_TAB);
 	}
