@@ -149,7 +149,9 @@ public class WikiBase extends PlatformBase{
 	public final By ELEMENT_CANCEL_BUTTON_MOVE_PAGE = By.xpath("//*[contains(@class, 'uiWikiMovePageForm')]//button[contains(text(), 'Cancel')]");
 	public final By ELEMENT_MOVE_PAGE_POPUP = By.xpath("//*[contains(@class, 'popupTitle') and text()='Move Page']");
 	public final By ELEMENT_SELECT_SPACE_DESTINATION = By.xpath("//*[contains(text(), 'Select the destination:')]/..//*[@class='btn dropdown-toggle']");
-	public final String ELEMENT_SPACE_NAME_SELECTED = "//a[text() = '${space}']";
+	//public final String ELEMENT_SPACE_NAME_SELECTED = "//a[text() = '${space}']";
+	public final String ELEMENT_SPACE_NAME_SELECTED = "//*[@id='UISpaceSwitcher_/spaces/${space}']/a";
+	public final By ELEMENT_SPACE_SWITCHER_INPUT_FOCUS = By.xpath("//*[@id='uiSpaceSwitcher_BreadCrumb']//input[@class='spaceSearchText focus']") ;
 	public final By ELEMENT_PORTAL_NAME_SELECTED = By.id("UISpaceSwitcher_/portal/intranet");
 	public final String MESSAGE_MOVE_PAGE_DUPLICATE_TITLE = "Another page with the same title already exists in the selected space.";
 	public final By ELEMENT_RENAME_LINK_WHEN_MOVE_PAGE = By.linkText("Rename");
@@ -262,6 +264,7 @@ public class WikiBase extends PlatformBase{
 	public String ELEMENT_CREATOR_PAGE_INFO = "//*[@id='UIWikiPageInfoArea']//a[1][text()='${fullName}']";
 	public String ELEMENT_UPDATER_PAGE_INFO = "//*[@id='UIWikiPageInfoArea']//a[2][text()='${fullName}']";
 	public final By ELEMENT_ADD_MORE_RELATION_BUTTON = By.xpath("//button[text()='Add More Relations']");
+	public final String ELEMENT_ATTACHMENT_TITLE = "//*[@class='uiAttachmentUploadListForm clearfix']//*[text()='${fileName}']";
 
 	public final String ELEMENT_PAGE_INFO_TITLE = "//h6[@class='pageInfoTitle' and contains(text(),'${infoTitle}')]";
 	public final String ELEMENT_VERIFY_INFO_SUMMARY = "//div[@class='uiPageInfoItem uiPageInfoSummary']//b[contains(text(),'${infoSummary}')]/ancestor::tr/td[contains(text(),'${item}')]";
