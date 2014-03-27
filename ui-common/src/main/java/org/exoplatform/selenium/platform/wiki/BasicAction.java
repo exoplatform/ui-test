@@ -34,7 +34,7 @@ public class BasicAction extends Permission{
 	public final String ELEMENT_PERMISSION_WINDOW_CLOSE_BUTTON = "//*[@id='UIWikiPopupWindowL1']//a[@title='Close Window']";
 	public final By ELEMENT_MEMBERS_TAB = By.xpath("//div[@id='UISpaceSetting']//a[text()='Members']");
 	public String ELEMENT_ACTION_USER_ON_SPACE = "//a[text()='${spaceName}']/../../..//button[text()='${action}']";
-	
+
 	// Wiki page
 	/*===================== Add Page ====================*/	
 
@@ -115,6 +115,7 @@ public class BasicAction extends Permission{
 	 * 
 	 */
 	public void addWikiPageSourceEditor(String title, String content){
+		String[] text ;
 		info("Modify data with source editor");
 		if(title != null){
 			type(ELEMENT_TITLE_WIKI_INPUT, title, true);
@@ -124,8 +125,13 @@ public class BasicAction extends Permission{
 			waitForAndGetElement(ELEMENT_RICHTEXT_BUTTON);
 		}
 		Utils.pause(1000);
+
 		if(content != null){
-			type(ELEMENT_CONTENT_WIKI_INPUT,content,true);
+			text = content.split("</br>");
+			for(int i=0; i < text.length; i++){
+				type(ELEMENT_CONTENT_WIKI_INPUT,text[i],false);
+				waitForAndGetElement(ELEMENT_CONTENT_WIKI_INPUT).sendKeys(Keys.ENTER);
+			}
 		}	
 		//waitForAndGetElement(ELEMENT_SAVE_BUTTON_ADD_PAGE);
 		Utils.pause(1000);
@@ -166,7 +172,7 @@ public class BasicAction extends Permission{
 			if(title != null)
 				type(ELEMENT_TITLE_WIKI_INPUT, title, true);
 			if (content != null){
-				inputDataToFrame(ELEMENT_CONTENT_WIKI_FRAME, content,true);
+				inputDataToFrame(ELEMENT_CONTENT_WIKI_FRAME, content);
 				Utils.pause(1000);
 				driver.switchTo().defaultContent();
 			}

@@ -66,7 +66,7 @@ public class Wiki_BasicAction_Other extends Permalink {
 		click(By.linkText(title));
 		goToExportPageAsPDF();
 		Utils.pause(3000);
-		//assert checkFileExisted(title + ".pdf");
+		assert checkFileExisted(title + ".pdf");
 		
 		deleteCurrentWikiPage();
 	}

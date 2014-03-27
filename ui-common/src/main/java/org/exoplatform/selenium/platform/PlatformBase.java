@@ -1207,8 +1207,6 @@ public class PlatformBase extends TestBase {
 					if (validate[0]){
 						info("clear old data of frame, verify that new data is input correctly");
 						((JavascriptExecutor) driver).executeScript("document.body.innerHTML='" + data + "'");
-						info(data);
-						info(inputsummary.getText());
 						if (inputsummary.getText().contains(data)) break;
 					}
 					else{

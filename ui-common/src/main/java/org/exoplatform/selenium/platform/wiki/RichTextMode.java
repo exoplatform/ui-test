@@ -48,11 +48,43 @@ public class RichTextMode extends Template {
 	public By ELEMENT_MACRO_LINK = By.xpath("//*[text()='Macro']");
 	public By ELEMENT_INSERT_MACRO_LINK = By.xpath("//*[text()='Insert Macro...']");
 	public By ELEMENT_MACRO_CATEGORY_SELECT = By.xpath("//select[@title='Select a macro category']");
+	public By ELEMENT_MACRO_TYPE_FILTER = By.xpath("//input[@title='Type to filter']");
 	public String ELEMENT_MACRO_LABEL = "//*[text()='${macro}']";
+	public By ELEMENT_RICHTEXTMODE_FRAME = By.id("gwt-RichTextArea");
+	public String ELEMENT_MACRO_BOX = "//div[@class='box']/*[contains(.,'${macro}')]";
+	public String ELEMENT_MACRO_EXCERPT = "//*[@class='ExcerptClass' and contains(text(),'${macro}')]";
+	public String ELEMENT_MACRO_INFO_MESSAGE = "//*[@class='box infomessage' and contains(text(),'${macro}')]";
+	public String ELEMENT_MACRO_TABLE_CONTENT = "//span[@class='macro-placeholder' and contains(.,'toc')]";
+	public String ELEMENT_MACRO_TIP_MESSAGE = "//*[@class='box tipmessage' and contains(text(),'${macro}')]";
+	public String ELEMENT_MACRO_ERROR_MESSAGE = "//*[@class='box errormessage' and contains(text(),'${macro}')]";
+	public String ELEMENT_MACRO_SUCCESS_MESSAGE = "//*[@class='box successmessage' and contains(text(),'${macro}')]";
+	public String ELEMENT_MACRO_TEXT = "//*[contains(@style,'${color}') and contains(text(),'${text}')]";
+	public String ELEMENT_MACRO_WARNING_MESSAGE = "//*[@class='box warningmessage' and contains(text(),'${macro}')]";
+	public String ELEMENT_MACRO_CHART = "//img[@alt='${title}']";
+	public String ELEMENT_MACRO_FOOTNOTE = "//li[contains(.,'${macro}')]//a[text()='^']";
+	public By ELEMENT_MACRO_RSS_TITLE = By.xpath("//p[@class='rssitemtitle']");
+	public By ELEMENT_MACRO_COLLAPSE_LINK = By.xpath("//div[@class='gwt-MenuItemLabel' and text()='Collapse All']");
+	public By ELEMENT_MACRO_EXPAND_LINK = By.xpath("//div[@class='gwt-MenuItemLabel' and text()='Expand All']");
 
 	//Macro: Tip message
 	public By ELEMENT_CONTENT_MESSAGE_TEXTAREA = By.id("pd-content-input");
 	public String ELEMENT_TIP_MESSAGE_MACRO = "//*[@class='box tipmessage' and text()='${message}']";
+
+	//Macro: Box
+	public By ELEMENT_BOX_TITLE = By.id("pd-title-input");
+	public By ELEMENT_BOX_CONTENT = By.id("pd-content-input");
+
+	//Macro:Error message
+	public By ELEMENT_ERROR_MESSAGE_CONTENT = By.id("pd-content-input");
+
+	//Macro: Children
+	public By ELEMENT_CHILDREN_DESCENDANT_SELECT = By.id("pd-descendant-input");
+
+	//Macro: Code
+	public By ELEMENT_CODE_LANGUAGE_INPUT = By.id("pd-language-input");
+	public By ELEMENT_CODE_TITLE_INPUT = By.id("pd-title-input");
+	public By ELEMENT_CODE_CONTENT_INPUT = By.id("pd-content-input");
+	public String ELEMENT_MACRO_CODE = "//div[@class='box code' and contains(.,'${macro}')]";
 
 	//Macro: Color
 	public By ELEMENT_COLOR_TEXTBOX = By.id("pd-name-input");
@@ -70,6 +102,31 @@ public class RichTextMode extends Template {
 	public By ELEMENT_IMAGE_EXTERNAL_LINK = By.xpath("//*[text()='External Image...']");
 	public By ELEMENT_IMAGE_SETTING_BUTTON = By.xpath("//*[text()='Image Settings']");
 	public By ELEMENT_IMAGE_LOCATION = By.xpath("//input[@title='Image location']");
+	//Chart
+	public By ELEMENT_CHART_HEIGHT = By.id("pd-height-input");
+	public By ELEMENT_CHART_PARAMS = By.id("pd-params-input");
+	public By ELEMENT_CHART_SOURCE = By.id("pd-source-input");
+	public By ELEMENT_CHART_TITLE = By.id("pd-title-input");
+	public By ELEMENT_CHART_TYPE = By.id("pd-type-input");
+	public By ELEMENT_CHART_WIDTH = By.id("pd-width-input");
+	public By ELEMENT_CHART_CONTENT = By.id("pd-content-input");
+
+	//HTML
+	public By ELEMENT_HTML_CLEAN = By.id("pd-clean-input");
+	public By ELEMENT_HTML_WIKI = By.id("pd-wiki-input");
+	public By ELEMENT_HTML_CONTENT = By.id("pd-content-input");
+	//Fomula
+	public By ELEMENT_FORMULA_FONTSIZE = By.id("pd-fontSize-input");
+	public By ELEMENT_FORMULA_IMAGETYPE = By.id("pd-imageType-input");
+	public By ELEMENT_FORMULA_CONTENT = By.id("pd-content-input");
+
+	//RSS
+	public By ELEMEMT_RSS_CONTENT = By.id("pd-content-input");
+	public By ELEMEMT_RSS_COUNT = By.id("pd-count-input");
+	public By ELEMEMT_RSS_DECORATION = By.id("pd-decoration-input");
+	public By ELEMEMT_RSS_FEED = By.id("pd-feed-input");
+	public By ELEMEMT_RSS_IMAGE = By.id("pd-image-input");
+	public By ELEMEMT_RSS_WIDTH = By.id("pd-width-input");
 
 	//WebPage
 	public By ELEMENT_WEBPAGE_LINK = By.xpath("//*[text()='Web Page...']");
@@ -142,10 +199,12 @@ public class RichTextMode extends Template {
 	 * @see #createColorMacro(String, String)
 	 */
 	public void goToSelectAMacro(String cat, String macro){
-		info("Go to a macro: " + macro);
+		info("Select a macro: " + macro);
 		mouseOverAndClick(ELEMENT_MACRO_LINK);
 		mouseOverAndClick(ELEMENT_INSERT_MACRO_LINK);
 		select(ELEMENT_MACRO_CATEGORY_SELECT, cat);
+		mouseOverAndClick(ELEMENT_MACRO_TYPE_FILTER);
+		type(ELEMENT_MACRO_TYPE_FILTER,macro,true);
 		Utils.pause(1000);
 		click(ELEMENT_MACRO_LABEL.replace("${macro}", macro));
 		click(but.ELEMENT_SELECT_BUTTON);
@@ -153,16 +212,97 @@ public class RichTextMode extends Template {
 	}
 
 	/**
-	 * Add macro: "Tip Message"
-	 * 
+	 * Add macro: "Message"
+	 * @param type: Type of message (Tip, Info, Warning, Success, Excerpt, Footnote, Error)
 	 * @param message
 	 * 			 message that will be displayed in macro
 	 */
-	public void createTipMessageMacro(String message){
-		goToSelectAMacro("Formatting", "Tip Message");
-		type(ELEMENT_CONTENT_MESSAGE_TEXTAREA, message, true);
+	public void createMessageMacro(String type, String message){
+		if (type == "Tip") {
+			goToSelectAMacro("Formatting", "Tip Message");
+			type(ELEMENT_CONTENT_MESSAGE_TEXTAREA, message, true);
+			click(but.ELEMENT_CREATE_MACRO_BUTTON);
+		}
+		if (type == "Info") {
+			goToSelectAMacro("Formatting", "Info Message");
+			type(ELEMENT_CONTENT_MESSAGE_TEXTAREA, message, true);
+			click(but.ELEMENT_CREATE_MACRO_BUTTON);
+		}
+		if (type == "Warning") {
+			goToSelectAMacro("Formatting", "Warning Message");
+			type(ELEMENT_CONTENT_MESSAGE_TEXTAREA, message, true);
+			click(but.ELEMENT_CREATE_MACRO_BUTTON);
+		}
+		if (type == "Success") {
+			goToSelectAMacro("Formatting", "Success Message");
+			type(ELEMENT_CONTENT_MESSAGE_TEXTAREA, message, true);
+			click(but.ELEMENT_CREATE_MACRO_BUTTON);
+		}
+		if (type == "Excerpt") {
+			goToSelectAMacro("Content", "Excerpt");
+			type(ELEMENT_CONTENT_MESSAGE_TEXTAREA, message, true);
+			click(but.ELEMENT_CREATE_MACRO_BUTTON);	
+		}
+
+		if (type == "Footnote") {
+			goToSelectAMacro("Content", "Footnote");
+			type(ELEMENT_CONTENT_MESSAGE_TEXTAREA, message, true);
+			click(but.ELEMENT_CREATE_MACRO_BUTTON);	
+		}
+
+		if (type == "Error") {
+			goToSelectAMacro("Formatting", "Error Message");
+			type(ELEMENT_ERROR_MESSAGE_CONTENT, message, true);
+			click(but.ELEMENT_CREATE_MACRO_BUTTON);	
+		}
+	}
+
+	/**
+	 * Create a box macro
+	 * @param title
+	 * @param content
+	 */
+	public void createBoxMacro(String title,String content){
+		goToSelectAMacro("Formatting", "Box");
+		type(ELEMENT_BOX_TITLE, title, true);
+		type(ELEMENT_BOX_CONTENT, content, true);
 		click(but.ELEMENT_CREATE_MACRO_BUTTON);
-		waitForAndGetElement(ELEMENT_TIP_MESSAGE_MACRO.replace("${message}", message));
+	}
+	
+	/**
+	 * Create Children macro
+	 * @param descendant
+	 */
+	public void createChildrenMacro(String descendant){
+
+		goToSelectAMacro("Navigation", "Children"); 
+		mouseOverAndClick(ELEMENT_CHILDREN_DESCENDANT_SELECT);
+		type(ELEMENT_CHILDREN_DESCENDANT_SELECT,descendant,false);
+		Utils.pause(1000);
+		click(but.ELEMENT_CREATE_MACRO_BUTTON);		
+	}
+
+	/**
+	 * Create a table of content macro
+	 */
+	public void createTableOfContentsMacro(){
+		goToSelectAMacro("Navigation", "Table Of Contents");
+		click(but.ELEMENT_CREATE_MACRO_BUTTON);
+
+	}
+
+	/**
+	 * Create a code macro
+	 * @param language
+	 * @param title
+	 * @param message
+	 */
+	public void createCodeMacro(String language, String title, String message){
+		goToSelectAMacro("Formatting", "Code");
+		type(ELEMENT_CODE_LANGUAGE_INPUT,language,true);
+		type(ELEMENT_CODE_TITLE_INPUT,title,true);
+		type(ELEMENT_CONTENT_MESSAGE_TEXTAREA, message, true);
+		click(but.ELEMENT_CREATE_MACRO_BUTTON);	
 	}
 
 	/**
@@ -177,6 +317,92 @@ public class RichTextMode extends Template {
 		goToSelectAMacro("Formatting", "Color");
 		type(ELEMENT_COLOR_TEXTBOX, color, true);
 		type(ELEMENT_COLOR_MESSAGE, message, true);
+		click(but.ELEMENT_CREATE_MACRO_BUTTON);
+	}
+	
+	/**
+	 * Create a chart macro
+	 * @param height
+	 * @param params
+	 * @param source
+	 * @param title
+	 * @param type
+	 * @param content
+	 * @param width
+	 */
+	public void createChartMacro(String height,String params, String source, String title, String type, String[] content, String width ){
+		goToSelectAMacro("Content", "Chart");
+		if(height!=null && height!="")
+			type(ELEMENT_CHART_HEIGHT, height, true);
+		if(width!=null && width!="")
+			type(ELEMENT_CHART_WIDTH, width, true);
+
+		type(ELEMENT_CHART_PARAMS,params, true);
+		type(ELEMENT_CHART_SOURCE,source, true);
+		type(ELEMENT_CHART_TITLE,title, true);
+		type(ELEMENT_CHART_TYPE,type, true);
+		for(int i=0; i < content.length; i++){
+			type(ELEMENT_CHART_CONTENT,content[i],false);
+			waitForAndGetElement(ELEMENT_CHART_CONTENT).sendKeys(Keys.ENTER);
+		}
+		click(but.ELEMENT_CREATE_MACRO_BUTTON);
+	}
+
+	/**
+	 * Create an HTML macro
+	 * @param clean
+	 * @param wiki
+	 * @param content
+	 */
+	public void createHTMLMacro(String clean, String wiki, String content){
+
+		goToSelectAMacro("Development", "HTML");
+		if(clean!=null)
+			selectOption(ELEMENT_HTML_CLEAN, clean);
+		if(wiki!=null)
+			selectOption(ELEMENT_HTML_WIKI, wiki);
+		type(ELEMENT_HTML_CONTENT,content, true);
+		click(but.ELEMENT_CREATE_MACRO_BUTTON);
+	}
+	
+	/**
+	 * Create a formula macro
+	 * @param fontsize
+	 * @param imagetype
+	 * @param content
+	 */
+	public void createformulaMacro(String fontsize, String imagetype, String content){
+
+		goToSelectAMacro("Content", "Formula");
+		if(fontsize!=null)
+			selectOption(ELEMENT_FORMULA_FONTSIZE, fontsize);
+		if(imagetype!=null)
+			selectOption(ELEMENT_FORMULA_IMAGETYPE, imagetype);
+		type(ELEMENT_FORMULA_CONTENT,content, true);
+		click(but.ELEMENT_CREATE_MACRO_BUTTON);
+	}
+	
+	/**
+	 * Create a RSS macro
+	 * @param content
+	 * @param count
+	 * @param decoration
+	 * @param feed
+	 * @param image
+	 * @param width
+	 */
+	public void createRssMacro(String content, String count, String decoration, String feed, String image, String width ){
+
+		goToSelectAMacro("Content", "RSS");
+		if(content!=null)
+			selectOption(ELEMEMT_RSS_CONTENT, content);
+		type(ELEMEMT_RSS_COUNT,count,true);
+		if(decoration!=null)
+			selectOption(ELEMEMT_RSS_DECORATION, decoration);
+		type(ELEMEMT_RSS_FEED,feed,true);
+		if(image!=null)
+			selectOption(ELEMEMT_RSS_IMAGE, image);
+		type(ELEMEMT_RSS_WIDTH,width, true);
 		click(but.ELEMENT_CREATE_MACRO_BUTTON);
 	}
 
@@ -233,7 +459,6 @@ public class RichTextMode extends Template {
 	}
 
 	/**
-	 * @author ChinhDT
 	 * Add webpage link to a Wiki page
 	 * 
 	 * @param webpage
@@ -275,7 +500,6 @@ public class RichTextMode extends Template {
 	}
 
 	/**
-	 * @author ChinhDT
 	 * Add email link to a Wiki page
 	 * 
 	 * @param email
