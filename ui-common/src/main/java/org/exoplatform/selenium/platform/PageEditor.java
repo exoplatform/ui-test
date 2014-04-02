@@ -36,11 +36,14 @@ public class PageEditor extends PlatformBase {
 	public final String UP_LEVEL_ICON = "//a[@title='Up Level']";
 	public final String DEFAULT_NODE = "//div[contains(text(),'/default')]";
 	public final String NODE_NAME_INPUT = "//input[@id='pageName']";
+	public final String ELEMENT_PORTLET_ID = "//*[contains(@id,'.${portletId}') or (@id='${portletId}')]";
 
 	/* Page Editor - View Page Properties*/
 	//View Page Properties form -> Page Setting tab
 	public final By ELEMENT_VIEW_PAGE_PROPERTIES = By.linkText("View Page properties");
 	public final String ELEMENT_OWNERTYPE_SELECTED = "//*[@id='PageSetting-tab']//select[@name='ownerType']/option[@selected = 'selected' and text()='${ownerType}']";
+	public final By ELEMENT_CANCEL_VIEW_PROPERTIES = By.xpath("//*[@id='UIPageForm']//*[text()='Cancel']");
+	public final By ELEMENT_SAVE_VIEW_PROPERTIES = By.xpath("//*[@id='UIPageForm']//*[text()='Save']");
 
 	//View Page Properties form (there are 2 tabs in this form)
 	//Page Setting Tab
@@ -72,7 +75,7 @@ public class PageEditor extends PlatformBase {
 	public final By ELEMENT_MULTI_CONTENT_SELECT_POPUP = By.xpath("//span[@class='PopupTitle popupTitle' and text()='Multiple Content Selector Pane']");
 	public final By ELEMENT_CONTENT_ADD_PATH = By.xpath("//i[@class='uiIconAddPath uiIconLightGray']");
 	public final String ELEMENT_CONTENT_BROWSER_NODE = "//span[@class='nodeName' and contains(text(), '${node}')]";
-		
+
 	//Add Path > Right Workspace 
 	public final String ELEMENT_RIGHT_WORKSPACE_NODE = "//*[@class='rightWorkspace']//*[text()='${node}']";
 
@@ -315,15 +318,15 @@ public class PageEditor extends PlatformBase {
 			for(int i = 0; i < pathNames.length - 1; i ++ ){
 				String pathToSelect = ELEMENT_SELECT_CONTENT_FOLDER_PATHS.replace("${pathName}", pathNames[i])+"/../../../div";
 				String pathToSelectA = ELEMENT_SELECT_CONTENT_FOLDER_PATHS_A.replace("${pathName}", pathNames[i])+"/../../div";				
-				
+
 				boolean isExpandIcon = false;
 				boolean isExpandIconA = false;
-				
+
 				if(waitForAndGetElement(pathToSelect,DEFAULT_TIMEOUT,0)!=null)
-					 isExpandIcon = waitForAndGetElement(pathToSelect).getAttribute("class").equalsIgnoreCase("expandIcon");
+					isExpandIcon = waitForAndGetElement(pathToSelect).getAttribute("class").equalsIgnoreCase("expandIcon");
 				else if(waitForAndGetElement(pathToSelectA,DEFAULT_TIMEOUT,0)!=null)
-					 isExpandIconA = waitForAndGetElement(pathToSelectA).getAttribute("class").equalsIgnoreCase("expandIcon");
-				
+					isExpandIconA = waitForAndGetElement(pathToSelectA).getAttribute("class").equalsIgnoreCase("expandIcon");
+
 				if(isExpandIcon || isExpandIconA)
 					click(By.linkText(pathNames[i]));				
 			}
@@ -491,11 +494,13 @@ public class PageEditor extends PlatformBase {
 	 */
 	public void addNewContainerAndPortlet(String containerType, String container, String category, String portletId, Object...params){		
 		boolean finishEdit = (Boolean) (params.length > 0 ? params[0] : true);
-
 		addNewContainer(containerType, container);
 		click(ELEMENT_APPLICATION_TAB);
 		click(By.linkText(category));
-		dragAndDropToObject(By.id(portletId), ELEMENT_DROP_TARGET_HAS_LAYOUT);
+		if(portletId.contains("ContentListViewerPortlet"))
+			dragAndDropToObject(ELEMENT_CONTENTS_LIST_VIEWER_PORTLET, ELEMENT_DROP_TARGET_HAS_LAYOUT);
+		else
+			dragAndDropToObject(By.xpath(ELEMENT_PORTLET_ID.replace("${portletId}",portletId)), ELEMENT_DROP_TARGET_HAS_LAYOUT);
 		if (finishEdit){
 			finishEditLayout();
 		}
@@ -513,12 +518,12 @@ public class PageEditor extends PlatformBase {
 		click(ELEMENT_APPLICATION_TAB);
 		click(By.linkText(category));
 		if(targetPosition.length>0)
-			dragAndDropToObject(By.id(portletId), targetPosition[0]);
+			dragAndDropToObject(By.xpath(ELEMENT_PORTLET_ID.replace("${portletId}",portletId)), targetPosition[0]);
 		else{
 			if(waitForAndGetElement(ELEMENT_DROP_TARGET_NO_LAYOUT,DEFAULT_TIMEOUT,0)!=null)
-				dragAndDropToObject(By.id(portletId), ELEMENT_DROP_TARGET_NO_LAYOUT);
+				dragAndDropToObject(By.xpath(ELEMENT_PORTLET_ID.replace("${portletId}",portletId)), ELEMENT_DROP_TARGET_NO_LAYOUT);
 			else
-				dragAndDropToObject(By.id(portletId), ELEMENT_DROP_TARGET_NO_LAYOUT_PORTAL);
+				dragAndDropToObject(By.xpath(ELEMENT_PORTLET_ID.replace("${portletId}",portletId)), ELEMENT_DROP_TARGET_NO_LAYOUT_PORTAL);
 		}
 		Utils.pause(1000);
 	}
@@ -563,7 +568,7 @@ public class PageEditor extends PlatformBase {
 			clearCache();
 		}
 	}
-	
+
 	/**
 	 * Edit container access permission
 	 * 
@@ -579,9 +584,21 @@ public class PageEditor extends PlatformBase {
 	public void editContainerPermission(String container, String groupId, String membership, Boolean publicMode){
 		if (publicMode) { click(ELEMENT_ACCESS_PERMISSION_MAKEITPUBLIC); }
 		else {
-	    click(ELEMENT_ADD_PERMISSION_BUTTON);
-	    setEditPermissions(groupId, membership);
-	    button.save();
+			click(ELEMENT_ADD_PERMISSION_BUTTON);
+			setEditPermissions(groupId, membership);
+			button.save();
 		}
+	}
+	
+	/**
+	 * View property of a page
+	 * @param ownerType
+	 * @param nodeName
+	 */
+	public void viewPropertiesPage(String ownerType, String nodeName){
+		click(ELEMENT_VIEW_PAGE_PROPERTIES);
+		waitForAndGetElement(ELEMENT_OWNERTYPE_SELECTED.replace("${ownerType}", ownerType),300000);
+		waitForAndGetElement("//*[@id='title' and @value = '" + nodeName + "']");
+		click(ELEMENT_CANCEL_VIEW_PROPERTIES);
 	}
 }

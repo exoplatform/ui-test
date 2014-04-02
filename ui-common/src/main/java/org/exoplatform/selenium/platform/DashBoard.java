@@ -15,7 +15,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
-public class DashBoard extends PlatformBase {
+public class DashBoard extends PortalManagement {
 
 	NavigationToolbar nav = new NavigationToolbar(driver);
 	Dialog dialog = new Dialog(driver);
@@ -28,7 +28,7 @@ public class DashBoard extends PlatformBase {
 	// Gadget Directory form
 	public final By ELEMENT_GADGET_URI_INPUT = By.xpath("//input[@id='url']");
 	public final By ELEMENT_ADD_GADGET_BUTTON = By.xpath("//img[@title='Add Gadget']");
-	public final By ELEMENT_GADGET_CONTAINER = By.xpath("//*[@id='GadgetContainer']//*[text()='Drag your gadgets here.']");
+	public final By ELEMENT_GADGET_CONTAINER = By.xpath("//*[@id='GadgetContainer']");
 	public final String ELEMENT_GADGET_ON_CONTAINER = "//*[@id='GadgetContainer']//*[text()='${name}']";
 	public final By ELEMENT_CLOSE_ADD_GADGET_WINDOW = By.xpath("//*[@id='UIDashboardPortlet']//*[@title='Close Window']");
 	public final String ELEMENT_GADGET_NAME = "//*[@title='${name}']";
@@ -132,6 +132,7 @@ public class DashBoard extends PlatformBase {
 		if(tab != null){ 
 			mouseOverAndClick(By.linkText(currentName));
 		}
+		driver.navigate().refresh();
 		click(ELEMENT_DASHBOARD_SELECTED_DELETE);
 		alert.waitForConfirmation("Really want to remove this dashboard?");
 		alert.acceptAlert();

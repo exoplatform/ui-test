@@ -91,18 +91,20 @@ public class Gatein_Navigation_PortalNavigation_EditNavigation extends PortalMan
 		click(pageEditor.ELEMENT_VIEW_PAGE_PROPERTIES);
 
 		//Page Settings
+		waitForAndGetElement(pageEditor.ELEMENT_VIEWPAGE_PAGETITLE, 300000);
 		type(pageEditor.ELEMENT_VIEWPAGE_PAGETITLE, pageSelectorNameEdit, true);
 
 		//Permission Settings
 		click(ELEMENT_PERMISSION_SETTING_TAB);
 		click(ELEMENT_EDIT_PERMISSION_SETTING);
 		setEditPermissions("Platform/Content Management ", "manager");
-		button.save();
+		click(pageEditor.ELEMENT_SAVE_VIEW_PROPERTIES);
 		waitForElementNotPresent(ELEMENT_EDIT_PERMISSION_SETTING);
 		pageEditor.finishEditLayout();
 		waitForElementNotPresent(pageEditor.ELEMENT_VIEW_PAGE_PROPERTIES);
+		driver.navigate().refresh();
 		button.save();
-		waitForElementNotPresent(button.ELEMENT_SAVE_BUTTON);
+		waitForElementNotPresent(button.ELEMENT_SAVE_BUTTON,60000);
 
 		info("Verify [Page Settings] is updated");
 		navToolbar.goToManagePages();
@@ -143,7 +145,7 @@ public class Gatein_Navigation_PortalNavigation_EditNavigation extends PortalMan
 		waitForAndGetElement(pageEditor.ELEMENT_VIEW_PAGE_PROPERTIES);
 
 		info("Add an application into selected container");
-		pageEditor.addNewContainerAndPortlet(categoryContainer, typeContainer, "Collaboration", "Collaboration/AnswersPortlet", false);	
+		pageEditor.addNewContainerAndPortlet(categoryContainer, typeContainer, "answer", "AnswersPortlet", false);	
 		click(ELEMENT_SWITCH_VIEW_MODE);
 		waitForAndGetElement(ELEMENT_ANWSER_PORTLET_IN_VIEW_PAGE);
 		click(ELEMENT_SWITCH_VIEW_MODE);

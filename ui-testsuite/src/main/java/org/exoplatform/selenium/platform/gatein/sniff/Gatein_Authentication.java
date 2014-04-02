@@ -81,11 +81,11 @@ public class Gatein_Authentication extends PlatformBase {
 	 */
 	@Test
 	public void test03_CreateNewAccountInPrivateMode(){
-		String username = "gateinsniff";
-		String password = "123456";
-		String firstName = "gatein";
-		String lastName = "sniff";
-		String email = "gatein@gmail.com";
+		String username = getRandomString();
+		String password = username;
+		String firstName = username;
+		String lastName = username;
+		String email = username+"@gmail.com";
 		
 		navTool.goToNewStaff();
 		magAc.addNewUserAccount(username, password, password, firstName, lastName, null, email, null, null, true);

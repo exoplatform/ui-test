@@ -39,8 +39,6 @@ public class PlatformBase extends TestBase {
 	public Dialog dialog = new Dialog(driver);
 
 	/****************Common Elements*******************/
-
-
 	public final String ELEMENT_CONTAINS_TEXT = "//*[contains(text(),'${text}')]"; 
 
 	/*
@@ -53,8 +51,6 @@ public class PlatformBase extends TestBase {
 	 * */
 	public final String ELEMENT_SIGN_IN_LINK = "//b[contains(text(),'Sign in')]";
 	public final By ELEMENT_REFRESH = By.xpath("//div[@class='activityStreamStatus pull-left']");
-
-
 	/*
 	 * Log in Form - Sign-out 
 	 */
@@ -250,6 +246,7 @@ public class PlatformBase extends TestBase {
 	public final By ELEMENT_INPUT_LASTNAME = By.id("lastName");
 	public final By ELEMENT_INPUT_DISPLAY_NAME = By.id("displayName");
 	public final By ELEMENT_INPUT_EMAIL = By.id("email");
+	public final By ELEMENT_INPUT_EMAIL_PROFILE_FORM= By.xpath("//*[@id='UIAccountProfiles']//*[@id='email']");
 	public final By ELEMENT_CHANGE_PASSWORD = By.id("changePassword");
 	public final By ELEMENT_INPUT_EMAIL_UPDATE = By.xpath("//*[@class='UIFormInputSet']//*[@id='email']");
 	public final By ELEMENT_INPUT_EMAIL_ADD = By.xpath("//*[@id='AccountInputSet']//*[@id='email']");
@@ -342,7 +339,7 @@ public class PlatformBase extends TestBase {
 	public final By ELEMENT_TAB_MEMBERSHIP_MANAGEMENT = By.xpath("//*[contains(@class, 'uiIconMembership')]/parent::a");
 	public final String ELEMENT_MEMBERSHIP_EDIT_ICON = "//*[text()='${membership}']/../..//*[@data-original-title='Edit Membership']";
 	public final String ELEMENT_MEMBERSHIP_DELETE_ICON = "//*[text()='${membership}']/../..//*[@data-original-title='Delete Membership']";
-	public final String ELEMENT_NEXT_PAGE_ICON = "//a[@title='Next Page']";
+	public final String ELEMENT_NEXT_PAGE_ICON = "//a[@title='Next Page' or @data-original-title='Next Page']";
 	public final By ELEMENT_INPUT_NAME = By.id("name");
 	public final By ELEMENT_MEMBERSHIP_MANAGEMENT_GRID = By.xpath("//*[@class='UIListMembershipType']");
 	/*
@@ -434,7 +431,7 @@ public class PlatformBase extends TestBase {
 	public final By ELEMENT_CHECKBOX_EXTENDED_LABEL_MODE = By.id("switchmode");
 	public final String ELEMENT_LINK_EDITOR_PAGE_LAYOUT="//a[@class='ItemIcon EditPageIcon' and text()='Layout']";
 
-	public final By ELEMENT_UP_LEVEL=By.xpath("//a[@title='Up Level']");
+	public final By ELEMENT_UP_LEVEL=By.xpath("//a[@title='Up Level' or @data-original-title='Up Level']");
 	public final String ELEMENT_SELECT_LANGUAGE = "//select[@name='languages']";
 	public final String ELEMENT_INPUT_PAGE_DISPLAY_NAME = "//input[@id='pageDisplayName']";
 	public final String ELEMENT_PAGE_EDITOR_NEXT_STEP = "//button[text()='Next']";
@@ -453,7 +450,7 @@ public class PlatformBase extends TestBase {
 
 	//PortalNavigation - http://localhost:8080/portal/g/:platform:administrators/portalnavigation
 	public final String ELEMENT_NODE_LINK = "//*[@class='node']//*[@title='${nodeLabel}']";
-	public final String ELEMENT_EDIT_NAVIGATION = "//*[text()='${navigation}']/../..//*[@class='uiIconNavigation uiIconLightGray']";
+	public final String ELEMENT_EDIT_NAVIGATION = "//*[text()='${navigation}' or @title = '${navigation}']/../..//*[@class='uiIconNavigation uiIconLightGray']";
 	public final By ELEMENT_TITLE_NAVIGATION_MANAGEMENT = By.xpath("//*[contains(@class, 'popupTitle') and text() = 'Navigation Management']");
 	public final By ELEMENT_ADD_NODE_LINK = By.linkText("Add Node");
 	public final By ELEMENT_PAGE_SELECTOR_TAB = By.linkText("Page Selector");
@@ -463,10 +460,12 @@ public class PlatformBase extends TestBase {
 	public final By ELEMENT_SEARCH_SELECTOR_PAGE_LINK = By.className("uiIconSelectPage");
 	public final By ELEMENT_CLEAR_SELECTOR_PAGE = By.className("uiIconDelete");
 	public final By ELEMENT_SELECT_SEARCHED_PAGE = By.xpath("//*[@data-original-title='Select Page']");
+	public String ELEMENT_SELECT_SEARCHED_PAGE_BY_PAGETITLE ="//*[@title='${pageTitle}']/../..//*[@data-original-title='Select Page']";
 	public final By ELEMENT_PAGE_MANAGEMENT_SEARCH_BUTTON = By.xpath("//*[contains(@class, 'uiIconSearch')]");
 	public final By ELEMENT_SELECT_PAGE_SEARCH = By.xpath("//a[@data-original-title='Quick Search']");
 	public final By ELEMENT_SELECT_PAGE_BUTTON = By.xpath("//a[@data-original-title='Select Page']");
 	public final By ELEMENT_NO_RESULT_FOUND_MSG = By.xpath("//span[contains(text(),'No result found')]");
+	public final By ELEMENT_SAVE_EDIT_PAGE_FORM = By.xpath("//*[@id='UIPageNodeForm']//*[text()='Save']");
 
 	public final String ELEMENT_LIST_NODE_LINK = ELEMENT_NODE_LINK.replace("${nodeLabel}", "${nodeLabel}") + "/..//li[${number}]//*[@title='${childNode}']";
 	public final String ELEMENT_CHILD_NODE_LINK = ELEMENT_NODE_LINK.replace("${nodeLabel}", "${nodeLabel}") + "/../*[contains(@class, 'childrenContainer')]//*[@title='${childNode}']";
@@ -534,7 +533,7 @@ public class PlatformBase extends TestBase {
 	public final By ELEMENT_ACCOUNT_PORTLET = By.id("Administration/AccountPortlet");
 	public final By ELEMENT_PAGE_MANAGEMENT_PORTLET = By.id("Administration/PageManagementPortlet");
 	public final By ELEMENT_ORGANIZATION_PORTLET = By.id("Administration/OrganizationPortlet");
-	public final By ELEMENT_CONTENTS_LIST_VIEWER_PORTLET = By.id("Content/ContentListViewerPortlet");
+	public final By ELEMENT_CONTENTS_LIST_VIEWER_PORTLET = By.xpath("//*[contains(@id,'.ContentListViewerPortlet') or (@id='Content/ContentListViewerPortlet')]");
 	public final By ELEMENT_ANWSER_PORTLET = By.xpath("//div[@id='Collaboration/AnswersPortlet']/div");
 	public final By ELEMENT_ANWSER_PORTLET_IN_VIEW_PAGE = By.id("UIAnswersPortlet");
 	public final By ELEMENT_ACCOUNT_PORTLET_IN_VIEW_PAGE = By.id("UIAccountPortlet");
@@ -818,14 +817,21 @@ public class PlatformBase extends TestBase {
 		String membershipToSelect = ELEMENT_SELECT_EDIT_MEMBERSHIP_ITEM.replace("${membership}", membership);
 		//String selectedGroup = ELEMENT_SELECTED_EDIT_PERM_GROUP.replace("${groupId}", groupId.replace(" ", "-").toLowerCase());
 		String selectedMembership = ELEMENT_SELECTED_EDIT_PERMISSION_MEMBERSHIP.replace("${membership}", membership);
-
+		String groupToSelect="";
 		info("--Setting edit permission to " + groupId + ", " + membership + "--");
 		String[] groups = groupId.split("/");
 		click(ELEMENT_SELECT_PERMISSION_BUTTON);
 		Utils.pause(500);
 		waitForTextPresent("Permission Selector");
 		for (String group : groups) {
-			String groupToSelect = ELEMENT_SELECT_EDIT_GROUP_ITEM.replace("${group}", group);
+			if(group.contains("Administration")){
+				if(isElementPresent(ELEMENT_SELECT_EDIT_GROUP_ITEM.replace("${group}", group)))
+					groupToSelect = ELEMENT_SELECT_EDIT_GROUP_ITEM.replace("${group}", group);
+				else
+					groupToSelect = ELEMENT_SELECT_EDIT_GROUP_ITEM.replace("${group}", "Administrators");
+			}
+			else
+				groupToSelect = ELEMENT_SELECT_EDIT_GROUP_ITEM.replace("${group}", group);
 			click(groupToSelect);
 		}
 		click(membershipToSelect);
@@ -842,9 +848,10 @@ public class PlatformBase extends TestBase {
 	//Link to Edit a navigation
 	public void editNavigation(String currentNavigation) {
 		String navigation = ELEMENT_EDIT_NAVIGATION.replace("${navigation}", currentNavigation);
+		driver.navigate().refresh();
 		click(navigation);
 		//waitForTextPresent("Navigation Management");
-		waitForAndGetElement(ELEMENT_TITLE_NAVIGATION_MANAGEMENT);
+		waitForAndGetElement(ELEMENT_TITLE_NAVIGATION_MANAGEMENT,60000);
 	}
 
 	//Copy value from Source and paste to Target

@@ -64,7 +64,6 @@ public class Social_HomePage_Activity extends Activity {
 		conTemp = new ContentTemplate(driver,this.plfVersion);
 		cMenu= new ContextMenu(driver,this.plfVersion);
 		siteExp = new SitesExplorer(driver,this.plfVersion);
-
 		magAcc.signIn(DATA_USER1, DATA_PASS);
 	}
 

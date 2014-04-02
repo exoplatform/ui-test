@@ -198,5 +198,6 @@ public class NavigationManagement extends  PlatformBase{
 		}
 		//waitForTextNotPresent("Navigation Management");
 		waitForElementNotPresent(button.ELEMENT_SAVE_BUTTON);
+		Utils.pause(2000);
 	}
 }

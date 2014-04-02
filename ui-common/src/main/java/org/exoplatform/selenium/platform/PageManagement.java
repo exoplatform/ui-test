@@ -45,7 +45,7 @@ public class PageManagement extends PlatformBase {
 	public final By ELEMENT_SELECT_OWNER_TYPE = By.xpath("//select[@name='ownerType']");
 	public final By ELEMENT_SELECT_OWNER_ID = By.xpath("//select[@name='ownerId']");
 	public final By ELEMENT_OWNER_ID_INTRANET = By.xpath("//input[@id='ownerId' and @value='intranet']");
-		
+	public final String ELEMENT_PORTLET_ID = "//*[contains(@id,'.${portletId}') or (@id='${portletId}')]";	
 	//Message
 	public final String MESSAGE_DELETE_PAGE = "Do you want to delete this page?";
 	
@@ -69,7 +69,7 @@ public class PageManagement extends PlatformBase {
 		button = new Button(driver);
 		
 		click(ELEMENT_ADD_PAGE_BUTTON);
-		waitForTextPresent("Page Settings");	
+		waitForAndGetElement(By.xpath("//*[text()= 'Page Settings']"), 300000,1);	
 		switch (type){
 		case PORTAL:
 			select(ELEMENT_SELECT_OWNER_TYPE, "portal");
@@ -122,6 +122,7 @@ public class PageManagement extends PlatformBase {
 	public void editPageAtManagePages(PageType type, String pageTitle){
 		String pageEditIcon = ELEMENT_PAGE_EDIT_ICON.replace("${page}", pageTitle);
 		searchPageInManagementPage(type, pageTitle, true);
+		driver.navigate().refresh();
 		click(pageEditIcon);
 		Utils.pause(1000);
 	}
@@ -197,9 +198,19 @@ public class PageManagement extends PlatformBase {
 		for (String portletId : portletIds.keySet()) {
 			String elementEditPagePage = ELEMENT_EDIT_PAGE_PAGE;
 			//String verification = PORTLET_LABEL.replace("${portletName}", portletIdsAndVerifications.get(portletId));
-			dragAndDropToObject("//div[@id='" + portletId + "']/div", elementEditPagePage);
+			if(portletId.contains("ContentListViewerPortlet")){
+				info("Add portlet " + portletId);
+				dragAndDropToObject(ELEMENT_CONTENTS_LIST_VIEWER_PORTLET, elementEditPagePage);
+			}
+			else{
+				info("Add portlet " + portletId);
+				dragAndDropToObject(By.xpath(ELEMENT_PORTLET_ID.replace("${portletId}",portletId)), elementEditPagePage);
+			}
 			if(portletIds.get(portletId) != ""){
-				dragAndDropToObject("//div[@id='" + portletIds.get(portletId) + "']/div", elementEditPagePage);
+				info("Add portlet " + portletIds.get(portletId));
+				//dragAndDropToObject("//div[@id='" + portletIds.get(portletId) + "']/div", elementEditPagePage);
+				dragAndDropToObject("//*[contains(@id,'" + portletIds.get(portletId) + "') or (@id='" + portletIds.get(portletId) + "')]/div", elementEditPagePage);
+				
 			}
 		}
 		if (!verify) { 

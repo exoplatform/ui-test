@@ -92,7 +92,7 @@ public class Gatein_Dashboard extends DashBoard {
 	 */
 	@Test
 	public void test04_ChangeContainerWhenEditLayoutUserPage(){
-		String pageName = "gateinsniff04";
+		String pageName = "gateinsniff68859";
 		String title = "Row1";
 
 		navTool.goToDashboard();
@@ -128,7 +128,7 @@ public class Gatein_Dashboard extends DashBoard {
 	 */
 	@Test
 	public void test00_ChangeAppWhenEditingPageLayout(){
-		String pageName = "gateinsniff05";
+		String pageName = "gateinsniff68860";
 
 		navTool.goToDashboard();
 		pageE.createNewPageWithLayout(pageName, 2);
@@ -139,7 +139,7 @@ public class Gatein_Dashboard extends DashBoard {
 		click(ELEMENT_SWITCH_VIEW_MODE);
 
 		info("Edit portlet");
-		pageE.selectCLVPath("General Drives/Sites Management/acme", "documents");
+		pageE.selectCLVPath("General Drives/Sites Management/intranet", "documents");
 		click(ELEMENT_SWITCH_VIEW_MODE);
 		waitForTextPresent("offices.jpg");
 		waitForTextPresent("metro.pdf");
@@ -162,7 +162,7 @@ public class Gatein_Dashboard extends DashBoard {
 	 */
 	@Test
 	public void test06_AddAppIntoContainerWhenEditingPageLayout(){
-		String pageName = "gateinsniff06";
+		String pageName = "gateinsniff68861";
 
 		navTool.goToDashboard();
 		pageE.createNewPageWithLayout(pageName, 2);

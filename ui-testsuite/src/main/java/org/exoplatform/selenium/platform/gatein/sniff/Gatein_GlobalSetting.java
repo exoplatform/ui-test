@@ -39,7 +39,6 @@ public class Gatein_GlobalSetting extends PlatformBase {
 
 	@AfterMethod
 	public void afterTest(){
-		magAc.signOut();
 		driver.manage().deleteAllCookies();
 		driver.quit();
 	}
@@ -51,9 +50,9 @@ public class Gatein_GlobalSetting extends PlatformBase {
 	public void test01_ChangeUserProfile(){
 		String username = getRandomString();
 		String password = "123456";
-		String firstName = "User";
-		String lastName = "Profile";
-		String displayName = "New User";
+		String firstName = username;
+		String lastName = username;
+		String displayName = username + username;
 		String email = username + "@gmail.com";
 		
 		String newFirstName = "UserUpdate";
@@ -62,7 +61,7 @@ public class Gatein_GlobalSetting extends PlatformBase {
 		String newEmail = "newmail@gmail.com";
 		
 		navTool.goToNewStaff();
-		magAc.addNewUserAccount(username, password, password, firstName, lastName, displayName, email, null, null, true);
+		magAc.addNewUserAccount(username, password, password, firstName, lastName, displayName, email, null, null, false);
 		magAc.signOut();
 		
 		info("Change User Profile");
@@ -87,15 +86,15 @@ public class Gatein_GlobalSetting extends PlatformBase {
 	public void test02_ChangePassword(){
 		String username = getRandomString();
 		String password = "123456";
-		String firstName = "User";
-		String lastName = "Profile";
-		String displayName = "New User";
+		String firstName = username;
+		String lastName = username;
+		String displayName = username + username;
 		String email = username + "@gmail.com";
 		
 		String newpass = "123456789";
 		
 		navTool.goToNewStaff();
-		magAc.addNewUserAccount(username, password, password, firstName, lastName, displayName, email, null, null, true);
+		magAc.addNewUserAccount(username, password, password, firstName, lastName, displayName, email, null, null, false);
 		magAc.signOut();
 		
 		info("Change password of user");
@@ -158,6 +157,7 @@ public class Gatein_GlobalSetting extends PlatformBase {
 		
 		info("Check displaying language when language of browser don't support by portal with user account demo");
 		getDriverSetLanguage(Language.lo);
+		driver.get(baseUrl);
 		magAc = new ManageAccount(driver);
 		magAc.signIn("demo", DATA_PASS);
 		waitForAndGetElement(ELEMENT_HOME_TEXT);

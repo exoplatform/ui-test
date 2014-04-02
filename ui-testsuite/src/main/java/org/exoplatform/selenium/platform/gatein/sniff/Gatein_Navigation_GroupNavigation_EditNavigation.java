@@ -3,6 +3,7 @@ package org.exoplatform.selenium.platform.gatein.sniff;
 import static org.exoplatform.selenium.TestLogger.info;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import org.exoplatform.selenium.Button;
 import org.exoplatform.selenium.ManageAlert;
@@ -13,6 +14,7 @@ import org.exoplatform.selenium.platform.NavigationToolbar;
 import org.exoplatform.selenium.platform.PageEditor;
 import org.exoplatform.selenium.platform.PageManagement;
 import org.exoplatform.selenium.platform.UserGroupManagement;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -57,9 +59,9 @@ public class Gatein_Navigation_GroupNavigation_EditNavigation extends GroupNavig
 
 	@AfterMethod
 	public void afterTest(){
-				info("Gatein_Navigation_GroupNavigation_EditNavigation: Finish testing");
-				driver.manage().deleteAllCookies();
-				driver.quit();
+		info("Gatein_Navigation_GroupNavigation_EditNavigation: Finish testing");
+		driver.manage().deleteAllCookies();
+		driver.quit();
 	}
 
 	/**
@@ -70,24 +72,65 @@ public class Gatein_Navigation_GroupNavigation_EditNavigation extends GroupNavig
 	@Test
 	public void test01_EditPriorityForGroupNavigation(){
 		String groupAdmin = "/platform/administrators";
-		String groupAdminDisplayName = "Administration";
-		String groupAdminOldPosition = ELEMENT_GROUP_NAVIGATION_POSITION.replace("${index}","1").replace("${number}", "2").replace("${groupTitle}", groupAdmin);
-		String groupAdminNewPosition = ELEMENT_GROUP_NAVIGATION_POSITION.replace("${index}","1").replace("${number}", "1").replace("${groupTitle}", groupAdmin);
 
 		info("Go to Group Sites");
 		navToolbar.goToGroupSites();
+
+		List<WebElement> allElements = driver.findElements(ELEMENT_GROUP_NAVIGATION_TABLE);
+		int iTable = 1;
+		for (int j = 1; j<=allElements.size(); j++) {
+			if(waitForAndGetElement(ELEMENT_GROUP_NAVIGATION_TABLE_INDEX.replace("${index}", String.valueOf(j)).replace("${groupTitle}", groupAdmin),5000,0)!= null){
+				break;
+			}
+			else
+				iTable++;
+		}
+
+		allElements = driver.findElements(By.xpath(ELEMENT_GROUP_NAVIGATION_INDEX_IN_TABLE.replace("${index}", String.valueOf(iTable))));
+
+		int iRow = 1;
+		for (int j = 1; j<=allElements.size(); j++) {
+			if(waitForAndGetElement(ELEMENT_GROUP_NAVIGATION_POSITION.replace("${index}", String.valueOf(iTable)).replace("${number}", String.valueOf(iRow)).replace("${groupTitle}", groupAdmin),5000,0)!= null){
+				break;
+			}
+			else
+				iRow++;
+		}
+
+		String groupAdminOldPosition = ELEMENT_GROUP_NAVIGATION_POSITION.replace("${index}",String.valueOf(iTable)).replace("${number}", String.valueOf(iRow)).replace("${groupTitle}", groupAdmin);
 
 		//Verify position of Administration before change order
 		waitForAndGetElement(groupAdminOldPosition);
 
 		info("Select group navigation [Administration] and click [Edit Properties]");
-		click(ELEMENT_EDIT_PROPERTIES_ICON.replace("${groupName}", groupAdminDisplayName));
+		click(ELEMENT_EDIT_PROPERTIES_ICON.replace("${groupName}", groupAdmin));
 
 		info("Change priority for this group");
 		select(ELEMENT_GROUP_NAVIGATION_PRIORITY, "1");
 		button.save();
-
+		
 		info("Verify position of Administration after changing order");
+		allElements = driver.findElements(ELEMENT_GROUP_NAVIGATION_TABLE);
+		int newiTable = 1;
+		for (int j = 1; j<=allElements.size(); j++) {
+			if(waitForAndGetElement(ELEMENT_GROUP_NAVIGATION_TABLE_INDEX.replace("${index}", String.valueOf(j)).replace("${groupTitle}", groupAdmin),5000,0)!= null){
+				break;
+			}
+			else
+				newiTable++;
+		}
+
+		allElements = driver.findElements(By.xpath(ELEMENT_GROUP_NAVIGATION_INDEX_IN_TABLE.replace("${index}", String.valueOf(newiTable))));
+
+		int newiRow = 1;
+		for (int j = 1; j<=allElements.size(); j++) {
+			if(waitForAndGetElement(ELEMENT_GROUP_NAVIGATION_POSITION.replace("${index}", String.valueOf(newiTable)).replace("${number}", String.valueOf(newiRow)).replace("${groupTitle}", groupAdmin),5000,0)!= null){
+				break;
+			}
+			else
+				newiRow++;
+		}
+		String groupAdminNewPosition = ELEMENT_GROUP_NAVIGATION_POSITION.replace("${index}",String.valueOf(newiTable)).replace("${number}", String.valueOf(newiRow)).replace("${groupTitle}", groupAdmin);
 		waitForAndGetElement(groupAdminNewPosition);
 		magAc.signOut();
 		magAc.signIn("john", DATA_PASS);
@@ -97,8 +140,8 @@ public class Gatein_Navigation_GroupNavigation_EditNavigation extends GroupNavig
 		waitForAndGetElement(groupAdminNewPosition);
 
 		info("Reset order of navigation list");
-		click(ELEMENT_EDIT_PROPERTIES_ICON.replace("${groupName}", groupAdminDisplayName));
-		select(ELEMENT_GROUP_NAVIGATION_PRIORITY, "2");
+		click(ELEMENT_EDIT_PROPERTIES_ICON.replace("${groupName}", groupAdmin));
+		select(ELEMENT_GROUP_NAVIGATION_PRIORITY, String.valueOf(iRow));
 		button.save();
 		waitForAndGetElement(groupAdminOldPosition);
 	}
@@ -115,11 +158,11 @@ public class Gatein_Navigation_GroupNavigation_EditNavigation extends GroupNavig
 	 */
 	@Test
 	public void test02_AddEditDeleteNodeForGroup(){
-		String groupAdminDisplayName = "Administration";
+		String groupAdminDisplayName = "/platform/administrators";
 		String nodePortalAdministration = "Portal Administration";
-		String nodeName = "nodeTest02";
-		String nodeNameEdit = "nodeTest02Edit";
-		String pageSelectorName = "test02pageSelector";
+		String nodeName = "node70581";
+		String nodeNameEdit = "node70581";
+		String pageSelectorName = "page70581";
 
 		Map<String, String> languages = new HashMap<String, String>();
 		languages.put("English", "");
@@ -141,7 +184,7 @@ public class Gatein_Navigation_GroupNavigation_EditNavigation extends GroupNavig
 		info("A new node has been added...successful");
 
 		info("Edit node for group");
-		editNodeInGroupNavigation(groupAdminDisplayName, nodeName, nodeNameEdit, "profile", "portal");
+		editNodeInGroupNavigation(groupAdminDisplayName, nodeName, nodeNameEdit, "Profile", "portal");
 		button.save();
 		waitForElementNotPresent(button.ELEMENT_SAVE_BUTTON);
 		if(this.plfVersion.contains("4.0"))
@@ -170,7 +213,7 @@ public class Gatein_Navigation_GroupNavigation_EditNavigation extends GroupNavig
 	 */
 	@Test
 	public void test03_CopyCutCloneAndPasteNode(){
-		String groupAdminDisplayName = "Administration";
+		String groupAdminDisplayName = "/platform/administrators";
 		String nodePortalAdministration = "Portal Administration";
 		String nodeName = "nodeTest03";
 		String pageSelectorName = "test03pageSelector";
@@ -239,7 +282,7 @@ public class Gatein_Navigation_GroupNavigation_EditNavigation extends GroupNavig
 	 */
 	@Test
 	public void test04_ChangeNodeOrder(){
-		String groupAdminDisplayName = "Administration";
+		String groupAdminDisplayName = "/platform/administrators";
 		String nodeSitesManagement = "Sites Management";
 		String nodeName1 = "node1Test04";
 		String pageSelectorName1 = "test04page1Selector";
@@ -300,7 +343,7 @@ public class Gatein_Navigation_GroupNavigation_EditNavigation extends GroupNavig
 		String nodeName = "nodeTest05";
 		String pageSelectorName = "test05page1Selector";
 		String pageSelectorNameEdit = "test05page1SelectorEdit";
-		String groupAdminDisplayName = "Administration";
+		String groupAdminDisplayName = "/platform/administrators";
 		String nodeSitesManagement = "Sites Management";
 		String nodeLink = ELEMENT_NODE_LINK.replace("${nodeLabel}", nodeSitesManagement);
 		String nodeLinkToEdit = ELEMENT_NODE_LINK.replace("${nodeLabel}", nodeName);
@@ -325,6 +368,7 @@ public class Gatein_Navigation_GroupNavigation_EditNavigation extends GroupNavig
 		waitForAndGetElement(pageEditor.ELEMENT_VIEW_PAGE_PROPERTIES);
 		click(pageEditor.ELEMENT_VIEW_PAGE_PROPERTIES);
 		//Page Settings
+		waitForAndGetElement(pageEditor.ELEMENT_VIEWPAGE_PAGETITLE, 300000);
 		type(pageEditor.ELEMENT_VIEWPAGE_PAGETITLE, pageSelectorNameEdit, true);
 		//Permission Settings
 		click(ELEMENT_PERMISSION_SETTING_TAB);
@@ -362,7 +406,7 @@ public class Gatein_Navigation_GroupNavigation_EditNavigation extends GroupNavig
 	 */
 	@Test
 	public void test06_AddEditMoveAndDeleteContainerWhenEditPagePropertiesOfNode(){
-		String groupAdminDisplayName = "Administration";
+		String groupAdminDisplayName = "/platform/administrators";
 		String nodeLink = ELEMENT_NODE_LINK.replace("${nodeLabel}", "Add User");
 		String containerTitle = "test06ContainerTitle";
 		String newContainerPos = "//*[@class='UIRowContainer']/div[1]";
@@ -445,7 +489,7 @@ public class Gatein_Navigation_GroupNavigation_EditNavigation extends GroupNavig
 	@Test
 	public void test07_AddEditMoveAndDeleteApplicationWhenEditPagePropertiesOfNode(){
 		String nodeSitesManagement = "Sites Management";
-		String groupAdminDisplayName = "Administration";	
+		String groupAdminDisplayName = "/platform/administrators";	
 		String pageSelectorName = "test07pageSelector";
 		String portletTitle = "test07PortletTitle";
 		String nodeName = "test07NodeName";
@@ -529,7 +573,7 @@ public class Gatein_Navigation_GroupNavigation_EditNavigation extends GroupNavig
 	@Test
 	public void test08_AddApplicationIntoContainerWhenEditPagePropertiesOfNode(){
 		String nodeSitesManagement = "Sites Management";
-		String groupAdminDisplayName = "Administration";	
+		String groupAdminDisplayName = "/platform/administrators";	
 		String pageSelectorName = "test08pageSelector";
 		String nodeName = "test08NodeName";
 		String nodeLink = ELEMENT_NODE_LINK.replace("${nodeLabel}", nodeName);
@@ -551,7 +595,7 @@ public class Gatein_Navigation_GroupNavigation_EditNavigation extends GroupNavig
 		waitForAndGetElement(pageEditor.ELEMENT_VIEW_PAGE_PROPERTIES);
 
 		info("Add an application into selected container");
-		pageEditor.addNewContainerAndPortlet(categoryContainer, typeContainer, "Collaboration", "Collaboration/AnswersPortlet", false);	
+		pageEditor.addNewContainerAndPortlet(categoryContainer, typeContainer, "answer", "AnswersPortlet", false);	
 		click(ELEMENT_SWITCH_VIEW_MODE);
 		waitForAndGetElement(ELEMENT_ANWSER_PORTLET_IN_VIEW_PAGE);
 		click(ELEMENT_SWITCH_VIEW_MODE);

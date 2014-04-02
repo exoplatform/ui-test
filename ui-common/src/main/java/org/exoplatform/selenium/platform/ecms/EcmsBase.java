@@ -571,13 +571,13 @@ public class EcmsBase extends ManageAccount {
 		//driver.switchTo().frame(waitForAndGetElement(ELEMENT_UPLOAD_IMG_FRAME_XPATH));
 		//type(ELEMENT_UPLOAD_IMG_ID, Utils.getAbsoluteFilePath(link), false);
 		Boolean verify = (Boolean) (params.length > 0 ? params[0] : true);
-		if (waitForAndGetElement(By.xpath("//a[@class='actionIcon' and contains(text(),'Upload')]"),DEFAULT_TIMEOUT,0)==null){
+		if (waitForAndGetElement(By.xpath("//a[@class='actionIcon' and contains(text(),'Upload')]"),10000,0)==null){
 			click(ELEMENT_MORE_LINK_WITHOUT_BLOCK);
 		}
 		//click(By.xpath("//a[@class='actionIcon' and contains(text(),'Upload')]"));
 		
 		((JavascriptExecutor)driver).executeScript("arguments[0].style.visibility = 'visible'; arguments[0].style.height = '1px'; " +
-				"arguments[0].style.width = '1px'; arguments[0].style.opacity = 1", waitForAndGetElement(ELEMENT_UPLOAD_LINK, DEFAULT_TIMEOUT, 1, 2));
+				"arguments[0].style.width = '1px'; arguments[0].style.opacity = 1", waitForAndGetElement(ELEMENT_UPLOAD_LINK, 10000, 1, 2));
 		
 		Utils.pause(10000);
 		type(ELEMENT_UPLOAD_LINK, Utils.getAbsoluteFilePath(link), false);

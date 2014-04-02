@@ -53,25 +53,39 @@ public class Gatein_Manage_ManagePage extends DashBoard {
 	 */
 	@Test
 	public void test01_ShowAndSearchPage(){
+		String portalName = "portal68851";
+
+		info("Add new portal");
+		Map<String, String> permissions = null;
+		String editGroupId = "Platform /Content Management ";
+		String editMembership = "*" ;
+		navTool.goToPortalSites();
+		addNewPortal(portalName, null, null, "French", null, "Always", true, permissions, editGroupId, editMembership);
+
 		navTool.goToManagePages();
-		
+
 		info("Search page with Type");
 		pageMag.searchPageInManagementPage(PageType.PORTAL, null, true);
 		//waitForAndGetElement("//*[contains(text(), 'portal::intranet::Register')]");
 		waitForElementNotPresent("//*[contains(text(), 'group::/')]");
-		
+
 		info("Search page with Type and Title");
 		pageMag.searchPageInManagementPage(PageType.GROUP, "Site Map", true);
 		waitForAndGetElement("//*[contains(text(), 'group::/platform/guests::sitemap')]");
-		
+
 		info("Search page with Type and Site");
-		pageMag.searchPageInManagementPage(PageType.PORTAL, "", true, "acme");
-		waitForAndGetElement("//*[contains(text(), 'portal::acme::overview')]");
+		pageMag.searchPageInManagementPage(PageType.PORTAL, "", true, "portal68851");
+		waitForAndGetElement("//*[contains(text(), 'portal::"+portalName+"::overview')]");
 		waitForElementNotPresent("//*[contains(text(), 'portal::intranet::')]");
-		
+
 		info("Search page with Title, Site name, Type");
 		pageMag.searchPageInManagementPage(PageType.PORTAL, "Register", true, "intranet");
 		waitForAndGetElement("//*[contains(text(), 'portal::intranet::Register')]");
+
+		info("Delete portal");
+		driver.get(baseUrl);
+		navTool.goToPortalSites();
+		deletePortal(portalName);
 	}
 	
 	/**CaseId: 68852 + 68862 + 70422 -> Add + edit + delete page of portal using Page Management
@@ -79,9 +93,9 @@ public class Gatein_Manage_ManagePage extends DashBoard {
 	 */
 	@Test
 	public void test02_AddEditDeletePageForPortal_InPageManagement(){
-		String pageName = "SniffManagePageName02";
-		String pageTitle = "SniffManagePageTitle02";
-		String groupPath = "Platform /Content Management ";
+		String pageName = "pageName68862";
+		String pageTitle = "pageTitle68862";
+		String groupPath = "Platform/Administration";
 		String membership = "*";
 		
 		navTool.goToManagePages();
@@ -99,10 +113,11 @@ public class Gatein_Manage_ManagePage extends DashBoard {
 		editCLVPortletAndSwitchViewMode();
 		
 		info("View properties of page");
-		viewPropertiesPage("portal", pageTitle);
+		pageE.viewPropertiesPage("portal", pageTitle);
 		pageE.finishEditLayout();
 		
 		info("Delete page");
+		driver.navigate().refresh();
 		pageMag.deletePage(PageType.PORTAL, pageTitle);
 	}
 	
@@ -111,7 +126,7 @@ public class Gatein_Manage_ManagePage extends DashBoard {
 	 */
 	@Test
 	public void test03_AddEditPageForPortal_WiZard(){
-		String nodeName = "SniffManagePageName03";
+		String nodeName = "pageName68893";
 		
 		navTool.goToPageCreationWizard();
 		Map<String, String> portal = new HashMap<String, String>();
@@ -125,7 +140,7 @@ public class Gatein_Manage_ManagePage extends DashBoard {
 		editCLVPortletAndSwitchViewMode();
 		
 		info("View page properties");
-		viewPropertiesPage("portal", nodeName);
+		pageE.viewPropertiesPage("portal", nodeName);
 		pageE.finishEditLayout();
 		
 		info("Delete portlet");
@@ -135,8 +150,8 @@ public class Gatein_Manage_ManagePage extends DashBoard {
 		
 		info("Add new container and portlet");
 		navTool.goToEditPageEditor();
-		pageE.addNewContainerAndPortlet("Rows Layout", "oneRow", "Collaboration", "Collaboration/AnswersPortlet");
-		waitForAndGetElement(By.id("UIAnswersPortlet"));
+		pageE.addNewContainerAndPortlet("Rows Layout", "oneRow", "Collaboration", "CalendarPortlet");
+		waitForAndGetElement(By.id("UICalendarWorkingContainer"));
 		
 		info("Delete page");
 		pageMag.deletePageAtManagePageAndPortalNavigation(nodeName, true, "intranet", false, null);
@@ -147,10 +162,10 @@ public class Gatein_Manage_ManagePage extends DashBoard {
 	 */
 	@Test
 	public void test04_AddEditDeletePageForGroup_InPageManagement(){
-		String pageName = "SniffManagePageName04";
-		String pageTitle = "SniffManagePageTitle04";
+		String pageName = "pageName70419";
+		String pageTitle = "pageTitle70419";
 		String ownerId = "/organization/management/executive-board";
-		String groupPath = "Platform /Content Management ";
+		String groupPath = "Platform/Administration";
 		String membership = "*";
 		
 		navTool.goToManagePages();
@@ -168,9 +183,10 @@ public class Gatein_Manage_ManagePage extends DashBoard {
 		editCLVPortletAndSwitchViewMode();
 		
 		info("View properties of page");
-		viewPropertiesPage("group", pageTitle);
+		pageE.viewPropertiesPage("group", pageTitle);
 		pageE.finishEditLayout();
 		
+		driver.navigate().refresh();
 		pageMag.deletePage(PageType.GROUP, pageTitle);
 	}
 	
@@ -179,7 +195,7 @@ public class Gatein_Manage_ManagePage extends DashBoard {
 	 */
 	@Test
 	public void test05_AddEditPageForGroup_Wizard(){
-		String nodeName = "SniffManagePageName05";
+		String nodeName = "pageName68871";
 		
 		navTool.goToSiteExplorer();
 		navTool.goToPageCreationWizard();
@@ -194,7 +210,7 @@ public class Gatein_Manage_ManagePage extends DashBoard {
 		editCLVPortletAndSwitchViewMode();
 		
 		info("View page properties");
-		viewPropertiesPage("group", nodeName);
+		pageE.viewPropertiesPage("group", nodeName);
 		pageE.finishEditLayout();
 		
 		info("Delete portlet");
@@ -204,8 +220,8 @@ public class Gatein_Manage_ManagePage extends DashBoard {
 		
 		info("Add new container and portlet");
 		navTool.goToEditPageEditor();
-		pageE.addNewContainerAndPortlet("Rows Layout", "oneRow", "Collaboration", "Collaboration/AnswersPortlet");
-		waitForAndGetElement(By.id("UIAnswersPortlet"));
+		pageE.addNewContainerAndPortlet("Rows Layout", "oneRow", "Collaboration", "CalendarPortlet");
+		waitForAndGetElement(By.id("UICalendarWorkingContainer"));
 		
 		info("Delete page");
 		pageMag.deletePageAtManagePageAndPortalNavigation(nodeName, false, null, true, "Content Management");
@@ -216,8 +232,8 @@ public class Gatein_Manage_ManagePage extends DashBoard {
 	 */
 	@Test
 	public void test06_AddPageForUser(){
-		String nodeName = "SniffManagePageName06";
-		String displayName = "SniffManagePage06";
+		String nodeName = "pageName68857";
+		String displayName = "pagePage68857";
 		
 		navTool.goToDashboard();
 		
@@ -234,7 +250,7 @@ public class Gatein_Manage_ManagePage extends DashBoard {
 		editCLVPortletAndSwitchViewMode();
 		
 		info("View page properties");
-		viewPropertiesPage("user", nodeName);
+		pageE.viewPropertiesPage("user", nodeName);
 		pageE.finishEditLayout();
 		
 		info("Delete portlet");
@@ -244,26 +260,21 @@ public class Gatein_Manage_ManagePage extends DashBoard {
 		
 		info("Add new container and portlet");
 		navTool.goToEditPageEditor();
-		pageE.addNewContainerAndPortlet("Rows Layout", "oneRow", "Collaboration", "Collaboration/AnswersPortlet");
-		waitForAndGetElement(By.id("UIAnswersPortlet"));
+		pageE.addNewContainerAndPortlet("Rows Layout", "oneRow", "Collaboration", "CalendarPortlet");
+		waitForAndGetElement(By.id("UICalendarWorkingContainer"));
 		
 		info("Delete Page");
+		driver.navigate().refresh();
+		click(By.xpath("//*[@title = 'Minimize' or @data-original-title='Minimize']"));
 		deleteTabOnDashboard(nodeName);
 	}
 	
 	public void editCLVPortletAndSwitchViewMode(){
-		pageE.selectCLVPath("General Drives/Sites Management/acme", "documents");
+		pageE.selectCLVPath("General Drives/Sites Management/intranet", "documents");
 		click(ELEMENT_SWITCH_VIEW_MODE);
 		waitForTextPresent("offices.jpg");
 		waitForTextPresent("metro.pdf");
 		waitForTextPresent("conditions.doc");
 		click(ELEMENT_SWITCH_VIEW_MODE);
-	}
-	
-	public void viewPropertiesPage(String ownerType, String nodeName){
-		click(pageE.ELEMENT_VIEW_PAGE_PROPERTIES);
-		waitForAndGetElement(pageE.ELEMENT_OWNERTYPE_SELECTED.replace("${ownerType}", ownerType));
-		waitForAndGetElement("//*[@id='title' and @value = '" + nodeName + "']");
-		but.cancel();
 	}
 }

@@ -55,9 +55,9 @@ public class Gatein_Navigation_PortalNavigation_EditLayout extends PortalManagem
 	 */
 	@Test
 	public void test01_AddAppToContainer_LayoutOfPortalPage(){
-		String pageName = "Sniffportalnavigation01";
-		String category = "Collaboration";
-		String portletId = "Collaboration/AnswersPortlet";
+		String pageName = "page68876";
+		String category = "answer";
+		String portletId = "AnswersPortlet";
 		
 		info("Create page for portal with empty layout");
 		pageE.createNewPageEmptyLayout(pageName);
@@ -124,8 +124,8 @@ public class Gatein_Navigation_PortalNavigation_EditLayout extends PortalManagem
 		waitForAndGetElement(ELEMENT_PORTAL.replace("${siteName}", portalName));
 		
 		goToPortalEditLayout(portalName);
-		click(ELEMENT_CATEGORY_COLLABORATION);
-		dragAndDropToObject(ELEMENT_ANWSER_PORTLET, By.xpath("//*[text() = 'Portal Page']/.."));
+		click(ELEMENT_EDIT_PAGE_CATEGORY_MENU.replace("${categoryLabel}", "answer"));
+		dragAndDropToObject(By.xpath(pageMag.ELEMENT_PORTLET_ID.replace("${portletId}","AnswersPortlet")), By.xpath("//*[text() = 'Portal Page']/.."));
 		waitForAndGetElement("//*[@class='portletLayoutDecorator' and contains(text(),'Answers Portlet')]");
 		click(ELEMENT_SWITCH_VIEW_MODE_PORTAL);
 		waitForAndGetElement(ELEMENT_ANWSER_PORTLET_IN_VIEW_PAGE);
@@ -178,19 +178,18 @@ public class Gatein_Navigation_PortalNavigation_EditLayout extends PortalManagem
 		info("Create new page with application");
 		navTool.goToPageCreationWizard();
 		Map<String, String> portal = new HashMap<String, String>();
-		portal.put("Collaboration/AnswersPortlet", "Collaboration/WikiPortlet");
-		pageMag.addNewPageEditor(pageName, "", null, "Collaboration", portal, false, false);
+		portal.put("ContentListViewerPortlet", "FileExplorerPortlet");
+		pageMag.addNewPageEditor(pageName, "", null, "Content", portal, false, false);
 
 		navTool.goToEditPageEditor();
-		waitForAndGetElement(ELEMENT_PORTLET_1 + "//div[contains(text(),'Wiki Portlet')]");
+		waitForAndGetElement(ELEMENT_PORTLET_1 + "//div[contains(text(),'Content List')]");
 		mouseOver(ELEMENT_PORTLET_2, true);
 		if(this.plfVersion.contains("4.0"))
 			dragAndDropToObject(ELEMENT_PORTLET_2 + ELEMENT_PORTLET_DRAG_DROP_ICON, ELEMENT_PORTLET_1);
 		else 
 			dragAndDropToObject(ELEMENT_PORTLET_2 + ELEMENT_PORTLET_DRAG_DROP_ICON_PLF41, ELEMENT_PORTLET_1);
-		waitForAndGetElement(ELEMENT_PORTLET_1 + "//div[contains(text(),'Answers Portlet')]");
-		click(ELEMENT_SWITCH_VIEW_MODE);
-		waitForAndGetElement(ELEMENT_PORTLET_2 + "//*[@id='UIWikiPortlet']");
+		waitForAndGetElement(ELEMENT_PORTLET_1 + "//div[contains(text(),'Content Explorer')]");
+		waitForAndGetElement(ELEMENT_PORTLET_2 + "//div[contains(text(),'Content List')]");
 		click(ELEMENT_SWITCH_VIEW_MODE);
 		pageE.finishEditLayout();
 		
@@ -219,7 +218,7 @@ public class Gatein_Navigation_PortalNavigation_EditLayout extends PortalManagem
 		
 		info("Edit application when edit layout of page");
 		navTool.goToEditPageEditor();
-		pageE.selectCLVPath("General Drives/Sites Management/acme", "documents");
+		pageE.selectCLVPath("General Drives/Sites Management/intranet", "documents");
 		click(ELEMENT_SWITCH_VIEW_MODE);
 		waitForTextPresent("offices.jpg");
 		waitForTextPresent("metro.pdf");

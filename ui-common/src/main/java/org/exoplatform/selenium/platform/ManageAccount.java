@@ -129,7 +129,10 @@ public class ManageAccount extends PlatformBase {
 				type(ELEMENT_INPUT_LASTNAME, lastName, true);
 			}
 			if (email != null){
-				type(ELEMENT_INPUT_EMAIL, email, true);
+				if(isElementPresent(ELEMENT_INPUT_EMAIL_PROFILE_FORM))
+					type(ELEMENT_INPUT_EMAIL_PROFILE_FORM, email, true);
+				else
+					type(ELEMENT_INPUT_EMAIL, email, true);
 			}
 			if (displayName != null){
 				type(ELEMENT_INPUT_DISPLAY_NAME, displayName, true);
@@ -191,10 +194,10 @@ public class ManageAccount extends PlatformBase {
 
 		if (verify) {
 			Utils.pause(10000);
-			waitForMessage("You have registered a new account.");
+			waitForMessage("You have registered a new account.",300000);
 			dialog.closeMessageDialog();
 		}
-		Utils.pause(1000);
+		Utils.pause(10000);
 	}
 
 	//Add a new user account in public mode

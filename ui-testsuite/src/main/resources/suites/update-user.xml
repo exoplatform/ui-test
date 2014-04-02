@@ -13,6 +13,11 @@
           			<include name="test02_UpdateUserAccount"/>
         		</methods>
       		</class>
+      		<class name="org.exoplatform.selenium.community.Community_Create_DataTest">
+        		<methods>
+          			<include name="Create_Data_Test"/>
+        		</methods>
+      		</class>
 		</classes>
 	</test>
 	<listeners>

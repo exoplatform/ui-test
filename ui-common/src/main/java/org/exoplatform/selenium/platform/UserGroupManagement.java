@@ -20,6 +20,7 @@ public class UserGroupManagement extends PlatformBase {
 		this.plfVersion = plfVersion.length>0?plfVersion[0]:"4.0";
 		driver = dr;
 		naviTool = new NavigationToolbar(driver);
+		button = new Button(dr, this.plfVersion);
 
 	}
 	Dialog dialog;
@@ -31,6 +32,7 @@ public class UserGroupManagement extends PlatformBase {
 	public  final String MESSAGE_DUPLICATE_GROUPS = "in the group \"${groupName}\", please select another one.";
 	public  final String ELEMENT_USER_INGROUP_DELETE_ICON = "//*[@id='UIGridUser']//span[text()='${userName}']/parent::td/parent::tr/td[@class='center actionContainer']//i[@class='uiIconDeleteUser uiIconLightGray']";
 	public final String ELEMENT_USER_MEMBERSHIP_TAB_DELETE_ICON = "//*[@class='uiIconDeleteMembership uiIconLightGray']";
+	public final String ELEMENT_USER_GROUP_DELETE_ICON = "//*[@id='UIGridUser']//span[text()='${userName}']/parent::td/parent::tr//span[contains(text(),'${membership}')]/../../td[@class='center actionContainer']//i[@class='uiIconDeleteUser uiIconLightGray']";
 	public final String ELEMENT_USER_MEMBERSHIP_TAB_DELETE_ICON_NO = "//*[@id='MembershipGrid']//tbody/tr[${No}]//*[@class='uiIconDeleteMembership uiIconLightGray']";
 	public String ELEMENT_GROUP_MANAGEMENT_TAB_USER_EDIT_ICON = "//*[@id='UIGridUser']//span[text()='${userName}']/parent::td/parent::tr/td[@class='center actionContainer']//i[@class='uiIconEdit uiIconLightGray']";
 	public String ELEMENT_GROUP_MANAGEMENT_TAB_MEMBERSHIP_COMBO_BOX_CHOICE = "//*[@id='UIGroupEditMembershipForm']//select[@name='membership']/option[text()='${membership}']";
@@ -38,7 +40,10 @@ public class UserGroupManagement extends PlatformBase {
 	public String ELEMENT_GROUP_MANAGEMENT_TAB_MEMBERSHIP_SAVE_BUTTON = "//*[@id='UIGroupEditMembershipForm']//button[text()='Save']";
 	public String ELEMENT_GROUP_MANAGEMENT_TAB_MEMBERSHIP = "//*[@id='UIGridUser']//span[text()='${username}']/parent::td/parent::tr/td[4]/span[text()='${membership}']";
 
+	public String ELEMENT_FIRST_PAGE = "//div[@class='pagination uiPageIterator clearfix']//a[text()='1']";
+	public String ELEMENT_ACTIVE_FIRST_PAGE = "//div[@class='pagination uiPageIterator clearfix']//li[@class='active']//a[text()='1']";
 	public final String ELEMENT_MEMBERSHIP_MANAGEMENT_TAB_FAIL_DEL_MSG = "//span[contains(text(),'You cannot delete this membership because it is mandatory.')]";
+	public By ELEMENT_PAGE_TOTAL_NUMBER = By.className("pagesTotalNumber");
 	//User Management -> Edit User form
 	public  final By ELEMENT_USER_MEMBERSHIP_TAB = By.xpath("//*[text()='User Membership']");
 	public final String ELEMENT_GROUP_PERMISSION = "//a[@title='${groupName}']";
@@ -79,6 +84,7 @@ public class UserGroupManagement extends PlatformBase {
 		dialog = new Dialog(driver);
 		alert = new ManageAlert(driver);
 		button = new Button(driver);
+		searchUser(username, "User Name");
 		String userDeleteIcon = ELEMENT_USER_DELETE_ICON.replace("${username}", username);
 		info("--Deleting user " + username + "--");
 		if (waitForAndGetElement("//*[contains(text(),'Total pages')]",DEFAULT_TIMEOUT,0) != null) {
@@ -86,7 +92,7 @@ public class UserGroupManagement extends PlatformBase {
 		}
 		Utils.pause(500);
 		click(userDeleteIcon);
-		alert.waitForConfirmation("Are you sure you want to delete " + username + " user?");
+		alert.waitForConfirmation("Are you sure you want to delete " + username + " user?",300000);
 		Utils.pause(1000);
 		type(ELEMENT_INPUT_SEARCH_USER_NAME, username, true);
 
@@ -533,6 +539,38 @@ public class UserGroupManagement extends PlatformBase {
 			waitForAndGetElement(ELEMENT_GROUP_USER_IN_TABLE.replace("${username}", user)); 
 		} else {
 			waitForAndGetElement(ELEMENT_GROUP_SEARCH_USER_NO_RESULT_MSG);
+		}
+	}
+	
+	/**
+	 * check membership of a user
+	 * @param userName
+	 * @param membership
+	 * @return
+	 */
+	public boolean checkUserInGroup(String userName, String membership){
+		int numPage =  1;
+		if(waitForAndGetElement(ELEMENT_PAGE_TOTAL_NUMBER,5000,0) != null){
+			numPage =  Integer.parseInt(waitForAndGetElement(ELEMENT_PAGE_TOTAL_NUMBER).getText());
+			for(int i = 0; i < numPage; i++){
+				if(waitForAndGetElement(ELEMENT_USER_GROUP_DELETE_ICON.replace("${membership}", membership).replace("${userName}", userName),5000,0) != null)
+					return true;
+				click(ELEMENT_NEXT_PAGE_ICON);
+			}
+		}
+		if(waitForAndGetElement(ELEMENT_USER_GROUP_DELETE_ICON.replace("${membership}", membership).replace("${userName}", userName),5000,0) != null)
+			return true;
+		else
+			return false;
+	}
+
+	/**
+	 * Go to first page
+	 */
+	public void goToFirstPage(){
+		if(waitForAndGetElement(ELEMENT_FIRST_PAGE, 3000,0) != null){
+			click(ELEMENT_FIRST_PAGE);
+			waitForAndGetElement(ELEMENT_ACTIVE_FIRST_PAGE);
 		}
 	}
 }

@@ -104,7 +104,6 @@ public class PLF_UnifiedSearch extends Template {
 		magQuest = new AnswerManageQuestion(driver, this.plfVersion);
 		navMag = new NavigationManagement(driver, this.plfVersion);
 		ecms = new EcmsBase(driver, this.plfVersion);
-
 		magAcc.signIn(DATA_USER1, DATA_PASS);
 	}
 

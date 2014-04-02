@@ -51,14 +51,14 @@ public class Gatein_Manage_Portal extends PortalManagement{
 		
 		info("Add new portal");
 		Map<String, String> permissions = null;
-		String editGroupId = "Platform /Content Management ";
+		String editGroupId = "Platform/Administration";
 		String editMembership = "*" ;
 		navTool.goToPortalSites();
 		addNewPortal(portalName, null, null, "French", null, "Always", true, permissions, editGroupId, editMembership);
 		waitForAndGetElement("//*[@class='siteName' and text()='" + portalName + "']");
 		
 		info("Switch to new portal");
-		driver.get("http://localhost:8080/portal/" + portalName);
+		driver.get(baseUrl+"/" + portalName);
 		waitForAndGetElement("//img[contains(@src, 'sites/" + portalName + "')]");
 		
 		info("Delete portal");

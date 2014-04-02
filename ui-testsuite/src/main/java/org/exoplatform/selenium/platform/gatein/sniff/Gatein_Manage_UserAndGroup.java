@@ -61,7 +61,7 @@ public class Gatein_Manage_UserAndGroup extends PlatformBase{
 		
 		navTool.goToNewStaff();
 		info("Create new user");
-		magAc.addNewUserAccount(username, password, password, firstName, lastName, displayName, email, null, null, true);
+		magAc.addNewUserAccount(username, password, password, firstName, lastName, displayName, email, null, null, false);
 		
 		info("Edit user information");
 		navTool.goToUsersAndGroupsManagement();

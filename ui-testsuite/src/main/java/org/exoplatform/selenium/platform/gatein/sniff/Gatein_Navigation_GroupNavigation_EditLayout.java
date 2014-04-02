@@ -53,7 +53,7 @@ public class Gatein_Navigation_GroupNavigation_EditLayout extends GroupNavigatio
 	 */
 	@Test
 	public void test01_AddEditRemoveAppWhenEditLayout_GroupPage(){
-		String pageName = "Sniffgroupnavigationlayout01";
+		String pageName = "page70563";
 		
 		info("Add new page of group");
 		navTool.goToSiteExplorer();
@@ -70,7 +70,7 @@ public class Gatein_Navigation_GroupNavigation_EditLayout extends GroupNavigatio
 		
 		info("Edit application when edit layout of page");
 		navTool.goToEditPageEditor();
-		pageE.selectCLVPath("General Drives/Sites Management/acme", "documents");
+		pageE.selectCLVPath("General Drives/Sites Management/intranet", "documents");
 		click(ELEMENT_SWITCH_VIEW_MODE);
 		waitForTextPresent("offices.jpg");
 		waitForTextPresent("metro.pdf");
@@ -92,7 +92,7 @@ public class Gatein_Navigation_GroupNavigation_EditLayout extends GroupNavigatio
 	 */
 	@Test
 	public void test02_MoveAppWhenEditLayout_GroupPage(){
-		String pageName = "Sniffgroupnavigationlayout02";
+		String pageName = "page68875";
 		String ELEMENT_PORTLET_1 = "//*[contains(@id, 'UIPortlet')][1]";
 		String ELEMENT_PORTLET_2 = "//*[contains(@id, 'UIPortlet')][2]";
 		
@@ -100,11 +100,11 @@ public class Gatein_Navigation_GroupNavigation_EditLayout extends GroupNavigatio
 		navTool.goToSiteExplorer();
 		navTool.goToPageCreationWizard();
 		Map<String, String> portal = new HashMap<String, String>();
-		portal.put("Collaboration/AnswersPortlet", "Collaboration/WikiPortlet");
-		pageMag.addNewPageEditor(pageName, "", null, "Collaboration", portal, false, false);
+		portal.put("AnswersPortlet", "FAQPortlet");
+		pageMag.addNewPageEditor(pageName, "", null, "answer", portal, false, false);
 
 		navTool.goToEditPageEditor();
-		waitForAndGetElement(ELEMENT_PORTLET_1 + "//div[contains(text(),'Wiki Portlet')]");
+		waitForAndGetElement(ELEMENT_PORTLET_1 + "//div[contains(text(),'FAQPortlet')]");
 		mouseOver(ELEMENT_PORTLET_2, true);
 		if(this.plfVersion.contains("4.0"))
 			dragAndDropToObject(ELEMENT_PORTLET_2 + ELEMENT_PORTLET_DRAG_DROP_ICON, ELEMENT_PORTLET_1);
@@ -112,7 +112,7 @@ public class Gatein_Navigation_GroupNavigation_EditLayout extends GroupNavigatio
 			dragAndDropToObject(ELEMENT_PORTLET_2 + ELEMENT_PORTLET_DRAG_DROP_ICON_PLF41, ELEMENT_PORTLET_1);
 		waitForAndGetElement(ELEMENT_PORTLET_1 + "//div[contains(text(),'Answers Portlet')]");
 		click(ELEMENT_SWITCH_VIEW_MODE);
-		waitForAndGetElement(ELEMENT_PORTLET_2 + "//*[@id='UIWikiPortlet']");
+		waitForAndGetElement(ELEMENT_PORTLET_2 + "//div[contains(text(),'FAQPortlet')]");
 		click(ELEMENT_SWITCH_VIEW_MODE);
 		pageE.finishEditLayout();
 		
@@ -125,7 +125,7 @@ public class Gatein_Navigation_GroupNavigation_EditLayout extends GroupNavigatio
 	 */
 	@Test
 	public void test03_AddEditMoveDeleteContainerWhenEditLayout_GroupPage(){
-		String pageName = "Sniffgroupnavigationlayout03";
+		String pageName = "page70567";
 		String containerTitle = "test06ContainerTitle";
 		String newContainerPos = "//*[@class='UIRowContainer']/div[2]";
 		
@@ -186,8 +186,8 @@ public class Gatein_Navigation_GroupNavigation_EditLayout extends GroupNavigatio
 	 */
 	@Test
 	public void test04_ViewPropertiesWhenEditLayout_GroupPage(){
-		String pageName = "Sniffgroupnavigationlayout04";
-		String newtitle = "Newtitlepage04";
+		String pageName = "page68873";
+		String newtitle = "page68873";
 		
 		navTool.goToSiteExplorer();
 		pageE.createNewPageEmptyLayout(pageName);
@@ -195,7 +195,7 @@ public class Gatein_Navigation_GroupNavigation_EditLayout extends GroupNavigatio
 		
 		info("View page's properties");
 		click(pageE.ELEMENT_VIEW_PAGE_PROPERTIES);
-		waitForAndGetElement(pageE.ELEMENT_OWNERTYPE_SELECTED.replace("${ownerType}", "group"));
+		waitForAndGetElement(pageE.ELEMENT_OWNERTYPE_SELECTED.replace("${ownerType}", "group"), 300000);
 		waitForAndGetElement("//*[@id='title' and @value = '" + pageName + "']");
 		
 		info("Edit properties of page");
@@ -203,17 +203,17 @@ public class Gatein_Navigation_GroupNavigation_EditLayout extends GroupNavigatio
 		click(ELEMENT_PERMISSION_SETTING_TAB);
 		click(ELEMENT_EDIT_PERMISSION_SETTING);
 		setEditPermissions("Development ", "*");
-		but.save();
+		click(pageE.ELEMENT_SAVE_VIEW_PROPERTIES);
 		waitForElementNotPresent(ELEMENT_EDIT_PERMISSION_SETTING);
 		pageE.finishEditLayout();
 		
 		navTool.goToEditPageEditor();
 		click(pageE.ELEMENT_VIEW_PAGE_PROPERTIES);
-		waitForAndGetElement("//*[@id='title' and @value = '" + newtitle + "']");
+		waitForAndGetElement("//*[@id='title' and @value = '" + newtitle + "']", 300000);
 		click(ELEMENT_PERMISSION_SETTING_TAB);
 		click(ELEMENT_EDIT_PERMISSION_SETTING);
 		waitForTextPresent("/developers");
-		but.cancel();
+		click(pageE.ELEMENT_CANCEL_VIEW_PROPERTIES);
 		waitForElementNotPresent(ELEMENT_EDIT_PERMISSION_SETTING);
 		pageE.finishEditLayout();
 		

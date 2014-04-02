@@ -194,6 +194,18 @@
 			</properties>
 		</profile>
 		<profile>
+			<id>gatein-sniff-part1</id>
+			<properties>
+				<testSuite>gatein-sniff-part1.xml</testSuite>
+			</properties>
+		</profile>
+		<profile>
+			<id>gatein-sniff-part2</id>
+			<properties>
+				<testSuite>gatein-sniff-part2.xml</testSuite>
+			</properties>
+		</profile>
+		<profile>
 			<id>forum-sniff</id>
 			<properties>
 				<testSuite>forum-sniff.xml</testSuite>

@@ -57,7 +57,6 @@ public class PLF_Navigation_TopNavigation extends BasicAction {
 		mngFru = new ForumManageForum(driver, this.plfVersion);
 		actBar = new ActionBar(driver, this.plfVersion);
 		ecms = new EcmsBase(driver, this.plfVersion);
-
 		magAcc.signIn(DATA_USER1, DATA_PASS);
 	}
 

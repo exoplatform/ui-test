@@ -30,6 +30,7 @@ public class GateIn_BasicPortlets_Administration_ApplicationRegistry extends Das
 	PageManagement pageMag;
 	PageEditor pageE;
 	ManageApplications magApp;
+	Button button;
 
 	@BeforeMethod
 	public void setUpBeforeTest(){

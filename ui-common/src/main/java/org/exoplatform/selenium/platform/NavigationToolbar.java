@@ -82,7 +82,7 @@ public class NavigationToolbar extends PlatformBase {
 			}
 			info("Retry...[" + repeat + "]");
 		}
-		waitForAndGetElement(ELEMENT_MANAGE_SITE_TITLE);
+		waitForAndGetElement(ELEMENT_MANAGE_SITE_TITLE,60000);
 	}
 
 	//Go to Portal Manage Pages	
@@ -250,6 +250,7 @@ public class NavigationToolbar extends PlatformBase {
 
 	public void goToEditPageEditor () {
 		info("----Go to Edit page editor----");
+		driver.navigate().refresh();
 		String id = waitForAndGetElement(By.xpath("//*[@class='UIPage']")).getAttribute("id").replace("UIPage-", "");
 		((JavascriptExecutor)driver).executeScript("javascript:ajaxGet(eXo.env.server.createPortalURL('" + id + "', 'EditCurrentPage', true));");
 		Utils.pause(500);

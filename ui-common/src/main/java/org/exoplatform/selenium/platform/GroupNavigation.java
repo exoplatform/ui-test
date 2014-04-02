@@ -18,12 +18,14 @@ public class GroupNavigation extends PlatformBase {
 	public final By ELEMENT_MANAGE_NAVIGATION_POPUP = By.xpath("//*[text()='Navigation Management']");
 	public final String ELEMENT_GROUP_NAME = "//*[@class='siteName' and text()='${groupName}']";
 	public final String ELEMENT_DELETE_NAVIGATION_ICON = "//*[text()='${groupName}']/../..//*[text()='Delete Navigation']";
-	public final String ELEMENT_EDIT_PROPERTIES_ICON = "//*[text()='${groupName}']/../..//*[text()='Edit Properties']";
+	public final String ELEMENT_EDIT_PROPERTIES_ICON = "//*[text()='${groupName}' or @title='${groupName}']/../..//*[text()='Edit Properties']";
 	//public final String ELEMENT_EDIT_NAVIGATION_ICON = "//*[text()='${groupName}']/../..//*[text()='Edit Navigation']";
 	public final String ELEMENT_NAVIGATION_NODE = "//a[contains(text(),'${nodeName}')]"; 
 	public final String ELEMENT_GROUP_TITLE = "//div[@title='${groupTitle}']"; 
 	public final String ELEMENT_GROUP_NAVIGATION_POSITION = "//*[@id='UIGroupNavigationGrid']/table[${index}]/tbody/tr[${number}]" + ELEMENT_GROUP_TITLE;
-
+	public final By ELEMENT_GROUP_NAVIGATION_TABLE = By.xpath("//*[@id='UIGroupNavigationGrid']//table");
+	public final String ELEMENT_GROUP_NAVIGATION_TABLE_INDEX = "//*[@id='UIGroupNavigationGrid']//table[${index}]//div[@title='/platform/administrators']";
+	public final String ELEMENT_GROUP_NAVIGATION_INDEX_IN_TABLE = "//*[@id='UIGroupNavigationGrid']//table[${index}]/tbody/tr";
 	public final By ELEMENT_GROUP_ADD_NAVIGATION_BUTTON = By.linkText("Add Navigation");
 
 	//Click on [Edit Properties] icon
@@ -152,9 +154,10 @@ public class GroupNavigation extends PlatformBase {
 			type(ELEMENT_INPUT_PAGE_TITLE, pageTitle, true);
 			select(ELEMENT_SELECT_SEARCH_OPTION, option);
 			click(pageMag.ELEMENT_PAGE_MANAGEMENT_SEARCH_BUTTON);
-			click(ELEMENT_SELECT_SEARCHED_PAGE);
-		}	
-		button.save();
+			click(ELEMENT_SELECT_SEARCHED_PAGE_BY_PAGETITLE.replace("${pageTitle}", pageTitle));
+		}
+		click(ELEMENT_SAVE_EDIT_PAGE_FORM);
+		Utils.pause(1000);
 		if(!nodeLabel.isEmpty()){
 			waitForAndGetElement(ELEMENT_NODE_LINK.replace("${nodeLabel}", nodeLabel));
 		}
