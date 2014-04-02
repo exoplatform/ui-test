@@ -72,6 +72,7 @@ public class PeopleSearch extends SocialBase{
 		}
 		Utils.pause(1000);
 	}
+	
 //	/**
 //	 * 
 //	 * @param type: Search by Name/Role/Skill or Directory

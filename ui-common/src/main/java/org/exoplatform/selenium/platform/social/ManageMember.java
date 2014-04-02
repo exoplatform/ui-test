@@ -240,6 +240,7 @@ public class ManageMember extends SpaceManagement {
 		info("-- Joining the open space: " + spaceName);
 		int iTimeout = params.length > 0 ? params[0] : DEFAULT_TIMEOUT;
 		goToAllSpaces();
+		spSeach.searchSpaceByName(spaceName, true);
 		doAction("Join", spaceName);
 		waitForAndGetElement(By.xpath("//*[@class='spaceTitle']/text()['(Member)']/../a[text()='"+ spaceName +"']"), iTimeout);
 		Utils.pause(1000);
@@ -285,18 +286,28 @@ public class ManageMember extends SpaceManagement {
 		waitForAndGetElement(ELEMENT_SELECT_MEMBER_FORM);
 		switch (userName) {
 		case ROOT:
+			type(ELEMENT_GROUP_SEARCH_USER_SEARCH_INPUT, USER_ROOT, true);
+			click(ELEMENT_GROUP_SEARCH_USER_SEARCH_ICON);
 			addUserToSpace(true, "Root");
 			break;
 		case ADMIN:
+			type(ELEMENT_GROUP_SEARCH_USER_SEARCH_INPUT, DATA_USER1, true);
+			click(ELEMENT_GROUP_SEARCH_USER_SEARCH_ICON);
 			addUserToSpace(false, "John");
 			break;
 		case AUTHOR:
+			type(ELEMENT_GROUP_SEARCH_USER_SEARCH_INPUT, DATA_USER3, true);
+			click(ELEMENT_GROUP_SEARCH_USER_SEARCH_ICON);
 			addUserToSpace(false, "James");
 			break;	
 		case DEVELOPER:
+			type(ELEMENT_GROUP_SEARCH_USER_SEARCH_INPUT, DATA_USER5, true);
+			click(ELEMENT_GROUP_SEARCH_USER_SEARCH_ICON);
 			addUserToSpace(false, "Jack");
 			break;	
 		case PUBLISHER:
+			type(ELEMENT_GROUP_SEARCH_USER_SEARCH_INPUT, DATA_USER2, true);
+			click(ELEMENT_GROUP_SEARCH_USER_SEARCH_ICON);
 			addUserToSpace(false, "Mary");
 			break;	
 		default:
@@ -345,6 +356,9 @@ public class ManageMember extends SpaceManagement {
 		goToMembers(spaceName);
 		click(ELEMENT_SELECT_MEMBER_BUTTON);
 		waitForAndGetElement(ELEMENT_SELECT_MEMBER_FORM);
+		//info("-- Searching user: " + userName);
+		//type(ELEMENT_GROUP_SEARCH_USER_SEARCH_INPUT, userName, true);
+		//click(ELEMENT_GROUP_SEARCH_USER_SEARCH_ICON);
 		if (userRoot){
 			check(By.xpath(ELEMENT_SELECTED_USER_BOX.replace("${username}", userName)),2);
 			button.add();

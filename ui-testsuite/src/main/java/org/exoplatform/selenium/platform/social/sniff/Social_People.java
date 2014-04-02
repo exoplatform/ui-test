@@ -22,7 +22,6 @@ import org.testng.annotations.Test;
  * @date 24/09/2013
  *
  */
-
 public class Social_People extends SocialBase {
 	//Platform
 	ManageAccount magAcc;
@@ -35,10 +34,10 @@ public class Social_People extends SocialBase {
 	PeopleSearch peoSearch;
 	
 	String user = "John Smith";
-	String user1="Mary Williams";
-	String user2="Jack Miller";
-	String user3="James Davis";
-	String user4="Root Root";
+	String user1 = "Mary Williams";
+	String user2 = "Jack Miller";
+	String user3 = "James Davis";
+	String user4 = "Root Root";
 	String user_login1 = "mary";
 	String user_login2 = "demo";
 
@@ -46,14 +45,14 @@ public class Social_People extends SocialBase {
 	public void beforeMethods() {
 		initSeleniumTest();
 		driver.get(baseUrl);
-		info("Login with " + DATA_USER_JOHN);
+		info("Login with " + DATA_USER1);
 		magAcc = new ManageAccount(driver);
 		navToolBar = new NavigationToolbar(driver);
 		activity = new HomePageActivity(driver);
 		peoConn = new PeopleConnection(driver);
 		peoPro = new PeopleProfile(driver);
 		peoSearch = new PeopleSearch(driver);
-		magAcc.signIn(DATA_USER_JOHN, DATA_PASS);
+		magAcc.signIn(DATA_USER1, DATA_PASS);
 	}
 
 	@AfterMethod
@@ -68,7 +67,7 @@ public class Social_People extends SocialBase {
 	 * This test case is not included in qmetry
 	 * Purpose of selenium test case: verify bug: https://jira.exoplatform.org/browse/PLF-4862
 	 */
-	@Test
+	//@Test
 	public void test00_VerifyMouseOver(){
 		mouseOver(ELEMENT_ACCOUNT_NAME_LINK, true);
 		mouseOver(ELEMENT_TOOLBAR_NETWORKS_ICON, true);
@@ -132,9 +131,13 @@ public class Social_People extends SocialBase {
 		navToolBar.goToConnectionPage();
 
 		//Show all users on Social and user can send friend request to connect with other users
+		peoSearch.searchPeople(false, user1);
 		waitForAndGetElement(peoConn.ELEMENT_PEOPLE_SEARCH.replace("${peopleName}", user1));
+		peoSearch.searchPeople(false, user2);
 		waitForAndGetElement(peoConn.ELEMENT_PEOPLE_SEARCH.replace("${peopleName}", user2));
+		peoSearch.searchPeople(false, user3);
 		waitForAndGetElement(peoConn.ELEMENT_PEOPLE_SEARCH.replace("${peopleName}", user3));
+		peoSearch.searchPeople(false, user4);
 		waitForAndGetElement(peoConn.ELEMENT_PEOPLE_SEARCH.replace("${peopleName}", user4));
 	}
 

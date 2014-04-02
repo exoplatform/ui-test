@@ -32,7 +32,7 @@ public class Community_Create_Users extends PlatformBase{
 		navBar = new NavigationToolbar(driver);
 		userGroup = new UserGroupManagement(driver);
 		button = new Button(driver, plfVersion);
-		info("== Creating users to eXo Cloud ==");
+		info("== Updating users for Community Sites ==");
 	}
 
 	@AfterMethod

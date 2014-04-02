@@ -3,6 +3,7 @@ package org.exoplatform.selenium.platform.wiki;
 import static org.exoplatform.selenium.TestLogger.info;
 
 import org.exoplatform.selenium.Dialog;
+import org.exoplatform.selenium.Utils;
 import org.exoplatform.selenium.platform.ManageAccount;
 import org.openqa.selenium.By;
 
@@ -45,9 +46,12 @@ public class Permalink extends BasicAction {
 		magAc = new ManageAccount(driver,this.plfVersion);
 		
 		info("Check permalink with user " + user);
-		driver.get(permalink);
+		//driver.get(permalink);
 		magAc.signIn(user, DATA_PASS);
-		
+		Utils.pause(3000);
+		driver.get(permalink);
+		Utils.pause(1000);
+		driver.navigate().refresh();
 		if (permission){
 			waitForTextPresent(content);
 		}else {

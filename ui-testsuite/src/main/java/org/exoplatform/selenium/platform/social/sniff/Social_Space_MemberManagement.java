@@ -33,12 +33,12 @@ public class Social_Space_MemberManagement extends Activity{
 	public void beforeMethods() {
 		initSeleniumTest();
 		driver.get(baseUrl);
-		info("Login with " + DATA_USER_JOHN);
+		info("Login with " + DATA_USER1);
 		magAcc = new ManageAccount(driver,this.plfVersion);
 		magMember = new ManageMember(driver,this.plfVersion);
 		spaceMag = new SpaceManagement(driver,this.plfVersion);
 
-		magAcc.signIn(DATA_USER_JOHN, DATA_PASS);
+		magAcc.signIn(DATA_USER1, DATA_PASS);
 	}
 
 	@AfterMethod
@@ -100,7 +100,7 @@ public class Social_Space_MemberManagement extends Activity{
 	@Test
 	public void test02_InviteAcceptUserToSpace(){
 		//Declare variable
-		String spaceName = "space67670";
+		String spaceName = "space676700";
 
 		//Create data
 		//Add new space

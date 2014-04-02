@@ -28,11 +28,11 @@ public class Social_Space_Search extends SocialBase {
 	public void beforeMethods() {
 		initSeleniumTest();
 		driver.get(baseUrl);
-		info("Login with " + DATA_USER_JOHN);
+		info("Login with " + DATA_USER1);
 		magAcc = new ManageAccount(driver);
 		magMember = new ManageMember(driver);
 		spaceSearch = new SpaceSearch(driver);
-		magAcc.signIn(DATA_USER_JOHN, DATA_PASS);
+		magAcc.signIn(DATA_USER1, DATA_PASS);
 	}
 
 	@AfterMethod
@@ -79,5 +79,4 @@ public class Social_Space_Search extends SocialBase {
 		magMember.deleteSpace(spaceName1,300000);
 		magMember.deleteSpace(spaceName2,300000);
 	}
-
 }

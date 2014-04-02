@@ -31,11 +31,11 @@ public class PeopleConnection extends SocialBase {
 	public final By ELEMENT_MY_CONNECTIONS_TAB = By.linkText("My Connections");
 	public final By ELEMENT_EVERYONE_TAB = By.linkText("Everyone");
 	public final By ELEMENT_REQUEST_SENT_TAB = By.linkText("Requests Sent");
-	public final String ELEMENT_CONNECTION_BUTTON = "//a[text()='${peopleName}']/ancestor::div[@class='spaceBox pull-left']//button[contains(text(),'Connect')]";
-public final String ELEMENT_CANCEL_REQUEST_BUTTON = "//a[text()='${peopleName}']/ancestor::div[@class='spaceBox pull-left']//button[contains(text(),'Cancel Request')]";
-public final String ELEMENT_REMOVE_CONNECTION_BUTTON = "//a[text()='${peopleName}']/ancestor::div[@class='spaceBox pull-left']//button[contains(text(),'Remove Connection')]";
-public final String ELEMENT_CONFIRM_BUTTON = "//a[text()='${peopleName}']/ancestor::div[@class='spaceBox pull-left']//button[contains(text(),'Confirm')]";
-public final String ELEMENT_IGNORE_BUTTON = "//*[@data-original-title='${peopleName}']/../..//*[text()='Ignore']";
+	public final String ELEMENT_CONNECTION_BUTTON = "//*[contains(text(), '${peopleName}')]/ancestor::div[@class='spaceBox pull-left']//button[contains(text(),'Connect')]";
+	public final String ELEMENT_CANCEL_REQUEST_BUTTON = "//*[contains(text(),'${peopleName}')]/ancestor::div[@class='spaceBox pull-left']//button[contains(text(),'Cancel Request')]";
+	public final String ELEMENT_REMOVE_CONNECTION_BUTTON = "//*[contains(text(),'${peopleName}')]/ancestor::div[@class='spaceBox pull-left']//button[contains(text(),'Remove Connection')]";
+	public final String ELEMENT_CONFIRM_BUTTON = "//a[text()='${peopleName}']/ancestor::div[@class='spaceBox pull-left']//button[contains(text(),'Confirm')]";
+	public final String ELEMENT_IGNORE_BUTTON = "//*[@data-original-title='${peopleName}']/../..//*[text()='Ignore']";
 	//public final String ELEMENT_IGNORE_BUTTON = "//*[@data-original-title='${peopleName}']/../..//*[text()='Ignore']";
 	public final String ELEMENT_CONNECT_LIST = "//*[text()='Connect']";
 	public final String ELEMENT_PEOPLE_SEARCH = "//*[@class='uiProfileUserSearch']/..//*[text()='${peopleName}']";
@@ -47,23 +47,45 @@ public final String ELEMENT_IGNORE_BUTTON = "//*[@data-original-title='${peopleN
 	 * Connect to people
 	 * @param peopleName: name of selected people (String)
 	 */
-	public void connectPeople (String peopleName) {
-		info("-- Connect to: " + peopleName);
+	public void connectPeople(String peopleName){
+		//info("-- Connect to: " + peopleName);
 		//By ELEMENT_CONNECT_BUTTON = By.xpath("//div/a[text()='"+peopleName+"']/following::ul/li/a[@title='Connect']");
 		//By ELEMENT_CONNECT_BUTTON = By.xpath(ELEMENT_CONNECTION.replace("${peopleName}", peopleName) + "/../../ul/li/a[@title='Connect']");
 		//By ELEMENT_CANCEL_REQUEST_BUTTON = By.xpath("//div/a[text()='"+peopleName+"']/following::ul/li/a[@title='Cancel Request']");
 		//By ELEMENT_CANCEL_REQUEST_BUTTON = By.xpath(ELEMENT_CONNECTION.replace("${peopleName}", peopleName) + "/../../ul/li[2]/a[@title='Cancel Request']");
 		info("-- Connect the user: " + peopleName);
-		if(waitForAndGetElement(ELEMENT_EVERYONE_TAB,5000,0)==null){
+		/*if(waitForAndGetElement(ELEMENT_EVERYONE_TAB, 3000,0)==null){
 			info("----Go to My connections----");
 			goToMyConnections();
 			info("---Click  every one tab-----");
 			click(ELEMENT_EVERYONE_TAB);
 		}
-		else
+		else{
 			click(ELEMENT_EVERYONE_TAB);
+		}*/
+		//info("-----Click connect to people-----");
+		//waitForAndGetElement(ELEMENT_CONNECTION_BUTTON.replace("${peopleName}", peopleName));
+		//click(ELEMENT_CONNECTION_BUTTON.replace("${peopleName}", peopleName));
+		//info("---Verify Connect button is disappeared----");
+		//waitForElementNotPresent(ELEMENT_CONNECTION_BUTTON.replace("${peopleName}", peopleName));
+		//info("-----Verify Cancel request button is displayed-----");
+		//waitForAndGetElement(ELEMENT_CANCEL_REQUEST_BUTTON.replace("${peopleName}", peopleName));
+		//waitForAndGetElement(ELEMENT_EVERYONE_TAB_ACTIVE, 80000);
+        
+		peoSearch.searchPeople(false,peopleName);
+		waitForAndGetElement(By.linkText(peopleName));
 		info("-----Click connect to people-----");
-	//	waitForAndGetElement(ELEMENT_CONNECTION_BUTTON.replace("${peopleName}", peopleName));
+		if (waitForAndGetElement(ELEMENT_CANCEL_REQUEST_BUTTON.replace("${peopleName}", peopleName), 3000, 0) != null){
+			info("cancel connection request");
+			click(ELEMENT_CANCEL_REQUEST_BUTTON.replace("${peopleName}", peopleName));
+			Utils.pause(1000);
+		}
+		if (waitForAndGetElement(ELEMENT_REMOVE_CONNECTION_BUTTON.replace("${peopleName}", peopleName), 3000, 0) != null){
+			info("remove connection");
+			click(ELEMENT_REMOVE_CONNECTION_BUTTON.replace("${peopleName}", peopleName));
+			Utils.pause(1000);
+		}
+		waitForAndGetElement(ELEMENT_CONNECTION_BUTTON.replace("${peopleName}", peopleName));
 		click(ELEMENT_CONNECTION_BUTTON.replace("${peopleName}", peopleName));
 		info("---Verify Connect button is disappeared----");
 		waitForElementNotPresent(ELEMENT_CONNECTION_BUTTON.replace("${peopleName}", peopleName));
@@ -77,7 +99,7 @@ public final String ELEMENT_IGNORE_BUTTON = "//*[@data-original-title='${peopleN
 	 */
 	public void acceptInvitation (String peopleName) {
 		info("-- Accept the invitation: " + peopleName);
-		if(waitForAndGetElement(ELEMENT_REQUESTS_RECEIVED_TAB,5000,0)==null){
+		if(waitForAndGetElement(ELEMENT_REQUESTS_RECEIVED_TAB, 3000,0)==null){
 			info("----Go to My connections----");
 			goToMyConnections();
 			info("---Click Requests Received tab-----");
@@ -100,7 +122,7 @@ public final String ELEMENT_IGNORE_BUTTON = "//*[@data-original-title='${peopleN
 	 */
 	public void ignoreInvitation (String peopleName) {
 		info("-- Ignore the invitation from: " + peopleName);
-		if(waitForAndGetElement(ELEMENT_REQUESTS_RECEIVED_TAB,5000,0)==null){
+		if(waitForAndGetElement(ELEMENT_REQUESTS_RECEIVED_TAB, 3000,0)==null){
 			info("----Go to My connections----");
 			goToMyConnections();
 			info("---Click Requests Received tab-----");
@@ -112,9 +134,10 @@ public final String ELEMENT_IGNORE_BUTTON = "//*[@data-original-title='${peopleN
 		info("---Ignore the invitation from user '"+peopleName+"'-----");
 		click(ELEMENT_IGNORE_BUTTON.replace("${peopleName}", peopleName));
 		waitForElementNotPresent(ELEMENT_IGNORE_BUTTON.replace("${peopleName}", peopleName));
-		info("---Go to Everyone tab----");
-		click(ELEMENT_EVERYONE_TAB);
-		waitForAndGetElement(ELEMENT_CONNECTION_BUTTON.replace("${peopleName}", peopleName));
+		//info("---Go to Everyone tab----");
+		//click(ELEMENT_EVERYONE_TAB);
+		//peoSearch.searchPeople(false, peopleName);
+		//waitForAndGetElement(ELEMENT_CONNECTION_BUTTON.replace("${peopleName}", peopleName));
 	}
 
 	/**

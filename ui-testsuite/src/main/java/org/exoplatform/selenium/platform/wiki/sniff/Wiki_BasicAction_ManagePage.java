@@ -41,7 +41,7 @@ public class Wiki_BasicAction_ManagePage extends ManageDraft{
 
 	@AfterMethod
 	public void afterTest(){
-		magAc.signOut();
+		//magAc.signOut();
 		driver.manage().deleteAllCookies();
 		driver.quit();
 	}

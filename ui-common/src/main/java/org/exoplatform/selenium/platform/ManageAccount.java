@@ -47,7 +47,7 @@ public class ManageAccount extends PlatformBase {
 	public void signIn(String username, String password,Boolean...opParams) {
 		Boolean verify = (Boolean) (opParams.length > 0 ? opParams[0]: true);
 		Boolean maxWin = (Boolean) (opParams.length > 1 ? opParams[1]: true);
-		boolean community = (waitForAndGetElement(ELEMENT_COMMUNITY_SIGN_IN_LINK,5000,0) != null) ? true :false;
+		boolean community = (waitForAndGetElement(ELEMENT_COMMUNITY_SIGN_IN_LINK, 3000, 0) != null) ? true :false;
 		if(maxWin){
 			driver.manage().window().maximize();
 			driver.navigate().refresh();
@@ -334,7 +334,7 @@ public class ManageAccount extends PlatformBase {
 	 * @param user: type: Root, Admin, Author, Developer or Publisher
 	 */
 	public void userSignIn(userType user){
-		if (isElementNotPresent(ELEMENT_INPUT_USERNAME)){
+		if (isElementNotPresent(ELEMENT_INPUT_USERNAME) && isElementNotPresent(ELEMENT_COMMUNITY_ADD_ONS)){
 			signOut();
 		}else{
 			info("-- User.logIn: " + user);

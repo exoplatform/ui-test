@@ -242,7 +242,7 @@ public class PeopleProfile extends PlatformBase {
 	 */
 	public void goToUserProfile(String userName){
 		info("--Go to User's Profile--");
-		peoSearch.searchPeople(false,userName);
+		peoSearch.searchPeople(false, userName);
 		click(By.linkText(userName));
 		waitForAndGetElement(ELEMENT_MY_PROFILE_TAB);
 	}

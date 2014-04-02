@@ -46,7 +46,7 @@ public class PLF_Navigation_TopNavigation extends BasicAction {
 	public void beforeMethods() {
 		initSeleniumTest();
 		driver.get(baseUrl);
-		info("Login with " + DATA_USER_JOHN);
+		info("Login with " + DATA_USER1);
 		magAcc = new ManageAccount(driver, this.plfVersion);
 		naviToolbar = new NavigationToolbar(driver, this.plfVersion);
 		peoPro = new PeopleProfile(driver, this.plfVersion);
@@ -58,7 +58,7 @@ public class PLF_Navigation_TopNavigation extends BasicAction {
 		actBar = new ActionBar(driver, this.plfVersion);
 		ecms = new EcmsBase(driver, this.plfVersion);
 
-		magAcc.signIn(DATA_USER_JOHN, DATA_PASS);
+		magAcc.signIn(DATA_USER1, DATA_PASS);
 	}
 
 	@AfterMethod

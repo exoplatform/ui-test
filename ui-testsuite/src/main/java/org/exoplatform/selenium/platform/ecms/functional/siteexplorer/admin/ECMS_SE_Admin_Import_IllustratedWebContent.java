@@ -37,7 +37,7 @@ public class ECMS_SE_Admin_Import_IllustratedWebContent extends PlatformBase {
 		cTemplate = new ContentTemplate(driver,this.plfVersion);
 		cMenu = new ContextMenu(driver,this.plfVersion);
 		siteExp = new SitesExplorer(driver,this.plfVersion);
-		magAcc.signIn(DATA_USER_JOHN, DATA_PASS);
+		magAcc.signIn(DATA_USER1, DATA_PASS);
 
 
 		info("Add Import icon to action bar if it does not existed");

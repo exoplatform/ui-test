@@ -456,10 +456,10 @@ public class NavigationToolbar extends PlatformBase {
 		hpAct = new HomePageActivity(driver, this.plfVersion);
 		click(ELEMENT_CONNECTION_PAGE);
 		waitForAndGetElement(peoCon.ELEMENT_EVERYONE_TAB);
-		if(waitForElementNotPresent(hpAct.ELEMENT_ACTIVITY_TEXTBOX,DEFAULT_TIMEOUT,0) != null){
+		/*if(waitForElementNotPresent(hpAct.ELEMENT_ACTIVITY_TEXTBOX,DEFAULT_TIMEOUT,0) != null){
 			clearCache();
 			waitForAndGetElement(peoCon.ELEMENT_EVERYONE_TAB);
-		}
+		}*/
 	}
 
 	public void changeEditMode()

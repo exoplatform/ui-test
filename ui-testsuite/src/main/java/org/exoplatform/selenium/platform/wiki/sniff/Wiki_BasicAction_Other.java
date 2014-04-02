@@ -291,7 +291,8 @@ public class Wiki_BasicAction_Other extends Permalink {
 	public void test10_CheckPermalinkWithNotMemberOfPage(){
 		String title = "Wiki_sniff_permalink_title_10";
 		String content = "Wiki_sniff_permalink_content_10";
-		
+	
+		Utils.pause(5000);
 		addBlankWikiPage(title, content, 0);
 		deletePagePermission("any");
 		goToPermalink();
@@ -348,7 +349,7 @@ public class Wiki_BasicAction_Other extends Permalink {
 		String spaceName = "Space12";
 		String title = "Wiki_sniff_permalink_title_12";
 		String content = "Wiki_sniff_permalink_content_12";
-		
+
 		addWikiForSpace(spaceName, title, content);
 		goToPermalink();
 		String permalink = getPermalink();

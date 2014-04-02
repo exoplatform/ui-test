@@ -398,7 +398,7 @@ public class WikiBase extends PlatformBase{
 		ManageAccount.userType usr = (ManageAccount.userType) (user.length > 0 ? user[0] : null);
 
 		if (usr != null){
-			if (isElementNotPresent(ELEMENT_INPUT_USERNAME)){
+			if (isElementNotPresent(ELEMENT_INPUT_USERNAME) && isElementNotPresent(ELEMENT_COMMUNITY_ADD_ONS)){
 				magAcc.signOut();
 			}else{
 				info("-- User.logIn: " + user);

@@ -37,7 +37,7 @@ public class Wiki_Information extends Version {
 
 	@AfterMethod
 	public void afterTest(){
-		magAc.signOut();
+		//magAc.signOut();
 		driver.manage().deleteAllCookies();
 		driver.quit();
 	}

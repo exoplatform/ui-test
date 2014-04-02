@@ -61,9 +61,10 @@ public class BasicAction extends Permission{
 		String message = (String) (option.length > 1 ? option[1] : "");	
 		goToAddBlankPage();
 		Utils.pause(500);
-		driver.navigate().refresh();
-		Utils.pause(2000);
-
+		if (isElementNotPresent(ELEMENT_TITLE_WIKI_INPUT)){
+			driver.navigate().refresh();
+			Utils.pause(2000);
+		}
 		info("-- Add a wiki page from blank page --");
 		if (mode == 1){ 
 			addWikiPageRichText(title, content);
@@ -146,7 +147,7 @@ public class BasicAction extends Permission{
 		if(this.plfVersion=="4.0"){
 			if(title != null)
 				type(ELEMENT_TITLE_WIKI_INPUT, title, true);
-			if(waitForAndGetElement(ELEMENT_RICHTEXT_BUTTON,5000,0)!=null){
+			if(waitForAndGetElement(ELEMENT_RICHTEXT_BUTTON, 3000, 0)!=null){
 				click(ELEMENT_RICHTEXT_BUTTON);
 				waitForAndGetElement(ELEMENT_SOURCE_EDITOR_BUTTON);
 			}
@@ -159,7 +160,7 @@ public class BasicAction extends Permission{
 			Utils.pause(1000);
 		}
 		else if(this.plfVersion == "4.1"){
-			if(waitForAndGetElement(ELEMENT_RICHTEXT_BUTTON_PL4_1,5000,0)!=null){
+			if(waitForAndGetElement(ELEMENT_RICHTEXT_BUTTON_PL4_1, 3000, 0)!=null){
 				click(ELEMENT_RICHTEXT_BUTTON_PL4_1);
 				waitForAndGetElement(ELEMENT_SOURCE_EDITOR_BUTTON);
 			}
@@ -173,7 +174,6 @@ public class BasicAction extends Permission{
 			//waitForAndGetElement(ELEMENT_SAVE_BUTTON_ADD_PAGE);
 			Utils.pause(1000);
 		}		
-
 	}
 
 	/**

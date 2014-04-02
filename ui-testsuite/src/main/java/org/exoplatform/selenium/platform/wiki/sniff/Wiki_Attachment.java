@@ -31,7 +31,7 @@ public class Wiki_Attachment extends BasicAction {
 
 	@AfterMethod
 	public void afterTest(){
-		magAc.signOut();
+		//magAc.signOut();
 		driver.manage().deleteAllCookies();
 		driver.quit();
 	}

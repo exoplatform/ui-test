@@ -266,6 +266,8 @@ public class SpaceManagement extends SocialBase {
 		}
 		Utils.pause(1000);
 		waitForElementNotPresent(By.xpath(ELEMENT_ACTION_USER_ON_SPACE.replace("${spaceName}", name).replace("${action}", "Delete")), iTimeout);
+		driver.navigate().refresh();
+		Utils.pause(2000);
 		info(name + " was deleted successfully");
 	}
 

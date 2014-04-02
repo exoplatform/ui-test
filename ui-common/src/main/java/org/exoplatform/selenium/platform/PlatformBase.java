@@ -21,25 +21,28 @@ import static org.exoplatform.selenium.TestLogger.info;
 
 public class PlatformBase extends TestBase {
 
-
+	public final String USER_ROOT = "root";
+	public final String PASS_ROOT = "gtn";
 	public final String DATA_USER1 = "john";
 	public final String DATA_USER2 = "mary";
-
-//	public final String DATA_USER_JOHN = "john";
-	public final String DATA_USER_JOHN = "john";
+	public final String DATA_USER3 = "james";
+	public final String DATA_USER4 = "jack";
+	public final String DATA_USER5 = "demo";
 	public final String DATA_PASS = "gtngtn";
-//	public final String DATA_USER_MARY = "mary";
-	public final String DATA_USER_MARY = "mary";
-
+	//public final String DATA_USER_JOHN = "john";
+	//public final String DATA_USER1 = "john";
+	//public final String DATA_PASS = "gtngtn";
+	//public final String DATA_USER_MARY = "mary";
+	//public final String DATA_USER2 = "mary";
 	public ManageAlert alert = new ManageAlert(driver);
 	public Button button = new Button(driver);
 	public Dialog dialog = new Dialog(driver);
 
 	/****************Common Elements*******************/
-	
-	
+
+
 	public final String ELEMENT_CONTAINS_TEXT = "//*[contains(text(),'${text}')]"; 
-	
+
 	/*
 	 * Default Page - http://localhost:8080/portal/default/
 	 * */
@@ -51,7 +54,7 @@ public class PlatformBase extends TestBase {
 	public final String ELEMENT_SIGN_IN_LINK = "//b[contains(text(),'Sign in')]";
 	public final By ELEMENT_REFRESH = By.xpath("//div[@class='activityStreamStatus pull-left']");
 
-	
+
 	/*
 	 * Log in Form - Sign-out 
 	 */
@@ -200,7 +203,7 @@ public class PlatformBase extends TestBase {
 	public final By ELEMENT_MY_CONNECTIONS = By.className("uiIconPLFMyConnection");
 	public final By ELEMENT_MY_WIKI = By.className("uiIconWikiWiki");
 	public final String ELEMENT_LINE_BETWEEN_MENU = "//*[@class='divider'][${index}]";
-	
+
 	//User -> Change Language
 	public final By ELEMENT_CHANGE_LANGUAGE_POPUP = By.xpath("//*[@id='UIMaskWorkspace']//*[text()='Interface Language Setting']");
 	public final By ELEMENT_CHANGE_LANGUAGE_POPUP_FRENCH = By.xpath("//*[@id='UIMaskWorkspace']//*[text()='Langues Disponibles']");
@@ -521,7 +524,7 @@ public class PlatformBase extends TestBase {
 	public final String ELEMENT_CONTENT_IN_CONTENT_DETAIL_PORTLET_41 = "//*[contains(@id, 'UISingleContentViewerPortlet')]//*[@class='topTitle' and text()='${contentName}']";
 	public final String ELEMENT_GADGET_APPLICATION_PAGE_EDITOR = "//div[@id='UIApplicationList0']//div[contains(text(),'${gadget}')]";
 	public final String ELEMENT_PORTLET_TITLE = "//*[@class='portletLayoutDecorator' and contains(text(), '${portletTitle}')]";
-	
+
 	public final By ELEMENT_CONTENTS_BY_QUERY_PORTLET = By.xpath("//div[contains(text(),'Content By Query')]");
 	public final By ELEMENT_CATEGORY_TOOLS = By.linkText("Tools");
 	public final By ELEMENT_CATEGORY_GADGETS = By.linkText("Gadgets");
@@ -1306,9 +1309,9 @@ public class PlatformBase extends TestBase {
 			for (int i = 0; i < lines.length; i++){
 				if(this.plfVersion.equalsIgnoreCase("4.0")){
 					info("type multi line 4.0");
-//					inputsummary.sendKeys(lines[i]);
-//					inputsummary.sendKeys(Keys.ENTER);
-//					Utils.pause(500);
+					//					inputsummary.sendKeys(lines[i]);
+					//					inputsummary.sendKeys(Keys.ENTER);
+					//					Utils.pause(500);
 					String newStr = "<p>" + lines[i]+"</p>";;
 					if(i==0)
 						newStr = "<p>" + lines[i]+"</p>";
@@ -1317,7 +1320,7 @@ public class PlatformBase extends TestBase {
 						newStr +="<p>" + lines[i]+"</p>";
 					}
 					((JavascriptExecutor) driver).executeScript("document.body.innerHTML='" + newStr + "'");
-					
+
 				} else{ //if(this.plfVersion.equalsIgnoreCase("4.1")){
 					info("type multi line 4.1");
 					String newStr = "<p>" + lines[i]+"</p>";;
@@ -1400,7 +1403,7 @@ public class PlatformBase extends TestBase {
 		if(newFolder!=""){
 
 			if(plfVersion =="4.1"){
-			click(ELEMENT_CREATE_FOLDER_BUTTON_PLF41);
+				click(ELEMENT_CREATE_FOLDER_BUTTON_PLF41);
 			}
 			else{
 				click(ELEMENT_CREATE_FOLDER_BUTTON);
@@ -1423,7 +1426,7 @@ public class PlatformBase extends TestBase {
 		button.close();
 		Utils.pause(1000);
 		waitForElementNotPresent(ELEMENT_SELECT_FILE_POPUP);	
-		
+
 	}
 
 	/** Switch to new browser window

@@ -255,7 +255,7 @@ public class SocialBase extends PlatformBase {
 				break;
 			}
 			mouseOver(ELEMENT_ACCOUNT_NAME_LINK, true);
-			if (waitForAndGetElement(ELEMENT_TOOLBAR_NETWORKS_ICON, 5000, 0) != null){
+			if (waitForAndGetElement(ELEMENT_TOOLBAR_NETWORKS_ICON, 1000, 0) != null){
 				info("Element " + ELEMENT_TOOLBAR_NETWORKS_ICON + "... is displayed");
 				break;
 			}
@@ -275,7 +275,7 @@ public class SocialBase extends PlatformBase {
 				break;
 			}
 			mouseOver(ELEMENT_ACCOUNT_NAME_LINK, true);
-			if (waitForAndGetElement(ELEMENT_TOOLBAR_ACTIVITY_ICON, 5000, 0) != null){
+			if (waitForAndGetElement(ELEMENT_TOOLBAR_ACTIVITY_ICON, 1000, 0) != null){
 				info("Element " + ELEMENT_TOOLBAR_ACTIVITY_ICON + "... is displayed");
 				break;
 			}

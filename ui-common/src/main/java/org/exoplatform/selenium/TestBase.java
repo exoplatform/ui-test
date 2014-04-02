@@ -61,7 +61,8 @@ public class TestBase {
 	//public final By ELEMENT_MENU_EDIT_LINK = By.xpath("//i[@class='uiIconPLF24x24Edit']");
 	//public final By ELEMENT_MENU_PAGE_LINK = By.linkText("Page");
 	//public final String AJAX_LOADING_MASK = "//div[@id='AjaxLoadingMask']";
-	public final String DEFAULT_BASEURL="http://192.168.3.50:8080/portal";
+	public final String DEFAULT_BASEURL = "http://community-4.1.x-snapshot.acceptance4.exoplatform.org/portal";
+	//"http://192.168.3.50:8080/portal";
 
 	/*======= Welcome Screen (Term and Conditions) =====*/
 	public final By ELEMENT_FIRSTNAME_ACCOUNT = By.name("firstNameAccount");
@@ -91,9 +92,10 @@ public class TestBase {
 	public final By ELEMENT_ACCOUNT_ERROR = By.xpath("//*[@class='accountSetupError']");
 
 	/*********************Community******************************/
+	public final By ELEMENT_COMMUNITY_ADD_ONS = By.xpath("//*[contains(text(), 'Community Add-ons')]");
 	public final By ELEMENT_COMMUNITY_SIGN_IN = By.xpath("//h5[text()='eXo Community Sign in']");
 	public final String ELEMENT_COMMUNITY_SIGN_IN_LINK = "//a[contains(text(),'Sign in')]";
-
+     
 	/*======== End of Term and conditions =====*/	
 
 	public void initSeleniumTestWithOutTermAndCondition(Object... opParams){
@@ -117,11 +119,47 @@ public class TestBase {
 	}
 
 	public void initSeleniumTest(Object... opParams){
-		initSeleniumTestWithOutTermAndCondition();
-		info("Term and conditions");
-		termsAndConditions(opParams);
-		info("End of term and conditions");
-
+		initSeleniumTestWithOutTermAndCondition();	
+		driver.get(baseUrl);
+//		WebElement community = waitForAndGetElement(ELEMENT_COMMUNITY_ADD_ONS, 3000, 0);
+//		if(!community.isDisplayed()){
+//			info("Term and conditions...Platform 4");
+//			termsAndConditions(opParams);
+//			info("End of term and conditions...Platform 4");
+//		}else{
+//			info("== Launch Community Website...==");		
+//		}
+//		if(!firstTimeLogin){
+//			info("This is not the first time login");
+//			checkPLFVersion();
+//		}
+//		else{
+//			info("This is the first time login");
+//			driver.manage().window().maximize();
+//			driver.navigate().refresh();
+//			Utils.pause(2000);
+//
+//			ManageAccount acc = new ManageAccount(driver,this.plfVersion);
+//			acc.signOut();
+//			firstTimeLogin=false;
+//			//			checkPLFVersion();
+//		}
+		checkTermConditionAndPLFVersion(opParams);
+	}
+	
+	/**
+	 * Verify if the current binary is Platform or Sites (Community; Cloud)
+	 * @param opParams: use in case need to create a new user for Platform or Sites
+	 */
+    public void checkTermConditionAndPLFVersion(Object... opParams){
+    	WebElement community = waitForAndGetElement(ELEMENT_COMMUNITY_ADD_ONS, 3000, 0);
+		if(!community.isDisplayed()){
+			info("Term and conditions...Platform 4");
+			termsAndConditions(opParams);
+			info("End of term and conditions...Platform 4");
+		}else{
+			info("== Launch Community Website...==");		
+		}
 		if(!firstTimeLogin){
 			info("This is not the first time login");
 			checkPLFVersion();
@@ -136,33 +174,18 @@ public class TestBase {
 			acc.signOut();
 			firstTimeLogin=false;
 			//			checkPLFVersion();
-		}
-	}
-
-
-
+		}	
+    }
+    
 	/**
 	 * Check term and conditions
 	 * 
 	 */
 	public void termsAndConditions(Object... opParams){
-		//By ELEMENT_FIRSTNAME_ACCOUNT = By.name("firstNameAccount");
-		//By ELEMENT_LASTNAME_ACCOUNT = By.name("lastNameAccount");
-		//By ELEMENT_EMAIL_ACCOUNT = By.name("emailAccount");
-		//By ELEMENT_CONFIRM_PASS_ACCOUNT = By.name("confirmUserPasswordAccount");
-		//By ELEMENT_ROOT_PASS_ACCOUNT = By.name("adminPassword");
-		//By ELEMENT_ROOT_CONFIRM_PASS_ACCOUNT = By.name("confirmAdminPassword");
-		//By ELEMENT_AGREEMENT_CHECKBOX = By.xpath("//*[@id = 'agreement']");
-		//By ELEMENT_INPUT_USERNAME = By.name("username"); 
-		//By ELEMENT_CONTINUE_BUTTON = By.xpath("//button[text()='Continue']");
-		//By ELEMENT_START_BUTTON = By.xpath("//button[text()='Start']");
-		//By ELEMENT_SUBMIT_BUTTON = By.xpath("//*[text()='Submit']");
-		//By ELEMENT_INPUT_PASSWORD = By.name("password");
-		//By ELEMENT_ACCOUNT_NAME_LINK = By.xpath("//*[@id='UIUserPlatformToolBarPortlet']/a");
 		Boolean isCreateAccount = (Boolean)(opParams.length>0 ? opParams[0]:true);
-		driver.get(baseUrl);
+		//driver.get(baseUrl);
 		info("Agreement page");
-		if (waitForAndGetElement(ELEMENT_AGREEMENT_CHECKBOX, 5000, 0, 2) != null) {
+		if (waitForAndGetElement(ELEMENT_AGREEMENT_CHECKBOX, 3000, 0, 2) != null) {
 			info("-- Checking the terms and conditions agreement... --");
 			click(ELEMENT_AGREEMENT_CHECKBOX, 2);
 			click(ELEMENT_CONTINUE_BUTTON);
@@ -173,20 +196,8 @@ public class TestBase {
 				accountSetup();
 			firstTimeLogin = true;
 			info("-- Administrator account (FQA) has been created successfully... --");
-		}else if (waitForAndGetElement(ELEMENT_ROOT_PASS_ACCOUNT, 5000, 0, 2) != null){
+		}else if (waitForAndGetElement(ELEMENT_ROOT_PASS_ACCOUNT, 3000, 0, 2) != null){
 			info("-- Creating an Admin account: FQA... --");
-			//type(ELEMENT_INPUT_USERNAME, "fqa", true);
-			//type(ELEMENT_FIRSTNAME_ACCOUNT, "FQA", true);
-			//type(ELEMENT_LASTNAME_ACCOUNT, "VN", true);
-			//type(ELEMENT_EMAIL_ACCOUNT, "fqa@exoplatform.com", true);	
-			//type(ELEMENT_INPUT_PASSWORD, "gtngtn", true);
-			//type(ELEMENT_CONFIRM_PASS_ACCOUNT, "gtngtn", true);	
-			//type(ELEMENT_ROOT_PASS_ACCOUNT, "gtngtn", true);
-			//type(ELEMENT_ROOT_CONFIRM_PASS_ACCOUNT, "gtngtn", true);
-			//click(ELEMENT_SUBMIT_BUTTON);
-			//waitForTextNotPresent("Create your account");
-			//click(ELEMENT_START_BUTTON);
-			//waitForAndGetElement(ELEMENT_ACCOUNT_NAME_LINK);
 			accountSetup();
 			firstTimeLogin = true;
 			info("-- Administrator account (FQA) has been created successfully... --");
@@ -201,7 +212,7 @@ public class TestBase {
 		waitForTextNotPresent("terms and conditions agreement");
 		try{
 			info("Verify platform version");
-			WebElement eVersion = waitForAndGetElement(ELEMENT_PLF_INFORMATION, DEFAULT_TIMEOUT,0);
+			WebElement eVersion = waitForAndGetElement(ELEMENT_PLF_INFORMATION, 3000, 0);
 			if(eVersion != null){
 				String des = eVersion.getText();
 				if(des.contains("v4.0")){
@@ -212,7 +223,6 @@ public class TestBase {
 					this.plfVersion="4.1";
 					info("Platform version 4.1.x");
 				}
-
 			}else{
 				this.plfVersion="4.1";
 				info("Set default to 4.1");
@@ -221,7 +231,6 @@ public class TestBase {
 			info("Unknown platform version. Set default to 4.1");
 			this.plfVersion="4.1";
 		}
-
 	}
 
 	public void accountSetupWithoutGreeting(){
@@ -315,7 +324,6 @@ public class TestBase {
 		info("cannot find element after " + timeout/1000 + "s.");
 		return null;
 	}
-
 
 	/*
 	 * @opPram[0]: timeout
@@ -750,8 +758,10 @@ public class TestBase {
 		baseUrl = System.getProperty("baseUrl");
 		if (baseUrl==null) baseUrl = DEFAULT_BASEURL;
 		action = new Actions(driver);
-		termsAndConditions();
-		checkPLFVersion();
+		driver.get(baseUrl);
+		checkTermConditionAndPLFVersion();
+		//termsAndConditions();
+		//checkPLFVersion();
 	}
 
 	/**function set driver to auto open new window when click link
@@ -904,8 +914,6 @@ public class TestBase {
 		WebElement element = waitForAndGetElement(locator, DEFAULT_TIMEOUT, 1, 2);
 		((JavascriptExecutor)driver).executeScript("arguments[0].style.display = 'block';",element);	
 	}
-
-
 
 	public void setPreferenceRunTime(){
 		FirefoxProfile fp = new FirefoxProfile();
