@@ -43,7 +43,7 @@ public class UserGroupManagement extends PlatformBase {
 	public String ELEMENT_FIRST_PAGE = "//div[@class='pagination uiPageIterator clearfix']//a[text()='1']";
 	public String ELEMENT_ACTIVE_FIRST_PAGE = "//div[@class='pagination uiPageIterator clearfix']//li[@class='active']//a[text()='1']";
 	public final String ELEMENT_MEMBERSHIP_MANAGEMENT_TAB_FAIL_DEL_MSG = "//span[contains(text(),'You cannot delete this membership because it is mandatory.')]";
-	public By ELEMENT_PAGE_TOTAL_NUMBER = By.className("pagesTotalNumber");
+
 	//User Management -> Edit User form
 	public  final By ELEMENT_USER_MEMBERSHIP_TAB = By.xpath("//*[text()='User Membership']");
 	public final String ELEMENT_GROUP_PERMISSION = "//a[@title='${groupName}']";
@@ -52,7 +52,10 @@ public class UserGroupManagement extends PlatformBase {
 	public final By ELEMENT_USER_CONFIRM_PASSWORD = By.id("confirmPassword");
 	public final String MSG_UPDATE_USER_ACCOUNT = "The user profile has been updated.";
 	
-
+	//Group Management
+	public final By ELEMENT_INPUT_SEARCH_USER = By.id("Quick Search");
+	public final By ELEMENT_QUICK_SEARCH_USER = By.xpath("//*[@data-original-title='Quick Search']");
+	public final By ELEMENT_QUICK_SEARCH_USER_IN_POPUP_DIALOG = By.xpath("//*[@id='UIUserSelector']//*[@data-original-title='Quick Search']");
 	/*
 	 *  Choose TAB actions
 	 * */
@@ -100,7 +103,7 @@ public class UserGroupManagement extends PlatformBase {
 
 		click(ELEMENT_SEARCH_ICON_USERS_MANAGEMENT);
 
-		waitForMessage("No result found.");
+		waitForMessage("No result found",300000);
 
 		dialog.closeMessageDialog();
 		searchUser("", "User Name");
@@ -142,7 +145,7 @@ public class UserGroupManagement extends PlatformBase {
 			else
 				type(ELEMENT_INPUT_EMAIL, email, true);
 		}
-		
+
 		if(newPassword.length > 0){
 			check(ELEMENT_USER_CHANGE_PASSWORD,2);
 			type(ELEMENT_USER_NEW_PASSWORD,newPassword[0],true);
@@ -214,11 +217,12 @@ public class UserGroupManagement extends PlatformBase {
 			}
 			waitForTextPresent("Select User");
 			for (String user : users) {
+				searchUserInGroupManagement(user,"User Name",true);
 				check("//input[@name='" + user + "']", 2);
 			}
 			//click(ELEMENT_GROUP_SEARCH_POPUP_ADD_ICON);
 			click(button.ELEMENT_ADD_BUTTON);
-			Utils.pause(500);
+			waitForElementNotPresent(button.ELEMENT_ADD_BUTTON, 180000);
 			Assert.assertEquals(getValue(ELEMENT_INPUT_USERNAME), userNames);
 		} else {
 			type(ELEMENT_INPUT_USERNAME, userNames, true);
@@ -307,11 +311,25 @@ public class UserGroupManagement extends PlatformBase {
 				if (!temp[i].matches("Administration")){
 					click(By.linkText(temp[i]));
 				}else{
-					if (waitForAndGetElement(groupName_4.replace("${groupName}", temp[i]), 5000, 0) != null){
-						click(groupName_4.replace("${groupName}", temp[i]));
-					}else{
-						click(By.xpath(groupName.replace("${groupName}", temp[i])));
-					}		
+					if(temp[i].contains("Admin")){
+						if (waitForAndGetElement(groupName_4.replace("${groupName}", "Administration"), 5000, 0) != null){
+							click(groupName_4.replace("${groupName}", temp[i]));
+						}
+						else if (waitForAndGetElement(groupName_4.replace("${groupName}", "Administrators"), 5000, 0) != null){
+							click(groupName_4.replace("${groupName}", "Administrators"));
+						}else if (waitForAndGetElement(By.xpath(groupName.replace("${groupName}", "Administration")), 5000, 0) != null){
+							click(By.xpath(groupName.replace("${groupName}", "Administration")));
+						}else{
+							click(By.xpath(groupName.replace("${groupName}", "Administrators")));
+						}	
+					}
+					else{
+						if (waitForAndGetElement(groupName_4.replace("${groupName}", temp[i]), 5000, 0) != null){
+							click(groupName_4.replace("${groupName}", temp[i]));
+						}else{
+							click(By.xpath(groupName.replace("${groupName}", temp[i])));
+						}	
+					}
 				}
 			}
 			Utils.pause(500);
@@ -529,9 +547,9 @@ public class UserGroupManagement extends PlatformBase {
 	 */
 	public void searchUserInGroupManagement(String user, String searchOption, boolean verify){
 		info("--Search user " + user + "--");
-		waitForAndGetElement(ELEMENT_GROUP_SEARCH_USER_ICON);
+		waitForAndGetElement(ELEMENT_GROUP_SEARCH_USER_ICON,180000);
 		click(ELEMENT_GROUP_SEARCH_USER_ICON);
-		click(ELEMENT_GROUP_SEARCH_USER_SEARCH_INPUT);
+		waitForAndGetElement(ELEMENT_GROUP_SEARCH_USER_SEARCH_INPUT,180000);
 		type(ELEMENT_GROUP_SEARCH_USER_SEARCH_INPUT,user,true);
 		select(ELEMENT_GROUP_SEARCH_USER_OPTION, searchOption);	
 		click(ELEMENT_GROUP_SEARCH_USER_SEARCH_ICON);
@@ -541,7 +559,7 @@ public class UserGroupManagement extends PlatformBase {
 			waitForAndGetElement(ELEMENT_GROUP_SEARCH_USER_NO_RESULT_MSG);
 		}
 	}
-	
+
 	/**
 	 * check membership of a user
 	 * @param userName

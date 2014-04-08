@@ -114,7 +114,8 @@ public class ECMS_Admin_Repository extends PlatformBase{
 
 		info("-- Restore data --");
 		nav.goToSiteExplorer();
-		cMenu.deleteDocument(eLockedFile);
+		ecms.goToNode("intranet/documents");
+		cMenu.deleteDocument(eLockedFile,180000);
 	}
 
 	/**

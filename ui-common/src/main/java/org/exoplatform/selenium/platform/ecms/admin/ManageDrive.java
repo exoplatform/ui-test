@@ -83,7 +83,9 @@ public class ManageDrive extends EcmsBase{
 
 		Boolean editDrv = (Boolean) (params.length > 0 ? params[0]: false);
 		Boolean selectView = (Boolean) (params.length > 1 ? params[1]: false);
-
+		select(By.xpath("//select[contains(@id,'maxPageSize')]"),"100");
+		driver.navigate().refresh();
+		Utils.pause(500);
 		if (!editDrv){
 			click(ELEMENT_ADD_DRIVER_BUTTON);
 
@@ -170,7 +172,7 @@ public class ManageDrive extends EcmsBase{
 			selectCheckBoxList(view);
 			//Complete add new drive
 			click(button.ELEMENT_SAVE_BUTTON);
-			select(By.xpath("//select[contains(@id,'maxPageSize')]"),"20");
+			select(By.xpath("//select[contains(@id,'maxPageSize')]"),"100");
 			driver.navigate().refresh();
 			Utils.pause(500);
 			//waitForElementPresent(ELEMENT_DRIVER);

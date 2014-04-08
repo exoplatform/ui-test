@@ -136,14 +136,13 @@ public class Gatein_Navigation_GroupNavigation_EditNavigation extends GroupNavig
 		magAc.signIn("john", DATA_PASS);
 		navToolbar.goToGroupSites();
 		//Verify position of Administration after SignOut and SignIn  
-		waitForElementNotPresent(groupAdminOldPosition);
 		waitForAndGetElement(groupAdminNewPosition);
 
 		info("Reset order of navigation list");
 		click(ELEMENT_EDIT_PROPERTIES_ICON.replace("${groupName}", groupAdmin));
 		select(ELEMENT_GROUP_NAVIGATION_PRIORITY, String.valueOf(iRow));
 		button.save();
-		waitForAndGetElement(groupAdminOldPosition);
+		waitForElementNotPresent(button.ELEMENT_SAVE_BUTTON);
 	}
 
 	/**

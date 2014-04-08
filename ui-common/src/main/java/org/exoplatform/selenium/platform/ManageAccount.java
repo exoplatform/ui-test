@@ -148,7 +148,7 @@ public class ManageAccount extends PlatformBase {
 			type(ELEMENT_INPUT_NEW_PASSWORD_MYACCOUNT, newPassword, true);
 			type(ELEMENT_INPUT_NEW_CONFIRM_PASSWORD_MYACCOUNT, confirmNewPassword, true);
 			click(ELEMENT_SAVE_CHANGE_PASS_BUTTON);
-			waitForMessage(MESSAGE_UPDATE_PASSWORD);
+			waitForMessage(MESSAGE_UPDATE_PASSWORD,180000);
 			dialog.closeMessageDialog();
 		}
 		button.close();

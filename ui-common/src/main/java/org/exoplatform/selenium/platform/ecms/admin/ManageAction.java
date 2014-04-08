@@ -55,7 +55,7 @@ public class ManageAction extends EcmsBase{
 			type(ELEMENT_INPUT_VARIABLE, variable, true);
 		}
 		button.save();
-		waitForTextPresent(actionTypeName);	
+		assert checkActionTypeName(actionTypeName);
 	}
 
 	//Edit Action Type
@@ -71,7 +71,8 @@ public class ManageAction extends EcmsBase{
 			type(ELEMENT_INPUT_VARIABLE, variable, true);
 		}
 		button.save();
-		waitForTextPresent(newActionTypeName);
+		assert checkActionTypeName(newActionTypeName);
+		assert !checkActionTypeName(actionTypeName);
 	}
 	
 	//Delete Action Type
@@ -80,6 +81,28 @@ public class ManageAction extends EcmsBase{
 		Utils.pause(500);
 		click(ELEMENT_DELETE_ACTION_TYPE_ICON.replace("${actionTypeName}", actionTypeName));
 		magAlert.acceptAlert();
-		waitForTextNotPresent(actionTypeName);
+		assert !checkActionTypeName(actionTypeName);
+	}
+	
+	/**
+	 * check action name in action list
+	 * @param actionTypeName
+	 * @return
+	 */
+	public boolean checkActionTypeName(String actionTypeName){
+		info("Verify action name exists or not");
+		int numPage =  1;
+		if(waitForAndGetElement(ELEMENT_PAGE_TOTAL_NUMBER,5000,0) != null){
+			numPage =  Integer.parseInt(waitForAndGetElement(ELEMENT_PAGE_TOTAL_NUMBER).getText());
+			for(int i = 0; i < numPage; i++){
+				if(waitForAndGetElement(ELEMENT_DATA_ORIGINAL_TITLE.replace("${title}", actionTypeName),5000,0) != null)
+					return true;
+				click(ELEMENT_NEXT_PAGE_ICON);
+			}
+		}
+		if(waitForAndGetElement(ELEMENT_DATA_ORIGINAL_TITLE.replace("${title}", actionTypeName),5000,0) != null)
+			return true;
+		else
+			return false;
 	}
 }

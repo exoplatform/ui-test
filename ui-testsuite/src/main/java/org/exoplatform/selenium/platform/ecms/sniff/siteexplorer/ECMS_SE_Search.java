@@ -61,7 +61,7 @@ public class ECMS_SE_Search extends PlatformBase {
 		
 		//Delete data
 		click(siteExp.ELEMENT_SIDEBAR_FILE_EXPLORER);
-		cMenu.deleteDocument(bNode1);
+		cMenu.deleteDocument(bNode1,180000);
 		
 	}
 	/**CaseID 65875 Simple Search
@@ -85,7 +85,7 @@ public class ECMS_SE_Search extends PlatformBase {
 		waitForAndGetElement(aSearch.ELEMENT_SEARCH_RESULT_TEXT.replace("${result}", node1));
 		
 		//Delete data
-		cMenu.deleteDocument(bNode1);
+		cMenu.deleteDocument(bNode1,180000);
 		
 	}
 	
@@ -122,7 +122,7 @@ public class ECMS_SE_Search extends PlatformBase {
 		
 		//Delete data
 		click(siteExp.ELEMENT_SIDEBAR_FILE_EXPLORER);
-		cMenu.deleteDocument(bNode1);
+		cMenu.deleteDocument(bNode1,180000);
 	}
 	
 	
@@ -130,16 +130,16 @@ public class ECMS_SE_Search extends PlatformBase {
 	public void beforeMethod() {
 		initSeleniumTest();
 		driver.get(baseUrl);
-		navToolBar = new NavigationToolbar(driver);
-		magAcc = new ManageAccount(driver);
+		navToolBar = new NavigationToolbar(driver, this.plfVersion);
+		magAcc = new ManageAccount(driver, this.plfVersion);
 		magAcc.signIn(DATA_USER1, DATA_PASS);
 		navToolBar.goToSiteExplorer();
-		actBar = new ActionBar(driver);
-		cTemplate = new ContentTemplate(driver);
-		ecms = new EcmsBase(driver);
-		cMenu = new ContextMenu(driver);
-		siteExp = new SitesExplorer(driver);
-		btn = new Button(driver);
+		actBar = new ActionBar(driver, this.plfVersion);
+		cTemplate = new ContentTemplate(driver, this.plfVersion);
+		ecms = new EcmsBase(driver, this.plfVersion);
+		cMenu = new ContextMenu(driver, this.plfVersion);
+		siteExp = new SitesExplorer(driver, this.plfVersion);
+		btn = new Button(driver, this.plfVersion);
 		aSearch = new AdvancedSearch(driver);
 
 	}

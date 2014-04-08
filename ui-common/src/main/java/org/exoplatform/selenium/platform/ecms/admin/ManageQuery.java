@@ -75,7 +75,7 @@ public class ManageQuery extends EcmsBase{
 		
 		Utils.pause(500);
 		button.save();
-		waitForTextPresent(queryName);
+		assert checkQueryName(queryName);
 	}
 	
 	//Edit a Query
@@ -127,6 +127,28 @@ public class ManageQuery extends EcmsBase{
 		Utils.pause(500);
 		click(ELEMENT_DELETE_QUERY_ICON.replace("${queryName}", queryName));
 		magAlert.acceptAlert();
-		waitForTextNotPresent(queryName);
+		assert !checkQueryName(queryName);
+	}
+	
+	/**
+	 * check query name in query list
+	 * @param queryName
+	 * @return
+	 */
+	public boolean checkQueryName(String queryName){
+		info("Verify action name exists or not");
+		int numPage =  1;
+		if(waitForAndGetElement(ELEMENT_PAGE_TOTAL_NUMBER,5000,0) != null){
+			numPage =  Integer.parseInt(waitForAndGetElement(ELEMENT_PAGE_TOTAL_NUMBER).getText());
+			for(int i = 0; i < numPage; i++){
+				if(waitForAndGetElement(ELEMENT_DELETE_QUERY_ICON.replace("${queryName}", queryName),5000,0) != null)
+					return true;
+				click(ELEMENT_NEXT_PAGE_ICON);
+			}
+		}
+		if(waitForAndGetElement(ELEMENT_DELETE_QUERY_ICON.replace("${queryName}", queryName),5000,0) != null)
+			return true;
+		else
+			return false;
 	}
 }

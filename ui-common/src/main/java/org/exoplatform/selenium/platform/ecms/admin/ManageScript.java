@@ -31,8 +31,8 @@ public class ManageScript extends EcmsBase{
 	public final By ELEMENT_SCRIPT_CONTENT = By.name("scriptContent");
 	public final By ELEMENT_SCRIPT_LABEL = By.name("scriptLabel");
 	public final By ELEMENT_SCRIPT_NAME = By.name("scriptName");
-	public final String ELEMENT_EDIT_SCRIPT_ICON = "//*[contains(text(), '${scriptLabel}')]/../..//*[contains(@class, 'uiIconEdit')]";
-	public final String ELEMENT_DELETE_SCRIPT_ICON = "//*[contains(text(), '${scriptLabel}')]/../..//*[@class = 'uiIconDelete']";
+	public final String ELEMENT_EDIT_SCRIPT_ICON = "//*[@id='tab-UIActionScriptContainer']//*[contains(text(), '${scriptLabel}')]/../..//*[contains(@class, 'uiIconEdit')]";
+	public final String ELEMENT_DELETE_SCRIPT_ICON = "//*[@id='tab-UIActionScriptContainer']//*[contains(text(), '${scriptLabel}')]/../..//*[@class = 'uiIconDelete']";
 
 
 	//Open form [Add Script]
@@ -57,13 +57,13 @@ public class ManageScript extends EcmsBase{
 		type(ELEMENT_SCRIPT_NAME, scriptName, true);
 
 		button.save();
-		waitForTextPresent(scriptName + ".groovy");
+		assert checkScriptName(scriptName + ".groovy");
 	}
-	
+
 	//Edit a Script
 	public void editScript(String scriptName, String newScriptFileContent, String newScriptName, Object...params){
 		Boolean enableVersion = (Boolean) (params.length > 0 ? params[0]: false);
-		
+
 		info("-- Editing Script --");
 		click(ELEMENT_EDIT_SCRIPT_ICON.replace("${scriptLabel}", scriptName));
 		if (!newScriptFileContent.isEmpty()){
@@ -71,16 +71,16 @@ public class ManageScript extends EcmsBase{
 			type(ELEMENT_SCRIPT_CONTENT, content, true);
 		}
 		if (enableVersion){
-				click(ELEMENT_ENABLE_VERSION, 2);
+			click(ELEMENT_ENABLE_VERSION, 2);
 		}
 		if (!newScriptName.isEmpty()){
 			type(ELEMENT_SCRIPT_LABEL, newScriptName, true);
 		}
 		button.save();
 		if (!newScriptName.isEmpty()){
-			waitForTextPresent(newScriptName);
+			assert checkScriptName(newScriptName);
 		}else {
-			waitForTextPresent(scriptName);
+			assert !checkScriptName(scriptName);
 		}
 		Utils.pause(500);
 	}
@@ -88,9 +88,41 @@ public class ManageScript extends EcmsBase{
 	//Delete a script
 	public void deleteScript(String scriptLabel){
 		info("-- Deleting Script...-- " + scriptLabel);
+		int numPage =  1;
+		if(waitForAndGetElement(ELEMENT_PAGE_TOTAL_NUMBER,5000,0) != null){
+			numPage =  Integer.parseInt(waitForAndGetElement(ELEMENT_PAGE_TOTAL_NUMBER).getText());
+			for(int i = 0; i < numPage; i++){
+				if(waitForAndGetElement(ELEMENT_DELETE_SCRIPT_ICON.replace("${scriptLabel}", scriptLabel),5000,0) != null){
+					break;
+				}
+				click(ELEMENT_NEXT_PAGE_ICON);
+			}
+		}
 		Utils.pause(500);
 		click(ELEMENT_DELETE_SCRIPT_ICON.replace("${scriptLabel}", scriptLabel));
 		magAlert.acceptAlert();
-		waitForTextNotPresent(scriptLabel);
+		assert !checkScriptName(scriptLabel);
+	}
+	
+	/**
+	 * check script name in script list
+	 * @param scriptLabel
+	 * @return
+	 */
+	public boolean checkScriptName(String scriptLabel){
+		info("Verify action name exists or not");
+		int numPage =  1;
+		if(waitForAndGetElement(ELEMENT_PAGE_TOTAL_NUMBER,5000,0) != null){
+			numPage =  Integer.parseInt(waitForAndGetElement(ELEMENT_PAGE_TOTAL_NUMBER).getText());
+			for(int i = 0; i < numPage; i++){
+				if(waitForAndGetElement(ELEMENT_DELETE_SCRIPT_ICON.replace("${scriptLabel}", scriptLabel),5000,0) != null)
+					return true;
+				click(ELEMENT_NEXT_PAGE_ICON);
+			}
+		}
+		if(waitForAndGetElement(ELEMENT_DELETE_SCRIPT_ICON.replace("${scriptLabel}", scriptLabel),5000,0) != null)
+			return true;
+		else
+			return false;
 	}
 }

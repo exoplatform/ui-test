@@ -98,8 +98,8 @@ public class ECMS_SE_BasicAction extends PlatformBase {
 		waitForAndGetElement(node1New);
 
 		//Delete data
-		cMenu.deleteDocument(siteExp.ELEMENT_SE_NODE.replace("{$node}", node2));
-		cMenu.deleteDocument(siteExp.ELEMENT_SE_NODE.replace("{$node}", node1));
+		cMenu.deleteDocument(siteExp.ELEMENT_SE_NODE.replace("{$node}", node2),180000);
+		cMenu.deleteDocument(siteExp.ELEMENT_SE_NODE.replace("{$node}", node1),180000);
 	}
 
 

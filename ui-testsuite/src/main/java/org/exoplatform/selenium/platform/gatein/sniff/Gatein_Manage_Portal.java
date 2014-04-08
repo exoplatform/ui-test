@@ -59,7 +59,7 @@ public class Gatein_Manage_Portal extends PortalManagement{
 		
 		info("Switch to new portal");
 		driver.get(baseUrl+"/" + portalName);
-		waitForAndGetElement("//img[contains(@src, 'sites/" + portalName + "')]");
+		waitForAndGetElement("//*[@class='HomeLink' and contains(@href, '/portal/" + portalName + "')]");
 		
 		info("Delete portal");
 		driver.get(baseUrl);

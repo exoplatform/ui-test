@@ -195,7 +195,7 @@ public class Gatein_Navigation_PortalNavigation_EditNavigation extends PortalMan
 		waitForElementNotPresent(button.ELEMENT_SAVE_BUTTON);
 
 		info("View Page before editing...");
-		driver.get(DEFAULT_BASEURL + "/intranet/home/" + nodeName2);
+		driver.get(baseUrl + "/intranet/home/" + nodeName2);
 		waitForTextPresent("Basic information");
 		waitForTextPresent("Contact");
 		waitForTextPresent("Experience");
@@ -207,7 +207,7 @@ public class Gatein_Navigation_PortalNavigation_EditNavigation extends PortalMan
 		waitForElementNotPresent(button.ELEMENT_SAVE_BUTTON);
 
 		info("View Page after editing...");
-		driver.get(DEFAULT_BASEURL + "/intranet/home/" + nodeName2);
+		driver.get(baseUrl + "/intranet/home/" + nodeName2);
 		waitForTextNotPresent("Basic information");
 		waitForTextPresent("Wiki Home");
 
@@ -354,12 +354,12 @@ public class Gatein_Navigation_PortalNavigation_EditNavigation extends PortalMan
 	public void test06_AddEditMoveAndRemoveApplicationWhenEditPagePropertiesOfNode(){
 		String portalName = "intranet";
 		String parentNode = "Home";
-		String nodeName = "test06EditNode";
-		String pageSelectorName = "test06pageSelector";
+		String nodeName = "node70607";
+		String pageSelectorName = "page70607";
 		Map<String, String> languages = new HashMap<String, String>();
 		languages.put("English", "");
 		String nodeLinkToEdit = ELEMENT_NODE_LINK.replace("${nodeLabel}", nodeName);
-		String portletTitle = "test06PortletTitle";
+		String portletTitle = "title70607";
 
 		info("Go to Administration/Portal Sites");
 		navToolbar.goToPortalSites();
@@ -447,7 +447,7 @@ public class Gatein_Navigation_PortalNavigation_EditNavigation extends PortalMan
 	public void test00_AddEditMoveAndDeleteContainerWhenEditPagePropertiesOfNode(){
 		String portalName = "intranet";
 		String nodeLink = ELEMENT_NODE_LINK.replace("${nodeLabel}", "Documents");
-		String containerTitle = "test07EditContainerTitle";
+		String containerTitle = "container70612";
 
 		info("Go to Administration/Portal Sites");
 		navToolbar.goToPortalSites();

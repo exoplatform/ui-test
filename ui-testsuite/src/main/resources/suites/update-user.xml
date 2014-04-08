@@ -11,6 +11,7 @@
 			<class name="org.exoplatform.selenium.community.Community_Create_Users">
         		<methods>
           			<include name="test02_UpdateUserAccount"/>
+          			<include name="test03_UpdateMembership"/>
         		</methods>
       		</class>
       		<class name="org.exoplatform.selenium.community.Community_Create_DataTest">

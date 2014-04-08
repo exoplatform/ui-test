@@ -532,8 +532,8 @@ public class PlatformBase extends TestBase {
 	public final By ELEMENT_CATEGORY_COLLABORATION = By.linkText("Collaboration");
 	public final By ELEMENT_CATEGORY_ADMINISTRATION = By.linkText("Administration");
 	public final By ELEMENT_ACCOUNT_PORTLET = By.id("Administration/AccountPortlet");
-	public final By ELEMENT_PAGE_MANAGEMENT_PORTLET = By.id("Administration/PageManagementPortlet");
-	public final By ELEMENT_ORGANIZATION_PORTLET = By.id("Administration/OrganizationPortlet");
+	public final By ELEMENT_PAGE_MANAGEMENT_PORTLET = By.xpath("//*[contains(@id,'PageManagementPortlet' ) or @id='Administration/PageManagementPortlet']");
+	public final By ELEMENT_ORGANIZATION_PORTLET = By.xpath("//*[contains(@id,'OrganizationPortlet' ) or @id='Administration/OrganizationPortlet']");
 	public final By ELEMENT_CONTENTS_LIST_VIEWER_PORTLET = By.xpath("//*[contains(@id,'.ContentListViewerPortlet') or (@id='Content/ContentListViewerPortlet')]");
 	public final By ELEMENT_ANWSER_PORTLET = By.xpath("//div[@id='Collaboration/AnswersPortlet']/div");
 	public final By ELEMENT_ANWSER_PORTLET_IN_VIEW_PAGE = By.id("UIAnswersPortlet");
@@ -787,6 +787,9 @@ public class PlatformBase extends TestBase {
 	public By PRODUCTS_LABEL_ENGLISH = By.xpath("//*[text()='Products']");
 	public By PRODUCTS_LABEL_FRENCH = By.xpath("//*[text()='Produits']");
 	public By PRODUCTS_LABEL_GERMAN = By.xpath("//*[text()='Produkte']");
+	
+	//Page navigator
+	public By ELEMENT_PAGE_TOTAL_NUMBER = By.className("pagesTotalNumber");
 
 
 	///////////////////
@@ -1168,6 +1171,8 @@ public class PlatformBase extends TestBase {
 		for(String winHandle : driver.getWindowHandles()){
 			driver.switchTo().window(winHandle);
 		}
+		baseUrl = System.getProperty("baseUrl");
+		if (baseUrl==null) baseUrl = DEFAULT_BASEURL;
 		driver.navigate().to(baseUrl);
 	}
 

@@ -111,12 +111,12 @@ public class ECMS_Admin_Advanced extends PlatformBase{
 		//Prepare test data
 		//GetMailScript
 		String scriptFileContent_0 = "TestData/ECMS_Admin_GetMailScript_Template.txt"; 
-		String scriptLabel_0 = "GetMailScript"; 
-		String scriptName_0 = "GetMailScript";
+		String scriptLabel_0 = "AGetMailScript"; 
+		String scriptName_0 = "AGetMailScript";
 		//SendMailScript
 		String scriptFileContent_1 = "TestData/ECMS_Admin_SendMailScript_Template.txt"; 
-		String scriptLabel_1 = "SendMailScript"; 
-		String scriptName_1 = "SendMailScript";
+		String scriptLabel_1 = "ASendMailScript"; 
+		String scriptName_1 = "ASendMailScript";
 
 		String actionTypeName = "Get Emails";
 		String newActionTypeName = "Send Emails";
@@ -139,6 +139,7 @@ public class ECMS_Admin_Advanced extends PlatformBase{
 		//Reset data
 		click(ecMain.ELEMENT_MANAGE_SCRIPTS_LINK);
 		magScript.deleteScript(scriptLabel_0);
+		click(ecMain.ELEMENT_MANAGE_SCRIPTS_LINK);
 		magScript.deleteScript(scriptLabel_1);
 	}
 
@@ -158,45 +159,45 @@ public class ECMS_Admin_Advanced extends PlatformBase{
 		String DATA_FILE = "FileTest";
 		By ELEMENT_FILE = By.linkText(DATA_FILE);
 
-		nav.goToContentAdministration();
-
-		//Add a new category tree
-		String[] form1 = {categoryTreeName, categoryWorkspace, nodeHomePath};
-		String[] form2 = {groupID, "*"};
-		String[] form3 = {actionName, optionLifeCycle, nodeTargetPath}; 
-		boolean[] setPermission = {true, true, true};
-		magCa.addNewCategoryTree(form1, false, true, form2, DATA_USER, setPermission, form3, true);
-
-		//Add/copy/cut/paste/delete category in category tree
-		magCa.addChildCategory(categoryTreeName, categoryName_0, false);
-		ecms.clickUpLevel();
-		magCa.addChildCategory(categoryTreeName, newCategoryName_0, true);
-		magCa.copyAndPasteCategory(categoryName_0, newCategoryName_0);
-
-		ecms.clickUpLevel();
-		ecms.clickUpLevel();
-		magCa.addChildCategory(categoryTreeName, categoryName_1, true);
-		ecms.clickUpLevel();
-		magCa.addChildCategory(categoryTreeName, newCategoryName_1, true);
-		magCa.cutAndPasteCategory(categoryName_1, newCategoryName_1);	
-		magCa.deleteCategory(newCategoryName_1);
-		button.close();
-		waitForTextPresent(categoryTreeName);
-
-		//Edit a category
-		magCa.addNewCategoryTree_Step4(categoryTreeName, categoryName_2, newCategoryName_2, "mary", true, true, true);
-		click(magCa.ELEMENT_EDIT_CATEGORY_TREE.replace("${categoryTreeName}", categoryTreeName));
-		click(button.ELEMENT_PREVIOUS_BUTTON_ADMIN_4);
-		click(button.ELEMENT_PREVIOUS_BUTTON_ADMIN_3);
-		ecmsPer.removeDefaultPermissionOfNode();
-		ecmsPer.deletePermission("*:/platform/users",true);
-		button.close();
-		magAcc.signOut();
-
-		//create a node by user who hasn't [read] permission
-		magAcc.signIn("mary", DATA_PASS);
-		nav.goToSiteExplorer();
-		actBar.addItem2ActionBar("addDocument", actBar.ELEMENT_NEW_CONTENT_LINK);
+//		nav.goToContentAdministration();
+//
+//		//Add a new category tree
+//		String[] form1 = {categoryTreeName, categoryWorkspace, nodeHomePath};
+//		String[] form2 = {groupID, "*"};
+//		String[] form3 = {actionName, optionLifeCycle, nodeTargetPath}; 
+//		boolean[] setPermission = {true, true, true};
+//		magCa.addNewCategoryTree(form1, false, true, form2, DATA_USER, setPermission, form3, true);
+//
+//		//Add/copy/cut/paste/delete category in category tree
+//		magCa.addChildCategory(categoryTreeName, categoryName_0, false);
+//		ecms.clickUpLevel();
+//		magCa.addChildCategory(categoryTreeName, newCategoryName_0, true);
+//		magCa.copyAndPasteCategory(categoryName_0, newCategoryName_0);
+//
+//		ecms.clickUpLevel();
+//		ecms.clickUpLevel();
+//		magCa.addChildCategory(categoryTreeName, categoryName_1, true);
+//		ecms.clickUpLevel();
+//		magCa.addChildCategory(categoryTreeName, newCategoryName_1, true);
+//		magCa.cutAndPasteCategory(categoryName_1, newCategoryName_1);	
+//		magCa.deleteCategory(newCategoryName_1);
+//		button.close();
+//		waitForTextPresent(categoryTreeName);
+//
+//		//Edit a category
+//		magCa.addNewCategoryTree_Step4(categoryTreeName, categoryName_2, newCategoryName_2, DATA_USER2, true, true, true);
+//		click(magCa.ELEMENT_EDIT_CATEGORY_TREE.replace("${categoryTreeName}", categoryTreeName));
+//		click(button.ELEMENT_PREVIOUS_BUTTON_ADMIN_4);
+//		click(button.ELEMENT_PREVIOUS_BUTTON_ADMIN_3);
+//		ecmsPer.removeDefaultPermissionOfNode();
+//		ecmsPer.deletePermission("*:/platform/users",true);
+//		button.close();
+//		magAcc.signOut();
+//
+//		//create a node by user who hasn't [read] permission
+//		magAcc.signIn(DATA_USER2, DATA_PASS);
+//		nav.goToSiteExplorer();
+//		actBar.addItem2ActionBar("addDocument", actBar.ELEMENT_NEW_CONTENT_LINK);
 		magAcc.userSignIn(userType.PUBLISHER);
 		nav.goToSiteExplorer();
 		 if(waitForAndGetElement(actBar.ELEMENT_VIEW_MODE_LINK.replace("${viewName}", "Web"),DEFAULT_TIMEOUT,0)!=null){
@@ -236,7 +237,7 @@ public class ECMS_Admin_Advanced extends PlatformBase{
 	 */
 	@Test
 	public void test03_AddEditAndDeleteQuery(){
-		String queryName = "Created Documents"; 
+		String queryName = "query65863"; 
 		String queryType = "SQL";
 		boolean enableCacheResult = false;
 		String group = "Platform/Users";
@@ -268,8 +269,8 @@ public class ECMS_Admin_Advanced extends PlatformBase{
 	@Test
 	public void test04_AddEditAndDeleteScript(){
 		String scriptFileContent = "TestData/ECMS_Admin_SendMailScript_Template.txt"; 
-		String scriptLabel = "SendMailScript"; 
-		String scriptName = "SendMailScript";
+		String scriptLabel = "AScript65865"; 
+		String scriptName = "ASendMail65865";
 
 		String newScriptFileContent = ""; 
 		String newScriptName = "Edit SendMailScript";

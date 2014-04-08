@@ -32,13 +32,15 @@ public class NavigationToolbar extends PlatformBase {
 		brandMag = new BrandingManagement(driver);
 		button = new Button(driver);
 		peoCon = new PeopleConnection(driver);
-		
+
 	} 
 
 	//Go to portal sites
 	public void goToPortalBranding() {
 		info("--Go to Portal Branding Management--");
-		String url = DEFAULT_BASEURL + "/g/:platform:administrators/branding";
+		baseUrl = System.getProperty("baseUrl");
+		if (baseUrl==null) baseUrl = DEFAULT_BASEURL;
+		String url = baseUrl + "/g/:platform:administrators/branding";
 		for(int repeat=0;; repeat ++){
 			if (repeat > 1){
 				driver.get(url);
@@ -65,7 +67,9 @@ public class NavigationToolbar extends PlatformBase {
 	//Go to portal sites
 	public void goToPortalSites() {
 		info("--Go to Portal Site Management--");
-		String url = DEFAULT_BASEURL + "/g/:platform:administrators/portalnavigation";
+		baseUrl = System.getProperty("baseUrl");
+		if (baseUrl==null) baseUrl = DEFAULT_BASEURL;
+		String url = baseUrl + "/g/:platform:administrators/portalnavigation";
 		for(int repeat=0;; repeat ++){
 			if (repeat > 1){
 				driver.get(url);
@@ -88,7 +92,9 @@ public class NavigationToolbar extends PlatformBase {
 	//Go to Portal Manage Pages	
 	public void goToManagePages() {
 		info("--Go to Page Management--");
-		String url = DEFAULT_BASEURL + "/g/:platform:administrators/administration/pageManagement";
+		baseUrl = System.getProperty("baseUrl");
+		if (baseUrl==null) baseUrl = DEFAULT_BASEURL;
+		String url = baseUrl + "/g/:platform:administrators/administration/pageManagement";
 		for(int repeat=0;; repeat ++){
 			if (repeat > 1){
 				driver.get(url);
@@ -168,7 +174,9 @@ public class NavigationToolbar extends PlatformBase {
 	//Go to Portal/Group Sites
 	public void goToGroupSites(){
 		info("--Go to Group Site Management--");
-		String url = DEFAULT_BASEURL + "/g/:platform:administrators/groupnavigation";
+		baseUrl = System.getProperty("baseUrl");
+		if (baseUrl==null) baseUrl = DEFAULT_BASEURL;
+		String url = baseUrl + "/g/:platform:administrators/groupnavigation";
 		//driver.get(url);
 		Utils.pause(1000);
 		for(int repeat=0;; repeat ++){
@@ -192,7 +200,9 @@ public class NavigationToolbar extends PlatformBase {
 	//Go to Portal/Sites
 	public void goToSites(){
 		info("--Go to Sites --");
-		String url = DEFAULT_BASEURL + "/g/:platform:administrators/portalnavigation";
+		baseUrl = System.getProperty("baseUrl");
+		if (baseUrl==null) baseUrl = DEFAULT_BASEURL;
+		String url = baseUrl + "/g/:platform:administrators/portalnavigation";
 		//driver.get(url);
 		Utils.pause(1000);
 		for(int repeat=0;; repeat ++){
@@ -268,6 +278,8 @@ public class NavigationToolbar extends PlatformBase {
 
 	//Go to register page in public mode
 	public void goToRegisterPageInPublicMode(WebDriver driverTest){
+		baseUrl = System.getProperty("baseUrl");
+		if (baseUrl==null) baseUrl = DEFAULT_BASEURL;
 		String registerPageLink = baseUrl.concat("/portal/intranet/Register");
 		driverTest.get(registerPageLink);
 		waitForTextPresent("Create a New Account");
@@ -276,7 +288,9 @@ public class NavigationToolbar extends PlatformBase {
 	// Go to content administration
 	public void goToContentAdministration()
 	{
-		String url = DEFAULT_BASEURL + "/g/:platform:web-contributors/wcmAdmin";
+		baseUrl = System.getProperty("baseUrl");
+		if (baseUrl==null) baseUrl = DEFAULT_BASEURL;
+		String url = baseUrl + "/g/:platform:web-contributors/wcmAdmin";
 		for(int repeat=0;; repeat ++){
 			if (repeat > 1){
 				driver.get(url);
@@ -299,22 +313,28 @@ public class NavigationToolbar extends PlatformBase {
 
 	//Enter Sites Management Form 
 	public void goToSiteExplorer(){
-		Utils.pause(500);
+		Utils.pause(1000);
+		baseUrl = System.getProperty("baseUrl");
+		if (baseUrl==null) baseUrl = DEFAULT_BASEURL;
+		String url = baseUrl + "/g/:platform:web-contributors/siteExplorer";
 		for(int repeat=0;; repeat ++){
 			if (repeat > 1){
-				mouseOverAndClick(ELEMENT_LINK_SETUP);
+				driver.get(url);
 				break;
 			}
 			mouseOver(ELEMENT_LINK_SETUP, true);
-			if (waitForAndGetElement(ELEMENT_MENU_CONTENT_LINK, 5000, 0) != null){
-				info("Element " + ELEMENT_MENU_CONTENT_LINK + "... is displayed");
-				break;
+			if (waitForAndGetElement(ELEMENT_MENU_CONTENT_LINK, 5000, 0)!= null) {	
+				mouseOver(ELEMENT_MENU_CONTENT_LINK, true);
+				if (waitForAndGetElement(ELEMENT_MENU_SITE_EXPLORER, 5000, 0)!= null){
+					click(ELEMENT_MENU_SITE_EXPLORER);
+					break;
+				}
 			}
 			info("Retry...[" + repeat + "]");
 		}
 		//mouseOverAndClick(ELEMENT_LINK_SETUP);
 		//mouseOver(ELEMENT_LINK_SETUP, true);
-		mouseOverAndClick(ELEMENT_MENU_CONTENT_LINK);
+//		mouseOverAndClick(ELEMENT_MENU_CONTENT_LINK);
 		//click(ELEMENT_MENU_SITE_EXPLORER);
 		Utils.pause(2000);
 	}
@@ -322,7 +342,9 @@ public class NavigationToolbar extends PlatformBase {
 	//Enter Search Form  (Administration > Content > Search menu)
 	public void goToSearch()
 	{
-		String url = DEFAULT_BASEURL + "/g/:platform:administrators/search";
+		baseUrl = System.getProperty("baseUrl");
+		if (baseUrl==null) baseUrl = DEFAULT_BASEURL;
+		String url = baseUrl + "/g/:platform:administrators/search";
 		for(int repeat=0;; repeat ++){
 			if (repeat > 1){
 				driver.get(url);
@@ -494,7 +516,9 @@ public class NavigationToolbar extends PlatformBase {
 	 */
 	public void goToIDEPage(){
 		info("--Go to IDE Page--");
-		String url = DEFAULT_BASEURL + "/g/:developers/ide";
+		baseUrl = System.getProperty("baseUrl");
+		if (baseUrl==null) baseUrl = DEFAULT_BASEURL;
+		String url = baseUrl + "/g/:developers/ide";
 		for(int repeat=0;; repeat ++){
 			if (repeat > 1){
 				driver.get(url);

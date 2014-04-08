@@ -37,8 +37,10 @@ public class Dialog extends TestBase{
 	public void closeMessageDialog() {
 		info("--Closing message dialog--");
 		if (ieFlag) {
+			waitForAndGetElement(ELEMENT_MESSAGE_DIALOG_CLOSE_ICON_IE, 300000);
 			click(ELEMENT_MESSAGE_DIALOG_CLOSE_ICON_IE);
 		} else {
+			waitForAndGetElement(ELEMENT_MESSAGE_DIALOG_CLOSE_ICON, 300000);
 			click(ELEMENT_MESSAGE_DIALOG_CLOSE_ICON);
 		}
 		Utils.pause(1000);

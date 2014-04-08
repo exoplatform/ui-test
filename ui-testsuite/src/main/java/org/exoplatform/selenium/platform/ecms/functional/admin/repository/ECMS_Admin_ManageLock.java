@@ -106,7 +106,7 @@ public class ECMS_Admin_ManageLock extends PlatformBase{
 
 		nav.goToSiteExplorer();
 
-		cMenu.deleteDocument(elementArticleToLock);
+		cMenu.deleteDocument(elementArticleToLock,180000);
 
 		info("-- SignOut--");
 
@@ -164,7 +164,7 @@ public class ECMS_Admin_ManageLock extends PlatformBase{
 
 		ecms.goToNode("intranet/documents");
 
-		cMenu.deleteDocument(elementArticleLockedByAdmin);
+		cMenu.deleteDocument(elementArticleLockedByAdmin,180000);
 
 		info("-- SignOut --");
 	}

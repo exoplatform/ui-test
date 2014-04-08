@@ -155,7 +155,7 @@ public class ECMS_SE_PublicActivity extends PlatformBase {
 		info("Add new web content ");
 		actBar.goToAddNewContent();
 		temp.createFullNewProduct(name, "", sum, "", "", true);
-		click(By.linkText("acme"));
+		actBar.goToNode(elementProduct);
 		
 		info("Make version for this file document");
 		cMenu.contextMenuAction(elementProduct, cMenu.ELEMENT_MENU_CHECKIN);
@@ -324,21 +324,22 @@ public class ECMS_SE_PublicActivity extends PlatformBase {
 		info("Add a category for uploaded file");
 		navToolBar.goToSiteExplorer();
 		ecms.goToNode(elementUploadFile);
-		actBar.addCategoryForNode("powers", false, "", category1);
+		actBar.addCategoryForNode("intranet", false, "", category1);
 		
 		info("Check activity after adding a category");
 		navTool.goToHomePage();
-		activity.checkCategoryAfterAddingToContent(fileUpload, category1);
+		activity.checkCategoryAfterAddingToContent(fileUpload, category1.toLowerCase());
 		
 		info("Add 2 category for uploaded file");
 		navToolBar.goToSiteExplorer();
-		actBar.addCategoryForNode("powers", false, "", category2);
-		actBar.addCategoryForNode("powers", false, "", category3);
+		ecms.goToNode(elementUploadFile);
+		actBar.addCategoryForNode("intranet", false, "", category2);
+		actBar.addCategoryForNode("intranet", false, "", category3);
 		
 		info("Check activity after adding 2 categories");
 		navTool.goToHomePage();
-		activity.checkCategoryAfterAddingToContent(fileUpload, category2);
-		activity.checkCategoryAfterAddingToContent(fileUpload, category3);
+		activity.checkCategoryAfterAddingToContent(fileUpload, category2.toLowerCase());
+		activity.checkCategoryAfterAddingToContent(fileUpload, "natural-elements");
 		
 		//delete data
 		navToolBar.goToSiteExplorer();
@@ -395,7 +396,7 @@ public class ECMS_SE_PublicActivity extends PlatformBase {
 	 */
 	@Test
 	public void test12_EditAContentFromContentActivity(){
-		String name = "Public_activity_web_content_11";
+		String name = "webcontent75294";
 		String sum = "line1/line2/line3";
 		By elementWeb = By.linkText(name);
 		
@@ -403,6 +404,7 @@ public class ECMS_SE_PublicActivity extends PlatformBase {
 		
 		info("Click Edit icon in activity");
 		activity.goToEditFromContentActivity(name);
+		info(getValue(temp.ELEMENT_WEBCONTENT_NAME_TEXTBOX));
 		assert getValue(temp.ELEMENT_WEBCONTENT_NAME_TEXTBOX).equalsIgnoreCase(name);
 		activity.backToHomePageFromEditContentScreen();
 		
@@ -433,9 +435,6 @@ public class ECMS_SE_PublicActivity extends PlatformBase {
 		activity.backToHomePageFromEditContentScreen();
 		
 		navTool.goToSiteExplorer();
-		actBar.chooseDrive(By.xpath("//*[@data-original-title='Sites Management']"));
-		click(siteExp.ELEMENT_SIDEBAR_FILE_EXPLORER);
-		waitForAndGetElement(siteExp.ELEMENT_SIDEBAR_SITES_MANAGEMENT);
 		cMenu.deleteData(elementWeb);		
 	}
 	

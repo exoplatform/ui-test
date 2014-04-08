@@ -69,13 +69,17 @@ public class PageManagement extends PlatformBase {
 		button = new Button(driver);
 		
 		click(ELEMENT_ADD_PAGE_BUTTON);
-		waitForAndGetElement(By.xpath("//*[text()= 'Page Settings']"), 300000,1);	
+		if(waitForAndGetElement(By.xpath("//*[text()= 'Page Settings']"), 180000,0)==null){
+			driver.navigate().refresh();
+		}
+		waitForAndGetElement(By.xpath("//*[text()= 'Page Settings']"), 300000,1);
 		switch (type){
 		case PORTAL:
 			select(ELEMENT_SELECT_OWNER_TYPE, "portal");
 			break;
 		case GROUP:	
 			select(ELEMENT_SELECT_OWNER_TYPE, "group");
+			waitForAndGetElement(ELEMENT_SELECT_OWNER_ID, 180000);
 			break;
 		default:
 			break;

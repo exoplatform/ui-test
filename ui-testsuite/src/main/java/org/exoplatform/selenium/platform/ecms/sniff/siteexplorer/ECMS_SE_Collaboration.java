@@ -70,12 +70,10 @@ public class ECMS_SE_Collaboration extends PlatformBase {
 		By elementFile = By.linkText(file);
 
 		navToolBar.goToSiteExplorer();
-		click(By.linkText("acme"));
-		click(By.linkText("documents"));
-		click(By.linkText("metro.pdf"));
+		cTemplate.goToNode("intranet/documents/metro.pdf");
 		actBar.addItem2ActionBar("comment", actBar.ELEMENT_ADD_COMMENT_LINK);
 		navToolBar.goToSiteExplorer();
-		ecms.goToNode(siteExp.ELEMENT_SIDEBAR_SITES_MANAGEMENT);
+		actBar.goToNodeByAddressPath("/");
 		actBar.goToAddNewContent();
 
 		info("Create new file document and add comment");
@@ -101,9 +99,7 @@ public class ECMS_SE_Collaboration extends PlatformBase {
 		By elementUploadFile = By.linkText(fileUpload);
 
 		navToolBar.goToSiteExplorer();
-		click(By.linkText("acme"));
-		click(By.linkText("documents"));
-		click(By.linkText("metro.pdf"));
+		cTemplate.goToNode("intranet/documents/metro.pdf");
 		actBar.addItem2ActionBar("comment", actBar.ELEMENT_ADD_COMMENT_LINK);
 		navToolBar.goToSiteExplorer();
 		ecms.goToNode(siteExp.ELEMENT_SIDEBAR_SITES_MANAGEMENT);
@@ -247,7 +243,7 @@ public class ECMS_SE_Collaboration extends PlatformBase {
 		info("Create new file with English language then public its");		
 		cTemplate.createNewFile(fileEnglish, fileContentEnglish, fileEnglish);
 		actBar.publishDocument();
-		ecms.goToNode(siteExp.ELEMENT_SIDEBAR_SITES_MANAGEMENT);
+		actBar.goToNodeByAddressPath("/");
 
 		info("Create new file with French language then public its");
 		actBar.goToAddNewContent();

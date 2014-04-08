@@ -31,19 +31,19 @@ public class ContextMenu extends EcmsBase{
 	/*
 	 * @Added by PhuongDT
 	 * Date 04/09/2013 
-	*/
+	 */
 	public final By ELEMENT_MENU_ADD_TO_FAVORITE = By.xpath("//*[@id='JCRContextMenu']//i[@class='uiIconEcmsAddToFavourite']");
 	/*End Added*/
-	
+
 	public final By ELEMENT_CONTEXT_MENU_LOCK = By.xpath("//*[@class='uiContextMenuContainer']//i[@class='uiIconEcmsLock']"); 
-			//By.className("uiIconEcmsLock");
+	//By.className("uiIconEcmsLock");
 	public final By ELEMENT_MENU_UNLOCK = By.className("uiIconEcmsUnlock");
 	public final By ELEMENT_MENU_CHECKIN = By.className("uiIconEcmsCheckIn");
 	public final By ELEMENT_MENU_CHECKOUT = By.className("uiIconEcmsCheckOut");
 	public final By ELEMENT_MENU_RENAME_NODE = By.linkText("Rename");
 	public final By ELEMENT_MENU_PASTE = By.xpath("//a[contains(text(),'Paste')]");
 	public final By ELEMENT_MENU_DELETE = By.className("uiIconEcmsDelete");
-			//By.className("uiIconEcmsDelete");
+	//By.className("uiIconEcmsDelete");
 	public final By ELEMENT_MENU_DELETE_RIGHT_CLICK_POPUP = By.xpath("//*[@id='JCRContextMenu']/div/ul/li[7]/a");
 	public final By ELEMENT_MENU_EDIT = By.className("uiIconEcmsEditDocument");
 	public final By ELEMENT_MENU_ADD_SYMLINK = By.className("uiIconEcmsAddSymLink");
@@ -93,7 +93,8 @@ public class ContextMenu extends EcmsBase{
 			if(isElementPresent(By.xpath("//*[@data-original-title = 'File Explorer']")))
 				click(By.xpath("//*[@data-original-title = 'File Explorer']"));
 		}
-		rightClickOnElement(loc);
+		if(checkNodeName(loc))
+			rightClickOnElement(loc);
 		if (waitForAndGetElement(actionItem, 5000, 0) != null) {
 			if(this.plfVersion.equalsIgnoreCase("4.0"))
 				click(actionItem);
@@ -103,10 +104,10 @@ public class ContextMenu extends EcmsBase{
 		if (!nodeName.isEmpty()){
 			//if (waitForAndGetElement(ELEMENT_MENU_RENAME_NODE, 5000, 1) != null){
 			//	click(ELEMENT_MENU_RENAME_NODE);
-				type(ELEMENT_INPUT_RENAME_NODE, nodeName, true);
-				button.rename();
-				waitForTextPresent(nodeName);
-				info("Node is renamed successfully");
+			type(ELEMENT_INPUT_RENAME_NODE, nodeName, true);
+			button.rename();
+			waitForTextPresent(nodeName);
+			info("Node is renamed successfully");
 			//}
 		}
 		//Utils.pause(WAIT_INTERVAL);
@@ -126,7 +127,8 @@ public class ContextMenu extends EcmsBase{
 				Utils.pause(1000);
 				click(By.xpath("//*[@data-original-title = 'File Explorer']"));
 			}
-			rightClickOnElement(by);
+			if(checkNodeName(by))
+				rightClickOnElement(by);
 			Utils.pause(500);
 			if (isElementPresent(ELEMENT_MENU_UNLOCK)) {
 				locked = true;
@@ -186,7 +188,8 @@ public class ContextMenu extends EcmsBase{
 				if(isElementPresent(By.xpath("//*[@data-original-title = 'File Explorer']")))
 					click(By.xpath("//*[@data-original-title = 'File Explorer']"));
 			}
-			rightClickOnElement(locator);
+			if(checkNodeName(locator))
+				rightClickOnElement(locator);
 			if (waitForAndGetElement(ELEMENT_MENU_DELETE, 10000, 0)!=null) 
 			{	
 				click(ELEMENT_MENU_DELETE);

@@ -61,7 +61,7 @@ public class HomePageActivity extends PlatformBase{
 
 	//Content activity
 	public final String ELEMENT_CONTENT_NAME = "//a[@title='@{fileName}']";
-	public final String ELEMENT_CONTENT_NAME_41 = "//a[@data-original-title='@{fileName}']";
+	public final String ELEMENT_CONTENT_NAME_41 = "//a[@data-original-title='@{fileName}' and @class='linkTitle']";
 	public final String ELEMENT_CONTENT_TYPE_ICON = "//a[@title='@{fileName}']/../..//*[@class='${icon}']";
 	public final String ELEMENT_CONTENT_TYPE_ICON_41 = "//a[@data-original-title='@{fileName}']/../..//*[@class='${icon}']";
 	public final String ELEMENT_CONTENT_TYPE = "//a[@title='@{fileName}']/..//*[@class='versionFile' and contains(text(), '${type}')]";
@@ -95,7 +95,7 @@ public class HomePageActivity extends PlatformBase{
 	public final String ELEMENT_CONTENT_VIEW_LINK_PLF41 = "//*[contains(text(),'${activityText}')]/../../../..//*[@class='uiIconWatch uiIconLightGray']";
 	public final String ELEMENT_CONTENT_EDIT_LINK_PLF41 = "//*[contains(text(),'${activityText}')]/../../../..//*[@class='uiIconEdit uiIconLightGray']"; 
 	public final String ELEMENT_CONTENT_COMMENT_MOVING = "//*[@title='@{fileName}']/../../../..//*[@class='commentBox']//*[text()='Publication has been moved to: ${path}']";
-	public final String ELEMENT_CONTENT_COMMENT_MOVING_41 = "//*[@data-original-title='@{fileName}']/../../../..//*[@class='commentBox']//*[text()='Publication has been moved to: ${path}']";
+	public final String ELEMENT_CONTENT_COMMENT_MOVING_41 = "//*[@data-original-title='@{fileName}' or @title='@{fileName}']/../../../..//*[@class='commentBox']//*[text()='Publication has been moved to: ${path}']";
 	public final String ELEMENT_CONTENT_COMMENT_RENAME_SPACE = "//div[@class='author']/a[contains(text(), '${spacename}')]//ancestor::div[contains(@id,'ContextBox')]/div[contains(@id,'CommentBlockBound')]//p[contains(text(),'Name has been updated to: ${spacename}.')]";
 	public final String ELEMENT_CONTENT_COMMENT_USER_JOIN_SPACE="//div[@class='author']/a[contains(text(), '${spacename}')]//ancestor::div[contains(@id,'ContextBox')]/div[contains(@id,'CommentBlockBound')]//div[@class='author']/a[text()='${username}']/../../p[contains(text(),'Has joined the space')]";
 	public final String ELEMENT_CONTENT_COMMENT_USER_CHANGE_AVATAR="//div[@class='author']/a[contains(text(), '${username}')]//ancestor::div[contains(@id,'ContextBox')]/div[contains(@id,'CommentBlockBound')]//div[@class='author']/a[text()='${username}']/../../p[contains(text(),'Avatar has been updated.')]";

@@ -67,7 +67,7 @@ public class ECMS_SE_Info extends PlatformBase {
 
 		//Check if mary has edit, read on node1
 		actBar.goToNode(bNode1);
-		waitForAndGetElement(actBar.ELEMENT_NEW_CONTENT_LINK);
+		actBar.goToAddNewContent();
 
 		//Delete data
 		magAcc.signOut();
@@ -112,9 +112,9 @@ public class ECMS_SE_Info extends PlatformBase {
 
 		//Check if mary has edit, read on node1
 		actBar.goToNode(bNode1);
-		waitForAndGetElement(actBar.ELEMENT_NEW_CONTENT_LINK);
 		rightClickOnElement(bNode1);
 		waitForAndGetElement(cMenu.ELEMENT_MENU_DELETE);
+		actBar.goToAddNewContent();
 
 		//Delete data
 		magAcc.signOut();
@@ -155,7 +155,7 @@ public class ECMS_SE_Info extends PlatformBase {
 
 		//Check if mary has edit, read on node1
 		actBar.goToNode(bNode1);
-		waitForAndGetElement(actBar.ELEMENT_NEW_CONTENT_LINK);
+		actBar.goToAddNewContent();
 
 		//Delete permission
 		magAcc.signOut();
@@ -205,8 +205,6 @@ public class ECMS_SE_Info extends PlatformBase {
 
 	@BeforeMethod
 	public void beforeMethod() {
-		initSeleniumTest();
-		driver.close();
 		getDriverAutoOpenWindow();
 		driver.get(baseUrl);
 		navToolBar = new NavigationToolbar(driver);

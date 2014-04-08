@@ -58,7 +58,7 @@ public class ECMS_SE_Setting extends PlatformBase {
 		
 		//Delete data
 		click(siteExp.ELEMENT_SIDEBAR_FILE_EXPLORER);
-		cMenu.deleteDocument(bNode1);
+		cMenu.deleteDocument(bNode1,180000);
 	}
 	
 	@BeforeMethod

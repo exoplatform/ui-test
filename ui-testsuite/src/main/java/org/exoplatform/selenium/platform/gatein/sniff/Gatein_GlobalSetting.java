@@ -61,7 +61,7 @@ public class Gatein_GlobalSetting extends PlatformBase {
 		String newEmail = "newmail@gmail.com";
 		
 		navTool.goToNewStaff();
-		magAc.addNewUserAccount(username, password, password, firstName, lastName, displayName, email, null, null, false);
+		magAc.addNewUserAccount(username, password, password, firstName, lastName, displayName, email, null, null, true);
 		magAc.signOut();
 		
 		info("Change User Profile");
@@ -94,7 +94,7 @@ public class Gatein_GlobalSetting extends PlatformBase {
 		String newpass = "123456789";
 		
 		navTool.goToNewStaff();
-		magAc.addNewUserAccount(username, password, password, firstName, lastName, displayName, email, null, null, false);
+		magAc.addNewUserAccount(username, password, password, firstName, lastName, displayName, email, null, null, true);
 		magAc.signOut();
 		
 		info("Change password of user");

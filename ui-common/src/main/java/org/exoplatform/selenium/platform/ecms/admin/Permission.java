@@ -50,6 +50,11 @@ public class Permission extends EcmsPermission{
 	public final String ELEMENT_DELETE_SELECTED_GROUP = "//*[contains(text(), '${selectedGroup}')]/../..//*[contains(@class, 'uiIconDelete')]";
 	public final String ELEMENT_TEXT_ADD_PERMISSION = "//*[@class='UIPermissionManager']//*[contains(text(), '${text}')]";
 
+	//Search group and user
+	public final By ELEMENT_INPUT_SEARCH_USER = By.id("Quick Search");
+	public final String ELEMENT_SELECT_SEARCH_OPTION = "//select[@name='filter']";
+	public final By ELEMENT_QUICK_SEARCH_USER = By.xpath("//*[@data-original-title='Quick Search']");
+
 	/*============== Explorer/Tags Permission Manager ================*/
 	/**
 	 * Remove permission 
@@ -88,7 +93,7 @@ public class Permission extends EcmsPermission{
 			}else {
 				click(ELEMENT_SELECT_USER_IN_PERMISSION_MANAGEMENT_2);
 			}
-
+			searchUser(user,"User Name");
 			if (waitForAndGetElement(ELEMENT_TEXT_ADD_PERMISSION.replace("${text}", "Add permissions to this node"), 5000, 0) != null){
 				if (waitForAndGetElement(By.xpath("//*[@title='" + user + "']/../..//*[@class='SelectPageIcon']"), 5000, 0) !=null ){
 					click(By.xpath("//*[@title='" + user + "']/../..//*[@class='SelectPageIcon']"));
@@ -158,5 +163,18 @@ public class Permission extends EcmsPermission{
 			button.close();
 		}
 		Utils.pause(1000);
+	}
+
+	/**
+	 * Search user in permission form
+	 * @param user
+	 * @param searchOption
+	 */
+	public void searchUser(String user, String searchOption){
+		info("--Search user " + user + "--");
+		type(ELEMENT_INPUT_SEARCH_USER, user, true);
+		select(ELEMENT_SELECT_SEARCH_OPTION, searchOption);
+		click(ELEMENT_QUICK_SEARCH_USER);
+		waitForTextPresent(user);
 	}
 }

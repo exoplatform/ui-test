@@ -86,7 +86,7 @@ public class Gatein_Manage_UserAndGroup extends PlatformBase{
 	 */
 	@Test
 	public void test02_AddEditDeleteGroup(){
-		String groupName = "Gateinsniffgroup01";
+		String groupName = "group68902";
 		String groupLabel = "Group Label 01";
 		String groupDesc = "create new group";
 		
@@ -114,7 +114,7 @@ public class Gatein_Manage_UserAndGroup extends PlatformBase{
 	 */
 	@Test
 	public void test03_AddEditDeleteMembership(){
-		String membershipName = "Membership03";
+		String membershipName = "membership68904";
 		String membershipDesc = "Add new membership";
 		String newDesc = "Add new membership update";
 		

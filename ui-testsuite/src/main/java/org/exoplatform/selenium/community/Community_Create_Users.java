@@ -160,18 +160,6 @@ public class Community_Create_Users extends PlatformBase{
 		//Redactor
 		navBar.goToNewStaff();     
 		magAccount.addNewUserAccount("james", DATA_PASS, DATA_PASS, "James", "Davis", "James Davis", "james.davis@acme.exoplatform.com", "", "", false);
-		//Group Management
-		navBar.goToUsersAndGroupsManagement();
-		userGroup.chooseGroupTab();
-		//Publisher
-		userGroup.selectGroup("Platform/Content Management", true);
-		userGroup.addUsersToGroup("james", "author", false, false);
-		userGroup.addUsersToGroup("james", "redactor", false, false);
-
-		click(ELEMENT_UP_LEVEL);
-		//Organization/Employees
-		userGroup.selectGroup("Organization/Employees", true);
-		userGroup.addUsersToGroup("james", "member", true, true);
 	}
 	
 	@Test(priority=1)
@@ -182,54 +170,44 @@ public class Community_Create_Users extends PlatformBase{
 		userGroup.chooseGroupTab();
 		userGroup.selectGroup("Platform/Administrators", true);
 		if(!userGroup.checkUserInGroup("john", "*")){
-			userGroup.goToFirstPage();
 			userGroup.addUsersToGroup("john", "*", false, false);
 		}
 
 		click(ELEMENT_UP_LEVEL);
-		userGroup.selectGroup("Platform/Web Contributors", true);
+		userGroup.selectGroup("Platform/Content Management", true);
 		if(!userGroup.checkUserInGroup("john", "*")){
-			userGroup.goToFirstPage();
 			userGroup.addUsersToGroup("john", "*", false, false);
 		}
 		if(!userGroup.checkUserInGroup("mary", "manager")){
-			userGroup.goToFirstPage();
 			userGroup.addUsersToGroup("mary", "manager", false, false);
 		}
 
 		if(!userGroup.checkUserInGroup("mary", "editor")){
-			userGroup.goToFirstPage();
 			userGroup.addUsersToGroup("mary", "editor", false, false);
 		}
 		if(!userGroup.checkUserInGroup("james", "author")){
-			userGroup.goToFirstPage();
 			userGroup.addUsersToGroup("james", "author", false, false);
 		}
 
 		if(!userGroup.checkUserInGroup("james", "redactor")){
-			userGroup.goToFirstPage();
 			userGroup.addUsersToGroup("james", "redactor", false, false);
 		}
 		click(ELEMENT_UP_LEVEL);
 		userGroup.selectGroup("Organization/Employees", true);
 
 		if(!userGroup.checkUserInGroup("john", "*")){
-			userGroup.goToFirstPage();
 			userGroup.addUsersToGroup("john", "*", false, false);
 		}
 
 		if(!userGroup.checkUserInGroup("mary", "member")){
-			userGroup.goToFirstPage();
 			userGroup.addUsersToGroup("mary", "member", false, false);
 		}
 
 		if(!userGroup.checkUserInGroup("james", "member")){
-			userGroup.goToFirstPage();
 			userGroup.addUsersToGroup("james", "member", false, false);
 		}
 
 		if(!userGroup.checkUserInGroup("demo", "member")){
-			userGroup.goToFirstPage();
 			userGroup.addUsersToGroup("demo", "member", false, false);
 		}
 
@@ -237,7 +215,6 @@ public class Community_Create_Users extends PlatformBase{
 		//Organization/Management/Executive Board
 		userGroup.selectGroup("Organization/Management/Executive Board", true);
 		if(!userGroup.checkUserInGroup("john", "*")){
-			userGroup.goToFirstPage();
 			userGroup.addUsersToGroup("john", "*", false, false);
 		}
 
@@ -248,12 +225,10 @@ public class Community_Create_Users extends PlatformBase{
 
 		userGroup.selectGroup("Development", true);
 		if(!userGroup.checkUserInGroup("demo", "member")){
-			userGroup.goToFirstPage();
 			userGroup.addUsersToGroup("demo", "member", false, false);
 		}
 
 		if(!userGroup.checkUserInGroup("john", "member")){
-			userGroup.goToFirstPage();
 			userGroup.addUsersToGroup("john", "member", false, false);
 		}
 

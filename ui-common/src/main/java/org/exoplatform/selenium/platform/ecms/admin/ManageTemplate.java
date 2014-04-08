@@ -79,7 +79,8 @@ public class ManageTemplate extends EcmsBase{
 
 	public final By ELEMENT_DIALOG_CONTENT = By.xpath(ELEMENT_CONTENT.replace("${tab}", "UIDialogTab"));
 	public final By ELEMENT_DIALOG_NAME = By.xpath(ELEMENT_INPUT_NAME.replace("${tab}", "UIDialogTab"));
-	public final By ELEMENT_DIALOG_PERMISSION_ICON = By.xpath(ELEMENT_ADD_PERMISSION.replace("${tab}", "UIDialogTab"));
+	//public final By ELEMENT_DIALOG_PERMISSION_ICON = By.xpath(ELEMENT_ADD_PERMISSION.replace("${tab}", "UIDialogTab"));
+	public final By ELEMENT_DIALOG_PERMISSION_ICON = By.xpath("//*[contains(@class, 'uiIconAddPermission')]");
 	public final By ELEMENT_DIALOG_SAVE_BUTTON = By.xpath(ELEMENT_TEMPLATE_SAVE_BUTTON.replace("${tab}", "UIDialogTab"));
 
 	public final By ELEMENT_VIEW_CONTENT = By.xpath(ELEMENT_CONTENT.replace("${tab}", "UIViewTab"));

@@ -59,7 +59,7 @@ public class ECMS_SE_Admin extends PlatformBase {
 		actBar.exportNode(true, true, false);
 		
 		//Delete data
-		cMenu.deleteDocument(bNode);
+		cMenu.deleteDocument(bNode,180000);
 	}
 	
 	/**CaseID 65851 Add a category
@@ -70,7 +70,7 @@ public class ECMS_SE_Admin extends PlatformBase {
 		String node1 = "test02_AddCategory";
 		By bNode = By.xpath(siteExp.ELEMENT_SE_NODE.replace("{$node}", node1));
 		String categoryPath = "Defense";
-		String categoryTree = "powers";
+		String categoryTree = "intranet";
 		
 		info("Add Category");
 		//Create node
@@ -125,7 +125,7 @@ public class ECMS_SE_Admin extends PlatformBase {
 		//Create node1, node2
 		actBar.goToAddNewContent();
 		cTemplate.createNewFile(node1,node1,node1);
-		click(siteExp.ELEMENT_SIDEBAR_SITES_MANAGEMENT);
+		actBar.goToNodeByAddressPath("/");
 		actBar.goToAddNewContent();
 		cTemplate.createNewProduct(node2, node2);
 		
@@ -179,7 +179,7 @@ public class ECMS_SE_Admin extends PlatformBase {
 	public void test06_DeleteCategory() {
 		String node1 = "test06_DeleteCategory1";
 		By bNode = By.xpath(siteExp.ELEMENT_SE_NODE.replace("{$node}", node1));
-		String catePath="powers";
+		String catePath="intranet";
 
 		info("Add Category");
 		//Create node
@@ -194,7 +194,7 @@ public class ECMS_SE_Admin extends PlatformBase {
 		actBar.addCategoryForNode(catePath, false, "Defense", "Healing");
 		
 		//Delete category
-		actBar.deleteCategory(catePath + "/Defense/Healing");
+		actBar.deleteCategory(catePath + "/defense/healing");
 		
 		//Delete data
 		cMenu.deleteDocument(bNode);
@@ -266,7 +266,7 @@ public class ECMS_SE_Admin extends PlatformBase {
 		//Create node1, node2
 		actBar.goToAddNewContent();
 		cTemplate.createNewFile(node1,node1,node1);
-		click(siteExp.ELEMENT_SIDEBAR_SITES_MANAGEMENT);
+		actBar.goToNodeByAddressPath("/");
 		actBar.goToAddNewContent();
 		cTemplate.createNewProduct(node2, node2);
 		
@@ -287,13 +287,13 @@ public class ECMS_SE_Admin extends PlatformBase {
 	public void beforeMethods() {
 		getDriverAutoSave();
 		driver.get(baseUrl);
-		magAcc = new ManageAccount(driver);
-		navToolBar = new NavigationToolbar(driver);
-		ecms = new EcmsBase(driver);
-		actBar = new ActionBar(driver);
-		cTemplate = new ContentTemplate(driver);
-		cMenu = new ContextMenu(driver);
-		siteExp = new SitesExplorer(driver);
+		magAcc = new ManageAccount(driver, this.plfVersion);
+		navToolBar = new NavigationToolbar(driver, this.plfVersion);
+		ecms = new EcmsBase(driver, this.plfVersion);
+		actBar = new ActionBar(driver, this.plfVersion);
+		cTemplate = new ContentTemplate(driver, this.plfVersion);
+		cMenu = new ContextMenu(driver, this.plfVersion);
+		siteExp = new SitesExplorer(driver, this.plfVersion);
 		magAcc.signIn(DATA_USER, DATA_PASS);
 		navToolBar.goToSiteExplorer();
 	}

@@ -45,7 +45,7 @@ public class ContentTemplate extends EcmsBase{
 	//public final By ELEMENT_WEBCONTENT_TITLE_TEXTBOX = By.id("title");	
 	public final By ELEMENT_WEBCONTENT_NAME_TEXTBOX = By.id("name");	
 	public final By ELEMENT_WEBCONTENT_CONTENT_FRAME = By.xpath("//td[contains(@id,'cke_contents_htmlData')]/iframe");
-	public final By ELEMENT_WEBCONTENT_CONTENT_FRAME_41 = By.xpath("//div[@id= 'cke_1_contents']/iframe");
+	public final By ELEMENT_WEBCONTENT_CONTENT_FRAME_41 = By.xpath("//div[@id= 'cke_1_contents' or @id='cke_117_contents']/iframe");
 	public final By ELEMENT_WEBCONTENT_ADD_CONTENT_LINK = By.xpath("//*[@title='Insert Content Link']");
 	public final By ELEMENT_WEBCONTENT_ILLUSTRATION_TAB = By.xpath("//*[contains(text(),'Illustration')]");
 	public final By ELEMENT_WEBCONTENT_UPLOAD_FRAME = By.xpath("//*[contains(@name,'uploadIFrame')]");
@@ -347,7 +347,7 @@ public class ContentTemplate extends EcmsBase{
 			type(ELEMENT_NEWFILE_DESCRIPTION_TEXTBOX, description, false);
 		}
 		button.saveAndClose();
-		waitForElementNotPresent(button.ELEMENT_SAVE_CLOSE_BUTTON);
+		waitForElementNotPresent(button.ELEMENT_SAVE_CLOSE_BUTTON, 180000, 1);
 		waitForAndGetElement(By.xpath(ELEMENT_VERIFY_FILE_CONTENT.replace("${content}", cont)), DEFAULT_TIMEOUT, 1, 2);
 		Utils.pause(1000);
 	}
@@ -1011,7 +1011,10 @@ public class ContentTemplate extends EcmsBase{
 		//type(ELEMENT_WEBCONTENT_TITLE_TEXTBOX, title_edit, true);
 		//		waitForAndGetElement(ELEMENT_WEBCONTENT_NAME_TEXTBOX).clear();
 		if (contentToEdit != ""){
-			inputDataToFrame(ELEMENT_WEBCONTENT_CONTENT_FRAME, contentToEdit, true);
+			if(this.plfVersion.equalsIgnoreCase("4.1"))
+				inputDataToFrame(ELEMENT_WEBCONTENT_CONTENT_FRAME_41,contentToEdit,true);
+			else
+				inputDataToFrame(ELEMENT_WEBCONTENT_CONTENT_FRAME,contentToEdit,true);
 			switchToParentWindow();
 		}
 

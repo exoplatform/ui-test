@@ -74,7 +74,7 @@ public class ECMS_Admin_Explorer extends PlatformBase{
 	 */
 	@Test
 	public void test01_AddEditDeleteDrive(){
-		String drive = "Ecms_Admin_Drive_Test";
+		String drive = "drive65854";
 		By eDrive = By.xpath(ecms.ELEMENT_DATA_TITLE.replace("${dataTitle}", drive));
 
 		info("-- Go to ECMS/Admin/Drives --");
@@ -161,10 +161,10 @@ public class ECMS_Admin_Explorer extends PlatformBase{
 		magView.fillAddNewViewForm(viewName, "List", actionTab, "addCategory", true, true, "Organization/Management", "*");
 
 		//Edit a View
-		magView.editView(viewName, editTemplate, false, true, true, actionTab, "manageCategories/manageActions", true, false, "", "", true, "james");
+		magView.editView(viewName, editTemplate, false, true, true, actionTab, "manageCategories/manageActions", true, false, "", "", true, "fqa");
 
 		//View a View
-		magView.viewSelectedView(viewName, true, editTemplate, true, actionTab, "Manage Categories", true, "James");
+		magView.viewSelectedView(viewName, true, editTemplate, true, actionTab, "Manage Categories", true, "Fqa");
 
 		//Delete a View
 		//magView.deleteView(viewName, "Are you sure you want to delete this view?", true);

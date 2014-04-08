@@ -1456,10 +1456,10 @@ public class ActionBar extends EcmsBase{
 	 */
 	public void openManagePublicationForm(){
 		info("-- Open Manage Publication Form --");
-		if ((waitForAndGetElement(ELEMENT_PUBLICATION, 5000, 0) == null )){
+		if ((waitForAndGetElement(ELEMENT_PUBLICATION, DEFAULT_TIMEOUT, 0) == null )){
 			click(ELEMENT_MORE_LINK_WITHOUT_BLOCK);
 		}
-		if (waitForAndGetElement(ELEMENT_PUBLICATION, 3000, 0) != null){
+		if (waitForAndGetElement(ELEMENT_PUBLICATION, DEFAULT_TIMEOUT, 0) != null){
 			click(ELEMENT_PUBLICATION);
 		}else {
 			click(ELEMENT_PUBLICATION_ICON);

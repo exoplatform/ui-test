@@ -106,12 +106,12 @@ public class NavigationManagement extends  PlatformBase{
 		if (verifyNode) {
 			//waitForTextNotPresent("Page Node Settings");
 			//waitForTextPresent(nodeName);
-			waitForAndGetElement( ELEMENT_NODE_LINK.replace("${nodeLabel}", nodeName));
+			waitForAndGetElement( ELEMENT_NODE_LINK.replace("${nodeLabel}", nodeName),180000);
 			//button.save();
 			//waitForTextNotPresent("Navigation Management");
 		}
 		button.save();
-		waitForElementNotPresent(ELEMENT_TITLE_NAVIGATION_MANAGEMENT);
+		waitForElementNotPresent(ELEMENT_TITLE_NAVIGATION_MANAGEMENT,180000);
 	}
 
 	// Edit a node 

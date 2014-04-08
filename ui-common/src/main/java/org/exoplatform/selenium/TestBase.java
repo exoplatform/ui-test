@@ -109,11 +109,11 @@ public class TestBase {
 			driver = new InternetExplorerDriver();
 			ieFlag = true;
 		} else {
-			//FirefoxProfile profile = new FirefoxProfile();
-			//profile.setPreference("plugins.hide_infobar_for_missing_plugin", true);
-			//DesiredCapabilities capabilities = DesiredCapabilities.firefox();
-			//capabilities.setCapability(FirefoxDriver.PROFILE, profile);
-			//driver = new FirefoxDriver(capabilities);
+//			FirefoxProfile profile = new FirefoxProfile();
+//			profile.setPreference("plugins.hide_infobar_for_missing_plugin", true);
+//			DesiredCapabilities capabilities = DesiredCapabilities.firefox();
+//			capabilities.setCapability(FirefoxDriver.PROFILE, profile);
+//			driver = new FirefoxDriver(capabilities);
 			driver = new FirefoxDriver();
 		}
 		baseUrl = System.getProperty("baseUrl");
@@ -754,7 +754,9 @@ public class TestBase {
 		baseUrl = System.getProperty("baseUrl");
 		if (baseUrl==null) baseUrl = DEFAULT_BASEURL;
 		action = new Actions(driver);
-		termsAndConditions();
+//		termsAndConditions();
+		driver.get(baseUrl);
+		checkTermConditionAndPLFVersion();
 	}
 
 	/**
