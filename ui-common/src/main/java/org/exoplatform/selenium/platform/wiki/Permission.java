@@ -138,7 +138,7 @@ public class Permission extends WikiBase{
 		By delete = By.xpath(ELEMENT_DELETE_PERMISSION.replace("{$user}", user));
 		By deletePlatformUser = By.xpath(ELEMENT_DELETE_PERMISSION.replace("{$user}", "platform/user")); 
 		By deletePlatformGuest = By.xpath(ELEMENT_DELETE_PERMISSION.replace("{$user}", "guest"));
-       
+
 		goToPagePermission();
 
 		info("--Delete permission--");
@@ -259,6 +259,7 @@ public class Permission extends WikiBase{
 		break;
 		}
 		click(button.ELEMENT_ADD_BUTTON);
+		Utils.pause(3000);
 		button.save();
 		waitForMessage(MSG_PERMISSION_SAVE);
 
@@ -304,7 +305,7 @@ public class Permission extends WikiBase{
 		}	
 
 		goToSpacePermission();
-
+       
 		info("--Add space permission--");
 
 		if (view){

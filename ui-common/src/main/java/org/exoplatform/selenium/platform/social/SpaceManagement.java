@@ -380,7 +380,7 @@ public class SpaceManagement extends SocialBase {
 		}else
 			eMenuItem = ELEMENT_SPACE_MENU_ITEM;
 
-		if(waitForAndGetElement(eMenuItem.replace("${menuItem}", menuItem),DEFAULT_TIMEOUT,0)!=null)
+		if(waitForAndGetElement(eMenuItem.replace("${menuItem}", menuItem), DEFAULT_TIMEOUT, 0)!=null)
 			click(By.xpath(eMenuItem.replace("${menuItem}", menuItem)));
 		else{
 			click(By.xpath(eMenuItem.replace("${menuItem}", "More")));

@@ -512,10 +512,16 @@ public class CalendarBase extends PlatformBase {
 	 */
 	public void deleteFeeds(String name){
 		alert = new ManageAlert(driver);
+		button = new Button(driver);
 		info("--Delete event--");
 		click(ELEMENT_DELETE_FEEDS);
-		assert alert.getTextFromAlert().contains(MSG_FEEDS_DELETE);
-		alert.acceptAlert();
+		
+		if(isElementPresent(button.ELEMENT_YES_BUTTON_AUX)){
+			click(button.ELEMENT_YES_BUTTON_AUX);
+		}else{
+			assert alert.getTextFromAlert().contains(MSG_FEEDS_DELETE);
+			alert.acceptAlert();
+		}
 		//alert.verifyAlertMessage(MSG_FEEDS_DELETE);
 		waitForElementNotPresent(By.linkText(name));
 		click(ELEMENT_SETTINGS_FORM_SAVE_BUTTON);

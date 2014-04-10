@@ -534,7 +534,7 @@ public class WikiBase extends PlatformBase{
 			mouseOverAndClick(ELEMENT_WIKI_SETTING_LINK);
 			click(ELEMENT_PERMISSION_LINK);
 		}
-		Utils.pause(1000);
+		Utils.pause(2000);
 		waitForAndGetElement(ELEMENT_SELECT_USER);
 	}
 

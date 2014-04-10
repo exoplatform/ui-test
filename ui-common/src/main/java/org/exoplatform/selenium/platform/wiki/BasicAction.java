@@ -264,6 +264,7 @@ public class BasicAction extends Permission{
 	{
 		boolean ca = cancel.length > 0 ? cancel[0] : false;
 		info("--Delete a wiki page--");
+		Utils.pause(2000);
 		goToDeletePage();
 		if (ca){
 			click(button.ELEMENT_CANCEL_BUTTON);

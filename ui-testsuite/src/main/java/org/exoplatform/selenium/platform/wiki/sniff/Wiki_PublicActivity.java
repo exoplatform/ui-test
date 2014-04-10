@@ -150,8 +150,14 @@ public class Wiki_PublicActivity extends BasicAction {
 		movePage(title2, title1);
 
 		naTool.goToHomePage();
-		activity.checkCommentAfterMoveWikiPage(title2, "Wiki Home > " + title1 + " > " + title2);
-
+		
+		if (isTextNotPresent("eXo Community Wiki")){
+			activity.checkCommentAfterMoveWikiPage(title2, "Wiki Home > " + title1 + " > " + title2);
+		}else{
+			//community: eXo Community Wiki
+			activity.checkCommentAfterMoveWikiPage(title2, "eXo Community Wiki > " + title1 + " > " + title2);
+		}
+		
 		click(By.linkText(title2));
 		click(By.linkText(title1));
 		deleteCurrentWikiPage();
@@ -172,7 +178,7 @@ public class Wiki_PublicActivity extends BasicAction {
 		activity.checkActivityInfoOfWiki(title, content, "1");
 
 		click(By.linkText(title));
-		waitForTextPresent("Wiki Home");
+		//waitForTextPresent("Wiki Home");
 		deleteCurrentWikiPage();
 	}
 

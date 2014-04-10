@@ -50,8 +50,8 @@ public class ManageAccount extends PlatformBase {
 		boolean community = (waitForAndGetElement(ELEMENT_COMMUNITY_SIGN_IN_LINK, 3000, 0) != null) ? true :false;
 		if(maxWin){
 			driver.manage().window().maximize();
-			driver.navigate().refresh();
-			Utils.pause(2000);
+			//driver.navigate().refresh();
+			//Utils.pause(2000);
 		}
 		if (firstTimeLogin){
 			signOut();

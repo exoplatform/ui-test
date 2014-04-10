@@ -88,6 +88,7 @@ public class Calendar_PublishActivities_Event extends CalendarBase{
 	
 	/**Update activity for event of Space Calendar- event is updated as all day event a space
 	 * CaseID 74735
+	 * Jira issue: CAL-914
 	 */
 	@Test
 	public void test02_UpdateActivityForEventWhenUpdateToAllDay() {

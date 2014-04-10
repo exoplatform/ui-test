@@ -178,7 +178,7 @@ public class Wiki_Information extends Version {
 	/**CaseId: 70342 -> Add relation in the case there is no space
 	 * 
 	 */
-	@Test
+	@Test(priority=0)
 	public void test06_AddRelation_NoSpace(){
 		String title = "Wiki_sniff_infor_page_title_06";
 		String content = "Wiki_sniff_infor_page_content_06";

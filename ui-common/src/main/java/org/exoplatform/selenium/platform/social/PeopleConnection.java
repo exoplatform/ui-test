@@ -72,25 +72,27 @@ public class PeopleConnection extends SocialBase {
 		//waitForAndGetElement(ELEMENT_CANCEL_REQUEST_BUTTON.replace("${peopleName}", peopleName));
 		//waitForAndGetElement(ELEMENT_EVERYONE_TAB_ACTIVE, 80000);
         
-		peoSearch.searchPeople(false,peopleName);
-		waitForAndGetElement(By.linkText(peopleName));
+		click(ELEMENT_MY_CONNECTIONS_TAB);
 		info("-----Click connect to people-----");
-		if (waitForAndGetElement(ELEMENT_CANCEL_REQUEST_BUTTON.replace("${peopleName}", peopleName), 3000, 0) != null){
-			info("cancel connection request");
-			click(ELEMENT_CANCEL_REQUEST_BUTTON.replace("${peopleName}", peopleName));
-			Utils.pause(1000);
-		}
 		if (waitForAndGetElement(ELEMENT_REMOVE_CONNECTION_BUTTON.replace("${peopleName}", peopleName), 3000, 0) != null){
 			info("remove connection");
 			click(ELEMENT_REMOVE_CONNECTION_BUTTON.replace("${peopleName}", peopleName));
 			Utils.pause(1000);
 		}
-		waitForAndGetElement(ELEMENT_CONNECTION_BUTTON.replace("${peopleName}", peopleName));
+		click(ELEMENT_EVERYONE_TAB);
+		peoSearch.searchPeople(false,peopleName);
+		waitForAndGetElement(By.linkText(peopleName));
+		if (waitForAndGetElement(ELEMENT_CANCEL_REQUEST_BUTTON.replace("${peopleName}", peopleName), 3000, 0) != null){
+			info("cancel connection request");
+			click(ELEMENT_CANCEL_REQUEST_BUTTON.replace("${peopleName}", peopleName));
+			Utils.pause(1000);
+		}
+		//waitForAndGetElement(ELEMENT_CONNECTION_BUTTON.replace("${peopleName}", peopleName));
 		click(ELEMENT_CONNECTION_BUTTON.replace("${peopleName}", peopleName));
 		info("---Verify Connect button is disappeared----");
 		waitForElementNotPresent(ELEMENT_CONNECTION_BUTTON.replace("${peopleName}", peopleName));
-		info("-----Verify Cancel request button is displayed-----");
-		waitForAndGetElement(ELEMENT_CANCEL_REQUEST_BUTTON.replace("${peopleName}", peopleName));
+		//info("-----Verify Cancel request button is displayed-----");
+		//waitForAndGetElement(ELEMENT_CANCEL_REQUEST_BUTTON.replace("${peopleName}", peopleName));
 	}
 
 	/**
@@ -197,6 +199,7 @@ public class PeopleConnection extends SocialBase {
 		waitForElementNotPresent(ELEMENT_CANCEL_REQUEST_BUTTON.replace("${peopleName}", peopleName));
 		info("---Go to Everyone tab----");
 		click(ELEMENT_EVERYONE_TAB);
+		peoSearch.searchPeople(false,peopleName);
 		waitForAndGetElement(ELEMENT_CONNECTION_BUTTON.replace("${peopleName}", peopleName));
 	}
 

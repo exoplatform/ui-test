@@ -63,7 +63,7 @@ public class PlatformPermission extends PlatformBase {
 			for (int i = 0; i < temp.length; i ++){
 				By ELEMENT_USER = By.xpath(ELEMENT_USER_CHECKBOX.replace("${user}", temp[i]));
 				By ELEMENT_FIRST = By.xpath("//*[@id='UIListUsers']/tbody/tr[1]//*[text()='" + temp[i] + "']");
-				By ELEMENT_SECOND = By.xpath("//*[@id='UIListUsers']/tbody/tr[2]");
+				//By ELEMENT_SECOND = By.xpath("//*[@id='UIListUsers']/tbody/tr[2]");
 				if (type.length > i){
 					type(ELEMENT_SEARCH_USER_INPUT, temp[i], true);
 					switch (type[i]){
@@ -84,12 +84,13 @@ public class PlatformPermission extends PlatformBase {
 					}
 					click(ELEMENT_QUICK_SEARCH_BUTTON);
 					waitForAndGetElement(ELEMENT_FIRST);
-					waitForElementNotPresent(ELEMENT_SECOND);
+					//waitForElementNotPresent(ELEMENT_SECOND);
 				}
 				check(ELEMENT_USER, 2);
 			}
 		}
 		click(ELEMENT_ADD_USERS_BUTTON);
+		Utils.pause(3000);
 	}
 
 	/**function: select a group when set permission
@@ -102,6 +103,7 @@ public class PlatformPermission extends PlatformBase {
 		userGroup.selectGroup(grouppath,true);
 		if(waitForAndGetElement(ELEMENT_SELECT_THIS_GROUP, DEFAULT_TIMEOUT,0) != null)
 			click(ELEMENT_SELECT_THIS_GROUP);
+		Utils.pause(3000);
 	}
 
 	/**function: select group and membership when set permission
@@ -122,6 +124,6 @@ public class PlatformPermission extends PlatformBase {
 		}else {
 			click(elementMembership);
 		}
-		Utils.pause(1000);
+		Utils.pause(3000);
 	}
 }
