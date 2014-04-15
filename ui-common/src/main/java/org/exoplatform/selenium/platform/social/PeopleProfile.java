@@ -225,7 +225,7 @@ public class PeopleProfile extends PlatformBase {
 				"arguments[0].style.width = '1px'; arguments[0].style.opacity = 1", upload);
 		((JavascriptExecutor)driver).executeScript("arguments[0].style.display = 'block'; arguments[0].style.visibility = 'visible'", upload);
 		upload.sendKeys(Utils.getAbsoluteFilePath(linkfile));
-		Utils.pause(3000);
+		Utils.pause(10000);
 		info("Upload file " + Utils.getAbsoluteFilePath(linkfile));
 		switchToParentWindow();
 		click(ELEMENT_CONFIRM);

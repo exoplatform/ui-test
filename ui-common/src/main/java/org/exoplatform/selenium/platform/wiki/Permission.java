@@ -133,17 +133,19 @@ public class Permission extends WikiBase{
 	 * @see #deletePermissionWithUserAdmin(String, By)
 	 * @see WikiBase#goToPagePermission()
 	 */
-	public void deletePagePermission(String user){
+	public void deletePagePermission(String user, Object... deleteOption){
 		button = new Button(driver);	
 		By delete = By.xpath(ELEMENT_DELETE_PERMISSION.replace("{$user}", user));
 		By deletePlatformUser = By.xpath(ELEMENT_DELETE_PERMISSION.replace("{$user}", "platform/user")); 
 		By deletePlatformGuest = By.xpath(ELEMENT_DELETE_PERMISSION.replace("{$user}", "guest"));
-
+		boolean deleteAnyPermission = (Boolean) (deleteOption.length > 0 ? deleteOption[0] : true);
+		
 		goToPagePermission();
 
 		info("--Delete permission--");
-		if (isElementPresent(delete)){
+		if (deleteAnyPermission && isElementPresent(delete)){
 			click(delete);
+			waitForElementNotPresent(delete);
 		}
 		if (isElementPresent(deletePlatformUser) && isElementPresent(deletePlatformGuest)){
 			click(deletePlatformUser);
@@ -151,9 +153,7 @@ public class Permission extends WikiBase{
 			click(deletePlatformGuest);
 			waitForElementNotPresent(deletePlatformGuest);
 		}
-		waitForElementNotPresent(delete);
 		button.save();
-
 		Utils.pause(2000);
 	}
 

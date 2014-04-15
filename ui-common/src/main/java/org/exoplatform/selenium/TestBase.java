@@ -32,7 +32,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.remote.DesiredCapabilities;
+//import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 
@@ -61,7 +61,7 @@ public class TestBase {
 	//public final By ELEMENT_MENU_EDIT_LINK = By.xpath("//i[@class='uiIconPLF24x24Edit']");
 	//public final By ELEMENT_MENU_PAGE_LINK = By.linkText("Page");
 	//public final String AJAX_LOADING_MASK = "//div[@id='AjaxLoadingMask']";
-	public final String DEFAULT_BASEURL = "http://community-4.1.x-snapshot.acceptance4.exoplatform.org/portal";
+	public final String DEFAULT_BASEURL = "http://192.168.3.50:8080/portal";
 	//"http://community-4.1.x-snapshot.acceptance4.exoplatform.org/portal"; 
 	//"http://localhost:8080/portal";
 	//"http://192.168.3.50:8080/portal";
@@ -109,11 +109,12 @@ public class TestBase {
 			driver = new InternetExplorerDriver();
 			ieFlag = true;
 		} else {
-			FirefoxProfile profile = new FirefoxProfile();
-			profile.setPreference("plugins.hide_infobar_for_missing_plugin", true);
-			DesiredCapabilities capabilities = DesiredCapabilities.firefox();
-			capabilities.setCapability(FirefoxDriver.PROFILE, profile);
-			driver = new FirefoxDriver(capabilities);
+			//FirefoxProfile profile = new FirefoxProfile();
+			//profile.setPreference("plugins.hide_infobar_for_missing_plugin", true);
+			//DesiredCapabilities capabilities = DesiredCapabilities.firefox();
+			//capabilities.setCapability(FirefoxDriver.PROFILE, profile);
+			//driver = new FirefoxDriver(capabilities);
+			driver = new FirefoxDriver();
 		}
 		baseUrl = System.getProperty("baseUrl");
 		if (baseUrl==null) baseUrl = DEFAULT_BASEURL;
@@ -123,29 +124,6 @@ public class TestBase {
 	public void initSeleniumTest(Object... opParams){
 		initSeleniumTestWithOutTermAndCondition();	
 		driver.get(baseUrl);
-//		WebElement community = waitForAndGetElement(ELEMENT_COMMUNITY_ADD_ONS, 3000, 0);
-//		if(!community.isDisplayed()){
-//			info("Term and conditions...Platform 4");
-//			termsAndConditions(opParams);
-//			info("End of term and conditions...Platform 4");
-//		}else{
-//			info("== Launch Community Website...==");		
-//		}
-//		if(!firstTimeLogin){
-//			info("This is not the first time login");
-//			checkPLFVersion();
-//		}
-//		else{
-//			info("This is the first time login");
-//			driver.manage().window().maximize();
-//			driver.navigate().refresh();
-//			Utils.pause(2000);
-//
-//			ManageAccount acc = new ManageAccount(driver,this.plfVersion);
-//			acc.signOut();
-//			firstTimeLogin=false;
-//			//			checkPLFVersion();
-//		}
 		checkTermConditionAndPLFVersion(opParams);
 	}
 	
@@ -155,7 +133,7 @@ public class TestBase {
 	 */
     public void checkTermConditionAndPLFVersion(Object... opParams){
     	WebElement community = waitForAndGetElement(ELEMENT_COMMUNITY_ADD_ONS, 3000, 0);
-		if(!community.isDisplayed()){
+		if(community == null){
 			info("Term and conditions...Platform 4");
 			termsAndConditions(opParams);
 			info("End of term and conditions...Platform 4");
@@ -175,7 +153,7 @@ public class TestBase {
 			ManageAccount acc = new ManageAccount(driver,this.plfVersion);
 			acc.signOut();
 			firstTimeLogin=false;
-			//			checkPLFVersion();
+			//checkPLFVersion();
 		}	
     }
     

@@ -220,14 +220,15 @@ public class Calendar_Event_RecurringEvents extends CalendarBase {
 		goToCalendarPage();
 		evt.goToAddEvent();
 		evt.inputBasicQuickEvent(name, description);
-		evt.inputFromToEvent(getDate(0,"MM/dd/yyyy"), getDate(0,"MM/dd/yyyy"), true);
+		evt.inputFromToEvent(getDate(0,"MM/dd/yyyy"), getDate(0,"MM/dd/yyyy"), false);
 		click(evt.ELEMENT_BUTTON_EVENT_MORE_DETAILS);
 		Utils.pause(1000);
 		check(evt.ELEMENT_IS_REPEAT_CHECKBOX,2);
 		evt.inputRecurringInfoEvent(repeatType.Daily, null, null, repeatEndType.After);
 		click(evt.ELEMENT_ADD_EVENT_SAVE_BUTTON);
 		waitForElementNotPresent(evt.ELEMENT_ADD_EVENT_POPUP);
-		Utils.pause(1000);
+		Utils.pause(3000);
+		
 		info("Confirm added event displays in the calendar");
 		assert evt.verifyEventInWeekView(name, getDate(0, "MMM dd yyyy"), selectDayOption.ONEDAY);
 		assert evt.verifyEventInWeekView(name, getDate(1, "MMM dd yyyy"), selectDayOption.ONEDAY);
@@ -266,17 +267,17 @@ public class Calendar_Event_RecurringEvents extends CalendarBase {
 
 		 *Expected Outcome: 
 			- Changes are restricted to the edited recurring event*/
-		evt.editRecurringEvent(name,newName,description, null,null,null,true,selectDayOption.ALLDAY,recurringType.ONLY_EVENT,getDate(1, "MMM dd yyyy"));
+		evt.editRecurringEvent(name,newName,description, null,null,null,true,selectDayOption.ONEDAY,recurringType.ONLY_EVENT,getDate(1, "MMM dd yyyy"));
 		assert evt.verifyEventInWeekView(name, getDate(0, "MMM dd yyyy"), selectDayOption.ONEDAY);
 		assert !evt.verifyEventInWeekView(name, getDate(1, "MMM dd yyyy"), selectDayOption.ONEDAY);
 		assert evt.verifyEventInWeekView(name, getDate(2, "MMM dd yyyy"), selectDayOption.ONEDAY);
 		assert evt.verifyEventInWeekView(name, getDate(3, "MMM dd yyyy"), selectDayOption.ONEDAY);
 		assert evt.verifyEventInWeekView(name, getDate(4, "MMM dd yyyy"), selectDayOption.ONEDAY);
-		assert evt.verifyEventInWeekView(newName, getDate(1, "MMM dd yyyy"), selectDayOption.ONEDAY);
+		assert evt.verifyEventInWeekView(newName, getDate(1, "MMM dd yyyy"), selectDayOption.ALLDAY);
 		
 		/*Clear data*/
 		info("Clear data");
-		evt.deleteRecurringEvent(name, selectDayOption.ALLDAY, recurringType.ALL_EVENT,getDate(0, "MMM dd yyyy"));
+		evt.deleteRecurringEvent(name, selectDayOption.ONEDAY, recurringType.ALL_EVENT,getDate(0, "MMM dd yyyy"));
 		evt.deleteRecurringEvent(newName, selectDayOption.ALLDAY);
 	}
 

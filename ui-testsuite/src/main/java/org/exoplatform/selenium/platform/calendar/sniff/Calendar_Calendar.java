@@ -82,7 +82,7 @@ public class Calendar_Calendar extends CalendarBase{
 		evt.addQuickEvent(eventName,eventName,getCurrentDate("MM/dd/yyyy"),addMinuteToCurrentDateTime(30),true,calendar);
 		exportCalendar(calendar,fileName);
 		deleteCalendar(calendar);
-		importCalendar("TestData/TestOutput/" + fileName,calendar,null,null);
+		importCalendar("TestData/TestOutput/" + fileName, calendar, null,null);
 
 		//Delete data
 		deleteFile("TestOutput/" + fileName);

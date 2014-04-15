@@ -244,12 +244,14 @@ public class Wiki_BasicAction_Other extends Permalink {
 		String title2 = "Wiki_move_title_08_2";
 		String content2 = "Wiki_move_content_08_2";
 		
-		goToWiki();
-		addBlankWikiPage(title1, content1, 0);		
+		//goToWiki();
+		addBlankWikiPage(title1, content1, 0);	
+		deletePagePermission("", false);
 		magAc.signOut();
 		
 		magAc.signIn("mary", DATA_PASS);
 		addWikiForSpace(spaceName, title2, content2);
+		Utils.pause(15000);
 		
 		info("Move page2 of space to page1 of Intranet");
 		movePage(title2, title1, "Intranet", false);

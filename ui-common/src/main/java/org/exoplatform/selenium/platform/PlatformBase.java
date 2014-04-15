@@ -67,7 +67,8 @@ public class PlatformBase extends TestBase {
 	public final By ELEMENT_FORUM_PAGE = By.xpath("//ul[@class='uiCompanyNavigations']//*[@class='uiIconUIForms']");
 	public final By ELEMENT_CALENDAR_PAGE = By.className("uiIconPLFCalendar");
 	public final String ELEMENT_LEFT_NAVIGATION_ITEM_INDEX="//ul[@class='uiCompanyNavigations']//li[${index}]/a[text()='${menuItem}']";
-	public final String ELEMENT_LEFT_NAVIGATION_ITEM_INDEX_PLF41="//ul[@class='uiCompanyNavigations']//li[${index}]/a[@href='${menuItem}']";
+	//public final String ELEMENT_LEFT_NAVIGATION_ITEM_INDEX_PLF41="//ul[@class='uiCompanyNavigations']//li[${index}]/a[@href='${menuItem}']";
+	public final String ELEMENT_LEFT_NAVIGATION_ITEM_INDEX_PLF41="//ul[@class='uiCompanyNavigations']//*/a[@href='${menuItem}']";
 	public final By ELEMENT_SPACE_NAVIGATION = By.className("spaceNavigation");
 	public final String ELEMENT_SPACE_NAVIGATION_SPACE_ITEM = "//*[@class='spaceNavigation']//*[contains(text(),'${spaceName}')]";
 	public final String ELEMENT_SPACE_NAVIGATION_SPACE_ITEM_INDEX = "//*[@class='spaceNavigation']/li[${index}]/a[contains(text(),'${spaceName}')]";

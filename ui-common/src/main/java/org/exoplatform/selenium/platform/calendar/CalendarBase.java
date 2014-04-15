@@ -130,6 +130,7 @@ public class CalendarBase extends PlatformBase {
 	public By ELEMENT_CAL_GROUP_INPUT = By.id("AddGroupInput");
 	public By ELEMENT_CAL_SELECT_GROUP_ICON = By.xpath("//*[@class='uiIconGroup uiIconLightGray']");
 	public String ELEMENT_EDIT_PERMISSION_INPUT = "//*[contains(@id,'${groupName}_permission')]";
+	public By ELEMENT_ADD_NEW_CALENDAR_BUTTON = By.xpath("//*[@data-original-title='New Calendar']");
 
 	//-----------Event/Task -----------
 	public String ELEMENT_EVENT_TASK_ALL_DAY = "//*[@id='UIWeekViewGridAllDay']//div[contains(text(),'${event}')]";
@@ -546,6 +547,7 @@ public class CalendarBase extends PlatformBase {
 		//		driver.switchTo().defaultContent();
 		switchToParentWindow();
 		waitForAndGetElement(ELEMENT_CAL_IMPORT_DELETE_ICON);
+		//Utils.pause(3000);
 	}
 
 	/**
@@ -573,6 +575,9 @@ public class CalendarBase extends PlatformBase {
 	public void importCalendar(String path, String name, String description, String color){
 		goToImportCalendar();
 		uploadCalendar(path);
+		if (isElementPresent(ELEMENT_ADD_NEW_CALENDAR_BUTTON)){
+			click(ELEMENT_ADD_NEW_CALENDAR_BUTTON);
+		}
 		if(name != null)
 			type(ELEMENT_CAL_DISPLAY_NAME_INPUT,name,true);
 		if(description != null)
@@ -726,12 +731,16 @@ public class CalendarBase extends PlatformBase {
 	 */
 	public void deleteCalendar(String name, boolean...verify){
 		alert = new ManageAlert(driver); 
+		button = new Button(driver);
 		boolean check = verify.length > 0 ? verify[0] : true;
 
 		info("--Delete a Calendar-");
-
 		executeActionCalendar(name,"RemoveCalendar");
-
+        
+		if (isElementPresent(button.ELEMENT_YES_BUTTON_AUX)){
+			click(button.ELEMENT_YES_BUTTON_AUX);
+			Utils.pause(3000);
+		}
 		if (check){
 			waitForElementNotPresent(ELEMENT_CALENDAR_GET_BY_TAG_LI.replace("{$calendar}", name));
 			info("Remove calendar successfully");

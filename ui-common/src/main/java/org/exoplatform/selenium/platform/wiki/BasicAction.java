@@ -264,7 +264,7 @@ public class BasicAction extends Permission{
 	{
 		boolean ca = cancel.length > 0 ? cancel[0] : false;
 		info("--Delete a wiki page--");
-		Utils.pause(2000);
+		Utils.pause(3000);
 		goToDeletePage();
 		if (ca){
 			click(button.ELEMENT_CANCEL_BUTTON);
@@ -382,8 +382,12 @@ public class BasicAction extends Permission{
 			click(ELEMENT_SELECT_SPACE);
 			if (space == "Intranet"){
 				click(ELEMENT_PORTAL_NAME_SELECTED);
-			}else {
-				click(ELEMENT_SPACE_NAME_SELECTED.replace("${space}", space.toLowerCase()));
+			}else{
+				if (isElementPresent(ELEMENT_SPACE_NAME_SELECTED_AUX.replace("${space}", space.toLowerCase()))){
+					click(ELEMENT_SPACE_NAME_SELECTED_AUX.replace("${space}", space.toLowerCase()));
+				}else{
+					click(ELEMENT_SPACE_NAME_SELECTED.replace("${space}", space.toLowerCase()));
+				}
 			}
 		}
 		click(By.xpath(ELEMENT_SELECTED_PAGE.replace("${relatedPage}", pageName)));

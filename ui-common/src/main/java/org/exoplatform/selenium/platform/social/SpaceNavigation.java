@@ -37,7 +37,7 @@ public class SpaceNavigation extends SocialBase{
 	public final By ELEMENT_SELECT_PAGE = By.xpath("//div[@id='UIRepeater']//table//tbody/tr/td[5]/div[@class='ActionContainer']/img");
 	public final String WARNING_EXISTING_NODE = "This node name already exists.";
 	public final By SAVE_PAGE_BUTTON = By.xpath("//div[@class='uiAction']/button[text()='Save']");
-	
+
 	public final String ELEMENT_NODE_LINK_FORM = "//ul[@class='nodeGroup']//a[@title='${nodeLabel}']";
 	public final String ELEMENT_NODE_LINK_FORM_COLLAPSE = "//ul[@class='nodeGroup']//a[@title='${nodeLabel}' and @ class= 'uiIconNode nodeSelected collapseIcon']";
 	public final String ELEMENT_RIGHT_CLICK_ADD_NODE_FORM_ = "//div[@class='TopLeftRightClickPopupMenu']/div[@class='UIContextMenuContainer']//a[@class='ItemIcon AddNode16x16Icon']";
@@ -86,6 +86,7 @@ public class SpaceNavigation extends SocialBase{
 		if(nodeLabel!=""){
 			waitForAndGetElement(NODE_LABEL);
 			type(NODE_LABEL, nodeLabel, true);
+			Utils.pause(1000);
 		}
 		if(pageName!=""){
 			//Click Page selector tab
@@ -148,11 +149,12 @@ public class SpaceNavigation extends SocialBase{
 		waitForAndGetElement("//*[contains(text(),'Page Node Setting')]");
 		type(NODE_NAME, nodeName, true);
 		if (extendedLabelMode) {
-				select(ELEMENT_SELECT_LANGUAGE, language);
-				Utils.pause(500);
+			select(ELEMENT_SELECT_LANGUAGE, language);
+			Utils.pause(500);
 		} else {
 			uncheck(ELEMENT_CHECKBOX_EXTENDED_LABEL_MODE,2);
 			type(NODE_LABEL, nodeLabel, true);
+			Utils.pause(1000);
 		}
 		info("-- Select page selector tab --");
 		waitForAndGetElement(PAGE_SELECTOR);
@@ -198,6 +200,7 @@ public class SpaceNavigation extends SocialBase{
 		click(ELEMENT_EDIT_SELECTED_NODE);
 		if(!nodeLabel.isEmpty()){
 			type(NODE_LABEL, nodeLabel, true);
+			Utils.pause(1000);
 		}
 		//Selector page
 		if (!pageTitle.isEmpty()){
@@ -300,7 +303,7 @@ public class SpaceNavigation extends SocialBase{
 
 	}
 
-	public void moveDownNode(String nodeName) {
+	public void moveDownNode(String nodeName){
 
 		waitForAndGetElement(By.xpath("//a[@class='NodeIcon DefaultPageIcon' and text()='"+nodeName+"']"));
 
@@ -311,14 +314,13 @@ public class SpaceNavigation extends SocialBase{
 		click(ELEMENT_MOVE_DOWN_LINK);
 	}
 
-	public void editNodePage(String nodeName) {;
-	waitForAndGetElement(By.xpath("//a[@class='NodeIcon DefaultPageIcon' and text()='"+nodeName+"']"));
+	public void editNodePage(String nodeName){
+		waitForAndGetElement(By.xpath("//a[@class='NodeIcon DefaultPageIcon' and text()='"+nodeName+"']"));
 
-	rightClickOnElement(By.xpath("//a[@class='NodeIcon DefaultPageIcon' and text()='"+nodeName+"']"));
+		rightClickOnElement(By.xpath("//a[@class='NodeIcon DefaultPageIcon' and text()='"+nodeName+"']"));
 
-	waitForAndGetElement(ELEMENT_EDIT_NODE_PAGE);
+		waitForAndGetElement(ELEMENT_EDIT_NODE_PAGE);
 
-	click(ELEMENT_EDIT_NODE_PAGE);
+		click(ELEMENT_EDIT_NODE_PAGE);
 	}
 }
-

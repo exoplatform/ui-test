@@ -619,6 +619,9 @@ public class Event extends CalendarBase{
 		else{
 			inputAddEventForm(name,description, location,from,to,allDay);
 			click(ELEMENT_ADD_EVENT_SAVE_BUTTON);
+			if (isElementPresent(ELEMENT_CONFIRM_EDIT_BUTTON)){
+				click(ELEMENT_CONFIRM_EDIT_BUTTON);
+			}
 			waitForElementNotPresent(ELEMENT_EDIT_EVENT_POPUP);
 		}
 	}
@@ -630,7 +633,7 @@ public class Event extends CalendarBase{
 	 * @return: true if event exist, false if event doesn't exist
 	 */
 	public boolean verifyEventInWeekView(String eventName, String dateTime, Object... options){
-		info("Verify even " + eventName + " on " + dateTime);
+		info("Verify event " + eventName + " on " + dateTime);
 		selectDayOption optDay = (selectDayOption) (options.length > 0 ? options[0]: selectDayOption.ALLDAY);
 		boolean isPresentEvent = false;
 		switch (optDay) {
