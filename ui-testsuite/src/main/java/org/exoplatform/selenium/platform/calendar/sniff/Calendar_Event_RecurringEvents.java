@@ -109,7 +109,7 @@ public class Calendar_Event_RecurringEvents extends CalendarBase {
 		evt.inputRecurringInfoEvent(repeatType.Daily, null, null, repeatEndType.After);
 		click(evt.ELEMENT_ADD_EVENT_SAVE_BUTTON);
 		waitForElementNotPresent(evt.ELEMENT_ADD_EVENT_POPUP);
-		Utils.pause(1000);
+		Utils.pause(5000);
 
 		info("Confirm added event displays in the calendar");
 		assert evt.verifyEventInWeekView(name, getDate(0, "MMM dd yyyy"), selectDayOption.ONEDAY);

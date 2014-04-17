@@ -306,7 +306,7 @@ public class Event extends CalendarBase{
 			switch(endRepeat){
 			case After:
 				info("Check After option");
-				check(ELEMENT_END_AFTER_NUMBER,2);
+				check(ELEMENT_AFTER_END_RECURRING_EVENT,2);
 				if(occurence!="")
 					type(ELEMENT_END_AFTER_NUMBER,option[0],true);
 				break;

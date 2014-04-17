@@ -401,6 +401,9 @@ public class CalendarBase extends PlatformBase {
 		per = new PlatformPermission(driver);
 		button = new Button(driver);
 
+		if (isElementPresent(ELEMENT_ADD_NEW_CALENDAR_BUTTON)){
+			click(ELEMENT_ADD_NEW_CALENDAR_BUTTON);
+		}	
 		if(name != null)
 			type(ELEMENT_CAL_DISPLAY_NAME_INPUT,name,true);
 		if(description != null)
