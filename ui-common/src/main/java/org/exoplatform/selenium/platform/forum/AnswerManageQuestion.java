@@ -346,7 +346,7 @@ public class AnswerManageQuestion extends AnswerBase {
 
 	public void goToOpenQuestionTab(){
 		info("Go to Open quesntion tab in manage question");
-		click(ELEMENT_OPEN_QUESTION_TAB);
+		click(By.xpath(ELEMENT_OPEN_QUESTION_TAB.replace("${status}", "last")));
 		Utils.pause(3000);
 	}
 

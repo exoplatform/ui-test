@@ -73,11 +73,14 @@ public class SettingSearchPage extends PlatformBase {
 	//Search result form
 	public final By ELEMENT_RESULT_SEARCH_PAGE = By.id("resultPage");
 	public final String ELEMENT_RESULT_ITEM = "//div[@id='resultPage']//a[text()='${item}']/*[contains(text(),'${keySearch}')]";
+	public final String ELEMENT_RESULT_ITEM_QUICHSEARCH = "//div[@id='resultPage']//a[contains(text(),'${keySearch}')]";
 	public final String ELEMENT_RESULT_LOCATION_DATETIME = "//div[@id='resultPage']//a[text()='${item}']/*[contains(text(),'${keySearch}')]/../../../*[@class='detail']";
 	public final String ELEMENT_RESULT_EXCERPT = "//div[@id='resultPage']//a[text()='${item}']/*[contains(text(),'${keySearch}')]/../../../*[@class='excerpt']";
 	public final String ELEMENT_RESULT_ICON = "//div[@id='resultPage']//a[text()='${item}']/*[contains(text(),'${keySearch}')]/../../../../*[contains(@class,'avatar pull-left')]";
 	public final String ELEMENT_RESULT_INDEX = "//*[@id='result']/div[${index}][contains(@class,'${title}')]";
 	public final By ELEMENT_RESULT_CONTENT_DETAIL = By.xpath("//*[@class='content']/*[@class='detail']");
+	public final String ELEMENT_ICON_SORT_DOWN = "//*[@id='sortOptions']//a[contains(text(),'${sortItem}')]//i[class='uiIconSortDown']";
+	public final String ELEMENT_ICON_SORT_UP = "//*[@id='sortOptions']//a[contains(text(),'Relevance')]//i[@class='uiIconSortUp']";
 
 	//Task page result
 	public final String ELEMENT_RESULT_TASK_ICON = "//div[@id='resultPage']//a[text()='${item}']/*[contains(text(),'${keySearch}')]/../../../..//*[@class='uiIconApp64x64TaskNeedActions']";
@@ -86,7 +89,7 @@ public class SettingSearchPage extends PlatformBase {
 	public final String ELEMENT_RESULT_EVENT_ICON = "//div[@id='resultPage']//a[text()='${item}']/*[contains(text(),'${keySearch}')]/../../../..//*[@class='calendarBox']";
 
 	//People page result
-	public final String ELEMENT_RESULT_PEOPLE_ICON = "//*[@class='avatar pull-left']";
+	public final String ELEMENT_RESULT_PEOPLE_ICON = "//*[@class='avatar pull-left userThumbnail']";
 	public final By ELEMENT_RESULT_TITLE = By.xpath("//*[@class='content']//a");
 
 	//File page result

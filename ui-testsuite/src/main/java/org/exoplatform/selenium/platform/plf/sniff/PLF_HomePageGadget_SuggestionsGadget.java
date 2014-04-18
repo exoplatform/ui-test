@@ -94,9 +94,9 @@ public class PLF_HomePageGadget_SuggestionsGadget extends Activity{
 		//- The suggestion gadget always displays 2 people suggestions and 2 space suggestions.
 		//- The 2 people suggestions are people with the most common connections with the users and ordered by alphabet
 		waitForAndGetElement(homeGad.ELEMENT_SUGGESTION_GADGET_FORM);
-		waitForAndGetElement(homeGad.ELEMENT_VERIFY_USER_SUGGESTIONS.replace("${peopleName}", user1));
 		waitForAndGetElement(homeGad.ELEMENT_VERIFY_USER_SUGGESTIONS.replace("${peopleName}", user2));
-		waitForElementNotPresent(homeGad.ELEMENT_VERIFY_USER_SUGGESTIONS.replace("${peopleName}", user3));
+		waitForAndGetElement(homeGad.ELEMENT_VERIFY_USER_SUGGESTIONS.replace("${peopleName}", user3));
+		waitForElementNotPresent(homeGad.ELEMENT_VERIFY_USER_SUGGESTIONS.replace("${peopleName}", user1));
 
 		//- The 2 space suggestions are spaces that have the most members who are user's connections and ordered by alphabet
 		waitForAndGetElement(homeGad.ELEMENT_SUGGESTION_GADGET_FORM);

@@ -826,6 +826,7 @@ public class RichTextMode extends Template {
 	 * 			 veriry - false: not verify result 
 	 */
 	public void insertAttachNewFile(String file, String label, String tooltip,Object...opParam){
+		info("insert Attach File");
 		Boolean verify =(Boolean)(opParam.length>0?opParam[0]:false);
 		String path = Utils.getAbsoluteFilePath("TestData/"+file);
 		mouseOverAndClick(ELEMENT_LINK);

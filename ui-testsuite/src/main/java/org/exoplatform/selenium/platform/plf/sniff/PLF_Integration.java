@@ -98,6 +98,7 @@ public class PLF_Integration extends PlatformBase {
 	 * Step 4: Import application
 	 * Step 5: Add page with CMIS
 	 * Error: Refer: https://jira.exoplatform.org/browse/EXOGTN-991
+	 * Note: N/A status, should be config when check this case. 
 	 */
 	@Test (groups="error")
 	public void test03_InstallCMISExpertGadget(){

@@ -151,7 +151,10 @@ public class WikiBase extends PlatformBase{
 	public final By ELEMENT_MOVE_PAGE_POPUP = By.xpath("//*[contains(@class, 'popupTitle') and text()='Move Page']");
 	public final By ELEMENT_SELECT_SPACE_DESTINATION = By.xpath("//*[contains(text(), 'Select the destination:')]/..//*[@class='btn dropdown-toggle']");
 	//public final String ELEMENT_SPACE_NAME_SELECTED = "//a[text() = '${space}']";
-	public final String ELEMENT_SPACE_NAME_SELECTED = "//*[contains(@id,'UISpaceSwitcher_/spaces/${space}')]/a";
+
+//	public final String ELEMENT_SPACE_NAME_SELECTED = "//*[@id='UISpaceSwitcher_/spaces/${space}']/a";
+//	public final String ELEMENT_SPACE_NAME_SELECTED = " //a[contains(text(), '${space}')]";
+	public final String ELEMENT_SPACE_NAME_SELECTED = "//img[@alt='${space}']";
 	public final By ELEMENT_SPACE_SWITCHER_INPUT_FOCUS = By.xpath("//*[@id='uiSpaceSwitcher_BreadCrumb']//input[@class='spaceSearchText focus']") ;
 	public final By ELEMENT_PORTAL_NAME_SELECTED = By.id("UISpaceSwitcher_/portal/intranet");
 	public final String MESSAGE_MOVE_PAGE_DUPLICATE_TITLE = "Another page with the same title already exists in the selected space.";
@@ -475,13 +478,16 @@ public class WikiBase extends PlatformBase{
 			else if(space=="My Wiki")
 				click(ELEMENT_MY_WIKI_NAME_SELECTED);
 			else {
-				click(ELEMENT_SPACE_NAME_SELECTED.replace("${space}", space.toLowerCase()));
+				info("Select Space");				
+			    click(ELEMENT_SPACE_NAME_SELECTED.replace("${space}", space), 2);	
+				Utils.pause(500);
 			}
 		}
 		info("CURRENT_LOCATION");
 		waitForAndGetElement(ELEMENT_VERIFY_CURRENT_LOCATION);
 		if(pageName2!=""&&pageName2!=null){
-			click(ELEMENT_NEW_LOCATION);
+			info("Click new location");
+			click(ELEMENT_NEW_LOCATION);			
 			waitForAndGetElement(ELEMENT_VERIFY_NEW_LOCATION);
 		}
 		else{
@@ -489,6 +495,7 @@ public class WikiBase extends PlatformBase{
 			click(By.xpath("//*[contains(@class, 'popupContent')]//*[contains(@onclick, 'event')]//a[contains(text(), '"+ wikiHome +"')]"));
 			waitForAndGetElement(By.xpath("//label[contains(text(), 'New Location')]/../..//*[contains(text(), '"+ wikiHome +"')]"));
 		}
+		info("Click move button");
 		click(button.ELEMENT_MOVE_BUTTON);
 		if (verify){
 			waitForAndGetElement(ELEMENT_VERIFY_AFTER_MOVE_PAGE);

@@ -108,7 +108,7 @@ public class Wiki_BasicAction_Add extends ManageDraft{
 	 * Add new page when title is blank
 	 */
 	@Test
-	public void test00_AddNewPageWithBlankTitle(){
+	public void test03_AddNewPageWithBlankTitle(){
 		//String title = "";
 		String content = "TestCase 003 Content";
 		int mode = 0;
@@ -596,7 +596,7 @@ public class Wiki_BasicAction_Add extends ManageDraft{
 			click(ELEMENT_RICHTEXT_BUTTON);
 			waitForAndGetElement(ELEMENT_SOURCE_EDITOR_BUTTON);
 		}
-		type(ELEMENT_CONTENT_WIKI_INPUT,content,true);
+		type(ELEMENT_CONTENT_WIKI_INPUT,content,true, 20000);
 		info("-- Saving Wiki Page... --");
 		click(ELEMENT_SAVE_BUTTON_ADD_PAGE);
 		waitForAndGetElement(By.linkText(pageLink));
@@ -892,6 +892,8 @@ public class Wiki_BasicAction_Add extends ManageDraft{
 
 		//Delete data test		
 		info("close webpage");
+		driver.quit();
+		beforeMethod();
 		goToWiki();
 		goToWikiPage("Wiki Home/"+title);
 		deleteCurrentWikiPage();

@@ -164,7 +164,7 @@ public class PLF_HomepageGadget_CalendarGadget extends CalendarBase{
 
 		mouseOver(By.xpath(Calendar_In_Additional_List), true);
 		Utils.pause(10000);
-		click(ELEMENT_ADD_CALENDAR_IN_ADDITION_LIST);
+		click(By.xpath(ELEMENT_ADD_CALENDAR_IN_ADDITION_LIST.replace("${calendar}", Calendar_Information_1)));
 		button.ok();
 		driver.navigate().refresh();
 		waitForAndGetElement(By.xpath(Calendar_In_Calendar_Gadget));

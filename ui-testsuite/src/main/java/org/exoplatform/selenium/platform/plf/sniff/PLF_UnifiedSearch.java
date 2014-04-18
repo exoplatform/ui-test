@@ -87,7 +87,7 @@ public class PLF_UnifiedSearch extends Template {
 		pEditor = new PageEditor(driver);
 		pageMag = new PageManagement(driver);
 		actBar = new ActionBar(driver);
-		conTemp = new ContentTemplate(driver);
+		conTemp = new ContentTemplate(driver,this.plfVersion);
 		magMember = new ManageMember(driver);
 		cMenu = new ContextMenu(driver);
 		siteExp = new SitesExplorer(driver);
@@ -319,10 +319,10 @@ public class PLF_UnifiedSearch extends Template {
 		qsPage.quickSearch(searchText);
 
 		//- By default, quick search returns results for items with All types located in the current site only, as attachment SearchResult.png
-		waitForAndGetElement(qsPage.ELEMENT_RESULT_ITEM.replace("${keySearch}", searchText).replace("${item}", "S"));
-		waitForAndGetElement(qsPage.ELEMENT_RESULT_ITEM.replace("${keySearch}", searchText).replace("${item}", "W"));
-		waitForAndGetElement(qsPage.ELEMENT_RESULT_ITEM.replace("${keySearch}", searchText).replace("${item}", "C"));
-
+		waitForAndGetElement(qsPage.ELEMENT_RESULT_ITEM_QUICHSEARCH.replace("${keySearch}", searchText+"S"));
+		waitForAndGetElement(qsPage.ELEMENT_RESULT_ITEM_QUICHSEARCH.replace("${keySearch}", searchText+"W"));
+		waitForAndGetElement(qsPage.ELEMENT_RESULT_ITEM_QUICHSEARCH.replace("${keySearch}", searchText+"C"));
+		
 		/*clear data*/
 		info("-- Clear data --");
 		//Delete file
@@ -725,7 +725,7 @@ public class PLF_UnifiedSearch extends Template {
 		info("-- the user profile phone --");
 		assert waitForAndGetElement(qsPage.ELEMENT_RESULT_CONTENT_DETAIL).getText().contains(numberOfPhone);
 		info("-- genders --");
-		assert waitForAndGetElement(qsPage.ELEMENT_RESULT_CONTENT_DETAIL).getText().contains(typeOfGender);
+		assert waitForAndGetElement(qsPage.ELEMENT_RESULT_CONTENT_DETAIL).getText().contains(typeOfGender.toLowerCase());
 
 		//- Item in search result is clickable and open it when user click
 		waitForAndGetElement(qsPage.ELEMENT_RESULT_TITLE).click();
@@ -958,16 +958,31 @@ public class PLF_UnifiedSearch extends Template {
 
 		//Search result will sorted by Relevancy, or date, or title respectively
 		//Sort by title
-		qsPage.sortByItem("Title");
-		waitForAndGetElement(qsPage.ELEMENT_RESULT_INDEX.replace("${index}", "1").replace("${title}", "event"));
-		waitForAndGetElement(qsPage.ELEMENT_RESULT_INDEX.replace("${index}", "2").replace("${title}", "task"));
-		waitForAndGetElement(qsPage.ELEMENT_RESULT_INDEX.replace("${index}", "3").replace("${title}", "answer"));
-
-		//Sort by Date
-		qsPage.sortByItem("Date");
-		waitForAndGetElement(qsPage.ELEMENT_RESULT_INDEX.replace("${index}", "1").replace("${title}", "answer"));
-		waitForAndGetElement(qsPage.ELEMENT_RESULT_INDEX.replace("${index}", "2").replace("${title}", "event"));
-		waitForAndGetElement(qsPage.ELEMENT_RESULT_INDEX.replace("${index}", "3").replace("${title}", "task"));
+		click(qsPage.ELEMENT_SORT_DROPDOWN,2);
+		Utils.pause(1000);
+		if(isElementPresent(By.xpath(qsPage.ELEMENT_ICON_SORT_DOWN.replace("${sortItem}", "Title"))))
+		{
+			info("-- Select sort Title --");
+			click(qsPage.ELEMENT_SORT_ITEM_OPTION.replace("${sortItem}", "Title"));
+			waitForAndGetElement(qsPage.ELEMENT_RESULT_INDEX.replace("${index}", "1").replace("${title}", "answer"));
+			waitForAndGetElement(qsPage.ELEMENT_RESULT_INDEX.replace("${index}", "2").replace("${title}", "task"));
+			waitForAndGetElement(qsPage.ELEMENT_RESULT_INDEX.replace("${index}", "3").replace("${title}", "event"));
+			qsPage.sortByItem("Date");
+			waitForAndGetElement(qsPage.ELEMENT_RESULT_INDEX.replace("${index}", "1").replace("${title}", "event"));
+			waitForAndGetElement(qsPage.ELEMENT_RESULT_INDEX.replace("${index}", "2").replace("${title}", "task"));
+			waitForAndGetElement(qsPage.ELEMENT_RESULT_INDEX.replace("${index}", "3").replace("${title}", "answer"));			
+		}
+		else if(isElementPresent(By.xpath(qsPage.ELEMENT_ICON_SORT_UP.replace("${sortItem}", "Relevance")))){
+			click(qsPage.ELEMENT_SORT_ITEM_OPTION.replace("${sortItem}", "Title"));
+			info("-- Select sort Title --");
+			waitForAndGetElement(qsPage.ELEMENT_RESULT_INDEX.replace("${index}", "1").replace("${title}", "event"));
+			waitForAndGetElement(qsPage.ELEMENT_RESULT_INDEX.replace("${index}", "2").replace("${title}", "task"));
+			waitForAndGetElement(qsPage.ELEMENT_RESULT_INDEX.replace("${index}", "3").replace("${title}", "answer"));
+			qsPage.sortByItem("Date");
+			waitForAndGetElement(qsPage.ELEMENT_RESULT_INDEX.replace("${index}", "1").replace("${title}", "answer"));
+			waitForAndGetElement(qsPage.ELEMENT_RESULT_INDEX.replace("${index}", "2").replace("${title}", "task"));	
+			waitForAndGetElement(qsPage.ELEMENT_RESULT_INDEX.replace("${index}", "3").replace("${title}", "event"));
+		}
 		
 		/*clear data*/
 		info("-- Clear data --");

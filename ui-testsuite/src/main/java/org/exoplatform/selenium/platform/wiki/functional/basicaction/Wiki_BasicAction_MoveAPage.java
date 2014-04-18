@@ -242,7 +242,7 @@ public class Wiki_BasicAction_MoveAPage extends RichTextMode {
 		info("Check content of page with attachments 1");
 		click(By.linkText(PAGE_NAME1));
 		if(isElementNotPresent(By.linkText(fileImage2)))
-			click(ELEMENT_ATTACHMENT_ICON);
+		click(ELEMENT_ATTACHMENT_ICON);
 		waitForAndGetElement(By.linkText(fileImage2));
 		waitForAndGetElement(By.linkText(fileImage1));
 		

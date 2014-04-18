@@ -48,7 +48,7 @@ public class PLF_Navigation_SpaceNavigation extends PlatformBase {
 	@Test
 	public void test01_ShowTheSpaceMenu(){
 		/*Declare variables*/
-		String spaceName = "space74379";
+		String spaceName = "space74379"+getRandomString();
 		
 		/*Create data*/
 		spaceMag.goToMySpacePage();
@@ -69,7 +69,7 @@ public class PLF_Navigation_SpaceNavigation extends PlatformBase {
 		//- Click on each applications, the application will show up in the main page
 		spaceMag.goToSpaceMenu("Activity Stream");
 		waitForAndGetElement(spaceMag.ELEMENT_SPACE_ACTIVITY_STREAM_PORTLET);
-		spaceMag.goToSpaceMenu("Forums");
+		spaceMag.goToSpaceMenu("Forum");
 		waitForAndGetElement(spaceMag.ELEMENT_SPACE_FORUM_PORTLET);
 		spaceMag.goToSpaceMenu("Wiki");
 		waitForAndGetElement(spaceMag.ELEMENT_SPACE_WIKI_PORTLET);
@@ -95,7 +95,7 @@ public class PLF_Navigation_SpaceNavigation extends PlatformBase {
 	@Test
 	public void test02_RemoveApplicationOfSpaceToolbar(){
 		/*Declare variables*/
-		String spaceName = "space74380";
+		String spaceName = "space74380"+getRandomString();
 		
 		/*Create data*/
 		spaceMag.goToMySpacePage();
@@ -111,7 +111,7 @@ public class PLF_Navigation_SpaceNavigation extends PlatformBase {
 		//- The Horizontal toolbar is displayed
 		//- The list of applications of space are displayed
 		spaceMag.verifySpaceMenu("Activity Stream");
-		spaceMag.verifySpaceMenu("Forums");
+		spaceMag.verifySpaceMenu("Forum");
 		spaceMag.verifySpaceMenu("Wiki");
 		spaceMag.verifySpaceMenu("Documents");
 		spaceMag.verifySpaceMenu("Space Setting");

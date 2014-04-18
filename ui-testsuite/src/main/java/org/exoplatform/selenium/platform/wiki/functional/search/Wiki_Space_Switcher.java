@@ -185,7 +185,7 @@ public class Wiki_Space_Switcher extends BasicAction{
 		//resote data
 		magMember.goToMySpacePage();	
 		magMember.deleteSpace(mobileSpace,300000);
-		magMember.deleteSpace("Long title for ...", 300000);
+		magMember.deleteSpace("Long title for ...", 500000);
 		for (int i = 1; i < 12; i++) {
 			magMember.deleteSpace(spacePrefix+i, 300000);
 		}
@@ -276,7 +276,7 @@ public class Wiki_Space_Switcher extends BasicAction{
 		//resote data
 		magMember.goToMySpacePage();	
 		magMember.deleteSpace(mobileSpace,300000);
-		magMember.deleteSpace("Long title for ...", 300000);
+		magMember.deleteSpace("Long title for ...", 500000);
 		for (int i = 1; i < 12; i++) {
 			magMember.deleteSpace(spacePrefix+i, 300000);
 		}
@@ -341,7 +341,7 @@ public class Wiki_Space_Switcher extends BasicAction{
 		//resote data
 		magMember.goToMySpacePage();	
 		magMember.deleteSpace(mobileSpace,300000);
-		magMember.deleteSpace("Long title for ...", 300000);
+		magMember.deleteSpace("Long title for ...", 500000);
 		for (int i = 1; i < 12; i++) {
 			magMember.deleteSpace(spacePrefix+i, 300000);
 		}
@@ -405,7 +405,7 @@ public class Wiki_Space_Switcher extends BasicAction{
 		//resote data
 		magMember.goToMySpacePage();	
 		magMember.deleteSpace(mobileSpace,300000);
-		magMember.deleteSpace("Long title for ...", 300000);
+		magMember.deleteSpace("Long title for ...", 500000);
 		for (int i = 1; i < 12; i++) {
 			magMember.deleteSpace(spacePrefix+i, 300000);
 		}
@@ -480,7 +480,7 @@ public class Wiki_Space_Switcher extends BasicAction{
 		//resote data
 		magMember.goToMySpacePage();	
 		magMember.deleteSpace(mobileSpace,300000);
-		magMember.deleteSpace("Long title for ...", 300000);
+		magMember.deleteSpace("Long title for ...", 500000);
 		for (int i = 1; i < 12; i++) {
 			magMember.deleteSpace(spacePrefix+i, 300000);
 		}
@@ -544,7 +544,7 @@ public class Wiki_Space_Switcher extends BasicAction{
 		//resote data
 		magMember.goToMySpacePage();	
 		magMember.deleteSpace(mobileSpace,300000);
-		magMember.deleteSpace("Long title for ...", 300000);
+		magMember.deleteSpace("Long title for ...", 500000);
 		for (int i = 1; i < 12; i++) {
 			magMember.deleteSpace(spacePrefix+i, 300000);
 		}
@@ -636,7 +636,7 @@ public class Wiki_Space_Switcher extends BasicAction{
 		//resote data
 		magMember.goToMySpacePage();	
 		magMember.deleteSpace(mobileSpace,300000);
-		magMember.deleteSpace("Long title for ...", 300000);
+		magMember.deleteSpace("Long title for ...", 500000);
 		for (int i = 1; i < 12; i++) {
 			magMember.deleteSpace(spacePrefix+i, 300000);
 		}
