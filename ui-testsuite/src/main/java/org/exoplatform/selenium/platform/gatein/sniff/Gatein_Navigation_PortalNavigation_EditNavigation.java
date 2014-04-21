@@ -3,6 +3,7 @@ package org.exoplatform.selenium.platform.gatein.sniff;
 import static org.exoplatform.selenium.TestLogger.info;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.exoplatform.selenium.Button;
@@ -12,8 +13,8 @@ import org.exoplatform.selenium.platform.NavigationManagement;
 import org.exoplatform.selenium.platform.NavigationToolbar;
 import org.exoplatform.selenium.platform.PageEditor;
 import org.exoplatform.selenium.platform.PageManagement;
-import org.exoplatform.selenium.platform.PortalManagement;
 import org.exoplatform.selenium.platform.UserGroupManagement;
+import org.exoplatform.selenium.platform.wiki.BasicAction;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -25,7 +26,7 @@ import org.testng.annotations.Test;
  * August 15th 2013
  *
  */
-public class Gatein_Navigation_PortalNavigation_EditNavigation extends PortalManagement{
+public class Gatein_Navigation_PortalNavigation_EditNavigation extends BasicAction{
 	//General
 	Button button;
 	ManageAlert magAlert;
@@ -177,10 +178,10 @@ public class Gatein_Navigation_PortalNavigation_EditNavigation extends PortalMan
 	public void test03_AddEditDeleteNodeForPortal(){
 		String portalName = "intranet";
 		String parentNode = "Home";
-		String nodeName = "test03EditNode";
-		String pageSelectorName = "test03pageSelector";
-		String nodeName2 = "test03EditNode2";
-		String nodeName2Edit = "test03EditNode2Label";
+		String nodeName = "node705851";
+		String pageSelectorName = "page70585";
+		String nodeName2 = "node705852";
+		String nodeName2Edit = "node705852label";
 		Map<String, String> languages = new HashMap<String, String>();
 		languages.put("English", "");
 
@@ -208,8 +209,7 @@ public class Gatein_Navigation_PortalNavigation_EditNavigation extends PortalMan
 
 		info("View Page after editing...");
 		driver.get(baseUrl + "/intranet/home/" + nodeName2);
-		waitForTextNotPresent("Basic information");
-		waitForTextPresent("Wiki Home");
+		waitForAndGetElement(ELEMENT_QUICK_SEARCH);	
 
 		info("Delete node for Portal");
 		pageMag.deletePageAtManagePageAndPortalNavigation(pageSelectorName, true, portalName, false, "", nodeName);
@@ -249,12 +249,20 @@ public class Gatein_Navigation_PortalNavigation_EditNavigation extends PortalMan
 
 		info("Select Move Up from the drop-down menu");
 		editNavigation(portalName);
-		waitForAndGetElement(ELEMENT_LIST_NODE_LINK.replace("${nodeLabel}", parentNode).replace("${number}", "1").replace("${childNode}", nodeName2));
-		waitForAndGetElement(ELEMENT_LIST_NODE_LINK.replace("${nodeLabel}", parentNode).replace("${number}", "2").replace("${childNode}", nodeName));	
+		List<WebElement> allElements = driver.findElements(ELEMENT_NODE_LIST_IN_NAVIGATION); 
+		int i = 1;
+		for (WebElement element: allElements) {
+			if(element.getText().contains(nodeName2))
+				break;
+			else
+				i++;
+		}
+		waitForAndGetElement(ELEMENT_LIST_NODE_LINK.replace("${nodeLabel}", parentNode).replace("${number}", String.valueOf(i)).replace("${childNode}", nodeName2));
+		waitForAndGetElement(ELEMENT_LIST_NODE_LINK.replace("${nodeLabel}", parentNode).replace("${number}", String.valueOf(i+1)).replace("${childNode}", nodeName));	
 		rightClickOnElement(nodeLinkToMove);
 		click(ELEMENT_NAVIGATION_MOVE_DOWN_NODE);
-		waitForAndGetElement(ELEMENT_LIST_NODE_LINK.replace("${nodeLabel}", parentNode).replace("${number}", "1").replace("${childNode}", nodeName));
-		waitForAndGetElement(ELEMENT_LIST_NODE_LINK.replace("${nodeLabel}", parentNode).replace("${number}", "2").replace("${childNode}", nodeName2));
+		waitForAndGetElement(ELEMENT_LIST_NODE_LINK.replace("${nodeLabel}", parentNode).replace("${number}", String.valueOf(i)).replace("${childNode}", nodeName));
+		waitForAndGetElement(ELEMENT_LIST_NODE_LINK.replace("${nodeLabel}", parentNode).replace("${number}", String.valueOf(i+1)).replace("${childNode}", nodeName2));
 		button.save();
 		waitForElementNotPresent(button.ELEMENT_SAVE_BUTTON);
 

@@ -266,7 +266,6 @@ public class Forum_Forum_Category_Add extends ForumBase {
 		acc.signOut();
 		acc.signIn(DATA_USER2, DATA_PASS);
 		goToForums();
-
 		fmCat.checkRightOfViewCategory(DATA_USER2, DATA_PASS, catName, description, true);
 
 		acc.signOut();

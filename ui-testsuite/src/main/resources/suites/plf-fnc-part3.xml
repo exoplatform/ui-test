@@ -8,7 +8,6 @@
 			</run>
 		</groups>
 		<classes>
-			<class name = "org.exoplatform.selenium.platform.plf.functional.welcomescreens.PLF_WelcomeScreens_Greeting_TermCondition" />
 			<class name = "org.exoplatform.selenium.platform.plf.functional.navigation.PLF_UserNavigation" />
 			<class name = "org.exoplatform.selenium.platform.plf.functional.navigation.leftnavigation.PLF_Navigation_LeftNavigation_CompanyList" />
 			<class name = "org.exoplatform.selenium.platform.plf.functional.navigation.leftnavigation.PLF_Navigation_LeftNavigation_General" />

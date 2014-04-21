@@ -52,7 +52,7 @@ public class UserGroupManagement extends PlatformBase {
 	public final By ELEMENT_USER_NEW_PASSWORD = By.id("newPassword");
 	public final By ELEMENT_USER_CONFIRM_PASSWORD = By.id("confirmPassword");
 	public final String MSG_UPDATE_USER_ACCOUNT = "The user profile has been updated.";
-	
+
 	//Group Management
 	public final By ELEMENT_INPUT_SEARCH_USER = By.id("Quick Search");
 	public final By ELEMENT_QUICK_SEARCH_USER = By.xpath("//*[@data-original-title='Quick Search']");
@@ -114,7 +114,7 @@ public class UserGroupManagement extends PlatformBase {
 
 	public void searchUser(String user, String searchOption){
 		info("--Search user " + user + "--");
-		if (isTextPresent("Search")){
+		if (isElementPresent(ELEMENT_INPUT_SEARCH_USER_NAME)){
 			type(ELEMENT_INPUT_SEARCH_USER_NAME, user, true);
 			select(ELEMENT_SELECT_SEARCH_OPTION, searchOption);
 		}	
@@ -147,7 +147,6 @@ public class UserGroupManagement extends PlatformBase {
 			else
 				type(ELEMENT_INPUT_EMAIL, email, true);
 		}
-
 		if(newPassword.length > 0){
 			check(ELEMENT_USER_CHANGE_PASSWORD,2);
 			type(ELEMENT_USER_NEW_PASSWORD,newPassword[0],true);

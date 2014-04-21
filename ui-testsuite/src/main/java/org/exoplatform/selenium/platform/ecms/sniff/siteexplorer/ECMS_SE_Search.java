@@ -133,6 +133,7 @@ public class ECMS_SE_Search extends PlatformBase {
 		navToolBar = new NavigationToolbar(driver, this.plfVersion);
 		magAcc = new ManageAccount(driver, this.plfVersion);
 		magAcc.signIn(DATA_USER1, DATA_PASS);
+
 		navToolBar.goToSiteExplorer();
 		actBar = new ActionBar(driver, this.plfVersion);
 		cTemplate = new ContentTemplate(driver, this.plfVersion);

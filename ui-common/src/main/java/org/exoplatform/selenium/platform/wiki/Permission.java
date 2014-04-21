@@ -139,7 +139,6 @@ public class Permission extends WikiBase{
 		By deletePlatformUser = By.xpath(ELEMENT_DELETE_PERMISSION.replace("{$user}", "platform/user")); 
 		By deletePlatformGuest = By.xpath(ELEMENT_DELETE_PERMISSION.replace("{$user}", "guest"));
 		boolean deleteAnyPermission = (Boolean) (deleteOption.length > 0 ? deleteOption[0] : true);
-		
 		goToPagePermission();
 
 		info("--Delete permission--");

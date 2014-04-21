@@ -215,6 +215,17 @@
 			<id>gatein-sniff-part2</id>
 			<properties>
 				<testSuite>gatein-sniff-part2.xml</testSuite>
+		</profile>
+		<profile>
+			<id>gatein-func-1</id>
+			<properties>
+				<testSuite>gatein-func-part1.xml</testSuite>
+			</properties>
+		</profile>
+		<profile>
+			<id>gatein-func-part1</id>
+			<properties>
+				<testSuite>gatein-func-part1.xml</testSuite>
 			</properties>
 		</profile>
 		<profile>

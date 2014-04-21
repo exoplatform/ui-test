@@ -10,6 +10,7 @@
 		<classes>
 			<class name = "org.exoplatform.selenium.platform.plf.functional.branding.PLF_Branding" />
 			<class name = "org.exoplatform.selenium.platform.plf.functional.contentnavigation.PLF_ContentNavigation" />
+			<class name = "org.exoplatform.selenium.platform.plf.functional.homepageactivitystream.activitystream_activitypost.PLF_HomepageActivityStream_ActivityStream_ActivityPost" />
 			<class name = "org.exoplatform.selenium.platform.plf.functional.homepageactivitystream.activity.PLF_HomePageActivityStream_Activity_Comment" />
 			<class name = "org.exoplatform.selenium.platform.plf.functional.homepageactivitystream.activity.PLF_HomePageActivityStream_Activity_General" />
 			<class name = "org.exoplatform.selenium.platform.plf.functional.homepageactivitystream.activity.PLF_HomePageActivityStream_Activity_Likes" />

@@ -309,7 +309,7 @@ public class Social_People extends SocialBase {
 		peoPro.editUserBasicInformation(firstName, lastName, email);
 
 		//Get old avatar
-		WebElement element = waitForAndGetElement(By.xpath(ELEMENT_GET_URL_IMAGE.replace("${name}", firstName+" "+lastName)));
+		WebElement element = waitForAndGetElement(By.xpath(ELEMENT_GET_URL_IMAGE.replace("${name}", oldFirstnName+" "+oldLastName)));
 		String oldsrc = element.getAttribute("src"); 
 
 		//Click on Change avatar and upload new image and Confirm

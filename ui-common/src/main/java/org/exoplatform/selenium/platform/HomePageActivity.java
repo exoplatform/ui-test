@@ -76,8 +76,9 @@ public class HomePageActivity extends PlatformBase{
 	public final String ELEMENT_CONTENT_SUMMARY_41 = "//*[@data-original-title='@{fileName}']/..//p[1 or 2]";
 	public final String ELEMENT_CONTENT_SUMMARY_WEBCONTENT = "//*[@title='@{fileName}']/../../div[@class='text']//p[${index}]";
 	public final String eLEMENT_CONTENT_SUMMARY_WEBCONTENT_41 = "//*[@data-original-title='@{fileName}']/../../div[@class='text']//p[${index}]";
-
 	public final String ELEMENT_CONTENT_COMMENT_EDIT_TITLE = "//*[normalize-space(text())='@{fileName}']/../../../..//*[@class='commentRight']//*[contains(text(),'Title has been updated to: ${title}')]";
+	//public final String ELEMENT_CONTENT_COMMENT_EDIT_TITLE = "//*[@title='@{fileName}']/../../../..//*[@class='commentRight']//*[contains(text(),'Title has been updated to: ${title}')]";
+	//public final String ELEMENT_CONTENT_COMMENT_EDIT_TITLE = "//*[contains(text(), '@{fileName}')]";
 	public final String ELEMENT_CONTENT = "//a[@title='@{fileName}']/..//*[contains(text(), '${text}')]";
 	public final String ELEMENT_CONTENT_ACTIVITY_INDEX = "//div[contains(@id,'UIActivitiesContainer')]/div[contains(@id,'activityContainer')][${index}]//*[contains(text(),'${content}')]";
 

@@ -155,7 +155,7 @@ public class Community_Create_Users extends PlatformBase{
 		button.save();
 		waitForMessage(userGroup.MSG_UPDATE_USER_ACCOUNT);
 		button.ok();
-		
+
 		info("Edit group");
 		navBar.goToUsersAndGroupsManagement();
 		userGroup.chooseGroupTab();
@@ -261,6 +261,18 @@ public class Community_Create_Users extends PlatformBase{
 			userGroup.goToFirstPage();
 			userGroup.addUsersToGroup("john", "member", false, false);
 		}
+		
+		//Group Management
+		navBar.goToUsersAndGroupsManagement();
+		userGroup.chooseGroupTab();
+		//Publisher
+		userGroup.selectGroup("Platform/Content Management", true);
+		userGroup.addUsersToGroup("james", "author", false, false);
+		userGroup.addUsersToGroup("james", "redactor", false, false);
 
+		click(ELEMENT_UP_LEVEL);
+		//Organization/Employees
+		userGroup.selectGroup("Organization/Employees", true);
+		userGroup.addUsersToGroup("james", "member", true, true);
 	}
 }

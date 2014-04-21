@@ -81,7 +81,7 @@ public class PeopleConnection extends SocialBase {
 		}
 		click(ELEMENT_EVERYONE_TAB);
 		peoSearch.searchPeople(false,peopleName);
-		waitForAndGetElement(By.linkText(peopleName));
+		waitForAndGetElement(By.linkText(peopleName),180000);
 		if (waitForAndGetElement(ELEMENT_CANCEL_REQUEST_BUTTON.replace("${peopleName}", peopleName), 3000, 0) != null){
 			info("cancel connection request");
 			click(ELEMENT_CANCEL_REQUEST_BUTTON.replace("${peopleName}", peopleName));

@@ -650,7 +650,6 @@ public class ECMS_SE_Info_Permission  extends PlatformBase {
 		ePerm = new EcmsPermission(driver);
 		btn = new Button(driver);
 		cMenu = new ContextMenu(driver);
-
 		info("Login ECMS with " + DATA_USER2);
 		magAcc.signIn(DATA_USER2, DATA_PASS);
 		navToolBar.goToSiteExplorer();

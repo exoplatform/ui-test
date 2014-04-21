@@ -257,6 +257,7 @@ public class SpaceManagement extends SocialBase {
 	public void deleteSpace(String name, int... params){
 		info("-- Deleting Space..." + name);
 		int iTimeout = params.length > 0 ? params[0] : DEFAULT_TIMEOUT;
+		spSeach.searchSpaceByName(name,true);
 		doAction("Delete", name);    
 		magAlert = new ManageAlert(driver);
 		magAlert.acceptAlert();

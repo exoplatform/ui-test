@@ -88,7 +88,9 @@ public class SettingSearchPage extends PlatformBase {
 
 	//People page result
 	public final String ELEMENT_RESULT_PEOPLE_ICON = "//*[contains(@class,'avatar pull-left')]";
-	public final By ELEMENT_RESULT_TITLE = By.xpath("//*[@class='content']//a");
+	public final String ELEMENT_RESULT_TITLE = "//*[@class='content']//a[contains(.,'${content}')]";
+	public final String ELEMENT_RESULT_PEOPLE_FULLNAME = "//*[@class='content']//a[contains(@href,'/portal/intranet/profile/${userName}') and contains(.,'${fullName}')]";
+	public final String ELEMENT_RESULT_CONTENT_DETAIL_PEOPLE = "//*[@class='content']/*[@class='detail' and contains(.,'${content}')]";
 
 	//File page result
 	public final String ELEMENT_RESULT_FILE_ICON = "//div[@id='resultPage']//a[text()='${item}']/*[contains(text(),'${keySearch}')]/../../../..//*[contains(@class,'avatar pull-left')]";
@@ -133,6 +135,7 @@ public class SettingSearchPage extends PlatformBase {
 		Utils.pause(3000);
 		click(ELEMENT_SEE_ALL_SEARCH_RESULTS);
 		Utils.pause(5000);
+		waitForElementNotPresent(ELEMENT_SEE_ALL_SEARCH_RESULTS,180000);
 	}
 
 	/** Go To Edit Search Portlet
@@ -274,6 +277,7 @@ public class SettingSearchPage extends PlatformBase {
 	 * @param keySearch
 	 */
 	public void searchInSearchPage(String keySearch){
+		info("Seach in search page");
 		type(ELEMENT_SEARCH_TEXTBOX, keySearch,true);
 		click(ELEMENT_SEARCH_BUTTON);
 		Utils.pause(1000);
@@ -288,6 +292,7 @@ public class SettingSearchPage extends PlatformBase {
 		info("-- Select sort "+sortItem+" --");
 		if(waitForAndGetElement(ELEMENT_SORT_ITEM_CURRENT.replace("${sortItem}", sortItem), 5000, 0)==null){
 			info("-- Select sort "+sortItem+" from dropdown --");
+			waitForAndGetElement(ELEMENT_SORT_DROPDOWN, 60000,1,2);
 			click(ELEMENT_SORT_DROPDOWN,2);
 			click(ELEMENT_SORT_ITEM_OPTION.replace("${sortItem}", sortItem));
 			waitForAndGetElement(ELEMENT_SORT_ITEM_CURRENT.replace("${sortItem}", sortItem));

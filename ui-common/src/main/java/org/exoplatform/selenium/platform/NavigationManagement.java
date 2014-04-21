@@ -98,13 +98,17 @@ public class NavigationManagement extends  PlatformBase{
 			type(ELEMENT_INPUT_POPUP_SEARCH_TITLE, pageTitle, true);
 			click(ELEMENT_PAGE_MANAGEMENT_SEARCH_BUTTON);
 			Utils.pause(1000);
-			if(isElementPresent(ELEMENT_SELECT_SEARCHED_PAGE_BY_PAGETITLE.replace("${pageTitle}", pageTitle)))
+			if(isElementPresent(ELEMENT_SELECT_SEARCHED_PAGE_BY_PAGETITLE.replace("${pageTitle}", pageTitle))){
 				click(ELEMENT_SELECT_SEARCHED_PAGE_BY_PAGETITLE.replace("${pageTitle}", pageTitle));
-			else
+				waitForElementNotPresent(ELEMENT_SELECT_SEARCHED_PAGE_BY_PAGETITLE.replace("${pageTitle}", pageTitle));
+			}
+			else{
 				click(ELEMENT_SELECT_SEARCHED_PAGE);
+				waitForElementNotPresent(ELEMENT_SELECT_SEARCHED_PAGE);
+			}
 		}
 		info("-- Save add node for portal --");
-		Utils.pause(500);
+		Utils.pause(3000);
 		button.save();
 		if (verifyNode) {
 			//waitForTextNotPresent("Page Node Settings");
@@ -163,7 +167,15 @@ public class NavigationManagement extends  PlatformBase{
 			click(ELEMENT_SEARCH_SELECTOR_PAGE_LINK);
 			type(ELEMENT_INPUT_POPUP_SEARCH_TITLE, pageTitle, true);
 			click(ELEMENT_PAGE_MANAGEMENT_SEARCH_BUTTON);
-			click(ELEMENT_SELECT_SEARCHED_PAGE);	
+			Utils.pause(1000);
+			if(isElementPresent(ELEMENT_SELECT_SEARCHED_PAGE_BY_PAGETITLE.replace("${pageTitle}", pageTitle))){
+				click(ELEMENT_SELECT_SEARCHED_PAGE_BY_PAGETITLE.replace("${pageTitle}", pageTitle));
+				waitForElementNotPresent(ELEMENT_SELECT_SEARCHED_PAGE_BY_PAGETITLE.replace("${pageTitle}", pageTitle));
+			}
+			else{
+				click(ELEMENT_SELECT_SEARCHED_PAGE);
+				waitForElementNotPresent(ELEMENT_SELECT_SEARCHED_PAGE);
+			}
 			button.save();
 		}
 		Utils.pause(500);

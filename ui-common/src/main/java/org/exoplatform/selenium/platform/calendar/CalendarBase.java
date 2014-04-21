@@ -519,7 +519,6 @@ public class CalendarBase extends PlatformBase {
 		button = new Button(driver);
 		info("--Delete event--");
 		click(ELEMENT_DELETE_FEEDS);
-
 		if(isElementPresent(button.ELEMENT_YES_BUTTON_AUX)){
 			click(button.ELEMENT_YES_BUTTON_AUX);
 		}else{

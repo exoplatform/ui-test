@@ -36,8 +36,7 @@ public class Wiki_BasicAction_Other extends Permalink {
 		button = new Button(driver);
 		magMem = new ManageMember(driver);
 		per = new PlatformPermission(driver);
-
-		magAc.signIn("john", DATA_PASS); 
+		magAc.signIn(DATA_USER1, DATA_PASS); 
 		goToWiki();
 	}
 
@@ -66,7 +65,7 @@ public class Wiki_BasicAction_Other extends Permalink {
 		click(By.linkText(title));
 		goToExportPageAsPDF();
 		Utils.pause(3000);
-		//assert checkFileExisted(title + ".pdf");
+		assert checkFileExisted(title + ".pdf");
 
 		deleteCurrentWikiPage();
 	}
@@ -254,8 +253,7 @@ public class Wiki_BasicAction_Other extends Permalink {
 			click(button.ELEMENT_CANCEL_BUTTON);
 //		}
 		magAc.signOut();
-
-		magAc.signIn("mary", DATA_PASS);
+		magAc.signIn(DATA_USER2, DATA_PASS);
 		addWikiForSpace(spaceName, title2, content2);
 
 		info("Move page2 of space to page1 of Intranet");
@@ -343,7 +341,6 @@ public class Wiki_BasicAction_Other extends Permalink {
 		magAc.signOut();
 
 		goToWikiByPermalink("demo", permalink, true, content);
-
 		magAc.signIn("john", DATA_PASS);
 		magMem.goToAllSpaces();
 		magMem.deleteSpace(spaceName, 240000);
@@ -365,7 +362,6 @@ public class Wiki_BasicAction_Other extends Permalink {
 		magAc.signOut();
 
 		goToWikiByPermalink("demo", permalink, false, content);
-
 		magAc.signIn("john", DATA_PASS);
 		magMem.goToAllSpaces();
 		magMem.deleteSpace(spaceName, 180000);

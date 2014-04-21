@@ -19,7 +19,6 @@ import org.testng.annotations.Test;
  */
 public class Forum_Forum_Category_ImportExport extends ForumBase {
 
-
 	ManageAccount magAc;
 	ForumManageCategory magCat;
 	ForumManageForum magForum;
@@ -185,6 +184,58 @@ public class Forum_Forum_Category_ImportExport extends ForumBase {
 		click(By.linkText(catName2));
 		magCat .deleteCategoryInForum(catName2);
 	}
+
+	/* *CaseId: 72819 -> Functional-Forum-Forum-Category-Import without file uploaded.
+	 * This is medium test case, so it is not required to executed.
+	 *
+  @BeforeMethod
+  public void setUpBeforeTest(){
+    getDriverAutoSave();
+    magAc = new ManageAccount(driver);
+    magCat = new ForumManageCategory(driver);
+    magForum = new ForumManageForum(driver);
+    magTopic = new ForumManageTopic(driver);
+
+    magAc.signIn("john", DATA_PASS);
+    goToForums();
+
+  }
+
+  @AfterMethod
+
+  public void afterTest(){
+    driver.manage().deleteAllCookies();
+    driver.quit();
+  }
+  
+   @Test
+	ManageAccount magAc;
+	ForumManageCategory magCat;
+	ForumManageForum magForum;
+	ForumManageTopic magTopic;
+	ForumManagePost magPost;
+
+
+	@BeforeMethod
+	public void setUpBeforeTest(){
+		getDriverAutoSave();
+		magAc = new ManageAccount(driver);
+		magCat = new ForumManageCategory(driver);
+		magForum = new ForumManageForum(driver);
+		magTopic = new ForumManageTopic(driver);
+
+		magAc.signIn("john", "gtn");
+		goToForums();
+
+	}
+
+	@AfterMethod
+
+	public void afterTest(){
+		driver.manage().deleteAllCookies();
+		driver.quit();
+	}
+
 
 	/* *CaseId: 72819 -> Functional-Forum-Forum-Category-Import without file uploaded.
 	 * This is medium test case, so it is not required to executed.

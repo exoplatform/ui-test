@@ -189,6 +189,7 @@ public class Wiki_PublicActivity extends BasicAction {
 			waitForTextPresent("eXo Community Wiki");
 		else
 			waitForTextPresent("Wiki Home");*/
+		//waitForTextPresent("Wiki Home");
 		deleteCurrentWikiPage();
 	}
 

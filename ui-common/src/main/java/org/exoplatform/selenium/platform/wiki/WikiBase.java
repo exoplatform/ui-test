@@ -164,7 +164,6 @@ public class WikiBase extends PlatformBase{
 	//public final String ELEMENT_SPACE_NAME_SELECTED = "//*[@id='UISpaceSwitcher_/spaces/${space}']/a";
 	public final String ELEMENT_SPACE_NAME_SELECTED = "//form[@id='UIWikiMovePageForm']//a[contains(.,'${space}')]";
 	public final String ELEMENT_SPACE_NAME_SELECTED_AUX = "//*[contains(@alt, '${space}')]";
-
 	public final By ELEMENT_PORTAL_NAME_SELECTED = By.id("UISpaceSwitcher_/portal/intranet");
 	public final String MESSAGE_MOVE_PAGE_DUPLICATE_TITLE = "Another page with the same title already exists in the selected space.";
 	public final By ELEMENT_RENAME_LINK_WHEN_MOVE_PAGE = By.linkText("Rename");

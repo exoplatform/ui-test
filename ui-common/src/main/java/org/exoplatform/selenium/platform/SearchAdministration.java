@@ -32,7 +32,7 @@ public class SearchAdministration extends PlatformBase {
 		waitForAndGetElement(ELEMENT_CONTENT_TYPE_ENABLE_DISABLE_BUTTON.replace("${contentType}", contentType).replace("${action}", "Disable"));
 		Utils.pause(1000);
 		qsPage.quickSearch(contentType);
-		waitForAndGetElement(ELEMENT_CONTENT_TYPE_ITEM_SEARCH.replace("${contentType}", contentType));
+		waitForAndGetElement(ELEMENT_CONTENT_TYPE_ITEM_SEARCH.replace("${contentType}", contentType),180000);
 	}
 
 	/** Disable a content type

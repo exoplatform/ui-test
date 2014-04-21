@@ -192,6 +192,7 @@ public class ContextMenu extends EcmsBase{
 				rightClickOnElement(locator);
 			if (waitForAndGetElement(ELEMENT_MENU_DELETE, 10000, 0)!=null) 
 			{	
+				info("Delete document");
 				click(ELEMENT_MENU_DELETE);
 				//waitForTextPresent("Delete");
 				//click(By.linkText("OK"));
@@ -204,10 +205,6 @@ public class ContextMenu extends EcmsBase{
 		Utils.pause(1000);
 		//waitForElementNotPresent(By.linkText("OK"));
 		//waitForTextNotPresent("Delete");
-		if (isElementPresent(locator)){
-			driver.navigate().refresh();
-			Utils.pause(2000);
-		}
 		waitForElementNotPresent(locator, iTimeout);
 		info(locator.toString() + " is deleted successfully");		
 		Utils.pause(1000);
@@ -216,7 +213,7 @@ public class ContextMenu extends EcmsBase{
 	//Delete data
 	public void deleteData(By data){
 		goToNode(data);
-		deleteDocument(data);
+		deleteDocument(data,120000);
 		/*Utils.pause(1000);
 		waitForElementNotPresent(data);*/
 	}

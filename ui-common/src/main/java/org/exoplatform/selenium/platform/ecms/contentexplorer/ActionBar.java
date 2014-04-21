@@ -254,6 +254,7 @@ public class ActionBar extends EcmsBase{
 			info("retry...[" + repeat + "]");
 		}
 		//mouseOverAndClick(ELEMENT_NEW_CONTENT_LINK);
+		waitForAndGetElement(ELEMENT_NEW_CONTENT_LINK, 180000);
 		click(ELEMENT_NEW_CONTENT_LINK);
 		waitForElementNotPresent(ELEMENT_NEW_CONTENT_LINK, DEFAULT_TIMEOUT, 1);
 	}

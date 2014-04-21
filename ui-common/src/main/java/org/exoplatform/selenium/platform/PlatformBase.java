@@ -33,6 +33,9 @@ public class PlatformBase extends TestBase {
 	public final String USER_MARY = "Mary";
 	public final String USER_JAMES = "James";
 	public final String USER_JACK = "Jack";
+
+//	public final String DATA_USER_JOHN = "john";
+//	public final String DATA_USER_MARY = "mary";
 	public ManageAlert alert = new ManageAlert(driver);
 	public Button button = new Button(driver);
 	public Dialog dialog = new Dialog(driver);
@@ -475,7 +478,7 @@ public class PlatformBase extends TestBase {
 	public final By ELEMENT_SELECT_PAGE_BUTTON = By.xpath("//a[@data-original-title='Select Page']");
 	public final By ELEMENT_NO_RESULT_FOUND_MSG = By.xpath("//span[contains(text(),'No result found')]");
 	public final By ELEMENT_SAVE_EDIT_PAGE_FORM = By.xpath("//*[@id='UIPageNodeForm']//*[text()='Save']");
-
+	public final By ELEMENT_NODE_LIST_IN_NAVIGATION = By.xpath("//*[@class='node']//*[@title='Home']/..//ul[@class='childrenContainer nodeGroup']/li");
 	public final String ELEMENT_LIST_NODE_LINK = ELEMENT_NODE_LINK.replace("${nodeLabel}", "${nodeLabel}") + "/..//li[${number}]//*[@title='${childNode}']";
 	public final String ELEMENT_CHILD_NODE_LINK = ELEMENT_NODE_LINK.replace("${nodeLabel}", "${nodeLabel}") + "/../*[contains(@class, 'childrenContainer')]//*[@title='${childNode}']";
 	public final String ELEMENT_SELECT_HOME_PAGE = "//div[@id='UIRepeater']//table//tbody/tr/td[5]/div[@class='ActionContainer']/img";
@@ -770,7 +773,7 @@ public class PlatformBase extends TestBase {
 
 	//Search porlet
 	public final By ELEMENT_SEARCH_APPLICATION = By.xpath("//a[@title='Search']");
-	public final String ELEMENT_GADGET_SEARCH_APPLICATION_PAGE_EDITOR = "//div[@id='UIApplicationList17']//div[contains(text(),'${gadget}')]";
+	public final String ELEMENT_GADGET_SEARCH_APPLICATION_PAGE_EDITOR = "//div[contains(@id,'${gadget}')]";
 
 	//Administration Menu for admin acc
 

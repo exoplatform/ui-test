@@ -24,13 +24,13 @@ import org.testng.annotations.Test;
  */
 
 public class Gatein_Navigation_PortalNavigation_EditLayout extends PortalManagement {
-	
+
 	ManageAccount magAc;
 	NavigationToolbar navTool;
 	PageManagement pageMag;
 	PageEditor pageE;
 	Button but;
-	
+
 	@BeforeMethod
 	public void setUpBeforeTest(){
 		initSeleniumTest();
@@ -40,7 +40,7 @@ public class Gatein_Navigation_PortalNavigation_EditLayout extends PortalManagem
 		pageMag = new PageManagement(driver, this.plfVersion);
 		pageE = new PageEditor(driver, this.plfVersion);
 		but = new Button(driver, this.plfVersion);
-		
+
 		magAc.signIn("john", DATA_PASS);
 	}
 
@@ -49,7 +49,7 @@ public class Gatein_Navigation_PortalNavigation_EditLayout extends PortalManagem
 		driver.manage().deleteAllCookies();
 		driver.quit();
 	}
-	
+
 	/**CaseId: 68876
 	 * Add application into container when edit layout for portal's page
 	 */
@@ -58,24 +58,24 @@ public class Gatein_Navigation_PortalNavigation_EditLayout extends PortalManagem
 		String pageName = "page68876";
 		String category = "answer";
 		String portletId = "AnswersPortlet";
-		
+
 		info("Create page for portal with empty layout");
 		pageE.createNewPageEmptyLayout(pageName);
-		
+
 		info("Go to page edit layout");
 		navTool.goToEditPageEditor();
-		
+
 		info("Add new container and application to page layout");
 		pageE.addNewContainerAndPortlet("Rows Layout", "oneRow", category, portletId, false);
 		click(ELEMENT_SWITCH_VIEW_MODE);
 		waitForAndGetElement(ELEMENT_ANWSER_PORTLET_IN_VIEW_PAGE);
 		click(ELEMENT_SWITCH_VIEW_MODE);
 		pageE.finishEditLayout();
-		
+
 		info("Delete page");
 		pageMag.deletePageAtManagePageAndPortalNavigation(pageName, true, "intranet", false, null);
 	}
-	
+
 	/**CaseId: 68888 -> Change site's config of portal
 	 * 
 	 */
@@ -84,20 +84,20 @@ public class Gatein_Navigation_PortalNavigation_EditLayout extends PortalManagem
 		String portalName = "Sniffportalnavigation02";
 		String label = "sniff portal lable 02";
 		String description = "sniff portal descriptrion 02";
-		
+
 		info("Add new portal");
 		navTool.goToPortalSites();
 		addNewPortal(portalName, null, null, null, null, "On Demand", true, null, "Platform /Content Management ", "*");
 		waitForAndGetElement(ELEMENT_PORTAL.replace("${siteName}", portalName));
-		
+
 		info("Edit layout of portal");
 		goToPortalEditLayout(portalName);
 		click(ELEMENT_SWITCH_PORTAL_CONFIG);
-		
+
 		info("Config portal");	
 		configPortal(null, label, description, "French", null, "Always", true, null, "Development ", "member");
 		pageE.finishEditLayout();
-		
+
 		info("Check config portal successfully");
 		goToEditSiteConfiguration(portalName);
 		assert getValue(ELEMENT_PORTAL_LABEL).equalsIgnoreCase(label);
@@ -107,22 +107,22 @@ public class Gatein_Navigation_PortalNavigation_EditLayout extends PortalManagem
 		waitForTextPresent("/developers");
 		but.cancel();
 		Utils.pause(1000);
-		
+
 		deletePortal(portalName);
 	}
-	
+
 	/**CaseId: 68891 -> Add application into container in layout of portal
 	 * 
 	 */
 	@Test
 	public void test03_AddAppToContainer_LayoutOfPortal(){
 		String portalName = "Sniffportalnavigation03";
-		
+
 		info("Add new portal");
 		navTool.goToPortalSites();
 		addNewPortal(portalName, null, null, null, null, "On Demand", true, null, "Platform /Content Management ", "*");
 		waitForAndGetElement(ELEMENT_PORTAL.replace("${siteName}", portalName));
-		
+
 		goToPortalEditLayout(portalName);
 		click(ELEMENT_EDIT_PAGE_CATEGORY_MENU.replace("${categoryLabel}", "answer"));
 		dragAndDropToObject(By.xpath(pageMag.ELEMENT_PORTLET_ID.replace("${portletId}","AnswersPortlet")), By.xpath("//*[text() = 'Portal Page']/.."));
@@ -131,10 +131,10 @@ public class Gatein_Navigation_PortalNavigation_EditLayout extends PortalManagem
 		waitForAndGetElement(ELEMENT_ANWSER_PORTLET_IN_VIEW_PAGE);
 		click(ELEMENT_SWITCH_VIEW_MODE_PORTAL);
 		pageE.finishEditLayout();
-		
+
 		deletePortal(portalName);
 	}
-	
+
 	/**CaseId 68892 -> Edit portal's config
 	 * 
 	 */
@@ -143,16 +143,16 @@ public class Gatein_Navigation_PortalNavigation_EditLayout extends PortalManagem
 		String portalName = "Sniffportalnavigation04";
 		String label = "sniff portal lable 04";
 		String description = "sniff portal descriptrion 04";
-		
+
 		info("Add new portal");
 		navTool.goToPortalSites();
 		addNewPortal(portalName, null, null, null, null, "On Demand", true, null, "Platform /Content Management ", "*");
 		waitForAndGetElement(ELEMENT_PORTAL.replace("${siteName}", portalName));
-		
+
 		info("Config portal");
 		editPortal(portalName, label, description, "French", null, "Always", true, null, "Development ", "member");
 		Utils.pause(1000);
-		
+
 		info("Check config portal successfully");
 		goToEditSiteConfiguration(portalName);
 		assert getValue(ELEMENT_PORTAL_LABEL).equalsIgnoreCase(label);
@@ -162,19 +162,19 @@ public class Gatein_Navigation_PortalNavigation_EditLayout extends PortalManagem
 		waitForTextPresent("/developers");
 		but.cancel();
 		Utils.pause(1000);
-		
+
 		deletePortal(portalName);
 	}
-	
+
 	/**CaseId: 70587 -> Move application when edit layout for portal's page
 	 * 
 	 */
 	@Test
 	public void test05_MoveAppWhenEditLayout_PortalPage(){
-		String pageName = "Sniffportalnavigation05";
+		String pageName = "page705871";
 		String ELEMENT_PORTLET_1 = "//*[contains(@id, 'UIPortlet')][1]";
 		String ELEMENT_PORTLET_2 = "//*[contains(@id, 'UIPortlet')][2]";
-		
+
 		info("Create new page with application");
 		navTool.goToPageCreationWizard();
 		Map<String, String> portal = new HashMap<String, String>();
@@ -182,31 +182,45 @@ public class Gatein_Navigation_PortalNavigation_EditLayout extends PortalManagem
 		pageMag.addNewPageEditor(pageName, "", null, "Content", portal, false, false);
 
 		navTool.goToEditPageEditor();
-		waitForAndGetElement(ELEMENT_PORTLET_1 + "//div[contains(text(),'Content List')]");
-		mouseOver(ELEMENT_PORTLET_2, true);
-		if(this.plfVersion.contains("4.0"))
-			dragAndDropToObject(ELEMENT_PORTLET_2 + ELEMENT_PORTLET_DRAG_DROP_ICON, ELEMENT_PORTLET_1);
-		else 
-			dragAndDropToObject(ELEMENT_PORTLET_2 + ELEMENT_PORTLET_DRAG_DROP_ICON_PLF41, ELEMENT_PORTLET_1);
-		waitForAndGetElement(ELEMENT_PORTLET_1 + "//div[contains(text(),'Content Explorer')]");
-		waitForAndGetElement(ELEMENT_PORTLET_2 + "//div[contains(text(),'Content List')]");
-		click(ELEMENT_SWITCH_VIEW_MODE);
-		pageE.finishEditLayout();
-		
+		if(isElementPresent(ELEMENT_PORTLET_1 + "//div[contains(text(),'Content List')]")){
+			waitForAndGetElement(ELEMENT_PORTLET_1 + "//div[contains(text(),'Content List')]");
+			mouseOver(ELEMENT_PORTLET_2, true);
+			if(this.plfVersion.contains("4.0"))
+				dragAndDropToObject(ELEMENT_PORTLET_2 + ELEMENT_PORTLET_DRAG_DROP_ICON, ELEMENT_PORTLET_1);
+			else 
+				dragAndDropToObject(ELEMENT_PORTLET_2 + ELEMENT_PORTLET_DRAG_DROP_ICON_PLF41, ELEMENT_PORTLET_1);
+			waitForAndGetElement(ELEMENT_PORTLET_1 + "//div[contains(text(),'Content Explorer')]");
+			waitForAndGetElement(ELEMENT_PORTLET_2 + "//div[contains(text(),'Content List')]");
+			click(ELEMENT_SWITCH_VIEW_MODE);
+			pageE.finishEditLayout();
+		}
+		else{
+			waitForAndGetElement(ELEMENT_PORTLET_1 + "//div[contains(text(),'Content Explorer')]");
+			mouseOver(ELEMENT_PORTLET_2, true);
+			if(this.plfVersion.contains("4.0"))
+				dragAndDropToObject(ELEMENT_PORTLET_2 + ELEMENT_PORTLET_DRAG_DROP_ICON, ELEMENT_PORTLET_1);
+			else 
+				dragAndDropToObject(ELEMENT_PORTLET_2 + ELEMENT_PORTLET_DRAG_DROP_ICON_PLF41, ELEMENT_PORTLET_1);
+			waitForAndGetElement(ELEMENT_PORTLET_2 + "//div[contains(text(),'Content Explorer')]");
+			waitForAndGetElement(ELEMENT_PORTLET_1 + "//div[contains(text(),'Content List')]");
+			click(ELEMENT_SWITCH_VIEW_MODE);
+			pageE.finishEditLayout();
+		}
+
 		info("Delete page");
 		pageMag.deletePageAtManagePageAndPortalNavigation(pageName, true, "intranet", false, null);	
 	}
-	
+
 	/**CaseId: 70588 + 70589 + 70590 -> Add, edit, remove application when edit layout for portal's page
 	 * 
 	 */
 	@Test
 	public void test06_AddEditRemoveAppWhenEditLayout_PortalPage() {
 		String pageName = "Sniffportalnavigation06";
-		
+
 		info("Create new page of portal with empty layout and applications");
 		pageE.createNewPageEmptyLayout(pageName);
-		
+
 		info("Add application when edit layout of page");
 		navTool.goToEditPageEditor();
 		click(By.linkText("Content"));
@@ -215,7 +229,7 @@ public class Gatein_Navigation_PortalNavigation_EditLayout extends PortalManagem
 		waitForAndGetElement(ELEMENT_CLV_PORTLET);
 		click(ELEMENT_SWITCH_VIEW_MODE);
 		pageE.finishEditLayout();
-		
+
 		info("Edit application when edit layout of page");
 		navTool.goToEditPageEditor();
 		pageE.selectCLVPath("General Drives/Sites Management/intranet", "documents");
@@ -225,16 +239,16 @@ public class Gatein_Navigation_PortalNavigation_EditLayout extends PortalManagem
 		waitForTextPresent("conditions.doc");
 		click(ELEMENT_SWITCH_VIEW_MODE);
 		pageE.finishEditLayout();
-		
+
 		info("Remove application when edit layout of page");
 		navTool.goToEditPageEditor();
 		pageE.removePortlet(ELEMENT_FRAME_CONTAIN_PORTLET, ELEMENT_DELETE_PORTLET_ICON);
 		waitForElementNotPresent(ELEMENT_CLV_PORTLET);
-		
+
 		info("Delete page");
 		pageMag.deletePageAtManagePageAndPortalNavigation(pageName, true, "intranet", false, null);	
 	}
-	
+
 	/**CaseId: 70593 + 70594 + 70592 + 70595 
 	 * Add container when edit layout for portal's page
 	 * edit container when edit layout for portal's page
@@ -246,10 +260,10 @@ public class Gatein_Navigation_PortalNavigation_EditLayout extends PortalManagem
 		String pageName = "Sniffportalnavigation07";
 		String title = "Container1";
 		String newContainerPos = "//*[@class='UIRowContainer']/div[2]";
-		
+
 		pageE.createNewPageEmptyLayout(pageName);
 		navTool.goToEditPageEditor();
-		
+
 		info("Add container");
 		pageE.addNewContainer("Rows Layout", "oneRow");
 		waitForAndGetElement(ELEMENT_DROP_TARGET_HAS_LAYOUT);
@@ -269,7 +283,7 @@ public class Gatein_Navigation_PortalNavigation_EditLayout extends PortalManagem
 		WebElement element = waitForAndGetElement(ELEMENT_EDITING_CONTAINER);
 		String valueStyle = element.getAttribute("style");
 		assert valueStyle.equals("width: 150px; height: 150px;"): "Failed to edit the value of container: " + title;
-		
+
 		info("Move container");
 		pageE.addNewContainer("Rows Layout", "oneRow");
 		waitForAndGetElement(ELEMENT_LIST_CONTAINER.replace("${number}", "1").replace("${nameContainer}", "Container"), DEFAULT_TIMEOUT, 1, 2);
@@ -284,14 +298,14 @@ public class Gatein_Navigation_PortalNavigation_EditLayout extends PortalManagem
 		click(ELEMENT_ABORTEDIT_BUTTON);
 		click(pageE.ELEMENT_CONFIRM_YES_BUTTON);
 		waitForElementNotPresent(pageE.ELEMENT_VIEW_PAGE_PROPERTIES);
-		
+
 		info("Delete container");
 		navTool.goToEditPageEditor();
 		pageE.addNewContainer("Rows Layout", "oneRow");
 		pageE.removeContainer(ELEMENT_NAME_CURRENT_CONTAINER.replace("${nameContainer}", "Container"), ELEMENT_DELETE_CONTAINER_ICON);
 		pageE.finishEditLayout();	
 		waitForElementNotPresent(pageE.ELEMENT_VIEW_PAGE_PROPERTIES);
-		
+
 		info("Delete page");
 		pageMag.deletePageAtManagePageAndPortalNavigation(pageName, true, "intranet", false, null);	
 	}

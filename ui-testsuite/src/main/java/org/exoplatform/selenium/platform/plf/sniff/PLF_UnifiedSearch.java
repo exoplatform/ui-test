@@ -49,7 +49,7 @@ import org.testng.annotations.Test;
 public class PLF_UnifiedSearch extends Template {
 	//General
 	Button button;
-	
+
 	//Platform
 	NavigationToolbar naviToolbar;
 	ManageAccount magAcc;
@@ -144,7 +144,7 @@ public class PLF_UnifiedSearch extends Template {
 		//- This content type will no longer appear in the search results, nor in the search apps settings
 		naviToolbar.goToSearch();
 		searchAdmin.disableContentTypeSearch(contentType);
-		
+
 		//Restore data
 		naviToolbar.goToSearch();
 		searchAdmin.enableContentTypeSearch(contentType);
@@ -158,7 +158,7 @@ public class PLF_UnifiedSearch extends Template {
 	@Test(priority=3)
 	public void test02_ConfigureQuickSearch(){
 		/*Declare variables*/
-		String qsGadget = "Quick Search";
+		String qsGadget = "QuicksearchPortlet";
 		String pageName = "QuickSearch70831";
 
 		/*Create data*/
@@ -210,7 +210,7 @@ public class PLF_UnifiedSearch extends Template {
 		//- Click Save settings, 
 		//- value is save
 		qsPage.editSearchSettingEditMode("10",true,true,true,true,true,true);	
-		
+
 		//Restore value
 		qsPage.goToEditSearchPortlet();
 		qsPage.editSearchSettingEditMode("10",false,false,false,true,true,true);
@@ -236,7 +236,7 @@ public class PLF_UnifiedSearch extends Template {
 		//Add new webcontent
 		info("Add new webcontent");
 		naviToolbar.goToSiteExplorer();
-		actBar.addItem2ActionBar("addDocument", actBar.ELEMENT_NEW_CONTENT_LINK);
+//		actBar.addItem2ActionBar("addDocument", actBar.ELEMENT_NEW_CONTENT_LINK);
 		actBar.goToAddNewContent();
 		conTemp.createNewWebContent(contentName, contentName, "", "", "", "");
 
@@ -256,7 +256,7 @@ public class PLF_UnifiedSearch extends Template {
 		qsPage.quickSearch(searchText);
 
 		//- By default, quick search returns results for items located in the current site only, as attachment SearchResult.png
-		waitForAndGetElement(qsPage.ELEMENT_RESULT_ITEM.replace("${keySearch}", searchText).replace("${item}", "S"));
+		waitForAndGetElement(qsPage.ELEMENT_RESULT_ITEM.replace("${keySearch}", searchText).replace("${item}", "S"),180000);
 		waitForAndGetElement(qsPage.ELEMENT_RESULT_ITEM.replace("${keySearch}", searchText).replace("${item}", "W"));
 		waitForAndGetElement(qsPage.ELEMENT_RESULT_ITEM.replace("${keySearch}", searchText).replace("${item}", "C"));
 
@@ -300,7 +300,7 @@ public class PLF_UnifiedSearch extends Template {
 		//Add new webcontent
 		info("Add new webcontent");
 		naviToolbar.goToSiteExplorer();
-		actBar.addItem2ActionBar("addDocument", actBar.ELEMENT_NEW_CONTENT_LINK);
+//		actBar.addItem2ActionBar("addDocument", actBar.ELEMENT_NEW_CONTENT_LINK);
 		actBar.goToAddNewContent();
 		conTemp.createNewWebContent(contentName, contentName, "", "", "", "");
 
@@ -320,7 +320,7 @@ public class PLF_UnifiedSearch extends Template {
 		qsPage.quickSearch(searchText);
 
 		//- By default, quick search returns results for items with All types located in the current site only, as attachment SearchResult.png
-		waitForAndGetElement(qsPage.ELEMENT_RESULT_ITEM.replace("${keySearch}", searchText).replace("${item}", "S"));
+		waitForAndGetElement(qsPage.ELEMENT_RESULT_ITEM.replace("${keySearch}", searchText).replace("${item}", "S"),180000);
 		waitForAndGetElement(qsPage.ELEMENT_RESULT_ITEM.replace("${keySearch}", searchText).replace("${item}", "W"));
 		waitForAndGetElement(qsPage.ELEMENT_RESULT_ITEM.replace("${keySearch}", searchText).replace("${item}", "C"));
 
@@ -370,7 +370,7 @@ public class PLF_UnifiedSearch extends Template {
 		info("-- Verify the answers icon --");
 		waitForAndGetElement(qsPage.ELEMENT_RESULT_ANSWER_ICON);
 		info("-- Verify the answers title --");
-		assert waitForAndGetElement(qsPage.ELEMENT_RESULT_TITLE).getText().contains(questionName);
+		waitForAndGetElement(qsPage.ELEMENT_RESULT_TITLE.replace("${content}", questionName));
 		info("-- Verify an excerpt --");
 		assert waitForAndGetElement(qsPage.ELEMENT_RESULT_EXCERPT.replace("${keySearch}", searchText).replace("${item}", "Q")).getText().contains(questionContent);
 		info("-- Verify the number of replies --");
@@ -427,13 +427,13 @@ public class PLF_UnifiedSearch extends Template {
 		info("-- Verify the topic icon --");
 		waitForAndGetElement(qsPage.ELEMENT_RESULT_FORUM_ICON);
 		info("-- Verify the post title --");
-		assert waitForAndGetElement(qsPage.ELEMENT_RESULT_TITLE).getText().contains(topic1);
+		waitForAndGetElement(qsPage.ELEMENT_RESULT_TITLE.replace("${content}", topic1));
 		info("-- Verify an excerpt --");
 		assert waitForAndGetElement(qsPage.ELEMENT_RESULT_EXCERPT.replace("${keySearch}", searchText).replace("${item}", "To")).getText().contains(topic1);
 		info("-- Verify the forum name --");
 		assert waitForAndGetElement(qsPage.ELEMENT_RESULT_CONTENT_DETAIL).getText().contains(forum1);
 		info("-- Verify the post date --");
-//		assert waitForAndGetElement(qsPage.ELEMENT_RESULT_CONTENT_DETAIL).getText().contains("AM");
+		//		assert waitForAndGetElement(qsPage.ELEMENT_RESULT_CONTENT_DETAIL).getText().contains("AM");
 		assert waitForAndGetElement(qsPage.ELEMENT_RESULT_CONTENT_DETAIL).getText().contains(getCurrentDate("EEEEE, MMMMM d, yyyy"));
 		info("-- Verify the rating --");
 		waitForAndGetElement(qsPage.ELEMENT_RESULT_FORUM_VOTE);
@@ -469,7 +469,7 @@ public class PLF_UnifiedSearch extends Template {
 		//Some documents are existed on Site explorer
 		info("Add new webcontent");
 		naviToolbar.goToSiteExplorer();
-		actBar.addItem2ActionBar("addDocument", actBar.ELEMENT_NEW_CONTENT_LINK);
+//		actBar.addItem2ActionBar("addDocument", actBar.ELEMENT_NEW_CONTENT_LINK);
 		actBar.goToAddNewContent();
 		conTemp.createNewProduct(contentName1, contentName1);
 		ecms.goToNode(siteExp.ELEMENT_SIDEBAR_SITES_MANAGEMENT);
@@ -554,6 +554,8 @@ public class PLF_UnifiedSearch extends Template {
 		waitForAndGetElement(qsPage.ELEMENT_RESULT_LOCATION_DATETIME.replace("${keySearch}", searchText).replace("${item}", "Event"));
 		String searchTaskDate = waitForAndGetElement(qsPage.ELEMENT_RESULT_LOCATION_DATETIME.replace("${keySearch}", searchText).replace("${item}", "Event")).getText();
 		String searchDate = searchTaskDate.substring(searchTaskDate.indexOf(',')+1).trim();
+		info(searchTaskDate);
+		info(searchDate);
 		assert searchDate.contains(eventDate);
 
 		//- Item in search result is clickable and open it when user click
@@ -587,7 +589,7 @@ public class PLF_UnifiedSearch extends Template {
 		//Some documents are existed on Site explorer
 		info("Add new webcontent");
 		naviToolbar.goToSiteExplorer();
-		actBar.addItem2ActionBar("addDocument", actBar.ELEMENT_NEW_CONTENT_LINK);
+//		actBar.addItem2ActionBar("addDocument", actBar.ELEMENT_NEW_CONTENT_LINK);
 		actBar.goToAddNewContent();
 		conTemp.createNewFile(fileName1, fileName1, fileName1);
 		click(naviToolbar.ELEMENT_SITE_EXPLORER_HOME);
@@ -654,7 +656,7 @@ public class PLF_UnifiedSearch extends Template {
 		pageMag.addNewPageAtManagePages(PageType.PORTAL, pageName1, pageName1, true, null, groupPath, membership,  "Page Configs", ELEMENT_PAGE_LAYOUT_OPTION_EMPTY, true);
 		pageMag.addNewPageAtManagePages(PageType.PORTAL, pageName2, pageName2, true, null, groupPath, membership,  "Page Configs", ELEMENT_PAGE_LAYOUT_OPTION_EMPTY, true);
 		pageMag.addNewPageAtManagePages(PageType.PORTAL, pageName3, pageName3, true, null, groupPath, membership,  "Page Configs", ELEMENT_PAGE_LAYOUT_OPTION_EMPTY, true);
-		
+
 		info("Go to Administration/Portal Sites");
 		naviToolbar.goToPortalSites();
 		navMag.addNodeForPortal(portalName, parentNode, true, nodeName1, true, languages, nodeName1, "", pageName1, true, true);
@@ -719,17 +721,17 @@ public class PLF_UnifiedSearch extends Template {
 		info("-- Verify profile avatar --");
 		waitForAndGetElement(qsPage.ELEMENT_RESULT_PEOPLE_ICON);
 		info("-- Verify the user full name --");
-		assert waitForAndGetElement(qsPage.ELEMENT_RESULT_TITLE).getText().contains(searchText);
+		waitForAndGetElement(qsPage.ELEMENT_RESULT_PEOPLE_FULLNAME.replace("${fullName}", searchText).replace("${userName}", DATA_USER1));
 		info("-- the user profile email --");
-		assert waitForAndGetElement(qsPage.ELEMENT_RESULT_CONTENT_DETAIL).getText().contains(email);
+		waitForAndGetElement(qsPage.ELEMENT_RESULT_CONTENT_DETAIL_PEOPLE.replace("${content}",email));
 		info("-- the user profile phone --");
-		assert waitForAndGetElement(qsPage.ELEMENT_RESULT_CONTENT_DETAIL).getText().contains(numberOfPhone);
+		waitForAndGetElement(qsPage.ELEMENT_RESULT_CONTENT_DETAIL_PEOPLE.replace("${content}",numberOfPhone));
 		info("-- genders --");
-		assert waitForAndGetElement(qsPage.ELEMENT_RESULT_CONTENT_DETAIL).getText().contains(typeOfGender);
+		waitForAndGetElement(qsPage.ELEMENT_RESULT_CONTENT_DETAIL_PEOPLE.replace("${content}",typeOfGender));
 
 		//- Item in search result is clickable and open it when user click
-		waitForAndGetElement(qsPage.ELEMENT_RESULT_TITLE).click();
-		waitForAndGetElement(peoPro.ELEMENT_EDIT_INFORMATION_BUTTON);
+		click(qsPage.ELEMENT_RESULT_PEOPLE_FULLNAME.replace("${fullName}", searchText).replace("${userName}", DATA_USER1));
+		waitForAndGetElement(peoPro.ELEMENT_EDIT_INFORMATION_BUTTON,60000);
 
 		/*Clear data*/
 		info("-- Clear data --");
@@ -927,10 +929,10 @@ public class PLF_UnifiedSearch extends Template {
 	@Test(priority=11)
 	public void test16_SortSearchResult(){
 		/*Declare variables*/
-		String searchText = "searchtext71633";
-		String eventName1 = "searchtext71633A";
-		String taskName1 = "searchtext71633B";
-		String questionName = "searchtext71633C";
+		String searchText = "Asearchtext71633";
+		String eventName1 = "Asearchtext71633A";
+		String taskName1 = "Asearchtext71633B";
+		String questionName = "Asearchtext71633C";
 
 		//Create data
 		//Some contents (such as wiki pages, events, tasks...) are existed.
@@ -946,29 +948,66 @@ public class PLF_UnifiedSearch extends Template {
 		//- Type some text into search box, Click on Search
 		qsPage.quickSearch(searchText);
 		qsPage.searchInSearchPage(searchText);
+		qsPage.searchInSearchPage(searchText);
+		waitForAndGetElement(qsPage.ELEMENT_FILTER_SEARCH_ALL_CONTENTTYE_CHECKBOX, 60000,1,2);
+		uncheck(qsPage.ELEMENT_FILTER_SEARCH_ALL_CONTENTTYE_CHECKBOX,2);
+		check(qsPage.ELEMENT_FILTER_SEARCH_EVENT_CHECKBOX,2);
+		check(qsPage.ELEMENT_FILTER_SEARCH_TASK_CHECKBOX,2);
+		check(qsPage.ELEMENT_FILTER_SEARCH_ANSWER_CHECKBOX,2);
 
 		//-- By default, quick search returns results for items located in the current site only, as attachment SearchResult.png
 		/*Step 2: Sort search results*/
 		//- Click on Sort by combo, select one of sets "Relevancy", "Date", "title"
-		//Sort by Relevancy
-		qsPage.sortByItem("Relevance");
-		waitForAndGetElement(qsPage.ELEMENT_RESULT_INDEX.replace("${index}", "1").replace("${title}", "task"));
-		waitForAndGetElement(qsPage.ELEMENT_RESULT_INDEX.replace("${index}", "2").replace("${title}", "event"));
-		waitForAndGetElement(qsPage.ELEMENT_RESULT_INDEX.replace("${index}", "3").replace("${title}", "answer"));
 
 		//Sort by Date
 		qsPage.sortByItem("Date");
-		waitForAndGetElement(qsPage.ELEMENT_RESULT_INDEX.replace("${index}", "1").replace("${title}", "answer"));
-		waitForAndGetElement(qsPage.ELEMENT_RESULT_INDEX.replace("${index}", "2").replace("${title}", "event"));
-		waitForAndGetElement(qsPage.ELEMENT_RESULT_INDEX.replace("${index}", "3").replace("${title}", "task"));
-		
-		//Search result will sorted by Relevancy, or date, or title respectively
+		if(isElementPresent(qsPage.ELEMENT_RESULT_INDEX.replace("${index}", "1").replace("${title}", "task"))){
+			waitForAndGetElement(qsPage.ELEMENT_RESULT_INDEX.replace("${index}", "1").replace("${title}", "task"));
+			waitForAndGetElement(qsPage.ELEMENT_RESULT_INDEX.replace("${index}", "2").replace("${title}", "event"));
+			waitForAndGetElement(qsPage.ELEMENT_RESULT_INDEX.replace("${index}", "3").replace("${title}", "answer"));
+
+			//Sort by Relevancy
+			qsPage.sortByItem("Relevance");
+			waitForAndGetElement(qsPage.ELEMENT_RESULT_INDEX.replace("${index}", "3").replace("${title}", "task"));
+			waitForAndGetElement(qsPage.ELEMENT_RESULT_INDEX.replace("${index}", "2").replace("${title}", "event"));
+			waitForAndGetElement(qsPage.ELEMENT_RESULT_INDEX.replace("${index}", "1").replace("${title}", "answer"));
+		}else{
+			waitForAndGetElement(qsPage.ELEMENT_RESULT_INDEX.replace("${index}", "3").replace("${title}", "task"));
+			waitForAndGetElement(qsPage.ELEMENT_RESULT_INDEX.replace("${index}", "2").replace("${title}", "event"));
+			waitForAndGetElement(qsPage.ELEMENT_RESULT_INDEX.replace("${index}", "1").replace("${title}", "answer"));
+
+			//Sort by Relevancy
+			qsPage.sortByItem("Relevance");
+			waitForAndGetElement(qsPage.ELEMENT_RESULT_INDEX.replace("${index}", "1").replace("${title}", "task"));
+			waitForAndGetElement(qsPage.ELEMENT_RESULT_INDEX.replace("${index}", "2").replace("${title}", "event"));
+			waitForAndGetElement(qsPage.ELEMENT_RESULT_INDEX.replace("${index}", "3").replace("${title}", "answer"));
+
+		}
+
 		//Sort by title
 		qsPage.sortByItem("Title");
-		waitForAndGetElement(qsPage.ELEMENT_RESULT_INDEX.replace("${index}", "1").replace("${title}", "event"));
-		waitForAndGetElement(qsPage.ELEMENT_RESULT_INDEX.replace("${index}", "2").replace("${title}", "task"));
-		waitForAndGetElement(qsPage.ELEMENT_RESULT_INDEX.replace("${index}", "3").replace("${title}", "answer"));
-		
+		if(isElementPresent(qsPage.ELEMENT_RESULT_INDEX.replace("${index}", "1").replace("${title}", "event"))){
+			waitForAndGetElement(qsPage.ELEMENT_RESULT_INDEX.replace("${index}", "1").replace("${title}", "event"));
+			waitForAndGetElement(qsPage.ELEMENT_RESULT_INDEX.replace("${index}", "2").replace("${title}", "task"));
+			waitForAndGetElement(qsPage.ELEMENT_RESULT_INDEX.replace("${index}", "3").replace("${title}", "answer"));
+
+			//Sort by Relevancy
+			qsPage.sortByItem("Relevance");
+			waitForAndGetElement(qsPage.ELEMENT_RESULT_INDEX.replace("${index}", "3").replace("${title}", "event"));
+			waitForAndGetElement(qsPage.ELEMENT_RESULT_INDEX.replace("${index}", "2").replace("${title}", "task"));
+			waitForAndGetElement(qsPage.ELEMENT_RESULT_INDEX.replace("${index}", "1").replace("${title}", "answer"));
+		}else{
+			waitForAndGetElement(qsPage.ELEMENT_RESULT_INDEX.replace("${index}", "3").replace("${title}", "event"));
+			waitForAndGetElement(qsPage.ELEMENT_RESULT_INDEX.replace("${index}", "2").replace("${title}", "task"));
+			waitForAndGetElement(qsPage.ELEMENT_RESULT_INDEX.replace("${index}", "1").replace("${title}", "answer"));
+
+			//Sort by Relevancy
+			qsPage.sortByItem("Relevance");
+			waitForAndGetElement(qsPage.ELEMENT_RESULT_INDEX.replace("${index}", "1").replace("${title}", "event"));
+			waitForAndGetElement(qsPage.ELEMENT_RESULT_INDEX.replace("${index}", "2").replace("${title}", "task"));
+			waitForAndGetElement(qsPage.ELEMENT_RESULT_INDEX.replace("${index}", "3").replace("${title}", "answer"));
+		}
+
 		/*clear data*/
 		info("-- Clear data --");
 		evt.goToCalendarPage();

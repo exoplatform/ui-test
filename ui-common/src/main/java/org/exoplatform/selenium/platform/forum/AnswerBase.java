@@ -129,6 +129,7 @@ public class AnswerBase extends ForumBase {
 		page = new PageManagement(driver);
 
 		Map<String, String> ANSWER_PORTLET_ID = new HashMap<String, String>();
+
 		ANSWER_PORTLET_ID.put("answer/local._faq.AnswersPortlet", "");
 
 		info("--Go to intranet--");

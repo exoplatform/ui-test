@@ -136,6 +136,7 @@ public class Gatein_Dashboard extends DashBoard {
 
 		info("Add new application to page");
 		addContentListPortletForPage();
+		waitForTextPresent("Sorry, no articles are available.");
 		click(ELEMENT_SWITCH_VIEW_MODE);
 
 		info("Edit portlet");
@@ -192,6 +193,6 @@ public class Gatein_Dashboard extends DashBoard {
 		}
 		click(ELEMENT_SWITCH_VIEW_MODE);
 		Utils.pause(3000);
-		waitForTextPresent("Sorry, no articles are available.");
+		//waitForTextPresent("Sorry, no articles are available.");
 	}
 }
