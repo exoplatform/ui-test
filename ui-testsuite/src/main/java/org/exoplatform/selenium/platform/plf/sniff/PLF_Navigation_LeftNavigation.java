@@ -428,12 +428,12 @@ public class PLF_Navigation_LeftNavigation extends GroupNavigation {
 			//waitForElementNotPresent(ELEMENT_LEFT_NAVIGATION_ITEM_INDEX_PLF41.replace("${index}", "4").replace("${menuItem}", "/portal/intranet/documents"));
 			//waitForElementNotPresent(ELEMENT_LEFT_NAVIGATION_ITEM_INDEX_PLF41.replace("${index}", "5").replace("${menuItem}", "/portal/intranet/forum"));
 			//waitForElementNotPresent(ELEMENT_LEFT_NAVIGATION_ITEM_INDEX_PLF41.replace("${index}", "6").replace("${menuItem}", "/portal/intranet/calendar"));
-			waitForAndGetElement(ELEMENT_LEFT_NAVIGATION_ITEM_INDEX_PLF41.replace("${menuItem}", "/portal/intranet/home"));
-			waitForAndGetElement(ELEMENT_LEFT_NAVIGATION_ITEM_INDEX_PLF41.replace("${menuItem}", "/portal/intranet/connexions"));
-			waitForAndGetElement(ELEMENT_LEFT_NAVIGATION_ITEM_INDEX_PLF41.replace("${menuItem}", "/portal/intranet/wiki"));
-			waitForAndGetElement(ELEMENT_LEFT_NAVIGATION_ITEM_INDEX_PLF41.replace("${menuItem}", "/portal/intranet/documents"));
-			waitForAndGetElement(ELEMENT_LEFT_NAVIGATION_ITEM_INDEX_PLF41.replace("${menuItem}", "/portal/intranet/forum"));
-			waitForAndGetElement(ELEMENT_LEFT_NAVIGATION_ITEM_INDEX_PLF41.replace("${menuItem}", "/portal/intranet/calendar"));
+			waitForElementNotPresent(ELEMENT_LEFT_NAVIGATION_ITEM_INDEX_PLF41.replace("${menuItem}", "/portal/intranet/home"));
+			waitForElementNotPresent(ELEMENT_LEFT_NAVIGATION_ITEM_INDEX_PLF41.replace("${menuItem}", "/portal/intranet/connexions"));
+			waitForElementNotPresent(ELEMENT_LEFT_NAVIGATION_ITEM_INDEX_PLF41.replace("${menuItem}", "/portal/intranet/wiki"));
+			waitForElementNotPresent(ELEMENT_LEFT_NAVIGATION_ITEM_INDEX_PLF41.replace("${menuItem}", "/portal/intranet/documents"));
+			waitForElementNotPresent(ELEMENT_LEFT_NAVIGATION_ITEM_INDEX_PLF41.replace("${menuItem}", "/portal/intranet/forum"));
+			waitForElementNotPresent(ELEMENT_LEFT_NAVIGATION_ITEM_INDEX_PLF41.replace("${menuItem}", "/portal/intranet/calendar"));
 		}
 		else{// if (plfVersion =="4.0"){
 

@@ -130,5 +130,4 @@ public class PLF_Navigation_SpaceNavigation extends PlatformBase {
 		spaceMag.goToAllSpaces();
 		spaceMag.deleteSpace(spaceName,300000);
 	}
-
 }

@@ -392,7 +392,7 @@ public class SpaceManagement extends SocialBase {
 				click(By.xpath(eMenuItem.replace("${menuItem}", menuItem)));
 			}
 		}	
-
+		Utils.pause(3000);
 	}
 
 	/**

@@ -132,7 +132,7 @@ public class SettingSearchPage extends PlatformBase {
 		type(ELEMENT_QUICK_SEARCH_TEXTBOX,searchText,true);
 		Utils.pause(3000);
 		click(ELEMENT_SEE_ALL_SEARCH_RESULTS);
-		Utils.pause(1000);
+		Utils.pause(5000);
 	}
 
 	/** Go To Edit Search Portlet

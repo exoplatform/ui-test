@@ -29,11 +29,12 @@ public class PlatformBase extends TestBase {
 	public final String DATA_USER4 = "jack";
 	public final String DATA_USER5 = "demo";
 	public final String DATA_PASS = "gtngtn";
-	//public final String DATA_USER_JOHN = "john";
-	//public final String DATA_USER1 = "john";
-	//public final String DATA_PASS = "gtngtn";
-	//public final String DATA_USER_MARY = "mary";
-	//public final String DATA_USER2 = "mary";
+	
+	public final String USER_JOHN = "John";
+	public final String USER_MARY = "Mary";
+	public final String USER_JAMES = "James";
+	public final String USER_JACK = "Jack";
+	
 	public ManageAlert alert = new ManageAlert(driver);
 	public Button button = new Button(driver);
 	public Dialog dialog = new Dialog(driver);
@@ -850,10 +851,14 @@ public class PlatformBase extends TestBase {
 	}
 
 	//Link to Edit a navigation
-	public void editNavigation(String currentNavigation) {
+	public void editNavigation(String currentNavigation){
 		String navigation = ELEMENT_EDIT_NAVIGATION.replace("${navigation}", currentNavigation);
-		driver.navigate().refresh();
-		click(navigation);
+		//driver.navigate().refresh();
+		if (currentNavigation.contains("Administration") || currentNavigation.contains("Administrators")){
+			click(ELEMENT_EDIT_NAVIGATION.replace("${navigation}", "/platform/administrators"));
+		}else{
+			click(navigation);
+		}
 		//waitForTextPresent("Navigation Management");
 		waitForAndGetElement(ELEMENT_TITLE_NAVIGATION_MANAGEMENT,60000);
 	}

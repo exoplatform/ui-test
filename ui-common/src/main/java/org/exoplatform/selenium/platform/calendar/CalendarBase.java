@@ -1041,17 +1041,36 @@ public class CalendarBase extends PlatformBase {
 		}
 		else{
 			button.save();
+			
+			String userFirstName = waitForAndGetElement(ELEMENT_ACCOUNT_NAME_LINK).getText();
+			String calendarUserName = "";
+			if (userFirstName.contains(USER_JOHN)){
+				calendarUserName = USER_JOHN;
+			}else if (userFirstName.contains(USER_MARY)){
+				calendarUserName = USER_MARY;
+			}else if (userFirstName.contains(USER_JAMES)){
+				calendarUserName = USER_JAMES;
+			}else if (userFirstName.contains(USER_JACK)){
+				calendarUserName = USER_JACK;
+			}
 			if(verify){
 				if(isEvent){
-					waitForAndGetElement(ELEMENT_CREATE_EVENT_MESSAGE.replace("${calendar}", waitForAndGetElement(ELEMENT_ACCOUNT_NAME_LINK).getText()));
+					info("== Add new Event with Current user is ..." + calendarUserName);
+					//waitForAndGetElement(ELEMENT_CREATE_EVENT_MESSAGE.replace("${calendar}", waitForAndGetElement(ELEMENT_ACCOUNT_NAME_LINK).getText()));
+					//Utils.pause(3000);
+					//waitForElementNotPresent(ELEMENT_CREATE_EVENT_MESSAGE.replace("${calendar}",  waitForAndGetElement(ELEMENT_ACCOUNT_NAME_LINK).getText()));
+					waitForAndGetElement(ELEMENT_CREATE_EVENT_MESSAGE.replace("${calendar}", calendarUserName));
 					Utils.pause(3000);
-					waitForElementNotPresent(ELEMENT_CREATE_EVENT_MESSAGE.replace("${calendar}",  waitForAndGetElement(ELEMENT_ACCOUNT_NAME_LINK).getText()));
+					waitForElementNotPresent(ELEMENT_CREATE_EVENT_MESSAGE.replace("${calendar}", calendarUserName));
 				}
 				else{
-					waitForAndGetElement(ELEMENT_CREATE_TASK_MESSAGE.replace("${calendar}", waitForAndGetElement(ELEMENT_ACCOUNT_NAME_LINK).getText()));
+					info("== Add new Task with Current user is ..." + calendarUserName);
+					//waitForAndGetElement(ELEMENT_CREATE_TASK_MESSAGE.replace("${calendar}", waitForAndGetElement(ELEMENT_ACCOUNT_NAME_LINK).getText()));
+					//Utils.pause(3000);
+					//waitForElementNotPresent(ELEMENT_CREATE_TASK_MESSAGE.replace("${calendar}",  waitForAndGetElement(ELEMENT_ACCOUNT_NAME_LINK).getText()));
+					waitForAndGetElement(ELEMENT_CREATE_TASK_MESSAGE.replace("${calendar}", calendarUserName));
 					Utils.pause(3000);
-					waitForElementNotPresent(ELEMENT_CREATE_TASK_MESSAGE.replace("${calendar}",  waitForAndGetElement(ELEMENT_ACCOUNT_NAME_LINK).getText()));
-
+					waitForElementNotPresent(ELEMENT_CREATE_TASK_MESSAGE.replace("${calendar}", calendarUserName));
 				}
 			}
 		}
