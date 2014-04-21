@@ -456,9 +456,9 @@ public class PLF_HomepageActivityStream_ActivityStream_ActivityFilter_Others ext
 		acc.signOut();
 
 		//delete data
-		acc.signOut();
+//		acc.signOut();
 		acc.signIn(username, password);
-		home.deleteActivity(text);
+		home.deleteActivity(text, true, false);
 		nav.goToConnectionPage();
 		pConn.removeConnection(user);
 	}

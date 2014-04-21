@@ -141,7 +141,7 @@ public class PLF_HomepageActivityStream_ActivityComposer_General extends Activit
 		addActivity(false, "", true, link);
 
 		//Clear data
-		hpActivity.deleteActivity(link);
+		hpActivity.deleteActivity(link, true, false);
 
 	}
 

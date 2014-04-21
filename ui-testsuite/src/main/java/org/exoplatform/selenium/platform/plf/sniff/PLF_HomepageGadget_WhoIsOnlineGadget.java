@@ -3,15 +3,17 @@ package org.exoplatform.selenium.platform.plf.sniff;
 import static org.exoplatform.selenium.TestLogger.info;
 
 import org.exoplatform.selenium.Utils;
+import org.exoplatform.selenium.platform.HomePageActivity;
 import org.exoplatform.selenium.platform.ManageAccount;
 import org.exoplatform.selenium.platform.NavigationToolbar;
-import org.exoplatform.selenium.platform.PlatformBase;
 import org.openqa.selenium.By;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import org.exoplatform.selenium.platform.HomePageGadget;
+import org.exoplatform.selenium.platform.social.Activity;
 import org.exoplatform.selenium.platform.social.PeopleConnection;
+import org.exoplatform.selenium.platform.social.PeopleProfile;
 
 /**
  * 
@@ -19,25 +21,31 @@ import org.exoplatform.selenium.platform.social.PeopleConnection;
  * @date 01-Nov-2013
  */
 
-public class PLF_HomepageGadget_WhoIsOnlineGadget extends PlatformBase {
+public class PLF_HomepageGadget_WhoIsOnlineGadget extends Activity {
 
 	ManageAccount acc;
 	HomePageGadget hg;
 	NavigationToolbar navToolBar;
 	PeopleConnection peopleC;
+	PeopleProfile peopleP;
+	HomePageActivity homeAct;
 	
-	String User1 = "fqa";
-	String User2 = "root";
-	String Pass1 = "gtngtn";
-	String fullNameUser2="Root Root";
+	String User1 = "john";
+	String User2 = "mary";
+	String Pass1 = "gtn";
+	String fullNameUser2="Mary Williams";
+	String fullNameUser1 = "John Smith";
 	
 	@BeforeMethod
 	public void setUpBeforeTest(){
-		getDriverAutoSave();
+//		getDriverAutoSave();
+		initSeleniumTest();
 		acc = new ManageAccount(driver);
 		hg = new HomePageGadget(driver);
 		peopleC = new PeopleConnection(driver);
 		navToolBar = new NavigationToolbar(driver);
+		peopleP = new PeopleProfile(driver);
+		homeAct = new HomePageActivity(driver);
 		acc.signIn(User1, Pass1);
 	}
 
@@ -74,17 +82,26 @@ public class PLF_HomepageGadget_WhoIsOnlineGadget extends PlatformBase {
 	 */
 	@Test
 	public void test02_showInfoOfOnlineUser(){
+		String position = "Developer";
+		String activity = "Activity70764";
+		
 		info("Go to Homepage Intranet by user acc 1");
+		navToolBar.goToMyProfile();
+		peopleP.editCurrentPosition(position);
+		peopleP.changeAvatar("/TestData/Winter.jpg");
 		navToolBar.goToHomePage();
+		addActivity(true, activity, false, null);
 		
 		info("Switch to other browser to login by user acc 2");
 		loginWithAnotherAccOnThesameBrowser(User2, Pass1);
 		
 		info("Confirm if WhoisOnline gadget dislays or not with user1");
 		hg=new HomePageGadget(newDriver);
-		hg.checkUserInfoOnWhoisOnlineGadget(User1, false, "", false, false);
+		hg.checkUserInfoOnWhoisOnlineGadget(User1, fullNameUser1, position, true, activity, 0);
 		newDriver.manage().deleteAllCookies();
 		newDriver.quit();
+		
+		homeAct.deleteActivity(activity, true, false);
 	}
 	
 	/**
@@ -93,28 +110,31 @@ public class PLF_HomepageGadget_WhoIsOnlineGadget extends PlatformBase {
 	 */
 	@Test
 	public void test03_ConnectUserfromWhoisOnlineGadget(){
-		info("Go to Homepage Intranet by user acc 1");
-		navToolBar.goToHomePage();
+//		info("Go to Homepage Intranet by user acc 1");
+//		navToolBar.goToHomePage();
 		
 		info("Switch to other browser to login by user acc 2");
 		loginWithAnotherAccOnThesameBrowser(User2, Pass1);
 		hg=new HomePageGadget(newDriver);
-		hg.checkUserInfoOnWhoisOnlineGadget(User1, false , "", false, false);
+		peopleC = new PeopleConnection(newDriver);
+		acc = new ManageAccount(newDriver);
+		navToolBar = new NavigationToolbar(newDriver);
+		peopleC.resetConnection(fullNameUser1);
+		navToolBar.goToHomePage();
+		hg.checkUserInfoOnWhoisOnlineGadget(User1, fullNameUser1, null, false, null, 0);
 		
 		info("User 2 connect with user 1 from Who's Online gadget");
 		hg.connectPeoplefromWhoisOnlineGadget(User1);
-		acc = new ManageAccount(newDriver);
 		acc.signOut();
 
 		info("Check if user 1 received connect invitation from user 2 or not");
 		acc.signIn(User1, Pass1);
-		Utils.pause(500);
-		newDriver.findElement(By.xpath(hg.ELEMENT_SHOW_CONNECTIONS_REQUEST_USER.replace("${nameinvitation}","Root Root")));
-		Utils.pause(500);
+//		Utils.pause(500);
+//		newDriver.findElement(By.xpath(hg.ELEMENT_SHOW_CONNECTIONS_REQUEST_USER.replace("${nameinvitation}","Root Root")));
+		waitForAndGetElement(hg.ELEMENT_SHOW_CONNECTIONS_REQUEST_USER.replace("${nameinvitation}",fullNameUser2), DEFAULT_TIMEOUT, 1, 2, newDriver);
+//		Utils.pause(500);
 		
 		info("-- Clear data --");
-		navToolBar = new NavigationToolbar(newDriver);
-		peopleC = new PeopleConnection(newDriver);
 		navToolBar.goToConnectionPage();
 		peopleC.ignoreInvitation(fullNameUser2);
 		newDriver.manage().deleteAllCookies();

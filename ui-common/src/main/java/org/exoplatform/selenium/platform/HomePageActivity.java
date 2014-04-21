@@ -47,8 +47,8 @@ public class HomePageActivity extends PlatformBase{
 	public final String ELEMENT_ACTIVITY_COMMENT_CONTENT = "//*[contains(text(),'${title}')]/../../../..//*[@class='contentComment']/../*[contains(text(), '${comment}')]";
 	public final String ELEMENT_GET_COMMENT_CONTENT = "//*[contains(text(),'${title}')]/../../../..//*[@class='commentItem commentItemLast']/..//p";
 	public final String ELEMENT_ACTIVITY_COMMENT_CONTENT_1 = "//*[text()='${title}']/ancestor::div[@class='boxContainer']//*[@class='contentComment']";
-	public final String ELEMENT_COMMENTBOX="//*[text()='${title}']/../../../..//div[@class='exo-mentions']/div[contains(@id,'DisplayCommentTextarea')]";
-	public final String ELEMENT_COMMENTBOX_PLF4_1="//*[text()='${title}']/../../../../..//div[@class='exo-mentions']/div[contains(@id,'DisplayCommentTextarea')]";
+	public final String ELEMENT_COMMENTBOX="//*[text()='${title}']/../../../..//*[contains(@id,'DisplayCommentTextarea')]";
+	public final String ELEMENT_COMMENTBOX_PLF4_1="//*[text()='${title}']/../../../../..//*[contains(@id,'DisplayCommentTextarea')]";
 	public final String ELEMENT_ICON_COMMENT = "//*[contains(text(),'${title}')]/../../../..//i[@class='uiIconComment uiIconLightGray']";
 	public final String ELEMENT_COMMENT_BLOCK = "//a[contains(text(),'${title}')]/../../../..//div[contains(@class,'commentItem commentItemLast')]";
 	public final String ELEMENT_COMMENT_LAST = "//*[contains(text(),'${title}')]/../../../..//div[contains(@class,'commentItem commentItemLast')]//*[contains(text(), '${comment}')]";
@@ -183,7 +183,13 @@ public class HomePageActivity extends PlatformBase{
 	public final String MSG_TASK_COMMENT_UPDATE_NOTE = "Note has been updated to: ${note}.";
 	public final String MSG_TASK_COMMENT_UPDATE_STATUS = "Task has been completed.";
 
-
+	//------------------User popup------------------------------------
+	public final By ELEMENT_USER_POPUP_NAME = By.xpath("//*[@id='tipName']//td[2]/a");
+	public final By ELEMENT_USER_POPUP_POSITION = By.xpath("//*[@id='tipName']//td[2]/div");
+	public final By ELEMENT_USER_POPUP_AVATAR = By.xpath("//*[@id='tipName']//img[contains(@src, 'UserAvtDefault.png')]");
+	public final By ELEMENT_USER_POPUP_LAST_ACTIVITY = By.xpath("//*[@id='tiptip_content']/blockquote");
+	public final String ELEMENT_USER_POPUP_STATUS_CONNECT = "//*[@id='tiptip_content']//*[@class='uiAction connectAction']/*[text()='${status}']";
+	
 	public HomePageActivity(WebDriver dr, String...plfVersion){
 		driver = dr;
 		this.plfVersion = plfVersion.length>0?plfVersion[0]:"4.0";
@@ -892,6 +898,7 @@ public class HomePageActivity extends PlatformBase{
 	public void deleteActivity (String activityText,boolean...verify) {
 		info("-- Deleting an activity " +activityText+" --");
 		boolean canDelete = verify.length>0?verify[0]:true;
+		boolean check = verify.length > 1 ? verify[1]:true;
 		if(!canDelete)
 			waitForElementNotPresent(By.xpath(ELEMENT_ACTIVITY_DELETE.replace("${activityText}", activityText)), DEFAULT_TIMEOUT,1,2);
 		else{
@@ -904,8 +911,10 @@ public class HomePageActivity extends PlatformBase{
 			executor.executeScript("document.getElementById('"+deleteActivityIconID+"').click();");
 			waitForAndGetElement(ELEMENT_MESSAGE_CONFIRM_DELETE_ACTIVITY);
 			button.ok();
-			waitForElementNotPresent(By.xpath(ELEMENT_ACTIVITY_AUTHOR_ACTIVITY.replace("${activityText}", activityText)));
-			waitForElementNotPresent(By.xpath(ELEMENT_ACTIVITY_DELETE.replace("${activityText}", activityText)), DEFAULT_TIMEOUT,1,2);
+			if (check){
+				waitForElementNotPresent(By.xpath(ELEMENT_ACTIVITY_AUTHOR_ACTIVITY.replace("${activityText}", activityText)));
+				waitForElementNotPresent(By.xpath(ELEMENT_ACTIVITY_DELETE.replace("${activityText}", activityText)), DEFAULT_TIMEOUT,1,2);	
+			}
 			Utils.pause(1000);
 		}
 		
@@ -995,5 +1004,55 @@ public class HomePageActivity extends PlatformBase{
 		waitForAndGetElement(ELEMENT_QUESTION_CONTENT.replace("${title}", name));
 		waitForAndGetElement(ELEMENT_QUESTION_NUM_COMMENT.replace("${title}", name).replace("${number}", "No"));
 		checkNumberOfLineOfContent(getText(ELEMENT_QUESTION_CONTENT.replace("${title}", name)), content);
+	}
+	
+	/**
+	 * @author lientm
+	 * @param fullName: name display of user
+	 * @param position: position of user, if not exits (=null)
+	 * @param avatar: check avatar of user is change, if it is not default (=true)
+	 * @param activity: last activity of user , if not exits (=null)
+	 * @param status = 0: not check
+	 * 				 = 1: button [Connect] displays
+	 * 				 = 2: button [Cancel Request] displays
+	 * 				 = 3: button [Confirm] displays
+	 * 				 = 4: button [Remove Connection] displays
+	 */
+	public void checkUserInfoOnUserPopup(String fullName, String position, boolean avatar, String activity, int status){
+		info("Check information of user" + fullName + " on user popup");
+		assert getText(ELEMENT_USER_POPUP_NAME).equalsIgnoreCase(fullName);
+		info("Name of user displays true");
+		if (position != null){
+			assert getText(ELEMENT_USER_POPUP_POSITION).equalsIgnoreCase(position);
+			info("Position of user displays true");
+		}
+		if (avatar){
+			waitForElementNotPresent(ELEMENT_USER_POPUP_AVATAR);
+			info("Avatar of user is not default avatar");
+		}
+		if (activity != null){
+			assert getText(ELEMENT_USER_POPUP_LAST_ACTIVITY).equalsIgnoreCase(activity);
+			info("Last activity of user displayes true");
+		}
+		switch (status) {
+		case 1:
+			waitForAndGetElement(ELEMENT_USER_POPUP_STATUS_CONNECT.replace("${status}", "Connect"));
+			info("Button [Connect] is displayed");
+			break;
+		case 2:
+			waitForAndGetElement(ELEMENT_USER_POPUP_STATUS_CONNECT.replace("${status}", "Cancel Request"));
+			info("Button [Cancel request] is displayed");
+			break;
+		case 3:
+			waitForAndGetElement(ELEMENT_USER_POPUP_STATUS_CONNECT.replace("${status}", "Confirm"));
+			info("Button [Confirm] is displayed");
+			break;
+		case 4:
+			waitForAndGetElement(ELEMENT_USER_POPUP_STATUS_CONNECT.replace("${status}", "Remove Connection"));
+			info("Button [Remove connection] is displayed");
+			break;
+		default:
+			break;
+		}
 	}
 }

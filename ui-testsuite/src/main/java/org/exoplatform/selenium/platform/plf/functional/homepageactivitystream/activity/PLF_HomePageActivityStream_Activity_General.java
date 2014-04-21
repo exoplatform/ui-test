@@ -219,8 +219,11 @@ public class PLF_HomePageActivityStream_Activity_General extends Activity{
 		//delete data
 		acc.userSignIn(userType.ADMIN);
 		home.deleteActivity(text);
+		
+		/*@date 22/3/2014 -- lientm comment: 2 user are not connected
 		nav.goToConnectionPage();
-		pConn.removeConnection(user1);
+		pConn.removeConnection(user1); */
+		
 		mMember.goToAllSpaces();
 		mMember.deleteSpace(spaceName,300000);
 	}

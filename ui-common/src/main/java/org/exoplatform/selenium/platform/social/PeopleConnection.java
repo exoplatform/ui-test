@@ -192,4 +192,27 @@ public class PeopleConnection extends SocialBase {
 		waitForElementNotPresent(ELEMENT_REMOVE_CONNECTION_BTN);
 	}
 
+	/**function reset all relation (if exist) with other user
+	 * @author lientm
+	 * @param user
+	 */
+	public void resetConnection(String user){
+		info("-- Reset Connection to: " + user);
+		if(waitForAndGetElement(ELEMENT_EVERYONE_TAB, 5000, 0) == null){
+			goToMyConnections();
+			click(ELEMENT_EVERYONE_TAB);
+		}
+		else
+			click(ELEMENT_EVERYONE_TAB);
+		waitForAndGetElement(By.linkText(user));
+		if (waitForAndGetElement(ELEMENT_CANCEL_REQUEST_BUTTON.replace("${peopleName}", user), 5000, 0) != null){
+			click(ELEMENT_CANCEL_REQUEST_BUTTON.replace("${peopleName}", user));
+		}
+		if (waitForAndGetElement(ELEMENT_REMOVE_CONNECTION_BUTTON.replace("${peopleName}", user), 5000, 0) != null){
+			click(ELEMENT_REMOVE_CONNECTION_BUTTON.replace("${peopleName}", user));
+		}
+		if (waitForAndGetElement(ELEMENT_IGNORE_BUTTON.replace("${peopleName}", user), 5000, 0) != null) {
+			click(ELEMENT_IGNORE_BUTTON.replace("${peopleName}", user));
+		}
+	}
 }

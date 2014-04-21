@@ -243,7 +243,7 @@ public class PLF_HomePageActivityStream_Activity_Comment extends Activity{
 		waitForAndGetElement(ELEMENT_USER_PROFILE_POPUP.replace("${userName}", "John Smith"));
 		
 		//delete data
-		home.deleteActivity(text);
+		home.deleteActivity(text, true, false);
 	}
 
 	/** Display vertical scroll bar for long comment

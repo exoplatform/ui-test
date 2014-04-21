@@ -104,7 +104,7 @@ public class PLF_HomepageActivityStream_ActivityStream_ActivityPost extends Acti
 		selectFileter("My Spaces");
 
 		//Delete activity before exit test cases
-		hpActivity.deleteActivity(activity);
+		hpActivity.deleteActivity(activity, true, false);
 		spaceMag.goToMySpacePage();
 		spaceMag.deleteSpace(spaceName,300000);
 	}
@@ -131,7 +131,7 @@ public class PLF_HomepageActivityStream_ActivityStream_ActivityPost extends Acti
 		addComment(activity,comment);
 
 		//Delete activity before exit test cases
-		hpActivity.deleteActivity(activity);
+		hpActivity.deleteActivity(activity, true, false);
 	}	
 
 	/*

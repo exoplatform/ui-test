@@ -238,7 +238,7 @@ public class PLF_HomepageActivityStream_ActivityStream_ActivityFilter_AllActivit
 
 		// Delete data
 		acc.userSignIn(userType.ADMIN);
-		home.deleteActivity(user1);
+		home.deleteActivity(user1, true, false);
 	}
 
 

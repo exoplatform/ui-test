@@ -104,11 +104,13 @@ public class HomePageGadget extends PlatformBase{
 	public final By ELEMENT_SUGGESTION_GADGET = By.xpath("//div[@id='OfficeRight']//div[@class='NormalContainerBlock UIComponentBlock']//*[@id='content']");
 
 	//-------------------------------------------------------------//
-
+	HomePageActivity homeActi;
+	
 	public HomePageGadget(WebDriver dr, String...plfVersion){
 		driver = dr;
 		this.plfVersion = plfVersion.length>0?plfVersion[0]:"4.0";
 		button = new Button(driver, this.plfVersion);
+		homeActi = new HomePageActivity(driver);
 	}
 
 	/**
@@ -220,25 +222,22 @@ public class HomePageGadget extends PlatformBase{
 	}
 
 	/**
-	 * Check info of user displayed on Who's online Gadget
-	 * 
-	 * @param userName 
-	 * 				name of user who is online
+	 * @author havtt (lientm updated)
+	 * @param userName
+	 * @param fullName
+	 * @param position
+	 * @param avatar
 	 * @param activity
-	 * 				value is "true" if online user has his activity posted on AS
-	 * @param activityPosted
-	 * 				activity content posted on AS of online user
-	 * @param connected
-	 * 				connection status of online user with the logged-in user. 
-	 * 				value is "true" if online user and logged-in user are connected already.
+	 * @param status
 	 */
-	public void checkUserInfoOnWhoisOnlineGadget(String userName, boolean activity, String activityPosted, boolean connected, boolean invited){
+	public void checkUserInfoOnWhoisOnlineGadget(String userName, String fullName, String position, boolean avatar, String activity, int status){
 		waitForAndGetElement(ELEMENT_WHOISONLINE_GADGET);
 		mouseOver(ELEMENT_ONLINE_USER_AVATAR.replace("${acc}",userName),true);
-		info("Confirm user avatar");
-		waitForAndGetElement(ELEMENT_ONLINE_USER_ACC_IMG.replace("${acc}",userName), DEFAULT_TIMEOUT,1,2);
-		info("Confirm user name");
-		waitForAndGetElement(ELEMENT_ONLINE_USER_TITLE.replace("${acc}",userName), DEFAULT_TIMEOUT,1,2);
+//		info("Confirm user avatar");
+//		waitForAndGetElement(ELEMENT_ONLINE_USER_ACC_IMG.replace("${acc}",userName), DEFAULT_TIMEOUT,1,2);
+//		info("Confirm user name");
+//		waitForAndGetElement(ELEMENT_ONLINE_USER_TITLE.replace("${acc}",userName), DEFAULT_TIMEOUT,1,2);
+		homeActi.checkUserInfoOnUserPopup(fullName, position, avatar, activity, status);
 	}	
 
 	/**

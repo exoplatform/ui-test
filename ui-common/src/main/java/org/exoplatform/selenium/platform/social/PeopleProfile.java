@@ -30,6 +30,8 @@ public class PeopleProfile extends PlatformBase {
 	// Edit user in My Profile
 	// Basic information
 	public final By ELEMENT_EDIT_HEADER_BUTTON = By.xpath("//*[@id='UIHeaderSection']//../*[@class='uiIconEdit']");
+	public final By ELEMENT_CURRENT_POSITION_INPUT = By.id("position");
+	public final By ELEMENT_SAVE_POSITION = By.id("savePosition");
 	public final By ELEMENT_EDIT_INFORMATION_BUTTON = By.xpath("//*[@id='UIBasicInfoSection']//../*[@class='uiIconEdit']");
 
 	// Contact
@@ -78,6 +80,18 @@ public class PeopleProfile extends PlatformBase {
 		this.plfVersion = plfVersion.length>0?plfVersion[0]:"4.0";
 		button = new Button(driver, this.plfVersion);
 		peoSearch = new PeopleSearch(driver);
+	}
+	
+	/**
+	 * @author lientm
+	 * @param position
+	 */
+	public void editCurrentPosition(String position){
+		info("Change position of user");
+		click(ELEMENT_EDIT_HEADER_BUTTON);
+		type(ELEMENT_CURRENT_POSITION_INPUT, position, true);
+		click(ELEMENT_SAVE_POSITION);
+		waitForElementNotPresent(ELEMENT_CURRENT_POSITION_INPUT);
 	}
 
 	/**

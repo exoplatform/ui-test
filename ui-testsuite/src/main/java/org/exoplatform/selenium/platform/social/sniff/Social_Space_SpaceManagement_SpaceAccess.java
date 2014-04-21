@@ -71,10 +71,10 @@ public class Social_Space_SpaceManagement_SpaceAccess  extends SocialBase{
 
 		//+ All default portlet display: Home space, Discussion, Members, Wiki, Documents, Space settings
 		spaceMag.verifySpaceMenu("Activity Stream");
-		spaceMag.verifySpaceMenu("Forums");
+		spaceMag.verifySpaceMenu("Forum");
 		spaceMag.verifySpaceMenu("Wiki");
 		spaceMag.verifySpaceMenu("Documents");
-		spaceMag.verifySpaceMenu("Space Setting");
+		spaceMag.verifySpaceMenu("Space Settings");
 		spaceMag.verifySpaceMenu("Members");
 
 		/*Clear data*/

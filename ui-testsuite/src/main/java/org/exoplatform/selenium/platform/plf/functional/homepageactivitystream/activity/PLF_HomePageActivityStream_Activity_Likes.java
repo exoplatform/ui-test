@@ -190,7 +190,7 @@ public class PLF_HomePageActivityStream_Activity_Likes extends Activity {
 	 * == Display message after more than 2 user like activity (78627) ==
 	 * Test case ID: 78627
 	 * Step 1: Check message
-	 * ERROR: Refer: https://jira.exoplatform.org/browse/SOC-3072
+	 * ERROR: Refer: https://jira.exoplatform.org/browse/SOC-3072 -> @date 22/4/2014: refer error SOC-3371
 	 */
 	@Test (groups="error")
 	public void test04_DisplayMessageAfterMoreThan2UserLikeActivity(){

@@ -24,7 +24,8 @@ public class PLF_HomepageActivityStream_LinkSharingActivity extends Activity{
 
 	  @BeforeMethod
 	  public void setUpBeforeTest(){
-	    getDriverAutoSave();
+//	    getDriverAutoSave();
+		initSeleniumTest();
 	    magAc = new ManageAccount(driver);
 	    naviToolbar = new NavigationToolbar(driver);
 	    hpActivity = new HomePageActivity(driver);
@@ -53,10 +54,10 @@ public class PLF_HomepageActivityStream_LinkSharingActivity extends Activity{
 
 	  @Test	
 	  public void test01_LinkSharing_Intranet(){
-		  String link = "http://yahoo.fr";
+		  String link = "http://www.google.com.vn/ig/directory?synd=open&cat=funandgames";
 		  int height = 75;
 		  int width = 75;
-		  String title = "Yahoo France";
+		  String title = "Google Gadgets For Your Webpage";
 
 		  // Add a link shared in intranet
 		  naviToolbar.goToHomePage();

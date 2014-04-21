@@ -398,7 +398,7 @@ public class PLF_HomePageActivityStream_ActivityComposer_File extends Activity {
 		waitForAndGetElement(By.linkText(uploadFileName));
 
 		//Clear data
-		activity.deleteActivity(uploadFileName);
+		activity.deleteActivity(uploadFileName, true, false);
 		navToolBar.goToSiteExplorer();
 		actBar.chooseDrive(ecms.ELEMENT_PERSONAL_DRIVE);
 		actBar.goToViewMode("Admin");
