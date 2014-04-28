@@ -57,7 +57,7 @@ public class Calendar_Event extends CalendarBase {
 		String event = "Event_99373_1";
 		String newEvent = "Event_99373_1 update";
 		String note = "Update new event";
-
+		
 		goToCalendarPage();		
 		info("Create new personal calendar");
 		addCalendar(calendar, null, color);
@@ -142,7 +142,6 @@ public class Calendar_Event extends CalendarBase {
 		goToCalendarPage();
 		deleteCalendar(calendar,true);
 	}
-
 //	/**
 //	 * Add new event in Shared Calendar
 //	 * CaseID 68656
@@ -225,7 +224,6 @@ public class Calendar_Event extends CalendarBase {
 		acc.signIn(DATA_USER1, DATA_PASS);
 		goToCalendarPage();
 		deleteCalendar(CAL_03,true);
-
 	}
 //	/**
 //	 * Add new event in Group Calendar
@@ -550,11 +548,9 @@ public class Calendar_Event extends CalendarBase {
 		String event2 = "Event_111483_2";
 		String event3 = "Event_111483_3";
 		String event4 = "Event_111483_4";
-
 		goToCalendarPage();		
 		info("Create new personal calendar");
 		addCalendar(calendar, null, color);
-
 		info("Check date suggestion when add event from click setting on calendar");
 		evt.goToAddEventFromCalendar(calendar);
 		evt.checkSuggestionEventTime(null, 60);
@@ -586,7 +582,6 @@ public class Calendar_Event extends CalendarBase {
 		evt.inputAddEventForm(event4, null, null, null, null, false, calendar);
 		click(evt.ELEMENT_ADD_EVENT_SAVE_QUICK_BUTTON);
 		waitForElementNotPresent(evt.ELEMENT_ADD_EVENT_POPUP);
-
 		deleteCalendar(calendar);
 	}
 }

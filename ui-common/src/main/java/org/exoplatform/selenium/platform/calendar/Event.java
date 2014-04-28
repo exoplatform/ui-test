@@ -125,9 +125,12 @@ public class Event extends CalendarBase{
 
 	/**
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * Open Edit Event form 
 	 * @param oldEvent: old name of event
 =======
+=======
+>>>>>>> 2f751a6... FQA-1721: PLF4.1.x - Calendar sniff - Date suggestion
 	 * @author lientm
 	 * @param calendarName
 	 */

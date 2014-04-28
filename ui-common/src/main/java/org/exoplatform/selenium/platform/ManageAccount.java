@@ -78,6 +78,7 @@ public class ManageAccount extends PlatformBase {
 			driver.get(baseUrl);
 			Utils.pause(5000);
 		}
+		Utils.pause(2000);
 	}
 
 	/** Login to acme portal

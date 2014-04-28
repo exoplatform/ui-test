@@ -118,6 +118,9 @@ public class Task extends CalendarBase{
 	public void goToAddTaskFromActionBar(){
 		info("Go to Add Task page from action bar"); 
 		click(ELEMENT_BUTTON_TASK);
+	public void goToAddTaskFromActionBar(){
+		info("Go to Add Task page from action bar"); 
+		click(ELEMENT_BUTTON_TASK);
 		waitForAndGetElement(ELEMENT_QUICK_ADD_TASK_POPUP);
 	}
 	
@@ -380,6 +383,7 @@ public class Task extends CalendarBase{
 			waitForAndGetElement(ELEMENT_EVENT_TASK_ONE_DAY.replace("${taskName}", name));
 
 	}
+	
 	
 	public void inputDataTask(String name, String note, String from, String to, boolean allDay, String...opt){
 		inputBasicQuickTask(name, note, opt);

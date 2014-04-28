@@ -17,6 +17,7 @@ import org.exoplatform.selenium.platform.calendar.Task;
  * @author lientm
  * @description: update suggestion date follow https://jira.exoplatform.org/browse/FQA-1721
  */
+
 public class Calendar_Task extends CalendarBase {
 
 	ManageAccount acc;
@@ -41,7 +42,6 @@ public class Calendar_Task extends CalendarBase {
 		driver.manage().deleteAllCookies();
 		driver.quit();
 	}
-
 
 	/**Testcase to check add task from 3 ways
 	 * CaseID 109238: add new task from action bar or on a calendar
@@ -95,6 +95,7 @@ public class Calendar_Task extends CalendarBase {
 		tsk.deleteEventTask(newTask);
 		deleteCalendar(calendar);
 	}
+	
 	
 	/* caseId: 99374 -> Add a Task by click on calendar main pane*/
 	@Test
@@ -262,6 +263,53 @@ public class Calendar_Task extends CalendarBase {
 		Utils.pause(5000);
 		deleteEventTask(CALENDAR05, selectDayOption.ONEDAY);
 	}
+
+//	/** 
+//	 * Edit a task
+//	 * CaseID: 69266
+//	 */
+//	@Test
+//	public void test04_EditTask(){
+//
+//		String CALENDAR04 = "CALENDAR_04";
+//		String TITLE = "CALENDAR_04_edited";
+//		String DESCRIPTION = "CALENDAR_04_description_edited";
+//
+//		info("Go to Intranet Calendar");
+//		goToCalendarPage();
+//		//setTimezoneForCalendar("(GMT +07:00) Asia/Ho_Chi_Minh");
+//		driver.navigate().refresh();
+//
+//		info("Add a new task");
+//		tsk.addQuickTask(CALENDAR04,CALENDAR04,getDate(0,"MM/dd/yyyy"),getDate(0,"MM/dd/yyyy"),false);
+//
+//		info("Edit a task");
+//		tsk.editTask(CALENDAR04,TITLE,DESCRIPTION,null,null, false,"");
+//		
+//		info("Restore data");
+//		waitForAndGetElement(By.xpath(ELEMENT_EVENT_TASK_ONE_DAY.replace("${taskName}", CALENDAR04)));
+//		deleteEventTask(CALENDAR04, selectDayOption.ONEDAY);
+//	}
+//
+//	/** 
+//	 * Delete a task
+//	 * CaseID: 69267
+//	 */
+//	@Test
+//	public void test05_DeleteTask(){
+//		String CALENDAR05 = "CALENDAR_05";
+//
+//		info("Go to Intranet Calendar");
+//		goToCalendarPage();
+//		driver.navigate().refresh();
+//
+//		info("Add a new task");
+//		tsk.addQuickTask(CALENDAR05,CALENDAR05,getDate(0,"MM/dd/yyyy"),getDate(0,"MM/dd/yyyy"),false);
+//
+//		info("Delete a task");
+//		Utils.pause(5000);
+//		deleteEventTask(CALENDAR05, selectDayOption.ONEDAY);
+//	}
 
 //	/** 
 //	 * Edit a task
