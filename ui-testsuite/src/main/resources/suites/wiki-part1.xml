@@ -1,7 +1,7 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
 <suite name="Wiki Functional Test" verbose="1" preserve-order="true">
-	<test name="wiki-func-attachment" enabled="true">
+	<test name="wiki-func-attachment" enabled="true" preserve-order="true">
 		<groups>
 			<run>
 				<exclude name="pending" />
@@ -14,7 +14,7 @@
  		</classes>
 	</test>
 
-	<test name="wiki-func-basicaction" enabled="true">
+	<test name="wiki-func-basicaction" enabled="true" preserve-order="true">
 		<groups>
 			<run>
 				<exclude name="pending" />
@@ -31,7 +31,7 @@
  		</classes>
 	</test>
 
-	<test name="wiki-func-info" enabled="true">
+	<test name="wiki-func-info" enabled="true" preserve-order="true">
 		<groups>
 			<run>
 				<exclude name="pending" />

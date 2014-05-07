@@ -1,7 +1,7 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
 <suite name="Wiki Functional Test" verbose="1" preserve-order="true">
-	<test name="wiki-func-search" enabled="true">
+	<test name="wiki-func-search" enabled="true" preserve-order="true">
 		<groups>
 			<run>
 				<exclude name="pending" />
@@ -14,7 +14,7 @@
 		</classes>
 	</test>
 
-	<test name="wiki-func-spacepermission" enabled="true">
+	<test name="wiki-func-spacepermission" enabled="true" preserve-order="true">
 		<groups>
 			<run>
 				<exclude name="pending" />
@@ -28,7 +28,7 @@
 		</classes>
 	</test>
 
-	<test name="wiki-func-template" enabled="true">
+	<test name="wiki-func-template" enabled="true" preserve-order="true">
 		<groups>
 			<run>
 				<exclude name="pending" />
@@ -40,6 +40,19 @@
 			<class name="org.exoplatform.selenium.platform.wiki.functional.template.Wiki_Template_Edit" />
 			<class name="org.exoplatform.selenium.platform.wiki.functional.template.Wiki_Template_Other" />
 			<class name="org.exoplatform.selenium.platform.wiki.functional.template.Wiki_Template_Search" />
+		</classes>
+	</test>
+	
+	<test name="wiki-func-macro" enabled="true" preserve-order="true">
+		<groups>
+			<run>
+				<exclude name="pending" />
+			</run>
+		</groups>
+		<classes>
+			<class name="org.exoplatform.selenium.platform.wiki.functional.macro.Wiki_Macro_Add" />
+			<class name="org.exoplatform.selenium.platform.wiki.functional.macro.Wiki_Macro_Edit" />
+			<class name="org.exoplatform.selenium.platform.wiki.functional.macro.Wiki_Macro_Otherchek" />
 		</classes>
 	</test>
 

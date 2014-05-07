@@ -1,7 +1,7 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
 <suite name="Platform Functional Test" verbose="1" preserve-order="true">
-	<test name="forum-answer" enabled="true">
+	<test name="forum-answer" enabled="true" preserve-order="true">
 		<groups>
 			<run>
 				<exclude name="pending" />

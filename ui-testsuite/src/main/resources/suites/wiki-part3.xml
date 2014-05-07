@@ -1,7 +1,7 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
 <suite name="Wiki Functional Test" verbose="1" preserve-order="true">
-	<test name="wiki-func-pagepermission" enabled="true">
+	<test name="wiki-func-pagepermission" enabled="true" preserve-order="true">
 		<groups>
 			<run>
 				<exclude name="pending" />
@@ -15,7 +15,7 @@
 		</classes>
 	</test>
 
-	<test name="wiki-func-spaceswitcher" enabled="true">
+	<test name="wiki-func-spaceswitcher" enabled="true" preserve-order="true">
 		<groups>
 			<run>
 				<exclude name="pending" />
@@ -26,7 +26,7 @@
 		</classes>
 	</test>
 
-	<test name="wiki-func-activities" enabled="true">
+	<test name="wiki-func-activities" enabled="true" preserve-order="true">
 		<groups>
 			<run>
 				<exclude name="pending" />
@@ -41,7 +41,7 @@
 		</classes>
 	</test>
 
-	<test name="wiki-func-navigationacrossspace" enabled="true">
+	<test name="wiki-func-navigationacrossspace" enabled="true" preserve-order="true">
 		<groups>
 			<run>
 				<exclude name="pending" />
