@@ -52,7 +52,7 @@
 		<classes>
 			<class name="org.exoplatform.selenium.platform.wiki.functional.macro.Wiki_Macro_Add" />
 			<class name="org.exoplatform.selenium.platform.wiki.functional.macro.Wiki_Macro_Edit" />
-			<class name="org.exoplatform.selenium.platform.wiki.functional.macro.Wiki_Macro_Otherchek" />
+			<class name="org.exoplatform.selenium.platform.wiki.functional.macro.Wiki_Macro_Othercheck" />
 		</classes>
 	</test>
 
