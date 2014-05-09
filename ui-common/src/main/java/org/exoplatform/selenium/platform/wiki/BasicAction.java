@@ -680,4 +680,29 @@ public class BasicAction extends Permission{
 		click(ELEMENT_SAVE_BUTTON_ADD_PAGE);
 		waitForElementNotPresent(ELEMENT_SAVE_BUTTON_ADD_PAGE);
 	}
+
+	public void editWikiPageWithContentMultiLine(String title, String content){
+		if(title != null)
+			type(ELEMENT_TITLE_WIKI_INPUT, title, true);
+		if(content != null){
+			waitForAndGetElement(ELEMENT_CONTENT_WIKI_INPUT).clear();
+			String[] line = content.split("/");
+			for (int i = 0; i < line.length; i ++){
+				type(ELEMENT_CONTENT_WIKI_INPUT, line[i] , false);
+				type(ELEMENT_CONTENT_WIKI_INPUT, Keys.ENTER.toString(), false);
+			}
+		}
+		Utils.pause(1000);
+	}
+	
+	/**edit title of wiki page by double click on title
+	 * @author lientm
+	 * @param newTitle
+	 */
+	public void editWikiPageTitleByClickTitle(String newTitle){
+		click(ELEMENT_PAGE_TITLE);
+		type(By.id("EdiableInput"), newTitle, true, 2);
+		waitForAndGetElement(By.id("EdiableInput")).sendKeys(Keys.RETURN);
+		waitForAndGetElement("//*[@id='titleInfo' and text()='" + newTitle + "']");
+	}
 }

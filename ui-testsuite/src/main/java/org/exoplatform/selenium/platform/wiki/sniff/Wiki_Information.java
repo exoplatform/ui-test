@@ -259,4 +259,48 @@ public class Wiki_Information extends Version {
 		click(By.linkText(title));
 		deleteCurrentWikiPage();
 	}
+	
+	/**Version Creation
+	 * CaseId: 109771
+	 * update follow issue https://jira.exoplatform.org/browse/FQA-1772
+	 */
+	@Test
+	public void test09_VersionCreation(){
+		String title1 = "Wiki_page_109771";
+		String content1 = "Content page 109771";
+		String title2 = "Wiki_page_109771 update";
+		String content2 = "Content page 109771 update";
+		String link = "Wiki_Sniff_Attachment_01.jpg";
+		String title3 = "Wiki_page_109771 update 2";
+
+		info("Create new wiki page -> it has verion 1");
+		addBlankWikiPage(title1, content1, 0);
+		waitForAndGetElement(ELEMENT_VERSION_LINK.replace("{$version}", "1"));
+		
+		info("Edit title of page by click edit -> it has version 2");
+		editWikiPage(title2, null, 0);
+		waitForAndGetElement(ELEMENT_VERSION_LINK.replace("{$version}", "2"));
+		
+		info("Edit content of page by click edit -> it has verstion 3");
+		editWikiPage(null, content2, 0);
+		waitForAndGetElement(ELEMENT_VERSION_LINK.replace("{$version}", "3"));
+		
+		info("Add new attachment -> page's version is not changed");
+		click(ELEMENT_ATTACHMENT_ICON);
+		attachFileInWiki("TestData/" + link, 2);
+		waitForAndGetElement(ELEMENT_ATTACHMENT_NUMBER.replace("${No}", "1"));
+		waitForAndGetElement(ELEMENT_VERSION_LINK.replace("{$version}", "3"));
+		
+		info("Delete acttachment -> page's version is not changed");
+		deleteAnAttachment(link);		
+		waitForAndGetElement(ELEMENT_ATTACHMENT_NUMBER.replace("${No}", "0"));
+		waitForAndGetElement(ELEMENT_VERSION_LINK.replace("{$version}", "3"));
+		
+		info("Edit title by double click -> page's version is not changed");
+		editWikiPageTitleByClickTitle(title3);
+		waitForAndGetElement(ELEMENT_VERSION_LINK.replace("{$version}", "3"));
+		
+		info("Delete data");
+		deleteCurrentWikiPage();
+	}
 }
