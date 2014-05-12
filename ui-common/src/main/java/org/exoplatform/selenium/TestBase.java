@@ -716,9 +716,11 @@ public class TestBase {
 		String pathFile = System.getProperty("user.dir") + "/src/main/resources/TestData/TestOutput";
 
 		FirefoxProfile fp = new FirefoxProfile();	
-		fp.setPreference("browser.download.folderList", 2);
+
 		info("Save file to " + pathFile);
+		fp.setPreference("browser.download.manager.showWhenStarting", false);
 		fp.setPreference("browser.download.dir", pathFile);
+		fp.setPreference("browser.download.folderList", 2);
 		//		fp.setPreference("browser.helperApps.neverAsk.saveToDisk", 
 		//				"application/x-zip;application/x-zip-compressed;application/x-winzip;application/zip;application/bzip2;" +
 		//				"gzip/document;multipart/x-zip;application/x-gunzip;application/x-gzip;application/x-gzip-compressed;" +
@@ -734,6 +736,13 @@ public class TestBase {
 				"text/x-vCalendar;image/jpeg;image/jpg;image/jp_;application/jpg;" +
 				"application/x-jpg;image/pjpeg;image/pipeg;image/vnd.swiftview-jpeg;image/x-xbitmap;image/png;application/xml;text/xml;text/icalendar;");
 
+		fp.setPreference("plugin.disable_full_page_plugin_for_types", "application/pdf");
+		fp.setPreference("pref.downloads.disable_button.edit_actions", true);
+//		fp.setPreference("browser.helperApps.neverAsk.saveToDisk", "application/pdf");
+		fp.setPreference("pdfjs.disabled", true); 
+//		fp.setPreference("pdfjs.firstRun", false); 
+//		fp.setPreference("pdfjs.migrationVersion", 1);
+		
 		fp.setPreference("browser.helperApps.alwaysAsk.force", false);
 		driver = new FirefoxDriver(fp);
 		baseUrl = System.getProperty("baseUrl");
