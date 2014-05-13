@@ -65,7 +65,7 @@ public class SpaceManagement extends SocialBase {
 	public final String MESSAGE_DELETE_SPACE            = "Cannot undo one deleted space with all its page navigations and group. Are you sure to delete this space?";
 	public final String ELEMENT_VERIFY_SPACE_NAME_ACTIVITY = "//div[@class='author']/a[contains(text(),'${spaceName}')]";
 	public final String ELEMENT_SPACE_MENU_ITEM = "//span[contains(text(),'${menuItem}')]";
-	public final String ELEMENT_SPACE_MENU_ITEM_41 = "//span[@class='tabName' and contains(text(),'${menuItem}')]";
+	public final String ELEMENT_SPACE_MENU_ITEM_41 = "//span[contains(text(),'${menuItem}')]";
 	public final String ELEMENT_SPACE_CURRENT_MENU_ITEM = "//li[@class='active item']//span[text()='${menuItem}']";
 
 	//Space access
@@ -181,7 +181,11 @@ public class SpaceManagement extends SocialBase {
 		clickButton("Create");
 		waitForAndGetElement(By.linkText(name), iTimeout);
 		//waitForElementPresent(By.xpath("//div[contains(@class,'UISpaceName')]/a[@title='" + name + "']"),iTimeout);
-		//waitForAndGetElement("//span[contains(text(),'More')]",iTimeout);
+		if(waitForAndGetElement("//span[contains(text(),'More')]",iTimeout,0) == null){
+			click(By.linkText(name));
+			waitForAndGetElement("//span[contains(text(),'More')]",iTimeout,0);
+		}
+			
 		//Utils.pause(1000);
 	}
 
@@ -265,6 +269,7 @@ public class SpaceManagement extends SocialBase {
 		info("-- Deleting Space..." + name);
 		int iTimeout = params.length > 0 ? params[0] : DEFAULT_TIMEOUT;    
 		spSearch.searchSpaceByName(name, true);
+
 		doAction("Delete", name);    
 		magAlert = new ManageAlert(driver);
 		magAlert.acceptAlert();
@@ -379,7 +384,8 @@ public class SpaceManagement extends SocialBase {
 	 * @author phuongdt
 	 * @param menuItem
 	 */
-	public void goToSpaceMenu(String menuItem){
+	public void goToSpaceMenu(String menuItem,int...wait){
+		int timeout = wait.length > 0 ? wait[0] : DEFAULT_TIMEOUT;
 		info("-- Go To " + menuItem + " --");
 		String eMenuItem = "";
 		if(this.plfVersion.equalsIgnoreCase("4.1")){
@@ -387,7 +393,7 @@ public class SpaceManagement extends SocialBase {
 		}else
 			eMenuItem = ELEMENT_SPACE_MENU_ITEM;
 
-		if(waitForAndGetElement(eMenuItem.replace("${menuItem}", menuItem),DEFAULT_TIMEOUT,0)!=null)
+		if(waitForAndGetElement(eMenuItem.replace("${menuItem}", menuItem),timeout,0) != null)
 			click(By.xpath(eMenuItem.replace("${menuItem}", menuItem)));
 		else{
 			click(By.xpath(eMenuItem.replace("${menuItem}", "More")));

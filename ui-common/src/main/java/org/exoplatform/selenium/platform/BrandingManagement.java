@@ -25,6 +25,9 @@ public class BrandingManagement extends PlatformBase {
 	public String ELEMENT_COLOR_CONTAINER_PREVIEW = "//div[@id='StylePreview']//div[@id='UIToolbarContainer' and contains(@class,'${color}')]";
 	public String ELEMENT_COLOR_CONTAINER_TOOLBAR = "//div[contains(@class,'UIRowContainer')]/div[@id='PlatformAdminToolbarContainer']//div[@id='UIToolbarContainer' and contains(@class,'${color}')]";
 	public final By ELEMENT_LOGO_CONTAINER_PREVIEW = By.xpath("//div[@id='StylePreview']//a[@class='HomeLink']/img[@alt='Home']");
+	public final By ELEMENT_MESSAGE_MUST_PNG = By.xpath("//div[@id='mustpng' and contains(.,'The file must be in photo format png')]");
+	public final By ELEMENT_MESSAGE_CANCEL_INFO = By.xpath("//div[@id='cancelinfo' and contains(.,'Changes in branding settings have been canceled')]");
+	public final By ELEMENT_MESSAGE_SAVE_INFO = By.xpath("//div[@id='saveinfo' and contains(.,'Changes in branding settings have been saved')]");
 	
 //	public final By SAVE_INFO_MSG = By.id("saveinfo");
 //	public final By CANCEL_INFO_MSG = By.id("cancelinfo");

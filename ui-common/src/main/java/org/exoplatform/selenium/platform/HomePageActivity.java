@@ -45,7 +45,7 @@ public class HomePageActivity extends PlatformBase{
 	//Comment box
 	public final String ELEMENT_COMMENT_LINK = "//div[@class='text' or @class = 'description'or @class='linkSource' or contains(@id, 'ContextBox')]/*[contains(text(), '${activityText}')]//ancestor::div[contains(@id,'ActivityContextBox')]//*[starts-with(@id, 'CommentLink')]";
 	public final String ELEMENT_ACTIVITY_COMMENT_CONTENT = "//*[contains(text(),'${title}')]/../../../..//*[@class='contentComment']/../*[contains(text(), '${comment}')]";
-	
+
 	public final String ELEMENT_GET_COMMENT_CONTENT = "//*[contains(text(),'${title}')]/../../../..//*[@class='commentItem commentItemLast']/..//p";
 	public final String ELEMENT_ACTIVITY_COMMENT_CONTENT_1 = "//*[text()='${title}']/ancestor::div[@class='boxContainer']//*[@class='contentComment']";
 	public final String ELEMENT_COMMENTBOX="//*[text()='${title}']/../../../..//div[@class='exo-mentions']/div[contains(@id,'DisplayCommentTextarea')]";
@@ -101,7 +101,7 @@ public class HomePageActivity extends PlatformBase{
 	public final String ELEMENT_CONTENT_COMMENT_USER_CHANGE_AVATAR="//div[@class='author']/a[contains(text(), '${username}')]//ancestor::div[contains(@id,'ContextBox')]/div[contains(@id,'CommentBlockBound')]//div[@class='author']/a[text()='${username}']/../../p[contains(text(),'Avatar has been updated.')]";
 	public final String ELEMENT_CONTENT_COMMENT_USER_EDIT_BASIC_INFO="//div[@class='author']/a[contains(text(), '${username}')]//ancestor::div[contains(@id,'ContextBox')]/div[contains(@id,'CommentBlockBound')]//div[@class='author']/a[text()='${username}']/../../p[contains(text(),'Basic information has been updated.')]";
 	public final By ELEMENT_CONTENT_WIKI_VIEW_CHANGE = By.xpath("//*[@class='uiIconViewChange uiIconLightGray']");
-	
+
 	//File activity
 	public final String ELEMENT_FILE_SIZE = "//a[@title='@{fileName}']/..//*[@class='versionFile' and contains(text(), '${size}')]";
 	public final String ELEMENT_FILE_SIZE_41 = "//a[@data-original-title='@{fileName}']/..//*[@class='versionFile' and contains(text(), '${size}')]";
@@ -134,7 +134,7 @@ public class HomePageActivity extends PlatformBase{
 	public final String ELEMENT_QUESTION_NUM_ANSWER = "//a[contains(text(),'${title}')]/../../../..//div[@class='contentAnswer theContent']//span[contains(text(),'${number} Answer')]";
 	public final String ELEMENT_QUESTION_NUM_COMMENT = "//a[contains(text(),'${title}')]/../../../..//div[@class='contentAnswer theContent']//span[contains(text(),'${number} Comment')]";
 	public final String ELEMENT_QUESTION_COMMENT = "//a[contains(text(),'${title}')]/../../../..//div[@class='commentList']";
-	
+
 	public final String ELEMENT_QUESTION_RATE = "//a[@class='linkTitle' and text()='${title}']/../..//div[@class='avgRatingImages sumaryRate']/i[@class='voted'][${rate}]";
 	public final String ELEMENT_QUESTION_UNRATE = "//a[@class='linkTitle' and text()='${title}']/../..//div[@class='avgRatingImages sumaryRate']/i[@class='unvoted'][${rate}]";
 	public final String ELEMENT_QUESTION_HAFT_RATE = "//a[@class='linkTitle' and text()='${title}']/../..//div[@data-original-title='Average']/i[@class='votedHaft']";
@@ -168,9 +168,9 @@ public class HomePageActivity extends PlatformBase{
 
 	//Poll activity
 	public final String ELEMENT_POLL_ACTIVITY = "//div[@class='uiBox roundedBottom introBox pollShare']//a[contains(text(),'${poll}')]";
-	public final String ELEMENT_VOTE = "//div[@class='uiBox roundedBottom introBox pollShare']//a[contains(text(),'${poll}')]/../../..//div[@class='titleVote' and contains(text(),'${vote}')]";
-	public final String ELEMENT_VOTE_PROGRESSBAR = "//div[@class='uiBox roundedBottom introBox pollShare']//a[contains(text(),'${poll}')]/../../..//div[@class='titleVote' and contains(text(),'${vote}')]/..//div[@class='progressBar']";
-	public final String ELEMENT_VOTE_RATE = "//div[@class='uiBox roundedBottom introBox pollShare']//a[contains(text(),'${poll}')]/../../..//div[@class='titleVote' and contains(text(),'${vote}')]/..//div[@class='progressing' and contains(text(),'(${rate} vote)')]";
+	public final String ELEMENT_VOTE = "//div[@class='uiBox roundedBottom introBox pollShare']//a[contains(text(),'${poll}')]/../../..//span[@class='text-vote' and contains(text(),'${vote}')]";
+	public final String ELEMENT_VOTE_PROGRESSBAR = "//div[@class='uiBox roundedBottom introBox pollShare']//a[contains(text(),'${poll}')]/../../..//span[@class='text-vote' and contains(text(),'${vote}')]/../..//div[@class='progressBar']";
+	public final String ELEMENT_VOTE_RATE = "//div[@class='uiBox roundedBottom introBox pollShare']//a[contains(text(),'${poll}')]/../../..//span[@class='text-vote' and contains(text(),'${vote}')]/../..//div[@class='progressing' and contains(text(),'(${rate} vote)')]";
 	public final String ELEMENT_POLL_VOTE = "//a[contains(text(),'${poll}')]/../../../..//i[@class='uiIconSocVote uiIconSocLightGray']";
 	public final String ELEMENT_VOTE_TOTAL = "//div[@class='uiBox roundedBottom introBox pollShare']//a[contains(text(),'${poll}')]/../..//*[@class='numberVoted']";
 
@@ -227,7 +227,7 @@ public class HomePageActivity extends PlatformBase{
 				sum = getText(ELEMENT_CONTENT_SUMMARY.replace("@{fileName}", name)).split("\n");
 			else //if(waitForAndGetElement(ELEMENT_CONTENT_SUMMARY_41.replace("@{fileName}", name),5000,0,2)!=null)
 				sum = getText(ELEMENT_CONTENT_SUMMARY_41.replace("@{fileName}", name)).split("\n");
-		
+
 			String[] cont = content.split("/");
 			if(sum.length>2){
 				if (cont.length > 4){
@@ -634,12 +634,12 @@ public class HomePageActivity extends PlatformBase{
 		//Check number of answer
 		waitForAndGetElement(ELEMENT_QUESTION_NUM_ANSWER.replace("${title}",question).replace("${number}", Integer.toString(number)));
 		if(this.plfVersion.equalsIgnoreCase("4.0")){
-		for (int i = 0; i < number; i ++){
-			waitForAndGetElement(ELEMENT_QUESTION_COMMENT.replace("${title}", question).replace("${comment}", MSG_ANSWER_QUESTION.replace("${answer}", answer[i])));
+			for (int i = 0; i < number; i ++){
+				waitForAndGetElement(ELEMENT_QUESTION_COMMENT.replace("${title}", question).replace("${comment}", MSG_ANSWER_QUESTION.replace("${answer}", answer[i])));
+			}
 		}
-		}
-		
-		
+
+
 	}
 
 	/** Check number of comment, and comment of question
@@ -654,9 +654,9 @@ public class HomePageActivity extends PlatformBase{
 		//Check number of comment
 		waitForAndGetElement(ELEMENT_QUESTION_NUM_COMMENT.replace("${title}", question).replace("${number}", Integer.toString(number)));
 		if(this.plfVersion.equalsIgnoreCase("4.0")){
-		for (int i = 0; i < number; i ++){
-			waitForAndGetElement(ELEMENT_QUESTION_COMMENT.replace("${title}", question).replace("${comment}", comment[i]));
-		} 
+			for (int i = 0; i < number; i ++){
+				waitForAndGetElement(ELEMENT_QUESTION_COMMENT.replace("${title}", question).replace("${comment}", comment[i]));
+			} 
 		}
 	}
 	/** Check comment on activity after activating a question
@@ -671,10 +671,10 @@ public class HomePageActivity extends PlatformBase{
 		boolean act = activate.length > 0 ? activate[0]: true;
 		if(act){
 			info("Check for comment of question after activating a question");
-				waitForAndGetElement(ELEMENT_QUESTION_COMMENT.replace("${title}", question).replace("${comment}", MSG_QUESTION_ACTIVATE));
+			waitForAndGetElement(ELEMENT_QUESTION_COMMENT.replace("${title}", question).replace("${comment}", MSG_QUESTION_ACTIVATE));
 		}else{
 			info("Check for comment of question after deactivating a question");
-				waitForElementNotPresent(ELEMENT_QUESTION_COMMENT.replace("${title}", question).replace("${comment}", MSG_QUESTION_ACTIVATE));
+			waitForElementNotPresent(ELEMENT_QUESTION_COMMENT.replace("${title}", question).replace("${comment}", MSG_QUESTION_ACTIVATE));
 		}
 	}
 
@@ -892,6 +892,7 @@ public class HomePageActivity extends PlatformBase{
 	public void deleteActivity (String activityText,boolean...verify) {
 		info("-- Deleting an activity " +activityText+" --");
 		boolean canDelete = verify.length>0?verify[0]:true;
+		boolean verifyElement = verify.length>1?verify[1]:true;
 		if(!canDelete)
 			waitForElementNotPresent(By.xpath(ELEMENT_ACTIVITY_DELETE.replace("${activityText}", activityText)), DEFAULT_TIMEOUT,1,2);
 		else{
@@ -904,11 +905,12 @@ public class HomePageActivity extends PlatformBase{
 			executor.executeScript("document.getElementById('"+deleteActivityIconID+"').click();");
 			waitForAndGetElement(ELEMENT_MESSAGE_CONFIRM_DELETE_ACTIVITY);
 			button.ok();
-			waitForElementNotPresent(By.xpath(ELEMENT_ACTIVITY_AUTHOR_ACTIVITY.replace("${activityText}", activityText)));
-			waitForElementNotPresent(By.xpath(ELEMENT_ACTIVITY_DELETE.replace("${activityText}", activityText)), DEFAULT_TIMEOUT,1,2);
+			if(verifyElement)
+				waitForElementNotPresent(By.xpath(ELEMENT_ACTIVITY_AUTHOR_ACTIVITY.replace("${activityText}", activityText)));
+			//			waitForElementNotPresent(By.xpath(ELEMENT_ACTIVITY_DELETE.replace("${activityText}", activityText)), DEFAULT_TIMEOUT,1,2);
 			Utils.pause(1000);
 		}
-		
+
 	}
 
 	/**

@@ -7,6 +7,7 @@ import org.exoplatform.selenium.Dialog;
 import org.exoplatform.selenium.ManageAlert;
 import org.exoplatform.selenium.Utils;
 import org.exoplatform.selenium.platform.HomePageActivity;
+import org.exoplatform.selenium.platform.ecms.EcmsBase;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
@@ -35,6 +36,7 @@ public class Activity extends SocialBase {
 
 	Dialog dialog = new Dialog(driver);
 	HomePageActivity hpActivity = new HomePageActivity(driver);
+	EcmsBase ecms = new EcmsBase(driver);
 
 	//=====Element on space home page=======stash@{1}
 	// Go to My Spaces > Select a space
@@ -68,7 +70,7 @@ public class Activity extends SocialBase {
 	public final By ELEMENT_CROSS_BUTTON = By.xpath("//a[@class='uiIconClose uiIconLightGray']"); 
 	public final By ELEMENT_SHARE_DISPLAY = By.xpath("//div[@class='uiLinkShareDisplay blastShare']");
 	public final By ELEMENT_PICTURE_SHARE = By.xpath("//div[@id='UIThumbnailLeftBox']"); 
-	public final By ELEMENT_TITLE_SHARE = By.xpath("//div[@id='UIRightBox']/h5[@id='LinkTitle']"); 
+	public final String ELEMENT_TITLE_SHARE = "//div[@id='UIRightBox']/h5[@id='LinkTitle' and contains(text(),'${title}')]"; 
 	public final By ELEMENT_URL_SHARE = By.xpath("//div[@id='LinkUrl']");
 	public final By ELEMENT_NAME_SPACE_ACTIVITY = By.xpath("//a[@class='spaceName']");
 	public final By ELEMENT_ICON_SPACE_ACTIVITY = By.xpath("//i[@class='uiIconSocGroup uiIconSocLightGray']");
@@ -109,6 +111,7 @@ public class Activity extends SocialBase {
 	public final String ELEMENT_USER_NAME_LIKE_THIS_ACTIVITY = "//div[@class='text' or @class = 'description'or @class='linkSource' or contains(@id, 'ContextBox')]/../*[contains(text(), '${activityText}')]//ancestor::div[contains(@id,'ActivityContextBox')]//div[@class='listPeopleContent']/*[contains(text(),'${userName} liked this')]";
 	public final String ELEMENT_USER_PROFILE_POPUP = "//table[@id='tipName']//a[contains(text(),'${userName}')]";
 	public final String ELEMENT_USER_PROFILE_AVATAR = "//table[@id='tipName']//a[@target='parent']/img"; 
+	public final By ELEMENT_LIKE_ACTIVITY_MORE = By.xpath("//button[contains(text(),'...')]");
 
 	//=====Element on welcome page=======
 	public final By ELEMENT_HINT_BLOCK = By.className("hint");
@@ -237,13 +240,15 @@ public class Activity extends SocialBase {
 			info("Upload file " + Utils.getAbsoluteFilePath("TestData/" +uploadFileName));
 			switchToParentWindow();
 			waitForAndGetElement(By.linkText(uploadFileName));
+			Utils.pause(1000);
 			click(By.linkText(uploadFileName));
-			Utils.pause(500);
+			waitForAndGetElement(ecms.ELEMENT_BREADCUMBSCONTAINER.replace("${fileName}", uploadFileName));
 		}
 		else 
 		{
 			if(selectFileName!=""){
 				click(By.linkText(selectFileName));
+				waitForAndGetElement(ecms.ELEMENT_BREADCUMBSCONTAINER.replace("${fileName}", selectFileName));
 				Utils.pause(500);
 			}
 		}
@@ -258,6 +263,7 @@ public class Activity extends SocialBase {
 					assert waitForAndGetElement(ELEMENT_FILE_INPUT_DOC).getText().contains(selectFileName);
 				}
 			}
+			waitForElementNotPresent(ELEMENT_SELECT_BUTTON);
 			click(ELEMENT_SHARE_BUTTON);
 			if(upload)
 				waitForAndGetElement(By.linkText(uploadFileName));
@@ -281,7 +287,7 @@ public class Activity extends SocialBase {
 		if (addText) 
 		{
 			info("----Add text into activity text box-----");
-			WebElement inputText = waitForAndGetElement(hpActivity.ELEMENT_ACTIVITY_TEXTBOX);
+			WebElement inputText = waitForAndGetElement(hpActivity.ELEMENT_ACTIVITY_TEXTBOX,100000);
 			WebElement shareButton = waitForAndGetElement(ELEMENT_SHARE_BUTTON);
 			WebElement workingLabel = waitForAndGetElement(ELEMENT_ACTIVITY_WHAT_ARE_YOU_WORKING_LABEL);
 			((JavascriptExecutor)driver).executeScript("arguments[0].textContent = '';", workingLabel);

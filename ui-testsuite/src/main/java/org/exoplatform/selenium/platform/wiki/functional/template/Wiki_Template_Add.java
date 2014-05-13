@@ -78,7 +78,7 @@ public class Wiki_Template_Add extends Template{
 	 * - Delete template
 	 */
 	@Test
-	public void test08_createNewTemplateWithBoldEffect(){
+	public void test02_createNewTemplateWithBoldEffect(){
 		String DATA_TEMPLATE_TITLE="New_Template_08";
 		String DATA_TEMPLATE_DESC="This is New Template 08";
 		String DATA_TEMPLATE_CONTENT="Content_In_Bold";
@@ -118,7 +118,7 @@ public class Wiki_Template_Add extends Template{
 	 * - Delete template
 	 */
 	@Test
-	public void test09_createNewTemplateWithItalicEffect(){
+	public void test03_createNewTemplateWithItalicEffect(){
 
 		String DATA_TEMPLATE_TITLE="New_Template_09";
 		String DATA_TEMPLATE_DESC="This is New Template 09";
@@ -158,7 +158,7 @@ public class Wiki_Template_Add extends Template{
 	 * - Delete template
 	 */
 	@Test
-	public void test10_createNewTemplateWithStrikeEffect(){
+	public void test04_createNewTemplateWithStrikeEffect(){
 
 		String DATA_TEMPLATE_TITLE="New_Template_10";
 		String DATA_TEMPLATE_DESC="This is New Template 10";
@@ -198,7 +198,7 @@ public class Wiki_Template_Add extends Template{
 	 * - Delete template
 	 */
 	@Test
-	public void test11_createNewTemplateWithUnderlineEffect(){
+	public void test05_createNewTemplateWithUnderlineEffect(){
 
 		String DATA_TEMPLATE_TITLE="New_Template_11";
 		String DATA_TEMPLATE_DESC="This is New Template 11";
@@ -238,7 +238,7 @@ public class Wiki_Template_Add extends Template{
 	 * - Delete template
 	 */
 	@Test
-	public void test12_createNewTemplateWithHeadingEffect(){
+	public void test06_createNewTemplateWithHeadingEffect(){
 
 		String DATA_TEMPLATE_TITLE="New_Template_12";
 		String DATA_TEMPLATE_DESC="This is New Template 12";
@@ -278,7 +278,7 @@ public class Wiki_Template_Add extends Template{
 	 * - Delete template
 	 */
 	@Test
-	public void test15_createNewTemplateWithBulletListEffect(){
+	public void test07_createNewTemplateWithBulletListEffect(){
 
 		String DATA_TEMPLATE_TITLE="New_Template_15";
 		String DATA_TEMPLATE_DESC="Bullet_effect_template";
@@ -319,7 +319,7 @@ public class Wiki_Template_Add extends Template{
 	 * - Delete template
 	 */
 	@Test
-	public void test16_createNewTemplateWithNumberListEffect(){
+	public void test08_createNewTemplateWithNumberListEffect(){
 
 		String DATA_TEMPLATE_TITLE="New_Template_16";
 		String DATA_TEMPLATE_DESC="Number_effect_template";
@@ -360,7 +360,7 @@ public class Wiki_Template_Add extends Template{
 	 * - Delete template
 	 */
 	@Test
-	public void test17_createNewTemplateWithTableEffect(){
+	public void test09_createNewTemplateWithTableEffect(){
 
 		String DATA_TEMPLATE_TITLE="New_Template_17";
 		String DATA_TEMPLATE_DESC="Table_effect_template";
@@ -401,7 +401,7 @@ public class Wiki_Template_Add extends Template{
 	 * - Delete template
 	 */
 	@Test
-	public void test18_createNewTemplateWithLinkEffect(){
+	public void test10_createNewTemplateWithLinkEffect(){
 
 		String DATA_TEMPLATE_TITLE="New_Template_18";
 		String DATA_TEMPLATE_DESC="Link_effect_template";

@@ -212,9 +212,8 @@ public class PLF_HomepageGadgets_CalendarGadget_Tasks extends CalendarBase{
 		info("Test 5: Display a task in Late and not Completed status");
 		String calendar = "Calendar 69189";
 		String task1 = "Task 69189";
-
-		/*
-		- Connect to Intranet
+		
+		/*- Connect to Intranet
 		- In calendar application, add a task in previous day
 		 *Input Data: 
 		 *Expected Outcome: Task is added in the previous day with status "Need action"		*/
@@ -226,7 +225,7 @@ public class PLF_HomepageGadgets_CalendarGadget_Tasks extends CalendarBase{
 		 *Expected Outcome: Task is displayed in the gadget in Italic		*/
 		nav.goToHomePage();
 		waitForAndGetElement(ELEMENT_CALENDAR_GADGET_TODAY_LABEL);
-		waitForElementNotPresent(ELEMENT_CALENDAR_GADGET_TASK_NORMAL.replace("${task}",task1));
+		waitForElementNotPresent(ELEMENT_CALENDAR_GADGET_TASK_LATE_NORMAL.replace("${task}",task1));
 
 		/*From the calendar gadget, click on the left arrow in the header to display "YESTERDAY" day
 		 *Input Data: 
@@ -234,7 +233,7 @@ public class PLF_HomepageGadgets_CalendarGadget_Tasks extends CalendarBase{
 		click(ELEMENT_CALENDAR_GADGET_PREVIOUSDAY_ARROW);
 		waitForAndGetElement(ELEMENT_CALENDAR_GADGET_YESTERDAY_LABEL); 
 		waitForAndGetElement(ELEMENT_CALENDAR_GADGET_TASK_LABEL);
-		waitForAndGetElement(ELEMENT_CALENDAR_GADGET_TASK_NORMAL.replace("${task}",task1));
+		waitForAndGetElement(ELEMENT_CALENDAR_GADGET_TASK_LATE_NORMAL.replace("${task}",task1));
 
 		//Delete data test
 		info("Delete data test");
@@ -469,9 +468,10 @@ public class PLF_HomepageGadgets_CalendarGadget_Tasks extends CalendarBase{
 		 *Expected Outcome: 
 		- The Task is added in the top of the list		*/ 
 		nav.goToHomePage();
-		waitForAndGetElement(ELEMENT_CALENDAR_GADGET_TASK_LABEL);
+		waitForElementNotPresent(ELEMENT_CALENDAR_GADGET_TASK_LABEL);
 		click(ELEMENT_CALENDAR_GADGET_PREVIOUSDAY_ARROW);
 		waitForAndGetElement(ELEMENT_CALENDAR_GADGET_YESTERDAY_LABEL); 
+		waitForAndGetElement(ELEMENT_CALENDAR_GADGET_TASK_LABEL);
 		waitForAndGetElement(ELEMENT_CALENDAR_GADGET_TASK_INDEX.replace("${index}","1").replace("${task}",task1));
 
 		//Delete data test

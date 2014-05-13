@@ -132,7 +132,7 @@ public class PLF_HomepageGadgets_GettingStartedGadget extends Activity{
 		navToolBar.goToHomePage();
 		waitForAndGetElement(homeGad.ELEMENT_UPLOAD_A_DOCUMENT);
 		click(homeGad.ELEMENT_UPLOAD_A_DOCUMENT);
-		driver.navigate().refresh();
+//		driver.navigate().refresh();
 		waitForAndGetElement(ecms.ELEMENT_UPLOAD_FILE_LINK);
 		
 		info("79582: Display Home page from Getting started gadget");
@@ -168,7 +168,7 @@ public class PLF_HomepageGadgets_GettingStartedGadget extends Activity{
 		
 		String driverName = "Personal Drives";
 		String folderPath = "Personal Documents";
-		String uploadFileName = "PLF_Upload_pdffile.pdf";
+		String uploadFileName = "upload78611.pdf";
 		String spaceName = "space79586";
 		String activity1 = "activity 79587";
 		String file = "ECMS_DMS_SE_Upload_imgfile.jpg";
@@ -200,10 +200,10 @@ public class PLF_HomepageGadgets_GettingStartedGadget extends Activity{
 		info("79585: Connect to co-workers");
 		click(homeGad.ELEMENT_CONNECT_TO_COWORKERS);
 		click(peoConn.ELEMENT_EVERYONE_TAB);
-		peoConn.connectPeople(DATA_USER1); 
+		peoConn.connectPeople("John Smith"); 
 		acc.signOut();
 		acc.signIn(DATA_USER1, DATA_PASS); 
-		peoConn.acceptInvitation(DATA_USER2);
+		peoConn.acceptInvitation("Mary Williams");
 		acc.signOut();
 		acc.signIn(DATA_USER2, DATA_PASS); 
 		
@@ -276,6 +276,7 @@ public class PLF_HomepageGadgets_GettingStartedGadget extends Activity{
 		waitForAndGetElement(homeGad.ELEMENT_FINISH_UPLOAD_FILE.replace("${status}", ""));
 		
 		info("Restore data");
+		navToolBar.goToSiteExplorer();
 		cMenu.deleteData(By.linkText(file1));
 		cMenu.deleteData(By.linkText(file2));
 		acc.signOut();		

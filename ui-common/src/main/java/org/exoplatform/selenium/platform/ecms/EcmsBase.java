@@ -576,11 +576,11 @@ public class EcmsBase extends ManageAccount {
 		}
 		//click(By.xpath("//a[@class='actionIcon' and contains(text(),'Upload')]"));
 		
-		((JavascriptExecutor)driver).executeScript("arguments[0].style.visibility = 'visible'; arguments[0].style.height = '1px'; " +
+		((JavascriptExecutor)driver).executeScript("arguments[0].style.visibility = 'block'; arguments[0].style.height = '1px'; " +
 				"arguments[0].style.width = '1px'; arguments[0].style.opacity = 1", waitForAndGetElement(ELEMENT_UPLOAD_LINK, DEFAULT_TIMEOUT, 1, 2));
 		
 		Utils.pause(10000);
-		type(ELEMENT_UPLOAD_LINK, Utils.getAbsoluteFilePath(link), false);
+		type(ELEMENT_UPLOAD_LINK, Utils.getAbsoluteFilePath(link), false,2);
 		//Utils.pause(2000);
 		info("Upload file " + Utils.getAbsoluteFilePath(link));
 		switchToParentWindow();

@@ -77,7 +77,7 @@ public class PLF_HomePageActivityStream_Activity_General extends Activity{
 		- The activity is displayed in the activity stream:
 		- The activity is made out of different parts:+ The author+ The author's avatar+ The space (if activity is created in a space)+ The type (optional)+The activity message+ The featured content (optional)+The Action bar (Comment and Like links + custom actions)+ The like section (optional)+ The comment section (optional)		*/ 
 		String text = "Activity 78606";
-		String spaceName = "Space 78606";
+		String spaceName = "Space78606";
 		//Create space 
 		mMember.goToMySpacePage();
 		mMember.addNewSpace(spaceName,"");
@@ -146,7 +146,7 @@ public class PLF_HomePageActivityStream_Activity_General extends Activity{
 	public  void test03_DeleteASpaceActivityFromActivityStreamBySpacesAdministrator() {
 		info("Test 3: Delete a space activity from activity stream by space's administrator");
 		String text = "Activity 78608";
-		String spaceName = "Space 78608";
+		String spaceName = "Space78608";
 		// Pre-Condition
 		mMember.goToMySpacePage();
 		mMember.addNewSpace(spaceName,"");
@@ -189,7 +189,7 @@ public class PLF_HomePageActivityStream_Activity_General extends Activity{
 	public  void test04_NotDisplayXIconOfSpaceActivityForMember() {
 		info("Test 4: Not display (X) icon of space activity for member");
 		String text = "Activity 78609";
-		String spaceName = "Space 78609";
+		String spaceName = "Space78609";
 		/*
 		- Connect to Intranet with User A
 		- Open the Space X
@@ -280,7 +280,7 @@ public class PLF_HomePageActivityStream_Activity_General extends Activity{
 		info("Test 6: Display type icon of activity in the timeline");
 		String driverName = "Personal Drives";
 		String folderPath = "Personal Documents";
-		String uploadFileName = "ECMS_DMS_SE_Upload_pdffile.pdf";
+		String uploadFileName = "upload78611.pdf";
 		String folder = "Folder78611";
 		String contentType = ".pdf";
 		/*
@@ -341,7 +341,7 @@ public class PLF_HomePageActivityStream_Activity_General extends Activity{
 	public  void test08_DisplayNameOfSpaceInSpacesActivity() {
 		info("Test 8: Display name of space in space's activity");
 		String text = "Activity 78613";
-		String spaceName = "Space 78613";
+		String spaceName = "Space78613";
 		/*
 		- Connect to Intranet
 		- Open a Space
@@ -377,7 +377,7 @@ public class PLF_HomePageActivityStream_Activity_General extends Activity{
 	@Test
 	public  void test09_OpenSpaceFromTheSpacesActivity() {
 		info("Test 9: Open space from the space's activity");
-		String spaceName = "Space 78614";
+		String spaceName = "Space78614";
 		String text = "Activity 78614";
 		/*
 		- Connect to Intranet

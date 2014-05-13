@@ -182,13 +182,16 @@ public class PLF_HomePageActivityStream_ActivityComposer_File extends Activity {
 		//-  Only the folder of the path's root level, plus sub-folder 2, sub-folder 3. the folder 1 is not shown
 		selectFile(driverName,false,folderPath,"","",folder1,false);
 		button.closeWindow();
+		waitForElementNotPresent(ELEMENT_SELECT_FILE_POPUP);
 		selectFile(driverName,false,folderPath+"/"+folder1,"","",folder2,false);
 		button.closeWindow();
+		waitForElementNotPresent(ELEMENT_SELECT_FILE_POPUP);
 		selectFile(driverName,false,folderPath+"/"+folder1+"/"+folder2,"","",folder3,false);
 		button.closeWindow();
+		waitForElementNotPresent(ELEMENT_SELECT_FILE_POPUP);
 		goToFolderPath(driverName,folderPath+"/"+folder1+"/"+folder2+"/"+folder3,true);
 		button.cancel();
-
+		waitForElementNotPresent(ELEMENT_SELECT_FILE_POPUP);
 		//Clear data
 		navToolBar.goToSiteExplorer();
 		actBar.chooseDrive(ecms.ELEMENT_PERSONAL_DRIVE);
@@ -282,8 +285,9 @@ public class PLF_HomePageActivityStream_ActivityComposer_File extends Activity {
 		button.cancel();
 
 		//Clear data
-		navToolBar.goToSiteExplorer();
-		actBar.chooseDrive(ecms.ELEMENT_PERSONAL_DRIVE);
+		navToolBar.goToPersonalDocuments();
+		/*navToolBar.goToSiteExplorer();
+		actBar.chooseDrive(ecms.ELEMENT_PERSONAL_DRIVE);*/
 		actBar.actionsOnElement(folder1, actionType.DELETE,true,true);
 	}
 
@@ -294,10 +298,10 @@ public class PLF_HomePageActivityStream_ActivityComposer_File extends Activity {
 	 * Step 2: Select a file by double-clicking
 	 * ERROR: Refer https://jira.exoplatform.org/browse/COMMONS-278
 	 */
-	//@Test (groups="error")
+//	@Test (groups="error")
 	public void test08_OpenSelectFilePopup(){
 		/*Declare variables*/
-		String uploadFileName = "ECMS_DMS_SE_Upload_pdffile.pdf";
+		String uploadFileName = "upload77802.pdf";
 		String folder = "folder77783";
 		String driverName = "Personal Drives";
 		String folderPath = "Personal Documents";
@@ -311,7 +315,7 @@ public class PLF_HomePageActivityStream_ActivityComposer_File extends Activity {
 		//- Click on a folder, do this until there is a file in the current folder
 		//- Double click on that file
 		selectFile(driverName,true,folderPath,"",uploadFileName,folder);
-		goToFolderPath(driverName,folderPath);
+		goToFolderPath(driverName,folderPath + "/" + folder );
 		doubleClickOnElement(By.linkText(uploadFileName));
 
 		//The file is selected and the pop up is closed
@@ -327,11 +331,12 @@ public class PLF_HomePageActivityStream_ActivityComposer_File extends Activity {
 	 * Test case ID: 77802
 	 * Step 1: Open [Select File] popup
 	 * Step 2: Select a file by double-clicking
+	 * Bug: https://jira.exoplatform.org/browse/COMMONS-278
 	 */
-	@Test
+	@Test(groups="error")
 	public void test09_SelectAFileByASimpleClick(){
 		/*Declare variables*/
-		String uploadFileName = "ECMS_DMS_SE_Upload_pdffile.pdf";
+		String uploadFileName = "upload77802.pdf";
 		String folder = "folder77802";
 		String driverName = "Personal Drives";
 		String folderPath = "Personal Documents";
@@ -344,10 +349,10 @@ public class PLF_HomePageActivityStream_ActivityComposer_File extends Activity {
 		//- Select a drive from [Select Drive] list
 		//- Click on a folder, do this until there is a file in the current folder
 		selectFile(driverName,true,folderPath,"",uploadFileName,folder);
-		goToFolderPath(driverName,folderPath);
+		goToFolderPath(driverName,folderPath + "/" + folder);
 
 		//- Click on that file
-		click(By.linkText(uploadFileName));
+		click("//div[@id='UIDocActivitySelector']//a[@data-original-title='"+uploadFileName+"']");
 
 		//The name of the file is shown in the breadcrumb
 		waitForAndGetElement(ecms.ELEMENT_BREADCUMBSCONTAINER.replace("${fileName}", uploadFileName));
@@ -365,11 +370,12 @@ public class PLF_HomePageActivityStream_ActivityComposer_File extends Activity {
 	 * == Share an attached file ==
 	 * Test case ID: 77811
 	 * Step 1: Share an attached file
+	 * Bug: https://jira.exoplatform.org/browse/COMMONS-278
 	 */
-	@Test
+	@Test(groups="error")
 	public void test10_ShareAnAttachedFile(){
 		/*Declare variables*/
-		String uploadFileName = "ECMS_DMS_SE_Upload_pdffile.pdf";
+		String uploadFileName = "upload77802.pdf";
 		String folder = "folder77811";
 		String driverName = "Personal Drives";
 		String folderPath = "Personal Documents";
@@ -383,16 +389,18 @@ public class PLF_HomePageActivityStream_ActivityComposer_File extends Activity {
 		//- From the [Activity Composer] box, click on [File] button
 		//- Select a drive from [Select drive] list
 		//- Click a folder, do this until there is a file in the current folder
-		goToFolderPath(driverName,folderPath);
+		goToFolderPath(driverName,folderPath + "/" + folder);
 
 		//- Double click this file
 		click(By.linkText(uploadFileName));
+		waitForAndGetElement(ecms.ELEMENT_BREADCUMBSCONTAINER.replace("${fileName}", uploadFileName));
 		Utils.pause(500);
 
 		//- Click on the button [Share]
 		//- The file is added to activity stream
 		//- The text "What are working on?" is shown with lighter color
 		click(ELEMENT_SELECT_BUTTON);
+		waitForElementNotPresent(ELEMENT_SELECT_BUTTON);
 		click(ELEMENT_SHARE_BUTTON);
 		waitForAndGetElement(By.linkText(uploadFileName));
 
@@ -411,12 +419,13 @@ public class PLF_HomePageActivityStream_ActivityComposer_File extends Activity {
 	 * Step 2: Open window for browse file
 	 * Step 3: Select a file
 	 * Step 4: Share an uploaded file
+	 * Bug: https://jira.exoplatform.org/browse/COMMONS-278
 	 */
-	@Test
+	@Test(groups="error")
 	public void test11_ShareAnUploadedFile(){
 		/*Declare variables*/
-		String uploadFileName = "ECMS_DMS_SE_Upload_pdffile.pdf";
-		String folder = "folder77811";
+		String uploadFileName = "upload77811.pdf";
+		String folder = "folder77812";
 		String driverName = "Personal Drives";
 		String folderPath = "Personal Documents";
 		/* Step 1: Open [Select file] popup */
@@ -456,8 +465,8 @@ public class PLF_HomePageActivityStream_ActivityComposer_File extends Activity {
 	@Test
 	public void test12_ShowTheVerticalScrollBarForListOfFiles(){
 		/*Declare variables*/
-		String uploadFileName1 = "ECMS_DMS_SE_Upload_pdffile.pdf";
-		String uploadFileName2 = "ECMS_DMS_SE_File.jpg";
+		String uploadFileName1 = "upload77811.pdf";
+		String uploadFileName2 = "upload78611.jpg";
 		String folder1 = "778151";
 		String folder2 = "778152";
 		String driverName = "Personal Drives";

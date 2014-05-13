@@ -246,18 +246,20 @@ public class Event extends CalendarBase{
 					String[] dateTime = from.split(" ");
 					if(dateTime.length > 0)
 						type(ELEMENT_INPUT_EVENT_FROM, dateTime[0], true);
-					if(dateTime.length > 1)
+					if(dateTime.length > 1){
 						click(ELEMENT_INPUT_EVENT_FROM_TIME_IN, 2);
-						click(ELEMENT_EVENT_SELECT_FROM_TIME.replace("${time}", dateTime[0]));
+						click(ELEMENT_EVENT_SELECT_FROM_TIME.replace("${time}", dateTime[1]));
+					}
 						Utils.pause(1000);
 				}
 				if((to != null) & (to != "")){
 					String[] dateTime = to.split(" ");
 					if(dateTime.length > 0)
 						type(ELEMENT_INPUT_EVENT_TO, dateTime[0], true);
-					if(dateTime.length > 1)
+					if(dateTime.length > 1){
 						click(ELEMENT_INPUT_EVENT_TO_TIME_IN, 2);
-						click(ELEMENT_EVENT_SELECT_TO_TIME.replace("${time}", dateTime[0]));
+						click(ELEMENT_EVENT_SELECT_TO_TIME.replace("${time}", dateTime[1]));
+					}
 						Utils.pause(1000);
 //						type(ELEMENT_INPUT_EVENT_TO_TIME_SELECTBOX, dateTime[1], true);
 				}
@@ -275,9 +277,10 @@ public class Event extends CalendarBase{
 					String[] dateTime = from.split(" ");
 					if(dateTime.length > 0)
 						type(ELEMENT_ADD_EDIT_EVENT_FROM, dateTime[0], true);
-					if(dateTime.length > 1)
+					if(dateTime.length > 1){
 						click(ELEMENT_ADD_EDIT_EVENT_FROM_TIME_IN, 2);
 						click(ELEMENT_ADD_EDIT_EVENT_SELECT_FROM_TIME.replace("${time}", dateTime[1]));
+					}
 						Utils.pause(1000);
 //						type(ELEMENT_ADD_EDIT_EVENT_FROM_TIME, dateTime[1], true);
 				}
@@ -285,10 +288,11 @@ public class Event extends CalendarBase{
 					String[] dateTime = to.split(" ");
 					if(dateTime.length > 0)
 						type(ELEMENT_ADD_EDIT_EVENT_TO, dateTime[0], true);
-					if(dateTime.length > 1)
+					if(dateTime.length > 1){
 //						type(ELEMENT_ADD_EDIT_EVENT_TO_TIME, dateTime[1], true);
 						click(ELEMENT_ADD_EDIT_EVENT_TO_TIME_IN, 2);
 						click(ELEMENT_ADD_EDIT_EVENT_SELECT_TO_TIME.replace("${time}", dateTime[1]));
+					}
 						Utils.pause(1000);
 				}
 			}

@@ -198,10 +198,10 @@ public class PLF_HomepageGadgets_CalendarGadget_Settings extends CalendarBase{
 		// Add calendars to Displayed Calendars
 		mouseOver(By.xpath(Calendar2_In_Additional_List), true);
 		Utils.pause(10000);
-		if(isElementPresent(ELEMENT_ADD_CALENDAR_IN_ADDITION_LIST))
-			click(ELEMENT_ADD_CALENDAR_IN_ADDITION_LIST);
+		if(isElementPresent(ELEMENT_ADD_CALENDAR_IN_ADDITION_LIST.replace("${calendar}", Calendar2)))
+			click(ELEMENT_ADD_CALENDAR_IN_ADDITION_LIST.replace("${calendar}", Calendar2));
 		else
-			click(ELEMENT_ADD_CALENDAR_IN_ADDITION_LIST_PLF_41);	
+			click(ELEMENT_ADD_CALENDAR_IN_ADDITION_LIST_PLF_41.replace("${calendar}", Calendar2));	
 		
 		// Save CAL Gadget Setting
 		button.ok();

@@ -1,7 +1,5 @@
 package org.exoplatform.selenium.platform.plf.functional.homepageactivitystream.activitycomposer;
 
-
-
 import static org.exoplatform.selenium.TestLogger.info;
 
 import org.exoplatform.selenium.Button;
@@ -15,10 +13,8 @@ import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.*;
 
-
-
 /**
- * @author chinhdt
+ * @author chinhdtt
  *
  */
 public class PLF_HomepageActivityStream_ActivityComposer_General extends Activity{
@@ -80,8 +76,6 @@ public class PLF_HomepageActivityStream_ActivityComposer_General extends Activit
 		info("-- Verify Share button --");
  	}
 
-
-
 	/**
 	* Case ID:77797.
 	* Test Case Name: Remove the default value "What are you working on?".
@@ -94,7 +88,7 @@ public class PLF_HomepageActivityStream_ActivityComposer_General extends Activit
 		/*Declare variables*/ 
 		String text = "Test case2"; 
 		String workingLabelText = "What are you working on?";
-		String lighterColor = "rgba(153, 153, 153, 1)";
+		String lighterColor = "rgba(51, 51, 51, 1)";
 
 		/* Step 1: Connect to Intranet */
 		//- Connect to Intranet
@@ -111,17 +105,12 @@ public class PLF_HomepageActivityStream_ActivityComposer_General extends Activit
 		//((JavascriptExecutor)driver).executeScript("arguments[0].textContent = '';", workingLabel);
 		//((JavascriptExecutor)driver).executeScript("arguments[0].textContent = '"+text+"';", inputText);
 		
-		
 		type(ELEMENT_ACTIVITY_WHAT_ARE_YOU_WORKING_LABEL, " ", false);
 		type(home.ELEMENT_ACTIVITY_TEXTBOX, text, false);
+		waitForElementNotPresent(ELEMENT_ACTIVITY_WHAT_ARE_YOU_WORKING_LABEL);
+		Utils.pause(2000);
 		
-		Utils.pause(1000);
-		Assert.assertEquals(workingLabel.isDisplayed(), false);
-		
-		info("Check string");
  	}
-
-
 
 	/**
 	* Case ID:78038.
@@ -133,24 +122,20 @@ public class PLF_HomepageActivityStream_ActivityComposer_General extends Activit
 		info("Test 3: URL is able to be detected"); 
 
 		/*Declare variables*/ 
-		String text2 = "http://www.yahoo.com a";
+		String text2 = "http://www.apple.com";
 
 		/* Step: Detect url */
 		//- - Connect to Intranet
 		//- Enter an URL in the Shared activity box
 		info("----Add link into activity text box-----");
-		type(ELEMENT_ACTIVITY_WHAT_ARE_YOU_WORKING_LABEL," ",false);
 		type(home.ELEMENT_ACTIVITY_TEXTBOX,text2,false);
+		type(home.ELEMENT_ACTIVITY_TEXTBOX," a",false);
 		
-		waitForTextPresent("Loading...");
-		waitForTextNotPresent("Loading", 100000);
-		waitForAndGetElement(ELEMENT_SHARE_DISPLAY);
+		waitForTextPresent("Loading...",60000);
+		waitForTextNotPresent("Loading", 150000);
+		waitForAndGetElement(ELEMENT_SHARE_DISPLAY,80000);
 		waitForAndGetElement(ELEMENT_URL_SHARE); 
 		waitForAndGetElement(ELEMENT_PICTURE_SHARE); 
-		waitForAndGetElement(ELEMENT_TITLE_SHARE); 	
-		
+		waitForAndGetElement(ELEMENT_TITLE_SHARE.replace("${title}","Apple")); 	
  	}
-
-
-
 }

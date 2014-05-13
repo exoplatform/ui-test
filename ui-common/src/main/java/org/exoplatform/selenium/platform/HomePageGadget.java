@@ -17,7 +17,7 @@ public class HomePageGadget extends PlatformBase{
 
 	//-------Invitation Gadget --------
 	public By ELEMENT_INVITATION_GADGET = By.id("InvitationsPortlet");
-	public String ELEMENT_SHOW_CONNECTIONS_REQUEST_USER = "//div[@id='InvitationsPortlet']//div[@class='peopleInviteName']//div[text()='${nameinvitation}']";
+	public String ELEMENT_SHOW_CONNECTIONS_REQUEST_USER = "//div[@id='InvitationsPortlet']//div[@class='peopleInviteName']//a[text()='${nameinvitation}']";
 	public String ELEMENT_INVITATION_GADGET_USER_41 = "//div[@id='InvitationsPortlet']//div[@class='peopleInviteName']//a[contains(text(),'${nameinvitation}')]";
 	public String ELEMENT_SHOW_CONNECTIONS_REQUEST_USER_PLF41="//div[@id='InvitationsPortlet']//div[@class='peopleInvitePicture pull-left avatarXSmall']//a[@href='/portal/intranet/profile/james']";
 	public String ELEMENT_SHOW_CONNECTIONS_REQUEST_SPACE= "//div[@id='InvitationsPortlet']//div[@class='spaceInviteInfo']//div[text()='${namespace}']";
@@ -30,7 +30,7 @@ public class HomePageGadget extends PlatformBase{
 	public By ELEMENT_PROFILE_PICTURE_GADGET = By.xpath("//div[@class='peopleInvitePicture pull-left avatarXSmall']");
 	public String ELEMENT_SPACE_ACCEPT_BUTTON = "//div[@id='InvitationsPortlet']//div[@class='spaceInviteInfo']//div[text()='${namespace}']/..//a[text()='Accept']";
 	public String ELEMENT_SPACE_REMOVE_BUTTON = "//div[@id='InvitationsPortlet']//div[@class='spaceInviteInfo']//div[text()='${namespace}']/..//i[@class='uiIconClose']";
-	public String ELEMENT_CONNECTIONS_REQUEST_USER_INDEX = "//ul[@id='requests']//li['${index}']/../../..//div[@class='peopleInviteName']//div[text()='${nameinvitation}']";
+	public String ELEMENT_CONNECTIONS_REQUEST_USER_INDEX = "//ul[@id='requests']//li['${index}']/../../..//div[@class='peopleInviteName']//a[text()='${nameinvitation}']";
 	public String ELEMENT_CONNECTIONS_REQUEST_SPACE_INDEX = "//ul[@id='requests']//li['${index}']/../../..//div[@class='spaceInviteInfo']//div[text()='${namespace}']";
 	public By ELEMENT_ICON_SPACE_GADGET = By.xpath("//div[@class='spaceInvitePicture pull-left avatarXSmall']");
 
@@ -73,11 +73,17 @@ public class HomePageGadget extends PlatformBase{
 	public String ELEMENT_ONLINE_USER_STATUS_TRUNCATED = "//*[@id='tiptip_content']/blockquote/span[@class='truncate_ellipsis']";
 	public String ELEMENT_WHOISONLINE_CONNECT_BUTTON_INVITE = "//*[@id='tiptip_content']//div[@data-action='Invite:${acc}']";
 	public String ELEMENT_WHOISONLINE_CONNECT_BUTTON_ACCEPT = "//*[@id='tiptip_content']//div[@data-action='Accept:${acc}']";
+	//------------------User popup - Who is online gadget------------------------------------
+	public final By ELEMENT_USER_POPUP_NAME = By.xpath("//*[@id='tipName']//td[2]/a");
+	public final By ELEMENT_USER_POPUP_POSITION = By.xpath("//*[@id='tipName']//td[2]/div");
+	public final By ELEMENT_USER_POPUP_AVATAR = By.xpath("//*[@id='tipName']//img[contains(@src, 'UserAvtDefault.png')]");
+	public final By ELEMENT_USER_POPUP_LAST_ACTIVITY = By.xpath("//*[@id='tiptip_content']/blockquote");
+	public final String ELEMENT_USER_POPUP_STATUS_CONNECT = "//*[@id='tiptip_content']//*[@class='uiAction connectAction']/*[text()='${status}']";
 	//My Profile tab
 	public String ELEMENT_PROFILE_TAB_USER_INFO = "//*[@id='UIUserNavigationPortlet']/ul[@class='nav nav-tabs userNavigation']//a[@href='/portal/intranet/profile/${acc}']";
 	//My activity stream tab
 	public String ELEMENT_MY_AS_TAB = "//*[@id='UIUserNavigationPortlet']//a[@href='/portal/intranet/activities/${acc}']";
-	
+
 	//-------------------Bookmarks gadget-----------------------------------
 	public final By ELEMENT_APPLICATION_BOOKMARKS = By.id("Gadgets/Bookmark");
 	public By ELEMENT_BOOKMARKS_GADGET_CONTENT_LIST = By.id("BookmarkList");
@@ -85,18 +91,18 @@ public class HomePageGadget extends PlatformBase{
 	public static By ELEMENT_BOOKMARKS_GADGET_ADDNAME = By.xpath("//*[@class='editName' and @placeholder='Bookmarks']");
 	public static By ELEMENT_BOOKMARKS_GADGET_ADDURL = By.xpath("//*[@class='editLink' and @placeholder='URL']");
 	public String ELEMENT_BOOKMARKS_GADGET_DELETE_ICON = "//*[text()='${bookmarkName}']/..//*[@ data-original-title='Delete']/i";
-	
+
 	/*Feature Poll porlet*/
 	public final By ELEMENT_APPLICATION_POLL = By.id("Gadgets/FeaturedPoll"); 
-	public final By ELEMENT_SETTING_POLL_GADGET = By.xpath("//*[contains(text(),'Featured Poll')]//*[@class='uiIconSetting']");
+	public final By ELEMENT_SETTING_POLL_GADGET = By.xpath("//*[contains(text(),'Featured Poll')]//*[contains(@class,'uiIconSetting')]");
 	public final By ELEMENT_SELECT_BOX_FEATURED_POLL = By.xpath("//*[@class='selectbox']");
 	public final String ELEMENT_SELECT_BOX_FEATURED_ITEM = "//option[text()='${pollName}']";
 	public final String ELEMENT_POLL_NAME_ITEM = "//*[@title='${pollOption}' or @data-original-title='${pollOption}']";
-	
+
 	/*My profile gadget*/
 	public final By ELEMENT_APPLICATION_MY_PROFILE = By.id("Gadgets/Profile");
 	public final By ELEMENT_PROFILE_PICTURE_IN_MY_PROFILE_GADGET = By.xpath("//*[@class='GadCont ProfilePicture']");
-	public final By ELEMENT_PROFILE_INFO_IN_MY_PROFILE_GADGET = By.xpath("//*[@class='GadCont ProfileInfo']");
+	public final By ELEMENT_PROFILE_INFO_IN_MY_PROFILE_GADGET = By.xpath("//*[contains(@class,'GadCont ProfileInfo')]");
 
 	/*Tools application*/
 	public final By ELEMENT_APPLICATION_FAVORITEDOCUMENT = By.id("Tools/FavoriteDocument");
@@ -184,7 +190,7 @@ public class HomePageGadget extends PlatformBase{
 	 */
 	public void connectSpaceSuggestionsGadget(String spaceName) {
 		info("-- Connect Suggestions user --"); 
-//		mouseOver(ELEMENT_VERIFY_SPACE_SUGGESTIONS.replace("${spaceName}", spaceName),true);
+		//		mouseOver(ELEMENT_VERIFY_SPACE_SUGGESTIONS.replace("${spaceName}", spaceName),true);
 		WebElement element = waitForAndGetElement(ELEMENT_REQUEST_SPACE_SUGGESTIONS.replace("${spaceName}", spaceName), DEFAULT_TIMEOUT,1,2);
 		((JavascriptExecutor)driver).executeScript("arguments[0].click();", element);
 		waitForElementNotPresent(ELEMENT_REQUEST_SPACE_SUGGESTIONS.replace("${spaceName}", spaceName));
@@ -255,76 +261,163 @@ public class HomePageGadget extends PlatformBase{
 		waitForAndGetElement(ELEMENT_ONLINE_USER_TITLE.replace("${acc}",userName), DEFAULT_TIMEOUT,1,2);
 	}	
 
-	/**
-	 * Accept a space invitation 
-	 * @author chinhdtt
-	 * @date 07 Feb 2014
-	 * @param spaceName
-	 */
-	public void acceptSpaceInvitationGadget(String spaceName) {
-		info("-- Accept a space invitation --");
-		mouseOver(ELEMENT_SHOW_CONNECTIONS_REQUEST_SPACE.replace("${namespace}", spaceName), true);
-		waitForAndGetElement(ELEMENT_SPACE_ACCEPT_BUTTON.replace("${namespace}", spaceName));
-		waitForAndGetElement(ELEMENT_SPACE_REMOVE_BUTTON.replace("${namespace}", spaceName));
-		Utils.pause(1000);
-		click(ELEMENT_SPACE_ACCEPT_BUTTON.replace("${namespace}", spaceName));
-		waitForElementNotPresent(ELEMENT_SHOW_CONNECTIONS_REQUEST_SPACE.replace("${namespace}", spaceName));		
-	} 
+	public void checkUserInfoOnWhoisOnlineGadget(String userName, String fullName, String position, boolean avatar, String activity, int status){
 
-	/**
-	 * Remove a space invitation 
-	 * @author chinhdtt
-	 * @date 07 Feb 2014
-	 * @param spaceName
-	 */
-	public void removeSpaceInvitationGadget(String spaceName) {
-		info("-- Remove a space invitation --");
-		mouseOver(ELEMENT_SHOW_CONNECTIONS_REQUEST_SPACE.replace("${namespace}", spaceName), true);
-		waitForAndGetElement(ELEMENT_SPACE_ACCEPT_BUTTON.replace("${namespace}", spaceName));
-		waitForAndGetElement(ELEMENT_SPACE_REMOVE_BUTTON.replace("${namespace}", spaceName));
-		Utils.pause(1000);
-		click(ELEMENT_SPACE_REMOVE_BUTTON.replace("${namespace}", spaceName));
-		waitForElementNotPresent(ELEMENT_SHOW_CONNECTIONS_REQUEST_SPACE.replace("${namespace}", spaceName));		
-	} 
+		waitForAndGetElement(ELEMENT_WHOISONLINE_GADGET);
+
+		mouseOver(ELEMENT_ONLINE_USER_AVATAR.replace("${acc}",userName),true);
+
+		info("Confirm user avatar");
+
+		waitForAndGetElement(ELEMENT_ONLINE_USER_ACC_IMG.replace("${acc}",userName), DEFAULT_TIMEOUT,1,2);
+
+		info("Confirm user name");
+
+		waitForAndGetElement(ELEMENT_ONLINE_USER_TITLE.replace("${acc}",userName), DEFAULT_TIMEOUT,1,2);
+
+		info("Confirm user avatar");
+
+		waitForAndGetElement(ELEMENT_ONLINE_USER_ACC_IMG.replace("${acc}",userName), DEFAULT_TIMEOUT,1,2);
+		info("Confirm user name");
+
+		waitForAndGetElement(ELEMENT_ONLINE_USER_TITLE.replace("${acc}",userName), DEFAULT_TIMEOUT,1,2);
+
+		checkUserInfoOnUserPopup(fullName, position, avatar, activity, status);
+	}
+
+		/**
+
+		 * @author lientm
+
+		 * @param fullName: name display of user
+
+		 * @param position: position of user, if not exits (=null)
+
+		 * @param avatar: check avatar of user is change, if it is not default (=true)
+
+		 * @param activity: last activity of user , if not exits (=null)
+
+		 * @param status = 0: not check
+
+		 * 				 = 1: button [Connect] displays
+
+		 * 				 = 2: button [Cancel Request] displays
+
+		 * 				 = 3: button [Confirm] displays
+
+		 * 				 = 4: button [Remove Connection] displays
+
+		 */
+
+		public void checkUserInfoOnUserPopup(String fullName, String position, boolean avatar, String activity, int status){
+
+			info("Check information of user" + fullName + " on user popup");
+			assert getText(ELEMENT_USER_POPUP_NAME).equalsIgnoreCase(fullName);
+			info("Name of user displays true");
+			if (position != null){
+				assert getText(ELEMENT_USER_POPUP_POSITION).equalsIgnoreCase(position);
+				info("Position of user displays true");
+			}
+			if (avatar){
+				waitForElementNotPresent(ELEMENT_USER_POPUP_AVATAR);
+				info("Avatar of user is not default avatar");
+			}
+			if (activity != null){
+				assert getText(ELEMENT_USER_POPUP_LAST_ACTIVITY).equalsIgnoreCase(activity);
+				info("Last activity of user displayes true");
+			}
+			switch (status) {
+			case 1:
+				waitForAndGetElement(ELEMENT_USER_POPUP_STATUS_CONNECT.replace("${status}", "Connect"));
+				info("Button [Connect] is displayed");
+				break;
+			case 2:
+				waitForAndGetElement(ELEMENT_USER_POPUP_STATUS_CONNECT.replace("${status}", "Cancel Request"));
+				info("Button [Cancel request] is displayed");
+				break;
+			case 3:
+				waitForAndGetElement(ELEMENT_USER_POPUP_STATUS_CONNECT.replace("${status}", "Confirm"));
+				info("Button [Confirm] is displayed");
+				break;
+			case 4:
+				waitForAndGetElement(ELEMENT_USER_POPUP_STATUS_CONNECT.replace("${status}", "Remove Connection"));
+				info("Button [Remove connection] is displayed");
+				break;
+			default:
+				break;
+			}
+		}
+
+		/**
+		 * Accept a space invitation 
+		 * @author chinhdtt
+		 * @date 07 Feb 2014
+		 * @param spaceName
+		 */
+		public void acceptSpaceInvitationGadget(String spaceName) {
+			info("-- Accept a space invitation --");
+			mouseOver(ELEMENT_SHOW_CONNECTIONS_REQUEST_SPACE.replace("${namespace}", spaceName), true);
+			waitForAndGetElement(ELEMENT_SPACE_ACCEPT_BUTTON.replace("${namespace}", spaceName));
+			waitForAndGetElement(ELEMENT_SPACE_REMOVE_BUTTON.replace("${namespace}", spaceName));
+			Utils.pause(1000);
+			click(ELEMENT_SPACE_ACCEPT_BUTTON.replace("${namespace}", spaceName));
+			waitForElementNotPresent(ELEMENT_SHOW_CONNECTIONS_REQUEST_SPACE.replace("${namespace}", spaceName));		
+		} 
+
+		/**
+		 * Remove a space invitation 
+		 * @author chinhdtt
+		 * @date 07 Feb 2014
+		 * @param spaceName
+		 */
+		public void removeSpaceInvitationGadget(String spaceName) {
+			info("-- Remove a space invitation --");
+			mouseOver(ELEMENT_SHOW_CONNECTIONS_REQUEST_SPACE.replace("${namespace}", spaceName), true);
+			waitForAndGetElement(ELEMENT_SPACE_ACCEPT_BUTTON.replace("${namespace}", spaceName));
+			waitForAndGetElement(ELEMENT_SPACE_REMOVE_BUTTON.replace("${namespace}", spaceName));
+			Utils.pause(1000);
+			click(ELEMENT_SPACE_REMOVE_BUTTON.replace("${namespace}", spaceName));
+			waitForElementNotPresent(ELEMENT_SHOW_CONNECTIONS_REQUEST_SPACE.replace("${namespace}", spaceName));		
+		} 
 
 
-	/**
-	 * Check status truncated of user on WhoIsOnline gadget
-	 * 
-	 * @param username
-	 * 				Name of user who is online on the gadget
-	 */
-	public void checkTruncatedStatusOnWhoIsOnlineGadget(String username) {
-		mouseOver(ELEMENT_ONLINE_USER_AVATAR.replace("${acc}",username),true);
-		waitForAndGetElement(ELEMENT_ONLINE_USER_STATUS_TRUNCATED);
+		/**
+		 * Check status truncated of user on WhoIsOnline gadget
+		 * 
+		 * @param username
+		 * 				Name of user who is online on the gadget
+		 */
+		public void checkTruncatedStatusOnWhoIsOnlineGadget(String username) {
+			mouseOver(ELEMENT_ONLINE_USER_AVATAR.replace("${acc}",username),true);
+			waitForAndGetElement(ELEMENT_ONLINE_USER_STATUS_TRUNCATED);
+		}
+
+		/**
+		 * and new bookmark list gadget
+		 * @param name
+		 * @param url
+		 * @opParams: isAdd (true: click button "Add", fale: click button "Cancel")
+		 */
+		public void addNewBookmarkListGadget(String name, String url, Object...opParams){
+			Boolean isAdd = (Boolean) (opParams.length > 0 ? opParams[0]: true);
+			click(ELEMENT_BOOKMARKS_GADGET_ADDBOOKMARK_ICON);
+			if(name!="")
+				type(ELEMENT_BOOKMARKS_GADGET_ADDNAME,name, true);
+			if(url!="")
+				type(ELEMENT_BOOKMARKS_GADGET_ADDURL,url, true);
+			if(isAdd)
+				button.add();
+			else
+				button.cancel();
+		}
+
+		/**
+		 * Delete bookmark item
+		 * @param bookmarName
+		 */
+		public void deleteBookmarkListGadget(String bookmarkName){
+			mouseOver(By.linkText(bookmarkName),true);
+			waitForAndGetElement(ELEMENT_BOOKMARKS_GADGET_DELETE_ICON.replace("${bookmarkName}", bookmarkName)).click();
+			waitForElementNotPresent(By.linkText(bookmarkName));
+		}
 	}
-	
-	/**
-	 * and new bookmark list gadget
-	 * @param name
-	 * @param url
-	 * @opParams: isAdd (true: click button "Add", fale: click button "Cancel")
-	 */
-	public void addNewBookmarkListGadget(String name, String url, Object...opParams){
-		Boolean isAdd = (Boolean) (opParams.length > 0 ? opParams[0]: true);
-		click(ELEMENT_BOOKMARKS_GADGET_ADDBOOKMARK_ICON);
-		if(name!="")
-			type(ELEMENT_BOOKMARKS_GADGET_ADDNAME,name, true);
-		if(url!="")
-			type(ELEMENT_BOOKMARKS_GADGET_ADDURL,url, true);
-		if(isAdd)
-			button.add();
-		else
-			button.cancel();
-	}
-	
-	/**
-	 * Delete bookmark item
-	 * @param bookmarName
-	 */
-	public void deleteBookmarkListGadget(String bookmarkName){
-		mouseOver(By.linkText(bookmarkName),true);
-		waitForAndGetElement(ELEMENT_BOOKMARKS_GADGET_DELETE_ICON.replace("${bookmarkName}", bookmarkName)).click();
-		waitForElementNotPresent(By.linkText(bookmarkName));
-	}
-}

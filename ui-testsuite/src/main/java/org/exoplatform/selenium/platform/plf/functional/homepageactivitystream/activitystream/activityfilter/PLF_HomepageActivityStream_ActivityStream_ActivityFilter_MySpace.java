@@ -21,8 +21,6 @@
 
 package org.exoplatform.selenium.platform.plf.functional.homepageactivitystream.activitystream.activityfilter;
 
-
-
 import static org.exoplatform.selenium.TestLogger.info;
 
 import org.exoplatform.selenium.platform.HomePageActivity;
@@ -35,9 +33,6 @@ import org.exoplatform.selenium.platform.social.PeopleConnection;
 import org.exoplatform.selenium.platform.social.SpaceManagement;
 import org.openqa.selenium.By;
 import org.testng.annotations.*;
-
-
-
 
 	/**
 	* @author khanhnt
@@ -85,7 +80,7 @@ import org.testng.annotations.*;
 	public  void test01_ActivityPostedFromASpaceShouldBeVisibleInMySpaces() {
 		info("Test 1: Activity posted from a space should be visible in My Spaces");
 		String text = "Test 1 New Activity";
-		String spaceName = "Test 1 space";
+		String spaceName = "Test77657";
 		/*
 		- Connect to Intranet
 		- open a Space
@@ -94,7 +89,7 @@ import org.testng.annotations.*;
 		*Expected Outcome: The activity is added to the activity stream of the space		*/
 		mMember.goToMySpacePage();
 		mMember.addNewSpace(spaceName,"");
-		spaceMan.goToSpaceMenu("Activity Stream");
+		spaceMan.goToSpaceMenu("Activity Stream",100000);
 		addActivity(true, text, false, "");
 
 		/*
@@ -111,8 +106,6 @@ import org.testng.annotations.*;
 		mMember.deleteSpace(spaceName);
 	}
 
-
-
 	/**
 	* Case ID:77661.
 	* Test Case Name: Activity posted from a space should be visible in "My Spaces" of other members.
@@ -125,7 +118,7 @@ import org.testng.annotations.*;
 	public  void test02_ActivityPostedFromASpaceShouldBeVisibleInMySpacesOfOtherMembers() {
 		info("Test 2: Activity posted from a space should be visible in My Spaces of other members");
 		String text = "Test 2 New Activity";
-		String spaceName = "Test 2 space";
+		String spaceName = "Space77661";
 		/*
 		- Connect to Intranet with User A
 		- Open the Space "Test"
@@ -160,8 +153,6 @@ import org.testng.annotations.*;
 		mMember.deleteSpace(spaceName);
 	}
 
-
-
 	/**
 	* Case ID:77678.
 	* Test Case Name: Comment on my activity from "My spaces".
@@ -173,7 +164,7 @@ import org.testng.annotations.*;
 	@Test
 	public  void test03_CommentOnMyActivityFromMySpaces() {
 		info("Test 3: Comment on my activity from My spaces");
-		String spaceName = "Test 3 new space";
+		String spaceName = "Space77678";
 		String text = "Test 3 new activity";
 		/*
 		- Connect to Intranet/Homepage
@@ -200,8 +191,6 @@ import org.testng.annotations.*;
 		mMember.deleteSpace(spaceName);
  	}
 
-
-
 	/**
 	* Case ID:77685.
 	* Test Case Name: Activity posted from a space should not be visible in user activity stream by user is not member of space.
@@ -213,7 +202,7 @@ import org.testng.annotations.*;
 	@Test
 	public  void test04_ActivityPostedFromASpaceShouldNotBeVisibleInUserActivityStreamByUserIsNotMemberOfSpace() {
 		info("Test 4: Activity posted from a space should not be visible in user activity stream by user is not member of space");
-		String spaceName = "Test 4 new space";
+		String spaceName = "Space77685";
 		String text = "Test 4 new activity";
 		/*
 		- Connect to Intranet with User A
@@ -267,8 +256,6 @@ import org.testng.annotations.*;
 		mMember.deleteSpace(spaceName);
  	}
 
-
-
 	/**
 	* Case ID:77690.
 	* Test Case Name: User can comment on an activity posted in a space where he is not member when he was mentioned in it.
@@ -280,7 +267,7 @@ import org.testng.annotations.*;
 	@Test
 	public  void test05_UserCanCommentOnAnActivityPostedInASpaceWhereHeIsNotMemberWhenHeWasMentionedInIt() {
 		info("Test 5: User can comment on an activity posted in a space where he is not member when he was mentioned in it");
-		String spaceName = "Test 5 space";
+		String spaceName = "space77690";
 		String text = "Test 5 New comment";
 		/*
 		- Connect to Intranet with User A
@@ -291,7 +278,7 @@ import org.testng.annotations.*;
 		*Expected Outcome: The message is added to the activity astream where the name of the user B is mentioned		*/
 		
 		mMember.goToMySpacePage();
-		mMember.addNewSpace(spaceName,"");
+		mMember.addNewSpace(spaceName,"",150000);
 		goToMembers(spaceName);
 		spaceMan.goToSpaceMenu("Activity Stream");
 		mentionActivity(true,"",user1);
@@ -316,10 +303,8 @@ import org.testng.annotations.*;
 		acc.signOut();
 		acc.signIn(DATA_USER1, DATA_PASS);
 		mMember.goToAllSpaces();
-		mMember.deleteSpace(spaceName);
+		mMember.deleteSpace(spaceName,150000);
  	}
-
-
 
 	/**
 	* Case ID:77694.
@@ -332,7 +317,7 @@ import org.testng.annotations.*;
 	@Test
 	public  void test06_NotDisplayTheDropdownListOfStreamInSpacesActivityStream() {
 		info("Test 6: Not Display the dropdown list of stream in Space's activity stream");
-		String spaceName = "Test 6 space";
+		String spaceName = "space77694";
 		/*
 		- Connect to Intranet
 		- Open a space
@@ -350,8 +335,6 @@ import org.testng.annotations.*;
 		mMember.deleteSpace(spaceName);
  	}
 
-
-
 	/**
 	* Case ID:77698.
 	* Test Case Name: Show space's activity on activity stream of user.
@@ -363,7 +346,7 @@ import org.testng.annotations.*;
 	@Test
 	public  void test07_ShowSpacesActivityOnActivityStreamOfUser() {
 		info("Test 7: Show space's activity on activity stream of user");
-		String spaceName = "Test 7 space";
+		String spaceName = "space77698";
 		String text = "Test 7 activity";
 		/*
 		- Connect to Intranet with user A
@@ -386,8 +369,6 @@ import org.testng.annotations.*;
 		mMember.deleteSpace(spaceName);
  	}
 
-
-
 	/**
 	* Case ID:77699.
 	* Test Case Name: Not display space's activity on user's activity stream for other user.
@@ -399,7 +380,7 @@ import org.testng.annotations.*;
 	@Test
 	public  void test08_NotDisplaySpacesActivityOnUsersActivityStreamForOtherUser() {
 		info("Test 8: Not display space's activity on user's activity stream for other user");
-		String spaceName = "Test 8 space";
+		String spaceName = "space77699";
 		String text1 = "Test 8 activity 1";
 		String text2 = "Test 8 activity 2";
 		String text3 = "Test 8 activity 3";
@@ -444,7 +425,4 @@ import org.testng.annotations.*;
 		mMember.goToAllSpaces();
 		mMember.deleteSpace(spaceName);
 	}
-
-
-
 }

@@ -190,7 +190,7 @@ public class PLF_HomePageActivityStream_Activity_Likes extends Activity {
 	 * == Display message after more than 2 user like activity (78627) ==
 	 * Test case ID: 78627
 	 * Step 1: Check message
-	 * ERROR: Refer: https://jira.exoplatform.org/browse/SOC-3072
+	 * ERROR: Refer: https://jira.exoplatform.org/browse/SOC-4291
 	 */
 	@Test (groups="error")
 	public void test04_DisplayMessageAfterMoreThan2UserLikeActivity(){
@@ -355,7 +355,7 @@ public class PLF_HomePageActivityStream_Activity_Likes extends Activity {
 		//- Many user like activity more than the width
 		//- User A can see this activity
 
-		/* Step 1:Show [More] link */
+//		 Step 1:Show [More] link 
 		//- Connect to Intranet with User A
 		magAcc.userSignIn(userType.ADMIN);
 
@@ -365,17 +365,27 @@ public class PLF_HomePageActivityStream_Activity_Likes extends Activity {
 		//- Avatars of user's likers are displayed
 		//- The link "More" is displayed
 		int j=1;
-		for(int i=14;i>0;i--){
+		for(int i=14;i>4;i--){
 			String avatarName = waitForAndGetElement(ELEMENT_AVATAR_LIST_LIKER_INDEX.replace("${activityText}", activity).replace("${index}", String.valueOf(j))).getAttribute("alt");
 			assert(avatarName.contains(username[i]+" "+username[i]));
 			j++;
 		}
-		String avatarName = waitForAndGetElement(ELEMENT_AVATAR_LIST_LIKER_INDEX.replace("${activityText}", activity).replace("${index}", String.valueOf(j))).getAttribute("alt");
-		assert!(avatarName.contains(username[0]+" "+username[0]));
-
+		for(int i=4;i>=0;i--){
+			waitForElementNotPresent(ELEMENT_AVATAR_LIST_LIKER_INDEX.replace("${activityText}", activity).replace("${index}", String.valueOf(j)));
+			j++;
+		}
+		info("More button is shown");
+		waitForAndGetElement(ELEMENT_LIKE_ACTIVITY_MORE);
 		/* Step 1:Show [More] link */
 		//- Click on the link "More"
 		//- Avatars are displayed in the next line
+		j=11;
+		click(ELEMENT_LIKE_ACTIVITY_MORE);
+		for(int i=4;i>=0;i--){
+			String avatarName = waitForAndGetElement(ELEMENT_AVATAR_LIST_LIKER_INDEX.replace("${activityText}", activity).replace("${index}", String.valueOf(j))).getAttribute("alt");
+			assert (avatarName.contains(username[i]+" "+username[i]));
+			j++;
+		}
 		
 		/*Clear data*/
 		info("clear data");

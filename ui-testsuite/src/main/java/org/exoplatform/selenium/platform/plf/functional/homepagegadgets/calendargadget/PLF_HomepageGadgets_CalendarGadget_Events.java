@@ -121,8 +121,7 @@ public class PLF_HomepageGadgets_CalendarGadget_Events extends CalendarBase{
 		info("Add events in calendar");
 		event.addQuickEvent(Event, Event, getDate(1,"MM/dd/yyyy"), getDate(2, "MM/dd/yyyy"), false);
 		naviToolbar.goToHomePage();
-		click(ELEMENT_CALENDAR_GADGET_TOMORROW_LABEL);
-		click(ELEMENT_CALENDAR_GADGET_TOMORROW_LABEL);
+		click(ELEMENT_CALENDAR_GADGET_NEXTDAY_ARROW);
 		waitForAndGetElement(ELEMENT_EVENT_TASK_MULTIDATE_ITEM_IN_CALENDAR_GADGET.replace("${event}", Event).replace("${totime}",date1).replace("${endtime}",date2));
 		goToCalendarPage();
 		event.deleteEventTask(Event,selectDayOption.ONEDAY);

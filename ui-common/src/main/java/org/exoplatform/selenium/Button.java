@@ -61,7 +61,7 @@ public class Button extends TestBase{
 	//Content explorer 
 	public final By ELEMENT_REFRESH_BUTTON = By.xpath("//*[text()='refresh']");
 	public final By ELEMENT_RENAME_BUTTON = By.xpath("//*[text()='Rename']");
-	public final By ELEMENT_NEXT_PAGE_BUTTON = By.xpath("//*[@title='Next Page']");
+	public final By ELEMENT_NEXT_PAGE_BUTTON = By.xpath("//*[(@data-original-title or @title)='Next Page']");
 
 	/*
 	 * General

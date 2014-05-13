@@ -24,9 +24,9 @@ public class Task extends CalendarBase{
 	public String ELEMENT_TASK_MENU_DELETE = "//*[@id='tmpMenuElement']//i[@class='uiIconDelete uiIconLightGray']";
 	public String ELEMENT_TASK_MENU_EDIT = "//*[@id='tmpMenuElement']//i[@class='uiIconEdit uiIconLightGray']";
 	public By ELEMENT_RIGHT_CLICK_ADD_TASK = By.xpath("//*[@id='tmpMenuElement']//*[@class='createTask']");
-	
+
 	//Add quick task
-//	public By ELEMENT_QUICK_ADD_TASK_POPUP = By.xpath("//span[@class='PopupTitle popupTitle' and text()='Quick Add Task']");
+	//	public By ELEMENT_QUICK_ADD_TASK_POPUP = By.xpath("//span[@class='PopupTitle popupTitle' and text()='Quick Add Task']");
 	public By ELEMENT_QUICK_ADD_TASK_POPUP = By.id("UIQuickAddTaskPopupWindow");
 	public By ELEMENT_INPUT_TASK_TITLE = By.xpath("//*[@id='UIQuickAddTask']//*[@name='eventName']");
 	public By ELEMENT_INPUT_TASK_NOTE = By.xpath("//*[@id='UIQuickAddTask']//*[@id='description']");
@@ -103,7 +103,7 @@ public class Task extends CalendarBase{
 		click(ELEMENT_BUTTON_TASK);
 		waitForAndGetElement(ELEMENT_QUICK_ADD_TASK_POPUP);
 	}
-	
+
 	/**
 	 * @author lientm
 	 * @param calendarName
@@ -120,13 +120,13 @@ public class Task extends CalendarBase{
 	public void goToAddTaskFromMainPane(String time){
 		String current = getCurrentDate("MMM dd yyyy");
 		info("Current date is " + current);
-		
+
 		String cell = "//td[contains(@startfull,'" + current + " " + time + ":00')]";
 		rightClickOnElement(cell);
 		click(ELEMENT_RIGHT_CLICK_ADD_TASK, 2);
 		waitForAndGetElement(ELEMENT_QUICK_ADD_TASK_POPUP);
 	}
-	
+
 	/**
 	 * Open "Edit task" form
 	 * 
@@ -242,21 +242,23 @@ public class Task extends CalendarBase{
 					String[] dateTimeFrom = from.split(" ");
 					if(dateTimeFrom.length > 0)
 						type(ELEMENT_INPUT_TASK_FROM, dateTimeFrom[0], true);
-					if(dateTimeFrom.length > 1)
+					if(dateTimeFrom.length > 1){
 						click(ELEMENT_INPUT_TASK_FROM_TIME_IN, 2);
 						click(ELEMENT_TASK_SELECT_FROM_TIME.replace("${time}", dateTimeFrom[1]));
-						Utils.pause(1000);
-//						type(ELEMENT_INPUT_TASK_FROM_TIME, dateTimeFrom[1], false);
+					}
+					Utils.pause(1000);
+					//						type(ELEMENT_INPUT_TASK_FROM_TIME, dateTimeFrom[1], false);
 				}
 				if ((to != null) & (to != "")){
 					String[] dateTimeTo = to.split(" ");
 					if(dateTimeTo.length > 0)
 						type(ELEMENT_INPUT_TASK_TO, dateTimeTo[0], true);
-					if(dateTimeTo.length > 1)
+					if(dateTimeTo.length > 1){
 						click(ELEMENT_INPUT_TASK_TO_TIME_IN, 2);
 						click(ELEMENT_TASK_SELECT_TO_TIME.replace("${time}", dateTimeTo[1]));
-						Utils.pause(1000);
-//						type(ELEMENT_INPUT_TASK_TO_TIME, dateTimeTo[1], false);
+					}
+					Utils.pause(1000);
+					//						type(ELEMENT_INPUT_TASK_TO_TIME, dateTimeTo[1], false);
 				}
 			}
 
@@ -275,20 +277,22 @@ public class Task extends CalendarBase{
 					String[] dateTime = from.split(" ");
 					if(dateTime.length > 0)
 						type(ELEMENT_ADD_EDIT_TASK_FROM, dateTime[0], true);
-					if(dateTime.length > 1)
-//						type(ELEMENT_ADD_EDIT_TASK_FROM_TIME, dateTime[1], false);
+					if(dateTime.length > 1){
+						//						type(ELEMENT_ADD_EDIT_TASK_FROM_TIME, dateTime[1], false);
 						click(ELEMENT_ADD_EDIT_TASK_FROM_TIME_IN, 2);
 						click(ELEMENT_ADD_EDIT_TASK_SELECT_FROM_TIME.replace("${time}", dateTime[1]));
-						Utils.pause(1000);
+					}
+					Utils.pause(1000);
 				}
 				if ((to != null) & (to != "")){
 					String[] dateTime = to.split(" ");
 					type(ELEMENT_ADD_EDIT_TASK_TO, dateTime[0], true);
-					if(dateTime.length > 1)
+					if(dateTime.length > 1){
 						click(ELEMENT_ADD_EDIT_TASK_TO_TIME_IN, 2);
 						click(ELEMENT_ADD_EDIT_TASK_SELECT_TO_TIME.replace("${time}", dateTime[1]));
-						Utils.pause(1000);
-//						type(ELEMENT_ADD_EDIT_TASK_TO_TIME, dateTime[1], false);
+					}
+					Utils.pause(1000);
+					//						type(ELEMENT_ADD_EDIT_TASK_TO_TIME, dateTime[1], false);
 
 				}
 			}
@@ -387,10 +391,10 @@ public class Task extends CalendarBase{
 			else
 				waitForAndGetElement(ELEMENT_EVENT_TASK_ALL_DAY_PLF41.replace("${event}", name));
 		else
-			waitForAndGetElement(ELEMENT_EVENT_TASK_ONE_DAY.replace("${taskName}", name));
+			waitForAndGetElement(ELEMENT_EVENT_TASK_ONE_DAY.replace("${taskName}", name),100000);
 
 	}
-	
+
 	public void inputDataTask(String name, String note, String from, String to, boolean allDay, String...opt){
 		inputBasicQuickTask(name, note, opt);
 		inputFromToTask(from, to, allDay);
@@ -404,7 +408,7 @@ public class Task extends CalendarBase{
 			waitForAndGetElement(ELEMENT_EVENT_TASK_ONE_DAY.replace("${taskName}", name));
 
 	}
-	
+
 	/**
 	 * @author lientm
 	 * @param from
@@ -416,7 +420,7 @@ public class Task extends CalendarBase{
 		String dateTo = getValue(ELEMENT_INPUT_TASK_TO);
 		assert dateFrom.equals(getCurrentDate("MM/dd/yyyy"));
 		assert dateTo.equals(getCurrentDate("MM/dd/yyyy"));
-		
+
 		info("Check suggestion time");
 		if (from == null){
 			info("Check time suggestion default");				

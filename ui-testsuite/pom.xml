@@ -103,23 +103,29 @@
 			</properties>
 		</profile>
 		<profile>
-			<id>plf-func-part1</id>
-			<properties>
-				<testSuite>plf-fnc-part1.xml</testSuite>
-			</properties>
-		</profile>
-		<profile>
-			<id>plf-func-part2</id>
-			<properties>
-				<testSuite>plf-fnc-part2.xml</testSuite>
-			</properties>
-		</profile>
-		<profile>
-			<id>plf-func-part3</id>
-			<properties>
-				<testSuite>plf-fnc-part3.xml</testSuite>
-			</properties>
-		</profile>
+ 			<id>plf-fnc-part1</id>
+ 			<properties>
+ 				<testSuite>plf-fnc-part1.xml</testSuite>
+ 			</properties>
+ 		</profile>
+ 		<profile>
+ 			<id>plf-fnc-part2</id>
+ 			<properties>
+ 				<testSuite>plf-fnc-part2.xml</testSuite>
+ 			</properties>
+ 		</profile>
+ 		<profile>
+ 			<id>plf-fnc-part3</id>
+ 			<properties>
+ 				<testSuite>plf-fnc-part3.xml</testSuite>
+ 			</properties>
+ 		</profile>
+ 		<profile>
+ 			<id>plf-fnc-part4</id>
+ 			<properties>
+ 				<testSuite>plf-fnc-part4.xml</testSuite>
+ 			</properties>
+ 		</profile>
 		<profile>
 			<id>social</id>
 			<properties>
@@ -221,6 +227,12 @@
 			<id>forum-forum</id>
 			<properties>
 				<testSuite>forum-forum.xml</testSuite>
+			</properties>
+		</profile>
+		<profile>
+			<id>testng-failed</id>
+			<properties>
+				<testSuite>testng-failed.xml</testSuite>
 			</properties>
 		</profile>
 		<profile>

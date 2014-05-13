@@ -122,7 +122,7 @@ public class PLF_Navigation_LeftNavigation_CompanyList extends Template{
 		
 		info("Click on Documments");
 		click(ELEMENT_PERSONAL_DOCUMENTS);
-		waitForAndGetElement(By.id("UIFileViewCheckBox"), 3000, 1, 2);
+		waitForAndGetElement(By.id("uiActionsBarContainer"), 3000, 1, 2);
 		Utils.pause(500);
 		nav.goToHomePage();
 		

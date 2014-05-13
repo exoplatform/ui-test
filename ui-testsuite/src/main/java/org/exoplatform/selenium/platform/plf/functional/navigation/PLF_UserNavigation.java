@@ -143,7 +143,6 @@ public class PLF_UserNavigation extends PlatformBase {
 		waitForAndGetElement(ELEMENT_MY_ACTIVITY_STREAM_TAB);
 		waitForAndGetElement(ELEMENT_MY_CONNECTIONS_TAB);
 		waitForAndGetElement(ELEMENT_MY_WIKI_TAB);
-		waitForAndGetElement(ELEMENT_MY_DASHBOARD_TAB);
 	}
 	
 	/**

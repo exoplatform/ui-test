@@ -8,9 +8,10 @@
 			</run>
 		</groups>
 		<classes>
-			<class name = "org.exoplatform.selenium.platform.plf.functional.welcomescreens.PLF_WelcomeScreens_AccountSetup" />
-			<class name = "org.exoplatform.selenium.platform.plf.functional.welcomescreens.PLF_WelcomeScreens_Greeting_TermCondition" />
+			<!--<class name = "org.exoplatform.selenium.platform.plf.functional.welcomescreens.PLF_WelcomeScreens_AccountSetup" />
+			<class name = "org.exoplatform.selenium.platform.plf.functional.welcomescreens.PLF_WelcomeScreens_Greeting_TermCondition" />-->
 			<class name = "org.exoplatform.selenium.platform.plf.functional.welcomescreens.PLF_WelcomeScreens_Login" />
+			<class name = "org.exoplatform.selenium.platform.plf.functional.homepagegadgets.calendargadget.PLF_HomepageGadgets_CalendarGadget_Tasks" />
 			<class name = "org.exoplatform.selenium.platform.plf.functional.homepagegadgets.PLF_HomepageGadgets_Bookmarks" />
 			<class name = "org.exoplatform.selenium.platform.plf.functional.homepagegadgets.PLF_HomepageGadgets_FavoritesDocuments" />
 			<class name = "org.exoplatform.selenium.platform.plf.functional.homepagegadgets.PLF_HomepageGadgets_FeaturePoll" />
@@ -20,9 +21,6 @@
 			<class name = "org.exoplatform.selenium.platform.plf.functional.homepagegadgets.calendargadget.PLF_HomepageGadgets_CalendarGadget_Events" />
 			<class name = "org.exoplatform.selenium.platform.plf.functional.homepagegadgets.calendargadget.PLF_HomepageGadgets_CalendarGadget_General" />
 			<class name = "org.exoplatform.selenium.platform.plf.functional.homepagegadgets.calendargadget.PLF_HomepageGadgets_CalendarGadget_Settings" />
-			<class name = "org.exoplatform.selenium.platform.plf.functional.homepagegadgets.calendargadget.PLF_HomepageGadgets_CalendarGadget_Tasks" />
-			<class name = "org.exoplatform.selenium.platform.plf.functional.hompagegadgets.invitationgadget.PLF_HomepageGadgets_InvitationGadget" />
-			<class name = "org.exoplatform.selenium.platform.plf.functional.homepagegadgets.suggestiongadget.PLF_HomepageGadgets_SuggestionGadget" />
 		</classes>
 	</test>
 	<listeners>

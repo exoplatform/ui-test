@@ -4,6 +4,7 @@ package org.exoplatform.selenium.platform.plf.functional.homepageactivitystream.
 
 import static org.exoplatform.selenium.TestLogger.info;
 
+import org.exoplatform.selenium.Utils;
 import org.exoplatform.selenium.platform.HomePageActivity;
 import org.exoplatform.selenium.platform.ManageAccount;
 import org.exoplatform.selenium.platform.NavigationToolbar;
@@ -37,7 +38,7 @@ public class PLF_HomepageActivityStream_ActivityStream_ActivityFilter_AllActivit
 		home = new HomePageActivity(driver);
 		nav = new NavigationToolbar(driver);	
 		pConn = new PeopleConnection(driver);
-		mMember = new ManageMember(driver);
+		mMember = new ManageMember(driver,this.plfVersion);
 		acc.signIn(DATA_USER1, DATA_PASS);		
 	}
 
@@ -132,13 +133,13 @@ public class PLF_HomepageActivityStream_ActivityStream_ActivityFilter_AllActivit
 	@Test
 	public void test04_ActivityPostedFromASpaceIsVisibleInAllActivitiesOfMembersEvenIfTheyAreNotConnections(){
 		String text = "Activity 77665";
-		String spaceName = "Test 77665";
+		String spaceName = "Test77665";
 		// Step 1: Add new space
 		// - Connect to Intranet with User A
 		// - Click [Join a space]
 		// - Add new space "Test"
 		mMember.goToMySpacePage();
-		mMember.addNewSpace(spaceName,"");
+		mMember.addNewSpace(spaceName,"",150000);
 
 		// Step 2: Invited user B is member of space
 		// - Go to [Space Setting]
@@ -160,8 +161,7 @@ public class PLF_HomepageActivityStream_ActivityStream_ActivityFilter_AllActivit
 		// - Open the space "Test"
 		// - Post an activity in the space stream
 		acc.userSignIn(userType.ADMIN);
-		mMember.goToMySpacePage();
-		goToActivityStream();
+		accessSpace(spaceName);
 		addActivity(true, text, false, "");
 		acc.signOut();
 		// Step 5: Check activity on "All activities" stream by user B
@@ -199,6 +199,9 @@ public class PLF_HomepageActivityStream_ActivityStream_ActivityFilter_AllActivit
 		// - Switch to the stream "My activities"
 		selectFileter("My Activities");
 		waitForAndGetElement(home.ELEMENT_TOPIC_COMMENT.replace("${title}",text).replace("${comment}", comment));
+		
+		selectFileter("All Activities");
+		Utils.pause(1000);
 		//delete data
 		home.deleteActivity(text);
 	}

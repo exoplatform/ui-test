@@ -132,8 +132,8 @@ public class PLF_Navigation_LeftNavigation_GroupList extends GroupNavigation{
 		- Navigation nodes are displayed as Administration Group, then node and subnode
 		- A long name's navigation is truncated and append "..."		*/ 
 		nav.goToHomePage();
-		waitForAndGetElement(ELEMENT_GROUP_NAVIGATION_ICON_LEFT_PANEL_PLF41.replace("${groupName}","Administration"));
-		waitForAndGetElement(ELEMENT_GROUP_NAVIGATION_ICON_LEFT_PANEL_PLF41.replace("${groupName}",truncateNode));
+		waitForAndGetElement(ELEMENT_NODE_NAVIGATION_LEFT_PANEL.replace("${groupName}","Administration"));
+		waitForAndGetElement(ELEMENT_NODE_NAVIGATION_LEFT_PANEL.replace("${groupName}",truncateNode));
 
 		//Delete data test
 		info("-- Clear data --");
@@ -190,7 +190,7 @@ public class PLF_Navigation_LeftNavigation_GroupList extends GroupNavigation{
 		 *Expected Outcome: With user in group administration, In the Left Navigation, the Group Navigation is displayed above "MY SPACES" 
 		- In the Header, the name ofgroup is displayed. i.e Administration Group		*/ 
 		nav.goToHomePage();
-		waitForAndGetElement(ELEMENT_GROUP_NAVIGATION_ICON_LEFT_PANEL_PLF41.replace("${groupName}","Administration"));
+		waitForAndGetElement(ELEMENT_NODE_NAVIGATION_LEFT_PANEL.replace("${groupName}","Administration"));
 		waitForAndGetElement("//*[@id='LeftNavigation']//*[contains(@class,'UIRowContainer')]/div[3][@id='GroupsNavigationPortlet']");
 		waitForAndGetElement("//*[@id='LeftNavigation']//*[contains(@class,'UIRowContainer')]/div[4][@id='SpaceNavigationPortlet']");
 
@@ -249,7 +249,7 @@ public class PLF_Navigation_LeftNavigation_GroupList extends GroupNavigation{
 		- In the Group Navigation panel, panel a small button is displayed to fold/unfold sub node		*/ 
 		nav.goToHomePage();
 		waitForAndGetElement(ELEMENT_GROUP_NAVIGATION_ICON_LEFT_PANEL_PLF41.replace("${groupName}","Administration"));
-		click(ELEMENT_GROUP_NAVIGATION_ICON_LEFT_PANEL.replace("${groupName}", nodePortalAdministration));
+		click(ELEMENT_GROUP_NAVIGATION_ICON_LEFT_PANEL_PLF41.replace("${groupName}", nodePortalAdministration));
 		waitForAndGetElement(ELEMENT_NAVIGATION_NODE.replace("${nodeName}", nodeName));
 
 		//Delete data test
@@ -310,7 +310,7 @@ public class PLF_Navigation_LeftNavigation_GroupList extends GroupNavigation{
 		- 2 levels are displayed: Navigations and sub-navigation,i.e Site Management and sub-navigation1		*/
 		nav.goToHomePage();
 		waitForAndGetElement(ELEMENT_GROUP_NAVIGATION_ICON_LEFT_PANEL_PLF41.replace("${groupName}","Administration"));
-		click(ELEMENT_GROUP_NAVIGATION_ICON_LEFT_PANEL.replace("${groupName}", nodePortalAdministration));
+		click(ELEMENT_GROUP_NAVIGATION_ICON_LEFT_PANEL_PLF41.replace("${groupName}", nodePortalAdministration));
 		waitForAndGetElement(ELEMENT_NAVIGATION_NODE.replace("${nodeName}", nodeName));
 
 		/*
@@ -328,7 +328,7 @@ public class PLF_Navigation_LeftNavigation_GroupList extends GroupNavigation{
 		
 		nav.goToHomePage();
 		waitForAndGetElement(ELEMENT_GROUP_NAVIGATION_ICON_LEFT_PANEL_PLF41.replace("${groupName}","Administration"));
-		click(ELEMENT_GROUP_NAVIGATION_ICON_LEFT_PANEL.replace("${groupName}", nodePortalAdministration));
+		click(ELEMENT_GROUP_NAVIGATION_ICON_LEFT_PANEL_PLF41.replace("${groupName}", nodePortalAdministration));
 		waitForAndGetElement(ELEMENT_NAVIGATION_NODE.replace("${nodeName}", nodeName));
 		waitForElementNotPresent(ELEMENT_GROUP_NAVIGATION_ICON_LEFT_PANEL.replace("${groupName}", nodeName));
 		waitForElementNotPresent(ELEMENT_NAVIGATION_NODE.replace("${nodeName}", subNodeName));

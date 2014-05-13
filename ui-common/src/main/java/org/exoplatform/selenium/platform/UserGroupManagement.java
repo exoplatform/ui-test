@@ -75,6 +75,8 @@ public class UserGroupManagement extends PlatformBase {
 		button = new Button(driver);
 		String userDeleteIcon = ELEMENT_USER_DELETE_ICON.replace("${username}", username);
 		info("--Deleting user " + username + "--");
+		
+		searchUser(username, "User Name");
 		if (waitForAndGetElement("//*[contains(text(),'Total pages')]",DEFAULT_TIMEOUT,0) != null) {
 			usePaginator(userDeleteIcon, "User " + username + "not found in group");
 		}

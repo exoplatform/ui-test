@@ -72,6 +72,7 @@ public class PageEditor extends PlatformBase {
 	public final By ELEMENT_MULTI_CONTENT_SELECT_POPUP = By.xpath("//span[@class='PopupTitle popupTitle' and text()='Multiple Content Selector Pane']");
 	public final By ELEMENT_CONTENT_ADD_PATH = By.xpath("//i[@class='uiIconAddPath uiIconLightGray']");
 	public final String ELEMENT_CONTENT_BROWSER_NODE = "//span[@class='nodeName' and contains(text(), '${node}')]";
+	public final String ELEMENT_PORTLET_DRAGGED = "//div[contains(@class,'portletLayoutDecorator') and contains(text(),'${portlet}')]";
 		
 	//Add Path > Right Workspace 
 	public final String ELEMENT_RIGHT_WORKSPACE_NODE = "//*[@class='rightWorkspace']//*[text()='${node}']";
@@ -386,6 +387,7 @@ public class PageEditor extends PlatformBase {
 			mouseOver(elementPortlet, true);
 			click(iconDelete);
 			magAlert.acceptAlert();
+			waitForElementNotPresent(ELEMENT_PORTLET_DRAGGED.replace("${portlet}", "Bookmarks"));
 			Utils.pause(1000);
 			if (verify){
 				finishEditLayout();

@@ -51,7 +51,7 @@ public class PLF_HomepageActivityStream_ActivityComposer_Link extends Activity{
 		info("Test 1: Attach a link"); 
 
 		/*Declare variables*/ 
-		String link = "http://www.yahoo.com"; 
+		String link = "http://www.apple.com"; 
 		/* Step: Attach a link */
 		//-  Connect to Intranet
 		//- From "Activity Composer" box, click on "Link"
@@ -65,12 +65,10 @@ public class PLF_HomepageActivityStream_ActivityComposer_Link extends Activity{
 		type(ELEMENT_INPUT_LINK_BOX, link, true);
 		waitForAndGetElement(ELEMENT_ATTACH_BUTTON);
 		click(ELEMENT_ATTACH_BUTTON);
-		waitForTextPresent("Loading...");
-		waitForTextNotPresent("Loading", 100000);
 		waitForAndGetElement(ELEMENT_SHARE_DISPLAY);
 		waitForAndGetElement(ELEMENT_URL_SHARE); 
 		waitForAndGetElement(ELEMENT_PICTURE_SHARE); 
-		waitForAndGetElement(ELEMENT_TITLE_SHARE); 	
+		waitForAndGetElement(ELEMENT_TITLE_SHARE.replace("${title}", "Apple")); 	
  	}
 
 
@@ -99,8 +97,6 @@ public class PLF_HomepageActivityStream_ActivityComposer_Link extends Activity{
 		Assert.assertEquals(attachButton.isDisplayed(), true);
  	}
 
-
-
 	/**
 	* Case ID:77796.
 	* Test Case Name: Remove a link to share.
@@ -111,7 +107,7 @@ public class PLF_HomepageActivityStream_ActivityComposer_Link extends Activity{
 		info("Test 3: Remove a link to share"); 
 
 		/*Declare variables*/ 
-		String link = "http://www.yahoo.com"; 
+		String link = "http://www.apple.com"; 
 
 		/* Step1: Open [Select File] popup */
 		//- Connect to Intranet
@@ -126,11 +122,9 @@ public class PLF_HomepageActivityStream_ActivityComposer_Link extends Activity{
 		type(ELEMENT_INPUT_LINK_BOX, link, true);
 		waitForAndGetElement(ELEMENT_ATTACH_BUTTON);
 		click(ELEMENT_ATTACH_BUTTON);
-		waitForTextPresent("Loading...");
-		waitForTextNotPresent("Loading", 100000);
-		waitForAndGetElement(ELEMENT_SHARE_DISPLAY);
+		waitForAndGetElement(ELEMENT_SHARE_DISPLAY,200000);
 		waitForAndGetElement(ELEMENT_PICTURE_SHARE); 
-		waitForAndGetElement(ELEMENT_TITLE_SHARE); 
+		waitForAndGetElement(ELEMENT_TITLE_SHARE.replace("${title}", "Apple")); 
 		waitForAndGetElement(ELEMENT_CROSS_BUTTON); 
 		/* Step3: Cancel attaching file*/
 		// - Click on the cross [x] icon
@@ -139,8 +133,6 @@ public class PLF_HomepageActivityStream_ActivityComposer_Link extends Activity{
 
 		info("Remove attach"); 		
  	}
-
-
 
 	/**
 	* Case ID:77803.
@@ -152,7 +144,7 @@ public class PLF_HomepageActivityStream_ActivityComposer_Link extends Activity{
 		info("Test 4: Select an image from the link to share"); 
 
 		/*Declare variables*/ 
-		String link = "http://yahoo.com"; 
+		String link = "http://www.apple.com"; 
 
 		/* Step1: Show the field to input URL link */
 		//- Connect to Intranet
@@ -185,8 +177,6 @@ public class PLF_HomepageActivityStream_ActivityComposer_Link extends Activity{
 		home.deleteActivity(link);
  	}
 
-
-
 	/**
 	* Case ID:77807.
 	* Test Case Name: Share a link.
@@ -198,9 +188,9 @@ public class PLF_HomepageActivityStream_ActivityComposer_Link extends Activity{
 
 		/*Declare variables*/ 
 		String text = "";
-		String link = "http://yahoo.com"; 
+		String link = "http://apple.com"; 
 		String workingLabelText = "What are you working on?";
-		String lighterColor = "rgba(153, 153, 153, 1)";
+		String lighterColor = "rgba(51, 51, 51, 1)";
 		/* Step: Show a field to input a link */
 		//- Connect to Intranet
 		//- From the [Activity Composer] box, click on [Link] button
@@ -210,14 +200,10 @@ public class PLF_HomepageActivityStream_ActivityComposer_Link extends Activity{
 		WebElement workingLabel = waitForAndGetElement(ELEMENT_ACTIVITY_WHAT_ARE_YOU_WORKING_LABEL);
 		//Check color
 		info("--Check color of string--");
-		
 		Assert.assertEquals(workingLabel.getText(), workingLabelText);
 		Assert.assertEquals(waitForAndGetElement(home.ELEMENT_ACTIVITY_TEXTBOX).getCssValue("color"), lighterColor);
 		
 		//delete Activity
 		home.deleteActivity(link);
  	}
-
-
-
 }

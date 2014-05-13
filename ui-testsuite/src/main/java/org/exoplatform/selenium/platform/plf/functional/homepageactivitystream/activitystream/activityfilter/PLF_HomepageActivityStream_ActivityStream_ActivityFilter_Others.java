@@ -77,6 +77,7 @@ public class PLF_HomepageActivityStream_ActivityStream_ActivityFilter_Others ext
 
 		//delete data
 		selectFileter("All Activities");
+		Utils.pause(1000);
 		home.deleteActivity(text);
 	}
 
@@ -114,7 +115,7 @@ public class PLF_HomepageActivityStream_ActivityStream_ActivityFilter_Others ext
 	@Test
 	public  void test03_MentionMemberThatIsNotAConnectionInSpaceShouldPushTheActivityInMyActivitiesAndMySpacesOfTheMentionedUser() {
 		info("Test 3: Mention member that is not a connection in space should push the activity in My Activities and My Spaces of the mentioned user");
-		String spaceName = "Space 77668";
+		String spaceName = "Space77668";
 
 		/*
 		- Connect to Intranet/Homepage with User A
@@ -238,7 +239,8 @@ public class PLF_HomepageActivityStream_ActivityStream_ActivityFilter_Others ext
 		waitForAndGetElement(home.ELEMENT_ACTIVITY.replace("${activityText}",text));
 
 		//delete data
-
+		selectFileter("All Activities");
+		Utils.pause(1000);
 		home.deleteActivity(text);
 	}
 
@@ -254,7 +256,7 @@ public class PLF_HomepageActivityStream_ActivityStream_ActivityFilter_Others ext
 	@Test
 	public  void test06_ActivityPostedFromASpaceShouldBeVisibleInMySpacesMyActivitiesAndAllActivities() {
 		info("Test 6: Activity posted from a space should be visible in My Spaces, My Activities and All Activities");
-		String spaceName = "Space 77687";
+		String spaceName = "Space77687";
 		String text = "Activitity 77687";
 		/*
 		- Connect to Intranet
@@ -291,7 +293,7 @@ public class PLF_HomepageActivityStream_ActivityStream_ActivityFilter_Others ext
 		 *Expected Outcome: The activity is displayed in the stream "All activities"		*/ 
 		selectFileter("All Activities");
 		waitForAndGetElement(home.ELEMENT_ACTIVITY.replace("${activityText}",text));
-
+		Utils.pause(1000);
 		//delete data
 		home.deleteActivity(text);
 		mMember.goToAllSpaces();

@@ -57,7 +57,7 @@ public class PlatformBase extends TestBase {
 	public final By ELEMENT_WIKI_PAGE = By.className("uiIconWiki");
 	public final By ELEMENT_FORUM_PAGE = By.xpath("//ul[@class='uiCompanyNavigations']//*[@class='uiIconUIForms']");
 	public final By ELEMENT_CALENDAR_PAGE = By.className("uiIconPLFCalendar");
-	public final String ELEMENT_LEFT_NAVIGATION_ITEM_INDEX="//ul[@class='uiCompanyNavigations']//li[${index}]/a[text()='${menuItem}']";
+	public final String ELEMENT_LEFT_NAVIGATION_ITEM_INDEX="//ul[@class='uiCompanyNavigations']//li[${index}]//span[text()='${menuItem}']";
 	public final String ELEMENT_LEFT_NAVIGATION_ITEM_INDEX_PLF41="//ul[@class='uiCompanyNavigations']//li[${index}]/a[@href='${menuItem}']";
 	public final By ELEMENT_SPACE_NAVIGATION = By.className("spaceNavigation");
 	public final String ELEMENT_SPACE_NAVIGATION_SPACE_ITEM_INDEX = "//*[@class='spaceNavigation']/li[${index}]/a[contains(text(),'${spaceName}')]";
@@ -186,7 +186,7 @@ public class PlatformBase extends TestBase {
 	public final By ELEMENT_MY_SETTING = By.className("uiIconSetting");
 	public final By ELEMENT_MY_ACTIVITY_STREAM = By.className("uiIconPLFActivityStream");
 	public final By ELEMENT_MY_CONNECTIONS = By.className("uiIconPLFMyConnection");
-	public final By ELEMENT_MY_WIKI = By.className("uiIconWikiWiki");
+	public final By ELEMENT_MY_WIKI = By.xpath("//a[contains(.,'My Wiki')]");
 	public final String ELEMENT_LINE_BETWEEN_MENU = "//*[@class='divider'][${index}]";
 	
 	//User -> Change Language
@@ -683,12 +683,12 @@ public class PlatformBase extends TestBase {
 	public By ELEMENT_CALENDAR_GADGET_TODAY_LABEL = By.xpath("//div[@class='currentDateContainer']//a[contains(text(), 'Today')]");
 	public By ELEMENT_CALENDAR_GADGET_NEXTDAY_ARROW = By.xpath("//a[@class='actionIcon nextDate pull-right']//*[@class='uiIconMiniArrowRight uiIconLightGray']");
 	public By ELEMENT_CALENDAR_GADGET_PREVIOUSDAY_ARROW = By.xpath("//*[@class='actionIcon prevDate pull-left']//*[@class='uiIconMiniArrowLeft uiIconLightGray']");
-	public By ELEMENT_CALENDAR_GADGET_TOMORROW_LABEL = By.xpath("//*[@class='currentDateContainer']//a[contains(text(),Tomorrow)]");
+	public By ELEMENT_CALENDAR_GADGET_TOMORROW_LABEL = By.xpath("//*[@class='currentDateContainer']//a[contains(text(),'Tomorrow')]");
 	public By ELEMENT_CALENDAR_GADGET_YESTERDAY_LABEL = By.xpath("//div[@class='currentDateContainer']//a[contains(text(),Yesterday)]");
 	public String ELEMENT_CALENDAR_GADGET_SETTING_LINK_ITEM = "//span[contains(text(),'${calendar}')]";
 	public By ELEMENT_CALENDAR_GADGET_VERIFIED_TEXT_LABEL = By.xpath("//*[ text()='Displayed Calendars:']");
 	public String ELEMENT_ADD_CALENDAR_IN_ADDITION_LIST = "//a[text()='${calendar}']/..//i[contains(@class,'uiIconAdd')]";
-	public static String ELEMENT_ADD_CALENDAR_IN_ADDITION_LIST_PLF_41 = "//a[text()='${calendar}']/..//i[@class ='uiIconSimplePlusMini uiIconLightGray']";
+	public String ELEMENT_ADD_CALENDAR_IN_ADDITION_LIST_PLF_41 = "//a[text()='${calendar}']/..//i[@class ='uiIconSimplePlusMini uiIconLightGray']";
 	public String ELEMENT_CALENDAR_IN_CALENDAR_GADGET = "//span[@class='calendarName asparagus' and@title='${calendar}']";
 	public String ELEMENT_DELETE_CALENDAR_ICON = "//span[contains(text(),'${calendar}')] /..//*[@class='uiIconDel']";
 	public String ELEMENT_CALENDAR_IN_ADDITIONAL_LIST = "//a[text()='${calendar}']";
@@ -698,6 +698,7 @@ public class PlatformBase extends TestBase {
 	public String ELEMENT_EVENT_TASK_MULTIDATE_ITEM_IN_CALENDAR_GADGET = "//*[contains(@class,'eventsList')]//*[contains(text(),'${event}')]/../..//span[contains(text(),'${totime}')]/../span[contains(text(),'${endtime}')]";
 	public By ELEMENT_CALENDAR_GADGET_TASK_LABEL = By.xpath("//*[@class='title taskTitle']");
 	public String ELEMENT_CALENDAR_GADGET_TASK_NORMAL = "//ul[@class='tasksList']//li[@class='taskNotCompleted']//a[contains(text(),'${task}')]";
+	public String ELEMENT_CALENDAR_GADGET_TASK_LATE_NORMAL = "//ul[@class='tasksList']//li[@class='taskLateNotCompleted']//a[contains(text(),'${task}')]";
 	public String ELEMENT_CALENDAR_GADGET_TASK_COMPLETED = "//ul[@class='tasksList']//li[@class='taskCompleted']//a[contains(text(),'${task}')]";
 	public String ELEMENT_CALENDAR_GADGET_TASK_INDEX = "//ul[@class='tasksList']//li['${index}']//a[contains(text(),'${task}')]";
 	public By ELEMENT_CALENDAR_GADGET_EMPTY = By.xpath("//*[contains(text(),'Nothing Planned ')]");

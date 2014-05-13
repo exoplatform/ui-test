@@ -76,7 +76,10 @@ public class PLF_HomepageGadgets_Bookmarks extends WikiBase{
 		String name = "Connection";
 		String url = "/portal/intranet/connexions";
 		
-		//Add Bookmarks gadget to HomePage  
+		//Add Bookmarks gadget to HomePage 
+		naviToolbar.goToApplicationRegistry();
+		magApp.importApplication();
+		naviToolbar.goToHomePage();
 		naviToolbar.goToEditLayout();
 		click(ELEMENT_CATEGORY_GADGETS);
 		dragAndDropToObject(hpGadget.ELEMENT_APPLICATION_BOOKMARKS,hpGadget.ELEMENT_MIDDLE_CONTAINER);

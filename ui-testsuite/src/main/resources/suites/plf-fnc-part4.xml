@@ -1,0 +1,19 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="Platform Functional Test" verbose="1" preserve-order="true">
+	<test name="plf-fnc-part4" enabled="true">
+		<groups>
+			<run>
+				<exclude name="pending" />
+			</run>
+		</groups>
+		<classes>
+			<class name = "org.exoplatform.selenium.platform.plf.functional.homepagegadgets.suggestiongadget.PLF_HomepageGadgets_SuggestionGadget" />
+			<class name = "org.exoplatform.selenium.platform.plf.functional.homepagegadgets.invitationgadget.PLF_HomepageGadgets_InvitationGadget" />
+			
+		</classes>
+	</test>
+	<listeners>
+		<listener class-name="org.exoplatform.selenium.TestReportListener" />
+	</listeners>
+</suite>

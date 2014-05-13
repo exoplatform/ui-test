@@ -58,7 +58,7 @@ public class PLF_HomepageActivityStream_FileSharingActivity extends Activity{
 		info("Test 1: Add File Sharing activity after share a file in portal");
 		String driverName = "Personal Drives";
 		String folderPath = "Personal Documents";
-		String uploadFileName = "ECMS_DMS_SE_Upload_pdffile.pdf";
+		String uploadFileName = "upload77157.pdf";
 		String folder = "Folder77157";
 		/*
 		- Connect to Intranet
@@ -90,7 +90,7 @@ public class PLF_HomepageActivityStream_FileSharingActivity extends Activity{
 		info("Test 2: Delete a File sharing activity from activity stream by its user in portal");
 		String driverName = "Personal Drives";
 		String folderPath = "Personal Documents";
-		String uploadFileName = "ECMS_DMS_SE_Upload_pdffile.pdf";
+		String uploadFileName = "upload77157.pdf";
 		String folder = "Folder77166";
 		/*
 		- Connect to Intranet
@@ -132,7 +132,7 @@ public class PLF_HomepageActivityStream_FileSharingActivity extends Activity{
 		info("Test 3: Dislike a File sharing activity from intranet");
 		String driverName = "Personal Drives";
 		String folderPath = "Personal Documents";
-		String uploadFileName = "ECMS_DMS_SE_Upload_pdffile.pdf";
+		String uploadFileName = "upload77157.pdf";
 		String folder = "Folder77167";
 
 		/*
@@ -176,10 +176,10 @@ public class PLF_HomepageActivityStream_FileSharingActivity extends Activity{
 	@Test
 	public  void test04_AddFileSharingActivityAfterShareAFileInSpace() {
 		info("Test 4: Add File Sharing activity after share a file in space");
-		String spaceName = "Space 77331";
+		String spaceName = "Space77331";
 		String driverName = "Personal Drives";
 		String folderPath = "Personal Documents";
-		String uploadFileName = "ECMS_DMS_SE_Upload_pdffile.pdf";
+		String uploadFileName = "upload77157.pdf";
 		String folder = "Folder77331";
 
 		/*
@@ -220,10 +220,10 @@ public class PLF_HomepageActivityStream_FileSharingActivity extends Activity{
 	@Test
 	public  void test05_DeleteAFileSharingActivityFromActivityStreamByItsUserInSpace() {
 		info("Test 5: Delete a File sharing activity from activity stream by its user in space");
-		String spaceName = "Space 77332";
+		String spaceName = "Space77332";
 		String driverName = "Personal Drives";
 		String folderPath = "Personal Documents";
-		String uploadFileName = "ECMS_DMS_SE_Upload_pdffile.pdf";
+		String uploadFileName = "upload77157.pdf";
 		String folder = "Folder77332";
 
 		/*
@@ -278,10 +278,10 @@ public class PLF_HomepageActivityStream_FileSharingActivity extends Activity{
 	@Test
 	public  void test06_DislikeAFileSharingActivityFromSpace() {
 		info("Test 6: Dislike a File sharing activity from space");
-		String spaceName = "Space 77618";
+		String spaceName = "Space77618";
 		String driverName = "Personal Drives";
 		String folderPath = "Personal Documents";
-		String uploadFileName = "ECMS_DMS_SE_Upload_pdffile.pdf";
+		String uploadFileName = "upload77157.pdf";
 		String folder = "Folder77618";
 
 		/*

@@ -21,7 +21,6 @@ public class PLF_Branding extends PlatformBase{
 	ManageAccount magAcc;
 	NavigationToolbar naviToolbar;
 	BrandingManagement brandMag;
-	Button btn;
 
 	@BeforeMethod
 	public void beforeMethods() {
@@ -31,7 +30,7 @@ public class PLF_Branding extends PlatformBase{
 		naviToolbar = new NavigationToolbar(driver);
 		magAcc = new ManageAccount(driver);
 		brandMag = new BrandingManagement(driver);
-		btn = new Button(driver);
+		button = new Button(driver);
 		magAcc.signIn(DATA_USER1, DATA_PASS);
 	}
 
@@ -81,7 +80,7 @@ public class PLF_Branding extends PlatformBase{
 
 		info("Upload an invalid logo");
 		brandMag.uploadLogo(urlFile, false, false);
-		waitForMessage(brandMag.INCORRECT_LOGO_MSG);
+		waitForAndGetElement(brandMag.ELEMENT_MESSAGE_MUST_PNG);
 
 	}
 
@@ -145,7 +144,7 @@ public class PLF_Branding extends PlatformBase{
 
 		info("Upload a valid logo");
 		brandMag.uploadLogo(urlFile, true, true);	
-		waitForMessage(brandMag.SAVE_INFO_MSG);
+		waitForAndGetElement(brandMag.ELEMENT_MESSAGE_SAVE_INFO);
 	}
 
 	/**
@@ -162,7 +161,7 @@ public class PLF_Branding extends PlatformBase{
 		info("Upload a valid logo");
 		brandMag.uploadLogo(urlFile, true, false);	
 		button.cancel();
-		waitForMessage(brandMag.CANCEL_INFO_MSG);
+		waitForAndGetElement(brandMag.ELEMENT_MESSAGE_CANCEL_INFO);
 	}
 
 	/**
@@ -233,10 +232,10 @@ public class PLF_Branding extends PlatformBase{
 
 	/**
 	 * caseID 79329: Logo defined should be 34 pixels height in the final navigation bar
-	 * 
+	 * Bug: https://jira.exoplatform.org/browse/PLF-5923
 	 */
 
-	@Test
+	@Test(groups="error")
 	public void test13_CheckLogoSizeAfterSavedOnFinalNavBar() {
 		String urlFile = "FNC_ECMS_FEX_ACTION_09_1.png";
 		String size = "34px";
@@ -249,6 +248,7 @@ public class PLF_Branding extends PlatformBase{
 
 		info("Go to Intranet Homepage");
 		naviToolbar.goToHomePage();
+		info("size " + driver.findElement(brandMag.ELEMENT_LOGO_CONTAINER_TOOLBAR).getCssValue("height"));
 		String logo = driver.findElement(brandMag.ELEMENT_LOGO_CONTAINER_TOOLBAR).getCssValue("height");
 		assert logo.equals(size);
 	}

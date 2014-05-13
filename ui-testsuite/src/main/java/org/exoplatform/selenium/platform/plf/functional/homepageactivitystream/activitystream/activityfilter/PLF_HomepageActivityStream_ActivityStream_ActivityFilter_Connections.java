@@ -36,8 +36,8 @@ public class PLF_HomepageActivityStream_ActivityStream_ActivityFilter_Connection
 		home = new HomePageActivity(driver);
 		nav = new NavigationToolbar(driver);	
 		pConn = new PeopleConnection(driver);
-		mMember = new ManageMember(driver);
-		spaceMan = new SpaceManagement(driver);
+		mMember = new ManageMember(driver,this.plfVersion);
+		spaceMan = new SpaceManagement(driver,this.plfVersion);
 		acc.signIn(DATA_USER1, DATA_PASS);		
 	}
 
@@ -92,7 +92,7 @@ public class PLF_HomepageActivityStream_ActivityStream_ActivityFilter_Connection
 	public void test02_ActivityPostedFromASpaceShouldNotBeVisibleInConnectionsOfAConnection(){
 		// Connect userA & userB
 		String text="Activity 77662";
-		String spaceName = "Space 77662";
+		String spaceName = "Space77662";
 		//Connect user A & B
 		nav.goToConnectionPage();
 		pConn.connectPeople(user1);
@@ -201,7 +201,4 @@ public class PLF_HomepageActivityStream_ActivityStream_ActivityFilter_Connection
 		nav.goToConnectionPage();
 		pConn.removeConnection(user1);
 	}
-
-
-
 }

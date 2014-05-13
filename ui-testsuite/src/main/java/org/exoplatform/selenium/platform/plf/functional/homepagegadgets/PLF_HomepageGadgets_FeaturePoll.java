@@ -183,7 +183,7 @@ public class PLF_HomepageGadgets_FeaturePoll extends BasicAction{
 		*Input Data: 
 			
 		*Expected Outcome: 
-			The selected poll is shown*/ 
+			The selected poll is shown */
 		naviToolbar.goToHomePage();
 		//Add poll gadget
 		naviToolbar.goToApplicationRegistry();
@@ -194,6 +194,7 @@ public class PLF_HomepageGadgets_FeaturePoll extends BasicAction{
 		click(ELEMENT_CATEGORY_GADGETS);
 		click(ELEMENT_SWITCH_VIEW_MODE);
 		dragAndDropToObject(hpGadget.ELEMENT_APPLICATION_POLL, hpGadget.ELEMENT_MIDDLE_CONTAINER);
+		waitForAndGetElement(pageEditor.ELEMENT_PORTLET_DRAGGED.replace("${portlet}", "Featured Poll"));
 		pageEditor.finishEditLayout();	
 		naviToolbar.goToHomePage();
 		driver.switchTo().frame(waitForAndGetElement(ELEMENT_GADGET_WORKSPACE_FRAME));

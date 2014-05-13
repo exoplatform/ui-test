@@ -2,6 +2,7 @@ package org.exoplatform.selenium.platform.plf.functional.homepagegadgets;
 
 import static org.exoplatform.selenium.TestLogger.info;
 
+import org.exoplatform.selenium.Utils;
 import org.exoplatform.selenium.platform.HomePageGadget;
 import org.exoplatform.selenium.platform.ManageAccount;
 import org.exoplatform.selenium.platform.ManageApplications;
@@ -69,8 +70,8 @@ public class PLF_HomepageGadgets_MyProfile extends Activity{
 		naviToolbar.goToHomePage();
 		naviToolbar.goToEditPageEditor();
 		click(ELEMENT_CATEGORY_GADGETS);
-		click(ELEMENT_SWITCH_VIEW_MODE);
 		dragAndDropToObject(hpGadget.ELEMENT_APPLICATION_MY_PROFILE, hpGadget.ELEMENT_MIDDLE_CONTAINER);
+		waitForAndGetElement(pageEditor.ELEMENT_PORTLET_DRAGGED.replace("${portlet}", "My Profile"));
 		pageEditor.finishEditLayout();
 
 		//Get old avatar
@@ -152,8 +153,9 @@ public class PLF_HomepageGadgets_MyProfile extends Activity{
 		naviToolbar.goToHomePage();
 		naviToolbar.goToEditPageEditor();
 		click(ELEMENT_CATEGORY_GADGETS);
-		click(ELEMENT_SWITCH_VIEW_MODE);
+		Utils.pause(1000);
 		dragAndDropToObject(hpGadget.ELEMENT_APPLICATION_MY_PROFILE,hpGadget.ELEMENT_MIDDLE_CONTAINER);
+		waitForAndGetElement(pageEditor.ELEMENT_PORTLET_DRAGGED.replace("${portlet}", "My Profile"));
 		pageEditor.finishEditLayout();
 
 		//Get old first name
@@ -199,7 +201,6 @@ public class PLF_HomepageGadgets_MyProfile extends Activity{
 		/*Clear data*/
 		info("Clear data");
 		naviToolbar.goToEditPageEditor();
-		click(ELEMENT_SWITCH_VIEW_MODE);
 		waitForAndGetElement(pageEditor.ELEMENT_VIEW_PAGE_PROPERTIES);
 		pageEditor.removePortlet(hpGadget.ELEMENT_GADGET_PORLET_IN_MIDDLE_HOME_PAGE, hpGadget.ELEMENT_DELETE_ICON_GADGET_PORLET_IN_MIDDLE_HOME_PAGE);
 		naviToolbar.goToMyProfile();
@@ -231,8 +232,8 @@ public class PLF_HomepageGadgets_MyProfile extends Activity{
 		naviToolbar.goToHomePage();
 		naviToolbar.goToEditPageEditor();
 		click(ELEMENT_CATEGORY_GADGETS);
-		click(ELEMENT_SWITCH_VIEW_MODE);
 		dragAndDropToObject(hpGadget.ELEMENT_APPLICATION_MY_PROFILE, hpGadget.ELEMENT_MIDDLE_CONTAINER);
+		waitForAndGetElement(pageEditor.ELEMENT_PORTLET_DRAGGED.replace("${portlet}", "My Profile"));
 		pageEditor.finishEditLayout();
 
 		//Get old first name

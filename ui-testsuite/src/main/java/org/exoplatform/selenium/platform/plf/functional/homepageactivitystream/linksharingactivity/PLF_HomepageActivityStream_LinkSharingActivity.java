@@ -52,10 +52,10 @@ public class PLF_HomepageActivityStream_LinkSharingActivity extends Activity{
 
 	  @Test	
 	  public void test01_LinkSharing_Intranet(){
-		  String link = "http://yahoo.fr";
-		  int height = 75;
+		  String link = "http://gadgets.com";
+//		  int height = 75;
 		  int width = 75;
-		  String title = "Yahoo France";
+		  String title = "Gadgets.com";
 
 		  // Add a link shared in intranet
 		  naviToolbar.goToHomePage();
@@ -69,12 +69,12 @@ public class PLF_HomepageActivityStream_LinkSharingActivity extends Activity{
 		  
 		  // Verify the size of the content's image
 		  String ELEMENT_LINKSHARE_THUMBNAIL = ELEMENT_DATA_ORIGINAL_TITLE.replace("${title}", title);
-		  int imageHeight = waitForAndGetElement(ELEMENT_LINKSHARE_THUMBNAIL).getSize().getHeight();
+//		  int imageHeight = waitForAndGetElement(ELEMENT_LINKSHARE_THUMBNAIL).getSize().getHeight();
 		  int imageWidth = waitForAndGetElement(ELEMENT_LINKSHARE_THUMBNAIL).getSize().getWidth();
-		  info("Height = " + String.valueOf(imageHeight));
+//		  info("Height = " + String.valueOf(imageHeight));
 		  info("Width = " + String.valueOf(imageWidth));
 		  Assert.assertEquals(width,imageWidth);
-		  Assert.assertEquals(height,imageHeight);
+//		  Assert.assertEquals(height,imageHeight);
 		  
 		  // Delete a link shared
 		  hpActivity.deleteActivity(link);
@@ -89,7 +89,7 @@ public class PLF_HomepageActivityStream_LinkSharingActivity extends Activity{
 	  
 	  @Test	
 	  public void test02_LinkSharing_Space(){
-		  String link = "https://www.google.com.vn/";
+		  String link = "http://www.google.com";
 		  String spaceName = "Space77623";
 
 		  // Create data for Pre-Conditions

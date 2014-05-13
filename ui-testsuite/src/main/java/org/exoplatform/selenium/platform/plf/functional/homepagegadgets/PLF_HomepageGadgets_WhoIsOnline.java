@@ -26,8 +26,8 @@ public class PLF_HomepageGadgets_WhoIsOnline extends Activity {
 	NavigationToolbar navToolBar;
 	PeopleConnection peopleC;
 	PeopleSearch peopleS;
+	String user1 = "Mary Williams";
 
-	
 	@BeforeMethod
 	public void setUpBeforeTest(){
 		getDriverAutoSave();
@@ -59,28 +59,28 @@ public class PLF_HomepageGadgets_WhoIsOnline extends Activity {
 		loginWithAnotherAccOnThesameBrowser(DATA_USER2, DATA_PASS);
 		hg=new HomePageGadget(newDriver);
 		newDriver.navigate().refresh();
-		
+
 		info("USER2: 79683 - Check pop-up information of online user");
 		hg.checkUserInfoOnWhoisOnlineGadget(DATA_USER1, false, "", false, false);
-		
+
 		info("USER2: Go to My Connection");
 		navToolBar = new NavigationToolbar(newDriver);
 		navToolBar.goToConnectionPage();
-		
+
 		info("USER2: Connect with user acc 2");
 		peopleC = new PeopleConnection(newDriver);
-		peopleC.connectPeople(DATA_USER1);		
-		
+		peopleC.connectPeople("John Smith");		
+
 		info("USER2: Go to Homepage Intranet");
 		navToolBar.goToHomePage();
-		
+
 		info("USER2: 79684 - Check pop-up information after sending a connection request");
 		hg.checkUserInfoOnWhoisOnlineGadget(DATA_USER1, false, "", true, false);
-		
-		
-		info("--Cancel Connection--");
+
+
+		info("--Ignore Connection--");
 		navToolBar.goToConnectionPage();
-		peopleC.cancelRequest("john");
+		peopleC.ignoreInvitation("Mary Williams");
 		info("--Close the 2nd browser window--");
 		Utils.pause(500);
 		newDriver.manage().deleteAllCookies();
@@ -98,81 +98,103 @@ public class PLF_HomepageGadgets_WhoIsOnline extends Activity {
 	@Test
 	public void test02_checkDisplayOfOnlineConnectedUser(){
 		String activity = "HelloWorld79685";
-		
+
 		info("USER1: Share a status on activity stream");
 		addActivity(true, activity, false,"");
-		
+
 		info("USER1: Go to My Connection");
 		navToolBar.goToConnectionPage();
-		
+
 		info("USER1: Connect with user acc 2");
-		peopleC.connectPeople(DATA_USER2);
-						
+		peopleC.connectPeople("Mary Williams");
+
 		info("USER2: Switch to other window to login");
 		loginWithAnotherAccOnThesameBrowser(DATA_USER2, DATA_PASS);
 		hg=new HomePageGadget(newDriver);
-		
+
 		info("USER2: 79686 - Check popup information of online user when receiving a connection request");
 		hg.checkUserInfoOnWhoisOnlineGadget(DATA_USER1, true, activity, true, true);
-		
+
 		info("USER2: Accept invitation from user acc 1");
 		hg.acceptInvitationGadget("John Smith");
-	
+
 		info("USER2: 79685 - Check popup information of online user 1 when having a connection");
 		hg.checkUserInfoOnWhoisOnlineGadget(DATA_USER1, true, activity, true, true);
-		
+
 		info("Restore data");
 		info("--Cancel Connection--");
 		peopleC = new PeopleConnection(newDriver);
 		navToolBar = new NavigationToolbar(newDriver);
 		navToolBar.goToConnectionPage();
-		peopleS.searchPeople(true,DATA_USER1);
-		peopleC.removeConnection(DATA_USER1);
+		peopleS.searchPeople(true,"John Smith");
+		peopleC.removeConnection("John Smith");
 		info("--Close the 2nd browser window--");
 		Utils.pause(500);
 		newDriver.manage().deleteAllCookies();
 		newDriver.quit();
 	}
-	
+
 	/**
-	 * CaseID 79677
-	 * Automatic refresh of the Gadget "Who's online?"
-	 * 
 	 * CaseID 79678
 	 * Connect to User from the information pop up
 	 * 
 	 * CaseID 79682
 	 * Display a long title of an activity in pop up for a connected user
+	 * Bug: https://jira.exoplatform.org/browse/PLF-4280
 	 */
-	@Test
+	@Test(groups="error")
 	public void test03_checkUpdateOfOnlineUser(){
 		String longActivity = "Merry Xmas and Happy New Year 2014 to every body all around the world. We wish you a merry xmas and a happy new year with lots of joy and happiness and luck !!!";
-		
+
 		info("USER1: Share a status on activity stream");
 		addActivity(true, longActivity, false,"");
-		
+
 		info("USER2: Switch to other window to login");
 		loginWithAnotherAccOnThesameBrowser(DATA_USER2, DATA_PASS);
 		hg=new HomePageGadget(newDriver);
 		newDriver.navigate().refresh();
-		
+
 		info("USER2: Check updated long status of user acc 1");
 		hg.checkTruncatedStatusOnWhoIsOnlineGadget(DATA_USER1);
-		
+
 		info("USER2: Connect to other acc from Who'sOnline");
 		hg.connectPeoplefromWhoisOnlineGadget(DATA_USER1);
-		
+
 		info("Restore data");
 		info("--Cancel Connection--");
 		peopleC = new PeopleConnection(newDriver);
 		navToolBar = new NavigationToolbar(newDriver);
 		navToolBar.goToConnectionPage();
-		peopleS.searchPeople(true,DATA_USER1);
-		peopleC.removeConnection(DATA_USER1);
+		peopleS.searchPeople(true,"John Smith");
+		peopleC.removeConnection("John Smith");
 		info("--Close the 2nd browser window--");
 		Utils.pause(500);
 		newDriver.manage().deleteAllCookies();
 		newDriver.quit();
 	}
-	
+
+	/**@date 24/4/2014
+	 * @author lientm: insert
+	 * CaseID 79677
+	 * Automatic refresh of the Gadget "Who's online?"
+	 **/
+	@Test
+	public void test04_AutomaticRefresh(){
+
+		loginWithAnotherAccOnThesameBrowser(DATA_USER2, DATA_PASS);
+		//user1 check user2 display on Who is online gadget after 1 minus
+		Utils.pause(31000);//buffer 1s
+		hg.checkUserInfoOnWhoisOnlineGadget(DATA_USER2, user1, null, false, null, 0);
+		//user 2 logout
+		acc = new ManageAccount(newDriver);
+		acc.signOut();
+		newDriver.manage().deleteAllCookies();
+		newDriver.quit();
+		//user1 check user2 not display on who is online gadget after 1 minus
+
+		Utils.pause(31000);//buffer 1s
+
+		waitForElementNotPresent(hg.ELEMENT_ONLINE_USER_AVATAR.replace("${acc}",DATA_USER1));
+
+	}	
 }

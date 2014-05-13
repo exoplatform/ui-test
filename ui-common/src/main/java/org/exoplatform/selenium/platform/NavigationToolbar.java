@@ -444,7 +444,7 @@ public class NavigationToolbar extends PlatformBase {
 		click(ELEMENT_HOME_PAGE);
 		Utils.pause(1000);
 		driver.navigate().refresh();
-		waitForAndGetElement(ELEMENT_REFRESH);
+		waitForAndGetElement(ELEMENT_REFRESH,60000);
 	}
 
 	/**

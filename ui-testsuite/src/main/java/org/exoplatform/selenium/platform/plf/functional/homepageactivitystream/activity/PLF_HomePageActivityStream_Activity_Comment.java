@@ -224,7 +224,7 @@ public class PLF_HomePageActivityStream_Activity_Comment extends Activity{
 	 */
 	@Test
 	public void test08_DisplayUserProfileISPopupInAComment(){
-		String text = "Activity case 08"; 
+		String text = "Activity case 78598"; 
 		String link = "";
 		String comment = "Add comment case08";
 		addActivity(true, text, false, link);
@@ -243,7 +243,7 @@ public class PLF_HomePageActivityStream_Activity_Comment extends Activity{
 		waitForAndGetElement(ELEMENT_USER_PROFILE_POPUP.replace("${userName}", "John Smith"));
 		
 		//delete data
-		home.deleteActivity(text);
+		home.deleteActivity(text,true,false);
 	}
 
 	/** Display vertical scroll bar for long comment

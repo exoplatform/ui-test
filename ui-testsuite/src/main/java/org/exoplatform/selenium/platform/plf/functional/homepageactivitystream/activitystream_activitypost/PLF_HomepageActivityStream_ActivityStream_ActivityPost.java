@@ -1,5 +1,6 @@
 package org.exoplatform.selenium.platform.plf.functional.homepageactivitystream.activitystream_activitypost;
 
+import org.exoplatform.selenium.Utils;
 import org.exoplatform.selenium.platform.HomePageActivity;
 import org.exoplatform.selenium.platform.ManageAccount.userType;
 import org.exoplatform.selenium.platform.social.Activity;
@@ -129,7 +130,8 @@ public class PLF_HomepageActivityStream_ActivityStream_ActivityPost extends Acti
 
 		//Step2: Add a comment
 		addComment(activity,comment);
-
+		selectFileter("All Activities");
+		Utils.pause(1000);
 		//Delete activity before exit test cases
 		hpActivity.deleteActivity(activity);
 	}	

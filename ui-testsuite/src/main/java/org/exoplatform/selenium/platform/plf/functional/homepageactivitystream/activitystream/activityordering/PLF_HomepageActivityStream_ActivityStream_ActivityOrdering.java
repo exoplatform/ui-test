@@ -55,7 +55,7 @@ public class PLF_HomepageActivityStream_ActivityStream_ActivityOrdering extends 
 		- Add an activity
 		 *Input Data: 
 		 *Expected Outcome: The activity is added in the top of the stream		*/
-		String spaceName = "Space 77650";
+		String spaceName = "Space77650";
 		String text1 = "Activity 1";
 		String text2 = "Activity 2"; 
 		mMember.goToMySpacePage();
@@ -108,8 +108,8 @@ public class PLF_HomepageActivityStream_ActivityStream_ActivityOrdering extends 
 		waitForAndGetElement(home.ELEMENT_ACTIVITY_ORDER.replace("${index}","2").replace("${activityText}", text1));
 
 		//delete data
-		home.deleteActivity(text2);
-		home.deleteActivity(text1);
+		home.deleteActivity(text2,true,false);
+		home.deleteActivity(text1,true,false);
 	}
 
 	/**
@@ -134,6 +134,7 @@ public class PLF_HomepageActivityStream_ActivityStream_ActivityOrdering extends 
 		nav.goToHomePage();
 		selectFileter("All Activities");
 		addActivity(true, text1, false,"");
+		driver.navigate().refresh();
 		Utils.pause(500);
 		addActivity(true, text2, false,"");
 		nav.goToHomePage();
@@ -151,8 +152,8 @@ public class PLF_HomepageActivityStream_ActivityStream_ActivityOrdering extends 
 		waitForAndGetElement(home.ELEMENT_ACTIVITY_ORDER.replace("${index}","2").replace("${activityText}", text2));
 
 		//delete data
-		home.deleteActivity(text2);
-		home.deleteActivity(text1);
+		home.deleteActivity(text2,true,false);
+		home.deleteActivity(text1,true,false);
 	}
 
 	/**
@@ -176,6 +177,7 @@ public class PLF_HomepageActivityStream_ActivityStream_ActivityOrdering extends 
 		nav.goToHomePage();
 		selectFileter("All Activities");
 		addActivity(true, text1, false,"");
+		driver.navigate().refresh();
 		addActivity(true, text2, false,"");
 		waitForAndGetElement(home.ELEMENT_ACTIVITY_ORDER.replace("${index}","1").replace("${activityText}", text2));
 		waitForAndGetElement(home.ELEMENT_ACTIVITY_ORDER.replace("${index}","2").replace("${activityText}", text1));
@@ -205,7 +207,7 @@ public class PLF_HomepageActivityStream_ActivityStream_ActivityOrdering extends 
 	@Test
 	public  void test05_AddACommentToAnOlderActivityFromASpace() {
 		info("Test 5: Add a comment to an older activity from a space");
-		String spaceName = "Space 77654";
+		String spaceName = "Space77654";
 		String text1 = "Activity 1";
 		String text2 = "Activity 2"; 
 		String comment = "Comment 77654";
@@ -249,7 +251,7 @@ public class PLF_HomepageActivityStream_ActivityStream_ActivityOrdering extends 
 	@Test
 	public  void test06_AddALikeToAnOlderActivityFromASpace() {
 		info("Test 6: Add a Like to an older activity from a space");
-		String spaceName = "Space 77655";
+		String spaceName = "Space77655";
 		String text1 = "Activity 1";
 		String text2 = "Activity 2";
 		/*
