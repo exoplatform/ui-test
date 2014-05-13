@@ -42,21 +42,18 @@ public class ECMS_Admin_ManageView extends PlatformBase{
 	EcmsBase ecms;
 	ECMainFunction ecMain;
 	ManageView magView;
-
-	String DATA_USER = "john";
-	String DATA_PASS = "gtn";
 	
 	@BeforeMethod
 	public void beforeMethods(){
 		initSeleniumTest();
 		driver.get(baseUrl);
-		info("Login ECMS with "+ DATA_USER);
+		info("Login ECMS with "+ DATA_USER1);
 		dialog = new Dialog(driver);
 		magAcc = new ManageAccount(driver);
 		ecms = new EcmsBase(driver);
 		ecMain = new ECMainFunction(driver);
 		magView = new ManageView(driver);
-		magAcc.signIn(DATA_USER, DATA_PASS);
+		magAcc.signIn(DATA_USER1, DATA_PASS);
 		ecMain.goToManageViews();
 	}
 

@@ -363,7 +363,7 @@ public class ECMS_SE_BasicAction_CopyPaste extends PlatformBase {
 		magAcc.signOut();
 
 		//delete data with john
-		magAcc.signIn("john", "gtn");
+		magAcc.signIn(DATA_USER1,DATA_PASS);;
 		navToolBar.goToSiteExplorer();
 		cMenu.deleteData(DOCUMENT_FOLDER_PATH_1);
 	}

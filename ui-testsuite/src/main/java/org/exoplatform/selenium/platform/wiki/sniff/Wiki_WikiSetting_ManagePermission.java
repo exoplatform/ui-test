@@ -25,7 +25,7 @@ public class Wiki_WikiSetting_ManagePermission extends BasicAction {
 		driver.get(baseUrl);
 		magAc = new ManageAccount(driver);
 		but = new Button(driver);
-		magAc.signIn("john", "gtn"); 
+		magAc.signIn(DATA_USER1, DATA_PASS); 
 		goToWiki();
 	}
 
@@ -89,7 +89,7 @@ public class Wiki_WikiSetting_ManagePermission extends BasicAction {
 		checkUserNotHaveWikiAdminPermission(user);
 		
 		info("Edit permission for user mary");	
-		magAc.signIn("john", "gtn"); 
+		magAc.signIn(DATA_USER1, DATA_PASS);
 		goToWiki();
 		editSpacePermission(user, true, true, true, true, 2);
 		assert waitForAndGetElement(ELEMENT_ADMIN_SPACE_CHECK.replace("{$user}", user),DEFAULT_TIMEOUT, 1, 2).isSelected();
@@ -98,7 +98,7 @@ public class Wiki_WikiSetting_ManagePermission extends BasicAction {
 		checkUserHaveWikiAdminPermission(user);
 		
 		info("Delete permission");
-		magAc.signIn("john", "gtn"); 
+		magAc.signIn(DATA_USER1, DATA_PASS);
 		goToWiki();
 		deleteSpacePermission(user);
 	}
@@ -116,7 +116,7 @@ public class Wiki_WikiSetting_ManagePermission extends BasicAction {
 		checkUserNotHaveWikiAdminPermission(user);
 		
 		info("Edit permission for group Development");
-		magAc.signIn("john", "gtn"); 
+		magAc.signIn(DATA_USER1, DATA_PASS);
 		goToWiki();
 		editSpacePermission("developers", true, true, true, true, 2);
 		assert waitForAndGetElement(ELEMENT_ADMIN_SPACE_CHECK.replace("{$user}", "developers"),DEFAULT_TIMEOUT, 1, 2).isSelected();
@@ -125,7 +125,7 @@ public class Wiki_WikiSetting_ManagePermission extends BasicAction {
 		checkUserHaveWikiAdminPermission(user);
 		
 		info("Delete permission");
-		magAc.signIn("john", "gtn"); 
+		magAc.signIn(DATA_USER1, DATA_PASS);
 		goToWiki();
 		deleteSpacePermission("developers");
 	}
@@ -144,7 +144,7 @@ public class Wiki_WikiSetting_ManagePermission extends BasicAction {
 		checkUserNotHaveWikiAdminPermission(user);
 		
 		info("Edit permission for membership " + path);
-		magAc.signIn("john", "gtn"); 
+		magAc.signIn(DATA_USER1, DATA_PASS);
 		goToWiki();
 		editSpacePermission(path, true, true, true, true, 2);
 		assert waitForAndGetElement(ELEMENT_ADMIN_SPACE_CHECK.replace("{$user}", path),DEFAULT_TIMEOUT, 1, 2).isSelected();
@@ -153,7 +153,7 @@ public class Wiki_WikiSetting_ManagePermission extends BasicAction {
 		checkUserHaveWikiAdminPermission(user);
 		
 		info("Delete permission");
-		magAc.signIn("john", "gtn"); 
+		magAc.signIn(DATA_USER1, DATA_PASS);
 		goToWiki();
 		deleteSpacePermission(path);
 	}

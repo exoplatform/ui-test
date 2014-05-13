@@ -45,7 +45,7 @@ public class Wiki_Space_Switcher extends BasicAction{
 		driver.get(baseUrl);
 		magAc = new ManageAccount(driver);
 		magMember = new ManageMember(driver);
-		magAc.signIn("john", "gtn");
+		magAc.signIn(DATA_USER1,DATA_PASS);;
 	}
 
 	@AfterMethod

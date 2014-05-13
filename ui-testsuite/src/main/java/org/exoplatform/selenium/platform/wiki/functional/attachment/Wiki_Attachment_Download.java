@@ -29,7 +29,7 @@ public class Wiki_Attachment_Download extends BasicAction{
 		driver.get(baseUrl);
 		magAcc = new ManageAccount(driver);
 		button = new Button(driver);
-		magAcc.signIn("john", "gtn");
+		magAcc.signIn(DATA_USER1,DATA_PASS);;
 		goToWiki();
 	}
 

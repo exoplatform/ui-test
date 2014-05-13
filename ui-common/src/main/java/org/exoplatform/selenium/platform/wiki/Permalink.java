@@ -46,7 +46,7 @@ public class Permalink extends BasicAction {
 		
 		info("Check permalink with user " + user);
 		driver.get(permalink);
-		magAc.signIn(user, "gtn");
+		magAc.signIn(DATA_USER1, DATA_PASS);
 		
 		if (permission){
 			waitForTextPresent(content);

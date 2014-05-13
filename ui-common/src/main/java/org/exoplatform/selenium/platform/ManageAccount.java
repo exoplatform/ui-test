@@ -334,16 +334,16 @@ public class ManageAccount extends PlatformBase {
 			signIn("root", "gtngtn");
 			break;
 		case ADMIN:
-			signIn("john", "gtn");
+			signIn("john", DATA_PASS);
 			break;	
 		case AUTHOR:
-			signIn("james", "gtn");
+			signIn("james", DATA_PASS);
 			break;
 		case DEVELOPER:
-			signIn("demo", "gtn");
+			signIn("demo", DATA_PASS);
 			break;
 		case PUBLISHER:
-			signIn("mary", "gtn");
+			signIn("mary", DATA_PASS);
 			break;
 		default:
 			break;

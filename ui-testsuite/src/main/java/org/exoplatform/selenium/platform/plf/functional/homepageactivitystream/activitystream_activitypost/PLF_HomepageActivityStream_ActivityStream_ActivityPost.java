@@ -35,7 +35,7 @@ public class PLF_HomepageActivityStream_ActivityStream_ActivityPost extends Acti
 		hpActivity = new HomePageActivity(driver);
 		spaceMag = new SpaceManagement(driver);
 		conn = new PeopleConnection(driver);
-		magAc.signIn("john", "gtn");
+		magAc.signIn(DATA_USER1,DATA_PASS);;
 
 	}
 

@@ -47,7 +47,6 @@ public class ECMS_Admin_ManageCategories_Display extends PlatformBase {
 	AdvancedSearch advSrc;
 
 	public final String DATA_USER = "john";
-	public final String DATA_PASS = "gtn";
 	
 	@BeforeMethod
 	public void beforeMethods() {

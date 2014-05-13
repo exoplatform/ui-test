@@ -199,7 +199,7 @@ public class ECMS_SE_BasicAction_Delete extends PlatformBase {
 		magAcc.signOut();
 
 		//delete data
-		magAcc.signIn("john", "gtn");
+		magAcc.signIn(DATA_USER1,DATA_PASS);;
 		navToolBar.goToSiteExplorer();
 		cMenu.deleteDocument(ELEMENT_CONTENT_FOLDER);
 		newDriver.close();
@@ -256,7 +256,7 @@ public class ECMS_SE_BasicAction_Delete extends PlatformBase {
 		magAcc.signOut();
 
 		//delete data
-		magAcc.signIn("john", "gtn");
+		magAcc.signIn(DATA_USER1,DATA_PASS);;
 		navToolBar.goToSiteExplorer();
 		cMenu.deleteDocument(ELEMENT_CONTENT_FOLDER);		
 	}
@@ -306,7 +306,7 @@ public class ECMS_SE_BasicAction_Delete extends PlatformBase {
 
 		//Delete data
 		magAcc.signOut();
-		magAcc.signIn("john", "gtn");
+		magAcc.signIn(DATA_USER1,DATA_PASS);;
 
 		//goto Site Explorer
 		navToolBar.goToSiteExplorer();

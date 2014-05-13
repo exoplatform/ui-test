@@ -63,7 +63,7 @@ import org.testng.annotations.*;
 			button = new Button(driver);
 			magAlert = new ManageAlert(driver);
 
-			magAc.signIn("john", "gtn");
+			magAc.signIn(DATA_USER1,DATA_PASS);;
 		}
 
 		@AfterMethod

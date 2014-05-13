@@ -53,7 +53,7 @@ public class Wiki_BasicAction_Add extends ManageDraft{
 		dialog = new Dialog(driver);	
 		button = new Button(driver, this.plfVersion);	
 		mMember = new ManageMember(driver, this.plfVersion);	
-		magAcc.signIn("john", "gtn");
+		magAcc.signIn(DATA_USER1,DATA_PASS);;
 	}
 
 	@AfterMethod

@@ -392,7 +392,21 @@ public class Wiki_Macro_Add extends ManageDraft{
 	@Test(groups="error")
 	public void test11_InsertSourceMacro(){
 		String title = "Page 94914";
-		String content = "== Java with title ==\\{{code language='java' title='HelloWorld.java'}} System.out.println('Hello World'); {{/code}} \\ == Java without title ==\\{{code language='java'}} System.out.println('Hello World'); {{/code}} \\ [[xwiki example>>http://extensions.xwiki.org/xwiki/bin/view/Extension/Code+Macro]] \\ {{code language='html'}} <html> <head>How cool?</head></html>{{/code}}";
+		String content = "= Code macro = \\"
+						+"== Java with title == \\"
+						+"{{code language='java' title='HelloWorld.java'}}\\"
+						+"System.out.println('Hello World');\\"
+						+"{{/code}}\\"
+						+"== Java without title ==\\"
+						+"{{code language='java'}}\\"
+						+"System.out.println('Hello World');\\"
+						+"{{/code}}\\"
+						+"== HTML ==\\"
+						+"use [[xwiki example>>http://extensions.xwiki.org/xwiki/bin/view/Extension/Code+Macro]]\\"
+						+"{{code language='html'}}\\"
+						+"<html>\\"
+						+"<head>How cool?</head>\\"
+						+"</html>{{/code}}";
 
 		//Add source macro in SourceEditor
 		info("Add new wiki page at Rich Text mode:");
@@ -450,8 +464,8 @@ public class Wiki_Macro_Add extends ManageDraft{
 	public void test13_InsertMacroInMacro2(){
 		String title = "Page macro2 78591";
 		String text = "Test macro in macro 02";
-		String syntax = "{{warning~}~}warning message!!!{{/warning~}~}";
-		String content = "{{box title=${syntax}}}${text}{{/box}}".replace("${syntax}", syntax).replace("${text}", text);
+		String syntax = " {{warning}}warning message!!!{{/warning}} ";
+		String content = "{{box title='${text}' width='100%'}}${syntax} ${text}{{/box}}".replace("${syntax}", syntax).replace("${text}", text);
 
 		//Add source macro in SourceEditor
 		info("Add new wiki page at Rich Text mode:");

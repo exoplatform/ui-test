@@ -117,7 +117,7 @@ public class Forum_Answers_Questions extends AnswerBase {
 		
 		viewQuestionWithDemoUser(categoryName,questionName,false);
 		
-		magAc.signIn("john", "gtn");
+		magAc.signIn(DATA_USER1,DATA_PASS);;
 		
 		goToAnswer();
 
@@ -136,7 +136,7 @@ public class Forum_Answers_Questions extends AnswerBase {
 		
 		info("Clear data");
 		
-		magAc.signIn("john", "gtn");
+		magAc.signIn(DATA_USER1,DATA_PASS);;
 		
 		goToAnswer();
 				
@@ -167,7 +167,7 @@ public class Forum_Answers_Questions extends AnswerBase {
 		
 		viewQuestionWithDemoUser(categoryName,questionName,false);
 		
-		magAc.signIn("john", "gtn");
+		magAc.signIn(DATA_USER1,DATA_PASS);;
 		
 		goToAnswer();
 
@@ -186,7 +186,7 @@ public class Forum_Answers_Questions extends AnswerBase {
 		
 		info("Clear data");
 			
-		magAc.signIn("john", "gtn");
+		magAc.signIn(DATA_USER1,DATA_PASS);;
 		
 		goToAnswer();
 				

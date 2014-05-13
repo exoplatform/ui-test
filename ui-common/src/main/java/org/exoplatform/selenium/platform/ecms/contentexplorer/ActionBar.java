@@ -578,7 +578,7 @@ public class ActionBar extends EcmsBase{
 			}else{
 				magView.setup2ShowViewAction(item, view, tab);
 				magAcc.signOut();
-				magAcc.signIn("john", "gtn");
+				signIn(DATA_USER1, DATA_PASS);
 				navToolBar.goToSiteExplorer();
 			}
 		}else {

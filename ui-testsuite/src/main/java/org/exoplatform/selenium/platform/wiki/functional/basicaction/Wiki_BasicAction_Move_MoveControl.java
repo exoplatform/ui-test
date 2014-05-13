@@ -33,7 +33,7 @@ public class Wiki_BasicAction_Move_MoveControl extends BasicAction{
 		alert = new ManageAlert(driver, this.plfVersion);
 		button = new Button(driver, this.plfVersion);	
 		mMember = new ManageMember(driver, this.plfVersion);	
-		acc.signIn("john", "gtn");		
+		acc.signIn(DATA_USER1,DATA_PASS);;		
 	}
 
 	@AfterMethod

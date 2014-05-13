@@ -44,7 +44,7 @@ public class ECMS_SE_Collaboration_Manage_Tag extends PlatformBase{
 		cTemplate = new ContentTemplate(driver);
 		siteExp = new SitesExplorer(driver);
 		cMenu = new ContextMenu(driver);
-		magAc.signIn("john", "gtn");
+		magAc.signIn(DATA_USER1,DATA_PASS);;
 		driver.navigate().refresh();
 	}
 
@@ -84,7 +84,7 @@ public class ECMS_SE_Collaboration_Manage_Tag extends PlatformBase{
 
 		info("Reset data");
 		magAc.signOut();
-		magAc.signIn("john", "gtn");
+		magAc.signIn(DATA_USER1,DATA_PASS);;
 		navToolbar.goToSiteExplorer();
 		siteExp.goToEditTag();
 		siteExp.deleteTag(tagName);
@@ -122,7 +122,7 @@ public class ECMS_SE_Collaboration_Manage_Tag extends PlatformBase{
 
 		info("Reset data");
 		magAc.signOut();
-		magAc.signIn("john", "gtn");
+		magAc.signIn(DATA_USER1,DATA_PASS);;
 		navToolbar.goToSiteExplorer();
 		siteExp.goToEditTag();
 		siteExp.deleteTag(tagName);

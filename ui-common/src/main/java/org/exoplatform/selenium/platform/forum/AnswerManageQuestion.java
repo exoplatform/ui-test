@@ -101,7 +101,8 @@ public class AnswerManageQuestion extends AnswerBase {
 	public final By ELEMENT_MANAGE_QUESTIONS = By.xpath("//*[contains(text(), 'Manage Questions')]");
 	public final By ELEMENT_MANAGE_QUESTIONS_POPUP = By.xpath("//*[@class='PopupTitle popupTitle' and text()='Manage Questions']");
 	public final String ELEMENT_ALL_QUESTION_TAB = "//li[contains(@class,'${status}')]//a[text()='All Questions']";
-	public final String ELEMENT_OPEN_QUESTION_TAB = "//li[contains(@class,'${status}')]//a[text()='Open Questions']";
+	//public final String ELEMENT_OPEN_QUESTION_TAB = "//li[contains(@class,'${status}')]//a[text()='Open Questions']";
+	public final String ELEMENT_OPEN_QUESTION_TAB = "//a[text()='Open Questions']";
 	public final String ELEMENT_ANSWER_QUESTION_IN_LIST = "//*[text()='${question}']/..//*[@data-original-title='Answer']";
 	public final String ELEMENT_EDIT_QUESTION_IN_LIST = "//*[text()='${question}']/..//*[@data-original-title='Edit']";
 	public final String ELEMENT_DELETE_QUESTION_IN_ALL_QUESTION_TAB_LIST = "//div[@id='QuestionManagerment-tab']//td[text()='${question}']/..//*[@data-original-title='Delete']";

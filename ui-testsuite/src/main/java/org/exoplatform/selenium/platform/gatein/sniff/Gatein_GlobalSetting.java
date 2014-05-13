@@ -34,7 +34,7 @@ public class Gatein_GlobalSetting extends PlatformBase {
 		user = new UserGroupManagement(driver);
 		but = new Button(driver);
 		
-		magAc.signIn("john", "gtn"); 
+		magAc.signIn(DATA_USER1,DATA_PASS);; 
 	}
 
 	@AfterMethod
@@ -75,7 +75,7 @@ public class Gatein_GlobalSetting extends PlatformBase {
 		waitForTextPresent(newDisplayName);
 		magAc.signOut();
 
-		magAc.signIn("john", "gtn");
+		magAc.signIn(DATA_USER1,DATA_PASS);;
 		navTool.goToUsersAndGroupsManagement();
 		user.deleteUser(username);
 	}
@@ -109,7 +109,7 @@ public class Gatein_GlobalSetting extends PlatformBase {
 		magAc.signIn(username, newpass);
 		magAc.signOut();
 
-		magAc.signIn("john", "gtn");
+		magAc.signIn(DATA_USER1,DATA_PASS);;
 		navTool.goToUsersAndGroupsManagement();
 		user.deleteUser(username);
 	}
@@ -134,7 +134,7 @@ public class Gatein_GlobalSetting extends PlatformBase {
 		magAc.signOut();
 		
 		info("Rollback language for user");
-		magAc.signIn("john", "gtn");
+		magAc.signIn(DATA_USER1,DATA_PASS);;
 		navTool.goToUsersAndGroupsManagement();
 		user.goToEditUserInfo("mary");
 		click(ELEMENT_USER_PROFILE_TAB);

@@ -32,7 +32,7 @@ public class Wiki_BasicAction_MoveAPage extends RichTextMode {
 		driver.manage().window().maximize();
 		magAcc = new ManageAccount(driver);
 		button = new Button(driver);
-		magAcc.signIn("john", "gtn");
+		magAcc.signIn(DATA_USER1,DATA_PASS);;
 		spaceMag = new SpaceManagement(driver);
 
 	}
@@ -80,7 +80,7 @@ public class Wiki_BasicAction_MoveAPage extends RichTextMode {
 		click(ELEMENT_CANCEL_BUTTON_MOVE_PAGE);
 		waitForElementNotPresent(ELEMENT_CANCEL_BUTTON_MOVE_PAGE);
 		magAcc.signOut();
-		magAcc.signIn("john", "gtn");
+		magAcc.signIn(DATA_USER1,DATA_PASS);;
 		goToWiki();
 		click(ELEMENT_PAGE1);
 		deleteCurrentWikiPage();
@@ -112,7 +112,7 @@ public class Wiki_BasicAction_MoveAPage extends RichTextMode {
 		mouseOverAndClick(ELEMENT_MORE_LINK);
 		waitForElementNotPresent(ELEMENT_MOVE_PAGE_LINK);
 		magAcc.signOut();
-		magAcc.signIn("john", "gtn");
+		magAcc.signIn(DATA_USER1,DATA_PASS);;
 		goToWiki();
 		click(ELEMENT_PAGE1);
 		deleteCurrentWikiPage();

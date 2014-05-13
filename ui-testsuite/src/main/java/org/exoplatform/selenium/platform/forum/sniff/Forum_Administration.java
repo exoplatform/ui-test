@@ -34,7 +34,7 @@ public class Forum_Administration extends ForumBase {
 		forum = new ForumManageForum(driver);
 		magtopic = new ForumManageTopic(driver);
 		
-		magAc.signIn("john", "gtn");
+		magAc.signIn(DATA_USER1,DATA_PASS);;
 		goToForums();
 	}
 
@@ -110,7 +110,7 @@ public class Forum_Administration extends ForumBase {
 		magAc.signOut();
 		
 		driver.get(baseUrl);
-		magAc.signIn("john", "gtn");
+		magAc.signIn(DATA_USER1,DATA_PASS);;
 		goToForums();
 		deleteBanIp(ip);
 		click(By.linkText(catName));

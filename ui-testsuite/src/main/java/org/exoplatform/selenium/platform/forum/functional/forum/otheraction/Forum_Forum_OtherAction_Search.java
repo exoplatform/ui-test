@@ -38,7 +38,7 @@ public class Forum_Forum_OtherAction_Search extends ForumBase{
 	    magTopic = new ForumManageTopic(driver, this.plfVersion);
 	    magPost = new ForumManagePost(driver, this.plfVersion);
 
-	    magAc.signIn("john", "gtn");
+	    magAc.signIn(DATA_USER1, DATA_PASS);
 	    goToForums();
 
 	  }

@@ -40,7 +40,7 @@ public class Forum_Setting extends ForumBase {
 		button = new Button(driver);
 		navTool = new NavigationToolbar(driver);
 		pageE = new PageEditor(driver);
-		magAc.signIn("john", "gtn");
+		magAc.signIn(DATA_USER1,DATA_PASS);;
 		goToForums();
 	}
 
@@ -103,7 +103,7 @@ public class Forum_Setting extends ForumBase {
 		click(By.linkText(title));
 		post.postReply(postname, messagePost, null, null);
 		magAc.signOut();
-		magAc.signIn("john", "gtn");
+		magAc.signIn(DATA_USER1,DATA_PASS);;
 		
 		goToForums();
 		goToUserManagement("demo");
@@ -127,7 +127,7 @@ public class Forum_Setting extends ForumBase {
 		magAc.signOut();
 		
 		info("Reset data");
-		magAc.signIn("john", "gtn");
+		magAc.signIn(DATA_USER1,DATA_PASS);;
 		goToForums();
 		click(By.linkText(catName));
 		cat.deleteCategoryInForum(catName);

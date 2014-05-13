@@ -31,7 +31,7 @@ public class Wiki_Navigation_Across_Space extends BasicAction {
 		driver.manage().window().maximize();
 		magAcc = new ManageAccount(driver);
 		button = new Button(driver);
-		magAcc.signIn("john", "gtn");
+		magAcc.signIn(DATA_USER1,DATA_PASS);;
 		spaceMag = new SpaceManagement(driver);
 		naviToolbar = new NavigationToolbar(driver, this.plfVersion);
 		peoPro = new PeopleProfile(driver, this.plfVersion);

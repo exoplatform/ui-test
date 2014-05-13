@@ -37,7 +37,7 @@ public class Wiki_BasicAction_Other extends Permalink {
 		magMem = new ManageMember(driver);
 		per = new PlatformPermission(driver);
 		
-		magAc.signIn("john", "gtn"); 
+		magAc.signIn(DATA_USER1, DATA_PASS);
 		goToWiki();
 	}
 
@@ -324,7 +324,7 @@ public class Wiki_BasicAction_Other extends Permalink {
 		magAc.signOut();
 		
 		info("Add new wiki page in space");
-		magAc.signIn("john", "gtn");
+		magAc.signIn(DATA_USER1, DATA_PASS);
 		magMem.goToMySpacePage();
 		goToWikiFromSpace(spaceName);
 		addBlankWikiPage(title, content, 0);
@@ -335,7 +335,7 @@ public class Wiki_BasicAction_Other extends Permalink {
 		
 		goToWikiByPermalink("demo", permalink, true, content);
 		
-		magAc.signIn("john", "gtn");
+		magAc.signIn(DATA_USER1, DATA_PASS);
 		magMem.goToAllSpaces();
 		magMem.deleteSpace(spaceName, 180000);
 	}
@@ -357,7 +357,7 @@ public class Wiki_BasicAction_Other extends Permalink {
 		
 		goToWikiByPermalink("demo", permalink, false, content);
 		
-		magAc.signIn("john", "gtn");
+		magAc.signIn(DATA_USER1, DATA_PASS);
 		magMem.goToAllSpaces();
 		magMem.deleteSpace(spaceName, 180000);
 	}

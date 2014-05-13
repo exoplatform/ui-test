@@ -22,7 +22,7 @@ public class Wiki_SpacePermission_Others extends BasicAction {
 		initSeleniumTest();
 		driver.get(baseUrl);
 		magAc = new ManageAccount(driver);
-		magAc.signIn("john", "gtn");
+		magAc.signIn(DATA_USER1,DATA_PASS);;
 	}
 	
 	/**
