@@ -86,6 +86,16 @@ public class WikiBase extends PlatformBase{
 	public final By ELEMENT_SPACE_SWITCHER_PLACEHOLDER = By.xpath("//*[contains(text(),'Filter Spaces')]");
 	public final String ELEMENT_SPACE_SWITCHER_SELECT = "//a[text() = '${spaceName}']";
 	public final String ELEMENT_CURRENT_SPACE_SWITCHER_SELECT= "//*[@id='uiSpaceSwitcher_BreadCrumb']//span[text()='${name}']";
+	public final String ELEMENT_SPACE_SWITCHER_AVATAR_SPACE = "//li[@class='spaceOption hover']/..//img[@alt='${spaceName}']";
+	public final String ELEMENT_SPACE_SWITCHER_INTRANET = "//li['${index}'][@class='portalSpace']//a[text() = '${spaceName}']";
+	public final By ELEMENT_SPACE_SWITCHER_AVATAR_INTRANET = By.xpath("//a[@class='spaceOption hover']/i[@class='uiIconWikiWiki']");
+	public final By ELEMENT_SPACE_SWITCHER_AVATAR_MYWIKI = By.xpath("//a[@class='spaceOption hover']/i[@class='uiIconWikiMyWiki']");
+	public final String ELEMENT_SPACE_SWITCHER_MYWIKI = "//li['${index}'][@class='userSpace']//a[@class='spaceOption hover' and @title ='My Wiki']";
+	public final By ELEMENT_SPACE_SWITCHER_CLOSE = By.xpath("//i[@title='Close']");
+	public final By ELEMENT_SPACE_SWITCHER_OUTSIDE = By.xpath("//div[@id='UIWikiPageControlArea']");
+	public final String ELEMENT_SPACE_SWITCHER_INDEX = "//li[@class='spaceOption hover']['${index}']//a[text()='${spaceName}']";
+	public final By ELEMENT_SPACE_SWITCHER_LOCATION = By.xpath("//li[contains(.,'Select location')]");
+	
 	
 	/*------------------add/edit wiki page---------------------*/
 	//Source Editor mode

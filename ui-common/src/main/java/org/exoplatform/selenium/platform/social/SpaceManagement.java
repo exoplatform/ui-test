@@ -36,9 +36,10 @@ import org.openqa.selenium.WebElement;
 public class SpaceManagement extends SocialBase {
 	UserGroupManagement userGroup;
 	Dialog dialog;
-	Button button;
+	Button button = new Button(driver, this.plfVersion);	
 	ManageAlert magAlert;
 	ActionBar actBar;
+	
 
 	//Go to My Spaces	> 
 	//Add space Form
@@ -287,7 +288,8 @@ public class SpaceManagement extends SocialBase {
 			info("-- Edit a space without changing the user's avatar --");
 		}
 		button.save();
-		waitForElementNotPresent(button.ELEMENT_SAVE_BUTTON);
+		Utils.pause(500);
+//		waitForElementNotPresent(button.ELEMENT_SAVE_BUTTON);
 		if(name == newName){
 			waitForAndGetElement("//*[contains(text(),'Updated space information successfully.')]");
 			dialog.closeMessageDialog();
@@ -319,6 +321,7 @@ public class SpaceManagement extends SocialBase {
 		Utils.pause(3000);
 		info("Upload file " + Utils.getAbsoluteFilePath(file));
 		switchToParentWindow();
+		Utils.pause(1000);
 		button.confirm();
 		waitForAndGetElement(ELEMENT_AVATAR_SAVE_BUTTON);
 		click(ELEMENT_AVATAR_SAVE_BUTTON);
