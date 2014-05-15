@@ -296,7 +296,14 @@ public class WikiBase extends PlatformBase{
 	public By ELEMENT_SELECT_SPACE = By.xpath("//*[contains(text(), 'Select the Wiki:')]/..//*[@class='btn dropdown-toggle']");
 	public final String ELEMENT_REMOVE_RELATED_PAGE_LINK = "//*[contains(text(),'${relatedPage}')]/ancestor::table//*[@class='uiIconDelete']";
 	public By ELEMENT_NO_SPACE_OPTION = By.id("UISpaceSwitcher_nospace");
-
+	public String ELEMENT_RELATED_PAGE_SPACE = "//td[contains(text(), '${spaceName}')]";
+	public String ELEMENT_RELATED_PAGE_SPACE_DEFAUT = "//*[contains(text(), 'Select the Wiki:')]/..//*[@class='btn dropdown-toggle']//span[text() = '${spaceName}']";
+	public String ELEMENT_RELATED_PAGE_HEAD_INDEX = "//th[${index}][contains(text(), '${text}')]";
+	public String ELEMENT_RELATED_PAGE_COLUMN_SPACE_INDEX = "//td[contains(text(), '${spaceName}')][${index}]";
+	public String ELEMENT_RELATED_PAGE_COLUMN_ACTION_INDEX = "//td[${index}]/..//i[@class='uiIconDelete']";
+	public String ELEMENT_RELATED_PAGE_COLUMN_WIKI_HOME = "//td[${index}]/div/ul/li[2]//a[contains(text(), 'Wiki Home')]";
+	public String ELEMENT_RELATED_PAGE_COLUMN_WIKI_PAGE = "//td[${index}]/div/ul/li[3]//a[contains(text(), '${relatedPage}')]";
+	
 	//Wiki page > Revisions page
 	public final String ELEMENT_CURRENT_VERSION = "//a[contains(text(), 'v.${version}') and contains(text(), 'Current Version')]";
 	//"//*[@id='UIWikiPageInfo']//a[text()='Current Version (v.${version})']";
