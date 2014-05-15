@@ -39,7 +39,7 @@ public class SpaceManagement extends SocialBase {
 	Button button = new Button(driver, this.plfVersion);	
 	ManageAlert magAlert;
 	ActionBar actBar;
-	
+	SpaceSearch spSearch;
 
 	//Go to My Spaces	> 
 	//Add space Form
@@ -103,6 +103,12 @@ public class SpaceManagement extends SocialBase {
 	
 	//Space action bar
 	public final String ELEMENT_SPACE_TAB_NAME = "//*[@id='spaceMenuTab']/li['${index}']/a/span[text()='${tabName}']";
+	
+	//----Space setting
+	//Application tab
+	public final String ELEMENT_APPLICATIONS_IN_SPACE = "//*[@id='UISpaceApplication']//*[text()='${app}']";
+	public final By ELEMENT_APPLICATIONS_TAB_IN_MENU_SETTING = By.linkText("Applications");
+	public final String ELEMENT_APPLICATIONS_DELETE_ICON_IN_MENU_SETTING = "//*[text()='${app}']/../..//*[@class='uiIconClose pull-right']";
 	
 	public SpaceManagement(WebDriver dr, String...plfVersion){
 		driver = dr;
@@ -256,6 +262,7 @@ public class SpaceManagement extends SocialBase {
 	public void deleteSpace(String name, int... params){
 		info("-- Deleting Space..." + name);
 		int iTimeout = params.length > 0 ? params[0] : DEFAULT_TIMEOUT;    
+		spSearch.searchSpaceByName(name, true);
 		doAction("Delete", name);    
 		magAlert = new ManageAlert(driver);
 		magAlert.acceptAlert();
@@ -417,8 +424,21 @@ public class SpaceManagement extends SocialBase {
 	 */
 	public void goToSpaceFromMySpaceNavigation(String spaceName){
 		info("-- Go to space "+spaceName+" --");
-		click(ELEMENT_SPACE_NAVIGATION_SPACE_ITEM.replace("${spaceName}", spaceName));
+		click(ELEMENT_SPACE_IN_MY_SPACE_LIST.replace("${space}", spaceName));
 		waitForAndGetElement(ELEMENT_SPACE_ACTIVITY_STREAM_PORTLET,60000,1);
+	}
+	
+	/**
+	 * @author lientm
+	 * @param tabName
+	 */
+	public void deleteSpaceMenu(String tabName){
+		info("Delete app " + tabName + " from space");
+		if (waitForAndGetElement(ELEMENT_APPLICATIONS_IN_SPACE.replace("${app}", tabName), 5000, 0) == null){
+			click(ELEMENT_APPLICATIONS_TAB_IN_MENU_SETTING);
+		}
+		click(ELEMENT_APPLICATIONS_DELETE_ICON_IN_MENU_SETTING.replace("${app}", tabName));
+		waitForElementNotPresent(ELEMENT_APPLICATIONS_IN_SPACE.replace("${app}", tabName));
 	}
 }
 

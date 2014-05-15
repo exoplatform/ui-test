@@ -35,10 +35,12 @@ public class ManageMember extends SpaceManagement {
 		this.plfVersion = plfVersion.length>0?plfVersion[0]:"4.0";
 		magAcc = new ManageAccount(driver,this.plfVersion);
 		nav = new NavigationToolbar(driver);
+		spaceS = new SpaceSearch(driver);
 	}
 
 	ManageAccount magAcc;
 	NavigationToolbar nav;
+	SpaceSearch spaceS;
 
 	//Go to My Spaces > Select a space > Settings
 	//Member Tab 
@@ -240,6 +242,7 @@ public class ManageMember extends SpaceManagement {
 		info("-- Joining the open space: " + spaceName);
 		int iTimeout = params.length > 0 ? params[0] : DEFAULT_TIMEOUT;
 		goToAllSpaces();
+		spaceS.searchSpaceByName(spaceName, true);
 		doAction("Join", spaceName);
 		waitForAndGetElement(By.xpath("//*[@class='spaceTitle']/text()['(Member)']/../a[text()='"+ spaceName +"']"), iTimeout);
 		Utils.pause(1000);

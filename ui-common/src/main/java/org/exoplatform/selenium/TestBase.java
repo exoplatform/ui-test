@@ -984,4 +984,22 @@ public class TestBase {
 		int minute = cal.get(Calendar.HOUR);
 		return (minute); 
 	}
+	
+	/**
+	 * @author lientm
+	 * @param object
+	 * @param classElement
+	 * @return = true: if there is not scroll bar on element
+	 *         = false: if there is scroll bar on element
+	 */
+	public boolean checkExitScrollBar(By object){
+		WebElement element = waitForAndGetElement(object);
+		String scrollHeight = String.valueOf(((JavascriptExecutor)driver).executeScript("return arguments[0].scrollHeight;", element));
+		String offsetHeight = String.valueOf(((JavascriptExecutor)driver).executeScript("return arguments[0].offsetHeight;", element));
+		info("scrollHeight: " + scrollHeight);
+		info("offsetHeight: " + offsetHeight);
+		int scroll = Integer.parseInt(scrollHeight);
+		int offset = Integer.parseInt(offsetHeight);
+		return scroll == offset;
+	}
 }

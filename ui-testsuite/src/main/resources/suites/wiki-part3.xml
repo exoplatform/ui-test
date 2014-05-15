@@ -23,6 +23,7 @@
 		</groups>
 		<classes>
  			<class name="org.exoplatform.selenium.platform.wiki.functional.spaceswitcher.Wiki_SpaceSwitcher_Display" />
+ 			<class name="org.exoplatform.selenium.platform.wiki.functional.spaceswitcher.Wiki_SpaceSwitcher" />
 		</classes>
 	</test>
 
