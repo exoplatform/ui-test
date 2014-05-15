@@ -6,10 +6,7 @@ import org.exoplatform.selenium.Utils;
 import org.exoplatform.selenium.platform.PlatformBase;
 import org.openqa.selenium.By;
 
-/**
- *@author HangNTT
- * @date: 07/11/2012
- */
+
 public class SocialBase extends PlatformBase {
 
 	//SpaceManagement spaceMag = new SpaceManagement();
@@ -19,11 +16,24 @@ public class SocialBase extends PlatformBase {
 
 	// Go to My space link
 //	public final By ELEMENT_MY_SPACES_LINK = By.linkText("My Spaces");
-	public final By ELEMENT_MY_SPACES_LINK  = By.xpath("//a[text()='My Spaces']");
 	public final By ELEMENT_ALL_SPACE_LINK = By.linkText("All Spaces");
 	public final By ELEMENT_INVATATION_RECEIVES_LINK = By.linkText("Invitations Received");
 	public final By ELEMENT_REQUESTS_PENDING_LINK = By.linkText("Requests Pending");
 
+	// My space portlet
+	public final By ELEMENT_MY_SPACE_PORTLET = By.id("UISpaceNavigationPortlet");
+	public final By ELEMENT_MY_SPACES_LINK  = By.xpath("//a[text()='My Spaces']");
+	public final String ELEMENT_SPACE_IN_TOP_MY_SPACE_LIST = "//*[@id='UISpaceNavigationPortlet']//*[@class='spaceNavigation']/li[1]//*[contains(text(), '${space}')]";
+	public final String ELEMENT_SPACE_IN_MY_SPACE_LIST = "//*[@id='UISpaceNavigationPortlet']//*[contains(text(), '${space}')]";
+	public final String ELEMENT_SPACE_POSITION_IN_MY_SPACE_LIST = "//*[@id='UISpaceNavigationPortlet']//li[${No}]//*[contains(text(), '${space}')]";
+	public final String ELEMENT_SHOW_MORE_SPACE = "//*[@id='UISpaceNavigationPortlet']//*[text()='Show ${No} More Spaces']";
+	public final By ELEMENT_SPACE_LINE_ON_MY_SPACE = By.xpath("//*[@id='UISpaceNavigationPortlet']/*[@class='spaceNavigation']/li");
+	public final By ELEMENT_SPACE_NAVIGATION_ON_MY_SPACE = By.xpath("//*[@id='UISpaceNavigationPortlet']/ul");
+	public final By ELEMENT_JOIN_SPACE_LINK_ON_MY_SPACE = By.xpath("//*[@id='UISpaceNavigationPortlet']//*[@class='joinSpace']/a");
+	public final By ELEMENT_MY_SPACE_SEARCH_BOX = By.xpath("//*[@id='UISpaceNavigationPortlet']//input[@value='Search Spaces']");
+	public final By ELEMENT_MY_SPACE_NO_FOUND_LABEL = By.xpath("//*[@id='UISpaceNavigationPortlet']//*[@class='noSpace' and text()='No space found']");
+	public final String ELEMENT_SPACE_TOOL_TIP = "//*[@id='UISpaceNavigationPortlet']//*[@class='tooltip fade bottom in']/*[@class='tooltip-inner' and text()='${space}']";
+	
 	// Go to My Space > All Spaces Tab
 	public final String ELEMENT_SEND_REQUEST_LINK = "//*[@id='UIManageAllSpaces']//*[text()='${spaceName}']/../../ul//*[text()='Request to Join']";
 	public final String ELEMENT_INVITATION_LEAVE_LINK_IN_ALL_SPACES = "//*[@id='UIManageAllSpaces']//*[text()='${spaceName}']/../../ul//*[text()='Leave']";

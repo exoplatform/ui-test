@@ -11,6 +11,7 @@ import org.exoplatform.selenium.platform.ManageAccount;
 import org.exoplatform.selenium.platform.NavigationManagement;
 import org.exoplatform.selenium.platform.NavigationToolbar;
 import org.exoplatform.selenium.platform.PageManagement;
+import org.exoplatform.selenium.platform.social.SocialBase;
 import org.exoplatform.selenium.platform.social.SpaceManagement;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -29,6 +30,7 @@ public class PLF_Navigation_LeftNavigation extends GroupNavigation {
 	NavigationToolbar navToolbar;
 	PageManagement pageMag;
 	NavigationManagement navMag;
+	SocialBase sb;
 
 	@BeforeMethod
 	public void beforeMethods() {
@@ -41,6 +43,7 @@ public class PLF_Navigation_LeftNavigation extends GroupNavigation {
 		button = new Button(driver, this.plfVersion);
 		pageMag = new PageManagement(driver, this.plfVersion);
 		navMag = new NavigationManagement(driver, this.plfVersion);
+		sb = new SocialBase();
 		magAcc.signIn(DATA_USER1, DATA_PASS);
 	}
 
@@ -247,9 +250,10 @@ public class PLF_Navigation_LeftNavigation extends GroupNavigation {
 		}
 		waitForAndGetElement(ELEMENT_SPACE_NAVIGATION);
 		if(this.plfVersion.contains("4.1")){
-
-			waitForAndGetElement(ELEMENT_SPACE_NAVIGATION_SPACE_ITEM_INDEX_PLF41.replace("${index}", "1").replace("${spaceName}", spaceName2));
-			waitForAndGetElement(ELEMENT_SPACE_NAVIGATION_SPACE_ITEM_INDEX_PLF41.replace("${index}", "2").replace("${spaceName}", spaceName1));
+			/*waitForAndGetElement(ELEMENT_SPACE_NAVIGATION_SPACE_ITEM_INDEX_PLF41.replace("${index}", "1").replace("${spaceName}", spaceName2));
+			waitForAndGetElement(ELEMENT_SPACE_NAVIGATION_SPACE_ITEM_INDEX_PLF41.replace("${index}", "2").replace("${spaceName}", spaceName1));*/
+			waitForAndGetElement(sb.ELEMENT_SPACE_POSITION_IN_MY_SPACE_LIST.replace("${space}", spaceName2).replace("${No}", "1"));
+			waitForAndGetElement(sb.ELEMENT_SPACE_POSITION_IN_MY_SPACE_LIST.replace("${space}", spaceName1).replace("${No}", "2"));
 		}
 		else{
 			waitForAndGetElement(ELEMENT_SPACE_NAVIGATION_SPACE_ITEM_INDEX.replace("${index}", "1").replace("${spaceName}", spaceName2));
@@ -271,8 +275,8 @@ public class PLF_Navigation_LeftNavigation extends GroupNavigation {
 
 		if(this.plfVersion.contains("4.1")){
 
-			waitForAndGetElement(ELEMENT_SPACE_NAVIGATION_SPACE_ITEM_INDEX_PLF41.replace("${index}", "1").replace("${spaceName}", spaceName1));
-			waitForAndGetElement(ELEMENT_SPACE_NAVIGATION_SPACE_ITEM_INDEX_PLF41.replace("${index}", "2").replace("${spaceName}", spaceName2));
+			waitForAndGetElement(sb.ELEMENT_SPACE_POSITION_IN_MY_SPACE_LIST.replace("${space}", spaceName1).replace("${No}", "1"));
+			waitForAndGetElement(sb.ELEMENT_SPACE_POSITION_IN_MY_SPACE_LIST.replace("${space}", spaceName2).replace("${No}", "2"));
 		}
 		else{
 			waitForAndGetElement(ELEMENT_SPACE_NAVIGATION_SPACE_ITEM_INDEX.replace("${index}", "1").replace("${spaceName}", spaceName1));
@@ -339,15 +343,17 @@ public class PLF_Navigation_LeftNavigation extends GroupNavigation {
 		type(ELEMENT_LEFT_NAVIGATION_SEARCH_SPACE,searchText1,true);
 
 		//- All spaces having a word containing with the inputed letter are displayed
-		waitForAndGetElement(ELEMENT_SPACE_NAVIGATION_SPACE_ITEM.replace("${spaceName}", spaceName1));
-		waitForAndGetElement(ELEMENT_SPACE_NAVIGATION_SPACE_ITEM.replace("${spaceName}", spaceName2));
+	/*	waitForAndGetElement(ELEMENT_SPACE_NAVIGATION_SPACE_ITEM.replace("${spaceName}", spaceName1));
+		waitForAndGetElement(ELEMENT_SPACE_NAVIGATION_SPACE_ITEM.replace("${spaceName}", spaceName2));*/
+		waitForAndGetElement(sb.ELEMENT_SPACE_IN_MY_SPACE_LIST.replace("${space}", spaceName1));
+		waitForAndGetElement(sb.ELEMENT_SPACE_IN_MY_SPACE_LIST.replace("${space}", spaceName2));
 
 		/*Step 3: Search by inputting two letters*/
 		//- Input a second letter "b"
 		type(ELEMENT_LEFT_NAVIGATION_SEARCH_SPACE,searchText2,true);
 		//- Only spaces containing "ab" are displayed
-		waitForElementNotPresent(ELEMENT_SPACE_NAVIGATION_SPACE_ITEM.replace("${spaceName}", spaceName1));
-		waitForAndGetElement(ELEMENT_SPACE_NAVIGATION_SPACE_ITEM.replace("${spaceName}", spaceName2));
+		waitForElementNotPresent(sb.ELEMENT_SPACE_IN_MY_SPACE_LIST.replace("${space}", spaceName1));
+		waitForAndGetElement(sb.ELEMENT_SPACE_IN_MY_SPACE_LIST.replace("${space}", spaceName2));
 
 		/*Clear data*/
 		info("-- Clear data --");

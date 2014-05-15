@@ -12,6 +12,7 @@
 			<class name = "org.exoplatform.selenium.platform.plf.functional.navigation.leftnavigation.PLF_Navigation_LeftNavigation_CompanyList" />
 			<class name = "org.exoplatform.selenium.platform.plf.functional.navigation.leftnavigation.PLF_Navigation_LeftNavigation_General" />
 			<class name = "org.exoplatform.selenium.platform.plf.functional.navigation.leftnavigation.PLF_Navigation_LeftNavigation_GroupList" />
+			<class name = "org.exoplatform.selenium.platform.plf.functional.navigation.leftnavigation.PLF_Navigation_LeftNavigation_SpaceList" />			
 			<class name = "org.exoplatform.selenium.platform.plf.functional.navigation.topnavigation.PLF_Navigation_TopNavigation_Administration" />
 			<class name = "org.exoplatform.selenium.platform.plf.functional.navigation.topnavigation.PLF_Navigation_TopNavigation_Edit" />
 			<class name = "org.exoplatform.selenium.platform.plf.functional.navigation.topnavigation.PLF_Navigation_TopNavigation_General" />

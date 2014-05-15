@@ -10,6 +10,7 @@ import org.exoplatform.selenium.platform.ManageAccount;
 import org.exoplatform.selenium.platform.NavigationToolbar;
 import org.exoplatform.selenium.platform.social.ApplicationManagement;
 import org.exoplatform.selenium.platform.social.ManageMember;
+import org.exoplatform.selenium.platform.social.SocialBase;
 import org.exoplatform.selenium.platform.wiki.WikiBase;
 import org.openqa.selenium.By;
 import org.testng.annotations.*;
@@ -25,6 +26,7 @@ public class Wiki_SpaceSwitcher extends WikiBase{
 	ManageMember mMember;
 	NavigationToolbar nav; 	
 	ApplicationManagement mApplication; 
+	SocialBase sb;
 
 	@BeforeMethod
 	public void beforeMethod(){
@@ -38,6 +40,7 @@ public class Wiki_SpaceSwitcher extends WikiBase{
 		mMember = new ManageMember(driver, this.plfVersion);	
 		nav = new NavigationToolbar(driver, this.plfVersion);
 		mApplication = new ApplicationManagement(driver);
+		sb = new SocialBase();
 		acc.signIn("john", "gtn");		
 	}
 
@@ -656,10 +659,10 @@ public class Wiki_SpaceSwitcher extends WikiBase{
 		 *Input Data: 
 		 *Expected Outcome: 
 		- Intranet is displaying left sidebar with list of spaces		*/		
-		waitForAndGetElement(By.xpath(ELEMENT_SPACE_NAVIGATION_SPACE_ITEM.replace("${spaceName}", space4)));
-		waitForAndGetElement(By.xpath(ELEMENT_SPACE_NAVIGATION_SPACE_ITEM.replace("${spaceName}", space3)));
-		waitForAndGetElement(By.xpath(ELEMENT_SPACE_NAVIGATION_SPACE_ITEM.replace("${spaceName}", space2)));
-		waitForAndGetElement(By.xpath(ELEMENT_SPACE_NAVIGATION_SPACE_ITEM.replace("${spaceName}", space1)));
+		waitForAndGetElement(By.xpath(sb.ELEMENT_SPACE_IN_MY_SPACE_LIST.replace("${space}", space4)));
+		waitForAndGetElement(By.xpath(sb.ELEMENT_SPACE_IN_MY_SPACE_LIST.replace("${space}", space3)));
+		waitForAndGetElement(By.xpath(sb.ELEMENT_SPACE_IN_MY_SPACE_LIST.replace("${space}", space2)));
+		waitForAndGetElement(By.xpath(sb.ELEMENT_SPACE_IN_MY_SPACE_LIST.replace("${space}", space1)));
 
 		/*
 		- Using left sidebar, go into Mobile space

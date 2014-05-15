@@ -1,11 +1,13 @@
 package org.exoplatform.selenium.platform.wiki.functional.navigationacrossspace;
 
 import static org.exoplatform.selenium.TestLogger.info;
+
 import org.exoplatform.selenium.Button;
 import org.exoplatform.selenium.platform.ManageAccount;
 import org.exoplatform.selenium.platform.NavigationToolbar;
 import org.exoplatform.selenium.platform.social.ManageMember;
 import org.exoplatform.selenium.platform.social.PeopleProfile;
+import org.exoplatform.selenium.platform.social.SocialBase;
 import org.exoplatform.selenium.platform.social.SpaceManagement;
 import org.exoplatform.selenium.platform.wiki.BasicAction;
 import org.openqa.selenium.By;
@@ -24,6 +26,8 @@ public class Wiki_Navigation_Across_Space extends BasicAction {
 	PeopleProfile peoPro;
 	//Space
 	SpaceManagement spaceMag;
+	SocialBase sb;
+	
 	@BeforeMethod
 	public void setUpBeforeTest(){
 		initSeleniumTest();
@@ -35,6 +39,7 @@ public class Wiki_Navigation_Across_Space extends BasicAction {
 		spaceMag = new SpaceManagement(driver);
 		naviToolbar = new NavigationToolbar(driver, this.plfVersion);
 		peoPro = new PeopleProfile(driver, this.plfVersion);
+		sb = new SocialBase();
 	}
 
 	@AfterMethod
@@ -83,7 +88,7 @@ public class Wiki_Navigation_Across_Space extends BasicAction {
 		addBlankWikiPage(PAGE_SUB1, PAGE_SUB1, 0);
 		
 		goToWikiFromSpace(space2);
-		waitForAndGetElement(ELEMENT_SPACE_NAVIGATION_SPACE_ITEM.replace("${spaceName}", space2));
+		waitForAndGetElement(sb.ELEMENT_SPACE_IN_MY_SPACE_LIST.replace("${space}", space2));
 		click(ELEMENT_SPACE_SWITCHER_BREADCRUMB);
 		click(ELEMENT_SPACE_SWITCHER_SELECT.replace("${spaceName}",space1));
 		waitForElementNotPresent(ELEMENT_SPACE_NAVIGATION_NAME.replace("${spaceName}", space2));
