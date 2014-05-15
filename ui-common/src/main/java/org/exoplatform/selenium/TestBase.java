@@ -64,7 +64,7 @@ public class TestBase {
 	//"http://community-4.1.x-snapshot.acceptance4.exoplatform.org/portal"; 
 	//"http://localhost:8080/portal";
 	//"http://192.168.3.50:8080/portal";
-	public final String DEFAULT_BASEURL="http://192.168.3.48:8080/portal";
+	public final String DEFAULT_BASEURL="http://community-preprod.exoplatform.com/portal";
 
 
 	/*======= Welcome Screen (Term and Conditions) =====*/

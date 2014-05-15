@@ -8,14 +8,14 @@
 		</groups>
 		<classes>
 			<class name="org.exoplatform.selenium.platform.plf.sniff.PLF_UnifiedSearch"/>
-			<class name="org.exoplatform.selenium.platform.plf.sniff.PLF_HomepageGadget_CalendarGadget"/>
+			<!-- <class name="org.exoplatform.selenium.platform.plf.sniff.PLF_HomepageGadget_CalendarGadget"/> -->
             <class name="org.exoplatform.selenium.platform.plf.sniff.PLF_Integration"/>
             <class name="org.exoplatform.selenium.platform.plf.sniff.PLF_Registration"/>
             <class name="org.exoplatform.selenium.platform.plf.sniff.PLF_Navigation_UserNavigation"/>
             <class name="org.exoplatform.selenium.platform.plf.sniff.PLF_Navigation_TopNavigation"/>
             <class name="org.exoplatform.selenium.platform.plf.sniff.PLF_Navigation_SpaceNavigation"/>
             <class name="org.exoplatform.selenium.platform.plf.sniff.PLF_Navigation_LeftNavigation"/>
-            <class name="org.exoplatform.selenium.platform.plf.sniff.PLF_HomePageGadget_SuggestionsGadget"/>
+            <!-- <class name="org.exoplatform.selenium.platform.plf.sniff.PLF_HomePageGadget_SuggestionsGadget"/> -->
             <class name="org.exoplatform.selenium.platform.plf.sniff.PLF_HomePageGadget_InvitationGadget"/>
             <class name="org.exoplatform.selenium.platform.plf.sniff.PLF_HomePageGadget_GettingStartedGadget"/>   
             <class name="org.exoplatform.selenium.platform.plf.sniff.PLF_Branding"/>

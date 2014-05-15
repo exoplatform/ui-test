@@ -60,9 +60,9 @@ public class PLF_Integration extends PlatformBase {
 		//- Login intranet site by root
 		//Home page is show properly, inlcuding activity stream at the center, gadgets that are well displayed at the right
 		waitForAndGetElement(hpActivity.ELEMENT_ACTIVITY_TEXTBOX);
-		waitForAndGetElement(ELEMENT_CALENDAR_GADGET);
+		//waitForAndGetElement(ELEMENT_CALENDAR_GADGET); //Not using CAL gadget on Community
 		waitForAndGetElement(ELEMENT_GETTING_STARTED_GADGET);
-		waitForAndGetElement(ELEMENT_GETTING_SUGGESTIONS);
+		//waitForAndGetElement(ELEMENT_GETTING_SUGGESTIONS); //Not using Suggestion gadget on Community
 	}
 
 	/**
@@ -70,8 +70,9 @@ public class PLF_Integration extends PlatformBase {
 	 * Test case ID: 70870
 	 * Step 1: Check IDE page
 	 * Step 2: Check showing IDE page
+	 * Pending on Community site
 	 */
-	@Test
+	//@Test
 	public void test02_CheckIDE(){
 		/*Step 1: Check IDE page*/ 
 		//- Login and go to intranet home page
@@ -98,8 +99,9 @@ public class PLF_Integration extends PlatformBase {
 	 * Step 4: Import application
 	 * Step 5: Add page with CMIS
 	 * Error: Refer: https://jira.exoplatform.org/browse/EXOGTN-991
+	 * Pending on Community site
 	 */
-	@Test (groups="error")
+	//@Test (groups="error")
 	public void test03_InstallCMISExpertGadget(){
 		/*Declare variables*/
 		String url = "http://www.xcmis.org/CmisExpert4Platform/org.exoplatform.cmis.CmisExpertGadget/org.exoplatform.cmis.client.CmisExpertGadget.gadget.xml";
