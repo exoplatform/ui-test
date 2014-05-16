@@ -72,7 +72,7 @@ public class Wiki_BasicAction_Move_MoveLayout extends BasicAction {
 		waitForAndGetElement(ELEMENT_DESTINATION_LIST_SCROLLBAR);
 		
 		info("Test 3: Selecting a space with the space switcher should feed the destination container - 79544");
-		click(ELEMENT_SPACE_NAME_SELECTED.replace("${space}", spacedest));
+		click(By.xpath(ELEMENT_SPACE_SWITCHER_SELECT.replace("${spaceName}", spacedest)));
 		waitForAndGetElement(ELEMENT_DESTINATION_TREE_ITEM.replace("${treeItem}", page_name2));
 		
 		/*Clear data*/

@@ -505,7 +505,7 @@ public class WikiBase extends PlatformBase{
 			else if(space=="My Wiki")
 				click(ELEMENT_MY_WIKI_NAME_SELECTED);
 			else {
-				click(ELEMENT_SPACE_NAME_SELECTED.replace("${space}", space.toLowerCase()));
+				click(ELEMENT_SPACE_SWITCHER_SELECT.replace("${spaceName}", space));
 			}
 		}
 		info("CURRENT_LOCATION");

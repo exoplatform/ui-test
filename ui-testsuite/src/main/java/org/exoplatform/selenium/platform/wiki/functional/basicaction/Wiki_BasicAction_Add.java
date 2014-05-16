@@ -72,7 +72,7 @@ public class Wiki_BasicAction_Add extends ManageDraft{
 		String title = "TestCase 001";
 		String content = title + " Content";
 		int mode = 0;
-		
+
 		//Create new page with a blank template
 		goToWiki();
 		addBlankWikiPage(title, content, mode);
@@ -117,16 +117,14 @@ public class Wiki_BasicAction_Add extends ManageDraft{
 		info("-- Add a new page when Title is blank --");
 		//Create new page with a blank template
 		goToWiki();
-		
+
 		info("-- Create new page when click [Confirm] button --");
 		addBlankWikiPage(null, content, mode, false, infoMessage); 
 		waitForTextPresent("Untitled");
-		
+
 		info("-- Create new page when click [Cancel] button --");
 		goToWikiHome();
 		goToAddBlankPage();
-//		driver.navigate().refresh();
-//		Utils.pause(3000);
 		addWikiPageSourceEditor(null, content);
 		switchToParentWindow();
 		Utils.pause(500);
@@ -136,7 +134,7 @@ public class Wiki_BasicAction_Add extends ManageDraft{
 		click(ELEMENT_CANCEL_BUTTON_ADD_PAGE);
 		click(button.ELEMENT_OK_BUTTON);
 		Utils.pause(3000);
-		
+
 		//Restore data
 		goToWikiPage("Untitled");
 		deleteCurrentWikiPage();
@@ -233,16 +231,15 @@ public class Wiki_BasicAction_Add extends ManageDraft{
 	public void test07_PreviewPage(){
 		String title = "TestCase 007";
 		String content = title + " Content";
-		int mode = 0;
+		int mode = 1;
 		By uiWikiPageTitlePreview = By.xpath("//div[@class='uiWikiPageTitlePreview' and contains(text(),'" + title + "')]");
-		By wikiContent = By.xpath("//div[@class='uiWikiContentDisplay']/p[contains(text(),'" + title + "')]");
+		By wikiContent = By.xpath("//div[@class='uiWikiContentDisplay']/p[contains(text(),'" + content+ "')]");
 
 		goToWiki();
 		previewWikiPage(title, content, mode);
 		waitForAndGetElement(uiWikiPageTitlePreview);
 		waitForAndGetElement(wikiContent);
 
-		//click(button.ELEMENT_CLOSE_WINDOW);
 		button.closeWindow();
 		waitForElementNotPresent(wikiContent);
 		click(ELEMENT_CANCEL_BUTTON_ADD_PAGE);
@@ -464,7 +461,7 @@ public class Wiki_BasicAction_Add extends ManageDraft{
 		goToWikiPage("Wiki Home/"+title);
 		deleteCurrentWikiPage();
 	}
-	
+
 	/**
 	 * Case ID:70776.
 	 * Test Case Name: Add a Draft to Wiki Intranet.
@@ -510,7 +507,7 @@ public class Wiki_BasicAction_Add extends ManageDraft{
 	@Test
 	public  void test02_AddADraftToWikiSpace() {
 		info("Test 2: Add a Draft to Wiki space");
-		String spaceName = "Space 74595";
+		String spaceName = "Space74595";
 		String title = "Case 74595";
 		String content = "Content 74595";
 
@@ -592,12 +589,14 @@ public class Wiki_BasicAction_Add extends ManageDraft{
 		 *Expected Outcome: 
 		- Show new page with name created above and user can add content for it		*/ 
 		click(By.linkText(label));
-		if(waitForAndGetElement(ELEMENT_RICHTEXT_BUTTON,5000,0)!=null){
-			click(ELEMENT_RICHTEXT_BUTTON);
-			waitForAndGetElement(ELEMENT_SOURCE_EDITOR_BUTTON);
-		}
+		if(waitForAndGetElement(ELEMENT_SOURCE_EDITOR_BUTTON,5000,0)!=null){
+			click(ELEMENT_SOURCE_EDITOR_BUTTON);
+			Utils.pause(1000);
+			waitForAndGetElement(ELEMENT_RICHTEXT_BUTTON_PL4_1);			
+		}		
 		type(ELEMENT_CONTENT_WIKI_INPUT,content,true);
 		info("-- Saving Wiki Page... --");
+		Utils.pause(1000);
 		click(ELEMENT_SAVE_BUTTON_ADD_PAGE);
 		waitForAndGetElement(By.linkText(pageLink));
 		Utils.pause(500);	
@@ -682,7 +681,7 @@ public class Wiki_BasicAction_Add extends ManageDraft{
 		String title = "Case 71103";
 		String content = "Add attached file when exits";
 		String link = "Wiki_Sniff_Attachment_01.doc";
-		
+
 		/*
 		- Add new page or edit a page
 		- Click on Rich TextEditor icon in toolbar
@@ -889,8 +888,10 @@ public class Wiki_BasicAction_Add extends ManageDraft{
 		goToWikiPage("Wiki Home/"+title);
 		click(By.linkText(label));
 		driver.getCurrentUrl().contains(webpage);
+		driver.quit();
 
 		//Delete data test		
+		beforeMethod();
 		info("close webpage");
 		goToWiki();
 		goToWikiPage("Wiki Home/"+title);

@@ -322,13 +322,13 @@ public class BasicAction extends Permission{
 		mouseOverAndClick(ELEMENT_BLANK_PAGE_LINK);
 		type(ELEMENT_TITLE_WIKI_INPUT, title, true);
 		if ( mode == 1 ){
-			click(ELEMENT_RICHTEXT_BUTTON);
-			waitForAndGetElement(ELEMENT_SOURCE_EDITOR_BUTTON);
-			inputDataToFrame(ELEMENT_CONTENT_WIKI_FRAME, content,true);
+			click(ELEMENT_SOURCE_EDITOR_BUTTON);
+			waitForAndGetElement(ELEMENT_RICHTEXT_BUTTON_PL4_1);
+			type(ELEMENT_CONTENT_WIKI_INPUT,content,true);
 			driver.switchTo().defaultContent();
 		}
 		else {
-			type(ELEMENT_CONTENT_WIKI_INPUT,content,true);
+			inputDataToFrame(ELEMENT_CONTENT_WIKI_FRAME, content,true);
 		}
 		click(ELEMENT_PREVIEW_BUTTON);
 		waitForAndGetElement(ELEMENT_PREVIEW_SCREEN);

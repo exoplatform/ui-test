@@ -12,7 +12,7 @@ import org.testng.annotations.Test;
  * @author vuna2
  * <li>Date: Dec 17, 2012</li>
  */
-public class Wiki_Version_Restore extends Version{
+public class Wiki_PageInformation_Version_Restore extends Version{
 	ManageAccount magAcc;
 	
 	public String admin = "john";

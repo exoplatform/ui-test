@@ -38,10 +38,12 @@
 			</run>
 		</groups>
 		<classes>
- 			<class name="org.exoplatform.selenium.platform.wiki.functional.information.Wiki_RelatedPage" />
- 			<class name="org.exoplatform.selenium.platform.wiki.functional.information.Wiki_Version_Compare" />
- 			<class name="org.exoplatform.selenium.platform.wiki.functional.information.Wiki_Version_Restore" />
- 			<class name="org.exoplatform.selenium.platform.wiki.functional.information.Wiki_Version_View" />
+ 			<class name="org.exoplatform.selenium.platform.wiki.functional.information.Wiki_PageInformation_RelatedPage_Add" />
+ 			<class name="org.exoplatform.selenium.platform.wiki.functional.information.Wiki_PageInformation_RelatedPage_Delete_Rename" />
+ 			<class name="org.exoplatform.selenium.platform.wiki.functional.information.Wiki_PageInformation_RelatedPage_View" />
+ 			<class name="org.exoplatform.selenium.platform.wiki.functional.information.Wiki_PageInformation_Version_Compare" />
+ 			<class name="org.exoplatform.selenium.platform.wiki.functional.information.Wiki_PageInformation_Version_Restore" />
+ 			<class name="org.exoplatform.selenium.platform.wiki.functional.information.Wiki_PageInformation_Version_View" />
  		</classes>
 	</test>
 

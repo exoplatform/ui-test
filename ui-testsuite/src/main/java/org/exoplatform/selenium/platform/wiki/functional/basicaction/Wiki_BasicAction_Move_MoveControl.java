@@ -1603,7 +1603,7 @@ public class Wiki_BasicAction_Move_MoveControl extends BasicAction{
 		String spaceDest = "SpaceDestination79560";
 		String title1 = "Page A";
 		String title2 = "Page B";
-		String title3 = "Page C Renamed";
+		String title3 = "Page C";
 		String subpage1 = "SubPage1";
 		String subpage2 = "SubPage2";
 		String subpage3 = "SubPage3";
@@ -1618,7 +1618,7 @@ public class Wiki_BasicAction_Move_MoveControl extends BasicAction{
 		mMember.goToAllSpaces();
 		mMember.addNewSpace(spaceMove, "");
 
-		info("Add page to space Move");
+		info("Add page to space Move");		
 		goToWikiFromSpace(spaceMove);
 		addBlankWikiPage(title1, title1, 0);
 		Utils.pause(1000);
@@ -2207,7 +2207,6 @@ public class Wiki_BasicAction_Move_MoveControl extends BasicAction{
 		assert waitForAndGetElement(ELEMENT_MOVE_PAGE_MESSAGE.replace("${index}","5")).getText().contains("SubPage5 already exists");
 		waitForAndGetElement(ELEMENT_MOVE_PAGE_RENAME_LINK.replace("${index}","5"));
 		waitForElementNotPresent(ELEMENT_MOVE_PAGE_MESSAGE.replace("${index}","6"));
-		button.cancel();
 
 		/*
 		- Put your mouse over "Rename" next to the message "Sub
@@ -2379,7 +2378,6 @@ public class Wiki_BasicAction_Move_MoveControl extends BasicAction{
 		assert waitForAndGetElement(ELEMENT_MOVE_PAGE_MESSAGE.replace("${index}","5")).getText().contains("SubPage5 already exists");
 		waitForAndGetElement(ELEMENT_MOVE_PAGE_RENAME_LINK.replace("${index}","5"));
 		assert waitForAndGetElement(ELEMENT_MOVE_PAGE_MESSAGE.replace("${index}","6")).getText().contains("and more...");
-		button.cancel();
 
 		/*
 		- Put your mouse over "Rename" next to the message "Sub
@@ -2537,7 +2535,6 @@ public class Wiki_BasicAction_Move_MoveControl extends BasicAction{
 		assert waitForAndGetElement(ELEMENT_MOVE_PAGE_MESSAGE.replace("${index}","6")).getText().contains("SubPage5 already exists");
 		waitForAndGetElement(ELEMENT_MOVE_PAGE_RENAME_LINK.replace("${index}","6"));
 		waitForElementNotPresent(ELEMENT_MOVE_PAGE_MESSAGE.replace("${index}","7"));
-		button.cancel();	
 
 		/*
 		- Put your mouse over "Rename" next to the message "Another page with the same title already exist in the selected page."
@@ -2722,7 +2719,6 @@ public class Wiki_BasicAction_Move_MoveControl extends BasicAction{
 		waitForAndGetElement(ELEMENT_MOVE_PAGE_RENAME_LINK.replace("${index}","6"));
 		assert waitForAndGetElement(ELEMENT_MOVE_PAGE_MESSAGE.replace("${index}","7")).getText().contains("and more...");
 		waitForElementNotPresent(ELEMENT_MOVE_PAGE_MESSAGE.replace("${index}","8"));
-		button.cancel();
 
 		/*
 		- Put your mouse over "Rename" next to the message "Another page with the same title already exist in the selected page."

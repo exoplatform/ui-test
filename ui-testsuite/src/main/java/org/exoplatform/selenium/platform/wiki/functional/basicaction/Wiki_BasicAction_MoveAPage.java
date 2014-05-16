@@ -6,7 +6,7 @@ import org.exoplatform.selenium.Button;
 import org.exoplatform.selenium.Utils;
 import org.exoplatform.selenium.platform.social.ManageMember;
 import org.exoplatform.selenium.platform.social.SpaceManagement;
-import org.exoplatform.selenium.platform.wiki.RichTextMode;
+import org.exoplatform.selenium.platform.wiki.ManageDraft;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.testng.annotations.AfterMethod;
@@ -18,7 +18,7 @@ import org.exoplatform.selenium.platform.ManageAccount;
  * @author hantv
  *
  */
-public class Wiki_BasicAction_MoveAPage extends RichTextMode {
+public class Wiki_BasicAction_MoveAPage extends ManageDraft {
 	ManageAccount magAcc;
 	Button button;
 	ManageMember magMember;
@@ -212,7 +212,7 @@ public class Wiki_BasicAction_MoveAPage extends RichTextMode {
 		String spacedest = "destspace79568";
 		String fileImage1 = "landscape08.jpg";
 		String fileImage2 = "portrait08.jpg";
-
+		
 		spaceMag.goToMySpacePage();
 		spaceMag.addNewSpace(spacedest, "");
 
@@ -223,28 +223,28 @@ public class Wiki_BasicAction_MoveAPage extends RichTextMode {
 		info("Create Page with attachments (with two images in its content)");
 		goToAddBlankPage();
 		Utils.pause(500);
-		addWikiPageRichText(PAGE_NAME1, "");
+		addWikiPageRichText(PAGE_NAME1, PAGE_NAME1);
+		Utils.pause(1000);
+	 	info("Insert image1");
 		insertImageFile(fileImage1,false);
-		if(isElementPresent(ELEMENT_SOURCE_EDITOR_BUTTON)){
-			click(ELEMENT_SOURCE_EDITOR_BUTTON);
-			waitForAndGetElement(ELEMENT_RICHTEXT_BUTTON);
-		}
-		waitForAndGetElement(ELEMENT_CONTENT_WIKI_INPUT).sendKeys(Keys.chord(Keys.CONTROL, Keys.END));
-		waitForAndGetElement(ELEMENT_CONTENT_WIKI_INPUT).sendKeys(Keys.RETURN);
-		click(ELEMENT_RICHTEXT_BUTTON);
-		insertImageFile(fileImage2,false);
+		Utils.pause(1000);
+		info("Insert image2");
+		insertAttachNewFile(fileImage2, "", "",true);
 		click(ELEMENT_SAVE_BUTTON_ADD_PAGE);
 		Utils.pause(500);
 		
+		info("Move page");
 		click(By.linkText(PAGE_NAME1));
 		movePage(PAGE_NAME1, "",spacedest,false);
 
 		info("Check content of page with attachments 1");
 		click(By.linkText(PAGE_NAME1));
 		if(isElementNotPresent(By.linkText(fileImage2)))
-			click(ELEMENT_ATTACHMENT_ICON);
+		click(ELEMENT_ATTACHMENT_ICON);
 		waitForAndGetElement(By.linkText(fileImage2));
 		waitForAndGetElement(By.linkText(fileImage1));
+		info("image2");
+		waitForTextPresent(fileImage1);
 		
 		/*Clear data*/
 		spaceMag.goToAllSpaces();
@@ -292,17 +292,12 @@ public class Wiki_BasicAction_MoveAPage extends RichTextMode {
 		Utils.pause(500);
 		addWikiPageRichText(title4, "");
 		insertImageFile(fileImage41,false);
-		if(isElementPresent(ELEMENT_SOURCE_EDITOR_BUTTON)){
-			click(ELEMENT_SOURCE_EDITOR_BUTTON);
-			waitForAndGetElement(ELEMENT_RICHTEXT_BUTTON);
-		}
-		waitForAndGetElement(ELEMENT_CONTENT_WIKI_INPUT).sendKeys(Keys.chord(Keys.CONTROL, Keys.END));
-		waitForAndGetElement(ELEMENT_CONTENT_WIKI_INPUT).sendKeys(Keys.RETURN);
-		click(ELEMENT_RICHTEXT_BUTTON);
-		insertImageFile(fileImage42,false);
+		Utils.pause(1000);
+		info("Insert image2");
+		insertAttachNewFile(fileImage42, "", "",true);
 		click(ELEMENT_SAVE_BUTTON_ADD_PAGE);
 		Utils.pause(500);
-
+		
 		spaceMag.goToMySpacePage();
 		spaceMag.addNewSpace(spaceMove, "");
 		goToWikiFromSpace(spaceMove);
@@ -320,15 +315,11 @@ public class Wiki_BasicAction_MoveAPage extends RichTextMode {
 		Utils.pause(500);
 		addWikiPageRichText(subpage1, "");
 		insertImageFile(fileImage1,true);
-		if(isElementPresent(ELEMENT_SOURCE_EDITOR_BUTTON)){
-			click(ELEMENT_SOURCE_EDITOR_BUTTON);
-			waitForAndGetElement(ELEMENT_RICHTEXT_BUTTON);
-		}
-		waitForAndGetElement(ELEMENT_CONTENT_WIKI_INPUT).sendKeys(Keys.chord(Keys.CONTROL, Keys.END));
-		waitForAndGetElement(ELEMENT_CONTENT_WIKI_INPUT).sendKeys(Keys.RETURN);
-		click(ELEMENT_RICHTEXT_BUTTON);
-		insertImageFile(fileImage2,true);
+		Utils.pause(1000);
+		info("Insert image2");
+		insertAttachNewFile(fileImage2, "", "",true);
 		click(ELEMENT_SAVE_BUTTON_ADD_PAGE);
+		Utils.pause(500);	
 		waitForAndGetElement(By.linkText(subpage1));
 		
 		info("Add Sub-Page with attachments 2 (two files as attachments)");
@@ -336,13 +327,8 @@ public class Wiki_BasicAction_MoveAPage extends RichTextMode {
 		goToAddBlankPage();
 		addWikiPageRichText(subpage2, "");
 		insertAttachNewFile(linkAttach1, "", "", true);
-		if(isElementPresent(ELEMENT_SOURCE_EDITOR_BUTTON)){
-			click(ELEMENT_SOURCE_EDITOR_BUTTON);
-			waitForAndGetElement(ELEMENT_RICHTEXT_BUTTON);
-		}
-		waitForAndGetElement(ELEMENT_CONTENT_WIKI_INPUT).sendKeys(Keys.chord(Keys.CONTROL, Keys.END));
-		waitForAndGetElement(ELEMENT_CONTENT_WIKI_INPUT).sendKeys(Keys.RETURN);
-		click(ELEMENT_RICHTEXT_BUTTON);
+		waitForAndGetElement(ELEMENT_CONTENT_WIKI_FRAME).sendKeys(Keys.chord(Keys.CONTROL, Keys.END));
+		waitForAndGetElement(ELEMENT_CONTENT_WIKI_FRAME).sendKeys(Keys.RETURN);
 		insertAttachNewFile(linkAttach2, "", "", true);
 		Utils.pause(500);
 		info("-- Saving Wiki Page... --");

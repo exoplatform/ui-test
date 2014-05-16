@@ -20,7 +20,7 @@ import org.testng.annotations.Test;
  * <li>Date: Dec 18, 2012</li>
  * <li>Test cases: KS\Wiki\Version\View</li>
  */
-public class Wiki_Version_View extends Version{
+public class Wiki_PageInformation_Version_View extends Version{
 	ManageAccount magAcc;
 	Button button;
 
