@@ -239,7 +239,7 @@ public class GateIn_BasicPortlets_Administration_ApplicationRegistry extends Das
 		//Edit category successfully
 		info("Edit category");
 		Map<String, String> permissions = new HashMap<String, String>();
-		permissions.put("Platform/Content Management", "*");
+		permissions.put("Platform/Administration", "*");
 		magApp.editCategoryAtManageApplications(categoryName, displayName, categoryDescription, false, permissions, true);
 
 		/* Step 4: Check accessing above category without right */
@@ -274,8 +274,8 @@ public class GateIn_BasicPortlets_Administration_ApplicationRegistry extends Das
 		String categoryDescription = "Add new category";
 		String appName1 = "Application73526";
 		Map<String, String> permissions = new HashMap<String, String>();
-		permissions.put("Platform/Content Management", "*");
-		String groupId ="Platform/Content Management";
+		permissions.put("Platform/Administration", "*");
+		String groupId ="Platform/Administration";
 		String membership ="*";
 
 		/* Step 1: Add application */
@@ -375,8 +375,8 @@ public class GateIn_BasicPortlets_Administration_ApplicationRegistry extends Das
 		String appName1 = "Application735921";
 		String appName2 = "Advanced Search";
 		Map<String, String> permissions = new HashMap<String, String>();
-		permissions.put("Platform/Content Management", "*");
-		String groupId ="Platform/Content Management";
+		permissions.put("Platform/Administration", "*");
+		String groupId ="Platform/Administration";
 		String membership ="*";
 
 		/* Step 1: Add category with limit of access users */
@@ -452,7 +452,7 @@ public class GateIn_BasicPortlets_Administration_ApplicationRegistry extends Das
 		//- Create category & assign group A with membership B to access
 		info("Add new category");
 		navTool.goToApplicationRegistry();
-		magApp.addNewCategoryAtManageApplications(categoryName, displayName, categoryDescription, true, permissions, true);
+		magApp.addNewCategoryAtManageApplications(categoryName, displayName, categoryDescription, false, permissions, true);
 
 		//- Add application into category
 		//Application is added into that category
@@ -470,11 +470,10 @@ public class GateIn_BasicPortlets_Administration_ApplicationRegistry extends Das
 		//- In add new page by wizard form:
 		//- Input valid values at step 1 & 2
 		//- Click Next from step 2 to go to step 3
-		//Show all application which user has right or not but 
+		//Show all application which user has right
 		//+ with application which user has right: can drag & drop to user
-		//+ with application which user does not have right, when drag & drop application -> Show protected content.
-		magApp.viewCategoryAtManageApplicationsWithOtherUser(userType.PUBLISHER,displayName,true,appName1,true);
-		magApp.viewCategoryAtManageApplicationsWithOtherUser(userType.PUBLISHER,displayName,true,appName2,false);
+		magApp.viewCategoryAtManageApplicationsWithOtherUser(userType.PUBLISHER,displayName,true,appName1, true, appName2, false);
+		//magApp.viewCategoryAtManageApplicationsWithOtherUser(userType.PUBLISHER,displayName,true,appName2,false);
 
 		/* Step 4: Check accessing above application by user has right to access the application but does not have right to access the category */
 		//- Login by user in group C
@@ -482,8 +481,16 @@ public class GateIn_BasicPortlets_Administration_ApplicationRegistry extends Das
 		//- In add new page by wizard form:
 		//- Input valid values at step 1 & 2
 		//- Click Next from step 2 to go to step 3
-		//The category and of course its application(s) can not be displayed for user to use
-		magApp.viewCategoryAtManageApplicationsWithOtherUser(userType.ROOT,displayName,false);
+		//The category and of course its application(s) can not be displayed for user to use		
+		magAc.signIn(DATA_USER1,DATA_PASS);
+		navTool.goToApplicationRegistry();
+		info("Edit category");
+		Map<String, String> permissions1 = new HashMap<String, String>();
+		permissions1.put("Platform/Content Management", "author");
+		magApp.editCategoryAtManageApplications(categoryName, null, null, false, permissions1, false);
+		magAc.signOut();
+		
+		magApp.viewCategoryAtManageApplicationsWithOtherUser(userType.PUBLISHER, displayName, false);
 		magAc.signIn(DATA_USER1,DATA_PASS);
 		navTool.goToApplicationRegistry();
 

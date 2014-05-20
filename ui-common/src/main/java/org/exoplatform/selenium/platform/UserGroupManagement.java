@@ -329,22 +329,22 @@ public class UserGroupManagement extends PlatformBase {
 
 	public void addMembership(String membershipName, String membershipDesc, boolean verify){
 		button = new Button(driver);
-		boolean verifyMembership;
+		By member = By.xpath("//*[@id='UIGrid']//span[text()='" + membershipName + "']");
+//		boolean verifyMembership;
 		info("--Creating new membership--");
 		click(ELEMENT_TAB_MEMBERSHIP_MANAGEMENT);
 		waitForAndGetElement(ELEMENT_INPUT_NAME);
 		type(ELEMENT_INPUT_NAME, membershipName, true);
 		type(ELEMENT_TEXTAREA_DESCRIPTION, membershipDesc, true);
 		button.save();
-		verifyMembership = isTextPresent(membershipName);
-		if (verifyMembership){
-			waitForTextPresent(membershipName);
+//		verifyMembership = isTextPresent(membershipName);
+//		if (verifyMembership){
+//			waitForTextPresent(membershipName);
+//		}
+		if (waitForAndGetElement(member, 10000, 0) == null){
+			click(ELEMENT_NEXT_PAGE_ICON);
 		}
-		else if (verify){
-			click(ELEMENT_NEXT_PAGE_ICON);	
-			waitForTextPresent(membershipName);
-		}
-
+		waitForAndGetElement(member);
 	}
 
 	public void editMembership(String membershipName, String newDesc){

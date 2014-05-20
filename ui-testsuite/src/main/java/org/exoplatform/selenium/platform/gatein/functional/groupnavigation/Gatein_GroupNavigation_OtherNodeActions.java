@@ -581,8 +581,8 @@ public class Gatein_GroupNavigation_OtherNodeActions extends GroupNavigation{
 		String typeContainer1 = "oneRow";
 		String nodeLinkToEdit = ELEMENT_NODE_LINK.replace("${nodeLabel}", pageName);
 		String parentLinkToEdit = ELEMENT_NODE_LINK.replace("${nodeLabel}", nodeNameHome);
-		By elementLayout1 = By.xpath("//*[@class='UIRowContainer']/div[1]//div[@class='UIRowContainer EmptyContainer']");
-		By elementLayout2 = By.xpath("//*[@class='UIRowContainer']/div[2]//div[@class='UIRowContainer EmptyContainer']");
+		By elementLayout1 = By.xpath("//*[@class='UIRowContainer']//div[@class='UIRowContainer EmptyContainer']");
+		By elementLayout2 = By.xpath("//*[@class='UIRowContainer']//*[contains(@class, 'UIRowContainer')]//div[@class='UIRowContainer EmptyContainer']");
 
 		/* Step 1: Add page */
 		//Create new page by wizard
@@ -591,7 +591,7 @@ public class Gatein_GroupNavigation_OtherNodeActions extends GroupNavigation{
 		info("Go to group site");
 		navTool.goToGroupSites();
 		info("Create page for portal with empty layout");
-		navTool.goToPageCreationWizard();
+//		navTool.goToPageCreationWizard();
 		pageEditor.createNewPageEmptyLayout(pageName);
 
 		info("Go to page edit layout");
@@ -625,10 +625,10 @@ public class Gatein_GroupNavigation_OtherNodeActions extends GroupNavigation{
 		//- Click Finish icon on Page editor
 		//- Page editor form is closed
 		//- Changes on container layout above was saved
-		waitForAndGetElement(elementLayout1);
+//		waitForElementNotPresent(elementLayout1);
 		waitForAndGetElement(elementLayout2);
 		pageEditor.finishEditLayout();
-		button.save();
+//		button.save();
 		
 		/*Clear data*/
 		info("-- Clear data --");
@@ -722,7 +722,7 @@ public class Gatein_GroupNavigation_OtherNodeActions extends GroupNavigation{
 		//- Edit page & Nav form is closed
 		//- When shown form to edit above portlet like step 3, change was saved
 		pageEditor.finishEditLayout();
-		button.save();
+//		button.save();
 
 		/*Clear data*/
 		info("-- Clear data --");
@@ -798,7 +798,7 @@ public class Gatein_GroupNavigation_OtherNodeActions extends GroupNavigation{
 		//- Navigation management is closed
 		//- Changes on Portlet layout was saved
 		pageEditor.finishEditLayout();
-		button.save();
+//		button.save();
 
 		/*Clear data*/
 		info("-- Clear data --");

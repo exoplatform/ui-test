@@ -163,7 +163,7 @@ public class Gatein_PortalNavigation_Edit_EditNavigation_ManageNode extends Plat
 		String pageSelectorName = "test04pageSelector";
 		Map<String, String> languages = new HashMap<String, String>();
 		languages.put("English", "");
-		String currentNodeName = "//*[@class='node']//*[@title='${parentNode}']/..//*[@class='node']//*[@title='${nodeName}']";
+//		String currentNodeName = "//*[@class='node']//*[@title='${parentNode}']/..//*[@class='node']//*[@title='${nodeName}']";
 
 		info("Go to Administration/Portal Sites");
 		navToolbar.goToPortalSites();
@@ -179,13 +179,13 @@ public class Gatein_PortalNavigation_Edit_EditNavigation_ManageNode extends Plat
 		waitForElementNotPresent(ELEMENT_WARNING_EXISTING_NODE);
 
 		info("Delete node for Portal");
-		editNavigation(portalName);
-		rightClickOnElement(currentNodeName.replace("${parentNode}", parentNode2).replace("${nodeName}", nodeName));
-		click(ELEMENT_NAVIGATION_DELETE_NODE);
-		alert.waitForConfirmation("Are you sure you want to delete this node?");
-		waitForElementNotPresent(currentNodeName);
-		button.save();		
-		
+//		editNavigation(portalName);
+//		rightClickOnElement(currentNodeName.replace("${parentNode}", parentNode2).replace("${nodeName}", nodeName));
+//		click(ELEMENT_NAVIGATION_DELETE_NODE);
+//		alert.waitForConfirmation("Are you sure you want to delete this node?");
+//		waitForElementNotPresent(currentNodeName);
+//		button.save();		
+		navMag.deleteNode(portalName, parentNode2, nodeName, false, false);
 		navMag.deleteNode(portalName, parentNode1, nodeName, true);
 		
 		navToolbar.goToManagePages();

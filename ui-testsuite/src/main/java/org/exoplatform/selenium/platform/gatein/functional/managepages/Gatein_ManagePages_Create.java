@@ -238,7 +238,7 @@ import org.testng.annotations.*;
 		magAc.signIn(DATA_USER1, DATA_PASS);
 		navTool.goToManagePages();
 		pageMag.deletePage(PageType.PORTAL, pageName);
-
+		
  	}
 
 

@@ -305,7 +305,6 @@ public class Gatein_BasicPortlets_Organization_GroupManagement extends PlatformB
 		
 		String pageName = "ManagePageName09";
 		String pageTitle = "ManagePageTitle09";
-		String groupPath = "Gateingroup09";
 		String membership = "*";
 		
 		String nodeName = "NodeName09";
@@ -317,17 +316,19 @@ public class Gatein_BasicPortlets_Organization_GroupManagement extends PlatformB
 		
 		info("Add new page in Page Management");
 		navTool.goToManagePages();
-		pageMag.addNewPageAtManagePages(PageType.GROUP, pageName, pageTitle, true, null, groupPath, membership, "Page Configs", ELEMENT_PAGE_LAYOUT_OPTION_EMPTY, true);
+		pageMag.addNewPageAtManagePages(PageType.GROUP, pageName, pageTitle, true, null, groupLabel, membership, "Page Configs", ELEMENT_PAGE_LAYOUT_OPTION_EMPTY, true);
 		
 		info("Add new page by wizard");
 		navTool.goToPageCreationWizard();
 		Map<String, String> portletId = new HashMap<String, String>();
 		portletId.put("Content/ContentListViewerByQueryPortlet", "");
-		pageMag.addNewPageEditor(nodeName, nodeName, null, "Home", portletId, false, false);
+		pageMag.addNewPageEditor(nodeName, nodeName, null, "Content", portletId, false, false);
 		//Add Group permission for page
+		
 		navTool.goToEditPageEditor();
-		pageEditor.addAccessPermissionforPortlet(portletId, groupName, membership);
-
+		pageEditor.addAccessPermissionforPortlet("//*[contains(@id,'UIPortlet')]", groupLabel, membership);
+		pageEditor.finishEditLayout();
+		
 		info("Delete group");
 		navTool.goToUsersAndGroupsManagement();
 		user.chooseGroupTab();
@@ -340,7 +341,7 @@ public class Gatein_BasicPortlets_Organization_GroupManagement extends PlatformB
 		
 		info("Restore data");
 		pageMag.deletePage(PageType.GROUP, pageTitle);
-		pageMag.searchPageInManagementPage(PageType.GROUP, nodeName, true);
+//		pageMag.searchPageInManagementPage(PageType.GROUP, nodeName, true);
 		pageMag.deletePage(PageType.GROUP, nodeName);
 	}
 

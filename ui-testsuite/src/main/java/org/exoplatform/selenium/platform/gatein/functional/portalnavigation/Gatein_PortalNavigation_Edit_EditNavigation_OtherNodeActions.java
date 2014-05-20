@@ -104,9 +104,16 @@ public class Gatein_PortalNavigation_Edit_EditNavigation_OtherNodeActions extend
 //			click(nodeNamelocator.replace("${nodeName}", parentNode));
 			copyNode(nodeNamelocator.replace("${nodeName}", nodeName1));
 			pasteNode(nodeNamelocator.replace("${nodeName}", nodeName2));
+			button.save();
+			waitForElementNotPresent(ELEMENT_TITLE_NAVIGATION_MANAGEMENT);
 			
 			info("Check the existence of copied node");
-			waitForElementNotPresent(ELEMENT_LIST_NODE_LINK.replace("${nodeLabel}", nodeName2).replace("${number}", "1").replace("${childNode}", nodeName1));
+			click(ELEMENT_EDIT_NAVIGATION.replace("${navigation}", portalName));
+			waitForAndGetElement(ELEMENT_CHILD_NODE_LINK.replace("${nodeLabel}", parentNode).replace("${childNode}", nodeName1));
+			click(ELEMENT_NODE_LINK.replace("${nodeLabel}", nodeName2));
+			waitForAndGetElement(ELEMENT_LIST_NODE_LINK.replace("${nodeLabel}", nodeName2).replace("${number}", "1").replace("${childNode}", nodeName1));
+			button.save();
+			waitForElementNotPresent(ELEMENT_TITLE_NAVIGATION_MANAGEMENT);
 			
 			info("Delete node for Portal");
 			navMag.deleteNode(portalName, parentNode, nodeName1, false);
@@ -178,9 +185,16 @@ public class Gatein_PortalNavigation_Edit_EditNavigation_OtherNodeActions extend
 			click(ELEMENT_EDIT_NAVIGATION.replace("${navigation}", portalName));
 			cutNode(nodeNamelocator.replace("${nodeName}", nodeName1));
 			pasteNode(nodeNamelocator.replace("${nodeName}", nodeName2));
+			button.save();
+			waitForElementNotPresent(ELEMENT_TITLE_NAVIGATION_MANAGEMENT);
 			
 			info("Check the existence of cut node");
-			waitForElementNotPresent(ELEMENT_LIST_NODE_LINK.replace("${nodeLabel}", nodeName2).replace("${number}", "1").replace("${childNode}", nodeName1));
+			click(ELEMENT_EDIT_NAVIGATION.replace("${navigation}", portalName));
+			waitForElementNotPresent(ELEMENT_CHILD_NODE_LINK.replace("${nodeLabel}", parentNode).replace("${childNode}", nodeName1));
+			click(ELEMENT_NODE_LINK.replace("${nodeLabel}", nodeName2));
+			waitForAndGetElement(ELEMENT_LIST_NODE_LINK.replace("${nodeLabel}", nodeName2).replace("${number}", "1").replace("${childNode}", nodeName1));
+			button.save();
+			waitForElementNotPresent(ELEMENT_TITLE_NAVIGATION_MANAGEMENT);
 			
 			info("Delete node for Portal");
 			navMag.deleteNode(portalName, parentNode, nodeName2, false);
@@ -212,7 +226,7 @@ public class Gatein_PortalNavigation_Edit_EditNavigation_OtherNodeActions extend
 			click(ELEMENT_EDIT_NAVIGATION.replace("${navigation}", portalName));
 			copyNode(nodeNamelocator.replace("${nodeName}", nodeName));
 			pasteNode(nodeNamelocator.replace("${nodeName}", parentNode));
-			isElementPresent(WarningMsgFailPasteNode);
+			waitForAndGetElement(WarningMsgFailPasteNode);
 			button.ok();
 			
 			info("Delete node for Portal");
@@ -280,8 +294,9 @@ public class Gatein_PortalNavigation_Edit_EditNavigation_OtherNodeActions extend
 			
 			info("Check the existence of cut node");
 			click(ELEMENT_EDIT_NAVIGATION.replace("${navigation}", portalName));
-			waitForElementNotPresent(ELEMENT_LIST_NODE_LINK.replace("${nodeLabel}", parentNode).replace("${number}", "1").replace("${childNode}", pageName));
-			waitForAndGetElement(ELEMENT_LIST_NODE_LINK.replace("${nodeLabel}", targetNode).replace("${number}", "1").replace("${childNode}", pageName));
+			waitForElementNotPresent(ELEMENT_CHILD_NODE_LINK.replace("${nodeLabel}", parentNode).replace("${childNode}", pageName));
+			click(ELEMENT_NODE_LINK.replace("${nodeLabel}", targetNode));
+			waitForAndGetElement(ELEMENT_CHILD_NODE_LINK.replace("${nodeLabel}", targetNode).replace("${childNode}", pageName));
 			
 			info("Restore data");
 			navMag.deleteNode(portalName, targetNode, pageName, false);
@@ -452,15 +467,18 @@ public class Gatein_PortalNavigation_Edit_EditNavigation_OtherNodeActions extend
 			
 			info("Check the existence of cloned node");
 			click(ELEMENT_EDIT_NAVIGATION.replace("${navigation}", portalName));
-			waitForAndGetElement(ELEMENT_LIST_NODE_LINK.replace("${nodeLabel}", parentNode).replace("${number}", "1").replace("${childNode}", nodeName));
+			waitForAndGetElement(ELEMENT_CHILD_NODE_LINK.replace("${nodeLabel}", parentNode).replace("${childNode}", nodeName));
 			
 			if(isElementNotPresent(By.xpath("//*[@class='uiIconNode expandIcon nodeSelected' and @title = '"+targetNode+"']")))
 				click(ELEMENT_NODE_LINK.replace("${nodeLabel}", targetNode));
-			waitForAndGetElement(ELEMENT_LIST_NODE_LINK.replace("${nodeLabel}", targetNode).replace("${number}", "1").replace("${childNode}", nodeName));
-			
+			waitForAndGetElement(ELEMENT_CHILD_NODE_LINK.replace("${nodeLabel}", targetNode).replace("${childNode}", nodeName));
+			button.save();
+			waitForElementNotPresent(ELEMENT_TITLE_NAVIGATION_MANAGEMENT);
+
 			info("Restore data");
-			navMag.deleteNode(portalName, targetNode, nodeName, false);			
-			navMag.deleteNode(portalName, parentNode, nodeName, false);
+			click(ELEMENT_EDIT_NAVIGATION.replace("${navigation}", portalName));
+			navMag.deleteNode(portalName, parentNode, nodeName, false);			
+			navMag.deleteNode(portalName, targetNode, nodeName, false);
 		}
 
 		/**

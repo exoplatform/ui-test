@@ -141,12 +141,12 @@ public class Gatein_BasicPortlets_Organization_MembershipManagement extends Plat
 	 */
 	@Test
 	public void test04_CheckUserMembershipinGroupAfterDeleteMembership(){
-		String groupName = "Group04";
-		String groupLabel = "Group Label 04";
+		String groupName = "Group73709";
+		String groupLabel = "Group Label 73709";
 		String groupDesc = "create new group";
 
-		String newUser = "testc";
-		String membership = "test";
+		String newUser = "user73709";
+		String membership = "Membership73709";
 		String membershipDesc = "test";
 		String email = "helloworld@gmail.com";
 		String password = "gtngtn";

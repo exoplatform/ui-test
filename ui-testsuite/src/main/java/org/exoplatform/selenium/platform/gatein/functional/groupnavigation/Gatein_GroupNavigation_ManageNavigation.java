@@ -2,12 +2,15 @@ package org.exoplatform.selenium.platform.gatein.functional.groupnavigation;
 
 import static org.exoplatform.selenium.TestLogger.info;
 
+import java.util.List;
+
 import org.exoplatform.selenium.Button;
 import org.exoplatform.selenium.platform.GroupNavigation;
 import org.exoplatform.selenium.platform.ManageAccount;
 import org.exoplatform.selenium.platform.NavigationToolbar;
 import org.exoplatform.selenium.platform.UserGroupManagement;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -54,8 +57,8 @@ public class Gatein_GroupNavigation_ManageNavigation extends GroupNavigation {
 		/*Declare variables*/
 		String groupNameDisplayName = "aagroup74232";
 		String groupName = "/"+groupNameDisplayName;
-		String groupAdminOldPosition = ELEMENT_GROUP_NAVIGATION_POSITION.replace("${index}","1").replace("${number}", "1").replace("${groupTitle}", groupName);
-		String groupAdminNewPosition = ELEMENT_GROUP_NAVIGATION_POSITION.replace("${index}","2").replace("${number}", "3").replace("${groupTitle}", groupName);
+//		String groupAdminOldPosition = ELEMENT_GROUP_NAVIGATION_POSITION.replace("${index}","1").replace("${number}", "1").replace("${groupTitle}", groupName);
+//		String groupAdminNewPosition = ELEMENT_GROUP_NAVIGATION_POSITION.replace("${index}","2").replace("${number}", "3").replace("${groupTitle}", groupName);
 
 		/*Create data*/
 		info("Create new group with John");
@@ -80,6 +83,28 @@ public class Gatein_GroupNavigation_ManageNavigation extends GroupNavigation {
 		/* Step 2: Show form to edit group navigation */
 		//- Select group navigation and click on Edit properties link
 		//Verify position of Administration before change order
+		List <WebElement> allElements = driver.findElements(ELEMENT_GROUP_NAVIGATION_TABLE);
+		int iTable = 1;
+		for (int j = 1; j<=allElements.size(); j++) {
+			if(waitForAndGetElement(ELEMENT_GROUP_NAVIGATION_TABLE_INDEX.replace("${index}", String.valueOf(j)).replace("${groupTitle}", groupName),5000,0)!= null){
+				break;
+			} else {
+				iTable++;
+			}
+		}
+
+		allElements = driver.findElements(By.xpath(ELEMENT_GROUP_NAVIGATION_INDEX_IN_TABLE.replace("${index}", String.valueOf(iTable))));
+
+		int iRow = 1;
+		for (int i = 1; i<=allElements.size(); i++) {
+			if(waitForAndGetElement(ELEMENT_GROUP_NAVIGATION_POSITION.replace("${index}", String.valueOf(iTable)).replace("${number}", String.valueOf(iRow)).replace("${groupTitle}", groupName),5000,0)!= null){
+				break;
+			} else {
+			iRow++;
+			}
+		}
+
+		String groupAdminOldPosition = ELEMENT_GROUP_NAVIGATION_POSITION.replace("${index}",String.valueOf(iTable)).replace("${number}", String.valueOf(iRow)).replace("${groupTitle}", groupName);
 		waitForAndGetElement(groupAdminOldPosition);
 		info("Select group navigation [groupName] and click [Edit Properties]");
 		click(ELEMENT_EDIT_PROPERTIES_ICON.replace("${groupName}", groupNameDisplayName));
@@ -105,6 +130,25 @@ public class Gatein_GroupNavigation_ManageNavigation extends GroupNavigation {
 		//- Go to Group link
 		//- Show navigation list after change priority successfully
 		info("Verify position of Administration after changing order");
+		allElements = driver.findElements(ELEMENT_GROUP_NAVIGATION_TABLE);
+		int newiTable = 1;
+		for (int j = 1; j<=allElements.size(); j++) {
+			if(waitForAndGetElement(ELEMENT_GROUP_NAVIGATION_TABLE_INDEX.replace("${index}", String.valueOf(j)).replace("${groupTitle}", groupName),5000,0)!= null){
+				break;
+			} else
+				newiTable++;
+		}
+
+		allElements = driver.findElements(By.xpath(ELEMENT_GROUP_NAVIGATION_INDEX_IN_TABLE.replace("${index}", String.valueOf(newiTable))));
+
+		int newiRow = 1;
+		for (int j = 1; j<=allElements.size(); j++) {
+			if(waitForAndGetElement(ELEMENT_GROUP_NAVIGATION_POSITION.replace("${index}", String.valueOf(newiTable)).replace("${number}", String.valueOf(newiRow)).replace("${groupTitle}", groupName),5000,0)!= null){
+				break;
+			} else
+				newiRow++;
+		}
+		String groupAdminNewPosition = ELEMENT_GROUP_NAVIGATION_POSITION.replace("${index}",String.valueOf(newiTable)).replace("${number}", String.valueOf(newiRow)).replace("${groupTitle}", groupName);
 		waitForAndGetElement(groupAdminNewPosition);
 		
 		//Verify position of Administration after SignOut and SignIn

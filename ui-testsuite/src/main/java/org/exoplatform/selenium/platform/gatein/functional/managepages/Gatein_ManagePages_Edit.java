@@ -118,9 +118,9 @@ import org.testng.annotations.*;
 		info("Edit page and click Save & Finish");
 		pageMag.editPageAtManagePages(PageType.PORTAL, pageTitle);
 		click(ELEMENT_VIEW_PAGE_PROPERTIES);
-		click(ELEMENT_INPUT_PAGE_TITLE);
+		click(ELEMENT_INPUT_PAGE_TITLE_VIEW_PROPERTIES);
 		//Edit the page title
-		type(ELEMENT_INPUT_PAGE_TITLE, pageTitleEdited, true);
+		type(ELEMENT_INPUT_PAGE_TITLE_VIEW_PROPERTIES, pageTitleEdited, true);
 		//Click button SAVE
 		button.save();
 		//Click button FINISH to turn off the Edit mode
@@ -181,8 +181,8 @@ import org.testng.annotations.*;
 		pageMag.editPageAtManagePages(PageType.PORTAL, pageTitle);
 		click(ELEMENT_VIEW_PAGE_PROPERTIES);
 		//Edit the page title
-		click(ELEMENT_INPUT_PAGE_TITLE);
-		type(ELEMENT_INPUT_PAGE_TITLE, pageTitleEdited, true);
+		click(ELEMENT_INPUT_PAGE_TITLE_VIEW_PROPERTIES);
+		type(ELEMENT_INPUT_PAGE_TITLE_VIEW_PROPERTIES, pageTitleEdited, true);
 		//Click button CANCEL to show button FINISH
 		button.cancel();
 		//Click button FINISH to turn off the Edit mode

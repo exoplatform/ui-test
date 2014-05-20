@@ -215,17 +215,27 @@ public class ManageApplications extends PlatformBase {
 	public void editCategoryAtManageApplications(String categoryName, String newDisplayName, String newCategoryDescription,
 			boolean publicMode, Map<String, String> permissions, boolean verify){
 		button = new Button(driver);
+		alt = new ManageAlert(driver);
 		info("--Edit category (" + categoryName + ")--");
 		click(ELEMENT_CATEGORY_NAME.replace("${categoryName}", categoryName));
 		click(ELEMENT_CATEGORY_EDIT_ICON);
-		type(ELEMENT_FIELD_DISPLAY_NAME, newDisplayName, true);
-		type(ELEMENT_FIELD_DESCRIPTION, newCategoryDescription, true);
+		if (newDisplayName != null){
+			type(ELEMENT_FIELD_DISPLAY_NAME, newDisplayName, true);	
+		}
+		if (newCategoryDescription != null){
+			type(ELEMENT_FIELD_DESCRIPTION, newCategoryDescription, true);
+		}
 		click(ELEMENT_PERMISSION_TAB);
 		if (publicMode){
 			check(ELEMENT_CHECKBOX_PUBLIC_MODE, 2);
 			waitForElementNotPresent(ELEMENT_ADD_PERMISSION_BUTTON);
 		} else {
 			makeItPublic(false);
+			if (waitForAndGetElement(ELEMENT_PERMISSION_GRID_DELETE_ICON, 5000, 0) != null){
+				click(ELEMENT_PERMISSION_GRID_DELETE_ICON, 2);
+				alt.acceptAlert();
+				waitForElementNotPresent(ELEMENT_PERMISSION_GRID_DELETE_ICON);
+			}
 			for (String key : permissions.keySet()) {
 				setViewPermissions(key, permissions.get(key));
 			}
@@ -367,7 +377,10 @@ public class ManageApplications extends PlatformBase {
 	 */
 	public void viewCategoryAtManageApplicationsWithOtherUser(userType user, String categoryName, boolean view,Object... opParams){
 		String applicationName = (String) (opParams.length > 0 ? opParams[0]: "");		
-		Boolean viewApp = (Boolean) (opParams.length > 1 ? opParams[1]: true);		
+		Boolean viewApp = (Boolean) (opParams.length > 1 ? opParams[1]: true);
+		String applicationName2 = (String) (opParams.length > 2 ? opParams[2]: "");	
+		Boolean viewApp2 = (Boolean) (opParams.length > 3 ? opParams[3]: true);
+		
 		magAc.userSignIn(user);
 		navTool.goToSiteExplorer();
 		navTool.goToEditPageEditor();
@@ -377,6 +390,7 @@ public class ManageApplications extends PlatformBase {
 			waitForElementNotPresent(By.xpath("//a[@title='"+categoryName+"']"));
 		}
 		if(applicationName!=""){
+
 			if(waitForAndGetElement("//a[@title='"+categoryName+"']/*[@class='uiIconArrowDown pull-right']", DEFAULT_TIMEOUT,0)==null){
 				click(By.xpath("//a[@title='"+categoryName+"']"));
 			}
@@ -384,6 +398,13 @@ public class ManageApplications extends PlatformBase {
 				waitForAndGetElement(By.xpath("//*[@class='txtLeft' and contains(text(),'"+applicationName+"')]"));
 			}else{
 				waitForElementNotPresent(By.xpath("//*[@class='txtLeft' and contains(text(),'"+applicationName+"')]"));
+			}
+		}
+		if(applicationName2!=""){
+			if(viewApp2){
+				waitForAndGetElement(By.xpath("//*[@class='txtLeft' and contains(text(),'"+applicationName2+"')]"));
+			}else{
+				waitForElementNotPresent(By.xpath("//*[@class='txtLeft' and contains(text(),'"+applicationName2+"')]"));
 			}
 		}
 		pageE.finishEditLayout();

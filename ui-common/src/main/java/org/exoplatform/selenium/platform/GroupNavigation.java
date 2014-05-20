@@ -23,7 +23,9 @@ public class GroupNavigation extends PlatformBase {
 	public final String ELEMENT_NAVIGATION_NODE = "//a[contains(@data-original-title,'${nodeName}')]"; 
 	public final String ELEMENT_GROUP_TITLE = "//div[@title='${groupTitle}']"; 
 	public final String ELEMENT_GROUP_NAVIGATION_POSITION = "//*[@id='UIGroupNavigationGrid']/table[${index}]/tbody/tr[${number}]" + ELEMENT_GROUP_TITLE;
-
+	public final By ELEMENT_GROUP_NAVIGATION_TABLE = By.xpath("//*[@id='UIGroupNavigationGrid']//table");
+	public final String ELEMENT_GROUP_NAVIGATION_TABLE_INDEX = "//*[@id='UIGroupNavigationGrid']//table[${index}]//div[@title='${groupTitle}']";
+	public final String ELEMENT_GROUP_NAVIGATION_INDEX_IN_TABLE = "//*[@id='UIGroupNavigationGrid']//table[${index}]/tbody/tr";
 	public final By ELEMENT_GROUP_ADD_NAVIGATION_BUTTON = By.linkText("Add Navigation");
 
 	//Click on [Edit Properties] icon

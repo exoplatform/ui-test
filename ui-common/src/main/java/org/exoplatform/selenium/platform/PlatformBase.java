@@ -330,7 +330,7 @@ public class PlatformBase extends TestBase {
 	public final By ELEMENT_TAB_MEMBERSHIP_MANAGEMENT = By.xpath("//*[contains(@class, 'uiIconMembership')]/parent::a");
 	public final String ELEMENT_MEMBERSHIP_EDIT_ICON = "//*[text()='${membership}']/../..//*[@data-original-title='Edit Membership']";
 	public final String ELEMENT_MEMBERSHIP_DELETE_ICON = "//*[text()='${membership}']/../..//*[@data-original-title='Delete Membership']";
-	public final String ELEMENT_NEXT_PAGE_ICON = "//a[@title='Next Page']";
+	public final String ELEMENT_NEXT_PAGE_ICON = "//*[@data-original-title='Next Page']";
 	public final By ELEMENT_INPUT_NAME = By.id("name");
 	public final By ELEMENT_MEMBERSHIP_MANAGEMENT_GRID = By.xpath("//*[@class='UIListMembershipType']");
 	/*
@@ -393,7 +393,8 @@ public class PlatformBase extends TestBase {
 	public final String ELEMENT_SELECT_EDIT_GROUP_ITEM = "//*[@id='UIPermissionSelector']//*[contains(text(), '${group}')]";
 	public final By ELEMENT_BROWSE_GROUP = By.xpath("//h6[text()='Browse and select a group']");
 	public final By ELEMENT_PERMISSION_GRID = By.id("PermissionGrid");
-
+	public final By ELEMENT_PERMISSION_GRID_DELETE_ICON = By.xpath("//*[@id='PermissionGrid']//*[@data-original-title='Delete']");
+	
 	//Portal Template TAB
 	public final By ELEMENT_PORTAL_TEMPLATE_TAB= By.linkText("Portal Templates");
 
@@ -417,9 +418,9 @@ public class PlatformBase extends TestBase {
 	public final String ELEMENT_LINK_EDITOR_PAGE = "//a[text()='Page']";
 	public final String ELEMENT_LINK_EDITOR_ADD_PAGE = "//a[text()='Add Page']";	
 	public final String ELEMENT_INPUT_NODE_NAME = "//input[@id='pageName']";
+	public final By ELEMENT_INPUT_PAGE_TITLE_VIEW_PROPERTIES = By.id("title");
 	public final By ELEMENT_CHECKBOX_EXTENDED_LABEL_MODE = By.id("switchmode");
 	public final String ELEMENT_LINK_EDITOR_PAGE_LAYOUT="//a[@class='ItemIcon EditPageIcon' and text()='Layout']";
-
 	public final By ELEMENT_UP_LEVEL=By.xpath("//a[@title='Up Level']");
 	public final String ELEMENT_SELECT_LANGUAGE = "//select[@name='languages']";
 	public final String ELEMENT_INPUT_PAGE_DISPLAY_NAME = "//input[@id='pageDisplayName']";
@@ -603,7 +604,7 @@ public class PlatformBase extends TestBase {
 	public final By ELEMENT_WINDOWS_TITLE = By.xpath("//*[@id='title']");
 
 	public final By ELEMENT_PORTLET_ACCESS_PERMISSION_TAB = By.xpath("//*[@id='tab-UIPortletForm']//a[@data-target='#PortletPermission-tab']");
-	public final By ELEMENT_PORTLET_ADD_PERMISSION_BUTTON = By.xpath("//*[@id='PortletPermissionSelector']//a[contains(text(),'Add Permission')]");
+	public final By ELEMENT_PORTLET_ADD_PERMISSION_BUTTON = By.xpath("//a[contains(text(),'Add Permission')]");
 	public final By ELEMENT_PORTLET_LIST_PERMISSION_WINDOW = By.xpath("//*[@id='PortletPermissionSelectorPopup']//span[contains(text(),'ListPermissionSelector')]");
 	public String ELEMENT_PORTLET_PERMISSION_GROUP = "//div[@class='uiGroupMembershipSelector']//a[@title='${groupName}']";
 	public String ELEMENT_PORTLET_PERMISSION_MEMBERSHIP = "//*[@class='uiBox noRounded childGoup']//a[@title='${membership}']";
@@ -788,7 +789,7 @@ public class PlatformBase extends TestBase {
 		String[] groups = groupId.split("/");
 		Utils.pause(500);
 		click(ELEMENT_ADD_PERMISSION_BUTTON);
-		waitForAndGetElement(ELEMENT_BROWSE_GROUP);
+//		waitForAndGetElement(ELEMENT_BROWSE_GROUP);
 		for (String group : groups) {
 			String groupToSelect = ELEMENT_SELECT_ACCESS_GROUP_ITEM.replace("${group}", group);
 			click(groupToSelect);

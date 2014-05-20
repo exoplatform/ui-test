@@ -169,7 +169,8 @@ public class NavigationManagement extends  PlatformBase{
 	}
 
 	//Delete a node from Portal navigation
-	public void deleteNode(String currentNavigation, String nodeNameHome, String nodeName, boolean firstLevel){
+	public void deleteNode(String currentNavigation, String nodeNameHome, String nodeName, boolean firstLevel, boolean...verify){
+		boolean check = verify.length > 0 ? verify[0]:true;
 		info("--Delete a node from navigation--");
 		alt = new ManageAlert(driver);
 		button = new Button(driver);
@@ -183,7 +184,9 @@ public class NavigationManagement extends  PlatformBase{
 			rightClickOnElement(currentNodeName);
 			click(ELEMENT_NAVIGATION_DELETE_NODE);
 			alt.waitForConfirmation("Are you sure you want to delete this node?");
-			waitForElementNotPresent(currentNodeName);
+			if (check){
+				waitForElementNotPresent(currentNodeName);
+			}
 			button.save();		
 		}else {
 			if (isElementNotPresent(currentChildNodeName) && isElementNotPresent(currentNodeName)){
@@ -193,7 +196,9 @@ public class NavigationManagement extends  PlatformBase{
 			rightClickOnElement(currentNodeName);
 			click(ELEMENT_NAVIGATION_DELETE_NODE);
 			alt.waitForConfirmation("Are you sure you want to delete this node?");
-			waitForElementNotPresent(currentNodeName);
+			if (check){
+				waitForElementNotPresent(currentNodeName);
+			}
 			button.save();		
 		}
 		//waitForTextNotPresent("Navigation Management");

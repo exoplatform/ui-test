@@ -356,9 +356,9 @@ public class NavigationToolbar extends PlatformBase {
 	//Go to Page Creation Wizard
 	public void goToPageCreationWizard(){
 		info("Go to add page wizard");
-		mouseOverAndClick(ELEMENT_MENU_EDIT_LINK);
-		mouseOver(ELEMENT_MENU_PAGE_LINK, true);
-		click(ELEMENT_ADD_PAGE_MENU);
+//		mouseOverAndClick(ELEMENT_MENU_EDIT_LINK);
+//		mouseOver(ELEMENT_MENU_PAGE_LINK, true);
+//		click(ELEMENT_ADD_PAGE_MENU);
 		((JavascriptExecutor)driver).executeScript("javascript:ajaxGet(eXo.env.server.createPortalURL('UIWorkingWorkspace', 'PageCreationWizard', true));");
 
 		//waitForTextPresent("Page Creation Wizard");
