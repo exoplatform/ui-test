@@ -42,6 +42,19 @@
  			<class name="org.exoplatform.selenium.platform.wiki.functional.template.Wiki_Template_Search" />
  		</classes>
 	</test>
+	
+	<test name="wiki-func-macro" enabled="true">
+		<groups>
+			<run>
+				<exclude name="pending" />
+			</run>
+		</groups>
+		<classes>
+ 			<class name="org.exoplatform.selenium.platform.wiki.functional.macro.Wiki_Macro_Add" />
+ 			<class name="org.exoplatform.selenium.platform.wiki.functional.macro.Wiki_Macro_Edit" />
+ 			<class name="org.exoplatform.selenium.platform.wiki.functional.macro.Wiki_Macro_Othercheck" />
+ 		</classes>
+	</test>
 
 	<listeners>
 		<listener class-name="org.exoplatform.selenium.TestReportListener" />

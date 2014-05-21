@@ -17,7 +17,6 @@ import org.testng.annotations.Test;
  * @author: LanLTK
  * @date: 03/24/2014
  */
-
 public class Wiki_Macro_Edit extends ManageDraft{
 
 	ManageAccount magAc;
@@ -46,7 +45,6 @@ public class Wiki_Macro_Edit extends ManageDraft{
 	/**
 	 *  CaseId 71282-78535: Edit JIRA macro
 	 */
-	
 	@Test	
 	public void test01_Edit_Jira_Macro(){
 		String title = "Page 71281_71282";
@@ -74,6 +72,5 @@ public class Wiki_Macro_Edit extends ManageDraft{
 		
 		//Delete wiki page before exit test case
 		deleteCurrentWikiPage();
-	}
-	
+	}	
 }

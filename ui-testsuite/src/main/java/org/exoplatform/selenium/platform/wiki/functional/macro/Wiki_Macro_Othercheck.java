@@ -84,7 +84,5 @@ public class Wiki_Macro_Othercheck extends ManageDraft{
 				
 		//Delete wiki page before exit test case
 		deleteCurrentWikiPage();
-
 	}
-	
 }

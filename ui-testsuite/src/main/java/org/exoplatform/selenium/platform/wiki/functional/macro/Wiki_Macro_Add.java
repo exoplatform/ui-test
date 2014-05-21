@@ -21,7 +21,6 @@ import org.testng.annotations.Test;
  * @author: LanLTK
  * @date: 03/24/2014
  */
-
 public class Wiki_Macro_Add extends ManageDraft{
 
 	ManageAccount magAc;
@@ -531,6 +530,7 @@ public class Wiki_Macro_Add extends ManageDraft{
 		//Delete wiki page before exit test case
 		deleteCurrentWikiPage();
 	}
+	
 	/*
 	 * Cases in 4.1.x
 	 * Pie chart
@@ -691,6 +691,7 @@ public class Wiki_Macro_Add extends ManageDraft{
 		//Delete wiki page before exit test case
 		deleteCurrentWikiPage();
 	}
+	
 	/**
 	 * 
 	 */
@@ -794,7 +795,6 @@ public class Wiki_Macro_Add extends ManageDraft{
 	/** Have a bug about display chart
 	 * 
 	 */
-
 	@Test(groups="pending")
 	public void test22_InsertLineChartMacro(){
 		String height = "150";
@@ -824,6 +824,7 @@ public class Wiki_Macro_Add extends ManageDraft{
 		deleteCurrentWikiPage();
 
 	}
+	
 	@Test(groups="pending")
 	public void test23_InsertBarChartMacro(){
 		String height = " 320";
@@ -852,6 +853,7 @@ public class Wiki_Macro_Add extends ManageDraft{
 		//Delete wiki page before exit test case
 		deleteCurrentWikiPage();
 	}
+	
 	@Test(groups="pending")
 	public void test24_InsertBar3DChartMacro(){
 		String height = "300";
@@ -862,7 +864,6 @@ public class Wiki_Macro_Add extends ManageDraft{
 		String[] content = {"|=Date|=Value|2012-02-21|1.97|2012-02-26|2.96|2012-03-04|3.93|2012-03-11|4.84|2012-03-18|5.83|2012-03-25|4.5|2012-04-01|3.85|2012-04-08|4.87 "};
 		String cont = "";
 		String width = "400";
-
 
 		//Add source macro in SourceEditor
 		info("Add new wiki page at Rich Text mode:");
@@ -879,10 +880,10 @@ public class Wiki_Macro_Add extends ManageDraft{
 
 		//Check the availability of Code macro
 
-
 		//Delete wiki page before exit test case
 		deleteCurrentWikiPage();
 	}
+	
 	@Test(groups="pending")
 	public void test25_InsertTimeSerialChartUsingXYlineAndShapemacro(){
 		String height = "300";
@@ -914,6 +915,7 @@ public class Wiki_Macro_Add extends ManageDraft{
 		//Delete wiki page before exit test case
 		deleteCurrentWikiPage();
 	}
+	
 	@Test(groups="pending")
 	public void test26_InsertTimeSerialchartUsingXYline3Dmacro(){
 		String height = "300";
@@ -943,6 +945,7 @@ public class Wiki_Macro_Add extends ManageDraft{
 		//Delete wiki page before exit test case
 		deleteCurrentWikiPage();
 	}
+	
 	@Test(groups="pending")
 	public void test27_InsertTimeSerialChartUsingXYStepMacro(){
 		String height = "300";
@@ -973,6 +976,7 @@ public class Wiki_Macro_Add extends ManageDraft{
 		//Delete wiki page before exit test case
 		deleteCurrentWikiPage();
 	}
+	
 	@Test(groups="pending")
 	public void test28_InsertCustomColorChartMacro(){
 
