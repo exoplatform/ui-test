@@ -23,6 +23,7 @@ public class Button extends TestBase{
 	//By.linkText("Save & Close");
 
 	public final By ELEMENT_OK_BUTTON = By.xpath("//*[text()='OK']");
+	public final By ELEMENT_OK_BUTTON_LINK = By.linkText("OK");
 	public final By ELEMENT_NO_BUTTON = By.xpath("//*[text()='No']");
 	public final By ELEMENT_NO_BUTTON_AUX = By.xpath("//*[contains(@class, 'popup')]//*[contains(text(),'No')]");
 	public final By ELEMENT_YES_BUTTON = By.xpath("//*[text()='Yes']");
@@ -77,8 +78,11 @@ public class Button extends TestBase{
 		Utils.pause(500);
 	}
 	public void ok() {
-		waitForAndGetElement(ELEMENT_OK_BUTTON);
-		click(ELEMENT_OK_BUTTON);
+		if (waitForAndGetElement(ELEMENT_OK_BUTTON, 5000, 0) != null){
+			click(ELEMENT_OK_BUTTON);
+		}else {
+			click(ELEMENT_OK_BUTTON_LINK);
+		}
 		Utils.pause(500);
 	}
 	public void no() {

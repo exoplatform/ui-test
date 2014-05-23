@@ -166,12 +166,13 @@ public class GroupNavigation extends PlatformBase {
 	 * @param groupName
 	 */
 	public void addNewNavigationForGroup(String groupName){
-		button = new Button(driver);
+//		button = new Button(driver);
 		info("Add navigation for group " + groupName);
 		click(ELEMENT_GROUP_ADD_NAVIGATION_BUTTON);
 		click(ELEMENT_GROUP_SELECT_ADD_NAVIGATION.replace("${groupName}", groupName));
 		waitForElementNotPresent(ELEMENT_GROUP_SELECT_ADD_NAVIGATION.replace("${groupName}", groupName));
-		button.cancel();
+//		button.cancel();
+		click(By.linkText("Cancel"));
 		waitForAndGetElement(ELEMENT_GROUP_NAME.replace("${groupName}", groupName));
 	}
 
