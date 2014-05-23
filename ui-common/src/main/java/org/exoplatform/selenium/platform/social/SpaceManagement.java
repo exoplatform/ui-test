@@ -36,7 +36,8 @@ import org.openqa.selenium.WebElement;
 public class SpaceManagement extends SocialBase {
 	UserGroupManagement userGroup;
 	Dialog dialog;
-	Button button = new Button(driver, this.plfVersion);	
+	Button button;
+	//new Button(driver, this.plfVersion);	
 	ManageAlert magAlert;
 	ActionBar actBar;
 	SpaceSearch spSearch;
@@ -118,6 +119,7 @@ public class SpaceManagement extends SocialBase {
 		button = new Button(driver);
 		magAlert = new ManageAlert(driver);
 		actBar = new ActionBar(driver);
+		spSearch = new SpaceSearch(driver);
 	}
 
 	/**

@@ -79,8 +79,9 @@ public class WikiBase extends PlatformBase{
 	public final By ELEMENT_QUICK_SEARCH = By.id("wikiSearchValue");
 	public final By ELEMENT_SEARCH_RESULT = By.className("resultNumber");
 	//public final String ELEMENT_PAGE_RESULT = "//*[@id='UIWikiAdvanceSearchResult']//*[contains(text(), '${title}')]";
-	public final String ELEMENT_PAGE_RESULT="//*[@href='/portal/intranet/wiki/${title}']";
-	public final String ELEMENT_PAGE_SPACR_RESULT="";
+	public final String ELEMENT_PAGE_RESULT = "//*[@href='/portal/intranet/wiki/${title}']";
+	public final String ELEMENT_PAGE_RESULT_AUX = "//*[contains(@href, '${title}')]";
+	//public final String ELEMENT_PAGE_SPACE_RESULT="";
 	
 	//Wiki Home
 	public final By ELEMENT_WIKI_HOME_LINK=By.xpath("//a[text()='Wiki Home']");
@@ -296,6 +297,7 @@ public class WikiBase extends PlatformBase{
 	public final String ELEMENT_CHANGES_COMPARE_VERSION = "//*[text()='${1stNumber}']/../b[text()='${2ndNumber}']/../..//a[@class='changes']";
 	public final String ELEMENT_VERSION_CHECKBOX="//input[@id='version_{$version}']";
 	public String ELEMENT_LINE_REMOVE = "//*[@class='diffremoveword' and text()='${lineRemove}']";
+	public String ELEMENT_LINE_REMOVE_AUX = "//*[@class='diffunmodifiedline' and text()='${lineRemove}']"; 
 	public String ELEMENT_LINE_ADD = "//*[@class='diffaddword' and text()='${lineAdd}']";
 
 	// Go to Wiki page > More > Page info > Add more relations

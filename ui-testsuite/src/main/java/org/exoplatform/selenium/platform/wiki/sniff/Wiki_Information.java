@@ -36,7 +36,7 @@ public class Wiki_Information extends Version {
 
 	@AfterMethod
 	public void afterTest(){
-		magAc.signOut();
+		//magAc.signOut();
 		driver.manage().deleteAllCookies();
 		driver.quit();
 	}
@@ -83,7 +83,9 @@ public class Wiki_Information extends Version {
 
 		info("Compare 2 version of page");
 		compareVersion("1", "2");
-		waitForAndGetElement(ELEMENT_LINE_REMOVE.replace("${lineRemove}", content));
+		if (waitForAndGetElement(ELEMENT_LINE_REMOVE.replace("${lineRemove}", content), 3000, 0) == null){
+			waitForAndGetElement(ELEMENT_LINE_REMOVE_AUX.replace("${lineRemove}", content));	
+		}
 		waitForAndGetElement(ELEMENT_LINE_ADD.replace("${lineAdd}", newContent));
 
 		click(By.linkText(newTitle));
