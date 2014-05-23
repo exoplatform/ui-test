@@ -1,0 +1,34 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="Platform Sniff Test" verbose="1" preserve-order="true">
+	<test name="gatein-func-part-1" enabled="true">
+		<groups>
+			<run>
+				<exclude name="pending" />
+			</run>
+		</groups>
+		<classes>
+			<class
+				name="org.exoplatform.selenium.platform.gatein.functional.groupnavigation.Gatein_GroupNavigation_OtherNodeActions" />
+			<class
+				name="org.exoplatform.selenium.platform.gatein.functional.managepages.Gatein_ManagePages_Create" />
+			<class
+				name="org.exoplatform.selenium.platform.gatein.functional.managepages.Gatein_ManagePages_Edit" />
+			<class
+				name="org.exoplatform.selenium.platform.gatein.functional.others.Gatein_Others_SiteMap" />
+			<class
+				name="org.exoplatform.selenium.platform.gatein.functional.portalnavigation.Gatein_PortalNavigation_Edit_EditLayout" />
+			<class
+				name="org.exoplatform.selenium.platform.gatein.functional.portalnavigation.Gatein_PortalNavigation_Edit_EditNavigation_ManageNode" />
+			<class
+				name="org.exoplatform.selenium.platform.gatein.functional.portalnavigation.Gatein_PortalNavigation_Edit_EditNavigation_OtherNodeActions" />
+			<class
+				name="org.exoplatform.selenium.platform.gatein.functional.portalnavigation.Gatein_PortalNavigation_ManagePortal" />
+			<class
+				name="org.exoplatform.selenium.platform.gatein.functional.registration.Gatein_Registration_PrivateMode" />
+		</classes>
+	</test>
+	<listeners>
+		<listener class-name="org.exoplatform.selenium.TestReportListener" />
+	</listeners>
+</suite>

@@ -34,56 +34,56 @@
 				<testSuite>ecms-se.xml</testSuite>
 			</properties>
 		</profile>
-		
+
 		<profile>
 			<id>ecms-se-activities</id>
 			<properties>
 				<testSuite>ecms-se-activities.xml</testSuite>
 			</properties>
 		</profile>
-		
+
 		<profile>
 			<id>ecms-se-admin</id>
 			<properties>
 				<testSuite>ecms-se-admin.xml</testSuite>
 			</properties>
 		</profile>
-		
+
 		<profile>
 			<id>ecms-se-basicaction</id>
 			<properties>
 				<testSuite>ecms-se-basicaction.xml</testSuite>
 			</properties>
 		</profile>
-		
+
 		<profile>
 			<id>ecms-se-createnode</id>
 			<properties>
 				<testSuite>ecms-se-createnode.xml</testSuite>
 			</properties>
 		</profile>
-		
+
 		<profile>
 			<id>ecms-se-others</id>
 			<properties>
 				<testSuite>ecms-se-others.xml</testSuite>
 			</properties>
 		</profile>
-		
+
 		<profile>
 			<id>ecms-admin</id>
 			<properties>
 				<testSuite>ecms-admin.xml</testSuite>
 			</properties>
 		</profile>
-		
+
 		<profile>
 			<id>ecms-sniff</id>
 			<properties>
 				<testSuite>ecms-sniff.xml</testSuite>
 			</properties>
 		</profile>
-		
+
 		<profile>
 			<id>exogtn</id>
 			<properties>
@@ -103,30 +103,30 @@
 			</properties>
 		</profile>
 		<profile>
- 			<id>plf-func-part1</id>
- 			<properties>
- 				<testSuite>plf-fnc-part1.xml</testSuite>
- 			</properties>
- 		</profile>
- 		<profile>
- 			<id>plf-func-part2</id>
- 			<properties>
- 				<testSuite>plf-fnc-part2.xml</testSuite>
- 			</properties>
- 		</profile>
- 		<profile>
- 			<id>plf-func-part3</id>
- 			<properties>
- 				<testSuite>plf-fnc-part3.xml</testSuite>
- 			</properties>
- 		</profile>
+			<id>plf-func-part1</id>
+			<properties>
+				<testSuite>plf-fnc-part1.xml</testSuite>
+			</properties>
+		</profile>
+		<profile>
+			<id>plf-func-part2</id>
+			<properties>
+				<testSuite>plf-fnc-part2.xml</testSuite>
+			</properties>
+		</profile>
+		<profile>
+			<id>plf-func-part3</id>
+			<properties>
+				<testSuite>plf-fnc-part3.xml</testSuite>
+			</properties>
+		</profile>
 		<profile>
 			<id>social</id>
 			<properties>
 				<testSuite>social.xml</testSuite>
 			</properties>
 		</profile>
-		
+
 		<profile>
 			<id>social-sniff</id>
 			<properties>
@@ -182,9 +182,21 @@
 			</properties>
 		</profile>
 		<profile>
+			<id>gatein-func</id>
+			<properties>
+				<testSuite>gatein-func.xml</testSuite>
+			</properties>
+		</profile>
+		<profile>
 			<id>gatein-func-1</id>
 			<properties>
-				<testSuite>gatein-func-part1.xml</testSuite>
+				<testSuite>gatein-func-1.xml</testSuite>
+			</properties>
+		</profile>
+		<profile>
+			<id>gatein-func-2</id>
+			<properties>
+				<testSuite>gatein-func-2.xml</testSuite>
 			</properties>
 		</profile>
 		<profile>
