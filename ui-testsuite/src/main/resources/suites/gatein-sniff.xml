@@ -19,6 +19,7 @@
 			<class name="org.exoplatform.selenium.platform.gatein.sniff.Gatein_Navigation_GroupNavigation_EditLayout"/>
 			<class name="org.exoplatform.selenium.platform.gatein.sniff.Gatein_Navigation_PortalNavigation_EditLayout"/>
 			<class name="org.exoplatform.selenium.platform.gatein.sniff.Gatein_Navigation_PortalNavigation_EditNavigation"/>
+			<class name="org.exoplatform.selenium.platform.gatein.sniff.Gatein_Dashboard"/>
 		</classes>
 	</test>
 	<listeners>
