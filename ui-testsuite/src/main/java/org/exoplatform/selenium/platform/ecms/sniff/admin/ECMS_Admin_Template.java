@@ -38,11 +38,11 @@ public class ECMS_Admin_Template extends PlatformBase{
 		initSeleniumTest();
 		driver.get(baseUrl);
 		info("LogIn to Intranet with User..." + DATA_USER_ADMIN);
-		alt = new ManageAlert(driver);
-		magAcc = new ManageAccount(driver);
-		ecms = new EcmsBase(driver);
-		ecMain = new ECMainFunction(driver);
-		magTem = new ManageTemplate(driver);
+		alt = new ManageAlert(driver,this.plfVersion);
+		magAcc = new ManageAccount(driver,this.plfVersion);
+		ecms = new EcmsBase(driver,this.plfVersion);
+		ecMain = new ECMainFunction(driver,this.plfVersion);
+		magTem = new ManageTemplate(driver,this.plfVersion);
 		magNType = new ManageNodeType(driver);
 		magAcc.signIn(DATA_USER_ADMIN, DATA_PASS);
 	}

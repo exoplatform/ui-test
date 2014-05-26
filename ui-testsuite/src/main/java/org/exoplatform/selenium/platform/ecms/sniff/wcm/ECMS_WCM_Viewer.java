@@ -45,16 +45,16 @@ public class ECMS_WCM_Viewer extends PlatformBase{
 	public void beforeMethod() {
 		initSeleniumTest();
 		driver.get(baseUrl);
-		button = new Button(driver);
-		userGroup = new UserGroupManagement(driver);
-		navToolBar = new NavigationToolbar(driver);
-		magAcc = new ManageAccount(driver);	
-		pEditor = new PageEditor(driver);
-		pMag = new PageManagement(driver);
-		ecms = new EcmsBase(driver);
-		actBar = new ActionBar(driver);
-		cTemplate = new ContentTemplate(driver);
-		cMenu = new ContextMenu(driver);
+		button = new Button(driver, this.plfVersion);
+		userGroup = new UserGroupManagement(driver, this.plfVersion);
+		navToolBar = new NavigationToolbar(driver, this.plfVersion);
+		magAcc = new ManageAccount(driver, this.plfVersion);
+		pEditor = new PageEditor(driver, this.plfVersion);
+		pMag = new PageManagement(driver, this.plfVersion);
+		ecms = new EcmsBase(driver, this.plfVersion);
+		actBar = new ActionBar(driver, this.plfVersion);
+		cTemplate = new ContentTemplate(driver, this.plfVersion);
+		cMenu = new ContextMenu(driver, this.plfVersion);
 		cList = new ContentListPreference(driver);
 		magAcc.signIn(DATA_USER1, DATA_PASS);
 		driver.get(acmeURL);
@@ -216,7 +216,7 @@ public class ECMS_WCM_Viewer extends PlatformBase{
 		actBar.publishDocument();
 		actBar.openManagePublicationForm();
 		String pDate;
-		pDate = actBar.getPublishDate(actBar.ELEMENT_FIRST_REVISION_DATE);
+		pDate = actBar.getPublishDate(By.xpath(actBar.ELEMENT_REVISION_DATE.replace("${status}", "Published[Current Revision]")));
 		button.close();
 
 		info("-- Open Overview page --");

@@ -339,16 +339,16 @@ public class ECMS_WCM_Others extends PlatformBase{
 	public void beforeMethods() {
 		initSeleniumTest();
 		driver.manage().window().maximize();
-		button = new Button(driver);
-		magAcc = new ManageAccount(driver);
-		pEditor = new PageEditor(driver);
-		navToolBar = new NavigationToolbar(driver);
-		actBar = new ActionBar(driver);
-		ecms = new EcmsBase(driver);
-		cTemplate = new ContentTemplate(driver);
-		cMenu = new ContextMenu(driver);
-		siteExp = new SitesExplorer(driver);
-		pages = new PageManagement(driver);
+		button = new Button(driver, this.plfVersion);
+		magAcc = new ManageAccount(driver, this.plfVersion);
+		pEditor = new PageEditor(driver, this.plfVersion);
+		navToolBar = new NavigationToolbar(driver, this.plfVersion);
+		actBar = new ActionBar(driver, this.plfVersion);
+		ecms = new EcmsBase(driver, this.plfVersion);
+		cTemplate = new ContentTemplate(driver, this.plfVersion);
+		cMenu = new ContextMenu(driver, this.plfVersion);
+		siteExp = new SitesExplorer(driver, this.plfVersion);
+		pages = new PageManagement(driver, this.plfVersion);
 		seo = new SEO(driver);
 		magAcc.signIn(DATA_USER1, DATA_PASS);
 		driver.get(acmeURL);

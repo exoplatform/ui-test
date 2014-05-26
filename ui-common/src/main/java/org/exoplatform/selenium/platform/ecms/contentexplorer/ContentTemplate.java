@@ -1008,10 +1008,14 @@ public class ContentTemplate extends EcmsBase{
 	{   
 		info("-- Editing Web Content --" + title);
 		actBar.goToEditDocument(title);
+		driver.navigate().refresh();
 		//type(ELEMENT_WEBCONTENT_TITLE_TEXTBOX, title_edit, true);
 		//		waitForAndGetElement(ELEMENT_WEBCONTENT_NAME_TEXTBOX).clear();
 		if (contentToEdit != ""){
-			inputDataToFrame(ELEMENT_WEBCONTENT_CONTENT_FRAME, contentToEdit, true);
+			if(this.plfVersion.equalsIgnoreCase("4.1"))
+				inputDataToFrame(ELEMENT_WEBCONTENT_CONTENT_FRAME_41,contentToEdit,true);
+			else
+				inputDataToFrame(ELEMENT_WEBCONTENT_CONTENT_FRAME,contentToEdit,true);
 			switchToParentWindow();
 		}
 

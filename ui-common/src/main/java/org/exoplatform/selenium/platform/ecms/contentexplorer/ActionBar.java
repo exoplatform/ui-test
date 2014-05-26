@@ -905,6 +905,7 @@ public class ActionBar extends EcmsBase{
 		
 		info("-- Undo deletion --");
 		if (node != ""){
+			info("\'" + node + "' was deleted succesfully.");
 			waitForTextPresent("\'" + node + "' was deleted succesfully.");
 		}
 		if(this.plfVersion.equalsIgnoreCase("4.1"))

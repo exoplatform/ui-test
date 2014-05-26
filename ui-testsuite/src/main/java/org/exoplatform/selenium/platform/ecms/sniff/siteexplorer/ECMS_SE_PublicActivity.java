@@ -395,7 +395,7 @@ public class ECMS_SE_PublicActivity extends PlatformBase {
 	 */
 	@Test
 	public void test12_EditAContentFromContentActivity(){
-		String name = "Public_activity_web_content_11";
+		String name = "webcontent75294";
 		String sum = "line1/line2/line3";
 		By elementWeb = By.linkText(name);
 		
