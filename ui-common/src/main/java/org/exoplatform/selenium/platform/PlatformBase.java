@@ -64,6 +64,8 @@ public class PlatformBase extends TestBase {
 	public final By ELEMENT_LEFT_NAVIGATION_SEARCH_SPACE=By.xpath("//*[@id='UISpaceNavigationPortlet']//*[@value='Search Spaces']");
 	public final By ELEMENT_LEFT_NAVIGATION_COMPANY = By.className("uiCompanyNavigationPortlet");
 	public By ELEMENT_CALENDAR_PANEL = By.xpath("//div[@class='uiBox uiCalendars']");
+	public final By ELEMENT_TITLE_WIKI_HOME_LINK = By.xpath("//*[@class='titleWikiBox']/*[contains(text(), 'Wiki Home')]");
+	
 	/*
 	 * Navigation Bar
 	 */
@@ -213,7 +215,10 @@ public class PlatformBase extends TestBase {
 	public final By ELEMENT_LAST_NAME_TEXTBOX_EDIT = By.id("lastName");
 	public final By ELEMENT_EMAIL_TEXTBOX_EDIT = By.id("email");
 	public final By ELEMENT_EDIT_BASIC_INFO_SAVE_BUTTON = By.xpath("//*[@id='UIBasicInfoSection']//button[contains(text(), 'Save')]");
-
+	public final By ELEMENT_MY_WIKI_LINK = By.linkText("My Wiki");
+	public final By ELEMENT_NOTIFICATION_LINK = By.linkText("Notifications");
+	public final By ELEMENT_MY_CONNECTIONS_LINK = By.linkText("My Connections");
+		
 	//User-> Setting
 	public final By ELEMENT_CHANGE_PASSWORD_TAB = By.linkText("Change Password");
 	public final By ELEMENT_ACCOUNT_PROFILE_TAB = By.linkText("Account Profiles");

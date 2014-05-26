@@ -67,6 +67,7 @@ public class SpaceManagement extends SocialBase {
 	public final String ELEMENT_SPACE_MENU_ITEM = "//span[contains(text(),'${menuItem}')]";
 	public final String ELEMENT_SPACE_MENU_ITEM_41 = "//span[contains(text(),'${menuItem}')]";
 	public final String ELEMENT_SPACE_CURRENT_MENU_ITEM = "//li[@class='active item']//span[text()='${menuItem}']";
+	public final By ELEMENT_SPACE_MORE_ITEM = By.xpath("//i[@class='uiIconAppMoreButton']");
 
 	//Space access
 	public final By		ELEMENT_ACCESS_EDIT_VISIBLE 	= By.xpath("//span[text()='Visible']/../input[@name='UIVisibility']");
@@ -396,7 +397,8 @@ public class SpaceManagement extends SocialBase {
 		if(waitForAndGetElement(eMenuItem.replace("${menuItem}", menuItem),timeout,0) != null)
 			click(By.xpath(eMenuItem.replace("${menuItem}", menuItem)));
 		else{
-			click(By.xpath(eMenuItem.replace("${menuItem}", "More")));
+			click(ELEMENT_SPACE_MORE_ITEM);
+			Utils.pause(2000);
 			String []items = menuItem.split(" ");
 			if(items.length>1){
 				click(By.xpath(eMenuItem.replace("${menuItem}", menuItem.split(" ")[0]+" ...")));
