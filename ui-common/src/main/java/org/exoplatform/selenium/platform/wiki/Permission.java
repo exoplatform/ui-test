@@ -398,34 +398,34 @@ public class Permission extends WikiBase{
 
 		if ( type[0]) {
 			info("Message: check view page permission is checked");
-			waitForAndGetElement(ELEMENT_VIEW_PAGE_PERMISSIONS.replace("${user}", username), 3000, 0, notDisplay).isSelected();
+			assert waitForAndGetElement(ELEMENT_VIEW_PAGE_PERMISSIONS.replace("${user}", username), 5000, 1, notDisplay).isSelected();
 		}else if (!type[0]){
 			info("Message: check view page permission is un-checked");
-			waitForAndGetElement(ELEMENT_VIEW_PAGE_PERMISSIONS.replace("${user}", username), 3000, 0, notDisplay).isSelected();	
+			assert !waitForAndGetElement(ELEMENT_VIEW_PAGE_PERMISSIONS.replace("${user}", username), 5000, 1, notDisplay).isSelected();	
 		}
 
 		if ( type[1]) {
 			info("Message: Check edit permission is checked");
-			waitForAndGetElement(ELEMENT_EDIT_PAGE_PERMISSIONS.replace("${user}", username), 3000, 0, notDisplay).isSelected();
+			assert waitForAndGetElement(ELEMENT_EDIT_PAGE_PERMISSIONS.replace("${user}", username), 3000, 0, notDisplay).isSelected();
 		}else if (!type[1]){
 			info("Message: Check edit permission is un-checked");
-			waitForAndGetElement(ELEMENT_EDIT_PAGE_PERMISSIONS.replace("${user}", username), 3000, 0, notDisplay).isSelected();	
+			assert !waitForAndGetElement(ELEMENT_EDIT_PAGE_PERMISSIONS.replace("${user}", username), 3000, 0, notDisplay).isSelected();	
 		}
 
 		if ( type.length > 2 && type[2]){
 			info("Messgage: Check admin page is checked");
-			waitForAndGetElement(ELEMENT_ADMIN_PAGE_CHECK.replace("${user}", username), 3000, 0, notDisplay).isSelected();
+			assert waitForAndGetElement(ELEMENT_ADMIN_PAGE_CHECK.replace("${user}", username), 3000, 0, notDisplay).isSelected();
 		}else if (type.length > 2 && !type[2]){
 			info("Message: Check admin page is un-checked");
-			waitForAndGetElement(ELEMENT_ADMIN_PAGE_CHECK.replace("${user}", username), 3000, 0, notDisplay).isSelected();
+			assert waitForAndGetElement(ELEMENT_ADMIN_PAGE_CHECK.replace("${user}", username), 3000, 0, notDisplay).isSelected();
 		}
 
 		if ( type.length > 2 && type[3]){
 			info("Messgage: Check admin space is checked");
-			waitForAndGetElement(ELEMENT_ADMIN_SPACE_CHECK.replace("${user}", username), 3000, 0, notDisplay).isSelected();
+			assert waitForAndGetElement(ELEMENT_ADMIN_SPACE_CHECK.replace("${user}", username), 3000, 0, notDisplay).isSelected();
 		}else if (type.length > 2 && !type[3]){
 			info("Message: Check admin space is un-checked");
-			waitForAndGetElement(ELEMENT_ADMIN_SPACE_CHECK.replace("${user}", username), 3000, 0, notDisplay).isSelected();
+			assert waitForAndGetElement(ELEMENT_ADMIN_SPACE_CHECK.replace("${user}", username), 3000, 0, notDisplay).isSelected();
 		}
 		button.save();
 		Utils.pause(1000);

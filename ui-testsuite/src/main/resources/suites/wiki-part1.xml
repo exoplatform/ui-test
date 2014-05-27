@@ -28,6 +28,7 @@
  			<class name="org.exoplatform.selenium.platform.wiki.functional.basicaction.Wiki_BasicAction_Move_MoveControl" />
  			<class name="org.exoplatform.selenium.platform.wiki.functional.basicaction.Wiki_BasicAction_MoveAPage" />
  			<class name="org.exoplatform.selenium.platform.wiki.functional.basicaction.Wiki_BasicAction_Move_MoveLayout" />
+ 			<class name="org.exoplatform.selenium.platform.wiki.functional.basicaction.Wiki_BasicAction_Permanlink" />
  		</classes>
 	</test>
 

@@ -53,6 +53,8 @@ public class ManageMember extends SpaceManagement {
 	public final String ELEMENT_PENDING_TABLE = "//th[contains(text(),'Pending')]/ancestor::table";
 	public final String ELEMENT_INVITED_TABLE = "//th[contains(text(),'Invited')]/ancestor::table";
 	public final String ELEMENT_SELECTED_USER_BOX = "//span[text()='${username}']/../..//input[@class='checkbox']";
+	public final By ELEMENT_ADD_USER_BUTTON = By.xpath("//*[@id='UIUserSelector']//*[text()='Add']");
+	
 	//Adapt to plf4.1.0
 	public final String ELEMENT_SELECTED_USER_BOX_PLF4_1 = "//span[@class='text' and contains(text(),'${username}')]/../..//input[@class='checkbox']";	
 	public final String ELEMENT_GRAND_MANAGER_BUTTON = ELEMENT_MEMBERS_TABLE + "/..//td[contains(text(),'${username}')]/..//*[@class='iPhoneCheckHandle']";
@@ -115,7 +117,7 @@ public class ManageMember extends SpaceManagement {
 		click(ELEMENT_SELECT_MEMBER_BUTTON);
 		waitForAndGetElement(ELEMENT_SELECT_MEMBER_FORM);
 		check(By.xpath(ELEMENT_SELECTED_USER_BOX.replace("${username}", name)),2);
-			clickButton("Add");
+			click(ELEMENT_ADD_USER_BUTTON);
 			if (name.equals("Jack")){
 				waitForAndGetElement(By.xpath(user1.replace("${user}", "demo")));
 			}else{

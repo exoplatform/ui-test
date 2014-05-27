@@ -17,7 +17,7 @@ public class SocialBase extends PlatformBase {
 	// Go to My space link
 //	public final By ELEMENT_MY_SPACES_LINK = By.linkText("My Spaces");
 	public final By ELEMENT_ALL_SPACE_LINK = By.linkText("All Spaces");
-	public final By ELEMENT_INVATATION_RECEIVES_LINK = By.linkText("Invitations Received");
+	public final By ELEMENT_INVITATION_RECEIVES_LINK = By.linkText("Invitations Received");
 	public final By ELEMENT_REQUESTS_PENDING_LINK = By.linkText("Requests Pending");
 
 	// My space portlet
@@ -141,8 +141,8 @@ public class SocialBase extends PlatformBase {
 	public void goToInvitationReceives(){
 		info("Go to Invitation Receives");
 		goToMySpacePage();
-		waitForAndGetElement(ELEMENT_INVATATION_RECEIVES_LINK);
-		click(ELEMENT_INVATATION_RECEIVES_LINK);	
+		waitForAndGetElement(ELEMENT_INVITATION_RECEIVES_LINK);
+		click(ELEMENT_INVITATION_RECEIVES_LINK);	
 	}
 	// Go to Request Pending
 	public void goToRequestsPeding(){

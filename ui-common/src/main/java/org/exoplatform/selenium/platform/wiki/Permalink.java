@@ -22,6 +22,9 @@ public class Permalink extends BasicAction {
 	public final By ELEMENT_PERMISSION_MANAGEMENT = By.xpath("//*[text() = 'Manage Permissions']");
 	public final String DATA_NOTIFY_RESTRICT = "This page is restricted. Only authorized users can view and edit it.";
 	public final String DATA_NOTIFY_PUBLIC = "This page is public. Anybody can view and edit it.";
+	public final String ELEMENT_ANCESTOR_RESTRICT = "//*[contains(text(), '${subPage}')]/../../../../..//em[text()='restricted']";
+	public final By ELEMENT_ANCESTOR_RESTRICT_TOOLTIP = By.xpath("//*[@class='tooltip fade right in']/*[text()='This page is restricted, you do not have permission to view it.']");
+	public final String ELEMENT_STATUS_IN_INFO_PAGE = "//*[@id='titleInfo' and text()='${title}']/../..//*[contains(text(), '${status}')]";
 	
 	/**
 	 * Gets a permanent link by a given value.
@@ -46,7 +49,7 @@ public class Permalink extends BasicAction {
 		
 		info("Check permalink with user " + user);
 		driver.get(permalink);
-		magAc.signIn(DATA_USER1, DATA_PASS);
+		magAc.signIn(user, DATA_PASS);
 		
 		if (permission){
 			waitForTextPresent(content);
