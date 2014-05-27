@@ -21,7 +21,7 @@ import org.exoplatform.selenium.Utils;
 public class Event extends CalendarBase{
 
 	public By ELEMENT_RIGHT_CLICK_ADD_EVENT = By.xpath("//*[@id='tmpMenuElement']//*[@class='createEvent']");
-	
+
 	//--------------------Event basic actions------------------------
 	public By ELEMENT_INPUT_EVENT_TITLE = By.id("eventName");
 	public By ELEMENT_INPUT_EVENT_DESCRIPTION = By.id("description");
@@ -44,7 +44,7 @@ public class Event extends CalendarBase{
 	public By ELEMENT_INPUT_EVENT_FROM_TIME = By.xpath("//form[@id='UIQuickAddEvent']//*[@id='fromTime']");
 	public By ELEMENT_INPUT_EVENT_TO_TIME = By.xpath("//form[@id='UIQuickAddEvent']//*[@id='toTime']");
 	public By ELEMENT_ADD_EVENT_SAVE_QUICK_BUTTON = By.xpath("//*[@id='QuickAddEventContainer']//*[text()='Save']");
-	
+
 	//Preview form
 	public String ELEMENT_EVENT_PREVIEW_TITLE = "//form[@id='UIPreviewPopup']//div[@class='titleList']/strong[text()='${event}']";
 
@@ -138,13 +138,13 @@ public class Event extends CalendarBase{
 	public void goToAddEventFromMainPane(String time){
 		String current = getCurrentDate("MMM dd yyyy");
 		info("Current date is " + current);
-		
+
 		String cell = "//td[contains(@startfull,'" + current + " " + time + ":00')]";
 		rightClickOnElement(cell);
 		click(ELEMENT_RIGHT_CLICK_ADD_EVENT, 2);
 		waitForAndGetElement(ELEMENT_ADD_EVENT_POPUP);
 	}
-	
+
 	/**add event by click on block time in main panel
 	 * @author lientm
 	 * @param time
@@ -153,14 +153,14 @@ public class Event extends CalendarBase{
 		String current = getCurrentDate("MMM dd yyyy");
 		info("Current date is " + current);
 		for (int i = 0; i < 5; i ++){
-		if (waitForAndGetElement(ELEMENT_ADD_EVENT_POPUP, 5000, 0) == null){
-			click("//td[contains(@startfull,'" + current + " " + time + ":00')]", 2);
-			info("Repeat " + i);
+			if (waitForAndGetElement(ELEMENT_ADD_EVENT_POPUP, 5000, 0) == null){
+				click("//td[contains(@startfull,'" + current + " " + time + ":00')]", 2);
+				info("Repeat " + i);
 			}
 		}
 		waitForAndGetElement(ELEMENT_ADD_EVENT_POPUP);
 	}
-	
+
 	/**
 	 * Open "Edit Event" form 
 	 * @param oldEvent
@@ -250,20 +250,23 @@ public class Event extends CalendarBase{
 						click(ELEMENT_INPUT_EVENT_FROM_TIME_IN, 2);
 						click(ELEMENT_EVENT_SELECT_FROM_TIME.replace("${time}", dateTime[1]));
 					}
-						Utils.pause(1000);
-				}
-				if((to != null) & (to != "")){
-					String[] dateTime = to.split(" ");
-					if(dateTime.length > 0)
-						type(ELEMENT_INPUT_EVENT_TO, dateTime[0], true);
-					if(dateTime.length > 1){
-						click(ELEMENT_INPUT_EVENT_TO_TIME_IN, 2);
-						click(ELEMENT_EVENT_SELECT_TO_TIME.replace("${time}", dateTime[1]));
-					}
-						Utils.pause(1000);
-//						type(ELEMENT_INPUT_EVENT_TO_TIME_SELECTBOX, dateTime[1], true);
+
+					Utils.pause(1000);
 				}
 			}
+			if((to != null) & (to != "")){
+				String[] dateTime = to.split(" ");
+				if(dateTime.length > 0)
+					type(ELEMENT_INPUT_EVENT_TO, dateTime[0], true);
+				if(dateTime.length > 1){
+					click(ELEMENT_INPUT_EVENT_TO_TIME_IN, 2);
+					click(ELEMENT_EVENT_SELECT_TO_TIME.replace("${time}", dateTime[1]));
+				}
+
+				Utils.pause(1000);
+			}
+			//						type(ELEMENT_INPUT_EVENT_TO_TIME_SELECTBOX, dateTime[1], true);
+
 		}else{
 			if(allDay){
 				check(ELEMENT_ADD_EDIT_EVENT_ALLDAY,2);
@@ -281,24 +284,24 @@ public class Event extends CalendarBase{
 						click(ELEMENT_ADD_EDIT_EVENT_FROM_TIME_IN, 2);
 						click(ELEMENT_ADD_EDIT_EVENT_SELECT_FROM_TIME.replace("${time}", dateTime[1]));
 					}
-						Utils.pause(1000);
-//						type(ELEMENT_ADD_EDIT_EVENT_FROM_TIME, dateTime[1], true);
+					Utils.pause(1000);
 				}
-				if((to != null) & (to != "")){
-					String[] dateTime = to.split(" ");
-					if(dateTime.length > 0)
-						type(ELEMENT_ADD_EDIT_EVENT_TO, dateTime[0], true);
-					if(dateTime.length > 1){
-//						type(ELEMENT_ADD_EDIT_EVENT_TO_TIME, dateTime[1], true);
-						click(ELEMENT_ADD_EDIT_EVENT_TO_TIME_IN, 2);
-						click(ELEMENT_ADD_EDIT_EVENT_SELECT_TO_TIME.replace("${time}", dateTime[1]));
-					}
-						Utils.pause(1000);
-				}
+				//						type(ELEMENT_ADD_EDIT_EVENT_FROM_TIME, dateTime[1], true);
 			}
-
+			if((to != null) & (to != "")){
+				String[] dateTime = to.split(" ");
+				if(dateTime.length > 0)
+					type(ELEMENT_ADD_EDIT_EVENT_TO, dateTime[0], true);
+				if(dateTime.length > 1){
+					//						type(ELEMENT_ADD_EDIT_EVENT_TO_TIME, dateTime[1], true);
+					click(ELEMENT_ADD_EDIT_EVENT_TO_TIME_IN, 2);
+					click(ELEMENT_ADD_EDIT_EVENT_SELECT_TO_TIME.replace("${time}", dateTime[1]));
+				}
+				Utils.pause(1000);
+			}
 		}
 	}
+
 
 	/**
 	 * Input into other fields of tab Details of Add/Edit event
@@ -445,13 +448,18 @@ public class Event extends CalendarBase{
 	 */
 	public void addQuickEvent(String name, String description, String from, String to, boolean allDay, String...opt){
 		info("--Add an event--");
+		//		String date = "";
 		goToAddEventFromActionBar();
 		inputBasicQuickEvent(name, description, opt);
 		inputFromToEvent(from, to, allDay);
 		button.save();
 		waitForElementNotPresent(ELEMENT_ADD_EVENT_POPUP);
 		Utils.pause(1000);
-		if(allDay){
+		/*if((from != null) & (from != "")){
+			date = from.split("/")[1];
+			click(ELEMENT_MINI_CALENDAR_DATE_HIGHLIGHT.replace("${date}", date));
+			}*/
+		/*if(allDay){
 			if(this.plfVersion.contains("4.0"))
 				waitForAndGetElement(ELEMENT_EVENT_TASK_ALL_DAY.replace("${event}", name));
 			else
@@ -460,7 +468,7 @@ public class Event extends CalendarBase{
 		else{
 			if(isElementNotPresent(ELEMENT_EVENT_TASK_ONE_DAY.replace("${taskName}", name)))
 				waitForAndGetElement(ELEMENT_EVENT_TASK_ONE_DAY_1.replace("${taskName}", name));
-		}
+		}*/
 	}
 
 	/**
@@ -705,7 +713,7 @@ public class Event extends CalendarBase{
 			info("Verify event all day");
 			if(this.plfVersion.contains("4.0")){
 				info("Verify in plf 4.0");
-				if(isElementNotPresent(ELEMENT_EVENT_TASK_ALL_DAY.replace("${event}", eventName))&&isElementNotPresent(ELEMENT_EVENT_TASK_WORKING_PANE.replace("${event}", eventName))){
+				if((waitForElementNotPresent(ELEMENT_EVENT_TASK_ALL_DAY.replace("${event}", eventName)) == null)&&(waitForElementNotPresent(ELEMENT_EVENT_TASK_WORKING_PANE.replace("${event}", eventName))==null)){
 					isPresentEvent = false;
 				}        
 				else
@@ -714,14 +722,15 @@ public class Event extends CalendarBase{
 			else{ //this.plfVersion.contains("4.1")
 				info("Verify in plf 4.1");
 				if(dateTime!=""){
-					if(isElementNotPresent(ELEMENT_EVENT_TASK_DETAIL_ALL_DAY.replace("${event}", eventName).replace("${date}", dateTime))){
+					if(waitForElementNotPresent(ELEMENT_EVENT_TASK_DETAIL_ALL_DAY.replace("${event}", eventName).replace("${date}", dateTime),5000,0)==null){
 						isPresentEvent = false;
 					}        
-					else
+					else{
 						isPresentEvent = true;
+					}
 				}
 				else{
-					if(isElementNotPresent(ELEMENT_EVENT_TASK_ALL_DAY_PLF41.replace("${event}", eventName))&&isElementNotPresent(ELEMENT_EVENT_TASK_WORKING_PANE_PLF41.replace("${event}", eventName))){
+					if((waitForElementNotPresent(ELEMENT_EVENT_TASK_ALL_DAY_PLF41.replace("${event}", eventName),5000,0)==null)&&(waitForElementNotPresent(ELEMENT_EVENT_TASK_WORKING_PANE_PLF41.replace("${event}", eventName),5000,0)==null)){
 						isPresentEvent = false;
 					}        
 					else
@@ -732,15 +741,19 @@ public class Event extends CalendarBase{
 		case ONEDAY:
 			info("Verify event one day");
 			if(dateTime!=null&&dateTime!=""){
-				if(isElementNotPresent(By.xpath(ELEMENT_EVENT_TASK_DETAIL_DATE.replace("${taskName}", eventName).replace("${date}", dateTime)))){
+				if(waitForElementNotPresent(By.xpath(ELEMENT_EVENT_TASK_DETAIL_DATE.replace("${taskName}", eventName).replace("${date}", dateTime)),5000,0)==null){
 					((JavascriptExecutor) driver).executeScript("arguments[0].scrollTop = arguments[0].scrollHeight;", 
 							waitForAndGetElement(ELEMENT_EVENT_TASK_WEEK_PANEL));
-					if(isElementNotPresent(By.xpath(ELEMENT_EVENT_TASK_DETAIL_DATE.replace("${taskName}", eventName).replace("${date}", dateTime)))){
+					if(waitForElementNotPresent(By.xpath(ELEMENT_EVENT_TASK_DETAIL_DATE.replace("${taskName}", eventName).replace("${date}", dateTime)),5000,0)==null){
 						click(ELEMENT_NEXT_WEEK);
-						if(isElementPresent(By.xpath(ELEMENT_EVENT_TASK_DETAIL_DATE.replace("${taskName}", eventName).replace("${date}", dateTime))))
+						if(waitForAndGetElement(By.xpath(ELEMENT_EVENT_TASK_DETAIL_DATE.replace("${taskName}", eventName).replace("${date}", dateTime)),5000,0)!= null){
 							isPresentEvent = true;
-						else
+							info("it is shown in date " + dateTime);
+						}
+						else{
 							isPresentEvent = false;
+							info("it is not shown in date " + dateTime);
+						}
 						click(ELEMENT_PREVIOUS_WEEK);
 					}
 					else
@@ -750,17 +763,18 @@ public class Event extends CalendarBase{
 					isPresentEvent = true;
 			}
 			else{
-				if(isElementPresent(ELEMENT_EVENT_TASK_ONE_DAY.replace("${taskName}", eventName)))
+				if(waitForAndGetElement(ELEMENT_EVENT_TASK_ONE_DAY.replace("${taskName}", eventName),5000,0) != null)
 					isPresentEvent = true;
-				else
+				else{
 					isPresentEvent = false;
+				}
 			}
 			break;
 		}
 		return isPresentEvent;
 	}
-	
-	
+
+
 	/**
 	 * @author lientm
 	 * @param from
@@ -772,7 +786,7 @@ public class Event extends CalendarBase{
 		String dateTo = getValue(ELEMENT_INPUT_EVENT_TO);
 		assert dateFrom.equals(getCurrentDate("MM/dd/yyyy"));
 		assert dateTo.equals(getCurrentDate("MM/dd/yyyy"));
-		
+
 		info("Check suggestion time");
 		if (from == null){
 			info("Check time suggestion default");				

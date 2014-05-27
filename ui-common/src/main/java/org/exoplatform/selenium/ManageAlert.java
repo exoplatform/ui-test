@@ -104,8 +104,11 @@ public class ManageAlert extends TestBase{
 		else if (isElementPresent(ELEMENT_CONFIRM)){
 			assert getText(ELEMENT_CONFIRM).contains(message):"Message is wrong";        
 		}
-		if (waitForAndGetElement(button.ELEMENT_OK_BUTTON, 3000, 0) != null){
+		if (waitForAndGetElement(button.ELEMENT_OK_BUTTON, 5000, 0) != null){
 			click(button.ELEMENT_OK_BUTTON);
+		}
+		if (waitForAndGetElement(button.ELEMENT_YES_BUTTON, 3000, 0) != null){
+			click(button.ELEMENT_YES_BUTTON);
 		}
 		Utils.pause(1000);
 	}

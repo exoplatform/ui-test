@@ -248,6 +248,7 @@ public class Task extends CalendarBase{
 					}
 					Utils.pause(1000);
 					//						type(ELEMENT_INPUT_TASK_FROM_TIME, dateTimeFrom[1], false);
+
 				}
 				if ((to != null) & (to != "")){
 					String[] dateTimeTo = to.split(" ");
@@ -278,11 +279,12 @@ public class Task extends CalendarBase{
 					if(dateTime.length > 0)
 						type(ELEMENT_ADD_EDIT_TASK_FROM, dateTime[0], true);
 					if(dateTime.length > 1){
-						//						type(ELEMENT_ADD_EDIT_TASK_FROM_TIME, dateTime[1], false);
+
+//						type(ELEMENT_ADD_EDIT_TASK_FROM_TIME, dateTime[1], false);
 						click(ELEMENT_ADD_EDIT_TASK_FROM_TIME_IN, 2);
 						click(ELEMENT_ADD_EDIT_TASK_SELECT_FROM_TIME.replace("${time}", dateTime[1]));
+						Utils.pause(1000);
 					}
-					Utils.pause(1000);
 				}
 				if ((to != null) & (to != "")){
 					String[] dateTime = to.split(" ");
@@ -290,10 +292,10 @@ public class Task extends CalendarBase{
 					if(dateTime.length > 1){
 						click(ELEMENT_ADD_EDIT_TASK_TO_TIME_IN, 2);
 						click(ELEMENT_ADD_EDIT_TASK_SELECT_TO_TIME.replace("${time}", dateTime[1]));
-					}
-					Utils.pause(1000);
-					//						type(ELEMENT_ADD_EDIT_TASK_TO_TIME, dateTime[1], false);
 
+						Utils.pause(1000);
+//						type(ELEMENT_ADD_EDIT_TASK_TO_TIME, dateTime[1], false);
+					}
 				}
 			}
 		}

@@ -178,11 +178,11 @@ public class HomePageActivity extends PlatformBase{
 	public final String ELEMENT_EVENT_MONTH_ICON = "//a[text()='${event}']/../..//div[@class='pull-left calendarBox']/div[@class='heading' and contains(text(),'${month}')]";
 	public final String ELEMENT_EVENT_DATE_ICON = "//a[text()='${event}']/../..//div[@class='pull-left calendarBox']/div[@class='content' and contains(text(),'${date}')]";
 	public final String MSG_EVENT_COMMENT_UPDATE_ALL_DAY = "Event is now an all-day event.";
-	public final String MSG_EVENT_COMMENT_UPDATE_SUMMARY = "Summary has been updated: ${newTitle}.";
-	public final String MSG_EVENT_COMMENT_UPDATE_DESC = "Description has been updated: ${description}.";
-	public final String MSG_EVENT_COMMENT_UPDATE_LOCATION = "Location has been updated: ${location}.";
+	public final String MSG_EVENT_COMMENT_UPDATE_SUMMARY = "Summary has been updated to: ${newTitle}.";
+	public final String MSG_EVENT_COMMENT_UPDATE_DESC = "Description has been updated to: ${description}.";
+	public final String MSG_EVENT_COMMENT_UPDATE_LOCATION = "Location has been updated to: ${location}.";
 	public final String MSG_TASK_COMMENT_UPDATE_ATTACHMENT = "Attachment(s) has been added to the task.";
-	public final String MSG_TASK_COMMENT_UPDATE_NOTE = "Note has been updated: ${note}.";
+	public final String MSG_TASK_COMMENT_UPDATE_NOTE = "Note has been updated to: ${note}.";
 	public final String MSG_TASK_COMMENT_UPDATE_STATUS = "Task has been completed.";
 	public final String MSG_EVENT_COMMENT_DELETE_EDITED_EVENT = "Event cancelled for ${date}";
 	public final String MSG_EVENT_REPEAT_EVERYDAY = "Event will be repeated every day.";
