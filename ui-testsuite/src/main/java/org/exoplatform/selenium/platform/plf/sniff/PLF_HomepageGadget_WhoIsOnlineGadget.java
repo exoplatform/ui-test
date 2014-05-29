@@ -33,7 +33,8 @@ public class PLF_HomepageGadget_WhoIsOnlineGadget extends PlatformBase {
 	
 	@BeforeMethod
 	public void setUpBeforeTest(){
-		getDriverAutoSave();
+//		getDriverAutoSave();
+		initSeleniumTest();
 		acc = new ManageAccount(driver);
 		hg = new HomePageGadget(driver);
 		peopleC = new PeopleConnection(driver);
@@ -109,12 +110,13 @@ public class PLF_HomepageGadget_WhoIsOnlineGadget extends PlatformBase {
 		info("Check if user 1 received connect invitation from user 2 or not");
 		acc.signIn(User1, Pass1);
 		Utils.pause(500);
-		if(plfVersion =="4.1"){
-			
-			newDriver.findElement(By.xpath(hg.ELEMENT_SHOW_CONNECTIONS_REQUEST_USER_PLF41.replace("${peopleName}","root")));
+		if(plfVersion =="4.1"){		
+//			newDriver.findElement(By.xpath(hg.ELEMENT_SHOW_CONNECTIONS_REQUEST_USER_PLF41.replace("${peopleName}","root")));
+			assert waitForAndGetElement(hg.ELEMENT_SHOW_CONNECTIONS_REQUEST_USER_PLF41.replace("${peopleName}","root"), DEFAULT_TIMEOUT, 1, 2, newDriver) != null;
 		}
 		else{// if (plfVersion =="4.0"){
-			newDriver.findElement(By.xpath(hg.ELEMENT_SHOW_CONNECTIONS_REQUEST_USER.replace("${nameinvitation}","Root Root")));
+//			newDriver.findElement(By.xpath(hg.ELEMENT_SHOW_CONNECTIONS_REQUEST_USER.replace("${nameinvitation}","Root Root")));
+			assert waitForAndGetElement(hg.ELEMENT_SHOW_CONNECTIONS_REQUEST_USER.replace("${nameinvitation}","Root Root"), DEFAULT_TIMEOUT, 1, 2, newDriver) != null;
 		}	
 		
 		Utils.pause(500);
@@ -123,7 +125,7 @@ public class PLF_HomepageGadget_WhoIsOnlineGadget extends PlatformBase {
 		navToolBar = new NavigationToolbar(newDriver);
 		peopleC = new PeopleConnection(newDriver);
 		navToolBar.goToConnectionPage();
-		peopleC.ignoreInvitation(User2);
+		peopleC.ignoreInvitation(fullNameUser2);
 		newDriver.manage().deleteAllCookies();
 		newDriver.quit();
 	}

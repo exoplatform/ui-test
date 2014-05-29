@@ -274,9 +274,10 @@ public class SpaceManagement extends SocialBase {
 		doAction("Delete", name);    
 		magAlert = new ManageAlert(driver);
 		magAlert.acceptAlert();
-		if (waitForAndGetElement(button.ELEMENT_OK_BUTTON_LINK, 3000, 0, 2) != null){
-			click(button.ELEMENT_OK_BUTTON_LINK);
-		}
+//		if (waitForAndGetElement(button.ELEMENT_OK_BUTTON, 3000, 0, 2) != null){
+//			click(button.ELEMENT_OK_BUTTON);
+//		}
+		button.ok();
 		Utils.pause(1000);
 		waitForElementNotPresent(By.xpath(ELEMENT_ACTION_USER_ON_SPACE.replace("${spaceName}", name).replace("${action}", "Delete")), iTimeout);
 		info(name + " was deleted successfully");

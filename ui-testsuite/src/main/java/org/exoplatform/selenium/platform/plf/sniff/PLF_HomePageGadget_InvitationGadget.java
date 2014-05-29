@@ -5,6 +5,7 @@ import org.exoplatform.selenium.platform.HomePageGadget;
 import org.exoplatform.selenium.platform.ManageAccount;
 import org.exoplatform.selenium.platform.NavigationToolbar;
 import org.exoplatform.selenium.platform.ManageAccount.userType;
+import org.exoplatform.selenium.platform.UserGroupManagement;
 import org.exoplatform.selenium.platform.calendar.Event;
 import org.exoplatform.selenium.platform.calendar.Task;
 import org.exoplatform.selenium.platform.social.Activity;
@@ -29,19 +30,23 @@ public class PLF_HomePageGadget_InvitationGadget extends Activity{
 	PeopleConnection peoConn;
 	NavigationToolbar navToolBar;
 	HomePageGadget homeGad;
+	UserGroupManagement user;
 
 	@BeforeMethod
 	public void setUpBeforeTest(){
-		getDriverAutoSave();
+//		getDriverAutoSave();
+		initSeleniumTest();
 		acc = new ManageAccount(driver);
 		evt = new Event(driver);
 		tsk = new Task(driver);
 		btn = new Button(driver);
 		homeGad = new HomePageGadget(driver,this.plfVersion);
-		acc.signIn(DATA_USER1, DATA_PASS);
-		magMember = new ManageMember(driver);
+		magMember = new ManageMember(driver, this.plfVersion);
 		peoConn = new PeopleConnection(driver);
-		navToolBar = new NavigationToolbar(driver);		
+		navToolBar = new NavigationToolbar(driver);	
+		user = new UserGroupManagement(driver);
+		
+		acc.signIn(DATA_USER1, DATA_PASS);
 	}
 
 	@AfterMethod
@@ -67,42 +72,46 @@ public class PLF_HomePageGadget_InvitationGadget extends Activity{
 		String user3="James Davis";
 		String user_login2 = "demo";
 		String user_login4 = "james";
-		String user_login5 = "john";
+//		String user_login5 = "john";
 		String eInvitationUser = "";
 
 		String number_gadget = "4";
 		String status = "Private Space";
+		
+		String username = "test75079";
+		String pass = "gtngtn";
+		String name = "TestMot";
 
+		info("Create new user to test");
+		navToolBar.goToNewStaff();
+		acc.addNewUserAccount(username, pass, pass, name, name, name, username + "@gmail.com", null, null, true);
+		acc.signOut();
+		
 		// Check not show Invitation gadget	
+		acc.signIn(username, pass);
 		waitForElementNotPresent(homeGad.ELEMENT_INVITATION_GADGET);
 		acc.signOut();
 
-		//Create new space1 by mary
+		//James request connect and invite user in space
 		acc.signIn(user_login4, DATA_PASS);
 		magMember.goToMySpacePage();
 		magMember.addNewSpace(spaceName1, "");
-		magMember.managerInviteUserToJoinSpace(userType.PUBLISHER,spaceName1,userType.ADMIN,false);
+		magMember.managerInviteUserToJoinSpace(userType.PUBLISHER,spaceName1,userType.NEW_USER,false, name);
+		navToolBar.goToConnectionPage();
+		peoConn.connectPeople(name + " " + name);
 		acc.signOut();
 
-		//Create space for demo
+		//Demo request connect and invite user in space
 		acc.signIn(user_login2, DATA_PASS);
 		magMember.goToMySpacePage();
 		magMember.addNewSpace(spaceName2, "");
-		magMember.managerInviteUserToJoinSpace(userType.PUBLISHER,spaceName2,userType.ADMIN,false);
-		acc.signOut();
-
-		//Login by demo
-		acc.signIn(user_login2,DATA_PASS);
+		magMember.managerInviteUserToJoinSpace(userType.PUBLISHER,spaceName2,userType.NEW_USER,false, name);
 		navToolBar.goToConnectionPage();
-		peoConn.connectPeople(user_login5);
+		peoConn.connectPeople(name + " " + name);
 		acc.signOut();
-
-		//Login by james
-		acc.signIn(user_login4,DATA_PASS);
-		navToolBar.goToConnectionPage();
-		peoConn.connectPeople(user_login5);
-		acc.signOut();
-		acc.signIn(DATA_USER1, DATA_PASS);
+		
+		//Login with new user check invitation gadget
+		acc.signIn(username, pass);
 		waitForAndGetElement(homeGad.ELEMENT_INVITATION_GADGET);
 		if(this.plfVersion.equalsIgnoreCase("4.0")){
 			eInvitationUser = homeGad.ELEMENT_SHOW_CONNECTIONS_REQUEST_USER;
@@ -122,12 +131,6 @@ public class PLF_HomePageGadget_InvitationGadget extends Activity{
 
 		//Remove invitation
 		homeGad.removeInvitationGadget(user3);
-
-		/*Clear data*/
-		info("-- clear data --");
-		//remove connection
-		navToolBar.goToConnectionPage();
-		peoConn.removeConnection(user_login2);
 		acc.signOut();
 
 		//Delete space
@@ -137,6 +140,10 @@ public class PLF_HomePageGadget_InvitationGadget extends Activity{
 		acc.signOut();
 		acc.signIn(user_login2,DATA_PASS);
 		magMember.goToAllSpaces();
-		magMember.deleteSpace(spaceName2,300000);		
+		magMember.deleteSpace(spaceName2,300000);
+		acc.signOut();
+		acc.signIn(DATA_USER1, DATA_PASS);
+		navToolBar.goToUsersAndGroupsManagement();
+		user.deleteUser(username);
 	}
 }

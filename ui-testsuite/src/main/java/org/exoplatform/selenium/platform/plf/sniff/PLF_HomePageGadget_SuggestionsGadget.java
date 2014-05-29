@@ -27,7 +27,8 @@ public class PLF_HomePageGadget_SuggestionsGadget extends Activity{
 
 	@BeforeMethod
 	public void setUpBeforeTest(){
-		getDriverAutoSave();
+//		getDriverAutoSave();
+		initSeleniumTest();
 		acc = new ManageAccount(driver);
 		homeGad = new HomePageGadget(driver);
 		magMember = new ManageMember(driver);

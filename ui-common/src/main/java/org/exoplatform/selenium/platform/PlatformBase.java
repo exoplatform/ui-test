@@ -750,7 +750,8 @@ public class PlatformBase extends TestBase {
 	//Search porlet
 	public final By ELEMENT_SEARCH_APPLICATION = By.xpath("//a[@title='Search']");
 	public final String ELEMENT_GADGET_SEARCH_APPLICATION_PAGE_EDITOR = "//div[@id='UIApplicationList17']//div[contains(text(),'${gadget}')]";
-
+	public final By ELEMENT_QUICK_SEARCH_PORTLET = By.id("Search/local._unified-search.QuicksearchPortlet");
+	
 	//Administration Menu for admin acc
 
 	//public final By ELEMENT_MENU_ADMIN_DROPDOWN = By.xpath("//*[@id='UISetupPlatformToolBarPortlet']/a[@class='dropdown-toggle']");
