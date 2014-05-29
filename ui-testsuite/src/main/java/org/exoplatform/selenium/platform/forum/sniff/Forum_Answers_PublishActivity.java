@@ -3,6 +3,7 @@ package org.exoplatform.selenium.platform.forum.sniff;
 import static org.exoplatform.selenium.TestLogger.info;
 
 import org.exoplatform.selenium.Button;
+import org.exoplatform.selenium.Utils;
 import org.exoplatform.selenium.platform.HomePageActivity;
 import org.exoplatform.selenium.platform.ManageAccount;
 import org.exoplatform.selenium.platform.NavigationToolbar;
@@ -168,7 +169,7 @@ public class Forum_Answers_PublishActivity extends AnswerBase{
 		info("Check activity on homepage");
 		navTool.goToHomePage();
 		waitForAndGetElement(By.linkText(questionName));
-
+		Utils.pause(10000);
 		HPAct.checkActivateQuestion(questionName,false);
 		//Activate this question to delete
 		goToAnswer();

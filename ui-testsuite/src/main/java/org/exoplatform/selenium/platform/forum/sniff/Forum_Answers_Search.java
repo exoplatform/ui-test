@@ -40,7 +40,6 @@ public class Forum_Answers_Search extends AnswerBase {
 	}
 	
 	/**CaseId: 68943 -> Quick search in answer
-	 * testcase is having bug (issue FORUM-537)
 	 */
 	@Test (groups = "error")
 	public void test01_QuickSearch(){
@@ -48,7 +47,7 @@ public class Forum_Answers_Search extends AnswerBase {
 		String description = "Add new category for answer";
 		String[] userGroup = {"demo"};
 		
-		magCat.addNewCategoryInAnswer(categoryName, null, description, 2, userGroup, true, false);
+		magCat.addNewCategoryInAnswer(categoryName, null, description, 2, userGroup, false, true);
 
 		quickSearchInAnswer(categoryName);
 		waitForAndGetElement(By.linkText(categoryName));

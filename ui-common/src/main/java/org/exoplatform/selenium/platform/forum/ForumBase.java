@@ -56,7 +56,7 @@ public class ForumBase extends PlatformBase {
 	public final By ELEMENT_HOME_BUTTON = By.xpath("//*[@id='UIBreadcumbs']//*[text()='Home']");
 	public final String ELEMENT_HOME_FORUM = "Forum Home";
 	public final By ELEMENT_USER_MANAGEMENT = By.xpath("//*[@id='ManageModerator']//*[@class='uiIconUser uiIconLightGray']");
-	public final By ELEMENT_MORE_BUTTON = By.xpath("//li[@class='dropdown moreItem pull-right']");
+	public final By ELEMENT_MORE_BUTTON = By.xpath("//div[@class='actionIcon' and contains(.,'More')]");
 	public final By ELEMENT_PENDING = By.id("PendingJob");
 	
 	public String ELEMENT_FORUM_BREADCUMB = "//*[@id='UIBreadcumbs']/div[@class='pull-left']//a[@class='Selected' and contains(text(),'${forumName}')]";
@@ -303,6 +303,7 @@ public class ForumBase extends PlatformBase {
 	public final By ELEMENT_USER_MANAGEMENT_POST_TAB = By.linkText("Posts");
 	public final String ELEMENT_USER_NUMBER_POST = "//*[@class='infoMember']/div[contains(text(),'Posts')]";
 	public final By ELEMENT_CLOSE_USER_PROFILE_BUTTON = By.xpath("//*[@id='ViewUserProfile']//*[text()='Close']");
+	public final String ELEMENT_USER_MANAGEMENT_CATEGORY_LINK = "//form[@id='UISelectItemForum']//a[contains(.,'${category}')]";
 
 	//Private message
 	public final By ELEMENT_PRIVATE_MESSAGE_ICON = By.xpath("//a[@class='actionIcon']/i[@class='uiIconMail uiIconLightGray']");
@@ -1301,6 +1302,7 @@ public class ForumBase extends PlatformBase {
 
 	public void settingUserManagementProfile(String screenName, String titleUser, String category, String forum, String sign, boolean...opt){
 		button = new Button(driver);
+		String[] pathForum = {};
 		if (screenName != null){
 			type(ELEMENT_SCREEN_NAME, screenName, true);
 		}
@@ -1314,8 +1316,11 @@ public class ForumBase extends PlatformBase {
 			Utils.pause(1000);
 		}
 		if (forum != null){
+			pathForum = forum.split("/");
 			click(ELEMENT_ADD_MODERATOR_FORUM_ICON);
-			check(ELEMENT_CATEGORY_SELECT_CHECKBOX.replace("${cat}", forum), 2);
+			if(waitForAndGetElement(ELEMENT_CATEGORY_SELECT_CHECKBOX.replace("${cat}", pathForum[1]),5000,0) == null)
+				click(ELEMENT_USER_MANAGEMENT_CATEGORY_LINK.replace("${category}", pathForum[0]));
+			check(ELEMENT_CATEGORY_SELECT_CHECKBOX.replace("${cat}", pathForum[1]), 2);
 			click(button.ELEMENT_ADD_BUTTON);
 			Utils.pause(1000);
 		}

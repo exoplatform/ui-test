@@ -266,7 +266,7 @@ public class AnswerManageCategory extends AnswerBase {
 		switchToParentWindow();
 		waitForAndGetElement(ELEMENT_CONTAINS_TEXT.replace("${text}", links[links.length-1]), DEFAULT_TIMEOUT, 1, 2);
 		button.save();
-		waitForMessage(ELEMENT_IMPORT_SUCCESS_MESSAGE);
+		waitForMessage(ELEMENT_IMPORT_SUCCESS_MESSAGE,100000);
 		click(ELEMENT_OK_INFOR_POPUP);
 		Utils.pause(2000);
 	}

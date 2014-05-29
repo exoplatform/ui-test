@@ -194,7 +194,7 @@ public class Calendar_Event extends CalendarBase {
 		String CAL_03 = "calendar_99379";
 		String EVENT_CATEGORY = "All";
 		String USER_GROUP = "root";
-		String USER_GROUP_PASS = "gtngtn";
+		String USER_GROUP_PASS = "gtn";
 		String CAL_GROUP = "/platform/administrators";
 		String newEvent = "event_99379_update";
 		String note = "Update new event";

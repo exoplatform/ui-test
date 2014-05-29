@@ -89,7 +89,13 @@ public class AnswerBase extends ForumBase {
 	public final By ELEMENT_MAIL_MOVE_QUESTION_TAB = By.xpath("//button[text()='Move Question']");
 	public final By ELEMENT_MAIL_CONTENT_FRAME1 = By.id("EmailMoveQuestion___Frame");
 	public final By ELEMENT_MAIL_CONTENT_FRAME2 = By.xpath("//*[@id='xEditingArea']/iframe");
+	public final By ELEMENT_MAIL_MOVE_QUESTION_FRAME = By.xpath("//div[@id='cke_EmailMoveQuestion']//iframe");
+	public final By ELEMENT_MAIL_EDIT_ANSWER_FRAME = By.xpath("//div[@id='cke_EmailEditQuestion']//iframe");
+	public final By ELEMENT_MAIL_NEW_QUESTION_FRAME = By.xpath("//div[@id='cke_EmailAddNewQuestion']//iframe");
 	public final By ELEMENT_CLOSE_SETTING_BUTTON = By.id("Close");
+	public final By ELEMENT_EDIT_ANSWER_RELOAD_DEFAULT_EMAIL = By.xpath("//*[@for='EmailEditQuestion']/..//*[@class='uiIconRefresh uiIconLightGray']");
+	public final By ELEMENT_NEW_QUESTION_RELOAD_DEFAULT_EMAIL = By.xpath("//*[@for='EmailAddNewQuestion']/..//*[@class='uiIconRefresh uiIconLightGray']");
+	public final By ELEMENT_MOVE_QUESTION_RELOAD_DEFAULT_EMAIL = By.xpath("//*[@for='EmailMoveQuestion']/..//*[@class='uiIconRefresh uiIconLightGray']");
 
 	/*---------------------------------Common functions-----------------------------------*/
 
@@ -270,16 +276,30 @@ public class AnswerBase extends ForumBase {
 		switch (tab) {
 		case 1:
 			click(ELEMENT_MAIL_NEW_QUESTION_TAB);
+			inputDataToFrame(ELEMENT_MAIL_NEW_QUESTION_FRAME, content, true);
 			break;
 		case 2:
 			click(ELEMENT_MAIL_EDIT_ANSWER_TAB);
+			inputDataToFrame(ELEMENT_MAIL_EDIT_ANSWER_FRAME, content, true);
 			break;
-		default:
+		case 3:
 			click(ELEMENT_MAIL_MOVE_QUESTION_TAB);
+			inputDataToFrame(ELEMENT_MAIL_MOVE_QUESTION_FRAME, content, true);
+			break;
+		case 4:
+			click(ELEMENT_MAIL_NEW_QUESTION_TAB);
+			click(ELEMENT_NEW_QUESTION_RELOAD_DEFAULT_EMAIL);
+			break;
+		case 5:
+			click(ELEMENT_MAIL_EDIT_ANSWER_TAB);
+			click(ELEMENT_EDIT_ANSWER_RELOAD_DEFAULT_EMAIL);
+			break;
+		case 6:
+			click(ELEMENT_MAIL_MOVE_QUESTION_TAB);
+			click(ELEMENT_MOVE_QUESTION_RELOAD_DEFAULT_EMAIL);
 			break;
 		}
 
-		inputDataToFrameInFrame(ELEMENT_MAIL_CONTENT_FRAME1, ELEMENT_MAIL_CONTENT_FRAME2, content, true);
 		switchToParentWindow();
 		button.save();
 		click(ELEMENT_OK_INFOR_POPUP);

@@ -47,9 +47,9 @@ public class Forum_Answers_Setting extends AnswerBase {
 	}
 	
 	/**CaseId: 68945 + 71099 -> setting for answer portlet
-	 * https://jira.exoplatform.org/browse/FORUM-827 (Cannot show forum in Discussion of Answer portlet setting)
+	 *
 	 */
-	@Test(groups="error")
+	@Test
 	public void test01_SettingAnswerPortlet(){
 		//category1 in answer
 		String categoryName1 = "Answersetting689451";
@@ -114,7 +114,7 @@ public class Forum_Answers_Setting extends AnswerBase {
 		goToEditAnswerPortlet();
 		setDisplayCategoryScoping(categoryName2, true);
 		settingDiscussion(false, null);
-		settingEmailTemplate(3, "");
+		settingEmailTemplate(6, "");
 		click(ELEMENT_CLOSE_SETTING_BUTTON);
 		pageE.finishEditLayout();
 		

@@ -67,7 +67,7 @@ public class Calendar_Task extends CalendarBase {
 		tsk.checkSuggestionTaskTime(null, 30);
 		tsk.checkSuggestionTaskTime("07:00", 30);
 		tsk.inputDataTask(task, null, null, null, false, calendar);
-		tsk.editTask(task, newTask, note, getDate(0,"MM/dd/yyyy") + " 12:00", getDate(0,"MM/dd/yyyy") + " 13:00", false, "/TestDate/Winter.jpg");
+		tsk.editTask(task, newTask, note, getDate(0,"MM/dd/yyyy") + " 12:00", getDate(0,"MM/dd/yyyy") + " 13:00", false, "/TestData/Winter.jpg");
 		waitForAndGetElement(By.xpath(ELEMENT_EVENT_TASK_ONE_DAY.replace("${taskName}", newTask)));
 
 		tsk.deleteEventTask(newTask);
@@ -90,7 +90,7 @@ public class Calendar_Task extends CalendarBase {
 		tsk.checkSuggestionTaskTime(null, 30);
 		tsk.checkSuggestionTaskTime("07:00", 30);
 		tsk.inputDataTask(task, null, null, null, false, calendar);
-		tsk.editTask(task, newTask, note, getDate(0,"MM/dd/yyyy") + " 12:00", getDate(0,"MM/dd/yyyy") + " 13:00", false, "/TestDate/Winter.jpg");
+		tsk.editTask(task, newTask, note, getDate(0,"MM/dd/yyyy") + " 12:00", getDate(0,"MM/dd/yyyy") + " 13:00", false, "/TestData/Winter.jpg");
 		waitForAndGetElement(By.xpath(ELEMENT_EVENT_TASK_ONE_DAY.replace("${taskName}", newTask)));
 
 		tsk.deleteEventTask(newTask);
@@ -114,7 +114,7 @@ public class Calendar_Task extends CalendarBase {
 		tsk.checkSuggestionTaskTime(null, 30);
 		tsk.checkSuggestionTaskTime("07:00", 30);
 		tsk.inputDataTask(task, null, null, null, false, calendar);
-		tsk.editTask(task, newTask, note, getDate(0,"MM/dd/yyyy") + " 12:00", getDate(0,"MM/dd/yyyy") + " 13:00", false, "/TestDate/Winter.jpg");
+		tsk.editTask(task, newTask, note, getDate(0,"MM/dd/yyyy") + " 12:00", getDate(0,"MM/dd/yyyy") + " 13:00", false, "/TestData/Winter.jpg");
 		waitForAndGetElement(By.xpath(ELEMENT_EVENT_TASK_ONE_DAY.replace("${taskName}", newTask)));
 
 		tsk.deleteEventTask(newTask);
