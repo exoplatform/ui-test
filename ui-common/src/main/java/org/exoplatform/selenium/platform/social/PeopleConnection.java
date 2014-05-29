@@ -200,7 +200,7 @@ public class PeopleConnection extends SocialBase {
 		}
 		else
 			click(ELEMENT_EVERYONE_TAB);
-		peoSearch.searchPeople(true,"John Smith");
+		peoSearch.searchPeople(true,user);
 		waitForAndGetElement(By.linkText(user));
 		if (waitForAndGetElement(ELEMENT_CANCEL_REQUEST_BUTTON.replace("${peopleName}", user), 5000, 0) != null){
 			click(ELEMENT_CANCEL_REQUEST_BUTTON.replace("${peopleName}", user));

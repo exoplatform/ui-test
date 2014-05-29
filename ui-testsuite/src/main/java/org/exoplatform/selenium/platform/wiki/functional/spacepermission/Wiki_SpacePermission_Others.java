@@ -198,7 +198,10 @@ public class Wiki_SpacePermission_Others extends BasicAction {
 		magAc.userSignIn(ManageAccount.userType.AUTHOR);
 		
 		//goToWiki();
-		click(ELEMENT_WIKI_LINK);
+		if(waitForAndGetElement(ELEMENT_WIKI_LINK, 5000,0)!=null)
+			click(ELEMENT_WIKI_LINK);
+		else
+			click(ELEMENT_WIKI_LINK_PLF41);
 
 		waitForTextPresent(VERIFY_MESSAGE);
 

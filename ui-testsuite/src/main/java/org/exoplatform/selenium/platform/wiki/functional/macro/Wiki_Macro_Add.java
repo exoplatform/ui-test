@@ -395,23 +395,23 @@ public class Wiki_Macro_Add extends ManageDraft{
 	 * CaseId 99101: Insert Code macro by source
 	 * Bug: WIKI-546 - [PLF-jboss] Code macro doesn't work
 	 */
-	@Test(groups="error")
+	@Test
 	public void test11_InsertSourceMacro(){
 		String title = "Page 94914";
-		String content = "= Code macro = \\"
-						+"== Java with title == \\"
-						+"{{code language='java' title='HelloWorld.java'}}\\"
-						+"System.out.println('Hello World');\\"
-						+"{{/code}}\\"
-						+"== Java without title ==\\"
-						+"{{code language='java'}}\\"
-						+"System.out.println('Hello World');\\"
-						+"{{/code}}\\"
-						+"== HTML ==\\"
-						+"use [[xwiki example>>http://extensions.xwiki.org/xwiki/bin/view/Extension/Code+Macro]]\\"
-						+"{{code language='html'}}\\"
-						+"<html>\\"
-						+"<head>How cool?</head>\\"
+		String content = "= Code macro = "
+						+"== Java with title == "
+						+"{{code language='java' title='HelloWorld.java'}}"
+						+"System.out.println('Hello World');"
+						+"{{/code}}"
+						+"== Java without title =="
+						+"{{code language='java'}}"
+						+"System.out.println('Hello World');"
+						+"{{/code}}"
+						+"== HTML =="
+						+"use [[xwiki example>>http://extensions.xwiki.org/xwiki/bin/view/Extension/Code+Macro]]"
+						+"{{code language='html'}}"
+						+"<html>"
+						+"<head>How cool?</head>"
 						+"</html>{{/code}}";
 
 		//Add source macro in SourceEditor
@@ -422,7 +422,8 @@ public class Wiki_Macro_Add extends ManageDraft{
 		waitForElementNotPresent(ELEMENT_SAVE_BUTTON_ADD_PAGE);
 
 		//Check the availability of Code macro
-		waitForTextPresent("HelloWorld.java");
+		waitForTextPresent("Hello World");
+		waitForTextPresent("How cool?");
 		waitForAndGetElement(ELEMENT_MACRO_TEXT.replace("${color}", "#658b00;").replace("${text}", "out"));
 		waitForAndGetElement(ELEMENT_MACRO_TEXT.replace("${color}", "#658b00;").replace("${text}", "println"));
 		waitForTextPresent("System");

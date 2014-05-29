@@ -59,7 +59,7 @@ public class Wiki_Activity_Delete extends Permalink{
 	@Test 
 	public  void test01_DeleteAWikiActivityFromActivityStreamByOwner() {
 		info("Test 1: Delete a Wiki activity from activity stream by owner");
-		String spaceName = "Space 77127";
+		String spaceName = "Space77127";
 		String title = "Title 77127";
 		String content = "Content 77127";
 		String newcontent = "Content case 77127";
@@ -113,7 +113,7 @@ public class Wiki_Activity_Delete extends Permalink{
 	@Test
 	public  void test02_RemoveWikisPageOfSpace() {
 		info("Test 2 Remove wiki's page of space");
-		String spaceName = "Space 77615";
+		String spaceName = "Space77615";
 		String title = "Title 77615";
 		String content = "Content 77615";
 		String newcontent = "Content case 77615";

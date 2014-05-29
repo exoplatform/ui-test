@@ -122,15 +122,10 @@ public class Wiki_Space_Switcher extends BasicAction{
 		info("Test 3: Search should start on first characters inputed");
 		String mobileSpace = "Mobile";
 		String longNameSpace = "Long title for a space name 30";
-		String spacePrefix = "Space ";
 		magMember.goToMySpacePage();
 		magMember.addNewSpace(mobileSpace, "");
 		magMember.goToMySpacePage();
 		magMember.addNewSpace(longNameSpace, "");
-		for (int i = 1; i < 12; i++) {
-			magMember.goToMySpacePage();
-			magMember.addNewSpace(spacePrefix+i, "");
-		}
 		/*Step Number: 1
 		 *Step Name: 
 		 *Step Description: 
@@ -159,17 +154,14 @@ public class Wiki_Space_Switcher extends BasicAction{
 
 		 *Expected Outcome: 
 				- List of spaces is updated and displaying "No Spaces"*/ 
-		type(ELEMENT_SPACE_SWITCHER_INPUT,"x",false);
+		waitForAndGetElement(ELEMENT_SPACE_SWITCHER_INPUT).clear();
+		waitForAndGetElement(ELEMENT_SPACE_SWITCHER_INPUT).click();
+		type(ELEMENT_SPACE_SWITCHER_INPUT_FOCUS,"x",false);
 		waitForAndGetElement(ELEMENT_NO_SPACE_OPTION);
 
 		//resote data
 		magMember.goToMySpacePage();	
 		magMember.deleteSpace(mobileSpace,300000);
-		magMember.deleteSpace("Long title for ...", 300000);
-		for (int i = 1; i < 12; i++) {
-			magMember.deleteSpace(spacePrefix+i, 300000);
-		}
-
 	}
 
 	/**
@@ -185,15 +177,10 @@ public class Wiki_Space_Switcher extends BasicAction{
 		info("Test 5: Search is working as a filter in the list of spaces");
 		String mobileSpace = "Mobile79649";
 		String longNameSpace = "Long title for a space name 31";
-		String spacePrefix = "Space79649 ";
 		magMember.goToMySpacePage();	
 		magMember.addNewSpace(mobileSpace, "");
 		magMember.goToMySpacePage();
 		magMember.addNewSpace(longNameSpace, "");
-		for (int i = 1; i < 12; i++) {
-			magMember.goToMySpacePage();
-			magMember.addNewSpace(spacePrefix+i, "");
-		}
 		/*Step Number: 1
 		 *Step Name: 
 		 *Step Description: 
@@ -224,7 +211,9 @@ public class Wiki_Space_Switcher extends BasicAction{
 
 		 *Expected Outcome: 
 				- List of spaces is updated and displaying :* Mobile*/
-		type(ELEMENT_SPACE_SWITCHER_INPUT,"Mo",false);
+		waitForAndGetElement(ELEMENT_SPACE_SWITCHER_INPUT).clear();
+		waitForAndGetElement(ELEMENT_SPACE_SWITCHER_INPUT).click();
+		type(ELEMENT_SPACE_SWITCHER_INPUT_FOCUS,"Mo",false);
 		waitForAndGetElement(ELEMENT_SPACE_NAME_SELECTED.replace("${space}", mobileSpace.toLowerCase()));
 		/*Step number: 4
 		 *Step Name: 
@@ -239,9 +228,6 @@ public class Wiki_Space_Switcher extends BasicAction{
 		type(ELEMENT_SPACE_SWITCHER_INPUT_FOCUS," ",false);
 		waitForAndGetElement(ELEMENT_SPACE_NAME_SELECTED.replace("${space}", mobileSpace.toLowerCase()));
 		waitForAndGetElement(ELEMENT_SPACE_NAME_SELECTED.replace("${space}", longNameSpace.toLowerCase().replace(" ", "_")));
-		for (int i = 1; i < 12; i++) {
-			waitForAndGetElement(ELEMENT_SPACE_NAME_SELECTED.replace("${space}", (spacePrefix+i).toLowerCase().replace(" ", "_")));
-		}
 		/*Step number: 5
 		 *Step Name: 
 		 *Step Description: 
@@ -250,6 +236,8 @@ public class Wiki_Space_Switcher extends BasicAction{
 
 		 *Expected Outcome: 
 				- List of sapces is updated and displaying : * Mobile*/ 
+		waitForAndGetElement(ELEMENT_SPACE_SWITCHER_INPUT_FOCUS).clear();
+		waitForAndGetElement(ELEMENT_SPACE_SWITCHER_INPUT_FOCUS).click();
 		type(ELEMENT_SPACE_SWITCHER_INPUT_FOCUS,"bile",false);
 		waitForAndGetElement(ELEMENT_SPACE_NAME_SELECTED.replace("${space}", mobileSpace.toLowerCase()));
 
@@ -257,9 +245,6 @@ public class Wiki_Space_Switcher extends BasicAction{
 		magMember.goToMySpacePage();	
 		magMember.deleteSpace(mobileSpace,300000);
 		magMember.deleteSpace("Long title for ...", 300000);
-		for (int i = 1; i < 12; i++) {
-			magMember.deleteSpace(spacePrefix+i, 300000);
-		}
 	}
 
 
@@ -276,15 +261,11 @@ public class Wiki_Space_Switcher extends BasicAction{
 		info("Test 6: Search is not case sensitive");
 		String mobileSpace = "Mobile79650";
 		String longNameSpace = "Long title for a space name 32";
-		String spacePrefix = "Space79650 ";
 		magMember.goToMySpacePage();	
 		magMember.addNewSpace(mobileSpace, "");
 		magMember.goToMySpacePage();
 		magMember.addNewSpace(longNameSpace, "");
-		for (int i = 1; i < 12; i++) {
-			magMember.goToMySpacePage();
-			magMember.addNewSpace(spacePrefix+i, "");
-		}
+
 		/*Step Number: 1
 		 *Step Name: 
 		 *Step Description: 
@@ -315,16 +296,15 @@ public class Wiki_Space_Switcher extends BasicAction{
 
 		 *Expected Outcome: 
 				- List of spaces is updated and displaying :* Mobile*/ 
-		type(ELEMENT_SPACE_SWITCHER_INPUT,"mo",false);
+		waitForAndGetElement(ELEMENT_SPACE_SWITCHER_INPUT).clear();
+		waitForAndGetElement(ELEMENT_SPACE_SWITCHER_INPUT).click();
+		type(ELEMENT_SPACE_SWITCHER_INPUT_FOCUS,"mo",false);
 		waitForAndGetElement(ELEMENT_SPACE_NAME_SELECTED.replace("${space}", mobileSpace.toLowerCase()));
 
 		//resote data
 		magMember.goToMySpacePage();	
 		magMember.deleteSpace(mobileSpace,300000);
 		magMember.deleteSpace("Long title for ...", 300000);
-		for (int i = 1; i < 12; i++) {
-			magMember.deleteSpace(spacePrefix+i, 300000);
-		}
 	}
 
 	/**
@@ -340,15 +320,10 @@ public class Wiki_Space_Switcher extends BasicAction{
 		info("Test 7: Search doesn't take into account order of words");
 		String mobileSpace = "Mobile79651";
 		String longNameSpace = "Long title for a space name 33";
-		String spacePrefix = "Space79651 ";
 		magMember.goToMySpacePage();	
 		magMember.addNewSpace(mobileSpace, "");
 		magMember.goToMySpacePage();
 		magMember.addNewSpace(longNameSpace, "");
-		for (int i = 1; i < 12; i++) {
-			magMember.goToMySpacePage();
-			magMember.addNewSpace(spacePrefix+i, "");
-		}
 		/*Step Number: 1
 		 *Step Name: 
 		 *Step Description: 
@@ -379,16 +354,15 @@ public class Wiki_Space_Switcher extends BasicAction{
 
 		 *Expected Outcome: 
 				- List of spaces is updated and displaying :* "Long title for a space name 30"*/ 
-		type(ELEMENT_SPACE_SWITCHER_INPUT,"title",false);
+		waitForAndGetElement(ELEMENT_SPACE_SWITCHER_INPUT).clear();
+		waitForAndGetElement(ELEMENT_SPACE_SWITCHER_INPUT).click();
+		type(ELEMENT_SPACE_SWITCHER_INPUT_FOCUS,"title",false);
 		waitForAndGetElement(ELEMENT_SPACE_NAME_SELECTED.replace("${space}", longNameSpace.toLowerCase().replace(" ", "_")));
 
 		//resote data
 		magMember.goToMySpacePage();	
 		magMember.deleteSpace(mobileSpace,300000);
 		magMember.deleteSpace("Long title for ...", 300000);
-		for (int i = 1; i < 12; i++) {
-			magMember.deleteSpace(spacePrefix+i, 300000);
-		}
 	}
 
 	/**
@@ -404,7 +378,7 @@ public class Wiki_Space_Switcher extends BasicAction{
 		info("Test 8: Search - Space switcher is scrollable when there are more than 10 results");
 		String mobileSpace = "Mobile79652";
 		String longNameSpace = "Long title for a space name 34";
-		String spacePrefix = "Space79652 ";
+		String spacePrefix = "space79652";
 		magMember.goToMySpacePage();	
 		magMember.addNewSpace(mobileSpace, "");
 		magMember.goToMySpacePage();
@@ -442,8 +416,10 @@ public class Wiki_Space_Switcher extends BasicAction{
 		 *Input Data: 
 
 		 *Expected Outcome: 
-				- List of spaces is updated and displaying :* Space 1* Space 2* Space 3* Space 4* Space 5* Space 6* Space 7* Space 8* Space 9* Space 10User can scroll down to see* Space 11* Long title for a space name 30*/ 
-		type(ELEMENT_SPACE_SWITCHER_INPUT,"Spac",false);
+				- List of spaces is updated and displaying :* Space 1* Space 2* Space 3* Space 4* Space 5* Space 6* Space 7* Space 8* Space 9* Space 10User can scroll down to see* Space 11* Long title for a space name 30*/
+		waitForAndGetElement(ELEMENT_SPACE_SWITCHER_INPUT).clear();
+		waitForAndGetElement(ELEMENT_SPACE_SWITCHER_INPUT).click();
+		type(ELEMENT_SPACE_SWITCHER_INPUT_FOCUS,"Spac",false);
 		waitForAndGetElement(ELEMENT_SPACE_NAME_SELECTED.replace("${space}", longNameSpace.toLowerCase().replace(" ", "_")));
 		for (int i = 1; i < 12; i++) {
 			waitForAndGetElement(ELEMENT_SPACE_NAME_SELECTED.replace("${space}", (spacePrefix+i).toLowerCase().replace(" ", "_")));
@@ -479,15 +455,10 @@ public class Wiki_Space_Switcher extends BasicAction{
 		info("Test 9: Search should not take into account spaces at the end of a text inputted");
 		String mobileSpace = "Mobile79658";
 		String longNameSpace = "Long title for a space name 35";
-		String spacePrefix = "Space79658 ";
 		magMember.goToMySpacePage();	
 		magMember.addNewSpace(mobileSpace, "");
 		magMember.goToMySpacePage();
 		magMember.addNewSpace(longNameSpace, "");
-		for (int i = 1; i < 12; i++) {
-			magMember.goToMySpacePage();
-			magMember.addNewSpace(spacePrefix+i, "");
-		}
 		/*Step Number: 1
 		 *Step Name: 
 		 *Step Description: 
@@ -517,17 +488,16 @@ public class Wiki_Space_Switcher extends BasicAction{
 		 *Input Data: 
 
 		 *Expected Outcome: 
-				- List of spaces is updated and displaying :* Mobile*/ 
-		type(ELEMENT_SPACE_SWITCHER_INPUT,"Mo  ",false);
+				- List of spaces is updated and displaying :* Mobile*/
+		waitForAndGetElement(ELEMENT_SPACE_SWITCHER_INPUT).clear();
+		waitForAndGetElement(ELEMENT_SPACE_SWITCHER_INPUT).click();
+		type(ELEMENT_SPACE_SWITCHER_INPUT_FOCUS,"Mo  ",false);
 		waitForAndGetElement(ELEMENT_SPACE_NAME_SELECTED.replace("${space}", mobileSpace.toLowerCase()));
 
 		//resote data
 		magMember.goToMySpacePage();	
 		magMember.deleteSpace(mobileSpace,300000);
 		magMember.deleteSpace("Long title for ...", 300000);
-		for (int i = 1; i < 12; i++) {
-			magMember.deleteSpace(spacePrefix+i, 300000);
-		}
 	}
 
 	/**
@@ -543,15 +513,11 @@ public class Wiki_Space_Switcher extends BasicAction{
 		info("Test 10 Search should take into account spaces in the middle of text inputted");
 		String mobileSpace = "Mobile79659";
 		String longNameSpace = "Long title for a space name 36";
-		String spacePrefix = "Space79659 ";
 		magMember.goToMySpacePage();	
 		magMember.addNewSpace(mobileSpace, "");
 		magMember.goToMySpacePage();
 		magMember.addNewSpace(longNameSpace, "");
-		for (int i = 1; i < 12; i++) {
-			magMember.goToMySpacePage();
-			magMember.addNewSpace(spacePrefix+i, "");
-		}
+
 		/*Step Number: 1
 		 *Step Name: 
 		 *Step Description: 
@@ -582,7 +548,9 @@ public class Wiki_Space_Switcher extends BasicAction{
 
 		 *Expected Outcome: 
 				- List of spaces is updated and displaying :* Long title for a space name 30*/
-		type(ELEMENT_SPACE_SWITCHER_INPUT,"Long title",false);
+		waitForAndGetElement(ELEMENT_SPACE_SWITCHER_INPUT).clear();
+		waitForAndGetElement(ELEMENT_SPACE_SWITCHER_INPUT).click();
+		type(ELEMENT_SPACE_SWITCHER_INPUT_FOCUS,"Long title",false);
 		waitForAndGetElement(ELEMENT_SPACE_NAME_SELECTED.replace("${space}", longNameSpace.toLowerCase().replace(" ", "_")));
 		/*Step number: 4
 		 *Step Name: 
@@ -597,9 +565,6 @@ public class Wiki_Space_Switcher extends BasicAction{
 		type(ELEMENT_SPACE_SWITCHER_INPUT_FOCUS," ",false);
 		waitForAndGetElement(ELEMENT_SPACE_NAME_SELECTED.replace("${space}", mobileSpace.toLowerCase()));
 		waitForAndGetElement(ELEMENT_SPACE_NAME_SELECTED.replace("${space}", longNameSpace.toLowerCase().replace(" ", "_")));
-		for (int i = 1; i < 12; i++) {
-			waitForAndGetElement(ELEMENT_SPACE_NAME_SELECTED.replace("${space}", (spacePrefix+i).toLowerCase().replace(" ", "_")));
-		}
 		/*Step number: 5
 		 *Step Name: 
 		 *Step Description: 
@@ -609,16 +574,18 @@ public class Wiki_Space_Switcher extends BasicAction{
 		 *Expected Outcome: 
 				Space switcher is displaying :
 				- "No Spaces"*/ 
+		waitForAndGetElement(ELEMENT_SPACE_SWITCHER_INPUT_FOCUS).clear();
+		waitForAndGetElement(ELEMENT_SPACE_SWITCHER_INPUT_FOCUS).click();
 		type(ELEMENT_SPACE_SWITCHER_INPUT_FOCUS,"Longtitle ",false);
 		waitForAndGetElement(ELEMENT_NO_SPACE_OPTION);
+		waitForAndGetElement(ELEMENT_SPACE_SWITCHER_INPUT_FOCUS).clear();
+		waitForAndGetElement(ELEMENT_SPACE_SWITCHER_INPUT_FOCUS).click();
 		type(ELEMENT_SPACE_SWITCHER_INPUT_FOCUS,"Long  title",false);
 		waitForAndGetElement(ELEMENT_NO_SPACE_OPTION);
 		//resote data
 		magMember.goToMySpacePage();	
 		magMember.deleteSpace(mobileSpace,300000);
 		magMember.deleteSpace("Long title for ...", 300000);
-		for (int i = 1; i < 12; i++) {
-			magMember.deleteSpace(spacePrefix+i, 300000);
-		}
+
 	}
 }

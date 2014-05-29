@@ -276,7 +276,7 @@ public class RichTextMode extends Template {
 	 * @param descendant
 	 */
 	public void createChildrenMacro(String descendant){
-		goToSelectAMacro("Navigation", "Chilren"); //Bug Wiki-863
+		goToSelectAMacro("Navigation", "Children"); //Bug Wiki-863
 		mouseOverAndClick(ELEMENT_CHILDREN_DESCENDANT_SELECT);
 		type(ELEMENT_CHILDREN_DESCENDANT_SELECT,descendant,false);
 		Utils.pause(1000);

@@ -124,6 +124,7 @@ public class Social_Space_SpaceManagement_WikiPageAccess extends Permalink{
 		goToPermalink();
 		String permalink = getPermalink();
 		dialog.closeMessageDialog();
+		info(permalink);
 
 		//- Login by user B is not member of space
 		//- Paste the permalink

@@ -516,11 +516,10 @@ public class Wiki_Navigation_Across_Space extends BasicAction {
 	@Test
 	public  void test09_SwitchingToASpaceWikiFromCompanyWikiShouldDisplaySpaceNavigation() {
 		info("Test 9: Switching to a space wiki from Company wiki should display space navigation");
-		String space1 = "space991109";
+		String space1 = "Space99110";
 
 		spaceMag.goToMySpacePage();
 		spaceMag.addNewSpace(space1, "");
-		waitForAndGetElement(By.linkText(space1));
 
 		/*Step Number: 1
 		 *Step Name: 
@@ -545,7 +544,7 @@ public class Wiki_Navigation_Across_Space extends BasicAction {
 		click(ELEMENT_SPACE_SWITCHER_BREADCRUMB);
 		waitForAndGetElement(By.xpath("//*[@title='Intranet']"));
 		waitForAndGetElement(By.xpath("//*[@title='My Wiki']"));
-		waitForAndGetElement(ELEMENT_SPACE_SWITCHER_SELECT.replace("${spacename}",space1));
+		waitForAndGetElement(ELEMENT_SPACE_NAME_SELECTED.replace("${space}",space1.toLowerCase()));
 
 		/*Step number: 3
 		 *Step Name: 
@@ -557,8 +556,9 @@ public class Wiki_Navigation_Across_Space extends BasicAction {
 			- Personal wiki is displayed
 			- Breacrumb is displaying "Space 1"
 			- Space navigation is displayed ("Wiki" application selected)*/ 
-		click(ELEMENT_SPACE_SWITCHER_SELECT.replace("${spacename}",space1));
-		waitForAndGetElement(ELEMENT_MY_WIKI_TAB);
+		click(ELEMENT_SPACE_NAME_SELECTED.replace("${space}",space1.toLowerCase()));
+		waitForAndGetElement(ELEMENT_CURRENT_SPACE_SWITCHER_SELECT.replace("${name}", space1));
+		waitForAndGetElement(spaceMag.ELEMENT_SPACE_WIKI_PORTLET);
 
 		/*Clear data*/
 		info("Clear data");

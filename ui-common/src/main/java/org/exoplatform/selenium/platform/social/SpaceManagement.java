@@ -64,8 +64,8 @@ public class SpaceManagement extends SocialBase {
 	public final By 	ELEMENT_AVATAR_SAVE_BUTTON		= By.xpath("//div[@id = 'UIAvatarUploadContent']//button[text()='Save']");
 	public final String MESSAGE_DELETE_SPACE            = "Cannot undo one deleted space with all its page navigations and group. Are you sure to delete this space?";
 	public final String ELEMENT_VERIFY_SPACE_NAME_ACTIVITY = "//div[@class='author']/a[contains(text(),'${spaceName}')]";
-	public final String ELEMENT_SPACE_MENU_ITEM = "//span[contains(text(),'${menuItem}')]";
-	public final String ELEMENT_SPACE_MENU_ITEM_41 = "//span[contains(text(),'${menuItem}')]";
+	public final String ELEMENT_SPACE_MENU_ITEM = "//*[@id='spaceMenuTab']//span[contains(text(),'${menuItem}')]";
+	public final String ELEMENT_SPACE_MENU_ITEM_41 = "//*[@id='spaceMenuTab']//span[contains(text(),'${menuItem}')]";
 	public final String ELEMENT_SPACE_CURRENT_MENU_ITEM = "//li[@class='active item']//span[text()='${menuItem}']";
 	public final By ELEMENT_SPACE_MORE_ITEM = By.xpath("//i[@class='uiIconAppMoreButton']");
 
@@ -74,7 +74,7 @@ public class SpaceManagement extends SocialBase {
 	public final By		ELEMENT_ACCESS_EDIT_HIDDEN 	= By.xpath("//span[text()='Hidden']/../input[@name='UIVisibility']");
 	public final By		ELEMENT_ACCESS_EDIT_REGISTRATION_OPEN 	= By.xpath("//span[text()='Open']/../input[@name='UIRegistration']");
 	public final By		ELEMENT_ACCESS_EDIT_REGISTRATION_VALIDATION 	= By.xpath("//span[text()='Validation']/../input[@name='UIRegistration']");
-	public final By		ELEMENT_ACCESS_EDIT_REGISTRATION_CLOSE 	= By.xpath("//span[text()='Close']/../input[@name='UIRegistration']");
+	public final By		ELEMENT_ACCESS_EDIT_REGISTRATION_CLOSE 	= By.xpath("//span[contains(text(),'Close')]/../input[@name='UIRegistration']");
 	public final By		ELEMENT_SPACE_ACCESS_INFO = By.xpath("//div[@class='spaceAccessInfo']");
 	public final By		ELEMENT_SPACE_ACCESS_ALERT_SUCCESS = By.xpath("//div[@class='alert alert-success']");
 	public final By 	ELEMENT_RESTRICT_SPACE_PAGE = By.xpath("//div[@class='spaceAccessBlock lockIcon']/*[text()='Restricted Area']");
