@@ -118,6 +118,7 @@ public class SpaceManagement extends SocialBase {
 		button = new Button(driver);
 		magAlert = new ManageAlert(driver);
 		actBar = new ActionBar(driver);
+		spSearch = new SpaceSearch(driver);
 	}
 
 	/**
