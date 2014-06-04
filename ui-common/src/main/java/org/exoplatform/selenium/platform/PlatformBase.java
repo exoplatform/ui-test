@@ -65,7 +65,7 @@ public class PlatformBase extends TestBase {
 	public final By ELEMENT_LEFT_NAVIGATION_COMPANY = By.className("uiCompanyNavigationPortlet");
 	public By ELEMENT_CALENDAR_PANEL = By.xpath("//div[@class='uiBox uiCalendars']");
 	public final By ELEMENT_TITLE_WIKI_HOME_LINK = By.xpath("//*[@class='titleWikiBox']/*[contains(text(), 'Wiki Home')]");
-	
+
 	/*
 	 * Navigation Bar
 	 */
@@ -190,7 +190,7 @@ public class PlatformBase extends TestBase {
 	public final By ELEMENT_MY_CONNECTIONS = By.className("uiIconPLFMyConnection");
 	public final By ELEMENT_MY_WIKI = By.xpath("//a[contains(.,'My Wiki')]");
 	public final String ELEMENT_LINE_BETWEEN_MENU = "//*[@class='divider'][${index}]";
-	
+
 	//User -> Change Language
 	public final By ELEMENT_CHANGE_LANGUAGE_POPUP = By.xpath("//*[@id='UIMaskWorkspace']//*[text()='Interface Language Setting']");
 	public final By ELEMENT_CHANGE_LANGUAGE_POPUP_FRENCH = By.xpath("//*[@id='UIMaskWorkspace']//*[text()='Langues Disponibles']");
@@ -218,7 +218,7 @@ public class PlatformBase extends TestBase {
 	public final By ELEMENT_MY_WIKI_LINK = By.linkText("My Wiki");
 	public final By ELEMENT_NOTIFICATION_LINK = By.linkText("Notifications");
 	public final By ELEMENT_MY_CONNECTIONS_LINK = By.linkText("My Connections");
-		
+
 	//User-> Setting
 	public final By ELEMENT_CHANGE_PASSWORD_TAB = By.linkText("Change Password");
 	public final By ELEMENT_ACCOUNT_PROFILE_TAB = By.linkText("Account Profiles");
@@ -511,7 +511,7 @@ public class PlatformBase extends TestBase {
 	public final String ELEMENT_CONTENT_IN_CONTENT_DETAIL_PORTLET_41 = "//*[contains(@id, 'UISingleContentViewerPortlet')]//*[@class='topTitle' and text()='${contentName}']";
 	public final String ELEMENT_GADGET_APPLICATION_PAGE_EDITOR = "//div[@id='UIApplicationList0']//div[contains(text(),'${gadget}')]";
 	public final String ELEMENT_PORTLET_TITLE = "//*[@class='portletLayoutDecorator' and contains(text(), '${portletTitle}')]";
-	
+
 	public final By ELEMENT_CONTENTS_BY_QUERY_PORTLET = By.xpath("//div[contains(text(),'Content By Query')]");
 	public final By ELEMENT_CATEGORY_TOOLS = By.linkText("Tools");
 	public final By ELEMENT_CATEGORY_GADGETS = By.linkText("Gadgets");
@@ -724,6 +724,11 @@ public class PlatformBase extends TestBase {
 	public final By ELEMENT_UPLOAD_FILE_FORM = By.id("UploadFileSelectorPopUpWindow");
 	public final By ELEMENT_SELECT_FORUM = By.xpath("//*[@class='titleForum' and (contains(text(),'Select Forum') or contains(text(),'Select a Forum'))]");
 	public final String ELEMENT_SELECT_FORUM_ITEM = "//*[@class='item forum']//*[text()='${forumName}']";
+	public final By ELEMENT_LOCATION_WIKI = By.xpath("//*[@id='uiWikiSpaceSwitcher_CreateWiki']//input[@class='spaceSearchText lostFocus']");
+	public final String ELEMENT_CREATE_WIKI_INTRANET = "//*[@id='uiWikiSpaceSwitcher_CreateWiki']//span[text()='${name}']";
+	public final By ELEMENT_CREATE_WIKI_LABEL = By.xpath("//*[contains(text(),  'Create a new Wiki Page')]");
+	public final By ELEMENT_UPLOAD_FILE_LABEL = By.xpath("//*[contains(text(), 'Select Drive')]");
+	public final By ELEMENT_UPLOAD_FILE_DRIVER = By.id("DriveTypeDropDown");	
 
 	//Help functions
 	public final By ELEMENT_HELP_ICON = By.xpath("//*[@class='uiIconPLF24x24Help']");
@@ -1298,9 +1303,9 @@ public class PlatformBase extends TestBase {
 			for (int i = 0; i < lines.length; i++){
 				if(this.plfVersion.equalsIgnoreCase("4.0")){
 					info("type multi line 4.0");
-//					inputsummary.sendKeys(lines[i]);
-//					inputsummary.sendKeys(Keys.ENTER);
-//					Utils.pause(500);
+					//					inputsummary.sendKeys(lines[i]);
+					//					inputsummary.sendKeys(Keys.ENTER);
+					//					Utils.pause(500);
 					String newStr = "<p>" + lines[i]+"</p>";;
 					if(i==0)
 						newStr = "<p>" + lines[i]+"</p>";
@@ -1309,7 +1314,7 @@ public class PlatformBase extends TestBase {
 						newStr +="<p>" + lines[i]+"</p>";
 					}
 					((JavascriptExecutor) driver).executeScript("document.body.innerHTML='" + newStr + "'");
-					
+
 				} else{ //if(this.plfVersion.equalsIgnoreCase("4.1")){
 					info("type multi line 4.1");
 					String newStr = "<p>" + lines[i]+"</p>";;
@@ -1392,7 +1397,7 @@ public class PlatformBase extends TestBase {
 		if(newFolder!=""){
 
 			if(plfVersion =="4.1"){
-			click(ELEMENT_CREATE_FOLDER_BUTTON_PLF41);
+				click(ELEMENT_CREATE_FOLDER_BUTTON_PLF41);
 			}
 			else{
 				click(ELEMENT_CREATE_FOLDER_BUTTON);
@@ -1415,7 +1420,7 @@ public class PlatformBase extends TestBase {
 		button.close();
 		Utils.pause(1000);
 		waitForElementNotPresent(ELEMENT_SELECT_FILE_POPUP);	
-		
+
 	}
 
 	/** Switch to new browser window

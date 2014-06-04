@@ -5,6 +5,7 @@ import static org.exoplatform.selenium.TestLogger.info;
 import org.exoplatform.selenium.Utils;
 import org.exoplatform.selenium.platform.PlatformBase;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 
 
 public class SocialBase extends PlatformBase {
@@ -103,6 +104,15 @@ public class SocialBase extends PlatformBase {
 	public final By ELEMENT_ACTIVITY_STREAM_TAB = By.xpath("//div[@id='UIProfileNavigationPortlet']//a[text()='Activity Stream']");
 
 	/*------------------- End of parameters ---------------------*/	
+	
+	public SocialBase(){
+		 
+	}
+	
+	public SocialBase(WebDriver dr, String...plfVersion){
+		dr = driver; 
+		this.plfVersion = plfVersion.length>0?plfVersion[0]:"4.0";		
+	}	
 
 	/**
 	 * Common functions for Social

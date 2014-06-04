@@ -1,4 +1,4 @@
-package org.exoplatform.selenium.platform.plf.functional.navigation.topnavigation;
+package org.exoplatform.selenium.platform.plf.functional.navigation.topnavigation.create;
 
 import static org.exoplatform.selenium.TestLogger.info;
 
