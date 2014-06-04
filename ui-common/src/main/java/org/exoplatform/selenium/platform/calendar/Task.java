@@ -329,13 +329,19 @@ public class Task extends CalendarBase{
 	 */
 	public void addQuickTask(String name, String note, String from, String to, boolean allDay, String...opt){
 		String date = "";
+		char[] oneDay = {}; 
 		goToAddTask();
 		inputBasicQuickTask(name, note, opt);
 		inputFromToTask(from, to, allDay);
 		click(ELEMENT_BUTTON_TASK_SAVE);
 		if((from != null) & (from != "")){
 			date = from.split("/")[1];
-			click(ELEMENT_MINI_CALENDAR_DATE_HIGHLIGHT.replace("${date}", date));
+			if (Integer.valueOf(date) < 10){
+				oneDay = date.toCharArray();
+				date = String.valueOf(oneDay[1]);
+			}
+			if(waitForAndGetElement(ELEMENT_MINI_CALENDAR_DATE_HIGHLIGHT.replace("${date}", date),5000,0)!=null)
+				click(ELEMENT_MINI_CALENDAR_DATE_HIGHLIGHT.replace("${date}", date));
 		}
 		if(allDay)
 			waitForAndGetElement(ELEMENT_EVENT_TASK_ALL_DAY.replace("${event}", name));

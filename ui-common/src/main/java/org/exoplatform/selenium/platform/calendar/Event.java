@@ -51,7 +51,7 @@ public class Event extends CalendarBase{
 		button = new Button(driver, this.plfVersion);
 		alert = new ManageAlert(driver, this.plfVersion);
 	}
-	
+
 	/******************Go to******************************/
 	/**
 	 * Open "Add event" form 
@@ -62,7 +62,7 @@ public class Event extends CalendarBase{
 		click(ELEMENT_BUTTON_EVENT);
 		waitForAndGetElement(ELEMENT_ADD_EVENT_POPUP);
 	}
-	
+
 	/**
 	 * Open "Edit Event" form 
 	 * @param oldEvent
@@ -101,10 +101,10 @@ public class Event extends CalendarBase{
 				type(ELEMENT_INPUT_EVENT_DESCRIPTION, description, true);
 			}
 			if (opt.length > 0 && opt[0] != null){
-				select(ELEMENT_INPUT_EVENT_CALENDAR, opt[0]);
+				select(ELEMENT_INPUT_EVENT_CALENDAR,(String)opt[0]);
 			}
 			if (opt.length > 1 && opt[1] != null){
-				select(ELEMENT_INPUT_EVENT_CATEGORY, opt[1]);
+				select(ELEMENT_INPUT_EVENT_CATEGORY,(String)opt[1]);
 			}
 		}else{
 			if (name != null){
@@ -114,14 +114,14 @@ public class Event extends CalendarBase{
 				type(ELEMENT_ADD_EDIT_EVENT_DESC, description, true);
 			}
 			if (opt.length > 0 && opt[0] != null){
-				select(ELEMENT_ADD_EDIT_EVENT_CALENDAR, opt[0]);
+				select(ELEMENT_ADD_EDIT_EVENT_CALENDAR,(String)opt[0]);
 			}
 			if (opt.length > 1 && opt[1] != null){
-				select(ELEMENT_ADD_EDIT_EVENT_CATEGORY, opt[1]);
+				select(ELEMENT_ADD_EDIT_EVENT_CATEGORY, (String)opt[1]);
 			}
 		}
 	}
-	
+
 	/**
 	 * Input into "From", "To" fields of "Add quick event" and tab "Details" of "Add/Edit event"
 	 * 
@@ -186,7 +186,7 @@ public class Event extends CalendarBase{
 
 		}
 	}
-	
+
 	/**
 	 * Input into other fields of tab Details of Add/Edit event
 	 * 
@@ -198,7 +198,7 @@ public class Event extends CalendarBase{
 			type(ELEMENT_ADD_EDIT_EVENT_LOCATION,location,true);
 		}
 	}
-	
+
 	/**
 	 * Input into Add/Edit Event form
 	 * 
@@ -224,11 +224,11 @@ public class Event extends CalendarBase{
 		inputOtherFieldsTabDetailsEvent(location);
 		inputFromToEvent(from, to, allDay);
 	}
-	
+
 	/************End of input data form***************/
 
-	
-    /******************Add/Edit Event*************************/
+
+	/******************Add/Edit Event*************************/
 	/** 
 	 * Quick add event
 	 * 
@@ -250,18 +250,24 @@ public class Event extends CalendarBase{
 	public void addQuickEvent(String name, String description, String from, String to, boolean allDay, String...opt){
 		info("--Add an event--");
 		String date = "";
+		char[] oneDay = {}; 
 		goToAddEvent();
 		inputBasicQuickEvent(name, description, opt);
 		inputFromToEvent(from, to, allDay);
 		button.save();
 		waitForElementNotPresent(ELEMENT_ADD_EVENT_POPUP);
 		Utils.pause(1000);
-		
+
 		if((from != null) & (from != "")){
 			date = from.split("/")[1];
-			click(ELEMENT_MINI_CALENDAR_DATE_HIGHLIGHT.replace("${date}", date));
+			if (Integer.valueOf(date) < 10){
+				oneDay = date.toCharArray();
+				date = String.valueOf(oneDay[1]);
+			}
+			if(waitForAndGetElement(ELEMENT_MINI_CALENDAR_DATE_HIGHLIGHT.replace("${date}", date),5000,0)!=null)
+				click(ELEMENT_MINI_CALENDAR_DATE_HIGHLIGHT.replace("${date}", date));
 		}
-			
+
 		if(allDay)
 			waitForAndGetElement(ELEMENT_EVENT_TASK_ALL_DAY.replace("${event}", name));
 		else{
@@ -299,6 +305,6 @@ public class Event extends CalendarBase{
 		click(ELEMENT_ADD_EVENT_SAVE_BUTTON);
 		waitForElementNotPresent(ELEMENT_EDIT_EVENT_POPUP,60000);
 	}
-	
+
 	/****************End of Add/Edit Event*******************/
 }

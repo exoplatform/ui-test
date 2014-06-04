@@ -93,7 +93,7 @@ public class Calendar_Settings extends CalendarBase{
 			waitForAndGetElement(By.xpath(ELEMENT_VERIFY_CALENDAR.replace("${UserName}","John Smith").replace("${CheckboxColor}", "asparagus").replace("${checkicon}", "checkbox iconUnCheckBox")));
 		}
 		click(ELEMENT_SETTINGS_FORM_SAVE_BUTTON);
-		waitForElementNotPresent(By.xpath(ELEMENT_VERIFY_CALENDAR_FORM.replace("${UserName}","John Smith").replace("${CheckboxColor}", "asparagus")));
+		waitForElementNotPresent(By.xpath(ELEMENT_CALENDAR_GET_BY_TAG_LI.replace("${calendar}", "John Smith")));
 		
 		info("--Setup to Show specific calendar--");
 		goToCalendarSettings();
@@ -103,7 +103,7 @@ public class Calendar_Settings extends CalendarBase{
 			waitForElementNotPresent(By.xpath(ELEMENT_VERIFY_CALENDAR.replace("${UserName}","John Smith").replace("${CheckboxColor}", "asparagus").replace("${checkicon}", "checkbox iconUnCheckBox")));
 		}
 		click(ELEMENT_SETTINGS_FORM_SAVE_BUTTON);
-		waitForAndGetElement(By.xpath(ELEMENT_VERIFY_CALENDAR_FORM.replace("${UserName}","John Smith").replace("${CheckboxColor}", "asparagus").replace("${checkicon}", "iconCheckBox checkbox")));
+		waitForAndGetElement(By.xpath(ELEMENT_CALENDAR_GET_BY_TAG_LI.replace("${calendar}", "John Smith")));
 		
 		info("--Delete Calendar--");
 		deleteCalendar(calendar);

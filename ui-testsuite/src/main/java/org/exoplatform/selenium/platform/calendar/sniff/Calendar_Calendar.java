@@ -76,7 +76,7 @@ public class Calendar_Calendar extends CalendarBase{
 
 		info("Export/Import calendar");
 		addCalendar(calendar,calendar,null);
-		evt.addQuickEvent(eventName,eventName,getCurrentDate("MM/dd/yyyy"),addMinuteToCurrentDateTime(30),true,calendar);
+		evt.addQuickEvent(eventName,eventName,getCurrentDate("MM/dd/yyyy"),getCurrentDate("MM/dd/yyyy"),true,calendar);
 		exportCalendar(calendar,fileName);
 		deleteCalendar(calendar);
 		importCalendar("TestData/TestOutput/" + fileName,calendar,null,null);
@@ -140,7 +140,6 @@ public class Calendar_Calendar extends CalendarBase{
 		goToCalendarPage();
 		driver.navigate().refresh();
 		deleteCalendar(calendar,true);
-		
 		
 	}
 
