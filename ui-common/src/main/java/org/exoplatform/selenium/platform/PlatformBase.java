@@ -151,15 +151,13 @@ public class PlatformBase extends TestBase {
 	//Administration
 	public final By ELEMENT_TOP_NAVIGATION_MANAGEMENT = By.xpath("//*[@id='UISetupPlatformToolBarPortlet']//a[@href='/portal/g/:platform:administrators/servicesManagement' and text()='Management']");
 	public final By ELEMENT_TOP_NAVIGATION_MONITORING = By.xpath("//*[@id='UISetupPlatformToolBarPortlet']//a[@href='/portal/g/:platform:administrators/monitoring' and text()='Monitoring']");
-	public final By ELEMENT_MENU_CONTENT = By.xpath("//*[@id='UISetupPlatformToolBarPortlet']//a[@href='/portal/g/:platform:web-contributors/siteExplorer' and text()='Content']");
-	public final By ELEMENT_MENU_CONTENT_SITE_EXPLORER = By.xpath("//*[@id='UISetupPlatformToolBarPortlet']//a[@href='/portal/g/:platform:web-contributors/siteExplorer' and text()='Sites Explorer']");
-	public final By ELEMENT_MENU_CONTENT_ADMIN = By.xpath("//*[@id='UISetupPlatformToolBarPortlet']//a[@href='/portal/g/:platform:web-contributors/wcmAdmin' and text()='Content Administration']");
 	public final By ELEMENT_MENU_CONTENT_SEARCH = By.xpath("//*[@id='UISetupPlatformToolBarPortlet']//a[@href='/portal/g/:platform:administrators/search' and text()='Search']");
 	public final By ELEMENT_MENU_ADMIN_ICON = By.className("uiIconPLF24x24Setup");
 	public final By ELEMENT_MENU_EDIT_ICON = By.className("uiIconPLF24x24Edit");
 	public final By ELEMENT_MENU_ADD_ICON = By.className("uiIconPLF24x24Add");
 	public final By ELEMENT_MENU_SEARCH_ICON = By.className("uiIconPLF24x24Search");
 	public final By ELEMENT_MENU_HELP_ICON = By.className("uiIconPLF24x24Help");
+	public final By ELEMENT_MENU_EMAIL_NOTIFICATION = By.xpath("//a[text()='Email Notifications']");
 
 	//IDE
 	public final By ELEMENT_LINK_IDE = By.linkText("IDE");
@@ -190,6 +188,7 @@ public class PlatformBase extends TestBase {
 	public final By ELEMENT_MY_CONNECTIONS = By.className("uiIconPLFMyConnection");
 	public final By ELEMENT_MY_WIKI = By.xpath("//a[contains(.,'My Wiki')]");
 	public final String ELEMENT_LINE_BETWEEN_MENU = "//*[@class='divider'][${index}]";
+	public final By ELEMENT_NOTIFICATION_SETTING_MENU = By.xpath("//*[@id='UIUserPlatformToolBarPortlet']//a[contains(.,'Notifications')]");
 
 	//User -> Change Language
 	public final By ELEMENT_CHANGE_LANGUAGE_POPUP = By.xpath("//*[@id='UIMaskWorkspace']//*[text()='Interface Language Setting']");
@@ -218,7 +217,8 @@ public class PlatformBase extends TestBase {
 	public final By ELEMENT_MY_WIKI_LINK = By.linkText("My Wiki");
 	public final By ELEMENT_NOTIFICATION_LINK = By.linkText("Notifications");
 	public final By ELEMENT_MY_CONNECTIONS_LINK = By.linkText("My Connections");
-
+	public final String ELEMENT_PROFILE_PAGE = "//div[@id='UIProfile']//h3[contains(.,'${user}')]";
+	
 	//User-> Setting
 	public final By ELEMENT_CHANGE_PASSWORD_TAB = By.linkText("Change Password");
 	public final By ELEMENT_ACCOUNT_PROFILE_TAB = By.linkText("Account Profiles");
@@ -663,11 +663,13 @@ public class PlatformBase extends TestBase {
 	public final By ELEMENT_GMAIL_USERNAME = By.id("Email");
 	public final By ELEMENT_GMAIL_PASS = By.id("Passwd");
 	public final By ELEMENT_GMAIL_SIGN_IN = By.id("signIn");
-	public final String ELEMENT_GMAIL_TITLE = "//span/b[contains(text(),'{$title}')]";
+	public final String ELEMENT_GMAIL_TITLE = "//td/div[@class='xS']//div[@class='xT']//span/b[contains(text(),\"{$title}\")]";
 	public final By ELEMENT_GMAIL_COMPOSE = By.xpath("//div[contains(text(),'COMPOSE')]");
+	public final By ELEMENT_GMAIL_SHOW_DETAIL = By.xpath("//img[@aria-label='Show details']");
+	public final String ELEMENT_GMAIL_TO_FIELD = "//td/span[text()='to:']/../..//span[text()='${to}']";
 
 	public final By ELEMENT_FIRST_MAIL = By.xpath("//div[@class='iA g6' and contains(text(),'Hi')]/../../../../../table[@class='cf iB']");
-	public final String ELEMENT_GMAIL_CONTENT = "//*[@class='adn ads']//*[contains(text(),'${content}')]";
+	public final String ELEMENT_GMAIL_CONTENT = "//*[@class='adn ads']";//*[contains(text(),'${content}')]";
 	public final By ELEMENT_GMAIL_SIGN_IN_LINK = By.xpath("//a[@id='gmail-sign-in' and contains(text(),'Sign in')]");
 
 	//get url
@@ -1367,7 +1369,7 @@ public class PlatformBase extends TestBase {
 		click(mail);	
 		if(waitForAndGetElement(ELEMENT_GMAIL_CONTENT.replace("${content}",content),20000,0) == null )
 			click(ELEMENT_FIRST_MAIL);
-		waitForAndGetElement(ELEMENT_GMAIL_CONTENT.replace("${content}",content));
+		assert waitForAndGetElement(ELEMENT_GMAIL_CONTENT).getText().contains(content);//.replace("${content}",content));
 		info("Found notify mail");
 
 		info("delete mail");

@@ -96,10 +96,10 @@ public class PLF_Navigation_TopNavigation_Administration extends PlatformBase{
 		- The Content submenu is displayed
 		- The following entries are displayed in this order:* Site Explorer* Content Administration* Search 		*/ 
 		mouseOverAndClick(ELEMENT_CATEGORY_ADMINISTRATION);
-		waitForAndGetElement(ELEMENT_MENU_CONTENT);
-		mouseOver(ELEMENT_MENU_CONTENT, true);
-		waitForAndGetElement(ELEMENT_MENU_CONTENT_SITE_EXPLORER);
-		waitForAndGetElement(ELEMENT_MENU_CONTENT_ADMIN);
+		waitForAndGetElement(ELEMENT_MENU_CONTENT_LINK);
+		mouseOver(ELEMENT_MENU_CONTENT_LINK, true);
+		waitForAndGetElement(ELEMENT_MENU_SITE_EXPLORER);
+		waitForAndGetElement(ELEMENT_LINK_CONTENT_ADMIN);
 		waitForAndGetElement(ELEMENT_MENU_CONTENT_SEARCH);
 	}
 
@@ -203,7 +203,7 @@ public class PLF_Navigation_TopNavigation_Administration extends PlatformBase{
 		mouseOverAndClick(ELEMENT_CATEGORY_ADMINISTRATION);
 		waitForAndGetElement(By.xpath(ELEMENT_LINK_USERS));
 		waitForAndGetElement(ELEMENT_APPLICATIONS_LINK);
-		waitForAndGetElement(ELEMENT_MENU_CONTENT);
+		waitForAndGetElement(ELEMENT_MENU_CONTENT_LINK);
 		waitForAndGetElement(ELEMENT_MENU_ADMININISTRATION);
 		waitForAndGetElement(ELEMENT_MENU_PORTAL);
 	}

@@ -11,6 +11,7 @@ import org.exoplatform.selenium.platform.ecms.EcmsBase;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.internal.Locatable;
@@ -128,9 +129,14 @@ public class Activity extends SocialBase {
 	public final By ELEMENT_WELCOME_APPSTORE_LINK = By.linkText("iOS App Store");
 	public final By ELEMENT_WELCOME_GOOGLE_LINK = By.linkText("Google Play"); 
 	
-	/*public Activity(WebDriver dr){
+	public Activity(WebDriver dr,String...plfVersion){
 		driver = dr;
-	}*/
+		this.plfVersion = plfVersion.length>0?plfVersion[0]:"4.0";
+		
+	}
+	public Activity(){
+		
+	}
 	/**
 	 * Select filter activity
 	 * @author phuongdt

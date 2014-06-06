@@ -4,6 +4,7 @@ import static org.exoplatform.selenium.TestLogger.info;
 
 import org.exoplatform.selenium.Button;
 import org.exoplatform.selenium.Utils;
+import org.exoplatform.selenium.platform.social.Notification;
 import org.exoplatform.selenium.platform.social.PeopleConnection;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -17,6 +18,7 @@ public class NavigationToolbar extends PlatformBase {
 	BrandingManagement brandMag;
 	PeopleConnection peoCon;
 	HomePageActivity hpAct;
+	Notification noti;
 
 	public final By ELEMENT_MENU_EDIT_LINK = By.xpath("//i[@class='uiIconPLF24x24Edit']");
 	public final By ELEMENT_MENU_EDIT_CONTENT = By.xpath("//i[@class='quickEditChecked']");
@@ -32,6 +34,7 @@ public class NavigationToolbar extends PlatformBase {
 		brandMag = new BrandingManagement(driver);
 		button = new Button(driver);
 		peoCon = new PeopleConnection(driver);
+		noti = new Notification(driver);
 		
 	} 
 
@@ -608,5 +611,24 @@ public class NavigationToolbar extends PlatformBase {
 		String pageElement = waitForAndGetElement(ELEMENT_PAGE_ID).getAttribute("id");
 		int beginIndex = pageElement.indexOf("-");
 		return pageElement.substring(beginIndex+1);
+	}
+	
+	/**
+	 * Go to Email notification administration page
+	 */
+	public void goToNotificationAdministration(){
+		click(ELEMENT_LINK_SETUP);
+		mouseOver(ELEMENT_MENU_PORTAL,true);
+		click(ELEMENT_MENU_EMAIL_NOTIFICATION);
+	}
+	
+	/**
+	 * Go to Notification settings
+	 */
+	public void goToNotificationSettings(){
+		info("Go to notification settings");
+		click(ELEMENT_ACCOUNT_NAME_LINK);
+		click(ELEMENT_NOTIFICATION_SETTING_MENU);
+		waitForAndGetElement(noti.ELEMENT_NOTIFICATION_SETTINGS_TITLE);
 	}
 }

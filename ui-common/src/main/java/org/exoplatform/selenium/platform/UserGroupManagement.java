@@ -77,9 +77,9 @@ public class UserGroupManagement extends PlatformBase {
 		info("--Deleting user " + username + "--");
 		
 		searchUser(username, "User Name");
-		if (waitForAndGetElement("//*[contains(text(),'Total pages')]",DEFAULT_TIMEOUT,0) != null) {
+		/*if (waitForAndGetElement("//*[contains(text(),'Total pages')]",3000,0) != null) {
 			usePaginator(userDeleteIcon, "User " + username + "not found in group");
-		}
+		}*/
 		Utils.pause(500);
 		click(userDeleteIcon);
 		alert.waitForConfirmation("Are you sure you want to delete " + username + " user?");

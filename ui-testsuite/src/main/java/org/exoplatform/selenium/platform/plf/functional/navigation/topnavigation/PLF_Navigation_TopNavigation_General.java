@@ -125,7 +125,7 @@ public class PLF_Navigation_TopNavigation_General extends PlatformBase{
 		info("Administrator menu is display");
 		waitForAndGetElement(By.xpath(ELEMENT_LINK_USERS));
 		waitForAndGetElement(ELEMENT_APPLICATIONS_LINK);
-		waitForAndGetElement(ELEMENT_MENU_CONTENT);
+		waitForAndGetElement(ELEMENT_MENU_CONTENT_LINK);
 		waitForAndGetElement(ELEMENT_MENU_ADMININISTRATION);
 		waitForAndGetElement(ELEMENT_MENU_PORTAL);
 
