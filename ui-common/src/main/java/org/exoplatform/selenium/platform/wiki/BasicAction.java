@@ -114,7 +114,8 @@ public class BasicAction extends Permission{
 	 * 			updated content of the wiki page. Can not be <code>null</code>
 	 * 
 	 */
-	public void addWikiPageSourceEditor(String title, String content){
+	public void addWikiPageSourceEditor(String title, String content,boolean...keepOldData){
+		boolean keepData = keepOldData.length > 0 ? keepOldData[0] : true;
 		String[] text ;
 		info("Modify data with source editor");
 		if(title != null){
@@ -127,10 +128,19 @@ public class BasicAction extends Permission{
 		Utils.pause(1000);
 
 		if(content != null){
-			text = content.split("</br>");
-			for(int i=0; i < text.length; i++){
-				type(ELEMENT_CONTENT_WIKI_INPUT,text[i],false);
-				waitForAndGetElement(ELEMENT_CONTENT_WIKI_INPUT).sendKeys(Keys.ENTER);
+			if(keepData){
+				text = content.split("</br>");
+				for(int i=0; i < text.length; i++){
+					type(ELEMENT_CONTENT_WIKI_INPUT,text[i],false);
+					waitForAndGetElement(ELEMENT_CONTENT_WIKI_INPUT).sendKeys(Keys.ENTER);
+				}
+			}else{
+				waitForAndGetElement(ELEMENT_CONTENT_WIKI_INPUT).clear();
+				text = content.split("</br>");
+				for(int i=0; i < text.length; i++){
+					type(ELEMENT_CONTENT_WIKI_INPUT,text[i],false);
+					waitForAndGetElement(ELEMENT_CONTENT_WIKI_INPUT).sendKeys(Keys.ENTER);
+				}
 			}
 		}	
 		//waitForAndGetElement(ELEMENT_SAVE_BUTTON_ADD_PAGE);
@@ -238,7 +248,7 @@ public class BasicAction extends Permission{
 			if(isEditMultiLine)
 				editWikiPageWithContentMultiLine(title, content);
 			else
-				addWikiPageSourceEditor(title, content);
+				addWikiPageSourceEditor(title, content,false);
 		}		
 		else{
 			addWikiPageRichText(title, content);

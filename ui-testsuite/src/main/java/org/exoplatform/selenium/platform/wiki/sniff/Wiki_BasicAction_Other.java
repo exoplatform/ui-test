@@ -57,7 +57,7 @@ public class Wiki_BasicAction_Other extends Permalink {
 	/**CaseId: 70044
 	 * Export page as PDF
 	 */
-	@Test
+	@Test(groups="pending")
 	public void test01_ExportPDF(){
 		String title = "Wiki_sniff_export_pdf_title_01";
 		String content = "Wiki_sniff_export_pdf_content_01";

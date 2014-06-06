@@ -106,7 +106,7 @@ public class Wiki_WikiSetting_ManagePermission extends BasicAction {
 	@Test
 	public void test02_AddEditDeletePerssionForWiki_ForGroup(){
 		String user = "demo";
-		String userGroup[] = {"Development/Select this Group"};
+		String userGroup[] = {"Development"};
 		
 		info("Add permission for group Development");
 		addSpacePermission(2, userGroup);
@@ -196,7 +196,7 @@ public class Wiki_WikiSetting_ManagePermission extends BasicAction {
 		String title = "Wiki_sniff_permission_title_05";
 		String content = "Wiki_sniff_permission_content_05";
 		String user = "demo";
-		String userGroup[] = {"Development/Select this Group"};
+		String userGroup[] = {"Development"};
 		
 		addBlankWikiPage(title, content, 0);
 		deletePagePermission("any");
