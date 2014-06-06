@@ -40,6 +40,7 @@ public class PeopleConnection extends SocialBase {
 	public final String ELEMENT_CONNECT_LIST = "//*[text()='Connect']";
 	public final String ELEMENT_PEOPLE_SEARCH = "//*[@class='uiProfileUserSearch']/..//*[text()='${peopleName}']";
 	public final String ELEMENT_EVERYONE_TAB_ACTIVE = "//li[@class='active']/a[contains(text(),'Everyone')]";
+	public final By ELEMENT_REVOKE_BUTTON = By.xpath("//button[text()='Revoke']");
 
 	//-----------------------Connections page------------------------
 	public String ELEMENT_INVITATION_RECEIVED_MSG = "//h4[@class='spaceTitle']/a[contains(text(),'${acc}')]/ancestor::div[@class='spaceBox pull-left']/div[@class='connectionBtn clearfix']/span[contains(text(),'Invitation Received')]";

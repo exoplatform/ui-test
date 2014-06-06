@@ -20,6 +20,7 @@
             <class name="org.exoplatform.selenium.platform.social.sniff.Social_Space_SpaceManagement_ManageSpace"/>
             <class name="org.exoplatform.selenium.platform.social.sniff.Social_Space_SpaceManagement_SpaceAccess"/>
             <class name="org.exoplatform.selenium.platform.social.sniff.Social_Space_SpaceManagement_WikiPageAccess"/>
+            <class name="org.exoplatform.selenium.platform.social.sniff.Social_EmailNotifications_NotificationType"/>
         </classes>
 	</test>
 	<listeners>

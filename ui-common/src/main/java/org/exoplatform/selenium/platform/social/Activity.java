@@ -10,6 +10,7 @@ import org.exoplatform.selenium.platform.HomePageActivity;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.internal.Locatable;
@@ -92,9 +93,32 @@ public class Activity extends SocialBase {
 	public final String ELEMENT_USER_NAME_LIKE_THIS_ACTIVITY = "//div[@class='text' or @class = 'description'or @class='linkSource' or contains(@id, 'ContextBox')]/../*[contains(text(), '${activityText}')]//ancestor::div[contains(@id,'ActivityContextBox')]//div[@class='listPeopleContent']/*[contains(text(),'${userName} liked this')]";
 	public final String ELEMENT_USER_PROFILE_POPUP = "//table[@id='tipName']//a[contains(text(),'${userName}')]";
 
-	/*public Activity(WebDriver dr){
+	public final String ELEMENT_USER_PROFILE_AVATAR = "//table[@id='tipName']//a[@target='parent']/img"; 
+	public final By ELEMENT_LIKE_ACTIVITY_MORE = By.xpath("//button[contains(text(),'...')]");
+
+	//=====Element on welcome page=======
+	public final By ELEMENT_HINT_BLOCK = By.className("hint");
+	public final By ELEMENT_CLOSE_HINT_BUTTON = By.xpath("//i[@class='uiIconClose uiIconLightGray']");
+	public final By ELEMENT_WELCOME_ACTIVITY = By.id("welcomeActivity");
+	public final String ELEMENT_WELCOME_AVATAR = "//div[@class='activityAvatar avatarCircle']//img[@alt='${author}']";
+	public final By ELEMENT_WELCOME_DESCRIPTION = By.cssSelector("div.description.clearfix");
+	public final By ELEMENT_WELCOME_CONNECTIONS_LINK = By.linkText("Connections");
+	public final By ELEMENT_WELCOME_DOCUMENTS_LINK = By.linkText("Documents");
+	public final By ELEMENT_WELCOME_WIKIS_LINK = By.linkText("Wikis");
+	public final By ELEMENT_WELCOME_FORUMS_LINK = By.linkText("Forums");
+	public final By ELEMENT_WELCOME_CALENDAR_LINK = By.linkText("Calendars");
+	public final By ELEMENT_WELCOME_SPACES_LINK = By.linkText("Spaces");
+	public final By ELEMENT_WELCOME_APPSTORE_LINK = By.linkText("iOS App Store");
+	public final By ELEMENT_WELCOME_GOOGLE_LINK = By.linkText("Google Play"); 
+	
+	public Activity(WebDriver dr,String...plfVersion){
 		driver = dr;
-	}*/
+		this.plfVersion = plfVersion.length>0?plfVersion[0]:"4.0";
+		
+	}
+	public Activity(){
+		
+	}
 	/**
 	 * Select filter activity
 	 * @author phuongdt

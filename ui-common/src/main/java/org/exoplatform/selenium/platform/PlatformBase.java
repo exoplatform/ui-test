@@ -67,6 +67,7 @@ public class PlatformBase extends TestBase {
 	 * Navigation Bar
 	 */
 	public final By ELEMENT_NAVIGATION_TOOLBAR_HOMEPAGE = By.xpath("//*[@class='VIEW-CONTAINER ToolbarContainer VIEW-BLOCK']");
+	public final By ELEMENT_LOGO_CONTAINER_TOOLBAR = By.xpath("//div[contains(@class,'UIRowContainer')]/div[@id='PlatformAdminToolbarContainer']//a[@class='HomeLink']/img[@alt='Home']");
 
 	//My site
 	public final By ELEMENT_MYSITE = By.linkText("My Sites");
@@ -137,6 +138,16 @@ public class PlatformBase extends TestBase {
 	public final String ELEMENT_LINK_BRANDING = "//a[text()='Branding']";
 
 	//Administration
+	public final By ELEMENT_TOP_NAVIGATION_MANAGEMENT = By.xpath("//*[@id='UISetupPlatformToolBarPortlet']//a[@href='/portal/g/:platform:administrators/servicesManagement' and text()='Management']");
+	public final By ELEMENT_TOP_NAVIGATION_MONITORING = By.xpath("//*[@id='UISetupPlatformToolBarPortlet']//a[@href='/portal/g/:platform:administrators/monitoring' and text()='Monitoring']");
+	public final By ELEMENT_MENU_CONTENT_SEARCH = By.xpath("//*[@id='UISetupPlatformToolBarPortlet']//a[@href='/portal/g/:platform:administrators/search' and text()='Search']");
+	public final By ELEMENT_MENU_ADMIN_ICON = By.className("uiIconPLF24x24Setup");
+	public final By ELEMENT_MENU_EDIT_ICON = By.className("uiIconPLF24x24Edit");
+	public final By ELEMENT_MENU_ADD_ICON = By.className("uiIconPLF24x24Add");
+	public final By ELEMENT_MENU_SEARCH_ICON = By.className("uiIconPLF24x24Search");
+	public final By ELEMENT_MENU_HELP_ICON = By.className("uiIconPLF24x24Help");
+	public final By ELEMENT_MENU_EMAIL_NOTIFICATION = By.xpath("//a[text()='Email Notifications']");
+
 	//IDE
 	public final By ELEMENT_LINK_IDE = By.linkText("IDE");
 	public final By ELEMENT_IDE_WORKSPACE_FRAME = By.id("remote_iframe_0");
@@ -159,7 +170,13 @@ public class PlatformBase extends TestBase {
 
 	public final By ELEMENT_MY_PROFILE_LINK = By.xpath("//i[@class='uiIconPLFProfile']/..");
 	public final By ELEMENT_DASHBROARD_LINK = By.className("uiIconPLFDashboard");
-	public final By ELEMENT_MY_SETTING = By.linkText("Settings");
+
+	public final By ELEMENT_MY_SETTING = By.className("uiIconSetting");
+	public final By ELEMENT_MY_ACTIVITY_STREAM = By.className("uiIconPLFActivityStream");
+	public final By ELEMENT_MY_CONNECTIONS = By.className("uiIconPLFMyConnection");
+	public final By ELEMENT_MY_WIKI = By.xpath("//a[contains(.,'My Wiki')]");
+	public final String ELEMENT_LINE_BETWEEN_MENU = "//*[@class='divider'][${index}]";
+	public final By ELEMENT_NOTIFICATION_SETTING_MENU = By.xpath("//*[@id='UIUserPlatformToolBarPortlet']//a[contains(.,'Notifications')]");
 
 	//User -> Change Language
 	public final By ELEMENT_CHANGE_LANGUAGE_POPUP = By.xpath("//*[@id='UIMaskWorkspace']//*[text()='Interface Language Setting']");
@@ -185,6 +202,11 @@ public class PlatformBase extends TestBase {
 	public final By ELEMENT_LAST_NAME_TEXTBOX_EDIT = By.id("lastName");
 	public final By ELEMENT_EMAIL_TEXTBOX_EDIT = By.id("email");
 	public final By ELEMENT_EDIT_BASIC_INFO_SAVE_BUTTON = By.xpath("//*[@id='UIBasicInfoSection']//button[contains(text(), 'Save')]");
+
+	public final By ELEMENT_MY_WIKI_LINK = By.linkText("My Wiki");
+	public final By ELEMENT_NOTIFICATION_LINK = By.linkText("Notifications");
+	public final By ELEMENT_MY_CONNECTIONS_LINK = By.linkText("My Connections");
+	public final String ELEMENT_PROFILE_PAGE = "//div[@id='UIProfile']//h3[contains(.,'${user}')]";
 
 	//User-> Setting
 	public final By ELEMENT_CHANGE_PASSWORD_TAB = By.linkText("Change Password");
@@ -251,7 +273,9 @@ public class PlatformBase extends TestBase {
 	public final String ELEMENT_SEARCH_ICON_USERS_MANAGEMENT = "//form[@id='UISearchForm']/div[2]/a";
 	public final String ELEMENT_USER_EDIT_ICON = "//*[@id='UIListUsersGird']//*[text()='${username}']/../..//*[@data-original-title='Edit User Info']";
 	public final By ELEMENET_USER_MANAGEMENT_GRID = By.id("UIListUsersGird");
-
+	public final By ELEMENT_USER_MANAGEMENT_GROUP = By.xpath("//*[@id='UIOrganizationPortlet']//ul[@class='managementIconContainer clearfix']/li[2]/a");
+	public final String ELEMENT_USER_MANAGEMENT_GROUP_NODE = "//*[@class='uiIconNode collapseIcon' and contains(text(), '${node}')]";
+	
 	public String USER_REG_SAME_ACC_FAIL_MSG = "//span[@class='errorIcon' and contains(text(),'This user name already exists, please enter a different name.')]";
 	public String USER_REG_UPPER_LETTER_FAIL_MSG = "//span[@class='warningIcon' and contains(text(),'nly lowercase letters, digits, dot and underscore characters are allowed for the field')]";
 	public String USER_REG_COPYPASTE_PASSWORD_FAIL_MSG = "//span[@class='errorIcon' and contains(text(),'Password and Confirm Password must be the same.')]";
@@ -625,11 +649,13 @@ public class PlatformBase extends TestBase {
 	public final By ELEMENT_GMAIL_USERNAME = By.id("Email");
 	public final By ELEMENT_GMAIL_PASS = By.id("Passwd");
 	public final By ELEMENT_GMAIL_SIGN_IN = By.id("signIn");
-	public final String ELEMENT_GMAIL_TITLE = "//span/b[contains(text(),'{$title}')]";
+	public final String ELEMENT_GMAIL_TITLE = "//td/div[@class='xS']//div[@class='xT']//span/b[contains(text(),\"{$title}\")]";
 	public final By ELEMENT_GMAIL_COMPOSE = By.xpath("//div[contains(text(),'COMPOSE')]");
+	public final By ELEMENT_GMAIL_SHOW_DETAIL = By.xpath("//img[@aria-label='Show details']");
+	public final String ELEMENT_GMAIL_TO_FIELD = "//td/span[text()='to:']/../..//span[text()='${to}']";
 
 	public final By ELEMENT_FIRST_MAIL = By.xpath("//div[@class='iA g6' and contains(text(),'Hi')]/../../../../../table[@class='cf iB']");
-	public final String ELEMENT_GMAIL_CONTENT = "//*[@class='adn ads']//*[contains(text(),'${content}')]";
+	public final String ELEMENT_GMAIL_CONTENT = "//*[@class='adn ads']";//*[contains(text(),'${content}')]";
 	public final By ELEMENT_GMAIL_SIGN_IN_LINK = By.xpath("//a[@id='gmail-sign-in' and contains(text(),'Sign in')]");
 	public final String ELEMENT_GMAIL_INVITE_COWORKER_CONTENT = "//*[@class='adn ads']/..";
 	public final String ELEMENT_GMAIL_FROM_USER = "//*[@class='gD' and @name ='${user}']";

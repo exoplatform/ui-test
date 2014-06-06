@@ -78,9 +78,10 @@ public class UserGroupManagement extends PlatformBase {
 		String userDeleteIcon = ELEMENT_USER_DELETE_ICON.replace("${username}", username);
 
 		info("--Deleting user " + username + "--");
-		if (waitForAndGetElement("//*[contains(text(),'Total pages')]",DEFAULT_TIMEOUT,0) != null) {
+		searchUser(username, "User Name");
+		/*if (waitForAndGetElement("//*[contains(text(),'Total pages')]",3000,0) != null) {
 			usePaginator(userDeleteIcon, "User " + username + "not found in group");
-		}
+		}*/
 		Utils.pause(500);
 		click(userDeleteIcon);
 		alert.waitForConfirmation("Are you sure you want to delete " + username + " user?");

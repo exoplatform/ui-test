@@ -12,6 +12,7 @@
             <class name="org.exoplatform.selenium.platform.social.sniff.Social_People"/>
             <class name="org.exoplatform.selenium.platform.social.sniff.Social_HomePage_ActivityComposer"/>
             <class name="org.exoplatform.selenium.platform.social.sniff.Social_HomePage_ActivityStream"/>
+            <class name="org.exoplatform.selenium.platform.social.sniff.Social_EmailNotifications_NotificationType"/>
         </classes>
 	</test>
 	<listeners>

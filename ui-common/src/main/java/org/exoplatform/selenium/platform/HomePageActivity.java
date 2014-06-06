@@ -44,8 +44,7 @@ public class HomePageActivity extends SocialBase{
 
 	//Comment box
 	public final String ELEMENT_COMMENT_LINK = "//div[@class='text' or @class = 'description'or @class='linkSource' or contains(@id, 'ContextBox')]/*[contains(text(), '${activityText}')]//ancestor::div[contains(@id,'ActivityContextBox')]//*[starts-with(@id, 'CommentLink')]";
-	public final String ELEMENT_ACTIVITY_COMMENT_CONTENT = "//*[contains(text(),'${title}')]/../../../..//*[@class='contentComment']/../*[contains(text(), '${comment}')]";
-	
+	public final String ELEMENT_ACTIVITY_COMMENT_CONTENT = "//*[contains(text(),'${title}')]/../../../..//*[@class='contentComment']/..//*[contains(text(), '${comment}')]";
 	public final String ELEMENT_GET_COMMENT_CONTENT = "//*[contains(text(),'${title}')]/../../../..//*[@class='commentItem commentItemLast']/..//p";
 	public final String ELEMENT_ACTIVITY_COMMENT_CONTENT_1 = "//*[text()='${title}']/ancestor::div[@class='boxContainer']//*[@class='contentComment']";
 	public final String ELEMENT_COMMENTBOX="//*[text()='${title}']/../../../..//div[@class='exo-mentions']/div[contains(@id,'DisplayCommentTextarea')]";
@@ -903,20 +902,27 @@ public class HomePageActivity extends SocialBase{
 	 * Delete activity 
 	 * @param activityText: input a String 
 	 */
-	public void deleteActivity (String activityText) {
+	public void deleteActivity (String activityText,boolean...verify) {
 		info("-- Deleting an activity " +activityText+" --");
-		WebElement elem = waitForAndGetElement(By.xpath(ELEMENT_ACTIVITY_DELETE.replace("${activityText}", activityText)), DEFAULT_TIMEOUT,1,2);
+		boolean canDelete = verify.length>0?verify[0]:true;
+		boolean verifyElement = verify.length>1?verify[1]:true;
+		if(!canDelete)
+			waitForElementNotPresent(By.xpath(ELEMENT_ACTIVITY_DELETE.replace("${activityText}", activityText)), DEFAULT_TIMEOUT,1,2);
+		else{
+			WebElement elem = waitForAndGetElement(By.xpath(ELEMENT_ACTIVITY_DELETE.replace("${activityText}", activityText)), DEFAULT_TIMEOUT,1,2);
 
-		String deleteActivityIconID;
-		deleteActivityIconID = elem.getAttribute("id");
+			String deleteActivityIconID;
+			deleteActivityIconID = elem.getAttribute("id");
 
-		JavascriptExecutor executor = (JavascriptExecutor)driver;
-		executor.executeScript("document.getElementById('"+deleteActivityIconID+"').click();");
-		waitForAndGetElement(ELEMENT_MESSAGE_CONFIRM_DELETE_ACTIVITY);
-		click(ELEMENT_DELETE_SOCIAL_OK);
-		waitForElementNotPresent(By.xpath(ELEMENT_ACTIVITY_AUTHOR_ACTIVITY.replace("${activityText}", activityText)));
-		waitForElementNotPresent(By.xpath(ELEMENT_ACTIVITY_DELETE.replace("${activityText}", activityText)), DEFAULT_TIMEOUT,1,2);
-		Utils.pause(1000);
+			JavascriptExecutor executor = (JavascriptExecutor)driver;
+			executor.executeScript("document.getElementById('"+deleteActivityIconID+"').click();");
+			waitForAndGetElement(ELEMENT_MESSAGE_CONFIRM_DELETE_ACTIVITY);
+			button.ok();
+			if(verifyElement)
+				//	waitForElementNotPresent(By.xpath(ELEMENT_ACTIVITY_AUTHOR_ACTIVITY.replace("${activityText}", activityText)));
+				waitForElementNotPresent(By.xpath(ELEMENT_ACTIVITY_DELETE.replace("${activityText}", activityText)), DEFAULT_TIMEOUT,1,2);
+			Utils.pause(1000);
+		}
 	}
 
 	/**
