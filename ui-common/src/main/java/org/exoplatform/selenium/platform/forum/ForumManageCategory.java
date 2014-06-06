@@ -57,7 +57,7 @@ public class ForumManageCategory extends ForumBase {
 
 	//------------add category form------------------------------------------------------------------------
 	public final By ELEMENT_POPUP_ADD_CATEGORY = By.xpath("//span[@class='PopupTitle popupTitle' and text()='Category']");
-	public final By ELEMENT_CATEGORY_TAB = By.xpath("//div[@class='MiddleTab' and text()='Category']");
+	public final By ELEMENT_CATEGORY_TAB = By.linkText("Category");
 	public final By ELEMENT_CATEGORY_TITLE = By.id("CategoryTitle");
 	public final By ELEMENT_CATEGORY_ORDER = By.id("CategoryOrder");
 	public final By ELEMENT_RESTRICTED_AUDIENCE = By.id("UserPrivate");
@@ -108,7 +108,8 @@ public class ForumManageCategory extends ForumBase {
 	//-------------------Message-------------------------------------
 	public String MESSAGE_CATEGORY_NOT_EXISTE ="The category isn't existed";
 	public String MESSAGE_RESTRICTED_AUDIENCE_INVALID="The field \"Restricted Audience\" is invalid: ";
-
+	public String MESSAGE_CATEGORY_MODERATOR_INVALID = "not found, please enter a valid value.";
+	
 	/*------------------------------------common function---------------------------------*/
 
 
@@ -124,7 +125,7 @@ public class ForumManageCategory extends ForumBase {
 	public void selectRestricted(int chooseRestricted, String[] restricted){
 		switch (chooseRestricted) {
 		case 1:
-			type(ELEMENT_RESTRICTED_AUDIENCE, restricted[0], false);
+			type(ELEMENT_RESTRICTED_AUDIENCE, restricted[0], true);
 			break;
 		case 2:
 			click(ELEMENT_RESTRICTED_SELECT_USER);

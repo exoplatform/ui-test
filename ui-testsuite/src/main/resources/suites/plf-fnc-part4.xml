@@ -10,7 +10,11 @@
 		<classes>
 			<class name = "org.exoplatform.selenium.platform.plf.functional.homepagegadgets.suggestiongadget.PLF_HomepageGadgets_SuggestionGadget" />
 			<class name = "org.exoplatform.selenium.platform.plf.functional.homepagegadgets.invitationgadget.PLF_HomepageGadgets_InvitationGadget" />
-			
+			<class name = "org.exoplatform.selenium.platform.plf.functional.navigation.topnavigation.create.PLF_Navigation_TopNavigation_Create_EventTask" />
+			<class name = "org.exoplatform.selenium.platform.plf.functional.navigation.topnavigation.create.PLF_Navigation_TopNavigation_Create_General" />
+			<class name = "org.exoplatform.selenium.platform.plf.functional.navigation.topnavigation.create.PLF_Navigation_TopNavigation_Create_UploadFile" />
+			<class name = "org.exoplatform.selenium.platform.plf.functional.navigation.topnavigation.create.PLF_Navigation_TopNavigation_Create_WikiPage" />
+			<class name = "org.exoplatform.selenium.platform.plf.functional.genericuserpopup.PLF_GenericUserPopup_WhoIsOnlineGadget" />
 		</classes>
 	</test>
 	<listeners>

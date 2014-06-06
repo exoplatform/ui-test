@@ -40,7 +40,8 @@ public class ForumPermission extends ForumBase {
 	public final String ELEMENT_POST_FORUM_CATEGORY_CHECKBOX = "//*[contains(text(), '${user}')]/../../td[4]//input[@type='checkbox']";
 	public final String ELEMENT_VIEW_POST_FORUM_CATEGORY_CHECKBOX = "//*[contains(text(), '${user}')]/../../td[5]//input[@type='checkbox']";
 	public final By ELEMENT_FORUM_CATEGORY_PERMISSION_GRID = By.id("PermissionTab");
-
+	public final String ELEMENT_FORUM_CATEGORY_PERMISSION_DELETE = "//*[contains(text(), '${user}')]/../../td[6]//i[@class='uiIconDelete uiIconLightGray']";
+	
 	//Set permission for forum of forum
 	public final String ELEMENT_MODERATOR_FORUM_FORUM_CHECKBOX = "//*[contains(text(), '${user}')]/../../td[2]//input[@type='checkbox']";
 	public final String ELEMENT_VIEW_POST_FORUM_FORUM_CHECKBOX = "//*[contains(text(), '${user}')]/../../td[3]//input[@type='checkbox']";
@@ -289,5 +290,15 @@ public class ForumPermission extends ForumBase {
 				uncheck(ELEMENT_WHO_CAN_POST_CHECKBOX.replace("${user}", check), 2);
 			}
 		}
+	}
+	
+	/**
+	 * 
+	 */
+	public void deletePermission4ForumCategory(String userGroup){
+		click(ELEMENT_PERMISSION_TAB);
+		Utils.pause(1000);
+		click(ELEMENT_FORUM_CATEGORY_PERMISSION_DELETE.replace("${user}", userGroup));
+		waitForElementNotPresent(ELEMENT_FORUM_CATEGORY_PERMISSION_DELETE.replace("${user}", userGroup)); 
 	}
 }

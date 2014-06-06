@@ -19,7 +19,6 @@
 			<class name = "org.exoplatform.selenium.platform.plf.functional.navigation.topnavigation.PLF_Navigation_TopNavigation_Logo" />
 			<class name = "org.exoplatform.selenium.platform.plf.functional.navigation.topnavigation.PLF_Navigation_TopNavigation_Profile" />
 			<class name = "org.exoplatform.selenium.platform.plf.functional.navigation.topnavigation.PLF_Navigation_TopNavigation_Search" />
-			<class name = "org.exoplatform.selenium.platform.plf.functional.navigation.topnavigation.PLF_Navigation_TopNavigation_Create_EventTask" />
 		</classes>
 	</test>
 	<listeners>
