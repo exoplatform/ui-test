@@ -18,7 +18,6 @@ import org.exoplatform.selenium.platform.calendar.Task;
  * @author havtt
  * @date 17 Oct 2013
  */
-
 public class Calendar_Task extends CalendarBase {
 
 	ManageAccount acc;
@@ -42,8 +41,7 @@ public class Calendar_Task extends CalendarBase {
 		driver.manage().deleteAllCookies();
 		driver.quit();
 	}
-
-
+	
 	/**
 	 * Add new task to Calendar
 	 * CaseID 68652
@@ -92,7 +90,6 @@ public class Calendar_Task extends CalendarBase {
 		info("Restore data");
 		waitForAndGetElement(By.xpath(ELEMENT_EVENT_TASK_ALL_DAY.replace("${taskTitle}", CALENDAR02)));
 		deleteEventTask(CALENDAR02);
-
 	}
 
 	/** 
@@ -171,11 +168,14 @@ public class Calendar_Task extends CalendarBase {
 		info("Go to Intranet Calendar");
 		info("Add a new task");
 		tsk.addQuickTask(CALENDAR05,CALENDAR05,getDate(0,"MM/dd/yyyy"),getDate(0,"MM/dd/yyyy"),false);
-		waitForAndGetElement(ELEMENT_EVENT_TASK_ONE_DAY.replace("${taskName}", CALENDAR05),50000);
+		//waitForAndGetElement(ELEMENT_EVENT_TASK_ONE_DAY.replace("${taskName}", CALENDAR05),50000);
+		if (isElementNotPresent(ELEMENT_EVENT_TASK_ONE_DAY.replace("${taskName}", CALENDAR05))){
+			waitForAndGetElement(ELEMENT_EVENT_TASK_ONE_DAY_PLF41.replace("${taskName}", CALENDAR05));
+		}
 		
 		info("Delete a task");
 		Utils.pause(5000);
-		deleteEventTask(CALENDAR05);
+		deleteEventTask(CALENDAR05, selectDayOption.ONEDAY);
 	}
 
 	/** 
@@ -189,14 +189,14 @@ public class Calendar_Task extends CalendarBase {
 		info("Go to Intranet Calendar");
 		Long ab = (Long) ((JavascriptExecutor) driver).executeScript("return arguments[0].scrollTop;", waitForAndGetElement(ELEMENT_WORKING_PANE));
 		info("Add a new task " + ab);
-//		tsk.addQuickTask(CALENDAR06,CALENDAR06,getDate(0,"MM/dd/yyyy"),getDate(0,"MM/dd/yyyy"),false);
+		tsk.addQuickTask(CALENDAR06,CALENDAR06, getDate(0,"MM/dd/yyyy"), getDate(0,"MM/dd/yyyy"), false);
 
 		info("Drag & drop a task");
-		waitForAndGetElement(By.xpath(ELEMENT_EVENT_TASK_ONE_DAY.replace("${taskName}", CALENDAR06)),50000);
-		dragAndDropToObject(By.xpath(ELEMENT_EVENT_TASK_ONE_DAY.replace("${taskName}", CALENDAR06)),ELEMENT_TARGET_DATE);
+		waitForAndGetElement(By.xpath(ELEMENT_EVENT_TASK_ONE_DAY.replace("${taskName}", CALENDAR06)), 50000);
+		dragAndDropToObject(By.xpath(ELEMENT_EVENT_TASK_ONE_DAY.replace("${taskName}", CALENDAR06)), ELEMENT_TARGET_DATE);
 
 		info("Restore data");
-		deleteEventTask(CALENDAR06);
+		deleteEventTask(CALENDAR06, selectDayOption.ONEDAY);
 	}
 
 	/** 

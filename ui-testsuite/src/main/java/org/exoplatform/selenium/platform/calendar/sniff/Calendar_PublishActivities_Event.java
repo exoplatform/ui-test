@@ -18,7 +18,6 @@ import org.exoplatform.selenium.platform.social.SpaceManagement;
  * @author thuntn
  * @date 29 Oct 2013 
  */
-
 public class Calendar_PublishActivities_Event extends CalendarBase{
 
 	ManageAccount acc;
@@ -26,6 +25,7 @@ public class Calendar_PublishActivities_Event extends CalendarBase{
 	SpaceManagement sp;
 	NavigationToolbar toolBar;
 	HomePageActivity homeAct;
+	
 	@BeforeMethod
 	public void setUpBeforeTest(){
 		initSeleniumTest();
@@ -46,7 +46,9 @@ public class Calendar_PublishActivities_Event extends CalendarBase{
 		driver.manage().deleteAllCookies();
 		driver.quit();
 	}
-	/**Publish activity for Event of Group Calendar of a Space, and delete event of space calendar
+	
+	/**
+	 * Publish activity for Event of Group Calendar of a Space, and delete event of space calendar
 	 * CaseID 74734, CaseID 74739
 	 */
 	@Test
@@ -82,7 +84,8 @@ public class Calendar_PublishActivities_Event extends CalendarBase{
 		sp.deleteSpace(space);
 	}
 	
-	/**Update activity for event of Space Calendar- event is updated as all day event a space
+	/**
+	 * Update activity for event of Space Calendar- event is updated as all day event a space
 	 * CaseID 74735
 	 * https://jira.exoplatform.org/browse/CAL-407
 	 */
@@ -96,7 +99,7 @@ public class Calendar_PublishActivities_Event extends CalendarBase{
 		sp.goToAllSpaces();
 		sp.addNewSpace(space,space);
 		sp.goToSpaceMenu("Agenda");
-		
+
 		//Add an event
 		evt.addQuickEvent(event, event, null, null, false);
 		evt.editEvent(event,null, null, null, null, null, true);
@@ -111,7 +114,8 @@ public class Calendar_PublishActivities_Event extends CalendarBase{
 		sp.deleteSpace(space);
 	}
 	
-	/**Update activity for event of Space Calendar - event summary
+	/**
+	 * Update activity for event of Space Calendar - event summary
 	 * CaseID 74736
 	 */
 	@Test
@@ -142,7 +146,8 @@ public class Calendar_PublishActivities_Event extends CalendarBase{
 		sp.deleteSpace(space);
 	}
 	
-	/**Update activity for event of Space Calendar - event description
+	/**
+	 * Update activity for event of Space Calendar - event description
 	 * CaseID 74737
 	 */
 	@Test
@@ -173,7 +178,8 @@ public class Calendar_PublishActivities_Event extends CalendarBase{
 		sp.deleteSpace(space);
 	}
 	
-	/**Update activity for event of Space Calendar - event location
+	/**
+	 * Update activity for event of Space Calendar - event location
 	 * CaseID 74738
 	 */
 	@Test
@@ -204,7 +210,8 @@ public class Calendar_PublishActivities_Event extends CalendarBase{
 		sp.deleteSpace(space);
 	}
 	
-	/**Redirect to Calendar Application
+	/**
+	 * Redirect to Calendar Application
 	 * CaseID 75290
 	 */
 	@Test
@@ -217,7 +224,7 @@ public class Calendar_PublishActivities_Event extends CalendarBase{
 		sp.goToAllSpaces();
 		sp.addNewSpace(space,space);
 		sp.goToSpaceMenu("Agenda");
-		
+
 		//Add an event
 		evt.addQuickEvent(event, event, null, null, false);
 		
@@ -228,7 +235,9 @@ public class Calendar_PublishActivities_Event extends CalendarBase{
 		waitForAndGetElement(evt.ELEMENT_EVENT_PREVIEW_TITLE.replace("${event}", event));
 		button.close();
 		waitForAndGetElement(sp.ELEMENT_SPACE_BREAD.replace("${space}", space));
-		waitForAndGetElement(ELEMENT_EVENT_TASK_ONE_DAY.replace("${taskName}", event));
+		if (isElementNotPresent(ELEMENT_EVENT_TASK_ONE_DAY.replace("${taskName}", event))){
+			waitForAndGetElement(ELEMENT_EVENT_TASK_ONE_DAY_PLF41.replace("${taskName}", event));
+		}
 		
 		//Delete space
 		sp.goToAllSpaces();

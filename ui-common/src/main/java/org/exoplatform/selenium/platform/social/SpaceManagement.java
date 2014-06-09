@@ -39,6 +39,17 @@ public class SpaceManagement extends SocialBase {
 	Button button;
 	ManageAlert magAlert;
 	ActionBar actBar;
+	SpaceSearch spSearch;
+	
+	public SpaceManagement(WebDriver dr){
+		driver = dr;
+		userGroup = new UserGroupManagement(driver);
+		dialog = new Dialog(driver);
+		button = new Button(driver);
+		magAlert = new ManageAlert(driver);
+		actBar = new ActionBar(driver);
+		spSearch = new SpaceSearch(driver);
+	}
 
 	//Go to My Spaces	> 
 	//Add space Form
@@ -101,16 +112,6 @@ public class SpaceManagement extends SocialBase {
 	public final By ELEMENT_SPACE_FAQ_PORTLET = By.id("UIFAQPortlet");
 	public final By ELEMENT_SPACE_MEMBER_PORTLET = By.id("UIMembersPortlet");
 	
-	
-	public SpaceManagement(WebDriver dr){
-		driver = dr;
-		userGroup = new UserGroupManagement(driver);
-		dialog = new Dialog(driver);
-		button = new Button(driver);
-		magAlert = new ManageAlert(driver);
-		actBar = new ActionBar(driver);
-	}
-
 	/**
 	 * Migrate to PLF 4
 	 * <li>Update by @author vuna2</li>
@@ -134,6 +135,7 @@ public class SpaceManagement extends SocialBase {
 		waitForAndGetElement(tab);
 		click(tab);
 	}
+	
 	/**
 	 * Migrate to PLF 4
 	 * <li>Update by @author vuna2</li>
@@ -254,9 +256,11 @@ public class SpaceManagement extends SocialBase {
 	public void deleteSpace(String name, int... params){
 		info("-- Deleting Space..." + name);
 		int iTimeout = params.length > 0 ? params[0] : DEFAULT_TIMEOUT;    
-		if (waitForAndGetElement(button.ELEMENT_SHOW_MORE_BUTTON, 5000, 0) != null){
-			click(button.ELEMENT_SHOW_MORE_BUTTON);
-		}
+//		if (waitForAndGetElement(button.ELEMENT_SHOW_MORE_BUTTON, 5000, 0) != null){
+//			click(button.ELEMENT_SHOW_MORE_BUTTON);
+//		}
+		spSearch.searchSpaceByName(name, true);
+		
 		doAction("Delete", name);    
 		magAlert = new ManageAlert(driver);
 		magAlert.acceptAlert();
@@ -297,6 +301,7 @@ public class SpaceManagement extends SocialBase {
 			waitForAndGetElement(By.xpath(ELEMENT_VERIFY_SPACE_NAME_ACTIVITY.replace("${spaceName}", newName)));
 		}
 	}
+	
 	/**
 	 * Go to edit form of a space
 	 * @param name : Space name
@@ -306,6 +311,7 @@ public class SpaceManagement extends SocialBase {
 		doAction("Edit", name);
 		waitForAndGetElement(ELEMENT_SPACE_SETTING_MENU,60000);    
 	}
+	
 	/**
 	 * Change avatar of a space
 	 * @param file : File path of new avatar
@@ -414,4 +420,3 @@ public class SpaceManagement extends SocialBase {
 		Utils.pause(2000);
 	}
 }
-

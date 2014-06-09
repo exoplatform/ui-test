@@ -14,11 +14,9 @@ import org.exoplatform.selenium.platform.calendar.Event;
 import org.exoplatform.selenium.platform.calendar.Task;
 
 /**
- * 
  * @author havtt
  * @date 25 Oct 2013
  */
-
 public class Calendar_Event extends CalendarBase {
 
 	ManageAccount acc;
@@ -42,7 +40,6 @@ public class Calendar_Event extends CalendarBase {
 		driver.manage().deleteAllCookies();
 		driver.quit();
 	}
-
 
 	/**
 	 * Add new event in Personal Calendar
@@ -165,11 +162,14 @@ public class Calendar_Event extends CalendarBase {
 
 		info("Add a new event");
 		evt.addQuickEvent(EVENT05,EVENT05,getDate(0,"MM/dd/yyyy"),getDate(0,"MM/dd/yyyy"),false);
-		waitForAndGetElement(ELEMENT_EVENT_TASK_ONE_DAY.replace("${taskName}", EVENT05));
+		//waitForAndGetElement(ELEMENT_EVENT_TASK_ONE_DAY.replace("${taskName}", EVENT05));
+		if (isElementNotPresent(ELEMENT_EVENT_TASK_ONE_DAY.replace("${taskName}", EVENT05))){
+			waitForAndGetElement(ELEMENT_EVENT_TASK_ONE_DAY_PLF41.replace("${taskName}", EVENT05));
+		}
 		
 		info("Delete an event");
 		Utils.pause(5000);
-		deleteEventTask(EVENT05);
+		deleteEventTask(EVENT05, selectDayOption.ONEDAY);
 	}
 
 
@@ -185,13 +185,15 @@ public class Calendar_Event extends CalendarBase {
 		evt.addQuickEvent(EVENT06,EVENT06,getDate(0,"MM/dd/yyyy"),getDate(0,"MM/dd/yyyy"),false);
 
 		info("Drag & drop a task");
-		waitForAndGetElement(By.xpath(ELEMENT_EVENT_TASK_ONE_DAY.replace("${taskName}", EVENT06)),50000);
-		dragAndDropToObject(By.xpath(ELEMENT_EVENT_TASK_ONE_DAY.replace("${taskName}", EVENT06)),ELEMENT_TARGET_DATE);
-
+		if (isElementNotPresent(ELEMENT_EVENT_TASK_ONE_DAY.replace("${taskName}", EVENT06))){
+			dragAndDropToObject(By.xpath(ELEMENT_EVENT_TASK_ONE_DAY_PLF41.replace("${taskName}", EVENT06)), ELEMENT_TARGET_DATE);
+		}else{
+			//waitForAndGetElement(By.xpath(ELEMENT_EVENT_TASK_ONE_DAY.replace("${taskName}", EVENT06)), 50000);
+			dragAndDropToObject(By.xpath(ELEMENT_EVENT_TASK_ONE_DAY.replace("${taskName}", EVENT06)), ELEMENT_TARGET_DATE);
+		}
 		info("Restore data");
-		deleteEventTask(EVENT06);
+		deleteEventTask(EVENT06, selectDayOption.ONEDAY);
 	}
-
 
 	/**
 	 * Edit event in Group Calendar
@@ -333,7 +335,6 @@ public class Calendar_Event extends CalendarBase {
 
 		info("==Restore data==");
 		deleteCalendar(CAL_10);
-
 	}
 
 	/** 

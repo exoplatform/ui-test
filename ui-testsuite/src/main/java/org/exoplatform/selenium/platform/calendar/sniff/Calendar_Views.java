@@ -15,8 +15,6 @@ import org.exoplatform.selenium.platform.calendar.Task;
  * @author havtt
  * @date 23 Oct 2013
  */
-
-
 public class Calendar_Views extends CalendarBase{
 
 	ManageAccount acc;
@@ -43,8 +41,8 @@ public class Calendar_Views extends CalendarBase{
 		driver.quit();
 	}
 
-
-	/** Check displaying added task/event in all views
+	/** 
+	 * Check displaying added task/event in all views
 	 * CaseID 68658
 	 */
 	@Test
@@ -59,8 +57,10 @@ public class Calendar_Views extends CalendarBase{
 
 		info("Switch to Day view");
 		click(ELEMENT_BUTTON_DAY_VIEW);
-		waitForAndGetElement(EVENT_DAY_VIEW.replace("${eventTitle}",EVENT_NAME_01),50000);
-
+		if (isElementNotPresent(EVENT_DAY_VIEW.replace("${eventTitle}",EVENT_NAME_01))){
+			waitForAndGetElement(EVENT_DAY_VIEW_PLF41.replace("${eventTitle}",EVENT_NAME_01),50000);
+		}
+		
 		info("Switch to Month view");
 		click(ELEMENT_BUTTON_MONTH_VIEW);
 		waitForAndGetElement(EVENT_MONTH_VIEW.replace("${eventTitle}",EVENT_NAME_01),50000);
@@ -81,7 +81,8 @@ public class Calendar_Views extends CalendarBase{
 		deleteEventTask(EVENT_NAME_01);
 	}
 
-	/** Check category filter in Week view
+	/** 
+	 * Check category filter in Week view
 	 * CaseID 75247
 	 */
 	@Test
@@ -114,7 +115,8 @@ public class Calendar_Views extends CalendarBase{
 
 	}
 
-	/** Check category filter in List view
+	/** 
+	 * Check category filter in List view
 	 * CaseID 75248
 	 */
 	@Test
@@ -144,7 +146,5 @@ public class Calendar_Views extends CalendarBase{
 		info("Restore data");
 		click(ELEMENT_BUTTON_WEEK_VIEW);
 		deleteEventTask(EVENT_NAME_03);
-
 	}
 }
-

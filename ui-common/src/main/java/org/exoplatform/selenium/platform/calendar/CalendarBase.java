@@ -142,8 +142,11 @@ public class CalendarBase extends PlatformBase {
 
 	//-----------Event/Task -----------
 	public String ELEMENT_EVENT_TASK_ALL_DAY = "//*[@id='UIWeekViewGridAllDay']//div[contains(text(),'${event}')]";
+	public String ELEMENT_EVENT_TASK_ALL_DAY_PLF41 = "//*[@id='UIWeekViewGridAllDay']//div[contains(@class,'eventAlldayContent') and contains(.,'${event}')]";
 	public String ELEMENT_EVENT_TASK_ONE_DAY = "//*[@id='UIWeekViewGrid']//div[contains(text(),'${taskName}')]/parent::div[@class='clearfix']/div[@class='eventContainerBar eventTitle pull-left']";
+	public String ELEMENT_EVENT_TASK_ONE_DAY_PLF41 = "//*[contains(@id, 'UIWeekView')]//div[contains(text(),'${taskName}')]";
 	public String ELEMENT_EVENT_TASK_WORKING_PANE = "//div[contains(@class,'eventContainer') and contains(text(),'${event}')]";
+	public String ELEMENT_EVENT_TASK_WORKING_PANE_PLF41 = "//*[@id='UIWeekViewGrid']//div[contains(@class,'eventAlldayContent') and contains(.,'${event}')]";
 	public By ELEMENT_EVENT_TASK_DELETE_MENU = By.xpath("//div[@id='tmpMenuElement']//a[@class='eventAction' and contains(@href,'Delete')]");
 	public String MSG_EVENT_TASK_DELETE = "Are you sure you want to delete this event/task?";
 
@@ -196,6 +199,7 @@ public class CalendarBase extends PlatformBase {
 
 	public String EVENT_WEEK_VIEW = "//*[@id='UIWeekViewGridAllDay']//div[contains(text(),'${eventTitle}')]";
 	public String EVENT_DAY_VIEW = "//*[@id='UIDayView']//div[contains(text(),'${eventTitle}')]";
+	public String EVENT_DAY_VIEW_PLF41 = "//*[@id='UIDayView']//div[contains(text(),'${eventTitle}')]/..";
 	public String EVENT_MONTH_VIEW = "//*[@id='UIMonthView']//span[contains(text(),'${eventTitle}')]";
 	public String EVENT_LIST_VIEW = "//*[@id='UIListUsers']//span[contains(text(),'${eventTitle}')]";
 	public String EVENT_WORK_WEEK_VIEW = "//*[@id='UIWeekViewGridAllDay']//div[contains(text(),'${eventTitle}')]";
@@ -546,48 +550,78 @@ public class CalendarBase extends PlatformBase {
 	public enum selectDayOption{
 		ONEDAY, ALLDAY;
 	}
+
 	/**
 	 * Delete an event or task
-	 * @param event: name of event or task
-	 * @param options: optional, if not pass, this function consider the event/task as all day
-	 * 				= selectDayOption.ALLDAY: this function consider the event/task as all day
-	 * 				= selectDayOption.ONEDAY: this function consider the event/task as one day
+	 *
+	 * @param event
+	 * name of event or task
+	 * @param options
+	 * optional parameter, if not be set, the event/task will be automatically set as "all day" event/task
+	 * = selectDayOption.ALLDAY: this function consider the event/task as all day
+	 * = selectDayOption.ONEDAY: this function consider the event/task as one day
 	 */
 	public void deleteEventTask(String event, selectDayOption... options){
 		alert = new ManageAlert(driver);
+		button = new Button(driver);
 		waitForAndGetElement(ELEMENT_WORKING_PANE_23H);
-		selectDayOption optDay = (waitForAndGetElement(ELEMENT_EVENT_TASK_ONE_DAY.replace("${taskName}", event), 10000,0) == null) ? selectDayOption.ALLDAY : selectDayOption.ONEDAY;
+		selectDayOption optDay =  options.length > 0 ? options[0]: selectDayOption.ALLDAY;
+		//(waitForAndGetElement(ELEMENT_EVENT_TASK_ONE_DAY.replace("${taskName}", event), 5000,0) == null) ? selectDayOption.ALLDAY : selectDayOption.ONEDAY;
 
 		info("--Delete an Event/Task--");
 		switch (optDay) {
 		case ALLDAY:
-			if(waitForAndGetElement(ELEMENT_EVENT_TASK_ALL_DAY.replace("${event}", event), 5000, 0) == null){
-				rightClickOnElement(ELEMENT_EVENT_TASK_WORKING_PANE.replace("${event}", event),2);
-			}        
-			else{
-				rightClickOnElement(ELEMENT_EVENT_TASK_ALL_DAY.replace("${event}", event),2);
+			info("Deleting Event/Task by..." + optDay);
+			if(this.plfVersion.contains("4.0")){
+				if(waitForAndGetElement(ELEMENT_EVENT_TASK_ALL_DAY.replace("${event}", event), 5000, 0) == null){
+					rightClickOnElement(ELEMENT_EVENT_TASK_WORKING_PANE.replace("${event}", event), 2);
+				}
+				else{
+					rightClickOnElement(ELEMENT_EVENT_TASK_ALL_DAY.replace("${event}", event), 2);
+				}
+			}
+			else{ //this.plfVersion.contains("4.1")
+				if(waitForAndGetElement(ELEMENT_EVENT_TASK_ALL_DAY_PLF41.replace("${event}", event), 5000, 0) == null){
+					rightClickOnElement(ELEMENT_EVENT_TASK_WORKING_PANE_PLF41.replace("${event}", event), 2);
+				}
+				else{
+					rightClickOnElement(ELEMENT_EVENT_TASK_ALL_DAY_PLF41.replace("${event}", event), 2);
+				}
 			}
 			break;
 		case ONEDAY:
-			rightClickOnElement(ELEMENT_EVENT_TASK_ONE_DAY.replace("${taskName}", event),2);
-			break;			
+			info("Deleting Event/Task by..." + optDay);
+			Utils.pause(3000);
+			if (isElementNotPresent(ELEMENT_EVENT_TASK_ONE_DAY.replace("${taskName}", event))){
+				rightClickOnElement(ELEMENT_EVENT_TASK_ONE_DAY_PLF41.replace("${taskName}", event), 2);
+			}else{
+				rightClickOnElement(ELEMENT_EVENT_TASK_ONE_DAY.replace("${taskName}", event), 2);
+			}
+			break;	
 		default:
 			break;
 		}
 		click(ELEMENT_EVENT_TASK_DELETE_MENU);
-		alert.waitForConfirmation(MSG_EVENT_TASK_DELETE);
-		Utils.pause(3000);
+		alert.verifyAlertMessage(MSG_EVENT_TASK_DELETE);
+		button.yes();
+		driver.navigate().refresh();
+		Utils.pause(1000);
 		if (optDay.equals(selectDayOption.ALLDAY)){
-			waitForElementNotPresent(ELEMENT_EVENT_TASK_ALL_DAY.replace("${event}", event),60000);
-			waitForElementNotPresent(ELEMENT_EVENT_TASK_WORKING_PANE.replace("${event}", event),60000);
+			if(this.plfVersion.contains("4.0")){
+				waitForElementNotPresent(ELEMENT_EVENT_TASK_ALL_DAY.replace("${event}", event), 5000);
+				waitForElementNotPresent(ELEMENT_EVENT_TASK_WORKING_PANE.replace("${event}", event), 5000);
+			}
+			else{
+				waitForElementNotPresent(ELEMENT_EVENT_TASK_ALL_DAY_PLF41.replace("${event}", event), 5000);
+				waitForElementNotPresent(ELEMENT_EVENT_TASK_WORKING_PANE_PLF41.replace("${event}", event), 5000);
+			}
 		}else if (optDay.equals(selectDayOption.ONEDAY)){
-			waitForElementNotPresent(ELEMENT_EVENT_TASK_ONE_DAY.replace("${taskName}", event),60000);
+			waitForElementNotPresent(ELEMENT_EVENT_TASK_ONE_DAY.replace("${taskName}", event));
 		}	
 	}
 
 	/*============Add, Edit, Delete a Calendar ===========*/
-
-
+	
 	/** Delete calendar
 	 * @author thuntn
 	 * @param name: name of calendar
@@ -759,9 +793,11 @@ public class CalendarBase extends PlatformBase {
 	 */
 	public void deleteEventCategory(String categoryName){
 		alert = new ManageAlert(driver);
+		button = new Button(driver);
 		waitForAndGetElement(ELEMENT_LIST_DELETE_EVENT_BUTTON.replace("${categoryName}",categoryName));
 		click(ELEMENT_LIST_DELETE_EVENT_BUTTON.replace("${categoryName}",categoryName));
 		alert.acceptAlert();
+		button.yes();
 		waitForElementNotPresent(ELEMENT_LIST_DELETE_EVENT_BUTTON.replace("${categoryName}",categoryName));
 		click(ELEMENT_ADD_EVENT_CATEGORY_BUTTON_CLOSE);	
 	}

@@ -69,14 +69,17 @@ public class Event extends CalendarBase{
 	 * @param oldEvent: old name of event
 	 */
 	public void goToEditEventForm(String oldEvent){
-		if(waitForAndGetElement(ELEMENT_EVENT_TASK_ONE_DAY.replace("${taskName}", oldEvent),15000,0) != null)
-			rightClickOnElement(ELEMENT_EVENT_TASK_ONE_DAY.replace("${taskName}", oldEvent),2);
-		else
-			rightClickOnElement(ELEMENT_EVENT_TASK_ALL_DAY.replace("${event}", oldEvent),2);
+		if(waitForAndGetElement(ELEMENT_EVENT_TASK_ONE_DAY.replace("${taskName}", oldEvent), 15000, 0) != null){
+			rightClickOnElement(ELEMENT_EVENT_TASK_ONE_DAY.replace("${taskName}", oldEvent), 2);
+		}else if (waitForAndGetElement(ELEMENT_EVENT_TASK_ONE_DAY_PLF41.replace("${taskName}", oldEvent), 15000, 0) != null){
+			rightClickOnElement(ELEMENT_EVENT_TASK_ONE_DAY_PLF41.replace("${taskName}", oldEvent), 2);
+		}else{
+			rightClickOnElement(ELEMENT_EVENT_TASK_ALL_DAY.replace("${event}", oldEvent), 2);
+		}
 		click(ELEMENT_MENU_EVENT_EDIT);
 		waitForAndGetElement(ELEMENT_EDIT_EVENT_POPUP);
 	}
-	/******************End of go to**********************/
+	/******************End of Go To Edit An Event**********************/
 
 	/**************Input data form***************/
 	/**

@@ -18,7 +18,6 @@ import org.exoplatform.selenium.platform.social.SpaceManagement;
  * @author thuntn
  * @date 29 Oct 2013 
  */
-
 public class Calendar_PublishActivities_Task extends CalendarBase{
 
 	ManageAccount acc;
@@ -26,6 +25,7 @@ public class Calendar_PublishActivities_Task extends CalendarBase{
 	SpaceManagement sp;
 	NavigationToolbar toolBar;
 	HomePageActivity homeAct;
+	
 	@BeforeMethod
 	public void setUpBeforeTest(){
 		initSeleniumTest();
@@ -46,7 +46,9 @@ public class Calendar_PublishActivities_Task extends CalendarBase{
 		driver.manage().deleteAllCookies();
 		driver.quit();
 	}
-	/**Publish activity for Task of Group Calendar of Space, and Delete task for Space Calendar
+	
+	/**
+	 * Publish activity for Task of Group Calendar of Space, and Delete task for Space Calendar
 	 * CaseID 74740, CaseID 74744
 	 */
 	@Test
@@ -82,13 +84,14 @@ public class Calendar_PublishActivities_Task extends CalendarBase{
 		sp.deleteSpace(space);
 	}
 
-	/**Update activity for event of Space Calendar- event is updated as all day event a space
+	/**
+	 * Update activity for event of Space Calendar- event is updated as all day event a space
 	 * CaseID 74741
 	 */
 	@Test
 	public void test02_UpdateActivityForTaskWhenAddAttachment() {
-		String space = "Space74735";
-		String task = "Task74735";
+		String space = "Space74741";
+		String task = "Task74741";
 		String path = "TestData/Calendar_74741.xml";
 		info("Update activity for event of Space Calendar- event is updated as all day event a space");
 		
@@ -113,14 +116,15 @@ public class Calendar_PublishActivities_Task extends CalendarBase{
 		sp.deleteSpace(space);
 	}
 
-	/**Update Task for a Space Calendar - edit note
+	/**
+	 * Update Task for a Space Calendar - edit note
 	 * CaseID 74742
 	 */
 	@Test
 	public void test03_UpdateActivityForTaskWhenUpdateNote() {
-		String space = "Space74736";
-		String task = "Event74736";
-		String note = "new Event74736";
+		String space = "Space74742";
+		String task = "Event74742";
+		String note = "new Event74742";
 		info("Update activity for event of Space Calendar - event summary");
 		
 		//Add a space
@@ -142,13 +146,14 @@ public class Calendar_PublishActivities_Task extends CalendarBase{
 		sp.deleteSpace(space);
 	}
 
-	/**Update activity for event of Space Calendar - event description
+	/**
+	 * Update activity for event of Space Calendar - event description
 	 * CaseID 74743
 	 */
 	@Test
 	public void test04_UpdateActivityForTaskWhenUpdateTaskStatus() {
-		String space = "Space74737";
-		String task = "Task74737";
+		String space = "Space74743";
+		String task = "Task74743";
 		info("Update activity for event of Space Calendar - event description");
 
 		//Add space
@@ -172,7 +177,8 @@ public class Calendar_PublishActivities_Task extends CalendarBase{
 		sp.deleteSpace(space);
 	}
 
-	/**Redirect to Calendar Application
+	/**
+	 * Redirect to Calendar Application
 	 * CaseID 75291
 	 */
 	@Test

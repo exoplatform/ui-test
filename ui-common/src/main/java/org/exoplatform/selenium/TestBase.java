@@ -14,6 +14,7 @@ import java.util.Random;
 import java.util.Set;
 
 import org.apache.commons.io.FileUtils;
+import org.exoplatform.selenium.platform.ManageAccount;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.ElementNotVisibleException;
@@ -45,6 +46,14 @@ public class TestBase {
 	public int loopCount = 0;	
 	protected boolean ieFlag;	 
 	protected boolean chromeFlag;
+
+	/**
+	 * 4.0 : Version 4.0.x.
+	 * 4.1 : Version 4.1.x.
+	 * 4.2 : Version 4.2.x.
+	 * ect...
+	 */
+	protected String plfVersion = "";
 	public final int ACTION_REPEAT = 5;
 	public static boolean firstTimeLogin = false;
 	public Actions action;
@@ -54,7 +63,8 @@ public class TestBase {
 	//public final By ELEMENT_MENU_PAGE_LINK = By.linkText("Page");
 	//public final String AJAX_LOADING_MASK = "//div[@id='AjaxLoadingMask']";
 
-	public final String DEFAULT_BASEURL = "http://cloudtest06.exocloud.testlab1.exoplatform.vn/portal";
+	public final String DEFAULT_BASEURL = "http://localhost:8080/portal"; 
+	//"http://cloudtest06.exocloud.testlab1.exoplatform.vn/portal";
 
 
 	//"http://yopmail.netstg.exoplatform.org/portal";
@@ -67,20 +77,21 @@ public class TestBase {
 	//"http://localhost:8080/portal";
 
 	/*======= Welcome Screen (Term and Conditions) =====*/
-	By ELEMENT_FIRSTNAME_ACCOUNT = By.name("firstNameAccount");
-	By ELEMENT_LASTNAME_ACCOUNT = By.name("lastNameAccount");
-	By ELEMENT_EMAIL_ACCOUNT = By.name("emailAccount");
-	By ELEMENT_CONFIRM_PASS_ACCOUNT = By.name("confirmUserPasswordAccount");
-	By ELEMENT_ROOT_PASS_ACCOUNT = By.name("adminPassword");
-	By ELEMENT_ROOT_CONFIRM_PASS_ACCOUNT = By.name("confirmAdminPassword");
+	public final By ELEMENT_FIRSTNAME_ACCOUNT = By.name("firstNameAccount");
+	public final By ELEMENT_LASTNAME_ACCOUNT = By.name("lastNameAccount");
+	public final By ELEMENT_EMAIL_ACCOUNT = By.name("emailAccount");
+	public final By ELEMENT_CONFIRM_PASS_ACCOUNT = By.name("confirmUserPasswordAccount");
+	public final By ELEMENT_ROOT_PASS_ACCOUNT = By.name("adminPassword");
+	public final By ELEMENT_ROOT_CONFIRM_PASS_ACCOUNT = By.name("confirmAdminPassword");
 	public final By ELEMENT_AGREEMENT_CHECKBOX = By.xpath("//*[@id = 'agreement']");
-	By ELEMENT_INPUT_USERNAME = By.name("username"); 
+	public final By ELEMENT_INPUT_USERNAME = By.name("username"); 
 	public final By ELEMENT_CONTINUE_BUTTON = By.xpath("//button[text()='Continue' and @class='btn active']");
 	public final By ELEMENT_START_BUTTON = By.xpath("//button[text()='Start']");
-	By ELEMENT_SUBMIT_BUTTON = By.xpath("//*[text()='Submit']");
-	By ELEMENT_INPUT_PASSWORD = By.name("password");
-	By ELEMENT_ACCOUNT_NAME_LINK = By.xpath("//*[@id='UIUserPlatformToolBarPortlet']/a");
-
+	public final By ELEMENT_SUBMIT_BUTTON = By.xpath("//*[text()='Submit']");
+	public final By ELEMENT_INPUT_PASSWORD = By.name("password");
+	public final By ELEMENT_ACCOUNT_NAME_LINK = By.xpath("//*[@id='UIUserPlatformToolBarPortlet']/a");
+	public final By ELEMENT_PLF_INFORMATION = By.id("platformInfoDiv");
+	
 	public final String ELEMENT_TERM_CONDITION_BOX = "//div[@class='header' and text()='Terms and Conditions Agreement']/..";
 	public final By ELEMENT_CONTINUE_BUTTON_DISABLE = By.xpath("//button[text()='Continue' and @class='btn inactive']");
 	public final By ELEMENT_TERM_CONDITION_CONTENT = By.xpath("//div[@id='AccountSetup' and @class='content']");
@@ -110,10 +121,28 @@ public class TestBase {
 
 	public void initSeleniumTest(Object... opParams){
 		initSeleniumTestWithOutTermAndCondition();
-//		info("Term and conditions");
-//		termsAndConditions(opParams);
-//		info("End of term and conditions");
-		driver.get(baseUrl);
+		//		info("Term and conditions");
+		//		termsAndConditions(opParams);
+		//		info("End of term and conditions");
+		//      driver.get(baseUrl);
+		info("Term and conditions");
+		termsAndConditions(opParams);
+		info("End of term and conditions");
+
+		if(!firstTimeLogin){
+			info("This is not the first time login");
+			checkPLFVersion();
+		}
+		else{
+			info("This is the first time login");
+			driver.manage().window().maximize();
+			driver.navigate().refresh();
+			Utils.pause(2000);
+			ManageAccount acc = new ManageAccount(driver,this.plfVersion);
+			acc.signOut();
+			firstTimeLogin=false;
+			checkPLFVersion();
+		}
 	}
 
 
@@ -123,19 +152,6 @@ public class TestBase {
 	 * 
 	 */
 	public void termsAndConditions(Object... opParams){
-		//By ELEMENT_FIRSTNAME_ACCOUNT = By.name("firstNameAccount");
-		//By ELEMENT_LASTNAME_ACCOUNT = By.name("lastNameAccount");
-		//By ELEMENT_EMAIL_ACCOUNT = By.name("emailAccount");
-		//By ELEMENT_CONFIRM_PASS_ACCOUNT = By.name("confirmUserPasswordAccount");
-		//By ELEMENT_ROOT_PASS_ACCOUNT = By.name("adminPassword");
-		//By ELEMENT_ROOT_CONFIRM_PASS_ACCOUNT = By.name("confirmAdminPassword");
-		//By ELEMENT_AGREEMENT_CHECKBOX = By.xpath("//*[@id = 'agreement']");
-		//By ELEMENT_INPUT_USERNAME = By.name("username"); 
-		//By ELEMENT_CONTINUE_BUTTON = By.xpath("//button[text()='Continue']");
-		//By ELEMENT_START_BUTTON = By.xpath("//button[text()='Start']");
-		//By ELEMENT_SUBMIT_BUTTON = By.xpath("//*[text()='Submit']");
-		//By ELEMENT_INPUT_PASSWORD = By.name("password");
-		//By ELEMENT_ACCOUNT_NAME_LINK = By.xpath("//*[@id='UIUserPlatformToolBarPortlet']/a");
 		Boolean isCreateAccount = (Boolean)(opParams.length>0 ? opParams[0]:true);
 		driver.get(baseUrl);
 		info("Agreement page");
@@ -152,23 +168,34 @@ public class TestBase {
 			info("-- Administrator account (FQA) has been created successfully... --");
 		}else if (waitForAndGetElement(ELEMENT_ROOT_PASS_ACCOUNT, 5000, 0, 2) != null){
 			info("-- Creating an Admin account: FQA... --");
-			//type(ELEMENT_INPUT_USERNAME, "fqa", true);
-			//type(ELEMENT_FIRSTNAME_ACCOUNT, "FQA", true);
-			//type(ELEMENT_LASTNAME_ACCOUNT, "VN", true);
-			//type(ELEMENT_EMAIL_ACCOUNT, "fqa@exoplatform.com", true);	
-			//type(ELEMENT_INPUT_PASSWORD, "gtngtn", true);
-			//type(ELEMENT_CONFIRM_PASS_ACCOUNT, "gtngtn", true);	
-			//type(ELEMENT_ROOT_PASS_ACCOUNT, "gtngtn", true);
-			//type(ELEMENT_ROOT_CONFIRM_PASS_ACCOUNT, "gtngtn", true);
-			//click(ELEMENT_SUBMIT_BUTTON);
-			//waitForTextNotPresent("Create your account");
-			//click(ELEMENT_START_BUTTON);
-			//waitForAndGetElement(ELEMENT_ACCOUNT_NAME_LINK);
 			accountSetup();
 			firstTimeLogin = true;
 			info("-- Administrator account (FQA) has been created successfully... --");
 		} 
 		Utils.pause(1000);     
+	}
+
+	/**
+	 * Verify plf version
+	 */
+	public void checkPLFVersion(){
+		waitForTextNotPresent("terms and conditions agreement");
+		try{
+			info("Verify platform version");
+			String des = driver.findElement(ELEMENT_PLF_INFORMATION).getText();
+			if(des.contains("v4.0")){
+				this.plfVersion = "4.0";
+				info("Platform version 4.0.x");
+			}
+			else if(des.contains("v4.1")){
+				this.plfVersion="4.1";
+				info("Platform version 4.1.x");
+			}
+		}catch(Exception e){
+			info("Unknown platform version. Set to default version 4.0.x.");
+			this.plfVersion="4.0";
+		}
+
 	}
 
 	public void accountSetupWithoutGreeting(){
@@ -499,7 +526,7 @@ public class TestBase {
 		int waitTime = wait.length > 0 ? wait[0] : DEFAULT_TIMEOUT;
 		//info("--Verify message: " + message);
 		Utils.pause(500);
-//		waitForTextPresent(message, waitTime);
+		//		waitForTextPresent(message, waitTime);
 		waitForAndGetElement("//*[contains(text(),'"+message+"')]",waitTime);
 	}
 
@@ -695,7 +722,7 @@ public class TestBase {
 		if (baseUrl==null) baseUrl = DEFAULT_BASEURL;
 		action = new Actions(driver);
 		driver.get(baseUrl);
-//		termsAndConditions();
+		//		termsAndConditions();
 	}
 
 	/**function set driver to auto open new window when click link

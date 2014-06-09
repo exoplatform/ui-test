@@ -35,7 +35,8 @@ public class WikiBase extends PlatformBase{
 	public final String ELEMENT_WIKI_HEADER = "//*[@id='H${header}']"; 
 
 	//Company/Left panel > Wiki Link
-	public final By ELEMENT_WIKI_LINK=By.xpath("//ul[@class='uiCompanyNavigations']//li/a[text()='Wiki']");
+	public final By ELEMENT_WIKI_LINK = By.xpath("//ul[@class='uiCompanyNavigations']//li/a[text()='Wiki']");
+	public final By ELEMENT_WIKI_LINK_PLF41 = By.xpath("//*[@data-original-title='Wiki']");
 
 	//Add page menu
 	public final By ELEMENT_ADD_PAGE_LINK = By.xpath("//*[@id='UIWikiPageControlArea_PageToolBar']//div[contains(text(),'Add Page')]");
@@ -109,7 +110,7 @@ public class WikiBase extends PlatformBase{
 	//Upload file area
 	public By ELEMENT_UPLOAD_FILE = By.xpath("//div[@class='uiUploadInput']//*[@type='file']"); 
 	public final By ELEMENT_FRAME_UPLOAD=By.xpath("//div[@class='uiUploadInput']/iframe");
-	public final String ELEMENT_REMOVE_ATTACHMENT = "//a[text()='{$file}']/../../td/a/i[@class='uiIconDelete']";
+	public final String ELEMENT_REMOVE_ATTACHMENT = "//a[text()='{$file}']/../../td/a/i[contains(@class, 'uiIconDelete')]";
 
 	//Add page from template
 	public final String ELEMENT_SELECT_TEMPLATE_LINK = "//input[@value = '{$template}']";
@@ -283,7 +284,10 @@ public class WikiBase extends PlatformBase{
 	public void goToWiki(){
 		info("--Go to Wiki--");
 		Utils.pause(1000);
-		click(ELEMENT_WIKI_LINK);
+		if(waitForAndGetElement(ELEMENT_WIKI_LINK, 5000, 0)!= null)
+			click(ELEMENT_WIKI_LINK);
+		else
+			click(ELEMENT_WIKI_LINK_PLF41);
 		waitForAndGetElement(ELEMENT_TITLE_WIKI_HOME_LINK);	
 	}
 

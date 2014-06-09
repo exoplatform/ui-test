@@ -18,17 +18,21 @@ public class Button extends TestBase{
 
 	public final By ELEMENT_SHOW_MORE_BUTTON = By.xpath("//*[contains(text(), 'Show More')]"); 
 	public final By ELEMENT_NEXT_ARROW_BUTTON = By.className("uiIconNextArrow");
-	
+
 	//public final By ELEMENT_CONFIRM_BUTTON = By.xpath("//*[text()='Confirm']");
 	public final By ELEMENT_SAVE_CLOSE_BUTTON = By.xpath("//*[text()='Save & Close']");
 	public final By ELEMENT_SAVE_CLOSE_BUTTON_2 = By.xpath("//*[text()='Save And Close']");
 	//By.linkText("Save & Close");
 
 	public final By ELEMENT_OK_BUTTON = By.xpath("//*[text()='OK']");
+	public final By ELEMENT_NO_BUTTON = By.xpath("//*[text()='No']");
+	public final By ELEMENT_NO_BUTTON_AUX = By.xpath("//*[contains(@class, 'popup')]//*[contains(text(),'No')]");
+	public final By ELEMENT_YES_BUTTON = By.xpath("//*[normalize-space(text())='Yes']");
+	public final By ELEMENT_YES_BUTTON_AUX = By.xpath("//*[contains(@class, 'popup')]//*[contains(text(),'Yes')]");
 	public final By ELEMENT_APPLY_FRENCH_BUTTON = By.linkText("Appliquer");
 	public final By ELEMENT_APPLY_GERMAN_BUTTON = By.linkText("Anwenden");
 	public final By ELEMENT_APPLY_BUTTON = By.xpath("//*[text()='Apply']");
-			//By.linkText("Apply");
+	//By.linkText("Apply");
 	public final By ELEMENT_SAVE_BUTTON = By.xpath("//*[text()='Save']"); 
 	public final By ELEMENT_SAVE_BUTTON_POPUP_WINDOWS = By.xpath("//*[contains(@class, 'popup')]//*[text()='Save']");
 	public final By ELEMENT_CANCEL_BUTTON = By.xpath("//*[text()='Cancel']");
@@ -38,7 +42,7 @@ public class Button extends TestBase{
 	public final By ELEMENT_SELECT_BUTTON = By.xpath("//*[text()='Select']");
 	public final By ELEMENT_CONFIRM_BUTTON = By.xpath("//*[text()='Confirm']");
 	public final By ELEMENT_CLOSE_WINDOW = By.xpath("//*[contains(@class, 'uiIconClose') and @title = 'Close Window']");
-			//By.className("uiIconClose"); 
+	//By.className("uiIconClose"); 
 	public final By ELEMENT_MOVE_BUTTON = By.xpath("//button[contains(text(), 'Move')]");
 	public final By ELEMENT_FINISH_ICON = By.xpath("//a[@title='Finish']"); //Finish editing portlet icon
 	public final By ELEMENT_NEXT_BUTTON = By.xpath("//*[text()='Next']");	
@@ -58,7 +62,7 @@ public class Button extends TestBase{
 	public final By ELEMENT_REFRESH_BUTTON = By.xpath("//*[text()='refresh']");
 	public final By ELEMENT_RENAME_BUTTON = By.xpath("//*[text()='Rename']");
 	public final By ELEMENT_NEXT_PAGE_BUTTON = By.xpath("//*[@title='Next Page']");
-	
+
 
 	/*
 	 * General
@@ -80,6 +84,20 @@ public class Button extends TestBase{
 		Utils.pause(500);
 	}
 
+	public void no() {
+		waitForAndGetElement(ELEMENT_NO_BUTTON);
+		click(ELEMENT_NO_BUTTON);
+		Utils.pause(500);
+	}
+	public void yes() {	
+		if (waitForAndGetElement(ELEMENT_YES_BUTTON, 3000, 0) != null){
+			click(ELEMENT_YES_BUTTON);
+		}else if (waitForAndGetElement(ELEMENT_YES_BUTTON_AUX, 3000, 0) != null){
+			click(ELEMENT_YES_BUTTON_AUX);
+		}
+		Utils.pause(500);
+	}
+
 	public void close(){
 		waitForAndGetElement(ELEMENT_CLOSE_BUTTON);
 		click(ELEMENT_CLOSE_BUTTON);
@@ -94,7 +112,7 @@ public class Button extends TestBase{
 			click(ELEMENT_CANCEL_BUTTON_AUX);
 		}
 	}
-	
+
 	public void add(){
 		waitForAndGetElement(ELEMENT_ADD_BUTTON);
 		click(ELEMENT_ADD_BUTTON);
@@ -148,5 +166,5 @@ public class Button extends TestBase{
 		}
 		Utils.pause(1000);
 	}
-	
+
 }

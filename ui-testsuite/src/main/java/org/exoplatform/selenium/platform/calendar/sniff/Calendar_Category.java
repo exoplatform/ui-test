@@ -14,7 +14,6 @@ import org.exoplatform.selenium.platform.calendar.Task;
  * @author havtt
  * @date 22 Oct 2013
  */
-
 public class Calendar_Category extends CalendarBase{
 
 	ManageAccount acc;
@@ -39,8 +38,8 @@ public class Calendar_Category extends CalendarBase{
 		driver.quit();
 	}
 
-
-	/** Add event category
+	/** 
+	 * Add event category
 	 * CaseID 74832
 	 */
 	@Test
@@ -60,7 +59,8 @@ public class Calendar_Category extends CalendarBase{
 
 	}
 
-	/** Edit event category
+	/** 
+	 * Edit event category
 	 * CaseID 74833
 	 */
 	@Test
@@ -84,7 +84,8 @@ public class Calendar_Category extends CalendarBase{
 		deleteEventCategory(EVENT_CATEGORY_02);
 	}
 
-	/** Delete event category
+	/** 
+	 * Delete event category
 	 * CaseID 74834
 	 */
 	@Test
