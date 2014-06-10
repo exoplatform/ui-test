@@ -36,7 +36,7 @@ public class PLF_HomepageGadgets_WhoIsOnline extends Activity {
 		peopleC = new PeopleConnection(driver);
 		peopleS = new PeopleSearch(driver);
 		navToolBar = new NavigationToolbar(driver);
-		acc.signIn(DATA_USER1, DATA_PASS);
+		acc.signIn(DATA_USER1, DATA_PASS);		
 	}
 
 	@AfterMethod
@@ -80,7 +80,7 @@ public class PLF_HomepageGadgets_WhoIsOnline extends Activity {
 
 		info("--Ignore Connection--");
 		navToolBar.goToConnectionPage();
-		peopleC.ignoreInvitation("Mary Williams");
+		peopleC.cancelRequest("John Smith");
 		info("--Close the 2nd browser window--");
 		Utils.pause(500);
 		newDriver.manage().deleteAllCookies();
