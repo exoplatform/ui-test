@@ -532,16 +532,12 @@ public class ForumManageTopic extends ForumBase {
 	 */
 	public void censorTopic(String topic){
 		By element_topic = By.xpath(ELEMENT_CENSOR_TOPIC_CHECKBOX.replace("${topic}", topic));
-
+		check(element_topic,2);
 		info("Approve a topic that is pending by censor");
 		waitForAndGetElement(ELEMENT_MODERATION);
 		click(ELEMENT_MODERATION);
 		waitForAndGetElement(magFor.ELEMENT_CENSOR_TOPIC);
 		click(magFor.ELEMENT_CENSOR_TOPIC);
-		waitForAndGetElement(ELEMENT_POPUP_CENSOR_TOPIC);
-		check(element_topic,2);
-		click(ELEMENT_CENSOR_APPROVE_BUTTON);
-		waitForElementNotPresent(ELEMENT_POPUP_CENSOR_TOPIC);
 		info("Approve a topic successfully");
 	}
 

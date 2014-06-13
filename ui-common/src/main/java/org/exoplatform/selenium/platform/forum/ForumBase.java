@@ -58,21 +58,21 @@ public class ForumBase extends PlatformBase {
 	public final By ELEMENT_USER_MANAGEMENT = By.xpath("//*[@id='ManageModerator']//*[@class='uiIconUser uiIconLightGray']");
 	public final By ELEMENT_MORE_BUTTON = By.xpath("//div[@class='actionIcon' and contains(.,'More')]");
 	public final By ELEMENT_PENDING = By.id("PendingJob");
-	
+
 	public String ELEMENT_FORUM_BREADCUMB = "//*[@id='UIBreadcumbs']/div[@class='pull-left']//a[@class='Selected' and contains(text(),'${forumName}')]";
 	public String ELEMENT_LATEST_TOPIC = "//a[contains(text(),'${forum}')]/ancestor::tr[@class='oncontextmenu']//a[contains(text(),'${topic}')]";
 	public String ELEMENT_FORUM_ON_HOMEPAGE = "//a[contains(text(),'${category}')]/ancestor::div[@id='UICategories']//tr[@class='oncontextmenu']//a[contains(text(),'${forum}')]";
 
 	//Administration menu
-	//	public final By ELEMENT_ADMINISTRATION = By.className("uiIconForumAdmin");
-	//	public final By ELEMENT_SORT_SETTING = By.linkText("Sort Settings");
-	//	public final By ELEMENT_CENSOR_KEYWORDS = By.linkText("Censor Keywords");
-	//	public final By ELEMENT_NOTIFICATIONS= By.linkText("Notifications");
-	//	public final By ELEMENT_BAN_IP = By.linkText("Banned IPs");		
-	//	public final By ELEMENT_BBCODE = By.linkText("BBCodes");
-	//	public final By ELEMENT_PRUNE = By.linkText("Pruning");
-	//	public final By ELEMENT_IMPORT = By.linkText("Import");
-	//	public final By ELEMENT_EXPORT = By.linkText("Export");
+	// public final By ELEMENT_ADMINISTRATION = By.className("uiIconForumAdmin");
+	// public final By ELEMENT_SORT_SETTING = By.linkText("Sort Settings");
+	// public final By ELEMENT_CENSOR_KEYWORDS = By.linkText("Censor Keywords");
+	// public final By ELEMENT_NOTIFICATIONS= By.linkText("Notifications");
+	// public final By ELEMENT_BAN_IP = By.linkText("Banned IPs");
+	// public final By ELEMENT_BBCODE = By.linkText("BBCodes");
+	// public final By ELEMENT_PRUNE = By.linkText("Pruning");
+	// public final By ELEMENT_IMPORT = By.linkText("Import");
+	// public final By ELEMENT_EXPORT = By.linkText("Export");
 
 	public final By ELEMENT_ADMINISTRATION = By.xpath("//*[@id='Administrations']//*[@class='uiIconForumAdmin uiIconForumLightGray']");
 	public final By ELEMENT_SORT_SETTING = By.xpath("//span[text()='Sort Settings']");
@@ -84,7 +84,7 @@ public class ForumBase extends PlatformBase {
 
 	//-----------------Watch/Unwatch screen-------------------------------------------
 	public final String MESSAGE_WATCH = "You are now watching this item.";
-	
+
 	public final String MESSAGE_UNWATCH = "You are no longer watching this item.";	
 	public static String REGISTER_MAIL_CONTENT = "Hi, you received this email because you registered for the Forum and Topic Watching notification.";
 
@@ -130,14 +130,14 @@ public class ForumBase extends PlatformBase {
 	//----------------Set Censor keywords form----------------------------------
 	public final By ELEMENT_CENSOR_POPUP = By.xpath("//span[@class='PopupTitle popupTitle' and text()='Censor Keywords']");
 	public final By ELEMENT_CENSOR_POPUP_PLF4_1 = By.xpath("//span[@class='PopupTitle popupTitle' and text()='Censor Keywords']");
-	public final By ELEMENT_CENSORED_KEYWORDS =  By.id("censorKeyword");
-	
+	public final By ELEMENT_CENSORED_KEYWORDS = By.id("censorKeyword");
+
 	//----------------Set Ban IP form--------------------------------------------
 	public final By ELEMENT_BAN_IP_POPUP = By.xpath("//span[@class='PopupTitle popupTitle' and text()='Banned IPs']");
 	public final By ELEMENT_BAN_IP_FILTER = By.id("searchIpBan");
 	public final By ELEMENT_BAN_IP_ADD = By.linkText("Add");
 	public final String ELEMENT_BAN_IP_ADDRESS = "newIpBan${No}";
-	public final String ELEMENT_BAN_IP_DELETE = "//*[contains(@data-action, '${ip}')  and @data-original-title='Delete']";
+	public final String ELEMENT_BAN_IP_DELETE = "//*[contains(@data-action, '${ip}') and @data-original-title='Delete']";
 	public final String MSG_DELETE_BAN_IP = "This IP will no longer be banned. Do you confirm ?";
 	public final By ELEMENT_START_TOPIC_DISABLE = By.xpath("//*[@id='UITopicContainer']//*[@data-original-title='Forum is closed for posting.']");
 	public final By ELEMENT_POST_DISABLE = By.xpath("//*[@data-original-title='You cannot reply to this topic.' and text()='Post Reply']");
@@ -169,7 +169,7 @@ public class ForumBase extends PlatformBase {
 
 	public final String MSG_BBCODE_BLANK_FIELD = "The field ${field} is required.";
 
-	//Action click code for add BBCode. 
+	//Action click code for add BBCode.
 	public enum ADDBBCODE_ACTION{
 		ADDBBCODE,
 		SAVE,
@@ -210,7 +210,7 @@ public class ForumBase extends PlatformBase {
 	public final By ELEMENT_IS_DISPLAY_SIGNATURE = By.id("IsDisplaySignature");
 	public final By ELEMENT_IS_DISPLAY_AVATAR = By.id("IsDisplayAvatar");
 	public final By ELEMENT_WATCH_TOPIC_START = By.id("AutoWatchMyTopics");
-	public final By ELEMENT_WATCH_TOPIC_POST =  By.id("AutoWatchTopicIPost");
+	public final By ELEMENT_WATCH_TOPIC_POST = By.id("AutoWatchTopicIPost");
 	public final By ELEMENT_AVATAR_UPDATE_BUTTON = By.xpath("//*[@id='Avatar']//button");
 
 	//Forum settings tab
@@ -225,7 +225,7 @@ public class ForumBase extends PlatformBase {
 	//My subcription tab
 	public final By ELEMENT_SETTING_MYSCRIPTIONS_TAB = By.linkText("My Subscriptions");
 	public final By ELEMENT_FEED_URL_TEXTBOX = By.id("RSSLink");
-	public final String ELEMENT_SETTING_EMAIL_CHECKBOX = "//a[contains(text(), '${forum}')]/../../../*//input[contains(@id, 'EMAILforum')]"; 
+	public final String ELEMENT_SETTING_EMAIL_CHECKBOX = "//a[contains(text(), '${forum}')]/../../../*//input[contains(@id, 'EMAILforum')]";
 	public final String ELEMENT_SETTING_MAIL_DELETE = "//a[contains(text(), '${forum}')]/../../../*//div[@class='DeleteIcon']";
 	public final By ELEMENT_SETTING_EMAIL_ADDRESS = By.id("EmailAddress");
 	public final String ELEMENT_CHECKBOX_EMAIL = "//*[contains(text(), '${name}')]/../..//input[contains(@id, 'EMAILforumCategory')]";
@@ -238,12 +238,12 @@ public class ForumBase extends PlatformBase {
 	public final By ELEMENT_FEED_CONTENT = By.id("feedContent");
 	public final String ELEMENT_MY_SUBSCRIPTION_OBJECT_WATCH = "//div[@id='UIForumUserSettingForm']//a[contains(text(),'${object}')]" ;
 	public final String ELEMENT_RSS_TOPIC_LINK = "//xhtml:span[text()='${topic}']";
-	
+
 	public final By ELEMENT_MY_SUBSCRIPTION_NEXT_PAGE = By.xpath("//div[@id='ForumUserWatches-tab']//*[@data-original-title='Next Page']");
 	public final By ELEMENT_MY_SUBSCRIPTION_TOTAL_PAGE = By.xpath("//div[@id='ForumUserWatches-tab']//span[@class='pagesTotalNumber']");
 
 	//---------------------Notifications------------------
-	public final By ELEMENT_NOTIFICATION_LINK = By.xpath("//*[@id='Administrations']//*[@class='uiIconNotification']"); 
+	public final By ELEMENT_NOTIFICATION_LINK = By.xpath("//*[@id='Administrations']//*[@class='uiIconNotification']");
 	public final By ELEMENT_NOTIFY_FRAME=By.xpath("//*[@id='xEditingArea']/iframe");
 	public final String ELEMENT_NOTIFY_TEXT= "New Posts Notification";
 	public final By ELEMENT_NOTIFY_FRAME_UP=By.id("notifyEmail___Frame");
@@ -274,13 +274,13 @@ public class ForumBase extends PlatformBase {
 	public final By ELEMENT_FORUM_PORTLET_SAVE_BUTTON = By.cssSelector("#UISettingEditModeForm.UIForm div.uiAction button.btn");
 
 	//attach file popup
-//	public final By ELEMENT_POPUP_UPLOAD_FILE = By.xpath("//span[@class='PopupTitle' and text()='Attach File']");
+	// public final By ELEMENT_POPUP_UPLOAD_FILE = By.xpath("//span[@class='PopupTitle' and text()='Attach File']");
 	public final By ELEMENT_POPUP_UPLOAD_FILE = By.xpath("//span[@class='PopupTitle popupTitle' and text()='Attach File']");
-//	public final By ELEMENT_ATTACH_FILE = By.linkText("Attach Files");
-//	public final By ELEMENT_ATTACH_FILE =By.xpath("//button[@class='btn' and text()='Attach Files']");
+	// public final By ELEMENT_ATTACH_FILE = By.linkText("Attach Files");
+	// public final By ELEMENT_ATTACH_FILE =By.xpath("//button[@class='btn' and text()='Attach Files']");
 	public final By ELEMENT_ATTACH_FILE =By.xpath("//*[@id='ThreadContent']/div/div[3]/div/button");
 	public final By ELEMENT_ATTACHMENT_FILE_INPUT = By.name("file");
-//	public final By ELEMENT_ATTACHMENT_SAVE_BUTTON = By.xpath("//*[@id='UIAttachmentForm']//*[text()='Save']");
+	// public final By ELEMENT_ATTACHMENT_SAVE_BUTTON = By.xpath("//*[@id='UIAttachmentForm']//*[text()='Save']");
 	public final By ELEMENT_ATTACHMENT_SAVE_BUTTON = By.xpath("//button[@class='btn' and text()='Save'");
 
 	//-----------------------User Management--------------------------------------------//
@@ -331,7 +331,7 @@ public class ForumBase extends PlatformBase {
 
 	//Gmail
 	public String ELEMENT_GMAIL_EMAIL = "//span/b[text()='[${category}][${forum}] ${topic}']";
-		
+
 	//Pending job
 	public final By ELEMENT_PENDING_JOB_POPUP = By.xpath("//span[@class='PopupTitle popupTitle' and text()='Waiting for Approval']");
 	public By ELEMENT_APPROVE_PENDING_JOB = By.xpath("//*[text()='Approve']");
@@ -344,8 +344,8 @@ public class ForumBase extends PlatformBase {
 	 * @param frame2
 	 * @param data
 	 * @param validate = null: clear data before
-	 *                 = true: clear data before
-	 *                 = false: not clear data before
+	 * = true: clear data before
+	 * = false: not clear data before
 	 */
 	public void inputDataToFrameInFrame(By frame1, By frame2, String data, boolean...validate){
 		boolean valid = validate.length > 0 ? validate[0]: true;
@@ -367,7 +367,7 @@ public class ForumBase extends PlatformBase {
 					inputsummary.sendKeys(data); break;
 				}
 				if(verify){
-					if (data.equals(inputsummary.getText())) 
+					if (data.equals(inputsummary.getText()))
 						break;
 				}else break;
 				switchToParentWindow();
@@ -384,7 +384,7 @@ public class ForumBase extends PlatformBase {
 			loopCount = 0;
 		}
 	}
-	
+
 	/** function: Attach file in attach popup
 	 * @author lientm
 	 * @param number: number of upload container that need upload file
@@ -398,9 +398,9 @@ public class ForumBase extends PlatformBase {
 			element.sendKeys(Utils.getAbsoluteFilePath("TestData/" + file[i]));
 			waitForAndGetElement("//*[@class='fileNameLabel' and contains(text(),'" + file[i] + "')]");
 		}
-//		click(ELEMENT_ATTACHMENT_SAVE_BUTTON);
+		// click(ELEMENT_ATTACHMENT_SAVE_BUTTON);
 		button.save();
-//		waitForElementNotPresent(ELEMENT_ATTACHMENT_SAVE_BUTTON);
+		// waitForElementNotPresent(ELEMENT_ATTACHMENT_SAVE_BUTTON);
 	}
 
 	public void goToForums(){
@@ -415,7 +415,7 @@ public class ForumBase extends PlatformBase {
 		waitForElementNotPresent(ELEMENT_HOME_BUTTON);
 	}
 
-	public void watchItem(boolean watch){		
+	public void watchItem(boolean watch){	
 		if (watch){
 			if (waitForAndGetElement(ELEMENT_WATCH, DEFAULT_TIMEOUT, 0) != null){
 				info("Watch item");
@@ -426,7 +426,7 @@ public class ForumBase extends PlatformBase {
 				info("Watch item successfully");
 			}else {
 				info("Not found watch link");
-			}			
+			}	
 		} else {
 			if (waitForAndGetElement(ELEMENT_UNWATCH, DEFAULT_TIMEOUT, 0) != null) {
 				info("Unwatch item");
@@ -503,7 +503,7 @@ public class ForumBase extends PlatformBase {
 	 * @param scope
 	 * @param key
 	 * @return = true: have result return
-	 * 		   = false: not have result return
+	 * = false: not have result return
 	 */
 	public void advancedSearch(String searchIn, String key, boolean scope, String...opts){
 		per = new PlatformPermission(driver);
@@ -636,7 +636,7 @@ public class ForumBase extends PlatformBase {
 
 	public void inputBanIP(String...ban){
 		if (ban.length > 0){
-			for (int i = 0; i < ban.length; i ++){ 
+			for (int i = 0; i < ban.length; i ++){
 				String temp[] = ban[i].split("\\.");
 				for (int j = 0; j < temp.length; j ++){
 					type(By.id(ELEMENT_BAN_IP_ADDRESS.replace("${No}", Integer.toString(j + 1))), temp[j], true);
@@ -697,7 +697,7 @@ public class ForumBase extends PlatformBase {
 			break;
 		default:
 			break;
-		}			
+		}	
 	}
 
 	/** function: modify a BBCode
@@ -769,11 +769,11 @@ public class ForumBase extends PlatformBase {
 		}else{
 			modifyBBcodeInfo(tag, replace, description, example, option);
 			waitForElementNotPresent(ELEMENT_BBCODE_ADD_POPUP);
-			//			waitForTextPresent(tag.toUpperCase());
+			// waitForTextPresent(tag.toUpperCase());
 			waitForAndGetElement("//*[contains(text(),'"+tag.toUpperCase()+"')]");
 			waitForElementNotPresent(ELEMENT_ALERT);
 			info("Add BBcode successfully");
-		}			
+		}	
 	}
 
 	/**
@@ -791,7 +791,7 @@ public class ForumBase extends PlatformBase {
 	 * @param tag: tag of BBCode
 	 * @param active: set active for BBCode
 	 * @param option = true: BBCode have option
-	 * 				 = false: BBCode does not have option
+	 * = false: BBCode does not have option
 	 */
 	public void activeBBcode(String tag, boolean active, boolean option){
 		By ELEMENT_ACTIVE_OPTION = By.xpath(ELEMENT_BBCODE_ACTIVE_HAVE_OPTION.replace("${tag}", tag));
@@ -799,7 +799,7 @@ public class ForumBase extends PlatformBase {
 		button = new Button(driver);
 		info("set active/deactive for BBcode");
 		if (tag != null && tag != ""){
-			if (option){				
+			if (option){	
 				WebElement act = waitForAndGetElement(ELEMENT_ACTIVE_OPTION, 10000, 1,2);
 				if ((active && act.isSelected() == false) || (!active && act.isSelected() == true)){
 					if (option) {
@@ -842,7 +842,7 @@ public class ForumBase extends PlatformBase {
 		waitForElementNotPresent(ELEMENT_BBCODE_EDIT_POPUP);
 		waitForElementNotPresent(ELEMENT_ALERT);
 		waitForAndGetElement("//label[contains(text(),'"+tagnew.toUpperCase()+"')]");
-		//		waitForTextPresent(tagnew.toUpperCase());
+		// waitForTextPresent(tagnew.toUpperCase());
 		info("Edit BBcode successfully");
 	}
 
@@ -850,7 +850,7 @@ public class ForumBase extends PlatformBase {
 	 * @author lientm
 	 * @param tag
 	 * @param option = true: BBCode have option
-	 * 				 = false: BBCode does not have option
+	 * = false: BBCode does not have option
 	 */
 	public void deleteBBcode(String tag, boolean...isDelete){
 		By ELEMENT_DELETE = By.xpath(ELEMENT_BBCODE_DELETE_ICON.replace("${tag}", tag.toUpperCase()));
@@ -889,7 +889,7 @@ public class ForumBase extends PlatformBase {
 	 * @param category: title of category
 	 * @param forum: title of forum
 	 * @param activeDay: number of day active
-	 * @param dayType: type 
+	 * @param dayType: type
 	 * @param jobDay: number of job day
 	 * @param jobDayType: type
 	 */
@@ -919,7 +919,7 @@ public class ForumBase extends PlatformBase {
 	 * @author lientm
 	 * @param category: title of category
 	 * @param active = true: active
-	 * 				 = false: deactive
+	 * = false: deactive
 	 */
 	public void activePrune(String category, boolean active){
 		By ELEMENT_ACTIVE = By.xpath(ELEMENT_PRUNE_ACTIVE.replace("${category}", category));
@@ -953,7 +953,7 @@ public class ForumBase extends PlatformBase {
 	/**Change content of notifications
 	 * @author thuntn
 	 * @param prefix: = true if check Add a prefix to notification field
-	 * 				  = false if else
+	 * = false if else
 	 * @param subject: text to add to Subject notification field
 	 * @param content: text to add to content field
 	 */
@@ -996,10 +996,10 @@ public class ForumBase extends PlatformBase {
 	public void compareString(String[] temp, String[] content){
 		for (int i = 0; i < content.length; i ++){
 			info("String1: " + temp[i] + "--- String2: " + content[i]);
-			assert temp[i].contains(content[i]): "Fail! 2 Strings are different from each other"; 
+			assert temp[i].contains(content[i]): "Fail! 2 Strings are different from each other";
 		}
 	}
-	/**Remove empty element of array 
+	/**Remove empty element of array
 	 * @author thuntn
 	 * @param arr
 	 * @return
@@ -1064,7 +1064,7 @@ public class ForumBase extends PlatformBase {
 		}
 		if (opt.length > 0){
 			if (opt[0]){
-				check(ELEMENT_IS_DISPLAY_SIGNATURE, 2);			
+				check(ELEMENT_IS_DISPLAY_SIGNATURE, 2);	
 			}else {
 				uncheck(ELEMENT_IS_DISPLAY_SIGNATURE, 2);
 			}
@@ -1191,12 +1191,12 @@ public class ForumBase extends PlatformBase {
 	/**Function select option show panels in forum portlet setting
 	 * @author lientm
 	 * @param show: array option to show panels
-	 *        show[0]: show poll
-	 *        show[1]: show moderator
-	 *        show[2]: show quick reply
-	 *        show[3]: show legend icon reply
-	 *        show[4]: show rule panel
-	 *        show[5]: show statistic panel
+	 * show[0]: show poll
+	 * show[1]: show moderator
+	 * show[2]: show quick reply
+	 * show[3]: show legend icon reply
+	 * show[4]: show rule panel
+	 * show[5]: show statistic panel
 	 */
 	public void selectPanel(boolean... show){
 		button = new Button(driver);
@@ -1252,9 +1252,9 @@ public class ForumBase extends PlatformBase {
 	 * @author lientm
 	 * @param itemName: name of category/forum
 	 * @param isCategory: = true: category
-	 * 					  = false: forum
+	 * = false: forum
 	 * @param display: = true: check to display
-	 * 				   = false: uncheck
+	 * = false: uncheck
 	 */
 	public void selectDisplayCategoryAndForum(String itemName, boolean display){
 		button = new Button(driver);
@@ -1329,7 +1329,7 @@ public class ForumBase extends PlatformBase {
 		}
 		if (opt.length > 0){
 			if (opt[0]){
-				check(ELEMENT_USER_MANAGEMENT_FORUM_ADMIN, 2);			
+				check(ELEMENT_USER_MANAGEMENT_FORUM_ADMIN, 2);	
 			}else {
 				uncheck(ELEMENT_USER_MANAGEMENT_FORUM_ADMIN, 2);
 
@@ -1337,7 +1337,7 @@ public class ForumBase extends PlatformBase {
 		}
 		if (opt.length > 1){
 			if (opt[1]){
-				check(ELEMENT_IS_DISPLAY_SIGNATURE, 2);			
+				check(ELEMENT_IS_DISPLAY_SIGNATURE, 2);	
 			}else {
 				uncheck(ELEMENT_IS_DISPLAY_SIGNATURE, 2);
 			}
@@ -1374,7 +1374,7 @@ public class ForumBase extends PlatformBase {
 		waitForAndGetElement(ELEMENT_PRIVATE_MESSAGE_POPUP);
 	}
 	/** Input a private message form
-	 * 
+	 *
 	 * @param receiver: send message to this receiver
 	 * @param title
 	 * @param message
@@ -1386,9 +1386,9 @@ public class ForumBase extends PlatformBase {
 			type(ELEMENT_PRIVATE_MESSAGE_TITLE_INPUT,title,true);
 		if(message != null){
 			if(this.plfVersion.equalsIgnoreCase("4.0"))
-			inputDataToFrameInFrame(ELEMENT_PRIVATE_MESSAGE_FRAME1,ELEMENT_POST_MESSAGE_FRAME_2 , message, false);
-		else
-			inputDataToFrame(ELEMENT_PRIVATE_MESSAGE_FRAME_41, message);
+				inputDataToFrameInFrame(ELEMENT_PRIVATE_MESSAGE_FRAME1,ELEMENT_POST_MESSAGE_FRAME_2 , message, false);
+			else
+				inputDataToFrame(ELEMENT_PRIVATE_MESSAGE_FRAME_41, message);
 		}
 		switchToParentWindow();
 		click(ELEMENT_PRIVATE_MESSAGE_SEND_BUTTON);
@@ -1414,7 +1414,7 @@ public class ForumBase extends PlatformBase {
 	}
 
 	/**Delete message after Private message and tabs are opened
-	 * 
+	 *
 	 * @author thuntn
 	 * @param titleMessage
 	 */
@@ -1482,7 +1482,7 @@ public class ForumBase extends PlatformBase {
 		click(ELEMENT_PENDING);
 		waitForAndGetElement(ELEMENT_PENDING_JOB_POPUP);
 	}
-	
+
 	/**
 	 * Approve a pending job.
 	 * Created by khanhnt at Dec 11, 2013
