@@ -183,8 +183,8 @@ public class CalendarBase extends PlatformBase {
 	//-----------------Calendar Search-----------------------------
 	public String ELEMENT_INPUT_QUICK_SEARCH = "//div[@class='uiSearchForm uiSearchInput pull-right']//*[@id='value']";
 	public String ELEMENT_QUICK_SEARCH_FORM = "//div[@class='uiSearchForm uiSearchInput pull-right']";
-	public String ELEMENT_BUTTON_CLOSE_QUICK_SEARCH_RESULT = "//*[@id='UIListView']//button[contains(text(),'Close Search')]";
-	public String ELEMENT_BUTTON_OPEN_ADVANCE_SEARCH_FORM = "//*[@id='UIListView']//button[contains(text(),'Advanced Search')]";
+	public String ELEMENT_BUTTON_CLOSE_QUICK_SEARCH_RESULT = "//button[contains(text(),'Close Search')]";
+	public String ELEMENT_BUTTON_OPEN_ADVANCE_SEARCH_FORM = "//button[contains(text(),'Advanced Search')]";
 	public String ELEMENT_INPUT_TEXT_ADVANCE_SEARCH = "//*[@id='UIAdvancedSearchForm']//*[@id='text']";
 	public String ELEMENT_BUTTON_SEARCH_ADVANCE_SEARCH = "//*[@id='UIAdvancedSearchForm']//button[contains(text(),'Search')]";
 

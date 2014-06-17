@@ -406,7 +406,7 @@ public class Calendar_Event_RecurringEvents extends CalendarBase {
 		 *Expected Outcome: 
 			- Start and End dates and times of event are updated
 			- Event is marked as 'edited' by an icon with tooltip.*/
-		dragAndDropToObject(By.xpath(ELEMENT_EVENT_TASK_DETAIL_DATE.replace("${taskName}", name).replace("${date}", getDate(0, "MMM dd yyyy"))),By.xpath(ELEMENT_ANY_TARGET_DATE.replace("${targetDate}", getDate(-1, "MMM dd yyyy HH")+":00:00")));
+		dragAndDropToObject(By.xpath(ELEMENT_EVENT_TASK_DETAIL_DATE.replace("${taskName}", name).replace("${date}", getDate(0, "MMM dd yyyy"))),By.xpath(ELEMENT_ANY_TARGET_DATE.replace("${targetDate}", getDate(1, "MMM dd yyyy HH")+":00:00")));
 		Utils.pause(2000);
 
 		/*Step number: 3
@@ -417,7 +417,7 @@ public class Calendar_Event_RecurringEvents extends CalendarBase {
 
 		 *Expected Outcome: 
 			A tooltip is displayed "edited recurring event"*/ 
-		mouseOver(By.xpath(ELEMENT_EVENT_TASK_DETAIL_DATE.replace("${taskName}", name).replace("${date}", getDate(-1, "MMM dd yyyy"))),true);
+		mouseOver(By.xpath(ELEMENT_EVENT_TASK_DETAIL_DATE.replace("${taskName}", name).replace("${date}", getDate(1, "MMM dd yyyy"))),true);
 		waitForAndGetElement(evt.ELEMENT_TITLE_RECURRING_EVENT);
 		waitForAndGetElement(evt.ELEMENT_DATE_TIME_RECURRING_EVENT);
 		assert waitForAndGetElement(evt.ELEMENT_EDITED_RECURRING_TEXT_RECURRING_EVENT).getText().contains("Edited Recurring event");
