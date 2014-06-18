@@ -57,7 +57,7 @@ public class Social_HomePage_Activity extends Activity {
 		activity = new HomePageActivity(driver);
 		navToolBar = new NavigationToolbar(driver);
 		peoConn = new PeopleConnection(driver);
-		magMember = new ManageMember(driver);
+		magMember = new ManageMember(driver,this.plfVersion);
 		peoPro = new PeopleProfile(driver);
 		actBar = new ActionBar(driver);
 		ecms = new EcmsBase(driver);

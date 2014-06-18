@@ -30,14 +30,17 @@ import org.openqa.selenium.WebDriver;
  */
 public class ManageMember extends SpaceManagement {
 
-	public ManageMember(WebDriver dr){
+	public ManageMember(WebDriver dr, String...plfVersion){
 		super(dr);
-		magAcc = new ManageAccount(driver);
+		this.plfVersion = plfVersion.length>0?plfVersion[0]:"4.0";
+		magAcc = new ManageAccount(driver,this.plfVersion);
 		nav = new NavigationToolbar(driver);
+		spaceS = new SpaceSearch(driver);
 	}
 
 	ManageAccount magAcc;
 	NavigationToolbar nav;
+	SpaceSearch spaceS;
 
 	//Go to My Spaces > Select a space > Settings
 	//Member Tab 
@@ -59,6 +62,9 @@ public class ManageMember extends SpaceManagement {
 	public final String ELEMENT_REMOVE_USER_BUTTON = ELEMENT_MEMBERS_TABLE + "/..//td[contains(text(),'${userName}')]/..//i[@class='uiIconDelete uiIconLightGray']";
 	public final String ELEMENT_PENDING_VALIDATE_BUTTON = ELEMENT_PENDING_TABLE+ "/..//td[contains(text(),'${userName}')]/..//i[@class='uiIconValidate uiIconLightGray']";
 	public final String ELEMENT_PENDING_DECLINE_BUTTON = ELEMENT_PENDING_TABLE+ "/..//td[contains(text(),'${userName}')]/..//i[@class='uiIconRemove uiIconLightGray']";
+
+	//Adapt to plf4.1.0
+	public final String ELEMENT_SELECTED_USER_BOX_PLF4_1 = "//span[@class='text' and contains(text(),'${username}')]/../..//input[@class='checkbox']";
 
 	//Verify message for user is manager of space  
 	public final String VERIFY_MESSAGE = "You are the last manager of this space. You need to promote another member as manager of the space before you can leave it.";
@@ -303,12 +309,18 @@ public class ManageMember extends SpaceManagement {
 	public void addUserToSpace(boolean userRoot, String userName){
 		info("-- Action: adding the user: " + userName);
 		if (userRoot){
-			check(By.xpath(ELEMENT_SELECTED_USER_BOX.replace("${username}", userName)),2);
+			if(this.plfVersion.equals("4.0"))
+				check(By.xpath(ELEMENT_SELECTED_USER_BOX.replace("${username}", userName)),2);
+			else if(this.plfVersion.equals("4.1"))
+				check(By.xpath(ELEMENT_SELECTED_USER_BOX_PLF4_1.replace("${username}", userName)),2);
 			button.add();
 			click(ELEMENT_INVITE_MEMBER_BUTTON);
 			waitForAndGetElement(By.xpath(ELEMENT_MEMBERS_TABLE + "//td[contains(text(),'"+ userName +"')]"));
 		}else{
-			check(By.xpath(ELEMENT_SELECTED_USER_BOX.replace("${username}", userName)), 2);
+			if(this.plfVersion.equals("4.0"))
+				check(By.xpath(ELEMENT_SELECTED_USER_BOX.replace("${username}", userName)),2);
+			else //if(this.plfVersion.equals("4.1"))
+				check(By.xpath(ELEMENT_SELECTED_USER_BOX_PLF4_1.replace("${username}", userName)),2);
 			button.add();
 			click(ELEMENT_INVITE_MEMBER_BUTTON);
 			//click(ELEMENT_INVITE_MEMBER_BUTTON_AUX);

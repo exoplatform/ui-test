@@ -214,19 +214,18 @@ public class Activity extends SocialBase {
 		if(shareActivity){
 			click(ELEMENT_SELECT_BUTTON);
 			Utils.pause(1000);
-			if(upload && uploadFileName!="")
-				assert waitForAndGetElement(ELEMENT_FILE_INPUT_DOC).getText().contains(uploadFileName);
-			else{
-				if(selectFileName!=""){
-					assert waitForAndGetElement(ELEMENT_FILE_INPUT_DOC).getText().contains(selectFileName);
-				}
+			if(upload && uploadFileName!=""){
+				if (plfVersion.equalsIgnoreCase("4.0")) 
+					assert waitForAndGetElement(ELEMENT_FILE_INPUT_DOC).getText().contains(uploadFileName);
+				if(plfVersion.equalsIgnoreCase("4.1")) 
+					waitForAndGetElement(ELEMENT_FILE_INPUT_DOC);
+				waitForElementNotPresent(ELEMENT_SELECT_BUTTON);
+				click(ELEMENT_SHARE_BUTTON);
+				if(upload)
+					waitForAndGetElement(By.linkText(uploadFileName));
+				else
+					waitForAndGetElement(By.linkText(selectFileName));
 			}
-			click(ELEMENT_SHARE_BUTTON);
-			if(upload){
-				waitForAndGetElement(ELEMENT_LINK_ACTIVITY.replace("${link}", uploadFileName));
-			}
-			else
-				waitForAndGetElement(ELEMENT_LINK_ACTIVITY.replace("${link}", selectFileName));
 		}
 	}
 
@@ -498,7 +497,7 @@ public class Activity extends SocialBase {
 		hpActivity = new HomePageActivity(driver);
 		if(isActivity){
 			info ("-- Adding a mention activity --");			
-			
+
 			click(ELEMENT_MENTION_USER_BUTTON);
 			WebElement inputText = waitForAndGetElement(hpActivity.ELEMENT_ACTIVITY_TEXTBOX, DEFAULT_TIMEOUT, 1, 2);
 			((JavascriptExecutor)driver).executeScript("arguments[0].style.display = 'block'; arguments[0].style.visibility = 'visible'", inputText);
