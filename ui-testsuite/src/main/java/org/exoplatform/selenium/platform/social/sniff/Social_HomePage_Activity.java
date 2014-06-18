@@ -61,7 +61,7 @@ public class Social_HomePage_Activity extends Activity {
 		peoPro = new PeopleProfile(driver);
 		actBar = new ActionBar(driver);
 		ecms = new EcmsBase(driver);
-		conTemp = new ContentTemplate(driver);
+		conTemp = new ContentTemplate(driver,this.plfVersion);
 		cMenu= new ContextMenu(driver);
 		siteExp = new SitesExplorer(driver);
 		magAcc.signIn(DATA_USER_JOHN, DATA_PASS);

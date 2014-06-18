@@ -96,6 +96,9 @@ public class SocialBase extends PlatformBase {
 	public final By ELEMENT_ACTIVITY_STREAM_TAB = By.xpath("//div[@id='UIProfileNavigationPortlet']//a[text()='Activity Stream']");
 	public final By ELEMENT_BLAST_SPACE = By.className("blastInputSpace");
 
+	//Delete button
+	public final By 	ELEMENT_DELETE_SOCIAL_OK			= By.xpath("//*[@id='UISocialPopupConfirmation']//*[text()='OK']");
+
 	/*------------------- End of parameters ---------------------*/	
 
 	/**

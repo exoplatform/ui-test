@@ -178,9 +178,16 @@ public class Activity extends SocialBase {
 		for (String path : paths)
 			click(By.linkText(path));
 		if(newFolder!=""){
-			click(ELEMENT_CREATE_FOLDER_BUTTON);
-			alert.inputAlertText(newFolder);
-			click(By.linkText(newFolder));
+			if(plfVersion.equalsIgnoreCase("4.0")){
+				click(ELEMENT_CREATE_FOLDER_BUTTON);
+				alert.inputAlertText(newFolder);
+				click(By.linkText(newFolder));
+			}
+			if(plfVersion.equalsIgnoreCase("4.1")){
+				click(ELEMENT_CREATE_FOLDER_BUTTON_PLF41);
+				alert.inputAlertText(newFolder);
+				click(By.linkText(newFolder));
+			}
 		}
 
 		if (upload && uploadFileName!="")

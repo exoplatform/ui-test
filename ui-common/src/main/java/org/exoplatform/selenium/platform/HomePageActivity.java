@@ -6,6 +6,7 @@ import org.exoplatform.selenium.Button;
 import org.exoplatform.selenium.Dialog;
 import org.exoplatform.selenium.ManageAlert;
 import org.exoplatform.selenium.platform.forum.ForumManagePost;
+import org.exoplatform.selenium.platform.social.SocialBase;
 import org.exoplatform.selenium.Utils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -20,7 +21,7 @@ import org.openqa.selenium.internal.Locatable;
  * @author lienTM
  *
  */
-public class HomePageActivity extends PlatformBase{
+public class HomePageActivity extends SocialBase{
 
 	Dialog dialog;
 	ForumManagePost post;
@@ -847,7 +848,7 @@ public class HomePageActivity extends PlatformBase{
 		JavascriptExecutor executor = (JavascriptExecutor)driver;
 		executor.executeScript("document.getElementById('"+deleteActivityIconID+"').click();");
 		waitForAndGetElement(ELEMENT_MESSAGE_CONFIRM_DELETE_ACTIVITY);
-		button.ok();
+		click(ELEMENT_DELETE_SOCIAL_OK);
 		waitForElementNotPresent(By.xpath(ELEMENT_ACTIVITY_AUTHOR_ACTIVITY.replace("${activityText}", activityText)));
 		waitForElementNotPresent(By.xpath(ELEMENT_ACTIVITY_DELETE.replace("${activityText}", activityText)), DEFAULT_TIMEOUT,1,2);
 		Utils.pause(1000);

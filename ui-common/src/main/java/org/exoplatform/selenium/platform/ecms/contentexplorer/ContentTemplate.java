@@ -17,8 +17,9 @@ import org.openqa.selenium.WebElement;
  *
  */
 public class ContentTemplate extends EcmsBase{
-	public ContentTemplate(WebDriver dr) {
+	public ContentTemplate(WebDriver dr, String...plfVersion) {
 		super(dr);
+		this.plfVersion = plfVersion.length>0?plfVersion[0]:"4.0";
 		// TODO Auto-generated constructor stub
 	}
 
@@ -102,6 +103,7 @@ public class ContentTemplate extends EcmsBase{
 	//By.linkText("File");
 	public final By ELEMENT_NEWFILE_NAME_TEXTBOX = By.id("name");
 	public final By ELEMENT_NEWFILE_CONTENT_FRAME = By.xpath("//*[@id='cke_contents_contentHtml']/iframe");
+	public final By ELEMENT_NEWFILE_CONTENT_FRAME_41 = By.xpath("//*[@id='cke_contentHtml']//iframe");
 	public final By ELEMENT_NEWFILE_TITLE_TEXTBOX = By.id("title0");
 	//public final By ELEMENT_NEWFILE_DESC_TEXTBOX = By.id("description0");
 	public final By ELEMENT_NEWFILE_DESCRIPTION_TEXTBOX = By.id("description0");
@@ -314,6 +316,9 @@ public class ContentTemplate extends EcmsBase{
 				inputDataToFrame(ELEMENT_NEWFILE_CONTENT_FRAME, cont, true);
 			}else if (waitForAndGetElement(ELEMENT_NEWFILE_TEXTAREA_ID, 3000, 0) != null){
 				type(ELEMENT_NEWFILE_TEXTAREA_ID, cont, true);
+			}
+			else{ //(waitForAndGetElement(ELEMENT_NEWFILE_CONTENT_FRAME_41, 3000, 0) != null){
+				inputDataToFrame(ELEMENT_NEWFILE_CONTENT_FRAME_41, cont, true);
 			}
 			switchToParentWindow();
 		}else {

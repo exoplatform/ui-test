@@ -186,7 +186,7 @@ public class ContextMenu extends EcmsBase{
 		//waitForElementNotPresent(By.linkText("OK"));
 		//waitForTextNotPresent("Delete");
 		if (isElementPresent(locator)){
-			click(button.ELEMENT_REFRESH_BUTTON);
+			driver.navigate().refresh();
 			Utils.pause(2000);
 		}
 		if(isElementNotPresent(locator) && isElementPresent(ELEMENT_NEXT_PAGE_ICON_SE)){

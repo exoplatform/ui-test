@@ -76,10 +76,7 @@ public class SpaceManagement extends SocialBase {
 	public final String ELEMENT_VERIFY_SPACE_NAME_ACTIVITY = "//div[@class='author']/a[contains(text(),'${spaceName}')]";
 	public final String ELEMENT_SPACE_MENU_ITEM = "//span[contains(text(),'${menuItem}')]";
 	public final String ELEMENT_SPACE_CURRENT_MENU_ITEM = "//li[@class='active item']//span[text()='${menuItem}']";
-	
-	//Delete space
-	public final By 	ELEMENT_DELETE_SPACE_OK			= By.xpath("//*[@id='UISocialPopupConfirmation']//*[text()='OK']");
-	
+		
 	//Space access
 	public final By		ELEMENT_ACCESS_EDIT_VISIBLE 	= By.xpath("//span[text()='Visible']/../input[@name='UIVisibility']");
 	public final By		ELEMENT_ACCESS_EDIT_HIDDEN 	= By.xpath("//span[text()='Hidden']/../input[@name='UIVisibility']");
@@ -267,8 +264,8 @@ public class SpaceManagement extends SocialBase {
 		doAction("Delete", name);    
 		magAlert = new ManageAlert(driver);
 		magAlert.acceptAlert();
-		if (waitForAndGetElement(ELEMENT_DELETE_SPACE_OK, 3000, 0, 2) != null){
-			click(ELEMENT_DELETE_SPACE_OK);
+		if (waitForAndGetElement(ELEMENT_DELETE_SOCIAL_OK, 3000, 0, 2) != null){
+			click(ELEMENT_DELETE_SOCIAL_OK);
 		}
 		Utils.pause(1000);
 		waitForElementNotPresent(By.xpath(ELEMENT_ACTION_USER_ON_SPACE.replace("${spaceName}", name).replace("${action}", "Delete")), iTimeout);
