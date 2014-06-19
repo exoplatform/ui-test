@@ -25,7 +25,7 @@ public class Button extends TestBase{
 	//By.linkText("Save & Close");
 
 	public final By ELEMENT_OK_BUTTON = By.xpath("//*[text()='OK']");
-	public final By ELEMENT_OK_BUTTON_NEW = By.xpath("//*[@id='UISocialPopupConfirmation']//*[text()='OK']");
+	public final By ELEMENT_OK_BUTTON_NEW = By.xpath("//*[@class='PopupContent popupContent']//*[text()='OK']");
 	public final By ELEMENT_NO_BUTTON = By.xpath("//*[text()='No']");
 	public final By ELEMENT_NO_BUTTON_AUX = By.xpath("//*[contains(@class, 'popup')]//*[contains(text(),'No')]");
 	public final By ELEMENT_YES_BUTTON = By.xpath("//*[normalize-space(text())='Yes']");

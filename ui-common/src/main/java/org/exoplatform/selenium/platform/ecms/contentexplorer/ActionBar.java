@@ -425,7 +425,7 @@ public class ActionBar extends EcmsBase{
 			click(ELEMENT_IMPORT);
 			Utils.pause(500);
 			waitForMessage("Imported successfully.");
-			click(button.ELEMENT_OK_BUTTON);
+			button.ok();
 		}
 		else 
 		{
@@ -896,9 +896,15 @@ public class ActionBar extends EcmsBase{
 			assert getText(By.xpath("//*[@id='wcm-notice']")).contains(message):"Message is wrong";
 			//waitForTextPresent("\'" + node + "' was deleted succesfully.");
 		}
-		click(ELEMENT_UNDO_DELETED_ITEM);
+		if(this.plfVersion.equalsIgnoreCase("4.1"))
+			((JavascriptExecutor)driver).executeScript("arguments[0].click();",waitForAndGetElement(ELEMENT_UNDO_DELETED_ITEM));
+		else if(this.plfVersion.equalsIgnoreCase("4.0"))
+			click(ELEMENT_UNDO_DELETED_ITEM);
 		if (waitForAndGetElement(button.ELEMENT_OK_BUTTON, 3000, 0) != null){
 			click(button.ELEMENT_OK_BUTTON);
+		}
+		else if (waitForAndGetElement(button.ELEMENT_OK_BUTTON_NEW, 3000, 0) != null){
+			click(button.ELEMENT_OK_BUTTON_NEW);
 		}
 		if (node != ""){
 			String message = "\'" + node + "' was successfully restored";
@@ -1000,7 +1006,10 @@ public class ActionBar extends EcmsBase{
 	 */
 	public void addComment(String comment){
 		goToAddComment();
-		inputDataToFrame(ELEMENT_ADD_COMMENT_FRAME, comment, false);
+		if(this.plfVersion.equalsIgnoreCase("4.1"))
+			inputDataToFrame(ELEMENT_ADD_COMMENT_FRAME_41, comment, true);
+		else// if(this.plfVersion.equalsIgnoreCase("4.0"))
+			inputDataToFrame(ELEMENT_ADD_COMMENT_FRAME, comment, true);
 		switchToParentWindow();
 		button.save();
 		waitForElementNotPresent(ELEMENT_ADD_COMMENT_POPUP);

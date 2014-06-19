@@ -69,7 +69,7 @@ public class Wiki_BasicAction_ManagePage extends ManageDraft{
 	 * (Msg: There was an error loading data)
 	 * Note: This issue is not created on jira
 	 */
-	@Test (groups="error")
+	@Test(priority = 0)
 	public void test00_CreatePageRichTextEditor(){
 		String pageLink = "PageLink68837";
 		String title = "Wiki_manage_page_title_02";

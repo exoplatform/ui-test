@@ -408,7 +408,7 @@ public class ManageTemplate extends EcmsBase{
 		}else if (option.equals("Delete")){
 			click(ELEMENT_DELETE_METADATA_TEMPLATE_ICON.replace("${templateName}", metadata));
 			alt.acceptAlert();
-			click(button.ELEMENT_OK_BUTTON);
+			button.ok();
 			waitForElementNotPresent(ELEMENT_DELETE_METADATA_TEMPLATE_ICON.replace("${templateName}", metadata));
 		}
 		Utils.pause(500);	

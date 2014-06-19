@@ -19,7 +19,7 @@ import org.openqa.selenium.WebElement;
 public class ContentTemplate extends EcmsBase{
 	public ContentTemplate(WebDriver dr, String...plfVersion) {
 		super(dr);
-		this.plfVersion = plfVersion.length>0?plfVersion[0]:"4.0";
+		this.plfVersion = plfVersion.length>0?plfVersion[0]:"4.1";
 		// TODO Auto-generated constructor stub
 	}
 
@@ -36,7 +36,7 @@ public class ContentTemplate extends EcmsBase{
 	//Announcement
 	public final By ELEMENT_ANNOUNCEMENT_LINK = By.xpath("//*[@class='templateLabel']//*[text()='Announcement']");
 	public final By ELEMENT_ANNOUNCEMENT_NAME_TEXTBOX = By.id("name");
-	public final By ELEMENT_ANNOUNCEMENT_SUMMARY_FRAME = By.xpath("//*[@id='cke_contents_exo:summary']/iframe");
+	public final By ELEMENT_ANNOUNCEMENT_SUMMARY_FRAME = By.xpath("//*[@id='cke_exo:summary']//iframe");
 
 	//WebLink
 	public final By ELEMENT_WEBLINK_LINK = By.xpath("//*[@class='templateLabel']//*[text()='Web Link']");
@@ -46,11 +46,13 @@ public class ContentTemplate extends EcmsBase{
 	//public final By ELEMENT_WEBCONTENT_TITLE_TEXTBOX = By.id("title");	
 	public final By ELEMENT_WEBCONTENT_NAME_TEXTBOX = By.id("name");	
 	public final By ELEMENT_WEBCONTENT_CONTENT_FRAME = By.xpath("//td[contains(@id,'cke_contents_htmlData')]/iframe");
+	public final By ELEMENT_WEBCONTENT_CONTENT_FRAME_41 = By.xpath("//div[@id= 'cke_1_contents']/iframe");
 	public final By ELEMENT_WEBCONTENT_ADD_CONTENT_LINK = By.xpath("//*[@title='Insert Content Link']");
 	public final By ELEMENT_WEBCONTENT_ILLUSTRATION_TAB = By.xpath("//*[contains(text(),'Illustration')]");
 	public final By ELEMENT_WEBCONTENT_UPLOAD_FRAME = By.xpath("//*[contains(@name,'uploadIFrame')]");
 	//public final By ELEMENT_WEBCONTENT_FILE_IMAGE = By.name("file");
 	public final By ELEMENT_WEBCONTENT_SUMMARY_FRAME = By.xpath("//td[@id='cke_contents_exo:summary']/iframe");
+	public final By ELEMENT_WEBCONTENT_SUMMARY_FRAME_41 = By.xpath("//*[@id='cke_exo:summary']//iframe");
 	public final By ELEMENT_WEBCONTENT_ADVANCE_TAB = By.xpath("//*[contains(text(),'Advanced')]");
 	public final By ELEMENT_WEBCONTENT_CSS_TEXTAREA = By.xpath("//textarea[contains(@id,'ContentCSS')]");
 	public final By ELEMENT_WEBCONTENT_JS_TEXTAREA = By.xpath("//textarea[contains(@id,'ContentJS')]");
@@ -240,7 +242,11 @@ public class ContentTemplate extends EcmsBase{
 	public void createNewWebContent(String name, String cont, String img, String sum, String css, String js, Object...params){
 		boolean lines = (Boolean) (params.length > 0 ? params[0]: false);
 		String optionLang = (String) (params.length > 1 ? params[1]:"");
-
+		By eWebContentSum ;
+		if(this.plfVersion.equalsIgnoreCase("4.1"))
+			eWebContentSum = ELEMENT_WEBCONTENT_SUMMARY_FRAME_41;
+		else
+			eWebContentSum = ELEMENT_WEBCONTENT_SUMMARY_FRAME;
 		info("-- Creating a new Web Content --");
 		Utils.pause(500);
 		click(ELEMENT_WEBCONTENT_LINK);
@@ -249,7 +255,10 @@ public class ContentTemplate extends EcmsBase{
 			selectOption(ELEMENT_PIC_LANG, optionLang);
 		}
 		if (cont != ""){
-			inputDataToFrame(ELEMENT_WEBCONTENT_CONTENT_FRAME,cont);
+			if(this.plfVersion.equalsIgnoreCase("4.1"))
+				inputDataToFrame(ELEMENT_WEBCONTENT_CONTENT_FRAME_41,cont,true);
+			else
+				inputDataToFrame(ELEMENT_WEBCONTENT_CONTENT_FRAME,cont,true);
 			switchToParentWindow();
 		}
 		if (sum!="" || img !=""){
@@ -268,10 +277,13 @@ public class ContentTemplate extends EcmsBase{
 				waitForAndGetElement(By.xpath("//div[contains(text(),'" + links[length-1]+"')]"),DEFAULT_TIMEOUT,1,2);
 			}
 			if (!lines){
-				inputDataToFrame(ELEMENT_WEBCONTENT_SUMMARY_FRAME, sum);
+				inputDataToFrame(eWebContentSum, sum);
 				switchToParentWindow();
 			}else {
-				typeMultiLineInCkeContent(ELEMENT_WEBCONTENT_SUMMARY_FRAME, sum);
+				if(waitForAndGetElement(ELEMENT_WEBCONTENT_SUMMARY_FRAME_41,5000,0,1)!=null)
+					typeMultiLineInCkeContent(ELEMENT_WEBCONTENT_SUMMARY_FRAME_41, sum);
+				else //if(waitForAndGetElement(ELEMENT_WEBCONTENT_SUMMARY_FRAME,5000,0,1)!=null)
+					typeMultiLineInCkeContent(ELEMENT_WEBCONTENT_SUMMARY_FRAME, sum);
 			}
 		}
 		if(css!="" || js !=""){
@@ -347,7 +359,10 @@ public class ContentTemplate extends EcmsBase{
 
 		click(ELEMENT_NEWFILE_LINK);	
 		type(ELEMENT_NEWFILE_NAME_TEXTBOX, name, true);
-		inputDataToFrame(ELEMENT_NEWFILE_CONTENT_FRAME, cont, true);
+		if(isElementPresent(ELEMENT_NEWFILE_CONTENT_FRAME))
+			inputDataToFrame(ELEMENT_NEWFILE_CONTENT_FRAME, cont, true);
+		else
+			inputDataToFrame(ELEMENT_NEWFILE_CONTENT_FRAME_41, cont, true);
 		switchToParentWindow();
 		if (title != ""){
 			type(ELEMENT_NEWFILE_TITLE_TEXTBOX, title, true);
@@ -856,7 +871,13 @@ public class ContentTemplate extends EcmsBase{
 		Utils.pause(500);
 		//type(ELEMENT_NEWFILE_NAME_TEXTBOX, nameEdit, true);
 		if (contentEdit != ""){
-			inputDataToFrame(ELEMENT_NEWFILE_CONTENT_FRAME, contentEdit, true);
+			if (waitForAndGetElement(ELEMENT_NEWFILE_CONTENT_FRAME, 5000, 0,2) != null){
+				inputDataToFrame(ELEMENT_NEWFILE_CONTENT_FRAME, contentEdit, true);
+			}else if (waitForAndGetElement(ELEMENT_NEWFILE_TEXTAREA_ID, 3000, 0) != null){
+				type(ELEMENT_NEWFILE_TEXTAREA_ID, contentEdit, true);
+			} else{// if(waitForAndGetElement(ELEMENT_NEWFILE_CONTENT_FRAME_41, 3000, 0) != null){
+				inputDataToFrame(ELEMENT_NEWFILE_CONTENT_FRAME_41, contentEdit, true);
+			}
 			switchToParentWindow();
 		}
 		if (titleEdit != ""){
@@ -868,8 +889,9 @@ public class ContentTemplate extends EcmsBase{
 			//waitForElementNotPresent(button.ELEMENT_SAVE_BUTTON);
 			waitForAndGetElement(button.ELEMENT_SAVE_CLOSE_BUTTON);
 		} else if (option == 1){
-			button.close();
 			magAlert.acceptAlert();
+			button.ok();
+			button.close();
 			Utils.pause(500);
 		} else{
 			button.saveAndClose();

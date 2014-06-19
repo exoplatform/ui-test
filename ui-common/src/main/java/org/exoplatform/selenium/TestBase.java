@@ -128,7 +128,6 @@ public class TestBase {
 		info("Term and conditions");
 		termsAndConditions(opParams);
 		info("End of term and conditions");
-
 		if(!firstTimeLogin){
 			info("This is not the first time login");
 			checkPLFVersion();

@@ -214,7 +214,6 @@
 				<testSuite>social-sniff.xml</testSuite>
 			</properties>
 		</profile>
-
 		<profile>
 			<id>wiki</id>
 			<properties>

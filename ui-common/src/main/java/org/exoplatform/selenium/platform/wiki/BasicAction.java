@@ -116,12 +116,19 @@ public class BasicAction extends Permission{
 		if(title != null){
 			type(ELEMENT_TITLE_WIKI_INPUT, title, true);
 		}	
+<<<<<<< HEAD
 		if(isElementPresent(ELEMENT_SOURCE_EDITOR_BUTTON)){
 			click(ELEMENT_SOURCE_EDITOR_BUTTON);
 			waitForAndGetElement(ELEMENT_RICHTEXT_BUTTON);
 		}
 		Utils.pause(1000);
 
+=======
+		if(waitForAndGetElement(ELEMENT_SOURCE_EDITOR_BUTTON,5000,0)!=null){
+			click(ELEMENT_SOURCE_EDITOR_BUTTON);
+			waitForAndGetElement(ELEMENT_RICHTEXT_BUTTON);
+		}
+>>>>>>> fd95065... FQA-1550: PLF4.1/Sniff/Wiki/Migrate from PLF4.0 (Attachment + Basic Action)
 		if(content != null){
 			text = content.split("</br>");
 			for(int i=0; i < text.length; i++){
@@ -146,8 +153,10 @@ public class BasicAction extends Permission{
 	public void addWikiPageRichText(String title, String content){
 		if(title != null)
 			type(ELEMENT_TITLE_WIKI_INPUT, title, true);
-		click(ELEMENT_RICHTEXT_BUTTON);
-		waitForAndGetElement(ELEMENT_SOURCE_EDITOR_BUTTON);
+		if(waitForAndGetElement(ELEMENT_RICHTEXT_BUTTON,5000,0)!=null){
+			click(ELEMENT_RICHTEXT_BUTTON);
+			waitForAndGetElement(ELEMENT_SOURCE_EDITOR_BUTTON);
+		}
 		if (content != null){
 			inputDataToFrame(ELEMENT_CONTENT_WIKI_FRAME, content,true);
 			Utils.pause(1000);

@@ -35,8 +35,13 @@ public class WikiBase extends PlatformBase{
 	public final String ELEMENT_WIKI_HEADER = "//*[@id='H${header}']"; 
 
 	//Company/Left panel > Wiki Link
+<<<<<<< HEAD
 	public final By ELEMENT_WIKI_LINK = By.xpath("//ul[@class='uiCompanyNavigations']//li/a[text()='Wiki']");
 	public final By ELEMENT_WIKI_LINK_PLF41 = By.xpath("//*[@data-original-title='Wiki']");
+=======
+	public final By ELEMENT_WIKI_LINK=By.xpath("//ul[@class='uiCompanyNavigations']//li/a[text()='Wiki']");
+	public final By ELEMENT_WIKI_LINK_PLF41=By.xpath("//*[@data-original-title='Wiki']");
+>>>>>>> fd95065... FQA-1550: PLF4.1/Sniff/Wiki/Migrate from PLF4.0 (Attachment + Basic Action)
 
 	//Add page menu
 	public final By ELEMENT_ADD_PAGE_LINK = By.xpath("//*[@id='UIWikiPageControlArea_PageToolBar']//div[contains(text(),'Add Page')]");
@@ -284,7 +289,11 @@ public class WikiBase extends PlatformBase{
 	public void goToWiki(){
 		info("--Go to Wiki--");
 		Utils.pause(1000);
+<<<<<<< HEAD
 		if(waitForAndGetElement(ELEMENT_WIKI_LINK, 5000, 0)!= null)
+=======
+		if(waitForAndGetElement(ELEMENT_WIKI_LINK, 5000,0)!=null)
+>>>>>>> fd95065... FQA-1550: PLF4.1/Sniff/Wiki/Migrate from PLF4.0 (Attachment + Basic Action)
 			click(ELEMENT_WIKI_LINK);
 		else
 			click(ELEMENT_WIKI_LINK_PLF41);
