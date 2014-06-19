@@ -43,7 +43,9 @@ public class PeopleConnection extends SocialBase {
 
 	//-----------------------Connections page------------------------
 	public String ELEMENT_INVITATION_RECEIVED_MSG = "//h4[@class='spaceTitle']/a[contains(text(),'${acc}')]/ancestor::div[@class='spaceBox pull-left']/div[@class='connectionBtn clearfix']/span[contains(text(),'Invitation Received')]";
-
+	//---------------------------Generic user popup - Connection Application------------
+	public final String ELEMENT_CONNECTION_MEMBER = "//a[text()='${peopleName}']";
+	
 	/**
 	 * Connect to people
 	 * @param peopleName: name of selected people (String)
