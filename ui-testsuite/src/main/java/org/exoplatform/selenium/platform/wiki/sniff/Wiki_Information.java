@@ -12,11 +12,9 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 /**
- * 
  * @author lientm
  * @date: 1-July-2013
  */
-
 public class Wiki_Information extends Version {
 
 	ManageAccount magAc;
@@ -40,9 +38,9 @@ public class Wiki_Information extends Version {
 		driver.manage().deleteAllCookies();
 		driver.quit();
 	}
-
-
-	/**CaseId: 109192 -> View Page General information
+	
+	/**
+	 * CaseId: 109192 -> View Page General information
 	 */
 	@Test
 	public void test01_ViewPageGeneralInformation(){
@@ -64,9 +62,9 @@ public class Wiki_Information extends Version {
 
 		deleteCurrentWikiPage();
 	}
-
-	/**CaseId: 109193 -> View Page history to compare versions
-	 *
+	
+	/**
+	 * CaseId: 109193 -> View Page history to compare versions
 	 */
 	@Test
 	public void test02_ViewPageHistoryToCompareVersions(){
@@ -91,9 +89,9 @@ public class Wiki_Information extends Version {
 		click(By.linkText(newTitle));
 		deleteCurrentWikiPage();
 	}
-
-	/**CaseId: 70337 -> Add Relation between 2 pages different space
-	 * 
+	
+	/**
+	 * CaseId: 70337 -> Add Relation between 2 pages different space
 	 */
 	@Test
 	public void test03_AddRelationDifferentSpace(){
@@ -122,9 +120,9 @@ public class Wiki_Information extends Version {
 		magMem.deleteSpace(spaceName1, 180000);
 		magMem.deleteSpace(spaceName2, 180000);
 	}
-
-	/**CaseId: 70340 -> Add Relation with intranet portal
-	 * 
+	
+	/**
+	 * CaseId: 70340 -> Add Relation with intranet portal
 	 */
 	@Test
 	public void test04_AddRelationWithIntranetPortal(){
@@ -151,8 +149,8 @@ public class Wiki_Information extends Version {
 		deleteCurrentWikiPage();
 	}
 
-	/**CaseId: 70341 -> Add Relation same space
-	 * 
+	/**
+	 * CaseId: 70341 -> Add Relation same space
 	 */
 	@Test
 	public void test05_AddRelationSameSpace(){
@@ -175,9 +173,9 @@ public class Wiki_Information extends Version {
 		magMem.goToAllSpaces();
 		magMem.deleteSpace(spaceName, 180000);
 	}
-
-	/**CaseId: 70342 -> Add relation in the case there is no space
-	 * 
+	
+	/**
+	 * CaseId: 70342 -> Add relation in the case there is no space
 	 */
 	@Test
 	public void test06_AddRelation_NoSpace(){
@@ -196,9 +194,9 @@ public class Wiki_Information extends Version {
 		click(By.linkText(title));
 		deleteCurrentWikiPage();
 	}
-
-	/**CaseId: 70344 -> Delete relation
-	 * 
+	
+	/**
+	 * CaseId: 70344 -> Delete relation
 	 */
 	@Test
 	public void test07_DeleteRelation(){
@@ -220,9 +218,9 @@ public class Wiki_Information extends Version {
 		click(By.linkText(title2));
 		deleteCurrentWikiPage();
 	}
-
-	/**CaseId: 109191 -> View Page info
-	 *
+	
+	/**
+	 * CaseId: 109191 -> View Page info
 	 */
 	@Test
 	public void test08_ViewPageInfo(){

@@ -41,7 +41,7 @@ public class UserGroupManagement extends PlatformBase {
 	public final String ELEMENT_MEMBERSHIP_MANAGEMENT_TAB_FAIL_DEL_MSG = "//span[contains(text(),'You cannot delete this membership because it is mandatory.')]";
 	//User Management -> Edit User form
 	public  final By ELEMENT_USER_MEMBERSHIP_TAB = By.xpath("//*[text()='User Membership']");
-
+	public final String ELEMENT_GROUP_PERMISSION = "//a[@title='${groupName}']";
 	/*
 	 *  Choose TAB actions
 	 * */

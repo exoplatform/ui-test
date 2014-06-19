@@ -21,9 +21,19 @@ import static org.exoplatform.selenium.TestLogger.info;
 
 public class PlatformBase extends TestBase {
 
+
 	public final String DATA_USER1 = "john";
 	public final String DATA_PASS = "gtn";
 	public final String DATA_USER2 = "mary";
+
+	public final String USER_ROOT = "root@acme.com";
+	public final String PASS_ROOT = "gtngtn";
+//	public final String DATA_USER1 = "john.smith@acme.com";
+//	public final String DATA_USER2 = "mary.williams@acme.com";
+	public final String DATA_USER3 = "james.davis@acme.com";
+	public final String DATA_USER4 = "jack.demo@acme.com";
+//	public final String DATA_PASS = "gtngtn";
+
 	public ManageAlert alert = new ManageAlert(driver);
 	public Button button = new Button(driver);
 	public Dialog dialog = new Dialog(driver);
@@ -783,7 +793,7 @@ public class PlatformBase extends TestBase {
 	public By PRODUCTS_LABEL_ENGLISH = By.xpath("//*[text()='Products']");
 	public By PRODUCTS_LABEL_FRENCH = By.xpath("//*[text()='Produits']");
 	public By PRODUCTS_LABEL_GERMAN = By.xpath("//*[text()='Produkte']");
-
+	public final By ELEMENT_UP_LEVEL_AUX = By.xpath("//a[@data-original-title='Up Level']");
 
 	///////////////////
 	//Set view permissions for portal
