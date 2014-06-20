@@ -658,6 +658,13 @@ public class PlatformBase extends TestBase {
 	public static String ELEMENT_CALENDAR_IN_CALENDAR_GADGET = "//span[@class='calendarName asparagus' and@title='${calendar}']";
 	public static String ELEMENT_DELETE_CALENDAR_ICON = "//span[contains(text(),'${calendar}')] /..//*[@class='uiIconDel']";
 	public static String ELEMENT_CALENDAR_IN_ADDITIONAL_LIST = "//a[text()='${calendar}']";
+	public By ELEMENT_CALENDAR_GADGET_TASK_LABEL = By.xpath("//*[@class='title taskTitle']");
+	public String ELEMENT_CALENDAR_GADGET_TASK_NORMAL = "//ul[@class='tasksList']//li[@class='taskNotCompleted']//a[contains(text(),'${task}')]";
+	public String ELEMENT_CALENDAR_GADGET_TASK_LATE_NORMAL = "//ul[@class='tasksList']//li[@class='taskLateNotCompleted']//a[contains(text(),'${task}')]";
+	public String ELEMENT_CALENDAR_GADGET_TASK_COMPLETED = "//ul[@class='tasksList']//li[@class='taskCompleted']//a[contains(text(),'${task}')]";
+	public By ELEMENT_CALENDAR_GADGET_EMPTY = By.xpath("//*[contains(text(),'Nothing Planned ')]");
+	public String ELEMENT_CALENDAR_GADGET_EVENT_ITEM = "//div[@class='pull-left eventSummary']//a[contains(text(), '${event}')]";
+	public String ELEMENT_CALENDAR_GADGET_TASK_INDEX = "//ul[@class='tasksList']//li['${index}']//a[contains(text(),'${task}')]";
 
 	//Create functions
 	public static By ELEMENT_ADD_ICON = By.xpath("//*[@class='uiIconPLF24x24Add']");

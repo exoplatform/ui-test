@@ -57,6 +57,9 @@ public class CalendarBase extends PlatformBase {
 	public String ELEMENT_CALENDAR_GET_BY_TAG_LI = "//a[@class='calendarName' and contains(text(), '${calendar}')]/../..";
 	public By ELEMENT_CALENDAR_POPUP_WINDOW = By.xpath("//*[@id='UICalendarPopupWindow']/div[2]");
 	public String ELEMENT_VERIFY_CALENDAR_FORM = "//*[@id='defaultCalendarTab'] //div[@class='myCalendar']/*[@class='calendarTitle']/..//li[contains(@class,'calendarItem' )]//*[text()='${UserName}']/../a[@class='${CheckboxColor}']";
+	public String ELEMENT_DISPLAY_CALENDAR= "//a[@data-original-title='${calendar}']";
+	public String ELEMENT_COLOR_ICON = "//*[@class='calendarName' and text()='${calendar}']/..//*[@class='colorOpacity']/..";
+	public String ELEMENT_CALENDAR_ID = "//*[@class='calendarName' and text()='${calendar}']/..";
 
 	//--------------Mini calendar-------------------
 	public String ELEMENT_MINI_CALENDAR_DATE_HIGHLIGHT = "//td[contains(@class,'highLight') and contains(text(),'${date}')]";
@@ -107,14 +110,16 @@ public class CalendarBase extends PlatformBase {
 	public String ELEMENT_LIST_EDIT_EVENT_BUTTON = ".//*[@id='UIEventCategoryList']//span[contains(text(),'${categoryName}')]/parent::td/parent::tr//a[@data-original-title='Edit']/i[@class='uiIconEdit uiIconLightGray']";
 
 	//-----------Menu of calendar------------
-	public By ELEMENT_CAL_ADD_EVENT_MENU = By.id("AddEvent");
-	public By ELEMENT_CAL_ADD_TASK_MENU = By.id("AddTask");
+//	public By ELEMENT_CAL_ADD_EVENT_MENU = By.id("AddEvent");
+//	public By ELEMENT_CAL_ADD_TASK_MENU = By.id("AddTask");
 	public By ELEMENT_CAL_REMOVE_MENU = By.xpath("//*[@id='tmpMenuElement']//a[contains(@href,'RemoveSharedCalendar')]");
 	public By ELEMENT_CAL_IMPORT_MENU = By.xpath("//*[@id='tmpMenuElement']//a[contains(@href,'ImportCalendar')]");
 	public By ELEMENT_CAL_EXPORT_MENU = By.xpath("//*[@id='tmpMenuElement']//a[contains(@href,'ExportCalendar')]");
 	public By ELEMENT_CAL_REFRESH_MENU = By.xpath("//*[@id='tmpMenuElement']//a[contains(@href,'RefreshRemoteCalendar')]");
 	public By ELEMENT_CAL_SHARE_MENU = By.xpath("//*[@id='tmpMenuElement']//a[contains(@href,'ShareCalendar')]");
 	public By ELEMENT_CAL_EDIT_MENU = By.xpath("//*[@id='tmpMenuElement']//a[contains(@href,'EditCalendar')]");
+	public By ELEMENT_CAL_ADD_TASK_MENU = By.xpath("//*[@id='tmpMenuElement']//*[@id='AddTask']");
+	public By ELEMENT_CAL_ADD_EVENT_MENU = By.xpath("//*[@id='tmpMenuElement']//*[@id='AddEvent']");
 	public By ELEMENT_CAL_SETTING_MENU = By.xpath("//*[@id='UIActionBar']//i[@class='uiIconSetting uiIconLightGray']");
 	public String ELEMENT_CAL_SETTING_TIMEZONE_VALUE = "//*[@id='setting']//select[@name='timeZone']/option[@value='${timezoneOpt}']";
 
@@ -605,13 +610,14 @@ public class CalendarBase extends PlatformBase {
 	 * 				= false: not verify that calendar is deleted, 
 	 */
 	public void deleteCalendar(String name, boolean...verify){
-		alert = new ManageAlert(driver); 
+		button = new Button(driver); 
 		boolean check = verify.length > 0 ? verify[0] : true;
 
 		info("--Delete a Calendar-");
 
 		executeActionCalendar(name,"RemoveCalendar");
-		alert.waitForConfirmation("Are%20you%20sure%20you%20want%20to%20delete%20this%20calendar%20and%20all%20its%20events?");
+		//alert.waitForConfirmation("Are%20you%20sure%20you%20want%20to%20delete%20this%20calendar%20and%20all%20its%20events?");
+		button.yes();
 		if (check){
 			assert (waitForAndGetElement(ELEMENT_CALENDAR_GET_BY_TAG_LI.replace("{$calendar}", name), 10000,0) == null) : "Cannot delete the calendar!" ;
 			info("Remove calendar successfully");
@@ -655,9 +661,11 @@ public class CalendarBase extends PlatformBase {
 	 * @param calendar: name of calendar
 	 */
 	public void openMenuOfCalendar(String calendar){
-		WebElement element = waitForAndGetElement(ELEMENT_CALENDAR_SETTING_ICON.replace("${calendar}", calendar), DEFAULT_TIMEOUT, 0, 2);
+		String id = getPropertyOfCalendar(calendar, 1);
+		WebElement element = waitForAndGetElement("//*[@id='" + id + "']/*[contains(@id,'UICalendars_CalendarPopupMenu')]", DEFAULT_TIMEOUT, 1, 2);
 		mouseOver(By.linkText(calendar),true);
 		((JavascriptExecutor)driver).executeScript("arguments[0].click();", element);
+		Utils.pause(1000);
 	}
 
 	/** Show working time on working pane
@@ -1031,5 +1039,19 @@ public class CalendarBase extends PlatformBase {
 			waitForAndGetElement(ELEMENT_ADD_CALENDAR_GROUP_DELETE_ICON.replace("${group}", groups[0]));
 		}
 		Utils.pause(1000);
+	}
+	/**
+	 * @author lientm
+	 * @param cal
+	 * @param action
+	 */
+	public void goToActionOnCalendar(String cal, String action){
+		openMenuOfCalendar(cal);
+		if (action.equalsIgnoreCase("add task")){
+			click(ELEMENT_CAL_ADD_TASK_MENU);
+		}
+		if (action.equalsIgnoreCase("add event")){
+			click(ELEMENT_CAL_ADD_EVENT_MENU);
+		}
 	}
 }

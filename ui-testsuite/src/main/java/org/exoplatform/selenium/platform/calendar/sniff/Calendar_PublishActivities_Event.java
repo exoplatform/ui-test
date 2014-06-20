@@ -282,7 +282,7 @@ public class Calendar_PublishActivities_Event extends CalendarBase{
 			- The calendar application is displayed
 			- An edited recurring event is displayed 
 		 */
-		evt.goToAddEvent();
+		evt.goToAddEventFromActionBar();
 		evt.inputBasicQuickEvent(name, description);
 		evt.inputFromToEvent(getDate(0,"MM/dd/yyyy"), getDate(0,"MM/dd/yyyy"), false);
 		click(evt.ELEMENT_BUTTON_EVENT_MORE_DETAILS);
@@ -373,7 +373,7 @@ public class Calendar_PublishActivities_Event extends CalendarBase{
 			- The calendar application is displayed
 			- An edited recurring event is displayed 
 		 */
-		evt.goToAddEvent();
+		evt.goToAddEventFromActionBar();
 		evt.inputBasicQuickEvent(name, description);
 		evt.inputFromToEvent(getDate(0,"MM/dd/yyyy"), getDate(0,"MM/dd/yyyy"), false);
 		click(evt.ELEMENT_BUTTON_EVENT_MORE_DETAILS);
@@ -535,7 +535,7 @@ public class Calendar_PublishActivities_Event extends CalendarBase{
 		 *Expected Outcome: 
 			- An event is displayed 
 		 */
-		evt.goToAddEvent();
+		evt.goToAddEventFromActionBar();
 		evt.inputBasicQuickEvent(name, description);
 		evt.inputFromToEvent(getDate(0,"MM/dd/yyyy"), getDate(0,"MM/dd/yyyy"), false);
 		click(evt.ELEMENT_BUTTON_EVENT_MORE_DETAILS);

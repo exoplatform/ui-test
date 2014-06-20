@@ -13,9 +13,9 @@ import org.exoplatform.selenium.platform.calendar.Event;
 import org.exoplatform.selenium.platform.calendar.Task;
 
 /**
- * 
- * @author havtt
- * @date 17 Oct 2013
+ * @date: 25/04/2014
+ * @author lientm
+ * @description: update suggestion date follow https://jira.exoplatform.org/browse/FQA-1721
  */
 public class Calendar_Task extends CalendarBase {
 
@@ -25,7 +25,8 @@ public class Calendar_Task extends CalendarBase {
 
 	@BeforeMethod
 	public void setUpBeforeTest(){
-		getDriverAutoSave();
+//		getDriverAutoSave();
+		initSeleniumTest();
 		acc = new ManageAccount(driver);
 		evt = new Event(driver);
 		tsk = new Task(driver);
@@ -40,29 +41,107 @@ public class Calendar_Task extends CalendarBase {
 		driver.manage().deleteAllCookies();
 		driver.quit();
 	}
-	
-	/**
-	 * Add new task to Calendar
-	 * CaseID 68652
-	 */
-	@Test
-	public void test01_AddNewTask() {
-		String CALENDAR01 = "CALENDAR_01";
 
-		info("Go to Intranet Calendar");
+
+	/**Testcase to check add task from 3 ways
+	 * CaseID 109238: add new task from action bar or on a calendar
+	 * CaseID: 69266: edit task
+	 * CaseID: 69267: delete task
+	 */
+	
+	/* caseId: 109238 -> Add new task by clicking Task on action bar or [Add task] in a calendar*/
+	@Test
+	public void test01_AddEditDeleteTask_FromActionBar(){
+		String calendar = "Calendar_109238_1";
+		String color = "sky_blue";
+		String task = "Task_109238_1";
+		String newTask = "Task_109238_1 update";
+		String note = "Update new task";
+		
 		goToCalendarPage();
 		setTimezoneForCalendar("(GMT +07:00) Asia/Ho_Chi_Minh");
-		driver.navigate().refresh();
+		
+		addCalendar(calendar, null, color);
+		tsk.goToAddTaskFromActionBar();
+		tsk.checkSuggestionTaskTime(null, 30);
+		tsk.checkSuggestionTaskTime("07:00", 30);
+		tsk.inputDataTask(task, null, null, null, false, calendar);
+		tsk.editTask(task, newTask, note, getDate(0,"MM/dd/yyyy") + " 12:00", getDate(0,"MM/dd/yyyy") + " 13:00", false, "/TestDate/Winter.jpg");
+		waitForAndGetElement(By.xpath(ELEMENT_EVENT_TASK_ONE_DAY.replace("${taskName}", newTask)));
 
-		info("Add a new task");
-		tsk.addQuickTask(CALENDAR01,CALENDAR01,getDate(0,"MM/dd/yyyy"),getDate(0,"MM/dd/yyyy"),false);
-
-		info("Confirm added task displays in the calendar");
-		waitForAndGetElement(By.xpath(ELEMENT_EVENT_TASK_ONE_DAY.replace("${taskName}", CALENDAR01)));
-
-		info("restore data");
-		deleteEventTask(CALENDAR01,selectDayOption.ONEDAY);
+		tsk.deleteEventTask(newTask);
+		deleteCalendar(calendar);
 	}
+	
+	@Test
+	public void test01_AddEditDeleteTask_FromOnCalendar(){
+		String calendar = "Calendar_109238_2";
+		String color = "sky_blue";
+		String task = "Task_109238_2";
+		String newTask = "Task_109238_2 update";
+		String note = "Update new task";
+		
+		goToCalendarPage();
+		setTimezoneForCalendar("(GMT +07:00) Asia/Ho_Chi_Minh");
+		
+		addCalendar(calendar, null, color);
+		tsk.goToAddTaskFromCalendar(calendar);
+		tsk.checkSuggestionTaskTime(null, 30);
+		tsk.checkSuggestionTaskTime("07:00", 30);
+		tsk.inputDataTask(task, null, null, null, false, calendar);
+		tsk.editTask(task, newTask, note, getDate(0,"MM/dd/yyyy") + " 12:00", getDate(0,"MM/dd/yyyy") + " 13:00", false, "/TestDate/Winter.jpg");
+		waitForAndGetElement(By.xpath(ELEMENT_EVENT_TASK_ONE_DAY.replace("${taskName}", newTask)));
+
+		tsk.deleteEventTask(newTask);
+		deleteCalendar(calendar);
+	}
+	
+	/* caseId: 99374 -> Add a Task by click on calendar main pane*/
+	@Test
+	public void test01_AddEditDeleteTask_FromMainPane(){
+		String calendar = "Calendar_99374";
+		String color = "sky_blue";
+		String task = "Task_99374";
+		String newTask = "Task_99374 update";
+		String note = "Update new task";
+		
+		goToCalendarPage();
+		setTimezoneForCalendar("(GMT +07:00) Asia/Ho_Chi_Minh");
+		
+		addCalendar(calendar, null, color);
+		tsk.goToAddTaskFromMainPane("12:00");
+		tsk.checkSuggestionTaskTime(null, 30);
+		tsk.checkSuggestionTaskTime("07:00", 30);
+		tsk.inputDataTask(task, null, null, null, false, calendar);
+		tsk.editTask(task, newTask, note, getDate(0,"MM/dd/yyyy") + " 12:00", getDate(0,"MM/dd/yyyy") + " 13:00", false, "/TestDate/Winter.jpg");
+		waitForAndGetElement(By.xpath(ELEMENT_EVENT_TASK_ONE_DAY.replace("${taskName}", newTask)));
+
+		tsk.deleteEventTask(newTask);
+		deleteCalendar(calendar);
+	}
+	
+//	/**
+//	 * Add new task to Calendar
+//	 * CaseID 68652
+//	 */
+//	@Test
+//	public void test01_AddNewTask() {
+//		String CALENDAR01 = "CALENDAR_01";
+//
+//		info("Go to Intranet Calendar");
+//		goToCalendarPage();
+//		setTimezoneForCalendar("(GMT +07:00) Asia/Ho_Chi_Minh");
+////		driver.navigate().refresh();
+//
+//		info("Add a new task");
+//		tsk.addQuickTask(CALENDAR01,CALENDAR01,getDate(0,"MM/dd/yyyy"),getDate(0,"MM/dd/yyyy"),false);
+//
+//		info("Confirm added task displays in the calendar");
+//		waitForAndGetElement(By.xpath(ELEMENT_EVENT_TASK_ONE_DAY.replace("${taskName}", CALENDAR01)));
+//
+//		info("restore data");
+//		deleteEventTask(CALENDAR01,selectDayOption.ONEDAY);
+//	}
 
 	/** 
 	 * Check pop-up reminder of a task
@@ -79,7 +158,7 @@ public class Calendar_Task extends CalendarBase {
 		driver.navigate().refresh();
 
 		info("Add a new task");
-		tsk.goToAddTask();
+		tsk.goToAddTaskFromActionBar();
 		tsk.inputBasicQuickTask(CALENDAR02,CALENDAR02);
 		tsk.inputFromToTask(getDate(0,"MM/dd/yyyy"),getDate(0,"MM/dd/yyyy"),false);
 		info("Setting reminder for task");
@@ -114,7 +193,7 @@ public class Calendar_Task extends CalendarBase {
 		driver.navigate().refresh();
 
 		info("Add a new task");
-		tsk.goToAddTask();
+		tsk.goToAddTaskFromActionBar();
 		tsk.inputBasicQuickTask(CALENDAR03,CALENDAR03);
 		tsk.inputFromToTask(FROM_TIME,TO_TIME,false);
 		info("Setting reminder for task");
@@ -184,6 +263,53 @@ public class Calendar_Task extends CalendarBase {
 		deleteEventTask(CALENDAR05, selectDayOption.ONEDAY);
 	}
 
+//	/** 
+//	 * Edit a task
+//	 * CaseID: 69266
+//	 */
+//	@Test
+//	public void test04_EditTask(){
+//
+//		String CALENDAR04 = "CALENDAR_04";
+//		String TITLE = "CALENDAR_04_edited";
+//		String DESCRIPTION = "CALENDAR_04_description_edited";
+//
+//		info("Go to Intranet Calendar");
+//		goToCalendarPage();
+//		//setTimezoneForCalendar("(GMT +07:00) Asia/Ho_Chi_Minh");
+//		driver.navigate().refresh();
+//
+//		info("Add a new task");
+//		tsk.addQuickTask(CALENDAR04,CALENDAR04,getDate(0,"MM/dd/yyyy"),getDate(0,"MM/dd/yyyy"),false);
+//
+//		info("Edit a task");
+//		tsk.editTask(CALENDAR04,TITLE,DESCRIPTION,null,null, false,"");
+//		
+//		info("Restore data");
+//		waitForAndGetElement(By.xpath(ELEMENT_EVENT_TASK_ONE_DAY.replace("${taskName}", CALENDAR04)));
+//		deleteEventTask(CALENDAR04, selectDayOption.ONEDAY);
+//	}
+//
+//	/** 
+//	 * Delete a task
+//	 * CaseID: 69267
+//	 */
+//	@Test
+//	public void test05_DeleteTask(){
+//		String CALENDAR05 = "CALENDAR_05";
+//
+//		info("Go to Intranet Calendar");
+//		goToCalendarPage();
+//		driver.navigate().refresh();
+//
+//		info("Add a new task");
+//		tsk.addQuickTask(CALENDAR05,CALENDAR05,getDate(0,"MM/dd/yyyy"),getDate(0,"MM/dd/yyyy"),false);
+//
+//		info("Delete a task");
+//		Utils.pause(5000);
+//		deleteEventTask(CALENDAR05, selectDayOption.ONEDAY);
+//	}
+
 	/** 
 	 * Drag & drop a task
 	 * CaseID: 75249
@@ -220,7 +346,7 @@ public class Calendar_Task extends CalendarBase {
 		goToCalendarPage();
 
 		info("Add a new task");
-		tsk.goToAddTask();
+		tsk.goToAddTaskFromActionBar();
 		tsk.inputBasicQuickTask(CALENDAR07,CALENDAR07);
 		tsk.inputFromToTask(getDate(0,"MM/dd/yyyy"),getDate(0,"MM/dd/yyyy"),false);
 		waitForAndGetElement(By.xpath(ELEMENT_EVENT_TASK_ALL_DAY.replace("${taskTitle}", CALENDAR07)));

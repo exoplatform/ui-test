@@ -2,6 +2,11 @@ package org.exoplatform.selenium.platform.calendar;
 
 import static org.exoplatform.selenium.TestLogger.info;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import org.exoplatform.selenium.Button;
 import org.exoplatform.selenium.Utils;
 import org.openqa.selenium.By;
@@ -20,16 +25,22 @@ public class Task extends CalendarBase{
 	//------------------------Task Menu-------------------------------------------------------
 	public String ELEMENT_TASK_MENU_DELETE = "//*[@id='tmpMenuElement']//i[@class='uiIconDelete uiIconLightGray']";
 	public String ELEMENT_TASK_MENU_EDIT = "//*[@id='tmpMenuElement']//i[@class='uiIconEdit uiIconLightGray']";
-
+	public By ELEMENT_RIGHT_CLICK_ADD_TASK = By.xpath("//*[@id='tmpMenuElement']//*[@class='createTask']");
+	
 	//Add quick task
-	public By ELEMENT_QUICK_ADD_TASK_POPUP = By.xpath("//span[@class='PopupTitle popupTitle' and text()='Quick Add Task']");
+//	public By ELEMENT_QUICK_ADD_TASK_POPUP = By.xpath("//span[@class='PopupTitle popupTitle' and text()='Quick Add Task']");
+	public By ELEMENT_QUICK_ADD_TASK_POPUP = By.id("UIQuickAddTaskPopupWindow");
 	public By ELEMENT_INPUT_TASK_TITLE = By.xpath("//*[@id='UIQuickAddTask']//*[@name='eventName']");
 	public By ELEMENT_INPUT_TASK_NOTE = By.xpath("//*[@id='UIQuickAddTask']//*[@id='description']");
 	public By ELEMENT_CHECKBOX_TASK_ALLDAY = By.xpath("//*[@id='UIQuickAddTask']//*[@name='allDay']");
 	public By ELEMENT_INPUT_TASK_FROM = By.xpath("//*[@id='UIQuickAddTask']//*[@name='from']");
 	public By ELEMENT_INPUT_TASK_TO = By.xpath("//*[@id='UIQuickAddTask']//*[@name='to']");
-	public By ELEMENT_INPUT_TASK_FROM_TIME = By.xpath("//input[@id='fromTime' and @style='visibility: visible;']");
-	public By ELEMENT_INPUT_TASK_TO_TIME = By.xpath("//input[@id='fromTime' and @style='visibility: visible;']");
+	public By ELEMENT_INPUT_TASK_FROM_TIME = By.xpath("//form[@id='UIQuickAddTask']//*[@id='fromTime']");
+	public By ELEMENT_INPUT_TASK_TO_TIME = By.xpath("//form[@id='UIQuickAddTask']//*[@id='toTime']");
+	public By ELEMENT_INPUT_TASK_FROM_TIME_IN = By.xpath("//*[@id='UIQuickAddTask']//*[@id='fromTime']/..//*[@class='UIComboboxInput']");
+	public By ELEMENT_INPUT_TASK_TO_TIME_IN = By.xpath("//*[@id='UIQuickAddTask']//*[@id='toTime']/..//*[@class='UIComboboxInput']");
+	public String ELEMENT_TASK_SELECT_FROM_TIME = "//*[@id='UIQuickAddTask']//*[@id='fromTime']/..//*[@class='UIComboboxLabel' and text()='${time}']";
+	public String ELEMENT_TASK_SELECT_TO_TIME = "//*[@id='UIQuickAddTask']//*[@id='toTime']/..//*[@class='UIComboboxLabel' and text()='${time}']";
 	public By ELEMENT_INPUT_TASK_CALENDAR = By.xpath("//*[@id='UIQuickAddTask']//*[@name='calendar']");
 	public By ELEMENT_INPUT_TASK_CATEGORY = By.xpath("//*[@id='UIQuickAddTask']//*[@name='category']");
 	public By ELEMENT_BUTTON_TASK = By.id("UIActionBarQuickAddTask");
@@ -44,10 +55,15 @@ public class Task extends CalendarBase{
 	public By ELEMENT_ADD_EDIT_TASK_ALLDAY = By.xpath("//*[@id='UITaskForm']//*[@name='allDay']");
 	public By ELEMENT_ADD_EDIT_TASK_FROM = By.xpath("//*[@id='UITaskForm']//*[@name='from']");
 	public By ELEMENT_ADD_EDIT_TASK_TO = By.xpath("//*[@id='UITaskForm']//*[@name='to']");
-	public By ELEMENT_ADD_EDIT_TASK_FROM_TIME = By.xpath("//*[@id='UITaskForm'//input[@id='fromTime' and @style='visibility: visible;']");
-	public By ELEMENT_ADD_EDIT_TASK_TO_TIME = By.xpath("//*[@id='UITaskForm'//input[@id='fromTime' and @style='visibility: visible;']");
-	public By ELEMENT_ADD_EDIT_TASK_CALENDAR = By.xpath("//*[@id='UITaskForm'//*[@name='calendar']");
-	public By ELEMENT_ADD_EDIT_TASK_CATEGORY = By.xpath("//*[@id='UITaskForm'//*[@name='category']");
+
+	public By ELEMENT_ADD_EDIT_TASK_FROM_TIME = By.xpath("//*[@id='UITaskForm']//input[@id='fromTime' and @style='visibility: visible;']");
+	public By ELEMENT_ADD_EDIT_TASK_TO_TIME = By.xpath("//*[@id='UITaskForm']//input[@id='fromTime' and @style='visibility: visible;']");
+	public By ELEMENT_ADD_EDIT_TASK_FROM_TIME_IN = By.xpath("//*[@id='UITaskForm']//*[@id='fromTime']/..//*[@class='UIComboboxInput']");
+	public By ELEMENT_ADD_EDIT_TASK_TO_TIME_IN = By.xpath("//*[@id='UITaskForm']//*[@id='toTime']/..//*[@class='UIComboboxInput']");
+	public String ELEMENT_ADD_EDIT_TASK_SELECT_FROM_TIME = "//*[@id='UITaskForm']//*[@id='fromTime']/..//*[@class='UIComboboxLabel' and text()='${time}']";
+	public String ELEMENT_ADD_EDIT_TASK_SELECT_TO_TIME = "//*[@id='UITaskForm']//*[@id='toTime']/..//*[@class='UIComboboxLabel' and text()='${time}']";
+	public By ELEMENT_ADD_EDIT_TASK_CALENDAR = By.xpath("//*[@id='UITaskForm']//*[@name='calendar']");
+	public By ELEMENT_ADD_EDIT_TASK_CATEGORY = By.xpath("//*[@id='UITaskForm']//*[@name='category']");
 	public By ELEMENT_TASK_ADD_ATTACHMENT = By.xpath("//button[contains(@onclick,'AddAttachment')]");
 	public By ELEMENT_TASK_FILE_INPUT = By.xpath("//*[@id='upload']//*[@name='file']");
 	public By ELEMENT_TASK_STATUS = By.name("status");
@@ -60,7 +76,9 @@ public class Task extends CalendarBase{
 	public By ELEMENT_CHECKBOX_EMAIL_REMINDER_REPEAT = By.id("emailIsRepeat");
 	public By ELEMENT_CHECKBOX_POPUP_REMINDER_REPEAT = By.id("popupIsRepeat");
 	public By ELEMENT_BUTTON_REMINDER_ADD_MORE_EMAIL = By.xpath("//*[@id='eventReminder']//i[@class='uiIconPlus uiIconLightGray']");
-
+	public By ELEMENT_PREVIEW_TASK_POPUP = By.xpath("//span[@class='PopupTitle popupTitle' and text()='Preview']");
+	public String ELEMENT_TITLE_TASK_POPUP = "//div[@class='titleList'] //*[contains(text(),'${task}')]";
+	public By ELEMENT_BUTTON_TASK_SAVE_DETAILS = By.xpath("//*[@id='UITaskForm']//*[text()='Save']");
 	//Task preview
 	public String ELEMENT_TASK_PREVIEW_TITLE = "//*[@id='UIPreviewPopup']//div[@class='titleList']/*[text()='${task}']";
 
@@ -85,10 +103,52 @@ public class Task extends CalendarBase{
 		click(ELEMENT_BUTTON_TASK);
 		Utils.pause(500);
 	}
-
+	/**
+	 * Open "Add new task" form
+	 * 
+	 */
+	public void goToAddTaskFromActionBar(){
+		info("Go to Add Task page from action bar"); 
+		click(ELEMENT_BUTTON_TASK);
+		waitForAndGetElement(ELEMENT_QUICK_ADD_TASK_POPUP);
+	}
 	/**
 	 * Open Edit task form
 	 * @param oldName: old name of task
+	public void goToAddTaskFromActionBar(){
+		info("Go to Add Task page from action bar"); 
+		click(ELEMENT_BUTTON_TASK);
+		waitForAndGetElement(ELEMENT_QUICK_ADD_TASK_POPUP);
+	}
+	
+	/**
+	 * @author lientm
+	 * @param calendarName
+	 */
+	public void goToAddTaskFromCalendar(String calendarName){
+		goToActionOnCalendar(calendarName, "Add task");	
+		waitForAndGetElement(ELEMENT_QUICK_ADD_TASK_POPUP);
+	}
+
+	/**
+	 * @author lientm
+	 * @param time: format 12:00
+	 */
+	public void goToAddTaskFromMainPane(String time){
+		String current = getCurrentDate("MMM dd yyyy");
+		info("Current date is " + current);
+		
+		String cell = "//td[contains(@startfull,'" + current + " " + time + ":00')]";
+		rightClickOnElement(cell);
+		click(ELEMENT_RIGHT_CLICK_ADD_TASK, 2);
+		waitForAndGetElement(ELEMENT_QUICK_ADD_TASK_POPUP);
+	}
+	
+	/**
+	 * Open "Edit task" form
+	 * 
+	 * @param oldName
+	 * 				old name of task
 	 */
 	public void goToEditTaskForm(String oldName){
 		info("Open Edit Task form");
@@ -192,15 +252,20 @@ public class Task extends CalendarBase{
 					if(dateTimeFrom.length > 0)
 						type(ELEMENT_INPUT_TASK_FROM, dateTimeFrom[0], true);
 					if(dateTimeFrom.length > 1)
-						type(ELEMENT_INPUT_TASK_FROM_TIME, dateTimeFrom[1], false);
+						click(ELEMENT_INPUT_TASK_FROM_TIME_IN, 2);
+						click(ELEMENT_TASK_SELECT_FROM_TIME.replace("${time}", dateTimeFrom[1]));
+						Utils.pause(1000);
+//						type(ELEMENT_INPUT_TASK_FROM_TIME, dateTimeFrom[1], false);
 				}
 				if ((to != null) & (to != "")){
 					String[] dateTimeTo = to.split(" ");
-
 					if(dateTimeTo.length > 0)
 						type(ELEMENT_INPUT_TASK_TO, dateTimeTo[0], true);
 					if(dateTimeTo.length > 1)
-						type(ELEMENT_INPUT_TASK_TO_TIME, dateTimeTo[1], false);
+						click(ELEMENT_INPUT_TASK_TO_TIME_IN, 2);
+						click(ELEMENT_TASK_SELECT_TO_TIME.replace("${time}", dateTimeTo[1]));
+						Utils.pause(1000);
+//						type(ELEMENT_INPUT_TASK_TO_TIME, dateTimeTo[1], false);
 				}
 			}
 
@@ -220,14 +285,19 @@ public class Task extends CalendarBase{
 					if(dateTime.length > 0)
 						type(ELEMENT_ADD_EDIT_TASK_FROM, dateTime[0], true);
 					if(dateTime.length > 1)
-						type(ELEMENT_ADD_EDIT_TASK_FROM_TIME, dateTime[1], false);
+//						type(ELEMENT_ADD_EDIT_TASK_FROM_TIME, dateTime[1], false);
+						click(ELEMENT_ADD_EDIT_TASK_FROM_TIME_IN, 2);
+						click(ELEMENT_ADD_EDIT_TASK_SELECT_FROM_TIME.replace("${time}", dateTime[1]));
+						Utils.pause(1000);
 				}
 				if ((to != null) & (to != "")){
-
 					String[] dateTime = to.split(" ");
 					type(ELEMENT_ADD_EDIT_TASK_TO, dateTime[0], true);
 					if(dateTime.length > 1)
-						type(ELEMENT_ADD_EDIT_TASK_TO_TIME, dateTime[1], false);
+						click(ELEMENT_ADD_EDIT_TASK_TO_TIME_IN, 2);
+						click(ELEMENT_ADD_EDIT_TASK_SELECT_TO_TIME.replace("${time}", dateTime[1]));
+						Utils.pause(1000);
+//						type(ELEMENT_ADD_EDIT_TASK_TO_TIME, dateTime[1], false);
 
 				}
 			}
@@ -297,7 +367,21 @@ public class Task extends CalendarBase{
 	 * @param opt
 	 */
 	public void addQuickTask(String name, String note, String from, String to, boolean allDay, String...opt){
-		goToAddTask();
+		goToAddTaskFromActionBar();
+		inputBasicQuickTask(name, note, opt);
+		inputFromToTask(from, to, allDay);
+		click(ELEMENT_BUTTON_TASK_SAVE);
+		if(allDay)
+			if(this.plfVersion.contains("4.0"))
+				waitForAndGetElement(ELEMENT_EVENT_TASK_ALL_DAY.replace("${event}", name));
+			else
+				waitForAndGetElement(ELEMENT_EVENT_TASK_ALL_DAY_PLF41.replace("${event}", name));
+		else
+			waitForAndGetElement(ELEMENT_EVENT_TASK_ONE_DAY.replace("${taskName}", name));
+
+	}
+	
+	public void inputDataTask(String name, String note, String from, String to, boolean allDay, String...opt){
 		inputBasicQuickTask(name, note, opt);
 		inputFromToTask(from, to, allDay);
 		click(ELEMENT_BUTTON_TASK_SAVE);
@@ -309,7 +393,49 @@ public class Task extends CalendarBase{
 		else
 			waitForAndGetElement(ELEMENT_EVENT_TASK_ONE_DAY.replace("${taskName}", name));
 	}
+
 	/**Edit a task by right click (just edit some fields, pls write more)
+	/**
+	 * @author lientm
+	 * @param from
+	 * @param duration
+	 */
+	public void checkSuggestionTaskTime(String from, int duration){
+		info("Check date is current date");
+		String dateFrom = getValue(ELEMENT_INPUT_TASK_FROM);
+		String dateTo = getValue(ELEMENT_INPUT_TASK_TO);
+		assert dateFrom.equals(getCurrentDate("MM/dd/yyyy"));
+		assert dateTo.equals(getCurrentDate("MM/dd/yyyy"));
+		
+		info("Check suggestion time");
+		if (from == null){
+			info("Check time suggestion default");				
+		}else {
+			info("Check suggesion when select From time");
+			click(ELEMENT_INPUT_TASK_FROM_TIME_IN, 2);
+			click(ELEMENT_TASK_SELECT_FROM_TIME.replace("${time}", from));
+			Utils.pause(2000);
+		}
+		String fromTime = waitForAndGetElement(ELEMENT_INPUT_TASK_FROM_TIME, DEFAULT_TIMEOUT, 1, 2).getAttribute("value");
+		info("From is " + fromTime);
+		String toTime = waitForAndGetElement(ELEMENT_INPUT_TASK_TO_TIME, DEFAULT_TIMEOUT, 1, 2).getAttribute("value");
+		info("From is " + toTime);
+		DateFormat formatter = new SimpleDateFormat("HH:mm");
+		try {
+			Date fr = (Date)formatter.parse(fromTime);
+			Date to = (Date)formatter.parse(toTime);
+			long diff = (to.getTime() - fr.getTime())/60000;
+			info("Duration is " + diff + " minus");
+			assert duration == (int) diff;
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * Edit some informations of a task by right click
+>>>>>>> 2f751a6... FQA-1721: PLF4.1.x - Calendar sniff - Date suggestion
 	 * 
 	 * @param oldName: old name of a task
 	 * @param name: new name of a task
@@ -320,11 +446,11 @@ public class Task extends CalendarBase{
 	 * @param path: new path of attachment of a task
 	 * @param opt
 	 */
-	public void editTask(String oldName, String name, String note,String from, String to, boolean allDay, String path, String...opt) {
+
+	public void editTask(String oldName, String name, String note, String from, String to, boolean allDay, String path, String...opt) {
 		info("Edit a task");
 		goToEditTaskForm(oldName);
 		inputDataTabDetailTask(name, note, from, to, allDay, path, opt);
-
 		click(ELEMENT_BUTTON_TASK_SAVE_EDIT);
 		waitForElementNotPresent(ELEMENT_BUTTON_TASK_SAVE_EDIT);
 	}

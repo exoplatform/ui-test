@@ -2,6 +2,11 @@ package org.exoplatform.selenium.platform.calendar;
 
 import static org.exoplatform.selenium.TestLogger.info;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -16,6 +21,8 @@ import org.exoplatform.selenium.Utils;
  */
 public class Event extends CalendarBase{
 
+	public By ELEMENT_RIGHT_CLICK_ADD_EVENT = By.xpath("//*[@id='tmpMenuElement']//*[@class='createEvent']");
+	
 	//--------------------Event basic actions------------------------
 	public By ELEMENT_INPUT_EVENT_TITLE = By.id("eventName");
 	public By ELEMENT_INPUT_EVENT_DESCRIPTION = By.id("description");
@@ -30,9 +37,15 @@ public class Event extends CalendarBase{
 	public By ELEMENT_INPUT_EVENT_CATEGORY = By.name("category");
 	public By ELEMENT_BUTTON_EVENT = By.id("UIActionBarQuickAddEvent");
 	public By ELEMENT_MENU_EVENT_EDIT = By.xpath("//*[@id='tmpMenuElement']//i[@class='uiIconEdit uiIconLightGray']");
-	public By ELEMENT_ADD_EVENT_POPUP = By.xpath("//span[@class='PopupTitle popupTitle' and text()='Quick Add Event']");
-
-
+	public By ELEMENT_ADD_EVENT_POPUP = By.id("UIQuickAddEventPopupWindow");
+	public By ELEMENT_INPUT_EVENT_FROM_TIME_IN = By.xpath("//*[@id='UIQuickAddEvent']//*[@id='fromTime']/..//*[@class='UIComboboxInput']");
+	public By ELEMENT_INPUT_EVENT_TO_TIME_IN = By.xpath("//*[@id='UIQuickAddEvent']//*[@id='toTime']/..//*[@class='UIComboboxInput']");
+	public String ELEMENT_EVENT_SELECT_FROM_TIME = "//*[@id='UIQuickAddEvent']//*[@id='fromTime']/..//*[@class='UIComboboxLabel' and text()='${time}']";
+	public String ELEMENT_EVENT_SELECT_TO_TIME = "//*[@id='UIQuickAddEvent']//*[@id='toTime']/..//*[@class='UIComboboxLabel' and text()='${time}']";
+	public By ELEMENT_INPUT_EVENT_FROM_TIME = By.xpath("//form[@id='UIQuickAddEvent']//*[@id='fromTime']");
+	public By ELEMENT_INPUT_EVENT_TO_TIME = By.xpath("//form[@id='UIQuickAddEvent']//*[@id='toTime']");
+	public By ELEMENT_ADD_EVENT_SAVE_QUICK_BUTTON = By.xpath("//*[@id='QuickAddEventContainer']//*[text()='Save']");
+	
 	//Preview form
 	public String ELEMENT_EVENT_PREVIEW_TITLE = "//form[@id='UIPreviewPopup']//div[@class='titleList']/strong[text()='${event}']";
 
@@ -49,7 +62,10 @@ public class Event extends CalendarBase{
 	public By ELEMENT_ADD_EDIT_EVENT_CATEGORY = By.xpath("//form[@id='UIEventForm']//*[@name='category']");
 	public By ELEMENT_ADD_EDIT_EVENT_LOCATION = By.id("place");
 	public By ELEMENT_EDIT_EVENT_POPUP = By.xpath("//span[@class='PopupTitle popupTitle' and text()='Add/Edit Event']");
-
+	public By ELEMENT_ADD_EDIT_EVENT_FROM_TIME_IN = By.xpath("//*[@id='UIEventForm']//*[@id='fromTime']/..//*[@class='UIComboboxInput']");
+	public By ELEMENT_ADD_EDIT_EVENT_TO_TIME_IN = By.xpath("//*[@id='UIEventForm']//*[@id='toTime']/..//*[@class='UIComboboxInput']");
+	public String ELEMENT_ADD_EDIT_EVENT_SELECT_FROM_TIME = "//*[@id='UIEventForm']//*[@id='fromTime']/..//*[@class='UIComboboxLabel' and text()='${time}']";
+	public String ELEMENT_ADD_EDIT_EVENT_SELECT_TO_TIME = "//*[@id='UIEventForm']//*[@id='toTime']/..//*[@class='UIComboboxLabel' and text()='${time}']";
 
 	/*Recurring event form*/
 	public By ELEMENT_BUTTON_EVENT_MORE_DETAILS = By.xpath("//*[@id='UIQuickAddEventPopupWindow']//*[text()='More Details']");
@@ -101,15 +117,60 @@ public class Event extends CalendarBase{
 	 * Open form Add event
 	 * @author thuntn
 	 */
-	public void goToAddEvent(){
+	public void goToAddEventFromActionBar(){
 		info("Go to Add Event page");
 		click(ELEMENT_BUTTON_EVENT);
 		waitForAndGetElement(ELEMENT_ADD_EVENT_POPUP);
 	}
 
 	/**
+<<<<<<< HEAD
 	 * Open Edit Event form 
 	 * @param oldEvent: old name of event
+=======
+	 * @author lientm
+	 * @param calendarName
+	 */
+	public void goToAddEventFromCalendar(String calendarName){
+		goToActionOnCalendar(calendarName, "add event");
+		waitForAndGetElement(ELEMENT_ADD_EVENT_POPUP);
+	}
+
+	/**
+	 * @author lientm
+	 * @param time: format 12:00
+	 */
+	public void goToAddEventFromMainPane(String time){
+		String current = getCurrentDate("MMM dd yyyy");
+		info("Current date is " + current);
+		
+		String cell = "//td[contains(@startfull,'" + current + " " + time + ":00')]";
+		rightClickOnElement(cell);
+		click(ELEMENT_RIGHT_CLICK_ADD_EVENT, 2);
+		waitForAndGetElement(ELEMENT_ADD_EVENT_POPUP);
+	}
+	
+	/**add event by click on block time in main panel
+	 * @author lientm
+	 * @param time
+	 */
+	public void goToAddEventByClickOnCell(String time){
+		String current = getCurrentDate("MMM dd yyyy");
+		info("Current date is " + current);
+		for (int i = 0; i < 5; i ++){
+		if (waitForAndGetElement(ELEMENT_ADD_EVENT_POPUP, 5000, 0) == null){
+			click("//td[contains(@startfull,'" + current + " " + time + ":00')]", 2);
+			info("Repeat " + i);
+			}
+		}
+		waitForAndGetElement(ELEMENT_ADD_EVENT_POPUP);
+	}
+	
+	/**
+	 * Open "Edit Event" form 
+	 * @param oldEvent
+	 * 				Name of event that need editing
+>>>>>>> 2f751a6... FQA-1721: PLF4.1.x - Calendar sniff - Date suggestion
 	 */
 	public void goToEditEventForm(String oldEvent){
 		if(waitForAndGetElement(ELEMENT_EVENT_TASK_ONE_DAY.replace("${taskName}", oldEvent), 15000, 0) != null){
@@ -185,14 +246,19 @@ public class Event extends CalendarBase{
 					if(dateTime.length > 0)
 						type(ELEMENT_INPUT_EVENT_FROM, dateTime[0], true);
 					if(dateTime.length > 1)
-						type(ELEMENT_INPUT_EVENT_FROM_TIME_SELECTBOX, dateTime[1], true);
+						click(ELEMENT_INPUT_EVENT_FROM_TIME_IN, 2);
+						click(ELEMENT_EVENT_SELECT_FROM_TIME.replace("${time}", dateTime[0]));
+						Utils.pause(1000);
 				}
 				if((to != null) & (to != "")){
 					String[] dateTime = to.split(" ");
 					if(dateTime.length > 0)
 						type(ELEMENT_INPUT_EVENT_TO, dateTime[0], true);
 					if(dateTime.length > 1)
-						type(ELEMENT_INPUT_EVENT_TO_TIME_SELECTBOX, dateTime[1], true);
+						click(ELEMENT_INPUT_EVENT_TO_TIME_IN, 2);
+						click(ELEMENT_EVENT_SELECT_TO_TIME.replace("${time}", dateTime[0]));
+						Utils.pause(1000);
+//						type(ELEMENT_INPUT_EVENT_TO_TIME_SELECTBOX, dateTime[1], true);
 				}
 			}
 		}else{
@@ -209,14 +275,20 @@ public class Event extends CalendarBase{
 					if(dateTime.length > 0)
 						type(ELEMENT_ADD_EDIT_EVENT_FROM, dateTime[0], true);
 					if(dateTime.length > 1)
-						type(ELEMENT_ADD_EDIT_EVENT_FROM_TIME, dateTime[1], true);
+						click(ELEMENT_ADD_EDIT_EVENT_FROM_TIME_IN, 2);
+						click(ELEMENT_ADD_EDIT_EVENT_SELECT_FROM_TIME.replace("${time}", dateTime[1]));
+						Utils.pause(1000);
+//						type(ELEMENT_ADD_EDIT_EVENT_FROM_TIME, dateTime[1], true);
 				}
 				if((to != null) & (to != "")){
 					String[] dateTime = to.split(" ");
 					if(dateTime.length > 0)
 						type(ELEMENT_ADD_EDIT_EVENT_TO, dateTime[0], true);
 					if(dateTime.length > 1)
-						type(ELEMENT_ADD_EDIT_EVENT_TO_TIME, dateTime[1], true);
+//						type(ELEMENT_ADD_EDIT_EVENT_TO_TIME, dateTime[1], true);
+						click(ELEMENT_ADD_EDIT_EVENT_TO_TIME_IN, 2);
+						click(ELEMENT_ADD_EDIT_EVENT_SELECT_TO_TIME.replace("${time}", dateTime[1]));
+						Utils.pause(1000);
 				}
 			}
 
@@ -369,7 +441,7 @@ public class Event extends CalendarBase{
 	 */
 	public void addQuickEvent(String name, String description, String from, String to, boolean allDay, String...opt){
 		info("--Add an event--");
-		goToAddEvent();
+		goToAddEventFromActionBar();
 		inputBasicQuickEvent(name, description, opt);
 		inputFromToEvent(from, to, allDay);
 		button.save();
@@ -687,5 +759,45 @@ public class Event extends CalendarBase{
 		}
 		return isPresentEvent;
 	}
+	
+	
+	/**
+	 * @author lientm
+	 * @param from
+	 * @param duration
+	 */
+	public void checkSuggestionEventTime(String from, int duration){
+		info("Check date is current date");
+		String dateFrom = getValue(ELEMENT_INPUT_EVENT_FROM);
+		String dateTo = getValue(ELEMENT_INPUT_EVENT_TO);
+		assert dateFrom.equals(getCurrentDate("MM/dd/yyyy"));
+		assert dateTo.equals(getCurrentDate("MM/dd/yyyy"));
+		
+		info("Check suggestion time");
+		if (from == null){
+			info("Check time suggestion default");				
+		}else {
+			info("Check suggesion when select From time");
+			click(ELEMENT_INPUT_EVENT_FROM_TIME_IN, 2);
+			click(ELEMENT_EVENT_SELECT_FROM_TIME.replace("${time}", from));
+			Utils.pause(2000);
+		}
+		String fromTime = waitForAndGetElement(ELEMENT_INPUT_EVENT_FROM_TIME, DEFAULT_TIMEOUT, 1, 2).getAttribute("value");
+		info("From is " + fromTime);
+		String toTime = waitForAndGetElement(ELEMENT_INPUT_EVENT_TO_TIME, DEFAULT_TIMEOUT, 1, 2).getAttribute("value");
+		info("From is " + toTime);
+		DateFormat formatter = new SimpleDateFormat("HH:mm");
+		try {
+			Date fr = (Date)formatter.parse(fromTime);
+			Date to = (Date)formatter.parse(toTime);
+			long diff = (to.getTime() - fr.getTime())/60000;
+			info("Duration is " + diff + " minus");
+			assert duration == (int) diff;
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
 }
 

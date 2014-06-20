@@ -69,7 +69,7 @@ public class Calendar_Event_RecurringEvents extends CalendarBase {
 
 		 *Expected Outcome: 
 			- The pop up "Quick Add Event" is displayed*/
-		evt.goToAddEvent();
+		evt.goToAddEventFromActionBar();
 
 		/*Step number: 3
 		 *Step Name: Step 3: Add a recurring event
@@ -157,7 +157,7 @@ public class Calendar_Event_RecurringEvents extends CalendarBase {
 		 *Expected Outcome: 
 			- Series of events is displayed with an extra icon, see attachment [extraIcon.png]*/
 
-		evt.goToAddEvent();
+		evt.goToAddEventFromActionBar();
 		evt.inputBasicQuickEvent(name, description);
 		evt.inputFromToEvent(getDate(0,"MM/dd/yyyy"), getDate(0,"MM/dd/yyyy"), false);
 		click(evt.ELEMENT_BUTTON_EVENT_MORE_DETAILS);
@@ -218,7 +218,7 @@ public class Calendar_Event_RecurringEvents extends CalendarBase {
 			- The Calendar is displayed
 			- A recurring event is displayed*/
 		goToCalendarPage();
-		evt.goToAddEvent();
+		evt.goToAddEventFromActionBar();
 		evt.inputBasicQuickEvent(name, description);
 		evt.inputFromToEvent(getDate(0,"MM/dd/yyyy"), getDate(0,"MM/dd/yyyy"), true);
 		click(evt.ELEMENT_BUTTON_EVENT_MORE_DETAILS);
@@ -303,7 +303,7 @@ public class Calendar_Event_RecurringEvents extends CalendarBase {
 		 *Expected Outcome: 
 			- A recurring events is displayed*/
 		goToCalendarPage();
-		evt.goToAddEvent();
+		evt.goToAddEventFromActionBar();
 
 		evt.inputBasicQuickEvent(name, description);
 		evt.inputFromToEvent(getDate(0,"MM/dd/yyyy"), getDate(0,"MM/dd/yyyy"), false);
@@ -378,7 +378,7 @@ public class Calendar_Event_RecurringEvents extends CalendarBase {
 			- The Calendar is displayed
 			- A recurring event is displayed*/
 		goToCalendarPage();
-		evt.goToAddEvent();
+		evt.goToAddEventFromActionBar();
 		evt.inputBasicQuickEvent(name, description);
 		evt.inputFromToEvent(getDate(0,"MM/dd/yyyy"), getDate(0,"MM/dd/yyyy"), false);
 		click(evt.ELEMENT_BUTTON_EVENT_MORE_DETAILS);
@@ -453,7 +453,7 @@ public class Calendar_Event_RecurringEvents extends CalendarBase {
 		 *Expected Outcome: 
 			- A recurring events is displayed*/
 		goToCalendarPage();
-		evt.goToAddEvent();
+		evt.goToAddEventFromActionBar();
 
 		evt.inputBasicQuickEvent(name, description);
 		evt.inputFromToEvent(getDate(0,"MM/dd/yyyy"), getDate(0,"MM/dd/yyyy"), false);
@@ -530,7 +530,7 @@ public class Calendar_Event_RecurringEvents extends CalendarBase {
 			- The Calendar is displayed
 			- A recurring event is displayed*/
 		goToCalendarPage();
-		evt.goToAddEvent();
+		evt.goToAddEventFromActionBar();
 		evt.inputBasicQuickEvent(name, description);
 		evt.inputFromToEvent(getDate(0,"MM/dd/yyyy"), getDate(0,"MM/dd/yyyy"), true);
 		click(evt.ELEMENT_BUTTON_EVENT_MORE_DETAILS);
@@ -619,7 +619,7 @@ public class Calendar_Event_RecurringEvents extends CalendarBase {
 			- The Calendar is displayed
 			- A recurring event is displayed*/
 		goToCalendarPage();
-		evt.goToAddEvent();
+		evt.goToAddEventFromActionBar();
 		evt.inputBasicQuickEvent(name, description);
 		evt.inputFromToEvent(getDate(0,"MM/dd/yyyy"), getDate(0,"MM/dd/yyyy"), true);
 		click(evt.ELEMENT_BUTTON_EVENT_MORE_DETAILS);
@@ -709,7 +709,7 @@ public class Calendar_Event_RecurringEvents extends CalendarBase {
 		 *Expected Outcome: 
 			- A recurring events is displayed*/
 		goToCalendarPage();
-		evt.goToAddEvent();
+		evt.goToAddEventFromActionBar();
 
 		evt.inputBasicQuickEvent(name, description);
 		evt.inputFromToEvent(getDate(0,"MM/dd/yyyy"), getDate(0,"MM/dd/yyyy"), false);
