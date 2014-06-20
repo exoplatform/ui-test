@@ -1386,7 +1386,7 @@ public class PlatformBase extends TestBase {
 			switchToParentWindow();
 			waitForAndGetElement(By.linkText(uploadFileName));
 		}
-		button.cancel();
+		button.close();
 		Utils.pause(1000);
 		waitForElementNotPresent(ELEMENT_SELECT_FILE_POPUP);	
 		

@@ -120,29 +120,6 @@ public class Calendar_Task extends CalendarBase {
 		tsk.deleteEventTask(newTask);
 		deleteCalendar(calendar);
 	}
-	
-//	/**
-//	 * Add new task to Calendar
-//	 * CaseID 68652
-//	 */
-//	@Test
-//	public void test01_AddNewTask() {
-//		String CALENDAR01 = "CALENDAR_01";
-//
-//		info("Go to Intranet Calendar");
-//		goToCalendarPage();
-//		setTimezoneForCalendar("(GMT +07:00) Asia/Ho_Chi_Minh");
-////		driver.navigate().refresh();
-//
-//		info("Add a new task");
-//		tsk.addQuickTask(CALENDAR01,CALENDAR01,getDate(0,"MM/dd/yyyy"),getDate(0,"MM/dd/yyyy"),false);
-//
-//		info("Confirm added task displays in the calendar");
-//		waitForAndGetElement(By.xpath(ELEMENT_EVENT_TASK_ONE_DAY.replace("${taskName}", CALENDAR01)));
-//
-//		info("restore data");
-//		deleteEventTask(CALENDAR01,selectDayOption.ONEDAY);
-//	}
 
 	/** 
 	 * Check pop-up reminder of a task
@@ -215,150 +192,6 @@ public class Calendar_Task extends CalendarBase {
 	}
 
 	/** 
-	 * Edit a task
-	 * CaseID: 69266
-	 */
-	@Test
-	public void test04_EditTask(){
-
-		String CALENDAR04 = "CALENDAR_04";
-		String TITLE = "CALENDAR_04_edited";
-		String DESCRIPTION = "CALENDAR_04_description_edited";
-
-		info("Go to Intranet Calendar");
-		goToCalendarPage();
-		//setTimezoneForCalendar("(GMT +07:00) Asia/Ho_Chi_Minh");
-		driver.navigate().refresh();
-
-		info("Add a new task");
-		tsk.addQuickTask(CALENDAR04,CALENDAR04,getDate(0,"MM/dd/yyyy"),getDate(0,"MM/dd/yyyy"),false);
-
-		info("Edit a task");
-		tsk.editTask(CALENDAR04,TITLE,DESCRIPTION,null,null, false,"");
-		
-		info("Restore data");
-		waitForAndGetElement(By.xpath(ELEMENT_EVENT_TASK_ONE_DAY.replace("${taskName}", CALENDAR04)));
-		deleteEventTask(CALENDAR04, selectDayOption.ONEDAY);
-	}
-
-	/** 
-	 * Delete a task
-	 * CaseID: 69267
-	 */
-	@Test
-	public void test05_DeleteTask(){
-		String CALENDAR05 = "CALENDAR_05";
-
-		info("Go to Intranet Calendar");
-		goToCalendarPage();
-		driver.navigate().refresh();
-		info("Add a new task");
-		tsk.addQuickTask(CALENDAR05,CALENDAR05,getDate(0,"MM/dd/yyyy"),getDate(0,"MM/dd/yyyy"),false);
-		//waitForAndGetElement(ELEMENT_EVENT_TASK_ONE_DAY.replace("${taskName}", CALENDAR05),50000);
-		if (isElementNotPresent(ELEMENT_EVENT_TASK_ONE_DAY.replace("${taskName}", CALENDAR05))){
-			waitForAndGetElement(ELEMENT_EVENT_TASK_ONE_DAY_PLF41.replace("${taskName}", CALENDAR05));
-		}
-		
-		info("Delete a task");
-		Utils.pause(5000);
-		deleteEventTask(CALENDAR05, selectDayOption.ONEDAY);
-	}
-
-//	/** 
-//	 * Edit a task
-//	 * CaseID: 69266
-//	 */
-//	@Test
-//	public void test04_EditTask(){
-//
-//		String CALENDAR04 = "CALENDAR_04";
-//		String TITLE = "CALENDAR_04_edited";
-//		String DESCRIPTION = "CALENDAR_04_description_edited";
-//
-//		info("Go to Intranet Calendar");
-//		goToCalendarPage();
-//		//setTimezoneForCalendar("(GMT +07:00) Asia/Ho_Chi_Minh");
-//		driver.navigate().refresh();
-//
-//		info("Add a new task");
-//		tsk.addQuickTask(CALENDAR04,CALENDAR04,getDate(0,"MM/dd/yyyy"),getDate(0,"MM/dd/yyyy"),false);
-//
-//		info("Edit a task");
-//		tsk.editTask(CALENDAR04,TITLE,DESCRIPTION,null,null, false,"");
-//		
-//		info("Restore data");
-//		waitForAndGetElement(By.xpath(ELEMENT_EVENT_TASK_ONE_DAY.replace("${taskName}", CALENDAR04)));
-//		deleteEventTask(CALENDAR04, selectDayOption.ONEDAY);
-//	}
-//
-//	/** 
-//	 * Delete a task
-//	 * CaseID: 69267
-//	 */
-//	@Test
-//	public void test05_DeleteTask(){
-//		String CALENDAR05 = "CALENDAR_05";
-//
-//		info("Go to Intranet Calendar");
-//		goToCalendarPage();
-//		driver.navigate().refresh();
-//
-//		info("Add a new task");
-//		tsk.addQuickTask(CALENDAR05,CALENDAR05,getDate(0,"MM/dd/yyyy"),getDate(0,"MM/dd/yyyy"),false);
-//
-//		info("Delete a task");
-//		Utils.pause(5000);
-//		deleteEventTask(CALENDAR05, selectDayOption.ONEDAY);
-//	}
-
-//	/** 
-//	 * Edit a task
-//	 * CaseID: 69266
-//	 */
-//	@Test
-//	public void test04_EditTask(){
-//
-//		String CALENDAR04 = "CALENDAR_04";
-//		String TITLE = "CALENDAR_04_edited";
-//		String DESCRIPTION = "CALENDAR_04_description_edited";
-//
-//		info("Go to Intranet Calendar");
-//		goToCalendarPage();
-//		//setTimezoneForCalendar("(GMT +07:00) Asia/Ho_Chi_Minh");
-//		driver.navigate().refresh();
-//
-//		info("Add a new task");
-//		tsk.addQuickTask(CALENDAR04,CALENDAR04,getDate(0,"MM/dd/yyyy"),getDate(0,"MM/dd/yyyy"),false);
-//
-//		info("Edit a task");
-//		tsk.editTask(CALENDAR04,TITLE,DESCRIPTION,null,null, false,"");
-//		
-//		info("Restore data");
-//		waitForAndGetElement(By.xpath(ELEMENT_EVENT_TASK_ONE_DAY.replace("${taskName}", CALENDAR04)));
-//		deleteEventTask(CALENDAR04, selectDayOption.ONEDAY);
-//	}
-//
-//	/** 
-//	 * Delete a task
-//	 * CaseID: 69267
-//	 */
-//	@Test
-//	public void test05_DeleteTask(){
-//		String CALENDAR05 = "CALENDAR_05";
-//
-//		info("Go to Intranet Calendar");
-//		goToCalendarPage();
-//		driver.navigate().refresh();
-//
-//		info("Add a new task");
-//		tsk.addQuickTask(CALENDAR05,CALENDAR05,getDate(0,"MM/dd/yyyy"),getDate(0,"MM/dd/yyyy"),false);
-//
-//		info("Delete a task");
-//		Utils.pause(5000);
-//		deleteEventTask(CALENDAR05, selectDayOption.ONEDAY);
-//	}
-
-	/** 
 	 * Drag & drop a task
 	 * CaseID: 75249
 	 */
@@ -374,8 +207,8 @@ public class Calendar_Task extends CalendarBase {
 		tsk.addQuickTask(CALENDAR06,CALENDAR06,getDate(0,"MM/dd/yyyy"),getDate(0,"MM/dd/yyyy"),false);
 
 		info("Drag & drop a task");
-		waitForAndGetElement(By.xpath(ELEMENT_EVENT_TASK_ONE_DAY.replace("${taskName}", CALENDAR06)), 50000);
-		dragAndDropToObject(By.xpath(ELEMENT_EVENT_TASK_ONE_DAY.replace("${taskName}", CALENDAR06)), ELEMENT_TARGET_DATE);
+		waitForAndGetElement(By.xpath(ELEMENT_EVENT_TASK_ONE_DAY.replace("${taskName}", CALENDAR06)));
+		dragAndDropToObject(By.xpath(ELEMENT_EVENT_TASK_ONE_DAY.replace("${taskName}", CALENDAR06)),ELEMENT_TARGET_DATE);
 
 		info("Restore data");
 		deleteEventTask(CALENDAR06, selectDayOption.ONEDAY);

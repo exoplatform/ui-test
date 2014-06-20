@@ -439,7 +439,6 @@ public class Task extends CalendarBase{
 
 	/**
 	 * Edit some informations of a task by right click
->>>>>>> 2f751a6... FQA-1721: PLF4.1.x - Calendar sniff - Date suggestion
 	 * 
 	 * @param oldName: old name of a task
 	 * @param name: new name of a task

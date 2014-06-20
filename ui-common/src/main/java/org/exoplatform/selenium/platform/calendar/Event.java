@@ -124,13 +124,6 @@ public class Event extends CalendarBase{
 	}
 
 	/**
-<<<<<<< HEAD
-<<<<<<< HEAD
-	 * Open Edit Event form 
-	 * @param oldEvent: old name of event
-=======
-=======
->>>>>>> 2f751a6... FQA-1721: PLF4.1.x - Calendar sniff - Date suggestion
 	 * @author lientm
 	 * @param calendarName
 	 */
@@ -173,7 +166,6 @@ public class Event extends CalendarBase{
 	 * Open "Edit Event" form 
 	 * @param oldEvent
 	 * 				Name of event that need editing
->>>>>>> 2f751a6... FQA-1721: PLF4.1.x - Calendar sniff - Date suggestion
 	 */
 	public void goToEditEventForm(String oldEvent){
 		if(waitForAndGetElement(ELEMENT_EVENT_TASK_ONE_DAY.replace("${taskName}", oldEvent), 15000, 0) != null){
@@ -248,22 +240,27 @@ public class Event extends CalendarBase{
 					String[] dateTime = from.split(" ");
 					if(dateTime.length > 0)
 						type(ELEMENT_INPUT_EVENT_FROM, dateTime[0], true);
-					if(dateTime.length > 1)
+					if(dateTime.length > 1){
 						click(ELEMENT_INPUT_EVENT_FROM_TIME_IN, 2);
-						click(ELEMENT_EVENT_SELECT_FROM_TIME.replace("${time}", dateTime[0]));
-						Utils.pause(1000);
-				}
-				if((to != null) & (to != "")){
-					String[] dateTime = to.split(" ");
-					if(dateTime.length > 0)
-						type(ELEMENT_INPUT_EVENT_TO, dateTime[0], true);
-					if(dateTime.length > 1)
-						click(ELEMENT_INPUT_EVENT_TO_TIME_IN, 2);
-						click(ELEMENT_EVENT_SELECT_TO_TIME.replace("${time}", dateTime[0]));
-						Utils.pause(1000);
-//						type(ELEMENT_INPUT_EVENT_TO_TIME_SELECTBOX, dateTime[1], true);
+						click(ELEMENT_EVENT_SELECT_FROM_TIME.replace("${time}", dateTime[1]));
+					}
+
+					Utils.pause(1000);
 				}
 			}
+			if((to != null) & (to != "")){
+				String[] dateTime = to.split(" ");
+				if(dateTime.length > 0)
+					type(ELEMENT_INPUT_EVENT_TO, dateTime[0], true);
+				if(dateTime.length > 1){
+					click(ELEMENT_INPUT_EVENT_TO_TIME_IN, 2);
+					click(ELEMENT_EVENT_SELECT_TO_TIME.replace("${time}", dateTime[1]));
+				}
+
+				Utils.pause(1000);
+			}
+			//						type(ELEMENT_INPUT_EVENT_TO_TIME_SELECTBOX, dateTime[1], true);
+
 		}else{
 			if(allDay){
 				check(ELEMENT_ADD_EDIT_EVENT_ALLDAY,2);
@@ -277,24 +274,25 @@ public class Event extends CalendarBase{
 					String[] dateTime = from.split(" ");
 					if(dateTime.length > 0)
 						type(ELEMENT_ADD_EDIT_EVENT_FROM, dateTime[0], true);
-					if(dateTime.length > 1)
+					if(dateTime.length > 1){
 						click(ELEMENT_ADD_EDIT_EVENT_FROM_TIME_IN, 2);
 						click(ELEMENT_ADD_EDIT_EVENT_SELECT_FROM_TIME.replace("${time}", dateTime[1]));
-						Utils.pause(1000);
-//						type(ELEMENT_ADD_EDIT_EVENT_FROM_TIME, dateTime[1], true);
+					}
+					Utils.pause(1000);
 				}
-				if((to != null) & (to != "")){
-					String[] dateTime = to.split(" ");
-					if(dateTime.length > 0)
-						type(ELEMENT_ADD_EDIT_EVENT_TO, dateTime[0], true);
-					if(dateTime.length > 1)
-//						type(ELEMENT_ADD_EDIT_EVENT_TO_TIME, dateTime[1], true);
-						click(ELEMENT_ADD_EDIT_EVENT_TO_TIME_IN, 2);
-						click(ELEMENT_ADD_EDIT_EVENT_SELECT_TO_TIME.replace("${time}", dateTime[1]));
-						Utils.pause(1000);
-				}
+				//						type(ELEMENT_ADD_EDIT_EVENT_FROM_TIME, dateTime[1], true);
 			}
-
+			if((to != null) & (to != "")){
+				String[] dateTime = to.split(" ");
+				if(dateTime.length > 0)
+					type(ELEMENT_ADD_EDIT_EVENT_TO, dateTime[0], true);
+				if(dateTime.length > 1){
+					//						type(ELEMENT_ADD_EDIT_EVENT_TO_TIME, dateTime[1], true);
+					click(ELEMENT_ADD_EDIT_EVENT_TO_TIME_IN, 2);
+					click(ELEMENT_ADD_EDIT_EVENT_SELECT_TO_TIME.replace("${time}", dateTime[1]));
+				}
+				Utils.pause(1000);
+			}
 		}
 	}
 
@@ -411,7 +409,6 @@ public class Event extends CalendarBase{
 	 * 				optional parameter	
 	 * 				opt[0]: calendar name of this event (optional)
 	 * 				opt[1]: category of this event (optional)
->>>>>>> 81f98e5... FQA-1720: PLF4.1/Sniff/Calendar/Recurring event
 	 */
 	public void inputAddEventForm(String name, String description, String location, String from, String to, boolean allDay, String...opt){
 		inputBasicQuickEvent(name, description, opt);
@@ -440,7 +437,6 @@ public class Event extends CalendarBase{
 	 * 				optional parameter
 	 * 				opt[0]: calendar name of this event (optional)
 	 * 				opt[1]: category of this event (optional)
->>>>>>> 81f98e5... FQA-1720: PLF4.1/Sniff/Calendar/Recurring event
 	 */
 	public void addQuickEvent(String name, String description, String from, String to, boolean allDay, String...opt){
 		info("--Add an event--");
@@ -458,7 +454,7 @@ public class Event extends CalendarBase{
 		}
 		else{
 			if(isElementNotPresent(ELEMENT_EVENT_TASK_ONE_DAY.replace("${taskName}", name)))
-				waitForAndGetElement(ELEMENT_EVENT_TASK_ONE_DAY_1.replace("${taskName}", name));
+				waitForAndGetElement(ELEMENT_EVENT_TASK_ONE_DAY_PLF41.replace("${taskName}", name));
 		}
 	}
 
