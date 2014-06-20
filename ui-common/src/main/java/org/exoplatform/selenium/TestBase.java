@@ -181,7 +181,7 @@ public class TestBase {
 		waitForTextNotPresent("terms and conditions agreement");
 		try{
 			info("Verify platform version");
-			String des = driver.findElement(ELEMENT_PLF_INFORMATION).getText();
+			String des = waitForAndGetElement(ELEMENT_PLF_INFORMATION,5000,2).getText();
 			if(des.contains("v4.0")){
 				this.plfVersion = "4.0";
 				info("Platform version 4.0.x");
@@ -191,8 +191,8 @@ public class TestBase {
 				info("Platform version 4.1.x");
 			}
 		}catch(Exception e){
-			info("Unknown platform version. Set to default version 4.0.x.");
-			this.plfVersion="4.0";
+			info("Unknown platform version. Set to default version 4.1.x.");
+			this.plfVersion="4.1";
 		}
 
 	}
@@ -735,6 +735,7 @@ public class TestBase {
 		if (baseUrl==null) baseUrl = DEFAULT_BASEURL;
 		action = new Actions(driver);
 		termsAndConditions();
+		checkPLFVersion();
 	}
 
 	/**
