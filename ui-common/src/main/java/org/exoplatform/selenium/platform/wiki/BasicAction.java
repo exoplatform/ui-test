@@ -390,12 +390,18 @@ public class BasicAction extends Permission{
 	 */
 	public void removeRelatedPage(boolean delete, boolean direct, String wikiPath, String pageName){
 		magAlert = new ManageAlert(driver);
+		//button = new Button(driver);
+		
 		if (direct){
 			click(By.xpath(ELEMENT_REMOVE_RELATED_PAGE_LINK.replace("${relatedPage}", pageName)));
+			magAlert.acceptAlert();
+		    //button.ok(); 
 		}else{
 			goToWikiPage(wikiPath);
 			goToPageInfo();
 			click(By.xpath(ELEMENT_REMOVE_RELATED_PAGE_LINK.replace("${relatedPage}", pageName)));
+			magAlert.acceptAlert();
+			//button.ok();
 		}
 		if (delete){
 			magAlert.acceptAlert();

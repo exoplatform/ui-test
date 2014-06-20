@@ -83,7 +83,9 @@ public class Wiki_Information extends Version {
 
 		info("Compare 2 version of page");
 		compareVersion("1", "2");
-		waitForAndGetElement(ELEMENT_LINE_REMOVE.replace("${lineRemove}", content));
+		if (isElementNotPresent(ELEMENT_LINE_REMOVE.replace("${lineRemove}", content))){
+			waitForAndGetElement(ELEMENT_LINE_REMOVE_AUX.replace("${lineRemove}", content));
+		}
 		waitForAndGetElement(ELEMENT_LINE_ADD.replace("${lineAdd}", newContent));
 
 		click(By.linkText(newTitle));
@@ -181,7 +183,7 @@ public class Wiki_Information extends Version {
 		String content = "Wiki_sniff_infor_page_content_06";
 
 		magAc.signOut();
-		magAc.signIn("fqa-exo", "gtngtn");
+		magAc.signIn("fqaexo", "gtngtn");
 		goToWiki();
 		addBlankWikiPage(title, content, 0);
 		goToAddRelation();
@@ -208,7 +210,6 @@ public class Wiki_Information extends Version {
 
 		addBlankWikiPage(title2, content2, 0);
 		addRelatedPage("Wiki Home/" + title1, title2);
-
 		removeRelatedPage(true, true, "", title2);
 
 		click(By.linkText(title1));

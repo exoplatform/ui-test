@@ -17,7 +17,7 @@ public class ManageDraft extends RichTextMode {
 	
 	//Manage Draft screen
 	public String ELEMENT_DRAFT_OF_NEW_PAGE = "//*[@id='UIWikiDraftGrid']//*[text()='${title} (New Page)']";
-	public String ELEMENT_DELETE_DRAFT = "//*[contains(text(), '${title}')]/../../..//*[@class='uiIconDeleteDraft']";
+	public String ELEMENT_DELETE_DRAFT = "//*[contains(text(), '${title}')]/../../..//*[contains(@class, 'uiIconDeleteDraft')]";
 	public String ELEMENT_DRAFT_OF_EDIT_PAGE = "//*[@id='UIWikiDraftGrid']//*[text()='${title}']";
 	
 	/**

@@ -66,7 +66,6 @@ public class TestBase {
 	public final String DEFAULT_BASEURL = "http://cloudtest02.fqa.exocloud.vn/portal"; 
 	//"http://cloudtest06.exocloud.testlab1.exoplatform.vn/portal";
 
-
 	//"http://yopmail.netstg.exoplatform.org/portal";
 	//"http://hushmail.wks-acc.exoplatform.org/portal";
 	//"http://gmail.wks-acc.exoplatform.org/portal";
@@ -144,8 +143,6 @@ public class TestBase {
 		}
 	}
 
-
-
 	/**
 	 * Check term and conditions
 	 * 
@@ -182,6 +179,8 @@ public class TestBase {
 		try{
 			info("Verify platform version");
 			String des = waitForAndGetElement(ELEMENT_PLF_INFORMATION,5000,2).getText();
+			info("Platform version..." + des);
+
 			if(des.contains("v4.0")){
 				this.plfVersion = "4.0";
 				info("Platform version 4.0.x");
@@ -194,7 +193,6 @@ public class TestBase {
 			info("Unknown platform version. Set to default version 4.1.x.");
 			this.plfVersion="4.1";
 		}
-
 	}
 
 	public void accountSetupWithoutGreeting(){

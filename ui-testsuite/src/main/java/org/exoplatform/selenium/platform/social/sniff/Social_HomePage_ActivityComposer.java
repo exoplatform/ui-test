@@ -126,22 +126,22 @@ public class Social_HomePage_ActivityComposer extends Activity {
 		actBar.goToAddNewContent();
 		conTemp.createNewFile(file, file, "");
 
-//		Step 1: Go to Select File Dialog  
+		//Step 1: Go to Select File Dialog  
 		//- Goto Homepage
 		navToolBar.goToHomePage();
 
 		//- In Activity Composer click File (icon)
 		//- Select File Dialog shows up
-//		Step 2: Select document
+		//Step 2: Select document
 		//- Browse the Select File Dialog to choose a document
 		//- Click Select
 		//- A breadcrumb is displaying the current position of the user in the browsed drive.
 		//- the name of the file should be displayed under the activity input field.
-//		Step 3:  Share the document
+		//Step 3:  Share the document
 		//- Click Share button
 		//- Activity is added into activity stream
 		selectFile(driverName,false,folderPath,file,""); 
-
+		
 		//Clear data
 		activity.deleteActivity(file);
 		navToolBar.goToSiteExplorer();
@@ -189,7 +189,7 @@ public class Social_HomePage_ActivityComposer extends Activity {
 		//Click Share button
 		//- Activity is added into activity stream
 		selectFile(driverName,true,folderPath,"",uploadFileName,folder);
-
+		
 		//Clear data
 		activity.deleteActivity(uploadFileName);
 		navToolBar.goToSiteExplorer();

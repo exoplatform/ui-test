@@ -80,7 +80,8 @@ public class Wiki_Search extends Template {
 		goToWiki();
 		advancedSearch("Wiki_search_title_02", spaceName);
 		assert getText(ELEMENT_SEARCH_RESULT) != "0";
-		waitForAndGetElement(ELEMENT_PAGE_RESULT.replace("${title}", title));
+		//waitForAndGetElement(ELEMENT_PAGE_RESULT.replace("${title}", title));
+		waitForAndGetElement(ELEMENT_PAGE_RESULT_AUX.replace("${title}", title));
 		
 		magMem.goToAllSpaces();
 		magMem.deleteSpace(spaceName, 180000);

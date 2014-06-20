@@ -72,7 +72,8 @@ public class WikiBase extends PlatformBase{
 	public final By ELEMENT_SEARCH_RESULT = By.className("resultNumber");
 	//public final String ELEMENT_PAGE_RESULT = "//*[@id='UIWikiAdvanceSearchResult']//*[contains(text(), '${title}')]";
 	public final String ELEMENT_PAGE_RESULT="//*[@href='/portal/intranet/wiki/${title}']";
-	public final String ELEMENT_PAGE_SPACR_RESULT="";
+	public final String ELEMENT_PAGE_RESULT_AUX = "//*[contains(@href, '${title}')]";
+	public final String ELEMENT_PAGE_SPACR_RESULT = "";
 	
 	//Wiki Home
 	public final By ELEMENT_WIKI_HOME_LINK=By.xpath("//a[text()='Wiki Home']");
@@ -183,7 +184,7 @@ public class WikiBase extends PlatformBase{
 	//Close template list	
 	public By ELEMENT_CLOSE_TEMPLATE_LIST=By.xpath("//*[text()='Select Template']/../a[@class='uiIconClose pull-right']");
 	//Close preview window
-	public By ELEMENT_CLOSE_PREVIEW_WINDOW=By.xpath("//div[text()='Preview']/..//*[@class='uiIconClose']");
+	public By ELEMENT_CLOSE_PREVIEW_WINDOW=By.xpath("//div[text()='Preview']/..//*[contains(@class, 'uiIconClose')]");
 	//	Preview template
 	public final String ELEMENT_PREVIEW_NEW_TEMPLATE="//div[text()='${TEMPLATE_TITLE}']/../..//*[contains(@class, 'uiIconPreview')]";
 	// Verify effect
@@ -239,20 +240,21 @@ public class WikiBase extends PlatformBase{
 	public final By ELEMENT_PAGE_TITLE = By.id("titleInfo");
 	
 	public final String ELEMENT_PAGE_INFO_TITLE = "//h6[@class='pageInfoTitle' and contains(text(),'${infoTitle}')]";
-public final String ELEMENT_VERIFY_INFO_SUMMARY = "//div[@class='uiPageInfoItem uiPageInfoSummary']//b[contains(text(),'${infoSummary}')]/ancestor::tr/td[contains(text(),'${item}')]";
-public final String ELEMENT_VERIFY_HIERARCHY = "//div[text()='${page}']/..//*//*//a[@href='/portal/intranet/wiki/${pageTitle}']";
+    public final String ELEMENT_VERIFY_INFO_SUMMARY = "//div[@class='uiPageInfoItem uiPageInfoSummary']//b[contains(text(),'${infoSummary}')]/ancestor::tr/td[contains(text(),'${item}')]";
+    public final String ELEMENT_VERIFY_HIERARCHY = "//div[text()='${page}']/..//*//*//a[@href='/portal/intranet/wiki/${pageTitle}']";
 	
 	// Wiki page > View Change
 	public final String ELEMENT_CHANGES_COMPARE_VERSION = "//*[text()='${1stNumber}']/../b[text()='${2ndNumber}']/../..//a[@class='changes']";
 	public final String ELEMENT_VERSION_CHECKBOX="//input[@id='version_{$version}']";
-	public String ELEMENT_LINE_REMOVE = "//*[@class='diffremoveword' and text()='${lineRemove}']";
-	public String ELEMENT_LINE_ADD = "//*[@class='diffaddword' and text()='${lineAdd}']";
+	public final String ELEMENT_LINE_REMOVE = "//*[@class='diffremoveword' and text()='${lineRemove}']";
+	public final String ELEMENT_LINE_REMOVE_AUX = "//*[@class='diffunmodifiedline' and text()='${lineRemove}']";
+	public final String ELEMENT_LINE_ADD = "//*[@class='diffaddword' and text()='${lineAdd}']";
 
 	// Go to Wiki page > More > Page info > Add more relations
 	public final String ELEMENT_SELECTED_PAGE = "//div[contains(@class,'popupContent')]//*[@id='iconTreeExplorer' and contains(@onclick, 'event')]//a[contains(text(), '${relatedPage}')]"; 
 	public final String ELEMENT_RELATED_PAGE = "//*[text()='Related Pages']/..//a[contains(text(),'${relatedPage}')]";
 	public By ELEMENT_SELECT_SPACE = By.xpath("//*[contains(text(), 'Select the Wiki:')]/..//*[@class='btn dropdown-toggle']");
-	public final String ELEMENT_REMOVE_RELATED_PAGE_LINK = "//*[contains(text(),'${relatedPage}')]/ancestor::table//*[@class='uiIconDelete']";
+	public final String ELEMENT_REMOVE_RELATED_PAGE_LINK = "//*[contains(text(),'${relatedPage}')]/ancestor::table//*[contains(@class, 'uiIconDelete')]";
 	public By ELEMENT_NO_SPACE_OPTION = By.id("UISpaceSwitcher_nospace");
 
 	//Wiki page > Revisions page
