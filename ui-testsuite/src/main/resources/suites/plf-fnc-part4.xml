@@ -15,6 +15,7 @@
 			<class name = "org.exoplatform.selenium.platform.plf.functional.navigation.topnavigation.create.PLF_Navigation_TopNavigation_Create_UploadFile" />
 			<class name = "org.exoplatform.selenium.platform.plf.functional.navigation.topnavigation.create.PLF_Navigation_TopNavigation_Create_WikiPage" />
 			<class name = "org.exoplatform.selenium.platform.plf.functional.genericuserpopup.PLF_GenericUserPopup_WhoIsOnlineGadget" />
+			<class name = "org.exoplatform.selenium.platform.plf.functional.genericuserpopup.PLF_GenericUserPopup_ActivityStream" />
 		</classes>
 	</test>
 	<listeners>
