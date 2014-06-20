@@ -76,7 +76,9 @@ public class ForumManageTopic extends ForumBase {
 	public By ELEMENT_TOPIC_ICON_TAB = By.linkText("Icon");
 	public String ELEMENT_GROUP_ICON = "//div[@class='ItemTitle' and text()='${group}']";
 	public String ELEMENT_ICON = "//div[@class='${icon}']";
-
+	public String MSG_ADD_MODERATE_TOPIC = "Your topic is pending moderation. It will be displayed after approval.";
+	public String MSG_ADD_CENSOR_TOPIC = "This post may contain offensive content. It will be displayed after moderation.";
+	
 	//Options tab
 	public By ELEMENT_TOPIC_OPTIONS_TAB = By.linkText("Options");
 	public By ELEMENT_TOPIC_ADD_TYPE = By.xpath("//img[@alt='Add Topic Type']");
@@ -128,7 +130,7 @@ public class ForumManageTopic extends ForumBase {
 
 	//-------------------censor topic list form-----------------------------------------------
 	public By ELEMENT_POPUP_CENSOR_TOPIC = By.xpath("//span[@class='PopupTitle popupTitle' and text()='Censor Topics List']");
-	public String ELEMENT_CENSOR_TOPIC_CHECKBOX ="//*[text()='${topic}']/../../../../*//input[@type='checkbox']";
+	public String ELEMENT_CENSOR_TOPIC_CHECKBOX ="//*[@id='UIPageListTopicWaiting']//*[text()='${topic}']/../../../../*//input[@type='checkbox']";
 	public By ELEMENT_CENSOR_APPROVE_BUTTON = By.xpath("//*[text()='Approve']");
 
 	//-------------------Go to topic types management screen----------------------------------------------------
@@ -400,11 +402,13 @@ public class ForumManageTopic extends ForumBase {
 		waitForAndGetElement(ELEMENT_MOVE_TOPIC);
 		click(ELEMENT_MOVE_TOPIC);
 		waitForAndGetElement(ELEMENT_POPUP_MOVE_TOPIC);
-
-		click(ELEMENT_FORUM_SELECT.replace("${forum}", destination)); 
-		waitForElementNotPresent(ELEMENT_POPUP_MOVE_TOPIC);
 		String links[] = destination.split("/");
 		int length = links.length;
+		if (waitForAndGetElement(ELEMENT_FORUM_SELECT.replace("${forum}", destination), 3000, 0) == null){
+			click(ELEMENT_FORUM_SELECT.replace("${forum}", destination) + "/../../../a");
+		}
+		click(ELEMENT_FORUM_SELECT.replace("${forum}", destination));
+		waitForElementNotPresent(ELEMENT_POPUP_MOVE_TOPIC);
 		waitForAndGetElement(ELEMENT_BREADCRUMB_TOPIC.replace("${forum}", links[length-1]).replace("${topic}", topic)); 
 		info("Move topic successfully");
 	}	

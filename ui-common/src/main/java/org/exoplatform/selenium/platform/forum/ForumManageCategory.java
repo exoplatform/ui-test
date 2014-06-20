@@ -66,7 +66,7 @@ public class ForumManageCategory extends ForumBase {
 	public final By ELEMENT_RESTRICTED_SELECT_USER = By.xpath("//*[@id='DetailTab']//i[@class='uiIconUser uiIconLightGray']");
 	public final By ELEMENT_RESTRICTED_SELECT_GROUP = By.xpath("//*[@id='DetailTab']//i[@class='uiIconGroup uiIconLightGray']");
 	public final By ELEMENT_RESTRICTED_SELECT_ROLE = By.xpath("//*[@id='DetailTab']//i[@class='uiIconMembership uiIconLightGray']");
-
+	public final By ELEMENT_CANCEL_ADD_CATEGORY_BUTTON = By.xpath("//*[@id='UICategoryForm']//button[text()='Cancel']");
 
 	//---------------Import category form--------------------------------------
 	public final By ELEMENT_IMPORT_POPUP = By.xpath("//span[@class='PopupTitle popupTitle' and text()='Import Category']");
@@ -82,7 +82,9 @@ public class ForumManageCategory extends ForumBase {
 	public final By ELEMENT_EXPORT_CATEGORY_FILE_NAME = By.id("FileName");
 	public final By ELEMENT_EXPORT_CATEGORY_ALL = By.xpath("//*[@value='ExportAll']");
 	public final By ELEMENT_EXPORT_CATEGORY_ONLY = By.xpath("//*[@value='ExportCategories']");
-
+	public final String MSG_WARNING_EMPTY_CATEGORY_EXPORT = "You have to check at least one Category";
+	public final By ELEMENT_EXPORT_CHECK_ALL = By.id("checkAll");
+	
 	//-------------------Export forums in category form----------------------------
 	public final By ELEMENT_EXPORT_FORUMS_POPUP = By.xpath("//span[@class='PopupTitle popupTitle' and text()='Export Forums']");
 	public final String ELEMENT_EXPORT_FORUMS_CHECKBOX_LIST = "//*[@id='UIExportForm']//*[contains(@id,'forumcc')]";
@@ -294,7 +296,7 @@ public class ForumManageCategory extends ForumBase {
 		else{// if (plfVersion =="4.1"){
 			info("Import file " + file + "successfully");
 		}		
-	
+		waitForElementNotPresent(ELEMENT_IMPORT_POPUP);
 	}
 
 	/** function: export a category

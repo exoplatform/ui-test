@@ -1344,14 +1344,14 @@ public class PlatformBase extends TestBase {
 		driver.manage().window().maximize();
 
 		//login to mail
-		if(waitForAndGetElement(ELEMENT_GMAIL_USERNAME, 50000,0) == null)
+		if(waitForAndGetElement(ELEMENT_GMAIL_USERNAME, 5000,0) == null)
 			click(ELEMENT_GMAIL_SIGN_IN_LINK); 
 
-		waitForAndGetElement(ELEMENT_GMAIL_USERNAME,60000);
+//		waitForAndGetElement(ELEMENT_GMAIL_USERNAME,60000);
 		type(ELEMENT_GMAIL_USERNAME, email, true);
 		type(ELEMENT_GMAIL_PASS, pass, true);
 		click(ELEMENT_GMAIL_SIGN_IN);
-		click(ELEMENT_GMAIL_INBOX,60000);
+		click(ELEMENT_GMAIL_INBOX);
 		Utils.pause(1000);
 	}
 
@@ -1361,6 +1361,7 @@ public class PlatformBase extends TestBase {
 	 * @param content: mail content
 	 */
 	public void checkAndDeleteMail(By mail, String content){
+		info("Check and delete mail");
 		waitForAndGetElement(mail,300000);
 
 		click(mail);	

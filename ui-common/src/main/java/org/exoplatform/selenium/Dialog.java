@@ -20,6 +20,9 @@ public class Dialog extends TestBase{
 
 	public ManageAlert alt = new ManageAlert(driver);
 	
+	//Dialog warning
+	public final String ELEMENT_POPUP_WARNING = "//*[@class='UIPopupWindow UIDragObject uiPopup']//*[@class='warningIcon' and contains(text(),'${message}')]";
+	
 	//Close Message
 	public final String ELEMENT_MESSAGE_TEXT = "//li[@class='MessageContainer']/span[contains(@class, 'PopupIcon')]";
 	public final String ELEMENT_MESSAGE_DIALOG_CLOSE_ICON_IE = ELEMENT_MESSAGE_TEXT + "/../../../../../..//a";

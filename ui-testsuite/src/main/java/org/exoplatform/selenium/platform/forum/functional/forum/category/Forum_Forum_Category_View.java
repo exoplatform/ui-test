@@ -23,6 +23,7 @@ import org.testng.annotations.Test;
  * 
  * @author Thuntn
  * @date 21 Nov 2013
+ * Migrate to plf4.1 by Lientm (18 Jun 2014)
  */
 public class Forum_Forum_Category_View extends ForumBase {
 
@@ -55,13 +56,13 @@ public class Forum_Forum_Category_View extends ForumBase {
 		driver.quit();
 	}
 
-	/**CaseId: 72279 
+	/**CaseId: 109043 
 	 * View a category in case it is not restricted audience
 	 */
 	@Test
 	public void test01_ViewCategoryInCaseNotRestrictedAudience(){
-		String category = "Category 72279";
-		String descCate = "Description category 72279";
+		String category = "Category 109043";
+		String descCate = "Description category 109043";
 		
 		String[] permission = {};
 		
@@ -78,13 +79,13 @@ public class Forum_Forum_Category_View extends ForumBase {
 		cat.deleteCategoryInForum(category);
 	}
 
-	/**CaseId: 72440
+	/**CaseId: 109051
 	 * View a category in case it is restricted for specific users
 	 */
 	@Test
 	public void test02_ViewCategoryIncaseRestrictedForSpecificUsers(){
-		String category = "Category 72440";
-		String descCate = "Description category 72440";
+		String category = "Category 109051";
+		String descCate = "Description category 109051";
 		String[] permission = {"mary"};
 
 		info("View a category in case it is restricted for specific users");
@@ -104,13 +105,13 @@ public class Forum_Forum_Category_View extends ForumBase {
 		cat.deleteCategoryInForum(category);
 	}
 
-	/**CaseId: 72563
+	/**CaseId: 109057
 	 * View a category in case it is restricted for specific roles
 	 */
 	@Test
 	public void test03_ViewCategoryIncaseRestrictedForSpecificRole(){
-		String category = "Category 72563";
-		String descCate = "Description category 72563";
+		String category = "Category 109057";
+		String descCate = "Description category 109057";
 		String[] permission = {"Platform/Content Management","*"};
 
 		info("View a category in case it is restricted for specific roles");
@@ -130,13 +131,13 @@ public class Forum_Forum_Category_View extends ForumBase {
 		cat.deleteCategoryInForum(category);
 	}
 
-	/**CaseId: 72667
+	/**CaseId: 109063
 	 * View a category in case it is restricted for specific group
 	 */
 	@Test
 	public void test04_ViewCategoryIncaseRestrictedForSpecificGroups(){
-		String category = "Category 72667";
-		String descCate = "Description category 72667";
+		String category = "Category 109063";
+		String descCate = "Description category 109063";
 		String[] permission = {"Platform/Content Management"};
 
 		info("View a category in case it is restricted for specific group");
@@ -156,13 +157,13 @@ public class Forum_Forum_Category_View extends ForumBase {
 		cat.deleteCategoryInForum(category);
 	}
 
-	/**CaseId: 72745
+	/**CaseId: 10969
 	 * View a category in case its is restricted for user, role and group at once
 	 */
 	@Test
 	public void test05_ViewCategoryIncaseRestrictedForUserRoleGroup(){
-		String category = "Category 72745";
-		String descCate = "Category 72745";
+		String category = "Category 10969";
+		String descCate = "Category 10969";
 		String[] groups = {"Development"};
 		String[] users = {"james"};
 		String[] membership = {"Platform/Content Management","*"};
@@ -190,7 +191,7 @@ public class Forum_Forum_Category_View extends ForumBase {
 		//Check if mary can see the category
 		cat.checkRightOfViewCategory(DATA_USER2, DATA_PASS, category, descCate, true);
 
-		//Check if james can the category
+		//Check if james can see the category
 		cat.checkRightOfViewCategory("james", DATA_PASS, category, descCate, true);
 
 		//Delete data
@@ -203,13 +204,13 @@ public class Forum_Forum_Category_View extends ForumBase {
 		userGroup.deleteUser(user);
 	}
 
-	/**CaseId: 72815, 72816
+	/**CaseId: 109074
 	 * View a category with restricted audience in case the administrator login
 	 */
 	@Test
 	public void test06_AdministratorViewCategoryWithRestrictedAudience(){
-		String category = "Category 72815";
-		String descCate = "Description category 72815";
+		String category = "Category 109074";
+		String descCate = "Description category 109074";
 		String[] permission = {"demo"};
 
 		info("View a category with restricted audience in case the administrator login");
@@ -223,13 +224,13 @@ public class Forum_Forum_Category_View extends ForumBase {
 		cat.deleteCategoryInForum(category);
 	}
 
-	/**CaseId: 72871
-	 * View a category with restricted audience in case the administrator login
+	/**CaseId: 109079
+	 * View a category without restricted audience in case the administrator login
 	 */
 	@Test
 	public void test07_AdministratorViewCategoryWithoutRestrictedAudience(){
-		String category = "Category 72871";
-		String descCate = "Description category 72871";
+		String category = "Category 109079";
+		String descCate = "Description category 109079";
 
 		info("View a category with restricted audience in case the administrator login");
 		//Create category
@@ -238,19 +239,19 @@ public class Forum_Forum_Category_View extends ForumBase {
 		//Check if root can see the category
 		cat.checkRightOfViewCategory("root", "gtngtn", category, descCate, true);
 
-		//Delete data
+		//Delete data	
 		cat.deleteCategoryInForum(category);
 	}
 
-	/**CaseId: 72921
+	/**CaseId: 109083
 	 * View a forum belong category which assigned moderator for specific user
 	 */
 	@Test
 	public void test08_ViewForumOfCategoryWhichAssignModeratorForSpecificUser(){
-		String category = "Category 72921";
-		String descCate = "Description category 72921";
+		String category = "Category 109083";
+		String descCate = "Description category 109083";
 		String[] userGroup = {"demo"};
-		String forumName = "Forum 72921";
+		String forumName = "Forum 109083";
 		String[] addForum = {forumName, "1",null,null,forumName};
 
 		info("View a forum belong category which assigned moderator for specific user");
@@ -269,15 +270,15 @@ public class Forum_Forum_Category_View extends ForumBase {
 		cat.deleteCategoryInForum(category);
 	}
 
-	/**CaseId: 72966
+	/**CaseId: 109087
 	 * View a forum belong category which assigned moderator for specific role
 	 */
 	@Test
 	public void test09_ViewForumOfCategoryWhichAssignModeratorForSpecificRole(){
-		String category = "Category 72966";
-		String descCate = "Description category 72966";
+		String category = "Category 109087";
+		String descCate = "Description category 109087";
 		String[] userGroup = {"Platform/Content Management","*"};
-		String forumName = "Forum 72966";
+		String forumName = "Forum 109087";
 		String[] addForum = {forumName, "1",null,null,forumName};
 
 		info("View a forum belong category which assigned moderator for specific role");
@@ -296,17 +297,16 @@ public class Forum_Forum_Category_View extends ForumBase {
 		cat.deleteCategoryInForum(category);
 	}
 
-	/**CaseId: 73006
+	/**CaseId: 109090
 	 * View a forum belong category which assigned moderator for specific group
 	 */
 	@Test
 	public void test10_ViewForumOfCategoryWhichAssignModeratorForSpecificGroup(){
-		String category = "Category 73006";
-		String descCate = "Description category 73006";
+		String category = "Category 109090";
+		String descCate = "Description category 109090";
 		String[] userGroup = {"Development"};
-		String forumName = "Forum 73006";
+		String forumName = "Forum 109090";
 		String[] addForum = {forumName, "1",null,null,forumName};
-
 		info("View a forum belong category which assigned moderator for specific group");
 		//Create category
 		cat.addNewCategoryInForum(category, "1", 0,null, descCate, 3,userGroup,true,false,false,false);
@@ -323,17 +323,17 @@ public class Forum_Forum_Category_View extends ForumBase {
 		cat.deleteCategoryInForum(category);
 	}
 
-	/**CaseId: 73041
+	/**CaseId: 109093
 	 * View a forum in case it is assigned moderator for user, role and group at once
 	 */
 	@Test
 	public void test11_ViewForumOfCategoryWhichAssignModeratorForUserRoleGroup(){
-		String category = "Category 73041";
-		String descCate = "Description category 73041";
+		String category = "Category 109093";
+		String descCate = "Description category 109093";
 		String[] groups = {"Development"};
 		String[] users = {"mary"};
 		String[] membership = {"Organization/Management/Human Resources","*"};
-		String forumName = "Forum 73041";
+		String forumName = "Forum 109093";
 		String[] addForum = {forumName, "1",null,null,forumName};
 		String user = getRandomString();
 		String pass = "gtngtn";
@@ -375,13 +375,13 @@ public class Forum_Forum_Category_View extends ForumBase {
 		userGroup.deleteUser(user);
 	}
 
-	/**CaseId: 73076
+	/**CaseId: 109096
 	 * View a category in case it no longer exists
 	 */
 	@Test
 	public void test12_ViewForumOfCategoryWhichAssignModeratorForUserRoleGroup(){
-		String category = "Category 73076";
-		String descCate = "Description category 73076";
+		String category = "Category 109096";
+		String descCate = "Description category 109096";
 		String handlesBefore = driver.getWindowHandle();
 		Set<org.openqa.selenium.Cookie> cookieBefore = driver.manage().getCookies();
 

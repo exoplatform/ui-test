@@ -145,6 +145,7 @@ public class ForumBase extends PlatformBase {
 	public final String MSG_BLOCK_POST = "You cannot post replies.";
 	public final String MSG_BLOCK_POST_ATTACHMENT = "You cannot post attachments.";
 	public final String MSG_BLOCK_EDIT_YOUR_POST = "You cannot edit your posts.";	
+	public final By ELEMENT_BAN_IP_CANCEL_BUTTON = By.xpath("//*[@id='UIBanIPForumManagerForm']//button[text()='Cancel']");
 
 	//----------------Set BB Code form-------------------------------------
 	public final By ELEMENT_BBCODE_POPUP = By.xpath("//span[@class='PopupTitle popupTitle' and text()='BBCode Manager']");
@@ -331,6 +332,7 @@ public class ForumBase extends PlatformBase {
 
 	//Gmail
 	public String ELEMENT_GMAIL_EMAIL = "//span/b[text()='[${category}][${forum}] ${topic}']";
+	public String ELEMENT_GMAIL_EMAIL2 = "//span/b[text()='[${category}][${forum}]${topic}']";
 
 	//Pending job
 	public final By ELEMENT_PENDING_JOB_POPUP = By.xpath("//span[@class='PopupTitle popupTitle' and text()='Waiting for Approval']");
@@ -652,7 +654,7 @@ public class ForumBase extends PlatformBase {
 	 * @param ip: ip to delete
 	 */
 	public void deleteBanIp(String ip){
-		button = new Button(driver);
+//		button = new Button(driver);
 		By element_delete = By.xpath(ELEMENT_BAN_IP_DELETE.replace("${ip}", ip));
 
 		goToBanIp();
@@ -660,7 +662,9 @@ public class ForumBase extends PlatformBase {
 		waitForMessage(MSG_DELETE_BAN_IP);
 		click(ELEMENT_OK_DELETE);
 		waitForElementNotPresent(element_delete);
-		button.cancel();
+//		button.cancel();
+		click(ELEMENT_BAN_IP_CANCEL_BUTTON);
+		waitForElementNotPresent(ELEMENT_BAN_IP_POPUP);
 	}
 
 	/** function: go to BB code management
