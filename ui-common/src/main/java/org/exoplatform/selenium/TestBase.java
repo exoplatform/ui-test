@@ -45,7 +45,6 @@ public class TestBase {
 
 	public WebDriver driver;
 	public WebDriver newDriver;
-
 	public static String baseUrl;
 	protected int DEFAULT_TIMEOUT = 40000; //milliseconds = 30 seconds
 	protected int WAIT_INTERVAL = 50; //milliseconds  
@@ -98,6 +97,7 @@ public class TestBase {
 
 	/*======== End of Term and conditions =====*/	
 	public void initSeleniumTestWithOutTermAndCondition(Object... opParams){
+		//		System.setProperty("browser", "iexplorer");
 		String browser = System.getProperty("browser");
 
 		baseUrl = System.getProperty("baseUrl");
@@ -119,14 +119,15 @@ public class TestBase {
 			profile.setPreference("dom.max_script_run_time", 0);
 			DesiredCapabilities capabilities = DesiredCapabilities.firefox();
 			capabilities.setCapability(FirefoxDriver.PROFILE, profile);
-
 			driver = new FirefoxDriver(capabilities);
 		}
+
 		baseUrl = System.getProperty("baseUrl");
 		if (baseUrl==null) baseUrl = DEFAULT_BASEURL;
 		info("Base url is " + baseUrl);
 
 		action = new Actions(driver);
+
 	}
 
 	public void initSeleniumTest(Object... opParams){
@@ -140,12 +141,14 @@ public class TestBase {
 		if(!firstTimeLogin){
 			info("This is not the first time login");
 			checkPLFVersion();
+			info("ieFlag of TestBase is " + ieFlag);
 		}
 		else{
 			info("This is the first time login");
 			driver.manage().window().maximize();
 			driver.navigate().refresh();
 			Utils.pause(2000);
+			info("ieFlag of TestBase is " + ieFlag);
 			ManageAccount acc = new ManageAccount(driver,this.plfVersion);
 			acc.signOut();
 			firstTimeLogin=false;
@@ -823,6 +826,7 @@ public class TestBase {
 			fp.setPreference("browser.helperApps.alwaysAsk.force", false);
 			driver = new FirefoxDriver(fp);
 		}
+
 
 		baseUrl = System.getProperty("baseUrl");
 		if (baseUrl==null) baseUrl = DEFAULT_BASEURL;

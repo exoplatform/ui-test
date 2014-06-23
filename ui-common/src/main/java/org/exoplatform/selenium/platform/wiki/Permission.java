@@ -315,6 +315,7 @@ public class Permission extends WikiBase{
 				clickByJavascript(bViewSpace, notDisplay);
 			}
 		}else{
+
 			if(waitForAndGetElement(bViewSpace, DEFAULT_TIMEOUT, 1, notDisplay).isSelected()){
 				clickByJavascript(bViewSpace, notDisplay);
 				Utils.pause(1000);
@@ -328,6 +329,7 @@ public class Permission extends WikiBase{
 				clickByJavascript(bEditPage, notDisplay);
 			}
 		}else{
+
 			if(waitForAndGetElement(bEditPage, DEFAULT_TIMEOUT, 1, notDisplay).isSelected()){
 				clickByJavascript(bEditPage, notDisplay);
 				Utils.pause(1000);
@@ -340,6 +342,7 @@ public class Permission extends WikiBase{
 				clickByJavascript(bAdminPage, notDisplay);
 			}
 		}else{
+
 			if(waitForAndGetElement(bAdminPage, DEFAULT_TIMEOUT, 1, notDisplay).isSelected()){
 				clickByJavascript(bAdminPage, notDisplay);
 				Utils.pause(1000);

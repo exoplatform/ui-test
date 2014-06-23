@@ -26,7 +26,9 @@ public class Wiki_Attachment extends BasicAction {
 	TestBase test;
 	@BeforeMethod
 	public void setUpBeforeTest(){
-		getDriverAutoSave();
+		//		getDriverAutoSave();
+		
+		initSeleniumTest();
 		driver.get(baseUrl);
 		magAc = new ManageAccount(driver);
 		magAc.signIn(DATA_USER1, DATA_PASS); 

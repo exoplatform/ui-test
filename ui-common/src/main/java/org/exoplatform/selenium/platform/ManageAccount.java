@@ -59,6 +59,12 @@ public class ManageAccount extends PlatformBase {
 		}
 		info("--Sign in as " + username + "--");
 
+		if (System.getProperty("browser").equals("iexplorer")){
+			if (waitForAndGetElement(ELEMENT_INPUT_USERNAME,10000,0) == null){
+				info("User logged in already");
+				signOut();
+			}
+		}
 		/*if (isElementPresent(ELEMENT_GO_TO_PORTAL) ){
 			click(ELEMENT_GO_TO_PORTAL);		
 		}
@@ -68,7 +74,7 @@ public class ManageAccount extends PlatformBase {
 		type(ELEMENT_INPUT_PASSWORD, password, true);
 		clickByJavascript(ELEMENT_SIGN_IN_BUTTON);
 		if(verify)
-			waitForElementNotPresent(ELEMENT_SIGN_IN_BUTTON,100000,1,2);
+			waitForElementNotPresent(ELEMENT_SIGN_IN_BUTTON,100000);
 		Utils.pause(2000);
 	}
 

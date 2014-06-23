@@ -44,7 +44,6 @@ public class WikiBase extends PlatformBase{
 	public final By ELEMENT_BLANK_PAGE_LINK_41 = By.xpath ("//i[@class='uiIconAddPage']");
 
 	public final By ELEMENT_WIKI_LINK_PLF41=By.cssSelector("span[data-original-title='Wiki']");
-	//			By.xpath("//*[@data-original-title='Wiki']");
 
 	//Add page menu
 	public final By ELEMENT_ADD_PAGE_LINK = By.xpath("//*[@id='UIWikiPageControlArea_PageToolBar']//div[contains(.,'Add Page')]");
@@ -153,6 +152,7 @@ public class WikiBase extends PlatformBase{
 
 	//Upload file area
 	public By ELEMENT_UPLOAD_FILE = By.xpath("//div[@class='uiUploadInput']//*[@type='file']"); 
+
 	public final By ELEMENT_FRAME_UPLOAD=By.xpath("//div[@class='uiUploadInput']/iframe");
 
 	public final String ELEMENT_REMOVE_ATTACHMENT = "//a[text()='{$file}']/../../td//i[contains(@class,'uiIconDelete')]";
@@ -272,6 +272,7 @@ public class WikiBase extends PlatformBase{
 	public final String ELEMENT_VIEW_PAGE_CHECK = "//*[contains(text(), '{$user}')]/../..//*[@title='View Pages']";
 	public final String ELEMENT_ADMIN_PAGE_CHECK = "//*[contains(text(), '{$user}')]/../..//input[contains(@id, 'ADMINPAGE')]";
 	public final String ELEMENT_ADMIN_SPACE_CHECK = "//*[contains(text(), '{$user}')]/../..//input[contains(@id, 'ADMINSPACE')]"; 
+
 	public final String ELEMENT_DELETE_PERMISSION = "//tr/td/div[contains(text(),'{$user}')]/../../td//i[contains(@class,'uiIconDelete')]";
 
 	//set permission screen
@@ -312,6 +313,7 @@ public class WikiBase extends PlatformBase{
 	public final String ELEMENT_SELECTED_PAGE = "//div[contains(@class,'popupContent')]//*[@id='iconTreeExplorer' and contains(@onclick, 'event')]//a[contains(text(), '${relatedPage}')]"; 
 	public final String ELEMENT_RELATED_PAGE = "//*[text()='Related Pages']/..//a[contains(text(),'${relatedPage}')]";
 	public By ELEMENT_SELECT_SPACE = By.xpath("//*[contains(text(), 'Select the Wiki:')]/..//*[@class='btn dropdown-toggle']");
+
 	public final String ELEMENT_REMOVE_RELATED_PAGE_LINK = "//*[contains(text(),'${relatedPage}')]/ancestor::tr//*[contains(@class,'uiIconDelete')]";
 	public By ELEMENT_NO_SPACE_OPTION = By.id("UISpaceSwitcher_nospace");
 	public String ELEMENT_RELATED_PAGE_SPACE = "//td[contains(text(), '${spaceName}')]";
@@ -340,7 +342,7 @@ public class WikiBase extends PlatformBase{
 	//Wiki location
 	public final By ELEMENT_WIKI_LOCATION_DROPDOWN = By.xpath("//div[@class='btn dropdown-toggle']");
 	public final By ELEMENT_WIKI_TITLE_PREVIEW = By.xpath("//div[@class='uiWikiPageTitle']");
-
+	
 	//================== PLF4/Common function for Wiki ==================//
 	public WikiBase(){
 		ieFlag = super.ieFlag;

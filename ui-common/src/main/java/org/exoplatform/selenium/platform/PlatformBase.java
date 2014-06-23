@@ -51,6 +51,7 @@ public class PlatformBase extends TestBase {
 	 * Intranet
 	 * */
 	public final String ELEMENT_SIGN_IN_LINK = "//b[contains(text(),'Sign in')]";
+
 	public final By ELEMENT_REFRESH = By.cssSelector("div[class='activityStreamStatus pull-left']");
 
 	/*
@@ -181,7 +182,6 @@ public class PlatformBase extends TestBase {
 
 	/*--------------- User account Management (Click from user name) ---------------------*/
 	public final By ELEMENT_ACCOUNT_NAME_LINK = By.cssSelector("div[id=UIUserPlatformToolBarPortlet] a");
-	//			By.xpath("//*[@id='UIUserPlatformToolBarPortlet']/a");
 	public final By ELEMENT_NAVIGATION_ACCOUNT_AVATAR = By.xpath("//*[@id='UIUserPlatformToolBarPortlet']/a/img[@alt='avatar']");
 	public final By ELEMENT_SIGN_OUT_LINK = By.className("uiIconPLFLogout");
 	public final By ELEMENT_CHANGE_LANGUAGE_LINK_ACME = By.className("LanguageIcon");
