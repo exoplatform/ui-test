@@ -401,7 +401,7 @@ public class Social_People extends SocialBase {
 		String typeOfGender ="Female";
 		String typeOfAddPhone="Work";
 		String numberOfPhone="09880000";
-		String typeOfIMS="Gtalk";
+		String typeOfIMS="Google";
 		String nameOfIMS="marywill";
 		String nameOfURLS="exoplatform.com.vn";
 		String nameOfOrganization ="exoplatform company";

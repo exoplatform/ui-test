@@ -6,7 +6,6 @@ import org.exoplatform.selenium.Utils;
 import org.exoplatform.selenium.platform.ManageAccount;
 import org.exoplatform.selenium.platform.NavigationToolbar;
 import org.exoplatform.selenium.platform.PlatformBase;
-import org.openqa.selenium.By;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -85,7 +84,7 @@ public class PLF_HomepageGadget_WhoIsOnlineGadget extends PlatformBase {
 		
 		info("Confirm if WhoisOnline gadget dislays or not with user1");
 		hg=new HomePageGadget(newDriver);
-		hg.checkUserInfoOnWhoisOnlineGadget(User1);
+		hg.checkUserInfoOnWhoisOnlineGadget(User1, false, "", false, false);
 		newDriver.manage().deleteAllCookies();
 		newDriver.quit();
 	}
@@ -97,16 +96,16 @@ public class PLF_HomepageGadget_WhoIsOnlineGadget extends PlatformBase {
 	 * --> the online user is not displayed on whoisonline gadget 
 	 * --> Bug is not created on jira
 	 */
-	@Test(groups="error")
+	@Test
 	public void test03_ConnectUserfromWhoisOnlineGadget(){
 		info("Go to Homepage Intranet by user acc 1");
 		navToolBar.goToHomePage();
-		
+
 		info("Switch to other browser to login by user acc 2");
 		loginWithAnotherAccOnThesameBrowser(User2, Pass1);
 		hg=new HomePageGadget(newDriver);
-		hg.checkUserInfoOnWhoisOnlineGadget(User1);
-		
+		hg.checkUserInfoOnWhoisOnlineGadget(User1, false , "", false, false);
+
 		info("User 2 connect with user 1 from Who's Online gadget");
 		hg.connectPeoplefromWhoisOnlineGadget(User1);
 		acc = new ManageAccount(newDriver);
@@ -115,25 +114,25 @@ public class PLF_HomepageGadget_WhoIsOnlineGadget extends PlatformBase {
 		info("Check if user 1 received connect invitation from user 2 or not");
 		acc.signIn(User1, Pass1);
 		Utils.pause(500);
-		if(plfVersion =="4.1"){
-			
-			newDriver.findElement(By.xpath(hg.ELEMENT_SHOW_CONNECTIONS_REQUEST_USER_PLF41.replace("${peopleName}","root")));
+		if(plfVersion =="4.1"){		
+//			newDriver.findElement(By.xpath(hg.ELEMENT_SHOW_CONNECTIONS_REQUEST_USER_PLF41.replace("${peopleName}","root")));
+			waitForAndGetElement(hg.ELEMENT_SHOW_CONNECTIONS_REQUEST_USER_PLF41.replace("${peopleName}","root"), DEFAULT_TIMEOUT, 1, 2, newDriver);
 		}
 		else{// if (plfVersion =="4.0"){
-			newDriver.findElement(By.xpath(hg.ELEMENT_SHOW_CONNECTIONS_REQUEST_USER.replace("${nameinvitation}","Root Root")));
+//			newDriver.findElement(By.xpath(hg.ELEMENT_SHOW_CONNECTIONS_REQUEST_USER.replace("${nameinvitation}","Root Root")));
+			waitForAndGetElement(hg.ELEMENT_SHOW_CONNECTIONS_REQUEST_USER.replace("${nameinvitation}","Root Root"), DEFAULT_TIMEOUT, 1, 2, newDriver);
 		}	
-		
+
 		Utils.pause(500);
-		
+
 		info("-- Clear data --");
 		navToolBar = new NavigationToolbar(newDriver);
 		peopleC = new PeopleConnection(newDriver);
 		navToolBar.goToConnectionPage();
-		peopleC.ignoreInvitation(User2);
+		peopleC.ignoreInvitation(fullNameUser2);
 		newDriver.manage().deleteAllCookies();
 		newDriver.quit();
 	}
-
 	/**
 	 * Access activity stream of other user from Who's online gadget
 	 * CaseID 70764
@@ -155,9 +154,11 @@ public class PLF_HomepageGadget_WhoIsOnlineGadget extends PlatformBase {
 		Utils.pause(500);
 		
 		info("Check if user 1 profile page is displayed or not");
-		newDriver.findElement(By.xpath(hg.ELEMENT_PROFILE_TAB_USER_INFO.replace("${acc}",User1)));
+		//newDriver.findElement(By.xpath(hg.ELEMENT_PROFILE_TAB_USER_INFO.replace("${acc}",User1)));
+		waitForAndGetElement(hg.ELEMENT_PROFILE_TAB_USER_INFO.replace("${acc}",User1), DEFAULT_TIMEOUT, 1, 2, newDriver);
 		Utils.pause(500);
-		newDriver.findElement(By.xpath(hg.ELEMENT_MY_AS_TAB.replace("${acc}",User1)));
+		waitForAndGetElement(hg.ELEMENT_MY_AS_TAB.replace("${acc}",User1), DEFAULT_TIMEOUT, 1, 2, newDriver);
+		//newDriver.findElement(By.xpath(hg.ELEMENT_MY_AS_TAB.replace("${acc}",User1)));
 		Utils.pause(500);
 		newDriver.manage().deleteAllCookies();
 		newDriver.quit();

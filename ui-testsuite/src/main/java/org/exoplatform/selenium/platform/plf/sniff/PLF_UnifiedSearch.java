@@ -320,10 +320,9 @@ public class PLF_UnifiedSearch extends Template {
 		qsPage.quickSearch(searchText);
 
 		//- By default, quick search returns results for items with All types located in the current site only, as attachment SearchResult.png
-		waitForAndGetElement(qsPage.ELEMENT_RESULT_ITEM.replace("${keySearch}", searchText).replace("${item}", "S"));
-		waitForAndGetElement(qsPage.ELEMENT_RESULT_ITEM.replace("${keySearch}", searchText).replace("${item}", "W"));
-		waitForAndGetElement(qsPage.ELEMENT_RESULT_ITEM.replace("${keySearch}", searchText).replace("${item}", "C"));
-
+		waitForAndGetElement(qsPage.ELEMENT_RESULT_ITEM_LIST.replace("${keySearch}", spaceName).replace("${item}", "space"));
+		waitForAndGetElement(qsPage.ELEMENT_RESULT_ITEM_LIST.replace("${keySearch}", wikiName).replace("${item}", "wiki"));
+		waitForAndGetElement(qsPage.ELEMENT_RESULT_ITEM_LIST.replace("${keySearch}", contentName).replace("${item}", "document"));
 		/*clear data*/
 		info("-- Clear data --");
 		//Delete file
@@ -728,7 +727,7 @@ public class PLF_UnifiedSearch extends Template {
 		info("-- the user profile phone --");
 		assert waitForAndGetElement(qsPage.ELEMENT_RESULT_CONTENT_DETAIL).getText().contains(numberOfPhone);
 		info("-- genders --");
-		assert waitForAndGetElement(qsPage.ELEMENT_RESULT_CONTENT_DETAIL).getText().contains(typeOfGender);
+		assert waitForAndGetElement(qsPage.ELEMENT_RESULT_CONTENT_DETAIL).getText().contains(typeOfGender.toLowerCase());
 
 		//- Item in search result is clickable and open it when user click
 		waitForAndGetElement(qsPage.ELEMENT_RESULT_TITLE).click();

@@ -38,7 +38,7 @@ public class PLF_HomePageGadget_GettingStartedGadget extends Activity{
 
 	@BeforeMethod
 	public void setUpBeforeTest(){
-		getDriverAutoSave();
+		initSeleniumTest();
 		acc = new ManageAccount(driver);
 		acc.signIn(DATA_USER1, DATA_PASS);
 		homeGad = new HomePageGadget(driver);

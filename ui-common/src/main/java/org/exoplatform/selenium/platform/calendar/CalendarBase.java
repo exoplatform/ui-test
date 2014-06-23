@@ -610,14 +610,15 @@ public class CalendarBase extends PlatformBase {
 	 * 				= false: not verify that calendar is deleted, 
 	 */
 	public void deleteCalendar(String name, boolean...verify){
-		button = new Button(driver); 
+		button = new Button(driver);
+		alert = new ManageAlert(driver);
 		boolean check = verify.length > 0 ? verify[0] : true;
 
 		info("--Delete a Calendar-");
 
 		executeActionCalendar(name,"RemoveCalendar");
 		alert.waitForConfirmation("Are%20you%20sure%20you%20want%20to%20delete%20this%20calendar%20and%20all%20its%20events?");
-		//button.yes();
+		button.yes();
 		if (check){
 			assert (waitForAndGetElement(ELEMENT_CALENDAR_GET_BY_TAG_LI.replace("{$calendar}", name), 10000,0) == null) : "Cannot delete the calendar!" ;
 			info("Remove calendar successfully");

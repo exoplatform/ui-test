@@ -273,7 +273,8 @@ public class ManageMember extends SpaceManagement {
 	 * Invite an user to join a space
 	 * @param userName: type: Root, Admin, Author, Developer or Publisher 
 	 */
-	public void inviteSingleUser(ManageAccount.userType userName){
+	public void inviteSingleUser(ManageAccount.userType userName, String... newUser){
+		String user = newUser.length > 0 ? newUser[0]:"John";
 		info("-- Invite the user: " + userName + " to join our space");
 		click(ELEMENT_SELECT_MEMBER_BUTTON);
 		waitForAndGetElement(ELEMENT_SELECT_MEMBER_FORM);
@@ -293,6 +294,9 @@ public class ManageMember extends SpaceManagement {
 		case PUBLISHER:
 			addUserToSpace(false, "Mary");
 			break;	
+		case NEW_USER:
+			addUserToSpace(false, user);
+			break;
 		default:
 			break;
 		}
@@ -359,21 +363,19 @@ public class ManageMember extends SpaceManagement {
 	 * @param spaceName: name of space (String)
 	 * @param user: name of the invited (type: Root, Admin, Author, Developer or Publisher)
 	 */
-	public void managerInviteUserToJoinSpace(ManageAccount.userType manager, String spaceName, ManageAccount.userType user, Boolean... params){
-		magAcc = new ManageAccount(driver);
-		Boolean isLogin = params.length > 0 ? params[0] : true; 
+	public void managerInviteUserToJoinSpace(ManageAccount.userType manager, String spaceName, ManageAccount.userType user, Object... params){
+		magAcc = new ManageAccount(driver,this.plfVersion);
+		Boolean isLogin = (Boolean) (params.length>0 ? params[0] : true);
+		String newUser = (String) (params.length > 1 ? params[1] : "john"); 
 		info("-- Invite an user to join: " + spaceName);
 		if (isLogin){
 			magAcc.signOut();
 			magAcc.userSignIn(manager);
 		}		
 		goToMySpacePage();
-		if (waitForAndGetElement(button.ELEMENT_SHOW_MORE_BUTTON, 5000, 0) != null){
-			click(button.ELEMENT_SHOW_MORE_BUTTON);
-		}
 		gotoEditSpace(spaceName);
 		goToMembers();
-		inviteSingleUser(user);
+		inviteSingleUser(user, newUser);
 	}
 
 	/**

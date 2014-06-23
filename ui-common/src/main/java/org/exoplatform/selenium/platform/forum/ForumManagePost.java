@@ -75,6 +75,7 @@ public class ForumManagePost extends ForumBase {
 	public By ELEMENT_POST_PRIVATE_POPUP = By.xpath("//span[@class='PopupTitle popupTitle' and text()='Private Post']");
 	public By ELEMENT_POST_MESSAGE_FRAME_CKEDITOR = By.xpath("//iframe[@class='cke_wysiwyg_frame cke_reset']");
 	public By ELEMENT_POST_CANCEL_BUTTON = By.xpath("//form[@id='UIPostForm']//button[text()='Cancel']");
+	public By ELEMENT_POST_PREVIEW_BUTTON = By.xpath("//button[text()='Preview']");
 	
 	//--------------quick reply form-----------------------------------------------------------
 	public By ELEMENT_POST_QUICK_MESSAGE = By.id("UITopicDetail.label.Message");
@@ -109,11 +110,11 @@ public class ForumManagePost extends ForumBase {
 	 * @param iconClass: icon
 	 * @param file: file attach
 	 */
-	public void postReply(String title, String message, String groupName, String iconClass, String... file){
+	public void postReply(String title, String message, String groupName, String iconClass, Object... opParams){
 		info("Make a post");
 		click(ELEMENT_POST_REPLY_BUTTON);
 		waitForAndGetElement(ELEMENT_POST_POPUP_NEW);
-		putDataPost(title, message, groupName, iconClass, file);
+		putDataPost(title, message, groupName, iconClass, opParams);
 	}
 	
 	/** Function make a private post
@@ -125,13 +126,13 @@ public class ForumManagePost extends ForumBase {
 	 * @param iconClass: icon
 	 * @param file: file attach
 	 */
-	public void privatePost(String topic, String title, String message, String groupName, String iconClass, String... file){
+	public void privatePost(String topic, String title, String message, String groupName, String iconClass, Object... opParams){
 		By private_but = By.xpath(ELEMENT_PRIVATE_POST_BUTTON.replace("${topic}", topic));
-		
+
 		info("Make a private post");
 		click(private_but);
 		waitForAndGetElement(ELEMENT_POST_PRIVATE_POPUP);
-		putDataPost(title, message, groupName, iconClass, file);
+		putDataPost(title, message, groupName, iconClass, opParams);
 	}
 	
 	/**function put data into add Post
@@ -142,20 +143,32 @@ public class ForumManagePost extends ForumBase {
 	 * @param iconClass: icon
 	 * @param file: file attach
 	 */
-	public void putDataPost(String title, String message, String groupName, String iconClass, String... file){
+	public void putDataPost(String title, String message, String groupName, String iconClass, Object... opParams){
 		//magTopic = new ForumManageTopic(driver);
-		
+
+		Boolean check = (Boolean)(opParams.length > 1 ? opParams[1] : false);
+		String file = (String) (opParams.length > 0 ? opParams[0]: "");		
 		if (title != null) {
 			type(ELEMENT_POST_TITLE, title, true);
 		}
-		if (message != null) {
-			inputDataToFrameInFrame(ELEMENT_POST_MESSAGE_FRAME_1, ELEMENT_POST_MESSAGE_FRAME_2, message, true);
+		if (message != "" && message != null){
+			if(this.plfVersion.equalsIgnoreCase("4.1"))
+				inputDataToFrame(ELEMENT_POST_MESSAGE_FRAME_CKEDITOR, message, true,false);
+			else //if(this.plfVersion.equalsIgnoreCase("4.0"))
+				inputDataToFrameInFrame(ELEMENT_POST_MESSAGE_FRAME_1, ELEMENT_POST_MESSAGE_FRAME_2, message,true,false);
 			switchToParentWindow();	
 		}
-		if(file.length > 0 && file[0] != "" && file[0] != null){
+		if (message != null) {
+			if(waitForAndGetElement(ELEMENT_POST_MESSAGE_FRAME_CKEDITOR, 5000,0)!=null)
+				inputDataToFrame(ELEMENT_POST_MESSAGE_FRAME_CKEDITOR, message, true);
+			else// if(this.plfVersion.equalsIgnoreCase("4.0"))
+				inputDataToFrameInFrame(ELEMENT_POST_MESSAGE_FRAME_1, ELEMENT_POST_MESSAGE_FRAME_2, message,true);
+			switchToParentWindow();	
+		}
+		if(file!=""){
 			click(ELEMENT_ATTACH_FILE);
 			waitForAndGetElement(ELEMENT_POPUP_UPLOAD_FILE);
-			attachFile(file[0]);
+			attachFile(file);
 			waitForElementNotPresent(ELEMENT_POPUP_UPLOAD_FILE);
 		}	
 		if (groupName != "" && groupName != null && iconClass != "" && iconClass != null){
@@ -163,11 +176,16 @@ public class ForumManagePost extends ForumBase {
 			magTopic.chooseIcon(groupName, iconClass);
 		}
 		//magTopic = new ForumManageTopic(driver);
-		click(magTopic.ELEMENT_SUBMIT_BUTTON);
-		waitForElementNotPresent(ELEMENT_POST_POPUP_NEW);
-		
-		waitForAndGetElement(ELEMENT_POST_CONTENT_TEXT.replace("${post}", message));
-		info("Post reply successfully");
+		if(check==true){
+			click(ELEMENT_POST_PREVIEW_BUTTON);
+		}
+		else{
+			click(magTopic.ELEMENT_SUBMIT_BUTTON);
+			waitForElementNotPresent(ELEMENT_POST_POPUP_NEW);
+
+			waitForAndGetElement(ELEMENT_POST_CONTENT_TEXT.replace("${post}", message));
+			info("Post reply successfully");
+		}
 	}
 
 	/** function: quick add new Reply
@@ -221,7 +239,7 @@ public class ForumManagePost extends ForumBase {
 	 */	
 	public void editPost(String postContent, String title, String reason, String message, String groupName, String iconClass, String... file){
 		By EDIT_POST = By.xpath(ELEMENT_POST_EDIT_BUTTON.replace("${postContent}", postContent));
-		
+
 		info("Edit a post");
 		click(EDIT_POST);
 		waitForAndGetElement(ELEMENT_POST_POPUP_EDIT);
@@ -232,7 +250,10 @@ public class ForumManagePost extends ForumBase {
 			type(ELEMENT_POST_REASON, reason, true);
 		}
 		if (message != "" && message != null) {
-			inputDataToFrameInFrame(ELEMENT_POST_MESSAGE_FRAME_1, ELEMENT_POST_MESSAGE_FRAME_2, message, true);
+			if(this.plfVersion.equalsIgnoreCase("4.1"))
+				inputDataToFrame(ELEMENT_POST_MESSAGE_FRAME_CKEDITOR, message, true,false);
+			else//(this.plfVersion.equalsIgnoreCase("4.0"))
+				inputDataToFrameInFrame(ELEMENT_POST_MESSAGE_FRAME_1, ELEMENT_POST_MESSAGE_FRAME_2, message,true,false);
 			switchToParentWindow();	
 		} 
 		if(file.length > 0 && file[0] != "" && file[0] != null){
@@ -348,18 +369,18 @@ public class ForumManagePost extends ForumBase {
 	 */
 	public void quotePost(String post, String title, String content){
 		info("Quote a post");
-		
+
 		click(ELEMENT_QUOTE_POST.replace("${post}", post));
-		
+
 		type(ELEMENT_POST_TITLE, title,true);
 		if(this.plfVersion.equalsIgnoreCase("4.0"))
 			inputDataToFrameInFrame(ELEMENT_POST_MESSAGE_FRAME_1, ELEMENT_POST_MESSAGE_FRAME_2, content, false);
 		else
 			inputDataToFrame(ELEMENT_POST_MESSAGE_FRAME_CKEDITOR, content);
 		switchToParentWindow();	
-		
+
 		click(magTopic.ELEMENT_SUBMIT_BUTTON);
-		
+
 		waitForElementNotPresent(magTopic.ELEMENT_SUBMIT_BUTTON);
 		waitForAndGetElement(ELEMENT_POST_CONTENT_TEXT.replace("${post}", content));
 		waitForAndGetElement(ELEMENT_POST_QUOTE_TEXT.replace("${post}", post));

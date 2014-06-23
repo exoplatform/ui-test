@@ -653,7 +653,7 @@ public class PlatformBase extends TestBase {
 	public static By ELEMENT_CALENDAR_GADGET_YESTERDAY_LABEL = By.xpath("//div[@class='currentDateContainer']//a[contains(text(),Yesterday)]");
 	public static String ELEMENT_CALENDAR_GADGET_SETTING_LINK_ITEM = "//span[contains(text(),'${calendar}')]";
 	public static By ELEMENT_CALENDAR_GADGET_VERIFIED_TEXT_LABEL = By.xpath("//*[ text()='Displayed Calendars:']");
-	public static By ELEMENT_ADD_CALENDAR_IN_ADDITION_LIST = By.xpath("//i[contains(@class,'uiIconAdd')]");
+	public String ELEMENT_ADD_CALENDAR_IN_ADDITION_LIST = "//a[text()='${calendar}']/..//i[contains(@class,'uiIconAdd')]";
 	public String ELEMENT_ADD_CALENDAR_IN_ADDITION_LIST_PLF_41 = "//a[text()='${calendar}']/..//i[@class ='uiIconSimplePlusMini uiIconLightGray']";
 	public static String ELEMENT_CALENDAR_IN_CALENDAR_GADGET = "//span[@class='calendarName asparagus' and@title='${calendar}']";
 	public static String ELEMENT_DELETE_CALENDAR_ICON = "//span[contains(text(),'${calendar}')] /..//*[@class='uiIconDel']";
@@ -704,6 +704,7 @@ public class PlatformBase extends TestBase {
 	public final By ELEMENT_SEARCH_APPLICATION = By.xpath("//a[@title='Search']");
 	//public final String ELEMENT_GADGET_SEARCH_APPLICATION_PAGE_EDITOR = "//div[@id='UIApplicationList17']//div[contains(text(),'${gadget}')]";
 	public final String ELEMENT_GADGET_SEARCH_APPLICATION_PAGE_EDITOR = "//div[@id='UIApplicationList18' or @id='UIApplicationList19' or @id='UIApplicationList17']//div[contains(text(),'${gadget}')]";
+	public final By ELEMENT_QUICK_SEARCH_PORTLET = By.id("Search/local._unified-search.QuicksearchPortlet");
 
 	//Administration Menu for admin acc
 

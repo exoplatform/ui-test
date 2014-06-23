@@ -63,7 +63,7 @@ public class TestBase {
 	//public final By ELEMENT_MENU_PAGE_LINK = By.linkText("Page");
 	//public final String AJAX_LOADING_MASK = "//div[@id='AjaxLoadingMask']";
 
-	public final String DEFAULT_BASEURL = "http://demo.fqa.exocloud.vn/portal"; 
+	public final String DEFAULT_BASEURL = "http://localhost:8080/portal"; 
 	//"http://cloudtest06.exocloud.testlab1.exoplatform.vn/portal";
 
 
@@ -216,11 +216,12 @@ public class TestBase {
 		waitForAndGetElement(ELEMENT_ACCOUNT_NAME_LINK);
 	}
 
-	public WebElement getElement(Object locator) {
+	public WebElement getElement(Object locator, Object... opParams) {
 		By by = locator instanceof By ? (By)locator : By.xpath(locator.toString());
+		WebDriver wDriver = (WebDriver) (opParams.length > 0 ? opParams[0]: driver);	
 		WebElement elem = null;
 		try {
-			elem = driver.findElement(by);
+			elem = wDriver.findElement(by);
 		} catch (NoSuchElementException e) {
 
 		}
@@ -230,10 +231,11 @@ public class TestBase {
 	//return element only in case the element is displayed.
 	public WebElement getDisplayedElement(Object locator, Object... opParams) {
 		By by = locator instanceof By ? (By)locator : By.xpath(locator.toString());
+		WebDriver wDriver = (WebDriver) (opParams.length > 0 ? opParams[0]: driver);	
 		WebElement e = null;
 		try {
 			if(by != null)
-				e = driver.findElement(by);
+				e = wDriver.findElement(by);
 			if (e != null){
 				if (isDisplay(by)) return e;
 			}
@@ -265,17 +267,18 @@ public class TestBase {
 	 * 0: No Assert
 	 * 1: Assert
 	 */
-	public WebElement waitForAndGetElement(Object locator, int... opParams) {
+	public WebElement waitForAndGetElement(Object locator, Object... opParams) {
 		WebElement elem = null;
-		int timeout = opParams.length>0 ? opParams[0] : DEFAULT_TIMEOUT;
-		int isAssert = opParams.length > 1 ? opParams[1]: 1;
-		int notDisplayE = opParams.length > 2 ? opParams[2]: 0;
+		int timeout = (Integer) (opParams.length>0 ? opParams[0] : DEFAULT_TIMEOUT);
+		int isAssert = (Integer) (opParams.length > 1 ? opParams[1]: 1);
+		int notDisplayE = (Integer) (opParams.length > 2 ? opParams[2]: 0);
+		WebDriver wDriver = (WebDriver) (opParams.length > 3 ? opParams[3]: driver);	
 		for (int tick = 0; tick < timeout/WAIT_INTERVAL; tick++) {
 			if (notDisplayE == 2){
-				elem = getElement(locator);
+				elem = getElement(locator,wDriver);
 				//elem = getDisplayedElement(locator);
 			}else{
-				elem = getDisplayedElement(locator);
+				elem = getDisplayedElement(locator,wDriver);
 			}
 			if (null != elem) return elem;
 			Utils.pause(WAIT_INTERVAL);

@@ -327,7 +327,7 @@ public class ManageAccount extends PlatformBase {
 	 * Mary Williams: publisher 
 	 */
 	public enum userType {
-		ROOT, ADMIN, AUTHOR, DEVELOPER, PUBLISHER;
+		ROOT, ADMIN, AUTHOR, DEVELOPER, PUBLISHER, NEW_USER;
 	}
 
 	/**

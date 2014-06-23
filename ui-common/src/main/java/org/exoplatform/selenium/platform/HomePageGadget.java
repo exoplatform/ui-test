@@ -22,7 +22,7 @@ public class HomePageGadget extends PlatformBase{
 	public By ELEMENT_INVITATION_GADGET = By.id("InvitationsPortlet");
 	public String ELEMENT_SHOW_CONNECTIONS_REQUEST_USER = "//div[@id='InvitationsPortlet']//div[@class='peopleInviteName']//div[text()='${nameinvitation}']";
 	public String ELEMENT_INVITATION_GADGET_USER_41 = "//div[@id='InvitationsPortlet']//div[@class='peopleInviteName']//a[contains(text(),'${nameinvitation}')]";
-	public String ELEMENT_SHOW_CONNECTIONS_REQUEST_USER_PLF41="//div[@id='InvitationsPortlet']//div[@class='peopleInvitePicture pull-left avatarXSmall']//a[@href='/portal/intranet/profile/james']";
+	public String ELEMENT_SHOW_CONNECTIONS_REQUEST_USER_PLF41="//div[@id='InvitationsPortlet']//div[@class='peopleInvitePicture pull-left avatarXSmall']//a[@href='/portal/intranet/profile/${peopleName}']";
 	public String ELEMENT_SHOW_CONNECTIONS_REQUEST_SPACE= "//div[@id='InvitationsPortlet']//div[@class='spaceInviteInfo']//div[text()='${namespace}']";
 	public String ELEMENT_VERIFY_STATUS_SPACE = "//div[@id='InvitationsPortlet']//div[@class='spaceInviteInfo']//div[text()='${namespace}']/../div[@class='spaceproperties']/div[@class='spacevisibility' and contains(text(),'${statusspace}')]";
 	public String ELEMENT_SHOW_ACCEPTS_BUTTON = "//div[@id='InvitationsPortlet']//div[@class='peopleInviteInfo']//div[text()='${peopleName}']/..//a[text()='Accept']";
@@ -76,6 +76,12 @@ public class HomePageGadget extends PlatformBase{
 	//My activity stream tab
 	public String ELEMENT_MY_AS_TAB = "//*[@id='UIUserNavigationPortlet']//a[@href='/portal/intranet/activities/${acc}']";
 
+	//------------------User popup - Who is online gadget------------------------------------
+	public final By ELEMENT_USER_POPUP_NAME = By.xpath("//*[@id='tipName']//td[2]/a");
+	public final By ELEMENT_USER_POPUP_POSITION = By.xpath("//*[@id='tipName']//td[2]/div");
+	public final By ELEMENT_USER_POPUP_AVATAR = By.xpath("//*[@id='tipName']//img[contains(@src, 'UserAvtDefault.png')]");
+	public final By ELEMENT_USER_POPUP_LAST_ACTIVITY = By.xpath("//*[@id='tiptip_content']/blockquote");
+	public final String ELEMENT_USER_POPUP_STATUS_CONNECT = "//*[@id='tiptip_content']//*[@class='uiAction connectAction']/*[text()='${status}']";
 	//-------------------------------------------------------------//
 
 	public HomePageGadget(WebDriver dr, String...plfVersion){
@@ -208,12 +214,99 @@ public class HomePageGadget extends PlatformBase{
 	 * @date 06-Nov-2013
 	 * @param userName
 	 */
-	public void checkUserInfoOnWhoisOnlineGadget(String userName){
+	public void checkUserInfoOnWhoisOnlineGadget(String userName, boolean activity, String activityPosted, boolean connected, boolean invited){
 		waitForAndGetElement(ELEMENT_WHOISONLINE_GADGET);
 		mouseOver(ELEMENT_ONLINE_USER_AVATAR.replace("${acc}",userName),true);
 		info("Confirm user avatar");
 		waitForAndGetElement(ELEMENT_ONLINE_USER_ACC_IMG.replace("${acc}",userName), DEFAULT_TIMEOUT,1,2);
 		info("Confirm user name");
 		waitForAndGetElement(ELEMENT_ONLINE_USER_TITLE.replace("${acc}",userName), DEFAULT_TIMEOUT,1,2);
+	}	
+
+	public void checkUserInfoOnWhoisOnlineGadget(String userName, String fullName, String position, boolean avatar, String activity, int status){
+
+		waitForAndGetElement(ELEMENT_WHOISONLINE_GADGET);
+
+		mouseOver(ELEMENT_ONLINE_USER_AVATAR.replace("${acc}",userName),true);
+
+		info("Confirm user avatar");
+
+		waitForAndGetElement(ELEMENT_ONLINE_USER_ACC_IMG.replace("${acc}",userName), DEFAULT_TIMEOUT,1,2);
+
+		info("Confirm user name");
+
+		waitForAndGetElement(ELEMENT_ONLINE_USER_TITLE.replace("${acc}",userName), DEFAULT_TIMEOUT,1,2);
+
+		info("Confirm user avatar");
+
+		waitForAndGetElement(ELEMENT_ONLINE_USER_ACC_IMG.replace("${acc}",userName), DEFAULT_TIMEOUT,1,2);
+		info("Confirm user name");
+
+		waitForAndGetElement(ELEMENT_ONLINE_USER_TITLE.replace("${acc}",userName), DEFAULT_TIMEOUT,1,2);
+
+		checkUserInfoOnUserPopup(fullName, position, avatar, activity, status);
+	}
+	
+	/**
+
+	 * @author lientm
+
+	 * @param fullName: name display of user
+
+	 * @param position: position of user, if not exits (=null)
+
+	 * @param avatar: check avatar of user is change, if it is not default (=true)
+
+	 * @param activity: last activity of user , if not exits (=null)
+
+	 * @param status = 0: not check
+
+	 * 				 = 1: button [Connect] displays
+
+	 * 				 = 2: button [Cancel Request] displays
+
+	 * 				 = 3: button [Confirm] displays
+
+	 * 				 = 4: button [Remove Connection] displays
+
+	 */
+
+	public void checkUserInfoOnUserPopup(String fullName, String position, boolean avatar, String activity, int status){
+
+		info("Check information of user" + fullName + " on user popup");
+		assert getText(ELEMENT_USER_POPUP_NAME).equalsIgnoreCase(fullName);
+		info("Name of user displays true");
+		if (position != null){
+			assert getText(ELEMENT_USER_POPUP_POSITION).equalsIgnoreCase(position);
+			info("Position of user displays true");
+		}
+		if (avatar){
+			waitForElementNotPresent(ELEMENT_USER_POPUP_AVATAR);
+			info("Avatar of user is not default avatar");
+		}
+		if (activity != null){
+			assert getText(ELEMENT_USER_POPUP_LAST_ACTIVITY).equalsIgnoreCase(activity);
+			info("Last activity of user displayes true");
+		}
+		switch (status) {
+		case 1:
+			waitForAndGetElement(ELEMENT_USER_POPUP_STATUS_CONNECT.replace("${status}", "Connect"));
+			info("Button [Connect] is displayed");
+			break;
+		case 2:
+			waitForAndGetElement(ELEMENT_USER_POPUP_STATUS_CONNECT.replace("${status}", "Cancel Request"));
+			info("Button [Cancel request] is displayed");
+			break;
+		case 3:
+			waitForAndGetElement(ELEMENT_USER_POPUP_STATUS_CONNECT.replace("${status}", "Confirm"));
+			info("Button [Confirm] is displayed");
+			break;
+		case 4:
+			waitForAndGetElement(ELEMENT_USER_POPUP_STATUS_CONNECT.replace("${status}", "Remove Connection"));
+			info("Button [Remove connection] is displayed");
+			break;
+		default:
+			break;
+		}
 	}
 }

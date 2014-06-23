@@ -78,6 +78,7 @@ public class SettingSearchPage extends PlatformBase {
 	public final By ELEMENT_RESULT_SEARCH_PAGE = By.id("resultPage");
 	public final String ELEMENT_RESULT_ITEM = "//div[@id='resultPage']//a[text()='${item}']/*[contains(text(),'${keySearch}')]";
 //	public final String ELEMENT_RESULT_ITEM = "//div[@id='resultPage']//a[text()='${item}']";
+	public final String ELEMENT_RESULT_ITEM_LIST = "//*[@id='result']/*[@class='resultBox clearfix ${item}']//a[text()='${keySearch}']";
 	public final String ELEMENT_RESULT_LOCATION_DATETIME = "//div[@id='resultPage']//a[text()='${item}']/*[contains(text(),'${keySearch}')]/../../../*[@class='detail']";
 	public final String ELEMENT_RESULT_EXCERPT = "//div[@id='resultPage']//a[text()='${item}']/*[contains(text(),'${keySearch}')]/../../../*[@class='excerpt']";
 	public final String ELEMENT_RESULT_ICON = "//div[@id='resultPage']//a[text()='${item}']/*[contains(text(),'${keySearch}')]/../../../../*[contains(@class,'avatar pull-left')]";
@@ -124,9 +125,9 @@ public class SettingSearchPage extends PlatformBase {
 		Utils.pause(1000);
 		info("Create new page winzard empty layout and drags and drop gadget");
 		pEditor.goToPageEditor_EmptyLayout(pageName);
-		if(waitForAndGetElement(ELEMENT_GADGET_SEARCH_APPLICATION_PAGE_EDITOR.replace("${gadget}", gadget), DEFAULT_TIMEOUT,0)==null)
+		if(waitForAndGetElement(ELEMENT_QUICK_SEARCH_PORTLET, 10000, 0)==null)
 			click(ELEMENT_SEARCH_APPLICATION);
-		dragAndDropToObject(By.xpath(ELEMENT_GADGET_SEARCH_APPLICATION_PAGE_EDITOR.replace("${gadget}", gadget)), ELEMENT_DROP_TARGET_NO_LAYOUT);
+		dragAndDropToObject(ELEMENT_QUICK_SEARCH_PORTLET, ELEMENT_DROP_TARGET_NO_LAYOUT);
 		pEditor.finishEditLayout();
 	}
 

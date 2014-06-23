@@ -254,21 +254,24 @@ public class Task extends CalendarBase{
 					String[] dateTimeFrom = from.split(" ");
 					if(dateTimeFrom.length > 0)
 						type(ELEMENT_INPUT_TASK_FROM, dateTimeFrom[0], true);
-					if(dateTimeFrom.length > 1)
+					if(dateTimeFrom.length > 1){
 						click(ELEMENT_INPUT_TASK_FROM_TIME_IN, 2);
 						click(ELEMENT_TASK_SELECT_FROM_TIME.replace("${time}", dateTimeFrom[1]));
-						Utils.pause(1000);
-//						type(ELEMENT_INPUT_TASK_FROM_TIME, dateTimeFrom[1], false);
+					}
+					Utils.pause(1000);
+					//						type(ELEMENT_INPUT_TASK_FROM_TIME, dateTimeFrom[1], false);
+
 				}
 				if ((to != null) & (to != "")){
 					String[] dateTimeTo = to.split(" ");
 					if(dateTimeTo.length > 0)
 						type(ELEMENT_INPUT_TASK_TO, dateTimeTo[0], true);
-					if(dateTimeTo.length > 1)
+					if(dateTimeTo.length > 1){
 						click(ELEMENT_INPUT_TASK_TO_TIME_IN, 2);
 						click(ELEMENT_TASK_SELECT_TO_TIME.replace("${time}", dateTimeTo[1]));
-						Utils.pause(1000);
-//						type(ELEMENT_INPUT_TASK_TO_TIME, dateTimeTo[1], false);
+					}
+					Utils.pause(1000);
+					//						type(ELEMENT_INPUT_TASK_TO_TIME, dateTimeTo[1], false);
 				}
 			}
 
@@ -287,21 +290,24 @@ public class Task extends CalendarBase{
 					String[] dateTime = from.split(" ");
 					if(dateTime.length > 0)
 						type(ELEMENT_ADD_EDIT_TASK_FROM, dateTime[0], true);
-					if(dateTime.length > 1)
+					if(dateTime.length > 1){
+
 //						type(ELEMENT_ADD_EDIT_TASK_FROM_TIME, dateTime[1], false);
 						click(ELEMENT_ADD_EDIT_TASK_FROM_TIME_IN, 2);
 						click(ELEMENT_ADD_EDIT_TASK_SELECT_FROM_TIME.replace("${time}", dateTime[1]));
 						Utils.pause(1000);
+					}
 				}
 				if ((to != null) & (to != "")){
 					String[] dateTime = to.split(" ");
 					type(ELEMENT_ADD_EDIT_TASK_TO, dateTime[0], true);
-					if(dateTime.length > 1)
+					if(dateTime.length > 1){
 						click(ELEMENT_ADD_EDIT_TASK_TO_TIME_IN, 2);
 						click(ELEMENT_ADD_EDIT_TASK_SELECT_TO_TIME.replace("${time}", dateTime[1]));
+
 						Utils.pause(1000);
 //						type(ELEMENT_ADD_EDIT_TASK_TO_TIME, dateTime[1], false);
-
+					}
 				}
 			}
 		}
