@@ -3,7 +3,6 @@ package org.exoplatform.selenium.cloud.createdomain;
 import static org.exoplatform.selenium.TestLogger.info;
 
 import org.exoplatform.selenium.Button;
-import org.exoplatform.selenium.Utils;
 import org.exoplatform.selenium.platform.ManageAccount;
 import org.exoplatform.selenium.platform.NavigationToolbar;
 import org.exoplatform.selenium.platform.PlatformBase;
@@ -59,20 +58,9 @@ public class Cloud_Create_DataTest extends PlatformBase{
 		click(ecMain.ELEMENT_MANAGE_CATEGORIES_LINK);
 		magCa.addChildCategory(categoryTreeName, categoryName);
 		magCa.addChildCategory(categoryName, "Healing",true);
-		button.close();
-		
-		navBar.goToContentAdministration();
-		click(ELEMENT_ADVANCED_CONFIGURATION_TAB);
-		Utils.pause(10000);
-		click(ecMain.ELEMENT_MANAGE_CATEGORIES_LINK);
 		magCa.addChildCategory(categoryTreeName, "Movement");
-		button.close();
-		
-		navBar.goToContentAdministration();
-		click(ELEMENT_ADVANCED_CONFIGURATION_TAB);
-		Utils.pause(10000);
-		click(ecMain.ELEMENT_MANAGE_CATEGORIES_LINK);
 		magCa.addChildCategory(categoryTreeName, "Natural Elements");
+		button.close();
 		
 		info("Upload file into intranet/document");
 		navBar.goToSiteExplorer();
