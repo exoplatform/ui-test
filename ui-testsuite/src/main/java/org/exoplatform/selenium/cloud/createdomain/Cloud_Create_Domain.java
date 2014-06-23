@@ -20,7 +20,7 @@ public class Cloud_Create_Domain extends PlatformBase{
 	@BeforeMethod
 	public void beforeMethods() {
 		initSeleniumTestWithOutTermAndCondition();
-		baseUrl = "http://exocloud.testlab1.exoplatform.vn/";
+		baseUrl = "http://fqa.exocloud.vn/";
 		driver.get(baseUrl);
 		driver.manage().window().maximize();
 		magAccount = new ManageAccount(driver);

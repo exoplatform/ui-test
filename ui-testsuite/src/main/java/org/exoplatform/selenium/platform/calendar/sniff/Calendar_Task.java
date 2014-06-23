@@ -67,7 +67,7 @@ public class Calendar_Task extends CalendarBase {
 		tsk.checkSuggestionTaskTime("07:00", 30);
 		tsk.inputDataTask(task, null, null, null, false, calendar);
 		tsk.editTask(task, newTask, note, getDate(0,"MM/dd/yyyy") + " 12:00", getDate(0,"MM/dd/yyyy") + " 13:00", false, "/TestDate/Winter.jpg");
-		waitForAndGetElement(By.xpath(ELEMENT_EVENT_TASK_ONE_DAY.replace("${taskName}", newTask)));
+		waitForAndGetElement(By.xpath(ELEMENT_EVENT_TASK_ONE_DAY_PLF41.replace("${taskName}", newTask)));
 
 		tsk.deleteEventTask(newTask);
 		deleteCalendar(calendar);
@@ -90,7 +90,7 @@ public class Calendar_Task extends CalendarBase {
 		tsk.checkSuggestionTaskTime("07:00", 30);
 		tsk.inputDataTask(task, null, null, null, false, calendar);
 		tsk.editTask(task, newTask, note, getDate(0,"MM/dd/yyyy") + " 12:00", getDate(0,"MM/dd/yyyy") + " 13:00", false, "/TestDate/Winter.jpg");
-		waitForAndGetElement(By.xpath(ELEMENT_EVENT_TASK_ONE_DAY.replace("${taskName}", newTask)));
+		waitForAndGetElement(By.xpath(ELEMENT_EVENT_TASK_ONE_DAY_PLF41.replace("${taskName}", newTask)));
 
 		tsk.deleteEventTask(newTask);
 		deleteCalendar(calendar);
@@ -115,7 +115,7 @@ public class Calendar_Task extends CalendarBase {
 		tsk.checkSuggestionTaskTime("07:00", 30);
 		tsk.inputDataTask(task, null, null, null, false, calendar);
 		tsk.editTask(task, newTask, note, getDate(0,"MM/dd/yyyy") + " 12:00", getDate(0,"MM/dd/yyyy") + " 13:00", false, "/TestDate/Winter.jpg");
-		waitForAndGetElement(By.xpath(ELEMENT_EVENT_TASK_ONE_DAY.replace("${taskName}", newTask)));
+		waitForAndGetElement(By.xpath(ELEMENT_EVENT_TASK_ONE_DAY_PLF41.replace("${taskName}", newTask)));
 
 		tsk.deleteEventTask(newTask);
 		deleteCalendar(calendar);
@@ -147,7 +147,7 @@ public class Calendar_Task extends CalendarBase {
 		//TO-DO: need to add confirmation here after finishing setting reminder methods
 
 		info("Restore data");
-		waitForAndGetElement(By.xpath(ELEMENT_EVENT_TASK_ALL_DAY.replace("${taskTitle}", CALENDAR02)));
+		waitForAndGetElement(By.xpath(ELEMENT_EVENT_TASK_ALL_DAY_PLF41.replace("${taskTitle}", CALENDAR02)));
 		deleteEventTask(CALENDAR02,selectDayOption.ONEDAY);
 	}
 
@@ -187,7 +187,7 @@ public class Calendar_Task extends CalendarBase {
 		switchToParentWindow();
 
 		info("Restore data");
-		waitForAndGetElement(By.xpath(ELEMENT_EVENT_TASK_ALL_DAY.replace("${taskTitle}", CALENDAR03)));
+		waitForAndGetElement(By.xpath(ELEMENT_EVENT_TASK_ALL_DAY_PLF41.replace("${taskTitle}", CALENDAR03)));
 		deleteEventTask(CALENDAR03,selectDayOption.ONEDAY);
 	}
 
@@ -207,8 +207,8 @@ public class Calendar_Task extends CalendarBase {
 		tsk.addQuickTask(CALENDAR06,CALENDAR06,getDate(0,"MM/dd/yyyy"),getDate(0,"MM/dd/yyyy"),false);
 
 		info("Drag & drop a task");
-		waitForAndGetElement(By.xpath(ELEMENT_EVENT_TASK_ONE_DAY.replace("${taskName}", CALENDAR06)));
-		dragAndDropToObject(By.xpath(ELEMENT_EVENT_TASK_ONE_DAY.replace("${taskName}", CALENDAR06)),ELEMENT_TARGET_DATE);
+		waitForAndGetElement(By.xpath(ELEMENT_EVENT_TASK_ONE_DAY_PLF41.replace("${taskName}", CALENDAR06)));
+		dragAndDropToObject(By.xpath(ELEMENT_EVENT_TASK_ONE_DAY_PLF41.replace("${taskName}", CALENDAR06)),ELEMENT_TARGET_DATE);
 
 		info("Restore data");
 		deleteEventTask(CALENDAR06, selectDayOption.ONEDAY);
@@ -230,7 +230,7 @@ public class Calendar_Task extends CalendarBase {
 		tsk.goToAddTaskFromActionBar();
 		tsk.inputBasicQuickTask(CALENDAR07,CALENDAR07);
 		tsk.inputFromToTask(getDate(0,"MM/dd/yyyy"),getDate(0,"MM/dd/yyyy"),false);
-		waitForAndGetElement(By.xpath(ELEMENT_EVENT_TASK_ALL_DAY.replace("${taskTitle}", CALENDAR07)));
+		waitForAndGetElement(By.xpath(ELEMENT_EVENT_TASK_ALL_DAY_PLF41.replace("${taskTitle}", CALENDAR07)));
 
 		info("Resize a task to change date-time");
 		//TO-DO: update later
