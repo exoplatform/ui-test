@@ -925,7 +925,11 @@ public class PlatformBase extends TestBase {
 				click(ELEMENT_PAGINATOR_NEXT_ICON);
 				waitForAndGetElement(ELEMENT_PAGINATOR_SELECTED_PAGE.replace("${number}", String.valueOf((++i))));
 			}else {
-				click(button.ELEMENT_NEXT_PAGE_BUTTON);
+				if (isElementPresent(button.ELEMENT_NEXT_PAGE_BUTTON)){
+					click(button.ELEMENT_NEXT_PAGE_BUTTON);
+				}else{
+					click(button.ELEMENT_NEXT_PAGE_BUTTON_AUX);
+				}		
 			}
 			i++;
 			Utils.pause(500);

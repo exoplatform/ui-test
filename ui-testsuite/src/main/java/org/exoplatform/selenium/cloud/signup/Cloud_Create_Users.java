@@ -47,6 +47,7 @@ public class Cloud_Create_Users extends PlatformBase{
 		magAccount.addNewUserAccount("mary", DATA_PASS, DATA_PASS, "Mary", "Williams", "", "mary@acme.com", "", "", true);
 		//Admin
 		magAccount.addNewUserAccount("john", DATA_PASS, DATA_PASS, "John", "Smith", "", "john@acme.com", "", "", true);
+		magAccount.addNewUserAccount("fqaexo", DATA_PASS, DATA_PASS, "FQA", "eXo", "", "fqavn@acme.com", "", "", true);
 		//Redactor
 		magAccount.addNewUserAccount("james", DATA_PASS, DATA_PASS, "James", "Davis", "", "james@acme.com", "", "", true);
 		//Developer
@@ -59,6 +60,8 @@ public class Cloud_Create_Users extends PlatformBase{
 		userGroup.selectGroup("Platform/Administration", true);
 		userGroup.addUsersToGroup("john", "*", false, false);
 		userGroup.addUsersToGroup("john", "manager", false, false);
+		userGroup.addUsersToGroup("fqaexo", "manager", false, false);
+		userGroup.addUsersToGroup("fqaexo", "*", false, false);
 		click(ELEMENT_UP_LEVEL);
 	
 		//platform/users
@@ -69,6 +72,7 @@ public class Cloud_Create_Users extends PlatformBase{
 		//Publisher
 		userGroup.selectGroup("Platform/Content Management", true);
 		userGroup.addUsersToGroup("john", "*", false, true);
+		userGroup.addUsersToGroup("fqaexo", "*", false, false);
 		userGroup.addUsersToGroup("mary", "manager", false, true);
 		userGroup.addUsersToGroup("mary", "editor", false, true);
 		userGroup.addUsersToGroup("james", "author", false, false);
@@ -78,6 +82,7 @@ public class Cloud_Create_Users extends PlatformBase{
 		//Organization/Employees
 		userGroup.selectGroup("Organization/Employees", true);
 		userGroup.addUsersToGroup("john", "*", false, false);
+		userGroup.addUsersToGroup("fqaexo", "*", false, false);
 		userGroup.addUsersToGroup("mary", "member", true, true);
 		userGroup.addUsersToGroup("james", "member", true, true);
 		userGroup.addUsersToGroup("demo", "member", true, true);
