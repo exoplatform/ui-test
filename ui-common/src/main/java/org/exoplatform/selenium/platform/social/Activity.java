@@ -220,13 +220,13 @@ public class Activity extends SocialBase {
 				if(plfVersion.equalsIgnoreCase("4.1")) 
 					waitForAndGetElement(ELEMENT_FILE_INPUT_DOC);
 				waitForElementNotPresent(ELEMENT_SELECT_BUTTON);
-				info("Sharing activity...");
-				click(ELEMENT_SHARE_BUTTON);
-				if(upload)
-					waitForAndGetElement(By.linkText(uploadFileName));
-				else
-					waitForAndGetElement(By.linkText(selectFileName));
 			}
+			info("Sharing activity...");
+			click(ELEMENT_SHARE_BUTTON);
+			if(upload)
+				waitForAndGetElement(By.linkText(uploadFileName));
+			else
+				waitForAndGetElement(By.linkText(selectFileName));
 		}
 	}
 
@@ -268,7 +268,7 @@ public class Activity extends SocialBase {
 		waitForAndGetElement(ELEMENT_SHARE_BUTTON);
 		info("----Click share button----");
 		click(ELEMENT_SHARE_BUTTON);
-		Utils.pause(1000);
+		Utils.pause(3000);
 		info("-- Verify that an activity has been added --");
 		if (addText) {
 			waitForAndGetElement(By.xpath(ELEMENT_ACTIVITY_AUTHOR_ACTIVITY.replace("${activityText}", text)),100000);
