@@ -249,6 +249,8 @@ public class ContentTemplate extends EcmsBase{
 
 	//add new Free layout webcontent
 	public void createNewWebContent(String name, String cont, String img, String sum, String css, String js, Object...params){
+		driver.navigate().refresh();
+		Utils.pause(3000);
 		boolean lines = (Boolean) (params.length > 0 ? params[0]: false);
 		String optionLang = (String) (params.length > 1 ? params[1]:"");
 		By eWebContentSum ;
