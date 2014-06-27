@@ -48,7 +48,7 @@
 				<testSuite>ecms-sniff-wcm.xml</testSuite>
 			</properties>
 		</profile>
-
+		<profile>
 		<id>platform-username-email</id>
 			<properties>
 				<testSuite>platform-username-email.xml</testSuite>
