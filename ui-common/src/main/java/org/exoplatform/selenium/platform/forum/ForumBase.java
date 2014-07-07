@@ -79,7 +79,7 @@ public class ForumBase extends PlatformBase {
 	public final By ELEMENT_CENSOR_KEYWORDS = By.xpath("//*[@id='Administrations']//*[@class='uiIconForumCensor']");
 	public final By ELEMENT_BAN_IP = By.xpath("//*[@id='Administrations']//*[@class='uiIconForumBanIp']");
 	public final By ELEMENT_BBCODE = By.xpath("//*[@id='Administrations']//*[@class='uiIconForumBBCode']");
-	public final By ELEMENT_PRUNE = By.xpath("//*[@id='Administrations']//*[@class='Pruning']");
+	public final By ELEMENT_PRUNE = By.xpath("//*[@id='Administrations']//*[@class='uiIconForumPrune']");
 	public final By ELEMENT_IMPORT = By.xpath("//*[@id='Administrations']//*[@class='uiIconImport']");
 
 	//-----------------Watch/Unwatch screen-------------------------------------------
@@ -150,13 +150,12 @@ public class ForumBase extends PlatformBase {
 	//----------------Set BB Code form-------------------------------------
 	public final By ELEMENT_BBCODE_POPUP = By.xpath("//span[@class='PopupTitle popupTitle' and text()='BBCode Manager']");
 	public final String ELEMENT_BBCODE_ACTIVE_NO_OPTION = "//input[@type='checkbox' and @id='${tag}']";
-	public final String ELEMENT_BBCODE_ACTIVE_HAVE_OPTION = "//input[@type='checkbox' and contains(@id,'${tag}" + "opt" + "')]";
 	public final By ELEMENT_BBCODE_ADD_BUTTON = By.xpath("//button[text()='Add BBCode']");
 	public final By ELEMENT_BBCODE_SAVE_BUTTON = By.xpath("//button[text()='Save']");
 	public final By ELEMENT_BBCODE_RESET_BUTTON = By.xpath("//button[text()='Reset']");
 	public final By ELEMENT_BBCODE_CLOSE_BUTTON = By.xpath("//*[@id='BBCodeManagerForm']//button[text()='Close']");
-	public final String ELEMENT_BBCODE_EDIT_ICON = "//*[contains(@href,'${tag}') and @data-original-title='Edit BBCode']";
-	public final String ELEMENT_BBCODE_DELETE_ICON = "//*[contains(@data-action,'${tag}') and @data-original-title='Delete BBCode']";
+	public final String ELEMENT_BBCODE_EDIT_ICON = "//*[contains(@href,'objectId=${tag}') and @data-original-title='Edit BBCode']";
+	public final String ELEMENT_BBCODE_DELETE_ICON = "//*[contains(@data-action,'objectId=${tag}') and @data-original-title='Delete BBCode']";
 	public final By ELEMENT_BBCODE_DELETE_MESSAGE = By.xpath("//span[contains(text(),'Are you sure you want to delete this BB Code ?')]");
 
 	public final By ELEMENT_BBCODE_ADD_POPUP = By.xpath("//span[@class='PopupTitle popupTitle' and contains(text(),'Add BBCode')]");
@@ -246,8 +245,10 @@ public class ForumBase extends PlatformBase {
 	//---------------------Notifications------------------
 	public final By ELEMENT_NOTIFICATION_LINK = By.xpath("//*[@id='Administrations']//*[@class='uiIconNotification']");
 	public final By ELEMENT_NOTIFY_FRAME=By.xpath("//*[@id='xEditingArea']/iframe");
+	public final By ELEMENT_NOTIFY_FRAME_PLF41=By.xpath("//*[@class='cke_editable cke_editable_themed cke_contents_ltr cke_show_borders']");
 	public final String ELEMENT_NOTIFY_TEXT= "New Posts Notification";
 	public final By ELEMENT_NOTIFY_FRAME_UP=By.id("notifyEmail___Frame");
+	public final By ELEMENT_NOTIFY_FRAME_UP_PLF41 = By.xpath("//*[@class='cke_wysiwyg_frame cke_reset']");
 	public final By ELEMENT_NOTIFY_PREFIX = By.id("enableHeaderSubject");
 	public final By ELEMENT_NOTIFY_SUBJECT = By.id("headerSubject");
 	public final By ELEMENT_NOTIFY_RESET = By.xpath("//img[@title='Reset']");
@@ -333,6 +334,7 @@ public class ForumBase extends PlatformBase {
 	//Gmail
 	public String ELEMENT_GMAIL_EMAIL = "//span/b[text()='[${category}][${forum}] ${topic}']";
 	public String ELEMENT_GMAIL_EMAIL2 = "//span/b[text()='[${category}][${forum}]${topic}']";
+	public String ELEMENT_GMAIL_EMAIL_PREFIX = "//span/b[text()='${prefix}[${category}][${forum}] ${topic}']";
 
 	//Pending job
 	public final By ELEMENT_PENDING_JOB_POPUP = By.xpath("//span[@class='PopupTitle popupTitle' and text()='Waiting for Approval']");
@@ -361,9 +363,9 @@ public class ForumBase extends PlatformBase {
 					break;
 				}
 				driver.switchTo().frame(waitForAndGetElement(frame1));
-				driver.switchTo().frame(waitForAndGetElement(frame2));
 				inputsummary = driver.switchTo().activeElement();
-				if (valid){
+				inputsummary.clear();
+				if (valid){		
 					((JavascriptExecutor) driver).executeScript("document.body.innerHTML='" + data + "'");
 				}else {
 					inputsummary.sendKeys(data); break;
@@ -654,7 +656,7 @@ public class ForumBase extends PlatformBase {
 	 * @param ip: ip to delete
 	 */
 	public void deleteBanIp(String ip){
-//		button = new Button(driver);
+		//		button = new Button(driver);
 		By element_delete = By.xpath(ELEMENT_BAN_IP_DELETE.replace("${ip}", ip));
 
 		goToBanIp();
@@ -662,7 +664,7 @@ public class ForumBase extends PlatformBase {
 		waitForMessage(MSG_DELETE_BAN_IP);
 		click(ELEMENT_OK_DELETE);
 		waitForElementNotPresent(element_delete);
-//		button.cancel();
+		//		button.cancel();
 		click(ELEMENT_BAN_IP_CANCEL_BUTTON);
 		waitForElementNotPresent(ELEMENT_BAN_IP_POPUP);
 	}
@@ -798,29 +800,17 @@ public class ForumBase extends PlatformBase {
 	 * = false: BBCode does not have option
 	 */
 	public void activeBBcode(String tag, boolean active, boolean option){
-		By ELEMENT_ACTIVE_OPTION = By.xpath(ELEMENT_BBCODE_ACTIVE_HAVE_OPTION.replace("${tag}", tag));
 		By ELEMENT_ACTIVE_NOT_OPTION = By.xpath(ELEMENT_BBCODE_ACTIVE_NO_OPTION.replace("${tag}", tag));
 		button = new Button(driver);
 		info("set active/deactive for BBcode");
 		if (tag != null && tag != ""){
-			if (option){	
-				WebElement act = waitForAndGetElement(ELEMENT_ACTIVE_OPTION, 10000, 1,2);
-				if ((active && act.isSelected() == false) || (!active && act.isSelected() == true)){
-					if (option) {
-						check(ELEMENT_ACTIVE_OPTION, 2);
-					} else {
-						uncheck(ELEMENT_ACTIVE_OPTION, 2);
-					}	
-				}
-			}else {
-				WebElement act_no = waitForAndGetElement(ELEMENT_ACTIVE_NOT_OPTION, 10000, 1,2);
-				if ((active && act_no.isSelected() == false) || (!active && act_no.isSelected() == true)){
-					if (option) {
-						check(ELEMENT_ACTIVE_NOT_OPTION, 2);
-					} else {
-						uncheck(ELEMENT_ACTIVE_NOT_OPTION, 2);
-					}	
-				}
+			WebElement act = waitForAndGetElement(ELEMENT_ACTIVE_NOT_OPTION, 10000, 1,2);
+			if ((active && act.isSelected() == false) || (!active && act.isSelected() == true)){
+				if (option) {
+					check(ELEMENT_ACTIVE_NOT_OPTION, 2);
+				} else {
+					uncheck(ELEMENT_ACTIVE_NOT_OPTION, 2);
+				}	
 			}
 			button.save();
 			waitForElementNotPresent(ELEMENT_BBCODE_POPUP);
@@ -866,14 +856,17 @@ public class ForumBase extends PlatformBase {
 
 		boolean tryOthers = isDelete.length>0 ? isDelete[0]:true;
 		if (tryOthers){
-
-			click(ELEMENT_OK_DELETE);
-			waitForElementNotPresent(ELEMENT_DELETE);
 			info("Delete BBcode successfully");
+			click(ELEMENT_OK_DELETE);
+			Utils.pause(500);
+			waitForElementNotPresent(ELEMENT_OK_DELETE);
+
 		}else{
+			info("Cancel delete BBcode");
 			click(ELEMENT_CANCEL_DELETE);
 			waitForElementNotPresent(ELEMENT_CANCEL_DELETE);
 		}
+		button.close();
 	}
 
 	/** function: go to Prune Management
@@ -973,8 +966,8 @@ public class ForumBase extends PlatformBase {
 		if (subject != null){
 			type(ELEMENT_NOTIFY_SUBJECT,subject,true);
 		}
-
-		inputDataToFrameInFrame( ELEMENT_NOTIFY_FRAME_UP, ELEMENT_NOTIFY_FRAME,content,true);
+		if (plfVersion=="4.0") inputDataToFrameInFrame( ELEMENT_NOTIFY_FRAME_UP, ELEMENT_NOTIFY_FRAME,content,true);
+		else if(plfVersion=="4.1")	inputDataToFrameInFrame( ELEMENT_NOTIFY_FRAME_UP_PLF41, ELEMENT_NOTIFY_FRAME_PLF41,content,true);
 		switchToParentWindow();
 		button.save();
 	}

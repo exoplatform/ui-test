@@ -20,6 +20,7 @@
 			<class name = "org.exoplatform.selenium.platform.plf.functional.homepageactivitystream.linksharingactivity.PLF_HomepageActivityStream_LinkSharingActivity" />
 			<class name = "org.exoplatform.selenium.platform.plf.functional.homepageactivitystream.statusactivity.PLF_HomepageActivityStream_StatusActivity" />
 			<class name = "org.exoplatform.selenium.platform.plf.functional.homepageactivitystream.refresh.PLF_HomepageActivityStream_Refresh" />
+			<class name = "org.exoplatform.selenium.platform.plf.functional.genericuserpopup.PLF_GenericUserPopup_ConnectionApplication" />
 		</classes>
 	</test>
 	<listeners>
