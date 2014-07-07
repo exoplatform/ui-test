@@ -729,18 +729,34 @@ public class PlatformBase extends TestBase {
 	public final By ELEMENT_ADD_TOPIC_ICON = By.xpath("//*[@class='ToolBarActivityIcon']/*[@class='uiIconUIForms']");
 	public final By ELEMENT_ADD_UPLOAD_FILE_ICON = By.xpath("//*[@class='ToolBarActivityIcon']/*[@class='uiIconUpload']");
 	public final By ELEMENT_ADD_WIKI_ICON = By.xpath("//*[@class='ToolBarActivityIcon']/*[@class='uiIconWikiWiki']");
+	public final By ELEMENT_ADD_TOPIC_POLL_SCROLL_MENU = By.xpath("//*[@class='optionMenu open scroll-menu']");
 	public final By ELEMENT_ADD_EVENT_TASK_FORM = By.id("UICreateEvent");
 	public final By ELEMENT_ADD_POLL_FORM = By.id("UICreatePoll");
 	public final By ELEMENT_ADD_TOPIC_FORM = By.id("UICreateTopic");
+	public final By ELEMENT_POLL_FORM_LABEL = By.xpath("//*[text()='Create a new poll:']");
+	public final By ELEMENT_TOPIC_FORM_LABEL = By.xpath("//*[text()='Create a new topic:']");
+	public final By ELEMENT_ADD_POLL_TOPIC_LOCATION = By.xpath("//*[@id='ScrollSelectlocation']//*[contains(@class,'uiFormScrollMenu')]/div[contains(@class,'dropdown')]");
+	public final String ELEMENT_POLL_TOPIC_SELECTED_LOCATION = "//*[contains(@class,'uiFormScrollMenu')]//span[contains(text(),'${itemName}')]";
 	public final By ELEMENT_ADD_WIKI_FORM = By.id("UICreateForm");
 	public final By ELEMENT_UPLOAD_FILE_FORM = By.id("UploadFileSelectorPopUpWindow");
 	public final By ELEMENT_SELECT_FORUM = By.xpath("//*[@class='titleForum' and (contains(text(),'Select Forum') or contains(text(),'Select a Forum'))]");
+	public final String ELEMENT_ADD_TOPIC_POLL_CATEGORY_INDEX = "//*[@id='uiForumFilterforumId']//li[${index}][text()='${catName}']";
+	public final String ELEMENT_ADD_TOPIC_POLL_CATEGORY_FORUM_INDEX = "//*[@id='uiForumFilterforumId']//li[${indexCat}]/ul/li[${indexFor}]/a[text()='${forName}']";
 	public final String ELEMENT_SELECT_FORUM_ITEM = "//*[@class='item forum']//*[text()='${forumName}']";
+	public final By ELEMENT_NEXT_BUTTON_DISABLE = By.xpath("//*[text()='Next' and contains(@class,'disabled')]");
+	public final String ELEMENT_SELECT_CATEGORY_ITEM = "//*[@class='item category' and text()='${catName}']";
 	public final By ELEMENT_LOCATION_WIKI = By.xpath("//*[@id='uiWikiSpaceSwitcher_CreateWiki']//input[@class='spaceSearchText lostFocus']");
 	public final String ELEMENT_CREATE_WIKI_INTRANET = "//*[@id='uiWikiSpaceSwitcher_CreateWiki']//span[text()='${name}']";
 	public final By ELEMENT_CREATE_WIKI_LABEL = By.xpath("//*[contains(text(),  'Create a new Wiki Page')]");
 	public final By ELEMENT_UPLOAD_FILE_LABEL = By.xpath("//*[contains(text(), 'Select Drive')]");
 	public final By ELEMENT_UPLOAD_FILE_DRIVER = By.id("DriveTypeDropDown");	
+	public final String ELEMENT_LOCATION_OPTION = "//*[@id='ScrollSelectlocation']//a[contains(text(),'${itemName}')]";
+	public final By ELEMENT_FILTER_FORUM = By.xpath("//*[@class='filterInput']");
+	public final By ELEMENT_NO_FORUM = By.xpath("//*[@class='noforum']");
+	public final By ELEMENT_LOCATION_CARET = By.xpath("//*[@class='caret']");
+	public final By ELEMENT_FORUM_FILTER_AREA = By.xpath("//*[contains(@class,'filterMenu')]/ul");
+	public final String ELEMENT_NO_FORUM_MESSAGE = "Sorry, no forum is available yet to create a poll. Start by creating your own space";
+	public final String ELEMENT_NO_FORUM_MESSAGE_TO_CREATE_TOPIC = "Sorry, no forum is available yet to create a topic. Start by creating your own space";
 
 	//Help functions
 	public final By ELEMENT_HELP_ICON = By.xpath("//*[@class='uiIconPLF24x24Help']");

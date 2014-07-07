@@ -8,6 +8,9 @@
 			</run>
 		</groups>
 		<classes>
+			<class name = "org.exoplatform.selenium.platform.plf.functional.navigation.topnavigation.create.PLF_Navigation_TopNavigation_Create_TopicPoll1" />
+			<class name = "org.exoplatform.selenium.platform.plf.functional.navigation.topnavigation.create.PLF_Navigation_TopNavigation_Create_TopicPoll2" />
+			<class name = "org.exoplatform.selenium.platform.plf.functional.navigation.topnavigation.create.PLF_Navigation_TopNavigation_Create_TopicPoll3" />
 			<class name = "org.exoplatform.selenium.platform.plf.functional.navigation.PLF_UserNavigation" />
 			<class name = "org.exoplatform.selenium.platform.plf.functional.navigation.leftnavigation.PLF_Navigation_LeftNavigation_CompanyList" />
 			<class name = "org.exoplatform.selenium.platform.plf.functional.navigation.leftnavigation.PLF_Navigation_LeftNavigation_General" />

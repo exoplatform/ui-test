@@ -264,7 +264,7 @@ public class Wiki_BasicAction_Delete extends ManageDraft {
 	}
 
 	/**
-	 * Case ID:71245.
+	 * Case ID:78502.
 	 * Test Case Name: Remove attached file.
 	 * Pre-Condition: 
 	 * Post-Condition: 
@@ -295,8 +295,9 @@ public class Wiki_BasicAction_Delete extends ManageDraft {
 		mouseOverAndClick(ELEMENT_LINK);
 		mouseOverAndClick(ELEMENT_REMOVE_LINK);
 		Utils.pause(500);
-		mouseOverAndClick(ELEMENT_LINK);
-		waitForElementNotPresent(ELEMENT_REMOVE_LINK);
+		driver.switchTo().frame(waitForAndGetElement(ELEMENT_ADD_WIKI_PAGE_FRAME));
+		waitForElementNotPresent(By.linkText(title));
+		waitForMessage(file,DEFAULT_TIMEOUT,1,2);
 	}
 
 	/**

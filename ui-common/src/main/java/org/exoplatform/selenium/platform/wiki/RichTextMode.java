@@ -37,6 +37,7 @@ public class RichTextMode extends Template {
 	public By ELEMENT_ADD_NEW_LINKPAGE_TEXTBOX =  By.xpath("//input[@title='Type the name of the page to be created. The final name of the page may vary since some characters are filtered.']");
 	public By ELEMENT_ALL_PAGE_TAB = By.xpath("//div[contains(text(), 'All pages')]");
 	public By ELEMENT_ADD_NEW_PAGE_LINK = By.xpath("//*[@class='gwt-Label xNewPagePreview']");
+	public By ELEMENT_ADD_WIKI_PAGE_FRAME = By.xpath("//iframe[@class='gwt-RichTextArea']");
 
 	//Table
 	public By ELEMENT_TABLE_LINK = By.xpath("//*[text()='Table']");
