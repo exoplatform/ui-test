@@ -44,7 +44,7 @@ public class Cloud_Create_Domain extends PlatformBase{
 		By ELEMENT_MAIL_CONTENT = By.xpath("//iframe[@id='messagecontframe']");
 		type(By.xpath("//*[@id='email']"), email, true);
 		click(By.xpath("//*[@id='t_submit']"));
-		waitForAndGetElement(By.xpath("//*[@class='Greetings']"));
+		waitForAndGetElement(By.xpath("//*[@class='Greetings']"),100000);
 		Utils.pause(1000);
 		driver.get("https://192.168.3.46/mail");
 		type(By.id("rcmloginuser"), email, true);

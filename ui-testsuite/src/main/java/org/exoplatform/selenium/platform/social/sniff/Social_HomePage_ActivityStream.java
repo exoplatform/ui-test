@@ -489,9 +489,10 @@ public class Social_HomePage_ActivityStream extends Activity {
 		activity.deleteActivity(activityComment+user1);
 		activity.deleteActivity(activityLike+user1);
 		activity.deleteActivity(activityOfUser+user1);
+		activity.deleteActivity(activityMention+user1);
 		magAcc.userSignIn(userType.ADMIN);
 		selectFileter("All Activities");
-		activity.deleteActivity(activityMention+user1);
+		
 		magMember.goToMySpacePage();
 		magMember.deleteSpace(spacename,300000);
 		navToolBar.goToHomePage();
