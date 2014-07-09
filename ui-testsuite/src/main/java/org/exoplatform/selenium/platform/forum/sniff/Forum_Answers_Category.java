@@ -83,9 +83,7 @@ public class Forum_Answers_Category extends AnswerBase {
 		magCat.moveCategory(categoryName1, categoryName2);
 		magCat.openCategoryInAnswer(categoryName2);
 		waitForTextPresent(categoryName1);
-		
-		magCat.openCategoryInAnswer(categoryName1);
-		magCat.deleteCategoryInAnswer(categoryName1);
+
 		magCat.deleteCategoryInAnswer(categoryName2);
 	}
 	
@@ -173,7 +171,6 @@ public class Forum_Answers_Category extends AnswerBase {
 		magCat.openCategoryInAnswer(categoryName2);
 		waitForAndGetElement(ELEMENT_CATEGORY_LINK.replace("${category}", categoryName1));
 		
-		magCat.goToAnwserHome();
 		magCat.deleteCategoryInAnswer(categoryName2);
 	}
 }

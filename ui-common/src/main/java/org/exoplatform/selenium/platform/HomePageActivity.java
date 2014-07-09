@@ -689,7 +689,7 @@ public class HomePageActivity extends SocialBase{
 				waitForAndGetElement(ELEMENT_QUESTION_COMMENT.replace("${title}", question).replace("${comment}", MSG_QUESTION_ACTIVATE));
 		}else{
 			info("Check for comment of question after deactivating a question");
-				waitForElementNotPresent(ELEMENT_QUESTION_COMMENT.replace("${title}", question).replace("${comment}", MSG_QUESTION_ACTIVATE));
+			waitForAndGetElement(ELEMENT_QUESTION_COMMENT.replace("${title}", question).replace("${comment}", MSG_QUESTION_UNACTIVATE));
 		}
 	}
 

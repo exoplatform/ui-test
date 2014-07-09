@@ -67,7 +67,7 @@ public class ForumBase extends PlatformBase {
 	//	public final By ELEMENT_IMPORT = By.linkText("Import");
 	//	public final By ELEMENT_EXPORT = By.linkText("Export");
 
-	public final By ELEMENT_ADMINISTRATION = By.xpath("//*[@id='Administrations']//*[@class='uiIconForumAdmin uiIconForumLightGray']");
+	public final By ELEMENT_ADMINISTRATION = By.xpath("//*[@id='Administrations']//*[@class='uiIconMiniArrowDown']");
 	public final By ELEMENT_SORT_SETTING = By.xpath("//span[text()='Sort Settings']");
 	public final By ELEMENT_CENSOR_KEYWORDS = By.xpath("//*[@id='Administrations']//*[@class='uiIconForumCensor']");
 	public final By ELEMENT_BAN_IP = By.xpath("//*[@id='Administrations']//*[@class='uiIconForumBanIp']");

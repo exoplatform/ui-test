@@ -28,7 +28,7 @@ public class AnswerManageCategory extends AnswerBase {
 
 
 	//Manage Category
-	public final By ELEMENT_CATEGORY_BUTTON = By.className("uiIconAnsManageCategory");
+	public final By ELEMENT_CATEGORY_BUTTON = By.xpath("//*[@class='uiIconMiniArrowDown']");
 	public final By ELEMENT_ADD_CATEGORY_LINK = By.linkText("Add Category");
 	public final By ELEMENT_CATEGORY_NAME = By.id("eventCategoryName");
 	public final By ELEMENT_ORDER = By.id("index");
@@ -83,6 +83,7 @@ public class AnswerManageCategory extends AnswerBase {
 		}
 		//		getElementFromTextByJquery(categoryName).click();
 		click(ELEMENT_CATEGORY_LINK.replace("${category}", categoryName));
+		waitForAndGetElement(ELEMENT_ANSWER_BREADCUMB.replace("${category}", categoryName));
 	}
 
 	/**

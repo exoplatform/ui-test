@@ -87,8 +87,6 @@ public class Forum_Answers_Questions extends AnswerBase {
 		
 		click(magQuest.ELEMENT_MANAGE_QUESTION_CLOSE_BUTTON);
 
-		goToAnwserHome();
-		
 		magCat.deleteCategoryInAnswer(categoryName);
 	}
 	
@@ -227,7 +225,10 @@ public class Forum_Answers_Questions extends AnswerBase {
 		info("Clear data");
 		
 		magCat.deleteCategoryInAnswer(categoryName1);
+		goToAnwserHome();
 		
+		magCat.openCategoryInAnswer(categoryName2);
+
 		magCat.deleteCategoryInAnswer(categoryName2);		
 	}
 	
