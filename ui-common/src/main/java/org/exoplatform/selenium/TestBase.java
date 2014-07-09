@@ -180,7 +180,7 @@ public class TestBase {
 			}
 		}catch(Exception e){
 			info("Unknown platform version. Set to default version 4.0.x.");
-			this.plfVersion="4.0";
+			this.plfVersion="4.1";
 		}
 
 	}
