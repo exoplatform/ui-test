@@ -96,7 +96,23 @@ public class Event extends CalendarBase{
 	/*Open a week*/
 	public By ELEMENT_NEXT_WEEK = By.xpath("//*[@class='UIWeekView uiBox uiWeekView']//*[@class='uiIconMiniArrowRight uiIconLightGray']");
 	public By ELEMENT_PREVIOUS_WEEK = By.xpath("//*[@class='UIWeekView uiBox uiWeekView']//*[@class='uiIconMiniArrowLeft uiIconLightGray']");
-
+	
+	/*Open a day*/
+	public By ELEMENT_PREVIOUS_DAY= By.xpath("//*[@class='uiBox uiDayView']//i[@class='uiIconMiniArrowLeft uiIconLightGray']");
+	public By ELEMENT_NEXT_DAY = By.xpath("//*[@class='uiBox uiDayView']//*[@class='uiIconMiniArrowRight uiIconLightGray']");
+	
+	/*Open a month*/
+	public By ELEMENT_PREVIOUS_MONTH= By.xpath("//*[@class='uiMonthView uiBox']//i[@class='uiIconMiniArrowLeft uiIconLightGray']");
+	public By ELEMENT_NEXT_MONTH = By.xpath("//*[@class='uiMonthView uiBox']//*[@class='uiIconMiniArrowRight uiIconLightGray']");
+	
+	/*Open a work week*/
+	public By ELEMENT_PREVIOUS_WORK_WEEK= By.xpath("//*[@class='UIWeekView uiBox uiWeekView']//i[@class='uiIconMiniArrowLeft uiIconLightGray']");
+	public By ELEMENT_NEXT_WORK_WEEK = By.xpath("//*[@class='UIWeekView uiBox uiWeekView']//*[@class='uiIconMiniArrowRight uiIconLightGray']");
+	
+	/*Open a list*/
+	public By ELEMENT_PREVIOUS_LIST= By.xpath("//*[@class='title']//i[@class='uiIconMiniArrowLeft uiIconLightGray']");
+	public By ELEMENT_NEXT_LIST = By.xpath("//*[@class='title']//*[@class='uiIconMiniArrowRight uiIconLightGray']");
+	
 	/*Content recurring*/
 	public By ELEMENT_TITLE_RECURRING_EVENT = By.xpath("//*[@class='popover-content']/*[@class='title clearfix']/*[@class='text']");
 	public By ELEMENT_DATE_TIME_RECURRING_EVENT = By.xpath("//*[@class='popover-content']/*[@class='time clearfix']//*[@class='uiIconCalClockMini']/../../*[@class='text']");

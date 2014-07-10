@@ -138,6 +138,7 @@ public class CalendarBase extends PlatformBase {
 	//-----------Event/Task -----------
 	public String ELEMENT_EVENT_TASK_ALL_DAY = "//*[@id='UIWeekViewGridAllDay']//div[contains(text(),'${event}')]";
 	public String ELEMENT_EVENT_TASK_ALL_DAY_PLF41 = "//*[@id='UIWeekViewGridAllDay']//div[contains(@class,'eventAlldayContent') and contains(.,'${event}')]";
+	public String ELEMENT_EVENT_TASK_ALL_DAY_PLF41_DAY_VIEW = ".//*[@id='UIDayView']//div[@class='eventAllDay']//*[contains(@class,'eventContainer asparagus') and contains(.,'${event}')]";
 	//public String ELEMENT_EVENT_TASK_ONE_DAY = "//*[@id='UIWeekViewGrid']//div[contains(text(),'${taskName}')]/parent::div[@class='clearfix']/div[@class='eventContainerBar eventTitle pull-left']";
 	public String ELEMENT_EVENT_TASK_DETAIL_DATE = "//*[@id='UIWeekViewGrid']//*[contains(@startfull,'${date}')]//div[contains(text(),'${taskName}')]";
 	public String ELEMENT_EVENT_TASK_DETAIL_ALL_DAY = "//*[@id='UIWeekViewGridAllDay']//*[contains(@starttimefull,'${date}')]//div[contains(text(),'${event}')]";
@@ -157,6 +158,8 @@ public class CalendarBase extends PlatformBase {
 	public By ELEMENT_INPUT_TASK_NOTE_EDIT = By.xpath("//*[@id='eventDetail']//*[@id='description']");
 	public By ELEMENT_BUTTON_TASK_SAVE_EDIT = By.xpath("//*[@id='UITaskForm']//*[text()='Save']");
 	public By ELEMENT_BUTTON_EVENT_SAVE_EDIT = By.xpath("//*[@id='UIEventForm']//button[text()='Save']");
+	
+		
 	//--------------Import calendar -------------------------
 	public By ELEMENT_CAL_IMPORT_POPUP = By.xpath("//span[@class='PopupTitle popupTitle' and text()='Calendar']");
 	public By ELEMENT_CAL_IMPORT_TYPE = By.name("type");
@@ -189,6 +192,7 @@ public class CalendarBase extends PlatformBase {
 	public String ELEMENT_BUTTON_SEARCH_ADVANCE_SEARCH = "//*[@id='UIAdvancedSearchForm']//button[contains(text(),'Search')]";
 
 	//----------------------Calendar View------------------------------
+	public By ELEMENT_LINK_TODAY_VIEW = By.xpath("//a[contains(text(), 'Today')]");
 	public String ELEMENT_BUTTON_DAY_VIEW = "//*[@id='UIActionBar']//a[text()='Day']";
 	public String ELEMENT_BUTTON_WEEK_VIEW = "//*[@id='UIActionBar']//a[text()='Week']";
 	public String ELEMENT_BUTTON_MONTH_VIEW = "//*[@id='UIActionBar']//a[text()='Month']";
@@ -201,8 +205,8 @@ public class CalendarBase extends PlatformBase {
 	public String EVENT_DAY_VIEW = "//*[@id='UIDayView']//div[contains(text(),'${eventTitle}')]/..";
 	public String EVENT_MONTH_VIEW = "//*[@id='UIMonthView']//span[contains(text(),'${eventTitle}')]";
 	public String EVENT_LIST_VIEW = "//*[@id='UIListUsers']//span[contains(text(),'${eventTitle}')]";
-	//	public String EVENT_WORK_WEEK_VIEW = "//*[@id='UIWeekViewGridAllDay']//div[contains(text(),'${eventTitle}')]";
-
+	public String EVENT_WORK_WEEK_VIEW = "//*[@id='UIWeekView']//div[contains(text(),'${eventTitle}')]";
+		
 	//----------------Group calendar---------------------------------
 	public String ELEMENT_GROUP_CAL = "//*[@id='UICalendars']//a[contains(text(),'${calName}')]";
 	public String ELEMENT_SHOW_IN_GROUP_TAB = "//*[@id='uiPopupAddCalendarContainer']//a[@data-target='#public-tab' and text()='Show in Groups']";
@@ -879,10 +883,7 @@ public class CalendarBase extends PlatformBase {
 	public void chooseEventCategoryOpt(String categoryName){
 		info("----Verify if new category is displayed in Category option or not----");
 		waitForAndGetElement(ELEMENT_EVENT_CATEGORY_FILTER);
-		click(ELEMENT_EVENT_CATEGORY_COMBOBOX);
-		info("----Choose a category option----");
-		click(ELEMENT_EVENT_CATEGORY_COMBOBOX_OPTION.replace("${categoryName}", categoryName));
-
+		select(ELEMENT_EVENT_CATEGORY_COMBOBOX, categoryName);
 	}
 
 	/** 
@@ -1048,5 +1049,6 @@ public class CalendarBase extends PlatformBase {
 		if (action.equalsIgnoreCase("add event")){
 			click(ELEMENT_CAL_ADD_EVENT_MENU);
 		}
-	}
+	}	
+	
 }

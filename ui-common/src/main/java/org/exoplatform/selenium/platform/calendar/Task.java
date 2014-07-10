@@ -280,7 +280,7 @@ public class Task extends CalendarBase{
 						type(ELEMENT_ADD_EDIT_TASK_FROM, dateTime[0], true);
 					if(dateTime.length > 1){
 
-//						type(ELEMENT_ADD_EDIT_TASK_FROM_TIME, dateTime[1], false);
+						//						type(ELEMENT_ADD_EDIT_TASK_FROM_TIME, dateTime[1], false);
 						click(ELEMENT_ADD_EDIT_TASK_FROM_TIME_IN, 2);
 						click(ELEMENT_ADD_EDIT_TASK_SELECT_FROM_TIME.replace("${time}", dateTime[1]));
 						Utils.pause(1000);
@@ -294,7 +294,7 @@ public class Task extends CalendarBase{
 						click(ELEMENT_ADD_EDIT_TASK_SELECT_TO_TIME.replace("${time}", dateTime[1]));
 
 						Utils.pause(1000);
-//						type(ELEMENT_ADD_EDIT_TASK_TO_TIME, dateTime[1], false);
+						//						type(ELEMENT_ADD_EDIT_TASK_TO_TIME, dateTime[1], false);
 					}
 				}
 			}
@@ -387,14 +387,18 @@ public class Task extends CalendarBase{
 		inputBasicQuickTask(name, note, opt);
 		inputFromToTask(from, to, allDay);
 		click(ELEMENT_BUTTON_TASK_SAVE);
-		if(allDay)
+		waitForElementNotPresent(ELEMENT_BUTTON_TASK_SAVE);
+		/*if(allDay)
 			if(this.plfVersion.contains("4.0"))
 				waitForAndGetElement(ELEMENT_EVENT_TASK_ALL_DAY.replace("${event}", name));
-			else
-				waitForAndGetElement(ELEMENT_EVENT_TASK_ALL_DAY_PLF41.replace("${event}", name));
+			else{
+				if(waitForAndGetElement(ELEMENT_EVENT_TASK_ALL_DAY_PLF41.replace("${event}", name),5000,0)==null)
+					waitForAndGetElement(ELEMENT_EVENT_TASK_ALL_DAY_PLF41_DAY_VIEW.replace("${event}", name));
+				else
+					waitForAndGetElement(ELEMENT_EVENT_TASK_ALL_DAY_PLF41.replace("${event}", name));
+			}
 		else
-			waitForAndGetElement(ELEMENT_EVENT_TASK_ONE_DAY.replace("${taskName}", name),100000);
-
+			waitForAndGetElement(ELEMENT_EVENT_TASK_ONE_DAY.replace("${taskName}", name),100000);*/
 	}
 
 	public void inputDataTask(String name, String note, String from, String to, boolean allDay, String...opt){

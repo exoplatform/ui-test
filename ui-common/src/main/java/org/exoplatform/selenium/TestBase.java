@@ -852,6 +852,17 @@ public class TestBase {
 		cal.add(Calendar.DAY_OF_MONTH, gap);
 		return (dateFormat.format(cal.getTime()));	
 	}
+	
+	/** Get day of week
+	 * @author phuongdt
+	 * @param gap: distance from current date
+	 * @return day of week (monday, tuesday,..., sunday)
+	 */
+	public int getDayOfWeek(int gap){
+		Calendar cal = Calendar.getInstance();
+		cal.add(Calendar.DAY_OF_MONTH, gap);
+		return cal.get(Calendar.DAY_OF_WEEK);
+	}
 
 	/**
 	 * Get minute in format "mm" from current date
