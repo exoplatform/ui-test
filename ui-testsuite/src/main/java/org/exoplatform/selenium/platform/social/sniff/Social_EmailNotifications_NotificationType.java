@@ -486,8 +486,6 @@ public class Social_EmailNotifications_NotificationType extends Notification {
 		 *Expected Outcome: 
 		- New activity is added		*/
 		magAcc.userSignIn(userType.PUBLISHER);
-		navToolBar.goToConnectionPage();
-		peo.acceptInvitation(user);
 		mgMem.acceptInvitation(space);
 
 		act.addActivity(true, activity, false, "");

@@ -77,7 +77,7 @@ public class Forum_Forum_PublishActivity_TopicActivity extends ForumBase{
 		click(By.linkText(titleForum));
 		click(mngFru.ELEMENT_TOPIC_LINK.replace("${topic}", titleTop));
 		waitForAndGetElement(mngPost.ELEMENT_POST_REPLY_BUTTON);
-		mngTopic.moveTopic(titleTop, forum2);
+		mngTopic.moveTopic(titleTop, titleCat + "/" + forum2);
 
 		//Check activity
 		navTool.goToHomePage();

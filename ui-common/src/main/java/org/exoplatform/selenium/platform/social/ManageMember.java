@@ -150,7 +150,7 @@ public class ManageMember extends SpaceManagement {
 	public void acceptInvitation(String spaceName) {
 		goToInvitationReceives();
 		doAction("Accept", spaceName);
-		waitForAndGetElement(By.xpath(ELEMENT_SPACE_ACTIVTY.replace("${space}", spaceName)));
+		waitForAndGetElement(By.xpath(ELEMENT_SPACE_ACTIVTY.replace("${space}", spaceName.toLowerCase())), DEFAULT_TIMEOUT2);
 	}
 
 	/**

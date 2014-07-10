@@ -110,11 +110,11 @@ public class Social_EmailNotifications_Settings extends Notification {
 		String password = "gtngtn";
 		String fullName = username + " "+username;
 		String email = username + "@gmail.com";
-		By eEmail = By.xpath(ELEMENT_GMAIL_TITLE.replace("${title}", fullName+" has joined eXo"));
+		By eEmail = By.xpath(ELEMENT_GMAIL_TITLE.replace("{$title}", fullName+" has joined eXo"));
 		String username2 = getRandomString();
 		String fullName2 = username2 + " "+ username2;
 		String email2 = username2 + "@gmail.com";
-		By eEmail2 = By.xpath(ELEMENT_GMAIL_TITLE.replace("${title}", fullName2+" has joined eXo"));
+		By eEmail2 = By.xpath(ELEMENT_GMAIL_TITLE.replace("{$title}", fullName2+" has joined eXo"));
 		/*
 		- Click username on the right of top navigation
 		- Click Notification
@@ -167,7 +167,7 @@ public class Social_EmailNotifications_Settings extends Notification {
 	@Test
 	public  void test03_CheckTheBoxNeverNotifyMe() {
 		info("Test 3: Check the box Never Notify me");
-		By eEmail = By.xpath(ELEMENT_GMAIL_TITLE.replace("${title}", "Mary Williams wants to connect with you on eXo')]"));
+		By eEmail = By.xpath(ELEMENT_GMAIL_TITLE.replace("{$title}", "Mary Williams wants to connect with you on eXo')]"));
 		navToolBar.goToMyProfile();
 		magAcc.updateUserProfile(null, null, null, EMAIL_ADDRESS1);
 		navToolBar.goToNotificationSettings();

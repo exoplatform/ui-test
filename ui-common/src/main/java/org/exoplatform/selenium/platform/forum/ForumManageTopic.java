@@ -99,7 +99,7 @@ public class ForumManageTopic extends ForumBase {
 	//-------------------move topic screen----------------------------------------------------
 
 	public By ELEMENT_POPUP_MOVE_TOPIC = By.xpath("//span[@class='PopupTitle popupTitle' and text()='Move Topics']"); 
-	public String ELEMENT_FORUM_SELECT = "//a[contains(text(),'${forum}')]"; 
+	public String ELEMENT_FORUM_SELECT = "//form[@id='UIMoveTopicForm']//a[contains(.,'${forum}')]"; 
 
 	//-------------------Add tag--------------------------------------------------------------
 	public By ELEMENT_TAG = By.xpath("//i[@class='uiIconTag uiIconLightGray']");
@@ -390,10 +390,12 @@ public class ForumManageTopic extends ForumBase {
 		click(ELEMENT_MOVE_TOPIC);
 		waitForAndGetElement(ELEMENT_POPUP_MOVE_TOPIC);
 
-		click(ELEMENT_FORUM_SELECT.replace("${forum}", destination)); 
-		waitForElementNotPresent(ELEMENT_POPUP_MOVE_TOPIC);
 		String links[] = destination.split("/");
 		int length = links.length;
+		for (int i=0; i < length; i ++)
+			click(ELEMENT_FORUM_SELECT.replace("${forum}", links[i])); 
+		waitForElementNotPresent(ELEMENT_POPUP_MOVE_TOPIC);
+
 		waitForAndGetElement(ELEMENT_BREADCRUMB_TOPIC.replace("${forum}", links[length-1]).replace("${topic}", topic)); 
 		info("Move topic successfully");
 	}	

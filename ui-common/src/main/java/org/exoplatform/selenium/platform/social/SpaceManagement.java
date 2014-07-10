@@ -124,7 +124,7 @@ public class SpaceManagement extends SocialBase {
 	 * @param label : Button label
 	 */
 	public void clickButton(String label) {
-		By button = By.xpath("//div[@class='uiAction']/*[text()='" + label + "']");
+		By button = By.xpath("//div[contains(@class,'uiAction')]/*[text()='" + label + "']");
 		//("//*[contains(@class,'ActionButton') and text()='" + label + "']");
 		waitForAndGetElement(button);
 		click(button);
