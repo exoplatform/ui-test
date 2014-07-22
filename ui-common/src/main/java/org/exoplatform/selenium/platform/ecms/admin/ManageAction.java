@@ -30,7 +30,7 @@ public class ManageAction extends EcmsBase{
 	public final By ELEMENT_SELECT_SCRIPT = By.name("script");
 	public final By ELEMENT_INPUT_VARIABLE = By.xpath("//*[contains(@name, 'variables') and @type='text']");
 	public final String ELEMENT_EDIT_ACTION_TYPE_ICON = "//*[contains(text(), '${actionTypeName}')]/../..//*[contains(@class, 'uiIconEdit')]";
-	public final String ELEMENT_DELETE_ACTION_TYPE_ICON = "//*[contains(text(), '${actionTypeName}')]/../..//*[@class = 'uiIconDelete']";
+	public final String ELEMENT_DELETE_ACTION_TYPE_ICON = "//*[contains(text(), '${actionTypeName}')]/../..//*[@data-original-title='Delete']";
 	
 	//Open form [Add Action Type]
 	public void openActionTypeForm(){

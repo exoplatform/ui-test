@@ -232,7 +232,7 @@ public class WikiBase extends PlatformBase{
 	//Close template list	
 	public By ELEMENT_CLOSE_TEMPLATE_LIST=By.xpath("//*[text()='Select Template']/../a[@class='uiIconClose pull-right']");
 	//Close preview window
-	public By ELEMENT_CLOSE_PREVIEW_WINDOW=By.xpath("//div[text()='Preview']/..//*[@class='uiIconClose']");
+	public By ELEMENT_CLOSE_PREVIEW_WINDOW=By.xpath("//div[text()='Preview']/..//*[contains(@class,'uiIconClose')]");
 	//	Preview template
 	public final String ELEMENT_PREVIEW_NEW_TEMPLATE="//div[text()='${TEMPLATE_TITLE}']/../..//*[contains(@class, 'uiIconPreview')]";
 	// Verify effect
@@ -263,7 +263,7 @@ public class WikiBase extends PlatformBase{
 	public final String ELEMENT_VIEW_PAGE_CHECK = "//*[contains(text(), '{$user}')]/../..//*[@title='View Pages']";
 	public final String ELEMENT_ADMIN_PAGE_CHECK = "//*[contains(text(), '{$user}')]/../..//input[contains(@id, 'ADMINPAGE')]";
 	public final String ELEMENT_ADMIN_SPACE_CHECK = "//*[contains(text(), '{$user}')]/../..//input[contains(@id, 'ADMINSPACE')]"; 
-	public final String ELEMENT_DELETE_PERMISSION = "//tr/td/div[contains(text(),'{$user}')]/../../td/a/i[@class='uiIconDelete']";
+	public final String ELEMENT_DELETE_PERMISSION = "//tr/td/div[contains(text(),'{$user}')]/../../td/a[@data-original-title='Delete Permission']";
 
 	//set permission screen
 	public String ELEMENT_USER_CHECKBOX = "//*[text()='${user}']/../..//*[@type='checkbox']"; 

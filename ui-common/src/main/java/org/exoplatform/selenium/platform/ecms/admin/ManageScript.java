@@ -32,7 +32,7 @@ public class ManageScript extends EcmsBase{
 	public final By ELEMENT_SCRIPT_LABEL = By.name("scriptLabel");
 	public final By ELEMENT_SCRIPT_NAME = By.name("scriptName");
 	public final String ELEMENT_EDIT_SCRIPT_ICON = "//*[contains(text(), '${scriptLabel}')]/../..//*[contains(@class, 'uiIconEdit')]";
-	public final String ELEMENT_DELETE_SCRIPT_ICON = "//*[contains(text(), '${scriptLabel}')]/../..//*[@class = 'uiIconDelete']";
+	public final String ELEMENT_DELETE_SCRIPT_ICON = "//*[contains(text(), '${scriptLabel}')]/../..//*[contains(@class,'uiIconDelete')]";
 
 
 	//Open form [Add Script]

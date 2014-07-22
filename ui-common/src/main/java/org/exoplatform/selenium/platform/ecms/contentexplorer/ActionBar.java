@@ -97,7 +97,7 @@ public class ActionBar extends EcmsBase{
 	public By ELEMENT_IMPORT = By.xpath("//button[text()='Import']");
 
 	//Publication > Add Category Form
-	public By ELEMENT_CATEGORIES_LINK = By.xpath("//*[@class='actionIcon']//*[@class='uiIconEcmsManageCategories']"); 
+	public By ELEMENT_CATEGORIES_LINK = By.xpath("//*[@class='actionIcon']//*[contains(@class,'uiIconEcmsManageCategories')]"); 
 	public By ELEMENT_CATEGORIES_MORE_LINK = By.xpath("//*[text()='More']/..//a[text()='Categories']");
 	public By ELEMENT_SELECT_CATEGORY_TAB = By.xpath("//*[text()='Select Category']");
 	public By ELEMENT_CATEGORY_TREE_BOX = By.name("taxonomyTree");
@@ -159,10 +159,10 @@ public class ActionBar extends EcmsBase{
 	//publication TAB
 	public final By ELEMENT_PUBLICATION_TAB = By.xpath("//a[contains(text(),'Publication')]");
 	public final By ELEMENT_TEMPLATE_LIST_TEXT = By.xpath("//div[contains(text(),'Select your template in the list below')]");
-	public final By ELEMENT_EDIT_LINK = By.xpath("//*[@class='actionIcon']//*[@class='uiIconEcmsEditDocument']");
-	public final By ELEMENT_NEW_CONTENT_LINK = By.xpath("//*[@class='actionIcon']//*[@class='uiIconEcmsAddDocument']");
+	public final By ELEMENT_EDIT_LINK = By.xpath("//*[@class='actionIcon']//*[contains(@class,'uiIconEcmsEditDocument')]");
+	public final By ELEMENT_NEW_CONTENT_LINK = By.xpath("//*[@class='actionIcon']//*[contains(@class,'uiIconEcmsAddDocument')]");
 	public final By ELEMENT_PUBLICATION = By.xpath("//a[contains(text(),'Publications')]");
-    public final By ELEMENT_PUBLISH_ICON = By.xpath("//*[@class='actionIcon']//*[@class='uiIconEcmsPublicationPublish']");
+    public final By ELEMENT_PUBLISH_ICON = By.xpath("//*[@class='actionIcon']//*[contains(@class,'uiIconEcmsPublicationPublish')]");
 	public final By ELEMENT_PUBLICATION_ICON = By.className("uiIconEcmsManagePublications");
 	/*
 	 * Added by PhuongDT
@@ -173,7 +173,7 @@ public class ActionBar extends EcmsBase{
 	public final By ELEMENT_CLEAR_SELECTION = By.xpath("//*[@class='fileViewStatus']//*[@id='FileViewClearSelection']");
 	/*End Added*/
 
-	public final By ELEMENT_VERSIONS_LINK = By.xpath("//*[@class='actionIcon']//*[@class='uiIconEcmsManageVersions']");
+	public final By ELEMENT_VERSIONS_LINK = By.xpath("//*[@class='actionIcon']//*[contains(@class,'uiIconEcmsManageVersions')]");
 	public final String ELEMENT_RESTORE_VERSION_ICON = "//*[contains(text(), 'Version: ${version}')]/..//*[@class = 'uiIconRestore uiIconLightGray']";
 	public final String ELEMENT_PUBLICATION_STATE = "//p[contains(text(),'{$state}')]/../a[@class='node']";	
 	public final By ELEMENT_SCHEDULE_TAB = By.xpath("//a[text()='Scheduled']");	
@@ -184,7 +184,7 @@ public class ActionBar extends EcmsBase{
 	public final By ELEMENT_PUB_TO_INPUT = By.name("UIPublicationPanelEndDateInput");
 	public final String ELEMENT_REVISION_DATE = "//*[contains(text(), '${status}')]/../td[2]";
 	public final By ELEMENT_FIRST_REVISION_DATE = By.xpath(ELEMENT_REVISION_DATE.replace("${status}", "Draft[Current Revision]"));
-	public final By ELEMENT_ADD_RELATION_LINK = By.xpath("//*[@class='actionIcon']//*[@class='uiIconEcmsManageRelations']");
+	public final By ELEMENT_ADD_RELATION_LINK = By.xpath("//*[@class='actionIcon']//*[contains(@class,'uiIconEcmsManageRelations')]");
 	public final By ELEMENT_SELECT_RELATION_TAB = By.xpath("//*[contains(text(), 'Select Relation')]");
 	public final By ELEMENT_RELATION_LIST_TAB = By.xpath("//*[contains(text(), 'Relation List')]");
 	public final By ELEMENT_SHOW_RELATION_ICON = By.xpath("//i[@class='uiIconEcmsRelationMini']");

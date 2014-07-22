@@ -30,8 +30,8 @@ public class ManageQuery extends EcmsBase{
 	public final By ELEMENT_QUERY_TYPE = By.xpath("//select[@name='type']");
 	public final By ELEMENT_ENABLE_CACHE_RESULT = By.id("cache");
 	public final By ELEMENT_INPUT_STATEMENT = By.name("statement");
-	public final String ELEMENT_EDIT_QUERY_ICON = "//*[contains(text(), '${queryName}')]/../..//*[@class = 'uiIconEditInfo']";
- 	public final String ELEMENT_DELETE_QUERY_ICON = "//*[contains(text(), '${queryName}')]/../..//*[@class = 'uiIconDelete']";
+	public final String ELEMENT_EDIT_QUERY_ICON = "//*[contains(text(), '${queryName}')]/../..//*[contains(@class,'uiIconEditInfo')]";
+ 	public final String ELEMENT_DELETE_QUERY_ICON = "//*[contains(text(), '${queryName}')]/../..//*[contains(@class,'uiIconDelete')]";
 	public final By ELEMENT_QUERY_ADD_PERMISSION_ICON = By.xpath("//*[@data-original-title='Add Permission']");
  	
  	/*=======================================================================*/

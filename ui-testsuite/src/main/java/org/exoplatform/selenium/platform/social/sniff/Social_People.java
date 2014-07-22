@@ -67,8 +67,9 @@ public class Social_People extends SocialBase {
 	 * Verify mouse over account name link
 	 * This test case is not included in qmetry
 	 * Purpose of selenium test case: verify bug: https://jira.exoplatform.org/browse/PLF-4862
+	 * --> Moved this testcase from selenium script
 	 */
-	@Test
+	//@Test
 	public void test00_VerifyMouseOver(){
 		mouseOver(ELEMENT_ACCOUNT_NAME_LINK, true);
 		mouseOver(ELEMENT_TOOLBAR_NETWORKS_ICON, true);

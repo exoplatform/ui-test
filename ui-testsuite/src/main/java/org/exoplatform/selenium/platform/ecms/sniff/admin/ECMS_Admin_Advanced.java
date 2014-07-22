@@ -265,11 +265,11 @@ public class ECMS_Admin_Advanced extends PlatformBase{
 	@Test
 	public void test04_AddEditAndDeleteScript(){
 		String scriptFileContent = "TestData/ECMS_Admin_SendMailScript_Template.txt"; 
-		String scriptLabel = "SendMailScript"; 
-		String scriptName = "SendMailScript";
+		String scriptLabel = "SendMailScript65865"; 
+		String scriptName = "SendMailScript65865";
 
 		String newScriptFileContent = ""; 
-		String newScriptName = "Edit SendMailScript";
+		String newScriptName = "Edit SendMailScript65865";
 
 		ecMain.goToScriptsTabInContentAdmin();
 

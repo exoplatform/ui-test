@@ -38,7 +38,7 @@ public class ManageCategory extends EcmsPermission{
 	public final By ELEMENT_CATEGORIES_WORKSPACE = By.name("TaxoTreeWorkspace");
 	public final By ELEMENT_ADD_PATH_LINK = By.xpath("//*[@title='Add Path']");
 	public final By ELEMENT_POPUP_HOME_PATH = By.id("PopupTaxonomyJCRBrowser");
-	public final String ELEMENT_EDIT_CATEGORY_TREE = "//*[text()='${categoryTreeName}']/../..//*[@class='uiIconEditInfo']";
+	public final String ELEMENT_EDIT_CATEGORY_TREE = "//*[text()='${categoryTreeName}']/../..//*[contains(@class,'uiIconEditInfo')]";
 	public final By ELEMENT_ADD_PATH_LINK_ICON = By.xpath("//*[@data-original-title='Add Path']");
 	
 	// Add Category tree form -screen2
@@ -58,9 +58,9 @@ public class ManageCategory extends EcmsPermission{
 	public final By ELEMENT_UP_LEVEL = By.xpath("//*[@id='UITaxonomyTreeCreateChild']//..//a[@title='Up Level']");
 	public final By ELEMENT_ALERT_VISIBLE = By.xpath("//div[@class='UIPopupWindow UIDragObject ExoMessageDecorator' and contains(@style,'visible')]");	
 
-	public final String ELEMENT_COPY_CATEGORY_ICON = "//*[@title='${categoryName}']/../..//*[@class='uiIconEcmsCopy']";
-	public final String ELEMENT_PASTE_TO_CATEGORY_ICON = "//*[@title='${categoryName}']/../..//*[@class='uiIconEcmsPatse']";
-	public final String ELEMENT_CUT_CATEGORY_ICON = "//*[@title='${categoryName}']/../..//*[@class='uiIconEcmsCut']";
+	public final String ELEMENT_COPY_CATEGORY_ICON = "//*[@title='${categoryName}']/../..//*[contains(@class,'uiIconEcmsCopy')]";
+	public final String ELEMENT_PASTE_TO_CATEGORY_ICON = "//*[@title='${categoryName}']/../..//*[contains(@class,'uiIconEcmsPatse')]";
+	public final String ELEMENT_CUT_CATEGORY_ICON = "//*[@title='${categoryName}']/../..//*[contains(@class,'uiIconEcmsCut')]";
 	public final String MESSAGE_INFO_CUT_TO_CATEGORY =  "You cannot paste here. The category node '${pathCategory}' might be cut.";
 	public final String MESSAGE_INFO_PASTE_TO_CATEGORY = "Cannot read from the source file, or the destination category is a sub-category.";
 	public final String ELEMENT_LIFE_CYCLE_LIST_OPTIONS = ".//*[@name='lifecycle']/option[contains(text(), '${option}')]";

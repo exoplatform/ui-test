@@ -58,7 +58,7 @@ public class EcmsBase extends ManageAccount {
 	public final By ELEMENT_ADDRESS_BAR = By.id("address");
 
 	//New Folder
-	public final By ELEMENT_NEW_FOLDER_LINK = By.xpath("//*[@class='actionIcon']//*[@class='uiIconEcmsAddFolder']");
+	public final By ELEMENT_NEW_FOLDER_LINK = By.xpath("//*[@class='actionIcon']//*[contains(@class,'uiIconEcmsAddFolder')]");
 	public final By ELEMENT_FOLDER_POPUP_TITLE = By.xpath("//*[contains(@class, 'popupTitle') and text()='New Folder']");
 	public final By ELEMENT_FOLDER_TITLE_TEXTBOX = By.id("titleTextBox");
 	public final By ELEMENT_FOLDER_TYPE_OPTION = By.name("customTypeSelectBox");
@@ -207,8 +207,8 @@ public class EcmsBase extends ManageAccount {
 
 	//System TAB  
 	public final By ELEMENT_SYSTEM_TAB = By.xpath("//a[contains(@title,'System')]");
-	public final By ELEMENT_PERMISSION_LINK = By.xpath("//*[@class='actionIcon']//*[@class='uiIconEcmsViewPermissions']");
-	public final By ELEMENT_EXPORT_LINK = By.xpath("//i[@class='uiIconEcmsExportNode']");
+	public final By ELEMENT_PERMISSION_LINK = By.xpath("//*[@class='actionIcon']//*[contains(@class,'uiIconEcmsViewPermissions')]");
+	public final By ELEMENT_EXPORT_LINK = By.xpath("//i[contains(@class,'uiIconEcmsExportNode')]");
 	public final By ELEMENT_IMPORT_LINK = By.className("uiIconEcmsImportNode");
 
 	//Content template
@@ -225,8 +225,8 @@ public class EcmsBase extends ManageAccount {
 	//public By ELEMENT_LINK_TAB_PUBLICATION= By.xpath("//a[contains(text(),'Publication')]");
 	public final By ELEMENT_MANAGE_VIEW = By.xpath("//a[contains(text(),'Manage View')]");
 	public final By ELEMENT_MANAGEMENT_VIEW = By.className("uiIconEcmsViewManager");
-	public final String ELEMENT_EDIT_VIEW = "//*[@data-original-title='${viewName}']/../..//*[@class='uiIconEditInfo']"; //*[@id='UIViewList']
-	public final String ELEMENT_DELETE_VIEW = "//*[@data-original-title='${viewName}']/../..//*[@class='uiIconDelete']";
+	public final String ELEMENT_EDIT_VIEW = "//*[@data-original-title='${viewName}']/../..//*[@data-original-title='Edit']"; //*[@id='UIViewList']
+	public final String ELEMENT_DELETE_VIEW = "//*[@data-original-title='${viewName}']/../..//*[@data-original-title='Delete']";
 
 	//Edit View Form 
 	public final By ELEMENT_CHECKBOX_VERSION=By.id("manageVersions");

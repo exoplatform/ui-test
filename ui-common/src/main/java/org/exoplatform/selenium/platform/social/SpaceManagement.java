@@ -66,7 +66,7 @@ public class SpaceManagement extends SocialBase {
 	public final String ELEMENT_VERIFY_SPACE_NAME_ACTIVITY = "//div[@class='author']/a[contains(text(),'${spaceName}')]";
 	public final String ELEMENT_SPACE_MENU_ITEM = "//*[@id='spaceMenuTab']//span[contains(text(),'${menuItem}')]";
 	public final String ELEMENT_SPACE_MENU_ITEM_41 = "//*[@id='spaceMenuTab']//span[contains(text(),'${menuItem}')]";
-	public final String ELEMENT_SPACE_CURRENT_MENU_ITEM = "//li[@class='active item']//span[text()='${menuItem}']";
+	public final String ELEMENT_SPACE_CURRENT_MENU_ITEM = "//li[@class='active item']//span[contains(text(),'${menuItem}')]";
 	public final By ELEMENT_SPACE_MORE_ITEM = By.xpath("//i[@class='uiIconAppMoreButton']");
 
 	//Space access

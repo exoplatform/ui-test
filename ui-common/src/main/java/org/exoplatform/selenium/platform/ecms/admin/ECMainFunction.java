@@ -52,7 +52,7 @@ public class ECMainFunction extends EcmsBase{
 	public final By ELEMENT_MANAGE_NAME_SPACE_LINK = By.className("uiIconEcmsNamespaceManager");
 
 	//Repository > Locks
-	public final String ELEMENT_UNLOCK_NODE = "//*[text()='${lockedNode}']/../..//*[@class='uiIconUnlockMini']";
+	public final String ELEMENT_UNLOCK_NODE = "//*[text()='${lockedNode}']/../..//*[@data-original-title='UnLock']";
 
 	//Advanced
 	public final By ELEMENT_MANAGE_CATEGORIES_LINK = By.className("uiIconEcmsTaxonomyManagerTrees");

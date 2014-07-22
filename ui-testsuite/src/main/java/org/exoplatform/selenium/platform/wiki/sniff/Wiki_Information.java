@@ -183,7 +183,7 @@ public class Wiki_Information extends Version {
 		String content = "Wiki_sniff_infor_page_content_06";
 
 		magAc.signOut();
-		magAc.signIn("fqa", DATA_PASS);
+		magAc.signIn(DATA_USER2, DATA_PASS);
 		goToWiki();
 		addBlankWikiPage(title, content, 0);
 		goToAddRelation();
