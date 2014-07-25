@@ -412,7 +412,9 @@ public class PageEditor extends PlatformBase {
 		info("Go to edit container ");
 		click(ELEMENT_CONTAINER_TAB);
 		mouseOver(elementContainer, true);
-		click(ELEMENT_EDIT_CONTAINER_ICON);
+		info("mouse over");
+		Utils.pause(2000);
+		mouseOverAndClick(ELEMENT_EDIT_CONTAINER_ICON);
 		waitForAndGetElement(By.id("UIContainerForm"));
 	}
 

@@ -37,16 +37,14 @@ public class Gatein_GroupNavigation_ManageNode extends GroupNavigation {
 	public void setUpBeforeTest(){
 		initSeleniumTest();
 		driver.get(baseUrl);
-		magAc = new ManageAccount(driver);
-		navTool = new NavigationToolbar(driver);
-		group = new UserGroupManagement(driver);
-		navToolbar = new NavigationToolbar(driver);
+		magAc = new ManageAccount(driver, this.plfVersion);
+		navTool = new NavigationToolbar(driver, this.plfVersion);
+		group = new UserGroupManagement(driver, this.plfVersion);
+		navToolbar = new NavigationToolbar(driver, this.plfVersion);
 		button = new Button(driver);
 		magAlert = new ManageAlert(driver);
 		pageEditor = new PageEditor(driver);
-		pageMag = new PageManagement(driver);
-
-		magAc.signIn(DATA_USER1, DATA_PASS);
+		pageMag = new PageManagement(driver, this.plfVersion);
 	}
 
 	@AfterMethod
@@ -161,7 +159,7 @@ public class Gatein_GroupNavigation_ManageNode extends GroupNavigation {
 		//- Select a Group navigation and click on [Edit navigation] link
 		//Edit Group navigation is show with all exited node on group's nav
 		editNavigation(groupNameDisplayName);
-		
+
 		/* Step 2: Show form to add new node */
 		//- Choose a parent node
 		//- Right click on one node & select Add new node

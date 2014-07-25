@@ -47,9 +47,9 @@ public class Gatein_PortalNavigation_ManagePortal extends PortalManagement{
 		driver.quit();
 	}
 	/**CaseId: 73501,73502 -> Add and delete site
-	 * 
+	 * Bug: https://jira.exoplatform.org/browse/PORTAL-3940
 	 */
-	@Test
+	@Test (groups = "errors")
 	public void test01_AddDeletePortal(){
 		String portalName = "gateinfunctportal73501";
 
@@ -59,6 +59,7 @@ public class Gatein_PortalNavigation_ManagePortal extends PortalManagement{
 		String editMembership = "*" ;
 		navToolbar.goToPortalSites();
 		addNewPortal(portalName, null, null, "French", null, "Always", true, permissions, editGroupId, editMembership);
+		driver.navigate().refresh();
 		waitForAndGetElement(ELEMENT_PORTAL_EDIT_CONFIGURATION.replace("${siteName}", portalName));
 
 		info("Switch to new portal");

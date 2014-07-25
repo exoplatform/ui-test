@@ -86,7 +86,7 @@ public class Gatein_PortalNavigation_Edit_EditLayout extends PortalManagement{
 
 		//- Move mouse on the container and click on Edit icon of added container on mark layer
 		pageEditor.goToEditContainer(ELEMENT_DROP_TARGET_HAS_LAYOUT);
-
+	
 		//Edit container form appears with 2 tabs:
 		//Container settings:
 		//- Container Id: can not be changed

@@ -28,7 +28,6 @@ public class Gatein_BasicPortlets_Organization_UserManagement extends PlatformBa
 		user = new UserGroupManagement(driver);
 		but = new Button(driver);
 		dialog = new Dialog(driver);
-
 		magAc.signIn(DATA_USER1, DATA_PASS); 
 	}
 

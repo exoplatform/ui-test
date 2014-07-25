@@ -40,7 +40,6 @@ public class GateIn_GlobalSettings_LanguageSettings extends PortalManagement {
 
 	@AfterMethod
 	public void afterTest(){
-		magAc.signOut();
 		driver.manage().deleteAllCookies();
 		driver.quit();
 	}
@@ -155,7 +154,8 @@ public class GateIn_GlobalSettings_LanguageSettings extends PortalManagement {
 	@Test
 	public void test02_CheckDisplayLanguageOfPortalInPublicModeUsingLanguagePortal(){
 		//Set language of browser is not supported by portal
-		initFFBrowserWithSetLanguageBrowser("cs");
+		info("Set Korean language");
+		initFFBrowserWithSetLanguageBrowser("kp");
 		driver.manage().window().maximize();
 
 		/* Step 1: Show portal in public mode */
@@ -237,7 +237,8 @@ public class GateIn_GlobalSettings_LanguageSettings extends PortalManagement {
 	@Test
 	public void test03_CheckDisplayLanguageOfPortalInPrivateModeWithDemoAccountUsingLanguagePortal(){		
 		//Set language of browser is not supported by portal
-		initFFBrowserWithSetLanguageBrowser("cs");
+		info("Set Korean language");
+		initFFBrowserWithSetLanguageBrowser("kp");
 		driver.manage().window().maximize();
 		driver.get(baseUrl);
 		magAc = new ManageAccount(driver);
@@ -245,7 +246,7 @@ public class GateIn_GlobalSettings_LanguageSettings extends PortalManagement {
 		navTool = new NavigationToolbar(driver);
 
 		/*Create data*/
-		magAc.userSignIn(userType.ADMIN);
+		magAc.userSignIn(userType.ADMIN);		
 		userGroup.editUserAccount(DATA_USER4, false, null, null, null, null, null, null, null, "");
 
 		/* Step 1: Check display after login to portal */
@@ -437,21 +438,24 @@ public class GateIn_GlobalSettings_LanguageSettings extends PortalManagement {
 		initFFBrowserWithSetLanguageBrowser("fr");
 		driver.manage().window().maximize();
 		driver.get(baseUrl+"/acme");
-		magAc = new ManageAccount(driver);
-		userGroup = new UserGroupManagement(driver);
-		navTool = new NavigationToolbar(driver);
+		magAc = new ManageAccount(driver, this.plfVersion);
+		userGroup = new UserGroupManagement(driver, this.plfVersion);
+		navTool = new NavigationToolbar(driver, this.plfVersion);
 		String username = getRandomString();
 		String password = username;
-		String firstName = "firstName";
+		String firstName = "Test";
 		String lastName = "lastName";
 		String email = username+"@platform.com";
 
 		//Set captra to invisible
 		magAc.signInAcme(USER_ROOT,PASS_ROOT);
+		Utils.pause(2000);
 		info("Go to page edit layout");
 		driver.get(baseUrl+"/acme/newAccount");
+		Utils.pause(2000);
 		navTool.goToEditPageEditor();
 		setUseCaptcha(false,true);
+		Utils.pause(1000);
 		magAc.signOut();
 
 		/* Step 1: Create new account in public mode */
@@ -462,6 +466,7 @@ public class GateIn_GlobalSettings_LanguageSettings extends PortalManagement {
 		//- Input valid values for other fields
 		//- Click Subscribe
 		//Show message alerts new account is registered successfully
+		Utils.pause(3000);
 		driver.get(baseUrl+"/acme/newAccount");
 		magAc.addNewUserAccountInPublicMode(username, password, password, firstName, lastName, email, true);
 		Utils.pause(1000);
@@ -473,5 +478,14 @@ public class GateIn_GlobalSettings_LanguageSettings extends PortalManagement {
 		driver.get(baseUrl+"/acme");
 		magAc.signInAcme(username,password);
 		waitForAndGetElement(magAc.PRODUCTS_LABEL_FRENCH);
+		magAc.signOut();
+
+		//Delete data test
+		driver.get(baseUrl);
+		magAc.signInAcme(USER_ROOT,PASS_ROOT);
+		info("Change to English");		
+		magAc.changeLanguageForUser("Anglais");
+		navTool.goToUsersAndGroupsManagement();
+		userGroup.deleteUser(username);		
 	}
 }

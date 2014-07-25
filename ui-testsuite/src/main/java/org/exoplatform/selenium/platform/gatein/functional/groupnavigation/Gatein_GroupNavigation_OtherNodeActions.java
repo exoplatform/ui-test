@@ -505,7 +505,7 @@ public class Gatein_GroupNavigation_OtherNodeActions extends GroupNavigation{
 		info("Add new container and application to page layout");
 		pageEditor.addNewContainer(categoryContainer, typeContainer);
 		pageEditor.finishEditLayout();
-		
+
 		/* Step 2: Show form to edit added container */
 		//In Edit Page & Nav form:     
 		//- Select above added page (node) 
@@ -533,7 +533,7 @@ public class Gatein_GroupNavigation_OtherNodeActions extends GroupNavigation{
 		click(ELEMENT_CONTAINER_PERMISSION_TAB);
 		assert waitForAndGetElement(ELEMENT_CHECKBOX_PUBLIC_MODE, DEFAULT_TIMEOUT,1,2).isSelected();
 		click(ELEMENT_CONTAINER_SETTING_TAB);
-		
+
 		/* Step 3: Edit container */
 		//- Make change(s)
 		//- Click Save
@@ -549,7 +549,7 @@ public class Gatein_GroupNavigation_OtherNodeActions extends GroupNavigation{
 		String valueStyle = element.getAttribute("style");
 		info(valueStyle);
 		assert valueStyle.contains("width: 600px; height: 600px;");
-		
+
 		/* Step 4: Check  Finish */
 		//- Click on Finish icon on Page editor
 		//- Page editor is closed
@@ -564,7 +564,7 @@ public class Gatein_GroupNavigation_OtherNodeActions extends GroupNavigation{
 		navTool.goToGroupSites();
 		navMag.deleteNode(groupNameDisplayName,nodeNameHome,pageName,false);
 	}
-	
+
 	/** Check Finish function after change node's page's container layout
 	 * CaseID 73812
 	 * Step 1: Add page
@@ -591,7 +591,7 @@ public class Gatein_GroupNavigation_OtherNodeActions extends GroupNavigation{
 		info("Go to group site");
 		navTool.goToGroupSites();
 		info("Create page for portal with empty layout");
-//		navTool.goToPageCreationWizard();
+		//		navTool.goToPageCreationWizard();
 		pageEditor.createNewPageEmptyLayout(pageName);
 
 		info("Go to page edit layout");
@@ -603,7 +603,7 @@ public class Gatein_GroupNavigation_OtherNodeActions extends GroupNavigation{
 		waitForAndGetElement(elementLayout1);
 		waitForElementNotPresent(elementLayout2);
 		pageEditor.finishEditLayout();
-		
+
 		/* Step 2: Make change for page's container layout */
 		//In Edit Page & Nav form:     
 		//- Select above added page (node) 
@@ -620,16 +620,16 @@ public class Gatein_GroupNavigation_OtherNodeActions extends GroupNavigation{
 		click(ELEMENT_NAVIGATION_EDIT_PAGE_NODE);
 		pageEditor.addNewContainer(categoryContainer, typeContainer1);
 		click(ELEMENT_SWITCH_VIEW_MODE);
-		
+
 		/* Step 3: Check Save & Finish */
 		//- Click Finish icon on Page editor
 		//- Page editor form is closed
 		//- Changes on container layout above was saved
-//		waitForElementNotPresent(elementLayout1);
+		//		waitForElementNotPresent(elementLayout1);
 		waitForAndGetElement(elementLayout2);
 		pageEditor.finishEditLayout();
-//		button.save();
-		
+		//		button.save();
+
 		/*Clear data*/
 		info("-- Clear data --");
 		navToolbar.goToManagePages();
@@ -637,7 +637,7 @@ public class Gatein_GroupNavigation_OtherNodeActions extends GroupNavigation{
 		navTool.goToGroupSites();
 		navMag.deleteNode(groupNameDisplayName,nodeNameHome,pageName,false);
 	}
-	
+
 	/** Check Finish function after edit porlet with saving page
 	 * CaseID 73982
 	 * Step 1: Add page
@@ -650,7 +650,7 @@ public class Gatein_GroupNavigation_OtherNodeActions extends GroupNavigation{
 		/*Declare variables*/
 		String groupNameDisplayName = "Administration";
 		String nodeNameHome ="Group Navigation";
-		String pageName = "page73621";
+		String pageName = "page73982";
 		String category = "Collaboration";
 		String portletId = "Collaboration/AnswersPortlet";
 		String nodeLinkToEdit = ELEMENT_NODE_LINK.replace("${nodeLabel}", pageName);
@@ -675,7 +675,7 @@ public class Gatein_GroupNavigation_OtherNodeActions extends GroupNavigation{
 		click(ELEMENT_SWITCH_VIEW_MODE);
 		waitForAndGetElement(ELEMENT_ANWSER_PORTLET_IN_VIEW_PAGE);
 		pageEditor.finishEditLayout();
-		
+
 		/* Step 2: Show form to edit portlet when edit node's page */
 		//In Navigation management form: 
 		//- Select node above
@@ -700,7 +700,7 @@ public class Gatein_GroupNavigation_OtherNodeActions extends GroupNavigation{
 		waitForAndGetElement(ELEMENT_SELECT_ICON_TAB);
 		waitForAndGetElement(ELEMENT_DECORATION_THEMES_TAB);
 		waitForAndGetElement(ELEMENT_ACCESS_PERMISSION_TAB);
-		
+
 		/* Step 3: Edit portlet */
 		//- Make change for current portlet
 		//- Click Save in Edit portlet form
@@ -715,14 +715,14 @@ public class Gatein_GroupNavigation_OtherNodeActions extends GroupNavigation{
 		WebElement element = waitForAndGetElement(ELEMENT_PORTLET_FRAGMENT.replace("${portletName}", "UIAnswersPortlet"));
 		String valueStyle = element.getAttribute("style");
 		assert valueStyle.contains("width: 100%; height: 600px;"): "Failed to edit portlet: " + portletTitle;
-		
+
 		/* Step 4: Check  Finish */
 		//- Click finish icon on page editor
 		//- Click Save button on navigation management
 		//- Edit page & Nav form is closed
 		//- When shown form to edit above portlet like step 3, change was saved
 		pageEditor.finishEditLayout();
-//		button.save();
+		//		button.save();
 
 		/*Clear data*/
 		info("-- Clear data --");
@@ -731,7 +731,7 @@ public class Gatein_GroupNavigation_OtherNodeActions extends GroupNavigation{
 		navTool.goToGroupSites();
 		navMag.deleteNode(groupNameDisplayName,nodeNameHome,pageName,false);
 	}
-	
+
 	/** Check Finish function on Editing page after edited page portlet layout
 	 * CaseID 74042
 	 * Step 1: Add page
@@ -771,7 +771,7 @@ public class Gatein_GroupNavigation_OtherNodeActions extends GroupNavigation{
 		waitForAndGetElement(ELEMENT_ANWSER_PORTLET_IN_VIEW_PAGE);
 		waitForElementNotPresent(ELEMENT_ACCOUNT_PORTLET_IN_VIEW_PAGE);
 		pageEditor.finishEditLayout();
-		
+
 		/* Step 2: Show portlet control form for editing page */
 		//In Navigation management form: 
 		//- Select node above
@@ -783,7 +783,7 @@ public class Gatein_GroupNavigation_OtherNodeActions extends GroupNavigation{
 		info("Edit node's page: " + pageName);
 		rightClickOnElement(nodeLinkToEdit);
 		click(ELEMENT_NAVIGATION_EDIT_PAGE_NODE);
-		
+
 		/* Step 3: Add new portlet */
 		//Drag & drop portlet from list in left pane to page area in right pane
 		//New portlet is added in page area
@@ -791,14 +791,14 @@ public class Gatein_GroupNavigation_OtherNodeActions extends GroupNavigation{
 		click(ELEMENT_SWITCH_VIEW_MODE);
 		waitForAndGetElement(ELEMENT_ANWSER_PORTLET_IN_VIEW_PAGE);
 		waitForAndGetElement(ELEMENT_ACCOUNT_PORTLET_IN_VIEW_PAGE);
-		
+
 		/* Step 4: Check Save & Finish */
 		//- Click Finish icon on Page editor
 		//- Click Save on Navigation management
 		//- Navigation management is closed
 		//- Changes on Portlet layout was saved
 		pageEditor.finishEditLayout();
-//		button.save();
+		//		button.save();
 
 		/*Clear data*/
 		info("-- Clear data --");

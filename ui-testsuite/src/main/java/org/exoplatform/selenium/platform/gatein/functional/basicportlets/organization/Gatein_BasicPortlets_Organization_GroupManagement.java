@@ -1,6 +1,5 @@
 package org.exoplatform.selenium.platform.gatein.functional.basicportlets.organization;
 
-
 import static org.exoplatform.selenium.TestLogger.info;
 
 import java.util.HashMap;
@@ -21,11 +20,10 @@ import org.testng.annotations.Test;
 /**
  * 
  * @author havtt
- *
+ * @update chinhdtt 
  */
 
 public class Gatein_BasicPortlets_Organization_GroupManagement extends PlatformBase{
-
 	ManageAccount magAc;
 	NavigationToolbar navTool;
 	UserGroupManagement user;
@@ -37,15 +35,14 @@ public class Gatein_BasicPortlets_Organization_GroupManagement extends PlatformB
 	public void setUpBeforeTest(){
 		initSeleniumTest();
 		driver.get(baseUrl);
-		magAc = new ManageAccount(driver);
-		navTool = new NavigationToolbar(driver);
-		user = new UserGroupManagement(driver);
-		but = new Button(driver);
+		magAc = new ManageAccount(driver, this.plfVersion);
+		navTool = new NavigationToolbar(driver, this.plfVersion);
+		user = new UserGroupManagement(driver, this.plfVersion);
+		but = new Button(driver, this.plfVersion);
 		pageEditor = new PageEditor(driver);
-		pageMag = new PageManagement(driver);
-		magAc.signIn("fqa", "gtngtn"); 
+		pageMag = new PageManagement(driver, this.plfVersion);
 		button = new Button(driver);
-		magAc.signIn("fqa", DATA_PASS); 
+		magAc.signIn(DATA_USER1, DATA_PASS);		
 	}
 
 	@AfterMethod
@@ -171,7 +168,7 @@ public class Gatein_BasicPortlets_Organization_GroupManagement extends PlatformB
 		String username1 = USER_ROOT;
 		String username2 = "abc1234";
 		String username3 = "#$%^&";
-		
+
 		info("Select group");
 		navTool.goToUsersAndGroupsManagement();
 		user.chooseGroupTab();
@@ -179,10 +176,10 @@ public class Gatein_BasicPortlets_Organization_GroupManagement extends PlatformB
 
 		info("Search root user");
 		user.searchUserInGroupManagement(username1,"User Name", true);
-		
+
 		info("Search inexistent user");
 		user.searchUserInGroupManagement(username2,"User Name", false);
-		
+
 		info("Search with special chars");
 		user.searchUserInGroupManagement(username3,"User Name", false);	
 	}
@@ -201,7 +198,7 @@ public class Gatein_BasicPortlets_Organization_GroupManagement extends PlatformB
 		String membership = "member";
 		String email = newUser+"@gmail.com";
 		String password = newUser;
-		
+
 		info("Add new user");
 		navTool.goToNewStaff();
 		magAc.addNewUserAccount(newUser, password, password, newUser, newUser, newUser, email, null, null, true);
@@ -213,23 +210,25 @@ public class Gatein_BasicPortlets_Organization_GroupManagement extends PlatformB
 
 		info("Add new user to new group");
 		user.addUsersToGroup(newUser, membership, true, true);
-		
+
 		info("Delete user from group");
 		user.deleteUserInGroup(groupName, groupLabel, newUser);
-		
+
 		info("Check membership information of deleted user in group");
 		user.chooseUserTab();
 		user.goToEditUserInfo(newUser);
 		click(ELEMENT_USER_MANAGEMENT_MEMBERSHIP_TAB);
 		waitForElementNotPresent(ELEMENT_USER_MEMBERSHIP_TAB_GROUPID.replace("${groupName}", groupName));
-		
+
 		info("Restore data");
 		click(ELEMENT_USER_MEMBERSHIP_TAB_CLOSE_BUTTON);
 		user.deleteUser(newUser);
 		Utils.pause(3000);
+		info("Delete groups");
+		user.chooseGroupTab();
 		user.deleteGroup(groupName, true);
 	}
-	
+
 
 	/**
 	 * Check existing of user in deleted group
@@ -303,46 +302,45 @@ public class Gatein_BasicPortlets_Organization_GroupManagement extends PlatformB
 		String groupName = "Gateingroup09";
 		String groupLabel = "Group Label 09";
 		String groupDesc = "create new group";
-		
+
 		String pageName = "ManagePageName09";
 		String pageTitle = "ManagePageTitle09";
 		String membership = "*";
-		
+
 		String nodeName = "NodeName09";
 
 		info("Add new group");
 		navTool.goToUsersAndGroupsManagement();
 		user.chooseGroupTab();
 		user.addGroup(groupName, groupLabel, groupDesc, true);
-		
+
 		info("Add new page in Page Management");
 		navTool.goToManagePages();
 		pageMag.addNewPageAtManagePages(PageType.GROUP, pageName, pageTitle, true, null, groupLabel, membership, "Page Configs", ELEMENT_PAGE_LAYOUT_OPTION_EMPTY, true);
-		
+
 		info("Add new page by wizard");
 		navTool.goToPageCreationWizard();
 		Map<String, String> portletId = new HashMap<String, String>();
 		portletId.put("Content/ContentListViewerByQueryPortlet", "");
 		pageMag.addNewPageEditor(nodeName, nodeName, null, "Content", portletId, false, false);
 		//Add Group permission for page
-		
+
 		navTool.goToEditPageEditor();
 		pageEditor.addAccessPermissionforPortlet("//*[contains(@id,'UIPortlet')]", groupLabel, membership);
 		pageEditor.finishEditLayout();
-		
+
 		info("Delete group");
 		navTool.goToUsersAndGroupsManagement();
 		user.chooseGroupTab();
 		user.deleteGroup(groupName, true);
-		
+
 		info("Check the existence of pages after group is deleted");
 		navTool.goToManagePages();
 		pageMag.searchPageInManagementPage(PageType.GROUP, nodeName, true);
 		pageMag.searchPageInManagementPage(PageType.GROUP, pageTitle, true);
-		
+
 		info("Restore data");
 		pageMag.deletePage(PageType.GROUP, pageTitle);
-//		pageMag.searchPageInManagementPage(PageType.GROUP, nodeName, true);
 		pageMag.deletePage(PageType.GROUP, nodeName);
 	}
 
@@ -361,10 +359,11 @@ public class Gatein_BasicPortlets_Organization_GroupManagement extends PlatformB
 		navTool.goToUsersAndGroupsManagement();
 		user.chooseGroupTab();
 		user.addGroup(groupName, groupLabel, groupDesc, true);
-		
+
 		info("Delete group");
 		user.deleteGroup(groupName, true);
-		
+		Utils.pause(2000);
+
 		info("Check Group in Add Page Permission of Page Management");
 		info("--Click Admin menu--");
 		click(ELEMENT_LINK_SETUP);
@@ -372,17 +371,17 @@ public class Gatein_BasicPortlets_Organization_GroupManagement extends PlatformB
 		info("--Click Portal sub-menu & go to Page Management--");
 		click(ELEMENT_MENU_PORTAL);
 		Utils.pause(2000);
-		click(ELEMENT_MENU_PORTAL_PAGES_MANAGEMENT);
 		info("To be in Page Management");
 		pageMag.goToPagePermissionOfAddPageInPageManagement();
 		click(ELEMENT_ADD_PERMISSION_BUTTON);
 		waitForElementNotPresent(ELEMENT_SELECT_ACCESS_GROUP_ITEM.replace("${group}",groupName));
-		
+		but.cancel();
+
 		info("Check Group in Portlet Permission of Add new page by wizard");
 		navTool.goToPageCreationWizard();
 		Map<String, String> portletId = new HashMap<String, String>();
 		portletId.put("Content/ContentListViewerByQueryPortlet", "");
-		pageMag.addNewPageEditor(nodeName, nodeName, null, "Home", portletId, false, true);
+		pageMag.addNewPageEditor(nodeName, nodeName, null, "Content", portletId, false, true);
 		pageEditor.goToEditPortlet(ELEMENT_FRAME_CONTAIN_PORTLET);
 		click(ELEMENT_ACCESS_PERMISSION_TAB);
 		Utils.pause(3000);

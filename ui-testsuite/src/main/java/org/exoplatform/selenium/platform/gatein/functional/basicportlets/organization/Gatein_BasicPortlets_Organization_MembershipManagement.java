@@ -24,13 +24,12 @@ public class Gatein_BasicPortlets_Organization_MembershipManagement extends Plat
 	public void setUpBeforeTest(){
 		initSeleniumTest();
 		driver.get(baseUrl);
-		magAc = new ManageAccount(driver);
-		navTool = new NavigationToolbar(driver);
-		user = new UserGroupManagement(driver);
+		magAc = new ManageAccount(driver, this.plfVersion);
+		navTool = new NavigationToolbar(driver, this.plfVersion);
+		user = new UserGroupManagement(driver, this.plfVersion);
 		but = new Button(driver);
 		dialog = new Dialog(driver);
-
-		magAc.signIn("fqa", DATA_PASS); 
+		magAc.signIn(DATA_USER1, DATA_PASS); 
 	}
 
 	@AfterMethod
@@ -50,11 +49,11 @@ public class Gatein_BasicPortlets_Organization_MembershipManagement extends Plat
 		String groupLabel = "Group Label 01";
 		String groupDesc = "create new group";
 
-		String newUser = "testa";
+		String newUser = getRandomString();
 		String newMembership = "member";
 		String EditMembership = "manager";
-		String email = "helloworld@gmail.com";
-		String password = DATA_PASS;
+		String email = newUser+"@gmail.com";
+		String password = "gtn123";
 
 		navTool.goToNewStaff();
 		info("Create new user");
@@ -106,10 +105,10 @@ public class Gatein_BasicPortlets_Organization_MembershipManagement extends Plat
 		String groupLabel = "Group Label 03";
 		String groupDesc = "create new group";
 
-		String newUser = "testb";
+		String newUser = getRandomString();
 		String membership = "member";
-		String email = "helloworld@gmail.com";
-		String password = DATA_PASS;
+		String email = newUser+"@gmail.com";
+		String password = "gtn123";
 
 		navTool.goToNewStaff();
 		info("Create new user");
@@ -145,11 +144,11 @@ public class Gatein_BasicPortlets_Organization_MembershipManagement extends Plat
 		String groupLabel = "Group Label 73709";
 		String groupDesc = "create new group";
 
-		String newUser = "user73709";
+		String newUser = getRandomString();
 		String membership = "Membership73709";
 		String membershipDesc = "test";
-		String email = "helloworld@gmail.com";
-		String password = DATA_PASS;
+		String email = newUser+"@gmail.com";
+		String password = "gtn123";
 
 		navTool.goToNewStaff();
 		info("Create new user");

@@ -21,7 +21,7 @@ import org.testng.annotations.Test;
  * 
  * @author phuongdt
  * @date 12/11/2013
- *
+ * 
  */
 public class GateIn_BasicPortlets_Administration_ApplicationRegistry extends DashBoard {
 

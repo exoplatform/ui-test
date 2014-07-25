@@ -1,11 +1,13 @@
 package org.exoplatform.selenium.platform;
 
 import static org.exoplatform.selenium.TestLogger.info;
+
 import java.util.Map;
 
 import org.exoplatform.selenium.Button;
 import org.exoplatform.selenium.Dialog;
 import org.exoplatform.selenium.ManageAlert;
+import org.exoplatform.selenium.Utils;
 import org.exoplatform.selenium.platform.NavigationToolbar;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -60,9 +62,9 @@ public class PortalManagement extends PlatformBase {
 			click(ELEMENT_PORTAL_TEMPLATE_TAB);
 			WebElement temp = getElementFromTextByJquery(template[0]);
 			temp.click();
-//			click(By.linkText(template[0]));
 		}
 		button.save();
+		Utils.pause(2000);
 		if (waitForAndGetElement(ELEMENT_POPUP_ADD_PORTAL,10000,0) == null)
 			waitForElementNotPresent(ELEMENT_EDIT_PERMISSION_SETTING,120000);
 	}
