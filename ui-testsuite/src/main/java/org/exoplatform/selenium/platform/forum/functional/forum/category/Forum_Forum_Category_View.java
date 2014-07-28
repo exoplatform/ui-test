@@ -168,7 +168,7 @@ public class Forum_Forum_Category_View extends ForumBase {
 		String[] users = {DATA_USER3};
 		String[] membership = {"Platform/Content Management","*"};
 		String user = getRandomString();
-		String pass = DATA_PASS;
+		String pass = "123456";
 
 		info("View a category in case its is restricted for user, role and group at once");
 		navTool.goToNewStaff();
@@ -336,12 +336,12 @@ public class Forum_Forum_Category_View extends ForumBase {
 		String forumName = "Forum 109093";
 		String[] addForum = {forumName, "1",null,null,forumName};
 		String user = getRandomString();
-		String pass = DATA_PASS;
+		String pass = "123456";
 
 		info("View a forum in case it is assigned moderator for user, role and group at once");
 
 		navTool.goToNewStaff();
-		magAc.addNewUserAccount(user, pass, pass, "Test", "eXo", "Test", "exoservice@gmail.com", null, null, true);
+		magAc.addNewUserAccount(user, pass, pass, "Test", "eXo", "Test", user + "@gmail.com", null, null, true);
 
 		goToForums();
 

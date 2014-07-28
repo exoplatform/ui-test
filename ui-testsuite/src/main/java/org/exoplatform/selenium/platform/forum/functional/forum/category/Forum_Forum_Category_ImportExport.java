@@ -111,7 +111,6 @@ public class Forum_Forum_Category_ImportExport extends ForumBase {
 	deleteBanIp(ip);
 	goToBBCodeManagement();
 	deleteBBcode(tag);
-	click(ELEMENT_BBCODE_CLOSE_BUTTON);
 
     //Import category with mode export all
     magCat.importCategoryInForum("TestOutput/" + fileName + ".zip");

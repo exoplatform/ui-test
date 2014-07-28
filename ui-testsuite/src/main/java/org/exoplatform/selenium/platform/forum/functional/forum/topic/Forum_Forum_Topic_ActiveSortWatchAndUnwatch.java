@@ -133,10 +133,10 @@ public class Forum_Forum_Topic_ActiveSortWatchAndUnwatch extends ForumBase{
 		info("Test 2: Check send notify when add private post in topic or forum or category that is being watched");
 		String catName = "Category 72755";
 		String order = "1";
-		int chooseRestricted = 1;
+		int chooseRestricted = 0;
 		String []restricted = {""};
 		String description = "Description Category 72755";
-		int setPermission = 1;
+		int setPermission = 0;
 		String []userGroup = {""};
 		String []addForum = {"Forum 72755", "1", "Open", "Unlocked", "Description of forum 001"};
 		String title = "Topic 72755";
@@ -321,7 +321,7 @@ public class Forum_Forum_Topic_ActiveSortWatchAndUnwatch extends ForumBase{
 		 *Input Data: 
 		- Login by the Administrator/Moderator create new category, forum, thread
 		 *Expected Outcome: 
-		- Category, forum, thread are created		*/
+		- Category, forum, thread are created	*/	
 		info("Step 2: Create forum");
 		cat.goToAddCategory();
 		cat.addNewCategoryInForum(catName, order, chooseRestricted, restricted, description, setPermission, userGroup);
@@ -329,24 +329,23 @@ public class Forum_Forum_Topic_ActiveSortWatchAndUnwatch extends ForumBase{
 		forum.inputDataInAddForumTab_addForum(catName, addForum);
 		button.save();
 		topic.startTopic(title, message, "", 0, userGroup, false, false);
-
-		/*Step 3: Add watching
+/*
+		Step 3: Add watching
 		 *Input Data: 
 		- Right click on created category/forum/topic and select [Watch]
 		 *Expected Outcome: 
 		- Alert message is shown to inform watching successfully.
-		- Category/forum/topic is being watched		*/
+		- Category/forum/topic is being watched	*/	
 		info("Step 3: Watch topic/forum/category");
 		topic.watchItem(true);
 		alert.acceptAlert();
-		acc.signOut();
 
-		/*Step 4: Add new post on category/ forum/topic that is being watched
+	/*	Step 4: Add new post on category/ forum/topic that is being watched
 		 *Input Data: 
 		- Use normal user to add new post contains defined censored keyword above in watched category/forum/topic 
 		 *Expected Outcome: 
 		- Post is added with 'Pending for censor' status, no one else can see this post before it's censored except administrator/moderator
-		- Notify mail is only sent to registered email at step 2 when the pending topic is censored.		*/ 
+		- Notify mail is only sent to registered email at step 2 when the pending topic is censored.*/		 
 		info("Step 4: Add new post on category/ forum/topic that is being watched");
 		acc.userSignIn(userType.DEVELOPER);
 		goToForums();
@@ -354,7 +353,7 @@ public class Forum_Forum_Topic_ActiveSortWatchAndUnwatch extends ForumBase{
 		click(By.linkText(addForum[0]));
 		click(By.linkText(title));
 		info("Add post into topic");
-		post.postReply(key, key, "", "", "");
+		post.postReply(key, key, "", "", "",false,false);
 		alert.acceptAlert();
 		acc.signOut();
 
@@ -368,7 +367,7 @@ public class Forum_Forum_Topic_ActiveSortWatchAndUnwatch extends ForumBase{
 
 		//Check email
 		goToMail(EMAIL_ADDRESS1, EMAIL_PASS);
-		checkAndDeleteMail(By.xpath(ELEMENT_GMAIL_EMAIL.replace("${category}",catName).replace("${forum}", addForum[0]).replace("${topic}", title)), title);
+		checkAndDeleteMail(By.xpath(ELEMENT_GMAIL_EMAIL2.replace("${category}",catName).replace("${forum}", addForum[0]).replace("${topic}", title)), key);
 
 		// Clean data test
 		switchToParentWindow();
@@ -442,7 +441,7 @@ public class Forum_Forum_Topic_ActiveSortWatchAndUnwatch extends ForumBase{
 		 *Input Data: 
 		- Add post in to the category/forum/topic which is being watched
 		 *Expected Outcome: 
-		- Notify mail is sent to registered email of the user who added watch		*/
+		- Notify mail is sent to registered email of the user who added watch	*/	
 		info("User Admin add post");
 		acc.userSignIn(userType.ADMIN);
 		goToForums();
@@ -450,56 +449,44 @@ public class Forum_Forum_Topic_ActiveSortWatchAndUnwatch extends ForumBase{
 		click(By.linkText(addForum[0]));
 		click(By.linkText(title));
 		post.postReply(title, message, "", "", "");
-		acc.signOut();
 
 		//User 2 check email 
 		info("User 2 check email.");
-		acc.userSignIn(userType.DEVELOPER);
-		Utils.pause(500);
-		info("Check email");
 		goToMail(EMAIL_ADDRESS1, EMAIL_PASS);
+		String hadleMail = driver.getWindowHandle();
 		checkAndDeleteMail(By.xpath(ELEMENT_GMAIL_EMAIL.replace("${category}",catName).replace("${forum}", addForum[0]).replace("${topic}", title)), message);
-
-		Utils.pause(500);
-		switchToParentWindow();
-		acc.signOut();
 
 		/*Step 4: Do set view permission for the user on the category/forum/topic he added watch
 		 *Input Data: 
 		- Login as root to restrict view permission on the category which the being watched forum/topic belong to
 		- Or Login as root/ moderator or the creator to limit view permission on the being watched topic
 		 *Expected Outcome: 
-		- The user at step 2 no longer have view permission on the forum/topic he added watch		*/
-		acc.userSignIn(userType.ADMIN);
-		goToForums();
-		click(By.linkText(catName));
+		- The user at step 2 no longer have view permission on the forum/topic he added watch		
+*/
+		Utils.pause(500);
+		switchToParentWindow();
+		click(cat.ELEMENT_CATEGORY_LINK.replace("${category}", catName));
 		cat.editCategoryInForum(catNameEdit, order, chooseRestricted, restricted, description, setPermissionEdit, userGroupEdit, false, false, false, true);
-
+		
 		/*Step 5: Check send mail in case the user no longer have view permission on the forum/topic he added watch
 		 *Input Data: 
 		- Add post in to the category/forum/topic which is being watched but the user no longer have view permission
 		 *Expected Outcome: 
-		- Notify mail is not sent to the user who added watch on the forum/topic but do not have view permission any more.		*/ 
+		- Notify mail is not sent to the user who added watch on the forum/topic but do not have view permission any more.	*/	 
 		click(By.linkText(addForum[0]));
 		click(By.linkText(title));
 		info("Add post2 into topic");
 		post.postReply(titleEdit, messageEdit, "", "", "");
-		acc.signOut();
 
 		//check email	
 		info("User2 check notify email again");
-		acc.userSignIn(userType.DEVELOPER);
-		Utils.pause(500);
-		//		goToMail(EMAIL_ADDRESS1, EMAIL_PASS);
-		info("Go to gmail");
-		driver.navigate().to(GMAIL_URL);
+		driver.switchTo().window(hadleMail);
+		Utils.pause(30000);
 		waitForElementNotPresent(By.xpath(ELEMENT_GMAIL_EMAIL.replace("${category}",catNameEdit).replace("${forum}", addForum[0]).replace("${topic}", title)));
 
 		// Clean data test
 		switchToParentWindow();
-		acc.signOut();
-		acc.userSignIn(userType.ADMIN);
-		click(By.linkText(catName));
+		click(cat.ELEMENT_CATEGORY_LINK.replace("${category}", catNameEdit));
 		cat.deleteCategoryInForum(catNameEdit, true);	
 	}
 
@@ -562,11 +549,11 @@ public class Forum_Forum_Topic_ActiveSortWatchAndUnwatch extends ForumBase{
 		 *Expected Outcome: Post is moved successful
 		- Move notify is sent to post's author that is moved and watcher		*/ 
 		info("Move post");
-		post.movePost(titlePost, title2);
+		post.movePost(titlePost, catName +"/Forum 73014/"+title2);
 
 		//Check email
 		goToMail(EMAIL_ADDRESS1, EMAIL_PASS);
-		checkAndDeleteMail(By.xpath(ELEMENT_GMAIL_EMAIL.replace("${category}",catName).replace("${forum}", addForum[0]).replace("${topic}", title1)), title2);
+		checkAndDeleteMail(By.xpath(ELEMENT_GMAIL_EMAIL.replace("${category}",catName).replace("${forum}", addForum[0]).replace("${topic}", title2)), titlePost);
 
 		// Clean data test
 		switchToParentWindow();

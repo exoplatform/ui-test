@@ -414,12 +414,12 @@ public class Forum_Forum_Poll_Activities extends ForumBase{
 	@Test
 	public  void test05_AddUpdateRemovePollsActivityAfterAddANewPollFromPollPortlet() {
 		info("Test 7: Add Poll's activity after add a new poll from Poll portlet");
-		String nodeName = "Node77603_test8";
-		String displayName = "Node77603test8";
+		String nodeName = getRandomString();
+		String displayName = "Node77603test5";
 		String title = "Collaboration";
 		Map<String, String> portletIds= new HashMap<String, String>();
 		portletIds.put("Collaboration/PollPortlet", "");
-		String pollQuestion = "Poll 77603";
+		String pollQuestion = "Poll_77603";
 		String[] options = {"option1", "option2"};
 		String pollQuestionUpdate = "Case 77607";
 
@@ -456,7 +456,7 @@ public class Forum_Forum_Poll_Activities extends ForumBase{
 		click(ELEMENT_PAGE_FINISH_BUTTON);
 		waitForTextNotPresent("Page Editor");
 		Utils.pause(1000);
-		waitForAndGetElement(poll.ELEMENT_POLL_TITLE);
+		waitForAndGetElement(poll.ELEMENT_POLL_TITLE.replace("${poll}", pollQuestion));
 
 		/*
 		- Back to the Homepage
@@ -472,8 +472,9 @@ public class Forum_Forum_Poll_Activities extends ForumBase{
 		- Edit poll1 and Save
 		 *Input Data: 
 		 *Expected Outcome: poll1 is saved with new value		*/
+		click(home.ELEMENT_POLL_ACTIVITY.replace("${poll}", pollQuestion));
+		Utils.pause(1000);
 		info("Edit Poll in Portlet");
-		click(ELEMENT_LEFT_NAVIGATION_ITEM_INDEX.replace("${index}","7").replace("${menuItem}", displayName));
 		poll.editPoll(pollQuestionUpdate, options, "", false);
 
 		/*
@@ -505,7 +506,7 @@ public class Forum_Forum_Poll_Activities extends ForumBase{
 		 *Expected Outcome: 
 		- The Poll's activity is removed from the activity stream		*/ 	
 		nav.goToHomePage();
-		waitForElementNotPresent(home.ELEMENT_POLL_ACTIVITY.replace("${poll}", pollQuestion));
+		waitForElementNotPresent(home.ELEMENT_POLL_ACTIVITY.replace("${poll}", pollQuestionUpdate));
 
 		//delete data
 		info("Delete page");

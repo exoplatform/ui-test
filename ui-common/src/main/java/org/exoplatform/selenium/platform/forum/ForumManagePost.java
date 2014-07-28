@@ -86,6 +86,7 @@ public class ForumManagePost extends ForumBase {
 	//--------------move post screen-----------------------------------------------------------
 	//public By ELEMENT_POPUP_MOVE_POST = By.id("UIForumPopupWindow");
 	public By ELEMENT_POPUP_MOVE_POST = By.xpath("//span[@class='PopupTitle popupTitle' and text()='Move Posts']");
+	public String ELEMENT_MOVE_POST_NODE = "//form[@id='UIMovePostForm']//a[contains(.,'${node}')]";
 
 	//Delete post
 	public String MSG_DELETE_POST = "Are you sure you want to delete this post ?";
@@ -140,9 +141,9 @@ public class ForumManagePost extends ForumBase {
 	 */
 	public void putDataPost(String title, String message, String groupName, String iconClass, Object... opParams){
 		//magTopic = new ForumManageTopic(driver);
-
+		String file = (String) (opParams.length > 0 ? opParams[0]: "");	
 		Boolean check = (Boolean)(opParams.length > 1 ? opParams[1] : false);
-		String file = (String) (opParams.length > 0 ? opParams[0]: "");		
+		boolean verify = (Boolean)(opParams.length > 2 ? opParams[2] : true);
 		if (title != null) {
 			type(ELEMENT_POST_TITLE, title, true);
 		}
@@ -177,8 +178,8 @@ public class ForumManagePost extends ForumBase {
 		else{
 			click(magTopic.ELEMENT_SUBMIT_BUTTON);
 			waitForElementNotPresent(ELEMENT_POST_POPUP_NEW);
-
-			waitForAndGetElement(ELEMENT_POST_CONTENT_TEXT.replace("${post}", message));
+			if(verify)
+				waitForAndGetElement(ELEMENT_POST_CONTENT_TEXT.replace("${post}", message));
 			info("Post reply successfully");
 		}
 	}
@@ -311,11 +312,13 @@ public class ForumManagePost extends ForumBase {
 
 		temp = destination.split(delimiter);
 		/* Go to group */
-		for(int i =0; i < temp.length ; i++){
+		for(int i =0; i < temp.length-1 ; i++){
 			info("Go to " + temp[i]);
-			click(By.xpath("//div[@class='lastNode']//a[contains(text(),'"+temp[i]+"')]"));
+			if(waitForAndGetElement(ELEMENT_MOVE_POST_NODE.replace("${node}", temp[i+1]),3000,0) == null)
+				click(By.xpath(ELEMENT_MOVE_POST_NODE.replace("${node}", temp[i])));
 			Utils.pause(500);
 		}
+		click(By.xpath(ELEMENT_MOVE_POST_NODE.replace("${node}", temp[temp.length-1])));
 
 		waitForElementNotPresent(ELEMENT_POPUP_MOVE_POST);
 		//		String links[] = destination.split("/");
@@ -379,5 +382,26 @@ public class ForumManagePost extends ForumBase {
 		waitForElementNotPresent(magTopic.ELEMENT_SUBMIT_BUTTON);
 		waitForAndGetElement(ELEMENT_POST_CONTENT_TEXT.replace("${post}", content));
 		waitForAndGetElement(ELEMENT_POST_QUOTE_TEXT.replace("${post}", post));
+	}
+	
+	/**
+	 * Get post counter of user
+	 * @param user: username
+	 * @return
+	 */
+	public Integer getPostCounter(String user){
+		String postProfile;
+		Integer oldPostNum;
+		goToUserManagement(user);
+		click(ELEMENT_VIEW_USER_PROFILE_ICON.replace("${user}", user));
+		postProfile = waitForAndGetElement(ELEMENT_USER_NUMBER_POST).getText();
+		if(postProfile.contains(":"))
+			oldPostNum = Integer.valueOf(postProfile.substring(postProfile.indexOf(":")+1).trim());
+		else
+			oldPostNum = 0;
+		click(ELEMENT_CLOSE_USER_PROFILE_BUTTON);
+		waitForElementNotPresent(ELEMENT_CLOSE_USER_PROFILE_BUTTON);
+		button.close();
+		return oldPostNum;
 	}
 }

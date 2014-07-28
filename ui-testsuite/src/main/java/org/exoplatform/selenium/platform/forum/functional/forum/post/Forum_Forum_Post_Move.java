@@ -101,7 +101,7 @@ public class Forum_Forum_Post_Move extends ForumBase{
 		goToForums();
 		click(By.linkText(titleForum));
 		click(By.linkText(titleTop1));
-		mngPost.movePost(post1, titleTop2);
+		mngPost.movePost(post1, titleCat + "/" + titleForum + "/" + titleTop2);
 		
 		/*Step number: 4
 		*Step Name: Step 4: Move to Other topic
@@ -114,7 +114,7 @@ public class Forum_Forum_Post_Move extends ForumBase{
 		click(By.linkText(titleCat));
 		click(By.linkText(titleForum));
 		click(By.linkText(titleTop2));
-		mngPost.movePost(post1, titleTop1);
+		mngPost.movePost(post1, titleCat + "/" + titleForum + "/" + titleTop1);
 		
 		//Clear data
 		info("Clear data");

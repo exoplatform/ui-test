@@ -315,8 +315,8 @@ public class Forum_Forum_Category_Add extends ForumBase {
 		info("Test 5: Add a new category in case valid role entry for the Restricted audience field");
 		String catName = "Category 109089";
 		String order = "0";
-		int chooseRestricted = 1;
-		String[] restricted = { DATA_USER1 };
+		int chooseRestricted = 4;
+		String[] restricted = {"Development","*"};
 		String description = "Description";
 		int setPermission = 0;
 		String[] userGroup = null;
@@ -987,7 +987,7 @@ public class Forum_Forum_Category_Add extends ForumBase {
 		nav.goToNewStaff();
 		acc.addNewUserAccount(username, password, password, firstName, lastName, "", email1, null, null, true);
 		acc.signOut();
-		acc.signIn(DATA_USER3, DATA_PASS);
+		acc.signIn(username, password);
 		goToForums();
 		click(By.linkText(catName));
 		click(By.linkText(addForum[0]));

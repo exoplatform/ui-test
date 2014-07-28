@@ -85,11 +85,11 @@ public class Forum_Forum_Category_WatchAndUnwatch extends ForumBase{
 		// - Add new topic into above forum
 		info("Create New Topic");
 		topic.quickStartTopic(title, message); 
-		
+
 		//Check email
 		goToMail(EMAIL_ADDRESS1, EMAIL_PASS);
 		checkAndDeleteMail(By.xpath(ELEMENT_GMAIL_EMAIL.replace("${category}",catName).replace("${forum}", forumName).replace("${topic}", title)), REGISTER_MAIL_CONTENT);
-		
+
 		// Clean data test
 		switchToParentWindow();
 		click(By.linkText(catName));
@@ -143,7 +143,7 @@ public class Forum_Forum_Category_WatchAndUnwatch extends ForumBase{
 		goToMail(EMAIL_ADDRESS1, EMAIL_PASS);
 		Utils.pause(120000);
 		waitForElementNotPresent(mail);
-		
+
 		//admin approve topic
 		switchToParentWindow();
 		magAc.signOut();
@@ -152,11 +152,11 @@ public class Forum_Forum_Category_WatchAndUnwatch extends ForumBase{
 		click(By.linkText(addForum[0]));
 		click(By.linkText(title)); 
 		topic.approveTopic();
-		
+
 		//Check email
 		switchToNewWindow();
 		checkAndDeleteMail(mail, message);
-		
+
 		//Clean data test
 		switchToParentWindow();
 		click(By.linkText(catName));
@@ -191,7 +191,7 @@ public class Forum_Forum_Category_WatchAndUnwatch extends ForumBase{
 		setCensorKeywords(key);
 		magAc.signOut();
 
-		/* Step 2: Watch forum/category */
+		//		 Step 2: Watch forum/category 
 		//- Login by the normal user
 		//- On created category select [Watch]
 		info("Login by the normal user");
@@ -201,7 +201,7 @@ public class Forum_Forum_Category_WatchAndUnwatch extends ForumBase{
 		click(By.linkText(catName));
 		watchItem(true);
 
-		/* Step 3: Add topic into forum/category that is being watched*/
+		//		 Step 3: Add topic into forum/category that is being watched
 		// - Add new topic with censor content into above forum -> not having mail
 		click(By.linkText(forumName));
 		topic.startTopic(key, message, null, 0, null, true, true);
@@ -211,7 +211,7 @@ public class Forum_Forum_Category_WatchAndUnwatch extends ForumBase{
 		goToMail(EMAIL_ADDRESS1, EMAIL_PASS);
 		Utils.pause(120000);
 		waitForElementNotPresent(mail);
-		
+
 		//admin censor topic
 		switchToParentWindow();
 		magAc.signOut();
@@ -219,11 +219,11 @@ public class Forum_Forum_Category_WatchAndUnwatch extends ForumBase{
 		goToForums();
 		click(By.linkText(forumName));
 		topic.censorTopic(key);
-		
+
 		//Check email
 		switchToNewWindow();
 		checkAndDeleteMail(mail, message);
-		
+
 		//Clean data test
 		switchToParentWindow();
 		click(By.linkText(catName));
@@ -257,7 +257,7 @@ public class Forum_Forum_Category_WatchAndUnwatch extends ForumBase{
 		cat.addNewCategoryInForum(catName1, order, 0, null, description, 0, null, true);		
 		forum.quickAddForum(forum1);	
 		topic.quickStartTopic(title, message);
-		
+
 		goToForumHome();
 		cat.addNewCategoryInForum(catName2, "2", 0, null, description, 0, null, true);
 		forum.quickAddForum(forum2);
@@ -274,7 +274,7 @@ public class Forum_Forum_Category_WatchAndUnwatch extends ForumBase{
 		topic.moveTopic(title, forum2); 
 		goToMail(EMAIL_ADDRESS1, EMAIL_PASS);
 		checkAndDeleteMail(By.xpath(ELEMENT_GMAIL_EMAIL.replace("${category}",catName2).replace("${forum}", forum2).replace("${topic}", title)), title);
-		
+
 		//Clean data test
 		switchToParentWindow();
 		click(By.linkText(catName2));

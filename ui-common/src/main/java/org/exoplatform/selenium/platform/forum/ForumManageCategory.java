@@ -38,6 +38,7 @@ public class ForumManageCategory extends ForumBase {
 
 	//------------category home screen----------------------------------------------------------------------
 	public final String ELEMENT_CATEGORY = "//*[@class='nameForum']//strong[text()='${categoryName}']";	
+	public final String ELEMENT_CATEGORY_LINK = "//a[@data-original-title='${category}']";	
 	public final By ELEMENT_HOME_CATEGORY = By.xpath("//div[@class='Selected' and text()='Home']");
 	public final String ELEMENT_CATEGORY_DESCRIPTION_TEXT = ".//*[@id='UICategoryDescription']//span[@class='description' and contains(text(),'${desc}')]";
 

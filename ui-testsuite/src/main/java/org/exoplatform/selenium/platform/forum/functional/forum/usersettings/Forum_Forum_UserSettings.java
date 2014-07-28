@@ -72,7 +72,7 @@ public class Forum_Forum_UserSettings extends ForumBase {
 		info("Step 2: Watch some objects");
 		fmTopic.watchItem(true);
 
-		click(fmForum.ELEMENT_TOPIC_LINK.replace("${topic}", descTopic));
+		click(By.linkText(topic));
 		waitForAndGetElement(fmPost.ELEMENT_POST_REPLY_BUTTON);
 		watchItem(true);
 		goToForumHome();
@@ -87,7 +87,7 @@ public class Forum_Forum_UserSettings extends ForumBase {
 		openWatchedObject(forum);
 		waitForAndGetElement(fmForum.ELEMENT_FORUM_DESCRIPTION_TEXT.replace("${forum}", forum));
 		waitForAndGetElement(fmForum.ELEMENT_START_TOPIC);
-		waitForAndGetElement(fmForum.ELEMENT_TOPIC_LINK.replace("${topic}", descTopic));
+		waitForAndGetElement(By.linkText(topic));
 
 		openWatchedObject(topic);
 		waitForAndGetElement(fmPost.ELEMENT_POST_CONTENT_TEXT.replace("${post}", descTopic));
@@ -148,7 +148,7 @@ public class Forum_Forum_UserSettings extends ForumBase {
 		openWatchedObject(forum);
 		waitForAndGetElement(fmForum.ELEMENT_FORUM_DESCRIPTION_TEXT.replace("${forum}", forum));
 		waitForAndGetElement(fmForum.ELEMENT_START_TOPIC);
-		waitForAndGetElement(fmForum.ELEMENT_TOPIC_LINK.replace("${topic}", descTopic));
+		waitForAndGetElement(fmForum.ELEMENT_TOPIC_LINK.replace("${topic}", topic));
 
 		openWatchedObject(topic);
 		waitForAndGetElement(fmPost.ELEMENT_POST_CONTENT_TEXT.replace("${post}", descTopic));

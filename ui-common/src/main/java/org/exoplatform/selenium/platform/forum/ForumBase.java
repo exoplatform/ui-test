@@ -303,7 +303,7 @@ public class ForumBase extends PlatformBase {
 	public final By ELEMENT_BAN_USER_REASON = By.id("BanReason");
 	public final By ELEMENT_USER_MANAGEMENT_TOPIC_TAB = By.linkText("Topics");
 	public final By ELEMENT_USER_MANAGEMENT_POST_TAB = By.linkText("Posts");
-	public final String ELEMENT_USER_NUMBER_POST = "//*[@class='infoMember']/div[contains(text(),'Posts')]";
+	public final String ELEMENT_USER_NUMBER_POST = "//*[@class='infoMember']/div[contains(text(),'Post')]";
 	public final By ELEMENT_CLOSE_USER_PROFILE_BUTTON = By.xpath("//*[@id='ViewUserProfile']//*[text()='Close']");
 	public final String ELEMENT_USER_MANAGEMENT_CATEGORY_LINK = "//form[@id='UISelectItemForum']//a[contains(.,'${category}')]";
 

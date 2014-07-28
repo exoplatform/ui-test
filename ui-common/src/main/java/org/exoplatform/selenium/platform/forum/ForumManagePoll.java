@@ -75,7 +75,7 @@ public class ForumManagePoll extends ForumBase {
 	public String ELEMENT_POLL_DELETE_OK = "//span[contains(text(),'Are you sure you want to delete this poll ?')]/../../..//button[text()='OK']";
 
 	public final String ELEMENT_POLL_QUESTION_LINK = "//div[text()='${pollQuestion} ?']";
-	public final String ELEMENT_POLL_TITLE = "//div[@class='textTitlePoll pull-left' and contains(text(),'${poll}')]";
+	public final String ELEMENT_POLL_TITLE = "//div[@class='textTitlePoll pull-left' and contains(.,'${poll}')]";
 	public final String ELEMENT_OPTION = "//tbody[@class='contentVoting']//span[contains(text(),'${option}')]";	
 	public String ELEMENT_OPTION_RADIO = "//tbody[@class='contentVoting']//span[contains(text(),'${option}')]/parent::label[@class='uiRadio']/input[@class='radio']";
 	public String ELEMENT_OPTION_CHECKBOX = "//tbody[@class='contentVoting']//span[contains(text(),'${option}')]/parent::span[@class='uiCheckbox']/input[@class='checkbox']";

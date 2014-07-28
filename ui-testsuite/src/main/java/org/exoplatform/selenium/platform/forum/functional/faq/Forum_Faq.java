@@ -30,10 +30,10 @@ public class Forum_Faq extends FAQ {
 	@BeforeMethod
 	public void setUpBeforeTest(){
 		initSeleniumTest();
-		magAc = new ManageAccount(driver);
-		magCat = new AnswerManageCategory(driver);
-		magQuest = new AnswerManageQuestion(driver);
-		magAns = new AnswerManageAnwser(driver);
+		magAc = new ManageAccount(driver, this.plfVersion);
+		magCat = new AnswerManageCategory(driver, this.plfVersion);
+		magQuest = new AnswerManageQuestion(driver, this.plfVersion);
+		magAns = new AnswerManageAnwser(driver, this.plfVersion);
 		button = new Button(driver);
 		pageE = new PageEditor(driver);
 		magAc.signIn(DATA_USER1, DATA_PASS);
@@ -77,15 +77,15 @@ public class Forum_Faq extends FAQ {
 
 		//- Added Categories in Answer porlet are displayed in bold text
 		waitForAndGetElement(ELEMENT_FAQ_CATEGORY.replace("${cat}", categoryName));
-		
+
 		//- Browse category by click on Category's name
 		info("Click category to view question");
 		click(ELEMENT_FAQ_CATEGORY.replace("${cat}", categoryName));
-		
+
 		//- Questions in category is  displayed in link below that category
 		waitForAndGetElement(ELEMENT_FAQ_QUESTION.replace("${quest}", questionName));
 		waitForAndGetElement(ELEMENT_FAQ_ANSWER.replace("${ans}", answerContent));
-		
+
 		/*Clear data*/
 		info("-- Clear data --");
 		deleteFaqPortlet();
@@ -128,18 +128,18 @@ public class Forum_Faq extends FAQ {
 		info("Click category to view question");
 		click(ELEMENT_FAQ_CATEGORY.replace("${cat}", categoryName));
 		waitForAndGetElement(elementQuest);
-		
+
 		info("Click question to view answer");
-		goToFQAHome();
+//		goToFQAHome();
 		click(elementQuest);
 		waitForAndGetElement(ELEMENT_FAQ_ANSWER.replace("${ans}", answerContent));
-		
+
 		/*Clear data*/
 		info("-- Clear data --");
 		deleteFaqPortlet();
 		magCat.deleteCategoryInAnswer(categoryName);
 	}
-	
+
 	/** Check Edit template of FAQ porlet
 	 * CaseID 72797
 	 * Step 1: Open Edit template form
@@ -153,7 +153,7 @@ public class Forum_Faq extends FAQ {
 		/*Create data*/
 		//- Goto FAQ porlet
 		goToFaq();
-		
+
 		/* Step 1: Open Edit template form */
 		//- Goto Group at Administration at Page Manager â†’ Edit FAQ
 		//- Click on Edit template tab
@@ -170,7 +170,7 @@ public class Forum_Faq extends FAQ {
 		button.close();
 		pageE.finishEditLayout();
 		waitForAndGetElement(By.xpath("//h2[text()='Edit Template 1']"));
-		
+
 		/*Clear data*/
 		info("-- Clear data --");
 		deleteFaqPortlet();

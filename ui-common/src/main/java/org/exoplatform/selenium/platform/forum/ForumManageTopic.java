@@ -121,7 +121,7 @@ public class ForumManageTopic extends ForumBase {
 	public String ELEMENT_UNTAG_CONFIRMATION_BUTTON_OK = "//*[@id='UIForumPopupConfirmation']//button[@class='btn actionOK']";
 	public String MESSAGE_ADD_TAG_BLANK_NAME = "The field must not be blank.";
 	public String ELEMENT_UNTAG_ICON = "//a[text()='${tag}']/parent::span/i[@class='uiIconClose uiIconLightGray']";
-	public String ELEMENT_suggestion = "#searchTagName div:contains('${tag}') font:contains('(${No})')";
+	public String ELEMENT_SUGGESTION = "#searchTagName div:contains('${tag}') font:contains('(${No})')";
 	
 	public String ELEMENT_WARNING_MSG = "//span[@class='warningIcon' and contains(text(),'The field must not be blank.')]";
 //	public String ELEMENT_TOPIC_CHECKBOX = "//a[contains(text(),'${topic}')]/ancestor::table[@class='uiGrid table no-border-cell rounded-corners-bottom table-hover table-striped']//span[@class='uiCheckbox']/input[@class='checkbox' and starts-with(@name,'topic')]";
@@ -130,7 +130,7 @@ public class ForumManageTopic extends ForumBase {
 
 	//-------------------censor topic list form-----------------------------------------------
 	public By ELEMENT_POPUP_CENSOR_TOPIC = By.xpath("//span[@class='PopupTitle popupTitle' and text()='Censor Topics List']");
-	public String ELEMENT_CENSOR_TOPIC_CHECKBOX ="//*[@id='UIPageListTopicWaiting']//*[text()='${topic}']/../../../../*//input[@type='checkbox']";
+	public String ELEMENT_CENSOR_TOPIC_CHECKBOX ="//*[text()='${topic}']/../../../*//input[@type='checkbox']";
 	public By ELEMENT_CENSOR_APPROVE_BUTTON = By.xpath("//*[text()='Approve']");
 
 	//-------------------Go to topic types management screen----------------------------------------------------
@@ -488,7 +488,7 @@ public class ForumManageTopic extends ForumBase {
 	 * @return WebElement
 	 */
 	public WebElement getSuggestionElement(String tag, String number){	
-		String jQuerySelector = ELEMENT_suggestion.replace("${tag}", tag).replace("${No}", number);
+		String jQuerySelector = ELEMENT_SUGGESTION.replace("${tag}", tag).replace("${No}", number);
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		String script = "return $(\"" + jQuerySelector + "\").get(0);";
 		WebElement exampleDiv = (WebElement) js.executeScript(script);
