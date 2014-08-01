@@ -35,7 +35,7 @@ public class WikiBase extends PlatformBase{
 
 	//Company/Left panel > Wiki Link
 	public final By ELEMENT_WIKI_LINK=By.xpath("//ul[@class='uiCompanyNavigations']//li/a[text()='Wiki']");
-//	public final By ELEMENT_WIKI_LINK_PLF41=By.xpath("//*[@data-original-title='Wiki']");
+	//	public final By ELEMENT_WIKI_LINK_PLF41=By.xpath("//*[@data-original-title='Wiki']");
 
 	public final By ELEMENT_BLANK_PAGE_LINK_41 = By.xpath ("//i[@class='uiIconAddPage']");
 
@@ -81,7 +81,7 @@ public class WikiBase extends PlatformBase{
 	public final String ELEMENT_PAGE_RESULT = "//*[@href='/portal/intranet/wiki/${title}']";
 	public final String ELEMENT_PAGE_RESULT_AUX = "//*[contains(@href, '${title}')]";
 	//public final String ELEMENT_PAGE_SPACE_RESULT="";
-	
+
 	//Wiki Home
 	public final By ELEMENT_WIKI_HOME_LINK=By.xpath("//a[text()='Wiki Home']");
 	public final By ELEMENT_WIKI_HOME_PAGE=By.xpath("//*[@id='titleInfo' and text()='Wiki Home']");
@@ -97,15 +97,15 @@ public class WikiBase extends PlatformBase{
 	public final String ELEMENT_CURRENT_SPACE_SWITCHER_SELECT= "//*[@id='uiSpaceSwitcher_BreadCrumb']//span[text()='${name}']";
 	public final String ELEMENT_SPACE_SWITCHER_AVATAR_SPACE = "//li[@class='spaceOption hover']/..//img[@alt='${spaceName}']";
 	public final String ELEMENT_SPACE_SWITCHER_INTRANET = "//li['${index}'][@class='portalSpace']//a[text() = '${spaceName}']";
-	public final By ELEMENT_SPACE_SWITCHER_AVATAR_INTRANET = By.xpath("//a[@class='spaceOption hover']/i[@class='uiIconWikiWiki']");
-	public final By ELEMENT_SPACE_SWITCHER_AVATAR_MYWIKI = By.xpath("//a[@class='spaceOption hover']/i[@class='uiIconWikiMyWiki']");
+	public final By ELEMENT_SPACE_SWITCHER_AVATAR_INTRANET = By.xpath("//a[@class='spaceOption hover']/i[@class='uiIconWikiWiki uiIconWikiLightGray']");
+	public final By ELEMENT_SPACE_SWITCHER_AVATAR_MYWIKI = By.xpath("//a[@class='spaceOption hover']/i[@class='uiIconWikiMyWiki uiIconWikiLightGray']");
 	public final String ELEMENT_SPACE_SWITCHER_MYWIKI = "//li['${index}'][@class='userSpace']//a[@class='spaceOption hover' and @title ='My Wiki']";
 	public final By ELEMENT_SPACE_SWITCHER_CLOSE = By.xpath("//i[@title='Close']");
 	public final By ELEMENT_SPACE_SWITCHER_OUTSIDE = By.xpath("//div[@id='UIWikiPageControlArea']");
 	public final String ELEMENT_SPACE_SWITCHER_INDEX = "//li[@class='spaceOption hover']['${index}']//a[text()='${spaceName}']";
 	public final By ELEMENT_SPACE_SWITCHER_LOCATION = By.xpath("//li[contains(.,'Select location')]");
-	
-	
+
+
 	/*------------------add/edit wiki page---------------------*/
 	//Source Editor mode
 	public final By ELEMENT_TITLE_WIKI_INPUT = By.id("titleInput");
@@ -129,7 +129,7 @@ public class WikiBase extends PlatformBase{
 	//"Are you sure to leave this page?";
 	public final By ELEMENT_OK_BUTTON_WIKI_PAGE = By.xpath("//div[contains(@class, 'uiAction')]/a[text()='OK']");
 	public final String ELEMENT_SPACE_NAVIGATION_NAME = ("//div[@class='name' and contains(text(),'${spaceName}')]");
-	
+
 	//Richtext mode
 	public final By ELEMENT_SOURCE_EDITOR_BUTTON= By.xpath("//*[contains(text(),'Source Editor')]");
 	public final By ELEMENT_SOURCE_EDITOR_BUTTON_PLF4_1 = By.xpath("//button[contains(text(),'Source Editor')]");
@@ -147,7 +147,7 @@ public class WikiBase extends PlatformBase{
 	//Upload file area
 	public By ELEMENT_UPLOAD_FILE = By.xpath("//div[@class='uiUploadInput']//*[@type='file']"); 
 	public final By ELEMENT_FRAME_UPLOAD=By.xpath("//div[@class='uiUploadInput']/iframe");
-	public final String ELEMENT_REMOVE_ATTACHMENT = "//a[text()='{$file}']/../../td/a/i[@class='uiIconDelete']";
+	public final String ELEMENT_REMOVE_ATTACHMENT = "//a[text()='{$file}']/../../td/a/i[@class='uiIconDelete uiIconLightGray']";
 	public final String ELEMENT_ATTACHMENT_TITLE = "//*[@class='uiAttachmentUploadListForm clearfix']//*[text()='${fileName}']";
 
 	//Add page from template
@@ -185,7 +185,7 @@ public class WikiBase extends PlatformBase{
 	public final String ELEMENT_MOVE_PAGE_CURRENT_DESTINATION = "//*[@id='DisplayModesDropDown']//span[1][text()='{$item}']";
 	public final By ELEMENT_DESTINATION_LIST_SCROLLBAR = By.xpath("//*[@id='UIWikiPopupContainerL1']//*[@class='spaceChooserPopup']");
 	public final String ELEMENT_DESTINATION_TREE_ITEM = "//*[@id='iconTreeExplorer']/*[contains(.,'${treeItem}')]";
-	
+
 	/*-------------------------Permission page--------------------*/
 	public final By ELEMENT_SELECT_USER = By.xpath("//a[contains(@onclick, 'OpenSelectUserForm')]");
 	public final String ELEMENT_USERNAME_CHECK = "//input[@id='${user}' and @type='checkbox']";
@@ -206,7 +206,8 @@ public class WikiBase extends PlatformBase{
 	public final By ELEMENT_DRAFT_CONTINUE_EDIT_LINK = By.linkText("Continue Editing");
 	public final By ELEMENT_DELETE_DRAFT_LINK = By.linkText("Delete");
 	public final By EMEMENT_DRAFT_CHANGE_VIEW = By.xpath("//div[contains(text(), 'Draft Changes')]");
-	public final By ELEMENT_DRAFT_CLOSE = By.xpath("//div[text()='Draft Changes']/..//*[@class='uiIconClose']");
+	//	public final By ELEMENT_DRAFT_CLOSE = By.xpath("//div[text()='Draft Changes']/..//*[@class='uiIconClose']");
+	public final By ELEMENT_DRAFT_CLOSE = By.xpath("//*[@class='uiIconClose uiIconLightGray']");
 	public final By ELEMENT_DRAFT_MESSAGE = By.xpath("//*[contains(text(), 'A draft of this page was saved on')]");
 	public final By ELEMENT_DRAFT_RESUME__LINK = By.linkText("Resume the Draft");
 	public final String ELEMENT_DRAFT_STRING_ALERT = "This page is currently being edited by ${userName}";
@@ -274,11 +275,11 @@ public class WikiBase extends PlatformBase{
 	/*-------------------------Page information management------------------------------*/
 	public final By ELEMENT_WIKI_PAGE_INFO_FEED = By.xpath("//*[@id='UIWikiPageInfoArea']/div[@class='txtFeed']");
 	public final By ELEMENT_COMPARE_TEXT = By.xpath("//div[contains(text(),'Compared With')]");
-//	public final By ELEMENT_REVISION_LINK = By.xpath("//*[@id='UIWikiPageInfoArea']//a[contains(text(), 'V')]");
+	//	public final By ELEMENT_REVISION_LINK = By.xpath("//*[@id='UIWikiPageInfoArea']//a[contains(text(), 'V')]");
 	public final By ELEMENT_REVISION_LINK = By.xpath("//*[@id='UIWikiPageInfo']//div[@class='actionCenter']");
 	public final String ELEMENT_VERSION_LINK= "//a[contains(text(),'V{$version}')]";
 	public final String ELEMENT_VERSION_LINK_AUX= "//a[contains(text(),'v.{$version}')]";
-	public final String ELEMENT_RESTORE_LINK = "//td/label/a[contains(text(), 'v.{$version}')]/../../..//*[@class='uiIconRestore']";
+	public final String ELEMENT_RESTORE_LINK = "//td/label/a[contains(text(), 'v.{$version}')]/../../..//*[@class='uiIconRestore uiIconLightGray']";
 	public final By ELEMENT_COMPARE_BUTTON = By.xpath("//*[text()='Compare the selected versions']");	
 	public final By ELEMENT_VIEW_CHANGE = By.linkText("(View Change)");
 	public String ELEMENT_ATTACHMENT_NUMBER = "//*[@id='UIWikiPageInfoArea']//a[contains(text(),'${No}')]/*[@class='uiIconAttach']";
@@ -287,11 +288,11 @@ public class WikiBase extends PlatformBase{
 	public String ELEMENT_UPDATER_PAGE_INFO = "//*[@id='UIWikiPageInfoArea']//a[2][text()='${fullName}']";
 	public final By ELEMENT_ADD_MORE_RELATION_BUTTON = By.xpath("//button[text()='Add More Relations']");
 	public final By ELEMENT_PAGE_TITLE = By.id("titleInfo");
-	
+
 	public final String ELEMENT_PAGE_INFO_TITLE = "//h6[@class='pageInfoTitle' and contains(text(),'${infoTitle}')]";
 	public final String ELEMENT_VERIFY_INFO_SUMMARY = "//div[@class='uiPageInfoItem uiPageInfoSummary']//b[contains(text(),'${infoSummary}')]/ancestor::tr/td[contains(text(),'${item}')]";
 	public final String ELEMENT_VERIFY_HIERARCHY = "//div[text()='${page}']/..//*//*//a[@href='/portal/intranet/wiki/${pageTitle}']";
-	
+
 	// Wiki page > View Change
 	public final String ELEMENT_CHANGES_COMPARE_VERSION = "//*[text()='${1stNumber}']/../b[text()='${2ndNumber}']/../..//a[@class='changes']";
 	public final String ELEMENT_VERSION_CHECKBOX="//input[@id='version_{$version}']";
@@ -303,16 +304,16 @@ public class WikiBase extends PlatformBase{
 	public final String ELEMENT_SELECTED_PAGE = "//div[contains(@class,'popupContent')]//*[@id='iconTreeExplorer' and contains(@onclick, 'event')]//a[contains(text(), '${relatedPage}')]"; 
 	public final String ELEMENT_RELATED_PAGE = "//*[text()='Related Pages']/..//a[contains(text(),'${relatedPage}')]";
 	public By ELEMENT_SELECT_SPACE = By.xpath("//*[contains(text(), 'Select the Wiki:')]/..//*[@class='btn dropdown-toggle']");
-	public final String ELEMENT_REMOVE_RELATED_PAGE_LINK = "//*[contains(text(),'${relatedPage}')]/ancestor::table//*[@class='uiIconDelete']";
+	public final String ELEMENT_REMOVE_RELATED_PAGE_LINK = "//*[contains(text(),'${relatedPage}')]/ancestor::table//*[@class='uiIconDelete uiIconLightGray']";
 	public By ELEMENT_NO_SPACE_OPTION = By.id("UISpaceSwitcher_nospace");
 	public String ELEMENT_RELATED_PAGE_SPACE = "//td[contains(text(), '${spaceName}')]";
 	public String ELEMENT_RELATED_PAGE_SPACE_DEFAUT = "//*[contains(text(), 'Select the Wiki:')]/..//*[@class='btn dropdown-toggle']//span[text() = '${spaceName}']";
 	public String ELEMENT_RELATED_PAGE_HEAD_INDEX = "//th[${index}][contains(text(), '${text}')]";
 	public String ELEMENT_RELATED_PAGE_COLUMN_SPACE_INDEX = "//td[contains(text(), '${spaceName}')][${index}]";
-	public String ELEMENT_RELATED_PAGE_COLUMN_ACTION_INDEX = "//td[${index}]/..//i[@class='uiIconDelete']";
+	public String ELEMENT_RELATED_PAGE_COLUMN_ACTION_INDEX = "//td[${index}]/..//i[@class='uiIconDelete uiIconLightGray']";
 	public String ELEMENT_RELATED_PAGE_COLUMN_WIKI_HOME = "//td[${index}]/div/ul/li[2]//a[contains(text(), 'Wiki Home')]";
 	public String ELEMENT_RELATED_PAGE_COLUMN_WIKI_PAGE = "//td[${index}]/div/ul/li[3]//a[contains(text(), '${relatedPage}')]";
-	
+
 	//Wiki page > Revisions page
 	public final String ELEMENT_CURRENT_VERSION = "//*[@id='UIWikiPageInfo']//a[text()='Current Version (v.${version})']";
 	public final By ELEMENT_DISABLE_COMPARE_BUTTON = By.xpath("//*[contains(@class, 'disableButton') and text()='Compare Selected']");
@@ -381,7 +382,7 @@ public class WikiBase extends PlatformBase{
 		//mouseOver(ELEMENT_ADD_PAGE_LINK, true);
 		mouseOverAndClick(ELEMENT_ADD_PAGE_LINK);
 		if (isElementNotPresent(ELEMENT_BLANK_PAGE_LINK))
-		mouseOverAndClick(ELEMENT_BLANK_PAGE_LINK_41);
+			mouseOverAndClick(ELEMENT_BLANK_PAGE_LINK_41);
 		else
 			mouseOverAndClick(ELEMENT_BLANK_PAGE_LINK);
 		Utils.pause(1000);

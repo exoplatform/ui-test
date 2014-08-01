@@ -399,20 +399,20 @@ public class Wiki_Macro_Add extends ManageDraft{
 	public void test11_InsertSourceMacro(){
 		String title = "Page 94914";
 		String content = "= Code macro = "
-						+"== Java with title == "
-						+"{{code language='java' title='HelloWorld.java'}}"
-						+"System.out.println('Hello World');"
-						+"{{/code}}"
-						+"== Java without title =="
-						+"{{code language='java'}}"
-						+"System.out.println('Hello World');"
-						+"{{/code}}"
-						+"== HTML =="
-						+"use [[xwiki example>>http://extensions.xwiki.org/xwiki/bin/view/Extension/Code+Macro]]"
-						+"{{code language='html'}}"
-						+"<html>"
-						+"<head>How cool?</head>"
-						+"</html>{{/code}}";
+				+"== Java with title == "
+				+"{{code language='java' title='HelloWorld.java'}}"
+				+"System.out.println('Hello World');"
+				+"{{/code}}"
+				+"== Java without title =="
+				+"{{code language='java'}}"
+				+"System.out.println('Hello World');"
+				+"{{/code}}"
+				+"== HTML =="
+				+"use [[xwiki example>>http://extensions.xwiki.org/xwiki/bin/view/Extension/Code+Macro]]"
+				+"{{code language='html'}}"
+				+"<html>"
+				+"<head>How cool?</head>"
+				+"</html>{{/code}}";
 
 		//Add source macro in SourceEditor
 		info("Add new wiki page at Rich Text mode:");
@@ -502,7 +502,7 @@ public class Wiki_Macro_Add extends ManageDraft{
 		String content = "";
 		String box_content = "Box content";
 		String box_title = "Box title";
-		String sourceContent = "{{tip}} {{color name = 'red'}} This is tip message {{/color}} {{/tip}} {{box title=${title}}} Box content {{/box}}";
+		String sourceContent = "{{tip}} {{color name = 'red'}} This is tip message {{/color}} {{/tip}} " +"\\" + "\\" + " {{box title=${title}}} Box content {{/box}}";
 
 		//Add source macro in SourceEditor
 		info("Add new wiki page at Rich Text mode:");
@@ -531,7 +531,7 @@ public class Wiki_Macro_Add extends ManageDraft{
 		//Delete wiki page before exit test case
 		deleteCurrentWikiPage();
 	}
-	
+
 	/*
 	 * Cases in 4.1.x
 	 * Pie chart
@@ -667,10 +667,10 @@ public class Wiki_Macro_Add extends ManageDraft{
 		click(ELEMENT_SOURCE_EDITOR_BUTTON);
 		addWikiPageSourceEditor(title, sourceContent);
 		click(ELEMENT_RICHTEXT_BUTTON);
-		
+
 		//Create box macro
 		createBoxMacro("", boxContent);
-		
+
 		//Verify macro in Rich Text mode
 		driver.switchTo().frame(waitForAndGetElement(ELEMENT_CONTENT_WIKI_FRAME));
 		waitForAndGetElement(By.linkText("1"));
@@ -692,7 +692,7 @@ public class Wiki_Macro_Add extends ManageDraft{
 		//Delete wiki page before exit test case
 		deleteCurrentWikiPage();
 	}
-	
+
 	/**
 	 * 
 	 */
@@ -825,7 +825,7 @@ public class Wiki_Macro_Add extends ManageDraft{
 		deleteCurrentWikiPage();
 
 	}
-	
+
 	@Test(groups="pending")
 	public void test23_InsertBarChartMacro(){
 		String height = " 320";
@@ -854,7 +854,7 @@ public class Wiki_Macro_Add extends ManageDraft{
 		//Delete wiki page before exit test case
 		deleteCurrentWikiPage();
 	}
-	
+
 	@Test(groups="pending")
 	public void test24_InsertBar3DChartMacro(){
 		String height = "300";
@@ -884,7 +884,7 @@ public class Wiki_Macro_Add extends ManageDraft{
 		//Delete wiki page before exit test case
 		deleteCurrentWikiPage();
 	}
-	
+
 	@Test(groups="pending")
 	public void test25_InsertTimeSerialChartUsingXYlineAndShapemacro(){
 		String height = "300";
@@ -916,7 +916,7 @@ public class Wiki_Macro_Add extends ManageDraft{
 		//Delete wiki page before exit test case
 		deleteCurrentWikiPage();
 	}
-	
+
 	@Test(groups="pending")
 	public void test26_InsertTimeSerialchartUsingXYline3Dmacro(){
 		String height = "300";
@@ -946,7 +946,7 @@ public class Wiki_Macro_Add extends ManageDraft{
 		//Delete wiki page before exit test case
 		deleteCurrentWikiPage();
 	}
-	
+
 	@Test(groups="pending")
 	public void test27_InsertTimeSerialChartUsingXYStepMacro(){
 		String height = "300";
@@ -977,7 +977,7 @@ public class Wiki_Macro_Add extends ManageDraft{
 		//Delete wiki page before exit test case
 		deleteCurrentWikiPage();
 	}
-	
+
 	@Test(groups="pending")
 	public void test28_InsertCustomColorChartMacro(){
 

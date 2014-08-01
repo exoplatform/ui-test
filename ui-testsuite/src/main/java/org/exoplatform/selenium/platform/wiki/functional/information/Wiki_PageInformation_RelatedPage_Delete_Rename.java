@@ -238,9 +238,9 @@ public class Wiki_PageInformation_RelatedPage_Delete_Rename extends BasicAction{
 	 */
 	@Test
 	public void test03_DeletePage(){
-		String[][] pageInfo = {{"relatedPage06_1", "relatedPage06_2"}, {"content of page1", "content of page2"}};
+		String[][] pageInfo = {{"Page69742_1", "Page69742_2"}, {"content of page1", "content of page2"}};
 
-		String[][] wikiPath = {{"Wiki Home", "Wiki Home"}, {"Wiki Home/relatedPage06_1", "Wiki Home/relatedPage06_2"}};
+		String[][] wikiPath = {{"Wiki Home", "Wiki Home"}, {"Wiki Home/Page69742_1", "Wiki Home/Page69742_2"}};
 
 		addBlankWikiPageAndRelatePage(2, wikiPath[0], pageInfo, 0, wikiPath[1][0], pageInfo[0][1]);
 

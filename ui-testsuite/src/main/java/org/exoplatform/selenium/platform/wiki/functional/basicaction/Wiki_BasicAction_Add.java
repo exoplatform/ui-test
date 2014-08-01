@@ -645,7 +645,6 @@ public class Wiki_BasicAction_Add extends ManageDraft{
 		goToAddBlankPage();
 		addWikiPageRichText(title, "");
 		insertPageLink2WikiPage(true, pageLink, label, "Go to pageLink", true);
-		typeEnterInRichText();
 		Utils.pause(500);		
 		info("-- Saving Wiki Page... --");
 		click(ELEMENT_SAVE_BUTTON_ADD_PAGE);
@@ -655,6 +654,7 @@ public class Wiki_BasicAction_Add extends ManageDraft{
 		 *Input Data: 
 		 *Expected Outcome: 
 		- Show page successfully		*/ 
+		Utils.pause(500);
 		goToWikiPage("Wiki Home/"+title);
 		waitForAndGetElement(By.linkText(label));
 		click(By.linkText(label));
@@ -819,7 +819,6 @@ public class Wiki_BasicAction_Add extends ManageDraft{
 		 *Expected Outcome: Email address is added successfully in content of page
 		- Page is add/edited successfully		*/		
 		insertEmailLink2WikiPage(email, label, tooltip, true);
-		typeEnterInRichText();
 		Utils.pause(500);
 		info("-- Saving Wiki Page... --");
 		click(ELEMENT_SAVE_BUTTON_ADD_PAGE);

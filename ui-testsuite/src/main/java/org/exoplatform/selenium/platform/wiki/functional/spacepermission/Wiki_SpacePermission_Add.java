@@ -28,7 +28,7 @@ public class Wiki_SpacePermission_Add extends BasicAction {
 	ManageAccount magAcc;
 	Button button;
 	PlatformPermission per;
-	
+
 	String DATA_USER_ADMIN = DATA_USER1;
 
 	@BeforeMethod
@@ -67,7 +67,7 @@ public class Wiki_SpacePermission_Add extends BasicAction {
 		prepareDataWikiSpacePermissionV1(PAGE_NAME1, 0, user2, DATA_USER3);
 
 		magAcc.userSignIn(ManageAccount.userType.AUTHOR);
-		
+
 		goToWiki();
 
 		click(ELEMENT_PAGE1);
@@ -77,7 +77,7 @@ public class Wiki_SpacePermission_Add extends BasicAction {
 		info("reset data");
 
 		magAcc.userSignIn(ManageAccount.userType.ADMIN);
-		
+
 		goToWiki();
 
 		resetDataWikiSpacePermission(ELEMENT_PAGE1, DATA_USER3);
@@ -104,7 +104,7 @@ public class Wiki_SpacePermission_Add extends BasicAction {
 		magAcc.userSignIn(ManageAccount.userType.AUTHOR);
 
 		goToWiki();
-		
+
 		click(ELEMENT_PAGE1);
 
 		waitForAndGetElement(ELEMENT_EDIT_PAGE_LINK);
@@ -112,7 +112,7 @@ public class Wiki_SpacePermission_Add extends BasicAction {
 		info("reset data");
 
 		magAcc.userSignIn(ManageAccount.userType.ADMIN);
-		
+
 		goToWiki();
 
 		resetDataWikiSpacePermission(ELEMENT_PAGE1, DATA_USER3);
@@ -137,7 +137,7 @@ public class Wiki_SpacePermission_Add extends BasicAction {
 		info("Check user after set permisison");
 
 		magAcc.userSignIn(ManageAccount.userType.AUTHOR);
-		
+
 		goToWiki();
 
 		click(ELEMENT_PAGE1);
@@ -147,7 +147,7 @@ public class Wiki_SpacePermission_Add extends BasicAction {
 		info("reset data");
 
 		magAcc.userSignIn(ManageAccount.userType.ADMIN);
-		
+
 		goToWiki();
 
 		resetDataWikiSpacePermission(ELEMENT_PAGE1, DATA_USER3);
@@ -172,7 +172,7 @@ public class Wiki_SpacePermission_Add extends BasicAction {
 		info("Check after edit user");
 
 		magAcc.userSignIn(ManageAccount.userType.AUTHOR);
-		
+
 		goToWiki();
 
 		click(ELEMENT_PAGE1);
@@ -182,7 +182,7 @@ public class Wiki_SpacePermission_Add extends BasicAction {
 		info("reset data");
 
 		magAcc.userSignIn(ManageAccount.userType.ADMIN);
-		
+
 		goToWiki();
 
 		resetDataWikiSpacePermission(ELEMENT_PAGE1, DATA_USER3);
@@ -205,7 +205,7 @@ public class Wiki_SpacePermission_Add extends BasicAction {
 		prepareDataWikiSpacePermissionV2(PAGE_NAME1, "Davis", DATA_USER3, 3);
 
 		magAcc.userSignIn(ManageAccount.userType.AUTHOR);
-		
+
 		goToWiki();
 
 		click(ELEMENT_PAGE1);
@@ -215,7 +215,7 @@ public class Wiki_SpacePermission_Add extends BasicAction {
 		info("reset data");
 
 		magAcc.userSignIn(ManageAccount.userType.ADMIN);
-		
+
 		goToWiki();
 
 		resetDataWikiSpacePermission(ELEMENT_PAGE1, DATA_USER3);
@@ -238,7 +238,7 @@ public class Wiki_SpacePermission_Add extends BasicAction {
 		prepareDataWikiSpacePermissionV2(PAGE_NAME1, "james.davis@acme.exoplatform.com", DATA_USER3, 4);
 
 		magAcc.userSignIn(ManageAccount.userType.AUTHOR);
-		
+
 		goToWiki();
 
 		click(ELEMENT_PAGE1);
@@ -248,7 +248,7 @@ public class Wiki_SpacePermission_Add extends BasicAction {
 		info("reset data");
 
 		magAcc.userSignIn(ManageAccount.userType.ADMIN);
-		
+
 		goToWiki();
 
 		resetDataWikiSpacePermission(ELEMENT_PAGE1, DATA_USER3);
@@ -273,7 +273,7 @@ public class Wiki_SpacePermission_Add extends BasicAction {
 		editSpacePermission(DATA_USER2, true, true, true, true, 2);
 
 		magAcc.userSignIn(ManageAccount.userType.PUBLISHER);
-		
+
 		goToWiki();
 
 		click(ELEMENT_PAGE1);
@@ -283,7 +283,7 @@ public class Wiki_SpacePermission_Add extends BasicAction {
 		info("reset data");
 
 		magAcc.userSignIn(ManageAccount.userType.ADMIN);
-		
+
 		goToWiki();
 
 		click(ELEMENT_PAGE1);
@@ -310,7 +310,7 @@ public class Wiki_SpacePermission_Add extends BasicAction {
 		prepareDataWikiSpacePermissionV1(PAGE_NAME1, 0, user3, "*:/platform/users");
 
 		magAcc.userSignIn(ManageAccount.userType.AUTHOR);
-		
+
 		goToWiki();
 
 		click(ELEMENT_PAGE1);
@@ -318,7 +318,7 @@ public class Wiki_SpacePermission_Add extends BasicAction {
 		waitForAndGetElement(ELEMENT_EDIT_PAGE_LINK);
 
 		magAcc.userSignIn(ManageAccount.userType.ADMIN);
-		
+
 		goToWiki();
 
 		info("reset data");
@@ -344,7 +344,7 @@ public class Wiki_SpacePermission_Add extends BasicAction {
 		prepareDataWikiSpacePermissionV1(PAGE_NAME1, 2, user3, "*:/developers");
 
 		magAcc.userSignIn(ManageAccount.userType.DEVELOPER);
-		
+
 		goToWiki();
 
 		click(ELEMENT_PAGE1);
@@ -354,7 +354,7 @@ public class Wiki_SpacePermission_Add extends BasicAction {
 		info("reset data");
 
 		magAcc.userSignIn(ManageAccount.userType.ADMIN);
-		
+
 		goToWiki();
 
 		resetDataWikiSpacePermission(ELEMENT_PAGE1, "*:/platform/users");
@@ -377,7 +377,7 @@ public class Wiki_SpacePermission_Add extends BasicAction {
 		prepareDataWikiSpacePermissionV1(PAGE_NAME1, 3, user4, "author:/platform/web-contributors");
 
 		magAcc.userSignIn(ManageAccount.userType.AUTHOR);
-		
+
 		goToWiki();
 
 		click(ELEMENT_PAGE1);
@@ -387,7 +387,7 @@ public class Wiki_SpacePermission_Add extends BasicAction {
 		info("reset data");
 
 		magAcc.userSignIn(ManageAccount.userType.ADMIN);
-		
+
 		goToWiki();
 
 		resetDataWikiSpacePermission(ELEMENT_PAGE1, "author:/platform/web-contributors");
@@ -410,7 +410,7 @@ public class Wiki_SpacePermission_Add extends BasicAction {
 		prepareDataWikiSpacePermissionV1(PAGE_NAME1, 3, user4, "member:/platform/users");
 
 		magAcc.userSignIn(ManageAccount.userType.AUTHOR);
-		
+
 		goToWiki();
 
 		click(ELEMENT_PAGE1);
@@ -420,7 +420,7 @@ public class Wiki_SpacePermission_Add extends BasicAction {
 		info("reset data");
 
 		magAcc.userSignIn(ManageAccount.userType.ADMIN);
-		
+
 		goToWiki();
 
 		resetDataWikiSpacePermission(ELEMENT_PAGE1, "member:/platform/users");		
