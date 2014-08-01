@@ -298,7 +298,7 @@ public class PLF_HomePageActivityStream_ActivityComposer_File extends Activity {
 	 * Step 2: Select a file by double-clicking
 	 * ERROR: Refer https://jira.exoplatform.org/browse/COMMONS-278
 	 */
-//	@Test (groups="error")
+	@Test (groups="error")
 	public void test08_OpenSelectFilePopup(){
 		/*Declare variables*/
 		String uploadFileName = "upload77802.pdf";

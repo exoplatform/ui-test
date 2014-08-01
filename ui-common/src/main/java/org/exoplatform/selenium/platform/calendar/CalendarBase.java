@@ -145,9 +145,10 @@ public class CalendarBase extends PlatformBase {
 	public String ELEMENT_EVENT_TASK_ONE_DAY = "//*[@id='UIWeekViewGrid']//div[contains(text(),'${taskName}')]";
 	public String ELEMENT_EVENT_TASK_ONE_DAY_1 = "//*[@id='UIWeekView']//div[contains(text(),'${taskName}')]";
 	public String ELEMENT_EVENT_TASK_WORKING_PANE = "//*[@id='UIWeekViewGrid']//div[@class='eventContainer' and contains(text(),'${event}')]";
-	public String ELEMENT_EVENT_TASK_WORKING_PANE_PLF41 = "//*[@id='UIWeekViewGrid']//div[contains(@class,'eventAlldayContent') and contains(.,'${event}')]";
+	public String ELEMENT_EVENT_TASK_WORKING_PANE_PLF41 = "//*[contains(@id,'UIWeek')]//div[contains(@class,'eventAlldayContent') and contains(.,'${event}')]";
 	public By ELEMENT_EVENT_TASK_DELETE_MENU = By.xpath("//div[@id='tmpMenuElement']//a[@class='eventAction' and contains(@href,'Delete')]");
-	public String MSG_EVENT_TASK_DELETE = "Are you sure you want to delete this event/task?";
+	public String MSG_TASK_DELETE = "Are you sure you want to delete this task?";
+	public String MSG_EVENT_DELETE = "Are you sure you want to delete this event?";
 
 	public String MSG_CALENDAR_DELETE = "Are you sure you want to delete this calendar and all its events?";
 	public By ELEMENT_EVENT_TASK_WEEK_PANEL = By.xpath("//*[@class='eventWeekContent eventWeekContent mainWorkingPanel']");
@@ -662,7 +663,10 @@ public class CalendarBase extends PlatformBase {
 			break;
 		}
 		click(ELEMENT_EVENT_TASK_DELETE_MENU);
-		alert.verifyAlertMessage(MSG_EVENT_TASK_DELETE);
+		if(waitForAndGetElement(By.xpath("//*[contains(text(),'"+MSG_EVENT_DELETE+"')]"),5000,0)==null)
+			alert.verifyAlertMessage(MSG_TASK_DELETE);
+		else
+			alert.verifyAlertMessage(MSG_EVENT_DELETE);
 		button.yes();
 		driver.navigate().refresh();
 		Utils.pause(1000);
@@ -833,7 +837,7 @@ public class CalendarBase extends PlatformBase {
 		type(By.xpath(ELEMENT_INPUT_QUICK_SEARCH), keyword, true);
 		info("----Send search request----");
 		Utils.pause(5000);
-		click(ELEMENT_INPUT_QUICK_SEARCH);
+		//click(ELEMENT_INPUT_QUICK_SEARCH);
 		Utils.javaSimulateKeyPress(KeyEvent.VK_ENTER);
 		info("----Confirm search result page displayed----");
 		Utils.pause(3000);

@@ -607,7 +607,7 @@ public class Event extends CalendarBase{
 			waitForElementNotPresent(ELEMENT_DELETE_RECURRING_EVENT_FORM);
 		}
 		else{
-			alert.verifyAlertMessage(MSG_EVENT_TASK_DELETE);
+			alert.verifyAlertMessage(MSG_TASK_DELETE);
 			button.yes();
 			driver.navigate().refresh();
 			Utils.pause(1000);

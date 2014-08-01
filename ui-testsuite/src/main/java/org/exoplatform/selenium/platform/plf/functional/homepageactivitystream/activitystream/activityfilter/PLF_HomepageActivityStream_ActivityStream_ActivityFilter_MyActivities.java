@@ -83,7 +83,7 @@ import org.testng.annotations.*;
 	@Test(priority=3)
 	public  void test01_MentionFromCommentOnHomeShouldPushActivityInMyActivitiesOfTheMentionedUser() {
 		info("Test 1: Mention from comment on Home should push activity in My Activities of the mentioned user");
-		String text = "New Activity";
+		String text = "activity77666";
 		/*
 		- Connect to Intranet/Homepage with User A
 		- From the stream "All activities", add a comment in activity and mention the User B
@@ -310,7 +310,7 @@ import org.testng.annotations.*;
 	public  void test06_MentionANonMemberInACommentFromASpaceShouldPushTheActivityInMyActivitiesOfTheMentionedUser() {
 		info("Test 6: Mention a non member in a comment from a space should push the activity in My Activities of the mentioned user.");
 		String spaceName = "space77672";
-		String text = "New activity";
+		String text = "activity77672";
 		
 		mMember.goToMySpacePage();
 		mMember.addNewSpace(spaceName,"");
@@ -358,7 +358,7 @@ import org.testng.annotations.*;
 	@Test(priority=9)
 	public  void test07_MentionFromCommentInUserActivityStreamShouldPushTheActivityInMyActivitiesOfMentionedUser() {
 		info("Test 7: Mention from comment in user activity stream should push the activity in My Activities of mentioned user");
-		String text = "New activity";
+		String text = "activity77673";
 		/*
 		- Connect to Intranet/Homepage with User A
 		- Go to [My Profile] and choose [Activity stream] tab
@@ -443,7 +443,7 @@ import org.testng.annotations.*;
 	@Test(priority=1)
 	public  void test09_CommentOnSomeoneElsesActivity() {
 		info("Test 9: Comment on someone else's activity");
-		String text="New Activity";
+		String text="activity77676";
 		String comment = "New comment";
 		addActivity(true, text, false, "");
 		nav.goToConnectionPage();
@@ -498,7 +498,7 @@ import org.testng.annotations.*;
 	@Test(priority=0)
 	public  void test10_CommentOnMyActivityFromMyActivityStream() {
 		info("Test 10 Comment on my activity from My Activity stream");
-		String text="New Activity";
+		String text="activity77680";
 		String comment = "New comment";
 		/*
 		- Connect to Intranet/Homepage
@@ -537,7 +537,7 @@ import org.testng.annotations.*;
 	@Test(priority=11)
 	public  void test11_ActivityLikedFromMyActivityStreamShouldBeVisibleInMyActivities() {
 		info("Test 11 Activity liked from my activity stream should be visible in My Activities");
-		String text="New Activity";
+		String text="activity77682";
 		/*
 		- Connect to intranet/Homepage
 		- Choose [My Activity Stream] filter
@@ -574,7 +574,7 @@ import org.testng.annotations.*;
 	@Test(priority=12)
 	public  void test12_ActivityPostedFromMyActivityStreamShouldBeVisibleInMyActivities() {
 		info("Test 12 Activity posted from my activity stream  should be visible in My Activities");
-		String text="New Activity";
+		String text="activity77683";
 		/*
 		- Connect to Intranet
 		- Go to [My Profile]
@@ -611,7 +611,7 @@ import org.testng.annotations.*;
 	public  void test13_ActivityPostedFromASpaceShouldBeVisibleInMyActivities() {
 		info("Test 13 Activity posted from a space should be visible in My activities");
 		String spaceName = "Test";
-		String text = "New activity";
+		String text = "activity77684";
 		/*
 		- Connect to Intranet
 		- Click [join a space]
@@ -687,7 +687,7 @@ import org.testng.annotations.*;
 	@Test(priority=15)
 	public  void test15_AddCommentToAnActivityOnActivityStreamOfOtherUser() {
 		info("Test 15 Add Comment to an activity on activity stream of other user");
-		String text="New Activity";
+		String text="activity77696";
 		nav.goToConnectionPage();
 		pConn.connectPeople(user1);
 		acc.signOut();

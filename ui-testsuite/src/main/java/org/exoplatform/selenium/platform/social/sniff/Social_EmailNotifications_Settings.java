@@ -110,7 +110,7 @@ public class Social_EmailNotifications_Settings extends Notification {
 		String password = "gtngtn";
 		String fullName = username + " "+username;
 		String email = username + "@gmail.com";
-		By eEmail = By.xpath(ELEMENT_GMAIL_TITLE.replace("${title}", fullName+" has joined eXo"));
+		By eEmail = By.xpath(ELEMENT_GMAIL_TITLE.replace("{$title}", fullName+" has joined eXo"));
 		String username2 = getRandomString();
 		String fullName2 = username2 + " "+ username2;
 		String email2 = username2 + "@gmail.com";

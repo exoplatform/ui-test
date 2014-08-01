@@ -33,6 +33,7 @@ public class Calendar_Event extends CalendarBase {
 	public void setUpBeforeTest(){
 //		getDriverAutoSave();
 		initSeleniumTest();
+		driver.get(baseUrl);
 		acc = new ManageAccount(driver);
 		evt = new Event(driver);
 		tsk = new Task(driver);
@@ -473,6 +474,7 @@ public class Calendar_Event extends CalendarBase {
 	public void test10_deleteEventinSharedCal() {
 		String EVENT10 = "EVENT_10";
 		String CAL_10 = "CAL_10";
+		String EVENT_CATEGORY = "All";
 		String[] USER_SHARED = {USER_ROOT};
 		String USER_SHARED_PASS = PASS_ROOT;
 		boolean[] EDITABLE = {true};
@@ -495,7 +497,12 @@ public class Calendar_Event extends CalendarBase {
 		info("==Add a new event on shared calendar==");
 		goToCalendarPage();
 		Utils.pause(5000);
+		evt.addQuickEvent(EVENT10,EVENT10,getDate(0,"MM/dd/yyyy"), getDate(0,"MM/dd/yyyy"), false, CAL_10, EVENT_CATEGORY);
+		waitForAndGetElement(By.xpath(ELEMENT_EVENT_TASK_ONE_DAY.replace("${taskName}", EVENT10)));
 		deleteEventTask(EVENT10, selectDayOption.ONEDAY);
+		
+		info("==Restore data==");
+		deleteCalendar(CAL_10,true);
 	}
 //
 //	/**

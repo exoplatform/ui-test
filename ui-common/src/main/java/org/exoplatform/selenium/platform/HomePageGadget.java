@@ -25,7 +25,8 @@ public class HomePageGadget extends PlatformBase{
 	public String ELEMENT_SHOW_ACCEPTS_BUTTON = "//div[@id='InvitationsPortlet']//div[@class='peopleInviteInfo']//div[text()='${peopleName}']/..//a[text()='Accept']";
 	public String ELEMENT_INVITATION_GADGET_USER_ACCEPT_41 = "//div[@id='InvitationsPortlet']//div[@class='peopleInviteInfo']//a[text()='${peopleName}']/../..//a[contains(text(),'Accept')]";
 	public String ELEMENT_REMOVE_INVITATION_BUTTON = "//div[@id='InvitationsPortlet']//div[@class='peopleInviteInfo']//div[text()='${peopleName}']/..//i[@class='uiIconClose']";
-	public String ELEMENT_REMOVE_INVITATION_BUTTON_41 = "//div[@id='InvitationsPortlet']//div[@class='peopleInviteInfo']//a[text()='${peopleName}']/../..//i[@class='uiIconClose']";
+	public String ELEMENT_REMOVE_INVITATION_BUTTON_41 = "//div[@id='InvitationsPortlet']//div[contains(@class,'peopleInviteInfo')]//*[text()='${peopleName}']/../..//i[@class='uiIconClose']";
+	
 	public String ELEMENT_TITLE_OF_GAGDET = "//div[@id='InvitationsPortlet']/..//span[text()='${number}']";
 	public By ELEMENT_PROFILE_PICTURE_GADGET = By.xpath("//div[@class='peopleInvitePicture pull-left avatarXSmall']");
 	public String ELEMENT_SPACE_ACCEPT_BUTTON = "//div[@id='InvitationsPortlet']//div[@class='spaceInviteInfo']//div[text()='${namespace}']/..//a[text()='Accept']";

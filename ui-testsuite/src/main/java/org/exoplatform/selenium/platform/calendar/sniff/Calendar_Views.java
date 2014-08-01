@@ -21,6 +21,7 @@ public class Calendar_Views extends CalendarBase{
 	@BeforeMethod
 	public void setUpBeforeTest(){
 		initSeleniumTest();
+		driver.get(baseUrl);
 		acc = new ManageAccount(driver, this.plfVersion);
 		event = new Event(driver, this.plfVersion);
 		task = new Task(driver, this.plfVersion);
