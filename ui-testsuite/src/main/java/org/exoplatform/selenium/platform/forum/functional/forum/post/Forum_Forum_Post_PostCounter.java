@@ -60,7 +60,6 @@ public class Forum_Forum_Post_PostCounter extends ForumBase{
 		String titleTop = "Topic 106656";
 		String post1 = "Post 1066561";
 		String post2 = "Post 1066562";
-		String postProfile;
 		Integer oldPostNum;
 		Integer newPostNum;
 

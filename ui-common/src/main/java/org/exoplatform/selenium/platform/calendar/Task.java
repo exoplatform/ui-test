@@ -70,6 +70,7 @@ public class Task extends CalendarBase{
 	public By ELEMENT_ADD_EDIT_TASK_PRIORITY = By.xpath("//*[@id='UITaskForm']//*[@name='priority']");
 	public By ELEMENT_PREVIEW_TASK_POPUP = By.xpath("//span[@class='PopupTitle popupTitle' and text()='Preview']");
 	public String ELEMENT_TITLE_TASK_POPUP = "//div[@class='titleList'] //*[contains(text(),'${task}')]";
+	public String ELEMENT_TASK_ATTACHMENT = "//*[@id='UITaskForm']/..//a[@data-original-title='${file}']";
 
 
 	//----------------------- Task Reminder ---------------------------------------------

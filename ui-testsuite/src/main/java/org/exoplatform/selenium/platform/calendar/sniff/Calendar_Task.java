@@ -8,6 +8,7 @@ import org.openqa.selenium.By;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import org.exoplatform.selenium.platform.ManageAccount.userType;
 import org.exoplatform.selenium.platform.calendar.CalendarBase;
 import org.exoplatform.selenium.platform.calendar.Event;
 import org.exoplatform.selenium.platform.calendar.Task;
@@ -20,22 +21,30 @@ import org.exoplatform.selenium.platform.calendar.Task;
 /**
  * @date: 25/04/2014
  * @author lientm
- * @description: update suggestion date follow https://jira.exoplatform.org/browse/FQA-1721
+ * @description: update suggestion date follow https://jira.exoplatform.org/browse/FQA-1721 
+ */
+/**
+ * @author chinhdtt
+ * @date 01 Aug 2014
+ * @description:Add new 8cases: 
+ * 			+ Manage task in group calendar
+ * 			+ Manage task in shared calendar
+ * 			+ Manage task in personal calendar
+ * 			+ Task/Attachment
  */
 public class Calendar_Task extends CalendarBase {
 
 	ManageAccount acc;
-	Event evt;
-	Task tsk;
+	Event event; 
+	Task task; 
 
 	@BeforeMethod
 	public void setUpBeforeTest(){
-//		getDriverAutoSave();
 		initSeleniumTest();
-		acc = new ManageAccount(driver);
-		evt = new Event(driver);
-		tsk = new Task(driver);
-		acc.signIn(DATA_USER1, DATA_PASS);
+		acc = new ManageAccount(driver, this.plfVersion);
+		event = new Event(driver, this.plfVersion);
+		task = new Task(driver, this.plfVersion);
+		acc.signIn(DATA_USER1, DATA_PASS);		
 	}
 
 	@AfterMethod
@@ -45,104 +54,88 @@ public class Calendar_Task extends CalendarBase {
 	}
 
 	/**Testcase to check add task from 3 ways
-	 * CaseID 109238: add new task from action bar or on a calendar
-	 * CaseID: 69266: edit task
-	 * CaseID: 69267: delete task
+	 * CaseID 112466: add new task from action bar or on a calendar
+	 * Case ID:111869: Edit a task in personal calendar.
+	 * Case ID:111870: Delete a task in personal calendar.
 	 */
-	
-	/* caseId: 109238 -> Add new task by clicking Task on action bar or [Add task] in a calendar*/
+
+	/* caseId: 112466 -> Add a task in personal calendar by click Task on action bar */
 	@Test
 	public void test01_AddEditDeleteTask_FromActionBar(){
-		String calendar = "Calendar_109238_1";
+		String calendar = "Calendar_112466";
 		String color = "sky_blue";
-		String task = "Task_109238_1";
-		String newTask = "Task_109238_1 update";
+		String task1 = "Task_112466";
+		String newTask = "Task_112466_update";
 		String note = "Update new task";
-		
+
 		goToCalendarPage();
 		setTimezoneForCalendar("(GMT +07:00) Asia/Ho_Chi_Minh");
-		
+
 		addCalendar(calendar, null, color);
-		tsk.goToAddTaskFromActionBar();
-		tsk.checkSuggestionTaskTime(null, 30);
-		tsk.checkSuggestionTaskTime("07:00", 30);
-		tsk.inputDataTask(task, null, null, null, false, calendar);
-		tsk.editTask(task, newTask, note, getDate(0,"MM/dd/yyyy") + " 12:00", getDate(0,"MM/dd/yyyy") + " 13:00", false, "/TestData/Winter.jpg");
+		task.goToAddTaskFromActionBar();
+		task.checkSuggestionTaskTime(null, 30);
+		task.checkSuggestionTaskTime("07:00", 30);
+		task.inputDataTask(task1, null, null, null, false, calendar);
+		task.editTask(task1, newTask, note, getDate(0,"MM/dd/yyyy") + " 12:00", getDate(0,"MM/dd/yyyy") + " 13:00", false, "/TestData/Winter.jpg");
 		waitForAndGetElement(By.xpath(ELEMENT_EVENT_TASK_ONE_DAY.replace("${taskName}", newTask)));
 
-		tsk.deleteEventTask(newTask);
+		task.deleteEventTask(newTask);
 		deleteCalendar(calendar);
 	}
-	
+
+	/**
+	 * Case ID:111868.
+	 * Test Case Name: Add a task in personal calendar by icon settings of a calendar.
+	 */
 	@Test
-	public void test01_AddEditDeleteTask_FromOnCalendar(){
-		String calendar = "Calendar_109238_2";
+	public void test02_AddEditDeleteTask_FromOnCalendar(){
+		String calendar = "Calendar_111868";
 		String color = "sky_blue";
-		String task = "Task_109238_2";
-		String newTask = "Task_109238_2 update";
+		String task1 = "Task_111868";
+		String newTask = "Task_111868_update";
 		String note = "Update new task";
-		
+
 		goToCalendarPage();
 		setTimezoneForCalendar("(GMT +07:00) Asia/Ho_Chi_Minh");
-		
+
 		addCalendar(calendar, null, color);
-		tsk.goToAddTaskFromCalendar(calendar);
-		tsk.checkSuggestionTaskTime(null, 30);
-		tsk.checkSuggestionTaskTime("07:00", 30);
-		tsk.inputDataTask(task, null, null, null, false, calendar);
-		tsk.editTask(task, newTask, note, getDate(0,"MM/dd/yyyy") + " 12:00", getDate(0,"MM/dd/yyyy") + " 13:00", false, "/TestData/Winter.jpg");
+		task.goToAddTaskFromCalendar(calendar);
+		task.checkSuggestionTaskTime(null, 30);
+		task.checkSuggestionTaskTime("07:00", 30);
+		task.inputDataTask(task1, null, null, null, false, calendar);
+		task.editTask(task1, newTask, note, getDate(0,"MM/dd/yyyy") + " 12:00", getDate(0,"MM/dd/yyyy") + " 13:00", false, "/TestData/Winter.jpg");
 		waitForAndGetElement(By.xpath(ELEMENT_EVENT_TASK_ONE_DAY.replace("${taskName}", newTask)));
 
-		tsk.deleteEventTask(newTask);
+		task.deleteEventTask(newTask);
 		deleteCalendar(calendar);
 	}
-	
-	/* caseId: 99374 -> Add a Task by click on calendar main pane*/
+
+	/**
+	 * Case ID:112467.
+	 * Test Case Name: Add a task in personal calendar by right click Task on working pane.
+	 */
 	@Test
-	public void test01_AddEditDeleteTask_FromMainPane(){
-		String calendar = "Calendar_99374";
+	public void test03_AddEditDeleteTask_FromMainPane(){
+		String calendar = "Calendar_112467";
 		String color = "sky_blue";
-		String task = "Task_99374";
-		String newTask = "Task_99374 update";
+		String task1 = "Task_112467";
+		String newTask = "Task_112467_update";
 		String note = "Update new task";
-		
+
 		goToCalendarPage();
 		setTimezoneForCalendar("(GMT +07:00) Asia/Ho_Chi_Minh");
-		
+
 		addCalendar(calendar, null, color);
-		tsk.goToAddTaskFromMainPane("12:00");
-		tsk.checkSuggestionTaskTime(null, 30);
-		tsk.checkSuggestionTaskTime("07:00", 30);
-		tsk.inputDataTask(task, null, null, null, false, calendar);
-		tsk.editTask(task, newTask, note, getDate(0,"MM/dd/yyyy") + " 12:00", getDate(0,"MM/dd/yyyy") + " 13:00", false, "/TestData/Winter.jpg");
+		task.goToAddTaskFromMainPane("12:00");
+		task.checkSuggestionTaskTime(null, 30);
+		task.checkSuggestionTaskTime("07:00", 30);
+		task.inputDataTask(task1, null, null, null, false, calendar);
+		task.editTask(task1, newTask, note, getDate(0,"MM/dd/yyyy") + " 12:00", getDate(0,"MM/dd/yyyy") + " 13:00", false, "/TestData/Winter.jpg");
 		waitForAndGetElement(By.xpath(ELEMENT_EVENT_TASK_ONE_DAY.replace("${taskName}", newTask)));
 
-		tsk.deleteEventTask(newTask);
+		task.deleteEventTask(newTask);
 		deleteCalendar(calendar);
 	}
-	
-//	/**
-//	 * Add new task to Calendar
-//	 * CaseID 68652
-//	 */
-//	@Test
-//	public void test01_AddNewTask() {
-//		String CALENDAR01 = "CALENDAR_01";
-//
-//		info("Go to Intranet Calendar");
-//		goToCalendarPage();
-//		setTimezoneForCalendar("(GMT +07:00) Asia/Ho_Chi_Minh");
-////		driver.navigate().refresh();
-//
-//		info("Add a new task");
-//		tsk.addQuickTask(CALENDAR01,CALENDAR01,getDate(0,"MM/dd/yyyy"),getDate(0,"MM/dd/yyyy"),false);
-//
-//		info("Confirm added task displays in the calendar");
-//		waitForAndGetElement(By.xpath(ELEMENT_EVENT_TASK_ONE_DAY.replace("${taskName}", CALENDAR01)));
-//
-//		info("restore data");
-//		deleteEventTask(CALENDAR01,selectDayOption.ONEDAY);
-//	}
 
 	/** 
 	 * Check pop-up reminder of a task
@@ -150,7 +143,7 @@ public class Calendar_Task extends CalendarBase {
 	 * PENDING: refer https://jira.exoplatform.org/browse/FQA-1352
 	 */
 	@Test(groups={"pending"})
-	public void test02_CheckPopupReminderOfTask() {
+	public void test04_CheckPopupReminderOfTask() {
 
 		String CALENDAR02 = "CALENDAR_02";
 
@@ -159,12 +152,12 @@ public class Calendar_Task extends CalendarBase {
 		driver.navigate().refresh();
 
 		info("Add a new task");
-		tsk.goToAddTaskFromActionBar();
-		tsk.inputBasicQuickTask(CALENDAR02,CALENDAR02);
-		tsk.inputFromToTask(getDate(0,"MM/dd/yyyy"),getDate(0,"MM/dd/yyyy"),false);
+		task.goToAddTaskFromActionBar();
+		task.inputBasicQuickTask(CALENDAR02,CALENDAR02);
+		task.inputFromToTask(getDate(0,"MM/dd/yyyy"),getDate(0,"MM/dd/yyyy"),false);
 		info("Setting reminder for task");
-		tsk.gotoSetPopupReminder();
-		click(tsk.ELEMENT_BUTTON_TASK_SAVE);
+		task.gotoSetPopupReminder();
+		click(task.ELEMENT_BUTTON_TASK_SAVE);
 
 		info("Check pop-up reminder appear");
 		//TO-DO: need to add confirmation here after finishing setting reminder methods
@@ -181,7 +174,7 @@ public class Calendar_Task extends CalendarBase {
 	 * PENDING: refer https://jira.exoplatform.org/browse/FQA-1352
 	 */
 	@Test(groups={"pending"})
-	public void test03_CheckEmailReminderOfTask() {
+	public void test05_CheckEmailReminderOfTask() {
 
 		String CALENDAR03 = "CALENDAR_03";
 		//TO-DO: update later
@@ -195,13 +188,13 @@ public class Calendar_Task extends CalendarBase {
 		driver.navigate().refresh();
 
 		info("Add a new task");
-		tsk.goToAddTaskFromActionBar();
-		tsk.inputBasicQuickTask(CALENDAR03,CALENDAR03);
-		tsk.inputFromToTask(FROM_TIME,TO_TIME,false);
+		task.goToAddTaskFromActionBar();
+		task.inputBasicQuickTask(CALENDAR03,CALENDAR03);
+		task.inputFromToTask(FROM_TIME,TO_TIME,false);
 		info("Setting reminder for task");
-		tsk.gotoSetEmailReminder();
+		task.gotoSetEmailReminder();
 		//TO-DO: update after finishing setting reminder methods
-		click(tsk.ELEMENT_BUTTON_TASK_SAVE);
+		click(task.ELEMENT_BUTTON_TASK_SAVE);
 		Utils.pause(3000);
 
 		info("Check if e-mail is sent");
@@ -214,53 +207,6 @@ public class Calendar_Task extends CalendarBase {
 		waitForAndGetElement(By.xpath(ELEMENT_EVENT_TASK_ALL_DAY.replace("${taskTitle}", CALENDAR03)));
 		deleteEventTask(CALENDAR03,selectDayOption.ONEDAY);
 	}
-
-//	/** 
-//	 * Edit a task
-//	 * CaseID: 69266
-//	 */
-//	@Test
-//	public void test04_EditTask(){
-//
-//		String CALENDAR04 = "CALENDAR_04";
-//		String TITLE = "CALENDAR_04_edited";
-//		String DESCRIPTION = "CALENDAR_04_description_edited";
-//
-//		info("Go to Intranet Calendar");
-//		goToCalendarPage();
-//		//setTimezoneForCalendar("(GMT +07:00) Asia/Ho_Chi_Minh");
-//		driver.navigate().refresh();
-//
-//		info("Add a new task");
-//		tsk.addQuickTask(CALENDAR04,CALENDAR04,getDate(0,"MM/dd/yyyy"),getDate(0,"MM/dd/yyyy"),false);
-//
-//		info("Edit a task");
-//		tsk.editTask(CALENDAR04,TITLE,DESCRIPTION,null,null, false,"");
-//		
-//		info("Restore data");
-//		waitForAndGetElement(By.xpath(ELEMENT_EVENT_TASK_ONE_DAY.replace("${taskName}", CALENDAR04)));
-//		deleteEventTask(CALENDAR04, selectDayOption.ONEDAY);
-//	}
-//
-//	/** 
-//	 * Delete a task
-//	 * CaseID: 69267
-//	 */
-//	@Test
-//	public void test05_DeleteTask(){
-//		String CALENDAR05 = "CALENDAR_05";
-//
-//		info("Go to Intranet Calendar");
-//		goToCalendarPage();
-//		driver.navigate().refresh();
-//
-//		info("Add a new task");
-//		tsk.addQuickTask(CALENDAR05,CALENDAR05,getDate(0,"MM/dd/yyyy"),getDate(0,"MM/dd/yyyy"),false);
-//
-//		info("Delete a task");
-//		Utils.pause(5000);
-//		deleteEventTask(CALENDAR05, selectDayOption.ONEDAY);
-//	}
 
 	/** 
 	 * Drag & drop a task
@@ -275,7 +221,7 @@ public class Calendar_Task extends CalendarBase {
 		driver.navigate().refresh();
 
 		info("Add a new task");
-		tsk.addQuickTask(CALENDAR06,CALENDAR06,getDate(0,"MM/dd/yyyy"),getDate(0,"MM/dd/yyyy"),false);
+		task.addQuickTask(CALENDAR06,CALENDAR06,getDate(0,"MM/dd/yyyy"),getDate(0,"MM/dd/yyyy"),false);
 
 		info("Drag & drop a task");
 		waitForAndGetElement(By.xpath(ELEMENT_EVENT_TASK_ONE_DAY.replace("${taskName}", CALENDAR06)));
@@ -298,9 +244,9 @@ public class Calendar_Task extends CalendarBase {
 		goToCalendarPage();
 
 		info("Add a new task");
-		tsk.goToAddTaskFromActionBar();
-		tsk.inputBasicQuickTask(CALENDAR07,CALENDAR07);
-		tsk.inputFromToTask(getDate(0,"MM/dd/yyyy"),getDate(0,"MM/dd/yyyy"),false);
+		task.goToAddTaskFromActionBar();
+		task.inputBasicQuickTask(CALENDAR07,CALENDAR07);
+		task.inputFromToTask(getDate(0,"MM/dd/yyyy"),getDate(0,"MM/dd/yyyy"),false);
 		waitForAndGetElement(By.xpath(ELEMENT_EVENT_TASK_ALL_DAY.replace("${taskTitle}", CALENDAR07)));
 
 		info("Resize a task to change date-time");
@@ -310,4 +256,325 @@ public class Calendar_Task extends CalendarBase {
 		Utils.pause(3000);
 		deleteEventTask(CALENDAR07, selectDayOption.ONEDAY);
 	}
+
+	/**
+	 * Case ID:111865, 111867.
+	 * Test Case Name: 
+	 *          + Add a task in group calendar.
+	 *          + Delete a task in group calendar.
+	 * Pre-Condition: 
+	 * Post-Condition: 
+	 * Done with OSs and browsers : 
+	 * Generated by chinhdtt at 2014/08/01 16:54:44
+	 */
+	@Test
+	public  void test01_02_AddDeleteATaskInGroupCalendar() {
+		info("Test 1: Add a task in group calendar");
+		String calendar = "Calendar 111865";
+		String[] groups = {"/developers"};
+		String task1 = "Task 111865";
+
+		//Setting time zone
+		goToCalendarPage();
+		setTimezoneForCalendar("(GMT +07:00) Asia/Ho_Chi_Minh");
+
+		/*
+		- Login by user who has edit right on a group calendar
+		- Click Setting icon of this group calendar and choose [Add Task]
+		 *Expected Outcome: 
+		- The pop up "Quick Add Task" is displayed
+		- The Default Start date "From" is set to Today (System date)
+		- The default duration for Task is 30 minutes		*/
+		addCalendar(calendar, calendar, "red", groups);
+		task.goToAddTaskFromCalendar(calendar);
+		waitForAndGetElement(task.ELEMENT_QUICK_ADD_TASK_POPUP);
+		info("Check default date");
+		String dateFrom = getValue(task.ELEMENT_INPUT_TASK_FROM);
+		String dateTo = getValue(task.ELEMENT_INPUT_TASK_TO);
+		assert dateFrom.equals(getCurrentDate("MM/dd/yyyy"));
+		assert dateTo.equals(getCurrentDate("MM/dd/yyyy"));
+
+		info("Check default time ");
+		task.checkSuggestionTaskTime(null, 30);
+
+		/*
+		- Fill values
+		- Save
+		 *Input Data: 
+		 *Expected Outcome: 
+		- New task for that group calendar is added successfully
+		- The other users in shared group can view the task in the group calendar		*/ 
+		info("Add task for calendar");
+		task.inputDataTask(task1, null, null, null, false, calendar);
+		info("User of group view calendar");
+		acc.userSignIn(userType.DEVELOPER);
+		goToCalendarPage();
+		waitForAndGetElement(ELEMENT_CALENDAR_GET_BY_TAG_LI.replace("${calendar}", calendar));
+		info("User isn't member of Group can't view");
+		acc.userSignIn(userType.PUBLISHER);
+		goToCalendarPage();
+		waitForElementNotPresent(ELEMENT_CALENDAR_GET_BY_TAG_LI.replace("${calendar}", calendar));
+
+		//Delete data test
+		acc.userSignIn(userType.ADMIN);
+		goToCalendarPage();
+		deleteCalendar(calendar);
+	}
+
+	/**
+	 * Case ID:111866.
+	 * Test Case Name: Edit an event in group calendar.
+	 * Pre-Condition: 
+	 * Post-Condition: 
+	 * Done with OSs and browsers : 
+	 * Generated by chinhdtt at 2014/08/01 16:54:44
+	 */
+	@Test
+	public  void test03_EditAnEventInGroupCalendar() {
+		info("Test 2: Edit an event in group calendar");
+		String calendar = "Calendar 111866";
+		String[] groups = {"/developers"};
+		String task1 = "Task 111866";
+		String taskUpdateGroup = "Update 111866";
+		String from = getDate(0,"MM/dd/yyyy") + " 12:00";
+
+		goToCalendarPage();
+		addCalendar(calendar, calendar, "orange", groups);
+		task.goToAddTaskFromCalendar(calendar);
+		info("Add task for calendar");
+		task.inputDataTask(task1, null, null, null, false, calendar);
+
+
+		/*Step 1: Edit an event to a group calendar
+		 *Expected Outcome: 
+		- To time is automatically set = From Time + 30min		*/
+		info("Edit task");
+		driver.navigate().refresh();
+		task.goToEditTaskForm(task1);
+		task.inputBasicQuickTask(taskUpdateGroup, taskUpdateGroup);
+		info("Update time");
+		String[] dateTime = from.split(" ");
+		click(task.ELEMENT_ADD_EDIT_TASK_FROM_TIME_IN, 2);
+		click(task.ELEMENT_ADD_EDIT_TASK_SELECT_FROM_TIME.replace("${time}", dateTime[1]));
+		Utils.pause(1000);
+		info("Check To time is automatically set = From Time + 30min");
+		info(getValue(task.ELEMENT_ADD_EDIT_TASK_TO_TIME_IN));
+		assert getValue(task.ELEMENT_ADD_EDIT_TASK_TO_TIME_IN).equals("12:30");
+
+		/*Step 2: Save
+		 *Input Data: 
+		- Save
+		 *Expected Outcome: 
+		- Event is saved successfully
+		- The other users in group can view updated event in the group calendar		*/ 
+		click(task.ELEMENT_BUTTON_TASK_SAVE_EDIT);
+		waitForAndGetElement(By.xpath(ELEMENT_EVENT_TASK_ONE_DAY.replace("${taskName}", taskUpdateGroup)));
+
+		info("Member of group check");
+		acc.userSignIn(userType.DEVELOPER);
+		goToCalendarPage();
+		waitForAndGetElement(ELEMENT_CALENDAR_GET_BY_TAG_LI.replace("${calendar}", calendar));
+		waitForAndGetElement(By.xpath(ELEMENT_EVENT_TASK_ONE_DAY.replace("${taskName}", taskUpdateGroup)));
+
+		//Delete data test
+		acc.userSignIn(userType.ADMIN);
+		goToCalendarPage();
+		deleteCalendar(calendar);
+	}	
+
+	/**
+	 * Case ID:111871, 111872.
+	 * Test Case Name: 
+	 * 			+ Add a task for shared calendar.
+	 * 			+ Delete a task in shared calendar.
+	 * Pre-Condition: 
+	 * Post-Condition: 
+	 * Done with OSs and browsers : 
+	 * Generated by chinhdtt at 2014/08/01 14:50:33
+	 */
+	@Test
+	public  void test01_02_AddDeleteATaskForSharedCalendar() {
+		info("Test 1: Add a task for shared calendar");
+		String calendar = "Calendar 111871";
+		String task1 = "Task 111871";
+		String[] groupShare = {"mary"};
+		boolean[] edit = {true};
+
+		//Setting time zone
+		goToCalendarPage();
+		setTimezoneForCalendar("(GMT +07:00) Asia/Ho_Chi_Minh");
+
+		/*
+		- Create personal calendar
+		- Share added calendar with edit right
+		 *Expected Outcome: Calendar is created and shared		*/
+		addCalendar(calendar, calendar, "red");
+		shareCalendar(calendar, groupShare, edit , 1);
+
+		/*
+		- Login by shared user
+		- Click wheel icon of shared calendar and select Add task
+		 *Input Data: 
+		 *Expected Outcome: 
+		- The pop up "Quick Add Task" is displayed
+		- The Default Start date "From" is set to Today (System date)
+		- The default duration for task is 30 minutes		*/
+		acc.userSignIn(userType.PUBLISHER);
+		goToCalendarPage();
+		task.goToAddTaskFromCalendar(calendar);
+		waitForAndGetElement(task.ELEMENT_QUICK_ADD_TASK_POPUP);
+		info("Check default date");
+		String dateFrom = getValue(task.ELEMENT_INPUT_TASK_FROM);
+		String dateTo = getValue(task.ELEMENT_INPUT_TASK_TO);
+		assert dateFrom.equals(getCurrentDate("MM/dd/yyyy"));
+		assert dateTo.equals(getCurrentDate("MM/dd/yyyy"));
+
+		info("Check default time ");
+		task.checkSuggestionTaskTime(null, 30);
+
+		/*
+		- Fill values
+		- Save
+		 *Input Data: 
+		 *Expected Outcome: Task is added successfully in shared calendar		*/ 
+		info("Add task for calendar");
+		task.inputDataTask(task1, null, null, null, false, calendar);
+
+		//Delete data test
+		acc.userSignIn(userType.ADMIN);
+		goToCalendarPage();
+		deleteCalendar(calendar);
+	}
+
+	/**
+	 * Case ID:111873.
+	 * Test Case Name: Edit a task in shared calendar.
+	 * Pre-Condition: 
+	 * Post-Condition: 
+	 * Done with OSs and browsers : 
+	 * Generated by chinhdtt at 2014/08/01 14:50:33
+	 */
+	@Test
+	public  void test03_EditATaskInSharedCalendar() {
+		info("Test 3: Edit a task in shared calendar");
+		String calendar = "Calendar 111873";
+		String task1 = "Task 111873";
+		String[] groupShare = {"mary"};
+		boolean[] edit = {true};
+		String taskUpdate = "Task Update 111873";
+		String from = getDate(0,"MM/dd/yyyy") + " 10:00";
+
+		//Setting time zone
+		goToCalendarPage();
+		setTimezoneForCalendar("(GMT +07:00) Asia/Ho_Chi_Minh");
+
+		/*
+		- Create personal calendar
+		- Share added calendar with edit right
+		 *Expected Outcome: Calendar is created and shared		*/
+		addCalendar(calendar, calendar, "purple");
+		shareCalendar(calendar, groupShare, edit , 1);
+
+		/*
+		- Login by shared user
+		- Click wheel icon of shared calendar and select Add task
+		- Input task summary and click Save
+		 *Input Data: 
+		 *Expected Outcome: 
+		- The shared user can see the shared calendar and add task into it.		*/
+		acc.userSignIn(userType.PUBLISHER);
+		goToCalendarPage();
+		task.goToAddTaskFromCalendar(calendar);
+		info("Add task for calendar");
+		task.inputDataTask(task1, null, null, null, false, calendar);
+
+		/*
+		- Right click on event then choose Edit
+		- Update some values
+		- Change From time
+		 *Input Data: 
+		 *Expected Outcome: 
+		- To time is automatically set = From Time + 30min		*/
+		info("Edit event");
+		driver.navigate().refresh();
+		task.goToEditTaskForm(task1);
+		task.inputBasicQuickTask(taskUpdate, taskUpdate);
+		info("Update time");
+		String[] dateTime = from.split(" ");
+		click(task.ELEMENT_ADD_EDIT_TASK_FROM_TIME_IN, 2);
+		click(task.ELEMENT_ADD_EDIT_TASK_SELECT_FROM_TIME.replace("${time}", dateTime[1]));
+		Utils.pause(1000);
+		info("Check To time is automatically set = From Time + 30min");
+		info(getValue(task.ELEMENT_ADD_EDIT_TASK_TO_TIME_IN));
+		assert getValue(task.ELEMENT_ADD_EDIT_TASK_TO_TIME_IN).equals("10:30");
+
+		/*
+		- Save
+		 *Input Data: 
+		 *Expected Outcome: 
+		- Task in shared calendar is edited
+		- Sharing user can see updated task		*/ 
+		click(task.ELEMENT_BUTTON_TASK_SAVE_EDIT);
+		waitForAndGetElement(By.xpath(ELEMENT_EVENT_TASK_ONE_DAY.replace("${taskName}", taskUpdate)));
+
+		//Delete data test
+		acc.userSignIn(userType.ADMIN);
+		goToCalendarPage();
+		deleteCalendar(calendar);
+	}
+
+	/**
+	 * Case ID:111879, 111880.
+	 * Test Case Name: 
+	 *           + Add attachment to task.
+	 *           + Remove attachment of task.
+	 * Pre-Condition: 
+	 * Post-Condition: 
+	 * Done with OSs and browsers : 
+	 * Generated by chinhdtt at 2014/08/01 17:55:51
+	 */
+	@Test
+	public  void test01_AddRemoveAttachmentToTask() {
+		info("Test 1: Add attachment to task");
+		String calendar = "Calendar 111879";
+		String task1 = "Task 111879";
+		/*
+		- Select a calendar, Click Setting icon of this calendar and choose [Add Task] or Click Task button on action bar
+		- Input start and end time
+		- Click [More Details
+		 *Expected Outcome: Add/Edit Task pop-up has appears		*/
+		/*
+		- Click [Add Attachment]
+		- Browse to file and click save
+		 *Input Data: 
+		 *Expected Outcome: 
+		- Attachment is added to event		*/ 
+
+		//Setting time zone
+		goToCalendarPage();
+		setTimezoneForCalendar("(GMT +07:00) Asia/Ho_Chi_Minh");
+
+		addCalendar(calendar, calendar, "orange");		
+		info("Add a attachment to task");
+		task.goToAddTaskFromCalendar(calendar);
+		click(task.ELEMENT_BUTTON_TASK_MORE_DETAILS);
+		task.inputDataTabDetailTask(task1, task1, null, null, false, "/TestData/Winter.jpg");
+		click(task.ELEMENT_BUTTON_TASK_SAVE_DETAILS);
+		Utils.pause(500);
+		driver.navigate().refresh();
+		waitForAndGetElement(By.xpath(ELEMENT_EVENT_TASK_ONE_DAY.replace("${taskName}", task1)));
+
+		//Remove attachment of task
+		info("Edit task");
+		task.goToEditTaskForm(task1);
+		waitForAndGetElement(task.ELEMENT_TASK_ATTACHMENT.replace("${file}", "Winter.jpg"));
+		info("Remove attachment");
+		waitForAndGetElement(task.ELEMENT_TASK_ATTACHMENT.replace("${file}", "Remove"));
+		click(task.ELEMENT_TASK_ATTACHMENT.replace("${file}", "Remove"));
+		waitForElementNotPresent(task.ELEMENT_TASK_ATTACHMENT.replace("${file}", "Winter.jpg"));
+
+		//Delete data test
+		deleteCalendar(calendar);
+	}
+
 }

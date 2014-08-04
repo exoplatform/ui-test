@@ -148,6 +148,7 @@ public class CalendarBase extends PlatformBase {
 	public String ELEMENT_EVENT_TASK_WORKING_PANE_PLF41 = "//*[contains(@id,'UIWeek')]//div[contains(@class,'eventAlldayContent') and contains(.,'${event}')]";
 	public By ELEMENT_EVENT_TASK_DELETE_MENU = By.xpath("//div[@id='tmpMenuElement']//a[@class='eventAction' and contains(@href,'Delete')]");
 	public String MSG_TASK_DELETE = "Are you sure you want to delete this task?";
+
 	public String MSG_EVENT_DELETE = "Are you sure you want to delete this event?";
 
 	public String MSG_CALENDAR_DELETE = "Are you sure you want to delete this calendar and all its events?";
@@ -769,6 +770,7 @@ public class CalendarBase extends PlatformBase {
 	public void deleteSharedCalendar(String calendar){
 
 		executeActionCalendar(calendar,"RemoveSharedCalendar");
+		button.yes();
 		waitForElementNotPresent(By.linkText(calendar));
 	}
 
