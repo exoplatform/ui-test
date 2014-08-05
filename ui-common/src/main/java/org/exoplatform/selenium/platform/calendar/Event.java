@@ -28,6 +28,8 @@ public class Event extends CalendarBase{
 	public By ELEMENT_CHECKBOX_EVENT_ALLDAY = By.xpath("//form[@id='UIQuickAddEvent']//input[@id='allDay']");
 	public By ELEMENT_INPUT_EVENT_FROM = By.name("from");
 	public By ELEMENT_INPUT_EVENT_TO = By.name("to");
+	public By ELEMENT_INPUT_ADD_QUICK_EVENT_FROM = By.xpath("//form[@id='UIQuickAddEvent']//*[@name='from']");
+	public By ELEMENT_INPUT_ADD_QUICK_EVENT_TO = By.xpath("//form[@id='UIQuickAddEvent']//*[@name='to']");
 	public By ELEMENT_INPUT_EVENT_FROM_TIME_SELECTBOX = By.xpath("//*[@id='fromTime']/../input");
 	public By ELEMENT_INPUT_EVENT_TO_TIME_SELECTBOX = By.xpath("//*[@id='toTime']/../input");
 	public By ELEMENT_INPUT_EVENT_FROM_TIME_CURRENT_VALUE = By.xpath("//*[@id='UIQuickAddEventPopupWindow']//*[@name='fromTime']");
@@ -65,6 +67,11 @@ public class Event extends CalendarBase{
 	public By ELEMENT_ADD_EDIT_EVENT_TO_TIME_IN = By.xpath("//*[@id='UIEventForm']//*[@id='toTime']/..//*[@class='UIComboboxInput']");
 	public String ELEMENT_ADD_EDIT_EVENT_SELECT_FROM_TIME = "//*[@id='UIEventForm']//*[@id='fromTime']/..//*[@class='UIComboboxLabel' and text()='${time}']";
 	public String ELEMENT_ADD_EDIT_EVENT_SELECT_TO_TIME = "//*[@id='UIEventForm']//*[@id='toTime']/..//*[@class='UIComboboxLabel' and text()='${time}']";
+	public By ELEMENT_ADD_EVENT_CLOSE_BUTTON = By.xpath("//*[@id='UIQuickAddEventPopupWindow']//*[@title = 'Close Window']");
+	public By ELEMENT_ADD_EVENT_MORE_DETAILS_BUTTON = By.xpath("//div[@id='UIQuickAddEventPopupWindow']//button[contains(text(),'More Details')]");
+	public By ELEMENT_PARTICIPANTS_TAB = By.linkText("Participants");
+	public String ELEMENT_PARTICIPANT_ASK_RADIO = "//input[@value='ask' and @checked='checked']";
+	public By ELEMENT_ADD_DETAIL_EVENT_CLOSE = By.xpath(".//*[@id='UICalendarPopupWindow']//*[@title = 'Close Window']");
 
 	/*Recurring event form*/
 	public By ELEMENT_BUTTON_EVENT_MORE_DETAILS = By.xpath("//*[@id='UIQuickAddEventPopupWindow']//*[text()='More Details']");
@@ -119,6 +126,10 @@ public class Event extends CalendarBase{
 	public By ELEMENT_RECURRING_TEXT_RECURRING_EVENT = By.xpath("//*[@class='popover-content']/*[@class='time clearfix']//*[@class='uiIconCalRecurring']/../../*[@class='text']");
 	public By ELEMENT_EDITED_RECURRING_TEXT_RECURRING_EVENT = By.xpath("//*[@class='popover-content']/*[@class='time clearfix']//*[@class='uiIconCalEditRecurring']/../../*[@class='text']");
 	public By ELEMENT_DESCRIPTION_EVENT = By.xpath("//*[@class='popover-content']/*[@class='description']");
+	
+	/*****List view*****/
+	public String ELEMENT_LIST_VIEW_EVENT_START = "//form[@id='UIListView']//span[contains(text(),'${event}')]/../../td[5]";
+	public String ELEMENT_LIST_VIEW_EVENT_END = "//form[@id='UIListView']//span[contains(text(),'${event}')]/../../td[6]"; 
 
 	public Event(WebDriver dr, String...plfVersion){
 		driver = dr;

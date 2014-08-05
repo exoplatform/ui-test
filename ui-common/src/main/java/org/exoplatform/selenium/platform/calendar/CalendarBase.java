@@ -39,7 +39,11 @@ public class CalendarBase extends PlatformBase {
 	public String ELEMENT_DISPLAY_CALENDAR= "//a[@data-original-title='${calendar}']";
 	public String ELEMENT_COLOR_ICON = "//*[@class='calendarName' and text()='${calendar}']/..//*[@class='colorOpacity']/..";
 	public String ELEMENT_CALENDAR_ID = "//*[@class='calendarName' and text()='${calendar}']/..";
-	
+	public String ELEMENT_FIRST_DAY_WEEK = ".//*[@id='UIWeekView']//div[@class='eventWeekBar']/table//td[2]/a[contains(text(),'${day}')]";
+	public String ELEMENT_MINI_FIRST_DAY_WEEK = "//table[@class='weekList']//td[1 and contains(text(),'${day}')]";
+	public String ELEMENT_WORKING_PANEL_ROW = "//tr[contains(@class,'WorkOffTime')]//div[contains(text(),'${hour}')]";
+	public By ELEMENT_SHOW_HIDE_LEFT_PANEL = By.xpath("//div[@id='ShowHideAll']/i");
+
 	//--------------Mini calendar-------------------
 	public String ELEMENT_MINI_CALENDAR_DATE_HIGHLIGHT = "//td[contains(@class,'highLight') and contains(text(),'${date}')]";
 
@@ -56,6 +60,7 @@ public class CalendarBase extends PlatformBase {
 	public String ELEMENT_VERIFY_CALENDAR = "//*[@id='defaultCalendarTab'] //div[@class='myCalendar']/*[@class='calendarTitle']/..//li[contains(@class,'calendarItem' )]//*[text()='${UserName}']/../a[@class='${CheckboxColor}']//span[@class='${checkicon}']";
 	public By ELEMENT_UNCHECK_BOX = By.xpath("//span[@class='iconCheckBox checkbox']");
 	public By ELEMENT_SETTINGS_FORM_SAVE_BUTTON = By.xpath("//*[@id='UICalendarSettingForm']//*[text()='Save']");
+	public By ELEMENT_SETTINGS_FORM_CANCEL_BUTTON = By.xpath("//*[@id='UICalendarSettingForm']//*[text()='Cancel']");
 
 	public By ELEMENT_VIEW_TYPE = By.name("viewType");
 	public By ELEMENT_SELECTED_VIEW_TYPE = By.xpath("//*[@name='viewType']//*[@selected='selected']");
@@ -71,7 +76,7 @@ public class CalendarBase extends PlatformBase {
 	public By ELEMENT_SHOW_WORKING_TIME_CHECKBOX = By.name("showWorkingTime");
 	public By ELEMENT_BEGIN_TIME = By.name("beginTime");
 	public By ELEMENT_END_TIME = By.name("endTime");
-	public By ELEMENT_MONTH_TAB_ACTIVE = By.xpath("//*[text()='Month']/ancestor::li[contains(@class, 'active')]");
+	public String ELEMENT_VIEW_TAB_ACTIVE = "//*[text()='${tab}']/ancestor::li[contains(@class, 'active')]";
 	public By ELEMENT_WEEK_TAB = By.xpath("//*[text()='Week']/ancestor::li[contains(@class, 'btn')]");
 
 
@@ -89,8 +94,8 @@ public class CalendarBase extends PlatformBase {
 	public String ELEMENT_LIST_EDIT_EVENT_BUTTON = ".//*[@id='UIEventCategoryList']//span[contains(text(),'${categoryName}')]/parent::td/parent::tr//a[@data-original-title='Edit']/i[@class='uiIconEdit uiIconLightGray']";
 
 	//-----------Menu of calendar------------
-//	public By ELEMENT_CAL_ADD_EVENT_MENU = By.id("AddEvent");
-//	public By ELEMENT_CAL_ADD_TASK_MENU = By.id("AddTask");
+	//	public By ELEMENT_CAL_ADD_EVENT_MENU = By.id("AddEvent");
+	//	public By ELEMENT_CAL_ADD_TASK_MENU = By.id("AddTask");
 	public By ELEMENT_CAL_REMOVE_MENU = By.xpath("//*[@id='tmpMenuElement']//a[contains(@href,'RemoveSharedCalendar')]");
 	public By ELEMENT_CAL_IMPORT_MENU = By.xpath("//*[@id='tmpMenuElement']//a[contains(@href,'ImportCalendar')]");
 	public By ELEMENT_CAL_EXPORT_MENU = By.xpath("//*[@id='tmpMenuElement']//a[contains(@href,'ExportCalendar')]");
@@ -160,8 +165,8 @@ public class CalendarBase extends PlatformBase {
 	public By ELEMENT_INPUT_TASK_NOTE_EDIT = By.xpath("//*[@id='eventDetail']//*[@id='description']");
 	public By ELEMENT_BUTTON_TASK_SAVE_EDIT = By.xpath("//*[@id='UITaskForm']//*[text()='Save']");
 	public By ELEMENT_BUTTON_EVENT_SAVE_EDIT = By.xpath("//*[@id='UIEventForm']//button[text()='Save']");
-	
-		
+
+
 	//--------------Import calendar -------------------------
 	public By ELEMENT_CAL_IMPORT_POPUP = By.xpath("//span[@class='PopupTitle popupTitle' and text()='Calendar']");
 	public By ELEMENT_CAL_IMPORT_TYPE = By.name("type");
@@ -208,7 +213,7 @@ public class CalendarBase extends PlatformBase {
 	public String EVENT_MONTH_VIEW = "//*[@id='UIMonthView']//span[contains(text(),'${eventTitle}')]";
 	public String EVENT_LIST_VIEW = "//*[@id='UIListUsers']//span[contains(text(),'${eventTitle}')]";
 	public String EVENT_WORK_WEEK_VIEW = "//*[@id='UIWeekView']//div[contains(text(),'${eventTitle}')]";
-		
+
 	//----------------Group calendar---------------------------------
 	public String ELEMENT_GROUP_CAL = "//*[@id='UICalendars']//a[contains(text(),'${calName}')]";
 	public String ELEMENT_SHOW_IN_GROUP_TAB = "//*[@id='uiPopupAddCalendarContainer']//a[@data-target='#public-tab' and text()='Show in Groups']";
@@ -801,13 +806,13 @@ public class CalendarBase extends PlatformBase {
 	 */
 	public void showWorkingTimes(String beginTime, String endTime){
 		info("Show Working Times");
-		WebElement element = waitForAndGetElement(ELEMENT_SHOW_WORKING_TIME_CHECKBOX, 5000, 1, 2);
-		if (!element.isSelected()){
+		if((beginTime != "") && (endTime != "")){
 			check(ELEMENT_SHOW_WORKING_TIME_CHECKBOX, 2);
 			select(ELEMENT_BEGIN_TIME, beginTime);
 			select(ELEMENT_END_TIME, endTime);	
+
 		}else{
-			info("[Show working times is already checked]");
+			uncheck(ELEMENT_SHOW_WORKING_TIME_CHECKBOX, 2);
 		}
 		Utils.pause(500);
 	}
@@ -1041,7 +1046,7 @@ public class CalendarBase extends PlatformBase {
 			}
 		}
 	}
-	
+
 	/**
 	 * @author lientm
 	 * @param cal
@@ -1056,5 +1061,50 @@ public class CalendarBase extends PlatformBase {
 			click(ELEMENT_CAL_ADD_EVENT_MENU);
 		}
 	}	
-	
+
+	/**
+	 * Set up settings for calendar
+	 * @param view: view
+	 * @param dateFormat: date format
+	 * @param timeFormat: time format
+	 * @param zone: time zone
+	 * @param weekStart: week start
+	 * @param workingTimeFrom: working time from
+	 * @param workingTimeTo: working time to
+	 * @param sendInvitation: = 1: always, = 2: ask; if other, never
+	 */
+	public void settingCalendar(String view, String dateFormat, String timeFormat, String zone, String weekStart, String workingTimeFrom, String workingTimeTo, int...sendInvitation){
+		int invitation = sendInvitation.length > 0 ? sendInvitation[0] : 0;
+		if((view != null) & (view != ""))
+			select(ELEMENT_VIEW_TYPE, view);
+		if((dateFormat != null) & (dateFormat != ""))
+			select(ELEMENT_DATE_FORMAT, dateFormat);
+		if((timeFormat != null)&(timeFormat != ""))
+			select(ELEMENT_TIME_FORMAT, timeFormat);
+		if((zone != null)&(zone != ""))
+			select(ELEMENT_TIME_ZONE, zone);
+		if((weekStart != null) &(weekStart != "")){
+			select(ELEMENT_WEEK_START_ON, weekStart);
+		}
+		WebElement element = waitForAndGetElement(ELEMENT_SHOW_WORKING_TIME_CHECKBOX, 5000, 1, 2);
+		if (element.isSelected()){
+			check(ELEMENT_SHOW_WORKING_TIME_CHECKBOX, 2);
+		}	
+		if (workingTimeFrom != null){
+			showWorkingTimes(workingTimeFrom, workingTimeTo);
+		}
+
+		switch (invitation){
+		case 1: check(ELEMENT_SEND_EVENT_INVITATION.replace("${option}", "Always"), 2);
+		break;
+		case 2: check(ELEMENT_SEND_EVENT_INVITATION.replace("${option}", "Ask"), 2);
+		break;
+		default: check(ELEMENT_SEND_EVENT_INVITATION.replace("${option}", "Never"), 2);
+		break;
+		}
+
+		click(ELEMENT_SETTINGS_FORM_SAVE_BUTTON);
+		waitForElementNotPresent(ELEMENT_SETTINGS_FORM_SAVE_BUTTON);
+	}
+
 }

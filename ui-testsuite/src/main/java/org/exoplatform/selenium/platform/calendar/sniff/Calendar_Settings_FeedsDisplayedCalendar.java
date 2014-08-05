@@ -8,7 +8,6 @@ import org.exoplatform.selenium.platform.calendar.CalendarBase;
 import org.exoplatform.selenium.platform.calendar.Event;
 import org.exoplatform.selenium.platform.calendar.Task;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -18,7 +17,7 @@ import org.testng.annotations.Test;
  * @author hangNTT
  * @date 18 Oct 2013
  */
-public class Calendar_Settings extends CalendarBase{
+public class Calendar_Settings_FeedsDisplayedCalendar extends CalendarBase{
 	ManageAccount acc;
 	Event evt;
 	Task tsk;
@@ -133,73 +132,5 @@ public class Calendar_Settings extends CalendarBase{
 
 		info("--Delete event--");
 		deleteEventTask(eventName, selectDayOption.ONEDAY);
-	}
-
-	/**
-	 * Settings tab
-	 * CaseID 74835
-	 */
-	@Test
-	public void test03_SettingTabs() {
-		info("--Go to calendar Settings --");
-		goToCalendarSettings();
-		waitForAndGetElement(ELEMENT_CALENDAR_POPUP_WINDOW);
-		waitForAndGetElement(ELEMENT_SETTINGS_TAB);
-
-		info("--Verify display calendar tab--");
-		click (ELEMENT_DISPLAYED_CALENDAR);
-		waitForAndGetElement(ELEMENT_DISPLAYED_CALENDAR);
-
-		info("--Verify feeds tab--");
-		click(ELEMENT_FEEDS);
-		waitForAndGetElement(ELEMENT_FEEDS);
-
-		info("-- Check Displayed Calendar tab --");
-		click(ELEMENT_SETTINGS_TAB);
-		select(ELEMENT_VIEW_TYPE, "Month");
-		select(ELEMENT_DATE_FORMAT, "dd/mm/yyyy");
-		select(ELEMENT_TIME_FORMAT, "24 Hours");
-		select(ELEMENT_TIME_ZONE, "(GMT +07:00) Asia/Ho_Chi_Minh");
-		select(ELEMENT_WEEK_START_ON, "Tuesday");
-		showWorkingTimes("08:30", "17:30");
-		check(ELEMENT_SEND_EVENT_INVITATION.replace("${option}", "Ask"), 2);
-		click(ELEMENT_SETTINGS_FORM_SAVE_BUTTON);
-
-		acc.signOut();
-		acc.signIn(DATA_USER1, DATA_PASS);
-		goToCalendarPage();
-		waitForAndGetElement(ELEMENT_MONTH_TAB_ACTIVE);
-		goToCalendarSettings();
-
-		WebElement viewType = waitForAndGetElement(ELEMENT_SELECTED_VIEW_TYPE, 5000, 1, 2);
-		String vType = viewType.getText();
-		assert vType.equals("Month") : "Calendar Settings was failed...";
-
-		WebElement dateFormat = waitForAndGetElement(ELEMENT_SELECTED_DATE_FORMAT, 5000, 1, 2);
-		String dFormat = dateFormat.getText();
-		assert dFormat.equals("dd/mm/yyyy") : "Calendar Settings was failed...";
-
-		WebElement timeFormat = waitForAndGetElement(ELEMENT_SELECTED_TIME_FORMAT, 5000, 1, 2);
-		String tFormat = timeFormat.getText();
-		assert tFormat.equals("24 Hours") : "Calendar Settings was failed...";
-
-		WebElement timeZone = waitForAndGetElement(ELEMENT_SELECTED_TIME_ZONE, 5000, 1, 2);
-		String tZone = timeZone.getText();
-		assert tZone.equals("(GMT +07:00) Asia/Ho_Chi_Minh") : "Calendar Settings was failed...";
-
-		WebElement weekStart = waitForAndGetElement(ELEMENT_SELECTED_WEEK_START_ON, 5000, 1, 2);
-		String day = weekStart.getText();
-		assert day.equals("Tuesday") : "Calendar Settings was failed...";
-
-		WebElement showTimes = waitForAndGetElement(ELEMENT_SHOW_WORKING_TIME_CHECKBOX, 5000, 1, 2);
-		assert showTimes.isSelected(): "Calendar Settings was failed...";
-
-		WebElement sendInvitation = waitForAndGetElement(ELEMENT_SEND_EVENT_INVITATION.replace("${option}", "Ask"), 5000, 1, 2);
-		assert sendInvitation.isSelected(): "Calendar Settings was failed...";
-
-		select(ELEMENT_VIEW_TYPE, "Week");
-		select(ELEMENT_DATE_FORMAT, "mm/dd/yyyy");
-		select(ELEMENT_WEEK_START_ON, "Monday");
-		click(ELEMENT_SETTINGS_FORM_SAVE_BUTTON);
 	}
 }

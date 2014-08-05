@@ -177,4 +177,20 @@ public class Calendar_Calendar extends CalendarBase{
 		goToCalendarPage();
 		deleteCalendar(calendar);
 	}
+	/**
+	 * CaseID: 111900
+	 * Case Name: Check collapse/expand on left panel
+	 */
+	@Test
+	public void test07_CheckCollapseExpandOnLeftPanel() {
+
+		info("Check collapse/expand on left panel");
+		click(ELEMENT_SHOW_HIDE_LEFT_PANEL);
+		waitForElementNotPresent(ELEMENT_CALENDAR_PANEL);
+		waitForElementNotPresent(ELEMENT_TOOLBAR_MINI_CALENDAR);
+		
+		click(ELEMENT_SHOW_HIDE_LEFT_PANEL);
+		waitForAndGetElement(ELEMENT_CALENDAR_PANEL);
+		waitForAndGetElement(ELEMENT_TOOLBAR_MINI_CALENDAR);
+	}
 }

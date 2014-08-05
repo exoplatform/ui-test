@@ -819,8 +819,8 @@ public class TestBase {
 	 * @param fomat
 	 * @return
 	 */
-	public String getCurrentDate(String fomat){
-		DateFormat dateFormat = new SimpleDateFormat(fomat);
+	public String getCurrentDate(String format){
+		DateFormat dateFormat = new SimpleDateFormat(format);
 		Date date = new Date(); 
 		return (dateFormat.format(date));
 	}
@@ -834,8 +834,8 @@ public class TestBase {
 	//	}
 
 	//Add 1 minute to current date time
-	public String addMinuteToCurrentDateTime(int min){
-		DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+	public String addMinuteToCurrentDateTime(int min, String...format){
+		DateFormat dateFormat = format.length > 0 ? new SimpleDateFormat(format[0]) : new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
 		Calendar cal = Calendar.getInstance();
 		cal.add(Calendar.MINUTE, min);
 		return (dateFormat.format(cal.getTime()));	
