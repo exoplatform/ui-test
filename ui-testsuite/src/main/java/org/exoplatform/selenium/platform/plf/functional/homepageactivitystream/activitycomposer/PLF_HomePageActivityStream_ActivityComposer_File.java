@@ -419,9 +419,8 @@ public class PLF_HomePageActivityStream_ActivityComposer_File extends Activity {
 	 * Step 2: Open window for browse file
 	 * Step 3: Select a file
 	 * Step 4: Share an uploaded file
-	 * Bug: https://jira.exoplatform.org/browse/COMMONS-278
 	 */
-	@Test(groups="error")
+	@Test
 	public void test11_ShareAnUploadedFile(){
 		/*Declare variables*/
 		String uploadFileName = "upload77811.pdf";

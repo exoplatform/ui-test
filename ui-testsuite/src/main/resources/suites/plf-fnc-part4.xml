@@ -16,9 +16,6 @@
 			<class name = "org.exoplatform.selenium.platform.plf.functional.navigation.topnavigation.create.PLF_Navigation_TopNavigation_Create_WikiPage" />
 			<class name = "org.exoplatform.selenium.platform.plf.functional.genericuserpopup.PLF_GenericUserPopup_WhoIsOnlineGadget" />
 			<class name = "org.exoplatform.selenium.platform.plf.functional.genericuserpopup.PLF_GenericUserPopup_ActivityStream" />
-			<class name = "org.exoplatform.selenium.platform.plf.functional.homepageactivitystream.filesharingactivity.PLF_HomepageActivityStream_FileSharingActivity" />
-			<class name = "org.exoplatform.selenium.platform.plf.functional.homepageactivitystream.linksharingactivity.PLF_HomepageActivityStream_LinkSharingActivity" />
-			<class name = "org.exoplatform.selenium.platform.plf.functional.homepageactivitystream.statusactivity.PLF_HomepageActivityStream_StatusActivity" />
 			<class name = "org.exoplatform.selenium.platform.plf.functional.homepageactivitystream.refresh.PLF_HomepageActivityStream_Refresh" />
 			<class name = "org.exoplatform.selenium.platform.plf.functional.genericuserpopup.PLF_GenericUserPopup_ConnectionApplication" />
 		</classes>

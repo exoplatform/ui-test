@@ -21,6 +21,9 @@
 			<class name = "org.exoplatform.selenium.platform.plf.functional.homepagegadgets.calendargadget.PLF_HomepageGadgets_CalendarGadget_Events" />
 			<class name = "org.exoplatform.selenium.platform.plf.functional.homepagegadgets.calendargadget.PLF_HomepageGadgets_CalendarGadget_General" />
 			<class name = "org.exoplatform.selenium.platform.plf.functional.homepagegadgets.calendargadget.PLF_HomepageGadgets_CalendarGadget_Settings" />
+			<class name = "org.exoplatform.selenium.platform.plf.functional.homepageactivitystream.activitycomposer.PLF_HomePageActivityStream_ActivityComposer_File" />
+			<class name = "org.exoplatform.selenium.platform.plf.functional.homepageactivitystream.activitycomposer.PLF_HomepageActivityStream_ActivityComposer_General" />
+			<class name = "org.exoplatform.selenium.platform.plf.functional.homepageactivitystream.activitycomposer.PLF_HomepageActivityStream_ActivityComposer_Link" />
 		</classes>
 	</test>
 	<listeners>

@@ -177,13 +177,11 @@ public class PLF_ContentNavigation extends PlatformBase{
 			nav.goToSiteExplorer();
 			click(act.ELEMENT_REFRESH_BUTTON);
 			button.ok();
-			waitForAndGetElement(act.ELEMENT_NAVIGATION_LINK);
 		}	
-		click(act.ELEMENT_NAVIGATION_LINK);
-		waitForTextPresent("Navigation Form");
+		act.openContentNavigationForm();
 		assert waitForAndGetElement(By.id("Node")).getAttribute("value").equalsIgnoreCase("all");
 		act.addContentNavigation(false, "home", null, false, "wiki", "documents", true);
-		waitForTextNotPresent("Navigation Form");
+		waitForElementNotPresent(act.ELEMENT_CONTENT_NAVIGATION_FORM);
 
 		/*
 		- Clickable: Unchecked
@@ -252,10 +250,8 @@ public class PLF_ContentNavigation extends PlatformBase{
 			nav.goToSiteExplorer();
 			click(act.ELEMENT_REFRESH_BUTTON);
 			button.ok();
-			waitForAndGetElement(act.ELEMENT_NAVIGATION_LINK);
 		}	
-		click(act.ELEMENT_NAVIGATION_LINK);
-		waitForTextPresent("Navigation Form");
+		act.openContentNavigationForm();
 		assert waitForAndGetElement(By.id("Node")).getAttribute("value").equalsIgnoreCase("Fire");
 		act.addContentNavigation(true, "", "", false, "", "", true);
 
@@ -301,10 +297,8 @@ public class PLF_ContentNavigation extends PlatformBase{
 			nav.goToSiteExplorer();
 			click(act.ELEMENT_REFRESH_BUTTON);
 			button.ok();
-			waitForAndGetElement(act.ELEMENT_NAVIGATION_LINK);
 		}	
-		click(act.ELEMENT_NAVIGATION_LINK);
-		waitForTextPresent("Navigation Form");
+		act.openContentNavigationForm();
 		System.out.println("waitForAndGetElement " + waitForAndGetElement(By.id("Node")).getAttribute("value"));
 		assert waitForAndGetElement(By.id("Node")).getAttribute("value").equalsIgnoreCase("earth");
 		assert waitForAndGetElement(act.ELEMENT_NAVIGATION_DISPLAY_ORDER).getAttribute("value").equalsIgnoreCase("1000");
@@ -411,13 +405,11 @@ public class PLF_ContentNavigation extends PlatformBase{
 		if(isElementNotPresent(act.ELEMENT_NAVIGATION_LINK)){
 			ecMain.goToManageViews();
 			mnView.editView("Web", "", false, false, paras);
+			nav.goToSiteExplorer();
 			click(act.ELEMENT_REFRESH_BUTTON);
 			button.ok();
-			nav.goToSiteExplorer();
-			waitForAndGetElement(act.ELEMENT_NAVIGATION_LINK);
 		}	
-		click(act.ELEMENT_NAVIGATION_LINK);
-		waitForTextPresent("Navigation Form");	
+		act.openContentNavigationForm();	
 		assert waitForAndGetElement(By.id("Node")).getAttribute("value").equalsIgnoreCase("Fire");
 		act.addContentNavigation(true, "news", "", false, "", "", true);
 		/*Step 2: Check for the Fire node On News Menu

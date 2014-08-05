@@ -15,9 +15,6 @@
 			<class name = "org.exoplatform.selenium.platform.plf.functional.homepageactivitystream.activity.PLF_HomePageActivityStream_Activity_Comment" />
 			<class name = "org.exoplatform.selenium.platform.plf.functional.homepageactivitystream.activity.PLF_HomePageActivityStream_Activity_General" />
 			<class name = "org.exoplatform.selenium.platform.plf.functional.homepageactivitystream.activity.PLF_HomePageActivityStream_Activity_Likes" />
-			<class name = "org.exoplatform.selenium.platform.plf.functional.homepageactivitystream.activitycomposer.PLF_HomePageActivityStream_ActivityComposer_File" />
-			<class name = "org.exoplatform.selenium.platform.plf.functional.homepageactivitystream.activitycomposer.PLF_HomepageActivityStream_ActivityComposer_General" />
-			<class name = "org.exoplatform.selenium.platform.plf.functional.homepageactivitystream.activitycomposer.PLF_HomepageActivityStream_ActivityComposer_Link" />
 			<class name = "org.exoplatform.selenium.platform.plf.functional.homepageactivitystream.activitystream.activityfilter.PLF_HomepageActivityStream_ActivityStream_ActivityFilter_AllActivities" />
 			<class name = "org.exoplatform.selenium.platform.plf.functional.homepageactivitystream.activitystream.activityfilter.PLF_HomepageActivityStream_ActivityStream_ActivityFilter_Connections" />
 			<class name = "org.exoplatform.selenium.platform.plf.functional.homepageactivitystream.activitystream.activityfilter.PLF_HomepageActivityStream_ActivityStream_ActivityFilter_MySpace" />
