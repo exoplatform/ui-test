@@ -10,6 +10,7 @@ import java.util.Date;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.exoplatform.selenium.Button;
 import org.exoplatform.selenium.ManageAlert;
 import org.exoplatform.selenium.Utils;
@@ -46,11 +47,21 @@ public class Event extends CalendarBase{
 	public By ELEMENT_INPUT_EVENT_FROM_TIME = By.xpath("//form[@id='UIQuickAddEvent']//*[@id='fromTime']");
 	public By ELEMENT_INPUT_EVENT_TO_TIME = By.xpath("//form[@id='UIQuickAddEvent']//*[@id='toTime']");
 	public By ELEMENT_ADD_EVENT_SAVE_QUICK_BUTTON = By.xpath("//*[@id='QuickAddEventContainer']//*[text()='Save']");
+	public By ELEMENT_ADD_EVENT_ATTACHMENT_BUTTON = By.xpath("//button[contains(.,'Add Attachment')]");
+	public By ELEMENT_ADD_EVENT_UPLOAD_FILE = By.xpath("//*[@name='file']");
+	public String ELEMENT_ATTACH_FILE_LABEL = "//div[@class='fileNameLabel' and contains(text(),'${file}')]";
+	public By ELEMENT_ATTACH_FILE_SAVE_BUTTON = By.xpath("//form[@id='UIAttachFileForm']//button[text()='Save']");
+	public String ELEMENT_ADD_EVENT_FILE_ATTACHED = "//a[@data-original-title='${file}']";
+	public String ELEMENT_ADD_EVENT_DELETE_ATTACH = "//a[@data-original-title='${file}']/../a[@data-original-title='Remove']";
+	public String ELEMENT_SCHEDULE_DRAG = "//td[${index}]//span[@data-original-title=\"Drag here to change your event's start and end times\"]";
+	public By ELEMENT_SCHEDULE_FROM_TIME_INPUT = By.xpath("//input[@id='timeFrom']/../input[@class='UIComboboxInput']");
+	public By ELEMENT_SCHEDULE_TO_TIME_INPUT = By.xpath("//input[@id='timeTo']/../input[@class='UIComboboxInput']");
 
 	//Preview form
 	public String ELEMENT_EVENT_PREVIEW_TITLE = "//form[@id='UIPreviewPopup']//div[@class='titleList']/strong[text()='${event}']";
 
 	//Form Add event details
+	public By ELEMENT_ADD_EVENT_DETAIL_TAB = By.linkText("Details");
 	public By ELEMENT_ADD_EDIT_EVENT_ALLDAY = By.xpath("//form[@id='UIEventForm']//input[@id='allDay']");
 	public By ELEMENT_ADD_EDIT_EVENT_TITLE = By.xpath("//form[@id='UIEventForm']//*[@id='eventName']");
 	public By ELEMENT_ADD_EDIT_EVENT_DESC = By.xpath("//form[@id='UIEventForm']//*[@id='description']");
@@ -70,8 +81,26 @@ public class Event extends CalendarBase{
 	public By ELEMENT_ADD_EVENT_CLOSE_BUTTON = By.xpath("//*[@id='UIQuickAddEventPopupWindow']//*[@title = 'Close Window']");
 	public By ELEMENT_ADD_EVENT_MORE_DETAILS_BUTTON = By.xpath("//div[@id='UIQuickAddEventPopupWindow']//button[contains(text(),'More Details')]");
 	public By ELEMENT_PARTICIPANTS_TAB = By.linkText("Participants");
-	public String ELEMENT_PARTICIPANT_ASK_RADIO = "//input[@value='ask' and @checked='checked']";
+	public By ELEMENT_SCHEDULE_TAB = By.linkText("Schedule");
+	public String ELEMENT_PARTICIPANT_ASK_CHECKED_RADIO = "//input[@value='ask' and @checked='checked']";
+	public String ELEMENT_PARTICIPANT_ASK_RADIO = "//input[@value='ask']";
+	public String ELEMENT_PARTICIPANT_NEVER_RADIO = "//input[@value='never']";
+	public String ELEMENT_PARTICIPANT_ALWAYS_RADIO = "//input[@value='always']";
 	public By ELEMENT_ADD_DETAIL_EVENT_CLOSE = By.xpath(".//*[@id='UICalendarPopupWindow']//*[@title = 'Close Window']");
+	public By ELEMENT_PARTICIPANT_ADD_ICON = By.xpath("//a[@data-original-title='Add Participant']");
+	public By ELEMENT_PARTICIPANT_PICK_USER = By.xpath("//a[@data-original-title='Pick a User']");
+	public String ELEMENT_PARTICIPANT_SELECT_USER = "//*[@id='${user}']";
+	public By ELEMENT_PARTICIPANT_SEARCH_USER_INPUT = By.xpath(".//*[@id='Quick Search']");
+	public By ELEMENT_PARTICIPANT_SEARCH_USER_ICON = By.xpath("//*[@data-original-title='Quick Search']//i[@class='uiIconSearch uiIconLightGray']");
+	public By ELEMENT_PARTICIPANT_ADD_BUTTON = By.xpath("//a[text()='Add']");
+	public By ELEMENT_PARTICIPANT_SAVE_BUTTON = By.xpath(".//*[@id='UIInvitationForm']//button[text()='Save']");
+	public String ELEMENT_PARTICIPANT_PRIVATE_RADIO = "//input[@value='private']";
+	public String ELEMENT_PARTICIPANT_PUBLIC_RADIO = "//input[@value='public']";
+	public String ELEMENT_PARTICIPANT_BUSY_RADIO = "//input[@value='busy']";
+	public String ELEMENT_PARTICIPANT_AVAILABLE_RADIO = "//input[@value='available']";
+	public String ELEMENT_PARTICIPANT_OUTSIDE_RADIO = "//input[@value='outside']";
+	public String ELEMENT_PARTICIPANT_STATUS = "//span[contains(text(),'${user}')]/../..//td[3]/span";
+	public String ELEMENT_SCHEDULE_TIME = ".//*[@id='${user}']/../../../../..//td[${index}]";
 
 	/*Recurring event form*/
 	public By ELEMENT_BUTTON_EVENT_MORE_DETAILS = By.xpath("//*[@id='UIQuickAddEventPopupWindow']//*[text()='More Details']");
@@ -103,30 +132,30 @@ public class Event extends CalendarBase{
 	/*Open a week*/
 	public By ELEMENT_NEXT_WEEK = By.xpath("//*[@class='UIWeekView uiBox uiWeekView']//*[@class='uiIconMiniArrowRight uiIconLightGray']");
 	public By ELEMENT_PREVIOUS_WEEK = By.xpath("//*[@class='UIWeekView uiBox uiWeekView']//*[@class='uiIconMiniArrowLeft uiIconLightGray']");
-	
+
 	/*Open a day*/
 	public By ELEMENT_PREVIOUS_DAY= By.xpath("//*[@class='uiBox uiDayView']//i[@class='uiIconMiniArrowLeft uiIconLightGray']");
 	public By ELEMENT_NEXT_DAY = By.xpath("//*[@class='uiBox uiDayView']//*[@class='uiIconMiniArrowRight uiIconLightGray']");
-	
+
 	/*Open a month*/
 	public By ELEMENT_PREVIOUS_MONTH= By.xpath("//*[@class='uiMonthView uiBox']//i[@class='uiIconMiniArrowLeft uiIconLightGray']");
 	public By ELEMENT_NEXT_MONTH = By.xpath("//*[@class='uiMonthView uiBox']//*[@class='uiIconMiniArrowRight uiIconLightGray']");
-	
+
 	/*Open a work week*/
 	public By ELEMENT_PREVIOUS_WORK_WEEK= By.xpath("//*[@class='UIWeekView uiBox uiWeekView']//i[@class='uiIconMiniArrowLeft uiIconLightGray']");
 	public By ELEMENT_NEXT_WORK_WEEK = By.xpath("//*[@class='UIWeekView uiBox uiWeekView']//*[@class='uiIconMiniArrowRight uiIconLightGray']");
-	
+
 	/*Open a list*/
 	public By ELEMENT_PREVIOUS_LIST= By.xpath("//*[@class='title']//i[@class='uiIconMiniArrowLeft uiIconLightGray']");
 	public By ELEMENT_NEXT_LIST = By.xpath("//*[@class='title']//*[@class='uiIconMiniArrowRight uiIconLightGray']");
-	
+
 	/*Content recurring*/
 	public By ELEMENT_TITLE_RECURRING_EVENT = By.xpath("//*[@class='popover-content']/*[@class='title clearfix']/*[@class='text']");
 	public By ELEMENT_DATE_TIME_RECURRING_EVENT = By.xpath("//*[@class='popover-content']/*[@class='time clearfix']//*[@class='uiIconCalClockMini']/../../*[@class='text']");
 	public By ELEMENT_RECURRING_TEXT_RECURRING_EVENT = By.xpath("//*[@class='popover-content']/*[@class='time clearfix']//*[@class='uiIconCalRecurring']/../../*[@class='text']");
 	public By ELEMENT_EDITED_RECURRING_TEXT_RECURRING_EVENT = By.xpath("//*[@class='popover-content']/*[@class='time clearfix']//*[@class='uiIconCalEditRecurring']/../../*[@class='text']");
 	public By ELEMENT_DESCRIPTION_EVENT = By.xpath("//*[@class='popover-content']/*[@class='description']");
-	
+
 	/*****List view*****/
 	public String ELEMENT_LIST_VIEW_EVENT_START = "//form[@id='UIListView']//span[contains(text(),'${event}')]/../../td[5]";
 	public String ELEMENT_LIST_VIEW_EVENT_END = "//form[@id='UIListView']//span[contains(text(),'${event}')]/../../td[6]"; 
@@ -338,9 +367,73 @@ public class Event extends CalendarBase{
 	 * @param location
 	 * 				location of event
 	 */
-	public void inputOtherFieldsTabDetailsEvent(String location){
+	public void inputOtherFieldsTabDetailsEvent(String location, String...opt){
 		if(location != null){
 			type(ELEMENT_ADD_EDIT_EVENT_LOCATION,location,true);
+		}
+		if(opt.length>0){
+			click(ELEMENT_ADD_EVENT_ATTACHMENT_BUTTON);
+			WebElement upload = waitForAndGetElement(ELEMENT_ADD_EVENT_UPLOAD_FILE,DEFAULT_TIMEOUT,1,2);
+			String path = Utils.getAbsoluteFilePath(opt[0]);
+			((JavascriptExecutor)driver).executeScript("arguments[0].style.display='block';",upload);
+			upload.sendKeys(path);
+			String[] links = opt[0].split("/");
+			waitForAndGetElement(ELEMENT_ATTACH_FILE_LABEL.replace("${file}", links[links.length - 1]),60000);
+			click(ELEMENT_ATTACH_FILE_SAVE_BUTTON);
+			waitForAndGetElement(ELEMENT_ADD_EVENT_FILE_ATTACHED.replace("${file}", links[links.length - 1]));
+		}
+
+	}
+
+	/**
+	 * Input into participant tab
+	 * @param user: username 
+	 * @param sendInvitation: 1: Never, 2: always, 3: ask
+	 * @param opt: opt[1]: privacy, 1: private, 2: public
+	 * 			   opt[2]: available, 1: Busy, 2: Available, 3: Outside
+	 */
+	public void inputParticipantTab(String user, int sendInvitation,int...opt){
+		click(ELEMENT_PARTICIPANTS_TAB);
+		click(ELEMENT_PARTICIPANT_ADD_ICON);
+		click(ELEMENT_PARTICIPANT_PICK_USER);
+		type(ELEMENT_PARTICIPANT_SEARCH_USER_INPUT,user,true);
+		click(ELEMENT_PARTICIPANT_SEARCH_USER_ICON);
+		check(ELEMENT_PARTICIPANT_SELECT_USER.replace("${user}", user),2);
+		click(ELEMENT_PARTICIPANT_ADD_BUTTON);
+		waitForElementNotPresent(ELEMENT_PARTICIPANT_ADD_BUTTON);
+		click(ELEMENT_PARTICIPANT_SAVE_BUTTON);
+		waitForElementNotPresent(ELEMENT_PARTICIPANT_SAVE_BUTTON);
+		if(sendInvitation != 0)
+			switch (sendInvitation){
+			case 1: click(ELEMENT_PARTICIPANT_NEVER_RADIO,2);
+			break;
+			case 2: click(ELEMENT_PARTICIPANT_ALWAYS_RADIO,2);
+			break;
+			case 3: click(ELEMENT_PARTICIPANT_ASK_RADIO,2);
+			break;
+			default: break;
+			}
+		
+		if(opt.length > 0){
+			switch (opt[0]){
+			case 1: click(ELEMENT_PARTICIPANT_PRIVATE_RADIO,2);
+			break;
+			case 2: click(ELEMENT_PARTICIPANT_PUBLIC_RADIO,2);
+			break;
+			default: break;
+			}
+		}
+		
+		if(opt.length > 1){
+			switch (opt[1]){
+			case 1: click(ELEMENT_PARTICIPANT_BUSY_RADIO,2);
+			break;
+			case 2: click(ELEMENT_PARTICIPANT_AVAILABLE_RADIO,2);
+			break;
+			case 3: click(ELEMENT_PARTICIPANT_OUTSIDE_RADIO,2);
+			break;
+			default: break;
+			}
 		}
 	}
 

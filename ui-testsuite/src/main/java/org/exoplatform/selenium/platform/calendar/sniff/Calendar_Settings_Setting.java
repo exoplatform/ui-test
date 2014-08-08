@@ -73,7 +73,7 @@ public class Calendar_Settings_Setting extends CalendarBase{
 		event.goToAddEventFromActionBar();
 		click(event.ELEMENT_ADD_EVENT_MORE_DETAILS_BUTTON);
 		click(event.ELEMENT_PARTICIPANTS_TAB);
-		waitForAndGetElement(event.ELEMENT_PARTICIPANT_ASK_RADIO,DEFAULT_TIMEOUT,1,2);
+		waitForAndGetElement(event.ELEMENT_PARTICIPANT_ASK_CHECKED_RADIO,DEFAULT_TIMEOUT,1,2);
 		click(event.ELEMENT_ADD_DETAIL_EVENT_CLOSE);
 		goToCalendarSettings();
 		settingCalendar(null, null, null, null, null, null, null, 3);
