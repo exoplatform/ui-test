@@ -443,7 +443,8 @@ public class PLF_GenericUserPopup_ConnectionApplication extends Activity{
 		info("Confirm user name");
 		waitForAndGetElement(hg.ELEMENT_ONLINE_USER_TITLE.replace("${acc}",DATA_USER1), DEFAULT_TIMEOUT,1,2);
 		info("Confirm user activity");
-		assert getText(hg.ELEMENT_USER_POPUP_LAST_ACTIVITY).equalsIgnoreCase(activity);
+//		assert getText(hg.ELEMENT_USER_POPUP_LAST_ACTIVITY).equalsIgnoreCase(activity);
+		waitForAndGetElement(hg.ELEMENT_USER_POPUP_LAST_ACTIVITY.replace("${activity}",activity));
 
 		//Delete data test 
 		acc.userSignIn(userType.ADMIN);
@@ -489,7 +490,8 @@ public class PLF_GenericUserPopup_ConnectionApplication extends Activity{
 		info("Confirm user name");
 		waitForAndGetElement(hg.ELEMENT_ONLINE_USER_TITLE.replace("${acc}",DATA_USER1), DEFAULT_TIMEOUT,1,2);
 		info("Confirm user activity");
-		assert getText(hg.ELEMENT_USER_POPUP_LAST_ACTIVITY).equalsIgnoreCase(uploadFileName);
+//		assert getText(hg.ELEMENT_USER_POPUP_LAST_ACTIVITY).equalsIgnoreCase(uploadFileName);
+		waitForAndGetElement(hg.ELEMENT_USER_POPUP_LAST_ACTIVITY.replace("${activity}",uploadFileName));
 
 		//Delete data test 
 		acc.userSignIn(userType.ADMIN);
@@ -536,8 +538,9 @@ public class PLF_GenericUserPopup_ConnectionApplication extends Activity{
 		info("Confirm user name");
 		waitForAndGetElement(hg.ELEMENT_ONLINE_USER_TITLE.replace("${acc}",DATA_USER1), DEFAULT_TIMEOUT,1,2);
 		info("Confirm user activity");
-		assert getText(hg.ELEMENT_USER_POPUP_LAST_ACTIVITY).equalsIgnoreCase("Yahoo");
-
+//		assert getText(hg.ELEMENT_USER_POPUP_LAST_ACTIVITY).equalsIgnoreCase("Yahoo");
+		waitForAndGetElement(hg.ELEMENT_USER_POPUP_LAST_ACTIVITY.replace("${activity}","Yahoo"));
+		
 		//Delete data test 
 		acc.userSignIn(userType.ADMIN);
 		home.deleteActivity(link, true);
@@ -585,7 +588,8 @@ public class PLF_GenericUserPopup_ConnectionApplication extends Activity{
 		info("Confirm user name");
 		waitForAndGetElement(hg.ELEMENT_ONLINE_USER_TITLE.replace("${acc}",DATA_USER1), DEFAULT_TIMEOUT,1,2);
 		info("Confirm user activity");
-		assert getText(hg.ELEMENT_USER_POPUP_LAST_ACTIVITY).equalsIgnoreCase(activity);
+//		assert getText(hg.ELEMENT_USER_POPUP_LAST_ACTIVITY).equalsIgnoreCase(activity);
+		waitForAndGetElement(hg.ELEMENT_USER_POPUP_LAST_ACTIVITY.replace("${activity}",activity));
 		waitForAndGetElement(hg.ELEMENT_USER_POPUP_STATUS_CONNECT.replace("${status}", "Connect"));
 
 		/*
@@ -651,7 +655,8 @@ public class PLF_GenericUserPopup_ConnectionApplication extends Activity{
 		info("Confirm user name");
 		waitForAndGetElement(hg.ELEMENT_ONLINE_USER_TITLE.replace("${acc}",DATA_USER1), DEFAULT_TIMEOUT,1,2);
 		info("Confirm user activity");
-		assert getText(hg.ELEMENT_USER_POPUP_LAST_ACTIVITY).equalsIgnoreCase(activity);
+//		assert getText(hg.ELEMENT_USER_POPUP_LAST_ACTIVITY).equalsIgnoreCase(activity);
+		waitForAndGetElement(hg.ELEMENT_USER_POPUP_LAST_ACTIVITY.replace("${activity}",activity));
 		waitForAndGetElement(hg.ELEMENT_USER_POPUP_STATUS_CONNECT.replace("${status}", "Confirm"));
 
 		//Delete data test
@@ -713,7 +718,8 @@ public class PLF_GenericUserPopup_ConnectionApplication extends Activity{
 		info("Confirm user name");
 		waitForAndGetElement(hg.ELEMENT_ONLINE_USER_TITLE.replace("${acc}",DATA_USER2), DEFAULT_TIMEOUT,1,2);
 		info("Confirm user activity");
-		assert getText(hg.ELEMENT_USER_POPUP_LAST_ACTIVITY).equalsIgnoreCase(activity);
+//		assert getText(hg.ELEMENT_USER_POPUP_LAST_ACTIVITY).equalsIgnoreCase(activity);
+		waitForAndGetElement(hg.ELEMENT_USER_POPUP_LAST_ACTIVITY.replace("${activity}",activity));
 		waitForAndGetElement(hg.ELEMENT_USER_POPUP_STATUS_CONNECT.replace("${status}", "Cancel Request"));
 
 		//Delete data test
@@ -775,7 +781,8 @@ public class PLF_GenericUserPopup_ConnectionApplication extends Activity{
 		info("Confirm user name");
 		waitForAndGetElement(hg.ELEMENT_ONLINE_USER_TITLE.replace("${acc}",DATA_USER1), DEFAULT_TIMEOUT,1,2);
 		info("Confirm user activity");
-		assert getText(hg.ELEMENT_USER_POPUP_LAST_ACTIVITY).equalsIgnoreCase(activity);
+//		assert getText(hg.ELEMENT_USER_POPUP_LAST_ACTIVITY).equalsIgnoreCase(activity);
+		waitForAndGetElement(hg.ELEMENT_USER_POPUP_LAST_ACTIVITY.replace("${activity}",activity));
 		waitForAndGetElement(hg.ELEMENT_USER_POPUP_STATUS_CONNECT.replace("${status}", "Remove Connection"));
 
 		//Delete data test

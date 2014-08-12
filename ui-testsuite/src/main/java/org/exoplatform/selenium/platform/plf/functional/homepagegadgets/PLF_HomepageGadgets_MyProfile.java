@@ -3,6 +3,7 @@ package org.exoplatform.selenium.platform.plf.functional.homepagegadgets;
 import static org.exoplatform.selenium.TestLogger.info;
 
 import org.exoplatform.selenium.Utils;
+import org.exoplatform.selenium.platform.HomePageActivity;
 import org.exoplatform.selenium.platform.HomePageGadget;
 import org.exoplatform.selenium.platform.ManageAccount;
 import org.exoplatform.selenium.platform.ManageApplications;
@@ -26,6 +27,7 @@ public class PLF_HomepageGadgets_MyProfile extends Activity{
 	ManageApplications app;
 	PageEditor pageEditor;
 	HomePageGadget hpGadget;
+	HomePageActivity hpAct;
 
 	@BeforeMethod
 	public void beforeMethods(){	
@@ -37,6 +39,7 @@ public class PLF_HomepageGadgets_MyProfile extends Activity{
 		acc = new ManageAccount(driver, this.plfVersion);
 		pageEditor = new PageEditor(driver, this.plfVersion);
 		hpGadget = new HomePageGadget(driver, this.plfVersion);
+		hpAct = new HomePageActivity(driver,this.plfVersion);
 		acc.signIn(DATA_USER1, DATA_PASS);		
 	}
 
@@ -64,7 +67,6 @@ public class PLF_HomepageGadgets_MyProfile extends Activity{
 		//Add my profile gadget to homepage
 		naviToolbar.goToHomePage();
 		//Add My Profile gadget
-		naviToolbar.goToApplicationRegistry();
 		// Import all application
 		app.importApplication();
 		naviToolbar.goToHomePage();
@@ -147,7 +149,6 @@ public class PLF_HomepageGadgets_MyProfile extends Activity{
 		//Add my profile gadget to homepage
 		naviToolbar.goToHomePage();
 		//Add My Profile gadget
-		naviToolbar.goToApplicationRegistry();
 		// Import all application
 		app.importApplication();
 		naviToolbar.goToHomePage();
@@ -197,12 +198,13 @@ public class PLF_HomepageGadgets_MyProfile extends Activity{
 		assert newName.contains(newFullName);
 		assert !newName.contains(fullName);
 		driver.switchTo().defaultContent();
-
+		waitForAndGetElement(hpAct.ELEMENT_ACTIVITY_TEXTBOX);
+		Utils.pause(5000);
 		/*Clear data*/
 		info("Clear data");
 		naviToolbar.goToEditPageEditor();
 		waitForAndGetElement(pageEditor.ELEMENT_VIEW_PAGE_PROPERTIES);
-		pageEditor.removePortlet(hpGadget.ELEMENT_GADGET_PORLET_IN_MIDDLE_HOME_PAGE, hpGadget.ELEMENT_DELETE_ICON_GADGET_PORLET_IN_MIDDLE_HOME_PAGE);
+		pageEditor.removePortlet(hpGadget.ELEMENT_EDIT_PAGE_IN_MIDDLE_PORTLET.replace("${portlet}", "My Profile"), hpGadget.ELEMENT_EDIT_PAGE_PORTLET_DELETE_ICON.replace("${portlet}", "My Profile"));
 		naviToolbar.goToMyProfile();
 		peoPro.editUserBasicInformation(firstName, "", "");
 	}
@@ -226,7 +228,6 @@ public class PLF_HomepageGadgets_MyProfile extends Activity{
 		//Add my profile gadget to homepage
 		naviToolbar.goToHomePage();
 		//Add My Profile gadget
-		naviToolbar.goToApplicationRegistry();
 		// Import all application
 		app.importApplication();
 		naviToolbar.goToHomePage();

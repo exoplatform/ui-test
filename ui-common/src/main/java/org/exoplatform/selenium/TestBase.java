@@ -62,7 +62,7 @@ public class TestBase {
 	//public final By ELEMENT_MENU_EDIT_LINK = By.xpath("//i[@class='uiIconPLF24x24Edit']");
 	//public final By ELEMENT_MENU_PAGE_LINK = By.linkText("Page");
 	//public final String AJAX_LOADING_MASK = "//div[@id='AjaxLoadingMask']";
-	public final String DEFAULT_BASEURL="http://localhost:8080/portal";
+	public final String DEFAULT_BASEURL="http://192.168.3.50:8080/portal";
 
 	/*======= Welcome Screen (Term and Conditions) =====*/
 	public final By ELEMENT_FIRSTNAME_ACCOUNT = By.name("firstNameAccount");
@@ -103,8 +103,10 @@ public class TestBase {
 		} else {
 			FirefoxProfile profile = new FirefoxProfile();
             profile.setPreference("plugins.hide_infobar_for_missing_plugin", true);
+            profile.setPreference("dom.max_script_run_time", 0);
             DesiredCapabilities capabilities = DesiredCapabilities.firefox();
             capabilities.setCapability(FirefoxDriver.PROFILE, profile);
+            
 			driver = new FirefoxDriver();
 		}
 		baseUrl = System.getProperty("baseUrl");

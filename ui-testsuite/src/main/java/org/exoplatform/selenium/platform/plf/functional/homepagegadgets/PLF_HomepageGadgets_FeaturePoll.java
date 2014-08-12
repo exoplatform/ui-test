@@ -151,6 +151,7 @@ public class PLF_HomepageGadgets_FeaturePoll extends BasicAction{
 		By ELEMENT_TOPIC_TITLE_1 = By.linkText(titleTop1);
 		By ELEMENT_TOPIC_TITLE_2 = By.linkText(titleTop2);
 		
+		
 		info("Test 2: Setting for the gadget");
 		/*Step Number: 1
 		*Step Name: Step 1: Add new polls
@@ -184,15 +185,13 @@ public class PLF_HomepageGadgets_FeaturePoll extends BasicAction{
 			
 		*Expected Outcome: 
 			The selected poll is shown */
-		naviToolbar.goToHomePage();
 		//Add poll gadget
-		naviToolbar.goToApplicationRegistry();
 		// Import all application
+		app.showImportApplication(true);
 		app.importApplication();
 		naviToolbar.goToHomePage();
 		naviToolbar.goToEditPageEditor();
-		click(ELEMENT_CATEGORY_GADGETS);
-		click(ELEMENT_SWITCH_VIEW_MODE);
+		click(ELEMENT_CATEGORY_COLLABORATION);
 		dragAndDropToObject(hpGadget.ELEMENT_APPLICATION_POLL, hpGadget.ELEMENT_MIDDLE_CONTAINER);
 		waitForAndGetElement(pageEditor.ELEMENT_PORTLET_DRAGGED.replace("${portlet}", "Featured Poll"));
 		pageEditor.finishEditLayout();	

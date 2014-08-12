@@ -192,7 +192,7 @@ public class PLF_HomePageActivityStream_Activity_Likes extends Activity {
 	 * Step 1: Check message
 	 * ERROR: Refer: https://jira.exoplatform.org/browse/SOC-4291
 	 */
-	@Test (groups="error")
+	@Test 
 	public void test04_DisplayMessageAfterMoreThan2UserLikeActivity(){
 		//Declare variable
 		String activity = "activity 78627";

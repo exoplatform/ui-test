@@ -335,7 +335,8 @@ public class PLF_GenericUserPopup_ActivityStream extends Activity{
 		waitForAndGetElement(hg.ELEMENT_ONLINE_USER_ACC_IMG.replace("${acc}",DATA_USER1), DEFAULT_TIMEOUT,1,2);
 		info("Confirm user name");
 		waitForAndGetElement(hg.ELEMENT_ONLINE_USER_TITLE.replace("${acc}",DATA_USER1), DEFAULT_TIMEOUT,1,2);
-		assert getText(hg.ELEMENT_USER_POPUP_LAST_ACTIVITY).equalsIgnoreCase(activity);
+//		assert getText(hg.ELEMENT_USER_POPUP_LAST_ACTIVITY).equalsIgnoreCase(activity);
+		waitForAndGetElement(hg.ELEMENT_USER_POPUP_LAST_ACTIVITY.replace("${activity}",activity));
 		info("Last activity of user displayes true");
 
 		//Delete date test
@@ -377,7 +378,8 @@ public class PLF_GenericUserPopup_ActivityStream extends Activity{
 		waitForAndGetElement(hg.ELEMENT_ONLINE_USER_ACC_IMG.replace("${acc}",DATA_USER1), DEFAULT_TIMEOUT,1,2);
 		info("Confirm user name");
 		waitForAndGetElement(hg.ELEMENT_ONLINE_USER_TITLE.replace("${acc}",DATA_USER1), DEFAULT_TIMEOUT,1,2);
-		assert getText(hg.ELEMENT_USER_POPUP_LAST_ACTIVITY).equalsIgnoreCase(activity);
+//		assert getText(hg.ELEMENT_USER_POPUP_LAST_ACTIVITY).equalsIgnoreCase(activity);
+		waitForAndGetElement(hg.ELEMENT_USER_POPUP_LAST_ACTIVITY.replace("${activity}",activity));
 		info("Last activity of user displayes true");
 
 		//Delete data test
@@ -422,7 +424,8 @@ public class PLF_GenericUserPopup_ActivityStream extends Activity{
 		waitForAndGetElement(hg.ELEMENT_ONLINE_USER_ACC_IMG.replace("${acc}",DATA_USER1), DEFAULT_TIMEOUT,1,2);
 		info("Confirm user name");
 		waitForAndGetElement(hg.ELEMENT_ONLINE_USER_TITLE.replace("${acc}",DATA_USER1), DEFAULT_TIMEOUT,1,2);
-		assert getText(hg.ELEMENT_USER_POPUP_LAST_ACTIVITY).equalsIgnoreCase(activity);
+//		assert getText(hg.ELEMENT_USER_POPUP_LAST_ACTIVITY).equalsIgnoreCase(activity);
+		waitForAndGetElement(hg.ELEMENT_USER_POPUP_LAST_ACTIVITY.replace("${activity}",activity));
 		info("Last activity of user displayes true");
 
 		//Delete data test
@@ -466,7 +469,8 @@ public class PLF_GenericUserPopup_ActivityStream extends Activity{
 		waitForAndGetElement(hg.ELEMENT_ONLINE_USER_ACC_IMG.replace("${acc}",DATA_USER2), DEFAULT_TIMEOUT,1,2);
 		info("Confirm user name");
 		waitForAndGetElement(hg.ELEMENT_ONLINE_USER_TITLE.replace("${acc}",DATA_USER2), DEFAULT_TIMEOUT,1,2);
-		assert getText(hg.ELEMENT_USER_POPUP_LAST_ACTIVITY).equalsIgnoreCase(activity);
+//		assert getText(hg.ELEMENT_USER_POPUP_LAST_ACTIVITY).equalsIgnoreCase(activity);
+		waitForAndGetElement(hg.ELEMENT_USER_POPUP_LAST_ACTIVITY.replace("${activity}",activity));
 		info("Last activity of user displayes true");
 
 		//Detele data test
@@ -503,7 +507,8 @@ public class PLF_GenericUserPopup_ActivityStream extends Activity{
 		- The Generic popup is displayed with the last activity posted: Status		*/ 
 		mouseOver(home.ELEMENT_ACTIVITY_AUTHOR_AVATAR.replace("${index}","1").replace("${author}", user1), true);
 		waitForAndGetElement(ELEMENT_USER_PROFILE_POPUP.replace("${userName}", user1));
-		assert getText(hg.ELEMENT_USER_POPUP_LAST_ACTIVITY).equalsIgnoreCase(activity);
+//		assert getText(hg.ELEMENT_USER_POPUP_LAST_ACTIVITY).equalsIgnoreCase(activity);
+		waitForAndGetElement(hg.ELEMENT_USER_POPUP_LAST_ACTIVITY.replace("${activity}",activity));
 		info("Last activity of user displayes true");
 
 		//Delete date test
@@ -540,7 +545,8 @@ public class PLF_GenericUserPopup_ActivityStream extends Activity{
 		waitForAndGetElement(home.ELEMENT_ACTIVITY_AUTHOR_NAME.replace("${index}","1").replace("${author}", user1));
 		mouseOver(home.ELEMENT_ACTIVITY_AUTHOR_NAME.replace("${index}","1").replace("${author}", user1), true);
 		waitForAndGetElement(ELEMENT_USER_PROFILE_POPUP.replace("${userName}", user1));
-		assert getText(hg.ELEMENT_USER_POPUP_LAST_ACTIVITY).equalsIgnoreCase(activity);
+//		assert getText(hg.ELEMENT_USER_POPUP_LAST_ACTIVITY).equalsIgnoreCase(activity);
+		waitForAndGetElement(hg.ELEMENT_USER_POPUP_LAST_ACTIVITY.replace("${activity}",activity));
 		info("Last activity of user displayes true");
 
 		//Delete data test
@@ -583,7 +589,8 @@ public class PLF_GenericUserPopup_ActivityStream extends Activity{
 		mouseOver(home.ELEMENT_ACTIVITY_AUTHOR_AVATAR.replace("${index}","1").replace("${author}", user1), true);
 		waitForAndGetElement(ELEMENT_USER_PROFILE_POPUP.replace("${userName}", user1));
 		info("Last activity of user displayes true");
-		assert getText(hg.ELEMENT_USER_POPUP_LAST_ACTIVITY).equalsIgnoreCase(uploadFileName);		
+//		assert getText(hg.ELEMENT_USER_POPUP_LAST_ACTIVITY).equalsIgnoreCase(uploadFileName);
+		waitForAndGetElement(hg.ELEMENT_USER_POPUP_LAST_ACTIVITY.replace("${activity}",uploadFileName));
 
 		//Delete date test
 		nav.goToHomePage();
@@ -631,7 +638,8 @@ public class PLF_GenericUserPopup_ActivityStream extends Activity{
 		mouseOver(ELEMENT_AVATAR_LIST_LIKER_INDEX.replace("${activityText}", uploadFileName).replace("${index}", "1"),true);
 		waitForAndGetElement(ELEMENT_USER_PROFILE_POPUP.replace("${userName}", user1));
 		info("Last activity of user displayes true");
-		assert getText(hg.ELEMENT_USER_POPUP_LAST_ACTIVITY).equalsIgnoreCase(uploadFileName);		
+//		assert getText(hg.ELEMENT_USER_POPUP_LAST_ACTIVITY).equalsIgnoreCase(uploadFileName);
+		waitForAndGetElement(hg.ELEMENT_USER_POPUP_LAST_ACTIVITY.replace("${activity}",uploadFileName));
 
 		//Delete date test
 		nav.goToHomePage();
@@ -684,7 +692,8 @@ public class PLF_GenericUserPopup_ActivityStream extends Activity{
 		mouseOver(home.ELEMENT_ACTIVITY.replace("${activityText}",user1), true);		
 		waitForAndGetElement(ELEMENT_USER_PROFILE_POPUP.replace("${userName}", user1));
 		info("Last activity of user displayes true");
-		assert getText(hg.ELEMENT_USER_POPUP_LAST_ACTIVITY).equalsIgnoreCase(user1);
+//		assert getText(hg.ELEMENT_USER_POPUP_LAST_ACTIVITY).equalsIgnoreCase(user1);
+		waitForAndGetElement(hg.ELEMENT_USER_POPUP_LAST_ACTIVITY.replace("${activity}",user1));
 
 		//Detele data test
 		home.deleteActivity(user1, true);
@@ -723,7 +732,8 @@ public class PLF_GenericUserPopup_ActivityStream extends Activity{
 		mouseOver(home.ELEMENT_ACTIVITY_AUTHOR_NAME.replace("${index}","1").replace("${author}", user1), true);
 		waitForAndGetElement(ELEMENT_USER_PROFILE_POPUP.replace("${userName}", user1));
 		info("Last activity of user displayes true");
-		assert getText(hg.ELEMENT_USER_POPUP_LAST_ACTIVITY).equalsIgnoreCase(uploadFileName);		
+//		assert getText(hg.ELEMENT_USER_POPUP_LAST_ACTIVITY).equalsIgnoreCase(uploadFileName);
+		waitForAndGetElement(hg.ELEMENT_USER_POPUP_LAST_ACTIVITY.replace("${activity}",uploadFileName));
 
 		//Delete date test
 		nav.goToHomePage();
@@ -763,7 +773,8 @@ public class PLF_GenericUserPopup_ActivityStream extends Activity{
 		mouseOver(home.ELEMENT_ACTIVITY_AUTHOR_AVATAR.replace("${index}","1").replace("${author}", user1), true);
 		waitForAndGetElement(ELEMENT_USER_PROFILE_POPUP.replace("${userName}", user1));
 		info("Last activity of user displayes true");
-		assert getText(hg.ELEMENT_USER_POPUP_LAST_ACTIVITY).equalsIgnoreCase("Yahoo");	
+//		assert getText(hg.ELEMENT_USER_POPUP_LAST_ACTIVITY).equalsIgnoreCase("Yahoo");
+		waitForAndGetElement(hg.ELEMENT_USER_POPUP_LAST_ACTIVITY.replace("${activity}","Yahoo"));
 
 		//Delete data test
 		nav.goToHomePage();
@@ -803,7 +814,8 @@ public class PLF_GenericUserPopup_ActivityStream extends Activity{
 		mouseOver(ELEMENT_AVATAR_LIST_LIKER_INDEX.replace("${activityText}", link).replace("${index}", "1"),true);
 		waitForAndGetElement(ELEMENT_USER_PROFILE_POPUP.replace("${userName}", user1));
 		info("Last activity of user displayes true");
-		assert getText(hg.ELEMENT_USER_POPUP_LAST_ACTIVITY).equalsIgnoreCase("Yahoo");	
+//		assert getText(hg.ELEMENT_USER_POPUP_LAST_ACTIVITY).equalsIgnoreCase("Yahoo");
+		waitForAndGetElement(hg.ELEMENT_USER_POPUP_LAST_ACTIVITY.replace("${activity}","Yahoo"));
 
 		//Delete data test
 		nav.goToHomePage();
@@ -849,7 +861,8 @@ public class PLF_GenericUserPopup_ActivityStream extends Activity{
 		mouseOver(home.ELEMENT_ACTIVITY.replace("${activityText}",user2), true);
 		waitForAndGetElement(ELEMENT_USER_PROFILE_POPUP.replace("${userName}", user2));
 		info("Last activity of user displayes true");
-		assert getText(hg.ELEMENT_USER_POPUP_LAST_ACTIVITY).equalsIgnoreCase("Yahoo");	
+//		assert getText(hg.ELEMENT_USER_POPUP_LAST_ACTIVITY).equalsIgnoreCase("Yahoo");
+		waitForAndGetElement(hg.ELEMENT_USER_POPUP_LAST_ACTIVITY.replace("${activity}","Yahoo"));
 		Utils.pause(1000);
 
 		//Delete data test
@@ -884,7 +897,8 @@ public class PLF_GenericUserPopup_ActivityStream extends Activity{
 		mouseOver(home.ELEMENT_ACTIVITY_AUTHOR_NAME.replace("${index}","1").replace("${author}", user1), true);
 		waitForAndGetElement(ELEMENT_USER_PROFILE_POPUP.replace("${userName}", user1));
 		info("Last activity of user displayes true");
-		assert getText(hg.ELEMENT_USER_POPUP_LAST_ACTIVITY).equalsIgnoreCase("Yahoo");	
+//		assert getText(hg.ELEMENT_USER_POPUP_LAST_ACTIVITY).equalsIgnoreCase("Yahoo");	
+		waitForAndGetElement(hg.ELEMENT_USER_POPUP_LAST_ACTIVITY.replace("${activity}","Yahoo"));
 
 		//Delete data test
 		nav.goToHomePage();
@@ -939,7 +953,8 @@ public class PLF_GenericUserPopup_ActivityStream extends Activity{
 		info("Confirm user name");
 		waitForAndGetElement(hg.ELEMENT_ONLINE_USER_TITLE.replace("${acc}",DATA_USER1), DEFAULT_TIMEOUT,1,2);
 		info("Last activity of user displayes true");
-		assert getText(hg.ELEMENT_USER_POPUP_LAST_ACTIVITY).equalsIgnoreCase(activity);	
+//		assert getText(hg.ELEMENT_USER_POPUP_LAST_ACTIVITY).equalsIgnoreCase(activity);
+		waitForAndGetElement(hg.ELEMENT_USER_POPUP_LAST_ACTIVITY.replace("${activity}",activity));
 		info("Button [Connect] is displayed");
 		waitForAndGetElement(hg.ELEMENT_USER_POPUP_STATUS_CONNECT.replace("${status}", "Connect"), DEFAULT_TIMEOUT,1,2);
 		Utils.pause(1000);
@@ -1029,7 +1044,8 @@ public class PLF_GenericUserPopup_ActivityStream extends Activity{
 		info("Confirm user name");
 		waitForAndGetElement(hg.ELEMENT_ONLINE_USER_TITLE.replace("${acc}",DATA_USER1), DEFAULT_TIMEOUT,1,2);
 		info("Last activity of user displayes true");
-		assert getText(hg.ELEMENT_USER_POPUP_LAST_ACTIVITY).equalsIgnoreCase(activity1);	
+//		assert getText(hg.ELEMENT_USER_POPUP_LAST_ACTIVITY).equalsIgnoreCase(activity1);
+		waitForAndGetElement(hg.ELEMENT_USER_POPUP_LAST_ACTIVITY.replace("${activity}",activity1));
 		info("Button [Connect] is displayed");
 		waitForAndGetElement(hg.ELEMENT_USER_POPUP_STATUS_CONNECT.replace("${status}", "Connect"), DEFAULT_TIMEOUT,1,2);
 		Utils.pause(1000);
@@ -1111,7 +1127,8 @@ public class PLF_GenericUserPopup_ActivityStream extends Activity{
 		info("Confirm user name");
 		waitForAndGetElement(hg.ELEMENT_ONLINE_USER_TITLE.replace("${acc}",DATA_USER1), DEFAULT_TIMEOUT,1,2);
 		info("Last activity of user displayes true");
-		assert getText(hg.ELEMENT_USER_POPUP_LAST_ACTIVITY).equalsIgnoreCase(activity);	
+//		assert getText(hg.ELEMENT_USER_POPUP_LAST_ACTIVITY).equalsIgnoreCase(activity);
+		waitForAndGetElement(hg.ELEMENT_USER_POPUP_LAST_ACTIVITY.replace("${activity}",activity));
 		info("Button [Connect] is displayed");
 		waitForAndGetElement(hg.ELEMENT_USER_POPUP_STATUS_CONNECT.replace("${status}", "Connect"), DEFAULT_TIMEOUT,1,2);
 		Utils.pause(1000);
@@ -1191,7 +1208,8 @@ public class PLF_GenericUserPopup_ActivityStream extends Activity{
 		info("Confirm user name");
 		waitForAndGetElement(hg.ELEMENT_ONLINE_USER_TITLE.replace("${acc}",DATA_USER1), DEFAULT_TIMEOUT,1,2);
 		info("Last activity of user displayes true");
-		assert getText(hg.ELEMENT_USER_POPUP_LAST_ACTIVITY).equalsIgnoreCase(activity);	
+//		assert getText(hg.ELEMENT_USER_POPUP_LAST_ACTIVITY).equalsIgnoreCase(activity);	
+		waitForAndGetElement(hg.ELEMENT_USER_POPUP_LAST_ACTIVITY.replace("${activity}",activity));
 		info("Button [Connect] is displayed");
 		waitForAndGetElement(hg.ELEMENT_USER_POPUP_STATUS_CONNECT.replace("${status}", "Connect"), DEFAULT_TIMEOUT,1,2);
 		Utils.pause(1000);
@@ -1275,7 +1293,8 @@ public class PLF_GenericUserPopup_ActivityStream extends Activity{
 		info("Confirm user name");
 		waitForAndGetElement(hg.ELEMENT_ONLINE_USER_TITLE.replace("${acc}",DATA_USER1), DEFAULT_TIMEOUT,1,2);
 		info("Last activity of user displayes true");
-		assert getText(hg.ELEMENT_USER_POPUP_LAST_ACTIVITY).equalsIgnoreCase(activity);	
+//		assert getText(hg.ELEMENT_USER_POPUP_LAST_ACTIVITY).equalsIgnoreCase(activity);
+		waitForAndGetElement(hg.ELEMENT_USER_POPUP_LAST_ACTIVITY.replace("${activity}",activity));
 		info("Button [Connect] is displayed");
 		waitForAndGetElement(hg.ELEMENT_USER_POPUP_STATUS_CONNECT.replace("${status}", "Confirm"), DEFAULT_TIMEOUT,1,2);
 		Utils.pause(1000);
@@ -1362,7 +1381,8 @@ public class PLF_GenericUserPopup_ActivityStream extends Activity{
 		info("Confirm user name");
 		waitForAndGetElement(hg.ELEMENT_ONLINE_USER_TITLE.replace("${acc}",DATA_USER1), DEFAULT_TIMEOUT,1,2);
 		info("Last activity of user displayes true");
-		assert getText(hg.ELEMENT_USER_POPUP_LAST_ACTIVITY).equalsIgnoreCase(activity1);	
+//		assert getText(hg.ELEMENT_USER_POPUP_LAST_ACTIVITY).equalsIgnoreCase(activity1);
+		waitForAndGetElement(hg.ELEMENT_USER_POPUP_LAST_ACTIVITY.replace("${activity}",activity1));
 		info("Button [Connect] is displayed");
 		waitForAndGetElement(hg.ELEMENT_USER_POPUP_STATUS_CONNECT.replace("${status}", "Confirm"), DEFAULT_TIMEOUT,1,2);
 		Utils.pause(1000);
@@ -1443,7 +1463,8 @@ public class PLF_GenericUserPopup_ActivityStream extends Activity{
 		info("Confirm user name");
 		waitForAndGetElement(hg.ELEMENT_ONLINE_USER_TITLE.replace("${acc}",DATA_USER1), DEFAULT_TIMEOUT,1,2);
 		info("Last activity of user displayes true");
-		assert getText(hg.ELEMENT_USER_POPUP_LAST_ACTIVITY).equalsIgnoreCase(activity);	
+//		assert getText(hg.ELEMENT_USER_POPUP_LAST_ACTIVITY).equalsIgnoreCase(activity);
+		waitForAndGetElement(hg.ELEMENT_USER_POPUP_LAST_ACTIVITY.replace("${activity}",activity));
 		info("Button [Connect] is displayed");
 		waitForAndGetElement(hg.ELEMENT_USER_POPUP_STATUS_CONNECT.replace("${status}", "Confirm"), DEFAULT_TIMEOUT,1,2);
 		Utils.pause(1000);
@@ -1516,7 +1537,8 @@ public class PLF_GenericUserPopup_ActivityStream extends Activity{
 		info("Confirm user name");
 		waitForAndGetElement(hg.ELEMENT_ONLINE_USER_TITLE.replace("${acc}",DATA_USER1), DEFAULT_TIMEOUT,1,2);
 		info("Last activity of user displayes true");
-		assert getText(hg.ELEMENT_USER_POPUP_LAST_ACTIVITY).equalsIgnoreCase(activity);	
+//		assert getText(hg.ELEMENT_USER_POPUP_LAST_ACTIVITY).equalsIgnoreCase(activity);
+		waitForAndGetElement(hg.ELEMENT_USER_POPUP_LAST_ACTIVITY.replace("${activity}",activity));
 		info("Button [Connect] is displayed");
 		waitForAndGetElement(hg.ELEMENT_USER_POPUP_STATUS_CONNECT.replace("${status}", "Confirm"), DEFAULT_TIMEOUT,1,2);
 		Utils.pause(1000);
@@ -1588,7 +1610,8 @@ public class PLF_GenericUserPopup_ActivityStream extends Activity{
 		info("Confirm user name");
 		waitForAndGetElement(hg.ELEMENT_ONLINE_USER_TITLE.replace("${acc}",DATA_USER2), DEFAULT_TIMEOUT,1,2);
 		info("Last activity of user displayes true");
-		assert getText(hg.ELEMENT_USER_POPUP_LAST_ACTIVITY).equalsIgnoreCase(activity);	
+//		assert getText(hg.ELEMENT_USER_POPUP_LAST_ACTIVITY).equalsIgnoreCase(activity);	
+		waitForAndGetElement(hg.ELEMENT_USER_POPUP_LAST_ACTIVITY.replace("${activity}",activity));
 		info("Button [Connect] is displayed");
 		waitForAndGetElement(hg.ELEMENT_USER_POPUP_STATUS_CONNECT.replace("${status}", "Cancel Request"), DEFAULT_TIMEOUT,1,2);
 		Utils.pause(1000);
@@ -1674,7 +1697,8 @@ public class PLF_GenericUserPopup_ActivityStream extends Activity{
 		info("Confirm user name");
 		waitForAndGetElement(hg.ELEMENT_ONLINE_USER_TITLE.replace("${acc}",DATA_USER2), DEFAULT_TIMEOUT,1,2);
 		info("Last activity of user displayes true");
-		assert getText(hg.ELEMENT_USER_POPUP_LAST_ACTIVITY).equalsIgnoreCase(activity2);	
+//		assert getText(hg.ELEMENT_USER_POPUP_LAST_ACTIVITY).equalsIgnoreCase(activity2);
+		waitForAndGetElement(hg.ELEMENT_USER_POPUP_LAST_ACTIVITY.replace("${activity}",activity2));
 		info("Button [Connect] is displayed");
 		waitForAndGetElement(hg.ELEMENT_USER_POPUP_STATUS_CONNECT.replace("${status}", "Cancel Request"), DEFAULT_TIMEOUT,1,2);
 		Utils.pause(1000);
@@ -1756,7 +1780,8 @@ public class PLF_GenericUserPopup_ActivityStream extends Activity{
 		info("Confirm user name");
 		waitForAndGetElement(hg.ELEMENT_ONLINE_USER_TITLE.replace("${acc}",DATA_USER2), DEFAULT_TIMEOUT,1,2);
 		info("Last activity of user displayes true");
-		assert getText(hg.ELEMENT_USER_POPUP_LAST_ACTIVITY).equalsIgnoreCase(activity);	
+//		assert getText(hg.ELEMENT_USER_POPUP_LAST_ACTIVITY).equalsIgnoreCase(activity);	
+		waitForAndGetElement(hg.ELEMENT_USER_POPUP_LAST_ACTIVITY.replace("${activity}",activity));
 		info("Button [Connect] is displayed");
 		waitForAndGetElement(hg.ELEMENT_USER_POPUP_STATUS_CONNECT.replace("${status}", "Cancel Request"), DEFAULT_TIMEOUT,1,2);
 		Utils.pause(1000);
@@ -1789,7 +1814,7 @@ public class PLF_GenericUserPopup_ActivityStream extends Activity{
 		String activity = "Activity 108075";
 
 		//Pre-Condition
-		info("UserA send a request to userB");
+		/*info("UserA send a request to userB");
 		nav.goToConnectionPage();
 		pConnect.connectPeople(user2);
 
@@ -1804,21 +1829,21 @@ public class PLF_GenericUserPopup_ActivityStream extends Activity{
 		acc.updateUserProfile(position,null, null, null);	
 		mMember.acceptInvitation(spaceName);
 
-		/*
+		
 		- Connect to Intranet with the User A
 		- Share an activity 
 		 *Expected Outcome: 
-		- The activity is shared		*/
+		- The activity is shared		
 		mSpace.accessSpace(spaceName);
 		addActivity(true, activity, false, "");
 
-		/*
+		
 		- Connect to Intranet with the User B 
 		- Move the mouse over the username A
 		 *Input Data: 
 		 *Expected Outcome: 
-		- A pop up information is displayed* avatar* name* title (or position in the company) if defined* last activity title* The boutton "Cancel Request" is displayed		*/ 
-		acc.userSignIn(userType.ADMIN);	
+		- A pop up information is displayed* avatar* name* title (or position in the company) if defined* last activity title* The boutton "Cancel Request" is displayed		 
+		acc.userSignIn(userType.ADMIN);	*/
 		mSpace.accessSpace(spaceName);
 		mouseOver(home.ELEMENT_ACTIVITY_AUTHOR_NAME.replace("${index}","1").replace("${author}", user2), true);	
 		waitForAndGetElement(ELEMENT_USER_PROFILE_POPUP.replace("${userName}", user2));
@@ -1829,7 +1854,8 @@ public class PLF_GenericUserPopup_ActivityStream extends Activity{
 		info("Confirm user name");
 		waitForAndGetElement(hg.ELEMENT_ONLINE_USER_TITLE.replace("${acc}",DATA_USER2), DEFAULT_TIMEOUT,1,2);
 		info("Last activity of user displayes true");
-		assert getText(hg.ELEMENT_USER_POPUP_LAST_ACTIVITY).equalsIgnoreCase(activity);	
+//		assert getText(hg.ELEMENT_USER_POPUP_LAST_ACTIVITY).equalsIgnoreCase(activity);
+		waitForAndGetElement(hg.ELEMENT_USER_POPUP_LAST_ACTIVITY.replace("${activity}",activity));
 		info("Button [Connect] is displayed");
 		waitForAndGetElement(hg.ELEMENT_USER_POPUP_STATUS_CONNECT.replace("${status}", "Cancel Request"), DEFAULT_TIMEOUT,1,2);
 		Utils.pause(1000);
@@ -1895,7 +1921,8 @@ public class PLF_GenericUserPopup_ActivityStream extends Activity{
 		info("Confirm user name");
 		waitForAndGetElement(hg.ELEMENT_ONLINE_USER_TITLE.replace("${acc}",DATA_USER2), DEFAULT_TIMEOUT,1,2);
 		info("Last activity of user displayes true");
-		assert getText(hg.ELEMENT_USER_POPUP_LAST_ACTIVITY).equalsIgnoreCase(activity);	
+//		assert getText(hg.ELEMENT_USER_POPUP_LAST_ACTIVITY).equalsIgnoreCase(activity);
+		waitForAndGetElement(hg.ELEMENT_USER_POPUP_LAST_ACTIVITY.replace("${activity}",activity));
 		info("Button [Connect] is displayed");
 		waitForAndGetElement(hg.ELEMENT_USER_POPUP_STATUS_CONNECT.replace("${status}", "Remove Connection"), DEFAULT_TIMEOUT,1,2);
 		Utils.pause(1000);
@@ -1975,7 +2002,8 @@ public class PLF_GenericUserPopup_ActivityStream extends Activity{
 		info("Confirm user name");
 		waitForAndGetElement(hg.ELEMENT_ONLINE_USER_TITLE.replace("${acc}",DATA_USER1), DEFAULT_TIMEOUT,1,2);
 		info("Last activity of user displayes true");
-		assert getText(hg.ELEMENT_USER_POPUP_LAST_ACTIVITY).equalsIgnoreCase(activity2);	
+//		assert getText(hg.ELEMENT_USER_POPUP_LAST_ACTIVITY).equalsIgnoreCase(activity2);
+		waitForAndGetElement(hg.ELEMENT_USER_POPUP_LAST_ACTIVITY.replace("${activity}",activity2));
 		info("Button [Connect] is displayed");
 		waitForAndGetElement(hg.ELEMENT_USER_POPUP_STATUS_CONNECT.replace("${status}", "Remove Connection"), DEFAULT_TIMEOUT,1,2);
 		Utils.pause(1000);
@@ -2046,7 +2074,8 @@ public class PLF_GenericUserPopup_ActivityStream extends Activity{
 		info("Confirm user name");
 		waitForAndGetElement(hg.ELEMENT_ONLINE_USER_TITLE.replace("${acc}",DATA_USER1), DEFAULT_TIMEOUT,1,2);
 		info("Last activity of user displayes true");
-		assert getText(hg.ELEMENT_USER_POPUP_LAST_ACTIVITY).equalsIgnoreCase(activity);	
+//		assert getText(hg.ELEMENT_USER_POPUP_LAST_ACTIVITY).equalsIgnoreCase(activity);	
+		waitForAndGetElement(hg.ELEMENT_USER_POPUP_LAST_ACTIVITY.replace("${activity}",activity));
 		info("Button [Connect] is displayed");
 		waitForAndGetElement(hg.ELEMENT_USER_POPUP_STATUS_CONNECT.replace("${status}", "Remove Connection"), DEFAULT_TIMEOUT,1,2);
 		Utils.pause(1000);
@@ -2113,7 +2142,8 @@ public class PLF_GenericUserPopup_ActivityStream extends Activity{
 		info("Confirm user name");
 		waitForAndGetElement(hg.ELEMENT_ONLINE_USER_TITLE.replace("${acc}",DATA_USER2), DEFAULT_TIMEOUT,1,2);
 		info("Last activity of user displayes true");
-		assert getText(hg.ELEMENT_USER_POPUP_LAST_ACTIVITY).equalsIgnoreCase(activity);	
+//		assert getText(hg.ELEMENT_USER_POPUP_LAST_ACTIVITY).equalsIgnoreCase(activity);
+		waitForAndGetElement(hg.ELEMENT_USER_POPUP_LAST_ACTIVITY.replace("${activity}",activity));
 		info("Button [Connect] is displayed");
 		waitForAndGetElement(hg.ELEMENT_USER_POPUP_STATUS_CONNECT.replace("${status}", "Remove Connection"), DEFAULT_TIMEOUT,1,2);
 		Utils.pause(1000);

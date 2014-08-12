@@ -78,7 +78,7 @@ public class HomePageGadget extends PlatformBase{
 	public final By ELEMENT_USER_POPUP_NAME = By.xpath("//*[@id='tipName']//td[2]/a");
 	public final By ELEMENT_USER_POPUP_POSITION = By.xpath("//*[@id='tipName']//td[2]/div");
 	public final By ELEMENT_USER_POPUP_AVATAR = By.xpath("//*[@id='tipName']//img[contains(@src, 'UserAvtDefault.png')]");
-	public final By ELEMENT_USER_POPUP_LAST_ACTIVITY = By.xpath("//*[@id='tiptip_content']/blockquote");
+	public final String ELEMENT_USER_POPUP_LAST_ACTIVITY = "//*[@id='tiptip_content']//blockquote[contains(text(),'${activity}')]";
 	public final String ELEMENT_USER_POPUP_STATUS_CONNECT = "//*[@id='tiptip_content']//*[@class='uiAction connectAction']/*[text()='${status}']";
 	//My Profile tab
 	public String ELEMENT_PROFILE_TAB_USER_INFO = "//*[@id='UIUserNavigationPortlet']/ul[@class='nav nav-tabs userNavigation']//a[@href='/portal/intranet/profile/${acc}']";
@@ -86,15 +86,15 @@ public class HomePageGadget extends PlatformBase{
 	public String ELEMENT_MY_AS_TAB = "//*[@id='UIUserNavigationPortlet']//a[@href='/portal/intranet/activities/${acc}']";
 
 	//-------------------Bookmarks gadget-----------------------------------
-	public final By ELEMENT_APPLICATION_BOOKMARKS = By.id("Gadgets/Bookmark");
+	public final By ELEMENT_APPLICATION_BOOKMARKS = By.id("Collaboration/FeaturedPoll");
 	public By ELEMENT_BOOKMARKS_GADGET_CONTENT_LIST = By.id("BookmarkList");
 	public By ELEMENT_BOOKMARKS_GADGET_ADDBOOKMARK_ICON = By.xpath("//*[@data-original-title='Add Bookmark']");
-	public static By ELEMENT_BOOKMARKS_GADGET_ADDNAME = By.xpath("//*[@class='editName' and @placeholder='Bookmarks']");
-	public static By ELEMENT_BOOKMARKS_GADGET_ADDURL = By.xpath("//*[@class='editLink' and @placeholder='URL']");
+	public By ELEMENT_BOOKMARKS_GADGET_ADDNAME = By.xpath("//*[@class='editName' and @placeholder='Bookmarks']");
+	public By ELEMENT_BOOKMARKS_GADGET_ADDURL = By.xpath("//*[@class='editLink' and @placeholder='URL']");
 	public String ELEMENT_BOOKMARKS_GADGET_DELETE_ICON = "//*[text()='${bookmarkName}']/..//*[@ data-original-title='Delete']/i";
 
 	/*Feature Poll porlet*/
-	public final By ELEMENT_APPLICATION_POLL = By.id("Gadgets/FeaturedPoll"); 
+	public final By ELEMENT_APPLICATION_POLL = By.xpath(".//*[@id='Collaboration/FeaturedPoll']/div"); 
 	public final By ELEMENT_SETTING_POLL_GADGET = By.xpath("//*[contains(text(),'Featured Poll')]//*[contains(@class,'uiIconSetting')]");
 	public final By ELEMENT_SELECT_BOX_FEATURED_POLL = By.xpath("//*[@class='selectbox']");
 	public final String ELEMENT_SELECT_BOX_FEATURED_ITEM = "//option[text()='${pollName}']";
@@ -111,6 +111,8 @@ public class HomePageGadget extends PlatformBase{
 	public final By ELEMENT_MIDDLE_CONTAINER = By.xpath("//div[@id='OfficeMiddle']//div[@class='NormalContainerBlock UIComponentBlock']");
 	public final By ELEMENT_FAVORITEDOCUMENT_ICON_HOMEPAGE = By.xpath("//i[@class='uiIconFavoriteDocument uiIconLightGray']");
 	public final By ELEMENT_GADGET_PORLET_IN_MIDDLE_HOME_PAGE = By.xpath("//div[@id='OfficeMiddle']//div[@class='NormalContainerBlock UIComponentBlock']//*[@id='UIGadgetPortlet']");
+	public final String ELEMENT_EDIT_PAGE_IN_MIDDLE_PORTLET = "//div[@id='OfficeMiddle']//div[@class='NormalContainerBlock UIComponentBlock']//div[contains(text(),'${portlet}')]";
+	public final String ELEMENT_EDIT_PAGE_PORTLET_DELETE_ICON = "//div[@id='OfficeMiddle']//div[@class='NormalContainerBlock UIComponentBlock']//div[contains(text(),'${portlet}')]/../../..//*[@data-original-title='Delete Portlet']";
 	public final By ELEMENT_DELETE_ICON_GADGET_PORLET_IN_MIDDLE_HOME_PAGE = By.xpath("//div[@id='OfficeMiddle']//div[@class='NormalContainerBlock UIComponentBlock']//*[@id='UIGadgetPortlet']/../../../..//*[@data-original-title='Delete Portlet']");
 	public final By ELEMENT_SUGGESTION_GADGET = By.xpath("//div[@id='OfficeRight']//div[@class='NormalContainerBlock UIComponentBlock']//*[@id='content']");
 
@@ -324,7 +326,8 @@ public class HomePageGadget extends PlatformBase{
 				info("Avatar of user is not default avatar");
 			}
 			if (activity != null){
-				assert getText(ELEMENT_USER_POPUP_LAST_ACTIVITY).equalsIgnoreCase(activity);
+//				assert getText(ELEMENT_USER_POPUP_LAST_ACTIVITY).equalsIgnoreCase(activity);
+				waitForAndGetElement(ELEMENT_USER_POPUP_LAST_ACTIVITY.replace("${activity}",activity));
 				info("Last activity of user displayes true");
 			}
 			switch (status) {

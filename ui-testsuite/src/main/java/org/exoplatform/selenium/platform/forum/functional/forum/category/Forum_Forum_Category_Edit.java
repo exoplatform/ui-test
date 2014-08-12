@@ -287,7 +287,7 @@ public class Forum_Forum_Category_Edit extends ForumBase{
 	 * Created by chinhdtt at 2014/06/09 13:50:14
 	 * This case is remove from qmetry
 	 */
-	//@Test
+	@Test
 	public  void test04_EditCategoryInCaseInvalidUserEntryForModeratorField() {
 		info("Test 04 Edit Category in case invalid user entry for Moderator field");
 		String catName = "Category 73007";
