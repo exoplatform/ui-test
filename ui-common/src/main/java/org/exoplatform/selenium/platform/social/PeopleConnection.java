@@ -32,7 +32,7 @@ public class PeopleConnection extends SocialBase {
 	public final By ELEMENT_EVERYONE_TAB = By.linkText("Everyone");
 	public final String ELEMENT_EVERYONE_TAB_ACTIVE = "//li[@class='active']/a[contains(text(),'Everyone')]";
 	public final By ELEMENT_REQUEST_SENT_TAB = By.linkText("Requests Sent");
-	public final String ELEMENT_CONNECTION_BUTTON = "//a[text()='${peopleName}']/ancestor::div[contains(@class,'spaceBox pull-left')]//button[contains(text(),'Connect')]";
+	public final String ELEMENT_CONNECTION_BUTTON = "//a[text()='${peopleName}']/ancestor::div[contains(@class,'pull-left')]//button[contains(text(),'Connect')]";
 	public final String ELEMENT_CANCEL_REQUEST_BUTTON = "//a[text()='${peopleName}']/ancestor::div[contains(@class,'spaceBox pull-left')]//button[contains(text(),'Cancel Request')]";
 	public final String ELEMENT_REMOVE_CONNECTION_BUTTON = "//a[text()='${peopleName}']/ancestor::div[contains(@class,'spaceBox pull-left')]//button[contains(text(),'Remove Connection')]";
 	public final String ELEMENT_CONFIRM_BUTTON = "//a[text()='${peopleName}']/ancestor::div[contains(@class,'spaceBox pull-left')]//button[contains(text(),'Confirm')]";
