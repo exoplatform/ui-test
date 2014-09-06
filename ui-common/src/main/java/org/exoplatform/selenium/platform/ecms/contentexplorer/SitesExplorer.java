@@ -38,7 +38,7 @@ public class SitesExplorer extends EcmsBase{
 
 	/*Text*/
 	public final String ELEMENT_TEXT ="//*[text()='{$node}']";
-	
+
 	//Button on the top-bar menu
 	//public final By ELEMENT_BUTTON_BACK_PREVIOUS_NODE = By.className("uiIconEcmsGoBack");
 	public final By ELEMENT_BUTTON_REFRESH_TOPBAR_MENU = By.className("uiIconRefresh");
@@ -70,10 +70,10 @@ public class SitesExplorer extends EcmsBase{
 	public final String ELEMENT_TITLE_LEFT_PANEL = "//div[@id='UITreeExplorer']//div[contains(@onmousedown,'collaboration:/sites/${title}')]";
 
 	public final String ELEMENT_DOCUMENT_TITLE = "//*[@class='nodeLabel']/*[text()='${title}']";
-	
+
 	//Check status of documents
 	public final String ELEMENT_STATUS_DOCUMENT = "//*[@data-original-title='${title}']/../..//*[@data-original-title='status']";
-	
+
 	/*================***==================*/
 
 	//Verify if Driver is present
@@ -152,12 +152,15 @@ public class SitesExplorer extends EcmsBase{
 
 		for(int i = 0; i < tagName.length ; i++){
 			// Input information
-			type(ELEMENT_TAG_NAME, tagName[i], true);
-			click(button.ELEMENT_ADD_BUTTON);
+			type(ELEMENT_TAG_NAME, tagName[i] + ",", false);
+
 			//Verify new tag
+
+		}
+		click(button.ELEMENT_ADD_BUTTON);
+		for(int i = 0; i < tagName.length ; i++){
 			waitForAndGetElement(By.xpath("//*[text()='Linked Tags:']/..//*[contains(text(), '"+ tagName[i] +"')]"));
 		}
-
 		//Close
 		click(button.ELEMENT_CLOSE_BUTTON);
 

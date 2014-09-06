@@ -1,7 +1,11 @@
 package org.exoplatform.selenium.platform.wiki.functional.macro;
 
 import static org.exoplatform.selenium.TestLogger.info;
+
+import java.awt.event.KeyEvent;
+
 import org.exoplatform.selenium.Button;
+import org.exoplatform.selenium.Utils;
 import org.exoplatform.selenium.platform.ManageAccount;
 import org.exoplatform.selenium.platform.wiki.WikiBase;
 import org.exoplatform.selenium.platform.wiki.RichTextMode;
@@ -73,6 +77,18 @@ public class Wiki_Macro_Othercheck extends ManageDraft{
 		
 		mouseOverAndClick(ELEMENT_MACRO_LINK);
 		click(ELEMENT_MACRO_EXPAND_LINK);
+		driver.switchTo().frame(waitForAndGetElement(ELEMENT_CONTENT_WIKI_FRAME));
+		waitForAndGetElement(ELEMENT_MACRO_TEXT.replace("${text}", contentcolor).replace("${color}", "red"));
+		waitForAndGetElement(ELEMENT_MACRO_ERROR_MESSAGE.replace("${macro}", contenterror));
+		switchToParentWindow();
+		
+		Utils.javaSimulateKeyPress(KeyEvent.VK_CONTROL, KeyEvent.VK_SHIFT,KeyEvent.VK_C);
+		driver.switchTo().frame(waitForAndGetElement(ELEMENT_CONTENT_WIKI_FRAME));
+		waitForAndGetElement("//span[@class='macro-placeholder' and text()='error']");
+		waitForAndGetElement("//span[@class='macro-placeholder' and text()='color']");
+		switchToParentWindow();
+		
+		Utils.javaSimulateKeyPress(KeyEvent.VK_CONTROL, KeyEvent.VK_SHIFT,KeyEvent.VK_E);
 		driver.switchTo().frame(waitForAndGetElement(ELEMENT_CONTENT_WIKI_FRAME));
 		waitForAndGetElement(ELEMENT_MACRO_TEXT.replace("${text}", contentcolor).replace("${color}", "red"));
 		waitForAndGetElement(ELEMENT_MACRO_ERROR_MESSAGE.replace("${macro}", contenterror));

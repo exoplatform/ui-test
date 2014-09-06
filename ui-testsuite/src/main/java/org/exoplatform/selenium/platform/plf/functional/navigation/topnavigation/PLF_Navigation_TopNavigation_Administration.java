@@ -138,6 +138,7 @@ public class PLF_Navigation_TopNavigation_Administration extends PlatformBase{
 		waitForAndGetElement(By.xpath(ELEMENT_LINK_SITES));
 		waitForAndGetElement(By.xpath(ELEMENT_LINK_GROUP));
 		waitForAndGetElement(By.xpath(ELEMENT_LINK_BRANDING));
+		waitForAndGetElement(ELEMENT_MENU_EMAIL_NOTIFICATION);
 	}
 
 	/**

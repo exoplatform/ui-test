@@ -72,7 +72,12 @@ public class Calendar_Event extends CalendarBase {
 		waitForElementNotPresent(evt.ELEMENT_ADD_EVENT_POPUP);
 
 		info("Edit event");
-		evt.editEvent(event, newEvent, note, null, getDate(0,"MM/dd/yyyy") + " 12:00", getDate(0,"MM/dd/yyyy") + " 14:00", false);
+		evt.goToEditEventForm(event);
+		evt.inputAddEventForm(newEvent, note, null, getDate(0,"MM/dd/yyyy") + " 12:00", "", false);
+		assert waitForAndGetElement(evt.ELEMENT_ADD_EDIT_EVENT_TO_TIME).getAttribute("value").equals("13:00");
+		click(evt.ELEMENT_ADD_EVENT_SAVE_BUTTON);
+		waitForElementNotPresent(evt.ELEMENT_EDIT_EVENT_POPUP);
+		
 		waitForAndGetElement(By.xpath(ELEMENT_EVENT_TASK_ONE_DAY.replace("${taskName}", newEvent)));
 
 		evt.deleteEventTask(newEvent);

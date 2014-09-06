@@ -75,6 +75,8 @@ public class Activity extends SocialBase {
 	public final By ELEMENT_URL_SHARE = By.xpath("//div[@id='LinkUrl']");
 	public final By ELEMENT_NAME_SPACE_ACTIVITY = By.xpath("//a[@class='spaceName']");
 	public final By ELEMENT_ICON_SPACE_ACTIVITY = By.xpath("//i[@class='uiIconSocGroup uiIconSocLightGray']");
+	public final String MSG_SHARE_EMPTY_TEXT = "The message is empty.";
+	public final String ELEMENT_MESSAGE_EMPTY_OK = "//span[contains(text(),'The message is empty.')]/../../..//a[contains(text(),'OK')]";
 
 	//	public final String ELEMENT_COMMENT_LINK = "//div[@class='text' or @class = 'description'or @class='linkSource' or contains(@id, 'ContextBox')]/*[contains(text(), '${activityText}')]//ancestor::div[contains(@id,'ActivityContextBox')]//*[starts-with(@id, 'CommentLink')]";
 	public final String ELEMENT_COMMENT = "//div[@class='ContentBox']//*[contains(text(), '${activityText}')]";
@@ -248,7 +250,7 @@ public class Activity extends SocialBase {
 			waitForAndGetElement(By.linkText(uploadFileName));
 			Utils.pause(1000);
 			click(By.linkText(uploadFileName));
-			waitForAndGetElement(ecms.ELEMENT_BREADCUMBSCONTAINER.replace("${fileName}", uploadFileName));
+//			waitForAndGetElement(ecms.ELEMENT_BREADCUMBSCONTAINER.replace("${fileName}", uploadFileName));
 		}
 		else 
 		{

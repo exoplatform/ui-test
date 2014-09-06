@@ -155,7 +155,7 @@ public class PLF_Navigation_TopNavigation_General extends PlatformBase{
 		 *Input Data: 
 		 *Expected Outcome: 
 		- The top navigation bar is displayed
-		- The top bar contain the Administration button, and buttons: Company logo Create button Search button Profile button Help button		*/ 
+		- The top bar contain the Administration button, and buttons: Company logo Create button Search button Profile button Help button,edit button		*/ 
 		waitForAndGetElement(ELEMENT_NAVIGATION_TOOLBAR_HOMEPAGE);
 		waitForAndGetElement(ELEMENT_LOGO_CONTAINER_TOOLBAR);
 		waitForAndGetElement(ELEMENT_MENU_ADMIN_ICON);

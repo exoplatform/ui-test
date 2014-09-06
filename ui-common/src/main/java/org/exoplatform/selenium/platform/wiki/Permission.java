@@ -140,9 +140,7 @@ public class Permission extends WikiBase{
 		goToPagePermission();
 
 		info("--Delete permission--");
-		if (isElementPresent(Delete)){
-			click(Delete);
-		}
+		click(Delete);
 		waitForElementNotPresent(Delete);
 		button.save();
 

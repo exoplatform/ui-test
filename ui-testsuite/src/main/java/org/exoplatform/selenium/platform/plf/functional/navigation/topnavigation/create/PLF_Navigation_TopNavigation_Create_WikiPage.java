@@ -11,6 +11,7 @@ import org.exoplatform.selenium.platform.UserGroupManagement;
 import org.exoplatform.selenium.platform.social.ApplicationManagement;
 import org.exoplatform.selenium.platform.social.ManageMember;
 import org.exoplatform.selenium.platform.social.SocialBase;
+import org.exoplatform.selenium.platform.wiki.BasicAction;
 import org.exoplatform.selenium.platform.wiki.Permission;
 import org.openqa.selenium.By;
 import org.testng.annotations.*;
@@ -26,6 +27,7 @@ public class PLF_Navigation_TopNavigation_Create_WikiPage extends Permission{
 	ApplicationManagement mApplication; 
 	UserGroupManagement uGroup; 
 	SocialBase social; 
+	BasicAction ba;
 
 	@BeforeMethod
 	public void beforeMethods(){	
@@ -39,6 +41,7 @@ public class PLF_Navigation_TopNavigation_Create_WikiPage extends Permission{
 		mApplication = new ApplicationManagement(driver);
 		uGroup = new UserGroupManagement(driver, this.plfVersion);
 		social = new SocialBase(driver, this.plfVersion);
+		ba  = new BasicAction(driver);
 	}
 
 	@AfterMethod
@@ -332,12 +335,15 @@ public class PLF_Navigation_TopNavigation_Create_WikiPage extends Permission{
 		 *Input Data: 
 		 *Expected Outcome: 
 		- The space switcher is displayed
-		- Not show space which this user has not "Edit permission" on its wiki		*/ 
+		- The space which this user has not "Edit permission" on its wiki is still shown, but do not open the form to add new page.		*/ 
 		click(ELEMENT_SPACE_SWITCHER_BREADCRUMB);
 		info("Title of space switcher");
 		waitForAndGetElement(ELEMENT_SPACE_SWITCHER_LOCATION);
 		info("Space is not displayed");
-		waitForElementNotPresent(ELEMENT_SPACE_SWITCHER_SELECT.replace("${spaceName}", spaceName));
+		waitForAndGetElement(ELEMENT_SPACE_SWITCHER_SELECT.replace("${spaceName}", spaceName));
+		click(ELEMENT_SPACE_SWITCHER_SELECT.replace("${spaceName}", spaceName));
+		Utils.pause(10000);
+		waitForElementNotPresent(ba.ELEMENT_TITLE_WIKI_INPUT);
 
 		//Delete data test
 		acc.userSignIn(userType.ADMIN);

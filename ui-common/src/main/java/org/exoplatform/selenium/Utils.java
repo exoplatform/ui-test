@@ -105,15 +105,20 @@ public class Utils {
 	 * @throws InterruptedException 
 	 */
 	public static void javaSimulateKeyPress(int firstKey, Object... params){
-		int secondKey = (Integer) (params.length > 0 ? params[0]: KeyEvent.VK_ENTER); 
+		int secondKey = (Integer) (params.length > 0 ? params[0]: KeyEvent.VK_ENTER);
+		int thirdKey = (Integer) (params.length > 1 ? params[1]: KeyEvent.VK_ENTER); 
 		try {
 			Robot robot = new Robot();
 			// Simulate a key press
 			robot.keyPress(firstKey);
 			robot.keyPress(secondKey);
+			if(params.length > 1)
+				robot.keyPress(thirdKey);
 			pause(3000);
 			robot.keyRelease(secondKey);
 			robot.keyRelease(firstKey);
+			if(params.length > 1)
+				robot.keyRelease(thirdKey);
 
 		} catch (AWTException e) {
 			e.printStackTrace();

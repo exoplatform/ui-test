@@ -178,6 +178,7 @@ public class ECMS_SE_Admin_ManageVersions  extends PlatformBase {
 		public void test03_ActivateVersionForHTMLFileDocument(){
 			/*Declare variable*/
 			String node1 = "test03_ActivateVersionForHTMLFileDocument";
+			String newContent = "new test03";
 			By bNode = By.xpath(siteExp.ELEMENT_SE_NODE.replace("{$node}", node1));
 			
 			/*Step 1: Create node*/
@@ -201,6 +202,8 @@ public class ECMS_SE_Admin_ManageVersions  extends PlatformBase {
 			
 			/*Step 3:Active version*/
 			//Click [Check In] from the Right-click menu for a node 
+			cMenu.contextMenuAction(bNode, cMenu.ELEMENT_MENU_EDIT);
+			cTemplate.inputHtmlFile("","fr",newContent);
 			cMenu.contextMenuAction(bNode, cMenu.ELEMENT_MENU_CHECKIN);
 			
 			//Verify: Version info form appears and node isn't activated version
@@ -494,6 +497,7 @@ public class ECMS_SE_Admin_ManageVersions  extends PlatformBase {
 		public void test09_ActivateVersionForCSSFileDocument(){
 			/*Declare variable*/
 			String node1 = "test09_ActivateVersionForCSSFileDocument";
+			String node2 = "new test09";
 			By bNode = By.xpath(siteExp.ELEMENT_SE_NODE.replace("{$node}", node1));
 			
 			/*Step 1: Create node*/
@@ -519,6 +523,8 @@ public class ECMS_SE_Admin_ManageVersions  extends PlatformBase {
 			
 			/*Step 3:Active version*/
 			//Click [Check In] from the Right-click menu for a node 
+			
+			cTemplate.editCssFile(node1, "2", node2);
 			cMenu.contextMenuAction(bNode, cMenu.ELEMENT_MENU_CHECKIN);
 			
 			//Verify: Version info form appears and node isn't activated version
