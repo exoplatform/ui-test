@@ -11,6 +11,7 @@ import org.exoplatform.selenium.platform.social.ManageMember;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 /**
@@ -35,6 +36,13 @@ public class BasicAction extends Permission{
 	public final By ELEMENT_MEMBERS_TAB = By.xpath("//div[@id='UISpaceSetting']//a[text()='Members']");
 	public String ELEMENT_ACTION_USER_ON_SPACE = "//a[text()='${spaceName}']/../../..//button[text()='${action}']";
 
+	public BasicAction(WebDriver dr){
+		this.driver=dr;
+	}
+	
+	public BasicAction(){
+		
+	}
 	// Wiki page
 	/*===================== Add Page ====================*/	
 

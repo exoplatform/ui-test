@@ -4,13 +4,14 @@ package org.exoplatform.selenium.platform.plf.functional.homepageactivitystream.
 
 import static org.exoplatform.selenium.TestLogger.info;
 
+import java.awt.event.KeyEvent;
+
 import org.exoplatform.selenium.Button;
 import org.exoplatform.selenium.ManageAlert;
 import org.exoplatform.selenium.Utils;
 import org.exoplatform.selenium.platform.HomePageActivity;
 import org.exoplatform.selenium.platform.ManageAccount;
 import org.exoplatform.selenium.platform.social.Activity;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.*;
@@ -52,35 +53,31 @@ public class PLF_HomepageActivityStream_ActivityComposer_General extends Activit
 	public  void test01_CantShareAnEmptyMessage() {
 		info("Test 1: Can't share an empty message"); 
 
-		/*Declare variables*/ 
-		String text1 = "       ";
-		String text2 = "Test case1"; 
-
 		/* Step 1: Don't type in shared activity box */
 		//- Connect to Intranet
 		//- Click in the composer input box, don't type
 		info("----Add text into activity text box-----");
-		WebElement inputText = waitForAndGetElement(hpActivity.ELEMENT_ACTIVITY_TEXTBOX);
+
 		WebElement shareButton = waitForAndGetElement(ELEMENT_SHARE_BUTTON);
 
 		Assert.assertEquals(shareButton.isEnabled(), false);
 
 		/*Step 2: Input space characters into shared activity box */
 		//- Input space characters into shared activity box
-		((JavascriptExecutor)driver).executeScript("arguments[0].textContent = '"+text1+"';", inputText);
-		Assert.assertEquals(shareButton.isEnabled(), false);
 
-
-		/* Step 3: Input letters into shared activity box */
-		// - in put "a" character
-		type(ELEMENT_ACTIVITY_WHAT_ARE_YOU_WORKING_LABEL, "   ", false);
-		type(hpActivity.ELEMENT_ACTIVITY_TEXTBOX, text2, false);
-		Utils.pause(1000);
+		click(hpActivity.ELEMENT_ACTIVITY_TEXTBOX);
+		Utils.javaSimulateKeyPress(KeyEvent.VK_SPACE, KeyEvent.VK_SPACE);
+		Utils.pause(20000);
 		Assert.assertEquals(shareButton.isEnabled(), true);
-		info("-- Verify Share button --");
-	}
+		click(ELEMENT_SHARE_BUTTON);
+		waitForMessage(MSG_SHARE_EMPTY_TEXT);
+		click(ELEMENT_MESSAGE_EMPTY_OK);
+		
+		/* This step is removed on qmetry
+		 * Step 3: Input letters into shared activity box 
+		 */
 
-
+ 	}
 
 	/**
 	 * Case ID:77797.

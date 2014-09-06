@@ -238,8 +238,7 @@ public class ECMS_SE_PublicActivity extends PlatformBase {
 		
 		info("Check new comment when add 2 tags for content in activity");
 		navTool.goToHomePage();
-		activity.checkTagAfterAddingToContent(name, tag2[0], 1);
-		activity.checkTagAfterAddingToContent(name, tag2[1], 1);
+		activity.checkTagAfterAddingToContent(name, tag2[0] + "," + tag2[1], 2);
 		
 		//delete data
 		navTool.goToSiteExplorer();

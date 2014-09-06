@@ -742,6 +742,9 @@ public class PlatformBase extends TestBase {
 	public final By ELEMENT_UPLOAD_FILE_FORM = By.id("UploadFileSelectorPopUpWindow");
 	public final By ELEMENT_SELECT_FORUM = By.xpath("//*[@class='titleForum' and (contains(text(),'Select Forum') or contains(text(),'Select a Forum'))]");
 	public final String ELEMENT_SELECT_FORUM_ITEM = "//*[@class='item forum']//*[text()='${forumName}']";
+	public final By ELEMENT_CREATE_WIKI_LABEL = By.xpath("//*[contains(text(), 'Create a new Wiki Page')]");
+	public final String ELEMENT_CREATE_WIKI_INTRANET = "//*[@id='uiWikiSpaceSwitcher_CreateWiki']//span[text()='${name}']";
+	public final By ELEMENT_LOCATION_WIKI = By.xpath("//*[@id='uiWikiSpaceSwitcher_CreateWiki']//input[@class='spaceSearchText lostFocus']");
 
 	//Help functions
 	public final By ELEMENT_HELP_ICON = By.xpath("//*[@class='uiIconPLF24x24Help']");

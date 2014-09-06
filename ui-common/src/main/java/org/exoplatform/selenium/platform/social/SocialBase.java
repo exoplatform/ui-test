@@ -6,6 +6,7 @@ import org.exoplatform.selenium.Utils;
 import org.exoplatform.selenium.platform.HomePageActivity;
 import org.exoplatform.selenium.platform.PlatformBase;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 
 
 public class SocialBase extends PlatformBase {
@@ -17,7 +18,7 @@ public class SocialBase extends PlatformBase {
 	//public final By ELEMENT_JOIN_SPACE_LINK = By.xpath("//div[@class='uiSpaceNavigationPortlet']/..//div/a[contains(text(),'Join a space')]");
 
 	// Go to My space link
-//	public final By ELEMENT_MY_SPACES_LINK = By.linkText("My Spaces");
+	//	public final By ELEMENT_MY_SPACES_LINK = By.linkText("My Spaces");
 	public final By ELEMENT_ALL_SPACE_LINK = By.linkText("All Spaces");
 	public final By ELEMENT_INVATATION_RECEIVES_LINK = By.linkText("Invitations Received");
 	public final By ELEMENT_REQUESTS_PENDING_LINK = By.linkText("Requests Pending");
@@ -35,16 +36,16 @@ public class SocialBase extends PlatformBase {
 	public final By ELEMENT_MY_SPACE_SEARCH_BOX = By.xpath("//*[@id='UISpaceNavigationPortlet']//input[@value='Search Spaces']");
 	public final By ELEMENT_MY_SPACE_NO_FOUND_LABEL = By.xpath("//*[@id='UISpaceNavigationPortlet']//*[@class='noSpace' and text()='No space found']");
 	public final String ELEMENT_SPACE_TOOL_TIP = "//*[@id='UISpaceNavigationPortlet']//*[@class='tooltip fade bottom in']/*[@class='tooltip-inner' and text()='${space}']";
-	
+
 	// Go to My Space > All Spaces Tab
 	public final String ELEMENT_SEND_REQUEST_LINK = "//*[@id='UIManageAllSpaces']//*[text()='${spaceName}']/../../ul//*[text()='Request to Join']";
 	public final String ELEMENT_INVITATION_LEAVE_LINK_IN_ALL_SPACES = "//*[@id='UIManageAllSpaces']//*[text()='${spaceName}']/../../ul//*[text()='Leave']";
 	public final String ELEMENT_INVITATION_ACCEPT_LINK_IN_ALL_SPACES = "//*[@id='UIManageAllSpaces']//*[text()='${spaceName}']/../../ul//*[text()='Accept']";
 	public final String ELEMENT_INVITATION_IGNORE_LINK_IN_ALL_SPACES = "//*[@id='UIManageAllSpaces']//*[text()='${spaceName}']/../../ul//*[text()='Ignore']";
 	public final By     ELEMENT_ADDNEWSPACE_BUTTON      = By.xpath("//button[text()='Add New Space']");
-    
-    // Go to My Space > My Spaces Tab
- 	public final String ELEMENT_INVITATION_LEAVE_LINK = "//*[@id='UIManageMySpaces']//*[text()='${spaceName}']/../../ul//*[text()='Leave']";
+
+	// Go to My Space > My Spaces Tab
+	public final String ELEMENT_INVITATION_LEAVE_LINK = "//*[@id='UIManageMySpaces']//*[text()='${spaceName}']/../../ul//*[text()='Leave']";
 
 	// Go to My Space > Invitation Receives Tab
 	public final String ELEMENT_INVITATION_ACCEPT_LINK = "//*[@id='UIManageInvitationSpaces']//*[text()='${spaceName}']/../../ul//*[text()='Accept']";
@@ -57,7 +58,7 @@ public class SocialBase extends PlatformBase {
 	public final By ELEMENT_SEARCH_BUTTON = By.id("SearchButton");
 
 	// Go to My Space -> Select a space > click setting icon
-	public final By ELEMENT_SETTINGS = By.xpath("//*[@title='Settings']");
+	public final By ELEMENT_SETTINGS = By.xpath("//*[@id='settings']");
 
 	// Go to My Space -> Select a space > click Navigation tab
 	public final By ELEMENT_NAVIGATION_TAB = By.xpath("//a[text()='Navigations']");
@@ -107,6 +108,13 @@ public class SocialBase extends PlatformBase {
 
 	/*------------------- End of parameters ---------------------*/	
 
+	public SocialBase(){
+
+	}
+	public SocialBase(WebDriver dr, String...plfVersion){
+		this.driver = dr;
+		this.plfVersion = plfVersion.length>0?plfVersion[0]:"4.0";
+	}
 	/**
 	 * Common functions for Social
 	 */
@@ -115,7 +123,7 @@ public class SocialBase extends PlatformBase {
 	 * Migrate to PLF 4
 	 * <li> Update by @author vuna2 </li>
 	 */
-	
+
 	public void goToMySpacePage(){
 		info("--Go to My Space Page--");
 		//waitForElementPresent(ELEMENT_MY_SPACES_LINK);

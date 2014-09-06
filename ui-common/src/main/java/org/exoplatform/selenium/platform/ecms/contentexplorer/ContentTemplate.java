@@ -619,30 +619,33 @@ public class ContentTemplate extends EcmsBase{
 	 */
 	public void createNewHtmlFile(String name, Object... params){
 		click(ELEMENT_NEW_HTML_FILE_LINK);
+		inputHtmlFile(name, params);
+	}
+
+	/**
+	 * @function input HTML File	
+	 * @param name
+	 * @param language
+	 * @param content
+	 */
+	public void inputHtmlFile(String name, Object... params){
 		String lang = (String) (params.length > 0 ? params[0]: "");
 		String content = (String) (params.length > 1 ? params[1]: "");
 		info("-- Creating a new HTML File --");
-		type(ELEMENT_HTML_FILE_NAME, name, true);
+		if(name != "")
+			type(ELEMENT_HTML_FILE_NAME, name, true);
 		if (!lang.isEmpty()){
 			selectOption(ELEMENT_HTML_FILE_LANGUAGE, lang);
 		}
 		if (!content.isEmpty()){
-			/*switch to ckeditor frame*/
-			driver.switchTo().frame(driver.findElement(ELEMENT_HTML_FILE_CKEDITOR_FRAME));
-			/*locator body of ckeditor*/
-			type(ELEMENT_HTML_FILE_CKEDITOR_FRAME_BODY, content, false);
-			/*return main frame*/
-			driver.switchTo().defaultContent();
 
-			inputDataToFrame(ELEMENT_HTML_FILE_CKEDITOR_FRAME, content, true);
+
+			if(this.plfVersion.equalsIgnoreCase("4.0"))
+				inputDataToFrame(ELEMENT_HTML_FILE_CKEDITOR_FRAME, content, true);
+			/*else
+				inputDataToFrame(ELEMENT_HTML_FILE_CKEDITOR_FRAME_41, content, true);*/
 			switchToParentWindow();
-			//			
-			//			/*switch to ckeditor frame*/
-			//			driver.switchTo().frame(driver.findElement(ELEMENT_HTML_FILE_CKEDITOR_FRAME));
-			//			/*locator body of ckeditor*/
-			//			type(ELEMENT_HTML_FILE_CKEDITOR_FRAME_BODY, content, false);
-			//			/*return main frame*/
-			//			driver.switchTo().defaultContent();
+
 		}		
 		click(button.ELEMENT_SAVE_CLOSE_BUTTON);
 		waitForElementNotPresent(button.ELEMENT_SAVE_CLOSE_BUTTON);

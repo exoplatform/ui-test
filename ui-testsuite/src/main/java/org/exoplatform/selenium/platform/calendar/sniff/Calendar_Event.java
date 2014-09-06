@@ -60,6 +60,7 @@ public class Calendar_Event extends CalendarBase {
 
 		info("restore data");
 		deleteEventTask(EVENT_01);
+
 	}
 
 	/**

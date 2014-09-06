@@ -23,7 +23,7 @@ public class WikiBase extends PlatformBase{
 
 	ManageAccount magAcc = new ManageAccount(driver,this.plfVersion);
 	UserGroupManagement userGroup = new UserGroupManagement(driver);
-	Button button = new Button(driver);
+//	Button button = new Button(driver);
 	ManageMember magMember = new ManageMember(driver);
 
 	/*-----------------Page control area-------------------*/

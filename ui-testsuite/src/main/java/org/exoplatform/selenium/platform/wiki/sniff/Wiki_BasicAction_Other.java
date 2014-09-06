@@ -7,7 +7,9 @@ import org.exoplatform.selenium.Dialog;
 import org.exoplatform.selenium.Utils;
 import org.exoplatform.selenium.platform.ManageAccount;
 import org.exoplatform.selenium.platform.PlatformPermission;
+import org.exoplatform.selenium.platform.ManageAccount.userType;
 import org.exoplatform.selenium.platform.social.ManageMember;
+import org.exoplatform.selenium.platform.social.SocialBase;
 import org.exoplatform.selenium.platform.wiki.Permalink;
 import org.openqa.selenium.By;
 import org.testng.annotations.AfterMethod;
@@ -26,6 +28,7 @@ public class Wiki_BasicAction_Other extends Permalink {
 	Button button;
 	ManageMember magMem;
 	PlatformPermission per;
+	SocialBase socBase;
 	
 	@BeforeMethod
 	public void setUpBeforeTest(){
@@ -33,11 +36,13 @@ public class Wiki_BasicAction_Other extends Permalink {
 		driver.get(baseUrl);
 		magAc = new ManageAccount(driver);
 		dialog = new Dialog(driver);
-		button = new Button(driver);
-		magMem = new ManageMember(driver);
-		per = new PlatformPermission(driver);
-		
-		magAc.signIn(DATA_USER1, DATA_PASS);
+
+		button = new Button(driver,this.plfVersion);
+		magMem = new ManageMember(driver,this.plfVersion);
+		per = new PlatformPermission(driver,this.plfVersion);
+		socBase = new SocialBase(driver,this.plfVersion);
+
+		magAc.signIn(DATA_USER1, DATA_PASS); 
 		goToWiki();
 	}
 
@@ -244,6 +249,7 @@ public class Wiki_BasicAction_Other extends Permalink {
 		String title2 = "Wiki_move_title_08_2";
 		String content2 = "Wiki_move_content_08_2";
 		
+		
 		goToWiki();
 		addBlankWikiPage(title1, content1, 0);		
 		magAc.signOut();
@@ -262,6 +268,46 @@ public class Wiki_BasicAction_Other extends Permalink {
 		magAc.signOut();
 		goToWikiPage("Wiki Home/" + title1, ManageAccount.userType.ADMIN);
 		deleteCurrentWikiPage();
+	}
+	
+	/**CaseId: 70362
+	 * Move page when user has no edit permission at destination page (new version)
+	 * This case check on space wiki according to new updates
+	 */
+	@Test
+	public void test08_MovePageInSpaceWikiWhenNotHaveEditPermissionAtDestPage(){
+		String spaceName = "Space08";
+		String title1 = "Wiki_move_title_08_1";
+		String content1 = "Wiki_move_content_08_1";
+		String title2 = "Wiki_move_title_08_2";
+		String content2 = "Wiki_move_content_08_2";
+		String[] userGroup = {"mary"};
+		socBase = new SocialBase(driver, this.plfVersion);
+		addWikiForSpace(spaceName, title1, content1);
+		addPagePermission(1, userGroup);
+		deletePagePermission("*:/spaces/"+spaceName);
+		click(socBase.ELEMENT_SETTINGS);
+		click(socBase.ELEMENT_MEMBERS_TAB);
+		magMem.inviteSingleUser(userType.PUBLISHER);
+		
+		goToWikiFromSpace(spaceName);
+		addBlankWikiPage(title2, content2, 0);		
+		magAc.signOut();
+		magAc.signIn(DATA_USER2, DATA_PASS);
+		
+		magMem.acceptInvitation(spaceName);
+		goToWikiFromSpace(spaceName);
+		info("Move page2 of space to page1 of space08");
+		goToWikiPage(title2);
+		movePage(title2, title1, spaceName, false);
+		waitForTextPresent(MESSAGE_NO_PERMISSION_MOVE_PAGE);
+		button.ok();
+		click(ELEMENT_CANCEL_BUTTON_MOVE_PAGE);
+
+		magAc.signOut();
+		magAc.signIn(DATA_USER1, DATA_PASS);
+		magMem.goToAllSpaces();
+		magMem.deleteSpace(spaceName, 180000);
 	}
 	
 	/**CaseId: 70073

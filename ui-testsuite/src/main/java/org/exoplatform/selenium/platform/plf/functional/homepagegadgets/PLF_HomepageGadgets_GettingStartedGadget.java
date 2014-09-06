@@ -177,6 +177,8 @@ public class PLF_HomepageGadgets_GettingStartedGadget extends Activity{
 		String activity1 = "activity 79587";
 		String file = "ECMS_DMS_SE_Upload_imgfile.jpg";
 		
+		magMember.goToMySpacePage();
+		magMember.addNewSpace(spaceName, "", "Visible", "Open", "", "");
 		//Sign in by other user (mary williams)
 		acc.signOut();
 		acc.signIn(DATA_USER2, DATA_PASS);
@@ -187,8 +189,11 @@ public class PLF_HomepageGadgets_GettingStartedGadget extends Activity{
 		waitForAndGetElement(homeGad.ELEMENT_FINISH_UPLOAD_FILE.replace("${status}", "done"));
 		
 		info("79586: Join a space");
+		magMember.goToAllSpaces();
+		magMember.joinOpenSpace(spaceName);
 		magMember.goToMySpacePage();
-		magMember.addNewSpace(spaceName, "");
+		waitForAndGetElement(By.linkText(spaceName));
+		waitForAndGetElement(ELEMENT_SPACE_IN_MY_SPACE_LIST.replace("${space}", spaceName));
 		navToolBar.goToHomePage();
 		waitForAndGetElement(homeGad.ELEMENT_FINISH_JOIN_TO_SPACE.replace("${status}", "done"));
 		
@@ -223,12 +228,16 @@ public class PLF_HomepageGadgets_GettingStartedGadget extends Activity{
 		
 		info("Restore data");
 		activity.deleteActivity(activity1);
-		magMember.goToAllSpaces();
-		magMember.deleteSpace(spaceName,300000);
+		
 		navToolBar.goToSiteExplorer();
 		actBar.chooseDrive(ecms.ELEMENT_PERSONAL_DRIVE);
 		actBar.actionsOnElement(uploadFileName, actionType.DELETE,true,true);
-//		acc.signOut();
+
+
+		acc.signOut();
+		acc.signIn(DATA_USER1, DATA_PASS);
+		magMember.goToAllSpaces();
+		magMember.deleteSpace(spaceName,300000);
 	}
 	
 	/**
