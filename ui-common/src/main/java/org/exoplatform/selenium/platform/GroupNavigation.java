@@ -19,7 +19,7 @@ public class GroupNavigation extends PlatformBase {
 	public final String ELEMENT_GROUP_NAME = "//*[@class='siteName' and text()='${groupName}']";
 	public final String ELEMENT_DELETE_NAVIGATION_ICON = "//*[text()='${groupName}']/../..//*[text()='Delete Navigation']";
 	public final String ELEMENT_EDIT_PROPERTIES_ICON = "//*[text()='${groupName}']/../..//*[text()='Edit Properties']";
-	public final String ELEMENT_NAVIGATION_NODE = "//a[contains(@title,'${nodeName}')]"; 
+	public final String ELEMENT_NAVIGATION_NODE = "//a[contains(@title,'${nodeName}') or contains(@data-original-title,'${nodeName}')]"; 
 	public final String ELEMENT_GROUP_TITLE = "//div[@title='${groupTitle}']"; 
 	public final String ELEMENT_GROUP_NAVIGATION_POSITION = "//*[@id='UIGroupNavigationGrid']/table[${index}]/tbody/tr[${number}]" + ELEMENT_GROUP_TITLE;
 	public final By ELEMENT_GROUP_NAVIGATION_TABLE = By.xpath("//*[@id='UIGroupNavigationGrid']//table");
