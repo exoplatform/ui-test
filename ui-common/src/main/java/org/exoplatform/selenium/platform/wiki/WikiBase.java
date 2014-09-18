@@ -87,6 +87,7 @@ public class WikiBase extends PlatformBase{
 	public final By ELEMENT_WIKI_HOME_PAGE=By.xpath("//*[@id='titleInfo' and text()='Wiki Home']");
 	public final By ELEMENT_TITLE_WIKI_HOME_LINK = By.xpath("//*[@class='titleWikiBox']/*[contains(text(), 'Wiki Home')]");
 	public final String ELEMENT_NODE_WIKI_PAGE = "//*[@class='node']//*[contains(text(), '{$node}')]";
+	public final String ELEMENT_PAGE_NOT_FOUND = "//h3[text()='Page Not Found']";
 
 	//Space Switcher
 	public final By ELEMENT_SPACE_SWITCHER_BREADCRUMB = By.id("DisplayModesDropDown");

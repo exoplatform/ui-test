@@ -8,6 +8,7 @@ import org.exoplatform.selenium.Utils;
 import org.exoplatform.selenium.platform.ManageAccount;
 import org.exoplatform.selenium.platform.PlatformPermission;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 
 /**
  * Provides all methods of managing the restrictions to apply on a wiki or a page and to specific users, groups or memberships.
@@ -23,6 +24,14 @@ public class Permission extends WikiBase{
 
 	public final String ELEMENT_PERMISSION = "//*[@id='UIPermissionGrid']//*[contains(text(),'${user}')]";
 
+	public Permission(WebDriver dr){
+		driver = dr;
+	}
+	
+	public Permission(){
+		
+	}
+	
 	/////
 	/*=================== Page permission ===================*/
 	/** 
@@ -253,6 +262,7 @@ public class Permission extends WikiBase{
 		waitForMessage(MSG_PERMISSION_SAVE);
 
 		dialog.closeMessageDialog();
+		
 		Utils.pause(1000);
 	}
 
@@ -302,24 +312,36 @@ public class Permission extends WikiBase{
 				click(bViewSpace, notDisplay);
 			}
 		}else{
-			if(waitForAndGetElement(bViewSpace, DEFAULT_TIMEOUT, 1, notDisplay).isSelected())
+			if(waitForAndGetElement(bViewSpace, DEFAULT_TIMEOUT, 1, notDisplay).isSelected()){
 				click(bViewSpace, notDisplay);
+				Utils.pause(1000);
+				assert !waitForAndGetElement(bEditPage,DEFAULT_TIMEOUT,1,notDisplay).isSelected();
+				assert !waitForAndGetElement(bAdminPage,DEFAULT_TIMEOUT,1,notDisplay).isSelected();
+				assert !waitForAndGetElement(bAdminSpace,DEFAULT_TIMEOUT,1,notDisplay).isSelected();
+			}
 		}
 		if (edit){
 			if(!waitForAndGetElement(bEditPage, DEFAULT_TIMEOUT, 1, notDisplay).isSelected()){
 				click(bEditPage, notDisplay);
 			}
 		}else{
-			if(waitForAndGetElement(bEditPage, DEFAULT_TIMEOUT, 1, notDisplay).isSelected())
+			if(waitForAndGetElement(bEditPage, DEFAULT_TIMEOUT, 1, notDisplay).isSelected()){
 				click(bEditPage, notDisplay);
+				Utils.pause(1000);
+				assert !waitForAndGetElement(bAdminPage,DEFAULT_TIMEOUT,1,notDisplay).isSelected();
+				assert !waitForAndGetElement(bAdminSpace,DEFAULT_TIMEOUT,1,notDisplay).isSelected();
+			}
 		}
 		if (adminPage){
 			if(!waitForAndGetElement(bAdminPage, DEFAULT_TIMEOUT, 1, notDisplay).isSelected()){
 				click(bAdminPage, notDisplay);
 			}
 		}else{
-			if(waitForAndGetElement(bAdminPage, DEFAULT_TIMEOUT, 1, notDisplay).isSelected())
+			if(waitForAndGetElement(bAdminPage, DEFAULT_TIMEOUT, 1, notDisplay).isSelected()){
 				click(bAdminPage, notDisplay);
+				Utils.pause(1000);
+				assert !waitForAndGetElement(bAdminSpace,DEFAULT_TIMEOUT,1,notDisplay).isSelected();
+			}
 		}
 
 		if (adminSpace){

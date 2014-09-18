@@ -1,4 +1,4 @@
-package org.exoplatform.selenium.platform.wiki.functional.spacepermission;
+package org.exoplatform.selenium.platform.wiki.functional.permissions.wikipermissions;
 
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -11,7 +11,7 @@ import org.exoplatform.selenium.platform.wiki.Permission;
  * @author HangNTT
  * @date: 18/12/2012
  */
-public class Wiki_SpacePermission_Delete extends Permission {
+public class Wiki_Permissions_WikiPermissions_Edit extends Permission {
 
 	ManageAccount magAc;
 	
@@ -23,11 +23,11 @@ public class Wiki_SpacePermission_Delete extends Permission {
 
 		magAc.signIn(DATA_USER1, DATA_PASS);
 	}
-
-	//Qmetry ID: 69746
-	//Delete permission for space
+	
+	//Qmetry ID: 69759
+	//Edit permission for space
 	@Test
-	public void test01_DeletePermissionForSpace() {
+	public void test01_EditPermissionForSpace() {
 
 		String[] user2= {DATA_USER3};
 
@@ -35,7 +35,24 @@ public class Wiki_SpacePermission_Delete extends Permission {
 
 		addSpacePermission(0, user2);
 
+		editSpacePermission(DATA_USER3, true, true, true, false, 2);
+
 		deleteSpacePermission(DATA_USER3);
+	}
+	
+	//Qmetry ID: 69757
+	//Edit permission for space is blank
+	@Test
+	public void test02_EditPermissionForSpaceIsBlank() {
+
+		String[] user2= {DATA_USER3};
+
+		goToWiki();
+
+		addSpacePermission(0, user2);
+
+		editSpacePermission(DATA_USER3, false, false, false, false, 2);
+		waitForElementNotPresent(ELEMENT_VIEW_PAGE_PERMISSIONS.replace("${user}", DATA_USER3), DEFAULT_TIMEOUT,1,2);
 	}
 
 	@AfterMethod

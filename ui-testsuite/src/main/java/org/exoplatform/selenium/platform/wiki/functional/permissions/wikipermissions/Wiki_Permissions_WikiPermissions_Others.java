@@ -1,4 +1,4 @@
-package org.exoplatform.selenium.platform.wiki.functional.spacepermission;
+package org.exoplatform.selenium.platform.wiki.functional.permissions.wikipermissions;
 
 import org.openqa.selenium.By;
 import org.testng.annotations.AfterMethod;
@@ -13,7 +13,7 @@ import static org.exoplatform.selenium.TestLogger.info;
  * @author HangNTT
  * @date: 18/12/2012
  */
-public class Wiki_SpacePermission_Others extends BasicAction {
+public class Wiki_Permissions_WikiPermissions_Others extends BasicAction {
 
 	ManageAccount magAc;
 	
@@ -81,7 +81,7 @@ public class Wiki_SpacePermission_Others extends BasicAction {
 	 * Check permission for user/group does not admin space page 
 	 */
 	@Test
-	public void test02_CheckWhenUserOrGroupDoesNotSpacePagePermission() {
+	public void test02_CheckWhenUserOrGroupDoesNotAdminSpacePermission() {
 
 		String PAGE_NAME1 = "Check When user does not space page permission";
 
@@ -102,7 +102,6 @@ public class Wiki_SpacePermission_Others extends BasicAction {
 		//goToWikiWithUser(ManageAccount.userType.AUTHOR);
 		goToWikiPage("Wiki Home/" + PAGE_NAME1, ManageAccount.userType.AUTHOR);
 		 
-		//waitForElementNotPresent(ELEMENT_BROWSE_LINK);
 		mouseOverAndClick(ELEMENT_BROWSE_LINK);
 		waitForElementNotPresent(ELEMENT_WIKI_SETTING_LINK);
 

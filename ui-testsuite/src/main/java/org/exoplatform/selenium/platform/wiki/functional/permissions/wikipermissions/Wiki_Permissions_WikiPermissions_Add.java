@@ -1,4 +1,4 @@
-package org.exoplatform.selenium.platform.wiki.functional.spacepermission;
+package org.exoplatform.selenium.platform.wiki.functional.permissions.wikipermissions;
 
 import org.openqa.selenium.By;
 import org.testng.annotations.AfterMethod;
@@ -23,7 +23,7 @@ import static org.exoplatform.selenium.TestLogger.info;
  * @author HangNTT
  * @date: 17/12/2012
  */
-public class Wiki_SpacePermission_Add extends BasicAction {
+public class Wiki_Permissions_WikiPermissions_Add extends BasicAction {
 
 	ManageAccount magAcc;
 	Button button;
@@ -440,6 +440,10 @@ public class Wiki_SpacePermission_Add extends BasicAction {
 		addBlankWikiPage(pageName, pageName, 0);
 		deleteSpacePermission("any");
 		addSpacePermission(option, userGroupToAddPermission, 2);
+		assert waitForAndGetElement(ELEMENT_VIEW_PAGE_PERMISSIONS.replace("${user}", userGroupToEditPermission), DEFAULT_TIMEOUT,1,2).isSelected();
+		assert !waitForElementNotPresent(ELEMENT_EDIT_PAGE_PERMISSIONS.replace("${user}", userGroupToEditPermission), DEFAULT_TIMEOUT,1,2).isSelected();
+		assert !waitForElementNotPresent(ELEMENT_ADMIN_SPACE_CHECK.replace("${user}", userGroupToEditPermission), DEFAULT_TIMEOUT,1,2).isSelected();
+		assert !waitForElementNotPresent(ELEMENT_ADMIN_PAGE_CHECK.replace("${user}", userGroupToEditPermission), DEFAULT_TIMEOUT,1,2).isSelected();
 		editSpacePermission(userGroupToEditPermission, true, true, true, true, 2);
 	}
 

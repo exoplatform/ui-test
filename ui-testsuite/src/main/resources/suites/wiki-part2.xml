@@ -21,10 +21,10 @@
 			</run>
 		</groups>
 		<classes>
- 			<class name="org.exoplatform.selenium.platform.wiki.functional.spacepermission.Wiki_SpacePermission_Add" />
- 			<class name="org.exoplatform.selenium.platform.wiki.functional.spacepermission.Wiki_SpacePermission_Delete" />
- 			<class name="org.exoplatform.selenium.platform.wiki.functional.spacepermission.Wiki_SpacePermission_Edit" />
- 			<class name="org.exoplatform.selenium.platform.wiki.functional.spacepermission.Wiki_SpacePermission_Others" />
+ 			<class name="org.exoplatform.selenium.platform.wiki.functional.permissions.wikipermissions.Wiki_Permissions_WikiPermissions_Add" />
+ 			<class name="org.exoplatform.selenium.platform.wiki.functional.permissions.wikipermissions.Wiki_Permissions_WikiPermissions_Delete" />
+ 			<class name="org.exoplatform.selenium.platform.wiki.functional.permissions.wikipermissions.Wiki_Permissions_WikiPermissions_Edit" />
+ 			<class name="org.exoplatform.selenium.platform.wiki.functional.permissions.wikipermissions.Wiki_Permissions_WikiPermissions_Others" />
  		</classes>
 	</test>
 

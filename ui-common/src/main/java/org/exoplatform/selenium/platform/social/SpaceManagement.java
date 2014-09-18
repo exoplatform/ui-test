@@ -112,6 +112,9 @@ public class SpaceManagement extends SocialBase {
 	public final By ELEMENT_APPLICATIONS_TAB_IN_MENU_SETTING = By.linkText("Applications");
 	public final String ELEMENT_APPLICATIONS_DELETE_ICON_IN_MENU_SETTING = "//*[text()='${app}']/../..//*[@class='uiIconClose pull-right']";
 	
+	//Space settings tab
+	public final By ELEMENT_MEMBER_TAB = By.xpath("//*[@id='UITabPane']//a[@data-target='#UISpaceMember-tab' and contains(text(),'Members')]");
+	
 	public SpaceManagement(WebDriver dr, String...plfVersion){
 		driver = dr;
 		this.plfVersion = plfVersion.length>0?plfVersion[0]:"4.0";
