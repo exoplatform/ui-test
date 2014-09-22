@@ -48,8 +48,8 @@ public class Permalink extends BasicAction {
 		magAc = new ManageAccount(driver,this.plfVersion);
 		
 		info("Check permalink with user " + user);
-		driver.get(permalink);
 		magAc.signIn(user, DATA_PASS);
+		driver.get(permalink);
 		
 		if (permission){
 			waitForTextPresent(content);

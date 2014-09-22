@@ -35,6 +35,7 @@ public class BasicAction extends Permission{
 	public final String ELEMENT_PERMISSION_WINDOW_CLOSE_BUTTON = "//*[@id='UIWikiPopupWindowL1']//a[@title='Close Window']";
 	public final By ELEMENT_MEMBERS_TAB = By.xpath("//div[@id='UISpaceSetting']//a[text()='Members']");
 	public String ELEMENT_ACTION_USER_ON_SPACE = "//a[text()='${spaceName}']/../../..//button[text()='${action}']";
+	public final By ELEMENT_DELETE_OK_BUTTON = By.xpath("//*[@id='UIWikiDeletePageConfirm']//*[text()='OK']");
 
 	public BasicAction(WebDriver dr){
 		this.driver=dr;
@@ -283,8 +284,8 @@ public class BasicAction extends Permission{
 			click(button.ELEMENT_CANCEL_BUTTON);
 			waitForElementNotPresent(button.ELEMENT_CANCEL_BUTTON);
 		}else{
-			click(button.ELEMENT_OK_BUTTON);
-			waitForElementNotPresent(button.ELEMENT_OK_BUTTON);
+			click(ELEMENT_DELETE_OK_BUTTON);
+			waitForElementNotPresent(ELEMENT_DELETE_OK_BUTTON);
 		}
 		Utils.pause(1000);
 	}
