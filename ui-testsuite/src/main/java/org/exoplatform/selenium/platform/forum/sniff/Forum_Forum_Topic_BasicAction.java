@@ -94,10 +94,10 @@ public class Forum_Forum_Topic_BasicAction extends ForumBase {
 	 */
 	@Test
 	public void test04_MoveTopic() {
-		String titleCat = "Category 04";
-		String titleForum = "Forum 04";
-		String titleTop = "Topic 04";
-		String forum2 = "Forum 04 2";
+		String titleCat = "Category 71197";
+		String titleForum = "Forum 71197";
+		String titleTop = "Topic 71197";
+		String forum2 = "Forum 71197 2";
 		String[] addForum2 = {forum2, "1",null,null,forum2};
 		String[] permission = {};
 

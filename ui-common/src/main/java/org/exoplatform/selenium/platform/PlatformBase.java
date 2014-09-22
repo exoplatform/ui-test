@@ -58,7 +58,7 @@ public class PlatformBase extends TestBase {
 	public final String ELEMENT_LEFT_NAVIGATION_ITEM_INDEX="//ul[@class='uiCompanyNavigations']//li[${index}]/a[text()='${menuItem}']";
 	public final String ELEMENT_LEFT_NAVIGATION_ITEM_INDEX_PLF41="//ul[@class='uiCompanyNavigations']//li[${index}]/a[@href='${menuItem}']";
 	public final By ELEMENT_SPACE_NAVIGATION = By.className("spaceNavigation");
-	public final String ELEMENT_SPACE_NAVIGATION_SPACE_ITEM = "//*[@class='spaceNavigation']//a[contains(text(),'${spaceName}')]";
+	public final String ELEMENT_SPACE_NAVIGATION_SPACE_ITEM = "//*[@class='spaceNavigation']//span[contains(text(),'${spaceName}')]";
 	public final String ELEMENT_SPACE_NAVIGATION_SPACE_ITEM_INDEX = "//*[@class='spaceNavigation']/li[${index}]/a[contains(text(),'${spaceName}')]";
 	public final String ELEMENT_SPACE_NAVIGATION_SPACE_ITEM_INDEX_PLF41 = "//*[@class='spaceNavigation']/li[${index}]/a[@class='spaceIcon avatarMini']/*[@data-original-title = '${spaceName}']";
 	public final By ELEMENT_LEFT_NAVIGATION_SEARCH_SPACE=By.xpath("//*[@id='UISpaceNavigationPortlet']//*[@value='Search Spaces']");
@@ -1473,6 +1473,26 @@ public class PlatformBase extends TestBase {
 			WebElement web = (WebElement) js.executeScript("return $(\"a:contains('" + text + "')\").get(0);");
 			return web;
 		}
+	}
+	
+	/**
+	 * Convert Full name to user name of default users
+	 * @param name: full name
+	 * @return user name
+	 */
+	public String convertToUserName(String name){
+		if (name.equals("Mary Williams"))
+			return "mary";
+		else if (name.equals("John Smith"))
+			return "john";
+		else if (name.equals("Jack Miller"))
+			return "demo";
+		else if (name.equals("James Davis"))
+			return "james";
+		else if (name.equals("Root Root"))
+			return "root";
+		else
+			return "";
 	}
 
 	/*	*//**

@@ -63,7 +63,7 @@ public class Cloud_Create_Users extends PlatformBase{
 		userGroup.addUsersToGroup("fqaexo", "manager", false, false);
 		userGroup.addUsersToGroup("fqaexo", "*", false, false);
 		click(ELEMENT_UP_LEVEL);
-	
+
 		//platform/users
 		userGroup.selectGroup("Platform/Users", true);
 		userGroup.addUsersToGroup("john", "*", false, false);
@@ -88,7 +88,7 @@ public class Cloud_Create_Users extends PlatformBase{
 		userGroup.addUsersToGroup("demo", "member", true, true);
 
 		click(ELEMENT_UP_LEVEL);
-		//Organization/Management/Executive Board
+		//		Organization/Management/Executive Board
 		userGroup.selectGroup("Organization/Management/Executive Board", true);
 		userGroup.addUsersToGroup("john", "*", true, true);
 

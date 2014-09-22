@@ -52,7 +52,7 @@ public class Forum_Forum_Topic_ManagePoll extends ForumBase{
 	 */
 	@Test
 	public void test01_AddPoll() {
-		String titleCat = "Category 01";
+		String titleCat = "Category 74762";
 		String titleForum = "Forum 01";
 		String titleTop = "Topic 01";
 		String poll = "Poll of topic 01";
@@ -72,7 +72,7 @@ public class Forum_Forum_Topic_ManagePoll extends ForumBase{
 	 */
 	@Test
 	public void test02_EditPoll() {
-		String titleCat = "Category 02";
+		String titleCat = "Category 71202";
 		String titleForum = "Forum 02";
 		String titleTop = "Topic 02";
 		String poll = "Poll of topic 02";
@@ -102,7 +102,7 @@ public class Forum_Forum_Topic_ManagePoll extends ForumBase{
 	 */
 	@Test
 	public void test03_DeletePoll() {
-		String titleCat = "Category 03";
+		String titleCat = "Category 71202";
 		String titleForum = "Forum 03";
 		String titleTop = "Topic 03";
 		String poll = "Poll of topic 03";
@@ -124,7 +124,7 @@ public class Forum_Forum_Topic_ManagePoll extends ForumBase{
 	 */
 	@Test
 	public void test04_ClosePoll() {
-		String titleCat = "Category 04";
+		String titleCat = "Category 71202";
 		String titleForum = "Forum 04";
 		String titleTop = "Topic 04";
 		String poll = "Poll of topic 04";

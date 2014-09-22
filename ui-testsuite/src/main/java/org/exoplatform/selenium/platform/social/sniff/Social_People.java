@@ -10,6 +10,7 @@ import org.exoplatform.selenium.platform.social.PeopleConnection;
 import org.exoplatform.selenium.platform.social.PeopleProfile;
 import org.exoplatform.selenium.platform.social.PeopleSearch;
 import org.exoplatform.selenium.platform.social.SocialBase;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -59,6 +60,16 @@ public class Social_People extends SocialBase {
 		info("Logout portal");
 		driver.manage().deleteAllCookies();
 		driver.quit();
+	}
+	@AfterClass
+	public void afterClass() {
+		magAcc.userSignIn(userType.ADMIN);
+		navToolBar.goToMyProfile();
+		peoPro.editUserBasicInformation("John", "Smith");
+		magAcc.userSignIn(userType.PUBLISHER);
+		navToolBar.goToMyProfile();
+		peoPro.editUserBasicInformation("Mary", "Williams");
+		
 	}
 
 	/**
@@ -131,10 +142,10 @@ public class Social_People extends SocialBase {
 		navToolBar.goToConnectionPage();
 
 		//Show all users on Social and user can send friend request to connect with other users
-		waitForAndGetElement(peoConn.ELEMENT_PEOPLE_SEARCH.replace("${peopleName}", user1));
-		waitForAndGetElement(peoConn.ELEMENT_PEOPLE_SEARCH.replace("${peopleName}", user2));
-		waitForAndGetElement(peoConn.ELEMENT_PEOPLE_SEARCH.replace("${peopleName}", user3));
-		waitForAndGetElement(peoConn.ELEMENT_PEOPLE_SEARCH.replace("${peopleName}", user4));
+		waitForAndGetElement(peoConn.ELEMENT_PEOPLE_SEARCH.replace("${peopleName}", "mary"));
+		waitForAndGetElement(peoConn.ELEMENT_PEOPLE_SEARCH.replace("${peopleName}", "demo"));
+		waitForAndGetElement(peoConn.ELEMENT_PEOPLE_SEARCH.replace("${peopleName}", "james"));
+		waitForAndGetElement(peoConn.ELEMENT_PEOPLE_SEARCH.replace("${peopleName}", "root"));
 	}
 
 	/**
@@ -436,8 +447,8 @@ public class Social_People extends SocialBase {
 		waitForAndGetElement("//*[contains(text(),'"+firstName+"')]");
 		waitForAndGetElement("//*[contains(text(),'"+lastName+"')]");
 		waitForAndGetElement("//*[contains(text(),'"+email+"')]");
-		waitForAndGetElement("//*[contains(text(),'"+typeOfGender+"')]");
-		waitForAndGetElement("//div[contains(text(),'"+typeOfAddPhone+"')]");
+		waitForAndGetElement("//*[contains(text(),'"+typeOfGender.toLowerCase()+"')]");
+		waitForAndGetElement("//div[contains(text(),'"+typeOfAddPhone.toLowerCase()+"')]");
 		waitForAndGetElement("//*[contains(text(),'"+numberOfPhone+"')]");
 		waitForAndGetElement("//*[contains(text(),'"+typeOfIMS+"')]");
 		waitForAndGetElement("//*[contains(text(),'"+nameOfIMS+"')]");

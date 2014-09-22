@@ -7,9 +7,7 @@
 			</run>
 		</groups>
 		 <classes>
-    		<class name="org.exoplatform.selenium.platform.social.sniff.Social_People"/>
     		<class name="org.exoplatform.selenium.platform.social.sniff.Social_HomePage_ActivityStream"/>
-            <class name="org.exoplatform.selenium.platform.social.sniff.Social_HomePage_Activity"/>
             <class name="org.exoplatform.selenium.platform.social.sniff.Social_Space_MemberManagement"/>
             <class name="org.exoplatform.selenium.platform.social.sniff.Social_Dashboard"/>
             <class name="org.exoplatform.selenium.platform.social.sniff.Social_HomePage_ActivityComposer"/>
@@ -23,6 +21,8 @@
             <class name="org.exoplatform.selenium.platform.social.sniff.Social_EmailNotifications_NotificationType"/>
             <class name="org.exoplatform.selenium.platform.social.sniff.Social_EmailNotifications_Settings"/>
             <class name="org.exoplatform.selenium.platform.social.sniff.Social_EmailNotifications_Administration"/>
+            <class name="org.exoplatform.selenium.platform.social.sniff.Social_HomePage_Activity"/>
+            <class name="org.exoplatform.selenium.platform.social.sniff.Social_People"/>
         </classes>
 	</test>
 	<listeners>

@@ -106,11 +106,11 @@ public class Social_EmailNotifications_Administration extends Notification {
 		String password = "gtngtn";
 		String fullName = username + " "+username;
 		String email = username + "@gmail.com";
-		By eEmail = By.xpath(ELEMENT_GMAIL_TITLE.replace("${title}", fullName+" has joined eXo"));
+		By eEmail = By.xpath(ELEMENT_GMAIL_TITLE.replace("{$title}", fullName+" has joined eXo"));
 		String username2 = getRandomString();
 		String fullName2 = username2 + " "+ username2;
 		String email2 = username2 + "@gmail.com";
-		By eEmail2 = By.xpath(ELEMENT_GMAIL_TITLE.replace("${title}", fullName2+" has joined eXo"));
+		By eEmail2 = By.xpath(ELEMENT_GMAIL_TITLE.replace("{$title}", fullName2+" has joined eXo"));
 		info("CaseID-109865:Disable a Notification");
 		//Setup email
 		navToolBar.goToMyProfile();
@@ -135,7 +135,7 @@ public class Social_EmailNotifications_Administration extends Notification {
 
 		//Verify activity "New user" is not present on Notification settings
 		navToolBar.goToNotificationSettings();
-		waitForAndGetElement(ELEMENT_NOTIFY_COLUMN.replace("${column}", ""));
+		waitForAndGetElement(ELEMENT_NOTIFY_COLUMN.replace("${column}", "Notify me when:"));
 		waitForElementNotPresent(ELEMENT_JOIN_INTRANET_SEND_RIGHT);
 
 		//Add new user

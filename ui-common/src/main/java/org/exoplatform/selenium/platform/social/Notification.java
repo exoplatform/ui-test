@@ -128,7 +128,7 @@ public class Notification extends SocialBase {
 	public void enableNotification(String title,boolean option){
 		if(!option){
 			info("Disable notification " + title);
-			click(ELEMENT_ENABLE.replace("${title}", title).replace("${enable}", "YES"));
+			click(ELEMENT_ENABLE.replace("${title}", title).replace("${enable}", "YES"),2);
 			waitForAndGetElement(ELEMENT_ENABLE.replace("${title}",title).replace("${enable}", "NO"));
 		}
 		else{

@@ -31,20 +31,21 @@ public class PeopleConnection extends SocialBase {
 	public final By ELEMENT_MY_CONNECTIONS_TAB = By.linkText("My Connections");
 	public final By ELEMENT_EVERYONE_TAB = By.linkText("Everyone");
 	public final By ELEMENT_REQUEST_SENT_TAB = By.linkText("Requests Sent");
-	public final String ELEMENT_CONNECTION_BUTTON = "//a[text()='${peopleName}']/ancestor::div[@class='spaceBox pull-left']//button[contains(text(),'Connect')]";
-	public final String ELEMENT_CANCEL_REQUEST_BUTTON = "//a[text()='${peopleName}']/ancestor::div[@class='spaceBox pull-left']//button[contains(text(),'Cancel Request')]";
-	public final String ELEMENT_REMOVE_CONNECTION_BUTTON = "//a[text()='${peopleName}']/ancestor::div[contains(@class,'spaceBox pull-left')]//button[contains(text(),'Remove Connection')]";
-	public final String ELEMENT_CONFIRM_BUTTON = "//a[text()='${peopleName}']/ancestor::div[@class='spaceBox pull-left']//button[contains(text(),'Confirm')]";
-	public final String ELEMENT_IGNORE_BUTTON = "//*[@data-original-title='${peopleName}']/../..//*[text()='Ignore']";
+	public final String ELEMENT_CONNECTION_BUTTON = "//a[contains(@href,'${peopleName}')]/..//button[contains(text(),'Connect')]";
+	public final String ELEMENT_CANCEL_REQUEST_BUTTON = "//a[contains(@href,'${peopleName}')]/../ancestor::div[@class='spaceBox pull-left']//button[contains(text(),'Cancel Request')]/ancestor::div[@class='spaceBox pull-left']//button[contains(text(),'Cancel Request')]";
+	public final String ELEMENT_REMOVE_CONNECTION_BUTTON = "//a[contains(@href,'${peopleName}')]/ancestor::div[contains(@class,'spaceBox pull-left')]//button[contains(text(),'Remove Connection')]";
+	public final String ELEMENT_CONFIRM_BUTTON = "//a[contains(@href,'${peopleName}')]/ancestor::div[@class='spaceBox pull-left']//button[contains(text(),'Confirm')]";
+	public final String ELEMENT_IGNORE_BUTTON = "//a[contains(@href,'${peopleName}')]/../..//*[text()='Ignore']";
 	//public final String ELEMENT_IGNORE_BUTTON = "//*[@data-original-title='${peopleName}']/../..//*[text()='Ignore']";
 	public final String ELEMENT_CONNECT_LIST = "//*[text()='Connect']";
-	public final String ELEMENT_PEOPLE_SEARCH = "//*[@class='uiProfileUserSearch']/..//*[text()='${peopleName}']";
+	public final String ELEMENT_PEOPLE_SEARCH = "//*[@class='uiProfileUserSearch']/..//a[contains(@href,'${peopleName}')]";
 	public final String ELEMENT_EVERYONE_TAB_ACTIVE = "//li[@class='active']/a[contains(text(),'Everyone')]";
 	public final By ELEMENT_REVOKE_BUTTON = By.xpath("//button[text()='Revoke']");
 
 	//-----------------------Connections page------------------------
 	public String ELEMENT_INVITATION_RECEIVED_MSG = "//h4[@class='spaceTitle']/a[contains(text(),'${acc}')]/ancestor::div[@class='spaceBox pull-left']/div[@class='connectionBtn clearfix']/span[contains(text(),'Invitation Received')]";
 
+	
 	/**
 	 * Connect to people
 	 * @param peopleName: name of selected people (String)
@@ -56,6 +57,8 @@ public class PeopleConnection extends SocialBase {
 		//By ELEMENT_CANCEL_REQUEST_BUTTON = By.xpath("//div/a[text()='"+peopleName+"']/following::ul/li/a[@title='Cancel Request']");
 		//By ELEMENT_CANCEL_REQUEST_BUTTON = By.xpath(ELEMENT_CONNECTION.replace("${peopleName}", peopleName) + "/../../ul/li[2]/a[@title='Cancel Request']");
 		info("-- Connect the user: " + peopleName);
+		
+		
 		if(waitForAndGetElement(ELEMENT_EVERYONE_TAB,5000,0)==null){
 			info("----Go to My connections----");
 			goToMyConnections();
@@ -65,6 +68,7 @@ public class PeopleConnection extends SocialBase {
 		if(waitForAndGetElement(ELEMENT_EVERYONE_TAB_ACTIVE,5000,0) == null)
 			click(ELEMENT_EVERYONE_TAB);
 		resetConnection(peopleName);
+		peopleName = convertToUserName(peopleName);
 		info("-----Click connect to people-----");
 		//	waitForAndGetElement(ELEMENT_CONNECTION_BUTTON.replace("${peopleName}", peopleName));
 		click(ELEMENT_CONNECTION_BUTTON.replace("${peopleName}", peopleName));
@@ -80,6 +84,7 @@ public class PeopleConnection extends SocialBase {
 	 */
 	public void acceptInvitation (String peopleName) {
 		info("-- Accept the invitation: " + peopleName);
+		peopleName = convertToUserName(peopleName);
 		if(waitForAndGetElement(ELEMENT_REQUESTS_RECEIVED_TAB,5000,0)==null){
 			info("----Go to My connections----");
 			goToMyConnections();
@@ -103,6 +108,7 @@ public class PeopleConnection extends SocialBase {
 	 */
 	public void ignoreInvitation (String peopleName) {
 		info("-- Ignore the invitation from: " + peopleName);
+		peopleName = convertToUserName(peopleName);
 		if(waitForAndGetElement(ELEMENT_REQUESTS_RECEIVED_TAB,5000,0)==null){
 			info("----Go to My connections----");
 			goToMyConnections();
@@ -126,7 +132,7 @@ public class PeopleConnection extends SocialBase {
 	 */
 	public void removeConnection(String peopleName){
 		info("-- Remove connection with: " + peopleName);
-
+		peopleName = convertToUserName(peopleName);
 		if(waitForAndGetElement(ELEMENT_MY_CONNECTIONS_TAB,5000,0)==null){
 			info("----Go to My connections----");
 
@@ -162,6 +168,7 @@ public class PeopleConnection extends SocialBase {
 	 */
 	public void cancelRequest(String peopleName){
 		info("-- Cancel the invitation: " + peopleName);
+		peopleName = convertToUserName(peopleName);
 		if(waitForAndGetElement(ELEMENT_REQUEST_PENDING_TAB,5000,0)==null){
 			info("----Go to My connections----");
 			goToMyConnections();
@@ -195,6 +202,7 @@ public class PeopleConnection extends SocialBase {
 
 	public void resetConnection(String user){
 		info("-- Reset Connection to: " + user);
+		
 		if(waitForAndGetElement(ELEMENT_EVERYONE_TAB, 5000, 0) == null){
 			goToMyConnections();
 			click(ELEMENT_EVERYONE_TAB);
@@ -202,7 +210,8 @@ public class PeopleConnection extends SocialBase {
 		else
 			click(ELEMENT_EVERYONE_TAB);
 		peoSearch.searchPeople(true,user);
-		waitForAndGetElement(By.linkText(user),DEFAULT_TIMEOUT2);
+		user = convertToUserName(user);
+		waitForAndGetElement(ELEMENT_PEOPLE_SEARCH.replace("${peopleName}", user));
 		if (waitForAndGetElement(ELEMENT_CANCEL_REQUEST_BUTTON.replace("${peopleName}", user), 5000, 0) != null){
 			click(ELEMENT_CANCEL_REQUEST_BUTTON.replace("${peopleName}", user));
 		}
