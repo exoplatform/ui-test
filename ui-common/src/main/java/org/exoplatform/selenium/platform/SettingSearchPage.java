@@ -1,5 +1,6 @@
 package org.exoplatform.selenium.platform;
 import static org.exoplatform.selenium.TestLogger.info;
+
 import org.exoplatform.selenium.Button;
 import org.exoplatform.selenium.ManageAlert;
 import org.exoplatform.selenium.Utils;
@@ -79,7 +80,9 @@ public class SettingSearchPage extends PlatformBase {
 	public final String ELEMENT_RESULT_ICON = "//div[@id='resultPage']//a[text()='${item}']/*[contains(text(),'${keySearch}')]/../../../../*[contains(@class,'avatar pull-left')]";
 	public final String ELEMENT_RESULT_INDEX = "//*[@id='result']/div[${index}][contains(@class,'${title}')]";
 	public final By ELEMENT_RESULT_CONTENT_DETAIL = By.xpath("//*[@class='content']/*[@class='detail']");
-	
+
+	public final String ELEMENT_SEARCH_RESULT_EXCERPT= "//*[@id='result']//div[@class='detail'][contains(.,'${keySearch}')]";
+	public final String ELEMENT_SEARCH_RESULT_CONTENT_DETAIL= "//*[@id='result']//div[@class='detail'][contains(.,'${keySearch1}') and contains(.,'${keySearch2}')]";
 	//Task page result
 	public final String ELEMENT_RESULT_TASK_ICON = "//div[@id='resultPage']//a[text()='${item}']/*[contains(text(),'${keySearch}')]/../../../..//*[@class='uiIconApp64x64TaskNeedActions']";
 
@@ -90,12 +93,16 @@ public class SettingSearchPage extends PlatformBase {
 	public final String ELEMENT_RESULT_PEOPLE_ICON = "//*[contains(@class,'avatar pull-left')]";
 	public final By ELEMENT_RESULT_TITLE = By.xpath("//*[@class='content']//a");
 
+	public final String ELEMENT_SEARCH_RESULT_TITLE= "//*[@class='content']//a[contains(text(),'${tileName}')]";
+
 	//File page result
 	public final String ELEMENT_RESULT_FILE_ICON = "//div[@id='resultPage']//a[text()='${item}']/*[contains(text(),'${keySearch}')]/../../../..//*[contains(@class,'avatar pull-left')]";
 
 	//Forum page result
 	public final By ELEMENT_RESULT_FORUM_ICON = By.xpath("//*[@class='uiIconApp64x64Forum']");
 	public final By ELEMENT_RESULT_FORUM_VOTE = By.xpath("//*[@class='avgRatingImages clearfix']");
+	public final String ELEMENT_SEARCH_RESULT_FORUM_VOTE = "//*[contains(text(),'${keySearch}')]/..//div[@class='avgRatingImages clearfix']";
+
 
 	//Answer page result
 	public final By ELEMENT_RESULT_ANSWER_ICON = By.xpath("//*[@class='uiIconApp64x64Answers']");
@@ -133,6 +140,17 @@ public class SettingSearchPage extends PlatformBase {
 		Utils.pause(3000);
 		click(ELEMENT_SEE_ALL_SEARCH_RESULTS);
 		Utils.pause(1000);
+	}
+	
+	/** quick search a text
+	 * @author quynhpt
+	 * @param searchText
+	 */
+	public void quickSearchType(String TypeText){
+		info("-- Go to quick search --");
+		click(ELEMENT_QUICK_SEARCH_ICON);
+		type(ELEMENT_QUICK_SEARCH_TEXTBOX,TypeText,true);
+		Utils.pause(3000);
 	}
 
 	/** Go To Edit Search Portlet

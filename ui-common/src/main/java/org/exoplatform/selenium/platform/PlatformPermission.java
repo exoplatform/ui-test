@@ -43,9 +43,10 @@ public class PlatformPermission extends PlatformBase {
 	public final By ELEMENT_PERMISSION_TAB = By.linkText("Permissions");
 	public final By ELEMENT_PERMISSION_INPUT = By.id("UIPermissionInput");
 	public final By ELEMENT_PERMISSION_INPUT_PLF4_1 = By.id("permissionInput");
-	public final By ELEMENT_SELECT_USER_ICON = By.xpath("//*[@id='PermissionTab']//*[@class='uiIconUser uiIconLightGray']");
-	public final By ELEMENT_SELECT_MEMBERSHIP_ICON = By.xpath("//*[@id='PermissionTab']//*[@class='uiIconMembership uiIconLightGray']");
-	public final By ELEMENT_SELECT_GROUP_ICON = By.xpath("//*[@id='PermissionTab']//*[@class='uiIconGroup uiIconLightGray']");
+	public final By ELEMENT_SELECT_USER_ICON = By.xpath(".//*[contains(@id,'Permission')]//*[@class='uiIconUser uiIconLightGray']");
+	public final By ELEMENT_SELECT_MEMBERSHIP_ICON =By.xpath(".//*[contains(@id,'Permission')]//*[@class='uiIconUser uiIconLightGray']");
+	public final By ELEMENT_SELECT_GROUP_ICON = By.xpath(".//*[contains(@id,'Permission')]//*[@class='uiIconUser uiIconLightGray']");
+	
 	public final By ELEMENT_ADD_USERS_BUTTON = By.xpath("//*[@id='UIUserSelector']//*[text()='Add']");
 	public final By ELEMENT_SELECT_USER_POPUP = By.xpath("//span[@class='PopupTitle popupTitle' and text()='Select User']");
 	public final By ELEMENT_SELECT_GROUP_POPUP = By.xpath("//span[@class='PopupTitle popupTitle' and text()='Select Group']");

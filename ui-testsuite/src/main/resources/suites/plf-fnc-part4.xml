@@ -18,6 +18,7 @@
 			<class name = "org.exoplatform.selenium.platform.plf.functional.genericuserpopup.PLF_GenericUserPopup_ActivityStream" />
 			<class name = "org.exoplatform.selenium.platform.plf.functional.homepageactivitystream.refresh.PLF_HomepageActivityStream_Refresh" />
 			<class name = "org.exoplatform.selenium.platform.plf.functional.genericuserpopup.PLF_GenericUserPopup_ConnectionApplication" />
+			<class name = "org.exoplatform.selenium.platform.plf.functional.unifiedsearch.PLF_UnifiedSearch_DiscussionSearch" />
 		</classes>
 	</test>
 	<listeners>

@@ -13,6 +13,7 @@ import org.openqa.selenium.WebElement;
 
 /**
  * Migrate from plf3.5
+ * 
  * @author lientm
  * @date 19 Aug 2013
  */
@@ -26,51 +27,66 @@ public class ForumManageTopic extends ForumBase {
 	ForumManagePost mngPost;
 	NavigationToolbar naviToolbar;
 
-	public ForumManageTopic(WebDriver dr,String...plfVersion){
-		this.plfVersion = plfVersion.length>0?plfVersion[0]:"4.0";
+	public ForumManageTopic(WebDriver dr, String... plfVersion) {
+		this.plfVersion = plfVersion.length > 0 ? plfVersion[0] : "4.0";
 		driver = dr;
-		userGroup = new UserGroupManagement(driver,this.plfVersion);
-		per = new ForumPermission(driver,this.plfVersion);
-		magCat = new ForumManageCategory(driver,this.plfVersion);
-		magFor = new ForumManageForum(driver,this.plfVersion);
-		button = new Button(driver,this.plfVersion);
-		alert = new ManageAlert(driver,this.plfVersion);
-		naviToolbar = new NavigationToolbar(driver,this.plfVersion);
-		navTool = new NavigationToolbar(driver,this.plfVersion);
+		userGroup = new UserGroupManagement(driver, this.plfVersion);
+		per = new ForumPermission(driver, this.plfVersion);
+		magCat = new ForumManageCategory(driver, this.plfVersion);
+		magFor = new ForumManageForum(driver, this.plfVersion);
+		button = new Button(driver, this.plfVersion);
+		alert = new ManageAlert(driver, this.plfVersion);
+		naviToolbar = new NavigationToolbar(driver, this.plfVersion);
+		navTool = new NavigationToolbar(driver, this.plfVersion);
 	}
 
-	//----------------topic home screen---------------------------------------------------
+	// ----------------topic home
+	// screen---------------------------------------------------
 
 	public By ELEMENT_DELETE_TOPIC = By.id("UITopicDetailConfirm0");
-	public By ELEMENT_EDIT_TOPIC = By.xpath("//*[contains(@href, 'EditTopic')]");
-	public By ELEMENT_MOVE_TOPIC = By.xpath("//div[@class='dropdown uiDropdownWithIcon actionIcon open']//i[@class='uiIconMove']");
+	public By ELEMENT_EDIT_TOPIC = By
+			.xpath("//*[contains(@href, 'EditTopic')]");
+	public By ELEMENT_MOVE_TOPIC = By
+			.xpath("//div[@class='dropdown uiDropdownWithIcon actionIcon open']//i[@class='uiIconMove']");
 	public By ELEMENT_APPROVE_TOPIC = By.xpath("//*[text()='Approve']");
-	public By ELEMENT_CHECK_ALL = By.xpath("//*[@id='UITopicContent']//input[@title='Check All']");
-	public String ELEMENT_BREADCRUMB_TOPIC = "//a[@data-original-title='${forum}']/../../li[text()='${topic}']"; 
+	public By ELEMENT_CHECK_ALL = By
+			.xpath("//*[@id='UITopicContent']//input[@title='Check All']");
+	public String ELEMENT_BREADCRUMB_TOPIC = "//a[@data-original-title='${forum}']/../../li[text()='${topic}']";
 	public String MSG_DELETE_TOPIC = "Are you sure you want to delete this topic ?";
-	public By ELEMENT_OK_DELETE_TOPIC = By.xpath("//span[contains(text(),'Are you sure you want to delete this topic ?')]/../../..//button[@class='btn actionOK']");
-	public By ELEMENT_LOCK_TOPIC = By.xpath("//li[@class='defaultStyle forumSeparatorLine']//a[contains(text(),'Lock')]"); 
-	public By ELEMENT_UNLOCK_TOPIC = By.xpath("//li[@class='defaultStyle forumSeparatorLine']//a[contains(text(),'Unlock')]"); 
+	public By ELEMENT_OK_DELETE_TOPIC = By
+			.xpath("//span[contains(text(),'Are you sure you want to delete this topic ?')]/../../..//button[@class='btn actionOK']");
+	public By ELEMENT_LOCK_TOPIC = By
+			.xpath("//li[@class='defaultStyle forumSeparatorLine']//a[contains(text(),'Lock')]");
+	public By ELEMENT_UNLOCK_TOPIC = By
+			.xpath("//li[@class='defaultStyle forumSeparatorLine']//a[contains(text(),'Unlock')]");
 	public By ELEMENT_CLOSE_TOPIC = By.xpath("//i[@class='uiIconMinus']");
 	public By ELEMENT_OPEN_TOPIC = By.xpath("//i[@class='uiIconOpen']");
-	public final By ELEMENT_MORE_ACTION = By.xpath("//form[@id='UITopicDetail']//*[@data-toggle='dropdown']/*[@class='uiIconSettings uiIconLightGray']");
+	public final By ELEMENT_MORE_ACTION = By
+			.xpath("//form[@id='UITopicDetail']//*[@data-toggle='dropdown']/*[@class='uiIconSettings uiIconLightGray']");
 
-	public String ELEMENT_CATEGORY_BREAD = "//a[@data-original-title='${category}']"; 
-//	public By ELEMENT_TOPIC_ON_FORUM_HOMEPAGE = By.xpath("//*[contains(@data-original-title,'${topic}')]");
+	public String ELEMENT_CATEGORY_BREAD = "//a[@data-original-title='${category}']";
+	// public By ELEMENT_TOPIC_ON_FORUM_HOMEPAGE =
+	// By.xpath("//*[contains(@data-original-title,'${topic}')]");
 
-	//----------------start topic screen--------------------------------------------------
+	// ----------------start topic screen--------------------------------------------------
 
-	public By ELEMENT_START_TOPIC_BUTTON = By.xpath("//*[@class='btn btn-primary pull-left']");
-	public By ELEMENT_POPUP_START_TOPIC = By.xpath("//span[@class='PopupTitle popupTitle' and text()='New Topic']");
+	public By ELEMENT_START_TOPIC_BUTTON = By
+			.xpath("//*[@class='btn btn-primary pull-left']");
+	public By ELEMENT_POPUP_START_TOPIC = By
+			.xpath("//span[@class='PopupTitle popupTitle' and text()='New Topic']");
 	public By ELEMENT_SUBMIT_BUTTON = By.xpath("//button[text()='Submit']");
-	public By ElEMENT_CANCEL_ADD_TOPIC = By.xpath("//*[@id='UITopicForm']//button[text()='Cancel']");
+	public By ElEMENT_CANCEL_ADD_TOPIC = By
+			.xpath("//*[@id='UITopicForm']//button[text()='Cancel']");
 
 	public By ELEMENT_TOPIC_CONTENT_TAB = By.linkText("Content");
 	public By ELEMENT_TOPIC_TITLE = By.id("ThreadTitle");
 	public By ELEMENT_TOPIC_MESSAGE_CKEDITOR = By.id("cke_messageContent");
-	public By ELEMENT_TOPIC_MESSAGE_FRAME_CKEDITOR = By.xpath("//iframe[@class='cke_wysiwyg_frame cke_reset']");//By.id("scayt_0");
-	public By ELEMENT_TOPIC_MESSAGE_FRAME_1 = By.xpath("//iframe[@id='messageContent___Frame']");
-	public By ELEMENT_TOPIC_MESSAGE_FRAME_2 = By.xpath("//td[@id='xEditingArea']/iframe");
+	public By ELEMENT_TOPIC_MESSAGE_FRAME_CKEDITOR = By
+			.xpath("//iframe[@class='cke_wysiwyg_frame cke_reset']");// By.id("scayt_0");
+	public By ELEMENT_TOPIC_MESSAGE_FRAME_1 = By
+			.xpath("//iframe[@id='messageContent___Frame']");
+	public By ELEMENT_TOPIC_MESSAGE_FRAME_2 = By
+			.xpath("//td[@id='xEditingArea']/iframe");
 	public String ELEMENT_REMOVE_FILE = "//a[contains(@title, '${file}')]/../*//img[@class='DustBin']";
 
 	public By ELEMENT_TOPIC_ICON_TAB = By.linkText("Icon");
@@ -78,8 +94,8 @@ public class ForumManageTopic extends ForumBase {
 	public String ELEMENT_ICON = "//div[@class='${icon}']";
 	public String MSG_ADD_MODERATE_TOPIC = "Your topic is pending moderation. It will be displayed after approval.";
 	public String MSG_ADD_CENSOR_TOPIC = "This post may contain offensive content. It will be displayed after moderation.";
-	
-	//Options tab
+
+	// Options tab
 	public By ELEMENT_TOPIC_OPTIONS_TAB = By.linkText("Options");
 	public By ELEMENT_TOPIC_ADD_TYPE = By.xpath("//img[@alt='Add Topic Type']");
 	public By ELEMENT_TOPIC_SELECT_TYPE = By.id("TopicType");
@@ -90,31 +106,37 @@ public class ForumManageTopic extends ForumBase {
 	public By ELEMENT_TOPIC_STICKY = By.id("Sticky");
 
 	public By ELEMENT_TOPIC_PERMISSION_TAB = By.linkText("Permissions");
-	public By ELEMENT_RATING_TOPIC = By.xpath("//div[contains(text(),'Rating')]");
+	public By ELEMENT_RATING_TOPIC = By
+			.xpath("//div[contains(text(),'Rating')]");
 
-	//------------------add topic type screen--------------------------------------------------
-	public By ELEMENT_TOPIC_ADD_TYPE_POPUP = By.xpath("//span[@class='PopupTitle' and text()='Topic Type']");
+	// ------------------add topic type screen--------------------------------------------------
+	public By ELEMENT_TOPIC_ADD_TYPE_POPUP = By
+			.xpath("//span[@class='PopupTitle' and text()='Topic Type']");
 	public By ELEMENT_TOPIC_TYPE_NAME = By.id("topicTypeName");
-	public By ELEMENT_CANCEL_ADD_TYPE = By.xpath(".//*[@id='UIAddTopicTypeForm']/div[3]/a[text()='Cancel']");
-	public String MESSAGE_WAIT_APPROVE="Your topic is pending moderation. It will be displayed after approval.";
+	public By ELEMENT_CANCEL_ADD_TYPE = By
+			.xpath(".//*[@id='UIAddTopicTypeForm']/div[3]/a[text()='Cancel']");
+	public String MESSAGE_WAIT_APPROVE = "Your topic is pending moderation. It will be displayed after approval.";
 	public String APPROVE_TITLE = "${title} (Pending)";
 
-	//------------------edit topic screen------------------------------------------------------
-	public By ELEMENT_TOPIC_EDIT_POPUP = By.xpath("//span[@class='PopupTitle popupTitle' and text()='Edit Topic']");
+	// ------------------edit topic screen------------------------------------------------------
+	public By ELEMENT_TOPIC_EDIT_POPUP = By
+			.xpath("//span[@class='PopupTitle popupTitle' and text()='Edit Topic']");
 	public By ELEMENT_TOPIC_EDIT_REASON = By.id("editReason");
 
-	//-------------------move topic screen----------------------------------------------------
+	// -------------------move topic screen----------------------------------------------------
 
-	public By ELEMENT_POPUP_MOVE_TOPIC = By.xpath("//span[@class='PopupTitle popupTitle' and text()='Move Topics']"); 
-	public String ELEMENT_FORUM_SELECT = "//a[contains(text(),'${forum}')]"; 
+	public By ELEMENT_POPUP_MOVE_TOPIC = By
+			.xpath("//span[@class='PopupTitle popupTitle' and text()='Move Topics']");
+	public String ELEMENT_FORUM_SELECT = "//a[contains(text(),'${forum}')]";
 
-	//-------------------Add tag--------------------------------------------------------------
+	// -------------------Add tag--------------------------------------------------------------
 	public By ELEMENT_TAG = By.xpath("//i[@class='uiIconTag uiIconLightGray']");
 	public By ELEMENT_ADD_TAG = By.id("AddTag");
-	public By ELEMENT_ADD_TAG_BUTTON = By.xpath("//a[contains(text(),'Add Tag')]");
+	public By ELEMENT_ADD_TAG_BUTTON = By
+			.xpath("//a[contains(text(),'Add Tag')]");
 	public String ELEMENT_TAG_NUMBER = "//*[@id='searchTagName']/div/font[text()='(${No})']";
 	public By ELEMENT_MANAGE_TAG = By.linkText("Manage Tag");
-//	public By ELEMENT_UNTAG = By.xpath("//a[contains(text(), 'Untag')]");
+	// public By ELEMENT_UNTAG = By.xpath("//a[contains(text(), 'Untag')]");
 	public By ELEMENT_UNTAG = By.id("UITopicsTagConfirm0");
 	public String ELEMENT_CHECKBOX_UNTAG = "//input[@type='checkbox' and @title='${topic}']";
 	public String MESSAGE_UNTAG = "//*[@id='UIForumPopupConfirmation']//span[contains(text(),'Are you sure you want to remove this tag from the topic ?')]";
@@ -122,66 +144,82 @@ public class ForumManageTopic extends ForumBase {
 	public String MESSAGE_ADD_TAG_BLANK_NAME = "The field must not be blank.";
 	public String ELEMENT_UNTAG_ICON = "//a[text()='${tag}']/parent::span/i[@class='uiIconClose uiIconLightGray']";
 	public String ELEMENT_SUGGESTION = "#searchTagName div:contains('${tag}') font:contains('(${No})')";
-	
+
 	public String ELEMENT_WARNING_MSG = "//span[@class='warningIcon' and contains(text(),'The field must not be blank.')]";
-//	public String ELEMENT_TOPIC_CHECKBOX = "//a[contains(text(),'${topic}')]/ancestor::table[@class='uiGrid table no-border-cell rounded-corners-bottom table-hover table-striped']//span[@class='uiCheckbox']/input[@class='checkbox' and starts-with(@name,'topic')]";
+	// public String ELEMENT_TOPIC_CHECKBOX =
+	// "//a[contains(text(),'${topic}')]/ancestor::table[@class='uiGrid table no-border-cell rounded-corners-bottom table-hover table-striped']//span[@class='uiCheckbox']/input[@class='checkbox' and starts-with(@name,'topic')]";
 	public String ELEMENT_TOPIC_CHECKBOX = "//span[@class='uiCheckbox']/input[@class='checkbox' and starts-with(@name,'topic')]";
 	public String ELEMENT_TAG_SUGGESTED = "//div[@class='searchTagName']//a[contains(text(),'${tagName}')]";
 
-	//-------------------censor topic list form-----------------------------------------------
-	public By ELEMENT_POPUP_CENSOR_TOPIC = By.xpath("//span[@class='PopupTitle popupTitle' and text()='Censor Topics List']");
-	public String ELEMENT_CENSOR_TOPIC_CHECKBOX ="//*[text()='${topic}']/../../../*//input[@type='checkbox']";
+	// -------------------censor topic list form-----------------------------------------------
+	public By ELEMENT_POPUP_CENSOR_TOPIC = By
+			.xpath("//span[@class='PopupTitle popupTitle' and text()='Censor Topics List']");
+	public String ELEMENT_CENSOR_TOPIC_CHECKBOX = "//*[text()='${topic}']/../../../*//input[@type='checkbox']";
 	public By ELEMENT_CENSOR_APPROVE_BUTTON = By.xpath("//*[text()='Approve']");
 
-	//-------------------Go to topic types management screen----------------------------------------------------
-	public By ELEMENT_TOPIC_TYPES=By.xpath("//span[text()='Topic Types']");
-	public By ELEMENT_TOPIC_MANAGER_POPUP=By.xpath("//span[text()='Topic Type Manager']");
-	public By ELEMENT_ADD_TOPIC_TYPE_BUTTON=By.xpath("//a[@class='ActionButton LightBlueStyle' and text()='Add Topic Type']");
+	// -------------------Go to topic types management screen----------------------------------------------------
+	public By ELEMENT_TOPIC_TYPES = By.xpath("//span[text()='Topic Types']");
+	public By ELEMENT_TOPIC_MANAGER_POPUP = By
+			.xpath("//span[text()='Topic Type Manager']");
+	public By ELEMENT_ADD_TOPIC_TYPE_BUTTON = By
+			.xpath("//a[@class='ActionButton LightBlueStyle' and text()='Add Topic Type']");
 
-	//-------------------Poll management screen-----------------------------------------------------------------
+	// -------------------Poll management screen-----------------------------------------------------------------
 
-	public By ELEMENT_POLL_POPUP = By.xpath("//span[@class='PopupTitle' and text()='Poll']");
+	public By ELEMENT_POLL_POPUP = By
+			.xpath("//span[@class='PopupTitle' and text()='Poll']");
 
-	//---------------------------------Vote topic--------------------------------
-	public By ELEMENT_RATE_TOPIC = By.xpath("//a[@class='actionIcon' and contains(text(),'Rate')]");
-	public By ELEMENT_RATE_TOPIC_TERRIBLE = By.xpath("//i[@data-original-title='Poor']");
-	public By ELEMENT_RATE_TOPIC_BAD = By.xpath("//i[@data-original-title='Below average']");
-	public By ELEMENT_RATE_TOPIC_AVERAGE = By.xpath("//i[@data-original-title='Average']");
-	public By ELEMENT_RATE_TOPIC_GOOD = By.xpath("//i[@data-original-title='Above average']");
-	public By ELEMENT_RATE_TOPIC_EXCELLENT = By.xpath("//i[@data-original-title='Good']");
+	// ---------------------------------Vote topic--------------------------------
+	public By ELEMENT_RATE_TOPIC = By
+			.xpath("//a[@class='actionIcon' and contains(text(),'Rate')]");
+	public By ELEMENT_RATE_TOPIC_TERRIBLE = By
+			.xpath("//i[@data-original-title='Poor']");
+	public By ELEMENT_RATE_TOPIC_BAD = By
+			.xpath("//i[@data-original-title='Below average']");
+	public By ELEMENT_RATE_TOPIC_AVERAGE = By
+			.xpath("//i[@data-original-title='Average']");
+	public By ELEMENT_RATE_TOPIC_GOOD = By
+			.xpath("//i[@data-original-title='Above average']");
+	public By ELEMENT_RATE_TOPIC_EXCELLENT = By
+			.xpath("//i[@data-original-title='Good']");
 	public String ELEMENT_TOPIC_VOTED = "//div[@class='avgRatingImages']/i[@class='voted'][${rate}]";
 	public String ELEMENT_RATE_CLOSE_BUTTON = "//form[@id='UIRatingForm']//*[text()='Close']";
-	public By ELEMENT_RATE_RATING = By.xpath("//div[contains(text(),'Rating')]");
+	public By ELEMENT_RATE_RATING = By
+			.xpath("//div[contains(text(),'Rating')]");
 
-	//------------Watch/Unwatch Topic---------------
+	// ------------Watch/Unwatch Topic---------------
 	public By ELEMENT_WATCH_TOPIC = By.linkText(" Watch");
 	public String ELEMENT_CLASS_WATCH_TOPIC = "AddWatchingIcon StatusIcon";
 
-
 	/*------------------------------Common function-----------------------------------*/
 
-	/** function: go to start topic from action bar
+	/**
+	 * function: go to start topic from action bar
+	 * 
 	 * @author lientm
 	 */
-	public void goToStartTopic(int... wayStart){
-		int way = wayStart.length > 0 ? wayStart[0]:2;
-		if (way == 1){
+	public void goToStartTopic(int... wayStart) {
+		int way = wayStart.length > 0 ? wayStart[0] : 2;
+		if (way == 1) {
 			info("Go to start topic from more action");
 			click(ELEMENT_MORE_ACTION);
 			click(ELEMENT_START_TOPIC_BUTTON);
-		}else {
+		} else {
 			info("Go to start topic by click start topic button");
 			click(ELEMENT_START_TOPIC_BUTTON);
 		}
 		waitForAndGetElement(ELEMENT_POPUP_START_TOPIC);
 	}
 
-	/** function: remove file in attach popup
+	/**
+	 * function: remove file in attach popup
+	 * 
 	 * @author lientm
-	 * @param fileName: remove a attached file in add/edit topic
+	 * @param fileName
+	 *            : remove a attached file in add/edit topic
 	 */
-	public void removeFileInTopic(String fileName){
-		By ELEMENT_REMOVE = By.xpath(ELEMENT_REMOVE_FILE.replace("${file}", fileName));
+	public void removeFileInTopic(String fileName) {
+		By ELEMENT_REMOVE = By.xpath(ELEMENT_REMOVE_FILE.replace("${file}",fileName));
 
 		WebElement element = waitForAndGetElement(ELEMENT_REMOVE);
 		if (element != null) {
@@ -194,26 +232,36 @@ public class ForumManageTopic extends ForumBase {
 		}
 	}
 
-	/** function: input data in content tab in start topic popup
+	/**
+	 * function: input data in content tab in start topic popup
+	 * 
 	 * @author lientm
-	 * @param title: title of topic
-	 * @param message: message
-	 * @param file: file upload
+	 * @param title
+	 *            : title of topic
+	 * @param message
+	 *            : message
+	 * @param file
+	 *            : file upload
 	 */
-	public void inputDataInContentTab_StartTopic(String title, String message, String... file){
+	public void inputDataInContentTab_StartTopic(String title, String message,
+			String... file) {
 		info("Input data in content tab");
 		waitForAndGetElement(ELEMENT_TOPIC_TITLE);
-		if (title != null){
+		if (title != null) {
 			type(ELEMENT_TOPIC_TITLE, title, true);
 		}
-		if (message != "" && message != null){
-			if(waitForAndGetElement(ELEMENT_TOPIC_MESSAGE_FRAME_CKEDITOR, 5000,0)!=null)
-				inputDataToFrame(ELEMENT_TOPIC_MESSAGE_FRAME_CKEDITOR, message,false);
-			else//(this.plfVersion.equalsIgnoreCase("4.0"))
-				inputDataToFrameInFrame(ELEMENT_TOPIC_MESSAGE_FRAME_1, ELEMENT_TOPIC_MESSAGE_FRAME_2, message,true,false);
-			switchToParentWindow();	
+		if (message != "" && message != null) {
+			if (waitForAndGetElement(ELEMENT_TOPIC_MESSAGE_FRAME_CKEDITOR,
+					5000, 0) != null)
+				inputDataToFrame(ELEMENT_TOPIC_MESSAGE_FRAME_CKEDITOR, message,
+						false);
+			else
+				// (this.plfVersion.equalsIgnoreCase("4.0"))
+				inputDataToFrameInFrame(ELEMENT_TOPIC_MESSAGE_FRAME_1,
+						ELEMENT_TOPIC_MESSAGE_FRAME_2, message, true, false);
+			switchToParentWindow();
 		}
-		if(file.length > 0 && file[0] != "" && file[0] != null){
+		if (file.length > 0 && file[0] != "" && file[0] != null) {
 			click(ELEMENT_ATTACH_FILE);
 			waitForAndGetElement(ELEMENT_POPUP_UPLOAD_FILE);
 			attachFile(file[0]);
@@ -221,17 +269,23 @@ public class ForumManageTopic extends ForumBase {
 		}
 	}
 
-	/** function: input data in icon tab in start topic popup
+	/**
+	 * function: input data in icon tab in start topic popup
+	 * 
 	 * @author lientm
-	 * @param groupName: group icon
-	 * @param iconClass: icon
+	 * @param groupName
+	 *            : group icon
+	 * @param iconClass
+	 *            : icon
 	 */
-	public void chooseIcon(String groupName, String iconClass){
-		By ELEMENT_GROUP = By.xpath(ELEMENT_GROUP_ICON.replace("${group}", groupName));
+	public void chooseIcon(String groupName, String iconClass) {
+		By ELEMENT_GROUP = By.xpath(ELEMENT_GROUP_ICON.replace("${group}",
+				groupName));
 		By ICON = By.xpath(ELEMENT_ICON.replace("${icon}", iconClass));
 
 		info("Choose icon");
-		if (groupName != "" && groupName != null && iconClass != "" && iconClass != null){
+		if (groupName != "" && groupName != null && iconClass != ""
+				&& iconClass != null) {
 			waitForAndGetElement(ELEMENT_GROUP);
 			click(ELEMENT_GROUP);
 			waitForAndGetElement(ICON);
@@ -241,70 +295,76 @@ public class ForumManageTopic extends ForumBase {
 		}
 	}
 
-	/** function: add a topic type in Options tab when start topic
+	/**
+	 * function: add a topic type in Options tab when start topic
+	 * 
 	 * @author lientm
-	 * @param typeName: name of topic type
-	 * @param groupName: group icon
-	 * @param iconClass: icon
+	 * @param typeName
+	 *            : name of topic type
+	 * @param groupName
+	 *            : group icon
+	 * @param iconClass
+	 *            : icon
 	 */
-	public void addTopicType(String typeName, String groupName, String iconClass){
+	public void addTopicType(String typeName, String groupName, String iconClass) {
 		info("Add new topic type");
 		waitForAndGetElement(ELEMENT_TOPIC_ADD_TYPE);
 		click(ELEMENT_TOPIC_ADD_TYPE);
-		modifyDataOfTopicType(typeName, groupName, iconClass);	
-		waitForElementNotPresent(ELEMENT_TOPIC_ADD_TYPE_POPUP);	
+		modifyDataOfTopicType(typeName, groupName, iconClass);
+		waitForElementNotPresent(ELEMENT_TOPIC_ADD_TYPE_POPUP);
 	}
 
-
-	public void inputDataInOptionsTab_StartTopic(boolean...options){
-		if (options.length > 0){
+	public void inputDataInOptionsTab_StartTopic(boolean... options) {
+		if (options.length > 0) {
 			info("Input data in Options tab");
 			click(ELEMENT_TOPIC_OPTIONS_TAB);
 		}
-		if (options.length > 0){
-			if (options[0]){
+		if (options.length > 0) {
+			if (options[0]) {
 				check(ELEMENT_TOPIC_STATE, 2);
-			}else {
+			} else {
 				uncheck(ELEMENT_TOPIC_STATE, 2);
 			}
 		}
-		if (options.length > 1){
-			if (options[1]){
+		if (options.length > 1) {
+			if (options[1]) {
 				check(ELEMENT_TOPIC_STATUS, 2);
-			}else {
+			} else {
 				uncheck(ELEMENT_TOPIC_STATUS, 2);
 			}
 		}
-		if (options.length > 2){
-			if (options[2]){
+		if (options.length > 2) {
+			if (options[2]) {
 				check(ELEMENT_TOPIC_STICKY, 2);
-			}else {
+			} else {
 				uncheck(ELEMENT_TOPIC_STICKY, 2);
 			}
 		}
-		if (options.length > 3){
-			if (options[3]){
+		if (options.length > 3) {
+			if (options[3]) {
 				check(ELEMENT_TOPIC_POSTS_MODER, 2);
-			}else {
+			} else {
 				uncheck(ELEMENT_TOPIC_POSTS_MODER, 2);
 			}
 		}
-		if (options.length > 4){
-			if (options[4]){
+		if (options.length > 4) {
+			if (options[4]) {
 				check(ELEMENT_TOPIC_POSTS_NOTIFY, 2);
-			}else {
+			} else {
 				uncheck(ELEMENT_TOPIC_POSTS_NOTIFY, 2);
 			}
 		}
 	}
 
-	public void inputDataStartTopic(String title, String message, String file, int type, String[] userGroup, boolean canview, boolean canpost, boolean... options){
+	public void inputDataStartTopic(String title, String message, String file,
+			int type, String[] userGroup, boolean canview, boolean canpost,
+			boolean... options) {
 		per = new ForumPermission(driver);
 		inputDataInContentTab_StartTopic(title, message, file);
 		inputDataInOptionsTab_StartTopic(options);
-		if (type != 0){
+		if (type != 0) {
 			click(ELEMENT_TOPIC_PERMISSION_TAB);
-			per.configPermission4Topic(type,userGroup, canview, canpost);
+			per.configPermission4Topic(type, userGroup, canview, canpost);
 		}
 	}
 
@@ -319,55 +379,63 @@ public class ForumManageTopic extends ForumBase {
 	 * @param canpost
 	 * @param options
 	 */
-	public void startTopic(String title, String message, String file, int type, String[] userGroup, boolean canview, boolean canpost, boolean...options){
+	public void startTopic(String title, String message, String file, int type,
+			String[] userGroup, boolean canview, boolean canpost,
+			boolean... options) {
 		info("Start a topic");
 		goToStartTopic();
-		inputDataStartTopic(title, message, file, type, userGroup, canview, canpost, options);
+		inputDataStartTopic(title, message, file, type, userGroup, canview,
+				canpost, options);
 		click(ELEMENT_SUBMIT_BUTTON);
 		waitForElementNotPresent(ELEMENT_SUBMIT_BUTTON);
-	}	
+	}
 
 	/**
 	 * 
 	 * @param title
 	 * @param message
 	 */
-	public void quickStartTopic(String title, String message){
+	public void quickStartTopic(String title, String message) {
 		info("Start a topic");
 		goToStartTopic();
 		inputDataInContentTab_StartTopic(title, message);
 		click(ELEMENT_SUBMIT_BUTTON);
 		waitForAndGetElement(By.linkText(title));
 		info("Start topic successfully");
-	} 
+	}
 
-	/** function: delete a topic
+	/**
+	 * function: delete a topic
+	 * 
 	 * @author lientm
-	 * @param title: title of topic that needs to delete
+	 * @param title
+	 *            : title of topic that needs to delete
 	 */
 
-	public void deleteTopic(String title){
+	public void deleteTopic(String title) {
 		click(ELEMENT_MORE_ACTION);
 		info("Delete topic");
 		click(ELEMENT_DELETE_TOPIC);
 
 		alert.waitForMessage(MSG_DELETE_TOPIC);
-		click(ELEMENT_OK_DELETE_TOPIC); 
+		click(ELEMENT_OK_DELETE_TOPIC);
 		waitForTextNotPresent(title);
 		info("Delete topic successfully");
 	}
 
 	/**
 	 * function to go edit a topic
+	 * 
 	 * @author lientm
 	 */
-	public void goToEditTopic(){
+	public void goToEditTopic() {
 		info("Go to edit topic");
 		click(ELEMENT_MORE_ACTION);
 		click(ELEMENT_EDIT_TOPIC);
 
 		waitForAndGetElement(ELEMENT_TOPIC_EDIT_POPUP);
 	}
+
 	/**
 	 * 
 	 * @param title
@@ -379,22 +447,29 @@ public class ForumManageTopic extends ForumBase {
 	 * @param canpost
 	 * @param options
 	 */
-	public void editTopic(String title, String message, String file, int type, String[] userGroup, boolean canview, boolean canpost, boolean... options){
+	public void editTopic(String title, String message, String file, int type,
+			String[] userGroup, boolean canview, boolean canpost,
+			boolean... options) {
 		goToEditTopic();
 		info("Edit topic");
-		inputDataStartTopic(title, message, file, type, userGroup, canview, canpost, options);
+		inputDataStartTopic(title, message, file, type, userGroup, canview,
+				canpost, options);
 		click(ELEMENT_SUBMIT_BUTTON);
 		waitForElementNotPresent(ELEMENT_TOPIC_EDIT_POPUP);
 		waitForTextPresent(title);
 		info("Edit topic successfully");
 	}
 
-	/** function: move a topic to other forum
+	/**
+	 * function: move a topic to other forum
+	 * 
 	 * @author lientm
-	 * @param topic: title of topic
-	 * @param destination: path go to forum
+	 * @param topic
+	 *            : title of topic
+	 * @param destination
+	 *            : path go to forum
 	 */
-	public void moveTopic(String topic, String destination){
+	public void moveTopic(String topic, String destination) {
 
 		info("Move topic to forum " + destination);
 		waitForAndGetElement(ELEMENT_MORE_ACTION);
@@ -404,19 +479,24 @@ public class ForumManageTopic extends ForumBase {
 		waitForAndGetElement(ELEMENT_POPUP_MOVE_TOPIC);
 		String links[] = destination.split("/");
 		int length = links.length;
-		if (waitForAndGetElement(ELEMENT_FORUM_SELECT.replace("${forum}", destination), 3000, 0) == null){
-			click(ELEMENT_FORUM_SELECT.replace("${forum}", destination) + "/../../../a");
+		if (waitForAndGetElement(
+				ELEMENT_FORUM_SELECT.replace("${forum}", destination), 3000, 0) == null) {
+			click(ELEMENT_FORUM_SELECT.replace("${forum}", destination)
+					+ "/../../../a");
 		}
 		click(ELEMENT_FORUM_SELECT.replace("${forum}", destination));
 		waitForElementNotPresent(ELEMENT_POPUP_MOVE_TOPIC);
-		waitForAndGetElement(ELEMENT_BREADCRUMB_TOPIC.replace("${forum}", links[length-1]).replace("${topic}", topic)); 
+		waitForAndGetElement(ELEMENT_BREADCRUMB_TOPIC.replace("${forum}",
+				links[length - 1]).replace("${topic}", topic));
 		info("Move topic successfully");
-	}	
+	}
 
-	/**function go to Add tag for topic
+	/**
+	 * function go to Add tag for topic
+	 * 
 	 * @author lientm
 	 */
-	public void goToAddTagForTopic(){
+	public void goToAddTagForTopic() {
 		waitForAndGetElement(ELEMENT_TAG);
 		click(ELEMENT_TAG);
 		waitForAndGetElement(ELEMENT_ADD_TAG);
@@ -424,56 +504,66 @@ public class ForumManageTopic extends ForumBase {
 
 	/**
 	 * function add tag for topic
-	 * @param tagName: name of tag
+	 * 
+	 * @param tagName
+	 *            : name of tag
 	 */
-		public void addTagForTopic(String tagName){
-			String[] tag = tagName.split(" ");
+	public void addTagForTopic(String tagName) {
+		String[] tag = tagName.split(" ");
 
-			goToAddTagForTopic();
-			type(ELEMENT_ADD_TAG, tagName, true);
-			click(ELEMENT_ADD_TAG_BUTTON);
-			for(int i = 0; i < tag.length; i ++){
-				waitForAndGetElement(By.linkText(tag[i]));
-			}
-			info("Add tag for topic successfully");
+		goToAddTagForTopic();
+		type(ELEMENT_ADD_TAG, tagName, true);
+		click(ELEMENT_ADD_TAG_BUTTON);
+		for (int i = 0; i < tag.length; i++) {
+			waitForAndGetElement(By.linkText(tag[i]));
 		}
+		info("Add tag for topic successfully");
+	}
 
-	/**function untag for many topics
+	/**
+	 * function untag for many topics
+	 * 
 	 * @author lientm
-	 * @param tagName: Name of tag
-	 * @param topic: topics that need untag
+	 * @param tagName
+	 *            : Name of tag
+	 * @param topic
+	 *            : topics that need untag
 	 */
-	public void unTagForTopics(String tagName, String...topic){
+	public void unTagForTopics(String tagName, String... topic) {
 		info("Go to manage tag");
 		click(By.linkText(tagName));
-		waitForAndGetElement(ELEMENT_MANAGE_TAG);		
+		waitForAndGetElement(ELEMENT_MANAGE_TAG);
 		info("choose topic to untag");
-		for (int i = 0; i < topic.length; i ++){
-			By element_topic = By.xpath(ELEMENT_CHECKBOX_UNTAG.replace("${topic}", topic[i]));
+		for (int i = 0; i < topic.length; i++) {
+			By element_topic = By.xpath(ELEMENT_CHECKBOX_UNTAG.replace(
+					"${topic}", topic[i]));
 			check(element_topic);
 		}
 		click(ELEMENT_MANAGE_TAG);
-		for(int i = 0; i < 5; i ++){
-			if (waitForAndGetElement(ELEMENT_UNTAG, 5000, 0) == null){
+		for (int i = 0; i < 5; i++) {
+			if (waitForAndGetElement(ELEMENT_UNTAG, 5000, 0) == null) {
 				click(ELEMENT_MANAGE_TAG);
 				info("retry click manage tag" + i);
-			}
-			else break;
+			} else
+				break;
 		}
 		click(ELEMENT_UNTAG);
 		alert.waitForConfirmation(MESSAGE_UNTAG);
 		info("Untag for topics successfully");
 	}
 
-	/**function untag directly for topic
+	/**
+	 * function untag directly for topic
+	 * 
 	 * @author lientm
 	 * @param tagName
 	 */
-	public void unTagDirectly(String tagName){
+	public void unTagDirectly(String tagName) {
 		String[] tag = tagName.split(" ");
 
-		for(int i = 0; i < tag.length; i ++){
-			By element_untag = By.xpath(ELEMENT_UNTAG_ICON.replace("${tag}", tag[i]));	
+		for (int i = 0; i < tag.length; i++) {
+			By element_untag = By.xpath(ELEMENT_UNTAG_ICON.replace("${tag}",
+					tag[i]));
 			info("untag directly");
 			click(element_untag);
 			waitForTextNotPresent(tag[i]);
@@ -481,48 +571,60 @@ public class ForumManageTopic extends ForumBase {
 		info("untag successfully");
 	}
 
-	/**function get element that is suggestion tag element when type into tag name
+	/**
+	 * function get element that is suggestion tag element when type into tag
+	 * name
+	 * 
 	 * @author lientm
-	 * @param tag: name of suggestion tag
+	 * @param tag
+	 *            : name of suggestion tag
 	 * @param number
 	 * @return WebElement
 	 */
-	public WebElement getSuggestionElement(String tag, String number){	
-		String jQuerySelector = ELEMENT_SUGGESTION.replace("${tag}", tag).replace("${No}", number);
+	public WebElement getSuggestionElement(String tag, String number) {
+		String jQuerySelector = ELEMENT_SUGGESTION.replace("${tag}", tag)
+				.replace("${No}", number);
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		String script = "return $(\"" + jQuerySelector + "\").get(0);";
 		WebElement exampleDiv = (WebElement) js.executeScript(script);
 		return exampleDiv;
 	}
 
-	/**function check Occurence number when add tag
+	/**
+	 * function check Occurence number when add tag
+	 * 
 	 * @author lientm
 	 * @param number
 	 * @param tagName
 	 */
-	public void checkOccurenceOfTag(String number, String tagName, String... prefix){
-		String valid = prefix.length > 0 ? prefix[0]: tagName;
+	public void checkOccurenceOfTag(String number, String tagName,
+			String... prefix) {
+		String valid = prefix.length > 0 ? prefix[0] : tagName;
 		String[] tag = tagName.split(" ");
 		String[] pre = valid.split(" ");
-		By element_tag_no = By.xpath(ELEMENT_TAG_NUMBER.replace("${No}", number));
+		By element_tag_no = By.xpath(ELEMENT_TAG_NUMBER
+				.replace("${No}", number));
 
-		if (pre.length == tag.length){
+		if (pre.length == tag.length) {
 			goToAddTagForTopic();
-			for (int i = 0; i < pre.length; i ++){
+			for (int i = 0; i < pre.length; i++) {
 				type(ELEMENT_ADD_TAG, pre[i], true);
 				info("Check suggesstion and occurence when add tag that is already exited");
-				waitForAndGetElement(element_tag_no);				
-				WebElement exampleDiv = getSuggestionElement(tag[i], number);				
-				if (exampleDiv == null) assert false;
+				waitForAndGetElement(element_tag_no);
+				WebElement exampleDiv = getSuggestionElement(tag[i], number);
+				if (exampleDiv == null)
+					assert false;
 				info("Suggesstion and Occurence of tag is true");
 			}
 		}
 	}
 
-	/** function approve a topic
+	/**
+	 * function approve a topic
+	 * 
 	 * @author lientm
 	 */
-	public void approveTopic(){
+	public void approveTopic() {
 		waitForAndGetElement(ELEMENT_MORE_ACTION);
 		click(ELEMENT_MORE_ACTION);
 		info("Approve topic");
@@ -530,13 +632,17 @@ public class ForumManageTopic extends ForumBase {
 		click(ELEMENT_APPROVE_TOPIC);
 	}
 
-	/** function censor for Topic list
+	/**
+	 * function censor for Topic list
+	 * 
 	 * @author lientm
-	 * @param topic: title of topic
+	 * @param topic
+	 *            : title of topic
 	 */
-	public void censorTopic(String topic){
-		By element_topic = By.xpath(ELEMENT_CENSOR_TOPIC_CHECKBOX.replace("${topic}", topic));
-		check(element_topic,2);
+	public void censorTopic(String topic) {
+		By element_topic = By.xpath(ELEMENT_CENSOR_TOPIC_CHECKBOX.replace(
+				"${topic}", topic));
+		check(element_topic, 2);
 		info("Approve a topic that is pending by censor");
 		waitForAndGetElement(ELEMENT_MODERATION);
 		click(ELEMENT_MODERATION);
@@ -545,25 +651,32 @@ public class ForumManageTopic extends ForumBase {
 		info("Approve a topic successfully");
 	}
 
-	/**Function: Go to Topic Types
-	 * @author hakt
-	 * Date: 07/12/2012
+	/**
+	 * Function: Go to Topic Types
+	 * 
+	 * @author hakt Date: 07/12/2012
 	 */
 
-	public void goToTopicTypes(){
+	public void goToTopicTypes() {
 		info("Go to topic types");
 		click(ELEMENT_ADMINISTRATION);
 		click(ELEMENT_TOPIC_TYPES);
 		waitForAndGetElement(ELEMENT_TOPIC_MANAGER_POPUP);
 	}
 
-	/** function: modify data of a topic types 
+	/**
+	 * function: modify data of a topic types
+	 * 
 	 * @author hakt
-	 * @param typeName: name of topic type
-	 * @param groupName: group icon
-	 * @param iconClass: icon
+	 * @param typeName
+	 *            : name of topic type
+	 * @param groupName
+	 *            : group icon
+	 * @param iconClass
+	 *            : icon
 	 */
-	public void modifyDataOfTopicType(String typeName, String groupName, String iconClass){
+	public void modifyDataOfTopicType(String typeName, String groupName,
+			String iconClass) {
 		info("Modify topic type");
 		waitForAndGetElement(ELEMENT_TOPIC_ADD_TYPE_POPUP);
 		type(ELEMENT_TOPIC_TYPE_NAME, typeName, true);
@@ -571,13 +684,19 @@ public class ForumManageTopic extends ForumBase {
 		button.save();
 	}
 
-	/** function: create a topic types 
+	/**
+	 * function: create a topic types
+	 * 
 	 * @author hakt
-	 * @param typeName: name of topic type
-	 * @param groupName: group icon
-	 * @param iconClass: icon
+	 * @param typeName
+	 *            : name of topic type
+	 * @param groupName
+	 *            : group icon
+	 * @param iconClass
+	 *            : icon
 	 */
-	public void createTopicType(String typeName, String groupName, String iconClass){
+	public void createTopicType(String typeName, String groupName,
+			String iconClass) {
 		info("Add new topic type");
 
 		click(ELEMENT_ADD_TOPIC_TYPE_BUTTON);
@@ -586,14 +705,17 @@ public class ForumManageTopic extends ForumBase {
 
 	/**
 	 * Function to edit a topic type
+	 * 
 	 * @author hakt
 	 * @param oldTopicTypeName
 	 * @param newTopicTypeName
 	 * @param groupName
 	 * @param iconClass
 	 */
-	public void editTopicType(String oldTopicTypeName, String newTopicTypeName, String groupName, String iconClass){
-		By TOPIC_TYPE_TO_EDIT=By.xpath("//td[text()='"+oldTopicTypeName+"']/../*//*[@class='Icon16x16 EditIcon']");
+	public void editTopicType(String oldTopicTypeName, String newTopicTypeName,
+			String groupName, String iconClass) {
+		By TOPIC_TYPE_TO_EDIT = By.xpath("//td[text()='" + oldTopicTypeName
+				+ "']/../*//*[@class='Icon16x16 EditIcon']");
 
 		info("Edit a topic type");
 		click(TOPIC_TYPE_TO_EDIT);
@@ -601,25 +723,31 @@ public class ForumManageTopic extends ForumBase {
 	}
 
 	/**
-	 * function: delete a topic types 
+	 * function: delete a topic types
+	 * 
 	 * @author hakt
 	 * @param topicTypeName
 	 */
-	public void deleteTopicType(String topicTypeName){
-		By TOPIC_TYPE_TO_DELETE=By.xpath("//td[text()='"+topicTypeName+"']/../*//*[@class='Icon16x16 DeleteIcon']");
-		By ELEMENT_TOPIC_TYPE=By.xpath("//td[text()='"+topicTypeName+"']");
+	public void deleteTopicType(String topicTypeName) {
+		By TOPIC_TYPE_TO_DELETE = By.xpath("//td[text()='" + topicTypeName
+				+ "']/../*//*[@class='Icon16x16 DeleteIcon']");
+		By ELEMENT_TOPIC_TYPE = By
+				.xpath("//td[text()='" + topicTypeName + "']");
 
 		info("Delete topic type");
 		click(TOPIC_TYPE_TO_DELETE);
 		waitForElementNotPresent(ELEMENT_TOPIC_TYPE);
 	}
 
-	/** function: delete all topic
+	/**
+	 * function: delete all topic
+	 * 
 	 * @author HangNTT
-	 * @param title: All topic that needs to delete
+	 * @param title
+	 *            : All topic that needs to delete
 	 */
 
-	public void deleteAllTopic(){
+	public void deleteAllTopic() {
 		waitForAndGetElement(ELEMENT_CHECK_ALL);
 		click(ELEMENT_CHECK_ALL);
 		info("Delete topic");
@@ -634,31 +762,41 @@ public class ForumManageTopic extends ForumBase {
 
 	/**
 	 * @author thuntn
-	 * @param rate: 1: poor
-	 * 				2: Below average
-	 * 				3: average
-	 * 				4: Above average
-	 * 				5: good
-	 * 				default: average
+	 * @param rate
+	 *            : 1: poor 2: Below average 3: average 4: Above average 5: good
+	 *            default: average
 	 */
-	public void voteTopic(int rate, boolean...verify){
-		boolean check = verify.length > 0 ? verify[0]:false;
+	public void voteTopic(int rate, boolean... verify) {
+		boolean check = verify.length > 0 ? verify[0] : false;
 		info("--Vote a topic--");
 		click(ELEMENT_RATE_TOPIC);
-		switch (rate){
-		case 1: click(ELEMENT_RATE_TOPIC_TERRIBLE); break;
-		case 2: click(ELEMENT_RATE_TOPIC_BAD); break;
-		case 3: click(ELEMENT_RATE_TOPIC_AVERAGE); break;
-		case 4: click(ELEMENT_RATE_TOPIC_GOOD); break;
-		case 5: click(ELEMENT_RATE_TOPIC_EXCELLENT); break;
-		default: click(ELEMENT_RATE_TOPIC_AVERAGE); break;
+		switch (rate) {
+		case 1:
+			click(ELEMENT_RATE_TOPIC_TERRIBLE);
+			break;
+		case 2:
+			click(ELEMENT_RATE_TOPIC_BAD);
+			break;
+		case 3:
+			click(ELEMENT_RATE_TOPIC_AVERAGE);
+			break;
+		case 4:
+			click(ELEMENT_RATE_TOPIC_GOOD);
+			break;
+		case 5:
+			click(ELEMENT_RATE_TOPIC_EXCELLENT);
+			break;
+		default:
+			click(ELEMENT_RATE_TOPIC_AVERAGE);
+			break;
 		}
 		waitForElementNotPresent(ELEMENT_RATE_CLOSE_BUTTON);
 
-		if(check) {
+		if (check) {
 			click(ELEMENT_RATE_TOPIC);
-			for(int i = 1;i <= rate;i++){
-				waitForAndGetElement(ELEMENT_TOPIC_VOTED.replace("${rate}", Integer.toString(i)));
+			for (int i = 1; i <= rate; i++) {
+				waitForAndGetElement(ELEMENT_TOPIC_VOTED.replace("${rate}",
+						Integer.toString(i)));
 
 			}
 			click(ELEMENT_RATE_CLOSE_BUTTON);
@@ -666,18 +804,20 @@ public class ForumManageTopic extends ForumBase {
 		}
 
 	}
-	/** Do actions on a topic: lock, unlock, close, open
+
+	/**
+	 * Do actions on a topic: lock, unlock, close, open
+	 * 
 	 * @author thuntn
-	 * @param action = 1: lock a topic
-	 * 				 = 2: unlock a topic
-	 * 				 = 3: close a topic
-	 * 				 = 4: Reopen a topic
+	 * @param action
+	 *            = 1: lock a topic = 2: unlock a topic = 3: close a topic = 4:
+	 *            Reopen a topic
 	 */
-	public void actionOnTopic(int action){
+	public void actionOnTopic(int action) {
 		mngPost = new ForumManagePost(driver);
 		click(ELEMENT_MORE_ACTION);
 		switch (action) {
-		case 1: 
+		case 1:
 			info("Lock a topic");
 			click(ELEMENT_LOCK_TOPIC);
 			waitForElementNotPresent(mngPost.ELEMENT_POST_REPLY_BUTTON);
@@ -717,35 +857,115 @@ public class ForumManageTopic extends ForumBase {
 			click(mngPost.ELEMENT_POST_CANCEL_BUTTON);
 			break;
 
-		default: break;
+		default:
+			break;
 		}
 	}
 
 	/**
 	 * Add category, forum, topic with simple data
+	 * 
 	 * @param cate
 	 * @param forum
 	 * @param topic
 	 * @param descTopic
 	 */
-	public void addCategoryForumTopic(String category, String forum, String topic, String descTopic){
+	public void addCategoryForumTopic(String category, String forum,
+			String topic, String descTopic) {
 		String[] permission = {};
-		String[] addForum = {forum, "1",null,null,forum};
-		magCat.addNewCategoryInForum(category, "1", 0,permission, category, 0,permission);
-		magFor.addForum(category, addForum, true, "", "", false,0, permission);
+		String[] addForum = { forum, "1", null, null, forum };
+		magCat.addNewCategoryInForum(category, "1", 0, permission, category, 0,
+				permission);
+		magFor.addForum(category, addForum, true, "", "", false, 0, permission);
 		click(ELEMENT_START_TOPIC_BUTTON);
-		startTopic(topic, descTopic, "", 0, permission,false, false, false);
+		startTopic(topic, descTopic, "", 0, permission, false, false, false);
 	}
 
 	/**
-	 * @author phuongdt
+	 * Add two topics into a forum of a category
+	 * 
+	 * @param category
+	 *            the name of category
+	 * @param forum
+	 *            the name of forum
+	 * @param numberTop
+	 *            the bumber of topic will be created in a forum
+	 * @param topic
+	 *            the name of topic
+	 * @param descTopic
+	 *            the description of topic
+	 */
+	public void addCategoryForumWithTwoTopics(String category, String forum,
+			String topic1, String descTopic1, String topic2, String descTopic2) {
+		String[] permission = {};
+		String[] addForum = { forum, "1", null, null, forum };
+
+		magCat.addNewCategoryInForum(category, "1", 0, permission, category, 0,
+				permission);
+		magFor.addForum(category, addForum, true, "", "", false, 0, permission);
+
+		click(ELEMENT_START_TOPIC_BUTTON);
+		startTopic(topic1, descTopic1, "", 0, permission, false, false, false);
+		
+		click(ELEMENT_START_TOPIC_BUTTON);
+		startTopic(topic2, descTopic2, "", 0, permission, false, false, false);
+ 
+	}
+
+	/**
+	 * add category, forum and topic for a user without "read" permission a topic
+	 * @param cate
+	 * @param forum
 	 * @param topic
 	 * @param descTopic
 	 */
-	public void addTopicFromTopNavigation(String topic, String descTopic,Object... option){
+	public void addForumTopicForUserWithoutReadPermision(String category,
+			String forum, String topic, String descTopic,
+			String[] permissionName) {
+		// String[] permission = {"Organization","manager"};
+		String[] addForum = { forum, "1", null, null, forum };
+		// magCat.addNewCategoryInForum(category, "1",0,permission, category,
+		// 0,permission);
+		magCat.addNewCategoryInForum(category, "1", 0, permissionName,
+				category,0, permissionName);
+		magFor.addForum(category, addForum, true, "", "", false,2,
+				permissionName,false,false,true,true);
+		click(ELEMENT_START_TOPIC_BUTTON);
+		startTopic(topic, descTopic, "", 0, permissionName, false, false, false);
+	}
+	
+	/**
+	 * add category, forum and topic for a user without "view" permission a forum
+	 * @param cate
+	 * @param forum
+	 * @param topic
+	 * @param descTopic
+	 */
+	public void addCategoryForumForUserWithoutViewPermision(String category,
+			String forum, String topic, String descTopic,
+			String[] permissionName) {
+		// String[] permission = {"Organization","manager"};
+		String[] addForum = { forum, "1", null, null, forum };
+		// magCat.addNewCategoryInForum(category, "1",0,permission, category,
+		// 0,permission);
+		magCat.addNewCategoryInForum(category, "1", 0, permissionName,
+				category,2, permissionName,false,false,true,true);
+		magFor.addForum(category, addForum, true, "", "", false,0,
+				permissionName);
+		click(ELEMENT_START_TOPIC_BUTTON);
+		startTopic(topic, descTopic, "", 0, permissionName, false, false, false);
+	}
+
+	/**
+	 * @param topic
+	 * @param descTopic
+	 */
+	public void addTopicFromTopNavigation(String topic, String descTopic,
+			Object... option) {
 		navTool.goToTopic(option);
 		String[] permission = {};
-		inputDataStartTopic(topic, descTopic, "", 0, permission,false, false, false);
+		inputDataStartTopic(topic, descTopic, "", 0, permission, false, false,
+				false);
 		click(ELEMENT_SUBMIT_BUTTON);
 		waitForAndGetElement(By.linkText(topic));
 	}

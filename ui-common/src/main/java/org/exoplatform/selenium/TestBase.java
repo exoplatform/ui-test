@@ -942,6 +942,22 @@ public class TestBase {
 		}
 		return sb.toString();
 	}
+	
+	/**
+	 * get a list of random numbers author quynhpt
+	 * 
+	 * @return
+	 */
+	public String getRandomNumber() {
+		char[] chars = "0123456789".toCharArray();
+		StringBuilder sb = new StringBuilder();
+		Random random = new Random();
+		for (int i = 0; i < 6; i++) {
+			char c = chars[random.nextInt(chars.length)];
+			sb.append(c);
+		}
+		return sb.toString();
+	}
 
 	/**
 	 * Copy and paste a string from one locator to other
