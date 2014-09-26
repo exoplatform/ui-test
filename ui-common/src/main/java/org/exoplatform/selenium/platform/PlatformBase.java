@@ -785,6 +785,12 @@ public class PlatformBase extends TestBase {
 	public final String ELEMENT_TOPIC_TITLE= "//*[@class='postViewTitle'][contains(text(),'${titleTopic}')]";
 	public final By ELEMENT_RESULT_FLOATING_RESULTS_DISCUSSION_ICON= By.xpath("//*[@class='uiQuickSearchResult']/descendant::tr[th[contains(text(),'Discussion')]]//a/i[contains(@class,'uiIconPLFDiscussion')]");
 	public final String ELEMENT_RESULT_FLOATING_RESULTS_NAME= "//*[@class='uiQuickSearchResult']/descendant::tr[th[contains(text(),'${type_Search}')]]//a[contains(.,'${detail_Name}')]";
+
+	public final By ELEMENT_QUICK_SEARCH_SEE_ALL_SEARCH_RESULTS = By.xpath("//*[@class='message']/a[contains(text(),'See All Search Results')]");
+	public final String ELEMENT_RESULT_FLOATING_RESULTS_DOCUMENT_TITLE="//*[@class='quickSearchResult document'][contains(.,'${name_document}')]";
+	public final String ELEMENT_RESULT_FLOATING_RESULTS_DOCUMENT_ORDER="//table//td/div[@class='quickSearchResult document' and @tabindex='${number_order}']";
+	public final String ELEMENT_RESULT_FLOATING_RESULTS_DOCUMENT_ICON="//*[@class='quickSearchResult document'][contains(.,'${name_document}')]//a/i[contains(@class,'webContent')]";
+
 	//Search porlet
 	public final By ELEMENT_SEARCH_APPLICATION = By.xpath("//a[@title='Search']");
 	public final String ELEMENT_GADGET_SEARCH_APPLICATION_PAGE_EDITOR = "//div[@id='UIApplicationList17']//div[contains(text(),'${gadget}')]";

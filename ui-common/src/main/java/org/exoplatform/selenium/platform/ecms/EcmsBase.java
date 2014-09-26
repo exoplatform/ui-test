@@ -145,13 +145,13 @@ public class EcmsBase extends ManageAccount {
 	public final By ELEMENT_ADD_NODE_CHECKBOX = By.id("add_node"); 
 	public final By ELEMENT_SET_PROPERTY_CHECKBOX = By.id("set_property");
 	public final By ELEMENT_REMOVE_CHECKBOX = By.id("remove");
-	public final By ELEMENT_DELETE_PERMISSION = By.xpath("//*[@id='PermissionInfo']/table/tbody/tr[4]/td[6]/div/img[2]");
-
+	
 	//Permission Management Form
 	public final By ELEMENT_PERMISSION_MANAGEMENT_POPUP = By.id("UIPopupWindow");
 	public final String ELEMENT_PERMISSION_MANAGEMENT_TEXT = "Permission Management";
 	public final By ELEMENT_PERMISSION_MANAGEMENT_GRID = By.className("permissionInfo");
 	public final By ELEMENT_MANAGE_TAGS = By.className("uiIconEcmsFolksonomyManager"); 
+	
 	//By.linkText("Manage Tags");
 	public final By ELEMENT_TAG_PERMISSION = By.xpath("//*[contains(text(),'Tag Permission Manager')]");
 
