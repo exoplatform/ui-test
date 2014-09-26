@@ -208,7 +208,9 @@ public class EcmsBase extends ManageAccount {
 	//System TAB  
 	public final By ELEMENT_SYSTEM_TAB = By.xpath("//a[contains(@title,'System')]");
 	public final By ELEMENT_PERMISSION_LINK = By.xpath("//*[@class='actionIcon']//*[contains(@class,'uiIconEcmsViewPermissions')]");
+//	public final By ELEMENT_PERMISSION_LINK2 = By.xpath("//*[@class='actionIcon']//*[@class='uiIconEcmsViewPermissions uiIconEcmsLightGray']");
 	public final By ELEMENT_EXPORT_LINK = By.xpath("//i[contains(@class,'uiIconEcmsExportNode')]");
+//	public final By ELEMENT_EXPORT_LINK2 = By.xpath("//i[@class='uiIconEcmsExportNode']");
 	public final By ELEMENT_IMPORT_LINK = By.className("uiIconEcmsImportNode");
 
 	//Content template
@@ -225,8 +227,11 @@ public class EcmsBase extends ManageAccount {
 	//public By ELEMENT_LINK_TAB_PUBLICATION= By.xpath("//a[contains(text(),'Publication')]");
 	public final By ELEMENT_MANAGE_VIEW = By.xpath("//a[contains(text(),'Manage View')]");
 	public final By ELEMENT_MANAGEMENT_VIEW = By.className("uiIconEcmsViewManager");
+
 	public final String ELEMENT_EDIT_VIEW = "//*[@data-original-title='${viewName}']/../..//*[@data-original-title='Edit']"; //*[@id='UIViewList']
+//	public final String ELEMENT_EDIT_VIEW2 = "//*[@data-original-title='${viewName}']/../..//*[contains(@class,'uiIconEditInfo')]"; //*[@id='UIViewList']
 	public final String ELEMENT_DELETE_VIEW = "//*[@data-original-title='${viewName}']/../..//*[@data-original-title='Delete']";
+//	public final String ELEMENT_DELETE_VIEW2 = "//*[@data-original-title='${viewName}']/../..//*[@class='uiIconDelete']";
 
 	//Edit View Form 
 	public final By ELEMENT_CHECKBOX_VERSION=By.id("manageVersions");

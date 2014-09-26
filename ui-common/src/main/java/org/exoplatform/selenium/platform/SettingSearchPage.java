@@ -73,7 +73,10 @@ public class SettingSearchPage extends PlatformBase {
 
 	//Search result form
 	public final By ELEMENT_RESULT_SEARCH_PAGE = By.id("resultPage");
-	public final String ELEMENT_RESULT_ITEM = "//div[@id='resultPage']//a[text()='${item}']/*[contains(text(),'${keySearch}')]";
+	public final String ELEMENT_RESULT_LINK = "//div[@id='resultPage']//a[contains(.,'${item}')]";
+	public final String ELEMENT_RESULT_ITEM = "//div[@id='resultPage']//a[contains(.,'${item}')]/../..//*[contains(text(),'${keySearch}')]";
+//	public final String ELEMENT_RESULT_SEARCH_PAGE_ITEM = "//div[@id='resultPage']//*[@class='content']/h6//*[contains(text(),'${eventname}')]";
+	public final String ELEMENT_RESULT_ITEM_ORDER_BY=".//*[@id='result']/div[{$index}]//*[text()='${keysearch}']";
 	public final String ELEMENT_RESULT_ITEM_LIST = "//*[@id='result']/*[@class='resultBox clearfix ${item}']//a[text()='${keySearch}']";
 	public final String ELEMENT_RESULT_LOCATION_DATETIME = "//div[@id='resultPage']//a[text()='${item}']/*[contains(text(),'${keySearch}')]/../../../*[@class='detail']";
 	public final String ELEMENT_RESULT_EXCERPT = "//div[@id='resultPage']//a[text()='${item}']/*[contains(text(),'${keySearch}')]/../../../*[@class='excerpt']";
@@ -83,6 +86,10 @@ public class SettingSearchPage extends PlatformBase {
 
 	public final String ELEMENT_SEARCH_RESULT_EXCERPT= "//*[@id='result']//div[@class='detail'][contains(.,'${keySearch}')]";
 	public final String ELEMENT_SEARCH_RESULT_CONTENT_DETAIL= "//*[@id='result']//div[@class='detail'][contains(.,'${keySearch1}') and contains(.,'${keySearch2}')]";
+	
+	//Quick Search elements
+	public final String ELEMENT_QUICKSEARCH_RESULT = "//*[@id='quickSearchResult${number}']//*[@href=contains(text(),'${name}')]";
+
 	//Task page result
 	public final String ELEMENT_RESULT_TASK_ICON = "//div[@id='resultPage']//a[text()='${item}']/*[contains(text(),'${keySearch}')]/../../../..//*[@class='uiIconApp64x64TaskNeedActions']";
 
@@ -91,9 +98,13 @@ public class SettingSearchPage extends PlatformBase {
 
 	//People page result
 	public final String ELEMENT_RESULT_PEOPLE_ICON = "//*[contains(@class,'avatar pull-left')]";
-	public final By ELEMENT_RESULT_TITLE = By.xpath("//*[@class='content']//a");
+	
+	//public final By ELEMENT_RESULT_TITLE = By.xpath("//*[@class='quickSearchResult file']//a");
 
 	public final String ELEMENT_SEARCH_RESULT_TITLE= "//*[@class='content']//a[contains(text(),'${tileName}')]";
+
+	//public final By ELEMENT_RESULT_TITLE = By.xpath("//*[@class='quickSearchResult file']//a");
+	public final By ELEMENT_RESULT_TITLE = By.xpath("//*[@class='content']//a");
 
 	//File page result
 	public final String ELEMENT_RESULT_FILE_ICON = "//div[@id='resultPage']//a[text()='${item}']/*[contains(text(),'${keySearch}')]/../../../..//*[contains(@class,'avatar pull-left')]";

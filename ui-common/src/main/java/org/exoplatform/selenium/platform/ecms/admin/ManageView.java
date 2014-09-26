@@ -36,7 +36,10 @@ public class ManageView extends EcmsBase{
 	//Action tab
 	public final By ELEMENT_ACTION_TAB = By.xpath("//*[contains(@class, 'popup')]//*[text()='Action']");
 	public final String ELEMENT_ACTION_TAB_NAME = "//*[contains(@class, 'popup')]//*[text()='${tabName}']";
+	
 	public final String ELEMENT_EDIT_ACTION_ICON = "//*[contains(@class, 'popup')]//*[text()='${tabName}']/../..//*[@data-original-title='Edit']";
+//	public final String ELEMENT_EDIT_ACTION_ICON = "//*[contains(@class, 'popup')]//*[text()='${tabName}']/../..//i[contains(@class,'uiIconEdit')]";
+
 	public final By ELEMENT_SAVE_BUTTON_EDIT_VIEW_TAB = By.xpath("//*[text()='Add/Edit Tab']/.. /..//*[text()='Save']");
 	//*[contains(@class, 'popupTitle')]/../..//*[text()='Admin']/../..//*[@class='uiIconEdit']
 
