@@ -336,7 +336,9 @@ public class CalendarBase extends PlatformBase {
 		}
 		click(ELEMENT_CAL_SHARE_ADD_BUTTON);
 		for(int j=0; j < canEdit.length; j++){
+			if(canEdit[j]==true){
 			check(ELEMENT_CAL_SHARE_EDIT_PERMISSION.replace("${user}", userGroup[j]),2);
+			}
 		}
 		click(ELEMENT_CAL_SHARE_SAVE_BUTTON);
 	}

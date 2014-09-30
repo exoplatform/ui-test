@@ -25,6 +25,9 @@
 			<class name = "org.exoplatform.selenium.platform.plf.functional.homepageactivitystream.filesharingactivity.PLF_HomepageActivityStream_FileSharingActivity" />
 			<class name = "org.exoplatform.selenium.platform.plf.functional.homepageactivitystream.linksharingactivity.PLF_HomepageActivityStream_LinkSharingActivity" />
 			<class name = "org.exoplatform.selenium.platform.plf.functional.homepageactivitystream.statusactivity.PLF_HomepageActivityStream_StatusActivity" />
+			<class name = "org.exoplatform.selenium.platform.plf.functional.homepageactivitystream.activitystream.activityordering.PLF_HomepageActivityStream_ActivityStream_ActivityOrdering" />
+			<class name = "org.exoplatform.selenium.platform.plf.functional.homepageactivitystream.activitystream.activityordering.PLF_HomepageActivityStream_ActivityStream_GeneralRules" />
+			
 		</classes>
 	</test>
 	<listeners>

@@ -105,10 +105,16 @@ public class SettingSearchPage extends PlatformBase {
 	// Search result form
 	public final By ELEMENT_RESULT_SEARCH_PAGE = By.id("resultPage");
 	public final String ELEMENT_RESULT_LINK = "//div[@id='resultPage']//a[contains(.,'${item}')]";
-	public final String ELEMENT_RESULT_ITEM = "//div[@id='resultPage']//a[contains(.,'${item}')]/../..//*[contains(text(),'${keySearch}')]";
+//	public final String ELEMENT_RESULT_ITEM = "//div[@id='resultPage']//a[contains(.,'${item}')]/../..//*[contains(text(),'${keySearch}')]";
 //	public final String ELEMENT_RESULT_SEARCH_PAGE_ITEM = "//div[@id='resultPage']//*[@class='content']/h6//*[contains(text(),'${eventname}')]";
 	public final String ELEMENT_RESULT_ITEM_ORDER_BY=".//*[@id='result']/div[{$index}]//*[text()='${keysearch}']";
 
+
+	//Quick Search elements
+	public final String ELEMENT_QUICK_SEARCH_BOX_RESULTS=".//*[@id='quickSearchResult{$position}']/*[contains(.,'{$result}')]";
+	
+	//Search result form
+	public final String ELEMENT_RESULT_ITEM = "//div[@id='resultPage']//*[@class='content']/h6//*[contains(.,'${keySearch}')]";
 	public final String ELEMENT_RESULT_ITEM_LIST = "//*[@id='result']/*[@class='resultBox clearfix ${item}']//a[text()='${keySearch}']";
 	public final String ELEMENT_RESULT_LOCATION_DATETIME = "//div[@id='resultPage']//a[text()='${item}']/*[contains(text(),'${keySearch}')]/../../../*[@class='detail']";
 	public final String ELEMENT_RESULT_EXCERPT = "//div[@id='resultPage']//a[text()='${item}']/*[contains(text(),'${keySearch}')]/../../../*[@class='excerpt']";

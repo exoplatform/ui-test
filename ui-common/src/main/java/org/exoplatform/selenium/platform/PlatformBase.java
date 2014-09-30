@@ -791,6 +791,7 @@ public class PlatformBase extends TestBase {
 	public final String ELEMENT_RESULT_FLOATING_RESULTS_DOCUMENT_ORDER="//table//td/div[@class='quickSearchResult document' and @tabindex='${number_order}']";
 	public final String ELEMENT_RESULT_FLOATING_RESULTS_DOCUMENT_ICON="//*[@class='quickSearchResult document'][contains(.,'${name_document}')]//a/i[contains(@class,'webContent')]";
 
+	public final String ELEMENT_SEARCH_EVENT_ICON = "//div[@class='heading' and contains(text(),'${month}')]/../div[@class='content' and contains(text(),'${date}')]";
 	//Search porlet
 	public final By ELEMENT_SEARCH_APPLICATION = By.xpath("//a[@title='Search']");
 	public final String ELEMENT_GADGET_SEARCH_APPLICATION_PAGE_EDITOR = "//div[@id='UIApplicationList17']//div[contains(text(),'${gadget}')]";
