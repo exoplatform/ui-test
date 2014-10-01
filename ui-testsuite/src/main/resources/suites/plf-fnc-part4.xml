@@ -20,6 +20,7 @@
 			<class name = "org.exoplatform.selenium.platform.plf.functional.genericuserpopup.PLF_GenericUserPopup_ConnectionApplication" />
 			<class name = "org.exoplatform.selenium.platform.plf.functional.unifiedsearch.PLF_UnifiedSearch_DiscussionSearch" />
 			<class name = "org.exoplatform.selenium.platform.plf.functional.unifiedsearch.PLF_UnifiedSearch_FileSearch" />
+			<class name = "org.exoplatform.selenium.platform.plf.functional.unifiedsearch.PLF_UnifiedSearch_SearchResults" />
 		</classes>
 	</test>
 	<listeners>

@@ -304,6 +304,7 @@ public class BasicAction extends Permission{
 		Utils.pause(500);
 		for(int i = 0; i < wikiPath.length; i++){
 			nodes = wikiPath[i].split("/");
+			info("Go to " + nodes);
 			pageName = nodes[nodes.length-1];
 			goToWikiPage(wikiPath[i]);
 			deleteCurrentWikiPage();

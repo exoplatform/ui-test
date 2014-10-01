@@ -77,12 +77,15 @@ public class SettingSearchPage extends PlatformBase {
 	public final String ELEMENT_RESULT_ITEM = "//div[@id='resultPage']//a[contains(.,'${item}')]/../..//*[contains(text(),'${keySearch}')]";
 //	public final String ELEMENT_RESULT_SEARCH_PAGE_ITEM = "//div[@id='resultPage']//*[@class='content']/h6//*[contains(text(),'${eventname}')]";
 	public final String ELEMENT_RESULT_ITEM_ORDER_BY=".//*[@id='result']/div[{$index}]//*[text()='${keysearch}']";
+
 	public final String ELEMENT_RESULT_ITEM_LIST = "//*[@id='result']/*[@class='resultBox clearfix ${item}']//a[text()='${keySearch}']";
 	public final String ELEMENT_RESULT_LOCATION_DATETIME = "//div[@id='resultPage']//a[text()='${item}']/*[contains(text(),'${keySearch}')]/../../../*[@class='detail']";
 	public final String ELEMENT_RESULT_EXCERPT = "//div[@id='resultPage']//a[text()='${item}']/*[contains(text(),'${keySearch}')]/../../../*[@class='excerpt']";
 	public final String ELEMENT_RESULT_ICON = "//div[@id='resultPage']//a[text()='${item}']/*[contains(text(),'${keySearch}')]/../../../../*[contains(@class,'avatar pull-left')]";
 	public final String ELEMENT_RESULT_INDEX = "//*[@id='result']/div[${index}][contains(@class,'${title}')]";
 	public final By ELEMENT_RESULT_CONTENT_DETAIL = By.xpath("//*[@class='content']/*[@class='detail']");
+	public final By ELEMENT_SHOW_MORE_RESULT = By.xpath("//*[@id='btnShowMore']");
+	public final By ELEMENT_SEARCH_PORTLET = By.xpath("//div[contains(@class,'portletLayoutDecorator') and contains(text(),'Search')]");
 
 	public final String ELEMENT_SEARCH_RESULT_EXCERPT= "//*[@id='result']//div[@class='detail'][contains(.,'${keySearch}')]";
 	public final String ELEMENT_SEARCH_RESULT_CONTENT_DETAIL= "//*[@id='result']//div[@class='detail'][contains(.,'${keySearch1}') and contains(.,'${keySearch2}')]";
