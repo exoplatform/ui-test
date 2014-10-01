@@ -95,9 +95,10 @@ public class SpaceManagement extends SocialBase {
 	//porlet list
 	public final By ELEMENT_SPACE_ACTIVITY_STREAM_PORTLET = By.id("UISpaceActivityStreamPortlet");
 	public final By ELEMENT_SPACE_FORUM_PORTLET = By.id("UIForumPortlet");
-	public final By ELEMENT_SPACE_WIKI_PORTLET = By.id("UIWikiPortlet");
+	public final By ELEMENT_SPACE_WIKI_PORTLET = By.id("//*[@id='spaceMenuTab']//*[text()='Wiki']");
 	public final By ELEMENT_SPACE_DOCUMENTS_PORTLET = By.id("UIJCRExplorerPortlet");
 	public final By ELEMENT_SPACE_CALENDAR_PORTLET = By.xpath("//*[text()='Agenda']");
+
 	public final By ELEMENT_SPACE_SETTING_PORTLET = By.xpath("//*[text()='Space Settings']");
 	public final By ELEMENT_SPACE_ANSWER_PORTLET = By.id("UIAnswersPortlet");
 	public final By ELEMENT_SPACE_FAQ_PORTLET = By.id("UIFAQPortlet");

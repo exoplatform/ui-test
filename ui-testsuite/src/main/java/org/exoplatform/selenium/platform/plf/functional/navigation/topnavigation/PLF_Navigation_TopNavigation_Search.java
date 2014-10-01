@@ -149,7 +149,7 @@ public class PLF_Navigation_TopNavigation_Search extends PlatformBase{
 		searchText.sendKeys(Keys.RETURN);
 		Utils.pause(1000);	
 		waitForAndGetElement(ELEMENT_RESULT_SEARCH_PAGE);
-		waitForAndGetElement(ELEMENT_RESULT_CONTENT_DETAIL);		
+//		waitForAndGetElement(ELEMENT_RESULT_CONTENT_DETAIL);		
 	}
 
 	/**
@@ -193,6 +193,6 @@ public class PLF_Navigation_TopNavigation_Search extends PlatformBase{
 		mouseOverAndClick(ELEMENT_QUICK_SEARCH_ICON);
 		Utils.pause(1000);	
 		waitForAndGetElement(ELEMENT_RESULT_SEARCH_PAGE);
-		waitForAndGetElement(ELEMENT_RESULT_CONTENT_DETAIL);
+//		waitForAndGetElement(ELEMENT_RESULT_CONTENT_DETAIL);
 	}
 }

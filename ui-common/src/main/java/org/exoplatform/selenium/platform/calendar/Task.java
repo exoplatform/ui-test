@@ -83,7 +83,7 @@ public class Task extends CalendarBase{
 
 	//Task preview
 	public String ELEMENT_TASK_PREVIEW_TITLE = "//*[@id='UIPreviewPopup']//div[@class='titleList']/*[text()='${task}']";
-
+	public String ELEMENT_TASK_PREVIEW_DESCRIPTION =".//*[@class='tableListEvent']//*[@class='viewDescription'][contains(text(),'${keySearch}')]";
 	//----------------------------------DateTime----------------------------------------
 	public int HAFL_HOUR = 30; //minutes
 	public int FULL_HOUR = 60; //minutes
@@ -182,6 +182,7 @@ public class Task extends CalendarBase{
 	 * 			optional parameter
 	 * 			opt[0]: calendar
 	 * 			opt[1]: category
+	 * 
 	 */
 	public void inputBasicQuickTask(String name, String note, String...opt){
 		boolean quick = (waitForAndGetElement(ELEMENT_QUICK_ADD_TASK_POPUP,5000,0) != null) ? true : false;

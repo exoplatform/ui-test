@@ -59,7 +59,8 @@ public class Event extends CalendarBase{
 
 	//Preview form
 	public String ELEMENT_EVENT_PREVIEW_TITLE = "//form[@id='UIPreviewPopup']//div[@class='titleList']/strong[text()='${event}']";
-
+	
+	
 	//Form Add event details
 	public By ELEMENT_ADD_EVENT_DETAIL_TAB = By.linkText("Details");
 	public By ELEMENT_ADD_EDIT_EVENT_ALLDAY = By.xpath("//form[@id='UIEventForm']//input[@id='allDay']");

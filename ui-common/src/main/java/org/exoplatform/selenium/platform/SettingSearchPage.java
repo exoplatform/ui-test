@@ -109,7 +109,6 @@ public class SettingSearchPage extends PlatformBase {
 //	public final String ELEMENT_RESULT_SEARCH_PAGE_ITEM = "//div[@id='resultPage']//*[@class='content']/h6//*[contains(text(),'${eventname}')]";
 	public final String ELEMENT_RESULT_ITEM_ORDER_BY=".//*[@id='result']/div[{$index}]//*[text()='${keysearch}']";
 
-
 	//Quick Search elements
 	public final String ELEMENT_QUICK_SEARCH_BOX_RESULTS=".//*[@id='quickSearchResult{$position}']/*[contains(.,'{$result}')]";
 	
@@ -117,6 +116,10 @@ public class SettingSearchPage extends PlatformBase {
 	public final String ELEMENT_RESULT_ITEM = "//div[@id='resultPage']//*[@class='content']/h6//*[contains(.,'${keySearch}')]";
 	public final String ELEMENT_RESULT_SEARCH_ITEM = "//div[@id='resultPage']//a[text()='${item}']";
 
+	//Quick Search elements
+	public final String ELEMENT_QUICKSEARCH_RESULT_FIRSTRESULT ="//*[@id='quickSearchResult1']//*[contains(@href,'${keySearch}')]";
+
+	//Search result form
 	public final String ELEMENT_RESULT_ITEM_LIST = "//*[@id='result']/*[@class='resultBox clearfix ${item}']//a[text()='${keySearch}']";
 	public final String ELEMENT_RESULT_LOCATION_DATETIME = "//div[@id='resultPage']//a[text()='${item}']/*[contains(text(),'${keySearch}')]/../../../*[@class='detail']";
 	public final String ELEMENT_RESULT_EXCERPT = "//div[@id='resultPage']//a[text()='${item}']/*[contains(text(),'${keySearch}')]/../../../*[@class='excerpt']";
@@ -129,7 +132,7 @@ public class SettingSearchPage extends PlatformBase {
 	
 	//Quick Search elements
 	public final String ELEMENT_QUICKSEARCH_RESULT = "//*[@id='quickSearchResult${number}']//*[@href=contains(text(),'${name}')]";
-
+	public final String ELEMENT_SEARCH_RESULT_EMPHASIZE = "//strong[normalize-space(text())='${text}']";
 	//Task page result
 	public final String ELEMENT_RESULT_SEARCH_PAGE_ICON = "//*[@id='result']//div[contains(@class,'resultBox')]//*[contains(text(),'${name_document}')]/../../..//i[contains(@class,'webContent')]";
 	public final String ELEMENT_RESULT_SEARCH_PAGE_TITLE = "//*[@id='result']//div[contains(@class,'resultBox')]//a[contains(text(),'${name_document}')]";

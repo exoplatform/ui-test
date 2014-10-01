@@ -777,9 +777,10 @@ public class PlatformBase extends TestBase {
 	//Search icon
 	public final By ELEMENT_QUICK_SEARCH_ICON = By.xpath("//i[@class='uiIconPLF24x24Search']");
 	public final By ELEMENT_QUICK_SEARCH_TEXTBOX = By.name("adminkeyword");
+	public final String ELEMENT_QUICK_SEARCH_BOX_RESULTS=".//*[@id='quickSearchResult{$position}']/*[contains(.,'{$result}')]";
 	public final By ELEMENT_SEE_ALL_SEARCH_RESULTS = By.linkText("See All Search Results");
 	public final By ELEMENT_RESULT_SEARCH_PAGE = By.id("resultPage");
-	public final By ELEMENT_RESULT_CONTENT_DETAIL = By.xpath("//*[@class='content']/*[@class='detail']");
+	public final String ELEMENT_RESULT_CONTENT_DETAIL = "//*[text()='${text}']/../../..//*[@class='content']/*[@class='detail']";
 	public final By ELEMENT_TOOLBAR_SEARCH = By.id("ToolBarSearch");
 
 	public final String ELEMENT_TOPIC_TITLE= "//*[@class='postViewTitle'][contains(text(),'${titleTopic}')]";
