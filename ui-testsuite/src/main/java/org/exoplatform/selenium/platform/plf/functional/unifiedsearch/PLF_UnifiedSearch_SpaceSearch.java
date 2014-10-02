@@ -5,10 +5,18 @@ import static org.exoplatform.selenium.TestLogger.info;
 import org.exoplatform.selenium.Button;
 import org.exoplatform.selenium.Utils;
 import org.exoplatform.selenium.platform.ManageAccount;
+import org.exoplatform.selenium.platform.NavigationManagement;
 import org.exoplatform.selenium.platform.NavigationToolbar;
 import org.exoplatform.selenium.platform.SearchAdministration;
 import org.exoplatform.selenium.platform.SettingSearchPage;
 import org.exoplatform.selenium.platform.ManageAccount.userType;
+import org.exoplatform.selenium.platform.ecms.contentexplorer.ActionBar;
+import org.exoplatform.selenium.platform.ecms.contentexplorer.ContentTemplate;
+import org.exoplatform.selenium.platform.ecms.contentexplorer.ContextMenu;
+import org.exoplatform.selenium.platform.forum.ForumManageCategory;
+import org.exoplatform.selenium.platform.forum.ForumManageForum;
+import org.exoplatform.selenium.platform.forum.ForumManagePost;
+import org.exoplatform.selenium.platform.forum.ForumManageTopic;
 import org.exoplatform.selenium.platform.social.ManageMember;
 import org.exoplatform.selenium.platform.wiki.Template;
 import org.openqa.selenium.By;
@@ -18,16 +26,39 @@ import org.testng.annotations.Test;
 
 public class PLF_UnifiedSearch_SpaceSearch extends Template {
 
+	// General
+	Button button;
+
 	// Platform
 	NavigationToolbar naviToolbar;
+	NavigationManagement navMag;
 	ManageAccount magAcc;
 	ManageMember magMember;
+
+	ContextMenu cMenu;
+	ActionBar actBar;
 
 	SearchAdministration searchAdmin;
 	SettingSearchPage qsPage;
 
+	ForumManageForum mngFru;
+	ForumManageTopic mngTopic;
+	ForumManagePost mngPost;
+	ForumManageCategory mngCat;
+
+	ContentTemplate conTemp;
+
+	String searchText = "topic";
+	String category1 = "";
+	String forum1 = "";
+	String topic1 = "";
+	String topic2 = "";
+	String text_Search = "Discussions";
+	boolean isPermission = false;
+
+
 	@BeforeTest
-	public void setBeforeTest() {
+	public void setBeforeTest() throws Exception {
 		initSeleniumTest();
 		driver.get(baseUrl);
 		info("Login with " + DATA_USER1);
@@ -36,7 +67,16 @@ public class PLF_UnifiedSearch_SpaceSearch extends Template {
 		magMember = new ManageMember(driver, this.plfVersion);
 		naviToolbar = new NavigationToolbar(driver, this.plfVersion);
 		button = new Button(driver, this.plfVersion);
+
+		mngFru = new ForumManageForum(driver, this.plfVersion);
+		actBar = new ActionBar(driver, this.plfVersion);
+		mngTopic = new ForumManageTopic(driver, this.plfVersion);
+		mngPost = new ForumManagePost(driver, this.plfVersion);
+		mngCat = new ForumManageCategory(driver, this.plfVersion);
+		navMag = new NavigationManagement(driver, this.plfVersion);
 		qsPage = new SettingSearchPage(driver);
+		cMenu = new ContextMenu(driver, this.plfVersion);
+		conTemp = new ContentTemplate(driver, this.plfVersion);
 		magAcc.signIn(DATA_USER1, DATA_PASS);
 
 	}
@@ -47,7 +87,6 @@ public class PLF_UnifiedSearch_SpaceSearch extends Template {
 		driver.manage().deleteAllCookies();
 		driver.quit();
 	}
-
 
 	/**
 	 * == Display a Space in the Search Result page ==
@@ -110,6 +149,7 @@ public class PLF_UnifiedSearch_SpaceSearch extends Template {
 		qsPage.quickSearch(name);
 		info("searching");
 		waitForAndGetElement(ELEMENT_RESULT_SEARCH_PAGE);
+
 		//check the result
 		waitForElementNotPresent(By.xpath((qsPage.ELEMENT_RESULT_SEARCH_ITEM).replace("${item}", name)));
 		info("test succeed");
@@ -155,6 +195,7 @@ public class PLF_UnifiedSearch_SpaceSearch extends Template {
 		//clean the data
 		magMember.goToAllSpaces();
 		magMember.deleteSpace(content,300000);
+
 		magMember.deleteSpace(content2,300000);
 		info("data cleaned");
 	}

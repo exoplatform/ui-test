@@ -53,6 +53,14 @@ public class PLF_UnifiedSearch_SearchEngine extends Template {
 
 	ContentTemplate conTemp;
 
+	String searchText = "topic";
+	String category1 = "";
+	String forum1 = "";
+	String topic1 = "";
+	String topic2 = "";
+	String text_Search = "Discussions";
+	boolean isPermission = false;
+
 	@BeforeTest
 	public void setBeforeTest() {
 		initSeleniumTest();

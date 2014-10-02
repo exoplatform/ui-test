@@ -120,6 +120,7 @@ public class SettingSearchPage extends PlatformBase {
 	public final String ELEMENT_QUICKSEARCH_RESULT_FIRSTRESULT ="//*[@id='quickSearchResult1']//*[contains(@href,'${keySearch}')]";
 
 	//Search result form
+
 	public final String ELEMENT_RESULT_ITEM_LIST = "//*[@id='result']/*[@class='resultBox clearfix ${item}']//a[text()='${keySearch}']";
 	public final String ELEMENT_RESULT_LOCATION_DATETIME = "//div[@id='resultPage']//a[text()='${item}']/*[contains(text(),'${keySearch}')]/../../../*[@class='detail']";
 	public final String ELEMENT_RESULT_EXCERPT = "//div[@id='resultPage']//a[text()='${item}']/*[contains(text(),'${keySearch}')]/../../../*[@class='excerpt']";
