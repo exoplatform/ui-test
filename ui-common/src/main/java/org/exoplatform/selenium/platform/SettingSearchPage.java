@@ -115,6 +115,8 @@ public class SettingSearchPage extends PlatformBase {
 	
 	//Search result form
 	public final String ELEMENT_RESULT_ITEM = "//div[@id='resultPage']//*[@class='content']/h6//*[contains(.,'${keySearch}')]";
+	public final String ELEMENT_RESULT_SEARCH_ITEM = "//div[@id='resultPage']//a[text()='${item}']";
+
 	public final String ELEMENT_RESULT_ITEM_LIST = "//*[@id='result']/*[@class='resultBox clearfix ${item}']//a[text()='${keySearch}']";
 	public final String ELEMENT_RESULT_LOCATION_DATETIME = "//div[@id='resultPage']//a[text()='${item}']/*[contains(text(),'${keySearch}')]/../../../*[@class='detail']";
 	public final String ELEMENT_RESULT_EXCERPT = "//div[@id='resultPage']//a[text()='${item}']/*[contains(text(),'${keySearch}')]/../../../*[@class='excerpt']";

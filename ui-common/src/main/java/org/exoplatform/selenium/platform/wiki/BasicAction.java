@@ -26,7 +26,6 @@ public class BasicAction extends Permission{
 	//ManageAlert magAlert;
 
 	Dialog dialog = new Dialog(driver);
-	Button button = new Button(driver);
 	ManageAlert magAlert = new ManageAlert(driver);
 	ManageMember mMember = new ManageMember(driver, this.plfVersion);
 

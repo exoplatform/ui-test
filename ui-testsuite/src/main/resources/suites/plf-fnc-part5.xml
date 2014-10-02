@@ -14,6 +14,8 @@
 			<class name = "org.exoplatform.selenium.platform.plf.functional.unifiedsearch.PLF_UnifiedSearch_EventSearch" />
 			<class name = "org.exoplatform.selenium.platform.plf.functional.unifiedsearch.PLF_UnifiedSearch_FileSearch" />
 			<class name = "org.exoplatform.selenium.platform.plf.functional.unifiedsearch.PLF_UnifiedSearch_SearchResults" />
+			<class name = "org.exoplatform.selenium.platform.plf.functional.unifiedsearch.PLF_UnifiedSearch_SpaceSearch" />
+			<class name = "org.exoplatform.selenium.platform.plf.functional.unifiedsearch.PLF_UnifiedSearch_SearchEngine" />
 		</classes>
 	</test>
 	<listeners>

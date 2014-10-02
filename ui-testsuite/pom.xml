@@ -152,6 +152,12 @@
  				<testSuite>plf-fnc-part4.xml</testSuite>
  			</properties>
  		</profile>
+ 		<profile>
+ 			<id>plf-fnc-part5</id>
+ 			<properties>
+ 				<testSuite>plf-fnc-part5.xml</testSuite>
+ 			</properties>
+ 		</profile>
 		<profile>
 			<id>social</id>
 			<properties>
