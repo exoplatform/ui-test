@@ -278,7 +278,6 @@ public class ManageAccount extends PlatformBase {
 	}
 
 	/** function edit information of user profile
-	 * @author lientm
 	 * @param pos
 	 * @param first
 	 * @param last
@@ -321,7 +320,6 @@ public class ManageAccount extends PlatformBase {
 	}
 
 	/**
-	 * @author vuna2
 	 * @param user: type: Root, Admin, Author, Developer or Publisher
 	 */
 	public void userSignIn(userType user){

@@ -38,16 +38,31 @@
 							<goal>jar</goal>
 						</goals>
 						<configuration>
+							<skip>${javadoc.skip}</skip>
 							<sourcepath>${source.folder}</sourcepath>
 							<doctitle>eXo Platform - Java Selenium Test Framework
 								Documentation</doctitle>
 							<sourceFileIncludes>
+								<!-- General -->
+								<include>org/exoplatform/selenium/*.java</include>
 								<!-- Wiki -->
 								<include>org/exoplatform/selenium/platform/wiki/*.java</include>
 								<!-- Calendar -->
 								<include>org/exoplatform/selenium/platform/calendar/*.java</include>
+								<!-- Social -->
+								<include>org/exoplatform/selenium/platform/social/*.java</include>
+								<!-- ECMS -->
+								<include>org/exoplatform/selenium/platform/ecms/*.java</include>
+								<!-- Forum -->
+								<include>org/exoplatform/selenium/platform/forum/*.java</include>
+								<!-- Platform -->
+								<include>org/exoplatform/selenium/platform/*.java</include>
 							</sourceFileIncludes>
 							<groups>
+								<group>
+									<title>General</title>
+									<packages>org.exoplatform.selenium</packages>
+								</group>
 								<group>
 									<title>Wiki</title>
 									<packages>org.exoplatform.selenium.platform.wiki</packages>
@@ -56,9 +71,25 @@
 									<title>Calendar</title>
 									<packages>org.exoplatform.selenium.platform.calendar</packages>
 								</group>
+								<group>
+									<title>Ecms</title>
+									<packages>org.exoplatform.selenium.platform.ecms</packages>
+								</group>
+								<group>
+									<title>Forum</title>
+									<packages>org.exoplatform.selenium.platform.forum</packages>
+								</group>
+								<group>
+									<title>Social</title>
+									<packages>org.exoplatform.selenium.platform.social</packages>
+								</group>
+								<group>
+									<title>Platform</title>
+									<packages>org.exoplatform.selenium.platform</packages>
+								</group>
 							</groups>
 							<reportOutputDirectory>${project.build.directory}</reportOutputDirectory>
-							<destDir>${project.basedir}/target/java-api</destDir>
+							<destDir>${project.basedir}/target/doc</destDir>
 						</configuration>
 					</execution>
 				</executions>

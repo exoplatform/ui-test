@@ -86,7 +86,6 @@ public class ForumManageForum extends ForumBase {
 	
 	/*-------------------------------------Common function--------------------------------*/
 	/** function: go to add forum
-	 * @author lientm
 	 */
 	public void goToAddForum(){
 		info("---Go to add new forum---");
@@ -95,13 +94,12 @@ public class ForumManageForum extends ForumBase {
 	}
 
 	/**function: input data in add forum tab in add forum popup
-	 * @author lientm
 	 * @param addForum: is array of 5 strings with
-	 * 			@addForum[0] = title of forum
-	 * 			@addForum[1] = order of forum
-	 *          @addForum[2] = Open/Closed
-	 *          @addForum[3] = Locked/Unlocked
-	 *          @addForum[4] = description of forum
+	 * 			addForum[0] = title of forum
+	 * 			addForum[1] = order of forum
+	 *          addForum[2] = Open/Closed
+	 *          addForum[3] = Locked/Unlocked
+	 *          addForum[4] = description of forum
 	 */
 	public void inputDataInAddForumTab_addForum(String catName, String[] addForum){
 		info("Input data in add forum tab");
@@ -224,7 +222,6 @@ public class ForumManageForum extends ForumBase {
 
 	
 	/** function: delete a forum
-	 * @author lientm
 	 * @param title: title of forum that needs to delete
 	 */
 	public void deleteForum(String title){
@@ -291,7 +288,6 @@ public class ForumManageForum extends ForumBase {
 	}
 
 	/**function: move a forum from a category to another category
-	 * @author lientm
 	 * @param forum: title of forum that needs to move
 	 * @param destination: title of destination category
 	 */
@@ -308,7 +304,6 @@ public class ForumManageForum extends ForumBase {
 	}
 
 	/** function: export a forum
-	 * @author lientm
 	 * @param fileName: file name export
 	 * @param compress: compress or not
 	 */
@@ -390,7 +385,6 @@ public class ForumManageForum extends ForumBase {
 
 	}
 	/**Ban IP for a forum
-	 * @author thuntn
 	 * @param ip
 	 */
 	public void banIPForum(String...ip){
