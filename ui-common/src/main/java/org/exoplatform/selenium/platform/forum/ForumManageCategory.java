@@ -264,7 +264,7 @@ public class ForumManageCategory extends ForumBase {
 			//waitForTextNotPresent(title);
 			
 			waitForElementNotPresent("//strong[text()='"+title+"']");
-			waitForElementNotPresent(By.linkText(title));
+			waitForElementNotPresent(By.linkText(title)); 
 		}
 		info("Delete category successfully");
 	}
