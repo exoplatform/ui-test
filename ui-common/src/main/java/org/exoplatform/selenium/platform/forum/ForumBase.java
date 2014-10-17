@@ -27,7 +27,7 @@ public class ForumBase extends PlatformBase {
 	public PageEditor pageE ;
 	public NavigationToolbar navTool ;
 	public PlatformPermission per ;
-
+	
 	public final By ELEMENT_FORUM_LINK = By.linkText("Forums");
 	public final By ELEMENT_OK_INFOR_POPUP = By.xpath("//div[@class='UIPopupWindow UIDragObject uiPopup']/.//a[text()='OK']");
 	public final By ELEMENT_OK_DELETE = By.xpath("//*[@id='UIForumPopupConfirmation']//*[text()='OK']");
@@ -168,6 +168,9 @@ public class ForumBase extends PlatformBase {
 	public final By ELEMENT_BBCODE_ALERT_POPUP = By.className("UIPopupWindow");
 
 	public final String MSG_BBCODE_BLANK_FIELD = "The field ${field} is required.";
+	
+	// CKEditor
+    public final String ELEMENT_CKEDITOR_DECORATE = ".//*[@title='${name}']";
 
 	//Action click code for add BBCode.
 	public enum ADDBBCODE_ACTION{
@@ -247,6 +250,7 @@ public class ForumBase extends PlatformBase {
 	public final By ELEMENT_NOTIFY_FRAME=By.xpath("//*[@id='xEditingArea']/iframe");
 	public final By ELEMENT_NOTIFY_FRAME_PLF41=By.xpath("//*[@class='cke_editable cke_editable_themed cke_contents_ltr cke_show_borders']");
 	public final String ELEMENT_NOTIFY_TEXT= "New Posts Notification";
+	public final String ELEMENT_NOTIFICACTION_DESCRIPTION=".//*[contains(text(),'${desText}')]";
 	public final By ELEMENT_NOTIFY_FRAME_UP=By.id("notifyEmail___Frame");
 	public final By ELEMENT_NOTIFY_FRAME_UP_PLF41 = By.xpath("//*[@class='cke_wysiwyg_frame cke_reset']");
 	public final By ELEMENT_NOTIFY_PREFIX = By.id("enableHeaderSubject");
@@ -256,7 +260,8 @@ public class ForumBase extends PlatformBase {
 	public final By ELEMENT_NOTIFY_MOVE_FRAME_UP= By.id("notifyEmailMoved___Frame");
 	public final By ELEMENT_NOTIFY_MOVE_TAB = By.xpath("//a[contains(text(),'Moved Notification')]");
 	public final By ELEMENT_NOTIFY_MOVE_RESET = By.xpath("//div[@id='notifyEmailMoveTab']//img[@title='Reset']");
-
+    public final By ELEMENT_NOTIFY_BUTTON_CLOSE=By.xpath(".//*[@id='UINotificationForm']//button[contains(text(),'Close')]");
+    public final By ELEMENT_NOTIFY_BUTTON_SAVE=By.xpath(".//*[@id='UINotificationForm']//button[contains(text(),'Save')]");
 	//--------------------------Forum portlet setting form------------------------------------
 	public final By ELEMENT_FORUM_PORTLET = By.xpath("//*[@class='CPortletLayoutDecorator' and contains(text(), 'Forum Portlet')]");
 	public final By ELEMENT_FORUM_PORTLET_EDIT_ICON = By.xpath("//div[text()='Forum Portlet']/../a[@class='EditIcon']");
@@ -308,8 +313,8 @@ public class ForumBase extends PlatformBase {
 	public final String ELEMENT_USER_MANAGEMENT_CATEGORY_LINK = "//form[@id='UISelectItemForum']//a[contains(.,'${category}')]";
 
 	//Private message
-	public final By ELEMENT_PRIVATE_MESSAGE_ICON = By.xpath("//a[@class='actionIcon']//i[@class='uiIconMail uiIconLightGray']");
-	public final By ELEMENT_COMPOSE_MESSAGE_TAB = By.linkText("Compose New Message");
+	public final By ELEMENT_PRIVATE_MESSAGE_ICON = By.xpath(".//*[@class='uiIconMail uiIconLightGray']");
+	public final By ELEMENT_COMPOSE_MESSAGE_TAB = By.xpath(".//*[@id='UIPrivateMessageForm']//a[contains(text(),'Compose New Message')]");
 	public final By ELEMENT_PRIVATE_MESSAGE_SENDTO_INPUT = By.id("SendTo");
 	public final By ELEMENT_PRIVATE_MESSAGE_TITLE_INPUT = By.id("MailTitle");
 	public final By ELEMENT_PRIVATE_MESSAGE_FRAME1 = By.id("MailMessage___Frame");
@@ -318,21 +323,22 @@ public class ForumBase extends PlatformBase {
 	public final By ELEMENT_PRIVATE_MESSAGE_SEND_BUTTON = By.xpath("//button[@class='btn' and text()='Send']");
 	public final By ELEMENT_PRIVATE_MESSAGE_POPUP = By.xpath("//span[@class='PopupTitle popupTitle' and text()='Private Messages']");
 	public final By ELEMENT_PRIVATE_MESSAGE_CANCEL_BUTTON = By.xpath("//form[@id='UIPrivateMessageForm']//button[text()='Cancel']");
-	public final By ELEMENT_PRIVATE_MESSAGE_SENT_TAB = By.linkText("Sent Messages");
+	public final By ELEMENT_PRIVATE_MESSAGE_SENT_TAB = By.xpath(".//*[@id='UIPrivateMessageForm']//a[contains(text(),'Sent Messages')]");
 	public final By ELEMENT_PRIVATE_MESSAGE_COMPOSE_OK = By.xpath("//span[contains(text(),'Your message was sent successfully.')]/../../..//*[text()='OK']");
 	public final By ELEMENT_PRIVATE_MESSAGE_DELETE_OK = By.xpath("//span[contains(text(),'Are you sure you want to delete this message ?')]/../../..//*[text()='OK']");
 
-	public final String ELEMENT_PRIVATE_MESSAGE_FORWARD_ICON = "//*[text()='${message}']//ancestor::tr//i[@class='uiIconForumForward uiIconForumLightGray' and @data-original-title='Forward Message']";
+	public final String ELEMENT_PRIVATE_MESSAGE_FORWARD_ICON = ".//*[@id='PermissionInfo']//a/strong[contains(text(),'${nameMess}')]//..//..//../td/a[@class='actionIcon']";
 	public final String ELEMENT_PRIVATE_MESSAGE_REPLY_ICON = "//*[text()='${message}']//ancestor::tr//i[@class='uiIconReply uiIconLightGray' and @data-original-title='Reply Message']";
-	public final String ELEMENT_PRIVATE_MESSAGE_DELETE_ICON = "//*[text()='${message}']//ancestor::td/../td/a/i[@class='uiIconDelete uiIconLightGray' and @data-original-title='Delete Message']";
+	public final String ELEMENT_PRIVATE_MESSAGE_DELETE_ICON = ".//*[@id='PermissionInfo']//a/strong[contains(text(),'${nameMess}')]//..//..//..//i[@class='uiIconDelete uiIconLightGray']";
 	public final String ELEMENT_PRIVATE_MESSAGE = "//form[@id='UIPrivateMessageForm']//td//*[text()='${message}']";
 	public final String ELEMENT_PRIVATE_MESSAGE_CONTENT = "//div[@id='UIListInBoxPrivateMessage']//p[contains(text(),'${message}')]";
 
 	public final String MSG_PRIVATE_MESSAGE_COMPOSE = "Your message was sent successfully.";
 	public final String MSG_PRIVATE_MESSAGE_DELETE = "Are you sure you want to delete this message ?";
+	public final String ELEMENT_PRIVATE_MESSAGE_NAME_SENT=".//*[@id='PermissionInfo']//td/span[contains(text(),'${nameReceiver}')]//..//..//../a/strong[contains(text(),'${nameMess}')]";
 
 	//Gmail
-	public String ELEMENT_GMAIL_EMAIL = "//span/b[text()='[${category}][${forum}] ${topic}']";
+	public String ELEMENT_GMAIL_EMAIL = ".//*/b[contains(text(),'[${category}][${forum}] ${topic}')]";
 	public String ELEMENT_GMAIL_EMAIL2 = "//span/b[text()='[${category}][${forum}]${topic}']";
 	public String ELEMENT_GMAIL_EMAIL_PREFIX = "//span/b[text()='${prefix}[${category}][${forum}] ${topic}']";
 
@@ -1392,6 +1398,30 @@ public class ForumBase extends PlatformBase {
 
 	}
 
+	/** Input a private message form
+	 *
+	 * @param receiver: send message to this receiver
+	 * @param title
+	 * @param message
+	 */
+	public void inputPrivateMessageWithDecorate(String receiver, String title, String message,String decorate){
+		if(receiver != null)
+			type(ELEMENT_PRIVATE_MESSAGE_SENDTO_INPUT,receiver,true);
+		if(title != null)
+			type(ELEMENT_PRIVATE_MESSAGE_TITLE_INPUT,title,true);
+		if(message != null){
+			if(this.plfVersion.equalsIgnoreCase("4.0"))
+				inputDataToFrameInFrame(ELEMENT_PRIVATE_MESSAGE_FRAME1,ELEMENT_POST_MESSAGE_FRAME_2 , message, false);
+			else
+				inputDataToFrame(ELEMENT_PRIVATE_MESSAGE_FRAME_41, message);
+		}
+		switchToParentWindow();
+		waitForAndGetElement(ELEMENT_CKEDITOR_DECORATE.replace("${name}",decorate));
+		click(By.xpath(ELEMENT_CKEDITOR_DECORATE.replace("${name}",decorate)));
+		click(ELEMENT_PRIVATE_MESSAGE_SEND_BUTTON);
+
+	}
+
 	/** Compose a private message
 	 * @author thuntn
 	 * @param receiver: send message to this receiver
@@ -1409,6 +1439,24 @@ public class ForumBase extends PlatformBase {
 		waitForElementNotPresent(ELEMENT_PRIVATE_MESSAGE_COMPOSE_OK);
 		waitForAndGetElement(ELEMENT_PRIVATE_MESSAGE.replace("${message}", title));
 	}
+	
+	/** Compose a private message
+	 * @author thuntn
+	 * @param receiver: send message to this receiver
+	 * @param title
+	 * @param message
+	 */
+	public void composePrivateMessagewithDecorate(String receiver, String title, String message,String decorate){
+		info("Compose a private message");
+
+		goToPrivateMessage();
+		click(ELEMENT_COMPOSE_MESSAGE_TAB);
+		inputPrivateMessageWithDecorate(receiver, title, message,decorate);
+		waitForMessage(MSG_PRIVATE_MESSAGE_COMPOSE);
+		click(ELEMENT_PRIVATE_MESSAGE_COMPOSE_OK);
+		waitForElementNotPresent(ELEMENT_PRIVATE_MESSAGE_COMPOSE_OK);
+		waitForAndGetElement(ELEMENT_PRIVATE_MESSAGE.replace("${message}", title));
+	}
 
 	/**Delete message after Private message and tabs are opened
 	 *
@@ -1417,11 +1465,11 @@ public class ForumBase extends PlatformBase {
 	 */
 	public void deletePrivateMessage(String titleMessage){
 		info("Delete message");
-		click(ELEMENT_PRIVATE_MESSAGE_DELETE_ICON.replace("${message}",titleMessage ));
+		click(ELEMENT_PRIVATE_MESSAGE_DELETE_ICON.replace("${nameMess}",titleMessage ));
 		waitForMessage(MSG_PRIVATE_MESSAGE_DELETE);
 		click(ELEMENT_PRIVATE_MESSAGE_DELETE_OK);
 		waitForElementNotPresent(ELEMENT_PRIVATE_MESSAGE_DELETE_OK);
-		waitForElementNotPresent(ELEMENT_PRIVATE_MESSAGE_DELETE_ICON.replace("${message}",titleMessage ));
+		waitForElementNotPresent(ELEMENT_PRIVATE_MESSAGE_DELETE_ICON.replace("${nameMess}",titleMessage ));
 	}
 
 	/** Forward a private message
@@ -1439,6 +1487,22 @@ public class ForumBase extends PlatformBase {
 		click(ELEMENT_PRIVATE_MESSAGE_COMPOSE_OK);
 		waitForElementNotPresent(ELEMENT_PRIVATE_MESSAGE_COMPOSE_OK);
 		waitForAndGetElement(ELEMENT_PRIVATE_MESSAGE.replace("${message}", "Forward:" + titleMessage));
+	}
+	/** Forward a private message
+	 * @author thuntn
+	 * @param titleMessage
+	 * @param receiver
+	 */
+	public void forwardPrivateMessageWithDecorate(String titleMessage, String receiver,String fwdMessage,String decorate){
+		info("Forward a private message");
+
+		click(ELEMENT_PRIVATE_MESSAGE_SENT_TAB);
+		click(ELEMENT_PRIVATE_MESSAGE_FORWARD_ICON.replace("${nameMess}", titleMessage));
+		inputPrivateMessageWithDecorate(receiver,fwdMessage, fwdMessage,decorate);
+		waitForMessage(MSG_PRIVATE_MESSAGE_COMPOSE);
+		click(ELEMENT_PRIVATE_MESSAGE_COMPOSE_OK);
+		waitForElementNotPresent(ELEMENT_PRIVATE_MESSAGE_COMPOSE_OK);
+		waitForAndGetElement(ELEMENT_PRIVATE_MESSAGE.replace("${message}",titleMessage));
 	}
 
 	/**Reply a private message

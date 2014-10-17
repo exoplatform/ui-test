@@ -8,8 +8,10 @@
 			</run>
 		</groups>
 		<classes>
-			<class name="org.exoplatform.selenium.platform.wiki.sniff.Wiki_BasicAction_Other" />
-			<class name="org.exoplatform.selenium.platform.wiki.sniff.Wiki_Information" />
+			<class
+				name="org.exoplatform.selenium.platform.wiki.sniff.Wiki_BasicAction_Other" />
+			<class
+				name="org.exoplatform.selenium.platform.wiki.sniff.Wiki_Information" />
 		</classes>
 	</test>
 	<listeners>

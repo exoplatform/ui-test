@@ -8,10 +8,14 @@
 			</run>
 		</groups>
 		<classes>
-			<class name="org.exoplatform.selenium.platform.ecms.sniff.admin.ECMS_Admin_Repository" />
-			<class name="org.exoplatform.selenium.platform.ecms.sniff.admin.ECMS_Admin_Template" />
-			<class name="org.exoplatform.selenium.platform.ecms.sniff.admin.ECMS_Admin_Explorer" />
-			<class name="org.exoplatform.selenium.platform.ecms.sniff.admin.ECMS_Admin_Advanced" />
+			<class
+				name="org.exoplatform.selenium.platform.ecms.sniff.admin.ECMS_Admin_Repository" />
+			<class
+				name="org.exoplatform.selenium.platform.ecms.sniff.admin.ECMS_Admin_Template" />
+			<class
+				name="org.exoplatform.selenium.platform.ecms.sniff.admin.ECMS_Admin_Explorer" />
+			<class
+				name="org.exoplatform.selenium.platform.ecms.sniff.admin.ECMS_Admin_Advanced" />
 		</classes>
 	</test>
 	<listeners>

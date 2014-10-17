@@ -3,16 +3,17 @@
 <suite name="Social Functional Test" verbose="1">
 	<test name="social-func" enabled="true">
 		<groups>
-		  <run>
-		    <exclude name="pending"/>
-		  </run>
+			<run>
+				<exclude name="pending" />
+			</run>
 		</groups>
 		<packages>
-			<package name="org.exoplatform.selenium.platform.social.functional.space.*" />
+			<package
+				name="org.exoplatform.selenium.platform.social.functional.space.*" />
 		</packages>
 	</test>
 
 	<listeners>
-    <listener class-name="org.exoplatform.selenium.TestReportListener"/>
-  </listeners>
+		<listener class-name="org.exoplatform.selenium.TestReportListener" />
+	</listeners>
 </suite>

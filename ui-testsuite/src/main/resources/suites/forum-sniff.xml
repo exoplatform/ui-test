@@ -8,25 +8,43 @@
 			</run>
 		</groups>
 		<classes>
-			<class name="org.exoplatform.selenium.platform.forum.sniff.Forum_Forum_Post" />
-			<class name="org.exoplatform.selenium.platform.forum.sniff.Forum_Forum_PrivateMessage" />
-			<class name="org.exoplatform.selenium.platform.forum.sniff.Forum_Forum_PublishActivity_PollActivity" />
-			<class name="org.exoplatform.selenium.platform.forum.sniff.Forum_Forum_PublishActivity_TopicActivity" />
-			<class name="org.exoplatform.selenium.platform.forum.sniff.Forum_Forum_Topic_BasicAction" />
-			<class name="org.exoplatform.selenium.platform.forum.sniff.Forum_Forum_Topic_ManagePoll" />
-			<class name="org.exoplatform.selenium.platform.forum.sniff.Forum_Forum_Topic_OtherAction" />
-			<class name="org.exoplatform.selenium.platform.forum.sniff.Forum_Administration" />
-			<class name="org.exoplatform.selenium.platform.forum.sniff.Forum_Answers_Answers" />
-			<class name="org.exoplatform.selenium.platform.forum.sniff.Forum_Answers_Category" />
-			<class name="org.exoplatform.selenium.platform.forum.sniff.Forum_Answers_PublishActivity" />
-			<class name="org.exoplatform.selenium.platform.forum.sniff.Forum_Answers_Questions" />
-			<class name="org.exoplatform.selenium.platform.forum.sniff.Forum_Answers_Search" />
-			<class name="org.exoplatform.selenium.platform.forum.sniff.Forum_Answers_Setting" />
+			<class
+				name="org.exoplatform.selenium.platform.forum.sniff.Forum_Forum_Post" />
+			<class
+				name="org.exoplatform.selenium.platform.forum.sniff.Forum_Forum_PrivateMessage" />
+			<class
+				name="org.exoplatform.selenium.platform.forum.sniff.Forum_Forum_PublishActivity_PollActivity" />
+			<class
+				name="org.exoplatform.selenium.platform.forum.sniff.Forum_Forum_PublishActivity_TopicActivity" />
+			<class
+				name="org.exoplatform.selenium.platform.forum.sniff.Forum_Forum_Topic_BasicAction" />
+			<class
+				name="org.exoplatform.selenium.platform.forum.sniff.Forum_Forum_Topic_ManagePoll" />
+			<class
+				name="org.exoplatform.selenium.platform.forum.sniff.Forum_Forum_Topic_OtherAction" />
+			<class
+				name="org.exoplatform.selenium.platform.forum.sniff.Forum_Administration" />
+			<class
+				name="org.exoplatform.selenium.platform.forum.sniff.Forum_Answers_Answers" />
+			<class
+				name="org.exoplatform.selenium.platform.forum.sniff.Forum_Answers_Category" />
+			<class
+				name="org.exoplatform.selenium.platform.forum.sniff.Forum_Answers_PublishActivity" />
+			<class
+				name="org.exoplatform.selenium.platform.forum.sniff.Forum_Answers_Questions" />
+			<class
+				name="org.exoplatform.selenium.platform.forum.sniff.Forum_Answers_Search" />
+			<class
+				name="org.exoplatform.selenium.platform.forum.sniff.Forum_Answers_Setting" />
 			<class name="org.exoplatform.selenium.platform.forum.sniff.Forum_FAQ" />
-			<class name="org.exoplatform.selenium.platform.forum.sniff.Forum_Forum_BasicAction" />
-			<class name="org.exoplatform.selenium.platform.forum.sniff.Forum_Forum_Bookmark" />
-			<class name="org.exoplatform.selenium.platform.forum.sniff.Forum_Forum_Category" />
-			<class name="org.exoplatform.selenium.platform.forum.sniff.Forum_Forum_MoreAction" />
+			<class
+				name="org.exoplatform.selenium.platform.forum.sniff.Forum_Forum_BasicAction" />
+			<class
+				name="org.exoplatform.selenium.platform.forum.sniff.Forum_Forum_Bookmark" />
+			<class
+				name="org.exoplatform.selenium.platform.forum.sniff.Forum_Forum_Category" />
+			<class
+				name="org.exoplatform.selenium.platform.forum.sniff.Forum_Forum_MoreAction" />
 			<class name="org.exoplatform.selenium.platform.forum.sniff.Forum_Search" />
 			<class name="org.exoplatform.selenium.platform.forum.sniff.Forum_Setting" />
 		</classes>

@@ -291,7 +291,7 @@ public class PLF_UnifiedSearch_DiscussionSearch extends PlatformBase {
 
 		info("-- Verify the forum name on excerpt --");
 		assert waitForAndGetElement(
-				qsPage.ELEMENT_TOPIC_TITLE.replace("${titleTopic}", topic1))
+				qsPage.ELEMENT_TOPIC_POST_TITLE.replace("${titleTopic}", topic1))
 				.getText().contains(topic1);
 		DeleteData();
 	}

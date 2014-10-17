@@ -8,8 +8,9 @@
 			</run>
 		</groups>
 		<classes>
- 			<class name="org.exoplatform.selenium.platform.ecms.functional.siteexplorer.collaboration.ECMS_SE_Collaboration_Manage_Tag" />
- 		</classes>
+			<class
+				name="org.exoplatform.selenium.platform.ecms.functional.siteexplorer.collaboration.ECMS_SE_Collaboration_Manage_Tag" />
+		</classes>
 	</test>
 
 	<test name="ecms-func-se-filemanagementview" enabled="true">
@@ -19,15 +20,21 @@
 			</run>
 		</groups>
 		<classes>
- 			<class name="org.exoplatform.selenium.platform.ecms.functional.siteexplorer.filemanagementview.ECMS_SE_FileManagementView_Actions_CreateEditDeleteNode" />
- 			<class name="org.exoplatform.selenium.platform.ecms.functional.siteexplorer.filemanagementview.ECMS_SE_FileManagementView_Actions_OtherActions" />
- 			<class name="org.exoplatform.selenium.platform.ecms.functional.siteexplorer.filemanagementview.ECMS_SE_FileManagementView_Actions_Select" />
- 			<class name="org.exoplatform.selenium.platform.ecms.functional.siteexplorer.filemanagementview.ECMS_SE_FileManagementView_Actions_Sort" />
- 			<class name="org.exoplatform.selenium.platform.ecms.functional.siteexplorer.filemanagementview.ECMS_SE_FileManagementView_Configure" />
- 			<class name="org.exoplatform.selenium.platform.ecms.functional.siteexplorer.filemanagementview.ECMS_SE_FileManagementView_Display" />
- 		</classes>
+			<class
+				name="org.exoplatform.selenium.platform.ecms.functional.siteexplorer.filemanagementview.ECMS_SE_FileManagementView_Actions_CreateEditDeleteNode" />
+			<class
+				name="org.exoplatform.selenium.platform.ecms.functional.siteexplorer.filemanagementview.ECMS_SE_FileManagementView_Actions_OtherActions" />
+			<class
+				name="org.exoplatform.selenium.platform.ecms.functional.siteexplorer.filemanagementview.ECMS_SE_FileManagementView_Actions_Select" />
+			<class
+				name="org.exoplatform.selenium.platform.ecms.functional.siteexplorer.filemanagementview.ECMS_SE_FileManagementView_Actions_Sort" />
+			<class
+				name="org.exoplatform.selenium.platform.ecms.functional.siteexplorer.filemanagementview.ECMS_SE_FileManagementView_Configure" />
+			<class
+				name="org.exoplatform.selenium.platform.ecms.functional.siteexplorer.filemanagementview.ECMS_SE_FileManagementView_Display" />
+		</classes>
 	</test>
-	
+
 	<test name="ecms-func-se-friendly" enabled="true">
 		<groups>
 			<run>
@@ -35,10 +42,11 @@
 			</run>
 		</groups>
 		<classes>
- 			<class name="org.exoplatform.selenium.platform.ecms.functional.siteexplorer.friendly.ECMS_SE_Friendly" />
- 		</classes>
+			<class
+				name="org.exoplatform.selenium.platform.ecms.functional.siteexplorer.friendly.ECMS_SE_Friendly" />
+		</classes>
 	</test>
-	
+
 	<test name="ecms-func-se-publication" enabled="true">
 		<groups>
 			<run>
@@ -46,8 +54,9 @@
 			</run>
 		</groups>
 		<classes>
- 			<class name="org.exoplatform.selenium.platform.ecms.functional.siteexplorer.publication.ECMS_SE_Publication" />
- 		</classes>
+			<class
+				name="org.exoplatform.selenium.platform.ecms.functional.siteexplorer.publication.ECMS_SE_Publication" />
+		</classes>
 	</test>
 	<test name="ecms-func-se-info" enabled="true">
 		<groups>
@@ -56,10 +65,11 @@
 			</run>
 		</groups>
 		<classes>
- 			<class name="org.exoplatform.selenium.platform.ecms.functional.siteexplorer.info.ECMS_SE_Info_Permission" />
- 		</classes>
+			<class
+				name="org.exoplatform.selenium.platform.ecms.functional.siteexplorer.info.ECMS_SE_Info_Permission" />
+		</classes>
 	</test>
-	
+
 	<test name="ecms-func-se-otherchecks" enabled="true">
 		<groups>
 			<run>
@@ -81,6 +91,7 @@
  			<class name="org.exoplatform.selenium.platform.ecms.functional.siteExplorer.ECMS_SiteExplorer_Collaboration" />
  		</classes>
 	</test>
+
 	<listeners>
 		<listener class-name="org.exoplatform.selenium.TestReportListener" />
 	</listeners>

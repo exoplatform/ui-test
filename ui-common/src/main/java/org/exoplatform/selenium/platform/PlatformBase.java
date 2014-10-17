@@ -45,11 +45,14 @@ public class PlatformBase extends TestBase {
 	 * */
 	public final String ELEMENT_GO_TO_PORTAL = "//a[text()='Login to the ACME social intranet']";
 	public final By ELEMENT_GO_TO_ACME = By.linkText("Login to the ACME website");
+	public final By ELEMENT_ACME_ICE_CONTENT=By.xpath(".//*[@title='Ice']/../../div[@class='summary']/p");
+	public final By ELEMENT_ACME_TEXT_WELCOME=By.xpath(".//*[contains(text(),'Welcome to Acme')]");
 	/*
 	 * Intranet
 	 * */
 	public final String ELEMENT_SIGN_IN_LINK = "//b[contains(text(),'Sign in')]";
 	public final By ELEMENT_REFRESH = By.xpath("//div[@class='activityStreamStatus pull-left']");
+	
 
 	/*
 	 * Log in Form - Sign-out 
@@ -783,7 +786,22 @@ public class PlatformBase extends TestBase {
 	public final String ELEMENT_RESULT_CONTENT_DETAIL = "//*[text()='${text}']/../../..//*[@class='content']/*[@class='detail']";
 	public final By ELEMENT_TOOLBAR_SEARCH = By.id("ToolBarSearch");
 
-	public final String ELEMENT_TOPIC_TITLE= "//*[@class='postViewTitle'][contains(text(),'${titleTopic}')]";
+	public final String ELEMENT_TOPIC_POST_TITLE= "//*[@class='postViewTitle'][contains(text(),'${titleTopic}')]";
+	public final String ELEMENT_TOPIC_POST_PRIVATE="//*[@class='postViewTitle'][contains(text(),'${titlePost}')]/span[contains(text(),'Post Private!')]";
+	public final String ELEMENT_TOPIC_POST_DESCRIPTION=".//*[@class='postContent']//..[contains(text(),'${descripTopic}')]";
+	public final String ELEMENT_TOPIC_POST_DESCRIPTION_NORMAL=".//*[@class='postContent']//../p[contains(text(),'${nameItem}')]";
+	public final String ELEMENT_TOPIC_POST_DESCRIPTION_DECORATED_BLOCKQUOTE=".//*[@class='postContent']//blockquote/p[contains(text(),'${nameDes}')]";
+	public final String ELEMENT_TOPIC_POST_DESCRIPTION_DECORATED_RIGHT=".//*[@class='postContent']//..[contains(text(),'${descripTopic}')][@style='text-align: right;']";
+	public final String ELEMENT_TOPIC_POST_DESCRIPTION_DECORATED_LEFT=".//*[@class='postContent']//..[contains(text(),'${descripTopic}')]";
+	public final String ELEMENT_TOPIC_POST_DESCRIPTION_DECORATED_CENTER=".//*[@class='postContent']//..[contains(text(),'${descripTopic}')][@style='text-align: center;']";
+	public final String ELEMENT_TOPIC_POST_DESCRIPTION_DECORATED_BOLD=".//*[@class='postContent']//p/strong[contains(text(),'${descripTopic}')]";
+	public final String ELEMENT_TOPIC_POST_DESCRIPTION_DECORATED_ITALIC=".//*[@class='postContent']//em[contains(text(),'${descripTopic}')]";
+	public final String ELEMENT_TOPIC_POST_DESCRIPTION_DECORATED_UNDERLINE=".//*[@class='postContent']//u[contains(text(),'${descripTopic}')]";
+	public final String ELEMENT_QUOTE_DESCRIPTION_DECORATED_RIGHT=".//*[@class='postContent']//..[contains(text(),'${nameDescQuote}')][@style='text-align: right;']//../div[@class='contentQuote']//.[contains(text(),'${nameDescPost}')]";
+	public final String ELEMENT_TOPIC_POST_DESCRIPTION_DECORATED_JUSTIFY=".//*[@class='postContent']//..[contains(text(),'${descripTopic}')][@style='text-align: justify;']";
+	public final String ELEMENT_TOPIC_POST_DESCRIPTITON_DECORATED_NUM_LIST=".//*[@class='postContent']//ol/li[contains(text(),'${nameItem}')]";
+	public final String ELEMENT_TOPIC_POST_DESCRIPTITON_DECORATED_BULLET_LIST=".//*[@class='postContent']//ul/li[contains(text(),'${nameItem}')]";
+    public final String ELEMENT_TOPIC_POST_DESCRIPTION_DECORATED_INCREASE=".//*[@class='postContent']//p[@style='margin-left: 40px;'][contains(text(),'${nameItem}')]";
 	public final By ELEMENT_RESULT_FLOATING_RESULTS_DISCUSSION_ICON= By.xpath("//*[@class='uiQuickSearchResult']/descendant::tr[th[contains(text(),'Discussion')]]//a/i[contains(@class,'uiIconPLFDiscussion')]");
 	public final String ELEMENT_RESULT_FLOATING_RESULTS_NAME= "//*[@class='uiQuickSearchResult']/descendant::tr[th[contains(text(),'${type_Search}')]]//a[contains(.,'${detail_Name}')]";
 
@@ -797,6 +815,8 @@ public class PlatformBase extends TestBase {
 	public final By ELEMENT_SEARCH_APPLICATION = By.xpath("//a[@title='Search']");
 	public final String ELEMENT_GADGET_SEARCH_APPLICATION_PAGE_EDITOR = "//div[@id='UIApplicationList17']//div[contains(text(),'${gadget}')]";
 	public final By ELEMENT_QUICK_SEARCH_PORTLET = By.id("Search/local._unified-search.QuicksearchPortlet");
+	
+	
 	
 	//Administration Menu for admin acc
 

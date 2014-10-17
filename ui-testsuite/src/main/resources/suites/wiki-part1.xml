@@ -8,10 +8,13 @@
 			</run>
 		</groups>
 		<classes>
- 			<class name="org.exoplatform.selenium.platform.wiki.functional.attachment.Wiki_Attachment_Add" />
- 			<class name="org.exoplatform.selenium.platform.wiki.functional.attachment.Wiki_Attachment_Delete" />
-			<class name="org.exoplatform.selenium.platform.wiki.functional.attachment.Wiki_Attachment_Download" />
- 		</classes>
+			<class
+				name="org.exoplatform.selenium.platform.wiki.functional.attachment.Wiki_Attachment_Add" />
+			<class
+				name="org.exoplatform.selenium.platform.wiki.functional.attachment.Wiki_Attachment_Delete" />
+			<class
+				name="org.exoplatform.selenium.platform.wiki.functional.attachment.Wiki_Attachment_Download" />
+		</classes>
 	</test>
 
 	<test name="wiki-func-basicaction" enabled="true">
@@ -21,15 +24,23 @@
 			</run>
 		</groups>
 		<classes>
- 			<class name="org.exoplatform.selenium.platform.wiki.functional.basicaction.Wiki_BasicAction_Add" />
- 			<class name="org.exoplatform.selenium.platform.wiki.functional.basicaction.Wiki_BasicAction_Delete" />
- 			<class name="org.exoplatform.selenium.platform.wiki.functional.basicaction.Wiki_BasicAction_Edit" />
- 			<class name="org.exoplatform.selenium.platform.wiki.functional.basicaction.Wiki_BasicAction_Intergration" />
- 			<class name="org.exoplatform.selenium.platform.wiki.functional.basicaction.Wiki_BasicAction_Move_MoveControl" />
- 			<class name="org.exoplatform.selenium.platform.wiki.functional.basicaction.Wiki_BasicAction_MoveAPage" />
- 			<class name="org.exoplatform.selenium.platform.wiki.functional.basicaction.Wiki_BasicAction_Move_MoveLayout" />
- 			<class name="org.exoplatform.selenium.platform.wiki.functional.basicaction.Wiki_BasicAction_Permanlink" />
- 		</classes>
+			<class
+				name="org.exoplatform.selenium.platform.wiki.functional.basicaction.Wiki_BasicAction_Add" />
+			<class
+				name="org.exoplatform.selenium.platform.wiki.functional.basicaction.Wiki_BasicAction_Delete" />
+			<class
+				name="org.exoplatform.selenium.platform.wiki.functional.basicaction.Wiki_BasicAction_Edit" />
+			<class
+				name="org.exoplatform.selenium.platform.wiki.functional.basicaction.Wiki_BasicAction_Intergration" />
+			<class
+				name="org.exoplatform.selenium.platform.wiki.functional.basicaction.Wiki_BasicAction_Move_MoveControl" />
+			<class
+				name="org.exoplatform.selenium.platform.wiki.functional.basicaction.Wiki_BasicAction_MoveAPage" />
+			<class
+				name="org.exoplatform.selenium.platform.wiki.functional.basicaction.Wiki_BasicAction_Move_MoveLayout" />
+			<class
+				name="org.exoplatform.selenium.platform.wiki.functional.basicaction.Wiki_BasicAction_Permanlink" />
+		</classes>
 	</test>
 
 	<test name="wiki-func-info" enabled="true">
@@ -39,13 +50,19 @@
 			</run>
 		</groups>
 		<classes>
- 			<class name="org.exoplatform.selenium.platform.wiki.functional.information.Wiki_PageInformation_RelatedPage_Add" />
- 			<class name="org.exoplatform.selenium.platform.wiki.functional.information.Wiki_PageInformation_RelatedPage_Delete_Rename" />
- 			<class name="org.exoplatform.selenium.platform.wiki.functional.information.Wiki_PageInformation_RelatedPage_View" />
- 			<class name="org.exoplatform.selenium.platform.wiki.functional.information.Wiki_PageInformation_Version_Compare" />
- 			<class name="org.exoplatform.selenium.platform.wiki.functional.information.Wiki_PageInformation_Version_Restore" />
- 			<class name="org.exoplatform.selenium.platform.wiki.functional.information.Wiki_PageInformation_Version_View" />
- 		</classes>
+			<class
+				name="org.exoplatform.selenium.platform.wiki.functional.information.Wiki_PageInformation_RelatedPage_Add" />
+			<class
+				name="org.exoplatform.selenium.platform.wiki.functional.information.Wiki_PageInformation_RelatedPage_Delete_Rename" />
+			<class
+				name="org.exoplatform.selenium.platform.wiki.functional.information.Wiki_PageInformation_RelatedPage_View" />
+			<class
+				name="org.exoplatform.selenium.platform.wiki.functional.information.Wiki_PageInformation_Version_Compare" />
+			<class
+				name="org.exoplatform.selenium.platform.wiki.functional.information.Wiki_PageInformation_Version_Restore" />
+			<class
+				name="org.exoplatform.selenium.platform.wiki.functional.information.Wiki_PageInformation_Version_View" />
+		</classes>
 	</test>
 
 	<listeners>

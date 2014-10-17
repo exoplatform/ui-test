@@ -8,16 +8,26 @@
 			</run>
 		</groups>
 		<classes>
-			<class name="org.exoplatform.selenium.platform.ecms.functional.siteexplorer.basicaction.ECMS_SE_BasicAction_AddSymlink" />
-			<class name="org.exoplatform.selenium.platform.ecms.functional.siteexplorer.basicaction.ECMS_SE_BasicAction_Clipboard" />
-			<class name="org.exoplatform.selenium.platform.ecms.functional.siteexplorer.basicaction.ECMS_SE_BasicAction_CopyPaste" />
-			<class name="org.exoplatform.selenium.platform.ecms.functional.siteexplorer.basicaction.ECMS_SE_BasicAction_CutPaste" />
-			<class name="org.exoplatform.selenium.platform.ecms.functional.siteexplorer.basicaction.ECMS_SE_BasicAction_Delete" />
-			<class name="org.exoplatform.selenium.platform.ecms.functional.siteexplorer.basicaction.ECMS_SE_BasicAction_Edit" />
-			<class name="org.exoplatform.selenium.platform.ecms.functional.siteexplorer.basicaction.ECMS_SE_BasicAction_Lock" />
-			<class name="org.exoplatform.selenium.platform.ecms.functional.siteexplorer.basicaction.ECMS_SE_BasicAction_Rename" />
-			<class name="org.exoplatform.selenium.platform.ecms.functional.siteexplorer.basicaction.ECMS_SE_BasicAction_ResizeAndCollapse" />
-			<class name="org.exoplatform.selenium.platform.ecms.functional.siteexplorer.basicaction.ECMS_SE_BasicAction_SortAndRevert" />
+			<class
+				name="org.exoplatform.selenium.platform.ecms.functional.siteexplorer.basicaction.ECMS_SE_BasicAction_AddSymlink" />
+			<class
+				name="org.exoplatform.selenium.platform.ecms.functional.siteexplorer.basicaction.ECMS_SE_BasicAction_Clipboard" />
+			<class
+				name="org.exoplatform.selenium.platform.ecms.functional.siteexplorer.basicaction.ECMS_SE_BasicAction_CopyPaste" />
+			<class
+				name="org.exoplatform.selenium.platform.ecms.functional.siteexplorer.basicaction.ECMS_SE_BasicAction_CutPaste" />
+			<class
+				name="org.exoplatform.selenium.platform.ecms.functional.siteexplorer.basicaction.ECMS_SE_BasicAction_Delete" />
+			<class
+				name="org.exoplatform.selenium.platform.ecms.functional.siteexplorer.basicaction.ECMS_SE_BasicAction_Edit" />
+			<class
+				name="org.exoplatform.selenium.platform.ecms.functional.siteexplorer.basicaction.ECMS_SE_BasicAction_Lock" />
+			<class
+				name="org.exoplatform.selenium.platform.ecms.functional.siteexplorer.basicaction.ECMS_SE_BasicAction_Rename" />
+			<class
+				name="org.exoplatform.selenium.platform.ecms.functional.siteexplorer.basicaction.ECMS_SE_BasicAction_ResizeAndCollapse" />
+			<class
+				name="org.exoplatform.selenium.platform.ecms.functional.siteexplorer.basicaction.ECMS_SE_BasicAction_SortAndRevert" />
 		</classes>
 	</test>
 	<listeners>

@@ -8,9 +8,12 @@
 			</run>
 		</groups>
 		<classes>
-			<class name="org.exoplatform.selenium.platform.wiki.functional.search.Wiki_Advanced_Search" />
-			<class name="org.exoplatform.selenium.platform.wiki.functional.search.Wiki_Quick_Search" />
-			<class name="org.exoplatform.selenium.platform.wiki.functional.search.Wiki_Space_Switcher" />
+			<class
+				name="org.exoplatform.selenium.platform.wiki.functional.search.Wiki_Advanced_Search" />
+			<class
+				name="org.exoplatform.selenium.platform.wiki.functional.search.Wiki_Quick_Search" />
+			<class
+				name="org.exoplatform.selenium.platform.wiki.functional.search.Wiki_Space_Switcher" />
 		</classes>
 	</test>
 
@@ -21,11 +24,15 @@
 			</run>
 		</groups>
 		<classes>
- 			<class name="org.exoplatform.selenium.platform.wiki.functional.permissions.wikipermissions.Wiki_Permissions_WikiPermissions_Add" />
- 			<class name="org.exoplatform.selenium.platform.wiki.functional.permissions.wikipermissions.Wiki_Permissions_WikiPermissions_Delete" />
- 			<class name="org.exoplatform.selenium.platform.wiki.functional.permissions.wikipermissions.Wiki_Permissions_WikiPermissions_Edit" />
- 			<class name="org.exoplatform.selenium.platform.wiki.functional.permissions.wikipermissions.Wiki_Permissions_WikiPermissions_Others" />
- 		</classes>
+			<class
+				name="org.exoplatform.selenium.platform.wiki.functional.permissions.wikipermissions.Wiki_Permissions_WikiPermissions_Add" />
+			<class
+				name="org.exoplatform.selenium.platform.wiki.functional.permissions.wikipermissions.Wiki_Permissions_WikiPermissions_Delete" />
+			<class
+				name="org.exoplatform.selenium.platform.wiki.functional.permissions.wikipermissions.Wiki_Permissions_WikiPermissions_Edit" />
+			<class
+				name="org.exoplatform.selenium.platform.wiki.functional.permissions.wikipermissions.Wiki_Permissions_WikiPermissions_Others" />
+		</classes>
 	</test>
 
 	<test name="wiki-func-template" enabled="true">
@@ -35,14 +42,19 @@
 			</run>
 		</groups>
 		<classes>
- 			<class name="org.exoplatform.selenium.platform.wiki.functional.template.Wiki_Template_Add" />
- 			<class name="org.exoplatform.selenium.platform.wiki.functional.template.Wiki_Template_Delete" />
- 			<class name="org.exoplatform.selenium.platform.wiki.functional.template.Wiki_Template_Edit" />
- 			<class name="org.exoplatform.selenium.platform.wiki.functional.template.Wiki_Template_Other" />
- 			<class name="org.exoplatform.selenium.platform.wiki.functional.template.Wiki_Template_Search" />
- 		</classes>
+			<class
+				name="org.exoplatform.selenium.platform.wiki.functional.template.Wiki_Template_Add" />
+			<class
+				name="org.exoplatform.selenium.platform.wiki.functional.template.Wiki_Template_Delete" />
+			<class
+				name="org.exoplatform.selenium.platform.wiki.functional.template.Wiki_Template_Edit" />
+			<class
+				name="org.exoplatform.selenium.platform.wiki.functional.template.Wiki_Template_Other" />
+			<class
+				name="org.exoplatform.selenium.platform.wiki.functional.template.Wiki_Template_Search" />
+		</classes>
 	</test>
-	
+
 	<test name="wiki-func-macro" enabled="true">
 		<groups>
 			<run>
@@ -50,10 +62,13 @@
 			</run>
 		</groups>
 		<classes>
- 			<class name="org.exoplatform.selenium.platform.wiki.functional.macro.Wiki_Macro_Add" />
- 			<class name="org.exoplatform.selenium.platform.wiki.functional.macro.Wiki_Macro_Edit" />
- 			<class name="org.exoplatform.selenium.platform.wiki.functional.macro.Wiki_Macro_Othercheck" />
- 		</classes>
+			<class
+				name="org.exoplatform.selenium.platform.wiki.functional.macro.Wiki_Macro_Add" />
+			<class
+				name="org.exoplatform.selenium.platform.wiki.functional.macro.Wiki_Macro_Edit" />
+			<class
+				name="org.exoplatform.selenium.platform.wiki.functional.macro.Wiki_Macro_Othercheck" />
+		</classes>
 	</test>
 
 	<listeners>

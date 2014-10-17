@@ -9,12 +9,13 @@
 			</run>
 		</groups>
 		<classes>
-			<class name = "org.exoplatform.selenium.platform.plf.functional.welcomescreens.PLF_WelcomeScreens_Greeting_TermCondition" />
+			<class
+				name="org.exoplatform.selenium.platform.plf.functional.welcomescreens.PLF_WelcomeScreens_Greeting_TermCondition" />
 		</classes>
 	</test>
 
 	<test name="plf-func" enabled="true">
-	    <groups>
+		<groups>
 			<run>
 				<exclude name="pending" />
 				<exclude name="terms" />
@@ -26,6 +27,6 @@
 		</packages>
 	</test>
 	<listeners>
-    <listener class-name="org.exoplatform.selenium.TestReportListener"/>
-  </listeners>
+		<listener class-name="org.exoplatform.selenium.TestReportListener" />
+	</listeners>
 </suite>

@@ -8,12 +8,18 @@
 			</run>
 		</groups>
 		<classes>
-			<class name="org.exoplatform.selenium.platform.ecms.functional.siteexplorer.publishactivities.ECMS_SE_PublishActivities_ContentActivities_Action" />
-			<class name="org.exoplatform.selenium.platform.ecms.functional.siteexplorer.publishactivities.ECMS_SE_PublishActivities_ContentActivities_Add" />
-			<class name="org.exoplatform.selenium.platform.ecms.functional.siteexplorer.publishactivities.ECMS_SE_PublishActivities_ContentActivities_Delete" />
-			<class name="org.exoplatform.selenium.platform.ecms.functional.siteexplorer.publishactivities.ECMS_SE_PublishActivities_ContentActivities_NotUpdateAS" />
-			<class name="org.exoplatform.selenium.platform.ecms.functional.siteexplorer.publishactivities.ECMS_SE_PublishActivities_ContentActivities_Update" />
-			<class name="org.exoplatform.selenium.platform.ecms.functional.siteexplorer.publishactivities.ECMS_SE_PublishActivities_FilesActivities" />
+			<class
+				name="org.exoplatform.selenium.platform.ecms.functional.siteexplorer.publishactivities.ECMS_SE_PublishActivities_ContentActivities_Action" />
+			<class
+				name="org.exoplatform.selenium.platform.ecms.functional.siteexplorer.publishactivities.ECMS_SE_PublishActivities_ContentActivities_Add" />
+			<class
+				name="org.exoplatform.selenium.platform.ecms.functional.siteexplorer.publishactivities.ECMS_SE_PublishActivities_ContentActivities_Delete" />
+			<class
+				name="org.exoplatform.selenium.platform.ecms.functional.siteexplorer.publishactivities.ECMS_SE_PublishActivities_ContentActivities_NotUpdateAS" />
+			<class
+				name="org.exoplatform.selenium.platform.ecms.functional.siteexplorer.publishactivities.ECMS_SE_PublishActivities_ContentActivities_Update" />
+			<class
+				name="org.exoplatform.selenium.platform.ecms.functional.siteexplorer.publishactivities.ECMS_SE_PublishActivities_FilesActivities" />
 		</classes>
 	</test>
 	<listeners>

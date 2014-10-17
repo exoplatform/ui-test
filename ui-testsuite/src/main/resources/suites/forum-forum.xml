@@ -9,10 +9,13 @@
 			</run>
 		</groups>
 		<classes>
-			<class name="org.exoplatform.selenium.platform.forum.functional.forum.topic.Forum_Forum_Topic_ActiveSortWatchAndUnwatch" />
-			<class name="org.exoplatform.selenium.platform.forum.functional.forum.topic.Forum_Forum_Topic_Add" />
-			<class name="org.exoplatform.selenium.platform.forum.functional.forum.topic.Forum_Forum_Topic_Tag" />		
-		</classes> 
+			<class
+				name="org.exoplatform.selenium.platform.forum.functional.forum.topic.Forum_Forum_Topic_ActiveSortWatchAndUnwatch" />
+			<class
+				name="org.exoplatform.selenium.platform.forum.functional.forum.topic.Forum_Forum_Topic_Add" />
+			<class
+				name="org.exoplatform.selenium.platform.forum.functional.forum.topic.Forum_Forum_Topic_Tag" />
+		</classes>
 	</test>
 	<test name="forum-func-forum-post" enabled="true">
 		<groups>
@@ -22,10 +25,13 @@
 			</run>
 		</groups>
 		<classes>
-			<class name="org.exoplatform.selenium.platform.forum.functional.forum.post.Forum_Forum_Post_BBCode" />
-			<class name="org.exoplatform.selenium.platform.forum.functional.forum.post.Forum_Forum_Post_Move" />
-			<class name="org.exoplatform.selenium.platform.forum.functional.forum.post.Forum_Forum_Post_PostCounter" />		
-		</classes> 
+			<class
+				name="org.exoplatform.selenium.platform.forum.functional.forum.post.Forum_Forum_Post_BBCode" />
+			<class
+				name="org.exoplatform.selenium.platform.forum.functional.forum.post.Forum_Forum_Post_Move" />
+			<class
+				name="org.exoplatform.selenium.platform.forum.functional.forum.post.Forum_Forum_Post_PostCounter" />
+		</classes>
 	</test>
 	<test name="forum-func-forum-otheraction" enabled="true">
 		<groups>
@@ -35,9 +41,11 @@
 			</run>
 		</groups>
 		<classes>
-			<class name="org.exoplatform.selenium.platform.forum.functional.forum.poll.Forum_Forum_Poll_Activities" />
-			<class name="org.exoplatform.selenium.platform.forum.functional.forum.poll.Forum_Forum_Poll_AddEditDelete" />
-		</classes> 
+			<class
+				name="org.exoplatform.selenium.platform.forum.functional.forum.poll.Forum_Forum_Poll_Activities" />
+			<class
+				name="org.exoplatform.selenium.platform.forum.functional.forum.poll.Forum_Forum_Poll_AddEditDelete" />
+		</classes>
 	</test>
 	<test name="forum-func-forum-poll" enabled="true">
 		<groups>
@@ -47,10 +55,13 @@
 			</run>
 		</groups>
 		<classes>
-			<class name="org.exoplatform.selenium.platform.forum.functional.forum.otheraction.Forum_Forum_OtherAction_GoToLastReadPost" />
-			<class name="org.exoplatform.selenium.platform.forum.functional.forum.otheraction.Forum_Forum_OtherAction_RSS" />
-			<class name="org.exoplatform.selenium.platform.forum.functional.forum.otheraction.Forum_Forum_OtherAction_Search" />		
-		</classes> 
+			<class
+				name="org.exoplatform.selenium.platform.forum.functional.forum.otheraction.Forum_Forum_OtherAction_GoToLastReadPost" />
+			<class
+				name="org.exoplatform.selenium.platform.forum.functional.forum.otheraction.Forum_Forum_OtherAction_RSS" />
+			<class
+				name="org.exoplatform.selenium.platform.forum.functional.forum.otheraction.Forum_Forum_OtherAction_Search" />
+		</classes>
 	</test>
 	<test name="forum-func-forum-usersetting" enabled="true">
 		<groups>
@@ -60,8 +71,9 @@
 			</run>
 		</groups>
 		<classes>
-			<class name="org.exoplatform.selenium.platform.forum.functional.forum.usersettings.Forum_Forum_UserSettings" />		
-		</classes> 
+			<class
+				name="org.exoplatform.selenium.platform.forum.functional.forum.usersettings.Forum_Forum_UserSettings" />
+		</classes>
 	</test>
 	<listeners>
 		<listener class-name="org.exoplatform.selenium.TestReportListener" />

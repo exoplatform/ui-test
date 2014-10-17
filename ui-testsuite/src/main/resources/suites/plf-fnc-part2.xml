@@ -25,6 +25,7 @@
 			<class name = "org.exoplatform.selenium.platform.plf.functional.homepageactivitystream.activitycomposer.PLF_HomepageActivityStream_ActivityComposer_General" />
 			<class name = "org.exoplatform.selenium.platform.plf.functional.homepageactivitystream.activitycomposer.PLF_HomepageActivityStream_ActivityComposer_Link" />
 			<class name = "org.exoplatform.selenium.platform.plf.functional.homepageactivitystream.refresh.PLF_HomepageActivityStream_Refresh" />
+
 		</classes>
 	</test>
 	<listeners>

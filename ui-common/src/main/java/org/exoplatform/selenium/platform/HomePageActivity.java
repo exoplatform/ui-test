@@ -165,7 +165,7 @@ public class HomePageActivity extends PlatformBase{
 	public final String ELEMENT_TOPIC_LAST_REPLY = "//a[contains(text(),'${title}')]/../../../..//i[@class='uiIconSocLastestReply uiIconSocLightGray']";
 	public final String ELEMENT_REPLY_VIEW = "//*[contains(text(), '${comment}')]/../..//*[@class='viewComment']";
 	public final String ELEMENT_TOPIC_COMMENT = "//*[contains(text(),'${title}')]/../../../..//*[@class='contentComment' and contains(text(), '${comment}')]";
-
+	public final String ELEMENT_TOPIC_TITLE=".//*[@class='titleForum']//..[contains(text(),'${nameTopic}')]";
 	//Poll activity
 	public final String ELEMENT_POLL_ACTIVITY = "//div[@class='uiBox roundedBottom introBox pollShare']//a[contains(text(),'${poll}')]";
 	public final String ELEMENT_VOTE = "//div[@class='uiBox roundedBottom introBox pollShare']//a[contains(text(),'${poll}')]/../../..//span[@class='text-vote' and contains(text(),'${vote}')]";

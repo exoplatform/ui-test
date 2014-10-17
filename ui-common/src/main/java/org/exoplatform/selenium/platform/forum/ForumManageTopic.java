@@ -68,7 +68,8 @@ public class ForumManageTopic extends ForumBase {
 	// public By ELEMENT_TOPIC_ON_FORUM_HOMEPAGE =
 	// By.xpath("//*[contains(@data-original-title,'${topic}')]");
 
-	// ----------------start topic screen--------------------------------------------------
+	// ----------------start topic
+	// screen--------------------------------------------------
 
 	public By ELEMENT_START_TOPIC_BUTTON = By
 			.xpath("//*[@class='btn btn-primary pull-left']");
@@ -94,6 +95,8 @@ public class ForumManageTopic extends ForumBase {
 	public String ELEMENT_ICON = "//div[@class='${icon}']";
 	public String MSG_ADD_MODERATE_TOPIC = "Your topic is pending moderation. It will be displayed after approval.";
 	public String MSG_ADD_CENSOR_TOPIC = "This post may contain offensive content. It will be displayed after moderation.";
+	// CKEditor
+	public final String ELEMENT_CKEDITOR_DECORATE = ".//*[@title='${name}']";
 
 	// Options tab
 	public By ELEMENT_TOPIC_OPTIONS_TAB = By.linkText("Options");
@@ -109,7 +112,8 @@ public class ForumManageTopic extends ForumBase {
 	public By ELEMENT_RATING_TOPIC = By
 			.xpath("//div[contains(text(),'Rating')]");
 
-	// ------------------add topic type screen--------------------------------------------------
+	// ------------------add topic type
+	// screen--------------------------------------------------
 	public By ELEMENT_TOPIC_ADD_TYPE_POPUP = By
 			.xpath("//span[@class='PopupTitle' and text()='Topic Type']");
 	public By ELEMENT_TOPIC_TYPE_NAME = By.id("topicTypeName");
@@ -118,18 +122,21 @@ public class ForumManageTopic extends ForumBase {
 	public String MESSAGE_WAIT_APPROVE = "Your topic is pending moderation. It will be displayed after approval.";
 	public String APPROVE_TITLE = "${title} (Pending)";
 
-	// ------------------edit topic screen------------------------------------------------------
+	// ------------------edit topic
+	// screen------------------------------------------------------
 	public By ELEMENT_TOPIC_EDIT_POPUP = By
 			.xpath("//span[@class='PopupTitle popupTitle' and text()='Edit Topic']");
 	public By ELEMENT_TOPIC_EDIT_REASON = By.id("editReason");
 
-	// -------------------move topic screen----------------------------------------------------
+	// -------------------move topic
+	// screen----------------------------------------------------
 
 	public By ELEMENT_POPUP_MOVE_TOPIC = By
 			.xpath("//span[@class='PopupTitle popupTitle' and text()='Move Topics']");
 	public String ELEMENT_FORUM_SELECT = "//a[contains(text(),'${forum}')]";
 
-	// -------------------Add tag--------------------------------------------------------------
+	// -------------------Add
+	// tag--------------------------------------------------------------
 	public By ELEMENT_TAG = By.xpath("//i[@class='uiIconTag uiIconLightGray']");
 	public By ELEMENT_ADD_TAG = By.id("AddTag");
 	public By ELEMENT_ADD_TAG_BUTTON = By
@@ -151,25 +158,29 @@ public class ForumManageTopic extends ForumBase {
 	public String ELEMENT_TOPIC_CHECKBOX = "//span[@class='uiCheckbox']/input[@class='checkbox' and starts-with(@name,'topic')]";
 	public String ELEMENT_TAG_SUGGESTED = "//div[@class='searchTagName']//a[contains(text(),'${tagName}')]";
 
-	// -------------------censor topic list form-----------------------------------------------
+	// -------------------censor topic list
+	// form-----------------------------------------------
 	public By ELEMENT_POPUP_CENSOR_TOPIC = By
 			.xpath("//span[@class='PopupTitle popupTitle' and text()='Censor Topics List']");
 	public String ELEMENT_CENSOR_TOPIC_CHECKBOX = "//*[text()='${topic}']/../../../*//input[@type='checkbox']";
 	public By ELEMENT_CENSOR_APPROVE_BUTTON = By.xpath("//*[text()='Approve']");
 
-	// -------------------Go to topic types management screen----------------------------------------------------
+	// -------------------Go to topic types management
+	// screen----------------------------------------------------
 	public By ELEMENT_TOPIC_TYPES = By.xpath("//span[text()='Topic Types']");
 	public By ELEMENT_TOPIC_MANAGER_POPUP = By
 			.xpath("//span[text()='Topic Type Manager']");
 	public By ELEMENT_ADD_TOPIC_TYPE_BUTTON = By
 			.xpath("//a[@class='ActionButton LightBlueStyle' and text()='Add Topic Type']");
 
-	// -------------------Poll management screen-----------------------------------------------------------------
+	// -------------------Poll management
+	// screen-----------------------------------------------------------------
 
 	public By ELEMENT_POLL_POPUP = By
 			.xpath("//span[@class='PopupTitle' and text()='Poll']");
 
-	// ---------------------------------Vote topic--------------------------------
+	// ---------------------------------Vote
+	// topic--------------------------------
 	public By ELEMENT_RATE_TOPIC = By
 			.xpath("//a[@class='actionIcon' and contains(text(),'Rate')]");
 	public By ELEMENT_RATE_TOPIC_TERRIBLE = By
@@ -219,7 +230,8 @@ public class ForumManageTopic extends ForumBase {
 	 *            : remove a attached file in add/edit topic
 	 */
 	public void removeFileInTopic(String fileName) {
-		By ELEMENT_REMOVE = By.xpath(ELEMENT_REMOVE_FILE.replace("${file}",fileName));
+		By ELEMENT_REMOVE = By.xpath(ELEMENT_REMOVE_FILE.replace("${file}",
+				fileName));
 
 		WebElement element = waitForAndGetElement(ELEMENT_REMOVE);
 		if (element != null) {
@@ -369,6 +381,35 @@ public class ForumManageTopic extends ForumBase {
 	}
 
 	/**
+	 * Input the data and decorate the content
+	 * 
+	 * @author quynhpt
+	 * @param title
+	 * @param message
+	 * @param decorate
+	 * @param file
+	 * @param type
+	 * @param userGroup
+	 * @param canview
+	 * @param canpost
+	 * @param options
+	 */
+	public void inputDataStartTopicWithDecorate(String title, String message,
+			String decorate, String file, int type, String[] userGroup,
+			boolean canview, boolean canpost, boolean... options) {
+		per = new ForumPermission(driver);
+		inputDataInContentTab_StartTopic(title, message, file);
+		if (decorate != "")
+			click(By.xpath(ELEMENT_CKEDITOR_DECORATE.replace("${name}",
+					decorate)));
+		inputDataInOptionsTab_StartTopic(options);
+		if (type != 0) {
+			click(ELEMENT_TOPIC_PERMISSION_TAB);
+			per.configPermission4Topic(type, userGroup, canview, canpost);
+		}
+	}
+
+	/**
 	 * 
 	 * @param title
 	 * @param message
@@ -383,9 +424,55 @@ public class ForumManageTopic extends ForumBase {
 			String[] userGroup, boolean canview, boolean canpost,
 			boolean... options) {
 		info("Start a topic");
-		goToStartTopic();
+		// goToStartTopic();
 		inputDataStartTopic(title, message, file, type, userGroup, canview,
 				canpost, options);
+		click(ELEMENT_SUBMIT_BUTTON);
+		waitForElementNotPresent(ELEMENT_SUBMIT_BUTTON);
+	}
+
+	/**
+	 * @author quynhpt
+	 * @param title
+	 * @param message
+	 * @param Decorate
+	 * @param file
+	 * @param type
+	 * @param userGroup
+	 * @param canview
+	 * @param canpost
+	 * @param options
+	 */
+	public void startTopicWithDecorate(String title, String message,
+			String decorate, String file, int type, String[] userGroup,
+			boolean canview, boolean canpost, boolean... options) {
+		info("Start a topic");
+		goToStartTopic();
+		inputDataStartTopicWithDecorate(title, message, decorate, file, type,
+				userGroup, canview, canpost, options);
+		click(ELEMENT_SUBMIT_BUTTON);
+		waitForElementNotPresent(ELEMENT_SUBMIT_BUTTON);
+	}
+
+	/**
+	 * @author quynhpt
+	 * @param title
+	 * @param message
+	 * @param Decorate
+	 * @param file
+	 * @param type
+	 * @param userGroup
+	 * @param canview
+	 * @param canpost
+	 * @param options
+	 */
+	public void startTopicWithCopPaste(String title, String message,
+			String decorate, String file, int type, String[] userGroup,
+			boolean canview, boolean canpost, boolean... options) {
+		info("Start a topic");
+		goToStartTopic();
+		inputDataStartTopicWithDecorate(title, message, decorate, file, type,
+				userGroup, canview, canpost, options);
 		click(ELEMENT_SUBMIT_BUTTON);
 		waitForElementNotPresent(ELEMENT_SUBMIT_BUTTON);
 	}
@@ -454,6 +541,31 @@ public class ForumManageTopic extends ForumBase {
 		info("Edit topic");
 		inputDataStartTopic(title, message, file, type, userGroup, canview,
 				canpost, options);
+		click(ELEMENT_SUBMIT_BUTTON);
+		waitForElementNotPresent(ELEMENT_TOPIC_EDIT_POPUP);
+		waitForTextPresent(title);
+		info("Edit topic successfully");
+	}
+
+	/**
+	 * 
+	 * @param title
+	 * @param message
+	 * @param decorate
+	 * @param file
+	 * @param type
+	 * @param userGroup
+	 * @param canview
+	 * @param canpost
+	 * @param options
+	 */
+	public void editTopicWithDecorate(String title, String message,
+			String decorate, String file, int type, String[] userGroup,
+			boolean canview, boolean canpost, boolean... options) {
+		goToEditTopic();
+		info("Edit topic");
+		inputDataStartTopicWithDecorate(title, message, decorate, file, type,
+				userGroup, canview, canpost, options);
 		click(ELEMENT_SUBMIT_BUTTON);
 		waitForElementNotPresent(ELEMENT_TOPIC_EDIT_POPUP);
 		waitForTextPresent(title);
@@ -882,6 +994,48 @@ public class ForumManageTopic extends ForumBase {
 	}
 
 	/**
+	 * Add a category, forum
+	 * 
+	 * @param category
+	 * @param forum
+	 * @author quynhpt
+	 */
+	public void addCategoryForum(String category, String forum) {
+		String[] permission = {};
+		String[] addForum = { forum, "1", null, null, forum };
+		magCat.addNewCategoryInForum(category, "1", 0, permission, category, 0,
+				permission);
+		magFor.addForum(category, addForum, true, "", "", false, 0, permission);
+	}
+
+	/**
+	 * @author quynhpt
+	 * @param topic
+	 * @param descTopic
+	 * @param decorate
+	 */
+	public void addATopicWithDecorate(String topic, String descTopic,
+			String decorate) {
+		String[] permission = {};
+		click(ELEMENT_START_TOPIC_BUTTON);
+		startTopicWithDecorate(topic, descTopic, decorate, "", 0, permission,
+				false, false, false);
+	}
+
+	/**
+	 * @author quynhpt
+	 * @param topic
+	 * @param descTopic
+	 * @param decorate
+	 */
+	public void editATopicWithDecorate(String topic, String descTopic,
+			String decorate) {
+		String[] permission = {};
+		editTopicWithDecorate(topic, descTopic, decorate, "", 0, permission,
+				false, false, false);
+	}
+
+	/**
 	 * Add two topics into a forum of a category
 	 * 
 	 * @param category
@@ -906,14 +1060,16 @@ public class ForumManageTopic extends ForumBase {
 
 		click(ELEMENT_START_TOPIC_BUTTON);
 		startTopic(topic1, descTopic1, "", 0, permission, false, false, false);
-		
+
 		click(ELEMENT_START_TOPIC_BUTTON);
 		startTopic(topic2, descTopic2, "", 0, permission, false, false, false);
- 
+
 	}
 
 	/**
-	 * add category, forum and topic for a user without "read" permission a topic
+	 * add category, forum and topic for a user without "read" permission a
+	 * topic
+	 * 
 	 * @param cate
 	 * @param forum
 	 * @param topic
@@ -927,15 +1083,17 @@ public class ForumManageTopic extends ForumBase {
 		// magCat.addNewCategoryInForum(category, "1",0,permission, category,
 		// 0,permission);
 		magCat.addNewCategoryInForum(category, "1", 0, permissionName,
-				category,0, permissionName);
-		magFor.addForum(category, addForum, true, "", "", false,2,
-				permissionName,false,false,true,true);
+				category, 0, permissionName);
+		magFor.addForum(category, addForum, true, "", "", false, 2,
+				permissionName, false, false, true, true);
 		click(ELEMENT_START_TOPIC_BUTTON);
 		startTopic(topic, descTopic, "", 0, permissionName, false, false, false);
 	}
-	
+
 	/**
-	 * add category, forum and topic for a user without "view" permission a forum
+	 * add category, forum and topic for a user without "view" permission a
+	 * forum
+	 * 
 	 * @param cate
 	 * @param forum
 	 * @param topic
@@ -949,8 +1107,8 @@ public class ForumManageTopic extends ForumBase {
 		// magCat.addNewCategoryInForum(category, "1",0,permission, category,
 		// 0,permission);
 		magCat.addNewCategoryInForum(category, "1", 0, permissionName,
-				category,2, permissionName,false,false,true,true);
-		magFor.addForum(category, addForum, true, "", "", false,0,
+				category, 2, permissionName, false, false, true, true);
+		magFor.addForum(category, addForum, true, "", "", false, 0,
 				permissionName);
 		click(ELEMENT_START_TOPIC_BUTTON);
 		startTopic(topic, descTopic, "", 0, permissionName, false, false, false);

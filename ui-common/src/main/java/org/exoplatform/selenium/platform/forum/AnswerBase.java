@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.exoplatform.selenium.Button;
+import org.exoplatform.selenium.ManageAlert;
 import org.exoplatform.selenium.Utils;
 import org.exoplatform.selenium.platform.ManageAccount;
 import org.exoplatform.selenium.platform.NavigationToolbar;
@@ -12,6 +13,7 @@ import org.exoplatform.selenium.platform.PageManagement;
 import org.exoplatform.selenium.platform.UserGroupManagement;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import static org.exoplatform.selenium.TestLogger.info;
@@ -99,6 +101,17 @@ public class AnswerBase extends ForumBase {
 
 	/*---------------------------------Common functions-----------------------------------*/
 
+	public AnswerBase(WebDriver dr,String...plfVersion){
+		this.plfVersion = plfVersion.length>0?plfVersion[0]:"4.0";
+		driver = dr;
+		button = new Button(driver,this.plfVersion);
+		alert = new ManageAlert(driver,this.plfVersion);
+	}
+	
+	public AnswerBase()
+	{
+		
+	}
 	/** 
 	 * Go to Answer
 	 * @author hakt

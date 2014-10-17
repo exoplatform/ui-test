@@ -6,23 +6,37 @@
 				<exclude name="pending" />
 			</run>
 		</groups>
-		 <classes>
-            <class name="org.exoplatform.selenium.platform.social.sniff.Social_HomePage_Activity"/>
-            <class name="org.exoplatform.selenium.platform.social.sniff.Social_Space_MemberManagement"/>
-            <class name="org.exoplatform.selenium.platform.social.sniff.Social_People"/>
-            <class name="org.exoplatform.selenium.platform.social.sniff.Social_HomePage_ActivityComposer"/>
-            <class name="org.exoplatform.selenium.platform.social.sniff.Social_HomePage_ActivityStream"/>
-            <class name="org.exoplatform.selenium.platform.social.sniff.Social_Space_ManageNavigation"/>
-            <class name="org.exoplatform.selenium.platform.social.sniff.Social_Space_Search"/>
-            <class name="org.exoplatform.selenium.platform.social.sniff.Social_Space_SpaceList"/>
-            <class name="org.exoplatform.selenium.platform.social.sniff.Social_Space_SpaceManagement_Applications"/>
-            <class name="org.exoplatform.selenium.platform.social.sniff.Social_Space_SpaceManagement_ManageSpace"/>
-            <class name="org.exoplatform.selenium.platform.social.sniff.Social_Space_SpaceManagement_SpaceAccess"/>
-            <class name="org.exoplatform.selenium.platform.social.sniff.Social_Space_SpaceManagement_WikiPageAccess"/>
-            <class name="org.exoplatform.selenium.platform.social.sniff.Social_EmailNotifications_NotificationType"/>
-            <class name="org.exoplatform.selenium.platform.social.sniff.Social_EmailNotifications_Administration"/>
-            <class name="org.exoplatform.selenium.platform.social.sniff.Social_EmailNotifications_Settings"/>
-        </classes>
+		<classes>
+			<class
+				name="org.exoplatform.selenium.platform.social.sniff.Social_HomePage_Activity" />
+			<class
+				name="org.exoplatform.selenium.platform.social.sniff.Social_Space_MemberManagement" />
+			<class name="org.exoplatform.selenium.platform.social.sniff.Social_People" />
+			<class
+				name="org.exoplatform.selenium.platform.social.sniff.Social_HomePage_ActivityComposer" />
+			<class
+				name="org.exoplatform.selenium.platform.social.sniff.Social_HomePage_ActivityStream" />
+			<class
+				name="org.exoplatform.selenium.platform.social.sniff.Social_Space_ManageNavigation" />
+			<class
+				name="org.exoplatform.selenium.platform.social.sniff.Social_Space_Search" />
+			<class
+				name="org.exoplatform.selenium.platform.social.sniff.Social_Space_SpaceList" />
+			<class
+				name="org.exoplatform.selenium.platform.social.sniff.Social_Space_SpaceManagement_Applications" />
+			<class
+				name="org.exoplatform.selenium.platform.social.sniff.Social_Space_SpaceManagement_ManageSpace" />
+			<class
+				name="org.exoplatform.selenium.platform.social.sniff.Social_Space_SpaceManagement_SpaceAccess" />
+			<class
+				name="org.exoplatform.selenium.platform.social.sniff.Social_Space_SpaceManagement_WikiPageAccess" />
+			<class
+				name="org.exoplatform.selenium.platform.social.sniff.Social_EmailNotifications_NotificationType" />
+			<class
+				name="org.exoplatform.selenium.platform.social.sniff.Social_EmailNotifications_Administration" />
+			<class
+				name="org.exoplatform.selenium.platform.social.sniff.Social_EmailNotifications_Settings" />
+		</classes>
 	</test>
 	<listeners>
 		<listener class-name="org.exoplatform.selenium.TestReportListener" />
