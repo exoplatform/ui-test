@@ -37,7 +37,7 @@ public class PeopleConnection extends SocialBase {
 	public final String ELEMENT_REMOVE_CONNECTION_BUTTON = "//a[text()='${peopleName}']/ancestor::div[contains(@class,'pull-left')]//button[contains(text(),'Remove Connection')]";
 	public final String ELEMENT_CONFIRM_BUTTON = "//a[text()='${peopleName}']/ancestor::div[contains(@class,'pull-left')]//button[contains(text(),'Confirm')]";
 
-	public final String ELEMENT_IGNORE_BUTTON = "//*[@data-original-title='${peopleName}']/../..//*[text()='Ignore']";
+	public final String ELEMENT_IGNORE_BUTTON = "//a[text()='${peopleName}']/ancestor::div[contains(@class,'pull-left')]//button[contains(text(),'Ignore')]";
 	//public final String ELEMENT_IGNORE_BUTTON = "//*[@data-original-title='${peopleName}']/../..//*[text()='Ignore']";
 	public final String ELEMENT_CONNECT_LIST = "//*[text()='Connect']";
 	public final String ELEMENT_PEOPLE_SEARCH = "//*[@class='uiProfileUserSearch']/..//*[text()='${peopleName}']";

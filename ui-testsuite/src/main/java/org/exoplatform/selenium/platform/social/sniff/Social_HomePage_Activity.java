@@ -160,8 +160,8 @@ public class Social_HomePage_Activity extends Activity {
 	public void test02_CheckOrderOfTheActivities(){
 		//Declare variable
 		String activity1 = "activity95701";
-		String uploadFileName = "ECMS_DMS_SE_Upload_pdffile.pdf";
-		String uploadFileName1 = "ECMS_DMS_SE_Upload_imgfile.jpg";
+		String uploadFileName = "portrait08.jpg";
+		String uploadFileName1 = "landscape08.jpg";
 		By elementfile = By.linkText(uploadFileName1);
 		String folder = "folder95701";
 		String driverName = "Personal Drives";

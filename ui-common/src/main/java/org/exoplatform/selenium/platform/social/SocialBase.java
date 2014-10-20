@@ -85,7 +85,7 @@ public class SocialBase extends PlatformBase {
 	public final By ELEMENT_TOOLBAR_PROFILE_ICON = By.linkText("My Profile");
 	public final By ELEMENT_TOOLBAR_NETWORKS_ICON = By.linkText("My Connections");
 	public final By ELEMENT_FIND_PEOPLE_ICON = By.linkText("Find Connections");
-	public final By ELEMENT_TOOLBAR_ACTIVITY_ICON = By.linkText("My Activity Stream");
+	public final By ELEMENT_TOOLBAR_ACTIVITY_ICON = By.linkText("My Activities");
 	public final String ELEMENT_USER_ACTIVIY_ACTIVE = "//li[@class='active']//a[contains(@href, '/portal/intranet/activities/${user}')]";
 
 	// Go to Account Name link > My Profile 
@@ -102,7 +102,7 @@ public class SocialBase extends PlatformBase {
 	public String ELEMENT_ACTION_USER_ON_SPACE = "//a[text()='${spaceName}']/../../..//button[text()='${action}']";
 
 	// Activity Stream tab	
-	public final By ELEMENT_ACTIVITY_STREAM_TAB = By.xpath("//div[@id='UIUserNavigationPortlet']//*[contains(text(),'Activities Stream')]");
+	public final By ELEMENT_ACTIVITY_STREAM_TAB = By.xpath("//div[@id='UIUserNavigationPortlet']//*[contains(text(),'Activities')]");
 
 	/*------------------- End of parameters ---------------------*/	
 	

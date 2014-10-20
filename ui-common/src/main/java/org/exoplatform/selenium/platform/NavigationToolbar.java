@@ -617,9 +617,24 @@ public class NavigationToolbar extends PlatformBase {
 	 * Go to Email notification administration page
 	 */
 	public void goToNotificationAdministration(){
-		click(ELEMENT_LINK_SETUP);
-		mouseOver(ELEMENT_MENU_PORTAL,true);
-		click(ELEMENT_MENU_EMAIL_NOTIFICATION);
+		String url = DEFAULT_BASEURL + "/g/:platform:administrators/notification";
+		for(int repeat=0;; repeat ++){
+			if (repeat > 1){
+				driver.get(url);
+				break;
+			}
+			//mouseOverAndClick(ELEMENT_LINK_SETUP);
+			mouseOver(ELEMENT_LINK_SETUP, true);
+			if (waitForAndGetElement(ELEMENT_MENU_PORTAL, 5000, 0)!= null) {	
+				mouseOver(ELEMENT_MENU_PORTAL, true);
+				if (waitForAndGetElement(ELEMENT_MENU_EMAIL_NOTIFICATION, 5000, 0)!= null){
+					click(ELEMENT_MENU_EMAIL_NOTIFICATION);
+					break;
+				}
+			}
+			info("Retry...[" + repeat + "]");
+		}
+		Utils.pause(1000);
 	}
 	
 	/**

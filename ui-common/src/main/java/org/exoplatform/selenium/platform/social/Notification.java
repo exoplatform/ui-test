@@ -99,7 +99,7 @@ public class Notification extends SocialBase {
 	public final String MSG_CONTENT_EMAIL_JOIN_SPACE = "${user} has requested access to the ${space} space where you are a manager. Would you like to authorize ${user} to join ?";
 	public final String MSG_CONTENT_EMAIL_INVITATION_SPACE = "You've received an invitation to join the ${space} space. Interested to join the space and access its documents and applications ?";
 	public final String MSG_CONTENT_EMAIL_MENTION = "${user} has mentioned you in the following post:</br>${activity}";
-	public final String MSG_CONTENT_EMAIL_NEW_USER = "${user} has joined eXo. Interested to connect and start collaborate with ${user}?";
+	public final String MSG_CONTENT_EMAIL_NEW_USER = "${user} has joined eXo. Interested to connect and start collaborate with ${user}";
 	public final String MSG_TITLE_EMAIL_JOIN_SPACE = "${user} has requested access to ${space}";
 	public final String MSG_TITLE_EMAIL_INVITATION_SPACE = "You're invited to join ${space} space";
 	public final String MSG_TITLE_EMAIL_MENTION = "You have been mentioned by ${user}";

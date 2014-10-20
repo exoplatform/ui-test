@@ -674,7 +674,7 @@ public class PlatformBase extends TestBase {
 	public final By ELEMENT_GMAIL_USERNAME = By.id("Email");
 	public final By ELEMENT_GMAIL_PASS = By.id("Passwd");
 	public final By ELEMENT_GMAIL_SIGN_IN = By.id("signIn");
-	public final String ELEMENT_GMAIL_TITLE = "//td/div[@class='xS']//div[@class='xT']//span/b[contains(text(),\"{$title}\")]";
+	public final String ELEMENT_GMAIL_TITLE = "//td/div[@class='xS']//div[@class='xT']//span/b[contains(text(),'{$title}')]";
 	public final By ELEMENT_GMAIL_COMPOSE = By.xpath("//div[contains(text(),'COMPOSE')]");
 	public final By ELEMENT_GMAIL_SHOW_DETAIL = By.xpath("//img[@aria-label='Show details']");
 	public final String ELEMENT_GMAIL_TO_FIELD = "//td/span[text()='to:']/../..//span[text()='${to}']";

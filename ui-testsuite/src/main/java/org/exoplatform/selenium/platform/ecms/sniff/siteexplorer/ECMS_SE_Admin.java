@@ -137,7 +137,7 @@ public class ECMS_SE_Admin extends PlatformBase {
 		
 		//Hide relation
 		click(siteExp.ELEMENT_SIDEBAR_FILE_EXPLORER);
-//		waitForElementNotPresent(ecms.ELEMENT_RELATION_LINK.replace("{$relation}", node2));
+		waitForElementNotPresent(actBar.ELEMENT_RELATION_LINK.replace("{$relation}", node2));
 		
 		//Delete data
 		cMenu.deleteDocument(bNode1);

@@ -24,8 +24,8 @@ public class BrowserPreferences extends EcmsBase{
 	//Preference
 	public final By ELEMENT_PREFERENCE_LINK = By.xpath("//*[contains(@class, 'setupPreferencesButton')]");
 	public final By ELEMENT_ADVANCED_OPTION = By.className("advancePreferences");
-	public final By ELEMENT_ADVANCED_ICON_ARROW_DOWN = By.xpath("//*[@class='advancePreferences']//*[@class='uiIconArrowDown']");
-	public final By ELEMENT_ADVANCED_ICON_ARROW_UP = By.xpath("//*[@class='advancePreferences']//*[@class='uiIconArrowUp']");
+	public final By ELEMENT_ADVANCED_ICON_ARROW_DOWN = By.xpath("//*[@class='advancePreferences']//*[contains(@class,'uiIconArrowDown')]");
+	public final By ELEMENT_ADVANCED_ICON_ARROW_UP = By.xpath("//*[@class='advancePreferences']//*[contains(@class,'uiIconArrowUp')]");
 	public final By ELEMENT_SHOW_SIDEBAR = By.id("showSideBar");
 	public final By ELEMENT_NODE_PER_PAGE = By.xpath("//select[@class='selectbox' and @name='nodesPerPage']");
 

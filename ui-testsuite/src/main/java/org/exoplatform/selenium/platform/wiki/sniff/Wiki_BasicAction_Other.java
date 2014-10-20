@@ -243,7 +243,7 @@ public class Wiki_BasicAction_Other extends Permalink {
 	 */
 	@Test
 	public void test08_MovePageWhenNotHaveEditPermissionAtDestPage(){
-		String spaceName = "Space08";
+		String spaceName = "space70362";
 		String title1 = "Wiki_move_title_08_1";
 		String content1 = "Wiki_move_content_08_1";
 		String title2 = "Wiki_move_title_08_2";
@@ -276,7 +276,7 @@ public class Wiki_BasicAction_Other extends Permalink {
 	 */
 	@Test
 	public void test08_MovePageInSpaceWikiWhenNotHaveEditPermissionAtDestPage(){
-		String spaceName = "Space08";
+		String spaceName = "space70362";
 		String title1 = "Wiki_move_title_08_1";
 		String content1 = "Wiki_move_content_08_1";
 		String title2 = "Wiki_move_title_08_2";

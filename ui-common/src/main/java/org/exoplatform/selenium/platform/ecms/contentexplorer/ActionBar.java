@@ -103,7 +103,7 @@ public class ActionBar extends EcmsBase{
 	public By ELEMENT_CATEGORY_TREE_BOX = By.name("taxonomyTree");
 	public By ELEMENT_ADD_ROOT_BUTTON = By.xpath("//label[text()='Root Tree']/following::img[@title='Add Root Node']");
 	public By ELEMENT_REFERENCE_TAB = By.xpath("//a[contains(text(),'Referenced Categories')]");
-	public String ELEMENT_DELETE_CATEGORY_ICON = "//td[text()='{$categoryPath}']/..//i[@class='uiIconDelete']";
+	public String ELEMENT_DELETE_CATEGORY_ICON = "//td[text()='{$categoryPath}']/..//*[@data-original-title='Delete']";
 	public String MSG_DELETE_CATEGORY = "Are you sure you want to delete this reference?";
 
 	//Version Info form
@@ -131,14 +131,14 @@ public class ActionBar extends EcmsBase{
 	public final String ELEMENT_HISTORY_ITEM = "//div[text()='${state}']";
 
 	//View Properties form
-	public final By ELEMENT_VIEW_PROPERTIES_ICON = By.xpath("//i[@class='uiIconEcmsViewProperties']");
+	public final By ELEMENT_VIEW_PROPERTIES_ICON = By.xpath("//i[contains(@class,'uiIconEcmsViewProperties')]");
 	public final By ELEMENT_PROPERTIES_TAB = By.linkText("Properties");
 	public final By ELEMENT_ADD_PROPERTY_TAB = By.linkText("Add New Property");
 	public final By ELEMENT_VALUE_INPUT = By.xpath("//input[contains(@id,'value')]");
 	public final By ELEMENT_ADD_PROPERTY_INPUT = By.name("property_select");
 	public final String ELEMENT_PROPERTY = "//td[text()='{$property}']/..//div[contains(text(),'{$value}')]"; 
 	//Metadata form
-	public final By ELEMENT_VIEW_METADATA_ICON = By.xpath("//i[@class='uiIconEcmsViewMetadatas']");
+	public final By ELEMENT_VIEW_METADATA_ICON = By.xpath("//i[contains(@class,'uiIconEcmsViewMetadatas')]");
 	public final By ELEMENT_METADATA_POPUP_TEXT = By.xpath("//span[@class='PopupTitle popupTitle' and text()='View Metadata']");
 	public final String ELEMENT_EDIT_PROPERTY_ICON = "//*[@class='uiPropertyTab']//*[text()='${property}']/..//*[contains(@class, 'uiIconEdit')]";
 	public final String ELEMENT_DELETE_PROPERTY_ICON = "//*[@class='uiPropertyTab']//*[text()='${property}']/..//*[contains(@class, 'uiIconDelete')]";
@@ -189,7 +189,7 @@ public class ActionBar extends EcmsBase{
 	public final By ELEMENT_ADD_RELATION_LINK = By.xpath("//*[@class='actionIcon']//*[contains(@class,'uiIconEcmsManageRelations')]");
 	public final By ELEMENT_SELECT_RELATION_TAB = By.xpath("//*[contains(text(), 'Select Relation')]");
 	public final By ELEMENT_RELATION_LIST_TAB = By.xpath("//*[contains(text(), 'Relation List')]");
-	public final By ELEMENT_SHOW_RELATION_ICON = By.xpath("//i[@class='uiIconEcmsRelationMini']");
+	public final By ELEMENT_SHOW_RELATION_ICON = By.xpath("//i[contains(@class,'uiIconEcmsRelationMini')]");
 	public final String ELEMENT_RELATION_LINK = "//a[text()='{$relation}']";
 	public final String ELEMENT_DELETE_RELATION_ICON = "//span[contains(text(),'{$relation}')]/../..//i[@class='uiIconDelete uiIconLightGray']";
 	public final String MESSAGE_DELETE_RELATION = "Are you sure you want to delete this relation?";

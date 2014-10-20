@@ -134,11 +134,11 @@ public class Calendar_Event_Attachment_Schedule_Participants extends CalendarBas
 		info("Test 3: Add a participant");
 		String name = "Event109868";
 		String mainHandle = driver.getWindowHandle();
-		/*acc.userSignIn(userType.PUBLISHER);
+		acc.userSignIn(userType.PUBLISHER);
 		acc.updateUserProfile(null, null, null, EMAIL_ADDRESS1);
 		acc.userSignIn(userType.ADMIN);
 		goToCalendarPage();
-		Step Number: 12
+		/*Step Number: 12
 		 *Step Name: Step 1: Open add/edit event pop up
 		 *Step 2: Add participant
 		 *Step Description: 
@@ -162,14 +162,14 @@ public class Calendar_Event_Attachment_Schedule_Participants extends CalendarBas
 			- Participants
 			- Schedule
 			- Selected users are listed on the table with 3 column + Name: participant fullname + Information: participant email + Status: participant status yes/no/not sure + Cction with remove icon
-			- Event is created with added participants 
+			- Event is created with added participants */
 		event.goToAddEventFromActionBar();
 		event.inputBasicQuickEvent(name, name);
 		click(event.ELEMENT_ADD_EVENT_MORE_DETAILS_BUTTON);
 		event.inputParticipantTab("mary",2,1,2);
-		click(event.ELEMENT_ADD_EVENT_SAVE_BUTTON);*/
-		/*acc.userSignIn(userType.PUBLISHER);
-		goToCalendarPage();*/
+		click(event.ELEMENT_ADD_EVENT_SAVE_BUTTON);
+		acc.userSignIn(userType.PUBLISHER);
+		goToCalendarPage();
 
 		/*Case ID:109869
 		 * Automatically send the invitation mail to the participants.

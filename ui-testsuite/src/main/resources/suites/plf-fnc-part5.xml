@@ -11,6 +11,7 @@
 			<class name = "org.exoplatform.selenium.platform.plf.functional.homepageactivitystream.activitystreamengagement.PLF_HomepageActivityStream_ActivityStreamEngagement" />
 			<class name = "org.exoplatform.selenium.platform.plf.functional.contentnavigation.PLF_ContentNavigation" />
 			<class name = "org.exoplatform.selenium.platform.plf.functional.unifiedsearch.PLF_UnifiedSearch_DiscussionSearch" />
+			<class name = "org.exoplatform.selenium.platform.plf.functional.unifiedsearch.PLF_UnifiedSearch_DocumentSearch" />
 			<class name = "org.exoplatform.selenium.platform.plf.functional.unifiedsearch.PLF_UnifiedSearch_EventSearch" />
 			<class name = "org.exoplatform.selenium.platform.plf.functional.unifiedsearch.PLF_UnifiedSearch_FileSearch" />
 			<class name = "org.exoplatform.selenium.platform.plf.functional.unifiedsearch.PLF_UnifiedSearch_SearchResults" />

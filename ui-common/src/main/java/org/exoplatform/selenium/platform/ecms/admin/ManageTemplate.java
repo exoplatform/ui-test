@@ -54,8 +54,8 @@ public class ManageTemplate extends EcmsBase{
 	public final By ELEMENT_ACTION_TAB = By.xpath(ELEMENT_TAB.replace("${typeTemplate}", "Documents").replace("${tab}", "Actions"));
 	public final By ELEMENT_ACTION_TAB_ACTIVE = By.xpath("//li[@class='active']/a[text()='Actions']");
 	public final By ELEMENT_OTHER_TAB = By.xpath(ELEMENT_TAB.replace("${typeTemplate}", "Documents").replace("${tab}", "Others"));
-	public final String ELEMENT_VIEW_TEMPLATE_ICON = "//*[contains(text(),'${templateName}')]/..//*[@class='uiIconView']";
-	public final String ELEMENT_EDIT_METADATA_TEMPLATE_ICON = "//*[contains(text(),'${templateName}')]/..//*[@class='uiIconEdit']";
+	public final String ELEMENT_VIEW_TEMPLATE_ICON = "//*[contains(text(),'${templateName}')]/..//*[@data-original-title='View']";
+	public final String ELEMENT_EDIT_METADATA_TEMPLATE_ICON = "//*[contains(text(),'${templateName}')]/..//*[@data-original-title='Edit']";
 	public final String ELEMENT_EDIT_TEMPLATE_ICON = "//*[contains(text(),'${templateName}')]/../..//*[contains(@class,'uiIconEdit')]";
 	public final String ELEMENT_DELETE_TEMPLATE_ICON = "//*[contains(text(),'${templateName}')]/../..//*[contains(@class,'uiIconDelete')]";
 	public final String ELEMENT_DELETE_METADATA_TEMPLATE_ICON = "//*[contains(text(),'${templateName}')]/..//*[contains(@class,'uiIconDelete')]";

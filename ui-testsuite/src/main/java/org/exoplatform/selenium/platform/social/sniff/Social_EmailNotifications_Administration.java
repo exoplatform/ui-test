@@ -107,10 +107,10 @@ public class Social_EmailNotifications_Administration extends Notification {
 		String fullName = username + " "+username;
 		String email = username + "@gmail.com";
 		By eEmail = By.xpath(ELEMENT_GMAIL_TITLE.replace("${title}", fullName+" has joined eXo"));
-		String username2 = getRandomString();
+		String username2 = "liiceo";//getRandomString();
 		String fullName2 = username2 + " "+ username2;
 		String email2 = username2 + "@gmail.com";
-		By eEmail2 = By.xpath(ELEMENT_GMAIL_TITLE.replace("${title}", fullName2+" has joined eXo"));
+		By eEmail2 = By.xpath(ELEMENT_GMAIL_TITLE.replace("{$title}", fullName2+" has joined eXo"));
 		info("CaseID-109865:Disable a Notification");
 		//Setup email
 		navToolBar.goToMyProfile();

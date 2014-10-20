@@ -308,7 +308,7 @@ public class ForumBase extends PlatformBase {
 	public final String ELEMENT_USER_MANAGEMENT_CATEGORY_LINK = "//form[@id='UISelectItemForum']//a[contains(.,'${category}')]";
 
 	//Private message
-	public final By ELEMENT_PRIVATE_MESSAGE_ICON = By.xpath("//a[@class='actionIcon']/i[@class='uiIconMail uiIconLightGray']");
+	public final By ELEMENT_PRIVATE_MESSAGE_ICON = By.xpath("//a[@class='actionIcon']//i[@class='uiIconMail uiIconLightGray']");
 	public final By ELEMENT_COMPOSE_MESSAGE_TAB = By.linkText("Compose New Message");
 	public final By ELEMENT_PRIVATE_MESSAGE_SENDTO_INPUT = By.id("SendTo");
 	public final By ELEMENT_PRIVATE_MESSAGE_TITLE_INPUT = By.id("MailTitle");
@@ -326,7 +326,7 @@ public class ForumBase extends PlatformBase {
 	public final String ELEMENT_PRIVATE_MESSAGE_REPLY_ICON = "//*[text()='${message}']//ancestor::tr//i[@class='uiIconReply uiIconLightGray' and @data-original-title='Reply Message']";
 	public final String ELEMENT_PRIVATE_MESSAGE_DELETE_ICON = "//*[text()='${message}']//ancestor::td/../td/a/i[@class='uiIconDelete uiIconLightGray' and @data-original-title='Delete Message']";
 	public final String ELEMENT_PRIVATE_MESSAGE = "//form[@id='UIPrivateMessageForm']//td//*[text()='${message}']";
-	public final String ELEMENT_PRIVATE_MESSAGE_CONTENT = "//div[@class='uiContentBox']//p[contains(text(),'${message}')]";
+	public final String ELEMENT_PRIVATE_MESSAGE_CONTENT = "//div[@id='UIListInBoxPrivateMessage']//p[contains(text(),'${message}')]";
 
 	public final String MSG_PRIVATE_MESSAGE_COMPOSE = "Your message was sent successfully.";
 	public final String MSG_PRIVATE_MESSAGE_DELETE = "Are you sure you want to delete this message ?";

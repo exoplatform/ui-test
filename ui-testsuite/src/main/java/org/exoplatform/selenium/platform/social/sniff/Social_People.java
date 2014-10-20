@@ -403,7 +403,7 @@ public class Social_People extends SocialBase {
 		String typeOfGender ="Female";
 		String typeOfAddPhone="Work";
 		String numberOfPhone="09880000";
-		String typeOfIMS="Google";
+		String typeOfIMS="Gtalk";
 		String nameOfIMS="marywill";
 		String nameOfURLS="exoplatform.com.vn";
 		String nameOfOrganization ="exoplatform company";
@@ -441,7 +441,7 @@ public class Social_People extends SocialBase {
 		waitForAndGetElement("//*[contains(text(),'"+typeOfGender+"') or contains(text(),'"+typeOfGender.toLowerCase()+"')]");
 		waitForAndGetElement("//div[contains(text(),'"+typeOfAddPhone+"') or contains(text(),'"+typeOfAddPhone.toLowerCase()+"')]");
 		waitForAndGetElement("//*[contains(text(),'"+numberOfPhone+"')]");
-		waitForAndGetElement("//*[contains(text(),'"+typeOfIMS+"')]");
+		waitForAndGetElement("//*[contains(text(),'"+typeOfIMS.toLowerCase()+"')]");
 		waitForAndGetElement("//*[contains(text(),'"+nameOfIMS+"')]");
 		waitForAndGetElement("//a[contains(text(),'"+nameOfURLS+"')]");
 		waitForAndGetElement("//*[contains(text(),'"+nameOfOrganization+"')]");
