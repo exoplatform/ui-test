@@ -126,9 +126,10 @@ public class Forum_Forum_Category_Edit extends ForumBase{
 	 * Case ID:109080.
 	 * Test Case Name: Edit Category with invalid data entry for Restricted Audience.	 
 	 * Created by khanhnt at 2013/11/21 17:20:14
+	 * This case is remove from qmetry (https://jira.exoplatform.org/browse/FQA-1844)
 	 */
-	@Test
-	public  void test02_EditCategoryInCaseInvalidUserEntryForRestrictedAudienceField() {
+	//@Test
+	/*public  void test02_EditCategoryInCaseInvalidUserEntryForRestrictedAudienceField() {
 		info("Test 2: Edit Category in case invalid user entry for Restricted audience field"); 
 		String catName = "Category 109080";
 		String order = "0";
@@ -139,13 +140,13 @@ public class Forum_Forum_Category_Edit extends ForumBase{
 		String[] userGroup = null;
 		boolean permission = false;
 		String[] invalidRestricted = {"invaliduser, /invalidGroup, invalidRole:/developers"};
-
-		/*
+test
+		
 		- Login as administrator user.
 		- Go to Forum Application, click on [Add Category] button in toolbar.
 		- Create new category that allow anyone to access ([Restricted Audience] = blank).
 		 *Expected Outcome: 
-		- Category is added successfully.		*/
+		- Category is added successfully.		
 		info("Create Category");
 		goToForums();
 		fmCat.addNewCategoryInForum(catName, order, chooseRestricted,
@@ -153,7 +154,7 @@ public class Forum_Forum_Category_Edit extends ForumBase{
 		fmCat.goToForumHome();
 		waitForAndGetElement(By.linkText(catName)).click();
 
-		/*
+		
 		- Go to Forum application.
 		- Select Category you want to edit.
 		- Click on [Mange Category] button and select [Edit] option in Category section.
@@ -161,20 +162,20 @@ public class Forum_Forum_Category_Edit extends ForumBase{
 		 *Expected Outcome: 
 		- All forums of selected category are shown.
 		- There is a [Manage Category] button in action bar.
-		- Edit Category form is shown properly.		*/
-		/*
+		- Edit Category form is shown properly.		
+		
 		- Enter invalid (unavailable) user(s)/role(s)/group(s) into[Restricted Audience] field.
 		 *Input Data: 
 		 *Expected Outcome: 
-		- User(s)/role(s)/group(s) can be input into[Restricted Audience] field.		*/
-		/*
+		- User(s)/role(s)/group(s) can be input into[Restricted Audience] field.		
+		
 		- Input valid value for other required fields.
 		- Click [Save] button.
 		 *Input Data: 
 		 *Expected Outcome: 
 		- Alert message is shown in order to notify about INCORRECT user(s)s/role(s)/group(s) at [Restricted Audience] field.
 		- User should correct [Restricted Audience] field with available user(s)/role(s)/group(s); 
-		Or leave this field blank then click [Save] button.		*/
+		Or leave this field blank then click [Save] button.		
 		fmCat.editCategoryInForum(catName, order, 1, invalidRestricted, null, 0, null);
 		waitForMessage(fmCat.MESSAGE_RESTRICTED_AUDIENCE_INVALID+invalidRestricted[0]);
 		click(ELEMENT_OK_INFOR_POPUP);
@@ -182,18 +183,19 @@ public class Forum_Forum_Category_Edit extends ForumBase{
 
 		//Delete data test
 		fmCat.deleteCategoryInForum(catName, true);
-	}
+	}*/
 
 	/**
 	 * Case ID:109084.
 	 * Test Case Name: Edit Category in case valid data entry for Restricted audience field.
-	 * Created by khanhnt at 2013/11/21 17:20:14
+	 * Created by khanhnt at 2013/11/21 17:20:14 
+	 * This case is remove from qmetry (https://jira.exoplatform.org/browse/FQA-1844)
 	 */
-	@Test
-	public  void test03_EditCategoryInCaseValidDataEntryForRestrictedAudienceField() {
+	//@Test
+	/*public  void test03_EditCategoryInCaseValidDataEntryForRestrictedAudienceField() {
 		info("Test 3: Edit Category in case valid data entry for Restricted audience field"); 
 		String catName = "Category 109084";
-		String order = "0";
+		String order = "0";test
 		int chooseRestricted = 0;
 		String[] restricted = { "" };
 		String description = "Description";
@@ -207,12 +209,12 @@ public class Forum_Forum_Category_Edit extends ForumBase{
 		String lastName = "FFFF";
 		String email1 = username+"@exoplatform.com";
 
-		/*
+		
 		- Login as administrator user.
 		- Go to Forum Application, click on [Add Category] button.
 		- Create new category that allow anyone to access ([Restricted Audience] = blank).
 		 *Expected Outcome: 
-		- Category is added successfully.		*/
+		- Category is added successfully.		
 		info("Create Category");
 		goToForums();
 		fmCat.addNewCategoryInForum(catName, order, chooseRestricted,
@@ -220,7 +222,7 @@ public class Forum_Forum_Category_Edit extends ForumBase{
 		fmCat.goToForumHome();
 		waitForAndGetElement(By.linkText(catName));
 
-		/*
+		
 		- Go to Forum application.
 		- Select Category you want to edit.
 		- Click on [Mange Category] button and select [Edit] option in Category section.
@@ -228,28 +230,28 @@ public class Forum_Forum_Category_Edit extends ForumBase{
 		 *Expected Outcome: 
 		- All forums of selected category are shown.
 		- There is a [Manage Category] button in action bar.
-		- Edit Category form is shown properly 		*/
-		/*
+		- Edit Category form is shown properly 		
+		
 		- Input valid (available) user(s),rolep(s), group(s) for [Restricted Audience] field; Or select user(s), role(s), group(s) in list by click on [Select User]/[Select Role]/[Select Group] buttons.
 		 *Input Data: 
 		 *Expected Outcome: 
-		- User(s), Role(s), Group(s) can be input into [Restricted Audience] field.		*/
-		/*
+		- User(s), Role(s), Group(s) can be input into [Restricted Audience] field.		
+		
 		- Input valid data into all required fields.
 		- Click [Save] button.
 		 *Input Data: 
 		 *Expected Outcome: 
 		- Category is edited successfully.
-		 */
+		 
 		click(By.linkText(catName));
 		fmCat.editCategoryInForum(catName, order, 1, validRestricted, null, 0, null);
 
-		/*
+		
 		- Login as user assigned in step3.
 		- Go to Forum Application.
 		 *Input Data: 
 		 *Expected Outcome: 
-		- User can view and access category edited.		*/
+		- User can view and access category edited.		
 		info("james login");
 		fmCat.checkRightOfViewCategory("james", DATA_PASS, catName, description, true);
 
@@ -259,12 +261,12 @@ public class Forum_Forum_Category_Edit extends ForumBase{
 		info("Demo login to check Group");
 		fmCat.checkRightOfViewCategory("demo", DATA_PASS, catName, description, true);
 
-		/*
+		
 		- Login as user NOT assigned in step3.
 		- Go to Forum Application.
 		 *Input Data: 
 		 *Expected Outcome: 
-		- User can NOT view the category edited.		*/ 		
+		- User can NOT view the category edited.		 		
 		info("Create new account to check");
 		acc.userSignIn(userType.ADMIN);
 		nav.goToNewStaff();
@@ -279,19 +281,19 @@ public class Forum_Forum_Category_Edit extends ForumBase{
 		info("Delete users test");
 		nav.goToUsersAndGroupsManagement();
 		uGroup.deleteUser(username);		
-	}
+	}*/
 
 	/**
 	 * Case ID:109091.
 	 * Test Case Name: Edit Category in case invalid user entry for Moderator field.
 	 * Created by chinhdtt at 2014/06/09 13:50:14
-	 * This case is remove from qmetry
+	 * This case is remove from qmetry (https://jira.exoplatform.org/browse/FQA-1844)
 	 */
-	@Test
-	public  void test04_EditCategoryInCaseInvalidUserEntryForModeratorField() {
+	//@Test
+	/*public  void test04_EditCategoryInCaseInvalidUserEntryForModeratorField() {
 		info("Test 04 Edit Category in case invalid user entry for Moderator field");
 		String catName = "Category 73007";
-		String order = "1";
+		String order = "1";test
 		int chooseRestricted = 1;
 		String[] restricted = {""}; 
 		String description = "Description of Category";
@@ -301,11 +303,11 @@ public class Forum_Forum_Category_Edit extends ForumBase{
 		String[] groupInvalid = {"/invalidGroup"};
 		String[] roleInvalid = {"invalidRole:/developers"};
 
-		/*
+		
 		- Login as administrator user: [root].
 		- Go to Forum Application, click on [Add Category] button in toolbar to create category.
 		 *Expected Outcome: 
-		- Category is created successfully.		*/
+		- Category is created successfully.		
 		goToForums();
 		info("Create New Category");
 		fmCat.goToAddCategory(); 
@@ -313,24 +315,24 @@ public class Forum_Forum_Category_Edit extends ForumBase{
 				description, setPermission, userGroup, false);
 		button.save();
 
-		/*
+		
 		- Select Category you want to edit by click on Category name.
 		- Click on [Mange Category] button and select [Edit] option in Category section.
 		 *Input Data: 
 		 *Expected Outcome: 
 		- All forums of selected category are shown.
 		- There is a [Manage Category] button in action bar.
-		- Edit Category form is shown properly.		*/
+		- Edit Category form is shown properly.		
 		fmCat.goToEditCategoryInForum(true);
 
-		/*
+		
 		- Select [Permissions] tab.
 		- Enter invalid (unavailable) user(s)/role(s)/group(s) for [Moderator] field.
 		- Click [Add] button.
 		 *Input Data: 
 		 *Expected Outcome: 
 		- User(s)/role(s)/group(s) is NOT displayed in [Moderator] field.
-		- Alert message is shown in order to notify that invalid user entry for [Moderator] field.		*/ 	
+		- Alert message is shown in order to notify that invalid user entry for [Moderator] field.		 	
 		info("Invalid User");
 		pForum.setPermissionWithOption(1, userInvalid);
 		click(pForum.ELEMENT_FORUM_CATEGORY_PERMISSION_GRID);
@@ -356,7 +358,7 @@ public class Forum_Forum_Category_Edit extends ForumBase{
 		goToForums();
 		fmCat.deleteCategoryInForum(catName, true);
 	}
-
+*/
 	/**
 	 * Case ID:109094.
 	 * Test Case Name: Edit Category with removing data in Moderator field.
@@ -366,7 +368,7 @@ public class Forum_Forum_Category_Edit extends ForumBase{
 	 * Generated by chinhdtt at 2014/06/04 18:16:39
 	 */
 	@Test
-	public  void test05_EditCategoryWithRemovingDataInModeratorField() {
+	public  void test04_EditCategoryWithRemovingDataInModeratorField() {
 		info("Test 05 Edit Category with removing data in Moderator field");
 		String catName = "Category 109094";
 		String order = "1";
@@ -475,7 +477,7 @@ public class Forum_Forum_Category_Edit extends ForumBase{
 	 * Created by khanhnt at 2013/11/21 17:20:14
 	 */
 	@Test(groups={"error"})
-	public  void test06_EditCategoryWhichDeletedByAnotherUser() {
+	public  void test05_EditCategoryWhichDeletedByAnotherUser() {
 		info("Test 6: Edit category which deleted by another user"); 
 		String catName = "Category 109097";
 		String order = "0";
@@ -525,7 +527,7 @@ public class Forum_Forum_Category_Edit extends ForumBase{
 	 * Generated by chinhdtt at 2014/06/11 14:29:51
 	 */
 	@Test
-	public  void test07_EditCategoryWithValidUserEntryForRestrictedAudience() {
+	public  void test06_EditCategoryWithValidUserEntryForRestrictedAudience() {
 		info("Test 7: Edit Category with valid user entry for Restricted Audience");
 		String catName = "Category 109109";
 		String order = "1";
@@ -608,7 +610,7 @@ public class Forum_Forum_Category_Edit extends ForumBase{
 	 * Generated by chinhdtt at 2014/06/11 14:29:51
 	 */
 	@Test
-	public  void test08_EditCategoryWithValidRoleEntryForRestrictedAudience() {
+	public  void test07_EditCategoryWithValidRoleEntryForRestrictedAudience() {
 		info("Test 8: Edit Category with valid role entry for Restricted Audience");
 		String catName = "Category 109110";
 		String order = "1";
@@ -689,7 +691,7 @@ public class Forum_Forum_Category_Edit extends ForumBase{
 	 * Generated by chinhdtt at 2014/06/11 14:29:51
 	 */
 	@Test
-	public  void test09_EditCategoryWithValidGroupEntryForRestrictedAudience() {
+	public  void test08_EditCategoryWithValidGroupEntryForRestrictedAudience() {
 		info("Test 9: Edit Category with valid group entry for Restricted Audience");
 		String catName = "Category 109111";
 		String order = "1";
@@ -770,7 +772,7 @@ public class Forum_Forum_Category_Edit extends ForumBase{
 	 * Generated by chinhdtt at 2014/06/11 14:29:51
 	 */
 	@Test
-	public  void test10_EditCategoryWithRemovingDataEntryInRestrictedAudience() {
+	public  void test09_EditCategoryWithRemovingDataEntryInRestrictedAudience() {
 		info("Test 10 Edit Category with removing data entry in Restricted Audience");
 		String catName = "Category 109112";
 		String order = "1";
@@ -852,7 +854,7 @@ public class Forum_Forum_Category_Edit extends ForumBase{
 	 * Created by chinhdtt at 2014/06/09 14:35:14
 	 */
 	@Test
-	public  void test11_EditCategoryInCaseValidUserEntryForModeratorField() {
+	public  void test10_EditCategoryInCaseValidUserEntryForModeratorField() {
 		info("Test 11: Edit Category with valid data entry in Moderator field"); 
 		String catName = "Category 109113";
 		String order = "1";
@@ -863,18 +865,18 @@ public class Forum_Forum_Category_Edit extends ForumBase{
 		String[] userGroup = null;
 		String catNameUpdate = "Update 109113";
 		String[] user = {"james"};
-		String[] userRole = {"manager:/platform/web-contributors"}; 
-		String[] userGroups = {"/developers"}; 
+		//String[] userRole = {"manager:/platform/web-contributors"}; 
+		//String[] userGroups = {"/developers"}; 
 		String[] addForum = {"Title of forum 001", "1", "Open", "Unlocked", "Description of forum 001"}; 	
 		String title1 = "Title topic 001"; 
 		String message1 = "Topic 001"; 
-		String title2 = "Title topic 002"; 
-		String message2 = "Topic 002"; 
-		String title3 = "Title topic 003"; 
-		String message3 = "Topic 003"; 
+		//String title2 = "Title topic 002"; 
+		//String message2 = "Topic 002"; 
+		//String title3 = "Title topic 003"; 
+		//String message3 = "Topic 003"; 
 		String postTitle1 = "Post 001";
-		String postTitle2 = "Post 002";
-		String postTitle3 = "Post 003";
+		//String postTitle2 = "Post 002";
+		//String postTitle3 = "Post 003";
 		String username = getRandomString();
 		String password = "gtngtn";
 		String firstName = "Test";
@@ -915,8 +917,8 @@ public class Forum_Forum_Category_Edit extends ForumBase{
 		- User(s)/role(s)/group(s) is added to list in Permissions tab.		*/
 		info("Set permission for category");
 		frumPer.configPermission4ForumCategory(2, user, true);
-		frumPer.configPermission4ForumCategory(1, userRole, true);
-		frumPer.configPermission4ForumCategory(1, userGroups, true);
+		//frumPer.configPermission4ForumCategory(1, userRole, true);
+		//frumPer.configPermission4ForumCategory(1, userGroups, true);
 		Utils.pause(1000);
 
 		/*
@@ -948,7 +950,7 @@ public class Forum_Forum_Category_Edit extends ForumBase{
 		post.postReply(postTitle1, postTitle1, "", "");
 		Utils.pause(1000);
 
-		info("Mary login to check role");
+		/*info("Mary login to check role");
 		acc.userSignIn(userType.PUBLISHER);
 		goToForums();
 		click(By.linkText(catNameUpdate));
@@ -957,9 +959,9 @@ public class Forum_Forum_Category_Edit extends ForumBase{
 		Utils.pause(1000);
 		click(By.linkText(title2));
 		post.postReply(postTitle2, postTitle2, "", "");
-		Utils.pause(1000);
+		Utils.pause(1000);*/
 
-		info("Demo login to check Group");
+		/*info("Demo login to check Group");
 		acc.userSignIn(userType.DEVELOPER);
 		goToForums();
 		click(By.linkText(catNameUpdate));
@@ -968,7 +970,7 @@ public class Forum_Forum_Category_Edit extends ForumBase{
 		Utils.pause(1000);
 		click(By.linkText(title3));
 		post.postReply(postTitle3, postTitle3, "", "");
-		Utils.pause(1000);
+		Utils.pause(1000);*/
 
 		info("Create new account to check");
 		acc.userSignIn(userType.ADMIN);
@@ -1000,7 +1002,7 @@ public class Forum_Forum_Category_Edit extends ForumBase{
 	 * Generated by chinhdtt at 2014/06/04 18:16:39
 	 */
 	@Test
-	public  void test12_AssignPermissionToStartTopicsForValidUserWhenEdittingCategory() {
+	public  void test11_AssignPermissionToStartTopicsForValidUserWhenEdittingCategory() {
 		info("Test 12 Assign [Permission to start topics] for valid user when editting category");
 		String catName = "Category 109114";
 		String order = "1";
@@ -1141,7 +1143,7 @@ public class Forum_Forum_Category_Edit extends ForumBase{
 	 * Generated by chinhdtt at 2014/06/04 18:16:39
 	 */
 	@Test
-	public  void test13_AssignPermissionToPostRepliesForValidUserWhenEdittingCategory() {
+	public  void test12_AssignPermissionToPostRepliesForValidUserWhenEdittingCategory() {
 		info("Test 13 Assign [Permission to post replies] for valid user when editting category");
 		String catName = "Category 109115";
 		String order = "1";
@@ -1289,7 +1291,7 @@ public class Forum_Forum_Category_Edit extends ForumBase{
 	 * Generated by chinhdtt at 2014/06/04 18:16:39
 	 */
 	@Test
-	public  void test14_AssignPermissionToViewPostsForValidUserWhenEdittingCategory() {
+	public  void test13_AssignPermissionToViewPostsForValidUserWhenEdittingCategory() {
 		info("Test 14 Assign [Permission to view posts] for valid user when editting category");
 		String catName = "Category 109116";
 		String order = "1";
@@ -1429,5 +1431,451 @@ public class Forum_Forum_Category_Edit extends ForumBase{
 		nav.goToUsersAndGroupsManagement();
 		uGroup.deleteUser(username);		
 	}
+	@Test
+	public  void test15_EditCategoryInCaseValidRoleEntryForModeratorField(){
+		info("Test 15: Edit Category with valid user entry in Moderator field"); 
+		String catName = "Category 109113";
+		String order = "1";
+		int chooseRestricted = 5; 
+		String[] restricted = {""}; 
+		String description = "Description of Category";
+		int setPermission = 0;
+		String[] userGroup = null;
+		String catNameUpdate = "Update 109113";
+		String[] userRole = {"manager:/platform/web-contributors"}; 
+		String[] addForum = {"Title of forum 001", "1", "Open", "Unlocked", "Description of forum 001"}; 	
+		String title2 = "Title topic 002"; 
+		String message2 = "Topic 002"; 
+		String postTitle2 = "Post 002";
+		String username = getRandomString();
+		String password = "gtngtn";
+		String firstName = "Test";
+		String lastName = "GGGG";
+		String email1 = username+"@exoplatform.com";
 
+		/*
+		- Login as administrator user: [root].
+		- Go to Forum Application, click on [Add Category] button.
+		- Create category that allows any user can access it ([Restricted Audience] = blank).
+		 *Expected Outcome: 
+		- Category is added successfully.		*/
+		goToForums();
+		info("Create New Category");
+		fmCat.goToAddCategory(); 
+		fmCat.inputDataCategoryInForum(catName, order, chooseRestricted, restricted,
+				description, setPermission, userGroup, false);
+		button.save();
+
+		/*
+		- Select Category you want to edit by click on Category name.
+		- Click on [Mange Category] button and select [Edit] option in Category section.
+		 *Input Data: 
+		 *Expected Outcome: 
+		- All forums of selected category are shown.
+		- There is a [Manage Category] button in action bar.
+		- Edit Category form is shown properly.		*/
+		goToForumHome();
+		click(By.linkText(catName));
+		fmCat.goToEditCategoryInForum(true);
+
+		/*
+		- Select [Permissions] tab.
+		- Input valid (available) role(s)in list of Permissions tab.
+		- Click [Add] button.
+		 *Input Data: 
+		 *Expected Outcome: 
+		- Role(s) is added to list in Permissions tab.		*/
+		info("Set permission for category");
+		frumPer.configPermission4ForumCategory(1, userRole, true);
+		Utils.pause(1000);
+
+		/*
+		- Input valid value for other required fields.
+		- Click [Save] button.
+		 *Input Data: 
+		 *Expected Outcome: 
+		- Selected category is edited successfully.
+		 */ 
+		click(fmCat.ELEMENT_CATEGORY_TAB);
+		fmCat.inputTitleOrderDescriptionCategory(catNameUpdate, order, description);
+		button.save();
+
+		info("Create New Forum");
+		forum.goToAddForum(); 
+		forum.inputDataInAddForumTab_addForum(catNameUpdate, addForum); 
+		button.save(); 
+
+		info("Mary login to check role");
+		acc.userSignIn(userType.PUBLISHER);
+		goToForums();
+		click(By.linkText(catNameUpdate));
+		click(By.linkText(addForum[0])); 
+		topic.quickStartTopic(title2, message2); 
+		Utils.pause(1000);
+		click(By.linkText(title2));
+		post.postReply(postTitle2, postTitle2, "", "");
+		Utils.pause(1000);
+
+		info("Create new account to check");
+		acc.userSignIn(userType.ADMIN);
+		nav.goToNewStaff();
+		acc.addNewUserAccount(username, password, password, firstName, lastName, "", email1, null, null, true);
+		acc.signOut();
+		acc.signIn(username, password);
+		goToForums();
+		click(By.linkText(catNameUpdate));
+		click(By.linkText(addForum[0]));
+		waitForElementNotPresent(topic.ELEMENT_START_TOPIC_BUTTON);
+
+		//Delete data test
+		acc.userSignIn(userType.ADMIN);
+		goToForums();
+		click(By.linkText(catNameUpdate));
+		fmCat.deleteCategoryInForum(catNameUpdate, true);		
+		info("Delete users test");
+		nav.goToUsersAndGroupsManagement();
+		uGroup.deleteUser(username);
+	
+	}
+	/**
+	 * @author quynhpt
+	 */
+	@Test
+	public  void test03_EditCategoryInCaseValidUserRoleGroupEntryForRestricteAudienceField(){
+		info("Test 03: Edit category in case valid user, role and group entry for Restricted audience field at once");
+		String catName = "Category 109095";
+		String order = "0";
+		int chooseRestricted = 1;
+		String[] restrictedCate={""};
+		String[] restricted = {"james, manager:/platform/web-contributors, /developers" };
+		String description = "Description";
+		int setPermission = 0;
+		String[] userGroup = null;
+		boolean permission = false;
+		String username = getRandomString();
+		String password = "gtngtn";
+		String firstName = "Test";
+		String lastName = "AAAA";
+		String email1 = username+"@exoplatform.com";
+		/*
+		- Login as administrator user: [root].
+		- Go to Forum Application, click on [Add Category] button.
+		- Create category that allows any user can access it ([Restricted Audience] = blank).
+		 *Expected Outcome: 
+		- Category is added successfully.		*/
+		goToForums();
+		info("Create New Category");
+		fmCat.goToAddCategory(); 
+		fmCat.inputDataCategoryInForum(catName, order, 1, restrictedCate,
+				description, setPermission, userGroup, permission);
+		button.save();
+		
+		/*
+		- Select Category you want to edit by click on Category name.
+		- Click on [Mange Category] button and select [Edit] option in Category section.
+		 *Input Data: 
+		 *Expected Outcome: 
+		- All forums of selected category are shown.
+		- There is a [Manage Category] button in action bar.
+		- Edit Category form is shown properly.		*/
+		fmCat.editCategoryInForum(catName, order, chooseRestricted, restricted, 
+				description, setPermission, userGroup, permission);
+
+		/*
+		- Input valid (available) user(s),  rolep(s), group(s) for [Restricted Audience] field; 
+		Or select user(s), role(s), group(s) in list by click on [Select User]/[Select Role]/[Select Group] buttons.
+		- Input valid data into all required fields.
+        - Click [Save] button.
+		 *Expected Outcome: 
+		- User(s), Role(s), Group(s) can be input into [Restricted Audience] field.	
+		- Category is edited successfully.
+        - Only user(s), users have the role and users in group assigned at step 3 can see this category.
+			*/
+		/*
+		 - Login as user assigned in step3.
+         - Go to Forum Application.
+         *Expected:
+         -User can view and access category edited.
+		 */
+		info("User James login to check");
+		fmCat.checkRightOfViewCategory("james", DATA_PASS, catName, description, true);
+
+		info("User mary login to check role");		
+		fmCat.checkRightOfViewCategory(DATA_USER2, DATA_PASS, catName, description, true);
+
+		info("User demo login to check group");
+		fmCat.checkRightOfViewCategory("demo", DATA_PASS, catName, description, true);
+        /*
+		- Login as user NOT assigned in step3.
+		- Go to Forum Application.
+		*Expected:
+		- User can NOT view the category edited.
+		*/
+		info("Create new account to check");
+		acc.userSignIn(userType.ADMIN);
+		nav.goToNewStaff();
+		acc.addNewUserAccount(username, password, password, firstName, lastName, "", email1, null, null, true);
+		fmCat.checkRightOfViewCategory(username, password, catName, description, false);
+
+		//Delete data test	
+		acc.userSignIn(userType.ADMIN);
+		goToForums();
+		click(By.linkText(catName));
+		fmCat.deleteCategoryInForum(catName, true);
+		info("Delete users test");
+		nav.goToUsersAndGroupsManagement();
+		uGroup.deleteUser(username);
+
+	}
+	@Test
+    public void test14_EditCategoryInCaseValidGroupEntryForModeratorField(){
+		info("Test 11: Edit Category with valid data entry in Moderator field"); 
+		String catName = "Category 109113";
+		String order = "1";
+		int chooseRestricted = 5; 
+		String[] restricted = {""}; 
+		String description = "Description of Category";
+		int setPermission = 0;
+		String[] userGroup = null;
+		String catNameUpdate = "Update 109113";
+		String[] userGroups = {"/developers"}; 
+		String[] addForum = {"Title of forum 001", "1", "Open", "Unlocked", "Description of forum 001"}; 	
+		String title3 = "Title topic 003"; 
+		String message3 = "Topic 003"; 
+		String postTitle3 = "Post 003";
+		String username = getRandomString();
+		String password = "gtngtn";
+		String firstName = "Test";
+		String lastName = "GGGG";
+		String email1 = username+"@exoplatform.com";
+
+		/*
+		- Login as administrator user: [root].
+		- Go to Forum Application, click on [Add Category] button.
+		- Create category that allows any user can access it ([Restricted Audience] = blank).
+		 *Expected Outcome: 
+		- Category is added successfully.		*/
+		goToForums();
+		info("Create New Category");
+		fmCat.goToAddCategory(); 
+		fmCat.inputDataCategoryInForum(catName, order, chooseRestricted, restricted,
+				description, setPermission, userGroup, false);
+		button.save();
+
+		/*
+		- Select Category you want to edit by click on Category name.
+		- Click on [Mange Category] button and select [Edit] option in Category section.
+		 *Input Data: 
+		 *Expected Outcome: 
+		- All forums of selected category are shown.
+		- There is a [Manage Category] button in action bar.
+		- Edit Category form is shown properly.		*/
+		goToForumHome();
+		click(By.linkText(catName));
+		fmCat.goToEditCategoryInForum(true);
+
+		/*
+		- Select [Permissions] tab.
+		- Input valid (available) user(s)/role(s)/group(s) in list of Permissions tab.
+		- Click [Add] button.
+		 *Input Data: 
+		 *Expected Outcome: 
+		- User(s)/role(s)/group(s) is added to list in Permissions tab.		*/
+		info("Set permission for category");
+		frumPer.configPermission4ForumCategory(1, userGroups, true);
+		Utils.pause(1000);
+
+		/*
+		- Input valid value for other required fields.
+		- Click [Save] button.
+		 *Input Data: 
+		 *Expected Outcome: 
+		- Selected category is edited successfully.
+		- Only inputed Group(s) on Permission table has a permission to start topic or post replies 
+		or view post or moderator (with checkbox checked respectively)
+		 */ 
+		click(fmCat.ELEMENT_CATEGORY_TAB);
+		fmCat.inputTitleOrderDescriptionCategory(catNameUpdate, order, description);
+		button.save();
+
+		info("Create New Forum");
+		forum.goToAddForum(); 
+		forum.inputDataInAddForumTab_addForum(catNameUpdate, addForum); 
+		button.save(); 
+
+		info("Demo login to check Group");
+		acc.userSignIn(userType.DEVELOPER);
+		goToForums();
+		click(By.linkText(catNameUpdate));
+		click(By.linkText(addForum[0])); 
+		topic.quickStartTopic(title3, message3); 
+		Utils.pause(1000);
+		click(By.linkText(title3));
+		post.postReply(postTitle3, postTitle3, "", "");
+		Utils.pause(1000);
+
+		info("Create new account to check");
+		acc.userSignIn(userType.ADMIN);
+		nav.goToNewStaff();
+		acc.addNewUserAccount(username, password, password, firstName, lastName, "", email1, null, null, true);
+		acc.signOut();
+		acc.signIn(username, password);
+		goToForums();
+		click(By.linkText(catNameUpdate));
+		click(By.linkText(addForum[0]));
+		waitForElementNotPresent(topic.ELEMENT_START_TOPIC_BUTTON);
+
+		//Delete data test
+		acc.userSignIn(userType.ADMIN);
+		goToForums();
+		click(By.linkText(catNameUpdate));
+		fmCat.deleteCategoryInForum(catNameUpdate, true);		
+		info("Delete users test");
+		nav.goToUsersAndGroupsManagement();
+		uGroup.deleteUser(username);
+    }
+	
+	/**
+	 * @author quynhpt
+	 */
+    @Test
+    public void test02_EditCategoryInCaseInvalidDataEntryForRestrictedAudienceField(){
+    	info("Test 02: Edit category in case invalid data entry for the Restricted audience field");
+		String catName = "Category 109080";
+		String order = "0";
+		int chooseRestricted = 1;
+		String[] restrictedUser = {"invaliduser"};
+		String[] restrictedGroup = {"/invalidGroup"};
+		String[] restrictedRole = {"invalidRole:/developers"};
+		String description = "Description";
+		int setPermission = 0;
+		String[] restricted = {""}; 
+		String[] userGroup = {""}; 
+
+		/*
+		- Login as administrator user: [root].
+		- Go to Forum Application, click on [Add Category] button.
+		- Create category that allows any user can access it ([Restricted Audience] = blank).
+		 *Expected Outcome: 
+		- Category is added successfully.		*/
+		goToForums();
+		info("Create New Category");
+		fmCat.goToAddCategory(); 
+		fmCat.inputDataCategoryInForum(catName, order, chooseRestricted, restricted,
+				description, setPermission, userGroup);
+		button.save();
+
+		/*
+		- Select Category you want to edit by click on Category name.
+		- Click on [Mange Category] button and select [Edit] option in Category section.
+		 *Input Data: 
+		 *Expected Outcome: 
+		- All forums of selected category are shown.
+		- There is a [Manage Category] button in action bar.
+		- Edit Category form is shown properly.		*/
+		/*
+		- Select [Permissions] tab.
+		- Input invalid (available) user(s)/role(s)/group(s) in list of Permissions tab.
+		- Click [Add] button.
+		 *Input Data: 
+		 *Expected Outcome: 
+		- Alert message is shown in order to notify about INCORRECT user(s)s/role(s)/group(s) at [Restricted Audience] field.
+		- User should correct [Restricted Audience] field with available user(s)/role(s)/group(s); Or leave this field blank then click [Save] button.	*/
+		fmCat.editCategoryInForum(catName, order, 1, restrictedUser, 
+				description, setPermission,userGroup);
+		button.save();
+		
+		waitForMessage(fmCat.MESSAGE_RESTRICTED_AUDIENCE_INVALID+restrictedUser[0]+".");
+		click(ELEMENT_OK_INFOR_POPUP);
+
+		info("Add invalid group");
+		fmCat.editCategoryInForum(catName, order, 1, restrictedGroup, 
+				description, setPermission,userGroup);
+		button.save();
+		waitForMessage(fmCat.MESSAGE_RESTRICTED_AUDIENCE_INVALID+restrictedGroup[0]+".");
+		click(ELEMENT_OK_INFOR_POPUP);
+
+		info("Add invalid role");
+		fmCat.editCategoryInForum(catName, order, 1,restrictedRole, 
+				description, setPermission,userGroup);
+		button.save();
+		waitForMessage(fmCat.MESSAGE_RESTRICTED_AUDIENCE_INVALID+restrictedRole[0]+".");
+		click(ELEMENT_OK_INFOR_POPUP);
+			
+    }
+    @Test
+    public void test16_EditCategoryInCaseInvalidDataEntryForModeratorField(){
+    	info("Test 16: Edit Category with invalid data entry in Moderator field"); 
+		String catName = "Category 109113";
+		String order = "1";
+		int chooseRestricted = 5; 
+		String[] restricted = {""}; 
+		String description = "Description of Category";
+		int setPermission = 0;
+		String[] userGroup = null;
+		String[] validUser = {"james"};
+		String[] validRole={"manager:/platform/web-contributors"};
+		String[] validGroup={"/developers"};
+		String[] invaliduser = {"invalidUser"};
+		String[] invaliduserRole = {"invalidUserRole"}; 
+		String[] invaliduserGroups = {"invalidUserGroup"}; 
+
+		/*
+		- Login as administrator user: [root].
+		- Go to Forum Application, click on [Add Category] button.
+		- Create category that allows any user can access it ([Restricted Audience] = blank).
+		- And this category has some Moderators in Permission tab.
+		 *Expected Outcome: 
+		- Category is added successfully.		*/
+		goToForums();
+		info("Create New Category");
+		fmCat.goToAddCategory(); 
+		fmCat.inputDataCategoryInForum(catName, order, chooseRestricted, restricted,
+				description, setPermission, userGroup, false);
+		frumPer.configPermission4ForumCategory(2, validUser, true);
+		frumPer.configPermission4ForumCategory(1, validRole, true);
+		frumPer.configPermission4ForumCategory(1, validGroup, true);
+		button.save();
+
+		/*
+		- Select Category you want to edit by click on Category name.
+		- Click on [Mange Category] button and select [Edit] option in Category section.
+		 *Input Data: 
+		 *Expected Outcome: 
+		- All forums of selected category are shown.
+		- There is a [Manage Category] button in action bar.
+		- Edit Category form is shown properly.		*/
+		goToForumHome();
+		click(By.linkText(catName));
+		fmCat.goToEditCategoryInForum(true);
+
+		/*
+		- Select [Permissions] tab.
+		- Input invalid (available) user(s)/role(s)/group(s) in list of Permissions tab.
+		- Click [Add] button.
+		 *Input Data: 
+		 *Expected Outcome: 
+		- The message is shown "{invalid data} not found, please enter a valid value."	*/
+		info("Set permission for category");
+		frumPer.configPermission4ForumCategory(1, invaliduser);
+		waitForMessage("\""+invaliduser[0]+"\""+fmCat.MESSAGE_CATEGORY_MODERATOR_INVALID);
+		info("\""+invaliduser+"\""+fmCat.MESSAGE_CATEGORY_MODERATOR_INVALID);
+		click(ELEMENT_OK_INFOR_POPUP);
+		frumPer.configPermission4ForumCategory(1, invaliduserRole);
+		waitForMessage("\""+invaliduserRole[0]+"\""+fmCat.MESSAGE_CATEGORY_MODERATOR_INVALID);
+		info("\""+invaliduserRole+"\""+fmCat.MESSAGE_CATEGORY_MODERATOR_INVALID);
+		click(ELEMENT_OK_INFOR_POPUP);
+		frumPer.configPermission4ForumCategory(1, invaliduserGroups);
+		waitForMessage("\""+invaliduserGroups[0]+"\""+fmCat.MESSAGE_CATEGORY_MODERATOR_INVALID);
+		info("\""+invaliduserGroups+"\""+fmCat.MESSAGE_CATEGORY_MODERATOR_INVALID);
+		click(ELEMENT_OK_INFOR_POPUP);
+		Utils.pause(1000);
+		
+		click(frumPer.ELEMENT_CATEGORY_CANCEL_BUTTON);
+        
+		//Delete data test
+		click(ELEMENT_HOME_BUTTON);
+		click(By.linkText(catName));
+		fmCat.deleteCategoryInForum(catName, true);		
+    }
 }

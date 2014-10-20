@@ -7,6 +7,7 @@ import org.exoplatform.selenium.ManageAlert;
 import org.exoplatform.selenium.Utils;
 import org.exoplatform.selenium.platform.ManageApplications;
 import org.exoplatform.selenium.platform.NavigationToolbar;
+import org.exoplatform.selenium.platform.PageEditor;
 import org.exoplatform.selenium.platform.UserGroupManagement;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -34,6 +35,7 @@ public class ForumManagePoll extends ForumBase {
 		naviToolbar = new NavigationToolbar(driver,this.plfVersion);
 		alert = new ManageAlert(driver,this.plfVersion);
 		mngPost = new ForumManagePost(driver,this.plfVersion);
+		pageE = new PageEditor(driver,this.plfVersion);
 	}
 
 	//Poll Manage
@@ -52,12 +54,13 @@ public class ForumManagePoll extends ForumBase {
 	public final By ELEMENT_EDIT_PORTLET = By.xpath("//a[@title='Edit Portlet']");
 	public final By ELEMENT_ADD_POLL_BUTTON = By.linkText("Add Poll");
 	public final By ELEMENT_ADD_POLL_FORM = By.xpath("//span[text()='Add New Poll']");
-	public final By ELEMENT_SUBMIT_POLL_BUTTON = By.linkText("Submit Poll");
-	public final By ELEMENT_SELECT_POLL = By.id("selectPoll");
+	public final By ELEMENT_SUBMIT_POLL_BUTTON = By.xpath("//*[@id='UIPollForm']//button[contains(text(),'Submit Poll')]");
+	public final By ELEMENT_SELECT_POLL = By.name("selectPoll");
 	public final By ELEMENT_POLL_QUESTION = By.id("Question");
 	public final By ELEMENT_SELECT_GROUP = By.xpath("//img[@title='Select Group']");
+	public final By ELEMENT_SELECT_GROUP_1=By.xpath("//*[@data-original-title='Select Group']/i[@class='uiIconAddIcon uiIconLightGray']");
 	public final String ELEMENT_GROUP_PATH = "//a[@class='NodeIcon GroupAdminIcon' and @title='${groupTitle}']";
-	public final By ELEMENT_VOTE_NOW_BUTTON = By.linkText("Vote Now");
+	public final By ELEMENT_VOTE_NOW_BUTTON = By.xpath("//*[@id='UIPoll']//button[contains(text(),'Vote Now')]");
 	public final By ELEMENT_VOTE_AGAIN = By.linkText("Vote Again");
 	public final By ELEMENT_HOME_LINK = By.linkText("Home");
 	public final By ELEMENT_SELECT_THIS_GROUP_LINK = By.linkText("Select this Group");
@@ -116,9 +119,6 @@ public class ForumManagePoll extends ForumBase {
 	 * @param multipleChoice
 	 */
 	public void addPollAndSelectPoll (String pollQuestion, String pollOptions, boolean publicData, String groups, String closeDate, boolean changeVote, boolean multipleChoice) {
-		navTool.goToEditPageEditor();
-		//mouseOver(pageE.ELEMENT_APPS_REG_PORTLET, true);
-		click(ELEMENT_EDIT_PORTLET);
 		click(ELEMENT_ADD_POLL_BUTTON);
 		waitForAndGetElement(ELEMENT_ADD_POLL_FORM);
 		type(ELEMENT_POLL_QUESTION, pollQuestion, false);
@@ -130,25 +130,24 @@ public class ForumManagePoll extends ForumBase {
 			type(By.id("Option" + i), pollOption[i], false);
 		}
 		if (!publicData) {
-			click(ELEMENT_PUBLIC_DATA);
-			waitForAndGetElement(ELEMENT_SELECT_GROUP);
-			click(ELEMENT_SELECT_GROUP);
+			uncheck(ELEMENT_PUBLIC_DATA,2);
+			waitForAndGetElement(ELEMENT_SELECT_GROUP_1);
+			click(ELEMENT_SELECT_GROUP_1);
 			userGroup.selectGroup(groups);
 			waitForAndGetElement(ELEMENT_SELECT_THIS_GROUP_LINK);
 			click(ELEMENT_SELECT_THIS_GROUP_LINK);
 		}
-		type(ELEMENT_TIMEOUT, closeDate, false);
+		if( closeDate!="")
+			type(ELEMENT_TIMEOUT, closeDate, false);
 		if (changeVote) click(ELEMENT_CHANGEVOTE);
 		if (multipleChoice) click(ELEMENT_MULTICHOICE);
 		click(ELEMENT_SUBMIT_POLL_BUTTON);
 		waitForElementNotPresent(ELEMENT_ADD_POLL_FORM);
-		waitForAndGetElement(By.xpath(ELEMENT_POLL_TITLE.replace("${pollQuestion}", pollQuestion)));
 		select(ELEMENT_SELECT_POLL,pollQuestion);
 		button.save();
 		button.close();
 		pageE.finishEditLayout();
-		waitForAndGetElement(By.xpath(ELEMENT_POLL_QUESTION_LINK.replace("${pollQuestion}", pollQuestion)));
-
+		waitForAndGetElement(By.xpath(ELEMENT_POLL_TITLE.replace("${poll}", pollQuestion)));
 	}
 
 	/**

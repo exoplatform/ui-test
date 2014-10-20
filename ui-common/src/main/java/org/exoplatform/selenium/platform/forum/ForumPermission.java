@@ -41,7 +41,7 @@ public class ForumPermission extends ForumBase {
 	public final String ELEMENT_VIEW_POST_FORUM_CATEGORY_CHECKBOX = "//*[contains(text(), '${user}')]/../../td[5]//input[@type='checkbox']";
 	public final By ELEMENT_FORUM_CATEGORY_PERMISSION_GRID = By.id("PermissionTab");
 	public final String ELEMENT_FORUM_CATEGORY_PERMISSION_DELETE = "//*[contains(text(), '${user}')]/../../td[6]//i[@class='uiIconDelete uiIconLightGray']";
-	
+
 	//Set permission for forum of forum
 	public final String ELEMENT_MODERATOR_FORUM_FORUM_CHECKBOX = "//*[contains(text(), '${user}')]/../../td[2]//input[@type='checkbox']";
 	public final String ELEMENT_VIEW_POST_FORUM_FORUM_CHECKBOX = "//*[contains(text(), '${user}')]/../../td[3]//input[@type='checkbox']";

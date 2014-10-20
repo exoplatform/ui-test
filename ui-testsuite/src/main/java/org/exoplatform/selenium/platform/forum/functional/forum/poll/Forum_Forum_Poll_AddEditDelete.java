@@ -2,7 +2,16 @@ package org.exoplatform.selenium.platform.forum.functional.forum.poll;
 
 import static org.exoplatform.selenium.TestLogger.info;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import org.exoplatform.selenium.Button;
+import org.exoplatform.selenium.ManageAlert;
+import org.exoplatform.selenium.Utils;
+import org.exoplatform.selenium.platform.HomePageActivity;
 import org.exoplatform.selenium.platform.ManageAccount;
+import org.exoplatform.selenium.platform.NavigationToolbar;
+import org.exoplatform.selenium.platform.PageManagement;
 import org.exoplatform.selenium.platform.forum.ForumBase;
 import org.exoplatform.selenium.platform.forum.ForumManageCategory;
 import org.exoplatform.selenium.platform.forum.ForumManageForum;
@@ -25,6 +34,9 @@ public class Forum_Forum_Poll_AddEditDelete extends ForumBase {
 	ForumManageForum fmForum;
 	ForumManageTopic fmTopic;
 	ForumManagePoll fmPoll;
+	NavigationToolbar nav;
+	HomePageActivity home;
+	PageManagement mPage; 
 	
 	@BeforeMethod
 	public void setUpBeforeTest() {
@@ -34,14 +46,19 @@ public class Forum_Forum_Poll_AddEditDelete extends ForumBase {
 		fmForum = new ForumManageForum(driver,this.plfVersion);
 		fmPoll = new ForumManagePoll(driver,this.plfVersion);
 		fmTopic = new ForumManageTopic(driver,this.plfVersion);
+		nav = new NavigationToolbar(driver, this.plfVersion);
+		home = new HomePageActivity(driver, this.plfVersion);
+		mPage = new PageManagement(driver, this.plfVersion);
+		button = new Button(driver, this.plfVersion);
 		acc = new ManageAccount(driver,this.plfVersion);
 		acc.signIn(DATA_USER1, DATA_PASS);
+		alert = new ManageAlert(driver);
 	}
 
 	@AfterMethod
 	public void afterTest() {
-		driver.manage().deleteAllCookies();
-		driver.quit();
+//		driver.manage().deleteAllCookies();
+//		driver.quit();
 	}
 	
 	/**
@@ -308,7 +325,7 @@ public class Forum_Forum_Poll_AddEditDelete extends ForumBase {
 	 * Edit Poll
 	 */
 	@Test
-	public void test08_EditPoll() {
+	public void test10_EditPoll() {
 		String categoryName = "category72313";
 		String forumName = "forum72313";
 		String topicName = "topic72313";
@@ -351,7 +368,7 @@ public class Forum_Forum_Poll_AddEditDelete extends ForumBase {
 	 * Add Poll in case only have 2 options
 	 */
 	@Test
-	public void test09_DeletePoll() {
+	public void test11_DeletePoll() {
 		String categoryName = "category72314";
 		String forumName = "forum72314";
 		String topicName = "topic72314";
@@ -380,5 +397,168 @@ public class Forum_Forum_Poll_AddEditDelete extends ForumBase {
 		goToForumHome();
 		click(By.linkText(categoryName));
 		fmCat.deleteCategoryInForum(categoryName, true);	
+	}
+	
+	/**
+	 * TC_ID:105960
+	 * @author quynhpt
+	 */
+	@Test
+	public void test08_AddPollInCasePublicData(){
+		info("Test 08: Add Poll in case public Data");
+		String nodeName = getRandomString();
+		String num=getRandomNumber();
+		String displayName = "Node_"+num;
+		String title = "Collaboration";
+		Map<String, String> portletIds= new HashMap<String, String>();
+		portletIds.put("Collaboration/PollPortlet", "");
+		String pollQuestion = "Poll_"+num;
+		String[] options = {"option1", "option2"};
+
+		/*
+		- Connect to Intranet
+		- Create a page by winzard
+		- Choose Poll porlet at step 3
+		 *Input Data: 
+		 *Expected Outcome: Page with Poll portlet is create successfully		*/
+		nav.goToPageCreationWizard();
+		Utils.pause(5000);
+		click(ELEMENT_UP_LEVEL);
+		info("Create page");
+		mPage.addNewPageEditor(nodeName, displayName,"",title, portletIds, false, true);
+		Utils.pause(5000);		
+
+		/*
+		- Open above page
+		- Click Edit > Layout
+		- Edit Poll portlet
+		- Click on Add Poll
+		- Fill all valid values
+		- Click Save > Finish 
+		 *Input Data: 
+		 *Expected Outcome: Poll is added and shown in Page		*/
+		mouseOver(ELEMENT_FRAME_CONTAIN_PORTLET,true);
+		click(ELEMENT_EDIT_PORTLET_ICON);
+		click(fmPoll.ELEMENT_ADD_POLL_BUTTON);
+		info("Add Poll in Portlet");
+		fmPoll.inputFormPoll(pollQuestion, options, "", false, false);
+		click(fmPoll.ELEMENT_POLL_SUBMIT_BUTTON);
+		Utils.pause(500);
+		button.close();
+		click(ELEMENT_PAGE_FINISH_BUTTON);
+		waitForTextNotPresent("Page Editor");
+		Utils.pause(1000);
+		waitForAndGetElement(fmPoll.ELEMENT_POLL_TITLE.replace("${poll}", pollQuestion));
+        
+		/*
+		- Login with normal user
+		- Go to the portlet
+		 *Expected Outcome: 
+		- The poll portlet is shown and user can choose and vote	*/ 
+		acc.signOut();
+		acc.signIn(DATA_USER4, DATA_PASS);
+		click(ELEMENT_LEFT_NAVIGATION_ITEM.replace("${menuItem}", displayName));
+		waitForAndGetElement(fmPoll.ELEMENT_POLL_TITLE.replace("${poll}", pollQuestion));
+		fmPoll.votePollSingleChoice(false,options[1]);
+		
+		/*
+		- Login with admin account
+		- Open page with Poll portlet
+		- Remove this poll
+		 *Input Data: 
+		 *Expected Outcome: Poll is deleted		*/
+		acc.signOut();
+		acc.signIn(DATA_USER1, DATA_PASS);
+		info("Remove Poll in Portlet");
+		click(ELEMENT_LEFT_NAVIGATION_ITEM.replace("${menuItem}", displayName));
+		click(fmPoll.ELEMENT_POLL_MORE_ACTION);
+		click(fmPoll.ELEMENT_POLL_DELETE_LINK);		
+		Utils.pause(500);
+		alert.acceptAlert();
+
+		//delete data
+		info("Delete page");
+		mPage.deletePageAtManagePageAndPortalNavigation(nodeName, true, "intranet", false, null,displayName);	
+	}
+	
+	/**
+	 * TC_ID: 105990
+	 */
+	@Test
+	public void test09_AddPollInCaseLimitViewRight(){
+		info("Test 09: Add Poll in case limit view Right");
+		String nodeName = getRandomString();
+		String num=getRandomNumber();
+		String displayName = "Node_"+num;
+		String title = "Collaboration";
+		Map<String, String> portletIds= new HashMap<String, String>();
+		portletIds.put("Collaboration/PollPortlet", "");
+		String pollQuestion = "Poll_"+num;
+		String options = "option1/option2";
+		String group ="Platform/Content Management";
+
+		/*
+		- Connect to Intranet
+		- Create a page by winzard
+		- Choose Poll porlet at step 3
+		 *Input Data: 
+		 *Expected Outcome: Page with Poll portlet is create successfully		*/
+		nav.goToPageCreationWizard();
+		Utils.pause(5000);
+		click(ELEMENT_UP_LEVEL);
+		info("Create page");
+		mPage.addNewPageEditor(nodeName, displayName,"",title, portletIds, false, true);
+		Utils.pause(5000);		
+
+		/*
+		- Open above page
+		- Click Edit > Layout
+		- Edit Poll portlet
+		- Click on Add Poll
+		- Fill all valid values
+		- Click Save > Finish 
+		 *Input Data: 
+		 *Expected Outcome: Poll is added and shown in Page		*/
+		mouseOver(ELEMENT_FRAME_CONTAIN_PORTLET,true);
+		click(ELEMENT_EDIT_PORTLET_ICON);
+		fmPoll.addPollAndSelectPoll(pollQuestion,options,false,group,"",false,false);
+		waitForAndGetElement(fmPoll.ELEMENT_POLL_TITLE.replace("${poll}", pollQuestion));
+		String[] pollOption = options.split("/");
+		/*
+		- Login with normal user
+		- Go to the portlet
+		 *Expected Outcome: 
+		- The poll portlet isn't shown and user cannot choose and vote	*/ 
+		acc.signOut();
+		acc.signIn(DATA_USER4, DATA_PASS);
+		click(ELEMENT_LEFT_NAVIGATION_ITEM.replace("${menuItem}", displayName));
+		waitForElementNotPresent(fmPoll.ELEMENT_POLL_TITLE.replace("${poll}", pollQuestion));
+		
+		/*
+		- Login with mary account of Content Management group
+		- Go to the portlet
+		 *Expected Outcome: The poll portlet is shown and user can choose and vote*/
+		acc.signOut();
+		acc.signIn(DATA_USER2, DATA_PASS);
+		click(ELEMENT_LEFT_NAVIGATION_ITEM.replace("${menuItem}", displayName));
+		waitForAndGetElement(fmPoll.ELEMENT_POLL_TITLE.replace("${poll}", pollQuestion));
+		fmPoll.votePollSingleChoice(false,pollOption[1]);
+		
+		/*
+		 - Login with admin account
+		 - delete poll portlet
+		 */
+		acc.signOut();
+		acc.signIn(DATA_USER1, DATA_PASS);
+		info("Remove Poll in Portlet");
+		click(ELEMENT_LEFT_NAVIGATION_ITEM.replace("${menuItem}", displayName));
+		click(fmPoll.ELEMENT_POLL_MORE_ACTION);
+		click(fmPoll.ELEMENT_POLL_DELETE_LINK);		
+		Utils.pause(500);
+		alert.acceptAlert();
+
+		//delete data
+		info("Delete page");
+		mPage.deletePageAtManagePageAndPortalNavigation(nodeName, true, "intranet", false, null,displayName);	
 	}
 }

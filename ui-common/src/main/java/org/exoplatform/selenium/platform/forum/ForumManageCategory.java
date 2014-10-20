@@ -38,10 +38,9 @@ public class ForumManageCategory extends ForumBase {
 
 	//------------category home screen----------------------------------------------------------------------
 	public final String ELEMENT_CATEGORY = "//*[@class='nameForum']//strong[text()='${categoryName}']";	
-	public final String ELEMENT_CATEGORY_LINK = "//a[@data-original-title='${category}']";	
+	public final String ELEMENT_CATEGORY_LINK = "//a[text()='${category}']";	
 	public final By ELEMENT_HOME_CATEGORY = By.xpath("//*[@class='Selected' and text()='Home']");
 	public final String ELEMENT_CATEGORY_DESCRIPTION_TEXT = ".//*[@id='UICategoryDescription']//span[@class='description' and contains(text(),'${desc}')]";
-
 	public final By ELEMENET_UICATEGORY = By.id("UICategories"); 
 	public final By ELEMENT_UIGRID = By.className("uiGrid");		
 	public final By ELEMENT_TEXT_TITLE_CATEGORY = By.className("actionOpenLink");

@@ -48,7 +48,7 @@ public class Forum_Forum_Category_Add extends ForumBase {
 		uGroup = new UserGroupManagement(driver, this.plfVersion);
 	}
 
-	@AfterMethod
+	@AfterTest
 	public void afterTest() {
 		driver.manage().deleteAllCookies();
 		driver.quit();
@@ -1061,5 +1061,126 @@ public class Forum_Forum_Category_Add extends ForumBase {
 		click(button.ELEMENT_ADD_BUTTON);
 		waitForMessage('"'+groupInvalid[0]+'"' +" "+ fmCat.MESSAGE_CATEGORY_MODERATOR_INVALID);
 		click(ELEMENT_OK_INFOR_POPUP);
+	}
+	
+	/**
+	 * Case ID:114035.
+	 * Test Case Name: Add Category With blank entry for Moderator field.
+	 * Steps:
+	 * 1. Login as Administrator user.
+	 * 2. Go to Forum Application.
+	 * 3. Click on [Add Category] button in main toolbar.
+	 * 4. Select [Permissions] tab.
+	 * 5. Don't input into User(s)/Role(s)/Group(s) for Moderator field.
+	 * Expected:
+	 * 5. The button [Add] is disable
+	 */
+	@Test
+	public  void test13_AddCategoryWithBlankEntryForModeratorfield() {
+		info("Test 13 Add Category With blank entry for Moderator field");
+		goToForums();
+		info("Create New Category");
+		fmCat.goToAddCategory(); 
+		click(frumPer.ELEMENT_PERMISSION_TAB);
+		
+		info("Verify that The button [Add] is disable");
+		assert waitForAndGetElement(button.ELEMENT_ADD_BUTTON_DISABLED).isDisplayed();
+		
+		click(button.ELEMENT_CATEGORY_CANCEL_BUTTON);
+	}
+	
+	/**
+	 * Case ID:114036.
+	 * Test Case Name: Add category with valid role entry for Moderator field.
+	 * Steps:
+	 * 1. Login as Administrator user.
+	 * 2. Go to Forum Application.
+	 * 3. Click on [Add Category] button in main toolbar.
+	 * 4. Select [Permissions] tab
+	 * 5. Input/select valid Role(s) to add for Moderator(s) field.
+	 * 6. Click [Add] button
+	 * ==>Role(s) is added and displayed in 'Moderators' field.
+	 * You can change value in 'Moderators' field by tick/untick the checkboxes.
+	 * 7. Input valid value for other required fields.
+	 * 8. Click [Save] button.
+	 * ==>New Category is added.
+	 * Selected Role(s) is displayed in Moderator field of added category.
+	 * Selected Role(s) in Moderator field will be moderator(s) of all forums of this category 
+
+	 */
+	@Test
+	public  void test14_AddCategoryWithValidRoleEntryForModeratorField() {
+		info("Test 14 Add category with Valid Role entry for Moderator field");
+		String catName = "Category 114036";
+		String order = "1";
+		String description = "Description of Category";
+		String[] userRole = {"manager:/platform/web-contributors"}; 
+		
+		goToForums();
+		info("Create New Category");
+		fmCat.goToAddCategory(); 
+		
+		info("Input name, order and description for new category");
+		fmCat.inputTitleOrderDescriptionCategory(catName, order, description);
+		
+		info("Set permission role for category");
+		frumPer.configPermission4ForumCategory(1, userRole, false, true, false, false);
+		frumPer.configPermission4ForumCategory(1, userRole, true, true, true,true);
+		button.save();
+		
+		info("Verify that the category is shown");
+		click(ELEMENT_HOME_BUTTON);
+		waitForAndGetElement(fmCat.ELEMENT_CATEGORY_LINK.replace("${category}",catName));
+		
+		info("Delete created category");
+		click(By.linkText(catName));
+		fmCat.deleteCategoryInForum(catName, true);		
+	}
+	
+	/**
+	 * Case ID:114037.
+	 * Test Case Name: Add category with valid group entry for Moderator field.
+	 * Steps:
+	 * 1. Login as Administrator user.
+	 * 2. Go to Forum Application.
+	 * 3. Click on [Add Category] button in main toolbar.
+	 * 4. Select [Permissions] tab
+	 * 5. Input/select valid Group(s) to add for Moderator(s) field.
+	 * 6. Click [Add] button
+	 * ==>Groups is added and displayed in 'Moderators' field.
+	 * You can change value in 'Moderators' field by tick/untick the checkboxes.
+	 * 7. Input valid value for other required fields.
+	 * 8. Click [Save] button.
+	 * ==>New Category is added.
+	 * Selected Group is displayed in Moderator field of added category.
+	 * Selected Group in Moderator field will be moderator(s) of all forums of this category 
+	 */
+	@Test
+	public  void test15_AddCategoryWithValidGroupEntryForModeratorField() {
+		info("Test 15 Add category with valid group entry for Moderator field");
+		String catName = "Category 114037";
+		String order = "1";
+		String description = "Description of Category";
+		String[] userGroup = {"/platform/web-contributors"}; 
+		
+		goToForums();
+		info("Create New Category");
+		fmCat.goToAddCategory(); 
+		
+		info("Input name, order and description for new category");
+		fmCat.inputTitleOrderDescriptionCategory(catName, order, description);
+		
+		info("Set permission role for category");
+		frumPer.configPermission4ForumCategory(1, userGroup, false, false, false, false);
+		frumPer.configPermission4ForumCategory(1, userGroup, true, true, true, true);
+		button.save();
+		
+		info("Verify that the category is shown");
+		click(ELEMENT_HOME_BUTTON);
+		waitForAndGetElement(fmCat.ELEMENT_CATEGORY_LINK.replace("${category}",catName));
+		
+		info("Delete created category");
+		click(By.linkText(catName));
+		fmCat.deleteCategoryInForum(catName, true);		
 	}
 }

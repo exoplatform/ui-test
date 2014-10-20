@@ -1,4 +1,4 @@
-package org.exoplatform.selenium.platform.forum.functional.forum.otheraction;
+package org.exoplatform.selenium.platform.forum.functional.forum.forum;
 
 import static org.exoplatform.selenium.TestLogger.info;
 import org.exoplatform.selenium.platform.ManageAccount;
@@ -19,7 +19,7 @@ import org.testng.annotations.Test;
  * @date 13 Jan 2014
  */
 
-public class Forum_Forum_OtherAction_Search extends ForumBase{
+public class Forum_Forum_Forum_Search extends ForumBase{
 	  ManageAccount magAc;
       NavigationToolbar naviToolbar;
 	  ForumManageCategory magCat;
@@ -60,7 +60,7 @@ public class Forum_Forum_OtherAction_Search extends ForumBase{
 	   */
 
 	  @Test  
-	  public void test01_SimpleSearchCategory_showinghiding(){
+	  public void test01_02_SimpleSearchCategory_showinghiding(){
 	    String catName1 = "Category 01 73221";
 	    String[] restricted1 = {DATA_USER4};
 	    String description1 = "Add new category Test01 73221";
@@ -150,7 +150,7 @@ public class Forum_Forum_OtherAction_Search extends ForumBase{
 	   * CaseId 73240: Do Simple Search with Forum when Scoped in case keyword matched with properties of hiding Forum
 	   */
 	  @Test  
-	  public void test02_SimpleSearchForum_showinghiding(){
+	  public void test03_04_SimpleSearchForum_showinghiding(){
 	    String catName1 = "Category 01 73235";
 	    String[] restricted1 = {DATA_USER4};
 	    String description1 = "Add new category Test01 73235";
@@ -267,7 +267,7 @@ public class Forum_Forum_OtherAction_Search extends ForumBase{
 	   * CaseId 73298: Category advanced search when Scoped in case keyword matched with properties of hiding category
 	   */
 	  @Test  
-	  public void test03_AdvancedSearchCategory_showinghiding(){
+	  public void test05_06_AdvancedSearchCategory_showinghiding(){
 	    String catName1 = "Category 01 73329";
 	    String[] restricted1 = {DATA_USER4};
 	    String description1 = "Add new category Test01 73329";
@@ -357,7 +357,7 @@ public class Forum_Forum_OtherAction_Search extends ForumBase{
 	   * CaseId 73299: Forum advanced search when Scoped in case keyword matched with properties of hiding forum
 	   */
 	  @Test  
-	  public void test04_AdvancedSearchForum_showinghiding(){
+	  public void test07_08_AdvancedSearchForum_showinghiding(){
 	    String catName1 = "Category 01 73334";
 	    String[] restricted1 = {DATA_USER4};
 	    String description1 = "Add new category Test01 73334";
@@ -481,7 +481,7 @@ public class Forum_Forum_OtherAction_Search extends ForumBase{
 	   * CaseId 73301: Do Advanced Search with content of attachment in post
 	   */
 	  @Test  
-	  public void test05_AdvancedSearchPost_Attachment(){
+	  public void test09_10_AdvancedSearchPost_Attachment(){
 	    String catName1 = "Category 01 73300";
 	    String[] restricted1 = {DATA_USER4};
 	    String description1 = "Add new category Test01 73300";
@@ -589,7 +589,7 @@ public class Forum_Forum_OtherAction_Search extends ForumBase{
 	   * CaseId 73250: Forum Advance Search by moderator when select moderator from list
 	   */
 	  @Test  
-	  public void test06_AdvancedSearchCategoryForum_Moderator(){
+	  public void test11_12_13_AdvancedSearchCategoryForum_Moderator(){
 	    String catName1 = "Category 01 72934";
 	    String[] restricted1 = {DATA_USER4};
 	    String description1 = "Add new category Test01 72934";
