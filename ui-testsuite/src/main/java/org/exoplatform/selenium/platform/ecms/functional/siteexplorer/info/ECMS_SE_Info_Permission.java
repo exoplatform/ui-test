@@ -4,6 +4,7 @@ import static org.exoplatform.selenium.TestLogger.info;
 
 import org.exoplatform.selenium.Button;
 import org.exoplatform.selenium.ManageAlert;
+import org.exoplatform.selenium.Utils;
 import org.exoplatform.selenium.platform.ManageAccount;
 import org.exoplatform.selenium.platform.NavigationToolbar;
 import org.exoplatform.selenium.platform.PlatformBase;
@@ -17,8 +18,9 @@ import org.exoplatform.selenium.platform.ecms.contentexplorer.ContentTemplate.fo
 import org.exoplatform.selenium.platform.ecms.contentexplorer.ContextMenu;
 import org.exoplatform.selenium.platform.ecms.contentexplorer.SitesExplorer;
 import org.openqa.selenium.By;
-import org.testng.annotations.AfterMethod;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 
@@ -26,7 +28,8 @@ import org.testng.annotations.Test;
  * 
  * @author PhuongDT
  * @date: 11/09/2013
- *
+ * @update QuynhPT
+ * @date   21/10/2014 
  */
 public class ECMS_SE_Info_Permission  extends PlatformBase {
 	//Platform
@@ -44,11 +47,41 @@ public class ECMS_SE_Info_Permission  extends PlatformBase {
 	EcmsPermission ePerm;
 	ManageAlert magAlert;
 	UserGroupManagement ugMan;
+	String folder;
+	String document;
+	String subdocument;
+	
+	/**
+	 * QuynhPT changed from BeforeMethod to BeforeTest
+	 * date : 21/10/2014
+	 */
+	@BeforeTest
+	public void beforeTest() {
+		initSeleniumTest();
+		setUpPages();
+		magAcc.signIn(DATA_USER1, DATA_PASS);
+		navToolBar.goToSiteExplorer();
+	}
+
+	/**
+	 * QuynhPT changed from AfterMethod to AfterTest
+	 * date: 21/10/2014
+	 */
+	@AfterTest
+	public void afterTest() {
+		info("Logout ECMS");
+		driver.manage().deleteAllCookies();
+		driver.quit();
+	}
 
 	@BeforeMethod
-	public void beforeMethods() {
-		initSeleniumTest();
-		driver.get(baseUrl);
+	public void beforeMethod(){
+		setUpNameVariables();
+	}
+	/**
+	 * Set up pages
+	 */
+	public void setUpPages(){
 		info("Login ECMS with " + DATA_USER1);
 		magAcc = new ManageAccount(driver);
 		actBar = new ActionBar(driver);
@@ -61,18 +94,15 @@ public class ECMS_SE_Info_Permission  extends PlatformBase {
 		mDrive = new ManageDrive(driver);
 		ePerm=new EcmsPermission(driver);
 		magAlert = new ManageAlert(driver);
-		magAcc.signIn(DATA_USER1, DATA_PASS);
 		ugMan = new UserGroupManagement(driver);
-		navToolBar.goToSiteExplorer();
 	}
-
-	@AfterMethod
-	public void afterMethods() {
-		info("Logout ECMS");
-		driver.manage().deleteAllCookies();
-		driver.quit();
+	
+	public void setUpNameVariables(){
+		String num_ran=getRandomNumber();
+		folder = "folder"+num_ran;
+		document = "document"+num_ran;
+		subdocument = "subdocument"+num_ran;
 	}
-
 	/**
 	 * == View Permission of folder ==
 	 * Test case ID: 66066
@@ -82,7 +112,6 @@ public class ECMS_SE_Info_Permission  extends PlatformBase {
 	@Test
 	public void test01_ViewPermissionOfFolder(){
 		/*Declare variable*/
-		String folder = "folder01";
 		By bFolder = By.linkText(folder);
 
 		/*Step 1: Select node to view permission of node*/
@@ -107,6 +136,8 @@ public class ECMS_SE_Info_Permission  extends PlatformBase {
 		waitForAndGetElement(actBar.ELEMENT_PERMISSION_MANAGEMENT_POPUP);
 		//Permission of node are listed
 		waitForAndGetElement(actBar.ELEMENT_PERMISSION_MANAGEMENT_GRID);
+		
+		info("The test is succcessfull");
 		btn.close();
 
 		/*Clear data*/
@@ -126,7 +157,6 @@ public class ECMS_SE_Info_Permission  extends PlatformBase {
 	@Test
 	public void test02_ViewPermissionOfLockedNodeByLocker(){
 		/*Declare variable*/
-		String folder = "folder66067";
 		By bFolder = By.xpath(cMenu.ELEMENT_FILE_TITLE.replace("${titleOfFile}", folder));
 		By bFolderLocked = By.linkText(folder);
 
@@ -159,6 +189,7 @@ public class ECMS_SE_Info_Permission  extends PlatformBase {
 		waitForAndGetElement(actBar.ELEMENT_PERMISSION_MANAGEMENT_POPUP);
 		//Permission of node are listed
 		waitForAndGetElement(actBar.ELEMENT_PERMISSION_MANAGEMENT_GRID);
+		info("The test is succcessfull");
 		btn.close();
 
 		/*Clear data*/
@@ -178,7 +209,6 @@ public class ECMS_SE_Info_Permission  extends PlatformBase {
 	@Test
 	public void test03_ViewPermissionOfLockedNodeByUserIsNotLocker(){
 		/*Declare variable*/
-		String folder = "folder03";
 		By bFolder = By.xpath(cMenu.ELEMENT_FILE_TITLE.replace("${titleOfFile}", folder));
 		By bFolderLocked = By.linkText(folder);
 
@@ -220,6 +250,7 @@ public class ECMS_SE_Info_Permission  extends PlatformBase {
 		waitForAndGetElement(actBar.ELEMENT_PERMISSION_MANAGEMENT_POPUP);
 		//Permission of node are listed
 		waitForAndGetElement(actBar.ELEMENT_PERMISSION_MANAGEMENT_GRID);
+		info("The test is succcessfull");
 		btn.close();
 
 		/*Clear data*/
@@ -238,12 +269,12 @@ public class ECMS_SE_Info_Permission  extends PlatformBase {
 	@Test
 	public void test04_ViewPermissionOfNodeIsDocument(){
 		/*Declare variable*/
-		String document = "document04";
 		By bDocument = By.linkText(document);
 
 		/*Step 1: Select node to view permission of node*/
 		//Create a document [Detail]
 		mDrive.addView2Drive("Admin", "Managed Sites");
+		navToolBar.goToSiteExplorer();
 		actBar.goToViewMode("Admin");
 		actBar.addItem2ActionBar("addDocument", actBar.ELEMENT_NEW_CONTENT_LINK, "Admin", "Admin");
 		//Add permission button to action bar if it is not on action bar
@@ -258,6 +289,7 @@ public class ECMS_SE_Info_Permission  extends PlatformBase {
 		waitForAndGetElement(actBar.ELEMENT_PERMISSION_MANAGEMENT_POPUP);
 		//Permission of node are listed
 		waitForAndGetElement(actBar.ELEMENT_PERMISSION_MANAGEMENT_GRID);
+		info("The test is succcessfull");
 		btn.close();
 
 		/*Clear data*/
@@ -284,9 +316,8 @@ public class ECMS_SE_Info_Permission  extends PlatformBase {
 		//Check if upload button is shown on action bar
 		actBar.addItem2ActionBar("upload", actBar.ELEMENT_UPLOAD_FILE_LINK);
 		//Add permission button to action bar if it is not on action bar
-		actBar.addItem2ActionBar("viewPermissions", actBar.ELEMENT_PERMISSION_LINK);		
+		actBar.addItem2ActionBar("viewPermissions", actBar.ELEMENT_PERMISSION_LINK);
 		ecms.uploadFile("TestData/"+file);
-
 		/*Step 2: Open 'Permission Management' pop-up*/		
 		actBar.goToNode(bFile);
 		//Click on 'View Permissions' icon 
@@ -295,6 +326,7 @@ public class ECMS_SE_Info_Permission  extends PlatformBase {
 		waitForAndGetElement(actBar.ELEMENT_PERMISSION_MANAGEMENT_POPUP);
 		//Permission of node are listed
 		waitForAndGetElement(actBar.ELEMENT_PERMISSION_MANAGEMENT_GRID);
+		info("The test is succcessfull");
 		btn.close();
 
 		/*Clear data*/
@@ -315,7 +347,6 @@ public class ECMS_SE_Info_Permission  extends PlatformBase {
 	@Test
 	public void test06_EditPermissionOfNode(){
 		/*Declare variable*/
-		String folder = "folder06";
 		By bFolder = By.linkText(folder);
 		String user = "*:/platform/web-contributors";
 
@@ -336,6 +367,7 @@ public class ECMS_SE_Info_Permission  extends PlatformBase {
 
 		//Click on 'View Permissions' icon 
 		actBar.goToNodeByAddressPath("/"+folder);
+		//actBar.goToNode(folder);
 		actBar.goToNodePermissionManagement();
 		//'Permission Management' popup appears
 		waitForAndGetElement(actBar.ELEMENT_PERMISSION_MANAGEMENT_POPUP);
@@ -356,6 +388,7 @@ public class ECMS_SE_Info_Permission  extends PlatformBase {
 		//Check if mary has edit, read on node1
 		rightClickOnElement(bFolder);
 		waitForElementNotPresent(cMenu.ELEMENT_MENU_DELETE);
+		info("The test is succcessfull");
 
 		/*Clear data*/
 		magAcc.signOut();
@@ -377,7 +410,6 @@ public class ECMS_SE_Info_Permission  extends PlatformBase {
 	@Test
 	public void test07_EditPermissionOfOwner(){
 		/*Declare variable*/
-		String folder = "folder07";
 		By bFolder = By.linkText(folder);
 
 		/*Step 1: Select node to view permission of node*/
@@ -409,7 +441,7 @@ public class ECMS_SE_Info_Permission  extends PlatformBase {
 		assert (!waitForAndGetElement(ePerm.ELEMENT_READ_CHECK.replace("{$user}",DATA_USER1),DEFAULT_TIMEOUT,1,2).isEnabled());
 		assert (!waitForAndGetElement(ePerm.ELEMENT_MODIFY_CHECK.replace("{$user}",DATA_USER1),DEFAULT_TIMEOUT,1,2).isEnabled());
 		assert (!waitForAndGetElement(ePerm.ELEMENT_REMOVE_CHECK.replace("{$user}",DATA_USER1),DEFAULT_TIMEOUT,1,2).isEnabled());
-
+		info("The test is succcessfull");
 		btn.close();
 
 		/*Clear data*/
@@ -429,7 +461,6 @@ public class ECMS_SE_Info_Permission  extends PlatformBase {
 	@Test
 	public void test08_DeletePermissionOfNode(){
 		/*Declare variable*/
-		String folder = "folder08";
 		By bFolder = By.linkText(folder);
 		String user = "*:/platform/web-contributors";
 
@@ -460,6 +491,7 @@ public class ECMS_SE_Info_Permission  extends PlatformBase {
 		//Click 'Delete' icon to delete permission of user 
 		//Permission of node is deleted
 		ePerm.deletePermission(user, true);
+		info("The test is succcessfull");
 		btn.close();
 
 		/*Clear data*/
@@ -480,7 +512,6 @@ public class ECMS_SE_Info_Permission  extends PlatformBase {
 	@Test
 	public void test09_DeletePermissionOfOwner(){
 		/*Declare variable*/
-		String folder = "folder09";
 		By bFolder = By.linkText(folder);
 
 		/*Step 1: Select node to view permission of node*/
@@ -509,7 +540,7 @@ public class ECMS_SE_Info_Permission  extends PlatformBase {
 		/*Step 3: Delete permission of user 'root' */
 		//Can't see delete icon of owner
 		waitForElementNotPresent(ePerm.ELEMENT_DELETE_USER_PERMISSION_1.replace("${userOrGroupName}", DATA_USER1));
-
+		info("The test is succcessfull");
 		/*Clear data*/
 		mDrive.removeViewFromDrive("Admin", "Managed Sites");
 		navToolBar.goToSiteExplorer();
@@ -527,7 +558,6 @@ public class ECMS_SE_Info_Permission  extends PlatformBase {
 	@Test
 	public void test10_AddEditDeletePermissionOfLockedNodeByLocker(){
 		/*Declare variable*/
-		String folder = "folder10";
 		By bFolder = By.xpath(cMenu.ELEMENT_FILE_TITLE.replace("${titleOfFile}", folder));
 		By bFolderLocked = By.linkText(folder);
 		String user1 = "*:/platform/web-contributors";
@@ -598,6 +628,7 @@ public class ECMS_SE_Info_Permission  extends PlatformBase {
 		//Check if mary has edit, read on node1
 		rightClickOnElement(bFolder);
 		waitForElementNotPresent(cMenu.ELEMENT_MENU_DELETE);
+		info("The test is succcessfull");
 
 		/*Clear data*/
 		magAcc.signOut();
@@ -619,7 +650,6 @@ public class ECMS_SE_Info_Permission  extends PlatformBase {
 	@Test
 	public void test11_AddEditDeletePermissionOfLockedNodeByUserIsNotLocker(){	
 		/*Declare variable*/
-		String folder = "folder11";
 		By bFolder = By.xpath(cMenu.ELEMENT_FILE_TITLE.replace("${titleOfFile}", folder));
 		By bFolderLocked = By.linkText(folder);
 		String user = "any";
@@ -638,13 +668,28 @@ public class ECMS_SE_Info_Permission  extends PlatformBase {
 
 		/*Step 3: Open 'Permission Management' pop-up*/
 		//Login by user is not locker
-		loginWithAnotherAccOnThesameBrowser(DATA_USER2, DATA_PASS);
-		magAcc = new ManageAccount(newDriver);
-		actBar= new ActionBar(newDriver);
-		navToolBar = new NavigationToolbar(newDriver);
-		ePerm = new EcmsPermission(newDriver);
-		btn = new Button(newDriver);
-		cMenu = new ContextMenu(newDriver);
+		
+		/**
+		 * QuynhPT commented this line
+		 * date 21/10/2014
+		 */
+		//loginWithAnotherAccOnThesameBrowser(DATA_USER2, DATA_PASS);
+		
+		/**
+		 * QuynhPT commented these lines
+		 * date 21/10/2014
+		 */
+		//magAcc = new ManageAccount(newDriver);
+		//actBar= new ActionBar(newDriver);
+		//navToolBar = new NavigationToolbar(newDriver);
+		//ePerm = new EcmsPermission(newDriver);
+		//btn = new Button(newDriver);
+		//cMenu = new ContextMenu(newDriver);
+		
+		initSeleniumTest();
+		setUpPages();
+		magAcc.signIn(DATA_USER2, DATA_PASS);
+		Utils.pause(2000);
 		navToolBar.goToSiteExplorer();
 
 		//Click on 'View Permissions' icon 
@@ -652,8 +697,9 @@ public class ECMS_SE_Info_Permission  extends PlatformBase {
 		actBar.goToNodePermissionManagement();
 
 		//User can not add/delete or edit permission of this node
-		waitForElementNotPresent(By.className("permission"),DEFAULT_TIMEOUT,1);
+		waitForAndGetElement(ePerm.ELEMENT_TITLE_PERMISSION_POPUP,DEFAULT_TIMEOUT,1);
 		waitForElementNotPresent(ePerm.ELEMENT_DELETE_USER_PERMISSION_1.replace("${userOrGroupName}", user), DEFAULT_TIMEOUT,1);
+		info("The test is succcessfull");
 		btn.close();
 		magAcc.signOut();
 
@@ -674,13 +720,16 @@ public class ECMS_SE_Info_Permission  extends PlatformBase {
 	@Test
 	public void test12_AddEditDeletePermissionOfNodeWhenNodeIsInCheckInStatus(){
 		/*Declare variable*/
-		String document = "document12";
 		By bDocument = By.xpath(cMenu.ELEMENT_FILE_TITLE.replace("${titleOfFile}", document));
 		String user = "*:/platform/web-contributors";
 
 		/*Step 1: Select node to view permission of node*/
 		//Create node (folder, document) or upload file
 		mDrive.addView2Drive("Admin", "Managed Sites");
+		
+		/**QuynhPT added more this line*/
+		navToolBar.goToSiteExplorer();
+		
 		actBar.goToViewMode("Admin");
 		actBar.addItem2ActionBar("addDocument", actBar.ELEMENT_NEW_CONTENT_LINK, "Admin", "Admin");
 		//Add permission button to action bar if it is not on action bar
@@ -716,7 +765,7 @@ public class ECMS_SE_Info_Permission  extends PlatformBase {
 		btn.save();
 		waitForAndGetElement(ePerm.ELEMENT_WARNING_DIALOG_PERMISSION);
 		magAlert.click(By.xpath("//*[text()='OK']"));
-
+		info("The test is succcessfull");
 		//close permission form
 		btn.close();
 
@@ -738,13 +787,12 @@ public class ECMS_SE_Info_Permission  extends PlatformBase {
 	@Test
 	public void test13_AddEditDeletePermissionOfNodeWhenParentNodeIsInCheckInStatus(){
 		/*Declare variable*/
-		String document = "document13";
-		String subdocument = "subdocument13";
 		By bDocument = By.xpath(cMenu.ELEMENT_FILE_TITLE.replace("${titleOfFile}", document));
 		By bSubDocument = By.xpath(cMenu.ELEMENT_FILE_TITLE.replace("${titleOfFile}", subdocument));
 		String user = "*:/platform/web-contributors";
 
 		mDrive.addView2Drive("Admin", "Managed Sites");
+		navToolBar.goToSiteExplorer();
 		actBar.goToViewMode("Admin");
 		
 		/*Step 1: Select node to view permission of node*/
@@ -777,7 +825,7 @@ public class ECMS_SE_Info_Permission  extends PlatformBase {
 
 		//Delete permission
 		ePerm.deletePermission(DATA_USER2, true);
-
+		info("The test is succcessfull");
 		//close permission form
 		btn.close();
 
@@ -790,15 +838,14 @@ public class ECMS_SE_Info_Permission  extends PlatformBase {
 	}
 
 	/**
-	 * == Add/Edit/Delete permission of node when user does not have 'set property' right ==
+	 * == Add/Edit/Delete permission of node when user does not have 'Modify' right ==
 	 * Test case ID: 67280
 	 * Step 1: Select node to view permission of node
 	 * Step 2: Open 'Permission Management' pop-up
 	 */
 	@Test
-	public void test14_AddEditDeletePermissionOfLockedNodeByUserIsNotLocker(){	
+	public void test14_AddEditDeletePermissionOfNoteWhenUserNotHaveModifyRight(){	
 		/*Declare variable*/
-		String folder = "folder14";
 		By bFolder = By.linkText(folder);
 		String defaultuser1 = "*:/platform/web-contributors";
 		String defaultuser2 = "*:/platform/administrators";
@@ -855,6 +902,7 @@ public class ECMS_SE_Info_Permission  extends PlatformBase {
 		//User can not add/delete or edit permission of this node
 		waitForElementNotPresent(By.className("permission"),DEFAULT_TIMEOUT,1);
 		waitForElementNotPresent(ePerm.ELEMENT_DELETE_USER_PERMISSION_1.replace("${userOrGroupName}", user), DEFAULT_TIMEOUT,1);
+		info("The test is succcessfull");
 		btn.close();
 
 		/*Clear data*/
@@ -878,7 +926,6 @@ public class ECMS_SE_Info_Permission  extends PlatformBase {
 	@Test
 	public void test15_AddPermissionForAnyUserToNode(){	
 		/*Declare variable*/
-		String folder = "folder15";
 		By bFolder = By.linkText(folder);
 
 		/*Step 1: Select node to view permission of node*/
@@ -914,6 +961,7 @@ public class ECMS_SE_Info_Permission  extends PlatformBase {
 		assert waitForAndGetElement(ePerm.ELEMENT_REMOVE_CHECK.replace("{$user}","any"),DEFAULT_TIMEOUT,1,2).isSelected();
 		assert waitForAndGetElement(ePerm.ELEMENT_MODIFY_CHECK.replace("{$user}","any"),DEFAULT_TIMEOUT,1,2).isSelected();
 		assert waitForAndGetElement(ePerm.ELEMENT_READ_CHECK.replace("{$user}","any"),DEFAULT_TIMEOUT,1,2).isSelected();
+		info("The test is succcessfull");
 		btn.close();
 
 		/*Clear data*/
@@ -935,7 +983,6 @@ public class ECMS_SE_Info_Permission  extends PlatformBase {
 	@Test
 	public void test16_AddPermissionForGroupToNode1(){	
 		/*Declare variable*/
-		String folder = "folder16";
 		By bFolder = By.linkText(folder);
 		String groupPath = "Platform";
 		String membership = "author";
@@ -976,6 +1023,7 @@ public class ECMS_SE_Info_Permission  extends PlatformBase {
 		assert waitForAndGetElement(ePerm.ELEMENT_REMOVE_CHECK.replace("{$user}",membership.toLowerCase()+":/"+groupPath.toLowerCase()),DEFAULT_TIMEOUT,1,2).isSelected();
 		assert waitForAndGetElement(ePerm.ELEMENT_MODIFY_CHECK.replace("{$user}",membership.toLowerCase()+":/"+groupPath.toLowerCase()),DEFAULT_TIMEOUT,1,2).isSelected();
 		assert waitForAndGetElement(ePerm.ELEMENT_READ_CHECK.replace("{$user}",membership.toLowerCase()+":/"+groupPath.toLowerCase()),DEFAULT_TIMEOUT,1,2).isSelected();
+		info("The test is succcessfull");
 		btn.close();
 
 		/*Clear data*/
@@ -997,7 +1045,6 @@ public class ECMS_SE_Info_Permission  extends PlatformBase {
 	@Test
 	public void test17_AddPermissionForGroupToNode2(){	
 		/*Declare variable*/
-		String folder = "folder17";
 		By bFolder = By.linkText(folder);
 		String groupPath = "Platform";
 		String membership = "*";
@@ -1038,6 +1085,7 @@ public class ECMS_SE_Info_Permission  extends PlatformBase {
 		assert waitForAndGetElement(ePerm.ELEMENT_REMOVE_CHECK.replace("{$user}",membership.toLowerCase()+":/"+groupPath.toLowerCase()),DEFAULT_TIMEOUT,1,2).isSelected();
 		assert waitForAndGetElement(ePerm.ELEMENT_MODIFY_CHECK.replace("{$user}",membership.toLowerCase()+":/"+groupPath.toLowerCase()),DEFAULT_TIMEOUT,1,2).isSelected();
 		assert waitForAndGetElement(ePerm.ELEMENT_READ_CHECK.replace("{$user}",membership.toLowerCase()+":/"+groupPath.toLowerCase()),DEFAULT_TIMEOUT,1,2).isSelected();
+		info("The test is succcessfull");
 		btn.close();
 
 		/*Clear data*/
@@ -1059,7 +1107,6 @@ public class ECMS_SE_Info_Permission  extends PlatformBase {
 	@Test
 	public void test18_AddPermissionForUserToNode(){	
 		/*Declare variable*/
-		String folder = "folder18";
 		By bFolder = By.linkText(folder);
 
 		/*Step 1: Select node to view permission of node*/
@@ -1098,6 +1145,7 @@ public class ECMS_SE_Info_Permission  extends PlatformBase {
 		assert waitForAndGetElement(ePerm.ELEMENT_REMOVE_CHECK.replace("{$user}",DATA_USER2),DEFAULT_TIMEOUT,1,2).isSelected();
 		assert waitForAndGetElement(ePerm.ELEMENT_MODIFY_CHECK.replace("{$user}",DATA_USER2),DEFAULT_TIMEOUT,1,2).isSelected();
 		assert waitForAndGetElement(ePerm.ELEMENT_READ_CHECK.replace("{$user}",DATA_USER2),DEFAULT_TIMEOUT,1,2).isSelected();
+		info("The test is succcessfull");
 		btn.close();
 
 		/*Clear data*/

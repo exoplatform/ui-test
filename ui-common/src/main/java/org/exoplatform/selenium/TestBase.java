@@ -40,7 +40,7 @@ public class TestBase {
 
 	public WebDriver driver;
 	public WebDriver newDriver;
-	protected String baseUrl;
+	public static String baseUrl;
 	protected int DEFAULT_TIMEOUT = 30000; //milliseconds = 30 seconds
 	protected int WAIT_INTERVAL = 1000; //milliseconds  
 	public int loopCount = 0;	
@@ -111,6 +111,7 @@ public class TestBase {
 		}
 		baseUrl = System.getProperty("baseUrl");
 		if (baseUrl==null) baseUrl = DEFAULT_BASEURL;
+		info("Base url is " + baseUrl);
 		action = new Actions(driver);
 	}
 

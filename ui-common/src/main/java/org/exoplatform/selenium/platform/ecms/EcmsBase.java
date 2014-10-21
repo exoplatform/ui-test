@@ -9,7 +9,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-
 import static org.exoplatform.selenium.TestLogger.info;
 
 /**
@@ -568,24 +567,15 @@ public class EcmsBase extends ManageAccount {
 
 	//upload file
 	public void uploadFile(String link, Object...params){
-		//waitForElementPresent(ELEMENT_UPLOAD_LINK_XPATH);
-		//click(ELEMENT_UPLOAD_LINK_XPATH);
-		//waitForElementPresent(ELEMENT_UPLOAD_FILE_NAME_ID);
-		//type(ELEMENT_UPLOAD_FILE_NAME_ID, fileName, false);
-		//driver.switchTo().frame(waitForAndGetElement(ELEMENT_UPLOAD_IMG_FRAME_XPATH));
-		//type(ELEMENT_UPLOAD_IMG_ID, Utils.getAbsoluteFilePath(link), false);
 		Boolean verify = (Boolean) (params.length > 0 ? params[0] : true);
 		if (waitForAndGetElement(By.xpath("//a[@class='actionIcon' and contains(text(),'Upload')]"),DEFAULT_TIMEOUT,0)==null){
 			click(ELEMENT_MORE_LINK_WITHOUT_BLOCK);
 		}
-		//click(By.xpath("//a[@class='actionIcon' and contains(text(),'Upload')]"));
-		
 		((JavascriptExecutor)driver).executeScript("arguments[0].style.visibility = 'block'; arguments[0].style.height = '1px'; " +
 				"arguments[0].style.width = '1px'; arguments[0].style.opacity = 1", waitForAndGetElement(ELEMENT_UPLOAD_LINK, DEFAULT_TIMEOUT, 1, 2));
 		
 		Utils.pause(10000);
 		type(ELEMENT_UPLOAD_LINK, Utils.getAbsoluteFilePath(link), false,2);
-		//Utils.pause(2000);
 		info("Upload file " + Utils.getAbsoluteFilePath(link));
 		switchToParentWindow();
 		if (verify){
@@ -594,10 +584,9 @@ public class EcmsBase extends ManageAccount {
 			Utils.pause(2000);
 			waitForAndGetElement(By.xpath("//*[contains(text(),'" + links[length-1]+ "')]"));
 		}
+		
 		info("Upload file successfully");
 		Utils.pause(2000);
-//		driver.navigate().refresh();
-//		Utils.pause(2000);
 	}
 
 	//Edit an uploaded file

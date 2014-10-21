@@ -590,8 +590,6 @@ public class ActionBar extends EcmsBase{
 		}else {
 			magView.setup2ShowViewAction(item, view, tab);
 			magAcc.signOut();
-			if (baseUrl==null) baseUrl = DEFAULT_BASEURL;
-			driver.get(baseUrl);
 			magAcc.signIn(DATA_USER1, DATA_PASS);
 			navToolBar.goToSiteExplorer();
 		}

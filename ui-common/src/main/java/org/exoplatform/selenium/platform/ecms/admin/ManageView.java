@@ -307,6 +307,7 @@ public class ManageView extends EcmsBase{
 
 		ecMain.goToManageViews();
 		click(ELEMENT_EDIT_VIEW.replace("${viewName}", view));
+		info("Update view " + view);
 		click(ELEMENT_ACTION_TAB);
 		click(ELEMENT_EDIT_ACTION_ICON.replace("${tabName}", tab));
 		selectCheckBoxList(viewAction);
