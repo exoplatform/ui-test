@@ -138,7 +138,7 @@ public class PlatformBase extends TestBase {
 	public final By ELEMENT_MENU_CONTENT_LINK = By.xpath("//li[@class='dropdown-submenu']/a[text()='Content']");
 	public final By ELEMENT_MENU_SITE_EXPLORER = By.linkText("Sites Explorer");
 	public final By ELEMENT_SITE_EXPLORER_HOME = By.className("uiIconEcmsHome");
-	public final By ELEMENT_NEW_FOLDER_LINK = By.xpath("//*[@class='actionIcon']//*[@class='uiIconEcmsAddFolder']");
+	public final By ELEMENT_NEW_FOLDER_LINK = By.xpath("//*[@class='actionIcon']//*[contains(@class, 'uiIconEcmsAddFolder')]");
 
 	//By.linkText("Sites Explorer");
 	public final By ELEMENT_LINK_CONTENT_ADMIN = By.xpath("//*[text()='Content Administration']");

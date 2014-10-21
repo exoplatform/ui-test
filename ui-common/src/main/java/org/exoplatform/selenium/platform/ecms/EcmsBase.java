@@ -261,7 +261,7 @@ public class EcmsBase extends ManageAccount {
 	public final By ELEMENT_ICONS_VIEW = By.xpath("//*[@data-original-title = 'Icons']");
 
 	//Overload thumbnail
-	public final By ELEMENT_OVERLOAD_THUMBNAIL = By.xpath("//*[@class = 'actionIcon']//*[@class = 'uiIconEcmsOverloadThumbnail']");
+	public final By ELEMENT_OVERLOAD_THUMBNAIL = By.xpath("//*[@class = 'actionIcon']//*[contains(@class,'uiIconEcmsOverloadThumbnail')]");
 	public final By ELEMENT_CHOOSE_THUMBNAIL_IMAGE = By.xpath("//*[text() = 'Choose Thumbnail Image']");
 	public final By ELEMENT_REMOVE_THUMBNAIL = By.xpath("//*[text() = 'Remove Thumbnail']");
 	public final String ELEMENT_VERIFY_THUMBNAIL = "//*[text()='${name}']//../../../*[@class='nodeLabel']/*[@class='thumbnailImage']";
@@ -542,7 +542,6 @@ public class EcmsBase extends ManageAccount {
 			click(ELEMENT_MORE_LINK_WITHOUT_BLOCK);
 		}
 		click(ELEMENT_OVERLOAD_THUMBNAIL);
-		
 		Utils.pause(1000);
 		//click(ELEMENT_CHOOSE_THUMBNAIL_IMAGE);
 		//driver.switchTo().frame(waitForAndGetElement(ELEMENT_UPLOAD_IMG_FRAME_XPATH));

@@ -67,10 +67,20 @@
 			</run>
 		</groups>
 		<classes>
- 			<class name="org.exoplatform.selenium.platform.ecms.functional.siteexplorer.otherchecks.ECMS_SE_OtherChecks" />
+ 			<class name="org.exoplatform.selenium.platform.ecms.functional.siteExplorer.ECMS_SiteExplorer_OtherChecks" />
  		</classes>
 	</test> 
 	
+	<test name="ecms-func-se-collaboration" enabled="true">
+		<groups>
+			<run>
+				<exclude name="pending" />
+			</run>
+		</groups>
+		<classes>
+ 			<class name="org.exoplatform.selenium.platform.ecms.functional.siteExplorer.ECMS_SiteExplorer_Collaboration" />
+ 		</classes>
+	</test>
 	<listeners>
 		<listener class-name="org.exoplatform.selenium.TestReportListener" />
 	</listeners>

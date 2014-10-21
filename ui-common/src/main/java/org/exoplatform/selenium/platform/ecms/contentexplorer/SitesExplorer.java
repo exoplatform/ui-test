@@ -75,6 +75,11 @@ public class SitesExplorer extends EcmsBase{
 	//Check status of documents
 	public final String ELEMENT_STATUS_DOCUMENT = "//*[@data-original-title='${title}']/../..//*[@data-original-title='status']";
 
+	//Other
+	public final String ELEMENT_BUTTON_WATCH_UNWATCH = "//*[@class='actionIcon' and contains(text(), ' Watch/Unwatch')]";
+	public final String ELEMENT_BUTTON_WATCH_EMAIL = "//*[text()='Email']";
+	public final String ELEMENT_BUTTON_WATCH_WATCH = "//*[@class='btn' and text()='Watch']";
+	
 	/*================***==================*/
 
 	//Verify if Driver is present

@@ -30,7 +30,7 @@ public class ActionBar extends EcmsBase{
 
 	public ActionBar(WebDriver dr, String...plfVersion) {
 		super(dr);
-		this.plfVersion = plfVersion.length>0?plfVersion[0]:"4.0";
+		this.plfVersion = plfVersion.length>0?plfVersion[0]:"4.1";
 		// TODO Auto-generated constructor stub
 	}
 
