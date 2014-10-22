@@ -42,13 +42,13 @@ public class ECMS_SE_PublishActivities_ContentActivities_Delete extends Platform
 	public void beforeMethod(){
 		initSeleniumTest();
 		driver.get(baseUrl);
-		magAcc = new ManageAccount(driver);
-		navToolBar = new NavigationToolbar(driver);
-		actBar = new ActionBar(driver);
-		sActivity = new HomePageActivity(driver);
-		cMenu = new ContextMenu(driver);
-		cTemplate = new ContentTemplate(driver);
-		SE = new SitesExplorer(driver);
+		magAcc = new ManageAccount(driver, this.plfVersion);
+		navToolBar = new NavigationToolbar(driver, this.plfVersion);
+		actBar = new ActionBar(driver,this.plfVersion);
+		cMenu = new ContextMenu(driver, this.plfVersion);
+		cTemplate = new ContentTemplate(driver, this.plfVersion);
+		sActivity = new HomePageActivity(driver, this.plfVersion);
+		SE = new SitesExplorer(driver, this.plfVersion);
 		magAcc.signIn(DATA_USER1, DATA_PASS);
 
 	}
@@ -62,18 +62,18 @@ public class ECMS_SE_PublishActivities_ContentActivities_Delete extends Platform
 
 
 	/**
-	 * Qmetry ID: 76986
-	 * Check content activity after deleting a content
+	 * Qmetry ID: 81225
+	 * Remove Content activity after delete a content
 	 * 
 	 */
 	@Test
-	public void test01_CheckContentActivityAfterDeleteContent(){
+	public void test01_RemoveContentActivityAfterDeleteAContent(){
 		String FILE_TITLE_01 = "ECMS_SE_Content_01";
 		By bNode = By.xpath(SE.ELEMENT_SE_NODE.replace("{$node}", FILE_TITLE_01));
-
+		
 		info("Go to Content Explorer");
 		navToolBar.goToSiteExplorer();
-
+		
 		info("Create a node in root path");
 		actBar.goToAddNewContent();
 		cTemplate.createNewWebContent(FILE_TITLE_01, FILE_TITLE_01, "", "", "", "");
@@ -89,12 +89,12 @@ public class ECMS_SE_PublishActivities_ContentActivities_Delete extends Platform
 	}
 
 	/**
-	 * Qmetry ID: 76989
-	 * Delete a content activity
+	 * Qmetry ID: 81228
+	 * Delete a Content activity from activity stream by its user
 	 * 
 	 */
 	@Test
-	public void test02_DeleteContentActivity(){
+	public void test02_DeleteaContentActivityFromActivityStreamByItsUser(){
 		String FILE_TITLE_02 = "ECMS_SE_Content_02";
 		By bNode = By.xpath(SE.ELEMENT_SE_NODE.replace("{$node}", FILE_TITLE_02));
 
@@ -104,13 +104,13 @@ public class ECMS_SE_PublishActivities_ContentActivities_Delete extends Platform
 		info("Create a node in root path");
 		actBar.goToAddNewContent();
 		cTemplate.createNewWebContent(FILE_TITLE_02, FILE_TITLE_02, "", "", "", "");
-
+		
 		info("Go to Intranet Homepage");
 		navToolBar.goToHomePage();
 
 		info("Delete a node activity");
 		sActivity.deleteActivity(FILE_TITLE_02);
-
+		
 		info("Check if a node activity is displayed or not");
 		waitForElementNotPresent(By.linkText(FILE_TITLE_02));
 

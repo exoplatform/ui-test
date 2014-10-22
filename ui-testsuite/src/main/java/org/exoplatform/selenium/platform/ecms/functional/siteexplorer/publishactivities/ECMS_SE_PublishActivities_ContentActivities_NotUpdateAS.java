@@ -46,14 +46,14 @@ public class ECMS_SE_PublishActivities_ContentActivities_NotUpdateAS extends Pla
 	public void beforeMethod(){
 		initSeleniumTest();
 		driver.get(baseUrl);
-		magAcc = new ManageAccount(driver);
-		navToolBar = new NavigationToolbar(driver);
-		actBar = new ActionBar(driver);
-		cMenu = new ContextMenu(driver);
-		cTemplate = new ContentTemplate(driver);
-		sActivity = new HomePageActivity(driver);
-		SE = new SitesExplorer(driver);
-		ecms = new EcmsBase(driver);
+		magAcc = new ManageAccount(driver, this.plfVersion);
+		navToolBar = new NavigationToolbar(driver, this.plfVersion);
+		actBar = new ActionBar(driver,this.plfVersion);
+		cMenu = new ContextMenu(driver, this.plfVersion);
+		cTemplate = new ContentTemplate(driver, this.plfVersion);
+		sActivity = new HomePageActivity(driver, this.plfVersion);
+		SE = new SitesExplorer(driver, this.plfVersion);
+		ecms = new EcmsBase(driver, this.plfVersion);
 		ePermission = new EcmsPermission(driver);
 		magAcc.signIn(DATA_USER1, DATA_PASS);
 	}
@@ -66,12 +66,14 @@ public class ECMS_SE_PublishActivities_ContentActivities_NotUpdateAS extends Pla
 	}
 
 	/**
-	 * Qmetry ID: 76976
-	 * Not update a content activity after updating a content permission
-	 * 
+	 * Qmetry ID: 81215
+	 * Not Update Content activity after edit permission of a content
+	 * Step 1: Add new content
+	 * Step 2: Edit permission of the content
+	 * Step 3: Check content activity after change permission 
 	 */
 	@Test
-	public void test01_NotUpdateASafterUpdateContentPermission(){
+	public void test01_NotUpdateContentActivityAfterEditPermissionOfaContent(){
 		String FILE_TITLE_01 = "ECMS_SE_Content_AS_01";
 		By bNode = By.xpath(SE.ELEMENT_SE_NODE.replace("{$node}", FILE_TITLE_01));
 
@@ -106,25 +108,27 @@ public class ECMS_SE_PublishActivities_ContentActivities_NotUpdateAS extends Pla
 
 		info("Go to Intranet Homepage");
 		navToolBar.goToHomePage();
-
+		// Step 3 : Check content activity after change permission 
 		info("Check if content activity on AS is updated or not");
 		WebElement COMMENT2 = waitForAndGetElement(sActivity.ELEMENT_COMMENT_LINK.replace("${activityText}",FILE_TITLE_01));
 		String nbComment_new = COMMENT2.getText();
 		assert nbComment_old.equals(nbComment_new);
 
-		//Step 3: Restore data
+		//Delete data
 		info("Restore data");
 		navToolBar.goToSiteExplorer();
 		cMenu.deleteDocument(bNode);
 
 	}
 	/**
-	 * Qmetry ID: 76982
-	 * Not Update Content activity after edit schedule settings of a content
-	 * 
+	 * Qmetry ID: 81221
+	 * Not Update Content activity after edit shedule settings of a content
+	 * Step 1: Add new content
+	 * Step 2: Edit Schedule setting of content
+	 * Step 3: Check Content's activity after change schedule setting
 	 */
 	@Test
-	public void test02_NotUpdateASafterUpdateContentSchedule(){
+	public void test02_NotUpdateContentActivityAfterEditSheduleSettingsOfaContent(){
 		String FILE_TITLE_02 = "ECMS_SE_Content_AS_02";
 		By bNode = By.xpath(SE.ELEMENT_SE_NODE.replace("{$node}", FILE_TITLE_02));
 		String STAGE = "Staged";
@@ -160,6 +164,7 @@ public class ECMS_SE_PublishActivities_ContentActivities_NotUpdateAS extends Pla
 		ecms.goToNode(bNode);
 		actBar.managePublication(STAGE,DATE);
 
+		//Step 3: Check Content's activity after change schedule setting
 		info("Check if content activity is updated or not");
 		navToolBar.goToHomePage();
 		WebElement COMMENT2 = waitForAndGetElement(sActivity.ELEMENT_COMMENT_LINK.replace("${activityText}",FILE_TITLE_02));
@@ -168,16 +173,18 @@ public class ECMS_SE_PublishActivities_ContentActivities_NotUpdateAS extends Pla
 		assert nbComment_new.equals("1");
 
 
-		//Step 3: restore data
+		//Delete data
 		info("Restore data");
 		navToolBar.goToSiteExplorer();
 		cMenu.deleteDocument(bNode);
 	}
 
 	/**
-	 * Qmetry ID: 76984
+	 * Qmetry ID: 81223
 	 * Not Update Content activity after check out a content
-	 * 
+	 * Step 1: Check in a content
+	 * Step 2: Check out content
+	 * Step 3: Check activity after checkout
 	 */
 	@Test
 	public void test03_NotUpdateASafterCheckoutContent(){
@@ -210,13 +217,14 @@ public class ECMS_SE_PublishActivities_ContentActivities_NotUpdateAS extends Pla
 
 		info("Go to Intranet Homepage");
 		navToolBar.goToHomePage();
-
+		
+		//Step 3: Check activity after checkout
 		info("Check if content activity is updated or not");
 		WebElement COMMENT2 = waitForAndGetElement(sActivity.ELEMENT_COMMENT_LINK.replace("${activityText}",FILE_TITLE_03));
 		String nbComment_new = COMMENT2.getText();
 		assert nbComment_old.equals(nbComment_new);
 
-		//Step 3: Restore data
+		//Delete data
 		info("Restore data");
 		navToolBar.goToSiteExplorer();
 		cMenu.deleteDocument(bNode);

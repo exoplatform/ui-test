@@ -38,49 +38,33 @@ public class ContentTemplate extends EcmsBase {
 	public final By ELEMENT_ANNOUNCEMENT_LINK = By
 			.xpath("//*[@class='templateLabel']//*[text()='Announcement']");
 	public final By ELEMENT_ANNOUNCEMENT_NAME_TEXTBOX = By.id("name");
-	public final By ELEMENT_ANNOUNCEMENT_SUMMARY_FRAME = By
-			.xpath("//*[@id='cke_exo:summary']//iframe");
 
-	// WebLink
-	public final By ELEMENT_WEBLINK_LINK = By
-			.xpath("//*[@class='templateLabel']//*[text()='Web Link']");
+	public final By ELEMENT_ANNOUNCEMENT_SUMMARY_FRAME = By.xpath("//*[@id='cke_exo:summary']//iframe");
 
-	// WebContent
-	public final By ELEMENT_WEBCONTENT_LINK = By
-			.xpath("//*[@class='templateLabel']//*[text()='Web Content']");
-	// public final By ELEMENT_WEBCONTENT_TITLE_TEXTBOX = By.id("title");
-	public final By ELEMENT_WEBCONTENT_NAME_TEXTBOX = By.id("name");
-	public final By ELEMENT_WEBCONTENT_CONTENT_FRAME = By
-			.xpath("//td[contains(@id,'cke_contents_htmlData')]/iframe");
-	public final By ELEMENT_WEBCONTENT_CONTENT_FRAME_41 = By
-			.xpath("//div[@id= 'cke_1_contents']/iframe");
-	public final By ELEMENT_WEBCONTENT_ADD_CONTENT_LINK = By
-			.xpath("//*[@title='Insert Content Link']");
-	public final By ELEMENT_WEBCONTENT_ILLUSTRATION_TAB = By
-			.xpath("//*[contains(text(),'Illustration')]");
-	public final By ELEMENT_WEBCONTENT_UPLOAD_FRAME = By
-			.xpath("//*[contains(@name,'uploadIFrame')]");
-	// public final By ELEMENT_WEBCONTENT_FILE_IMAGE = By.name("file");
-	public final By ELEMENT_WEBCONTENT_SUMMARY_FRAME = By
-			.xpath("//td[@id='cke_contents_exo:summary']/iframe");
-	public final By ELEMENT_WEBCONTENT_SUMMARY_FRAME_41 = By
-			.xpath("//*[@id='cke_exo:summary']//iframe");
-	public final By ELEMENT_WEBCONTENT_ADVANCE_TAB = By
-			.xpath("//*[contains(text(),'Advanced')]");
-	public final By ELEMENT_WEBCONTENT_CSS_TEXTAREA = By
-			.xpath("//textarea[contains(@id,'ContentCSS')]");
-	public final By ELEMENT_WEBCONTENT_JS_TEXTAREA = By
-			.xpath("//textarea[contains(@id,'ContentJS')]");
-	public final By ELEMENT_MAXIMIZE_ICON = By
-			.xpath("//*[contains(@class, 'uiIconEcmsExpand')]");
-	public final By ELEMENT_MINIMIZE_ICON = By
-			.xpath("//*[contains(@class, 'uiIconEcmsCollapse')]");
-	public final By ELEMENT_CHANGE_CONTENT_TYPE = By
-			.xpath("//*[contains(@class, 'ChangeTypeLink')]");
+	//WebLink
+	public final By ELEMENT_WEBLINK_LINK = By.xpath("//*[@class='templateLabel']//*[text()='Web Link']");
 
-	// Accessible Media
-	public final By ELEMENT_ACCESSIBLEMEDIA_LINK = By
-			.xpath("//*[@class='templateLabel']//*[text()='Accessible Media']");
+	//WebContent
+	public final By ELEMENT_WEBCONTENT_LINK = By.xpath("//*[@class='templateLabel']//*[text()='Web Content']");
+	//public final By ELEMENT_WEBCONTENT_TITLE_TEXTBOX = By.id("title");	
+	public final By ELEMENT_WEBCONTENT_NAME_TEXTBOX = By.id("name");	
+	public final By ELEMENT_WEBCONTENT_CONTENT_FRAME = By.xpath("//td[contains(@id,'cke_contents_htmlData')]/iframe");
+	public final By ELEMENT_WEBCONTENT_CONTENT_FRAME_41 = By.xpath("//div[@id= 'cke_1_contents']/iframe");
+	public final By ELEMENT_WEBCONTENT_ADD_CONTENT_LINK = By.xpath("//*[@title='Insert Content Link']");
+	public final By ELEMENT_WEBCONTENT_ILLUSTRATION_TAB = By.xpath("//*[contains(text(),'Illustration')]");
+	public final By ELEMENT_WEBCONTENT_UPLOAD_FRAME = By.xpath("//*[contains(@name,'uploadIFrame')]");
+	//public final By ELEMENT_WEBCONTENT_FILE_IMAGE = By.name("file");
+	public final By ELEMENT_WEBCONTENT_SUMMARY_FRAME = By.xpath("//td[contains(@id,'cke_contents_htmlData')]/iframe");
+	public final By ELEMENT_WEBCONTENT_SUMMARY_FRAME_41 = By.xpath("//*[@id='cke_exo:summary']//iframe");
+	public final By ELEMENT_WEBCONTENT_ADVANCE_TAB = By.xpath("//*[contains(text(),'Advanced')]");
+	public final By ELEMENT_WEBCONTENT_CSS_TEXTAREA = By.xpath("//textarea[contains(@id,'ContentCSS')]");
+	public final By ELEMENT_WEBCONTENT_JS_TEXTAREA = By.xpath("//textarea[contains(@id,'ContentJS')]");
+	public final By ELEMENT_MAXIMIZE_ICON = By.xpath("//*[contains(@class, 'uiIconEcmsExpand')]");
+	public final By ELEMENT_MINIMIZE_ICON = By.xpath("//*[contains(@class, 'uiIconEcmsCollapse')]");
+	public final By ELEMENT_CHANGE_CONTENT_TYPE = By.xpath("//*[contains(@class, 'ChangeTypeLink')]");
+
+	//Accessible Media
+	public final By ELEMENT_ACCESSIBLEMEDIA_LINK = By.xpath("//*[@class='templateLabel']//*[text()='Accessible Media']");
 
 	/*
 	 * Added by PhuongDT Date 30/08/2013

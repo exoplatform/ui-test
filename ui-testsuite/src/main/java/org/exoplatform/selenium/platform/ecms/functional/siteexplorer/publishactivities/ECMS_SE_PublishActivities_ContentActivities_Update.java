@@ -41,14 +41,14 @@ public class ECMS_SE_PublishActivities_ContentActivities_Update extends Platform
 		initSeleniumTest();
 		driver.get(baseUrl);
 		info("Login ECMS with " + DATA_USER1);
-		magAcc = new ManageAccount(driver);
-		actBar = new ActionBar(driver);
-		cTemplate = new ContentTemplate(driver);
-		siteExp = new SitesExplorer(driver);
-		navToolBar = new NavigationToolbar(driver);
-		ecms = new EcmsBase(driver);
-		cMenu = new ContextMenu(driver);
-		activity = new HomePageActivity(driver);
+		magAcc = new ManageAccount(driver,this.plfVersion);
+		actBar = new ActionBar(driver,this.plfVersion);
+		cTemplate = new ContentTemplate(driver,this.plfVersion);
+		siteExp = new SitesExplorer(driver,this.plfVersion);
+		navToolBar = new NavigationToolbar(driver,this.plfVersion);
+		ecms = new EcmsBase(driver,this.plfVersion);
+		cMenu = new ContextMenu(driver,this.plfVersion);
+		activity = new HomePageActivity(driver,this.plfVersion);
 		magAcc.signIn(DATA_USER1, DATA_PASS);
 	}
 

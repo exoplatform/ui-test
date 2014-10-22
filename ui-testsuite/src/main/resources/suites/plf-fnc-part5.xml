@@ -19,6 +19,9 @@
 			<class name = "org.exoplatform.selenium.platform.plf.functional.unifiedsearch.PLF_UnifiedSearch_SearchEngine" />
 			<class name = "org.exoplatform.selenium.platform.plf.functional.unifiedsearch.PLF_UnifiedSearch_TaskSearch" />
 			<class name = "org.exoplatform.selenium.platform.plf.functional.unifiedsearch.PLF_UnifiedSearch_WikiSearch" />
+			<class name = "org.exoplatform.selenium.platform.plf.functional.unifiedsearch.PLF_UnifiedSearch_QuickSearch" />
+			<class name = "org.exoplatform.selenium.platform.plf.functional.unifiedsearch.PLF_UnifiedSearch_Pages" />
+			<class name = "org.exoplatform.selenium.platform.plf.functional.unifiedsearch.PLF_UnifiedSearch_QuickSearchSettings" />
 		</classes>
 	</test>
 	<listeners>

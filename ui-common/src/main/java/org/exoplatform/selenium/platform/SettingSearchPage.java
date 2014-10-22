@@ -47,18 +47,15 @@ public class SettingSearchPage extends PlatformBase {
 	public final By ELEMENT_SEARCH_CURRENT_SITE_ONLY_CHECKBOX = By
 			.id("searchCurrentSiteOnly");
 	public final By ELEMENT_HIDE_SEARCH_FORM_CHECKBOX = By.id("hideSearchForm");
-	public final By ELEMENT_HIDE_FACETS_FILTER_CHECKBOX = By
-			.id("hideFacetsFilter");
-	public final By ELEMENT_SEARCH_ALL_CHECKBOX = By
-			.xpath("//span[@class='uiCheckbox']/span[text()='All']/../input[@class='checkbox']");
-	public final By ELEMENT_SEARCH_EVERYTHING_CHECKBOX = By
-			.xpath("//span[@class='uiCheckbox']/span[text()='Everything']/../input[@class='checkbox']");
-	public final By ELEMENT_SEARCH_FILES_CHECKBOX = By
-			.xpath("//span[@class='uiCheckbox']/span[text()='Files']/../input[@class='checkbox']");
-	public final By ELEMENT_SEARCH_WIKI_CHECKBOX = By
-			.xpath("//span[@class='uiCheckbox']/span[text()='Wiki']/../input[@class='checkbox']");
+
 	public final By ELEMENT_SEARCH_DOCUMENTS_CHECKBOX = By
 			.xpath("//span[@class='uiCheckbox']/span[text()='Documents']/../input[@class='checkbox']");
+	public final By ELEMENT_HIDE_FACETS_FILTER_CHECKBOX = By.id("hideFacetsFilter");
+	public final By ELEMENT_SEARCH_ALL_CHECKBOX = By.xpath("//span[@class='uiCheckbox']/span[text()='All']/../input[@class='checkbox']");
+	public final By ELEMENT_SEARCH_EVERYTHING_CHECKBOX = By.xpath("//span[@class='uiCheckbox']/span[text()='Everything']/../input[@class='checkbox']");
+	public final By ELEMENT_SEARCH_FILES_CHECKBOX = By.xpath("//span[@class='uiCheckbox']/span[text()='Files']/../input[@class='checkbox']");
+	public final By ELEMENT_SEARCH_EVENTS_CHECKBOX = By.xpath("//span[@class='uiCheckbox']/span[text()='Events']/../input[@class='checkbox']");
+	public final By ELEMENT_SEARCH_WIKI_CHECKBOX = By.xpath("//span[@class='uiCheckbox']/span[text()='Wiki']/../input[@class='checkbox']");
 	public final By ELEMENT_SAVE_SETTING = By.id("btnSave");
 
 	// Portlet Setting
@@ -72,37 +69,23 @@ public class SettingSearchPage extends PlatformBase {
 			.id("showPortletMode");
 	public final By ELEMENT_DESCRIPTION_TEXTBOX = By.id("description");
 
-	// Filter Search
-	public final By ELEMENT_FILTER_SEARCH_ALLSITE_CHECKBOX = By
-			.xpath("//input[@class='checkbox' and @value='acme' and @name='site']");
-	public final By ELEMENT_FILTER_SEARCH_ACME_CHECKBOX = By
-			.xpath("//input[@class='checkbox' and @value='acme'] and @name='site'");
-	public final By ELEMENT_FILTER_SEARCH_INTRANET_CHECKBOX = By
-			.xpath("//input[@class='checkbox' and @value='intranet' and @name='site']");
-	public final By ELEMENT_FILTER_SEARCH_ALL_CONTENTTYE_CHECKBOX = By
-			.xpath("//input[@class='checkbox' and @value='all' and @name='contentType']");
-	public final By ELEMENT_FILTER_SEARCH_FILE_CHECKBOX = By
-			.xpath("//input[@class='checkbox' and @value='file' and @name='contentType']");
-	public final By ELEMENT_FILTER_SEARCH_DOCUMENT_CHECKBOX = By
-			.xpath("//input[@class='checkbox' and @value='document' and @name='contentType']");
-	public final By ELEMENT_FILTER_SEARCH_WIKI_CHECKBOX = By
-			.xpath("//input[@class='checkbox' and @value='wiki' and @name='contentType']");
-	public final By ELEMENT_FILTER_SEARCH_PAGE_CHECKBOX = By
-			.xpath("//input[@class='checkbox' and @value='page' and @name='contentType']");
-	public final By ELEMENT_FILTER_SEARCH_DISCUSSION_CHECKBOX = By
-			.xpath("//input[@class='checkbox' and @value='post' and @name='contentType']");
-	public final By ELEMENT_FILTER_SEARCH_PEOPLE_CHECKBOX = By
-			.xpath("//input[@class='checkbox' and @value='people' and @name='contentType']");
-	public final By ELEMENT_FILTER_SEARCH_SPACE_CHECKBOX = By
-			.xpath("//input[@class='checkbox' and @value='space' and @name='contentType']");
-	public final By ELEMENT_FILTER_SEARCH_EVENT_CHECKBOX = By
-			.xpath("//input[@class='checkbox' and @value='event' and @name='contentType']");
-	public final By ELEMENT_FILTER_SEARCH_TASK_CHECKBOX = By
-			.xpath("//input[@class='checkbox' and @value='task' and @name='contentType']");
-	public final By ELEMENT_FILTER_SEARCH_ANSWER_CHECKBOX = By
-			.xpath("//input[@class='checkbox' and @value='answer' and @name='contentType']");
-
-	// Search result form
+	//Filter Search
+	public final By ELEMENT_FILTER_SEARCH_ALLSITE_CHECKBOX = By.xpath("//input[@class='checkbox' and @value='acme' and @name='site']");
+	public final By ELEMENT_FILTER_SEARCH_ACME_CHECKBOX = By.xpath("//input[@class='checkbox' and @value='acme'] and @name='site'");
+	public final By ELEMENT_FILTER_SEARCH_INTRANET_CHECKBOX = By.xpath("//input[@class='checkbox' and @value='intranet' and @name='site']");
+	public final By ELEMENT_FILTER_SEARCH_ALL_CONTENTTYE_CHECKBOX = By.xpath("//input[@class='checkbox' and @value='all' and @name='contentType']");
+	public final By ELEMENT_FILTER_SEARCH_FILE_CHECKBOX = By.xpath("//input[@class='checkbox' and @value='file' and @name='contentType']");
+	public final By ELEMENT_FILTER_SEARCH_DOCUMENT_CHECKBOX = By.xpath("//input[@class='checkbox' and @value='document' and @name='contentType']");
+	public final By ELEMENT_FILTER_SEARCH_WIKI_CHECKBOX = By.xpath("//input[@class='checkbox' and @value='wiki' and @name='contentType']");
+	public final By ELEMENT_FILTER_SEARCH_PAGE_CHECKBOX = By.xpath("//input[@class='checkbox' and @value='page' and @name='contentType']");
+	public final By ELEMENT_FILTER_SEARCH_DISCUSSION_CHECKBOX = By.xpath("//input[@class='checkbox' and @value='post' and @name='contentType']");
+	public final By ELEMENT_FILTER_SEARCH_PEOPLE_CHECKBOX = By.xpath("//input[@class='checkbox' and @value='people' and @name='contentType']");
+	public final By ELEMENT_FILTER_SEARCH_SPACE_CHECKBOX = By.xpath("//input[@class='checkbox' and @value='space' and @name='contentType']");
+	public final By ELEMENT_FILTER_SEARCH_EVENT_CHECKBOX = By.xpath("//input[@class='checkbox' and @value='event' and @name='contentType']");
+	public final By ELEMENT_FILTER_SEARCH_TASK_CHECKBOX = By.xpath("//input[@class='checkbox' and @value='task' and @name='contentType']");
+	public final By ELEMENT_FILTER_SEARCH_ANSWER_CHECKBOX = By.xpath("//input[@class='checkbox' and @value='answer' and @name='contentType']");
+	
+	//Search result form
 	public final By ELEMENT_RESULT_SEARCH_PAGE = By.id("resultPage");
 	public final String ELEMENT_RESULT_LINK = "//div[@id='resultPage']//a[contains(.,'${item}')]";
 //	public final String ELEMENT_RESULT_ITEM = "//div[@id='resultPage']//a[contains(.,'${item}')]/../..//*[contains(text(),'${keySearch}')]";
@@ -131,9 +114,16 @@ public class SettingSearchPage extends PlatformBase {
 	public final By ELEMENT_SHOW_MORE_RESULT = By.xpath("//*[@id='btnShowMore']");
 	public final By ELEMENT_SEARCH_PORTLET = By.xpath("//div[contains(@class,'portletLayoutDecorator') and contains(text(),'Search')]");
 	
+	// Quick Search elements for the new layout
+	public final By ELEMENT_QUICKSEARCH_NEW_PAGE=By.xpath("//*[@class='UIRowContainer']//*[@class='uiIconPLF24x24Search']");
+	public final By ELEMENT_QUICKSEARCH_TEXTBOX_NEW_PAGE=By.xpath("//*[@class='UIRowContainer']//*[@name='adminkeyword']");
+	public final By ELEMENT_ALL_SEARCH_RESULT_NEW_PAGE=By.xpath(".//*[text()='See All Search Results']");
+	public final String ELEMENT_TYPE_RESULTS_FLOATING_BOX_NEW_PAGE="//*[@class='uiQuickSearchResult']/descendant::tr[th[contains(text(),'${type}')]]";
+	
 	//Quick Search elements
 	public final String ELEMENT_QUICKSEARCH_RESULT = "//*[@id='quickSearchResult${number}']//*[@href=contains(text(),'${name}')]";
 	public final String ELEMENT_SEARCH_RESULT_EMPHASIZE = "//strong[normalize-space(text())='${text}']";
+	public final String ELEMENT_QUICKSEARCH_RESULT_NO_ORDER="//*[@href=contains(text(),'${name}')]";
 	//Task page result
 	public final String ELEMENT_RESULT_SEARCH_PAGE_ICON = "//*[@id='result']//div[contains(@class,'resultBox')]//*[contains(text(),'${name_document}')]/../../..//i[contains(@class,'webContent')]";
 	public final String ELEMENT_RESULT_SEARCH_PAGE_TITLE = "//*[@id='result']//div[contains(@class,'resultBox')]//a[contains(text(),'${name_document}')]";

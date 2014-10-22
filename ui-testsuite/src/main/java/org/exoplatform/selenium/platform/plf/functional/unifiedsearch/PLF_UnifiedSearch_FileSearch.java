@@ -112,7 +112,7 @@ public class PLF_UnifiedSearch_FileSearch extends Template {
 	 * Step 2: Click on "See All Search Results"
 	 */
 	public void test02_DisplayAFileInTheSearchResultPage() {
-		/*Declare varia	bles*/
+		/*Declare variables*/
 		String fileName1 = "Test104244";
 		String searchText = "Test104244";
 

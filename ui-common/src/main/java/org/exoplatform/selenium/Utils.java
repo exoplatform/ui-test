@@ -111,11 +111,13 @@ public class Utils {
 			Robot robot = new Robot();
 			// Simulate a key press
 			robot.keyPress(firstKey);
-			robot.keyPress(secondKey);
+			if(params.length > 0)
+				robot.keyPress(secondKey);
 			if(params.length > 1)
 				robot.keyPress(thirdKey);
 			pause(3000);
-			robot.keyRelease(secondKey);
+			if(params.length > 0)
+				robot.keyRelease(secondKey);
 			robot.keyRelease(firstKey);
 			if(params.length > 1)
 				robot.keyRelease(thirdKey);
