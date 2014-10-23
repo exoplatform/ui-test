@@ -16,13 +16,16 @@ import org.exoplatform.selenium.platform.ecms.contentexplorer.ContentTemplate.fo
 import org.exoplatform.selenium.platform.social.ManageMember;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.testng.annotations.AfterMethod;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-/*
- * @author: PhuongDT
- * @date: 16/09/2013
+/**
+ * By   PhuongDT
+ * Date 16/09/2013
+ * Update by QuynhPT
+ * Date 23/10/2014
  */
 public class ECMS_SE_PublishActivities_FilesActivities  extends PlatformBase {
 	//Platform
@@ -38,9 +41,15 @@ public class ECMS_SE_PublishActivities_FilesActivities  extends PlatformBase {
 	SitesExplorer siteExp;
 	ContextMenu cMenu;
 	Button btn;
+	
+	//Variables
+	String folder =null;
+	String num_ran=null;
+	String spacename=null ;
+	String spacedesc=null;
 
-	@BeforeMethod
-	public void beforeMethods() {
+	@BeforeTest
+	public void beforeTest() {
 		getDriverAutoSave();
 		driver.get(baseUrl);
 		info("Login ECMS with " + DATA_USER1);
@@ -57,11 +66,19 @@ public class ECMS_SE_PublishActivities_FilesActivities  extends PlatformBase {
 		magAcc.signIn(DATA_USER1, DATA_PASS);
 	}
 
-	@AfterMethod
-	public void afterMethods() {
+	@AfterTest
+	public void afterTest() {
 		info("Logout ECMS");
 		driver.manage().deleteAllCookies();
 		driver.quit();
+	}
+	
+	@BeforeMethod
+	public void beforeMethod(){
+		num_ran=getRandomNumber();
+		folder = "folder_"+num_ran;
+		spacename = "Space"+num_ran;
+		spacedesc = "Description Of Space_"+num_ran;
 	}
 	
 	/**
@@ -75,7 +92,6 @@ public class ECMS_SE_PublishActivities_FilesActivities  extends PlatformBase {
 	@Test
 	public void test01_NotUpdateFileActivityAfterCreatingANewFolder(){
 		//Declare variable
-		String folder = "folder01";
 		By elementFolder = By.xpath(siteExp.ELEMENT_SE_NODE.replace("{$node}", folder));
 
 		//Open Sites Explorer
@@ -113,8 +129,6 @@ public class ECMS_SE_PublishActivities_FilesActivities  extends PlatformBase {
 	@Test
 	public void test02_AddFileActivityAfterUploadingAFileInASpace(){
 		//Declare variable
-		String spacename = "Space02";
-		String spacedesc = "Description Of Space02";
 		String file = "ECMS_DMS_SE_Upload_imgfile.jpg";
 		
 		//Add new space
@@ -259,7 +273,8 @@ public class ECMS_SE_PublishActivities_FilesActivities  extends PlatformBase {
 		//From the file activity, click on the link "Edit"
 		info("Click Edit icon in activity");
 		activity.goToEditFromContentActivity(file);
-		assert getValue(cTemplate.ELEMENT_WEBCONTENT_NAME_TEXTBOX).equalsIgnoreCase(file);
+		//assert getValue(cTemplate.ELEMENT_WEBCONTENT_NAME_TEXTBOX).contains(file);
+		waitForAndGetElement(cTemplate.ELEMENT_WEBCONTENT_CONTENT_NAME.replace("${nameContent}", file));
 		activity.backToHomePageFromEditContentScreen();
 				
 		/*Clear data*/
@@ -420,8 +435,6 @@ public class ECMS_SE_PublishActivities_FilesActivities  extends PlatformBase {
 	public void test09_DeleteAFileActivityFromSpaceActivityStreamByOwner(){
 		//Declare variable
 		String file = "KS_Wiki_Attachment_pdffile.pdf";
-		String spacename = "Space09";
-		String spacedesc = "Description Of Space09";
 				
 		/*Step 1: Create file activity*/
 		//Add new space
@@ -467,9 +480,7 @@ public class ECMS_SE_PublishActivities_FilesActivities  extends PlatformBase {
 	public void test10_RemoveTheFileActivityAfterDeletingAFileInSpaceDocument(){
 		//Declare variable
 		String file = "KS_Wiki_Attachment_pdffile.pdf";
-		By elementfile = By.xpath(siteExp.ELEMENT_SE_NODE.replace("{$node}", file));
-		String spacename = "Space10";
-		String spacedesc = "Description Of Space10";
+		By elementfile = By.xpath(ecms.ELEMENT_PERSONAL_DOCUMENT_NODE.replace("${content}", file));
 				
 		/*Step 1: Create file activity*/
 		//Add new space
@@ -556,8 +567,6 @@ public class ECMS_SE_PublishActivities_FilesActivities  extends PlatformBase {
 	public void test12_EditAFileFromTheFileActivityFromSpace(){
 		//Declare variable
 		String file = "KS_Wiki_Attachment_pdffile.pdf";
-		String spacename = "Space12";
-		String spacedesc = "Description Of Space12";
 				
 		/*Step 1: Create file activity*/
 		//Add new space
@@ -583,7 +592,8 @@ public class ECMS_SE_PublishActivities_FilesActivities  extends PlatformBase {
 		//From the file activity, click on the link "Edit"
 		info("Click Edit icon in activity");
 		activity.goToEditFromContentActivity(file);
-		assert getValue(cTemplate.ELEMENT_WEBCONTENT_NAME_TEXTBOX).equalsIgnoreCase(file);
+		waitForAndGetElement(cTemplate.ELEMENT_WEBCONTENT_CONTENT_NAME.replace("${nameContent}", file));
+		//assert getValue(cTemplate.ELEMENT_WEBCONTENT_NAME_TEXTBOX).equalsIgnoreCase(file);
 		activity.backToHomePageFromEditContentScreen();
 				
 		/*Clear data*/

@@ -17,13 +17,16 @@ import org.exoplatform.selenium.platform.ecms.contentexplorer.ContextMenu;
 import org.exoplatform.selenium.platform.ecms.contentexplorer.SitesExplorer;
 import org.exoplatform.selenium.platform.social.ManageMember;
 import org.openqa.selenium.By;
-import org.testng.annotations.AfterMethod;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 /**
- * @author: PhuongDT
- * @date: 17/09/2013
+ * By  PhuongDT
+ * Date 17/09/2013
+ * Update by QuynhPT
+ * Date 22/10/2014
  */
 public class ECMS_SE_PublishActivities_ContentActivities_Add extends PlatformBase{
 	//Platform
@@ -39,30 +42,47 @@ public class ECMS_SE_PublishActivities_ContentActivities_Add extends PlatformBas
 	SitesExplorer siteExp;
 	ContextMenu cMenu;
 	
-	@BeforeMethod
-	public void beforeMethods() {
+	//Variables
+	String num_ran="";
+	String node="";
+	String spacename = "";
+	String spacedesc = "";
+	
+	//QuynhPT changed from BeforeMethod to BeforeTest
+	@BeforeTest
+	public void beforeTest() {
 		initSeleniumTest();
 		driver.get(baseUrl);
 		info("Login ECMS with " + DATA_USER1);
-		magAcc = new ManageAccount(driver);
-		actBar = new ActionBar(driver);
-		cTemplate = new ContentTemplate(driver);
-		siteExp = new SitesExplorer(driver);
-		navToolBar = new NavigationToolbar(driver);
-		ecms = new EcmsBase(driver);
-		cMenu = new ContextMenu(driver);
-		activity = new HomePageActivity(driver);
-		magMember = new ManageMember(driver);
+		magAcc = new ManageAccount(driver,this.plfVersion);
+		actBar = new ActionBar(driver,this.plfVersion);
+		cTemplate = new ContentTemplate(driver,this.plfVersion);
+		siteExp = new SitesExplorer(driver,this.plfVersion);
+		navToolBar = new NavigationToolbar(driver,this.plfVersion);
+		ecms = new EcmsBase(driver,this.plfVersion);
+		cMenu = new ContextMenu(driver,this.plfVersion);
+		activity = new HomePageActivity(driver,this.plfVersion);
+		magMember = new ManageMember(driver,this.plfVersion);
 		magAcc.signIn(DATA_USER1, DATA_PASS);
 	}
 
-	@AfterMethod
-	public void afterMethods() {
+	//QuynhPT changed from AfterMethod to AfterTest
+	@AfterTest
+	public void afterTest() {
 		info("Logout ECMS");
 		driver.manage().deleteAllCookies();
 		driver.quit();
 	}
-	 
+	 /**
+	  * Declare variable
+	  */
+	@BeforeMethod
+	public void beforeMethod(){
+		num_ran=getRandomNumber();
+		node="node_"+num_ran;
+		spacename = "Space"+num_ran;
+		spacedesc = "Description Of Space_"+num_ran;
+	}
 	 /**
 	 * == Add Content activity after Add an Accessible Media content  in CE ==
 	 * Test case ID: 76951
@@ -72,7 +92,6 @@ public class ECMS_SE_PublishActivities_ContentActivities_Add extends PlatformBas
 	 @Test
 	 public void test01_AddContentActivityAfterAddAnAccessibleMediaContentInCE(){
 		 //Declare variable
-		 String node = "node01";
 		 By bNode = By.xpath(siteExp.ELEMENT_SE_NODE.replace("{$node}", node));
 		 
 		 /*Step 1: Add Accessible Media content*/ 
@@ -149,7 +168,6 @@ public class ECMS_SE_PublishActivities_ContentActivities_Add extends PlatformBas
 	 @Test
 	 public void test03_AddContentActivityAfterAddAFileContentInCE(){
 		 //Declare variable
-		 String node = "node03";
 		 By bNode = By.xpath(siteExp.ELEMENT_SE_NODE.replace("{$node}", node));
 		 
 		 /*Step 1: Add File content*/ 
@@ -186,7 +204,6 @@ public class ECMS_SE_PublishActivities_ContentActivities_Add extends PlatformBas
 	 @Test
 	 public void test04_AddContentActivityAfterAddAFreeLayoutWebcontentContentInCE(){
 		 //Declare variable
-		 String node = "node04";
 		 By bNode = By.xpath(siteExp.ELEMENT_SE_NODE.replace("{$node}", node));
 		 
 		 /*Step 1: Add "Free Layout Webcontent"*/ 
@@ -224,7 +241,6 @@ public class ECMS_SE_PublishActivities_ContentActivities_Add extends PlatformBas
 	 @Test
 	 public void test05_AddContentActivityAfterAddAPictureOnHeadLayoutContentInCE(){
 		 //Declare variable
-		 String node = "node05";
 		 By bNode = By.xpath(siteExp.ELEMENT_SE_NODE.replace("{$node}", node));
 		 
 		 /*Step 1: Add Picture on Head Layout content*/ 
@@ -261,7 +277,6 @@ public class ECMS_SE_PublishActivities_ContentActivities_Add extends PlatformBas
 	 @Test
 	 public void test06_AddContentActivityAfterAddAProductContentInCE(){
 		 //Declare variable
-		 String node = "node06";
 		 By bNode = By.xpath(siteExp.ELEMENT_SE_NODE.replace("{$node}", node));
 		 
 		 /*Step 1: Ad Product content*/ 
@@ -299,7 +314,6 @@ public class ECMS_SE_PublishActivities_ContentActivities_Add extends PlatformBas
 	 @Test
 	 public void test07_AddContentActivityAfterAddAWebLinkContentInCE(){
 		 //Declare variable
-		 String node = "node07";
 		 By bNode = By.xpath(siteExp.ELEMENT_SE_NODE.replace("{$node}", node));
 		 
 		 /*Step 1: Ad Web Link content*/ 
@@ -336,11 +350,6 @@ public class ECMS_SE_PublishActivities_ContentActivities_Add extends PlatformBas
 	 */
 	 @Test
 	 public void test08_AddContentActivityAfterAddAnAccessibleMediaContentInSpace(){
-		 //Declare variable
-		 String node = "node08";
-		 String spacename = "Space08";
-		 String spacedesc = "Description Of Space08";
-		 
 		 /*Step 1: Add new space*/
 		 //Add new space
 		 magMember.goToMySpacePage();
@@ -384,9 +393,7 @@ public class ECMS_SE_PublishActivities_ContentActivities_Add extends PlatformBas
 	 public void test09_AddContentActivityAfterAddAContactUsContentInSpace(){
 		 //Declare variable
 		 DateFormat dateFormat = new SimpleDateFormat("yyyy.MM.dd - hh:mm");
-		 String spacename = "Space09";
-		 String spacedesc = "Description Of Space09";
-		
+
 		 /*Step 1: Add new space*/
 		 //Add new space
 		 magMember.goToMySpacePage();
@@ -432,11 +439,6 @@ public class ECMS_SE_PublishActivities_ContentActivities_Add extends PlatformBas
 	 */
 	 @Test
 	 public void test10_AddContentActivityAfterAddAFileContentInSpace(){
-		 //Declare variable
-		 String node = "node10";
-		 String spacename = "Space10";
-		 String spacedesc = "Description Of Space10";
-		 
 		 /*Step 1: Add new space*/
 		 //Add new space
 		 magMember.goToMySpacePage();
@@ -478,11 +480,6 @@ public class ECMS_SE_PublishActivities_ContentActivities_Add extends PlatformBas
 	 */
 	 @Test
 	 public void test11_AddContentActivityAfterAddAFreeLayoutWebcontentContentInSpace(){
-		 //Declare variable
-		 String node = "node11";
-		 String spacename = "Space11";
-		 String spacedesc = "Description Of Space11";
-
 		 /*Step 1: Add new space*/
 		 //Add new space
 		 magMember.goToMySpacePage();
@@ -516,7 +513,7 @@ public class ECMS_SE_PublishActivities_ContentActivities_Add extends PlatformBas
 	 }
 	 
 	 /**
-	 * == Add Content activity after add a Picture on head layout content  in space ==
+	 * == Add Content activity after add an Illustrated Web Content in space ==
 	 * Test case ID: 77322
 	 * Step 1: Add new space
 	 * Step 2: Add Picture on Head Layout content
@@ -524,12 +521,7 @@ public class ECMS_SE_PublishActivities_ContentActivities_Add extends PlatformBas
 	 * //exo:pictureOnHeadWebContent is changed to Illustrated Web Content
 	 */
 	 @Test
-	 public void test12_AddContentActivityAfterAddAPictureOnHeadLayoutContentInSpace(){
-		 //Declare variable
-		 String node = "node12";
-		 String spacename = "Space12";
-		 String spacedesc = "Description Of Space12";
-		 
+	 public void test12_AddContentActivityAfterAddAnIllustratedWebContentInSpace(){
 		 /*Step 1: Add new space*/
 		 //Add new space
 		 magMember.goToMySpacePage();
@@ -571,11 +563,6 @@ public class ECMS_SE_PublishActivities_ContentActivities_Add extends PlatformBas
 	 */
 	 @Test
 	 public void test13_AddContentActivityAfterAddAProductContentInSpace(){
-		 //Declare variable
-		 String node = "node13";
-		 String spacename = "Space13";
-		 String spacedesc = "Description Of Space13";
-		 
 		 /*Step 1: Add new space*/
 		 //Add new space
 		 magMember.goToMySpacePage();
@@ -617,11 +604,6 @@ public class ECMS_SE_PublishActivities_ContentActivities_Add extends PlatformBas
 	 */
 	 @Test
 	 public void test14_AddContentActivityAfterAddAWebLinkContentInSpace(){
-		 //Declare variable
-		 String node = "node14";
-		 String spacename = "Space14";
-		 String spacedesc = "Description Of Space14";
-		 
 		 /*Step 1: Add new space*/
 		 //Add new space
 		 magMember.goToMySpacePage();

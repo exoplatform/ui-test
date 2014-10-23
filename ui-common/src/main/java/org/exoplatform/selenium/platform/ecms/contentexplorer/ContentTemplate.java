@@ -38,7 +38,6 @@ public class ContentTemplate extends EcmsBase {
 	public final By ELEMENT_ANNOUNCEMENT_LINK = By
 			.xpath("//*[@class='templateLabel']//*[text()='Announcement']");
 	public final By ELEMENT_ANNOUNCEMENT_NAME_TEXTBOX = By.id("name");
-
 	public final By ELEMENT_ANNOUNCEMENT_SUMMARY_FRAME = By.xpath("//*[@id='cke_exo:summary']//iframe");
 
 	//WebLink
@@ -305,24 +304,31 @@ public class ContentTemplate extends EcmsBase {
 		boolean lines = (Boolean) (params.length > 0 ? params[0] : false);
 		String optionLang = (String) (params.length > 1 ? params[1] : "");
 		By eWebContentSum;
-		if (this.plfVersion.equalsIgnoreCase("4.1"))
-			eWebContentSum = ELEMENT_WEBCONTENT_SUMMARY_FRAME_41;
-		else
+		
+		if (this.plfVersion.equalsIgnoreCase("4.0"))
 			eWebContentSum = ELEMENT_WEBCONTENT_SUMMARY_FRAME;
+		else
+			eWebContentSum = ELEMENT_WEBCONTENT_SUMMARY_FRAME_41;
+		
 		info("-- Creating a new Web Content --");
 		Utils.pause(500);
 		click(ELEMENT_WEBCONTENT_LINK);
-		type(ELEMENT_WEBCONTENT_NAME_TEXTBOX, name, true);
+		type(ELEMENT_WEBCONTENT_NAME_TEXTBOX, name, false);
 		if (!optionLang.isEmpty()) {
 			selectOption(ELEMENT_PIC_LANG, optionLang);
 		}
 		if (cont != "") {
-			if (this.plfVersion.equalsIgnoreCase("4.1"))
+			if (this.plfVersion.equalsIgnoreCase("4.0"))
+				inputDataToFrame(ELEMENT_WEBCONTENT_CONTENT_FRAME, cont,true);
+			else
+				inputDataToFrame(ELEMENT_WEBCONTENT_CONTENT_FRAME_41, cont,true);
+			switchToParentWindow();
+			/*if (this.plfVersion.equalsIgnoreCase("4.1"))
 				inputDataToFrame(ELEMENT_WEBCONTENT_CONTENT_FRAME_41, cont,
 						true);
 			else
 				inputDataToFrame(ELEMENT_WEBCONTENT_CONTENT_FRAME, cont, true);
-			switchToParentWindow();
+			switchToParentWindow();*/
 		}
 		if (sum != "" || img != "") {
 			click(ELEMENT_WEBCONTENT_ILLUSTRATION_TAB);

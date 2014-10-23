@@ -12,14 +12,17 @@ import org.exoplatform.selenium.platform.ecms.contentexplorer.ContentTemplate;
 import org.exoplatform.selenium.platform.ecms.contentexplorer.ContextMenu;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 /**
  * 
- * @author havtt
+ * By havtt
  * Sep, 18th, 2013
+ * 
+ * Update by QuynhPT
+ * date 22/10/2014
  *
  */
 
@@ -36,8 +39,9 @@ public class ECMS_SE_PublishActivities_ContentActivities_Action extends Platform
 	//Social
 	HomePageActivity sActivity;
 
-	@BeforeMethod
-	public void beforeMethod(){
+	//QuynhPT changed from BeforeMethod to BeforeTest
+	@BeforeTest
+	public void beforeTest(){
 		initSeleniumTest();
 		driver.get(baseUrl);
 		magAcc = new ManageAccount(driver);
@@ -49,20 +53,27 @@ public class ECMS_SE_PublishActivities_ContentActivities_Action extends Platform
 		magAcc.signIn(DATA_USER1, DATA_PASS);
 	}
 
-	@AfterMethod
-	public void afterMethod() {
+	//QuynhPT changed from AfterMethod to AfterTest
+	@AfterTest
+	public void afterTest() {
 		info("-- User signOut --");
 		driver.manage().deleteAllCookies();
 		driver.quit();
 	}
 
 	/**
-	 * Qmetry ID: 76990
-	 * Dislike a content activity
-	 * 
+	 * Qmetry ID: 81229
+	 * Dislike a Content activity from like icon
+	 * Steps:
+	 * 1. Connect to Intranet 
+	 * 2. Select a content activity and click [like] icon
+	 * ==> The Content activity is displayed in the activity stream 
+	 * like icon + number of likes to + 1
+	 * 3. Click on [like] icon again
+	 * ==> The Content activity is disliked by the user, the number of like is updated to -1
 	 */
 	@Test
-	public void test01_DislikeContentActivity(){
+	public void test01_DislikeContentActivityFromLikeIcon(){
 		String FILE_TITLE_01 = "ECMS_SE_Content_00";
 
 		info("Go to Content Explorer");
@@ -70,28 +81,26 @@ public class ECMS_SE_PublishActivities_ContentActivities_Action extends Platform
 
 		info("Create a node in root path");
 		actBar.goToAddNewContent();
-		cTemplate.createNewWebContent(FILE_TITLE_01, FILE_TITLE_01, "", "", "", "");
+		cTemplate.createNewFile(FILE_TITLE_01, FILE_TITLE_01, FILE_TITLE_01);
 		waitForAndGetElement(By.linkText(FILE_TITLE_01));
 
 		info("Go to Intranet Homepage");
 		navToolBar.goToHomePage();
 		WebElement LIKE = waitForAndGetElement(sActivity.ELEMENT_LIKE_ICON.replace("${activityText}",FILE_TITLE_01));
-		//System.out.print(LIKE);
 		String nbLike_old = LIKE.getText();
 		info(nbLike_old);
 
 		info("Like a node activity");
 		//like
 		sActivity.likeOrUnlikeActivity(FILE_TITLE_01);
-		Utils.pause(5000);
+		Utils.pause(1000);
 
 		//dislike
 		info("Dislike a node activity");
 		sActivity.likeOrUnlikeActivity(FILE_TITLE_01);
-		Utils.pause(5000);
+		Utils.pause(1000);
 
 		info("Restore data");
-		//By bNode = By.xpath(siteExp.ELEMENT_SE_NODE.replace("{$node}", node));
 		navToolBar.goToSiteExplorer();
 		cMenu.deleteDocument(By.linkText(FILE_TITLE_01));
 

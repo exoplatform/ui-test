@@ -443,7 +443,7 @@ public class EcmsBase extends ManageAccount {
 				String[] nodes = ((String) locator).split("/");
 				for (String node: nodes)
 				{
-					//goToNode(By.xpath("//a[@title='" + node + " ']"));
+					//click(ELEMENT_PERSONAL_DOCUMENT_NODE.replace("${content}", node));
 					click(By.xpath("//*[@title='" + node + "']"));
 					Utils.pause(500);
 				}
