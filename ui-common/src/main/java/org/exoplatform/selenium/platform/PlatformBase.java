@@ -1252,7 +1252,7 @@ public class PlatformBase extends TestBase {
 				driver.switchTo().frame(e);
 				inputsummary = driver.switchTo().activeElement();
 				inputsummary.click();
-				//				inputsummary.clear();
+				inputsummary.clear();
 
 				if (validate.length >0)
 					if (validate[0]){

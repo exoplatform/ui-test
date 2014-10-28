@@ -55,6 +55,7 @@ public class ECMS_SE_PublishActivities_ContentActivities_NotUpdateAS extends Pla
 		SE = new SitesExplorer(driver, this.plfVersion);
 		ecms = new EcmsBase(driver, this.plfVersion);
 		ePermission = new EcmsPermission(driver);
+		
 		magAcc.signIn(DATA_USER1, DATA_PASS);
 	}
 

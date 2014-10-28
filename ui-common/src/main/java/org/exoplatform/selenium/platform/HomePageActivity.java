@@ -55,13 +55,13 @@ public class HomePageActivity extends PlatformBase{
 	public final String ELEMENT_COMMENT_LAST = "//*[contains(text(),'${title}')]/../../../..//div[contains(@class,'commentItem commentItemLast')]//*[contains(text(), '${comment}')]";
 
 	//Comment box for ECMS data type
-	public final String ELEMENT_ACTIVITY_COMMENT_CONTENT_2 = "//*[@title='${title}']/ancestor::div[@class='boxContainer']//*[@class='contentComment']";
+	public final String ELEMENT_ACTIVITY_COMMENT_CONTENT_2 = "//*[@class='contentComment' and contains(text(),'${comment}')]";
 	public final String ELEMENT_ACTIVITY_DELETE_COMMENT_ICON = "//*[@class='contentComment' and contains(text(), '${comment}')]/../..//*[contains(@id, 'DeleteCommentButton')]";
 	public final String DATA_MESSAGE_CONFIRM_DELETE_COMMENT = "Are you sure you want to delete this comment?";
 
 	//Content activity
 	public final String ELEMENT_CONTENT_NAME = "//a[@title='@{fileName}']";
-	public final String ELEMENT_CONTENT_NAME_41 = "//a[@data-original-title='@{fileName}']";
+	public final String ELEMENT_CONTENT_NAME_41 = "//a[contains(text(),'@{fileName}')]";
 	public final String ELEMENT_CONTENT_TYPE_ICON = "//a[@title='@{fileName}']/../..//*[@class='${icon}']";
 	public final String ELEMENT_CONTENT_TYPE_ICON_41 = "//a[@data-original-title='@{fileName}']/../..//*[@class='${icon}']";
 	public final String ELEMENT_CONTENT_TYPE = "//a[@title='@{fileName}']/..//*[@class='versionFile' and contains(text(), '${type}')]";
@@ -75,7 +75,7 @@ public class HomePageActivity extends PlatformBase{
 	public final String ELEMENT_CONTENT_SUMMARY = "//*[@title='@{fileName}']/..//p[1 or 2]";
 	public final String ELEMENT_CONTENT_SUMMARY_41 = "//*[@data-original-title='@{fileName}']/..//p[1 or 2]";
 	public final String ELEMENT_CONTENT_SUMMARY_WEBCONTENT = "//*[@title='@{fileName}']/../../div[@class='text']//p[${index}]";
-	public final String eLEMENT_CONTENT_SUMMARY_WEBCONTENT_41 = "//*[@data-original-title='@{fileName}']/../../div[@class='text']//p[${index}]";
+	public final String eLEMENT_CONTENT_SUMMARY_WEBCONTENT_41 = "//*[contains(text(),'@{fileName}')]/../../div[@class='text']//p[${index}]";
 	//	public final String ELEMENT_CONTENT_COMMENT_EDIT_TITLE = "//*[@title='@{fileName}']/../../../..//*[@class='commentRight']//*[contains(text(),'Title has been updated to: ${title}')]";
 	public final String ELEMENT_CONTENT_COMMENT_EDIT_TITLE = "//*[contains(text(), '@{fileName}')]";
 	public final String ELEMENT_CONTENT = "//a[@title='@{fileName}']/..//*[contains(text(), '${text}')]";
@@ -106,7 +106,7 @@ public class HomePageActivity extends PlatformBase{
 	public final String ELEMENT_FILE_SIZE = "//a[@title='@{fileName}']/..//*[@class='versionFile' and contains(text(), '${size}')]";
 	public final String ELEMENT_FILE_SIZE_41 = "//a[@data-original-title='@{fileName}']/..//*[@class='versionFile' and contains(text(), '${size}')]";
 	public final String ELEMENT_FILE_COMMENT_ADD_CATEGORY = "//*[@title='@{fileName}']/../../../..//*[@class='commentBox']//*[text()='Category: ${category} has been added.']";
-	public final String ELEMENT_FILE_COMMENT_ADD_CATEGORY_41 = "//*[@data-original-title='@{fileName}']/../../../..//*[@class='commentBox']//*[text()='Category: ${category} has been added.']";
+	public final String ELEMENT_FILE_COMMENT_ADD_CATEGORY_41 = "//*[@title='@{fileName}']/../../../..//*[@class='commentBox']//*[text()='Category: ${category} has been added.']";
 	public final String ELEMENT_FILE_COMMENT_REMOVE_CATEGORY = "//*[@title='@{fileName}']/../../../..//*[@class='commentBox']//*[text()='Category: ${category} has been removed.']";
 	public final By ELEMENT_FILE_VIEW_POPUP = By.id("UISocialPopupWindow");
 	public final String ELEMENT_FILE_VIEW_NAME = "//*[@id='UISocialPopupWindow']//*[text()='${fileName}']";
@@ -250,13 +250,18 @@ public class HomePageActivity extends PlatformBase{
 						contentIndex++;
 					}
 				}else {
-					int contentIndex = 2;
+					int contentIndex = 1;
 					for (int i = 0; i < cont.length; i ++){
-						if(this.plfVersion.equalsIgnoreCase("4.0"))
+						if(this.plfVersion.equalsIgnoreCase("4.0")){
+							info("check on 4.0 home");
 							assert getText(ELEMENT_CONTENT_SUMMARY_WEBCONTENT.replace("@{fileName}", name).replace("${index}", String.valueOf(contentIndex))).equalsIgnoreCase(cont[i]);
-						else //if(waitForAndGetElement(eLEMENT_CONTENT_SUMMARY_WEBCONTENT_41.replace("@{fileName}", name).replace("${index}", String.valueOf(contentIndex)),5000,0,2)!=null)
+							
+						}else{
+							info("check on 4.1 home");//if(waitForAndGetElement(eLEMENT_CONTENT_SUMMARY_WEBCONTENT_41.replace("@{fileName}", name).replace("${index}", String.valueOf(contentIndex)),5000,0,2)!=null)
+						
 							assert getText(eLEMENT_CONTENT_SUMMARY_WEBCONTENT_41.replace("@{fileName}", name).replace("${index}", String.valueOf(contentIndex))).equalsIgnoreCase(cont[i]);
-						contentIndex++;
+						}
+							contentIndex++;
 					}
 				}
 			}

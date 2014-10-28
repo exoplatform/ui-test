@@ -1,6 +1,5 @@
 package org.exoplatform.selenium.platform.ecms.functional.siteexplorer.publishactivities;
 
-import static org.testng.AssertJUnit.assertEquals;
 import static org.exoplatform.selenium.TestLogger.info;
 
 import org.exoplatform.selenium.platform.HomePageActivity;
@@ -41,15 +40,17 @@ public class ECMS_SE_PublishActivities_ContentActivities_Update extends Platform
 		initSeleniumTest();
 		driver.get(baseUrl);
 		info("Login ECMS with " + DATA_USER1);
-		magAcc = new ManageAccount(driver,this.plfVersion);
-		actBar = new ActionBar(driver,this.plfVersion);
-		cTemplate = new ContentTemplate(driver,this.plfVersion);
-		siteExp = new SitesExplorer(driver,this.plfVersion);
-		navToolBar = new NavigationToolbar(driver,this.plfVersion);
-		ecms = new EcmsBase(driver,this.plfVersion);
-		cMenu = new ContextMenu(driver,this.plfVersion);
-		activity = new HomePageActivity(driver,this.plfVersion);
+
+		magAcc = new ManageAccount(driver, this.plfVersion);
+		actBar = new ActionBar(driver, this.plfVersion);
+		cTemplate = new ContentTemplate(driver, this.plfVersion);
+		siteExp = new SitesExplorer(driver, this.plfVersion);
+		navToolBar = new NavigationToolbar(driver, this.plfVersion);
+		ecms = new EcmsBase(driver, this.plfVersion);
+		cMenu = new ContextMenu(driver, this.plfVersion);
+		activity = new HomePageActivity(driver, this.plfVersion);
 		magAcc.signIn(DATA_USER1, DATA_PASS);
+
 	}
 
 	@AfterMethod
@@ -60,14 +61,14 @@ public class ECMS_SE_PublishActivities_ContentActivities_Update extends Platform
 	}
 
 	/**
-	 * == Update Content activity after edit title of content ==
-	 * Test case ID: 76962
+	 * == Update Content activity after edit title of document ==
+	 * Test case ID: 81201
 	 * Step 1: Add new content
 	 * Step 2: Edit title of content
-	 * Step 3: Check content activity after edit title of content
+	 * Step 3: Check content activity after edit title of document
 	 */
 	@Test
-	public void test01_UpdateContentActivityAfterEditTitleOfContent(){
+	public void test01_UpdateContentActivityAfterEditTitleOfDocument(){
 		//Declare variable
 		String node = "node01";
 		By bNode = By.xpath(siteExp.ELEMENT_SE_NODE.replace("{$node}", node));
@@ -107,7 +108,7 @@ public class ECMS_SE_PublishActivities_ContentActivities_Update extends Platform
 
 	/**
 	 * == Update Content activity after edit summary of content ==
-	 * Test case ID: 76963
+	 * Test case ID: 81202
 	 * Step 1: Add new content
 	 * Step 2: Edit summary of content
 	 * Step 3: Check content activity after edit summary
@@ -119,7 +120,6 @@ public class ECMS_SE_PublishActivities_ContentActivities_Update extends Platform
 		By bNode = By.xpath(siteExp.ELEMENT_SE_NODE.replace("{$node}", node));
 		String summary = "Summary of web content";
 		String comment = "Summary has been updated to:";
-		String sumcomment = comment+"\n"+summary;
 
 		/*Step 1: Add new content*/ 
 		//Open Sites Explorer
@@ -130,11 +130,11 @@ public class ECMS_SE_PublishActivities_ContentActivities_Update extends Platform
 		actBar.goToAddNewContent();
 		cTemplate.createNewWebContent(node,node,"", "", "", "");
 
-		/*Step 2: Edit summary of content*/
+		//Step 2: Edit summary of content
 		//Edit the summary of the shared content
 		cTemplate.editWebContent(node, "", "", summary, "", "");
 
-		/*Step 3: Check content activity after edit summary*/
+		//Step 3: Check content activity after edit summary
 		//Back to the Home page
 		info("-- Back to the Home page --");
 		navToolBar.goToHomePage();
@@ -145,7 +145,7 @@ public class ECMS_SE_PublishActivities_ContentActivities_Update extends Platform
 
 		//A comment is added: Summary has been updated to: $value.
 		info("-- Verify comment --");
-		assertEquals(sumcomment,driver.findElement(By.xpath(activity.ELEMENT_ACTIVITY_COMMENT_CONTENT_2.replace("${title}", node).replace("${comment}", comment))).getText());
+		waitForAndGetElement((By.xpath(activity.ELEMENT_ACTIVITY_COMMENT_CONTENT_2.replace("${comment}",comment+" "+summary))));
 
 		/*Clear data*/
 		info("clear data");
@@ -156,7 +156,7 @@ public class ECMS_SE_PublishActivities_ContentActivities_Update extends Platform
 
 	/**
 	 * == Update Content activity after edit content by user creator ==
-	 * Test case ID: 76964
+	 * Test case ID: 81203
 	 * Step 1: Add new content
 	 * Step 2: Edit content
 	 * Step 3: Check content activity after edit content
@@ -194,8 +194,7 @@ public class ECMS_SE_PublishActivities_ContentActivities_Update extends Platform
 
 		//A comment is added: Content has been updated.
 		info("-- Verify comment --");
-		assertEquals(comment,driver.findElement(By.xpath(activity.ELEMENT_ACTIVITY_COMMENT_CONTENT_2.replace("${title}", node).replace("${comment}", comment))).getText());
-
+		waitForAndGetElement((By.xpath(activity.ELEMENT_ACTIVITY_COMMENT_CONTENT_2.replace("${title}", "").replace("${comment}",comment ))));
 		/*Clear data*/
 		info("clear data");
 		info("-- Open Sites Explorer --");
@@ -205,7 +204,7 @@ public class ECMS_SE_PublishActivities_ContentActivities_Update extends Platform
 
 	/**
 	 * == Update Content activity after attach files to a content ==
-	 * Test case ID: 76965
+	 * Test case ID: 81204
 	 * Step 1 : Add content
 	 * Step 2: Attach file to content
 	 * Step 3: Check activity content after attach file
@@ -253,7 +252,7 @@ public class ECMS_SE_PublishActivities_ContentActivities_Update extends Platform
 
 	/**
 	 * == Update Content activity after remove attached document to a content ==
-	 * Test case ID: 76966
+	 * Test case ID: 81205
 	 * Step 1 : Add content
 	 * Step 2: Attach file to content
 	 * Step 3: Remove attached file
@@ -309,7 +308,7 @@ public class ECMS_SE_PublishActivities_ContentActivities_Update extends Platform
 
 	/**
 	 * == Update Content activity after add a category to a content ==
-	 * Test case ID: 76967
+	 * Test case ID: 81206
 	 * Step 1 : Add content
 	 * Step 2: Add category to the content
 	 * Step 3: Check content activity after add category to content
@@ -384,7 +383,7 @@ public class ECMS_SE_PublishActivities_ContentActivities_Update extends Platform
 
 	/**
 	 * == Update Content activity after remove a category to a content ==
-	 * Test case ID: 76968
+	 * Test case ID: 81207
 	 * Step 1 : Add content
 	 * Step 2: Add category to the content
 	 * Step 3: Remove a category in content
@@ -443,7 +442,7 @@ public class ECMS_SE_PublishActivities_ContentActivities_Update extends Platform
 
 	/**
 	 * == Update Content activity after add tag to a content ==
-	 * Test case ID: 76969
+	 * Test case ID: 81208
 	 * Step 1: Add tag to content
 	 * Step 2: Check content activity after add tag
 	 * Step 3: Add more tag
@@ -507,8 +506,8 @@ public class ECMS_SE_PublishActivities_ContentActivities_Update extends Platform
 
 		//Two comments are added two the activity: Tag: $value has been added.
 		info("-- Verify comment --");
-		activity.checkTagAfterAddingToContent(node, tag2[0], 1);
-		activity.checkTagAfterAddingToContent(node, tag2[1], 1);
+		activity.checkTagAfterAddingToContent(node, tag2[0]+","+tag2[1], 2);
+		activity.checkTagAfterAddingToContent(node, tag1[0], 1);
 
 		/*Clear data*/
 		info("clear data");
@@ -523,7 +522,7 @@ public class ECMS_SE_PublishActivities_ContentActivities_Update extends Platform
 
 	/**
 	 * == Update Content activity after remove tag to a content ==
-	 * Test case ID: 76970
+	 * Test case ID: 81209
 	 * Step 1: Step 1: Add new content
 	 * Step 2: Add a tag for content
 	 * Step 3: Add more tags for content
@@ -619,7 +618,7 @@ public class ECMS_SE_PublishActivities_ContentActivities_Update extends Platform
 
 	/**
 	 * == Update Content activity after add a comment a content ==
-	 * Test case ID: 76972
+	 * Test case ID: 81211
 	 * Step 1: Add new content
 	 * Step 2: Add comment for content
 	 * Step 3: Check content activity after comment a content
@@ -670,7 +669,7 @@ public class ECMS_SE_PublishActivities_ContentActivities_Update extends Platform
 
 	/**
 	 * == Update Content activity after edit a comment of a content ==
-	 * Test case ID: 76973
+	 * Test case ID: 81212
 	 * Step 1: Add new content
 	 * Step 2: Add comment for content
 	 * Step 3: Edit comment
@@ -730,7 +729,7 @@ public class ECMS_SE_PublishActivities_ContentActivities_Update extends Platform
 
 	/**
 	 * == Update Content activity after remove a comment of a content ==
-	 * Test case ID: 76974
+	 * Test case ID: 81213
 	 * Step 1: Add new content
 	 * Step 2: Add comment for content
 	 * Step 3: Remove content
@@ -787,7 +786,7 @@ public class ECMS_SE_PublishActivities_ContentActivities_Update extends Platform
 
 	/**
 	 * == Update Content activity after edit publication status to Pending of content ==
-	 * Test case ID: 76977
+	 * Test case ID: 81216
 	 * Step 1: Add new content
 	 * Step 2: Change status of content to "pending"
 	 * Step 3: Check content activity after change status
@@ -838,7 +837,7 @@ public class ECMS_SE_PublishActivities_ContentActivities_Update extends Platform
 
 	/**
 	 * == Update Content activity after edit publication status to Approved of content ==
-	 * Test case ID: 76978
+	 * Test case ID: 81217
 	 * Step 1: Add new content
 	 * Step 2: Approved content
 	 * Step 3: Check content activity after change status
@@ -889,7 +888,7 @@ public class ECMS_SE_PublishActivities_ContentActivities_Update extends Platform
 
 	/**
 	 * == Update Content activity after edit publication status to Staged of content ==
-	 * Test case ID: 76979
+	 * Test case ID: 81218
 	 * Step 1: Add new content
 	 * Step 2: Staged content
 	 * Step 3: Check content activity after change status
@@ -940,7 +939,7 @@ public class ECMS_SE_PublishActivities_ContentActivities_Update extends Platform
 
 	/**
 	 * == Update Content activity after edit publication status to Published of content ==
-	 * Test case ID: 76980
+	 * Test case ID: 81219
 	 * Step 1: Add new content
 	 * Step 2: Change status of content to "Published"
 	 * Step 3: Check content activity after change status
@@ -991,7 +990,7 @@ public class ECMS_SE_PublishActivities_ContentActivities_Update extends Platform
 
 	/**
 	 * == Update Content activity after restore a revision of content ==
-	 * Test case ID: 76981
+	 * Test case ID: 81220
 	 * Step 1: Add new content
 	 * Step 2: Check in content
 	 * Step 3: Checkout content
@@ -1074,13 +1073,13 @@ public class ECMS_SE_PublishActivities_ContentActivities_Update extends Platform
 
 	/**
 	 * == Not Display Content activity after check in a content ==
-	 * Test case ID: 76983
+	 * Test case ID: 81222
 	 * Step 1: Check in content
 	 * Step 2: Check content activity 
 	 * Pending: Test fail. Wait for confirming test case again (step 2)
 	 * Refer https://jira.exoplatform.org/browse/ECMS-5662
 	 */
-	@Test (groups={"pending"})
+	@Test
 	public void test18_NotDisplayContentActivityAfterCheckInAContent(){
 		//Declare variable
 		String node = "node18";
@@ -1132,7 +1131,7 @@ public class ECMS_SE_PublishActivities_ContentActivities_Update extends Platform
 
 	/**
 	 * == Update Content activity after move a content ==
-	 * Test case ID: 76985
+	 * Test case ID: 81224
 	 * Step 1: Add new content
 	 * Step 2: Move content to new place
 	 * Step 3: Check content activity after move content

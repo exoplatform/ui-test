@@ -103,7 +103,7 @@ public class ActionBar extends EcmsBase{
 	public By ELEMENT_CATEGORY_TREE_BOX = By.name("taxonomyTree");
 	public By ELEMENT_ADD_ROOT_BUTTON = By.xpath("//label[text()='Root Tree']/following::img[@title='Add Root Node']");
 	public By ELEMENT_REFERENCE_TAB = By.xpath("//a[contains(text(),'Referenced Categories')]");
-	public String ELEMENT_DELETE_CATEGORY_ICON = "//td[text()='{$categoryPath}']/..//*[@data-original-title='Delete']";
+	public String ELEMENT_DELETE_CATEGORY_ICON = "//td[text()='{$categoryPath}']/..//i[@class='uiIconDelete uiIconLightGray']";
 	public String MSG_DELETE_CATEGORY = "Are you sure you want to delete this reference?";
 
 	//Version Info form
