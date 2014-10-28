@@ -498,7 +498,7 @@ public class ECMS_SE_BasicAction_Lock extends PlatformBase {
 		Utils.pause(3000);
 		rightClickOnElement(cMenu.ELEMENT_FILE_TITLE.replace("${titleOfFile}", WEB_CONTENT2));
 		Utils.pause(2000);
-		waitForAndGetElement(cMenu.ELEMENT_CONTEXT_MENU_UNLOCK).click();
+		waitForAndGetElement(cMenu.ELEMENT_MENU_UNLOCK).click();
 		
 		//Delete data
 		ecms.goToNode(WEB_CONTENT_PATH);

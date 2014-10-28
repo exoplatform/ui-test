@@ -38,7 +38,8 @@ public class Template extends BasicAction{
 		By eTemplate = By.xpath(ELEMENT_SELECT_TEMPLATE_LINK.replace("{$template}",template));
 		goToAddTemplateWikiPage();	
 		info("--Add a wiki page from template--");
-		clickByJavascript(eTemplate, 2);
+
+		click(eTemplate, 2);
 		click(ELEMENT_SELECT_BUTTON);
 		Utils.pause(500);
 		driver.navigate().refresh();

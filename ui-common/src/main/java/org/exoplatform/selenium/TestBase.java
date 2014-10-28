@@ -52,6 +52,7 @@ public class TestBase {
 	public int loopCount = 0;	
 	public boolean ieFlag;	 
 	public boolean chromeFlag;
+
 	/**
 	 * 4.0 : Version 4.0.x.
 	 * 4.1 : Version 4.1.x.
@@ -97,6 +98,14 @@ public class TestBase {
 	public final By ELEMENT_ADMIN_PASS_LABEL = By.xpath("//h5[contains(text(), 'Admin Password')]");
 	public final By ELEMENT_ACCOUNT_ERROR = By.xpath("//*[@class='accountSetupError']");
 
+	public TestBase(){
+
+	}
+
+	public TestBase(WebDriver dr){
+		driver = dr;
+	}
+
 	/*======== End of Term and conditions =====*/	
 	public void initSeleniumTestWithOutTermAndCondition(Object... opParams){
 		//		System.setProperty("browser", "iexplorer");
@@ -122,6 +131,7 @@ public class TestBase {
 			DesiredCapabilities capabilities = DesiredCapabilities.firefox();
 			capabilities.setCapability(FirefoxDriver.PROFILE, profile);
 			driver = new FirefoxDriver(capabilities);
+
 		}
 
 		baseUrl = System.getProperty("baseUrl");
@@ -828,7 +838,6 @@ public class TestBase {
 			fp.setPreference("browser.helperApps.alwaysAsk.force", false);
 			driver = new FirefoxDriver(fp);
 		}
-
 
 		baseUrl = System.getProperty("baseUrl");
 		if (baseUrl==null) baseUrl = DEFAULT_BASEURL;

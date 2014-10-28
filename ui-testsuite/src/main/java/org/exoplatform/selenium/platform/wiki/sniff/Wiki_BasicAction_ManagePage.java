@@ -152,9 +152,10 @@ public class Wiki_BasicAction_ManagePage extends ManageDraft{
 	public void test05_PreviewTemplate(){
 		By eTemplate = By.xpath(ELEMENT_SELECT_TEMPLATE_LINK.replace("{$template}","Two-Column_Layout"));
 		goToAddTemplateWikiPage();	
-		clickByJavascript(eTemplate, 2);
+
+		click(eTemplate, 2);
 		click(ELEMENT_SELECT_BUTTON);
-		clickByJavascript(ELEMENT_PREVIEW_BUTTON);
+		click(ELEMENT_PREVIEW_BUTTON);
 		waitForAndGetElement("//*[@class='uiWikiPageTitlePreview' and contains(text(), 'Two-Column Layout')]");
 		click(ELEMENT_CLOSE_PREVIEW_WINDOW);
 	}
@@ -168,7 +169,8 @@ public class Wiki_BasicAction_ManagePage extends ManageDraft{
 
 		By eTemplate = By.xpath(ELEMENT_SELECT_TEMPLATE_LINK.replace("{$template}","Status_Meeting"));
 		goToAddTemplateWikiPage();	
-		clickByJavascript(eTemplate, 2);
+
+		click(eTemplate, 2);
 		click(ELEMENT_SELECT_BUTTON);
 		addWikiPageSourceEditor(title, null);
 
