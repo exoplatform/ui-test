@@ -109,6 +109,7 @@ public class SettingSearchPage extends PlatformBase {
 	public final String ELEMENT_RESULT_EXCERPT = "//div[@id='resultPage']//a[contains(text(),'${item}')]/*[contains(text(),'${keySearch}')]/../../../*[@class='excerpt']";
 	public final String ELEMENT_RESULT_ICON = "//div[@id='resultPage']//a[contains(text(),'${item}')]/*[contains(text(),'${keySearch}')]/../../../../*[contains(@class,'avatar pull-left')]";
 
+
 	public final String ELEMENT_RESULT_INDEX = "//*[@id='result']/div[${index}][contains(@class,'${title}')]";
 	public final String ELEMENT_RESULT_TITLE_41 = "//*[contains(@href, '${name}')]";
 	public final By ELEMENT_RESULT_CONTENT_DETAIL = By.xpath("//*[@class='content']/*[@class='detail']");
