@@ -108,8 +108,9 @@ public class SettingSearchPage extends PlatformBase {
 	public final String ELEMENT_RESULT_LOCATION_DATETIME = "//div[@id='resultPage']//a[contains(text(),'${item}')]/*[contains(text(),'${keySearch}')]/../../../*[@class='detail']";
 	public final String ELEMENT_RESULT_EXCERPT = "//div[@id='resultPage']//a[contains(text(),'${item}')]/*[contains(text(),'${keySearch}')]/../../../*[@class='excerpt']";
 	public final String ELEMENT_RESULT_ICON = "//div[@id='resultPage']//a[contains(text(),'${item}')]/*[contains(text(),'${keySearch}')]/../../../../*[contains(@class,'avatar pull-left')]";
-	public final String ELEMENT_RESULT_INDEX = "//*[@id='result']/div[${index}][contains(@class,'${title}')]";
 
+	public final String ELEMENT_RESULT_INDEX = "//*[@id='result']/div[${index}][contains(@class,'${title}')]";
+	public final String ELEMENT_RESULT_TITLE_41 = "//*[contains(@href, '${name}')]";
 	public final By ELEMENT_RESULT_CONTENT_DETAIL = By.xpath("//*[@class='content']/*[@class='detail']");
 	public final By ELEMENT_SHOW_MORE_RESULT = By.xpath("//*[@id='btnShowMore']");
 	public final By ELEMENT_SEARCH_PORTLET = By.xpath("//div[contains(@class,'portletLayoutDecorator') and contains(text(),'Search')]");
@@ -127,7 +128,9 @@ public class SettingSearchPage extends PlatformBase {
 	//Task page result
 	public final String ELEMENT_RESULT_SEARCH_PAGE_ICON = "//*[@id='result']//div[contains(@class,'resultBox')]//*[contains(text(),'${name_document}')]/../../..//i[contains(@class,'webContent')]";
 	public final String ELEMENT_RESULT_SEARCH_PAGE_TITLE = "//*[@id='result']//div[contains(@class,'resultBox')]//a[contains(text(),'${name_document}')]";
+	public final String ELEMENT_RESULT_SEARCH_PAGE_TITLE_41 = "//*[@id='result']//div[contains(@class,'resultBox')]//a[contains(@href,'${name_document}')]";
 	public final String ELEMENT_RESULT_SEARCH_PAGE_EXCERPT = "//*[@id='result']//div[contains(@class,'content')]//*[contains(text(),'${name_document}')]/../../div[contains(@class,'detail')]";
+	public final String ELEMENT_RESULT_SEARCH_PAGE_EXCERPT_41 = "//*[@id='result']//div[contains(@class,'content')]//*[contains(text(),'${name_document}')]/../../../div[contains(@class,'detail')]";
 	public final String ELEMENT_SEARCH_RESULT_EXCERPT = "//*[@id='result']//div[@class='detail'][contains(.,'${keySearch}')]";
 	public final String ELEMENT_SEARCH_RESULT_CONTENT_DETAIL = "//*[@id='result']//div[@class='detail'][contains(.,'${keySearch1}') and contains(.,'${keySearch2}')]";
 

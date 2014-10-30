@@ -32,6 +32,8 @@ import org.openqa.selenium.WebDriver;
  *
  */
 public class Utils {
+	private static Scanner scanner;
+
 	//public WebDriver driver;
 	//
 	public static void pause(long timeInMillis) {
@@ -164,7 +166,8 @@ public class Utils {
 		} catch (FileNotFoundException e) {
 			error("Failed to find location of... " + filePath);
 		}
-		String inputStreamString = new Scanner(fis,"UTF-8").useDelimiter("\\A").next();		
+		scanner = new Scanner(fis,"UTF-8");
+		String inputStreamString = scanner.useDelimiter("\\A").next();		
 		return inputStreamString;	
 	}
 

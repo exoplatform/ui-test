@@ -32,7 +32,7 @@ public class PeopleConnection extends SocialBase {
 	public final By ELEMENT_EVERYONE_TAB = By.linkText("Everyone");
 	public final String ELEMENT_EVERYONE_TAB_ACTIVE = "//li[@class='active']/a[contains(text(),'Everyone')]";
 	public final By ELEMENT_REQUEST_SENT_TAB = By.linkText("Requests Sent");
-	public final String ELEMENT_CONNECTION_BUTTON = "//a[text()='${peopleName}']/ancestor::div[contains(@class,'pull-left')]//button[contains(text(),'Connect')]";
+	public final String ELEMENT_CONNECTION_BUTTON = "//*[contains(text(), '${peopleName}')]/ancestor::div[contains(@class,'pull-left')]//button[contains(text(),'Connect')]";
 	public final String ELEMENT_CANCEL_REQUEST_BUTTON = "//a[text()='${peopleName}']/ancestor::div[contains(@class,'pull-left')]//button[contains(text(),'Cancel Request')]";
 	public final String ELEMENT_REMOVE_CONNECTION_BUTTON = "//a[text()='${peopleName}']/ancestor::div[contains(@class,'pull-left')]//button[contains(text(),'Remove Connection')]";
 	public final String ELEMENT_CONFIRM_BUTTON = "//a[text()='${peopleName}']/ancestor::div[contains(@class,'pull-left')]//button[contains(text(),'Confirm')]";
@@ -59,7 +59,7 @@ public class PeopleConnection extends SocialBase {
 		//By ELEMENT_CANCEL_REQUEST_BUTTON = By.xpath("//div/a[text()='"+peopleName+"']/following::ul/li/a[@title='Cancel Request']");
 		//By ELEMENT_CANCEL_REQUEST_BUTTON = By.xpath(ELEMENT_CONNECTION.replace("${peopleName}", peopleName) + "/../../ul/li[2]/a[@title='Cancel Request']");
 		info("-- Connect the user: " + peopleName);
-		if(waitForAndGetElement(ELEMENT_EVERYONE_TAB,5000,0)==null){
+		if(waitForAndGetElement(ELEMENT_EVERYONE_TAB,5000, 0)==null){
 			info("----Go to My connections----");
 			goToMyConnections();
 			info("---Click  every one tab-----");
@@ -76,7 +76,7 @@ public class PeopleConnection extends SocialBase {
 		info("---Verify Connect button is disappeared----");
 		waitForElementNotPresent(ELEMENT_CONNECTION_BUTTON.replace("${peopleName}", peopleName));
 		info("-----Verify Cancel request button is displayed-----");
-		waitForAndGetElement(ELEMENT_CANCEL_REQUEST_BUTTON.replace("${peopleName}", peopleName));
+		waitForAndGetElement(ELEMENT_CANCEL_REQUEST_BUTTON.replace("${peopleName}", peopleName),5000, 1);
 	}
 
 	/**
