@@ -116,6 +116,10 @@ public class ContentTemplate extends EcmsBase {
 	// CSS File
 	public final By ELEMENT_CSS_FILE_LINK = By
 			.xpath("//*[@class='templateLabel']//*[text()='CSS File']");
+	
+	// JS File
+	public final By ELEMENT_JS_FILE_LINK = By
+			.xpath("//*[@class='templateLabel']//*[text()='Javascript File']");
 
 	/* End Added */
 
@@ -646,21 +650,21 @@ public class ContentTemplate extends EcmsBase {
 		}
 		switch (type) {
 		case Content:
-			type(ELEMENT_FOLDER_TITLE_TEXTBOX, title, false);
+			type(ELEMENT_FOLDER_TITLE_TEXTBOX, title, true);
 			selectOption(ELEMENT_FOLDER_TYPE_OPTION,
 					ELEMENT_CONTENT_FOLDER_TYPE);
 			break;
 		case Document:
 			selectOption(ELEMENT_FOLDER_TYPE_OPTION,
 					ELEMENT_DOCUMENT_FOLDER_TYPE);
-			type(ELEMENT_FOLDER_TITLE_TEXTBOX, title, false);
+			type(ELEMENT_FOLDER_TITLE_TEXTBOX, title, true);
 			break;
 		case Css:
 			selectOption(ELEMENT_FOLDER_TYPE_OPTION, ELEMENT_CSS_FOLDER_TYPE);
-			type(ELEMENT_FOLDER_TITLE_TEXTBOX, title, false);
+			type(ELEMENT_FOLDER_TITLE_TEXTBOX, title, true);
 			break;
 		case None:
-			type(ELEMENT_FOLDER_TITLE_TEXTBOX, title, false);
+			type(ELEMENT_FOLDER_TITLE_TEXTBOX, title, true);
 			if (fType == null) {
 				info("-- Add a new folder without selecting folder's type --");
 			} else if (fType != null && fType.isSelected()) {

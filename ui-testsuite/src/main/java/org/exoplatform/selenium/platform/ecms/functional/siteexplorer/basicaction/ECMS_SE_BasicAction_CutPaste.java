@@ -20,8 +20,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.AfterMethod;
 import static org.exoplatform.selenium.TestLogger.*;
 
-/*
- * @author: Thuntn
+/**
  * @date: 08/10/2012
  */
 public class ECMS_SE_BasicAction_CutPaste extends PlatformBase {
@@ -49,260 +48,600 @@ public class ECMS_SE_BasicAction_CutPaste extends PlatformBase {
 		initSeleniumTest();
 		driver.get(baseUrl);
 		driver.manage().window().maximize();
-		button = new Button(driver);
-		alt = new ManageAlert(driver);
-		magAcc = new ManageAccount(driver);
-		navToolBar = new NavigationToolbar(driver);
-		actBar = new ActionBar(driver);
-		ecms = new EcmsBase(driver);
+		button = new Button(driver, this.plfVersion);
+		alt = new ManageAlert(driver, this.plfVersion);
+		magAcc = new ManageAccount(driver, this.plfVersion);
+		navToolBar = new NavigationToolbar(driver, this.plfVersion);
+		actBar = new ActionBar(driver, this.plfVersion);
+		ecms = new EcmsBase(driver, this.plfVersion);
 		ecmsPer = new EcmsPermission(driver);
-		cTemplate = new ContentTemplate(driver);
-		cMenu = new ContextMenu(driver);
+		cTemplate = new ContentTemplate(driver, this.plfVersion);
+		cMenu = new ContextMenu(driver, this.plfVersion);
 		bPre = new BrowserPreferences(driver);
 		magView = new ManageView(driver);
-		siteExp = new SitesExplorer(driver);
+		siteExp = new SitesExplorer(driver, this.plfVersion);
 		magAcc.signIn(USER,PASS);
 		navToolBar.goToSiteExplorer();
 	}
-
-	//CaseID: 66802
-	//cut a content folder and paste it to another node
+	
+	@AfterMethod
+	public void afterMethod() {
+		driver.quit();
+	}
+	
+	/* 
+	 * Test_Case_ID:101958
+	 * Case 1: Cut a Content folder and paste it into a Content Folder
+	 */
 	@Test
-	public void test01_CutContentFolderPasteInOtherNode() {
-		String title = "ECMS_DMS_SE_BasicAction_CutPaste_01";
-		String targetNode = "target_CutPaste_01";
-		By bCont = By.xpath(cMenu.ELEMENT_FILE_TITLE.replace("${titleOfFile}", title)); 
-		By bTarget = By.xpath(cMenu.ELEMENT_FILE_TITLE.replace("${titleOfFile}", targetNode));
+	public void test01_1_CutContentFolderPasteInContentFolder() {
+		String titleCut = "titleCut1019581";
+		String titlePaste = "titlePaste1019581";
+		By bCont = By.xpath(cMenu.ELEMENT_FILE_TITLE.replace("${titleOfFile}", titleCut)); 
+		By bTarget = By.xpath(cMenu.ELEMENT_FILE_TITLE.replace("${titleOfFile}", titlePaste));
 
-		info("Cut a content folder and paste it to another node!");
-		//create a content folder 
-		cTemplate.createNewFolder(targetNode, folderType.Content);
-		cTemplate.createNewFolder(title, folderType.Content);
-		//cut and paste content folder to acme folder
+		info("Cut a Content Folder and paste it into a Content Folder!");
+		
+		//Create a content folder 
+		info(titleCut);
+		cTemplate.createNewFolder(titlePaste, folderType.Content);
+		cTemplate.createNewFolder(titleCut, folderType.Content);
+		
+		//Cut and paste a Content Folder into a Content Folder
 		cMenu.cutAndPasteNode(bCont, bTarget);
 
-		//verify if paste the content folder successfully in acme folder 
+		//Verify if paste the Content Folder successfully into Content Folder
+		click(siteExp.ELEMENT_SIDEBAR_SITES_MANAGEMENT);
 		waitForElementNotPresent(bCont);
-		ecms.goToNode(targetNode);
+		ecms.goToNode(titlePaste);
 		waitForAndGetElement(bCont);
 
-		//delete data
+		//Delete data
 		cMenu.deleteDocument(bTarget);
 	}
-
-	// CaseID 66803
-	//cut a document folder and paste it to a Document folder
+	
+	/* 
+	 * @date: 30/10/2014
+	 * Test_Case_ID:101958
+	 * Case 2: Cut a Content folder and paste it into a Web Content document
+	 */
 	@Test
-	public void test02_CutDocumentFolderPasteInDocumentFolder() {
-		String title="ECMS_DMS_SE_BasicAction_CutPaste_02";
-		By bDoc=By.xpath(cMenu.ELEMENT_FILE_TITLE.replace("${titleOfFile}", title));
-		String titleDes="ECMS_DMS_SE_BasicAction_CutPaste_02_des";
-		By bDocDes=By.xpath(cMenu.ELEMENT_FILE_TITLE.replace("${titleOfFile}", titleDes));
+	public void test01_2_CutContentFolderPasteIntoWebContent() {
+		String titleCut = "titleCut1019582";
+		String titlePaste = "titlePaste1019582";
+		By bCont = By.xpath(cMenu.ELEMENT_FILE_TITLE.replace("${titleOfFile}", titleCut)); 
+		By bTarget = By.xpath(cMenu.ELEMENT_FILE_TITLE.replace("${titleOfFile}", titlePaste));
 
-		info("Cut a document folder and paste it to another node!");
-		//create a document folder - source
-		cTemplate.createNewFolder(title, folderType.Document);
+		info("Cut a Content Folder and paste it into a Web Content!");
+		
+		//Create a Content Folder 
+		info(titleCut);
+		cTemplate.createNewFolder(titleCut, folderType.Content);
+		
+		//Create a Web Content document
+		info(titlePaste);
+		actBar.goToAddNewContent();
+		cTemplate.createNewWebContent(titlePaste, titlePaste, "", "", "", "");
+		
+		//Cut and paste a Content Folder into a Web Content document
+		cMenu.cutNode(bCont);
+		rightClickOnElement(bTarget);
+		cMenu.pasteNode(bTarget);
+		
+		//Verify if paste the Content Folder successfully into Content Folder
+		click(siteExp.ELEMENT_SIDEBAR_SITES_MANAGEMENT);
+		waitForElementNotPresent(bCont);
+		ecms.goToNode(titlePaste);
+		waitForAndGetElement(bCont);
+		
+		//Delete data
+		cMenu.deleteDocument(bTarget);
+	}
+	
+	/* 
+	 * @date: 30/10/2014
+	 * Test_Case_ID:101958
+	 * Case 3: Cut a Content folder and paste it into an Announcement
+	 */
+	@Test
+	public void test01_3_CutContentFolderPasteIntoAnnouncement() {
+		String titleCut = "titleCut1019583";
+		String titlePaste = "titlePaste1019583";
+		By bCont = By.xpath(cMenu.ELEMENT_FILE_TITLE.replace("${titleOfFile}", titleCut)); 
+		By bTarget = By.xpath(cMenu.ELEMENT_FILE_TITLE.replace("${titleOfFile}", titlePaste));
 
-		//create a document folder -destination
-		cTemplate.createNewFolder(titleDes, folderType.Document);
+		info("Cut a Content Folder and paste it into an Announcement!");
+		
+		//Create a content folder 
+		info(titleCut);
+		cTemplate.createNewFolder(titleCut, folderType.Content);
+		
+		//Create an Announcement document
+		info(titlePaste);
+		actBar.goToAddNewContent();
+		cTemplate.createNewAnnouncement(titlePaste, titlePaste);
+		
+		//Cut and paste a Content Folder into an Announcement document
+		cMenu.cutNode(bCont);
+		rightClickOnElement(bTarget);
+		cMenu.pasteNode(bTarget);
+		
+		//Verify if paste the Content Folder successfully into Content Folder
+		click(siteExp.ELEMENT_SIDEBAR_SITES_MANAGEMENT);
+		waitForElementNotPresent(bCont);
+		ecms.goToNode(titlePaste);
+		waitForAndGetElement(bCont);
+		
+		//Delete data
+		cMenu.deleteDocument(bTarget);
+	}
+	
+	/*
+	 * Test_Case_ID: 101959
+	 * Case 1: Cut a Document Folder and paste it into a Document folder
+	 */
+	@Test
+	public void test02_1_CutDocumentFolderPasteInDocumentFolder() {
+		String titleCut="titleCut1019591";
+		By bDoc=By.xpath(cMenu.ELEMENT_FILE_TITLE.replace("${titleOfFile}", titleCut));
+		String titlePaste="titlePaste1019591";
+		By bDocDes=By.xpath(cMenu.ELEMENT_FILE_TITLE.replace("${titleOfFile}", titlePaste));
 
-		//cut and paste the document folder to acme folder
+		info("Cut a Document Folder and paste it to Document Folder!");
+		
+		//Create a Document folder - source
+		cTemplate.createNewFolder(titleCut, folderType.Document);
+
+		//Create a Document folder -destination
+		cTemplate.createNewFolder(titlePaste, folderType.Document);
+
+		//Cut and paste the Document folder into Document Folder
 		cMenu.cutAndPasteNode(bDoc, bDocDes);
 
-		//verify if paste document folder successfully in destination folder 
+		//Verify if paste Document Folder successfully in Document Folder 
 		ecms.goToNode(bDocDes);
 		waitForAndGetElement(bDocDes);
 
-		//delete data
+		//Delete data
 		cMenu.deleteDocument(bDocDes);
 	}
 
-	//CaseID 66803
-	//cut a document folder and paste it to a content node
+	/*
+	 * @date: 30/10/2014
+	 * Test_Case_ID: 101959
+	 * Case 2: Cut a Document Folder and paste it into a Content Folder
+	 */
 	@Test
-	public void test02_CutDocumentFolderPasteInContentFolder() {
-		String title="ECMS_DMS_SE_BasicAction_CutPaste_02";
-		By bDoc=By.xpath(cMenu.ELEMENT_FILE_TITLE.replace("${titleOfFile}", title));
-		String titleDes="ECMS_DMS_SE_BasicAction_CutPaste_02_des";
-		By bDocDes=By.xpath(cMenu.ELEMENT_FILE_TITLE.replace("${titleOfFile}", titleDes));
+	public void test02_2_CutDocumentFolderPasteIntoContentFolder() {
+		String titleCut="titleCut1019592";
+		By bDoc=By.xpath(cMenu.ELEMENT_FILE_TITLE.replace("${titleOfFile}", titleCut));
+		String titlePaste="titlePaste1019592";
+		By bDocDes=By.xpath(cMenu.ELEMENT_FILE_TITLE.replace("${titleOfFile}", titlePaste));
 
-		info("Cut a document folder and paste it to another node!");
-		//create a document folder - source
-		cTemplate.createNewFolder(title, folderType.Document);
+		info("Cut a Document Folder and paste it into Content Folder!");
+		
+		//Create a Document Folder - source
+		cTemplate.createNewFolder(titleCut, folderType.Document);
 
-		//create a document folder -destination
-		cTemplate.createNewFolder(titleDes, folderType.Content);
+		//Create a Content Folder -destination
+		cTemplate.createNewFolder(titlePaste, folderType.Content);
 
-		//cut and paste the document folder to acme folder
+		//Cut and paste a Document Folder into a Content Folder
 		cMenu.cutAndPasteNode(bDoc, bDocDes);
 
-		//verify if paste document folder successfully in destination folder 
+		//Verify if paste Document Folder successfully in Content Folder 
 		ecms.goToNode(bDocDes);
 		waitForAndGetElement(bDocDes);
 
-		//delete data
+		//Delete data
 		cMenu.deleteDocument(bDocDes);
 	}
 	
-	//CaseID: 66804
-	//Cut a document folder and paste it to file document!
+	/*
+	 * @date: 30/10/2014
+	 * Test_Case_ID: 101959
+	 * Case 3: Cut a Document Folder and paste it into a Web Content
+	 */
 	@Test
-	public void test04_CutDocumentFolderPasteIntoFileDocument() {
-		String title="ECMS_DMS_SE_BasicAction_CutPaste_04";
-		By bDoc=By.xpath(cMenu.ELEMENT_FILE_TITLE.replace("${titleOfFile}", title));
-		String titleDes="ECMS_DMS_SE_BasicAction_CutPaste_04_des";
-		By bDocDes=By.xpath(cMenu.ELEMENT_FILE_TITLE.replace("${titleOfFile}", titleDes));
+	public void test02_3_CutDocumentFolderPasteIntoWebContent() {
+		String titleCut="titleCut1019593";
+		By bDoc=By.xpath(cMenu.ELEMENT_FILE_TITLE.replace("${titleOfFile}", titleCut));
+		
+		String titlePaste="titlePaste1019593";
+		By bDocDes=By.xpath(cMenu.ELEMENT_FILE_TITLE.replace("${titleOfFile}", titlePaste));
 
-		info("Cut a document folder and paste it to file document!");
-		//create a document folder - source
-		cTemplate.createNewFolder(title, folderType.Document);
+		info("Cut a Document Folder and paste it into Web Content!");
+		
+		//Create a Document Folder - source
+		cTemplate.createNewFolder(titleCut, folderType.Document);
 
-		//create a file document -destination
+		//Create a Web Content document
+		info(titlePaste);
 		actBar.goToAddNewContent();
-		cTemplate.createNewFile(titleDes, titleDes, titleDes);
+		cTemplate.createNewWebContent(titlePaste, titlePaste, "", "", "", "");
 
-		//cut and paste the document folder to file document
+		//Cut and paste the Document Folder into Web Content document
+		cMenu.cutAndPasteNode(bDoc, bDocDes);
+
+		//Verify if paste Document folder successfully into Web Content document 
+		ecms.goToNode(bDocDes);
+		waitForAndGetElement(bDocDes);
+
+		//Delete data
+		cMenu.deleteDocument(bDocDes);
+	}
+	
+	/*
+	 * Test_Case_ID: 101960
+	 * Case 1: Cut a Document Folder and paste it into File document!
+	 */
+	@Test
+	public void test03_1_CutDocumentFolderPasteIntoFileDocument() {
+		String titleCut="titleCut1019601";
+		By bDoc=By.xpath(cMenu.ELEMENT_FILE_TITLE.replace("${titleOfFile}", titleCut));
+		
+		String titlePaste="titlePaste1019601";
+		By bDocDes=By.xpath(cMenu.ELEMENT_FILE_TITLE.replace("${titleOfFile}", titlePaste));
+
+		info("Cut a Focument Folder and paste it into File Document!");
+		
+		//Create a Document Folder - source
+		cTemplate.createNewFolder(titleCut, folderType.Document);
+
+		//Create a File Document -destination
+		actBar.goToAddNewContent();
+		cTemplate.createNewFile(titlePaste, titlePaste, titlePaste);
+
+		//Cut and paste the Document Folder into File Document
 		cMenu.cutNode(bDoc);
 		rightClickOnElement(bDocDes);
 		waitForElementNotPresent(ELEMENT_PASTE_NODE);
-		
-		//verify if paste document folder successfully in a file document
-		
+			
+		//Delete data
 		cMenu.deleteDocument(bDocDes);
 		cMenu.deleteDocument(bDoc);
 	}
 	
-	//CaseID: 66804
-	//Cut a document folder and paste it to uploaded file!
+	/*
+	 * @date: 30/10/2014
+	 * Test_Case_ID: 101960
+	 * Case 2: Cut a Document Folder and paste it into HTML File document!
+	 */
 	@Test
-	public void test04_CutDocumentFolderPasteToUploadedFile() {
-		String title="ECMS_DMS_SE_BasicAction_CutPaste_04";
-		By bDoc=By.xpath(cMenu.ELEMENT_FILE_TITLE.replace("${titleOfFile}", title));
-		String titleDes="ECMS_DMS_SE_BasicAction_CutPaste_04_des.zip";
-		String img="TestData/ECMS_DMS_SE_BasicAction_CutPaste_04_des.zip";
-		By bDocDes=By.xpath(cMenu.ELEMENT_FILE_TITLE.replace("${titleOfFile}", titleDes));
+	public void test03_2_CutDocumentFolderPasteIntoHTMLFileDocument() {
+		String titleCut="titleCut1019602";
+		By bDoc=By.xpath(cMenu.ELEMENT_FILE_TITLE.replace("${titleOfFile}", titleCut));
+		
+		String titlePaste="titlePaste1019602";
+		By bDocDes=By.xpath(cMenu.ELEMENT_FILE_TITLE.replace("${titleOfFile}", titlePaste));
 
-		info("Cut a document folder and paste it to uploaded file!");
-		//create a document folder - source
-		cTemplate.createNewFolder(title, folderType.Document);
+		info("Cut a Document Folder and paste it to HTML File Document!");
+		
+		//Create a Document Folder - source
+		cTemplate.createNewFolder(titleCut, folderType.Document);
 
-		//create an uploaded file -destination
+		//Create a HTML File Document -destination
+		actBar.goToAddNewContent();
+		cTemplate.createNewHtmlFile(titlePaste, "");
+
+		//Cut and paste the Document Folder into HTML File Document
+		cMenu.cutNode(bDoc);
+		rightClickOnElement(bDocDes);
+		waitForElementNotPresent(ELEMENT_PASTE_NODE);
+			
+		//Delete data
+		cMenu.deleteDocument(bDocDes);
+		cMenu.deleteDocument(bDoc);
+	}
+	
+	/*
+	 * @date: 30/10/2014
+	 * Test_Case_ID: 101960
+	 * Case 3: Cut a Document Folder and paste it into CSS File document!
+	 */
+	@Test
+	public void test03_3_CutDocumentFolderPasteIntoCSSFileDocument() {
+		String titleCut="titleCut1019603";
+		By bDoc=By.xpath(cMenu.ELEMENT_FILE_TITLE.replace("${titleOfFile}", titleCut));
+		
+		String titlePaste="titlePaste1019603";
+		By bDocDes=By.xpath(cMenu.ELEMENT_FILE_TITLE.replace("${titleOfFile}", titlePaste));
+
+		info("Cut a Document Folder and paste it into CSS File document!");
+		
+		//Create a Document Folder - source
+		cTemplate.createNewFolder(titleCut, folderType.Document);
+
+		//Create a CSS File Document -destination
+		actBar.goToAddNewContent();
+		click(cTemplate.ELEMENT_CSS_FILE_LINK);
+		cTemplate.createNewCssFile(titlePaste, "", ""	);
+
+		//Cut and paste the Document Folder into CSS File Document
+		cMenu.cutNode(bDoc);
+		rightClickOnElement(bDocDes);
+		waitForElementNotPresent(ELEMENT_PASTE_NODE);
+			
+		//Delete data
+		cMenu.deleteDocument(bDocDes);
+		cMenu.deleteDocument(bDoc);
+	}
+	
+	/*
+	 * @date: 30/10/2014
+	 * Test_Case_ID: 101960
+	 * Case 4: Cut a Document Folder and paste it into JS File document!
+	 */
+	@Test
+	public void test03_4_CutDocumentFolderPasteIntoJSFileDocument() {
+		String titleCut="titleCut1019604";
+		By bDoc=By.xpath(cMenu.ELEMENT_FILE_TITLE.replace("${titleOfFile}", titleCut));
+		
+		String titlePaste="titlePaste1019604";
+		By bDocDes=By.xpath(cMenu.ELEMENT_FILE_TITLE.replace("${titleOfFile}", titlePaste));
+
+		info("Cut a document folder and paste it into CSS File document!");
+		
+		//Create a Document Folder - source
+		cTemplate.createNewFolder(titleCut, folderType.Document);
+
+		//Create a JS File Document -destination
+		actBar.goToAddNewContent();
+		click(cTemplate.ELEMENT_JS_FILE_LINK);
+		cTemplate.createNewJsFile(titlePaste, "", "");
+
+		//Cut and paste the Document Folder into JS File Document
+		cMenu.cutNode(bDoc);
+		rightClickOnElement(bDocDes);
+		waitForElementNotPresent(ELEMENT_PASTE_NODE);
+			
+		//Delete data
+		cMenu.deleteDocument(bDocDes);
+		cMenu.deleteDocument(bDoc);
+	}
+	
+	/*
+	 * Test_Case_ID: 101960
+	 * Case 5: Cut a Document Folder and paste it into Uploaded File!
+	 */
+	@Test
+	public void test03_5_CutDocumentFolderPasteIntoUploadedFile() {
+		String titleCut="titleCut1019605";
+		By bDoc=By.xpath(cMenu.ELEMENT_FILE_TITLE.replace("${titleOfFile}", titleCut));
+		
+		String img="TestData/ECMS_Admin_ManageCategories_Display.jpg";
+		By bDocDes=By.xpath(cMenu.ELEMENT_FILE_TITLE.replace("${titleOfFile}", img));
+
+		info("Cut a Document Folder and paste it into Uploaded File!");
+		
+		//Create a Document Folder - source
+		cTemplate.createNewFolder(titleCut, folderType.Document);
+
+		//create an Uploaded file -destination
 		ecms.uploadFile(img);
 		waitForAndGetElement(bDocDes);
 
-		//cut and paste the document folder to uploaded file
+		//Cut and paste the Document Folder into Uploaded File
 		cMenu.cutNode(bDoc);
 		rightClickOnElement(bDocDes);
 		waitForElementNotPresent(ELEMENT_PASTE_NODE);
-
-		//delete data
+			
+		//Delete data
 		cMenu.deleteDocument(bDocDes);
 		cMenu.deleteDocument(bDoc);
 	}
 	
-	//CaseID 66806
-	//Cut a file document and paste it to a node!
+	
+	/*
+	 * Test_Case_ID: 101961
+	 * Case 1: Cut a File Document and paste it into a Content Folder!
+	 * This test case is failed if before executing this test case, user execute action "Delete a Document Folder"
+	 * Issue ECMS-6479 is created for this problem
+	 */
 	@Test
-	public void test09_CutFilePasteToANode() {
-		String title="ecmsbasicactio09";
-		By bDoc=By.xpath(cMenu.ELEMENT_FILE_TITLE.replace("${titleOfFile}", title));
-		String titleDes="ecmsbasicactio09des";
-		By bDocDes=By.xpath(cMenu.ELEMENT_FILE_TITLE.replace("${titleOfFile}", titleDes));
+	public void test04_1_CutFilePasteIntoDocumentFolder(){
+		String titleCut="titleCut1019611";
+		By bDoc=By.xpath(cMenu.ELEMENT_FILE_TITLE.replace("${titleOfFile}", titleCut));
+		String titlePaste="titlePaste1019611";
+		By bDocDes=By.xpath(cMenu.ELEMENT_FILE_TITLE.replace("${titleOfFile}", titlePaste));
 
-		info("Cut a file document and paste it to a node!");
-		//create a content folder -destination
-		cTemplate.createNewFolder(titleDes, folderType.Content);
+		info("Cut a File Document and paste it into Content Folder!");
+		
+		//Create a Content Folder -destination
+		cTemplate.createNewFolder(titlePaste, folderType.Content);
 
-		//create a file document - source
+		//Create a File document - source
 		actBar.goToAddNewContent();
-		cTemplate.createNewFile(title, title, title);
+		cTemplate.createNewFile(titleCut, titleCut, titleCut);
 
-		//cut and paste the file document to a node
+		//Cut and paste the File Document into Content Folder
 		cMenu.cutAndPasteNode(bDoc, bDocDes);
-
-		//verify if paste file document in a node
+	
+		//Verify if paste file document in a node
 		waitForElementNotPresent(bDoc);
 		ecms.goToNode(bDocDes);
 		ecms.goToNode(bDoc);
-		waitForAndGetElement(By.xpath("//*[contains(@value,'"+ titleDes + "/" + title + "')]"));
+		waitForAndGetElement(By.xpath("//*[contains(@value,'"+ titlePaste + "/" + titleCut + "')]"));
 
-		//delete data
+		//Delete data
 		cMenu.deleteDocument(bDocDes);
 	}
 
-	// CaseID 66819
-	//Cut an uploaded file and paste it to a Node
+	/*
+	 * @date: 31/10/2014
+	 * Test_Case_ID: 101961
+	 * Case 2: Cut a CSS File Document and paste it into a Content Folder!
+	 * This test case is failed if before executing this test case, user execute action "Delete a Document Folder"
+	 * Issue ECMS-6479 is created for this problem
+	 */
 	@Test
-	public void test20_CutUploadedFilePasteToANode() {
-		String img = "TestData/ECMS_DMS_SE_BasicAction_CutPaste.png";
-		By bDoc=By.xpath(cMenu.ELEMENT_FILE_TITLE.replace("${titleOfFile}", "ECMS_DMS_SE_BasicAction_CutPaste.png"));
-		String titleDes="ECMS_DMS_SE_BasicAction_CutPaste_20_des";
-		By bDocDes=By.xpath(cMenu.ELEMENT_FILE_TITLE.replace("${titleOfFile}", titleDes));
-		
-		info("Cut an uploaded file and paste it to a content node!");
+	public void test04_2_CutCSSFilePasteIntoContentFolder(){
+		String titleCut="titleCut1019612";
+		By bDoc=By.xpath(cMenu.ELEMENT_FILE_TITLE.replace("${titleOfFile}", titleCut));
+		String titlePaste="titlePaste1019612";
+		By bDocDes=By.xpath(cMenu.ELEMENT_FILE_TITLE.replace("${titleOfFile}", titlePaste));
 
-		//upload an uploaded file - source
-		ecms.uploadFile(img);
-		waitForAndGetElement(bDoc);
+		info("Cut a CSS File Document and paste it into a Content Folder!");
+	
+		//Create a CSS File document - source
+		actBar.goToAddNewContent();
+		click(cTemplate.ELEMENT_CSS_FILE_LINK);
+		cTemplate.createNewCssFile(titleCut, "", ""	);
 
-		click(siteExp.ELEMENT_SIDEBAR_SITES_MANAGEMENT);
+		//Create a Content Folder -destination
+		cTemplate.createNewFolder(titlePaste, folderType.Content);
 
-		//create a node -destination
-		cTemplate.createNewFolder(titleDes, folderType.Content);
-
-		//cut and paste the uploaded file to a content folder
+		//Cut and paste the CSS File Document into Content Folder
 		cMenu.cutAndPasteNode(bDoc, bDocDes);
-
-		//verify if paste uploaded file in a content folder
-		waitForElementNotPresent(bDoc);
+	
+		//Verify if paste CSS File document in Content Folder
+		ecms.goToNode(bDocDes);
+		waitForAndGetElement(bDocDes);
 		
-		ecms.goToNode(titleDes);
-		waitForAndGetElement(bDoc);
+		//Delete data
+		cMenu.deleteDocument(bDocDes);
+	}
 
-		//delete data
+	/*
+	 * @date: 31/10/2014
+	 * Test_Case_ID: 101961
+	 * Case 3: Cut a JS File Document and paste it into a Content Folder!
+	 * This test case is failed if before executing this test case, user execute action "Delete a Document Folder"
+	 * Issue ECMS-6479 is created for this problem
+	 */
+	@Test
+	public void test04_3_CutJSFilePasteIntoContentFolder(){
+		String titleCut="titleCut1019613";
+		By bDoc=By.xpath(cMenu.ELEMENT_FILE_TITLE.replace("${titleOfFile}", titleCut));
+		String titlePaste="titlePaste1019613";
+		By bDocDes=By.xpath(cMenu.ELEMENT_FILE_TITLE.replace("${titleOfFile}", titlePaste));
+
+		info("Cut a JS File Document and paste it into a Content Folder!");
+					
+		//Create a Content Folder -destination
+		cTemplate.createNewFolder(titlePaste, folderType.Content);
+		
+		//Create a JS File document - source
+		actBar.goToAddNewContent();
+		click(cTemplate.ELEMENT_JS_FILE_LINK);
+		cTemplate.createNewJsFile(titleCut, "", "");
+
+		//Cut and paste the JS File Document into Content Folder
+		cMenu.cutAndPasteNode(bDoc, bDocDes);
+	
+		//Verify if paste JS File document in Content Folder
+		ecms.goToNode(bDocDes);
+		waitForAndGetElement(bDocDes);
+		
+		//Delete data
 		cMenu.deleteDocument(bDocDes);
 	}
 	
-	// CaseID 66816
-	//Cut a checked in node and paste it to a content folder!
+	/*
+	 * @date: 31/10/2014
+	 * Test_Case_ID: 101961
+	 * Case 4: Cut a HTML File Document and paste it into a Content Folder!
+	 * This test case is failed if before executing this test case, user execute action "Delete a Document Folder"
+	 * Issue ECMS-6479 is created for this problem
+	 */
 	@Test
-	public void test21_CutCheckInNodePasteToContentFolder() {
-		String title="ECMS_DMS_SE_BasicAction_CutPaste_21";
-		By bDoc=By.xpath(cMenu.ELEMENT_FILE_TITLE.replace("${titleOfFile}", title));
-		String titleDes="ECMS_DMS_SE_BasicAction_CutPaste_21_des";
-		By bDocDes=By.xpath(cMenu.ELEMENT_FILE_TITLE.replace("${titleOfFile}", titleDes));
+	public void test04_4_CutHTMLFilePasteIntoContentFolder(){
+		String titleCut="titleCut1019614";
+		By bDoc=By.xpath(cMenu.ELEMENT_FILE_TITLE.replace("${titleOfFile}", titleCut));
+		String titlePaste="titlePaste1019614";
+		By bDocDes=By.xpath(cMenu.ELEMENT_FILE_TITLE.replace("${titleOfFile}", titlePaste));
 
-		info("Cut a checkin node and paste it to a content folder!");
-
-		//create a file document
+		info("Cut a HTML File Document and paste it into a Content Folder!");
+				
+		//Create a Content Folder -destination
+		cTemplate.createNewFolder(titlePaste, folderType.Content);
+		
+		//Create a HTML File document - source
 		actBar.goToAddNewContent();
-		cTemplate.createNewAnnouncement(title, title);
+		cTemplate.createNewHtmlFile(titleCut, "");
+
+		//Cut and paste the HTML File Document into Content Folder
+		cMenu.cutAndPasteNode(bDoc, bDocDes);
+	
+		//Verify if paste HTML File document into Content Folder
+		ecms.goToNode(bDocDes);
+		waitForAndGetElement(bDocDes);
+		
+		//Delete data
+		cMenu.deleteDocument(bDocDes);
+	}
+	
+	/*
+	 * Test_Case_ID: 101966
+	 * Cut a checked in node and paste it to a content folder!
+	 */
+	@Test
+	public void test05_CutCheckInNodePasteToContentFolder() {
+		String titleCut="titleCut101966";
+		By bDoc=By.xpath(cMenu.ELEMENT_FILE_TITLE.replace("${titleOfFile}", titleCut));
+		String titlePaste="titlePaste101966";
+		By bDocDes=By.xpath(cMenu.ELEMENT_FILE_TITLE.replace("${titleOfFile}", titlePaste));
+
+		info("Cut a checkin File Document and paste it into a Content Folder!");
+
+		//Create a File document
+		actBar.goToAddNewContent();
+		cTemplate.createNewAnnouncement(titleCut, titleCut);
 		cMenu.contextMenuAction(bDoc, cMenu.ELEMENT_MENU_CHECKIN);
 
-		//add icon Version to action bar
+		//Add icon Version to action bar
 		actBar.addItem2ActionBar("manageVersions", actBar.ELEMENT_VERSIONS_LINK);
 		actBar.chooseDrive(ecms.ELEMENT_SITES_MANAGEMENT_DRIVE);
 		actBar.addVersionForNode(bDoc, "version file");
 
 		click(siteExp.ELEMENT_SIDEBAR_SITES_MANAGEMENT);
 
-		//create a content folder -destination
-		cTemplate.createNewFolder(titleDes, folderType.Content);
+		//Create a Content Folder -destination
+		cTemplate.createNewFolder(titlePaste, folderType.Content);
 
-		//cut and paste the uploaded file to an article
+		//Cut and paste the checked in File Document into Content Folder
 		cMenu.cutAndPasteNode(bDoc, bDocDes);
 
-		//verify if paste the uploaded file in an article
+		//Verify if paste the File Document into Content Folder
 		waitForElementNotPresent(bDoc);
-		ecms.goToNode(titleDes);
-		waitForAndGetElement(cMenu.ELEMENT_FILE_TITLE.replace("${titleOfFile}", title));
+		ecms.goToNode(titlePaste);
+		waitForAndGetElement(cMenu.ELEMENT_FILE_TITLE.replace("${titleOfFile}", titleCut));
 
-		//delete data
+		//Delete data
 		cMenu.deleteDocument(bDocDes);
 	}	
+	
+	/*
+	 * Test_Case_ID: 101969
+	 * Cut an uploaded file and paste it to a Node
+	 */
+	@Test
+	public void test06_CutUploadedFilePasteToANode() {
+		String img = "TestData/ECMS_DMS_SE_BasicAction_CutPaste.png";
+		By bDoc=By.xpath(cMenu.ELEMENT_FILE_TITLE.replace("${titleOfFile}", "ECMS_DMS_SE_BasicAction_CutPaste.png"));
+		String titleDes="des66819";
+		By bDocDes=By.xpath(cMenu.ELEMENT_FILE_TITLE.replace("${titleOfFile}", titleDes));
+		
+		info("Cut an Uploaded File and paste it into a Content Folder!");
 
-	@AfterMethod
-	public void afterMethod() {
-		driver.quit();
+		//Upload an Uploaded File - source
+		ecms.uploadFile(img);
+		waitForAndGetElement(bDoc);
+
+		click(siteExp.ELEMENT_SIDEBAR_SITES_MANAGEMENT);
+
+		//Create a Content Folder -destination
+		cTemplate.createNewFolder(titleDes, folderType.Content);
+
+		//Cut and paste the Uploaded File to a Content Folder
+		cMenu.cutAndPasteNode(bDoc, bDocDes);
+
+		//Verify if paste Uploaded File in a Content Folder
+		waitForElementNotPresent(bDoc);
+		ecms.goToNode(titleDes);
+		waitForAndGetElement(bDoc);
+
+		//Delete data
+		cMenu.deleteDocument(bDocDes);
 	}
 }

@@ -1096,15 +1096,15 @@ public class PlatformBase extends TestBase {
 				Assert.fail("Timeout");
 			}
 			rightClickOnElement(locator);
-			if (waitForAndGetElement(ELEMENT_CUT_NODE, 5000, 0)!=null){
+			if (waitForAndGetElement(ELEMENT_ECMS_CUT_NODE, 5000, 0)!=null){
 				debug("==Cut node " + locator + "==");
-				click((ELEMENT_CUT_NODE));
+				click((ELEMENT_ECMS_CUT_NODE));
 				return;
 			}else if (waitForAndGetElement(ELEMENT_NAVIGATION_CUT_NODE, 5000, 0) != null){
 				click(ELEMENT_NAVIGATION_CUT_NODE);
 				return;
-			}else if (waitForAndGetElement(ELEMENT_ECMS_CUT_NODE, 5000, 0) != null){
-				click(ELEMENT_ECMS_CUT_NODE);
+			}else if (waitForAndGetElement(ELEMENT_CUT_NODE, 5000, 0) != null){
+				click(ELEMENT_CUT_NODE);
 				return;
 			}
 			Utils.pause(WAIT_INTERVAL);
