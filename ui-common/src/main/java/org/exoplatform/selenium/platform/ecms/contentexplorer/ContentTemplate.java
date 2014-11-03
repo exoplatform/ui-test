@@ -45,6 +45,8 @@ public class ContentTemplate extends EcmsBase {
 
 	//WebContent
 	public final By ELEMENT_WEBCONTENT_LINK = By.xpath("//*[@class='templateLabel']//*[text()='Web Content']");
+	public final String ELEMENT_WEBCONTENT_CONTENT_NAME = ".//*[@ data-original-title='${nameContent}']";
+	
 	//public final By ELEMENT_WEBCONTENT_TITLE_TEXTBOX = By.id("title");	
 	public final By ELEMENT_WEBCONTENT_NAME_TEXTBOX = By.id("name");	
 	public final By ELEMENT_WEBCONTENT_CONTENT_FRAME = By.xpath("//td[contains(@id,'cke_contents_htmlData')]/iframe");
