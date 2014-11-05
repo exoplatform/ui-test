@@ -84,17 +84,17 @@ public class SettingSearchPage extends PlatformBase {
 	public final By ELEMENT_FILTER_SEARCH_EVENT_CHECKBOX = By.xpath("//input[@class='checkbox' and @value='event' and @name='contentType']");
 	public final By ELEMENT_FILTER_SEARCH_TASK_CHECKBOX = By.xpath("//input[@class='checkbox' and @value='task' and @name='contentType']");
 	public final By ELEMENT_FILTER_SEARCH_ANSWER_CHECKBOX = By.xpath("//input[@class='checkbox' and @value='answer' and @name='contentType']");
-	
+
 	//Search result form
 	public final By ELEMENT_RESULT_SEARCH_PAGE = By.id("resultPage");
 	public final String ELEMENT_RESULT_LINK = "//div[@id='resultPage']//a[contains(.,'${item}')]";
-//	public final String ELEMENT_RESULT_ITEM = "//div[@id='resultPage']//a[contains(.,'${item}')]/../..//*[contains(text(),'${keySearch}')]";
-//	public final String ELEMENT_RESULT_SEARCH_PAGE_ITEM = "//div[@id='resultPage']//*[@class='content']/h6//*[contains(text(),'${eventname}')]";
+	//	public final String ELEMENT_RESULT_ITEM = "//div[@id='resultPage']//a[contains(.,'${item}')]/../..//*[contains(text(),'${keySearch}')]";
+	//	public final String ELEMENT_RESULT_SEARCH_PAGE_ITEM = "//div[@id='resultPage']//*[@class='content']/h6//*[contains(text(),'${eventname}')]";
 	public final String ELEMENT_RESULT_ITEM_ORDER_BY=".//*[@id='result']/div[{$index}]//*[text()='${keysearch}']";
 
 	//Quick Search elements
 	public final String ELEMENT_QUICK_SEARCH_BOX_RESULTS=".//*[@id='quickSearchResult{$position}']/*[contains(.,'{$result}')]";
-	
+
 	//Search result form
 	public final String ELEMENT_RESULT_ITEM = "//div[@id='resultPage']//*[@class='content']/h6//*[contains(.,'${keySearch}')]";
 	public final String ELEMENT_RESULT_SEARCH_ITEM = "//div[@id='resultPage']//a[text()='${item}']";
@@ -113,13 +113,13 @@ public class SettingSearchPage extends PlatformBase {
 	public final By ELEMENT_RESULT_CONTENT_DETAIL = By.xpath("//*[@class='content']/*[@class='detail']");
 	public final By ELEMENT_SHOW_MORE_RESULT = By.xpath("//*[@id='btnShowMore']");
 	public final By ELEMENT_SEARCH_PORTLET = By.xpath("//div[contains(@class,'portletLayoutDecorator') and contains(text(),'Search')]");
-	
+
 	// Quick Search elements for the new layout
 	public final By ELEMENT_QUICKSEARCH_NEW_PAGE=By.xpath("//*[@class='UIRowContainer']//*[@class='uiIconPLF24x24Search']");
 	public final By ELEMENT_QUICKSEARCH_TEXTBOX_NEW_PAGE=By.xpath("//*[@class='UIRowContainer']//*[@name='adminkeyword']");
 	public final By ELEMENT_ALL_SEARCH_RESULT_NEW_PAGE=By.xpath(".//*[text()='See All Search Results']");
 	public final String ELEMENT_TYPE_RESULTS_FLOATING_BOX_NEW_PAGE="//*[@class='uiQuickSearchResult']/descendant::tr[th[contains(text(),'${type}')]]";
-	
+
 	//Quick Search elements
 	public final String ELEMENT_QUICKSEARCH_RESULT = "//*[@id='quickSearchResult${number}']//*[@href=contains(text(),'${name}')]";
 	public final String ELEMENT_SEARCH_RESULT_EMPHASIZE = "//strong[normalize-space(text())='${text}']";
@@ -139,7 +139,7 @@ public class SettingSearchPage extends PlatformBase {
 
 	// People page result
 	public final String ELEMENT_RESULT_PEOPLE_ICON = "//*[contains(@class,'avatar pull-left')]";
-	
+
 	//public final By ELEMENT_RESULT_TITLE = By.xpath("//*[@class='quickSearchResult file']//a");
 
 	public final String ELEMENT_SEARCH_RESULT_TITLE= "//*[@class='content']//a[contains(text(),'${tileName}')]";
@@ -159,6 +159,9 @@ public class SettingSearchPage extends PlatformBase {
 	// Answer page result
 	public final By ELEMENT_RESULT_ANSWER_ICON = By
 			.xpath("//*[@class='uiIconApp64x64Answers']");
+
+	// All text of page 
+	public final By ELEMENT_ALL_TEXT_PAGE=By.xpath("//*[contains(text(),'{\"document\":[{\"')]");
 
 	public SettingSearchPage(WebDriver dr) {
 		driver = dr;
@@ -275,7 +278,7 @@ public class SettingSearchPage extends PlatformBase {
 			else
 				uncheck(ELEMENT_SEARCH_DOCUMENTS_CHECKBOX, 2);
 		}
-		
+
 		click(ELEMENT_SAVE_SETTING);
 		alert.acceptAlert();
 		button.close();
@@ -406,5 +409,83 @@ public class SettingSearchPage extends PlatformBase {
 					"${sortItem}", sortItem));
 
 		}
+	}
+
+	/**
+	 * Get relevancy
+	 * 
+	 * @author Romain
+	 * @params1 : String Array : of elements to localize ( by name of variable, not by type ) 
+	 * @params2 :Integer, value :
+	 *				 Int=1 return a string array with the relevancy of each element
+	 * 				 Int=2 return an array with the elements give in params sorted by relevancy ( First element has the higher relevancy )
+	 */
+	public String[] getRelevancy(String tabOfElements[], int kindOfResult){
+
+
+		String theText = waitForAndGetElement(ELEMENT_ALL_TEXT_PAGE).getText();
+		String arrayOfRelevancy[]=new String[tabOfElements.length];
+		String arrayReturn[]=new String[tabOfElements.length];
+
+		// sort the array
+		int z=0;
+		int bigger;
+		int valueInt=0;
+		int index=0;
+		String saveValue;
+
+		// Get the relevancy for each elements
+		for (int i=0;i<tabOfElements.length;i++){
+			try{
+				// We localize the element
+				int num = theText.indexOf(tabOfElements[i]);
+
+				// We find the index of the relevancy which is after the element
+				int relevancyIndex= theText.indexOf("relevancy",num);
+
+				// We get the number of the relevancy
+				String chainRele = theText.substring(relevancyIndex+11,relevancyIndex+19);
+				int stopIndex = chainRele.indexOf(",");
+				String relevancyNumber=chainRele.substring(0,stopIndex);
+
+				// Full the array of relevancy of each elements
+				arrayOfRelevancy[i]=relevancyNumber;
+
+			}catch(Exception e){
+				assert false :(" One of the element is impossible to find : "+tabOfElements[i]);
+			}
+		}
+
+		if(kindOfResult!=1){
+			// Sort the array of the element by relevancy
+			for (int y=0;y<(arrayOfRelevancy.length);y++){
+				bigger=0;
+				for(int i=z;i<(arrayOfRelevancy.length);i++){
+					valueInt=Integer.parseInt(arrayOfRelevancy[i]);
+					if(valueInt>bigger){
+						bigger=valueInt;
+						index=i;
+					}
+				}
+				// change position if better
+				saveValue=tabOfElements[z];
+				tabOfElements[z]=tabOfElements[index];
+				tabOfElements[index]=saveValue;
+
+				saveValue=arrayOfRelevancy[z];
+				arrayOfRelevancy[z]=arrayOfRelevancy[index];
+				arrayOfRelevancy[index]=saveValue;
+
+				z=z+1;
+			}
+		}
+
+		if(kindOfResult==1){
+			arrayReturn=arrayOfRelevancy;
+		}else{
+			arrayReturn=tabOfElements;
+		}
+
+		return arrayReturn;
 	}
 }

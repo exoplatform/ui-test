@@ -271,14 +271,14 @@ public class PlatformBase extends TestBase {
 	/*
 	 * Context menu
 	 * */
-	public final By ELEMENT_CUT_NODE = By.className("uiIconCutNode");
+	public final By ELEMENT_CUT_NODE = By.xpath(".//*[@class='uiIconEcmsCut']");
 	public final By ELEMENT_ECMS_CUT_NODE = By.xpath("//*[@id='ECMContextMenu']//*[@class='uiIconEcmsCut']");
 	//By.xpath("//*[@class='uiContextMenuContainer']//*[@class='uiIconEcmsCut']"); 
 
 	public final By ELEMENT_PASTE_NODE = By.className("uiIconPasteNode");
 	public final By ELEMENT_ECMS_PASTE_NODE = By.xpath("//*[@id='ECMContextMenu']//*[@class='uiIconEcmsPaste']");
 	//By.xpath("//*[@class='uiContextMenuContainer']//*[@class='uiIconEcmsPaste']"); 
-	public final By ELEMENT_COPY_NODE = By.className("uiIconCopyNode");
+	public final By ELEMENT_COPY_NODE = By.xpath(".//*[@class='uiIconEcmsCopy']");
 	public final By ELEMENT_ECMS_COPY_NODE = By.xpath("//*[@id='ECMContextMenu']//*[@class='uiIconEcmsCopy']");
 	//By.xpath("//*[@class='uiContextMenuContainer']//*[@class='uiIconEcmsCopy']"); 
 	public final By ELEMENT_CLONE_NODE = By.xpath("//a[contains(text(),'Clone')]");

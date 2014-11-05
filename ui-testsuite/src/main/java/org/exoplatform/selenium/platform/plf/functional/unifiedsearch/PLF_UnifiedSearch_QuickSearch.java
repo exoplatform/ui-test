@@ -80,8 +80,8 @@ public class PLF_UnifiedSearch_QuickSearch extends Activity {
 
 	@AfterMethod
 	public void afterTest(){
-//		driver.manage().deleteAllCookies();		
-//		driver.quit();
+		driver.manage().deleteAllCookies();		
+		driver.quit();
 	}
 
 	/*
@@ -289,24 +289,26 @@ public class PLF_UnifiedSearch_QuickSearch extends Activity {
 
 		addAllData( eventName, taskName, wikiName, spaceName, fileName, documentName, peopleName, surname, pageName, discussionName);
 		/*
-		 * Step 1 : search for cloud
+		 * Step 1 : search for appl
 		 */
 		click(ELEMENT_QUICK_SEARCH_ICON);
 		Utils.pause(2000);
 		WebElement searchBox = waitForAndGetElement(ELEMENT_QUICK_SEARCH_TEXTBOX);
 		click(ELEMENT_QUICK_SEARCH_TEXTBOX);
-		searchBox.sendKeys("apple");
+		searchBox.sendKeys("app");
+		Utils.pause(2000);
+		searchBox.sendKeys("l");
 		Utils.pause(2000);
 
 		waitForAndGetElement(By.xpath(qsPage.ELEMENT_QUICK_SEARCH_BOX_RESULTS.replace("{$position}","1").replace("{$result}",fileName)));
-		waitForAndGetElement(By.xpath(qsPage.ELEMENT_QUICK_SEARCH_BOX_RESULTS.replace("{$position}","3").replace("{$result}",documentName)));
-		waitForAndGetElement(By.xpath(qsPage.ELEMENT_QUICK_SEARCH_BOX_RESULTS.replace("{$position}","5").replace("{$result}",wikiName)));
-		waitForAndGetElement(By.xpath(qsPage.ELEMENT_QUICK_SEARCH_BOX_RESULTS.replace("{$position}","6").replace("{$result}",pageName)));
-		waitForAndGetElement(By.xpath(qsPage.ELEMENT_QUICK_SEARCH_BOX_RESULTS.replace("{$position}","7").replace("{$result}",discussionName)));
-		waitForAndGetElement(By.xpath(qsPage.ELEMENT_QUICK_SEARCH_BOX_RESULTS.replace("{$position}","8").replace("{$result}",findpeopleName)));
-		waitForAndGetElement(By.xpath(qsPage.ELEMENT_QUICK_SEARCH_BOX_RESULTS.replace("{$position}","9").replace("{$result}",spaceName)));
-		waitForAndGetElement(By.xpath(qsPage.ELEMENT_QUICK_SEARCH_BOX_RESULTS.replace("{$position}","10").replace("{$result}",eventName)));
-		waitForAndGetElement(By.xpath(qsPage.ELEMENT_QUICK_SEARCH_BOX_RESULTS.replace("{$position}","11").replace("{$result}",taskName)));
+		waitForAndGetElement(By.xpath(qsPage.ELEMENT_QUICK_SEARCH_BOX_RESULTS.replace("{$position}","2").replace("{$result}",documentName)));
+		waitForAndGetElement(By.xpath(qsPage.ELEMENT_QUICK_SEARCH_BOX_RESULTS.replace("{$position}","4").replace("{$result}",wikiName)));
+		waitForAndGetElement(By.xpath(qsPage.ELEMENT_QUICK_SEARCH_BOX_RESULTS.replace("{$position}","5").replace("{$result}",pageName)));
+		waitForAndGetElement(By.xpath(qsPage.ELEMENT_QUICK_SEARCH_BOX_RESULTS.replace("{$position}","6").replace("{$result}",discussionName)));
+		waitForAndGetElement(By.xpath(qsPage.ELEMENT_QUICK_SEARCH_BOX_RESULTS.replace("{$position}","7").replace("{$result}",findpeopleName)));
+		waitForAndGetElement(By.xpath(qsPage.ELEMENT_QUICK_SEARCH_BOX_RESULTS.replace("{$position}","8").replace("{$result}",spaceName)));
+		waitForAndGetElement(By.xpath(qsPage.ELEMENT_QUICK_SEARCH_BOX_RESULTS.replace("{$position}","9").replace("{$result}",eventName)));
+		waitForAndGetElement(By.xpath(qsPage.ELEMENT_QUICK_SEARCH_BOX_RESULTS.replace("{$position}","10").replace("{$result}",taskName)));
 		/*
 		 * delete data
 		 */
@@ -317,69 +319,103 @@ public class PLF_UnifiedSearch_QuickSearch extends Activity {
 	 * ==Resulted sorts by pertinence in groups==
 	 * Test ID : 104274
 	 */
-	@Test(groups="pending")
+	@Test
 	public void test07_ResultedSortsByPertinenceInGroups(){
-		String discussionName1="cloud1";
-		String eventName1= "cloud1 event";
-		String taskName1= "cloud1 task";
-		String wikiName1= "Wiki cloud1";
-		String spaceName1= "cloud1 space";
-		String fileName1= "cloud1 file";
-		String documentName1= "cloud1 web";
-		String peopleName1="philipe";
-		String surname1="cloud";
-		String pageName1="cloudun";
-		String discussionName2="cloud2";
-		String eventName2= "cloud2 event";
-		String taskName2= "cloud2 task";
-		String wikiName2= "Wiki cloud2";
-		String spaceName2= "cloud2 space";
-		String fileName2= "cloud2 file";
-		String documentName2 = "cloud2 web";
-		String peopleName2="marine";
-		String surname2="cloud";
-		String pageName2="cloudde";
+		String discussionName1="bluerayone disc";
+		String eventName1= "blueray1 event";
+		String taskName1= "blueray1 task";
+		String wikiName1= "Wiki blueray1";
+		String spaceName1= "bluerayone sp";
+		String fileName1= "blueray1 file";
+		String documentName1= "blueray1 web";
+		String peopleName1="philip";
+		String surname1="bluerayone";
+		String pageName1="bluerayun";
+		String discussionName2="blueray2 disc";
+		String eventName2= "blueray22 event";
+		String taskName2= "blueray22 task";
+		String wikiName2= "Wiki blueray22";
+		String spaceName2= "blueray2 sp";
+		String fileName2= "blueray22 file";
+		String documentName2 = "blueray22 web";
+		String peopleName2="marin";
+		String surname2="bluerayde";
+		String pageName2="blueraytwo";
 
-		String tabVar1[] = {eventName1, taskName1, wikiName1, spaceName1, fileName1, documentName1, peopleName1, surname1, pageName1, discussionName1};
-		String tabVar2[] = {eventName2, taskName2, wikiName2, spaceName2, fileName2, documentName2, peopleName2, surname2, pageName2, discussionName2};
+		String searchWord="blueray";
+
+		String tabVar1[] = {fileName1,documentName1, wikiName1,pageName1,discussionName1,peopleName1,spaceName1,  eventName1, taskName1 };
+		String tabVar2[] = {fileName2,documentName2, wikiName2,pageName2,discussionName2,peopleName2,spaceName2,eventName2,taskName2};
+
+		String[] relevancy1=new String[tabVar1.length];
+		String[] relevancy2=new String[tabVar2.length];
 		/*
 		 * pre conditions
 		 */
-		addAllData( eventName1, taskName1, wikiName1, spaceName1, fileName1, documentName1, peopleName1, surname1, pageName1, discussionName1);
-		naviToolbar.goToHomePage();
-		addAllData( eventName2, taskName2, wikiName2, spaceName2, fileName2, documentName2, peopleName2, surname2, pageName2, discussionName2);
+				addAllData( eventName1, taskName1, wikiName1, spaceName1, fileName1, documentName1, peopleName1, surname1, pageName1, discussionName1);
+				naviToolbar.goToHomePage();
+				addAllData( eventName2, taskName2, wikiName2, spaceName2, fileName2, documentName2, peopleName2, surname2, pageName2, discussionName2);
 
 		click(ELEMENT_QUICK_SEARCH_ICON);
 		Utils.pause(2000);
 		WebElement searchBox = waitForAndGetElement(ELEMENT_QUICK_SEARCH_TEXTBOX);
 		click(ELEMENT_QUICK_SEARCH_TEXTBOX);
-		searchBox.sendKeys("cloud");
+		searchBox.sendKeys(searchWord);
 		Utils.pause(2000);
-		// check all the first data are presents in the floating box
-		for(int i=0;i<tabVar1.length;i++)
-			waitForAndGetElement(qsPage.ELEMENT_QUICKSEARCH_RESULT_NO_ORDER.replace("${name}", tabVar1[i]));
-		// check the second tab of data		
-		for(int j=0;j<tabVar2.length;j++)
-			waitForAndGetElement(qsPage.ELEMENT_QUICKSEARCH_RESULT_NO_ORDER.replace("${name}", tabVar2[j]));
+		// check all the first data are presents in the floating box and there are in first position
+		int x=1;
+		for(int i=0;i<tabVar1.length;i++){
+			waitForAndGetElement(qsPage.ELEMENT_QUICK_SEARCH_BOX_RESULTS.replace("{$result}", tabVar1[i]).replace("{$position}",""+x));
+			x=x+2;
+		}
+		int y=2;
+		// check the second tab of data	and there are in second position
+		for(int j=0;j<tabVar2.length;j++){
+			waitForAndGetElement(qsPage.ELEMENT_QUICK_SEARCH_BOX_RESULTS.replace("{$result}", tabVar2[j]).replace("{$position}",""+y));
+			y=y+2;
+		}
 
+		// get the relenvancy of each element
 		loginWithAnotherAccOnThesameBrowser(DATA_USER2, DATA_PASS);
 		evt1=new Event(newDriver, this.plfVersion);
 		magMember1 = new ManageMember(newDriver,this.plfVersion);
 		newDriver.navigate().refresh();
 		magAcc1 = new ManageAccount(newDriver, this.plfVersion);
 
-		click(naviToolbar.ELEMENT_SITE_EXPLORER_HOME);
+		naviToolbar.goToHomePage();
 		String theURL = driver.getCurrentUrl();
-		driver.get((theURL).replace("portal/intranet/", "/rest/search?q=cloud&types=all"));
+		driver.get((theURL).replace("portal/intranet/home", "rest/search?q="+searchWord+"&types=all"));
+		relevancy1=qsPage.getRelevancy(tabVar1,1);
+		relevancy2=qsPage.getRelevancy(tabVar2,1);
+
+		for(final String e: relevancy1) 
+			System.out.println(e);
+
+		for(final String r: relevancy2) 
+			System.out.println(r);
+
 		info("Disconnect user");
 		magAcc1.signOut();
 		Utils.pause(800);
 		newDriver.quit();
+
+		// check the relevancy is inferior for the second tab 
+		for (int a=0;a<relevancy1.length;a++){
+			int array1=Integer.parseInt(relevancy1[a]);
+			int array2=Integer.parseInt(relevancy2[a]);
+
+			if (array2>array1){
+				info("The relevancy is superior and the element is at the end of the list. Problem");
+				assert false;
+			}
+		}
+
+
 		/*
 		 * delete data 
 		 */
-		deleteDataOfEachElement( eventName1, taskName1, wikiName1, spaceName1, fileName1, documentName1, peopleName1, pageName1, discussionName1);
-		deleteDataOfEachElement( eventName2, taskName2, wikiName2, spaceName2, fileName2, documentName2, peopleName2, pageName2, discussionName2);
+				deleteDataOfEachElement( eventName1, taskName1, wikiName1, spaceName1, fileName1, documentName1, peopleName1, pageName1, discussionName1);
+				deleteDataOfEachElement( eventName2, taskName2, wikiName2, spaceName2, fileName2, documentName2, peopleName2, pageName2, discussionName2);
 	}
 
 	/*
@@ -417,9 +453,9 @@ public class PLF_UnifiedSearch_QuickSearch extends Activity {
 		Utils.pause(2000);
 		waitForAndGetElement(qsPage.ELEMENT_QUICKSEARCH_RESULT_NO_ORDER.replace("${name}", eventName2));
 		Utils.javaSimulateKeyPress(KeyEvent.VK_BACK_SPACE);
-	
+
 		click(ELEMENT_QUICK_SEARCH_TEXTBOX);
-		
+
 		Utils.javaSimulateKeyPress(KeyEvent.VK_CONTROL,KeyEvent.VK_A);
 		Utils.pause(5000);
 		Utils.javaSimulateKeyPress(KeyEvent.VK_CUT);
@@ -447,7 +483,7 @@ public class PLF_UnifiedSearch_QuickSearch extends Activity {
 		 */
 		evt.goToCalendarPage();
 		evt.addQuickEvent(eventName1,content1,getDate(1,"MM/dd/yyyy"),getDate(2,"MM/dd/yyyy"),false);
-		
+
 		/*
 		 * Step 1
 		 */
@@ -503,18 +539,18 @@ public class PLF_UnifiedSearch_QuickSearch extends Activity {
 
 		evt.goToCalendarPage();
 		// add event
-		evt.addQuickEvent(eventName,"cloud",getDate(2,"MM/dd/yyyy"),getDate(2,"MM/dd/yyyy"),false);
+		evt.addQuickEvent(eventName,"mon ev "+eventName,getDate(2,"MM/dd/yyyy"),getDate(2,"MM/dd/yyyy"),false);
 		// add task
-		task.addQuickTask(taskName,"Cloud",getDate(1,"MM/dd/yyyy"),getDate(1,"MM/dd/yyyy"),false);
+		task.addQuickTask(taskName,"mon ev"+taskName,getDate(1,"MM/dd/yyyy"),getDate(1,"MM/dd/yyyy"),false);
 		// add wiki page
 		ba.goToWiki();
 		click(ba.ELEMENT_SPACE_SWITCHER_BREADCRUMB);
 		click(ba.ELEMENT_SPACE_SWITCHER_AVATAR_MYWIKI);
-		ba.addBlankWikiPage(wikiName, "cloud", 0);
+		ba.addBlankWikiPage(wikiName, "my wiki "+wikiName, 0);
 		// add space
 		magMember.goToMySpacePage();
 		magMember.addNewSpace(spaceName, "");
-		info("New space added : Cloud ");
+		info("New space added :  "+spaceName);
 		//Add new topic
 		//Create data
 		mngTopic.goToForums();
@@ -530,12 +566,12 @@ public class PLF_UnifiedSearch_QuickSearch extends Activity {
 		actBar.addItem2ActionBar("addDocument", actBar.ELEMENT_NEW_CONTENT_LINK);
 		actBar.goToAddNewContent();
 		// add file
-		conTemp.createNewFile(fileName, "cloud", "cloud");
+		conTemp.createNewFile(fileName, "my file"+fileName, "file :"+fileName);
 		click(naviToolbar.ELEMENT_SITE_EXPLORER_HOME);
 		//add people
 		naviToolbar.goToNewStaff();
 		actBar.addNewUserAccount(peopleName, "gtngtn654", "gtngtn654", peopleName, surname, "", peopleName+"@exo.fr", null, null, true);
-		//create cloud page
+
 	}
 	public void deleteDataOfEachElement(String eventName,String taskName,String wikiName,String spaceName,String fileName,String documentName,String peopleName,String pageName,String discussionName){
 		ba.goToWiki();
@@ -557,7 +593,7 @@ public class PLF_UnifiedSearch_QuickSearch extends Activity {
 		naviToolbar.goToUsersAndGroupsManagement();
 		userGroup.deleteUser(peopleName);
 		naviToolbar.goToApplicationRegistry();
-		pageMag.deletePageAtManagePageAndPortalNavigation(pageName, false, "intranet", true, "Administration");
+		pageMag.deletePageAtManagePageAndPortalNavigation(pageName, true, "intranet", false, "Administration");
 		info("data cleared");
 	}
 }

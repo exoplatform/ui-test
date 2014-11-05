@@ -66,8 +66,8 @@ public class SitesExplorer extends EcmsBase{
 
 	public final By ELEMENT_CLIPBOARD_ICON = By.xpath("//*[@data-original-title = 'Clipboard']");
 	public final By ELEMENT_CLEAR_ALL_ICON = By.xpath("//*[contains(text(),'Clear All')]");
+	public final String ELEMENT_CLIPBOARD_PATH = ".//*[@class='text']//*[contains(text(),'${name}')]";
 	public final By MESSAGE_CLEAR_ALL = By.xpath("//*[contains(text(),'There are no items in the clipboard.')]");
-	public final String ELEMENT_VERIFY_ACTION = "//*[contains(@data-original-title, '${titleOfFile}')]/../..//*[contains(@class, 'uiIconEcmsPaste')]";
 	public final String ELEMENT_TITLE_LEFT_PANEL = "//div[@id='UITreeExplorer']//div[contains(@onmousedown,'collaboration:/sites/${title}')]";
 
 	public final String ELEMENT_DOCUMENT_TITLE = "//*[@class='nodeLabel']/*[text()='${title}']";

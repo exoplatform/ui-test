@@ -44,19 +44,21 @@ public class ECMS_SE_BasicAction_Clipboard extends PlatformBase {
 	{
 		initSeleniumTest();
 		driver.get(baseUrl);
-		navToolBar = new NavigationToolbar(driver);
-		magAcc = new ManageAccount(driver);
-		actBar = new ActionBar(driver);
-		ecms = new EcmsBase(driver);
-		cTemplate = new ContentTemplate(driver);
-		cMenu = new ContextMenu(driver);
-		siteExp = new SitesExplorer(driver);
-
+		navToolBar = new NavigationToolbar(driver,this.plfVersion);
+		magAcc = new ManageAccount(driver,this.plfVersion);
+		actBar = new ActionBar(driver,this.plfVersion);
+		ecms = new EcmsBase(driver,this.plfVersion);
+		cTemplate = new ContentTemplate(driver,this.plfVersion);
+		cMenu = new ContextMenu(driver,this.plfVersion);
+		siteExp = new SitesExplorer(driver,this.plfVersion);
 		magAcc.signIn(DATA_USER1, DATA_PASS);
 	}
 
-	//Delete  all action in clipboard
-	@Test()
+	/*
+	 * == Delete Action in Clipboard ==
+	 * Test ID : 101975
+	 */
+	@Test
 	public void test20_DeleteActionInClipboard()
 	{
 		//goto Site Explorer
@@ -90,11 +92,12 @@ public class ECMS_SE_BasicAction_Clipboard extends PlatformBase {
 		waitForAndGetElement(siteExp.ELEMENT_CLIPBOARD_ICON);
 		click(siteExp.ELEMENT_CLIPBOARD_ICON);
 
+		
 		//Verify Path & Cm of Nodes
-		waitForAndGetElement(siteExp.ELEMENT_VERIFY_ACTION.replace("${titleOfFile}", DATA_CONTENT_FOLDER));
-		waitForAndGetElement(siteExp.ELEMENT_VERIFY_ACTION.replace("${titleOfFile}", DATA_DOCUMENT_FOLDER));
-		waitForAndGetElement(siteExp.ELEMENT_VERIFY_ACTION.replace("${titleOfFile}", DATA_FILE_NAME));
-		waitForAndGetElement(siteExp.ELEMENT_VERIFY_ACTION.replace("${titleOfFile}", "Winter.jpg"));
+		waitForAndGetElement(siteExp.ELEMENT_CLIPBOARD_PATH.replace("${name}", DATA_CONTENT_FOLDER));
+		waitForAndGetElement(siteExp.ELEMENT_CLIPBOARD_PATH.replace("${name}", DATA_DOCUMENT_FOLDER));
+		waitForAndGetElement(siteExp.ELEMENT_CLIPBOARD_PATH.replace("${name}", DATA_FILE_NAME));
+		waitForAndGetElement(siteExp.ELEMENT_CLIPBOARD_PATH.replace("${name}", "Winter.jpg"));
 		
 		//Clear all action in list
 		click(siteExp.ELEMENT_CLEAR_ALL_ICON);
