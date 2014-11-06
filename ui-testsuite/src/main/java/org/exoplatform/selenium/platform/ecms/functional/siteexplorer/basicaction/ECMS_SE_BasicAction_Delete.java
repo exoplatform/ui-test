@@ -5,12 +5,15 @@ import static org.exoplatform.selenium.TestLogger.*;
 import org.exoplatform.selenium.Button;
 import org.exoplatform.selenium.Dialog;
 import org.exoplatform.selenium.ManageAlert;
+import org.exoplatform.selenium.TestBase;
 import org.exoplatform.selenium.Utils;
 import org.exoplatform.selenium.platform.ManageAccount;
 import org.exoplatform.selenium.platform.NavigationToolbar;
 import org.exoplatform.selenium.platform.PlatformBase;
 import org.exoplatform.selenium.platform.ecms.EcmsBase;
 import org.exoplatform.selenium.platform.ecms.EcmsPermission;
+import org.exoplatform.selenium.platform.ecms.admin.ECMainFunction;
+import org.exoplatform.selenium.platform.ecms.admin.ManageView;
 import org.exoplatform.selenium.platform.ecms.contentexplorer.ActionBar;
 import org.exoplatform.selenium.platform.ecms.contentexplorer.ContentTemplate;
 import org.exoplatform.selenium.platform.ecms.contentexplorer.ContextMenu;
@@ -49,7 +52,11 @@ public class ECMS_SE_BasicAction_Delete extends PlatformBase {
 	EcmsPermission ecmsPer;
 	ContentTemplate cTemplate;
 	ContextMenu cMenu;
+	ContextMenu c2Menu;
 	SitesExplorer siteExp;
+	ECMainFunction ecMain;
+	ManageView mnView;
+	TestBase testBase;
 
 	@BeforeMethod()
 	public void beforeTest()
@@ -58,21 +65,28 @@ public class ECMS_SE_BasicAction_Delete extends PlatformBase {
 		driver.get(baseUrl);
 		driver.manage().window().maximize();
 		dialog = new Dialog(driver); 
-		magAlert = new ManageAlert(driver);
-		button = new Button(driver);
-		magAcc = new ManageAccount(driver); 
-		navToolBar = new NavigationToolbar(driver);
-		actBar = new ActionBar(driver);	
-		ecms = new EcmsBase(driver);
+		magAlert = new ManageAlert(driver, this.plfVersion);
+		button = new Button(driver, this.plfVersion);
+		magAcc = new ManageAccount(driver, this.plfVersion); 
+		navToolBar = new NavigationToolbar(driver, this.plfVersion);
+		actBar = new ActionBar(driver, this.plfVersion);	
+		ecms = new EcmsBase(driver, this.plfVersion);
 		ecmsPer = new EcmsPermission(driver); 
-		cTemplate = new ContentTemplate(driver);
-		cMenu = new ContextMenu(driver); 
-		siteExp = new SitesExplorer(driver);
+		cTemplate = new ContentTemplate(driver, this.plfVersion);
+		cMenu = new ContextMenu(driver, this.plfVersion); 
+		siteExp = new SitesExplorer(driver, this.plfVersion);
 		magAcc.signIn(DATA_USER1,DATA_PASS);
+		mnView = new ManageView(driver,this.plfVersion);
+		ecMain = new ECMainFunction(driver,this.plfVersion);
 	}
 
+	@AfterMethod()
+	public void afterTest()
+	{
+		driver.quit();
+	}
 	/**
-	 * Qmetry ID: 66588
+	 * Qmetry ID: 101908
 	 */
 	//Delete node when user has right to remove node
 	@Test
@@ -120,7 +134,7 @@ public class ECMS_SE_BasicAction_Delete extends PlatformBase {
 
 	/**
 	 * 
-	 * Qmetry ID: 66586
+	 * Qmetry ID: 101906
 	 *  
 	 */
 	//Delete node in 'check in' status
@@ -150,9 +164,36 @@ public class ECMS_SE_BasicAction_Delete extends PlatformBase {
 		cMenu.deleteDocument(UPLOAD_FILE_NAME);
 	}
 
+	/**
+	 * Qmetry ID: 102069 
+	 * Delete single file from trash
+	 * 
+	 */
+	@Test
+	public void test03_DeleteSingleFileFromTrash(){
+		String data1 = "ECMS_Admin_SendMailScript_Template.txt";
+		String DATA_UPLOAD_FILE_PATH_1 ="TestData/" + data1;
+
+		info("-- Upload a file --");
+		navToolBar.goToPersonalDocuments();
+		ecms.uploadFile(DATA_UPLOAD_FILE_PATH_1);
+
+		info("-- Delete a file --");
+		actBar.actionsOnElement(data1, actionType.DELETE);
+
+		info("-- Delete in trash --");
+		actBar.chooseDrive(ecms.ELEMENT_TRASH_DRIVE);
+		click(ELEMENT_PERSONAL_DOCUMENTS);
+		usePaginator(ecms.ELEMENT_UI_CHECKBOX.replace("${element}", data1), "Cannot find element...");
+		click(ecms.ELEMENT_UI_CHECKBOX.replace("${element}", data1), 2);
+		click(cMenu.ELEMENT_MENU_DELETE);
+		magAlert.verifyAlertMessage("Are you sure you want to permanently remove the file 'ECMS_Admin_SendMailScript_Template.txt'?");
+		dialog.deleteInDialog();
+		waitForElementNotPresent(ecms.ELEMENT_UI_CHECKBOX.replace("${element}", data1));
+	}
 
 	/**
-	 * Qmetry ID: 66581
+	 * Qmetry ID: 101902
 	 * case07: Delete locked node by user is not locker
 	 * create node by user John: content folder
 	 * lock node by user John
@@ -161,7 +202,7 @@ public class ECMS_SE_BasicAction_Delete extends PlatformBase {
 	@Test
 	public void test07_DeleteLockedNodeByUserIsNotLocker(){
 		String DATA_CONTENT_FOLDER = "ECMS_DMS_SE_BasicAction_Delete_07";
-		By ELEMENT_CONTENT_FOLDER = By.linkText(DATA_CONTENT_FOLDER);
+		By ELEMENT_CONTENT_FOLDER = By.xpath(cMenu.ELEMENT_FILE_TITLE.replace("${titleOfFile}", "ECMS_DMS_SE_BasicAction_Delete_07"));
 
 		//create new content folder by John
 		navToolBar.goToSiteExplorer();
@@ -175,20 +216,24 @@ public class ECMS_SE_BasicAction_Delete extends PlatformBase {
 
 		info("Lock node successfully");
 		assert cMenu.isLockedNode(ELEMENT_CONTENT_FOLDER):"Lock node unsuccessfully";
-		driver.close();
-
+		//            ---------------------------------------- try to delete it on the mary browser -------------------
 		//login with user mary
 		info("Initialize a new session and Login with Mary");
 		loginWithAnotherAccOnThesameBrowser(DATA_USER2, DATA_PASS);
-		ecms = new EcmsBase(newDriver);
-		navToolBar = new NavigationToolbar(newDriver);
-		magAcc = new ManageAccount(newDriver);
-		cMenu = new ContextMenu(newDriver);
+		navToolBar = new NavigationToolbar(newDriver, this.plfVersion);
+		magAcc = new ManageAccount(newDriver, this.plfVersion); 
+
+		newDriver.navigate().refresh();
+		Utils.pause(1000);
 		navToolBar.goToSiteExplorer();
 
+		WebElement myElement =newDriver.findElement(By.xpath("//*[@title = 'ECMS_DMS_SE_BasicAction_Delete_07']/.."));
+
+		Actions action= new Actions(newDriver);
+		action.contextClick(myElement).sendKeys(Keys.ARROW_DOWN).sendKeys(Keys.ARROW_DOWN).sendKeys(Keys.RETURN).build().perform();
+
 		//check user mary can not delete node
-		rightClickOnElement(ELEMENT_CONTENT_FOLDER);
-		waitForElementNotPresent(cMenu.ELEMENT_MENU_DELETE);
+		waitForElementNotPresent(newDriver.findElement(By.xpath(".//*[@class='uiIconEcmsDelete']/..")));
 		info("User mary cannot delete this locker node");
 		magAcc.signOut();
 
@@ -196,10 +241,11 @@ public class ECMS_SE_BasicAction_Delete extends PlatformBase {
 		magAcc.signIn(DATA_USER1, DATA_PASS);
 		navToolBar.goToSiteExplorer();
 		cMenu.deleteDocument(ELEMENT_CONTENT_FOLDER);
+		newDriver.quit();
 	}
 
 	/**
-	 * Qmetry ID: 66562
+	 * Qmetry ID: 101898
 	 * case09: Delete child node while parent node is being locked by user is not locker
 	 * create parent node: content folder by user John
 	 * create child node: article document by user John
@@ -255,13 +301,13 @@ public class ECMS_SE_BasicAction_Delete extends PlatformBase {
 	}
 
 	/**
-	 * Qmetry ID: 66590
+	 * Qmetry ID: 101909
 	 * 
 	 */
 	//case10: Delete node while user does not have remove right
 	@Test
 	public void test10_DeleteNodeByUserNotHaveRemoveRight(){
-		String DATA_CONTENT_FOLDER = "ECMS_DMS_SE_BasicAction_Delete_content_10";
+		String DATA_CONTENT_FOLDER = "ECMS_BasicAction_Delete_content_10";
 		By CONTENT_FOLDER = By.linkText(DATA_CONTENT_FOLDER);
 
 		//goto Site Explorer
@@ -279,6 +325,7 @@ public class ECMS_SE_BasicAction_Delete extends PlatformBase {
 
 		ecms.selectMembership("Platform/Content Management", "*", "Select Membership");
 		ecmsPer.setPermissionForNode(true, true, false);
+		Utils.pause(9000);
 
 		info("Save then close");
 		button.save();
@@ -308,70 +355,9 @@ public class ECMS_SE_BasicAction_Delete extends PlatformBase {
 		cMenu.deleteDocument(CONTENT_FOLDER);
 	}
 
-	//	//Delete public folder
-	//  //Qmetry ID 66605 (Pending: We could delete a public folder)
-	//	@Test
-	//	public void test16_DeletePublicDriver()
-	//	{
-	//		//goto Site Explorer
-	//		goToSiteExplorer();
-	//		
-	//		//Click Show Drives > collaboration > Users 
-	//		waitForElementPresent(SHOW_DRIVES_ICON);
-	//		click(SHOW_DRIVES_ICON);
-	//		waitForElementPresent(COLLABORATION_ICON);
-	//		doubleClickOnElement(COLLABORATION_ICON_XPATH);
-	//		waitForElementPresent(USERS_FOLDER);
-	//		doubleClickOnElement(USERS_FOLDER_XPATH);
-	//		
-	//		waitForElementPresent(ADDRESS_INPUT);
-	//		type(ADDRESS_INPUT, "/Users/j___/jo___/joh___/john", true);
-	//		WebElement element = waitForAndGetElement(ADDRESS_INPUT);
-	//		//actions.sendKeys(element, Keys.ENTER).build().perform();
-	//		element.sendKeys(Keys.ENTER);
-	//		
-	//	}
-
-
-	//	//Delete private folder
-	//	//Qmetry ID 66600 (Pending: We could delete a private folder)
-	//	@Test
-	//	public void test17_DeletePrivateDriver()
-	//	{
-	//		
-	//	}
-
-	/*====== New Test Cases ======*/
-	/**
-	 * Qmetry ID: 74476 
-	 * Delete a Parent & Child selection
-	 * <li>Go to Intranet/Documents</li>
-	 * <li>Create a folder and some sub nodes</li>
-	 * <li>Select Parent and Child from the list by tick on checkbox on the right of parents </li>
-	 * <li>From action bar, choose "Delete"</li>
-	 */
-	@Test
-	public void test11_DeleteParentAndChildSelection(){
-		String folderName = "deleteParentAndChild";
-		String DATA_UPLOAD_FILE_PATH ="TestData/Winter.jpg";
-
-		info("-- Go to Intranet / Documents --");
-		navToolBar.goToPersonalDocuments();
-		cTemplate.createNewFolder(folderName, folderType.None);
-
-		info("-- Adding a sub-node... --");
-		ecms.goToNode(folderName, true);
-		cTemplate.createNewFolder("subFolder", folderType.None);
-		ecms.uploadFile(DATA_UPLOAD_FILE_PATH);
-
-		info("-- Delete Parent & Child node --");
-		click(ecms.ELEMENT_BACK_PREVIOUS_NODE);
-		navToolBar.goToPersonalDocuments();
-		actBar.actionsOnElement(folderName, ContextMenu.actionType.DELETE);
-	}
 
 	/**
-	 * Qmetry ID: 74516
+	 * Qmetry ID: 102059
 	 * Delete document with references
 	 * <li>Go to Sites Explorer</li>
 	 * <li>Create 2 nodes</li> 
@@ -382,11 +368,19 @@ public class ECMS_SE_BasicAction_Delete extends PlatformBase {
 	public void test12_DeleteDocumentWithReferences(){
 		String webContentName_0 = "deleteDocumentWithRef";
 		String content_0 = "Delete document with references";
-
 		String webContentName_1 = "deleteDocumentWithRef_1";
 		String content_1 = "Delete document with references_1";
-
 		String pathTowebContentName_1 = "sites/" + webContentName_1;
+
+		Object[] paras = {true,"Authoring","manageRelations"};
+
+		info("make relations available");
+		ecMain.goToManageViews();
+		mnView.editView("Web", "", false, false, paras);
+
+		info("-- logout to take effect --");
+		magAcc.signOut();
+		magAcc.signIn(DATA_USER1, DATA_PASS);
 
 		info("-- Go to Sites Explorer --");
 		navToolBar.goToSiteExplorer();
@@ -396,6 +390,7 @@ public class ECMS_SE_BasicAction_Delete extends PlatformBase {
 		cTemplate.createNewWebContent(webContentName_0, content_0, "", "", "", "");
 		click(siteExp.ELEMENT_SIDEBAR_SITES_MANAGEMENT);
 		waitForTextNotPresent(content_0);
+		driver.navigate().refresh();
 		actBar.goToAddNewContent();
 		cTemplate.createNewWebContent(webContentName_1, content_1, "", "", "", "");
 
@@ -416,7 +411,7 @@ public class ECMS_SE_BasicAction_Delete extends PlatformBase {
 	}
 
 	/**
-	 * Qmetry ID: 74520
+	 * Qmetry ID: 102063
 	 * Delete multiple documents with references
 	 * <li>Go to Sites Explorer/Collaboration drive </li>
 	 * <li>Create 2 nodes </li>
@@ -430,7 +425,15 @@ public class ECMS_SE_BasicAction_Delete extends PlatformBase {
 
 		String webContentName_1 = "deleteMultipleDocumentWithRef_1";
 		String content_1 = "Delete multiple documents with references_1";
+		Object[] paras = {true,"Authoring","manageRelations"};
 
+		info("make relations available");
+		ecMain.goToManageViews();
+		mnView.editView("Web", "", false, false, paras);
+
+		info("-- logout to take effect --");
+		magAcc.signOut();
+		magAcc.signIn(DATA_USER1, DATA_PASS);
 		info("-- Go to Sites Explorer --");
 		navToolBar.goToSiteExplorer();
 		actBar.chooseDrive(ecms.ELEMENT_COLLABORATION_DRIVE);
@@ -440,13 +443,17 @@ public class ECMS_SE_BasicAction_Delete extends PlatformBase {
 		cTemplate.createNewWebContent(webContentName_0, content_0, "", "", "", "");
 		click(siteExp.ELEMENT_SIDEBAR_COLLABORATION);
 		waitForTextNotPresent(content_0);
+		driver.navigate().refresh();
 		actBar.goToAddNewContent();
 		cTemplate.createNewWebContent(webContentName_1, content_1, "", "", "", "");
+		click(siteExp.ELEMENT_SIDEBAR_COLLABORATION);
 
 		info("-- Create a relation between 2 nodes --");
 		actBar.addItem2ActionBar("manageRelations", actBar.ELEMENT_ADD_RELATION_LINK);
 		actBar.chooseDrive(ecms.ELEMENT_COLLABORATION_DRIVE);
 		actBar.createRelation(webContentName_0, webContentName_1);
+
+		click(siteExp.ELEMENT_SIDEBAR_COLLABORATION);
 
 		info("-- Delete a document --");
 		WebElement file1 = waitForAndGetElement(siteExp.ELEMENT_DOCUMENT_TITLE.replace("${title}", webContentName_0));
@@ -455,13 +462,9 @@ public class ECMS_SE_BasicAction_Delete extends PlatformBase {
 		actions.keyDown(Keys.CONTROL).click(file1).click(file2).keyUp(Keys.CONTROL).build().perform();
 		rightClickOnElement(siteExp.ELEMENT_DOCUMENT_TITLE.replace("${title}", webContentName_0));
 
-		//click(cMenu.ELEMENT_MENU_DELETE_RIGHT_CLICK_POPUP);
 		((JavascriptExecutor)driver).executeScript("arguments[0].click();", waitForAndGetElement(cMenu.ELEMENT_MENU_DELETE_RIGHT_CLICK_POPUP, DEFAULT_TIMEOUT, 1));
-		magAlert.verifyAlertMessage("Are you sure you want to delete the 2 selected items and their references?");
+		magAlert.verifyAlertMessage("Are you sure you want to delete the 3 selected items and their references?");
 		Utils.captureScreen("Delete_multiple_document_with_references");
-		//dialog.deleteInDialog();
-		//waitForElementNotPresent(siteExp.ELEMENT_DOCUMENT_TITLE.replace("${title}", webContentName_0));
-		//waitForElementNotPresent(siteExp.ELEMENT_DOCUMENT_TITLE.replace("${title}", webContentName_1));
 
 		button.cancel();
 		cMenu.deleteDocument(By.linkText(webContentName_0));
@@ -469,7 +472,7 @@ public class ECMS_SE_BasicAction_Delete extends PlatformBase {
 	}
 
 	/**
-	 * Qmetry ID: 74518
+	 * Qmetry ID: 102061
 	 * Delete multiple files and folders with references
 	 */
 	@Test
@@ -479,6 +482,15 @@ public class ECMS_SE_BasicAction_Delete extends PlatformBase {
 		String DATA_UPLOAD_FILE_PATH_1 = "TestData/" + data1;
 		String DATA_UPLOAD_FILE_PATH_2 = "TestData/" + data2;
 		String folderName = "deleteMutipleFilesFolders";
+		Object[] paras = {true,"Authoring","manageRelations"};
+
+		info("make relations available");
+		ecMain.goToManageViews();
+		mnView.editView("Web", "", false, false, paras);
+
+		info("-- logout to take effect --");
+		magAcc.signOut();
+		magAcc.signIn(DATA_USER1, DATA_PASS);
 
 		info("-- Create files and folder --");
 		navToolBar.goToSiteExplorer();
@@ -507,7 +519,7 @@ public class ECMS_SE_BasicAction_Delete extends PlatformBase {
 		//click(cMenu.ELEMENT_MENU_DELETE_RIGHT_CLICK_POPUP);
 		((JavascriptExecutor)driver).executeScript("arguments[0].click();", waitForAndGetElement(cMenu.ELEMENT_MENU_DELETE_RIGHT_CLICK_POPUP, DEFAULT_TIMEOUT, 1));
 
-		magAlert.verifyAlertMessage("Are you sure you want to delete the 3 selected files, their references, folders and all subfolders?");
+		magAlert.verifyAlertMessage("Are you sure you want to delete the 4 selected files, their references, folders and all subfolders?");
 		Utils.captureScreen("Delete_multiple_Files_Folders_with_references");
 
 		dialog.deleteInDialog();
@@ -517,7 +529,7 @@ public class ECMS_SE_BasicAction_Delete extends PlatformBase {
 	}
 
 	/**
-	 * Qmetry ID: 74517
+	 * Qmetry ID: 102060
 	 * Delete multiple files with references
 	 * 
 	 */
@@ -528,16 +540,27 @@ public class ECMS_SE_BasicAction_Delete extends PlatformBase {
 		String DATA_UPLOAD_FILE_PATH_1 ="TestData/" + data1;
 		String DATA_UPLOAD_FILE_PATH_2 ="TestData/" + data2;
 
+		Object[] paras = {true,"Authoring","manageRelations"};
+
+		info("make relations available");
+		ecMain.goToManageViews();
+		mnView.editView("Web", "", false, false, paras);
+
+		info("-- logout to take effect --");
+		magAcc.signOut();
+		magAcc.signIn(DATA_USER1, DATA_PASS);
+
+
 		info("-- Upload 2 files --");
 		navToolBar.goToSiteExplorer();
 		actBar.chooseDrive(ecms.ELEMENT_COLLABORATION_DRIVE);
 
 		ecms.uploadFile(DATA_UPLOAD_FILE_PATH_1);
+		driver.navigate().refresh();
 		ecms.uploadFile(DATA_UPLOAD_FILE_PATH_2);
 
 		info("-- Add a relation --");
-		//actBar.addRelationToActionBar();
-		//actBar.addItem2ActionBar("manageRelations", actBar.ELEMENT_ADD_RELATION_LINK);
+
 		actBar.createRelation(data1, data2);
 		click(siteExp.ELEMENT_SIDEBAR_COLLABORATION);
 		Utils.pause(1000);
@@ -550,10 +573,9 @@ public class ECMS_SE_BasicAction_Delete extends PlatformBase {
 		actions.keyDown(Keys.CONTROL).click(file1).click(file2).keyUp(Keys.CONTROL).build().perform();
 		rightClickOnElement(siteExp.ELEMENT_DOCUMENT_TITLE.replace("${title}", data1));
 
-		//click(cMenu.ELEMENT_MENU_DELETE_RIGHT_CLICK_POPUP);
 		((JavascriptExecutor)driver).executeScript("arguments[0].click();", waitForAndGetElement(cMenu.ELEMENT_MENU_DELETE_RIGHT_CLICK_POPUP, DEFAULT_TIMEOUT, 1));
 
-		magAlert.verifyAlertMessage("Are you sure you want to delete the 2 selected files and their references?");
+		magAlert.verifyAlertMessage("Are you sure you want to delete the 3 selected files and their references?");
 		Utils.captureScreen("Delete_multiple_files_with_references");
 		dialog.deleteInDialog();
 		waitForElementNotPresent(siteExp.ELEMENT_DOCUMENT_TITLE.replace("${title}", data1));
@@ -561,7 +583,7 @@ public class ECMS_SE_BasicAction_Delete extends PlatformBase {
 	}
 
 	/**
-	 * Qmetry ID: 74519
+	 * Qmetry ID: 102062
 	 * Delete multiple files, folders and items with references
 	 * 
 	 */
@@ -574,6 +596,15 @@ public class ECMS_SE_BasicAction_Delete extends PlatformBase {
 		String folderName = "deleteMutipleFilesFoldersItems";
 		String webContentName = "webContent";
 		String content = "Delete multiple files, folders and items with references";
+		Object[] paras = {true,"Authoring","manageRelations"};
+
+		info("make relations available");
+		ecMain.goToManageViews();
+		mnView.editView("Web", "", false, false, paras);
+
+		info("-- logout to take effect --");
+		magAcc.signOut();
+		magAcc.signIn(DATA_USER1, DATA_PASS);
 
 		info("-- Create documents and folders --");
 		navToolBar.goToSiteExplorer();
@@ -589,8 +620,6 @@ public class ECMS_SE_BasicAction_Delete extends PlatformBase {
 		waitForTextNotPresent(content);
 
 		info("-- Add a relation --");
-		//actBar.addRelationToActionBar();
-		//actBar.addItem2ActionBar("manageRelations", actBar.ELEMENT_ADD_RELATION_LINK);
 		actBar.createRelation(data1, data2);
 		click(siteExp.ELEMENT_SIDEBAR_COLLABORATION);
 		Utils.pause(1000);
@@ -609,7 +638,7 @@ public class ECMS_SE_BasicAction_Delete extends PlatformBase {
 		//click(cMenu.ELEMENT_MENU_DELETE_RIGHT_CLICK_POPUP);
 		((JavascriptExecutor)driver).executeScript("arguments[0].click();", waitForAndGetElement(cMenu.ELEMENT_MENU_DELETE_RIGHT_CLICK_POPUP, DEFAULT_TIMEOUT, 1));
 
-		magAlert.verifyAlertMessage("Are you sure you want to delete the 4 selected items, files, their references, folders and all subfolders?");
+		magAlert.verifyAlertMessage("Are you sure you want to delete the 5 selected items, files, their references, folders and all subfolders?");
 		Utils.captureScreen("Delete_multiple_files_folders_Items_with_references");
 		dialog.deleteInDialog();
 		waitForElementNotPresent(siteExp.ELEMENT_DOCUMENT_TITLE.replace("${title}", folderName));
@@ -618,36 +647,10 @@ public class ECMS_SE_BasicAction_Delete extends PlatformBase {
 		waitForElementNotPresent(siteExp.ELEMENT_DOCUMENT_TITLE.replace("${title}", webContentName));
 	}
 
-	/**
-	 * Qmetry ID: 74526 
-	 * Delete single file from trash
-	 * 
-	 */
-	@Test
-	public void test17_DeleteSingleFileFromTrash(){
-		String data1 = "ECMS_Admin_SendMailScript_Template.txt";
-		String DATA_UPLOAD_FILE_PATH_1 ="TestData/" + data1;
 
-		info("-- Upload a file --");
-		navToolBar.goToPersonalDocuments();
-		ecms.uploadFile(DATA_UPLOAD_FILE_PATH_1);
-
-		info("-- Delete a file --");
-		actBar.actionsOnElement(data1, actionType.DELETE);
-
-		info("-- Delete in trash --");
-		actBar.chooseDrive(ecms.ELEMENT_TRASH_DRIVE);
-		click(ELEMENT_PERSONAL_DOCUMENTS);
-		usePaginator(ecms.ELEMENT_UI_CHECKBOX.replace("${element}", data1), "Cannot find element...");
-		click(ecms.ELEMENT_UI_CHECKBOX.replace("${element}", data1), 2);
-		click(cMenu.ELEMENT_MENU_DELETE);
-		magAlert.verifyAlertMessage("Are you sure you want to permanently remove the file 'ECMS_Admin_SendMailScript_Template.txt'?");
-		dialog.deleteInDialog();
-		waitForElementNotPresent(ecms.ELEMENT_UI_CHECKBOX.replace("${element}", data1));
-	}
 
 	/**
-	 * Qmetry ID: 74515
+	 * Qmetry ID: 102058
 	 * Delete single file with references 
 	 */
 	@Test
@@ -657,6 +660,15 @@ public class ECMS_SE_BasicAction_Delete extends PlatformBase {
 		String DATA_UPLOAD_FILE_PATH_1 ="TestData/" + data1;
 		String webContentName = "webContent";
 		String content = "Delete single file with references";
+		Object[] paras = {true,"Authoring","manageRelations"};
+
+		info("make relations available");
+		ecMain.goToManageViews();
+		mnView.editView("Web", "", false, false, paras);
+
+		info("-- logout to take effect --");
+		magAcc.signOut();
+		magAcc.signIn(DATA_USER1, DATA_PASS);
 
 		info("-- Create documents and folders --");
 		navToolBar.goToSiteExplorer();
@@ -681,7 +693,7 @@ public class ECMS_SE_BasicAction_Delete extends PlatformBase {
 	}
 
 	/**
-	 * Qmetry ID: 74522
+	 * Qmetry ID: 102065
 	 * Undo delete single file
 	 * 
 	 */
@@ -697,16 +709,16 @@ public class ECMS_SE_BasicAction_Delete extends PlatformBase {
 		info("-- Delete a file --");
 		actBar.actionsOnElement(data1, actionType.DELETE);		
 		waitForAndGetElement(ecms.MESSAGE_ITEM_DELETED_SUCCESSFULLY.replace("${title}", data1));
-		
+
 		info("-- Undo Deletion --");
 		actBar.undoDeletion();
 		waitForAndGetElement(ecms.MESSAGE_ITEM_RESTORED_SUCCESSFULLY.replace("${title}", data1));
-		
+
 		actBar.actionsOnElement(data1, actionType.DELETE);
 	}
-	
+
 	/**
-	 * Qmetry ID: 74525 
+	 * Qmetry ID: 102068 
 	 * Undo delete multiple items
 	 * 
 	 */
@@ -716,12 +728,12 @@ public class ECMS_SE_BasicAction_Delete extends PlatformBase {
 		String data2 = "ECMS_Undo_Delete_3.txt";
 		String DATA_UPLOAD_FILE_PATH_1 ="TestData/" + data1;
 		String DATA_UPLOAD_FILE_PATH_2 ="TestData/" + data2;
-		
+
 		info("-- Upload a file --");
 		navToolBar.goToPersonalDocuments();
 		ecms.uploadFile(DATA_UPLOAD_FILE_PATH_1);
 		ecms.uploadFile(DATA_UPLOAD_FILE_PATH_2);
-		
+
 		info("-- Delete Files--");
 		click(ELEMENT_PERSONAL_DOCUMENTS);
 		click(ecms.ELEMENT_UI_CHECKBOX.replace("${element}", data1), 2);
@@ -729,15 +741,15 @@ public class ECMS_SE_BasicAction_Delete extends PlatformBase {
 		click(actBar.ELEMENT_DELETE_NODE_ICON);
 		dialog.deleteInDialog();
 		waitForAndGetElement(ecms.MESSAGE_MULTI_ITEMS_DELETED_SUCCESSFULLY.replace("${title}", "2 items"));
-		
+
 		info("-- Undo Deletion --");
 		actBar.undoDeletion();
 		waitForAndGetElement(ecms.MESSAGE_MULTI_ITEMS_RESTORED_SUCCESSFULLY.replace("${title}", "2 items"));
-		
+
 		actBar.actionsOnElement(data1, actionType.DELETE);
 		actBar.actionsOnElement(data2, actionType.DELETE);
 	}
-	
+
 	/**
 	 * Qmetry ID: 74528
 	 * Undo Delete with relations
@@ -749,41 +761,45 @@ public class ECMS_SE_BasicAction_Delete extends PlatformBase {
 		String data2 = "ECMS_Undo_Delete_5.txt";
 		String DATA_UPLOAD_FILE_PATH_1 ="TestData/" + data1;
 		String DATA_UPLOAD_FILE_PATH_2 ="TestData/" + data2;
-		
+
+		Object[] paras = {true,"Authoring","manageRelations"};
+
+		info("make relations available");
+		ecMain.goToManageViews();
+		mnView.editView("Web", "", false, false, paras);
+
+		info("-- logout to take effect --");
+		magAcc.signOut();
+		magAcc.signIn(DATA_USER1, DATA_PASS);
+
 		info("-- Upload a file --");
 		navToolBar.goToPersonalDocuments();
 		ecms.uploadFile(DATA_UPLOAD_FILE_PATH_1);
 		ecms.uploadFile(DATA_UPLOAD_FILE_PATH_2);
 		
 		info("-- Add a relation --");
-		//actBar.addRelationToActionBar();
-		//actBar.addItem2ActionBar("manageRelations", actBar.ELEMENT_ADD_RELATION_LINK);
 		actBar.createRelation("ECMS_Undo_Delete_4", "Users/j___/jo___/joh___/john/Private/"+ data2, true);
-		
-		info("-- Delete file with relation --");
 		click(ecms.ELEMENT_BACK_PREVIOUS_NODE);
+		
+		info("-- Delete Files--");
 		click(ELEMENT_PERSONAL_DOCUMENTS);
+		click(ecms.ELEMENT_UI_CHECKBOX.replace("${element}", data1), 2);
 		actBar.actionsOnElement(data1, actionType.DELETE);
 		
-		info("-- Undo deletion --");
+		info("-- Undo Deletion --");
 		actBar.undoDeletion();
-		waitForAndGetElement(ecms.MESSAGE_ITEM_RESTORED_SUCCESSFULLY.replace("${title}", data1));
-		
+		waitForAndGetElement(ecms.MESSAGE_MULTI_ITEMS_RESTORED_SUCCESSFULLY.replace("${title}", "1 items"));
+
 		info("-- Review a relation --");
 		ecms.goToNode("ECMS_Undo_Delete_4", true);
 		click(actBar.ELEMENT_ADD_RELATION_LINK);
 		waitForTextPresent(data2);
 		button.close();
 		
-		click(ecms.ELEMENT_BACK_PREVIOUS_NODE);
 		actBar.actionsOnElement(data1, actionType.DELETE);
 		actBar.actionsOnElement(data2, actionType.DELETE);
+
 	} 
-	
-	@AfterMethod()
-	public void afterTest()
-	{
-		//logoutEcms();
-		driver.quit();
-	}
+
+
 }

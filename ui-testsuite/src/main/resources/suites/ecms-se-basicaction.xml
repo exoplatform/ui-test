@@ -27,6 +27,8 @@
 			<class
 				name="org.exoplatform.selenium.platform.ecms.functional.siteexplorer.basicaction.ECMS_SE_BasicAction_ResizeAndCollapse" />
 			<class
+				name="org.exoplatform.selenium.platform.ecms.functional.siteexplorer.basicaction.ECMS_SE_BasicAction_DragDrop" />
+			<class
 				name="org.exoplatform.selenium.platform.ecms.functional.siteexplorer.basicaction.ECMS_SE_BasicAction_SortAndRevert" />
 		</classes>
 	</test>

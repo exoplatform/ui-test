@@ -367,6 +367,8 @@ public class EcmsBase extends ManageAccount {
 	public final By ELEMENT_RSS_ICON = By.xpath("//*[@data-original-title='RSS Feed']");
 	public final String ELEMENT_CLV_TITLE = "//*[@class='Title' and contains(text(), '${title}')]";
 	public final String ELEMENT_CLV_PUBLISH_DATE = ELEMENT_CLV_TITLE + "/../div[contains(text(), '${date}')]";
+	
+
 
 	////////////////////////////////
 	//Log-in ECMS
@@ -641,6 +643,7 @@ public class EcmsBase extends ManageAccount {
 		}
 	}
 	
+
 	//Function to select home path
 	public void selectHomePathForCategoryTree(String homePath){
 		String[] temp;
