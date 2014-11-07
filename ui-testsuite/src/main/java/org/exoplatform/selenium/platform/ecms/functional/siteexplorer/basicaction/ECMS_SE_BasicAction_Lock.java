@@ -12,8 +12,6 @@ import org.exoplatform.selenium.platform.ecms.EcmsPermission;
 import org.exoplatform.selenium.platform.ecms.contentexplorer.ActionBar;
 import org.exoplatform.selenium.platform.ecms.contentexplorer.ContentTemplate;
 import org.exoplatform.selenium.platform.ecms.contentexplorer.ContextMenu;
-import org.exoplatform.selenium.platform.ecms.contentexplorer.ContentTemplate.folderType;
-import org.exoplatform.selenium.platform.ecms.contentexplorer.ContextMenu.actionType;
 import org.exoplatform.selenium.platform.ecms.contentexplorer.SitesExplorer;
 import org.openqa.selenium.By;
 import org.testng.annotations.AfterMethod;
@@ -33,22 +31,22 @@ public class ECMS_SE_BasicAction_Lock extends PlatformBase {
 	ContentTemplate cTemplate;
 	ContextMenu cMenu;
 	SitesExplorer siteExp;
-	
+
 	@BeforeMethod
 	public void beforeMethods() {
 		initSeleniumTest();
 		driver.get(baseUrl);
 		driver.manage().window().maximize();
-		button = new Button(driver);
-		magAcc = new ManageAccount(driver);
-		navToolBar = new NavigationToolbar(driver);
-		actBar = new ActionBar(driver);
-		ecms = new EcmsBase(driver);
+		button = new Button(driver,this.plfVersion);
+		magAcc = new ManageAccount(driver,this.plfVersion);
+		navToolBar = new NavigationToolbar(driver,this.plfVersion);
+		actBar = new ActionBar(driver,this.plfVersion);
+		ecms = new EcmsBase(driver,this.plfVersion);
 		ecmsPer = new EcmsPermission(driver);
-		cTemplate = new ContentTemplate(driver);
-		cMenu = new ContextMenu(driver);
-		siteExp = new SitesExplorer(driver);
-		
+		cTemplate = new ContentTemplate(driver,this.plfVersion);
+		cMenu = new ContextMenu(driver,this.plfVersion);
+		siteExp = new SitesExplorer(driver,this.plfVersion);
+
 		magAcc.signIn(DATA_USER1, DATA_PASS);
 	}
 
@@ -58,7 +56,7 @@ public class ECMS_SE_BasicAction_Lock extends PlatformBase {
 		driver.quit();
 	}
 
-	/**CaseId: 66035
+	/**CaseId: 101887
 	 * Case 01: Lock a node
 	 * Create a node
 	 * Lock this node
@@ -91,14 +89,14 @@ public class ECMS_SE_BasicAction_Lock extends PlatformBase {
 		cMenu.deleteDocument(FILE_PATH_LOCKED);
 	}
 
-	/**CaseId: 66193
+	/**CaseId: 101848
 	 * Case02: Unlock a node by locker
 	 * Create a node
 	 * Lock node
 	 * Unlock node
 	 */
 	@Test
-	public void test02_UnlockNodeByLocker () {
+	public void test02_UnlockANodeByLocker () {
 		String DATA_FILE_TITLE = "EMCS_SE_BasicAction_Lock_Case02";
 		By FILE_PATH = By.xpath(cMenu.ELEMENT_FILE_TITLE.replace("${titleOfFile}", DATA_FILE_TITLE));
 		By FILE_PATH_LOCKED = By.linkText(DATA_FILE_TITLE);
@@ -129,7 +127,7 @@ public class ECMS_SE_BasicAction_Lock extends PlatformBase {
 		cMenu.deleteDocument(FILE_PATH);
 	}
 
-	/**CaseId: 66194
+	/**CaseId: 101849
 	 * Case03: Unlock a node by user is  not locker 
 	 * create new node
 	 * lock node by user John
@@ -179,7 +177,7 @@ public class ECMS_SE_BasicAction_Lock extends PlatformBase {
 		cMenu.deleteData(FILE_PATH);
 	}
 
-	/**CaseID: 66536
+	/**CaseID: 101888
 	 * Case 04: Lock a node while parent node is being in locked status
 	 * Login
 	 * Create node and its child node
@@ -187,7 +185,7 @@ public class ECMS_SE_BasicAction_Lock extends PlatformBase {
 	 * Lock child node
 	 */
 	@Test
-	public void test04_LockANodeWhileParentNodeIsBeingLocked() {
+	public void test04_LockANodeWhileParentNodeIsBeingInLockedStatus() {
 		String DATA_ANNOUN_TITLE = "EMCS_SE_BasicAction_Lock_Case04";
 		By ANNOUN_PATH = By.xpath(cMenu.ELEMENT_FILE_TITLE.replace("${titleOfFile}", DATA_ANNOUN_TITLE));
 		By ANNOUN_PATH_LOCKED = By.linkText(DATA_ANNOUN_TITLE);
@@ -215,12 +213,12 @@ public class ECMS_SE_BasicAction_Lock extends PlatformBase {
 		info("Lock child node");
 		cMenu.contextMenuAction(FILE_PATH, cMenu.ELEMENT_CONTEXT_MENU_LOCK);
 		assert cMenu.isLockedNode(FILE_PATH_LOCKED);
-		
+
 		//Delete data
 		cMenu.deleteDocument(ANNOUN_PATH_LOCKED);
 	}
 
-	/**CaseId: 66195
+	/**CaseId: 101850
 	 * Case05: Unlock a node while parent node is being in lock status
 	 * Login
 	 * Create node and its child node
@@ -253,7 +251,7 @@ public class ECMS_SE_BasicAction_Lock extends PlatformBase {
 		info("Lock parent node");
 		cMenu.contextMenuAction(ANNOUN_PATH, cMenu.ELEMENT_CONTEXT_MENU_LOCK);
 		assert cMenu.isLockedNode(ANNOUN_PATH_LOCKED);
-		
+
 		info("Lock child node");
 		cMenu.contextMenuAction(FILE_PATH, cMenu.ELEMENT_CONTEXT_MENU_LOCK);
 		assert cMenu.isLockedNode(FILE_PATH_LOCKED);
@@ -266,14 +264,14 @@ public class ECMS_SE_BasicAction_Lock extends PlatformBase {
 		cMenu.deleteDocument(ANNOUN_PATH_LOCKED);
 	}
 
-	/**CaseId: 66539
-	 * Case 06: Lock node while it is being checked-in
+	/**CaseId: 101891
+	 * Case 06: Lock node while it is Being in check status
 	 * Create node
 	 * Check in this node
 	 * Verify cannot lock check in node
 	 */
 	@Test
-	public void test06_LockNodeWhileItIsBeingCheckedIn() {
+	public void test06_LockNodeWhileItIsBeingInCheckStatus() {
 		String DATA_FILE_NAME = "EMCS_DMS_SE_Lock_Case06";
 		By FILE_PATH = By.xpath(cMenu.ELEMENT_FILE_TITLE.replace("${titleOfFile}", DATA_FILE_NAME));
 
@@ -296,15 +294,15 @@ public class ECMS_SE_BasicAction_Lock extends PlatformBase {
 		cMenu.deleteDocument(FILE_PATH);
 	}
 
-	/**CaseId: 66537
-	 * Case 07: Lock child node while its parent is being check in status
+	/**CaseId: 101889
+	 * Case 07: Lock child node is nt:file while it's parent is being in check in status
 	 * Create parent node
 	 * Create child node
 	 * Check in parent node
 	 * Lock child node
 	 */
 	@Test
-	public void test07_LockChildNodeWhileItsParentIsInCheckinStatus() {
+	public void test07_LockChildIsntFileWhileItsParentIsBeingInCheckinStatus() {
 		String WEB_CONTENT = "EMCS_DMS_SE_Lock_Case07";
 		String WEB_CONTENT_CONTENT = "EMCS_DMS_SE_Lock_Case07_Content";
 		By WEB_CONTENT_PATH = By.xpath(cMenu.ELEMENT_FILE_TITLE.replace("${titleOfFile}", WEB_CONTENT));
@@ -314,7 +312,7 @@ public class ECMS_SE_BasicAction_Lock extends PlatformBase {
 
 		info("Go to site explorer");
 		navToolBar.goToSiteExplorer();
-		
+
 		info("Create new web content");
 		actBar.goToAddNewContent();
 		cTemplate.createNewWebContent(WEB_CONTENT, WEB_CONTENT_CONTENT, "", "", "", "");
@@ -325,7 +323,7 @@ public class ECMS_SE_BasicAction_Lock extends PlatformBase {
 
 		info("Check in parent node");
 		cMenu.contextMenuAction(WEB_CONTENT_PATH, cMenu.ELEMENT_MENU_CHECKIN);
-		
+
 		info("Check can not lock child node");
 		rightClickOnElement(FILE_PATH);
 		waitForElementNotPresent(cMenu.ELEMENT_CONTEXT_MENU_LOCK);
@@ -336,8 +334,8 @@ public class ECMS_SE_BasicAction_Lock extends PlatformBase {
 		cMenu.deleteDocument(WEB_CONTENT_PATH);
 	}
 
-	/**CaseId: 66538
-	 * Case 08: Lock a node when user has not set property right
+	/**CaseId: 101890
+	 * Case 08: Lock a node when user has not set modify right
 	 * Login John
 	 * Create document
 	 * Set right for this document: James has all permission except set property
@@ -345,7 +343,7 @@ public class ECMS_SE_BasicAction_Lock extends PlatformBase {
 	 * James cannot lock this documents
 	 */
 	@Test
-	public void test08_LockNodeWhenUserHasNotSetPropertyRight() {
+	public void test08_LockNodeWhenUserHasNotSetModifyRight() {
 		String DATA_FILE_NAME = "ECMS_DMS_SE_BasicAction_Lock_Case08";
 		By FILE_PATH = By.xpath(cMenu.ELEMENT_FILE_TITLE.replace("${titleOfFile}", DATA_FILE_NAME));
 
@@ -358,7 +356,7 @@ public class ECMS_SE_BasicAction_Lock extends PlatformBase {
 
 		//Add a view permission to Action Bar 
 		actBar.addItem2ActionBar("viewPermissions", actBar.ELEMENT_PERMISSION_LINK);
-		
+
 		ecms.goToNode(FILE_PATH);
 		actBar.goToNodePermissionManagement();
 
@@ -386,7 +384,7 @@ public class ECMS_SE_BasicAction_Lock extends PlatformBase {
 		cMenu.deleteDocument(FILE_PATH);
 	}
 
-	/**CaseId: 67297
+	/**CaseId: 102034
 	 * Case 09: Automatically unlock a node when user logout
 	 * Login
 	 * Create node
@@ -421,110 +419,240 @@ public class ECMS_SE_BasicAction_Lock extends PlatformBase {
 		//Delete data
 		cMenu.deleteDocument(FILE_PATH);
 	}
-	
-	/**CaseId: Automatically unlock a node after 30 minutes
-	 * Create new node
-	 * lock node
-	 * wait 30 minutes
-	 * check auto unlock node
+
+	/**CaseId: 101889
+	 * Case 10: Lock child node is not nt:file while it's parent is being in check in status
+	 * Create parent node
+	 * Create child node
+	 * Check in parent node
+	 * Lock child node
 	 */
 	@Test
-	public void test10_AutomaticallyUnlockNodeAfter30Minutes(){
-		String DATA_FILE_TITLE = "EMCS_SE_BasicAction_Lock_Case10";
-		By FILE_PATH = By.xpath(cMenu.ELEMENT_FILE_TITLE.replace("${titleOfFile}", DATA_FILE_TITLE));
-		By FILE_PATH_LOCKED = By.linkText(DATA_FILE_TITLE);
+	public void test10_LockChildIsNotntFileWhileItsParentIsBeingInCheckinStatus() {
+		String WEB_CONTENT = "Lock_Case10";
+		String WEB_CONTENT_CONTENT = "Lock_Case10_Content";
+		By WEB_CONTENT_PATH = By.xpath(cMenu.ELEMENT_FILE_TITLE.replace("${titleOfFile}", WEB_CONTENT));
+
+		String WEB_CONTENT2 = "case10.1";
+		String WEB_CONTENT_CONTENT2 = "case10.1_Content";
+		
+		info("Go to site explorer");
+		navToolBar.goToSiteExplorer();
+
+		info("Create new web content");
+		actBar.goToAddNewContent();
+		cTemplate.createNewWebContent(WEB_CONTENT, WEB_CONTENT_CONTENT, "", "", "", "");
+		driver.navigate().refresh();
+		info("Create child node is file document");
+		actBar.goToAddNewContent();
+		cTemplate.createNewWebContent(WEB_CONTENT2, WEB_CONTENT_CONTENT2, "", "", "", "");
+
+		info("Check in parent node");
+		cMenu.contextMenuAction(WEB_CONTENT_PATH, cMenu.ELEMENT_MENU_CHECKIN);
+
+		info("Check can lock child node");
+		rightClickOnElement(cMenu.ELEMENT_FILE_TITLE.replace("${titleOfFile}", WEB_CONTENT));
+
+		//Delete data
+		ecms.goToNode(WEB_CONTENT_PATH);
+		cMenu.contextMenuAction(WEB_CONTENT_PATH, cMenu.ELEMENT_MENU_CHECKOUT);
+		cMenu.deleteDocument(WEB_CONTENT_PATH);
+	}
+
+
+	/**CaseId: 102134
+	 * Case 11: Unlock child node is not nt:file while it's parent is being in check in status
+	 * Create parent node
+	 * Create child node
+	 * Check in parent node
+	 * Lock child node
+	 * Unlock child node
+	 */
+	@Test
+	public void test11_UnlockChildIsNotntFileWhileItsParentIsBeingInCheckinStatus() {
+		String WEB_CONTENT = "EMCS_DMS_SE_Lock_Case11";
+		String WEB_CONTENT_CONTENT = "EMCS_DMS_SE_Lock_Case11_Content";
+		By WEB_CONTENT_PATH = By.xpath(cMenu.ELEMENT_FILE_TITLE.replace("${titleOfFile}", WEB_CONTENT));
+
+		String WEB_CONTENT2 = "Case11";
+		String WEB_CONTENT_CONTENT2 = "Case11_Content";
 
 		info("Go to site explorer");
 		navToolBar.goToSiteExplorer();
 
-		info("Create new file document");
+		info("Create new web content");
 		actBar.goToAddNewContent();
-		cTemplate.createNewFile(DATA_FILE_TITLE, DATA_FILE_TITLE, DATA_FILE_TITLE);
-		
-		info("Lock node");
-		cMenu.contextMenuAction(FILE_PATH, cMenu.ELEMENT_CONTEXT_MENU_LOCK);
-		assert cMenu.isLockedNode(FILE_PATH_LOCKED);
-		
-		info("Wait 30 minutes");
-		Utils.pause(1800000);
-		
-		info("Check automatically unlock node");
+		cTemplate.createNewWebContent(WEB_CONTENT, WEB_CONTENT_CONTENT, "", "", "", "");
 		driver.navigate().refresh();
+		info("Create child node is file document");
+		actBar.goToAddNewContent();
+		cTemplate.createNewWebContent(WEB_CONTENT2, WEB_CONTENT_CONTENT2, "", "", "", "");
+
+		info("Check in parent node");
+		cMenu.contextMenuAction(WEB_CONTENT_PATH, cMenu.ELEMENT_MENU_CHECKIN);
+		Utils.pause(2000);
+		info("Check can not lock child node");
+		rightClickOnElement(cMenu.ELEMENT_FILE_TITLE.replace("${titleOfFile}", WEB_CONTENT2));
+		Utils.pause(2000);
+		waitForAndGetElement(cMenu.ELEMENT_CONTEXT_MENU_LOCK).click();
 		Utils.pause(3000);
-		rightClickOnElement(FILE_PATH_LOCKED);
-		waitForAndGetElement(cMenu.ELEMENT_CONTEXT_MENU_LOCK);
+		rightClickOnElement(cMenu.ELEMENT_FILE_TITLE.replace("${titleOfFile}", WEB_CONTENT2));
+		Utils.pause(2000);
+		waitForAndGetElement(cMenu.ELEMENT_CONTEXT_MENU_UNLOCK).click();
 		
-		cMenu.deleteDocument(FILE_PATH);
+		//Delete data
+		ecms.goToNode(WEB_CONTENT_PATH);
+		cMenu.contextMenuAction(WEB_CONTENT_PATH, cMenu.ELEMENT_MENU_CHECKOUT);
+		cMenu.deleteDocument(WEB_CONTENT_PATH);
 	}
-	
-	/**CaseId: 74529 -> Lock a Parent & Child selection
-	 * 
+
+
+	/**CaseId: 102135
+	 * Case 12: Unlock child node is nt:file while it's parent is being in check in status
+	 * Create parent node
+	 * Create child node
+	 * Check in parent node
+	 * Lock/Unlock child node
 	 */
 	@Test
-	public void test11_LockParentAndChildNodeSelection(){
-		String DATA_FOLDER = "contentfolder11";
-		String FILE_NAME = "EMCS_SE_BasicAction_Lock_Case11";
-		By ELEMENT_FILE = By.linkText(FILE_NAME);
-		
-		info("Add New Content icon in action bar of File management view");
-		navToolBar.goToPersonalDocuments();
-		actBar.goToViewMode("List");
-		actBar.addItem2ActionBar("addDocument", actBar.ELEMENT_NEW_CONTENT_LINK, "List", "List");
-		
-		info("Create parent node");
-		navToolBar.goToPersonalDocuments();
-		actBar.goToViewMode("List");
-		cTemplate.createNewFolder(DATA_FOLDER, folderType.None);
-		ecms.goToNode(DATA_FOLDER, true);
-		
-		info("Create child node");
+	public void test12_UnlockChildIstntFileWhileItsParentIsBeingInCheckinStatus() {
+		String WEB_CONTENT = "EMCS_DMS_SE_Lock_Case12";
+		String WEB_CONTENT_CONTENT = "EMCS_DMS_SE_Lock_Case12_Content";
+		By WEB_CONTENT_PATH = By.xpath(cMenu.ELEMENT_FILE_TITLE.replace("${titleOfFile}", WEB_CONTENT));
+
+		String WEB_CONTENT2 = "Lock_Case12";
+		String WEB_CONTENT_CONTENT2 = "Case12_Content";
+
+		info("Go to site explorer");
+		navToolBar.goToSiteExplorer();
+
+		info("Create new web content");
 		actBar.goToAddNewContent();
-		cTemplate.createNewFile(FILE_NAME, FILE_NAME, FILE_NAME);		
-		click(ecms.ELEMENT_BACK_PREVIOUS_NODE);
-		click(By.xpath(siteExp.ELEMENT_ARROW_RIGHT.replace("${nodeName}", DATA_FOLDER)));
-		waitForAndGetElement(ELEMENT_FILE);
-		
-		info("Lock parent and child node");
-		actBar.lockNodeFromActionBar(DATA_FOLDER + "/" + FILE_NAME);
-		
-		//actBar.deleteDataInAdminView(DATA_FOLDER);
-		actBar.actionsOnElement(DATA_FOLDER, actionType.DELETE);
-	}
-	
-	/**CaseId: 74536 -> Unlock a Parent & Child selection
-	 * 
-	 */
-	@Test
-	public void test12_UnlockParentAndChildSelection(){
-		String DATA_FOLDER = "contentfolder12";
-		String FILE_NAME = "EMCS_SE_BasicAction_Lock_Case12";
-		By ELEMENT_FILE = By.linkText(FILE_NAME);
-		
-		info("Add New Content icon in action bar of File management view");
-		navToolBar.goToPersonalDocuments();
-		actBar.goToViewMode("List");
-		actBar.addItem2ActionBar("addDocument", actBar.ELEMENT_NEW_CONTENT_LINK, "List", "List");
-		
-		info("Create parent node");
-		navToolBar.goToPersonalDocuments();
-		actBar.goToViewMode("List");
-		cTemplate.createNewFolder(DATA_FOLDER, folderType.None);
-		ecms.goToNode(DATA_FOLDER, true);
-		
-		info("Create child node");
+		cTemplate.createNewWebContent(WEB_CONTENT, WEB_CONTENT_CONTENT, "", "", "", "");
+		driver.navigate().refresh();
+		info("Create child node is file document");
 		actBar.goToAddNewContent();
-		cTemplate.createNewFile(FILE_NAME, FILE_NAME, FILE_NAME);		
-		click(ecms.ELEMENT_BACK_PREVIOUS_NODE);
-		click(By.xpath(siteExp.ELEMENT_ARROW_RIGHT.replace("${nodeName}", DATA_FOLDER)));
-		waitForAndGetElement(ELEMENT_FILE);
-		
-		info("Lock parent and child node");
-		actBar.lockNodeFromActionBar(DATA_FOLDER + "/" + FILE_NAME);
-		
-		info("Unlock parent and child node");
-		actBar.unLockNodeFromActionBar(DATA_FOLDER + "/" + FILE_NAME);
-		
-		//actBar.deleteDataInAdminView(DATA_FOLDER);
-		actBar.actionsOnElement(DATA_FOLDER, actionType.DELETE);
+		cTemplate.createNewWebContent(WEB_CONTENT2, WEB_CONTENT_CONTENT2, "", "", "", "");
+
+		info("Check in parent node");
+		cMenu.contextMenuAction(WEB_CONTENT_PATH, cMenu.ELEMENT_MENU_CHECKIN);
+
+		info("Check can not lock child node");
+		rightClickOnElement(cMenu.ELEMENT_FILE_TITLE.replace("${titleOfFile}", WEB_CONTENT2));
+
+		waitForElementNotPresent(cMenu.ELEMENT_CONTEXT_MENU_LOCK);
+
+		//Delete data
+		ecms.goToNode(WEB_CONTENT_PATH);
+		cMenu.contextMenuAction(WEB_CONTENT_PATH, cMenu.ELEMENT_MENU_CHECKOUT);
+		cMenu.deleteDocument(WEB_CONTENT_PATH); // pas present
 	}
+	// --------------------------------------------------- Not hight priority ----------------------------------------------------------	
+
+
+	//	/**CaseId: Automatically unlock a node after 30 minutes
+	//	 * Create new node
+	//	 * lock node
+	//	 * wait 30 minutes
+	//	 * check auto unlock node
+	//	 */
+	//	@Test
+	//	public void test10_AutomaticallyUnlockNodeAfter30Minutes(){
+	//		String DATA_FILE_TITLE = "EMCS_SE_BasicAction_Lock_Case10";
+	//		By FILE_PATH = By.xpath(cMenu.ELEMENT_FILE_TITLE.replace("${titleOfFile}", DATA_FILE_TITLE));
+	//		By FILE_PATH_LOCKED = By.linkText(DATA_FILE_TITLE);
+	//
+	//		info("Go to site explorer");
+	//		navToolBar.goToSiteExplorer();
+	//
+	//		info("Create new file document");
+	//		actBar.goToAddNewContent();
+	//		cTemplate.createNewFile(DATA_FILE_TITLE, DATA_FILE_TITLE, DATA_FILE_TITLE);
+	//		
+	//		info("Lock node");
+	//		cMenu.contextMenuAction(FILE_PATH, cMenu.ELEMENT_CONTEXT_MENU_LOCK);
+	//		assert cMenu.isLockedNode(FILE_PATH_LOCKED);
+	//		
+	//		info("Wait 30 minutes");
+	//		Utils.pause(1800000);
+	//		
+	//		info("Check automatically unlock node");
+	//		driver.navigate().refresh();
+	//		Utils.pause(3000);
+	//		rightClickOnElement(FILE_PATH_LOCKED);
+	//		waitForAndGetElement(cMenu.ELEMENT_CONTEXT_MENU_LOCK);
+	//		
+	//		cMenu.deleteDocument(FILE_PATH);
+	//	}
+	//	
+	//	/**CaseId: 74529 -> Lock a Parent & Child selection
+	//	 * 
+	//	 */
+	//	@Test
+	//	public void test11_LockParentAndChildNodeSelection(){
+	//		String DATA_FOLDER = "contentfolder11";
+	//		String FILE_NAME = "EMCS_SE_BasicAction_Lock_Case11";
+	//		By ELEMENT_FILE = By.linkText(FILE_NAME);
+	//		
+	//		info("Add New Content icon in action bar of File management view");
+	//		navToolBar.goToPersonalDocuments();
+	//		actBar.goToViewMode("List");
+	//		actBar.addItem2ActionBar("addDocument", actBar.ELEMENT_NEW_CONTENT_LINK, "List", "List");
+	//		
+	//		info("Create parent node");
+	//		navToolBar.goToPersonalDocuments();
+	//		actBar.goToViewMode("List");
+	//		cTemplate.createNewFolder(DATA_FOLDER, folderType.None);
+	//		ecms.goToNode(DATA_FOLDER, true);
+	//		
+	//		info("Create child node");
+	//		actBar.goToAddNewContent();
+	//		cTemplate.createNewFile(FILE_NAME, FILE_NAME, FILE_NAME);		
+	//		click(ecms.ELEMENT_BACK_PREVIOUS_NODE);
+	//		click(By.xpath(siteExp.ELEMENT_ARROW_RIGHT.replace("${nodeName}", DATA_FOLDER)));
+	//		waitForAndGetElement(ELEMENT_FILE);
+	//		
+	//		info("Lock parent and child node");
+	//		actBar.lockNodeFromActionBar(DATA_FOLDER + "/" + FILE_NAME);
+	//		
+	//		//actBar.deleteDataInAdminView(DATA_FOLDER);
+	//		actBar.actionsOnElement(DATA_FOLDER, actionType.DELETE);
+	//	}
+	//	
+	//	/**CaseId: 74536 -> Unlock a Parent & Child selection
+	//	 * 
+	//	 */
+	//	@Test
+	//	public void test12_UnlockParentAndChildSelection(){
+	//		String DATA_FOLDER = "contentfolder12";
+	//		String FILE_NAME = "EMCS_SE_BasicAction_Lock_Case12";
+	//		By ELEMENT_FILE = By.linkText(FILE_NAME);
+	//		
+	//		info("Add New Content icon in action bar of File management view");
+	//		navToolBar.goToPersonalDocuments();
+	//		actBar.goToViewMode("List");
+	//		actBar.addItem2ActionBar("addDocument", actBar.ELEMENT_NEW_CONTENT_LINK, "List", "List");
+	//		
+	//		info("Create parent node");
+	//		navToolBar.goToPersonalDocuments();
+	//		actBar.goToViewMode("List");
+	//		cTemplate.createNewFolder(DATA_FOLDER, folderType.None);
+	//		ecms.goToNode(DATA_FOLDER, true);
+	//		
+	//		info("Create child node");
+	//		actBar.goToAddNewContent();
+	//		cTemplate.createNewFile(FILE_NAME, FILE_NAME, FILE_NAME);		
+	//		click(ecms.ELEMENT_BACK_PREVIOUS_NODE);
+	//		click(By.xpath(siteExp.ELEMENT_ARROW_RIGHT.replace("${nodeName}", DATA_FOLDER)));
+	//		waitForAndGetElement(ELEMENT_FILE);
+	//		
+	//		info("Lock parent and child node");
+	//		actBar.lockNodeFromActionBar(DATA_FOLDER + "/" + FILE_NAME);
+	//		
+	//		info("Unlock parent and child node");
+	//		actBar.unLockNodeFromActionBar(DATA_FOLDER + "/" + FILE_NAME);
+	//		
+	//		//actBar.deleteDataInAdminView(DATA_FOLDER);
+	//		actBar.actionsOnElement(DATA_FOLDER, actionType.DELETE);
+	//	}
 }

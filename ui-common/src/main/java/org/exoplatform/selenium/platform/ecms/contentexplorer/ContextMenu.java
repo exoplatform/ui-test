@@ -35,7 +35,8 @@ public class ContextMenu extends EcmsBase{
 	public final By ELEMENT_MENU_ADD_TO_FAVORITE = By.xpath("//*[@id='JCRContextMenu']//i[@class='uiIconEcmsAddToFavourite']");
 	/*End Added*/
 	
-	public final By ELEMENT_CONTEXT_MENU_LOCK = By.xpath("//*[@class='uiContextMenuContainer']//i[@class='uiIconEcmsLock']"); 
+	public final By ELEMENT_CONTEXT_MENU_LOCK = By.xpath("//*[@class='uiContextMenuContainer']//i[@class='uiIconEcmsLock']");
+	public final By ELEMENT_CONTEXT_MENU_UNLOCK = By.xpath("//i[@class='uiIconEcmsUnlock']"); 
 			//By.className("uiIconEcmsLock");
 	public final By ELEMENT_MENU_UNLOCK = By.className("uiIconEcmsUnlock");
 	public final By ELEMENT_MENU_CHECKIN = By.className("uiIconEcmsCheckIn");
