@@ -54,6 +54,7 @@ public class SitesExplorer extends EcmsBase{
 	public final By ELEMENT_SIDEBAR_COLLABORATION = By.xpath("//*[@data-original-title = 'Collaboration']");
 	public final String ELEMENT_PATH_ADDRESS = "//*[@id='address' and @value='${path}']";
 	public final String ELEMENT_NODE_TREE_EXPLORER_NAME=".//*[@id='UITreeExplorer']//a/span[contains(@class,'nodeName')][contains(text(),'${name_document}')]";
+	
 	//File Explorer - relation -clipboard - tag clould - saved search
 	public final String ELEMENT_TAG_IN_CONTAINER_LIST = "//*[@class='tagContainer']/*[text()='${tagName}']"; 
 	public final By ELEMENT_TAG_CLOUD = By.xpath("//*[@data-original-title = 'Tag Cloud']");
@@ -71,7 +72,11 @@ public class SitesExplorer extends EcmsBase{
 	public final String ELEMENT_TITLE_LEFT_PANEL = "//div[@id='UITreeExplorer']//div[contains(@onmousedown,'collaboration:/sites/${title}')]";
 
 	public final String ELEMENT_DOCUMENT_TITLE = "//*[@class='nodeLabel']/*[text()='${title}']";
-
+	
+	//Document View Edit mode
+	public final String ELEMENT_DOCUMENT_CONTENT_EDIT_MODE=".//*[@class='WCMInlineEditable cke_editable cke_editable_inline cke_contents_ltr cke_show_borders']/p[contains(text(),'${content}')]/..";
+	public final By ELEMENT_ACCEPT_EDIT=By.xpath(".//*[@id='cke_51']");
+	
 	//Check status of documents
 	public final String ELEMENT_STATUS_DOCUMENT = "//*[@data-original-title='${title}']/../..//*[@data-original-title='status']";
 
