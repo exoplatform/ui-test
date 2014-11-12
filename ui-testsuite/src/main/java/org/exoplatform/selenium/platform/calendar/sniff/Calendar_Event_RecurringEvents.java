@@ -56,7 +56,6 @@ public class Calendar_Event_RecurringEvents extends CalendarBase {
 			- Connect to Intranet
 			- Choose Calendar application
 		 *Input Data: 
-
 		 *Expected Outcome: 
 			- The Calendar is displayed*/
 		goToCalendarPage();
@@ -66,7 +65,6 @@ public class Calendar_Event_RecurringEvents extends CalendarBase {
 		 *Step Description: 
 			Click Event on action bar
 		 *Input Data: 
-
 		 *Expected Outcome: 
 			- The pop up "Quick Add Event" is displayed*/
 		evt.goToAddEventFromActionBar();
@@ -81,7 +79,6 @@ public class Calendar_Event_RecurringEvents extends CalendarBase {
 			- Save
 			- Save
 		 *Input Data: 
-
 		 *Expected Outcome: 
 			-The default duration for Event (From
 			-To) is 1 hour
@@ -143,7 +140,6 @@ public class Calendar_Event_RecurringEvents extends CalendarBase {
 			- Connect to Intranet
 			- Choose Calendar application
 		 *Input Data: 
-
 		 *Expected Outcome: 
 			- The Calendar is displayed*/
 		goToCalendarPage();
@@ -153,7 +149,6 @@ public class Calendar_Event_RecurringEvents extends CalendarBase {
 		 *Step Description: 
 			- Create a Recurring event
 		 *Input Data: 
-
 		 *Expected Outcome: 
 			- Series of events is displayed with an extra icon, see attachment [extraIcon.png]*/
 
@@ -180,7 +175,6 @@ public class Calendar_Event_RecurringEvents extends CalendarBase {
 		 *Step Description: 
 			- Move the mouse over the event
 		 *Input Data: 
-
 		 *Expected Outcome: 
 			- The popover of the event shows + Title of event+ Description+ Location+ Time+ Icon is the same icon with the label "Recurring event", pls see attachment [Recurring_icon_On_Popover.png]*/
 		mouseOver(By.xpath(ELEMENT_EVENT_TASK_DETAIL_DATE.replace("${taskName}", name).replace("${date}", getDate(0, "MMM dd yyyy"))),true);
@@ -214,7 +208,6 @@ public class Calendar_Event_RecurringEvents extends CalendarBase {
 			- Connect to Intranet
 			- Choose Calendar application
 		 *Input Data: 
-
 		 *Expected Outcome: 
 			- The Calendar is displayed
 			- A recurring event is displayed*/
@@ -241,7 +234,6 @@ public class Calendar_Event_RecurringEvents extends CalendarBase {
 		 *Step Description: 
 			- Edit an even from the series
 		 *Input Data: 
-
 		 *Expected Outcome: 
 			- The pop up "Edit Recurring event" is displayed
 			- The icon "Repeat" is checked*/
@@ -252,7 +244,6 @@ public class Calendar_Event_RecurringEvents extends CalendarBase {
 			- Edit the repeat option
 			- Click "Save"
 		 *Input Data: 
-
 		 *Expected Outcome: 
 			- A confirmation pop up is displayed to ask user: "Would you like to change only this event, all events in the series, or this and all following events in the series?"
 			- 3 options:  + Only this event + Following events + All events
@@ -264,7 +255,6 @@ public class Calendar_Event_RecurringEvents extends CalendarBase {
 			- Choose the Defeult option "Only this Event"
 			- Click "Save"
 		 *Input Data: 
-
 		 *Expected Outcome: 
 			- Changes are restricted to the edited recurring event*/
 		evt.editRecurringEvent(name,newName,description, null,null,null,true,selectDayOption.ALLDAY,recurringType.ONLY_EVENT,getDate(1, "MMM dd yyyy"));
@@ -300,7 +290,6 @@ public class Calendar_Event_RecurringEvents extends CalendarBase {
 			- Connect to Intranet
 			- Open "Calendar" application
 		 *Input Data: 
-
 		 *Expected Outcome: 
 			- A recurring events is displayed*/
 		goToCalendarPage();
@@ -328,7 +317,6 @@ public class Calendar_Event_RecurringEvents extends CalendarBase {
 			- Right click on event from the series
 			- Choose the option "Delete"
 		 *Input Data: 
-
 		 *Expected Outcome: 
 			<p>
 			- A pop up is displayed with:<br>* A title: "Delete Recurring Event"<br>* A message: Would you like to delete only this event, all events in the series, or this and all following events in the series?<br>* The option 'Only this event" is selected by default<br>* A button "Delete"</p>*/
@@ -342,7 +330,6 @@ public class Calendar_Event_RecurringEvents extends CalendarBase {
 			- Choose the default option "All events"<br>
 			- Click "Delete"</p>
 		 *Input Data: 
-
 		 *Expected Outcome: 
 			<p>
 			- All events are deletes</p><p>
@@ -374,7 +361,6 @@ public class Calendar_Event_RecurringEvents extends CalendarBase {
 			- Connect to Intranet
 			- Choose Calendar application
 		 *Input Data: 
-
 		 *Expected Outcome: 
 			- The Calendar is displayed
 			- A recurring event is displayed*/
@@ -402,7 +388,6 @@ public class Calendar_Event_RecurringEvents extends CalendarBase {
 		 *Step Description: 
 			- Drag and drop an event from the series, Select only this event. Save
 		 *Input Data: 
-
 		 *Expected Outcome: 
 			- Start and End dates and times of event are updated
 			- Event is marked as 'edited' by an icon with tooltip.*/
@@ -414,7 +399,6 @@ public class Calendar_Event_RecurringEvents extends CalendarBase {
 		 *Step Description: 
 			- Move the mouse over the icon
 		 *Input Data: 
-
 		 *Expected Outcome: 
 			A tooltip is displayed "edited recurring event"*/ 
 		mouseOver(By.xpath(ELEMENT_EVENT_TASK_DETAIL_DATE.replace("${taskName}", name).replace("${date}", getDate(1, "MMM dd yyyy"))),true);
@@ -450,7 +434,6 @@ public class Calendar_Event_RecurringEvents extends CalendarBase {
 			- Connect to Intranet
 			- Open "Calendar" application
 		 *Input Data: 
-
 		 *Expected Outcome: 
 			- A recurring events is displayed*/
 		goToCalendarPage();
@@ -480,7 +463,6 @@ public class Calendar_Event_RecurringEvents extends CalendarBase {
 			- Right click on event from the series
 			- Choose the option "Delete"
 		 *Input Data: 
-
 		 *Expected Outcome: 
 			- A pop upis displayed with:* A title: "Delete Recurring Event"* A message: Would you like to delete only this event, all events in the series, or this and all following events in the series?* The option 'Only this event" is selected by default* A button "Delete"*/
 
@@ -492,7 +474,6 @@ public class Calendar_Event_RecurringEvents extends CalendarBase {
 			- Choose the default option "Only this event"
 			- Click "Delete"
 		 *Input Data: 
-
 		 *Expected Outcome: 
 			- Only current event is deleted from the series*/ 
 		evt.deleteRecurringEvent(name, selectDayOption.ONEDAY, recurringType.ONLY_EVENT,getDate(0, "MMM dd yyyy"));
@@ -526,7 +507,6 @@ public class Calendar_Event_RecurringEvents extends CalendarBase {
 			- Connect to Intranet
 			- Choose Calendar application
 		 *Input Data: 
-
 		 *Expected Outcome: 
 			- The Calendar is displayed
 			- A recurring event is displayed*/
@@ -553,7 +533,6 @@ public class Calendar_Event_RecurringEvents extends CalendarBase {
 		 *Step Description: 
 			- Edit an even from the series
 		 *Input Data: 
-
 		 *Expected Outcome: 
 			- The pop up "Edit Recurring event" is displayed
 			- The icon "Repeat" is checked*/
@@ -564,7 +543,6 @@ public class Calendar_Event_RecurringEvents extends CalendarBase {
 			- Edit the repeat option
 			- Click "Save"
 		 *Input Data: 
-
 		 *Expected Outcome: 
 			- A confirmation pop up is displayed to ask user: "Would you like to change only this event, all events in the series, or this and all following events in the series?"
 			- 3 options:  + Only this event + Following events + All events
@@ -576,7 +554,6 @@ public class Calendar_Event_RecurringEvents extends CalendarBase {
 			- Choose "Following events"
 			- Click "Save"
 		 *Input Data: 
-
 		 *Expected Outcome: 
 			- Changes are appliyed for current & following events*/ 
 		evt.editRecurringEvent(name,newName,description, null,null,null,true,selectDayOption.ALLDAY,recurringType.FOLLOW_EVENT,getDate(2, "MMM dd yyyy"));
@@ -615,7 +592,6 @@ public class Calendar_Event_RecurringEvents extends CalendarBase {
 			- Connect to Intranet
 			- Choose Calendar application
 		 *Input Data: 
-
 		 *Expected Outcome: 
 			- The Calendar is displayed
 			- A recurring event is displayed*/
@@ -642,7 +618,6 @@ public class Calendar_Event_RecurringEvents extends CalendarBase {
 		 *Step Description: 
 			- Edit an even from the series
 		 *Input Data: 
-
 		 *Expected Outcome: 
 			- The pop up "Edit Recurring event" is displayed
 			- The icon "Repeat" is checked*/
@@ -653,7 +628,6 @@ public class Calendar_Event_RecurringEvents extends CalendarBase {
 			- Edit the repeat option
 			- Click "Save"
 		 *Input Data: 
-
 		 *Expected Outcome: 
 			- A confirmation pop up is displayed to ask user: "Would you like to change only this event, all events in the series, or this and all following events in the series?"
 			- 3 options:  + Only this event + Following events + All events
@@ -665,7 +639,6 @@ public class Calendar_Event_RecurringEvents extends CalendarBase {
 			- Choose "All events"
 			- Click "Save"
 		 *Input Data: 
-
 		 *Expected Outcome: 
 			- Changes are appliyed for all events*/ 
 		evt.editRecurringEvent(name,newName,description, null,null,null,true,selectDayOption.ALLDAY,recurringType.ALL_EVENT,getDate(2, "MMM dd yyyy"));
@@ -706,7 +679,6 @@ public class Calendar_Event_RecurringEvents extends CalendarBase {
 			- Connect to Intranet
 			- Open "Calendar" application
 		 *Input Data: 
-
 		 *Expected Outcome: 
 			- A recurring events is displayed*/
 		goToCalendarPage();
@@ -737,7 +709,6 @@ public class Calendar_Event_RecurringEvents extends CalendarBase {
 			- Right click on event from the series
 			- Choose the option "Delete"
 		 *Input Data: 
-
 		 *Expected Outcome: 
 			- A pop upis displayed with:* A title: "Delete Recurring Event"* A message: Would you like to delete only this event, all events in the series, or this and all following events in the series?* The option 'Only this event" is selected by default* A button "Delete"*/
 
@@ -750,7 +721,6 @@ public class Calendar_Event_RecurringEvents extends CalendarBase {
 			- Choose the default option "Following events"<br>
 			- Click "Delete"</p>
 		 *Input Data: 
-
 		 *Expected Outcome: 
 			<p>
 			- Selected and following event are deleted</p>*/ 
