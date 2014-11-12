@@ -58,18 +58,18 @@ public class ECMS_SE_BasicAction_CopyPaste extends PlatformBase {
 		initSeleniumTest();
 		driver.get(baseUrl);
 		driver.manage().window().maximize();
-		button = new Button(driver);
-		alt = new ManageAlert(driver);
-		magAcc = new ManageAccount(driver);
-		navToolBar = new NavigationToolbar(driver);
-		actBar = new ActionBar(driver);
-		ecms = new EcmsBase(driver);
+		button = new Button(driver, this.plfVersion);
+		alt = new ManageAlert(driver, this.plfVersion);
+		magAcc = new ManageAccount(driver, this.plfVersion);
+		navToolBar = new NavigationToolbar(driver,this.plfVersion);
+		actBar = new ActionBar(driver, this.plfVersion);
+		ecms = new EcmsBase(driver, this.plfVersion);
 		ecmsPer = new EcmsPermission(driver);
-		cTemplate = new ContentTemplate(driver);
-		cMenu = new ContextMenu(driver);
+		cTemplate = new ContentTemplate(driver, this.plfVersion);
+		cMenu = new ContextMenu(driver, this.plfVersion);
 		bPre = new BrowserPreferences(driver);
-		siteExp = new SitesExplorer(driver);
-		alert = new ManageAlert(driver);
+		siteExp = new SitesExplorer(driver, this.plfVersion);
+		alert = new ManageAlert(driver, this.plfVersion);
 		magAcc.signIn(DATA_USER1,DATA_PASS);
 	}
 
@@ -207,7 +207,7 @@ public class ECMS_SE_BasicAction_CopyPaste extends PlatformBase {
 
 		String CONTENT_FOLDER_NAME="BasicAction_CopyPaste_Content_Folder_04";
 		By CONTENT_FOLDER_PATH=By.xpath(cMenu.ELEMENT_FILE_TITLE.replace("${titleOfFile}", CONTENT_FOLDER_NAME));
-		By CONTENT_FOLDER_PATH_NEW = By.xpath(ELEMENT_SUB_NODE.replace("${parent}", WEB_CONTENT_NAME).replace("${child}", CONTENT_FOLDER_NAME));
+		By CONTENT_FOLDER_PATH_NEW = By.xpath(ELEMENT_SUB_NODE.replace("${parent}", WEB_CONTENT_NAME.replaceAll("_", "").toLowerCase()).replace("${child}", CONTENT_FOLDER_NAME));
 
 		info("Go to CE");
 		navToolBar.goToSiteExplorer();
@@ -241,7 +241,7 @@ public class ECMS_SE_BasicAction_CopyPaste extends PlatformBase {
 	 * Delete data
 	 */
 	@Test
-	public void test08_CopyDocumentFolderToContentFolder()
+	public void test05_CopyDocumentFolderToContentFolder()
 	{
 		String CONTENT_FOLDER_NAME="BasicAction_CopyPaste_Content_Folder_08";
 		By CONTENT_FOLDER_PATH=By.xpath(cMenu.ELEMENT_FILE_TITLE.replace("${titleOfFile}", CONTENT_FOLDER_NAME));
@@ -279,7 +279,7 @@ public class ECMS_SE_BasicAction_CopyPaste extends PlatformBase {
 	 * Delete data
 	 */
 	@Test
-	public void test09_CopyDocumentFolderToDocumentFolder()
+	public void test06_CopyDocumentFolderToDocumentFolder()
 	{
 		String DOCUMENT_FOLDER_NAME="BasicAction_CopyPaste_Document_Folder_09";
 		By DOCUMENT_FOLDER_PATH=By.xpath(cMenu.ELEMENT_FILE_TITLE.replace("${titleOfFile}", DOCUMENT_FOLDER_NAME));
@@ -315,7 +315,7 @@ public class ECMS_SE_BasicAction_CopyPaste extends PlatformBase {
 	 * login with mary: create new node. Check can not copy this node to locked node
 	 */
 	@Test
-	public void test17_CopyFolderAndPasteIntoLockedNodeByUserIsNotLock(){		
+	public void test07_CopyFolderAndPasteIntoLockedNodeByUserIsNotLock(){		
 		String DOCUMENT_FOLDER_NAME_1 = "BasicAction_CopyPaste_Document_Folder_17_1";
 		String DOCUMENT_FOLDER_TITLE_1 = DOCUMENT_FOLDER_NAME_1.replaceAll("_", "").toLowerCase();
 		By DOCUMENT_FOLDER_PATH_1 = By.linkText(DOCUMENT_FOLDER_NAME_1);
@@ -377,7 +377,7 @@ public class ECMS_SE_BasicAction_CopyPaste extends PlatformBase {
 	 * Delete data
 	 */
 	@Test
-	public void test18_CopyFolderPasteIntoNodeUserNotHaveAddNodeRight()
+	public void test08_CopyFolderPasteIntoNodeUserNotHaveAddNodeRight()
 	{
 		String CONTENT_FOLDER_NAME_1 = "BasicAction_CopyPaste_Content_Folder_18_1";
 		By CONTENT_FOLDER_PATH_1 = By.xpath(cMenu.ELEMENT_FILE_TITLE.replace("${titleOfFile}", CONTENT_FOLDER_NAME_1));
@@ -433,7 +433,7 @@ public class ECMS_SE_BasicAction_CopyPaste extends PlatformBase {
 	 * Delete data
 	 */
 	@Test
-	public void test20_CopyDocumentFolderToRootPath()
+	public void test09_CopyDocumentFolderToRootPath()
 	{ 
 		String DOCUMENT_FOLDER_NAME = "BasicAction_CopyPaste_Document_Folder_20";
 		By DOCUMENT_FOLDER_PATH = By.xpath(cMenu.ELEMENT_FILE_TITLE.replace("${titleOfFile}", DOCUMENT_FOLDER_NAME));
@@ -469,7 +469,7 @@ public class ECMS_SE_BasicAction_CopyPaste extends PlatformBase {
 	 * Delete data
 	 */
 	@Test
-	public void test31_CopyFileToFolder()
+	public void test10_CopyFileToFolder()
 	{ 
 		String CONTENT_FOLDER_NAME = "BasicAction_CopyPaste_Content_Folder_31";
 		By CONTENT_FOLDER_PATH = By.xpath(cMenu.ELEMENT_FILE_TITLE.replace("${titleOfFile}", CONTENT_FOLDER_NAME));
@@ -507,7 +507,7 @@ public class ECMS_SE_BasicAction_CopyPaste extends PlatformBase {
 	 * Delete data
 	 */
 	@Test
-	public void test32_CopyFileToOtherDocument()
+	public void test11_CopyFileToOtherDocument()
 	{ 
 		String ANNOUN_NAME = "BasicAction_CopyPaste_Announcement_32";
 		String ANNOUN_SUMMARY = "summary of announcement";
@@ -516,7 +516,8 @@ public class ECMS_SE_BasicAction_CopyPaste extends PlatformBase {
 		String FILE_NAME = "BasicAction_CopyPaste_File_Document_32";
 		String FILE_CONTENT="Content of File";
 		By FILE_PATH = By.xpath(cMenu.ELEMENT_FILE_TITLE.replace("${titleOfFile}", FILE_NAME));
-		By FILE_PATH_NEW = By.xpath(ELEMENT_SUB_NODE.replace("${parent}", ANNOUN_NAME).replace("${child}", FILE_NAME));
+		By FILE_PATH_NEW = By.xpath(ELEMENT_SUB_NODE.replace("${parent}", ANNOUN_NAME.replaceAll("_", "").toLowerCase()).replace("${child}", FILE_NAME));
+		
 
 		info("Go to CE");
 		navToolBar.goToSiteExplorer();
