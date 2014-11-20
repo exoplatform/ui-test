@@ -25,7 +25,7 @@ public class ResizeAndCollapse extends EcmsBase {
 	//Right panel
 	public final By ELEMENT_RIGHT_CONTAINER = By.className("rightContainer");
 	public final String ELEMENT_BORDER_COLUMN = "//*[@class='lineLeft'][${position}]";
-	public final String ELEMENT_COLUMN_NAME = "//*[@class='columnName' and contains(text(), '${name}')]";
+	public final String ELEMENT_COLUMN_NAME = "//*[@class='columnName' and contains(., '${name}')]";
 	
 	/**function show side bar in personal document
 	 * @author lientm

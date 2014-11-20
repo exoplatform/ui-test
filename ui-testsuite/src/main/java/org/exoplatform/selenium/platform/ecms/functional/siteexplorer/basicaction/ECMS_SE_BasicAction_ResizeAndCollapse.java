@@ -65,36 +65,12 @@ public class ECMS_SE_BasicAction_ResizeAndCollapse extends PlatformBase {
 		waitForAndGetElement(resize.ELEMENT_PANEL_COLLAPSE_BUTTON);
 	}
 
-	/**CaseId: 74871 -> Saved resize of the right panel from Intranet/documents
-	 * Resize column in right panel
-	 * -> Do not saved this resize as test case in Qmetry
-	 */
-	//	REMOVED
-	//	@Test
-	//	public void test02_SavedResizeOfTheRightPanel_IntranetDocuments(){
-	//		magDri.addView2Drive("Web", "Personal Documents");
-	//		actBar.goToViewMode("Web");
-	//		
-	//		String before = waitForAndGetElement(resize.ELEMENT_COLUMN_NAME.replace("${name}", "Document Title")).getAttribute("style").replace("width: ", "").replace(";", "");		
-	//		info("Size of column Document Title before resize is " + before);
-	//		resize.resizeColumnInRightPanel("2", 100);
-	//		String after = waitForAndGetElement(resize.ELEMENT_COLUMN_NAME.replace("${name}", "Document Title")).getAttribute("style").replace("width: ", "").replace(";", "");		
-	//		info("Size of column Document Title after resize is " + after);
-	//		assert before != after;
-	//		
-	//		nav.goToHomePage();
-	//		nav.goToPersonalDocuments();
-	//		actBar.goToViewMode("Web");
-	//		String after1 = waitForAndGetElement(resize.ELEMENT_COLUMN_NAME.replace("${name}", "Document Title")).getAttribute("style").replace("width: ", "").replace(";", "");		
-	//		info("Size of column Document Title saving is " + after1);
-	//		
-	//	}
 
 	/**CaseId: 74873 -> Resize the left panel from Intranet/Documents
 	 * this case is having issue ECMS-5368
 	 */
 	@Test
-	public void test03_ResizeLeftPanel_IntranetDocuments(){
+	public void test02_ResizeLeftPanel_IntranetDocuments(){
 		nav.goToPersonalDocuments();
 		resize.showSideBar();
 
@@ -105,11 +81,11 @@ public class ECMS_SE_BasicAction_ResizeAndCollapse extends PlatformBase {
 		assert left != "240px;";
 	}
 
-	/**CaseId: 74881 -> Actions in the right panel after resize of left panel from Intranet Documents
-	 * -> this case is having issue ECMS-5368
+	/**CaseId: 102094 -> Actions in the right panel after resize of left panel from Intranet Documents
+	 * 
 	 */
-	//@Test
-	public void test04_ActionInRightPanelAfterResizeLeftPanel_IntranetDocument(){
+	@Test
+	public void test03_ActionInRightPanelAfterResizeLeftPanel_IntranetDocument(){
 		nav.goToPersonalDocuments();
 		resize.showSideBar();
 
@@ -128,11 +104,11 @@ public class ECMS_SE_BasicAction_ResizeAndCollapse extends PlatformBase {
 		waitForAndGetElement(ecms.ELEMENT_PERMISSION_LINK);	
 	}
 
-	/**CaseId: 74883 -> Show the resize pointer of the left panel from Content explorer
+	/**CaseId: 102096 -> Show the resize pointer of the left panel from Content explorer
 	 * 
 	 */
 	@Test
-	public void test05_ShowResizePointerOfLeftPanel_ContentExplorer(){
+	public void test04_ShowResizePointerOfLeftPanel_ContentExplorer(){
 		nav.goToSiteExplorer();
 
 		info("Panel limit is not displayed");
@@ -144,11 +120,11 @@ public class ECMS_SE_BasicAction_ResizeAndCollapse extends PlatformBase {
 		waitForAndGetElement(resize.ELEMENT_PANEL_COLLAPSE_BUTTON);
 	}
 
-	/**CaseId: 74884 -> Resize the left panel from Content explorer
+	/**CaseId: 102097 -> Resize the left panel from Content explorer
 	 * 
 	 */
 	@Test
-	public void test06_ResizeLeftPanel_ContentExplorer(){
+	public void test05_ResizeLeftPanel_ContentExplorer(){
 		nav.goToSiteExplorer();
 
 		resize.resizeLimitPanel(200);
@@ -158,15 +134,15 @@ public class ECMS_SE_BasicAction_ResizeAndCollapse extends PlatformBase {
 		assert left != "240px;";
 	}
 
-	/**CaseId: 74890 -> Saved resize of the right panel from Content explorer
+	/**CaseId: 102102 -> Saved resize of the right panel from Content explorer
 	 * resize "Document title" column
-	 * -> Do not saved this resize as test case in Qmetry
+	 * 
 	 */
 	@Test
-	public void test07_SaveResizeOfRightPanel_ContentExplorer(){
+	public void test06_SaveResizeOfRightPanel_ContentExplorer(){
 		nav.goToSiteExplorer();
-
-		String before = waitForAndGetElement(resize.ELEMENT_COLUMN_NAME.replace("${name}", "Document Title")).getAttribute("style").replace("width: ", "").replace(";", "");		
+	
+		String before = waitForAndGetElement(resize.ELEMENT_COLUMN_NAME.replace("${name}", "Document Title")).getAttribute("style").replace("width: ", "").replace(";", ""); 	
 		info("Size of column Document Title before resize is " + before);
 		resize.resizeColumnInRightPanel("2", 100);
 		String after = waitForAndGetElement(resize.ELEMENT_COLUMN_NAME.replace("${name}", "Document Title")).getAttribute("style").replace("width: ", "").replace(";", "");		
@@ -179,11 +155,11 @@ public class ECMS_SE_BasicAction_ResizeAndCollapse extends PlatformBase {
 		info("Size of column Document Title saving is " + after1);
 	}
 
-	/**CaseId: 74894 -> Actions in the right panel after resize of left panel from Settings
+	/**CaseId: 102104 -> Actions in the right panel after resize of left panel from Settings
 	 * 
 	 */
 	@Test
-	public void test08_ActionInRightPanelAfterResizeLeftPanel_ContentExplorer(){
+	public void test07_ActionInRightPanelAfterResizeLeftPanel_ContentExplorer(){
 		nav.goToSiteExplorer();
 
 		resize.resizeLimitPanel(600);
@@ -203,15 +179,15 @@ public class ECMS_SE_BasicAction_ResizeAndCollapse extends PlatformBase {
 		waitForAndGetElement(ecms.ELEMENT_ADD_TRANSLATION_LINK);
 	}
 
-	/**CaseId: 74896 -> Show the resize pointer of the left panel from Space/Document
+	/**CaseId: 102106 -> Show the resize pointer of the left panel from Space/Document
 	 * @author hzekri
 	 */
 	@Test
-	public void test09_ShowResizePointerOfLeftPanel_SpaceDocuments(){
+	public void test08_ShowResizePointerOfLeftPanel_SpaceDocuments(){
 
 		//Declare variables
-		String spacename = "SpaceTestResize09";
-		String spacedesc = "Description Of SpaceTestResize09";
+		String spacename = "SpaceTestResize08";
+		String spacedesc = "Description Of SpaceTestResize08";
 
 		//Add new space
 		magMember.goToMySpacePage();
@@ -236,14 +212,14 @@ public class ECMS_SE_BasicAction_ResizeAndCollapse extends PlatformBase {
 		magMember.deleteSpace(spacename,300000);
 	}
 
-	/**CaseId: 74899 -> Resize the left panel from Space/Documents
+	/**CaseId: 102108 -> Resize the left panel from Space/Documents
 	 *  @author hzekri
 	 */
 	@Test
-	public void test10_ResizeLeftPanel_SpaceDocuments(){
+	public void test09_ResizeLeftPanel_SpaceDocuments(){
 		//Declare variables
-		String spacename = "SpaceTestResize10";
-		String spacedesc = "Description Of SpaceTestResize10";
+		String spacename = "SpaceTestResize09";
+		String spacedesc = "Description Of SpaceTestResize09";
 
 		//Add new space
 		magMember.goToMySpacePage();
@@ -269,14 +245,14 @@ public class ECMS_SE_BasicAction_ResizeAndCollapse extends PlatformBase {
 		magMember.deleteSpace(spacename,300000);
 	}
 
-	/**CaseId: 74907 -> Actions in the right panel after resize of left panel from Space Documents
+	/**CaseId: 102115 -> Actions in the right panel after resize of left panel from Space Documents
 	 * @author hzekri
 	 */
 	@Test
-	public void test11_ActionInRightPanelAfterResizeLeftPanel_SpaceDocument(){
+	public void test10_ActionInRightPanelAfterResizeLeftPanel_SpaceDocument(){
 		//Declare variables
-		String spacename = "SpaceTestResize11";
-		String spacedesc = "Description Of SpaceTestResize11";
+		String spacename = "SpaceTestResize10";
+		String spacedesc = "Description Of SpaceTestResize10";
 
 		//Add new space
 		magMember.goToMySpacePage();
@@ -293,8 +269,8 @@ public class ECMS_SE_BasicAction_ResizeAndCollapse extends PlatformBase {
 		info("Size of left container to maximum is" + left);
 
 		waitForAndGetElement(ecms.ELEMENT_MORE_LINK_WITHOUT_BLOCK);
+		waitForAndGetElement(ecms.ELEMENT_UPLOAD_FILE_LINK);  
 		waitForElementNotPresent(actBar.ELEMENT_NEW_FOLDER_LINK);
-		waitForElementNotPresent(ecms.ELEMENT_UPLOAD_FILE_LINK);
 		waitForElementNotPresent(ecms.ELEMENT_PERMISSION_LINK);
 
 		click(ecms.ELEMENT_MORE_LINK_WITHOUT_BLOCK);
