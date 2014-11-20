@@ -61,7 +61,7 @@ public class ECMS_SE_BasicAction_Rename extends PlatformBase{
 	}
 
 	/**
-	 * Qmetry ID: 74551
+	 * Qmetry ID: 102072
 	 * Cancel button should dismiss the form without renaming
 	 * 
 	 */
@@ -94,7 +94,7 @@ public class ECMS_SE_BasicAction_Rename extends PlatformBase{
 	}
 
 	/**
-	 * Qmetry ID: 74577
+	 * Qmetry ID: 102084
 	 * Check the same name when accessed via WEBDAV
 	 * 
 	 */
@@ -136,7 +136,7 @@ public class ECMS_SE_BasicAction_Rename extends PlatformBase{
 	}
 
 	/**
-	 * Qmetry ID: 74553
+	 * Qmetry ID: 102073
 	 * File extension not shown in rename form
 	 * 
 	 */
@@ -170,7 +170,7 @@ public class ECMS_SE_BasicAction_Rename extends PlatformBase{
 
 
 	/**
-	 * Qmetry ID: 74555
+	 * Qmetry ID: 102074
 	 * File name is restored if leaving name blank while renaming
 	 * 
 	 */
@@ -203,10 +203,10 @@ public class ECMS_SE_BasicAction_Rename extends PlatformBase{
 	}
 
 	/**
-	 * Qmetry ID: 74557
+	 * Qmetry ID: 102075
 	 * File name is updated after the rename operation is finished
 	 * ================
-	 * Qmetry ID: 74574
+	 * Qmetry ID: 102082
 	 * Rename on Enter key
 	 * 
 	 */
@@ -241,7 +241,7 @@ public class ECMS_SE_BasicAction_Rename extends PlatformBase{
 	}
 
 	/**
-	 * Qmetry ID: 74559
+	 * Qmetry ID: 102076
 	 * File name should change to "Renaming..." during the rename operation
 	 * ======== PENDING ======
 	 * Not able to automate
@@ -252,7 +252,7 @@ public class ECMS_SE_BasicAction_Rename extends PlatformBase{
 	}*/
 
 	/**
-	 * Qmetry ID: 74560
+	 * Qmetry ID: 102077
 	 * Focus is set in rename field
 	 * 
 	 */
@@ -289,7 +289,7 @@ public class ECMS_SE_BasicAction_Rename extends PlatformBase{
 	}
 
 	/**
-	 * Qmetry ID: 74568
+	 * Qmetry ID: 102078
 	 * Name should be populated in field
 	 * ======== PENDING =======
 	 * Not able to automate
@@ -300,7 +300,7 @@ public class ECMS_SE_BasicAction_Rename extends PlatformBase{
 	}*/
 
 	/**
-	 * Qmetry ID: 74570
+	 * Qmetry ID: 102079
 	 * No restriction on name
 	 * 
 	 */
@@ -329,7 +329,7 @@ public class ECMS_SE_BasicAction_Rename extends PlatformBase{
 	}
 
 	/**
-	 * Qmetry ID: 74572 
+	 * Qmetry ID: 102080 
 	 * Rename form should dismiss when clicking outside
 	 * Drive: Sites Management
 	 * 
@@ -361,7 +361,7 @@ public class ECMS_SE_BasicAction_Rename extends PlatformBase{
 	}  
 
 	/**
-	 * Qmetry ID: 74573
+	 * Qmetry ID: 102081
 	 * Rename form ui
 	 * Note: [Main area] and [Left panel] are displayed in Sites Management View  
 	 * 
@@ -403,7 +403,7 @@ public class ECMS_SE_BasicAction_Rename extends PlatformBase{
 	}
 
 	/**
-	 * Qmetry ID: 74676
+	 * Qmetry ID: 102083
 	 * Rename on Rename button
 	 * 
 	 */
@@ -432,7 +432,7 @@ public class ECMS_SE_BasicAction_Rename extends PlatformBase{
 	}
 
 	/**
-	 * Qmetry ID: 74579
+	 * Qmetry ID: 102085
 	 * Should add title on the fly
 	 * 
 	 */
