@@ -56,8 +56,9 @@ public class Social_Space_SpaceManagement_Applications extends SocialBase{
 		String appliTitleSearch="ForumsStatistic";
 
 		//- Create new space
-		magMember.goToMySpacePage();
+		magMember.goToAllSpaces();
 		magMember.addNewSpace(spaceName, "");
+		magMember.accessSpace(spaceName);
 		
 		/*Step 1: Add application*/ 
 		//- Access Space, select Setting tab/Application
@@ -65,6 +66,7 @@ public class Social_Space_SpaceManagement_Applications extends SocialBase{
 		//- Application is added on space. Name of application is display on right of space menu portlet
 		spaceMag.goToSpaceMenu("Space Settings");
 		appMag.addApplication(categoryName, applicationTitle);
+
 		spaceMag.goToSpaceMenu(appliTitleSearch);
 		
 		/*Clear data*/

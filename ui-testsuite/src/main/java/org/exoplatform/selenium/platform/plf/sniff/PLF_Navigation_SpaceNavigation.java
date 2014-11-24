@@ -7,6 +7,7 @@ import org.exoplatform.selenium.platform.ManageAccount;
 import org.exoplatform.selenium.platform.PlatformBase;
 import org.exoplatform.selenium.platform.social.ApplicationManagement;
 import org.exoplatform.selenium.platform.social.SpaceManagement;
+import org.exoplatform.selenium.platform.wiki.WikiBase;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -22,6 +23,7 @@ public class PLF_Navigation_SpaceNavigation extends PlatformBase {
 	ManageAccount magAcc;
 	SpaceManagement spaceMag;
 	ApplicationManagement appMag;
+	WikiBase wiki;
 
 	@BeforeMethod
 	public void beforeMethods() {
@@ -31,6 +33,7 @@ public class PLF_Navigation_SpaceNavigation extends PlatformBase {
 		magAcc = new ManageAccount(driver, this.plfVersion);
 		spaceMag = new SpaceManagement(driver, this.plfVersion);
 		appMag = new ApplicationManagement(driver);
+		wiki = new WikiBase(driver);
 		magAcc.signIn(DATA_USER1, DATA_PASS);
 	}
 
@@ -52,7 +55,7 @@ public class PLF_Navigation_SpaceNavigation extends PlatformBase {
 		String spaceName = "space74379";
 		
 		/*Create data*/
-		spaceMag.goToMySpacePage();
+		spaceMag.goToAllSpaces();
 		spaceMag.addNewSpace(spaceName, "");
 		
 		/*Step 1: Show space applications*/ 
@@ -75,8 +78,7 @@ public class PLF_Navigation_SpaceNavigation extends PlatformBase {
 		Utils.pause(1000);
 		waitForAndGetElement(spaceMag.ELEMENT_SPACE_FORUM_PORTLET);
 		spaceMag.goToSpaceMenu("Wiki");
-		Utils.pause(1000);
-		waitForAndGetElement(spaceMag.ELEMENT_SPACE_WIKI_PORTLET);
+		waitForAndGetElement(wiki.ELEMENT_SPACE_WIKI_PAGE);
 		spaceMag.goToSpaceMenu("Documents");
 		Utils.pause(1000);
 		waitForAndGetElement(spaceMag.ELEMENT_SPACE_DOCUMENTS_PORTLET);
