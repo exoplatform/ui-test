@@ -25,6 +25,10 @@
 			<class
 				name="org.exoplatform.selenium.platform.ecms.functional.siteexplorer.createnode.ECMS_SE_CreateNode_Link" />
 			<class
+				name="org.exoplatform.selenium.platform.ecms.functional.siteexplorer.createnode.ECMS_SE_CreateNode_WebContent" />
+			<class
+				name="org.exoplatform.selenium.platform.ecms.functional.siteexplorer.createnode.ECMS_SE_CreateNode_WebLink" />			
+			<class
 				name="org.exoplatform.selenium.platform.ecms.functional.siteexplorer.createnode.ECMS_SE_CreateNode_PictureOnHeadLayout" />
 			<class
 				name="org.exoplatform.selenium.platform.ecms.functional.siteexplorer.createnode.ECMS_SE_CreateNode_Upload_Action_FileExisting" />

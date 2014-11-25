@@ -5,14 +5,16 @@ import static org.exoplatform.selenium.TestLogger.info;
 import org.exoplatform.selenium.Button;
 import org.exoplatform.selenium.ManageAlert;
 import org.exoplatform.selenium.Utils;
+import org.exoplatform.selenium.platform.HomePageActivity;
+import org.exoplatform.selenium.platform.HomePageGadget;
 import org.exoplatform.selenium.platform.ManageAccount;
 import org.exoplatform.selenium.platform.NavigationToolbar;
-import org.exoplatform.selenium.platform.PlatformBase;
 import org.exoplatform.selenium.platform.ecms.EcmsBase;
 import org.exoplatform.selenium.platform.ecms.contentexplorer.ActionBar;
 import org.exoplatform.selenium.platform.ecms.contentexplorer.ContentTemplate;
 import org.exoplatform.selenium.platform.ecms.contentexplorer.ContextMenu;
 import org.exoplatform.selenium.platform.ecms.contentexplorer.SitesExplorer;
+import org.exoplatform.selenium.platform.social.Activity;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.AfterMethod;
@@ -25,7 +27,7 @@ import org.testng.annotations.Test;
  * July, 29th, 2013
  *
  */
-public class ECMS_SE_CreateNode_CSSFile extends PlatformBase{
+public class ECMS_SE_CreateNode_CSSFile extends Activity{
 	//Platform
 	Button button;
 	ManageAccount magAcc;
@@ -38,7 +40,8 @@ public class ECMS_SE_CreateNode_CSSFile extends PlatformBase{
 	ContextMenu cMenu;
 	ContentTemplate cTemplate;
 	SitesExplorer sExplorer;
-
+	HomePageGadget hpGadget;
+	HomePageActivity hpActivity;
 	@BeforeMethod
 	public void beforeMethod(){
 		initSeleniumTest();
@@ -52,6 +55,8 @@ public class ECMS_SE_CreateNode_CSSFile extends PlatformBase{
 		cTemplate = new ContentTemplate(driver);
 		magAlt = new ManageAlert(driver);
 		sExplorer = new SitesExplorer(driver);
+		hpGadget = new HomePageGadget(driver,  this.plfVersion);
+		hpActivity = new HomePageActivity(driver, this.plfVersion);
 		magAcc.signIn(DATA_USER1, DATA_PASS);
 	}
 
@@ -63,15 +68,16 @@ public class ECMS_SE_CreateNode_CSSFile extends PlatformBase{
 	}
 
 	/**
-	 * Qmetry ID: 66724
+	 * Qmetry ID: 101523
 	 * Create CSS file on Site explorer with Active is True and the priority is highest
 	 *  
 	 */
 	@Test
 	public void test01_CreateCSSFileWithActiveIsTrue(){
 		String FILE_TITLE = "ECMS_SE_CSS_FILE_01";
-		String filePath = "TestData/ECMS_CSS_File_Color_Red.txt";
-		String data = Utils.getFileContent(filePath);
+		String data = "body{ color:red;}";
+		String activity1 = "activity101523";
+		String comment1 = "comment101523";
 
 		info("Go to CSS Folder in Site Explorer");
 		navToolBar.goToSiteExplorer();
@@ -81,33 +87,48 @@ public class ECMS_SE_CreateNode_CSSFile extends PlatformBase{
 		actBar.goToAddNewContent();
 		cTemplate.createNewCssFile(FILE_TITLE, "1", data, true);
 
+		//Switch to ACME Site
+		driver.get(DEFAULT_BASEURL + "/intranet");
+		driver.navigate().refresh();
+		Utils.pause(3000);
+
 		info("Check the body tags: changed in red color");
-		WebElement element = waitForAndGetElement(sExplorer.ELEMENT_SIDEBAR_SITES_MANAGEMENT);
+		addActivity(true, activity1, false,"");
+		info("-- Add comment --");
+		addComment(activity1, comment1);
+		info("Check the body tags: changed in red color");
+		WebElement element = waitForAndGetElement(ELEMENT_CONTENT_COMMENT.replace("${activityText}", activity1).replace("${commentText}", comment1));
 		String styleValue = element.getCssValue("color");
 		info("-- Dispalyed Color -- " + styleValue);
 		assert styleValue.equals("rgba(255, 0, 0, 1)"): "cannot set the tags color to red...";	
 
 		info("Restore data");
+		hpActivity.deleteActivity(activity1);
+		navToolBar.goToSiteExplorer();
+		cMenu.goToNode(By.linkText("intranet"));
+		cMenu.goToNode(By.linkText("css"));
 		cMenu.deleteDocument(By.linkText(FILE_TITLE));	
 	}
 
 	/**
-	 * Qmetry ID: 67038
+	 * Qmetry ID: 102173
 	 * Check CSS priority on Site Explorer when have two CSS files which have the different content.
 	 *  
 	 */
 	@Test
 	public void test02_CheckCSSPriorityOf2CSSFilesThatHaveDifferentContent(){
 		String FILE_TITLE_BLUE = "ECMS_SE_CSS_FILE_BLUE_02";
-		String data0 = "body {background: black;}";
+		String data0 = "body {font-size: 15px;}";
 
 		String FILE_TITLE_RED = "ECMS_SE_CSS_FILE_RED_02";
-		String data1 = "UIOptionBar .ActionIcon:hover {color: blue;}";
+		String data1 = "body {color: red;}";
+
+		String activity1 = "activity102173";
+		String comment1 = "comment102173";
 
 		info("Go to CSS Folder in Site Explorer");
 		navToolBar.goToSiteExplorer();
-		ecms.goToNode("acme/css");
-
+		ecms.goToNode("intranet/css");
 
 		info("Create a new CSS File: change the text color to red");
 		actBar.goToAddNewContent();
@@ -119,29 +140,34 @@ public class ECMS_SE_CreateNode_CSSFile extends PlatformBase{
 		cTemplate.createNewCssFile(FILE_TITLE_BLUE, "11", data0, true);
 
 		//Switch to ACME Site
-		driver.get(DEFAULT_BASEURL + "/acme");
+		driver.get(DEFAULT_BASEURL + "/intranet");
 		driver.navigate().refresh();
 		Utils.pause(3000);
 
-		info("Check the text color: changed in red color");
-		WebElement elementR = waitForAndGetElement(By.xpath("//p"));
-		String styleValueR = elementR.getCssValue("color");
-		info("-- Dispalyed Color -- " + styleValueR);
-		assert styleValueR.equals("rgba(255, 0, 0, 1)"): "cannot set the text color to red...";
+		addActivity(true, activity1, false,"");
+		info("-- Add comment --");
+		addComment(activity1, comment1);
+		info("Check the body tags: changed in red color");
+		WebElement element = waitForAndGetElement(ELEMENT_CONTENT_COMMENT.replace("${activityText}", activity1).replace("${commentText}", comment1));
+		String styleValue = element.getCssValue("color");
+		info("-- Dispalyed Color -- " + styleValue);
+		assert styleValue.equals("rgba(255, 0, 0, 1)"): "cannot set the tags color to red...";	
 
-		//WebElement elementG = waitForAndGetElement(By.id("SITEBODY-VIEW-BLOCK"));
-		//String styleValueG = elementG.getCssValue("color");
-		//info("-- Dispalyed Color -- " + styleValueG);
-		//assert styleValueR.equals("rgba(0, 0, 255, 1)"): "cannot set the background color to green...";
+		String styleValueS = element.getCssValue("font-size");
+		info("-- Dispalyed Size -- " + styleValueS);
+		assert styleValueS.equals("15px"): "cannot set size of text";
 
 		//reset data
+		hpActivity.deleteActivity(activity1);
 		navToolBar.goToSiteExplorer();
+		cMenu.goToNode(By.linkText("intranet"));
+		cMenu.goToNode(By.linkText("css"));
 		cMenu.deleteDocument(By.linkText(FILE_TITLE_RED));
 		cMenu.deleteDocument(By.linkText(FILE_TITLE_BLUE));
 	}
 
 	/**
-	 * Qmetry ID: 67039
+	 * Qmetry ID: 102174
 	 * Check CSS priority on Site Explorer when have two CSS files which have the same content and the different priority level.
 	 *  
 	 */
@@ -152,10 +178,11 @@ public class ECMS_SE_CreateNode_CSSFile extends PlatformBase{
 
 		String FILE_TITLE_RED = "ECMS_SE_CSS_FILE_RED_03";
 		String data1 = "p{ color:red;}";
-
+		String activity1 = "activity102174";
+		String comment1 = "comment102174";
 		info("Go to CSS Folder in Site Explorer");
 		navToolBar.goToSiteExplorer();
-		ecms.goToNode("acme/css");
+		ecms.goToNode("intranet/css");
 
 
 		info("Create a new CSS File: change the text color to red with priority [10]");
@@ -168,25 +195,31 @@ public class ECMS_SE_CreateNode_CSSFile extends PlatformBase{
 		cTemplate.createNewCssFile(FILE_TITLE_GREEN, "11", data0, true);
 
 		//Switch to ACME Site
-		driver.get(DEFAULT_BASEURL + "/acme");
+		driver.get(DEFAULT_BASEURL + "/intranet");
 		driver.navigate().refresh();
 		Utils.pause(3000);
 
+		addActivity(true, activity1, false,"");
+		info("-- Add comment --");
+		addComment(activity1, comment1);
 		info("Verify that the text color has been changed to [Green] and not to [Red] color");
-		WebElement element = waitForAndGetElement(By.xpath("//p"));
+		WebElement element = waitForAndGetElement(ELEMENT_CONTENT_COMMENT.replace("${activityText}", activity1).replace("${commentText}", comment1));
 		String styleValue = element.getCssValue("color");
 		info("-- Dispalyed Color -- " + styleValue);
 		assert !styleValue.equals("rgba(255, 0, 0, 1)"): "Error: could set the text color to red...";
 		assert styleValue.equals("rgba(0, 128, 0, 1)"): "Error: cannot set the text color to green...";
 
 		//reset data
+		hpActivity.deleteActivity(activity1);
 		navToolBar.goToSiteExplorer();
+		cMenu.goToNode(By.linkText("intranet"));
+		cMenu.goToNode(By.linkText("css"));
 		cMenu.deleteDocument(By.linkText(FILE_TITLE_RED));
 		cMenu.deleteDocument(By.linkText(FILE_TITLE_GREEN));
 	}
 
 	/**
-	 * Qmetry ID: 67113
+	 * Qmetry ID: 102177
 	 * Check the affection of CSS file in Share site
 	 *  
 	 */

@@ -37,6 +37,7 @@ public class HomePageGadget extends PlatformBase{
 
 	//-------Getting Started Gadget -------- 
 	public By ELEMENT_GETTING_STARTED_GADGET_FORM = By.className("GettingStartedContainer");
+	public By ELEMENT_GETTING_STARTED_GADGET_LABEL = By.xpath("//div[@id='OfficeRight']//div[@class='GettingStartedContainer']//h6[contains(.,'Getting Started')]");
 	public By ELEMENT_PROFILE_PICTURE = By.linkText("Add a profile picture");
 	public By ELEMENT_CONNECT_TO_COWORKERS = By.linkText("Connect to coworkers");
 	public By ELEMENT_JOIN_A_SPACE = By.linkText("Join a space");
