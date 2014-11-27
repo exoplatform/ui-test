@@ -11,7 +11,7 @@
 			<class
 				name="org.exoplatform.selenium.platform.ecms.functional.siteexplorer.createnode.ECMS_SE_CreateNode_Category" />
 			<class
-				name="org.exoplatform.selenium.platform.ecms.functional.siteexplorer.createnode.ECMS_SE_CreateNode_ContentFreeLayout" />
+				name="org.exoplatform.selenium.platform.ecms.functional.siteexplorer.createnode.ECMS_SE_CreateNode_WebContent" />
 			<class
 				name="org.exoplatform.selenium.platform.ecms.functional.siteexplorer.createnode.ECMS_SE_CreateNode_CSSFile" />
 			<class
@@ -23,7 +23,7 @@
 			<class
 				name="org.exoplatform.selenium.platform.ecms.functional.siteexplorer.createnode.ECMS_SE_CreateNode_JSFile" />
 			<class
-				name="org.exoplatform.selenium.platform.ecms.functional.siteexplorer.createnode.ECMS_SE_CreateNode_Link" />
+				name="org.exoplatform.selenium.platform.ecms.functional.siteexplorer.createnode.ECMS_SE_CreateNode_WebLink" />
 			<class
 				name="org.exoplatform.selenium.platform.ecms.functional.siteexplorer.createnode.ECMS_SE_CreateNode_WebContent" />
 			<class

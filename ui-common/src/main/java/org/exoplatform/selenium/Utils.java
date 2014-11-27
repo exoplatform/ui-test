@@ -164,7 +164,6 @@ public class Utils {
 		} catch (FileNotFoundException e) {
 			error("Failed to find location of... " + filePath);
 		}
-		@SuppressWarnings("resource")
 		String inputStreamString = new Scanner(fis,"UTF-8").useDelimiter("\\A").next();		
 		return inputStreamString;	
 	}
