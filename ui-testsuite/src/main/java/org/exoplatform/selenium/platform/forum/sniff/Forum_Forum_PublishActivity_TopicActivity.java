@@ -131,11 +131,11 @@ public class Forum_Forum_PublishActivity_TopicActivity extends ForumBase{
 	 */
 	@Test
 	public void test03_CheckTopicASafterUpdateTopicTitle(){
-		String titleCat = "Category 03";
-		String titleForum = "Forum 03";
-		String titleTop = "Topic 03";
+		String titleCat = "Category 75277";
+		String titleForum = "Forum 75277";
+		String titleTop = "Topic 75277";
 		String descTop = "line1<br>line2<br>line3<br>line4<br>line5";
-		String newTopic = "New Topic 03";
+		String newTopic = "New Topic 75277";
 		String[] userGroup ={};
 		
 		info("Update topic title");
@@ -160,9 +160,9 @@ public class Forum_Forum_PublishActivity_TopicActivity extends ForumBase{
 	 */
 	@Test
 	public void test04_CheckTopicASafterUpdateTopicContent(){
-		String titleCat = "Category 04";
-		String titleForum = "Forum 04";
-		String titleTop = "Topic 04";
+		String titleCat = "Category 75278";
+		String titleForum = "Forum 75278";
+		String titleTop = "Topic 75278";
 		String descTop = "line1<br>line2<br>line3<br>line4<br>line5";
 		String newDesc = "New<br>";
 		String[] userGroup ={};
@@ -225,9 +225,9 @@ public class Forum_Forum_PublishActivity_TopicActivity extends ForumBase{
 	 */
 	@Test
 	public void test06_CheckTopicASafterDeleteTopic(){
-		String titleCat = "Category 06";
-		String titleForum = "Forum 06";
-		String titleTop = "Topic 06";
+		String titleCat = "Category 75280";
+		String titleForum = "Forum 75280";
+		String titleTop = "Topic 75280";
 		String descTop = "line1<br>line2<br>line3<br>line4<br>line5";
 		
 		info("Delete topic");

@@ -140,6 +140,7 @@ public class BasicAction extends Permission{
 		Utils.pause(1000);
 		
 		if(content != null){
+			waitForAndGetElement(ELEMENT_CONTENT_WIKI_INPUT).clear();
 			text = content.split("</br>");
 			for(int i=0; i < text.length; i++){
 				Utils.javaSimulateKeyPress((int)KeyEvent.VK_END);

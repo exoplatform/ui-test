@@ -250,9 +250,9 @@ public class Calendar_PublishActivities_Event extends CalendarBase{
 	 */
 	@Test
 	public  void test07_ActivitiesShouldBeUpdatedAfterDeletingOfAnEditedRecurringEvent() {
-		String name ="event 109227";
-		String description = "description 109227";
-		String space = "Space109227";
+		String name ="event 1092271";
+		String description = "description 1092271";
+		String space = "Space1092271";
 		/*create data*/
 		info("Create data");
 		sp.goToAllSpaces();
@@ -280,10 +280,9 @@ public class Calendar_PublishActivities_Event extends CalendarBase{
 		evt.inputRecurringInfoEvent(repeatType.Daily, null, null, repeatEndType.After);
 		click(evt.ELEMENT_ADD_EVENT_SAVE_BUTTON);
 		waitForElementNotPresent(evt.ELEMENT_ADD_EVENT_POPUP);
-		Utils.pause(1000);
 		info("Confirm added event displays in the calendar");
-
 		Utils.pause(5000);
+		click(ELEMENT_BUTTON_WEEK_VIEW);
 		assert evt.verifyEventInWeekView(name, getDate(0, "MMM dd yyyy"), selectDayOption.ONEDAY);
 		assert evt.verifyEventInWeekView(name, getDate(1, "MMM dd yyyy"), selectDayOption.ONEDAY);
 		assert evt.verifyEventInWeekView(name, getDate(2, "MMM dd yyyy"), selectDayOption.ONEDAY);
@@ -291,6 +290,7 @@ public class Calendar_PublishActivities_Event extends CalendarBase{
 		assert evt.verifyEventInWeekView(name, getDate(4, "MMM dd yyyy"), selectDayOption.ONEDAY);
 		dragAndDropToObject(By.xpath(ELEMENT_EVENT_TASK_DETAIL_DATE.replace("${taskName}", name).replace("${date}", getDate(0, "MMM dd yyyy"))),By.xpath(ELEMENT_ANY_TARGET_DATE.replace("${targetDate}", getDate(-1, "MMM dd yyyy HH")+":00:00")));
 		Utils.pause(2000);
+		driver.navigate().refresh();
 		mouseOver(By.xpath(ELEMENT_EVENT_TASK_DETAIL_DATE.replace("${taskName}", name).replace("${date}", getDate(-1, "MMM dd yyyy"))),true);
 		Utils.pause(4000);
 		waitForAndGetElement(evt.ELEMENT_TITLE_RECURRING_EVENT);
@@ -309,9 +309,7 @@ public class Calendar_PublishActivities_Event extends CalendarBase{
 		 *Expected Outcome: 
 			- The edited recurring event is deleted*/
 		goToCalendarPage();
-		
-		evt.deleteRecurringEvent(name, selectDayOption.ONEDAY, recurringType.ONLY_EVENT,getDate(1, "MMM dd yyyy"));
-		evt.deleteEventTask(name);
+		evt.deleteRecurringEvent(name, selectDayOption.ONEDAY, recurringType.ONLY_EVENT,getDate(-1, "MMM dd yyyy"));
 		
 		/*Step number: 3
 		 *Step Name: Step 3: Check activity
@@ -324,7 +322,9 @@ public class Calendar_PublishActivities_Event extends CalendarBase{
 			- A comment is added to the main activity (of series): Event cancelled for $CANCEL_DATE
 			where $CANCEL_DATE : the date of the event removed*/
 		toolBar.goToHomePage();
-		waitForAndGetElement(homeAct.ELEMENT_ACTIVITY_COMMENT_CONTENT.replace("${title}", name).replace("${comment}", homeAct.MSG_EVENT_COMMENT_DELETE_EDITED_EVENT.replace("${date}",getDate(-1, "EEEE, MMMM dd, yyyy"))));
+		if(waitForAndGetElement(homeAct.ELEMENT_ACTIVITY_COMMENT_CONTENT.replace("${title}", name).replace("${comment}", homeAct.MSG_EVENT_COMMENT_DELETE_EDITED_EVENT.replace("${date}",getDate(-1, "EEEE, MMMM d, yyyy"))),5000,0)==null){
+			waitForAndGetElement(homeAct.ELEMENT_ACTIVITY_COMMENT_CONTENT.replace("${title}", name).replace("${comment}", homeAct.MSG_EVENT_COMMENT_DELETE_EDITED_EVENT.replace("${date}",getDate(-1, "EEEE, MMMM dd, yyyy"))));
+		}
 		
 		/*Clear data*/
 		info("Clear data");
@@ -541,6 +541,7 @@ public class Calendar_PublishActivities_Event extends CalendarBase{
 		waitForElementNotPresent(evt.ELEMENT_ADD_EVENT_POPUP);
 		Utils.pause(3000);
 		info("Confirm added event displays in the calendar");
+		click(ELEMENT_BUTTON_WEEK_VIEW);
 		assert evt.verifyEventInWeekView(name, getDate(0, "MMM dd yyyy"), selectDayOption.ONEDAY);
 		assert evt.verifyEventInWeekView(name, getDate(1, "MMM dd yyyy"), selectDayOption.ONEDAY);
 		assert evt.verifyEventInWeekView(name, getDate(2, "MMM dd yyyy"), selectDayOption.ONEDAY);
@@ -559,6 +560,7 @@ public class Calendar_PublishActivities_Event extends CalendarBase{
 
 		dragAndDropToObject(By.xpath(ELEMENT_EVENT_TASK_DETAIL_DATE.replace("${taskName}", name).replace("${date}", getDate(0, "MMM dd yyyy"))),By.xpath(ELEMENT_ANY_TARGET_DATE.replace("${targetDate}", getDate(-1, "MMM dd yyyy HH")+":00:00")));
 		Utils.pause(2000);
+		driver.navigate().refresh();
 		mouseOver(By.xpath(ELEMENT_EVENT_TASK_DETAIL_DATE.replace("${taskName}", name).replace("${date}", getDate(-1, "MMM dd yyyy"))),true);
 		waitForAndGetElement(evt.ELEMENT_TITLE_RECURRING_EVENT);
 		waitForAndGetElement(evt.ELEMENT_DATE_TIME_RECURRING_EVENT);

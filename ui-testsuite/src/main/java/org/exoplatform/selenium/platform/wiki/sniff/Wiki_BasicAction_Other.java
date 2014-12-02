@@ -145,7 +145,8 @@ public class Wiki_BasicAction_Other extends Permalink {
 		
 		info("Move page2 of space to page1 of Intranet");
 		movePage(title2, title1, "Intranet");
-		waitForAndGetElement(ELEMENT_DISPLAY_MODE.replace("${space}", "Intranet"));
+		if(waitForAndGetElement(ELEMENT_DISPLAY_MODE.replace("${space}", "Apps"),5000,0)==null)
+			waitForAndGetElement(ELEMENT_DISPLAY_MODE.replace("${space}", "Intranet"));
 		
 		magMem.goToAllSpaces();
 		goToWikiFromSpace(spaceName);

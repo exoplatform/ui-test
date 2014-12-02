@@ -55,6 +55,7 @@ public class AnswerManageCategory extends AnswerBase {
 	public final By ELEMENT_IMPORT_CATEGORY_LINK = By.linkText("Import");
 	public final By ELEMENT_IMPORT_CATEGORY_INPUT = By.name("file");
 	public final String ELEMENT_IMPORT_SUCCESS_MESSAGE = "The file has been imported.";
+	public final By ELEMENT_IMPORT_CATEGORY_POPUP = By.xpath("//span[@class='PopupTitle popupTitle' and contains(text(),'Import')]");
 
 	//context menu
 	public final By ELEMENT_MOVE_CATEGORY_LINK = By.linkText(" Move");
@@ -259,11 +260,11 @@ public class AnswerManageCategory extends AnswerBase {
 		String[] links = fileName.split("/");
 		click(ELEMENT_CATEGORY_BUTTON);
 		click(ELEMENT_IMPORT_CATEGORY_LINK);
-
+		waitForAndGetElement(ELEMENT_IMPORT_CATEGORY_POPUP);
 		WebElement element = waitForAndGetElement(ELEMENT_IMPORT_CATEGORY_INPUT, DEFAULT_TIMEOUT, 1, 2);
 		((JavascriptExecutor)driver).executeScript("arguments[0].style.display = 'block';", element);
 		element.sendKeys(Utils.getAbsoluteFilePath("TestData/" + fileName));
-		switchToParentWindow();
+//		switchToParentWindow();
 		waitForAndGetElement(ELEMENT_CONTAINS_TEXT.replace("${text}", links[links.length-1]), DEFAULT_TIMEOUT, 1, 2);
 		button.save();
 		waitForMessage(ELEMENT_IMPORT_SUCCESS_MESSAGE,100000);

@@ -25,7 +25,7 @@ public class ECMainFunction extends EcmsBase{
 	NavigationToolbar navToolbar = new NavigationToolbar(driver);
 
 	//Template tab
-	public final By ELEMENT_TEMPLATE_TAB = By.xpath("//*[text()='Templates']");
+	public final By ELEMENT_TEMPLATE_TAB = By.xpath("//*[contains(@class,'uiIconSelected')]/../../*[contains(.,'Templates')]");
 	/*
 	 * @Added by: PhuongDT
 	 * @date: 27/08/2013
@@ -38,7 +38,7 @@ public class ECMainFunction extends EcmsBase{
 	public final By ELEMENT_METADATA_LINK = By.className("uiIconEcmsMetadataManager");
 
 	//Explorer Tab
-	public final By ELEMENT_EXPLORER_TAB = By.xpath("//*[text()='Explorer']");
+	public final By ELEMENT_EXPLORER_TAB = By.xpath("//*[contains(@class,'uiIconSelected')]/../../*[contains(.,'Explorer')]");
 	public final By ELEMENT_DRIVES_TAB = By.className("uiIconEcmsDriveManager");
 
 	//Explorer Tags
@@ -55,14 +55,14 @@ public class ECMainFunction extends EcmsBase{
 	public final String ELEMENT_UNLOCK_NODE = "//*[text()='${lockedNode}']/../..//*[@data-original-title='UnLock']";
 
 	//Advanced
-	public final By ELEMENT_MANAGE_CATEGORIES_LINK = By.className("uiIconEcmsTaxonomyManagerTrees");
+	public final By ELEMENT_MANAGE_CATEGORIES_LINK = By.xpath("//*[contains(@class,'uiIconEcmsTaxonomyManagerTrees')]");
 	public final By ELEMENT_ADD_QUERY_BUTTON = By.xpath("//*[text()='Add Query']");
-	public final By ELEMENT_MANAGE_QUERIES_LINK = By.className("uiIconEcmsQueriesManager");
+	public final By ELEMENT_MANAGE_QUERIES_LINK = By.xpath("//*[contains(@class,'uiIconEcmsQueriesManager')]");
 
-	public final By ELEMENT_MANAGE_SCRIPTS_LINK = By.className("uiIconEcmsScriptManager");
+	public final By ELEMENT_MANAGE_SCRIPTS_LINK = By.xpath("//*[contains(@class,'uiIconEcmsScriptManager')]");
 	public final By ELEMENT_ADD_SCRIPT_BUTTON = By.xpath("//*[text()='Add Script']");
 
-	public final By ELEMENT_MANAGE_ACTIONS_LINK = By.className("uiIconEcmsActionManager");
+	public final By ELEMENT_MANAGE_ACTIONS_LINK = By.xpath("//*[contains(@class,'uiIconEcmsActionManager')]");
 	public final By ELEMENT_ADD_ACTION_TYPE_BUTTON = By.xpath("//*[text()='Add Action Type']");
 
 	/*=============================================================*/

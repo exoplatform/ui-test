@@ -187,6 +187,7 @@ public class Task extends CalendarBase{
 	public void inputBasicQuickTask(String name, String note, String...opt){
 		boolean quick = (waitForAndGetElement(ELEMENT_QUICK_ADD_TASK_POPUP,5000,0) != null) ? true : false;
 		if(quick){
+			info("Add/Edit quick task/event");
 			if (name != null){
 				type(ELEMENT_INPUT_TASK_TITLE, name, true);
 			}
@@ -201,6 +202,7 @@ public class Task extends CalendarBase{
 				select(ELEMENT_INPUT_TASK_CATEGORY, opt[1]);
 			}
 		}else{
+			info("Add/Edit task/event");
 			if (name != null){
 				type(ELEMENT_ADD_EDIT_TASK_TITLE, name, true);
 			}
@@ -354,7 +356,6 @@ public class Task extends CalendarBase{
 	 * 				path of attachment of a task
 	 */
 	public void attachFileToTask(String path){
-
 		click(ELEMENT_TASK_ADD_ATTACHMENT);
 		WebElement eFile = waitForAndGetElement(ELEMENT_TASK_FILE_INPUT,DEFAULT_TIMEOUT,1,2);
 		((JavascriptExecutor) driver).executeScript("arguments[0].style.display = 'block';",eFile);

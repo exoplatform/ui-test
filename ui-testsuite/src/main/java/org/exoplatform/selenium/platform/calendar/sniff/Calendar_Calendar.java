@@ -61,6 +61,7 @@ public class Calendar_Calendar extends CalendarBase{
 			assert verify;
 		}
 		Utils.pause(3000);
+		click(ELEMENT_BUTTON_WEEK_VIEW);
 		deleteEventTask(eventName,selectDayOption.ONEDAY);
 		info("Event deleted successfully");
 		deleteEventTask(taskName,selectDayOption.ONEDAY);

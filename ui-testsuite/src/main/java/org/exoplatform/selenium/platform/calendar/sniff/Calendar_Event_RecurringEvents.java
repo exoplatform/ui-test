@@ -25,7 +25,7 @@ public class Calendar_Event_RecurringEvents extends CalendarBase {
 
 	@BeforeMethod
 	public void setUpBeforeTest(){
-		getDriverAutoSave();
+		initSeleniumTest();
 		acc = new ManageAccount(driver, this.plfVersion);
 		evt = new Event(driver, this.plfVersion);
 		button = new Button(driver, this.plfVersion);
@@ -109,6 +109,7 @@ public class Calendar_Event_RecurringEvents extends CalendarBase {
 		Utils.pause(1000);
 
 		info("Confirm added event displays in the calendar");
+		click(ELEMENT_BUTTON_WEEK_VIEW);
 		assert evt.verifyEventInWeekView(name, getDate(0, "MMM dd yyyy"), selectDayOption.ONEDAY);
 		assert evt.verifyEventInWeekView(name, getDate(1, "MMM dd yyyy"), selectDayOption.ONEDAY);
 		assert evt.verifyEventInWeekView(name, getDate(2, "MMM dd yyyy"), selectDayOption.ONEDAY);
@@ -164,6 +165,7 @@ public class Calendar_Event_RecurringEvents extends CalendarBase {
 		Utils.pause(1000);
 
 		info("Confirm added event displays in the calendar");
+		click(ELEMENT_BUTTON_WEEK_VIEW);
 		assert evt.verifyEventInWeekView(name, getDate(0, "MMM dd yyyy"), selectDayOption.ONEDAY);
 		assert evt.verifyEventInWeekView(name, getDate(1, "MMM dd yyyy"), selectDayOption.ONEDAY);
 		assert evt.verifyEventInWeekView(name, getDate(2, "MMM dd yyyy"), selectDayOption.ONEDAY);
@@ -223,6 +225,7 @@ public class Calendar_Event_RecurringEvents extends CalendarBase {
 		waitForElementNotPresent(evt.ELEMENT_ADD_EVENT_POPUP);
 		Utils.pause(1000);
 		info("Confirm added event displays in the calendar");
+		click(ELEMENT_BUTTON_WEEK_VIEW);
 		assert evt.verifyEventInWeekView(name, getDate(0, "MMM dd yyyy"), selectDayOption.ALLDAY);
 		assert evt.verifyEventInWeekView(name, getDate(1, "MMM dd yyyy"), selectDayOption.ALLDAY);
 		assert evt.verifyEventInWeekView(name, getDate(2, "MMM dd yyyy"), selectDayOption.ALLDAY);
@@ -257,6 +260,7 @@ public class Calendar_Event_RecurringEvents extends CalendarBase {
 		 *Input Data: 
 		 *Expected Outcome: 
 			- Changes are restricted to the edited recurring event*/
+		click(ELEMENT_BUTTON_WEEK_VIEW);
 		evt.editRecurringEvent(name,newName,description, null,null,null,true,selectDayOption.ALLDAY,recurringType.ONLY_EVENT,getDate(1, "MMM dd yyyy"));
 		assert evt.verifyEventInWeekView(name, getDate(0, "MMM dd yyyy"), selectDayOption.ALLDAY);
 		assert !evt.verifyEventInWeekView(name, getDate(1, "MMM dd yyyy"), selectDayOption.ALLDAY);
@@ -306,6 +310,7 @@ public class Calendar_Event_RecurringEvents extends CalendarBase {
 		Utils.pause(1000);
 
 		info("Confirm added event displays in the calendar");
+		click(ELEMENT_BUTTON_WEEK_VIEW);
 		assert evt.verifyEventInWeekView(name, getDate(0, "MMM dd yyyy"), selectDayOption.ONEDAY);
 		assert evt.verifyEventInWeekView(name, getDate(1, "MMM dd yyyy"), selectDayOption.ONEDAY);
 		assert evt.verifyEventInWeekView(name, getDate(2, "MMM dd yyyy"), selectDayOption.ONEDAY);
@@ -334,6 +339,7 @@ public class Calendar_Event_RecurringEvents extends CalendarBase {
 			<p>
 			- All events are deletes</p><p>
 			- Series no longer exists</p>*/ 
+		click(ELEMENT_BUTTON_WEEK_VIEW);
 		evt.deleteRecurringEvent(name, selectDayOption.ONEDAY, recurringType.ALL_EVENT,getDate(0, "MMM dd yyyy"));
 		assert !evt.verifyEventInWeekView(name, getDate(0, "MMM dd yyyy"), selectDayOption.ONEDAY);
 		assert !evt.verifyEventInWeekView(name, getDate(1, "MMM dd yyyy"), selectDayOption.ONEDAY);
@@ -377,6 +383,7 @@ public class Calendar_Event_RecurringEvents extends CalendarBase {
 		Utils.pause(1000);
 
 		info("Confirm added event displays in the calendar");
+		click(ELEMENT_BUTTON_WEEK_VIEW);
 		assert evt.verifyEventInWeekView(name, getDate(0, "MMM dd yyyy"), selectDayOption.ONEDAY);
 		assert evt.verifyEventInWeekView(name, getDate(1, "MMM dd yyyy"), selectDayOption.ONEDAY);
 		assert evt.verifyEventInWeekView(name, getDate(2, "MMM dd yyyy"), selectDayOption.ONEDAY);
@@ -391,7 +398,7 @@ public class Calendar_Event_RecurringEvents extends CalendarBase {
 		 *Expected Outcome: 
 			- Start and End dates and times of event are updated
 			- Event is marked as 'edited' by an icon with tooltip.*/
-		dragAndDropToObject(By.xpath(ELEMENT_EVENT_TASK_DETAIL_DATE.replace("${taskName}", name).replace("${date}", getDate(0, "MMM dd yyyy"))),By.xpath(ELEMENT_ANY_TARGET_DATE.replace("${targetDate}", getDate(1, "MMM dd yyyy HH")+":00:00")));
+		dragAndDropToObject(By.xpath(ELEMENT_EVENT_TASK_DETAIL_DATE.replace("${taskName}", name).replace("${date}", getDate(0, "MMM dd yyyy"))),By.xpath(ELEMENT_ANY_TARGET_DATE.replace("${targetDate}", getDate(-1, "MMM dd yyyy HH")+":00:00")));
 		Utils.pause(2000);
 
 		/*Step number: 3
@@ -408,6 +415,7 @@ public class Calendar_Event_RecurringEvents extends CalendarBase {
 		
 		/*Clear data*/
 		info("Clear data");
+		click(ELEMENT_BUTTON_WEEK_VIEW);
 		evt.deleteRecurringEvent(name, selectDayOption.ONEDAY, recurringType.ALL_EVENT,getDate(1, "MMM dd yyyy"));
 		evt.deleteRecurringEvent(name, selectDayOption.ONEDAY);
 
@@ -450,6 +458,7 @@ public class Calendar_Event_RecurringEvents extends CalendarBase {
 		Utils.pause(1000);
 
 		info("Confirm added event displays in the calendar");
+		click(ELEMENT_BUTTON_WEEK_VIEW);
 		assert evt.verifyEventInWeekView(name, getDate(0, "MMM dd yyyy"), selectDayOption.ONEDAY);
 		assert evt.verifyEventInWeekView(name, getDate(1, "MMM dd yyyy"), selectDayOption.ONEDAY);
 		assert evt.verifyEventInWeekView(name, getDate(2, "MMM dd yyyy"), selectDayOption.ONEDAY);
@@ -476,6 +485,7 @@ public class Calendar_Event_RecurringEvents extends CalendarBase {
 		 *Input Data: 
 		 *Expected Outcome: 
 			- Only current event is deleted from the series*/ 
+		click(ELEMENT_BUTTON_WEEK_VIEW);
 		evt.deleteRecurringEvent(name, selectDayOption.ONEDAY, recurringType.ONLY_EVENT,getDate(0, "MMM dd yyyy"));
 		assert !evt.verifyEventInWeekView(name, getDate(0, "MMM dd yyyy"), selectDayOption.ONEDAY);
 		assert evt.verifyEventInWeekView(name, getDate(1, "MMM dd yyyy"), selectDayOption.ONEDAY);
@@ -522,6 +532,7 @@ public class Calendar_Event_RecurringEvents extends CalendarBase {
 		waitForElementNotPresent(evt.ELEMENT_ADD_EVENT_POPUP);
 		Utils.pause(1000);
 		info("Confirm added event displays in the calendar");
+		click(ELEMENT_BUTTON_WEEK_VIEW);
 		assert evt.verifyEventInWeekView(name, getDate(0, "MMM dd yyyy"));
 		assert evt.verifyEventInWeekView(name, getDate(1, "MMM dd yyyy"));
 		assert evt.verifyEventInWeekView(name, getDate(2, "MMM dd yyyy"));
@@ -555,7 +566,8 @@ public class Calendar_Event_RecurringEvents extends CalendarBase {
 			- Click "Save"
 		 *Input Data: 
 		 *Expected Outcome: 
-			- Changes are appliyed for current & following events*/ 
+			- Changes are appliyed for current & following events*/
+		click(ELEMENT_BUTTON_WEEK_VIEW);
 		evt.editRecurringEvent(name,newName,description, null,null,null,true,selectDayOption.ALLDAY,recurringType.FOLLOW_EVENT,getDate(2, "MMM dd yyyy"));
 		assert evt.verifyEventInWeekView(name, getDate(0, "MMM dd yyyy"));
 		assert evt.verifyEventInWeekView(name, getDate(1, "MMM dd yyyy"));
@@ -607,6 +619,7 @@ public class Calendar_Event_RecurringEvents extends CalendarBase {
 		waitForElementNotPresent(evt.ELEMENT_ADD_EVENT_POPUP);
 		Utils.pause(1000);
 		info("Confirm added event displays in the calendar");
+		click(ELEMENT_BUTTON_WEEK_VIEW);
 		assert evt.verifyEventInWeekView(name, getDate(0, "MMM dd yyyy"));
 		assert evt.verifyEventInWeekView(name, getDate(1, "MMM dd yyyy"));
 		assert evt.verifyEventInWeekView(name, getDate(2, "MMM dd yyyy"));
@@ -641,6 +654,7 @@ public class Calendar_Event_RecurringEvents extends CalendarBase {
 		 *Input Data: 
 		 *Expected Outcome: 
 			- Changes are appliyed for all events*/ 
+		click(ELEMENT_BUTTON_WEEK_VIEW);
 		evt.editRecurringEvent(name,newName,description, null,null,null,true,selectDayOption.ALLDAY,recurringType.ALL_EVENT,getDate(2, "MMM dd yyyy"));
 		assert !evt.verifyEventInWeekView(name, getDate(0, "MMM dd yyyy"));
 		assert !evt.verifyEventInWeekView(name, getDate(1, "MMM dd yyyy"));
@@ -695,6 +709,7 @@ public class Calendar_Event_RecurringEvents extends CalendarBase {
 		Utils.pause(1000);
 		
 		info("Confirm added event displays in the calendar");
+		click(ELEMENT_BUTTON_WEEK_VIEW);
 		assert evt.verifyEventInWeekView(name, getDate(0, "MMM dd yyyy"), selectDayOption.ONEDAY);
 		assert evt.verifyEventInWeekView(name, getDate(1, "MMM dd yyyy"), selectDayOption.ONEDAY);
 		assert evt.verifyEventInWeekView(name, getDate(2, "MMM dd yyyy"), selectDayOption.ONEDAY);
@@ -724,6 +739,7 @@ public class Calendar_Event_RecurringEvents extends CalendarBase {
 		 *Expected Outcome: 
 			<p>
 			- Selected and following event are deleted</p>*/ 
+		click(ELEMENT_BUTTON_WEEK_VIEW);
 		evt.deleteRecurringEvent(name, selectDayOption.ONEDAY, recurringType.FOLLOW_EVENT,getDate(2, "MMM dd yyyy"));
 		assert evt.verifyEventInWeekView(name, getDate(0, "MMM dd yyyy"), selectDayOption.ONEDAY);
 		assert evt.verifyEventInWeekView(name, getDate(1, "MMM dd yyyy"), selectDayOption.ONEDAY);

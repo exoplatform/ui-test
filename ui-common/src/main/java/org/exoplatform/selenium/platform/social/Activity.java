@@ -556,11 +556,12 @@ public class Activity extends SocialBase {
 		hpActivity = new HomePageActivity(driver);
 		if(isActivity){
 			info ("-- Adding a mention activity --");	
-			WebElement inputText = waitForAndGetElement(hpActivity.ELEMENT_ACTIVITY_TEXTBOX, DEFAULT_TIMEOUT, 1, 2);
+			WebElement inputText = waitForAndGetElement(hpActivity.ELEMENT_ACTIVITY_TEXTBOX);
 			((JavascriptExecutor)driver).executeScript("arguments[0].style.display = 'block'; arguments[0].style.visibility = 'visible'", inputText);
 			Utils.pause(1000);
 			click(ELEMENT_MENTION_USER_BUTTON);
-			inputText.sendKeys(userName);
+			Utils.pause(1000);
+			type(inputText,"@"+userName,false);
 			click(ELEMENT_MENTION_USER_AVATAR.replace("${userName}", userName));
 			Utils.pause(1000);
 			click(hpActivity.ELEMENT_ACTIVITY_TEXTBOX);

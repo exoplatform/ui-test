@@ -139,7 +139,7 @@ public class Calendar_Views extends CalendarBase{
 		waitForAndGetElement(ELEMENT_EVENT_TASK_ALL_DAY.replace("${event}",event5));
 		waitForAndGetElement(ELEMENT_EVENT_TASK_ALL_DAY.replace("${event}",task1));
 
-		//Delete data test
+		info("Clear data");
 		deleteEventTask(event1);
 		deleteEventTask(event2);
 		deleteEventTask(event3);
@@ -252,7 +252,7 @@ public class Calendar_Views extends CalendarBase{
 		waitForAndGetElement(EVENT_LIST_VIEW.replace("${eventTitle}",event5));
 		waitForAndGetElement(EVENT_LIST_VIEW.replace("${eventTitle}",task1));
 
-		//Delete data test
+		info("Clear data");
 		click(ELEMENT_BUTTON_WEEK_VIEW);
 		Utils.pause(2000);
 		waitForAndGetElement(ELEMENT_BUTTON_VIEW_ACTIVE.replace("${view}", "Week"));
@@ -324,7 +324,7 @@ public class Calendar_Views extends CalendarBase{
 		waitForAndGetElement(ELEMENT_CALENDAR_PANEL);
 		waitForAndGetElement(ELEMENT_EVENT_TASK_ALL_DAY_PLF41_DAY_VIEW.replace("${event}", event2));
 
-		//Delete data test
+		info("Clear data");
 		click(ELEMENT_BUTTON_WEEK_VIEW);
 		Utils.pause(2000);
 		waitForAndGetElement(ELEMENT_BUTTON_VIEW_ACTIVE.replace("${view}", "Week"));
@@ -521,7 +521,7 @@ public class Calendar_Views extends CalendarBase{
 		waitForAndGetElement(EVENT_LIST_VIEW.replace("${eventTitle}", event1));
 		waitForAndGetElement(EVENT_LIST_VIEW.replace("${eventTitle}", task1));
 
-		//Delete data test
+		info("Clear data");
 		click(ELEMENT_BUTTON_WEEK_VIEW);
 		Utils.pause(2000);
 		waitForAndGetElement(ELEMENT_BUTTON_VIEW_ACTIVE.replace("${view}", "Week"));
@@ -885,7 +885,7 @@ public class Calendar_Views extends CalendarBase{
 		waitForAndGetElement(EVENT_WORK_WEEK_VIEW.replace("${eventTitle}", event1));
 		waitForAndGetElement(EVENT_WORK_WEEK_VIEW.replace("${eventTitle}", task1));	
 
-		//Delete data test
+		info("Clear data");
 		Utils.pause(500);
 		deleteEventTask(event1);
 		deleteEventTask(task1);

@@ -133,12 +133,14 @@ public class ManageDrive extends EcmsBase{
 				click(ELEMENT_EXO_ECM);
 			}else if (isElementPresent(By.xpath(ELEMENT_SELECT_PATH_ITEM_AUX.replace("${node}", path)))){
 				click(By.xpath(ELEMENT_SELECT_PATH_ITEM_AUX.replace("${node}", path)));
+				waitForElementNotPresent(By.xpath(ELEMENT_SELECT_PATH_ITEM_AUX.replace("${node}", path)));
 			}else if (isElementNotPresent(By.xpath(ELEMENT_SELECT_PATH_ITEM_AUX.replace("${node}", path)))){
 				selectHomePathForCategoryTree(path);
 			}
 			else{
 				info("list node of homepath display false");
 			}
+			info(getValue(ELEMENT_HOME_PATH));
 			assert getValue(ELEMENT_HOME_PATH).equals("/" + path + ""):"select homepath is false";
 		}
 

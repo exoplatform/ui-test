@@ -215,9 +215,9 @@ public class Forum_Answers_PublishActivity extends AnswerBase{
 	 */
 	@Test
 	public void test05_EditTitleOfQuestion(){
-		String questionName = "Question05";
-		String questionContent = "Content of question 05";
-		String newName= "New Question 05";
+		String questionName = "Question74761";
+		String questionContent = "Content of question 74761";
+		String newName= "New Question 74761";
 
 		info("Edit question title");
 		//Create a question

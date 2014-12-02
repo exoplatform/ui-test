@@ -25,13 +25,13 @@ public class Permission extends WikiBase{
 	public Permission() {
 		ieFlag = super.ieFlag;
 	}
-	
+
 	public final String ELEMENT_PERMISSION = "//*[@id='UIPermissionGrid']//*[contains(text(),'${user}')]";
 
 	public Permission(WebDriver dr){
 		driver = dr;
 	}
-	
+
 	/////
 	/*=================== Page permission ===================*/
 	/** 
@@ -235,15 +235,7 @@ public class Permission extends WikiBase{
 		button = new Button(driver);
 		dialog = new Dialog(driver);
 		per = new PlatformPermission(driver);
-		//		if (type.length > 0){
-		//			if (!(type[0] instanceof Integer)) {
-		//				throw new IllegalArgumentException("-- Argument should be an Integer --");
-		//			}
-		//			notDisplay = (Integer)type[0];
-		//		}
-
 		goToSpacePermission();
-
 		info("--Add space permission--");
 		switch(option) {
 		case 0: type(ELEMENT_SELECT_INPUT,groupUser[0],true);
@@ -260,12 +252,11 @@ public class Permission extends WikiBase{
 		per.selectGroupMembership(groupUser[0], groupUser[1]);
 		break;
 		}
-		click(button.ELEMENT_ADD_BUTTON);
+		clickByJavascript(button.ELEMENT_ADD_BUTTON);
+		Utils.pause(3000);
 		button.save();
 		waitForMessage(MSG_PERMISSION_SAVE);
-
 		dialog.closeMessageDialog();
-		
 		Utils.pause(1000);
 	}
 
@@ -288,7 +279,7 @@ public class Permission extends WikiBase{
 	 * @see WikiBase#goToPagePermission()
 	 */
 	public void editSpacePermission(String userGroup,boolean view,boolean edit, boolean adminPage, 
-			boolean adminSpace, Integer...type ){
+			boolean adminSpace, int...type ){
 		button = new Button(driver);
 		dialog = new Dialog(driver);
 		//By bEditPage = By.xpath(ELEMENT_EDIT_PAGE_CHECK.replace("{$user}", userGroup));
@@ -300,62 +291,37 @@ public class Permission extends WikiBase{
 
 		int notDisplay = 0;
 		if (type.length > 0){
-			if (!(type[0] instanceof Integer)) {
-				throw new IllegalArgumentException("-- Argument should be an Integer --");
-			}
-			notDisplay = (Integer)type[0];
+			notDisplay = type[0];
 		}	
-
 		goToSpacePermission();
-
 		info("--Add space permission--");
-
 		if (view){
-			if(!waitForAndGetElement(bViewSpace, DEFAULT_TIMEOUT, 1, notDisplay).isSelected()){
-				clickByJavascript(bViewSpace, notDisplay);
-			}
+			check(bViewSpace, notDisplay);
 		}else{
-			if(waitForAndGetElement(bViewSpace, DEFAULT_TIMEOUT, 1, notDisplay).isSelected()){
-				clickByJavascript(bViewSpace, notDisplay);
-				Utils.pause(1000);
-				assert !waitForAndGetElement(bEditPage,DEFAULT_TIMEOUT,1,notDisplay).isSelected();
-				assert !waitForAndGetElement(bAdminPage,DEFAULT_TIMEOUT,1,notDisplay).isSelected();
-				assert !waitForAndGetElement(bAdminSpace,DEFAULT_TIMEOUT,1,notDisplay).isSelected();
-			}
+			uncheck(bViewSpace, notDisplay);
+			Utils.pause(1000);
+			assert !waitForAndGetElement(bEditPage,DEFAULT_TIMEOUT,1,notDisplay).isSelected();
+			assert !waitForAndGetElement(bAdminPage,DEFAULT_TIMEOUT,1,notDisplay).isSelected();
+			assert !waitForAndGetElement(bAdminSpace,DEFAULT_TIMEOUT,1,notDisplay).isSelected();
 		}
 		if (edit){
-			if(!waitForAndGetElement(bEditPage, DEFAULT_TIMEOUT, 1, notDisplay).isSelected()){
-				clickByJavascript(bEditPage, notDisplay);
-			}
+			check(bEditPage, notDisplay);
 		}else{
-			if(waitForAndGetElement(bEditPage, DEFAULT_TIMEOUT, 1, notDisplay).isSelected()){
-				clickByJavascript(bEditPage, notDisplay);
-				Utils.pause(1000);
-				assert !waitForAndGetElement(bAdminPage,DEFAULT_TIMEOUT,1,notDisplay).isSelected();
-				assert !waitForAndGetElement(bAdminSpace,DEFAULT_TIMEOUT,1,notDisplay).isSelected();
-			}
+			uncheck(bEditPage, type);
+			assert !waitForAndGetElement(bAdminPage,DEFAULT_TIMEOUT,1,notDisplay).isSelected();
+			assert !waitForAndGetElement(bAdminSpace,DEFAULT_TIMEOUT,1,notDisplay).isSelected();
 		}
 		if (adminPage){
-			if(!waitForAndGetElement(bAdminPage, DEFAULT_TIMEOUT, 1, notDisplay).isSelected()){
-				clickByJavascript(bAdminPage, notDisplay);
-			}
+			check(bAdminPage, notDisplay);
 		}else{
-			if(waitForAndGetElement(bAdminPage, DEFAULT_TIMEOUT, 1, notDisplay).isSelected()){
-				clickByJavascript(bAdminPage, notDisplay);
-				Utils.pause(1000);
-				assert !waitForAndGetElement(bAdminSpace,DEFAULT_TIMEOUT,1,notDisplay).isSelected();
-			}
+			uncheck(bAdminPage, notDisplay);
+			assert !waitForAndGetElement(bAdminSpace,DEFAULT_TIMEOUT,1,notDisplay).isSelected();
 		}
-
 		if (adminSpace){
-			if(!waitForAndGetElement(bAdminSpace, DEFAULT_TIMEOUT, 1, notDisplay).isSelected()){
-				clickByJavascript(bAdminSpace, notDisplay);
-			}
+			check(bAdminSpace, notDisplay);
 		}else{
-			if(waitForAndGetElement(bAdminSpace, DEFAULT_TIMEOUT, 1, notDisplay).isSelected())
-				clickByJavascript(bAdminSpace, notDisplay);
+			uncheck(bAdminSpace, notDisplay);
 		}
-
 		button.save();
 		waitForMessage(MSG_PERMISSION_SAVE);
 		dialog.closeMessageDialog();

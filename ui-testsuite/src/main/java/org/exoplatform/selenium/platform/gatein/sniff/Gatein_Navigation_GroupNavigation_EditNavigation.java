@@ -4,8 +4,10 @@ import static org.exoplatform.selenium.TestLogger.info;
 
 import java.util.HashMap;
 import java.util.Map;
+
 import org.exoplatform.selenium.Button;
 import org.exoplatform.selenium.ManageAlert;
+import org.exoplatform.selenium.Utils;
 import org.exoplatform.selenium.platform.GroupNavigation;
 import org.exoplatform.selenium.platform.ManageAccount;
 import org.exoplatform.selenium.platform.NavigationManagement;
@@ -13,6 +15,7 @@ import org.exoplatform.selenium.platform.NavigationToolbar;
 import org.exoplatform.selenium.platform.PageEditor;
 import org.exoplatform.selenium.platform.PageManagement;
 import org.exoplatform.selenium.platform.UserGroupManagement;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -369,8 +372,11 @@ public class Gatein_Navigation_GroupNavigation_EditNavigation extends GroupNavig
 
 		info("Go to Group Sites/Edit navigation");
 		navToolbar.goToGroupSites();
-
+	/*	WebElement e = waitForAndGetElement("//div[@id='GroupNavigationList']");
 		info("Edit node's page properties");
+		JavascriptExecutor jse = (JavascriptExecutor)driver;
+		jse.executeScript("arguments[0].scrollTo(0,arguments[0].style.height);",e);*/
+		Utils.pause(2000);
 		editNavigation(groupAdminDisplayName);
 		rightClickOnElement(nodeLink);
 		click(ELEMENT_NAVIGATION_EDIT_PAGE_NODE);

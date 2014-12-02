@@ -68,15 +68,15 @@ public class Forum_Administration extends ForumBase {
 	}
 	
 	/**CaseId: 68917 -> Ban IP
-	 * 
+	 * Bug: UXP-146
 	 */
-	@Test
+	@Test(groups="error")
 	public void test02_BanIP(){
-		String catName = "CategoryBanIP_02";
+		String catName = "CategoryBanIP_68917";
 		String description = "Add new category in forum";
-		String forumName = "ForumBanIP_02";
-		String topic = "TopicBanIP_02";
-		String message = "New topic 02";
+		String forumName = "ForumBanIP_68917";
+		String topic = "TopicBanIP_68917";
+		String message = "New topic 68917";
 		
 		info("Add new category, forum, topic with user admin");
 		cat.addNewCategoryInForum(catName, "1", 0, null, description, 0, null);
@@ -84,13 +84,12 @@ public class Forum_Administration extends ForumBase {
 		magtopic.quickStartTopic(topic, message);
 		
 		String ip = Utils.getIPOfLocal();
-		
 		info("Set banIP is localhost");
 		setBanIp(ip);
 		magAc.signOut();
 		
 		info("Check banIp with user demo");
-		driver.get("http://" + ip + ":8080/portal");
+		driver.get(baseUrl);
 		magAc.signIn(DATA_USER4, DATA_PASS);
 		goToForums();
 		click(By.linkText(forumName));

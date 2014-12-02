@@ -96,22 +96,9 @@ public class Version extends BasicAction{
 		Utils.pause(500);
 		driver.navigate().refresh();
 		Utils.pause(2000);
-		//click(versionCheckbox1, 2);
-		WebElement vCheckbox1 = waitForAndGetElement(versionCheckbox1, DEFAULT_TIMEOUT, 1, 2);
-		((JavascriptExecutor)driver).executeScript("arguments[0].click();", vCheckbox1);
-		//click(versionCheckbox2, 2);
-		WebElement vCheckbox2 = waitForAndGetElement(versionCheckbox2, DEFAULT_TIMEOUT, 1, 2);
-		((JavascriptExecutor)driver).executeScript("arguments[0].click();", vCheckbox2);
-		
-		WebElement cButton = waitForAndGetElement(ELEMENT_COMPARE_BUTTON, 3000, 0, 2);
-		
-	
-		if (cButton != null){
-			//click(ELEMENT_COMPARE_BUTTON);
-			((JavascriptExecutor)driver).executeScript("arguments[0].click();", cButton);
-		}else {
-			click(By.xpath("//*[text()='Compare with selected versions']"));
-		}
+		check(versionCheckbox1, 2);
+		check(versionCheckbox2, 2);
+		click(ELEMENT_COMPARE_BUTTON);
 		waitForAndGetElement(ELEMENT_COMPARE_TEXT);
 	}
 

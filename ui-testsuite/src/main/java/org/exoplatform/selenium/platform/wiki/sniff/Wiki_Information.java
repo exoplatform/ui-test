@@ -88,7 +88,7 @@ public class Wiki_Information extends Version {
 		if (waitForAndGetElement(ELEMENT_LINE_REMOVE.replace("${lineRemove}", content), 3000, 0) == null){
 			waitForAndGetElement(ELEMENT_LINE_REMOVE_AUX.replace("${lineRemove}", content));	
 		}
-		waitForAndGetElement(ELEMENT_LINE_ADD.replace("${lineAdd}", content+newContent));
+		waitForAndGetElement(ELEMENT_LINE_ADD.replace("${lineAdd}", newContent));
 
 		click(ELEMENT_NODE_WIKI_PAGE.replace("{$node}",newTitle));
 		waitForMessage(newContent);
@@ -188,7 +188,7 @@ public class Wiki_Information extends Version {
 		String content = "Wiki_sniff_infor_page_content_06";
 
 		magAc.signOut();
-		magAc.signIn("fqa", "gtngtn");
+		magAc.signIn(USER_ROOT, PASS_ROOT);
 		goToWiki();
 		addBlankWikiPage(title, content, 0);
 		goToAddRelation();

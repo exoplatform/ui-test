@@ -4,6 +4,7 @@ import static org.exoplatform.selenium.TestLogger.info;
 
 import org.exoplatform.selenium.Button;
 import org.exoplatform.selenium.ManageAlert;
+import org.exoplatform.selenium.Utils;
 import org.exoplatform.selenium.platform.ManageAccount;
 import org.exoplatform.selenium.platform.forum.ForumPermission;
 import org.openqa.selenium.By;
@@ -140,6 +141,7 @@ public class ForumManageForum extends ForumBase {
 			check(ELEMENT_FORUM_AUTO_FILL, 2);
 		} else {
 			uncheck(ELEMENT_FORUM_AUTO_FILL, 2);
+			Utils.pause(2000);
 			if (postEmail != null) {
 				type(ELEMENT_NOTIFY_ADD_POST, postEmail, true);
 			}

@@ -119,7 +119,7 @@ public class AnswerManageQuestion extends AnswerBase {
 	//More action menu
 	public final By ELEMENT_MORE_ACTION_QUESTION = By.xpath("//*[contains(text(), 'More Actions')]");
 	public final By ELEMENT_DISCUSS_IN_FORUM_LINK = By.linkText("Discuss in Forum");
-	public final By ELEMENT_MORE_ACTION_EDIT = By.xpath("//i[@class='uiIconEdit uiIconLightGray']");
+	public final String ELEMENT_MORE_ACTION_EDIT = "//h5/a[contains(text(),'${question}')]/../..//div//i[@class='uiIconEdit uiIconLightGray']";
 	
 	public final By ELEMENT_MORE_ACTION_DELETE = By.linkText("Delete");
 	public final By ELEMENT_MORE_ACTION_MOVE_TO = By.xpath("//*[@class='uiIconMove uiIconLightGray']");
@@ -291,7 +291,7 @@ public class AnswerManageQuestion extends AnswerBase {
 		case 2:
 			info("Edit question while opening question");
 			click(ELEMENT_MORE_ACTION_QUESTION);
-			click(ELEMENT_MORE_ACTION_EDIT);
+			click(ELEMENT_MORE_ACTION_EDIT.replace("${question}",questionName));
 			break;
 		default:
 			info("Edit question from manage question");

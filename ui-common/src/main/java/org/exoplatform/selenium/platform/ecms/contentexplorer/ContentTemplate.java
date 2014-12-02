@@ -363,7 +363,7 @@ public class ContentTemplate extends EcmsBase {
 				switchToParentWindow();
 			} else {
 				if (waitForAndGetElement(ELEMENT_WEBCONTENT_SUMMARY_FRAME_41,
-						5000, 0, 1) != null)
+						5000, 0, 2) != null)
 					typeMultiLineInCkeContent(
 							ELEMENT_WEBCONTENT_SUMMARY_FRAME_41, sum);
 				else

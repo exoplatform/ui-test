@@ -22,11 +22,11 @@ import static org.exoplatform.selenium.TestLogger.info;
 public class PlatformBase extends TestBase {
 
 	public final String DATA_USER1 = "john";
-	public final String DATA_PASS = "gtn";
+	public final String DATA_PASS = "gtngtn";
 	public final String DATA_USER2 = "mary";
 
 	public final String USER_ROOT = "root";//"root@acme.com";
-	public final String PASS_ROOT = "gtngtn";
+	public final String PASS_ROOT = "12345";
 //	public final String DATA_USER1 = "john.smith@acme.com";
 //	public final String DATA_USER2 = "mary.williams@acme.com";
 	public final String DATA_USER3 = "james";//"james.davis@acme.com";
@@ -643,7 +643,7 @@ public class PlatformBase extends TestBase {
 	 * */
 
 	//Content Administration / Advanced Configuration 
-	public final By ELEMENT_ADVANCED_CONFIGURATION_TAB = By.xpath("//*[text()='Advanced']");
+	public final By ELEMENT_ADVANCED_CONFIGURATION_TAB = By.xpath("//*[contains(@class,'uiIconSelected')]/../../*[contains(.,'Advanced')]");
 	public final By ELEMENT_MANAGE_LOCK_TAB = By.xpath("//*[text() = 'Manage Lock']");
 	//("//div[@class = 'MiddleTab' and text() = 'Manage Lock']");
 	public final By ELEMENT_MANAGE_LOCKS = By.className("uiIconEcmsUnLockManager");
@@ -1259,10 +1259,10 @@ public class PlatformBase extends TestBase {
 				driver.switchTo().frame(e);
 				inputsummary = driver.switchTo().activeElement();
 				inputsummary.click();
-				inputsummary.clear();
 
 				if (validate.length >0)
 					if (validate[0]){
+						inputsummary.clear();
 						((JavascriptExecutor) driver).executeScript("document.body.innerHTML='" + data + "'");
 						if (inputsummary.getText().contains(data)) break;
 					}

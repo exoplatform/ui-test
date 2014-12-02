@@ -303,7 +303,7 @@ public class ManageCategory extends EcmsPermission{
 			click(ELEMENT_EDIT_CATEGORY_TREE.replace("${categoryTreeName}", cat_name));
 		}
 		info("Add child category " + child_name + " for category " + cat_name);
-			
+		Utils.pause(2000);	
 		if (waitForAndGetElement(ELEMENT_ADD_CATEGORY_ICON_1.replace("${categoryName}", cat_name), 3000, 0) != null){
 			click(By.xpath(ELEMENT_ADD_CATEGORY_ICON_1.replace("${categoryName}", cat_name)));
 		}else if (waitForAndGetElement(ELEMENT_ADD_CATEGORY_ICON.replace("${categoryName}", cat_name), 3000, 0) != null) {

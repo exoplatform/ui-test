@@ -117,7 +117,7 @@ public class WikiBase extends PlatformBase{
 	public final By ELEMENT_TITLE_WIKI_INPUT = By.id("titleInput");
 	public final By ELEMENT_CONTENT_WIKI_INPUT = By.id("Markup");
 	public final By ELEMENT_RICHTEXT_BUTTON = By.xpath("//*[@id='UIEditorTabs']/button[1]");
-	public final By ELEMENT_RICHTEXT_BUTTON_PL4_1 = By.xpath("//button[contains(.,'Rich Text')]");
+	public final By ELEMENT_RICHTEXT_BUTTON_PL4_1 = By.xpath("//*[@class='uiIconWikiRickText']");
 	public final By ELEMENT_PREVIEW_BUTTON = By.xpath("//*[@id='UIEditorTabs']/button[2]");
 	public final By ELEMENT_PREVIEW_SCREEN = By.xpath("//div[@class='popupTitle' and text()='Preview']");
 	public final By ELEMENT_PUBLISH_ACTIVITY_CHECKBOX = By.id("PublishActivityUpper");
@@ -442,7 +442,7 @@ public class WikiBase extends PlatformBase{
 		//goToWikiPage(wikiPath);
 		driver.navigate().refresh();
 		Utils.pause(2000);
-		//String bExpandIcon = "//*[@class='node']//*[contains(text(), '{$node}')]"; 
+		String bExpandIcon = "//*[@class='node']//*[contains(text(), '{$node}')]"; 
 		String[] nodes = wikiPath.split("/");
 		int length = nodes.length -1;
 		for (int index = 0;index < length;index++)
@@ -450,12 +450,12 @@ public class WikiBase extends PlatformBase{
 			String node = nodes[index];
 			String nodeNext = nodes[index+1];
 
-			//if(waitForAndGetElement(bExpandIcon.replace("{$node}",nodeNext),5000,0) == null){
-			//	click(bExpandIcon.replace("{$node}",node));
-			//}
-			if(waitForAndGetElement(ELEMENT_NODE_WIKI_PAGE.replace("{$node}",nodeNext),5000,0) == null){
-				click(ELEMENT_NODE_WIKI_PAGE.replace("{$node}",node));
-			}  
+			if(waitForAndGetElement(bExpandIcon.replace("{$node}",nodeNext),5000,0) == null){
+				click(bExpandIcon.replace("{$node}",node));
+			}
+//			if(waitForAndGetElement(ELEMENT_NODE_WIKI_PAGE.replace("{$node}",nodeNext),5000,0) == null){
+//				click(ELEMENT_NODE_WIKI_PAGE.replace("{$node}",node));
+//			}  
 			Utils.pause(100);
 		}
 		String nodeLast = nodes[length];

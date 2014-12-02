@@ -59,8 +59,8 @@ public class Event extends CalendarBase{
 
 	//Preview form
 	public String ELEMENT_EVENT_PREVIEW_TITLE = "//form[@id='UIPreviewPopup']//div[@class='titleList']/strong[text()='${event}']";
-	
-	
+
+
 	//Form Add event details
 	public By ELEMENT_ADD_EVENT_DETAIL_TAB = By.linkText("Details");
 	public By ELEMENT_ADD_EDIT_EVENT_ALLDAY = By.xpath("//form[@id='UIEventForm']//input[@id='allDay']");
@@ -414,7 +414,7 @@ public class Event extends CalendarBase{
 			break;
 			default: break;
 			}
-		
+
 		if(opt.length > 0){
 			switch (opt[0]){
 			case 1: click(ELEMENT_PARTICIPANT_PRIVATE_RADIO,2);
@@ -424,7 +424,7 @@ public class Event extends CalendarBase{
 			default: break;
 			}
 		}
-		
+
 		if(opt.length > 1){
 			switch (opt[1]){
 			case 1: click(ELEMENT_PARTICIPANT_BUSY_RADIO,2);
@@ -502,7 +502,7 @@ public class Event extends CalendarBase{
 			switch(endRepeat){
 			case After:
 				info("Check After option");
-				check(ELEMENT_END_AFTER_NUMBER,2);
+				check(ELEMENT_AFTER_END_RECURRING_EVENT,2);
 				if(occurence!="")
 					type(ELEMENT_END_AFTER_NUMBER,option[0],true);
 				break;
@@ -518,7 +518,9 @@ public class Event extends CalendarBase{
 				break;
 			}
 		}
+		Utils.pause(500);
 		click(ELEMENT_SAVE_EVENT_OCCURRING);
+		waitForElementNotPresent(ELEMENT_SAVE_EVENT_OCCURRING);
 	}
 
 	/**
@@ -689,7 +691,8 @@ public class Event extends CalendarBase{
 			break;
 		}
 		click(ELEMENT_EVENT_TASK_DELETE_MENU);
-		if(isElementPresent(ELEMENT_DELETE_RECURRING_EVENT_FORM)){
+		if(waitForAndGetElement(ELEMENT_DELETE_RECURRING_EVENT_FORM,5000,0)!=null){
+			info("Delete recurring event");
 			waitForAndGetElement(ELEMENT_DELETE_RECURRING_EVENT_FORM);
 			info(waitForAndGetElement(ELEMENT_CONFIRM_EDIT_DELETE_RECURRING_EVENT).getText());
 			assert waitForAndGetElement(ELEMENT_CONFIRM_EDIT_DELETE_RECURRING_EVENT).getText().contains(ELEMENT_CONFIRM_DELETE_MESSAGE);
@@ -712,7 +715,8 @@ public class Event extends CalendarBase{
 			waitForElementNotPresent(ELEMENT_DELETE_RECURRING_EVENT_FORM);
 		}
 		else{
-			alert.verifyAlertMessage(MSG_TASK_DELETE);
+			info("Delete an event");
+			alert.verifyAlertMessage(MSG_EVENT_DELETE);
 			button.yes();
 			driver.navigate().refresh();
 			Utils.pause(1000);
@@ -788,7 +792,7 @@ public class Event extends CalendarBase{
 			break;
 		}
 		click(ELEMENT_MENU_EVENT_EDIT);
-		if(isElementPresent(ELEMENT_EDIT_EVENT_POPUP)){
+		if(waitForAndGetElement(ELEMENT_EDIT_EVENT_POPUP,5000,0)!=null){
 			waitForAndGetElement(ELEMENT_EDIT_EVENT_POPUP);
 			inputAddEventForm(name,description, location,from,to,allDay);
 			click(ELEMENT_ADD_EVENT_SAVE_BUTTON);
@@ -836,7 +840,7 @@ public class Event extends CalendarBase{
 			info("Verify event all day");
 			if(this.plfVersion.contains("4.0")){
 				info("Verify in plf 4.0");
-				if((waitForElementNotPresent(ELEMENT_EVENT_TASK_ALL_DAY.replace("${event}", eventName)) == null)&&(waitForElementNotPresent(ELEMENT_EVENT_TASK_WORKING_PANE.replace("${event}", eventName))==null)){
+				if((waitForAndGetElement(ELEMENT_EVENT_TASK_ALL_DAY.replace("${event}", eventName)) == null)&&(waitForAndGetElement(ELEMENT_EVENT_TASK_WORKING_PANE.replace("${event}", eventName))==null)){
 					isPresentEvent = false;
 				}        
 				else
@@ -845,16 +849,33 @@ public class Event extends CalendarBase{
 			else{ //this.plfVersion.contains("4.1")
 				info("Verify in plf 4.1");
 				if(dateTime!=""){
-					if(waitForElementNotPresent(ELEMENT_EVENT_TASK_DETAIL_ALL_DAY.replace("${event}", eventName).replace("${date}", dateTime),5000,0)==null){
-						isPresentEvent = false;
+					info("verify recurring event in allday");
+					if(waitForAndGetElement(ELEMENT_EVENT_TASK_DETAIL_ALL_DAY.replace("${event}", eventName).replace("${date}", dateTime),10000,0)==null){
+						click(ELEMENT_NEXT_WEEK);
+						if(waitForAndGetElement(ELEMENT_EVENT_TASK_DETAIL_ALL_DAY.replace("${event}", eventName).replace("${date}", dateTime),10000,0)!=null){
+							isPresentEvent = true;
+							info("it is shown in date");
+						}
+						else
+						{
+							isPresentEvent = false;
+							info("it is not shown in date");
+						}
+						click(ELEMENT_PREVIOUS_WEEK);
 					}        
 					else{
 						isPresentEvent = true;
 					}
 				}
 				else{
-					if((waitForElementNotPresent(ELEMENT_EVENT_TASK_ALL_DAY_PLF41.replace("${event}", eventName),5000,0)==null)&&(waitForElementNotPresent(ELEMENT_EVENT_TASK_WORKING_PANE_PLF41.replace("${event}", eventName),5000,0)==null)){
-						isPresentEvent = false;
+					if((waitForAndGetElement(ELEMENT_EVENT_TASK_ALL_DAY_PLF41.replace("${event}", eventName),5000,0)==null)&&(waitForAndGetElement(ELEMENT_EVENT_TASK_WORKING_PANE_PLF41.replace("${event}", eventName),5000,0)==null)){
+						click(ELEMENT_NEXT_WEEK);
+						if((waitForAndGetElement(ELEMENT_EVENT_TASK_ALL_DAY_PLF41.replace("${event}", eventName),5000,0)!=null)||(waitForAndGetElement(ELEMENT_EVENT_TASK_WORKING_PANE_PLF41.replace("${event}", eventName),5000,0)!=null)){
+							isPresentEvent = true;
+						}
+						else
+							isPresentEvent = false;
+						click(ELEMENT_PREVIOUS_WEEK);
 					}        
 					else
 						isPresentEvent = true;
@@ -864,10 +885,10 @@ public class Event extends CalendarBase{
 		case ONEDAY:
 			info("Verify event one day");
 			if(dateTime!=null&&dateTime!=""){
-				if(waitForElementNotPresent(By.xpath(ELEMENT_EVENT_TASK_DETAIL_DATE.replace("${taskName}", eventName).replace("${date}", dateTime)),5000,0)==null){
+				if(waitForAndGetElement(By.xpath(ELEMENT_EVENT_TASK_DETAIL_DATE.replace("${taskName}", eventName).replace("${date}", dateTime)),5000,0)==null){
 					((JavascriptExecutor) driver).executeScript("arguments[0].scrollTop = arguments[0].scrollHeight;", 
 							waitForAndGetElement(ELEMENT_EVENT_TASK_WEEK_PANEL));
-					if(waitForElementNotPresent(By.xpath(ELEMENT_EVENT_TASK_DETAIL_DATE.replace("${taskName}", eventName).replace("${date}", dateTime)),5000,0)==null){
+					if(waitForAndGetElement(By.xpath(ELEMENT_EVENT_TASK_DETAIL_DATE.replace("${taskName}", eventName).replace("${date}", dateTime)),5000,0)==null){
 						click(ELEMENT_NEXT_WEEK);
 						if(waitForAndGetElement(By.xpath(ELEMENT_EVENT_TASK_DETAIL_DATE.replace("${taskName}", eventName).replace("${date}", dateTime)),5000,0)!= null){
 							isPresentEvent = true;

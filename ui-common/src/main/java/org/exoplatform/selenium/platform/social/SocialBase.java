@@ -85,7 +85,7 @@ public class SocialBase extends PlatformBase {
 	public final By ELEMENT_TOOLBAR_PROFILE_ICON = By.linkText("My Profile");
 	public final By ELEMENT_TOOLBAR_NETWORKS_ICON = By.linkText("My Connections");
 	public final By ELEMENT_FIND_PEOPLE_ICON = By.linkText("Find Connections");
-	public final By ELEMENT_TOOLBAR_ACTIVITY_ICON = By.linkText("My Activities");
+	public final By ELEMENT_TOOLBAR_ACTIVITY_ICON = By.xpath("//*[@class='uiIconPLFActivityStream']");
 	public final String ELEMENT_USER_ACTIVIY_ACTIVE = "//li[@class='active']//a[contains(@href, '/portal/intranet/activities/${user}')]";
 
 	// Go to Account Name link > My Profile 

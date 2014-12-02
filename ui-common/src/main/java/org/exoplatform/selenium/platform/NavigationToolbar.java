@@ -38,6 +38,8 @@ public class NavigationToolbar extends PlatformBase {
 	//Go to portal sites
 	public void goToPortalBranding() {
 		info("--Go to Portal Branding Management--");
+		if(baseUrl==null)
+			baseUrl=DEFAULT_BASEURL;
 		String url = baseUrl + "/g/:platform:administrators/branding";
 		for(int repeat=0;; repeat ++){
 			if (repeat > 1){
@@ -65,6 +67,8 @@ public class NavigationToolbar extends PlatformBase {
 	//Go to portal sites
 	public void goToPortalSites() {
 		info("--Go to Portal Site Management--");
+		if(baseUrl==null)
+			baseUrl=DEFAULT_BASEURL;
 		String url = baseUrl + "/g/:platform:administrators/portalnavigation";
 		for(int repeat=0;; repeat ++){
 			if (repeat > 1){
@@ -72,7 +76,7 @@ public class NavigationToolbar extends PlatformBase {
 				break;
 			}
 			//mouseOverAndClick(ELEMENT_LINK_SETUP);
-			mouseOver(ELEMENT_LINK_SETUP, true);
+			click(ELEMENT_LINK_SETUP);
 			if (waitForAndGetElement(ELEMENT_LINK_PORTAL, 5000, 0)!= null) {	
 				mouseOver(ELEMENT_LINK_PORTAL, false);
 				if (waitForAndGetElement(ELEMENT_LINK_SITES, 5000, 0)!= null){
@@ -88,6 +92,8 @@ public class NavigationToolbar extends PlatformBase {
 	//Go to Portal Manage Pages	
 	public void goToManagePages() {
 		info("--Go to Page Management--");
+		if(baseUrl==null)
+			baseUrl=DEFAULT_BASEURL;
 		String url = baseUrl + "/g/:platform:administrators/administration/pageManagement";
 		for(int repeat=0;; repeat ++){
 			if (repeat > 1){
@@ -168,6 +174,8 @@ public class NavigationToolbar extends PlatformBase {
 	//Go to Portal/Group Sites
 	public void goToGroupSites(){
 		info("--Go to Group Site Management--");
+		if(baseUrl==null)
+			baseUrl=DEFAULT_BASEURL;
 		String url = baseUrl + "/g/:platform:administrators/groupnavigation";
 		//driver.get(url);
 		Utils.pause(1000);
@@ -192,6 +200,8 @@ public class NavigationToolbar extends PlatformBase {
 	//Go to Portal/Sites
 	public void goToSites(){
 		info("--Go to Sites --");
+		if(baseUrl==null)
+			baseUrl=DEFAULT_BASEURL;
 		String url = baseUrl + "/g/:platform:administrators/portalnavigation";
 		//driver.get(url);
 		Utils.pause(1000);
@@ -275,6 +285,8 @@ public class NavigationToolbar extends PlatformBase {
 	// Go to content administration
 	public void goToContentAdministration()
 	{
+		if(baseUrl==null)
+			baseUrl=DEFAULT_BASEURL;
 		String url = baseUrl + "/g/:platform:web-contributors/wcmAdmin";
 		info("base url of content admin is " + baseUrl);
 		for(int repeat=0;; repeat ++){
@@ -322,6 +334,8 @@ public class NavigationToolbar extends PlatformBase {
 	//Enter Search Form  (Administration > Content > Search menu)
 	public void goToSearch()
 	{
+		if(baseUrl==null)
+			baseUrl=DEFAULT_BASEURL;
 		String url = baseUrl + "/g/:platform:administrators/search";
 		for(int repeat=0;; repeat ++){
 			if (repeat > 1){
@@ -494,6 +508,8 @@ public class NavigationToolbar extends PlatformBase {
 	 */
 	public void goToIDEPage(){
 		info("--Go to IDE Page--");
+		if(baseUrl==null)
+			baseUrl=DEFAULT_BASEURL;
 		String url = baseUrl + "/g/:developers/ide";
 		for(int repeat=0;; repeat ++){
 			if (repeat > 1){
@@ -615,6 +631,8 @@ public class NavigationToolbar extends PlatformBase {
 	 * Go to Email notification administration page
 	 */
 	public void goToNotificationAdministration(){
+		if(baseUrl==null)
+			baseUrl=DEFAULT_BASEURL;
 		String url = baseUrl + "/g/:platform:administrators/notification";
 		for(int repeat=0;; repeat ++){
 			if (repeat > 1){

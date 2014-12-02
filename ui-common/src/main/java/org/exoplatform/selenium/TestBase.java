@@ -45,8 +45,8 @@ public class TestBase {
 	public WebDriver driver;
 	public WebDriver newDriver;
 
-	protected String baseUrl;
-	protected int DEFAULT_TIMEOUT = 60000; //milliseconds = 30 seconds
+	protected static String baseUrl;
+	protected int DEFAULT_TIMEOUT = 30000; //milliseconds = 30 seconds
 	protected int WAIT_INTERVAL = 1000; //milliseconds  
 	public int loopCount = 0;	
 	public boolean ieFlag;	 
@@ -66,7 +66,7 @@ public class TestBase {
 	//public final By ELEMENT_MENU_EDIT_LINK = By.xpath("//i[@class='uiIconPLF24x24Edit']");
 	//public final By ELEMENT_MENU_PAGE_LINK = By.linkText("Page");
 	//public final String AJAX_LOADING_MASK = "//div[@id='AjaxLoadingMask']";
-	public final String DEFAULT_BASEURL="http://localhost:8080/portal";
+	public final String DEFAULT_BASEURL="http://demo.uxpacc01.exoplatform.org/portal";
 
 	/*======= Welcome Screen (Term and Conditions) =====*/
 	public final By ELEMENT_FIRSTNAME_ACCOUNT = By.name("firstNameAccount");
@@ -184,7 +184,7 @@ public class TestBase {
 	 * Verify plf version
 	 */
 	public void checkPLFVersion(){
-//		waitForTextNotPresent("terms and conditions agreement");
+		//		waitForTextNotPresent("terms and conditions agreement");
 		try{
 			info("Verify platform version");
 			String des = driver.findElement(ELEMENT_PLF_INFORMATION).getText();
@@ -424,12 +424,13 @@ public class TestBase {
 
 	public void click(Object locator, Object... opParams) {
 		//Actions actions = new Actions(driver);
-		int notDisplay = (Integer) (opParams.length > 0 ? opParams[0]: 0);		
-		Actions actions = new Actions(driver);
+		int notDisplay = (Integer) (opParams.length > 0 ? opParams[0]: 0);  
+		//  Actions actions = new Actions(driver);
 		try {
 			WebElement element = waitForAndGetElement(locator, DEFAULT_TIMEOUT, 1, notDisplay);
 			if(element.isEnabled())
-				actions.click(element).perform();
+				//    actions.click(element).perform();
+				((JavascriptExecutor)driver).executeScript("arguments[0].click();", element);
 			else {
 				debug("Element is not enabled");
 				click(locator, notDisplay);
@@ -437,11 +438,11 @@ public class TestBase {
 		} catch (StaleElementReferenceException e) {
 			checkCycling(e, DEFAULT_TIMEOUT/WAIT_INTERVAL);
 			Utils.pause(WAIT_INTERVAL);
-			click(locator, notDisplay);
+			clickByJavascript(locator, notDisplay);
 		} catch (ElementNotVisibleException e) {
 			checkCycling(e, DEFAULT_TIMEOUT/WAIT_INTERVAL);
 			Utils.pause(WAIT_INTERVAL);
-			click(locator, notDisplay);
+			clickByJavascript(locator, notDisplay);
 		} finally {
 			loopCount = 0;
 		}
@@ -741,37 +742,53 @@ public class TestBase {
 	 */
 	public void getDriverAutoSave(){
 		String pathFile = System.getProperty("user.dir") + "/src/main/resources/TestData/TestOutput";
+		String browser = System.getProperty("browser");
+		baseUrl = System.getProperty("baseUrl");
+		if (baseUrl==null) baseUrl = DEFAULT_BASEURL;
+		if("chrome".equals(browser)){
+			driver = new ChromeDriver();
+			chromeFlag = true;
+		} else if ("iexplorer".equals(browser)){
+			System.setProperty("webdriver.ie.driver","D:\\java\\eXoProjects\\IEDriverServer\\IEDriverServer.exe") ;
+			DesiredCapabilities  capabilitiesIE = DesiredCapabilities.internetExplorer();
+			capabilitiesIE.setCapability("ignoreProtectedModeSettings", true);
+			driver = new InternetExplorerDriver(capabilitiesIE);
 
-		FirefoxProfile fp = new FirefoxProfile();	
+			this.ieFlag = true;
+		} else {
+			System.setProperty("browser", "firefox");
+			FirefoxProfile fp = new FirefoxProfile(); 
 
-		info("Save file to " + pathFile);
-		fp.setPreference("browser.download.manager.showWhenStarting", false);
-		fp.setPreference("browser.download.dir", pathFile);
-		fp.setPreference("browser.download.folderList", 2);
-		//		fp.setPreference("browser.helperApps.neverAsk.saveToDisk", 
-		//				"application/x-zip;application/x-zip-compressed;application/x-winzip;application/zip;application/bzip2;" +
-		//				"gzip/document;multipart/x-zip;application/x-gunzip;application/x-gzip;application/x-gzip-compressed;" +
-		//				"application/x-bzip;application/gzipped;application/gzip-compressed;application/gzip;application/octet-stream");
+			info("Save file to " + pathFile);
+			fp.setPreference("browser.download.manager.showWhenStarting", false);
+			fp.setPreference("browser.download.dir", pathFile);
+			fp.setPreference("browser.download.folderList", 2);
+			//  fp.setPreference("browser.helperApps.neverAsk.saveToDisk", 
+			//    "application/x-zip;application/x-zip-compressed;application/x-winzip;application/zip;application/bzip2;" +
+			//    "gzip/document;multipart/x-zip;application/x-gunzip;application/x-gzip;application/x-gzip-compressed;" +
+			//    "application/x-bzip;application/gzipped;application/gzip-compressed;application/gzip;application/octet-stream");
 
-		fp.setPreference("browser.helperApps.neverAsk.saveToDisk", "application/x-xpinstall;" +
-				"application/x-zip;application/x-zip-compressed;application/x-winzip;application/zip;" +
-				"gzip/document;multipart/x-zip;application/x-gunzip;application/x-gzip;application/x-gzip-compressed;" +
-				"application/x-bzip;application/gzipped;application/gzip-compressed;application/gzip" +
-				"application/octet-stream" +
-				";application/pdf;application/msword;text/plain;" +
-				"application/octet;text/calendar;text/x-vcalendar;text/Calendar;" +
-				"text/x-vCalendar;image/jpeg;image/jpg;image/jp_;application/jpg;" +
-				"application/x-jpg;image/pjpeg;image/pipeg;image/vnd.swiftview-jpeg;image/x-xbitmap;image/png;application/xml;text/xml;text/icalendar;");
+			fp.setPreference("browser.helperApps.neverAsk.saveToDisk", "application/x-xpinstall;" +
+					"application/x-zip;application/x-zip-compressed;application/x-winzip;application/zip;" +
+					"gzip/document;multipart/x-zip;application/x-gunzip;application/x-gzip;application/x-gzip-compressed;" +
+					"application/x-bzip;application/gzipped;application/gzip-compressed;application/gzip" +
+					"application/octet-stream" +
+					";application/pdf;application/msword;text/plain;" +
+					"application/octet;text/calendar;text/x-vcalendar;text/Calendar;" +
+					"text/x-vCalendar;image/jpeg;image/jpg;image/jp_;application/jpg;" +
+					"application/x-jpg;image/pjpeg;image/pipeg;image/vnd.swiftview-jpeg;image/x-xbitmap;image/png;application/xml;text/xml;text/icalendar;");
 
-		fp.setPreference("plugin.disable_full_page_plugin_for_types", "application/pdf");
-		fp.setPreference("pref.downloads.disable_button.edit_actions", true);
-		//		fp.setPreference("browser.helperApps.neverAsk.saveToDisk", "application/pdf");
-		fp.setPreference("pdfjs.disabled", true); 
-		//		fp.setPreference("pdfjs.firstRun", false); 
-		//		fp.setPreference("pdfjs.migrationVersion", 1);
+			fp.setPreference("plugin.disable_full_page_plugin_for_types", "application/pdf");
+			fp.setPreference("pref.downloads.disable_button.edit_actions", true);
+			//  fp.setPreference("browser.helperApps.neverAsk.saveToDisk", "application/pdf");
+			fp.setPreference("pdfjs.disabled", true); 
+			//  fp.setPreference("pdfjs.firstRun", false); 
+			//  fp.setPreference("pdfjs.migrationVersion", 1);
 
-		fp.setPreference("browser.helperApps.alwaysAsk.force", false);
-		driver = new FirefoxDriver(fp);
+			fp.setPreference("browser.helperApps.alwaysAsk.force", false);
+			driver = new FirefoxDriver(fp);
+		}
+
 		baseUrl = System.getProperty("baseUrl");
 		if (baseUrl==null) baseUrl = DEFAULT_BASEURL;
 		action = new Actions(driver);
