@@ -332,7 +332,8 @@ public class EcmsBase extends ManageAccount {
 
 	/* File management view - Personal document	 */
 	public final String ELEMENT_SELECT_CHECKBOX = "//*[@data-original-title='${name}']/../..//input[@type='checkbox']";
-	public final String ELEMENT_ARROW_RIGHT = "//*[@data-original-title='${nodeName}']/../..//i[@class='uiIconArrowRight']";
+	public final String ELEMENT_ARROW_RIGHT = "//*[@data-original-title='${nodeName}']/../..//*[@class='uiIconArrowRight']";
+	public final String ELEMENT_ARROW_RIGHT_41 = "//*[@data-original-title='${nodeName}']/../..//*[@class='uiIconArrowRight uiIconLightGray']";
 	public final String ELEMENT_ARROW_DOWN = "//*[@data-original-title='${nodeName}']/../..//i[@class='uiIconArrowDown']";
 
 	//Add comment form

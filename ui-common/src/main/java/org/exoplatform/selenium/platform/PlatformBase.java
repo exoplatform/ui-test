@@ -275,7 +275,7 @@ public class PlatformBase extends TestBase {
 	public final By ELEMENT_ECMS_CUT_NODE = By.xpath("//*[@id='ECMContextMenu']//*[@class='uiIconEcmsCut']");
 	//By.xpath("//*[@class='uiContextMenuContainer']//*[@class='uiIconEcmsCut']"); 
 
-	public final By ELEMENT_PASTE_NODE = By.className("uiIconPasteNode");
+	public final By ELEMENT_PASTE_NODE = By.className("uiIconEcmsPaste");
 	public final By ELEMENT_ECMS_PASTE_NODE = By.xpath("//*[@id='ECMContextMenu']//*[@class='uiIconEcmsPaste']");
 	//By.xpath("//*[@class='uiContextMenuContainer']//*[@class='uiIconEcmsPaste']"); 
 	public final By ELEMENT_COPY_NODE = By.xpath(".//*[@class='uiIconEcmsCopy']");

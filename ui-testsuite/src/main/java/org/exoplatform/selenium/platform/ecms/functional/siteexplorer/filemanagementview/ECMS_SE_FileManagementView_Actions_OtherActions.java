@@ -1,7 +1,5 @@
 package org.exoplatform.selenium.platform.ecms.functional.siteexplorer.filemanagementview;
 
-import static org.testng.AssertJUnit.assertFalse;
-import static org.testng.AssertJUnit.assertTrue;
 import static org.exoplatform.selenium.TestLogger.info;
 
 import org.exoplatform.selenium.Button;
@@ -41,7 +39,7 @@ public class ECMS_SE_FileManagementView_Actions_OtherActions extends PlatformBas
 
 	@BeforeMethod
 	public void beforeMethods() {
-		getDriverAutoSave();
+		initSeleniumTest();
 		driver.get(baseUrl);
 		info("Login ECMS with " + DATA_USER1);
 		magAcc = new ManageAccount(driver);
@@ -70,7 +68,7 @@ public class ECMS_SE_FileManagementView_Actions_OtherActions extends PlatformBas
 	 * Step 2: Create nodes
 	 * Step 3: Add parent and child nodes to favorite
 	 */
-	@Test
+	@Test (groups ="ERROR")
 	public void test01_AddToFavoriteAParentAndChildSelection(){
 		/*Declare variables*/
 		String parentDocument = "addtofavoriteparent1";
@@ -104,21 +102,25 @@ public class ECMS_SE_FileManagementView_Actions_OtherActions extends PlatformBas
 		////select parent and child node
 		info("-- Select parent and child node --");
 		actBar.goToNodeByAddressPath("/");
-		click(By.xpath(siteExp.ELEMENT_ARROW_RIGHT.replace("${nodeName}", parentDocument)));
+		driver.navigate().refresh();
+		Utils.pause(2000);
+		click(By.xpath(siteExp.ELEMENT_ARROW_RIGHT_41.replace("${nodeName}", parentDocument)),2);
+		click(By.xpath(siteExp.ELEMENT_ARROW_RIGHT.replace("${nodeName}", parentDocument)),2);
 		waitForAndGetElement(ecms.ELEMENT_NODE_ADMIN_VIEW.replace("${nodeName}", childDocument));
 		click(By.xpath(siteExp.ELEMENT_SELECT_CHECKBOX.replace("${name}", parentDocument)), 2);
 		click(By.xpath(siteExp.ELEMENT_SELECT_CHECKBOX.replace("${name}", childDocument)), 2);
 
 		//Click add to favorite
 		info("-- Click add to favorite --");
-		actBar.goToAddToFavorite();
-
+		click(By.xpath("//*[@class='uiIconEcmsAddToFavourite']"));
+		Utils.pause(3000);
 		//Go to Favorite
 		info("-- Go to favorite --");
 		actBar.goToNodeByAddressPath("/Favorites");
 
 		//Verify Parent and Child node are added in the list "Favorite"
 		info("-- Verify Parent and Child node are added in the list --");
+		driver.navigate().refresh();
 		waitForAndGetElement(ecms.ELEMENT_NODE_ADMIN_VIEW.replace("${nodeName}", parentDocument));
 		waitForAndGetElement(ecms.ELEMENT_NODE_ADMIN_VIEW.replace("${nodeName}", childDocument));
 
@@ -168,7 +170,8 @@ public class ECMS_SE_FileManagementView_Actions_OtherActions extends PlatformBas
 		//select parent and child node
 		info("-- Select parent and child node --");
 		actBar.goToNodeByAddressPath("/");
-		click(By.xpath(siteExp.ELEMENT_ARROW_RIGHT.replace("${nodeName}", parentFolder)));
+		click(By.xpath(siteExp.ELEMENT_ARROW_RIGHT_41.replace("${nodeName}", parentFolder)),2);
+		click(By.xpath(siteExp.ELEMENT_ARROW_RIGHT.replace("${nodeName}", parentFolder)),2);
 		waitForAndGetElement(ecms.ELEMENT_NODE_ADMIN_VIEW.replace("${nodeName}", parentFolder));
 		waitForAndGetElement(ecms.ELEMENT_NODE_ADMIN_VIEW.replace("${nodeName}", childDocument));			
 
@@ -210,38 +213,43 @@ public class ECMS_SE_FileManagementView_Actions_OtherActions extends PlatformBas
 		/*Step 2: Select a document mode*/
 		//Create a document
 		info("-- Create a document --");
-		actBar.goToAddNewContent();
-		cTemplate.createNewFile(dnode, dnode, dnode);
+		//		actBar.goToAddNewContent();
+		//		cTemplate.createNewFile(dnode, dnode, dnode);
 
 		//Select a node
 		actBar.goToNodeByAddressPath("/");
 		info("-- Select a node --");
-		check(By.xpath(siteExp.ELEMENT_SELECT_CHECKBOX.replace("${name}", dnode)), 2);
+		Utils.pause(4000);
+		//		check(By.xpath(siteExp.ELEMENT_SELECT_CHECKBOX.replace("${name}", dnode)), 2);
+		//		Utils.pause(2000);
+		//		uncheck(By.xpath(siteExp.ELEMENT_SELECT_CHECKBOX.replace("${name}", dnode)), 2);
+		//		Utils.pause(2000);
+		click(By.xpath("//*[@class='rowView fileViewRowView Normal clearfix' and contains(., 'test03_HideActionsOfANode')]"));
 		Utils.pause(2000);
 
 		info("--Verify actions for this node are displayed on top of the top action bar --");
 		info("--Verify display action copy node --");
-		assertTrue(actBar.isActionsOnActionBarPresent(actBar.ELEMENT_COPY_NODE));
+		waitForAndGetElement(actBar.ELEMENT_COPY_NODE);
 		info("--Verify display action cut node --");
-		assertTrue(actBar.isActionsOnActionBarPresent(actBar.ELEMENT_CUT_NODE));
+		waitForAndGetElement(actBar.ELEMENT_CUT_NODE);
 		info("--Verify display action delete node --");
-		assertTrue(actBar.isActionsOnActionBarPresent(actBar.ELEMENT_DELETE_NODE));
+		waitForAndGetElement(actBar.ELEMENT_DELETE_NODE);
 		info("--Verify display action lock node --");
-		assertTrue(actBar.isActionsOnActionBarPresent(actBar.ELEMENT_LOCK_NODE));
+		waitForAndGetElement(actBar.ELEMENT_LOCK_NODE);
 		info("--Verify display action rename node --");
-		assertTrue(actBar.isActionsOnActionBarPresent(actBar.ELEMENT_RENAME_NODE));
+		waitForAndGetElement(actBar.ELEMENT_RENAME_NODE);
 		info("--Verify display action add symlink node --");
-		assertTrue(actBar.isActionsOnActionBarPresent(actBar.ELEMENT_ADD_SYMLINK_NODE));
+		waitForAndGetElement(actBar.ELEMENT_ADD_SYMLINK_NODE);
 		info("--Verify display action view information node --");
-		assertTrue(actBar.isActionsOnActionBarPresent(cMenu.ELEMENT_VIEW_INFORMATION));
+		waitForAndGetElement(cMenu.ELEMENT_VIEW_INFORMATION);
 		info("--Verify display action add to favorite --");
-		assertTrue(actBar.isActionsOnActionBarPresent(actBar.ELEMENT_ADD_TO_FAVORITE_NODE));
+		waitForAndGetElement(actBar.ELEMENT_ADD_TO_FAVORITE_NODE);
 		info("--Verify display action download --");
-		assertTrue(actBar.isActionsOnActionBarPresent(actBar.ELEMENT_DOWNLOAD_NODE));
+		waitForAndGetElement(actBar.ELEMENT_DOWNLOAD_NODE);
 		info("--Verify display action copy to url --");
-		assertTrue(actBar.isActionsOnActionBarPresent(actBar.ELEMENT_COPY_TO_URL_NODE));
+		waitForAndGetElement(actBar.ELEMENT_COPY_TO_URL_NODE);
 		info("--Verify display action view document --");
-		assertTrue(actBar.isActionsOnActionBarPresent(actBar.ELEMENT_VIEW_DOCUMENT_NODE));
+		waitForAndGetElement(actBar.ELEMENT_VIEW_DOCUMENT_NODE);
 
 		/*Step 3: Not select a document node*/		
 		info("-- Not select a node --");
@@ -249,27 +257,27 @@ public class ECMS_SE_FileManagementView_Actions_OtherActions extends PlatformBas
 		Utils.pause(2000);
 		info("-- Actions are hidden --");
 		info("--Verify hidden action copy node --");
-		assertFalse(actBar.isActionsOnActionBarPresent(actBar.ELEMENT_COPY_NODE));
+		waitForElementNotPresent(actBar.ELEMENT_COPY_NODE);
 		info("--Verify hidden action cut node --");
-		assertFalse(actBar.isActionsOnActionBarPresent(actBar.ELEMENT_CUT_NODE));
+		waitForElementNotPresent(actBar.ELEMENT_CUT_NODE);
 		info("--Verify hidden action delete node --");
-		assertFalse(actBar.isActionsOnActionBarPresent(actBar.ELEMENT_DELETE_NODE));
+		waitForElementNotPresent(actBar.ELEMENT_DELETE_NODE);
 		info("--Verify hidden action lock node --");
-		assertFalse(actBar.isActionsOnActionBarPresent(actBar.ELEMENT_LOCK_NODE));
+		waitForElementNotPresent(actBar.ELEMENT_LOCK_NODE);
 		info("--Verify hidden action rename node --");
-		assertFalse(actBar.isActionsOnActionBarPresent(actBar.ELEMENT_RENAME_NODE));
+		waitForElementNotPresent(actBar.ELEMENT_RENAME_NODE);
 		info("--Verify hidden action add symlink node --");
-		assertFalse(actBar.isActionsOnActionBarPresent(actBar.ELEMENT_ADD_SYMLINK_NODE));
+		waitForElementNotPresent(actBar.ELEMENT_ADD_SYMLINK_NODE);
 		info("--Verify hidden action view information node --");
-		assertFalse(actBar.isActionsOnActionBarPresent(cMenu.ELEMENT_VIEW_INFORMATION));
+		waitForElementNotPresent(cMenu.ELEMENT_VIEW_INFORMATION);
 		info("--Verify hidden action add to favorite --");
-		assertFalse(actBar.isActionsOnActionBarPresent(actBar.ELEMENT_ADD_TO_FAVORITE_NODE));
+		waitForElementNotPresent(actBar.ELEMENT_ADD_TO_FAVORITE_NODE);
 		info("--Verify hidden action download --");
-		assertFalse(actBar.isActionsOnActionBarPresent(actBar.ELEMENT_DOWNLOAD_NODE));
+		waitForElementNotPresent(actBar.ELEMENT_DOWNLOAD_NODE);
 		info("--Verify hidden action copy to url --");
-		assertFalse(actBar.isActionsOnActionBarPresent(actBar.ELEMENT_COPY_TO_URL_NODE));
+		waitForElementNotPresent(actBar.ELEMENT_COPY_TO_URL_NODE);
 		info("--Verify hidden action view document --");
-		assertFalse(actBar.isActionsOnActionBarPresent(actBar.ELEMENT_VIEW_DOCUMENT_NODE));
+		waitForElementNotPresent(actBar.ELEMENT_VIEW_DOCUMENT_NODE);
 
 		//Clear data
 		info("-- Clear data --");
@@ -319,7 +327,8 @@ public class ECMS_SE_FileManagementView_Actions_OtherActions extends PlatformBas
 
 		//Click on triangle icon beside a document/ folder
 		info("-- Click on triangle icon beside a document/ folder --");
-		click(By.xpath(siteExp.ELEMENT_ARROW_RIGHT.replace("${nodeName}", parentFolder)));
+		click(By.xpath(siteExp.ELEMENT_ARROW_RIGHT_41.replace("${nodeName}", parentFolder)),2);
+		click(By.xpath(siteExp.ELEMENT_ARROW_RIGHT.replace("${nodeName}", parentFolder)),2);
 
 		//The triangle position of arrow is top -> down
 		info("-- The triangle position of arrow is top -> down --");
@@ -400,7 +409,8 @@ public class ECMS_SE_FileManagementView_Actions_OtherActions extends PlatformBas
 		/*Step 2: Lock both of parent and child nodes*/		
 		//Click on triangle icon beside a document/ folder
 		info("-- Click on triangle icon beside a document/ folder --");
-		click(By.xpath(siteExp.ELEMENT_ARROW_RIGHT.replace("${nodeName}", parentFolder)));
+		click(By.xpath(siteExp.ELEMENT_ARROW_RIGHT_41.replace("${nodeName}", parentFolder)),2);
+		click(By.xpath(siteExp.ELEMENT_ARROW_RIGHT.replace("${nodeName}", parentFolder)),2);
 		waitForAndGetElement(ecms.ELEMENT_NODE_ADMIN_VIEW.replace("${nodeName}", childDocument));
 
 		//From action bar, choose [Lock]
@@ -416,7 +426,7 @@ public class ECMS_SE_FileManagementView_Actions_OtherActions extends PlatformBas
 
 		//Click  again on arrow beside that document/ folder
 		info("-- Click  again on arrow beside that document/ folder --");
-		click(By.xpath(siteExp.ELEMENT_ARROW_DOWN.replace("${nodeName}", parentFolder)));
+		//		click(By.xpath(siteExp.ELEMENT_ARROW_DOWN.replace("${nodeName}", parentFolder)),2);
 
 		info("-- Delete both of parent and child nodes --");
 		actBar.actionsOnElement(parentFolder, actionType.DELETE);
@@ -468,7 +478,7 @@ public class ECMS_SE_FileManagementView_Actions_OtherActions extends PlatformBas
 		/*Step 2: Lock both of parent and child nodes*/		
 		//Click on triangle icon beside a document/ folder
 		info("-- Click on triangle icon beside a document/ folder --");
-		click(By.xpath(siteExp.ELEMENT_ARROW_RIGHT.replace("${nodeName}", parentFolder)));
+		click(By.xpath(siteExp.ELEMENT_ARROW_RIGHT_41.replace("${nodeName}", parentFolder)),2);
 		waitForAndGetElement(ecms.ELEMENT_NODE_ADMIN_VIEW.replace("${nodeName}", childDocument));
 
 		//From action bar, choose [Lock]
@@ -484,7 +494,7 @@ public class ECMS_SE_FileManagementView_Actions_OtherActions extends PlatformBas
 		info("-- clear data --");
 		//Click  again on arrow beside that document/ folder
 		info("-- Click  again on arrow beside that document/ folder --");
-		click(By.xpath(siteExp.ELEMENT_ARROW_DOWN.replace("${nodeName}", parentFolder)));
+		//	click(By.xpath(siteExp.ELEMENT_ARROW_DOWN.replace("${nodeName}", parentFolder)),2);
 
 		info("-- Delete both of parent and child nodes --");
 		actBar.actionsOnElement(parentFolder, actionType.DELETE);
@@ -578,7 +588,8 @@ public class ECMS_SE_FileManagementView_Actions_OtherActions extends PlatformBas
 		/*Step 2: Create symlink for parent and child nodes*/		
 		//Click on triangle icon beside a document/ folder
 		info("-- Click on triangle icon beside a document/ folder --");
-		click(By.xpath(siteExp.ELEMENT_ARROW_RIGHT.replace("${nodeName}", parentFolder)));
+		click(By.xpath(siteExp.ELEMENT_ARROW_RIGHT_41.replace("${nodeName}", parentFolder)),2);
+		click(By.xpath(siteExp.ELEMENT_ARROW_RIGHT.replace("${nodeName}", parentFolder)),2);
 		waitForAndGetElement(ecms.ELEMENT_NODE_ADMIN_VIEW.replace("${nodeName}", childDocument));
 
 		//Check on checkboxes at the right of child and parent nodes to select them
@@ -600,7 +611,7 @@ public class ECMS_SE_FileManagementView_Actions_OtherActions extends PlatformBas
 		//clear data 
 		//Click  again on arrow beside that document/ folder
 		info("-- Click  again on arrow beside that document/ folder --");
-		click(By.xpath(siteExp.ELEMENT_ARROW_DOWN.replace("${nodeName}", parentFolder)));
+		//		click(By.xpath(siteExp.ELEMENT_ARROW_DOWN.replace("${nodeName}", parentFolder)));
 
 		info("-- Delete both of parent and child nodes --");
 		actBar.actionsOnElement(parentFolder, actionType.DELETE);
@@ -668,8 +679,10 @@ public class ECMS_SE_FileManagementView_Actions_OtherActions extends PlatformBas
 		/*Step 2: Copy paste both of parent and child nodes*/		
 		//Click on triangle icon beside a document/ folder
 		info("-- Click on triangle icon beside a document/ folder --");
-		click(By.xpath(siteExp.ELEMENT_ARROW_RIGHT.replace("${nodeName}", sourceFolder)));
-		click(By.xpath(siteExp.ELEMENT_ARROW_RIGHT.replace("${nodeName}", parentFolder)));
+		click(By.xpath(siteExp.ELEMENT_ARROW_RIGHT_41.replace("${nodeName}", sourceFolder)),2);
+		click(By.xpath(siteExp.ELEMENT_ARROW_RIGHT.replace("${nodeName}", sourceFolder)),2);
+		click(By.xpath(siteExp.ELEMENT_ARROW_RIGHT_41.replace("${nodeName}", parentFolder)),2);
+		click(By.xpath(siteExp.ELEMENT_ARROW_RIGHT.replace("${nodeName}", parentFolder)),2);
 		waitForAndGetElement(ecms.ELEMENT_NODE_ADMIN_VIEW.replace("${nodeName}", childDocument));
 		waitForAndGetElement(ecms.ELEMENT_NODE_ADMIN_VIEW.replace("${nodeName}", parentFolder));
 
@@ -686,21 +699,20 @@ public class ECMS_SE_FileManagementView_Actions_OtherActions extends PlatformBas
 		//Choose target folder
 		info("-- Choose the target folder --");
 		waitForAndGetElement(ecms.ELEMENT_NODE_ADMIN_VIEW.replace("${nodeName}", targetFolder));
-		click(By.xpath(siteExp.ELEMENT_SELECT_CHECKBOX.replace("${name}", targetFolder)),2);
+		click(By.xpath("//*[@class='rowView fileViewRowView Normal clearfix' and contains(., 'targetfolder09')]"));
 		Utils.pause(2000);
 
 		//Click on [Paste] from the action bar 
 		info("-- Click on [Paste] from the action bar  --");
 		waitForAndGetElement(ELEMENT_PASTE_NODE);
 		click(ELEMENT_PASTE_NODE);
-
+		Utils.pause(2000);
 		//In the target folder, the parent and child nodes are shown
 		//Go to target folder
 		actBar.goToNodeByAddressPath("/"+targetFolder);
 		Utils.pause(2000);
-		if (waitForAndGetElement(By.xpath(siteExp.ELEMENT_ARROW_RIGHT.replace("${nodeName}", parentFolder)), 3000, 0) != null){
-			click(By.xpath(siteExp.ELEMENT_ARROW_RIGHT.replace("${nodeName}", parentFolder)));
-		}
+		click(By.xpath(siteExp.ELEMENT_ARROW_RIGHT_41.replace("${nodeName}", parentFolder)),2);
+		click(By.xpath(siteExp.ELEMENT_ARROW_RIGHT.replace("${nodeName}", parentFolder)),2);
 		info("-- the parent and child nodes are shown in target folder --");
 		waitForAndGetElement(ecms.ELEMENT_NODE_ADMIN_VIEW.replace("${nodeName}", childDocument));
 		waitForAndGetElement(ecms.ELEMENT_NODE_ADMIN_VIEW.replace("${nodeName}", parentFolder));
@@ -710,7 +722,8 @@ public class ECMS_SE_FileManagementView_Actions_OtherActions extends PlatformBas
 		actBar.goToNodeByAddressPath("/"+sourceFolder);
 		Utils.pause(2000);
 		if (waitForAndGetElement(By.xpath(siteExp.ELEMENT_ARROW_RIGHT.replace("${nodeName}", parentFolder)), 3000, 0) != null){
-			click(By.xpath(siteExp.ELEMENT_ARROW_RIGHT.replace("${nodeName}", parentFolder)));
+			click(By.xpath(siteExp.ELEMENT_ARROW_RIGHT_41.replace("${nodeName}", parentFolder)),2);
+			click(By.xpath(siteExp.ELEMENT_ARROW_RIGHT.replace("${nodeName}", parentFolder)),2);
 		}
 		info("-- the parent and child nodes are shown in source folder--");
 		waitForAndGetElement(ecms.ELEMENT_NODE_ADMIN_VIEW.replace("${nodeName}", childDocument));
@@ -784,8 +797,10 @@ public class ECMS_SE_FileManagementView_Actions_OtherActions extends PlatformBas
 		/*Step 2: Cut paste both of parent and child nodes*/		
 		//Click on triangle icon beside a document/ folder
 		info("-- Click on triangle icon beside a document/ folder --");
-		click(By.xpath(siteExp.ELEMENT_ARROW_RIGHT.replace("${nodeName}", sourceFolder)));
-		click(By.xpath(siteExp.ELEMENT_ARROW_RIGHT.replace("${nodeName}", parentFolder)));
+		click(By.xpath(siteExp.ELEMENT_ARROW_RIGHT_41.replace("${nodeName}", sourceFolder)),2);
+		click(By.xpath(siteExp.ELEMENT_ARROW_RIGHT.replace("${nodeName}", sourceFolder)),2);
+		click(By.xpath(siteExp.ELEMENT_ARROW_RIGHT_41.replace("${nodeName}", parentFolder)),2);
+		click(By.xpath(siteExp.ELEMENT_ARROW_RIGHT.replace("${nodeName}", parentFolder)),2);
 		waitForAndGetElement(ecms.ELEMENT_NODE_ADMIN_VIEW.replace("${nodeName}", parentFolder));
 		waitForAndGetElement(ecms.ELEMENT_NODE_ADMIN_VIEW.replace("${nodeName}", childDocument));
 
@@ -802,21 +817,20 @@ public class ECMS_SE_FileManagementView_Actions_OtherActions extends PlatformBas
 		//Choose target folder
 		info("-- Choose the target folder --");
 		waitForAndGetElement(ecms.ELEMENT_NODE_ADMIN_VIEW.replace("${nodeName}", targetFolder));
-		click(By.xpath(siteExp.ELEMENT_SELECT_CHECKBOX.replace("${name}", targetFolder)), 2);
+		click(By.xpath("//*[@class='rowView fileViewRowView Normal clearfix' and contains(., 'targetfolder10')]"));
 		Utils.pause(2000);
 
 		//Click on [Paste] from the action bar 
 		info("-- Click on [Paste] from the action bar  --");
 		waitForAndGetElement(ELEMENT_PASTE_NODE);
 		click(ELEMENT_PASTE_NODE);
-
+		Utils.pause(2000);
 		//In the target folder, the parent and child nodes are shown
 		//Go to target folder
 		actBar.goToNodeByAddressPath("/"+targetFolder);
 		Utils.pause(2000);
-		if (waitForAndGetElement(By.xpath(siteExp.ELEMENT_ARROW_RIGHT.replace("${nodeName}", parentFolder)), 3000, 0) != null){
-			click(By.xpath(siteExp.ELEMENT_ARROW_RIGHT.replace("${nodeName}", parentFolder)));
-		}
+		click(By.xpath(siteExp.ELEMENT_ARROW_RIGHT_41.replace("${nodeName}", parentFolder)),2);
+		click(By.xpath(siteExp.ELEMENT_ARROW_RIGHT.replace("${nodeName}", parentFolder)),2);
 		info("-- the parent and child nodes are shown in target folder --");
 		waitForAndGetElement(ecms.ELEMENT_NODE_ADMIN_VIEW.replace("${nodeName}", childDocument));
 		waitForAndGetElement(ecms.ELEMENT_NODE_ADMIN_VIEW.replace("${nodeName}", parentFolder));
@@ -826,7 +840,8 @@ public class ECMS_SE_FileManagementView_Actions_OtherActions extends PlatformBas
 		actBar.goToNodeByAddressPath("/"+sourceFolder);
 		Utils.pause(2000);
 		if (waitForAndGetElement(By.xpath(siteExp.ELEMENT_ARROW_RIGHT.replace("${nodeName}", parentFolder)), 3000, 0) != null){
-			click(By.xpath(siteExp.ELEMENT_ARROW_RIGHT.replace("${nodeName}", parentFolder)));
+			click(By.xpath(siteExp.ELEMENT_ARROW_RIGHT_41.replace("${nodeName}", parentFolder)),2);
+			click(By.xpath(siteExp.ELEMENT_ARROW_RIGHT.replace("${nodeName}", parentFolder)),2);
 		}
 		info("-- the parent and child nodes are shown in source folder--");
 		waitForElementNotPresent(ecms.ELEMENT_NODE_ADMIN_VIEW.replace("${nodeName}", childDocument));
@@ -877,7 +892,7 @@ public class ECMS_SE_FileManagementView_Actions_OtherActions extends PlatformBas
 		check(By.xpath(siteExp.ELEMENT_SELECT_CHECKBOX.replace("${name}", folder1)), 2);
 		WebElement thisElement = driver.findElement(By.xpath(siteExp.ELEMENT_SELECT_CHECKBOX.replace("${name}", folder1)));
 		assert (thisElement.isSelected());
-		check(By.xpath(siteExp.ELEMENT_SELECT_CHECKBOX.replace("${name}", folder2)), 2);
+		click(By.xpath("//*[@class='rowView fileViewRowView Normal clearfix' and contains(., 'test11_ClearSelection_2')]"));
 		thisElement = driver.findElement(By.xpath(siteExp.ELEMENT_SELECT_CHECKBOX.replace("${name}", folder2)));
 		assert (thisElement.isSelected());
 
@@ -981,7 +996,7 @@ public class ECMS_SE_FileManagementView_Actions_OtherActions extends PlatformBas
 		actBar.goToAddNewContent();
 		click(By.xpath("//*[@class='templateLabel']//*[text()='Web Link']"));
 		cTemplate.createNewLink(targetNode, targetNode);
-
+		Utils.pause(2000);
 		info("-- Select target node --");
 		actBar.goToNodeByAddressPath("/"+targetNode);
 

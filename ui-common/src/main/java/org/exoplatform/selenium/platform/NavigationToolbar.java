@@ -38,6 +38,8 @@ public class NavigationToolbar extends PlatformBase {
 	//Go to portal sites
 	public void goToPortalBranding() {
 		info("--Go to Portal Branding Management--");
+		if (baseUrl==null) baseUrl = DEFAULT_BASEURL;
+		info("Base url is " + baseUrl);
 		String url = baseUrl + "/g/:platform:administrators/branding";
 		for(int repeat=0;; repeat ++){
 			if (repeat > 1){
@@ -65,6 +67,8 @@ public class NavigationToolbar extends PlatformBase {
 	//Go to portal sites
 	public void goToPortalSites() {
 		info("--Go to Portal Site Management--");
+		if (baseUrl==null) baseUrl = DEFAULT_BASEURL;
+		info("Base url is " + baseUrl);
 		String url = baseUrl + "/g/:platform:administrators/portalnavigation";
 		for(int repeat=0;; repeat ++){
 			if (repeat > 1){
@@ -88,6 +92,8 @@ public class NavigationToolbar extends PlatformBase {
 	//Go to Portal Manage Pages	
 	public void goToManagePages() {
 		info("--Go to Page Management--");
+		if (baseUrl==null) baseUrl = DEFAULT_BASEURL;
+		info("Base url is " + baseUrl);
 		String url = baseUrl + "/g/:platform:administrators/administration/pageManagement";
 		for(int repeat=0;; repeat ++){
 			if (repeat > 1){
@@ -168,6 +174,8 @@ public class NavigationToolbar extends PlatformBase {
 	//Go to Portal/Group Sites
 	public void goToGroupSites(){
 		info("--Go to Group Site Management--");
+		if (baseUrl==null) baseUrl = DEFAULT_BASEURL;
+		info("Base url is " + baseUrl);
 		String url = baseUrl + "/g/:platform:administrators/groupnavigation";
 		//driver.get(url);
 		Utils.pause(1000);
@@ -191,6 +199,8 @@ public class NavigationToolbar extends PlatformBase {
 
 	//Go to Portal/Sites
 	public void goToSites(){
+		if (baseUrl==null) baseUrl = DEFAULT_BASEURL;
+		info("Base url is " + baseUrl);
 		info("--Go to Sites --");
 		String url = baseUrl + "/g/:platform:administrators/portalnavigation";
 		//driver.get(url);
@@ -274,6 +284,8 @@ public class NavigationToolbar extends PlatformBase {
 	// Go to content administration
 	public void goToContentAdministration()
 	{
+		if (baseUrl==null) baseUrl = DEFAULT_BASEURL;
+		info("Base url is " + baseUrl);
 		String url = baseUrl + "/g/:platform:web-contributors/wcmAdmin";
 		info("base url of content admin is " + baseUrl);
 		for(int repeat=0;; repeat ++){
@@ -321,6 +333,8 @@ public class NavigationToolbar extends PlatformBase {
 	//Enter Search Form  (Administration > Content > Search menu)
 	public void goToSearch()
 	{
+		if (baseUrl==null) baseUrl = DEFAULT_BASEURL;
+		info("Base url is " + baseUrl);
 		String url = baseUrl + "/g/:platform:administrators/search";
 		for(int repeat=0;; repeat ++){
 			if (repeat > 1){
