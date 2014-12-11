@@ -1266,10 +1266,9 @@ public class PlatformBase extends TestBase {
 
 				if (validate.length >0)
 					if (validate[0]){
-						inputsummary.clear();
-						inputsummary.sendKeys(data);
-						//						((JavascriptExecutor) driver).executeScript("document.body.innerHTML='" + data + "'");
-						if (inputsummary.getText().contains(data)) break;
+						((JavascriptExecutor) driver).executeScript("document.body.innerHTML='" + data + "'");
+						if (inputsummary.getText().contains(data))
+							break;
 					}
 					else{
 						inputsummary.sendKeys(data);
@@ -1279,7 +1278,8 @@ public class PlatformBase extends TestBase {
 				else {
 
 					((JavascriptExecutor) driver).executeScript("document.body.innerHTML='" + data + "' + document.body.innerHTML;");
-					if (inputsummary.getText().contains(data)) break;
+					if (inputsummary.getText().contains(data)) 
+						break;
 				}
 
 				switchToParentWindow();
@@ -1305,6 +1305,48 @@ public class PlatformBase extends TestBase {
 		}
 	}
 
+	/*
+	 *Function to add data to CKEditor 
+	 */
+	public void inputDataToCKEditor(By framelocator, String data, boolean...validate){
+		try {
+			WebElement inputsummary = null;
+
+				WebElement e = waitForAndGetElement(framelocator,DEFAULT_TIMEOUT,1,2);
+				driver.switchTo().frame(e);
+				inputsummary = driver.switchTo().activeElement();
+				inputsummary.click();
+				inputsummary.clear();
+
+				if (validate.length >0)
+					if (validate[0]){
+						((JavascriptExecutor) driver).executeScript("document.body.innerHTML='" + data + "'");
+					}
+					else{
+						((JavascriptExecutor) driver).executeScript("document.body.innerHTML='" + data + "' + document.body.innerHTML;");
+					}
+				else {
+					((JavascriptExecutor) driver).executeScript("document.body.innerHTML='" + data + "' + document.body.innerHTML;");
+				}
+
+				switchToParentWindow();
+		} catch (StaleElementReferenceException e) {
+			checkCycling(e, DEFAULT_TIMEOUT/WAIT_INTERVAL);
+			Utils.pause(WAIT_INTERVAL);
+			driver.switchTo().defaultContent();
+			inputDataToFrame (framelocator, data,validate);
+		} catch (ElementNotVisibleException e) {
+			checkCycling(e, DEFAULT_TIMEOUT/WAIT_INTERVAL);
+			Utils.pause(WAIT_INTERVAL);
+			driver.switchTo().defaultContent();
+			inputDataToFrame (framelocator,data,validate);
+		}catch (WebDriverException e) {
+			checkCycling(e, DEFAULT_TIMEOUT/WAIT_INTERVAL);
+			Utils.pause(WAIT_INTERVAL);
+			driver.switchTo().defaultContent();
+			inputDataToFrame (framelocator,data,validate);
+		}
+	}
 	// Select option from combo box
 	public void selectOption(Object locator, String option) {
 		try {

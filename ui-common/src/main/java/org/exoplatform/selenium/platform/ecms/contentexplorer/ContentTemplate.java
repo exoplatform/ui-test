@@ -46,13 +46,14 @@ public class ContentTemplate extends EcmsBase {
 
 	//WebContent
 	public final By ELEMENT_WEBCONTENT_LINK = By.xpath("//*[@class='templateLabel']//*[text()='Web Content']");
+
 	public final String ELEMENT_WEBCONTENT_CONTENT_NAME = ".//*[@ data-original-title='${nameContent}']";
 	public final String ELEMENT_WEBCONTENT_CONTENT_NAME_DOCUMENT_VIEW=".//*[@id='UITabContent']//*[contains(text(),'${content}')]";
 
 	//public final By ELEMENT_WEBCONTENT_TITLE_TEXTBOX = By.id("title");	
 	public final By ELEMENT_WEBCONTENT_NAME_TEXTBOX = By.id("name");	
-	public final By ELEMENT_WEBCONTENT_CONTENT_FRAME = By.xpath("//td[contains(@id,'cke_contents_htmlData')]/iframe");
-	public final By ELEMENT_WEBCONTENT_CONTENT_FRAME_41 = By.xpath("//*[@class='cke_contents cke_reset']/iframe");
+	public final By ELEMENT_WEBCONTENT_CONTENT_FRAME = By.xpath("//*[contains(@id,'cke_contents_htmlData')]/iframe");
+	public final By ELEMENT_WEBCONTENT_CONTENT_FRAME_41 = By.xpath("//*[@id= 'cke_1_contents']//iframe");
 	public final By ELEMENT_WEBCONTENT_ADD_CONTENT_LINK = By.xpath("//*[@title='Insert Content Link']");
 	public final By ELEMENT_WEBCONTENT_ILLUSTRATION_TAB = By.xpath("//*[contains(text(),'Illustration')]");
 	public final By ELEMENT_WEBCONTENT_UPLOAD_FRAME = By.xpath("//*[contains(@name,'uploadIFrame')]");
@@ -64,7 +65,7 @@ public class ContentTemplate extends EcmsBase {
 	public final By ELEMENT_WEBCONTENT_JS_TEXTAREA = By.xpath("//textarea[contains(@id,'ContentJS')]");
 	public final By ELEMENT_MAXIMIZE_ICON = By.xpath("//*[contains(@class, 'uiIconEcmsExpand')]");
 	public final By ELEMENT_MINIMIZE_ICON = By.xpath("//*[contains(@class, 'uiIconEcmsCollapse')]");
-	public final By ELEMENT_CHANGE_CONTENT_TYPE = By.xpath("//*[contains(@class, 'ChangeTypeLink')]");
+	public final By ELEMENT_CHANGE_CONTENT_TYPE = By.xpath("//*[contains(@class, 'changeTypeLink')]");
 
 	//Accessible Media
 	public final By ELEMENT_ACCESSIBLEMEDIA_LINK = By.xpath("//*[@class='templateLabel']//*[text()='Accessible Media']");
@@ -131,7 +132,8 @@ public class ContentTemplate extends EcmsBase {
 	public final By ELEMENT_NEWFILE_NAME_TEXTBOX = By.id("name");
 
 	public final By ELEMENT_NEWFILE_CONTENT_FRAME = By
-			.xpath("//*[@id='cke_1_contents']/iframe");
+			.xpath("//*[@id='cke_1_contents']//iframe");
+
 	public final By ELEMENT_NEWFILE_CONTENT_FRAME_41 = By
 			.xpath("//*[@id='cke_contentHtml']//iframe");
 	public final By ELEMENT_NEWFILE_TITLE_TEXTBOX = By.id("title0");
@@ -142,13 +144,20 @@ public class ContentTemplate extends EcmsBase {
 	public final By ELEMENT_NEWFILE_SOURCE_LINK_XPATH = By
 			.xpath("//*[@title='Source']");
 	public final By ELEMENT_NEWFILE_SOURCE_TEXTAREA_XPATH = By
-			.xpath("//textarea[@class='cke_source cke_enable_context_menu']");
+			.xpath("//div[@id='cke_1_contents']/textarea");
 	public final By ELEMENT_NEWFILE_FRAME_HTML_TAB_XPATH = By
 			.xpath("//iframe[@class='ECMIframe']");
 	public final By ELEMENT_NEWFILE_HTML_TAB_P_XPATH = By
 			.xpath("//html/body/p");
+	public final By ELEMENT_NEWFILE_HTML_TAB_B_XPATH = By
+			.xpath("//html/body/b");
+	public final By ELEMENT_NEWFILE_HTML_TAB_B_XPATH_2 = By
+			.xpath("html/body/p/b");
+	//public final By ELEMENT_NEWFILE_TEXT_TAB_XPATH = By
+	//		.xpath("//*[contains(text(),'View as Plain text')]");
 	public final By ELEMENT_NEWFILE_TEXT_TAB_XPATH = By
-			.xpath("//*[contains(text(),'View as Plain text')]");
+			.xpath("//a[contains(text(),'View as Plain text')]");
+	
 	public final String ELEMENT_NEWFILE_TEXT_TAB_P_CSS = ".textContent>pre";
 	public final By ELEMENT_NEWFILE_MIME_COMBOX_ID = By.name("mimetype");
 	public final By ELEMENT_NEWFILE_TEXTAREA_ID = By.id("contentHtml");
@@ -307,7 +316,7 @@ public class ContentTemplate extends EcmsBase {
 	}
 
 	// add new Free layout webcontent
-	public void createNewWebContent(String name, String cont, String img,
+	public void createNewWebContent	(String name, String cont, String img,
 			String sum, String css, String js, Object... params) {
 		boolean lines = (Boolean) (params.length > 0 ? params[0] : false);
 		String optionLang = (String) (params.length > 1 ? params[1] : "");
@@ -338,6 +347,7 @@ public class ContentTemplate extends EcmsBase {
 				inputDataToFrame(frame, cont,true);
 			}
 			switchToParentWindow();
+						
 			/*if (this.plfVersion.equalsIgnoreCase("4.1"))
 				inputDataToFrame(ELEMENT_WEBCONTENT_CONTENT_FRAME_41, cont,
 						true);
