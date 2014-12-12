@@ -25,7 +25,7 @@ import org.testng.annotations.Test;
  * 
  * @author vuna2
  * July, 16th, 2013
- * 
+ * updated by anhpp
  */
 public class ECMS_SE_CreateNode_Folder extends PlatformBase{
 	//Platform
@@ -69,7 +69,7 @@ public class ECMS_SE_CreateNode_Folder extends PlatformBase{
 	}
 
 	/**
-	 * Qmetry ID: 67341
+	 * Qmetry ID: 102185
 	 * Check if a normal user can add folder in a node locked by another user
 	 *  
 	 */
@@ -111,9 +111,9 @@ public class ECMS_SE_CreateNode_Folder extends PlatformBase{
 	}
 
 	/**
-	 * Qmetry ID: 67342
+	 * Qmetry ID: 102186
 	 * Add folder in a node of which parent is in 'Check in' status
-	 *  
+	 * updated by anhpp 
 	 */
 	@Test
 	public void test02_AddFolderInANodeOfWhichParentIsInCheckInStatus(){
@@ -167,11 +167,11 @@ public class ECMS_SE_CreateNode_Folder extends PlatformBase{
 	}
 
 	/**
-	 * Qmetry ID: 67343
+	 * Qmetry ID: 102187
 	 * Add folder in a node with 'Check in' status
 	 *  
 	 */
-	@Test
+	@Test  
 	public void test03_AddFolderInANodeWithCheckInStatus(){
 		String CONTENT_FOLDER_TITLE = "ECMS_SE_Folder_ContentFolder_03";
 
@@ -190,9 +190,9 @@ public class ECMS_SE_CreateNode_Folder extends PlatformBase{
 		cMenu.contextMenuAction(By.linkText(CONTENT_FOLDER_TITLE), cMenu.ELEMENT_MENU_CHECKOUT);
 		cMenu.deleteDocument(By.linkText(CONTENT_FOLDER_TITLE));
 	}
-
+	
 	/**
-	 * Qmetry ID: 67344
+	 * Qmetry ID: 102188
 	 * Add folder when do not input data in [Name] field
 	 *  
 	 */
@@ -214,23 +214,12 @@ public class ECMS_SE_CreateNode_Folder extends PlatformBase{
 	}
 
 	/**
-	 * Qmetry ID: 67345
-	 * Add folder when do not input data in [Title] field
-	 * => Refer the case: Qmetry ID (67344) 
-	 */
-	//@Test
-//	REMOVED
-//	public void test05_AddFolderWhenDoNotInputDataInTitleField(){
-//
-//	}
-
-	/**
-	 * Qmetry ID: 67346
+	 * Qmetry ID: 102189
 	 * Add folder when user does not have permission to add node
 	 * 
 	 */
 	@Test
-	public void test06_AddFolderWhenUserDoesNotHavePermissionToAddNode(){
+	public void test05_AddFolderWhenUserDoesNotHavePermissionToAddNode(){
 		String CONTENT_FOLDER_TITLE = "ECMS_SE_Folder_ContentFolder_06";
 
 		info("Create a content folder and set a permission for users");
@@ -262,12 +251,12 @@ public class ECMS_SE_CreateNode_Folder extends PlatformBase{
 	}
 
 	/**
-	 * Qmetry ID: 67347
+	 * Qmetry ID: 102190
 	 * Add folder with special characters in 'Name' field like !,@,#
-	 * PENDING: Refer https://jira.exoplatform.org/browse/ECMS-5954
+	 * Refer https://jira.exoplatform.org/browse/ECMS-5954
 	 */
-	@Test (groups="pending")
-	public void test07_AddFolderWithSpecialCharactersInNameField(){
+	@Test 
+	public void test06_AddFolderWithSpecialCharactersInNameField(){
 		String cTitle = "ECMS_SE_ContentFolder_07";
 		String dTitle = "ECMS_SE_DocumentFolder_07";
 		String CONTENT_FOLDER_TITLE = cTemplate.DATA_SPECIAL_CHARACTER_STRING + cTitle;
@@ -294,12 +283,12 @@ public class ECMS_SE_CreateNode_Folder extends PlatformBase{
 	}
 
 	/**
-	 * Qmetry ID: 67494
+	 * Qmetry ID: 102203
 	 * Add a folder in root path
 	 * 
 	 */
 	@Test
-	public void test08_AddAFolderInRootPath(){
+	public void test07_AddAFolderInRootPath(){
 		String CONTENT_FOLDER_TITLE = "ECMS_SE_Folder_ContentFolder_08";
 
 		info("Add a folder in root path");
@@ -311,12 +300,12 @@ public class ECMS_SE_CreateNode_Folder extends PlatformBase{
 	}
 
 	/**
-	 * Qmetry ID: 67562
+	 * Qmetry ID: 102205
 	 * Add Content folder in a locked Document folder by locker
 	 * 
 	 */
 	@Test
-	public void test09_AddContentFolderInALockedDocumentFolderByLocker(){
+	public void test08_AddContentFolderInALockedDocumentFolderByLocker(){
 		String DOCUMENT_FOLDER_TITLE = "ECMS_SE_Folder_DocumentFolder_09";
 
 		info("Add a folder in root path and lock this node");
@@ -336,12 +325,12 @@ public class ECMS_SE_CreateNode_Folder extends PlatformBase{
 	}
 
 	/**
-	 * Qmetry ID: 67566
+	 * Qmetry ID: 102207
 	 * Add Document folder in a locked Document folder by locker
 	 * 
 	 */
 	@Test
-	public void test10_AddDocumentFolderInALockedDocumentFolderByLocker(){
+	public void test09_AddDocumentFolderInALockedDocumentFolderByLocker(){
 		String DOCUMENT_FOLDER_TITLE = "ECMS_SE_Folder_DocumentFolder_10";
 		String DOCUMENT_SUB_FOLDER_TITLE = "ECMS_SE_Folder_DocumentSubFolder_10";
 
@@ -364,12 +353,12 @@ public class ECMS_SE_CreateNode_Folder extends PlatformBase{
 	}
 
 	/**
-	 * Qmetry ID: 67568
+	 * Qmetry ID: 102209
 	 * Add Content folder in another Content folder
 	 * 
 	 */
 	@Test
-	public void test11_AddContentFolderInAnotherContentFolder(){
+	public void test10_AddContentFolderInAnotherContentFolder(){
 		String CONTENT_FOLDER_TITLE = "ECMS_SE_Folder_ContentFolder_11";
 		String CONTENT_SUB_FOLDER_TITLE = "ECMS_SE_Folder_ContentSubFolder_11";
 
@@ -387,12 +376,12 @@ public class ECMS_SE_CreateNode_Folder extends PlatformBase{
 	}
 
 	/**
-	 * Qmetry ID: 67569
+	 * Qmetry ID: 102210
 	 * Add Document folder in another Document folder
 	 * 
 	 */
 	@Test
-	public void test12_AddDocumentFolderInAnotherDocumentFolder(){
+	public void test11_AddDocumentFolderInAnotherDocumentFolder(){
 		String DOCUMENT_FOLDER_TITLE = "ECMS_SE_Folder_DocumentFolder_12";
 		String DOCUMENT_SUB_FOLDER_TITLE = "ECMS_SE_Folder_DocumentSubFolder_12";
 
@@ -410,12 +399,12 @@ public class ECMS_SE_CreateNode_Folder extends PlatformBase{
 	}
 
 	/**
-	 * Qmetry ID: 67572
+	 * Qmetry ID: 102211
 	 * Add Document folder in Content folder
 	 * 
 	 */
 	@Test
-	public void test13_AddDocumentFolderInContentFolder(){
+	public void test12_AddDocumentFolderInContentFolder(){
 		String CONTENT_FOLDER_TITLE = "ECMS_SE_Folder_ContentFolder_13";
 		String DOCUMENT_FOLDER_TITLE = "ECMS_SE_Folder_DocumentFolder_13";
 
@@ -435,12 +424,12 @@ public class ECMS_SE_CreateNode_Folder extends PlatformBase{
 	}
 
 	/**
-	 * Qmetry ID: 67573
+	 * Qmetry ID: 102212
 	 * Add Content folder in Document folder
 	 * 
 	 */
 	@Test
-	public void test14_AddContentFolderInDocumentFolder(){
+	public void test13_AddContentFolderInDocumentFolder(){
 		String DOCUMENT_FOLDER_TITLE = "ECMS_SE_Folder_DocumentFolder_14";
 
 		info("Create Document folder at root path");
@@ -460,7 +449,7 @@ public class ECMS_SE_CreateNode_Folder extends PlatformBase{
 	}
 
 	/**
-	 * Qmetry ID: 74468
+	 * Qmetry ID: 102294
 	 * Creates a Document folder if not specified
 	 * Pre-condition:
 	 * A drive allows creation of all folder types.
@@ -470,7 +459,7 @@ public class ECMS_SE_CreateNode_Folder extends PlatformBase{
        - On field "Allow Folder Creation", select types, save
 	 */
 	@Test
-	public void test15_CreatesDocumentFolderIfNotSpecified(){
+	public void test14_CreatesDocumentFolderIfNotSpecified(){
 		String FOLDER_TITLE = "ECMS_SE_Folder_15";
 
 		info("Step1: Go to [intranet/documents] and Open form [Add new folder]");
@@ -490,12 +479,12 @@ public class ECMS_SE_CreateNode_Folder extends PlatformBase{
 	}
 
 	/**
-	 * Qmetry ID: 74469
+	 * Qmetry ID: 102295
 	 * List of folder types is defined in drive configuration
 	 * 
 	 */
 	@Test
-	public void test16_ListFolderTypesIsDefinedInDriveConfiguration(){
+	public void test15_ListFolderTypesIsDefinedInDriveConfiguration(){
 		String drive = "Managed Sites";
 		String typeFolder = "Content Folder/CSS Folder/Document Folder/Link Folder/Web Content Folder";
 
@@ -527,12 +516,12 @@ public class ECMS_SE_CreateNode_Folder extends PlatformBase{
 	}
 
 	/**
-	 * Qmetry ID: 74470
+	 * Qmetry ID: 102296
 	 * List of folder types is determined based on the nodetype restrictions
 	 * 
 	 */
 	@Test
-	public void test17_ListOfFolderTypesIsDeterminedBasedOnTheNodeTypeRestrictions(){
+	public void test16_ListOfFolderTypesIsDeterminedBasedOnTheNodeTypeRestrictions(){
 		String DOCUMENT_FOLDER_TITLE = "ECMS_SE_Folder_17";
 
 		info("Go to Shared folder");
@@ -557,12 +546,12 @@ public class ECMS_SE_CreateNode_Folder extends PlatformBase{
 	}
 
 	/**
-	 * Qmetry ID: 74471
+	 * Qmetry ID: 102297
 	 * Created a folder which is one of type: Content, Css, Link Folder...
 	 * 
 	 */
 	@Test
-	public void test18_CreatedFolderIsOfTheSelectedType(){
+	public void test17_CreatedFolderIsOfTheSelectedType(){
 		String CSS_FOLDER_TITLE = "ECMS_SE_CSS_Folder_18";
 
 		info("Create a new folder using [Css Folder] type");
@@ -580,31 +569,12 @@ public class ECMS_SE_CreateNode_Folder extends PlatformBase{
 	}
 
 	/**
-	 * Qmetry ID: 74472
-	 * Clicking on Cancel button closes the dialog without creating the folder
-	 * 
-	 */
-	@Test
-	public void test19_ClickingOnCancelButtonClosesTheDialogWithoutCreatingTheFolder(){
-		String FOLDER_TITLE = "ECMS_SE_Folder_19";
-
-		info("Step 1: Open a form [New Folder]");
-		navToolBar.goToSiteExplorer();
-		actBar.goToAddNewFolder();
-
-		info("Step 2: Click on [Cancel] button");		
-		type(ecms.ELEMENT_FOLDER_TITLE_TEXTBOX, FOLDER_TITLE, false);
-		button.cancel();
-		waitForElementNotPresent(By.xpath(cTemplate.ELEMENT_VERIFY_FILE_CONTENT.replace("${content}", FOLDER_TITLE)));
-	}
-
-	/**
-	 * Qmetry ID: 74477
+	 * Qmetry ID: 102299
 	 * UI check dialog when multiple folder types are allowed
 	 * 
 	 */
 	@Test
-	public void test20_UICheckDialogWhenMultipleFolderTypesAreAllowed(){
+	public void test18_UICheckDialogWhenMultipleFolderTypesAreAllowed(){
 		info("Check UI  dialog when multiple folder types are allowed");
 		navToolBar.goToSiteExplorer();
 		actBar.goToAddNewFolder();
@@ -630,12 +600,12 @@ public class ECMS_SE_CreateNode_Folder extends PlatformBase{
 	}
 
 	/**
-	 * Qmetry ID: 74478
+	 * Qmetry ID: 102300
 	 * UI check dialog with only one folder type allowed
 	 * 
 	 */
 	@Test
-	public void test21_UICheckDialogWithOnlyOneFolderTypeAllowed(){
+	public void test19_UICheckDialogWithOnlyOneFolderTypeAllowed(){
 		String drive = "Managed Sites";
 		String typeFolder = "Content Folder";
 
@@ -661,12 +631,12 @@ public class ECMS_SE_CreateNode_Folder extends PlatformBase{
 	} 
 
 	/**
-	 * Qmetry ID: 75141
+	 * Qmetry ID: 102322
 	 * Add Document folder in a locked Content folder by locker
 	 * 
 	 */
 	@Test
-	public void test22_AddDocumentFolderInALockedContentFolderByLocker(){
+	public void test20_AddDocumentFolderInALockedContentFolderByLocker(){
 		String DOCUMENT_FOLDER_TITLE = "ECMS_SE_DocumentFolder_22";
 		String CONTENT_FOLDER_TITLE = "ECMS_SE_ContentFolder_22";
 		String drive = "Managed Sites";
@@ -702,13 +672,12 @@ public class ECMS_SE_CreateNode_Folder extends PlatformBase{
 	}
 
 	/**
-	 * Qmetry ID: 76619
-	 * Check if admin (Root) can add Folder into a node locked by another user
-	 * ========== PENDING ============ 
+	 * Qmetry ID: 102323
+	 * Admin cannot add while node is locked by another user
 	 * ========== ECMS-5483 ==========
 	 */
-	//@Test(groups = {"Error"})
-	public void test23_CheckIfAdminCanAddFolderIntoANodeLockedByAnotherUser(){
+	@Test
+	public void test21_CheckIfAdminCanAddFolderIntoANodeLockedByAnotherUser(){
 		String CONTENT_FOLDER_TITLE = "ECMS_SE_ContentFolder_23";
 		String CONTENT_SUB_FOLDER_TITLE = "ECMS_SE_ContentSubFolder_23";
 		
@@ -718,8 +687,10 @@ public class ECMS_SE_CreateNode_Folder extends PlatformBase{
 		navToolBar.goToSiteExplorer();
 		
 		cTemplate.createNewFolder(CONTENT_FOLDER_TITLE, folderType.Content);
+		
 		cMenu.contextMenuAction(By.linkText(CONTENT_FOLDER_TITLE), cMenu.ELEMENT_CONTEXT_MENU_LOCK);
 		assert cMenu.isLockedNode(By.linkText(CONTENT_FOLDER_TITLE)): "Failed to lock the node..." + CONTENT_FOLDER_TITLE;
+		driver.close();
 		
 		initSeleniumTest();
 		driver.get(baseUrl);
@@ -736,10 +707,54 @@ public class ECMS_SE_CreateNode_Folder extends PlatformBase{
 		info("Step 2: Add folder into locked node using Admin account");
 		navToolBar.goToSiteExplorer();
 		ecms.goToNode(CONTENT_FOLDER_TITLE);
-		cTemplate.createNewFolder(CONTENT_SUB_FOLDER_TITLE, folderType.Content);
-		waitForAndGetElement(cMenu.ELEMENT_FILE_TITLE_AUX.replace("${title1}", CONTENT_FOLDER_TITLE).replace("${title2}", CONTENT_SUB_FOLDER_TITLE));
+		cTemplate.createNewFolder(CONTENT_SUB_FOLDER_TITLE, folderType.Content,false);
+		
+		//pop-up opens, cannot create folder
+		waitForAndGetElement(button.ELEMENT_OK_BUTTON).click();
+		waitForAndGetElement(button.ELEMENT_CANCEL_BUTTON).click();
+		cTemplate.waitForElementNotPresent(CONTENT_SUB_FOLDER_TITLE);
+		
+		info("Logout Root");
+		magAcc.signOut();
 		
 		info("Restore data");
+		magAcc.signIn(DATA_USER2, DATA_PASS);
+		navToolBar.goToSiteExplorer();
+		cMenu.deleteDocument(By.linkText(CONTENT_FOLDER_TITLE));
+		
+	}
+	
+	/**
+	 * Qmetry ID: 102327
+	 * Add folder in a node ( not folder/nt:file) of which parent is in 'Check in' status
+	 *  
+	 **/
+	@Test
+	public void test22_AddFolderInANodeNotNTFileOfWhichParentIsInCheckInStatus(){
+		String CONTENT_FOLDER_TITLE = "ECMS_SE_Folder_ContentFolder_24";
+		String ANNOUNCE_NAME = "ECMS_SE_Folder_Announce_24";
+		String ANNOUNCE_SUM = "ECMS_SE_Folder_Announce_24";
+		String ANNOUNCE_NAME_SUB_FOLDER_TITLE = "ECMS_SE_Folder_Announce_SubFolder_24";
+		
+		info("Step 1: Create a web content and its sub-folder");
+		navToolBar.goToSiteExplorer();
+		actBar.goToAddNewContent();
+		cTemplate.createNewWebContent(CONTENT_FOLDER_TITLE, CONTENT_FOLDER_TITLE, "", "", "", "");
+		actBar.goToAddNewContent();
+		cTemplate.createNewAnnouncement(ANNOUNCE_NAME, ANNOUNCE_SUM);
+
+		info("Check In Parent Node: " + CONTENT_FOLDER_TITLE);
+		ecms.goToNode(By.linkText(CONTENT_FOLDER_TITLE));
+		cMenu.contextMenuAction(By.linkText(CONTENT_FOLDER_TITLE), cMenu.ELEMENT_MENU_CHECKIN);
+
+		info("Step 2: Check User can add sub-node into child node: folder");
+		ecms.goToNode(By.linkText(ANNOUNCE_NAME));
+		cTemplate.createNewFolder(ANNOUNCE_NAME_SUB_FOLDER_TITLE, folderType.Content);
+
+		//delete data
+		navToolBar.goToSiteExplorer();
+		cMenu.contextMenuAction(By.linkText(CONTENT_FOLDER_TITLE), cMenu.ELEMENT_MENU_CHECKOUT);
 		cMenu.deleteDocument(By.linkText(CONTENT_FOLDER_TITLE));
 	}
+
 }
