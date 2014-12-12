@@ -313,10 +313,16 @@ public class ContentTemplate extends EcmsBase {
 		By eWebContentSum;
 		
 		if (this.plfVersion.equalsIgnoreCase("4.0"))
+		{
 			eWebContentSum = ELEMENT_WEBCONTENT_SUMMARY_FRAME;
-		else
+		}
+		else{
 			eWebContentSum = ELEMENT_WEBCONTENT_SUMMARY_FRAME_41;
-		
+			}
+		/*if (this.plfVersion.equalsIgnoreCase("4.1"))
+			eWebContentSum = ELEMENT_WEBCONTENT_SUMMARY_FRAME_41;
+		else
+			eWebContentSum = ELEMENT_WEBCONTENT_SUMMARY_FRAME;*/
 		info("-- Creating a new Web Content --");
 		Utils.pause(500);
 		click(ELEMENT_WEBCONTENT_LINK);
@@ -332,12 +338,6 @@ public class ContentTemplate extends EcmsBase {
 				inputDataToFrame(frame, cont,true);
 			}
 			switchToParentWindow();
-			/*if (this.plfVersion.equalsIgnoreCase("4.1"))
-				inputDataToFrame(ELEMENT_WEBCONTENT_CONTENT_FRAME_41, cont,
-						true);
-			else
-				inputDataToFrame(ELEMENT_WEBCONTENT_CONTENT_FRAME, cont, true);
-			switchToParentWindow();*/
 		}
 		if (sum != "" || img != "") {
 			click(ELEMENT_WEBCONTENT_ILLUSTRATION_TAB);

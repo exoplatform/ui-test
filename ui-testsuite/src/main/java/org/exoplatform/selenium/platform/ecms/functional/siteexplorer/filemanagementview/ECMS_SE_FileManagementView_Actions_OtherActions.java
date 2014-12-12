@@ -104,7 +104,7 @@ public class ECMS_SE_FileManagementView_Actions_OtherActions extends PlatformBas
 		actBar.goToNodeByAddressPath("/");
 		driver.navigate().refresh();
 		Utils.pause(2000);
-		click(By.xpath(siteExp.ELEMENT_ARROW_RIGHT_41.replace("${nodeName}", parentDocument)),2);
+		click(By.xpath(siteExp.ELEMENT_ARROW_RIGHT.replace("${nodeName}", parentDocument)),2);
 		click(By.xpath(siteExp.ELEMENT_ARROW_RIGHT.replace("${nodeName}", parentDocument)),2);
 		waitForAndGetElement(ecms.ELEMENT_NODE_ADMIN_VIEW.replace("${nodeName}", childDocument));
 		click(By.xpath(siteExp.ELEMENT_SELECT_CHECKBOX.replace("${name}", parentDocument)), 2);
@@ -170,7 +170,7 @@ public class ECMS_SE_FileManagementView_Actions_OtherActions extends PlatformBas
 		//select parent and child node
 		info("-- Select parent and child node --");
 		actBar.goToNodeByAddressPath("/");
-		click(By.xpath(siteExp.ELEMENT_ARROW_RIGHT_41.replace("${nodeName}", parentFolder)),2);
+		click(By.xpath(siteExp.ELEMENT_ARROW_RIGHT.replace("${nodeName}", parentFolder)),2);
 		click(By.xpath(siteExp.ELEMENT_ARROW_RIGHT.replace("${nodeName}", parentFolder)),2);
 		waitForAndGetElement(ecms.ELEMENT_NODE_ADMIN_VIEW.replace("${nodeName}", parentFolder));
 		waitForAndGetElement(ecms.ELEMENT_NODE_ADMIN_VIEW.replace("${nodeName}", childDocument));			
@@ -327,7 +327,7 @@ public class ECMS_SE_FileManagementView_Actions_OtherActions extends PlatformBas
 
 		//Click on triangle icon beside a document/ folder
 		info("-- Click on triangle icon beside a document/ folder --");
-		click(By.xpath(siteExp.ELEMENT_ARROW_RIGHT_41.replace("${nodeName}", parentFolder)),2);
+		click(By.xpath(siteExp.ELEMENT_ARROW_RIGHT.replace("${nodeName}", parentFolder)),2);
 		click(By.xpath(siteExp.ELEMENT_ARROW_RIGHT.replace("${nodeName}", parentFolder)),2);
 
 		//The triangle position of arrow is top -> down
@@ -409,7 +409,7 @@ public class ECMS_SE_FileManagementView_Actions_OtherActions extends PlatformBas
 		/*Step 2: Lock both of parent and child nodes*/		
 		//Click on triangle icon beside a document/ folder
 		info("-- Click on triangle icon beside a document/ folder --");
-		click(By.xpath(siteExp.ELEMENT_ARROW_RIGHT_41.replace("${nodeName}", parentFolder)),2);
+		click(By.xpath(siteExp.ELEMENT_ARROW_RIGHT.replace("${nodeName}", parentFolder)),2);
 		click(By.xpath(siteExp.ELEMENT_ARROW_RIGHT.replace("${nodeName}", parentFolder)),2);
 		waitForAndGetElement(ecms.ELEMENT_NODE_ADMIN_VIEW.replace("${nodeName}", childDocument));
 
@@ -478,7 +478,7 @@ public class ECMS_SE_FileManagementView_Actions_OtherActions extends PlatformBas
 		/*Step 2: Lock both of parent and child nodes*/		
 		//Click on triangle icon beside a document/ folder
 		info("-- Click on triangle icon beside a document/ folder --");
-		click(By.xpath(siteExp.ELEMENT_ARROW_RIGHT_41.replace("${nodeName}", parentFolder)),2);
+		click(By.xpath(siteExp.ELEMENT_ARROW_RIGHT.replace("${nodeName}", parentFolder)),2);
 		waitForAndGetElement(ecms.ELEMENT_NODE_ADMIN_VIEW.replace("${nodeName}", childDocument));
 
 		//From action bar, choose [Lock]
@@ -588,7 +588,7 @@ public class ECMS_SE_FileManagementView_Actions_OtherActions extends PlatformBas
 		/*Step 2: Create symlink for parent and child nodes*/		
 		//Click on triangle icon beside a document/ folder
 		info("-- Click on triangle icon beside a document/ folder --");
-		click(By.xpath(siteExp.ELEMENT_ARROW_RIGHT_41.replace("${nodeName}", parentFolder)),2);
+		click(By.xpath(siteExp.ELEMENT_ARROW_RIGHT.replace("${nodeName}", parentFolder)),2);
 		click(By.xpath(siteExp.ELEMENT_ARROW_RIGHT.replace("${nodeName}", parentFolder)),2);
 		waitForAndGetElement(ecms.ELEMENT_NODE_ADMIN_VIEW.replace("${nodeName}", childDocument));
 
@@ -679,9 +679,9 @@ public class ECMS_SE_FileManagementView_Actions_OtherActions extends PlatformBas
 		/*Step 2: Copy paste both of parent and child nodes*/		
 		//Click on triangle icon beside a document/ folder
 		info("-- Click on triangle icon beside a document/ folder --");
-		click(By.xpath(siteExp.ELEMENT_ARROW_RIGHT_41.replace("${nodeName}", sourceFolder)),2);
 		click(By.xpath(siteExp.ELEMENT_ARROW_RIGHT.replace("${nodeName}", sourceFolder)),2);
-		click(By.xpath(siteExp.ELEMENT_ARROW_RIGHT_41.replace("${nodeName}", parentFolder)),2);
+		click(By.xpath(siteExp.ELEMENT_ARROW_RIGHT.replace("${nodeName}", sourceFolder)),2);
+		click(By.xpath(siteExp.ELEMENT_ARROW_RIGHT.replace("${nodeName}", parentFolder)),2);
 		click(By.xpath(siteExp.ELEMENT_ARROW_RIGHT.replace("${nodeName}", parentFolder)),2);
 		waitForAndGetElement(ecms.ELEMENT_NODE_ADMIN_VIEW.replace("${nodeName}", childDocument));
 		waitForAndGetElement(ecms.ELEMENT_NODE_ADMIN_VIEW.replace("${nodeName}", parentFolder));
@@ -711,7 +711,7 @@ public class ECMS_SE_FileManagementView_Actions_OtherActions extends PlatformBas
 		//Go to target folder
 		actBar.goToNodeByAddressPath("/"+targetFolder);
 		Utils.pause(2000);
-		click(By.xpath(siteExp.ELEMENT_ARROW_RIGHT_41.replace("${nodeName}", parentFolder)),2);
+		click(By.xpath(siteExp.ELEMENT_ARROW_RIGHT.replace("${nodeName}", parentFolder)),2);
 		click(By.xpath(siteExp.ELEMENT_ARROW_RIGHT.replace("${nodeName}", parentFolder)),2);
 		info("-- the parent and child nodes are shown in target folder --");
 		waitForAndGetElement(ecms.ELEMENT_NODE_ADMIN_VIEW.replace("${nodeName}", childDocument));
@@ -722,7 +722,7 @@ public class ECMS_SE_FileManagementView_Actions_OtherActions extends PlatformBas
 		actBar.goToNodeByAddressPath("/"+sourceFolder);
 		Utils.pause(2000);
 		if (waitForAndGetElement(By.xpath(siteExp.ELEMENT_ARROW_RIGHT.replace("${nodeName}", parentFolder)), 3000, 0) != null){
-			click(By.xpath(siteExp.ELEMENT_ARROW_RIGHT_41.replace("${nodeName}", parentFolder)),2);
+			click(By.xpath(siteExp.ELEMENT_ARROW_RIGHT.replace("${nodeName}", parentFolder)),2);
 			click(By.xpath(siteExp.ELEMENT_ARROW_RIGHT.replace("${nodeName}", parentFolder)),2);
 		}
 		info("-- the parent and child nodes are shown in source folder--");
@@ -797,9 +797,9 @@ public class ECMS_SE_FileManagementView_Actions_OtherActions extends PlatformBas
 		/*Step 2: Cut paste both of parent and child nodes*/		
 		//Click on triangle icon beside a document/ folder
 		info("-- Click on triangle icon beside a document/ folder --");
-		click(By.xpath(siteExp.ELEMENT_ARROW_RIGHT_41.replace("${nodeName}", sourceFolder)),2);
 		click(By.xpath(siteExp.ELEMENT_ARROW_RIGHT.replace("${nodeName}", sourceFolder)),2);
-		click(By.xpath(siteExp.ELEMENT_ARROW_RIGHT_41.replace("${nodeName}", parentFolder)),2);
+		click(By.xpath(siteExp.ELEMENT_ARROW_RIGHT.replace("${nodeName}", sourceFolder)),2);
+		click(By.xpath(siteExp.ELEMENT_ARROW_RIGHT.replace("${nodeName}", parentFolder)),2);
 		click(By.xpath(siteExp.ELEMENT_ARROW_RIGHT.replace("${nodeName}", parentFolder)),2);
 		waitForAndGetElement(ecms.ELEMENT_NODE_ADMIN_VIEW.replace("${nodeName}", parentFolder));
 		waitForAndGetElement(ecms.ELEMENT_NODE_ADMIN_VIEW.replace("${nodeName}", childDocument));
@@ -829,7 +829,7 @@ public class ECMS_SE_FileManagementView_Actions_OtherActions extends PlatformBas
 		//Go to target folder
 		actBar.goToNodeByAddressPath("/"+targetFolder);
 		Utils.pause(2000);
-		click(By.xpath(siteExp.ELEMENT_ARROW_RIGHT_41.replace("${nodeName}", parentFolder)),2);
+		click(By.xpath(siteExp.ELEMENT_ARROW_RIGHT.replace("${nodeName}", parentFolder)),2);
 		click(By.xpath(siteExp.ELEMENT_ARROW_RIGHT.replace("${nodeName}", parentFolder)),2);
 		info("-- the parent and child nodes are shown in target folder --");
 		waitForAndGetElement(ecms.ELEMENT_NODE_ADMIN_VIEW.replace("${nodeName}", childDocument));
@@ -840,7 +840,7 @@ public class ECMS_SE_FileManagementView_Actions_OtherActions extends PlatformBas
 		actBar.goToNodeByAddressPath("/"+sourceFolder);
 		Utils.pause(2000);
 		if (waitForAndGetElement(By.xpath(siteExp.ELEMENT_ARROW_RIGHT.replace("${nodeName}", parentFolder)), 3000, 0) != null){
-			click(By.xpath(siteExp.ELEMENT_ARROW_RIGHT_41.replace("${nodeName}", parentFolder)),2);
+			click(By.xpath(siteExp.ELEMENT_ARROW_RIGHT.replace("${nodeName}", parentFolder)),2);
 			click(By.xpath(siteExp.ELEMENT_ARROW_RIGHT.replace("${nodeName}", parentFolder)),2);
 		}
 		info("-- the parent and child nodes are shown in source folder--");

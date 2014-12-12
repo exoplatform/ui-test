@@ -290,12 +290,12 @@ public class NavigationToolbar extends PlatformBase {
 		info("base url of content admin is " + baseUrl);
 		for(int repeat=0;; repeat ++){
 			if (repeat > 1){
-				driver.get(url);
-				break;
+					driver.get(url);
+					break;
 			}
 			//mouseOverAndClick(ELEMENT_LINK_SETUP);
 			mouseOver(ELEMENT_LINK_SETUP, true);
-			if (waitForAndGetElement(ELEMENT_MENU_CONTENT_LINK, 5000, 0)!= null) {	
+			if (waitForAndGetElement(ELEMENT_MENU_CONTENT_LINK, 5000, 0)!= null) {
 				mouseOver(ELEMENT_MENU_CONTENT_LINK, true);
 				if (waitForAndGetElement(ELEMENT_LINK_CONTENT_ADMIN, 5000, 0)!= null){
 					click(ELEMENT_LINK_CONTENT_ADMIN);
@@ -303,9 +303,9 @@ public class NavigationToolbar extends PlatformBase {
 				}
 			}
 			info("Retry...[" + repeat + "]");
-		}
-		//waitForTextPresent("Manage ECM Main Functions");
-		Utils.pause(1000);
+			}
+			//waitForTextPresent("Manage ECM Main Functions");
+			Utils.pause(1000);
 	}
 
 	//Enter Sites Management Form 
