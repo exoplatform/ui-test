@@ -50,7 +50,7 @@ public class Forum_FAQ extends FAQ {
 	 */
 	@Test
 	public void test01_BrowseCategoryQuestion(){
-		String categoryName = "FAQ category 01";
+		String categoryName = "FAQ category 01" + getRandomNumber();
 		String description = "Add new category for answer";	
 		String questionName = "FAQ question 01";
 		String questionContent = "Add new question for category";

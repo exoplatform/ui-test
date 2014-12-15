@@ -447,7 +447,7 @@ public class EcmsBase extends ManageAccount {
 				for (String node: nodes)
 				{
 					//click(ELEMENT_PERSONAL_DOCUMENT_NODE.replace("${content}", node));
-					click(By.xpath("//*[@title='" + node + "']"));
+					click(By.xpath("//*[@title='" + node + "' or @data-original-title='" + node + "']"));
 					Utils.pause(500);
 				}
 			}
@@ -578,8 +578,8 @@ public class EcmsBase extends ManageAccount {
 				"arguments[0].style.width = '1px'; arguments[0].style.opacity = 1", waitForAndGetElement(ELEMENT_UPLOAD_LINK, DEFAULT_TIMEOUT, 1, 2));
 		
 		Utils.pause(10000);
-		type(ELEMENT_UPLOAD_LINK, Utils.getAbsoluteFilePath(link), false,2);
 		info("Upload file " + Utils.getAbsoluteFilePath(link));
+		driver.findElement(ELEMENT_UPLOAD_LINK).sendKeys(Utils.getAbsoluteFilePath(link));
 		switchToParentWindow();
 		if (verify){
 			String links[] = link.split("/");

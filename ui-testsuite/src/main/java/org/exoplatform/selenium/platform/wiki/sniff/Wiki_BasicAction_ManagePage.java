@@ -152,9 +152,9 @@ public class Wiki_BasicAction_ManagePage extends ManageDraft{
 	public void test05_PreviewTemplate(){
 		By eTemplate = By.xpath(ELEMENT_SELECT_TEMPLATE_LINK.replace("{$template}","Two-Column_Layout"));
 		goToAddTemplateWikiPage();	
-		clickByJavascript(eTemplate, 2);
+		click(eTemplate, 2);
 		click(ELEMENT_SELECT_BUTTON);
-		clickByJavascript(ELEMENT_PREVIEW_BUTTON);
+		click(ELEMENT_PREVIEW_BUTTON);
 		waitForAndGetElement("//*[@class='uiWikiPageTitlePreview' and contains(text(), 'Two-Column Layout')]");
 		click(ELEMENT_CLOSE_PREVIEW_WINDOW);
 	}
@@ -168,7 +168,7 @@ public class Wiki_BasicAction_ManagePage extends ManageDraft{
 
 		By eTemplate = By.xpath(ELEMENT_SELECT_TEMPLATE_LINK.replace("{$template}","Status_Meeting"));
 		goToAddTemplateWikiPage();	
-		clickByJavascript(eTemplate, 2);
+		click(eTemplate, 2);
 		click(ELEMENT_SELECT_BUTTON);
 		addWikiPageSourceEditor(title, null);
 
@@ -186,10 +186,10 @@ public class Wiki_BasicAction_ManagePage extends ManageDraft{
 	 */
 	@Test
 	public void test07_ResumeDraft(){
-		String title = "Wiki_manage_page_title_09";
-		String content = "Wiki_manage_page_content_09";
-		String newTitle = "Wiki_manage_page_title_09_update";
-		String newContent = "Wiki_manage_page_content_09_update";
+		String title = "Wiki_manage_page_title_09" + getRandomNumber();
+		String content = "Wiki_manage_page_content_09" + getRandomNumber();
+		String newTitle = "Wiki_manage_page_title_09_update" + getRandomNumber();
+		String newContent = "Wiki_manage_page_content_09_update" + getRandomNumber();
 		String draftTitle = ELEMENT_DRAFT_OF_NEW_PAGE.replace("${title}", title);
 
 		goToAddBlankPage();
@@ -201,12 +201,14 @@ public class Wiki_BasicAction_ManagePage extends ManageDraft{
 		Utils.pause(3000);
 		waitForAndGetElement(draftTitle);
 
+		Utils.pause(4000);
 		click(draftTitle);
 		addWikiPageSourceEditor(newTitle, newContent);
 		click(ELEMENT_SAVE_BUTTON_ADD_PAGE);
 		waitForElementNotPresent(ELEMENT_SAVE_BUTTON_ADD_PAGE);
 
 		goToManageDraft();
+		driver.navigate().refresh();
 		Utils.pause(3000);
 		waitForElementNotPresent(draftTitle);
 
@@ -279,10 +281,10 @@ public class Wiki_BasicAction_ManagePage extends ManageDraft{
 	 */
 	@Test
 	public void test10_EditPageCheckPublicActivity(){
-		String title = "Wiki_manage_page_title_10";
-		String content = "Wiki_manage_page_content_10";
-		String newTitle = "Wiki_manage_page_title_10_update";
-		String newContent = "Wiki_manage_page_content_10_update";
+		String title = "Wiki_manage_page_title_10" + getRandomNumber();
+		String content = "Wiki_manage_page_content_10" + getRandomNumber();
+		String newTitle = "Wiki_manage_page_title_10_update" + getRandomNumber();
+		String newContent = "Wiki_manage_page_content_10_update" + getRandomNumber();
 
 		info("Add new wiki page");		
 		addBlankWikiPage(title, content, 0);

@@ -37,7 +37,8 @@ public class PlatformPermission extends PlatformBase {
 	public final String ELEMENT_USER_CHECKBOX = "//*[text()='${user}']/../..//*[@type='checkbox']"; 
 	public final By ELEMENT_SELECT_THIS_GROUP = By.linkText("Select this Group");
 	public final By ELEMENT_SEARCH_ICON = By.xpath("//a[@title='Quick Search']");
-	public final By ELEMENT_SEARCH_USER_INPUT = By.id("Quick Search");
+	//public final By ELEMENT_SEARCH_USER_INPUT = By.id("Quick Search");
+	public final By ELEMENT_SEARCH_USER_INPUT = By.xpath(".//input[contains(@name,'Quick Search')]");
 	public final By ELEMENT_QUICK_SEARCH_BUTTON = By.xpath("//a[@data-original-title='Quick Search']");
 	public final By ELEMENT_SELECT_SEARCH = By.name("filter");
 	public final By ELEMENT_PERMISSION_TAB = By.linkText("Permissions");
@@ -115,9 +116,11 @@ public class PlatformPermission extends PlatformBase {
 		userGroup = new UserGroupManagement(driver);
 		userGroup.selectGroup(groupPath);	
 		WebElement elementMembership = waitForAndGetElement("//*[contains(text(), '" + membership + "')]", 5000, 0);
-		WebElement elementMembership_1 = waitForAndGetElement(By.linkText(membership), 5000, 0);
+		//WebElement elementMembership_1 = waitForAndGetElement(By.xpath("//*[@title='"+membership+"']"), 5000, 0);
+		WebElement elementMembership_1 = waitForAndGetElement(By.xpath(".//a[contains(text(),'"+membership+"')]"), 5000, 0);
 		//WebElement elementMembership_2 = waitForAndGetElement("//*[@title='" + membership + "']", 5000, 0);
 		if (elementMembership_1 != null){
+			Utils.pause(3000);
 			//click(elementMembership_1);
 			((JavascriptExecutor)driver).executeScript("arguments[0].click();", elementMembership_1);
 		}else {

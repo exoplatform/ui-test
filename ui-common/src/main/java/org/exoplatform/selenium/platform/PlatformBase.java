@@ -51,7 +51,7 @@ public class PlatformBase extends TestBase {
 	 * Intranet
 	 * */
 	public final String ELEMENT_SIGN_IN_LINK = "//b[contains(text(),'Sign in')]";
-	public final By ELEMENT_REFRESH = By.cssSelector("div[class='activityStreamStatus pull-left']");
+	public final By ELEMENT_REFRESH = By.id("RefreshButton");
 
 	/*
 	 * Log in Form - Sign-out 
@@ -663,7 +663,7 @@ public class PlatformBase extends TestBase {
 	public final By ELEMENT_UPLOAD_VERSION_ID = By.xpath("//div[@id='versionHistory']//input[@name='file']");
 
 	//Space > Wiki link
-	public final By ELEMENT_WIKI_LINK_IN_SPACE = By.cssSelector("i[class='uiIconAppWikiPortlet uiIconDefaultApp']");
+	public final By ELEMENT_WIKI_LINK_IN_SPACE = By.xpath("i[class='uiIconAppWikiPortlet uiIconDefaultApp']");
 
 	//----------------------Gmail form ---------------------------------------------------
 	public final String GMAIL_URL = "https://mail.google.com";
@@ -1364,9 +1364,6 @@ public class PlatformBase extends TestBase {
 			WebElement e = waitForAndGetElement(cke_frame,DEFAULT_TIMEOUT,1,2);
 			driver.switchTo().frame(e);
 			inputsummary = driver.switchTo().activeElement();
-			inputsummary.click();
-			inputsummary.clear();
-
 			for (int i = 0; i < lines.length; i++){
 				if(this.plfVersion.equalsIgnoreCase("4.0")){
 					info("type multi line 4.0");

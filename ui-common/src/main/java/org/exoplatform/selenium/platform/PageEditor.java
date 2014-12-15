@@ -184,7 +184,7 @@ public class PageEditor extends PlatformBase {
 		if (path != ""){
 			String[] paths = path.split("/");
 			for (int i = 0; i < paths.length; i ++){
-				click("//a[@data-original-title='" + paths[i] + "']");
+				click("//*[@data-original-title='" + paths[i] + "']");
 				Utils.pause(1000);
 			}
 		}

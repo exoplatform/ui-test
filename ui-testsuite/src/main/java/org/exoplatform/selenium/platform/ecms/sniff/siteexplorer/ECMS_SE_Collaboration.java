@@ -67,7 +67,7 @@ public class ECMS_SE_Collaboration extends PlatformBase {
 		By elementFile = By.linkText(file);
 
 		navToolBar.goToSiteExplorer();
-		click(By.linkText("acme"));
+		click(By.linkText("intranet"));
 		click(By.linkText("documents"));
 		click(By.linkText("metro.pdf"));
 		actBar.addItem2ActionBar("comment", actBar.ELEMENT_ADD_COMMENT_LINK);
@@ -98,7 +98,7 @@ public class ECMS_SE_Collaboration extends PlatformBase {
 		By elementUploadFile = By.linkText(fileUpload);
 
 		navToolBar.goToSiteExplorer();
-		click(By.linkText("acme"));
+		click(By.linkText("intranet"));
 		click(By.linkText("documents"));
 		click(By.linkText("metro.pdf"));
 		actBar.addItem2ActionBar("comment", actBar.ELEMENT_ADD_COMMENT_LINK);
@@ -254,7 +254,7 @@ public class ECMS_SE_Collaboration extends PlatformBase {
 
 		info("Add translation for file English to file French");
 		ecms.goToNode(elementFileEnglish);
-		actBar.addTranslationForDocument("", fileFrench);
+		actBar.addTranslationForDocument("General Drives/Sites Management/", fileFrench);
 		click(siteExp.ELEMENT_SITEBAR_RELATION);
 		waitForAndGetElement(By.xpath(ecms.ELEMENT_TRANSLATION_IN_RELATION_TAB.replace("${fileName}", fileFrench)));
 

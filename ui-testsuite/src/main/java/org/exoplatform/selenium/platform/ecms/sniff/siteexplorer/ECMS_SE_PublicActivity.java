@@ -152,7 +152,7 @@ public class ECMS_SE_PublicActivity extends PlatformBase {
 		info("Add new web content ");
 		actBar.goToAddNewContent();
 		temp.createFullNewProduct(name, "", sum, "", "", true);
-		click(By.linkText("acme"));
+		click(By.linkText("intranet"));
 		
 		info("Make version for this file document");
 		cMenu.contextMenuAction(elementProduct, cMenu.ELEMENT_MENU_CHECKIN);

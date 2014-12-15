@@ -905,11 +905,12 @@ public class HomePageActivity extends PlatformBase{
 
 			String deleteActivityIconID;
 			deleteActivityIconID = elem.getAttribute("id");
-
+			Utils.pause(2000);
 			JavascriptExecutor executor = (JavascriptExecutor)driver;
 			executor.executeScript("document.getElementById('"+deleteActivityIconID+"').click();");
+			Utils.pause(1000);
 			waitForAndGetElement(ELEMENT_MESSAGE_CONFIRM_DELETE_ACTIVITY);
-			button.ok();
+			waitForAndGetElement("//*[@id='UISocialPopupConfirmation']//*[text()='OK']").click();
 			if(verifyElement)
 				//	waitForElementNotPresent(By.xpath(ELEMENT_ACTIVITY_AUTHOR_ACTIVITY.replace("${activityText}", activityText)));
 				waitForElementNotPresent(By.xpath(ELEMENT_ACTIVITY_DELETE.replace("${activityText}", activityText)), DEFAULT_TIMEOUT,1,2);

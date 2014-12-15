@@ -536,8 +536,8 @@ public class Gatein_Navigation_GroupNavigation_EditNavigation extends GroupNavig
 	public void test08_AddApplicationIntoContainerWhenEditPagePropertiesOfNode(){
 		String nodeSitesManagement = "Sites Management";
 		String groupAdminDisplayName = "Administration";	
-		String pageSelectorName = "test08pageSelector";
-		String nodeName = "test08NodeName";
+		String pageSelectorName = "page68882";
+		String nodeName = "node68882";
 		String nodeLink = ELEMENT_NODE_LINK.replace("${nodeLabel}", nodeName);
 		String categoryContainer = "Rows Layout";
 		String typeContainer = "oneRow";

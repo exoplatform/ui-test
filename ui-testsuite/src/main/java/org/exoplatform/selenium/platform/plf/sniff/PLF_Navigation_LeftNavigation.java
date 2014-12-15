@@ -123,7 +123,7 @@ public class PLF_Navigation_LeftNavigation extends GroupNavigation {
 		addNodeForGroup(groupAdminDisplayName, nodePortalAdministration, true, 
 				nodeName, true, languages, nodeName, 
 				pageSelectorName, pageSelectorName, true, false);
-		button.save();	
+		click(button.ELEMENT_SAVE_BUTTON);
 		waitForElementNotPresent(button.ELEMENT_SAVE_BUTTON);
 		waitForAndGetElement(ELEMENT_NAVIGATION_NODE.replace("${nodeName}", nodeName));
 
@@ -133,7 +133,7 @@ public class PLF_Navigation_LeftNavigation extends GroupNavigation {
 		addNodeForGroup(groupAdminDisplayName, nodeName, false, 
 				subNodeName, true, languages, subNodeName, 
 				pageSelectorName1, pageSelectorName1, true, false);
-		button.save();	
+		click(button.ELEMENT_SAVE_BUTTON);
 		waitForElementNotPresent(button.ELEMENT_SAVE_BUTTON);
 		if(this.plfVersion.contains("4.1")){
 			click(ELEMENT_GROUP_NAVIGATION_ICON_LEFT_PANEL_PLF41.replace("${groupName}", nodeName));

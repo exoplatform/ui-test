@@ -245,9 +245,9 @@ public class Wiki_BasicAction_Other extends Permalink {
 	 */
 	@Test
 	public void test08_MovePageWhenNotHaveEditPermissionAtDestPage(){
-		String spaceName = "space70362";
-		String title1 = "Wiki_move_title_08_1";
-		String content1 = "Wiki_move_content_08_1";
+		String spaceName = "space70362" + getRandomNumber();
+		String title1 = "Wiki_move_title_08_1" + getRandomNumber();
+		String content1 = "Wiki_move_content_08_1" + getRandomNumber();
 		String title2 = "Wiki_move_title_08_2";
 		String content2 = "Wiki_move_content_08_2";
 		
@@ -278,15 +278,15 @@ public class Wiki_BasicAction_Other extends Permalink {
 	 */
 	@Test
 	public void test08_MovePageInSpaceWikiWhenNotHaveEditPermissionAtDestPage(){
-		String spaceName = "space70362";
+		String spaceName = "space70362" + getRandomNumber();
 		String title1 = "Wiki_move_title_08_1";
 		String content1 = "Wiki_move_content_08_1";
-		String title2 = "Wiki_move_title_08_2";
-		String content2 = "Wiki_move_content_08_2";
+		String title2 = "Wiki_move_title_08_2" + getRandomNumber();
+		String content2 = "Wiki_move_content_08_2" + getRandomNumber();
 		String[] userGroup = {"mary"};
 		socBase = new SocialBase(driver, this.plfVersion);
 		addWikiForSpace(spaceName, title1, content1);
-		addPagePermission(1, userGroup);
+		addPagePermission(0, userGroup);
 		deletePagePermission("*:/spaces/"+spaceName);
 		click(socBase.ELEMENT_SETTINGS);
 		click(socBase.ELEMENT_MEMBERS_TAB);
@@ -317,8 +317,8 @@ public class Wiki_BasicAction_Other extends Permalink {
 	 */
 	@Test
 	public void test09_CheckPermalinkWithMemberOfPage(){
-		String title = "Wiki_sniff_permalink_title_09";
-		String content = "Wiki_sniff_permalink_content_09";
+		String title = "Wiki_sniff_permalink_title_09" + getRandomNumber();
+		String content = "Wiki_sniff_permalink_content_09" + getRandomNumber();
 		
 		addBlankWikiPage(title, content, 0);
 		goToPermalink();
@@ -337,8 +337,8 @@ public class Wiki_BasicAction_Other extends Permalink {
 	 */
 	@Test
 	public void test10_CheckPermalinkWithNotMemberOfPage(){
-		String title = "Wiki_sniff_permalink_title_10";
-		String content = "Wiki_sniff_permalink_content_10";
+		String title = "Wiki_sniff_permalink_title_10" + getRandomNumber();
+		String content = "Wiki_sniff_permalink_content_10" + getRandomNumber();
 		
 		addBlankWikiPage(title, content, 0);
 		deletePagePermission("any");
@@ -358,7 +358,7 @@ public class Wiki_BasicAction_Other extends Permalink {
 	 */
 	@Test
 	public void test11_CheckPermalinkWithUserMemberOfSpace(){
-		String spaceName = "Space11";
+		String spaceName = "Space11" + getRandomNumber();
 		String title = "Wiki_sniff_permalink_title_11";
 		String content = "Wiki_sniff_permalink_content_11";
 		
@@ -393,9 +393,9 @@ public class Wiki_BasicAction_Other extends Permalink {
 	 */
 	@Test
 	public void test12_CheckPermanlinkWithUserNotMemberOfSpace(){
-		String spaceName = "Space12";
-		String title = "Wiki_sniff_permalink_title_12";
-		String content = "Wiki_sniff_permalink_content_12";
+		String spaceName = "Space12" + getRandomNumber();
+		String title = "Wiki_sniff_permalink_title_12" + getRandomNumber();
+		String content = "Wiki_sniff_permalink_content_12" + getRandomNumber();
 		
 		addWikiForSpace(spaceName, title, content);
 		goToPermalink();
@@ -415,8 +415,8 @@ public class Wiki_BasicAction_Other extends Permalink {
 	 */
 	@Test
 	public void test13_CheckWhenChangePermalinkStatus(){
-		String title = "Wiki_sniff_permalink_title_13";
-		String content = "Wiki_sniff_permalink_content_13";
+		String title = "Wiki_sniff_permalink_title_13" + getRandomNumber();
+		String content = "Wiki_sniff_permalink_content_13" + getRandomNumber();
 		String user = DATA_USER4;
 		
 		info("Create new page at restricted status");
@@ -451,8 +451,8 @@ public class Wiki_BasicAction_Other extends Permalink {
 	 */
 	@Test
 	public void test14_ChangePermissionOfPageInPermalink_SelectUser(){
-		String title = "Wiki_sniff_permalink_title_14_1";
-		String content = "Wiki_sniff_permalink_content_14_1";
+		String title = "Wiki_sniff_permalink_title_14_1" + getRandomNumber();
+		String content = "Wiki_sniff_permalink_content_14_1" + getRandomNumber();
 		String[] userGroup1 = {DATA_USER2};
 		
 		addBlankWikiPage(title, content, 0);
@@ -476,8 +476,8 @@ public class Wiki_BasicAction_Other extends Permalink {
 	
 	@Test(priority = 0)
 	public void test14_ChangePermissionOfPageInPermalink_SelectGroup(){
-		String title = "Wiki_sniff_permalink_title_14_2";
-		String content = "Wiki_sniff_permalink_content_14_2";
+		String title = "Wiki_sniff_permalink_title_14_2" + getRandomNumber();
+		String content = "Wiki_sniff_permalink_content_14_2" + getRandomNumber();
 		String userGroup2 = "Development/Select this Group";
 		
 		addBlankWikiPage(title, content, 0);
@@ -501,8 +501,8 @@ public class Wiki_BasicAction_Other extends Permalink {
 	
 	@Test
 	public void test14_ChangePermissionOfPageInPermalink_SelectMembership(){
-		String title = "Wiki_sniff_permalink_title_14_3";
-		String content = "Wiki_sniff_permalink_content_14_3";
+		String title = "Wiki_sniff_permalink_title_14_3" + getRandomNumber();
+		String content = "Wiki_sniff_permalink_content_14_3" + getRandomNumber();
 		String[] userGroup3 = {"Platform/Content Management", "author"}; 
 		
 		addBlankWikiPage(title, content, 0);
@@ -531,10 +531,10 @@ public class Wiki_BasicAction_Other extends Permalink {
 	 */
 	@Test
 	public void test15_WatchUnwatchPage(){
-		String title = "Wiki_watch_title_15";
-		String content = "Wiki_watch_content_15";
-		String newTitle = "Wiki_watch_title_15_update";
-		String newContent = "Wiki_watch_content_15_update";
+		String title = "Wiki_watch_title_15" + getRandomNumber();
+		String content = "Wiki_watch_content_15" + getRandomNumber();
+		String newTitle = "Wiki_watch_title_15_update" + getRandomNumber();
+		String newContent = "Wiki_watch_content_15_update" + getRandomNumber();
 			
 		magAc.updateUserProfile(null, null, null, "exomailtest01@gmail.com");
 		

@@ -51,7 +51,7 @@ public class Wiki_PublicActivity extends BasicAction {
 		naTool.goToHomePage();
 		activity.checkActivityInfoOfWiki(title, content, "1");
 
-		clickByJavascript(By.linkText(title));
+		click(By.linkText(title));
 		deleteCurrentWikiPage();
 	}
 
@@ -73,7 +73,7 @@ public class Wiki_PublicActivity extends BasicAction {
 		activity.checkActivityInfoOfWiki(newTitle, content, "2");
 		waitForAndGetElement(activity.ELEMENT_WIKI_COMMENT_EDIT_TITLE.replace("${title}", newTitle));
 
-		clickByJavascript(By.linkText(newTitle));
+		click(By.linkText(newTitle));
 		deleteCurrentWikiPage();
 	}
 
@@ -98,13 +98,13 @@ public class Wiki_PublicActivity extends BasicAction {
 		waitForElementNotPresent(activity.ELEMENT_WIKI_COMMENT_EDIT_CONTENT.replace("${title}", title));
 
 		info("Edit wiki page with no comment");
-		clickByJavascript(ELEMENT_NODE_WIKI_PAGE.replace("{$node}", title));
+		click(ELEMENT_NODE_WIKI_PAGE.replace("{$node}", title));
 		editPageWithCheckPublicActivity(null, newContent2);
 		naTool.goToHomePage();
 		activity.checkActivityInfoOfWiki(title, newContent2, "3");
 		waitForAndGetElement(activity.ELEMENT_WIKI_COMMENT_EDIT_CONTENT.replace("${title}", title));
 
-		clickByJavascript(By.linkText(title));
+		click(By.linkText(title));
 		deleteCurrentWikiPage();
 	}
 
@@ -122,7 +122,7 @@ public class Wiki_PublicActivity extends BasicAction {
 		naTool.goToHomePage();
 		activity.checkActivityInfoOfWiki(title, content, "1");
 
-		clickByJavascript(By.linkText(title));
+		click(By.linkText(title));
 		deleteCurrentWikiPage();
 
 		naTool.goToHomePage();
@@ -150,7 +150,7 @@ public class Wiki_PublicActivity extends BasicAction {
 		naTool.goToHomePage();
 		activity.checkCommentAfterMoveWikiPage(title2, "Wiki Home > " + title1 + " > " + title2);
 
-		clickByJavascript(By.linkText(title2));
+		click(By.linkText(title2));
 		click(ELEMENT_NODE_WIKI_PAGE.replace("{$node}", title1));
 		deleteCurrentWikiPage();
 	}
@@ -169,7 +169,7 @@ public class Wiki_PublicActivity extends BasicAction {
 		naTool.goToHomePage();
 		activity.checkActivityInfoOfWiki(title, content, "1");
 
-		clickByJavascript(By.linkText(title));
+		click(By.linkText(title));
 		waitForMessage("Wiki Home");
 		deleteCurrentWikiPage();
 	}
@@ -195,7 +195,7 @@ public class Wiki_PublicActivity extends BasicAction {
 		waitForElementNotPresent(activity.ELEMENT_WIKI_COMMENT_EDIT_TITLE.replace("${title}", newTitle));
 		waitForElementNotPresent(activity.ELEMENT_WIKI_COMMENT_EDIT_CONTENT.replace("${title}", newContent));
 
-		clickByJavascript(By.linkText(newTitle));
+		click(By.linkText(newTitle));
 		deleteCurrentWikiPage();
 	}
 }

@@ -98,11 +98,12 @@ public class Forum_Forum_PublishActivity_PollActivity extends ForumBase{
 	 */
 	@Test
 	public void test02_AddPoll(){
-		String titleCat = "Category 02";
-		String titleForum = "Forum 02";
-		String titleTop = "Topic 02";
+		String titleCat = "Category 02" + getRandomNumber();
+		String titleForum = "Forum 02" + getRandomNumber();
+		String titleTop = "Topic 02" + getRandomNumber();
+
 		String descTop = "line1<br>line2<br>line3<br>line4<br>line5";
-		String pollQuestion = "Poll 02";
+		String pollQuestion = "Poll 75283";
 		String[] pollOptions = {"Option 01", "Option 02"};
 		String[] rate = {"0","0"};
 		

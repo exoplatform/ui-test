@@ -323,7 +323,7 @@ public class ActionBar extends EcmsBase{
 				click(ELEMENT_MORE_LINK_WITHOUT_BLOCK);
 				click(ELEMENT_EDIT_LINK);
 			}
-			if (waitForAndGetElement(button.ELEMENT_SAVE_CLOSE_BUTTON, 50000).isDisplayed()) 
+			if (waitForAndGetElement(button.ELEMENT_SAVE_CLOSE_BUTTON, 5000, 0)!=null) 
 				break;
 		}
 	}

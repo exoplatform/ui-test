@@ -66,7 +66,7 @@ public class TestBase {
 	//public final By ELEMENT_MENU_EDIT_LINK = By.xpath("//i[@class='uiIconPLF24x24Edit']");
 	//public final By ELEMENT_MENU_PAGE_LINK = By.linkText("Page");
 	//public final String AJAX_LOADING_MASK = "//div[@id='AjaxLoadingMask']";
-	public final String DEFAULT_BASEURL="http://demo.uxpacc01.exoplatform.org/portal";
+	public final String DEFAULT_BASEURL="http://dispostable.uxpacc01.exoplatform.org/portal";
 
 	/*======= Welcome Screen (Term and Conditions) =====*/
 	public final By ELEMENT_FIRSTNAME_ACCOUNT = By.name("firstNameAccount");
@@ -101,6 +101,7 @@ public class TestBase {
 
 		baseUrl = System.getProperty("baseUrl");
 		if (baseUrl==null) baseUrl = DEFAULT_BASEURL;
+		
 		if("chrome".equals(browser)){
 			driver = new ChromeDriver();
 			chromeFlag = true;
@@ -130,10 +131,11 @@ public class TestBase {
 
 	public void initSeleniumTest(Object... opParams){
 		initSeleniumTestWithOutTermAndCondition();
+		driver.manage().window().maximize();
 		info("Term and conditions");
 		termsAndConditions(opParams);
 		info("End of term and conditions");
-
+		
 		if(!firstTimeLogin){
 			info("This is not the first time login");
 			checkPLFVersion();
@@ -162,7 +164,7 @@ public class TestBase {
 		info("Agreement page");
 		if (waitForAndGetElement(ELEMENT_AGREEMENT_CHECKBOX, 3000, 0, 2) != null) {
 			info("-- Checking the terms and conditions agreement... --");
-			clickByJavascript(ELEMENT_AGREEMENT_CHECKBOX, 2);
+			click(ELEMENT_AGREEMENT_CHECKBOX, 2);
 			click(ELEMENT_CONTINUE_BUTTON);
 			waitForTextNotPresent("terms and conditions agreement");
 
@@ -438,11 +440,11 @@ public class TestBase {
 		} catch (StaleElementReferenceException e) {
 			checkCycling(e, DEFAULT_TIMEOUT/WAIT_INTERVAL);
 			Utils.pause(WAIT_INTERVAL);
-			clickByJavascript(locator, notDisplay);
+			click(locator, notDisplay);
 		} catch (ElementNotVisibleException e) {
 			checkCycling(e, DEFAULT_TIMEOUT/WAIT_INTERVAL);
 			Utils.pause(WAIT_INTERVAL);
-			clickByJavascript(locator, notDisplay);
+			click(locator, notDisplay);
 		} finally {
 			loopCount = 0;
 		}
@@ -457,6 +459,20 @@ public class TestBase {
 		int notDisplay = (Integer) (opParams.length > 0 ? opParams[0]: 0);	
 		WebElement e = waitForAndGetElement(locator,DEFAULT_TIMEOUT, 1, notDisplay);
 		((JavascriptExecutor)driver).executeScript("arguments[0].click();", e);
+	}
+	
+	/**
+	 * Mouse hover by Javascript
+	 * @param locator
+	 * @param opParams
+	 */
+	public void mouseHoverByJavaScript(Object locator, Object...opParams)
+	{
+		int notDisplay = (Integer) (opParams.length > 0 ? opParams[0]: 0);
+		WebElement targetElement;
+		String mouseOverScript = "if(document.createEvent){var evObj = document.createEvent('MouseEvents');evObj.initEvent('mouseover', true, false); arguments[0].dispatchEvent(evObj);} else if(document.createEventObject) { arguments[0].fireEvent('onmouseover');}";
+		targetElement = waitForAndGetElement(locator,5000, 1, notDisplay);
+		((JavascriptExecutor)driver).executeScript(mouseOverScript, targetElement);
 	}
 
 	public void clearCache(){
@@ -477,7 +493,7 @@ public class TestBase {
 			WebElement element = waitForAndGetElement(locator, DEFAULT_TIMEOUT, 1, notDisplayE);
 
 			if (!element.isSelected()) {
-				clickByJavascript(locator,notDisplayE);
+				click(locator,notDisplayE);
 			} else {
 				info("Element " + locator + " is already checked.");
 			}
@@ -640,7 +656,7 @@ public class TestBase {
 			WebElement element = waitForAndGetElement(locator, DEFAULT_TIMEOUT, 1, notDisplayE);
 
 			if (element.isSelected()) {
-				clickByJavascript(locator,notDisplayE);
+				click(locator,notDisplayE);
 			} else {
 				info("Element " + locator + " is already unchecked.");
 			}

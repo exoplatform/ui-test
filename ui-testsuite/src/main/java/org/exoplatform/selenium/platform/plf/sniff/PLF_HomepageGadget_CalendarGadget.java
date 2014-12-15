@@ -128,9 +128,9 @@ public class PLF_HomepageGadget_CalendarGadget extends CalendarBase{
 	 */
 	@Test
 	public void test03_AddCalendarToFollowedCalendarList(){
-		String Calendar_Information_1 = "Calendar_70426";
-		String Event_11 = "Event_70426_1";
-		String Event_12 = "Event_70426_2";
+		String Calendar_Information_1 = "Calendar_704261";
+		String Event_11 = "Event_704261_1";
+		String Event_12 = "Event_704261_2";
 
 		String Calendar_In_Calendar_Gadget = ELEMENT_CALENDAR_IN_CALENDAR_GADGET.replace("${calendar}", Calendar_Information_1);
 		String Delete_Calendar_1_Path = ELEMENT_DELETE_CALENDAR_ICON.replace("${calendar}", Calendar_Information_1);
@@ -154,7 +154,7 @@ public class PLF_HomepageGadget_CalendarGadget extends CalendarBase{
 		Utils.pause(5000);
 
 		click(By.xpath(Delete_Calendar_1_Path));
-		button.ok();
+		click(By.xpath("//*[@class='settingValidationButton']//*[text()='OK']"));
 		waitForElementNotPresent(By.xpath(Calendar_In_Calendar_Gadget));
 
 		mouseOver(ELEMENT_CALENDAR_GADGET, true);
@@ -172,7 +172,7 @@ public class PLF_HomepageGadget_CalendarGadget extends CalendarBase{
 			click(ELEMENT_ADD_CALENDAR_IN_ADDITION_LIST.replace("${calendar}", Calendar_Information_1));
 		}		
 		
-		button.ok();
+		click(By.xpath("//*[@class='settingValidationButton']//*[text()='OK']"));
 		driver.navigate().refresh();
 		waitForAndGetElement(By.xpath(Calendar_In_Calendar_Gadget));
 
@@ -214,7 +214,8 @@ public class PLF_HomepageGadget_CalendarGadget extends CalendarBase{
 		Utils.pause(5000);
 
 		click(By.xpath(Delete_Calendar_1_Path));
-		button.ok();
+		click(By.xpath("//*[@class='settingValidationButton']//*[text()='OK']"));
+		driver.navigate().refresh();
 		waitForElementNotPresent(By.xpath(Calendar_In_Calendar_Gadget));
 
 		goToCalendarPage();

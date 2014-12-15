@@ -52,18 +52,18 @@ public class Forum_Answers_Setting extends AnswerBase {
 	@Test
 	public void test01_SettingAnswerPortlet(){
 		//category1 in answer
-		String categoryName1 = "Answersetting689451";
+		String categoryName1 = "Answersetting689451" + getRandomNumber();
 		String description1 = "Add new category for answer";
 		String[] userGroup1 = {DATA_USER4};
 		
 		//category2 in answer
-		String categoryName2 = "Answersetting689452";
+		String categoryName2 = "Answersetting689452" + getRandomNumber();
 		String description2 = "Add new category2 for answer";
 		String[] userGroup2 = {"Platform/Content Management"};
 		
 		//question in category1
-		String questionName = "Questionsetting689451";
-		String questionContent = "Question of Questionsetting1";
+		String questionName = "Questionsetting689451" + getRandomNumber();
+		String questionContent = "Question of Questionsetting1" + getRandomNumber();
 		
 		//category and forum in forum
 		String title = "ForumCat689451";

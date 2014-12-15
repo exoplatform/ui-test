@@ -116,7 +116,7 @@ public class Event extends CalendarBase{
 	public By ELEMENT_SAVE_EVENT_OCCURRING = By.xpath("//*[@id='UIRepeatEventForm']//*[contains(text(),'Save')]");
 
 	/*Delete recurring event form*/
-	public By ELEMENT_DELETE_RECURRING_EVENT_FORM = By.id("UICalendarPopupWindow");
+	public By ELEMENT_DELETE_RECURRING_EVENT_FORM = By.xpath("//*[text()='Delete Recurring Event']");
 	public By ELEMENT_EDIT_DELETE_ONE_EVENT = By.xpath("//*[@value='save_one']");
 	public By ELEMENT_EDIT_DELETE_FOLLOWING_EVENT = By.xpath("//*[@value='save_follow']");
 	public By ELEMENT_EDIT_DELETE_ALL_EVENT = By.xpath("//*[@value='save_all']");
@@ -691,7 +691,7 @@ public class Event extends CalendarBase{
 			break;
 		}
 		click(ELEMENT_EVENT_TASK_DELETE_MENU);
-		if(waitForAndGetElement(ELEMENT_DELETE_RECURRING_EVENT_FORM,5000,0)!=null){
+		if(waitForAndGetElement(ELEMENT_DELETE_RECURRING_EVENT_FORM,10000,0)!=null){
 			info("Delete recurring event");
 			waitForAndGetElement(ELEMENT_DELETE_RECURRING_EVENT_FORM);
 			info(waitForAndGetElement(ELEMENT_CONFIRM_EDIT_DELETE_RECURRING_EVENT).getText());
@@ -720,18 +720,6 @@ public class Event extends CalendarBase{
 			button.yes();
 			driver.navigate().refresh();
 			Utils.pause(1000);
-			if (optDay.equals(selectDayOption.ALLDAY)){
-				if(this.plfVersion.contains("4.0")){
-					waitForElementNotPresent(ELEMENT_EVENT_TASK_ALL_DAY.replace("${event}", event),5000);
-					waitForElementNotPresent(ELEMENT_EVENT_TASK_WORKING_PANE.replace("${event}", event),5000);
-				}
-				else{
-					waitForElementNotPresent(ELEMENT_EVENT_TASK_ALL_DAY_PLF41.replace("${event}", event),5000);
-					waitForElementNotPresent(ELEMENT_EVENT_TASK_WORKING_PANE_PLF41.replace("${event}", event),5000);
-				}
-			}else if (optDay.equals(selectDayOption.ONEDAY)){
-				waitForElementNotPresent(ELEMENT_EVENT_TASK_ONE_DAY.replace("${taskName}", event));
-			}	
 		}
 	}
 

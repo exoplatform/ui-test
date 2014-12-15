@@ -8,6 +8,7 @@ import org.exoplatform.selenium.platform.ManageAccount;
 import org.exoplatform.selenium.platform.PlatformBase;
 import org.exoplatform.selenium.platform.UserGroupManagement;
 import org.exoplatform.selenium.platform.social.ManageMember;
+import org.exoplatform.selenium.platform.social.SpaceManagement;
 import org.openqa.selenium.By;
 import org.openqa.selenium.ElementNotVisibleException;
 import org.openqa.selenium.JavascriptExecutor;
@@ -194,12 +195,13 @@ public class WikiBase extends PlatformBase{
 	public final String ELEMENT_DESTINATION_TREE_ITEM = "//*[@id='iconTreeExplorer']/*[contains(.,'${treeItem}')]";
 
 	/*-------------------------Permission page--------------------*/
-	public final By ELEMENT_SELECT_USER = By.xpath("//a[contains(@onclick, 'OpenSelectUserForm')]");
+	//public final By ELEMENT_SELECT_USER =  By.className("uiIconUser uiIconLightGray");
+	public final By ELEMENT_SELECT_USER =  By.xpath("//*[@class='actionIcon' and @data-original-title='Select User']/i");
 	public final String ELEMENT_USERNAME_CHECK = "//input[@id='${user}' and @type='checkbox']";
 	public final By ELEMENT_SELECTOR_TEXT = By.xpath("//span[@class='PopupTitle' and contains(text(),'User Selector')]");
 	public final By ELEMENT_SELECT_INPUT = By.id("PermissionOwner");
-	public final By ELEMENT_SELECT_GROUP = By.className("uiIconGroup");
-	public final By ELEMENT_SELECT_MEMBERSHIP = By.className("uiIconMembership");
+	public final By ELEMENT_SELECT_GROUP = By.xpath("//*[@class='actionIcon' and @data-original-title='Select Group']/i");
+	public final By ELEMENT_SELECT_MEMBERSHIP = By.xpath("//*[@class='actionIcon' and @data-original-title='Select Membership']/i");
 	public final String ELEMENT_USER_PERMISSIONS = "//*[contains(text(), '${user}')]";
 	public final String ELEMENT_EDIT_PAGE_PERMISSIONS = "//*[contains(text(), '${user}')]/../..//input[contains(@id, 'EDITPAGE')]";
 	public final String ELEMENT_VIEW_PAGE_PERMISSIONS = "//*[contains(text(), '${user}')]/../..//input[contains(@id, 'VIEWPAGE')]";
@@ -310,9 +312,11 @@ public class WikiBase extends PlatformBase{
 	// Go to Wiki page > More > Page info > Add more relations
 	public final String ELEMENT_SELECTED_PAGE = "//div[contains(@class,'popupContent')]//*[@id='iconTreeExplorer' and contains(@onclick, 'event')]//a[contains(text(), '${relatedPage}')]"; 
 	public final String ELEMENT_RELATED_PAGE = "//*[text()='Related Pages']/..//a[contains(text(),'${relatedPage}')]";
+	public final String ELEMENT_RELATED_PAGE_2 = "//li[contains(@class,'active')]//a[contains(text(),'${relatedPage}')]";
 	public By ELEMENT_SELECT_SPACE = By.xpath("//*[contains(text(), 'Select the Wiki:')]/..//*[@class='btn dropdown-toggle']");
 	public final String ELEMENT_REMOVE_RELATED_PAGE_LINK = "//*[contains(text(),'${relatedPage}')]/ancestor::tr//*[contains(@class,'uiIconDelete')]";
 	public By ELEMENT_NO_SPACE_OPTION = By.id("UISpaceSwitcher_nospace");
+	public By ELEMENT_GETTING_STARTED_SPACE = By.xpath(".//*[@id='UISpaceSwitcher_/spaces/getting_started']//img[contains(@alt,'Getting Started')]"); 
 	public String ELEMENT_RELATED_PAGE_SPACE = "//td[contains(text(), '${spaceName}')]";
 	public String ELEMENT_RELATED_PAGE_SPACE_DEFAUT = "//*[contains(text(), 'Select the Wiki:')]/..//*[@class='btn dropdown-toggle']//span[text() = '${spaceName}']";
 	public String ELEMENT_RELATED_PAGE_HEAD_INDEX = "//th[${index}][contains(text(), '${text}')]";
@@ -362,9 +366,9 @@ public class WikiBase extends PlatformBase{
 		info("--Go to Wiki--");
 		Utils.pause(1000);
 		if(waitForAndGetElement(ELEMENT_WIKI_LINK, 5000,0)!=null)
-			clickByJavascript(ELEMENT_WIKI_LINK);
+			click(ELEMENT_WIKI_LINK);
 		else
-			clickByJavascript(ELEMENT_WIKI_LINK_PLF41);
+			click(ELEMENT_WIKI_LINK_PLF41);
 		waitForAndGetElement(ELEMENT_TITLE_WIKI_HOME_LINK);	
 	}
 
@@ -391,11 +395,11 @@ public class WikiBase extends PlatformBase{
 		info("--Go to add blank wiki page--");
 		Utils.pause(500);
 		//mouseOver(ELEMENT_ADD_PAGE_LINK, true);
-		clickByJavascript(ELEMENT_ADD_PAGE_LINK);
+		click(ELEMENT_ADD_PAGE_LINK);
 		if (isElementNotPresent(ELEMENT_BLANK_PAGE_LINK))
-			clickByJavascript(ELEMENT_BLANK_PAGE_LINK_41);
+			click(ELEMENT_BLANK_PAGE_LINK_41);
 		else
-			clickByJavascript(ELEMENT_BLANK_PAGE_LINK);
+			click(ELEMENT_BLANK_PAGE_LINK);
 		Utils.pause(1000);
 	}
 
@@ -407,11 +411,11 @@ public class WikiBase extends PlatformBase{
 	{
 		info("Deleting a wiki page...");
 		//mouseOver(ELEMENT_MORE_LINK,true);
-		clickByJavascript(ELEMENT_MORE_LINK);
+		click(ELEMENT_MORE_LINK);
 		if (waitForAndGetElement(ELEMENT_DELETE_LINK_2, 5000, 0) == null){
-			clickByJavascript(ELEMENT_DELETE_LINK);
+			click(ELEMENT_DELETE_LINK);
 		}else {
-			clickByJavascript(ELEMENT_DELETE_LINK_2);
+			click(ELEMENT_DELETE_LINK_2);
 		}
 	}
 
@@ -442,7 +446,7 @@ public class WikiBase extends PlatformBase{
 		//goToWikiPage(wikiPath);
 		driver.navigate().refresh();
 		Utils.pause(2000);
-		String bExpandIcon = "//*[@class='node']//*[contains(text(), '{$node}')]"; 
+		String bExpandIcon = "//*[@class='node' or @class='titleWikiBox']//*[contains(text(), '{$node}')]"; 
 		String[] nodes = wikiPath.split("/");
 		int length = nodes.length -1;
 		for (int index = 0;index < length;index++)
@@ -459,7 +463,7 @@ public class WikiBase extends PlatformBase{
 			Utils.pause(100);
 		}
 		String nodeLast = nodes[length];
-		clickByJavascript(ELEMENT_NODE_WIKI_PAGE.replace("{$node}",nodeLast));
+		click(ELEMENT_NODE_WIKI_PAGE.replace("{$node}",nodeLast));
 		Utils.pause(2000);
 	}
 
@@ -546,7 +550,7 @@ public class WikiBase extends PlatformBase{
 		//Utils.pause(2000);
 		if(waitForAndGetElement(ELEMENT_PAGE_PERMISSION_POPUP, 5000, 0) == null) {
 			mouseOverAndClick(ELEMENT_MORE_LINK);
-			clickByJavascript(ELEMENT_PAGE_PERMISSION_LINK,2);	
+			click(ELEMENT_PAGE_PERMISSION_LINK,2);	
 		}
 		Utils.pause(1000);
 		info("-- Go to Page Permissions...successful");
@@ -631,7 +635,11 @@ public class WikiBase extends PlatformBase{
 			click(element_space);
 			Utils.pause(2000);
 		}
-		clickByJavascript(ELEMENT_WIKI_LINK_IN_SPACE);
+		SpaceManagement spMag;
+		spMag = new SpaceManagement(driver, this.plfVersion);
+		spMag.goToSpaceMenu("Wiki");
+		waitForAndGetElement(ELEMENT_WIKI_HOME);
+		Utils.pause(1000);
 		waitForAndGetElement(ELEMENT_WIKI_HOME);
 		Utils.pause(1000);
 	}
@@ -717,7 +725,7 @@ public class WikiBase extends PlatformBase{
 		String removeIcon= ELEMENT_REMOVE_ATTACHMENT.replace("{$file}", fName);
 
 		//click(ELEMENT_EDIT_PAGE_LINK);
-		clickByJavascript(removeIcon);
+		click(removeIcon);
 		waitForElementNotPresent(removeIcon);
 	}
 

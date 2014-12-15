@@ -15,6 +15,8 @@ import org.openqa.selenium.WebElement;
  *
  */
 public class BrandingManagement extends PlatformBase {
+	public final By ELEMENT_BRANDING_CANCEL = By.id("cancel");
+	public final By ELEMENT_BRANDING_SAVE = By.id("save");
 	public final By ELEMENT_PREVIEW_LOGO = By.id("PreviewImg");
 	public final By ELEMENT_UPLOAD_BUTTON = By.id("btUpload");
 	public final By ELEMENT_NAVIGATION_STYLE = By.id("navigationStyle");

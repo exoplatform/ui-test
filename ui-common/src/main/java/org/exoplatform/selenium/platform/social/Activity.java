@@ -316,7 +316,7 @@ public class Activity extends SocialBase {
 			click(ELEMENT_ATTACH_BUTTON);
 			waitForAndGetElement(By.id("LinkTitle"));
 		}
-		waitForAndGetElement(ELEMENT_SHARE_BUTTON);
+		waitForAndGetElement(ELEMENT_SHARE_BUTTON).click();
 		info("----Click share button----");
 		click(ELEMENT_SHARE_BUTTON);
 		Utils.pause(1000);
@@ -372,6 +372,9 @@ public class Activity extends SocialBase {
 		((JavascriptExecutor)driver).executeScript("arguments[0].textContent = '"+contentOfComment+"';", commentText);
 		((JavascriptExecutor)driver).executeScript("arguments[0].disabled = false;", commentButton);
 		((JavascriptExecutor)driver).executeScript("arguments[0].className = 'btn pull-right btn-primary';", commentButton);
+		Utils.pause(1000);
+		waitForAndGetElement(ELEMENT_COMMENT_BUTTON.replace("${activityText}", activityText)).click();
+		info("----Click share button----");
 		click(ELEMENT_COMMENT_BUTTON.replace("${activityText}", activityText));
 		waitForAndGetElement(ELEMENT_DELETE_COMMENT_BUTTON.replace("${activityText}", activityText).replace("${commentText}", contentOfComment), DEFAULT_TIMEOUT,1,2);
 

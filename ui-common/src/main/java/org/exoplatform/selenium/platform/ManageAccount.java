@@ -103,14 +103,14 @@ public class ManageAccount extends PlatformBase {
 				mouseOverAndClick(ELEMENT_ACCOUNT_NAME_LINK);
 				break;
 			}
-			clickByJavascript(ELEMENT_ACCOUNT_NAME_LINK);
+			click(ELEMENT_ACCOUNT_NAME_LINK);
 			if (waitForAndGetElement(ELEMENT_SIGN_OUT_LINK, 5000, 0) != null){
 				info("Element " + ELEMENT_SIGN_OUT_LINK + "... is displayed");
 				break;
 			}
 			info("Retry...[" + repeat + "]");
 		}
-		clickByJavascript(ELEMENT_SIGN_OUT_LINK,2);
+		click(ELEMENT_SIGN_OUT_LINK,2);
 		Utils.pause(1000);
 		if ( ExpectedConditions.alertIsPresent() != null ){
 			magAlert = new ManageAlert(driver);

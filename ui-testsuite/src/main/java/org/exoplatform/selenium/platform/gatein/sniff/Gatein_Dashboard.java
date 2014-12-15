@@ -142,7 +142,7 @@ public class Gatein_Dashboard extends DashBoard {
 		click(ELEMENT_SWITCH_VIEW_MODE);
 
 		info("Edit portlet");
-		pageE.selectCLVPath("General Drives/Sites Management/acme", "documents");
+		pageE.selectCLVPath("General Drives/Sites Management/intranet", "documents");
 		click(ELEMENT_SWITCH_VIEW_MODE);
 		waitForTextPresent("offices.jpg");
 		waitForTextPresent("metro.pdf");

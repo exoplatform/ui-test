@@ -60,8 +60,8 @@ public class NavigationToolbar extends PlatformBase {
 		waitForAndGetElement(brandMag.ELEMENT_UPLOAD_BUTTON);
 		waitForAndGetElement(brandMag.ELEMENT_NAVIGATION_STYLE);
 		waitForAndGetElement(brandMag.ELEMENT_TABLE_COLUMN_CONTAINER);
-		waitForAndGetElement(button.ELEMENT_CANCEL_BUTTON);
-		waitForAndGetElement(button.ELEMENT_SAVE_BUTTON);
+		waitForAndGetElement(brandMag.ELEMENT_BRANDING_CANCEL);
+		waitForAndGetElement(brandMag.ELEMENT_BRANDING_SAVE);
 	}
 
 	//Go to portal sites
@@ -456,10 +456,8 @@ public class NavigationToolbar extends PlatformBase {
 	//Function go to Home Page
 	public void goToHomePage(){
 		info("-- Go to home page --");
-		clickByJavascript(ELEMENT_HOME_PAGE);
+		click(ELEMENT_HOME_PAGE);
 		Utils.pause(1000);
-		driver.navigate().refresh();
-		waitForAndGetElement(ELEMENT_REFRESH,60000);
 	}
 
 	/**

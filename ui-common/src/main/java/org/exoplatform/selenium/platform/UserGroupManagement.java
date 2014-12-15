@@ -286,7 +286,7 @@ public class UserGroupManagement extends PlatformBase {
 				}
 			}else{
 				if (!temp[i].matches("Administration")){
-					click(By.linkText(temp[i]));
+					click(By.xpath("//*[@title='"+temp[i]+"']"));
 				}else{
 					if (waitForAndGetElement(groupName_4.replace("${groupName}", temp[i]), 5000, 0) != null){
 						click(groupName_4.replace("${groupName}", temp[i]));

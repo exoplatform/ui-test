@@ -22,13 +22,15 @@ public class CalendarBase extends PlatformBase {
 	PlatformPermission per;
 
 	//Go to the calendar's page
+	public String ELEMENT_CALENDAR_LIST_ITEM="//*[@id='UICalendars']//*[text()='$calendar']";
+	public By ELEMENT_CALENDAR_RIGHT_MENU=By.id("tmpMenuElement");
 	public String ID_CALENDAR_PAGE = "";
 	public By ELEMENT_GET_ID_PAGE = By.xpath("//*[@id='CalendarApplicationMinWidth']/../..");
 	public By ELEMENT_CALENDAR_LINK = By.className("uiIconPLFCalendar");
 	public By ELEMENT_CALENDAR_PANEL = By.xpath("//div[@class='uiBox uiCalendars']");
 	public String ELEMENT_CALENDAR_MINI_DATE= "//td[@class='highLight' and contains(text(),'${date}')]";
 	//public String ELEMENT_CALENDAR_SETTING_ICON = "//a[text()='${calendar}']/ancestor::li[contains(@class, 'calendarItem')]/div[contains(@id,'UICalendars')]";
-	public String ELEMENT_CALENDAR_SETTING_ICON = "//a[text()='${calendar}']/ancestor::li[contains(@class, 'calendarItem')]/div[@class='uiIconCalSettingMini uiIconLightGray pull-right']";
+	public String ELEMENT_CALENDAR_SETTING_ICON="//*[text()='$calendar']/../..//*[contains(@class,'uiIconCalSettingMini')]";
 	public By ELEMENT_CALENDAR_ACTIONS_ICON = By.xpath("//*[@class='uiIconCalSimplePlus uiIconLightGray']");
 	public By ELEMENT_CALENDAR_ADD_MENU = By.xpath("//*[@id='tmpMenuElement']//a[contains(@href,'AddCalendar')]");
 	public By ELEMENT_CALENDAR_SETTINGS = By.xpath("//*[@id='tmpMenuElement']//a[contains(@href,'CalendarSetting')]");
@@ -790,11 +792,10 @@ public class CalendarBase extends PlatformBase {
 	 * 				name of calendar
 	 */
 	public void openMenuOfCalendar(String calendar){
-		String id = getPropertyOfCalendar(calendar, 1);
-		WebElement element = waitForAndGetElement("//*[@id='" + id + "']/*[contains(@id,'UICalendars_CalendarPopupMenu')]", DEFAULT_TIMEOUT, 1, 2);
-		mouseOver(By.linkText(calendar),true);
-		((JavascriptExecutor)driver).executeScript("arguments[0].click();", element);
-		Utils.pause(1000);
+		info("Open menu of a calendar");
+		mouseHoverByJavaScript(ELEMENT_CALENDAR_LIST_ITEM.replace("$calendar", calendar),2);
+		clickByJavascript(ELEMENT_CALENDAR_SETTING_ICON.replace("$calendar", calendar),2);
+		waitForAndGetElement(ELEMENT_CALENDAR_RIGHT_MENU);
 	}
 
 	/** 

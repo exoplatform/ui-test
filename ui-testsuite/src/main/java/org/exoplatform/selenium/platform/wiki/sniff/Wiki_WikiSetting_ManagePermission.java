@@ -82,7 +82,7 @@ public class Wiki_WikiSetting_ManagePermission extends BasicAction {
 		String userGroup[] = {user};
 	
 		info("Add permission for user mary");
-		addSpacePermission(1, userGroup, 2);
+		addSpacePermission(0, userGroup, 2);
 		editSpacePermission(user, true, false, false, false, 2);
 		magAc.signOut();
 		
@@ -149,7 +149,7 @@ public class Wiki_WikiSetting_ManagePermission extends BasicAction {
 		editSpacePermission(path, true, true, true, true, 2);
 		assert waitForAndGetElement(ELEMENT_ADMIN_SPACE_CHECK.replace("{$user}", path),DEFAULT_TIMEOUT, 1, 2).isSelected();
 		magAc.signOut();
-		
+
 		checkUserHaveWikiAdminPermission(user);
 		
 		info("Delete permission");
@@ -164,15 +164,15 @@ public class Wiki_WikiSetting_ManagePermission extends BasicAction {
 	
 	@Test
 	public void test04_AddEditDeletePermissionOfPage_ForUser(){
-		String title = "Wiki_sniff_permission_title_04";
-		String content = "Wiki_sniff_permission_content_04";
+		String title = "Wiki_sniff_permission_title_04" + getRandomNumber();
+		String content = "Wiki_sniff_permission_content_04" + getRandomNumber();
 		String user = DATA_USER2;
 		String userGroup[] = {user};
 		
 		addBlankWikiPage(title, content, 0);
 		deletePagePermission("any");
 
-		addPagePermission(1, userGroup, 1);
+		addPagePermission(0, userGroup, 1);
 		editPagePermission(user, true, false, false, 2);
 		magAc.signOut();
 		
@@ -194,8 +194,8 @@ public class Wiki_WikiSetting_ManagePermission extends BasicAction {
 	
 	@Test
 	public void test05_AddEditDeletePermissionOfPage_ForGroup(){
-		String title = "Wiki_sniff_permission_title_05";
-		String content = "Wiki_sniff_permission_content_05";
+		String title = "Wiki_sniff_permission_title_05" + getRandomNumber();
+		String content = "Wiki_sniff_permission_content_05" + getRandomNumber();
 		String user = DATA_USER4;
 		String userGroup[] = {"Development/Select this Group"};
 		

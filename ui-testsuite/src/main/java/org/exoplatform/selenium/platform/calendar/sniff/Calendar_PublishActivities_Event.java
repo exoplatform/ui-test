@@ -250,9 +250,9 @@ public class Calendar_PublishActivities_Event extends CalendarBase{
 	 */
 	@Test
 	public  void test07_ActivitiesShouldBeUpdatedAfterDeletingOfAnEditedRecurringEvent() {
-		String name ="event 1092271";
-		String description = "description 1092271";
-		String space = "Space1092271";
+		String name ="event 1092272";
+		String description = "description 1092272";
+		String space = "Space1092272";
 		/*create data*/
 		info("Create data");
 		sp.goToAllSpaces();

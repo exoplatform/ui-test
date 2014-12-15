@@ -65,8 +65,8 @@ public class Gatein_Manage_ManagePage extends DashBoard {
 		waitForAndGetElement("//*[contains(text(), 'group::/platform/guests::sitemap')]");
 		
 		info("Search page with Type and Site");
-		pageMag.searchPageInManagementPage(PageType.PORTAL, "", true, "acme");
-		waitForAndGetElement("//*[contains(text(), 'portal::acme::overview')]");
+		pageMag.searchPageInManagementPage(PageType.PORTAL, "", true, "intranet");
+		waitForAndGetElement("//*[contains(text(), 'portal::intranet::overview')]");
 		waitForElementNotPresent("//*[contains(text(), 'portal::intranet::')]");
 		
 		info("Search page with Title, Site name, Type");
@@ -147,9 +147,9 @@ public class Gatein_Manage_ManagePage extends DashBoard {
 	 */
 	@Test
 	public void test04_AddEditDeletePageForGroup_InPageManagement(){
-		String pageName = "SniffManagePageName04";
-		String pageTitle = "SniffManagePageTitle04";
-		String ownerId = "/organization/management/executive-board";
+		String pageName = "SniffManagePageName7";
+		String pageTitle = "SniffManagePageTitle7";
+		String ownerId = "/platform/administrators";
 		String groupPath = "Platform /Content Management ";
 		String membership = "*";
 		
@@ -216,8 +216,8 @@ public class Gatein_Manage_ManagePage extends DashBoard {
 	 */
 	@Test
 	public void test06_AddPageForUser(){
-		String nodeName = "SniffManagePageName06";
-		String displayName = "SniffManagePage06";
+		String nodeName = "SniffManagePageNamex";
+		String displayName = "SniffManagePagex";
 		
 		navTool.goToDashboard();
 		
@@ -252,7 +252,7 @@ public class Gatein_Manage_ManagePage extends DashBoard {
 	}
 	
 	public void editCLVPortletAndSwitchViewMode(){
-		pageE.selectCLVPath("General Drives/Sites Management/acme", "documents");
+		pageE.selectCLVPath("General Drives/Sites Management/intranet", "documents");
 		click(ELEMENT_SWITCH_VIEW_MODE);
 		waitForTextPresent("offices.jpg");
 		waitForTextPresent("metro.pdf");

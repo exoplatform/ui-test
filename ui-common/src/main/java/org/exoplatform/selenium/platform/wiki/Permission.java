@@ -77,7 +77,7 @@ public class Permission extends WikiBase{
 			break;
 			}		
 			Utils.pause(1000);
-			clickByJavascript(button.ELEMENT_ADD_BUTTON);
+			click(button.ELEMENT_ADD_BUTTON);
 			Utils.pause(1000);
 			button.save();
 		}
@@ -150,8 +150,8 @@ public class Permission extends WikiBase{
 
 		info("--Delete permission--");
 
-		if (waitForAndGetElement(Delete,10000,0) != null){
-			clickByJavascript(Delete);
+		if (waitForAndGetElement(Delete,5000,0) != null){
+			click(Delete);
 		}
 		waitForElementNotPresent(Delete);
 		button.save();
@@ -252,7 +252,8 @@ public class Permission extends WikiBase{
 		per.selectGroupMembership(groupUser[0], groupUser[1]);
 		break;
 		}
-		clickByJavascript(button.ELEMENT_ADD_BUTTON);
+		Utils.pause(3000);
+		click(button.ELEMENT_ADD_BUTTON);
 		Utils.pause(3000);
 		button.save();
 		waitForMessage(MSG_PERMISSION_SAVE);

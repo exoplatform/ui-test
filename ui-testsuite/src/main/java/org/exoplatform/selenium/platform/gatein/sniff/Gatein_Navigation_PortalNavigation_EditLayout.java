@@ -228,7 +228,7 @@ public class Gatein_Navigation_PortalNavigation_EditLayout extends PortalManagem
 		
 		info("Edit application when edit layout of page");
 		navTool.goToEditPageEditor();
-		pageE.selectCLVPath("General Drives/Sites Management/acme", "documents");
+		pageE.selectCLVPath("General Drives/Sites Management/intranet", "documents");
 		click(ELEMENT_SWITCH_VIEW_MODE);
 		waitForTextPresent("offices.jpg");
 		waitForTextPresent("metro.pdf");

@@ -6,6 +6,7 @@ import org.exoplatform.selenium.Button;
 import org.exoplatform.selenium.ManageAlert;
 import org.exoplatform.selenium.Utils;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 
 /**
@@ -197,7 +198,7 @@ public class SettingSearchPage extends PlatformBase {
 		click(ELEMENT_QUICK_SEARCH_ICON);
 		type(ELEMENT_QUICK_SEARCH_TEXTBOX, searchText, true);
 		Utils.pause(3000);
-		click(ELEMENT_SEE_ALL_SEARCH_RESULTS);
+		waitForAndGetElement(ELEMENT_QUICK_SEARCH_TEXTBOX).sendKeys(Keys.RETURN);
 		Utils.pause(1000);
 	}
 

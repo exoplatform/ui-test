@@ -64,10 +64,10 @@ public class ECMS_SE_Admin extends PlatformBase {
 	 */
 	@Test
 	public void test02_AddCategory() {
-		String node1 = "test02_AddCategory";
+		String node1 = "test02_AddCategory658512";
 		By bNode = By.xpath(siteExp.ELEMENT_SE_NODE.replace("{$node}", node1));
 		String categoryPath = "Defense";
-		String categoryTree = "powers";
+		String categoryTree = "intranet";
 		
 		info("Add Category");
 		//Create node
@@ -79,7 +79,7 @@ public class ECMS_SE_Admin extends PlatformBase {
 		actBar.addItem2ActionBar("addCategory", actBar.ELEMENT_CATEGORIES_LINK);
 		
 		//Add category for node
-		actBar.addCategoryForNode(categoryTree, false, categoryPath, "Healing");
+		actBar.addCategoryForNode(categoryTree, false, categoryPath, "");
 		
 		//Delete data
 		cMenu.deleteDocument(bNode);
@@ -237,7 +237,7 @@ public class ECMS_SE_Admin extends PlatformBase {
 		cTemplate.createNewFile(node1,node1,node1);
 		click(siteExp.ELEMENT_SIDEBAR_SITES_MANAGEMENT);
 		actBar.goToAddNewContent();
-		cTemplate.createNewProduct(node2, node2);
+		cTemplate.createNewFile(node2, node2, node2);
 		
 		//Add Relation button to action bar if it is not shown on action bar yet
 		cTemplate.goToNode(bNode1);
@@ -265,7 +265,7 @@ public class ECMS_SE_Admin extends PlatformBase {
 		cTemplate.createNewFile(node1,node1,node1);
 		click(siteExp.ELEMENT_SIDEBAR_SITES_MANAGEMENT);
 		actBar.goToAddNewContent();
-		cTemplate.createNewProduct(node2, node2);
+		cTemplate.createNewFile(node2, node2, node2);
 		
 		//Add Relation button to action bar if it is not shown on action bar yet
 		cTemplate.goToNode(bNode1);

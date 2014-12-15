@@ -61,7 +61,7 @@ public class ECMS_SE_BasicAction extends PlatformBase {
 		//Go to node2, add a document
 		ecms.goToNode(node2);
 		actBar.goToAddNewContent();
-		cTemplate.createNewWebContent(webContent, webContent, "", webContent, "", "");
+		cTemplate.createNewWebContent(webContent, webContent, "", "", "", "");
 
 		//Check if a symlink is added into symlink of node2
 		ecms.goToNode(node1);

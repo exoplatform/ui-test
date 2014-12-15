@@ -134,14 +134,14 @@ public class SocialBase extends PlatformBase {
 		//		goToMySpacePage();
 		goToAllSpaces();
 		waitForAndGetElement(ELEMENT_MY_SPACES_LINK);
-		clickByJavascript(ELEMENT_MY_SPACES_LINK);
+		click(ELEMENT_MY_SPACES_LINK);
 		Utils.pause(500);
 	}
 
 	// Go to All Spaces
 	public void goToAllSpaces(){
 		info("Go to All Spaces");
-		clickByJavascript(ELEMENT_JOIN_SPACE_LINK);
+		click(ELEMENT_JOIN_SPACE_LINK);
 		if(waitForAndGetElement("//button[contains(.,'Add New Space')]",DEFAULT_TIMEOUT,0)== null){
 			clearCache();
 			waitForAndGetElement("//button[contains(.,'Add New Space')]");

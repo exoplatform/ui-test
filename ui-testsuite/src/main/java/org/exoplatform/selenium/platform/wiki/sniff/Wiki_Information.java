@@ -100,11 +100,11 @@ public class Wiki_Information extends Version {
 	 */
 	@Test
 	public void test03_AddRelationDifferentSpace(){
-		String spaceName1 = "relationspace031";
+		String spaceName1 = "relationspace031" + getRandomNumber();
 		String title1 = "Wiki_sniff_relation_title_03_1";
 		String content1 = "Wiki_sniff_relation_content_03_1";
 
-		String spaceName2 = "relationspace032";
+		String spaceName2 = "relationspace032" + getRandomNumber();
 		String title2 = "Wiki_sniff_relation_title_03_2";
 		String content2 = "Wiki_sniff_relation_content_03_2";
 
@@ -119,7 +119,8 @@ public class Wiki_Information extends Version {
 		addBlankWikiPage(title2, content2, 0);
 
 		info("Add relation for page2 of space2 to page1 of space1");
-		addRelatedPage("Wiki Home/" + title2, title1, spaceName1);
+		addRelatedPage("Wiki Home/" + title2, title1, spaceName1, false);
+		waitForAndGetElement(ELEMENT_RELATED_PAGE_2.replace("${relatedPage}", title1));
 
 		magMem.goToAllSpaces();
 		magMem.deleteSpace(spaceName1, 180000);
@@ -131,10 +132,10 @@ public class Wiki_Information extends Version {
 	 */
 	@Test
 	public void test04_AddRelationWithIntranetPortal(){
-		String title1 = "Wiki_relation_title_04_1";
-		String content1 = "Wiki_relation_content_04_1";
+		String title1 = "Wiki_relation_title_04_1" + getRandomNumber();
+		String content1 = "Wiki_relation_content_04_1" + getRandomNumber();
 
-		String spaceName = "relationspace04";
+		String spaceName = "relationspace04" + getRandomNumber();
 		String title2 = "Wiki_relation_title_04_2";
 		String content2 = "Wiki_relation_content_04_2";
 
@@ -146,7 +147,8 @@ public class Wiki_Information extends Version {
 		addBlankWikiPage(title2, content2, 0);
 
 		info("Add relation for page2 of space2 to page1 of space1");
-		addRelatedPage("Wiki Home/" + title2, title1, "Intranet");
+		addRelatedPage("Wiki Home/" + title2, title1, "Intranet", false);
+		waitForAndGetElement(ELEMENT_RELATED_PAGE_2.replace("${relatedPage}", title1));
 
 		magMem.goToAllSpaces();
 		magMem.deleteSpace(spaceName, 180000);
@@ -184,8 +186,8 @@ public class Wiki_Information extends Version {
 	 */
 	@Test
 	public void test06_AddRelation_NoSpace(){
-		String title = "Wiki_sniff_infor_page_title_06";
-		String content = "Wiki_sniff_infor_page_content_06";
+		String title = "Wiki_sniff_infor_page_title_06" + getRandomNumber();
+		String content = "Wiki_sniff_infor_page_content_06" + getRandomNumber();
 
 		magAc.signOut();
 		magAc.signIn(USER_ROOT, PASS_ROOT);
@@ -194,8 +196,18 @@ public class Wiki_Information extends Version {
 		goToAddRelation();
 		click(ELEMENT_SELECT_SPACE);
 		Utils.pause(2000);
-		waitForAndGetElement(ELEMENT_NO_SPACE_OPTION);
-		but.cancel();
+		//waitForAndGetElement(ELEMENT_NO_SPACE_OPTION);
+		waitForAndGetElement(ELEMENT_GETTING_STARTED_SPACE);
+		click(ELEMENT_SELECT_SPACE);
+		//click("//i[contains(@class,'uiIconClose pull-right') and contains(@title,'Close')]");
+		//clickByJavascript("//i[contains(@class,'uiIconClose pull-right') and contains(@title,'Close')]");
+		//click("//i[contains(@title,'Close')]");
+		/*WebElement elementMembership_1 = waitForAndGetElement(By.xpath("//i[contains(@title,'Close')]"), 5000, 0);
+		((JavascriptExecutor)driver).executeScript("arguments[0].click();", elementMembership_1);*/
+		//click(but.ELEMENT_CANCEL_BUTTON);
+		click(but.ELEMENT_SELECT_BUTTON);
+		//but.cancel();
+		//but.close();
 
 		click(ELEMENT_NODE_WIKI_PAGE.replace("{$node}", title));
 		waitForMessage(content);
@@ -304,7 +316,7 @@ public class Wiki_Information extends Version {
 		waitForAndGetElement(ELEMENT_VERSION_LINK.replace("{$version}", "3"));
 		
 		info("Delete acttachment -> page's version is not changed");
-		clickByJavascript(ELEMENT_NODE_WIKI_PAGE.replace("{$node}", title2));
+		click(ELEMENT_NODE_WIKI_PAGE.replace("{$node}", title2));
 		deleteAnAttachment(link);		
 		waitForAndGetElement(ELEMENT_ATTACHMENT_NUMBER.replace("${No}", "0"));
 		waitForAndGetElement(ELEMENT_VERSION_LINK.replace("{$version}", "3"));

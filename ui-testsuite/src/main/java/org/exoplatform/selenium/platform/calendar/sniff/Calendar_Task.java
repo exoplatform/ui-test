@@ -76,7 +76,7 @@ public class Calendar_Task extends CalendarBase {
 		task.checkSuggestionTaskTime(null, 30);
 		task.checkSuggestionTaskTime("07:00", 30);
 		task.inputDataTask(task1, null, null, null, false, calendar);
-		task.editTask(task1, newTask, note, getDate(0,"MM/dd/yyyy") + " 12:00", getDate(0,"MM/dd/yyyy") + " 13:00", false, "/TestData/Winter.jpg");
+		task.editTask(task1, newTask, note, getDate(0,"MM/dd/yyyy") + " 12:00", getDate(0,"MM/dd/yyyy") + " 13:00", false, "");
 		Utils.pause(3000);
 		waitForAndGetElement(By.xpath(ELEMENT_EVENT_TASK_ONE_DAY.replace("${taskName}", newTask)));
 
@@ -104,7 +104,7 @@ public class Calendar_Task extends CalendarBase {
 		task.checkSuggestionTaskTime(null, 30);
 		task.checkSuggestionTaskTime("07:00", 30);
 		task.inputDataTask(task1, null, null, null, false, calendar);
-		task.editTask(task1, newTask, note, getDate(0,"MM/dd/yyyy") + " 12:00", getDate(0,"MM/dd/yyyy") + " 13:00", false, "/TestData/Winter.jpg");
+		task.editTask(task1, newTask, note, getDate(0,"MM/dd/yyyy") + " 12:00", getDate(0,"MM/dd/yyyy") + " 13:00", false, "");
 		Utils.pause(3000);
 		waitForAndGetElement(By.xpath(ELEMENT_EVENT_TASK_ONE_DAY.replace("${taskName}", newTask)));
 
@@ -132,7 +132,7 @@ public class Calendar_Task extends CalendarBase {
 		task.checkSuggestionTaskTime(null, 30);
 		task.checkSuggestionTaskTime("07:00", 30);
 		task.inputDataTask(task1, null, null, null, false, calendar);
-		task.editTask(task1, newTask, note, getDate(0,"MM/dd/yyyy") + " 12:00", getDate(0,"MM/dd/yyyy") + " 13:00", false, "/TestData/Winter.jpg");
+		task.editTask(task1, newTask, note, getDate(0,"MM/dd/yyyy") + " 12:00", getDate(0,"MM/dd/yyyy") + " 13:00", false, "");
 		Utils.pause(3000);
 		waitForAndGetElement(By.xpath(ELEMENT_EVENT_TASK_ONE_DAY.replace("${taskName}", newTask)));
 
@@ -279,9 +279,9 @@ public class Calendar_Task extends CalendarBase {
 	@Test
 	public  void test01_02_AddDeleteATaskInGroupCalendar() {
 		info("Test 1: Add a task in group calendar");
-		String calendar = "Calendar 111865";
+		String calendar = "Calendar 111867";
 		String[] groups = {"/developers"};
-		String task1 = "Task 111865";
+		String task1 = "Task 111867";
 
 		//Setting time zone
 		goToCalendarPage();
