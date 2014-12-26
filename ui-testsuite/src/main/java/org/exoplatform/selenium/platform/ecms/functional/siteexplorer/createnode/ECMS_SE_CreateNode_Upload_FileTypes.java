@@ -14,7 +14,6 @@ import org.testng.annotations.Test;
 
 /**
  * 
- * @author vuna2
  * July, 31th, 2013
  * 
  */
@@ -46,13 +45,13 @@ public class ECMS_SE_CreateNode_Upload_FileTypes extends PlatformBase{
 	}
 
 	/**
-	 * Qmetry ID: 66219 <Upload .exe file>
-	 * Qmetry ID: 66220 <Upload .html file>
-	 * Qmetry ID: 66221 <Upload .PDF file>
-	 * Qmetry ID: 66222 <Upload .xml file>
-	 * Qmetry ID: 66223 <Upload image file> 
-	 * Qmetry ID: 66224 <Upload Microsoft office file>
-	 * Qmetry ID: 66219 <Upload Open office file>
+	 * Qmetry ID: 102142 <Upload .exe file>
+	 * Qmetry ID: 102143 <Upload .html file>
+	 * Qmetry ID: 102144 <Upload .PDF file>
+	 * Qmetry ID: 102145 <Upload .xml file>
+	 * Qmetry ID: 102146 <Upload image file> 
+	 * Qmetry ID: 102147 <Upload Microsoft office file>
+	 * Qmetry ID: 102148 <Upload Open office file>
 	 * 
 	 */
 	@Test

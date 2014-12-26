@@ -68,7 +68,7 @@ public class TestBase {
 	//public final By ELEMENT_MENU_EDIT_LINK = By.xpath("//i[@class='uiIconPLF24x24Edit']");
 	//public final By ELEMENT_MENU_PAGE_LINK = By.linkText("Page");
 	//public final String AJAX_LOADING_MASK = "//div[@id='AjaxLoadingMask']";
-	public final String DEFAULT_BASEURL="http://localhost:8080/portal";
+	public final String DEFAULT_BASEURL="http://192.168.1.36:8080/portal";
 
 	/*======= Welcome Screen (Term and Conditions) =====*/
 	public final By ELEMENT_FIRSTNAME_ACCOUNT = By.name("firstNameAccount");
@@ -471,29 +471,31 @@ public class TestBase {
 	public void click(Object locator, Object... opParams) {
 		//Actions actions = new Actions(driver);
 		int notDisplay = (Integer) (opParams.length > 0 ? opParams[0]: 0);		
-		//		Actions actions = new Actions(driver);
+
+		Actions actions = new Actions(driver);
 		try {
 			WebElement element = waitForAndGetElement(locator, DEFAULT_TIMEOUT, 1, notDisplay);
 			if(element.isEnabled())
-				//				actions.click(element).perform();
-				((JavascriptExecutor)driver).executeScript("arguments[0].click();", element);
+				actions.click(element).perform();
 			else {
+				
 				debug("Element is not enabled");
 				click(locator, notDisplay);
 			}
 		} catch (StaleElementReferenceException e) {
 			checkCycling(e, DEFAULT_TIMEOUT/WAIT_INTERVAL);
 			Utils.pause(WAIT_INTERVAL);
-			clickByJavascript(locator, notDisplay);
+			click(locator, notDisplay);
 		} catch (ElementNotVisibleException e) {
 			checkCycling(e, DEFAULT_TIMEOUT/WAIT_INTERVAL);
 			Utils.pause(WAIT_INTERVAL);
-			clickByJavascript(locator, notDisplay);
+			click(locator, notDisplay);
 		} finally {
 			loopCount = 0;
 		}
 		Utils.pause(500);
 	}
+
 
 	/**
 	 * Click by using javascript
@@ -526,7 +528,7 @@ public class TestBase {
 			WebElement element = waitForAndGetElement(locator, DEFAULT_TIMEOUT, 1, notDisplayE);
 
 			if (!element.isSelected()) {
-				clickByJavascript(locator,notDisplayE);
+				click(locator,notDisplayE);
 			} else {
 				info("Element " + locator + " is already checked.");
 			}
@@ -1251,7 +1253,7 @@ public class TestBase {
 	 * Upload file on IE
 	 * @param file: name of file
 	 */
-	public void uploadFile(String file){
+	protected void uploadFile(String file){
 		String fs = File.separator;
 		try {
 			Process proc=Runtime.getRuntime().exec(Utils.getAbsoluteFilePath("TestData\\uploadFile.exe") + " " + Utils.getAbsoluteFilePath(file.replace("/", fs)));

@@ -716,18 +716,20 @@ public class ActionBar extends EcmsBase{
 		if(!notPersonalDoc)
 			click(ELEMENT_PERSONAL_DOCUMENTS);
 		if (mDelete){
+			info("mDelete is true");
 			String[] nodes = elementName.split("/");
 			for (String node : nodes){
 				info("-- Delete node: " + node); 
 				if (waitForAndGetElement(ELEMENT_SELECT_CHECKBOX.replace("${name}", node), 3000, 0, 2) != null){
-//					check(ELEMENT_SELECT_CHECKBOX.replace("${name}", node), 2);
-					info("check click of selenium ");
-					waitForAndGetElement(ELEMENT_SELECT_CHECKBOX.replace("${name}", node),DEFAULT_TIMEOUT,1,2).click();
+					info("Checkbox is not in admin view");
+					check(ELEMENT_SELECT_CHECKBOX.replace("${name}", node), 2);
 				}else{
+					info("Checkbox is in admin view");
 					check(ELEMENT_NODE_ADMIN_VIEW.replace("${nodeName}", node) + "/../../../div[@class='columnCheckbox']", 2);
 				}
 			}
 		}else{
+			info("mDelete is false");
 			if (waitForAndGetElement(ELEMENT_UI_CHECKBOX.replace("${element}", elementName), 3000, 0, 2) != null){
 				check(ELEMENT_UI_CHECKBOX.replace("${element}", elementName), 2);
 			}else{
