@@ -34,6 +34,7 @@ public class ECMS_SE_CreateNode_Upload_Action_FileExisting extends PlatformBase{
 	Button button;
 
 	//Ecms
+	
 	EcmsBase ecms;
 	ContextMenu cMenu;
 	ActionBar actBar;
@@ -64,7 +65,7 @@ public class ECMS_SE_CreateNode_Upload_Action_FileExisting extends PlatformBase{
 	}
 
 	/**
-	 * Qmetry ID: 66208
+	 * Qmetry ID: 102138
 	 * Cancel uploading an existing file in Document
 	 * 
 	 */
@@ -77,6 +78,7 @@ public class ECMS_SE_CreateNode_Upload_Action_FileExisting extends PlatformBase{
 
 		info("Create a data test");
 		ecms.uploadFile("TestData/" + FILE_PDF_NAME + ".pdf");
+		
 
 		info("Upload an existing file");
 		uploadFileAndCheckDisplayedMessage("TestData/" + FILE_PDF_NAME + ".pdf");
@@ -92,7 +94,7 @@ public class ECMS_SE_CreateNode_Upload_Action_FileExisting extends PlatformBase{
 	}
 
 	/**
-	 * Qmetry ID: 74417
+	 * Qmetry ID: 102247
 	 * Keep an existing file when uploading in Document
 	 * 
 	 */
@@ -129,7 +131,7 @@ public class ECMS_SE_CreateNode_Upload_Action_FileExisting extends PlatformBase{
 	}
 
 	/**
-	 * Qmetry ID: 74418
+	 * Qmetry ID: 102248
 	 * Replace an existing file in Document
 	 * 
 	 */
@@ -146,8 +148,10 @@ public class ECMS_SE_CreateNode_Upload_Action_FileExisting extends PlatformBase{
 		click(ecms.ELEMENT_UPLOAD_CLOSE_TAB);
 		click(sitesEx.ELEMENT_BUTTON_REFRESH_TOPBAR_MENU);
 		button.ok();
+		
 		Utils.pause(3000);
 
+		
 		ecms.goToNode(FILE_OPOFFICE_NAME, true);
 		click(actBar.ELEMENT_EDIT_LINK);
 		type(cTemplate.ELEMENT_NEWFILE_TITLE_TEXTBOX, editTitle, false);
@@ -166,8 +170,11 @@ public class ECMS_SE_CreateNode_Upload_Action_FileExisting extends PlatformBase{
 		click(ecms.ELEMENT_UPLOAD_FILE_ACTION.replace("${action}", "Replace"));
 		click(sitesEx.ELEMENT_BUTTON_REFRESH_TOPBAR_MENU);
 		button.ok();
-		Utils.pause(3000);	
+		Utils.pause(3000);
+		info("Wait the new element");
 		waitForAndGetElement(ecms.ELEMENT_NODE_ADMIN_VIEW.replace("${nodeName}", FILE_OPOFFICE_NAME));
+		
+		info("Wait for element after");
 		WebElement elementAfter = waitForAndGetElement(ecms.ELEMENT_FILE_INFORMATION.replace("${node}", FILE_OPOFFICE_NAME));
 		String dateAfter = elementAfter.getText();
 		info("Replacement, change a File Date to..." + dateAfter);
@@ -178,7 +185,7 @@ public class ECMS_SE_CreateNode_Upload_Action_FileExisting extends PlatformBase{
 	}
 
 	/**
-	 * Qmetry ID: 74449
+	 * Qmetry ID: 102278
 	 * Keep existing files when uploading in Site Explorer
 	 * 
 	 */
@@ -212,7 +219,7 @@ public class ECMS_SE_CreateNode_Upload_Action_FileExisting extends PlatformBase{
 	}
 
 	/**
-	 * Qmetry ID: 74450
+	 * Qmetry ID: 102279
 	 * Replace an existing file in Site Explorer
 	 * 
 	 */
@@ -232,15 +239,15 @@ public class ECMS_SE_CreateNode_Upload_Action_FileExisting extends PlatformBase{
 		WebElement elementBefore = waitForAndGetElement(ecms.ELEMENT_FILE_CREATED_DATE.replace("${nodeTitle}", FILE_NAME));
 		String dateBefore = elementBefore.getText();
 		info("Date of document creation..." + dateBefore);
-		Utils.pause(65000);
+		Utils.pause(5000);
 
 		info("Replace an existing file in Document");
-		ecms.uploadFile("TestData/" + FILE_NAME);
+		uploadFileAndCheckDisplayedMessage("TestData/" + FILE_NAME);
 		click(ecms.ELEMENT_UPLOAD_FILE_ACTION.replace("${action}", "Replace"));
 		Utils.pause(1000);
 		click(sitesEx.ELEMENT_BUTTON_REFRESH_TOPBAR_MENU);
 		button.ok();
-
+		Utils.pause(3000);
 		WebElement elementAfter = waitForAndGetElement(ecms.ELEMENT_FILE_CREATED_DATE.replace("${nodeTitle}", FILE_NAME));
 		String dateAfter = elementAfter.getText();
 		info("Replacement, change a File Date to..." + dateAfter);	
@@ -251,7 +258,7 @@ public class ECMS_SE_CreateNode_Upload_Action_FileExisting extends PlatformBase{
 	}
 
 	/**
-	 * Qmetry ID: 74842
+	 * Qmetry ID: 102303
 	 * Cancel uploading an existing file in Site Explorer
 	 * 
 	 */

@@ -471,7 +471,6 @@ public class TestBase {
 	public void click(Object locator, Object... opParams) {
 		//Actions actions = new Actions(driver);
 		int notDisplay = (Integer) (opParams.length > 0 ? opParams[0]: 0);		
-
 		Actions actions = new Actions(driver);
 		try {
 			WebElement element = waitForAndGetElement(locator, DEFAULT_TIMEOUT, 1, notDisplay);

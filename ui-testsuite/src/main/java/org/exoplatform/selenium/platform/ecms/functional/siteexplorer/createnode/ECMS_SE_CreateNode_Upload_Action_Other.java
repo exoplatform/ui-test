@@ -3,6 +3,7 @@ package org.exoplatform.selenium.platform.ecms.functional.siteexplorer.createnod
 import static org.exoplatform.selenium.TestLogger.info;
 
 import org.exoplatform.selenium.Button;
+import org.exoplatform.selenium.Utils;
 import org.exoplatform.selenium.platform.ManageAccount;
 import org.exoplatform.selenium.platform.NavigationToolbar;
 import org.exoplatform.selenium.platform.PlatformBase;
@@ -44,10 +45,10 @@ public class ECMS_SE_CreateNode_Upload_Action_Other extends PlatformBase{
 		initSeleniumTest();
 		driver.get(baseUrl);
 		magAcc = new ManageAccount(driver);
-		navToolBar = new NavigationToolbar(driver);
+		navToolBar = new NavigationToolbar(driver, this.plfVersion);
 		ecms = new EcmsBase(driver);
 		cMenu = new ContextMenu(driver);
-		cTemplate = new ContentTemplate(driver);
+		cTemplate = new ContentTemplate(driver, this.plfVersion);
 		actBar = new ActionBar(driver);
 		ecmsPer = new EcmsPermission(driver);
 		button = new Button(driver);
@@ -63,11 +64,11 @@ public class ECMS_SE_CreateNode_Upload_Action_Other extends PlatformBase{
 	}
 
 	/**
-	 * Qmetry ID: 66216
+	 * Qmetry ID: 102140
 	 * Upload a file in locked node by user is not locker in Site Explorer
-	 * 
+	 * Cannot check this case, when if not logout of John, cannot check waitforElementnotPresent does not work.
 	 */
-	@Test
+	@Test(groups = "pending")
 	public void test01_UploadFileInLockedNodeByUserIsNotLockerInSiteExplorer(){
 		String DOCUMENT_FOLDER_TITLE = "ECMS_SE_Upload_Other_01";
 
@@ -78,19 +79,24 @@ public class ECMS_SE_CreateNode_Upload_Action_Other extends PlatformBase{
 		cTemplate.createNewFolder(DOCUMENT_FOLDER_TITLE, folderType.Document);	
 		cMenu.contextMenuAction(By.linkText(DOCUMENT_FOLDER_TITLE), cMenu.ELEMENT_CONTEXT_MENU_LOCK);
 		assert cMenu.isLockedNode(By.linkText(DOCUMENT_FOLDER_TITLE)): "Failed to lock the node..." + DOCUMENT_FOLDER_TITLE;
-		driver.close();
-
+		driver.quit();
+		
+		
 		info("Login by user is not locker");
+//		initSeleniumTest();
+//		newDriver.get(baseUrl);
+		
 		loginWithAnotherAccOnThesameBrowser(DATA_USER2, DATA_PASS);
 		magAcc = new ManageAccount(newDriver);
 		navToolBar = new NavigationToolbar(newDriver);
 		ecms = new EcmsBase(newDriver);
 		cMenu = new ContextMenu(newDriver);
-		siteExp = new SitesExplorer(newDriver);
 
 		info("Checking... [Mary] can not see [Upload] icon on action bar");
 		navToolBar.goToSiteExplorer();
 		ecms.goToNode(By.linkText(DOCUMENT_FOLDER_TITLE));
+		Utils.pause(4000);
+		info("Check the Upoad button does not display");
 		waitForElementNotPresent(ELEMENT_UPLOAD_LINK_XPATH);
 
 		info("Restore data");
@@ -99,10 +105,13 @@ public class ECMS_SE_CreateNode_Upload_Action_Other extends PlatformBase{
 		//reset data
 		navToolBar.goToSiteExplorer();
 		cMenu.deleteDocument(By.linkText(DOCUMENT_FOLDER_TITLE));
+		info("-- User signOut --");
+		magAcc.signOut();
+		newDriver.close();
 	}
 
 	/**
-	 * Qmetry ID: 66217
+	 * Qmetry ID: 102141
 	 * Upload a file in path is in 'check in' status
 	 * 
 	 */
@@ -128,7 +137,7 @@ public class ECMS_SE_CreateNode_Upload_Action_Other extends PlatformBase{
 	}
 
 	/**
-	 * Qmetry ID: 66227
+	 * Qmetry ID: 102149
 	 * Upload a file when user does not have add node right
 	 * 
 	 */
@@ -165,7 +174,7 @@ public class ECMS_SE_CreateNode_Upload_Action_Other extends PlatformBase{
 	}
 
 	/**
-	 * Qmetry ID: 66228
+	 * Qmetry ID: 102150
 	 * Upload a file in a node has parent node is in 'Check in' status
 	 * 
 	 */
@@ -184,7 +193,8 @@ public class ECMS_SE_CreateNode_Upload_Action_Other extends PlatformBase{
 		
 		info("Create a new content inside the above folder");
 		actBar.goToAddNewContent();
-		cTemplate.createNewIllustratedWebContent(WEB_CONTENT_TITLE, WEB_CONTENT_TITLE, "", "", "", "", "");
+		cTemplate.createNewWebContent(WEB_CONTENT_TITLE, WEB_CONTENT_TITLE, "", "", "", "");
+		//cTemplate.createNewIllustratedWebContent(WEB_ILLUSTRATED_CONTENT_TITLE, "", "", "", "", "", "");
 		
 		info("Check in the document folder");
 		ecms.goToNode(WEB_CONTENT_FOLDER_TITLE);
@@ -200,7 +210,7 @@ public class ECMS_SE_CreateNode_Upload_Action_Other extends PlatformBase{
 	}
 
 	/**
-	 * Qmetry ID: 74409
+	 * Qmetry ID: 102241
 	 * File uploaded is stored and saved in Document
 	 * 
 	 */
@@ -220,7 +230,7 @@ public class ECMS_SE_CreateNode_Upload_Action_Other extends PlatformBase{
 	}
 
 	/**
-	 * Qmetry ID: 74419
+	 * Qmetry ID: 102249
 	 * Upload a file with size more than 200 MB from Document
 	 * ====================== PENDING =======================
 	 * ===== Do not upload a large file to git repository ===  
@@ -232,7 +242,7 @@ public class ECMS_SE_CreateNode_Upload_Action_Other extends PlatformBase{
 	}
 
 	/**
-	 * Qmetry ID: 74422
+	 * Qmetry ID: 102252
 	 * File uploaded with "waiting" status when upload in Document 
 	 * 
 	 */
@@ -242,7 +252,7 @@ public class ECMS_SE_CreateNode_Upload_Action_Other extends PlatformBase{
 	}
 	
 	/**
-	 * Qmetry ID: 74441
+	 * Qmetry ID: 102271
 	 * File uploaded is stored and saved in Site Explorer
 	 * 
 	 */
@@ -261,22 +271,23 @@ public class ECMS_SE_CreateNode_Upload_Action_Other extends PlatformBase{
 	}
 	
 	/**
-	 * Qmetry ID: 74442
+	 * Qmetry ID: 102319
 	 * Upload a file with invalid characters([], ', ") in Site Explorer
 	 * 
 	 */
 	@Test
 	public void test09_UploadFileWithInvalidCharactersInSiteExplorer(){
-		String FILE_NAME = "ECMS_DMS_SE_Upload_[]'\"Chars.doc";
+		String FILE_NAME = "ECMS_DMS_SE_Upload_[]" + "'" + '"' + "Chars.doc";
 		String FILE_NAME_UPDATE = "ECMS_DMS_SE_Upload_----Chars.doc";
 		
 		info("Go to Content Explorer");
 		navToolBar.goToSiteExplorer();
 		
 		info("Upload a file with invalid characters");
+		info(FILE_NAME);
 		ecms.uploadFile("TestData/" + FILE_NAME, false);
 		
-		info("Verification: invalid characters will be replaced by character [Dash]");
+		info("Verification: invalid characters will be replaced by character [hyphen]");
 		waitForAndGetElement(ecms.ELEMENT_DATA_TITLE.replace("${dataTitle}", FILE_NAME_UPDATE));
 		
 		info("Reset data");
@@ -284,7 +295,7 @@ public class ECMS_SE_CreateNode_Upload_Action_Other extends PlatformBase{
 	}
 	
 	/**
-	 * Qmetry ID: 74451
+	 * Qmetry ID: 102280
 	 * Upload a file with size more than 200 MB form Site Explorer
 	 * ====================== PENDING =======================
 	 * ===== Do not upload a large file to git repository ===  
@@ -297,8 +308,8 @@ public class ECMS_SE_CreateNode_Upload_Action_Other extends PlatformBase{
 	/**
 	 * Qmetry ID: 74461
 	 * File uploaded with "waiting" status when upload in Site Explorer
-	 * 
-	 * 
+	 * =====================PENDING==============
+	 * ==== Cannot check waiting status =========
 	 */
 	@Test(groups={"pending"})
 	public void test11_FileUploadedWithWaitingStatusWhenUploadInSiteExplorer(){
@@ -306,14 +317,15 @@ public class ECMS_SE_CreateNode_Upload_Action_Other extends PlatformBase{
 	}
 	
 	/**
-	 * Qmetry ID: 74922
+	 * Qmetry ID: 102319
 	 * Upload a file with invalid characters in Document
-	 * 
-	 * Pending because file which is used to upload is illegal on Windows
+	 * Check only the special characters: []'"
+	 * because the / is not allowed in file name
+	 * Need to be confirmed
 	 */
-	@Test(groups="pending")
+	@Test
 	public void test12_UploadFileWithInvalidCharactersInDocument(){
-		String FILE_NAME = "ECMS_DMS_SE_Upload_[]'\"Chars";
+		String FILE_NAME = "ECMS_DMS_SE_Upload_[]'" + '"' + "Chars";
 		String FILE_NAME_UPDATE = "ECMS_DMS_SE_Upload_----Chars";
 		
 		info("Go to Intranet/Documents");
