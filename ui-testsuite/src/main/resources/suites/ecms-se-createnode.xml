@@ -38,6 +38,8 @@
 				name="org.exoplatform.selenium.platform.ecms.functional.siteexplorer.createnode.ECMS_SE_CreateNode_Upload_FileTypes" />
 			<class
 				name="org.exoplatform.selenium.platform.ecms.functional.siteexplorer.createnode.ECMS_SE_CreateNode_Upload_UploadByUploadButton" />
+			<class	
+				name="org.exoplatform.selenium.platform.ecms.functional.siteexplorer.createnode.ECMS_SE_CreateNode_Upload_MultiUploadComponent" />
 		</classes>
 	</test>
 	<listeners>

@@ -9,6 +9,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+
 import static org.exoplatform.selenium.TestLogger.info;
 
 /**
@@ -275,6 +276,10 @@ public class EcmsBase extends ManageAccount {
 	public final By ELEMENT_COLLABORATION_DRIVE= By.xpath("//*[@class = 'driveLabel' and @data-original-title = 'Collaboration']");
 
 	//Site explorer > Upload 
+	public final By ELEMENT_MULTI_UPLOAD_HELP_ICON = By.xpath("//i[@id='MultiUploadHelp']");
+	public final By ELEMENT_MUITI_UPLOAD =By.xpath("//div[@id='UIMultiUpload']");
+	public final By ELEMENT_UPLOADING_FILE = By.id("MultiUploadFilesUploading-text");
+	public final By ELEMENT_AWAITING_FILE = By.id("MultiUploadFilesAwaiting-text");
 	public final By ELEMENT_UPLOAD_TITLE = By.id("title0");
 	public final By ELEMENT_UPLOAD_DESC = By.id("description0");
 	public final By ELEMENT_UPLOAD_CREATOR = By.id("creator0");
@@ -290,6 +295,11 @@ public class EcmsBase extends ManageAccount {
 	public final String ELEMENT_HREF_NODE_LINK = "//*[contains(@href, '${nodeName}')]"; 
 	public final String ELEMENT_FILE_CLONE = ELEMENT_HREF_NODE_LINK.replace("${nodeName}", "${node}") + "/ancestor::div[contains(@class, 'rowView')]";
 	public final String ELEMENT_FILE_CREATED_DATE = ELEMENT_DATA_TITLE.replace("${dataTitle}", "${nodeTitle}") + "/../../*[contains(@class, 'columnDatetime')]";
+	public final By ELEMENT_MULTI_UPLOAD_LIST_PROGRESS = By.xpath("//div[@id='MultiUploadFileListProgress']");
+	public final By ELEMENT_BOX_UPLOAD = By.xpath("//div[@class='uiBox']");
+	public final By ELEMENT_MESSAGE_IN_BOX_UPLOAD = By.xpath("//a[contains(@class,'pull-right action')]");
+	public final String ELEMENT_FILE_TOP_MESSAGE = ".//*[@id='MultiUploadFilesShortInfo']/following-sibling::div//div[text()='${fileName}']";
+	public final By ELEMENT_MESSAGE_UPLOAD_BOX_OVER_200MB= By.xpath("//div[contains(text(),'The file size exceeds the size limit of  200Mb!')]");
 	
 	//Edit Tag Form
 	public final By ELEMENT_TAG_CLOUD = By.className("uiIconEcmsTagExplorerMini");
@@ -321,7 +331,9 @@ public class EcmsBase extends ManageAccount {
 	public final String ELEMENT_PERSONAL_DOCUMENT_NODE= "//*[@class='nodeName' and contains(text(), '${content}')]";
 	public final String ELEMENT_NODE_ADDRESS = "//input[@id='address' and contains(@value,'/${content}')]";
 	public final String PERSONAL_DRIVE_BREADCRUMB = "//div[@class='breadcrumbLink']//a[@data-original-title='Personal Documents']";
-	public final By ELEMENT_VIEW_MORE_BUTTON = By.xpath("//div[@class='pull-right MoreButton']");
+	public final By ELEMENT_VIEW_MORE_BUTTON = By.xpath("//div[@class='FR MoreButton' and contains(text(),'More')]");
+	public final By ELEMENT_IN_PERSON_DOCUMENT= By.xpath("//div[@data-original-title='in Personal Documents/']");
+	public final String ELEMENT_NAME_CONTENT_PERSON_DOCUMENT= "//div[@data-original-title='${name}']/a";
 	
 	//Undo Deleted items
 	public final By ELEMENT_UNDO_DELETED_ITEM = By.xpath("//*[@class='uiIconSuccess']/../*[contains(text(), 'Undo')]");
@@ -368,6 +380,9 @@ public class EcmsBase extends ManageAccount {
 	public final By ELEMENT_RSS_ICON = By.xpath("//*[@data-original-title='RSS Feed']");
 	public final String ELEMENT_CLV_TITLE = "//*[@class='Title' and contains(text(), '${title}')]";
 	public final String ELEMENT_CLV_PUBLISH_DATE = ELEMENT_CLV_TITLE + "/../div[contains(text(), '${date}')]";
+	
+	//Drive
+	public final By ELEMENT_IN_SITE_MANAGEMENT= By.xpath("//div[@data-original-title='in Sites Management/']");
 	
 
 

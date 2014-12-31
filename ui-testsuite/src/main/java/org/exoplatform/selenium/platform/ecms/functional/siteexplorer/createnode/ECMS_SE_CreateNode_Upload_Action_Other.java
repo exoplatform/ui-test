@@ -83,14 +83,19 @@ public class ECMS_SE_CreateNode_Upload_Action_Other extends PlatformBase{
 		
 		
 		info("Login by user is not locker");
-//		initSeleniumTest();
-//		newDriver.get(baseUrl);
-		
-		loginWithAnotherAccOnThesameBrowser(DATA_USER2, DATA_PASS);
-		magAcc = new ManageAccount(newDriver);
-		navToolBar = new NavigationToolbar(newDriver);
-		ecms = new EcmsBase(newDriver);
-		cMenu = new ContextMenu(newDriver);
+
+		initSeleniumTest();
+		driver.get(baseUrl);
+		magAcc = new ManageAccount(driver);
+		navToolBar = new NavigationToolbar(driver, this.plfVersion);
+		ecms = new EcmsBase(driver);
+		cMenu = new ContextMenu(driver);
+		cTemplate = new ContentTemplate(driver, this.plfVersion);
+		actBar = new ActionBar(driver);
+		ecmsPer = new EcmsPermission(driver);
+		button = new Button(driver);
+		siteExp = new SitesExplorer(driver);
+		magAcc.signIn(DATA_USER2, DATA_PASS);
 
 		info("Checking... [Mary] can not see [Upload] icon on action bar");
 		navToolBar.goToSiteExplorer();

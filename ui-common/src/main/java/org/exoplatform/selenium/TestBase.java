@@ -469,13 +469,13 @@ public class TestBase {
 	}
 
 	public void click(Object locator, Object... opParams) {
-		//Actions actions = new Actions(driver);
 		int notDisplay = (Integer) (opParams.length > 0 ? opParams[0]: 0);		
 		Actions actions = new Actions(driver);
 		try {
 			WebElement element = waitForAndGetElement(locator, DEFAULT_TIMEOUT, 1, notDisplay);
 			if(element.isEnabled())
 				actions.click(element).perform();
+
 			else {
 				
 				debug("Element is not enabled");
@@ -1152,13 +1152,13 @@ public class TestBase {
 	 */
 	public boolean checkExitScrollBar(By object){
 		WebElement element = waitForAndGetElement(object);
-		String scrollHeight = String.valueOf(((JavascriptExecutor)driver).executeScript("return arguments[0].scrollHeight;", element));
-		String offsetHeight = String.valueOf(((JavascriptExecutor)driver).executeScript("return arguments[0].offsetHeight;", element));
-		info("scrollHeight: " + scrollHeight);
-		info("offsetHeight: " + offsetHeight);
-		int scroll = Integer.parseInt(scrollHeight);
-		int offset = Integer.parseInt(offsetHeight);
-		return scroll == offset;
+		//String scrollHeight = String.valueOf(((JavascriptExecutor)driver).executeScript("return arguments[0].scrollHeight;", element));
+		String scrollTopMax = String.valueOf(((JavascriptExecutor)driver).executeScript("return arguments[0].scrollTopMax;", element));
+	//	info("scrollHeight: " + scrollHeight);
+		info("scrollTopMax: " + scrollTopMax);
+		//int scroll = Integer.parseInt(scrollHeight);
+		int scroTopMax = Integer.parseInt(scrollTopMax);
+		return scroTopMax>0;
 	}
 
 	/**
