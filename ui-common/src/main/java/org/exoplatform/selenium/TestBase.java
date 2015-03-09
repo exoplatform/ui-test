@@ -98,6 +98,18 @@ public class TestBase {
 	public final By ELEMENT_ADMIN_PASS_LABEL = By.xpath("//h5[contains(text(), 'Admin Password')]");
 	public final By ELEMENT_ACCOUNT_ERROR = By.xpath("//*[@class='accountSetupError']");
 
+	public final String DATA_USER1 = "john";
+	public static String DATA_PASS;
+	public final String DATA_USER2 = "mary";
+
+	public final String USER_ROOT = "root";//"root@acme.com";
+	public static String PASS_ROOT;
+	//	public final String DATA_USER1 = "john.smith@acme.com";
+	//	public final String DATA_USER2 = "mary.williams@acme.com";
+	public final String DATA_USER3 = "james";//"james.davis@acme.com";
+	public final String DATA_USER4 = "demo";//"jack.demo@acme.com";
+	//	public final String DATA_PASS = "gtngtn";
+	
 	public TestBase(){
 
 	}
@@ -113,6 +125,10 @@ public class TestBase {
 
 		baseUrl = System.getProperty("baseUrl");
 		if (baseUrl==null) baseUrl = DEFAULT_BASEURL;
+		DATA_PASS = System.getProperty("DATA_PASS");
+		if (DATA_PASS==null) DATA_PASS = "gtn";
+		PASS_ROOT = System.getProperty("PASS_ROOT");
+		if (PASS_ROOT==null) PASS_ROOT = "gtngtn";
 		if("chrome".equals(browser)){
 			driver = new ChromeDriver();
 			chromeFlag = true;
