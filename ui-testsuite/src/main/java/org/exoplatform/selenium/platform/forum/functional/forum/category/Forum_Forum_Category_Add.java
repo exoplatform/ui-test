@@ -296,7 +296,7 @@ public class Forum_Forum_Category_Add extends ForumBase {
 		 *Expected Outcome: 
 		- User can NOT see this category in list.		*/ 
 		info("User Demo login to check");
-		fmCat.checkRightOfViewCategory("demo", DATA_PASS, catName, description, false);
+		fmCat.checkRightOfViewCategory(DATA_USER4, DATA_PASS, catName, description, false);
 
 		//Delete data test
 		acc.userSignIn(userType.ADMIN);
@@ -416,7 +416,7 @@ public class Forum_Forum_Category_Add extends ForumBase {
 		 *Input Data: 
 		 *Expected Outcome: 
 		- User can see this category in list and can access it.		*/
-		fmCat.checkRightOfViewCategory("demo", DATA_PASS, catName, description, true);
+		fmCat.checkRightOfViewCategory(DATA_USER4, DATA_PASS, catName, description, true);
 
 		/*
 		- Login by user who is NOT in group assigned in step2.
@@ -486,7 +486,7 @@ public class Forum_Forum_Category_Add extends ForumBase {
 		fmCat.checkRightOfViewCategory(DATA_USER2, DATA_PASS, catName, description, true);
 
 		info("User demo login to check group");
-		fmCat.checkRightOfViewCategory("demo", DATA_PASS, catName, description, true);
+		fmCat.checkRightOfViewCategory(DATA_USER4, DATA_PASS, catName, description, true);
 
 		info("Create new account to check");
 		acc.userSignIn(userType.ADMIN);

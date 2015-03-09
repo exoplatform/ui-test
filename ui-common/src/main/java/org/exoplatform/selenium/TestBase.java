@@ -114,7 +114,7 @@ public class TestBase {
 	//	public final String DATA_USER1 = "john.smith@acme.com";
 	//	public final String DATA_USER2 = "mary.williams@acme.com";
 	public final String DATA_USER3 = "james";//"james.davis@acme.com";
-	public final String DATA_USER4 = "demo";//"jack.demo@acme.com";
+	public static String DATA_USER4 = "demo";//"jack.demo@acme.com";
 	//	public final String DATA_PASS = "gtngtn";
 	
 	public TestBase(){
@@ -136,6 +136,7 @@ public class TestBase {
 		if (DATA_PASS==null) DATA_PASS = "gtn";
 		PASS_ROOT = System.getProperty("PASS_ROOT");
 		if (PASS_ROOT==null) PASS_ROOT = "gtngtn";
+		if (DATA_USER4==null) DATA_USER4 = "demo";
 		if("chrome".equals(browser)){
 			driver = new ChromeDriver();
 			chromeFlag = true;

@@ -518,7 +518,7 @@ public class Forum_Forum_CKEditor_CKEditor extends ForumBase {
 		info("-- Verify the name of the message forwarded --");
 		waitForAndGetElement(
 				ELEMENT_PRIVATE_MESSAGE_NAME_SENT.replace("${nameReceiver}",
-						"demo").replace("${nameMess}", tex_mess_forw));
+						DATA_USER4).replace("${nameMess}", tex_mess_forw));
 		
 		info("-- The test is successfull--");
 		

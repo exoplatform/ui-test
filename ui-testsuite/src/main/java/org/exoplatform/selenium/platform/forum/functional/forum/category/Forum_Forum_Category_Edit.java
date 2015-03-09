@@ -113,7 +113,7 @@ public class Forum_Forum_Category_Edit extends ForumBase{
 				description, setPermission, userGroup);
 
 		info("Nomal user login to check");
-		fmCat.checkRightOfViewCategory("demo", DATA_PASS, catNameUpdate, description, true);
+		fmCat.checkRightOfViewCategory(DATA_USER4, DATA_PASS, catNameUpdate, description, true);
 
 		//Delete data test
 		acc.userSignIn(userType.ADMIN);
@@ -259,7 +259,7 @@ test
 		fmCat.checkRightOfViewCategory(DATA_USER2, DATA_PASS, catName, description, true);
 
 		info("Demo login to check Group");
-		fmCat.checkRightOfViewCategory("demo", DATA_PASS, catName, description, true);
+		fmCat.checkRightOfViewCategory(DATA_USER4, DATA_PASS, catName, description, true);
 
 		
 		- Login as user NOT assigned in step3.
@@ -746,7 +746,7 @@ test
 		 *Input Data: 
 		 *Expected Outcome: 
 		- User can view and access category edited.		*/
-		fmCat.checkRightOfViewCategory("demo", DATA_PASS, catNameUpdate, description, true);
+		fmCat.checkRightOfViewCategory(DATA_USER4, DATA_PASS, catNameUpdate, description, true);
 
 		/*
 		- Login as userwho is NOT in group assigned in step3.
@@ -839,7 +839,7 @@ test
 		 *Input Data: 
 		 *Expected Outcome: 
 		- User can NOT view the category edited.		*/ 
-		fmCat.checkRightOfViewCategory("demo", DATA_PASS, catNameUpdate, description, false);
+		fmCat.checkRightOfViewCategory(DATA_USER4, DATA_PASS, catNameUpdate, description, false);
 
 		//Delete data test
 		acc.userSignIn(userType.ADMIN);
@@ -1604,7 +1604,7 @@ test
 		fmCat.checkRightOfViewCategory(DATA_USER2, DATA_PASS, catName, description, true);
 
 		info("User demo login to check group");
-		fmCat.checkRightOfViewCategory("demo", DATA_PASS, catName, description, true);
+		fmCat.checkRightOfViewCategory(DATA_USER4, DATA_PASS, catName, description, true);
         /*
 		- Login as user NOT assigned in step3.
 		- Go to Forum Application.
