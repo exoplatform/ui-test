@@ -225,9 +225,9 @@ public class Forum_Forum_PublishActivity_TopicActivity extends ForumBase{
 	 */
 	@Test
 	public void test06_CheckTopicASafterDeleteTopic(){
-		String titleCat = "Category 06";
-		String titleForum = "Forum 06";
-		String titleTop = "Topic 06";
+		String titleCat = "Category 75280";
+		String titleForum = "Forum 75280";
+		String titleTop = "Topic 75280";
 		String descTop = "line1<br>line2<br>line3<br>line4<br>line5";
 		
 		info("Delete topic");

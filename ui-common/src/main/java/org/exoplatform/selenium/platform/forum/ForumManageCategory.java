@@ -245,7 +245,7 @@ public class ForumManageCategory extends ForumBase {
 	 * @param title: title of category
 	 */
 	public void deleteCategoryInForum(String title, boolean...verify){
-		boolean check = verify.length > 0 ? verify[0] : true;
+		boolean check = verify.length > 0 ? verify[0] : false;
 		Utils.pause(2000);
 		click(ELEMENT_MANAGE_CATEGORY);
 		Utils.pause(2000);
