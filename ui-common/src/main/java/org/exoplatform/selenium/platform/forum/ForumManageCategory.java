@@ -92,7 +92,7 @@ public class ForumManageCategory extends ForumBase {
 	public final String ELEMENT_EXPORT_FORUMS_CHECKBOX = "//*[contains(text(), '${forum}')]/..//input[@type='checkbox']";
 
 	public By ELEMENT_OK_DELETE_CATEGORY = By.xpath("//*[@id='UIForumPopupConfirmation']//*[text()='OK']");
-
+	public final String ELEMENT_CATEGORY_DELETE_CONFIRM_MSG="Are you sure you want to delete this category?";
 	//------------add category form------------------------------------------------------------------------
 	public String[] SET_PERMISSION = {"moderators", "Topicable", "Postable", "Viewer"};
 	public String ELEMENT_MODERATORS = "moderators";
@@ -250,19 +250,12 @@ public class ForumManageCategory extends ForumBase {
 		click(ELEMENT_MANAGE_CATEGORY);
 		Utils.pause(2000);
 		info("Delete category");
-		if(plfVersion =="4.1"){
-			click (ELEMENT_DELETE_CATEGORY_PLF4_1);
-			//click(ELEMENT_OK_DELETE_CATEGORY);
-		}
-		else{// if (plfVersion =="4.0"){
-			click(ELEMENT_DELETE_CATEGORY);
-			
-		}		
-		alert.waitForMessage("Are you sure you want to delete this category?");
-		click(ELEMENT_OK_DELETE_CATEGORY);
+		info("Click on Delete link");
+		click(ELEMENT_DELETE_CATEGORY);
+		Utils.pause(1000);
+		alert.waitForMessage(ELEMENT_CATEGORY_DELETE_CONFIRM_MSG);
+		click(ELEMENT_OK_DELETE);
 		if(check){
-			//waitForTextNotPresent(title);
-			
 			waitForElementNotPresent("//strong[text()='"+title+"']");
 			waitForElementNotPresent(By.linkText(title)); 
 		}

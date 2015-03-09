@@ -4,6 +4,7 @@ import static org.exoplatform.selenium.TestLogger.info;
 
 import org.exoplatform.selenium.Button;
 import org.exoplatform.selenium.ManageAlert;
+import org.exoplatform.selenium.Utils;
 import org.exoplatform.selenium.platform.ManageAccount;
 import org.exoplatform.selenium.platform.forum.ForumPermission;
 import org.openqa.selenium.By;
@@ -34,23 +35,22 @@ public class ForumManageForum extends ForumBase {
 	//--------------------forum home screen-------------------------------------------------
 	public String ELEMENT_FORUM = "//*[@class='nameForum']/strong[text()='${forumName}']";
 	public String ELEMENT_FORUM_LINK = "//span[@class='NameForum' and text()='${forumName}']";
-	public By ELEMENT_DELETE_FORUM = By.xpath("//*[contains(@data-action, 'RemoveForum')]");
-	public By ELEMENT_DELETE_FORUM41 = By.xpath("//*[contains(@href, 'RemoveForum')]");
-	public By ELEMENT_DELETE_FORUM411 = By.xpath("//i[@class='uiIconDelete']");
-	public By ELEMENT_EDIT_FORUM = By.xpath("//*[contains(@href, 'EditForum')]");
-	public By ELEMENT_MOVE_FORUM = By.xpath("//*[contains(@href, 'MoveForum')]");
+	public final By ELEMENT_EDIT_FORUM = By.xpath("//*[contains(@href, 'EditForum')]");
+	public final By ELEMENT_DELETE_FORUM = By.xpath("//*[contains(@data-action, 'RemoveForum')]");
+	public final By ELEMENT_MOVE_FORUM = By.xpath("//*[contains(@href, 'MoveForum')]");
+	public final By ELEMENT_START_TOPIC_BUTTON = By.xpath("//*[contains(@href, 'AddTopic')]");
+	public final By ELEMENT_LOCK_FORUM = By.className("uiIconLockMedium");
+	public final By ELEMENT_UNLOCK_FORUM = By.className("uiIconUnlockMedium");
+	public final By ELEMENT_CLOSE_FORUM = By.xpath("//a[contains(@href,'SetCloseForum')]");
+	public final By ELEMENT_OPEN_FORUM = By.xpath("//a[contains(@href,'SetOpenForum')]");
 	public By ELEMENT_START_TOPIC = By.xpath("//button[contains(@onclick,'AddTopic')][1]");
 	public By ELEMENT_CENSOR_TOPIC =By.linkText("Censor");
 	public By ELEMENT_MODERATOR_PANEL = By.xpath("//*[@id='uicomponent.id' and @class='UIForumModerator']");
 	public By ELEMENT_RULE_PANEL = By.id("UIPostRules");
 	public String ELEMENT_TOPIC_LINK = "//a[contains(.,'${topic}')]";
 	public String ELEMENT_CATEGORY_FORUM_BREAD = "//*[text()='${category}']/../../*[text()='${forum}']";
-	public By ELEMENT_LOCK_FORUM = By.className("uiIconLockMedium");
-	public By ELEMENT_UNLOCK_FORUM = By.className("uiIconUnlockMedium");
 	public String ELEMENT_CATEGORY_BREAD = "//a[@data-original-title='${category}']";
 	public String ELEMENT_CATEGORY_BREAD41 = "//a[@title='${category}']";
-	public By ELEMENT_CLOSE_FORUM = By.xpath("//a[contains(@href,'SetCloseForum')]");
-	public By ELEMENT_OPEN_FORUM = By.xpath("//a[contains(@href,'SetOpenForum')]");
 	public By ELEMENT_NO_FORUM = By.xpath("//td[@class='noticeEmpty' and text()='No Forums']");
 	public By ELEMENT_BAN_IP_FORUM = By.xpath("//a[contains(@href,'BanIpForumTools')]"); 
 	public final By ELEMENT_MORE_ACTION = By.xpath("//form[@id='UITopicContainer']//*[@data-toggle='dropdown']/*[@class='uiIconSettings uiIconLightGray']");
@@ -83,7 +83,7 @@ public class ForumManageForum extends ForumBase {
 	public final String MESSAGE_CENSOR = "This post may contain offensive content. It will be displayed after moderation.";
 	public final String CENSORED_TITLE = "${title} (Censored)";
 
-	
+
 	/*-------------------------------------Common function--------------------------------*/
 	/** function: go to add forum
 	 */
@@ -220,33 +220,21 @@ public class ForumManageForum extends ForumBase {
 		info("Create forum successfully");
 	}
 
-	
+
 	/** function: delete a forum
 	 * @param title: title of forum that needs to delete
 	 */
 	public void deleteForum(String title){
 		click(ELEMENT_MORE_ACTION);
-		info("Delete forum");
-		if(plfVersion =="4.1"){
-			if (isElementPresent(ELEMENT_DELETE_FORUM41)){
-			click(ELEMENT_DELETE_FORUM41);
-			alert.acceptAlert();
-			}else{
-			click(ELEMENT_DELETE_FORUM411);
-			
-			click(ELEMENT_OK_DELETE);
-			}
-		}
-		else{// if (plfVersion =="4.0"){
-			click(ELEMENT_DELETE_FORUM);
-			click(ELEMENT_OK_DELETE);
-		}		
-		
-		//click(ELEMENT_OK_DELETE);
-		//		waitForTextNotPresent(title);
-		
-		waitForElementNotPresent(By.linkText(title));
-		info("Delete forum successfully");
+		info("click on Delete link");
+		waitForAndGetElement(ELEMENT_DELETE_FORUM,2000,0);
+		click(ELEMENT_DELETE_FORUM);
+		Utils.pause(1000);
+		info("Verify that Confirm popup is shown");
+		alert.waitForMessage("Are you sure you want to delete this forum ?");
+		info("Click on OK button of Confirm popup");
+		click(ELEMENT_OK_DELETE);
+		info("Finish deleting the forum");
 	}
 
 	/** function: go to edit forum
@@ -409,7 +397,7 @@ public class ForumManageForum extends ForumBase {
 		topic = new ForumManageTopic(driver);
 		account.signOut();
 		account.signIn(user, password);
-		
+
 		goToForums();
 		click(By.linkText(category));
 		click(By.linkText(forum));
@@ -436,5 +424,5 @@ public class ForumManageForum extends ForumBase {
 		click(ELEMENT_MODERATOR_TAB);
 		waitForTextPresent(email);
 	}
-	
+
 }

@@ -49,21 +49,21 @@ public class Forum_Forum_BasicAction extends ForumBase{
 	public void test01_AddForum() {
 		String category = "Category_71105";
 		String forum = "Forum_71105";
-		
+
 		String[] permission = {};
 		String[] addForum = {forum, "1","Open","Unlocked",forum};
 
 		info("Add a forum, Edit a forum, Delete a forum");
 		mngCat.addNewCategoryInForum(category, "1", 0,permission, category, 0,permission);
-		
+
 		//Add forum
 		mngFru.addForum(category, addForum, true, "", "", true, 0, permission);
 		//Edit forum
 		mngFru.editForum(addForum, false, EMAIL_ADDRESS2, EMAIL_ADDRESS2, false, 0, permission);
-		
+
 		//Delete forum
-	mngFru.deleteForum(forum);
-		
+		mngFru.deleteForum(forum);
+
 		//Delete category
 		//click(By.linkText(category));
 		mngCat.deleteCategoryInForum(category);
@@ -86,13 +86,13 @@ public class Forum_Forum_BasicAction extends ForumBase{
 		mngCat.addNewCategoryInForum(category1, "1", 0,permission, category1, 0,permission);
 		goToForumHome();
 		mngCat.addNewCategoryInForum(category2, "1", 0,permission, category2, 0,permission);
-		
+
 		//Add forum
 		mngFru.addForum(category1, addForum, true, "", "", true, 0, permission);
-		
+
 		//Move forum
 		mngFru.moveForum(forum, category2);
-		
+
 		//Delete data
 		click(By.linkText(category2));
 		mngCat.deleteCategoryInForum(category2);
@@ -100,7 +100,7 @@ public class Forum_Forum_BasicAction extends ForumBase{
 		mngCat.deleteCategoryInForum(category1);
 
 	}
-	
+
 	/** Watch&Unwatch forum
 	 * CaseID 68914
 	 */
@@ -118,28 +118,28 @@ public class Forum_Forum_BasicAction extends ForumBase{
 		goToForums();
 		//Add forum
 		mngFru.addCategoryForum(category, forum);
-		
+
 		//Watch forum
 		mngFru.watchItem(true);
 		mngTopic.quickStartTopic(topic1, topic1);
-		
+
 		//Check email after watching
 		goToMail(EMAIL_ADDRESS1, EMAIL_PASS);
 		checkAndDeleteMail(By.xpath(ELEMENT_GMAIL_EMAIL.replace("${category}",category).replace("${forum}", forum).replace("${topic}", topic1)), forum);
-		
+
 		switchToParentWindow();
-		
+
 		//Unwatch forum
 		mngFru.watchItem(false);
 		mngTopic.startTopic(topic2, topic2, "", 0, permission, false, false, false);
-		
+
 		//Check email after unwatching
 		switchToNewWindow();
 		Utils.pause(30000);
 		waitForElementNotPresent(ELEMENT_GMAIL_EMAIL.replace("${category}",category).replace("${forum}", forum).replace("${topic}", topic2));
-		
+
 		switchToParentWindow();
-		
+
 		//Delete data
 		click(By.linkText(category));
 		mngCat.deleteCategoryInForum(category);
