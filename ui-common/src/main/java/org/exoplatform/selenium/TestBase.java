@@ -5,6 +5,8 @@ import static org.exoplatform.selenium.TestLogger.info;
 
 import java.awt.AWTException;
 import java.awt.Robot;
+import java.awt.Toolkit;
+import java.awt.datatransfer.StringSelection;
 import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.IOException;
@@ -1268,21 +1270,50 @@ public class TestBase {
 		// an exception if no window was found.
 		return foundHandle;
 	}
+	/**
+	 * setClipboardData
+	 * @param string
+	 */
+	public static void setClipboardData(String string) {
+		//StringSelection is a class that can be used for copy and paste operations.
+		StringSelection stringSelection = new StringSelection(string);
+		Toolkit.getDefaultToolkit().getSystemClipboard().setContents(stringSelection, null);
+	}
 
 	/**
 	 * Upload file on IE
 	 * @param file: name of file
 	 */
 	protected void uploadFile(String file){
+		info("Upload file using Robot");
 		String fs = File.separator;
-		String path=Utils.getAbsoluteFilePath("TestData\\attachFile.exe") + " " + Utils.getAbsoluteFilePath(file.replace("/", fs));
+		String path=Utils.getAbsoluteFilePath(file.replace("/", fs));
+		info("path in uploadRobot:"+path);
 		try {
-			info(path);
-			Runtime.getRuntime().exec(path);
-			info("done upload");
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			Robot robot = new Robot();
+			robot.delay(1000);
+			robot.keyPress(KeyEvent.VK_CONTROL);
+			robot.keyPress(KeyEvent.VK_A);
+			robot.keyRelease(KeyEvent.VK_CONTROL);
+			robot.keyRelease(KeyEvent.VK_A);
+			robot.keyPress(KeyEvent.VK_CONTROL);
+			robot.keyPress(KeyEvent.VK_X);
+			robot.keyRelease(KeyEvent.VK_CONTROL);
+			robot.keyRelease(KeyEvent.VK_X);
+			//Setting clipboard with file location
+			setClipboardData(path);
+			//native key strokes for CTRL, V and ENTER keys
+			
+			robot.keyPress(KeyEvent.VK_CONTROL);
+			robot.keyPress(KeyEvent.VK_V);
+			robot.keyRelease(KeyEvent.VK_V);
+			robot.keyRelease(KeyEvent.VK_CONTROL);
+			robot.delay(1000);
+			robot.keyPress(KeyEvent.VK_ENTER);
+			robot.keyRelease(KeyEvent.VK_ENTER);
+			robot.delay(1000);
+		} catch (Exception exp) {
+			exp.printStackTrace();
 		}
 	}
 
