@@ -98,6 +98,11 @@ public class TestBase {
 	public final By ELEMENT_ADMIN_PASS_LABEL = By.xpath("//h5[contains(text(), 'Admin Password')]");
 	public final By ELEMENT_ACCOUNT_ERROR = By.xpath("//*[@class='accountSetupError']");
 
+	public String uploadfile= Utils.getAbsoluteFilePath("TestData\\attachFile.exe");
+	public String downloadfile=Utils.getAbsoluteFilePath("TestData\\downloadIE9.exe");
+	public String ieDriver=Utils.getAbsoluteFilePath("TestData\\IEDriverServer.exe");
+	public String chromeDriver= Utils.getAbsoluteFilePath("TestData\\chromedriver.exe");
+	
 	public final String DATA_USER1 = "john";
 	public static String DATA_PASS;
 	public final String DATA_USER2 = "mary";
@@ -1270,16 +1275,10 @@ public class TestBase {
 	 */
 	protected void uploadFile(String file){
 		String fs = File.separator;
+		String path=Utils.getAbsoluteFilePath("TestData\\attachFile.exe") + " " + Utils.getAbsoluteFilePath(file.replace("/", fs));
 		try {
-			Process proc=Runtime.getRuntime().exec(Utils.getAbsoluteFilePath("TestData\\uploadFile.exe") + " " + Utils.getAbsoluteFilePath(file.replace("/", fs)));
-			InputStream is = proc.getInputStream();
-			int retCode = 0;
-			while(retCode != -1)
-			{
-				retCode = is.read();
-				if(retCode == -1)
-					info("Now Exiting");
-			} 
+			info(path);
+			Runtime.getRuntime().exec(path);
 			info("done upload");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

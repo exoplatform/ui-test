@@ -150,9 +150,10 @@ public class Utils {
 
 	//This function returns a absolute path from a relative path
 	public static String getAbsoluteFilePath(String relativeFilePath){
-		String curDir = System.getProperty("user.dir");
 		String fs = File.separator;
-		String absolutePath = curDir + fs + "src" + fs + "main" + fs + "resources" + fs + relativeFilePath;
+		String curDir = System.getProperty("user.dir");
+		String absolutePath = curDir + "/src/main/resources/" + relativeFilePath;
+		absolutePath=absolutePath.replace("/", fs);
 		return absolutePath;
 	}
 
