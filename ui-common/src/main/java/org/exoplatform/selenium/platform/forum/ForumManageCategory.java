@@ -84,7 +84,7 @@ public class ForumManageCategory extends ForumBase {
 	public final By ELEMENT_EXPORT_CATEGORY_ONLY = By.xpath("//*[@value='ExportCategories']");
 	public final String MSG_WARNING_EMPTY_CATEGORY_EXPORT = "You have to check at least one Category";
 	public final By ELEMENT_EXPORT_CHECK_ALL = By.id("checkAll");
-	
+
 	//-------------------Export forums in category form----------------------------
 	public final By ELEMENT_EXPORT_FORUMS_POPUP = By.xpath("//span[@class='PopupTitle popupTitle' and text()='Export Forums']");
 	public final String ELEMENT_EXPORT_FORUMS_CHECKBOX_LIST = "//*[@id='UIExportForm']//*[contains(@id,'forumcc')]";
@@ -92,7 +92,7 @@ public class ForumManageCategory extends ForumBase {
 	public final String ELEMENT_EXPORT_FORUMS_CHECKBOX = "//*[contains(text(), '${forum}')]/..//input[@type='checkbox']";
 
 	public By ELEMENT_OK_DELETE_CATEGORY = By.xpath("//*[@id='UIForumPopupConfirmation']//*[text()='OK']");
-	public final String ELEMENT_CATEGORY_DELETE_CONFIRM_MSG="Are you sure you want to delete this category?";
+	public final String ELEMENT_CATEGORY_DELETE_CONFIRM_MSG="Are you sure you want to delete this category ?";
 	//------------add category form------------------------------------------------------------------------
 	public String[] SET_PERMISSION = {"moderators", "Topicable", "Postable", "Viewer"};
 	public String ELEMENT_MODERATORS = "moderators";
@@ -111,7 +111,7 @@ public class ForumManageCategory extends ForumBase {
 	public String MESSAGE_CATEGORY_NOT_EXISTE ="The category isn't existed";
 	public String MESSAGE_RESTRICTED_AUDIENCE_INVALID="The field \"Restricted Audience\" is invalid: ";
 	public String MESSAGE_CATEGORY_MODERATOR_INVALID = "not found, please enter a valid value.";
-	
+
 	/*------------------------------------common function---------------------------------*/
 
 
@@ -253,11 +253,16 @@ public class ForumManageCategory extends ForumBase {
 		info("Click on Delete link");
 		click(ELEMENT_DELETE_CATEGORY);
 		Utils.pause(1000);
-		alert.waitForMessage(ELEMENT_CATEGORY_DELETE_CONFIRM_MSG);
-		click(ELEMENT_OK_DELETE);
+
 		if(check){
+			alert.waitForMessage(ELEMENT_CATEGORY_DELETE_CONFIRM_MSG);
+			click(ELEMENT_OK_DELETE);
 			waitForElementNotPresent("//strong[text()='"+title+"']");
 			waitForElementNotPresent(By.linkText(title)); 
+		}
+		else{
+			click(ELEMENT_OK_DELETE);
+			Utils.pause(1000);
 		}
 		info("Delete category successfully");
 	}
@@ -282,7 +287,7 @@ public class ForumManageCategory extends ForumBase {
 		//click(ELEMENT_IMPORT);
 		if(plfVersion =="4.0"){
 			waitForMessage(MSG_IMPORT_CATEGORY);
-			
+
 			info("Import file " + file + "successfully");
 			click(ELEMENT_OK_INFOR_POPUP);
 			Utils.pause(1000);

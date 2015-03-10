@@ -57,8 +57,8 @@ public class Forum_Forum_Poll_AddEditDelete extends ForumBase {
 
 	@AfterMethod
 	public void afterTest() {
-//		driver.manage().deleteAllCookies();
-//		driver.quit();
+		driver.manage().deleteAllCookies();
+		driver.quit();
 	}
 	
 	/**
