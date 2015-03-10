@@ -9,12 +9,13 @@ import java.awt.Robot;
 import java.awt.Toolkit;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.KeyEvent;
-
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -23,6 +24,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 import java.util.Set;
+
 import org.apache.commons.io.FileUtils;
 import org.exoplatform.selenium.platform.ManageLogInOut;
 import org.openqa.selenium.Alert;
@@ -32,6 +34,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.Platform;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.UnhandledAlertException;
 import org.openqa.selenium.WebDriver;
@@ -43,6 +46,7 @@ import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 
@@ -67,10 +71,12 @@ public class TestBase {
 	public String uploadfile= getAbsoluteFilePath("TestData\\attachFile.exe");
 	public String downloadfile=getAbsoluteFilePath("TestData\\downloadIE9.exe");
 	public String ieDriver=getAbsoluteFilePath("TestData\\IEDriverServer.exe");
-	public String chromeDriver= getAbsoluteFilePath("TestData\\chromedriver.exe");
+	public String chromeDriver= getAbsoluteFilePath("TestData/chromedriver");
 
 	/*========System Property====================*/
 	public static String baseUrl;
+	public static String nodeUrl;
+	
 	public static String browser;
 	public static String server;
 
@@ -105,6 +111,8 @@ public class TestBase {
 
 	/*========Default System Property=============*/
 	public final String DEFAULT_BASEURL="http://localhost:8080/portal";
+	public final String DEFAULT_NODEURL="http://127.0.0.1:5555/wd/hub";
+	
 	public final String DEFAULT_BROWSER="firefox";//iexplorer, firefox, chrome
 	public final String DEFAULT_SERVER="ubuntu"; //win, ubuntu
 
@@ -169,6 +177,7 @@ public class TestBase {
 	public final String ELEMENT_UPLOAD_POPUP_NAMEFILE = "//*[@class='fileNameLabel' and contains(text(),'${fileName}')]";
 
 	public final By ELEMENT_SAVE_BTN = By.xpath("//*[text()='Save']");
+
 	/*======== End of Term and conditions =====*/	
 	/**
 	 * Get System Property
@@ -177,6 +186,7 @@ public class TestBase {
 		browser = System.getProperty("browser");
 		server = System.getProperty("server");
 		baseUrl = System.getProperty("baseUrl");
+		nodeUrl = System.getProperty("nodeUrl");
 
 		jdbcDriver = System.getProperty("jdbcDriver");
 		dbUrl = System.getProperty("dbUrl");
@@ -186,6 +196,7 @@ public class TestBase {
 		sqlAttach = System.getProperty("sqlAttach");
 		sqlUser = System.getProperty("sqlUser");
 
+		
 		defaultSheet = System.getProperty("defaultSheet");
 
 		userDataFilePath = System.getProperty("userDataFilePath");
@@ -203,6 +214,7 @@ public class TestBase {
 
 		if (browser==null) browser = DEFAULT_BROWSER;
 		if (baseUrl==null) baseUrl = DEFAULT_BASEURL;
+		if (nodeUrl==null) nodeUrl = DEFAULT_NODEURL;
 		if (server==null) server = DEFAULT_SERVER;
 
 		if (isRandom==null) isRandom = DEFAULT_ISRANDOM;
@@ -247,7 +259,21 @@ public class TestBase {
 		wikiMessageFilePath = getAbsoluteFilePath(wikiMessageFilePath);
 	}
 
-
+	public WebDriver initRemoteWebDriverChrome(Object... opParams) throws MalformedURLException {
+		getSystemProperty();
+		info(chromeDriver);
+//		System.setProperty("webdriver.chrome.driver",chromeDriver) ;
+		DesiredCapabilities capability = DesiredCapabilities.chrome();
+		capability.setBrowserName("chrome");
+		capability.setPlatform(Platform.LINUX);
+		driver = new RemoteWebDriver(new URL(nodeUrl), capability);
+		action = new Actions(driver);
+		driver.manage().window().maximize();
+		driver.navigate().refresh();
+		termsAndConditions(opParams);
+		return driver;
+	}
+	
 	/**
 	 * Init IE driver
 	 */
@@ -266,6 +292,20 @@ public class TestBase {
 		return new InternetExplorerDriver(capabilitiesIE);
 	}
 
+	public WebDriver initRemoteWebDriverFF(Object... opParams) throws MalformedURLException {
+		getSystemProperty();
+		DesiredCapabilities capability = DesiredCapabilities.firefox();
+		chromeFlag = true;
+		capability.setBrowserName("firefox");
+		capability.setPlatform(Platform.LINUX);
+		driver = new RemoteWebDriver(new URL(nodeUrl), capability);
+		action = new Actions(driver);
+		driver.manage().window().maximize();
+		driver.navigate().refresh();
+		termsAndConditions(opParams);
+		return driver;
+	}
+	
 	/**
 	 * 
 	 * Init FF driver
@@ -283,6 +323,7 @@ public class TestBase {
 		profile.setPreference("plugins.hide_infobar_for_missing_plugin", true);
 		profile.setPreference("dom.max_script_run_time", 0);
 		DesiredCapabilities capabilities = DesiredCapabilities.firefox();
+
 		capabilities.setCapability(FirefoxDriver.PROFILE, profile);
 		info("Save file to " + pathFile);
 		profile.setPreference("browser.download.manager.showWhenStarting", false);
@@ -303,6 +344,7 @@ public class TestBase {
 		profile.setPreference("pdfjs.disabled", true); 
 		profile.setPreference("browser.helperApps.alwaysAsk.force", false);
 		return new FirefoxDriver(profile);
+		
 	}
 
 	public void initSeleniumTestWithOutTermAndCondition(Object... opParams){
