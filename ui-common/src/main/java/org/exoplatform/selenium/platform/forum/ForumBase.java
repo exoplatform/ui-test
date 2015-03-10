@@ -419,7 +419,7 @@ public class ForumBase extends PlatformBase {
 	public void goToForums(){
 		info("--Go to Forums--");
 		click(ELEMENT_FORUM_LINK);
-		waitForAndGetElement(ELEMENT_FORUM_STATE,DEFAULT_TIMEOUT,0);
+		Utils.pause(1000);
 	}
 
 	public void goToForumHome(){
