@@ -136,6 +136,7 @@ public class TestBase {
 		if (DATA_PASS==null) DATA_PASS = "gtn";
 		PASS_ROOT = System.getProperty("PASS_ROOT");
 		if (PASS_ROOT==null) PASS_ROOT = "gtngtn";
+		DATA_USER4 = System.getProperty("DATA_USER4");
 		if (DATA_USER4==null) DATA_USER4 = "demo";
 		if("chrome".equals(browser)){
 			driver = new ChromeDriver();
