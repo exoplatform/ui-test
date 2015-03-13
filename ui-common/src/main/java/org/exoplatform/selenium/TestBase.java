@@ -266,6 +266,7 @@ public class TestBase {
 		DesiredCapabilities capability = DesiredCapabilities.chrome();
 		capability.setBrowserName("chrome");
 		capability.setPlatform(Platform.LINUX);
+		capability.setCapability("jenkins.label","redhat5 && amd64");
 		driver = new RemoteWebDriver(new URL(nodeUrl), capability);
 		action = new Actions(driver);
 		driver.manage().window().maximize();
@@ -299,6 +300,7 @@ public class TestBase {
 		chromeFlag = true;
 		capability.setBrowserName("firefox");
 		capability.setPlatform(Platform.LINUX);
+		capability.setCapability("jenkins.label","redhat5 && amd64");
 		driver = new RemoteWebDriver(new URL(nodeUrl), capability);
 		action = new Actions(driver);
 		driver.manage().window().maximize();
