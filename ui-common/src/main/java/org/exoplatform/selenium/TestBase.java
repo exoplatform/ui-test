@@ -292,6 +292,7 @@ public class TestBase {
 		return new InternetExplorerDriver(capabilitiesIE);
 	}
 
+	//Init remote for selemium grid
 	public WebDriver initRemoteWebDriverFF(Object... opParams) throws MalformedURLException {
 		getSystemProperty();
 		DesiredCapabilities capability = DesiredCapabilities.firefox();
