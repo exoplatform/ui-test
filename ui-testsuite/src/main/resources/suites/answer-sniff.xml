@@ -24,6 +24,30 @@
 				name="org.exoplatform.selenium.platform.addons.sniff.Addons_Faq" />
 		</classes>
 	</test>
+	
+	<test name="ecms-sniff">
+		<groups>
+			<run>
+				<exclude name="pending" />
+			</run>
+		</groups>
+		<classes>
+			<class
+				name="org.exoplatform.selenium.platform.addons.sniff.Addons_Answers_Answers" />
+			<class
+				name="org.exoplatform.selenium.platform.addons.sniff.Addons_Answers_Category" />
+			<class
+				name="org.exoplatform.selenium.platform.addons.sniff.Addons_Answers_PublishActivity" />
+			<class
+				name="org.exoplatform.selenium.platform.addons.sniff.Addons_Answers_Question" />
+			<class
+				name="org.exoplatform.selenium.platform.addons.sniff.Addons_Answers_Search" />
+			<class
+				name="org.exoplatform.selenium.platform.addons.sniff.Addons_Answers_Setting" />
+				<class
+				name="org.exoplatform.selenium.platform.addons.sniff.Addons_Faq" />
+		</classes>
+	</test>
 	<listeners>
 		<listener class-name="org.exoplatform.selenium.TestReportListener" />
 	</listeners>

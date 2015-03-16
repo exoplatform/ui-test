@@ -111,7 +111,7 @@ public class TestBase {
 
 	/*========Default System Property=============*/
 	public final String DEFAULT_BASEURL="http://localhost:8080/portal";
-	public final String DEFAULT_NODEURL="http://builder2.testlab1.exoplatform.vn:4444/wd/hub";
+	public final String DEFAULT_NODEURL="http://127.0.0.1:5555/wd/hub";
 	
 	public final String DEFAULT_BROWSER="firefox";//iexplorer, firefox, chrome
 	public final String DEFAULT_SERVER="ubuntu"; //win, ubuntu
@@ -266,7 +266,6 @@ public class TestBase {
 		DesiredCapabilities capability = DesiredCapabilities.chrome();
 		capability.setBrowserName("chrome");
 		capability.setPlatform(Platform.LINUX);
-//		capability.setCapability("jenkins.label","redhat5 && amd64");
 		driver = new RemoteWebDriver(new URL(nodeUrl), capability);
 		action = new Actions(driver);
 		driver.manage().window().maximize();
@@ -297,10 +296,8 @@ public class TestBase {
 	public WebDriver initRemoteWebDriverFF(Object... opParams) throws MalformedURLException {
 		getSystemProperty();
 		DesiredCapabilities capability = DesiredCapabilities.firefox();
-		chromeFlag = true;
 		capability.setBrowserName("firefox");
 		capability.setPlatform(Platform.LINUX);
-		capability.setCapability("jenkins.label","redhat5 && amd64");
 		driver = new RemoteWebDriver(new URL(nodeUrl), capability);
 		action = new Actions(driver);
 		driver.manage().window().maximize();
