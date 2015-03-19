@@ -111,8 +111,8 @@ public class TestBase {
 
 	/*========Default System Property=============*/
 	public final String DEFAULT_BASEURL="http://localhost:8080/portal";
-	public final String DEFAULT_NODEURL="http://builder2.testlab1.exoplatform.vn:4444/wd/hub";
-	
+	public final String DEFAULT_NODEURL="http://127.0.0.1:5555/wd/hub";
+//	http://builder2.testlab1.exoplatform.vn:4444/wd/hub
 	public final String DEFAULT_BROWSER="firefox";//iexplorer, firefox, chrome
 	public final String DEFAULT_SERVER="ubuntu"; //win, ubuntu
 
@@ -296,20 +296,11 @@ public class TestBase {
 	public WebDriver initRemoteWebDriverFF(Object... opParams) throws MalformedURLException {
 		getSystemProperty();
 		DesiredCapabilities capability = DesiredCapabilities.firefox();
-		String pathFile="";
-		if ("win".equals(server)){
-			pathFile = System.getProperty("user.dir") + "\\src\\main\\resources\\TestData\\TestOutput";
-		}
-		else{
-			pathFile = System.getProperty("user.dir") + "/src/main/resources/TestData/TestOutput";
-		}
-		info("Init FF driver");
-		FirefoxProfile profile = new FirefoxProfile();
-		profile.setPreference("plugins.hide_infobar_for_missing_plugin", true);
-		profile.setPreference("dom.max_script_run_time", 0);
-		DesiredCapabilities capabilities = DesiredCapabilities.firefox();
-
-		capabilities.setCapability(FirefoxDriver.PROFILE, profile);
+//		capability.setCapability("jenkins.label","redhat5 && amd64");
+		capability.setBrowserName("firefox");
+//		capability.setCapability("version", "28.0");
+		capability.setCapability("binary", "/usr/bin/firefox");
+		capability.setPlatform(Platform.LINUX);
 		driver = new RemoteWebDriver(new URL(nodeUrl), capability);
 		action = new Actions(driver);
 		driver.manage().window().maximize();
