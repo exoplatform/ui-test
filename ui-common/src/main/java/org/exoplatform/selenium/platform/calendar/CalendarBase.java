@@ -191,7 +191,7 @@ public class CalendarBase extends PlatformBase {
 	public By ELEMENT_TARGET_DATE = By.xpath("//*[contains(@startfull, '${targetDate}')]".replace("${targetDate}", ELEMENT_TARGET_TIME));
 	public String ELEMENT_ANY_TARGET_DATE = "//*[contains(@startfull, '${targetDate}')]";
 	//-----------------Calendar Search-----------------------------
-	public String ELEMENT_INPUT_QUICK_SEARCH = "//div[@class='uiSearchForm uiSearchInput pull-right']//*[@id='value']";
+	public String ELEMENT_INPUT_QUICK_SEARCH = ".//*[@id='value']";
 	public String ELEMENT_QUICK_SEARCH_FORM = "//div[@class='uiSearchForm uiSearchInput pull-right']";
 	public String ELEMENT_BUTTON_CLOSE_QUICK_SEARCH_RESULT = "//button[contains(text(),'Close Search')]";
 	public String ELEMENT_BUTTON_OPEN_ADVANCE_SEARCH_FORM = "//button[contains(text(),'Advanced Search')]";
@@ -895,6 +895,7 @@ public class CalendarBase extends PlatformBase {
 	 */
 	public void chooseEventCategoryOpt(String categoryName){
 		info("----Verify if new category is displayed in Category option or not----");
+		goToCalendarPage();
 		waitForAndGetElement(ELEMENT_EVENT_CATEGORY_FILTER);
 		select(ELEMENT_EVENT_CATEGORY_COMBOBOX, categoryName);
 	}

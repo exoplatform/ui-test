@@ -66,13 +66,13 @@ public class PeopleConnection extends SocialBase {
 			click(ELEMENT_EVERYONE_TAB);
 		}
 		if(waitForAndGetElement(ELEMENT_EVERYONE_TAB_ACTIVE,5000,0) == null)
-			clickByJavascript(ELEMENT_EVERYONE_TAB);
+			click(ELEMENT_EVERYONE_TAB);
 		waitForAndGetElement(By.linkText(peopleName),DEFAULT_TIMEOUT,1,2);
 		if(isElementNotPresent(ELEMENT_CONNECTION_BUTTON.replace("${peopleName}", peopleName)))
 			resetConnection(peopleName);
 		info("-----Click connect to people-----");
 		Utils.pause(2000);
-		clickByJavascript(ELEMENT_CONNECTION_BUTTON.replace("${peopleName}", peopleName));
+		click(ELEMENT_CONNECTION_BUTTON.replace("${peopleName}", peopleName));
 		info("---Verify Connect button is disappeared----");
 		waitForElementNotPresent(ELEMENT_CONNECTION_BUTTON.replace("${peopleName}", peopleName));
 		info("-----Verify Cancel request button is displayed-----");
@@ -89,15 +89,15 @@ public class PeopleConnection extends SocialBase {
 			info("----Go to My connections----");
 			goToMyConnections();
 			info("---Click Requests Received tab-----");
-			clickByJavascript(ELEMENT_REQUESTS_RECEIVED_TAB);
+			click(ELEMENT_REQUESTS_RECEIVED_TAB);
 		}
 		else
-			clickByJavascript(ELEMENT_REQUESTS_RECEIVED_TAB);
+			click(ELEMENT_REQUESTS_RECEIVED_TAB);
 		info("----Confirm the invitation from user '"+peopleName+"' ");
-		clickByJavascript(ELEMENT_CONFIRM_BUTTON.replace("${peopleName}", peopleName));
+		click(ELEMENT_CONFIRM_BUTTON.replace("${peopleName}", peopleName));
 		waitForElementNotPresent(ELEMENT_CONFIRM_BUTTON.replace("${peopleName}", peopleName));
 		info("----Go to My connections tab----");
-		clickByJavascript(ELEMENT_MY_CONNECTIONS_TAB);
+		click(ELEMENT_MY_CONNECTIONS_TAB);
 		info("---Verify remove connection button----");
 		waitForAndGetElement(ELEMENT_REMOVE_CONNECTION_BUTTON.replace("${peopleName}", peopleName));
 	}

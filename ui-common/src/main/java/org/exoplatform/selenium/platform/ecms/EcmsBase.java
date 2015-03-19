@@ -173,12 +173,17 @@ public class EcmsBase extends ManageAccount {
 	public final By ELEMENT_CONTEXT_MENU_ADD_SYMLINK = By.xpath("//*[@class='uiContextMenuContainer']//*[@class='uiIconEcmsAddSymLink']");
 	public final String ELEMENT_DATA_TITLE = "//*[@data-original-title = '${dataTitle}']";
 	public final String ELEMENT_SYMLINK_TITLE = "//*[@data-original-title = '${symlinkTitle}']";
-	public final String ELEMENT_TARGET_NODE = "//*[contains(text(),'${node}')]/../../td/a[@data-original-title='select']";
+	//public final String ELEMENT_TARGET_NODE = "//*[contains(text(),'${node}')]/../../td/a[@data-original-title='select']";
+	public final String ELEMENT_TARGET_NODE = "//div[contains(normalize-space(), '${node}') and @class='Text']/../../td/a[@data-original-title='Select']";
+	public final String ELEMENT_TARGET_NODE_2 = "//*[@id='ListRecords']//a[contains(text(),'${fileName}')]/i";
+	public final String ELEMENT_TARGET_NODE_NEW = "//*[@id='ListRecords']//a[contains(text(),'${fileName}')]";
+	public final String ELEMENT_PATH_NODE = "//*[@data-original-title='${filePath}']";
+	public final String ELEMENT_TRANSLATE_PATH_NODE="//*[@id='LeftWorkspace']//*[@data-original-title='${filePath}']";
 	public final String ELEMENT_SYMLINK = "//*[@title='${symlinkTitle}']/i[@class='iconLinkSmall']/../..";
 	public final String ELEMENT_SYMLINK_OTHER = "//*[@data-original-title='${name}.lnk']/*[@class='LinkSmall']";
 	public final String ELEMENT_SYMLINK_PATH_NODE_TITLE = "//*[@id='UIOneNodePathSelector']//a/i[@title='${node}']";
 	public final String ELEMENT_DOCUMENT_NODE_LIST = "//*[@id='UIDocumentNodeList']//*[@data-original-title='${node}']";
-
+	
 	//Rename Form in Sites Explorer (Right-click -> Rename)
 	public final By ELEMENT_INPUT_TITLE_NODE = By.xpath("//input[@id = 'titleField']");
 	public final By ELEMENT_INPUT_NAME_NODE = By.xpath("//input[@id = 'nameField']");
@@ -586,13 +591,11 @@ public class EcmsBase extends ManageAccount {
 	//upload file
 	public void uploadFile(String link, Object...params){
 		Boolean verify = (Boolean) (params.length > 0 ? params[0] : true);
-		if (waitForAndGetElement(By.xpath("//a[@class='actionIcon' and contains(text(),'Upload')]"),DEFAULT_TIMEOUT,0)==null){
+		if (waitForAndGetElement(By.xpath("//a[@class='actionIcon' and contains(text(),'Upload')]"),5000,0)==null){
 			click(ELEMENT_MORE_LINK_WITHOUT_BLOCK);
 		}
 		((JavascriptExecutor)driver).executeScript("arguments[0].style.visibility = 'block'; arguments[0].style.height = '1px'; " +
-				"arguments[0].style.width = '1px'; arguments[0].style.opacity = 1", waitForAndGetElement(ELEMENT_UPLOAD_LINK, DEFAULT_TIMEOUT, 1, 2));
-		
-		Utils.pause(10000);
+				"arguments[0].style.width = '1px'; arguments[0].style.opacity = 1", waitForAndGetElement(ELEMENT_UPLOAD_LINK, 5000, 1, 2));
 		type(ELEMENT_UPLOAD_LINK, Utils.getAbsoluteFilePath(link), false,2);
 		info("Upload file " + Utils.getAbsoluteFilePath(link));
 		switchToParentWindow();
@@ -678,6 +681,22 @@ public class EcmsBase extends ManageAccount {
 			click(element_select1);
 		}else if (waitForAndGetElement(element_select2, 5000, 0) != null){
 			click(element_select2);
+		}
+		Utils.pause(500);
+	}
+	
+	
+	
+	public void selectTranslation(String homePath){
+		String[] temp;
+		/* delimiter */
+		String delimiter = "/";
+		temp = homePath.split(delimiter);
+		for(int i =0; i < temp.length; i++){
+			info("Go to "+temp[i]);
+			waitForAndGetElement(ELEMENT_TRANSLATE_PATH_NODE.replace("${filePath}", temp[i]));
+			click(ELEMENT_TRANSLATE_PATH_NODE.replace("${filePath}", temp[i]));
+			Utils.pause(1000);
 		}
 		Utils.pause(500);
 	}

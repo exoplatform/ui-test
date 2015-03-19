@@ -92,8 +92,7 @@ public class ForumManageCategory extends ForumBase {
 	public final String ELEMENT_EXPORT_FORUMS_CHECKBOX = "//*[contains(text(), '${forum}')]/..//input[@type='checkbox']";
 
 	public By ELEMENT_OK_DELETE_CATEGORY = By.xpath("//*[@id='UIForumPopupConfirmation']//*[text()='OK']");
-	public final String ELEMENT_CATEGORY_DELETE_CONFIRM_MSG="Are you sure you want to delete this category ?";
-	//------------add category form------------------------------------------------------------------------
+	public final String ELEMENT_CATEGORY_DELETE_CONFIRM_MSG="Are you sure you want to delete this category";	//------------add category form------------------------------------------------------------------------
 	public String[] SET_PERMISSION = {"moderators", "Topicable", "Postable", "Viewer"};
 	public String ELEMENT_MODERATORS = "moderators";
 	public String ELEMENT_TOPICABLE = "Topicable";

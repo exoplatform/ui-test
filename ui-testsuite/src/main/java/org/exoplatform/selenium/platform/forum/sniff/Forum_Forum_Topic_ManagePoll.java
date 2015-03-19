@@ -108,10 +108,10 @@ public class Forum_Forum_Topic_ManagePoll extends ForumBase{
 	 */
 	@Test
 	public void test03_DeletePoll() {
-		String titleCat = "Category 03";
-		String titleForum = "Forum 03";
-		String titleTop = "Topic 03";
-		String poll = "Poll of topic 03";
+		String titleCat = "Category 03" + getRandomNumber();
+		String titleForum = "Forum 03" + getRandomNumber();
+		String titleTop = "Topic 03" + getRandomNumber();
+		String poll = "Poll of topic 03" + getRandomNumber();
 		String[] options =  {"Option 01","Option 02"};
 		mngTopic.addCategoryForumTopic(titleCat, titleForum, titleTop,titleTop); 
 		click(mngFru.ELEMENT_TOPIC_LINK.replace("${topic}", titleTop));

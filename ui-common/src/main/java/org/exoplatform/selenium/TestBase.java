@@ -106,11 +106,11 @@ public class TestBase {
 	public String chromeDriver= Utils.getAbsoluteFilePath("TestData\\chromedriver.exe");
 	
 	public final String DATA_USER1 = "john";
-	public static String DATA_PASS;
+	public static String DATA_PASS = "gtn";
 	public final String DATA_USER2 = "mary";
 
 	public final String USER_ROOT = "root";//"root@acme.com";
-	public static String PASS_ROOT;
+	public static String PASS_ROOT = "gtngtn";
 	//	public final String DATA_USER1 = "john.smith@acme.com";
 	//	public final String DATA_USER2 = "mary.williams@acme.com";
 	public final String DATA_USER3 = "james";//"james.davis@acme.com";

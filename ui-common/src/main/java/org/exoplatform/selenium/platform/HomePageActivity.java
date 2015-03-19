@@ -105,17 +105,17 @@ public class HomePageActivity extends PlatformBase{
 	//File activity
 	public final String ELEMENT_FILE_SIZE = "//a[@title='@{fileName}']/..//*[@class='versionFile' and contains(text(), '${size}')]";
 	public final String ELEMENT_FILE_SIZE_41 = "//a[@data-original-title='@{fileName}']/..//*[@class='versionFile' and contains(text(), '${size}')]";
-	public final String ELEMENT_FILE_COMMENT_ADD_CATEGORY = "//*[@title='@{fileName}']/../../../..//*[@class='commentBox']//*[text()='Category: ${category} has been added.']";
-	public final String ELEMENT_FILE_COMMENT_ADD_CATEGORY_41 = "//*[@title='@{fileName}']/../../../..//*[@class='commentBox']//*[text()='Category: ${category} has been added.']";
+	public final String ELEMENT_FILE_COMMENT_ADD_CATEGORY = "//*[@title='@{fileName}' or @data-original-title='@{fileName}']/../../../..//*[@class='commentBox']//*[text()='Category: ${category} has been added.']";
+	public final String ELEMENT_FILE_COMMENT_ADD_CATEGORY_41 = "//*[@title='@{fileName}' or @data-original-title='@{fileName}']/../../../..//*[@class='commentBox']//*[text()='Category: ${category} has been added.']";
 	public final String ELEMENT_FILE_COMMENT_REMOVE_CATEGORY = "//*[@title='@{fileName}']/../../../..//*[@class='commentBox']//*[text()='Category: ${category} has been removed.']";
 	public final By ELEMENT_FILE_VIEW_POPUP = By.id("UISocialPopupWindow");
 	public final String ELEMENT_FILE_VIEW_NAME = "//*[@id='UISocialPopupWindow']//*[text()='${fileName}']";
-	public final String ELEMENT_FILE_COMMENT_MOVING = "//*[@title='@{fileName}']/../../../..//*[@class='commentBox']//*[text()='File has been moved to: ${path}']";
+	public final String ELEMENT_FILE_COMMENT_MOVING = "//*[@title='@{fileName}' or @data-original-title='@{fileName}']/../../../..//*[@class='commentBox']//*[text()='File has been moved to: ${path}']";
 	public final String ELEMENT_FILE_COMMENT_MOVING_41 = "//*[@data-original-title='@{fileName}']/../../../..//*[@class='commentBox']//*[text()='File has been moved to: ${path}']";
 
 	//Attach file
-	public final String ELEMENT_FILE_COMMENT_ADD_ATTACH_FILE = "//*[@title='@{fileName}']/../../../..//*[@class='commentBox']//*[text()='File(s) has been attached.']";
-	public final String ELEMENT_FILE_COMMENT_REMOVE_ATTACH_FILE = "//*[@title='@{fileName}']/../../../..//*[@class='commentBox']//*[text()='File(s) has been removed.']";
+	public final String ELEMENT_FILE_COMMENT_ADD_ATTACH_FILE = "//*[@title='@{fileName}' or @data-original-title='@{fileName}']/../../../..//*[@class='commentBox']//*[text()='File(s) has been attached.']";
+	public final String ELEMENT_FILE_COMMENT_REMOVE_ATTACH_FILE = "//*[@title='@{fileName}' or @data-original-title='@{fileName}']/../../../..//*[@class='commentBox']//*[text()='File(s) has been removed.']";
 
 	//Edit screen from click Edit in activity
 	public final By ELEMENT_CONTENT_EDIT_SCREEN_FROM_ACTIVITY = By.id("UIJCRExplorerPortlet");
@@ -185,7 +185,7 @@ public class HomePageActivity extends PlatformBase{
 	public final String MSG_TASK_COMMENT_UPDATE_NOTE = "Note has been updated to: ${note}.";
 	public final String MSG_TASK_COMMENT_UPDATE_STATUS = "Task has been completed.";
 	public final String MSG_EVENT_COMMENT_DELETE_EDITED_EVENT = "Event cancelled for ${date}";
-	public final String MSG_EVENT_REPEAT_EVERYDAY = "Event will be repeated every day.";
+	public final String MSG_EVENT_REPEAT_EVERYDAY = "Event will be repeated every day,";
 	public final String ELEMENT_EVENT_ACTIVITY_DATE_TIME_INFO = "//div[${index}][contains(@id,'activityContainer')]//*[contains(@id,'ActivityContextBox')]//*[@class='text']/*[@class='dateTime']";
 	public final String ELEMENT_TASK_COMPLETED_ICON = "//*[contains(text(),'${title}')]/../../..//i[@class='uiIconStatus-completed']";
 

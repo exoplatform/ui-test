@@ -225,10 +225,10 @@ public class ECMS_SE_Collaboration extends PlatformBase {
 	 */
 	@Test
 	public void test41_AddTranslation_Document(){
-		String fileEnglish = "File_document_English";
+		String fileEnglish = "File_document_English" + getRandomNumber();
 		String fileContentEnglish = "File_document_content_English";
 		By elementFileEnglish = By.linkText(fileEnglish);
-		String fileFrench = "File_document_French";
+		String fileFrench = "File_document_French" + getRandomNumber();
 		String fileContentFrench = "File_document_content_French";
 		By elementFileFrench = By.linkText(fileFrench);
 		String eContentDetail ;
@@ -254,7 +254,7 @@ public class ECMS_SE_Collaboration extends PlatformBase {
 
 		info("Add translation for file English to file French");
 		ecms.goToNode(elementFileEnglish);
-		actBar.addTranslationForDocument("", fileFrench);
+		actBar.addTranslationForDocument("General Drives/Sites Management", fileFrench);
 		click(siteExp.ELEMENT_SITEBAR_RELATION);
 		waitForAndGetElement(By.xpath(ecms.ELEMENT_TRANSLATION_IN_RELATION_TAB.replace("${fileName}", fileFrench)));
 
@@ -312,7 +312,7 @@ public class ECMS_SE_Collaboration extends PlatformBase {
 
 		info("Add translation for file English to file French");
 		ecms.goToNode(elementFileEnglish);
-		actBar.addTranslationForDocument("", fileFrench);
+		actBar.addTranslationForDocument("General Drives/Sites Management", fileFrench);
 		click(siteExp.ELEMENT_SITEBAR_RELATION);
 		waitForAndGetElement(By.xpath(ecms.ELEMENT_TRANSLATION_IN_RELATION_TAB.replace("${fileName}", fileFrench)));
 

@@ -56,7 +56,7 @@ public class Social_Space_MemberManagement extends Activity{
 	@Test(priority=0)
 	public void test01_ChangeMemberRoleInSpace(){
 		//Declare variable
-		String spaceName = "space67664";
+		String spaceName = "space67664" + getRandomNumber();
 
 		//Create data
 		//Add new space

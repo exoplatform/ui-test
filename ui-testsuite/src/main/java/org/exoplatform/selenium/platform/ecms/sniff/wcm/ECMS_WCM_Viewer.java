@@ -3,6 +3,7 @@ package org.exoplatform.selenium.platform.ecms.sniff.wcm;
 import static org.exoplatform.selenium.TestLogger.info;
 
 import org.exoplatform.selenium.Button;
+import org.exoplatform.selenium.Utils;
 import org.exoplatform.selenium.platform.ManageAccount;
 import org.exoplatform.selenium.platform.NavigationToolbar;
 import org.exoplatform.selenium.platform.PageEditor;
@@ -79,9 +80,9 @@ public class ECMS_WCM_Viewer extends PlatformBase{
 	 */
 	@Test
 	public void test01_CreateAndEditSingleContentViewerPage(){	
-		String pageName = "Sniff_Ecms_SCV01";
+		String pageName = "sniff658333";
 		String contentPath = "General Drives/Sites Management/acme/documents/offices.jpg";
-		String editContentPath = "conditions.doc";
+		String editContentPath = "General Drives/Sites Management/acme/documents/conditions.doc";
 
 		info("-- Create Single Content Viewer page --");
 		pEditor.addSCVPageAndContentFolderPaths(pageName, contentPath);
@@ -90,7 +91,8 @@ public class ECMS_WCM_Viewer extends PlatformBase{
 		info("-- Edit Single Content Viewer page --");
 		navToolBar.goToEditPageEditor();
 		pEditor.openAddContentPathForm();
-		click(By.linkText(editContentPath));
+		userGroup = new UserGroupManagement(driver);
+		userGroup.selectGroup(editContentPath);
 		button.save();
 		button.close();
 		click(ELEMENT_PAGE_FINISH_BUTTON);
@@ -112,14 +114,14 @@ public class ECMS_WCM_Viewer extends PlatformBase{
 	 */
 	@Test
 	public void test02_CreateAndEditContentListViewerPageByFolder(){
-		String cName = "CLV_By_Folder_01";
+		String cName = "page1678252";
 		String cContent = "Web content: CLV By folder";
 		String contentPath = "acme/web contents/News";
 
-		String pCLVName = "CLV_By_Folder_02";
+		String pCLVName = "CLV_By_Folder_1678252";
 		String pCLVPath = "General Drives/Sites Management/acme/web contents";
 		String pCLVFolder = "News";
-		String editCLVPath = "Events";
+		String editpCLVFolder = "Events";
 
 		info("-- Create a web content --");
 		navToolBar.goToSiteExplorer();
@@ -129,6 +131,7 @@ public class ECMS_WCM_Viewer extends PlatformBase{
 		actBar.publishDocument();
 
 		info("-- Create a new content list viewer page --");
+		driver.get(baseUrl);
 		ecms.goToOverviewPage();
 		pEditor.addCLVPageAndCLVpath(pCLVName, pCLVPath, pCLVFolder);
 		//waitForTextPresent(cName);
@@ -136,7 +139,12 @@ public class ECMS_WCM_Viewer extends PlatformBase{
 		info("-- Edit a content list viewer page --");
 		navToolBar.goToEditPageEditor();
 		pEditor.openAddContentPathForm();
-		click(pEditor.ELEMENT_RIGHT_WORKSPACE_NODE.replace("${node}", editCLVPath));
+		String[] node = pCLVPath.split("/");
+		for (int i = 0; i < node.length; i ++){
+			Utils.pause(3000);
+			click(By.xpath("//*[@class='node']//*[contains(text(),'" + node [i] + "')]"));
+		}
+		click(pEditor.ELEMENT_RIGHT_WORKSPACE_NODE_NEW.replace("${node}", editpCLVFolder));
 		button.save();
 		//wait a second: avoid pop-up blocker 
 		waitForTextNotPresent("News");
@@ -161,11 +169,11 @@ public class ECMS_WCM_Viewer extends PlatformBase{
 	 */
 	@Test
 	public void test03_CreateAndEditListViewerPageByContent(){
-		String cName = "CLV_By_Content_01";
+		String cName = "CLV_By_Content_658324";
 		String cContent = "Web content: CLV By Content";
 		String contentPath = "acme/web contents/Events";
 
-		String pCLVName = "CLV_By_Content_02";
+		String pCLVName = "CLV_By_Content_678244";
 		String pCLVPath = "General Drives/Sites Management/acme/web contents/News";
 		String pCLVContent = "New: Speed";
 		String editCLVPath = "General Drives/Sites Management/acme/web contents/Events/" + cName;
@@ -180,13 +188,11 @@ public class ECMS_WCM_Viewer extends PlatformBase{
 		info("-- Create a new content list viewer page --");
 		ecms.goToOverviewPage();		
 		pEditor.addCLVPageAndCLVpath(pCLVName, pCLVPath, pCLVContent, "content");
-		//waitForTextPresent(pCLVContent);
 
 		info("-- Edit a content list viewer page --");
 		navToolBar.goToEditPageEditor();
-		pEditor.selectContentPathInEditMode(editCLVPath, true, true);
+		pEditor.selectContentPathInEditMode(editCLVPath, false);
 		click(ELEMENT_PAGE_FINISH_BUTTON);
-		waitForTextPresent(cName);
 
 		info("-- Restore original data--");
 		pMag.deletePageAtManagePageAndPortalNavigation(pCLVName, true, "acme", false, "");
@@ -202,7 +208,7 @@ public class ECMS_WCM_Viewer extends PlatformBase{
 	 */
 	@Test
 	public void test04_EditPreferenceOfContentListViewer(){
-		String cName = "Edit_Preference_News";
+		String cName = "page658453";
 		String cContent = "Edit Preference of Content List Viewer";
 		String contentPath = "acme/web contents/Events";
 		String image = "TestData/Winter.jpg";
@@ -225,15 +231,16 @@ public class ECMS_WCM_Viewer extends PlatformBase{
 		ecms.enableEditMode(true);
 
 		info("-- Latest news: Open Content List Preference --");
-		
 		cList.goToContentListPreference(ecms.ELEMENT_RSS_ICON, cList.ELEMENT_PREFERENCE_LATEST_NEWS_ICON);
-		
 		//Edit properties
 		cList.setDisplayOptions(cList.ELEMENT_SHOW_DATE);
 		click(cList.ELEMENT_CONTENT_SELECTION_TAB);
 		click(pEditor.ELEMENT_BY_CONTENT_MODE,2);
 		click(ELEMENT_SELECT_CONTENT_PATH_LINK);
-		pEditor.selectContentPathInEditMode(pCLVPath, true, false, false);
+		userGroup = new UserGroupManagement(driver);
+		userGroup.selectGroup(pCLVPath);
+		click(By.xpath(".//*[@id='tab-UIContentBrowsePanelMulti']//*[text()='Save']"));
+		click(By.xpath(".//*[@id='UICLVConfig']//*[text()='Save']"));
 		waitForAndGetElement(ecms.ELEMENT_CLV_TITLE.replace("${title}", cName), DEFAULT_TIMEOUT, 0, 2);
 		waitForAndGetElement(ecms.ELEMENT_CLV_PUBLISH_DATE.replace("${date}", pDate), DEFAULT_TIMEOUT, 0, 2);
 		info("-- Restore original data--");

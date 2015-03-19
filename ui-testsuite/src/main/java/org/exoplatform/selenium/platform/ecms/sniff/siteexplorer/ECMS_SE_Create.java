@@ -118,12 +118,12 @@ public class ECMS_SE_Create extends PlatformBase {
 		cMenu.deleteData(elementWeb);
 		Utils.pause(3000);
 		
-		info("Restore data");
+		/*info("Restore data");
 		actBar.undoDeletion(name);
 		waitForAndGetElement(elementWeb);
 		
 		info("Delete web content after restore");
-		cMenu.deleteData(elementWeb);
+		cMenu.deleteData(elementWeb);*/
 	}
 	
 	

@@ -136,11 +136,13 @@ public class Calendar_Event_Attachment_Schedule_Participants extends CalendarBas
 	@Test
 	public  void test03_04_05_AddAParticipantAndSendInvitationAndCheckPrivacy() {
 		info("Test 3: Add a participant");
-		String name = "Event109868";
+		String name = "Event109868" + getRandomNumber();
 		String mainHandle = driver.getWindowHandle();
 		acc.userSignIn(userType.PUBLISHER);
 		acc.updateUserProfile(null, null, null, EMAIL_ADDRESS1);
-		acc.userSignIn(userType.ADMIN); 
+		//acc.userSignIn(userType.ADMIN); 
+		acc.signOut();
+		acc.signIn(DATA_USER1, DATA_PASS);
 		goToCalendarPage();
 		/*Step Number: 12
 		 *Step Name: Step 1: Open add/edit event pop up

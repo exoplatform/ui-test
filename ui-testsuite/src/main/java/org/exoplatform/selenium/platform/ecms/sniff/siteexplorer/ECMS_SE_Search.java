@@ -41,7 +41,7 @@ public class ECMS_SE_Search extends PlatformBase {
 	 * 
 	 */
 	@Test
-	public void test01_AdvancedSearch() {
+	public void test02_AdvancedSearch() {
 		String node1= "test01AdvancedSearch";
 		String des = "test01 desc";
 		By bNode1= By.xpath(siteExp.ELEMENT_SE_NODE.replace("{$node}",node1));
@@ -69,7 +69,7 @@ public class ECMS_SE_Search extends PlatformBase {
 	 * 
 	 */
 	@Test
-	public void test02_SimpleSearch() {
+	public void test01_SimpleSearch() {
 		String node1= "test02SimpleSearch";
 		String des = "test02 desc";
 		By bNode1= By.xpath(siteExp.ELEMENT_SE_NODE.replace("{$node}",node1));

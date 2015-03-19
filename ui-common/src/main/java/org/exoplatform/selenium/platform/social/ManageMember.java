@@ -57,8 +57,10 @@ public class ManageMember extends SpaceManagement {
 
 	//Adapt to plf4.1.0
 	public final String ELEMENT_SELECTED_USER_BOX_PLF4_1 = "//span[@class='text' and contains(text(),'${username}')]/../..//input[@class='checkbox']";	
-	public final String ELEMENT_GRAND_MANAGER_BUTTON = ELEMENT_MEMBERS_TABLE + "/..//td[contains(text(),'${username}')]/..//*[@class='iPhoneCheckHandle']";
-	public final String ELEMENT_IS_MANAGER_ICON = ELEMENT_MEMBERS_TABLE + "/..//td[contains(text(),'${username}')]/..//*[@class='iPhoneCheckHandle' and @style='left: 41px;']";
+	//public final String ELEMENT_GRAND_MANAGER_BUTTON = ELEMENT_MEMBERS_TABLE + "/..//td[contains(text(),'${username}')]/..//*[@class='iPhoneCheckHandle']";
+	public final String ELEMENT_GRAND_MANAGER_BUTTON = ELEMENT_MEMBERS_TABLE + "//*[contains(text(),'${username}')]/..//*[contains(text(),'NO')]";
+	//public final String ELEMENT_IS_MANAGER_ICON = ELEMENT_MEMBERS_TABLE + "/..//td[contains(text(),'${username}')]/..//*[@class='iPhoneCheckHandle' and @style='left: 41px;']";
+	public final String ELEMENT_IS_MANAGER_ICON = ELEMENT_MEMBERS_TABLE + "//*[contains(text(),'${username}')]/..//*[contains(text(),'YES')]";
 	public final String ELEMENT_IS_NOT_MANAGER_ICON = ELEMENT_MEMBERS_TABLE + "/..//td[contains(text(),'${username}')]/..//*[@class='iPhoneCheckHandle' and @style='left: 1px;']";
 	public final String ELEMENT_MEMBER_USER_ITEM = "//th[contains(text(),'Members')]/ancestor::table//td[contains(text(),'${userName}')]";
 	public final String ELEMENT_INVITED_USER_ITEM = "//th[contains(text(),'Invited')]/ancestor::table//td[contains(text(),'${userName}')]";

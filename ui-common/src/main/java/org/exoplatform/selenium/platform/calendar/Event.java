@@ -108,7 +108,7 @@ public class Event extends CalendarBase{
 	public By ELEMENT_BUTTON_EVENT_MORE_DETAILS = By.xpath("//*[@id='UIQuickAddEventPopupWindow']//*[text()='More Details']");
 	public By ELEMENT_RECURRING_TYPE_SELECT_BOX = By.xpath("//*[@name='repeatType']");
 	public By ELEMENT_INTERVAL_SELECT_BOX = By.xpath("//*[@name='interval']");
-	public By ELEMENT_END_AFTER_NUMBER = By.id("endAfterNumber");
+	public By ELEMENT_END_AFTER_NUMBER = By.id("endAfter");
 	public By ELEMENT_NEVER_END_RECURRING_EVENT = By.id("endNever");
 	public By ELEMENT_AFTER_END_RECURRING_EVENT = By.id("endAfter");
 	public By ELEMENT_BY_THIS_DATE_END_RECURRING_EVENT = By.id("endByDate");
@@ -713,7 +713,10 @@ public class Event extends CalendarBase{
 			waitForElementNotPresent(ELEMENT_DELETE_RECURRING_EVENT_FORM);
 		}
 		else{
-			alert.verifyAlertMessage(MSG_TASK_DELETE);
+			if ((isTextPresent(MSG_TASK_DELETE, 3000)))
+				alert.verifyAlertMessage(MSG_TASK_DELETE);
+			else
+				alert.verifyAlertMessage(MSG_EVENT_DELETE);
 			button.yes();
 			driver.navigate().refresh();
 			Utils.pause(1000);

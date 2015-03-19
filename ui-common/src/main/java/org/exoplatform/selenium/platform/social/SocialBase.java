@@ -134,14 +134,14 @@ public class SocialBase extends PlatformBase {
 		//		goToMySpacePage();
 		goToAllSpaces();
 		waitForAndGetElement(ELEMENT_MY_SPACES_LINK);
-		clickByJavascript(ELEMENT_MY_SPACES_LINK);
+		click(ELEMENT_MY_SPACES_LINK);
 		Utils.pause(500);
 	}
 
 	// Go to All Spaces
 	public void goToAllSpaces(){
 		info("Go to All Spaces");
-		clickByJavascript(ELEMENT_JOIN_SPACE_LINK);
+		click(ELEMENT_JOIN_SPACE_LINK);
 		if(waitForAndGetElement("//button[contains(.,'Add New Space')]",DEFAULT_TIMEOUT,0)== null){
 			clearCache();
 			waitForAndGetElement("//button[contains(.,'Add New Space')]");
@@ -188,7 +188,7 @@ public class SocialBase extends PlatformBase {
 
 	// Go to Member tab
 	public void goToMembers(){
-		clickByJavascript(ELEMENT_MEMBERS_TAB);
+		click(ELEMENT_MEMBERS_TAB);
 		waitForAndGetElement(By.id("user"));
 	}
 
@@ -271,18 +271,18 @@ public class SocialBase extends PlatformBase {
 		info("--Go to My Connections--");		
 		for(int repeat=0;; repeat ++){
 			if (repeat > 1){
-				clickByJavascript(ELEMENT_ACCOUNT_NAME_LINK,2);
+				click(ELEMENT_ACCOUNT_NAME_LINK,2);
 				info("--Error mouse over and click: can't mouseover, need to use mouse over and click --");
 				break;
 			}
-			clickByJavascript(ELEMENT_ACCOUNT_NAME_LINK,2);
+			click(ELEMENT_ACCOUNT_NAME_LINK,2);
 			if (waitForAndGetElement(ELEMENT_TOOLBAR_NETWORKS_ICON, 5000, 0) != null){
 				info("Element " + ELEMENT_TOOLBAR_NETWORKS_ICON + "... is displayed");
 				break;
 			}
 			info("Retry...[" + repeat + "]");
 		}
-		clickByJavascript(ELEMENT_TOOLBAR_NETWORKS_ICON);
+		click(ELEMENT_TOOLBAR_NETWORKS_ICON);
 		waitForAndGetElement(ELEMENT_MY_CONNECTIONS_TAB);
 	}	
 
@@ -318,7 +318,7 @@ public class SocialBase extends PlatformBase {
 	public void doAction(String action, String spaceName){
 		By actionLink = By.xpath(ELEMENT_ACTION_USER_ON_SPACE.replace("${spaceName}", spaceName).replace("${action}", action));
 		waitForAndGetElement(actionLink, DEFAULT_TIMEOUT,1);
-		clickByJavascript(actionLink);
+		click(actionLink);
 		Utils.pause(1000);
 	}
 

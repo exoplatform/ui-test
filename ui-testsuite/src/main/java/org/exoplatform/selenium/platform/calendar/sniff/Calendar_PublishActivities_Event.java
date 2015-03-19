@@ -250,9 +250,9 @@ public class Calendar_PublishActivities_Event extends CalendarBase{
 	 */
 	@Test
 	public  void test07_ActivitiesShouldBeUpdatedAfterDeletingOfAnEditedRecurringEvent() {
-		String name ="event 109227";
+		String name ="event 109227" + getRandomNumber();
 		String description = "description 109227";
-		String space = "Space109227";
+		String space = "Space109227" + getRandomNumber();
 		/*create data*/
 		info("Create data");
 		sp.goToAllSpaces();
@@ -311,7 +311,7 @@ public class Calendar_PublishActivities_Event extends CalendarBase{
 		goToCalendarPage();
 		
 		evt.deleteRecurringEvent(name, selectDayOption.ONEDAY, recurringType.ONLY_EVENT,getDate(1, "MMM dd yyyy"));
-		evt.deleteEventTask(name);
+		//evt.deleteEventTask(name);
 		
 		/*Step number: 3
 		 *Step Name: Step 3: Check activity
@@ -324,7 +324,7 @@ public class Calendar_PublishActivities_Event extends CalendarBase{
 			- A comment is added to the main activity (of series): Event cancelled for $CANCEL_DATE
 			where $CANCEL_DATE : the date of the event removed*/
 		toolBar.goToHomePage();
-		waitForAndGetElement(homeAct.ELEMENT_ACTIVITY_COMMENT_CONTENT.replace("${title}", name).replace("${comment}", homeAct.MSG_EVENT_COMMENT_DELETE_EDITED_EVENT.replace("${date}",getDate(-1, "EEEE, MMMM dd, yyyy"))));
+		waitForAndGetElement(homeAct.ELEMENT_ACTIVITY_COMMENT_CONTENT.replace("${title}", name).replace("${comment}", homeAct.MSG_EVENT_COMMENT_DELETE_EDITED_EVENT.replace("${date}",getDate(1, "EEEE, MMMM dd, yyyy"))));
 		
 		/*Clear data*/
 		info("Clear data");

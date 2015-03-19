@@ -74,13 +74,11 @@ public class PageEditor extends PlatformBase {
 	public final By ELEMENT_BY_CONTENT_MODE=By.xpath("//*[contains(text(),'By Content')]");
 	public final String ELEMENT_CONTENT_BROWSER_NODE = "//span[@class='nodeName' and contains(text(), '${node}')]";
 	public final String ELEMENT_PORTLET_DRAGGED = "//div[contains(@class,'portletLayoutDecorator') and contains(text(),'${portlet}')]";
-	
-		
+
+
 	//Add Path > Right Workspace 
 	public final String ELEMENT_RIGHT_WORKSPACE_NODE = "//*[@class='rightWorkspace']//*[text()='${node}']";
-
-	//public final By ELEMENT_ROW_EMPTY_CONTAINER = By.xpath("//*[contains(@class, 'UIRowContainer EmptyContainer')]");
-
+	public final String ELEMENT_RIGHT_WORKSPACE_NODE_NEW = "//*[@id='ListRecords']//a[contains(text(),'${node}')]";
 	/*===================== Common Function =======================*/
 
 	//Create page wizard without layout
@@ -151,7 +149,6 @@ public class PageEditor extends PlatformBase {
 	//Create new CLV with layout and content
 	public void addCLVPageAndCLVpath(String pageName, String path, String clv, Object...params){
 		String modeContent = (String) (params.length > 0 ? params[0]: "");
-
 		gotoPageEditorAndSelectLayout(pageName, 1);
 		Utils.pause(500);
 		addContentList();
@@ -183,10 +180,12 @@ public class PageEditor extends PlatformBase {
 		click(ELEMENT_SELECT_CONTENT_PATH_LINK);
 		if (path != ""){
 			String[] paths = path.split("/");
-			for (int i = 0; i < paths.length; i ++){
-				click("//a[@data-original-title='" + paths[i] + "']");
+			for (int i = 0; i < paths.length-1; i ++){
+				click(ELEMENT_TARGET_PATH_NODE.replace("${filePath}", paths[i]));
 				Utils.pause(1000);
 			}
+			if (waitForAndGetElement(ELEMENT_TARGET_NODE_NEW.replace("${fileName}", paths[paths.length-1])) != null)
+				click(ELEMENT_TARGET_NODE_NEW.replace("${fileName}", paths[paths.length-1]));
 		}
 		click(button.ELEMENT_SAVE_BUTTON);
 		click(button.ELEMENT_CLOSE_BUTTON);
@@ -229,7 +228,6 @@ public class PageEditor extends PlatformBase {
 	 */
 	public void selectCLVPath(String path, String clv, String...mode){
 		userGroup = new UserGroupManagement(driver);
-		By ELEMENT_SELECT_CLV_PATH = By.xpath("//td/a[text()='" + clv + "']");
 		goToEditPortlet(ELEMENT_FRAME_CONTAIN_PORTLET);
 		if (mode.length >0){ 
 			if (mode[0] == "content")
@@ -244,11 +242,11 @@ public class PageEditor extends PlatformBase {
 			Utils.pause(3000);
 			click(By.xpath("//*[@class='node']//*[contains(text(),'" + node [i] + "')]"));
 		}
-		click(ELEMENT_SELECT_CLV_PATH);
+		click(ELEMENT_RIGHT_WORKSPACE_NODE_NEW.replace("${node}", clv));
 		if (mode.length >0){ 
 			if (mode[0] == "content"){
 				click(button.ELEMENT_SAVE_BUTTON);
-				waitForElementNotPresent(ELEMENT_SELECT_CLV_PATH);
+				waitForElementNotPresent(ELEMENT_RIGHT_WORKSPACE_NODE_NEW.replace("${node}", clv));
 			}		
 		}
 		click(button.ELEMENT_SAVE_BUTTON);
@@ -270,13 +268,9 @@ public class PageEditor extends PlatformBase {
 		goToPageEditor_EmptyLayout(pageName);
 		//Drag and drop Content Detail portlet into this page
 		addContentDetailEmptyLayout();
-		//click(ELEMENT_NEWPAGE_SAVE_BUTTON);
-		//waitForElementNotPresent(ELEMENT_NEWPAGE_SAVE_BUTTON);
-		//nav.goToEditPageEditor();
 
 		info("-- Select Content Path --");
 		selectContentPathInEditMode(contentPath, rightClickNode);
-		//click(ELEMENT_NEWPAGE_SAVE_BUTTON);
 		finishEditLayout();
 	}
 
@@ -288,18 +282,9 @@ public class PageEditor extends PlatformBase {
 		Boolean nClose = (Boolean) (params.length > 1 ? params[1]: true) ;
 
 		info("-- Select the content path: "+ contentPath +"--");
-		String ELEMENT_SELECT_CONTENT_FOLDER_PATHS = "//span[contains(text(),'${pathName}')]";
-		String ELEMENT_SELECT_CONTENT_FOLDER_PATHS_A = "//a[@data-original-title='${pathName}']";
-		String[] pathNames = contentPath.split("/");
-		//if (isTextNotPresent("Folder Browser")){
-		//click(ELEMENT_SELECT_CONTENT_PATH_LINK);
-		//}
 		if(inEditModeWindows){
-
 			if(waitForAndGetElement(ELEMENT_FRAME_CONTAIN_PORTLET,10000,0) != null){
 				mouseOver(ELEMENT_FRAME_CONTAIN_PORTLET,true);	
-				//click(ELEMENT_EDIT_PORTLET_ICON);
-				//click(ELEMENT_SELECT_CONTENT_PATH_LINK);
 				click(ELEMENT_EDIT_PORTLET_ICON);  
 				if (waitForAndGetElement(ELEMENT_SELECT_CONTENT_PATH_LINK_AUX, 3000, 0) != null){
 					click(ELEMENT_SELECT_CONTENT_PATH_LINK_AUX);
@@ -309,30 +294,15 @@ public class PageEditor extends PlatformBase {
 			}
 
 			waitForAndGetElement(By.xpath("//*[@id='BreadcumbsContainer']//*[@class='uiIconHome uiIconLightGray']"));
-			/*info("-- Load frame 1 --");
-			if(waitForAndGetElement(By.id("UIContentSelectorOne"),DEFAULT_TIMEOUT,0)==null){
-				info("-- Load frame 2 --");
-				if(waitForAndGetElement(By.id("CorrectContentSelectorPopupWindow"),DEFAULT_TIMEOUT,0)==null){
-					info("-- Load frame 3 --");
-					waitForAndGetElement(By.id("UIContentSelectorFolder"));
-				}
-			}*/
-			for(int i = 0; i < pathNames.length - 1; i ++ ){
-				String pathToSelect = ELEMENT_SELECT_CONTENT_FOLDER_PATHS.replace("${pathName}", pathNames[i])+"/../../../div";
-				String pathToSelectA = ELEMENT_SELECT_CONTENT_FOLDER_PATHS_A.replace("${pathName}", pathNames[i])+"/../../div";				
-				
-				boolean isExpandIcon = false;
-				boolean isExpandIconA = false;
-				
-				if(waitForAndGetElement(pathToSelect,DEFAULT_TIMEOUT,0)!=null)
-					 isExpandIcon = waitForAndGetElement(pathToSelect).getAttribute("class").equalsIgnoreCase("expandIcon");
-				else if(waitForAndGetElement(pathToSelectA,DEFAULT_TIMEOUT,0)!=null)
-					 isExpandIconA = waitForAndGetElement(pathToSelectA).getAttribute("class").equalsIgnoreCase("expandIcon");
-				
-				if(isExpandIcon || isExpandIconA)
-					click(By.linkText(pathNames[i]));
+			String[] pathNames = contentPath.split("/");
+			for (int i = 0; i < pathNames.length-1; i ++){
+				Utils.pause(3000);
+				click(By.xpath("//*[@class='node']//*[contains(text(),'" + pathNames [i] + "')]"));
 			}
-			click(ELEMENT_RIGHT_WORKSPACE_NODE.replace("${node}", pathNames[pathNames.length - 1]));
+			if(waitForAndGetElement(ELEMENT_RIGHT_WORKSPACE_NODE_NEW.replace("${node}", pathNames[pathNames.length - 1]), 1,5000)!=null)
+					click(ELEMENT_RIGHT_WORKSPACE_NODE_NEW.replace("${node}", pathNames[pathNames.length - 1]));
+			else
+				click(ELEMENT_RIGHT_WORKSPACE_NODE.replace("${node}", pathNames[pathNames.length - 1]));
 			//wait 1s
 			Utils.pause(1000);
 			button.save();
@@ -556,7 +526,7 @@ public class PageEditor extends PlatformBase {
 		click(ELEMENT_PORTLET_ACCESS_PERMISSION_TAB);
 		Utils.pause(2000);
 		click(ELEMENT_PORTLET_ADD_PERMISSION_BUTTON);
-//		waitForAndGetElement(ELEMENT_PORTLET_LIST_PERMISSION_WINDOW);
+		//		waitForAndGetElement(ELEMENT_PORTLET_LIST_PERMISSION_WINDOW);
 		click(ELEMENT_PORTLET_PERMISSION_GROUP.replace("${groupName}", groupName));
 		click(ELEMENT_PORTLET_PERMISSION_MEMBERSHIP.replace("${membership}", membership));
 		click(ELEMENT_PORTLET_SAVE_AND_CLOSE_BUTTON);
@@ -572,7 +542,7 @@ public class PageEditor extends PlatformBase {
 			clearCache();
 		}
 	}
-	
+
 	/**
 	 * Edit container access permission
 	 * 
@@ -588,9 +558,9 @@ public class PageEditor extends PlatformBase {
 	public void editContainerPermission(String container, String groupId, String membership, Boolean publicMode){
 		if (publicMode) { click(ELEMENT_ACCESS_PERMISSION_MAKEITPUBLIC); }
 		else {
-	    click(ELEMENT_ADD_PERMISSION_BUTTON);
-	    setEditPermissions(groupId, membership);
-	    button.save();
+			click(ELEMENT_ADD_PERMISSION_BUTTON);
+			setEditPermissions(groupId, membership);
+			button.save();
 		}
 	}
 }

@@ -286,7 +286,7 @@ public class UserGroupManagement extends PlatformBase {
 
 		temp = groupPath.split(delimiter);
 		/* Go to group */
-		for(int i =0; i < temp.length ; i++){
+		for(int i =0; i < temp.length-1 ; i++){
 			info("Go to " + temp[i]);
 			if (isInPermissionTab){
 				if (waitForAndGetElement(By.xpath(groupName_5.replace("${groupName}", temp[i])),10000,0) != null){
@@ -311,6 +311,9 @@ public class UserGroupManagement extends PlatformBase {
 			}
 			Utils.pause(500);
 		}
+		info(ELEMENT_TARGET_NODE_NEW.replace("${fileName}", temp[temp.length-1]));
+		if(waitForAndGetElement(ELEMENT_TARGET_NODE_NEW.replace("${fileName}", temp[temp.length-1]),5000,0)!=null)
+			click(ELEMENT_TARGET_NODE_NEW.replace("${fileName}", temp[temp.length-1]));
 	}
 
 	public void editGroup(String oldName, String groupName, String groupLabel, String groupDesc, boolean verify){

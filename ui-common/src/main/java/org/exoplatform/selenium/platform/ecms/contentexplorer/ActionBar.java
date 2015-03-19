@@ -465,7 +465,7 @@ public class ActionBar extends EcmsBase{
 		String categoryName = (String) (params.length > 1 ? params[1]:"");
 
 		By ELEMENT_ADD_CATEGORY_SPECIFIC = By.xpath("//div[contains(text(),'"+categoryName+"')]/following::a[@title='select']");
-		// By ELEMENT_CATEGORY_LIST = By.xpath("//th[text()='Category']")
+		By ELEMENT_ADD_CATEGORY_SPECIFIC_NEW = By.xpath("//*[@class='uiGrid table table-hover table-striped']//div[contains(.,'"+categoryName+"')]/parent::td//parent::tr//*[@data-original-title='Select']");
 		By ELEMENT_ADD_CATEGORY_SPECIFIC_OTHER = By.xpath("//div[contains(text(),'"+categoryName+"')]/following::a[@data-original-title='select']");
 
 		if (waitForAndGetElement(ELEMENT_CATEGORIES_LINK, 5000, 0) == null){
@@ -491,7 +491,10 @@ public class ActionBar extends EcmsBase{
 			}
 			if (waitForAndGetElement(ELEMENT_ADD_CATEGORY_SPECIFIC, 5000, 0) != null){
 				click(ELEMENT_ADD_CATEGORY_SPECIFIC);	
-			}else {
+			}else if (waitForAndGetElement(ELEMENT_ADD_CATEGORY_SPECIFIC_NEW, 5000, 0) != null){
+				click(ELEMENT_ADD_CATEGORY_SPECIFIC_NEW);	
+			}
+			else {
 				click(ELEMENT_ADD_CATEGORY_SPECIFIC_OTHER);
 			}
 			Utils.pause(500);
@@ -1124,9 +1127,10 @@ public class ActionBar extends EcmsBase{
 		click(ELEMENT_SELECT_DOCUMENT_BUTTON);
 
 		if (paths != ""){
-			goToNode(paths);
+			selectTranslation(paths);
 		}
-		click(By.xpath("//*[@id='ListRecords']//a[text()='" + fileName + "']"));
+		if (waitForAndGetElement(ELEMENT_TARGET_NODE_NEW.replace("${fileName}", fileName)) != null)
+			click(ELEMENT_TARGET_NODE_NEW.replace("${fileName}", fileName));
 		waitForElementNotPresent(ELEMENT_SELECT_DOCUMENT_POPUP);
 		button.save();
 		waitForElementNotPresent(ELEMENT_ADD_TRANSLATION_POPUP);

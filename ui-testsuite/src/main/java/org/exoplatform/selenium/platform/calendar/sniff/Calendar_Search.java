@@ -24,7 +24,8 @@ public class Calendar_Search extends CalendarBase{
 
 	@BeforeMethod
 	public void setUpBeforeTest(){
-		getDriverAutoSave();
+		//getDriverAutoSave();
+		initSeleniumTest();
 		acc = new ManageAccount(driver);
 		evt = new Event(driver);
 		tsk = new Task(driver);
@@ -44,7 +45,7 @@ public class Calendar_Search extends CalendarBase{
 	@Test
 	public void test01_calendarQuickSearch() {
 
-		String EVENT_NAME_01 = "QS_EVENT_01";
+		String EVENT_NAME_01 = "QS_EVENT_01" + getRandomNumber();
 
 		info("Go to Intranet Calendar");
 		goToCalendarPage();
@@ -66,7 +67,7 @@ public class Calendar_Search extends CalendarBase{
 	 */
 	@Test
 	public void test02_calendarAdvanceSearch(){
-		String EVENT_NAME_02 = "QS_EVENT_02";
+		String EVENT_NAME_02 = "QS_EVENT_02" + getRandomNumber();
 
 		info("Go to Intranet Calendar");
 		goToCalendarPage();
