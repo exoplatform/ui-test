@@ -300,7 +300,7 @@ public class TestBase {
 		capability.setBrowserName("firefox");
 //		capability.setCapability("version", "28.0");
 //		capability.setCapability("binary", "/usr/bin/firefox");
-		capability.setPlatform(Platform.LINUX);
+		capability.setPlatform(Platform.ANY);
 		driver = new RemoteWebDriver(new URL(nodeUrl), capability);
 		action = new Actions(driver);
 		termsAndConditions(opParams);
