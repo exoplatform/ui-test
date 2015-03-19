@@ -296,6 +296,7 @@ public class TestBase {
 	public WebDriver initRemoteWebDriverFF(Object... opParams) throws MalformedURLException {
 		getSystemProperty();
 		DesiredCapabilities capability = DesiredCapabilities.firefox();
+//		capability.setCapability("jenkins.label","redhat5 && amd64");
 		capability.setBrowserName("firefox");
 		capability.setPlatform(Platform.LINUX);
 		driver = new RemoteWebDriver(new URL(nodeUrl), capability);
