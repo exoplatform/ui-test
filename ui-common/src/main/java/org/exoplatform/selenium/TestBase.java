@@ -297,13 +297,13 @@ public class TestBase {
 		getSystemProperty();
 		DesiredCapabilities capability = DesiredCapabilities.firefox();
 //		capability.setCapability("jenkins.label","redhat5 && amd64");
-		capability.setBrowserName("firefox");
+//		capability.setBrowserName("firefox");
 //		capability.setCapability("version", "28.0");
 //		capability.setCapability("binary", "/usr/bin/firefox");
-		capability.setPlatform(Platform.ANY);
+//		capability.setPlatform(Platform.ANY);
 		driver = new RemoteWebDriver(new URL(nodeUrl), capability);
 		action = new Actions(driver);
-		termsAndConditions(opParams);
+//		termsAndConditions(opParams);
 		return driver;
 	}
 	
