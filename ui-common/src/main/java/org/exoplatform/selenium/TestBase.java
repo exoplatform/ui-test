@@ -110,8 +110,8 @@ public class TestBase {
 	protected String getStartFilePath;
 
 	/*========Default System Property=============*/
-	public final String DEFAULT_BASEURL="http://localhost:8080/portal";
-	public final String DEFAULT_NODEURL="http://may38.l.exoplatform.vn:4444";
+	public final String DEFAULT_BASEURL="http://may38.l.exoplatform.vn:8080/portal";
+	public final String DEFAULT_NODEURL="http://127.0.0.1:5555/wd/hub";
 //	http://ubuntu14.04-2.testlab1.exoplatform.vn:4444/wd/hub
 	public final String DEFAULT_BROWSER="firefox";//iexplorer, firefox, chrome
 	public final String DEFAULT_SERVER="ubuntu"; //win, ubuntu
@@ -297,13 +297,13 @@ public class TestBase {
 		getSystemProperty();
 		DesiredCapabilities capability = DesiredCapabilities.firefox();
 //		capability.setCapability("jenkins.label","redhat5 && amd64");
-//		capability.setBrowserName("firefox");
+		capability.setBrowserName("firefox");
 //		capability.setCapability("version", "28.0");
 //		capability.setCapability("binary", "/usr/bin/firefox");
-//		capability.setPlatform(Platform.ANY);
+		capability.setPlatform(Platform.LINUX);
 		driver = new RemoteWebDriver(new URL(nodeUrl), capability);
 		action = new Actions(driver);
-//		termsAndConditions(opParams);
+		termsAndConditions(opParams);
 		return driver;
 	}
 	
