@@ -262,7 +262,7 @@ public class TestBase {
 	public WebDriver initRemoteWebDriverChrome(Object... opParams) throws MalformedURLException {
 		getSystemProperty();
 		info(chromeDriver);
-//		System.setProperty("webdriver.chrome.driver",chromeDriver) ;
+	//	System.setProperty("webdriver.chrome.driver",chromeDriver);
 		DesiredCapabilities capability = DesiredCapabilities.chrome();
 		capability.setBrowserName("chrome");
 		capability.setPlatform(Platform.LINUX);
