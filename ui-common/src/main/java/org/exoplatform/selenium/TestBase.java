@@ -210,7 +210,7 @@ public class TestBase {
 		info("Agreement page");
 		if (waitForAndGetElement(ELEMENT_AGREEMENT_CHECKBOX, 3000, 0, 2) != null) {
 			info("-- Checking the terms and conditions agreement... --");
-			clickByJavascript(ELEMENT_AGREEMENT_CHECKBOX, 2);
+			click(ELEMENT_AGREEMENT_CHECKBOX, 2);
 			click(ELEMENT_CONTINUE_BUTTON);
 			waitForTextNotPresent("terms and conditions agreement");
 

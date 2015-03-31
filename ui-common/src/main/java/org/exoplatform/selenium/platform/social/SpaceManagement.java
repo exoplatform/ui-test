@@ -138,7 +138,7 @@ public class SpaceManagement extends SocialBase {
 		By button = By.xpath("//div[@class='uiAction']/*[text()='" + label + "']");
 		//("//*[contains(@class,'ActionButton') and text()='" + label + "']");
 		waitForAndGetElement(button);
-		clickByJavascript(button);
+		click(button);
 	}
 
 	/**
@@ -178,7 +178,7 @@ public class SpaceManagement extends SocialBase {
 		if (waitForAndGetElement(ELEMENT_ADDNEWSPACE_BUTTON, 3000, 0, 2) != null){
 			click(ELEMENT_ADDNEWSPACE_BUTTON);
 		}else {
-			clickByJavascript(By.xpath("//*[contains(@class, 'uiIconSocSimplePlus')]"));
+			click(By.xpath("//*[contains(@class, 'uiIconSocSimplePlus')]"));
 		}
 		waitForAndGetElement(ELEMENT_ADDNEWSPACE_FORM,60000);
 		type(ELEMENT_SPACE_NAME_INPUT, name, true);
@@ -214,9 +214,9 @@ public class SpaceManagement extends SocialBase {
 		info("-- Adding a new space --");
 		int iTimeout = params.length > 0 ? params[0] : DEFAULT_TIMEOUT;
 		if (waitForAndGetElement(ELEMENT_ADDNEWSPACE_BUTTON, 3000, 0, 2) != null){
-			clickByJavascript(ELEMENT_ADDNEWSPACE_BUTTON);
+			click(ELEMENT_ADDNEWSPACE_BUTTON);
 		}else {
-			clickByJavascript(By.cssSelector("i[class ~= 'uiIconSocSimplePlus']"));
+			click(By.cssSelector("i[class ~= 'uiIconSocSimplePlus']"));
 		}
 
 		waitForAndGetElement(ELEMENT_ADDNEWSPACE_FORM);

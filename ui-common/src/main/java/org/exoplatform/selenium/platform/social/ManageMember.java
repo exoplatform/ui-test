@@ -288,7 +288,7 @@ public class ManageMember extends SpaceManagement {
 	public void inviteSingleUser(ManageAccount.userType userName, String... newUser){
 		String user = newUser.length > 0 ? newUser[0]:"John";
 		info("-- Invite the user: " + userName + " to join our space");
-		clickByJavascript(ELEMENT_SELECT_MEMBER_BUTTON);
+		click(ELEMENT_SELECT_MEMBER_BUTTON);
 		waitForAndGetElement(ELEMENT_SELECT_MEMBER_FORM);
 		switch (userName) {
 		case ROOT:

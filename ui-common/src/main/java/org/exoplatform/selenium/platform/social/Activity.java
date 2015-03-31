@@ -269,7 +269,7 @@ public class Activity extends SocialBase {
 
 			Utils.pause(1000);
 			info("Upload finished");
-			clickByJavascript(By.linkText(uploadFileName));
+			click(By.linkText(uploadFileName));
 			//			waitForAndGetElement(ecms.ELEMENT_BREADCUMBSCONTAINER.replace("${fileName}", uploadFileName));
 		}
 		else 

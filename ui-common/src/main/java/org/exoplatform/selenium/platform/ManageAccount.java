@@ -72,7 +72,7 @@ public class ManageAccount extends PlatformBase {
 		Utils.pause(1000);
 		type(ELEMENT_INPUT_USERNAME, username, true);
 		type(ELEMENT_INPUT_PASSWORD, password, true);
-		clickByJavascript(ELEMENT_SIGN_IN_BUTTON);
+		click(ELEMENT_SIGN_IN_BUTTON);
 		if(verify)
 			waitForElementNotPresent(ELEMENT_SIGN_IN_BUTTON,100000);
 		Utils.pause(2000);
@@ -100,17 +100,17 @@ public class ManageAccount extends PlatformBase {
 		info("Sign out");
 		for(int repeat=0;; repeat ++){
 			if (repeat > 1){
-				clickByJavascript(ELEMENT_ACCOUNT_NAME_LINK);
+				click(ELEMENT_ACCOUNT_NAME_LINK);
 				break;
 			}
-			clickByJavascript(ELEMENT_ACCOUNT_NAME_LINK);
+			click(ELEMENT_ACCOUNT_NAME_LINK);
 			if (waitForAndGetElement(ELEMENT_SIGN_OUT_LINK, 5000, 0) != null){
 				info("Element " + ELEMENT_SIGN_OUT_LINK + "... is displayed");
 				break;
 			}
 			info("Retry...[" + repeat + "]");
 		}
-		clickByJavascript(ELEMENT_SIGN_OUT_LINK,2);
+		click(ELEMENT_SIGN_OUT_LINK,2);
 		Utils.pause(1000);
 		if ( ExpectedConditions.alertIsPresent() != null ){
 			magAlert = new ManageAlert(driver);

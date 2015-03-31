@@ -762,9 +762,9 @@ public class ActionBar extends EcmsBase{
 			break;
 		case DELETE:
 			if (waitForAndGetElement(cMenu.ELEMENT_MENU_DELETE, 3000, 0) != null){
-				clickByJavascript(cMenu.ELEMENT_MENU_DELETE);
+				click(cMenu.ELEMENT_MENU_DELETE);
 			}else {
-				clickByJavascript(By.className("uiIconEcmsDelete"));
+				click(By.className("uiIconEcmsDelete"));
 			}
 			//waitForTextPresent("Delete");
 			dialog.deleteInDialog();

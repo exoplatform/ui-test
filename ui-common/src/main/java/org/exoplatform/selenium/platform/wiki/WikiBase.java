@@ -370,9 +370,9 @@ public class WikiBase extends PlatformBase{
 		info("--Go to Wiki--");
 		Utils.pause(1000);
 		if(waitForAndGetElement(ELEMENT_WIKI_LINK, 5000,0)!=null)
-			clickByJavascript(ELEMENT_WIKI_LINK);
+			click(ELEMENT_WIKI_LINK);
 		else
-			clickByJavascript(ELEMENT_WIKI_LINK_PLF41);
+			click(ELEMENT_WIKI_LINK_PLF41);
 		waitForAndGetElement(ELEMENT_TITLE_WIKI_HOME_LINK);	
 	}
 
@@ -399,11 +399,11 @@ public class WikiBase extends PlatformBase{
 		info("--Go to add blank wiki page--");
 		Utils.pause(500);
 		//mouseOver(ELEMENT_ADD_PAGE_LINK, true);
-		clickByJavascript(ELEMENT_ADD_PAGE_LINK);
+		click(ELEMENT_ADD_PAGE_LINK);
 		if (isElementNotPresent(ELEMENT_BLANK_PAGE_LINK))
-			clickByJavascript(ELEMENT_BLANK_PAGE_LINK_41);
+			click(ELEMENT_BLANK_PAGE_LINK_41);
 		else
-			clickByJavascript(ELEMENT_BLANK_PAGE_LINK);
+			click(ELEMENT_BLANK_PAGE_LINK);
 		Utils.pause(1000);
 	}
 
@@ -415,11 +415,11 @@ public class WikiBase extends PlatformBase{
 	{
 		info("Deleting a wiki page...");
 		//mouseOver(ELEMENT_MORE_LINK,true);
-		clickByJavascript(ELEMENT_MORE_LINK);
+		click(ELEMENT_MORE_LINK);
 		if (waitForAndGetElement(ELEMENT_DELETE_LINK_2, 5000, 0) == null){
-			clickByJavascript(ELEMENT_DELETE_LINK);
+			click(ELEMENT_DELETE_LINK);
 		}else {
-			clickByJavascript(ELEMENT_DELETE_LINK_2);
+			click(ELEMENT_DELETE_LINK_2);
 		}
 	}
 
@@ -467,7 +467,7 @@ public class WikiBase extends PlatformBase{
 			Utils.pause(100);
 		}
 		String nodeLast = nodes[length];
-		clickByJavascript(ELEMENT_NODE_WIKI_PAGE.replace("{$node}",nodeLast));
+		click(ELEMENT_NODE_WIKI_PAGE.replace("{$node}",nodeLast));
 		Utils.pause(2000);
 	}
 
@@ -554,7 +554,7 @@ public class WikiBase extends PlatformBase{
 		//Utils.pause(2000);
 		if(waitForAndGetElement(ELEMENT_PAGE_PERMISSION_POPUP, 5000, 0) == null) {
 			mouseOverAndClick(ELEMENT_MORE_LINK);
-			clickByJavascript(ELEMENT_PAGE_PERMISSION_LINK,2);	
+			click(ELEMENT_PAGE_PERMISSION_LINK,2);	
 		}
 		Utils.pause(1000);
 		info("-- Go to Page Permissions...successful");
@@ -639,7 +639,7 @@ public class WikiBase extends PlatformBase{
 			click(element_space);
 			Utils.pause(2000);
 		}
-		clickByJavascript(ELEMENT_WIKI_LINK_IN_SPACE);
+		click(ELEMENT_WIKI_LINK_IN_SPACE);
 		waitForAndGetElement(ELEMENT_WIKI_HOME);
 		Utils.pause(1000);
 	}
@@ -725,7 +725,7 @@ public class WikiBase extends PlatformBase{
 		String removeIcon= ELEMENT_REMOVE_ATTACHMENT.replace("{$file}", fName);
 
 		//click(ELEMENT_EDIT_PAGE_LINK);
-		clickByJavascript(removeIcon);
+		click(removeIcon);
 		waitForElementNotPresent(removeIcon);
 	}
 

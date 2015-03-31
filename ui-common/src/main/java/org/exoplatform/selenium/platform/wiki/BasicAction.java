@@ -134,7 +134,7 @@ public class BasicAction extends Permission{
 			type(ELEMENT_TITLE_WIKI_INPUT, title, true);
 		}	
 		if(isElementPresent(ELEMENT_SOURCE_EDITOR_BUTTON)){
-			clickByJavascript(ELEMENT_SOURCE_EDITOR_BUTTON);
+			click(ELEMENT_SOURCE_EDITOR_BUTTON);
 			waitForAndGetElement(ELEMENT_RICHTEXT_BUTTON_PL4_1);
 		}
 		Utils.pause(1000);
@@ -689,8 +689,8 @@ public class BasicAction extends Permission{
 		if (comment.length > 0){
 			type(ELEMENT_COMMENT_TEXTBOX, comment[0], true);
 		}
-		clickByJavascript(ELEMENT_PUBLISH_ACTIVITY_CHECKBOX, 2);
-		clickByJavascript(ELEMENT_SAVE_BUTTON_ADD_PAGE);
+		click(ELEMENT_PUBLISH_ACTIVITY_CHECKBOX, 2);
+		click(ELEMENT_SAVE_BUTTON_ADD_PAGE);
 		waitForElementNotPresent(ELEMENT_SAVE_BUTTON_ADD_PAGE);
 	}
 

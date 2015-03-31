@@ -149,17 +149,17 @@ public class NavigationToolbar extends PlatformBase {
 		//mouseOver(ELEMENT_LINK_SETUP, true);
 		for(int repeat=0;; repeat ++){
 			if (repeat > 1){
-				clickByJavascript(ELEMENT_LINK_SETUP);
+				click(ELEMENT_LINK_SETUP);
 				break;
 			}
-			clickByJavascript(ELEMENT_LINK_SETUP);
+			click(ELEMENT_LINK_SETUP);
 			if (waitForAndGetElement(ELEMENT_LINK_USERS, 5000, 0) != null){
 				info("Element " + ELEMENT_LINK_USERS + "... is displayed");
 				break;
 			}
 			info("Retry...[" + repeat + "]");
 		}
-		clickByJavascript(ELEMENT_LINK_USERS);
+		click(ELEMENT_LINK_USERS);
 		Utils.pause(1000);
 	}
 
@@ -238,8 +238,8 @@ public class NavigationToolbar extends PlatformBase {
 
 	public void goToUsersAndGroupsManagement() {
 		info("--Go to Users and groups management--");
-		clickByJavascript(ELEMENT_LINK_SETUP);
-		clickByJavascript(ELEMENT_GROUP_AND_ROLE_LINK,2);
+		click(ELEMENT_LINK_SETUP);
+		click(ELEMENT_GROUP_AND_ROLE_LINK,2);
 		Utils.pause(500);
 	}
 
@@ -318,10 +318,10 @@ public class NavigationToolbar extends PlatformBase {
 		Utils.pause(500);
 		for(int repeat=0;; repeat ++){
 			if (repeat > 1){
-				clickByJavascript(ELEMENT_LINK_SETUP);
+				click(ELEMENT_LINK_SETUP);
 				break;
 			}
-			clickByJavascript(ELEMENT_LINK_SETUP);
+			click(ELEMENT_LINK_SETUP);
 			if (waitForAndGetElement(ELEMENT_MENU_CONTENT_LINK, 5000, 0) != null){
 				info("Element " + ELEMENT_MENU_CONTENT_LINK + "... is displayed");
 				break;
@@ -330,7 +330,7 @@ public class NavigationToolbar extends PlatformBase {
 		}
 		//mouseOverAndClick(ELEMENT_LINK_SETUP);
 		//mouseOver(ELEMENT_LINK_SETUP, true);
-		clickByJavascript(ELEMENT_MENU_CONTENT_LINK,2);
+		click(ELEMENT_MENU_CONTENT_LINK,2);
 		//click(ELEMENT_MENU_SITE_EXPLORER);
 		Utils.pause(2000);
 	}
@@ -463,7 +463,7 @@ public class NavigationToolbar extends PlatformBase {
 	//Function go to Home Page
 	public void goToHomePage(){
 		info("-- Go to home page --");
-		clickByJavascript(ELEMENT_HOME_PAGE);
+		click(ELEMENT_HOME_PAGE);
 		Utils.pause(1000);
 //		driver.navigate().refresh();
 		waitForAndGetElement(ELEMENT_REFRESH,60000);
@@ -476,7 +476,7 @@ public class NavigationToolbar extends PlatformBase {
 	 */
 	public void goToConnectionPage(){
 		hpAct = new HomePageActivity(driver, this.plfVersion);
-		clickByJavascript(ELEMENT_CONNECTION_PAGE);
+		click(ELEMENT_CONNECTION_PAGE);
 		waitForAndGetElement(peoCon.ELEMENT_EVERYONE_TAB);
 		if(waitForElementNotPresent(hpAct.ELEMENT_ACTIVITY_TEXTBOX,DEFAULT_TIMEOUT,0) != null){
 			clearCache();

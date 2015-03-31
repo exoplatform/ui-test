@@ -225,7 +225,7 @@ public class PeopleProfile extends PlatformBase {
 		info("-- changeAvatar --");
 		String[] files = linkfile.split("/");
 
-		clickByJavascript(ELEMENT_CHANGE_AVATAR_LINK);
+		click(ELEMENT_CHANGE_AVATAR_LINK);
 
 		Utils.pause(2000);
 		if(System.getProperty("browser").equalsIgnoreCase("firefox")){

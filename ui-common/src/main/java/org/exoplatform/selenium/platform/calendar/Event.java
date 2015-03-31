@@ -176,7 +176,7 @@ public class Event extends CalendarBase{
 	 */
 	public void goToAddEventFromActionBar(){
 		info("Go to Add Event page");
-		clickByJavascript(ELEMENT_BUTTON_EVENT);
+		click(ELEMENT_BUTTON_EVENT);
 		waitForAndGetElement(ELEMENT_ADD_EVENT_POPUP);
 	}
 
@@ -374,8 +374,8 @@ public class Event extends CalendarBase{
 			type(ELEMENT_ADD_EDIT_EVENT_LOCATION,location,true);
 		}
 		if(opt.length>0){
-			clickByJavascript(ELEMENT_ADD_EVENT_ATTACHMENT_BUTTON);
-			clickByJavascript(ELEMENT_ADD_EVENT_SELECT_FILE);
+			click(ELEMENT_ADD_EVENT_ATTACHMENT_BUTTON);
+			click(ELEMENT_ADD_EVENT_SELECT_FILE);
 			WebElement upload = waitForAndGetElement(ELEMENT_ADD_EVENT_UPLOAD_FILE,DEFAULT_TIMEOUT,1,2);
 			((JavascriptExecutor)driver).executeScript("arguments[0].style.display='block';",upload);
 			uploadFile(opt[0]);
