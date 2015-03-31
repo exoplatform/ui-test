@@ -15,8 +15,6 @@ import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import java.io.File;
-
 /**
  * Provides all methods of managing all WebElements on Wiki.
  * 
@@ -667,7 +665,6 @@ public class WikiBase extends PlatformBase{
 	 */
 	public void attachFileInWiki(String link, Integer...type ){
 		int notDisplay = 0;
-		String fs = File.separator;
 		if (type.length > 0){
 			if (!(type[0] instanceof Integer)) {
 				throw new IllegalArgumentException("-- Argument should be an Integer --");
@@ -709,9 +706,7 @@ public class WikiBase extends PlatformBase{
 		} finally {
 			loopCount = 0;
 		}
-
 		switchToParentWindow();
-		waitForAndGetElement(By.linkText(link.replace("TestData" + fs, "")));
 	}
 
 	/** 

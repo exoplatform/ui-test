@@ -423,21 +423,21 @@ public class PLF_UnifiedSearch_DiscussionSearch extends PlatformBase {
 	 * @param permissionName
 	 *            a array of the names of a user or a group or a role
 	 */
-
-	private void AddForumForUserWithoutViewPermission() {
-		// TODO Auto-generated method stub
-
-		createNameCategoryForumTopic();
-
-		String[] permisionName = { "demo" };
-		// Create data
-		// Forums, topics, posts are existed on Forum application.
-		info("Add a post");
-		mngFru.goToForums();
-		mngTopic.addCategoryForumForUserWithoutViewPermision(category1, forum1,
-				topic1, topic1, permisionName);
-
-	}
+//
+//	private void AddForumForUserWithoutViewPermission() {
+//		// TODO Auto-generated method stub
+//
+//		createNameCategoryForumTopic();
+//
+//		String[] permisionName = { "demo" };
+//		// Create data
+//		// Forums, topics, posts are existed on Forum application.
+//		info("Add a post");
+//		mngFru.goToForums();
+//		mngTopic.addCategoryForumForUserWithoutViewPermision(category1, forum1,
+//				topic1, topic1, permisionName);
+//
+//	}
 
 	/**
 	 * Create a category, a forum and a topic that is viewed anyone in the

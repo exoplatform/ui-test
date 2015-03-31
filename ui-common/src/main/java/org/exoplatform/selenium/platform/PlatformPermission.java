@@ -60,6 +60,7 @@ public class PlatformPermission extends PlatformBase {
 	 * @param user: user that needs to set permission
 	 */
 	public void selectUserPermission(String user, int...type){	
+		info("Select user permission");
 		String[] temp = user.split("/");
 		if (temp.length > 0){
 			for (int i = 0; i < temp.length; i ++){

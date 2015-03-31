@@ -116,7 +116,6 @@ public class NavigationToolbar extends PlatformBase {
 			}
 			info("Retry...[" + repeat + "]");
 		}
-		//waitForTextPresent("Page Id");
 		waitForAndGetElement(ELEMENT_PAGE_MANAGEMENT_SEARCH_BUTTON);
 	}
 
@@ -144,9 +143,6 @@ public class NavigationToolbar extends PlatformBase {
 	//Go to User management page
 	public void goToNewStaff() {
 		info("Go to New Staff");
-		//goToPage(ELEMENT_SEARCH_ICON_REGISTER, ELEMENT_LINK_SETUP, ELEMENT_LINK_USERS, ELEMENT_LINK_ADD_USERS);
-		//mouseOverAndClick(ELEMENT_LINK_SETUP);
-		//mouseOver(ELEMENT_LINK_SETUP, true);
 		for(int repeat=0;; repeat ++){
 			if (repeat > 1){
 				click(ELEMENT_LINK_SETUP);
@@ -238,8 +234,24 @@ public class NavigationToolbar extends PlatformBase {
 
 	public void goToUsersAndGroupsManagement() {
 		info("--Go to Users and groups management--");
-		click(ELEMENT_LINK_SETUP);
-		click(ELEMENT_GROUP_AND_ROLE_LINK,2);
+		if (baseUrl==null) baseUrl = DEFAULT_BASEURL;
+		info("Base url is " + baseUrl);
+		String url = baseUrl + "/g/:platform:administrators/administration/management";
+		for(int repeat=0;; repeat ++){
+			if (repeat > 1){
+				driver.get(url);
+				break;
+			}
+			click(ELEMENT_LINK_SETUP);
+			if (waitForAndGetElement(ELEMENT_USER_LINK, 5000, 0)!= null) {	
+				mouseOver(ELEMENT_USER_LINK, false);
+				if (waitForAndGetElement(ELEMENT_GROUP_AND_ROLE_LINK, 5000, 0)!= null){
+					click(ELEMENT_GROUP_AND_ROLE_LINK,2);
+					break;
+				}
+			}
+			info("Retry...[" + repeat + "]");
+		}
 		Utils.pause(500);
 	}
 
