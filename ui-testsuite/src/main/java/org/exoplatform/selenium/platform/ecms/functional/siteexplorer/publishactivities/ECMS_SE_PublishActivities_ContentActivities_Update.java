@@ -678,7 +678,7 @@ public class ECMS_SE_PublishActivities_ContentActivities_Update extends Platform
 	@Test
 	public void test11_UpdateContentActivityAfterEditACommentOfAContent(){
 		//Declare variable
-		String node = "node11";
+		String node = "node81212";
 		By bNode = By.xpath(siteExp.ELEMENT_SE_NODE.replace("{$node}", node));
 		String oldComment = "Comment to file document";
 		String newComment = "New comment to file document";

@@ -183,7 +183,7 @@ public class ECMS_SE_PublishActivities_FilesActivities  extends PlatformBase {
 				
 		//- The File activity is displayed in the activity stream
 		info("-- A File activity is added to the activity stream --");
-		activity.checkInforAfterAddingDocument(file, "", "File", "1 MB", "", "", "", "");
+		activity.checkInforAfterAddingDocument(file, "", "File", "91 bytes", "", "", "", "");
 				
 		//- A preview of the file is displayed (only first page for documents)
 				
@@ -233,7 +233,7 @@ public class ECMS_SE_PublishActivities_FilesActivities  extends PlatformBase {
 		
 		//The File activity is displayed in the activity stream
 		info("-- A File activity is added to the activity stream --");
-		activity.checkInforAfterAddingDocument(file, "", "File", "1 MB", "", "1", desc, "");
+		activity.checkInforAfterAddingDocument(file, "", "File", "91 bytes", "", "1", desc, "");
 		activity.checkTitleAfterEditing(file, title);
 		
 		/*Clear data*/
@@ -267,7 +267,7 @@ public class ECMS_SE_PublishActivities_FilesActivities  extends PlatformBase {
 				
 		//- The File activity is displayed in the activity stream
 		info("-- A File activity is added to the activity stream --");
-		activity.checkInforAfterAddingDocument(file, "", "File", "1 MB", "", "", "", "");
+		activity.checkInforAfterAddingDocument(file, "", "File", "91 bytes", "", "", "", "");
 				
 		/*Step 2: Edit file from activity stream*/
 		//From the file activity, click on the link "Edit"
@@ -308,7 +308,7 @@ public class ECMS_SE_PublishActivities_FilesActivities  extends PlatformBase {
 				
 		//- The File activity is displayed in the activity stream
 		info("-- A File activity is added to the activity stream --");
-		activity.checkInforAfterAddingDocument(file, "", "File", "1 MB", "", "", "", "");
+		activity.checkInforAfterAddingDocument(file, "", "File", "91 bytes", "", "", "", "");
 				
 		/*Step 2: Delete File*/
 		//Delete the file
@@ -350,7 +350,7 @@ public class ECMS_SE_PublishActivities_FilesActivities  extends PlatformBase {
 				
 		//- The File activity is displayed in the activity stream
 		info("-- A File activity is added to the activity stream --");
-		activity.checkInforAfterAddingDocument(file, "", "File", "1 MB", "", "", "", "");
+		activity.checkInforAfterAddingDocument(file, "", "File", "91 bytes", "", "", "", "");
 				
 		/*Step 2: See delete activity icon*/
 		/*Step 3: Delete activity*/
@@ -454,7 +454,7 @@ public class ECMS_SE_PublishActivities_FilesActivities  extends PlatformBase {
 				
 		//- The File activity is displayed in the activity stream
 		info("-- A File activity is added to the activity stream --");
-		activity.checkInforAfterAddingDocument(file, "", "File", "1 MB", "", "", "", "");
+		activity.checkInforAfterAddingDocument(file, "", "File", "91 bytes", "", "", "", "");
 				
 		/*Step 2: See delete activity icon*/
 		/*Step 3: Delete activity*/
@@ -500,7 +500,7 @@ public class ECMS_SE_PublishActivities_FilesActivities  extends PlatformBase {
 				
 		//- The File activity is displayed in the activity stream
 		info("-- A File activity is added to the activity stream --");
-		activity.checkInforAfterAddingDocument(file, "", "File", "1 MB", "", "", "", "");
+		activity.checkInforAfterAddingDocument(file, "", "File", "91 bytes", "", "", "", "");
 				
 		/*Step 2: Delete File*/
 		//Delete file from space
@@ -549,7 +549,7 @@ public class ECMS_SE_PublishActivities_FilesActivities  extends PlatformBase {
 						
 		//- The File activity is displayed in the activity stream
 		info("-- A File activity is added to the activity stream --");
-		activity.checkInforAfterAddingDocument(file, "", "File", "1 MB", "", "", "", "");
+		activity.checkInforAfterAddingDocument(file, "", "File", "91 bytes", "", "", "", "");
 						
 		/*Clear data*/
 		info ("-- Clear data --");
@@ -586,7 +586,7 @@ public class ECMS_SE_PublishActivities_FilesActivities  extends PlatformBase {
 				
 		//- The File activity is displayed in the activity stream
 		info("-- A File activity is added to the activity stream --");
-		activity.checkInforAfterAddingDocument(file, "", "File", "1 MB", "", "", "", "");
+		activity.checkInforAfterAddingDocument(file, "", "File", "91 bytes", "", "", "", "");
 				
 		/*Step 2: Edit file from activity stream*/
 		//From the file activity, click on the link "Edit"

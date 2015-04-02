@@ -116,7 +116,8 @@ public class ECMS_SE_BasicAction_Rename extends PlatformBase{
 
 		//Rename a file
 		cMenu.contextMenuAction(eFile, cMenu.ELEMENT_MENU_RENAME_NODE, newFileName);
-
+		click(cMenu.ELEMENT_RENAME_BUTTON);
+		
 		//View information
 		cMenu.contextMenuAction(editFile, cMenu.ELEMENT_VIEW_INFORMATION);
 		waitForAndGetElement(cMenu.ELEMENT_POPUP_VIEW_INFORMATION_NAME.replace("${fileName}", newFileName + ".txt"));
@@ -277,7 +278,7 @@ public class ECMS_SE_BasicAction_Rename extends PlatformBase{
 
 		//Focus is set in rename field
 		click(cMenu.ELEMENT_MENU_RENAME_NODE);
-		type(cMenu.ELEMENT_INPUT_RENAME_NODE, newFileName, false);
+		type(cMenu.ELEMENT_INPUT_RENAME_NODE, newFileName, true);
 		WebElement element = waitForAndGetElement(cMenu.ELEMENT_INPUT_RENAME_NODE);
 		String fileName = element.getAttribute("value");
 		assert fileName.equals(newFileName): "Failed: Focus is set in rename field";
@@ -322,6 +323,7 @@ public class ECMS_SE_BasicAction_Rename extends PlatformBase{
 
 		//Rename a file
 		cMenu.contextMenuAction(eFile, cMenu.ELEMENT_MENU_RENAME_NODE, newFileName);
+		click(cMenu.ELEMENT_RENAME_BUTTON);
 		waitForAndGetElement(editFile);
 
 		//Restore data
@@ -425,6 +427,7 @@ public class ECMS_SE_BasicAction_Rename extends PlatformBase{
 
 		//Rename a file
 		cMenu.contextMenuAction(eFile, cMenu.ELEMENT_MENU_RENAME_NODE, newFileName);
+		click(cMenu.ELEMENT_RENAME_BUTTON);
 		waitForAndGetElement(editFile);
 
 		//Restore data
@@ -468,6 +471,7 @@ public class ECMS_SE_BasicAction_Rename extends PlatformBase{
 
 		//Rename a file
 		cMenu.contextMenuAction(eFile, cMenu.ELEMENT_MENU_RENAME_NODE, newFileName);
+		click(cMenu.ELEMENT_RENAME_BUTTON);
 		waitForAndGetElement(editFile);
 
 		//Go to properties tab

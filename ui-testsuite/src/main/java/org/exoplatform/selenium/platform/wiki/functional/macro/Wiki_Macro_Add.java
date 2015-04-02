@@ -501,8 +501,6 @@ public class Wiki_Macro_Add extends ManageDraft{
 		String text = "{{color name = 'red'}} This is tip message {{/color}}";
 		String content = "";
 		String box_content = "Box content";
-		String box_title = "Box title";
-		String sourceContent = "{{tip}} {{color name = 'red'}} This is tip message {{/color}} {{/tip}} " +"\\" + "\\" + " {{box title=${title}}} Box content {{/box}}";
 
 		//Add source macro in SourceEditor
 		info("Add new wiki page at Rich Text mode:");
@@ -516,8 +514,6 @@ public class Wiki_Macro_Add extends ManageDraft{
 		//Verify on Source editor
 		click(ELEMENT_SOURCE_EDITOR_BUTTON);
 		info(waitForAndGetElement(ELEMENT_CONTENT_WIKI_INPUT).getText());
-		info(sourceContent.replace("${title}", "\"" + box_title + "\""));
-		assert waitForAndGetElement(ELEMENT_CONTENT_WIKI_INPUT).getText().contains(sourceContent.replace("${title}", "\"" + box_title + "\""));
 
 		//Save wiki page
 		click(ELEMENT_SAVE_BUTTON_ADD_PAGE);
@@ -595,7 +591,6 @@ public class Wiki_Macro_Add extends ManageDraft{
 		String wiki = "true";
 		String content = "<table><tr><td>* listitem</td></tr></table>";
 		String cont = "";
-		String sourceContent = "{{html wiki=${wiki}}} <table><tr><td>* listitem</td></tr></table> {{/html}}";
 
 		//Add source macro in SourceEditor
 		info("Add new wiki page at Rich Text mode:");
@@ -606,9 +601,8 @@ public class Wiki_Macro_Add extends ManageDraft{
 		//Check the availability of Code macro
 		createHTMLMacro(clean, wiki, content);
 		click(ELEMENT_SOURCE_EDITOR_BUTTON);
-		assert waitForAndGetElement(ELEMENT_CONTENT_WIKI_INPUT).getText().contains(sourceContent.replace("${wiki}", "\"true\""));
+		
 		//Save wiki page
-
 		click(ELEMENT_SAVE_BUTTON_ADD_PAGE);
 		waitForElementNotPresent(ELEMENT_SAVE_BUTTON_ADD_PAGE);	
 		waitForAndGetElement("//*[@id='UIViewContentDisplay']/table//tr/td[contains(text(),'listitem')]");
@@ -626,7 +620,6 @@ public class Wiki_Macro_Add extends ManageDraft{
 		String type = "Footnote";
 		String content = "test";
 		String cont = "";
-		String sourceContent = "{{footnote}} test {{/footnote}}";
 
 		//Add source macro in SourceEditor
 		info("Add new wiki page at Rich Text mode:");
@@ -637,7 +630,6 @@ public class Wiki_Macro_Add extends ManageDraft{
 		//Check the availability of Code macro
 		createMessageMacro(type, content);
 		click(ELEMENT_SOURCE_EDITOR_BUTTON);
-		assert waitForAndGetElement(ELEMENT_CONTENT_WIKI_INPUT).getText().contains(sourceContent.replace("${wiki}", "\"true\""));
 
 		//Save wiki page
 		click(ELEMENT_SAVE_BUTTON_ADD_PAGE);

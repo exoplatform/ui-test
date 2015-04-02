@@ -25,13 +25,13 @@ public class Permission extends WikiBase{
 	public Permission() {
 		ieFlag = super.ieFlag;
 	}
-	
+
 	public final String ELEMENT_PERMISSION = "//*[@id='UIPermissionGrid']//*[contains(text(),'${user}')]";
 
 	public Permission(WebDriver dr){
 		driver = dr;
 	}
-	
+
 	/////
 	/*=================== Page permission ===================*/
 	/** 
@@ -235,13 +235,6 @@ public class Permission extends WikiBase{
 		button = new Button(driver);
 		dialog = new Dialog(driver);
 		per = new PlatformPermission(driver);
-		//		if (type.length > 0){
-		//			if (!(type[0] instanceof Integer)) {
-		//				throw new IllegalArgumentException("-- Argument should be an Integer --");
-		//			}
-		//			notDisplay = (Integer)type[0];
-		//		}
-
 		goToSpacePermission();
 
 		info("--Add space permission--");
@@ -265,7 +258,7 @@ public class Permission extends WikiBase{
 		waitForMessage(MSG_PERMISSION_SAVE);
 
 		dialog.closeMessageDialog();
-		
+
 		Utils.pause(1000);
 	}
 

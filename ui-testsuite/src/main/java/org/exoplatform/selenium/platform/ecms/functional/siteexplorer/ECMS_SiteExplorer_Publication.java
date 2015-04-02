@@ -46,6 +46,7 @@ public class ECMS_SiteExplorer_Publication extends PlatformBase {
 		magAcc.signIn(DATA_USER1, DATA_PASS);
 		testBase = new TestBase();
 		ecms = new EcmsBase(driver, this.plfVersion);
+		naviToolbar.goToSiteExplorer();
 	}
 
 	@AfterMethod

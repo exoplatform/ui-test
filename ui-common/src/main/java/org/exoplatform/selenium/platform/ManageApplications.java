@@ -331,7 +331,7 @@ public class ManageApplications extends PlatformBase {
 
 		//Verify Categories display as default
 		waitForAndGetElement(ELEMENT_CATEGORIES_FORM);
-		
+
 		boolean importNotPresent = (waitForAndGetElement(ELEMENT_IMPORT_APPLICATION,3000,0) == null);
 
 		if(((importNotPresent) & checkShowImport) || (!importNotPresent & !checkShowImport)){
@@ -348,9 +348,11 @@ public class ManageApplications extends PlatformBase {
 			}
 			click(ELEMENT_EDIT_PORTLET_ICON);
 			if (checkShowImport){
-				if (waitForAndGetElement(SHOW_IMPORT_CHECKED, 7000, 0, 2) == null) check(ELEMENT_SHOW_IMPORT_CHECKBOX, 2);    				
+				if (waitForAndGetElement(SHOW_IMPORT_CHECKED, 7000, 0, 2) == null) 
+					check(ELEMENT_SHOW_IMPORT_CHECKBOX, 2);    				
 			} else {
-				if (waitForAndGetElement(SHOW_IMPORT_CHECKED, 7000, 0, 2) != null) uncheck(ELEMENT_SHOW_IMPORT_CHECKBOX, 2);
+				if (waitForAndGetElement(SHOW_IMPORT_CHECKED, 7000, 0, 2) != null) 
+					uncheck(ELEMENT_SHOW_IMPORT_CHECKBOX, 2);
 			}
 			button.save();
 			button.close();

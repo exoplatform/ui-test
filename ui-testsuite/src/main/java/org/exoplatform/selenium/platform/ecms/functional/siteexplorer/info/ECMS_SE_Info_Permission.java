@@ -58,6 +58,7 @@ public class ECMS_SE_Info_Permission  extends PlatformBase {
 	@BeforeTest
 	public void beforeTest() {
 		initSeleniumTest();
+		driver.get(baseUrl);
 		setUpPages();
 		magAcc.signIn(DATA_USER1, DATA_PASS);
 		navToolBar.goToSiteExplorer();

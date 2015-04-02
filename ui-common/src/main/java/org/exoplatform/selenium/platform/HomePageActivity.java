@@ -503,6 +503,8 @@ public class HomePageActivity extends PlatformBase{
 				}
 			}else {
 				for (int i = 0; i < cont.length; i ++){
+					info(sum[i]);
+					info(cont[i]);
 					assert sum[i].equalsIgnoreCase(cont[i]) : "Failed! " + cont[i] + " differ " + sum[i];
 				}
 			}

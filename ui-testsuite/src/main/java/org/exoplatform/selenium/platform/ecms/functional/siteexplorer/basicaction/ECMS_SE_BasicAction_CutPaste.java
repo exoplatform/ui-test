@@ -63,12 +63,12 @@ public class ECMS_SE_BasicAction_CutPaste extends PlatformBase {
 		magAcc.signIn(USER,PASS);
 		navToolBar.goToSiteExplorer();
 	}
-	
+
 	@AfterMethod
 	public void afterMethod() {
 		driver.quit();
 	}
-	
+
 	/* 
 	 * Test_Case_ID:101958
 	 * Case 1: Cut a Content folder and paste it into a Content Folder
@@ -81,12 +81,12 @@ public class ECMS_SE_BasicAction_CutPaste extends PlatformBase {
 		By bTarget = By.xpath(cMenu.ELEMENT_FILE_TITLE.replace("${titleOfFile}", titlePaste));
 
 		info("Cut a Content Folder and paste it into a Content Folder!");
-		
+
 		//Create a content folder 
 		info(titleCut);
 		cTemplate.createNewFolder(titlePaste, folderType.Content);
 		cTemplate.createNewFolder(titleCut, folderType.Content);
-		
+
 		//Cut and paste a Content Folder into a Content Folder
 		cMenu.cutAndPasteNode(bCont, bTarget);
 
@@ -99,7 +99,7 @@ public class ECMS_SE_BasicAction_CutPaste extends PlatformBase {
 		//Delete data
 		cMenu.deleteDocument(bTarget);
 	}
-	
+
 	/* 
 	 * @date: 30/10/2014
 	 * Test_Case_ID:101958
@@ -113,31 +113,31 @@ public class ECMS_SE_BasicAction_CutPaste extends PlatformBase {
 		By bTarget = By.xpath(cMenu.ELEMENT_FILE_TITLE.replace("${titleOfFile}", titlePaste));
 
 		info("Cut a Content Folder and paste it into a Web Content!");
-		
+
 		//Create a Content Folder 
 		info(titleCut);
 		cTemplate.createNewFolder(titleCut, folderType.Content);
-		
+
 		//Create a Web Content document
 		info(titlePaste);
 		actBar.goToAddNewContent();
 		cTemplate.createNewWebContent(titlePaste, titlePaste, "", "", "", "");
-		
+
 		//Cut and paste a Content Folder into a Web Content document
 		cMenu.cutNode(bCont);
 		rightClickOnElement(bTarget);
 		cMenu.pasteNode(bTarget);
-		
+
 		//Verify if paste the Content Folder successfully into Content Folder
 		click(siteExp.ELEMENT_SIDEBAR_SITES_MANAGEMENT);
 		waitForElementNotPresent(bCont);
 		ecms.goToNode(titlePaste);
 		waitForAndGetElement(bCont);
-		
+
 		//Delete data
 		cMenu.deleteDocument(bTarget);
 	}
-	
+
 	/* 
 	 * @date: 30/10/2014
 	 * Test_Case_ID:101958
@@ -151,31 +151,31 @@ public class ECMS_SE_BasicAction_CutPaste extends PlatformBase {
 		By bTarget = By.xpath(cMenu.ELEMENT_FILE_TITLE.replace("${titleOfFile}", titlePaste));
 
 		info("Cut a Content Folder and paste it into an Announcement!");
-		
+
 		//Create a content folder 
 		info(titleCut);
 		cTemplate.createNewFolder(titleCut, folderType.Content);
-		
+
 		//Create an Announcement document
 		info(titlePaste);
 		actBar.goToAddNewContent();
 		cTemplate.createNewAnnouncement(titlePaste, titlePaste);
-		
+
 		//Cut and paste a Content Folder into an Announcement document
 		cMenu.cutNode(bCont);
 		rightClickOnElement(bTarget);
 		cMenu.pasteNode(bTarget);
-		
+
 		//Verify if paste the Content Folder successfully into Content Folder
 		click(siteExp.ELEMENT_SIDEBAR_SITES_MANAGEMENT);
 		waitForElementNotPresent(bCont);
 		ecms.goToNode(titlePaste);
 		waitForAndGetElement(bCont);
-		
+
 		//Delete data
 		cMenu.deleteDocument(bTarget);
 	}
-	
+
 	/*
 	 * Test_Case_ID: 101959
 	 * Case 1: Cut a Document Folder and paste it into a Document folder
@@ -188,7 +188,7 @@ public class ECMS_SE_BasicAction_CutPaste extends PlatformBase {
 		By bDocDes=By.xpath(cMenu.ELEMENT_FILE_TITLE.replace("${titleOfFile}", titlePaste));
 
 		info("Cut a Document Folder and paste it to Document Folder!");
-		
+
 		//Create a Document folder - source
 		cTemplate.createNewFolder(titleCut, folderType.Document);
 
@@ -219,7 +219,7 @@ public class ECMS_SE_BasicAction_CutPaste extends PlatformBase {
 		By bDocDes=By.xpath(cMenu.ELEMENT_FILE_TITLE.replace("${titleOfFile}", titlePaste));
 
 		info("Cut a Document Folder and paste it into Content Folder!");
-		
+
 		//Create a Document Folder - source
 		cTemplate.createNewFolder(titleCut, folderType.Document);
 
@@ -236,7 +236,7 @@ public class ECMS_SE_BasicAction_CutPaste extends PlatformBase {
 		//Delete data
 		cMenu.deleteDocument(bDocDes);
 	}
-	
+
 	/*
 	 * @date: 30/10/2014
 	 * Test_Case_ID: 101959
@@ -246,12 +246,12 @@ public class ECMS_SE_BasicAction_CutPaste extends PlatformBase {
 	public void test02_3_CutDocumentFolderPasteIntoWebContent() {
 		String titleCut="titleCut1019593";
 		By bDoc=By.xpath(cMenu.ELEMENT_FILE_TITLE.replace("${titleOfFile}", titleCut));
-		
+
 		String titlePaste="titlePaste1019593";
 		By bDocDes=By.xpath(cMenu.ELEMENT_FILE_TITLE.replace("${titleOfFile}", titlePaste));
 
 		info("Cut a Document Folder and paste it into Web Content!");
-		
+
 		//Create a Document Folder - source
 		cTemplate.createNewFolder(titleCut, folderType.Document);
 
@@ -270,7 +270,7 @@ public class ECMS_SE_BasicAction_CutPaste extends PlatformBase {
 		//Delete data
 		cMenu.deleteDocument(bDocDes);
 	}
-	
+
 	/*
 	 * Test_Case_ID: 101960
 	 * Case 1: Cut a Document Folder and paste it into File document!
@@ -279,12 +279,12 @@ public class ECMS_SE_BasicAction_CutPaste extends PlatformBase {
 	public void test03_1_CutDocumentFolderPasteIntoFileDocument() {
 		String titleCut="titleCut1019601";
 		By bDoc=By.xpath(cMenu.ELEMENT_FILE_TITLE.replace("${titleOfFile}", titleCut));
-		
+
 		String titlePaste="titlePaste1019601";
 		By bDocDes=By.xpath(cMenu.ELEMENT_FILE_TITLE.replace("${titleOfFile}", titlePaste));
 
 		info("Cut a Focument Folder and paste it into File Document!");
-		
+
 		//Create a Document Folder - source
 		cTemplate.createNewFolder(titleCut, folderType.Document);
 
@@ -296,12 +296,12 @@ public class ECMS_SE_BasicAction_CutPaste extends PlatformBase {
 		cMenu.cutNode(bDoc);
 		rightClickOnElement(bDocDes);
 		waitForElementNotPresent(ELEMENT_PASTE_NODE);
-			
+
 		//Delete data
 		cMenu.deleteDocument(bDocDes);
 		cMenu.deleteDocument(bDoc);
 	}
-	
+
 	/*
 	 * @date: 30/10/2014
 	 * Test_Case_ID: 101960
@@ -311,12 +311,12 @@ public class ECMS_SE_BasicAction_CutPaste extends PlatformBase {
 	public void test03_2_CutDocumentFolderPasteIntoHTMLFileDocument() {
 		String titleCut="titleCut1019602";
 		By bDoc=By.xpath(cMenu.ELEMENT_FILE_TITLE.replace("${titleOfFile}", titleCut));
-		
+
 		String titlePaste="titlePaste1019602";
 		By bDocDes=By.xpath(cMenu.ELEMENT_FILE_TITLE.replace("${titleOfFile}", titlePaste));
 
 		info("Cut a Document Folder and paste it to HTML File Document!");
-		
+
 		//Create a Document Folder - source
 		cTemplate.createNewFolder(titleCut, folderType.Document);
 
@@ -328,12 +328,12 @@ public class ECMS_SE_BasicAction_CutPaste extends PlatformBase {
 		cMenu.cutNode(bDoc);
 		rightClickOnElement(bDocDes);
 		waitForElementNotPresent(ELEMENT_PASTE_NODE);
-			
+
 		//Delete data
 		cMenu.deleteDocument(bDocDes);
 		cMenu.deleteDocument(bDoc);
 	}
-	
+
 	/*
 	 * @date: 30/10/2014
 	 * Test_Case_ID: 101960
@@ -343,12 +343,12 @@ public class ECMS_SE_BasicAction_CutPaste extends PlatformBase {
 	public void test03_3_CutDocumentFolderPasteIntoCSSFileDocument() {
 		String titleCut="titleCut1019603";
 		By bDoc=By.xpath(cMenu.ELEMENT_FILE_TITLE.replace("${titleOfFile}", titleCut));
-		
+
 		String titlePaste="titlePaste1019603";
 		By bDocDes=By.xpath(cMenu.ELEMENT_FILE_TITLE.replace("${titleOfFile}", titlePaste));
 
 		info("Cut a Document Folder and paste it into CSS File document!");
-		
+
 		//Create a Document Folder - source
 		cTemplate.createNewFolder(titleCut, folderType.Document);
 
@@ -361,12 +361,12 @@ public class ECMS_SE_BasicAction_CutPaste extends PlatformBase {
 		cMenu.cutNode(bDoc);
 		rightClickOnElement(bDocDes);
 		waitForElementNotPresent(ELEMENT_PASTE_NODE);
-			
+
 		//Delete data
 		cMenu.deleteDocument(bDocDes);
 		cMenu.deleteDocument(bDoc);
 	}
-	
+
 	/*
 	 * @date: 30/10/2014
 	 * Test_Case_ID: 101960
@@ -376,12 +376,12 @@ public class ECMS_SE_BasicAction_CutPaste extends PlatformBase {
 	public void test03_4_CutDocumentFolderPasteIntoJSFileDocument() {
 		String titleCut="titleCut1019604";
 		By bDoc=By.xpath(cMenu.ELEMENT_FILE_TITLE.replace("${titleOfFile}", titleCut));
-		
+
 		String titlePaste="titlePaste1019604";
 		By bDocDes=By.xpath(cMenu.ELEMENT_FILE_TITLE.replace("${titleOfFile}", titlePaste));
 
 		info("Cut a document folder and paste it into CSS File document!");
-		
+
 		//Create a Document Folder - source
 		cTemplate.createNewFolder(titleCut, folderType.Document);
 
@@ -394,12 +394,12 @@ public class ECMS_SE_BasicAction_CutPaste extends PlatformBase {
 		cMenu.cutNode(bDoc);
 		rightClickOnElement(bDocDes);
 		waitForElementNotPresent(ELEMENT_PASTE_NODE);
-			
+
 		//Delete data
 		cMenu.deleteDocument(bDocDes);
 		cMenu.deleteDocument(bDoc);
 	}
-	
+
 	/*
 	 * Test_Case_ID: 101960
 	 * Case 5: Cut a Document Folder and paste it into Uploaded File!
@@ -408,30 +408,30 @@ public class ECMS_SE_BasicAction_CutPaste extends PlatformBase {
 	public void test03_5_CutDocumentFolderPasteIntoUploadedFile() {
 		String titleCut="titleCut1019605";
 		By bDoc=By.xpath(cMenu.ELEMENT_FILE_TITLE.replace("${titleOfFile}", titleCut));
-		
-		String img="TestData/ECMS_Admin_ManageCategories_Display.jpg";
+
+		String img="ECMS_Admin_ManageCategories_Display.jpg";
 		By bDocDes=By.xpath(cMenu.ELEMENT_FILE_TITLE.replace("${titleOfFile}", img));
 
 		info("Cut a Document Folder and paste it into Uploaded File!");
-		
+
 		//Create a Document Folder - source
 		cTemplate.createNewFolder(titleCut, folderType.Document);
 
 		//create an Uploaded file -destination
-		ecms.uploadFile(img);
+		ecms.uploadFile("TestData/"+img);
 		waitForAndGetElement(bDocDes);
 
 		//Cut and paste the Document Folder into Uploaded File
 		cMenu.cutNode(bDoc);
 		rightClickOnElement(bDocDes);
 		waitForElementNotPresent(ELEMENT_PASTE_NODE);
-			
+
 		//Delete data
 		cMenu.deleteDocument(bDocDes);
 		cMenu.deleteDocument(bDoc);
 	}
-	
-	
+
+
 	/*
 	 * Test_Case_ID: 101961
 	 * Case 1: Cut a File Document and paste it into a Content Folder!
@@ -446,22 +446,22 @@ public class ECMS_SE_BasicAction_CutPaste extends PlatformBase {
 		By bDocDes=By.xpath(cMenu.ELEMENT_FILE_TITLE.replace("${titleOfFile}", titlePaste));
 
 		info("Cut a File Document and paste it into Content Folder!");
-		
-		//Create a Content Folder -destination
-		cTemplate.createNewFolder(titlePaste, folderType.Content);
 
 		//Create a File document - source
 		actBar.goToAddNewContent();
 		cTemplate.createNewFile(titleCut, titleCut, titleCut);
 
+		//Create a Content Folder -destination
+		actBar.goToNodeByAddressPath("//");
+		cTemplate.createNewFolder(titlePaste, folderType.Content);
+
 		//Cut and paste the File Document into Content Folder
 		cMenu.cutAndPasteNode(bDoc, bDocDes);
-	
+
 		//Verify if paste file document in a node
 		waitForElementNotPresent(bDoc);
 		ecms.goToNode(bDocDes);
-		ecms.goToNode(bDoc);
-		waitForAndGetElement(By.xpath("//*[contains(@value,'"+ titlePaste + "/" + titleCut + "')]"));
+		waitForAndGetElement(bDoc);
 
 		//Delete data
 		cMenu.deleteDocument(bDocDes);
@@ -482,22 +482,23 @@ public class ECMS_SE_BasicAction_CutPaste extends PlatformBase {
 		By bDocDes=By.xpath(cMenu.ELEMENT_FILE_TITLE.replace("${titleOfFile}", titlePaste));
 
 		info("Cut a CSS File Document and paste it into a Content Folder!");
-	
+
 		//Create a CSS File document - source
 		actBar.goToAddNewContent();
 		click(cTemplate.ELEMENT_CSS_FILE_LINK);
 		cTemplate.createNewCssFile(titleCut, "", ""	);
 
 		//Create a Content Folder -destination
+		actBar.goToNodeByAddressPath("//");
 		cTemplate.createNewFolder(titlePaste, folderType.Content);
 
 		//Cut and paste the CSS File Document into Content Folder
 		cMenu.cutAndPasteNode(bDoc, bDocDes);
-	
+
 		//Verify if paste CSS File document in Content Folder
 		ecms.goToNode(bDocDes);
 		waitForAndGetElement(bDocDes);
-		
+
 		//Delete data
 		cMenu.deleteDocument(bDocDes);
 	}
@@ -517,10 +518,10 @@ public class ECMS_SE_BasicAction_CutPaste extends PlatformBase {
 		By bDocDes=By.xpath(cMenu.ELEMENT_FILE_TITLE.replace("${titleOfFile}", titlePaste));
 
 		info("Cut a JS File Document and paste it into a Content Folder!");
-					
+
 		//Create a Content Folder -destination
 		cTemplate.createNewFolder(titlePaste, folderType.Content);
-		
+
 		//Create a JS File document - source
 		actBar.goToAddNewContent();
 		click(cTemplate.ELEMENT_JS_FILE_LINK);
@@ -528,15 +529,15 @@ public class ECMS_SE_BasicAction_CutPaste extends PlatformBase {
 
 		//Cut and paste the JS File Document into Content Folder
 		cMenu.cutAndPasteNode(bDoc, bDocDes);
-	
+
 		//Verify if paste JS File document in Content Folder
 		ecms.goToNode(bDocDes);
 		waitForAndGetElement(bDocDes);
-		
+
 		//Delete data
 		cMenu.deleteDocument(bDocDes);
 	}
-	
+
 	/*
 	 * @date: 31/10/2014
 	 * Test_Case_ID: 101961
@@ -552,25 +553,25 @@ public class ECMS_SE_BasicAction_CutPaste extends PlatformBase {
 		By bDocDes=By.xpath(cMenu.ELEMENT_FILE_TITLE.replace("${titleOfFile}", titlePaste));
 
 		info("Cut a HTML File Document and paste it into a Content Folder!");
-				
+
 		//Create a Content Folder -destination
 		cTemplate.createNewFolder(titlePaste, folderType.Content);
-		
+
 		//Create a HTML File document - source
 		actBar.goToAddNewContent();
 		cTemplate.createNewHtmlFile(titleCut, "");
 
 		//Cut and paste the HTML File Document into Content Folder
 		cMenu.cutAndPasteNode(bDoc, bDocDes);
-	
+
 		//Verify if paste HTML File document into Content Folder
 		ecms.goToNode(bDocDes);
 		waitForAndGetElement(bDocDes);
-		
+
 		//Delete data
 		cMenu.deleteDocument(bDocDes);
 	}
-	
+
 	/*
 	 * Test_Case_ID: 101966
 	 * Cut a checked in node and paste it to a content folder!
@@ -610,7 +611,7 @@ public class ECMS_SE_BasicAction_CutPaste extends PlatformBase {
 		//Delete data
 		cMenu.deleteDocument(bDocDes);
 	}	
-	
+
 	/*
 	 * Test_Case_ID: 101969
 	 * Cut an uploaded file and paste it to a Node
@@ -621,7 +622,7 @@ public class ECMS_SE_BasicAction_CutPaste extends PlatformBase {
 		By bDoc=By.xpath(cMenu.ELEMENT_FILE_TITLE.replace("${titleOfFile}", "ECMS_DMS_SE_BasicAction_CutPaste.png"));
 		String titleDes="des66819";
 		By bDocDes=By.xpath(cMenu.ELEMENT_FILE_TITLE.replace("${titleOfFile}", titleDes));
-		
+
 		info("Cut an Uploaded File and paste it into a Content Folder!");
 
 		//Upload an Uploaded File - source

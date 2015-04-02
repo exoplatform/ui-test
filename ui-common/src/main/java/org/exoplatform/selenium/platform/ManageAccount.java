@@ -59,12 +59,11 @@ public class ManageAccount extends PlatformBase {
 		}
 		info("--Sign in as " + username + "--");
 
-		if (System.getProperty("browser").equals("iexplorer")){
-			if (waitForAndGetElement(ELEMENT_INPUT_USERNAME,10000,0) == null){
-				info("User logged in already");
-				signOut();
-			}
+		if (waitForAndGetElement(ELEMENT_INPUT_USERNAME,10000,0) == null){
+			info("User logged in already");
+			signOut();
 		}
+		
 		/*if (isElementPresent(ELEMENT_GO_TO_PORTAL) ){
 			click(ELEMENT_GO_TO_PORTAL);		
 		}

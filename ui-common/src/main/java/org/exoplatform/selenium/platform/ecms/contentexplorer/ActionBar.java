@@ -632,16 +632,20 @@ public class ActionBar extends EcmsBase{
 	public void goToAddSymlinkTab(){
 		if (isTextPresent("Add Symlink")){
 			info("-- Add Symlink tab is already displayed --");
-			if(isElementPresent(ELEMENT_ACTION_BAR_ADD_SYMLINK))
+			if(waitForAndGetElement(ELEMENT_ACTION_BAR_ADD_SYMLINK,5000,0)!=null)
 				click(ELEMENT_ACTION_BAR_ADD_SYMLINK);
-			else
+			else if(waitForAndGetElement(ELEMENT_ADD_SYMLINK_NODE,5000,0)!=null)
 				click(ELEMENT_ADD_SYMLINK_NODE);
+			else
+				click(ELEMENT_ADD_SYMLINK_LIST_VIEW);
 		}else{
 			click(ELEMENT_MORE_LINK_WITHOUT_BLOCK);
-			if(isElementPresent(ELEMENT_ACTION_BAR_ADD_SYMLINK))
+			if(waitForAndGetElement(ELEMENT_ACTION_BAR_ADD_SYMLINK,5000,0)!=null)
 				click(ELEMENT_ACTION_BAR_ADD_SYMLINK);
-			else
+			else if(waitForAndGetElement(ELEMENT_ADD_SYMLINK_NODE,5000,0)!=null)
 				click(ELEMENT_ADD_SYMLINK_NODE);
+			else
+				click(ELEMENT_ADD_SYMLINK_LIST_VIEW);
 		}
 		Utils.pause(1000);
 	}
@@ -1051,9 +1055,9 @@ public class ActionBar extends EcmsBase{
 		click(By.xpath(ELEMENT_EDIT_COMMENT_ICON.replace("${comment}", oldComment)));
 		waitForAndGetElement(ELEMENT_ADD_COMMENT_POPUP);
 		if(this.plfVersion.equalsIgnoreCase("4.1"))
-			inputDataToFrame(ELEMENT_ADD_COMMENT_FRAME_41, newComment, false);
+			inputDataToFrame(ELEMENT_ADD_COMMENT_FRAME_41, newComment, true);
 		else if(this.plfVersion.equalsIgnoreCase("4.0"))
-			inputDataToFrame(ELEMENT_ADD_COMMENT_FRAME, newComment, false);
+			inputDataToFrame(ELEMENT_ADD_COMMENT_FRAME, newComment, true);
 		switchToParentWindow();
 		button.save();
 		waitForElementNotPresent(ELEMENT_ADD_COMMENT_POPUP);

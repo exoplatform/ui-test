@@ -38,12 +38,8 @@ public class Template extends BasicAction{
 		By eTemplate = By.xpath(ELEMENT_SELECT_TEMPLATE_LINK.replace("{$template}",template));
 		goToAddTemplateWikiPage();	
 		info("--Add a wiki page from template--");
-
-		click(eTemplate, 2);
+		check(eTemplate, 2);
 		click(ELEMENT_SELECT_BUTTON);
-		Utils.pause(500);
-		driver.navigate().refresh();
-		Utils.pause(2000);
 		if (mode == 1){ 
 			addWikiPageRichText(title, null);
 		}

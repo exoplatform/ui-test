@@ -188,6 +188,7 @@ public class EcmsBase extends ManageAccount {
 	public final By ELEMENT_INPUT_TITLE_NODE = By.xpath("//input[@id = 'titleField']");
 	public final By ELEMENT_INPUT_NAME_NODE = By.xpath("//input[@id = 'nameField']");
 	public final By ELEMENT_INPUT_RENAME_NODE = By.xpath("//input[@id = 'renameField']");
+	public final By ELEMENT_RENAME_BUTTON=By.id("renameLink");
 
 	/* Default Data (Document and folder like: acme, Document,....) */
 	//Sidebar - Tree node
@@ -336,7 +337,7 @@ public class EcmsBase extends ManageAccount {
 	public final String ELEMENT_PERSONAL_DOCUMENT_NODE= "//*[@class='nodeName' and contains(text(), '${content}')]";
 	public final String ELEMENT_NODE_ADDRESS = "//input[@id='address' and contains(@value,'/${content}')]";
 	public final String PERSONAL_DRIVE_BREADCRUMB = "//div[@class='breadcrumbLink']//a[@data-original-title='Personal Documents']";
-	public final By ELEMENT_VIEW_MORE_BUTTON = By.xpath("//div[@class='FR MoreButton' and contains(text(),'More')]");
+	public final By ELEMENT_VIEW_MORE_BUTTON = By.xpath("//*[@id='uiActionsBarContainer']//*[contains(text(),'More')]");
 	public final By ELEMENT_IN_PERSON_DOCUMENT= By.xpath("//div[@data-original-title='in Personal Documents/']");
 	public final String ELEMENT_NAME_CONTENT_PERSON_DOCUMENT= "//div[@data-original-title='${name}']/a";
 	

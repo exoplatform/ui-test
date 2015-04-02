@@ -67,8 +67,6 @@ public class BasicAction extends Permission{
 	 */
 	public void addBlankWikiPage(String title, String content, int mode, Object... option){
 		info("-- Adding a new wiki page... --");
-		//boolean  verify = option.length > 0 ? option[0] : false;
-		//boolean ca = (Boolean) (option.length > 0 ? option[0] : false);
 		String message = (String) (option.length > 1 ? option[1] : "");	
 		goToAddBlankPage();
 		Utils.pause(500);
@@ -89,17 +87,14 @@ public class BasicAction extends Permission{
 			info("-- Cancel Wiki Page --");
 			click(ELEMENT_CANCEL_BUTTON_ADD_PAGE);
 			waitForWikiConfirmation(MESSAGE_CANCEL_CREATE_PAGE);
-			//waitForWikiConfirmation("Are you sure to leave this page?");
 			waitForElementNotPresent(ELEMENT_TITLE_WIKI_INPUT);
 		}else{
 			info("-- Saving Wiki Page... --");
 			click(ELEMENT_SAVE_BUTTON_ADD_PAGE);
-			//waitForElementNotPresent(ELEMENT_SAVE_BUTTON_ADD_PAGE);
 		}
 
 		if (!message.isEmpty()){ 
 			info(message);
-			//waitForMessage(message);
 			if (waitForAndGetElement(button.ELEMENT_OK_BUTTON, 3000, 0, 2) != null){
 				click(button.ELEMENT_OK_BUTTON);
 				click(ELEMENT_CANCEL_BUTTON_ADD_PAGE);
@@ -107,10 +102,6 @@ public class BasicAction extends Permission{
 				click(ELEMENT_CONFIRM_BUTTON_ADD_PAGE);
 			}
 		}
-
-		/*if (verify){
-			waitForTextPresent(content);
-		}*/
 		Utils.pause(1000);
 		waitForElementNotPresent(ELEMENT_SAVE_BUTTON_ADD_PAGE);
 	}
@@ -133,13 +124,13 @@ public class BasicAction extends Permission{
 		if(title != null){
 			type(ELEMENT_TITLE_WIKI_INPUT, title, true);
 		}	
-		if(isElementPresent(ELEMENT_SOURCE_EDITOR_BUTTON)){
+		if(waitForAndGetElement(ELEMENT_SOURCE_EDITOR_BUTTON,5000,0)!=null){
 			click(ELEMENT_SOURCE_EDITOR_BUTTON);
 			waitForAndGetElement(ELEMENT_RICHTEXT_BUTTON_PL4_1);
 		}
 		Utils.pause(1000);
-		
 		if(content != null){
+			waitForAndGetElement(ELEMENT_CONTENT_WIKI_INPUT).clear();
 			text = content.split("</br>");
 			for(int i=0; i < text.length; i++){
 				Utils.javaSimulateKeyPress((int)KeyEvent.VK_END);
@@ -147,7 +138,6 @@ public class BasicAction extends Permission{
 				waitForAndGetElement(ELEMENT_CONTENT_WIKI_INPUT).sendKeys(Keys.ENTER);
 			}
 		}	
-		//waitForAndGetElement(ELEMENT_SAVE_BUTTON_ADD_PAGE);
 		Utils.pause(1000);
 	}
 
@@ -186,11 +176,11 @@ public class BasicAction extends Permission{
 			if(title != null)
 				type(ELEMENT_TITLE_WIKI_INPUT, title, true);
 			if (content != null){
+				info("Add content");
 				inputDataToFrame(ELEMENT_CONTENT_WIKI_FRAME, content);
 				Utils.pause(1000);
 				driver.switchTo().defaultContent();
 			}
-			//waitForAndGetElement(ELEMENT_SAVE_BUTTON_ADD_PAGE);
 			Utils.pause(1000);
 		}		
 
@@ -257,15 +247,9 @@ public class BasicAction extends Permission{
 		else{
 			addWikiPageRichText(title, content);
 		}
-		//In PLF4, there is no more Minor Edit Option
-		/*if (minorEdit) {
-			click(ELEMENT_MINOR_EDIT_BUTTON);
-			waitForElementNotPresent(ELEMENT_MINOR_EDIT_BUTTON);
-		}*/		
-		//save();
 		switchToParentWindow();
 		Utils.pause(500);
-		//click(ELEMENT_SAVE_BUTTON_ADD_PAGE);
+
 		mouseOverAndClick(ELEMENT_SAVE_BUTTON_ADD_PAGE);
 		waitForElementNotPresent(ELEMENT_SAVE_BUTTON_ADD_PAGE,100000);
 		Utils.pause(2000);
@@ -360,16 +344,12 @@ public class BasicAction extends Permission{
 	 *
 	 */
 	public void waitForWikiConfirmation(String message, boolean...isCancel){
-		//By btnOK = By.xpath("//input[@type='button' and @value='OK']");
-		//By btnCancel = By.xpath("//input[@type='button' and @value='Cancel']");
 		button = new Button(driver);
 		By messageLocator = By.xpath("//div[@class='confirmMessage' and contains(text(), '" + message + "')]");
 		waitForAndGetElement(messageLocator);
 		if(isCancel.length > 0 && (isCancel[0] == true)) 
-			//click(btnCancel);
 			button.cancel();
 		else
-			//click(btnOK);
 			click(button.ELEMENT_OK_BUTTON);
 		waitForElementNotPresent(messageLocator);
 	}

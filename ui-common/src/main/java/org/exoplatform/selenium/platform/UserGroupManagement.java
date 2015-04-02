@@ -26,7 +26,7 @@ public class UserGroupManagement extends PlatformBase {
 		driver = dr;
 		naviTool = new NavigationToolbar(driver,this.plfVersion);
 	}
-	
+	public final By ELEMENT_SELECT_THIS_GROUP = By.linkText("Select this Group");
 	public final String MESSAGE_DUPLICATE_USERS = "User \"${username}\" has already the same membership ";
 	public final String MESSAGE_DUPLICATE_GROUPS = "in the group \"${groupName}\", please select another one.";
 	public final String ELEMENT_USER_INGROUP_DELETE_ICON = "//*[@id='UIGridUser']//span[text()='${userName}']/parent::td/parent::tr/td[@class='center actionContainer']//i[@class='uiIconDeleteUser uiIconLightGray']";
@@ -38,7 +38,7 @@ public class UserGroupManagement extends PlatformBase {
 	public final String ELEMENT_GROUP_MANAGEMENT_TAB_MEMBERSHIP_SAVE_BUTTON = "//*[@id='UIGroupEditMembershipForm']//button[text()='Save']";
 	public final String ELEMENT_GROUP_MANAGEMENT_TAB_MEMBERSHIP = "//*[@id='UIGridUser']//span[text()='${username}']/parent::td/parent::tr/td[4]/span[text()='${membership}']";
 	public final String ELEMENT_MEMBERSHIP_MANAGEMENT_TAB_FAIL_DEL_MSG = "//span[contains(text(),'You cannot delete this membership because it is mandatory.')]";
-	
+
 	//User Management -> Edit User form
 	public  final By ELEMENT_USER_MEMBERSHIP_TAB = By.xpath("//*[text()='User Membership']");
 	public final String ELEMENT_GROUP_PERMISSION = "//a[@title='${groupName}']";
@@ -75,7 +75,7 @@ public class UserGroupManagement extends PlatformBase {
 		button = new Button(driver);
 		String userDeleteIcon = ELEMENT_USER_DELETE_ICON.replace("${username}", username);
 		info("--Deleting user " + username + "--");
-		
+
 		searchUser(username, "User Name");
 		/*if (waitForAndGetElement("//*[contains(text(),'Total pages')]",3000,0) != null) {
 			usePaginator(userDeleteIcon, "User " + username + "not found in group");
@@ -96,7 +96,7 @@ public class UserGroupManagement extends PlatformBase {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}*/
-		
+
 		Utils.pause(1000);
 		type(ELEMENT_INPUT_SEARCH_USER_NAME, username, true);
 
@@ -286,21 +286,21 @@ public class UserGroupManagement extends PlatformBase {
 
 		temp = groupPath.split(delimiter);
 		/* Go to group */
-		for(int i =0; i < temp.length-1 ; i++){
+		for(int i =0; i < temp.length ; i++){
 			info("Go to " + temp[i]);
 			if (isInPermissionTab){
-				if (waitForAndGetElement(By.xpath(groupName_5.replace("${groupName}", temp[i])),10000,0) != null){
+				if (waitForAndGetElement(By.xpath(groupName_5.replace("${groupName}", temp[i])),3000,0) != null){
 					click(By.xpath(groupName_5.replace("${groupName}", temp[i])));
-				}else if (isElementPresent(By.xpath(groupName.replace("${groupName}", temp[i])))){
+				}else if (waitForAndGetElement(By.xpath(groupName.replace("${groupName}", temp[i])),3000,0) != null){
 					click(By.xpath(groupName.replace("${groupName}", temp[i])));
-				}else if (isElementPresent(By.xpath(groupName_2.replace("${groupName}", temp[i])))){
+				}else if (waitForAndGetElement(By.xpath(groupName_2.replace("${groupName}", temp[i])),3000,0) != null){
 					click(By.xpath(groupName_2.replace("${groupName}", temp[i])));
-				}else if (isElementPresent(By.xpath(groupName_3.replace("${groupName}", temp[i])))){
+				}else if (waitForAndGetElement(By.xpath(groupName_3.replace("${groupName}", temp[i])),3000,0) != null){
 					click(By.xpath(groupName_3.replace("${groupName}", temp[i])));
 				}
 			}else{
 				if (!temp[i].matches("Administration")){
-					click(By.linkText(temp[i]));
+					click(By.xpath(groupName_5.replace("${groupName}", temp[i])));
 				}else{
 					if (waitForAndGetElement(groupName_4.replace("${groupName}", temp[i]), 5000, 0) != null){
 						click(groupName_4.replace("${groupName}", temp[i]));
@@ -311,9 +311,8 @@ public class UserGroupManagement extends PlatformBase {
 			}
 			Utils.pause(500);
 		}
-		info(ELEMENT_TARGET_NODE_NEW.replace("${fileName}", temp[temp.length-1]));
-		if(waitForAndGetElement(ELEMENT_TARGET_NODE_NEW.replace("${fileName}", temp[temp.length-1]),5000,0)!=null)
-			click(ELEMENT_TARGET_NODE_NEW.replace("${fileName}", temp[temp.length-1]));
+		if(waitForAndGetElement(ELEMENT_SELECT_THIS_GROUP, 5000,0)!=null)
+			click(ELEMENT_SELECT_THIS_GROUP);
 	}
 
 	public void editGroup(String oldName, String groupName, String groupLabel, String groupDesc, boolean verify){
@@ -348,17 +347,17 @@ public class UserGroupManagement extends PlatformBase {
 	public void addMembership(String membershipName, String membershipDesc, boolean verify){
 		button = new Button(driver);
 		By member = By.xpath("//*[@id='UIGrid']//span[text()='" + membershipName + "']");
-//		boolean verifyMembership;
+		//		boolean verifyMembership;
 		info("--Creating new membership--");
 		click(ELEMENT_TAB_MEMBERSHIP_MANAGEMENT);
 		waitForAndGetElement(ELEMENT_INPUT_NAME);
 		type(ELEMENT_INPUT_NAME, membershipName, true);
 		type(ELEMENT_TEXTAREA_DESCRIPTION, membershipDesc, true);
 		button.save();
-//		verifyMembership = isTextPresent(membershipName);
-//		if (verifyMembership){
-//			waitForTextPresent(membershipName);
-//		}
+		//		verifyMembership = isTextPresent(membershipName);
+		//		if (verifyMembership){
+		//			waitForTextPresent(membershipName);
+		//		}
 		if (waitForAndGetElement(member, 10000, 0) == null){
 			click(ELEMENT_NEXT_PAGE_ICON);
 		}

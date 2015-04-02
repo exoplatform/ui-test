@@ -157,7 +157,7 @@ public class ContentTemplate extends EcmsBase {
 	//		.xpath("//*[contains(text(),'View as Plain text')]");
 	public final By ELEMENT_NEWFILE_TEXT_TAB_XPATH = By
 			.xpath("//a[contains(text(),'View as Plain text')]");
-	
+
 	public final String ELEMENT_NEWFILE_TEXT_TAB_P_CSS = ".textContent>pre";
 	public final By ELEMENT_NEWFILE_MIME_COMBOX_ID = By.name("mimetype");
 	public final By ELEMENT_NEWFILE_TEXTAREA_ID = By.id("contentHtml");
@@ -327,7 +327,7 @@ public class ContentTemplate extends EcmsBase {
 		}
 		else{
 			eWebContentSum = ELEMENT_WEBCONTENT_SUMMARY_FRAME_41;
-			}
+		}
 		/*if (this.plfVersion.equalsIgnoreCase("4.1"))
 			eWebContentSum = ELEMENT_WEBCONTENT_SUMMARY_FRAME_41;
 		else
@@ -347,7 +347,7 @@ public class ContentTemplate extends EcmsBase {
 				inputDataToFrame(frame, cont,true);
 			}
 			switchToParentWindow();
-						
+
 			/*if (this.plfVersion.equalsIgnoreCase("4.1"))
 				inputDataToFrame(ELEMENT_WEBCONTENT_CONTENT_FRAME_41, cont,
 						true);
@@ -428,20 +428,22 @@ public class ContentTemplate extends EcmsBase {
 			selectOption(ELEMENT_NEWFILE_MIME_COMBOX_ID, mimeType);
 		}
 		Utils.pause(300);
-		if (!lines) {
-			if(this.plfVersion.equalsIgnoreCase("4.1"))
-				inputDataToFrame(ELEMENT_NEWFILE_CONTENT_FRAME_41, cont, true);
-			else if(this.plfVersion.equalsIgnoreCase("4.0"))
-				inputDataToFrame(ELEMENT_NEWFILE_CONTENT_FRAME, cont, true);
-			else
-				type(ELEMENT_NEWFILE_TEXTAREA_ID, cont, true);
-
-			switchToParentWindow();
-		} else {
-			typeMultiLineInCkeContent(ELEMENT_NEWFILE_CONTENT_FRAME, cont);
-		}
 		if (mimeType.equalsIgnoreCase("text/plain"))
 			type(ELEMENT_NEWFILE_TEXTPLAIN, cont, true);
+		else{
+			if (!lines) {
+				if(this.plfVersion.equalsIgnoreCase("4.1"))
+					inputDataToFrame(ELEMENT_NEWFILE_CONTENT_FRAME_41, cont, true);
+				else if(this.plfVersion.equalsIgnoreCase("4.0"))
+					inputDataToFrame(ELEMENT_NEWFILE_CONTENT_FRAME, cont, true);
+				else
+					type(ELEMENT_NEWFILE_TEXTAREA_ID, cont, true);
+
+				switchToParentWindow();
+			} else {
+				typeMultiLineInCkeContent(ELEMENT_NEWFILE_CONTENT_FRAME, cont);
+			}
+		}
 		type(ELEMENT_NEWFILE_TITLE_TEXTBOX, title, false);
 		if (!description.isEmpty()) {
 			type(ELEMENT_NEWFILE_DESCRIPTION_TEXTBOX, description, false);
@@ -501,8 +503,6 @@ public class ContentTemplate extends EcmsBase {
 			String file, String illustrationImage, String illustrationSummary,
 			String css, String js, Object... params) {
 		info("-- Creating a new Illustrated Web Content --");
-		// String imageWidth = (String) (params.length > 0 ? params[0]: "");
-		// String imageHeight = (String) (params.length > 1 ? params[1]: "");
 		String optionLang = (String) (params.length > 0 ? params[0] : "");
 		Boolean verify = (Boolean) (params.length > 1 ? params[1] : true);
 
@@ -514,7 +514,7 @@ public class ContentTemplate extends EcmsBase {
 			inputDataToFrame(ELEMENT_WEBCONTENT_CONTENT_FRAME_41, content);
 		switchToParentWindow();
 		if (file != "") {
-			WebElement upload = waitForAndGetElement(ELEMENT_UPLOAD_NAME,
+			WebElement upload = waitForAndGetElement(By.xpath("//*[@id='tab1']//*[@name='file']"),
 					DEFAULT_TIMEOUT, 0, 2);
 			((JavascriptExecutor) driver).executeScript(
 					"arguments[0].style.display = 'block';", upload);
@@ -1068,8 +1068,6 @@ public class ContentTemplate extends EcmsBase {
 			button.saveAndClose();
 			waitForElementNotPresent(button.ELEMENT_SAVE_CLOSE_BUTTON);
 		}
-		// waitForAndGetElement(By.xpath("//body/p[contains(text(), '" +
-		// contentEdit +"')]"));
 	}
 
 	// Edit Illustrated Web Content
@@ -1083,24 +1081,20 @@ public class ContentTemplate extends EcmsBase {
 		info("-- Editing Illustrated Web Content -- " + title);
 		actBar.goToEditDocument(title);
 
-		if (this.plfVersion.equalsIgnoreCase("4.0"))
+		if (waitForAndGetElement(ELEMENT_WEBCONTENT_CONTENT_FRAME, 5000,0)!=null)
 			inputDataToFrame(ELEMENT_WEBCONTENT_CONTENT_FRAME, contentToEdit, true);
-		else
+		else if (waitForAndGetElement(ELEMENT_WEBCONTENT_CONTENT_FRAME_41, 5000,0)!=null)
 			inputDataToFrame(ELEMENT_WEBCONTENT_CONTENT_FRAME_41, contentToEdit, true);
-
+		else
+			inputDataToFrame(By.xpath("//*[contains(@id,'cke_htmlData')]//iframe"), contentToEdit, true);
 		switchToParentWindow();
-
 		// Main Content tab
 		if (file != "") {
-			// driver.switchTo().frame(waitForAndGetElement(ELEMENT_HEAD_LAYOUT_UPLOAD_FRAME));
-			// type(ELEMENT_HEAD_LAYOUT_UPLOAD_FILE,
-			// Utils.getAbsoluteFilePath(file), false);
 			WebElement upload = waitForAndGetElement(ELEMENT_UPLOAD_NAME,
 					DEFAULT_TIMEOUT, 0, 2);
 			((JavascriptExecutor) driver).executeScript(
 					"arguments[0].style.display = 'block';", upload);
 			upload.sendKeys(Utils.getAbsoluteFilePath(file));
-			// //
 			switchToParentWindow();
 			String links[] = file.split("/");
 			int length = links.length;
@@ -1127,7 +1121,7 @@ public class ContentTemplate extends EcmsBase {
 				}
 				Utils.pause(1000);
 				click(ELEMENT_WEBCONTENT_ILLUSTRATION_TAB);
-				WebElement upload = waitForAndGetElement(ELEMENT_UPLOAD_NAME,
+				WebElement upload = waitForAndGetElement(By.xpath("//*[@id='tab1']//*[@name='file']"),
 						DEFAULT_TIMEOUT, 0, 2);
 				((JavascriptExecutor) driver).executeScript(
 						"arguments[0].style.display = 'block';", upload);

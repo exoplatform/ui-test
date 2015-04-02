@@ -34,14 +34,14 @@
 				<testSuite>ecms-sniff-se.xml</testSuite>
 			</properties>
 		</profile>
-		
+
 		<profile>
 			<id>ecms-sniff-admin</id>
 			<properties>
 				<testSuite>ecms-sniff-admin.xml</testSuite>
 			</properties>
 		</profile>
-		
+
 		<profile>
 			<id>ecms-sniff-wcm</id>
 			<properties>
@@ -49,7 +49,7 @@
 			</properties>
 		</profile>
 		<profile>
-		<id>platform-username-email</id>
+			<id>platform-username-email</id>
 			<properties>
 				<testSuite>platform-username-email.xml</testSuite>
 			</properties>
@@ -129,35 +129,35 @@
 			</properties>
 		</profile>
 		<profile>
- 			<id>plf-fnc-part1</id>
- 			<properties>
- 				<testSuite>plf-fnc-part1.xml</testSuite>
- 			</properties>
- 		</profile>
- 		<profile>
- 			<id>plf-fnc-part2</id>
- 			<properties>
- 				<testSuite>plf-fnc-part2.xml</testSuite>
- 			</properties>
- 		</profile>
- 		<profile>
- 			<id>plf-fnc-part3</id>
- 			<properties>
- 				<testSuite>plf-fnc-part3.xml</testSuite>
- 			</properties>
- 		</profile>
- 		<profile>
- 			<id>plf-fnc-part4</id>
- 			<properties>
- 				<testSuite>plf-fnc-part4.xml</testSuite>
- 			</properties>
- 		</profile>
- 		<profile>
- 			<id>plf-fnc-part5</id>
- 			<properties>
- 				<testSuite>plf-fnc-part5.xml</testSuite>
- 			</properties>
- 		</profile>
+			<id>plf-fnc-part1</id>
+			<properties>
+				<testSuite>plf-fnc-part1.xml</testSuite>
+			</properties>
+		</profile>
+		<profile>
+			<id>plf-fnc-part2</id>
+			<properties>
+				<testSuite>plf-fnc-part2.xml</testSuite>
+			</properties>
+		</profile>
+		<profile>
+			<id>plf-fnc-part3</id>
+			<properties>
+				<testSuite>plf-fnc-part3.xml</testSuite>
+			</properties>
+		</profile>
+		<profile>
+			<id>plf-fnc-part4</id>
+			<properties>
+				<testSuite>plf-fnc-part4.xml</testSuite>
+			</properties>
+		</profile>
+		<profile>
+			<id>plf-fnc-part5</id>
+			<properties>
+				<testSuite>plf-fnc-part5.xml</testSuite>
+			</properties>
+		</profile>
 		<profile>
 			<id>social</id>
 			<properties>
@@ -214,6 +214,12 @@
 			</properties>
 		</profile>
 		<profile>
+			<id>wiki-part4</id>
+			<properties>
+				<testSuite>wiki-part4.xml</testSuite>
+			</properties>
+		</profile>
+		<profile>
 			<id>gatein-sniff</id>
 			<properties>
 				<testSuite>gatein-sniff.xml</testSuite>
@@ -222,7 +228,7 @@
 		<profile>
 			<id>gatein-func-1</id>
 			<properties>
-			<testSuite>gatein-func-1.xml</testSuite>
+				<testSuite>gatein-func-1.xml</testSuite>
 			</properties>
 		</profile>
 		<profile>
@@ -303,9 +309,9 @@
 						</goals>
 						<configuration>
 							<skip>${maven.test.skip}</skip>
-							<systemPropertyVariables> 
-								<webdriver.ie.driver>D:\\java\\eXoProjects\\IEDriverServer\\IEDriverServer.exe</webdriver.ie.driver> 
-							</systemPropertyVariables> 
+							<systemPropertyVariables>
+								<webdriver.ie.driver>D:\\java\\eXoProjects\\IEDriverServer\\IEDriverServer.exe</webdriver.ie.driver>
+							</systemPropertyVariables>
 							<suiteXmlFiles>
 								<suiteXmlFile>${project.build.OutputDirectory}/suites/${testSuite}</suiteXmlFile>
 							</suiteXmlFiles>

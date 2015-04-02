@@ -7,7 +7,6 @@ import org.exoplatform.selenium.Dialog;
 import org.exoplatform.selenium.Utils;
 import org.exoplatform.selenium.platform.ecms.EcmsBase;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
@@ -31,22 +30,22 @@ public class ContextMenu extends EcmsBase{
 	/*
 	 * @Added by PhuongDT
 	 * Date 04/09/2013 
-	*/
+	 */
 	public final By ELEMENT_MENU_ADD_TO_FAVORITE = By.xpath("//*[@id='JCRContextMenu']//i[@class='uiIconEcmsAddToFavourite']");
 	/*End Added*/
 
 	public final By ELEMENT_CONTEXT_MENU_LOCK = By.xpath("//*[@class='uiContextMenuContainer']//i[@class='uiIconEcmsLock']"); 
 	public final By ELEMENT_CONTEXT_MENU_COPY = By.xpath("//*[@class='uiContextMenuContainer']//i[@class='uiIconEcmsCopy']");
 	public final By ELEMENT_CONTEXT_MENU_VIEW = By.xpath("//*[@class='uiContextMenuContainer']//i[@class='uiIconEcmsViewInfo']");
-			
-			//By.className("uiIconEcmsLock");
+
+	//By.className("uiIconEcmsLock");
 	public final By ELEMENT_MENU_UNLOCK = By.className("uiIconEcmsUnlock");
 	public final By ELEMENT_MENU_CHECKIN = By.className("uiIconEcmsCheckIn");
 	public final By ELEMENT_MENU_CHECKOUT = By.className("uiIconEcmsCheckOut");
 	public final By ELEMENT_MENU_RENAME_NODE = By.linkText("Rename");
 	public final By ELEMENT_MENU_PASTE = By.xpath("//a[contains(text(),'Paste')]");
-	public final By ELEMENT_MENU_DELETE = By.xpath(".//*[@class='uiIconEcmsDelete']");
-			//By.className("uiIconEcmsDelete");
+	public final By ELEMENT_MENU_DELETE = By.xpath("//*[@class='uiContextMenuContainer']//*[@class='uiIconEcmsDelete']");
+	//By.className("uiIconEcmsDelete");
 	public final By ELEMENT_MENU_DELETE_RIGHT_CLICK_POPUP = By.xpath("//*[@id='JCRContextMenu']/div/ul/li[7]/a");
 	public final By ELEMENT_MENU_EDIT = By.className("uiIconEcmsEditDocument");
 	public final By ELEMENT_MENU_ADD_SYMLINK = By.className("uiIconEcmsAddSymLink");
@@ -85,11 +84,6 @@ public class ContextMenu extends EcmsBase{
 		By loc = locator instanceof By ? (By)locator : By.xpath((String)locator);
 		String nodeName = (String) (params.length > 0 ? params[0] : "");
 		Utils.pause(1000);
-		//for(int repeat=0;; repeat ++)
-		//{
-		//	if (repeat >= ACTION_REPEAT) {
-		//		Assert.fail("Cannot perform this action after " + ACTION_REPEAT + " tries");
-		//	}
 		if(isElementPresent(By.xpath(ELEMENT_VIEW_MODE_LINK.replace("${viewName}", "Web")))){
 			click(By.xpath(ELEMENT_VIEW_MODE_LINK.replace("${viewName}", "Web")));
 			Utils.pause(1000);
@@ -98,23 +92,12 @@ public class ContextMenu extends EcmsBase{
 		}
 		rightClickOnElement(loc);
 		if (waitForAndGetElement(actionItem, 5000, 0) != null) {
-			if(this.plfVersion.equalsIgnoreCase("4.0"))
-				click(actionItem);
-			else// if(this.plfVersion.equalsIgnoreCase("4.1"))
-				((JavascriptExecutor)driver).executeScript("arguments[0].click();", waitForAndGetElement(actionItem));
+			click(actionItem);
 		}
 		if (!nodeName.isEmpty()){
-			//if (waitForAndGetElement(ELEMENT_MENU_RENAME_NODE, 5000, 1) != null){
-			//	click(ELEMENT_MENU_RENAME_NODE);
-				type(ELEMENT_INPUT_RENAME_NODE, nodeName, true);
-				button.rename();
-				waitForTextPresent(nodeName);
-				info("Node is renamed successfully");
-			//}
+			type(ELEMENT_INPUT_RENAME_NODE, nodeName, true);
+			info("Node is renamed successfully");
 		}
-		//Utils.pause(WAIT_INTERVAL);
-		//	info("Retry...[" + repeat + "]");
-		//}
 		Utils.pause(1000);
 	}
 
@@ -183,7 +166,7 @@ public class ContextMenu extends EcmsBase{
 			if (repeat > ACTION_REPEAT) {
 				Assert.fail("Cannot perform this action after " + ACTION_REPEAT + " tries");
 			}
-			if(isElementPresent(By.xpath(ELEMENT_VIEW_MODE_LINK.replace("${viewName}", "Web")))){
+			if(waitForAndGetElement(By.xpath(ELEMENT_VIEW_MODE_LINK.replace("${viewName}", "Web")),5000,0)!=null){
 				click(By.xpath(ELEMENT_VIEW_MODE_LINK.replace("${viewName}", "Web")));
 				Utils.pause(1000);
 				if(isElementPresent(By.xpath("//*[@data-original-title = 'File Explorer']")))
@@ -193,8 +176,6 @@ public class ContextMenu extends EcmsBase{
 			if (waitForAndGetElement(ELEMENT_MENU_DELETE, 10000, 0)!=null) 
 			{	
 				click(ELEMENT_MENU_DELETE);
-				//waitForTextPresent("Delete");
-				//click(By.linkText("OK"));
 				dialog.deleteInDialog();
 				break;
 			}

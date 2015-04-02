@@ -143,12 +143,12 @@ public class ECMS_SE_CreateNode_Upload_MultiUploadComponent extends PlatformBase
 		 */
 		@Test
 		public void test06_DisplayScrollBar(){
-			String FILE_EXE_NAME = "ECMS_DMS_SE_Upload_exefile.exe";		
+			String FILE_EXE_NAME = "ECMS_DMS_SE_Upload_odsfile.ods";		
 			String FILE_HTML_NAME = "ECMS_DMS_SE_Upload_htmlfile.html";
 			String FILE_PDF_NAME = "ECMS_DMS_SE_Upload_pdffile.pdf";
 			String FILE_IMAGE_NAME = "ECMS_DMS_SE_Upload_imgfile.jpg";
 			
-			String FILE_EXE_TITLE = "ECMS_DMS_SE_Upload_exefile";
+			String FILE_EXE_TITLE = "ECMS_DMS_SE_Upload_odsfile";
 			String FILE_HTML_TITLE = "ECMS_DMS_SE_Upload_htmlfile";
 			String FILE_PDF_TITLE = "ECMS_DMS_SE_Upload_pdffile";
 			String FILE_IMAGE_TITLE = "ECMS_DMS_SE_Upload_imgfile";
@@ -163,6 +163,7 @@ public class ECMS_SE_CreateNode_Upload_MultiUploadComponent extends PlatformBase
 			info("Display the scroll bar in the specific zone when upload in Document !");
 			
 			navToolBar.goToPersonalDocuments();
+			actBar.goToViewMode("Admin");
 			for (int j=0; j < setFile_TITLE_1.length; j++){
 				info("Upload file: " + setFile1[j]);
 				ecms.uploadFile(data + setFile1[j]);

@@ -48,7 +48,7 @@ public class TestBase {
 	public WebDriver driver;
 	public WebDriver newDriver;
 	public static String baseUrl;
-	protected int DEFAULT_TIMEOUT = 40000; //milliseconds = 30 seconds
+	protected int DEFAULT_TIMEOUT = 30000; //milliseconds = 30 seconds
 	protected int WAIT_INTERVAL = 50; //milliseconds  
 
 	public int loopCount = 0;	
@@ -84,7 +84,7 @@ public class TestBase {
 	public final By ELEMENT_CONTINUE_BUTTON = By.xpath("//button[text()='Continue' and @class='btn active']");
 	public final By ELEMENT_START_BUTTON = By.xpath("//button[text()='Start']");
 	public final By ELEMENT_SUBMIT_BUTTON = By.xpath("//*[text()='Submit']");
-	
+
 	public final By ELEMENT_INPUT_PASSWORD = By.name("password");
 	public final By ELEMENT_ACCOUNT_NAME_LINK = By.xpath("//*[@id='UIUserPlatformToolBarPortlet']/a");
 	public final By ELEMENT_PLF_INFORMATION = By.id("platformInfoDiv");
@@ -104,7 +104,7 @@ public class TestBase {
 	public String downloadfile=Utils.getAbsoluteFilePath("TestData\\downloadIE9.exe");
 	public String ieDriver=Utils.getAbsoluteFilePath("TestData\\IEDriverServer.exe");
 	public String chromeDriver= Utils.getAbsoluteFilePath("TestData\\chromedriver.exe");
-	
+
 	public final String DATA_USER1 = "john";
 	public static String DATA_PASS = "gtn";
 	public final String DATA_USER2 = "mary";
@@ -116,7 +116,7 @@ public class TestBase {
 	public final String DATA_USER3 = "james";//"james.davis@acme.com";
 	public static String DATA_USER4 = "demo";//"jack.demo@acme.com";
 	//	public final String DATA_PASS = "gtngtn";
-	
+
 	public TestBase(){
 
 	}
@@ -127,9 +127,8 @@ public class TestBase {
 
 	/*======== End of Term and conditions =====*/	
 	public void initSeleniumTestWithOutTermAndCondition(Object... opParams){
-		//		System.setProperty("browser", "iexplorer");
 		String browser = System.getProperty("browser");
-
+		String pathFile = System.getProperty("user.dir") + "/src/main/resources/TestData/TestOutput";
 		baseUrl = System.getProperty("baseUrl");
 		if (baseUrl==null) baseUrl = DEFAULT_BASEURL;
 		DATA_PASS = System.getProperty("DATA_PASS");
@@ -143,8 +142,6 @@ public class TestBase {
 			chromeFlag = true;
 		} else if ("iexplorer".equals(browser)){
 			info("ie test " + System.getProperty("webdriver.ie.driver"));
-			//			capabilitiesIE.setJavascriptEnabled(true);                   
-			//			capabilitiesIE.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);                                   
 			driver = initIEDriver();
 
 			this.ieFlag = true;
@@ -153,6 +150,23 @@ public class TestBase {
 			FirefoxProfile profile = new FirefoxProfile();
 			profile.setPreference("plugins.hide_infobar_for_missing_plugin", true);
 			profile.setPreference("dom.max_script_run_time", 0);
+			profile.setPreference("browser.download.manager.showWhenStarting", false);
+			profile.setPreference("browser.download.dir", pathFile);
+			profile.setPreference("browser.download.folderList", 2);
+			profile.setPreference("browser.helperApps.neverAsk.saveToDisk", "application/x-xpinstall;" +
+					"application/x-zip;application/x-zip-compressed;application/x-winzip;application/zip;" +
+					"gzip/document;multipart/x-zip;application/x-gunzip;application/x-gzip;application/x-gzip-compressed;" +
+					"application/x-bzip;application/gzipped;application/gzip-compressed;application/gzip" +
+					"application/octet-stream" +
+					";application/pdf;application/msword;text/plain;" +
+					"application/octet;text/calendar;text/x-vcalendar;text/Calendar;" +
+					"text/x-vCalendar;image/jpeg;image/jpg;image/jp_;application/jpg;" +
+					"application/x-jpg;image/pjpeg;image/pipeg;image/vnd.swiftview-jpeg;image/x-xbitmap;image/png;application/xml;text/xml;text/icalendar;");
+
+			profile.setPreference("plugin.disable_full_page_plugin_for_types", "application/pdf");
+			profile.setPreference("pref.downloads.disable_button.edit_actions", true);
+			profile.setPreference("pdfjs.disabled", true); 
+			profile.setPreference("browser.helperApps.alwaysAsk.force", false);
 			DesiredCapabilities capabilities = DesiredCapabilities.firefox();
 			capabilities.setCapability(FirefoxDriver.PROFILE, profile);
 			driver = new FirefoxDriver(capabilities);
@@ -475,10 +489,6 @@ public class TestBase {
 			Utils.pause(WAIT_INTERVAL);
 			dragAndDropToObject(sourceLocator, targetLocator);
 		}catch (UnhandledAlertException e) {
-			/*checkCycling(e, DEFAULT_TIMEOUT/WAIT_INTERVAL);
-			Utils.pause(WAIT_INTERVAL);
-			dragAndDropToObject(sourceLocator, targetLocator);*/
-			//acceptAlert();
 			try {
 				Alert alert = driver.switchTo().alert();
 				alert.accept();
@@ -502,7 +512,7 @@ public class TestBase {
 				actions.click(element).perform();
 
 			else {
-				
+
 				debug("Element is not enabled");
 				click(locator, notDisplay);
 			}
@@ -1179,7 +1189,7 @@ public class TestBase {
 		WebElement element = waitForAndGetElement(object);
 		//String scrollHeight = String.valueOf(((JavascriptExecutor)driver).executeScript("return arguments[0].scrollHeight;", element));
 		String scrollTopMax = String.valueOf(((JavascriptExecutor)driver).executeScript("return arguments[0].scrollTopMax;", element));
-	//	info("scrollHeight: " + scrollHeight);
+		//	info("scrollHeight: " + scrollHeight);
 		info("scrollTopMax: " + scrollTopMax);
 		//int scroll = Integer.parseInt(scrollHeight);
 		int scroTopMax = Integer.parseInt(scrollTopMax);
@@ -1305,7 +1315,7 @@ public class TestBase {
 			//Setting clipboard with file location
 			setClipboardData(path);
 			//native key strokes for CTRL, V and ENTER keys
-			
+
 			robot.keyPress(KeyEvent.VK_CONTROL);
 			robot.keyPress(KeyEvent.VK_V);
 			robot.keyRelease(KeyEvent.VK_V);

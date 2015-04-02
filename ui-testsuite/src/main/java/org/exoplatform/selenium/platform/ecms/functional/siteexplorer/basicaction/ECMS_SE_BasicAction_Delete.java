@@ -185,7 +185,7 @@ public class ECMS_SE_BasicAction_Delete extends PlatformBase {
 		actBar.chooseDrive(ecms.ELEMENT_TRASH_DRIVE);
 		click(ELEMENT_PERSONAL_DOCUMENTS);
 		usePaginator(ecms.ELEMENT_UI_CHECKBOX.replace("${element}", data1), "Cannot find element...");
-		click(ecms.ELEMENT_UI_CHECKBOX.replace("${element}", data1), 2);
+		check(ecms.ELEMENT_UI_CHECKBOX.replace("${element}", data1), 2);
 		click(cMenu.ELEMENT_MENU_DELETE);
 		magAlert.verifyAlertMessage("Are you sure you want to permanently remove the file 'ECMS_Admin_SendMailScript_Template.txt'?");
 		dialog.deleteInDialog();
@@ -788,7 +788,7 @@ public class ECMS_SE_BasicAction_Delete extends PlatformBase {
 		
 		info("-- Undo Deletion --");
 		actBar.undoDeletion();
-		waitForAndGetElement(ecms.MESSAGE_MULTI_ITEMS_RESTORED_SUCCESSFULLY.replace("${title}", "1 items"));
+		waitForAndGetElement(ecms.MESSAGE_MULTI_ITEMS_RESTORED_SUCCESSFULLY.replace("${title}", data1));
 
 		info("-- Review a relation --");
 		ecms.goToNode("ECMS_Undo_Delete_4", true);

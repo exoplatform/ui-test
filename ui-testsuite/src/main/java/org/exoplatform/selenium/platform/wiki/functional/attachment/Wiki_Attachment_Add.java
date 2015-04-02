@@ -1,6 +1,9 @@
 package org.exoplatform.selenium.platform.wiki.functional.attachment;
 
 import static org.exoplatform.selenium.TestLogger.info;
+
+import java.util.Set;
+
 import org.exoplatform.selenium.Button;
 import org.exoplatform.selenium.Utils;
 import org.exoplatform.selenium.platform.ManageAccount;
@@ -214,7 +217,7 @@ public class Wiki_Attachment_Add extends BasicAction{
 		String ATTACHMENT_PATH="TestData/"+ATTACHMENT_NAME+"";
 		By ATTACHMENT_FILE_LINK=By.xpath("//*[text()='"+ATTACHMENT_NAME+"']");
 		String URL = "KS_Wiki_Attachment_pdffile.pdf";
-		
+
 		/*Step Number: 1
 		 *Step Name: Step 1: Open form to add a new wiki page
 		 *Step Description: 
@@ -228,7 +231,7 @@ public class Wiki_Attachment_Add extends BasicAction{
 			- Form to add new page appears.*/
 		goToAddBlankPage();
 		addWikiPageSourceEditor(DATA_WIKI_PAGE_NAME, DATA_WIKI_PAGE_CONTENT);
-		
+
 		/*Step number: 2
 		 *Step Name: Step 2: Add many files
 		 *Step Description: 
@@ -241,7 +244,7 @@ public class Wiki_Attachment_Add extends BasicAction{
 			Files are attached for page.*/
 		attachFileInWiki(ATTACHMENT_PATH, 2);
 		click(ATTACHMENT_FILE_LINK);
-		
+		Utils.pause(3000);
 		/*Step number: 3
 		 *Step Name: Step 3: View content of attachments
 		 *Step Description: 
@@ -250,18 +253,22 @@ public class Wiki_Attachment_Add extends BasicAction{
 
 		 *Expected Outcome: 
 			Content of text1.pdf is shown in a new tab*/
-		String HandleBefore = driver.getWindowHandle();
-		info("Open new window");
-		Utils.pause(5000);	
-		for(String winHandle : driver.getWindowHandles()){
-			driver.switchTo().window(winHandle);
+		String parentWindow = driver.getWindowHandle();
+		Set<String> handles =  driver.getWindowHandles();
+		for(String windowHandle  : handles)
+		{
+			if(!windowHandle.equals(parentWindow))
+			{
+				driver.switchTo().window(windowHandle);
+				String actUrl=driver.getCurrentUrl();
+				info(URL);
+				info(actUrl);
+				assert actUrl.contains(URL);	
+				driver.close(); 
+				driver.switchTo().window(parentWindow); 
+			}
 		}
-		Utils.pause(1000);
-		info(URL);
-		info(driver.getCurrentUrl());
-		assert driver.getCurrentUrl().contains(URL);	
-		driver.switchTo().window(HandleBefore);
-		
+
 		/*Step number: 4
 		 *Step Name: Step 4: Save the page with attached PDF files
 		 *Step Description: 
@@ -285,7 +292,7 @@ public class Wiki_Attachment_Add extends BasicAction{
 			- The file file is shown in another tab*/
 		click(ELEMENT_ATTACHMENT_NUMBER.replace("${No}", "1"));
 		waitForAndGetElement(ELEMENT_ATTACHMENT_TITLE.replace("${fileName}", ATTACHMENT_NAME));
-		
+
 		/*Step number: 6
 		 *Step Name: Step 6: Hide Attachment pane
 		 *Step Description: 
@@ -296,7 +303,7 @@ public class Wiki_Attachment_Add extends BasicAction{
 			- The Attachments pane is disappeared*/
 		click(ELEMENT_ATTACHMENT_NUMBER.replace("${No}", "1"));
 		waitForElementNotPresent(ELEMENT_ATTACHMENT_TITLE.replace("${fileName}", ATTACHMENT_NAME));
-		
+
 		info("Clear data");
 		deleteCurrentWikiPage();	
 	}
@@ -318,7 +325,7 @@ public class Wiki_Attachment_Add extends BasicAction{
 		String ATTACHMENT_NAME="KS_Wiki_Attachment_pdffile.pdf";
 		String ATTACHMENT_PATH="TestData/"+ATTACHMENT_NAME+"";
 		By ATTACHMENT_FILE_LINK=By.xpath("//*[text()='"+ATTACHMENT_NAME+"']");
-		
+
 		/*Step Number: 1
 		 *Step Name: Step 1: Open form to add a new wiki page
 		 *Step Description: 
@@ -331,7 +338,7 @@ public class Wiki_Attachment_Add extends BasicAction{
 			- Form to add new page appears.*/
 		goToAddBlankPage();
 		addWikiPageSourceEditor(DATA_WIKI_PAGE_NAME, DATA_WIKI_PAGE_CONTENT);
-		
+
 		/*Step number: 2
 		 *Step Name: Step 2: Add the first file named doc1.txt
 		 *Step Description: 
@@ -344,7 +351,7 @@ public class Wiki_Attachment_Add extends BasicAction{
 			The file is attached for page.*/
 		attachFileInWiki(ATTACHMENT_PATH, 2);
 		waitForAndGetElement(ATTACHMENT_FILE_LINK);
-		
+
 		/*Step number: 3
 		 *Step Name: Step 3: Add the second file with the same name doc1.txt
 		 *Step Description: 
@@ -354,7 +361,7 @@ public class Wiki_Attachment_Add extends BasicAction{
 		 *Expected Outcome: 
 			One warning shows: Already in use Keep both Replace or Cancel (similar to Upload case in Documents)*/
 		attachFileInWiki(ATTACHMENT_PATH, 2);
-		
+
 		/*Step number: 4
 		 *Step Name: Step 4: Select either of upload options
 		 *Step Description: 
@@ -364,9 +371,7 @@ public class Wiki_Attachment_Add extends BasicAction{
 		 *Expected Outcome: 
 			- If "Keep both", the file is still uploaded with an index added. For example, doc1.txt[1]
 			- If "Replace", the second file will replace the first file.
-			- If "Cancel", the second file is not uploaded*/ 
-		info("Clear data");
-		deleteCurrentWikiPage();	
+			- If "Cancel", the second file is not uploaded*/ 	
 	}
 
 	/**
@@ -385,7 +390,7 @@ public class Wiki_Attachment_Add extends BasicAction{
 		String ATTACHMENT_NAME="KS_Wiki_Attachment_pdffile.pdf";
 		String ATTACHMENT_PATH="TestData/"+ATTACHMENT_NAME+"";
 		By ATTACHMENT_FILE_LINK=By.xpath("//*[text()='"+ATTACHMENT_NAME+"']");
-		
+
 		/*Step Number: 1
 		 *Step Name: Step 1: Open a wiki page
 		 *Step Description: 
@@ -400,7 +405,7 @@ public class Wiki_Attachment_Add extends BasicAction{
 		waitForAndGetElement(ATTACHMENT_FILE_LINK);
 		click(ELEMENT_SAVE_BUTTON_ADD_PAGE);
 		waitForAndGetElement(ELEMENT_ATTACHMENT_NUMBER.replace("${No}", "1"));
-		
+
 		/*Step number: 2
 		 *Step Name: Step 2: View Attachments pane
 		 *Step Description: 
@@ -416,7 +421,7 @@ public class Wiki_Attachment_Add extends BasicAction{
 		info("Clear data");
 		deleteCurrentWikiPage();	
 	}
-	
+
 	/**
 	 * Case ID:109768.
 	 * Test Case Name: Show Upload New File button when creating a new wiki page
@@ -432,7 +437,7 @@ public class Wiki_Attachment_Add extends BasicAction{
 		String DATA_WIKI_PAGE_CONTENT="content109768";
 		String ATTACHMENT_NAME="KS_Wiki_Attachment_pdffile.pdf";
 		String ATTACHMENT_PATH="TestData/"+ATTACHMENT_NAME+"";
-		
+
 		/*Step Number: 1
 		 *Step Name: Step 1: Create a wiki page
 		 *Step Description: 
@@ -443,7 +448,7 @@ public class Wiki_Attachment_Add extends BasicAction{
 			- Form to add new page appears.*/
 		goToAddBlankPage();
 		addWikiPageSourceEditor(DATA_WIKI_PAGE_NAME, DATA_WIKI_PAGE_CONTENT);
-		
+
 		/*Step number: 2
 		 *Step Name: Step 2: Show Upload New File button
 		 *Step Description: 

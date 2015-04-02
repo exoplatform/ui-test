@@ -821,7 +821,8 @@ public class Wiki_BasicAction_Edit extends ManageDraft {
 		info(waitForAndGetElement(ELEMENT_DRAFT_ALERT, 5000,1,2,newDriver).getText());
 		info(ELEMENT_DRAFT_STRING_ALERT.replace("${userName}",fullName));
 		assert(waitForAndGetElement(ELEMENT_DRAFT_ALERT, 5000,1,2,newDriver).getText().contains(ELEMENT_DRAFT_STRING_ALERT.replace("${userName}",fullName)));
-		
+		newDriver.manage().deleteAllCookies();
+		newDriver.close();
 		/*
 		- Back to browser 1 and click Save button
 		 *Input Data: 
@@ -840,8 +841,6 @@ public class Wiki_BasicAction_Edit extends ManageDraft {
 		goToWikiPage("Wiki Home/"+titleUpdate);
 		deleteCurrentWikiPage();
 		info("--Close the 2nd browser window--");
-		Utils.pause(500);
-		newDriver.manage().deleteAllCookies();
-		newDriver.quit();
+
 	}
 }

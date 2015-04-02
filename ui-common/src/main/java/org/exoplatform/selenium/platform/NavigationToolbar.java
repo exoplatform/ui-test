@@ -242,7 +242,7 @@ public class NavigationToolbar extends PlatformBase {
 				driver.get(url);
 				break;
 			}
-			click(ELEMENT_LINK_SETUP);
+			mouseOver(ELEMENT_LINK_SETUP, true);
 			if (waitForAndGetElement(ELEMENT_USER_LINK, 5000, 0)!= null) {	
 				mouseOver(ELEMENT_USER_LINK, false);
 				if (waitForAndGetElement(ELEMENT_GROUP_AND_ROLE_LINK, 5000, 0)!= null){

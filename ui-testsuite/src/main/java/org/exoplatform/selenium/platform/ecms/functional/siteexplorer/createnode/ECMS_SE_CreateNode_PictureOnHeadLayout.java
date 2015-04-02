@@ -67,15 +67,14 @@ public class ECMS_SE_CreateNode_PictureOnHeadLayout extends PlatformBase{
 	 */
 	@Test
 	public void test01_AddPictureOnHeadContentInWebContentWithNameInDifferentLanguages(){
-		String WEB_CONTENT_VN_TITLE = "Lập_trình_viên_eXo_001";
+		String WEB_CONTENT_VN_TITLE = "Lập_trình_viên_eXo_67454";
 		By vnTitle = By.linkText(WEB_CONTENT_VN_TITLE);
 
-		String WEB_CONTENT_FR_TITLE = "Développer_eXo_001";
+		String WEB_CONTENT_FR_TITLE = "Développer_eXo_67454";
 		By frTitle = By.linkText(WEB_CONTENT_FR_TITLE);
 
 		info("Go to Site Explorer");
 		navToolBar.goToSiteExplorer();
-		ecms.goToNode("acme/web contents");
 
 		info("Go to [Add New Webcontent]");
 		actBar.goToAddNewContent();
@@ -85,7 +84,8 @@ public class ECMS_SE_CreateNode_PictureOnHeadLayout extends PlatformBase{
 		waitForAndGetElement(vnTitle);
 
 		info("Illustrated Web Content...with name in French");
-		ecms.goToNode("web contents");
+		info("Go to Site Explorer");
+		navToolBar.goToSiteExplorer();
 		actBar.goToAddNewContent();
 		cTemplate.createNewIllustratedWebContent(WEB_CONTENT_FR_TITLE, WEB_CONTENT_FR_TITLE, "", "", "", "", "", "fr");
 		waitForAndGetElement(frTitle);
@@ -108,7 +108,6 @@ public class ECMS_SE_CreateNode_PictureOnHeadLayout extends PlatformBase{
 		
 		info("Go to Site Explorer");
 		navToolBar.goToSiteExplorer();
-		ecms.goToNode("acme/web contents");
 
 		info("Add new [Illustrated Webcontent]");
 		actBar.goToAddNewContent();

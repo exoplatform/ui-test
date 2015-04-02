@@ -155,7 +155,7 @@ public class ECMS_SE_CreateNode_WebContent extends PlatformBase{
 	 * Add web content in Web Content folder with special characters in Name
 	 * error : selenium has a problem with the specials characters
 	 */
-	@Test(groups={"error"})
+	@Test(groups="pending")
 	public void test04_AddWebContentInWebContentFolderWithSpecialCharactersInName(){
 		String WEB_CONTENT_TITLE = cTemplate.DATA_SPECIAL_CHARACTER_STRING + "WebContent_04";
 		String charSpecials="!@#$%&*()./:[]{}<>',;~`";

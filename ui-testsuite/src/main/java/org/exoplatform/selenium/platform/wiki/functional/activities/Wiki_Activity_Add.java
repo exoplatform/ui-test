@@ -100,11 +100,11 @@ public class Wiki_Activity_Add extends Permalink{
 	@Test 
 	public  void test02_AddAWikisActivityAfterCreateAWikiPageInSpace() {
 		info("Test 02 Add a wiki's activity after create a wiki page in space");
-		String spaceName = "space771291";
-		String title = "Title771291";
-		String content = "Content 77129";
+		String spaceName = "space771293";
+		String title = "Title771293";
+		String content = "Content 771293";
 		String url = baseUrl+"/intranet/wiki/group/spaces/"+spaceName+"/"+title;
-		String newcontent = "Content case 77129";
+		String newcontent = "Content case 771293";
 		/*
 		- Connect to Intranet
 		- Click [Join a space]

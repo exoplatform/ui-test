@@ -67,12 +67,12 @@ public class ECMS_SE_CreateNode_WebLink extends PlatformBase{
 	 */
 	@Test
 	public void test01_CreateLinkInSiteExplorer(){
-		String linkName = "ECMS_SE_CreateNode_Link_01";
+		String linkName = "ECMS_SE_CreateNode_Link_102160";
 		String url = "http://www.google.com";
 		
 		info("Go to Site Explorer");
 		navToolBar.goToSiteExplorer();
-		ecms.goToNode("acme/links");
+		ecms.goToNode("intranet/links");
 		
 		info("Create a new link");
 		actBar.goToAddNewContent();
@@ -84,7 +84,7 @@ public class ECMS_SE_CreateNode_WebLink extends PlatformBase{
 		click(By.linkText(url));
 		
 		switchToNewWindow();
-		waitForAndGetElement(cMenu.ELEMENT_FILE_TITLE.replace("${titleOfFile}", "Google"));
+		waitForAndGetElement(".//*[@id='hplogo' and @alt='Google']");
 		driver.switchTo().window(handlesBefore);
 		
 		info("Restore data");

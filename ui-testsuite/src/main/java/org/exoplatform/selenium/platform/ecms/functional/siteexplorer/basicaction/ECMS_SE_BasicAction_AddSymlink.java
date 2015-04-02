@@ -604,7 +604,7 @@ public class ECMS_SE_BasicAction_AddSymlink extends PlatformBase{
 	 * add symlink for some node
 	 * -- Error of selenium -- Impossible to select two elements in the right panel
 	 */
-	@Test(groups={"error"})
+	@Test
 	public void test16_AddSymlinkForSomeNodesAtTheSameTime(){
 		String folderName = "ECMS_AddSymlink_Content_folder_16";
 		String fileName = "ECMS_AddSymlink_file_16";

@@ -3,9 +3,8 @@ import static org.exoplatform.selenium.TestLogger.info;
 
 import org.exoplatform.selenium.Utils;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 
 /**
  * 
@@ -21,18 +20,15 @@ public class SpaceSearch extends SocialBase {
 	}
 	//Search space by name
 	public void searchSpaceByName (String spaceName, boolean verify) {	
-		By DATA_SPACE_LINK = By.linkText(spaceName);	
+		By DATA_SPACE_LINK = By.xpath("//*[@class='spaceTitle']//*[contains(@data-text, '"+spaceName+"')]");	
 		info("Input data into search textbox");	
 		waitForAndGetElement(ELEMENT_SEARCH_TEXTBOX);	
 		type(ELEMENT_SEARCH_TEXTBOX, spaceName, true);	
 		info("Click search button");	
-		WebElement searchButton = waitForAndGetElement(ELEMENT_SEARCH_BUTTON, DEFAULT_TIMEOUT, 1, 2);
-		((JavascriptExecutor)driver).executeScript("arguments[0].click();", searchButton);
+		Utils.pause(3000);
+		waitForAndGetElement(ELEMENT_SEARCH_TEXTBOX).sendKeys(Keys.ENTER);;
 		if (verify) {	
 			waitForAndGetElement(DATA_SPACE_LINK);		
-		}
-		else {
-			Utils.captureScreen("SearchResultByName");
 		}
 	}
 

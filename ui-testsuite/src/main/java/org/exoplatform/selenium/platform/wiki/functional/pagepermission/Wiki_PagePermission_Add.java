@@ -377,9 +377,9 @@ public class Wiki_PagePermission_Add extends BasicAction {
 	 */
 	@Test
 	public void test09_AddPermissionForGroup_SelectGroup(){
-		String title = "KS_Wiki_PagePermission_Add_Page_09";
-		String content = "KS_Wiki_PagePermission_Add_Page_Content_09";
-		String new_content = "KS_Wiki_PagePermission_Add_Page_Content_new_09";
+		String title = "KS_Wiki_PagePermission_Add_Page_092";
+		String content = "KS_Wiki_PagePermission_Add_Page_Content_092";
+		String new_content = "KS_Wiki_PagePermission_Add_Page_Content_new_092";
 		By element_page = By.linkText(title);
 		String group = "*:/platform/web-contributors";
 		String[] userGroup = {"Platform/Content Management"};

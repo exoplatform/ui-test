@@ -1208,10 +1208,7 @@ public class PlatformBase extends TestBase {
 	 * Open a new browser by Javascript
 	 */
 	public void openNewBrowser(){
-		//Open new browser by Javascript
-		//String handlesBefore = driver.getWindowHandle();
 		((JavascriptExecutor) driver).executeScript("window.open()");
-		//driver.manage().deleteAllCookies();
 		for(String winHandle : driver.getWindowHandles()){
 			driver.switchTo().window(winHandle);
 		}
@@ -1265,8 +1262,7 @@ public class PlatformBase extends TestBase {
 							break;
 					}
 					else{
-						inputsummary.sendKeys(data);
-						//						((JavascriptExecutor) driver).executeScript("document.body.innerHTML='" + data + "' + document.body.innerHTML;");
+						((JavascriptExecutor) driver).executeScript("document.body.innerHTML='" + data + "' + document.body.innerHTML;");
 						break;
 					}
 				else {
@@ -1275,7 +1271,6 @@ public class PlatformBase extends TestBase {
 					if (inputsummary.getText().contains(data)) 
 						break;
 				}
-
 				switchToParentWindow();
 			}
 		} catch (StaleElementReferenceException e) {
@@ -1590,13 +1585,9 @@ public class PlatformBase extends TestBase {
 			acc = new ManageAccount(newDriver);
 		}else if(System.getProperty("browser").equalsIgnoreCase("iexplorer")){
 			newDriver = initIEDriver();
-//			newDriver = new InternetExplorerDriver();
 			newDriver.get(baseUrl);
 			acc = new ManageAccount(newDriver);
-			
-//			acc.signOut();
 		}
-
 		acc.signIn(User2, Pass2);
 		Utils.pause(2000);
 	}

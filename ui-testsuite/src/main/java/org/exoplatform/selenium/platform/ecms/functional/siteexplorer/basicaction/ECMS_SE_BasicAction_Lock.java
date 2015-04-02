@@ -529,7 +529,7 @@ public class ECMS_SE_BasicAction_Lock extends PlatformBase {
 		info("Create new web content");
 		actBar.goToAddNewContent();
 		cTemplate.createNewWebContent(WEB_CONTENT, WEB_CONTENT_CONTENT, "", "", "", "");
-		driver.navigate().refresh();
+
 		info("Create child node is file document");
 		actBar.goToAddNewContent();
 		cTemplate.createNewWebContent(WEB_CONTENT2, WEB_CONTENT_CONTENT2, "", "", "", "");

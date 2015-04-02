@@ -38,10 +38,11 @@ public class ECMS_SE_FileManagementView_Actions_CreateEditDeleteNode extends Pla
 
 		info("Config New Content on action bar for admin view if it is not available on action bar");
 		navToolBar.goToPersonalDocuments();
-
+		actBar.goToViewMode("Admin");
 		actBar.addItem2ActionBar("addDocument", actBar.ELEMENT_NEW_CONTENT_LINK, "Admin", "Admin");
 
 		actBar.chooseDrive(ecms.ELEMENT_PERSONAL_DRIVE);
+		actBar.goToViewMode("Admin");
 	}
 
 	@AfterMethod
@@ -297,7 +298,7 @@ public class ECMS_SE_FileManagementView_Actions_CreateEditDeleteNode extends Pla
 	 */
 	@Test
 	public void test14_EditIllustratedWebContent(){
-		String Illustrated_WC_Name="Illustrated_WC_case_78957";
+		String Illustrated_WC_Name="Illustrated_WC_case_101548";
 		String Illustrated_WC_content= "Content Of Illustrated_WC";
 		String path2Image = "TestData/Winter.jpg";
 		String Illustrated_WC_Edited_content= "Edited: Content Of Illustrated_WC";
@@ -305,7 +306,6 @@ public class ECMS_SE_FileManagementView_Actions_CreateEditDeleteNode extends Pla
 		info("Edit illustrated web content");
 		actBar.goToAddNewContent();
 		conTemp.createNewIllustratedWebContent(Illustrated_WC_Name, Illustrated_WC_content, path2Image, "", "", "", "");
-
 		conTemp.editIllustratedWebContent(null, Illustrated_WC_Edited_content, "", "", "", "", "");
 
 		waitForTextPresent(Illustrated_WC_Edited_content);

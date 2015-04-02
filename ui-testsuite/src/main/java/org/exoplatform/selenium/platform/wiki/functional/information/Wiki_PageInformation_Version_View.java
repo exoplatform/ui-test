@@ -1,15 +1,11 @@
 package org.exoplatform.selenium.platform.wiki.functional.information;
 
 import static org.exoplatform.selenium.TestLogger.info;
-
-import java.util.Set;
-
 import org.exoplatform.selenium.Button;
 import org.exoplatform.selenium.Utils;
 import org.exoplatform.selenium.platform.ManageAccount;
 import org.exoplatform.selenium.platform.wiki.Version;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Cookie;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -68,9 +64,9 @@ public class Wiki_PageInformation_Version_View extends Version{
 
 		editWikiPage(dataInfo[4], dataInfo[5], 0);
 
-	//	click(By.xpath("//*[text()='View Page History']"));
+		//	click(By.xpath("//*[text()='View Page History']"));
 		goToRevisionsPage();
-		
+
 		viewVersion("3");
 
 		waitForTextPresent(dataInfo[5]);
@@ -108,7 +104,7 @@ public class Wiki_PageInformation_Version_View extends Version{
 		editWikiPage(dataInfo[4], dataInfo[5], 0);
 
 		goToRevisionsPage();
-		
+
 		viewVersion("1");
 
 		waitForTextPresent(dataInfo[1]);
@@ -146,9 +142,9 @@ public class Wiki_PageInformation_Version_View extends Version{
 
 		editWikiPage(dataInfo[4], dataInfo[5], 0);
 
-	
+
 		goToRevisionsPage();
-		
+
 		viewVersion("1");
 
 		waitForTextPresent(dataInfo[1]);
@@ -270,11 +266,11 @@ public class Wiki_PageInformation_Version_View extends Version{
 
 		goToRevisionsPage();
 
-		
+
 		goToWiki();
-		
+
 		click(By.linkText(dataInfo[2]));
-		
+
 		deleteCurrentWikiPage();
 	}
 
@@ -297,50 +293,24 @@ public class Wiki_PageInformation_Version_View extends Version{
 
 		info("Step 1: Create new Wiki page");
 		goToWiki();
-		
 		addBlankWikiPage(dataInfo[1], dataInfo[2], 0);
-		
 		editWikiPage(dataInfo[2], dataInfo[3], 0);
-		
+
 		info("Step 2: Edit revision of Wiki page");
-
-		Set<Cookie> cookies1 = getBrowserCookies();
-
-		String handlesBefore = driver.getWindowHandle();
-		
-		openNewBrowser();
-
 		goToWikiPage(dataInfo[2], ManageAccount.userType.PUBLISHER);
-		
 		goToRevisionsPage();
-		
 		waitForAndGetElement(ELEMENT_CURRENT_VERSION.replace("${version}", "2"));
 
-		Set<Cookie> cookies2 = getBrowserCookies();
-
-		String handlesAfter = driver.getWindowHandle();
-
-		backToPreviousBrowser(cookies1, handlesBefore);
-
+		goToWikiPage(dataInfo[2], ManageAccount.userType.ADMIN);
 		editWikiPage(dataInfo[4], dataInfo[5], 0);
-		
+
 		info("Step 3: Open new browser to confirm page revision");
-
-		backToPreviousBrowser(cookies2, handlesAfter);
-
-		goToWiki();
-
+		goToWikiPage(dataInfo[4], ManageAccount.userType.PUBLISHER);
 		goToWikiPage(dataInfo[4]);
-
 		goToRevisionsPage();
-
-		if(isElementNotPresent(ELEMENT_VERSION_LINK.replace("{$version}","2")))
-			waitForAndGetElement(ELEMENT_VERSION_LINK_AUX.replace("{$version}","2"));
-		
 		waitForAndGetElement(ELEMENT_CURRENT_VERSION.replace("${version}", "3"));
 
-		backToPreviousBrowser(cookies1, handlesBefore);
-
+		goToWikiPage(dataInfo[4], ManageAccount.userType.ADMIN);
 		deleteCurrentWikiPage();
 	}	
 }

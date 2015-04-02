@@ -1,0 +1,32 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="Wiki Functional Test" verbose="1" preserve-order="true">
+	<test name="wiki-func-basicaction" enabled="true">
+		<groups>
+			<run>
+				<exclude name="pending" />
+			</run>
+		</groups>
+		<classes>
+			<class
+				name="org.exoplatform.selenium.platform.wiki.functional.basicaction.Wiki_BasicAction_Add" />
+			<class
+				name="org.exoplatform.selenium.platform.wiki.functional.basicaction.Wiki_BasicAction_Delete" />
+			<class
+				name="org.exoplatform.selenium.platform.wiki.functional.basicaction.Wiki_BasicAction_Edit" />
+			<class
+				name="org.exoplatform.selenium.platform.wiki.functional.basicaction.Wiki_BasicAction_Intergration" />
+			<class
+				name="org.exoplatform.selenium.platform.wiki.functional.basicaction.Wiki_BasicAction_Move_MoveControl" />
+			<class
+				name="org.exoplatform.selenium.platform.wiki.functional.basicaction.Wiki_BasicAction_MoveAPage" />
+			<class
+				name="org.exoplatform.selenium.platform.wiki.functional.basicaction.Wiki_BasicAction_Move_MoveLayout" />
+			<class
+				name="org.exoplatform.selenium.platform.wiki.functional.basicaction.Wiki_BasicAction_Permanlink" />
+		</classes>
+	</test>
+	<listeners>
+		<listener class-name="org.exoplatform.selenium.TestReportListener" />
+	</listeners>
+</suite>

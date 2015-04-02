@@ -30,13 +30,6 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-
-/**
- * Created by The eXo Platform SAS
- * Author : Hoang Manh Dung
- *          dunghm@exoplatform.com
- * Dec 10, 2012  
- */
 public class Wiki_BasicAction_Add extends ManageDraft{
 
 	ManageAccount magAcc;
@@ -255,16 +248,13 @@ public class Wiki_BasicAction_Add extends ManageDraft{
 	 */ 
 	@Test
 	public void test08_CancelAddNewPage(){
-		String title = "TestCase 008";
+		String title = "TestCase 69700";
 		String content = title + " Content";
 		int mode = 0;   
 		//Cancel creating a new wiki page
 		goToWiki();
 		addBlankWikiPage(title, content, mode, true);
-		waitForTextNotPresent(title);
-
-		//Reset data
-		//deleteCurrentWikiPage();
+		waitForElementNotPresent(ELEMENT_NODE_WIKI_PAGE.replace("{$node}", title));
 	}
 
 	/**
@@ -641,7 +631,7 @@ public class Wiki_BasicAction_Add extends ManageDraft{
 		- This page is listed with page containing the link		*/
 		goToWiki();
 		addBlankWikiPage(pageLink, content, 0);
-		Utils.pause(500);
+		goToWiki();
 		goToAddBlankPage();
 		addWikiPageRichText(title, "");
 		insertPageLink2WikiPage(true, pageLink, label, "Go to pageLink", true);
@@ -656,8 +646,8 @@ public class Wiki_BasicAction_Add extends ManageDraft{
 		- Show page successfully		*/ 
 		Utils.pause(500);
 		goToWikiPage("Wiki Home/"+title);
-		waitForAndGetElement(By.linkText(label));
 		click(By.linkText(label));
+		waitForTextPresent(content);
 
 		//Delete data test
 		goToWikiPage("Wiki Home/"+title);
@@ -997,7 +987,7 @@ public class Wiki_BasicAction_Add extends ManageDraft{
 	 */
 	@Test
 	public  void test28_CreateNewPageUsingExistingTemplate() {
-		info("Test 11 Create new page using existing template");
+		info("Test 28 Create new page using existing template");
 		String title1 = "Case 69720 Two Column layout";
 		String title2 = "Case 69720 Three Column layout";
 		String title3 = "Case 69720 Status Meeting";

@@ -146,7 +146,7 @@ public class ECMS_SiteExplorer_OtherChecks extends PlatformBase {
 		click(pdriver);
 		info("go to the driver");
 		//check for initialed folder 
-		waitForAndGetElement((ELEMENT_NODE_LINK).replace("${nodeLabel}", "groups"));
+		waitForAndGetElement((ELEMENT_NODE_LINK).replace("${nodeLabel}", "Groups"));
 		waitForAndGetElement((ELEMENT_NODE_LINK).replace("${nodeLabel}", "sites"));
 		waitForAndGetElement((ELEMENT_NODE_LINK).replace("${nodeLabel}", "tags"));
 		//check for actions
@@ -156,7 +156,7 @@ public class ECMS_SiteExplorer_OtherChecks extends PlatformBase {
 		navToolbar.goToContentAdministration();
 		click(By.xpath("//*[text()='Explorer']"));
 		click(By.xpath("//*[@class='uiIconEcmsDriveManager uiIconEcmsLightGray']"));
-		waitForAndGetElement("//*[@data-original-title='Collaboration']/../..//*[@data-original-title='*:/platform/administrators,*:/platform/web-contributors']");
+		waitForAndGetElement("//*[@data-original-title='Collaboration']/../..//*[@data-original-title='*:/platform/web-contributors,*:/platform/administrators']");
 		info("Test Collaboration drive succeed");
 	}
 
@@ -221,7 +221,7 @@ public class ECMS_SiteExplorer_OtherChecks extends PlatformBase {
 		navToolbar.goToContentAdministration();
 		click(By.xpath("//*[text()='Explorer']"));
 		click(By.xpath("//*[@class='uiIconEcmsDriveManager uiIconEcmsLightGray']"));
-		waitForAndGetElement(By.xpath("//*[@data-original-title='Personal Documents']/../..//*[@data-original-title=' /Users /${userId} /Private']"));
+		waitForAndGetElement(By.xpath("//*[@data-original-title='Personal Documents']/../..//*[@data-original-title='*:/platform/users']"));
 		info("Test Personal document succeed");
 	}
 

@@ -85,7 +85,7 @@ public class RichTextMode extends Template {
 	public By ELEMENT_CODE_LANGUAGE_INPUT = By.id("pd-language-input");
 	public By ELEMENT_CODE_TITLE_INPUT = By.id("pd-title-input");
 	public By ELEMENT_CODE_CONTENT_INPUT = By.id("pd-content-input");
-	public String ELEMENT_MACRO_CODE = "//div[@class='box code' and contains(.,'${macro}')]";
+	public String ELEMENT_MACRO_CODE = "//div[contains(@class,'box') and contains(.,'${macro}')]";
 
 	//Macro: Color
 	public By ELEMENT_COLOR_TEXTBOX = By.id("pd-name-input");

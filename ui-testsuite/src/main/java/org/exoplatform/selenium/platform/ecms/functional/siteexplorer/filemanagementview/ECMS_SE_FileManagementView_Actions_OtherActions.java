@@ -68,7 +68,7 @@ public class ECMS_SE_FileManagementView_Actions_OtherActions extends PlatformBas
 	 * Step 2: Create nodes
 	 * Step 3: Add parent and child nodes to favorite
 	 */
-	@Test (groups ="ERROR")
+	@Test
 	public void test01_AddToFavoriteAParentAndChildSelection(){
 		/*Declare variables*/
 		String parentDocument = "addtofavoriteparent1";
@@ -208,23 +208,18 @@ public class ECMS_SE_FileManagementView_Actions_OtherActions extends PlatformBas
 
 		//Click on [Admin] view icon or [List] view icon
 		actBar.goToViewMode("Admin");
-		//actBar.goToViewMode("List");
 
 		/*Step 2: Select a document mode*/
 		//Create a document
 		info("-- Create a document --");
-		//		actBar.goToAddNewContent();
-		//		cTemplate.createNewFile(dnode, dnode, dnode);
+		actBar.goToAddNewContent();
+		cTemplate.createNewFile(dnode, dnode, dnode);
 
 		//Select a node
 		actBar.goToNodeByAddressPath("/");
 		info("-- Select a node --");
 		Utils.pause(4000);
-		//		check(By.xpath(siteExp.ELEMENT_SELECT_CHECKBOX.replace("${name}", dnode)), 2);
-		//		Utils.pause(2000);
-		//		uncheck(By.xpath(siteExp.ELEMENT_SELECT_CHECKBOX.replace("${name}", dnode)), 2);
-		//		Utils.pause(2000);
-		click(By.xpath("//*[@class='rowView fileViewRowView Normal clearfix' and contains(., 'test03_HideActionsOfANode')]"));
+		check(By.xpath(siteExp.ELEMENT_SELECT_CHECKBOX.replace("${name}", dnode)), 2);
 		Utils.pause(2000);
 
 		info("--Verify actions for this node are displayed on top of the top action bar --");
@@ -245,6 +240,7 @@ public class ECMS_SE_FileManagementView_Actions_OtherActions extends PlatformBas
 		info("--Verify display action add to favorite --");
 		waitForAndGetElement(actBar.ELEMENT_ADD_TO_FAVORITE_NODE);
 		info("--Verify display action download --");
+		click(actBar.ELEMENT_MORE_LINK);
 		waitForAndGetElement(actBar.ELEMENT_DOWNLOAD_NODE);
 		info("--Verify display action copy to url --");
 		waitForAndGetElement(actBar.ELEMENT_COPY_TO_URL_NODE);
@@ -293,8 +289,8 @@ public class ECMS_SE_FileManagementView_Actions_OtherActions extends PlatformBas
 	@Test
 	public void test04_HideFolderChildrenByClickingOnArrow(){
 		/*Declare variables*/
-		String parentFolder = "parentfolder04";
-		String childDocument = "childdocument04";
+		String parentFolder = "parentfolder745041";
+		String childDocument = "childdocument745041";
 		/*Step 1: Show sub-nodes of a node*/
 		//Add icon "new content" to action bar
 		navToolBar.goToPersonalDocuments();
@@ -321,8 +317,8 @@ public class ECMS_SE_FileManagementView_Actions_OtherActions extends PlatformBas
 		//select parent and child node
 		info("-- Select parent and child node --");
 		actBar.goToNodeByAddressPath("//");
-
-		String beforePath = waitForAndGetElement(actBar.ELEMENT_ADDRESS_BAR).getAttribute("value").substring(1);
+		Utils.pause(1000);
+		String beforePath = waitForAndGetElement(actBar.ELEMENT_ADDRESS_BAR).getAttribute("value");
 		info("before path = " + beforePath);
 
 		//Click on triangle icon beside a document/ folder
@@ -446,8 +442,8 @@ public class ECMS_SE_FileManagementView_Actions_OtherActions extends PlatformBas
 	@Test
 	public void test06_UnlockAParentAndChildSelection(){
 		/*Declare variables*/
-		String parentFolder = "parentfolder06";
-		String childDocument = "childdocument06";
+		String parentFolder = "parentfolder74536";
+		String childDocument = "childdocument74536";
 		/*Step 1: Open File Management View*/
 		//Add icon "new content" to action bar
 		navToolBar.goToPersonalDocuments();
@@ -478,6 +474,7 @@ public class ECMS_SE_FileManagementView_Actions_OtherActions extends PlatformBas
 		/*Step 2: Lock both of parent and child nodes*/		
 		//Click on triangle icon beside a document/ folder
 		info("-- Click on triangle icon beside a document/ folder --");
+		click(By.xpath(siteExp.ELEMENT_ARROW_RIGHT.replace("${nodeName}", parentFolder)),2);
 		click(By.xpath(siteExp.ELEMENT_ARROW_RIGHT.replace("${nodeName}", parentFolder)),2);
 		waitForAndGetElement(ecms.ELEMENT_NODE_ADMIN_VIEW.replace("${nodeName}", childDocument));
 
@@ -552,8 +549,8 @@ public class ECMS_SE_FileManagementView_Actions_OtherActions extends PlatformBas
 	@Test
 	public void test08_AddSymlinkTAParentAndChildSelection(){
 		/*Declare variables*/
-		String parentFolder = "parentfolder08";
-		String childDocument = "childdocument08";
+		String parentFolder = "parentfolder778222";
+		String childDocument = "childdocument778222";
 		By ELEMENT_PARENT_LINK = By.xpath(ecms.ELEMENT_DOCUMENT_NODE_LIST.replace("${node}", parentFolder+".lnk"));
 		By ELEMENT_CHILD_LINK = By.xpath(ecms.ELEMENT_DOCUMENT_NODE_LIST.replace("${node}", childDocument+".lnk"));
 
@@ -594,8 +591,8 @@ public class ECMS_SE_FileManagementView_Actions_OtherActions extends PlatformBas
 
 		//Check on checkboxes at the right of child and parent nodes to select them
 		info("-- Check on checkboxes at the right of child and parent nodes to select them --");
-		click(By.xpath(siteExp.ELEMENT_SELECT_CHECKBOX.replace("${name}", parentFolder)), 2);
-		click(By.xpath(siteExp.ELEMENT_SELECT_CHECKBOX.replace("${name}", childDocument)), 2);
+		check(By.xpath(siteExp.ELEMENT_SELECT_CHECKBOX.replace("${name}", parentFolder)), 2);
+		check(By.xpath(siteExp.ELEMENT_SELECT_CHECKBOX.replace("${name}", childDocument)), 2);
 
 		//From action bar, choose [Add Symlink] icon
 		info("-- From action bar, choose [Add Symlink] icon --");
@@ -890,12 +887,8 @@ public class ECMS_SE_FileManagementView_Actions_OtherActions extends PlatformBas
 		//Check on checkboxes at the right of 2 or more nodes to select them
 		info("-- Check on checkboxes at the right of 2 or more nodes to select them --");
 		check(By.xpath(siteExp.ELEMENT_SELECT_CHECKBOX.replace("${name}", folder1)), 2);
-		WebElement thisElement = driver.findElement(By.xpath(siteExp.ELEMENT_SELECT_CHECKBOX.replace("${name}", folder1)));
-		assert (thisElement.isSelected());
-		click(By.xpath("//*[@class='rowView fileViewRowView Normal clearfix' and contains(., 'test11_ClearSelection_2')]"));
-		thisElement = driver.findElement(By.xpath(siteExp.ELEMENT_SELECT_CHECKBOX.replace("${name}", folder2)));
-		assert (thisElement.isSelected());
-
+		check(By.xpath(siteExp.ELEMENT_SELECT_CHECKBOX.replace("${name}", folder2)), 2);
+		
 		//A link [Clear selection] is displayed on the right of the action bar
 		info("-- A link [Clear selection] is displayed on the right of the action bar --");
 		waitForAndGetElement(actBar.ELEMENT_CLEAR_SELECTION);
@@ -910,7 +903,7 @@ public class ECMS_SE_FileManagementView_Actions_OtherActions extends PlatformBas
 		waitForElementNotPresent(actBar.ELEMENT_CLEAR_SELECTION);
 
 		//Nodes are not selected any more
-		thisElement = driver.findElement(By.xpath(siteExp.ELEMENT_SELECT_CHECKBOX.replace("${name}", folder1)));
+		WebElement thisElement = driver.findElement(By.xpath(siteExp.ELEMENT_SELECT_CHECKBOX.replace("${name}", folder1)));
 		assert (!thisElement.isSelected());
 		thisElement = driver.findElement(By.xpath(siteExp.ELEMENT_SELECT_CHECKBOX.replace("${name}", folder2)));
 		assert (!thisElement.isSelected());
@@ -1178,7 +1171,6 @@ public class ECMS_SE_FileManagementView_Actions_OtherActions extends PlatformBas
 
 		//delete file on computer
 		deleteFile("TestOutput/"+"sysview.xml");
-		assert (!checkFileExisted("sysview.xml"));
 	}
 
 	/**

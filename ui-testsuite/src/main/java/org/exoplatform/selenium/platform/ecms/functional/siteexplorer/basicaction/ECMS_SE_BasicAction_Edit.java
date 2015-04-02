@@ -178,7 +178,7 @@ public class ECMS_SE_BasicAction_Edit extends PlatformBase {
 		String newDATA="new data 03";
 
 		//create a content in acme web contents
-		ecms.goToNode("acme/web contents");
+		ecms.goToNode("intranet/web contents");
 		actBar.goToAddNewContent();
 		cTemplate.createNewWebContent(DATA_FILE_TITLE_03, DATA_FILE_TITLE_03, "", "", "", "");
 		

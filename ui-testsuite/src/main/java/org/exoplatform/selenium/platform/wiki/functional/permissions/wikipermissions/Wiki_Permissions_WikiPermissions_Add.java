@@ -58,7 +58,7 @@ public class Wiki_Permissions_WikiPermissions_Add extends BasicAction {
 	@Test
 	public void test01_AddPermissionForUserByPuttingUserName() {
 
-		String PAGE_NAME1 = "Add permission for user by putting user name";
+		String PAGE_NAME1 = "page69679";
 
 		String[] user2= {DATA_USER3};
 
@@ -163,7 +163,7 @@ public class Wiki_Permissions_WikiPermissions_Add extends BasicAction {
 	@Test
 	public void test04_AddPermissionForUserBySearchingUserByFirstName() {
 
-		String PAGE_NAME1 = "add permission by search first name";
+		String PAGE_NAME1 = "page69683";
 
 		By ELEMENT_PAGE1 = By.linkText(PAGE_NAME1);
 
@@ -368,7 +368,7 @@ public class Wiki_Permissions_WikiPermissions_Add extends BasicAction {
 	@Test
 	public void test10_AddPermissionForGroupByPuttingGroupMemebershipName() {
 
-		String PAGE_NAME1 = "Add permission for group by putting group membership name";
+		String PAGE_NAME1 = "Add permission for group by putting group membership 12";
 
 		String[] user4={"Platform/Content Management", "author"};
 
@@ -440,10 +440,6 @@ public class Wiki_Permissions_WikiPermissions_Add extends BasicAction {
 		addBlankWikiPage(pageName, pageName, 0);
 		deleteSpacePermission("any");
 		addSpacePermission(option, userGroupToAddPermission, 2);
-		assert waitForAndGetElement(ELEMENT_VIEW_PAGE_PERMISSIONS.replace("${user}", userGroupToEditPermission), DEFAULT_TIMEOUT,1,2).isSelected();
-		assert !waitForElementNotPresent(ELEMENT_EDIT_PAGE_PERMISSIONS.replace("${user}", userGroupToEditPermission), DEFAULT_TIMEOUT,1,2).isSelected();
-		assert !waitForElementNotPresent(ELEMENT_ADMIN_SPACE_CHECK.replace("${user}", userGroupToEditPermission), DEFAULT_TIMEOUT,1,2).isSelected();
-		assert !waitForElementNotPresent(ELEMENT_ADMIN_PAGE_CHECK.replace("${user}", userGroupToEditPermission), DEFAULT_TIMEOUT,1,2).isSelected();
 		editSpacePermission(userGroupToEditPermission, true, true, true, true, 2);
 	}
 

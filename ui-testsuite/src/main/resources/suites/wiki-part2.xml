@@ -1,22 +1,6 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
 <suite name="Wiki Functional Test" verbose="1" preserve-order="true">
-	<test name="wiki-func-search" enabled="true">
-		<groups>
-			<run>
-				<exclude name="pending" />
-			</run>
-		</groups>
-		<classes>
-			<class
-				name="org.exoplatform.selenium.platform.wiki.functional.search.Wiki_Advanced_Search" />
-			<class
-				name="org.exoplatform.selenium.platform.wiki.functional.search.Wiki_Quick_Search" />
-			<class
-				name="org.exoplatform.selenium.platform.wiki.functional.search.Wiki_Space_Switcher" />
-		</classes>
-	</test>
-
 	<test name="wiki-func-spacepermission" enabled="true">
 		<groups>
 			<run>
@@ -71,6 +55,22 @@
 		</classes>
 	</test>
 
+	<test name="wiki-func-search" enabled="true">
+		<groups>
+			<run>
+				<exclude name="pending" />
+			</run>
+		</groups>
+		<classes>
+			<class
+				name="org.exoplatform.selenium.platform.wiki.functional.search.Wiki_Advanced_Search" />
+			<class
+				name="org.exoplatform.selenium.platform.wiki.functional.search.Wiki_Quick_Search" />
+			<class
+				name="org.exoplatform.selenium.platform.wiki.functional.search.Wiki_Space_Switcher" />
+		</classes>
+	</test>
+	
 	<listeners>
 		<listener class-name="org.exoplatform.selenium.TestReportListener" />
 	</listeners>

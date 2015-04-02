@@ -90,12 +90,12 @@ public class WikiBase extends PlatformBase{
 	public final By ELEMENT_TITLE_WIKI_HOME_LINK = By.xpath("//*[@class='titleWikiBox']/*[contains(text(), 'Wiki Home')]");
 
 	public final String ELEMENT_PAGE_NOT_FOUND = "//h3[text()='Page Not Found']";
-	public final String ELEMENT_NODE_WIKI_PAGE = "a[href$= '{$node}']";
+	public final String ELEMENT_NODE_WIKI_PAGE = "//*[@class='wikiBox']//a[contains(text(), '{$node}')]";
 
 	//Space Switcher
 	public final By ELEMENT_SPACE_SWITCHER_BREADCRUMB = By.id("DisplayModesDropDown");
-	public final By ELEMENT_SPACE_SWITCHER_INPUT = By.xpath("//*[@id='uiSpaceSwitcher_BreadCrumb']//input[@class='spaceSearchText lostFocus']") ;
-	public final By ELEMENT_SPACE_SWITCHER_INPUT_FOCUS = By.xpath("//*[@id='uiSpaceSwitcher_BreadCrumb']//input[@class='spaceSearchText focus']") ;
+	public final By ELEMENT_SPACE_SWITCHER_INPUT = By.xpath("//*[@id='uiSpaceSwitcher_BreadCrumb']//input[contains(@class,'spaceSearchText')]") ;
+	public final By ELEMENT_SPACE_SWITCHER_INPUT_FOCUS = By.xpath("//*[@id='uiSpaceSwitcher_BreadCrumb']//input[contains(@class,'spaceSearchText')]") ;
 	public final By ELEMENT_SPACE_SWITCHER_PLACEHOLDER = By.xpath("//*[contains(text(),'Filter Spaces')]");
 	public final String ELEMENT_SPACE_SWITCHER_SELECT = "//a[text() = '${spaceName}']";
 	public final String ELEMENT_CURRENT_SPACE_SWITCHER_SELECT= "//*[@id='uiSpaceSwitcher_BreadCrumb']//span[text()='${name}']";
@@ -122,7 +122,7 @@ public class WikiBase extends PlatformBase{
 	public final By ELEMENT_COMMENT_TEXTBOX = By.id("Comment");
 	public final By ELEMENT_SAVE_BUTTON_ADD_PAGE = By.id("UISubmitToolBarUpper_SavePage_");
 	//public final By ELEMENT_SAVE_BUTTON_ADD_PAGE = By.xpath("//div[@id = 'UISubmitToolBarUpper']//button[@id = 'UISubmitToolBarUpper_SavePage_']");
-	public final By ELEMENT_CANCEL_BUTTON_ADD_PAGE = By.id("UISubmitToolBarBottom_Cancel_");
+	public final By ELEMENT_CANCEL_BUTTON_ADD_PAGE = By.id("UISubmitToolBarUpper_Cancel_");
 	public final By ELEMENT_CONFIRM_BUTTON_ADD_PAGE = By.xpath("//button[text()='Confirm']");
 	public final By ELEMENT_CANCEL_BUTTON_ADD_PAGE_NULL_TITLE = By.xpath("//button[text()='Cancel']");
 	public final String MESSAGE_PAGE_ALREADY_EXISTS = "The page title already exists. Please select another one.";
@@ -265,7 +265,7 @@ public class WikiBase extends PlatformBase{
 
 	/*------------------------Permission space--------------------------------*/
 	public final By ELEMENT_PERMISSION_LINK=By.linkText("Permission");
-	public final String MSG_PERMISSION_SAVE = "The permission setting has been saved successfully.";
+	public final String MSG_PERMISSION_SAVE = "The permission setting has been saved successfully";
 	public final String ELEMENT_EDIT_PAGE_CHECK = "//*[contains(text(), '{$user}')]/../..//*[@title='Edit Pages']";
 	public final String ELEMENT_VIEW_PAGE_CHECK = "//*[contains(text(), '{$user}')]/../..//*[@title='View Pages']";
 	public final String ELEMENT_ADMIN_PAGE_CHECK = "//*[contains(text(), '{$user}')]/../..//input[contains(@id, 'ADMINPAGE')]";
@@ -371,6 +371,7 @@ public class WikiBase extends PlatformBase{
 			click(ELEMENT_WIKI_LINK);
 		else
 			click(ELEMENT_WIKI_LINK_PLF41);
+		driver.navigate().refresh();
 		waitForAndGetElement(ELEMENT_TITLE_WIKI_HOME_LINK);	
 	}
 
@@ -434,7 +435,7 @@ public class WikiBase extends PlatformBase{
 		ManageAccount.userType usr = (ManageAccount.userType) (user.length > 0 ? user[0] : null);
 
 		if (usr != null){
-			if (isElementNotPresent(ELEMENT_INPUT_USERNAME)){
+			if (waitForAndGetElement(ELEMENT_INPUT_USERNAME,5000,0)!=null){
 				magAcc.signOut();
 			}else{
 				info("-- User.logIn: " + user);
@@ -442,27 +443,17 @@ public class WikiBase extends PlatformBase{
 			magAcc.userSignIn(usr);
 			Utils.pause(1000);
 		}
-		if (waitForAndGetElement(ELEMENT_ADD_PAGE_LINK, 5000, 0) == null){
-			goToWiki();
-		}		
-		//goToWikiPage(wikiPath);
-		driver.navigate().refresh();
-		Utils.pause(2000);
-		//String bExpandIcon = "//*[@class='node']//*[contains(text(), '{$node}')]"; 
+		goToWiki();		
 		String[] nodes = wikiPath.split("/");
 		int length = nodes.length -1;
 		for (int index = 0;index < length;index++)
 		{ 	
+			info("Go to " + nodes[index]);
 			String node = nodes[index];
-			String nodeNext = nodes[index+1];
-
-			//if(waitForAndGetElement(bExpandIcon.replace("{$node}",nodeNext),5000,0) == null){
-			//	click(bExpandIcon.replace("{$node}",node));
-			//}
-			if(waitForAndGetElement(ELEMENT_NODE_WIKI_PAGE.replace("{$node}",nodeNext),5000,0) == null){
+			if(node.contains("Wiki Home"))
+				click(ELEMENT_TITLE_WIKI_HOME_LINK);
+			else
 				click(ELEMENT_NODE_WIKI_PAGE.replace("{$node}",node));
-			}  
-			Utils.pause(100);
 		}
 		String nodeLast = nodes[length];
 		click(ELEMENT_NODE_WIKI_PAGE.replace("{$node}",nodeLast));
@@ -628,9 +619,6 @@ public class WikiBase extends PlatformBase{
 		//By element_wiki = By.xpath(ELEMENT_SPACE_WIKI.replace("${spaceName}", spaceName));
 
 		info("Go to wiki page of space " + spaceName);
-		//mouseOver(ELEMENT_MY_SPACES_LINK, true);
-		//mouseOver(element_space, true);
-		//mouseOverAndClick(element_wiki);
 		Utils.pause(1000);
 		if (isElementNotPresent(ELEMENT_WIKI_LINK_IN_SPACE)){
 			magMember.goToMySpacePage();
@@ -638,7 +626,7 @@ public class WikiBase extends PlatformBase{
 			Utils.pause(2000);
 		}
 		click(ELEMENT_WIKI_LINK_IN_SPACE);
-		waitForAndGetElement(ELEMENT_WIKI_HOME);
+		//waitForAndGetElement(ELEMENT_TITLE_WIKI_HOME_LINK);
 		Utils.pause(1000);
 	}
 
@@ -706,7 +694,7 @@ public class WikiBase extends PlatformBase{
 		} finally {
 			loopCount = 0;
 		}
-		switchToParentWindow();
+		driver.switchTo().defaultContent();
 	}
 
 	/** 

@@ -52,7 +52,7 @@ public class SocialBase extends PlatformBase {
 	public final String ELEMENT_CANCEL_LINK = "//*[@id='UIManagePendingSpaces']//*[text()='${spaceName}']/../../ul//*[text()='Cancel']";
 
 	// Go to My Space -> Search Button
-	public final By ELEMENT_SEARCH_BUTTON = By.id("SearchButton");
+	public final By ELEMENT_SEARCH_BUTTON = By.xpath("//*[contains(@class,'uiIconSearch')]");
 
 	// Go to My Space -> Select a space > click setting icon
 	public final By ELEMENT_SETTINGS = By.xpath("//*[@id='settings']");
@@ -99,7 +99,7 @@ public class SocialBase extends PlatformBase {
 	public String ELEMENT_PROFILE_NAME_LINK = "//a[contains(@class,'CommunityName') and text()='${name}']";
 	public String ELEMENT_PROFILE_FULLNAME = "//div[@id='UIProfile']//h2[contains(text(),'${name}')]";
 	public String ELEMENT_ACTIVITYSTREAM_TITLE = "//div[contains(@id,'ActivityContextBox')]/h5/a[@title='${name}']";
-	public String ELEMENT_ACTION_USER_ON_SPACE = "//a[text()='${spaceName}']/../../..//button[text()='${action}']";
+	public String ELEMENT_ACTION_USER_ON_SPACE = "//a[contains(text(),'${spaceName}')]/../../..//button[text()='${action}']";
 
 	// Activity Stream tab	
 	public final By ELEMENT_ACTIVITY_STREAM_TAB = By.xpath("//div[@id='UIUserNavigationPortlet']//*[contains(text(),'Activities')]");
@@ -316,6 +316,7 @@ public class SocialBase extends PlatformBase {
 	 * @param spaceName : Space name
 	 */
 	public void doAction(String action, String spaceName){
+		info("Do " + action + " " + spaceName);
 		By actionLink = By.xpath(ELEMENT_ACTION_USER_ON_SPACE.replace("${spaceName}", spaceName).replace("${action}", action));
 		waitForAndGetElement(actionLink, DEFAULT_TIMEOUT,1);
 		click(actionLink);

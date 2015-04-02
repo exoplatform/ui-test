@@ -24,14 +24,14 @@ public class DashBoard extends PlatformBase {
 	public  final String MESSAGE_DRAG_GADGETS_HERE = "Drag your gadgets here.";
 	public  final By ELEMENT_ADD_GADGETS_LINK = By.xpath("//a[text()='Add Gadgets']");
 	public 	final By ELEMENT_DASHBOARD_FRAME = By.xpath("//iframe[contains(@id,'remote_iframe_')]");
-
+	public final By ELEMENT_DASHBOARD_WORKSPACE_POPUP_TITLE=By.xpath(".//*[@class='PopupTitle popupTitle'][contains(text(),'Dashboard Workspace')]");
 	// Gadget Directory form
 	public final By ELEMENT_GADGET_URI_INPUT = By.xpath("//input[@id='url']");
 	public final By ELEMENT_ADD_GADGET_BUTTON = By.xpath("//img[@title='Add Gadget']");
 	public final By ELEMENT_GADGET_CONTAINER = By.xpath("//*[@id='GadgetContainer']//*[text()='Drag your gadgets here.']");
 	public final String ELEMENT_GADGET_ON_CONTAINER = "//*[@id='GadgetContainer']//*[text()='${name}']";
 	public final By ELEMENT_CLOSE_ADD_GADGET_WINDOW = By.xpath("//*[@id='UIDashboardPortlet']//*[@title='Close Window']");
-	public final String ELEMENT_GADGET_NAME = "//*[@title='${name}']";
+	public final String ELEMENT_GADGET_NAME = "//*[@class='GadgetTitle' and @title='${name}']";
 	public final String ELEMENT_ACTION_ON_GADGET = "//span[text()='${gadgetTitleDisplay}']/..//*[@data-original-title='${action}']/i";
 	public final By ELEMENT_GADGET_CONTENT_FORM = By.className("UIGadgetContent");
 	public final String ELEMENT_GADGET_TITLE = "//*[@class='gadgetTitle' and text()='${title}']";
@@ -39,7 +39,7 @@ public class DashBoard extends PlatformBase {
 
 	public final By ELEMENT_RSS_READER_EDIT_BUTTON = By.xpath("//span[@class='gadgetTitle' and text()='RSS Reader']/parent::h5[@class='title gadgetControl clearfix']/span[@class='pull-right']//*[@class='uiIconEdit uiIconLightGray']");
 	public final By ELEMENT_RSS_READER_NUM_INPUT = By.id("m_0_0");
-	public final By ELEMENT_RESS_READER_SAVE_BUTTON = By.xpath("//input[@value='#{word.save}']");
+	public final By ELEMENT_RESS_READER_SAVE_BUTTON = By.xpath("//input[@value='Save']");
 
 	/*------------- Data for Dashboard tab --------------------------------*/
 	public final String ELEMENT_DASHBOARD_NEW_ICON = "//*[@id='UITabPaneDashboard']//*[@class='uiIconSimplePlusMini uiIconLightGray']";
@@ -69,7 +69,7 @@ public class DashBoard extends PlatformBase {
 			if(repeat > 5) break;
 		}
 
-		
+
 		if (verify) {
 			waitForAndGetElement(ELEMENT_TAB_LINK.replace("${tabName}", displayName));
 		}
@@ -157,8 +157,8 @@ public class DashBoard extends PlatformBase {
 	public void dragDropGadget(String gadget){
 		info("Drag drop " + gadget + " gadget to dashboard");
 		click(ELEMENT_ADD_GADGETS_LINK);
-		Utils.pause(1000);
-		dragAndDropToObject(By.xpath(ELEMENT_GADGET_NAME.replace("${name}", gadget)), ELEMENT_GADGET_CONTAINER);
+		waitForAndGetElement(ELEMENT_DASHBOARD_WORKSPACE_POPUP_TITLE,2000,1);
+		dragAndDropToObject(By.xpath(ELEMENT_GADGET_NAME.replace("${name}", gadget)), By.xpath("//*[@class='UIColumn'][3]"));
 		Utils.pause(1000);
 		waitForAndGetElement(ELEMENT_GADGET_ON_CONTAINER.replace("${name}", gadget));
 	}

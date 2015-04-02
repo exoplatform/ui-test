@@ -9,6 +9,8 @@
 		</groups>
 		<classes>
 			<class
+				name="org.exoplatform.selenium.platform.ecms.functional.siteexplorer.basicaction.ECMS_SE_BasicAction_Delete" />
+			<class
 				name="org.exoplatform.selenium.platform.ecms.functional.siteexplorer.basicaction.ECMS_SE_BasicAction_AddSymlink" />
 			<class
 				name="org.exoplatform.selenium.platform.ecms.functional.siteexplorer.basicaction.ECMS_SE_BasicAction_Clipboard" />
@@ -16,8 +18,6 @@
 				name="org.exoplatform.selenium.platform.ecms.functional.siteexplorer.basicaction.ECMS_SE_BasicAction_CopyPaste" />
 			<class
 				name="org.exoplatform.selenium.platform.ecms.functional.siteexplorer.basicaction.ECMS_SE_BasicAction_CutPaste" />
-			<class
-				name="org.exoplatform.selenium.platform.ecms.functional.siteexplorer.basicaction.ECMS_SE_BasicAction_Delete" />
 			<class
 				name="org.exoplatform.selenium.platform.ecms.functional.siteexplorer.basicaction.ECMS_SE_BasicAction_Edit" />
 			<class

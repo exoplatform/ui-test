@@ -126,6 +126,7 @@ public class ECMS_SE_FileManagementView_Actions_Select extends PlatformBase{
 
 		//Verify context menu
 		info("Verify menu");
+		waitForAndGetElement(actBar.ELEMENT_MORE_LINK);
 		waitForAndGetElement(actBar.ELEMENT_ECMS_CUT_NODE);
 		waitForAndGetElement(actBar.ELEMENT_ECMS_COPY_NODE);
 		waitForAndGetElement(actBar.ELEMENT_DELETE_NODE);

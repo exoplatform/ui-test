@@ -331,8 +331,8 @@ public class Wiki_Permissions_WikiPermissions_Delete extends WikiBase{
 	public  void test04_DeleteAdminWikiPermissionForAUser() {
 		info("Test 4: Delete Admin Wiki permission for a user");
 		String[] user = {"demo"};
-		String title = "Delete permission 113638";
-		String space = "space113638";
+		String title = "Delete permission 113634";
+		String space = "space1113634";
 
 		spMag.goToAllSpaces();
 		spMag.addNewSpace(space, space);
@@ -722,9 +722,9 @@ public class Wiki_Permissions_WikiPermissions_Delete extends WikiBase{
 	public  void test09_DeleteViewPermissionForAGroup() {
 		info("Test 9: Delete View permission for a group");
 		
-		String[] user = {"/Platform/Content Management"};
-		String title = "Delete permission 113635";
-		String space = "space113635";
+		String[] user = {"Platform/Content Management"};
+		String title = "Delete permission 1136352";
+		String space = "space1136352";
 		
 		spMag.goToAllSpaces();
 		spMag.addNewSpace(space, space);
@@ -801,8 +801,8 @@ public class Wiki_Permissions_WikiPermissions_Delete extends WikiBase{
 		info("Test 10 Delete View permission for a user");
 		
 		String[] user = {"mary"};
-		String title = "Delete permission 113605";
-		String space = "space113605";
+		String title = "Delete permission 1136051";
+		String space = "space1136051";
 		
 		spMag.goToAllSpaces();
 		spMag.addNewSpace(space, space);
