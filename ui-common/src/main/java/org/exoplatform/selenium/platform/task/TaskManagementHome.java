@@ -1,4 +1,4 @@
-package org.exoplatform.selenium.platform.TaskManagement;
+package org.exoplatform.selenium.platform.task;
 
 import static org.exoplatform.selenium.TestLogger.info;
 
@@ -9,7 +9,7 @@ import org.openqa.selenium.WebDriver;
  *
  */
 public class TaskManagementHome extends TaskManagementLocatorObject {
-
+	
 	public TaskManagementHome(WebDriver dr){
 		this.driver=dr;
 	}
@@ -18,6 +18,10 @@ public class TaskManagementHome extends TaskManagementLocatorObject {
 	 */
 	public void goToTasks(){
 		info("--Go to Tasks area--");
+		click(ELEMENT_TASKS_LINK_PLF);
+		if(waitForAndGetElement(ELEMENT_TASKS_PORTLET,5000,0)==null)
+			driver.navigate().refresh();
+		waitForAndGetElement(ELEMENT_TASKS_PORTLET);
 	}
 	
 	/**

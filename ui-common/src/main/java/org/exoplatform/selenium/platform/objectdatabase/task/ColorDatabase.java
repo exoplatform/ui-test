@@ -1,4 +1,4 @@
-package org.exoplatform.selenium.platform.objectdatabase.TaskManagement;
+package org.exoplatform.selenium.platform.objectdatabase.task;
 
 import static org.exoplatform.selenium.TestLogger.info;
 

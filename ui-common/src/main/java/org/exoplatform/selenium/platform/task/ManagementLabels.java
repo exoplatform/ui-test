@@ -1,4 +1,4 @@
-package org.exoplatform.selenium.platform.TaskManagement;
+package org.exoplatform.selenium.platform.task;
 
 import org.openqa.selenium.WebDriver;
 

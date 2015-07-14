@@ -1,10 +1,13 @@
-package org.exoplatform.selenium.platform.TaskManagement;
+package org.exoplatform.selenium.platform.task;
 
 
 import static org.exoplatform.selenium.TestLogger.info;
 
 import org.exoplatform.selenium.Utils;
+
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.Keys;
 
 /**
  * This class will define actions about management tasks
@@ -23,6 +26,7 @@ public class ManagementProjects extends TaskManagementLocatorObject {
 	 */
 	public void goToContMenuProject(){
 		info("Click on + icon to open Context Menu of Projects");
+		click(ELEMENT_LEFT_PANE_PROJECTS_PLUS_MENU,0,true);
 	}
 	
 	/**
@@ -42,6 +46,7 @@ public class ManagementProjects extends TaskManagementLocatorObject {
 		switch(op){
 		case Add_Project:
 			info("Select Add Project option");
+			click(ELEMENT_LEFT_PANE_PROJECTS_ADD,0,true);
 			break;
 		case Show_Hidden_Project:
 			info("Select Show hide Project");
@@ -59,6 +64,7 @@ public class ManagementProjects extends TaskManagementLocatorObject {
 	 */
 	public void goToContMenuGivenProject(String project){
 		info("Right click on a project in the list");
+			clickByJavascript(ELEMENT_LEFT_PANE_PROJECT_MENU.replace("$project", project),2);
 	}
 	
 	/**
@@ -77,7 +83,7 @@ public class ManagementProjects extends TaskManagementLocatorObject {
 	 */
 	public void selectOpContMenuGivenProject(String project,optionContMenuGivenProject op){
 	    goToContMenuGivenProject(project);
-	    switch(op){
+		switch(op){
 	    case Edit:
 	    	info("Select Edit option");
 	    	break;
@@ -92,9 +98,11 @@ public class ManagementProjects extends TaskManagementLocatorObject {
 	    	break;
 	    case Delete:
 	    	info("Select Delete option");
+	    	click(ELEMENT_LEFT_PANE_PROJECT_DELETE.replace("$project", project),0,true);
 	    	break;
 	    case Add_Project:
 	    	info("Select Add Project option");
+	    	click(ELEMENT_LEFT_PANE_PROJECT_ADD.replace("$project", project),0,true);
 	    	break;
 	    default:
 	    	info("No option in the list. Please select correct option");
@@ -128,22 +136,27 @@ public class ManagementProjects extends TaskManagementLocatorObject {
 	 */
 	public void addProject(String title,String des,boolean enableCalendar){
 		info("Create a new project");
-		if(title!=null || title!=""){
-			info("Input title");
-			type(ELEMENT_ADD_PROJECT_TITLE,title,true);
-		}
 		if(des!=null || des!=""){
 			info("Input description");
-			type(ELEMENT_ADD_PROJECT_DES,des,true);
+			type(ELEMENT_ADD_PROJECT_DES_INPUT,des,true);
 		}
+		if(title!=null || title!=""){
+			info("Input title");
+			//type(ELEMENT_ADD_PROJECT_TITLE,title,true);
+			waitForAndGetElement(ELEMENT_ADD_PROJECT_TITLE_INPUT).sendKeys(title);
+	        Utils.pause(500);
+	        driver.findElement(ELEMENT_ADD_PROJECT_TITLE_INPUT).sendKeys(Keys.ENTER);
+		}
+		
 		if(enableCalendar){
 			info("Enable Calendar intergration");
-			check(ELEMETN_ADD_PROJECT_ENABLE_CALENDAR_CHECKBOX,2);
+			check(ELEMENT_ADD_PROJECT_ENABLE_CALENDAR_CHECKBOX,2);
 		}else{
 			info("Disable Calendar intergration");
-			uncheck(ELEMETN_ADD_PROJECT_ENABLE_CALENDAR_CHECKBOX,2);
+			uncheck(ELEMENT_ADD_PROJECT_ENABLE_CALENDAR_CHECKBOX,2);
 		}
-			
+		waitForAndGetElement(ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project", title));
+		waitForAndGetElement(ELEMENT_ADD_PROJECT_DES_TEXT.replace("$des", des));
 	}
 	/**
 	 * Save all changes for adding project
@@ -171,7 +184,7 @@ public class ManagementProjects extends TaskManagementLocatorObject {
 		String[] projects = projectPath.split("/");
 		for(String project:projects){
 			info("Click on "+project+" on left panel");
-			click(ELEMENT_LEFT_PANEL_PROJECT_NAME.replace("$project",project));
+			click(ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project",project));
 		}
 		Utils.pause(2000);
 		
@@ -195,24 +208,24 @@ public class ManagementProjects extends TaskManagementLocatorObject {
 		if(title!=null || title!=""){
 			info("Input title");
 			if(opt.length>0 && opt[0]==true)
-				type(ELEMENT_ADD_PROJECT_TITLE,title,false);//Input a new title with keeping old title
+				type(ELEMENT_ADD_PROJECT_TITLE_INPUT,title,false);//Input a new title with keeping old title
 			else
-				type(ELEMENT_ADD_PROJECT_TITLE,title,true);//Input a new title with clearing all old title
+				type(ELEMENT_ADD_PROJECT_TITLE_INPUT,title,true);//Input a new title with clearing all old title
 		}
 		if(des!=null || des!=""){
 			info("Input description");
 			if(opt.length>0 && opt[0]==true)
-				type(ELEMENT_ADD_PROJECT_DES,des,false);//Input a new description with keeping old description
+				type(ELEMENT_ADD_PROJECT_DES_INPUT,des,false);//Input a new description with keeping old description
 			else 
-				type(ELEMENT_ADD_PROJECT_DES,des,true);//Input a new description with clearing all old description
+				type(ELEMENT_ADD_PROJECT_DES_INPUT,des,true);//Input a new description with clearing all old description
 		}
 		
 		if(opt.length>1 && opt[1]==true){
 			info("Enable Calendar intergration");
-			check(ELEMETN_ADD_PROJECT_ENABLE_CALENDAR_CHECKBOX,2);
+			check(ELEMENT_ADD_PROJECT_ENABLE_CALENDAR_CHECKBOX,2);
 		}else{
 			info("Disable Calendar intergration");
-			uncheck(ELEMETN_ADD_PROJECT_ENABLE_CALENDAR_CHECKBOX,2);
+			uncheck(ELEMENT_ADD_PROJECT_ENABLE_CALENDAR_CHECKBOX,2);
 		}
 	}
 	
@@ -231,13 +244,13 @@ public class ManagementProjects extends TaskManagementLocatorObject {
 	}
 	/**
 	 * Change Project Parent
-	 * @param project
+	 * @param parentPrj
 	 */
-	public void changeParentProject(String project){
+	public void changeParentProject(String parentPrj){
 		info("Click on Parent project field");
-		click(ELEMENT_ADD_PROJECT_PARENT_PROJECT);
-		click(ELEMENT_ADD_PROJECT_PARENT_PROJECT_DROP_MENU.replace("$project",project));
-		Utils.pause(2000);
+		click(ELEMENT_RIGHT_PANE_PARENT_PATH_LINK);
+		click(ELEMENT_RIGHT_PANE_PARENT_PATH_DROPDOWN_MENU.replace("$project",parentPrj));
+		waitForAndGetElement(ELEMENT_RIGHT_PANE_PARENT_PATH_TEXT.replace("$project", parentPrj));
 	}
 	
 	/**
@@ -245,5 +258,39 @@ public class ManagementProjects extends TaskManagementLocatorObject {
 	 */
 	public void shareProject(){
 		
+	}
+	/**
+	 * Delete project
+	 * @param project
+	 * @param subPrj = true if delete also all sub-projects
+	 * 				 = false if not delete
+	 */
+	public void deleteProject(String project,boolean subPrj){
+		if(subPrj){
+			info("also delete all sub-projects");
+			check(ELEMENT_DELETE_PROJECT_DELETE_SUBPRJ_CHECKBOX,2);
+		}else{
+			info("no delete all sub-projects");
+			uncheck(ELEMENT_DELETE_PROJECT_DELETE_SUBPRJ_CHECKBOX,2);
+		}
+		click(ELEMENT_DELETE_PROJECT_CONFIRM_DELETE_BTN);
+		
+	}
+	
+	/**
+	 * get value attribute
+	 * @param locator
+	 * @return data-id of element
+	 */
+	public Integer getDataId(Object locator) {
+		try {
+			return Integer.parseInt(waitForAndGetElement(locator).getAttribute("data-id"));
+		} catch (StaleElementReferenceException e) {
+			checkCycling(e, DEFAULT_TIMEOUT/WAIT_INTERVAL);			
+			Utils.pause(WAIT_INTERVAL);
+			return Integer.parseInt(getValue(locator));
+		} finally {
+			loopCount = 0;
+		}
 	}
 }

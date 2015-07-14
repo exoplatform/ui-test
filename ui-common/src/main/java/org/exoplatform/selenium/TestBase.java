@@ -157,8 +157,10 @@ public class TestBase {
 	
 	//Task Management
 	protected String colorNamefilePath;
-
-
+	protected String welcomeMesFilePath;
+	protected String groupByFilePath;
+	protected String sortByFilePath;
+	
 	protected String notiDesFilePath;
 
 	protected static String ssoType;
@@ -256,6 +258,9 @@ public class TestBase {
 
 	//Task Management
 	public final String DEFAULT_COLOR_FILE_URL="DataDriven/"+"color.xls";
+	public final String DEFAULT_WELCOME_MESSAGE_FILE_URL="DataDriven/"+"welcome_message.xls";
+	public final String DEFAULT_GROUPBY_FILE_URL="DataDriven/"+"task_groupby.xls";
+	public final String DEFAULT_SORTBY_FILE_URL="DataDriven/"+"task_sortby.xls";
 	
 	/*======= Welcome Screen (Term and Conditions) =====*/
 	public final By ELEMENT_FIRSTNAME_ACCOUNT = By.name("firstNameAccount");
@@ -386,8 +391,10 @@ public class TestBase {
 		
 		//Task Management
 		colorNamefilePath =System.getProperty("colorNamefilePath");
-
-
+		welcomeMesFilePath = System.getProperty("welcomeMesFilePath");
+		sortByFilePath = System.getProperty("sortByFilePath");
+		groupByFilePath = System.getProperty("groupByFilePath");
+		
 		if (ssoType==null) ssoType = DEFAULT_SSOTYPE;
 
 		if (nativeEvent==null) nativeEvent = DEFAULT_NATIVE_EVENT;
@@ -474,7 +481,10 @@ public class TestBase {
 		
 		//Task Management
 		if (colorNamefilePath==null) colorNamefilePath=DEFAULT_COLOR_FILE_URL;
-
+		if (welcomeMesFilePath==null) welcomeMesFilePath=DEFAULT_WELCOME_MESSAGE_FILE_URL;
+		if (groupByFilePath == null) groupByFilePath = DEFAULT_GROUPBY_FILE_URL;
+		if (sortByFilePath == null) sortByFilePath = DEFAULT_SORTBY_FILE_URL;
+		
 		userDataFilePath = getAbsoluteFilePath(userDataFilePath);
 		userInfoFilePath = getAbsoluteFilePath(userInfoFilePath);
 		mailSuffixFilePath = getAbsoluteFilePath(mailSuffixFilePath);
@@ -541,6 +551,9 @@ public class TestBase {
 		
 		//Task Management
 		colorNamefilePath = getAbsoluteFilePath(colorNamefilePath);
+		welcomeMesFilePath = getAbsoluteFilePath(welcomeMesFilePath);
+		sortByFilePath = getAbsoluteFilePath(sortByFilePath);
+		groupByFilePath = getAbsoluteFilePath(groupByFilePath);
 	}
 
 	/**
