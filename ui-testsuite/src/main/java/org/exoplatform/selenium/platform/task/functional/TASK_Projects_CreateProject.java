@@ -523,9 +523,8 @@ import org.testng.annotations.*;
 	*<li> Test Case Name: Check manager field.</li>
 	*<li> Pre-Condition: exo-tasks add-on is installed</li>
 	*<li> Post-Condition: </li>
-	* BUG: https://jira.exoplatform.org/browse/TA-134
 	*/
-	@Test (groups = "pending")
+	@Test 
 	public  void test12_CheckManagerField() {
 		info("Test 12 Check manager field");
 		String prj1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();

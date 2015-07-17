@@ -3,6 +3,10 @@ package org.exoplatform.selenium.platform.task;
 
 import static org.exoplatform.selenium.TestLogger.info;
 
+import java.awt.AWTException;
+import java.awt.Robot;
+import java.awt.event.KeyEvent;
+
 import org.exoplatform.selenium.Utils;
 
 import org.openqa.selenium.StaleElementReferenceException;
@@ -89,6 +93,8 @@ public class ManagementProjects extends TaskManagementLocatorObject {
 	    	break;
 	    case Share:
 	    	info("Select Share option");
+	    	click(ELEMENT_LEFT_PANE_PROJECT_SHARE.replace("$project", project));
+	    	
 	    	break;
 	    case Clone:
 	    	info("Select Clone option");
@@ -255,9 +261,36 @@ public class ManagementProjects extends TaskManagementLocatorObject {
 	
 	/**
 	 * Share a Project
+	 * @throws AWTException 
+	 * @user
+	 * 		can be a user/users/group user
+	 * @manager
+	 * 		true if user is setted as manager
+	 * 		false if user is setted as paticipant
 	 */
-	public void shareProject(){
-		
+	public void shareProject(String[] users, boolean manager) {
+		if (manager){
+			
+		}
+		else{
+			for (String user : users) {
+				click(ELEMENT_SHARE_PROJECT_EDIT_PARTICIPANT_ICON);
+				type(ELEMENT_SHARE_PROJECT_EDIT_PARTICIPANT_INPUT,user,false);
+				Robot robot;
+				try {
+					robot = new Robot();
+					robot.delay(1000);
+					robot.keyPress(KeyEvent.VK_ENTER);
+					robot.keyRelease(KeyEvent.VK_ENTER);
+					Utils.pause(2000);
+				} catch (AWTException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			click(ELEMENT_SHARE_PROJECT_EDIT_PARTICIPANT_SAVE_BTN);
+		}
+		click(ELEMENT_CLOSE_BTN);
 	}
 	/**
 	 * Delete project

@@ -32,6 +32,7 @@ import org.exoplatform.selenium.platform.objectdatabase.social.SpaceNavigationDe
 import org.exoplatform.selenium.platform.objectdatabase.social.SpaceRegistrationDatabase;
 import org.exoplatform.selenium.platform.objectdatabase.social.SpaceVisibilityDatabase;
 import org.exoplatform.selenium.platform.objectdatabase.social.SpaceWarningMessageDatabase;
+import org.exoplatform.selenium.platform.objectdatabase.task.ColorDatabase;
 import org.exoplatform.selenium.platform.objectdatabase.task.GroupByDatabase;
 import org.exoplatform.selenium.platform.objectdatabase.task.SortByDatabase;
 import org.exoplatform.selenium.platform.objectdatabase.task.WelcomeMessageDatabase;
@@ -102,6 +103,7 @@ public class TASK_TestConfig_1 extends PlatformBase {
 	WelcomeMessageDatabase welcomeMesData;
 	GroupByDatabase groupByData;
 	SortByDatabase sortByData;
+	ColorDatabase colorData;
 	
 	@BeforeMethod
 	public void setUpBeforeMethod() throws Exception{
@@ -193,6 +195,8 @@ public class TASK_TestConfig_1 extends PlatformBase {
 		groupByData = new GroupByDatabase();
 		groupByData.setGroupByData(groupByFilePath,defaultSheet,isUseFile,jdbcDriver,dbUrl,user,pass,sqlUser);
 		
+		colorData = new ColorDatabase();
+		colorData.setData(colorNamefilePath,defaultSheet,isUseFile,jdbcDriver,dbUrl,user,pass,sqlUser);
 		info("End setUpBeforeMethod");
 	}
 

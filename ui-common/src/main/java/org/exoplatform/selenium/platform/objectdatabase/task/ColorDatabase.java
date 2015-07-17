@@ -7,6 +7,8 @@ import java.util.Random;
 
 import org.exoplatform.selenium.platform.objectdatabase.common.DatabaseResource;
 
+import org.openqa.selenium.WebElement;
+
 public class ColorDatabase {
 	public ArrayList<Integer> type;
 	public ArrayList<String> colorName;
