@@ -10,7 +10,7 @@
 			<class name="org.exoplatform.selenium.platform.task.functional.TASK_TestConfig_1" />
 			<class name="org.exoplatform.selenium.platform.task.functional.TASK_Projects_CreateProject" />
 			<class name="org.exoplatform.selenium.platform.task.functional.TASK_Projects_ProjectOverview" />
-			
+			<class name="org.exoplatform.selenium.platform.task.functional.TASK_Projects_ChangeProjectColor" />
 		</classes>
 	</test>
 	<listeners>

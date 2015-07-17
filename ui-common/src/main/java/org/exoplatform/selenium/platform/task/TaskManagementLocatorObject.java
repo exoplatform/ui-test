@@ -30,6 +30,8 @@ public class TaskManagementLocatorObject extends PlatformBase {
 	public final By ELEMENT_LEFT_PANE_PROJECTS_PLUS_MENU=By.xpath("//*[@class='uiIconLightGray uiIconSimplePlusMini addProject']");
 	public final By ELEMENT_LEFT_PANE_PROJECTS_ADD=By.xpath("//*[@class='uiDropdownMenu']//*[@class='uiIconAddProject uiIconLightGray']");
 	public final By ELEMENT_LEFT_PANE_PROJECTS_SHOWHIDE=By.xpath("//*[@class='uiDropdownMenu']//*[@class='uiIconShowProject uiIconLightGray']");
+	public final String ELEMENT_LEFT_PANE_PROJECT_COLOR = "//*[contains(@class,'project-name')][contains(.,'$project')]/../*[contains(@class,'$color')][contains(@class,'colorPie')]";
+	public final String ELEMENT_LEFT_PANE_PROJECT_NO_COLOR = "//*[contains(@class,'project-name')][contains(.,'$project')]/../*[@class=' colorPie']";
 	
 	//Project area-->Context Menu
 	public final String ELEMENT_LEFT_PANE_PROJECT_MENU="//*[@class='project-name' and contains(.,'$project')]/../*[@class='dropdown-toggle pull-right']/*[@class='uiIconRightMenu uiIconLightGray']";
@@ -41,7 +43,9 @@ public class TaskManagementLocatorObject extends PlatformBase {
 	public final String ELEMENT_LEFT_PANE_PROJECT_CLONE="//*[@class='project-name' and contains(.,'$project')]/..//*[@class='uiIconCloneNode uiIconLightGray']";
 	public final String ELEMENT_LEFT_PANE_PROJECT_DELETE="//*[@class='project-name' and contains(.,'$project')]/..//*[@class='delete-project']/*[@class='uiIconTrash uiIconLightGray']";
 
-
+	//Color
+	public final String ELEMENT_LEFT_PANE_COLOR_TABLE_ITEM=".//*[contains(@class,'project-name')][contains(.,'$project')]/..//*[contains(@class,'$color')]";
+	public final String ELEMENT_LEFT_PANE_COLOR_NO_COLOR = "//*[contains(@class,'project-name')][contains(.,'$project')]/..//li[contains(@class,'noColor changeProjectColor')]";
 	
 	
 	//Labels area
@@ -60,7 +64,8 @@ public class TaskManagementLocatorObject extends PlatformBase {
 	public final By ELEMENT_SORTBY_ICON = By.xpath("//*[@class='actionIcon dropdown-toggle']/*[@class='uiIconSortDown uiIconLightGray']");
 	public final String ELEMENT_SORTBY_ITEM ="//*[@data-original-title='Due date']//../*[contains(.,'$item')]";
 	public final String ELEMENT_GROUPBY_ITEM ="//*[@data-original-title='group By']//../*[contains(.,'$item')]";
-	public final String ELEMENT_TASK_COLOR=".//*[contains(@class,'column-item column-title')][contains(.,'$task')]/..//*[contains(@class,'$color')]";
+	public final String ELEMENT_TASK_COLOR=".//*[contains(@class,'column-item column-title')][contains(.,'$task')]/..//*[contains(@class,'$color')][contains(@class,'project-color')]";
+	public final String ELEMENT_TASK_NO_COLOR=".//*[contains(@class,'column-item column-title')][contains(.,'$task')]/..//*[@class='project-color ']";
 	
 	//Add Task form
 	public final By ELEMENT_ADD_TASK_BTN = By.xpath("//*[@class='btn btn-primary btn-add-task']/*[@class='uiIconSimplePlusMini']");
@@ -108,8 +113,7 @@ public class TaskManagementLocatorObject extends PlatformBase {
 	public final String ELEMENT_SHARE_PROJECT_EDIT_PARTICIPANT_TEXT = "//*[@data-type='participant'][@class='manager']//*[@class='replaceTextArea editable' ]/*[contains(.,'$user')]";
 	public final String ELEMENT_SHARE_PROJECT_EDIT_PARTICIPANT_REMOVE_ICON = "//*[@data-type='participant'][@class='manager']//*[@class='replaceTextArea editable' ]/*[contains(.,'$user')]//*[@class='uiIconClose uiIconLightGray']";
 	
-	//Color
-	public final String ELEMENT_COLOR_TABLE_ITEM=".//*[contains(@class,'project-name')][contains(.,'$project')]/..//*[contains(@class,'$color')]";
+	
 	
 	
 	//Clone project

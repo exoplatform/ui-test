@@ -126,7 +126,7 @@ public class ManagementProjects extends TaskManagementLocatorObject {
 	public void selectColor(String project,String color){
 		goToContMenuGivenProject(project);
 		info("Select "+color+" in color list");
-		click(ELEMENT_COLOR_TABLE_ITEM.replace("$project",project).replace("$color",color));
+		click(ELEMENT_LEFT_PANE_COLOR_TABLE_ITEM.replace("$project",project).replace("$color",color));
 		Utils.pause(2000);
 	}
 	
