@@ -306,7 +306,7 @@ public class ManagementProjects extends TaskManagementLocatorObject {
 			info("no delete all sub-projects");
 			uncheck(ELEMENT_DELETE_PROJECT_DELETE_SUBPRJ_CHECKBOX,2);
 		}
-		click(ELEMENT_DELETE_PROJECT_CONFIRM_DELETE_BTN);
+		click(ELEMENT_DELETE_PROJECT_POPUP_DELETE_BTN);
 		
 	}
 	

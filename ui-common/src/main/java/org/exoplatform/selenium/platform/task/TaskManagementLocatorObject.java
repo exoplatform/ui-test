@@ -125,7 +125,11 @@ public class TaskManagementLocatorObject extends PlatformBase {
 	
 	//Delete project
 	public final By ELEMENT_DELETE_PROJECT_DELETE_SUBPRJ_CHECKBOX=By.xpath(".//*[contains(@class,'checkbox deleteChild')]");
-	public final By ELEMENT_DELETE_PROJECT_CONFIRM_DELETE_BTN=By.xpath("//*[@class='btn btn-primary confirmDelete']");
+	public final String ELEMENT_DELETE_PROJECT_DELETE_SUBPRJ_CHECKBOX_TEXT=".//*[contains(@class,'checkbox deleteChild')]/../*[contains(.,'$mes')]";
+	public final By ELEMENT_DELETE_PROJECT_POPUP_DELETE_BTN=By.xpath("//*[@class='btn btn-primary confirmDelete']");
+	public final By ELEMENT_DELETE_PROJECT_POPUP_TITLE=By.xpath("//*[@class='PopupTitle popupTitle'][contains(.,'Confirmation')]");
+	public final By ELEMENT_DELETE_PROJECT_POPUP_CANCEL_BTN=By.xpath("//*[@class='btn'][contains(.,'Cancel')]");
+	public final String ELEMENT_DELETE_PROJECT_POPUP_MESSAGE="//*[contains(@class,'msg')]/../*[contains(.,'You are about to delete ${project} project and all its tasks. Please confirm')]";
 	
 	//*************************************Labels Management*****************************************//
 	
