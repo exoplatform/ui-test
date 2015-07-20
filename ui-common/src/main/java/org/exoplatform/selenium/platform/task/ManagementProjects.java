@@ -275,7 +275,22 @@ public class ManagementProjects extends TaskManagementLocatorObject {
 	 */
 	public void shareProject(String[] users, boolean manager) {
 		if (manager){
-			
+			for (String user : users) {
+				click(ELEMENT_SHARE_PROJECT_EDIT_MANAGER_ICON);
+				type(ELEMENT_SHARE_PROJECT_EDIT_MANAGER_INPUT,user,false);
+				Robot robot;
+				try {
+					robot = new Robot();
+					robot.delay(1000);
+					robot.keyPress(KeyEvent.VK_ENTER);
+					robot.keyRelease(KeyEvent.VK_ENTER);
+					Utils.pause(2000);
+				} catch (AWTException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			click(ELEMENT_SHARE_PROJECT_EDIT_MANAGER_SAVE_BTN);
 		}
 		else{
 			for (String user : users) {
@@ -295,8 +310,10 @@ public class ManagementProjects extends TaskManagementLocatorObject {
 			}
 			click(ELEMENT_SHARE_PROJECT_EDIT_PARTICIPANT_SAVE_BTN);
 		}
+		Utils.pause(1000);
 		click(ELEMENT_CLOSE_BTN);
 	}
+	
 	/**
 	 * Delete project
 	 * @param project

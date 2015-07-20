@@ -160,6 +160,7 @@ public class TestBase {
 	protected String welcomeMesFilePath;
 	protected String groupByFilePath;
 	protected String sortByFilePath;
+	protected String workFlowFilePath;
 	
 	protected String notiDesFilePath;
 
@@ -261,6 +262,7 @@ public class TestBase {
 	public final String DEFAULT_WELCOME_MESSAGE_FILE_URL="DataDriven/"+"welcome_message.xls";
 	public final String DEFAULT_GROUPBY_FILE_URL="DataDriven/"+"task_groupby.xls";
 	public final String DEFAULT_SORTBY_FILE_URL="DataDriven/"+"task_sortby.xls";
+	public final String DEFAULT_WORKFLOW_FILE_URL="DataDriven/"+"project_workflow.xls";
 	
 	/*======= Welcome Screen (Term and Conditions) =====*/
 	public final By ELEMENT_FIRSTNAME_ACCOUNT = By.name("firstNameAccount");
@@ -394,6 +396,7 @@ public class TestBase {
 		welcomeMesFilePath = System.getProperty("welcomeMesFilePath");
 		sortByFilePath = System.getProperty("sortByFilePath");
 		groupByFilePath = System.getProperty("groupByFilePath");
+		workFlowFilePath = System.getProperty("workFlowFilePath");
 		
 		if (ssoType==null) ssoType = DEFAULT_SSOTYPE;
 
@@ -484,6 +487,7 @@ public class TestBase {
 		if (welcomeMesFilePath==null) welcomeMesFilePath=DEFAULT_WELCOME_MESSAGE_FILE_URL;
 		if (groupByFilePath == null) groupByFilePath = DEFAULT_GROUPBY_FILE_URL;
 		if (sortByFilePath == null) sortByFilePath = DEFAULT_SORTBY_FILE_URL;
+		if (workFlowFilePath == null) workFlowFilePath = DEFAULT_WORKFLOW_FILE_URL;
 		
 		userDataFilePath = getAbsoluteFilePath(userDataFilePath);
 		userInfoFilePath = getAbsoluteFilePath(userInfoFilePath);
@@ -554,6 +558,7 @@ public class TestBase {
 		welcomeMesFilePath = getAbsoluteFilePath(welcomeMesFilePath);
 		sortByFilePath = getAbsoluteFilePath(sortByFilePath);
 		groupByFilePath = getAbsoluteFilePath(groupByFilePath);
+		workFlowFilePath = getAbsoluteFilePath(workFlowFilePath);
 	}
 
 	/**

@@ -11,7 +11,7 @@
 			<class name="org.exoplatform.selenium.platform.task.functional.TASK_Projects_ProjectOverview" />
 			<class name="org.exoplatform.selenium.platform.task.functional.TASK_Projects_ChangeProjectColor" />
 			<class name="org.exoplatform.selenium.platform.task.functional.TASK_Projects_CloneProject" />
-			
+			<class name="org.exoplatform.selenium.platform.task.functional.TASK_Projects_Subproject" />
 		</classes>
 	</test>
 	<listeners>

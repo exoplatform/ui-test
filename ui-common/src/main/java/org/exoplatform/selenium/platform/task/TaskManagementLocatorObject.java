@@ -112,8 +112,8 @@ public class TaskManagementLocatorObject extends PlatformBase {
 	public final String ELEMENT_SHARE_PROJECT_EDIT_MANAGER_REMOVE_ICON = "//*[@data-type='manager'][@class='manager']//*[@class='replaceTextArea editable' ]/*[contains(.,'$user')]//*[@class='uiIconClose uiIconLightGray']";
 	public final String ELEMENT_SHARE_PROJECT_EDIT_PARTICIPANT_TEXT = "//*[@data-type='participant'][@class='manager']//*[@class='replaceTextArea editable' ]/*[contains(.,'$user')]";
 	public final String ELEMENT_SHARE_PROJECT_EDIT_PARTICIPANT_REMOVE_ICON = "//*[@data-type='participant'][@class='manager']//*[@class='replaceTextArea editable' ]/*[contains(.,'$user')]//*[@class='uiIconClose uiIconLightGray']";
-	
-	
+	public final String ELEMENT_SHARE_PROJECT_DISPLAY_MANAGER = "//*[@data-type='manager'][@class='manager']//*[@class='list-users'][contains(.,'$user')]";
+	public final String ELEMENT_SHARE_PROJECT_DISPLAY_PARTICIPANT = "//*[@data-type='participant'][@class='manager']//*[@class='list-users'][contains(.,'$user')]";
 	
 	
 	//Clone project
@@ -219,4 +219,5 @@ public class TaskManagementLocatorObject extends PlatformBase {
 	public final By ELEMENT_RIGHT_PANE_TASK_ARROW_MENU=By.xpath("//*[contains(@class,'dropdown-toggle actionIconSmall')]/*[@class='uiIconArrowDown']");
 	public final By ELEMENT_RIGHT_PANE_TASK_ARROW_MENU_CLONE= By.xpath("//*[contains(@class,'action-clone-task')]/*[@class='uiIconCloneNode']");
 	public final By ELEMENT_RIGHT_PANE_TASK_ARROW_MENU_DELETE= By.xpath("//*[contains(@class,'action-delete-task')]/*[@class='uiIconDelete']");
+	public final String ELEMENT_RIGHT_PANE_TASK_WORKFLOW_DISPLAY = "//*[@class='toDo']/*[@class='uiEditableInline']/*[contains(.,'$flow')]";
 }
