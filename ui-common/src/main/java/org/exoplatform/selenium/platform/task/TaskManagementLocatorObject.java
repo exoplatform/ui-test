@@ -117,7 +117,11 @@ public class TaskManagementLocatorObject extends PlatformBase {
 	
 	
 	//Clone project
-	
+	public final By ELEMENT_CLONE_PROJECT_CLONE_BUTTON = By.xpath("//*[@class='confirmCloneProject uiPopup modal hide fade in']//*[@class='btn btn-primary']");
+	public final By ELEMENT_CLONE_PROJECT_CLONE_TASK_CHECKBOX = By.xpath("//*[@class='confirmCloneProject uiPopup modal hide fade in']//*[@class='checkbox cloneTask']");
+	public final String ELEMENT_CLONE_PROJECT_CLONE_TASK_CHECKBOX_TEXT = "//*[@class='confirmCloneProject uiPopup modal hide fade in']//*[@class='checkbox cloneTask']/../*[contains(.,'$mes')]";
+	public final By ELEMENT_CLONE_PROJECT_CANCEL_BUTTON = By.xpath("//*[@class='confirmCloneProject uiPopup modal hide fade in']//*[@class='btn'][contains(.,'Cancel')]");
+	public final String ELEMENT_CLONE_PROJECT_POPUP_MESSAGE="//*[@data-msg='$mes']/*[contains(.,'$project')]";
 	
 	
 	//Show and Hide project
@@ -127,7 +131,7 @@ public class TaskManagementLocatorObject extends PlatformBase {
 	public final By ELEMENT_DELETE_PROJECT_DELETE_SUBPRJ_CHECKBOX=By.xpath(".//*[contains(@class,'checkbox deleteChild')]");
 	public final String ELEMENT_DELETE_PROJECT_DELETE_SUBPRJ_CHECKBOX_TEXT=".//*[contains(@class,'checkbox deleteChild')]/../*[contains(.,'$mes')]";
 	public final By ELEMENT_DELETE_PROJECT_POPUP_DELETE_BTN=By.xpath("//*[@class='btn btn-primary confirmDelete']");
-	public final By ELEMENT_DELETE_PROJECT_POPUP_TITLE=By.xpath("//*[@class='PopupTitle popupTitle'][contains(.,'Confirmation')]");
+	public final By ELEMENT_CONFIRMATION_POPUP_TITLE=By.xpath("//*[@class='PopupTitle popupTitle'][contains(.,'Confirmation')]");
 	public final By ELEMENT_DELETE_PROJECT_POPUP_CANCEL_BTN=By.xpath("//*[@class='btn'][contains(.,'Cancel')]");
 	public final String ELEMENT_DELETE_PROJECT_POPUP_MESSAGE="//*[contains(@class,'msg')]/../*[contains(.,'You are about to delete ${project} project and all its tasks. Please confirm')]";
 	

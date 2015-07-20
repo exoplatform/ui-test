@@ -69,7 +69,7 @@ import org.testng.annotations.*;
 			- actions : [Delete] [Cancel]*/ 
 		info("delete project");
 		mgProject.selectOpContMenuGivenProject(prj1,optionContMenuGivenProject.Delete);
-		waitForAndGetElement(mgProject.ELEMENT_DELETE_PROJECT_POPUP_TITLE);
+		waitForAndGetElement(mgProject.ELEMENT_CONFIRMATION_POPUP_TITLE);
 		waitForAndGetElement(mgProject.ELEMENT_DELETE_PROJECT_POPUP_CANCEL_BTN);
 		waitForAndGetElement(mgProject.ELEMENT_DELETE_PROJECT_POPUP_DELETE_BTN);
 		waitForAndGetElement(mgProject.ELEMENT_DELETE_PROJECT_POPUP_MESSAGE.replace("${project}",prj1));
@@ -115,7 +115,7 @@ import org.testng.annotations.*;
 			- Cancel dismisses the dialog without making a change*/ 
 		info("click Cancel delete");
 		mgProject.selectOpContMenuGivenProject(prj1,optionContMenuGivenProject.Delete);
-		waitForAndGetElement(mgProject.ELEMENT_DELETE_PROJECT_POPUP_TITLE);
+		waitForAndGetElement(mgProject.ELEMENT_CONFIRMATION_POPUP_TITLE);
 		click(mgProject.ELEMENT_DELETE_PROJECT_POPUP_CANCEL_BTN);
 		waitForAndGetElement(mgProject.ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project", prj1));
 		

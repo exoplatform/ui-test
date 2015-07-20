@@ -75,7 +75,7 @@ public class ManagementProjects extends TaskManagementLocatorObject {
 	 * Define options in Context Menu of a given project in Project list
 	 */
 	public enum optionContMenuGivenProject{
-		Edit,Share,Clone,Hide,Delete,Add_Project;
+		Edit,Share,Clone,Hide,Show,Delete,Add_Project;
 	}
 	
 	/**
@@ -94,13 +94,18 @@ public class ManagementProjects extends TaskManagementLocatorObject {
 	    case Share:
 	    	info("Select Share option");
 	    	click(ELEMENT_LEFT_PANE_PROJECT_SHARE.replace("$project", project));
-	    	
 	    	break;
 	    case Clone:
 	    	info("Select Clone option");
+	    	click(ELEMENT_LEFT_PANE_PROJECT_CLONE.replace("$project", project));
 	    	break;
 	    case Hide:
 	    	info("Select Hide option");
+	    	
+	    	break;
+	    case Show:
+	    	info("Select Show option");
+	    	
 	    	break;
 	    case Delete:
 	    	info("Select Delete option");
@@ -325,5 +330,21 @@ public class ManagementProjects extends TaskManagementLocatorObject {
 		} finally {
 			loopCount = 0;
 		}
+	}
+	/**
+	 * Clone project
+	 * @param project
+	 * @param uncompleteTask = true if clone also uncompleted task
+	 * 						 = false if not
+	 */
+	public void cloneProject(String project, boolean uncompleteTask) {
+	if(uncompleteTask){
+		info("also clone uncompleted task");
+		check(ELEMENT_CLONE_PROJECT_CLONE_TASK_CHECKBOX,2);
+	}else{
+		info("no delete all sub-projects");
+		uncheck(ELEMENT_CLONE_PROJECT_CLONE_TASK_CHECKBOX,2);
+	}
+	click(ELEMENT_CLONE_PROJECT_CLONE_BUTTON);
 	}
 }
