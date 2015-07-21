@@ -214,8 +214,7 @@ import org.testng.annotations.*;
 		mgProject.shareProject(user1, false);
 		
 		/*Step number: 2
-		*Step Name: Step 2: Create sub
-		-project of project A
+		*Step Name: Step 2: Create sub-project of project A
 		*Step Description: 
 			- Add Project from contextual menu of project A: project A1
 		*Input Data: 
@@ -262,7 +261,6 @@ import org.testng.annotations.*;
 		String prj11 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		String task1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		String task11 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
-		String flow = flowData.getFlowByArrayTypeRandom(1);
 		/*Step Number: 1
 		*Step Name: Step 1: Open Tasks page
 		*Step Description: 
@@ -278,7 +276,7 @@ import org.testng.annotations.*;
 		mgProject.addProject(prj1,"", false);
 		info("add task into project 1");
 		mgTask.addTask(prj1, task1);
-		waitForAndGetElement(mgProject.ELEMENT_RIGHT_PANE_TASK_WORKFLOW_DISPLAY.replace("$flow",flow));
+		waitForAndGetElement(mgProject.ELEMENT_RIGHT_PANE_TASK_WORKFLOW_DISPLAY.replace("$flow","To Do"));
 		
 		/*Step number: 2
 		*Step Name: Step 2: Check Sub-projects inherit workflow from their parent
@@ -293,7 +291,7 @@ import org.testng.annotations.*;
 		mgProject.addProject(prj11,"", false);
 		info("add task into project 11");
 		mgTask.addTask(prj11, task11);
-		waitForAndGetElement(mgProject.ELEMENT_RIGHT_PANE_TASK_WORKFLOW_DISPLAY.replace("$flow",flow));
+		waitForAndGetElement(mgProject.ELEMENT_RIGHT_PANE_TASK_WORKFLOW_DISPLAY.replace("$flow","To Do"));
  	
 		info("delete data");
 		mgProject.selectOpContMenuGivenProject(prj1,optionContMenuGivenProject.Delete);

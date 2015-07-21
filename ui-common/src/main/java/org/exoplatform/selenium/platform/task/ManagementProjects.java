@@ -364,4 +364,37 @@ public class ManagementProjects extends TaskManagementLocatorObject {
 	}
 	click(ELEMENT_CLONE_PROJECT_CLONE_BUTTON);
 	}
+	/**
+	 * Click on Bold button
+	 * this function is used for the files has one CKEditor tool
+	 * 
+	 */
+	public void cke_Bold() {
+		info("Bold a text");
+		pressGroupKeysUsingRobot(KeyEvent.VK_CONTROL,KeyEvent.VK_A);
+		click(ELEMENT_CKEDITOR_BOLD);
+		Utils.pause(200);
+	}
+	/**
+	 * Click on Italic button
+	 * this function is used for the files has one CKEditor tool
+	 * 
+	 */
+	public void cke_Italic() {
+		info("Italic a text");
+		pressGroupKeysUsingRobot(KeyEvent.VK_CONTROL,KeyEvent.VK_A);
+		click(ELEMENT_CKEDITOR_ITALIC);
+		Utils.pause(200);
+	}
+	/**
+	 * Click on Number List button
+	 * this function is used for the files has one CKEditor tool
+	 * 
+	 */
+	public void cke_NumberList() {
+		info("NumberList a text");
+		pressGroupKeysUsingRobot(KeyEvent.VK_CONTROL,KeyEvent.VK_A);
+		click(ELEMENT_CKEDITOR_NUMBERLIST);
+		Utils.pause(200);
+	}
 }

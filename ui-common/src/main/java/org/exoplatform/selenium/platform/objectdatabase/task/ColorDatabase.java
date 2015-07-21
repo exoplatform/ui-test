@@ -4,10 +4,8 @@ import static org.exoplatform.selenium.TestLogger.info;
 
 import java.util.ArrayList;
 import java.util.Random;
-
 import org.exoplatform.selenium.platform.objectdatabase.common.DatabaseResource;
 
-import org.openqa.selenium.WebElement;
 
 public class ColorDatabase {
 	public ArrayList<Integer> type;

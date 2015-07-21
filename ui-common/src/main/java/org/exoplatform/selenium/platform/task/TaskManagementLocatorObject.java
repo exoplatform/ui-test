@@ -114,7 +114,10 @@ public class TaskManagementLocatorObject extends PlatformBase {
 	public final String ELEMENT_SHARE_PROJECT_EDIT_PARTICIPANT_REMOVE_ICON = "//*[@data-type='participant'][@class='manager']//*[@class='replaceTextArea editable' ]/*[contains(.,'$user')]//*[@class='uiIconClose uiIconLightGray']";
 	public final String ELEMENT_SHARE_PROJECT_DISPLAY_MANAGER = "//*[@data-type='manager'][@class='manager']//*[@class='list-users'][contains(.,'$user')]";
 	public final String ELEMENT_SHARE_PROJECT_DISPLAY_PARTICIPANT = "//*[@data-type='participant'][@class='manager']//*[@class='list-users'][contains(.,'$user')]";
-	
+	public final By ELEMENT_SHARE_PROJECT_EDIT_MANAGER_SELECT_USER_ICON = By.xpath("//*[@data-type='manager'][@class='manager']//*[@class='uiIconUser uiIconLightGray']");
+	public final By ELEMENT_SHARE_PROJECT_EDIT_MANAGER_SELECT_GROUP_ICON = By.xpath("//*[@data-type='manager'][@class='manager']//*[@class='uiIconGroup uiIconLightGray']");
+	public final By ELEMENT_SHARE_PROJECT_EDIT_PARTICIPANT_SELECT_USER_ICON = By.xpath("//*[@data-type='participant'][@class='manager']//*[@class='uiIconUser uiIconLightGray']");
+	public final By ELEMENT_SHARE_PROJECT_EDIT_PARTICIPANT_SELECT_GROUP_ICON = By.xpath("//*[@data-type='participant'][@class='manager']//*[@class='uiIconGroup uiIconLightGray']");
 	
 	//Clone project
 	public final By ELEMENT_CLONE_PROJECT_CLONE_BUTTON = By.xpath("//*[@class='confirmCloneProject uiPopup modal hide fade in']//*[@class='btn btn-primary']");
@@ -207,6 +210,7 @@ public class TaskManagementLocatorObject extends PlatformBase {
 	public final String ELEMENT_ADD_PROJECT_TITLE_TEXT= ".//*[contains(@class,'addProject')]//*[contains(@data-name,'name')][contains(.,'$title')]";
     public final By ELEMENT_ADD_PROJECT_DES_INPUT=By.xpath(".//*[contains(@class,'addProject')]//*[contains(@name,'description')]");
     public final String ELEMENT_ADD_PROJECT_DES_TEXT=".//*[contains(@class,'addProject')]//*[contains(@data-name,'description')][contains(.,'$des')]";
+    public final String ELEMENT_ADD_PROJECT_DES_CKEDITOR="//*[contains(@class,'addProject')]//*[contains(@data-name,'description')]/ol/li/strong[contains(.,'$des')]";
     public final By ELEMENT_ADD_PROJECT_ENABLE_CALENDAR_CHECKBOX=By.xpath(".//*[contains(@class,'addProject')]//*[contains(@class,'checkbox')]");
     public final By ELEMENT_ADD_PROJECT_ENABLE_CALENDAR=By.xpath(".//*[@class='checkbox']/../*[contains(.,'Enable Calendar Integration')]");
  
@@ -214,10 +218,21 @@ public class TaskManagementLocatorObject extends PlatformBase {
     public final String ELEMENT_RIGHT_PANE_PARENT_PATH_MATCH_VALUE="//*[contains(@class,'uiDropdownMenu dropdown-menu')]//strong[contains(.,'$text')]";
     public final String ELEMENT_RIGHT_PANE_PARENT_PATH_DROPDOWN_MENU="//*[contains(@class,'uiDropdownMenu dropdown-menu')]//a[contains(.,'$project')]";
     public final String ELEMENT_RIGHT_PANE_PARENT_PATH_FULL="//*[contains(@class,'uiDropdownMenu dropdown-menu')]//*[contains(.,'Projects')]/*[contains(.,'$parent')]/li[contains(.,'$child')]";
-	
+	public final By ELEMENT_RIGHT_PANE_EDIT_PROJECT_DES_INPUT = By.xpath("//*[contains(@class,'addProject')]//*[contains(@data-name,'description')]");
     //Task Detail
 	public final By ELEMENT_RIGHT_PANE_TASK_ARROW_MENU=By.xpath("//*[contains(@class,'dropdown-toggle actionIconSmall')]/*[@class='uiIconArrowDown']");
 	public final By ELEMENT_RIGHT_PANE_TASK_ARROW_MENU_CLONE= By.xpath("//*[contains(@class,'action-clone-task')]/*[@class='uiIconCloneNode']");
 	public final By ELEMENT_RIGHT_PANE_TASK_ARROW_MENU_DELETE= By.xpath("//*[contains(@class,'action-delete-task')]/*[@class='uiIconDelete']");
 	public final String ELEMENT_RIGHT_PANE_TASK_WORKFLOW_DISPLAY = "//*[@class='toDo']/*[@class='uiEditableInline']/*[contains(.,'$flow')]";
+	
+	//CKEditor
+	public final By ELEMENT_CKEDITOR_BOLD = By.xpath("//*[@class='cke_button_icon cke_button__bold_icon']");
+	public final By ELEMENT_CKEDITOR_ITALIC = By.xpath("//*[@class='cke_button_icon cke_button__italic_icon']");
+	public final By ELEMENT_CKEDITOR_NUMBERLIST = By.xpath("//*[@class='cke_button_icon cke_button__numberedlist_icon']");
+	public final By ELEMENT_CKEDITOR_IFRAME = By.xpath("//iframe[@class='cke_wysiwyg_frame cke_reset']");
+	
+	//Task Comment
+	public final String ELEMENT_RIGHT_PANE_COMMENT_TEXT = "//*[@class='author'][contains(.,'$user')]/../*[@class='contentComment'][contains(.,'$comment')]";
+	public final String ELEMENT_RIGHT_PANE_COMMENT_INPUT = "//*[@class='commentInput']//*[@class='replaceTextArea editable'][contains(.,'$comment')]";
+	public final By ELEMENT_RIGHT_PANE_COMMENT_BUTTON = By.id("taskCommentButton");
 }

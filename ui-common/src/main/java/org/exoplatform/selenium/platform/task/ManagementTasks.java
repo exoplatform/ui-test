@@ -2,8 +2,11 @@ package org.exoplatform.selenium.platform.task;
 
 import org.exoplatform.selenium.Utils;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 
 import static org.exoplatform.selenium.TestLogger.info;
 
@@ -138,5 +141,18 @@ public class ManagementTasks extends TaskManagementLocatorObject {
 		info("Delete task");
 		click(ELEMENT_TASK_TITLE.replace("$task", task));
 		
+	}
+	/**
+	 * Add comment to task
+	 * @param comment
+	 */
+	public void addTaskComment(String comment){
+		info("add comment to task");
+		click(ELEMENT_RIGHT_PANE_COMMENT_INPUT.replace("$comment",""));
+		WebElement input= waitForAndGetElement(ELEMENT_RIGHT_PANE_COMMENT_INPUT.replace("$comment",""));
+		Actions action =new Actions(driver);
+		action.moveToElement(input).sendKeys(comment).build().perform();		
+		//type(ELEMENT_RIGHT_PANE_COMMENT_INPUT,comment,false);
+		click(ELEMENT_RIGHT_PANE_COMMENT_BUTTON);
 	}
 }

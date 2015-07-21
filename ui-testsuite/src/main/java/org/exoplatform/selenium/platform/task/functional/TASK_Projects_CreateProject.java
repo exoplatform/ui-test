@@ -1,10 +1,13 @@
 package org.exoplatform.selenium.platform.task.functional;
 
 import static org.exoplatform.selenium.TestLogger.info;
+
 import org.exoplatform.selenium.Utils;
 import org.exoplatform.selenium.platform.task.ManagementProjects.optionContMenuGivenProject;
 import org.exoplatform.selenium.platform.task.ManagementProjects.optionContMenuProject;
+
 import org.openqa.selenium.Keys;
+
 import org.testng.annotations.*;
 
 
@@ -69,9 +72,8 @@ import org.testng.annotations.*;
 	*<li> Test Case Name: Check auto-completion drop-down displaying the project list.</li>
 	*<li> Pre-Condition: exo-tasks add-on is installedadd project A,add project A1 as child of project Aadd project B,add project B1 as child of project Bproject A,project B are childs of Projects</li>
 	*<li> Post-Condition: </li>
-	* BUG : https://jira.exoplatform.org/browse/TA-133
 	*/
-	@Test (groups = "pending")
+	@Test 
 	public  void test02_03_ChangeProjectParent() {
 		info("Test 2: Change project parent");
 		String parent = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
@@ -118,7 +120,6 @@ import org.testng.annotations.*;
 			- project B is now child of Projects, not child of project A*/ 
 		info("locate child project to parent Projects");
 		mgProject.changeParentProject("Projects");
-		driver.navigate().refresh();
 		waitForElementNotPresent(mgProject.ELEMENT_LEFT_PANE_SUBPROJECT_L1.replace("sub", child));
 		
 		info("Test 3: Check auto-completion drop-down displaying the project list");
@@ -130,10 +131,8 @@ import org.testng.annotations.*;
 		info("delete data");
 		mgProject.selectOpContMenuGivenProject(name,optionContMenuGivenProject.Delete);
 		mgProject.deleteProject(name, false);
-		mgProject.selectOpContMenuGivenProject(child,optionContMenuGivenProject.Delete);
-		mgProject.deleteProject(child, false);
 		mgProject.selectOpContMenuGivenProject(parent,optionContMenuGivenProject.Delete);
-		mgProject.deleteProject(parent, false);
+		mgProject.deleteProject(parent, true);
 		waitForElementNotPresent(mgProject.ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project", name));
 		waitForElementNotPresent(mgProject.ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project", parent));
 		waitForElementNotPresent(mgProject.ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project", child));
@@ -241,11 +240,12 @@ import org.testng.annotations.*;
 	*<li> Test Case Name: Check description can be decorated.</li>
 	*<li> Pre-Condition: exo-tasks add-on is installed</li>
 	*<li> Post-Condition: </li>
-	* NOT YET IMPLEMENT
 	*/
 	@Test 
 	public  void test06_CheckDescriptionCanBeDecorated() {
 		info("Test 6: Check description can be decorated");
+		String project = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+		String des = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		/*Step Number: 1
 		*Step Name: Step 1: Open Tasks page
 		*Step Description: 
@@ -254,7 +254,9 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- Tasks page is opened*/
-
+		info("open task page");
+		taskMgHome.goToTasks();
+		
 		/*Step number: 2
 		*Step Name: Step 2: Create new project
 		*Step Description: 
@@ -263,19 +265,38 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- new project is created*/
-
+		info("add project from Projects");
+		mgProject.selectOpContMenuProject(optionContMenuProject.Add_Project);
+		mgProject.addProject(project,"", false);
+		
 		/*Step number: 3
 		*Step Name: Step 3: Check description can be decorated
 		*Step Description: 
-			- On right pane, add description with simple effect: bold, italic, underline, strike
-			-through, list... and save
-			- left blank description and save
+			- On right pane, add description with simple effect: bold, italic, underline, strike-through, list... and save- left blank description and save
 		*Input Data: 
 			
 		*Expected Outcome: 
 			- description is saved with decorated
 			- description can be left blank*/ 
-
+		info("decorate description");
+		click(mgProject.ELEMENT_RIGHT_PANE_EDIT_PROJECT_DES_INPUT);
+		inputFrame(mgProject.ELEMENT_CKEDITOR_IFRAME, des);
+		mgProject.cke_NumberList();
+		mgProject.cke_Bold();
+		mouseOverAndClick(mgProject.ELEMENT_RIGHT_PANE_PARENT_PATH_LINK);
+		waitForAndGetElement(mgProject.ELEMENT_ADD_PROJECT_DES_CKEDITOR.replace("$des", des));
+		
+		info("left blank description");
+		click(mgProject.ELEMENT_RIGHT_PANE_EDIT_PROJECT_DES_INPUT);
+		inputFrame(mgProject.ELEMENT_CKEDITOR_IFRAME, "");
+		mouseOverAndClick(mgProject.ELEMENT_RIGHT_PANE_PARENT_PATH_LINK);
+		waitForAndGetElement(mgProject.ELEMENT_ADD_PROJECT_DES_TEXT.replace("$des", "Empty"));
+		
+		info("delete data");
+		mgProject.selectOpContMenuGivenProject(project,optionContMenuGivenProject.Delete);
+		mgProject.deleteProject(project, false);
+		waitForElementNotPresent(mgProject.ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project", project));
+		
  	}
 
 	/**
@@ -954,11 +975,12 @@ import org.testng.annotations.*;
 	*<li> Test Case Name: Update manager field.</li>
 	*<li> Pre-Condition: exo-tasks add-on is installedadd project A</li>
 	*<li> Post-Condition: </li>
-	* NOT YET IMPLEMENT
 	*/
 	@Test
 	public  void test21_UpdateManagerField() {
 		info("Test 21 Update manager field");
+		String prj1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+		String[] user1 = {DATA_USER2};
 		/*Step Number: 1
 		*Step Name: Step 1: Open Tasks page
 		*Step Description: 
@@ -967,7 +989,12 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- Tasks page is opened*/
-
+		info("open task page");
+		taskMgHome.goToTasks();
+		info("add project from Projects");
+		mgProject.selectOpContMenuProject(optionContMenuProject.Add_Project);
+		mgProject.addProject(prj1,"", false);
+		
 		/*Step number: 2
 		*Step Name: Step 2: Update manager field by sharing project
 		*Step Description: 
@@ -976,7 +1003,10 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- project A is now shared with user A*/
-
+		info("share project with mary with manager permission");
+		mgProject.selectOpContMenuGivenProject(prj1, optionContMenuGivenProject.Share);
+		mgProject.shareProject(user1, true);
+		
 		/*Step number: 3
 		*Step Name: Step 3: Check manager field
 		*Step Description: 
@@ -985,5 +1015,12 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- Project Overview is opened with manager: user A inside*/ 
-
+		info("mary is now manager of project 1");
+		doubleClickOnElement(mgProject.ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project",prj1));
+		waitForAndGetElement(mgProject.ELEMENT_RIGHT_PANE_MANAGER_NAME.replace("$user", DATA_NAME_USER2));
+		
+		info("delete data");
+		mgProject.selectOpContMenuGivenProject(prj1,optionContMenuGivenProject.Delete);
+		mgProject.deleteProject(prj1, true);
+		waitForElementNotPresent(mgProject.ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project", prj1));
  	}}
