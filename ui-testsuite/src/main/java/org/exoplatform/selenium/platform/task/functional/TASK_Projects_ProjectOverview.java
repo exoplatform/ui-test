@@ -215,7 +215,7 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			Projects has a contextual menu :Add Project, Show Hidden Projects*/
 		mgProject.goToContMenuProject();
-		waitForAndGetElement(mgProject.ELEMENT_LEFT_PANE_PROJECTS_SHOWHIDE);
+		waitForAndGetElement(mgProject.ELEMENT_LEFT_PANE_PROJECTS_SHOWHIDDEN);
 		waitForAndGetElement(mgProject.ELEMENT_LEFT_PANE_PROJECTS_ADD);
 		
 		/*Step number: 4
@@ -250,7 +250,7 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			Projects has a contextual menu :Show Hidden Projects*/ 
 		mgProject.goToContMenuProject();
-		waitForAndGetElement(mgProject.ELEMENT_LEFT_PANE_PROJECTS_SHOWHIDE);
+		waitForAndGetElement(mgProject.ELEMENT_LEFT_PANE_PROJECTS_SHOWHIDDEN);
 		waitForElementNotPresent(mgProject.ELEMENT_LEFT_PANE_PROJECTS_ADD);
 	
  	}

@@ -37,7 +37,7 @@ public class ManagementProjects extends TaskManagementLocatorObject {
 	 * Define options in Context Menu of Projects category
 	 */
 	public enum optionContMenuProject{
-		Add_Project,Show_Hidden_Project;
+		Add_Project,Show_Hidden_Project,Hide_Hidden_Project;
 	}
 	
 	/**
@@ -54,6 +54,11 @@ public class ManagementProjects extends TaskManagementLocatorObject {
 			break;
 		case Show_Hidden_Project:
 			info("Select Show hide Project");
+			click(ELEMENT_LEFT_PANE_PROJECTS_SHOWHIDDEN,0,true);
+			break;
+		case Hide_Hidden_Project:
+			info("Select Hide hide Project");
+			click(ELEMENT_LEFT_PANE_PROJECTS_HIDEHIDDEN,0,true);
 			break;
 		default:
 			info("No option in the list. Please select correct option.");
@@ -101,11 +106,11 @@ public class ManagementProjects extends TaskManagementLocatorObject {
 	    	break;
 	    case Hide:
 	    	info("Select Hide option");
-	    	
+	    	click(ELEMENT_LEFT_PANE_PROJECT_HIDE.replace("$project", project));
 	    	break;
 	    case Show:
 	    	info("Select Show option");
-	    	
+	    	click(ELEMENT_LEFT_PANE_PROJECT_SHOW.replace("$project", project));
 	    	break;
 	    case Delete:
 	    	info("Select Delete option");

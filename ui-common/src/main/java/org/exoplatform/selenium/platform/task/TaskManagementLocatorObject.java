@@ -29,7 +29,8 @@ public class TaskManagementLocatorObject extends PlatformBase {
 	public final String ELEMENT_LEFT_PANE_PROJECT_ID=".//*[contains(@data-id,'$id')][contains(.,'$project')]";
 	public final By ELEMENT_LEFT_PANE_PROJECTS_PLUS_MENU=By.xpath("//*[@class='uiIconLightGray uiIconSimplePlusMini addProject']");
 	public final By ELEMENT_LEFT_PANE_PROJECTS_ADD=By.xpath("//*[@class='uiDropdownMenu']//*[@class='uiIconAddProject uiIconLightGray']");
-	public final By ELEMENT_LEFT_PANE_PROJECTS_SHOWHIDE=By.xpath("//*[@class='uiDropdownMenu']//*[@class='uiIconShowProject uiIconLightGray']");
+	public final By ELEMENT_LEFT_PANE_PROJECTS_SHOWHIDDEN=By.xpath("//*[@class='uiDropdownMenu']//*[@class='uiIconShowProject uiIconLightGray']/../*[contains(.,'Show hidden project')]");
+	public final By ELEMENT_LEFT_PANE_PROJECTS_HIDEHIDDEN=By.xpath("//*[@class='uiDropdownMenu']//*[@class='uiIconShowProject uiIconLightGray']/../*[contains(.,'Hide hidden project')]");
 	public final String ELEMENT_LEFT_PANE_PROJECT_COLOR = "//*[contains(@class,'project-name')][contains(.,'$project')]/../*[contains(@class,'$color')][contains(@class,'colorPie')]";
 	public final String ELEMENT_LEFT_PANE_PROJECT_NO_COLOR = "//*[contains(@class,'project-name')][contains(.,'$project')]/../*[@class=' colorPie']";
 	
@@ -42,7 +43,9 @@ public class TaskManagementLocatorObject extends PlatformBase {
 	public final String ELEMENT_LEFT_PANE_PROJECT_SHARE="//*[@class='project-name' and contains(.,'$project')]/..//*[@class='uiIconShare uiIconLightGray']";
 	public final String ELEMENT_LEFT_PANE_PROJECT_CLONE="//*[@class='project-name' and contains(.,'$project')]/..//*[@class='uiIconCloneNode uiIconLightGray']";
 	public final String ELEMENT_LEFT_PANE_PROJECT_DELETE="//*[@class='project-name' and contains(.,'$project')]/..//*[@class='delete-project']/*[@class='uiIconTrash uiIconLightGray']";
-
+	public final String ELEMENT_LEFT_PANE_PROJECT_ISHIDDEN="//*[@class='list-projects']/*[contains(@data-hiddenproject,'$bool')]//*[@class='project-name' and contains(.,'$project')]";
+	public final String ELEMENT_LEFT_PANE_PROJECT_ISSHOWHIDDEN="//*[@data-showhiddenproject='$bool']//*[@class='project-name' and contains(.,'$project')]";
+	
 	//Color
 	public final String ELEMENT_LEFT_PANE_COLOR_TABLE_ITEM=".//*[contains(@class,'project-name')][contains(.,'$project')]/..//*[contains(@class,'$color')]";
 	public final String ELEMENT_LEFT_PANE_COLOR_NO_COLOR = "//*[contains(@class,'project-name')][contains(.,'$project')]/..//li[contains(@class,'noColor changeProjectColor')]";
