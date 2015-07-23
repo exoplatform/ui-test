@@ -42,7 +42,7 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- Tasks page is opened*/
 		info("open task page");
-		taskMgHome.goToTasks();
+		hp.goToTasks();
 		info("add project 1 from Projects");
 		mgProject.selectOpContMenuProject(optionContMenuProject.Add_Project);
 		mgProject.addProject(prj1,"", false);
@@ -98,7 +98,7 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- Tasks page is opened*/
 		info("open task page");
-		taskMgHome.goToTasks();
+		hp.goToTasks();
 		info("add project 1 from Projects");
 		mgProject.selectOpContMenuProject(optionContMenuProject.Add_Project);
 		mgProject.addProject(prj1,"", false);
@@ -149,7 +149,7 @@ import org.testng.annotations.*;
 		hp.goToMySpaces();
 		spaMg.addNewSpaceSimple(space1,space1);
 		info("open task page");
-		taskMgHome.goToTasks();
+		hp.goToTasks();
 		waitForAndGetElement(mgProject.ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project", space1));
 		
 		/*Step number: 2
@@ -185,7 +185,7 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- spaceA project is deleted from project list*/
 		info("open task page");
-		taskMgHome.goToTasks();
+		hp.goToTasks();
 		waitForElementNotPresent(mgProject.ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project", space1));
 		
 		/*Step number: 5
@@ -229,7 +229,7 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- Tasks page is opened*/
 		info("open task page");
-		taskMgHome.goToTasks();
+		hp.goToTasks();
 		
 		info("add project 1 from Projects");
 		mgProject.selectOpContMenuProject(optionContMenuProject.Add_Project);
@@ -281,7 +281,7 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- Tasks page is opened*/
 		info("open task page");
-		taskMgHome.goToTasks();
+		hp.goToTasks();
 		
 		info("add project 1 from Projects");
 		mgProject.selectOpContMenuProject(optionContMenuProject.Add_Project);

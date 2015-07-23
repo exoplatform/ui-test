@@ -34,7 +34,7 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			Tasks page is opened*/
 		info("open task page");
-		taskMgHome.goToTasks();
+		hp.goToTasks();
 		
 		info("add project 1 from Projects");
 		mgProject.selectOpContMenuProject(optionContMenuProject.Add_Project);
@@ -103,7 +103,7 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			Tasks page is opened*/
 		info("open task page");
-		taskMgHome.goToTasks();
+		hp.goToTasks();
 		info("add project 1 from Projects");
 		mgProject.selectOpContMenuProject(optionContMenuProject.Add_Project);
 		mgProject.addProject(prj1,"", false);
@@ -150,7 +150,7 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			Tasks page is opened*/
 		info("open task page");
-		taskMgHome.goToTasks();
+		hp.goToTasks();
 		
 		/*Step number: 6
 		*Step Name: Step 6: Check contextual menu of one project
@@ -169,7 +169,7 @@ import org.testng.annotations.*;
 		magAc.signOut();
 		magAc.signIn(DATA_USER1, DATA_PASS);
 		info("open task page");
-		taskMgHome.goToTasks();
+		hp.goToTasks();
 		info("delete project");
 		mgProject.selectOpContMenuGivenProject(prj1,optionContMenuGivenProject.Delete);
 		mgProject.deleteProject(prj1, false);
@@ -204,7 +204,7 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			Tasks page is opened*/
 		info("open task page");
-		taskMgHome.goToTasks();
+		hp.goToTasks();
 		
 		/*Step number: 3
 		*Step Name: Step 3: Check contextual menu of Projects
@@ -239,7 +239,7 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			Tasks page is opened*/
 		info("open task page");
-		taskMgHome.goToTasks();
+		hp.goToTasks();
 		
 		/*Step number: 6
 		*Step Name: Step 6: Check contextual menu of Projects
@@ -286,7 +286,7 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- Tasks page is opened*/
 		info("open task page");
-		taskMgHome.goToTasks();
+		hp.goToTasks();
 		
 		info("add project from Projects");
 		mgProject.selectOpContMenuProject(optionContMenuProject.Add_Project);
@@ -345,7 +345,7 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			Tasks page is opened*/
 		info("open task page");
-		taskMgHome.goToTasks();
+		hp.goToTasks();
 		
 		/*Step number: 2
 		*Step Name: Step 2: Check no Board on Projects
@@ -380,7 +380,7 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			Tasks page is opened*/
 		info("open task page");
-		taskMgHome.goToTasks();
+		hp.goToTasks();
 		
 		/*Step number: 2
 		*Step Name: Step 2: Open Projects overview
@@ -428,7 +428,7 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			Tasks page is opened*/
 		info("open task page");
-		taskMgHome.goToTasks();
+		hp.goToTasks();
 		
 		/*Step number: 2
 		*Step Name: Step 2: Check Projects view
@@ -470,7 +470,7 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			Tasks page is opened*/
 		info("open task page");
-		taskMgHome.goToTasks();
+		hp.goToTasks();
 		
 		info("add project from Projects");
 		mgProject.selectOpContMenuProject(optionContMenuProject.Add_Project);
@@ -526,7 +526,7 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- Tasks page is opened*/
 		info("open task page");
-		taskMgHome.goToTasks();
+		hp.goToTasks();
 		
 		info("add project from Projects");
 		mgProject.selectOpContMenuProject(optionContMenuProject.Add_Project);
@@ -594,7 +594,7 @@ import org.testng.annotations.*;
 		magAc.signOut();
 		magAc.signIn(USER_ROOT, DATA_PASS);
 		info("open task page");
-		taskMgHome.goToTasks();
+		hp.goToTasks();
 		
 		/*Step number: 2
 		*Step Name: Step 2: Check case of viewing Projects
@@ -641,7 +641,7 @@ import org.testng.annotations.*;
 		info("login as mary");
 		magAc.signOut();
 		magAc.signIn(DATA_USER2, DATA_PASS);
-		taskMgHome.goToTasks();
+		hp.goToTasks();
 		click(mgProject.ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project", project));
 		waitForAndGetElement(mgProject.ELEMENT_PROJECT_WELCOME_TEXT.replace("$message", mes2));
 		waitForAndGetElement(mgProject.ELEMENT_PROJECT_WELCOME_TEXT.replace("$message", mes3));
@@ -650,7 +650,7 @@ import org.testng.annotations.*;
 		magAc.signOut();
 		magAc.signIn(USER_ROOT, DATA_PASS);
 		info("open task page");
-		taskMgHome.goToTasks();
+		hp.goToTasks();
 		info("delete project");
 		mgProject.selectOpContMenuGivenProject(project,optionContMenuGivenProject.Delete);
 		mgProject.deleteProject(project, false);
@@ -677,7 +677,7 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			Tasks page is opened*/
 		info("open task page");
-		taskMgHome.goToTasks();
+		hp.goToTasks();
 		
 		/*Step number: 2
 		*Step Name: Step 2: Add new project
@@ -723,7 +723,7 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			Tasks page is opened*/
 		info("open task page");
-		taskMgHome.goToTasks();
+		hp.goToTasks();
 		info("add project from Projects");
 		mgProject.selectOpContMenuProject(optionContMenuProject.Add_Project);
 		mgProject.addProject(project,"", false);
@@ -784,7 +784,7 @@ import org.testng.annotations.*;
 			- Tasks page is opened
 			- space0 project is added in left pane under Projects*/ 
 		info("open task page");
-		taskMgHome.goToTasks();
+		hp.goToTasks();
 		waitForAndGetElement(mgProject.ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project", space));
 		
 		info("Delete a Space");

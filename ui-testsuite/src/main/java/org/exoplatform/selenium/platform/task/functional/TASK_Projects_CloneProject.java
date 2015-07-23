@@ -49,7 +49,7 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- Tasks page is opened*/
 		info("open task page");
-		taskMgHome.goToTasks();
+		hp.goToTasks();
 		
 		info("add project from Projects");
 		mgProject.selectOpContMenuProject(optionContMenuProject.Add_Project);
@@ -113,7 +113,7 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			Tasks page is opened*/
 		info("open task page");
-		taskMgHome.goToTasks();
+		hp.goToTasks();
 		
 		info("add project from Projects");
 		mgProject.selectOpContMenuProject(optionContMenuProject.Add_Project);
@@ -169,7 +169,7 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			Tasks page is opened*/
 		info("open task page");
-		taskMgHome.goToTasks();
+		hp.goToTasks();
 		
 		info("add project from Projects");
 		mgProject.selectOpContMenuProject(optionContMenuProject.Add_Project);
@@ -227,7 +227,7 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			Tasks page is opened*/
 		info("open task page");
-		taskMgHome.goToTasks();
+		hp.goToTasks();
 		info("add project from Projects");
 		mgProject.selectOpContMenuProject(optionContMenuProject.Add_Project);
 		mgProject.addProject(prj1,"", false);

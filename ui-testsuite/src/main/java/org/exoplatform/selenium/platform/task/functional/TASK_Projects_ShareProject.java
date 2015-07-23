@@ -33,7 +33,7 @@ import org.testng.annotations.*;
 		String[] user1 = {DATA_USER2};
 		
 		info("open task page");
-		taskMgHome.goToTasks();
+		hp.goToTasks();
 		info("add project from Projects");
 		mgProject.selectOpContMenuProject(optionContMenuProject.Add_Project);
 		mgProject.addProject(parent,parent, false);
@@ -68,7 +68,7 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- Tasks page is opened*/
 		info("open task page");
-		taskMgHome.goToTasks();
+		hp.goToTasks();
 		
 		/*Step number: 3
 		*Step Name: Step 3: Check case user has share permission on sub
@@ -104,7 +104,7 @@ import org.testng.annotations.*;
 		magAc.signOut();
 		magAc.signIn(DATA_USER1, DATA_PASS);
 		info("open task page");
-		taskMgHome.goToTasks();
+		hp.goToTasks();
 		info("delete data");
 		mgProject.selectOpContMenuGivenProject(parent,optionContMenuGivenProject.Delete);
 		mgProject.deleteProject(parent, true);
@@ -136,7 +136,7 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- Tasks page is opened*/
 		info("open task page");
-		taskMgHome.goToTasks();
+		hp.goToTasks();
 		info("add project from Projects");
 		mgProject.selectOpContMenuProject(optionContMenuProject.Add_Project);
 		mgProject.addProject(project,"", false);
@@ -168,7 +168,7 @@ import org.testng.annotations.*;
 		magAc.signOut();
 		magAc.signIn(DATA_USER2, DATA_PASS);
 		info("open task page");
-		taskMgHome.goToTasks();
+		hp.goToTasks();
 		
 		/*Step number: 4
 		*Step Name: Step 4: Check manager permission
@@ -264,7 +264,7 @@ import org.testng.annotations.*;
 		setSpaceMg.inviteUser(DATA_USER2,false,"");
 		
 		info("open task page");
-		taskMgHome.goToTasks();
+		hp.goToTasks();
 		
 		/*Step number: 3
 		*Step Name: Step 3: Check manager permission of user A on spaceA project
@@ -299,7 +299,7 @@ import org.testng.annotations.*;
 		hp.goToMySpaces();
 		spaMg.acceptAInvitation(space);
 		info("open task page");
-		taskMgHome.goToTasks();
+		hp.goToTasks();
 		
 		/*Step number: 3
 		*Step Name: Step 3: Check participant permission of user A on spaceA project
@@ -339,7 +339,7 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- Tasks page is opened*/
 		info("open task page");
-		taskMgHome.goToTasks();
+		hp.goToTasks();
 		info("add project from Projects");
 		mgProject.selectOpContMenuProject(optionContMenuProject.Add_Project);
 		mgProject.addProject(prj1,"", false);
@@ -392,7 +392,7 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- Tasks page is opened*/
 		info("open task page");
-		taskMgHome.goToTasks();
+		hp.goToTasks();
 		info("add project from Projects");
 		mgProject.selectOpContMenuProject(optionContMenuProject.Add_Project);
 		mgProject.addProject(prj1,"", false);

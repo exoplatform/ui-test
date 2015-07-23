@@ -33,7 +33,7 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- Tasks page is opened*/
 		info("open task page");
-		taskMgHome.goToTasks();
+		hp.goToTasks();
 		
 		/*Step number: 2
 		*Step Name: Step 2: Create new project with duplicate title
@@ -89,7 +89,7 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- Tasks page is opened*/
 		info("open task page");
-		taskMgHome.goToTasks();
+		hp.goToTasks();
 		
 		info("add project");
 		mgProject.selectOpContMenuProject(optionContMenuProject.Add_Project);
@@ -205,7 +205,7 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			Tasks page is opened*/
 		info("open task page");
-		taskMgHome.goToTasks();
+		hp.goToTasks();
 		
 		info("add project from Projects");
 		mgProject.selectOpContMenuProject(optionContMenuProject.Add_Project);
@@ -255,7 +255,7 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- Tasks page is opened*/
 		info("open task page");
-		taskMgHome.goToTasks();
+		hp.goToTasks();
 		
 		/*Step number: 2
 		*Step Name: Step 2: Create new project
@@ -320,7 +320,7 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			Tasks page is opened*/
 		info("open task page");
-		taskMgHome.goToTasks();
+		hp.goToTasks();
 
 		/*Step number: 2
 		*Step Name: Step 2: Check display after creating project
@@ -403,7 +403,7 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- Tasks page is opened*/
 		info("open task page");
-		taskMgHome.goToTasks();
+		hp.goToTasks();
 		
 		info("add project from Projects");
 		mgProject.selectOpContMenuProject(optionContMenuProject.Add_Project);
@@ -456,7 +456,7 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- Tasks page is opened*/
 		info("open task page");
-		taskMgHome.goToTasks();
+		hp.goToTasks();
 		
 		/*Step number: 2
 		*Step Name: Step 2: Check input field when Add Project is clicked
@@ -503,7 +503,7 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- Tasks page is opened*/
 		info("open task page");
-		taskMgHome.goToTasks();
+		hp.goToTasks();
 		
 		/*Step number: 2
 		*Step Name: Step 2: Add Project from the contextual menu of Projects
@@ -558,7 +558,7 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- Tasks page is opened*/
 		info("open task page");
-		taskMgHome.goToTasks();
+		hp.goToTasks();
 		
 		/*Step number: 2
 		*Step Name: Step 2: Check manager field
@@ -603,7 +603,7 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- Tasks page is opened*/
 		info("open task page");
-		taskMgHome.goToTasks();
+		hp.goToTasks();
 		
 		info("add project1 from Projects");
 		mgProject.selectOpContMenuProject(optionContMenuProject.Add_Project);
@@ -717,7 +717,7 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- Tasks page is opened*/
 		info("open task page");
-		taskMgHome.goToTasks();
+		hp.goToTasks();
 		
 		info("add project from Projects");
 		mgProject.selectOpContMenuProject(optionContMenuProject.Add_Project);
@@ -777,7 +777,7 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- Tasks page is opened*/
 		info("open task page");
-		taskMgHome.goToTasks();
+		hp.goToTasks();
 		
 		info("add parent2");
 		mgProject.selectOpContMenuProject(optionContMenuProject.Add_Project);
@@ -850,7 +850,7 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- Tasks page is opened*/
 		info("open task page");
-		taskMgHome.goToTasks();
+		hp.goToTasks();
 		
 		/*Step number: 2
 		*Step Name: Step 2: Open project A
@@ -905,7 +905,7 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- Tasks page is opened*/
 		info("open task page");
-		taskMgHome.goToTasks();
+		hp.goToTasks();
 		
 		/*Step number: 2
 		*Step Name: Step 2: Create a project from contextual menu
@@ -945,7 +945,7 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- Tasks page is opened*/
 		info("open task page");
-		taskMgHome.goToTasks();
+		hp.goToTasks();
 		
 		info("add parent");
 		mgProject.selectOpContMenuProject(optionContMenuProject.Add_Project);
@@ -990,7 +990,7 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- Tasks page is opened*/
 		info("open task page");
-		taskMgHome.goToTasks();
+		hp.goToTasks();
 		info("add project from Projects");
 		mgProject.selectOpContMenuProject(optionContMenuProject.Add_Project);
 		mgProject.addProject(prj1,"", false);

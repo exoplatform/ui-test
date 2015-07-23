@@ -32,7 +32,7 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- Tasks page is opened*/
 		info("open task page");
-		taskMgHome.goToTasks();
+		hp.goToTasks();
 		info("add project from Projects");
 		mgProject.selectOpContMenuProject(optionContMenuProject.Add_Project);
 		mgProject.addProject(prj1,"", false);
@@ -92,7 +92,7 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- Tasks page is opened*/
 		info("open task page");
-		taskMgHome.goToTasks();
+		hp.goToTasks();
 		info("add project from Projects");
 		mgProject.selectOpContMenuProject(optionContMenuProject.Add_Project);
 		mgProject.addProject(prj1,"", false);
@@ -153,7 +153,7 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- Tasks page is opened*/
 		info("open task page");
-		taskMgHome.goToTasks();
+		hp.goToTasks();
 		info("add project from Projects");
 		mgProject.selectOpContMenuProject(optionContMenuProject.Add_Project);
 		mgProject.addProject(prj1,"", false);
@@ -205,7 +205,7 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- Tasks page is opened*/
 		info("open task page");
-		taskMgHome.goToTasks();
+		hp.goToTasks();
 		info("add project from Projects");
 		mgProject.selectOpContMenuProject(optionContMenuProject.Add_Project);
 		mgProject.addProject(prj1,"", false);
@@ -270,13 +270,13 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			Tasks page is opened*/
 		info("open task page");
-		taskMgHome.goToTasks();
+		hp.goToTasks();
 		info("add project from Projects");
 		mgProject.selectOpContMenuProject(optionContMenuProject.Add_Project);
 		mgProject.addProject(prj1,"", false);
 		info("add task into project 1");
 		mgTask.addTask(prj1, task1);
-		waitForAndGetElement(mgProject.ELEMENT_RIGHT_PANE_TASK_WORKFLOW_DISPLAY.replace("$flow","To Do"));
+		waitForAndGetElement(mgProject.ELEMENT_RIGHT_PANE_TASK_WORKFLOW_TEXT.replace("$flow","To Do"));
 		
 		/*Step number: 2
 		*Step Name: Step 2: Check Sub-projects inherit workflow from their parent
@@ -291,7 +291,7 @@ import org.testng.annotations.*;
 		mgProject.addProject(prj11,"", false);
 		info("add task into project 11");
 		mgTask.addTask(prj11, task11);
-		waitForAndGetElement(mgProject.ELEMENT_RIGHT_PANE_TASK_WORKFLOW_DISPLAY.replace("$flow","To Do"));
+		waitForAndGetElement(mgProject.ELEMENT_RIGHT_PANE_TASK_WORKFLOW_TEXT.replace("$flow","To Do"));
  	
 		info("delete data");
 		mgProject.selectOpContMenuGivenProject(prj1,optionContMenuGivenProject.Delete);

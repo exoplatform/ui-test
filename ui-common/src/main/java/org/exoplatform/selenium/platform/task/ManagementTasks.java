@@ -1,9 +1,8 @@
 package org.exoplatform.selenium.platform.task;
 
 import org.exoplatform.selenium.Utils;
-
-import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -39,26 +38,31 @@ public class ManagementTasks extends TaskManagementLocatorObject {
 	 *          is an option in the list as: Incoming,All tasks,...
 	 */
 	public void selectOptionTask(optionTask op){
-		info("--Open Task Management--");
-		tasHome.goToTasks();
+
 		switch(op){
 		case Incoming:
 			info("Select Incomming option");
+			click(ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project", "Incoming"));
 			break;
 		case All_Tasks:
 			info("Select All tasks option");
+			click(ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project", "All Tasks"));
 			break;
 		case Overdue:
 			info("Select Overdue option");
+			click(ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project", "Overdue"));
 			break;
 		case Today:
 			info("Select Today option");
+			click(ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project", "Today"));
 			break;
 		case Tommorrow:
 			info("Select Tommorrow option");
+			click(ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project", "Tomorrow"));
 			break;
 		case Upcoming:
 			info("Select Upcoming option");
+			click(ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project", "Upcoming"));
 			break;
 		default:
 			info("No option in the list.Please select correct option.");
@@ -140,7 +144,9 @@ public class ManagementTasks extends TaskManagementLocatorObject {
 	public void deleteTask(String task){
 		info("Delete task");
 		click(ELEMENT_TASK_TITLE.replace("$task", task));
-		
+		click(ELEMENT_RIGHT_PANE_TASK_ARROW_MENU);
+		mouseOverAndClick(ELEMENT_RIGHT_PANE_TASK_ARROW_MENU_DELETE);
+		Utils.pause(500);
 	}
 	/**
 	 * Add comment to task
@@ -154,5 +160,21 @@ public class ManagementTasks extends TaskManagementLocatorObject {
 		action.moveToElement(input).sendKeys(comment).build().perform();		
 		//type(ELEMENT_RIGHT_PANE_COMMENT_INPUT,comment,false);
 		click(ELEMENT_RIGHT_PANE_COMMENT_BUTTON);
+	}
+	/**
+	 * get value attribute
+	 * @param locator
+	 * @return data-taskid of element
+	 */
+	public Integer getTaskId(Object locator) {
+		try {
+			return Integer.parseInt(waitForAndGetElement(locator).getAttribute("data-taskid"));
+		} catch (StaleElementReferenceException e) {
+			checkCycling(e, DEFAULT_TIMEOUT/WAIT_INTERVAL);			
+			Utils.pause(WAIT_INTERVAL);
+			return Integer.parseInt(getValue(locator));
+		} finally {
+			loopCount = 0;
+		}
 	}
 }

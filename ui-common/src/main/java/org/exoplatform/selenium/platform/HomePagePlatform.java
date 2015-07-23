@@ -236,6 +236,10 @@ public class HomePagePlatform extends TestBase{
 	public final String ELEMENT_PUBLICATION_ADDFILE_LOCATION_GENERALDRIVES_MANAGEDSITES_FILE = "//*[@data-original-title='${title}']";
 	public final By ELEMENT_PUBLICATION_ADDFILE_UPLOAD = By.xpath("//*[@class='uiIconUpload uiIconLightGray']");
 	
+	//Task area
+	public final By ELEMENT_TASKS_LINK_PLF=By.xpath("//*[@data-original-title='Tasks']");
+	public By ELEMENT_TASKS_PORTLET = By.id("taskManagement");
+	
 	WikiHomePage wHome;
 	CalendarHomePage cHome;
 	SpaceManagement sMang;
@@ -367,5 +371,15 @@ public class HomePagePlatform extends TestBase{
 		Utils.pause(2000);
 	}
 
+	/**
+	 * Go to Tasks area by clicking on Task header on left panel
+	 */
+	public void goToTasks(){
+		info("--Go to Tasks area--");
+		click(ELEMENT_TASKS_LINK_PLF);
+		if(waitForAndGetElement(ELEMENT_TASKS_PORTLET,5000,0)==null)
+			driver.navigate().refresh();
+		waitForAndGetElement(ELEMENT_TASKS_PORTLET);
+	}
 }
 
