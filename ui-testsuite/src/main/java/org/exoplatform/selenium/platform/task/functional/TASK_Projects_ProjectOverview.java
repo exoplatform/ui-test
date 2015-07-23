@@ -1,10 +1,6 @@
 package org.exoplatform.selenium.platform.task.functional;
 
 import static org.exoplatform.selenium.TestLogger.info;
-
-import org.exoplatform.selenium.platform.task.ManagementProjects.optionContMenuGivenProject;
-import org.exoplatform.selenium.platform.task.ManagementProjects.optionContMenuProject;
-
 import org.testng.annotations.*;
 
 
@@ -33,24 +29,12 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			Tasks page is opened*/
-		info("open task page");
 		hp.goToTasks();
-		
-		info("add project 1 from Projects");
-		mgProject.selectOpContMenuProject(optionContMenuProject.Add_Project);
 		mgProject.addProject(prj1,"", false);
-		info("add task");
 		mgTask.addTask(prj1, task1);
-		info("add project 2 from Projects");
-		mgProject.selectOpContMenuProject(optionContMenuProject.Add_Project);
 		mgProject.addProject(prj2,"", false);
-		info("add task");
 		mgTask.addTask(prj2, task2);
 		
-		info("add color to project 1");
-		mgProject.selectColor(prj1, color1);
-		info("add color to project 2");
-		mgProject.selectColor(prj2, color2);
 		/*Step number: 2
 		*Step Name: Step 2: Check color block of each task
 		*Step Description: 
@@ -60,17 +44,12 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			There is color block before each task to identify which project it belongs to.*/ 
-		click(mgProject.ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project", "Projects"));
-		waitForAndGetElement(mgProject.ELEMENT_TASK_COLOR.replace("$task", task1).replace("$color", color1));
-		waitForAndGetElement(mgProject.ELEMENT_TASK_COLOR.replace("$task", task2).replace("$color", color2));
-		
-		info("delete project");
-		mgProject.selectOpContMenuGivenProject(prj1,optionContMenuGivenProject.Delete);
+		mgProject.selectColor(prj1, color1,task1);
+		mgProject.selectColor(prj2, color2,task2);
+
+		info("delete data");
 		mgProject.deleteProject(prj1, false);
-		waitForElementNotPresent(mgProject.ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project", prj1));
-		mgProject.selectOpContMenuGivenProject(prj2,optionContMenuGivenProject.Delete);
 		mgProject.deleteProject(prj2, false);
-		waitForElementNotPresent(mgProject.ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project", prj2));
  	}
 
 	/**
@@ -102,10 +81,7 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			Tasks page is opened*/
-		info("open task page");
 		hp.goToTasks();
-		info("add project 1 from Projects");
-		mgProject.selectOpContMenuProject(optionContMenuProject.Add_Project);
 		mgProject.addProject(prj1,"", false);
 		
 		/*Step number: 3
@@ -116,19 +92,9 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			project has a contextual menu :Edit, Share, Clone, Hide, Delete, Add Project*/
-		info("check menu of project manager");
-		mgProject.goToContMenuGivenProject(prj1);
-		//Edit is not available
-		waitForAndGetElement(mgProject.ELEMENT_LEFT_PANE_PROJECT_ADD.replace("$project", prj1));
-		waitForAndGetElement(mgProject.ELEMENT_LEFT_PANE_PROJECT_SHARE.replace("$project", prj1));
-		waitForAndGetElement(mgProject.ELEMENT_LEFT_PANE_PROJECT_CLONE.replace("$project", prj1));
-		waitForAndGetElement(mgProject.ELEMENT_LEFT_PANE_PROJECT_DELETE.replace("$project", prj1));
-		waitForAndGetElement(mgProject.ELEMENT_LEFT_PANE_PROJECT_HIDE.replace("$project", prj1));
+		mgProject.checkMenuGivenProjectOfUser(prj1, true);
+		mgProject.shareProject(prj1,users, false);
 		
-		info("share project to mary");
-		mgProject.goToContMenuGivenProject(prj1);
-		mgProject.selectOpContMenuGivenProject(prj1, optionContMenuGivenProject.Share);
-		mgProject.shareProject(users, false);
 		/*Step number: 4
 		*Step Name: Step 4: Login as paticipant of one project (not manager)
 		*Step Description: 
@@ -149,7 +115,6 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			Tasks page is opened*/
-		info("open task page");
 		hp.goToTasks();
 		
 		/*Step number: 6
@@ -160,20 +125,15 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			project has a contextual menu : Hide*/ 
-		click(mgProject.ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project", "Projects"));
-		info("check menu of project participant");
-		//mgProject.goToContMenuGivenProject(prj1);
-		//waitForAndGetElement(mgProject.ELEMENT_LEFT_PANE_PROJECT_HIDE.replace("$project", prj1));
+		mgProject.checkMenuGivenProjectOfUser(prj1, false);
 		
 		info("login as john");
 		magAc.signOut();
 		magAc.signIn(DATA_USER1, DATA_PASS);
-		info("open task page");
 		hp.goToTasks();
-		info("delete project");
-		mgProject.selectOpContMenuGivenProject(prj1,optionContMenuGivenProject.Delete);
+		
+		info("delete data");
 		mgProject.deleteProject(prj1, false);
-		waitForElementNotPresent(mgProject.ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project", prj1));
  	}
 
 	/**
@@ -203,7 +163,6 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			Tasks page is opened*/
-		info("open task page");
 		hp.goToTasks();
 		
 		/*Step number: 3
@@ -214,10 +173,8 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			Projects has a contextual menu :Add Project, Show Hidden Projects*/
-		mgProject.goToContMenuProject();
-		waitForAndGetElement(mgProject.ELEMENT_LEFT_PANE_PROJECTS_SHOWHIDDEN);
-		waitForAndGetElement(mgProject.ELEMENT_LEFT_PANE_PROJECTS_ADD);
-		
+		mgProject.checkMenuProjectsOfUser(true);
+	
 		/*Step number: 4
 		*Step Name: Step 4: Login as paticipant of one project (not manager)
 		*Step Description: 
@@ -238,7 +195,6 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			Tasks page is opened*/
-		info("open task page");
 		hp.goToTasks();
 		
 		/*Step number: 6
@@ -249,10 +205,7 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			Projects has a contextual menu :Show Hidden Projects*/ 
-		mgProject.goToContMenuProject();
-		waitForAndGetElement(mgProject.ELEMENT_LEFT_PANE_PROJECTS_SHOWHIDDEN);
-		waitForElementNotPresent(mgProject.ELEMENT_LEFT_PANE_PROJECTS_ADD);
-	
+		mgProject.checkMenuProjectsOfUser(false);
  	}
 
 	/**
@@ -277,6 +230,7 @@ import org.testng.annotations.*;
 		String label = groupByData.getGroupBy(2);
 		String status = groupByData.getGroupBy(3);
 		String assignee = groupByData.getGroupBy(4);
+		String[] groups = {none,duedate,label,status,assignee};
 		/*Step Number: 1
 		*Step Name: Step 1: Open Tasks page
 		*Step Description: 
@@ -285,19 +239,11 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- Tasks page is opened*/
-		info("open task page");
 		hp.goToTasks();
-		
-		info("add project from Projects");
-		mgProject.selectOpContMenuProject(optionContMenuProject.Add_Project);
 		mgProject.addProject(project1,"", false);
-		info("add 2 tasks in to project1");
 		mgTask.addTask(project1, task1);
 		mgTask.addTask(project1, task2);
-		
-		mgProject.selectOpContMenuProject(optionContMenuProject.Add_Project);
 		mgProject.addProject(project2,"", false);
-		info("add 2 tasks in to project2");
 		mgTask.addTask(project2, task3);
 		mgTask.addTask(project2, task4);
 		
@@ -310,21 +256,11 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- Tasks of each project are Group by: None, Assignee, Project, Label, Due Date, Status*/ 
-		click(mgProject.ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project", "Projects"));
-		click(mgTask.ELEMENT_GROUPBY_ICON);
-		waitForAndGetElement(mgTask.ELEMENT_GROUPBY_ITEM.replace("$item",none));
-		waitForAndGetElement(mgTask.ELEMENT_GROUPBY_ITEM.replace("$item",duedate));
-		waitForAndGetElement(mgTask.ELEMENT_GROUPBY_ITEM.replace("$item",label));
-		waitForAndGetElement(mgTask.ELEMENT_GROUPBY_ITEM.replace("$item", assignee));
-		waitForAndGetElement(mgTask.ELEMENT_GROUPBY_ITEM.replace("$item", status));
+		mgProject.checkGroupByInProjects("Projects",groups);
 		
-		info("delete project");
-		mgProject.selectOpContMenuGivenProject(project1,optionContMenuGivenProject.Delete);
+		info("delete data");
 		mgProject.deleteProject(project1, false);
-		waitForElementNotPresent(mgProject.ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project", project1));
-		mgProject.selectOpContMenuGivenProject(project2,optionContMenuGivenProject.Delete);
 		mgProject.deleteProject(project2, false);
-		waitForElementNotPresent(mgProject.ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project", project2));
  	}
 
 	/**
@@ -344,7 +280,6 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			Tasks page is opened*/
-		info("open task page");
 		hp.goToTasks();
 		
 		/*Step number: 2
@@ -356,8 +291,7 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			There is no Board on Projects*/ 
-		click(mgProject.ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project", "Projects"));
-		waitForElementNotPresent(mgProject.ELEMENT_BOARD_VIEW);
+		mgProject.checkNoBoardInProjects("Projects");
  	}
 
 	/**
@@ -367,10 +301,15 @@ import org.testng.annotations.*;
 	*<li> Post-Condition: </li>
 	* BUG: https://jira.exoplatform.org/browse/TA-140
 	*/
+	/**
+	*<li> Case ID:128182.</li>
+	*<li> Test Case Name: Check Projects view.</li>
+	*<li> Pre-Condition: exo-tasks add-on is installed</li>
+	*<li> Post-Condition: </li>
+	*/
 	@Test (groups= "pending")
-	public  void test06_CheckProjectByDefault() {
+	public  void test06_07_CheckProjectByDefault() {
 		info("Test 6: Check project by default");
-		String tooltip =welcomeMesData.getWelcomeMessage(2); 
 		/*Step Number: 1
 		*Step Name: Step 1: Open Tasks page
 		*Step Description: 
@@ -379,7 +318,6 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			Tasks page is opened*/
-		info("open task page");
 		hp.goToTasks();
 		
 		/*Step number: 2
@@ -390,8 +328,6 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			Projects overview is opened*/
-		click(mgProject.ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project", "Projects"));
-		
 		/*Step number: 3
 		*Step Name: Step 3: Check Projects on central pane
 		*Step Description: 
@@ -403,47 +339,9 @@ import org.testng.annotations.*;
 			- big icon project is displayed 
 			- label No Project is displayed
 			- tooltip: Click here to create your first project.*/ 
-		waitForAndGetElement(mgProject.ELEMENT_LEFT_PANE_NO_PROJECT);
-		waitForAndGetElement(mgProject.ELEMENT_PROJECT_WELCOME_IMG);
-		waitForAndGetElement(mgProject.ELEMENT_PROJECT_WELCOME_TEXT.replace("$message", "No Project"));
-		waitForAndGetElement(mgProject.ELEMENT_LEFT_PANE_TOOLTIP.replace("$message", tooltip));
-		
+		mgProject.checkProjectsByDefault();
  	}
-
-	/**
-	*<li> Case ID:128182.</li>
-	*<li> Test Case Name: Check Projects view.</li>
-	*<li> Pre-Condition: exo-tasks add-on is installed</li>
-	*<li> Post-Condition: </li>
-	*/
-	@Test
-	public  void test07_CheckProjectsView() {
-		info("Test 7: Check Projects view");
-		/*Step Number: 1
-		*Step Name: Step 1: Open Tasks page
-		*Step Description: 
-			- Click on Tasks on the left navigation.
-		*Input Data: 
-			
-		*Expected Outcome: 
-			Tasks page is opened*/
-		info("open task page");
-		hp.goToTasks();
-		
-		/*Step number: 2
-		*Step Name: Step 2: Check Projects view
-		*Step Description: 
-			- Check Projects on left pane
-		*Input Data: 
-			
-		*Expected Outcome: 
-			- Add New Task function is not available on Projects view. 
-			- New Task and the blank field to add new task are hidden.*/ 
-		click(mgProject.ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project", "Projects"));
-		waitForElementNotPresent(mgProject.ELEMENT_ADD_TASK_BTN);
-		waitForElementNotPresent(mgProject.ELEMENT_ADD_TASK_TITLE);
- 	}
-
+	
 	/**
 	*<li> Case ID:128184.</li>
 	*<li> Test Case Name: Check Projects view default setting.</li>
@@ -469,17 +367,12 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			Tasks page is opened*/
-		info("open task page");
 		hp.goToTasks();
-		
-		info("add project from Projects");
-		mgProject.selectOpContMenuProject(optionContMenuProject.Add_Project);
 		mgProject.addProject(project,"", false);
-		
-		info("add 3 tasks in to project");
 		mgTask.addTask(project, task1);
 		mgTask.addTask(project, task2);
 		mgTask.addTask(project, task3);
+		
 		/*Step number: 2
 		*Step Name: Step 2: Check Projects view default setting
 		*Step Description: 
@@ -491,9 +384,7 @@ import org.testng.annotations.*;
 			Projects view default settings are:
 			- Group by: None
 			- Sort by: Due Date*/ 
-		click(mgProject.ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project", "Projects"));
-		waitForAndGetElement(mgProject.ELEMENT_SORTBY_ITEM.replace("$item", duedate));
-		waitForAndGetElement(mgProject.ELEMENT_GROUPBY_ITEM.replace("$item", none));
+		mgProject.checkDefaultGroupSort("Projects", none, duedate);
  	}
 
 	/**
@@ -517,6 +408,7 @@ import org.testng.annotations.*;
 		String title = sortByData.getSortBy(1);
 		String createdDate = sortByData.getSortBy(2);
 		String priority = sortByData.getSortBy(3);
+		String[] sorts = {duedate,title,createdDate,priority};
 		/*Step Number: 1
 		*Step Name: Step 1: Open Tasks page
 		*Step Description: 
@@ -525,19 +417,11 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- Tasks page is opened*/
-		info("open task page");
 		hp.goToTasks();
-		
-		info("add project from Projects");
-		mgProject.selectOpContMenuProject(optionContMenuProject.Add_Project);
 		mgProject.addProject(project1,"", false);
-		info("add 2 tasks in to project1");
 		mgTask.addTask(project1, task1);
 		mgTask.addTask(project1, task2);
-		
-		mgProject.selectOpContMenuProject(optionContMenuProject.Add_Project);
 		mgProject.addProject(project2,"", false);
-		info("add 2 tasks in to project2");
 		mgTask.addTask(project2, task3);
 		mgTask.addTask(project2, task4);
 		
@@ -550,20 +434,11 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- Tasks of each project are Sorted by: Title, Created Date, Due Date, Priority.*/ 
-		click(mgProject.ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project", "Projects"));
-		click(mgTask.ELEMENT_SORTBY_ICON);
-		waitForAndGetElement(mgTask.ELEMENT_SORTBY_ITEM.replace("$item",duedate));
-		waitForAndGetElement(mgTask.ELEMENT_SORTBY_ITEM.replace("$item",title));
-		waitForAndGetElement(mgTask.ELEMENT_SORTBY_ITEM.replace("$item",createdDate));
-		waitForAndGetElement(mgTask.ELEMENT_SORTBY_ITEM.replace("$item", priority));
+		mgProject.checkSortByInProjects("Projects", sorts);
 		
-		info("delete project");
-		mgProject.selectOpContMenuGivenProject(project1,optionContMenuGivenProject.Delete);
+		info("delete data");
 		mgProject.deleteProject(project1, false);
-		waitForElementNotPresent(mgProject.ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project", project1));
-		mgProject.selectOpContMenuGivenProject(project2,optionContMenuGivenProject.Delete);
 		mgProject.deleteProject(project2, false);
-		waitForElementNotPresent(mgProject.ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project", project2));
  	}
 
 	/**
@@ -577,10 +452,6 @@ import org.testng.annotations.*;
 	public  void test10_CheckWelcomeMessagesOfFirstAccess() {
 		info("Test 10 Check welcome messages of first access");
 		String project = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
-		String mes0 = welcomeMesData.getWelcomeMessage(0);
-		String mes1= welcomeMesData.getWelcomeMessage(1);
-		String mes2= welcomeMesData.getWelcomeMessage(3);
-		String mes3= welcomeMesData.getWelcomeMessage(4);
 		String[] users= {DATA_USER2};
 		/*Step Number: 1
 		*Step Name: Step 1: Open Tasks page
@@ -593,7 +464,6 @@ import org.testng.annotations.*;
 		info("login as root");
 		magAc.signOut();
 		magAc.signIn(USER_ROOT, DATA_PASS);
-		info("open task page");
 		hp.goToTasks();
 		
 		/*Step number: 2
@@ -605,8 +475,7 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			It displays: No Project*/
-		click(mgProject.ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project","Projects"));
-		waitForAndGetElement(mgProject.ELEMENT_PROJECT_WELCOME_TEXT.replace("$message", "No Project"));
+		mgProject.checkProjectsByDefault();
 		
 		/*Step number: 3
 		*Step Name: Step 3: Check case of viewing personal project
@@ -618,11 +487,7 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- It displays: This your personal project. You can share it for work collaboration.
 			- Share it is a link to open Share popup*/
-		info("add project from Projects");
-		mgProject.selectOpContMenuProject(optionContMenuProject.Add_Project);
 		mgProject.addProject(project,"", false);
-		waitForAndGetElement(mgProject.ELEMENT_PROJECT_WELCOME_TEXT.replace("$message", mes0));
-		waitForAndGetElement(mgProject.ELEMENT_PROJECT_WELCOME_TEXT.replace("$message", mes1));
 		
 		/*Step number: 4
 		*Step Name: Step 4: Check case of viewing shared project
@@ -633,28 +498,21 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- It displays: This is $FullName's project. There is no task to do.*/ 
-		info("share project to mary");
-		mgProject.goToContMenuGivenProject(project);
-		mgProject.selectOpContMenuGivenProject(project, optionContMenuGivenProject.Share);
-		mgProject.shareProject(users, false);
+		mgProject.shareProject(project,users, false);
 
 		info("login as mary");
 		magAc.signOut();
 		magAc.signIn(DATA_USER2, DATA_PASS);
 		hp.goToTasks();
-		click(mgProject.ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project", project));
-		waitForAndGetElement(mgProject.ELEMENT_PROJECT_WELCOME_TEXT.replace("$message", mes2));
-		waitForAndGetElement(mgProject.ELEMENT_PROJECT_WELCOME_TEXT.replace("$message", mes3));
-			
+		mgProject.checkDefaultSharedProject(project);
+		
 		info("login as root");
 		magAc.signOut();
 		magAc.signIn(USER_ROOT, DATA_PASS);
-		info("open task page");
 		hp.goToTasks();
-		info("delete project");
-		mgProject.selectOpContMenuGivenProject(project,optionContMenuGivenProject.Delete);
+		
+		info("delete data");
 		mgProject.deleteProject(project, false);
-		waitForElementNotPresent(mgProject.ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project", project));
  	}
 
 	/**
@@ -667,7 +525,6 @@ import org.testng.annotations.*;
 	public  void test11_CheckWelcomeScreenIsDisppearedWhenAddingProject() {
 		info("Test 11 Check welcome screen is disppeared when adding project");
 		String project = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
-		String tooltip = welcomeMesData.getWelcomeMessage(2);
 		/*Step Number: 1
 		*Step Name: Step 1: Open Tasks page
 		*Step Description: 
@@ -676,7 +533,6 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			Tasks page is opened*/
-		info("open task page");
 		hp.goToTasks();
 		
 		/*Step number: 2
@@ -689,16 +545,11 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- New project is created
 			- The message Click here to create your first project. and No Project screen are disappeared when there is a project added.*/ 
-		click(mgProject.ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project","Projects"));
-		info("add project from Projects");
-		mgProject.selectOpContMenuProject(optionContMenuProject.Add_Project);
 		mgProject.addProject(project,"", false);
-		waitForElementNotPresent(mgProject.ELEMENT_LEFT_PANE_TOOLTIP.replace("$message", tooltip));
+		mgProject.checkProjectDetail(project);
 		
-		info("delete project");
-		mgProject.selectOpContMenuGivenProject(project,optionContMenuGivenProject.Delete);
-		mgProject.deleteProject(project, true);
-		waitForElementNotPresent(mgProject.ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project", project));
+		info("delete data");
+		mgProject.deleteProject(project, false);
  	}
 
 	/**
@@ -712,8 +563,6 @@ import org.testng.annotations.*;
 		info("Test 12 Check welcome screen is disppeared when adding task");
 		String project = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		String task = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
-		String tooltip = welcomeMesData.getWelcomeMessage(5);
-		
 		/*Step Number: 1
 		*Step Name: Step 1: Open Tasks page
 		*Step Description: 
@@ -722,10 +571,7 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			Tasks page is opened*/
-		info("open task page");
 		hp.goToTasks();
-		info("add project from Projects");
-		mgProject.selectOpContMenuProject(optionContMenuProject.Add_Project);
 		mgProject.addProject(project,"", false);
 		
 		/*Step number: 2
@@ -738,15 +584,11 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- Task is added to project
 			- The message Let's create your first task. and welcome screen are disappeared when there is a task added.*/ 
-		info("add task into project");
 		mgTask.addTask(project, task);
-		waitForElementNotPresent(mgProject.ELEMENT_LEFT_PANE_TOOLTIP.replace("$mes", tooltip));
-		waitForElementNotPresent(mgProject.ELEMENT_PROJECT_WELCOME_IMG);
+		mgTask.checkTaskDetail(task);
 		
 		info("delete project");
-		mgProject.selectOpContMenuGivenProject(project,optionContMenuGivenProject.Delete);
-		mgProject.deleteProject(project, true);
-		waitForElementNotPresent(mgProject.ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project", project));
+		mgProject.deleteProject(project, false);
  	}
 
 	/**
@@ -759,7 +601,6 @@ import org.testng.annotations.*;
 	public  void test13_ProjectIsAddedWhenTheAppIsAddedToTheSpace() {
 		info("Test 13 Project is added when the app is added to the space");
 		String space = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
-		
 		/*Step Number: 1
 		*Step Name: Step 1: Add Task application to space
 		*Step Description: 
@@ -783,12 +624,11 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- Tasks page is opened
 			- space0 project is added in left pane under Projects*/ 
-		info("open task page");
 		hp.goToTasks();
 		waitForAndGetElement(mgProject.ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project", space));
 		
 		info("Delete a Space");
 		hp.goToMySpaces();
 		spaMg.deleteSpace(space,false);
-
- 	}}
+ 	}
+	}

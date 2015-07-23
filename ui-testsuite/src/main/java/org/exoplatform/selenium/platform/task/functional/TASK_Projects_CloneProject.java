@@ -1,10 +1,6 @@
 package org.exoplatform.selenium.platform.task.functional;
 
 import static org.exoplatform.selenium.TestLogger.info;
-
-import org.exoplatform.selenium.platform.task.ManagementProjects.optionContMenuGivenProject;
-import org.exoplatform.selenium.platform.task.ManagementProjects.optionContMenuProject;
-
 import org.testng.annotations.*;
 
 
@@ -38,8 +34,6 @@ import org.testng.annotations.*;
 	public  void test01_03_05_06_CheckAProjectCanBeClonedFromArrowMenuClone() {
 		info("Test 1: Check a project can be cloned from Arrow menu > Clone");
 		String name = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
-		String mes0 = welcomeMesData.getWelcomeMessage(7);
-		String mes1 = welcomeMesData.getWelcomeMessage(8);
 		/*Step Number: 1
 		*Step Name: Step 1: Open Tasks page
 		*Step Description: 
@@ -48,11 +42,7 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- Tasks page is opened*/
-		info("open task page");
 		hp.goToTasks();
-		
-		info("add project from Projects");
-		mgProject.selectOpContMenuProject(optionContMenuProject.Add_Project);
 		mgProject.addProject(name,"", false);
 		
 		/*Step number: 2
@@ -67,13 +57,6 @@ import org.testng.annotations.*;
 			-message : You are about to clone $Project project. Please confirm
 			- checkbox : also clone uncompleted tasks
 			- actions : [Clone] [Cancel]*/ 
-		info("clone project");
-		mgProject.selectOpContMenuGivenProject(name, optionContMenuGivenProject.Clone);
-		waitForAndGetElement(mgProject.ELEMENT_CLONE_PROJECT_CANCEL_BUTTON);
-		waitForAndGetElement(mgProject.ELEMENT_CLONE_PROJECT_CLONE_BUTTON);
-		waitForAndGetElement(mgProject.ELEMENT_CONFIRMATION_POPUP_TITLE);
-		waitForAndGetElement(mgProject.ELEMENT_CLONE_PROJECT_CLONE_TASK_CHECKBOX_TEXT.replace("$mes",mes0));
-		waitForAndGetElement(mgProject.ELEMENT_CLONE_PROJECT_POPUP_MESSAGE.replace("$project",name).replace("$mes",mes1));
 		mgProject.cloneProject(name,false);
 		
 		/*Step number: 2
@@ -84,14 +67,9 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- a cloned project is automatically given the same name prefixed by "Copy of"*/
-		waitForAndGetElement(mgTask.ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project","Copy of "+name));
 		info("delete data");
-		mgProject.selectOpContMenuGivenProject(name,optionContMenuGivenProject.Delete);
-		mgProject.deleteProject(name, false);
-		mgProject.selectOpContMenuGivenProject(name,optionContMenuGivenProject.Delete);
 		mgProject.deleteProject("Copy of "+name, false);
-		waitForElementNotPresent(mgProject.ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project", name));
-		waitForElementNotPresent(mgProject.ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project","Copy of "+name ));
+		mgProject.deleteProject(name, false);
  	}
 
 	/**
@@ -112,11 +90,7 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			Tasks page is opened*/
-		info("open task page");
 		hp.goToTasks();
-		
-		info("add project from Projects");
-		mgProject.selectOpContMenuProject(optionContMenuProject.Add_Project);
 		mgProject.addProject(name,"", false);
 		
 		/*Step number: 2
@@ -127,9 +101,6 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			project A is cloned*/
-		info("clone project");
-		mgProject.selectOpContMenuGivenProject(name, optionContMenuGivenProject.Clone);
-		
 		/*Step number: 3
 		*Step Name: Step 3: Check Cancel button when cloning project
 		*Step Description: 
@@ -138,14 +109,10 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			Cancel dismisses the dialog without making a change*/ 
-		click(mgProject.ELEMENT_CLONE_PROJECT_CANCEL_BUTTON);
-		waitForElementNotPresent(mgProject.ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project","Copy of "+name));
+		mgProject.cancelCloneProject(name);
 		
 		info("delete data");
-		mgProject.selectOpContMenuGivenProject(name,optionContMenuGivenProject.Delete);
 		mgProject.deleteProject(name, false);
-		waitForElementNotPresent(mgProject.ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project", name));
-		
  	}
 
 	/**
@@ -153,8 +120,9 @@ import org.testng.annotations.*;
 	*<li> Test Case Name: Check cloned project inherits.</li>
 	*<li> Pre-Condition: exo-tasks add-on is installedproject A1 is added to project A and has setted permission, description, color, due date</li>
 	*<li> Post-Condition: </li>
+	* BUG: https://jira.exoplatform.org/browse/TA-187
 	*/
-	@Test
+	@Test (groups="pending")
 	public  void test04_CheckClonedProjectInherits() {
 		info("Test 4: Check cloned project inherits");
 		String parent = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
@@ -168,17 +136,10 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			Tasks page is opened*/
-		info("open task page");
 		hp.goToTasks();
-		
-		info("add project from Projects");
-		mgProject.selectOpContMenuProject(optionContMenuProject.Add_Project);
 		mgProject.addProject(parent,"", false);
-		mgProject.selectOpContMenuGivenProject(parent,optionContMenuGivenProject.Add_Project);
-		mgProject.addProject(child,child, false);
-		info("add color to child");
+		mgProject.addSubProject(parent,child,child, false);
 		mgProject.selectColor(child, color1);
-		waitForAndGetElement(mgProject.ELEMENT_LEFT_PANE_PROJECT_COLOR.replace("$project", child).replace("$color", color1));
 		
 		/*Step number: 2
 		*Step Name: Step 2: Check cloned project inherits
@@ -188,21 +149,11 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			a cloned project inherits: workflow, permission, description, color, due date and parent project*/ 
-		info("clone child");
-		mgProject.selectOpContMenuGivenProject(child, optionContMenuGivenProject.Clone);
 		mgProject.cloneProject(child, false);
-		waitForAndGetElement(mgProject.ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project","Copy of "+child));
-		info("check inherits");
-		waitForAndGetElement(mgProject.ELEMENT_LEFT_PANE_PROJECT_COLOR.replace("$project", "Copy of "+child).replace("$color", color1));
-		click(mgProject.ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project", "Copy of "+child));
-		waitForAndGetElement(mgProject.ELEMENT_RIGHT_PANE_MANAGER_NAME.replace("$user", DATA_NAME_USER1));
-		waitForAndGetElement(mgProject.ELEMENT_RIGHT_PANE_PARENT_PATH_TEXT.replace("$project",parent));
-		waitForAndGetElement(mgProject.ELEMENT_ADD_PROJECT_DES_TEXT.replace("$des", child));
+		mgProject.checkClonedProjectInherits(child, parent,DATA_NAME_USER1,color1,child);
 		
 		info("delete data");
-		mgProject.selectOpContMenuGivenProject(parent,optionContMenuGivenProject.Delete);
-		mgProject.deleteProject(parent, true);
-		waitForElementNotPresent(mgProject.ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project", parent));
+		mgProject.deleteProject(parent, true,child);
 	}
 	
 	/**
@@ -226,17 +177,10 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			Tasks page is opened*/
-		info("open task page");
 		hp.goToTasks();
-		info("add project from Projects");
-		mgProject.selectOpContMenuProject(optionContMenuProject.Add_Project);
 		mgProject.addProject(prj1,"", false);
-		info("add task into project");
 		mgTask.addTask(prj1, task1);
-		info("add project from Projects");
-		mgProject.selectOpContMenuProject(optionContMenuProject.Add_Project);
 		mgProject.addProject(prj2,"", false);
-		info("add task into project");
 		mgTask.addTask(prj2, task2);
 		
 		/*Step number: 2
@@ -248,12 +192,7 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- project A is cloned
 			- all uncompleted task of this project cloned*/
-		info("clone project 1");
-		mgProject.selectOpContMenuGivenProject(prj1, optionContMenuGivenProject.Clone);
-		mgProject.cloneProject(prj1, true);
-		waitForAndGetElement(mgProject.ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project","Copy of "+prj1));
-		click(mgProject.ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project","Copy of "+prj1));
-		waitForAndGetElement(mgProject.ELEMENT_TASK_TITLE.replace("$task","Copy of "+task1));
+		mgProject.cloneProject(prj1, true,task1);
 		
 		/*Step number: 3
 		*Step Name: Step 3: Check when option to clone task is unchecked
@@ -264,24 +203,11 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- project A is cloned
 			- all uncompleted task of this project is NOT cloned*/ 
-		info("clone project 2 without uncompleted task");
-		mgProject.selectOpContMenuGivenProject(prj2, optionContMenuGivenProject.Clone);
-		mgProject.cloneProject(prj2, false);
-		waitForAndGetElement(mgProject.ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project","Copy of "+prj2));
-		click(mgProject.ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project","Copy of "+prj2));
-		waitForElementNotPresent(mgProject.ELEMENT_TASK_TITLE.replace("$task","Copy of "+task2));
+		mgProject.cloneProject(prj2, false,task2);
 		
 		info("delete data");
-		mgProject.selectOpContMenuGivenProject(prj1,optionContMenuGivenProject.Delete);
-		mgProject.deleteProject(prj1, false);
-		mgProject.selectOpContMenuGivenProject(prj2,optionContMenuGivenProject.Delete);
-		mgProject.deleteProject(prj2, false);
-		mgProject.selectOpContMenuGivenProject("Copy of "+ prj1,optionContMenuGivenProject.Delete);
 		mgProject.deleteProject("Copy of "+ prj1, false);
-		mgProject.selectOpContMenuGivenProject("Copy of "+ prj2,optionContMenuGivenProject.Delete);
 		mgProject.deleteProject("Copy of "+ prj2, false);
-		waitForElementNotPresent(mgProject.ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project","Copy of "+ prj2));
-		waitForElementNotPresent(mgProject.ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project","Copy of "+prj1));
-		waitForElementNotPresent(mgProject.ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project",prj2));
-		waitForElementNotPresent(mgProject.ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project",prj1));
+		mgProject.deleteProject(prj1, false);
+		mgProject.deleteProject(prj2, false);
 	}}

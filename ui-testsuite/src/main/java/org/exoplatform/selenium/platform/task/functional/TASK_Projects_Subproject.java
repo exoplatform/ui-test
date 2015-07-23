@@ -1,12 +1,7 @@
 package org.exoplatform.selenium.platform.task.functional;
 
 import static org.exoplatform.selenium.TestLogger.info;
-
-import org.exoplatform.selenium.platform.task.ManagementProjects.optionContMenuGivenProject;
-import org.exoplatform.selenium.platform.task.ManagementProjects.optionContMenuProject;
-
 import org.testng.annotations.*;
-
 
 	public class TASK_Projects_Subproject extends TASK_TestConfig_1{
 
@@ -23,6 +18,7 @@ import org.testng.annotations.*;
 		String prj11 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		String prj12 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		String prj13 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+		String[] subs = {prj11,prj12,prj13};
 		/*Step Number: 1
 		*Step Name: Step 1: Open Tasks page
 		*Step Description: 
@@ -31,10 +27,7 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- Tasks page is opened*/
-		info("open task page");
 		hp.goToTasks();
-		info("add project from Projects");
-		mgProject.selectOpContMenuProject(optionContMenuProject.Add_Project);
 		mgProject.addProject(prj1,"", false);
 	
 		/*Step number: 2
@@ -46,27 +39,15 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- project A1, project A2, project A3 are added to parent project A*/ 
-		info("add project from project 1");
-		mgProject.selectOpContMenuGivenProject(prj1, optionContMenuGivenProject.Add_Project);
-		mgProject.addProject(prj11,"", false);
-		click(mgProject.ELEMENT_RIGHT_PANE_PARENT_PATH_LINK);
-		waitForAndGetElement(mgProject.ELEMENT_RIGHT_PANE_PARENT_PATH_FULL.replace("$parent", prj1).replace("$child",""));
-		mgProject.selectOpContMenuGivenProject(prj1, optionContMenuGivenProject.Add_Project);
-		mgProject.addProject(prj12,"", false);
-		click(mgProject.ELEMENT_RIGHT_PANE_PARENT_PATH_LINK);
-		waitForAndGetElement(mgProject.ELEMENT_RIGHT_PANE_PARENT_PATH_FULL.replace("$parent", prj1).replace("$child",""));
-		mgProject.selectOpContMenuGivenProject(prj1, optionContMenuGivenProject.Add_Project);
-		mgProject.addProject(prj13,"", false);
-		click(mgProject.ELEMENT_RIGHT_PANE_PARENT_PATH_LINK);
-		waitForAndGetElement(mgProject.ELEMENT_RIGHT_PANE_PARENT_PATH_FULL.replace("$parent", prj1).replace("$child",""));
+		mgProject.addSubProject(prj1,prj11,"", false);
+		mgProject.checkChildrenProject(prj1, "");
+		mgProject.addSubProject(prj1,prj12,"", false);
+		mgProject.checkChildrenProject(prj1, "");
+		mgProject.addSubProject(prj1,prj13,"", false);
+		mgProject.checkChildrenProject(prj1, "");
 		
 		info("delete data");
-		mgProject.selectOpContMenuGivenProject(prj1,optionContMenuGivenProject.Delete);
-		mgProject.deleteProject(prj1, true);
-		waitForElementNotPresent(mgProject.ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project", prj1));
-		waitForElementNotPresent(mgProject.ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project", prj11));
-		waitForElementNotPresent(mgProject.ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project", prj12));
-		waitForElementNotPresent(mgProject.ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project", prj13));
+		mgProject.deleteProject(prj1, true,subs);	
 	}
 
 	/**
@@ -83,6 +64,7 @@ import org.testng.annotations.*;
 		String prj111 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		String prj112 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		String prj113 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+		String[] subs={prj11,prj111,prj112,prj113};
 		/*Step Number: 1
 		*Step Name: Step 1: Open Tasks page
 		*Step Description: 
@@ -91,14 +73,9 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- Tasks page is opened*/
-		info("open task page");
 		hp.goToTasks();
-		info("add project from Projects");
-		mgProject.selectOpContMenuProject(optionContMenuProject.Add_Project);
 		mgProject.addProject(prj1,"", false);
-		info("add project from project 1");
-		mgProject.selectOpContMenuGivenProject(prj1, optionContMenuGivenProject.Add_Project);
-		mgProject.addProject(prj11,"", false);
+		mgProject.addSubProject(prj1,prj11,"", false);
 		
 		/*Step number: 2
 		*Step Name: Step 2: Create some sub-projects in a sub-project
@@ -108,28 +85,15 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- project A11, project A12, project A13 are added to parent: project A1*/ 
-		info("add project from project 11");
-		mgProject.selectOpContMenuGivenProject(prj11, optionContMenuGivenProject.Add_Project);
-		mgProject.addProject(prj111,"", false);
-		click(mgProject.ELEMENT_RIGHT_PANE_PARENT_PATH_LINK);
-		waitForAndGetElement(mgProject.ELEMENT_RIGHT_PANE_PARENT_PATH_FULL.replace("$parent", prj1).replace("$child",prj11));
-		mgProject.selectOpContMenuGivenProject(prj11, optionContMenuGivenProject.Add_Project);
-		mgProject.addProject(prj112,"", false);
-		click(mgProject.ELEMENT_RIGHT_PANE_PARENT_PATH_LINK);
-		waitForAndGetElement(mgProject.ELEMENT_RIGHT_PANE_PARENT_PATH_FULL.replace("$parent", prj1).replace("$child",prj11));
-		mgProject.selectOpContMenuGivenProject(prj11, optionContMenuGivenProject.Add_Project);
-		mgProject.addProject(prj113,"", false);
-		click(mgProject.ELEMENT_RIGHT_PANE_PARENT_PATH_LINK);
-		waitForAndGetElement(mgProject.ELEMENT_RIGHT_PANE_PARENT_PATH_FULL.replace("$parent", prj1).replace("$child",prj11));
+		mgProject.addSubProject(prj11,prj111,"", false);
+		mgProject.checkChildrenProject(prj1, prj11);
+		mgProject.addSubProject(prj11,prj112,"", false);
+		mgProject.checkChildrenProject(prj1, prj11);
+		mgProject.addSubProject(prj11,prj113,"", false);
+		mgProject.checkChildrenProject(prj1, prj11);
 		
 		info("delete data");
-		mgProject.selectOpContMenuGivenProject(prj1,optionContMenuGivenProject.Delete);
-		mgProject.deleteProject(prj1, true);
-		waitForElementNotPresent(mgProject.ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project", prj1));
-		waitForElementNotPresent(mgProject.ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project", prj11));
-		waitForElementNotPresent(mgProject.ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project", prj111));
-		waitForElementNotPresent(mgProject.ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project", prj112));
-		waitForElementNotPresent(mgProject.ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project", prj113));
+		mgProject.deleteProject(prj1, true,subs);
 	}
 
 	/**
@@ -152,12 +116,8 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- Tasks page is opened*/
-		info("open task page");
 		hp.goToTasks();
-		info("add project from Projects");
-		mgProject.selectOpContMenuProject(optionContMenuProject.Add_Project);
 		mgProject.addProject(prj1,"", false);
-		info("add task into project 1");
 		mgTask.addTask(prj1, task1);
 		
 		/*Step number: 2
@@ -170,17 +130,11 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- project A1 is added to parent project A
 			- project A1 is empty. It is not inherit tasks from project A*/ 
-		info("add project to project 1");
-		mgProject.selectOpContMenuGivenProject(prj1, optionContMenuGivenProject.Add_Project);
-		mgProject.addProject(prj11,"", false);
+		mgProject.addSubProject(prj1,prj11,"", false);
 		waitForElementNotPresent(mgProject.ELEMENT_TASK_TITLE.replace("$task", task1));
 		
 		info("delete data");
-		mgProject.selectOpContMenuGivenProject(prj1,optionContMenuGivenProject.Delete);
-		mgProject.deleteProject(prj1, true);
-		waitForElementNotPresent(mgProject.ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project", prj1));
-		waitForElementNotPresent(mgProject.ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project", prj11));
-		
+		mgProject.deleteProject(prj1, true,prj11);
  	}
 
 	/**
@@ -196,6 +150,8 @@ import org.testng.annotations.*;
 		String prj11 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		String[] user1 = {DATA_USER2};
 		String[] user2 = {DATA_USER3};
+		String[] user3 = {DATA_NAME_USER1};
+		String[] user4 = {DATA_NAME_USER2};
 		/*Step Number: 1
 		*Step Name: Step 1: Open Tasks page
 		*Step Description: 
@@ -204,14 +160,9 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- Tasks page is opened*/
-		info("open task page");
 		hp.goToTasks();
-		info("add project from Projects");
-		mgProject.selectOpContMenuProject(optionContMenuProject.Add_Project);
 		mgProject.addProject(prj1,"", false);
-		info("add participant");
-		mgProject.selectOpContMenuGivenProject(prj1, optionContMenuGivenProject.Share);
-		mgProject.shareProject(user1, false);
+		mgProject.shareProject(prj1,user1, false);
 		
 		/*Step number: 2
 		*Step Name: Step 2: Create sub-project of project A
@@ -222,12 +173,8 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- project A1 is added to parent project A
 			- in Project Overview, manager is creator, paticipant is user A (permission is inherit from parent)*/
-		info("add project to project 1");
-		mgProject.selectOpContMenuGivenProject(prj1, optionContMenuGivenProject.Add_Project);
-		mgProject.addProject(prj11,"", false);
-		mgProject.selectOpContMenuGivenProject(prj11, optionContMenuGivenProject.Share);
-		waitForAndGetElement(mgProject.ELEMENT_SHARE_PROJECT_DISPLAY_PARTICIPANT.replace("$user",DATA_NAME_USER2));
-		waitForAndGetElement(mgProject.ELEMENT_SHARE_PROJECT_DISPLAY_MANAGER.replace("$user",DATA_NAME_USER1));
+		mgProject.addSubProject(prj1,prj11,"", false);
+		mgProject.checkShareUsers(prj11, user3, user4);
 	
 		/*Step number: 3
 		*Step Name: Step 3: Share sub
@@ -238,14 +185,10 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- project A1 is shared to user B*/ 
-		info("share project 11 to james");
-		mgProject.shareProject(user2, false);
+		mgProject.shareProject(prj11,user2, false);
 		
 		info("delete data");
-		mgProject.selectOpContMenuGivenProject(prj1,optionContMenuGivenProject.Delete);
-		mgProject.deleteProject(prj1, true);
-		waitForElementNotPresent(mgProject.ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project", prj1));
-		waitForElementNotPresent(mgProject.ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project", prj11));
+		mgProject.deleteProject(prj1, true,prj11);
  	}
 
 	/**
@@ -269,14 +212,9 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			Tasks page is opened*/
-		info("open task page");
 		hp.goToTasks();
-		info("add project from Projects");
-		mgProject.selectOpContMenuProject(optionContMenuProject.Add_Project);
 		mgProject.addProject(prj1,"", false);
-		info("add task into project 1");
 		mgTask.addTask(prj1, task1);
-		waitForAndGetElement(mgProject.ELEMENT_RIGHT_PANE_TASK_WORKFLOW_TEXT.replace("$flow","To Do"));
 		
 		/*Step number: 2
 		*Step Name: Step 2: Check Sub-projects inherit workflow from their parent
@@ -286,16 +224,10 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			Sub-projects inherit workflow from their parent at creation time. They can evolve separately afterwards.*/ 
-		info("add project to project 1");
-		mgProject.selectOpContMenuGivenProject(prj1, optionContMenuGivenProject.Add_Project);
-		mgProject.addProject(prj11,"", false);
-		info("add task into project 11");
+		mgProject.addSubProject(prj1,prj11,"", false);
 		mgTask.addTask(prj11, task11);
-		waitForAndGetElement(mgProject.ELEMENT_RIGHT_PANE_TASK_WORKFLOW_TEXT.replace("$flow","To Do"));
- 	
+		mgTask.checkTaskDetail(task11);
+		
 		info("delete data");
-		mgProject.selectOpContMenuGivenProject(prj1,optionContMenuGivenProject.Delete);
-		mgProject.deleteProject(prj1, true);
-		waitForElementNotPresent(mgProject.ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project", prj1));
-		waitForElementNotPresent(mgProject.ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project", prj11));
+		mgProject.deleteProject(prj1, true,prj11);
 	}}

@@ -1,11 +1,7 @@
 package org.exoplatform.selenium.platform.task.functional;
 
 import static org.exoplatform.selenium.TestLogger.info;
-import org.exoplatform.selenium.platform.task.ManagementProjects.optionContMenuGivenProject;
-import org.exoplatform.selenium.platform.task.ManagementProjects.optionContMenuProject;
-
 import org.testng.annotations.*;
-
 
 	public class TASK_Projects_ShowHideProject extends TASK_TestConfig_1{
 
@@ -33,12 +29,9 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			Tasks page is opened*/
-		info("open task page");
 		hp.goToTasks();
-		info("add project from Projects");
-		mgProject.selectOpContMenuProject(optionContMenuProject.Add_Project);
 		mgProject.addProject(name,"", false);
-		click(mgProject.ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project", "Projects"));
+		mgProject.goToProjects();
 		
 		/*Step number: 2
 		*Step Name: Step 2: Check a project can be hidden from contextual menu > Hide
@@ -48,15 +41,11 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			project A is hidden*/ 
-		info("hide project");
-		mgProject.selectOpContMenuGivenProject(name, optionContMenuGivenProject.Hide);
-		waitForTextNotPresent(name);
+		mgProject.hideProject(name);
 		
 		info("delete data");
-		mgProject.selectOpContMenuProject(optionContMenuProject.Show_Hidden_Project);
-		mgProject.selectOpContMenuGivenProject(name,optionContMenuGivenProject.Delete);
+		mgProject.showProject(name);
 		mgProject.deleteProject(name, false);
-		mgProject.selectOpContMenuProject(optionContMenuProject.Hide_Hidden_Project);
  	}
 
 	/**
@@ -152,15 +141,10 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- Tasks page is opened*/
-		info("open task page");
 		hp.goToTasks();
-		info("add project from Projects");
-		mgProject.selectOpContMenuProject(optionContMenuProject.Add_Project);
 		mgProject.addProject(name,"", false);
-		click(mgProject.ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project","Projects"));
-		info("hide project");
-		mgProject.selectOpContMenuGivenProject(name, optionContMenuGivenProject.Hide);
-		waitForTextNotPresent(name);
+		mgProject.goToProjects();
+		mgProject.hideProject(name);
 		
 		/*Step number: 2
 		*Step Name: Step 2: Check Hide Hidden Projects
@@ -171,14 +155,10 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- project A is shown
 			- Show Hidden Projects is turned into Hide Hidden Projects to hide all being displayed hidden projects again*/
-		info("show hide project");
-		mgProject.selectOpContMenuProject(optionContMenuProject.Show_Hidden_Project);
-		waitForTextPresent(name);
+		mgProject.showProject(name);
 		
 		info("delete data");
-		mgProject.selectOpContMenuGivenProject(name,optionContMenuGivenProject.Delete);
 		mgProject.deleteProject(name, false);
-		mgProject.selectOpContMenuProject(optionContMenuProject.Hide_Hidden_Project);
  	}
 
 	/**
@@ -186,8 +166,9 @@ import org.testng.annotations.*;
 	*<li> Test Case Name: Check hide project is personal display settings.</li>
 	*<li> Pre-Condition: exo-tasks add-on is installeduser A created project A and share to user B</li>
 	*<li> Post-Condition: </li>
+	*BUG: https://jira.exoplatform.org/browse/TA-182
 	*/
-	@Test
+	@Test (groups="pending")
 	public  void test06_CheckHideProjectIsPersonalDisplaySettings() {
 		info("Test 6: Check hide project is personal display settings");
 		String name = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
@@ -209,15 +190,10 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			Tasks page is opened*/
-		info("open task page");
 		hp.goToTasks();
-		info("add project from Projects");
-		mgProject.selectOpContMenuProject(optionContMenuProject.Add_Project);
 		mgProject.addProject(name,"", false);
-		click(mgProject.ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project","Projects"));
-		info("share project with mary ");
-		mgProject.selectOpContMenuGivenProject(name, optionContMenuGivenProject.Share);
-		mgProject.shareProject(user1, true);
+		mgProject.goToProjects();
+		mgProject.shareProject(name,user1, true);
 		
 		/*Step number: 3
 		*Step Name: Step 3: Hide project A
@@ -227,9 +203,7 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			project A is hidden*/
-		info("hide project");
-		mgProject.selectOpContMenuGivenProject(name, optionContMenuGivenProject.Hide);
-		waitForTextNotPresent(name);
+		mgProject.hideProject(name);
 		
 		/*Step number: 4
 		*Step Name: Step 4: Login as user B
@@ -251,7 +225,6 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			Tasks page is opened*/
-		info("open task page");
 		hp.goToTasks();
 		
 		/*Step number: 6
@@ -265,8 +238,7 @@ import org.testng.annotations.*;
 		waitForTextPresent(name);
 		
 		info("delete data");
-		mgProject.selectOpContMenuGivenProject(name,optionContMenuGivenProject.Delete);
-		mgProject.deleteProject(name, true);
+		mgProject.deleteProject(name, false);
 	
  	}
 
@@ -282,6 +254,7 @@ import org.testng.annotations.*;
 		String prj1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		String prj11 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		String prj12 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+		String[] subs = {prj11,prj12};
 		/*Step Number: 1
 		*Step Name: Step 1: Open Tasks page
 		*Step Description: 
@@ -290,17 +263,11 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			Tasks page is opened*/
-		info("open task page");
 		hp.goToTasks();
-		
-		info("add project from Projects");
-		mgProject.selectOpContMenuProject(optionContMenuProject.Add_Project);
 		mgProject.addProject(prj1,"", false);
-		mgProject.selectOpContMenuGivenProject(prj1, optionContMenuGivenProject.Add_Project);
-		mgProject.addProject(prj11,"", false);
-		mgProject.selectOpContMenuGivenProject(prj1, optionContMenuGivenProject.Add_Project);
-		mgProject.addProject(prj12,"", false);
-		click(mgProject.ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project","Projects"));
+		mgProject.addSubProject(prj1,prj11,"", false);
+		mgProject.addSubProject(prj1,prj12,"", false);
+		mgProject.goToProjects();
 		
 		/*Step number: 2
 		*Step Name: Step 2: Check sub
@@ -311,17 +278,11 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			project A1, project A1 are hidden also*/ 
-		info("hide project");
-		mgProject.selectOpContMenuGivenProject(prj1, optionContMenuGivenProject.Hide);
-		waitForTextNotPresent(prj1);
-		waitForTextNotPresent(prj11);
-		waitForTextNotPresent(prj12);
+		mgProject.hideProject(prj1,subs);
 		
 		info("delete data");
-		mgProject.selectOpContMenuProject(optionContMenuProject.Show_Hidden_Project);
-		mgProject.selectOpContMenuGivenProject(prj1,optionContMenuGivenProject.Delete);
-		mgProject.deleteProject(prj1, true);
-		mgProject.selectOpContMenuProject(optionContMenuProject.Hide_Hidden_Project);
+		mgProject.showProject(prj1);
+		mgProject.deleteProject(prj1, true,subs);
  	}
 
 	/**

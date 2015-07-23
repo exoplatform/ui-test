@@ -1,10 +1,6 @@
 package org.exoplatform.selenium.platform.task.functional;
 
 import static org.exoplatform.selenium.TestLogger.info;
-
-import org.exoplatform.selenium.platform.task.ManagementProjects.optionContMenuGivenProject;
-import org.exoplatform.selenium.platform.task.ManagementProjects.optionContMenuProject;
-
 import org.testng.annotations.*;
 
 
@@ -32,7 +28,6 @@ import org.testng.annotations.*;
 	public  void test01_03_CheckAProjectCanBeDeletedFromArrowMenuDelete() {
 		info("Test 1: Check a project can be deleted from Arrow menu > Delete");
 		String prj1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
-		String mes = welcomeMesData.getWelcomeMessage(6);
 		/*Step Number: 1
 		*Step Name: Step 1: Open Tasks page
 		*Step Description: 
@@ -41,10 +36,7 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- Tasks page is opened*/
-		info("open task page");
 		hp.goToTasks();
-		info("add project 1 from Projects");
-		mgProject.selectOpContMenuProject(optionContMenuProject.Add_Project);
 		mgProject.addProject(prj1,"", false);
 		
 		/*Step number: 2
@@ -67,16 +59,10 @@ import org.testng.annotations.*;
 			- message : You are about to delete $Project project and all its tasks. Please confirm
 			- checkbox : also delete all sub-projects.
 			- actions : [Delete] [Cancel]*/ 
-		info("delete project");
-		mgProject.selectOpContMenuGivenProject(prj1,optionContMenuGivenProject.Delete);
-		waitForAndGetElement(mgProject.ELEMENT_CONFIRMATION_POPUP_TITLE);
-		waitForAndGetElement(mgProject.ELEMENT_DELETE_PROJECT_POPUP_CANCEL_BTN);
-		waitForAndGetElement(mgProject.ELEMENT_DELETE_PROJECT_POPUP_DELETE_BTN);
-		waitForAndGetElement(mgProject.ELEMENT_DELETE_PROJECT_POPUP_MESSAGE.replace("${project}",prj1));
-		waitForAndGetElement(mgProject.ELEMENT_DELETE_PROJECT_DELETE_SUBPRJ_CHECKBOX_TEXT.replace("$mes", mes));
+		mgProject.checkConfirmDeleteProject(prj1);
 		
+		info("delete data");
 		mgProject.deleteProject(prj1, false);
-		waitForElementNotPresent(mgProject.ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project", prj1));
  	}
 
 	/**
@@ -97,10 +83,7 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- Tasks page is opened*/
-		info("open task page");
 		hp.goToTasks();
-		info("add project 1 from Projects");
-		mgProject.selectOpContMenuProject(optionContMenuProject.Add_Project);
 		mgProject.addProject(prj1,"", false);
 		
 		/*Step number: 2
@@ -113,16 +96,10 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- A confirmation dialog opens
 			- Cancel dismisses the dialog without making a change*/ 
-		info("click Cancel delete");
-		mgProject.selectOpContMenuGivenProject(prj1,optionContMenuGivenProject.Delete);
-		waitForAndGetElement(mgProject.ELEMENT_CONFIRMATION_POPUP_TITLE);
-		click(mgProject.ELEMENT_DELETE_PROJECT_POPUP_CANCEL_BTN);
-		waitForAndGetElement(mgProject.ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project", prj1));
-		
-		info("delete project");
-		mgProject.selectOpContMenuGivenProject(prj1,optionContMenuGivenProject.Delete);
+		mgProject.cancelDeleteProject(prj1);
+	
+		info("delete data");
 		mgProject.deleteProject(prj1, false);
-		waitForElementNotPresent(mgProject.ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project", prj1));
  	}
 
 	/**
@@ -136,7 +113,6 @@ import org.testng.annotations.*;
 	public  void test04_CheckDeleteActionIsNotAvailableToTheMainSpaceProject() {
 		info("Test 4: Check Delete action is not available to the main space project");
 		String space1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
-		
 		/*Step Number: 1
 		*Step Name: Step 1: Open Tasks page
 		*Step Description: 
@@ -148,7 +124,6 @@ import org.testng.annotations.*;
 		info("Create a space");
 		hp.goToMySpaces();
 		spaMg.addNewSpaceSimple(space1,space1);
-		info("open task page");
 		hp.goToTasks();
 		waitForAndGetElement(mgProject.ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project", space1));
 		
@@ -184,7 +159,6 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- spaceA project is deleted from project list*/
-		info("open task page");
 		hp.goToTasks();
 		waitForElementNotPresent(mgProject.ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project", space1));
 		
@@ -220,6 +194,7 @@ import org.testng.annotations.*;
 		String prj1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		String prj11 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		String prj12 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+		String[] subprjs = {prj11,prj12};
 		/*Step Number: 1
 		*Step Name: Step 1: Open Tasks page
 		*Step Description: 
@@ -228,18 +203,10 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- Tasks page is opened*/
-		info("open task page");
 		hp.goToTasks();
-		
-		info("add project 1 from Projects");
-		mgProject.selectOpContMenuProject(optionContMenuProject.Add_Project);
 		mgProject.addProject(prj1,"", false);
-		info("add project 11 from project 1");
-		mgProject.selectOpContMenuGivenProject(prj1, optionContMenuGivenProject.Add_Project);
-		mgProject.addProject(prj11,"", false);
-		info("add project 12 from project 1");
-		mgProject.selectOpContMenuGivenProject(prj1, optionContMenuGivenProject.Add_Project);
-		mgProject.addProject(prj12,"", false);
+		mgProject.addSubProject(prj1,prj11,"", false);
+		mgProject.addSubProject(prj1,prj12,"", false);
 		
 		/*Step number: 2
 		*Step Name: Step 2: Check when option to delete all sub
@@ -253,12 +220,9 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- A confirmation dialog opens
 			- project A and project A1, project A2 are deleted*/ 
-		info("delete project and check sub-project");
-		mgProject.selectOpContMenuGivenProject(prj1,optionContMenuGivenProject.Delete);
-		mgProject.deleteProject(prj1, true);
-		waitForElementNotPresent(mgProject.ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project", prj1));
-		waitForElementNotPresent(mgProject.ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project", prj11));
-		waitForElementNotPresent(mgProject.ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project", prj12));
+		info("delete data");
+		mgProject.deleteProject(prj1, true, subprjs);
+		
  	}
 
 	/**
@@ -280,15 +244,9 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- Tasks page is opened*/
-		info("open task page");
 		hp.goToTasks();
-		
-		info("add project 1 from Projects");
-		mgProject.selectOpContMenuProject(optionContMenuProject.Add_Project);
 		mgProject.addProject(prj1,"", false);
-		info("add project 11 from project 1");
-		mgProject.selectOpContMenuGivenProject(prj1, optionContMenuGivenProject.Add_Project);
-		mgProject.addProject(prj11,"", false);
+		mgProject.addSubProject(prj1,prj11,"", false);
 		
 		/*Step number: 2
 		*Step Name: Step 2: Check when option to delete all sub
@@ -302,15 +260,7 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- A confirmation dialog opens
 			- project A is deleted, project A1, project A2 are moved to the grandparent node*/ 
-		info("uncheck sub-project");
-		mgProject.selectOpContMenuGivenProject(prj1,optionContMenuGivenProject.Delete);
-		mgProject.deleteProject(prj1, false);
-		waitForElementNotPresent(mgProject.ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project", prj1));
-		waitForAndGetElement(mgProject.ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project", prj11));
-		
-		info("delete project");
-		mgProject.selectOpContMenuGivenProject(prj11,optionContMenuGivenProject.Delete);
-		mgProject.deleteProject(prj11, true);
-		waitForElementNotPresent(mgProject.ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project", prj11));
-		
+		mgProject.deleteProject(prj1, false,prj11);
+		info("delete data");
+		mgProject.deleteProject(prj11, false);
  	}}

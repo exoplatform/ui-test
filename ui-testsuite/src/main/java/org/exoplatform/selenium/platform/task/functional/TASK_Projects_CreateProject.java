@@ -1,15 +1,7 @@
 package org.exoplatform.selenium.platform.task.functional;
 
 import static org.exoplatform.selenium.TestLogger.info;
-
-import org.exoplatform.selenium.Utils;
-import org.exoplatform.selenium.platform.task.ManagementProjects.optionContMenuGivenProject;
-import org.exoplatform.selenium.platform.task.ManagementProjects.optionContMenuProject;
-
-import org.openqa.selenium.Keys;
-
 import org.testng.annotations.*;
-
 
 	public class TASK_Projects_CreateProject extends TASK_TestConfig_1{
 
@@ -22,8 +14,7 @@ import org.testng.annotations.*;
 	@Test
 	public  void test01_AProjectCanBeSavedWithTheDuplicatedTitle() {
 		info("Test 1: A project can be saved with the duplicated title");
-		String name = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
-		
+		String name = txData.getContentByArrayTypeRandom(1)+getRandomNumber();	
 		/*Step Number: 1
 		*Step Name: Step 1: Open Tasks page
 		*Step Description: 
@@ -32,7 +23,6 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- Tasks page is opened*/
-		info("open task page");
 		hp.goToTasks();
 		
 		/*Step number: 2
@@ -43,22 +33,14 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- another project A is added*/ 
-		info("add project from Projects");
-		mgProject.selectOpContMenuProject(optionContMenuProject.Add_Project);
 		mgProject.addProject(name,"", false);
 		int prj1_id= mgProject.getDataId(mgProject.ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project", name));
-		
-		info("add 2nd project with the same name");
-		mgProject.selectOpContMenuProject(optionContMenuProject.Add_Project);
 		mgProject.addProject(name,"", false);
 		waitForAndGetElement(mgProject.ELEMENT_LEFT_PANE_PROJECT_ID.replace("$id",String.valueOf(prj1_id+1)).replace("$project", name));
 		
 		info("delete data");
-		mgProject.selectOpContMenuGivenProject(name,optionContMenuGivenProject.Delete);
-		mgProject.deleteProject(name, false);
-		mgProject.selectOpContMenuGivenProject(name,optionContMenuGivenProject.Delete);
-		mgProject.deleteProject(name, false);
-		waitForElementNotPresent(mgProject.ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project", name));
+		mgProject.deleteProjectByDataId(name,String.valueOf(prj1_id), false);
+		mgProject.deleteProjectByDataId(name,String.valueOf(prj1_id+1), false);
  	}
 
 	/**
@@ -79,7 +61,6 @@ import org.testng.annotations.*;
 		String parent = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		String child = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		String name = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
-		
 		/*Step Number: 1
 		*Step Name: Step 1: Open Tasks page
 		*Step Description: 
@@ -88,18 +69,10 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- Tasks page is opened*/
-		info("open task page");
 		hp.goToTasks();
-		
-		info("add project");
-		mgProject.selectOpContMenuProject(optionContMenuProject.Add_Project);
 		mgProject.addProject(name,"", false);
-		info("add project A");
-		mgProject.selectOpContMenuProject(optionContMenuProject.Add_Project);
 		mgProject.addProject(parent,"", false);
-		info("add project B");
-		mgProject.selectOpContMenuGivenProject(parent, optionContMenuGivenProject.Add_Project);
-		mgProject.addProject(child, "", false);
+		mgProject.addSubProject(parent,child, "", false);
 		
 		/*Step number: 2
 		*Step Name: Step 2: Open project B
@@ -129,13 +102,9 @@ import org.testng.annotations.*;
 		waitForAndGetElement(mgProject.ELEMENT_RIGHT_PANE_PARENT_PATH_DROPDOWN_MENU.replace("$project", parent));
 		
 		info("delete data");
-		mgProject.selectOpContMenuGivenProject(name,optionContMenuGivenProject.Delete);
 		mgProject.deleteProject(name, false);
-		mgProject.selectOpContMenuGivenProject(parent,optionContMenuGivenProject.Delete);
-		mgProject.deleteProject(parent, true);
-		waitForElementNotPresent(mgProject.ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project", name));
-		waitForElementNotPresent(mgProject.ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project", parent));
-		waitForElementNotPresent(mgProject.ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project", child));
+		mgProject.deleteProject(child, false);
+		mgProject.deleteProject(parent, false);
  	}
 
 	/** 
@@ -156,7 +125,6 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- Tasks page is opened*/
-
 		/*Step number: 2
 		*Step Name: Step 2: Open project A
 		*Step Description: 
@@ -165,7 +133,6 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- project A is opened*/
-
 		/*Step number: 3
 		*Step Name: Step 3: Edit project A
 		*Step Description: 
@@ -204,14 +171,8 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			Tasks page is opened*/
-		info("open task page");
 		hp.goToTasks();
-		
-		info("add project from Projects");
-		mgProject.selectOpContMenuProject(optionContMenuProject.Add_Project);
 		mgProject.addProject(project,"", false);
-		
-		info("add 3 tasks in to project");
 		mgTask.addTask(project, task1);
 		mgTask.addTask(project, task2);
 		mgTask.addTask(project, task3);
@@ -226,13 +187,10 @@ import org.testng.annotations.*;
 			Project is created, Default settings in a group:
 			- Group by: None 
 			- Sort by: Due Date*/ 
-		waitForAndGetElement(mgProject.ELEMENT_PROJECT_DEFAULT_SORTBY.replace("$sort",sort));
-		waitForAndGetElement(mgProject.ELEMENT_PROJECT_DEFAULT_GROUPBY.replace("$group",group));
+		mgProject.checkDefaultGroupSort(project, group, sort);
 		
-		info("delete project");
-		mgProject.selectOpContMenuGivenProject(project,optionContMenuGivenProject.Delete);
+		info("delete data");
 		mgProject.deleteProject(project, false);
-		waitForElementNotPresent(mgProject.ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project", project));
  	}
 
 	/**
@@ -254,7 +212,6 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- Tasks page is opened*/
-		info("open task page");
 		hp.goToTasks();
 		
 		/*Step number: 2
@@ -265,8 +222,6 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- new project is created*/
-		info("add project from Projects");
-		mgProject.selectOpContMenuProject(optionContMenuProject.Add_Project);
 		mgProject.addProject(project,"", false);
 		
 		/*Step number: 3
@@ -278,25 +233,11 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- description is saved with decorated
 			- description can be left blank*/ 
-		info("decorate description");
-		click(mgProject.ELEMENT_RIGHT_PANE_EDIT_PROJECT_DES_INPUT);
-		inputFrame(mgProject.ELEMENT_CKEDITOR_IFRAME, des);
-		mgProject.cke_NumberList();
-		mgProject.cke_Bold();
-		mouseOverAndClick(mgProject.ELEMENT_RIGHT_PANE_PARENT_PATH_LINK);
-		waitForAndGetElement(mgProject.ELEMENT_ADD_PROJECT_DES_CKEDITOR.replace("$des", des));
-		
-		info("left blank description");
-		click(mgProject.ELEMENT_RIGHT_PANE_EDIT_PROJECT_DES_INPUT);
-		inputFrame(mgProject.ELEMENT_CKEDITOR_IFRAME, "");
-		mouseOverAndClick(mgProject.ELEMENT_RIGHT_PANE_PARENT_PATH_LINK);
-		waitForAndGetElement(mgProject.ELEMENT_ADD_PROJECT_DES_TEXT.replace("$des", "Empty"));
+		mgProject.decorateDescription(project, des);
+		mgProject.decorateDescription(project, "");
 		
 		info("delete data");
-		mgProject.selectOpContMenuGivenProject(project,optionContMenuGivenProject.Delete);
 		mgProject.deleteProject(project, false);
-		waitForElementNotPresent(mgProject.ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project", project));
-		
  	}
 
 	/**
@@ -309,8 +250,6 @@ import org.testng.annotations.*;
 	public  void test07_CheckDisplayAfterCreatingProject() {
 		info("Test 7: Check display after creating project");
 		String name = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
-		String mes1 = welcomeMesData.getWelcomeMessage(0);
-		String mes2 = welcomeMesData.getWelcomeMessage(1);
 		/*Step Number: 1
 		*Step Name: Step 1: Open Tasks page
 		*Step Description: 
@@ -319,7 +258,6 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			Tasks page is opened*/
-		info("open task page");
 		hp.goToTasks();
 
 		/*Step number: 2
@@ -330,18 +268,11 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			Project is created: it becomes the being selected one, new project welcome screen is displayed*/ 
-		info("add project from Projects");
-		mgProject.selectOpContMenuProject(optionContMenuProject.Add_Project);
 		mgProject.addProject(name,"", false);
-		waitForAndGetElement(mgProject.ELEMENT_LEFT_PANE_PROJECT_MENU.replace("$project",name));
-		waitForAndGetElement(mgProject.ELEMENT_PROJECT_WELCOME_IMG);
-		waitForAndGetElement(mgProject.ELEMENT_PROJECT_WELCOME_TEXT.replace("$message", mes1));
-		waitForAndGetElement(mgProject.ELEMENT_PROJECT_WELCOME_TEXT.replace("$message", mes2));
+		mgProject.checkProjectDetail(name);
 		
 		info("delete data");
-		mgProject.selectOpContMenuGivenProject(name,optionContMenuGivenProject.Delete);
 		mgProject.deleteProject(name, false);
-		waitForElementNotPresent(mgProject.ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project", name));
  	}
 
 	/**
@@ -394,6 +325,7 @@ import org.testng.annotations.*;
 		String label = groupByData.getGroupBy(2);
 		String status = groupByData.getGroupBy(3);
 		String assignee = groupByData.getGroupBy(4);
+		String[] groups={none,duedate,label,status,assignee};
 		/*Step Number: 1
 		*Step Name: Step 1: Open Tasks page
 		*Step Description: 
@@ -402,14 +334,8 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- Tasks page is opened*/
-		info("open task page");
 		hp.goToTasks();
-		
-		info("add project from Projects");
-		mgProject.selectOpContMenuProject(optionContMenuProject.Add_Project);
 		mgProject.addProject(project,"", false);
-		
-		info("add 3 tasks in to project");
 		mgTask.addTask(project, task1);
 		mgTask.addTask(project, task2);
 		mgTask.addTask(project, task3);
@@ -423,18 +349,10 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- Tasks of project A are Grouped by: None, Due Date, Label, Assignee, Status.*/ 
-		click(mgTask.ELEMENT_GROUPBY_ICON);
-		waitForAndGetElement(mgTask.ELEMENT_GROUPBY_ITEM.replace("$item",none));
-		waitForAndGetElement(mgTask.ELEMENT_GROUPBY_ITEM.replace("$item",duedate));
-		waitForAndGetElement(mgTask.ELEMENT_GROUPBY_ITEM.replace("$item",label));
-		waitForAndGetElement(mgTask.ELEMENT_GROUPBY_ITEM.replace("$item", assignee));
-		waitForAndGetElement(mgTask.ELEMENT_GROUPBY_ITEM.replace("$item", status));
-		
+		mgProject.checkGroupByInProjects(project, groups);
+	
 		info("delete project");
-		mgProject.selectOpContMenuGivenProject(project,optionContMenuGivenProject.Delete);
 		mgProject.deleteProject(project, false);
-		waitForElementNotPresent(mgProject.ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project", project));
-		
  	}
 
 	/**
@@ -455,7 +373,6 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- Tasks page is opened*/
-		info("open task page");
 		hp.goToTasks();
 		
 		/*Step number: 2
@@ -473,14 +390,7 @@ import org.testng.annotations.*;
 			- Description.
 			- Enable Calendar Integration option.
 			- Save and Cancel button.*/ 
-		info("click on Add Project from Projects");
-		mgProject.selectOpContMenuProject(optionContMenuProject.Add_Project);
-		waitForAndGetElement(mgProject.ELEMENT_ADD_PROJECT_HEADER.replace("$header","Project overview"));
-		waitForAndGetElement(mgProject.ELEMENT_RIGHT_PANE_PARENT_PATH_TEXT.replace("$project", "Projects"));
-		waitForAndGetElement(mgProject.ELEMENT_ADD_PROJECT_DES_INPUT);
-		waitForAndGetElement(mgProject.ELEMENT_ADD_PROJECT_TITLE_INPUT);
-		waitForAndGetElement(mgProject.ELEMENT_ADD_PROJECT_ENABLE_CALENDAR);
-		
+		mgProject.checkAddProjectPopup();
  	}
 
 	/**
@@ -502,7 +412,6 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- Tasks page is opened*/
-		info("open task page");
 		hp.goToTasks();
 		
 		/*Step number: 2
@@ -513,10 +422,7 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- New project is created with the parents value is Projects*/
-		info("add project1 from Projects");
-		mgProject.selectOpContMenuProject(optionContMenuProject.Add_Project);
 		mgProject.addProject(prj1,"", false);
-		waitForAndGetElement(mgProject.ELEMENT_RIGHT_PANE_PARENT_PATH_TEXT.replace("$project", "Projects"));
 		
 		/*Step number: 3
 		*Step Name: Step 3: Add Project from the contextual menu of project A
@@ -526,17 +432,10 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- New project is created with the parents value is Projects - project A*/ 
-		info("add project11 from project1");
-		mgProject.selectOpContMenuGivenProject(prj1,optionContMenuGivenProject.Add_Project);
-		mgProject.addProject(prj11,"", false);
-		waitForAndGetElement(mgProject.ELEMENT_RIGHT_PANE_PARENT_PATH_TEXT.replace("$project", prj1));
+		mgProject.addSubProject(prj1,prj11,"", false);
 		
 		info("delete project");
-		mgProject.selectOpContMenuGivenProject(prj1,optionContMenuGivenProject.Delete);
-		mgProject.deleteProject(prj1, true);
-		waitForElementNotPresent(mgProject.ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project", prj1));
-		waitForElementNotPresent(mgProject.ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project", prj11));
-		
+		mgProject.deleteProject(prj1, true,prj11);
 	}
 
 	/**
@@ -557,7 +456,6 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- Tasks page is opened*/
-		info("open task page");
 		hp.goToTasks();
 		
 		/*Step number: 2
@@ -571,15 +469,11 @@ import org.testng.annotations.*;
 			- new project is created
 			- The creator is default value of Manager field. 
 			- In the project overview, the manager field is not able to click to edit.*/ 
-		info("add project1 from Projects");
-		mgProject.selectOpContMenuProject(optionContMenuProject.Add_Project);
 		mgProject.addProject(prj1,"", false);
 		waitForAndGetElement(mgProject.ELEMENT_RIGHT_PANE_MANAGER_NAME.replace("$user",DATA_NAME_USER1));
 		
 		info("delete project");
-		mgProject.selectOpContMenuGivenProject(prj1,optionContMenuGivenProject.Delete);
 		mgProject.deleteProject(prj1, true);
-		waitForElementNotPresent(mgProject.ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project", prj1));
  	}
 
 	/**
@@ -602,17 +496,9 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- Tasks page is opened*/
-		info("open task page");
 		hp.goToTasks();
-		
-		info("add project1 from Projects");
-		mgProject.selectOpContMenuProject(optionContMenuProject.Add_Project);
 		mgProject.addProject(prj1,"", false);
-		info("add child1");
-		mgProject.selectOpContMenuGivenProject(prj1, optionContMenuGivenProject.Add_Project);
-		mgProject.addProject(prj11, "", false);
-		info("add project2 from Projects");
-		mgProject.selectOpContMenuProject(optionContMenuProject.Add_Project);
+		mgProject.addSubProject(prj1,prj11, "", false);
 		mgProject.addProject(prj2,"", false);
 		
 		/*Step number: 2
@@ -632,20 +518,12 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- matched project is displayed:Projects project Bproject B1*/ 
-		info("search child of project1");
-		click(mgProject.ELEMENT_RIGHT_PANE_PARENT_PATH_LINK);
-		type(mgProject.ELEMENT_EDIT_PROJECT_PATH_INPUT,prj11,true);
+		mgProject.searchProjectPath(prj11);
 		waitForAndGetElement(mgProject.ELEMENT_RIGHT_PANE_PARENT_PATH_FULL.replace("$parent",prj1).replace("$child", prj11));
 		
-		info("delete project");
-		mgProject.selectOpContMenuGivenProject(prj1,optionContMenuGivenProject.Delete);
-		mgProject.deleteProject(prj1, true);
-		waitForElementNotPresent(mgProject.ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project", prj1));
-		waitForElementNotPresent(mgProject.ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project", prj11));
-		mgProject.selectOpContMenuGivenProject(prj2,optionContMenuGivenProject.Delete);
-		mgProject.deleteProject(prj2, true);
-		waitForElementNotPresent(mgProject.ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project", prj2));
-		
+		info("delete data");
+		mgProject.deleteProject(prj1, true,prj11);
+		mgProject.deleteProject(prj2, false);
  	}
 
 	/**
@@ -686,7 +564,6 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- Save is enable
 			- Save all changes*/ 
-
  	}
 
 	/**
@@ -708,6 +585,7 @@ import org.testng.annotations.*;
 		String title = sortByData.getSortBy(1);
 		String createdDate = sortByData.getSortBy(2);
 		String priority = sortByData.getSortBy(3);
+		String[] sorts = {dueDate,title,createdDate,priority};
 		/*Step Number: 1
 		*Step Name: Step 1: Open Tasks page
 		*Step Description: 
@@ -716,14 +594,8 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- Tasks page is opened*/
-		info("open task page");
 		hp.goToTasks();
-		
-		info("add project from Projects");
-		mgProject.selectOpContMenuProject(optionContMenuProject.Add_Project);
 		mgProject.addProject(project,"", false);
-		
-		info("add 3 tasks in to project");
 		mgTask.addTask(project, task1);
 		mgTask.addTask(project, task2);
 		mgTask.addTask(project, task3);
@@ -737,16 +609,10 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- Tasks of project A are Sorted by: Title, Created Date, Due Date, Priority*/ 
-		click(mgTask.ELEMENT_SORTBY_ICON);
-		waitForAndGetElement(mgTask.ELEMENT_SORTBY_ITEM.replace("$item",dueDate));
-		waitForAndGetElement(mgTask.ELEMENT_SORTBY_ITEM.replace("$item",title));
-		waitForAndGetElement(mgTask.ELEMENT_SORTBY_ITEM.replace("$item",createdDate));
-		waitForAndGetElement(mgTask.ELEMENT_SORTBY_ITEM.replace("$item",priority));
+		mgProject.checkSortByInProjects(project, sorts);
 		
-		info("delete project");
-		mgProject.selectOpContMenuGivenProject(project,optionContMenuGivenProject.Delete);
+		info("delete data");
 		mgProject.deleteProject(project, false);
-		waitForElementNotPresent(mgProject.ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project", project));
  	}
 
 	/**
@@ -776,21 +642,11 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- Tasks page is opened*/
-		info("open task page");
 		hp.goToTasks();
-		
-		info("add parent2");
-		mgProject.selectOpContMenuProject(optionContMenuProject.Add_Project);
 		mgProject.addProject(prj2,"", false);
-		info("add parent1");
-		mgProject.selectOpContMenuProject(optionContMenuProject.Add_Project);
 		mgProject.addProject(prj1,"", false);
-		info("add child1");
-		mgProject.selectOpContMenuGivenProject(prj1, optionContMenuGivenProject.Add_Project);
-		mgProject.addProject(prj11, "", false);
-		info("add child of child 1");
-		mgProject.selectOpContMenuGivenProject(prj11, optionContMenuGivenProject.Add_Project);
-		mgProject.addProject(prj111, "", false);
+		mgProject.addSubProject(prj1,prj11, "", false);
+		mgProject.addSubProject(prj11,prj111, "", false);
 		
 		/*Step number: 2
 		*Step Name: Step 2: Open project A1
@@ -801,7 +657,7 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- Project Overview of project A1 is opened to edit*/
 		info("open child1");
-		click(mgProject.ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project", prj11));
+		mgProject.openProject(prj11);
 		
 		/*Step number: 3
 		*Step Name: Step 3: Check the project autocomplete filter
@@ -812,22 +668,15 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- The project autocomplete list is filtered following the input text. 
 			- The matched value is bold.*/ 
-		info("Click on Parent project field");
-		click(mgProject.ELEMENT_RIGHT_PANE_PARENT_PATH_LINK);
-		type(mgProject.ELEMENT_EDIT_PROJECT_PATH_INPUT,"Content",false);
-		waitForAndGetElement(mgProject.ELEMENT_RIGHT_PANE_PARENT_PATH_MATCH_VALUE.replace("$text","Content"));
+		mgProject.searchProjectPath("Content");
 		waitForElementNotPresent(mgProject.ELEMENT_RIGHT_PANE_PARENT_PATH_DROPDOWN_MENU.replace("$project",prj11));
 		waitForElementNotPresent(mgProject.ELEMENT_RIGHT_PANE_PARENT_PATH_DROPDOWN_MENU.replace("$project",prj111));
 		waitForAndGetElement(mgProject.ELEMENT_RIGHT_PANE_PARENT_PATH_DROPDOWN_MENU.replace("$project", prj1));
 		waitForAndGetElement(mgProject.ELEMENT_RIGHT_PANE_PARENT_PATH_DROPDOWN_MENU.replace("$project", prj2));
 		
 		info("delete data");
-		mgProject.selectOpContMenuGivenProject(prj1,optionContMenuGivenProject.Delete);
 		mgProject.deleteProject(prj1, true);
-		waitForElementNotPresent(mgProject.ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project", prj1));
-		mgProject.selectOpContMenuGivenProject(prj2,optionContMenuGivenProject.Delete);
 		mgProject.deleteProject(prj2, true);
-		waitForElementNotPresent(mgProject.ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project", prj2));
  	}
 
 	/**
@@ -849,7 +698,6 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- Tasks page is opened*/
-		info("open task page");
 		hp.goToTasks();
 		
 		/*Step number: 2
@@ -860,8 +708,6 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- Project Overview of project A is opened*/
-		info("add project");
-		mgProject.selectOpContMenuProject(optionContMenuProject.Add_Project);
 		mgProject.addProject(name,"", false);
 		
 		/*Step number: 3
@@ -873,17 +719,10 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- Untitled Project title is saved*/ 
-		info("clear title field");
-		click(mgProject.ELEMENT_ADD_PROJECT_TITLE_TEXT.replace("$title",name));
-		waitForAndGetElement(mgProject.ELEMENT_EDIT_PROJECT_TITLE_INPUT).clear();
-        Utils.pause(500);
-        driver.findElement(mgProject.ELEMENT_EDIT_PROJECT_TITLE_INPUT).sendKeys(Keys.ENTER);
-        waitForAndGetElement(mgProject.ELEMENT_ADD_PROJECT_TITLE_TEXT.replace("$title", "Untitled Project"));
+		mgProject.leftProjectTitleBlank(name);
         
         info("delete data");
-		mgProject.selectOpContMenuGivenProject("Untitled Project",optionContMenuGivenProject.Delete);
-		mgProject.deleteProject("Untitled Project", true);
-		waitForElementNotPresent(mgProject.ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project", "Untitled Project"));
+		mgProject.deleteProject("Untitled Project", false);
 	}
 
 	/**
@@ -904,7 +743,6 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- Tasks page is opened*/
-		info("open task page");
 		hp.goToTasks();
 		
 		/*Step number: 2
@@ -915,14 +753,11 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- new project is created under Projects on left pane*/ 
-		info("add project");
-		mgProject.selectOpContMenuProject(optionContMenuProject.Add_Project);
 		mgProject.addProject(name,"", false);
+		mgProject.checkProjectDetail(name);
 		
 		info("delete data");
-		mgProject.selectOpContMenuGivenProject(name,optionContMenuGivenProject.Delete);
-		mgProject.deleteProject(name, true);
-		waitForElementNotPresent(mgProject.ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project", name));
+		mgProject.deleteProject(name, false);
  	}
 
 	/**
@@ -944,11 +779,7 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- Tasks page is opened*/
-		info("open task page");
 		hp.goToTasks();
-		
-		info("add parent");
-		mgProject.selectOpContMenuProject(optionContMenuProject.Add_Project);
 		mgProject.addProject(parent,"", false);
 		
 		/*Step number: 2
@@ -960,14 +791,10 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- new sub-project is created under project A on left pane*/ 
-		info("add child");
-		mgProject.selectOpContMenuGivenProject(parent, optionContMenuGivenProject.Add_Project);
-		mgProject.addProject(child, "", false);
+		mgProject.addSubProject(parent,child, "", false);
 		
 		info("delete data");
-		mgProject.selectOpContMenuGivenProject(parent,optionContMenuGivenProject.Delete);
-		mgProject.deleteProject(parent, true);
-		waitForElementNotPresent(mgProject.ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project", parent));
+		mgProject.deleteProject(parent, true,child);
  	}
 
 	/**
@@ -989,10 +816,7 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- Tasks page is opened*/
-		info("open task page");
 		hp.goToTasks();
-		info("add project from Projects");
-		mgProject.selectOpContMenuProject(optionContMenuProject.Add_Project);
 		mgProject.addProject(prj1,"", false);
 		
 		/*Step number: 2
@@ -1003,9 +827,7 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- project A is now shared with user A*/
-		info("share project with mary with manager permission");
-		mgProject.selectOpContMenuGivenProject(prj1, optionContMenuGivenProject.Share);
-		mgProject.shareProject(user1, true);
+		mgProject.shareProject(prj1,user1, true);
 		
 		/*Step number: 3
 		*Step Name: Step 3: Check manager field
@@ -1016,11 +838,10 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- Project Overview is opened with manager: user A inside*/ 
 		info("mary is now manager of project 1");
-		doubleClickOnElement(mgProject.ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project",prj1));
+		mgProject.goToProjects();
+		mgProject.openProject(prj1);
 		waitForAndGetElement(mgProject.ELEMENT_RIGHT_PANE_MANAGER_NAME.replace("$user", DATA_NAME_USER2));
 		
 		info("delete data");
-		mgProject.selectOpContMenuGivenProject(prj1,optionContMenuGivenProject.Delete);
 		mgProject.deleteProject(prj1, true);
-		waitForElementNotPresent(mgProject.ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project", prj1));
  	}}

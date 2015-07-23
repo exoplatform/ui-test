@@ -1,12 +1,8 @@
 package org.exoplatform.selenium.platform.task.functional;
 
 import static org.exoplatform.selenium.TestLogger.info;
-
 import org.exoplatform.selenium.platform.task.ManagementProjects.optionContMenuGivenProject;
-import org.exoplatform.selenium.platform.task.ManagementProjects.optionContMenuProject;
-
 import org.testng.annotations.*;
-
 
 	public class TASK_Projects_ShareProject extends TASK_TestConfig_1{
 
@@ -32,20 +28,14 @@ import org.testng.annotations.*;
 		String comment2 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		String[] user1 = {DATA_USER2};
 		
-		info("open task page");
 		hp.goToTasks();
-		info("add project from Projects");
-		mgProject.selectOpContMenuProject(optionContMenuProject.Add_Project);
 		mgProject.addProject(parent,parent, false);
-		mgProject.selectOpContMenuGivenProject(parent, optionContMenuGivenProject.Add_Project);
-		mgProject.addProject(child, "",false);
+		mgProject.addSubProject(parent,child, "",false);
 		mgTask.addTask(child, task);
-		mgTask.addTaskComment(comment1);
-		waitForAndGetElement(mgTask.ELEMENT_RIGHT_PANE_COMMENT_TEXT.replace("$user", DATA_NAME_USER1).replace("$comment", comment1));
+		mgTask.addTaskComment(task,DATA_NAME_USER1,comment1);
 		
 		info("share project with mary");
-		mgProject.selectOpContMenuGivenProject(child, optionContMenuGivenProject.Share);
-		mgProject.shareProject(user1, false);
+		mgProject.shareProject(child,user1, false);
 		
 		/*Step Number: 1
 		*Step Name: Step 1: Login as user A
@@ -67,7 +57,6 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- Tasks page is opened*/
-		info("open task page");
 		hp.goToTasks();
 		
 		/*Step number: 3
@@ -82,7 +71,7 @@ import org.testng.annotations.*;
 		waitForAndGetElement(mgProject.ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project", parent));
 		waitForAndGetElement(mgProject.ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project", child));
 		info("click on parent project");
-		doubleClickOnElement(mgProject.ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project", parent));
+		mgProject.openProject(parent);
 		waitForElementNotPresent(mgProject.ELEMENT_ADD_PROJECT_DES_TEXT.replace("$des", parent));
 		
 		/*Step number: 4
@@ -93,23 +82,16 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			user A can add and edit, view and comment on tasks of the project*/
-		info("check comment of John");
-		click(mgProject.ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project", child));
-		click(mgProject.ELEMENT_TASK_TITLE.replace("$task", task));
-		waitForAndGetElement(mgTask.ELEMENT_RIGHT_PANE_COMMENT_TEXT.replace("$user", DATA_NAME_USER1).replace("$comment", comment1));
-		mgTask.addTaskComment(comment2);
-		waitForAndGetElement(mgTask.ELEMENT_RIGHT_PANE_COMMENT_TEXT.replace("$user", DATA_NAME_USER2).replace("$comment", comment2));
+		mgTask.checkCommentOfUser(child, task, comment1,DATA_NAME_USER1);
+		mgTask.addTaskComment(task,DATA_NAME_USER2,comment2);
 		
 		info("login as john");
 		magAc.signOut();
 		magAc.signIn(DATA_USER1, DATA_PASS);
-		info("open task page");
 		hp.goToTasks();
+		
 		info("delete data");
-		mgProject.selectOpContMenuGivenProject(parent,optionContMenuGivenProject.Delete);
-		mgProject.deleteProject(parent, true);
-		waitForElementNotPresent(mgProject.ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project", parent));
-		waitForElementNotPresent(mgProject.ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project", child));
+		mgProject.deleteProject(parent, true,child);
  	}
 
 	/**
@@ -126,7 +108,6 @@ import org.testng.annotations.*;
 		String comment1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		String comment2 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		String[] user1 = {DATA_USER2};
-		
 		/*Step Number: 1
 		*Step Name: Step 1: Open Tasks page
 		*Step Description: 
@@ -135,14 +116,11 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- Tasks page is opened*/
-		info("open task page");
 		hp.goToTasks();
-		info("add project from Projects");
-		mgProject.selectOpContMenuProject(optionContMenuProject.Add_Project);
 		mgProject.addProject(project,"", false);
 		mgTask.addTask(project, task);
-		mgTask.addTaskComment(comment1);
-		waitForAndGetElement(mgTask.ELEMENT_RIGHT_PANE_COMMENT_TEXT.replace("$user", DATA_NAME_USER1).replace("$comment", comment1));
+		mgTask.addTaskComment(task,DATA_NAME_USER1,comment1);
+		
 		/*Step number: 2
 		*Step Name: Step 2: Share project A with user A
 		*Step Description: 
@@ -152,9 +130,7 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- project A is shared to user A with manager permission*/
-		info("share project with mary");
-		mgProject.selectOpContMenuGivenProject(project, optionContMenuGivenProject.Share);
-		mgProject.shareProject(user1, true);
+		mgProject.shareProject(project,user1, true);
 		
 		/*Step number: 3
 		*Step Name: Step 3: Login as user A
@@ -167,7 +143,6 @@ import org.testng.annotations.*;
 		info("login as mary");
 		magAc.signOut();
 		magAc.signIn(DATA_USER2, DATA_PASS);
-		info("open task page");
 		hp.goToTasks();
 		
 		/*Step number: 4
@@ -180,20 +155,12 @@ import org.testng.annotations.*;
 			- user A can edit, delete, share, edit workflow of a project
 			- user A can add and edit, view and comment on tasks of the project*/
 		info("have full permisson on project");
-		mgProject.goToContMenuGivenProject(project);
-		waitForAndGetElement(mgProject.ELEMENT_LEFT_PANE_PROJECT_DELETE.replace("$project", project));
-		waitForAndGetElement(mgProject.ELEMENT_LEFT_PANE_PROJECT_SHARE.replace("$project", project));
-		info("check comment of John");
-		click(mgProject.ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project", project));
-		click(mgProject.ELEMENT_TASK_TITLE.replace("$task", task));
-		waitForAndGetElement(mgTask.ELEMENT_RIGHT_PANE_COMMENT_TEXT.replace("$user", DATA_NAME_USER1).replace("$comment", comment1));
-		mgTask.addTaskComment(comment2);
-		waitForAndGetElement(mgTask.ELEMENT_RIGHT_PANE_COMMENT_TEXT.replace("$user", DATA_NAME_USER2).replace("$comment", comment2));
+		mgProject.checkMenuGivenProjectOfUser(project, true);
+		mgTask.checkCommentOfUser(project, task, comment1,DATA_NAME_USER1);
+		mgTask.addTaskComment(task,DATA_NAME_USER2,comment2);
 		
 		info("delete data");
-		mgProject.selectOpContMenuGivenProject(project,optionContMenuGivenProject.Delete);
-		mgProject.deleteProject(project, true);
-		waitForElementNotPresent(mgProject.ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project", project));
+		mgProject.deleteProject(project, false);
  	}
 
 	/**
@@ -262,8 +229,6 @@ import org.testng.annotations.*;
 		spaMg.addNewSpaceSimple(space,space);
 		spaHome.goToSpaceSettingTab();
 		setSpaceMg.inviteUser(DATA_USER2,false,"");
-		
-		info("open task page");
 		hp.goToTasks();
 		
 		/*Step number: 3
@@ -275,15 +240,9 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- user Acan add and edit, view and comment on tasks of spaceA project
 			- user A can edit, delete, share, edit workflow of spaceA project*/ 
-		info("add task to space");
 		mgTask.addTask(space, task);
-		mgTask.addTaskComment(comment1);
-		waitForAndGetElement(mgTask.ELEMENT_RIGHT_PANE_COMMENT_TEXT.replace("$user", DATA_NAME_USER1).replace("$comment", comment1));
-		
-		info("check manager permission");
-		mgProject.goToContMenuGivenProject(space);
-		waitForAndGetElement(mgProject.ELEMENT_LEFT_PANE_PROJECT_DELETE.replace("$project", space));
-		waitForAndGetElement(mgProject.ELEMENT_LEFT_PANE_PROJECT_SHARE.replace("$project", space));
+		mgTask.addTaskComment(task,DATA_NAME_USER1,comment1);
+		mgProject.checkMenuGivenProjectOfUser(space, true);
 		
 		/*Step Number: 1
 		*Step Name: Step 1: Login as user A
@@ -298,7 +257,6 @@ import org.testng.annotations.*;
 		magAc.signIn(DATA_USER2, DATA_PASS);
 		hp.goToMySpaces();
 		spaMg.acceptAInvitation(space);
-		info("open task page");
 		hp.goToTasks();
 		
 		/*Step number: 3
@@ -309,12 +267,8 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- user Acan add and edit, view and comment on tasks of spaceA project*/ 
-		info("check comment of John");
-		click(mgProject.ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project", space));
-		click(mgProject.ELEMENT_TASK_TITLE.replace("$task", task));
-		waitForAndGetElement(mgTask.ELEMENT_RIGHT_PANE_COMMENT_TEXT.replace("$user", DATA_NAME_USER1).replace("$comment", comment1));
-		mgTask.addTaskComment(comment2);
-		waitForAndGetElement(mgTask.ELEMENT_RIGHT_PANE_COMMENT_TEXT.replace("$user", DATA_NAME_USER2).replace("$comment", comment2));
+		mgTask.checkCommentOfUser(space, task, comment1, DATA_NAME_USER1);
+		mgTask.addTaskComment(task,DATA_NAME_USER2,comment2);
  	}
 
 	/**
@@ -329,7 +283,7 @@ import org.testng.annotations.*;
 		String prj1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		String prj11 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		String[] user1 = {DATA_USER2};
-
+		String[] user0 = {DATA_USER1};
 		/*Step Number: 1
 		*Step Name: Step 1: Open Tasks page
 		*Step Description: 
@@ -338,14 +292,9 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- Tasks page is opened*/
-		info("open task page");
 		hp.goToTasks();
-		info("add project from Projects");
-		mgProject.selectOpContMenuProject(optionContMenuProject.Add_Project);
 		mgProject.addProject(prj1,"", false);
-		info("add participant");
-		mgProject.selectOpContMenuGivenProject(prj1, optionContMenuGivenProject.Share);
-		mgProject.shareProject(user1, false);
+		mgProject.shareProject(prj1,user1, false);
 		
 		/*Step number: 2
 		*Step Name: Step 2: Create sub
@@ -357,20 +306,11 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- project A1 is added to parent project A
 			- in Project Overview, manager is creator, paticipant is user A (permission is inherit from parent)*/ 
-		info("add project to project 1");
-		mgProject.selectOpContMenuGivenProject(prj1, optionContMenuGivenProject.Add_Project);
-		mgProject.addProject(prj11,"", false);
-		mgProject.selectOpContMenuGivenProject(prj11, optionContMenuGivenProject.Share);
-		waitForAndGetElement(mgProject.ELEMENT_SHARE_PROJECT_DISPLAY_PARTICIPANT.replace("$user",DATA_NAME_USER2));
-		waitForAndGetElement(mgProject.ELEMENT_SHARE_PROJECT_DISPLAY_MANAGER.replace("$user",DATA_NAME_USER1));
-		click(mgProject.ELEMENT_CLOSE_BTN);
+		mgProject.addSubProject(prj1,prj11,"", false);
+		mgProject.checkShareUsers(prj11, user0, user1);
 		
 		info("delete data");
-		mgProject.selectOpContMenuGivenProject(prj1,optionContMenuGivenProject.Delete);
-		mgProject.deleteProject(prj1, true);
-		waitForElementNotPresent(mgProject.ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project", prj1));
-		waitForElementNotPresent(mgProject.ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project", prj11));
-		
+		mgProject.deleteProject(prj1, true,prj11);
  	}
 
 	/**
@@ -391,10 +331,7 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- Tasks page is opened*/
-		info("open task page");
 		hp.goToTasks();
-		info("add project from Projects");
-		mgProject.selectOpContMenuProject(optionContMenuProject.Add_Project);
 		mgProject.addProject(prj1,"", false);
 		
 		/*Step number: 2
@@ -410,19 +347,8 @@ import org.testng.annotations.*;
 			- Project Share popup follows UX Permission Setting Spec*/ 
 		info("open Share popup");
 		mgProject.selectOpContMenuGivenProject(prj1, optionContMenuGivenProject.Share);
-		click(mgProject.ELEMENT_SHARE_PROJECT_EDIT_MANAGER_ICON);
-		waitForAndGetElement(mgProject.ELEMENT_SHARE_PROJECT_EDIT_MANAGER_INPUT);
-		waitForAndGetElement(mgProject.ELEMENT_SHARE_PROJECT_EDIT_MANAGER_SAVE_BTN);
-		waitForAndGetElement(mgProject.ELEMENT_SHARE_PROJECT_EDIT_MANAGER_SELECT_GROUP_ICON);
-		waitForAndGetElement(mgProject.ELEMENT_SHARE_PROJECT_EDIT_MANAGER_SELECT_USER_ICON);
-		click(mgProject.ELEMENT_SHARE_PROJECT_EDIT_PARTICIPANT_ICON);
-		waitForAndGetElement(mgProject.ELEMENT_SHARE_PROJECT_EDIT_PARTICIPANT_INPUT);
-		waitForAndGetElement(mgProject.ELEMENT_SHARE_PROJECT_EDIT_PARTICIPANT_SAVE_BTN);
-		waitForAndGetElement(mgProject.ELEMENT_SHARE_PROJECT_EDIT_PARTICIPANT_SELECT_GROUP_ICON);
-		waitForAndGetElement(mgProject.ELEMENT_SHARE_PROJECT_EDIT_PARTICIPANT_SELECT_USER_ICON);
+		mgProject.checkShareProjectPopup();
 		
 		info("delete data");
-		mgProject.selectOpContMenuGivenProject(prj1,optionContMenuGivenProject.Delete);
-		mgProject.deleteProject(prj1, true);
-		waitForElementNotPresent(mgProject.ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project", prj1));
+		mgProject.deleteProject(prj1, false);
  	}}

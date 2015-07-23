@@ -1,12 +1,7 @@
 package org.exoplatform.selenium.platform.task.functional;
 
 import static org.exoplatform.selenium.TestLogger.info;
-
-import org.exoplatform.selenium.platform.task.ManagementProjects.optionContMenuGivenProject;
-import org.exoplatform.selenium.platform.task.ManagementProjects.optionContMenuProject;
-
 import org.testng.annotations.*;
-
 
 	public class TASK_Projects_ChangeProjectColor extends TASK_TestConfig_1{
 
@@ -28,10 +23,7 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- Tasks page is opened*/
-		info("open task page");
 		hp.goToTasks();
-		info("add project from Projects");
-		mgProject.selectOpContMenuProject(optionContMenuProject.Add_Project);
 		mgProject.addProject(name,"", false);
 		
 		/*Step number: 2
@@ -43,14 +35,10 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- A project can be set color by No Color or click on specific color.*/ 
-		mgProject.goToContMenuGivenProject(name);
-		waitForAndGetElement(mgProject.ELEMENT_LEFT_PANE_COLOR_NO_COLOR.replace("$project", name));
-		waitForAndGetElement(mgProject.ELEMENT_LEFT_PANE_COLOR_TABLE_ITEM.replace("$project", name).replace("$color", "red"));
-		mgProject.goToContMenuGivenProject(name);
-		info("delete data");
-		mgProject.selectOpContMenuGivenProject(name,optionContMenuGivenProject.Delete);
+		mgProject.checkColorTable(name);
+		
+		info("clear data");
 		mgProject.deleteProject(name, false);
-		waitForElementNotPresent(mgProject.ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project", name));
  	}
 
 	/**
@@ -74,14 +62,8 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- Tasks page is opened*/
-		info("open task page");
 		hp.goToTasks();
-		
-		info("add project from Projects");
-		mgProject.selectOpContMenuProject(optionContMenuProject.Add_Project);
 		mgProject.addProject(project,"", false);
-		
-		info("add task into project");
 		mgTask.addTask(project, task);
 		
 		/*Step number: 2
@@ -94,15 +76,10 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- There is a color block that is colorized with the selected color in front of the project title in the left menu.
 			- All the tasks are displayed with the color block that is set to its project.*/ 
-		info("add color to project");
-		mgProject.selectColor(project, color1);
-		waitForAndGetElement(mgProject.ELEMENT_LEFT_PANE_PROJECT_COLOR.replace("$project", project).replace("$color", color1));
-		waitForAndGetElement(mgProject.ELEMENT_TASK_COLOR.replace("$task", task).replace("$color", color1));
+		mgProject.selectColor(project, color1,task);
 		
-		info("delete project");
-		mgProject.selectOpContMenuGivenProject(project,optionContMenuGivenProject.Delete);
+		info("clear data");
 		mgProject.deleteProject(project, false);
-		waitForElementNotPresent(mgProject.ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project", project));
  	}
 
 	/**
@@ -125,14 +102,8 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- Tasks page is opened*/
-		info("open task page");
 		hp.goToTasks();
-		
-		info("add project from Projects");
-		mgProject.selectOpContMenuProject(optionContMenuProject.Add_Project);
 		mgProject.addProject(project,"", false);
-		
-		info("add task into project");
 		mgTask.addTask(project, task);
 		
 		/*Step number: 2
@@ -145,13 +116,8 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- There is no color block in front of the project title in the left menu.
 			- All the tasks of no color project are displayed without the color block.*/ 
-		mgProject.goToContMenuGivenProject(project);
-		click(mgProject.ELEMENT_LEFT_PANE_COLOR_NO_COLOR.replace("$project", project));
-		waitForAndGetElement(mgProject.ELEMENT_LEFT_PANE_PROJECT_NO_COLOR.replace("$project", project));
-		waitForAndGetElement(mgProject.ELEMENT_TASK_NO_COLOR.replace("$task", task));
-		
-		info("delete project");
-		mgProject.selectOpContMenuGivenProject(project,optionContMenuGivenProject.Delete);
+		mgProject.selectNoColor(project,task);
+	
+		info("clear data");
 		mgProject.deleteProject(project, false);
-		waitForElementNotPresent(mgProject.ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project", project));
  	}}
