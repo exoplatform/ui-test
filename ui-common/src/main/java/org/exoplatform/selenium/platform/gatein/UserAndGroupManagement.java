@@ -58,12 +58,18 @@ public class UserAndGroupManagement extends PlatformBase {
 	public final String ELEMENT_MEMBERSHIP_INPUT = "//input[@value='${membershipName}']";
 	public final String ELEMENT_USER_EDIT_ICON = ".//*[contains(text(),'${username}')]/../..//*[@data-original-title='Edit User Info']/i";
 
+	//User tab
 	public final String ELEMENT_CLOSE_MESSAGE = "//*[contains(@title,'Close Window')]";
 	public final By ELEMENT_INPUT_SEARCH_USER_NAME = By.id("searchTerm");
 	public final String ELEMENT_SELECT_SEARCH_OPTION = "//*[contains(@name,'searchOption')]";
 	public final String ELEMENT_SEARCH_ICON_USERS_MANAGEMENT = "//*[contains(@title,'Quick Search')]";
 	public final String ELEMENT_USER_DELETE_ICON = ".//*[contains(text(),'${username}')]/../..//*[@data-original-title='Delete User']/i";
+<<<<<<< HEAD
 	public final String ELEMENT_USER_DELETE_ICON1 = "//*[@data-original-title='Delete User']/i";
+=======
+	public final String ELEMENT_USER_NAME_IN_USER_LIST=".//*[@id='UIListUsersGird']//*[contains(text(),'$userName')]";
+	
+>>>>>>> FQA-2575:[DISABLE USER][SELENIUM] PLF 4.3 - Add more common functions
 	//message
 	public final String ELEMENT_MSG_SELECT_USER = "Select User";
 	public final String ELEMENT_MSG_TOTAL_PAGES = "Total pages";
@@ -103,7 +109,12 @@ public class UserAndGroupManagement extends PlatformBase {
 
 	//Up level
 	public final By ELEMENT_UP_LEVEL=By.xpath("//*[@data-original-title='Up Level']");
-
+	
+	//Disable Users
+	public By ELEMENT_DISABLE_USER_DROP_BOX=By.id("UIListUsers-userStatusFilter");
+	public String ELEMENT_DISABLE_USER_HANDLE_BTN=".//*[@id='UIListUsersGird']//*[contains(text(),'$userName')]/../..//*[contains(@class,'switchBtnHandle')]";
+    public String ELEMENT_DISBALE_USER_ENABLED=".//*[@id='UIListUsersGird']//*[contains(text(),'$userName')]/../..//*[@checked='checked']";
+	
 	ManageAlert alert;
 	Dialog dialog;
 
@@ -609,11 +620,66 @@ public class UserAndGroupManagement extends PlatformBase {
 			type(ELEMENT_INPUT_SEARCH_USER_NAME, user, true);
 			select(ELEMENT_SELECT_SEARCH_OPTION, searchOption);
 		}
+		
 		click(ELEMENT_SEARCH_ICON_USERS_MANAGEMENT);
 		if (isTextNotPresent(user))
 			click(ELEMENT_OK_BUTTON);
 	}
-
+	
+	//************************************************DISABLE USERS***********************************//
+	/**
+	 * Select an option in Disable User drop list
+	 * @param option
+	 *                is a value as :ENABLED,DISABLED OR ALL
+	 */
+	public void selectDisableStatus(String option){
+		info("---Select status----");
+		if(!option.isEmpty()){
+			select(ELEMENT_DISABLE_USER_DROP_BOX,option);
+		}
+		Utils.pause(2000);
+	}
+	/**
+	 * Enable or disable a User
+	 * @param userName
+	 *                   is username of the user
+	 * @param isEnabled
+	 *                   = true if want to check the user that is enabled
+	 *                   = false if want to check the user that is disabled
+	 */
+	public void enableDisableUser(String userName,boolean isEnabled){
+		info("---Enable a user---");
+		click(ELEMENT_DISABLE_USER_HANDLE_BTN.replace("$userName",userName));
+		if(isEnabled){
+			info("Verify that user is enabled");
+			waitForAndGetElement(ELEMENT_DISBALE_USER_ENABLED.replace("$userName",userName));
+		}else{
+			info("Verify that user is disabled");
+			waitForElementNotPresent(ELEMENT_DISBALE_USER_ENABLED.replace("$userName",userName));
+		}
+	}
+	/**
+	 * Verify that the user is shown in the user list
+	 * @param userName
+	 *                 is user-name of the user
+	 */
+	public void verifyUserPresent(String userName){
+		info("---Verify that the user is shown in the table");
+		waitForAndGetElement(ELEMENT_USER_NAME_IN_USER_LIST.replace("$userName",userName));
+		info("The user is shown in the table");
+	}
+	
+	/**
+	 * Verify that the user is not shown in the user list
+	 * @param userName
+	 *                 is user-name of the user
+	 */
+	public void verifyUserNotPresent(String userName){
+		info("---Verify that the user is not shown in the table");
+		waitForElementNotPresent(ELEMENT_USER_NAME_IN_USER_LIST.replace("$userName",userName));
+		info("The user is not shown in the table");
+	}
+//*********************************************************************************************************//
 	/**
 	 * function: Delete user
 	 * 
