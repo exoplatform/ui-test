@@ -29,7 +29,7 @@ public class ManagementProjects extends TaskManagementLocatorObject {
 	 */
 	public void goToProjects(){
 		info("open Projects");
-		click(ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project","Projects"),0,true);
+		click(ELEMENT_LEFT_PANE_PROJECTS,0,true);
 	}
 	/**
 	 * Open project
@@ -876,5 +876,31 @@ public class ManagementProjects extends TaskManagementLocatorObject {
 	public void checkChildrenProject(String prj,String sub){
 		click(ELEMENT_RIGHT_PANE_PARENT_PATH_LINK);
 		waitForAndGetElement(ELEMENT_RIGHT_PANE_PARENT_PATH_FULL.replace("$parent", prj).replace("$child",sub));
+	}
+	/**
+	 * check top of list view
+	 * @param project
+	 * @param newTask
+	 * 				true if it'll displayed
+	 * 				false if it won't displayed
+	 */
+	public void checkTopOfListView(String project,boolean newTask){
+		
+		if(newTask){
+			openProject(project);
+			waitForAndGetElement(ELEMENT_ADD_TASK_BTN);
+			waitForAndGetElement(ELEMENT_ADD_TASK_TITLE);
+		}else{
+			if (project == "Projects"){
+				goToProjects();
+				waitForElementNotPresent(ELEMENT_ADD_TASK_BTN);
+				waitForElementNotPresent(ELEMENT_ADD_TASK_TITLE);
+			}else{
+				openProject(project);
+				waitForElementNotPresent(ELEMENT_ADD_TASK_BTN);
+				waitForElementNotPresent(ELEMENT_ADD_TASK_TITLE);
+			}
+		}
+		
 	}
 }

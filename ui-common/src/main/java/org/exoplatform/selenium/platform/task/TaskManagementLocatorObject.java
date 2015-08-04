@@ -21,7 +21,8 @@ public class TaskManagementLocatorObject extends PlatformBase {
 	public final By ELEMENT_TASK_APP_ICON = By.xpath("//*[@class='uiIconAppTaskManagementApplication uiIconDefaultApp']");
 	
 	//Project area-->General
-	public final String ELEMENT_LEFT_PANE_PROJECT_NAME="//*[contains(@class,'project-name')][contains(.,'$project')]";
+	public final String ELEMENT_LEFT_PANE_PROJECT_NAME="//*[contains(@class,'list-projects')]//*[contains(@class,'project-name')][contains(.,'$project')]";
+	public final By ELEMENT_LEFT_PANE_PROJECTS=By.xpath("//*[contains(@class,'project-name')][contains(.,'Projects')]");
 	public final String ELEMENT_LEFT_PANE_SUBPROJECT_L1="//*[contains(@class,'dropdown project-item')]/*[contains(@class,'list-projects')]//*[contains(@class,'project-name')][contains(.,'$sub')]";
 	public final String ELEMENT_LEFT_PANE_PROJECT_ID=".//*[contains(@data-id,'$id')][contains(.,'$project')]";
 	public final By ELEMENT_LEFT_PANE_PROJECTS_PLUS_MENU=By.xpath("//*[@class='uiIconLightGray uiIconSimplePlusMini addProject']");
@@ -75,7 +76,7 @@ public class TaskManagementLocatorObject extends PlatformBase {
 	public final String ELEMENT_UNTITLEDTASK_AND_TASK_INPUT = "//*[@class='column-item column-title taskName'][contains(.,'$task')]/../../../../../..//*[@class='form-create-task']/input";
 	
 	//Task area-->Incoming
-	
+    public final String ELEMENT_INCOMING_ROW_TASK = "//li[@class='row-item row-odd hover-action-reveal has-border has-background taskItem']/*[contains(.,'$task')]";
 	
 	//Task area-->All tasks
 	
@@ -168,6 +169,10 @@ public class TaskManagementLocatorObject extends PlatformBase {
 	//List View-->General
 	public final String ELEMENT_PROJECT_DEFAULT_SORTBY = "//*[@class='uiIconSortDown uiIconLightGray']/../*[contains(.,'$sort')]";
 	public final String ELEMENT_PROJECT_DEFAULT_GROUPBY = "//*[@class='uiIconViewList uiIconLightGray']/../*[contains(.,'$group')]";
+	public final String ELEMENT_TASK_CLOCK_ICON = "//*[@class='column-item column-title taskName'][contains(.,'$task')]/..//*[contains(@class,'uiIcon uiIconClock')]";
+	public final String ELEMENT_TASK_DUEDATE = "//*[@class='column-item column-title taskName'][contains(.,'$task')]/../*[@class='column-item column-time']/*[contains(.,'$day')]";
+	public final String ELEMENT_TASK_COMPLETE_CHECKBOX = "//*[@class='column-item column-title taskName'][contains(.,'$task')]/../*[@class='column-item column-checkbox']/*[contains(@class,'uiCheckbox')]/*[contains(@class,'checkbox')]";
+	public final String ELEMENT_TASK_COMPLETE_DISPLAY_CHECKBOX = "//*[@class='column-item column-title taskName'][contains(.,'$task')]/../*[@class='column-item column-checkbox']/*[contains(@class,'uiCheckbox')]";
 	//List View-->Group by Status
 	
 	
@@ -232,6 +237,8 @@ public class TaskManagementLocatorObject extends PlatformBase {
 	public final String ELEMENT_RIGHT_PANE_TASK_PROJECT_TEXT = "//*[@data-name='project']/*[contains(.,'$project')]";
 	public final String ELEMENT_RIGHT_PANE_TASK_TITLE_TEXT = "//*[@data-name='title'][contains(.,'$task')]";
 	public final By ELEMENT_RIGHT_PANE_TASK_DUEDATE_LINK = By.xpath("//*[@data-name='duedate']");
+	public final String ELEMENT_RIGHT_PANE_TASK_DUEDATE_TEXT = "//*[@data-name='duedate'][contains(.,'$date')]";
+	public final String ELEMENT_RIGHT_PANE_TASK_DUEDATE_DAY = "//*[@class='calendarComponent']//*[@id='BlockCalendar']//*[@class='weekDays']//a[.='$day']";
 	public final By ELEMENT_RIGHT_PANE_TASK_STATUS_LINK = By.xpath("//*[@data-name='status']");
 	public final By ELEMENT_RIGHT_PANE_TASK_DESCRIPTION_LINK = By.xpath("//*[@class='taskDescription']/*[@data-name='description']");
 	public final String ELEMENT_RIGHT_PANE_TASK_DESCRIPTION_TEXT = "//*[contains(@class,'taskDescription')]/*[@data-name='description']/*[contains(.,'$des')]";
@@ -239,6 +246,12 @@ public class TaskManagementLocatorObject extends PlatformBase {
 	public final By ELEMENT_RIGHT_PANE_TASK_ASSIGN_LINK = By.xpath("//*[@class='unassigned ']/*[@class='hoverStatus small editableField editAssignee']");
 	public final By ELEMENT_RIGHT_PANE_TASK_WORKFLOW_LINK = By.xpath("//*[@class='hoverStatus hoverStatusBlock small editableField']");
 	public final By ELEMENT_RIGHT_PANE_TASK_PRIORITY_LINK = By.xpath("//*[@class='task-priority hoverStatus editableField editable small editable-click']");
+	public final By ELEMENT_RIGHT_PANE_TASK_DUEDATE_NONE = By.xpath("//*[@class='popover-content']//a[@data-date='none']");
+	public final By ELEMENT_RIGHT_PANE_TASK_DUEDATE_TODAY = By.xpath("//*[@class='popover-content']//a[@data-date='today']");
+	public final By ELEMENT_RIGHT_PANE_TASK_DUEDATE_TOMORROW = By.xpath("//*[@class='popover-content']//a[@data-date='tomorrow']");
+	public final By ELEMENT_RIGHT_PANE_TASK_DUEDATE_NEXTWEEK = By.xpath("//*[@class='popover-content']//a[@data-date='nextweek']");
+	public final By ELEMENT_RIGHT_PANE_TASK_DUEDATE_NEXTMONTH_ICON = By.xpath("//*[@class='calendarComponent']//*[@id='BlockCalendar']//*[@data-original-title='Next Month']/*[@class='uiIconMiniArrowRight uiIconLightGray']");
+	public final By ELEMENT_RIGHT_PANE_TASK_DUEDATE_PREVIOUSMONTH_ICON = By.xpath(".//*[@id='BlockCalendar'][1]//*[@data-original-title='Previous Month']/*[@class='uiIconMiniArrowLeft uiIconLightGray']");
 	
 	//CKEditor
 	public final By ELEMENT_CKEDITOR_BOLD = By.xpath("//*[@class='cke_button_icon cke_button__bold_icon']");

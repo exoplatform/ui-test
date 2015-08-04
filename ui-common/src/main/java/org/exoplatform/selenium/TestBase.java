@@ -1782,6 +1782,18 @@ public class TestBase {
 		return dateFormat.format(now.getTime());
 	}
 	/**
+	 * get date of next gap year
+	 * @param format as MMM for month, dd for day, or yyyy for year
+	 * @gap for next 1,2,3....years
+	 * @return dateFormat.format(now.getTime())
+	 */
+	public String getDateOfNextYear(String format,int gap){
+		DateFormat dateFormat = new SimpleDateFormat (format);
+		Calendar now = Calendar.getInstance();
+		now.add(Calendar.YEAR, gap);
+		return dateFormat.format(now.getTime());
+	}
+	/**
 	 * Get minute in format "mm" from current date
 	 * @return minute
 	 * 

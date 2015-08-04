@@ -285,4 +285,146 @@ public class ManagementTasks extends TaskManagementLocatorObject {
 		waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_ARROW_MENU_DELETE);
 		waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_ARROW_MENU_WATCH);
 	}
+	/**
+	 * set due date for task
+	 * @param task
+	 * @param day
+	 * 				due date of task. ex: 10 (Aug 2015) 
+	 */
+	public void setDueDate(String task, String date, String day,int gap){
+		info("set due date for " +task);
+		openTask(task);
+		click(ELEMENT_RIGHT_PANE_TASK_DUEDATE_LINK);
+		
+		//if not the same year
+		if(gap>0){
+			for(int i=0;i<gap;i++){
+				clickByJavascript(ELEMENT_RIGHT_PANE_TASK_DUEDATE_NEXTMONTH_ICON);
+			}
+		}
+		//cut 0 to get round number, ex 07 > 7
+		if(day.startsWith("0")){
+			day=day.substring(1);
+		}
+		mouseHoverByJavaScript(ELEMENT_RIGHT_PANE_TASK_DUEDATE_DAY.replace("$day", day),2);
+		clickByJavascript(ELEMENT_RIGHT_PANE_TASK_DUEDATE_DAY.replace("$day", day),2);
+		waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_DUEDATE_TEXT.replace("$date",date));
+	}
+	/**
+     * Define options of duedate
+     *
+     */
+	public enum optDueDate{
+		None,Today,Tomorrow,NextWeek;
+	}
+	
+	/**
+	 * select duedate
+	 * @param task
+	 * @param opt
+	 * 			None,Today...
+	 */
+	public void selectDueDate(String task,optDueDate opt ){
+		openTask(task);
+		click(ELEMENT_RIGHT_PANE_TASK_DUEDATE_LINK);
+		switch(opt){
+		case None:
+			info("select None");
+			click(ELEMENT_RIGHT_PANE_TASK_DUEDATE_NONE,0,true);
+			waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_DUEDATE_TEXT.replace("$date","No Due Date"));
+			break;
+		case Today:
+			info("select Today");
+			click(ELEMENT_RIGHT_PANE_TASK_DUEDATE_TODAY,0,true);
+			waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_DUEDATE_TEXT.replace("$date",getDate(0,"dd MMM yyyy")));
+			break;
+		case Tomorrow:
+			info("select Tomorrow");
+			click(ELEMENT_RIGHT_PANE_TASK_DUEDATE_TOMORROW,0,true);
+			waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_DUEDATE_TEXT.replace("$date",getDate(1,"dd MMM yyyy")));
+			break;
+		case NextWeek:
+			info("select Next Week");
+			click(ELEMENT_RIGHT_PANE_TASK_DUEDATE_NEXTWEEK,0,true);
+			waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_DUEDATE_TEXT.replace("$date",getDayOfNextWeek("dd MMM yyyy")));
+			break;
+		default:
+			info("No option in the list.Please select correct option.");
+			break;
+		}
+	}
+	
+	/*
+	 * check display of List View 
+	 * @param list of tasks
+	 */
+	public void checkDisplayOfListView(String...tasks){
+		info("check display of tasks in List View");
+		for (String task : tasks) {
+			waitForAndGetElement(ELEMENT_TASK_DUEDATE.replace("$task", task).replace("$day",getDate(0,"MMM dd")));
+			waitForAndGetElement(ELEMENT_INCOMING_ROW_TASK.replace("$task", task));
+			mouseOverAndClick(ELEMENT_TASK_TITLE.replace("$task", task));
+			waitForAndGetElement(ELEMENT_TASK_COMPLETE_DISPLAY_CHECKBOX.replace("$task", task));
+		}
+	}
+	/*
+	 * complete task
+	 * @param task
+	 */
+	public void completeTask(String task){
+		mouseHoverByJavaScript(ELEMENT_TASK_TITLE.replace("$task", task),2);
+		clickByJavascript(ELEMENT_TASK_COMPLETE_CHECKBOX.replace("$task", task),2);
+		Utils.pause(500);
+		waitForElementNotPresent(ELEMENT_TASK_COMPLETE_CHECKBOX.replace("$task", task));
+	}
+	/**
+     * Define options of duedate
+     *
+     */
+	public enum optDueDateLV{
+		Date,Year,Today,Tomorrow,Yesterday;
+	}
+	/**
+	 * check display of due date in List View
+	 * @param task
+	 * @param opt
+	 * 			 date, year, today, tomorrow, yesterday
+	 */
+	public void checkDueDateInListView(optDueDateLV opt,String...tasks){
+		switch(opt){
+		case Date:
+			info("check for same year");
+			for (String task : tasks) {
+				waitForAndGetElement(ELEMENT_TASK_DUEDATE.replace("$task", task).replace("$day",getDate(0,"MMM dd")));
+			}
+			break;
+		case Year:
+			info("check for different year");
+			for (String task : tasks) {
+				waitForAndGetElement(ELEMENT_TASK_DUEDATE.replace("$task", task).replace("$day",getDateOfNextYear("MMM dd, yyyy", 1)));
+			}
+			break;
+		case Today:
+			info("check for today");
+			for (String task : tasks) {
+				waitForAndGetElement(ELEMENT_TASK_DUEDATE.replace("$task", task).replace("$day","Today"));
+			}
+			break;
+		case Tomorrow:
+			info("check for tomorrow");
+			for (String task : tasks) {
+				waitForAndGetElement(ELEMENT_TASK_DUEDATE.replace("$task", task).replace("$day","Tomorrow"));
+			}
+			break;
+		case Yesterday:
+			info("check for yesterday");
+			for (String task : tasks) {
+				waitForAndGetElement(ELEMENT_TASK_DUEDATE.replace("$task", task).replace("$day","Yesterday"));
+			}
+			break;
+		default:
+			info("No option in the list.Please select correct option.");
+			break;
+		}
+	}
 }
