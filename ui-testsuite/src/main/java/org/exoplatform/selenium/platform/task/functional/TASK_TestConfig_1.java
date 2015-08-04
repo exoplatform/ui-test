@@ -11,6 +11,7 @@ import org.exoplatform.selenium.platform.objectdatabase.task.ColorDatabase;
 import org.exoplatform.selenium.platform.objectdatabase.task.GroupByDatabase;
 import org.exoplatform.selenium.platform.objectdatabase.task.SortByDatabase;
 import org.exoplatform.selenium.platform.objectdatabase.task.WelcomeMessageDatabase;
+import org.exoplatform.selenium.platform.objectdatabase.task.WorkflowDatabase;
 import org.exoplatform.selenium.platform.social.SpaceHomePage;
 import org.exoplatform.selenium.platform.social.SpaceManagement;
 import org.exoplatform.selenium.platform.social.SpaceSettingManagement;
@@ -40,6 +41,7 @@ public class TASK_TestConfig_1 extends PlatformBase {
 	GroupByDatabase groupByData;
 	SortByDatabase sortByData;
 	ColorDatabase colorData;
+	WorkflowDatabase flowData;
 	
 	@BeforeMethod
 	public void setUpBeforeMethod() throws Exception{
@@ -74,6 +76,9 @@ public class TASK_TestConfig_1 extends PlatformBase {
 		
 		colorData = new ColorDatabase();
 		colorData.setData(colorNamefilePath,defaultSheet,isUseFile,jdbcDriver,dbUrl,user,pass,sqlUser);
+		
+		flowData = new WorkflowDatabase();
+		flowData.setWorkflowData(workflowByFilePath,defaultSheet,isUseFile,jdbcDriver,dbUrl,user,pass,sqlUser);
 		
 		info("End setUpBeforeMethod");
 	}

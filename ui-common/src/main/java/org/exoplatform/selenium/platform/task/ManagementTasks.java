@@ -372,6 +372,7 @@ public class ManagementTasks extends TaskManagementLocatorObject {
 	 * @param task
 	 */
 	public void completeTask(String task){
+		info("complete task:"+task );
 		mouseHoverByJavaScript(ELEMENT_TASK_TITLE.replace("$task", task),2);
 		clickByJavascript(ELEMENT_TASK_COMPLETE_CHECKBOX.replace("$task", task),2);
 		Utils.pause(500);
@@ -426,5 +427,25 @@ public class ManagementTasks extends TaskManagementLocatorObject {
 			info("No option in the list.Please select correct option.");
 			break;
 		}
+	}
+	/**
+	 * check list of workflow
+	 * @param task
+	 * @param flow  default flow
+	 * @param flows
+	 * 				list of flows
+	 */
+	public void checkListFlow(String task,String flow,String...flows){
+		openTask(task);
+		info("check default flow");
+		waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_WORKFLOW_TEXT.replace("$flow", flow));
+		click(ELEMENT_RIGHT_PANE_TASK_STATUS_LINK);
+		click(ELEMENT_RIGHT_PANE_TASK_STATUS_SELECT_LINK);
+		Utils.pause(1000);
+		info("check list flow");
+		for (String eflow : flows) {
+			waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_STATUS_SELECT.replace("$opt",eflow));
+		}
+		
 	}
 }

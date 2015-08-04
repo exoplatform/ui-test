@@ -239,12 +239,14 @@ public class TaskManagementLocatorObject extends PlatformBase {
 	public final By ELEMENT_RIGHT_PANE_TASK_DUEDATE_LINK = By.xpath("//*[@data-name='duedate']");
 	public final String ELEMENT_RIGHT_PANE_TASK_DUEDATE_TEXT = "//*[@data-name='duedate'][contains(.,'$date')]";
 	public final String ELEMENT_RIGHT_PANE_TASK_DUEDATE_DAY = "//*[@class='calendarComponent']//*[@id='BlockCalendar']//*[@class='weekDays']//a[.='$day']";
-	public final By ELEMENT_RIGHT_PANE_TASK_STATUS_LINK = By.xpath("//*[@data-name='status']");
+	public final By ELEMENT_RIGHT_PANE_TASK_STATUS_LINK = By.xpath("//*[@class='toDo']/*[contains(@class,'uiEditableInline')]/*[@data-name='status']");
 	public final By ELEMENT_RIGHT_PANE_TASK_DESCRIPTION_LINK = By.xpath("//*[@class='taskDescription']/*[@data-name='description']");
 	public final String ELEMENT_RIGHT_PANE_TASK_DESCRIPTION_TEXT = "//*[contains(@class,'taskDescription')]/*[@data-name='description']/*[contains(.,'$des')]";
 	public final By ELEMENT_RIGHT_PANE_TASK_DESCRIPTION_INPUT = By.xpath("//*[contains(@class,'addTask')]//*[@data-name='description']");
 	public final By ELEMENT_RIGHT_PANE_TASK_ASSIGN_LINK = By.xpath("//*[@class='unassigned ']/*[@class='hoverStatus small editableField editAssignee']");
-	public final By ELEMENT_RIGHT_PANE_TASK_WORKFLOW_LINK = By.xpath("//*[@class='hoverStatus hoverStatusBlock small editableField']");
+	public final By ELEMENT_RIGHT_PANE_TASK_WORKPLAN_LINK = By.xpath("//*[@class='hoverStatus hoverStatusBlock small editableField']");
+	public final String ELEMENT_RIGHT_PANE_TASK_STATUS_SELECT = "//*[@class='selectboxMini']/option[.='$opt']";
+	public final By ELEMENT_RIGHT_PANE_TASK_STATUS_SELECT_LINK = By.xpath("//*[@class='selectboxMini']");
 	public final By ELEMENT_RIGHT_PANE_TASK_PRIORITY_LINK = By.xpath("//*[@class='task-priority hoverStatus editableField editable small editable-click']");
 	public final By ELEMENT_RIGHT_PANE_TASK_DUEDATE_NONE = By.xpath("//*[@class='popover-content']//a[@data-date='none']");
 	public final By ELEMENT_RIGHT_PANE_TASK_DUEDATE_TODAY = By.xpath("//*[@class='popover-content']//a[@data-date='today']");

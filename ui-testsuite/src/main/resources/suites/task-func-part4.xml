@@ -9,6 +9,7 @@
 		<classes>
 			<class name="org.exoplatform.selenium.platform.task.functional.TASK_TestConfig_1" />
 			<class name="org.exoplatform.selenium.platform.task.functional.TASK_ListView" />
+			<class name="org.exoplatform.selenium.platform.task.functional.TASK_Projects_ProjectWorkFlow" />
 		</classes>
 	</test>
 	<listeners>
