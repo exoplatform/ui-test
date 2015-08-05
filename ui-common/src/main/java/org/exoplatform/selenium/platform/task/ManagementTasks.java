@@ -1,12 +1,14 @@
 package org.exoplatform.selenium.platform.task;
 
+import java.awt.AWTException;
+import java.awt.Robot;
+import java.awt.event.KeyEvent;
 import org.exoplatform.selenium.Utils;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
-
 import static org.exoplatform.selenium.TestLogger.info;
 
 /**
@@ -151,7 +153,7 @@ public class ManagementTasks extends TaskManagementLocatorObject {
 		openTask(task);
 		waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_TITLE_TEXT.replace("$task", task));
 		waitForAndGetElement(ELEMENT_UNTITLEDTASK_AND_TASK_INPUT.replace("$task", task));
-		waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_WORKFLOW_TEXT.replace("$flow","To Do"));
+		waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_STATUS_TEXT.replace("$flow","To Do"));
 	}
 	/**
 	 * Add a task by clicking directly on the blank field
@@ -256,23 +258,244 @@ public class ManagementTasks extends TaskManagementLocatorObject {
 		openTask(task);
 		click(ELEMENT_RIGHT_PANE_TASK_TITLE_TEXT.replace("$task", task));
 		info("Input title");
+		waitForAndGetElement(ELEMENT_EDIT_PROJECT_TITLE_INPUT).clear();
 		waitForAndGetElement(ELEMENT_EDIT_PROJECT_TITLE_INPUT).sendKeys(title);
         Utils.pause(500);
         driver.findElement(ELEMENT_EDIT_PROJECT_TITLE_INPUT).sendKeys(Keys.ENTER);
         waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_TITLE_TEXT.replace("$task", title));
 	}
 	/**
-	 * Edit task title
+	 * Edit task description
 	 * @param task
 	 * @param des
 	 * 				new des of task
 	 */
 	public void editTaskDescription(String task,String des){
+		openTask(task);
 		click(ELEMENT_RIGHT_PANE_TASK_DESCRIPTION_LINK);
 		info("input description");
 		inputFrame(ELEMENT_CKEDITOR_IFRAME, des);
 		mouseOverAndClick(ELEMENT_RIGHT_PANE_TASK_TITLE_TEXT.replace("$task", task));
 		waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_DESCRIPTION_TEXT.replace("$des", des));
+	}
+	/**
+	 * Edit project of task
+	 * @param task
+	 * @param project
+	 */
+	public void editTaskProject(String task,String project){
+		openTask(task);
+		click(ELEMENT_RIGHT_PANE_TASK_PROJECT_LINK);
+		info("change project");
+		click(ELEMENT_RIGHT_PANE_PARENT_PATH_DROPDOWN_MENU.replace("$project",project));
+		waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_PROJECT_TEXT.replace("$project", project));
+	}
+	/**
+	 * Edit assignee
+	 * @param task
+	 * @param assignee
+	 * @param coworkers
+	 * 					list of coworkers
+	 */
+	public void editTaskAssignee(String task,String assignee,String...coworkers){
+		openTask(task);
+		click(ELEMENT_RIGHT_PANE_TASK_ASSIGN_LINK);
+		info("edit assignee");
+		if(assignee!=""){
+			type(ELEMENT_RIGHT_PANE_TASK_ASSIGN_INPUT,assignee,false);
+			Robot robot;
+			try {
+				robot = new Robot();
+				robot.delay(1000);
+				robot.keyPress(KeyEvent.VK_ENTER);
+				robot.keyRelease(KeyEvent.VK_ENTER);
+				Utils.pause(1000);
+			} catch (AWTException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		if(coworkers.length>0){
+			for (String coworker : coworkers) {
+				type(ELEMENT_RIGHT_PANE_TASK_COWORKER_INPUT,coworker,false);
+				Robot robot;
+				try {
+					robot = new Robot();
+					robot.delay(1000);
+					robot.keyPress(KeyEvent.VK_ENTER);
+					robot.keyRelease(KeyEvent.VK_ENTER);
+					Utils.pause(1000);
+				} catch (AWTException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+		openTask(task);
+
+	}
+	/**
+	 * Check assignee full name
+	 * @param assignee
+	 * @param coworkers
+	 */
+	public void checkTaskAssignee(String assignee,String...coworkers){
+		info("check assignee");
+		click(ELEMENT_RIGHT_PANE_TASK_ASSIGN_LINK);
+		if(assignee!=""){
+			waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_ASSIGN_TEXT.replace("$user",assignee));
+		}
+		if(coworkers.length>0){
+			for (String coworker : coworkers) {
+				waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_COWORKER_TEXT.replace("$user",coworker));
+			}
+		}
+	}
+	/**
+	 * Edit status
+	 * @param task
+	 * @param status
+	 */
+	public void editTaskStatus(String task,String status){
+		openTask(task);
+		info("change task status: "+status);
+		click(ELEMENT_RIGHT_PANE_TASK_STATUS_LINK);
+		selectQuick(ELEMENT_RIGHT_PANE_TASK_STATUS_SELECT_LINK,status);
+		Utils.pause(500);
+		waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_STATUS_TEXT.replace("$flow", status));
+	}
+	/**
+	 * Edit tag
+	 * @param task
+	 * @param tags
+	 * 				list of tags
+	 */
+	public void editTaskTag(String task,String...tags){
+		openTask(task);
+		click(ELEMENT_RIGHT_PANE_TASK_TAG_LINK);
+		info("edit tag");
+		if(tags.length>0){
+			for (String tag : tags) {
+				type(ELEMENT_RIGHT_PANE_TASK_TAG_INPUT,tag,false);
+				Robot robot;
+				try {
+					robot = new Robot();
+					robot.delay(1000);
+					robot.keyPress(KeyEvent.VK_ENTER);
+					robot.keyRelease(KeyEvent.VK_ENTER);
+					Utils.pause(2000);
+				} catch (AWTException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_TAG_TEXT.replace("$tag",tag));
+			}
+		}
+	}
+	/**
+	 * Edit workplan
+	 * @param task
+	 * @param fromDay  day to pickup in calendar
+	 * @param gap1     loop count for next month in From table
+	 * @param toDay	   day to pickup in calendar
+	 * @param gap2		loop count for next month in To table
+	 * @param fromTime
+	 * @param toTime
+	 * @param checkAllDay
+	 */
+	public void editTaskWorkPlan(String task,String fromDay,int gap1,String toDay,int gap2,String fromTime,String toTime,boolean checkAllDay){
+		openTask(task);
+		click(ELEMENT_RIGHT_PANE_TASK_WORKPLAN_LINK);
+		info("edit workplan for task");
+		//if not the same month
+		if(gap1>0){
+			for(int i=0;i<gap1;i++){
+				clickByJavascript(ELEMENT_RIGHT_PANE_TASK_WORKPLAN_NEXTMONTH_ICON1);
+			}
+		}
+		if(fromDay!=""){
+			//cut 0 to get round number, ex 07 > 7
+			if(fromDay.startsWith("0")){
+				fromDay=fromDay.substring(1);
+			}
+			mouseHoverByJavaScript(ELEMENT_RIGHT_PANE_TASK_WORKPLAN_FROM_DAY.replace("$day", fromDay),2);
+			clickByJavascript(ELEMENT_RIGHT_PANE_TASK_WORKPLAN_FROM_DAY.replace("$day", fromDay),2);
+		}
+		if(fromTime!=""){
+			click(ELEMENT_RIGHT_PANE_TASK_WORKPLAN_FROMTIME_LINK);
+			click(ELEMENT_RIGHT_PANE_TASK_WORKPLAN_FROMTIME.replace("$time",fromTime));
+		}
+		//if not the same month
+		if(gap2>0){
+			for(int i=0;i<gap2;i++){
+				clickByJavascript(ELEMENT_RIGHT_PANE_TASK_WORKPLAN_NEXTMONTH_ICON2);
+			}
+		}
+		if(toDay!=""){
+			//cut 0 to get round number, ex 07 > 7
+			if(toDay.startsWith("0")){
+				toDay=toDay.substring(1);
+			}
+			mouseHoverByJavaScript(ELEMENT_RIGHT_PANE_TASK_WORKPLAN_TO_DAY.replace("$day", toDay),2);
+			clickByJavascript(ELEMENT_RIGHT_PANE_TASK_WORKPLAN_TO_DAY.replace("$day", toDay),2);
+		}
+		if(toTime!=""){
+			click(ELEMENT_RIGHT_PANE_TASK_WORKPLAN_TOTIME_LINK);
+			click(ELEMENT_RIGHT_PANE_TASK_WORKPLAN_TOTIME.replace("$time",toTime));
+		}
+		if(checkAllDay){
+			check(ELEMENT_RIGHT_PANE_TASK_WORKPLAN_ALLDAY_CHECKBOX,2);
+		}
+	}
+	/**
+	 * Delete workplan
+	 */
+	public void deleteTaskWorkPlan(){
+		click(ELEMENT_RIGHT_PANE_TASK_WORKPLAN_DELETE_ICON);
+		Utils.pause(500);
+		waitForElementNotPresent(ELEMENT_RIGHT_PANE_TASK_WORKPLAN_VISIBLE);
+	}
+	/**
+     * Define options of priority
+     *
+     */
+	public enum optPriority{
+		None,High,Low,Normal;
+	}
+	/**
+	 * Edit priority
+	 * @param task
+	 * @param opt
+	 */
+	public void editTaskPriority(String task,optPriority opt){
+		openTask(task);
+		click(ELEMENT_RIGHT_PANE_TASK_PRIORITY_LINK);
+		info("edit priority");
+		switch(opt){
+		case None:
+			info("select None");
+			selectQuick(ELEMENT_RIGHT_PANE_TASK_PRIORITY_SELECT_LINK,"None");
+			waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_PRIORITY_TEXT.replace("$priority","None"));
+			break;
+		case Normal:
+			info("select Normal");
+			selectQuick(ELEMENT_RIGHT_PANE_TASK_PRIORITY_SELECT_LINK,"Normal");
+			waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_PRIORITY_TEXT.replace("$priority","Normal"));
+			break;
+		case High:
+			info("select High");
+			selectQuick(ELEMENT_RIGHT_PANE_TASK_PRIORITY_SELECT_LINK,"High");
+			waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_PRIORITY_TEXT.replace("$priority","High"));
+			break;
+		case Low:
+			info("select Low");
+			selectQuick(ELEMENT_RIGHT_PANE_TASK_PRIORITY_SELECT_LINK,"Low");
+			waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_PRIORITY_TEXT.replace("$priority","Low"));
+			break;
+		default:
+			info("No option in the list.Please select correct option.");
+			break;
+		}
 	}
 	/**
 	 * Check menu of task detail
@@ -438,7 +661,7 @@ public class ManagementTasks extends TaskManagementLocatorObject {
 	public void checkListFlow(String task,String flow,String...flows){
 		openTask(task);
 		info("check default flow");
-		waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_WORKFLOW_TEXT.replace("$flow", flow));
+		waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_STATUS_TEXT.replace("$flow", flow));
 		click(ELEMENT_RIGHT_PANE_TASK_STATUS_LINK);
 		click(ELEMENT_RIGHT_PANE_TASK_STATUS_SELECT_LINK);
 		Utils.pause(1000);

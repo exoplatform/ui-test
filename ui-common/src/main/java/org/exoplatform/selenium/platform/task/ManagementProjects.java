@@ -1,14 +1,10 @@
 package org.exoplatform.selenium.platform.task;
 
-
 import static org.exoplatform.selenium.TestLogger.info;
-
 import java.awt.AWTException;
 import java.awt.Robot;
 import java.awt.event.KeyEvent;
-
 import org.exoplatform.selenium.Utils;
-
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.Keys;

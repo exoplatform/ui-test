@@ -1390,7 +1390,15 @@ public class TestBase {
 		}
 		Utils.pause(500);
 	}
-
+	/**
+	 * Select option from combo box
+	 * @param locator
+	 * @param option
+	 */
+	public void selectQuick(Object locator, String option){
+		Select select = new Select(waitForAndGetElement(locator));
+		select.selectByVisibleText(option);
+	}
 	/**
 	 * un-check a checked-box
 	 * @param locator
