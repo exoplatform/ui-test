@@ -243,11 +243,19 @@ public class TaskManagementLocatorObject extends PlatformBase {
 	public final String ELEMENT_RIGHT_PANE_TASK_DESCRIPTION_TEXT = "//*[contains(@class,'taskDescription')]/*[@data-name='description']/*[contains(.,'$des')]";
 	public final By ELEMENT_RIGHT_PANE_TASK_DESCRIPTION_INPUT = By.xpath("//*[contains(@class,'addTask')]//*[@data-name='description']");
 	//assign
-	public final By ELEMENT_RIGHT_PANE_TASK_ASSIGN_LINK = By.xpath("//*[@class='unassigned ']/*[@class='hoverStatus small editableField editAssignee'][@data-original-title='Click to edit']");
+	public final By ELEMENT_RIGHT_PANE_TASK_ASSIGN_LINK = By.xpath("//*[@class='unassigned ']/*[@class='hoverStatus small editableField editAssignee'][@data-original-title='Click to edit'][contains(.,'Unassigned')]");
 	public final By ELEMENT_RIGHT_PANE_TASK_ASSIGN_INPUT = By.xpath("//*[@class='contBlock']//*[contains(@class,'selectize-input replaceTextArea items not-full')]/*[@type='text']");
+	public final By ELEMENT_RIGHT_PANE_TASK_ASSIGN_INPUT_DISABLED = By.xpath("//*[@class='contBlock']//*[contains(@class,'selectize-input replaceTextArea items not-full')]/*[@disabled='']");
+	public final String ELEMENT_RIGHT_PANE_TASK_ASSIGN_AUTOCOMPLETE = "//*[@class='selectize-dropdown-content']/*[@data-value='$user']";
 	public final By ELEMENT_RIGHT_PANE_TASK_COWORKER_INPUT = By.xpath("//*[@class='contBlock tags']//*[contains(@class,'selectize-input replaceTextArea items not-full')]/*[@type='text']");
-	public final String ELEMENT_RIGHT_PANE_TASK_ASSIGN_TEXT = "//*[@class='inputUser']//*[contains(@class,'selectize-input replaceTextArea items not-full has-options')]/*[contains(.,'$user')]";
-	public final String ELEMENT_RIGHT_PANE_TASK_COWORKER_TEXT = "//*[@class='inputUser']//*[contains(@class,'selectize-input replaceTextArea items not-full has-options has-items')]/*[contains(.,'$user')]";
+	public final String ELEMENT_RIGHT_PANE_TASK_ASSIGN_TEXT = "//*[@class='contBlock']//*[contains(@class,'selectize-input replaceTextArea items not-full')]/*[contains(.,'$user')]";
+	public final String ELEMENT_RIGHT_PANE_TASK_ASSIGN_REMOVE_ICON = "//*[@class='contBlock']//*[contains(@class,'selectize-input replaceTextArea items not-full')]/*[@data-value='$user']//*[@class='uiIconClose uiIconLightGray']";
+	public final String ELEMENT_RIGHT_PANE_TASK_ASSIGN_REMOVE_ICON1 = "//*[@class='contBlock']//*[contains(@class,'selectize-input replaceTextArea items not-full')]/*[contains(.,'$username')]//*[@class='uiIconClose uiIconLightGray']";
+	public final String ELEMENT_RIGHT_PANE_TASK_COWORKER_TEXT = "//*[@class='contBlock tags']//*[contains(@class,'selectize-input replaceTextArea items not-full')]/*[contains(.,'$user')]";
+	public final String ELEMENT_RIGHT_PANE_TASK_COWORKER_REMOVE_ICON = "//*[@class='contBlock tags']//*[contains(@class,'selectize-input replaceTextArea items not-full')]/*[@data-value='$user']//*[@class='uiIconClose uiIconLightGray']";
+	public final String ELEMENT_RIGHT_PANE_TASK_DISPLAY_ASSIGN_COWORKER = ".//*[@class='assigned ']/*[@class='avatarMini']/img/../../*[contains(.,'$num')]";
+	public final String ELEMENT_RIGHT_PANE_TASK_DISPLAY_ONLY_COWORKER = "//*[@class='assigned ']/*[@class='avatarMini']/img[contains(@src,'UserAvtDefault')]/../../*[contains(.,'$num')]";
+			
 	//workplan
 	public final By ELEMENT_RIGHT_PANE_TASK_WORKPLAN_LINK = By.xpath("//*[@class='hoverStatus hoverStatusBlock small editableField'][@data-original-title='Click to edit']");
 	public final By ELEMENT_RIGHT_PANE_TASK_WORKPLAN_DELETE_ICON = By.xpath("//*[@class='uiIcon uiIconTrashMini']");

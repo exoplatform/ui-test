@@ -338,6 +338,8 @@ public class ManagementTasks extends TaskManagementLocatorObject {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_ASSIGN_INPUT_DISABLED);
+			waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_ASSIGN_REMOVE_ICON.replace("$user",assignee));
 		}
 		if(coworkers.length>0){
 			for (String coworker : coworkers) {
@@ -353,10 +355,46 @@ public class ManagementTasks extends TaskManagementLocatorObject {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+				waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_COWORKER_REMOVE_ICON.replace("$user",coworker));
 			}
 		}
 		openTask(task);
 
+	}
+	/**
+	 * Check assignee popup
+	 * @param task
+	 * @param user
+	 * @param username
+	 */
+	public void checkTaskAssigneePopup(String task,String user,String username){
+		openTask(task);
+		click(ELEMENT_RIGHT_PANE_TASK_ASSIGN_LINK);
+		info("check assignee popup");
+		waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_ASSIGN_INPUT);
+		waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_COWORKER_INPUT);
+		type(ELEMENT_RIGHT_PANE_TASK_ASSIGN_INPUT,user,false);
+		Robot robot;
+		try {
+			robot = new Robot();
+			robot.delay(1000);
+			robot.keyPress(KeyEvent.VK_ENTER);
+			robot.keyRelease(KeyEvent.VK_ENTER);
+			Utils.pause(1000);
+		} catch (AWTException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_ASSIGN_REMOVE_ICON1.replace("$username",username));
+	}
+	/**
+	 * Check default value of assignee
+	 * @param task
+	 */
+	public void checkTaskAssigneeDefault(String task){
+		openTask(task);
+		info("check default value of assignee");
+		waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_ASSIGN_LINK);
 	}
 	/**
 	 * Check assignee full name
@@ -374,6 +412,42 @@ public class ManagementTasks extends TaskManagementLocatorObject {
 				waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_COWORKER_TEXT.replace("$user",coworker));
 			}
 		}
+	}
+	/**
+	 * Check auto complete
+	 * @param task
+	 * @param key   keyword to search
+	 * @param users 
+	 * 					values which match to keyword
+	 */
+	public void checkAutoCompleteUser(String task,String key,String...users){
+		openTask(task);
+		click(ELEMENT_RIGHT_PANE_TASK_ASSIGN_LINK);
+		info("check auto complete");
+		type(ELEMENT_RIGHT_PANE_TASK_ASSIGN_INPUT,key,false);
+		if(users.length>0){
+			for (String user : users) {
+				waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_ASSIGN_AUTOCOMPLETE.replace("$user", user));
+			}
+		}
+	}
+	/**
+	 * Check display of assignee and coworkers
+	 * @param num
+	 * 			text of number coworkers
+	 */
+	public void checkDisplayOfAssigneeCoworker(String num){
+		info("check display of assignee and coworker");
+		waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_DISPLAY_ASSIGN_COWORKER.replace("$num", num));
+	}
+	/**
+	 * Check display of only coworkers
+	 * @param num
+	 * 			text of number coworkers
+	 */
+	public void checkDisplayOfOnlyCoworker(String num){
+		info("check display of only coworker");
+		waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_DISPLAY_ONLY_COWORKER.replace("$num", num));
 	}
 	/**
 	 * Edit status

@@ -185,6 +185,12 @@
 			</properties>
 		</profile>
 		<profile>
+			<id>task-func-part5</id>
+			<properties>
+				<testSuite>task-func-part5.xml</testSuite>
+			</properties>
+		</profile>
+		<profile>
 			<id>testng-failed</id>
 			<properties>
 				<testSuite>testng-failed.xml</testSuite>
