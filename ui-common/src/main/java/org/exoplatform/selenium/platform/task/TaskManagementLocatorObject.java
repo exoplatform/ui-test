@@ -253,6 +253,7 @@ public class TaskManagementLocatorObject extends PlatformBase {
 	public final String ELEMENT_RIGHT_PANE_TASK_ASSIGN_REMOVE_ICON1 = "//*[@class='contBlock']//*[contains(@class,'selectize-input replaceTextArea items not-full')]/*[contains(.,'$username')]//*[@class='uiIconClose uiIconLightGray']";
 	public final String ELEMENT_RIGHT_PANE_TASK_COWORKER_TEXT = "//*[@class='contBlock tags']//*[contains(@class,'selectize-input replaceTextArea items not-full')]/*[contains(.,'$user')]";
 	public final String ELEMENT_RIGHT_PANE_TASK_COWORKER_REMOVE_ICON = "//*[@class='contBlock tags']//*[contains(@class,'selectize-input replaceTextArea items not-full')]/*[@data-value='$user']//*[@class='uiIconClose uiIconLightGray']";
+	public final String ELEMENT_RIGHT_PANE_TASK_COWORKER_REMOVE_ICON1 = "//*[@class='contBlock tags']//*[contains(@class,'selectize-input replaceTextArea items not-full')]/*[contains(.,'$username')]//*[@class='uiIconClose uiIconLightGray']";
 	public final String ELEMENT_RIGHT_PANE_TASK_DISPLAY_ASSIGN_COWORKER = ".//*[@class='assigned ']/*[@class='avatarMini']/img/../../*[contains(.,'$num')]";
 	public final String ELEMENT_RIGHT_PANE_TASK_DISPLAY_ONLY_COWORKER = "//*[@class='assigned ']/*[@class='avatarMini']/img[contains(@src,'UserAvtDefault')]/../../*[contains(.,'$num')]";
 			
@@ -312,4 +313,7 @@ public class TaskManagementLocatorObject extends PlatformBase {
 	
 	//Task Change
 	public final By ELEMENT_RIGHT_PANE_CHANGE_TAB_LINK = By.xpath("//*[@href='#tab-changes']");
+	public final String ELEMENT_RIGHT_PANE_CHANGE_TEXT = "//*[@id='tab-changes']//a[contains(.,'$user')]/../*[contains(.,'$text')]";
+	public final String ELEMENT_RIGHT_PANE_CHANGE_TEXT1 = "//*[@id='tab-changes']//a[contains(.,'$user')]/../*[contains(.,'$text')][contains(.,'$opt')]";
+	public final String ELEMENT_RIGHT_PANE_CHANGE_TIME = "//*[@id='tab-changes']//a[contains(.,'$user')]/../*[contains(.,'$text')]/../../*[@class='date pull-right'][contains(.,'$time')]";
 }

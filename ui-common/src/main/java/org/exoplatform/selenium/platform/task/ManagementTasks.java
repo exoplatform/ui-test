@@ -296,7 +296,8 @@ public class ManagementTasks extends TaskManagementLocatorObject {
 		openTask(task);
 		click(ELEMENT_RIGHT_PANE_TASK_PROJECT_LINK);
 		info("change project");
-		click(ELEMENT_RIGHT_PANE_PARENT_PATH_DROPDOWN_MENU.replace("$project",project));
+		type(ELEMENT_EDIT_PROJECT_PATH_INPUT,project,true);
+		click(ELEMENT_RIGHT_PANE_PARENT_PATH_DROPDOWN_MENU.replace("$project",project),0,true);
 		waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_PROJECT_TEXT.replace("$project", project));
 	}
 	/**
@@ -414,6 +415,24 @@ public class ManagementTasks extends TaskManagementLocatorObject {
 		}
 	}
 	/**
+	 * Remove assignee
+	 * @param task
+	 * @param assignee
+	 * @param coworkers
+	 */
+	public void removeAssigneeOfTask(String task,String assignee,String...coworkers){
+		openTask(task);
+		click(ELEMENT_RIGHT_PANE_TASK_DISPLAY_ASSIGN_COWORKER.replace("$num", assignee));
+		click(ELEMENT_RIGHT_PANE_TASK_ASSIGN_REMOVE_ICON1.replace("$username", assignee));
+		Utils.pause(500);
+		if(coworkers.length>0){
+			for (String coworker : coworkers) {
+				click(ELEMENT_RIGHT_PANE_TASK_COWORKER_REMOVE_ICON1.replace("$username", coworker));
+				Utils.pause(500);
+			}
+		}
+	}
+	/**
 	 * Check auto complete
 	 * @param task
 	 * @param key   keyword to search
@@ -519,10 +538,7 @@ public class ManagementTasks extends TaskManagementLocatorObject {
 			mouseHoverByJavaScript(ELEMENT_RIGHT_PANE_TASK_WORKPLAN_FROM_DAY.replace("$day", fromDay),2);
 			clickByJavascript(ELEMENT_RIGHT_PANE_TASK_WORKPLAN_FROM_DAY.replace("$day", fromDay),2);
 		}
-		if(fromTime!=""){
-			click(ELEMENT_RIGHT_PANE_TASK_WORKPLAN_FROMTIME_LINK);
-			click(ELEMENT_RIGHT_PANE_TASK_WORKPLAN_FROMTIME.replace("$time",fromTime));
-		}
+		
 		//if not the same month
 		if(gap2>0){
 			for(int i=0;i<gap2;i++){
@@ -537,12 +553,14 @@ public class ManagementTasks extends TaskManagementLocatorObject {
 			mouseHoverByJavaScript(ELEMENT_RIGHT_PANE_TASK_WORKPLAN_TO_DAY.replace("$day", toDay),2);
 			clickByJavascript(ELEMENT_RIGHT_PANE_TASK_WORKPLAN_TO_DAY.replace("$day", toDay),2);
 		}
-		if(toTime!=""){
-			click(ELEMENT_RIGHT_PANE_TASK_WORKPLAN_TOTIME_LINK);
-			click(ELEMENT_RIGHT_PANE_TASK_WORKPLAN_TOTIME.replace("$time",toTime));
-		}
 		if(checkAllDay){
 			check(ELEMENT_RIGHT_PANE_TASK_WORKPLAN_ALLDAY_CHECKBOX,2);
+		}else{
+			click(ELEMENT_RIGHT_PANE_TASK_WORKPLAN_FROMTIME_LINK);
+			click(ELEMENT_RIGHT_PANE_TASK_WORKPLAN_FROMTIME.replace("$time",fromTime));
+			Utils.pause(1000);
+			click(ELEMENT_RIGHT_PANE_TASK_WORKPLAN_TOTIME_LINK);
+			click(ELEMENT_RIGHT_PANE_TASK_WORKPLAN_TOTIME.replace("$time",toTime));
 		}
 	}
 	/**
@@ -768,5 +786,31 @@ public class ManagementTasks extends TaskManagementLocatorObject {
 			waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_STATUS_SELECT.replace("$opt",eflow));
 		}
 		
+	}
+	/**
+	 * Check display of change
+	 * @param user
+	 * @param text
+	 * @param opt
+	 */
+	public void checkDisplayOfTaskChange(String user,String text,String...opt){
+		click(ELEMENT_RIGHT_PANE_CHANGE_TAB_LINK);
+		info("check display of change");
+		if(opt.length>0){
+			waitForAndGetElement(ELEMENT_RIGHT_PANE_CHANGE_TEXT.replace("$user", user).replace("$text", text).replace("$opt", opt[0]));
+		}else{
+			waitForAndGetElement(ELEMENT_RIGHT_PANE_CHANGE_TEXT.replace("$user", user).replace("$text", text));
+		}
+	}
+	/**
+	 * Check display of time change
+	 * @param user
+	 * @param text
+	 * @param time
+	 */
+	public void checkDisplayOfTaskChangeTime(String user,String text,String time){
+		click(ELEMENT_RIGHT_PANE_CHANGE_TAB_LINK);
+		info("check display of time change");
+		waitForAndGetElement(ELEMENT_RIGHT_PANE_CHANGE_TIME.replace("$user", user).replace("$text", text).replace("$time", time));
 	}
 }
