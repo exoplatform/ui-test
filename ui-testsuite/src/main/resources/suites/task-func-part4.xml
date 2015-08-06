@@ -11,6 +11,7 @@
 			<class name="org.exoplatform.selenium.platform.task.functional.TASK_ListView" />
 			<class name="org.exoplatform.selenium.platform.task.functional.TASK_Projects_ProjectWorkFlow" />
 			<class name="org.exoplatform.selenium.platform.task.functional.TASK_TaskDetails_EditTask" />
+			<class name="org.exoplatform.selenium.platform.task.functional.TASK_TaskDetails_EditTask_Project" />
 		</classes>
 	</test>
 	<listeners>

@@ -585,7 +585,7 @@ import org.testng.annotations.*;
 			- Task is added to project
 			- The message Let's create your first task. and welcome screen are disappeared when there is a task added.*/ 
 		mgTask.addTask(project, task);
-		mgTask.checkTaskDetail(task);
+		mgTask.checkTaskDetail(task,project);
 		
 		info("delete project");
 		mgProject.deleteProject(project, false);

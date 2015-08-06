@@ -76,5 +76,6 @@ import org.testng.annotations.*;
 		
 		info("delete data");
 		mgProject.deleteProject(prj1, false);
+		mgProject.deleteProject(prj2, false);
  	}
 }

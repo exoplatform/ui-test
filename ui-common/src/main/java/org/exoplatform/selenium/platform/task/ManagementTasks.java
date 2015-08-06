@@ -3,16 +3,19 @@ package org.exoplatform.selenium.platform.task;
 import java.awt.AWTException;
 import java.awt.Robot;
 import java.awt.event.KeyEvent;
+
 import org.exoplatform.selenium.Utils;
+
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+
 import static org.exoplatform.selenium.TestLogger.info;
 
 /**
- * This class will define actions about management project
+ * This class will define actions about management task
  *
  */
 public class ManagementTasks extends TaskManagementLocatorObject {
@@ -148,12 +151,18 @@ public class ManagementTasks extends TaskManagementLocatorObject {
 	/**
 	 * Check task detail
 	 * @param task
+	 * @param project
 	 */
-	public void checkTaskDetail(String task){
+	public void checkTaskDetail(String task,String project){
 		openTask(task);
 		waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_TITLE_TEXT.replace("$task", task));
 		waitForAndGetElement(ELEMENT_UNTITLEDTASK_AND_TASK_INPUT.replace("$task", task));
-		waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_STATUS_TEXT.replace("$flow","To Do"));
+		if(project!="No Project"){
+			waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_STATUS_TEXT.replace("$flow","To Do"));
+			waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_PROJECT_TEXT.replace("$project",project));
+		}else{
+			waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_NOPROJECT_TEXT);
+		}
 	}
 	/**
 	 * Add a task by clicking directly on the blank field
@@ -288,6 +297,21 @@ public class ManagementTasks extends TaskManagementLocatorObject {
 		click(ELEMENT_RIGHT_PANE_TASK_PROJECT_LINK);
 		info("change project");
 		click(ELEMENT_RIGHT_PANE_PARENT_PATH_DROPDOWN_MENU.replace("$project",project));
+		waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_PROJECT_TEXT.replace("$project", project));
+	}
+	/**
+	 * Search project in Projects
+	 * @param task
+	 * @param project: search key
+	 */
+	public void searchTaskProject(String task,String project){
+		openTask(task);
+		info("search project");
+		click(ELEMENT_RIGHT_PANE_TASK_PROJECT_LINK);
+		type(ELEMENT_EDIT_PROJECT_PATH_INPUT,project,true);
+		waitForAndGetElement(ELEMENT_RIGHT_PANE_PARENT_PATH_MATCH_VALUE.replace("$text",project));
+		click(ELEMENT_RIGHT_PANE_PARENT_PATH_MATCH_VALUE.replace("$text",project));
+		Utils.pause(500);
 		waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_PROJECT_TEXT.replace("$project", project));
 	}
 	/**

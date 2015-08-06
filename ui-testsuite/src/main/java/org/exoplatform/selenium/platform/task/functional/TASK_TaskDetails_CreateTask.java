@@ -91,7 +91,7 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- The new added task will be displayed on the top below Untitled Task field.*/
 		mgTask.addTask(project, task1);
-		mgTask.checkTaskDetail(task1);
+		mgTask.checkTaskDetail(task1,project);
 		
 		info("delete data");
 		mgProject.deleteProject(project, false);

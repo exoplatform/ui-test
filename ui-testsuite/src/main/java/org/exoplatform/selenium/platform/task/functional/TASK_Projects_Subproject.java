@@ -226,7 +226,7 @@ import org.testng.annotations.*;
 			Sub-projects inherit workflow from their parent at creation time. They can evolve separately afterwards.*/ 
 		mgProject.addSubProject(prj1,prj11,"", false);
 		mgTask.addTask(prj11, task11);
-		mgTask.checkTaskDetail(task11);
+		mgTask.checkTaskDetail(task11,prj11);
 		
 		info("delete data");
 		mgProject.deleteProject(prj1, true,prj11);

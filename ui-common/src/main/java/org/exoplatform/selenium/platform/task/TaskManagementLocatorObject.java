@@ -236,6 +236,7 @@ public class TaskManagementLocatorObject extends PlatformBase {
 	//title
 	public final By ELEMENT_RIGHT_PANE_TASK_PROJECT_LINK = By.xpath("//*[@data-original-title='Click to edit']/*[@data-name='project']");
 	public final String ELEMENT_RIGHT_PANE_TASK_PROJECT_TEXT = "//*[@data-name='project']/*[contains(.,'$project')]";
+	public final By ELEMENT_RIGHT_PANE_TASK_NOPROJECT_TEXT = By.xpath("//*[@data-name='project'][contains(.,'No Project')]");
 	public final String ELEMENT_RIGHT_PANE_TASK_TITLE_TEXT = "//*[@data-name='title'][contains(.,'$task')][@data-original-title='Click to edit']";
 	//description
 	public final By ELEMENT_RIGHT_PANE_TASK_DESCRIPTION_LINK = By.xpath("//*[@class='taskDescription']/*[@data-name='description'][@data-original-title='Click to edit']");
