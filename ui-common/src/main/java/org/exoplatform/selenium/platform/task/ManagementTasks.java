@@ -209,6 +209,134 @@ public class ManagementTasks extends TaskManagementLocatorObject {
 		waitForAndGetElement(ELEMENT_RIGHT_PANE_COMMENT_TEXT.replace("$user", user).replace("$comment", comment));
 	}
 	/**
+	 * Add many comment into task
+	 * @param task
+	 * @param comment
+	 * @param user
+	 * @param loop
+	 */
+	public void addManyTaskComment(String task,String user,String comment,int loop){
+		info("add comment to task");
+		openTask(task);
+		for(int i=1;i<=loop;i++){
+			doubleClickOnElement(ELEMENT_RIGHT_PANE_COMMENT_LINK);
+			WebElement input= waitForAndGetElement(ELEMENT_RIGHT_PANE_COMMENT_INPUT.replace("$comment",""));
+			Actions action =new Actions(driver);
+			action.moveToElement(input).sendKeys(comment+i).build().perform();
+			click(ELEMENT_RIGHT_PANE_COMMENT_BUTTON);
+			Utils.pause(2000);
+			waitForAndGetElement(ELEMENT_RIGHT_PANE_COMMENT_TEXT.replace("$user", user).replace("$comment", comment+i));
+		}
+	}
+	/**
+	 * Check View All Comment
+	 * @param user
+	 * @param comment
+	 * @param num
+	 * 			number of comments
+	 */
+	public void checkViewAllComments(String user,String comment,int num){
+		driver.navigate().refresh();
+		info("check display of View all comment");
+		waitForAndGetElement(ELEMENT_RIGHT_PANE_COMMENT_TEXT.replace("$user", user).replace("$comment", comment+num));
+		waitForAndGetElement(ELEMENT_RIGHT_PANE_COMMENT_TEXT.replace("$user", user).replace("$comment", comment+(num-1)));
+		for(int i=1;i<=(num-2);i++){
+			waitForElementNotPresent(ELEMENT_RIGHT_PANE_COMMENT_TEXT.replace("$user", user).replace("$comment", comment+i));
+		}
+		waitForAndGetElement(ELEMENT_RIGHT_PANE_COMMENT_VIEW_ALL.replace("$num",String.valueOf(num)));
+	}
+	/**
+	 * Check Hide All Comment
+	 * @param user
+	 * @param comment
+	 * @param num
+	 * 			number of comments
+	 */
+	public void checkHideAllComments(String user,String comment,int num){
+		info("check display of Hide all comment");
+		click(ELEMENT_RIGHT_PANE_COMMENT_VIEW_ALL.replace("$num",String.valueOf(num)));
+		for(int i=1;i<=num;i++){
+			waitForAndGetElement(ELEMENT_RIGHT_PANE_COMMENT_TEXT.replace("$user", user).replace("$comment", comment+i));
+		}
+		waitForAndGetElement(ELEMENT_RIGHT_PANE_COMMENT_HIDE_ALL.replace("$num",String.valueOf(num)));
+	}
+	/**
+	 * Check suggestion list when mention user
+	 * @param key	
+	 * 			keyword of username
+	 * @param users
+	 * 			list of users match to keyword
+	 */
+	public void checkSuggestionListWhenMention(String key,String...users){
+		info("check suggestion list when mention user");
+		doubleClickOnElement(ELEMENT_RIGHT_PANE_COMMENT_LINK);
+		WebElement input= waitForAndGetElement(ELEMENT_RIGHT_PANE_COMMENT_INPUT.replace("$comment",""));
+		Actions action =new Actions(driver);
+		action.moveToElement(input).sendKeys("@"+key).build().perform();
+		for (String user : users) {
+			waitForAndGetElement(ELEMENT_RIGHT_PANE_COMMENT_MENTION.replace("$user", user));
+		}
+	}
+	/**
+	 * Check comment button
+	 * @param task
+	 * @param isDisabled
+	 * 					true if button is disabled
+	 * 					false if button is enabled
+	 */
+	public void checkCommentButtonOfTaskComment(String task,boolean isDisabled){
+		if(isDisabled){
+			info("button is disabled");
+			waitForAndGetElement(ELEMENT_RIGHT_PANE_COMMENT_BUTTON_DISABLED);
+		}else{
+			info("button is enabled");
+			waitForElementNotPresent(ELEMENT_RIGHT_PANE_COMMENT_BUTTON_DISABLED);
+		}
+	}
+	/**
+	 * Check trash icon of comment
+	 * @param user
+	 * @param comment
+	 * @param enabled
+	 * 				true if user has permission to delete comment
+	 * 				false if user has NOT permission to delete comment
+	 */
+	public void checkTrashIconOfComment(String user,String comment,boolean enabled){
+		if(enabled){
+			info("user has permission to delete comment");
+			mouseOver(ELEMENT_RIGHT_PANE_COMMENT_USER.replace("$user", user).replace("$comment", comment),false);
+			Utils.pause(500);
+			waitForAndGetElement(ELEMENT_RIGHT_PANE_COMMENT_TRASH_ICON.replace("$comment", comment));
+		}else{
+			info("user has not permission to delete comment");
+			mouseOver(ELEMENT_RIGHT_PANE_COMMENT_USER.replace("$user", user).replace("$comment", comment),false);
+			Utils.pause(500);
+			waitForElementNotPresent(ELEMENT_RIGHT_PANE_COMMENT_TRASH_ICON.replace("$comment", comment));
+		}
+	}
+	/**
+	 * Check textarea of comment
+	 * @param comment
+	 */
+	public void checkTextAreaOfTaskComment(String comment){
+		doubleClickOnElement(ELEMENT_RIGHT_PANE_COMMENT_LINK);
+		WebElement input= waitForAndGetElement(ELEMENT_RIGHT_PANE_COMMENT_INPUT.replace("$comment",""));
+		Actions action =new Actions(driver);
+		action.moveToElement(input).sendKeys(comment).build().perform();
+		waitForAndGetElement(ELEMENT_RIGHT_PANE_COMMENT_INPUT_TEXTAREA);
+	}
+	/**
+	 * Check time of comment
+	 * @param user
+	 * @param comment
+	 * @param time
+	 * 			  when user posts comment
+	 */
+	public void checkDisplayOfTaskCommentTime(String user,String comment,String time){
+		info("check display of time change");
+		waitForAndGetElement(ELEMENT_RIGHT_PANE_COMMENT_TIME.replace("$user", user).replace("$comment", comment).replace("$time", time));
+	}
+	/**
 	 * get value attribute
 	 * @param locator
 	 * @return data-taskid of element

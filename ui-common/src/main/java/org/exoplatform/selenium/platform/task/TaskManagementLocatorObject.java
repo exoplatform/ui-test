@@ -306,11 +306,18 @@ public class TaskManagementLocatorObject extends PlatformBase {
 	
 	//Task Comment
 	public final String ELEMENT_RIGHT_PANE_COMMENT_TEXT = "//*[@class='author'][contains(.,'$user')]/../*[@class='contentComment'][contains(.,'$comment')]";
+	public final String ELEMENT_RIGHT_PANE_COMMENT_TIME = "//*[@class='author'][contains(.,'$user')]/../*[@class='contentComment'][contains(.,'$comment')]/..//*[@class='date'][contains(.,'$time')]";
 	public final String ELEMENT_RIGHT_PANE_COMMENT_INPUT = "//*[@class='commentInput']//*[@class='replaceTextArea editable'][contains(.,'$comment')]";
+	public final By ELEMENT_RIGHT_PANE_COMMENT_INPUT_TEXTAREA = By.xpath("//*[@class='commentInput']//*[@class='replaceTextArea editable']");
 	public final By ELEMENT_RIGHT_PANE_COMMENT_LINK = By.id("Displayundefined");
 	public final By ELEMENT_RIGHT_PANE_COMMENT_BUTTON = By.id("taskCommentButton");
+	public final By ELEMENT_RIGHT_PANE_COMMENT_BUTTON_DISABLED = By.xpath("//*[@id='taskCommentButton'][@disabled='disabled']");
 	public final By ELEMENT_RIGHT_PANE_COMMENT_TAB_LINK = By.xpath("//*[@href='#tab-comments']");
-	
+	public final String ELEMENT_RIGHT_PANE_COMMENT_VIEW_ALL = ".//*[@class='load-all-comments'][contains(.,'View all $num comments.')]";
+	public final String ELEMENT_RIGHT_PANE_COMMENT_HIDE_ALL = ".//*[@class='load-all-comments'][contains(.,'Hide all $num comments.')]";
+	public final String ELEMENT_RIGHT_PANE_COMMENT_MENTION = "//*[@class='autocomplete-menu']//*[@data-display='$user']";
+	public final String ELEMENT_RIGHT_PANE_COMMENT_TRASH_ICON = "//*[@class='commentList']//*[@class='contentComment'][contains(.,'$comment')]/../..//*[contains(@class,'uiIconTrashMini uiIconLightGray')]";
+	public final String ELEMENT_RIGHT_PANE_COMMENT_USER = "//*[@class='contentComment'][contains(.,'$comment')]/../..//*[@alt='$user']";
 	//Task Change
 	public final By ELEMENT_RIGHT_PANE_CHANGE_TAB_LINK = By.xpath("//*[@href='#tab-changes']");
 	public final String ELEMENT_RIGHT_PANE_CHANGE_TEXT = "//*[@id='tab-changes']//a[contains(.,'$user')]/../*[contains(.,'$text')]";
