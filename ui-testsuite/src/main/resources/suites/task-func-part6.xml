@@ -11,6 +11,7 @@
 			<class name="org.exoplatform.selenium.platform.task.functional.TASK_TaskDetails_EditTask_TaskDescription" />
 			<class name="org.exoplatform.selenium.platform.task.functional.TASK_TaskDetails_EditTask_TaskDueDate" />
 			<class name="org.exoplatform.selenium.platform.task.functional.TASK_TaskDetails_EditTask_TaskPriority" />
+			<class name="org.exoplatform.selenium.platform.task.functional.TASK_TaskDetails_EditTask_TaskStatus" />
 		</classes>
 	</test>
 	<listeners>

@@ -671,6 +671,24 @@ public class ManagementTasks extends TaskManagementLocatorObject {
 		waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_STATUS_TEXT.replace("$flow", status));
 	}
 	/**
+	 * Check default status of task
+	 * @param task
+	 * @param status
+	 * @param isDisplay
+	 * 					true if this status is displayed in task detail
+	 * 					false if this status is not displayed in task detail
+	 */
+	public void checkDefaultTaskStatus(String task,String status,boolean isDisplay){
+		openTask(task);
+		info("check default status");
+		if(isDisplay){
+			waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_STATUS_TEXT.replace("$flow", status));
+		}else{
+			waitForElementNotPresent(ELEMENT_RIGHT_PANE_TASK_STATUS_TEXT.replace("$flow", status));
+		}
+	}
+	
+	/**
 	 * Edit tag
 	 * @param task
 	 * @param tags
