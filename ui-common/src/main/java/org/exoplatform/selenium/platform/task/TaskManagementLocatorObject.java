@@ -302,7 +302,7 @@ public class TaskManagementLocatorObject extends PlatformBase {
 	public final By ELEMENT_CKEDITOR_BOLD = By.xpath("//*[@class='cke_button_icon cke_button__bold_icon']");
 	public final By ELEMENT_CKEDITOR_ITALIC = By.xpath("//*[@class='cke_button_icon cke_button__italic_icon']");
 	public final By ELEMENT_CKEDITOR_NUMBERLIST = By.xpath("//*[@class='cke_button_icon cke_button__numberedlist_icon']");
-	public final By ELEMENT_CKEDITOR_IFRAME = By.xpath("//iframe[@class='cke_wysiwyg_frame cke_reset']");
+	public final By ELEMENT_CKEDITOR_IFRAME = By.xpath("//*[@class='editable-input']//iframe[@class='cke_wysiwyg_frame cke_reset']");
 	
 	//Task Comment
 	public final String ELEMENT_RIGHT_PANE_COMMENT_TEXT = "//*[@class='author'][contains(.,'$user')]/../*[@class='contentComment'][contains(.,'$comment')]";

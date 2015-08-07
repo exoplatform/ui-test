@@ -411,10 +411,71 @@ public class ManagementTasks extends TaskManagementLocatorObject {
 		openTask(task);
 		click(ELEMENT_RIGHT_PANE_TASK_DESCRIPTION_LINK);
 		info("input description");
+		waitForAndGetElement(ELEMENT_CKEDITOR_IFRAME);
 		inputFrame(ELEMENT_CKEDITOR_IFRAME, des);
 		mouseOverAndClick(ELEMENT_RIGHT_PANE_TASK_TITLE_TEXT.replace("$task", task));
 		waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_DESCRIPTION_TEXT.replace("$des", des));
 	}
+
+	/**
+	 * Decorate description
+	 * @param task
+	 * @param des
+	 * 			 description of task
+	 */
+	public void decorateDescription(String task, String des){
+		openTask(task);
+		Utils.pause(1000);
+		click(ELEMENT_RIGHT_PANE_TASK_DESCRIPTION_LINK);
+		if(des==""){
+			info("left description blank");
+			inputFrame(ELEMENT_CKEDITOR_IFRAME, "");
+			mouseOverAndClick(ELEMENT_RIGHT_PANE_TASK_TITLE_TEXT.replace("$task", task));
+			waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_DESCRIPTION_TEXT.replace("$des", "Empty"));
+		}else{
+			info("decorate description");
+			inputFrame(ELEMENT_CKEDITOR_IFRAME, des);
+			cke_NumberList();
+			cke_Bold();
+			cke_Italic();
+			mouseOverAndClick(ELEMENT_RIGHT_PANE_TASK_TITLE_TEXT.replace("$task", task));
+			waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_DESCRIPTION_TEXT.replace("$des", des));
+		}
+	}
+	/**
+	 * Click on Bold button
+	 * this function is used for the files has one CKEditor tool
+	 * 
+	 */
+	public void cke_Bold() {
+		info("Bold a text");
+		pressGroupKeysUsingRobot(KeyEvent.VK_CONTROL,KeyEvent.VK_A);
+		click(ELEMENT_CKEDITOR_BOLD);
+		Utils.pause(200);
+	}
+	/**
+	 * Click on Italic button
+	 * this function is used for the files has one CKEditor tool
+	 * 
+	 */
+	public void cke_Italic() {
+		info("Italic a text");
+		pressGroupKeysUsingRobot(KeyEvent.VK_CONTROL,KeyEvent.VK_A);
+		click(ELEMENT_CKEDITOR_ITALIC);
+		Utils.pause(200);
+	}
+	/**
+	 * Click on Number List button
+	 * this function is used for the files has one CKEditor tool
+	 * 
+	 */
+	public void cke_NumberList() {
+		info("NumberList a text");
+		pressGroupKeysUsingRobot(KeyEvent.VK_CONTROL,KeyEvent.VK_A);
+		click(ELEMENT_CKEDITOR_NUMBERLIST);
+		Utils.pause(200);
+	}
+	
 	/**
 	 * Edit project of task
 	 * @param task
