@@ -9,7 +9,7 @@
 		<classes>
 			<class name="org.exoplatform.selenium.platform.task.functional.TASK_TestConfig_1" />
 			<class name="org.exoplatform.selenium.platform.task.functional.TASK_TaskDetails_EditTask_TaskDescription" />
-			
+			<class name="org.exoplatform.selenium.platform.task.functional.TASK_TaskDetails_EditTask_TaskDueDate" />
 		</classes>
 	</test>
 	<listeners>

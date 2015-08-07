@@ -874,15 +874,70 @@ public class ManagementTasks extends TaskManagementLocatorObject {
 		case NextWeek:
 			info("select Next Week");
 			click(ELEMENT_RIGHT_PANE_TASK_DUEDATE_NEXTWEEK,0,true);
-			waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_DUEDATE_TEXT.replace("$date",getDayOfNextWeek("dd MMM yyyy")));
+			waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_DUEDATE_TEXT.replace("$date",getDate(7,"dd MMM yyyy")));
 			break;
 		default:
 			info("No option in the list.Please select correct option.");
 			break;
 		}
 	}
-	
-	/*
+	/**
+	 * Check display of Duedate popup
+	 * @param opt
+	 */
+	public void checkDisplayOfDueDatePopup(optDueDate opt){
+		click(ELEMENT_RIGHT_PANE_TASK_DUEDATE_LINK);
+		switch(opt){
+		case None:
+			info("None is selected");
+			waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_DUEDATE_NONE);
+			break;
+		case Today:
+			info("Today is selected");
+			waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_DUEDATE_TODAY);
+			break;
+		case Tomorrow:
+			info("Tomorrow is selected");
+			waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_DUEDATE_TOMORROW);
+			break;
+		case NextWeek:
+			info("Next Week is selected");
+			waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_DUEDATE_NEXTWEEK);
+			break;
+		default:
+			info("No option in the list.Please select correct option.");
+			break;
+		}
+	}
+	/**
+	 * Check display of Duedate popup by default
+	 * @param task
+	 */
+	public void checkDisplayOfDueDatePopupByDefault(String task){
+		openTask(task);
+		waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_DUEDATE_TEXT.replace("$date","No Due Date"));
+		click(ELEMENT_RIGHT_PANE_TASK_DUEDATE_LINK);
+		info("check display of Duedate popup");
+		waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_DUEDATE_CALENDAR);
+		waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_DUEDATE_NONE);
+		waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_DUEDATE_TODAY);
+		waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_DUEDATE_TOMORROW);
+		waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_DUEDATE_NEXTWEEK);
+	}
+	/**
+	 * Check selected day in Duedate popup
+	 * @param day
+	 */
+	public void checkSelectedDay(String day){
+		//cut 0 to get round number, ex 07 > 7
+		if(day.startsWith("0")){
+			day=day.substring(1);
+		}
+		click(ELEMENT_RIGHT_PANE_TASK_DUEDATE_LINK);
+		info("check selected day");
+		waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_DUEDATE_DAY_SELECTED.replace("$day", day));
+	}
+	/**
 	 * check display of List View 
 	 * @param list of tasks
 	 */
