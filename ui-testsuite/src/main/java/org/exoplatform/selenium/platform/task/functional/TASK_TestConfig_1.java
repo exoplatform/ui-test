@@ -9,6 +9,7 @@ import org.exoplatform.selenium.platform.PlatformBase;
 import org.exoplatform.selenium.platform.objectdatabase.common.TextBoxDatabase;
 import org.exoplatform.selenium.platform.objectdatabase.task.ColorDatabase;
 import org.exoplatform.selenium.platform.objectdatabase.task.GroupByDatabase;
+import org.exoplatform.selenium.platform.objectdatabase.task.PriorityDatabase;
 import org.exoplatform.selenium.platform.objectdatabase.task.SortByDatabase;
 import org.exoplatform.selenium.platform.objectdatabase.task.WelcomeMessageDatabase;
 import org.exoplatform.selenium.platform.objectdatabase.task.WorkflowDatabase;
@@ -42,6 +43,7 @@ public class TASK_TestConfig_1 extends PlatformBase {
 	SortByDatabase sortByData;
 	ColorDatabase colorData;
 	WorkflowDatabase flowData;
+	PriorityDatabase priorityData;
 	
 	@BeforeMethod
 	public void setUpBeforeMethod() throws Exception{
@@ -80,6 +82,8 @@ public class TASK_TestConfig_1 extends PlatformBase {
 		flowData = new WorkflowDatabase();
 		flowData.setWorkflowData(workflowByFilePath,defaultSheet,isUseFile,jdbcDriver,dbUrl,user,pass,sqlUser);
 		
+		priorityData = new PriorityDatabase();
+		priorityData.setPriorityData(priorityByFilePath,defaultSheet,isUseFile,jdbcDriver,dbUrl,user,pass,sqlUser);
 		info("End setUpBeforeMethod");
 	}
 

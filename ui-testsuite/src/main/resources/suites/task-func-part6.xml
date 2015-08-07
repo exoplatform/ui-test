@@ -10,6 +10,7 @@
 			<class name="org.exoplatform.selenium.platform.task.functional.TASK_TestConfig_1" />
 			<class name="org.exoplatform.selenium.platform.task.functional.TASK_TaskDetails_EditTask_TaskDescription" />
 			<class name="org.exoplatform.selenium.platform.task.functional.TASK_TaskDetails_EditTask_TaskDueDate" />
+			<class name="org.exoplatform.selenium.platform.task.functional.TASK_TaskDetails_EditTask_TaskPriority" />
 		</classes>
 	</test>
 	<listeners>

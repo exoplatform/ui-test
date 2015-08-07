@@ -161,6 +161,7 @@ public class TestBase {
 	protected String groupByFilePath;
 	protected String sortByFilePath;
 	protected String workflowByFilePath;
+	protected String priorityByFilePath;
 	
 	protected String notiDesFilePath;
 
@@ -263,6 +264,7 @@ public class TestBase {
 	public final String DEFAULT_GROUPBY_FILE_URL="DataDriven/"+"task_groupby.xls";
 	public final String DEFAULT_SORTBY_FILE_URL="DataDriven/"+"task_sortby.xls";
 	public final String DEFAULT_WORKFLOW_FILE_URL="DataDriven/"+"project_workflow.xls";
+	public final String DEFAULT_PRIORITY_FILE_URL="DataDriven/"+"task_priority.xls";
 	
 	/*======= Welcome Screen (Term and Conditions) =====*/
 	public final By ELEMENT_FIRSTNAME_ACCOUNT = By.name("firstNameAccount");
@@ -397,6 +399,7 @@ public class TestBase {
 		sortByFilePath = System.getProperty("sortByFilePath");
 		groupByFilePath = System.getProperty("groupByFilePath");
 		workflowByFilePath = System.getProperty("workflowByFilePath");
+		priorityByFilePath =System.getProperty("priorityByFilePath");
 		
 		if (ssoType==null) ssoType = DEFAULT_SSOTYPE;
 
@@ -488,6 +491,7 @@ public class TestBase {
 		if (groupByFilePath == null) groupByFilePath = DEFAULT_GROUPBY_FILE_URL;
 		if (sortByFilePath == null) sortByFilePath = DEFAULT_SORTBY_FILE_URL;
 		if (workflowByFilePath == null) workflowByFilePath = DEFAULT_WORKFLOW_FILE_URL;
+		if (priorityByFilePath == null) priorityByFilePath = DEFAULT_PRIORITY_FILE_URL;
 		
 		userDataFilePath = getAbsoluteFilePath(userDataFilePath);
 		userInfoFilePath = getAbsoluteFilePath(userInfoFilePath);
@@ -559,6 +563,7 @@ public class TestBase {
 		sortByFilePath = getAbsoluteFilePath(sortByFilePath);
 		groupByFilePath = getAbsoluteFilePath(groupByFilePath);
 		workflowByFilePath = getAbsoluteFilePath(workflowByFilePath);
+		priorityByFilePath = getAbsoluteFilePath(priorityByFilePath);
 	}
 
 	/**

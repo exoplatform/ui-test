@@ -761,45 +761,33 @@ public class ManagementTasks extends TaskManagementLocatorObject {
 		waitForElementNotPresent(ELEMENT_RIGHT_PANE_TASK_WORKPLAN_VISIBLE);
 	}
 	/**
-     * Define options of priority
-     *
-     */
-	public enum optPriority{
-		None,High,Low,Normal;
-	}
-	/**
 	 * Edit priority
 	 * @param task
-	 * @param opt
+	 * @param priority
 	 */
-	public void editTaskPriority(String task,optPriority opt){
+	public void editTaskPriority(String task,String priority){
 		openTask(task);
 		click(ELEMENT_RIGHT_PANE_TASK_PRIORITY_LINK);
 		info("edit priority");
-		switch(opt){
-		case None:
-			info("select None");
-			selectQuick(ELEMENT_RIGHT_PANE_TASK_PRIORITY_SELECT_LINK,"None");
-			waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_PRIORITY_TEXT.replace("$priority","None"));
-			break;
-		case Normal:
-			info("select Normal");
-			selectQuick(ELEMENT_RIGHT_PANE_TASK_PRIORITY_SELECT_LINK,"Normal");
-			waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_PRIORITY_TEXT.replace("$priority","Normal"));
-			break;
-		case High:
-			info("select High");
-			selectQuick(ELEMENT_RIGHT_PANE_TASK_PRIORITY_SELECT_LINK,"High");
-			waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_PRIORITY_TEXT.replace("$priority","High"));
-			break;
-		case Low:
-			info("select Low");
-			selectQuick(ELEMENT_RIGHT_PANE_TASK_PRIORITY_SELECT_LINK,"Low");
-			waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_PRIORITY_TEXT.replace("$priority","Low"));
-			break;
-		default:
-			info("No option in the list.Please select correct option.");
-			break;
+		selectQuick(ELEMENT_RIGHT_PANE_TASK_PRIORITY_SELECT_LINK,priority);
+		waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_PRIORITY_TEXT.replace("$priority",priority));
+		waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_PRIORITY_ICON.replace("$priority",priority));
+	}
+	/**
+	 * Check default value of priority
+	 * @param task
+	 * @param dfpriority
+	 * 					default value of priority
+	 * @param priorities
+	 * 					list value of priority
+	 */
+	public void checkDefaultPriority(String task,String dfpriority,String...priorities){
+		openTask(task);
+		waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_PRIORITY_TEXT.replace("$priority",dfpriority));
+		click(ELEMENT_RIGHT_PANE_TASK_PRIORITY_LINK);
+		info("check priority combobox");
+		for (String priority : priorities) {
+			waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_PRIORITY_SELECT.replace("$opt",priority));
 		}
 	}
 	/**

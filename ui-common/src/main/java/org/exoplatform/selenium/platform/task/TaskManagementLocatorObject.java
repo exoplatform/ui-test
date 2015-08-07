@@ -280,10 +280,9 @@ public class TaskManagementLocatorObject extends PlatformBase {
 	public final By ELEMENT_RIGHT_PANE_TASK_PRIORITY_SELECT_LINK = By.xpath("//*[@class='priority pull-left']//*[@class='selectboxMini']");
 	public final By ELEMENT_RIGHT_PANE_TASK_PRIORITY_LINK = By.xpath("//*[@class='task-priority hoverStatus editableField editable small editable-click'][@data-original-title='Click to edit']");
 	public final String ELEMENT_RIGHT_PANE_TASK_PRIORITY_TEXT = "//*[@class='priority pull-left']/*[contains(.,'$priority')]";
-	public final By ELEMENT_RIGHT_PANE_TASK_PRIORITY_NONE = By.xpath("//*[@class='selectboxMini']/option[.='NONE']");
-	public final By ELEMENT_RIGHT_PANE_TASK_PRIORITY_HIGH = By.xpath("//*[@class='selectboxMini']/option[.='HIGH']");
-	public final By ELEMENT_RIGHT_PANE_TASK_PRIORITY_LOW = By.xpath("//*[@class='selectboxMini']/option[.='LOW']");
-	public final By ELEMENT_RIGHT_PANE_TASK_PRIORITY_NORMAL = By.xpath("//*[@class='selectboxMini']/option[.='NORMAL']");
+	public final String ELEMENT_RIGHT_PANE_TASK_PRIORITY_ICON = "//*[@class='uiIconColorPriority$priority']";
+	public final By ELEMENT_RIGHT_PANE_TASK_PRIORITY_NONE = By.xpath("//*[@class='selectboxMini']/option[.='UNDEFINED']");
+	
 	//duedate
 	public final By ELEMENT_RIGHT_PANE_TASK_DUEDATE_LINK = By.xpath("//*[@data-name='duedate'][@data-original-title='Click to edit']");
 	public final String ELEMENT_RIGHT_PANE_TASK_DUEDATE_TEXT = "//*[@data-name='duedate'][contains(.,'$date')]";
