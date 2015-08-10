@@ -61,7 +61,9 @@ public class TaskManagementLocatorObject extends PlatformBase {
 	//*************************************Task Management*****************************************//
 	
 	//Task area-->General
-	public final String ELEMENT_TASK_TITLE= "//*[@class='taskList']//*[contains(@class,'column-item column-title')][contains(.,'$task')]";
+	public final String ELEMENT_TASK_TITLE= "//*[@class='taskList']//*[contains(@class,'column-item column-title')][.='$task']";
+	public final String ELEMENT_TASK_TITLE_ID = "//*[@class='row-item row-odd hover-action-reveal has-border has-background taskItem']/*[contains(@class,'column-item column-title')][.='$task']/..";
+	public final String ELEMENT_TASK_ID = "//*[@data-taskid='$id']";
 	public final By ELEMENT_GROUPBY_ICON = By.xpath("//*[@class='actionIcon dropdown-toggle']/*[@class='uiIconViewList uiIconLightGray']");
 	public final By ELEMENT_SORTBY_ICON = By.xpath("//*[@class='actionIcon dropdown-toggle']/*[@class='uiIconSortDown uiIconLightGray']");
 	public final String ELEMENT_SORTBY_ITEM ="//*[@data-original-title='Due date']//../*[contains(.,'$item')]";
@@ -172,7 +174,7 @@ public class TaskManagementLocatorObject extends PlatformBase {
 	public final String ELEMENT_TASK_CLOCK_ICON = "//*[@class='column-item column-title taskName'][contains(.,'$task')]/..//*[contains(@class,'uiIcon uiIconClock')]";
 	public final String ELEMENT_TASK_DUEDATE = "//*[@class='column-item column-title taskName'][contains(.,'$task')]/../*[@class='column-item column-time']/*[contains(.,'$day')]";
 	public final String ELEMENT_TASK_COMPLETE_CHECKBOX = "//*[@class='column-item column-title taskName'][contains(.,'$task')]/../*[@class='column-item column-checkbox']/*[contains(@class,'uiCheckbox')]/*[contains(@class,'checkbox')]";
-	public final String ELEMENT_TASK_COMPLETE_DISPLAY_CHECKBOX = "//*[@class='column-item column-title taskName'][contains(.,'$task')]/../*[@class='column-item column-checkbox']/*[contains(@class,'uiCheckbox')]";
+	public final String ELEMENT_TASK_COMPLETE_DISPLAY_CHECKBOX = "//*[@class='column-item column-title taskName'][contains(.,'$task')]/../*[@class='column-item column-checkbox']";
 	//List View-->Group by Status
 	
 	
@@ -234,10 +236,12 @@ public class TaskManagementLocatorObject extends PlatformBase {
 	public final By ELEMENT_RIGHT_PANE_TASK_ARROW_MENU_DELETE= By.xpath("//*[contains(@class,'action-delete-task')]/*[@class='uiIconDelete']");
 	public final By ELEMENT_RIGHT_PANE_TASK_ARROW_MENU_WATCH= By.xpath("//*[@class='uiIconWatch']");
 	//title
+	public final String ELEMENT_RIGHT_PANE_TASK_DISPLAY_CHECKBOX=".//*[@class='title-task']/*[contains(.,'$task')]/../../*[contains(@class,'uiCheckbox')]";
 	public final By ELEMENT_RIGHT_PANE_TASK_PROJECT_LINK = By.xpath("//*[@data-original-title='Click to edit']/*[@data-name='project']");
 	public final String ELEMENT_RIGHT_PANE_TASK_PROJECT_TEXT = "//*[@data-name='project']/*[contains(.,'$project')]";
 	public final By ELEMENT_RIGHT_PANE_TASK_NOPROJECT_TEXT = By.xpath("//*[@data-name='project'][contains(.,'No Project')]");
 	public final String ELEMENT_RIGHT_PANE_TASK_TITLE_TEXT = "//*[@data-name='title'][contains(.,'$task')][@data-original-title='Click to edit']";
+	
 	//description
 	public final By ELEMENT_RIGHT_PANE_TASK_DESCRIPTION_LINK = By.xpath("//*[@class='taskDescription']/*[@data-name='description'][@data-original-title='Click to edit']");
 	public final String ELEMENT_RIGHT_PANE_TASK_DESCRIPTION_TEXT = "//*[contains(@class,'taskDescription')]/*[@data-name='description']/*[contains(.,'$des')]";

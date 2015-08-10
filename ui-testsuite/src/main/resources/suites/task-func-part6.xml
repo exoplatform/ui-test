@@ -13,6 +13,7 @@
 			<class name="org.exoplatform.selenium.platform.task.functional.TASK_TaskDetails_EditTask_TaskPriority" />
 			<class name="org.exoplatform.selenium.platform.task.functional.TASK_TaskDetails_EditTask_TaskStatus" />
 			<class name="org.exoplatform.selenium.platform.task.functional.TASK_TaskDetails_EditTask_TaskTags" />
+			<class name="org.exoplatform.selenium.platform.task.functional.TASK_TaskDetails_EditTask_TaskTitle" />
 		</classes>
 	</test>
 	<listeners>

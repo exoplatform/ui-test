@@ -129,7 +129,7 @@ import org.testng.annotations.*;
 			- Comment is added
 			- Display of comment time is the same with time on comment in the activity stream.*/ 
 		mgTask.addTaskComment(task1, DATA_NAME_USER1, comment);
-		mgTask.checkDisplayOfTaskCommentTime(DATA_NAME_USER1, comment, time);
+		mgTask.checkDisplayOfCommentTime(DATA_NAME_USER1, comment, time);
 		
 		info("delete data");
 		mgTask.deleteTask(task1);

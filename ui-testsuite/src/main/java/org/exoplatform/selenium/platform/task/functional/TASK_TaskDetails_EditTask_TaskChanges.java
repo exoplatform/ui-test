@@ -1,9 +1,7 @@
 package org.exoplatform.selenium.platform.task.functional;
 
 import static org.exoplatform.selenium.TestLogger.info;
-
 import org.exoplatform.selenium.platform.task.ManagementTasks.optionTask;
-
 import org.testng.annotations.*;
 
 
@@ -155,7 +153,7 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			$FullName assigned to $AssigneeFullName*/ 
-		mgTask.checkDisplayOfTaskChange(DATA_NAME_USER1, text,DATA_NAME_USER2);
+		mgTask.checkDisplayOfChange(DATA_NAME_USER1, text,DATA_NAME_USER2);
 		
 		info("delete data");
 		mgTask.deleteTask(task1);
@@ -214,7 +212,7 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			$FullName moved into @Project.*/ 
-		mgTask.checkDisplayOfTaskChange(DATA_NAME_USER1, text,prj1);
+		mgTask.checkDisplayOfChange(DATA_NAME_USER1, text,prj1);
 		
 		info("delete data");
 		mgProject.deleteProject(prj1, false);
@@ -273,7 +271,7 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			$FullName marked $TaskStatus*/ 
-		mgTask.checkDisplayOfTaskChange(DATA_NAME_USER1, text,status);
+		mgTask.checkDisplayOfChange(DATA_NAME_USER1, text,status);
 		
 		info("delete data");
 		mgProject.deleteProject(prj1, false);
@@ -319,7 +317,7 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			$FullName created task. Ex: John Smith created task*/ 
 		mgTask.openTask(task1);
-		mgTask.checkDisplayOfTaskChange(DATA_NAME_USER1, text);
+		mgTask.checkDisplayOfChange(DATA_NAME_USER1, text);
 		
 		info("delete data");
 		mgTask.deleteTask(task1);
@@ -375,7 +373,7 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			$FullName edited description.*/ 
-		mgTask.checkDisplayOfTaskChange(DATA_NAME_USER1, text);
+		mgTask.checkDisplayOfChange(DATA_NAME_USER1, text);
 		
 		info("delete data");
 		mgTask.deleteTask(task1);
@@ -430,7 +428,7 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			$FullName edited due date.*/ 
-		mgTask.checkDisplayOfTaskChange(DATA_NAME_USER1, text);
+		mgTask.checkDisplayOfChange(DATA_NAME_USER1, text);
 		
 		info("delete data");
 		mgTask.deleteTask(task1);
@@ -501,8 +499,8 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			All changes logs are displayed with the time format similar to time on the activity stream.*/
-		mgTask.checkDisplayOfTaskChange(DATA_NAME_USER1, text);
-		mgTask.checkDisplayOfTaskChangeTime(DATA_NAME_USER1, text,time);
+		mgTask.checkDisplayOfChange(DATA_NAME_USER1, text);
+		mgTask.checkDisplayOfChangeTime(DATA_NAME_USER1, text,time);
 		
 		info("delete data");
 		mgTask.deleteTask(title);
@@ -557,7 +555,7 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			$FullName edited work plan*/ 
-		mgTask.checkDisplayOfTaskChange(DATA_NAME_USER1, text);
+		mgTask.checkDisplayOfChange(DATA_NAME_USER1, text);
 		
 		info("delete data");
 		mgTask.deleteTask(task1);
@@ -615,7 +613,7 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			$FullName completed this task.*/ 
-		mgTask.checkDisplayOfTaskChange(DATA_NAME_USER1, text);
+		mgTask.checkDisplayOfChange(DATA_NAME_USER1, text);
 		
 		info("delete data");
 		mgTask.deleteTask(task1);
@@ -672,7 +670,7 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			$FullName unassigned from $AssigneeFullName*/ 
-		mgTask.checkDisplayOfTaskChange(DATA_NAME_USER1, text,DATA_NAME_USER2);
+		mgTask.checkDisplayOfChange(DATA_NAME_USER1, text,DATA_NAME_USER2);
 		
 		info("delete data");
 		mgTask.deleteTask(task1);

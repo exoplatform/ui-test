@@ -191,6 +191,27 @@ public class ManagementTasks extends TaskManagementLocatorObject {
 		waitForElementNotPresent(ELEMENT_TASK_TITLE.replace("$task",task));
 	}
 	/**
+	 * Delete task by id
+	 * @param id
+	 */
+	public void deleteTaskById(int id){
+		info("Delete task by id: "+id );
+		click(ELEMENT_TASK_ID.replace("$id",String.valueOf(id)));
+		click(ELEMENT_RIGHT_PANE_TASK_ARROW_MENU);
+		mouseOverAndClick(ELEMENT_RIGHT_PANE_TASK_ARROW_MENU_DELETE);
+		Utils.pause(500);
+		waitForElementNotPresent(ELEMENT_TASK_ID.replace("$id",String.valueOf(id)));
+	}
+	/**
+	 * Check display of task title
+	 * @param task
+	 */
+	public void checkDisplayOfTitle(String task){
+		info("check display of long title");
+		openTask(task);
+		waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_TITLE_TEXT.replace("$task", task));
+	}
+	/**
 	 * Add comment to task
 	 * @param task
 	 * @param comment
@@ -332,7 +353,7 @@ public class ManagementTasks extends TaskManagementLocatorObject {
 	 * @param time
 	 * 			  when user posts comment
 	 */
-	public void checkDisplayOfTaskCommentTime(String user,String comment,String time){
+	public void checkDisplayOfCommentTime(String user,String comment,String time){
 		info("check display of time change");
 		waitForAndGetElement(ELEMENT_RIGHT_PANE_COMMENT_TIME.replace("$user", user).replace("$comment", comment).replace("$time", time));
 	}
@@ -394,12 +415,20 @@ public class ManagementTasks extends TaskManagementLocatorObject {
 	public void editTaskTitle(String task,String title){
 		openTask(task);
 		click(ELEMENT_RIGHT_PANE_TASK_TITLE_TEXT.replace("$task", task));
-		info("Input title");
-		waitForAndGetElement(ELEMENT_EDIT_PROJECT_TITLE_INPUT).clear();
-		waitForAndGetElement(ELEMENT_EDIT_PROJECT_TITLE_INPUT).sendKeys(title);
-        Utils.pause(500);
-        driver.findElement(ELEMENT_EDIT_PROJECT_TITLE_INPUT).sendKeys(Keys.ENTER);
-        waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_TITLE_TEXT.replace("$task", title));
+		if(title!=""){
+			info("Input title");
+			waitForAndGetElement(ELEMENT_EDIT_PROJECT_TITLE_INPUT).clear();
+			waitForAndGetElement(ELEMENT_EDIT_PROJECT_TITLE_INPUT).sendKeys(title);
+	        Utils.pause(500);
+	        driver.findElement(ELEMENT_EDIT_PROJECT_TITLE_INPUT).sendKeys(Keys.ENTER);
+	        waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_TITLE_TEXT.replace("$task", title));
+		}else{
+			info("left title blank");
+			waitForAndGetElement(ELEMENT_EDIT_PROJECT_TITLE_INPUT).clear();
+	        Utils.pause(500);
+	        driver.findElement(ELEMENT_EDIT_PROJECT_TITLE_INPUT).sendKeys(Keys.ENTER);
+	        waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_TITLE_TEXT.replace("$task","Untitled Task"));
+		}
 	}
 	/**
 	 * Edit task description
@@ -1018,6 +1047,17 @@ public class ManagementTasks extends TaskManagementLocatorObject {
 		waitForElementNotPresent(ELEMENT_TASK_COMPLETE_CHECKBOX.replace("$task", task));
 	}
 	/**
+	 * Check display of task checkbox
+	 * @param task
+	 */
+	public void checkDisplayOfTaskCheckbox(String task){
+		info("check display of task checkbox");
+		mouseHoverByJavaScript(ELEMENT_TASK_TITLE.replace("$task", task),2);
+		waitForAndGetElement(ELEMENT_TASK_COMPLETE_DISPLAY_CHECKBOX.replace("$task", task));
+		openTask(task);
+		waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_DISPLAY_CHECKBOX.replace("$task", task));
+	}
+	/**
      * Define options of duedate
      *
      */
@@ -1093,7 +1133,7 @@ public class ManagementTasks extends TaskManagementLocatorObject {
 	 * @param text
 	 * @param opt
 	 */
-	public void checkDisplayOfTaskChange(String user,String text,String...opt){
+	public void checkDisplayOfChange(String user,String text,String...opt){
 		click(ELEMENT_RIGHT_PANE_CHANGE_TAB_LINK);
 		info("check display of change");
 		if(opt.length>0){
@@ -1108,7 +1148,7 @@ public class ManagementTasks extends TaskManagementLocatorObject {
 	 * @param text
 	 * @param time
 	 */
-	public void checkDisplayOfTaskChangeTime(String user,String text,String time){
+	public void checkDisplayOfChangeTime(String user,String text,String time){
 		click(ELEMENT_RIGHT_PANE_CHANGE_TAB_LINK);
 		info("check display of time change");
 		waitForAndGetElement(ELEMENT_RIGHT_PANE_CHANGE_TIME.replace("$user", user).replace("$text", text).replace("$time", time));
