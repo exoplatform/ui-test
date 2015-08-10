@@ -197,6 +197,12 @@
 			</properties>
 		</profile>
 		<profile>
+			<id>task-func-part7</id>
+			<properties>
+				<testSuite>task-func-part7.xml</testSuite>
+			</properties>
+		</profile>
+		<profile>
 			<id>testng-failed</id>
 			<properties>
 				<testSuite>testng-failed.xml</testSuite>

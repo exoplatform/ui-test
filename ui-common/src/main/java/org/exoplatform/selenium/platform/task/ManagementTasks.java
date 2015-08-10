@@ -850,6 +850,70 @@ public class ManagementTasks extends TaskManagementLocatorObject {
 		}
 	}
 	/**
+	 * Check display of workplan calculation
+	 * @param time
+	 * 			 total time in days,hours,minutes
+	 * @param dates
+	 * 			 date[0] if in the same day
+	 * 			 date[0],date[1] if from one day to another day
+	 */
+	public void checkDisplayOfWorkPlan(String time,String...dates){
+		info("check display of workplan calculation");
+		if(dates.length>1){
+			waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_WORKPLAN_TEXT_DIFFDAY.replace("$date1",dates[0]).replace("$date2", dates[1]).replace("$time", time));
+		}else{
+			waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_WORKPLAN_TEXT_1DAY.replace("$date",dates[0]).replace("$time", time));
+		}
+	}
+	/**
+	 * Check default of work plan
+	 * @param task
+	 */
+	public void checkDefaultOfWorkPlan(String task){
+		openTask(task);
+		info("check default of work plan");
+		waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_WORKPLAN_DEFAULT);
+		click(ELEMENT_RIGHT_PANE_TASK_WORKPLAN_LINK);
+		waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_WORKPLAN_TO_CALENDAR);
+		waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_WORKPLAN_FROM_CALENDAR);
+		waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_WORKPLAN_TOTIME_LINK);
+		waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_WORKPLAN_FROMTIME_LINK);
+	}
+	/**
+	 * Check popup contains calendar and time of edited work plan
+	 * @param task
+	 * @param from
+	 * @param to
+	 * @param fromTime
+	 * @param toTime
+	 */
+	public void checkPopupContainsCalendarTime(String task,String from,String to,String fromTime,String toTime){
+		openTask(task);
+		click(ELEMENT_RIGHT_PANE_TASK_WORKPLAN_LINK);
+		info("check popup contains calendar and time of edited work plan");
+		//cut 0 to get round number, ex 07 > 7
+		if(from.startsWith("0")){
+			from=from.substring(1);
+		}
+		if(to.startsWith("0")){
+			to=to.substring(1);
+		}
+		waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_WORKPLAN_TOTIME_SELECTED.replace("$time", toTime));
+		waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_WORKPLAN_FROMTIME_SELECTED.replace("$time", fromTime));
+		waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_WORKPLAN_FROM_SELECTED.replace("$day", from));
+		waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_WORKPLAN_TO_SELECTED.replace("$day", to));
+	}
+	/**
+	 * Check all day checkbox by default
+	 * @param task
+	 */
+	public void checkAllDayCheckboxByDefault(String task){
+		openTask(task);
+		click(ELEMENT_RIGHT_PANE_TASK_WORKPLAN_LINK);
+		info("check all day checkbox");
+		waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_WORKPLAN_ALLDAY_CHECKBOX_CHECK);
+	}
+	/**
 	 * Delete workplan
 	 */
 	public void deleteTaskWorkPlan(){

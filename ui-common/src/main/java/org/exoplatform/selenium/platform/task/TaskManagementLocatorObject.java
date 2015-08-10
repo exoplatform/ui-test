@@ -269,11 +269,21 @@ public class TaskManagementLocatorObject extends PlatformBase {
 	public final By ELEMENT_RIGHT_PANE_TASK_WORKPLAN_NEXTMONTH_ICON2 = By.xpath("//*[@id='BlockCalendar2']//*[@data-original-title='Next Month']/*[@class='uiIconMiniArrowRight uiIconLightGray']");
 	public final String ELEMENT_RIGHT_PANE_TASK_WORKPLAN_FROM_DAY = "//*[@id='BlockCalendar1']//*[@class='weekDays']//a[.='$day']";
 	public final String ELEMENT_RIGHT_PANE_TASK_WORKPLAN_TO_DAY = "//*[@id='BlockCalendar2']//*[@class='weekDays']//a[.='$day']";
+	public final By ELEMENT_RIGHT_PANE_TASK_WORKPLAN_TO_CALENDAR = By.xpath("//*[@id='BlockCalendar2']//*[@class='weekDays']");
+	public final By ELEMENT_RIGHT_PANE_TASK_WORKPLAN_FROM_CALENDAR = By.xpath("//*[@id='BlockCalendar1']//*[@class='weekDays']");
 	public final By ELEMENT_RIGHT_PANE_TASK_WORKPLAN_ALLDAY_CHECKBOX=By.xpath("//*[@class='date-work-plan']//*[@type='checkbox']");
+	public final By ELEMENT_RIGHT_PANE_TASK_WORKPLAN_ALLDAY_CHECKBOX_CHECK=By.xpath("//*[@class='row-fluid choose-time false all-day']//*[@class='uiCheckbox']");
 	public final By ELEMENT_RIGHT_PANE_TASK_WORKPLAN_TOTIME_LINK= By.xpath("//*[@class='date-work-plan']//*[@name='toTime']");
 	public final By ELEMENT_RIGHT_PANE_TASK_WORKPLAN_FROMTIME_LINK= By.xpath("//*[@class='date-work-plan']//*[@name='fromTime']");
 	public final String ELEMENT_RIGHT_PANE_TASK_WORKPLAN_TOTIME ="//*[@class='date-work-plan']//*[@name='toTime']/..//*[@data-time='$time']";
 	public final String ELEMENT_RIGHT_PANE_TASK_WORKPLAN_FROMTIME ="//*[@class='date-work-plan']//*[@name='fromTime']/..//*[@data-time='$time']";
+	public final String ELEMENT_RIGHT_PANE_TASK_WORKPLAN_TEXT_DIFFDAY ="//*[@class='date-work-plan']/*[contains(.,'Work planned from $date1 to $date2 ($time)')]";
+	public final String ELEMENT_RIGHT_PANE_TASK_WORKPLAN_TEXT_1DAY ="//*[@class='date-work-plan']/*[contains(.,'Work planned for $date ($time)')]";
+	public final By ELEMENT_RIGHT_PANE_TASK_WORKPLAN_DEFAULT = By.xpath("//*[@class='date-work-plan']/*[contains(.,'No work planned')]");
+	public final String ELEMENT_RIGHT_PANE_TASK_WORKPLAN_TOTIME_SELECTED = "//*[@class='date-work-plan']//*[@name='toTime'][@value='$time']";
+	public final String ELEMENT_RIGHT_PANE_TASK_WORKPLAN_FROMTIME_SELECTED = "//*[@class='date-work-plan']//*[@name='fromTime'][@value='$time']";
+	public final String ELEMENT_RIGHT_PANE_TASK_WORKPLAN_TO_SELECTED = "//*[@id='BlockCalendar2']//*[@class='weekDays']//a[.='$day'][@class='selected']";
+	public final String ELEMENT_RIGHT_PANE_TASK_WORKPLAN_FROM_SELECTED = "//*[@id='BlockCalendar1']//*[@class='weekDays']//a[.='$day'][@class='selected']";
 	//status
 	public final String ELEMENT_RIGHT_PANE_TASK_STATUS_TEXT = "//*[@class='toDo']/*[contains(@class,'uiEditableInline')]/*[contains(.,'$flow')]";
 	public final By ELEMENT_RIGHT_PANE_TASK_STATUS_LINK = By.xpath("//*[@class='toDo']/*[contains(@class,'uiEditableInline')]/*[@data-name='status'][@data-original-title='Click to edit']");
