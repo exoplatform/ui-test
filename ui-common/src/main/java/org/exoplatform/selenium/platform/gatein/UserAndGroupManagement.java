@@ -633,6 +633,18 @@ public class UserAndGroupManagement extends PlatformBase {
 			click(ELEMENT_OK_BUTTON);
 	}
 	
+	public void searchUserNotFound(String user, String searchOption) {
+		info("--Search user " + user + "--");
+		if (isTextPresent("Search")) {
+			type(ELEMENT_INPUT_SEARCH_USER_NAME, user, true);
+			select(ELEMENT_SELECT_SEARCH_OPTION, searchOption);
+		}
+		
+		click(ELEMENT_SEARCH_ICON_USERS_MANAGEMENT);
+		waitForTextNotPresent(user);
+	}
+	
+	
 	//************************************************DISABLE USERS***********************************//
 	/**
 	 * Select an option in Disable User drop list
@@ -660,7 +672,7 @@ public class UserAndGroupManagement extends PlatformBase {
 		Utils.pause(1000);
 		if(isEnabled){
 			info("Verify that user is enabled");
-			waitForAndGetElement(ELEMENT_DISBALE_USER_ENABLED.replace("$userName",userName),2000,0);
+			waitForAndGetElement(ELEMENT_DISBALE_USER_ENABLED.replace("$userName",userName),2000,1);
 		}else{
 			info("Verify that user is disabled");
 			waitForElementNotPresent(ELEMENT_DISBALE_USER_ENABLED.replace("$userName",userName));
@@ -716,7 +728,6 @@ public class UserAndGroupManagement extends PlatformBase {
 			Utils.pause(3000);
 			waitForMessage(ELEMENT_MSG_RESULT);
 			dialog.closeMessageDialog();
-			searchUser("", ELEMENT_MSG_SEARCH_USER_NAME);
 			Utils.pause(2000);
 			
 		}
@@ -789,9 +800,9 @@ public class UserAndGroupManagement extends PlatformBase {
 		waitForAndGetElement(ELEMENT_DISABLE_USER_COLUMN);
 		
  	 	for (String user : users) {
- 	 		waitForAndGetElement(ELEMENT_DISBALE_USER_ENABLED.replace("$userName", user),2000,0);
- 	 		waitForAndGetElement(ELEMENT_DISABLE_USER_TOGGLE_NO.replace("$userName", user),2000,0);
- 			waitForAndGetElement(ELEMENT_DISABLE_USER_TOGGLE_YES.replace("$userName", user),2000,0);
+ 	 		waitForAndGetElement(ELEMENT_DISBALE_USER_ENABLED.replace("$userName", user),2000,1);
+ 	 		waitForAndGetElement(ELEMENT_DISABLE_USER_TOGGLE_NO.replace("$userName", user),2000,1);
+ 			waitForAndGetElement(ELEMENT_DISABLE_USER_TOGGLE_YES.replace("$userName", user),2000,1);
 		}
 	}
 	/**
@@ -803,9 +814,9 @@ public class UserAndGroupManagement extends PlatformBase {
 		waitForAndGetElement(ELEMENT_DISABLE_USER_COLUMN);
 		
  	 	for (String user : users) {
- 	 		waitForAndGetElement(ELEMENT_DISBALE_USER_DISABLED.replace("$userName", user),2000,0);
- 	 		waitForAndGetElement(ELEMENT_DISABLE_USER_TOGGLE_NO.replace("$userName", user),2000,0);
- 			waitForAndGetElement(ELEMENT_DISABLE_USER_TOGGLE_YES.replace("$userName", user),2000,0);
+ 	 		waitForAndGetElement(ELEMENT_DISBALE_USER_DISABLED.replace("$userName", user),2000,1);
+ 	 		waitForAndGetElement(ELEMENT_DISABLE_USER_TOGGLE_NO.replace("$userName", user),2000,1);
+ 			waitForAndGetElement(ELEMENT_DISABLE_USER_TOGGLE_YES.replace("$userName", user),2000,1);
 		}
 	}
 	/**
@@ -821,12 +832,4 @@ public class UserAndGroupManagement extends PlatformBase {
 				waitForElementNotPresent(ELEMENT_USER_DELETE_ICON1);
 		}
 	}
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> FQA-2583:PLF 4.3 - Write High Fnc/Disable User/People
-=======
-	
->>>>>>> FQA-2584:PLF 4.3 - Write High Fnc/Disable User/Space
->>>>>>> FQA-2584:PLF 4.3 - Write High Fnc/Disable User/Space
 }

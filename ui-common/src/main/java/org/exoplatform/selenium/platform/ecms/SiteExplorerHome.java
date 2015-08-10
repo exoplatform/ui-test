@@ -367,12 +367,8 @@ public class SiteExplorerHome extends PlatformBase{
 		String[] arrayPath = path.split("/");
 		for (String arrayElement : arrayPath){
 			selectNode(arrayElement);
-<<<<<<< HEAD
-		}}
-=======
 		}
 		}
->>>>>>> FQA-2584:PLF 4.3 - Write High Fnc/Disable User/Space
 	}
 	/**
 	 * Open Add a new folder popup
@@ -1421,15 +1417,11 @@ public class SiteExplorerHome extends PlatformBase{
 		for (String query : queries) {
 			waitForAndGetElement(ELEMENT_SITEEXPLORER_ADVANCEDSEARCH_EXECUTEQUERY.replace("${name}",query));
 		}
-=======
+	}
+	/**
 	 * Check user selector of Documents/Permission
 	 * @param user
 	 * @param isPresent
-	 * 					true if user is displayed
-	 * 					false if user is NOT displayed
-	 * @param isDoc
-	 * 				true if it's personal document
-	 * 				false if it is not personal document
 	 */
 	public void checkUserSelectorECM(String user,boolean isPresent){
 		if (waitForAndGetElement(ELEMENT_ACTIONBAR_PERMISSION, DEFAULT_TIMEOUT, 0) == null) {
@@ -1470,6 +1462,5 @@ public class SiteExplorerHome extends PlatformBase{
 		click(ELEMENT_ACTIONBAR_WATCH_BUTTON,0,true);
 		waitForAndGetElement(ELEMENT_ACTIONBAR_WATCH_NOTICE);
 		Utils.pause(2000);
->>>>>>> FQA-2584:PLF 4.3 - Write High Fnc/Disable User/Space
 	}
 }

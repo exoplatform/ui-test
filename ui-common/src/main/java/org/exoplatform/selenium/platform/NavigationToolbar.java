@@ -679,19 +679,9 @@ public class NavigationToolbar extends PlatformBase {
 	 */
 	public void goToAddUser(){
 		info("Go to add user page");
-<<<<<<< HEAD
 		waitElementAndTryGetElement(ELEMENT_TOOLBAR_ADMINISTRATION);
 		click(ELEMENT_TOOLBAR_ADMINISTRATION);
 		waitForAndGetElement(ELEMENT_ADMINISTRATION_USERS, DEFAULT_TIMEOUT, 1);
-=======
-		waitForAndGetElement(ELEMENT_TOOLBAR_ADMINISTRATION,3000,0);
-<<<<<<< HEAD
-		click(ELEMENT_TOOLBAR_ADMINISTRATION);
-		waitForAndGetElement(ELEMENT_ADMINISTRATION_USERS, DEFAULT_TIMEOUT, 0);
-=======
-		click(ELEMENT_TOOLBAR_ADMINISTRATION,0,true);
->>>>>>> FQA-2584:PLF 4.3 - Write High Fnc/Disable User/Space
->>>>>>> FQA-2584:PLF 4.3 - Write High Fnc/Disable User/Space
 		mouseOver(ELEMENT_ADMINISTRATION_USERS,true);
 		if(waitForAndGetElement(ELEMENT_ADMINISTRATION_PORTAL_ADD_USERS,3000,0)!=null)
 			click(ELEMENT_ADMINISTRATION_PORTAL_ADD_USERS,0,true);

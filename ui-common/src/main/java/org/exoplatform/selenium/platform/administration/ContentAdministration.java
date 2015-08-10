@@ -3,11 +3,8 @@ package org.exoplatform.selenium.platform.administration;
 import org.exoplatform.selenium.ManageAlert;
 import org.exoplatform.selenium.Utils;
 import org.exoplatform.selenium.platform.PlatformBase;
-<<<<<<< HEAD
 import org.exoplatform.selenium.platform.ecms.ECMS_Permission;
-=======
 import org.exoplatform.selenium.platform.PlatformPermission;
->>>>>>> FQA-2584:PLF 4.3 - Write High Fnc/Disable User/Space
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -268,20 +265,14 @@ public class ContentAdministration extends PlatformBase{
 	public String ELEMENT_ECM_TEMPLATES_METADATA_FORM_DELETE = "//*[@id='UIMetadataList']//*[contains(text(),'{$name}')]/..//*[@class='uiIconDelete uiIconLightGray']";
 	public By ELEMENT_ECM_TEMPLATES_METADATA_FORM_OK_FORM = By.xpath("//*[@class='uiAction uiActionBorder']//*[contains(text(),'OK')]");
 
-<<<<<<< HEAD
 	ECMS_Permission ecmsPerm;
-=======
 	PlatformPermission plfPerm;
->>>>>>> FQA-2584:PLF 4.3 - Write High Fnc/Disable User/Space
 	ManageAlert alert ;
 	public ContentAdministration(WebDriver dr){
 		driver = dr;
 		alert= new ManageAlert(dr);
-<<<<<<< HEAD
 		ecmsPerm = new ECMS_Permission(driver);
-=======
 		plfPerm = new PlatformPermission(driver);
->>>>>>> FQA-2584:PLF 4.3 - Write High Fnc/Disable User/Space
 	}
 
 	/**
@@ -1297,7 +1288,6 @@ public class ContentAdministration extends PlatformBase{
 		Utils.pause(1000);
 		info("Finished Adding action for a view");
 	}
-<<<<<<< HEAD
 	/**
 	 * Add group permission to drive
 	 * @param drive
@@ -1358,7 +1348,6 @@ public class ContentAdministration extends PlatformBase{
 		Utils.pause(1000);
 		click(ecmsPerm.ELEMENT_PERMISSION_CLOSE,0,true);
 	}
-=======
   /**
    * Check select user in Advance/Category
    * @param cat: name of new category
@@ -1412,5 +1401,4 @@ public class ContentAdministration extends PlatformBase{
 			click(plfPerm.ELEMENT_SELECT_USER_ICON1,0,true);
 			plfPerm.checkUserSelector(user, isPresent);
 		}
->>>>>>> FQA-2584:PLF 4.3 - Write High Fnc/Disable User/Space
 }

@@ -18,14 +18,9 @@ public class PlatformPermission extends PlatformBase {
 	public final By ELEMENT_SELECT_MEMBERSHIP_ICON = By.xpath("//*[@class='uiIconMembership uiIconLightGray']");
 
 	//User permission
-<<<<<<< HEAD
-	public final String ELEMENT_USER_CHECKBOX = "//*[@id='${user}' and @type='checkbox']";
-	public final By ELEMENT_ADD_USERS_BUTTON = By.xpath("//*[contains(@class,'addButton')]");
-=======
 	public final String ELEMENT_USER_CHECKBOX = "//*[text()='${user}']/../..//*[@type='checkbox']";
 	public final String ELEMENT_USER_LIST="//*[@id='UIListUsers']//*[contains(.,'${user}')]";
 	public final By ELEMENT_ADD_USERS_BUTTON = By.xpath("//*[@id='UIUserSelector']//*[text()='Add']");
->>>>>>> FQA-2584:PLF 4.3 - Write High Fnc/Disable User/Space
 	public final By ELEMENT_SEARCH_USER_INPUT = By.id("Quick Search");
 	public final By ELEMENT_QUICK_SEARCH_BUTTON = By.xpath("//a[@data-original-title='Quick Search']");
 	public final By ELEMENT_SELECT_SEARCH = By.name("filter");

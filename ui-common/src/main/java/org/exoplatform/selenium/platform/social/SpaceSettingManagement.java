@@ -584,7 +584,6 @@ public class SpaceSettingManagement extends SpaceLocator{
 		Utils.pause(2000);
 	}
 	/**
-<<<<<<< HEAD
 	 * Verify member of space
 	 * @param fullname
 	 * @param isDisplay
@@ -613,14 +612,12 @@ public class SpaceSettingManagement extends SpaceLocator{
 			waitForElementNotPresent(ELEMENT_SPACE_REMOVE_USER_BTN_MEMBER_TABLE.replace("${fullName}", fullname));
 		}
 	}
-=======
-	 * Check user in Invited Space
+	 /** Check user in Invited Space
 	 * @param user
 	 * @param space
 	 * @param isPresent
 	 */
     public void checkUserInInvitedSpace(String user,String space,boolean isPresent){
-    	 goToSpaceSettingTab();
 		 goToMemberTab();
 		 if(isPresent)
 			 waitForAndGetElement(ELEMENT_SPACE_INVITED_USER_TABLE.replace("${user}",user));
@@ -634,7 +631,6 @@ public class SpaceSettingManagement extends SpaceLocator{
 	 * @param isPresent
 	 */
     public void checkUserInMemberSpace(String user,String space,boolean isPresent){
-    	goToSpaceSettingTab();
 		goToMemberTab();
 		if(isPresent)
 			waitForAndGetElement(ELEMENT_USER_IN_MEMBER_TABLE.replace("${fullName}",user));
@@ -648,7 +644,6 @@ public class SpaceSettingManagement extends SpaceLocator{
 	 * @param isPresent
 	 */
     public void checkUserSelectorInviteSpace(String user,boolean isPresent){
-    	goToSpaceSettingTab();
 		goToMemberTab();
 		click(ELEMENT_SPACE_MEMBERS_SELECT_USER,0,true);
 		plfPerm.checkUserSelector(user, isPresent);
@@ -660,10 +655,8 @@ public class SpaceSettingManagement extends SpaceLocator{
 	 * @param isPresent
 	 */
     public void checkSearchUserInviteSpace(String user,boolean isPresent){
-    	goToSpaceSettingTab();
 		goToMemberTab();
 		click(ELEMENT_SPACE_MEMBERS_SELECT_USER,0,true);
 		plfPerm.searchUser(user,isPresent);
     }
->>>>>>> FQA-2584:PLF 4.3 - Write High Fnc/Disable User/Space
 }
