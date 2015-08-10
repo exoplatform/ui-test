@@ -299,6 +299,10 @@ public class TaskManagementLocatorObject extends PlatformBase {
 	public final By ELEMENT_RIGHT_PANE_TASK_TAG_LINK=By.xpath("//*[@data-name='tags'][@data-original-title='Click to edit']");
 	public final By ELEMENT_RIGHT_PANE_TASK_TAG_INPUT = By.xpath("//*[contains(@class,'tags uiEditableInline')]//*[contains(@class,'selectize-input replaceTextArea items not-full')]/*[@type='text']");
 	public final String ELEMENT_RIGHT_PANE_TASK_TAG_TEXT="//*[contains(@class,'tags uiEditableInline')]//*[contains(@class,'selectize-input replaceTextArea items not-full')]/*[contains(.,'$tag')]";
+	public final String ELEMENT_RIGHT_PANE_TASK_TAG_SELECT_NEW ="//*[@class='selectize-dropdown-content']/*[contains(@class,'create')]/*[contains(.,'$tag')]";
+	public final String ELEMENT_RIGHT_PANE_TASK_TAG_REMOVE_ICON="//*[contains(@class,'tags uiEditableInline')]//*[contains(@class,'selectize-input replaceTextArea items not-full')]/*[contains(.,'$tag')]/*[@class='removeValue']";
+	public final By ELEMENT_RIGHT_PANE_TASK_TAG_DEFAULT_ICON = By.xpath("//*[@class='pull-left icon-hash ']/*[@class='uiIconHag']");
+	public final By ELEMENT_RIGHT_PANE_TASK_TAG_DEFAULT_LABEL = By.xpath("//*[contains(@class,'tags uiEditableInline')]/*[@data-name='tags'][contains(.,'Tags')]");
 	//CKEditor
 	public final By ELEMENT_CKEDITOR_BOLD = By.xpath("//*[@class='cke_button_icon cke_button__bold_icon']");
 	public final By ELEMENT_CKEDITOR_ITALIC = By.xpath("//*[@class='cke_button_icon cke_button__italic_icon']");

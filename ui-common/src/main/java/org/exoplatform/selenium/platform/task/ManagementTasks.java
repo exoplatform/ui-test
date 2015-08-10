@@ -689,12 +689,43 @@ public class ManagementTasks extends TaskManagementLocatorObject {
 	}
 	
 	/**
-	 * Edit tag
+	 * Edit tag with new
 	 * @param task
 	 * @param tags
-	 * 				list of tags
+	 * 				list of tags (not exist before)
 	 */
 	public void editTaskTag(String task,String...tags){
+		openTask(task);
+		click(ELEMENT_RIGHT_PANE_TASK_TAG_LINK);
+		info("edit tag");
+		if(tags.length>0){
+			for (String tag : tags) {
+				type(ELEMENT_RIGHT_PANE_TASK_TAG_INPUT,tag,false);
+				waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_TAG_SELECT_NEW.replace("$tag", tag));
+				Robot robot;
+				try {
+					robot = new Robot();
+					robot.delay(1000);
+					robot.keyPress(KeyEvent.VK_ENTER);
+					robot.keyRelease(KeyEvent.VK_ENTER);
+					Utils.pause(2000);
+				} catch (AWTException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_TAG_TEXT.replace("$tag",tag));
+				waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_TAG_REMOVE_ICON.replace("$tag",tag));
+			}
+		}
+		openTask(task);
+	}
+	/**
+	 * Add existed tag
+	 * @param task
+	 * @param tags
+	 * 				list of tags (exist before)
+	 */
+	public void addExistedTag(String task,String...tags){
 		openTask(task);
 		click(ELEMENT_RIGHT_PANE_TASK_TAG_LINK);
 		info("edit tag");
@@ -713,7 +744,26 @@ public class ManagementTasks extends TaskManagementLocatorObject {
 					e.printStackTrace();
 				}
 				waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_TAG_TEXT.replace("$tag",tag));
+				waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_TAG_REMOVE_ICON.replace("$tag",tag));
 			}
+		}
+		openTask(task);
+	}
+	/**
+	 * Check default tag
+	 * @param task
+	 * @param isPresent
+	 * 					true if it exists
+	 * 					false if it doesnot exist
+	 */
+	public void checkDefaultTag(String task,boolean isPresent){
+		openTask(task);
+		if(isPresent){
+			waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_TAG_DEFAULT_ICON);
+			waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_TAG_DEFAULT_LABEL);
+		}else{
+			waitForElementNotPresent(ELEMENT_RIGHT_PANE_TASK_TAG_DEFAULT_ICON);
+			waitForElementNotPresent(ELEMENT_RIGHT_PANE_TASK_TAG_DEFAULT_LABEL);
 		}
 	}
 	/**
