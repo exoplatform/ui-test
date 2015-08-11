@@ -33,6 +33,23 @@ public class ManagementProjects extends TaskManagementLocatorObject {
 	public void openProject(String project){
 		info("open project: "+project);
 		click(ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project", project),0,true);
+		waitForAndGetElement(ELEMENT_RIGHT_PANE_CLOSE_ICON);
+	}
+	/**
+	 * Close right pane
+	 */
+	public void closeProject(){
+		info("close project detail");
+		click(ELEMENT_RIGHT_PANE_CLOSE_ICON);
+		waitForElementNotPresent(ELEMENT_RIGHT_PANE_CLOSE_ICON);
+	}
+	/**
+	 * Hide project detail on right pane
+	 */
+	public void hideProjectDetail(){
+		info("hide detail of project on right pane");
+		click(ELEMENT_RIGHT_PANE_HIDE_ICON);
+		waitForElementNotPresent(ELEMENT_RIGHT_PANE_CLOSE_ICON);
 	}
 	/**
 	 * Open Context Menu of Projects by clicking on "+" icon
@@ -229,8 +246,8 @@ public class ManagementProjects extends TaskManagementLocatorObject {
 	 */
 	public void checkProjectDetail(String project){
 		waitForAndGetElement(ELEMENT_RIGHT_PANE_PARENT_PATH_TEXT.replace("$project", "Projects"));
-		waitForAndGetElement(ELEMENT_PROJECT_WELCOME_TEXT.replace("$message", "This is a personal project."));
-		waitForAndGetElement(ELEMENT_PROJECT_WELCOME_TEXT.replace("$message", "You can share it for work collaboration."));
+		waitForAndGetElement(ELEMENT_WELCOME_TEXT.replace("$message", "This is a personal project."));
+		waitForAndGetElement(ELEMENT_WELCOME_TEXT.replace("$message", "You can share it for work collaboration."));
 		mouseOver(ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project", project),false);
 		waitForAndGetElement(ELEMENT_LEFT_PANE_PROJECT_MENU.replace("$project",project));
 	}
@@ -698,6 +715,19 @@ public class ManagementProjects extends TaskManagementLocatorObject {
 		}
 	}
 	/**
+	 * Check first access of group by, sort by
+	 * @param isPresent
+	 */
+	public void checkFirstAccessGroupSort(boolean isPresent){
+		if(isPresent){
+			waitForAndGetElement(ELEMENT_GROUPBY_ICON);
+			waitForAndGetElement(ELEMENT_SORTBY_ICON);
+		}else{
+			waitForElementNotPresent(ELEMENT_GROUPBY_ICON);
+			waitForElementNotPresent(ELEMENT_SORTBY_ICON);
+		}
+	}
+	/**
 	 * Check no Board view in Projects
 	 * @param project
 	 */
@@ -712,8 +742,8 @@ public class ManagementProjects extends TaskManagementLocatorObject {
 	public void checkProjectsByDefault(){
 		goToProjects();
 		waitForAndGetElement(ELEMENT_LEFT_PANE_NO_PROJECT);
-		waitForAndGetElement(ELEMENT_PROJECT_WELCOME_IMG);
-		waitForAndGetElement(ELEMENT_PROJECT_WELCOME_TEXT.replace("$message", "No Project"));
+		waitForAndGetElement(ELEMENT_WELCOME_IMG);
+		waitForAndGetElement(ELEMENT_WELCOME_TEXT.replace("$message", "No Project"));
 		waitForAndGetElement(ELEMENT_LEFT_PANE_TOOLTIP.replace("$message","Click here to create your first project."));
 		waitForElementNotPresent(ELEMENT_ADD_TASK_BTN);
 		waitForElementNotPresent(ELEMENT_ADD_TASK_TITLE);
@@ -733,8 +763,8 @@ public class ManagementProjects extends TaskManagementLocatorObject {
 	 */
 	public void checkDefaultSharedProject(String project){
 		openProject(project);
-		waitForAndGetElement(ELEMENT_PROJECT_WELCOME_TEXT.replace("$message", "This is John Smith's project."));
-		waitForAndGetElement(ELEMENT_PROJECT_WELCOME_TEXT.replace("$message", "There is no task to do."));
+		waitForAndGetElement(ELEMENT_WELCOME_TEXT.replace("$message", "This is John Smith's project."));
+		waitForAndGetElement(ELEMENT_WELCOME_TEXT.replace("$message", "There is no task to do."));
 	}
 	/**
 	 * Check share users
@@ -872,6 +902,33 @@ public class ManagementProjects extends TaskManagementLocatorObject {
 	public void checkChildrenProject(String prj,String sub){
 		click(ELEMENT_RIGHT_PANE_PARENT_PATH_LINK);
 		waitForAndGetElement(ELEMENT_RIGHT_PANE_PARENT_PATH_FULL.replace("$parent", prj).replace("$child",sub));
+	}
+	/**
+	 * Check display of List, Board
+	 * @param isPresent
+	 */
+	public void checkDisplayOfListBoard(boolean isPresent){
+		if(isPresent){
+			 waitForAndGetElement(ELEMENT_LIST_VIEW);
+			 waitForAndGetElement(ELEMENT_BOARD_VIEW);
+		}else{
+			 waitForElementNotPresent(ELEMENT_LIST_VIEW);
+			 waitForElementNotPresent(ELEMENT_BOARD_VIEW);
+		}
+	}
+	/**
+	 * Check display of left pane
+	 */
+	public void checkDisplayOfLeftPane(){
+		waitForAndGetElement(ELEMENT_LEFT_PANE_PROJECTS);
+		waitForAndGetElement(ELEMENT_LEFT_PANE_LABELS);
+		waitForAndGetElement(ELEMENT_LEFT_PANE_TASKS);
+		waitForAndGetElement(ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project","Incoming"));
+		waitForAndGetElement(ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project","All Tasks"));
+		waitForAndGetElement(ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project","Today"));
+		waitForAndGetElement(ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project","Tomorrow"));
+		waitForAndGetElement(ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project","Overdue"));
+		waitForAndGetElement(ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project","Upcoming"));
 	}
 	/**
 	 * check top of list view

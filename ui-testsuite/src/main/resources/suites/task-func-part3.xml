@@ -9,7 +9,6 @@
 		<classes>
 			<class name="org.exoplatform.selenium.platform.task.functional.TASK_TestConfig_1" />
 			<class name="org.exoplatform.selenium.platform.task.functional.TASK_Projects_ShareProject" />
-			<class name="org.exoplatform.selenium.platform.task.functional.TASK_Projects_ShowHideProject" />
 			<class name="org.exoplatform.selenium.platform.task.functional.TASK_TaskDetails_CreateTask" />
 			<class name="org.exoplatform.selenium.platform.task.functional.TASK_TaskDetails_CloneTask" />
 		</classes>

@@ -8,8 +8,10 @@
 		</groups>
 		<classes>
 			<class name="org.exoplatform.selenium.platform.task.functional.TASK_TestConfig_1" />
+			<class name="org.exoplatform.selenium.platform.task.functional.TASK_UIOverview" />
 			<class name="org.exoplatform.selenium.platform.task.functional.TASK_TaskDetails_EditTask_WorkPlan" />
 			<class name="org.exoplatform.selenium.platform.task.functional.TASK_TaskDetails_EditTask_TaskPermissions" />
+			
 		</classes>
 	</test>
 	<listeners>

@@ -32,6 +32,23 @@ public class ManagementTasks extends TaskManagementLocatorObject {
 	public void openTask(String task){
 		info("open task: "+task);
 		click(ELEMENT_TASK_TITLE.replace("$task", task));
+		waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_CLOSE_ICON);
+	}
+	/**
+	 * Close task detail
+	 */
+	public void closeTask(){
+		info("close task detail");
+		click(ELEMENT_RIGHT_PANE_TASK_CLOSE_ICON);
+		waitForElementNotPresent(ELEMENT_RIGHT_PANE_TASK_CLOSE_ICON);
+	}
+	/**
+	 * Hide task detail on right pane
+	 */
+	public void hideTaskDetail(){
+		info("hide detail of task on right pane");
+		click(ELEMENT_RIGHT_PANE_HIDE_ICON);
+		waitForElementNotPresent(ELEMENT_RIGHT_PANE_TASK_CLOSE_ICON);
 	}
     /**
      * Define options in Task list
@@ -146,7 +163,17 @@ public class ManagementTasks extends TaskManagementLocatorObject {
         driver.findElement(ELEMENT_ADD_TASK_TITLE).sendKeys(Keys.ENTER);
         waitForAndGetElement(ELEMENT_TASK_TITLE.replace("$task", task));
         waitForElementNotPresent(ELEMENT_LEFT_PANE_TOOLTIP.replace("$mes", "Let's create your first task."));
-		waitForElementNotPresent(ELEMENT_PROJECT_WELCOME_IMG);
+		waitForElementNotPresent(ELEMENT_WELCOME_IMG);
+	}
+	/**
+	 * Check first access
+	 */
+	public void checkFirstAccess(){
+		waitForAndGetElement(ELEMENT_LEFT_PANE_TOOLTIP.replace("$mes", "Let's create your first task."));
+		waitForAndGetElement(ELEMENT_WELCOME_TEXT.replace("$message", "Welcome to eXo Tasks"));
+		waitForAndGetElement(ELEMENT_WELCOME_IMG);
+		waitForAndGetElement(ELEMENT_LEFT_PANE_NO_PROJECT);
+		waitForAndGetElement(ELEMENT_LEFT_PANE_PROJECT_ACTIVE.replace("$project", "Incoming"));
 	}
 	/**
 	 * Check Task in project
@@ -189,7 +216,7 @@ public class ManagementTasks extends TaskManagementLocatorObject {
         driver.findElement(ELEMENT_ADD_TASK_TITLE).sendKeys(Keys.ENTER);
         waitForAndGetElement(ELEMENT_TASK_TITLE.replace("$task", task));
         waitForElementNotPresent(ELEMENT_LEFT_PANE_TOOLTIP.replace("$mes", "Let's create your first task."));
-		waitForElementNotPresent(ELEMENT_PROJECT_WELCOME_IMG);
+		waitForElementNotPresent(ELEMENT_WELCOME_IMG);
 	}
 	/**
 	 * Delete task

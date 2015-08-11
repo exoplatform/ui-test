@@ -16,13 +16,16 @@ public class TaskManagementLocatorObject extends PlatformBase {
 	
 	/***********************************************************LEFT PANE******************************************************/
 	//General
-	public final By ELEMENT_LEFT_PANE_NO_PROJECT = By.xpath("//*[@class='list-projects']/*[contains(.,'No Project')]");
+	public final By ELEMENT_LEFT_PANE_NO_PROJECT = By.xpath("//*[contains(@class,'list-projects')]/*[contains(.,'No Project')]");
 	public final String ELEMENT_LEFT_PANE_TOOLTIP = "//*[@class='popover-content'][contains(.,\"$mes\")]";
 	public final By ELEMENT_TASK_APP_ICON = By.xpath("//*[@class='uiIconAppTaskManagementApplication uiIconDefaultApp']");
 	
 	//Project area-->General
 	public final String ELEMENT_LEFT_PANE_PROJECT_NAME="//*[contains(@class,'list-projects')]//*[contains(@class,'project-name')][contains(.,'$project')]";
-	public final By ELEMENT_LEFT_PANE_PROJECTS=By.xpath("//*[contains(@class,'project-name')][contains(.,'Projects')]");
+	public final String ELEMENT_LEFT_PANE_PROJECT_ACTIVE="//*[@class='dropdown project-item active']//*[contains(@class,'project-name')][contains(.,'$project')]";
+	public final By ELEMENT_LEFT_PANE_PROJECTS=By.xpath("//*[contains(@class,'project-name')][.='Projects']");
+	public final By ELEMENT_LEFT_PANE_LABELS=By.xpath("//*[contains(@class,'project-name')][.='Label']");
+	public final By ELEMENT_LEFT_PANE_TASKS=By.xpath("//*[contains(@class,'project-name')][.='Tasks']");
 	public final String ELEMENT_LEFT_PANE_SUBPROJECT_L1="//*[contains(@class,'dropdown project-item')]/*[contains(@class,'list-projects')]//*[contains(@class,'project-name')][contains(.,'$sub')]";
 	public final String ELEMENT_LEFT_PANE_PROJECT_ID=".//*[contains(@data-id,'$id')][contains(.,'$project')]";
 	public final By ELEMENT_LEFT_PANE_PROJECTS_PLUS_MENU=By.xpath("//*[@class='uiIconLightGray uiIconSimplePlusMini addProject']");
@@ -100,8 +103,8 @@ public class TaskManagementLocatorObject extends PlatformBase {
 	//*************************************Project Management*****************************************//
 
 	//Project-->General
-	public final By ELEMENT_PROJECT_WELCOME_IMG=By.xpath("//*[@class='empty-content']/img");
-	public final String ELEMENT_PROJECT_WELCOME_TEXT="//*[@class='empty-content']/*[contains(.,'$message')]";
+	public final By ELEMENT_WELCOME_IMG=By.xpath("//*[@class='empty-content']/img");
+	public final String ELEMENT_WELCOME_TEXT="//*[@class='empty-content']/*[contains(.,'$message')]";
 	
 	
 	
@@ -209,7 +212,8 @@ public class TaskManagementLocatorObject extends PlatformBase {
 	public final By ELEMENT_RIGHT_PANE_PARENT_PATH_LINK=By.xpath("//*[@data-name='parent']");
 	public final String ELEMENT_RIGHT_PANE_PARENT_PATH_TEXT="//*[@data-name='parent']/*[@class='active'][contains(.,'$project')]";
 	public final String ELEMENT_RIGHT_PANE_MANAGER_NAME ="//*[@class='row-fluid prjAuthor']/*[contains(.,'$user')]";
-
+	public final By ELEMENT_RIGHT_PANE_CLOSE_ICON = By.xpath("//*[@class='addProject uiBox']/*[@class='title']/*[contains(.,'Project overview')]/..//*[@class='uiIconClose uiIconLightGray']");
+	public final By ELEMENT_RIGHT_PANE_HIDE_ICON = By.xpath(".//*[@id='ShowHideRight']/i");
 	//Add project form
 	public final String ELEMENT_ADD_PROJECT_HEADER = "//*[@class='addProject uiBox']/*[@class='title']/*[contains(.,'$header')]";
 	public final By ELEMENT_ADD_PROJECT_PARENT_PROJECT=By.xpath("(.//*[contains(@class,'addProject')]//*[contains(@class,'hoverStatusBlock')])[1]");
@@ -235,6 +239,7 @@ public class TaskManagementLocatorObject extends PlatformBase {
 	public final By ELEMENT_RIGHT_PANE_TASK_ARROW_MENU_CLONE= By.xpath("//*[contains(@class,'action-clone-task')]/*[@class='uiIconCloneNode']");
 	public final By ELEMENT_RIGHT_PANE_TASK_ARROW_MENU_DELETE= By.xpath("//*[contains(@class,'action-delete-task')]/*[@class='uiIconDelete']");
 	public final By ELEMENT_RIGHT_PANE_TASK_ARROW_MENU_WATCH= By.xpath("//*[@class='uiIconWatch']");
+	public final By ELEMENT_RIGHT_PANE_TASK_CLOSE_ICON=By.xpath("//*[@class='uiIconClose']");
 	//title
 	public final String ELEMENT_RIGHT_PANE_TASK_DISPLAY_CHECKBOX=".//*[@class='title-task']/*[contains(.,'$task')]/../../*[contains(@class,'uiCheckbox')]";
 	public final By ELEMENT_RIGHT_PANE_TASK_PROJECT_LINK = By.xpath("//*[@data-original-title='Click to edit']/*[@data-name='project']");

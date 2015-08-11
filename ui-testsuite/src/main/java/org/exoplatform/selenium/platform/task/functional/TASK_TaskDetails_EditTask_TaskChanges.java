@@ -56,55 +56,6 @@ import org.testng.annotations.*;
  	}
 
 	/**
-	*<li> Case ID:130987.</li>
-	*<li> Test Case Name: Check display of add sub task in task change.</li>
-	*<li> Pre-Condition: exo-tasks add-on is installed</li>
-	*<li> Post-Condition: </li>
-	* NOT IMPLEMENT YET
-	*/
-	@Test (groups="pending")
-	public  void test02_CheckDisplayOfAddSubTaskInTaskChange() {
-		info("Test 2: Check display of add sub task in task change");
-		/*Step Number: 1
-		*Step Name: Step 1: Open Tasks page
-		*Step Description: 
-			- Click on Tasks on the left navigation.
-		*Input Data: 
-			
-		*Expected Outcome: 
-			Tasks page is opened*/
-
-		/*Step number: 2
-		*Step Name: Step 2: Create task A
-		*Step Description: 
-			- Add New Task in Incoming
-		*Input Data: 
-			
-		*Expected Outcome: 
-			task A is created*/
-
-		/*Step number: 3
-		*Step Name: Step 3: Add sub task for task A
-		*Step Description: 
-			- Add sub task for task A
-		*Input Data: 
-			
-		*Expected Outcome: 
-			sub task is added*/
-
-		/*Step number: 4
-		*Step Name: Step 4: Check display of add sub task in task change
-		*Step Description: 
-			- Click on tab Changes on task details of task A to view change
-		*Input Data: 
-			
-		*Expected Outcome: 
-			$FullName added sub
-			-task.*/ 
-
- 	}
-
-	/**
 	*<li> Case ID:130982.</li>
 	*<li> Test Case Name: Check display of assign task in task change.</li>
 	*<li> Pre-Condition: exo-tasks add-on is installed</li>
