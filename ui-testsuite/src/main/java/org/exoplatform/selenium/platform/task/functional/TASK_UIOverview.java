@@ -1,7 +1,6 @@
 package org.exoplatform.selenium.platform.task.functional;
 
 import static org.exoplatform.selenium.TestLogger.info;
-
 import org.testng.annotations.*;
 
 

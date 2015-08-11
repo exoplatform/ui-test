@@ -11,7 +11,7 @@
 			<class name="org.exoplatform.selenium.platform.task.functional.TASK_UIOverview" />
 			<class name="org.exoplatform.selenium.platform.task.functional.TASK_TaskDetails_EditTask_WorkPlan" />
 			<class name="org.exoplatform.selenium.platform.task.functional.TASK_TaskDetails_EditTask_TaskPermissions" />
-			
+			<class name="org.exoplatform.selenium.platform.task.functional.TASK_TaskDetails" />
 		</classes>
 	</test>
 	<listeners>
