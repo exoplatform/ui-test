@@ -149,6 +149,19 @@ public class ManagementTasks extends TaskManagementLocatorObject {
 		waitForElementNotPresent(ELEMENT_PROJECT_WELCOME_IMG);
 	}
 	/**
+	 * Check Task in project
+	 * @param project
+	 * @param tasks
+	 * 				list of tasks
+	 */
+	public void checkTasksOfProject(String project,String...tasks){
+		info("check list of tasks in project");
+		click(ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project",project),0,true);
+		for (String task : tasks) {
+			waitForAndGetElement(ELEMENT_TASK_TITLE.replace("$task", task));
+		}
+	}
+	/**
 	 * Check task detail
 	 * @param task
 	 * @param project

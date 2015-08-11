@@ -381,8 +381,8 @@ public class ManagementProjects extends TaskManagementLocatorObject {
 	public void shareProject(String project,String[] users, boolean manager) {
 		selectOpContMenuGivenProject(project, optionContMenuGivenProject.Share);
 		if (manager){
+			click(ELEMENT_SHARE_PROJECT_EDIT_MANAGER_ICON);
 			for (String user : users) {
-				click(ELEMENT_SHARE_PROJECT_EDIT_MANAGER_ICON);
 				type(ELEMENT_SHARE_PROJECT_EDIT_MANAGER_INPUT,user,false);
 				Robot robot;
 				try {
@@ -399,8 +399,8 @@ public class ManagementProjects extends TaskManagementLocatorObject {
 			click(ELEMENT_SHARE_PROJECT_EDIT_MANAGER_SAVE_BTN);
 		}
 		else{
+			click(ELEMENT_SHARE_PROJECT_EDIT_PARTICIPANT_ICON);
 			for (String user : users) {
-				click(ELEMENT_SHARE_PROJECT_EDIT_PARTICIPANT_ICON);
 				type(ELEMENT_SHARE_PROJECT_EDIT_PARTICIPANT_INPUT,user,false);
 				Robot robot;
 				try {
