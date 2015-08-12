@@ -1148,7 +1148,7 @@ public class ManagementTasks extends TaskManagementLocatorObject {
 		mouseHoverByJavaScript(ELEMENT_TASK_TITLE.replace("$task", task),2);
 		clickByJavascript(ELEMENT_TASK_COMPLETE_CHECKBOX.replace("$task", task),2);
 		Utils.pause(500);
-		waitForElementNotPresent(ELEMENT_TASK_COMPLETE_CHECKBOX.replace("$task", task));
+		waitForElementNotPresent(ELEMENT_TASK_TITLE.replace("$task", task));
 	}
 	/**
 	 * Check display of task checkbox
