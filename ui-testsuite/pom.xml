@@ -203,6 +203,12 @@
 			</properties>
 		</profile>
 		<profile>
+			<id>task-func-part8</id>
+			<properties>
+				<testSuite>task-func-part8.xml</testSuite>
+			</properties>
+		</profile>
+		<profile>
 			<id>testng-failed</id>
 			<properties>
 				<testSuite>testng-failed.xml</testSuite>

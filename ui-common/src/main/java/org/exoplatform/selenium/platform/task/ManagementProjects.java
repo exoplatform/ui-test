@@ -28,12 +28,18 @@ public class ManagementProjects extends TaskManagementLocatorObject {
 		click(ELEMENT_LEFT_PANE_PROJECTS,0,true);
 	}
 	/**
+	 * Open Labels
+	 */
+	public void goToLabels(){
+		info("open Labels");
+		click(ELEMENT_LEFT_PANE_LABELS,0,true);
+	}
+	/**
 	 * Open project
 	 */
 	public void openProject(String project){
 		info("open project: "+project);
 		click(ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project", project),0,true);
-		waitForAndGetElement(ELEMENT_RIGHT_PANE_CLOSE_ICON);
 	}
 	/**
 	 * Close right pane
@@ -177,29 +183,12 @@ public class ManagementProjects extends TaskManagementLocatorObject {
 	}
 	
 	/**
-	 * Set no color of a given project 
-	 * @param project
-	 *                is project's name
-	 */
-	public void selectNoColor(String project,String...tasks){
-		info("set no color for project");
-		goToContMenuGivenProject(project);
-		click(ELEMENT_LEFT_PANE_COLOR_NO_COLOR.replace("$project", project));
-		waitForAndGetElement(ELEMENT_LEFT_PANE_PROJECT_NO_COLOR.replace("$project", project));
-		if(tasks.length>0){
-			for (String task : tasks) {
-				openProject(project);
-				waitForAndGetElement(ELEMENT_TASK_NO_COLOR.replace("$task", task));
-			}
-		}
-	}
-	/**
 	 * Check add project popup
 	 */
 	public void checkAddProjectPopup(){
 		info("check Add Project popup");
 		selectOpContMenuProject(optionContMenuProject.Add_Project);
-		waitForAndGetElement(ELEMENT_ADD_PROJECT_HEADER.replace("$header","Project overview"));
+		waitForAndGetElement(ELEMENT_ADD_PROJECT_HEADER);
 		waitForAndGetElement(ELEMENT_RIGHT_PANE_PARENT_PATH_TEXT.replace("$project", "Projects"));
 		waitForAndGetElement(ELEMENT_ADD_PROJECT_DES_INPUT);
 		waitForAndGetElement(ELEMENT_ADD_PROJECT_TITLE_INPUT);
@@ -218,11 +207,11 @@ public class ManagementProjects extends TaskManagementLocatorObject {
 	public void addProject(String title,String des,boolean enableCalendar){
 		selectOpContMenuProject(optionContMenuProject.Add_Project);
 		info("Create project:" + title);
-		if(des!=null || des!=""){
+		if(!des.isEmpty()){
 			info("Input description");
 			type(ELEMENT_ADD_PROJECT_DES_INPUT,des,true);
 		}
-		if(title!=null || title!=""){
+		if(!title.isEmpty()){
 			info("Input title");
 			waitForAndGetElement(ELEMENT_ADD_PROJECT_TITLE_INPUT).sendKeys(title);
 	        driver.findElement(ELEMENT_ADD_PROJECT_TITLE_INPUT).sendKeys(Keys.ENTER);
@@ -238,7 +227,7 @@ public class ManagementProjects extends TaskManagementLocatorObject {
 		Utils.pause(1000);
 		waitForAndGetElement(ELEMENT_ADD_PROJECT_DES_TEXT.replace("$des", des));
 		waitForAndGetElement(ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project", title));
-		waitForElementNotPresent(ELEMENT_LEFT_PANE_TOOLTIP.replace("$message", "No Project. Click here to create your first project."));
+		waitForElementNotPresent(ELEMENT_LEFT_PANE_TOOLTIP_PROJECT);
 	}
 	/**
 	 * Check project detail by default
@@ -246,8 +235,8 @@ public class ManagementProjects extends TaskManagementLocatorObject {
 	 */
 	public void checkProjectDetail(String project){
 		waitForAndGetElement(ELEMENT_RIGHT_PANE_PARENT_PATH_TEXT.replace("$project", "Projects"));
-		waitForAndGetElement(ELEMENT_WELCOME_TEXT.replace("$message", "This is a personal project."));
-		waitForAndGetElement(ELEMENT_WELCOME_TEXT.replace("$message", "You can share it for work collaboration."));
+		waitForAndGetElement(ELEMENT_WELCOME_TEXT_PROJECT1);
+		waitForAndGetElement(ELEMENT_WELCOME_TEXT_PROJECT2);
 		mouseOver(ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project", project),false);
 		waitForAndGetElement(ELEMENT_LEFT_PANE_PROJECT_MENU.replace("$project",project));
 	}
@@ -743,8 +732,8 @@ public class ManagementProjects extends TaskManagementLocatorObject {
 		goToProjects();
 		waitForAndGetElement(ELEMENT_LEFT_PANE_NO_PROJECT);
 		waitForAndGetElement(ELEMENT_WELCOME_IMG);
-		waitForAndGetElement(ELEMENT_WELCOME_TEXT.replace("$message", "No Project"));
-		waitForAndGetElement(ELEMENT_LEFT_PANE_TOOLTIP.replace("$message","Click here to create your first project."));
+		waitForAndGetElement(ELEMENT_WELCOME_TEXT_PROJECT_DEFAULT);
+		waitForAndGetElement(ELEMENT_LEFT_PANE_TOOLTIP_PROJECT);
 		waitForElementNotPresent(ELEMENT_ADD_TASK_BTN);
 		waitForElementNotPresent(ELEMENT_ADD_TASK_TITLE);
 	}
@@ -763,8 +752,8 @@ public class ManagementProjects extends TaskManagementLocatorObject {
 	 */
 	public void checkDefaultSharedProject(String project){
 		openProject(project);
-		waitForAndGetElement(ELEMENT_WELCOME_TEXT.replace("$message", "This is John Smith's project."));
-		waitForAndGetElement(ELEMENT_WELCOME_TEXT.replace("$message", "There is no task to do."));
+		waitForAndGetElement(ELEMENT_WELCOME_TEXT_PROJECT_SHARE1);
+		waitForAndGetElement(ELEMENT_WELCOME_TEXT_PROJECT_SHARE2);
 	}
 	/**
 	 * Check share users
@@ -775,12 +764,12 @@ public class ManagementProjects extends TaskManagementLocatorObject {
 	public void checkShareUsers(String project,String[] managers,String[] participants){
 		info("check list of manager, participant");
 		selectOpContMenuGivenProject(project, optionContMenuGivenProject.Share);
-		if(!participants.equals("")){
+		if(participants.length>0 && !participants[0].isEmpty()){
 		for (String participant : participants) {
 			waitForAndGetElement(ELEMENT_SHARE_PROJECT_DISPLAY_PARTICIPANT.replace("$user",participant));
 			}
 		}
-		if(!managers.equals("")){
+		if(managers.length>0 && managers[0].isEmpty()){
 		for (String manager : managers) {
 			waitForAndGetElement(ELEMENT_SHARE_PROJECT_DISPLAY_MANAGER.replace("$user",manager));
 			}
@@ -808,7 +797,7 @@ public class ManagementProjects extends TaskManagementLocatorObject {
 	 */
 	public void checkColorTable(String project){
 		goToContMenuGivenProject(project);
-		waitForAndGetElement(ELEMENT_LEFT_PANE_COLOR_NO_COLOR.replace("$project", project));
+		waitForAndGetElement(ELEMENT_LEFT_PANE_COLOR_TABLE_ITEM.replace("$project", project).replace("$color", "noColor"));
 		waitForAndGetElement(ELEMENT_LEFT_PANE_COLOR_TABLE_ITEM.replace("$project", project).replace("$color", "red"));
 		goToContMenuGivenProject(project);
 	}
@@ -822,11 +811,11 @@ public class ManagementProjects extends TaskManagementLocatorObject {
 		openProject(project);
 		Utils.pause(1000);
 		click(ELEMENT_RIGHT_PANE_EDIT_PROJECT_DES_INPUT);
-		if(des==""){
+		if(des.isEmpty()){
 			info("left description blank");
 			inputFrame(ELEMENT_CKEDITOR_IFRAME, "");
 			mouseOverAndClick(ELEMENT_RIGHT_PANE_PARENT_PATH_LINK);
-			waitForAndGetElement(ELEMENT_ADD_PROJECT_DES_TEXT.replace("$des", "Empty"));
+			waitForAndGetElement(ELEMENT_ADD_PROJECT_DES_EMPTY);
 		}else{
 			info("decorate description");
 			inputFrame(ELEMENT_CKEDITOR_IFRAME, des);
@@ -856,7 +845,7 @@ public class ManagementProjects extends TaskManagementLocatorObject {
 		waitForAndGetElement(ELEMENT_EDIT_PROJECT_TITLE_INPUT).clear();
         Utils.pause(500);
         driver.findElement(ELEMENT_EDIT_PROJECT_TITLE_INPUT).sendKeys(Keys.ENTER);
-        waitForAndGetElement(ELEMENT_ADD_PROJECT_TITLE_TEXT.replace("$title", "Untitled Project"));
+        waitForAndGetElement(ELEMENT_ADD_PROJECT_UNTITLED);
 	}
 	/**
 	 * Hide project
@@ -923,12 +912,12 @@ public class ManagementProjects extends TaskManagementLocatorObject {
 		waitForAndGetElement(ELEMENT_LEFT_PANE_PROJECTS);
 		waitForAndGetElement(ELEMENT_LEFT_PANE_LABELS);
 		waitForAndGetElement(ELEMENT_LEFT_PANE_TASKS);
-		waitForAndGetElement(ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project","Incoming"));
-		waitForAndGetElement(ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project","All Tasks"));
-		waitForAndGetElement(ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project","Today"));
-		waitForAndGetElement(ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project","Tomorrow"));
-		waitForAndGetElement(ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project","Overdue"));
-		waitForAndGetElement(ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project","Upcoming"));
+		waitForAndGetElement(ELEMENT_LEFT_PANE_INCOMING);
+		waitForAndGetElement(ELEMENT_LEFT_PANE_ALLTASKS);
+		waitForAndGetElement(ELEMENT_LEFT_PANE_TODAY);
+		waitForAndGetElement(ELEMENT_LEFT_PANE_TOMORROW);
+		waitForAndGetElement(ELEMENT_LEFT_PANE_OVERDUE);
+		waitForAndGetElement(ELEMENT_LEFT_PANE_UPCOMING);
 	}
 	/**
 	 * check top of list view
@@ -937,19 +926,19 @@ public class ManagementProjects extends TaskManagementLocatorObject {
 	 * 				true if it'll displayed
 	 * 				false if it won't displayed
 	 */
-	public void checkTopOfListView(String project,boolean newTask){
+	public void checkTopOfListView(String project,boolean newTask,boolean isProjects){
 		
 		if(newTask){
 			openProject(project);
 			waitForAndGetElement(ELEMENT_ADD_TASK_BTN);
 			waitForAndGetElement(ELEMENT_ADD_TASK_TITLE);
 		}else{
-			if (project == "Projects"){
+			if (isProjects){
 				goToProjects();
 				waitForElementNotPresent(ELEMENT_ADD_TASK_BTN);
 				waitForElementNotPresent(ELEMENT_ADD_TASK_TITLE);
 			}else{
-				openProject(project);
+				goToLabels();
 				waitForElementNotPresent(ELEMENT_ADD_TASK_BTN);
 				waitForElementNotPresent(ELEMENT_ADD_TASK_TITLE);
 			}

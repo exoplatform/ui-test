@@ -42,7 +42,7 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- New task is created
 			- there is an editor to enter the description*/ 
-		mgTask.addTaskDirectly(task1);
+		mgTask.addTaskDirectly(task1,true);
 		
 		/*Step number: 3
 		*Step Name: Step 3: Check when a description is edited by clicking
@@ -87,7 +87,7 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			New task is created*/
-		mgTask.addTaskDirectly(task1);
+		mgTask.addTaskDirectly(task1,true);
 		
 		/*Step number: 3
 		*Step Name: Step 3: Check description can be decorated with simple effect

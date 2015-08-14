@@ -94,6 +94,7 @@ import org.testng.annotations.*;
 		info("Test 3: Check when No Color is ticked to project");
 		String project = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		String task = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+		String noColor = colorData.getClassNameByArrayTypeRandom(0);
 		/*Step Number: 1
 		*Step Name: Step 1: Open Tasks page
 		*Step Description: 
@@ -116,7 +117,7 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- There is no color block in front of the project title in the left menu.
 			- All the tasks of no color project are displayed without the color block.*/ 
-		mgProject.selectNoColor(project,task);
+		mgProject.selectColor(project, noColor, task);
 	
 		info("clear data");
 		mgProject.deleteProject(project, false);

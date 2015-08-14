@@ -1,6 +1,6 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="Task Func Test" verbose="1" preserve-order="true">
-	<test name="task-func-part6" enabled="true">
+	<test name="task-func-part7" enabled="true">
 		<groups>
 			<run>
 				<exclude name="pending" />

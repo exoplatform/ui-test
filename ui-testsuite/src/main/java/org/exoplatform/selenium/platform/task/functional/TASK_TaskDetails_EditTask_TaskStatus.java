@@ -96,7 +96,7 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- task A is created
 			- the status of a task is void (not displayed) and it cannot be set in task details.*/ 
-		mgTask.addTaskDirectly(task1);
+		mgTask.addTaskDirectly(task1,true);
 		mgTask.checkDefaultTaskStatus(task1,status,false);
 		
 		info("delete data");

@@ -36,7 +36,7 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			New task is created*/
-		mgTask.addTaskDirectly(task1);
+		mgTask.addTaskDirectly(task1,true);
 		
 		/*Step number: 3
 		*Step Name: Step 3: Check All Day checkbox
@@ -82,7 +82,7 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			New task is created*/
-		mgTask.addTaskDirectly(task1);
+		mgTask.addTaskDirectly(task1,true);
 		mgTask.editTaskWorkPlan(task1, getDate(1,"dd"), 0, getDate(1,"dd"), 0, "00:00", "02:00",false);
 		
 		/*Step number: 3
@@ -133,7 +133,7 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			New task is created*/
-		mgTask.addTaskDirectly(task1);
+		mgTask.addTaskDirectly(task1,true);
 		
 		/*Step number: 3
 		*Step Name: Step 3: Check display of date time plan In case of some hours
@@ -248,7 +248,7 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- New task is created
 			- No work planned is the default value.*/ 
-		mgTask.addTaskDirectly(task1);
+		mgTask.addTaskDirectly(task1,true);
 		mgTask.checkDefaultOfWorkPlan(task1);
 		
 		info("delete data");
@@ -283,7 +283,7 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			Task details is opened*/
-		mgTask.addTaskDirectly(task1);
+		mgTask.addTaskDirectly(task1,true);
 		mgTask.editTaskWorkPlan(task1, getDate(1,"dd"),0, getDate(2,"dd"), 0, "00:00", "02:30", false);
 		
 		/*Step number: 3
@@ -321,8 +321,8 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			Tasks page is opened*/
 		hp.goToTasks();
-		mgTask.addTaskDirectly(task1);
-		mgTask.addTaskDirectly(task2);
+		mgTask.addTaskDirectly(task1,true);
+		mgTask.addTaskDirectly(task2,true);
 		mgTask.editTaskWorkPlan(task2, getDate(0,"dd"), 0, getDate(1,"dd"), 0, "", "", true);
 		mgTask.editTaskWorkPlan(task1, getDate(0,"dd"), 0, getDate(1,"dd"), 0, "", "", true);
 		mgTask.setDueDate(task1, getDate(1,"dd MMM yyyy"), getDate(1,"dd"), 0);
@@ -400,7 +400,7 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			Task details is opened*/
-		mgTask.addTaskDirectly(task1);
+		mgTask.addTaskDirectly(task1,true);
 		mgTask.editTaskWorkPlan(task1, getDate(0,"dd"), 0, getDate(1,"dd"), 0, "", "", true);
 		
 		/*Step number: 3
@@ -445,7 +445,7 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			Task details is opened*/
-		mgTask.addTaskDirectly(task1);
+		mgTask.addTaskDirectly(task1,true);
 		mgTask.editTaskWorkPlan(task1, getDate(0,"dd"), 0, getDate(1,"dd"), 0, "", "", true);
 		
 		/*Step number: 3

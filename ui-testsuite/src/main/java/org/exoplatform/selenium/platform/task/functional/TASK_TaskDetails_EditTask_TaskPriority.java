@@ -46,7 +46,7 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			Task details is opened*/
-		mgTask.addTaskDirectly(task1);
+		mgTask.addTaskDirectly(task1,true);
 		
 		/*Step number: 3
 		*Step Name: Step 3: Check combo box to select priority
@@ -91,7 +91,7 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			New task is created*/
-		mgTask.addTaskDirectly(task1);
+		mgTask.addTaskDirectly(task1,true);
 		
 		/*Step number: 3
 		*Step Name: Step 3: Check display of priority

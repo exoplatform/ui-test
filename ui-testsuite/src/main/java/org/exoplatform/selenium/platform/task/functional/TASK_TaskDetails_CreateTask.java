@@ -48,7 +48,7 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- new task is created*/ 
-        mgTask.addTaskDirectly(task2);
+        mgTask.addTaskDirectly(task2,true);
 
         info("delete data");
 		mgProject.deleteProject(project, false);
@@ -71,6 +71,7 @@ import org.testng.annotations.*;
 		info("Test 2: Check creating task action");
 		String task1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		String project = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+		String defaultStatus = flowData.getFlowByArrayTypeRandom(1);
 		/*Step Number: 1
 		*Step Name: Step 1: Open Tasks page
 		*Step Description: 
@@ -91,7 +92,7 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- The new added task will be displayed on the top below Untitled Task field.*/
 		mgTask.addTask(project, task1);
-		mgTask.checkTaskDetail(task1,project);
+		mgTask.checkTaskDetail(task1,true,project,defaultStatus);
 		
 		info("delete data");
 		mgProject.deleteProject(project, false);
@@ -111,7 +112,7 @@ import org.testng.annotations.*;
 		String task2 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		String task3 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		String sort = sortByData.getSortBy(2);
-		String[] tasks = {task3,task2,task1};
+		String[] tasks = {task1,task2,task3};
 		/*Step Number: 1
 		*Step Name: Step 1: Open Tasks page
 		*Step Description: 
@@ -144,8 +145,8 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- The added tasks will be rearranged following the Group By & Sort By options.*/ 
 		driver.navigate().refresh();
-		mgTask.checkOrderBySortCreatedDate(tasks);
-		waitForAndGetElement(mgProject.ELEMENT_PROJECT_DEFAULT_SORTBY.replace("$sort",sort));
+		mgTask.checkSortByCreatedDate(tasks);
+		waitForAndGetElement(mgProject.ELEMENT_SORTBY_ITEM.replace("$sort",sort));
 		
 		info("delete task");
 		mgTask.deleteTask(task3);
@@ -190,7 +191,7 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- new task í created*/
-		mgTask.addTaskDirectly(task1);
+		mgTask.addTaskDirectly(task1,true);
 		
 		/*Step number: 3
 		*Step Name: Step 3: Create task from project A
@@ -246,7 +247,7 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- Tasks page is opened*/
 		hp.goToTasks();
-		mgTask.addTaskDirectly(task1);
+		mgTask.addTaskDirectly(task1,true);
 		
 		/*Step number: 2
 		*Step Name: Step 2: Check right pane when creating a task
@@ -292,7 +293,7 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- task A is created*/
-		mgTask.addTaskDirectly(task1);
+		mgTask.addTaskDirectly(task1,true);
 		
 		/*Step number: 3
 		*Step Name: Step 3: Check the arrow menu on the top of task detail pane

@@ -44,7 +44,7 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			New task is created*/
-		mgTask.addTaskDirectly(task1);
+		mgTask.addTaskDirectly(task1,true);
 		
 		/*Step number: 3
 		*Step Name: Step 3: Check a task can be assigned to multiple tags
@@ -89,7 +89,7 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			New task is created*/
-		mgTask.addTaskDirectly(task1);
+		mgTask.addTaskDirectly(task1,true);
 		
 		/*Step number: 3
 		*Step Name: Step 3: Check autocomplete list displaying all tags
@@ -139,7 +139,7 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			New task is created*/
-		mgTask.addTaskDirectly(task1);
+		mgTask.addTaskDirectly(task1,true);
 		
 		/*Step number: 3
 		*Step Name: Step 3: Check case new tag is input, it can be saved as a new one
@@ -184,7 +184,7 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- New task is created
 			- By default or in case of no tag added, there are tag icon and Tags label that will be hidden when there is a tag added.*/ 
-		mgTask.addTaskDirectly(task1);
+		mgTask.addTaskDirectly(task1,true);
 		mgTask.checkDefaultTag(task1, true);
 		mgTask.editTaskTag(task1, tag);
 		mgTask.checkDefaultTag(task1,false);

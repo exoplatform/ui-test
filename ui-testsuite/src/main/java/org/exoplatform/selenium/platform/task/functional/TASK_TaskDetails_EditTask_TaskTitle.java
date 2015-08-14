@@ -34,9 +34,9 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- task A is created successfully*/ 
-		mgTask.addTaskDirectly(task1);
-		int id1= mgTask.getTaskId(mgTask.ELEMENT_TASK_TITLE_ID.replace("$task", task1));
-		mgTask.addTaskDirectly(task1);
+		mgTask.addTaskDirectly(task1,true);
+		int id1= mgTask.getTaskId(mgTask.ELEMENT_TASK_TITLE.replace("$task", task1));
+		mgTask.addTaskDirectly(task1,true);
 		
 		info("delete data");
 		mgTask.deleteTaskById(id1);
@@ -88,7 +88,7 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			Task title is displayed fully (multiple rows in case of long title)in the task details pane.*/
-		mgTask.addTaskDirectly(title);
+		mgTask.addTaskDirectly(title,true);
 		mgTask.checkDisplayOfTitle(title);
 		
 		info("delete data");
@@ -125,7 +125,7 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- new task is created
 			- The Mark as completed icon in front of a task title is to mark it done.*/ 
-		mgTask.addTaskDirectly(task1);
+		mgTask.addTaskDirectly(task1,true);
 		mgTask.checkDisplayOfTaskCheckbox(task1);
 		
 		info("delete data");
@@ -161,7 +161,7 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			new task is created*/ 
-		mgTask.addTaskDirectly(task1);
+		mgTask.addTaskDirectly(task1,true);
 		
 		/*Step number: 3
 		*Step Name: Step 3: Check Untitled Task is default value of a task title

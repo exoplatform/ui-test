@@ -204,6 +204,7 @@ import org.testng.annotations.*;
 		String prj11 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		String task1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		String task11 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+		String defaultStatus = flowData.getFlowByArrayTypeRandom(1);
 		/*Step Number: 1
 		*Step Name: Step 1: Open Tasks page
 		*Step Description: 
@@ -226,7 +227,7 @@ import org.testng.annotations.*;
 			Sub-projects inherit workflow from their parent at creation time. They can evolve separately afterwards.*/ 
 		mgProject.addSubProject(prj1,prj11,"", false);
 		mgTask.addTask(prj11, task11);
-		mgTask.checkTaskDetail(task11,prj11);
+		mgTask.checkTaskDetail(task11,true,prj11,defaultStatus);
 		
 		info("delete data");
 		mgProject.deleteProject(prj1, true,prj11);

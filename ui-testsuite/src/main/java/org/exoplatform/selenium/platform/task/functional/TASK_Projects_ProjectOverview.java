@@ -563,6 +563,7 @@ import org.testng.annotations.*;
 		info("Test 12 Check welcome screen is disppeared when adding task");
 		String project = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		String task = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+		String defaultStatus= flowData.getFlowByArrayTypeRandom(1);
 		/*Step Number: 1
 		*Step Name: Step 1: Open Tasks page
 		*Step Description: 
@@ -585,7 +586,7 @@ import org.testng.annotations.*;
 			- Task is added to project
 			- The message Let's create your first task. and welcome screen are disappeared when there is a task added.*/ 
 		mgTask.addTask(project, task);
-		mgTask.checkTaskDetail(task,project);
+		mgTask.checkTaskDetail(task,true,project,defaultStatus);
 		
 		info("delete project");
 		mgProject.deleteProject(project, false);

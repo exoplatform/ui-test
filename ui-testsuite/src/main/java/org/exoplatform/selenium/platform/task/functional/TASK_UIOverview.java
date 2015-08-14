@@ -99,9 +99,9 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			Sort by and Group by options are hidden until there are at least 2 tasks added*/
 		mgProject.checkFirstAccessGroupSort(false);
-		mgTask.addTaskDirectly(task1);
-		mgTask.addTaskDirectly(task2);
-		mgTask.addTaskDirectly(task3);
+		mgTask.addTaskDirectly(task1,true);
+		mgTask.addTaskDirectly(task2,true);
+		mgTask.addTaskDirectly(task3,true);
 		
 		/*Step number: 3
 		*Step Name: Step 3: Create 2 tasks

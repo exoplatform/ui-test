@@ -17,6 +17,7 @@ import org.testng.annotations.*;
 		info("Test 1: Check display of task detail");
 		String prj1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		String task1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+		String defaultStatus = flowData.getFlowByArrayTypeRandom(1);
 		/*Step Number: 1
 		*Step Name: Step 1: Open Tasks page
 		*Step Description: 
@@ -46,7 +47,7 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- Task details information is displayed in the right pane*/
-		mgTask.checkTaskDetail(task1, prj1);
+		mgTask.checkTaskDetail(task1,true, prj1,defaultStatus);
 		
 		info("delete data");
 		mgProject.deleteProject(prj1, false);

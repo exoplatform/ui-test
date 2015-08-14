@@ -82,7 +82,7 @@ import org.testng.annotations.*;
 		String task1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		info("pre-condition");
 		hp.goToTasks();
-		mgTask.addTaskDirectly(task1);
+		mgTask.addTaskDirectly(task1,true);
 		mgTask.editTaskAssignee(task1, DATA_USER2, DATA_USER3);
 		
 		/*Step Number: 1
@@ -270,7 +270,7 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- task A is in the list*/
-		mgTask.addTaskDirectly(task1);
+		mgTask.addTaskDirectly(task1,true);
 		
 		/*Step number: 3
 		*Step Name: Step 3: Login as user B

@@ -40,7 +40,7 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			new task is created*/
-		mgTask.addTaskDirectly(task1);
+		mgTask.addTaskDirectly(task1,true);
 		
 		/*Step number: 3
 		*Step Name: Step 3: Set due date for created task
@@ -111,7 +111,7 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			new task is created*/
-		mgTask.addTaskDirectly(task1);
+		mgTask.addTaskDirectly(task1,true);
 		
 		/*Step number: 3
 		*Step Name: Step 3: Check display of due date in task row
@@ -165,7 +165,7 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			new task is created*/
-		mgTask.addTaskDirectly(task1);
+		mgTask.addTaskDirectly(task1,true);
 		
 		/*Step number: 3
 		*Step Name: Step 3: Check Due Date format
@@ -306,9 +306,9 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			Tasks page is opened*/
 		hp.goToTasks();
-		mgTask.addTaskDirectly(task1);
-		mgTask.addTaskDirectly(task2);
-		mgTask.addTaskDirectly(task3);
+		mgTask.addTaskDirectly(task1,true);
+		mgTask.addTaskDirectly(task2,true);
+		mgTask.addTaskDirectly(task3,true);
 		
 		/*Step number: 2
 		*Step Name: Step 2: Check group by of list view
@@ -495,9 +495,9 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			Tasks page is opened*/
 		hp.goToTasks();
-		mgTask.addTaskDirectly(task1);
-		mgTask.addTaskDirectly(task2);
-		mgTask.addTaskDirectly(task3);
+		mgTask.addTaskDirectly(task1,true);
+		mgTask.addTaskDirectly(task2,true);
+		mgTask.addTaskDirectly(task3,true);
 		
 		/*Step number: 2
 		*Step Name: Step 2: Check sort by of list view
@@ -652,10 +652,10 @@ import org.testng.annotations.*;
 			On top of the list view
 			- New Task button 
 			- first row is empty and used fast input of a task except: Labels, Projectsand Overdue view.*/ 
-		mgProject.checkTopOfListView("Labels",false);
-		mgProject.checkTopOfListView("Projects",false);
-		mgProject.checkTopOfListView("Overdue",false);
-		mgProject.checkTopOfListView("Incoming",true);
+		mgProject.checkTopOfListView("Labels",false,false);
+		mgProject.checkTopOfListView("Projects",false,true);
+		mgProject.checkTopOfListView("Overdue",false,false);
+		mgProject.checkTopOfListView("Incoming",true,false);
  	}
 
 	/**
@@ -759,7 +759,7 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			new task is created*/
-		mgTask.addTaskDirectly(task1);
+		mgTask.addTaskDirectly(task1,true);
 		
 		/*Step number: 3
 		*Step Name: Step 3: Check when the Due date is not in the same year
@@ -808,9 +808,9 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			new task is created*/
-		mgTask.addTaskDirectly(task1);
-		mgTask.addTaskDirectly(task2);
-		mgTask.addTaskDirectly(task3);
+		mgTask.addTaskDirectly(task1,true);
+		mgTask.addTaskDirectly(task2,true);
+		mgTask.addTaskDirectly(task3,true);
 		mgTask.setDueDate(task1, getDate(0,"dd MMM yyyy"), getDate(0,"dd"),0);
 		mgTask.setDueDate(task2, getDate(1,"dd MMM yyyy"), getDate(1,"dd"),0);
 		mgTask.setDueDate(task3, getDate(-1,"dd MMM yyyy"), getDate(-1,"dd"),0);

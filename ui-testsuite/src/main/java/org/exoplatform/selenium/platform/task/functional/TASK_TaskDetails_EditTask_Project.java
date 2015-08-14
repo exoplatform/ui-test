@@ -77,6 +77,7 @@ import org.testng.annotations.*;
 		String prj1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		String task1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		String task2 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+		String defaultStatus = flowData.getFlowByArrayTypeRandom(1);
 		/*Step Number: 1
 		*Step Name: Step 1: Open Tasks page
 		*Step Description: 
@@ -97,8 +98,8 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- new task is created
 			- project value is No Project*/
-		mgTask.addTaskDirectly(task1);
-		mgTask.checkTaskDetail(task1,"No Project");
+		mgTask.addTaskDirectly(task1,true);
+		mgTask.checkTaskDetail(task1,false,"","");
 		
 		/*Step number: 3
 		*Step Name: Step 3: Add Task in project A
@@ -112,7 +113,7 @@ import org.testng.annotations.*;
 			- project value is project A*/ 
 		mgProject.addProject(prj1, "", false);
 		mgTask.addTask(prj1, task2);
-		mgTask.checkTaskDetail(task2,prj1);
+		mgTask.checkTaskDetail(task2,true,prj1,defaultStatus);
 		
 		info("delete data");
 		mgProject.deleteProject(prj1, false);

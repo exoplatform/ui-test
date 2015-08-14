@@ -69,27 +69,27 @@ public class ManagementTasks extends TaskManagementLocatorObject {
 		switch(op){
 		case Incoming:
 			info("Select Incomming option");
-			clickByJavascript(ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project", "Incoming"),2);
+			click(ELEMENT_LEFT_PANE_INCOMING,0,true);
 			break;
 		case All_Tasks:
 			info("Select All tasks option");
-			click(ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project", "All Tasks"),0,true);
+			click(ELEMENT_LEFT_PANE_ALLTASKS,0,true);
 			break;
 		case Overdue:
 			info("Select Overdue option");
-			click(ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project", "Overdue"),0,true);
+			click(ELEMENT_LEFT_PANE_OVERDUE,0,true);
 			break;
 		case Today:
 			info("Select Today option");
-			click(ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project", "Today"),0,true);
+			click(ELEMENT_LEFT_PANE_TODAY,0,true);
 			break;
 		case Tommorrow:
 			info("Select Tommorrow option");
-			click(ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project", "Tomorrow"),0,true);
+			click(ELEMENT_LEFT_PANE_TOMORROW,0,true);
 			break;
 		case Upcoming:
 			info("Select Upcoming option");
-			click(ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project", "Upcoming"),0,true);
+			click(ELEMENT_LEFT_PANE_UPCOMING,0,true);
 			break;
 		default:
 			info("No option in the list.Please select correct option.");
@@ -135,20 +135,6 @@ public class ManagementTasks extends TaskManagementLocatorObject {
 	}
 	
 	/**
-	 * Open Sorting list of Incoming
-	 */
-	public void goToSortIncomingList(){
-		info("Click on Sort list");
-	}
-	
-	/**
-	 * Open Group list in Incoming
-	 */
-	public void goToGroupIncoming(){
-		info("Click on Group list");
-	}
-	
-	/**
 	 * Add a task into project
 	 * @param project 
 	 * 				can be project
@@ -162,18 +148,18 @@ public class ManagementTasks extends TaskManagementLocatorObject {
 		waitForAndGetElement(ELEMENT_ADD_TASK_TITLE).sendKeys(task);
         driver.findElement(ELEMENT_ADD_TASK_TITLE).sendKeys(Keys.ENTER);
         waitForAndGetElement(ELEMENT_TASK_TITLE.replace("$task", task));
-        waitForElementNotPresent(ELEMENT_LEFT_PANE_TOOLTIP.replace("$mes", "Let's create your first task."));
+        waitForElementNotPresent(ELEMENT_LEFT_PANE_TOOLTIP_TASK);
 		waitForElementNotPresent(ELEMENT_WELCOME_IMG);
 	}
 	/**
 	 * Check first access
 	 */
 	public void checkFirstAccess(){
-		waitForAndGetElement(ELEMENT_LEFT_PANE_TOOLTIP.replace("$mes", "Let's create your first task."));
-		waitForAndGetElement(ELEMENT_WELCOME_TEXT.replace("$message", "Welcome to eXo Tasks"));
+		waitForAndGetElement(ELEMENT_LEFT_PANE_TOOLTIP_TASK);
+		waitForAndGetElement(ELEMENT_WELCOME_TEXT_TASK_DEFAULT);
 		waitForAndGetElement(ELEMENT_WELCOME_IMG);
 		waitForAndGetElement(ELEMENT_LEFT_PANE_NO_PROJECT);
-		waitForAndGetElement(ELEMENT_LEFT_PANE_PROJECT_ACTIVE.replace("$project", "Incoming"));
+		waitForAndGetElement(ELEMENT_LEFT_PANE_INCOMING_ACTIVE);
 	}
 	/**
 	 * Check Task in project
@@ -192,13 +178,16 @@ public class ManagementTasks extends TaskManagementLocatorObject {
 	 * Check task detail
 	 * @param task
 	 * @param project
+	 * @param isProject
+	 * 					true if has project parent
+	 * 					false if has no project
 	 */
-	public void checkTaskDetail(String task,String project){
+	public void checkTaskDetail(String task,boolean isProject,String project,String defaultStatus){
 		openTask(task);
 		waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_TITLE_TEXT.replace("$task", task));
 		waitForAndGetElement(ELEMENT_UNTITLEDTASK_AND_TASK_INPUT.replace("$task", task));
-		if(project!="No Project"){
-			waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_STATUS_TEXT.replace("$flow","To Do"));
+		if(isProject && !defaultStatus.isEmpty()){
+			waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_STATUS_TEXT.replace("$flow",defaultStatus));
 			waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_PROJECT_TEXT.replace("$project",project));
 		}else{
 			waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_NOPROJECT_TEXT);
@@ -207,16 +196,21 @@ public class ManagementTasks extends TaskManagementLocatorObject {
 	/**
 	 * Add a task by clicking directly on the blank field
 	 * @param task
+	 * @param isCheck
+	 * 				true if want to check created task in list
+	 * 				false if dont want
 	 */
-	public void addTaskDirectly(String task){
+	public void addTaskDirectly(String task,boolean isCheck){
 		info("add task: "+ task);
 		click(ELEMENT_ADD_TASK_TITLE);
 		waitForAndGetElement(ELEMENT_ADD_TASK_TITLE).sendKeys(task);
         Utils.pause(500);
         driver.findElement(ELEMENT_ADD_TASK_TITLE).sendKeys(Keys.ENTER);
-        waitForAndGetElement(ELEMENT_TASK_TITLE.replace("$task", task));
-        waitForElementNotPresent(ELEMENT_LEFT_PANE_TOOLTIP.replace("$mes", "Let's create your first task."));
+        waitForElementNotPresent(ELEMENT_LEFT_PANE_TOOLTIP_TASK);
 		waitForElementNotPresent(ELEMENT_WELCOME_IMG);
+		if(isCheck){
+			waitForAndGetElement(ELEMENT_TASK_TITLE.replace("$task", task));
+		}
 	}
 	/**
 	 * Delete task
@@ -438,12 +432,134 @@ public class ManagementTasks extends TaskManagementLocatorObject {
 		waitForAndGetElement(ELEMENT_RIGHT_PANE_COMMENT_TEXT.replace("$user", user).replace("$comment", comment));
 	}
 	/**
-	 * Check order by sort type
+	 * Click on sort by
+	 */
+	public void clickSortBy(){
+		info("click Sort By");
+		click(ELEMENT_SORTBY_ICON);
+	}
+	/**
+	 * Define options in sort by
+	 */
+	public enum optionSortBy{
+		Due_Date,Title,Created_Date,Priority,Rank;
+	}
+	/**
+	 * Select sort by
+	 * @param opt
+	 */
+	public void selectOptSortBy(optionSortBy opt){
+		clickSortBy();
+		switch(opt){
+		case Due_Date:
+			info("Select Due Date");
+			click(ELEMENT_SORTBY_DUEDATE,0,true);
+			break;
+		case Title:
+			info("Select Title");
+			click(ELEMENT_SORTBY_TITLE,0,true);
+			break;
+		case Created_Date:
+			info("Select Created Date");
+			click(ELEMENT_SORTBY_CREATEDDATE,0,true);
+			break;
+		case Priority:
+			info("Select Priority");
+			click(ELEMENT_SORTBY_PRIORITY,0,true);
+			break;
+		case Rank:
+			info("Select Rank");
+			click(ELEMENT_SORTBY_RANK,0,true);
+			break;
+		default:
+			info("No option in the list. Please select correct option.");
+			break;
+		}
+	}
+	/**
+	 * Check order sort by created date
 	 * @param tasks
 	 */
-	public void checkOrderBySortCreatedDate(String[] tasks){
-		for(int i=1;i<=tasks.length;i++){
-			waitForAndGetElement(ELEMENT_TASK_ORDER.replace("$num",String.valueOf(i)).replace("$task", tasks[i]));
+	public void checkSortByCreatedDate(String[] tasks){
+		int i,j;
+		for(i=tasks.length,j=1;i>0;i--,j++)
+			waitForAndGetElement(ELEMENT_TASK_ORDER.replace("$num",String.valueOf(j)).replace("$task", tasks[i-1]));
+		
+	}
+	/**
+	 * Check sort by title: alphabet
+	 * @param tasks
+	 */
+	public void checkSortByTitle(String[] tasks){
+		int i;
+		for(i=1;i<=tasks.length;i++){
+			waitForAndGetElement(ELEMENT_TASK_ORDER.replace("$num",String.valueOf(i)).replace("$task", tasks[i-1]));
+		}
+	}
+	/**
+	 * Click on group by
+	 */
+	public void clickGroupBy(){
+		info("click Group By");
+		click(ELEMENT_GROUPBY_ICON);
+	}
+	/**
+	 * Define options in group by
+	 */
+	public enum optionGroupBy{
+		None,Due_Date,Label,Status,Assignee,Project;
+	}
+	/**
+	 * Select group by
+	 * @param opt
+	 */
+public void selectOptGroupBy(optionGroupBy opt){
+		clickGroupBy();
+		Utils.pause(500);
+		switch(opt){
+		case Due_Date:
+			info("Select Due Date");
+			clickByJavascript(ELEMENT_GROUPBY_DUEDATE,2);
+			break;
+		case None:
+			info("Select None");
+			clickByJavascript(ELEMENT_GROUPBY_NONE,2);
+			break;
+		case Label:
+			info("Select Label");
+			click(ELEMENT_GROUPBY_LABEL,0,true);
+			break;
+		case Status:
+			info("Select Status");
+			click(ELEMENT_GROUPBY_STATUS,0,true);
+			break;
+		case Assignee:
+			info("Select Assignee");
+			clickByJavascript(ELEMENT_GROUPBY_ASSIGNEE,2);
+			break;
+		case Project:
+			info("Select Project");
+			click(ELEMENT_GROUPBY_PROJECT,0,true);
+			break;
+		default:
+			info("No option in the list. Please select correct option.");
+			break;
+		}
+	}
+	/**
+	 * Check group by 
+	 * @param isGroup
+	 * 				true if group by Assignee,Due Date..
+	 * 				false if group by None
+	 * @param header
+	 * @param num
+	 * 			number of tasks 
+	 */
+	public void checkGroupBy(boolean isGroup,String header,int num){
+		if(isGroup){
+			waitForAndGetElement(ELEMENT_GROUPBY_HEADER.replace("$header", header).replace("$num", String.valueOf(num)));
+		}else{
+			waitForElementNotPresent(ELEMENT_GROUPBY_HEADER.replace("$header", header).replace("$num", String.valueOf(num)));
 		}
 	}
 	/**
@@ -455,7 +571,7 @@ public class ManagementTasks extends TaskManagementLocatorObject {
 	public void editTaskTitle(String task,String title){
 		openTask(task);
 		click(ELEMENT_RIGHT_PANE_TASK_TITLE_TEXT.replace("$task", task));
-		if(title!=""){
+		if(!title.isEmpty()){
 			info("Input title");
 			waitForAndGetElement(ELEMENT_EDIT_PROJECT_TITLE_INPUT).clear();
 			waitForAndGetElement(ELEMENT_EDIT_PROJECT_TITLE_INPUT).sendKeys(title);
@@ -467,7 +583,7 @@ public class ManagementTasks extends TaskManagementLocatorObject {
 			waitForAndGetElement(ELEMENT_EDIT_PROJECT_TITLE_INPUT).clear();
 	        Utils.pause(500);
 	        driver.findElement(ELEMENT_EDIT_PROJECT_TITLE_INPUT).sendKeys(Keys.ENTER);
-	        waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_TITLE_TEXT.replace("$task","Untitled Task"));
+	        waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_UNTITLED);
 		}
 	}
 	/**
@@ -496,11 +612,11 @@ public class ManagementTasks extends TaskManagementLocatorObject {
 		openTask(task);
 		Utils.pause(1000);
 		click(ELEMENT_RIGHT_PANE_TASK_DESCRIPTION_LINK);
-		if(des==""){
+		if(des.isEmpty()){
 			info("left description blank");
 			inputFrame(ELEMENT_CKEDITOR_IFRAME, "");
 			mouseOverAndClick(ELEMENT_RIGHT_PANE_TASK_TITLE_TEXT.replace("$task", task));
-			waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_DESCRIPTION_TEXT.replace("$des", "Empty"));
+			waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_DESCRIPTION_EMPTY);
 		}else{
 			info("decorate description");
 			inputFrame(ELEMENT_CKEDITOR_IFRAME, des);
@@ -584,7 +700,7 @@ public class ManagementTasks extends TaskManagementLocatorObject {
 		openTask(task);
 		click(ELEMENT_RIGHT_PANE_TASK_ASSIGN_LINK);
 		info("edit assignee");
-		if(assignee!=""){
+		if(!assignee.isEmpty()){
 			type(ELEMENT_RIGHT_PANE_TASK_ASSIGN_INPUT,assignee,false);
 			Robot robot;
 			try {
@@ -663,7 +779,7 @@ public class ManagementTasks extends TaskManagementLocatorObject {
 	public void checkTaskAssignee(String assignee,String...coworkers){
 		info("check assignee");
 		click(ELEMENT_RIGHT_PANE_TASK_ASSIGN_LINK);
-		if(assignee!=""){
+		if(!assignee.isEmpty()){
 			waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_ASSIGN_TEXT.replace("$user",assignee));
 		}
 		if(coworkers.length>0){
@@ -856,7 +972,7 @@ public class ManagementTasks extends TaskManagementLocatorObject {
 				clickByJavascript(ELEMENT_RIGHT_PANE_TASK_WORKPLAN_NEXTMONTH_ICON1);
 			}
 		}
-		if(fromDay!=""){
+		if(!fromDay.isEmpty()){
 			//cut 0 to get round number, ex 07 > 7
 			if(fromDay.startsWith("0")){
 				fromDay=fromDay.substring(1);
@@ -871,7 +987,7 @@ public class ManagementTasks extends TaskManagementLocatorObject {
 				clickByJavascript(ELEMENT_RIGHT_PANE_TASK_WORKPLAN_NEXTMONTH_ICON2);
 			}
 		}
-		if(toDay!=""){
+		if(!toDay.isEmpty()){
 			//cut 0 to get round number, ex 07 > 7
 			if(toDay.startsWith("0")){
 				toDay=toDay.substring(1);
@@ -1048,7 +1164,7 @@ public class ManagementTasks extends TaskManagementLocatorObject {
 		case None:
 			info("select None");
 			click(ELEMENT_RIGHT_PANE_TASK_DUEDATE_NONE,0,true);
-			waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_DUEDATE_TEXT.replace("$date","No Due Date"));
+			waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_NODUEDATE);
 			break;
 		case Today:
 			info("select Today");
@@ -1104,7 +1220,7 @@ public class ManagementTasks extends TaskManagementLocatorObject {
 	 */
 	public void checkDisplayOfDueDatePopupByDefault(String task){
 		openTask(task);
-		waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_DUEDATE_TEXT.replace("$date","No Due Date"));
+		waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_NODUEDATE);
 		click(ELEMENT_RIGHT_PANE_TASK_DUEDATE_LINK);
 		info("check display of Duedate popup");
 		waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_DUEDATE_CALENDAR);
@@ -1134,9 +1250,9 @@ public class ManagementTasks extends TaskManagementLocatorObject {
 		info("check display of tasks in List View");
 		for (String task : tasks) {
 			waitForAndGetElement(ELEMENT_TASK_DUEDATE.replace("$task", task).replace("$day",getDate(0,"MMM dd")));
-			waitForAndGetElement(ELEMENT_INCOMING_ROW_TASK.replace("$task", task));
+			waitForAndGetElement(ELEMENT_TASK_TITLE.replace("$task", task));
 			mouseOverAndClick(ELEMENT_TASK_TITLE.replace("$task", task));
-			waitForAndGetElement(ELEMENT_TASK_COMPLETE_DISPLAY_CHECKBOX.replace("$task", task));
+			waitForAndGetElement(ELEMENT_TASK_COMPLETE_ICON.replace("$task", task));
 		}
 	}
 	/*
@@ -1146,7 +1262,7 @@ public class ManagementTasks extends TaskManagementLocatorObject {
 	public void completeTask(String task){
 		info("complete task:"+task );
 		mouseHoverByJavaScript(ELEMENT_TASK_TITLE.replace("$task", task),2);
-		clickByJavascript(ELEMENT_TASK_COMPLETE_CHECKBOX.replace("$task", task),2);
+		clickByJavascript(ELEMENT_TASK_COMPLETE_ICON.replace("$task", task),2);
 		Utils.pause(500);
 		waitForElementNotPresent(ELEMENT_TASK_TITLE.replace("$task", task));
 	}
@@ -1157,9 +1273,9 @@ public class ManagementTasks extends TaskManagementLocatorObject {
 	public void checkDisplayOfTaskCheckbox(String task){
 		info("check display of task checkbox");
 		mouseHoverByJavaScript(ELEMENT_TASK_TITLE.replace("$task", task),2);
-		waitForAndGetElement(ELEMENT_TASK_COMPLETE_DISPLAY_CHECKBOX.replace("$task", task));
+		waitForAndGetElement(ELEMENT_TASK_COMPLETE_ICON.replace("$task", task));
 		openTask(task);
-		waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_DISPLAY_CHECKBOX.replace("$task", task));
+		waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_COMPLETE_ICON.replace("$task", task));
 	}
 	/**
      * Define options of duedate
@@ -1191,19 +1307,19 @@ public class ManagementTasks extends TaskManagementLocatorObject {
 		case Today:
 			info("check for today");
 			for (String task : tasks) {
-				waitForAndGetElement(ELEMENT_TASK_DUEDATE.replace("$task", task).replace("$day","Today"));
+				waitForAndGetElement(ELEMENT_TASK_DUEDATE_TODAY.replace("$task", task));
 			}
 			break;
 		case Tomorrow:
 			info("check for tomorrow");
 			for (String task : tasks) {
-				waitForAndGetElement(ELEMENT_TASK_DUEDATE.replace("$task", task).replace("$day","Tomorrow"));
+				waitForAndGetElement(ELEMENT_TASK_DUEDATE_TOMORROW.replace("$task", task));
 			}
 			break;
 		case Yesterday:
 			info("check for yesterday");
 			for (String task : tasks) {
-				waitForAndGetElement(ELEMENT_TASK_DUEDATE.replace("$task", task).replace("$day","Yesterday"));
+				waitForAndGetElement(ELEMENT_TASK_DUEDATE_YESTERDAY.replace("$task", task));
 			}
 			break;
 		default:
