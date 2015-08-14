@@ -11,13 +11,13 @@
 
 	<groupId>org.exoplatform.selenium</groupId>
 	<artifactId>ui-test</artifactId>
-	<version>4.2.x-SNAPSHOT</version>
+	<version>4.3.x-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<properties>
 		<maven.test.skip>true</maven.test.skip>
 		<maven-surefire-plugin.version>2.12.1</maven-surefire-plugin.version>
-		<selenium-java.version>2.47.1</selenium-java.version>
+		<selenium-java.version>2.48.2</selenium-java.version>
 		<testng.version>6.3.1</testng.version>
 		<cargo-maven2-plugin.version>1.1.1</cargo-maven2-plugin.version>
 		<maven-dependency-plugin.version>2.1</maven-dependency-plugin.version>
@@ -121,19 +121,12 @@
 			<version>5.1.26</version>
 		</dependency>
 
-		<!-- <dependency> <groupId>org.exoplatform.platform</groupId> <artifactId>exo.platform.packaging.tomcat</artifactId> 
-			<version>${org.exoplatform.platform.version}</version> <type>zip</type> </dependency> -->
 		<dependency>
 			<groupId>com.holmos</groupId>
 			<artifactId>holmos-webtest</artifactId>
 			<version>1.0.2u9</version>
 		</dependency>
 
-		<!--<dependency> <groupId>jacob-project</groupId> <artifactId>jacob</artifactId> 
-			<version>1.18-M2</version> <scope>system</scope> <systemPath>${user.dir}/ui-testsuite/src/main/resources/TestData/jacob.jar</systemPath> 
-			</dependency> <dependency> <groupId>autoitx4java</groupId> <artifactId>autoitx4java</artifactId> 
-			<version>0.0.1</version> <scope>system</scope> <systemPath>${user.dir}/ui-testsuite/src/main/resources/TestData/AutoItX4Java.jar</systemPath> 
-			</dependency> -->
 	</dependencies>
 	<modules>
 		<module>ui-common</module>

@@ -32,7 +32,24 @@ public class ForumHomePage extends PlatformBase {
 
 	public final String ELEMENT_FORUM_TOPIC_MARKAVERAGE = "//*[@data-original-title='${rate}']";
 	public final String ELEMENT_FORUM_NAVIGATION_BREADCRUMB = "//*[@class='breadcrumb']//*[text()='${name}']";
+	
+	public final By ELEMENT_MY_SUBSCRIPTIONS_EMAIL_UPDATE= By.id("EmailAddress");
 
+	//Private Message
+	public final By ELEMENT_PRIVATE_MESSAGE_COMPOSE_MESSAGE_TAB = By.xpath(".//*[@id='UIPrivateMessageForm']//*[contains(text(),'Compose New Message')]");
+	public final By ELEMENT_COMPOSE_NEW_MESSAGE_INPUT_SEARCH_USER_NAME = By.xpath(".//*[@id='QuickSearch']");
+	public final String ELEMENT_COMPOSE_NEW_MESSAGE_SELECT_SEARCH_OPTION = "//*[contains(@name,'filter')]";
+	public final String ELEMENT_COMPOSE_NEW_MESSAGE_SEARCH_ICON = ".//*[@id='UIUserSelector']//*[contains(@class,'uiIconSearch uiIconLightGray')]";
+	public final By ELEMENT_PRIVATE_MESSAGE_CANCEL = By.xpath(".//*[@id='UIPrivateMessageForm']//*[contains(text(),'Cancel')]");
+	public final By ELEMENT_COMPOSE_NEW_MESSAGE_USER_SELECTOR = By.xpath(".//*[@id='MessageTab']//*[@class='uiIconUser uiIconLightGray']");
+	public final By ELEMENT_COMPOSE_NEW_MESSAGE_CLOSE_USER_SELETOR = By.xpath(".//*[@id='UIUserSelector']//*[contains(text(),'Close')]");
+	
+	//Manage User
+	public final By ELEMENT_FORUM_USER_LIST = By.xpath(".//*[@id='ManageModerator']//*[contains(@class,'uiIconUser')]");
+	public final By ELEMENT_MANAGE_USER_INPUT_SEARCH_USER_NAME = By.xpath(".//*[@id='SearchUser']");
+	public final String ELEMENT_MANAGE_USER_SEARCH_ICON = ".//*[@id='UIModeratorManagementForm']//*[contains(@class,'uiIconSearch uiIconLightGray')]";
+	public final By ELEMENT_USER_FORM_CLOSE = By.xpath(".//*[@id='UIModeratorManagementForm']//*[contains(text(),'Close')]");
+	
 	//Add Category popup
 	public final By ELEMENT_ADDCATEGORY_POPUP_CATEGORY_TAB= By.xpath(".//*[@id='UICategoryForm']//a[text()='Category']");
 	public final By ELEMENT_ADDCATEGORY_POPUP_PERMISSION_TAB= By.xpath(".//*[@id='UICategoryForm']//a[text()='Permissions']");
@@ -72,6 +89,7 @@ public class ForumHomePage extends PlatformBase {
 	//reply on topic
 	public final By ELEMENT_TOPIC_REPLY = By.xpath("//*[@class='pull-left actionContainer']//*[@class='uiPostReplyIcon btn btn-primary']");
 	public final By ELEMENT_TOPIC_REPLY_TITLE = By.xpath("//*[@id='PostTitle']");
+	public final String ELEMENT_TOPIC_PRIVATE_BUTTON = ".//*[contains(text(),'${post}')]/../../../.././/*[contains(@class,'btn')]//*[contains(text(),'Private')]";
 
 
 	//administration
@@ -119,6 +137,7 @@ public class ForumHomePage extends PlatformBase {
 
 	//Topic 
 	public final String ELEMENT_TOPIC_LAST_REPLY = ".//*[contains(text(),'${reply}')]/../../../../following::div[7][@class='uiBox forumQuickReply uiCollapExpand']";
+	public final String ELEMENT_GMAIL_CONTENT_TOPIC = ".//span[contains(.,'\"{$title}\"')]";
 
 	//Button
 	public final By ELEMENT_OK_BTN = By.xpath("//*[@class='btn actionOK']");
@@ -128,6 +147,7 @@ public class ForumHomePage extends PlatformBase {
 
 
 	//Settings 
+	public final By ELEMENT_FORUM_SETTINGS = By.xpath(".//*[@id='EditProfile']//*[contains(@class,'uiIconSetting uiIconLightGray')]");
 	public final By ELEMENT_FORUM_SETTINGS_FORUMSETTINGS = By.xpath("//*[text()='Forum Settings']");
 	public final By ELEMENT_FORUM_SETTINGS_MYSUSCRIB = By.xpath("//*[text()='My Subscriptions']");
 	public final By ELEMENT_FORUM_SETTINGS_SCREENNAME = By.xpath("//*[@id='ScreenName']");
@@ -142,9 +162,11 @@ public class ForumHomePage extends PlatformBase {
 	public final By ELEMENT_FORUM_USERS_POSTS = By.xpath("//*[text()='Posts']");
 	public final By ELEMENT_FORUM_CLOSEBTN = By.xpath("//*[@class='btn' and text()='Close']");
 	public final String ELEMENT_FORUM_VERIFY_USER = "//*[text()='${user}']";
+	public final String ELEMENT_MY_SUBSCRIPTION_TITLE = "//*[@id='ForumUserWatches-tab']//*[contains(text(),'${link}')]";
 
 	//forum & category
 	public final String ELEMENT_FORUM_TITLECAT = "//*[text()='${title}']";
+	public final String ELEMENT_CATEGORY_TITLE = ".//*[contains(@class,'textTitleCategories pull-left')]//*[contains(text(),'${title}')]";
 
 	//add forum
 	public final By ELEMENT_FORUM_FORUM_NAME = By.xpath("//*[@id='ForumTitle']");
@@ -460,5 +482,117 @@ public class ForumHomePage extends PlatformBase {
 		click(ELEMENT_ACTIONBAR_PRIVATE_MESSAGE);
 		Utils.pause(2000);
 	}
-
+	/**
+	 * Go to Compose New Message tab in Private Message
+	 */
+	public void goToComposeNewMessageTab() {
+		info("Click on Compose New Message tab");
+		click(ELEMENT_PRIVATE_MESSAGE_COMPOSE_MESSAGE_TAB);
+		Utils.pause(2000);
+	}
+	
+	/**
+	 * Select User in Compose New Message tab
+	 * 
+	 */
+	public void gotoUserSelectorInComposeNewMessageTab(){
+		info("-- Go to wiki home page --");
+		click(ELEMENT_COMPOSE_NEW_MESSAGE_USER_SELECTOR);
+	}
+	
+	/**
+	 * function: Search user in User Selection Form when Compose New Private Message
+	 * 
+	 */
+	
+	public void searchUser(String user, String searchOption) {
+		info("--Search user " + user + "--");
+		type(ELEMENT_COMPOSE_NEW_MESSAGE_INPUT_SEARCH_USER_NAME, user, true);
+		select(ELEMENT_COMPOSE_NEW_MESSAGE_SELECT_SEARCH_OPTION, searchOption);
+		click(ELEMENT_COMPOSE_NEW_MESSAGE_SEARCH_ICON);
+		waitForTextPresent(user);
+	}
+	
+	public void searchUserNotFound(String user, String searchOption) {
+		info("--Search user " + user + "--");
+		type(ELEMENT_COMPOSE_NEW_MESSAGE_INPUT_SEARCH_USER_NAME, user, true);
+		select(ELEMENT_COMPOSE_NEW_MESSAGE_SELECT_SEARCH_OPTION, searchOption);
+		click(ELEMENT_COMPOSE_NEW_MESSAGE_SEARCH_ICON);
+		waitForTextNotPresent(user);
+	}
+	
+	/**
+	 * Cancel send Private Message 
+	 */
+	public void cancelSendPrivateMessage(){
+		info("Cancel Add or Edit Forum");
+		click(ELEMENT_PRIVATE_MESSAGE_CANCEL);
+	}
+	
+	/**
+	 * Close User Selector page
+	 */
+	public void closeUserSelector(){
+		info("-- Go to User Selector page --");
+		click(ELEMENT_COMPOSE_NEW_MESSAGE_CLOSE_USER_SELETOR);
+		Utils.pause(2000);
+	}
+	
+	/**
+	 * Go to Manage User in Forum
+	 */
+	public void goToManageUser() {
+		// TODO Auto-generated method stub
+		info("Click on Users button on Forum administration bar");
+		click(ELEMENT_FORUM_USER_LIST);
+		Utils.pause(2000);
+	}
+	
+	/**
+	 * function: Search user in User Manage Form
+	 * 
+	 */
+	
+	public void searchUserInUserList(String user, String searchOption) {
+		info("--Search user " + user + "--");
+		type(ELEMENT_MANAGE_USER_INPUT_SEARCH_USER_NAME, user, true);
+		click(ELEMENT_MANAGE_USER_SEARCH_ICON);
+		waitForTextPresent(user);
+	}
+	
+	public void searchUserInUserListNotFound(String user, String searchOption) {
+		info("--Search user " + user + "--");
+		type(ELEMENT_MANAGE_USER_INPUT_SEARCH_USER_NAME, user, true);
+		click(ELEMENT_MANAGE_USER_SEARCH_ICON);
+		waitForTextNotPresent(user);
+	}
+	
+	/**
+	 * Close User form
+	 */
+	public void closeUserForm(){
+		info("-- Go to User form --");
+		click(ELEMENT_USER_FORM_CLOSE);
+		Utils.pause(2000);
+	}
+	
+	/**
+	 * Go to My Subscription
+	 */
+	public void gotoMySubscriptions(){
+		click(ELEMENT_FORUM_SETTINGS);
+		click(ELEMENT_FORUM_SETTINGS_MYSUSCRIB);
+	}
+	
+	/**
+	 * Update email in Sub-scriptions
+	 * 
+	 */
+	public void updateEmailInMySubscriptions(String email){
+	    info("Update Email in My Subscriptions ");
+	    type (ELEMENT_MY_SUBSCRIPTIONS_EMAIL_UPDATE,email,true);
+	    click(ELEMENT_FORUM_SETTINGS_UPDATE);
+	    waitForTextPresent(email);
+	}
+	
 }

@@ -17,6 +17,7 @@ import org.testng.annotations.*;
 		info("Test 1: Check disabled user in invited member list of Space");
 		createNewUser();
 		createSpace();
+		hp.goToSpecificSpace(space);
 		spaHome.goToSpaceSettingTab();
 		setSpaceMg.goToMemberTab();
 		setSpaceMg.inviteUser(username,true,username+" "+lastName);
@@ -32,6 +33,7 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- User A is displayed*/ 
 		hp.goToSpecificSpace(space);
+		spaHome.goToSpaceSettingTab();
 		setSpaceMg.checkUserInInvitedSpace(username+" "+lastName, space, true);
 		deleteUser();
  	}
@@ -70,6 +72,7 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- User A is NOT displayed*/ 
 		hp.goToSpecificSpace(space);
+		spaHome.goToSpaceSettingTab();
 		spaMg.verifyMember(username+" "+lastName, false);
 		deleteUser();
  	}
@@ -101,7 +104,8 @@ import org.testng.annotations.*;
 		*Input Data: 
 			
 		*Expected Outcome: 
-			- User A is not displayed*/ 
+			- User A is not displayed*/
+		spaHome.goToSpaceSettingTab();
 		setSpaceMg.checkUserSelectorInviteSpace(username+" "+lastName,false);
 		deleteUser();
  	}
@@ -131,6 +135,8 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- User A is NOT displayed in the search result list*/ 
+		hp.goToSpecificSpace(space);
+		spaHome.goToSpaceSettingTab();
 		setSpaceMg.checkSearchUserInviteSpace(username,false);
 		deleteUser();
  	}}

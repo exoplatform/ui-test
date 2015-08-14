@@ -33,11 +33,7 @@ public class Forum_Category extends Forum_TestConfig{
 
 		 *Expected Outcome: 
 			Category is created successfully.*/
-
-		info("go to Forum home page");
-		hp.goToForum();
-		info("Add a category");
-		forumCatMag.addCategorySimple(nameCat,"",description);
+	
 
 		/*Step number: 2
 		 *Step Name: Watch a category
@@ -138,6 +134,8 @@ public class Forum_Category extends Forum_TestConfig{
 		info("Test 03: Edit a category");
 		info("edit category");
 		forumCatMag.editCategory(nameCat2);
+		
+		
 		info("Test 04: Delete a category");
 		info("delete category");
 		forumHP.goToHomeCategory();

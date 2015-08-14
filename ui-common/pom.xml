@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>org.exoplatform.selenium</groupId>
 		<artifactId>ui-test</artifactId>
-		<version>4.2.x-SNAPSHOT</version>
+		<version>4.3.x-SNAPSHOT</version>
 	</parent>
 
 	<artifactId>ui-common</artifactId>
@@ -38,6 +38,8 @@
 							<goal>jar</goal>
 						</goals>
 						<configuration>
+							<additionalparam>-Xdoclint:none</additionalparam>
+
 							<skip>${javadoc.skip}</skip>
 							<sourcepath>${source.folder}</sourcepath>
 							<doctitle>eXo Platform - Java Selenium Test Framework

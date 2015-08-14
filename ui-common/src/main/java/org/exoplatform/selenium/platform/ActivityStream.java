@@ -174,7 +174,8 @@ public class ActivityStream extends PlatformBase {
 	public final String ELEMENT_LIKE_NUMBER = "//*[contains(text(),\"${title}\")]/../../../..//*[contains(@class,'uiIconThumbUp')]/..";
 	public final String ELEMENT_COMMENT_BUTTON = "//*[contains(text(), \"${activityText}\")]/../../../..//button[contains(@id,'CommentButton')]";
 	public final String ELEMENT_ACTIVITY_ADD_YOUR_COMMENTLABEL = "//*[contains(text(),\"${activityText}\")]/../../../..//*[contains(@id,'DisplayCommentTextarea')]/../div[@class='placeholder']";
-	public final String ELEMENT_DELETE_COMMENT_BUTTON = "//*[contains(text(),'${activityText}')]/../../../..//div[@class='commentList']/div[contains(@id,'commentContainer')]//p[@class='contentComment'  and contains(text(),\"${commentText}\")]/../../a[contains(@id,'DeleteCommentButton')]";
+	public final String ELEMENT_DELETE_COMMENT_BUTTON = "//*[contains(text(),'${activityText}')]/..//*[@class='contentComment'  and contains(text(),\"${commentText}\")]/../..//*[contains(@id,'DeleteCommentButton')]";
+	
 	public final String ELEMENT_COMMENT_TEXT = "//*[contains(text(),\"${activityText}\")]/../../../..//p[@class='contentComment'  and contains(.,\"${commentText}\")]";
 	public final String ELEMENT_COMMENT_TEXT_QUOTES = "//*[contains(text(),\"${activityText}\")]/../../../..//p[@class='contentComment'  and contains(.,'${commentText}')]";
 	public final String ELEMENT_ACTIVITY_LIKE_ICON_BLUE = ".//*[contains(text(),'${nameFile}')]/../../../..//*[@class='uiIconThumbUp uiIconBlue']";
@@ -528,7 +529,8 @@ public class ActivityStream extends PlatformBase {
 		click (ELEMENT_ICON_COMMENT.replace("${title}", activityText));
 		WebElement commentText = waitForAndGetElement(ELEMENT_COMMENTBOX.replace("${title}", activityText));
 		WebElement commentButton = waitForAndGetElement(ELEMENT_COMMENT_BUTTON.replace("${activityText}", activityText));
-		WebElement workingLabel = waitForAndGetElement(ELEMENT_ACTIVITY_ADD_YOUR_COMMENTLABEL.replace("${activityText}", activityText));
+		WebElement workingLabel = waitForAndGetElement(ELEMENT_ACTIVITY_ADD_YOUR_COMMENTLABEL
+				.replace("${activityText}", activityText));
 
 		((JavascriptExecutor)driver).executeScript("arguments[0].textContent = '';", workingLabel);
 		((JavascriptExecutor)driver).executeScript("arguments[0].textContent = '"+contentOfComment+"';", commentText);
@@ -536,7 +538,9 @@ public class ActivityStream extends PlatformBase {
 		((JavascriptExecutor)driver).executeScript("arguments[0].className = 'btn pull-right btn-primary';", commentButton);
 		click(ELEMENT_COMMENT_BUTTON.replace("${activityText}", activityText));
 		info("Verify comment successfully");
-		waitForAndGetElement(ELEMENT_DELETE_COMMENT_BUTTON.replace("${activityText}", activityText).replace("${commentText}", contentOfComment), DEFAULT_TIMEOUT,1,2);
+		waitForAndGetElement(ELEMENT_DELETE_COMMENT_BUTTON.
+				replace("${activityText}", activityText).
+				replace("${commentText}", contentOfComment), DEFAULT_TIMEOUT,1,2);
 		info("Add comment successfully");
 	}
 
@@ -660,7 +664,7 @@ public class ActivityStream extends PlatformBase {
 		Utils.pause(3000);
 		info("-- Verify that an activity has been added --");
 		if (text!="" && text!=null){
-			waitForAndGetElement(By.xpath(ELEMENT_ACTIVITY_AUTHOR_ACTIVITY.replace("${activityText}", text)));
+			waitForAndGetElement(ELEMENT_ACTIVITY_AUTHOR_ACTIVITY.replace("${activityText}", text),3000,1);
 		}
 	}
 	/**

@@ -55,6 +55,14 @@ public class ForumTopicManagement extends PlatformBase {
 	public final By ELEMENT_START_TOPIC_POPUP_TITLE = By.xpath(".//*[@id='UIForumPopupWindow']//span[@class='PopupTitle popupTitle']");
 	public final By ELEMENT_START_TOPIC_POPUP_TITLE_FILED = By.id("ThreadTitle");
 	public final By ELEMENT_START_TOPIC_BTN = By.xpath(".//*[contains(@class,'uiIconForumCreateTopic')]");
+	public final By ELEMENT_TOPIC_PERMISSION_TAB = By.xpath(".//*[@id='UITopicForm']//*[contains(text(),'Permissions')]");
+	public final By ELEMENT_TOPIC_PERMISSION_TAB_USER_SELECTOR = By.xpath(".//*[@id='ThreadPermission']//*[@class='uiIconUser uiIconLightGray']");
+	public final By ELEMENT_TOPIC_PERMISSION_INPUT_SEARCH_USER_NAME = By.xpath(".//*[@id='QuickSearch']");
+	public final String ELEMENT_TOPIC_PERMISSION_SELECT_SEARCH_OPTION = "//*[contains(@name,'filter')]";
+	public final String ELEMENT_TOPIC_PERMISSION_SEARCH_ICON = ".//*[@id='UIUserSelector']//*[contains(@class,'uiIconSearch uiIconLightGray')]";
+	public final By ELEMENT_TOPIC_CANCEL = By.xpath(".//*[@id='UITopicForm']//*[contains(text(),'Cancel')]");
+	public final By ELEMENT_TOPIC_PERMISSION_CLOSE_USER_SELETOR = By.xpath(".//*[@id='UIUserSelector']//*[contains(text(),'Close')]");
+	
 	// reply post form 
     public final By ELEMENT_TITLE_POST = By.id("PostTitle");
     public final By ELEMENT_POST_CONTENT = By.xpath("//iframe[@class='cke_wysiwyg_frame cke_reset']");
@@ -642,5 +650,59 @@ public class ForumTopicManagement extends PlatformBase {
 		selectItemMoreActionMenuTopic(specifMoreActionMenuTopic.EDIT);
 		forumPerm.selectPermGroupMemberInTopic(groupPath, member, isView,isPost);
 		click(ELEMENT_SUBMIT_BUTTON);
+	}	
+	/**
+	 * Open permissions tab in Add/Edit Topic
+	 */
+	public void goToPermissions(){
+		info("Permissions page");
+		   click(ELEMENT_TOPIC_PERMISSION_TAB);
+	}
+	
+	/**
+	 * Select User in Permission tab
+	 * 
+	 */
+	public void gotoUserSelectorInPermissionTab(){
+		info("-- Go to wiki home page --");
+		click(ELEMENT_TOPIC_PERMISSION_TAB_USER_SELECTOR);
+	}
+	
+	/**
+	 * function: Search user in User Selection Form in Topic Permission
+	 * 
+	 */
+	
+	public void searchUser(String user, String searchOption) {
+		info("--Search user " + user + "--");
+		type(ELEMENT_TOPIC_PERMISSION_INPUT_SEARCH_USER_NAME, user, true);
+		select(ELEMENT_TOPIC_PERMISSION_SELECT_SEARCH_OPTION, searchOption);
+		click(ELEMENT_TOPIC_PERMISSION_SEARCH_ICON);
+		waitForTextPresent(user);
+	}
+	
+	public void searchUserNotFound(String user, String searchOption) {
+		info("--Search user " + user + "--");
+		type(ELEMENT_TOPIC_PERMISSION_INPUT_SEARCH_USER_NAME, user, true);
+		select(ELEMENT_TOPIC_PERMISSION_SELECT_SEARCH_OPTION, searchOption);
+		click(ELEMENT_TOPIC_PERMISSION_SEARCH_ICON);
+		waitForTextNotPresent(user);
+	}
+	
+	/**
+	 * Close User Selector page
+	 */
+	public void closeUserSelector(){
+		info("-- Go to User Selector page --");
+		click(ELEMENT_TOPIC_PERMISSION_CLOSE_USER_SELETOR);
+		Utils.pause(2000);
+	}
+	
+	/**
+	 * Cancel Add/Edit Forum form
+	 */
+	public void cancelAddEditTopic(){
+		info("Cancel Add or Edit Forum");
+		click(ELEMENT_TOPIC_CANCEL);
 	}
 }

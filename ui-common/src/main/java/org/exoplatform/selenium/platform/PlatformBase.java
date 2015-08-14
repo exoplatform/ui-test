@@ -32,12 +32,14 @@ public class PlatformBase extends TestBase {
 	public static String DATA_NAME_USER3 = "James Davis";
 	public static String DATA_NAME_USER4 = "Jack Miller";
 	public static String DATA_NAME_ROOT = "Root Root";
+	public static String ADMINISTRATION_GROUP = "Administration";
+	public static String PLATFORM_GROUP = "Platform";
 	
 	//Gmail
 	public final String GMAIL_URL = "https://mail.google.com";
 	public final String EMAIL_ADDRESS1 = "exomailtest01@gmail.com";
 	public final String EMAIL_ADDRESS2 = "fqaexovn@gmail.com";
-	public final String EMAIL_PASS = "exoadmin";
+	public final String EMAIL_PASS = "exoadmin1";
 	public final String ELEMENT_MAIL_SUBJECT = ".//span[contains(.,'${subject}')]";
 	public final By ELEMENT_DELETE_MAIL = By.xpath("//*[@id=':ro']/div[2]//*[@class='ar9 T-I-J3 J-J5-Ji']");
 	public final By ELEMENT_DELETE_MAIL_2 = By.xpath(".//*[@class='iH']//*[@data-tooltip='Delete']//*[@class='ar9 T-I-J3 J-J5-Ji']");

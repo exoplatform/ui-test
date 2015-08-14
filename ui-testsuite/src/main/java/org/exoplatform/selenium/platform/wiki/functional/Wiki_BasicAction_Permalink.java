@@ -44,7 +44,7 @@ import org.testng.annotations.*;
 		arrayPage.add(title);
 		
 		info("Make public the page");
-		wHome.publicPage();
+		wHome.restrictedPage(true);
 		
 		info("Verify that the page is published");
 		wValidate.verifyPublishedPage();
@@ -159,7 +159,7 @@ import org.testng.annotations.*;
 		arrayPage.add(title);
 		
 		info("Make public the page");
-		wHome.publicPage();
+		wHome.restrictedPage(true);
 		
 		info("Verify that the page is published");
 		wValidate.verifyPublishedPage();
@@ -266,7 +266,7 @@ import org.testng.annotations.*;
 		arrayPage.add(title);
 		
 		info("Make public the page");
-		wHome.publicPage();
+		wHome.restrictedPage(true);
 		
 		info("Verify that the page is published");
 		wValidate.verifyPublishedPage();
@@ -687,7 +687,7 @@ import org.testng.annotations.*;
 		arrayPage.add(title);
 		
 		info("Make public the page");
-		wHome.publicPage();
+		wHome.restrictedPage(true);
 		
 		info("Verify that the page is published");
 		wValidate.verifyPublishedPage();
@@ -842,7 +842,7 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			the Permission Indicator is refreshed accordingly.*/ 
 		info("Make public the page");
-		wHome.publicPage();
+		wHome.restrictedPage(true);
 		
 		info("Verify that the page is published");
 		wValidate.verifyPublishedPage();

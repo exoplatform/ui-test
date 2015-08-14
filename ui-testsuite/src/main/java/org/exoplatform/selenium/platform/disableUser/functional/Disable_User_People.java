@@ -69,7 +69,7 @@ import org.testng.annotations.*;
 	@Test
 	public  void test02_CheckDisableUserInRequestPendingPage() {
 		info("Test 2: Check disable user in Request Pending page");
-		createNewUser();
+		
 		/*Step Number: 1
 		*Step Name: Step 1: Open Connection Request
 		*Step Description: 
@@ -81,6 +81,7 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- The User A is displayed in the "Requests Pending" page*/
+		createNewUser();
 		hp.goToConnections();
 		connMag.checkDisplayInConnection(username, true, selectTabOption.ALL);
 		connMag.connectToAUser(username);

@@ -17,6 +17,8 @@ import org.testng.annotations.*;
 			searchUserName = userSearchOptionData.getUserSearchOptionByIndex(0);
 			info("remove existed user with EMAIL_ADDRESS2");
 			navToolBar.goToUsersAndGroupsManagement();
+			info("Change disabled user status to ALL");
+			userAndGroup.selectDisableStatus("All");
 			userAndGroup.searchUser(EMAIL_ADDRESS2, searchEmail);
 			if(isTextPresent(EMAIL_ADDRESS2))
 			userAndGroup.deleteUser();
@@ -26,10 +28,9 @@ import org.testng.annotations.*;
 			addUserPage.addUser(username, password, email, username, lastName);
 			navToolBar.goToUsersAndGroupsManagement();
 	 	 	userAndGroup.goToGroupTab();
-	 	 	click (userAndGroup.ELEMENT_GROUP_MANAGEMENT_SELECT_GROUP.replace("${name}", "Platform"));
-	 	 	click (userAndGroup.ELEMENT_GROUP_MANAGEMENT_SELECT_GROUP.replace("${name}", "Content Management"));
+	 	 	userAndGroup.selectGroup("Platform/Content Management");
 	 	 	userAndGroup.addUsersToGroup(username, membership, false, true);
-	 	 	click (userAndGroup.ELEMENT_GROUP_MANAGEMENT_SELECT_GROUP.replace("${name}", "Administration"));
+	 	 	userAndGroup.selectGroup("Administration");
 	 	 	userAndGroup.addUsersToGroup(username, membership, false, true);
 	 	 	
 		}

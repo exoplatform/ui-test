@@ -1,6 +1,7 @@
 package org.exoplatform.selenium.platform.disableUser.functional;
 
 import static org.exoplatform.selenium.TestLogger.info;
+
 import org.exoplatform.selenium.Utils;
 import org.exoplatform.selenium.platform.social.MyNotificationsSetting.myNotiType;
 import org.testng.annotations.*;
@@ -17,7 +18,8 @@ import org.testng.annotations.*;
 	/**
 	*<li> Case ID:128113.</li>
 	*<li> Test Case Name: Check intranet notification for disabled user.</li>
-	*<li> Pre-Condition: User A is member in Intranet and was able to receive social notification on intranetUser A is disabled</li>
+	*<li> Pre-Condition: User A is member in Intranet and 
+	*was able to receive social notification on intranetUser A is disabled</li>
 	*<li> Post-Condition: </li>
 	*/
 	@Test

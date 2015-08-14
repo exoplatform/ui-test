@@ -18,6 +18,7 @@ import org.testng.annotations.*;
 			searchUserName = userSearchOptionData.getUserSearchOptionByIndex(0);
 			info("remove existed user with EMAIL_ADDRESS2");
 			navToolBar.goToUsersAndGroupsManagement();
+			userAndGroup.selectDisableStatus("All");
 			userAndGroup.searchUser(EMAIL_ADDRESS2, searchEmail);
 			if(isTextPresent(EMAIL_ADDRESS2))
 			userAndGroup.deleteUser();
@@ -77,7 +78,6 @@ import org.testng.annotations.*;
 		cMang.checkDisplayOfCalendar(calendar, true);
 		
 		info("delete data");
-		cMang.deleteCalendar(calendar, true);
 		deleteUser();
  	}
 
@@ -286,12 +286,10 @@ import org.testng.annotations.*;
 			- Email invitation is not received*/ 
 		goToMail(EMAIL_ADDRESS2, EMAIL_PASS);
 		Utils.pause(20000);
-		cMang.checkEmailNotificationCalendar(event2,"icalendar.ics","","",false);
+		cMang.checkEmailNotificationCalendar(event2,"","","",false);
         switchToParentWindow();
         
 		info("delete data");
-		hp.goToCalendarPage();
-		cMang.deleteTaskEvent(event2);
 		deleteUser();
  	}
 
@@ -348,6 +346,7 @@ import org.testng.annotations.*;
 			- The User A is disabled*/
 		magAc.signOut();
 		magAc.signIn(DATA_USER1, DATA_PASS);
+		Utils.pause(2000);
 		disableUser();
  	 	
 		/*Step number: 2
@@ -440,8 +439,6 @@ import org.testng.annotations.*;
 		hp.goToCalendarPage();
 		evMg.checkDisplayOfEvent(event,true);
 		
-		info("delete data");
-		cMang.deleteCalendar(calendar, true);
 		magAc.signOut();
 		magAc.signIn(DATA_USER1,DATA_PASS);
 		deleteUser();

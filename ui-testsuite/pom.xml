@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>org.exoplatform.selenium</groupId>
 		<artifactId>ui-test</artifactId>
-		<version>4.2.x-SNAPSHOT</version>
+		<version>4.3.x-SNAPSHOT</version>
 	</parent>
 
 	<artifactId>ui-testsuite</artifactId>
@@ -545,18 +545,6 @@
 			</properties>
 		</profile>
 		<profile>
-			<id>forum-sniff-part1</id>
-			<properties>
-				<testSuite>forum-sniff-part1.xml</testSuite>
-			</properties>
-		</profile>
-		<profile>
-			<id>forum-sniff-part2</id>
-			<properties>
-				<testSuite>forum-sniff-part2.xml</testSuite>
-			</properties>
-		</profile>
-		<profile>
 			<id>plf-sniff-part1</id>
 			<properties>
 				<testSuite>plf-sniff-part1.xml</testSuite>
@@ -593,6 +581,36 @@
 			</properties>
 		</profile>
 		<profile>
+			<id>shareInContent-func-part1</id>
+			<properties>
+				<testSuite>shareInContent-func-part1.xml</testSuite>
+			</properties>
+		</profile>
+		<profile>
+			<id>shareInContent-func-part2</id>
+			<properties>
+				<testSuite>shareInContent-func-part2.xml</testSuite>
+			</properties>
+		</profile>
+		<profile>
+			<id>shareInContent-func-part3</id>
+			<properties>
+				<testSuite>shareInContent-func-part3.xml</testSuite>
+			</properties>
+		</profile>
+		<profile>
+			<id>forum-sniff-part1</id>
+			<properties>
+				<testSuite>forum-sniff-part1.xml</testSuite>
+			</properties>
+		</profile>
+		<profile>
+			<id>forum-sniff-part2</id>
+			<properties>
+				<testSuite>forum-sniff-part2.xml</testSuite>
+			</properties>
+		</profile>
+        <profile>
 			<id>disableUser-func-part1</id>
 			<properties>
 				<testSuite>disableUser-func-part1.xml</testSuite>
@@ -620,6 +638,15 @@
 
 	<build>
 		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.2</version>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
 			<!-- Execute integration tests -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>

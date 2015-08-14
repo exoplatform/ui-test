@@ -292,13 +292,13 @@ public class NavigationToolbar extends PlatformBase {
 		case MY_PROFILE:
 			click(ELEMENT_MY_PROFILE_LINK);
 			Utils.pause(2000);
-			waitForAndGetElement(myPro.ELEMENT_MY_PROFILE_TAB,3000,0);
+			waitForAndGetElement(myPro.ELEMENT_MY_PROFILE_TAB,3000,1);
 			break;
 		case MY_ACTIVITY:
 			info("Go to Activities of User");
 			waitForAndGetElement(ELEMENT_ACTIVITIES_LINK);
 			click(ELEMENT_ACTIVITIES_LINK);
-			waitForAndGetElement(ELEMENT_ACTIVITIES_PORTLET, 2000);
+			waitForAndGetElement(ELEMENT_ACTIVITIES_PORTLET, 2000,1);
 			break;
 		case MY_CONNECTIONS:
 			click(ELEMENT_MY_CONNECTION_LINK);

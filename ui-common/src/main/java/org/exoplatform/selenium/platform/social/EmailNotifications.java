@@ -163,7 +163,7 @@ public class EmailNotifications extends NotificationLocator{
 	 * @param fullName
 	 *                 is full name of the user
 	 * @param content
-	 *                  is the title of email notification
+	 *                  is the content of email notification
 	 */
 	public void verifyPresentEmailActivityNotifications(String title,String fullName,String content,String... isParams){
 		if(!content.isEmpty()){
@@ -182,6 +182,38 @@ public class EmailNotifications extends NotificationLocator{
 			}else {
 				info("Verify that email notificaiton is sent to user's inbox");
 				waitForAndGetElement(ELEMENT_GMAIL_TITLE
+						.replace("$title",title)
+						.replace("$fullName", fullName),30000, 1);
+			}
+		}
+	}
+	
+	/**
+	 * Verify email notification's title of comment an Activity is shown
+	 * @param title 
+	 *                  is the title of email notification
+	 * @param fullName
+	 *                 is full name of the user
+	 * @param content
+	 *                  is the content of email notification
+	 */
+	public void verifyNotPresentEmailActivityNotifications(String title,String fullName,String content,String... isParams){
+		if(!content.isEmpty()){
+			info("Verify that email notificaiton is sent to user's inbox");
+			waitForElementNotPresent(ELEMENT_GMAIL_TITLE
+					.replace("$title",title)
+					.replace("$fullName", fullName)
+					.replace("$content",content),30000, 1);
+		}else{
+			if(isParams.length>0){
+				info("Verify that email notificaiton is sent to user's inbox");
+				waitForElementNotPresent(ELEMENT_GMAIL_TITLE_WITH_INDEX
+						.replace("$title",title)
+						.replace("$fullName", fullName)
+						.replace("$num",isParams[0]),30000, 1);
+			}else {
+				info("Verify that email notificaiton is sent to user's inbox");
+				waitForElementNotPresent(ELEMENT_GMAIL_TITLE
 						.replace("$title",title)
 						.replace("$fullName", fullName),30000, 1);
 			}
@@ -638,37 +670,7 @@ public class EmailNotifications extends NotificationLocator{
 	}
 	
 
-	/**
-	 * Verify email notification's title of comment an Activity is shown
-	 * @param title 
-	 *                  is the title of email notification
-	 * @param fullName
-	 *                 is full name of the user
-	 * @param content
-	 *                  is the content of email notification
-	 */
-	public void verifyNotPresentEmailActivityNotifications(String title,String fullName,String content,String... isParams){
-		if(!content.isEmpty()){
-			info("Verify that email notificaiton is sent to user's inbox");
-			waitForElementNotPresent(ELEMENT_GMAIL_TITLE
-					.replace("$title",title)
-					.replace("$fullName", fullName)
-					.replace("$content",content),30000, 1);
-		}else{
-			if(isParams.length>0){
-				info("Verify that email notificaiton is sent to user's inbox");
-				waitForElementNotPresent(ELEMENT_GMAIL_TITLE_WITH_INDEX
-						.replace("$title",title)
-						.replace("$fullName", fullName)
-						.replace("$num",isParams[0]),30000, 1);
-			}else {
-				info("Verify that email notificaiton is sent to user's inbox");
-				waitForElementNotPresent(ELEMENT_GMAIL_TITLE
-						.replace("$title",title)
-						.replace("$fullName", fullName),30000, 1);
-			}
-		}
-	}
+	
 }
 
 

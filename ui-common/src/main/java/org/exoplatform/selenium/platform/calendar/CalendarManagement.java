@@ -1021,21 +1021,21 @@ public class CalendarManagement extends CalendarLocatorObject{
 	 * @param user
 	 * @param opParams
 	 */
-	public void checkEmailNotificationCalendar(String titleEventTask,String fileAttch,String link,String user,Object... opParams){
+	public void checkEmailNotificationCalendar(String titleEventTask,String fileAttch,String link,String user,Boolean... opParams){
 		info("Check and delete mail");
-		Boolean checkOrNo = (Boolean)(opParams.length > 0 ? opParams[0]: true);
 		String parentWindow = driver.getWindowHandle();
 		info("parentWindow:"+parentWindow);
 		  for(String windowHandle  : driver.getWindowHandles()){
 			     driver.switchTo().window(windowHandle);
 			     info("driver.title:"+driver.getTitle());
 		}
-		if (opParams.length > 0) {
-			if (checkOrNo == true)
-				waitForAndGetElement(ELEMENT_GMAIL_CONTENT_INVITATION_EMAIL.replace("$eventTask",titleEventTask),30000,1);
-            else 
-            	waitForElementNotPresent(ELEMENT_GMAIL_CONTENT_INVITATION_EMAIL.replace("$eventTask",titleEventTask),30000,1);
-		}
+		  if(opParams.length>0){
+			  if (opParams[0]==true)
+					waitForAndGetElement(ELEMENT_GMAIL_CONTENT_INVITATION_EMAIL.replace("$eventTask",titleEventTask),30000,1);
+		        else 
+		            waitForElementNotPresent(ELEMENT_GMAIL_CONTENT_INVITATION_EMAIL.replace("$eventTask",titleEventTask),30000,1);
+		  }
+		
 		if(opParams.length>1){
 			info("Click on the email");
 			click(ELEMENT_GMAIL_CONTENT_INVITATION_EMAIL.replace("$eventTask",titleEventTask));

@@ -27,6 +27,13 @@ public class ForumForumManagement extends PlatformBase {
 	public final By ELEMENT_ADDFORUM_POPUP_DESCRIPTION= By.id("Description");
 	public final By ELEMENT_ADDFORUM_POPUP_SAVE_BUTTON= By.xpath(".//*[@id='UIForumForm']//button[text()='Save']");
 	public final By ELEMENT_ADDFORUM_POPUP_CANCEL_BUTTON= By.xpath(".//*[@id='UIForumForm']//button[text()='Cancel']");
+	public final By ELEMENT_FORUM_PERMISSION_TAB = By.xpath(".//*[@id='UIForumForm']//*[contains(text(),'Permissions')]");
+	public final By ELEMENT_FORUM_PERMISSION_TAB_USER_SELECTOR = By.xpath(".//*[@id='forumPermission']//*[@class='uiIconUser uiIconLightGray']");
+	public final By ELEMENT_FORUM_CANCEL = By.xpath(".//*[@id='UIForumForm']//*[contains(text(),'Cancel')]");
+	public final By ELEMENT_FORUM_PERMISSION_CLOSE_USER_SELETOR = By.xpath(".//*[@id='UIUserSelector']//*[contains(text(),'Close')]");
+	public final By ELEMENT_FORUM_PERMISSION_INPUT_SEARCH_USER_NAME = By.xpath(".//*[@id='QuickSearch']");
+	public final String ELEMENT_FORUM_PERMISSION_SELECT_SEARCH_OPTION = "//*[contains(@name,'filter')]";
+	public final String ELEMENT_FORUM_PERMISSION_SEARCH_ICON = ".//*[@id='UIUserSelector']//*[contains(@class,'uiIconSearch uiIconLightGray')]";
 	
 	//More Action menu
 	public final By ELEMENT_MORE_ACTION = By.xpath("//*[@class='uiIconSettings uiIconLightGray']");
@@ -328,5 +335,64 @@ public class ForumForumManagement extends PlatformBase {
 		}else{
 			waitForElementNotPresent(ELEMENT_START_TOPIC_BTN);
 		}
+	}	
+	/**
+	 * Open permissions tab in Add/Edit Forum form
+	 */
+	public void goToPermissions(){
+		info("Permissions page");
+		   click(ELEMENT_FORUM_PERMISSION_TAB);
+	}
+	
+	/**
+	 * Select User in Permission tab
+	 * 
+	 */
+	public void gotoUserSelectorInPermissionTab(){
+		info("-- Go to wiki home page --");
+		click(ELEMENT_FORUM_PERMISSION_TAB_USER_SELECTOR);
+	}
+	
+	/**
+	 * Cancel Add/Edit Forum form
+	 */
+	public void cancelAddEditForum(){
+		info("Cancel Add or Edit Forum");
+		click(ELEMENT_FORUM_CANCEL);
+	}
+	
+	/**
+	 * Close User Selector page
+	 */
+	public void closeUserSelector(){
+		info("-- Go to User Selector page --");
+		click(ELEMENT_FORUM_PERMISSION_CLOSE_USER_SELETOR);
+		Utils.pause(2000);
+	}
+	
+	/**
+	 * function: Search user in User Selection Form in Forum Permission
+	 * @param user
+	 * @param searchOption
+	 */
+	
+	public void searchUser(String user, String searchOption) {
+		info("--Search user " + user + "--");
+		type(ELEMENT_FORUM_PERMISSION_INPUT_SEARCH_USER_NAME, user, true);
+		select(ELEMENT_FORUM_PERMISSION_SELECT_SEARCH_OPTION, searchOption);
+		click(ELEMENT_FORUM_PERMISSION_SEARCH_ICON);
+		waitForTextPresent(user);
+	}
+	/**
+	 * Search user not found
+	 * @param user
+	 * @param searchOption
+	 */
+	public void searchUserNotFound(String user, String searchOption) {
+		info("--Search user " + user + "--");
+		type(ELEMENT_FORUM_PERMISSION_INPUT_SEARCH_USER_NAME, user, true);
+		select(ELEMENT_FORUM_PERMISSION_SELECT_SEARCH_OPTION, searchOption);
+		click(ELEMENT_FORUM_PERMISSION_SEARCH_ICON);
+		waitForTextNotPresent(user);
 	}
 }

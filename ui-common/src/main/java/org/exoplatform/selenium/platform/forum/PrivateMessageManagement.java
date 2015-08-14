@@ -17,12 +17,19 @@ public class PrivateMessageManagement extends PlatformBase{
 	public By ELEMENT_TABS_SENT_MESSAGES = By.xpath("//*[@id='UIPrivateMessageForm']//*[@class='nav nav-tabs']//*[contains(text(),'Sent Messages')]");
 	public By ELEMENT_TABS_INBOX = By.xpath("//*[@id='UIPrivateMessageForm']//*[@class='nav nav-tabs']//*[contains(text(),'Inbox')]");
 	public By ELEMENT_TABS_COMPOSE_MESSAGE = By.xpath("//*[@id='UIPrivateMessageForm']//*[@class='nav nav-tabs']//*[contains(text(),'Compose New Message')]");
+	public By ELEMENT_PRIVATE_MESSAGE_CANCEL_BUTTON = By.xpath("//*[@id='UIPrivateMessageForm']//*[contains(text(),'Cancel')]");
 	
 	//send messages
 	public By ELEMENT_SEND_TO_MESSAGE = By.id("SendTo");
 	public By ELEMENT_TITLE_MESSAGE = By.id("MailTitle");
 	public By ELEMENT_MESSAGE_CONTENT = By.xpath("//iframe[@class='cke_wysiwyg_frame cke_reset']");
 	public By ELEMENT_SEND_BUTTON = By.xpath("//*[@id='UIPrivateMessageForm']//*[@class='uiAction']//*[contains(text(),'Send')]");
+	public final By ELEMENT_COMPOSE_NEW_MESSAGE_GROUP_SELECTOR = By.xpath(".//*[@id='MessageTab']//*[contains(@class,'uiIconGroup')]");
+	public final String ELEMENT_PRIVATE_MESSAGE_SELECT_GROUP=".//*[contains(@title,'${name}')]";
+	public final String ELEMENT_PRIVATE_MESSAGE_SELECT_A_GROUP=".//*[@id='UIGroupSelector']//*[contains(text(),'Select this Group')]";
+	public final String ELEMENT_PRIVATE_MESSAGE_SEND_SUCCESSFULLY = "Your message was sent successfully.";
+	public final By ELEMENT_COMPOSE_NEW_MESSAGE_MEMBERSHIP_SELECTOR = By.xpath(".//*[@id='MessageTab']//*[contains(@class,'uiIconMembership uiIconLightGray')]");
+	public final String ELEMENT_PRIVATE_MESSAGE_SELECT_A_MEMBERSHIP=".//*[@id='UIMemberShipSelector']//*[contains(text(),'${membership}')]";
 	
 	//inbox
 	public String ELEMENT_TITLE_AUTHORS_INBOX = "//*[@id='UIListInBoxPrivateMessage']//*[contains(text(),'{$author}')]/../..//*[contains(text(),'{$title}')]";
@@ -65,6 +72,13 @@ public class PrivateMessageManagement extends PlatformBase{
 	 */
 	public void goComposeMessage(){
 		click(ELEMENT_TABS_COMPOSE_MESSAGE);
+	}
+	
+	/**
+	 * Go to Inbox tab
+	 */
+	public void gotoInboxTab(){
+		click(ELEMENT_TABS_INBOX);
 	}
 	
 	/**
@@ -120,6 +134,14 @@ public class PrivateMessageManagement extends PlatformBase{
 		}
 	}
 	/**
+	 * check inbox message not found
+	 * @param title
+	 */
+	public void checkInboxMessageNotFound(String title){
+		waitForElementNotPresent(By.xpath(ELEMENT_CONTACT_INBOX.replace("{$content}",title)));
+	}
+	
+	/**
 	 * Reply a message
 	 * @param contact
 	 * @param title
@@ -165,5 +187,60 @@ public class PrivateMessageManagement extends PlatformBase{
 		click(By.xpath(ELEMENT_DELETE_MESSAGE.replace("{$title}",title).replace("{$contact}",contact)));
 		click(ELEMENT_CONFIRM);
 		waitForElementNotPresent(By.xpath(ELEMENT_TITLE_AUTHORS_INBOX.replace("{$title}",title).replace("{$author}",contact)));
+	}
+	
+	/**
+	 * Open Select Group Form
+	 */
+
+	public void openSelectGroupForm(){
+		click(ELEMENT_COMPOSE_NEW_MESSAGE_GROUP_SELECTOR);
+	}
+	
+	/**
+	 * Open Select Membership Form
+	 */
+
+	public void openSelectMembershipForm(){
+		click(ELEMENT_COMPOSE_NEW_MESSAGE_MEMBERSHIP_SELECTOR);
+	}
+	
+	/**
+	 * Write message to group
+	 * @param group
+	 */
+
+	public void writeMessageToGroup(String group, String title, String content){
+		click (ELEMENT_PRIVATE_MESSAGE_SELECT_GROUP.replace("${name}", group));
+		click (ELEMENT_PRIVATE_MESSAGE_SELECT_A_GROUP.replace("${name}", group));
+		type(ELEMENT_TITLE_MESSAGE,title,true);
+		inputFrame(ELEMENT_MESSAGE_CONTENT, content);
+		click(ELEMENT_SEND_BUTTON);
+		waitForMessage(ELEMENT_PRIVATE_MESSAGE_SEND_SUCCESSFULLY);
+		button.ok();
+		Utils.pause(2000);
+	}
+	
+	/**
+	 * Write message to group
+	 * @param group
+	 */
+
+	public void writeMessageToMembership(String group, String membership, String title, String content){
+		click (ELEMENT_PRIVATE_MESSAGE_SELECT_GROUP.replace("${name}", group));
+		click (ELEMENT_PRIVATE_MESSAGE_SELECT_A_MEMBERSHIP.replace("${membership}", membership));
+		type(ELEMENT_TITLE_MESSAGE,title,true);
+		inputFrame(ELEMENT_MESSAGE_CONTENT, content);
+		click(ELEMENT_SEND_BUTTON);
+		waitForMessage(ELEMENT_PRIVATE_MESSAGE_SEND_SUCCESSFULLY);
+		button.ok();
+		Utils.pause(2000);
+	}
+	
+	/**
+	 * Go inbox tab
+	 */
+	public void cancelPrivateMessage(){
+		click(ELEMENT_PRIVATE_MESSAGE_CANCEL_BUTTON);
 	}
 }

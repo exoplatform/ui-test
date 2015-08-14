@@ -67,6 +67,7 @@ import org.testng.annotations.*;
 		info("Test 3: Check toggles and their tooltips for enabled/disabled users");
 		createNewUser();
 		String[] users={username,DATA_USER3};
+		searchUserName = userSearchOptionData.getUserSearchOptionByIndex(0);
 		navToolBar.goToUsersAndGroupsManagement();
  	 	userAndGroup.checkStatusDropBox();
  	 	disableUser();
@@ -87,7 +88,11 @@ import org.testng.annotations.*;
 			- A new Column "Enabled" is displayed before the column "Action"
 			- Toggles are displayed in the column: + For enabled users: toggle displays Yes.+ For disabled user: toggle displays No.*/
  	 	userAndGroup.checkDisplayAllUsers(users);
+ 	 	userAndGroup.selectDisableStatus("Enabled");
+ 	 	userAndGroup.searchUser(DATA_USER3, searchUserName);
  	 	userAndGroup.checkDisplayEnableUser(DATA_USER3);
+ 	 	userAndGroup.selectDisableStatus("Disabled");
+ 	 	userAndGroup.searchUser(username, searchUserName);
  	 	userAndGroup.checkDisplayDisableUser(username);
  	 	
 		/*Step number: 2

@@ -53,7 +53,8 @@ import org.testng.annotations.*;
 	/**
 	*<li> Case ID:128004.</li>
 	*<li> Test Case Name: Check email from watch on answers app for disabled user.</li>
-	*<li> Pre-Condition: User A has watched an answerUser A is disabledUser B is admin</li>
+	*<li> Pre-Condition: User A has watched an answer
+	*User A is disabledUser B is admin</li>
 	*<li> Post-Condition: </li>
 	* BUG: https://jira.exoplatform.org/browse/ANS-17
 	*/

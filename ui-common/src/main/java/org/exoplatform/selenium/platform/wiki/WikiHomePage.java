@@ -320,25 +320,7 @@ public class WikiHomePage extends WikiLocators{
 		Utils.pause(2000);
 	}
 
-	/**
-	 * Public a page from infor bar or More menu
-	 * @param opParams
-	 */
-	public void publicPage(Boolean...opParams){
-		info("Make Public page");
-		Boolean useRestrictLink = (Boolean)(opParams.length>0 ? opParams[0]:false);
-		if(useRestrictLink){
-			waitForAndGetElement(ELEMENT_RESTRICTED_WIKI_ICON);
-			click(ELEMENT_RESTRICTED_WIKI_ICON);
-		}
-		else{
-			goToPermalink();
-		}
-		click(ELEMENT_MAKE_PUBLIC_BUTTON);
-		waitForAndGetElement(ELEMENT_MAKE_RESTRICT_BUTTON);
-		dialog.closeMessageDialog();
-		Utils.pause(2000);
-	}
+	
 	/**
 	 * Restricted a page from infor bar or More menu
 	 * @param opParams
@@ -360,7 +342,6 @@ public class WikiHomePage extends WikiLocators{
 	}
 	
 	/**
-<<<<<<< HEAD
 	 * Gets a permanent link by a given value.
 	 * 
 	 * @return The value.

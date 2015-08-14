@@ -35,6 +35,14 @@ public class ForumCategoryManagement extends PlatformBase {
 	public final By ELEMENT_ADDCATEGORY_POPUP_DESCRIPTION= By.id("Description");
 	public final By ELEMENT_ADDCATEGORY_POPUP_SAVE_BUTTON= By.xpath(".//*[@id='UICategoryForm']//button[text()='Save']");
 	public final By ELEMENT_ADDCATEGORY_POPUP_CANCEL_BUTTON= By.xpath(".//*[@id='UICategoryForm']//button[text()='Cancel']");
+	public final By ELEMENT_ADDCATEGORY_RESTRICTED_AUDIENCE = By.xpath(".//*[@id='DetailTab']//*[@class='uiIconUser uiIconLightGray']");
+	public final By ELEMENT_RESTRICTED_AUDIENCE_INPUT_SEARCH_USER_NAME = By.xpath(".//*[@id='QuickSearch']");
+	public final String ELEMENT_RESTRICTED_AUDIENCE_SELECT_SEARCH_OPTION = "//*[contains(@name,'filter')]";
+	public final String ELEMENT_RESTRICTED_AUDIENCE_SEARCH_ICON = ".//*[@id='UIUserSelector']//*[contains(@class,'uiIconSearch uiIconLightGray')]";
+	public final By ELEMENT_RESTRICTED_AUDIENCE_CLOSE_USER_SELETOR = By.xpath(".//*[@id='UIUserSelector']//*[contains(text(),'Close')]");
+	public final By ELEMENT_CATEGORY_CANCEL = By.xpath(".//*[@id='UICategoryForm']//*[contains(text(),'Cancel')]");
+	public final By ELEMENT_CATEGORY_PERMISSION_TAB = By.xpath(".//*[@id='UICategoryForm']//*[contains(text(),'Permissions')]");
+	public final By ELEMENT_CATEGORY_PERMISSION_TAB_USER_SELECTOR = By.xpath(".//*[@id='PermissionTab']//*[@class='uiIconUser uiIconLightGray']");
 	
 	//Popup confirmation
 	public final By ELEMENT_OK_DELETE = By.xpath("//*[@id='UIForumPopupConfirmation']//*[text()='OK']");
@@ -270,5 +278,64 @@ public class ForumCategoryManagement extends PlatformBase {
 		}else{
 			waitForElementNotPresent(ELEMENT_FORUM_CATEGORY_HOME_TITLE_LINK.replace("${name}", cat));
 		}
+	}
+	public void gotoUserSelectorForRestrictedAudience(){
+		info("-- Go to wiki home page --");
+		click(ELEMENT_ADDCATEGORY_RESTRICTED_AUDIENCE);
+	}
+	
+	/**
+	 * function: Search user in User Seletion Form in Restricted Audience
+	 * 
+	 */
+	
+	public void searchUser(String user, String searchOption) {
+		info("--Search user " + user + "--");
+		type(ELEMENT_RESTRICTED_AUDIENCE_INPUT_SEARCH_USER_NAME, user, true);
+		select(ELEMENT_RESTRICTED_AUDIENCE_SELECT_SEARCH_OPTION, searchOption);
+		click(ELEMENT_RESTRICTED_AUDIENCE_SEARCH_ICON);
+		waitForTextPresent(user);
+	}
+	
+	public void searchUserNotFound(String user, String searchOption) {
+		info("--Search user " + user + "--");
+		type(ELEMENT_RESTRICTED_AUDIENCE_INPUT_SEARCH_USER_NAME, user, true);
+		select(ELEMENT_RESTRICTED_AUDIENCE_SELECT_SEARCH_OPTION, searchOption);
+		click(ELEMENT_RESTRICTED_AUDIENCE_SEARCH_ICON);
+		waitForTextNotPresent(user);
+	}
+	
+	/**
+	 * Close User Selector page
+	 */
+	public void closeUserSelector(){
+		info("-- Go to User Selector page --");
+		click(ELEMENT_RESTRICTED_AUDIENCE_CLOSE_USER_SELETOR);
+		Utils.pause(2000);
+	}
+	
+	/**
+	 * Open permissions tab in Add/Edit Category form
+	 */
+	public void goToPermissions(){
+		info("Permissions page");
+		   click(ELEMENT_CATEGORY_PERMISSION_TAB);
+	}
+	
+	/**
+	 * Select User in Permission tab
+	 * 
+	 */
+	public void gotoUserSelectorInPermissionTab(){
+		info("-- Go to wiki home page --");
+		click(ELEMENT_CATEGORY_PERMISSION_TAB_USER_SELECTOR);
+	}
+	
+	/**
+	 * Cancel Add/Edit Category form
+	 */
+	public void cancelAddEditCategory(){
+		info("Cancel Add or Edit Category");
+		click(ELEMENT_CATEGORY_CANCEL);
 	}
 }

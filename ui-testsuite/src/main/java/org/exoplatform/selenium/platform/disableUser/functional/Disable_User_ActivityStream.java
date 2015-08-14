@@ -1,6 +1,8 @@
 package org.exoplatform.selenium.platform.disableUser.functional;
 
 import static org.exoplatform.selenium.TestLogger.info;
+
+import org.exoplatform.selenium.Utils;
 import org.exoplatform.selenium.platform.ActivityStream.optionMenuActivity;
 import org.testng.annotations.*;
 
@@ -13,7 +15,7 @@ import org.testng.annotations.*;
             username = userInfoData.getUserNameByIndex(5)+getRandomString();
 			password = userInfoData.getPassWordByIndex(5)+getRandomString();
 			lastName = userInfoData.getLastNameByIndex(5)+getRandomString();
-			email = EMAIL_ADDRESS1;
+			email = username+"@gmail.com";
 			searchUserName = userSearchOptionData.getUserSearchOptionByIndex(0);
 			info("remove existed user with EMAIL_ADDRESS1");
 			navToolBar.goToUsersAndGroupsManagement();
@@ -26,8 +28,7 @@ import org.testng.annotations.*;
 			addUserPage.addUser(username, password, email, username, lastName);
 			navToolBar.goToUsersAndGroupsManagement();
 	 	 	userAndGroup.goToGroupTab();
-	 	 	click (userAndGroup.ELEMENT_GROUP_MANAGEMENT_SELECT_GROUP.replace("${name}", "Platform"));
-	 	 	click (userAndGroup.ELEMENT_GROUP_MANAGEMENT_SELECT_GROUP.replace("${name}", "Administration"));
+	 	 	userAndGroup.selectGroup("Platform/Administration");
 	 	 	userAndGroup.addUsersToGroup(username, membership, false, true);
 	 	 	
 	 	 	info ("Connect with user");
@@ -748,21 +749,25 @@ import org.testng.annotations.*;
 	/**
 	*<li> Case ID:131090.</li>
 	*<li> Test Case Name: Check Connections stream of disabled user after re-enable active user in case more than 20 activities.</li>
-	*<li> Pre-Condition: User A and User B are active usersUser A and User B are connectedUser A is enabled, User B is adminThere are more than 20 activities on Connections stream of User A</li>
+	*<li> Pre-Condition: User A and User B are active users
+	*User A and User B are connected
+	*User A is enabled, User B is admin
+	*There are more than 20 activities on Connections stream of User A</li>
 	*<li> Post-Condition: </li>
 	*/
 	@Test
 	public  void test11_CheckConnectionsStreamOfDisabledUserAfterReenableActiveUserInCaseMoreThan20Activities() {
 		info("Test 11 Check Connections stream of disabled user after re-enable active user in case more than 20 activities");
-		String activity1 = txData.getContentByArrayTypeRandom(1) + getRandomNumber();
+		String activity1;
 		String activity2 = txData.getContentByArrayTypeRandom(1) + getRandomNumber();
 		String activity3 = txData.getContentByArrayTypeRandom(1) + getRandomNumber();
 		createUser();
 		info("add many activities");
 		hp.goToHomePage();
 		for(int i=0;i<18;i++){
-			hpAct.addActivity(i+activity1, "");
-			hpAct.checkActivity(i+activity1);
+			activity1 = txData.getContentByArrayTypeRandom(1) + getRandomNumber();
+			hpAct.addActivity(activity1, "");
+			hpAct.checkActivity(activity1);
 		}
 		/*Step Number: 1
 		*Step Name: Step 1: Share activity on All activities stream
@@ -775,6 +780,7 @@ import org.testng.annotations.*;
 			- The activity (1) is displayed on All activities stream.*/
 		magAc.signOut();
 		magAc.signIn(DATA_USER1, DATA_PASS);
+		Utils.pause(2000);
 		hpAct.addActivity(activity2, "");
 		hpAct.checkActivity(activity2);
 
@@ -788,6 +794,7 @@ import org.testng.annotations.*;
 			- User A can see the activity (1) shared by the User B*/
 		magAc.signOut();
 		magAc.signIn(username, password);
+		Utils.pause(2000);
  	 	hpAct.checkActivity(activity2);
  	 	
 		/*Step number: 3
@@ -802,6 +809,7 @@ import org.testng.annotations.*;
 			- The activity is shared on All activities stream*/
  	 	magAc.signOut();
 		magAc.signIn(DATA_USER1,DATA_PASS);
+		Utils.pause(2000);
 		disableUser();
  	 	
  	 	hp.goToHomePage();
@@ -823,6 +831,7 @@ import org.testng.annotations.*;
  	 	
  	 	magAc.signOut();
 		magAc.signIn(username, password);
+		Utils.pause(2000);
 		hpAct.selectOptMenuActivity(optionMenuActivity.Connections);
  	 	hpAct.checkActivity(activity2);
  	 	hpAct.checkNoActivity(activity3);
@@ -837,8 +846,7 @@ import org.testng.annotations.*;
 	*<li> Case ID:131085.</li>
 	*<li> Test Case Name: Check Connections stream of disabled user after re-enable active user via crash addon in case less than 20 activities.</li>
 	*<li> Pre-Condition: User A and User B are active usersUser A and User B are connectedUser A is enabled, User B is adminThere are less than 20 activities (For example: 5 activities) on Connections stream of User A"exo
-	-crash
-	-tomcat" addon has already installedHow to check the activity via crash addon:
+	-crash-tomcat" addon has already installedHow to check the activity via crash addon:
 	- telnet localhost 5000
 	- repo use container=portal
 	- ws login 
@@ -986,7 +994,10 @@ import org.testng.annotations.*;
 	/**
 	*<li> Case ID:131092.</li>
 	*<li> Test Case Name: Check Connections stream of disabled user after re-enable inactive user in case less than 20 activities.</li>
-	*<li> Pre-Condition: User A is inactive user (User A do not log in to plf in 30 days or 45 days, for example), User A is enabledUser B is active user, User B is adminUser A and User B are connectedThere are less than 20 activities (For example: 5 activities) on Connections stream of User A</li>
+	*<li> Pre-Condition: User A is inactive user (User A do not log in to plf in 30 days or 45 days, for example), 
+	*User A is enabledUser B is active user, User B is admin
+	*User A and User B are connectedThere are less than 20 activities 
+	*(For example: 5 activities) on Connections stream of User A</li>
 	*<li> Post-Condition: </li>
 	* CANNOT AUTO
 	*/
@@ -1348,12 +1359,14 @@ import org.testng.annotations.*;
 			- Activity (2) is displayed on All activities stream of User B and on activity stream of User A*/
 		magAc.signOut();
 		magAc.signIn(DATA_USER1, DATA_PASS);
+		Utils.pause(2000);
 		hpAct.checkActivity(activity1);
 		hpAct.addActivity(activity2, "");
 		hpAct.checkActivity(activity2);
 		
 		magAc.signOut();
 		magAc.signIn(username,password);
+		Utils.pause(2000);
 		hpAct.checkActivity(activity2);
 		
 		/*Step number: 2
@@ -1369,8 +1382,10 @@ import org.testng.annotations.*;
 			- Activity (3), Comments and like for activity (1) and activity (2) are displayed*/
 		hpAct.likeActivity(activity1);
 		hpAct.addCommentUsingJavascript(activity1, comment1);
+		Utils.pause(2000);
 		hpAct.likeActivity(activity2);
 		hpAct.addCommentUsingJavascript(activity2, comment2);
+		Utils.pause(2000);
 		hpAct.addActivity(activity3, "");
 		hpAct.checkActivity(activity3);
 		
@@ -1393,6 +1408,7 @@ import org.testng.annotations.*;
 			- Past activities of User A (activity (3)), comments and likes of User A for activity (1) and activity (2) still remains.*/ 
 		magAc.signOut();
 		magAc.signIn(DATA_USER1,DATA_PASS);
+		Utils.pause(2000);
 		disableUser();
  	 	
  	 	hp.goToHomePage();

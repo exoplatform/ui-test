@@ -368,7 +368,7 @@ public class UserProfilePage extends PlatformBase {
 		info("Click on Activity tab");
 		click(ELEMETN_ACTIVITY_TAB);
 		Utils.pause(3000);
-    }
+	}
 	/**
 	 * Connect in profile page
 	 * @param user

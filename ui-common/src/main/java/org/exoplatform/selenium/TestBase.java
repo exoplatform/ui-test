@@ -782,7 +782,11 @@ public class TestBase {
 	}
 
 	/**
+<<<<<<< HEAD
 	 * Check term and conditions
+=======
+	 *  Check term and conditions
+>>>>>>> FQA-2581: PLF 4.3 - Write High Fnc/Disable User/Forum
 	 * @param opParams
 	 */
 	public void termsAndConditions(Object... opParams){
@@ -832,7 +836,6 @@ public class TestBase {
 		Utils.pause(3000);   
 		info("End of term and conditions");
 	}
-
 	/**
 	 * Create new first account
 	 */

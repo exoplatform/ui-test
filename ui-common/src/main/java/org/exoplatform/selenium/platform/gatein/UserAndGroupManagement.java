@@ -59,7 +59,14 @@ public class UserAndGroupManagement extends PlatformBase {
 	public final String ELEMENT_MEMBERSHIP_INPUT = "//input[@value='${membershipName}']";
 	public final String ELEMENT_USER_EDIT_ICON = ".//*[contains(text(),'${username}')]/../..//*[@data-original-title='Edit User Info']/i";
 
+	//Paging control
+	public final By ELEMENT_PAGINATION_CONTROL=By.xpath(".//*[contains(@class,'pagination')]");
+	public final By ELMEMENT_PAGINATION_CONTROL_DISBALED_NEXT_ARROW=By.xpath(".//*[@class='disabled']//*[contains(@class,'uiIconNextArrow')]");
+	public final By ELEMENT_PAGINATION_TOTAL_PAGE=By.xpath("//*[contains(@class,'pagesTotalNumber')]");
+	public final By ELEMENT_PAGINATION_ENABLED_NEXT_ARROW=By.xpath(".//*[@ data-original-title='Next Page']//*[@class='uiIconNextArrow']");
+	
 	//User tab
+	public final String ELEMENT_USER_TAB=".//*[@id='UIOrganizationPortlet']//*[contains(@class,'uiIconUser uiIconLightGray')]";
 	public final String ELEMENT_CLOSE_MESSAGE = "//*[contains(@title,'Close Window')]";
 	public final By ELEMENT_INPUT_SEARCH_USER_NAME = By.id("searchTerm");
 	public final String ELEMENT_SELECT_SEARCH_OPTION = "//*[contains(@name,'searchOption')]";
@@ -111,15 +118,15 @@ public class UserAndGroupManagement extends PlatformBase {
 	//Disable Users
 	public final By ELEMENT_DISABLE_USER_DROP_BOX=By.id("UIListUsers-userStatusFilter");
 	public final String ELEMENT_DISABLE_USER_HANDLE_BTN=".//*[@id='UIListUsersGird']//*[contains(text(),'$userName')]/../..//*[contains(@class,'switchBtnHandle')]";
-    public final String ELEMENT_DISBALE_USER_ENABLED=".//*[@id='UIListUsersGird']//*[contains(text(),'$userName')]/../..//*[@data-original-title='Disable User']/*[@checked='checked']";
+    public final String ELEMENT_DISBALE_USER_ENABLED=".//*[@id='UIListUsersGird']//*[contains(text(),'$userName')]/../..//*[@data-original-title='Disable User']";
     public final String ELEMENT_DISBALE_USER_DISABLED=".//*[@id='UIListUsersGird']//*[contains(text(),'$userName')]/../..//*[@data-original-title='Enable User']";
     public final By ELEMENT_DISABLE_USER_COLUMN = By.xpath(".//th[@id='DisableEnableUser'][contains(.,'Enabled')]");
     public final By ELEMENT_DISABLE_USER_STATUS_DISABLED= By.xpath("//*[@id='UIListUsers-userStatusFilter']/*[contains(.,'Disabled')]");
     public final By ELEMENT_DISABLE_USER_STATUS_ALL= By.xpath("//*[@id='UIListUsers-userStatusFilter']/*[contains(.,'All')]");
     public final By ELEMENT_DISABLE_USER_STATUS_ENABLED= By.xpath("//*[@id='UIListUsers-userStatusFilter']/*[contains(.,'Enabled')]");
     public final String ELEMENT_DISABLE_USER_STATUS_SELECTED ="//*[@id='UIListUsers-userStatusFilter']/*[contains(.,'$status')][@selected='selected']";
-    public final String ELEMENT_DISABLE_USER_TOGGLE_NO = "//*[@id='UIListUsersGird']//*[contains(text(),'$userName')]/../..//*[contains(@class,'switchBtnLabelOff')]/*[contains(.,'No')]";
-    public final String ELEMENT_DISABLE_USER_TOGGLE_YES = "//*[@id='UIListUsersGird']//*[contains(text(),'$userName')]/../..//*[contains(@class,'switchBtnLabelOn')]/*[contains(.,'Yes')]";
+    public final String ELEMENT_DISABLE_USER_TOGGLE_NO = "//*[@id='UIListUsersGird']//*[contains(text(),'$userName')]/../..//*[contains(@class,'switchBtnLabelOff')]//*[contains(text(),'No')]";
+    public final String ELEMENT_DISABLE_USER_TOGGLE_YES = "//*[@id='UIListUsersGird']//*[contains(text(),'$userName')]/../..//*[contains(@class,'switchBtnLabelOn')]//*[contains(text(),'Yes')]";
     
     
     ManageAlert alert;
@@ -632,7 +639,11 @@ public class UserAndGroupManagement extends PlatformBase {
 		if (isTextNotPresent(user))
 			click(ELEMENT_OK_BUTTON);
 	}
-	
+	/**
+	 * Search User is not found
+	 * @param user
+	 * @param searchOption
+	 */
 	public void searchUserNotFound(String user, String searchOption) {
 		info("--Search user " + user + "--");
 		if (isTextPresent("Search")) {
@@ -642,6 +653,32 @@ public class UserAndGroupManagement extends PlatformBase {
 		
 		click(ELEMENT_SEARCH_ICON_USERS_MANAGEMENT);
 		waitForTextNotPresent(user);
+	}
+	
+	
+	/**
+	 * Find a user by clicking next arrow
+	 * @param user
+	 */
+	public void findUsersBbyNextArrow(String user){
+		if(waitForAndGetElement(ELEMENT_PAGINATION_CONTROL,2000,0)!=null){
+			int totalPage = Integer.parseInt(waitForAndGetElement(ELEMENT_PAGINATION_TOTAL_PAGE).getText());
+			//if not found user
+			if (waitForAndGetElement( ELEMENT_USER_DELETE_ICON.replace("${username}",
+					user), 2000, 0) == null){
+				//click on next arrow
+				for(int i=0;i<totalPage;i++){
+					info("Click on Next arrow");
+					click(ELEMENT_PAGINATION_ENABLED_NEXT_ARROW);
+					//if found the user, break the loop
+					if (waitForAndGetElement( ELEMENT_USER_DELETE_ICON.replace("${username}",
+							user), 2000, 0) != null) break;
+					//if next arrow is disabled, break the loop
+					if(waitForAndGetElement(ELMEMENT_PAGINATION_CONTROL_DISBALED_NEXT_ARROW,2000,0)!=null)
+						break;
+				}
+			}
+		}
 	}
 	
 	
@@ -672,12 +709,15 @@ public class UserAndGroupManagement extends PlatformBase {
 		Utils.pause(1000);
 		if(isEnabled){
 			info("Verify that user is enabled");
+			selectDisableStatus("Enabled");
 			waitForAndGetElement(ELEMENT_DISBALE_USER_ENABLED.replace("$userName",userName),2000,1);
 		}else{
 			info("Verify that user is disabled");
-			waitForElementNotPresent(ELEMENT_DISBALE_USER_ENABLED.replace("$userName",userName));
+			selectDisableStatus("Disabled");
+			waitForElementNotPresent(ELEMENT_DISBALE_USER_ENABLED.replace("$userName",userName),2000,1);
 		}
 	}
+	
 	/**
 	 * Verify that the user is shown in the user list
 	 * @param userName
@@ -729,23 +769,8 @@ public class UserAndGroupManagement extends PlatformBase {
 			waitForMessage(ELEMENT_MSG_RESULT);
 			dialog.closeMessageDialog();
 			Utils.pause(2000);
-			
 		}
 	}
-	
-	/**
-	 * function: Delete user
-	 *//*
-	public void deleteUser() {
-		info("--Deleting user ");
-		if (waitForAndGetElement( ELEMENT_USER_DELETE_ICON1, 2000, 0) != null) {
-			Utils.pause(2000);
-			click( ELEMENT_USER_DELETE_ICON1);
-			alert.waitForConfirmation(ELEMENT_MSG_CONFIRM_DELETE1);
-			Utils.pause(1000);
-			waitForElementNotPresent(ELEMENT_USER_DELETE_ICON1);
-		}
-	}*/
 	/**
 	 * Remove a user from a group
 	 * @param username
@@ -773,7 +798,7 @@ public class UserAndGroupManagement extends PlatformBase {
 	 */
 	public void checkStatusDropBox(){
 		info("check status drop box");
-		waitForAndGetElement(ELEMENT_DISABLE_USER_STATUS_SELECTED.replace("$status", "Enabled"));
+		waitForAndGetElement(ELEMENT_DISABLE_USER_STATUS_SELECTED.replace("$status", "Enabled"),2000,1);
 		waitForAndGetElement(ELEMENT_DISABLE_USER_DROP_BOX);
 		waitForAndGetElement(ELEMENT_DISABLE_USER_STATUS_ALL);
 		waitForAndGetElement(ELEMENT_DISABLE_USER_STATUS_DISABLED);
@@ -788,6 +813,7 @@ public class UserAndGroupManagement extends PlatformBase {
  	 	waitForAndGetElement(ELEMENT_INPUT_SEARCH_USER_NAME).clear();
  	 	click(ELEMENT_SEARCH_ICON_USERS_MANAGEMENT);
  	 	for (String user : users) {
+ 	 		findUsersBbyNextArrow(user);
  	 		verifyUserPresent(user);
 		}
 	}
@@ -798,11 +824,10 @@ public class UserAndGroupManagement extends PlatformBase {
 	public void checkDisplayEnableUser(String...users){
 		info("check display of enable users");
 		waitForAndGetElement(ELEMENT_DISABLE_USER_COLUMN);
-		
  	 	for (String user : users) {
  	 		waitForAndGetElement(ELEMENT_DISBALE_USER_ENABLED.replace("$userName", user),2000,1);
- 	 		waitForAndGetElement(ELEMENT_DISABLE_USER_TOGGLE_NO.replace("$userName", user),2000,1);
- 			waitForAndGetElement(ELEMENT_DISABLE_USER_TOGGLE_YES.replace("$userName", user),2000,1);
+ 	 		waitForAndGetElement(ELEMENT_DISABLE_USER_TOGGLE_NO.replace("$userName", user),2000,1,2);
+ 			waitForAndGetElement(ELEMENT_DISABLE_USER_TOGGLE_YES.replace("$userName", user),2000,1,2);
 		}
 	}
 	/**
@@ -812,11 +837,10 @@ public class UserAndGroupManagement extends PlatformBase {
 	public void checkDisplayDisableUser(String...users){
 		info("check display of disable users");
 		waitForAndGetElement(ELEMENT_DISABLE_USER_COLUMN);
-		
  	 	for (String user : users) {
  	 		waitForAndGetElement(ELEMENT_DISBALE_USER_DISABLED.replace("$userName", user),2000,1);
- 	 		waitForAndGetElement(ELEMENT_DISABLE_USER_TOGGLE_NO.replace("$userName", user),2000,1);
- 			waitForAndGetElement(ELEMENT_DISABLE_USER_TOGGLE_YES.replace("$userName", user),2000,1);
+ 	 		waitForAndGetElement(ELEMENT_DISABLE_USER_TOGGLE_NO.replace("$userName", user),2000,1,2);
+ 			waitForAndGetElement(ELEMENT_DISABLE_USER_TOGGLE_YES.replace("$userName", user),2000,1,2);
 		}
 	}
 	/**
@@ -831,5 +855,14 @@ public class UserAndGroupManagement extends PlatformBase {
 				Utils.pause(1000);
 				waitForElementNotPresent(ELEMENT_USER_DELETE_ICON1);
 		}
+		}
+	
+	/**
+	 * Open Users tab
+	 */
+	public void gotoUserTab(){
+		info("Open Users tab");
+		click(ELEMENT_USER_TAB);
+		Utils.pause(2000);
 	}
 }

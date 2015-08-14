@@ -1,6 +1,6 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
-<suite name="Disable User Func Test" verbose="1" preserve-order="true">
-	<test name="disableUser-func-part3" enabled="true">
+<suite name="Disable User Func Test" verbose="1" parallel="none">
+	<test name="disableUser-func-part3" enabled="true" preserve-order="true">
 		<groups>
 			<run>
 				<exclude name="pending" />
@@ -9,6 +9,8 @@
 		<classes>
 			<class name="org.exoplatform.selenium.platform.disableUser.functional.Disable_User_TestConfig" />
 			<class name="org.exoplatform.selenium.platform.disableUser.functional.Disable_User_Document" />
+			<class name="org.exoplatform.selenium.platform.disableUser.functional.Disable_User_Forum" />
+			<class name="org.exoplatform.selenium.platform.disableUser.functional.Disable_User_Wiki" />
 			<class name="org.exoplatform.selenium.platform.disableUser.functional.Disable_User_Notifications" />
 		</classes>
 	</test>
