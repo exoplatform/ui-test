@@ -166,9 +166,8 @@ import org.testng.annotations.*;
 	*<li> Test Case Name: Check hide project is personal display settings.</li>
 	*<li> Pre-Condition: exo-tasks add-on is installeduser A created project A and share to user B</li>
 	*<li> Post-Condition: </li>
-	*BUG: https://jira.exoplatform.org/browse/TA-182
 	*/
-	@Test (groups="pending")
+	@Test 
 	public  void test06_CheckHideProjectIsPersonalDisplaySettings() {
 		info("Test 6: Check hide project is personal display settings");
 		String name = txData.getContentByArrayTypeRandom(1)+getRandomNumber();

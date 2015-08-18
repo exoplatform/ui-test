@@ -57,9 +57,8 @@ import org.testng.annotations.*;
 	*<li> Test Case Name: Check contextual menu of one project.</li>
 	*<li> Pre-Condition: exo-tasks add-on is installed</li>
 	*<li> Post-Condition: </li>
-	* BUG: https://jira.exoplatform.org/browse/TA-132
 	*/
-	@Test (groups="pending")
+	@Test 
 	public  void test02_CheckContextualMenuOfOneProject() {
 		info("Test 2: Check contextual menu of one project");
 		String prj1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
@@ -213,9 +212,8 @@ import org.testng.annotations.*;
 	*<li> Test Case Name: Check group by of tasks in each project in Projects.</li>
 	*<li> Pre-Condition: exo-tasks add-on is installedadd project A,Badd some tasks to project A,B</li>
 	*<li> Post-Condition: </li>
-	* BUG: https://jira.exoplatform.org/browse/TA-135
 	*/
-	@Test (groups ="pending")
+	@Test 
 	public  void test04_CheckGroupByOfTasksInEachProjectInProjects() {
 		info("Test 4: Check group by of tasks in each project in Projects");
 		String project1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
@@ -256,7 +254,7 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- Tasks of each project are Group by: None, Assignee, Project, Label, Due Date, Status*/ 
-		mgProject.checkGroupByInProjects("Projects",groups);
+		mgProject.checkGroupByInProjects("Projects",groups,false);
 		
 		info("delete data");
 		mgProject.deleteProject(project1, false);
@@ -291,7 +289,7 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			There is no Board on Projects*/ 
-		mgProject.checkNoBoardInProjects("Projects");
+		mgProject.checkDisplayOfListBoard("Projects",false);
  	}
 
 	/**
@@ -347,9 +345,8 @@ import org.testng.annotations.*;
 	*<li> Test Case Name: Check Projects view default setting.</li>
 	*<li> Pre-Condition: exo-tasks add-on is installed</li>
 	*<li> Post-Condition: </li>
-	* BUG: https://jira.exoplatform.org/browse/TA-135
 	*/
-	@Test (groups="pending")
+	@Test 
 	public  void test08_CheckProjectsViewDefaultSetting() {
 		info("Test 8: Check Projects view default setting");
 		String project = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
@@ -384,7 +381,7 @@ import org.testng.annotations.*;
 			Projects view default settings are:
 			- Group by: None
 			- Sort by: Due Date*/ 
-		mgProject.checkDefaultGroupSort("Projects", none, duedate);
+		mgProject.checkDefaultGroupSort("Projects", none, duedate,false);
  	}
 
 	/**
@@ -392,9 +389,8 @@ import org.testng.annotations.*;
 	*<li> Test Case Name: Check sort by of tasks in each project in Projects.</li>
 	*<li> Pre-Condition: exo-tasks add-on is installedadd project A,Badd some tasks to project A,B</li>
 	*<li> Post-Condition: </li>
-	*BUG: https://jira.exoplatform.org/browse/TA-135
 	*/
-	@Test (groups="pending")
+	@Test 
 	public  void test09_CheckSortByOfTasksInEachProjectInProjects() {
 		info("Test 9: Check sort by of tasks in each project in Projects");
 		String project1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
@@ -434,7 +430,7 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- Tasks of each project are Sorted by: Title, Created Date, Due Date, Priority.*/ 
-		mgProject.checkSortByInProjects("Projects", sorts);
+		mgProject.checkSortByInProjects("Projects", sorts,false);
 		
 		info("delete data");
 		mgProject.deleteProject(project1, false);

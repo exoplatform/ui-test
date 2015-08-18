@@ -12,9 +12,8 @@ import org.testng.annotations.*;
 	*<li> Test Case Name: Check case of selecting None.</li>
 	*<li> Pre-Condition: exo-tasks add-on is installed</li>
 	*<li> Post-Condition: </li>
-	*BUG: https://jira.exoplatform.org/browse/TA-158
 	*/
-	@Test (groups="pending")
+	@Test 
 	public  void test01_CheckCaseOfSelectingNone() {
 		info("Test 1: Check case of selecting None");
 		String task1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
@@ -164,9 +163,8 @@ import org.testng.annotations.*;
 	*<li> Test Case Name: Check No Due Date is default value.</li>
 	*<li> Pre-Condition: exo-tasks add-on is installed</li>
 	*<li> Post-Condition: </li>
-	*BUG: https://jira.exoplatform.org/browse/TA-158
 	*/
-	@Test (groups="pending")
+	@Test 
 	public  void test04_06_CheckDisplayOfDueDatePopover() {
 		info("Test 4: Check display of due date popover");
 		String task1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();

@@ -50,6 +50,13 @@ public class ManagementProjects extends TaskManagementLocatorObject {
 		waitForElementNotPresent(ELEMENT_RIGHT_PANE_CLOSE_ICON);
 	}
 	/**
+	 * Open Board view
+	 */
+	public void openBoard(){
+		info("open Board view");
+		doubleClickOnElement(ELEMENT_BOARD_VIEW);
+	}
+	/**
 	 * Hide project detail on right pane
 	 */
 	public void hideProjectDetail(){
@@ -647,7 +654,7 @@ public class ManagementProjects extends TaskManagementLocatorObject {
 		goToContMenuGivenProject(project);
 		if(manager){
 			info("menu of manager");
-			//Edit is not available
+			waitForAndGetElement(ELEMENT_LEFT_PANE_PROJECT_EDIT.replace("$project", project));
 			waitForAndGetElement(ELEMENT_LEFT_PANE_PROJECT_ADD.replace("$project", project));
 			waitForAndGetElement(ELEMENT_LEFT_PANE_PROJECT_SHARE.replace("$project", project));
 			waitForAndGetElement(ELEMENT_LEFT_PANE_PROJECT_CLONE.replace("$project", project));
@@ -681,26 +688,46 @@ public class ManagementProjects extends TaskManagementLocatorObject {
 	 * Check GroupBy list in Projects
 	 * @param project
 	 * @param groups
+	 * @param isBoard
+	 * 				true if it's Board view
+	 * 				false if not
 	 */
-	public void checkGroupByInProjects(String project,String[] groups){
+	public void checkGroupByInProjects(String project,String[] groups,boolean isBoard){
 		info("check group by list of project");
 		openProject(project);
+		if(isBoard){
+			openBoard();
+		}
 		click(ELEMENT_GROUPBY_ICON);
 		for (String group : groups) {
-			waitForAndGetElement(ELEMENT_GROUPBY_ITEM.replace("$item",group));
+			try {
+				waitForAndGetElement(ELEMENT_GROUPBY_ITEM.replace("$group", group));
+			}catch (AssertionError e) {
+				waitForAndGetElement(ELEMENT_GROUPBY_ITEM_DEFAULT.replace("$group", group));
+			}
 		}
 	}
 	/**
 	 * Check SortBy list in Projects
 	 * @param project
 	 * @param sorts
+	 * @param isBoard
+	 * 				true if it's Board view
+	 * 				false if not
 	 */
-	public void checkSortByInProjects(String project,String[] sorts){
+	public void checkSortByInProjects(String project,String[] sorts,boolean isBoard){
 		info("check sort by list of project");
 		openProject(project);
+		if(isBoard){
+			openBoard();
+		}
 		click(ELEMENT_SORTBY_ICON);
 		for (String sort : sorts) {
-			waitForAndGetElement(ELEMENT_SORTBY_ITEM.replace("$item",sort));
+			try {
+				waitForAndGetElement(ELEMENT_SORTBY_ITEM.replace("$sort",sort));
+			}catch (AssertionError e) {
+				waitForAndGetElement(ELEMENT_SORTBY_ITEM_DEFAULT.replace("$sort",sort));
+			}
 		}
 	}
 	/**
@@ -716,15 +743,7 @@ public class ManagementProjects extends TaskManagementLocatorObject {
 			waitForElementNotPresent(ELEMENT_SORTBY_ICON);
 		}
 	}
-	/**
-	 * Check no Board view in Projects
-	 * @param project
-	 */
-	public void checkNoBoardInProjects(String project){
-		info("check no Board view");
-		openProject(project);
-		waitForElementNotPresent(ELEMENT_BOARD_VIEW);
-	}
+	
 	/**
 	 * Check Projects by default
 	 */
@@ -741,10 +760,13 @@ public class ManagementProjects extends TaskManagementLocatorObject {
 	 * Check default setting groupBy,sortBy
 	 * @param project
 	 */
-	public void checkDefaultGroupSort(String project,String group,String sort){
+	public void checkDefaultGroupSort(String project,String group,String sort,boolean isBoard){
 		openProject(project);
-		waitForAndGetElement(ELEMENT_SORTBY_ITEM.replace("$item",sort));
-		waitForAndGetElement(ELEMENT_GROUPBY_ITEM.replace("$item", group));
+		if(isBoard){
+			openBoard();
+		}
+		waitForAndGetElement(ELEMENT_SORTBY_ITEM_DEFAULT.replace("$sort",sort));
+		waitForAndGetElement(ELEMENT_GROUPBY_ITEM_DEFAULT.replace("$group", group));
 	}
 	/**
 	 * Check default shared project
@@ -894,9 +916,11 @@ public class ManagementProjects extends TaskManagementLocatorObject {
 	}
 	/**
 	 * Check display of List, Board
+	 * @param project
 	 * @param isPresent
 	 */
-	public void checkDisplayOfListBoard(boolean isPresent){
+	public void checkDisplayOfListBoard(String project,boolean isPresent){
+		openProject(project);
 		if(isPresent){
 			 waitForAndGetElement(ELEMENT_LIST_VIEW);
 			 waitForAndGetElement(ELEMENT_BOARD_VIEW);
@@ -920,29 +944,72 @@ public class ManagementProjects extends TaskManagementLocatorObject {
 		waitForAndGetElement(ELEMENT_LEFT_PANE_UPCOMING);
 	}
 	/**
+	 * Define options in No New Task
+	 */
+	public enum optionNoNewTask{
+		Projects,Labels,Overdue,Normal;
+	}
+	/**
 	 * check top of list view
 	 * @param project
 	 * @param newTask
 	 * 				true if it'll displayed
 	 * 				false if it won't displayed
+	 * @param opt 
+	 * 			can select Projects,Labels,...
 	 */
-	public void checkTopOfListView(String project,boolean newTask,boolean isProjects){
-		
-		if(newTask){
-			openProject(project);
-			waitForAndGetElement(ELEMENT_ADD_TASK_BTN);
-			waitForAndGetElement(ELEMENT_ADD_TASK_TITLE);
-		}else{
-			if (isProjects){
+	public void checkTopOfListView(String project,boolean newTask,optionNoNewTask opt){
+	
+			switch(opt){
+			case Projects:
+				info("Select Projects option");
 				goToProjects();
 				waitForElementNotPresent(ELEMENT_ADD_TASK_BTN);
 				waitForElementNotPresent(ELEMENT_ADD_TASK_TITLE);
-			}else{
+				break;
+			case Labels:
+				info("Select Labels option");
 				goToLabels();
 				waitForElementNotPresent(ELEMENT_ADD_TASK_BTN);
 				waitForElementNotPresent(ELEMENT_ADD_TASK_TITLE);
+				break;
+			case Overdue:
+				info("Select Overdue option");
+				openProject("Overdue");
+				waitForElementNotPresent(ELEMENT_ADD_TASK_BTN);
+				waitForElementNotPresent(ELEMENT_ADD_TASK_TITLE);
+				break;
+			case Normal:
+				info("Select normal project");
+				openProject(project);
+				waitForAndGetElement(ELEMENT_ADD_TASK_BTN);
+				waitForAndGetElement(ELEMENT_ADD_TASK_TITLE);
+				break;
+			default:
+				info("No option is selected");
+				break;
 			}
+	}
+	/**
+	 * Check display of Board view
+	 * @param flows
+	 * 				list of flow (status)
+	 */
+	public void checkDisplayOfBoard(String[] flows){
+		info("check display of Board");
+		openBoard();
+		for (String flow : flows) {
+			waitForAndGetElement(ELEMENT_BOARD_STATUS.replace("$flow", flow));
 		}
-		
+	}
+	/**
+	 * Check display number of status
+	 * @param status
+	 * @param num
+	 * 			number of task per status
+	 */
+	public void checkDisplayNumberOfStatus(String status,int num){
+		info("status : "+status);
+		waitForAndGetElement(ELEMENT_BOARD_STATUS_NUMBER.replace("$flow", status).replace("$num", String.valueOf(num)));
 	}
 }

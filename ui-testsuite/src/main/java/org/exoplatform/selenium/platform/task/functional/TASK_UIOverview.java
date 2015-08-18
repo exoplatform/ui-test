@@ -1,6 +1,7 @@
 package org.exoplatform.selenium.platform.task.functional;
 
 import static org.exoplatform.selenium.TestLogger.info;
+
 import org.testng.annotations.*;
 
 
@@ -140,6 +141,7 @@ import org.testng.annotations.*;
 	@Test
 	public  void test05_06_10_CheckLeftPane() {
 		info("Test 5: Check Left Pane");
+		String prj1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		/*Step Number: 1
 		*Step Name: Step 1: Open Tasks page
 		*Step Description: 
@@ -149,6 +151,7 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			Tasks page is opened*/
 		hp.goToTasks();
+		mgProject.addProject(prj1, "", false);
 		
 		/*Step number: 2
 		*Step Name: Step 2: Check Left Pane
@@ -171,7 +174,10 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			By default there is a List and Board views available in central pane*/ 
-		mgProject.checkDisplayOfListBoard(true);
+		mgProject.checkDisplayOfListBoard(prj1,true);
+		
+		info("delete data");
+		mgProject.deleteProject(prj1, false);
  	}
 
 	/**

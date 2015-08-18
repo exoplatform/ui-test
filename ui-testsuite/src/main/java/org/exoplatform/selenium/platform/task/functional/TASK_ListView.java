@@ -2,8 +2,11 @@ package org.exoplatform.selenium.platform.task.functional;
 
 import static org.exoplatform.selenium.TestLogger.info;
 
+import org.exoplatform.selenium.platform.task.ManagementProjects.optionNoNewTask;
 import org.exoplatform.selenium.platform.task.ManagementTasks.optDueDate;
 import org.exoplatform.selenium.platform.task.ManagementTasks.optDueDateLV;
+import org.exoplatform.selenium.platform.task.ManagementTasks.optionGroupBy;
+import org.exoplatform.selenium.platform.task.ManagementTasks.optionSortBy;
 import org.exoplatform.selenium.platform.task.ManagementTasks.optionTask;
 
 import org.testng.annotations.*;
@@ -219,11 +222,20 @@ import org.testng.annotations.*;
 	*<li> Test Case Name: Check group by Assignee.</li>
 	*<li> Pre-Condition: exo-tasks add-on is installedsome projects are createdsome tasks are added into projects, tasks are assigned to some users</li>
 	*<li> Post-Condition: </li>
-	* BUG: https://jira.exoplatform.org/browse/TA-135
 	*/
-	@Test (groups="pending")
-	public  void test07_CheckGroupByAssignee() {
+	/**
+	*<li> Case ID:131045.</li>
+	*<li> Test Case Name: Check when clicking on the user full name.</li>
+	*<li> Pre-Condition: exo-tasks add-on is installedsome projects are createdsome tasks are added into projects, tasks are assigned to some users</li>
+	*<li> Post-Condition: </li>
+	* BUG: https://jira.exoplatform.org/browse/TA-216
+	*/
+	@Test (groups="pending") 
+	public  void test07_22_CheckGroupByAssignee() {
 		info("Test 7: Check group by Assignee");
+		String task1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+		String task2 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+		String prj1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		/*Step Number: 1
 		*Step Name: Step 1: Open Tasks page
 		*Step Description: 
@@ -232,7 +244,13 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			Tasks page is opened*/
-
+		hp.goToTasks();
+		mgProject.addProject(prj1, "", false);
+		mgTask.addTask(prj1, task1);
+		mgTask.addTask(prj1, task2);
+		mgTask.editTaskAssignee(task1, DATA_USER1);
+		mgTask.editTaskAssignee(task2, DATA_USER2);
+		
 		/*Step number: 2
 		*Step Name: Step 2: Check group by Assignee
 		*Step Description: 
@@ -242,7 +260,25 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- Group by Assignee groups tasks by Assignee. 
 			- Assignee groups are sorted by user full name alphabetically.*/ 
-
+		mgTask.selectOptGroupBy(optionGroupBy.Assignee);
+		mgTask.checkGroupBy(true, DATA_NAME_USER1, 1);
+		mgTask.checkGroupBy(true, DATA_NAME_USER2, 1);
+		mgTask.checkSortOfGroupBy(DATA_NAME_USER1, 1);
+		mgTask.checkSortOfGroupBy(DATA_NAME_USER2, 2);
+		
+		/*Step number: 3
+		*Step Name: Step 3: Check when clicking on the user full name
+		*Step Description: 
+			- Click on one user group
+		*Input Data: 
+			
+		*Expected Outcome: 
+			- Page is redirected to user profile page*/ 
+		mgTask.checkFullnameLink(DATA_NAME_USER2);
+		
+		info("delete data");
+		hp.goToTasks();
+		mgProject.deleteProject(prj1, false);
  	}
 
 	/**
@@ -250,11 +286,13 @@ import org.testng.annotations.*;
 	*<li> Test Case Name: Check group by Due date.</li>
 	*<li> Pre-Condition: exo-tasks add-on is installedsome projects are createdsome tasks are added into projects, tasks have due date: overdue, today, tomorrow, next month....</li>
 	*<li> Post-Condition: </li>
-	*BUG: https://jira.exoplatform.org/browse/TA-135
 	*/
-	@Test (groups="pending")
+	@Test
 	public  void test08_CheckGroupByDueDate() {
 		info("Test 8: Check group by Due date");
+		String task1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+		String task2 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+		String prj1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		/*Step Number: 1
 		*Step Name: Step 1: Open Tasks page
 		*Step Description: 
@@ -263,7 +301,13 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			Tasks page is opened*/
-
+		hp.goToTasks();
+		mgProject.addProject(prj1, "", false);
+		mgTask.addTask(prj1, task1);
+		mgTask.addTask(prj1, task2);
+		mgTask.selectDueDate(task1, optDueDate.Today);
+		mgTask.selectDueDate(task2, optDueDate.Tomorrow);
+		
 		/*Step number: 2
 		*Step Name: Step 2: Check group by Due date
 		*Step Description: 
@@ -273,7 +317,14 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- Group by Due date allows to group tasks according to their Due Date. 
 			- Due Date groups are sorted by date (older first)*/ 
-
+		mgTask.selectOptGroupBy(optionGroupBy.Due_Date);
+		mgTask.checkGroupBy(true, "Today", 1);
+		mgTask.checkGroupBy(true, "Tomorrow", 1);
+		mgTask.checkSortOfGroupBy("Today", 1);
+		mgTask.checkSortOfGroupBy("Tomorrow", 2);
+		
+		info("delete data");
+		mgProject.deleteProject(prj1, false);
  	}
 
 	/**
@@ -281,7 +332,7 @@ import org.testng.annotations.*;
 	*<li> Test Case Name: Check group by of list view.</li>
 	*<li> Pre-Condition: exo-tasks add-on is installed</li>
 	*<li> Post-Condition: </li>
-	* NOT IMPLEMENT YET
+	*NOT IMPLEMENT YET
 	*/
 	@Test (groups="pending")
 	public  void test09_CheckGroupByOfListView() {
@@ -319,7 +370,7 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			The list view can be grouped by: None, Due Date, Label, Project, Assignee, Status.*/ 
-		mgProject.checkGroupByInProjects("Incoming", groups);
+		mgProject.checkGroupByInProjects("Incoming", groups,false);
 		
 		info("delete data");
 		mgTask.deleteTask(task1);
@@ -332,7 +383,7 @@ import org.testng.annotations.*;
 	*<li> Test Case Name: Check group By Project.</li>
 	*<li> Pre-Condition: exo-tasks add-on is installedsome projects are createdsome tasks are added into projects</li>
 	*<li> Post-Condition: </li>
-	*BUG: https://jira.exoplatform.org/browse/TA-135
+	*BUG: https://jira.exoplatform.org/browse/TA-207
 	*/
 	@Test (groups="pending")
 	public  void test10_CheckGroupByProject() {
@@ -369,7 +420,7 @@ import org.testng.annotations.*;
 	*<li> Test Case Name: Check group By Status when 2 statuses have the same name.</li>
 	*<li> Pre-Condition: exo-tasks add-on is installedproject A has workflow A, project B has workflow B, workflow A and B have one status in commonsome tasks are created in project A, project B and added status</li>
 	*<li> Post-Condition: </li>
-	*BUG: https://jira.exoplatform.org/browse/TA-135
+	*BUG: https://jira.exoplatform.org/browse/TA-207
 	*/
 	@Test (groups="pending")
 	public  void test11_13_CheckGroupByProjectWhen2ProjectsHaveTheSameTitle() {
@@ -411,11 +462,15 @@ import org.testng.annotations.*;
 	*<li> Test Case Name: Check group By Status.</li>
 	*<li> Pre-Condition: exo-tasks add-on is installedsome project is createdsome tasks are created in created projects and added status</li>
 	*<li> Post-Condition: </li>
-	*BUG: https://jira.exoplatform.org/browse/TA-135
 	*/
-	@Test (groups="pending")
+	@Test 
 	public  void test12_CheckGroupByStatus() {
 		info("Test 12 Check group By Status");
+		String task1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+		String task2 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+		String prj1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+		String todo = flowData.getFlowByArrayTypeRandom(1);
+		String inprogress = flowData.getFlowByArrayTypeRandom(2);
 		/*Step Number: 1
 		*Step Name: Step 1: Open Tasks page
 		*Step Description: 
@@ -424,7 +479,12 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			Tasks page is opened*/
-
+		hp.goToTasks();
+		mgProject.addProject(prj1, "", false);
+		mgTask.addTask(prj1, task1);
+		mgTask.addTask(prj1, task2);
+		mgTask.editTaskStatus(task2, inprogress);
+		
 		/*Step number: 2
 		*Step Name: Step 2: Check group By Status
 		*Step Description: 
@@ -433,7 +493,14 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			Group By Status groups tasks by Status. Status are sorted by the order of the status in the workflow*/ 
-
+		mgTask.selectOptGroupBy(optionGroupBy.Status);
+		mgTask.checkGroupBy(true, todo, 1);
+		mgTask.checkGroupBy(true, inprogress, 1);
+		mgTask.checkSortOfGroupBy(todo, 1);
+		mgTask.checkSortOfGroupBy(inprogress, 2);
+		
+		info("delete data");
+		mgProject.deleteProject(prj1, false);
  	}
 
 	/**
@@ -441,11 +508,15 @@ import org.testng.annotations.*;
 	*<li> Test Case Name: Check sort by Created Date.</li>
 	*<li> Pre-Condition: exo-tasks add-on is installedsome projects are createdsome tasks are added into projects, tasks have different created date</li>
 	*<li> Post-Condition: </li>
-	*BUG: https://jira.exoplatform.org/browse/TA-135
 	*/
-	@Test (groups="pending")
+	@Test 
 	public  void test14_CheckSortByCreatedDate() {
 		info("Test 14 Check sort by Created Date");
+		String task1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+		String task2 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+		String task3 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+		String prj1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+		String[] tasks= {task1,task2,task3};
 		/*Step Number: 1
 		*Step Name: Step 1: Open Tasks page
 		*Step Description: 
@@ -454,7 +525,12 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			Tasks page is opened*/
-
+		hp.goToTasks();
+		mgProject.addProject(prj1, "", false);
+		mgTask.addTask(prj1, task1);
+		mgTask.addTask(prj1, task2);
+		mgTask.addTask(prj1, task3);
+		
 		/*Step number: 2
 		*Step Name: Step 2: Check sort by Created Date
 		*Step Description: 
@@ -463,7 +539,11 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			Sort by Created Date sorts tasks by there created date follow order from the current to the past.*/ 
-
+		mgTask.selectOptSortBy(optionSortBy.Created_Date);
+		mgTask.checkSortByCreatedDate(tasks);
+		
+		info("delete data");
+		mgProject.deleteProject(prj1, false);
  	}
 
 	/**
@@ -471,21 +551,20 @@ import org.testng.annotations.*;
 	*<li> Test Case Name: Check sort by of list view.</li>
 	*<li> Pre-Condition: exo-tasks add-on is installed</li>
 	*<li> Post-Condition: </li>
-	* NOT IMPLEMENT YET
+	* NOT FULL IMPLEMENT YET
 	*/
-	@Test (groups="pending")
+	@Test
 	public  void test15_CheckSortByOfListView() {
 		info("Test 15 Check sort by of list view");
 		String task1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		String task2 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
-		String task3 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		
 		String title = sortByData.getSortBy(1);
 		String createdDate = sortByData.getSortBy(2);
 		String duedate = sortByData.getSortBy(0);
 		String priority = sortByData.getSortBy(3);
-		String rank = sortByData.getSortBy(4);
-		String[] sorts={title,priority,createdDate,duedate,rank};
+		//String rank = sortByData.getSortBy(4);
+		String[] sorts={title,priority,createdDate,duedate};
 		/*Step Number: 1
 		*Step Name: Step 1: Open Tasks page
 		*Step Description: 
@@ -497,7 +576,6 @@ import org.testng.annotations.*;
 		hp.goToTasks();
 		mgTask.addTaskDirectly(task1,true);
 		mgTask.addTaskDirectly(task2,true);
-		mgTask.addTaskDirectly(task3,true);
 		
 		/*Step number: 2
 		*Step Name: Step 2: Check sort by of list view
@@ -508,12 +586,11 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			The list view can be sorted by: Title, Created Date, Due Date, Priority, Rank.*/ 
-		mgProject.checkSortByInProjects("Incoming", sorts);
+		mgProject.checkSortByInProjects("Incoming", sorts,false);
 		
 		info("delete data");
 		mgTask.deleteTask(task1);
 		mgTask.deleteTask(task2);
-		mgTask.deleteTask(task3);
  	}
 
 	/**
@@ -526,6 +603,16 @@ import org.testng.annotations.*;
 	@Test (groups="pending")
 	public  void test16_CheckSortByPriority() {
 		info("Test 16 Check sort by Priority");
+		String task1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+		String task2 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+		String task3 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+		String task4 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+		String prj1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+		String high = priorityData.getPriorityByArrayTypeRandom(2);
+		String normal = priorityData.getPriorityByArrayTypeRandom(3);
+		String low = priorityData.getPriorityByArrayTypeRandom(4);
+		String none = priorityData.getPriorityByArrayTypeRandom(1);
+		String[] tasks={task4,task3,task2,task1};
 		/*Step Number: 1
 		*Step Name: Step 1: Open Tasks page
 		*Step Description: 
@@ -534,7 +621,17 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			Tasks page is opened*/
-
+		hp.goToTasks();
+		mgProject.addProject(prj1, "", false);
+		mgTask.addTask(prj1, task1);
+		mgTask.addTask(prj1, task2);
+		mgTask.addTask(prj1, task3);
+		mgTask.addTask(prj1, task4);
+		mgTask.editTaskPriority(task1, high);
+		mgTask.editTaskPriority(task2, normal);
+		mgTask.editTaskPriority(task3, low);
+		mgTask.editTaskPriority(task4, none);
+		
 		/*Step number: 2
 		*Step Name: Step 2: Check sort by Priority
 		*Step Description: 
@@ -543,7 +640,11 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			Sort by Priority sorts tasks by their priority in the following order : High, Medium, Low, no priority*/ 
-
+		mgTask.selectOptSortBy(optionSortBy.Priority);
+		mgTask.checkSortByCreatedDate(tasks);
+		
+		info("delete data");
+		mgProject.deleteProject(prj1, false);
  	}
 
 	/**
@@ -551,11 +652,13 @@ import org.testng.annotations.*;
 	*<li> Test Case Name: Check tasks without a due date are set in No Due Date group.</li>
 	*<li> Pre-Condition: exo-tasks add-on is installedsome projects are createdsome tasks are added into projects, tasks have due date: no due date,overdue, today, tomorrow, next month....</li>
 	*<li> Post-Condition: </li>
-	*BUG: https://jira.exoplatform.org/browse/TA-135
 	*/
-	@Test (groups="pending")
+	@Test
 	public  void test17_CheckTasksWithoutADueDateAreSetInNoDueDateGroup() {
 		info("Test 17 Check tasks without a due date are set in No Due Date group");
+		String task1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+		String task2 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+		String prj1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		/*Step Number: 1
 		*Step Name: Step 1: Open Tasks page
 		*Step Description: 
@@ -564,7 +667,12 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			Tasks page is opened*/
-
+		hp.goToTasks();
+		mgProject.addProject(prj1, "", false);
+		mgTask.addTask(prj1, task1);
+		mgTask.addTask(prj1, task2);
+		mgTask.selectDueDate(task2, optDueDate.Tomorrow);
+		
 		/*Step number: 2
 		*Step Name: Step 2: Check tasks without a due date are set in No Due Date group
 		*Step Description: 
@@ -575,7 +683,12 @@ import org.testng.annotations.*;
 			- Group by Due date allows to group tasks according to their Due Date. 
 			- Due Date groups are sorted by date (older first)
 			- Tasks without a due date are set in No Due Date group.*/ 
-
+		mgTask.selectOptGroupBy(optionGroupBy.Due_Date);
+		mgTask.checkGroupBy(true, "No Due Date", 1);
+		mgTask.checkGroupBy(true, "Tomorrow", 1);
+		
+		info("delete data");
+		mgProject.deleteProject(prj1, false);
  	}
 
 	/**
@@ -589,11 +702,13 @@ import org.testng.annotations.*;
 	*<li> Test Case Name: Check the ! symbol in red.</li>
 	*<li> Pre-Condition: exo-tasks add-on is installedtask A is created but overdue</li>
 	*<li> Post-Condition: </li>
-	* NOT IMPLEMENT YET
 	*/
 	@Test
 	public  void test18_19_CheckTheSymbolInBlue() {
 		info("Test 18 Check the ! symbol in blue");
+		String task1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+		String task2 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+		String prj1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		/*Step Number: 1
 		*Step Name: Step 1: Open Tasks page
 		*Step Description: 
@@ -602,7 +717,14 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			Tasks page is opened*/
-
+		hp.goToTasks();
+		mgProject.addProject(prj1, "", false);
+		mgTask.addTask(prj1, task1);
+		mgTask.addTask(prj1, task2);
+		mgTask.selectDueDate(task1, optDueDate.Today);
+		mgTask.setDueDate(task2, getDate(-2, "dd MMM yyyy"), getDate(-2, "dd"), 0);
+		mgProject.goToProjects();
+		
 		/*Step number: 2
 		*Step Name: Step 2: Check the ! symbol in blue
 		*Step Description: 
@@ -611,6 +733,8 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			The ! symbol in blue before task A to indicate the tasks that need to be done today.*/ 
+		mgTask.checkTaskSymbol(task1, true);
+		
 		/*Step number: 2
 		*Step Name: Step 2: Check the ! symbol in red
 		*Step Description: 
@@ -619,7 +743,10 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			The ! symbol in red before task A to indicate overdue task that has not been completed on time.*/
-
+		mgTask.checkTaskSymbol(task2, false);
+		
+		info("delete data");
+		mgProject.deleteProject(prj1, false);
  	}
 
 	/**
@@ -627,9 +754,9 @@ import org.testng.annotations.*;
 	*<li> Test Case Name: Check top of list view.</li>
 	*<li> Pre-Condition: exo-tasks add-on is installedsome tasks are created in Incoming</li>
 	*<li> Post-Condition: </li>
-	* NOT IMPLEMENT YET
+	* NOT FULL IMPLEMENT YET
 	*/
-	@Test (groups="pending")
+	@Test 
 	public  void test20_CheckTopOfListView() {
 		info("Test 20 Check top of list view");
 		/*Step Number: 1
@@ -652,10 +779,10 @@ import org.testng.annotations.*;
 			On top of the list view
 			- New Task button 
 			- first row is empty and used fast input of a task except: Labels, Projectsand Overdue view.*/ 
-		mgProject.checkTopOfListView("Labels",false,false);
-		mgProject.checkTopOfListView("Projects",false,true);
-		mgProject.checkTopOfListView("Overdue",false,false);
-		mgProject.checkTopOfListView("Incoming",true,false);
+		//mgProject.checkTopOfListView("Labels",false,false);
+		mgProject.checkTopOfListView("Projects",false,optionNoNewTask.Projects);
+		mgProject.checkTopOfListView("Overdue",false,optionNoNewTask.Overdue);
+		mgProject.checkTopOfListView("Incoming",true,optionNoNewTask.Normal);
  	}
 
 	/**
@@ -663,11 +790,14 @@ import org.testng.annotations.*;
 	*<li> Test Case Name: Check Unassigned tasks are put in Unassigned group.</li>
 	*<li> Pre-Condition: exo-tasks add-on is installedsome projects are createdsome tasks are added into projects, tasks are assigned to some users, some tasks are not assigned</li>
 	*<li> Post-Condition: </li>
-	*BUG: https://jira.exoplatform.org/browse/TA-135
+	*BUG: https://jira.exoplatform.org/browse/TA-216
 	*/
 	@Test (groups="pending")
 	public  void test21_CheckUnassignedTasksArePutInUnassignedGroup() {
 		info("Test 21 Check Unassigned tasks are put in Unassigned group");
+		String task1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+		String task2 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+		String prj1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		/*Step Number: 1
 		*Step Name: Step 1: Open Tasks page
 		*Step Description: 
@@ -676,7 +806,12 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			Tasks page is opened*/
-
+		hp.goToTasks();
+		mgProject.addProject(prj1, "", false);
+		mgTask.addTask(prj1, task1);
+		mgTask.addTask(prj1, task2);
+		mgTask.editTaskAssignee(task1, DATA_USER1);
+		
 		/*Step number: 2
 		*Step Name: Step 2: Check Unassigned tasks are put in Unassigned group
 		*Step Description: 
@@ -687,46 +822,12 @@ import org.testng.annotations.*;
 			- Group by Assignee groups tasks by Assignee. 
 			- Assignee groups are sorted by user full name alphabetically.
 			- Unassigned tasks are put in Unassigned group.*/ 
-
- 	}
-
-	/**
-	*<li> Case ID:131045.</li>
-	*<li> Test Case Name: Check when clicking on the user full name.</li>
-	*<li> Pre-Condition: exo-tasks add-on is installedsome projects are createdsome tasks are added into projects, tasks are assigned to some users</li>
-	*<li> Post-Condition: </li>
-	*BUG: https://jira.exoplatform.org/browse/TA-135
-	*/
-	@Test (groups="pending")
-	public  void test22_CheckWhenClickingOnTheUserFullName() {
-		info("Test 22 Check when clicking on the user full name");
-		/*Step Number: 1
-		*Step Name: Step 1: Open Tasks page
-		*Step Description: 
-			- Click on Tasks on the left navigation.
-		*Input Data: 
-			
-		*Expected Outcome: 
-			Tasks page is opened*/
-
-		/*Step number: 2
-		*Step Name: Step 2: Check group by Assignee
-		*Step Description: 
-			- Click on Projects menu and group by Assignee
-		*Input Data: 
-			
-		*Expected Outcome: 
-			- Group by Assignee groups tasks by Assignee. 
-			- Assignee groups are sorted by user full name alphabetically.*/
-
-		/*Step number: 3
-		*Step Name: Step 3: Check when clicking on the user full name
-		*Step Description: 
-			- Click on one user group
-		*Input Data: 
-			
-		*Expected Outcome: 
-			- Page is redirected to user profile page*/ 
+		mgTask.selectOptGroupBy(optionGroupBy.Assignee);
+		mgTask.checkGroupBy(true, DATA_NAME_USER1,1);
+		mgTask.checkGroupBy(true, "Unassigned", 1);
+		
+		info("delete data");
+		mgProject.deleteProject(prj1, false);
 
  	}
 

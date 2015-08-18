@@ -244,7 +244,7 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- Group by: None 
 			- Sort by: Created Date*/ 
-		mgProject.checkDefaultGroupSort("Incoming", none, createdDate);
+		mgProject.checkDefaultGroupSort("Incoming", none, createdDate,false);
 		
 		info("delete data");
 		mgTask.deleteTask(task1);

@@ -151,9 +151,8 @@ import org.testng.annotations.*;
 	*<li> Test Case Name: Check default setting after creating project.</li>
 	*<li> Pre-Condition: exo-tasks add-on is installed</li>
 	*<li> Post-Condition: </li>
-	* BUG: https://jira.exoplatform.org/browse/TA-136
 	*/
-	@Test (groups = "pending")
+	@Test 
 	public  void test05_CheckDefaultSettingAfterCreatingProject() {
 		info("Test 5: Check default setting after creating project");
 		String project = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
@@ -187,7 +186,7 @@ import org.testng.annotations.*;
 			Project is created, Default settings in a group:
 			- Group by: None 
 			- Sort by: Due Date*/ 
-		mgProject.checkDefaultGroupSort(project, group, sort);
+		mgProject.checkDefaultGroupSort(project, group, sort,false);
 		
 		info("delete data");
 		mgProject.deleteProject(project, false);
@@ -310,9 +309,8 @@ import org.testng.annotations.*;
 	*<li> Test Case Name: Check group by of tasks in a project.</li>
 	*<li> Pre-Condition: exo-tasks add-on is installedadd project Aadd some tasks to project A</li>
 	*<li> Post-Condition: </li>
-	* BUG : https://jira.exoplatform.org/browse/TA-136
 	*/
-	@Test (groups = "pending")
+	@Test 
 	public  void test09_CheckGroupByOfTasksInAProject() {
 		info("Test 9: Check group by of tasks in a project");
 		String project = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
@@ -322,10 +320,10 @@ import org.testng.annotations.*;
 		
 		String none = groupByData.getGroupBy(0);
 		String duedate = groupByData.getGroupBy(1);
-		String label = groupByData.getGroupBy(2);
+		//String label = groupByData.getGroupBy(2);
 		String status = groupByData.getGroupBy(3);
 		String assignee = groupByData.getGroupBy(4);
-		String[] groups={none,duedate,label,status,assignee};
+		String[] groups={none,duedate,status,assignee};
 		/*Step Number: 1
 		*Step Name: Step 1: Open Tasks page
 		*Step Description: 
@@ -349,7 +347,7 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- Tasks of project A are Grouped by: None, Due Date, Label, Assignee, Status.*/ 
-		mgProject.checkGroupByInProjects(project, groups);
+		mgProject.checkGroupByInProjects(project, groups,false);
 	
 		info("delete project");
 		mgProject.deleteProject(project, false);
@@ -571,9 +569,8 @@ import org.testng.annotations.*;
 	*<li> Test Case Name: Check sort by of tasks in a project.</li>
 	*<li> Pre-Condition: exo-tasks add-on is installedadd project Aadd some tasks to project A</li>
 	*<li> Post-Condition: </li>
-	* BUG : https://jira.exoplatform.org/browse/TA-136
 	*/
-	@Test (groups = "pending")
+	@Test 
 	public  void test15_CheckSortByOfTasksInAProject() {
 		info("Test 15 Check sort by of tasks in a project");
 		String project = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
@@ -609,7 +606,7 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- Tasks of project A are Sorted by: Title, Created Date, Due Date, Priority*/ 
-		mgProject.checkSortByInProjects(project, sorts);
+		mgProject.checkSortByInProjects(project, sorts,false);
 		
 		info("delete data");
 		mgProject.deleteProject(project, false);

@@ -557,9 +557,32 @@ public void selectOptGroupBy(optionGroupBy opt){
 	 */
 	public void checkGroupBy(boolean isGroup,String header,int num){
 		if(isGroup){
-			waitForAndGetElement(ELEMENT_GROUPBY_HEADER.replace("$header", header).replace("$num", String.valueOf(num)));
+			waitForAndGetElement(ELEMENT_GROUPBY_HEADER_NUM.replace("$header", header).replace("$num", String.valueOf(num)));
 		}else{
-			waitForElementNotPresent(ELEMENT_GROUPBY_HEADER.replace("$header", header).replace("$num", String.valueOf(num)));
+			waitForElementNotPresent(ELEMENT_GROUPBY_HEADER_NUM.replace("$header", header).replace("$num", String.valueOf(num)));
+		}
+	}
+	/**
+	 * Check sort of group by 
+	 * @param header
+	 * @param num
+	 * 			number of order
+	 */
+	public void checkSortOfGroupBy(String header,int num){
+		waitForAndGetElement(ELEMENT_GROUPBY_HEADER_SORT.replace("$header", header).replace("$num", String.valueOf(num)));
+	}
+	/**
+	 * Check symbol before task
+	 * @param task
+	 * @param isBlue
+	 * 				true if symbol is blue
+	 * 				false if symbol is red
+	 */
+	public void checkTaskSymbol(String task,boolean isBlue){
+		if(isBlue){
+			waitForAndGetElement(ELEMENT_TASK_SYMBOL_BLUE.replace("$task", task));
+		}else{
+			waitForAndGetElement(ELEMENT_TASK_SYMBOL_RED.replace("$task", task));
 		}
 	}
 	/**
@@ -805,6 +828,16 @@ public void selectOptGroupBy(optionGroupBy opt){
 				Utils.pause(500);
 			}
 		}
+	}
+	/**
+	 * Check fullname link of group assignee
+	 * @param user 
+	 */
+	public void checkFullnameLink(String user){
+		info("check fullname link of group assignee");
+		click(ELEMENT_GROUPBY_HEADER_FULLNAME.replace("$header", user));
+		Utils.pause(1000);
+		waitForAndGetElement(ELEMENT_PROFILE_PORTLET.replace("$user", user));
 	}
 	/**
 	 * Check auto complete

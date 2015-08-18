@@ -20,7 +20,7 @@ public class TaskManagementLocatorObject extends PlatformBase {
 	public final By ELEMENT_LEFT_PANE_TOOLTIP_TASK = By.xpath("//*[@class='popover-content'][contains(.,\"Let's create your first task.\")]");
 	public final By ELEMENT_LEFT_PANE_TOOLTIP_PROJECT = By.xpath("//*[@class='popover-content'][contains(.,\"No Project. Click here to create your first project.\")]");
 	public final By ELEMENT_TASK_APP_ICON = By.xpath("//*[contains(@class,'TaskManagementApplication')]");
-	
+	public final String ELEMENT_PROFILE_PORTLET = ".//*[@id='UIStatusProfilePortlet']/*[contains(.,'$user')]";
 	//Project area-->General
 	public final String ELEMENT_LEFT_PANE_PROJECT_NAME="//*[contains(@class,'project-name')][contains(.,'$project')]";
 	public final By ELEMENT_LEFT_PANE_PROJECTS=By.xpath("//*[contains(@class,'project-name')][contains(.,'Projects')]");
@@ -37,7 +37,7 @@ public class TaskManagementLocatorObject extends PlatformBase {
 	public final String ELEMENT_LEFT_PANE_PROJECT_ID=".//*[contains(@data-id,'$id')][contains(.,'$project')]";
 	public final By ELEMENT_LEFT_PANE_PROJECTS_PLUS_MENU=By.xpath("//*[contains(@class,'project-name')][contains(.,'Projects')]/../*[contains(@class,'add-new-project')]/*[contains(@class,'PlusMini')]");
 	public final By ELEMENT_LEFT_PANE_PROJECTS_ARROW_MENU=By.xpath("//*[contains(@class,'project-name')][contains(.,'Projects')]/../*[contains(@class,'collapseTree')]/*[contains(@class,'ArrowDownMini')]");
-	public final By ELEMENT_LEFT_PANE_PROJECTS_ADD=By.xpath("//*[contains(@class,'project-name')][contains(.,'Projects')]/../*[contains(@class,'uiDropdownWithIcon')]/*[contains(@class,'AddProject')]");
+	public final By ELEMENT_LEFT_PANE_PROJECTS_ADD=By.xpath("//*[contains(@class,'project-name')][contains(.,'Projects')]/../*[contains(@class,'uiDropdownWithIcon')]//*[contains(@class,'AddProject')]");
 	public final By ELEMENT_LEFT_PANE_PROJECTS_SHOWHIDDEN=By.xpath("//*[contains(@class,'ShowProject')]/../*[contains(.,'Show Hidden Projects')]");
 	public final By ELEMENT_LEFT_PANE_PROJECTS_HIDEHIDDEN=By.xpath("//*[contains(@class,'ShowProject')]/../*[contains(.,'Hide Hidden Projects')]");
 	public final String ELEMENT_LEFT_PANE_PROJECT_COLOR = "//*[contains(@class,'project-name')][contains(.,'$project')]/../*[contains(@class,'$color')][contains(@class,'colorPie')]";
@@ -50,6 +50,7 @@ public class TaskManagementLocatorObject extends PlatformBase {
 	public final String ELEMENT_LEFT_PANE_PROJECT_SHOW="//*[contains(@class,'project-name')][contains(.,'$project')]/../..//*[contains(@class,'uiIconHide')]/../*[contains(.,'Show')]";
 	public final String ELEMENT_LEFT_PANE_PROJECT_ADD="//*[contains(@class,'project-name')][contains(.,'$project')]/../..//*[contains(@class,'AddProject')]";
 	public final String ELEMENT_LEFT_PANE_PROJECT_SHARE="//*[contains(@class,'project-name')][contains(.,'$project')]/../..//*[contains(@class,'Share')]";
+	public final String ELEMENT_LEFT_PANE_PROJECT_EDIT="//*[contains(@class,'project-name')][contains(.,'$project')]/../..//*[contains(@class,'Edit')]";
 	public final String ELEMENT_LEFT_PANE_PROJECT_CLONE="//*[contains(@class,'project-name')][contains(.,'$project')]/../..//*[contains(@class,'CloneNode')]";
 	public final String ELEMENT_LEFT_PANE_PROJECT_DELETE="//*[contains(@class,'project-name')][contains(.,'$project')]/../..//*[contains(@class,'Trash')]";
 	public final String ELEMENT_LEFT_PANE_PROJECT_ISHIDDEN="//*[contains(@hiddenproject,'$bool')]//*[contains(@class,'project-name')][contains(.,'$project')]";
@@ -75,6 +76,8 @@ public class TaskManagementLocatorObject extends PlatformBase {
 	public final By ELEMENT_SORTBY_ICON = By.xpath("//*[contains(@class,'SortDown')]");
 	public final String ELEMENT_TASK_COLOR="//*[contains(@class,'title')][contains(.,'$task')]/..//*[contains(@class,'project-color $color')]";
 	public final String ELEMENT_TASK_NO_COLOR=".//*[contains(@class,'title')][contains(.,'$task')]/..//*[@class='project-color ']";
+	public final String ELEMENT_TASK_SYMBOL_BLUE = "//*[contains(@class,'row-item')]/*[contains(@class,'taskName')][.='$task']/..//*[contains(@class,'uiIconColorWarningInBlue')]";
+	public final String ELEMENT_TASK_SYMBOL_RED = "//*[contains(@class,'row-item')]/*[contains(@class,'taskName')][.='$task']/..//*[contains(@class,'uiIconColorWarningInRed')]";
 	
 	public final By ELEMENT_WELCOME_TEXT_TASK_DEFAULT= By.xpath("//*[@class='empty-content']/*[contains(.,'Welcome to eXo Tasks')]");
 	public final By ELEMENT_LEFT_PANE_TASKS_ARROW_MENU=By.xpath("//*[contains(@class,'project-name')][contains(.,'Tasks')]/../*[contains(@class,'collapseTree')]/*[contains(@class,'ArrowDownMini')]");
@@ -174,12 +177,14 @@ public class TaskManagementLocatorObject extends PlatformBase {
 	
 	
 	//*************************************List View*****************************************//
-	public final By ELEMENT_LIST_VIEW = By.xpath("//*[contains(@class,'center')]/*[contains(@class,'btn')]/*[contains(.,'List')]");
-	public final By ELEMENT_BOARD_VIEW = By.xpath("//*[contains(@class,'center')]/*[contains(@class,'btn')]/*[contains(.,'Board')]");
+	public final By ELEMENT_LIST_VIEW = By.xpath("//*[contains(@class,'btn-group')]/*[contains(@class,'btn')]/*[contains(.,'List')]");
+	
 	
 	//List View-->General
-	public final String ELEMENT_SORTBY_ITEM = "//*[contains(@class,'SortDown')]/../*[contains(.,'$sort')]";
-	public final String ELEMENT_GROUPBY_ITEM = "//*[contains(@class='ViewList')]/../*[contains(.,'$group')]";
+	public final String ELEMENT_SORTBY_ITEM = "//*[contains(@class,'SortDown')]/../../*[contains(@class,'dropdown-menu')]/*[contains(.,'$sort')]";
+	public final String ELEMENT_SORTBY_ITEM_DEFAULT = "//*[contains(@class,'SortDown')]/../*[contains(.,'$sort')]";
+	public final String ELEMENT_GROUPBY_ITEM = "//*[contains(@class,'ViewList')]/../../*[contains(@class,'dropdown-menu')]/*[contains(.,'$group')]";
+	public final String ELEMENT_GROUPBY_ITEM_DEFAULT = "//*[contains(@class,'ViewList')]/../*[contains(.,'$group')]";
 	public final String ELEMENT_TASK_CLOCK_ICON = "//*[contains(@class,'taskName')][contains(.,'$task')]/..//*[contains(@class,'Clock')]";
 	public final String ELEMENT_TASK_DUEDATE = "//*[@class='column-item column-title taskName'][contains(.,'$task')]/../*[@class='column-item column-time']/*[contains(.,'$day')]";
 	public final String ELEMENT_TASK_DUEDATE_TODAY = "//*[@class='column-item column-title taskName'][contains(.,'$task')]/../*[@class='column-item column-time']/*[contains(.,'Today')]";
@@ -195,7 +200,9 @@ public class TaskManagementLocatorObject extends PlatformBase {
 	
 	//List View-->Group by Assignee
 	public final By ELEMENT_GROUPBY_ASSIGNEE = By.xpath("//*[@data-groupby='assignee']");
-	public final String ELEMENT_GROUPBY_HEADER = "//*[contains(@class,'group-name')][contains(.,'$header')]/../*[contains(@class,'amount-item')][contains(.,'$num')]";
+	public final String ELEMENT_GROUPBY_HEADER_FULLNAME = "//*[contains(@class,'group-name')][contains(.,'$header')]";
+	public final String ELEMENT_GROUPBY_HEADER_NUM = "//*[contains(@class,'group-name')][contains(.,'$header')]/../*[contains(@class,'amount-item')][contains(.,'$num')]";
+	public final String ELEMENT_GROUPBY_HEADER_SORT = "//*[contains(@class,'primaryBackground')][$num]//*[contains(@class,'group-name')][contains(.,'$header')]";
 	//List View --> Group by Label
 	public final By ELEMENT_GROUPBY_LABEL = By.xpath("//*[@data-groupby='label']");
 	
@@ -217,6 +224,12 @@ public class TaskManagementLocatorObject extends PlatformBase {
 	
 	//List View - Sort by Title
 	public final By ELEMENT_SORTBY_TITLE = By.xpath("//*[@data-orderby='title']");
+	
+	//*************************************List View*****************************************//
+	public final By ELEMENT_BOARD_VIEW = By.xpath("//*[contains(@class,'btn-group')]/*[contains(@class,'btn')]/*[contains(.,'Board')]");
+	public final String ELEMENT_BOARD_STATUS = "//*[contains(@class,'col')]/*[@data-name='name'][contains(.,'$flow')]";
+	public final String ELEMENT_BOARD_STATUS_NUMBER = "//*[contains(@class,'col')]/*[@data-name='name'][contains(.,'$flow')]/../*[contains(@class,'number-tasks')][contains(.,'$num')]";
+	
 	/***********************************************************RIGHT PANE******************************************************/
 	// Project Overview
 	public final By ELEMENT_RIGHT_PANE_ARROW_MENU= By.xpath("//*[contains(@class,'addProject')]//*[contains(@class,'ArrowDown')]");

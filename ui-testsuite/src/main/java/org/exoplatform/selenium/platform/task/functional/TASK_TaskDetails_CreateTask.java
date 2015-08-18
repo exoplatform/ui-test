@@ -103,9 +103,8 @@ import org.testng.annotations.*;
 	*<li> Test Case Name: Check display of tasks when the page is refreshed.</li>
 	*<li> Pre-Condition: exo-tasks add-on is installedsome tasks are created in Incoming</li>
 	*<li> Post-Condition: </li>
-	* BUG: https://jira.exoplatform.org/browse/TA-183
 	*/
-	@Test (groups="pending")
+	@Test 
 	public  void test04_CheckDisplayOfTasksWhenThePageIsRefreshed() {
 		info("Test 4: Check display of tasks when the page is refreshed");
 		String task1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
