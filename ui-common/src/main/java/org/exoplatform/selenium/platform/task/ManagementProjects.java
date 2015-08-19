@@ -1,10 +1,13 @@
 package org.exoplatform.selenium.platform.task;
 
 import static org.exoplatform.selenium.TestLogger.info;
+
 import java.awt.AWTException;
 import java.awt.Robot;
 import java.awt.event.KeyEvent;
+
 import org.exoplatform.selenium.Utils;
+
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.Keys;
@@ -1012,5 +1015,45 @@ public class ManagementProjects extends TaskManagementLocatorObject {
 		info("status : "+status);
 		waitForAndGetElement(ELEMENT_BOARD_STATUS_NUMBER.replace("$flow", status).replace("$num", String.valueOf(num)));
 	}
-	
+	/**
+	 * Delete status
+	 * @param status
+	 */
+	public void deleteStatus(String status){
+		info("delete status");
+		mouseHoverByJavaScript(ELEMENT_BOARD_STATUS.replace("$flow", status));
+		clickByJavascript(ELEMENT_BOARD_STATUS_DELETE_ICON.replace("$flow", status),2);
+		Utils.pause(500);
+		waitForElementNotPresent(ELEMENT_BOARD_STATUS.replace("$flow", status));
+	}
+	/**
+	 * Edit status
+	 * @param status
+	 * @param newTitle
+	 */
+	public void editStatus(String status,String newTitle){
+		info("change status to" + newTitle);
+		doubleClickOnElement(ELEMENT_BOARD_STATUS.replace("$flow", status));
+		waitForAndGetElement(ELEMENT_BOARD_STATUS_TITLE_INPUT).clear();
+		waitForAndGetElement(ELEMENT_BOARD_STATUS_TITLE_INPUT).sendKeys(newTitle);
+        driver.findElement(ELEMENT_BOARD_STATUS_TITLE_INPUT).sendKeys(Keys.ENTER);
+        Utils.pause(500);
+        waitForAndGetElement(ELEMENT_BOARD_STATUS.replace("$flow", newTitle));
+	}
+	/**
+	 * Add status
+	 * @param status
+	 * 				status where we add new status
+	 * @param newTitle
+	 * 				new status is added
+	 */
+	public void addStatus(String status,String newTitle){
+		info("add new status "+newTitle);
+		mouseHoverByJavaScript(ELEMENT_BOARD_STATUS.replace("$flow", status));
+		clickByJavascript(ELEMENT_BOARD_STATUS_ADD_ICON.replace("$flow", status),2);
+		waitForAndGetElement(ELEMENT_BOARD_STATUS_TITLE_INPUT_NEW).sendKeys(newTitle);
+        driver.findElement(ELEMENT_BOARD_STATUS_TITLE_INPUT_NEW).sendKeys(Keys.ENTER);
+        Utils.pause(500);
+        waitForAndGetElement(ELEMENT_BOARD_STATUS.replace("$flow", newTitle));
+	}
 }

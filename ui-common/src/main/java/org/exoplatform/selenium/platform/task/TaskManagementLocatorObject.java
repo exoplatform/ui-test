@@ -229,6 +229,10 @@ public class TaskManagementLocatorObject extends PlatformBase {
 	public final By ELEMENT_BOARD_VIEW = By.xpath("//*[contains(@class,'btn-group')]/*[contains(@class,'btn')]/*[contains(.,'Board')]");
 	public final String ELEMENT_BOARD_STATUS = "//*[contains(@class,'col')]/*[@data-name='name'][contains(.,'$flow')]";
 	public final String ELEMENT_BOARD_STATUS_NUMBER = "//*[contains(@class,'col')]/*[@data-name='name'][contains(.,'$flow')]/../*[contains(@class,'number-tasks')][contains(.,'$num')]";
+	public final String ELEMENT_BOARD_STATUS_DELETE_ICON = "//*[contains(@class,'col')]/*[@data-name='name'][contains(.,'$flow')]/..//*[contains(@class,'Delete')]";
+	public final String ELEMENT_BOARD_STATUS_ADD_ICON = "//*[contains(@class,'col')]/*[@data-name='name'][contains(.,'$flow')]/..//*[contains(@class,'Plus')]";
+	public final By ELEMENT_BOARD_STATUS_TITLE_INPUT= By.xpath("//*[contains(@class,'input-board')]");
+	public final By ELEMENT_BOARD_STATUS_TITLE_INPUT_NEW= By.xpath("//*[@name='statusName']");
 	public final String ELEMENT_BOARD_TASK_CONTAINER = "//*[contains(@class,'col$num')][contains(@data-connected,'taskContainer')]";
 	public final String ELEMENT_BOARD_TASK_CONTAINER_GROUPBY_ASSIGNEE = "//*[contains(@class,'col$num')][contains(@data-connected,'$user')]";
 	public final String ELEMENT_BOARD_TASK_TITLE_GROUPBY_ASSIGNEE_INPUT = "//*[contains(@class,'col$num')]//*[contains(@class,'createTaskInListView')]/*[@value='$user']/../*[@name='taskTitle']";

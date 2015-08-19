@@ -1450,4 +1450,12 @@ public void selectOptGroupBy(optionGroupBy opt){
 			waitForAndGetElement(ELEMENT_BOARD_TASK_TITLE.replace("$task", task).replace("$num", String.valueOf(target)));
 		}
 	}
+	/**
+	 * Check task location
+	 * @param task
+	 * @param col
+	 */
+	public void checkTaskLocation(String task,int col){
+		waitForAndGetElement(ELEMENT_BOARD_TASK_TITLE.replace("$num", String.valueOf(col)).replace("$task", task));
+	}
 }
