@@ -79,7 +79,7 @@ public class TaskManagementLocatorObject extends PlatformBase {
 	public final String ELEMENT_TASK_SYMBOL_BLUE = "//*[contains(.,'$task')]/..//*[contains(@class,'uiIconColorWarningInBlue')]";
 	public final String ELEMENT_TASK_SYMBOL_RED = "//*[contains(.,'$task')]/..//*[contains(@class,'uiIconColorWarningInRed')]";
 	
-	public final By ELEMENT_WELCOME_TEXT_TASK_DEFAULT= By.xpath("//*[@class='empty-content']/*[contains(.,'Welcome to eXo Tasks')]");
+	public final By ELEMENT_WELCOME_TEXT_TASK_DEFAULT= By.xpath("//*[@class='empty-content']/*[contains(.,'No Task')]");
 	public final By ELEMENT_LEFT_PANE_TASKS_ARROW_MENU=By.xpath("//*[contains(@class,'project-name')][contains(.,'Tasks')]/../*[contains(@class,'collapseTree')]/*[contains(@class,'ArrowDownMini')]");
 	
 	//Add Task form
@@ -186,10 +186,10 @@ public class TaskManagementLocatorObject extends PlatformBase {
 	public final String ELEMENT_GROUPBY_ITEM = "//*[contains(@class,'ViewList')]/../../*[contains(@class,'dropdown-menu')]/*[contains(.,'$group')]";
 	public final String ELEMENT_GROUPBY_ITEM_DEFAULT = "//*[contains(@class,'ViewList')]/../*[contains(.,'$group')]";
 	public final String ELEMENT_TASK_CLOCK_ICON = "//*[contains(@class,'taskName')][contains(.,'$task')]/..//*[contains(@class,'Clock')]";
-	public final String ELEMENT_TASK_DUEDATE = "//*[@class='column-item column-title taskName'][contains(.,'$task')]/../*[@class='column-item column-time']/*[contains(.,'$day')]";
-	public final String ELEMENT_TASK_DUEDATE_TODAY = "//*[@class='column-item column-title taskName'][contains(.,'$task')]/../*[@class='column-item column-time']/*[contains(.,'Today')]";
-	public final String ELEMENT_TASK_DUEDATE_TOMORROW = "//*[@class='column-item column-title taskName'][contains(.,'$task')]/../*[@class='column-item column-time']/*[contains(.,'Tomorrow')]";
-	public final String ELEMENT_TASK_DUEDATE_YESTERDAY = "//*[@class='column-item column-title taskName'][contains(.,'$task')]/../*[@class='column-item column-time']/*[contains(.,'Yesterday')]";
+	public final String ELEMENT_TASK_DUEDATE = "//*[contains(@class,'taskName')][contains(.,'$task')]/../*[contains(.,'$day')]";
+	public final String ELEMENT_TASK_DUEDATE_TODAY = "//*[contains(@class,'taskName')][contains(.,'$task')]/../*[contains(.,'Today')]";
+	public final String ELEMENT_TASK_DUEDATE_TOMORROW = "//*[contains(@class,'taskName')][contains(.,'$task')]/../*[contains(.,'Tomorrow')]";
+	public final String ELEMENT_TASK_DUEDATE_YESTERDAY = "//*[contains(@class,'taskName')][contains(.,'$task')]/../*[contains(.,'Yesterday')]";
 	public final String ELEMENT_TASK_COMPLETE_ICON = "//*[contains(@class,'taskName')][contains(.,'$task')]/..//*[contains(@class,'Validate')]";
 	
 	//List View-->Group by Status
@@ -284,6 +284,7 @@ public class TaskManagementLocatorObject extends PlatformBase {
 	//title
 	public final String ELEMENT_RIGHT_PANE_TASK_COMPLETE_ICON="//*[@data-name='title'][contains(.,'$task')]/..//*[contains(@class,'Validate')]";
 	public final By ELEMENT_RIGHT_PANE_TASK_PROJECT_LINK = By.xpath("//*[@data-original-title='Click to edit']/*[@data-name='project']");
+	public final By ELEMENT_RIGHT_PANE_TASK_PROJECT_REMOVE_ICON=By.xpath("//*[contains(@class,'removeProject')]/*[contains(@class,'Close')]");
 	public final String ELEMENT_RIGHT_PANE_TASK_PROJECT_TEXT = "//*[@data-name='project']/*[contains(.,'$project')]";
 	public final By ELEMENT_RIGHT_PANE_TASK_NOPROJECT_TEXT = By.xpath("//*[@data-name='project'][contains(.,'No Project')]");
 	public final String ELEMENT_RIGHT_PANE_TASK_TITLE_TEXT = "//*[@data-name='title'][contains(.,'$task')][@data-original-title='Click to edit']";

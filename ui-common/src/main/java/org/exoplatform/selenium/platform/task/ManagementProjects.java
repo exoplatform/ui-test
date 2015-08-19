@@ -1,13 +1,10 @@
 package org.exoplatform.selenium.platform.task;
 
 import static org.exoplatform.selenium.TestLogger.info;
-
 import java.awt.AWTException;
 import java.awt.Robot;
 import java.awt.event.KeyEvent;
-
 import org.exoplatform.selenium.Utils;
-
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.Keys;
@@ -1055,5 +1052,13 @@ public class ManagementProjects extends TaskManagementLocatorObject {
         driver.findElement(ELEMENT_BOARD_STATUS_TITLE_INPUT_NEW).sendKeys(Keys.ENTER);
         Utils.pause(500);
         waitForAndGetElement(ELEMENT_BOARD_STATUS.replace("$flow", newTitle));
+	}
+	/**
+	 * Check No Task screen
+	 * @param project
+	 */
+	public void checkNoTask(String project){
+		openProject(project);
+		waitForAndGetElement(ELEMENT_WELCOME_TEXT_TASK_DEFAULT);
 	}
 }

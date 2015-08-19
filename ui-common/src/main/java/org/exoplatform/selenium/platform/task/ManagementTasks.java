@@ -3,15 +3,12 @@ package org.exoplatform.selenium.platform.task;
 import java.awt.AWTException;
 import java.awt.Robot;
 import java.awt.event.KeyEvent;
-
 import org.exoplatform.selenium.Utils;
-
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
-
 import static org.exoplatform.selenium.TestLogger.info;
 
 /**
@@ -161,6 +158,7 @@ public class ManagementTasks extends TaskManagementLocatorObject {
 		waitForAndGetElement(ELEMENT_LEFT_PANE_NO_PROJECT);
 		waitForAndGetElement(ELEMENT_LEFT_PANE_INCOMING_ACTIVE);
 	}
+	
 	/**
 	 * Check Task in project
 	 * @param project
@@ -704,7 +702,8 @@ public void selectOptGroupBy(optionGroupBy opt){
 	 */
 	public void searchTaskProject(String task,String project){
 		openTask(task);
-		info("search project");
+		info("remove old project first");
+		click(ELEMENT_RIGHT_PANE_TASK_PROJECT_REMOVE_ICON);
 		click(ELEMENT_RIGHT_PANE_TASK_PROJECT_LINK);
 		type(ELEMENT_EDIT_PROJECT_PATH_INPUT,project,true);
 		waitForAndGetElement(ELEMENT_RIGHT_PANE_PARENT_PATH_MATCH_VALUE.replace("$text",project));
@@ -712,6 +711,9 @@ public void selectOptGroupBy(optionGroupBy opt){
 		Utils.pause(500);
 		waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_PROJECT_TEXT.replace("$project", project));
 	}
+	/**
+	 * Edit task Project
+	 */
 	/**
 	 * Edit assignee
 	 * @param task
