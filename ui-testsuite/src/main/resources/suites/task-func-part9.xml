@@ -1,0 +1,18 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="Task Func Test" verbose="1" preserve-order="true">
+	<test name="task-func-part9" enabled="true">
+		<groups>
+			<run>
+				<exclude name="pending" />
+			</run>
+		</groups>
+		<classes>
+			<class name="org.exoplatform.selenium.platform.task.functional.TASK_TestConfig_1" />
+			<class name="org.exoplatform.selenium.platform.task.functional.TASK_Tasks_Overdue" />
+			
+		</classes>
+	</test>
+	<listeners>
+		<listener class-name="org.exoplatform.selenium.TestReportListener" />
+	</listeners>
+</suite>
