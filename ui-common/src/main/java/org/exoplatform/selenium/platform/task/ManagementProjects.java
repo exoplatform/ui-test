@@ -1012,4 +1012,5 @@ public class ManagementProjects extends TaskManagementLocatorObject {
 		info("status : "+status);
 		waitForAndGetElement(ELEMENT_BOARD_STATUS_NUMBER.replace("$flow", status).replace("$num", String.valueOf(num)));
 	}
+	
 }

@@ -76,8 +76,8 @@ public class TaskManagementLocatorObject extends PlatformBase {
 	public final By ELEMENT_SORTBY_ICON = By.xpath("//*[contains(@class,'SortDown')]");
 	public final String ELEMENT_TASK_COLOR="//*[contains(@class,'title')][contains(.,'$task')]/..//*[contains(@class,'project-color $color')]";
 	public final String ELEMENT_TASK_NO_COLOR=".//*[contains(@class,'title')][contains(.,'$task')]/..//*[@class='project-color ']";
-	public final String ELEMENT_TASK_SYMBOL_BLUE = "//*[contains(@class,'row-item')]/*[contains(@class,'taskName')][.='$task']/..//*[contains(@class,'uiIconColorWarningInBlue')]";
-	public final String ELEMENT_TASK_SYMBOL_RED = "//*[contains(@class,'row-item')]/*[contains(@class,'taskName')][.='$task']/..//*[contains(@class,'uiIconColorWarningInRed')]";
+	public final String ELEMENT_TASK_SYMBOL_BLUE = "//*[contains(.,'$task')]/..//*[contains(@class,'uiIconColorWarningInBlue')]";
+	public final String ELEMENT_TASK_SYMBOL_RED = "//*[contains(.,'$task')]/..//*[contains(@class,'uiIconColorWarningInRed')]";
 	
 	public final By ELEMENT_WELCOME_TEXT_TASK_DEFAULT= By.xpath("//*[@class='empty-content']/*[contains(.,'Welcome to eXo Tasks')]");
 	public final By ELEMENT_LEFT_PANE_TASKS_ARROW_MENU=By.xpath("//*[contains(@class,'project-name')][contains(.,'Tasks')]/../*[contains(@class,'collapseTree')]/*[contains(@class,'ArrowDownMini')]");
@@ -116,7 +116,7 @@ public class TaskManagementLocatorObject extends PlatformBase {
 	public final By ELEMENT_WELCOME_TEXT_PROJECT_DEFAULT= By.xpath("//*[@class='empty-content']/*[contains(.,'No Project')]");
 	public final By ELEMENT_WELCOME_TEXT_PROJECT_SHARE1= By.xpath("//*[@class='empty-content']/*[contains(.,'This is John Smith's project.')]");
 	public final By ELEMENT_WELCOME_TEXT_PROJECT_SHARE2= By.xpath("//*[@class='empty-content']/*[contains(.,'There is no task to do.')]");
-	
+	public final String ELEMENT_PROJECT_TITLE = "//*[contains(@class,'centerPanel')]//*[contains(@class,'projectName')][contains(.,'$project')]";
 	//Share project form
 	public final By ELEMENT_SHARE_PROJECT_EDIT_MANAGER_ICON = By.xpath("//*[@data-type='manager']//*[contains(@class,'EditPermission')]/*[contains(@class,'Edit')]");
 	public final By ELEMENT_SHARE_PROJECT_EDIT_PARTICIPANT_ICON =  By.xpath("//*[@data-type='participant']//*[contains(@class,'EditPermission')]/*[contains(@class,'Edit')]");
@@ -225,10 +225,19 @@ public class TaskManagementLocatorObject extends PlatformBase {
 	//List View - Sort by Title
 	public final By ELEMENT_SORTBY_TITLE = By.xpath("//*[@data-orderby='title']");
 	
-	//*************************************List View*****************************************//
+	//*************************************Board View*****************************************//
 	public final By ELEMENT_BOARD_VIEW = By.xpath("//*[contains(@class,'btn-group')]/*[contains(@class,'btn')]/*[contains(.,'Board')]");
 	public final String ELEMENT_BOARD_STATUS = "//*[contains(@class,'col')]/*[@data-name='name'][contains(.,'$flow')]";
 	public final String ELEMENT_BOARD_STATUS_NUMBER = "//*[contains(@class,'col')]/*[@data-name='name'][contains(.,'$flow')]/../*[contains(@class,'number-tasks')][contains(.,'$num')]";
+	public final String ELEMENT_BOARD_TASK_CONTAINER = "//*[contains(@class,'col$num')][contains(@data-connected,'taskContainer')]";
+	public final String ELEMENT_BOARD_TASK_CONTAINER_GROUPBY_ASSIGNEE = "//*[contains(@class,'col$num')][contains(@data-connected,'$user')]";
+	public final String ELEMENT_BOARD_TASK_TITLE_GROUPBY_ASSIGNEE_INPUT = "//*[contains(@class,'col$num')]//*[contains(@class,'createTaskInListView')]/*[@value='$user']/../*[@name='taskTitle']";
+	public final String ELEMENT_BOARD_TASK_TITLE_INPUT = "//*[contains(@class,'col$num')]//*[contains(@class,'createTaskInListView')]/*[@value='none']/../*[@name='taskTitle']";
+	public final String ELEMENT_BOARD_TASK_TITLE= "//*[contains(@class,'col$num')]//*[contains(@class,'taskName')][contains(.,'$task')]";
+	public final String ELEMENT_BOARD_TASK_DRAG_ICON ="//*[contains(@class,'col$num')]//*[contains(@class,'taskName')][contains(.,'$task')]/../../span[contains(@class,'dragable')]";
+	public final String ELEMENT_BOARD_TASK_BOX = "//*[contains(@class,'taskName')][contains(.,'$task')]/../..";
+	public final String ELEMENT_BOARD_COL_ITEM="//*[contains(@class,'col$num1')]//*[contains(@class,'taskItem')][$num2]";
+	public final String ELEMENT_BOARD_COL_ITEM_TASK ="//*[contains(@class,'col$num1')]//*[contains(@class,'taskItem')][$num2]//*[contains(@class,'taskName')][contains(.,'$task')]";
 	
 	/***********************************************************RIGHT PANE******************************************************/
 	// Project Overview

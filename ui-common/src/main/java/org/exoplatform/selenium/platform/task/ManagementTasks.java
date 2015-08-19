@@ -1406,4 +1406,48 @@ public void selectOptGroupBy(optionGroupBy opt){
 		info("check display of time change");
 		waitForAndGetElement(ELEMENT_RIGHT_PANE_CHANGE_TIME.replace("$user", user).replace("$text", text).replace("$time", time));
 	}
+	/**
+	 * Add new task in Board
+	 * @param colId
+	 * @param isNone
+	 * 				true if group by none
+	 * 				false if group by assignee
+	 * @param user
+	 */
+	public void addTaskInBoard(int colId,boolean isNone,String project,String task,String user){
+		if(isNone){
+			    info("group by none");
+			    mouseOverAndClick(ELEMENT_BOARD_TASK_CONTAINER.replace("$num", String.valueOf(colId)));
+			    waitForAndGetElement(ELEMENT_BOARD_TASK_TITLE_INPUT.replace("$num", String.valueOf(colId))).sendKeys(task);
+		        click(ELEMENT_PROJECT_TITLE.replace("$project", project));
+		        waitForAndGetElement(ELEMENT_BOARD_TASK_TITLE.replace("$task", task).replace("$num", String.valueOf(colId)));
+		}else{
+			info("group by assignee");
+				mouseOverAndClick(ELEMENT_BOARD_TASK_CONTAINER_GROUPBY_ASSIGNEE.replace("$num", String.valueOf(colId)).replace("$user", user));
+				waitForAndGetElement(ELEMENT_BOARD_TASK_TITLE_GROUPBY_ASSIGNEE_INPUT.replace("$num", String.valueOf(colId)).replace("$user", user)).sendKeys(task);
+				click(ELEMENT_PROJECT_TITLE.replace("$project", project));
+		        waitForAndGetElement(ELEMENT_BOARD_TASK_TITLE.replace("$task", task).replace("$num", String.valueOf(colId)));
+		   
+		}
+	}
+	/**
+	 * Check drag and drop task
+	 * @param task
+	 * @param col
+	 * @param target
+	 * 				is target column if different column
+	 * 				is target item in the same column if same column
+	 * @param isSameCol
+	 */
+	public void checkDragDropTask(String task,int col,int target,boolean isSameCol){
+		info("drag task");
+		mouseOverAndClick(ELEMENT_BOARD_TASK_BOX.replace("$task", task));
+		if(isSameCol){
+			dragAndDropToObject(ELEMENT_BOARD_TASK_DRAG_ICON.replace("$task", task).replace("$num", String.valueOf(col)), ELEMENT_BOARD_COL_ITEM.replace("$num1", String.valueOf(col)).replace("$num2", String.valueOf(target)));
+			waitForAndGetElement(ELEMENT_BOARD_COL_ITEM_TASK.replace("$task", task).replace("$num1", String.valueOf(col)).replace("$num2", String.valueOf(target)));
+		}else{
+			dragAndDropToObject(ELEMENT_BOARD_TASK_DRAG_ICON.replace("$task", task).replace("$num", String.valueOf(col)), ELEMENT_BOARD_TASK_CONTAINER.replace("$num", String.valueOf(target)));
+			waitForAndGetElement(ELEMENT_BOARD_TASK_TITLE.replace("$task", task).replace("$num", String.valueOf(target)));
+		}
+	}
 }
