@@ -112,6 +112,7 @@ public class ManagementTasks extends TaskManagementLocatorObject {
 		click(ELEMENT_TASK_TITLE.replace("$task", task),0,true);
 		info("click on arrow menu");
 		click(ELEMENT_RIGHT_PANE_TASK_ARROW_MENU,0,true);
+		Utils.pause(500);
 		switch(opt){
 		case Watch:
 			info("select Watch");
@@ -144,6 +145,7 @@ public class ManagementTasks extends TaskManagementLocatorObject {
 		click(ELEMENT_ADD_TASK_BTN,0,true);
 		waitForAndGetElement(ELEMENT_ADD_TASK_TITLE).sendKeys(task);
         driver.findElement(ELEMENT_ADD_TASK_TITLE).sendKeys(Keys.ENTER);
+        Utils.pause(1000);
         waitForAndGetElement(ELEMENT_TASK_TITLE.replace("$task", task));
         waitForElementNotPresent(ELEMENT_LEFT_PANE_TOOLTIP_TASK);
 		waitForElementNotPresent(ELEMENT_WELCOME_IMG);
@@ -152,6 +154,7 @@ public class ManagementTasks extends TaskManagementLocatorObject {
 	 * Check first access
 	 */
 	public void checkFirstAccess(){
+		Utils.pause(1000);
 		waitForAndGetElement(ELEMENT_LEFT_PANE_TOOLTIP_TASK);
 		waitForAndGetElement(ELEMENT_WELCOME_TEXT_TASK_DEFAULT);
 		waitForAndGetElement(ELEMENT_WELCOME_IMG);
@@ -168,6 +171,7 @@ public class ManagementTasks extends TaskManagementLocatorObject {
 	public void checkTasksOfProject(String project,String...tasks){
 		info("check list of tasks in project");
 		click(ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project",project),0,true);
+		Utils.pause(500);
 		for (String task : tasks) {
 			waitForAndGetElement(ELEMENT_TASK_TITLE.replace("$task", task));
 		}
@@ -182,6 +186,7 @@ public class ManagementTasks extends TaskManagementLocatorObject {
 	 */
 	public void checkTaskDetail(String task,boolean isProject,String project,String defaultStatus){
 		openTask(task);
+		Utils.pause(1000);
 		waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_TITLE_TEXT.replace("$task", task));
 		waitForAndGetElement(ELEMENT_UNTITLEDTASK_AND_TASK_INPUT.replace("$task", task));
 		if(isProject && !defaultStatus.isEmpty()){
@@ -204,9 +209,10 @@ public class ManagementTasks extends TaskManagementLocatorObject {
 		waitForAndGetElement(ELEMENT_ADD_TASK_TITLE).sendKeys(task);
         Utils.pause(500);
         driver.findElement(ELEMENT_ADD_TASK_TITLE).sendKeys(Keys.ENTER);
+        Utils.pause(500);
         waitForElementNotPresent(ELEMENT_LEFT_PANE_TOOLTIP_TASK);
-		waitForElementNotPresent(ELEMENT_WELCOME_IMG);
 		if(isCheck){
+			waitForElementNotPresent(ELEMENT_WELCOME_IMG);
 			waitForAndGetElement(ELEMENT_TASK_TITLE.replace("$task", task));
 		}
 	}
@@ -241,7 +247,8 @@ public class ManagementTasks extends TaskManagementLocatorObject {
 	public void checkDisplayOfTitle(String task){
 		info("check display of long title");
 		openTask(task);
-		waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_TITLE_TEXT.replace("$task", task));
+		Utils.pause(500);
+		waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_TITLE_TEXT.replace("$task", task),3000,0);
 	}
 	/**
 	 * Add comment to task
@@ -259,7 +266,7 @@ public class ManagementTasks extends TaskManagementLocatorObject {
 		//type(ELEMENT_RIGHT_PANE_COMMENT_INPUT,comment,false);
 		click(ELEMENT_RIGHT_PANE_COMMENT_BUTTON);
 		Utils.pause(2000);
-		waitForAndGetElement(ELEMENT_RIGHT_PANE_COMMENT_TEXT.replace("$user", user).replace("$comment", comment));
+		waitForAndGetElement(ELEMENT_RIGHT_PANE_COMMENT_TEXT.replace("$user", user).replace("$comment", comment),DEFAULT_TIMEOUT,0);
 	}
 	/**
 	 * Add many comment into task
@@ -273,6 +280,7 @@ public class ManagementTasks extends TaskManagementLocatorObject {
 		openTask(task);
 		for(int i=1;i<=loop;i++){
 			doubleClickOnElement(ELEMENT_RIGHT_PANE_COMMENT_LINK);
+			Utils.pause(1000);
 			WebElement input= waitForAndGetElement(ELEMENT_RIGHT_PANE_COMMENT_INPUT.replace("$comment",""));
 			Actions action =new Actions(driver);
 			action.moveToElement(input).sendKeys(comment+i).build().perform();
@@ -291,6 +299,7 @@ public class ManagementTasks extends TaskManagementLocatorObject {
 	public void checkViewAllComments(String user,String comment,int num){
 		driver.navigate().refresh();
 		info("check display of View all comment");
+		Utils.pause(1000);
 		waitForAndGetElement(ELEMENT_RIGHT_PANE_COMMENT_TEXT.replace("$user", user).replace("$comment", comment+num));
 		waitForAndGetElement(ELEMENT_RIGHT_PANE_COMMENT_TEXT.replace("$user", user).replace("$comment", comment+(num-1)));
 		for(int i=1;i<=(num-2);i++){
@@ -308,6 +317,7 @@ public class ManagementTasks extends TaskManagementLocatorObject {
 	public void checkHideAllComments(String user,String comment,int num){
 		info("check display of Hide all comment");
 		click(ELEMENT_RIGHT_PANE_COMMENT_VIEW_ALL.replace("$num",String.valueOf(num)));
+		Utils.pause(1000);
 		for(int i=1;i<=num;i++){
 			waitForAndGetElement(ELEMENT_RIGHT_PANE_COMMENT_TEXT.replace("$user", user).replace("$comment", comment+i));
 		}
@@ -323,21 +333,23 @@ public class ManagementTasks extends TaskManagementLocatorObject {
 	public void checkSuggestionListWhenMention(String key,String...users){
 		info("check suggestion list when mention user");
 		doubleClickOnElement(ELEMENT_RIGHT_PANE_COMMENT_LINK);
+		Utils.pause(1000);
 		WebElement input= waitForAndGetElement(ELEMENT_RIGHT_PANE_COMMENT_INPUT.replace("$comment",""));
 		Actions action =new Actions(driver);
 		action.moveToElement(input).sendKeys("@"+key).build().perform();
+		Utils.pause(1000);
 		for (String user : users) {
 			waitForAndGetElement(ELEMENT_RIGHT_PANE_COMMENT_MENTION.replace("$user", user));
 		}
 	}
 	/**
 	 * Check comment button
-	 * @param task
 	 * @param isDisabled
 	 * 					true if button is disabled
 	 * 					false if button is enabled
 	 */
-	public void checkCommentButtonOfTaskComment(String task,boolean isDisabled){
+	public void checkCommentButtonOfTaskComment(boolean isDisabled){
+		Utils.pause(500);
 		if(isDisabled){
 			info("button is disabled");
 			waitForAndGetElement(ELEMENT_RIGHT_PANE_COMMENT_BUTTON_DISABLED);
@@ -376,6 +388,7 @@ public class ManagementTasks extends TaskManagementLocatorObject {
 		WebElement input= waitForAndGetElement(ELEMENT_RIGHT_PANE_COMMENT_INPUT.replace("$comment",""));
 		Actions action =new Actions(driver);
 		action.moveToElement(input).sendKeys(comment).build().perform();
+		Utils.pause(1000);
 		waitForAndGetElement(ELEMENT_RIGHT_PANE_COMMENT_INPUT_TEXTAREA);
 	}
 	/**
@@ -394,7 +407,7 @@ public class ManagementTasks extends TaskManagementLocatorObject {
 	 * @param locator
 	 * @return data-taskid of element
 	 */
-	public Integer getTaskId(Object locator) {
+	public Integer getTaskId(String locator) {
 		try {
 			return Integer.parseInt(waitForAndGetElement(locator).getAttribute("data-taskid"));
 		} catch (StaleElementReferenceException e) {
@@ -413,6 +426,7 @@ public class ManagementTasks extends TaskManagementLocatorObject {
 		info("clone task");
 		openTask(task);
 		selectOptMenuTask(task, optMenuTask.Clone);
+		Utils.pause(1000);
 		waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_TITLE_TEXT.replace("$task","Copy of "+ task));
 	}
 	/**
@@ -480,6 +494,7 @@ public class ManagementTasks extends TaskManagementLocatorObject {
 	 */
 	public void checkSortByCreatedDate(String[] tasks){
 		int i,j;
+		Utils.pause(500);
 		for(i=tasks.length,j=1;i>0;i--,j++)
 			waitForAndGetElement(ELEMENT_TASK_ORDER.replace("$num",String.valueOf(j)).replace("$task", tasks[i-1]));
 		
@@ -490,6 +505,7 @@ public class ManagementTasks extends TaskManagementLocatorObject {
 	 */
 	public void checkSortByTitle(String[] tasks){
 		int i;
+		Utils.pause(500);
 		for(i=1;i<=tasks.length;i++){
 			waitForAndGetElement(ELEMENT_TASK_ORDER.replace("$num",String.valueOf(i)).replace("$task", tasks[i-1]));
 		}
@@ -511,7 +527,7 @@ public class ManagementTasks extends TaskManagementLocatorObject {
 	 * Select group by
 	 * @param opt
 	 */
-public void selectOptGroupBy(optionGroupBy opt){
+	public void selectOptGroupBy(optionGroupBy opt){
 		clickGroupBy();
 		Utils.pause(500);
 		switch(opt){
@@ -554,6 +570,7 @@ public void selectOptGroupBy(optionGroupBy opt){
 	 * 			number of tasks 
 	 */
 	public void checkGroupBy(boolean isGroup,String header,int num){
+		Utils.pause(500);
 		if(isGroup){
 			waitForAndGetElement(ELEMENT_GROUPBY_HEADER_NUM.replace("$header", header).replace("$num", String.valueOf(num)));
 		}else{
@@ -567,6 +584,7 @@ public void selectOptGroupBy(optionGroupBy opt){
 	 * 			number of order
 	 */
 	public void checkSortOfGroupBy(String header,int num){
+		Utils.pause(500);
 		waitForAndGetElement(ELEMENT_GROUPBY_HEADER_SORT.replace("$header", header).replace("$num", String.valueOf(num)));
 	}
 	/**
@@ -577,6 +595,7 @@ public void selectOptGroupBy(optionGroupBy opt){
 	 * 				false if symbol is red
 	 */
 	public void checkTaskSymbol(String task,boolean isBlue){
+		Utils.pause(500);
 		if(isBlue){
 			waitForAndGetElement(ELEMENT_TASK_SYMBOL_BLUE.replace("$task", task));
 		}else{
@@ -592,6 +611,7 @@ public void selectOptGroupBy(optionGroupBy opt){
 	public void editTaskTitle(String task,String title){
 		openTask(task);
 		click(ELEMENT_RIGHT_PANE_TASK_TITLE_TEXT.replace("$task", task));
+		Utils.pause(1000);
 		if(!title.isEmpty()){
 			info("Input title");
 			waitForAndGetElement(ELEMENT_EDIT_PROJECT_TITLE_INPUT).clear();
@@ -620,6 +640,7 @@ public void selectOptGroupBy(optionGroupBy opt){
 		waitForAndGetElement(ELEMENT_CKEDITOR_IFRAME);
 		inputFrame(ELEMENT_CKEDITOR_IFRAME, des);
 		mouseOverAndClick(ELEMENT_RIGHT_PANE_TASK_TITLE_TEXT.replace("$task", task));
+		Utils.pause(1000);
 		waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_DESCRIPTION_TEXT.replace("$des", des));
 	}
 
@@ -637,6 +658,7 @@ public void selectOptGroupBy(optionGroupBy opt){
 			info("left description blank");
 			inputFrame(ELEMENT_CKEDITOR_IFRAME, "");
 			mouseOverAndClick(ELEMENT_RIGHT_PANE_TASK_TITLE_TEXT.replace("$task", task));
+			Utils.pause(500);
 			waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_DESCRIPTION_EMPTY);
 		}else{
 			info("decorate description");
@@ -645,6 +667,7 @@ public void selectOptGroupBy(optionGroupBy opt){
 			cke_Bold();
 			cke_Italic();
 			mouseOverAndClick(ELEMENT_RIGHT_PANE_TASK_TITLE_TEXT.replace("$task", task));
+			Utils.pause(500);
 			waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_DESCRIPTION_TEXT.replace("$des", des));
 		}
 	}
@@ -683,7 +706,7 @@ public void selectOptGroupBy(optionGroupBy opt){
 	}
 	
 	/**
-	 * Edit project of task
+	 * Edit project of task - for task has no project
 	 * @param task
 	 * @param project
 	 */
@@ -693,23 +716,24 @@ public void selectOptGroupBy(optionGroupBy opt){
 		info("change project");
 		type(ELEMENT_EDIT_PROJECT_PATH_INPUT,project,true);
 		click(ELEMENT_RIGHT_PANE_PARENT_PATH_DROPDOWN_MENU.replace("$project",project),0,true);
+		Utils.pause(500);
 		waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_PROJECT_TEXT.replace("$project", project));
 	}
 	/**
-	 * Search project in Projects
+	 * Search project in Projects - for task already has project
 	 * @param task
 	 * @param project: search key
 	 */
-	public void searchTaskProject(String task,String project){
+	public void searchTaskProject(String task,String newProject){
 		openTask(task);
 		info("remove old project first");
 		click(ELEMENT_RIGHT_PANE_TASK_PROJECT_REMOVE_ICON);
 		click(ELEMENT_RIGHT_PANE_TASK_PROJECT_LINK);
-		type(ELEMENT_EDIT_PROJECT_PATH_INPUT,project,true);
-		waitForAndGetElement(ELEMENT_RIGHT_PANE_PARENT_PATH_MATCH_VALUE.replace("$text",project));
-		click(ELEMENT_RIGHT_PANE_PARENT_PATH_MATCH_VALUE.replace("$text",project));
+		type(ELEMENT_EDIT_PROJECT_PATH_INPUT,newProject,true);
+		waitForAndGetElement(ELEMENT_RIGHT_PANE_PARENT_PATH_MATCH_VALUE.replace("$text",newProject));
+		click(ELEMENT_RIGHT_PANE_PARENT_PATH_MATCH_VALUE.replace("$text",newProject));
 		Utils.pause(500);
-		waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_PROJECT_TEXT.replace("$project", project));
+		waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_PROJECT_TEXT.replace("$project", newProject));
 	}
 	/**
 	 * Edit task Project
@@ -724,6 +748,7 @@ public void selectOptGroupBy(optionGroupBy opt){
 	public void editTaskAssignee(String task,String assignee,String...coworkers){
 		openTask(task);
 		click(ELEMENT_RIGHT_PANE_TASK_ASSIGN_LINK);
+		Utils.pause(1000);
 		info("edit assignee");
 		if(!assignee.isEmpty()){
 			type(ELEMENT_RIGHT_PANE_TASK_ASSIGN_INPUT,assignee,false);
@@ -733,13 +758,13 @@ public void selectOptGroupBy(optionGroupBy opt){
 				robot.delay(1000);
 				robot.keyPress(KeyEvent.VK_ENTER);
 				robot.keyRelease(KeyEvent.VK_ENTER);
-				Utils.pause(1000);
+				Utils.pause(3000);
 			} catch (AWTException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_ASSIGN_INPUT_DISABLED);
-			waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_ASSIGN_REMOVE_ICON.replace("$user",assignee));
+			waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_ASSIGN_INPUT_DISABLED,DEFAULT_TIMEOUT,0);
+			waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_ASSIGN_REMOVE_ICON.replace("$user",assignee),DEFAULT_TIMEOUT,0);
 		}
 		if(coworkers.length>0){
 			for (String coworker : coworkers) {
@@ -750,7 +775,7 @@ public void selectOptGroupBy(optionGroupBy opt){
 					robot.delay(1000);
 					robot.keyPress(KeyEvent.VK_ENTER);
 					robot.keyRelease(KeyEvent.VK_ENTER);
-					Utils.pause(1000);
+					Utils.pause(3000);
 				} catch (AWTException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -759,7 +784,6 @@ public void selectOptGroupBy(optionGroupBy opt){
 			}
 		}
 		openTask(task);
-
 	}
 	/**
 	 * Check assignee popup
@@ -804,6 +828,7 @@ public void selectOptGroupBy(optionGroupBy opt){
 	public void checkTaskAssignee(String assignee,String...coworkers){
 		info("check assignee");
 		click(ELEMENT_RIGHT_PANE_TASK_ASSIGN_LINK);
+		Utils.pause(500);
 		if(!assignee.isEmpty()){
 			waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_ASSIGN_TEXT.replace("$user",assignee));
 		}
@@ -853,6 +878,7 @@ public void selectOptGroupBy(optionGroupBy opt){
 		click(ELEMENT_RIGHT_PANE_TASK_ASSIGN_LINK);
 		info("check auto complete");
 		type(ELEMENT_RIGHT_PANE_TASK_ASSIGN_INPUT,key,false);
+		Utils.pause(1000);
 		if(users.length>0){
 			for (String user : users) {
 				waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_ASSIGN_AUTOCOMPLETE.replace("$user", user));
@@ -900,6 +926,7 @@ public void selectOptGroupBy(optionGroupBy opt){
 	 */
 	public void checkDefaultTaskStatus(String task,String status,boolean isDisplay){
 		openTask(task);
+		Utils.pause(500);
 		info("check default status");
 		if(isDisplay){
 			waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_STATUS_TEXT.replace("$flow", status));
@@ -978,6 +1005,7 @@ public void selectOptGroupBy(optionGroupBy opt){
 	 */
 	public void checkDefaultTag(String task,boolean isPresent){
 		openTask(task);
+		Utils.pause(500);
 		if(isPresent){
 			waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_TAG_DEFAULT_ICON);
 			waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_TAG_DEFAULT_LABEL);
@@ -1050,6 +1078,7 @@ public void selectOptGroupBy(optionGroupBy opt){
 	 */
 	public void checkDisplayOfWorkPlan(String time,String...dates){
 		info("check display of workplan calculation");
+		Utils.pause(500);
 		if(dates.length>1){
 			waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_WORKPLAN_TEXT_DIFFDAY.replace("$date1",dates[0]).replace("$date2", dates[1]).replace("$time", time));
 		}else{
@@ -1062,6 +1091,7 @@ public void selectOptGroupBy(optionGroupBy opt){
 	 */
 	public void checkDefaultOfWorkPlan(String task){
 		openTask(task);
+		Utils.pause(500);
 		info("check default of work plan");
 		waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_WORKPLAN_DEFAULT);
 		click(ELEMENT_RIGHT_PANE_TASK_WORKPLAN_LINK);
@@ -1089,6 +1119,7 @@ public void selectOptGroupBy(optionGroupBy opt){
 		if(to.startsWith("0")){
 			to=to.substring(1);
 		}
+		Utils.pause(1000);
 		waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_WORKPLAN_TOTIME_SELECTED.replace("$time", toTime));
 		waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_WORKPLAN_FROMTIME_SELECTED.replace("$time", fromTime));
 		waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_WORKPLAN_FROM_SELECTED.replace("$day", from));
@@ -1102,6 +1133,7 @@ public void selectOptGroupBy(optionGroupBy opt){
 		openTask(task);
 		click(ELEMENT_RIGHT_PANE_TASK_WORKPLAN_LINK);
 		info("check all day checkbox");
+		Utils.pause(500);
 		waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_WORKPLAN_ALLDAY_CHECKBOX_CHECK);
 	}
 	/**
@@ -1122,6 +1154,7 @@ public void selectOptGroupBy(optionGroupBy opt){
 		click(ELEMENT_RIGHT_PANE_TASK_PRIORITY_LINK);
 		info("edit priority");
 		selectQuick(ELEMENT_RIGHT_PANE_TASK_PRIORITY_SELECT_LINK,priority);
+		Utils.pause(500);
 		waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_PRIORITY_TEXT.replace("$priority",priority));
 		waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_PRIORITY_ICON.replace("$priority",priority));
 	}
@@ -1138,6 +1171,7 @@ public void selectOptGroupBy(optionGroupBy opt){
 		waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_PRIORITY_TEXT.replace("$priority",dfpriority));
 		click(ELEMENT_RIGHT_PANE_TASK_PRIORITY_LINK);
 		info("check priority combobox");
+		Utils.pause(500);
 		for (String priority : priorities) {
 			waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_PRIORITY_SELECT.replace("$opt",priority));
 		}
@@ -1149,6 +1183,7 @@ public void selectOptGroupBy(optionGroupBy opt){
 	public void checkMenuOfTask(){
 		info("check menu of task detail");
 		click(ELEMENT_RIGHT_PANE_TASK_ARROW_MENU);
+		Utils.pause(500);
 		waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_ARROW_MENU_CLONE);
 		waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_ARROW_MENU_DELETE);
 		waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_ARROW_MENU_WATCH);
@@ -1195,6 +1230,7 @@ public void selectOptGroupBy(optionGroupBy opt){
 	public void selectDueDate(String task,optDueDate opt ){
 		openTask(task);
 		click(ELEMENT_RIGHT_PANE_TASK_DUEDATE_LINK);
+		Utils.pause(500);
 		switch(opt){
 		case None:
 			info("select None");
@@ -1258,6 +1294,7 @@ public void selectOptGroupBy(optionGroupBy opt){
 		waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_NODUEDATE);
 		click(ELEMENT_RIGHT_PANE_TASK_DUEDATE_LINK);
 		info("check display of Duedate popup");
+		Utils.pause(500);
 		waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_DUEDATE_CALENDAR);
 		waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_DUEDATE_NONE);
 		waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_DUEDATE_TODAY);
@@ -1275,6 +1312,7 @@ public void selectOptGroupBy(optionGroupBy opt){
 		}
 		click(ELEMENT_RIGHT_PANE_TASK_DUEDATE_LINK);
 		info("check selected day");
+		Utils.pause(500);
 		waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_DUEDATE_DAY_SELECTED.replace("$day", day));
 	}
 	/**
@@ -1283,6 +1321,7 @@ public void selectOptGroupBy(optionGroupBy opt){
 	 */
 	public void checkDisplayOfListView(String...tasks){
 		info("check display of tasks in List View");
+		Utils.pause(500);
 		for (String task : tasks) {
 			waitForAndGetElement(ELEMENT_TASK_DUEDATE.replace("$task", task).replace("$day",getDate(0,"MMM dd")));
 			waitForAndGetElement(ELEMENT_TASK_TITLE.replace("$task", task));
@@ -1307,9 +1346,10 @@ public void selectOptGroupBy(optionGroupBy opt){
 	 */
 	public void checkDisplayOfTaskCheckbox(String task){
 		info("check display of task checkbox");
-		mouseHoverByJavaScript(ELEMENT_TASK_TITLE.replace("$task", task),2);
+		mouseOver(ELEMENT_TASK_TITLE.replace("$task", task),false);
 		waitForAndGetElement(ELEMENT_TASK_COMPLETE_ICON.replace("$task", task));
 		openTask(task);
+		Utils.pause(500);
 		waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_COMPLETE_ICON.replace("$task", task));
 	}
 	/**
@@ -1390,6 +1430,7 @@ public void selectOptGroupBy(optionGroupBy opt){
 	 */
 	public void checkDisplayOfChange(String user,String text,String...opt){
 		click(ELEMENT_RIGHT_PANE_CHANGE_TAB_LINK);
+		Utils.pause(1000);
 		info("check display of change");
 		if(opt.length>0){
 			waitForAndGetElement(ELEMENT_RIGHT_PANE_CHANGE_TEXT.replace("$user", user).replace("$text", text).replace("$opt", opt[0]));
@@ -1406,6 +1447,7 @@ public void selectOptGroupBy(optionGroupBy opt){
 	public void checkDisplayOfChangeTime(String user,String text,String time){
 		click(ELEMENT_RIGHT_PANE_CHANGE_TAB_LINK);
 		info("check display of time change");
+		Utils.pause(1000);
 		waitForAndGetElement(ELEMENT_RIGHT_PANE_CHANGE_TIME.replace("$user", user).replace("$text", text).replace("$time", time));
 	}
 	/**
@@ -1422,12 +1464,14 @@ public void selectOptGroupBy(optionGroupBy opt){
 			    mouseOverAndClick(ELEMENT_BOARD_TASK_CONTAINER.replace("$num", String.valueOf(colId)));
 			    waitForAndGetElement(ELEMENT_BOARD_TASK_TITLE_INPUT.replace("$num", String.valueOf(colId))).sendKeys(task);
 		        click(ELEMENT_PROJECT_TITLE.replace("$project", project));
+		        Utils.pause(500);
 		        waitForAndGetElement(ELEMENT_BOARD_TASK_TITLE.replace("$task", task).replace("$num", String.valueOf(colId)));
 		}else{
 			info("group by assignee");
 				mouseOverAndClick(ELEMENT_BOARD_TASK_CONTAINER_GROUPBY_ASSIGNEE.replace("$num", String.valueOf(colId)).replace("$user", user));
 				waitForAndGetElement(ELEMENT_BOARD_TASK_TITLE_GROUPBY_ASSIGNEE_INPUT.replace("$num", String.valueOf(colId)).replace("$user", user)).sendKeys(task);
 				click(ELEMENT_PROJECT_TITLE.replace("$project", project));
+				Utils.pause(500);
 		        waitForAndGetElement(ELEMENT_BOARD_TASK_TITLE.replace("$task", task).replace("$num", String.valueOf(colId)));
 		   
 		}
@@ -1446,10 +1490,12 @@ public void selectOptGroupBy(optionGroupBy opt){
 		mouseOverAndClick(ELEMENT_BOARD_TASK_BOX.replace("$task", task));
 		if(isSameCol){
 			dragAndDropToObject(ELEMENT_BOARD_TASK_DRAG_ICON.replace("$task", task).replace("$num", String.valueOf(col)), ELEMENT_BOARD_COL_ITEM.replace("$num1", String.valueOf(col)).replace("$num2", String.valueOf(target)));
-			waitForAndGetElement(ELEMENT_BOARD_COL_ITEM_TASK.replace("$task", task).replace("$num1", String.valueOf(col)).replace("$num2", String.valueOf(target)));
+			Utils.pause(2000);
+			waitForAndGetElement(ELEMENT_BOARD_COL_ITEM_TASK.replace("$task", task).replace("$num1", String.valueOf(col)).replace("$num2", String.valueOf(target)),DEFAULT_TIMEOUT,0);
 		}else{
 			dragAndDropToObject(ELEMENT_BOARD_TASK_DRAG_ICON.replace("$task", task).replace("$num", String.valueOf(col)), ELEMENT_BOARD_TASK_CONTAINER.replace("$num", String.valueOf(target)));
-			waitForAndGetElement(ELEMENT_BOARD_TASK_TITLE.replace("$task", task).replace("$num", String.valueOf(target)));
+			Utils.pause(2000);
+			waitForAndGetElement(ELEMENT_BOARD_TASK_TITLE.replace("$task", task).replace("$num", String.valueOf(target)),DEFAULT_TIMEOUT,0);
 		}
 	}
 	/**
@@ -1458,6 +1504,7 @@ public void selectOptGroupBy(optionGroupBy opt){
 	 * @param col
 	 */
 	public void checkTaskLocation(String task,int col){
+		Utils.pause(500);
 		waitForAndGetElement(ELEMENT_BOARD_TASK_TITLE.replace("$num", String.valueOf(col)).replace("$task", task));
 	}
 }

@@ -125,7 +125,8 @@ import org.testng.annotations.*;
 		hp.goToMySpaces();
 		spaMg.addNewSpaceSimple(space1,space1);
 		hp.goToTasks();
-		waitForAndGetElement(mgProject.ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project", space1));
+		waitForAndGetElement(mgProject.ELEMENT_LEFT_PANE_PROJECT_NAME
+				.replace("$project", space1));
 		
 		/*Step number: 2
 		*Step Name: Step 2: Check Delete action is not available to the main space project
@@ -137,7 +138,8 @@ import org.testng.annotations.*;
 			- Delete action is not available to the main space project*/
 		info("cannot delete space project");
 		mgProject.goToContMenuGivenProject(space1);
-		waitForElementNotPresent(mgProject.ELEMENT_LEFT_PANE_PROJECT_DELETE.replace("$project", space1));
+		waitForElementNotPresent(mgProject.ELEMENT_LEFT_PANE_PROJECT_DELETE
+				.replace("$project", space1));
 		
 		/*Step number: 3
 		*Step Name: Step 3: Delete space
@@ -160,7 +162,8 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- spaceA project is deleted from project list*/
 		hp.goToTasks();
-		waitForElementNotPresent(mgProject.ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project", space1));
+		waitForElementNotPresent(mgProject.ELEMENT_LEFT_PANE_PROJECT_NAME
+				.replace("$project", space1));
 		
 		/*Step number: 5
 		*Step Name: Step 5: Remove Task application in space

@@ -380,6 +380,7 @@ public class HomePagePlatform extends TestBase{
 		if(waitForAndGetElement(ELEMENT_TASKS_PORTLET,5000,0)==null)
 			driver.navigate().refresh();
 		waitForAndGetElement(ELEMENT_TASKS_PORTLET);
+		Utils.pause(1000);
 	}
 }
 

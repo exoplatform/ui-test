@@ -52,7 +52,6 @@ import org.testng.annotations.*;
 			New task is created*/
 		mgTask.addTaskDirectly(task1,true);
 		mgTask.openTask(task1);
-		
 		/*Step number: 3
 		*Step Name: Step 3: Check comment button is disabled in case of no text input in comment field
 		*Step Description: 
@@ -61,7 +60,7 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			Comment button is disabled .*/ 
-		mgTask.checkCommentButtonOfTaskComment(task1,true);
+		mgTask.checkCommentButtonOfTaskComment(true);
 		
 		/*Step number: 3
 		*Step Name: Step 3: Check comment text area can be expanded
@@ -81,7 +80,7 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			Comment button is enabled*/ 
-		mgTask.checkCommentButtonOfTaskComment(task1, false);
+		mgTask.checkCommentButtonOfTaskComment(false);
 		
 		info("delete data");
 		mgTask.deleteTask(task1);

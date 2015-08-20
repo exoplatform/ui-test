@@ -58,7 +58,7 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- task is setted to the same status in the new project workflow.
 			- If not status matches in the new project workflow, the status is set to the first status in the new project workflow.*/
-		mgTask.editTaskProject(task1, prj2);
+		mgTask.searchTaskProject(task1, prj2);
 		mgTask.checkDefaultTaskStatus(task1,status,true);
 		
 		info("delete data");

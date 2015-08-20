@@ -36,7 +36,9 @@ import org.testng.annotations.*;
 		mgProject.addProject(name,"", false);
 		int prj1_id= mgProject.getDataId(mgProject.ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project", name));
 		mgProject.addProject(name,"", false);
-		waitForAndGetElement(mgProject.ELEMENT_LEFT_PANE_PROJECT_ID.replace("$id",String.valueOf(prj1_id+1)).replace("$project", name));
+		waitForAndGetElement(mgProject.ELEMENT_LEFT_PANE_PROJECT_ID
+				.replace("$id",String.valueOf(prj1_id+1))
+				.replace("$project", name));
 		
 		info("delete data");
 		mgProject.deleteProjectByDataId(name,String.valueOf(prj1_id), false);
@@ -517,7 +519,8 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- matched project is displayed:Projects project Bproject B1*/ 
 		mgProject.searchProjectPath(prj11);
-		waitForAndGetElement(mgProject.ELEMENT_RIGHT_PANE_PARENT_PATH_FULL.replace("$parent",prj1).replace("$child", prj11));
+		waitForAndGetElement(mgProject.ELEMENT_RIGHT_PANE_PARENT_PATH_FULL
+				.replace("$parent",prj1).replace("$child", prj11));
 		
 		info("delete data");
 		mgProject.deleteProject(prj1, true,prj11);
@@ -837,7 +840,8 @@ import org.testng.annotations.*;
 		info("mary is now manager of project 1");
 		mgProject.goToProjects();
 		mgProject.openProject(prj1);
-		waitForAndGetElement(mgProject.ELEMENT_RIGHT_PANE_MANAGER_NAME.replace("$user", DATA_NAME_USER2));
+		waitForAndGetElement(mgProject.ELEMENT_RIGHT_PANE_MANAGER_NAME
+				.replace("$user", DATA_NAME_USER2),DEFAULT_TIMEOUT,1);
 		
 		info("delete data");
 		mgProject.deleteProject(prj1, true);

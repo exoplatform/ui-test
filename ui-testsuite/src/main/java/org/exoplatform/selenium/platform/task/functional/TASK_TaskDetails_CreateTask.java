@@ -1,7 +1,10 @@
 package org.exoplatform.selenium.platform.task.functional;
 
 import static org.exoplatform.selenium.TestLogger.info;
+
+import org.exoplatform.selenium.platform.task.ManagementTasks.optionSortBy;
 import org.exoplatform.selenium.platform.task.ManagementTasks.optionTask;
+
 import org.testng.annotations.*;
 
 
@@ -103,14 +106,15 @@ import org.testng.annotations.*;
 	*<li> Test Case Name: Check display of tasks when the page is refreshed.</li>
 	*<li> Pre-Condition: exo-tasks add-on is installedsome tasks are created in Incoming</li>
 	*<li> Post-Condition: </li>
+	*https://jira.exoplatform.org/browse/TA-213
 	*/
-	@Test 
+	@Test (groups="pending")
 	public  void test04_CheckDisplayOfTasksWhenThePageIsRefreshed() {
 		info("Test 4: Check display of tasks when the page is refreshed");
 		String task1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		String task2 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		String task3 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
-		String sort = sortByData.getSortBy(2);
+		String title = sortByData.getSortBy(1);
 		String[] tasks = {task1,task2,task3};
 		/*Step Number: 1
 		*Step Name: Step 1: Open Tasks page
@@ -130,10 +134,9 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- New task is created*/
-		mgTask.selectOptionTask(optionTask.Incoming);
-		mgTask.addTask("Incoming", task1);
-		mgTask.addTask("Incoming", task2);
-		mgTask.addTask("Incoming", task3);
+		mgTask.addTaskDirectly(task1, true);
+		mgTask.addTaskDirectly(task2, true);
+		mgTask.selectOptSortBy(optionSortBy.Title);
 		
 		/*Step number: 3
 		*Step Name: Step 3: Check display of tasks when the page is refreshed
@@ -143,9 +146,10 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- The added tasks will be rearranged following the Group By & Sort By options.*/ 
+		mgTask.addTaskDirectly(task3, true);
 		driver.navigate().refresh();
-		mgTask.checkSortByCreatedDate(tasks);
-		waitForAndGetElement(mgProject.ELEMENT_SORTBY_ITEM.replace("$sort",sort));
+		mgTask.checkSortByTitle(tasks);
+		waitForAndGetElement(mgProject.ELEMENT_SORTBY_ITEM.replace("$sort",title));
 		
 		info("delete task");
 		mgTask.deleteTask(task3);
@@ -257,7 +261,7 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- the right pane is opened with task details that can be editable.*/ 
 		mgTask.editTaskTitle(task1, title);
-		mgTask.editTaskDescription(task1, des);
+		mgTask.editTaskDescription(title, des);
 		
 		info("delete task");
 		mgTask.selectOptionTask(optionTask.Incoming);

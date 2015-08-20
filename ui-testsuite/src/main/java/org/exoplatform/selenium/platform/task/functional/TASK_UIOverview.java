@@ -24,8 +24,9 @@ import org.testng.annotations.*;
 	*<li> Test Case Name: Check first access of project and label.</li>
 	*<li> Pre-Condition: exo-tasks add-on is installed</li>
 	*<li> Post-Condition: </li>
+	* BUG 
 	*/
-	@Test
+	@Test (groups="pending")
 	public  void test01_02_03_CheckFirstAccessOfWelcomeScreen() {
 		info("Test 1: Check first access of welcome screen");
 		/*Step Number: 1
@@ -138,7 +139,7 @@ import org.testng.annotations.*;
 	*<li> Pre-Condition: exo-tasks add-on is installed</li>
 	*<li> Post-Condition: </li>
 	*/
-	@Test
+	@Test 
 	public  void test05_06_10_CheckLeftPane() {
 		info("Test 5: Check Left Pane");
 		String prj1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();

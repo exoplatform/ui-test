@@ -66,7 +66,7 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- Task detail is saved*/ 
-		mgTask.editTaskProject(task1, prj2);
+		mgTask.searchTaskProject(task1, prj2);
 		mgTask.editTaskTitle(task1, newTask);
 		mgTask.editTaskDescription(newTask, task1);
 		mgTask.editTaskStatus(newTask, inProgress);

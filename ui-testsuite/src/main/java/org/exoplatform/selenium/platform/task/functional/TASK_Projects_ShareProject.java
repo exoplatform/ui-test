@@ -1,7 +1,10 @@
 package org.exoplatform.selenium.platform.task.functional;
 
 import static org.exoplatform.selenium.TestLogger.info;
+
+import org.exoplatform.selenium.Utils;
 import org.exoplatform.selenium.platform.task.ManagementProjects.optionContMenuGivenProject;
+
 import org.testng.annotations.*;
 
 	public class TASK_Projects_ShareProject extends TASK_TestConfig_1{
@@ -227,6 +230,7 @@ import org.testng.annotations.*;
 		info("Create a space");
 		hp.goToMySpaces();
 		spaMg.addNewSpaceSimple(space,space);
+		Utils.pause(2000);
 		spaHome.goToSpaceSettingTab();
 		setSpaceMg.inviteUser(DATA_USER2,false,"");
 		hp.goToTasks();

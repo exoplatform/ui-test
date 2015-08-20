@@ -212,8 +212,9 @@ import org.testng.annotations.*;
 	*<li> Test Case Name: Check group by of tasks in each project in Projects.</li>
 	*<li> Pre-Condition: exo-tasks add-on is installedadd project A,Badd some tasks to project A,B</li>
 	*<li> Post-Condition: </li>
+	*https://jira.exoplatform.org/browse/TA-215
 	*/
-	@Test 
+	@Test (groups="pending")
 	public  void test04_CheckGroupByOfTasksInEachProjectInProjects() {
 		info("Test 4: Check group by of tasks in each project in Projects");
 		String project1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
@@ -225,10 +226,11 @@ import org.testng.annotations.*;
 		
 		String none = groupByData.getGroupBy(0);
 		String duedate = groupByData.getGroupBy(1);
-		String label = groupByData.getGroupBy(2);
+		//String label = groupByData.getGroupBy(2);
 		String status = groupByData.getGroupBy(3);
 		String assignee = groupByData.getGroupBy(4);
-		String[] groups = {none,duedate,label,status,assignee};
+		String project = groupByData.getGroupBy(5);
+		String[] groups = {none,duedate,status,assignee,project};
 		/*Step Number: 1
 		*Step Name: Step 1: Open Tasks page
 		*Step Description: 
