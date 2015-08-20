@@ -11,6 +11,7 @@
 			<class name="org.exoplatform.selenium.platform.task.functional.TASK_Tasks_Overdue" />
 			<class name="org.exoplatform.selenium.platform.task.functional.TASK_Tasks_Today" />
 			<class name="org.exoplatform.selenium.platform.task.functional.TASK_Tasks_Tomorrow" />
+			<class name="org.exoplatform.selenium.platform.task.functional.TASK_Tasks_Upcoming" />
 		</classes>
 	</test>
 	<listeners>

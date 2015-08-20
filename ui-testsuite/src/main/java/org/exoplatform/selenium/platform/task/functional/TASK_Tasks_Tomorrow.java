@@ -190,7 +190,7 @@ import org.testng.annotations.*;
 		mgTask.addTaskDirectly(task2,true);
 		mgTask.editTaskAssignee(task1, DATA_USER1);
 		mgTask.selectDueDate(task2, optDueDate.Tomorrow);
-		mgTask.editTaskAssignee(task2, DATA_USER1);
+		mgTask.editTaskAssignee(task1, DATA_USER1);
 		mgTask.selectDueDate(task2, optDueDate.Tomorrow);
 		
 		/*Step number: 2
