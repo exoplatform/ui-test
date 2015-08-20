@@ -12,6 +12,7 @@
 			<class name="org.exoplatform.selenium.platform.task.functional.TASK_Tasks_Today" />
 			<class name="org.exoplatform.selenium.platform.task.functional.TASK_Tasks_Tomorrow" />
 			<class name="org.exoplatform.selenium.platform.task.functional.TASK_Tasks_Upcoming" />
+			<class name="org.exoplatform.selenium.platform.task.functional.TASK_Projects_ProjectStatus" />
 		</classes>
 	</test>
 	<listeners>

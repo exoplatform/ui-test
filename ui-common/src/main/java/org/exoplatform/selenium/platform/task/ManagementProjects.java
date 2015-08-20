@@ -1024,6 +1024,20 @@ public class ManagementProjects extends TaskManagementLocatorObject {
 		waitForElementNotPresent(ELEMENT_BOARD_STATUS.replace("$flow", status));
 	}
 	/**
+	 * Check delete status
+	 * @param status
+	 * @param canDelete
+	 */
+	public void checkDeleteStatus(String status,boolean canDelete){
+		info("check delete icon");
+		mouseOver(ELEMENT_BOARD_STATUS.replace("$flow", status),false);
+		if(canDelete){
+			waitForAndGetElement(ELEMENT_BOARD_STATUS_DELETE_ICON.replace("$flow", status));
+		}else
+			waitForElementNotPresent(ELEMENT_BOARD_STATUS_DELETE_ICON.replace("$flow", status));
+		
+	}
+	/**
 	 * Edit status
 	 * @param status
 	 * @param newTitle
