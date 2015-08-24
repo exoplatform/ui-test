@@ -650,9 +650,10 @@ public class UserAndGroupManagement extends PlatformBase {
 	public void enableDisableUser(String userName,boolean isEnabled){
 		info("---Enable a user---");
 		click(ELEMENT_DISABLE_USER_HANDLE_BTN.replace("$userName",userName));
+		Utils.pause(1000);
 		if(isEnabled){
 			info("Verify that user is enabled");
-			waitForAndGetElement(ELEMENT_DISBALE_USER_ENABLED.replace("$userName",userName));
+			waitForAndGetElement(ELEMENT_DISBALE_USER_ENABLED.replace("$userName",userName),2000,0);
 		}else{
 			info("Verify that user is disabled");
 			waitForElementNotPresent(ELEMENT_DISBALE_USER_ENABLED.replace("$userName",userName));
@@ -700,7 +701,10 @@ public class UserAndGroupManagement extends PlatformBase {
 			Utils.pause(2000);
 			click( ELEMENT_USER_DELETE_ICON.replace("${username}",
 					username));
+<<<<<<< HEAD
 			Utils.pause(3000);
+=======
+>>>>>>> FQA-2576:PLF 4.3 - Write High Fnc/Disable User/Activity Stream
 			//alert.waitForConfirmation(ELEMENT_MSG_CONFIRM_DELETE.replace(
 			//		"${userName}", username));
 			alert.acceptAlert();

@@ -49,7 +49,7 @@ public class ManageLogInOut extends PlatformBase {
 			info("login normally if not use SSO with user " + username + " and pass " + password);
 			type(ELEMENT_INPUT_USERNAME, username, true);
 			type(ELEMENT_INPUT_PASSWORD, password, true);
-			click(ELEMENT_SIGN_IN_BUTTON);
+			click(ELEMENT_SIGN_IN_BUTTON,0,true);
 			if(verify)
 				waitForElementNotPresent(ELEMENT_SIGN_IN_BUTTON);
 		}

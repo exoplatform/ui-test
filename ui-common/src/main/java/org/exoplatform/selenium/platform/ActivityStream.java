@@ -135,8 +135,13 @@ public class ActivityStream extends PlatformBase {
 	public String ELEMENT_ACTIVITY_EDIT_FROM_HOMEPAGE ="//*[@id='UIDocumentForm']//*[contains(text(),'{$title}')]";
 
 	// Common activity
+<<<<<<< HEAD
 	public final String ELEMENT_ACTIVITY_COMMENT = ".//*[contains(text(),'${title}')]/../../../../..//*[contains(text(),\"${comment}\")]";
 	public final String ELEMENT_ACTIVITY_NOT_ANY_COMMENT=".//*[contains(text(),'$title')]/../../../../..//*[contains(@class,'commentList')][not(div)]";
+=======
+	public final String ELEMENT_ACTIVITY_COMMOM_CHECK_COMMENT_OF_ACTIVITY = ".//*[contains(text(),'${title}')]/../../../../..//*[contains(text(),\"${comment}\")]";
+	public final String ELEMENT_ACTIVITY_NUM_LIKE ="//*[@id='boxContainer']//*[contains(.,'$activity')]//*[contains(@class,'statusAction')]//*[contains(@id,'Like')][contains(.,'$num')]";
+>>>>>>> FQA-2576:PLF 4.3 - Write High Fnc/Disable User/Activity Stream
 	public final String ELEMENT_ACTIVITY_VIEW_A_NODE = "//*[@class='linkTitle' and contains(text(),'{$title}')]/../../../..//*[@class='uiIconWatch uiIconLightGray']";
 	public final String ELEMENT_ACTIVITY_EDIT_A_NODE = "//*[@class='linkTitle' and contains(text(),'{$title}')]/../../../..//*[@class='uiIconEdit uiIconLightGray']";
 	public final String ELEMENT_ACTIVITY_ELEMENT_IN_ACTIVITY_STREAM ="//*[@id='boxContainer']//*[contains(text(),'${title}')]";
@@ -208,17 +213,62 @@ public class ActivityStream extends PlatformBase {
 	public final String ELEMENT_ACTIVITY_SPACE_HEADING = "//*[@class='heading']//*[contains(text(),'${space}')]";
 	public final String ELEMENT_ACTIVITY_SPACE_AUTHOR = "//*[contains(text(),'${title}')]/../*[contains(@class,'heading')]/*[contains(@class,'author')]";
 	public final String ELEMENT_ACTIVITY_USER_ACTIVITY_DELETE_BTN = "//*[contains(text(),'${title}')]/../*[contains(@class,'heading')]/*[contains(@class,'uiIconClose uiIconLightGray controllDelete')]";
+<<<<<<< HEAD
 
 	
 	
+=======
+    // Arrow menu Activity
+	public final By ELEMENT_ACTIVITY_ARROWDOWN_MENU = By.xpath("//*[contains(@class,'MiniArrowDown')]");
+	public final By ELEMENT_ACTIVITY_ALL_ACTIVITIES = By.xpath("//*[@class='OptionItem'][contains(.,'All Activities')]");
+	public final By ELEMENT_ACTIVITY_MY_ACTIVITIES = By.xpath("//*[@class='OptionItem'][contains(.,'My Activities')]");
+	public final By ELEMENT_ACTIVITY_MY_SPACES = By.xpath("//*[@class='OptionItem'][contains(.,'My Spaces')]");
+	public final By ELEMENT_ACTIVITY_CONNECTIONS = By.xpath("//*[@class='OptionItem'][contains(.,'Connections')]");
+>>>>>>> FQA-2576:PLF 4.3 - Write High Fnc/Disable User/Activity Stream
 	Button button;
 	/**
 	 * constructor
 	 * @param dr
 	 */
+	
 	public ActivityStream(WebDriver dr){
 		this.driver=dr;
 		button = new Button(dr);
+	}
+	/**
+	 * Define options of menu activity
+	 */
+	public enum optionMenuActivity{
+		All_Activities,My_Spaces,My_Activities,Connections;
+	}
+	/**
+	 * Activity arrow menu
+	 * @param opt
+	 */
+	public void selectOptMenuActivity(optionMenuActivity opt){
+		click(ELEMENT_ACTIVITY_ARROWDOWN_MENU,0,true);
+		Utils.pause(500);
+		switch(opt){
+		case All_Activities:
+			info("Select All Activities");
+			click(ELEMENT_ACTIVITY_ALL_ACTIVITIES,0,true);
+			break;
+		case My_Spaces:
+			info("Select My Spaces");
+			click(ELEMENT_ACTIVITY_MY_SPACES,0,true);
+			break;
+		case My_Activities:
+			info("Select My Activities");
+			click(ELEMENT_ACTIVITY_MY_ACTIVITIES,0,true);
+			break;
+		case Connections:
+			info("Select Connections");
+			click(ELEMENT_ACTIVITY_CONNECTIONS,0,true);
+			break;
+		default:
+			info("No option in the list. Please select correct option.");
+			break;
+		}
 	}
 	/**
 	 * Check activity after added a file
@@ -243,6 +293,7 @@ public class ActivityStream extends PlatformBase {
 		info("The activity of the name:"+name+" is shown successfully");
 	}
 	/**
+<<<<<<< HEAD
 	 * Check if there is not an activity in the stream
 	 * @param name
 	 */
@@ -250,6 +301,15 @@ public class ActivityStream extends PlatformBase {
 		info("Verify that the activity of the name:"+name+" isnot shown");
 		waitForElementNotPresent(ELEMENT_ACTIVITY_ELEMENT_IN_ACTIVITY_STREAM.replace("${title}",name),DEFAULT_TIMEOUT,1);
 		info("The activity of the name:"+name+" isnot shown successfully");
+=======
+	 * Check if there is no an activity in the stream
+	 * @param name
+	 */
+	public void checkNoActivity(String name){
+		info("Verify that the activity of the name:"+name+" is not shown");
+		waitForElementNotPresent(By.xpath(ELEMENT_ACTIVITY_ELEMENT_IN_ACTIVITY_STREAM.replace("${title}",name)),3000,1);
+		info("The activity of the name:"+name+" is not shown successfully");
+>>>>>>> FQA-2576:PLF 4.3 - Write High Fnc/Disable User/Activity Stream
 	}
 	/**
 	 * Check comment of an activity
@@ -283,6 +343,15 @@ public class ActivityStream extends PlatformBase {
 		
 		}
 			
+	}
+	/**
+	 * Check number like of activity
+	 * @param activity
+	 * @param num
+	 */
+	public void checkNumLikeOfActivity(String activity,int num){
+		info("Check number like of: "+activity);
+		waitForAndGetElement(ELEMENT_ACTIVITY_NUM_LIKE.replace("$activity", activity).replace("$num", String.valueOf(num)));
 	}
 	/**
 	 * Check activity of adding wiki page with 4 lines in the content
@@ -759,7 +828,24 @@ public class ActivityStream extends PlatformBase {
 		click(ELEMENT_COMPOSER_SHARE_BUTTON);
 		Utils.pause(2000);
 	}
-
+	/**
+	 * Check mention list user
+	 * @param user
+	 * @param text
+	 * @param isPresent
+	 * 					true if user is in the list
+	 * 					false if user is not in the list
+	 */
+	public void checkMentionListUser(String user,String text,boolean isPresent){
+		if(!text.isEmpty())
+			type(ELEMENT_COMPOSER_INPUT_FILED,text,false);
+		type(ELEMENT_COMPOSER_INPUT_FILED, "@"+user,false);
+	    if(isPresent){
+	    	waitForAndGetElement(ELEMENT_PUBLICATION_SUGGEST_USER.replace("${name}", user));
+	    }else{
+	    	waitForElementNotPresent(ELEMENT_PUBLICATION_SUGGEST_USER.replace("${name}", user));
+	    }
+	}
 	/**
 	 * Post a comment with mention a user and description text
 	 * @param username
