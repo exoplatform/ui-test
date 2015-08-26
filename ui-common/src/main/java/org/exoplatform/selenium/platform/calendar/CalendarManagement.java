@@ -8,6 +8,7 @@ import org.exoplatform.selenium.Utils;
 import org.exoplatform.selenium.platform.PlatformPermission;
 import org.exoplatform.selenium.platform.calendar.CalendarHomePage.selectViewOption;
 import org.exoplatform.selenium.platform.calendar.EventManagement.recurringType;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
@@ -41,12 +42,7 @@ public class CalendarManagement extends CalendarLocatorObject{
 		IMPORT, ADDCAL, REMOTECAL, ADDCATEGORY, CALSETTING
 	}
 
-	/**
-	 * View list in calendar (click on an calendar - Click icon *)
-	 */
-	public enum menuOfCalendarOption{
-		ADDTASK, ADDEVENT, EDIT, REMOVE, SHARE, IMPORT, EXPORT, REFRESH,COLOR
-	}
+	
 
 	/**
 	 * Execute action of calendar: Edit, Delete, Share, export....
@@ -91,6 +87,13 @@ public class CalendarManagement extends CalendarLocatorObject{
 		}
 	}
 	/**
+	 * View list in calendar (click on an calendar - Click icon *)
+	 */
+	public enum menuOfCalendarOption{
+		ADDTASK, ADDEVENT, EDIT, REMOVE, SHARE, IMPORT, EXPORT, REFRESH,COLOR
+	}
+	
+	/**
 	 * Open Calendar setting form from Setting button on Actions Bar
 	 */
 	public void openSettingCalendar(){
@@ -100,7 +103,6 @@ public class CalendarManagement extends CalendarLocatorObject{
 		info("Settings Calendar form is shown");
 	}
 	
-
 	/** 
 	 * Delete a calendar
 	 * 
@@ -251,6 +253,21 @@ public class CalendarManagement extends CalendarLocatorObject{
 		waitForElementNotPresent(ELEMENT_CALENDAR_GROUP_SELECT_FORM);
 		Utils.pause(1000);
 		
+	}
+	/**
+	 * Check user selector in group calendar
+	 * @param cal
+	 * @param user
+	 * @param isPresent
+	 */
+	public void checkUserSelectorOfGroupCalendar(String cal,String user,boolean isPresent){
+		executeActionCalendar(cal, menuOfCalendarOption.EDIT);
+		click(ELEMENT_CALENDAR_GROUP_TAB);
+		click(ELEMENT_CALENDAR_GROUP_SELECT_USER_BTN); 
+		if(isPresent)
+			waitForAndGetElement(ELEMENT_CALENDAR_GROUP_USER_IN_SELECT_FORM.replace("$user", user));
+		else
+			waitForElementNotPresent(ELEMENT_CALENDAR_GROUP_USER_IN_SELECT_FORM.replace("$user", user));
 	}
 	/**
 	 * Save add calendar
@@ -448,7 +465,19 @@ public class CalendarManagement extends CalendarLocatorObject{
 		click(ELEMENT_CALENDAR_SHARE_SAVE_BUTTON);
 		waitForElementNotPresent(ELEMENT_CALENDAR_SHARE_SAVE_BUTTON);
 	}
-
+	/**
+	 * Check user selector of share calendar
+	 * @param cal
+	 * @param user
+	 * @param isPresent
+	 */
+	public void checkUserSelectorOfShareCalendar(String cal,String user,boolean isPresent){
+		executeActionCalendar(cal, menuOfCalendarOption.SHARE);
+		click(ELEMENT_CALENDAR_SELECT_USER_ICON);
+		Utils.pause(500);
+		pPer.checkUserSelector(user, isPresent);
+		click(pPer.ELEMENT_USER_CLOSE_BUTTON);
+	}
 	/** 
 	 * Share a calendar
 	 * 
@@ -1340,6 +1369,7 @@ public class CalendarManagement extends CalendarLocatorObject{
 	}
 	
 	/**
+<<<<<<< HEAD
 	 * Check accessibility of share calendar
 	 * @param isAccess
 	 * 				true if user can view calendar
@@ -1409,4 +1439,16 @@ public class CalendarManagement extends CalendarLocatorObject{
 		click(ELEMENT_CALENDAR_SHARE_SAVE_BUTTON);
 		waitForElementNotPresent(ELEMENT_CALENDAR_SHARE_SAVE_BUTTON);
 	}
+/**
+ * Check display of calendar
+ * @param cal
+ * @param isPresent
+ */
+	public void checkDisplayOfCalendar(String cal,boolean isPresent){
+		if(isPresent)
+			waitForAndGetElement(ELEMENT_CALENDAR_LIST_ITEM.replace("$calendar",cal));
+		else
+			waitForElementNotPresent(ELEMENT_CALENDAR_LIST_ITEM.replace("$calendar",cal));
+	}
+
 }

@@ -13,6 +13,10 @@ import org.exoplatform.selenium.platform.PlatformPermission;
 import org.exoplatform.selenium.platform.answer.AnswerCategoryManagement;
 import org.exoplatform.selenium.platform.answer.AnswerHomePage;
 import org.exoplatform.selenium.platform.answer.QuestionManagement;
+import org.exoplatform.selenium.platform.calendar.CalendarHomePage;
+import org.exoplatform.selenium.platform.calendar.CalendarManagement;
+import org.exoplatform.selenium.platform.calendar.EventManagement;
+import org.exoplatform.selenium.platform.calendar.TaskManagement;
 import org.exoplatform.selenium.platform.gatein.UserAddManagement;
 import org.exoplatform.selenium.platform.gatein.UserAndGroupManagement;
 import org.exoplatform.selenium.platform.objectdatabase.common.AttachmentFileDatabase;
@@ -81,6 +85,11 @@ public class Disable_User_TestConfig extends PlatformBase {
 	Button button;
 	AnswerHomePage aHome;
 	
+	CalendarManagement cMang;
+	CalendarHomePage cHome;
+	EventManagement evMg;
+	TaskManagement tasMg;
+	
 	String username;
 	String firstName;
 	String password;
@@ -119,6 +128,11 @@ public class Disable_User_TestConfig extends PlatformBase {
 		qMang = new QuestionManagement(driver);
 		button = new Button(driver);
 		aHome = new AnswerHomePage(driver);
+		evMg = new EventManagement(driver);
+		tasMg =  new TaskManagement(driver);
+		
+		cMang = new CalendarManagement(driver);
+		cHome = new CalendarHomePage(driver);
 		
 		txData = new TextBoxDatabase();
 		txData.setContentData(texboxFilePath,defaultSheet,isUseFile,jdbcDriver,dbUrl,user,pass,sqlAttach);

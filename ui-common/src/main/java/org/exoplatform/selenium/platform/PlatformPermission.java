@@ -22,7 +22,7 @@ public class PlatformPermission extends PlatformBase {
 	public final By ELEMENT_SEARCH_USER_INPUT = By.id("Quick Search");
 	public final By ELEMENT_QUICK_SEARCH_BUTTON = By.xpath("//a[@data-original-title='Quick Search']");
 	public final By ELEMENT_SELECT_SEARCH = By.name("filter");
-
+	public final By ELEMENT_USER_CLOSE_BUTTON = By.xpath("//*[@id='UIUserSelector']//*[contains(@class,'btn')][contains(.,'Close')]");
 	//Group permission
 	public final By ELEMENT_SELECT_GROUP_POPUP = By.id("UIPopupGroupMembershipSelector");
 	public final By ELEMENT_SELECT_THIS_GROUP = By.linkText("Select this Group");
@@ -94,7 +94,17 @@ public class PlatformPermission extends PlatformBase {
 			}
 		}
 	}
-
+	/**
+	 * Check display of user selector
+	 * @param user
+	 * @param isPresent
+	 */
+	public void checkUserSelector(String user,boolean isPresent){
+		if(isPresent)
+			waitForAndGetElement(ELEMENT_USER_CHECKBOX.replace("${user}", user));
+		else
+			waitForElementNotPresent(ELEMENT_USER_CHECKBOX.replace("${user}", user));
+	}
 	/**
 	 * Select group permission
 	 * @param grouppath

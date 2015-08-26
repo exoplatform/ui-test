@@ -8,19 +8,30 @@ import java.util.Date;
 import java.text.ParseException;
 
 import org.exoplatform.selenium.Utils;
+import org.exoplatform.selenium.platform.PlatformPermission;
+
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 public class TaskManagement extends CalendarLocatorObject {
-
+	PlatformPermission pPer;
 	//CalendarHomePage cHome;
 	public TaskManagement(WebDriver dr){
 		driver = dr;
 		//cHome = new CalendarHomePage(driver);
+		pPer = new PlatformPermission(dr);
+
 	}
 
-
+	/**
+	 * Open reminders tab
+	 */
+	public void goToRemindersTab(){
+		info("Click on Reminders tab");
+		click(ELEMENT_EVENT_REMINDER_TAB);
+		Utils.pause(2000);
+	}
 	/**
 	 * 
 	 * @param date
@@ -514,5 +525,43 @@ public class TaskManagement extends CalendarLocatorObject {
 		waitForAndGetElement(ELEMENT_ADD_EVENT_FILE_ATTACHED.replace("${file}", links[links.length - 1]));
 
 	}
-
+	/**
+	 * Check user selector of task
+	 * @param user
+	 * @param isPresent
+	 */
+	public void checkUserSelectorOfTask(String user,boolean isPresent){
+		goToAddTaskFromActionBar();
+		moreDetailsTask();
+		info("check delegation");
+		click(ELEMENT_ADD_EDIT_TASK_DELIGATION_ADDUSER_ICON);
+		pPer.checkUserSelector(user, isPresent);
+		click(pPer.ELEMENT_USER_CLOSE_BUTTON);
+		info("check reminder");
+		goToRemindersTab();
+		click(ELEMENT_REMINDER_ADDMORE_ICON);
+		pPer.checkUserSelector(user, isPresent);
+		click(pPer.ELEMENT_USER_CLOSE_BUTTON);
+	}
+	/**
+	 * function: check content of mail then delete mail in email server
+	 * @param titleTask
+	 * @param opParams
+	 */
+	public void checkEmailNotificationReminderTask(String titleTask,Object... opParams){
+		info("Check and delete mail");
+		Boolean checkOrNo = (Boolean)(opParams.length > 0 ? opParams[0]: true);
+		String parentWindow = driver.getWindowHandle();
+		info("parentWindow:"+parentWindow);
+		  for(String windowHandle  : driver.getWindowHandles()){
+			     driver.switchTo().window(windowHandle);
+			     info("driver.title:"+driver.getTitle());
+		}
+		if (opParams.length > 0) {
+			if (checkOrNo == true)
+				waitForAndGetElement(ELEMENT_GMAIL_CONTENT_REMINDER_TASK.replace("$task",titleTask),30000,1);
+            else 
+            	waitForElementNotPresent(ELEMENT_GMAIL_CONTENT_REMINDER_TASK.replace("$task",titleTask),30000,1);
+		}
+	}
 }

@@ -12,6 +12,7 @@ import org.exoplatform.selenium.Utils;
 import org.exoplatform.selenium.platform.PlatformPermission;
 import org.exoplatform.selenium.platform.calendar.CalendarHomePage.selectDayOption;
 import org.exoplatform.selenium.platform.calendar.CalendarHomePage.selectViewOption;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -732,6 +733,9 @@ public class EventManagement extends CalendarLocatorObject {
 		}
 	}
 	/**
+	 * 
+	 */
+	/**
 	 * Save add EVENT
 	 */
 	public void saveQuickAddEvent(){
@@ -1085,6 +1089,14 @@ public class EventManagement extends CalendarLocatorObject {
 		Utils.pause(2000);
 	}
 	/**
+	 * Open reminders tab
+	 */
+	public void goToRemindersTab(){
+		info("Click on Reminders tab");
+		click(ELEMENT_EVENT_REMINDER_TAB);
+		Utils.pause(2000);
+	}
+	/**
 	 * Open invitation participant popup
 	 */
 	public void goToInvitationParticipantForm(){
@@ -1109,6 +1121,64 @@ public class EventManagement extends CalendarLocatorObject {
 		click(ELEMENT_INVITATION_PARTICIPANTS_REMOVE_BTN.replace("$fullName",fullName));
 		click(ELEMENT_YES_BUTTON);
 		waitForElementNotPresent(ELEMENT_INVITATION_PARTICIPANTS_REMOVE_BTN.replace("$fullName",fullName));
+	}
+	/**
+	 * Check user selector of event
+	 * @param user
+	 * @param isPresent
+	 */
+	public void checkUserSelectorOfEvent(String user,boolean isPresent){
+		goToAddEventFromActionBar();
+		moreDetailsEvent();
+		info("check reminder");
+		goToRemindersTab();
+		click(ELEMENT_REMINDER_ADDMORE_ICON);
+		pPer.checkUserSelector(user, isPresent);
+		click(pPer.ELEMENT_USER_CLOSE_BUTTON);
+		info("check participant");
+		goToParticipantsTab();
+		click(ELEMENT_ADD_PARTICIPANTS_BUTTON_IN_PARTICIPANT_TAB);
+		Utils.pause(500);
+		click(ELEMENT_PICK_USER_PARTICIPANTS_TAB);
+		pPer.checkUserSelector(user, isPresent);
+		click(pPer.ELEMENT_USER_CLOSE_BUTTON);
+		info("check schedule");
+		goToScheduleTab();
+		click(ELEMENT_ADD_PARTICIPANTS_BUTTON_IN_SCHEDULE_TAB);
+		pPer.checkUserSelector(user, isPresent);
+		click(pPer.ELEMENT_USER_CLOSE_BUTTON);
+	}
+	/**
+	 * Check display of event
+	 * @param event
+	 * @param isPresent
+	 */
+	public void checkDisplayOfEvent(String event,boolean isPresent){
+		if(isPresent)
+			waitForAndGetElement(ELEMENT_EVENT_TASK_TITLE.replace("${name}",event));
+		else
+			waitForElementNotPresent(ELEMENT_EVENT_TASK_TITLE.replace("${name}",event));
+	}
+	/**
+	 * function: check content of mail then delete mail in email server
+	 * @param titleEvent
+	 * @param opParams
+	 */
+	public void checkEmailNotificationReminderEvent(String titleEvent,Object... opParams){
+		info("Check and delete mail");
+		Boolean checkOrNo = (Boolean)(opParams.length > 0 ? opParams[0]: true);
+		String parentWindow = driver.getWindowHandle();
+		info("parentWindow:"+parentWindow);
+		  for(String windowHandle  : driver.getWindowHandles()){
+			     driver.switchTo().window(windowHandle);
+			     info("driver.title:"+driver.getTitle());
+		}
+		if (opParams.length > 0) {
+			if (checkOrNo == true)
+				waitForAndGetElement(ELEMENT_GMAIL_CONTENT_REMINDER_EVENT.replace("$task",titleEvent),30000,1);
+            else 
+            	waitForElementNotPresent(ELEMENT_GMAIL_CONTENT_REMINDER_EVENT.replace("$task",titleEvent),30000,1);
+		}
 	}
 }
 

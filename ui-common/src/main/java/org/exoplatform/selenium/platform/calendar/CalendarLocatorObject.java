@@ -536,13 +536,13 @@ public class CalendarLocatorObject extends PlatformBase{
 	public final String ELEMENT_INVITATION_PARTICIPANTS_REMOVE_BTN=".//*[@id='UIParticipantList']//*[contains(text(),'$fullName')]/../..//*[contains(@class,'uiIconDelete')]";
 	public final String ELEMENT_INVITATION_PARTICIPANTS_INVALID_USER_MESSAGE=".//*[contains(@class,'warningIcon')][contains(text(),\"'$user' is not a valid participant.\")]";
 	public final String ELEMENT_INVITATION_PARTICIPANTS_INVALID_EMAIL_MESSAGE=".//*[contains(@class,'warningIcon')][contains(text(),\"'$email' is not a valid email.\")]";
-
+	
 	//Reminder tab
 	public final By ELEMENT_REMINDER_TAB=By.xpath(".//*[contains(@data-target,'#eventReminder-tab')]");
 	public final By ELEMENT_REMINDER_BY_POPUP=By.id("popupReminder");
 	public final By ELEMENT_REMINDER_BY_MAIL=By.id("mailReminder");
 	public final By ELEMENT_REMINDER_DROP_BOX=By.xpath(".//*[contains(@name,'mailReminderTime')]");
-
+	public final By ELEMENT_REMINDER_ADDMORE_ICON = By.xpath("//*[@class='reminderByEmail']//*[contains(@class,'uiIconPlus')]");
 	/*Recurring event form*/
 	public By ELEMENT_RECURRING_FORM=By.id("UIRepeatEventForm");
 	public By ELEMENT_RECURRING_TYPE_SELECT_BOX = By.xpath("//*[@name='repeatType']");
@@ -657,7 +657,7 @@ public class CalendarLocatorObject extends PlatformBase{
 	public String ELEMENT_ADD_EDIT_INPUT_TASK_FROM_TIME_VALUE="//*[@id='UITaskForm']//input[@id='fromTime'][contains(@value,'$time')]";
 	public String ELEMENT_ADD_EDIT_INPUT_TASK_TO_TIME_VALUE="//*[@id='UITaskForm']//input[@id='fromTime'][contains(@value,'$time')]";
 	public By ELEMENT_BUTTON_TASK_CANCEL_DETAILS = By.xpath("//*[ @id='UITaskForm']//*[text()='Cancel']");
-	
+	public By ELEMENT_ADD_EDIT_TASK_DELIGATION_ADDUSER_ICON=By.xpath("//*[@name='delegation']/..//*[contains(@class,'uiIconPlus')]");
 	//Attach file form
 	public By ELEMENT_SELECT_FILE=By.xpath("//*[@class='uploadButton']/*[@class='btn']");
 	public By ELEMENT_SELECT_MORE_FILE=By.className("moreFiles");
@@ -688,5 +688,9 @@ public class CalendarLocatorObject extends PlatformBase{
 	public final String ELEMENT_REFUSE_INVITATION_MESSAGE ="//*[contains(text(),'You have refused invitation from $user')]";
 	public final String ELEMENT_MAYBE_INVITATION_MESSAGE ="//*[contains(text(),'You have answered invitation from $user: Maybe')]";
 	public final String ELEMENT_ACCEPT_INVITATION_MESSAGE ="//*[contains(text(),'You have accepted invitation from $user')]";
+	
+	//Reminder email
+	public final String ELEMENT_GMAIL_CONTENT_REMINDER_TASK = "//span[contains(text(),'Task Summary: $task')]";
+	public final String ELEMENT_GMAIL_CONTENT_REMINDER_EVENT = "//span[contains(text(),'Event Summary: $event')]";
 
 }

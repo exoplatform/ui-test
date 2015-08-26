@@ -10,7 +10,7 @@
 			<class name="org.exoplatform.selenium.platform.disableUser.functional.Disable_User_TestConfig" />
 			<class name="org.exoplatform.selenium.platform.disableUser.functional.Disable_User_ActivityStream" />
 			<class name="org.exoplatform.selenium.platform.disableUser.functional.Disable_User_Answers" />
-		    
+		    <class name="org.exoplatform.selenium.platform.disableUser.functional.Disable_User_Calendar" />
 		</classes>
 	</test>
 	<listeners>
