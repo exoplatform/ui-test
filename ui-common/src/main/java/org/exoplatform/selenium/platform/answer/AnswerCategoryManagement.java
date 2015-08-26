@@ -2,6 +2,7 @@ package org.exoplatform.selenium.platform.answer;
 
 import static org.exoplatform.selenium.TestLogger.info;
 
+import org.exoplatform.selenium.Utils;
 import org.exoplatform.selenium.Button;
 import org.exoplatform.selenium.ManageAlert;
 import org.exoplatform.selenium.platform.PlatformBase;
@@ -88,6 +89,11 @@ public class AnswerCategoryManagement extends PlatformBase {
 	public final By ELEMENT_SELECT_MEMBERSHIP_ICON = By.xpath("//*[@class='uiIconMembership uiIconLightGray']");
 	public final String ELEMENT_SELECT_RIGHT_PARENT_GROUP = "//*[contains(@id,'UIMemberShipSelector')]//a[contains(.,'$group')]";
 	public final By ELEMENT_SELECT_MEMBERSHIP_POPUP = By.xpath("//*[contains(@id,'UIPopupWindow')]");
+	
+	//Permission
+	public By ELEMENT_CATEGORY_TAB_PERMISSIONS = By.xpath("//*[contains(@data-toggle,'tab')][contains(.,'Permissions')]");
+	public By ELEMENT_CATEGORY_USER_ICON_SELECTOR = By.xpath("//*[contains(@class,'uiIconUser')]");
+	public String ELEMENT_CATEGORY_LIST_USER = ".//*[@id='UIListUsers']/*[contains(.,'$user')]";
 	/**
 	 * constructor
 	 * @param dr
@@ -326,6 +332,7 @@ public class AnswerCategoryManagement extends PlatformBase {
 		click(ELEMENT_CATEGORY_OK_BUTTON);
 	}
 	/**
+<<<<<<< HEAD
 	 * Set permission
 	 * @param cat
 	 * @param group
@@ -382,5 +389,21 @@ public class AnswerCategoryManagement extends PlatformBase {
 			}
 		}else
 			waitForElementNotPresent(ELEMENT_CATEGORY_LIST_ITEM.replace("$category", cat));
+	}
+	/**
+	 * Check user list
+	 * @param user
+	 * @param isPresent
+	 */
+	public void checkPermUserList(String user,boolean isPresent){
+		goToActionOfCategoryFromActionBar(actionCategoryOption.ADD);
+		click(ELEMENT_CATEGORY_TAB_PERMISSIONS,0,true);
+		Utils.pause(500);
+		click(ELEMENT_CATEGORY_USER_ICON_SELECTOR,0,true);
+		if(isPresent){
+			waitForAndGetElement(ELEMENT_CATEGORY_LIST_USER.replace("$user", user));
+		}else{
+			waitForElementNotPresent(ELEMENT_CATEGORY_LIST_USER.replace("$user", user));
+		}
 	}
 }

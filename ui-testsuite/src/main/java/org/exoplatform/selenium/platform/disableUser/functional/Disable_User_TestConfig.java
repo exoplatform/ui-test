@@ -2,6 +2,7 @@ package org.exoplatform.selenium.platform.disableUser.functional;
 
 import static org.exoplatform.selenium.TestLogger.info;
 
+import org.exoplatform.selenium.Button;
 import org.exoplatform.selenium.platform.ConnectionsManagement;
 import org.exoplatform.selenium.platform.HomePagePlatform;
 import org.exoplatform.selenium.platform.ActivityStream;
@@ -9,6 +10,9 @@ import org.exoplatform.selenium.platform.ManageLogInOut;
 import org.exoplatform.selenium.platform.NavigationToolbar;
 import org.exoplatform.selenium.platform.PlatformBase;
 import org.exoplatform.selenium.platform.PlatformPermission;
+import org.exoplatform.selenium.platform.answer.AnswerCategoryManagement;
+import org.exoplatform.selenium.platform.answer.AnswerHomePage;
+import org.exoplatform.selenium.platform.answer.QuestionManagement;
 import org.exoplatform.selenium.platform.gatein.UserAddManagement;
 import org.exoplatform.selenium.platform.gatein.UserAndGroupManagement;
 import org.exoplatform.selenium.platform.objectdatabase.common.AttachmentFileDatabase;
@@ -23,13 +27,13 @@ import org.exoplatform.selenium.platform.objectdatabase.wiki.WikiTemplateDatabas
 import org.exoplatform.selenium.platform.social.SpaceSettingManagement;
 import org.exoplatform.selenium.platform.social.SpaceHomePage;
 import org.exoplatform.selenium.platform.social.SpaceManagement;
+import org.exoplatform.selenium.platform.social.UserProfilePage;
 import org.exoplatform.selenium.platform.wiki.RichTextEditor;
 import org.exoplatform.selenium.platform.wiki.WikiDraftPage;
 import org.exoplatform.selenium.platform.wiki.WikiHomePage;
 import org.exoplatform.selenium.platform.wiki.WikiManagement;
-import org.exoplatform.selenium.platform.wiki.WikiSearchManagement;
-import org.exoplatform.selenium.platform.wiki.WikiSettingManagement;
-
+import org.exoplatform.selenium.platform.wiki.WikiSearch;
+import org.exoplatform.selenium.platform.wiki.WikiSettingPage;
 import org.testng.annotations.*;
 
 
@@ -44,8 +48,8 @@ public class Disable_User_TestConfig extends PlatformBase {
 	WikiManagement wikiMg;
 	WikiHomePage wHome;
 	WikiDraftPage wDraft;
-	WikiSearchManagement wSearchMg;
-	WikiSettingManagement wSettingMg;
+	WikiSearch wSearchMg;
+	WikiSettingPage wSettingMg;
 	
 	RichTextEditor rtMode;
 	SpaceManagement spaMg;
@@ -65,13 +69,17 @@ public class Disable_User_TestConfig extends PlatformBase {
 	NavigationToolbar navToolBar;
 	
 	UserAddManagement addUserPage;
-	
+	UserProfilePage myProfile;
 	UserSearchOptionDatabase userSearchOptionData;
 	
 	UserAndGroupManagement userAndGroup;
 	GateinPortalMemberShipsPermissionDatabase portMemPermisData;
 	
 	ConnectionsManagement connMag;
+	AnswerCategoryManagement aCatMg;
+	QuestionManagement qMang;
+	Button button;
+	AnswerHomePage aHome;
 	
 	String username;
 	String firstName;
@@ -98,13 +106,19 @@ public class Disable_User_TestConfig extends PlatformBase {
 		wikiMg = new WikiManagement(driver);
 		wHome = new WikiHomePage(driver);
 		wDraft = new WikiDraftPage(driver);
-		wSearchMg = new WikiSearchManagement(driver);
-		wSettingMg= new WikiSettingManagement(driver);
+		wSearchMg = new WikiSearch(driver);
+		wSettingMg= new WikiSettingPage(driver);
 		
 		rtMode = new RichTextEditor(driver);
 		spaMg = new SpaceManagement(driver);
 		spaHome = new SpaceHomePage(driver);
 		setSpaceMg = new SpaceSettingManagement(driver);
+		
+		aCatMg = new AnswerCategoryManagement(driver);
+		myProfile = new UserProfilePage(driver);
+		qMang = new QuestionManagement(driver);
+		button = new Button(driver);
+		aHome = new AnswerHomePage(driver);
 		
 		txData = new TextBoxDatabase();
 		txData.setContentData(texboxFilePath,defaultSheet,isUseFile,jdbcDriver,dbUrl,user,pass,sqlAttach);

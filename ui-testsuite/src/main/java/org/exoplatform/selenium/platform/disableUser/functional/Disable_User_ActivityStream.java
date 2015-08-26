@@ -18,7 +18,7 @@ import org.testng.annotations.*;
 			navToolBar.goToAddUser();
 			addUserPage.addUser(username, password, email, username, lastName);
 			navToolBar.goToUsersAndGroupsManagement();
-	 	 	userAndGroup.chooseGroupTab();
+	 	 	userAndGroup.goToGroupTab();
 	 	 	click (userAndGroup.ELEMENT_GROUP_MANAGEMENT_SELECT_GROUP.replace("${name}", "Platform"));
 	 	 	click (userAndGroup.ELEMENT_GROUP_MANAGEMENT_SELECT_GROUP.replace("${name}", "Administration"));
 	 	 	userAndGroup.addUsersToGroup(username, membership, false, true);

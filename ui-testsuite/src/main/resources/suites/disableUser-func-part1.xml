@@ -9,6 +9,7 @@
 		<classes>
 			<class name="org.exoplatform.selenium.platform.disableUser.functional.Disable_User_TestConfig" />
 			<class name="org.exoplatform.selenium.platform.disableUser.functional.Disable_User_ActivityStream" />
+			<class name="org.exoplatform.selenium.platform.disableUser.functional.Disable_User_Answers" />
 		    
 		</classes>
 	</test>

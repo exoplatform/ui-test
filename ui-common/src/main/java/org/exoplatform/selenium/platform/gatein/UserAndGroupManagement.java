@@ -64,12 +64,8 @@ public class UserAndGroupManagement extends PlatformBase {
 	public final String ELEMENT_SELECT_SEARCH_OPTION = "//*[contains(@name,'searchOption')]";
 	public final String ELEMENT_SEARCH_ICON_USERS_MANAGEMENT = "//*[contains(@title,'Quick Search')]";
 	public final String ELEMENT_USER_DELETE_ICON = ".//*[contains(text(),'${username}')]/../..//*[@data-original-title='Delete User']/i";
-<<<<<<< HEAD
 	public final String ELEMENT_USER_DELETE_ICON1 = "//*[@data-original-title='Delete User']/i";
-=======
 	public final String ELEMENT_USER_NAME_IN_USER_LIST=".//*[@id='UIListUsersGird']//*[contains(text(),'$userName')]";
-	
->>>>>>> FQA-2575:[DISABLE USER][SELENIUM] PLF 4.3 - Add more common functions
 	//message
 	public final String ELEMENT_MSG_SELECT_USER = "Select User";
 	public final String ELEMENT_MSG_TOTAL_PAGES = "Total pages";
@@ -701,12 +697,6 @@ public class UserAndGroupManagement extends PlatformBase {
 			Utils.pause(2000);
 			click( ELEMENT_USER_DELETE_ICON.replace("${username}",
 					username));
-<<<<<<< HEAD
-			Utils.pause(3000);
-=======
->>>>>>> FQA-2576:PLF 4.3 - Write High Fnc/Disable User/Activity Stream
-			//alert.waitForConfirmation(ELEMENT_MSG_CONFIRM_DELETE.replace(
-			//		"${userName}", username));
 			alert.acceptAlert();
 			Utils.pause(1000);
 			type(ELEMENT_INPUT_SEARCH_USER_NAME, username, true);
