@@ -81,7 +81,8 @@ public class Addons_Answers_Question extends PlatformBase {
 		hp.goToAnswer();
 		qMang.goToSubmitQuestion();
 		qMang.inputDataToQuestionForm(title, content, null, null);
-		click(qMang.ELEMENT_SUBMIT_QUESTION_FORM_SAVE_BUTTON);
+		//click(qMang.ELEMENT_SUBMIT_QUESTION_FORM_SAVE_BUTTON);
+		clickByJavascript(qMang.ELEMENT_SUBMIT_QUESTION_FORM_SAVE_BUTTON, 2);
 		click(button.ELEMENT_OK_BUTTON_LINK);
 		waitForAndGetElement(By.xpath(aHome.ELEMENT_QUESTION_LIST_ITEM.replace("$question", title)));
 
@@ -137,7 +138,8 @@ public class Addons_Answers_Question extends PlatformBase {
 		hp.goToAnswer();
 		qMang.goToSubmitQuestion();
 		qMang.inputDataToQuestionForm(title, content, null, "TestData/" + link);
-		click(qMang.ELEMENT_SUBMIT_QUESTION_FORM_SAVE_BUTTON);
+		//click(qMang.ELEMENT_SUBMIT_QUESTION_FORM_SAVE_BUTTON);
+		clickByJavascript(qMang.ELEMENT_SUBMIT_QUESTION_FORM_SAVE_BUTTON, 2);
 		click(button.ELEMENT_OK_BUTTON_LINK);
 		waitForAndGetElement(By.xpath(aHome.ELEMENT_QUESTION_LIST_ITEM.replace("$question", title)));
 
@@ -155,7 +157,8 @@ public class Addons_Answers_Question extends PlatformBase {
 			- This question is updated successfully.*/ 
 		qMang.goToActionOfQuestionByRightClick(title, actionQuestionOption.EDIT);
 		qMang.inputDataToQuestionForm(newtitle, newcontent, null, "TestData/" + link);
-		click(qMang.ELEMENT_SUBMIT_QUESTION_FORM_SAVE_BUTTON);
+		//click(qMang.ELEMENT_SUBMIT_QUESTION_FORM_SAVE_BUTTON);
+		clickByJavascript(qMang.ELEMENT_SUBMIT_QUESTION_FORM_SAVE_BUTTON, 2);
 		waitForElementNotPresent(By.xpath(aHome.ELEMENT_QUESTION_LIST_ITEM.replace("$question", title)));
 		waitForAndGetElement(By.xpath(aHome.ELEMENT_QUESTION_LIST_ITEM.replace("$question", newtitle)));
 
@@ -213,7 +216,8 @@ public class Addons_Answers_Question extends PlatformBase {
 		hp.goToAnswer();
 		cMang.goToActionOfCategoryFromRightClick(paCat1, actionCategoryOption.SUBMITQUESTION);
 		qMang.inputDataToQuestionForm(title, content, null, null);
-		click(qMang.ELEMENT_SUBMIT_QUESTION_FORM_SAVE_BUTTON);
+		//click(qMang.ELEMENT_SUBMIT_QUESTION_FORM_SAVE_BUTTON);
+		clickByJavascript(qMang.ELEMENT_SUBMIT_QUESTION_FORM_SAVE_BUTTON, 2);
 		click(button.ELEMENT_OK_BUTTON_LINK);
 		
 		/*Step number: 2
@@ -263,7 +267,8 @@ public class Addons_Answers_Question extends PlatformBase {
 		hp.goToAnswer();
 		qMang.goToSubmitQuestion();
 		qMang.inputDataToQuestionForm(title, content, null, "TestData/" + link);
-		click(qMang.ELEMENT_SUBMIT_QUESTION_FORM_SAVE_BUTTON);
+		//click(qMang.ELEMENT_SUBMIT_QUESTION_FORM_SAVE_BUTTON);
+		clickByJavascript(qMang.ELEMENT_SUBMIT_QUESTION_FORM_SAVE_BUTTON, 2);
 		click(button.ELEMENT_OK_BUTTON_LINK);
 		waitForAndGetElement(By.xpath(aHome.ELEMENT_QUESTION_LIST_ITEM.replace("$question", title)));
 
@@ -294,7 +299,8 @@ public class Addons_Answers_Question extends PlatformBase {
 		qMang.goToManageQuestionForm();
 		qMang.goToEditQuestionFromManageQuestionForm(title);
 		qMang.inputDataToQuestionForm(newtitle, newcontent, null, "TestData/" + link);
-		click(qMang.ELEMENT_SUBMIT_QUESTION_FORM_SAVE_BUTTON);
+		//click(qMang.ELEMENT_SUBMIT_QUESTION_FORM_SAVE_BUTTON);
+		clickByJavascript(qMang.ELEMENT_SUBMIT_QUESTION_FORM_SAVE_BUTTON, 2);
 		waitForElementNotPresent(By.xpath(qMang.ELEMENT_MANAGE_QUESTION_EDIT_QUESTION.replace("$question", title)));
 		waitForAndGetElement(By.xpath(qMang.ELEMENT_MANAGE_QUESTION_EDIT_QUESTION.replace("$question", newtitle)));
 
@@ -340,7 +346,8 @@ public class Addons_Answers_Question extends PlatformBase {
 		hp.goToAnswer();
 		qMang.goToSubmitQuestion();
 		qMang.inputDataToQuestionForm(title, content, null, null);
-		click(qMang.ELEMENT_SUBMIT_QUESTION_FORM_SAVE_BUTTON);
+		//click(qMang.ELEMENT_SUBMIT_QUESTION_FORM_SAVE_BUTTON);
+		clickByJavascript(qMang.ELEMENT_SUBMIT_QUESTION_FORM_SAVE_BUTTON, 2);
 		click(button.ELEMENT_OK_BUTTON_LINK);
 		waitForAndGetElement(By.xpath(aHome.ELEMENT_QUESTION_LIST_ITEM.replace("$question", title)));
 
@@ -414,7 +421,8 @@ public class Addons_Answers_Question extends PlatformBase {
 		hp.goToAnswer();
 		qMang.goToSubmitQuestion();
 		qMang.inputDataToQuestionForm(title, content, null, null);
-		click(qMang.ELEMENT_SUBMIT_QUESTION_FORM_SAVE_BUTTON);
+		//click(qMang.ELEMENT_SUBMIT_QUESTION_FORM_SAVE_BUTTON);
+		clickByJavascript(qMang.ELEMENT_SUBMIT_QUESTION_FORM_SAVE_BUTTON, 2);
 		click(button.ELEMENT_OK_BUTTON_LINK);
 		waitForAndGetElement(By.xpath(aHome.ELEMENT_QUESTION_LIST_ITEM.replace("$question", title)));
 
@@ -478,7 +486,8 @@ public class Addons_Answers_Question extends PlatformBase {
 		hp.goToAnswer();
 		qMang.goToSubmitQuestion();
 		qMang.inputDataToQuestionForm(title, content, null, null);
-		click(qMang.ELEMENT_SUBMIT_QUESTION_FORM_SAVE_BUTTON);
+		//click(qMang.ELEMENT_SUBMIT_QUESTION_FORM_SAVE_BUTTON);
+		clickByJavascript(qMang.ELEMENT_SUBMIT_QUESTION_FORM_SAVE_BUTTON, 2);
 		click(button.ELEMENT_OK_BUTTON_LINK);
 		waitForAndGetElement(By.xpath(aHome.ELEMENT_QUESTION_LIST_ITEM.replace("$question", title)));
 
@@ -495,7 +504,8 @@ public class Addons_Answers_Question extends PlatformBase {
 			- Content of mail includes Question content & Question link*/ 
 		qMang.goToActionOfQuestionByRightClick(title, actionQuestionOption.SEND);
 		type(qMang.ELEMENT_QUESTION_SEND_TO_INPUT,EMAIL_ADDRESS2,true);
-		click(qMang.ELEMENT_QUESTION_SEND_SEND_BUTTON);
+		//click(qMang.ELEMENT_QUESTION_SEND_SEND_BUTTON);
+		clickByJavascript(qMang.ELEMENT_QUESTION_SEND_SEND_BUTTON, 2);
 		click(qMang.ELEMENT_QUESTION_OK_BUTTON);
 		
 		//Check email

@@ -489,27 +489,33 @@ public class ContentAdministration extends PlatformBase{
 			switch(arrayElement){
 			case ADMIN :
 				info("Add Admin view type");
-				check(ELEMENT_ECM_EXPLORER_APPLY_VIEWS_CHECKBOX_ADMIN,2);
+				//check(ELEMENT_ECM_EXPLORER_APPLY_VIEWS_CHECKBOX_ADMIN,2);
+				clickByJavascript(ELEMENT_ECM_EXPLORER_APPLY_VIEWS_CHECKBOX_ADMIN, 2);
 				break;
 			case CATEGORY:
 				info("Add Category view type");
-				check(ELEMENT_ECM_EXPLORER_APPLY_VIEWS_CHECKBOX_CATEGORIES,2);
+				//check(ELEMENT_ECM_EXPLORER_APPLY_VIEWS_CHECKBOX_CATEGORIES,2);
+				clickByJavascript(ELEMENT_ECM_EXPLORER_APPLY_VIEWS_CHECKBOX_CATEGORIES, 2);
 				break;
 			case ICON:
 				info("Add Icon view type");
-				check(ELEMENT_ECM_EXPLORER_APPLY_VIEWS_CHECKBOX_ICONS,2);
+				//check(ELEMENT_ECM_EXPLORER_APPLY_VIEWS_CHECKBOX_ICONS,2);
+				clickByJavascript(ELEMENT_ECM_EXPLORER_APPLY_VIEWS_CHECKBOX_ICONS, 2);
 				break;
 			case LIST :
 				info("Add List view type");
-				check(ELEMENT_ECM_EXPLORER_APPLY_VIEWS_CHECKBOX_LIST,2);
+				//check(ELEMENT_ECM_EXPLORER_APPLY_VIEWS_CHECKBOX_LIST,2);
+				clickByJavascript(ELEMENT_ECM_EXPLORER_APPLY_VIEWS_CHECKBOX_LIST, 2);
 				break;
 			case WEB :
 				info("Add WEB view type");
-				check(ELEMENT_ECM_EXPLORER_APPLY_VIEWS_CHECKBOX_WEB,2);
+				//check(ELEMENT_ECM_EXPLORER_APPLY_VIEWS_CHECKBOX_WEB,2);
+				clickByJavascript(ELEMENT_ECM_EXPLORER_APPLY_VIEWS_CHECKBOX_WEB, 2);
 				break;
 			default:
 				info("Add WEB view type");
-				check(ELEMENT_ECM_EXPLORER_APPLY_VIEWS_CHECKBOX_WEB,2);
+				//check(ELEMENT_ECM_EXPLORER_APPLY_VIEWS_CHECKBOX_WEB,2);
+				clickByJavascript(ELEMENT_ECM_EXPLORER_APPLY_VIEWS_CHECKBOX_WEB, 2);
 				break;
 			}
 		}
@@ -1288,10 +1294,12 @@ public class ContentAdministration extends PlatformBase{
 			goTospecificEcmActionstypes(type);
 		Utils.pause(2000);
 		info("Click on Save button of Action popup");
-		click(ELEMENT_ECM_EXPORER_ACTIONS_POPUP_SAVE_BUTTON);
+		//click(ELEMENT_ECM_EXPORER_ACTIONS_POPUP_SAVE_BUTTON);
+		clickByJavascript(ELEMENT_ECM_EXPORER_ACTIONS_POPUP_SAVE_BUTTON, 2);
 		Utils.pause(2000);
 		info("Save all changes");
-		click(ELEMENT_ECM_EXPLORER_EDIT_VIEWS_SAVE_BUTTON);
+		//click(ELEMENT_ECM_EXPLORER_EDIT_VIEWS_SAVE_BUTTON);
+		clickByJavascript(ELEMENT_ECM_EXPLORER_EDIT_VIEWS_SAVE_BUTTON, 2);
 		Utils.pause(1000);
 		info("Finished Adding action for a view");
 	}

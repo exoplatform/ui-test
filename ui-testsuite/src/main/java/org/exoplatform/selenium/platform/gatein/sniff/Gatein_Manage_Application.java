@@ -15,11 +15,11 @@ import org.testng.annotations.*;
 	/**
 	*<li> Case ID:123075.</li>
 	*<li> Test Case Name: Import application.</li>
-	*/
+	*//*
 	@Test
 	public  void test02_ImportApplication() {
 		info("Test 02: Import application");
-		/*Step Number: 1
+		Step Number: 1
 		*Step Name: Step 1: Import application		
 		*Step Description: 
 			- Go to Application registry
@@ -28,7 +28,7 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			All existing portlets are imported successfully and displayed on left list 
-			( there are someones added categories: Integration,Navigation, System, etc)*/
+			( there are someones added categories: Integration,Navigation, System, etc)
 		navToolBar.goToApplication();
 		appRegistry.displayImportApplicaions();
 		navToolBar.goToApplication();
@@ -39,7 +39,7 @@ import org.testng.annotations.*;
 		appRegistry.checkImportedApplications(appGateInData.newCategory,appGateInData.newName);
  	}
 
-	/**
+	*//**
 	*<li> Case ID:123076.</li>
 	*<li> Test Case Name:Show Import Application icon.</li>
 	*/
@@ -80,7 +80,7 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			Import Application icon don't show in Application registry portlet 
-			*/ 
+*/			 
 		appRegistry.HideShowImportApplicaion();
  	}
 
@@ -109,8 +109,8 @@ import org.testng.annotations.*;
 		*Input Data: 
 			
 		*Expected Outcome: 
-			- Add category successfully
-			*/
+			- Add category successfully*/
+			
 		navToolBar.goToApplication();
 		appRegistry.addACategory(categoryName, displayName, des);
 		
@@ -196,7 +196,10 @@ import org.testng.annotations.*;
 		info("Test 07: Add manual gadget");
 		int index = creatGateinData.getRandomIndexByType(1);
 		String name = creatGateinData.newName.get(index);
-		String xmlCode = creatGateinData.newXMLCode.get(index);
+		String xmlCode = creatGateinData.xmlCode.get(index);
+		System.out.println(xmlCode);
+		String xmlCode1 = creatGateinData.newXMLCode.get(index);
+		System.out.println(xmlCode1);
 		/*Step Number: 1
 		*Step Name: Step 1: Add local gadget
 		*Step Description: 
@@ -345,8 +348,8 @@ import org.testng.annotations.*;
 		*Input Data: 
 			
 		*Expected Outcome: 
-			- Add remote gadget successfully
-			*/
+			- Add remote gadget successfully*/
+			
 		navToolBar.goToApplication();
 		appRegistry.goToGadgetPage();
 		gadMg.addRemoteGadget(url);
@@ -364,8 +367,8 @@ import org.testng.annotations.*;
 		*Input Data: 
 			
 		*Expected Outcome: 
-			- The remote gadget is removed from the list
-			*/
+			- The remote gadget is removed from the list*/
+			
 		gadMg.deleteGadget(name);
 	}
 
@@ -429,8 +432,8 @@ import org.testng.annotations.*;
 		*Input Data: 
 			
 		*Expected Outcome: 
-			- Add category successfully
-			*/
+			- Add category successfully*/
+			
 		navToolBar.goToApplication();
 		appRegistry.addACategory(categoryName, displayName, des);
 		
@@ -444,8 +447,8 @@ import org.testng.annotations.*;
 		*Input Data: 
 			
 		*Expected Outcome: 
-			- The category is updated with the change value
-			*/
+			- The category is updated with the change value*/
+			
 		appRegistry.editCategory(categoryName, newDisplayName, newDes);
 		appRegistry.deleteCategory(categoryName);
 	

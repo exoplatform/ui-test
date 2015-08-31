@@ -21,6 +21,7 @@ public class HomePagePlatform extends TestBase{
     public final By ELEMENT_PLF_HOMEPAGE_GADGET_PORTLET = By.xpath(".//*[@id='OfficeRightMiddle']");
     public final By ELEMENT_ADDNEWSPACE_BUTTON = By.xpath("//button[contains(.,'Add New Space')]");
 	//Left panel
+	public final By ELEMENT_PLF_HOMEPAGE_LOAD_MORE_BUTTON = By.xpath(".//*[@id='ActivitiesLoader']/a");
 	public final By ELEMENT_FORUM_LINK_PLF=By.xpath("//*[@data-original-title='Forums']");
 	public final By ELEMENT_ANSWER_LINK_PLF=By.xpath("//*[@data-original-title='Answers']");
 	public final By ELEMENT_WIKI_LINK_PLF=By.xpath("//*[@data-original-title='Wiki']");
@@ -193,6 +194,7 @@ public class HomePagePlatform extends TestBase{
 	public final String ELEMENT_PUBLICATION_COMMENT_STATUS = "//*[text()='${title}']/../../../..//*[@class='uiIconComment uiIconLightGray']";
 	public final String ELEMENT_PUBLICATION_COMMENTTEXTBOX_CONTENT = "//*[@title='${title}']/../../../..//*[@class='replaceTextArea editable']";
 	public final String ELEMENT_PUBLICATION_COMMENTTEXTBOX_STATUS = "//*[text()='${title}']/../../../..//*[@class='replaceTextArea editable']";
+	public final String ELEMENT_PUBLICATION_CONTENT_COMMENT = "//*[@class='contentComment' and contains(text(),'${comment}')]";
 	public final By ELEMENT_PUBLICATION_COMMENTBTN = By.xpath("//*[@data-original-title='Comment']");
 	public final String ELEMENT_PUBLICATION_COMMENTBTN_STATUS = "//*[text()='${title}']/..//*[text()='Comment']";
 	public final String ELEMENT_PUBLICATION_AUTHOR = "//*[@title='${title}']/../../../..//*[@class='author']";
@@ -218,10 +220,14 @@ public class HomePagePlatform extends TestBase{
 	public final By ELEMENT_PUBLICATION_DISPLAYMODE_MYACTIVITIES_OPTION = By.xpath("//*[@class='OptionItem' and text()='My Activities']");
 	public final By ELEMENT_PUBLICATION_DISPLAYMODE_MYACTIVITIES = By.xpath("//*[@id='DisplayModesDropDown']/../..//*[text()='My Activities']");
 
-	public final String ELEMENT_PUBLICATION_DISPLAYORDER = "//div[${number}]/form//*[contains(text(), '${title}')]";
-	public final String ELEMENT_PUBLICATION_DISPLAYORDER_WEBCONTENT = "//div[${number}]/form//*[@class='uiIcon64x64Templateexo_webContent']";
+	//public final String ELEMENT_PUBLICATION_DISPLAYORDER = "//div[${number}]/form//*[contains(text(), '${title}')]";
+	public final String ELEMENT_PUBLICATION_DISPLAYORDER = "//*[contains(@id,'UIActivitiesContainer')]/div[${number}]//*[@class='description' and text()='${title}']";
+	/*public final String ELEMENT_PUBLICATION_DISPLAYORDER_WEBCONTENT = "//div[${number}]/form//*[@class='uiIcon64x64Templateexo_webContent']";
 	public final String ELEMENT_PUBLICATION_DISPLAYORDER_FILE = "//div[${number}]/form//*[@class='uiIcon64x64FileDefault uiIcon64x64nt_file uiIcon64x64texthtml']";
-	public final String ELEMENT_PUBLICATION_DISPLAYORDER_PRODUCT = "//div[${number}]/form//*[@class='uiIcon64x64Templateacme_product']";
+	public final String ELEMENT_PUBLICATION_DISPLAYORDER_PRODUCT = "//div[${number}]/form//*[@class='uiIcon64x64Templateacme_product']";*/
+	public final String ELEMENT_PUBLICATION_DISPLAYORDER_PRODUCT = "//*[contains(@id,'UIActivitiesContainer')]/div[${number}]//*[@class='uiIcon64x64Templateacme_product']";
+	public final String ELEMENT_PUBLICATION_DISPLAYORDER_FILE = "//*[contains(@id,'UIActivitiesContainer')]/div[${number}]//*[@class='uiIcon64x64FileDefault uiIcon64x64nt_file uiIcon64x64texthtml']";
+	public final String ELEMENT_PUBLICATION_DISPLAYORDER_WEBCONTENT = "//*[contains(@id,'UIActivitiesContainer')]/div[${number}]//*[@class='uiIcon64x64Templateexo_webContent']";
 	public final String ELEMENT_PUBLICATION_DISPLAYORDER_PDF = "//div[${number}]/form//*[@data-original-title='ECMS_DMS_SE_Upload_pdffile.pdf']//*[@class='pdfImageBorder']";
 	
 	// add file box
@@ -258,6 +264,8 @@ public class HomePagePlatform extends TestBase{
 	 */
 	public void goToWiki(){
 		info("--Go to Wiki--");
+		Utils.pause(2000);
+		waitForAndGetElement(ELEMENT_WIKI_LINK_PLF, DEFAULT_TIMEOUT, 1);
 		click(ELEMENT_WIKI_LINK_PLF);
 		Utils.pause(2000);
 	}
@@ -274,24 +282,41 @@ public class HomePagePlatform extends TestBase{
 	 */
 	public void goToHomePage(){
 		info("--Go to Home page--");
+		Utils.pause(3000);
 		info("Click on Home link of intranet page");
-		click(ELEMENT_HOME_LINK_PLF);
+		clickByJavascript(ELEMENT_HOME_LINK_PLF);
 		info("the intranet is shown sucessfully"); 
 		Utils.pause(2000);
 	}
 
 	/**
 	 * Go to Home Calendar Page
+	 *//*
+	public void goToCalendarPage(){
+		do {
+			info("-- Go to calendar home page --");
+			info("click on Calendar link");
+			click(ELEMENT_CALENDAR_LINK_PLF);
+			info("Verify that Calendar page is shown");
+			//waitForAndGetElement(cHome.ELEMENT_CALENDAR_WORKING_PANEL);
+			//info("The calendar page is shown successfully");
+		} while (waitForAndGetElement(cHome.ELEMENT_CALENDAR_WORKING_PANEL, 5000, 1) == null);
+		info("The calendar page is shown successfully");
+	}*/
+
+	/**
+	 * Go to Home Calendar Page
 	 */
 	public void goToCalendarPage(){
-		info("-- Go to calendar home page --");
-		info("click on Calendar link");
-		click(ELEMENT_CALENDAR_LINK_PLF);
-		info("Verify that Calendar page is shown");
-		waitForAndGetElement(cHome.ELEMENT_CALENDAR_WORKING_PANEL);
-		info("The calendar page is shown successfully");
+			info("-- Go to calendar home page --");
+			Utils.pause(3000);
+			waitForAndGetElement(ELEMENT_CALENDAR_LINK_PLF, DEFAULT_TIMEOUT, 1);
+			info("click on Calendar link");
+			click(ELEMENT_CALENDAR_LINK_PLF);
+			info("Verify that Calendar page is shown");
+			waitForAndGetElement(cHome.ELEMENT_CALENDAR_WORKING_PANEL);
+			info("The calendar page is shown successfully");
 	}
-
 
 	/**
 	 * Go to my spaces
@@ -327,17 +352,19 @@ public class HomePagePlatform extends TestBase{
 		if(waitForAndGetElement(aHome.ELEMENT_ANSWER_PORTLET,5000,0)==null)
 			driver.navigate().refresh();
 		waitForAndGetElement(aHome.ELEMENT_ANSWER_PORTLET);
+		Utils.pause(2000);
 	}
 
 	/**
 	 * Go to forum page
 	 */
 	public void goToForum(){
-		info("-- Go to forum page --");
-		info("Click on Forum link");
-		click(ELEMENT_FORUM_LINK_PLF,0,true);
-		info("Verify that the forum portlet is shown");
-		waitForAndGetElement(fHome.ELEMENT_FORUM_PORTLET);
+		do {
+			info("-- Go to forum page --");
+			info("Click on Forum link");
+			click(ELEMENT_FORUM_LINK_PLF);
+			info("Verify that the forum portlet is shown");
+		} while (waitForAndGetElement(fHome.ELEMENT_FORUM_PORTLET, DEFAULT_TIMEOUT, 1) == null);
 		info("The forum portlet is shown successfully");
 	}
 
@@ -357,8 +384,9 @@ public class HomePagePlatform extends TestBase{
 	 */
 	public void goToConnections(){
 		info("--Go to Connections page---");
+		Utils.pause(2000);
 		info("Click on Connection link");
-		click(ELEMENT_CONNECTIONS_LINK_PLF,0,true);
+		click(ELEMENT_CONNECTIONS_LINK_PLF, 2);
 		info("Verify that the connections portlet is shown");
 		waitForAndGetElement(connMg.ELEMENT_CONNECTION_EVERYONE_TITLE,2000,0);
 		info("The connections portlet is shown successfully");
@@ -371,7 +399,7 @@ public class HomePagePlatform extends TestBase{
      */
 	public void goToSpecificSpace(String space){
 		info("Go to space "+space);
-		click(ELEMENT_SPECIFIC_PANEL.replace("{$space}",space));
+		clickByJavascript(ELEMENT_SPECIFIC_PANEL.replace("{$space}",space));
 		Utils.pause(3000);
 	}
 	/**
@@ -415,8 +443,8 @@ public class HomePagePlatform extends TestBase{
 			info("Select Connections");
 			click(ELEMENT_HOMEPAGE_DROP_MENU_CONNECTIONS);
 			break;
+			}
 		}
-	}
 		
 	 /** Check display of user in Invitation gadget
 	 * @param user
@@ -429,6 +457,15 @@ public class HomePagePlatform extends TestBase{
 			waitForAndGetElement(ELEMENT_INVITATIONS_PEOPLE_AVATAR .replace("${name}",user));
 		else
 			waitForElementNotPresent(ELEMENT_INVITATIONS_PEOPLE_AVATAR .replace("${name}",user));
+	}
+	/**
+     * Load More Activities
+     */
+	public void loadMoreActivities(){
+		Utils.pause(2000);
+		info("Load more activities");
+		waitForAndGetElement(ELEMENT_PLF_HOMEPAGE_LOAD_MORE_BUTTON, DEFAULT_TIMEOUT, 1);
+		click(ELEMENT_PLF_HOMEPAGE_LOAD_MORE_BUTTON);
 	}
 	/**
 	 * Check display of user in Suggestion gadget

@@ -83,9 +83,8 @@ public class SpaceManagement extends SpaceLocator {
 		type(ELEMENT_SPACE_NAME_INPUT, name, true);
 		type(ELEMENT_SPACE_DESCRIPTION_INPUT, desc, true);
 		info("Save all changes");
-		click(ELEMENET_SPACE_CREATE_BUTTON);
-		Utils.pause(3000);
-		waitForAndGetElement(".//*[@id='UISpaceNavigationPortlet']//*[@data-original-title='${nameSpace}']".replace("${nameSpace}", name), iTimeout);
+		clickByJavascript(ELEMENET_SPACE_CREATE_BUTTON);
+		waitForAndGetElement(By.linkText(name), iTimeout);
 	}
 	
 	/**
@@ -209,7 +208,7 @@ public class SpaceManagement extends SpaceLocator {
 	 */
 	public void saveChangesSpace(){
 		info("click on Save button");
-		click(ELEMENT_SPACE_SAVE_BTN);
+		clickByJavascript(ELEMENT_SPACE_SAVE_BTN);
 		info("Save all changes");
 		Utils.pause(2000);
 	}
@@ -325,8 +324,7 @@ public class SpaceManagement extends SpaceLocator {
 		info("Open invitation received tab");
 		goToInvitationsReceivedTab();
 		info("Click on Accept button of the space");
-		click(ELEMENT_MY_SPACE_INVITATION_RECEIVED_ACCEPT_BTN.replace("${space}",space));
-		Utils.pause(3000);
+		clickByJavascript(ELEMENT_MY_SPACE_INVITATION_RECEIVED_ACCEPT_BTN.replace("${space}",space));
 		info("Verify that the user joijed to the space");
 		waitForAndGetElement( ELEMENT_SPACE_NAME.replace("${name}",space),3000,1);
 	}

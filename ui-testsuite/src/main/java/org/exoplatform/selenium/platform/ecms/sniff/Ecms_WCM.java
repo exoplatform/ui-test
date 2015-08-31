@@ -21,7 +21,7 @@ public class Ecms_WCM extends ECMS_TestConfig_Part1 {
 	 *<li> Pre-Condition: </li>
 	 *<li> Post-Condition: </li>
 	 */
-	@Test
+	@Test (groups="pending")
 	public  void test01_CreateNewContentListViewerPageWithModeByFolder() {
 		info("Test 1: Create new Content List viewer page with mode By Folder");
 		String content = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
@@ -43,6 +43,7 @@ public class Ecms_WCM extends ECMS_TestConfig_Part1 {
 		CreNewDoc.createNewDoc(selectDocumentType.WEBCONTENT);
 		CreNewDoc.addNewWebContent(content, content);
 		CreNewDoc.saveAndClose();
+		SEHome.verifyContentCreatedSuccessfully(content);
 
 		/*	- Go to acme homepage, select Edit/ Page/Add Page to create new page.+ 
 		 * Fill node name+ Click Next -> Next. 
@@ -71,7 +72,7 @@ public class Ecms_WCM extends ECMS_TestConfig_Part1 {
 		info("Delete Data test");
 		info("Delete created file");
 		navTool.goToSiteExplorer();
-		SEHome.deleteData(content);
+		SEHome.deleteData(content, true);
 		info("Delete created page");
 		navTool.goToPotalPages();
 		paMang.deletePage(content,"");
@@ -88,7 +89,7 @@ public class Ecms_WCM extends ECMS_TestConfig_Part1 {
 	 *<li> Pre-Condition: </li>
 	 *<li> Post-Condition: </li>
 	 */
-	@Test
+	@Test (groups="pending")
 	public  void test02_CreateNewContentListViewerPageWithModeByContents() {
 		info("Test 2: Create new Content List Viewer page with mode By Contents");
 		String content = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
@@ -106,6 +107,7 @@ public class Ecms_WCM extends ECMS_TestConfig_Part1 {
 		CreNewDoc.createNewDoc(selectDocumentType.WEBCONTENT);
 		CreNewDoc.addNewWebContent(content, content);
 		CreNewDoc.saveAndClose();
+		SEHome.verifyContentCreatedSuccessfully(content);
 
 		/*	- Go to acme home page, select Edit/ Page/Add Page to create new page. + 
 		 * Fill node name+ Next+ Next + 
@@ -134,7 +136,7 @@ public class Ecms_WCM extends ECMS_TestConfig_Part1 {
         info("Delete Data test");
 		info("Delete created file");
 		navTool.goToSiteExplorer();
-		SEHome.deleteData(content);
+		SEHome.deleteData(content, true);
 		info("Delete created page");
 		navTool.goToPotalPages();
 		paMang.deletePage(content,"");
@@ -150,7 +152,7 @@ public class Ecms_WCM extends ECMS_TestConfig_Part1 {
 	 *<li> Pre-Condition: </li>
 	 *<li> Post-Condition: </li>
 	 */
-	@Test
+	@Test (groups="pending")
 	public  void test03_CreateSingleContentViewerPage() {
 		info("Test 3: Create Single Content Viewer page");
 		String content = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
@@ -162,6 +164,7 @@ public class Ecms_WCM extends ECMS_TestConfig_Part1 {
 		CreNewDoc.createNewDoc(selectDocumentType.WEBCONTENT);
 		CreNewDoc.addNewWebContent(content, content);
 		CreNewDoc.saveAndClose();
+		SEHome.verifyContentCreatedSuccessfully(content);
 		/*Step Number: 1
 		 *Step Name: Step 1: Create Single Content Viewer page
 		 *Step Description: 
@@ -191,7 +194,7 @@ public class Ecms_WCM extends ECMS_TestConfig_Part1 {
         info("Delete Data test");
 		info("Delete created file");
 		navTool.goToSiteExplorer();
-		SEHome.deleteData(content);
+		SEHome.deleteData(content, true);
 		info("Delete created page");
 		navTool.goToPotalPages();
 		paMang.deletePage(content,"");
@@ -214,12 +217,13 @@ public class Ecms_WCM extends ECMS_TestConfig_Part1 {
 		String newContent = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		
 		navTool.goToSiteExplorer();
-		SEHome.goToPath("acme", "Sites Management");
+		SEHome.goToPath("acme", "Site Management");
         //Create node
 		SEHome.goToAddNewContent();
 		CreNewDoc.createNewDoc(selectDocumentType.WEBCONTENT);
 		CreNewDoc.addNewWebContent(content, content);
 		CreNewDoc.saveAndClose();
+		SEHome.verifyContentCreatedSuccessfully(content);
 		/*Step Number: 1
 		 *Step Name: Step 1: Edit Content List Viewer (Documents, Last news...)
 		 *Step Description: 
@@ -251,7 +255,7 @@ public class Ecms_WCM extends ECMS_TestConfig_Part1 {
 		info("Delete Data test");
 		info("Delete created file");
 		navTool.goToSiteExplorer();
-		SEHome.deleteData(content);
+		SEHome.deleteData(content, true);
 		info("Delete created page");
 		navTool.goToPotalPages();
 		paMang.deletePage(content,"");
@@ -287,17 +291,20 @@ public class Ecms_WCM extends ECMS_TestConfig_Part1 {
 			- Can click link on search result to see content*/ 
 		this.driver.get(baseUrl+"/acme");
 		navTool.goToSiteExplorer();
-		SEHome.goToPath("acme", "Sites Management");
+		SEHome.goToPath("acme", "Site Management");
         //Create node
 		SEHome.goToAddNewContent();
 		CreNewDoc.createNewDoc(selectDocumentType.WEBCONTENT);
 		CreNewDoc.addNewWebContent(content , content);
 		CreNewDoc.saveAndClose();
+		SEHome.verifyContentCreatedSuccessfully(content);
 
 		//go to acme
 		this.driver.get(baseUrl+"/acme");
 		
 		//search
+		
+		navTool.goToUnEditContent();
 		acmeHP.searchQuickSearchBox(content );
 		navTool.goToEditContent();
 		waitForAndGetElement((acmeHP.ELEMENT_SEARCHRESULT_TITLE).replace("${title}",content ));
@@ -312,7 +319,7 @@ public class Ecms_WCM extends ECMS_TestConfig_Part1 {
 		
 		info("Delete created file");
 		navTool.goToSiteExplorer();
-		SEHome.deleteData(content);
+		SEHome.deleteData(content, true);
 
 	}
 
@@ -343,13 +350,14 @@ public class Ecms_WCM extends ECMS_TestConfig_Part1 {
 			- Documents/web contents in the selected category are displayed in Parameterized content list viewer portlet*/
 		 this.driver.get(baseUrl+"/acme");
 		navTool.goToSiteExplorer();
-		SEHome.goToPath("acme/categories/powers/Defense", "Sites Management");
+		SEHome.goToPath("acme/categories/powers/Defense", "Site Management");
 
 		//Create node
 		SEHome.goToAddNewContent();
 		CreNewDoc.createNewDoc(selectDocumentType.WEBCONTENT);
 		CreNewDoc.addNewWebContent(content, content);
 		CreNewDoc.saveAndClose();
+		SEHome.verifyContentCreatedSuccessfully(content);
 		SEHome.selectNode(content);
 		SEHome.goToPublication();
 		SEHome.changeStatusPulication("Published");
@@ -360,8 +368,8 @@ public class Ecms_WCM extends ECMS_TestConfig_Part1 {
 		
 		info("Delete created file");
 		navTool.goToSiteExplorer();
-		SEHome.goToPath("acme/categories/powers/Defense", "Sites Management");
-		SEHome.deleteData(content);
+		SEHome.goToPath("acme/categories/powers/Defense", "Site Management");
+		SEHome.deleteData(content, true);
 		
 	}
 	
@@ -377,12 +385,13 @@ public class Ecms_WCM extends ECMS_TestConfig_Part1 {
 		String content = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		this.driver.get(baseUrl+"/acme");
 		navTool.goToSiteExplorer();
-		SEHome.goToPath("acme", "Sites Management");
+		SEHome.goToPath("acme", "Site Management");
 		//Create node
 		SEHome.goToAddNewContent();
 		CreNewDoc.createNewDoc(selectDocumentType.WEBCONTENT);
 		CreNewDoc.addNewWebContent(content , content);
 		CreNewDoc.saveAndClose();
+		SEHome.verifyContentCreatedSuccessfully(content);
 		
 		/*Step Number: 1
 		 *Step Name: Step 1: Show draft /public content from page
@@ -428,7 +437,7 @@ public class Ecms_WCM extends ECMS_TestConfig_Part1 {
 		info("Delete Data test");
 		info("Delete created file");
 		navTool.goToSiteExplorer();
-		SEHome.deleteData(content);
+		SEHome.deleteData(content, true);
 		info("Delete created page");
 		navTool.goToPotalPages();
 		paMang.deletePage(content,"");
@@ -469,13 +478,14 @@ public class Ecms_WCM extends ECMS_TestConfig_Part1 {
 			All selected web content/documents are displayed as list in List Content Viewer page*/
 		this.driver.get(baseUrl+"/acme");
 		navTool.goToSiteExplorer();
-		SEHome.goToPath("acme", "Sites Management");
+		SEHome.goToPath("acme", "Site Management");
 
 		info("Create webcontent1");
 		SEHome.goToAddNewContent();
 		CreNewDoc.createNewDoc(selectDocumentType.WEBCONTENT);
 		CreNewDoc.addNewWebContent(content1 ,content1);
 		CreNewDoc.saveAndClose();
+		SEHome.verifyContentCreatedSuccessfully(content1);
 		
 		info("Select acme folder");
 		SEHome.selectNode("acme");
@@ -485,6 +495,7 @@ public class Ecms_WCM extends ECMS_TestConfig_Part1 {
 		CreNewDoc.createNewDoc(selectDocumentType.WEBCONTENT);
 		CreNewDoc.addNewWebContent(content2,content2);
 		CreNewDoc.saveAndClose();
+		SEHome.verifyContentCreatedSuccessfully(content2);
 			
 		this.driver.get(baseUrl+"/acme");
 		
@@ -516,7 +527,8 @@ public class Ecms_WCM extends ECMS_TestConfig_Part1 {
 			All selected web content/documents you've chosen are displayed as list in List Content Viewer page*/ 
 	
 		mouseOver(contList.ELEMENT_EDIT_CLV, true);
-		click(contList.ELEMENT_EDIT_PREFERENCE);
+		//click(contList.ELEMENT_EDIT_PREFERENCE);
+		clickByJavascript(contList.ELEMENT_EDIT_PREFERENCE, 2);
 		check(contList.ELEMENT_CONTENT_LIST_BY_CONTENT_MODE, 2);
 		contList.selectFolderContent("General Drives/Sites Management/acme",content1);
 		Utils.pause(2000);
@@ -529,8 +541,8 @@ public class Ecms_WCM extends ECMS_TestConfig_Part1 {
 		info("Delete create files");
 		this.driver.get(baseUrl+"/intranet");
 		navTool.goToSiteExplorer();
-		SEHome.deleteData(content1);
-		SEHome.deleteData(content2);
+		SEHome.deleteData(content1, true);
+		SEHome.deleteData(content2, true);
 	    info("Delete created page");
 		navTool.goToPotalPages();
 		paMang.deletePage(title,"");
@@ -565,13 +577,14 @@ public class Ecms_WCM extends ECMS_TestConfig_Part1 {
 		 *Expected Outcome: 
 			- All web contents/documents in selected folder are listed in Content List Viewer portlet in this page*/
 		navTool.goToSiteExplorer();
-		SEHome.goToPath("acme", "Sites Management");
+		SEHome.goToPath("acme", "Site Management");
 
 		info("Create webcontent1");
 		SEHome.goToAddNewContent();
 		CreNewDoc.createNewDoc(selectDocumentType.WEBCONTENT);
 		CreNewDoc.addNewWebContent(content1 ,content1);
 		CreNewDoc.saveAndClose();
+		SEHome.verifyContentCreatedSuccessfully(content1);
 		
 		info("Select acme folder");
 		SEHome.selectNode("acme");
@@ -581,6 +594,7 @@ public class Ecms_WCM extends ECMS_TestConfig_Part1 {
 		CreNewDoc.createNewDoc(selectDocumentType.WEBCONTENT);
 		CreNewDoc.addNewWebContent(content2 ,content2);
 		CreNewDoc.saveAndClose();
+		SEHome.verifyContentCreatedSuccessfully(content2);
 			
 		this.driver.get(baseUrl+"/acme");
 		
@@ -604,7 +618,8 @@ public class Ecms_WCM extends ECMS_TestConfig_Part1 {
 		 *Expected Outcome: 
 			- All web contents/documents in selected folder are listed in Content List Viewer portlet in this page*/ 
 		mouseOver(contList.ELEMENT_EDIT_CLV, true);
-		click(contList.ELEMENT_EDIT_PREFERENCE);
+		//click(contList.ELEMENT_EDIT_PREFERENCE);
+		clickByJavascript(contList.ELEMENT_EDIT_PREFERENCE, 2);
 		check(contList.ELEMENT_CONTENT_LIST_BY_FOLDER_MODE, 2);
 		contList.selectFolderContent("General Drives/Sites Management","acme");
 		Utils.pause(2000);
@@ -615,8 +630,8 @@ public class Ecms_WCM extends ECMS_TestConfig_Part1 {
 		info("Delete created files");
 		this.driver.get(baseUrl+"/intranet");
 		navTool.goToSiteExplorer();
-		SEHome.deleteData(content1);
-		SEHome.deleteData(content2);
+		SEHome.deleteData(content1, true);
+		SEHome.deleteData(content2, true);
 		info("Delete created page");
 		navTool.goToPotalPages();
 		paMang.deletePage(title,"");
@@ -649,13 +664,14 @@ public class Ecms_WCM extends ECMS_TestConfig_Part1 {
 			- The selected web content/document is displayed*/
 		this.driver.get(baseUrl+"/acme");
 		navTool.goToSiteExplorer();
-		SEHome.goToPath("acme", "Sites Management");
+		SEHome.goToPath("acme", "Site Management");
 
 		info("Create webcontent 1");
 		SEHome.goToAddNewContent();
 		CreNewDoc.createNewDoc(selectDocumentType.WEBCONTENT);
 		CreNewDoc.addNewWebContent(content1 ,content1);
 		CreNewDoc.saveAndClose();
+		SEHome.verifyContentCreatedSuccessfully(content1);
 		
 		info("Select acme folder");
 		SEHome.selectNode("acme");
@@ -665,6 +681,7 @@ public class Ecms_WCM extends ECMS_TestConfig_Part1 {
 		CreNewDoc.createNewDoc(selectDocumentType.WEBCONTENT);
 		CreNewDoc.addNewWebContent(content2,content2);
 		CreNewDoc.saveAndClose();
+		SEHome.verifyContentCreatedSuccessfully(content2);
 		
 		this.driver.get(baseUrl+"/acme");
 		navTool.goToAddPage();
@@ -687,7 +704,8 @@ public class Ecms_WCM extends ECMS_TestConfig_Part1 {
 		 *Expected Outcome: 
 			- The new selected web content/document is displayed*/ 
 		mouseOver(contDetail.ELEMENT_CONTENT_DETAIL_VIEW_CONTENT.replace("${title}",content1),true);
-		click(contDetail.ELEMENT_CONTENT_DETAIL_CONTENT_BOX_PREFERENCES_BTN.replace("${title}",content1));
+		//click(contDetail.ELEMENT_CONTENT_DETAIL_CONTENT_BOX_PREFERENCES_BTN.replace("${title}",content1));
+		clickByJavascript(contDetail.ELEMENT_CONTENT_DETAIL_CONTENT_BOX_PREFERENCES_BTN.replace("${title}",content1), 2);
 		click(contDetail.ELEMENT_CONTENT_DETAIL_ADDPATH_BTN);
 		contList.selectFolderContent("General Drives/Sites Management/acme",content2);
 		click(contDetail.ELEMENT_CONTENT_DETAIL_SAVE_BTN);
@@ -696,8 +714,8 @@ public class Ecms_WCM extends ECMS_TestConfig_Part1 {
 		info("Delete created files");
 		this.driver.get(baseUrl+"/intranet");
 		navTool.goToSiteExplorer();
-		SEHome.deleteData(content1);
-		SEHome.deleteData(content2);
+		SEHome.deleteData(content1, true);
+		SEHome.deleteData(content2, true);
 		info("Delete create page");
 		navTool.goToPotalPages();
 		paMang.deletePage(title,"");
@@ -864,7 +882,7 @@ public class Ecms_WCM extends ECMS_TestConfig_Part1 {
 
 	@Test
 	public  void test14_15_UpdateDeleteSEOMetadatasWithLocalization() {
-		info("Test 13_14 Update SEO metadatas with localization");
+		info("Test 14_15 Update SEO metadatas with localization");
 		String random = getRandomNumber();
 		String title = txData.getContentByArrayTypeRandom(1)+random;
 		

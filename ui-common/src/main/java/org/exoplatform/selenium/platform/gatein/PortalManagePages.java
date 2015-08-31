@@ -34,6 +34,8 @@ public class PortalManagePages extends PlatformBase {
 	
 	
 	//Add new page popup
+	public final By ELEMENT_MANAGEPAGES_ADD_NEW_PAGES_POPUP_FORM=By.xpath(".//*[@id='UIPageForm']");
+	public final By ELEMENT_MANAGEPAGES_ADD_NEW_PAGES_POPUP_CANCEL_BTN=By.xpath(".//*[@id='UIPageForm']//*[@class='btn' and text()='Cancel']");
 	public final By ELEMENT_MANAGEPAGES_ADD_NEW_PAGES_POPUP_SAVE_BTN=By.cssSelector("#UIMaskWorkspace .btn[onclick~=\"javascript:eXo.webui.UIForm.submitForm('UIPageForm','Save',true)\"]");
 	public final By ELEMENT_MANAGEPAGES_ADD_NEW_PAGE_POPUP_PAGE_NAME =By.cssSelector("#UIMaskWorkspace #name");
 	public final By ELEMENT_MANAGEPAGES_ADD_NEW_PAGE_POPUP_TITLE = By.cssSelector("#UIMaskWorkspace #title");
@@ -150,6 +152,8 @@ public class PortalManagePages extends PlatformBase {
 	 */
 	public void addPage(String pageName,String title,String type,boolean... isMaxWindow){
 		info("Click on Add new Page button");
+		Utils.pause(3000);
+		waitForAndGetElement(ELEMENT_MANAGEPAGES_ADD_NEW_PAGE_BTN, DEFAULT_TIMEOUT, 1);
 		click(ELEMENT_MANAGEPAGES_ADD_NEW_PAGE_BTN);
 		driver.navigate().refresh();
 		if (!pageName.isEmpty()) {
@@ -162,7 +166,7 @@ public class PortalManagePages extends PlatformBase {
 		}
 		if (!type.isEmpty()){
 			info("Select a type");
-			select(ELEMENT_MANAGEPAGES_ADD_NEW_PAGE_POPUP_TYPE_DROPBOX, type,2);
+			select(ELEMENT_MANAGEPAGES_ADD_NEW_PAGE_POPUP_TYPE_DROPBOX, type);
 		}
 		if(isMaxWindow.length>0){
 			info("Tick on show Max Window checkbox");

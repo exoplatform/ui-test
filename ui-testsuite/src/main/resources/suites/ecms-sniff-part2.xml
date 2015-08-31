@@ -8,9 +8,9 @@
 		</groups>
 		<classes>
 			<class name="org.exoplatform.selenium.platform.ecms.sniff.ECMS_TestConfig_Part2" />
-			<class name="org.exoplatform.selenium.platform.ecms.sniff.Ecms_SE_Admin" />
 			<class name="org.exoplatform.selenium.platform.ecms.sniff.Ecms_SE_BasicAction" />
 			<class name="org.exoplatform.selenium.platform.ecms.sniff.Ecms_SE_Create" />
+			<class name="org.exoplatform.selenium.platform.ecms.sniff.Ecms_SE_Admin" />
 		</classes>
 	</test>
 	<listeners>

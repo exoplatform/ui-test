@@ -160,9 +160,12 @@ public class EventManagement extends CalendarLocatorObject {
 	 * 
 	 */
 	public void goToAddEventFromActionBar(){
-		info("Go to Add Task page from action bar"); 
+		info("Go to Add Event page from action bar"); 
+		Utils.pause(2000);
+		//waitForAndGetElement(ELEMENT_BUTTON_EVENT, DEFAULT_TIMEOUT, 1);
 		click(cHome.ELEMENT_BUTTON_EVENT);
-		waitForAndGetElement(ELEMENT_QUICK_ADD_EVENT_POPUP);
+		///clickByJavascript(ELEMENT_BUTTON_EVENT, 2);
+		waitForAndGetElement(ELEMENT_QUICK_ADD_EVENT_POPUP, DEFAULT_TIMEOUT,1);
 	}
 
 	/**
@@ -253,6 +256,7 @@ public class EventManagement extends CalendarLocatorObject {
 		info("Input into From, To and check/uncheck allday checkbox fields of a EVENT");
 		if(allDay){
 			info("Check all day, then select date");
+			//waitForAndGetElement(ELEMENT_QUICK_CHECKBOX_EVENT_ALLDAY, DEFAULT_TIMEOUT, 1);
 			check(ELEMENT_QUICK_CHECKBOX_EVENT_ALLDAY,2);
 			if ((from != null) & (from != ""))
 				type(ELEMENT_QUICK_INPUT_EVENT_FROM_DATE, from, true);
@@ -261,6 +265,7 @@ public class EventManagement extends CalendarLocatorObject {
 
 		}else {
 			info("Uncheck all day, then select date time");
+			//waitForAndGetElement(ELEMENT_QUICK_CHECKBOX_EVENT_ALLDAY, DEFAULT_TIMEOUT, 1);
 			uncheck(ELEMENT_QUICK_CHECKBOX_EVENT_ALLDAY,2);
 			if ((from != null) & (from != "")){
 				String[] dateTimeFrom = from.split(" ");
@@ -347,8 +352,9 @@ public class EventManagement extends CalendarLocatorObject {
 	 * @param opt
 	 */
 	public void inputDataEventInQuickForm(String name, String note, String from, String to, boolean allDay, String...opt){
-		inputBasicQuickEvent(name, note, opt);
 		inputFromToQuickEvent(from, to, allDay);
+		inputBasicQuickEvent(name, note, opt);
+		
 	}
 
 	/**
@@ -562,7 +568,9 @@ public class EventManagement extends CalendarLocatorObject {
 	public void checkBusyTimeOfUser(String user, String from, String to){
 		info("Check busy time of an user");
 		int fromIndex = convertFromTimeToIndex(from);
+		//System.out.println("fromIndex: " + fromIndex);
 		int toIndex = convertFromTimeToIndex(to);
+		//System.out.println("toIndex: " + toIndex);
 		info("From index is " + String.valueOf(fromIndex));
 		info("To index is " + String.valueOf(toIndex));
 		for(int i = fromIndex; i<= toIndex-1; i++){
@@ -739,7 +747,10 @@ public class EventManagement extends CalendarLocatorObject {
 	 * Save add EVENT
 	 */
 	public void saveQuickAddEvent(){
-		click(ELEMENT_BUTTON_EVENT_SAVE);
+		//click(ELEMENT_BUTTON_EVENT_SAVE);
+		info("Save quick add event");
+		waitForAndGetElement(ELEMENT_BUTTON_EVENT_SAVE, DEFAULT_TIMEOUT, 1);
+		clickByJavascript(ELEMENT_BUTTON_EVENT_SAVE, 2);
 		waitForElementNotPresent(ELEMENT_BUTTON_EVENT_SAVE);
 		Utils.pause(2000);
 	}
@@ -748,8 +759,11 @@ public class EventManagement extends CalendarLocatorObject {
 	 * Save a EVENT with more details
 	 */
 	public void saveAddEventDetails(){
-		click(ELEMENT_BUTTON_EVENT_SAVE_DETAILS);
+		info("Sae add event details");
+		waitForAndGetElement(ELEMENT_BUTTON_EVENT_SAVE_DETAILS, DEFAULT_TIMEOUT, 1);
+		//click(ELEMENT_BUTTON_EVENT_SAVE_DETAILS);
 		//waitForElementNotPresent(ELEMENT_BUTTON_EVENT_SAVE_DETAILS);
+		clickByJavascript(ELEMENT_BUTTON_EVENT_SAVE_DETAILS, 2);
 		Utils.pause(500);
 	}
 
@@ -757,7 +771,11 @@ public class EventManagement extends CalendarLocatorObject {
 	 * Click on more details
 	 */
 	public void moreDetailsEvent(){
-		click(ELEMENT_BUTTON_EVENT_MORE_DETAILS);
+		info("Go to More Details");
+		Utils.pause(2000);
+		waitForAndGetElement(ELEMENT_BUTTON_EVENT_MORE_DETAILS, DEFAULT_TIMEOUT, 1);
+		//click(ELEMENT_BUTTON_EVENT_MORE_DETAILS);
+		clickByJavascript(ELEMENT_BUTTON_EVENT_MORE_DETAILS, 2);
 		waitForElementNotPresent(ELEMENT_BUTTON_EVENT_MORE_DETAILS);
 	}
 
@@ -921,22 +939,35 @@ public class EventManagement extends CalendarLocatorObject {
 		switch (optDeleteType) {
 		case ONLY_EVENT:
 			info("Delete only event recurring");
-			check(ELEMENT_EDIT_DELETE_ONE_EVENT,2);
+			if(browser.contains("iexplorer"))
+				clickByJavascript(ELEMENT_EDIT_DELETE_ONE_EVENT, 2);
+			else
+			    check(ELEMENT_EDIT_DELETE_ONE_EVENT,2);
 			break;
 		case FOLLOW_EVENT:
 			info("Delete following event recurring");
-			check(ELEMENT_EDIT_DELETE_FOLLOWING_EVENT,2);
+			if(browser.contains("iexplorer"))
+			    clickByJavascript(ELEMENT_EDIT_DELETE_FOLLOWING_EVENT, 2);
+			else
+				check(ELEMENT_EDIT_DELETE_FOLLOWING_EVENT,2);
 			break;
 		case ALL_EVENT:
 			info("Delete all event recurring");
-			check(ELEMENT_EDIT_DELETE_ALL_EVENT,2);
+			if(browser.contains("iexplorer"))
+				clickByJavascript(ELEMENT_EDIT_DELETE_ALL_EVENT, 2);
+			else
+				check(ELEMENT_EDIT_DELETE_ALL_EVENT,2);
 			break;
 		default: 
 			info("Delete only event recurring");
-			check(ELEMENT_EDIT_DELETE_ONE_EVENT,2);
+			if(browser.contains("iexplorer"))
+				clickByJavascript(ELEMENT_EDIT_DELETE_ONE_EVENT, 2);
+			else
+				check(ELEMENT_EDIT_DELETE_ONE_EVENT,2);
 			break;
 		}
-		click(ELEMENT_CONFIRM_DELETE_BUTTON);
+		waitForAndGetElement(ELEMENT_CONFIRM_DELETE_BUTTON, DEFAULT_TIMEOUT, 1);
+		clickByJavascript(ELEMENT_CONFIRM_DELETE_BUTTON, 2);
 		waitForElementNotPresent(ELEMENT_DELETE_RECURRING_EVENT_FORM);
 	}
 

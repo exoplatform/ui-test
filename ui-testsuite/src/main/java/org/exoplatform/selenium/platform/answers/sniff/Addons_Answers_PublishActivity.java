@@ -116,20 +116,23 @@ public class Addons_Answers_PublishActivity   extends PlatformBase {
 		info("Create question");
 		cMang.goToActionOfCategoryFromRightClick(paCat1, actionCategoryOption.SUBMITQUESTION);
 		qMang.inputDataToQuestionForm(question, content, null, null);
-		click(qMang.ELEMENT_SUBMIT_QUESTION_FORM_SAVE_BUTTON);
+		//click(qMang.ELEMENT_SUBMIT_QUESTION_FORM_SAVE_BUTTON);
+		clickByJavascript(qMang.ELEMENT_SUBMIT_QUESTION_FORM_SAVE_BUTTON, 2);
 		click(button.ELEMENT_OK_BUTTON_LINK);
 
 		info("Create answer");
 		click(cMang.ELEMENT_CATEGORY_LIST_ITEM.replace("$category", paCat1));
 		aMang.goToAnswerQuestion(question);
 		aMang.inputDataToAnswer(answer, null, null, null);
-		click(aMang.ELEMENT_ANSWER_FORM_SAVE_BUTTON);
+		//click(aMang.ELEMENT_ANSWER_FORM_SAVE_BUTTON);
+		clickByJavascript(aMang.ELEMENT_ANSWER_FORM_SAVE_BUTTON, 2);
 		waitForAndGetElement(aMang.ELEMENT_ANSWER_AUTHOR.replace("$answer", answer).replace("$fullname", fullName));
 
 		info("Create comment");
 		comMang.goToCommentQuestion(question);
 		comMang.inputDataToComment(comment);
-		click(comMang.ELEMENT_COMMENT_FORM_SAVE_BUTTON);
+		//click(comMang.ELEMENT_COMMENT_FORM_SAVE_BUTTON);
+		clickByJavascript(comMang.ELEMENT_COMMENT_FORM_SAVE_BUTTON, 2);
 		waitForAndGetElement(comMang.ELEMENT_COMMENT_AUTHOR.replace("$comment", comment).replace("$fullname", fullName));
 
 		info("Check homepage activity");
@@ -168,7 +171,10 @@ public class Addons_Answers_PublishActivity   extends PlatformBase {
 
 		info("Clear data test");
 		hp.goToAnswer();
-		qMang.deleteQuestion(question);
+		aHome.goToHomeCategory();
+		click(cMang.ELEMENT_CATEGORY_LIST_ITEM.replace("$category", paCat1));
+		cMang.deleteCategory(paCat1);
+		//qMang.deleteQuestion(question);
 	}
 
 	/**
@@ -195,7 +201,8 @@ public class Addons_Answers_PublishActivity   extends PlatformBase {
 		info("Create question");
 		qMang.goToSubmitQuestion();
 		qMang.inputDataToQuestionForm(question, content, null, null);
-		click(qMang.ELEMENT_SUBMIT_QUESTION_FORM_SAVE_BUTTON);
+		//click(qMang.ELEMENT_SUBMIT_QUESTION_FORM_SAVE_BUTTON);
+		clickByJavascript(qMang.ELEMENT_SUBMIT_QUESTION_FORM_SAVE_BUTTON, 2);
 		click(button.ELEMENT_OK_BUTTON_LINK);
 
 		info("Test 5: Submit an answer");
@@ -215,7 +222,8 @@ public class Addons_Answers_PublishActivity   extends PlatformBase {
 		info("Create answer");
 		aMang.goToAnswerQuestion(question);
 		aMang.inputDataToAnswer(answer1, null, null, null);
-		click(aMang.ELEMENT_ANSWER_FORM_SAVE_BUTTON);
+		//click(aMang.ELEMENT_ANSWER_FORM_SAVE_BUTTON);
+		clickByJavascript(aMang.ELEMENT_ANSWER_FORM_SAVE_BUTTON, 2);
 
 		info("Check homepage activity");
 		hp.goToHomePage();
@@ -242,7 +250,8 @@ public class Addons_Answers_PublishActivity   extends PlatformBase {
 		hp.goToAnswer();
 		comMang.goToCommentQuestion(question);
 		comMang.inputDataToComment(comment);
-		click(comMang.ELEMENT_COMMENT_FORM_SAVE_BUTTON);
+		//click(comMang.ELEMENT_COMMENT_FORM_SAVE_BUTTON);
+		clickByJavascript(comMang.ELEMENT_COMMENT_FORM_SAVE_BUTTON, 2);
 		waitForAndGetElement(comMang.ELEMENT_COMMENT_AUTHOR.replace("$comment", comment).replace("$fullname", fullName));
 
 		info("Check homepage activity");
@@ -266,7 +275,8 @@ public class Addons_Answers_PublishActivity   extends PlatformBase {
 		hp.goToAnswer();
 		aMang.goToAnswerQuestion(question);
 		aMang.inputDataToAnswer(answer2, null, null, null);
-		click(aMang.ELEMENT_ANSWER_FORM_SAVE_BUTTON);
+		//click(aMang.ELEMENT_ANSWER_FORM_SAVE_BUTTON);
+		clickByJavascript(aMang.ELEMENT_ANSWER_FORM_SAVE_BUTTON, 2);
 		waitForAndGetElement(aMang.ELEMENT_ANSWER_AUTHOR.replace("$answer", answer2).replace("$fullname", fullName));
 
 		info("Check homepage activity");
@@ -300,7 +310,8 @@ public class Addons_Answers_PublishActivity   extends PlatformBase {
 		info("Create question");
 		qMang.goToSubmitQuestion();
 		qMang.inputDataToQuestionForm(question, content, null, null);
-		click(qMang.ELEMENT_SUBMIT_QUESTION_FORM_SAVE_BUTTON);
+		//click(qMang.ELEMENT_SUBMIT_QUESTION_FORM_SAVE_BUTTON);
+		clickByJavascript(qMang.ELEMENT_SUBMIT_QUESTION_FORM_SAVE_BUTTON, 2);
 		click(button.ELEMENT_OK_BUTTON_LINK);
 		
 		info("Test 3: Unactivate a question");
@@ -376,7 +387,8 @@ public class Addons_Answers_PublishActivity   extends PlatformBase {
 		info("Create question");
 		qMang.goToSubmitQuestion();
 		qMang.inputDataToQuestionForm(question, content, null, null);
-		click(qMang.ELEMENT_SUBMIT_QUESTION_FORM_SAVE_BUTTON);
+		//click(qMang.ELEMENT_SUBMIT_QUESTION_FORM_SAVE_BUTTON);
+		clickByJavascript(qMang.ELEMENT_SUBMIT_QUESTION_FORM_SAVE_BUTTON, 2);
 		click(button.ELEMENT_OK_BUTTON_LINK);
 		
 		info("Test 8: Edit question title");
@@ -397,7 +409,8 @@ public class Addons_Answers_PublishActivity   extends PlatformBase {
 			- A comment is added: Title has been updated to: $value.*/ 
 		qMang.goToActionOfQuestionByRightClick(question, actionQuestionOption.EDIT);
 		qMang.inputDataToQuestionForm(newquestion, null, null, null);
-		click(qMang.ELEMENT_SUBMIT_QUESTION_FORM_SAVE_BUTTON);
+		//click(qMang.ELEMENT_SUBMIT_QUESTION_FORM_SAVE_BUTTON);
+		clickByJavascript(qMang.ELEMENT_SUBMIT_QUESTION_FORM_SAVE_BUTTON, 2);
 		waitForElementNotPresent(By.xpath(aHome.ELEMENT_QUESTION_LIST_ITEM.replace("$question", question)));
 		waitForAndGetElement(By.xpath(aHome.ELEMENT_QUESTION_LIST_ITEM.replace("$question", newquestion)));
 
@@ -437,7 +450,8 @@ public class Addons_Answers_PublishActivity   extends PlatformBase {
 		info("Create question");
 		cMang.goToActionOfCategoryFromRightClick(paCat1, actionCategoryOption.SUBMITQUESTION);
 		qMang.inputDataToQuestionForm(question, content, null, null);
-		click(qMang.ELEMENT_SUBMIT_QUESTION_FORM_SAVE_BUTTON);
+		//click(qMang.ELEMENT_SUBMIT_QUESTION_FORM_SAVE_BUTTON);
+		clickByJavascript(qMang.ELEMENT_SUBMIT_QUESTION_FORM_SAVE_BUTTON, 2);
 		click(button.ELEMENT_OK_BUTTON_LINK);
 		
 		info("Test 9: Open Answers application from Answer's activity");

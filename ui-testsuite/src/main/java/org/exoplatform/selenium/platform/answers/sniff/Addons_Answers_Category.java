@@ -126,7 +126,7 @@ public class Addons_Answers_Category  extends PlatformBase {
 	 * Pre-Condition: 
 	 * Post-Condition: 
 	 */
-	@Test(priority=2)
+	@Test(priority=5)
 	public  void test02_ExportImportCategory() {
 		String paCat1 = txData.getContentByArrayTypeRandom(1)+"p1116810";
 		String paDes1 = txData.getContentByArrayTypeRandom(1)+"p1116810";
@@ -155,7 +155,8 @@ public class Addons_Answers_Category  extends PlatformBase {
 		info("Create question 1");
 		cMang.goToActionOfCategoryFromRightClick(paCat1, actionCategoryOption.SUBMITQUESTION);
 		qMang.inputDataToQuestionForm(question1, content1, null, null);
-		click(qMang.ELEMENT_SUBMIT_QUESTION_FORM_SAVE_BUTTON);
+		//click(qMang.ELEMENT_SUBMIT_QUESTION_FORM_SAVE_BUTTON);
+		clickByJavascript(qMang.ELEMENT_SUBMIT_QUESTION_FORM_SAVE_BUTTON, 2);
 		click(button.ELEMENT_OK_BUTTON_LINK);
 		
 		info("Create category 2");
@@ -210,7 +211,7 @@ public class Addons_Answers_Category  extends PlatformBase {
 	 * Pre-Condition: 
 	 * Post-Condition: 
 	 */
-	@Test(priority=5)
+	@Test(priority=4)
 	public  void test03_WatchUnwatchCategory() {
 		String paCat1 = txData.getContentByArrayTypeRandom(1)+"p1116811";
 		String paDes1 = txData.getContentByArrayTypeRandom(1)+"p1116811";
@@ -324,7 +325,7 @@ public class Addons_Answers_Category  extends PlatformBase {
 	 * Pre-Condition: 
 	 * Post-Condition: 
 	 */
-	@Test(priority=3)
+	@Test(priority=2)
 	public  void test04_05_06_AddEditDeleteACategory() {
 		String cat = txData.getContentByArrayTypeRandom(1)+"116824";
 		String des = txData.getContentByArrayTypeRandom(1)+"116824";
@@ -390,7 +391,7 @@ public class Addons_Answers_Category  extends PlatformBase {
 	 * Pre-Condition: 
 	 * Post-Condition: 
 	 */
-	@Test(priority=4)
+	@Test(priority=3)
 	public  void test07_MoveACategory() {
 		String paCat1 = txData.getContentByArrayTypeRandom(1)+"p1116827";
 		String paDes1 = txData.getContentByArrayTypeRandom(1)+"p1116827";

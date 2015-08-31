@@ -11,7 +11,6 @@ import org.exoplatform.selenium.Utils;
 import org.exoplatform.selenium.platform.PlatformBase;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -46,7 +45,7 @@ public class ActivityStream extends PlatformBase {
 	public final By ELEMENT_COMPOSER_INPUT_LINK_FIELD = By.xpath(".//*[@id='InputLink']");
 	public final By ELEMENT_COMPOSER_ATTACH_LINK_BUTTON = By.xpath(".//*[@id='AttachButton']");
 	public final By ELEMENT_COMPOSER_CLOSE_SHARE_LINK_BUTTON=By.xpath("//*[@id='UIActivityComposerContainer']//*[@class='uiIconClose uiIconLightGray']");
-	public final By ELEMENT_COMPOSER_SHARE_BUTTON = By.id("ShareButton");
+	public final By ELEMENT_COMPOSER_SHARE_BUTTON = By.xpath(".//*[@id='ShareButton']");
 	public final By ELEMENT_ACTIVITY_WHAT_ARE_YOU_WORKING_LABEL = By.xpath("//div[@id='DisplaycomposerInput']/../div[@class='placeholder']");
 	public final String ELEMENT_ACTIVITY_AUTHOR_ACTIVITY = "//*[contains(text(), '${activityText}')]/../../../../..//*[@class='author']";
 	public final By ELEMENT_ACTIVITY_UPLOAD_POPUP_UPLOAD_BUTTON = By.xpath(".//input[@type='file']");	
@@ -227,6 +226,7 @@ public class ActivityStream extends PlatformBase {
 	public ActivityStream(WebDriver dr){
 		this.driver=dr;
 		button = new Button(dr);
+		
 	}
 	/**
 	 * Define options of menu activity
@@ -484,15 +484,6 @@ public class ActivityStream extends PlatformBase {
 	 * @param textContent
 	 */
 	public void addComment(String filename, String textContent){
-		/*waitForAndGetElement(By.xpath(ELEMENT_ICON_COMMENT.replace("${title}", filename))).click();
-		switchToParentWindow();
-		WebElement input= waitForAndGetElement(By.xpath(ELEMENT_COMMENTBOX.replace("${title}",filename)));
-		Actions action =new Actions(driver);
-		action.moveToElement(input).sendKeys(textContent).build().perform();
-		waitForAndGetElement(By.xpath(ELEMENT_COMMENT_BUTTON.replace("${activityText}", filename))).click();
-		Utils.pause(2000);
-		waitForAndGetElement(ELEMENT_PUBLICATION_COMMENTPOSTED.replace("${content}",textContent),2000,1);
-		info("The comment is added successfully");*/
 		info("Click on icon comment");
 		int repeat = 0;
 		while (waitForAndGetElement(ELEMENT_COMMENTBOX.replace("${title}", filename), 3000, 0,2) == null) {
@@ -572,9 +563,11 @@ public class ActivityStream extends PlatformBase {
 	 */
 	public void deleteComment(String name,String comment){
 		info("Hover over on the comment");
-		mouseOver(ELEMENT_PUBLICATION_LASTCOMMENT.replace("${title}", name), true);
-		click(ELEMENT_PUBLICATION_DELETE_LASTCOMMENT.replace("${title}", comment));
-		click(button.ELEMENT_OK_BUTTON);
+		//mouseOver(ELEMENT_PUBLICATION_LASTCOMMENT.replace("${title}", name), true);
+		mouseHoverByJavaScript(ELEMENT_PUBLICATION_LASTCOMMENT.replace("${title}", name), 2);
+		clickByJavascript(ELEMENT_PUBLICATION_DELETE_LASTCOMMENT.replace("${title}", comment));
+		//click(button.ELEMENT_OK_BUTTON);
+		clickByJavascript(button.ELEMENT_OK_BUTTON, 2);
 		Utils.pause(2000);
 		waitForElementNotPresent(ELEMENT_PUBLICATION_COMMENTPOSTED.replace("${content}", comment),2000,1);
 		info("The comment is deleted successfully");
@@ -603,6 +596,7 @@ public class ActivityStream extends PlatformBase {
 	public void addText(String text){
 		info("----Add text into activity text box-----");
 		WebElement inputText = waitForAndGetElement(ELEMENT_COMPOSER_INPUT_FILED,100000);
+		//type(ELEMENT_COMPOSER_INPUT_FILED, text, false);
 		WebElement shareButton = waitForAndGetElement(ELEMENT_COMPOSER_SHARE_BUTTON);
 		WebElement workingLabel = waitForAndGetElement(ELEMENT_ACTIVITY_WHAT_ARE_YOU_WORKING_LABEL);
 		((JavascriptExecutor)driver).executeScript("arguments[0].textContent = '';", workingLabel);
@@ -617,13 +611,19 @@ public class ActivityStream extends PlatformBase {
 	 */
 	public void addLink(String link){
 		info("----Click on Link----");
-		waitForAndGetElement( ELEMENT_COMPOSER_LINK_BUTTON).click();
+		//waitForAndGetElement( ELEMENT_COMPOSER_LINK_BUTTON).click();
+		waitForAndGetElement(ELEMENT_COMPOSER_LINK_BUTTON, DEFAULT_TIMEOUT,1);
+		clickByJavascript(ELEMENT_COMPOSER_LINK_BUTTON, 2);
 		info("----Input link into link box-----");
 		waitForAndGetElement(ELEMENT_COMPOSER_INPUT_LINK_FIELD);
-		type(ELEMENT_COMPOSER_INPUT_LINK_FIELD, link, true);
+		WebElement input= waitForAndGetElement(ELEMENT_COMPOSER_INPUT_LINK_FIELD, DEFAULT_TIMEOUT, 1);
+		Actions action =new Actions(driver);
+		action.moveToElement(input).click().perform();
+		action.sendKeys(link).perform();
+		//type(ELEMENT_COMPOSER_INPUT_LINK_FIELD, link, true);
 		waitForAndGetElement(ELEMENT_COMPOSER_ATTACH_LINK_BUTTON);
 		info("----Click attach button-----");
-		click(ELEMENT_COMPOSER_ATTACH_LINK_BUTTON);
+		clickByJavascript(ELEMENT_COMPOSER_ATTACH_LINK_BUTTON);
 		waitForAndGetElement(By.id("LinkTitle"));
 	}
 
@@ -636,14 +636,17 @@ public class ActivityStream extends PlatformBase {
 	 * Share activity
 	 */
 	public void shareActivity(){
-		waitForAndGetElement(ELEMENT_COMPOSER_SHARE_BUTTON);
 		info("----Click share button----");
 		if(browser.contains("iexplorer")){
 			info("mouse over and click");
-			waitForAndGetElement(ELEMENT_COMPOSER_SHARE_BUTTON,2000,1,2).sendKeys(Keys.ENTER);
+			Utils.pause(2000);
+			WebElement el = waitForAndGetElement(ELEMENT_COMPOSER_SHARE_BUTTON, 2000, 1, 2);
+			el.sendKeys("\n");
 		}
 		else click(ELEMENT_COMPOSER_SHARE_BUTTON);
 		Utils.pause(1000);
+		
+		
 	}
 	/**
 	 * Add new activity for space 
@@ -697,13 +700,15 @@ public class ActivityStream extends PlatformBase {
 	 * @param addText
 	 * @param text
 	 */
-	public void uploadAndShareFileActivity(String nameDrive,String pathFolder,String pathData,String nameFile,String text) {
+	public void uploadAndShareFileActivity(String nameDrive,String pathFolder,String pathData,String nameFile,String text, boolean...Doc) {
+		boolean prev = (Doc.length > 0 ? Doc[0]: false);
 		info("-- Adding an activity--");
 		Utils.pause(3000);
 		openUploadPopup(nameDrive,pathFolder);
-		uploadFileFromAS(pathData,nameFile);
+		uploadFileFromAS(pathData,nameFile,prev);
 		shareFileActivity(nameDrive,pathFolder,nameFile,text);
 	}
+	
 
 	/**
 	 * Add an activity stream with selecting a document that
@@ -732,7 +737,8 @@ public class ActivityStream extends PlatformBase {
 			waitForAndGetElement(By.linkText(nameFile)).click();
 			Utils.pause(2000);
 			info("click on Select button");
-			click(ELEMENT_SELECT_BUTTON);
+			//click(ELEMENT_SELECT_BUTTON);
+			clickByJavascript(ELEMENT_SELECT_BUTTON, 2);
 		}
 
 		info("add a text to composer box of AS");
@@ -753,7 +759,7 @@ public class ActivityStream extends PlatformBase {
 		for(int repeat=0;; repeat ++){
 			if (repeat > 1) {
 				if (waitForAndGetElement(ELEMENT_COMPOSER_FILE_BUTTON, 3000, 0) != null) {
-					click(ELEMENT_COMPOSER_FILE_BUTTON);
+					clickByJavascript(ELEMENT_COMPOSER_FILE_BUTTON);
 					if (waitForAndGetElement(ELEMENT_SELECT_FILE_POPUP, 3000, 0) != null) {
 						break;
 					}
@@ -762,37 +768,37 @@ public class ActivityStream extends PlatformBase {
 			if (waitForAndGetElement(ELEMENT_COMPOSER_FILE_BUTTON, 5000, 0) != null) {
 				info("Element " + ELEMENT_COMPOSER_FILE_BUTTON
 						+ " is displayed");
-				click(ELEMENT_COMPOSER_FILE_BUTTON);
+				clickByJavascript(ELEMENT_COMPOSER_FILE_BUTTON);
 				if (waitForAndGetElement(ELEMENT_SELECT_FILE_POPUP, 3000, 0) != null) {
 					break;
 				}
 			}
 			info("Retry...[" + repeat + "]");
 			this.driver.navigate().refresh();
-			click(ELEMENT_COMPOSER_FILE_BUTTON);
+			clickByJavascript(ELEMENT_COMPOSER_FILE_BUTTON);
 		}
 		info("----Upload a file-----");
 		waitForAndGetElement(ELEMENT_SELECT_FILE_POPUP,2000,1);
 		
 		if(!nameDrive.isEmpty()){
 			info("Click on drop down list");
-			click(ELEMENT_ACTIVITY_UPLOAD_POPUP);
+			clickByJavascript(ELEMENT_ACTIVITY_UPLOAD_POPUP);
 			info("Drop list is shown");
 			waitForAndGetElement(ELEMENT_DRIVES_LIST);
 			info("Drive item is shown in the list");
 			if(waitForAndGetElement(ELEMENT_DRIVER_OPTION.replace("${driveName}",nameDrive),3000,0)==null){
 				info("select a driver:"+1);
-				click("(.//*[@id='DriveTypeDropDown']//*[@class='OptionItem'])[1]");
+				clickByJavascript("(.//*[@id='DriveTypeDropDown']//*[@class='OptionItem'])[1]");
 			}else{
 			info("select a driver:"+nameDrive);
-			click(ELEMENT_DRIVER_OPTION.replace("${driveName}",nameDrive));
+			clickByJavascript(ELEMENT_DRIVER_OPTION.replace("${driveName}",nameDrive));
 			}
 		}
 			
 		info("go to the folder by path:"+path);
 		String[] arrayPath = path.split("/");
 		for(String arrayElement:arrayPath){
-			click(ELEMENT_ACTIVITY_UPLOAD_POPUP_NODE.replace("${nameNode}", arrayElement));
+			clickByJavascript(ELEMENT_ACTIVITY_UPLOAD_POPUP_NODE.replace("${nameNode}", arrayElement));
 			Utils.pause(2000);
 		}
 	}
@@ -802,15 +808,21 @@ public class ActivityStream extends PlatformBase {
 	 * @param path     where put TestData folder
 	 * @param nameFile
 	 */
-	public void uploadFileFromAS(String path,String nameFile){
+	public void uploadFileFromAS(String path,String nameFile, boolean...Doc){
+		boolean prev = (Doc.length > 0 ? Doc[0]: false);
 		info("-- Upload file --");
 		WebElement frame = waitForAndGetElement(ELEMENT_UPLOAD_FILE_FRAME_XPATH,3000,0);
 		driver.switchTo().frame(frame);
 		click(ELEMENT_UPLOAD_BUTTON);
-		uploadFileUsingRobot(path+nameFile);
+		/*WebElement el = waitForAndGetElement(ELEMENT_UPLOAD_BUTTON, 4000, 0);
+		el.sendKeys("\n");*/
+		if (prev)
+			uploadFileUsingRobotDocumentPreview(path+nameFile);
+		else
+			uploadFileUsingRobot(path+nameFile);
 		switchToParentWindow();
 		waitForElementNotPresent(ELEMENT_ACTIVITY_UPLOAD_POPUP_PROGRESS_UPLOAD,3000,0);
-		click(ELEMENT_ACTIVITY_UPLOAD_POPUP_CLOSE_BTN);
+		clickByJavascript(ELEMENT_ACTIVITY_UPLOAD_POPUP_CLOSE_BTN);
 		Utils.pause(2000);
 		info("Upload finished");
 	}
@@ -823,6 +835,7 @@ public class ActivityStream extends PlatformBase {
 	 * @throws AWTException 
 	 */
 	public void mentionUserActivity(String username, String text) throws AWTException{
+		info("mention user in activity");
 		type(ELEMENT_COMPOSER_INPUT_FILED, "@"+username,false);
 		Robot robot = new Robot();
 		robot.delay(1000);
@@ -831,7 +844,12 @@ public class ActivityStream extends PlatformBase {
 		Utils.pause(2000);
 		if(!text.isEmpty())
 			type(ELEMENT_COMPOSER_INPUT_FILED,text,false);
-		click(ELEMENT_COMPOSER_SHARE_BUTTON);
+		
+		info("Click share button");
+		waitForAndGetElement(ELEMENT_COMPOSER_SHARE_BUTTON, DEFAULT_TIMEOUT, 1);
+		Utils.pause(2000);
+		WebElement el = waitForAndGetElement(ELEMENT_COMPOSER_SHARE_BUTTON, DEFAULT_TIMEOUT, 0);
+		el.sendKeys("\n");
 		Utils.pause(2000);
 	}
 	/**

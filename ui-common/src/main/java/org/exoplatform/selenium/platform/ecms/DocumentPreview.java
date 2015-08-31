@@ -57,7 +57,8 @@ public class DocumentPreview extends ActivityStream {
 	  * Exit preview mode
 	  * ELEMENT_PREVIEW_MODE_CROSS_ICON : "X" icon on the top-right
 	 */
-	public final By ELEMENT_PREVIEW_MODE_CROSS_ICON= By.xpath(".//a[@title='Close Window']");
+	//public final By ELEMENT_PREVIEW_MODE_CROSS_ICON= By.xpath(".//a[@title='Close Window']");
+	public final By ELEMENT_PREVIEW_MODE_CROSS_ICON= By.xpath(".//*[@id='UIDocumentPreview']//*[@title='Close Window']");
 	
 	/**
      * The top of Comment area

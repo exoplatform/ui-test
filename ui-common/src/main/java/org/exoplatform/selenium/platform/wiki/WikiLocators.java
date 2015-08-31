@@ -3,6 +3,7 @@ package org.exoplatform.selenium.platform.wiki;
 import org.exoplatform.selenium.platform.PlatformBase;
 import org.openqa.selenium.By;
 
+
 public class WikiLocators extends PlatformBase{
 
 	//*====================================================HOME PAGE=================================================================*\\
@@ -78,6 +79,21 @@ public class WikiLocators extends PlatformBase{
 	public final By ELEMENT_PERMALINK_POPUP=By.id("UIWikiPermalinkForm");
 	public final By ELEMENT_PUBLIC_WIKI_ICON = By.xpath("//*[@id='UIWikiPageInfoArea']//*[contains(@class,'uiIconUnlockMini')]");
 	public final By ELEMENT_RESTICT_WIKI_ICON = By.xpath(".//*[@id='UIWikiPageInfoArea']//*[contains(@data-original-title,'This page is restricted. Click to share.')]");
+	
+	
+	//Permalink page
+	public final By ELEMENT_PERMALINK_LINKCOPY = By.xpath("//*[@id='PermalinkText']");
+	public final By ELEMENT_PERMALINK_MAKEPUBLIC = By.xpath("//*[text()='Make Public']");
+	public final By ELEMENT_PERMALINK_RESTRICT = By.xpath("//*[text()='Restrict']");
+
+	public final By ELEMENT_PAGE_PERMISSIONS = By.xpath(".//*[text()='Page Permissions']");
+	public final By ELEMENT_PERMALINK = By.xpath("//*[@id='UIWikiPageControlArea_PageToolBar']//*[text()='Permalink']");
+	
+	public final By ELEMENT_CANCEL_PERMISSION = By.xpath(".//*[@id='UIWikiPagePermissionForm']//*[contains(text(),'Cancel')]");
+	
+	//Action bar
+	public final String ELEMENT_PAGE_INFO_ADDED_BY = ".//*[@id='UIWikiPageInfoArea']//*[contains(.,'Added by')]//a[contains(text(),'{$name}')]";
+	public final String ELEMENT_PAGE_INFO_LAST_MODIFIED_BY = ".//*[@id='UIWikiPageInfoArea']//*[contains(.,'Last modified by')]//a[contains(text(),'{$name}')]";
 	
 	//permission page
 	public final By ELEMENT_PERMISSION_EDIT_ANY = By.xpath("//*[@id='EDITPAGEany']");
@@ -267,7 +283,7 @@ public class WikiLocators extends PlatformBase{
     public final String ELEMENT_PAGE_HISTORY_VERSION =".//a[contains(text(),'$version')]";
 	
 	//Compare reversion
-	public final By ELEMENT_WIKI_PAGE_COMPARE_REVERSION_TITLE = By.xpath(".//h4[text()='Compare Revisions']");
+	public final By ELEMENT_WIKI_PAGE_COMPARE_REVERSION_TITLE = By.xpath(".//h4[text()='Compare Versions']");
 	public final String ELEMENT_PAGE_HISTORY_COMPARE_CONTENT =".//*[@id='UIWikiPageVersionsCompare']//*[contains(text(),'${text}')]";
     public final By ELEMENT_COMPARE_VERSION_CURRENT_VERSION=By.xpath(".//*[@id='UIWikiPageVersionsCompare']//*[contains(text(),'Current version')]");
     public final String ELEMENT_COMPARE_VERSION_VERSION_NUMBER=".//*[@id='UIWikiPageVersionsCompare']//*[contains(text(),'Version $num')]";
@@ -433,7 +449,8 @@ public class WikiLocators extends PlatformBase{
 	
 
 	//Add wiki page link popup
-	public By ELEMENT_SEARCH_TEXTBOX_POPUP = By.xpath("//input[@title='Type a keyword to search for a wiki page']");
+	//public By ELEMENT_SEARCH_TEXTBOX_POPUP = By.xpath("//input[@title='Type a keyword to search for a wiki page']");
+	public By ELEMENT_SEARCH_TEXTBOX_POPUP = By.id("wikiSearchValue");
 	public By ELEMENT_SEARCH_BUTTON = By.xpath("//button[text()='Search']");
 	public String ELEMENT_PAGE_SELECTED = "//*[@class='xPagePreview' and @title='${page}']";
 	public String ELEMENT_SEARCH_TAB_PAGE_SELECTED="//*[contains(@class,'xPagesSearch')]//*[@title='${page}']";

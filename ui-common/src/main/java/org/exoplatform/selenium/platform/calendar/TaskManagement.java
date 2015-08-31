@@ -86,7 +86,10 @@ public class TaskManagement extends CalendarLocatorObject {
 	 */
 	public void goToAddTaskFromActionBar(){
 		info("Go to Add Task page from action bar"); 
+		Utils.pause(2000);
+		//waitForAndGetElement(ELEMENT_BUTTON_TASK, DEFAULT_TIMEOUT, 1);
 		click(ELEMENT_BUTTON_TASK);
+		//clickByJavascript(ELEMENT_BUTTON_TASK, 2);
 		waitForAndGetElement(ELEMENT_QUICK_ADD_TASK_POPUP);
 	}
 
@@ -164,6 +167,7 @@ public class TaskManagement extends CalendarLocatorObject {
 		info("Input into From, To and check/uncheck allday checkbox fields of a task");
 		if(allDay){
 			info("Check all day, then select date");
+			//waitForAndGetElement(ELEMENT_QUICK_CHECKBOX_TASK_ALLDAY, DEFAULT_TIMEOUT, 1);
 			check(ELEMENT_QUICK_CHECKBOX_TASK_ALLDAY,2);
 			if ((from != null) & (from != ""))
 				type(ELEMENT_QUICK_INPUT_TASK_FROM_DATE, from, true);
@@ -172,6 +176,7 @@ public class TaskManagement extends CalendarLocatorObject {
 
 		}else {
 			info("Uncheck all day, then select date time");
+			//waitForAndGetElement(ELEMENT_QUICK_CHECKBOX_TASK_ALLDAY, DEFAULT_TIMEOUT, 1);
 			uncheck(ELEMENT_QUICK_CHECKBOX_TASK_ALLDAY,2);
 			if ((from != null) & (from != "")){
 				String[] dateTimeFrom = from.split(" ");
@@ -249,8 +254,8 @@ public class TaskManagement extends CalendarLocatorObject {
 	 * @param opt
 	 */
 	public void inputDataTaskInQuickForm(String name, String note, String from, String to, boolean allDay, String...opt){
-		inputBasicQuickTask(name, note, opt);
 		inputFromToQuickTask(from, to, allDay);
+		inputBasicQuickTask(name, note, opt);
 	}
 
 	/**
@@ -457,7 +462,10 @@ public class TaskManagement extends CalendarLocatorObject {
 	 * Save add Task
 	 */
 	public void saveQuickAddTask(){
-		click(ELEMENT_BUTTON_TASK_SAVE);
+		info ("save quick add task");
+		waitForAndGetElement(ELEMENT_BUTTON_TASK_SAVE, DEFAULT_TIMEOUT, 1);
+		//click(ELEMENT_BUTTON_TASK_SAVE);
+		clickByJavascript(ELEMENT_BUTTON_TASK_SAVE, 2);
 		waitForElementNotPresent(ELEMENT_BUTTON_TASK_SAVE);
 		Utils.pause(2000);
 	}
@@ -483,7 +491,10 @@ public class TaskManagement extends CalendarLocatorObject {
 	 * Save a task with more details
 	 */
 	public void saveAddTaskDetails(){
-		click(ELEMENT_BUTTON_TASK_SAVE_DETAILS);
+		info("Save a task with more detail");
+		waitForAndGetElement(ELEMENT_BUTTON_TASK_SAVE_DETAILS, DEFAULT_TIMEOUT, 1);
+		clickByJavascript(ELEMENT_BUTTON_TASK_SAVE_DETAILS, 2);
+		//click(ELEMENT_BUTTON_TASK_SAVE_DETAILS);
 		waitForElementNotPresent(ELEMENT_BUTTON_TASK_SAVE_DETAILS);
 		Utils.pause(500);
 	}

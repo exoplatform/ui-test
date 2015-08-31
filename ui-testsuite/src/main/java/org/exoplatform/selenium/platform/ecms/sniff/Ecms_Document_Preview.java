@@ -3,6 +3,7 @@ package org.exoplatform.selenium.platform.ecms.sniff;
 import static org.exoplatform.selenium.TestLogger.info;
 
 import org.exoplatform.selenium.Utils;
+import org.exoplatform.selenium.platform.ecms.CreateNewDocument.selectDocumentType;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.testng.annotations.*;
@@ -56,7 +57,7 @@ import org.testng.annotations.*;
 	*<li> Case ID:112333.</li>
 	*<li> Test Case Name: Check the reader on the activity stream</li>
 	*/
-	@Test
+	@Test 
 	public  void test01_CheckReaderOnActivityStream() {
 		info("Test 1: Check the reader on the activity stream");
 		file = attachFile.getAttachFileByArrayTypeRandom(1);
@@ -74,10 +75,10 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- An activity of the PDF file is displayed on the stream*/ 
         info("Share a pdf file activity");
-		acStream.uploadAndShareFileActivity(nameDrive,folderPath,folderDataTestPath, file,description);
+		acStream.uploadAndShareFileActivity(nameDrive,folderPath,folderDataTestPath, file,description, true);
 
 		info("Verify that the activity is shown on AS");
-		waitForAndGetElement(acStream.ELEMENT_ACTIVITY_DOCUMENT_MEDIA_TITLE.replace("${title}",file),3000,1);
+		waitForAndGetElement(acStream.ELEMENT_ACTIVITY_DOCUMENT_MEDIA_TITLE.replace("${title}",file),DEFAULT_TIMEOUT,1);
 		
 		/*Step Number: 2
 		*Step Name: Step 2. View the attached file.
@@ -95,10 +96,10 @@ import org.testng.annotations.*;
 		acStream.openPreviewModeOnViewLink(file,1,"");
 
 		info("Verify that the preview mode is shown");
-		waitForAndGetElement(docPrev.ELEMENT_PREVIEW_MODE, 3000,1);
+		waitForAndGetElement(docPrev.ELEMENT_PREVIEW_MODE, DEFAULT_TIMEOUT,1);
 		info("The preview is shown successfully");
 		
-		Utils.pause(3000);
+		Utils.pause(DEFAULT_TIMEOUT);
 		info("Actions are displayed on the top bar of the reader");
 		waitForAndGetElement(docPrev.ELEMENT_ACTIONS_SIDERBAR_TOGGLE_BTN);
 		waitForAndGetElement(docPrev.ELEMENT_ACTIONS_SEARCH_BTN);
@@ -126,7 +127,7 @@ import org.testng.annotations.*;
 	*<li> Case ID:112334.</li>
 	*<li> Test Case Name: Check the reader on the Sites Explorer</li>
 	*/
-	@Test
+	@Test 
 	public  void test02_CheckReaderOnSiteExplorer() {
 		info("Test 02: Check the reader on the Sites Explorer");
 		file = attachFile.getAttachFileByArrayTypeRandom(1);
@@ -155,7 +156,7 @@ import org.testng.annotations.*;
 		driver.navigate().refresh();
 
 		info("Upload a file from:" + folderDataTestPath);
-		SEHome.uploadFileWithDymanicPath(folderDataTestPath+ file);
+		SEHome.uploadFileWithDymanicPath(folderDataTestPath+ file, true, true);
 
 		/*Step Number: 2
 		*Step Name: Step 2. Open the uploaded PDF file.
@@ -172,7 +173,7 @@ import org.testng.annotations.*;
 		SEHome.selectFileExplorer();
 		SEHome.selectAFile(file);
 		
-		Utils.pause(3000);
+		Utils.pause(DEFAULT_TIMEOUT);
 		info("Actions are displayed on the top bar of the reader");
 		waitForAndGetElement(docPrev.ELEMENT_ACTIONS_SIDERBAR_TOGGLE_BTN);
 		waitForAndGetElement(docPrev.ELEMENT_ACTIONS_SEARCH_BTN,1000,1);
@@ -204,7 +205,7 @@ import org.testng.annotations.*;
 		driver.navigate().refresh();
 
 		info("Upload a file from:" + folderDataTestPath);
-		SEHome.uploadFileWithDymanicPath(folderDataTestPath+ officefile);
+		SEHome.uploadFileWithDymanicPath(folderDataTestPath+ officefile, true, true);
 		
 		/*Step Number: 4
 		*Step Name: Step 4. Open the uploaded Office file.
@@ -222,7 +223,7 @@ import org.testng.annotations.*;
 		SEHome.selectFileExplorer();
 		SEHome.selectAFile(officefile);
 		
-		Utils.pause(3000);
+		Utils.pause(DEFAULT_TIMEOUT);
 		
 		info("Actions are displayed on the top bar of the reader");
 		waitForAndGetElement(docPrev.ELEMENT_ACTIONS_SIDERBAR_TOGGLE_BTN,1000,1);
@@ -244,7 +245,7 @@ import org.testng.annotations.*;
 	*<li> Test Case Name: Check the display of the reader when the files format aren't supported on Sites Explorer</li>
 	 * @throws Exception 
 	*/
-	@Test
+	@Test 
 	public  void test04_CheckDisplayOfReaderWhenTheFilesFormatNotSupportedOnSE() throws Exception {
 		info("Test 04: Check the display of the reader when the files format aren't supported on Sites Explorer");
 		file = attachFile.getAttachFileByArrayTypeRandom(25);
@@ -275,7 +276,7 @@ import org.testng.annotations.*;
 		driver.navigate().refresh();
 
 		info("Upload a file from:" + folderDataTestPath);
-		SEHome.uploadFileWithDymanicPath(folderDataTestPath+ file);
+		SEHome.uploadFileWithDymanicPath(folderDataTestPath+ file, true, true);
 		
 		/*Step Number: 2
 		*Step Name: Step 2. View the attached file.
@@ -293,12 +294,12 @@ import org.testng.annotations.*;
 		info("Go to Activity stream of Intranet Home page");
 		hp.goToHomePage();
 		info("View link is not displayed");
-		waitForElementNotPresent(acStream.ELEMENT_ACTIVITY_DOCUMENT_MEDIA_VIEW_LINK.replace("${nameFile}",file),3000,1);
+		waitForElementNotPresent(acStream.ELEMENT_ACTIVITY_DOCUMENT_MEDIA_VIEW_LINK.replace("${nameFile}",file),DEFAULT_TIMEOUT,1);
 		info("Download button is displayed");
-		waitForAndGetElement(acStream.ELEMENT_ACTIVITY_DOCUMENT_MEDIA_DOWNLOAD_BTN.replace("${nameFile}",file),3000,1);
+		waitForAndGetElement(acStream.ELEMENT_ACTIVITY_DOCUMENT_MEDIA_DOWNLOAD_BTN.replace("${nameFile}",file),DEFAULT_TIMEOUT,1);
 		
 		acStream.openPreviewModeOnFileName(file,"",1);
-		waitForAndGetElement(SEHome.ELEMENT_CONTENT_NAME.replace("${nameFile}",file),3000,1);
+		waitForAndGetElement(SEHome.ELEMENT_CONTENT_NAME.replace("${nameFile}",file),DEFAULT_TIMEOUT,1);
 		
 		/*Step Number: 3
 		*Step Name: Step 3. Download the attached file.
@@ -348,10 +349,10 @@ import org.testng.annotations.*;
 			- The file with not supported type is uploaded*/ 
 		
 		 info("Share a pdf file activity");
-		 acStream.uploadAndShareFileActivity(nameDrive,folderPath,folderDataTestPath, file,description);
+		 acStream.uploadAndShareFileActivity(nameDrive,folderPath,folderDataTestPath, file,description, true);
 
 		 info("Verify that the activity is shown on AS");
-		 waitForAndGetElement(acStream.ELEMENT_ACTIVITY_DOCUMENT_MEDIA_TITLE.replace("${title}",file),3000,1);
+		 waitForAndGetElement(acStream.ELEMENT_ACTIVITY_DOCUMENT_MEDIA_TITLE.replace("${title}",file),DEFAULT_TIMEOUT,1);
 		
 		/*Step Number: 2
 		*Step Name: Step 2. Open the uploaded file.
@@ -365,12 +366,12 @@ import org.testng.annotations.*;
 			*/ 
 		
 		info("View link is not displayed");
-		waitForElementNotPresent(acStream.ELEMENT_ACTIVITY_DOCUMENT_MEDIA_VIEW_LINK.replace("${nameFile}",file),3000,1);
+		waitForElementNotPresent(acStream.ELEMENT_ACTIVITY_DOCUMENT_MEDIA_VIEW_LINK.replace("${nameFile}",file),DEFAULT_TIMEOUT,1);
 		info("Download button is displayed");
-		waitForAndGetElement(acStream.ELEMENT_ACTIVITY_DOCUMENT_MEDIA_DOWNLOAD_BTN.replace("${nameFile}",file),3000,1);
+		waitForAndGetElement(acStream.ELEMENT_ACTIVITY_DOCUMENT_MEDIA_DOWNLOAD_BTN.replace("${nameFile}",file),DEFAULT_TIMEOUT,1);
 			
 		acStream.openPreviewModeOnFileName(file,"",1);
-		waitForAndGetElement(SEHome.ELEMENT_CONTENT_NAME.replace("${nameFile}",file),3000,1);
+		waitForAndGetElement(SEHome.ELEMENT_CONTENT_NAME.replace("${nameFile}",file),DEFAULT_TIMEOUT,1);
 			
 		/*Step Number: 3
 		*Step Name: Step 3. Download the file.
@@ -395,7 +396,7 @@ import org.testng.annotations.*;
 	*<li> Test Case Name: Check No preview mode in Activity Stream</li>
 	*<li> Precondition: - The shared file is not of the supported list of Preview.</li>
 	*/
-	@Test
+	@Test 
 	public  void test05_CheckNoPreviewModeInActivityStream() {
 		info("Test 05: Check No preview mode in Activity Stream");
 		file = attachFile.getAttachFileByArrayTypeRandom(24);
@@ -414,12 +415,12 @@ import org.testng.annotations.*;
 			- An activity is added to the stream with the PDF file
 			- The link View is displayed*/ 
 		 info("Share a pdf file activity");
-		 acStream.uploadAndShareFileActivity(nameDrive,folderPath,folderDataTestPath, file,description);
+		 acStream.uploadAndShareFileActivity(nameDrive,folderPath,folderDataTestPath, file,description, true);
 
 		 info("Verify that the activity is shown on AS");
-		 waitForAndGetElement(acStream.ELEMENT_ACTIVITY_DOCUMENT_MEDIA_TITLE.replace("${title}",file),3000,1);
+		 waitForAndGetElement(acStream.ELEMENT_ACTIVITY_DOCUMENT_MEDIA_TITLE.replace("${title}",file),DEFAULT_TIMEOUT,1);
 		 info("View link is displayed");
-		 waitForAndGetElement(acStream.ELEMENT_ACTIVITY_DOCUMENT_MEDIA_VIEW_LINK.replace("${nameFile}",file),3000,1);
+		 waitForAndGetElement(acStream.ELEMENT_ACTIVITY_DOCUMENT_MEDIA_VIEW_LINK.replace("${nameFile}",file),DEFAULT_TIMEOUT,1);
 			
 		/*Step Number: 2
 		*Step Name: Step 2. Check the Display area.
@@ -447,7 +448,7 @@ import org.testng.annotations.*;
 	*<li> Test Case Name: Check No preview mode in Sites Explorer</li>
 	*<li> Precondition: - The shared file is not of the supported list of Preview.</li>
 	*/
-	@Test
+	@Test 
 	public  void test06_CheckNoPreviewModeInSE() {
 		info("Test 06: Check No preview mode in Sites Explorer");
 		file = attachFile.getAttachFileByArrayTypeRandom(24);
@@ -477,7 +478,7 @@ import org.testng.annotations.*;
 		driver.navigate().refresh();
 
 		info("Upload a file from:" + folderDataTestPath);
-		SEHome.uploadFileWithDymanicPath(folderDataTestPath+ file);
+		SEHome.uploadFileWithDymanicPath(folderDataTestPath+ file, true, true);
 		
 		/*Step Number: 2
 		*Step Name: Step 2. Check the display area.
@@ -530,12 +531,12 @@ import org.testng.annotations.*;
 			- The link View is displayed*/ 
 		
 		info("Share a pdf file activity");
-		acStream.uploadAndShareFileActivity(nameDrive,folderPath,folderDataTestPath, file,description);
+		acStream.uploadAndShareFileActivity(nameDrive,folderPath,folderDataTestPath, file,description, true);
 
 		info("Verify that the activity is shown on AS");
-		waitForAndGetElement(acStream.ELEMENT_ACTIVITY_DOCUMENT_MEDIA_TITLE.replace("${title}",file),3000,1);
+		waitForAndGetElement(acStream.ELEMENT_ACTIVITY_DOCUMENT_MEDIA_TITLE.replace("${title}",file),DEFAULT_TIMEOUT,1);
 	    info("View link is displayed");
-	    waitForAndGetElement(acStream.ELEMENT_ACTIVITY_DOCUMENT_MEDIA_VIEW_LINK.replace("${nameFile}",file),3000,1);
+	    waitForAndGetElement(acStream.ELEMENT_ACTIVITY_DOCUMENT_MEDIA_VIEW_LINK.replace("${nameFile}",file),DEFAULT_TIMEOUT,1);
 		
 		/*Step Number: 2
 		*Step Name: Step 2. Check the Preview mode.
@@ -550,10 +551,10 @@ import org.testng.annotations.*;
 			*/
 	    acStream.openPreviewModeOnViewLink(file,1,"");
 	    info("Verify that the preview mode is shown");
-		waitForAndGetElement(docPrev.ELEMENT_PREVIEW_MODE, 3000,1);
+		waitForAndGetElement(docPrev.ELEMENT_PREVIEW_MODE, DEFAULT_TIMEOUT,1);
 		info("The preview is shown successfully");
 		
-		Dimension dimen = waitForAndGetElement(docPrev.ELEMENT_PREVIEW_MODE,3000,0).getSize();
+		Dimension dimen = waitForAndGetElement(docPrev.ELEMENT_PREVIEW_MODE,DEFAULT_TIMEOUT,0).getSize();
         int wd_prev =dimen.width;
         int wd_br=this.driver.manage().window().getSize().width;
  	    info("wd_pre:"+wd_prev);
@@ -594,7 +595,6 @@ import org.testng.annotations.*;
 		file = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		folderPath=siteExPath.getSiteExpPathByIndex(8);//sites/intranet/documents
 		nameDrive=siteExDrive.getSiteExpDriveByIndex(0);//Collaboration
-		String contentType = siteExContentType.getContentByIndex(0);
 		/*Step Number: 1
 		*Step Name: Step 1. Create a Web content file.
 		*Step Description: 
@@ -618,11 +618,17 @@ import org.testng.annotations.*;
 		SEHome.goToAFolder(folderPath);
 		driver.navigate().refresh();
 		
+		
 		info("Create a new document");
+		SEHome.clickWebView();
 		SEHome.goToAddNewContent();
-		SEHome.selectAContentType(contentType);
+		
+		/*SEHome.selectAContentType(contentType);
+		CreNewDoc.addNewWebContent(file, file);*/
+		CreNewDoc.createNewDoc(selectDocumentType.WEBCONTENT);
 		CreNewDoc.addNewWebContent(file, file);
 		CreNewDoc.saveAndClose();
+		//CreNewDoc.saveAndClose();
 		
 		/*Step Number: 2
 		*Step Name:Step 2. Check the activity stream.
@@ -637,7 +643,7 @@ import org.testng.annotations.*;
 		info("Go to Activity stream of Intranet Home page");
 		hp.goToHomePage();
 		info("Verify that the activity is shown on AS");
-		waitForAndGetElement(acStream.ELEMENT_ACTIVITY_WEBCONTENT_TITLE.replace("${title}",file),3000,1);
+		waitForAndGetElement(acStream.ELEMENT_ACTIVITY_WEBCONTENT_TITLE.replace("${title}",file),DEFAULT_TIMEOUT,1);
 		
 		/*Step Number: 3
 		*Step Name: Step 3. Open the file from the activity stream.
@@ -653,10 +659,10 @@ import org.testng.annotations.*;
 		
 		acStream.openPreviewModeOnFileName(file, "",2);
 		info("Verify that the preview mode is shown");
-		waitForAndGetElement(docPrev.ELEMENT_PREVIEW_MODE, 3000,1);
+		waitForAndGetElement(docPrev.ELEMENT_PREVIEW_MODE, DEFAULT_TIMEOUT,1);
 		info("The preview is shown successfully");
 		
-		Utils.pause(3000);
+		Utils.pause(DEFAULT_TIMEOUT);
 		info("On the right panel, the comment box are displayed");
 		waitForAndGetElement(docPrev.ELEMENT_RIGHT_PANEL_COMMENT_INPUT_BOX);
 		waitForAndGetElement(docPrev.ELEMENT_RIGHT_PANEL_COMMENT_AREA_BOX_WITH_NO_COMMENT);
@@ -694,9 +700,9 @@ import org.testng.annotations.*;
 		acStream.uploadAndShareFileActivity("",folderPath,folderDataTestPath, file,description);
 
 		info("Verify that the activity is shown on AS");
-		waitForAndGetElement(acStream.ELEMENT_ACTIVITY_DOCUMENT_MEDIA_TITLE.replace("${title}",file),3000,1);
+		waitForAndGetElement(acStream.ELEMENT_ACTIVITY_DOCUMENT_MEDIA_TITLE.replace("${title}",file),DEFAULT_TIMEOUT,1);
 	    info("View link is displayed");
-	    waitForAndGetElement(acStream.ELEMENT_ACTIVITY_DOCUMENT_MEDIA_VIEW_LINK.replace("${nameFile}",file),3000,1);
+	    waitForAndGetElement(acStream.ELEMENT_ACTIVITY_DOCUMENT_MEDIA_VIEW_LINK.replace("${nameFile}",file),DEFAULT_TIMEOUT,1);
 		
 		/*Step Number: 2
 		*Step Name: Step 2. Play the shared video.
@@ -747,13 +753,13 @@ import org.testng.annotations.*;
 		driver.navigate().refresh();
 
 		info("Upload a file from:" + folderDataTestPath);
-		SEHome.uploadFileWithDymanicPath(folderDataTestPath+ file);
+		SEHome.uploadFileWithDymanicPath(folderDataTestPath+ file, true, true);
 		
 		hp.goToHomePage();
 		info("Verify that the activity is shown on AS");
-		waitForAndGetElement(acStream.ELEMENT_ACTIVITY_DOCUMENT_MEDIA_TITLE.replace("${title}",file),3000,1);
+		waitForAndGetElement(acStream.ELEMENT_ACTIVITY_DOCUMENT_MEDIA_TITLE.replace("${title}",file),DEFAULT_TIMEOUT,1);
 	    info("View link is displayed");
-	    waitForAndGetElement(acStream.ELEMENT_ACTIVITY_DOCUMENT_MEDIA_VIEW_LINK.replace("${nameFile}",file),3000,1);
+	    waitForAndGetElement(acStream.ELEMENT_ACTIVITY_DOCUMENT_MEDIA_VIEW_LINK.replace("${nameFile}",file),DEFAULT_TIMEOUT,1);
 		/*Step Number: 2
 		*Step Name: Step 2. Play the video.
 		*Step Description: 
@@ -801,7 +807,7 @@ import org.testng.annotations.*;
 		driver.navigate().refresh();
 
 		info("Upload a file from:" + folderDataTestPath);
-		SEHome.uploadFileWithDymanicPath(folderDataTestPath+ file);
+		SEHome.uploadFileWithDymanicPath(folderDataTestPath+ file, true, true);
 		
 		
 		/*Step Number: 2
@@ -815,12 +821,12 @@ import org.testng.annotations.*;
 			*/
 		hp.goToHomePage();
 		info("Verify that the activity is shown on AS");
-		waitForAndGetElement(acStream.ELEMENT_ACTIVITY_DOCUMENT_MEDIA_TITLE.replace("${title}",file),3000,1);
+		waitForAndGetElement(acStream.ELEMENT_ACTIVITY_DOCUMENT_MEDIA_TITLE.replace("${title}",file),DEFAULT_TIMEOUT,1);
 	    info("View link is displayed");
-	    waitForAndGetElement(acStream.ELEMENT_ACTIVITY_DOCUMENT_MEDIA_VIEW_LINK.replace("${nameFile}",file),3000,1);
+	    waitForAndGetElement(acStream.ELEMENT_ACTIVITY_DOCUMENT_MEDIA_VIEW_LINK.replace("${nameFile}",file),DEFAULT_TIMEOUT,1);
 	    acStream.openPreviewModeOnViewLink(file, 1,"");
 	    info("Verify that the preview mode is shown");
-		waitForAndGetElement(docPrev.ELEMENT_PREVIEW_MODE, 3000,1);
+		waitForAndGetElement(docPrev.ELEMENT_PREVIEW_MODE, DEFAULT_TIMEOUT,1);
 		info("The preview is shown successfully");
 		docPrev.closeByPressECS();
 		
@@ -858,9 +864,9 @@ import org.testng.annotations.*;
 		acStream.addActivity(description, videoLink);
 
 		info("Verify that the activity is shown on AS");
-		waitForAndGetElement(acStream.ELEMENT_ACTIVITY_AUDIO_VIDEO_TITLE.replace("${link}",videoLink),3000,1);
+		waitForAndGetElement(acStream.ELEMENT_ACTIVITY_AUDIO_VIDEO_TITLE.replace("${link}",videoLink),DEFAULT_TIMEOUT,1);
 	    info("View link is displayed");
-	    waitForAndGetElement(acStream.ELEMENT_ACTIVITY_EMBBED_MEDIA_VIEW_LINK.replace("${linkFile}",videoLink),3000,1);
+	    waitForAndGetElement(acStream.ELEMENT_ACTIVITY_EMBBED_MEDIA_VIEW_LINK.replace("${linkFile}",videoLink),DEFAULT_TIMEOUT,1);
 		
 		
 		/*Step Number: 2
@@ -874,7 +880,7 @@ import org.testng.annotations.*;
 			*/
 		acStream.openPreviewModeOnViewLink(videoLink, 3,"");
 		info("Verify that the preview mode is shown");
-		waitForAndGetElement(docPrev.ELEMENT_PREVIEW_MODE, 3000,1);
+		waitForAndGetElement(docPrev.ELEMENT_PREVIEW_MODE, DEFAULT_TIMEOUT,1);
 		info("The preview is shown successfully");
 		
 		/*Step Number: 3
@@ -915,12 +921,12 @@ import org.testng.annotations.*;
 			- An activity with the image file is displayed on the stream
 			*/ 
 		info("Share a pdf file activity");
-		acStream.uploadAndShareFileActivity(nameDrive,folderPath,folderDataTestPath, file,description);
+		acStream.uploadAndShareFileActivity(nameDrive,folderPath,folderDataTestPath, file,description, true);
 
 		info("Verify that the activity is shown on AS");
-		waitForAndGetElement(acStream.ELEMENT_ACTIVITY_DOCUMENT_MEDIA_TITLE.replace("${title}",file),3000,1);
+		waitForAndGetElement(acStream.ELEMENT_ACTIVITY_DOCUMENT_MEDIA_TITLE.replace("${title}",file),DEFAULT_TIMEOUT,1);
 	    info("View link is displayed");
-	    waitForAndGetElement(acStream.ELEMENT_ACTIVITY_DOCUMENT_MEDIA_VIEW_LINK.replace("${nameFile}",file),3000,1);
+	    waitForAndGetElement(acStream.ELEMENT_ACTIVITY_DOCUMENT_MEDIA_VIEW_LINK.replace("${nameFile}",file),DEFAULT_TIMEOUT,1);
 		
 	    /*Step Number: 2
 		*Step Name: Step 2. Open the Preview mode.
@@ -933,7 +939,7 @@ import org.testng.annotations.*;
 			*/
 	    acStream.openPreviewModeOnViewLink(file,1,"");
 		info("Verify that the preview mode is shown");
-		waitForAndGetElement(docPrev.ELEMENT_PREVIEW_MODE, 3000,1);
+		waitForAndGetElement(docPrev.ELEMENT_PREVIEW_MODE, DEFAULT_TIMEOUT,1);
 		info("The preview is shown successfully");
 		docPrev.closeByPressECS();
  	}
@@ -967,12 +973,12 @@ import org.testng.annotations.*;
 			*/ 
 		
 		info("Share a pdf file activity");
-		acStream.uploadAndShareFileActivity(nameDrive,folderPath,folderDataTestPath, file,description);
+		acStream.uploadAndShareFileActivity(nameDrive,folderPath,folderDataTestPath, file,description, true);
 
 		info("Verify that the activity is shown on AS");
-		waitForAndGetElement(acStream.ELEMENT_ACTIVITY_DOCUMENT_MEDIA_TITLE.replace("${title}",file),3000,1);
+		waitForAndGetElement(acStream.ELEMENT_ACTIVITY_DOCUMENT_MEDIA_TITLE.replace("${title}",file),DEFAULT_TIMEOUT,1);
 	    info("View link is not displayed");
-	    waitForElementNotPresent(acStream.ELEMENT_ACTIVITY_DOCUMENT_MEDIA_VIEW_LINK.replace("${nameFile}",file),3000,1);
+	    waitForElementNotPresent(acStream.ELEMENT_ACTIVITY_DOCUMENT_MEDIA_VIEW_LINK.replace("${nameFile}",file),DEFAULT_TIMEOUT,1);
 		
 	    /*Step Number: 2
 		*Step Name: Step 2. Check the Preview mode.
@@ -986,9 +992,9 @@ import org.testng.annotations.*;
 			*/
 		acStream.openPreviewModeOnFileName(file, "",1);
 		info("Verify that the preview mode is shown");
-		waitForElementNotPresent(docPrev.ELEMENT_PREVIEW_MODE, 3000,1);
+		waitForElementNotPresent(docPrev.ELEMENT_PREVIEW_MODE, DEFAULT_TIMEOUT,1);
 		info("user is redirected to SE");
-		waitForAndGetElement(SEHome.ELEMENT_CONTENT_NAME.replace("${nameFile}",file),3000,1);
+		waitForAndGetElement(SEHome.ELEMENT_CONTENT_NAME.replace("${nameFile}",file),DEFAULT_TIMEOUT,1);
  	}
 	
 	/**
@@ -1054,10 +1060,10 @@ import org.testng.annotations.*;
 
 			*/ 
 		info("Share a pdf file activity");
-		acStream.uploadAndShareFileActivity(nameDrive,folderPath,folderDataTestPath, file,description);
+		acStream.uploadAndShareFileActivity(nameDrive,folderPath,folderDataTestPath, file,description, true);
 
 		info("Verify that the activity is shown on AS");
-		waitForAndGetElement(acStream.ELEMENT_ACTIVITY_DOCUMENT_MEDIA_TITLE.replace("${title}",file),3000,1);
+		waitForAndGetElement(acStream.ELEMENT_ACTIVITY_DOCUMENT_MEDIA_TITLE.replace("${title}",file),DEFAULT_TIMEOUT,1);
 		
 		/*Step Number: 2
 		*Step Name: Step 2. Open the Preview mode.
@@ -1072,9 +1078,9 @@ import org.testng.annotations.*;
 			*/
 		acStream.openPreviewModeOnFileName(file,"",1);
 		info("Verify that the preview mode is shown");
-		waitForAndGetElement(docPrev.ELEMENT_PREVIEW_MODE, 3000,1);
+		waitForAndGetElement(docPrev.ELEMENT_PREVIEW_MODE, DEFAULT_TIMEOUT,1);
 		info("Verify that the comment area is shown beside the display area");
-		waitForAndGetElement(docPrev.ELEMENT_RIGHT_PANEL_COMMENT_AREA_BOX_WITH_NO_COMMENT,3000,1);
+		waitForAndGetElement(docPrev.ELEMENT_RIGHT_PANEL_COMMENT_AREA_BOX_WITH_NO_COMMENT,DEFAULT_TIMEOUT,1);
 		docPrev.closeByPressECS();
 		
  	}
@@ -1103,10 +1109,10 @@ import org.testng.annotations.*;
 			*/ 
 		
 		info("Share a pdf file activity");
-		acStream.uploadAndShareFileActivity(nameDrive,folderPath,folderDataTestPath, file,description);
+		acStream.uploadAndShareFileActivity(nameDrive,folderPath,folderDataTestPath, file,description, true);
 
 		info("Verify that the activity is shown on AS");
-		waitForAndGetElement(acStream.ELEMENT_ACTIVITY_DOCUMENT_MEDIA_TITLE.replace("${title}",file),3000,1);
+		waitForAndGetElement(acStream.ELEMENT_ACTIVITY_DOCUMENT_MEDIA_TITLE.replace("${title}",file),DEFAULT_TIMEOUT,1);
 		
 		/*Step Number: 2
 		*Step Name: Step 2. Show the Preview mode.
@@ -1122,7 +1128,7 @@ import org.testng.annotations.*;
 			*/
 		acStream.openPreviewModeOnFileName(file,"",1);
 		info("Verify that the preview mode is shown");
-		waitForAndGetElement(docPrev.ELEMENT_PREVIEW_MODE, 3000,1);
+		waitForAndGetElement(docPrev.ELEMENT_PREVIEW_MODE, DEFAULT_TIMEOUT,1);
 		
 		/*Step Number: 3
 		*Step Name: Step 3. Hide the Comments area
@@ -1143,7 +1149,7 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			The comments area is expanded.
 			*/
-		int wd_comment_old = waitForAndGetElement(docPrev.ELEMENT_COMMENT_AREA,3000,0).getSize().width;
+		int wd_comment_old = waitForAndGetElement(docPrev.ELEMENT_COMMENT_AREA,DEFAULT_TIMEOUT,0).getSize().width;
 		info("Hide comment area");
 		docPrev.collapseCommentArea();
 		info("Verify that the comment area is hided");
@@ -1151,8 +1157,8 @@ import org.testng.annotations.*;
 		info("Show comment area");
 		docPrev.expandCommentArea();
 		info("Verify that the comment area is shown again");
-		waitForAndGetElement(docPrev.ELEMENT_COMMENT_AREA,3000,1);
-		int wd_comment_new = waitForAndGetElement(docPrev.ELEMENT_COMMENT_AREA,3000,0).getSize().width;
+		waitForAndGetElement(docPrev.ELEMENT_COMMENT_AREA,DEFAULT_TIMEOUT,1);
+		int wd_comment_new = waitForAndGetElement(docPrev.ELEMENT_COMMENT_AREA,DEFAULT_TIMEOUT,0).getSize().width;
 		info("Close The preview mode");
 		docPrev.closeByPressECS();
 		
@@ -1187,10 +1193,10 @@ import org.testng.annotations.*;
 			- The activity is displayed on the stream
 			*/ 
 		info("Share a pdf file activity");
-		acStream.uploadAndShareFileActivity(nameDrive,folderPath,folderDataTestPath, file,description);
+		acStream.uploadAndShareFileActivity(nameDrive,folderPath,folderDataTestPath, file,description, true);
 
 		info("Verify that the activity is shown on AS");
-		waitForAndGetElement(acStream.ELEMENT_ACTIVITY_DOCUMENT_MEDIA_TITLE.replace("${title}",file),3000,1);
+		waitForAndGetElement(acStream.ELEMENT_ACTIVITY_DOCUMENT_MEDIA_TITLE.replace("${title}",file),DEFAULT_TIMEOUT,1);
 		
 		/*Step Number: 2
 		*Step Name: Step 2. Show the Preview mode.
@@ -1204,10 +1210,10 @@ import org.testng.annotations.*;
 			*/
 		acStream.openPreviewModeOnFileName(file,"",1);
 		info("Verify that the preview mode is shown");
-		waitForAndGetElement(docPrev.ELEMENT_PREVIEW_MODE, 3000,1);
+		waitForAndGetElement(docPrev.ELEMENT_PREVIEW_MODE, DEFAULT_TIMEOUT,1);
 		
 		info("Verify that the comment area is shown beside the display area");
-		waitForAndGetElement(docPrev.ELEMENT_RIGHT_PANEL_COMMENT_AREA_BOX_WITH_NO_COMMENT,3000,1);
+		waitForAndGetElement(docPrev.ELEMENT_RIGHT_PANEL_COMMENT_AREA_BOX_WITH_NO_COMMENT,DEFAULT_TIMEOUT,1);
 		
 		/*Step Number: 3
 		*Step Name: Step 3. Add a comment.
@@ -1222,7 +1228,7 @@ import org.testng.annotations.*;
 		
 		info("Add a comment to Comment Area");
 		docPrev.addComment(comment,1);
-		waitForAndGetElement(docPrev.ELEMENT_COMMENT_CONTENT.replace("${text}",comment),3000,1);
+		waitForAndGetElement(docPrev.ELEMENT_COMMENT_CONTENT.replace("${text}",comment),DEFAULT_TIMEOUT,1);
 		
 		info("Verify that added comment is shown on Comment Area is only one");
 		int count = driver.findElements(By.xpath(docPrev.ELEMENT_COMMENT_CONTENT.replace("${text}",comment))).size();
@@ -1271,10 +1277,10 @@ import org.testng.annotations.*;
 			- The activity is displayed on the stream
 			*/ 
 		info("Share a pdf file activity");
-		acStream.uploadAndShareFileActivity(nameDrive,folderPath,folderDataTestPath, file,description);
+		acStream.uploadAndShareFileActivity(nameDrive,folderPath,folderDataTestPath, file,description, true);
 
 		info("Verify that the activity is shown on AS");
-		waitForAndGetElement(acStream.ELEMENT_ACTIVITY_DOCUMENT_MEDIA_TITLE.replace("${title}",file),3000,1);
+		waitForAndGetElement(acStream.ELEMENT_ACTIVITY_DOCUMENT_MEDIA_TITLE.replace("${title}",file),DEFAULT_TIMEOUT,1);
 		/*Step Number: 2
 		*Step Name: Step 2. Show the Preview mode.
 		*Step Description: 
@@ -1288,10 +1294,10 @@ import org.testng.annotations.*;
 		
 		acStream.openPreviewModeOnFileName(file,"",1);
 		info("Verify that the preview mode is shown");
-		waitForAndGetElement(docPrev.ELEMENT_PREVIEW_MODE, 3000,1);
+		waitForAndGetElement(docPrev.ELEMENT_PREVIEW_MODE, DEFAULT_TIMEOUT,1);
 		
 		info("Verify that The icon Like is displayed");
-		waitForAndGetElement(docPrev.ELEMENT_COMMENT_AREA_TOP_LIKE_ICON,3000,1);
+		waitForAndGetElement(docPrev.ELEMENT_COMMENT_AREA_TOP_LIKE_ICON,DEFAULT_TIMEOUT,1);
 		
 		/*Step Number: 3
 		*Step Name: Step 3. Like in the Preview mode.
@@ -1307,7 +1313,7 @@ import org.testng.annotations.*;
 		click(docPrev.ELEMENT_COMMENT_AREA_TOP_LIKE_ICON);
 		Utils.pause(2000);
 		info("Verify that the number of like is +1");
-		waitForAndGetElement(docPrev.ELEMENT_COMMENT_AREA_TOP_LIKE_NUMBER.replace("${number}","1"),3000,1);
+		waitForAndGetElement(docPrev.ELEMENT_COMMENT_AREA_TOP_LIKE_NUMBER.replace("${number}","1"),DEFAULT_TIMEOUT,1);
 		
 		
 		/*Step Number: 4
@@ -1324,7 +1330,7 @@ import org.testng.annotations.*;
 		docPrev.closeByPressECS();
 		Utils.pause(2000);
 		info("Verify that the number of like is +1");
-		String num= waitForAndGetElement(acStream.ELEMENT_LIKE_NUMBER.replace("${title}",file),3000,1).getText();
+		String num= waitForAndGetElement(acStream.ELEMENT_LIKE_NUMBER.replace("${title}",file),DEFAULT_TIMEOUT,1).getText();
 		info("num:"+num);
 		if(num.equals(" 1")) assert true;
 		else assert false:"the number of like is incorrect";
@@ -1340,17 +1346,17 @@ import org.testng.annotations.*;
 			*/
 		acStream.openPreviewModeOnFileName(file,"",1);
 		info("Verify that the preview mode is shown");
-		waitForAndGetElement(docPrev.ELEMENT_PREVIEW_MODE, 3000,1);
+		waitForAndGetElement(docPrev.ELEMENT_PREVIEW_MODE, DEFAULT_TIMEOUT,1);
 		info("click on Like icon");
 		click(docPrev.ELEMENT_COMMENT_AREA_TOP_LIKE_ICON);
 		Utils.pause(2000);
 		info("Verify that the number of like is -1");
-		waitForAndGetElement(docPrev.ELEMENT_COMMENT_AREA_TOP_LIKE_NUMBER.replace("${number}","0"),3000,1);
+		waitForAndGetElement(docPrev.ELEMENT_COMMENT_AREA_TOP_LIKE_NUMBER.replace("${number}","0"),DEFAULT_TIMEOUT,1);
 		
 		info("Close The preview mode");
 		docPrev.closeByPressECS();
 		info("Verify that the number of like is -1");
-		String num1=waitForAndGetElement(acStream.ELEMENT_LIKE_NUMBER.replace("${title}",file),3000,1).getText();
+		String num1=waitForAndGetElement(acStream.ELEMENT_LIKE_NUMBER.replace("${title}",file),DEFAULT_TIMEOUT,1).getText();
 		if(num1.equals(" 0")) assert true;
 		else assert false:"the number of like is incorrect";
 		info("num1:"+num1);

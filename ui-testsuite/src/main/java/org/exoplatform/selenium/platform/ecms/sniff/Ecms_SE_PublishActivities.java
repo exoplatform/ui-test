@@ -377,7 +377,7 @@ public class Ecms_SE_PublishActivities extends ECMS_TestConfig_Part2 {
 
 		info("Upload a file");
 		navTool.goToSiteExplorer();
-		SEHome.goToPath("intranet/documents","Sites Management");
+		SEHome.goToPath("intranet/documents","Site Management");
 		SEHome.uploadFile("TestData/"+file);
 
 		info("Go to the activity and verify that the file's activity is shown");
@@ -386,7 +386,7 @@ public class Ecms_SE_PublishActivities extends ECMS_TestConfig_Part2 {
 
 		info("Delete the file");
 		navTool.goToSiteExplorer();
-		SEHome.goToPath("intranet/documents","Sites Management");
+		SEHome.goToPath("intranet/documents","Site Management");
 		SEHome.deleteData(file);
 
 	}
@@ -405,7 +405,7 @@ public class Ecms_SE_PublishActivities extends ECMS_TestConfig_Part2 {
 
 		info("Upload a file");
 		navTool.goToSiteExplorer();
-		SEHome.goToPath("intranet/documents","Sites Management");
+		SEHome.goToPath("intranet/documents","Site Management");
 		SEHome.uploadFile("TestData/"+file);
 
 		info("Edit the file");
@@ -415,7 +415,7 @@ public class Ecms_SE_PublishActivities extends ECMS_TestConfig_Part2 {
 
 		info("Delete the file");
 		navTool.goToSiteExplorer();
-		SEHome.goToPath("intranet/documents","Sites Management");
+		SEHome.goToPath("intranet/documents","Site Management");
 		SEHome.deleteData(file);
 	}
 	/**
@@ -447,7 +447,7 @@ public class Ecms_SE_PublishActivities extends ECMS_TestConfig_Part2 {
 
 		info("Upload a file");
 		navTool.goToSiteExplorer();
-		SEHome.goToPath("intranet/documents","Sites Management");
+		SEHome.goToPath("intranet/documents","Site Management");
 		SEHome.uploadFile("TestData/"+file);
 
 		info("Select the file");
@@ -461,7 +461,7 @@ public class Ecms_SE_PublishActivities extends ECMS_TestConfig_Part2 {
 
 		info("Delete the file");
 		navTool.goToSiteExplorer();
-		SEHome.goToPath("intranet/documents","Sites Management");
+		SEHome.goToPath("intranet/documents","Site Management");
 		SEHome.deleteData(file);
 
 	}
@@ -479,12 +479,12 @@ public class Ecms_SE_PublishActivities extends ECMS_TestConfig_Part2 {
 
 		info("Upload a file");
 		navTool.goToSiteExplorer();
-		SEHome.goToPath("intranet/documents","Sites Management");
+		SEHome.goToPath("intranet/documents","Site Management");
 		SEHome.uploadFile("TestData/"+file);
 
 		info("Delete the file");
 		navTool.goToSiteExplorer();
-		SEHome.goToPath("intranet/documents","Sites Management");
+		SEHome.goToPath("intranet/documents","Site Management");
 		SEHome.deleteData(file);
 
 		info("Check the activity");
@@ -517,7 +517,7 @@ public class Ecms_SE_PublishActivities extends ECMS_TestConfig_Part2 {
 
 		info("Create a new Content");
 		navTool.goToSiteExplorer();
-		SEHome.goToPath("intranet/documents","Sites Management");
+		SEHome.goToPath("intranet/documents","Site Management");
 		SEHome.goToAddNewContent();
 		CreNewDoc.createNewDoc(selectDocumentType.WEBCONTENT);
 		CreNewDoc.addNewFile(title, content);
@@ -532,7 +532,7 @@ public class Ecms_SE_PublishActivities extends ECMS_TestConfig_Part2 {
 
 		info("Delete the file");
 		navTool.goToSiteExplorer();
-		SEHome.goToPath("intranet/documents","Sites Management");
+		SEHome.goToPath("intranet/documents","Site Management");
 		SEHome.deleteData(title);
 
 	}
@@ -551,7 +551,7 @@ public class Ecms_SE_PublishActivities extends ECMS_TestConfig_Part2 {
 
 		info("Create a new Content");
 		navTool.goToSiteExplorer();
-		SEHome.goToPath("intranet/documents","Sites Management");
+		SEHome.goToPath("intranet/documents","Site Management");
 		SEHome.goToAddNewContent();
 		CreNewDoc.createNewDoc(selectDocumentType.WEBCONTENT);
 		CreNewDoc.addNewFile(title, content);
@@ -564,7 +564,7 @@ public class Ecms_SE_PublishActivities extends ECMS_TestConfig_Part2 {
 
 		info("Delete the file");
 		navTool.goToSiteExplorer();
-		SEHome.goToPath("intranet/documents","Sites Management");
+		SEHome.goToPath("intranet/documents","Site Management");
 		SEHome.deleteData(title);
 	}
 
@@ -583,7 +583,7 @@ public class Ecms_SE_PublishActivities extends ECMS_TestConfig_Part2 {
 
 		info("Upload a file");
 		navTool.goToSiteExplorer();
-		SEHome.goToPath("intranet/documents","Sites Management");
+		SEHome.goToPath("intranet/documents","Site Management");
 		SEHome.uploadFile("TestData/"+file);
 
 		info("View the content from the activity");
@@ -599,7 +599,7 @@ public class Ecms_SE_PublishActivities extends ECMS_TestConfig_Part2 {
 
 		info("Delete the file");
 		navTool.goToSiteExplorer();
-		SEHome.goToPath("intranet/documents","Sites Management");
+		SEHome.goToPath("intranet/documents","Site Management");
 		SEHome.deleteData(file);
 	}
 
@@ -631,7 +631,7 @@ public class Ecms_SE_PublishActivities extends ECMS_TestConfig_Part2 {
 
 		info("Upload a file");
 		navTool.goToSiteExplorer();
-		SEHome.goToPath("intranet/documents","Sites Management");
+		SEHome.goToPath("intranet/documents","Site Management");
 		SEHome.uploadFile("TestData/"+file);
 
 		info("Move the file");
@@ -645,7 +645,7 @@ public class Ecms_SE_PublishActivities extends ECMS_TestConfig_Part2 {
 
 		info("Delete the file");
 		navTool.goToSiteExplorer();
-		SEHome.goToPath(fileRecept,"Sites Management");
+		SEHome.goToPath(fileRecept,"Site Management");
 		SEHome.deleteData(file);
 	}
 
@@ -677,7 +677,7 @@ public class Ecms_SE_PublishActivities extends ECMS_TestConfig_Part2 {
 
 		info("Create a new Content");
 		navTool.goToSiteExplorer();
-		SEHome.goToPath("intranet/documents","Sites Management");
+		SEHome.goToPath("intranet/documents","Site Management");
 		SEHome.goToAddNewContent();
 		CreNewDoc.createNewDoc(selectDocumentType.WEBCONTENT);
 		CreNewDoc.addNewFile(title, content);
@@ -685,7 +685,7 @@ public class Ecms_SE_PublishActivities extends ECMS_TestConfig_Part2 {
 
 		info("Move the content");
 		navTool.goToSiteExplorer();
-		SEHome.goToPath("intranet/documents","Sites Management");
+		SEHome.goToPath("intranet/documents","Site Management");
 		dragAndDropToObject(SEHome.ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME.replace("${title}", title),SEHome.ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME.replace("${title}", fileRecept));
 		alert.acceptAlert();
 		Utils.pause(2000);
@@ -696,7 +696,7 @@ public class Ecms_SE_PublishActivities extends ECMS_TestConfig_Part2 {
 
 		info("Delete the file");
 		navTool.goToSiteExplorer();
-		SEHome.goToPath(fileRecept,"Sites Management");
+		SEHome.goToPath(fileRecept,"Site Management");
 		SEHome.deleteData(title);
 
 	}

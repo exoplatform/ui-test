@@ -195,7 +195,9 @@ public class Wiki_Basic_Action_Manage_Page_Edit extends Wiki_TestConfig {
 			- Other paragraph's content  in page is remain */
 		hp.goToWiki();
 		wHome.goToAddBlankPage();
-		rtMode.addSimplePage(title, content);
+		wikiMg.goToSourceEditor();
+		sourceEditor.addSimplePage(title, content);
+		//rtMode.addSimplePage(title, content);
 		wikiMg.saveAddPage();
 		waitForAndGetElement(wHome.ELEMENT_TREE_WIKI_NAME.replace("${name}",title),2000,0);
 		
@@ -231,6 +233,7 @@ public class Wiki_Basic_Action_Manage_Page_Edit extends Wiki_TestConfig {
 			- Add new page successfully */
 		hp.goToWiki();
 		wHome.goToAddBlankPage();
+		wikiMg.goToRichTextEditor();
 		rtMode.addSimplePage(title, title);
 		wikiMg.saveAddPage();
 		waitForAndGetElement(wHome.ELEMENT_TREE_WIKI_NAME.replace("${name}",title),2000,0);

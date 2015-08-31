@@ -86,7 +86,7 @@ public class ConnectionsManagement extends PlatformBase {
 		info("--Connect to a user--");
 		info("Click on connect button");
 		searchPeople(username,null,null,null);
-		click(ELEMENT_CONNECTION_CONNECT_BTN.replace("${user}",username));
+		clickByJavascript(ELEMENT_CONNECTION_CONNECT_BTN.replace("${user}",username));
 		waitForAndGetElement(ELEMENT_CONNECTION_CANCEL_BTN.replace("${user}",username),2000,1);
 		info("Connected to the user");
 	}
@@ -99,7 +99,7 @@ public class ConnectionsManagement extends PlatformBase {
 		info("--Remove a connection of a user--");
 		info("Click on remove button");
 		searchPeople(username,null,null,null);
-		click(ELEMENT_CONNECTION_REVOVE_BTN.replace("${user}",username));
+		clickByJavascript(ELEMENT_CONNECTION_REVOVE_BTN.replace("${user}",username));
 		waitForElementNotPresent(ELEMENT_CONNECTION_REVOVE_BTN.replace("${user}",username));
 		info("Removed to the user");
 	}
@@ -111,7 +111,7 @@ public class ConnectionsManagement extends PlatformBase {
 		info("--Cancel a connection of a user--");
 		info("Click on Cancel button");
 		searchPeople(username,null,null,null);
-		click(ELEMENT_CONNECTION_CANCEL_BTN.replace("${user}",username));
+		clickByJavascript(ELEMENT_CONNECTION_CANCEL_BTN.replace("${user}",username));
 		waitForElementNotPresent(ELEMENT_CONNECTION_CANCEL_BTN.replace("${user}",username));
 		info("Canceled to the user");
 	}
@@ -123,7 +123,7 @@ public class ConnectionsManagement extends PlatformBase {
 		info("--Ignore a connection of a user--");
 		info("Click on Ignore button");
 		searchPeople(username,null,null,null);
-		click(ELEMENT_CONNECTION_IGNORE_BTN.replace("${user}",username));
+		clickByJavascript(ELEMENT_CONNECTION_IGNORE_BTN.replace("${user}",username));
 		waitForElementNotPresent(ELEMENT_CONNECTION_IGNORE_BTN.replace("${user}",username));
 		info("Connected to the user");
 	}
@@ -149,7 +149,7 @@ public class ConnectionsManagement extends PlatformBase {
 		info("Click on Confirm button");
 		searchPeople(username,null,null,null);
 		waitForAndGetElement(ELEMENT_CONNECTION_CONFIRM_BTN.replace("${user}",username));
-		click(ELEMENT_CONNECTION_CONFIRM_BTN.replace("${user}",username));
+		clickByJavascript(ELEMENT_CONNECTION_CONFIRM_BTN.replace("${user}",username));
 		waitForElementNotPresent(ELEMENT_CONNECTION_CONFIRM_BTN.replace("${user}",username));
 		info("Accepted to the user");
 	}
@@ -223,7 +223,7 @@ public class ConnectionsManagement extends PlatformBase {
 		else{
 			type(ELEMENT_SKILL_OF_PEOPLE, "", true);
 		}
-		click(ELEMENT_SEARCH_BUTTON);
+		clickByJavascript(ELEMENT_SEARCH_BUTTON);
 		if (directory!="" && directory!=null)
 			click(By.linkText(directory));
 		Utils.pause(1000);

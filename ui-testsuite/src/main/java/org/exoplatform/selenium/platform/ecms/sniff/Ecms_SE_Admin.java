@@ -29,7 +29,7 @@ public class Ecms_SE_Admin extends ECMS_TestConfig_Part2{
 	 *<li> Test Case Name: Add Relation</li>
 	 */
 
-	@Test
+	@Test(priority=1)
 	public  void test01_AddRelation() {
 		info("Test 1: Add Relation");
 		/*
@@ -58,7 +58,7 @@ public class Ecms_SE_Admin extends ECMS_TestConfig_Part2{
 		
 		info("Create content 1");
 		navTool.goToSiteExplorer();
-		SEHome.goToPath("acme/documents", "Sites Management");
+		SEHome.goToPath("acme/documents", "Site Management");
 		SEHome.goToAddNewContent();
 		CreNewDoc.createNewDoc(selectDocumentType.FILE);
 		CreNewDoc.addNewFile(node1, node1);
@@ -95,7 +95,7 @@ public class Ecms_SE_Admin extends ECMS_TestConfig_Part2{
 		
 		info("Delete all data test");
 		navTool.goToSiteExplorer();
-		SEHome.goToPath("acme/documents", "Sites Management");
+		SEHome.goToPath("acme/documents", "Site Management");
 		SEHome.deleteData(node1);
 		SEHome.deleteData(node2);
 	}
@@ -106,7 +106,7 @@ public class Ecms_SE_Admin extends ECMS_TestConfig_Part2{
 	 * <li>Test Case Name: Delete Relation</li>
 	 */
 
-	@Test
+	@Test(priority=2) 
 	public  void test02_DeleteRelation() {
 		info("Test 02: Delete Relation");
 		
@@ -135,7 +135,7 @@ public class Ecms_SE_Admin extends ECMS_TestConfig_Part2{
 		
 		info("Create content 1");
 		navTool.goToSiteExplorer();
-		SEHome.goToPath("acme/documents", "Sites Management");
+		SEHome.goToPath("acme/documents", "Site Management");
 		SEHome.goToAddNewContent();
 		CreNewDoc.createNewDoc(selectDocumentType.FILE);
 		CreNewDoc.addNewFile(node1, node1);
@@ -169,7 +169,7 @@ public class Ecms_SE_Admin extends ECMS_TestConfig_Part2{
 		
 		info("Delete all data test");
 		navTool.goToSiteExplorer();
-		SEHome.goToPath("acme/documents", "Sites Management");
+		SEHome.goToPath("acme/documents", "Site Management");
 		SEHome.deleteData(node1);
 		SEHome.deleteData(node2);
 		
@@ -178,7 +178,7 @@ public class Ecms_SE_Admin extends ECMS_TestConfig_Part2{
 	 *<li> Case ID:116596.</li>
 	 *<li> Test Case Name: Show/ Hide Relation</li>
 	 */
-	@Test
+	@Test(priority=3)
 	public  void test03_ShowHideRelation() {
 		info("Test 3: Show/Hide Relation");
 		info("Create data test");
@@ -189,7 +189,7 @@ public class Ecms_SE_Admin extends ECMS_TestConfig_Part2{
 
 		info("Create content 1");
 		navTool.goToSiteExplorer();
-		SEHome.goToPath("acme/documents", "Sites Management");
+		SEHome.goToPath("acme/documents", "Site Management");
 		SEHome.goToAddNewContent();
 		CreNewDoc.createNewDoc(selectDocumentType.FILE);
 		CreNewDoc.addNewFile(node1, node1);
@@ -225,7 +225,7 @@ public class Ecms_SE_Admin extends ECMS_TestConfig_Part2{
 		
 		info("Delete all data test");
 		navTool.goToSiteExplorer();
-		SEHome.goToPath("acme/documents", "Sites Management");
+		SEHome.goToPath("acme/documents", "Site Management");
 		SEHome.deleteData(node1);
 		SEHome.deleteData(node2);
 	}
@@ -236,7 +236,7 @@ public class Ecms_SE_Admin extends ECMS_TestConfig_Part2{
 	 *<li> Case ID:116655.</li>
 	 *<li> Test Case Name: Import a node</li>
 	 */
-	@Test
+	@Test(priority=8)
 	public  void test04_05_ImportExportANode() {
 		info("Test 4: Export a Node");
 
@@ -258,7 +258,7 @@ public class Ecms_SE_Admin extends ECMS_TestConfig_Part2{
 		
 		info("Add New folder");
 		navTool.goToSiteExplorer();
-		SEHome.goToPath("intranet/documents","Sites Management");
+		SEHome.goToPath("intranet/documents","Site Management");
 		SEHome.goToAddNewFolder();
 		
 		info("Create Folder node");
@@ -273,7 +273,7 @@ public class Ecms_SE_Admin extends ECMS_TestConfig_Part2{
 		
 		info("Delete all data test");
 		navTool.goToSiteExplorer();
-		SEHome.goToPath("intranet/documents", "Sites Management");
+		SEHome.goToPath("intranet/documents", "Site Management");
 		SEHome.deleteData(node1);
 		
 		info("Test 5: Import a Node");
@@ -284,7 +284,7 @@ public class Ecms_SE_Admin extends ECMS_TestConfig_Part2{
 		
 		info("Add New folder");
 		navTool.goToSiteExplorer();
-		SEHome.goToPath("intranet/documents", "Sites Management");
+		SEHome.goToPath("intranet/documents", "Site Management");
 		SEHome.goToAddNewFolder();
 		
 		info("Create Folder node");
@@ -299,7 +299,7 @@ public class Ecms_SE_Admin extends ECMS_TestConfig_Part2{
 		
 		info("Delete all data test");
 		navTool.goToSiteExplorer();
-		SEHome.goToPath("intranet/documents", "Sites Management");
+		SEHome.goToPath("intranet/documents", "Site Management");
 		SEHome.deleteData(node2);
 		deleteFile("TestOutput/sysview.xml");
 	}
@@ -309,7 +309,7 @@ public class Ecms_SE_Admin extends ECMS_TestConfig_Part2{
 	 *<li> Test Case Name: Add Category.</li>
 
 	 */
-	@Test
+	@Test(priority=4)
 	public  void test06_Add_Delete_Category() {
 		info("Test 6: Add a category");
 
@@ -332,7 +332,7 @@ public class Ecms_SE_Admin extends ECMS_TestConfig_Part2{
 		
 		info("Create a content");
 		navTool.goToSiteExplorer();
-		SEHome.goToPath("acme/documents", "Sites Management");
+		SEHome.goToPath("acme/documents", "Site Management");
 		SEHome.goToAddNewContent();
 		CreNewDoc.createNewDoc(selectDocumentType.FILE);
 		CreNewDoc.addNewFile(node1, node1);
@@ -348,7 +348,7 @@ public class Ecms_SE_Admin extends ECMS_TestConfig_Part2{
 		
 		info("Delete all data test");
 		navTool.goToSiteExplorer();
-		SEHome.goToPath("acme/documents", "Sites Management");
+		SEHome.goToPath("acme/documents", "Site Management");
 		SEHome.deleteData(node1);
 	}
 	
@@ -359,7 +359,7 @@ public class Ecms_SE_Admin extends ECMS_TestConfig_Part2{
 	 *in use with Category option ticked</li>
 	 */
 
-    @Test
+    @Test(priority=5)
 	public void test07_Delete_Category() {
 		info("Test 7: Delete a category");
 		/*Step Number: 1
@@ -382,7 +382,7 @@ public class Ecms_SE_Admin extends ECMS_TestConfig_Part2{
 		
 		info("Create a content");
 		navTool.goToSiteExplorer();
-		SEHome.goToPath("acme/documents", "Sites Management");
+		SEHome.goToPath("acme/documents", "Site Management");
 		SEHome.goToAddNewContent();
 		CreNewDoc.createNewDoc(selectDocumentType.FILE);
 		CreNewDoc.addNewFile(node1, node1);
@@ -399,7 +399,7 @@ public class Ecms_SE_Admin extends ECMS_TestConfig_Part2{
 		
 		info("Delete all data test");
 		navTool.goToSiteExplorer();
-		SEHome.goToPath("acme/documents", "Sites Management");
+		SEHome.goToPath("acme/documents", "Site Management");
 		SEHome.deleteData(node1);
 		
 	}
@@ -407,7 +407,7 @@ public class Ecms_SE_Admin extends ECMS_TestConfig_Part2{
 	 *<li> Case ID:116610.</li>
 	 *<li> Test Case Name: View Node Properties</li>
 	 */
-	@Test
+	@Test(priority=6)
 	public  void test08_ViewNodeProperties() {
 		info("Test 08: View Node Properties");
 		
@@ -432,7 +432,7 @@ public class Ecms_SE_Admin extends ECMS_TestConfig_Part2{
 		
 		info("Create a content");
 		navTool.goToSiteExplorer();
-		SEHome.goToPath("acme/documents", "Sites Management");
+		SEHome.goToPath("acme/documents", "Site Management");
 		SEHome.goToAddNewContent();
 		CreNewDoc.createNewDoc(selectDocumentType.FILE);
 		CreNewDoc.addNewFile(node1, node1);
@@ -447,7 +447,7 @@ public class Ecms_SE_Admin extends ECMS_TestConfig_Part2{
 		
 		info("Delete all data test");
 		navTool.goToSiteExplorer();
-		SEHome.goToPath("acme/documents", "Sites Management");
+		SEHome.goToPath("acme/documents", "Site Management");
 		SEHome.deleteData(node1);
 		
 	}
@@ -456,7 +456,7 @@ public class Ecms_SE_Admin extends ECMS_TestConfig_Part2{
 	 *<li> Case ID:116593.</li>
 	 *<li> Test Case Name: Manage Publication.</li>
 	 */
-	@Test
+	@Test(priority=7)
 	public  void test09_ManagePublication() {
 		info("Test 09: Manage Publication");
 		/*Step Number: 1
@@ -478,7 +478,7 @@ public class Ecms_SE_Admin extends ECMS_TestConfig_Part2{
 		
 		info("Create a content");
 		navTool.goToSiteExplorer();
-		SEHome.goToPath("acme/documents", "Sites Management");
+		SEHome.goToPath("acme/documents", "Site Management");
 		SEHome.goToAddNewContent();
 		CreNewDoc.createNewDoc(selectDocumentType.FILE);
 		CreNewDoc.addNewFile(node1, node1);
@@ -492,7 +492,7 @@ public class Ecms_SE_Admin extends ECMS_TestConfig_Part2{
 		
 		info("Delete all data test");
 		navTool.goToSiteExplorer();
-		SEHome.goToPath("acme/documents", "Sites Management");
+		SEHome.goToPath("acme/documents", "Site Management");
 		SEHome.deleteData(node1);
 		
 	}

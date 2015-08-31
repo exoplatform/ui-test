@@ -370,7 +370,9 @@ public class ForumTopicManagement extends PlatformBase {
     	type(ELEMENT_POLL_OPTIONS1,option2,true);
     	info("Click on Submit button");
     	click(ELEMENT_POLL_SUBMIT);
+    	waitForElementNotPresent(ELEMENT_POLL_SUBMIT);
     	info("Finished adding poll");
+    	Utils.pause(2000);
     }
     /**
 	 * Lock or Unlock a topic
@@ -462,11 +464,16 @@ public class ForumTopicManagement extends PlatformBase {
 	 * 
 	 */
 	public void addPostSimple(String name, String message) {
+		info("Add post simple");
+		Utils.pause(2000);
 		click(ELEMENT_FORUM_ADDPOST);
+		waitForAndGetElement(ELEMENT_FORUM_POST_TITLE, DEFAULT_TIMEOUT, 1);
 		type(ELEMENT_FORUM_POST_TITLE, name, true);
 		inputFrame(ELEMENT_FORUM_MESSAGE , message);
-		switchToParentWindow();
-		click(ELEMENT_FORUM_SETTINGS_SUBMIT);
+		//switchToParentWindow();
+		waitForAndGetElement(ELEMENT_FORUM_SETTINGS_SUBMIT, DEFAULT_TIMEOUT, 1);
+		clickByJavascript(ELEMENT_FORUM_SETTINGS_SUBMIT, 2);
+		//click(ELEMENT_FORUM_SETTINGS_SUBMIT);
 	}
 	
 	/**
@@ -479,9 +486,13 @@ public class ForumTopicManagement extends PlatformBase {
 		click(ELEMENT_FORUM_ADDTOPIC);
 		type(ELEMENT_FORUM_TOPIC_TITLE, name, true);
 		inputFrame(ELEMENT_FORUM_MESSAGE , message);
-		switchToParentWindow();
-		click(ELEMENT_FORUM_SETTINGS_SUBMIT);
-		waitForAndGetElement(ELEMENT_FORUM_TOPIC_LINK.replace("${name}",name),2000,1);
+		//switchToParentWindow();
+		//click(ELEMENT_FORUM_SETTINGS_SUBMIT);
+		do {
+			waitForAndGetElement(ELEMENT_FORUM_SETTINGS_SUBMIT, DEFAULT_TIMEOUT, 1);
+			clickByJavascript(ELEMENT_FORUM_SETTINGS_SUBMIT, 2);
+		}
+		while (waitForAndGetElement(ELEMENT_FORUM_TOPIC_LINK.replace("${name}",name),DEFAULT_TIMEOUT,1) == null);
 		info("The topic is created successfully");
 	}
 	
@@ -494,7 +505,8 @@ public class ForumTopicManagement extends PlatformBase {
 	 */
 	public void replyTopic(String newTitle,String newMessg,String pathFile,String fileName){
 		info("Click on Post Reply button"); 
-		click(ELEMENT_TOPIC_POST_REPLY_BOTTOM);
+		//click(ELEMENT_TOPIC_POST_REPLY_BOTTOM);
+		clickByJavascript(ELEMENT_TOPIC_POST_REPLY_BOTTOM, 2);
 		info("Verify that the pop up is shown");
 		waitForAndGetElement(ELEMENT_TOPIC_NEW_POST_TITLE);
 		info("Refresh the page");
@@ -521,7 +533,8 @@ public class ForumTopicManagement extends PlatformBase {
 			waitForElementNotPresent(ELEMENT_UPLOAD_POPUP_FILE);
 		}
 		info("click on Submit button");
-		click(ELEMENT_SUBMIT_BUTTON);
+		//click(ELEMENT_SUBMIT_BUTTON);
+		clickByJavascript(ELEMENT_SUBMIT_BUTTON, 2);
 		info("Verify that the replying is created");
 		waitForAndGetElement(ELEMENT_TOPIC_REPPLY_CONTENT.replace("${content}", newMessg));
 		info("Reply topic successfully");
@@ -536,10 +549,11 @@ public class ForumTopicManagement extends PlatformBase {
 	public void startTopic(String title, String message,String pathFile,String fileName) {
 		info("Verify that the pop up is shown");
 		waitForAndGetElement(ELEMENT_START_TOPIC_POPUP_TITLE_FILED);
-		info("Refresh the page");
-		this.driver.navigate().refresh();
+		//info("Refresh the page");
+		//this.driver.navigate().refresh();
 		if(!title.isEmpty()){
 			info("Input the title:"+title);
+			waitForAndGetElement(ELEMENT_START_TOPIC_POPUP_TITLE_FILED, DEFAULT_TIMEOUT, 1);
 			type(ELEMENT_START_TOPIC_POPUP_TITLE_FILED, title, true);
 		}
 		
@@ -559,7 +573,9 @@ public class ForumTopicManagement extends PlatformBase {
 			waitForElementNotPresent(ELEMENT_UPLOAD_POPUP_FILE);
 		}
 		info("click on Submit button");
-		click(ELEMENT_SUBMIT_BUTTON);
+		waitForAndGetElement(ELEMENT_SUBMIT_BUTTON, DEFAULT_TIMEOUT, 1);
+		clickByJavascript(ELEMENT_SUBMIT_BUTTON,2);
+		//click(ELEMENT_SUBMIT_BUTTON);
 		info("Verify that the topic is created");
 		waitForAndGetElement(By.linkText(title));
 		info("Start topic successfully");
@@ -585,7 +601,9 @@ public class ForumTopicManagement extends PlatformBase {
 		if(!newContent.isEmpty())
 		  inputFrame(ELEMENT_START_TOPIC_MESSAGE_FRAME_CKEDITOR,newContent);
 		info("Click on Submit button");
-		click(ELEMENT_SUBMIT_BUTTON);
+		waitForAndGetElement(ELEMENT_SUBMIT_BUTTON, DEFAULT_TIMEOUT, 1);
+		clickByJavascript(ELEMENT_SUBMIT_BUTTON, 2);
+		//click(ELEMENT_SUBMIT_BUTTON);
 		info("All changes are saved");
 	}
 	/**

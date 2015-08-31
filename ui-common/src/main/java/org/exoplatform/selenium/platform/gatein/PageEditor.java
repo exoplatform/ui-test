@@ -1,6 +1,7 @@
 package org.exoplatform.selenium.platform.gatein;
 import static org.exoplatform.selenium.TestLogger.info;
 import org.openqa.selenium.By;
+import org.exoplatform.selenium.Utils;
 import org.exoplatform.selenium.platform.PlatformBase;
 import org.openqa.selenium.WebDriver;
 
@@ -66,6 +67,7 @@ public class PageEditor extends PlatformBase {
      */
 	public void goToEditPortlet(Object locatorPortlet){
 		info("Go to edit portlet");
+		Utils.pause(3000);
 		mouseOver(locatorPortlet, true);
 		click(ELEMENT_EDIT_PORTLET_ICON);
 		waitForAndGetElement(ELEMENT_EDIT_PORTLET_FORM);

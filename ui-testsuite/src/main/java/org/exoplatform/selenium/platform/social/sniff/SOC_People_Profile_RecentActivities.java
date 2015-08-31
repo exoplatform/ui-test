@@ -32,14 +32,17 @@ public class SOC_People_Profile_RecentActivities extends SOC_TestConfig_2{
 		String uploadFileName = atData.getAttachFileByArrayTypeRandom(9);
 		String textDes1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		String textDes2 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
-		String folderPath=siteExPath.getSiteExpPathByIndex(6);
+		//String folderPath=siteExPath.getSiteExpPathByIndex(6);
+		String nameDrive=siteExDrive.getSiteExpDriveByIndex(4);
+		String folderPath=siteExPath.getSiteExpPathByIndex(10);
 		String comment = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		String mention = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 
-		/*Create data test*/
+		//Create data test
 		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
 		String password1 = username1;
 		String email1 = username1 + mailSuffixData.getMailSuffixRandom();
+	
 
 		info("Add new user");
 		magAc.signIn(DATA_USER1, DATA_PASS);
@@ -63,9 +66,9 @@ public class SOC_People_Profile_RecentActivities extends SOC_TestConfig_2{
 
 		info("share a document and comment");
 		driver.navigate().refresh();
-		hpAct.openUploadPopup("",folderPath);
+		hpAct.openUploadPopup(nameDrive,folderPath);
 		hpAct.uploadFileFromAS("TestData/",uploadFileName);
-		hpAct.shareFileActivity("",folderPath, uploadFileName, textDes);
+		hpAct.shareFileActivity(nameDrive,folderPath, uploadFileName, textDes);
 		waitForAndGetElement(hpAct.ELEMENT_ACTIVITY_TITLE.replace("${text}",textDes).replace("${file}",uploadFileName));
 		hpAct.addComment(textDes, comment);
 

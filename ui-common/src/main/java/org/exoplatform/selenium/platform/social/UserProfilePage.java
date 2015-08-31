@@ -6,6 +6,8 @@ import org.exoplatform.selenium.platform.PlatformBase;
 import org.exoplatform.selenium.Utils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 public class UserProfilePage extends PlatformBase {
 
 	public final String ELEMENT_USER_NAME_PAGE=".//*[@id='UIBreadCrumbsNavigationPortlet']//*[contains(text(),'$fullName')]";
@@ -207,12 +209,16 @@ public class UserProfilePage extends PlatformBase {
 	 */
 	public void changeAvatar(String linkfile){
 		info("-- changeAvatar --");
-		click(ELEMENT_CHANGE_AVATAR_LINK);
+		Utils.pause(2000);
+		if(browser.contains("iexplorer"))
+		   clickByJavascript(ELEMENT_CHANGE_AVATAR_LINK);
+		else
+		   click(ELEMENT_CHANGE_AVATAR_LINK);
 		click(ELEMENT_SELECT_AVATAR);
 		uploadFileUsingRobot(linkfile);
-		click(ELEMENT_CONFIRM);
+		clickByJavascript(ELEMENT_CONFIRM);
 		waitForElementNotPresent(ELEMENT_CONFIRM);
-		click(ELEMENT_SAVE_AVATAR);
+		clickByJavascript(ELEMENT_SAVE_AVATAR);
 		Utils.pause(1000);
 	}
 
@@ -271,7 +277,12 @@ public class UserProfilePage extends PlatformBase {
 		}
 		if(url!=null && !url.isEmpty()){
 			info("update url");
-			type(ELEMENT_CONTACT_URL_INPUT.replace("${index}", index),url,true);
+			WebElement input= waitForAndGetElement(By.xpath(ELEMENT_CONTACT_URL_INPUT.replace("${index}", index)), DEFAULT_TIMEOUT, 1);
+			Actions action =new Actions(driver);
+			action.moveToElement(input).click().perform();
+			action.sendKeys(url).perform();
+			//action.moveToElement(input).sendKeys(url).build().perform();
+			//type(ELEMENT_CONTACT_URL_INPUT.replace("${index}", index),url,true);
 		}
 	}
 
@@ -352,12 +363,16 @@ public class UserProfilePage extends PlatformBase {
 	public void saveCancelUpdateInfo(Boolean isSave){
 		if(isSave==null || isSave){
 			info("Save updating information");
-			click(ELEMENT_CONTACT_SAVE_BUTTON);
+			Utils.pause(2000);
+			//click(ELEMENT_CONTACT_SAVE_BUTTON);
+			clickByJavascript(ELEMENT_CONTACT_SAVE_BUTTON, 2);
 			Utils.pause(2000);	
 		}
 		else{
 			info("Cancel updating information");
-			click(ELEMENT_CONTACT_CANCEL_BUTTON);
+			Utils.pause(2000);
+			//click(ELEMENT_CONTACT_CANCEL_BUTTON);
+			clickByJavascript(ELEMENT_CONTACT_CANCEL_BUTTON, 2);
 			Utils.pause(2000);	
 		}	
 	}

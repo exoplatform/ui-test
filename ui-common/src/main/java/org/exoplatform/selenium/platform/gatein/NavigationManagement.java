@@ -65,6 +65,8 @@ public class NavigationManagement extends PlatformBase {
 	public final By ELEMENT_MANAGESITES_CONTEXTMENU_MOVE_DOWN_ICON= By.cssSelector(".ContainerConfigOptions .uiIconMoveDown");
 	
 	// new node
+	public final By ELEMENT_ADD_NODE_FORM = By.id("UIPageNodeForm");
+	public final By ELEMENT_BACK_BUTTON = By.xpath("//*[text()='Back']");
 	public final By ELEMENT_UP_LEVEL_PATH_NODE = By.xpath("//*[@id='UINavigationNodeSelector']//*[@class='uiIconUpLevel uiIconLightGray']");
 	public final By ELEMENT_ADD_NODE = By.xpath("//*[@id='UINavigationManagement']/..//*[contains(text(),'Add Node')]");
 	public final By ELEMENT_SAVE_NODE = By.xpath("//*[@id='UINavigationManagement']/..//*[contains(text(),'Save')]");
@@ -185,7 +187,7 @@ public class NavigationManagement extends PlatformBase {
 			break;
 		case PASTE_NODE:
 			info("Click on Paste node");
-			click(ELEMENT_MANAGESITES_CONTEXTMENU_PASTE_ICON);
+			clickByJavascript(ELEMENT_MANAGESITES_CONTEXTMENU_PASTE_ICON);
 			Utils.pause(2000);
 			break;
 		case DELETE_NODE:
@@ -194,13 +196,13 @@ public class NavigationManagement extends PlatformBase {
 			alert.acceptAlert();
 			break;
 		case MOVE_UP:
-			info("Click on Paste node");
-			click(ELEMENT_MANAGESITES_CONTEXTMENU_MOVE_UP_ICON);
+			info("Click on Moveup node");
+			clickByJavascript(ELEMENT_MANAGESITES_CONTEXTMENU_MOVE_UP_ICON);
 			Utils.pause(2000);
 			break;
 		case MOVE_DOWN:
-			info("Click on Paste node");
-			click(ELEMENT_MANAGESITES_CONTEXTMENU_MOVE_DOWN_ICON);
+			info("Click on Move down node");
+			clickByJavascript(ELEMENT_MANAGESITES_CONTEXTMENU_MOVE_DOWN_ICON);
 			Utils.pause(2000);
 			break;
 		}

@@ -4,12 +4,12 @@ import static org.exoplatform.selenium.TestLogger.info;
 import java.awt.AWTException;
 import org.exoplatform.selenium.Utils;
 import org.exoplatform.selenium.platform.ecms.CreateNewDocument.selectDocumentType;
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.testng.annotations.*;
 
 
 public class SOC_HomePage extends SOC_TestConfig_1 {
-
 	@AfterMethod
 	public void setAfterMethod(){
 		magAc.signOut();
@@ -23,7 +23,7 @@ public class SOC_HomePage extends SOC_TestConfig_1 {
 	 *<li> Pre-Condition: </li>
 	 *<li> Post-Condition: </li>
 	 */
-	@Test
+	@Test (priority=22)
 	public  void test01_LikeActivity() {
 		info("Test 1: Like Activity");
 
@@ -49,7 +49,7 @@ public class SOC_HomePage extends SOC_TestConfig_1 {
 		 *Expected Outcome: 
 			- Like button is highlighted and the number of likers is updated*/
 
-		click((hp.ELEMENT_PUBLICATION_LIKE).replace("${title}", name));
+		clickByJavascript((hp.ELEMENT_PUBLICATION_LIKE).replace("${title}", name));
 		waitForAndGetElement((hp.ELEMENT_PUBLICATION_LIKED).replace("${title}", name));
 
 		/*Step number: 2
@@ -62,7 +62,8 @@ public class SOC_HomePage extends SOC_TestConfig_1 {
 		 *Expected Outcome: 
 			- Avatar of liker is added into likes part, the oldest liker is displayed at the right and the newest at the left.
 			- Profile pictures of users popup*/ 
-		mouseOver(hp.ELEMENT_PUBLICATION_WHOLIKED, true);
+		//mouseOver(hp.ELEMENT_PUBLICATION_WHOLIKED, true);
+		mouseHoverByJavaScript(hp.ELEMENT_PUBLICATION_WHOLIKED, 2);
 		waitForAndGetElement(hp.ELEMENT_PUBLICATION_WHOLIKEDPOPUP);
 	}
 
@@ -77,7 +78,7 @@ public class SOC_HomePage extends SOC_TestConfig_1 {
 	 *<li> Pre-Condition: </li>
 	 *<li> Post-Condition: </li>
 	 */
-	@Test
+	@Test (priority=23)
 	public  void test02_15_AddDeleteComment() {
 		info("Test 2: Add comment");
 
@@ -106,7 +107,6 @@ public class SOC_HomePage extends SOC_TestConfig_1 {
 		 *Expected Outcome: 
 			- Comment will be shown in comment section of activity*/ 
 		hpAct.addComment(name,content2);
-
 		waitForAndGetElement(hpAct.ELEMENT_PUBLICATION_COMMENTPOSTED.replace("${content}", content2));
 
 		info("Test 15: Delete comment");
@@ -121,10 +121,10 @@ public class SOC_HomePage extends SOC_TestConfig_1 {
 	 *<li> Pre-Condition: </li>
 	 *<li> Post-Condition: </li>
 	 */
-	@Test
+	@Test (priority=1)
 	public  void test03_DeleteYourActivity() {
 		info("Test 3: Delete your activity");
-
+		//Actions actions = new Actions(driver);
 		String name = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		String content = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 
@@ -151,10 +151,30 @@ public class SOC_HomePage extends SOC_TestConfig_1 {
 			- the (x) icon display on the top
 			-right of activity
 			- activity is deteled successfully*/ 
-		mouseOver((hp.ELEMENT_PUBLICATION_AUTHOR).replace("${title}", name), true);
-		click((hp.ELEMENT_PUBLICATION_DELETE).replace("${title}", name));
-		click(button.ELEMENT_OK_BUTTON);
-		waitForElementNotPresent(hp.ELEMENT_PUBLICATION_TITLE.replace("${title}", name));
+		if(browser.contains("iexplorer")){
+			info("Click X icon");
+			Utils.pause(2000);
+			waitForAndGetElement(hp.ELEMENT_PUBLICATION_AUTHOR.replace("${title}", name), DEFAULT_TIMEOUT, 1);
+			mouseOver((hp.ELEMENT_PUBLICATION_AUTHOR).replace("${title}", name), true);
+			waitForAndGetElement(hp.ELEMENT_PUBLICATION_DELETE.replace("${title}", name), 5000, 1);
+			Utils.pause(2000);
+			clickByJavascript((hp.ELEMENT_PUBLICATION_DELETE).replace("${title}", name), 2);
+			
+			info("clik OK button");
+			waitForAndGetElement(button.ELEMENT_OK_BUTTON, DEFAULT_TIMEOUT, 1);
+			Utils.pause(2000);
+			
+			click(button.ELEMENT_OK_BUTTON, 2);
+			waitForElementNotPresent(hp.ELEMENT_PUBLICATION_AUTHOR.replace("${title}", name));
+		}
+		else{
+			Utils.pause(2000);
+			mouseOver((hp.ELEMENT_PUBLICATION_AUTHOR).replace("${title}", name), true);
+			waitForAndGetElement(hp.ELEMENT_PUBLICATION_DELETE.replace("${title}", name), 5000, 1);
+			click((hp.ELEMENT_PUBLICATION_DELETE).replace("${title}", name));
+			click(button.ELEMENT_OK_BUTTON);
+			waitForElementNotPresent(hp.ELEMENT_PUBLICATION_TITLE.replace("${title}", name));
+		}
 	}
 
 	/**
@@ -164,7 +184,7 @@ public class SOC_HomePage extends SOC_TestConfig_1 {
 	 *<li> Post-Condition: </li>
 	 * @throws AWTException 
 	 */
-	@Test
+	@Test (priority=2)
 	public  void test04_MentionAUserInActivityComposer() throws AWTException {
 		info("Test 4: Mention a user in activity composer");
 		String text = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
@@ -184,6 +204,7 @@ public class SOC_HomePage extends SOC_TestConfig_1 {
 			- In the activity stream, mentions are displayed as a link on "Firstname Lastname" to the user's activities page*/ 
 		hp.goToHomePage();
 		hpAct.mentionUserActivity(DATA_USER2,text);
+		waitForAndGetElement(By.xpath(hpAct.ELEMENT_ACTIVITY_AUTHOR_ACTIVITY.replace("${activityText}", text)));
 		
 	}
 
@@ -193,7 +214,7 @@ public class SOC_HomePage extends SOC_TestConfig_1 {
 	 *<li> Pre-Condition: </li>
 	 *<li> Post-Condition: </li>
 	 */
-	@Test
+	@Test (priority=3)
 	public  void test05_ShareYourStatus() {
 		info("Test 5: Share your status");
 
@@ -220,7 +241,7 @@ public class SOC_HomePage extends SOC_TestConfig_1 {
 	 *<li> Pre-Condition: </li>
 	 *<li> Post-Condition: </li>
 	 */
-	@Test
+	@Test(priority=4)
 	public  void test06_AddADocument() {
 		info("Test 6: Add a document");
 
@@ -279,13 +300,15 @@ public class SOC_HomePage extends SOC_TestConfig_1 {
 	 *<li> Pre-Condition: </li>
 	 *<li> Post-Condition: </li>
 	 */
-	@Test
+	@Test(priority=24)
 	public  void test07_AddNewFolderAndUploadFile() {
 		info("Test 7: Add New folder and upload file");
 
 		String uploadFileName = fData.getAttachFileByArrayTypeRandom(9);
 		String textDes = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
-		String folderPath=siteExPath.getSiteExpPathByIndex(6);
+		//String folderPath=siteExPath.getSiteExpPathByIndex(6);
+		String folderPath=siteExPath.getSiteExpPathByIndex(5);
+		String nameDrive=siteExDrive.getSiteExpDriveByIndex(2);
 
 		/*Step Number: 1
 		 *Step Name: - Go to Select File Dialog
@@ -334,11 +357,12 @@ public class SOC_HomePage extends SOC_TestConfig_1 {
 			- Activity is added into activity stream*/ 
 		hp.goToHomePage();
 		Utils.pause(3000);
-		hpAct.openUploadPopup("",folderPath);
+		//hpAct.openUploadPopup("",folderPath);
+		hpAct.openUploadPopup(nameDrive,folderPath);
 		hpAct.uploadFileFromAS("TestData/",uploadFileName);
 		magAc.signOut();
 		magAc.signIn(DATA_USER1, DATA_PASS);
-		hpAct.shareFileActivity("",folderPath, uploadFileName, textDes);
+		hpAct.shareFileActivity(nameDrive,folderPath, uploadFileName, textDes);
 		waitForAndGetElement(hpAct.ELEMENT_ACTIVITY_TITLE.replace("${text}",textDes).replace("${file}",uploadFileName));
 
 	}
@@ -349,7 +373,7 @@ public class SOC_HomePage extends SOC_TestConfig_1 {
 	 *<li> Pre-Condition: </li>
 	 *<li> Post-Condition: </li>
 	 */
-	@Test
+	@Test(priority=5)
 	public  void test08_AddALink() {
 		info("Test 8: Add a link");
 		String textDes = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
@@ -392,7 +416,7 @@ public class SOC_HomePage extends SOC_TestConfig_1 {
 	 *<li> Pre-Condition: </li>
 	 *<li> Post-Condition: </li>
 	 */
-	@Test
+	@Test(priority=6)
 	public  void test09_LoadPreviousActivityPageAutomatically() {
 		info("Test 9: Load previous activity page automatically");
 
@@ -409,12 +433,12 @@ public class SOC_HomePage extends SOC_TestConfig_1 {
 		String textDesMedi= null;
 		String textDeslast= null;
 		
-		for(int i=0; i<=20; i++) {
+		for(int i=0; i<=10; i++) {
 			if(i==0){
 				textDesfirst=txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 				textDesMedi=textDesfirst;
 			}
-			else if(i==20){
+			else if(i==10){
 				textDeslast=txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 				textDesMedi=textDeslast;
 			}
@@ -442,7 +466,8 @@ public class SOC_HomePage extends SOC_TestConfig_1 {
 		JavascriptExecutor jse = (JavascriptExecutor)driver;
 		jse.executeScript("window.scrollBy(0,5500)", "");
 		waitForElementNotPresent(hpAct.ELEMENT_ACTIVITY_ELEMENT_IN_ACTIVITY_STREAM.replace("{$name}",textDesfirst));
-		Utils.pause(5000);
+		Utils.pause(2000);
+		hp.loadMoreActivities();
 		waitForAndGetElement(hpAct.ELEMENT_ACTIVITY_ELEMENT_IN_ACTIVITY_STREAM.replace("${title}",textDesfirst));
 	}
 
@@ -452,7 +477,7 @@ public class SOC_HomePage extends SOC_TestConfig_1 {
 	 *<li> Pre-Condition: </li>
 	 *<li> Post-Condition: </li>
 	 */
-	@Test
+	@Test(priority=7)
 	public  void test10_CheckAllActivitiesFilter() {
 		info("Test 10 Check [All activities] filter");
 		/*Step Number: 1
@@ -488,7 +513,7 @@ public class SOC_HomePage extends SOC_TestConfig_1 {
 	 *<li> Pre-Condition: </li>
 	 *<li> Post-Condition: </li>
 	 */
-	@Test
+	@Test(priority=8)
 	public  void test11_CheckMySpacesFilter() {
 		info("Test 11 Check [My Spaces] filter");
 		/*Step Number: 1
@@ -514,8 +539,8 @@ public class SOC_HomePage extends SOC_TestConfig_1 {
 		 *Expected Outcome: 
 			- It shows only activities created in space where the user is a member*/ 
 
-		click(hp.ELEMENT_PUBLICATION_DISPLAYMODE_ALLACTIVITIES);
-		click(hp.ELEMENT_PUBLICATION_DISPLAYMODE_MYSPACE_OPTION);
+		clickByJavascript(hp.ELEMENT_PUBLICATION_DISPLAYMODE_ALLACTIVITIES);
+		clickByJavascript(hp.ELEMENT_PUBLICATION_DISPLAYMODE_MYSPACE_OPTION);
 		waitForAndGetElement(hp.ELEMENT_PUBLICATION_DISPLAYMODE_MYSPACE);
 	}
 
@@ -525,7 +550,7 @@ public class SOC_HomePage extends SOC_TestConfig_1 {
 	 *<li> Pre-Condition: </li>
 	 *<li> Post-Condition: </li>
 	 */
-	@Test
+	@Test(priority=9)
 	public  void test12_CheckConnectionsFilter() {
 		info("Test 12 Check [Connections] filter");
 		/*Step Number: 1
@@ -550,8 +575,9 @@ public class SOC_HomePage extends SOC_TestConfig_1 {
 
 		 *Expected Outcome: 
 			shows only activities created by the user's connections and by the user himself, outside a space*/ 
-		click(hp.ELEMENT_PUBLICATION_DISPLAYMODE_ALLACTIVITIES);
-		click(hp.ELEMENT_PUBLICATION_DISPLAYMODE_CONNECTION_OPTION);
+		//click(hp.ELEMENT_PUBLICATION_DISPLAYMODE_ALLACTIVITIES);
+		clickByJavascript(hp.ELEMENT_PUBLICATION_DISPLAYMODE_MYSPACE);
+		clickByJavascript(hp.ELEMENT_PUBLICATION_DISPLAYMODE_CONNECTION_OPTION);
 		waitForAndGetElement(hp.ELEMENT_PUBLICATION_DISPLAYMODE_CONNECTION);
 	}
 
@@ -561,7 +587,7 @@ public class SOC_HomePage extends SOC_TestConfig_1 {
 	 *<li> Pre-Condition: </li>
 	 *<li> Post-Condition: </li>
 	 */
-	@Test
+	@Test(priority=10)
 	public  void test13_CheckMyActivitiesFilter() {
 		info("Test 13 Check [My Activities] filter");
 		/*Step Number: 1
@@ -586,9 +612,17 @@ public class SOC_HomePage extends SOC_TestConfig_1 {
 
 		 *Expected Outcome: 
 			shows only activities where the user has been @mentionned, the user has commented or liked, and the user's activities (inside and outside a space)*/ 
-
-		click(hp.ELEMENT_PUBLICATION_DISPLAYMODE_ALLACTIVITIES);
-		click(hp.ELEMENT_PUBLICATION_DISPLAYMODE_MYACTIVITIES_OPTION);
+		if(browser.contains("iexplorer")){
+			clickByJavascript(hp.ELEMENT_PUBLICATION_DISPLAYMODE_CONNECTION);
+			waitForAndGetElement(hp.ELEMENT_PUBLICATION_DISPLAYMODE_MYACTIVITIES_OPTION, DEFAULT_TIMEOUT, 1);
+			clickByJavascript(hp.ELEMENT_PUBLICATION_DISPLAYMODE_MYACTIVITIES_OPTION);
+		}
+		else{
+			waitForAndGetElement(hp.ELEMENT_PUBLICATION_DISPLAYMODE_ALLACTIVITIES, DEFAULT_TIMEOUT, 1);
+			click(hp.ELEMENT_PUBLICATION_DISPLAYMODE_ALLACTIVITIES);
+			waitForAndGetElement(hp.ELEMENT_PUBLICATION_DISPLAYMODE_MYACTIVITIES_OPTION, DEFAULT_TIMEOUT, 1);
+			click(hp.ELEMENT_PUBLICATION_DISPLAYMODE_MYACTIVITIES_OPTION);
+		}
 		waitForAndGetElement(hp.ELEMENT_PUBLICATION_DISPLAYMODE_MYACTIVITIES);
 	}
 
@@ -598,7 +632,7 @@ public class SOC_HomePage extends SOC_TestConfig_1 {
 	 *<li> Pre-Condition: </li>
 	 *<li> Post-Condition: </li>
 	 */
-	@Test
+	@Test(priority=11)
 	public  void test14_CheckActivitiesOrder() {
 		info("Test 14 Check activities order");
 
@@ -622,16 +656,16 @@ public class SOC_HomePage extends SOC_TestConfig_1 {
 		hpAct.addActivity(activity2, "");
 		String comment = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 
-		waitForAndGetElement(hp.ELEMENT_PUBLICATION_DISPLAYORDER.replace("${number}", "1").replace("${title}", activity2));
-		waitForAndGetElement(hp.ELEMENT_PUBLICATION_DISPLAYORDER.replace("${number}", "2").replace("${title}", activity1));
-
-		click((hp.ELEMENT_PUBLICATION_COMMENT_STATUS).replace("${title}", activity1));
-		type((hp.ELEMENT_PUBLICATION_COMMENTTEXTBOX_STATUS).replace("${title}",activity1), comment, false);
-		click(hp.ELEMENT_PUBLICATION_COMMENTBTN_STATUS.replace("${title}", activity1));
-
+		info("verify order of 2 nodes after added");
 		driver.navigate().refresh();
-		waitForAndGetElement(hp.ELEMENT_PUBLICATION_DISPLAYORDER.replace("${number}", "1").replace("${title}", activity1));
 		waitForAndGetElement(hp.ELEMENT_PUBLICATION_DISPLAYORDER.replace("${number}", "2").replace("${title}", activity2));
+		waitForAndGetElement(hp.ELEMENT_PUBLICATION_DISPLAYORDER.replace("${number}", "3").replace("${title}", activity1));
+		
+		info("comment in activity1");
+		hpAct.addComment(activity1, comment);
+		driver.navigate().refresh();
+		waitForAndGetElement(hp.ELEMENT_PUBLICATION_DISPLAYORDER.replace("${number}", "2").replace("${title}", activity1));
+		waitForAndGetElement(hp.ELEMENT_PUBLICATION_DISPLAYORDER.replace("${number}", "3").replace("${title}", activity2));
 	}
 
 	/**
@@ -640,7 +674,7 @@ public class SOC_HomePage extends SOC_TestConfig_1 {
 	 *<li> Pre-Condition: </li>
 	 *<li> Post-Condition: </li>
 	 */
-	@Test
+	@Test(priority=12)
 	public  void test16_CheckLayoutOfActivities() {
 		info("Test 16 Check Layout of Activities");
 
@@ -681,7 +715,7 @@ public class SOC_HomePage extends SOC_TestConfig_1 {
 	 *<li> Pre-Condition: </li>
 	 *<li> Post-Condition: </li>
 	 */
-	@Test
+	@Test(priority=13)
 	public  void test17_ViewComments() {
 		info("Test 17 View Comments");
 
@@ -726,7 +760,7 @@ public class SOC_HomePage extends SOC_TestConfig_1 {
 		waitForAndGetElement(hpAct.ELEMENT_COMMENT_TEXT.replace("${activityText}",name).replace("${commentText}",commentlast));
 		waitForElementNotPresent(hpAct.ELEMENT_COMMENT_TEXT.replace("${activityText}",name).replace("${commentText}",commentfirst));
 		info("Verify that view all comment links is shown and clickable on it");
-		click(hpAct.ELEMENT_PUBLICATION_SEEALLCOMMENTBTN.replace("${activity}",name));
+		clickByJavascript(hpAct.ELEMENT_PUBLICATION_SEEALLCOMMENTBTN.replace("${activity}",name));
 
 		info("Verify that all comments is shown");
 		waitForAndGetElement(hpAct.ELEMENT_COMMENT_TEXT.replace("${activityText}",name).replace("${commentText}",commentSecondlast));
@@ -740,7 +774,7 @@ public class SOC_HomePage extends SOC_TestConfig_1 {
 	 *<li> Pre-Condition: </li>
 	 *<li> Post-Condition: </li>
 	 */
-	@Test
+	@Test(priority=14)
 	public  void test18_MentionAUserInComment() {
 		info("Test 18 Mention a user in comment");
 
@@ -769,7 +803,7 @@ public class SOC_HomePage extends SOC_TestConfig_1 {
 	 *<li> Pre-Condition: </li>
 	 *<li> Post-Condition: </li>
 	 */
-	@Test
+	@Test(priority=15)
 	public  void test19_RelationActivity() {
 		info("Test 19 Relation Activity");
 		/*Step Number: 1
@@ -799,7 +833,7 @@ public class SOC_HomePage extends SOC_TestConfig_1 {
 		hp.goToConnections();
 		connMag.acceptAConnection(DATA_USER1);
 		hp.goToHomePage();
-		waitForAndGetElement(hpAct.ELEMENT_PUBLICATION_ACTIVITYTEXT_CONNECTED.replace("${user}","John Smith"));
+		waitForAndGetElement(hpAct.ELEMENT_PUBLICATION_ACTIVITYTEXT_CONNECTED.replace("${user}","John Smith"), DEFAULT_TIMEOUT, 1);
 	    
 	}
 
@@ -810,7 +844,7 @@ public class SOC_HomePage extends SOC_TestConfig_1 {
 	 *<li> Post-Condition: </li>
 	 *
 	 */
-	@Test
+	@Test(priority=16)
 	public  void test20_CreateASpace() {
 		info("Test 20 Create a new space");
 
@@ -851,7 +885,7 @@ public class SOC_HomePage extends SOC_TestConfig_1 {
 	 *<li> Pre-Condition: </li>
 	 *<li> Post-Condition: </li>
 	 */
-	@Test
+	@Test(priority=25)
 	public  void test24_UpdateProfileChangeOfAvatar() {
 		info("Test 24: Update Profile - change of avatar");
 
@@ -884,7 +918,7 @@ public class SOC_HomePage extends SOC_TestConfig_1 {
 	 *<li> Pre-Condition: </li>
 	 *<li> Post-Condition: </li>
 	 */
-	@Test
+	@Test(priority=20)
 	public  void test25_UpdateProfileUpdateBasicInformation() {
 		info("Test 25 Update Profile - Update Basic information");
 		/*Step Number: 1
@@ -914,7 +948,7 @@ public class SOC_HomePage extends SOC_TestConfig_1 {
 	 *<li> Pre-Condition: </li>
 	 *<li> Post-Condition: </li>
 	 */
-	@Test
+	@Test(priority=21)
 	public  void test26_CheckOrderOfTheActivities() {
 		info("Test 26 Check order of the activities");
 
@@ -958,9 +992,9 @@ public class SOC_HomePage extends SOC_TestConfig_1 {
 
 		hp.goToHomePage();
 
-		waitForAndGetElement(hp.ELEMENT_PUBLICATION_DISPLAYORDER_WEBCONTENT.replace("${number}", "3"));
-		waitForAndGetElement(hp.ELEMENT_PUBLICATION_DISPLAYORDER_FILE.replace("${number}", "2"));
-		waitForAndGetElement(hp.ELEMENT_PUBLICATION_DISPLAYORDER_PRODUCT.replace("${number}", "1"));
+		waitForAndGetElement(hp.ELEMENT_PUBLICATION_DISPLAYORDER_WEBCONTENT.replace("${number}", "4"), DEFAULT_TIMEOUT, 1);
+		waitForAndGetElement(hp.ELEMENT_PUBLICATION_DISPLAYORDER_FILE.replace("${number}", "3"), DEFAULT_TIMEOUT, 1);
+		waitForAndGetElement(hp.ELEMENT_PUBLICATION_DISPLAYORDER_PRODUCT.replace("${number}", "2"), DEFAULT_TIMEOUT, 1);
 	}
 
 	/**
@@ -1054,7 +1088,7 @@ public class SOC_HomePage extends SOC_TestConfig_1 {
 	 *<li> Pre-Condition: a space activity is shared in the activity stream</li>
 	 *<li> Post-Condition: </li>
 	 */
-	@Test
+	@Test(priority=19)
 	public  void test23_PromoteAMemberAsManager() {
 		info("Test 23: Promote a member as manager");
 	
@@ -1107,7 +1141,7 @@ public class SOC_HomePage extends SOC_TestConfig_1 {
 	 *<li> Post-Condition: </li>
 	 *
 	 */
-	@Test
+	@Test(priority=17)
 	public  void test21_UserJoinASpace() {
 		info("Test 21: User join a space");
 	
@@ -1178,7 +1212,7 @@ public class SOC_HomePage extends SOC_TestConfig_1 {
 	 *<li> Post-Condition: </li>
 	 *
 	 */
-	@Test
+	@Test(priority=18)
 	public  void test22_RenameASpace() {
 		info("Test 22: Rename a Space");
 	

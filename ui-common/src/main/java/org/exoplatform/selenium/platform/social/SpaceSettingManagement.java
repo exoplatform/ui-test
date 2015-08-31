@@ -65,17 +65,18 @@ public class SpaceSettingManagement extends SpaceLocator{
 	public void inviteUser(String userName,boolean verify,String fullName){
 		goToMemberTab();
 		info("Click on select user button");
-		click(ELEMENT_SPACE_MEMBERS_SELECT_USER);
+		clickByJavascript(ELEMENT_SPACE_MEMBERS_SELECT_USER, 2);
 		info("--Search user " + user + "--");
 		type(ELEMENT_SEARCH_INPUT_USER_NAME,userName, true);
-		click(ELEMENT_SEARCH_USERS_ICON);
+		clickByJavascript(ELEMENT_SEARCH_USERS_ICON, 2);
 		Utils.pause(2000);
 		info("Select a user");
-		check(ELEMENT_SPACE_SELECT_USER_IN_FORM.replace("{$name}",userName),2);
+		//check(ELEMENT_SPACE_SELECT_USER_IN_FORM.replace("{$name}",userName),2);
+		clickByJavascript(ELEMENT_SPACE_SELECT_USER_IN_FORM.replace("{$name}",userName),2);
 		info("click on Add button");
-		click(ELEMENT_ADD);
+		clickByJavascript(ELEMENT_ADD, 2);
 		info("click on Invite button");
-		click(ELEMENT_SPACE_MEMBERS_INVITE);
+		clickByJavascript(ELEMENT_SPACE_MEMBERS_INVITE, 2);
 		if (verify) {
 			info("Verify that user is shown in invitation table");
 			if(fullName!="" && fullName!=null)
@@ -92,7 +93,7 @@ public class SpaceSettingManagement extends SpaceLocator{
 		info("OPen members tab");
 		click(ELEMENT_SPACE_SETTINGS_MEMBERS_TAB);
 		info("Click on change role button of manager column");
-		click(ELEMENT_SPACE_CHANGE_ROLE_USER_MEMBER.replace("${user}",user));
+		clickByJavascript(ELEMENT_SPACE_CHANGE_ROLE_USER_MEMBER.replace("${user}",user));
 		Utils.pause(2000);
 
 	}
@@ -243,13 +244,17 @@ public class SpaceSettingManagement extends SpaceLocator{
 	 */
 	public void addANodeSimple(String name){
 		info("Click on Add node button");
-		waitForAndGetElement(ELEMENT_SPACE_NAVIGATION_ADD_NODE_BUTTON,3000,0).click();
+		//waitForAndGetElement(ELEMENT_SPACE_NAVIGATION_ADD_NODE_BUTTON,3000,0).click();
+		waitForAndGetElement(ELEMENT_SPACE_NAVIGATION_ADD_NODE_BUTTON,DEFAULT_TIMEOUT, 1);
+		clickByJavascript(ELEMENT_SPACE_NAVIGATION_ADD_NODE_BUTTON, 2);
 		info("The popup is shown");
 		waitForAndGetElement(ELEMENT_SPACE_NAVIGATION_ADD_EDIT_NODE_TITLE,2000,0);
 		info("Input a new name for the node");
 		type(ELEMENT_SPACE_NAVIGATION_ADD_EDIT_POPUP_NAME,name,true);
 		info("Save all changes");
-		waitForAndGetElement(ELEMENT_SPACE_NAVIGATION_ADD_EDIT_POPUP_SAVE,2000,0).click();
+		//waitForAndGetElement(ELEMENT_SPACE_NAVIGATION_ADD_EDIT_POPUP_SAVE,2000,0).click();
+		waitForAndGetElement(ELEMENT_SPACE_NAVIGATION_ADD_EDIT_POPUP_SAVE,DEFAULT_TIMEOUT,1);
+		clickByJavascript(ELEMENT_SPACE_NAVIGATION_ADD_EDIT_POPUP_SAVE, 2);
 		info("Verify that the node is added successfully");
 		waitForAndGetElement(ELEMENT_SPACE_NAVIGATION_ADD_NODE_LIST.replace("${name}", name),3000,0);
 		Utils.pause(1000);
@@ -321,7 +326,8 @@ public class SpaceSettingManagement extends SpaceLocator{
 	public void setPermissionForSpace(String[] arrayRight){
 		for(String right: arrayRight){
 			info("Select a permission for space:"+right);
-			check(ELEMENT_ACCESS_PERMISSION_RADIO.replace("${right}", right),2);
+			//check(ELEMENT_ACCESS_PERMISSION_RADIO.replace("${right}", right),2);
+			clickByJavascript(ELEMENT_ACCESS_PERMISSION_RADIO.replace("${right}", right),2);
 		}
 		info("Save all changes");
 		if(waitForAndGetElement(ELEMENT_ACCESS_PERMISSION_SAVE_BTN,3000,0)!=null){
@@ -347,7 +353,10 @@ public class SpaceSettingManagement extends SpaceLocator{
 	 */
 	public void deleteANode(String nodeName){
 		info("Right click on the node");
+		//Actions actions = new Actions(driver);
 		rightClickOnElement(ELEMENT_SPACE_NAVIGATION_ADD_NODE_LIST.replace("${name}", nodeName));
+		/*WebElement el = waitForAndGetElement(ELEMENT_SPACE_NAVIGATION_ADD_NODE_LIST.replace("${name}", nodeName),  DEFAULT_TIMEOUT, 1);
+		actions.moveToElement(el).contextClick().perform();*/
 		info("Select delete link");
 		waitForAndGetElement(ELEMENT_SPACE_NAVIGATION_CONTEXT_MENU_DELETE,2000,0).click();
 		alert.acceptAlert();

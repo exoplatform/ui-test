@@ -113,7 +113,9 @@ public class Calendar_Event_Recurring extends PlatformBase {
 			- Changes are appliyed for current & following events*/ 
 		cHome.goToEditEventTaskFormByRightClick(titleEvent, selectViewOption.WEEK, selectDayOption.DETAILTIME, getDate(1,"MMM dd yyyy"));
 		event.inputDataEventInDetailForm(titleEvent2, contentEvent2, null,null, false);
-		click(event.ELEMENT_BUTTON_EVENT_SAVE_DETAILS);
+		//click(event.ELEMENT_BUTTON_EVENT_SAVE_DETAILS);
+		waitForAndGetElement(event.ELEMENT_BUTTON_EVENT_SAVE_DETAILS, DEFAULT_TIMEOUT, 1);
+		clickByJavascript(event.ELEMENT_BUTTON_EVENT_SAVE_DETAILS, 2);
 		event.editRecurringEvent(recurringType.FOLLOW_EVENT, true);
 		cHome.verifyIsPresentEventTaskWithDateTime(titleEvent, getDate(0,"MMM dd yyyy"), selectViewOption.MONTH, selectDayOption.DETAILTIME);
 		cHome.verifyIsPresentEventTaskWithDateTime(titleEvent2, getDate(1,"MMM dd yyyy"), selectViewOption.MONTH, selectDayOption.DETAILTIME);
@@ -219,7 +221,9 @@ public class Calendar_Event_Recurring extends PlatformBase {
 			- Changes are restricted to the edited recurring event*/ 
 		cHome.goToEditEventTaskFormByRightClick(titleEvent, selectViewOption.WEEK, selectDayOption.DETAILTIME, getDate(0,"MMM dd yyyy"));
 		event.inputDataEventInDetailForm(titleEvent2, contentEvent2, null,null, false);
-		click(event.ELEMENT_BUTTON_EVENT_SAVE_DETAILS);
+		//click(event.ELEMENT_BUTTON_EVENT_SAVE_DETAILS);
+		waitForAndGetElement(event.ELEMENT_BUTTON_EVENT_SAVE_DETAILS, DEFAULT_TIMEOUT, 1);
+		clickByJavascript(event.ELEMENT_BUTTON_EVENT_SAVE_DETAILS, 2);
 		event.editRecurringEvent(recurringType.ONLY_EVENT, true);
 		cHome.verifyIsNotPresentEventTaskWithDateTime(titleEvent, getDate(0,"MMM dd yyyy"), selectViewOption.MONTH, selectDayOption.DETAILTIME);
 		cHome.verifyIsPresentEventTaskWithDateTime(titleEvent2, getDate(0,"MMM dd yyyy"), selectViewOption.MONTH, selectDayOption.DETAILTIME);
@@ -388,7 +392,9 @@ public class Calendar_Event_Recurring extends PlatformBase {
 			- Changes are appliyed for all events*/ 
 		cHome.goToEditEventTaskFormByRightClick(titleEvent, selectViewOption.DAY, selectDayOption.DETAILTIME,getDate(0,"MMM dd yyyy"));
 		event.inputDataEventInDetailForm(titleEvent2, contentEvent2, null,null, false);
-		click(event.ELEMENT_BUTTON_EVENT_SAVE_DETAILS);
+		//click(event.ELEMENT_BUTTON_EVENT_SAVE_DETAILS);
+		waitForAndGetElement(event.ELEMENT_BUTTON_EVENT_SAVE_DETAILS, DEFAULT_TIMEOUT, 1);
+		clickByJavascript(event.ELEMENT_BUTTON_EVENT_SAVE_DETAILS, 2);
 		event.editRecurringEvent(recurringType.ALL_EVENT, true);
 		cHome.verifyIsNotPresentEventTaskWithDateTime(titleEvent, getDate(0,"MMM dd yyyy"), selectViewOption.MONTH, selectDayOption.DETAILTIME);
 		cHome.verifyIsNotPresentEventTaskWithDateTime(titleEvent, getDate(1,"MMM dd yyyy"), selectViewOption.MONTH, selectDayOption.DETAILTIME);

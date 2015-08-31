@@ -78,7 +78,7 @@ public class MyDashBoard extends PlatformBase {
 	 */
 	public void deleteGadget(String name){
 		info("Click on Delete button");
-		click(ELEMENT_MYDASH_DELETE_GADGET.replace("${name}", name));
+		clickByJavascript(ELEMENT_MYDASH_DELETE_GADGET.replace("${name}", name));
 		magAlert.acceptAlert();
 		waitForElementNotPresent(ELEMENT_MYDASH_DELETE_GADGET.replace("${name}", name));
 		info("The gadget is deleted successfully");
@@ -91,7 +91,7 @@ public class MyDashBoard extends PlatformBase {
 	 */
 	public void addRemoteGadget(String url,String name){
 		info("Open add gadget popup");
-		click(ELEMENT_MYDASH_BTN_ADDGADGET);
+		clickByJavascript(ELEMENT_MYDASH_BTN_ADDGADGET);
 		info("Input a url link");
 		if(browser.contains("iexplorer"))
 		typeByJavascript("url", url);

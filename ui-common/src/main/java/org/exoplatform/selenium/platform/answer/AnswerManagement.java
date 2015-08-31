@@ -1,5 +1,6 @@
 package org.exoplatform.selenium.platform.answer;
 
+import org.exoplatform.selenium.Utils;
 import org.openqa.selenium.WebDriver;
 
 import static org.exoplatform.selenium.TestLogger.info;
@@ -18,6 +19,7 @@ public class AnswerManagement  extends AnswerLocator {
 	 */
 	public void goToAnswerQuestion(String question){
 		info("Go to answer a question");
+		Utils.pause(3000);
 		if(waitForAndGetElement(ELEMENT_QUESTION_LIST_ITEM.replace("$question", question),5000,0)!=null)
 			click(ELEMENT_QUESTION_LIST_ITEM.replace("$question", question));
 		waitForAndGetElement(ELEMENT_QUESTION_SELECTED_ITEM.replace("$question", question));

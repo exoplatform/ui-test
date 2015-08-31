@@ -12,7 +12,7 @@ public class Wiki_Information extends Wiki_TestConfig {
 	 *<li> Pre-Condition: </li>
 	 *<li> Post-Condition:</li>
 	 */
-	@Test
+	@Test (priority=1)
 	public  void test01_ViewGeneralPageInformation() {
 		info("Test 01: View General Page information");
 		String title = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
@@ -80,7 +80,7 @@ public class Wiki_Information extends Wiki_TestConfig {
 	 *<li> Pre-Condition: </li>
 	 *<li> Post-Condition:</li>
 	 */
-	@Test
+	@Test (priority=2)
 	public  void test02_ViewHistoryToCompareVersions() {
 		info("Test 02: View Page history to compare versions");
 		String title = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
@@ -167,7 +167,7 @@ public class Wiki_Information extends Wiki_TestConfig {
 	 *<li> Pre-Condition: </li>
 	 *<li> Post-Condition:</li>
 	 */
-	@Test
+	@Test (priority=3)
 	public  void test03_ViewPageInfo() {
 		info("Test 03: View Page info");
 		String title = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
@@ -238,85 +238,6 @@ public class Wiki_Information extends Wiki_TestConfig {
 		hp.goToWiki();
 		wHome.deleteWiki(title);
 	}
-	
-	/**
-	 *<li> Case ID:122872.</li>
-	 *<li> Test Case Name: Version creation</li>
-	 *<li> Pre-Condition: </li>
-	 *<li> Post-Condition:</li>
-	 */
-	@Test
-	public  void test04_VersionCreation() {
-		info("Test 04: Version creation");
-		String title = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
-		String newTitle = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
-		String link = fData.getAttachFileByArrayTypeRandom(1);
-		
-		/*Step Number: 1
-		 *Step Name: Step 1:  Create new wiki page
-		 *Step Description: 
-			- Add new wiki page 
-		 *Input Data: 
-
-		 *Expected Outcome: 
-			New wiki page is created with version is V1*/ 
-		
-		info("Create a new wiki page");
-		hp.goToWiki();
-		wHome.goToAddBlankPage();
-		rtMode.addSimplePage(title,title);
-		wikiMg.saveAddPage();
-		waitForAndGetElement(wHome.ELEMENT_TREE_WIKI_NAME.replace("${name}",title),2000,0);
-		
-		info("Verify that New wiki page is created with version is V1");
-		wHome.viewInformationTable(title, "V1");
-		
-		/*Step Number: 2
-		 *Step Name: Step 2:  Edit title/wiki content by click [Edit] icon
-		 *Step Description: 
-			- Click edit icon
-			- Edit title or content or edit both
-			- Save
-			- View page version  
-		 *Input Data: 
-
-		 *Expected Outcome: 
-			New version is created*/ 
-		
-		info("Edit the page");
-		wHome.goToEditPage();
-		rtMode.editSimplePage(newTitle,newTitle);
-		wikiMg.saveAddPage();
-		waitForAndGetElement(wHome.ELEMENT_TREE_WIKI_NAME.replace("${name}",newTitle),2000,0);
-		
-		info("Verify that New wiki page is created with version is V2");
-		wHome.viewInformationTable(newTitle, "V2");
-		
-		/*Step Number: 3
-		 *Step Name: Step 3: upload/delete attachment
-		 *Step Description: 
-			- Click attachment icon at information area at the top of page
-			- Add new attachment
-			- Delete attachment
-			- View page version  
-		 *Input Data: 
-
-		 *Expected Outcome: 
-			No version is created*/ 
-		info("Click on attachment icon at information area at the top of page");
-		waitForAndGetElement(wikiMg.ELEMENT_WIKI_PAGE_INFORMATION_AREA_TOTAL_ATTACHEDFILES.replace("${number}","0"),2000,0).click();
-		info("Add new attachment");
-		rtMode.attachFile("TestData/"+link);
-		info("Delete attachment");
-		wikiMg.deleteAttachmentFile();
-		
-		info("Verify that New wiki page is created with version still is V2. No version is created");
-		wHome.viewInformationTable(newTitle, "V2");
-		
-		info("Delete the page");
-		hp.goToWiki();
-		wHome.deleteWiki(newTitle);
-	}
 
 	/**
 	 *<li> Case ID:122854.</li>
@@ -324,7 +245,7 @@ public class Wiki_Information extends Wiki_TestConfig {
 	 *<li> Pre-Condition: </li>
 	 *<li> Post-Condition:</li>
 	 */
-	@Test
+	@Test (priority=5)
 	public  void test06_AddRelationWithIntranetPortal() {
 		info("Test 06: Add relations with Intranet portal");
 		String space1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
@@ -447,7 +368,7 @@ public class Wiki_Information extends Wiki_TestConfig {
 	 *<li> Pre-Condition: </li>
 	 *<li> Post-Condition:</li>
 	 */
-	@Test
+	@Test (priority=6)
 	public void test07_AddRelationFrom2DiffenentSpaces() {
 		info("Test 07: Add relations from 2 different spaces");
 		String space1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
@@ -568,7 +489,7 @@ public class Wiki_Information extends Wiki_TestConfig {
 	 *<li> Pre-Condition: </li>
 	 *<li> Post-Condition:</li>
 	 */
-	@Test
+	@Test (priority=4)
 	public void test05_AddRelationInCaseThereIsNoSpace() {
 		info("Test 05: Add relation in the case there is no space");
 		String title1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
@@ -636,7 +557,7 @@ public class Wiki_Information extends Wiki_TestConfig {
 	 *<li> Pre-Condition: </li>
 	 *<li> Post-Condition:</li>
 	 */
-	@Test
+	@Test (priority=7)
 	public void test08_AddRelationWithSameSpace() {
 		info("Test 08: Add relations in same space");
 		String space1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
@@ -747,7 +668,7 @@ public class Wiki_Information extends Wiki_TestConfig {
 	 *<li> Pre-Condition: </li>
 	 *<li> Post-Condition:</li>
 	 */
-	@Test
+	@Test (priority=8)
 	public void test09_DeleteRelation() {
 		info("Test 09: Delete relations");
 		String space1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
@@ -877,7 +798,86 @@ public class Wiki_Information extends Wiki_TestConfig {
 		
 		/*info("Delete data test");
 		hp.goToMySpaces();
-		spaMg.deleteSpace(space1,false);*/
-	    
+		spaMg.deleteSpace(space1,false);*/ 
 	}	
+	
+	/**
+	 *<li> Case ID:122872.</li>
+	 *<li> Test Case Name: Version creation</li>
+	 *<li> Pre-Condition: </li>
+	 *<li> Post-Condition:</li>
+	 */
+	@Test (priority=9)
+	public  void test04_VersionCreation() {
+		info("Test 04: Version creation");
+		String title = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+		String newTitle = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+		String link = fData.getAttachFileByArrayTypeRandom(1);
+		
+		/*Step Number: 1
+		 *Step Name: Step 1:  Create new wiki page
+		 *Step Description: 
+			- Add new wiki page 
+		 *Input Data: 
+
+		 *Expected Outcome: 
+			New wiki page is created with version is V1*/ 
+		
+		info("Create a new wiki page");
+		hp.goToWiki();
+		wHome.goToAddBlankPage();
+		rtMode.addSimplePage(title,title);
+		wikiMg.saveAddPage();
+		waitForAndGetElement(wHome.ELEMENT_TREE_WIKI_NAME.replace("${name}",title),2000,0);
+		
+		info("Verify that New wiki page is created with version is V1");
+		wHome.viewInformationTable(title, "V1");
+		
+		/*Step Number: 2
+		 *Step Name: Step 2:  Edit title/wiki content by click [Edit] icon
+		 *Step Description: 
+			- Click edit icon
+			- Edit title or content or edit both
+			- Save
+			- View page version  
+		 *Input Data: 
+
+		 *Expected Outcome: 
+			New version is created*/ 
+		
+		info("Edit the page");
+		wHome.goToEditPage();
+		rtMode.editSimplePage(newTitle,newTitle);
+		wikiMg.saveAddPage();
+		waitForAndGetElement(wHome.ELEMENT_TREE_WIKI_NAME.replace("${name}",newTitle),2000,0);
+		
+		info("Verify that New wiki page is created with version is V2");
+		wHome.viewInformationTable(newTitle, "V2");
+		
+		/*Step Number: 3
+		 *Step Name: Step 3: upload/delete attachment
+		 *Step Description: 
+			- Click attachment icon at information area at the top of page
+			- Add new attachment
+			- Delete attachment
+			- View page version  
+		 *Input Data: 
+
+		 *Expected Outcome: 
+			No version is created*/ 
+		info("Click on attachment icon at information area at the top of page");
+		waitForAndGetElement(wikiMg.ELEMENT_WIKI_PAGE_INFORMATION_AREA_TOTAL_ATTACHEDFILES.replace("${number}","0"),2000,0).click();
+		info("Add new attachment");
+		//rtMode.attachFile("TestData/"+link);
+		sourceEditor.attachFile("TestData/"+link);
+		info("Delete attachment");
+		wikiMg.deleteAttachmentFile();
+		
+		info("Verify that New wiki page is created with version still is V2. No version is created");
+		wHome.viewInformationTable(newTitle, "V2");
+		
+		info("Delete the page");
+		hp.goToWiki();
+		wHome.deleteWiki(newTitle);
+	}
 }

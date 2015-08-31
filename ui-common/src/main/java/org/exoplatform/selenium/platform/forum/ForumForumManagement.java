@@ -80,10 +80,12 @@ public class ForumForumManagement extends PlatformBase {
 	 */
 	public void addForumSimple(String nameForum, String order, String description) {
 		// TODO Auto-generated method stub
-		waitForAndGetElement(ELEMENT_ACTIONBAR_ADDFORUM,3000,0);
+		info("Add forum simple");
+		waitForAndGetElement(ELEMENT_ACTIONBAR_ADDFORUM,DEFAULT_TIMEOUT,1);
 		info("click on Add forum button");
 		click(ELEMENT_ACTIONBAR_ADDFORUM);
 	    info("input the title for the forum");
+	    waitForAndGetElement(ELEMENT_ADDFORUM_POPUP_TITLE, DEFAULT_TIMEOUT, 1);
 	    type(ELEMENT_ADDFORUM_POPUP_TITLE,nameForum,true);
 	    
 	    info("check and input Oder field");

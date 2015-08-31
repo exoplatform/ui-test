@@ -25,6 +25,8 @@ public class QuestionManagement extends AnswerLocator {
 	 */
 	public void goToManageQuestionForm(){
 		info("Go to mange question");
+		Utils.pause(2000);
+		waitForAndGetElement(ELEMENT_MANAGE_QUESTION_BUTTON, DEFAULT_TIMEOUT, 1);
 		click(ELEMENT_MANAGE_QUESTION_BUTTON);
 		waitForAndGetElement(ELEMENT_MANAGE_QUESTION_FORM);
 	}
@@ -34,7 +36,9 @@ public class QuestionManagement extends AnswerLocator {
 	 */
 	public void goToSubmitQuestion(){
 		info("Open submin question form");
-		click(ELEMENT_SUBMIT_QUESTION,0,true);
+		Utils.pause(2000);
+		waitForAndGetElement(ELEMENT_SUBMIT_QUESTION, DEFAULT_TIMEOUT, 1);
+		clickByJavascript(ELEMENT_SUBMIT_QUESTION);
 		waitForAndGetElement(ELEMENT_SUBMIT_QUESTION_FORM);
 	}
 
@@ -91,6 +95,7 @@ public class QuestionManagement extends AnswerLocator {
 	 */
 	public void goToActionOfQuestionByRightClick(String question, actionQuestionOption action){
 		info("Select action from menu");
+		Utils.pause(3000);
 		rightClickOnElement(ELEMENT_QUESTION_LIST_ITEM.replace("$question", question));
 		switch(action){
 		case COMMENT:
@@ -176,7 +181,7 @@ public class QuestionManagement extends AnswerLocator {
 		info("Delete question");
 		goToActionOfQuestionByRightClick(question, actionQuestionOption.DELETE);
 		waitForAndGetElement(ELEMENT_QUESTION_CONFIRM_DELETE);
-		click(ELEMENT_QUESTION_DELETE_FORM_OK_BUTTON);
+		clickByJavascript(ELEMENT_QUESTION_DELETE_FORM_OK_BUTTON, 2);
 		waitForElementNotPresent(ELEMENT_QUESTION_LIST_ITEM.replace("$question", question));
 	}
 

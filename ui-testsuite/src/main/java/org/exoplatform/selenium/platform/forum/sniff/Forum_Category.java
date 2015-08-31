@@ -196,7 +196,7 @@ public class Forum_Category extends Forum_TestConfig{
 		 *Input Data: 
 
 		 *Expected Outcome: 
-			Category is imported successfully*/ 
+			Category is imported successfully */
 		info("Delete category");
 		forumCatMag.deleteCategory(nameCat);
 		

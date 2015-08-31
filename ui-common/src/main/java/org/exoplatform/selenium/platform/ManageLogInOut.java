@@ -6,6 +6,7 @@ import org.exoplatform.selenium.ManageAlert;
 import org.exoplatform.selenium.Utils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class ManageLogInOut extends PlatformBase {
@@ -145,14 +146,12 @@ public class ManageLogInOut extends PlatformBase {
 		}
 		else{
 			info("login normally if not use SSO with user " + username + " and pass " + password);
-				type(ELEMENT_INPUT_USERNAME, username, true);
-				type(ELEMENT_INPUT_PASSWORD, password, true);
-			    click(ELEMENT_SIGN_IN_BUTTON,0,true);
+			type(ELEMENT_INPUT_USERNAME, username, true);
+			type(ELEMENT_INPUT_PASSWORD, password, true);
+			clickByJavascript(ELEMENT_SIGN_IN_BUTTON, 2);
 			if(verify)
 				waitForElementNotPresent(ELEMENT_SIGN_IN_BUTTON);
 		}
-		//Utils.pause(3000);
-		//driver.navigate().refresh();
 	}
 	/**
 	 * Log in via OpenAM
@@ -200,7 +199,7 @@ public class ManageLogInOut extends PlatformBase {
 			info("Retry...[" + repeat + "]");
 			driver.navigate().refresh();
 		}
-		click(ELEMENT_SIGN_OUT_LINK);
+		clickByJavascript(ELEMENT_SIGN_OUT_LINK,2);
 		if(browser.contains("iexplorer")){
 			if(waitForAndGetElement(ELEMENT_ACCOUNT_NAME_LINK,2000,0)!=null){
 				info("Clear cache and reconnect to the package");
@@ -213,6 +212,15 @@ public class ManageLogInOut extends PlatformBase {
 		if ( ExpectedConditions.alertIsPresent() != null ){
 			magAlert = new ManageAlert(driver);
 			magAlert.acceptAlert();
+		}
+		WebElement logOutSucess = waitForAndGetElement(ELEMENT_ACCOUNT_NAME_LINK, 3000, 0);
+		if (logOutSucess != null){
+			info("Because issue: in jboss, logout then come back homepage, we have to close IE and init the new one");
+			driver.manage().deleteAllCookies();
+			driver.get(baseUrl);
+		}
+		else{
+			info("Logout sucessfully");
 		}
 	}
 	/**

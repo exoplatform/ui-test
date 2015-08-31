@@ -22,7 +22,7 @@ public class PlatformPermission extends PlatformBase {
 	public final String ELEMENT_USER_LIST="//*[@id='UIListUsers']//*[contains(.,'${user}')]";
 	public final By ELEMENT_ADD_USERS_BUTTON = By.xpath("//*[@id='UIUserSelector']//*[text()='Add']");
 	public final By ELEMENT_SEARCH_USER_INPUT = By.id("Quick Search");
-	public final By ELEMENT_QUICK_SEARCH_BUTTON = By.xpath("//a[@data-original-title='Quick Search']");
+	public final By ELEMENT_QUICK_SEARCH_BUTTON = By.xpath("//a[@data-original-title='Quick Search']/i");
 	public final By ELEMENT_SELECT_SEARCH = By.name("filter");
 	public final By ELEMENT_USER_CLOSE_BUTTON = By.xpath("//*[@id='UIUserSelector']//*[contains(@class,'btn')][contains(.,'Close')]");
 	//Group permission
@@ -68,6 +68,7 @@ public class PlatformPermission extends PlatformBase {
 		}
 		Utils.pause(500);
 		click(ELEMENT_QUICK_SEARCH_BUTTON);
+		//clickByJavascript(ELEMENT_QUICK_SEARCH_BUTTON);
 		waitForAndGetElement((ELEMENT_USER_CHECKBOX.replace("${user}", keySearch)),5000,1,2);
 	}
 
@@ -91,7 +92,8 @@ public class PlatformPermission extends PlatformBase {
 					click(ELEMENT_SELECT_USER_ICON);
 				searchUser(temp[i], type);
 				Utils.pause(1000);
-				check((ELEMENT_USER_CHECKBOX.replace("${user}", temp[i])), 2);
+				//check((ELEMENT_USER_CHECKBOX.replace("${user}", temp[i])), 2);
+				clickByJavascript(ELEMENT_USER_CHECKBOX.replace("${user}", temp[i]), 2);
 				click(ELEMENT_ADD_USERS_BUTTON);
 			}
 		}

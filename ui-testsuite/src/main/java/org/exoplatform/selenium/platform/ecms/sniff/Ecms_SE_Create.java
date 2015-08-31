@@ -39,14 +39,14 @@ public class Ecms_SE_Create extends ECMS_TestConfig_Part2{
 			- A modal message appears with Undo option. You can click undo to restore*/ 
 		info("Create a content folder");
 		navTool.goToSiteExplorer();
-		SEHome.goToPath("acme/documents", "Sites Management");
+		SEHome.goToPath("acme/documents", "Site Management");
 		SEHome.goToAddNewFolder();
 		info("Create new file document");
 		SEHome.createFolder(title, folderType);
 
 		info("Test 10: Delete file document");
 		navTool.goToSiteExplorer();
-		SEHome.goToPath("acme/documents", "Sites Management");
+		SEHome.goToPath("acme/documents", "Site Management");
 		SEHome.deleteData(title);
 	}
 
@@ -81,7 +81,7 @@ public class Ecms_SE_Create extends ECMS_TestConfig_Part2{
 			File is Edited successfully*/ 
 		info("Create a content");
 		navTool.goToSiteExplorer();
-		SEHome.goToPath("acme/documents", "Sites Management");
+		SEHome.goToPath("acme/documents", "Site Management");
 		SEHome.goToAddNewContent();
 		info("Create new file document");
 		CreNewDoc.createNewDoc(selectDocumentType.FILE);
@@ -97,7 +97,7 @@ public class Ecms_SE_Create extends ECMS_TestConfig_Part2{
 
 		info("Delete file document");
 		navTool.goToSiteExplorer();
-		SEHome.goToPath("acme/documents", "Sites Management");
+		SEHome.goToPath("acme/documents", "Site Management");
 		SEHome.deleteData(name);
 	}
 
@@ -131,7 +131,7 @@ public class Ecms_SE_Create extends ECMS_TestConfig_Part2{
 		 *Expected Outcome: 
 			The Web Content document is edited successfully*/ 
 		navTool.goToSiteExplorer();
-		SEHome.goToPath("acme/documents", "Sites Management");
+		SEHome.goToPath("acme/documents", "Site Management");
 		SEHome.goToAddNewContent();
 		info("Create new file document");
 		CreNewDoc.createNewDoc(selectDocumentType.WEBCONTENT);
@@ -147,7 +147,7 @@ public class Ecms_SE_Create extends ECMS_TestConfig_Part2{
 
 		info("Delete file document");
 		navTool.goToSiteExplorer();
-		SEHome.goToPath("acme/documents", "Sites Management");
+		SEHome.goToPath("acme/documents", "Site Management");
 		SEHome.deleteData(name);
 	}
 
@@ -185,7 +185,7 @@ public class Ecms_SE_Create extends ECMS_TestConfig_Part2{
 			The selected content/media is inserted to Main Content as a link.In view mode, user can click this link to view/download file.*/ 
 		info("Add a new content");
 		navTool.goToSiteExplorer();
-		SEHome.goToPath("acme/documents", "Sites Management");
+		SEHome.goToPath("acme/documents", "Site Management");
 		SEHome.goToAddNewContent();
 		info("Create new file document");
 		CreNewDoc.createNewDoc(selectDocumentType.WEBCONTENT);
@@ -201,7 +201,7 @@ public class Ecms_SE_Create extends ECMS_TestConfig_Part2{
 
 		info("Delete file document");
 		navTool.goToSiteExplorer();
-		SEHome.goToPath("acme/documents", "Sites Management");
+		SEHome.goToPath("acme/documents", "Site Management");
 		SEHome.deleteData(title);
 	}
 
@@ -233,7 +233,7 @@ public class Ecms_SE_Create extends ECMS_TestConfig_Part2{
 			- File Dialog open for user to choose files to upload*/
         info("Upload a file");
 		navTool.goToSiteExplorer();
-		SEHome.goToPath("acme/documents", "Sites Management");
+		SEHome.goToPath("acme/documents", "Site Management");
 		SEHome.uploadFile("TestData/"+file,true);
 
 		/*Step number: 2
@@ -276,7 +276,7 @@ public class Ecms_SE_Create extends ECMS_TestConfig_Part2{
 		 *Expected Outcome: 
 			- File Dialog open for user to choose files to upload*/
 		navTool.goToSiteExplorer();
-		SEHome.goToPath("intranet/documents","Sites Management");
+		SEHome.goToPath("intranet/documents","Site Management");
 		
 		/*Step number: 2
 		 *Step Name: 

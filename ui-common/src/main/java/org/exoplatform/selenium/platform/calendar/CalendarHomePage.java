@@ -53,30 +53,37 @@ public class CalendarHomePage extends CalendarLocatorObject{
 	 */
 	public void goToView(selectViewOption view){
 		info("Go to view "+ view);
+		Utils.pause(2000);
 		switch(view){
 		case DAY:
 			click(ELEMENT_CALENDAR_VIEW_BUTTON.replace("$view", "Day"));
-			waitForAndGetElement(ELEMENT_CALENDAR_ACTIVE_VIEW.replace("$view", "Day"));
+			waitForAndGetElement(ELEMENT_CALENDAR_ACTIVE_VIEW.replace("$view", "Day"), DEFAULT_TIMEOUT, 1, 2);
 			break;
 		case WEEK:
+			waitForAndGetElement(ELEMENT_CALENDAR_VIEW_BUTTON.replace("$view", "Week"), DEFAULT_TIMEOUT,1);
 			click(ELEMENT_CALENDAR_VIEW_BUTTON.replace("$view", "Week"));
-			waitForAndGetElement(ELEMENT_CALENDAR_ACTIVE_VIEW.replace("$view", "Week"));
+			waitForAndGetElement(ELEMENT_CALENDAR_ACTIVE_VIEW.replace("$view", "Week"), DEFAULT_TIMEOUT,1,2);
 			break;
 		case LIST:
+			waitForAndGetElement(ELEMENT_CALENDAR_VIEW_BUTTON.replace("$view", "List"), DEFAULT_TIMEOUT, 1);
 			click(ELEMENT_CALENDAR_VIEW_BUTTON.replace("$view", "List"));
-			waitForAndGetElement(ELEMENT_CALENDAR_ACTIVE_VIEW.replace("$view", "List"));
+			waitForAndGetElement(ELEMENT_CALENDAR_ACTIVE_VIEW.replace("$view", "List"), DEFAULT_TIMEOUT, 1,2);
 			break;
 		case MONTH:
-			click(ELEMENT_CALENDAR_VIEW_BUTTON.replace("$view", "Month"));
-			waitForAndGetElement(ELEMENT_CALENDAR_ACTIVE_VIEW.replace("$view", "Month"));
+			waitForAndGetElement(ELEMENT_CALENDAR_VIEW_BUTTON.replace("$view", "Month"), DEFAULT_TIMEOUT, 1);
+			clickByJavascript(ELEMENT_CALENDAR_VIEW_BUTTON.replace("$view", "Month"));
+			waitForAndGetElement(ELEMENT_CALENDAR_ACTIVE_VIEW.replace("$view", "Month"), DEFAULT_TIMEOUT,1,2);
+			Utils.pause(2000);
 			break;
 		case WORKWEEK:
+			waitForAndGetElement(ELEMENT_CALENDAR_VIEW_BUTTON.replace("$view", "Work Week"), DEFAULT_TIMEOUT, 1);
 			click(ELEMENT_CALENDAR_VIEW_BUTTON.replace("$view", "Work Week"));
-			waitForAndGetElement(ELEMENT_CALENDAR_ACTIVE_VIEW.replace("$view", "Work Week"));
+			waitForAndGetElement(ELEMENT_CALENDAR_ACTIVE_VIEW.replace("$view", "Work Week"), 1, 2);
 			break;
 		default:
+			waitForAndGetElement(ELEMENT_CALENDAR_VIEW_BUTTON.replace("$view", "Week"), DEFAULT_TIMEOUT, 1);
 			click(ELEMENT_CALENDAR_VIEW_BUTTON.replace("$view", "Week"));
-			waitForAndGetElement(ELEMENT_CALENDAR_ACTIVE_VIEW.replace("$view", "Week"));
+			waitForAndGetElement(ELEMENT_CALENDAR_ACTIVE_VIEW.replace("$view", "Week"), DEFAULT_TIMEOUT, 1,2);
 			break;
 		}
 		Utils.pause(500);

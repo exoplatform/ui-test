@@ -3,18 +3,20 @@ package org.exoplatform.selenium.platform.social;
 import static org.exoplatform.selenium.TestLogger.info;
 
 import org.exoplatform.selenium.Utils;
+import org.exoplatform.selenium.platform.ManageLogInOut;
 import org.openqa.selenium.WebDriver;
 
 public class SpaceHomePage extends SpaceLocator{
 	
 	SpaceSettingManagement setSpaceMg;
+	ManageLogInOut magAc;
 	/**
 	 * constructor
 	 * @param dr
 	 */
 	public SpaceHomePage(WebDriver dr){
 		this.driver=dr;
-		
+		magAc = new ManageLogInOut(driver);
 	}
 	
 	/**
@@ -23,8 +25,8 @@ public class SpaceHomePage extends SpaceLocator{
 	public void goToSpaceSettingTab(){
 		info("--Open Setting tab of the space");
 		info("Click on the tab");
-		waitForAndGetElement(ELEMENT_SPACE_SPACE_SETTINGS,3000,1);
-		click(ELEMENT_SPACE_SPACE_SETTINGS);
+		Utils.pause(2000);
+		clickByJavascript(ELEMENT_SPACE_SPACE_SETTINGS);
 		Utils.pause(3000);
 		waitForAndGetElement(ELEMENT_SPACE_SPACE_SETTINGS_TITLE,3000,1);
 		info("Space setting page is shown");

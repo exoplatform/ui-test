@@ -8,9 +8,9 @@
 		</groups>
 		<classes>
 			<class name="org.exoplatform.selenium.platform.wiki.sniff.Wiki_TestConfig" />
-			<class name="org.exoplatform.selenium.platform.wiki.sniff.Wiki_Attachment" />
 			<class name="org.exoplatform.selenium.platform.wiki.sniff.Wiki_Basic_Action_Manage_Page_Add_Delete" />
 			<class name="org.exoplatform.selenium.platform.wiki.sniff.Wiki_Basic_Action_Manage_Page_Edit" />
+			<class name="org.exoplatform.selenium.platform.wiki.sniff.Wiki_Attachment" />
 		</classes>
 	</test>
 	<listeners>

@@ -131,7 +131,7 @@ public class AnswerPage extends PlatformBase {
 	public void setDisplayCategoryScoping(String categoryScope, Boolean display){
 		info("setting display for categories in answer portlet");
 		String[] cat = categoryScope.split("/");
-		click(ELEMENT_CATEGORY_SCOPING_TAB);
+		clickByJavascript(ELEMENT_CATEGORY_SCOPING_TAB);
 		for (int i = 0; i < cat.length; i++){
 			if(display!=null){
 				if (display){

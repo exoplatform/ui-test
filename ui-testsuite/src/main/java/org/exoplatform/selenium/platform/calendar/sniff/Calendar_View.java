@@ -123,7 +123,7 @@ public class Calendar_View extends PlatformBase {
 		titleTaskAnni=titleTask+"anni";
 
 		defaultFormatDate="MM/dd/yyyy";
-		hp.goToCalendarPage();
+		//hp.goToCalendarPage();
 
 		//category
 		event.goToAddEventFromActionBar();

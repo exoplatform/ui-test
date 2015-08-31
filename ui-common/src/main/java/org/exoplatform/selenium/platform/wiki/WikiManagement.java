@@ -136,6 +136,7 @@ public class WikiManagement extends WikiLocators{
 	 */
 	public void editParagraph (String paragraphTitle, String paragraphContent) {
 		info("-- Editing a paragraph... " + paragraphTitle);
+		Utils.pause(2000);
 		String ELEMENT_PARAGRAPH_ID = "H"+paragraphTitle;
 		mouseOver(By.id(ELEMENT_PARAGRAPH_ID), true);
 		WebElement element = waitForAndGetElement(By.xpath("//*[@data-original-title='Edit Section: " + paragraphTitle + "']"));

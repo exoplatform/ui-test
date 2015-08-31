@@ -433,10 +433,10 @@ public class ForumHomePage extends PlatformBase {
 	 */
 	public void bookmark(String name){
 		info("Click on Bookmark link on Action bar");
-		click(ELEMENT_ACTIONBAR_BOOKMARK_ICON);
+		clickByJavascript(ELEMENT_ACTIONBAR_BOOKMARK_ICON);
 		Utils.pause(3000);
 		info("Click on Bookmark link on Action bar to open Bookmark popup");
-		click(ELEMENT_ACTIONBAR_BOOKMARK_MANAGER);
+		clickByJavascript(ELEMENT_ACTIONBAR_BOOKMARK_MANAGER);
 		info("Verify that the topic is bookmarked");
 		waitForAndGetElement(ELEMENT_FORUM_BOOKMARK_NAME.replace("${name}", name));
 		info("Delete the bookmark of the topic");

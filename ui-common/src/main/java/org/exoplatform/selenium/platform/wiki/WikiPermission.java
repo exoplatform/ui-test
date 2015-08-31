@@ -203,7 +203,7 @@ public class WikiPermission extends WikiLocators{
 		boolean savePresent = (booleans.length > 0 ? booleans[0]: true);
 		info("Click on Save button");
 		click(ELEMENT_PERMISSION_BUTTON_SAVE,0,true);
-		if (savePresent = false)
+		if (!savePresent)
 			waitForElementNotPresent(ELEMENT_PERMISSION_BUTTON_SAVE);
 		Utils.pause(3000);
 	}

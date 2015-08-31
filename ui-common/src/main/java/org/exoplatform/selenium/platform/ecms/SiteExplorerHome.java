@@ -285,7 +285,8 @@ public class SiteExplorerHome extends PlatformBase{
 	// SideBar
 	public final String ELEMENT_SE_NODE = "//*[@title='${node}']";
 	public final By ELEMENT_SIDE_BAR_MAINTAB = By.xpath(".//*[@id='UISideBar']//h6[@class='title']");
-	public final By ELEMENT_SIDEBAR_SITES_MANAGEMENT = By.xpath("//*[@data-original-title = 'Sites Management' or @title = 'Sites Management']");
+	//public final By ELEMENT_SIDEBAR_SITES_MANAGEMENT = By.xpath("//*[@data-original-title = 'Sites Management' or @title = 'Sites Management']");
+	public final By ELEMENT_SIDEBAR_SITES_MANAGEMENT = By.xpath("//*[@data-original-title='Site Management']");
 	public final By ELEMENT_SIDE_BAR_RELATION_ICON = By.xpath(".//*[@id='UISideBar']//i[@class='uiIconEcmsRelationMini uiIconEcmsLightGray']");
 	public final String ELEMENT_SIDE_BAR_RELATION_TAB_FILE_TITLE = ".//*[@id='UISideBar']//a[text()='${nameContent}']";
 	public final By ELEMENT_SIDE_BAR_FILE_EXPLORER_ICON = By.xpath(".//*[@id='UISideBar']//i[@class='uiIconEcmsExplorerMini uiIconEcmsLightGray']");
@@ -450,8 +451,18 @@ public class SiteExplorerHome extends PlatformBase{
 	 */
 	public void goToAddNewFolder() {
 		info("Add a new folder");
-		info("Click on New folder on Action Bar");
-		click(ELEMENT_ACTIONBAR_ADDFOLDER);
+		if (waitForAndGetElement(ELEMENT_ACTIONBAR_ADDFOLDER, 7000, 0) == null){
+			info("Click on More menu");
+			click(ELEMENT_ACTIONBAR_MORE);
+			waitForAndGetElement(ELEMENT_ACTIONBAR_ADDFOLDER, DEFAULT_TIMEOUT, 1);
+			info("Click on New folder on Action Bar");
+			click(ELEMENT_ACTIONBAR_ADDFOLDER);
+		}
+		else {
+			waitForAndGetElement(ELEMENT_ACTIONBAR_ADDFOLDER, DEFAULT_TIMEOUT, 1);
+			info("Click on New folder on Action Bar");
+			click(ELEMENT_ACTIONBAR_ADDFOLDER);
+		}
 		info("Verify that Add folder popup is shown");
 		waitForAndGetElement(ELEMENT_ADDFOLDERBOX);
 		info("The folder is shown successfully");
@@ -502,7 +513,8 @@ public class SiteExplorerHome extends PlatformBase{
 	 * Delete data by title
 	 * @param title
 	 */
-	public void deleteData(String title) {
+	public void deleteData(String title, boolean...destination) {
+		boolean verify = (destination.length > 0 ? destination[0]:false);
 		info("Click on File Explorer icon");
 		click(ELEMENT_SIDE_BAR_FILE_EXPLORER_ICON);
 		Utils.pause(2000);
@@ -511,10 +523,12 @@ public class SiteExplorerHome extends PlatformBase{
 		info("Click on Delete link");
 		click(ELEMENT_SITEEXPLORER_ACTION_DELETE);
 		info("Click on Delete button on Confirm popup");
-		click(ELEMENT_SITEEXPLORER_CONFIRMBOX_DELETE);
+		//click(ELEMENT_SITEEXPLORER_CONFIRMBOX_DELETE);
+		clickByJavascript(ELEMENT_SITEEXPLORER_CONFIRMBOX_DELETE, 2);
 		info("Verify that the node is deleted");
-		Utils.pause(1000);
-		//waitForElementNotPresent(By.xpath((ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME).replace("${title}", title)));
+		Utils.pause(3000);
+		if (verify)
+			waitForElementNotPresent(By.xpath((ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME).replace("${title}", title)));
 		info("the node is deleted successfully");
 	}
 	/**
@@ -576,13 +590,21 @@ public class SiteExplorerHome extends PlatformBase{
 	 */
 	public void uploadFileWithDymanicPath(String link, Object... params) {
 		Boolean verify = (Boolean) (params.length > 0 ? params[0] : true);
-		if (waitForAndGetElement(ELEMENT_UPLOAD_BUTTON, DEFAULT_TIMEOUT, 0) == null) {
+		Boolean prev = (Boolean) (params.length > 1 ? params[1] : false);
+		if (waitForAndGetElement(ELEMENT_UPLOAD_BUTTON, 10000, 0) == null) {
 			click(ELEMENT_MORE_LINK_WITHOUT_BLOCK);
 		}
 		click(ELEMENT_UPLOAD_LINK);
-		uploadFileUsingRobot(link);
-		info("Upload file " + getAbsoluteFilePath(link));
-		waitForElementNotPresent(ELEMENT_UPLOAD_PROGRESS_BAR,120000,1);
+		if (prev){
+			uploadFileUsingRobotDocumentPreview(link);
+			info("Upload file " + getAbsoluteFilePathFromFile(link));
+		}
+		else{
+			uploadFileUsingRobot(link);
+			info("Upload file " + getAbsoluteFilePath(link));
+		}
+		
+		waitForElementNotPresent(ELEMENT_UPLOAD_PROGRESS_BAR,120000,0);
 
 		info("verify:"+verify);
 		if (verify) {
@@ -607,16 +629,6 @@ public class SiteExplorerHome extends PlatformBase{
 		if (waitForAndGetElement(ELEMENT_UPLOAD_BUTTON, DEFAULT_TIMEOUT, 0) == null) {
 			click(ELEMENT_MORE_LINK_WITHOUT_BLOCK);
 		}
-		/*((JavascriptExecutor) driver)
-				.executeScript(
-						"arguments[0].style.visibility = 'block'; arguments[0].style.height = '1px'; "
-								+ "arguments[0].style.width = '1px'; arguments[0].style.opacity = 1",
-						waitForAndGetElement(ELEMENT_UPLOAD_LINK,
-								DEFAULT_TIMEOUT, 1, 2));
-
-		Utils.pause(10000);
-		driver.findElement(ELEMENT_UPLOAD_LINK).sendKeys(Utils.getAbsoluteFilePathFromFile(link));
-		info("Upload file " + Utils.getAbsoluteFilePathFromFile(link));*/
 		Utils.pause(2000);
 		click(ELEMENT_UPLOAD_LINK);
 		uploadFileUsingRobot(link);
@@ -718,9 +730,12 @@ public class SiteExplorerHome extends PlatformBase{
 		info("Click on Edit link");
 		click(ELEMENT_ACTIONBAR_EDIT);
 		driver.navigate().refresh();
+		Utils.pause(2000);
 		if(!newTitle.isEmpty())
+			waitForAndGetElement(ELEMENT_FILE_FORM_TITLE, DEFAULT_TIMEOUT, 1);
 			type(ELEMENT_FILE_FORM_TITLE,newTitle, true );
 		if(!content.isEmpty()){	
+			waitForAndGetElement(CreNewDoc.ELEMENT_FILEFORM_BLANK_CONTENT, DEFAULT_TIMEOUT, 1);
 			inputFrame(CreNewDoc.ELEMENT_FILEFORM_BLANK_CONTENT, content);
 			switchToParentWindow();
 		}
@@ -902,10 +917,10 @@ public class SiteExplorerHome extends PlatformBase{
 		select(ELEMENT_ADD_CATEGORY_POPUP_MENU, categoryTreeName);
 		Utils.pause(2000);
 		for (String cateName : arrayCatePath) {
-			click(ELEMENT_ADD_CATEGORY_POPUP_CATEGORY_NAME_LEFT_SIDE.replace("${nameTitle}", cateName));
+			//click(ELEMENT_ADD_CATEGORY_POPUP_CATEGORY_NAME_LEFT_SIDE.replace("${nameTitle}", cateName));
+			clickByJavascript(ELEMENT_ADD_CATEGORY_POPUP_CATEGORY_NAME_LEFT_SIDE.replace("${nameTitle}", cateName), 2);
 			Utils.pause(2000);
 		}
-
 		click(ELEMENT_ADD_CATEGORY_POPUP_SELECT_CATEGORY_RIGHT_SIDE.replace("${nameCategory}",nameSelectedCategory));
 		Utils.pause(3000);
 	}
@@ -1353,8 +1368,10 @@ public class SiteExplorerHome extends PlatformBase{
 	 */
 	public void clickWebView() {
 		info("Select a view type");
+		Utils.pause(3000);
 		waitForAndGetElement(ELEMENT_WEB_VIEW);
-		click(ELEMENT_WEB_VIEW);
+		//click(ELEMENT_WEB_VIEW);
+		clickByJavascript(ELEMENT_WEB_VIEW, 2);
 		Utils.pause(3000);
 	}
 
@@ -1424,7 +1441,8 @@ public class SiteExplorerHome extends PlatformBase{
 				.until(ExpectedConditions.presenceOfElementLocated(ELEMENT_SITE_EXPLORER_ALL_CHECKBOX));
 		if (waitForAndGetElement(ELEMENT_DOCUMENT_LIST_ROW_CONTENT, 5000, 0) != null) {
 			info("check on the checkbox");
-			el.click();
+			//el.click();
+			clickByJavascript(el, 2);
 			Utils.pause(3000);
 			info("Click on Delete button");
 			clickDeleteButton();
@@ -1453,6 +1471,7 @@ public class SiteExplorerHome extends PlatformBase{
 		selectAllFiles();
 	}
 	/**
+<<<<<<< HEAD
 	 * Check display of drive
 	 * @param drive
 	 * @param isDisplay
@@ -1816,4 +1835,15 @@ public class SiteExplorerHome extends PlatformBase{
 			selectNode(arrayElement);
 		}
 	}	
+
+	 /** 
+	  * Delete all files in a folder under Admin view
+	 * @param title
+	 */
+	public void verifyContentCreatedSuccessfully(String title){
+		info ("Verify Content was created successfully");
+		Utils.pause(2000);
+		waitForAndGetElement(By.xpath((ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME).replace("${title}", title)), DEFAULT_TIMEOUT, 1);
+		info("Content was created successfully");
+	}
 }

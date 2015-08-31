@@ -51,13 +51,16 @@ public class CalendarManagement extends CalendarLocatorObject{
 	 */
 	public void goToMenuFromMainCalendar(menuOfMainCalendar action){
 		info("Select action from menu");
+		Utils.pause(3000);
 		click(ELEMENT_CALENDAR_MENU_ACTIONS_ICON,0,true);
 		waitForAndGetElement(ELEMENT_CALENDAR_MENU);
 		switch(action){
 		case ADDCAL:
 			info("Go to add calendar");
+			Utils.pause(2000);
+			waitForAndGetElement(ELEMENT_CALENDAR_MENU_ACTIONS_ADD, DEFAULT_TIMEOUT, 1);
 			click(ELEMENT_CALENDAR_MENU_ACTIONS_ADD,0,true);
-			waitForAndGetElement(ELEMENT_CALENDAR_ADD_FORM);
+			waitForAndGetElement(ELEMENT_CALENDAR_ADD_FORM, DEFAULT_TIMEOUT, 1);
 			break;
 		case REMOTECAL:
 			info("Go to remote calendar");
@@ -71,8 +74,10 @@ public class CalendarManagement extends CalendarLocatorObject{
 			break;
 		case CALSETTING:
 			info("Go to calendar setting");
+			Utils.pause(2000);
+			waitForAndGetElement(ELEMENT_CALENDAR_MENU_ACTIONS_CALENDAR_SETTING, DEFAULT_TIMEOUT, 1);
 			click(ELEMENT_CALENDAR_MENU_ACTIONS_CALENDAR_SETTING,0,true);
-			waitForAndGetElement(ELEMENT_CALENDAR_SETTING_FORM);
+			waitForAndGetElement(ELEMENT_CALENDAR_SETTING_FORM, DEFAULT_TIMEOUT, 1);
 			break;
 		case IMPORT:
 			info("Import calendar");
@@ -652,16 +657,20 @@ public class CalendarManagement extends CalendarLocatorObject{
 			info("-- Select send invitaion option --");
 			switch(option){
 			case NEVER:
-				check(ELEMENT_CALENDAR_SETTING_NEVER_SEND_INVITE_CHECKBOX,2);
+				//check(ELEMENT_CALENDAR_SETTING_NEVER_SEND_INVITE_CHECKBOX,2);
+				clickByJavascript(ELEMENT_CALENDAR_SETTING_NEVER_SEND_INVITE_CHECKBOX, 2);
 				break;
 			case ALWAYS:
-				check(ELEMENT_CALENDAR_SETTING_ALWAYS_SEND_INVITE_CHECKBOX,2);
+				//check(ELEMENT_CALENDAR_SETTING_ALWAYS_SEND_INVITE_CHECKBOX,2);
+				clickByJavascript(ELEMENT_CALENDAR_SETTING_ALWAYS_SEND_INVITE_CHECKBOX, 2);
 				break;
 			case ASK:
-				check(ELEMENT_CALENDAR_SETTING_ASK_SEND_INVITE_CHECKBOX,2);
+				//check(ELEMENT_CALENDAR_SETTING_ASK_SEND_INVITE_CHECKBOX,2);
+				clickByJavascript(ELEMENT_CALENDAR_SETTING_ASK_SEND_INVITE_CHECKBOX, 2);
 				break;
 			default:
-				check(ELEMENT_CALENDAR_SETTING_NEVER_SEND_INVITE_CHECKBOX,2);
+				//check(ELEMENT_CALENDAR_SETTING_NEVER_SEND_INVITE_CHECKBOX,2);
+				clickByJavascript(ELEMENT_CALENDAR_SETTING_NEVER_SEND_INVITE_CHECKBOX, 2);
 				break;
 			}
 		}

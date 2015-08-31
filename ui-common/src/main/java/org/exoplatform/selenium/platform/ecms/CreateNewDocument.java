@@ -38,7 +38,8 @@ public class CreateNewDocument extends PlatformBase{
 
 	//New file form
 	public final By ELEMENT_FILEFORM_BLANK_CONTENT2 = By.xpath("//*[@id='cke_1_contents']/iframe");
-	public final By ELEMENT_FILEFORM_BUTTON_SAVEANDCLOSE = By.xpath("//*[@class='btn' and text()='Save & Close']"); 
+	//public final By ELEMENT_FILEFORM_BUTTON_SAVEANDCLOSE = By.xpath("//*[@class='btn' and text()='Save & Close']"); 
+	public final By ELEMENT_FILEFORM_BUTTON_SAVEANDCLOSE = By.xpath("//*[@class='btn' and contains(@onclick,'SaveAndClose')]"); 
 	public final By ELEMENT_FILEFORM_LANGUAGE = By.xpath("//*[@name='content-lang']");
 	
 	//New Web content form
@@ -76,16 +77,17 @@ public class CreateNewDocument extends PlatformBase{
 	 * @param type
 	 */
 	public void createNewDoc(selectDocumentType type) {
+		Utils.pause(2000);
 		info("Go to type "+ type);
 		switch(type){
 		case FILE:
 			info("Select File type");
 			click(ELEMENT_ADDDOCUMENT_FILE);
 			break;
-			
 		case WEBCONTENT:
 			info("Select WebContent type");
-			click(ELEMENT_ADDDOCUMENT_WEBCONTENT);
+			//click(ELEMENT_ADDDOCUMENT_WEBCONTENT);
+			clickByJavascript(ELEMENT_ADDDOCUMENT_WEBCONTENT, 2);
 			break;
 		case ACCESSIBLEMEDIA:
 			info("Select Accessiblemedia type");
@@ -183,6 +185,8 @@ public class CreateNewDocument extends PlatformBase{
 	 */
 	public void addNewFile(String title, String content) {
 		this.driver.navigate().refresh();
+		Utils.pause(2000);
+		waitForAndGetElement(ELEMENT_FILEFORM_BLANK_NAME, DEFAULT_TIMEOUT, 1);
 		type(ELEMENT_FILEFORM_BLANK_NAME, title, true);
 		inputFrame(ELEMENT_FILEFORM_BLANK_CONTENT,content);
 	}
@@ -216,8 +220,10 @@ public class CreateNewDocument extends PlatformBase{
 	 */
 
 	public void saveAndClose() {
-		click(ELEMENT_FILEFORM_BUTTON_SAVEANDCLOSE,0,true);
+		clickByJavascript(ELEMENT_FILEFORM_BUTTON_SAVEANDCLOSE);
 		Utils.pause(2000);
+		waitForElementNotPresent(ELEMENT_FILEFORM_BUTTON_SAVEANDCLOSE);
+		
 	}
 
 	/**

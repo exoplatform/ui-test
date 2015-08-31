@@ -71,6 +71,30 @@
 			</properties>
 		</profile>
 		<profile>
+			<id>calendar-sniff-part1</id>
+			<properties>
+				<testSuite>calendar-sniff-part1.xml</testSuite>
+			</properties>
+		</profile>
+		<profile>
+			<id>calendar-sniff-part2</id>
+			<properties>
+				<testSuite>calendar-sniff-part2.xml</testSuite>
+			</properties>
+		</profile>
+		<profile>
+			<id>calendar-sniff-part3</id>
+			<properties>
+				<testSuite>calendar-sniff-part3.xml</testSuite>
+			</properties>
+		</profile>
+		<profile>
+			<id>calendar-sniff-part4</id>
+			<properties>
+				<testSuite>calendar-sniff-part4.xml</testSuite>
+			</properties>
+		</profile>
+		<profile>
 			<id>calendar-func-part1</id>
 			<properties>
 				<testSuite>cal-func-part01.xml</testSuite>
@@ -96,6 +120,54 @@
 		</profile>
 		<profile>
 			<id>calendar-func-part5</id>
+			<properties>
+				<testSuite>cal-func-part05.xml</testSuite>
+			</properties>
+		</profile>
+		<profile>
+			<id>calendar-func-part6</id>
+			<properties>
+				<testSuite>cal-func-part06.xml</testSuite>
+			</properties>
+		</profile>
+		<profile>
+			<id>calendar-func-part7</id>
+			<properties>
+				<testSuite>cal-func-part07.xml</testSuite>
+			</properties>
+		</profile>
+		<profile>
+			<id>calendar-func-part8</id>
+			<properties>
+				<testSuite>cal-func-part08.xml</testSuite>
+			</properties>
+		</profile>
+		<profile>
+			<id>calendar-func-part9</id>
+			<properties>
+				<testSuite>cal-func-part09.xml</testSuite>
+			</properties>
+		</profile>
+		<profile>
+			<id>calendar-func-part10</id>
+			<properties>
+				<testSuite>cal-func-part10.xml</testSuite>
+			</properties>
+		</profile>
+		<profile>
+			<id>calendar-func-part11</id>
+			<properties>
+				<testSuite>cal-func-part11.xml</testSuite>
+			</properties>
+		</profile>
+		<profile>
+			<id>calendar-func-part12</id>
+			<properties>
+				<testSuite>cal-func-part12.xml</testSuite>
+			</properties>
+		</profile>
+		<profile>
+			<id>calendar-func-part13</id>
 			<properties>
 				<testSuite>cal-func-part05.xml</testSuite>
 			</properties>
@@ -638,6 +710,30 @@
 			<id>OAuth-func-part4</id>
 			<properties>
 				<testSuite>OAuth-func-part04.xml</testSuite>
+			</properties>
+		</profile>
+		<profile>
+			<id>forum-sniff-part2</id>
+			<properties>
+				<testSuite>forum-sniff-part2.xml</testSuite>
+			</properties>
+		</profile>
+		<profile>
+			<id>plf-sniff-part1</id>
+			<properties>
+				<testSuite>plf-sniff-part1.xml</testSuite>
+			</properties>
+		</profile>
+		<profile>
+			<id>plf-sniff-part2</id>
+			<properties>
+				<testSuite>plf-sniff-part2.xml</testSuite>
+			</properties>
+		</profile>
+		<profile>
+			<id>plf-sniff-part3</id>
+			<properties>
+				<testSuite>plf-sniff-part3.xml</testSuite>
 			</properties>
 		</profile>
 		<profile>

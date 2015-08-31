@@ -48,7 +48,7 @@ import org.testng.annotations.*;
 		
 		info("Create content 1");
 		navTool.goToSiteExplorer();
-		SEHome.goToPath("acme/documents", "Sites Management");
+		SEHome.goToPath("acme/documents", "Site Management");
 		SEHome.goToAddNewContent();
 		CreNewDoc.createNewDoc(selectDocumentType.FILE);
 		CreNewDoc.addNewFile(title, content);
@@ -71,7 +71,7 @@ import org.testng.annotations.*;
 		
 		info("Delete all data test");
 		navTool.goToSiteExplorer();
-		SEHome.goToPath("acme/documents", "Sites Management");
+		SEHome.goToPath("acme/documents", "Site Management");
 		SEHome.deleteData(title);
 		SEHome.deleteData(title2);
  	}
@@ -107,7 +107,7 @@ import org.testng.annotations.*;
 			You can see the comment at the bottom of document/uploaded file.*/ 
 		info("Create content 1");
 		navTool.goToSiteExplorer();
-		SEHome.goToPath("acme/documents", "Sites Management");
+		SEHome.goToPath("acme/documents", "Site Management");
 		SEHome.goToAddNewContent();
 		CreNewDoc.createNewDoc(selectDocumentType.FILE);
 		CreNewDoc.addNewFile(title, content);
@@ -161,7 +161,7 @@ import org.testng.annotations.*;
 			Node is added tag. You can find document using tag in Tag cloud of FE*/ 
 		info("Create content 1");
 		navTool.goToSiteExplorer();
-		SEHome.goToPath("acme/documents", "Sites Management");
+		SEHome.goToPath("acme/documents", "Site Management");
 		SEHome.goToAddNewContent();
 		CreNewDoc.createNewDoc(selectDocumentType.FILE);
 		CreNewDoc.addNewFile(title, content);
@@ -206,7 +206,7 @@ import org.testng.annotations.*;
 			The node is voted*/ 
 		info("Upload file");
 		navTool.goToSiteExplorer();
-		SEHome.goToPath("acme/documents", "Sites Management");
+		SEHome.goToPath("acme/documents", "Site Management");
 		SEHome.uploadFile("TestData/"+fileName);
 		
 		click(SEHome.ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME.replace("${title}", fileName));
@@ -248,7 +248,7 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- Comment is edited*/ 
 		navTool.goToSiteExplorer();
-		SEHome.goToPath("acme/documents", "Sites Management");
+		SEHome.goToPath("acme/documents", "Site Management");
 		info("Add a new content");
 		SEHome.goToAddNewContent();
 		info("Select a document type");
@@ -304,7 +304,7 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			Comment is deleted*/ 
 		navTool.goToSiteExplorer();
-		SEHome.goToPath("acme/documents", "Sites Management");
+		SEHome.goToPath("acme/documents", "Site Management");
 		SEHome.goToAddNewContent();
 		CreNewDoc.createNewDoc(selectDocumentType.FILE);
 		CreNewDoc.addNewFile(title, content);

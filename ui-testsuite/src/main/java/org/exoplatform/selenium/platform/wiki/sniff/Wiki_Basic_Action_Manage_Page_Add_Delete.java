@@ -17,7 +17,7 @@ public class Wiki_Basic_Action_Manage_Page_Add_Delete extends Wiki_TestConfig {
 	 *<li> Pre-Condition: </li>
 	 *<li> Post-Condition: </li>
 	 */
-	@Test
+	@Test 
 	public  void test02_09_Create_Delete_PageUsingSourceEditor() {
 		info("Test 02: Create page using Source Editor");
 		String wiki = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
@@ -119,7 +119,7 @@ public class Wiki_Basic_Action_Manage_Page_Add_Delete extends Wiki_TestConfig {
 	 *<li> Pre-Condition: </li>
 	 *<li> Post-Condition: </li>
 	 */
-	@Test
+	@Test 
 	public  void test03_AutoSaveWhenAddingPage() {
 		info("Test 3: Auto Save when adding page");
 	
@@ -220,7 +220,6 @@ public class Wiki_Basic_Action_Manage_Page_Add_Delete extends Wiki_TestConfig {
 		hp.goToWiki();
 		wHome.goToAddTemplateWikiPage();
 		wikiMg.previewATemplate(template);
-		
 	}
 	
 	/**

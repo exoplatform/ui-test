@@ -108,13 +108,15 @@ public class Addons_Answers_Answers  extends PlatformBase {
 		info("Create question");
 		qMang.goToSubmitQuestion();
 		qMang.inputDataToQuestionForm(question1, content1, null, null);
-		click(qMang.ELEMENT_SUBMIT_QUESTION_FORM_SAVE_BUTTON);
+		//click(qMang.ELEMENT_SUBMIT_QUESTION_FORM_SAVE_BUTTON);
+		clickByJavascript(qMang.ELEMENT_SUBMIT_QUESTION_FORM_SAVE_BUTTON, 2);
 		click(button.ELEMENT_OK_BUTTON_LINK);
 		
 		info("Create question");
 		qMang.goToSubmitQuestion();
 		qMang.inputDataToQuestionForm(question2, content2, null, null);
-		click(qMang.ELEMENT_SUBMIT_QUESTION_FORM_SAVE_BUTTON);
+		//click(qMang.ELEMENT_SUBMIT_QUESTION_FORM_SAVE_BUTTON);
+		clickByJavascript(qMang.ELEMENT_SUBMIT_QUESTION_FORM_SAVE_BUTTON, 2);
 		click(button.ELEMENT_OK_BUTTON_LINK);
 	}
 
@@ -141,17 +143,20 @@ public class Addons_Answers_Answers  extends PlatformBase {
 		hp.goToAnswer();
 		aMang.goToAnswerQuestion(question1);
 		aMang.inputDataToAnswer(answer1, null, null, null);
-		click(aMang.ELEMENT_ANSWER_FORM_SAVE_BUTTON);
+		//click(aMang.ELEMENT_ANSWER_FORM_SAVE_BUTTON);
+		clickByJavascript(aMang.ELEMENT_ANSWER_FORM_SAVE_BUTTON, 2);
 		waitForAndGetElement(aMang.ELEMENT_ANSWER_AUTHOR.replace("$answer", answer1).replace("$fullname", fullName));
 
 		aMang.goToAnswerQuestion(question1);
 		aMang.inputDataToAnswer(answer2, null, null, null);
-		click(aMang.ELEMENT_ANSWER_FORM_SAVE_BUTTON);
+		//click(aMang.ELEMENT_ANSWER_FORM_SAVE_BUTTON);
+		clickByJavascript(aMang.ELEMENT_ANSWER_FORM_SAVE_BUTTON, 2);
 		waitForAndGetElement(aMang.ELEMENT_ANSWER_AUTHOR.replace("$answer", answer2).replace("$fullname", fullName));
 
 		aMang.goToAnswerQuestion(question1);
 		aMang.inputDataToAnswer(answer3, null, null, null);
-		click(aMang.ELEMENT_ANSWER_FORM_SAVE_BUTTON);
+		clickByJavascript(aMang.ELEMENT_ANSWER_FORM_SAVE_BUTTON, 2);
+		//click(aMang.ELEMENT_ANSWER_FORM_SAVE_BUTTON);
 		waitForAndGetElement(aMang.ELEMENT_ANSWER_AUTHOR.replace("$answer", answer3).replace("$fullname", fullName));
 
 		info("Test 1: Rate/Sort answers");
@@ -211,7 +216,8 @@ public class Addons_Answers_Answers  extends PlatformBase {
 		hp.goToAnswer();
 		aMang.goToAnswerQuestion(question1);
 		aMang.inputDataToAnswer(answer, null, null, null);
-		click(aMang.ELEMENT_ANSWER_FORM_SAVE_BUTTON);
+		//click(aMang.ELEMENT_ANSWER_FORM_SAVE_BUTTON);
+		clickByJavascript(aMang.ELEMENT_ANSWER_FORM_SAVE_BUTTON, 2);
 		waitForAndGetElement(aMang.ELEMENT_ANSWER_AUTHOR.replace("$answer", answer).replace("$fullname", fullName));
 
 		/*Step number: 2
@@ -226,7 +232,8 @@ public class Addons_Answers_Answers  extends PlatformBase {
 			Answer will be disappeared with normal users*/
 		aMang.goToActionOfAnswerFromMoreAction(answer,actionAnswerOption.EDIT);
 		aMang.inputDataToAnswer(null, null, false, null);
-		click(aMang.ELEMENT_ANSWER_FORM_SAVE_BUTTON);
+		//click(aMang.ELEMENT_ANSWER_FORM_SAVE_BUTTON);
+		clickByJavascript(aMang.ELEMENT_ANSWER_FORM_SAVE_BUTTON, 2);
 		magAc.signOut();
 		magAc.signIn(DATA_USER2, DATA_PASS);
 		hp.goToAnswer();
@@ -249,7 +256,8 @@ public class Addons_Answers_Answers  extends PlatformBase {
 		click(By.xpath(aHome.ELEMENT_QUESTION_LIST_ITEM.replace("$question", question1)));
 		aMang.goToActionOfAnswerFromMoreAction(answer,actionAnswerOption.EDIT);
 		aMang.inputDataToAnswer(null, null, true, null);
-		click(aMang.ELEMENT_ANSWER_FORM_SAVE_BUTTON);
+		//click(aMang.ELEMENT_ANSWER_FORM_SAVE_BUTTON);
+		clickByJavascript(aMang.ELEMENT_ANSWER_FORM_SAVE_BUTTON, 2);
 		magAc.signOut();
 		magAc.signIn(DATA_USER2, DATA_PASS);
 		hp.goToAnswer();
@@ -292,7 +300,8 @@ public class Addons_Answers_Answers  extends PlatformBase {
 		hp.goToAnswer();
 		aMang.goToAnswerQuestion(question1);
 		aMang.inputDataToAnswer(answer, false, null, null);
-		click(aMang.ELEMENT_ANSWER_FORM_SAVE_BUTTON);
+		//click(aMang.ELEMENT_ANSWER_FORM_SAVE_BUTTON);
+		clickByJavascript(aMang.ELEMENT_ANSWER_FORM_SAVE_BUTTON, 2);
 
 		magAc.signOut();
 		magAc.signIn(DATA_USER2, DATA_PASS);
@@ -317,7 +326,8 @@ public class Addons_Answers_Answers  extends PlatformBase {
 		click(By.xpath(aHome.ELEMENT_QUESTION_LIST_ITEM.replace("$question", question1)));
 		aMang.goToActionOfAnswerFromMoreAction(answer,actionAnswerOption.EDIT);
 		aMang.inputDataToAnswer(null, true, null, null);
-		click(aMang.ELEMENT_ANSWER_FORM_SAVE_BUTTON);
+		//click(aMang.ELEMENT_ANSWER_FORM_SAVE_BUTTON);
+		clickByJavascript(aMang.ELEMENT_ANSWER_FORM_SAVE_BUTTON, 2);
 		magAc.signOut();
 		magAc.signIn(DATA_USER2, DATA_PASS);
 		hp.goToAnswer();
@@ -341,7 +351,8 @@ public class Addons_Answers_Answers  extends PlatformBase {
 		click(By.xpath(aHome.ELEMENT_QUESTION_LIST_ITEM.replace("$question", question1)));
 		aMang.goToActionOfAnswerFromMoreAction(answer,actionAnswerOption.EDIT);
 		aMang.inputDataToAnswer(null, false, null, null);
-		click(aMang.ELEMENT_ANSWER_FORM_SAVE_BUTTON);
+		//click(aMang.ELEMENT_ANSWER_FORM_SAVE_BUTTON);
+		clickByJavascript(aMang.ELEMENT_ANSWER_FORM_SAVE_BUTTON, 2);
 		magAc.signOut();
 		magAc.signIn(DATA_USER2, DATA_PASS);
 		hp.goToAnswer();
@@ -402,7 +413,8 @@ public class Addons_Answers_Answers  extends PlatformBase {
 		hp.goToAnswer();
 		aMang.goToAnswerQuestion(question1);
 		aMang.inputDataToAnswer(answer, null, null, null);
-		click(aMang.ELEMENT_ANSWER_FORM_SAVE_BUTTON);
+		///click(aMang.ELEMENT_ANSWER_FORM_SAVE_BUTTON);
+		clickByJavascript(aMang.ELEMENT_ANSWER_FORM_SAVE_BUTTON, 2);
 		waitForAndGetElement(aMang.ELEMENT_ANSWER_AUTHOR.replace("$answer", answer).replace("$fullname", fullName));
 
 		info("Test 5: Edit an answer");
@@ -421,7 +433,8 @@ public class Addons_Answers_Answers  extends PlatformBase {
 			- New content of answer is saved*/
 		aMang.goToActionOfAnswerFromMoreAction(answer,actionAnswerOption.EDIT);
 		aMang.inputDataToAnswer(newanswer, null, null, null);
-		click(aMang.ELEMENT_ANSWER_FORM_SAVE_BUTTON);
+		//click(aMang.ELEMENT_ANSWER_FORM_SAVE_BUTTON);
+		clickByJavascript(aMang.ELEMENT_ANSWER_FORM_SAVE_BUTTON, 2);
 		waitForAndGetElement(aMang.ELEMENT_ANSWER_AUTHOR.replace("$answer", newanswer).replace("$fullname", fullName));
 		waitForElementNotPresent(aMang.ELEMENT_ANSWER_AUTHOR.replace("$answer", answer).replace("$fullname", fullName));
 
@@ -470,7 +483,8 @@ public class Addons_Answers_Answers  extends PlatformBase {
 		hp.goToAnswer();
 		aMang.goToAnswerQuestion(question1);
 		aMang.inputDataToAnswer(answer, null, null, null);
-		click(aMang.ELEMENT_ANSWER_FORM_SAVE_BUTTON);
+		//click(aMang.ELEMENT_ANSWER_FORM_SAVE_BUTTON);
+		clickByJavascript(aMang.ELEMENT_ANSWER_FORM_SAVE_BUTTON, 2);
 		waitForAndGetElement(aMang.ELEMENT_ANSWER_AUTHOR.replace("$answer", answer).replace("$fullname", fullName));
 
 		/*Step number: 2
@@ -486,7 +500,8 @@ public class Addons_Answers_Answers  extends PlatformBase {
 			- Comment successfully*/ 
 		comMang.goToCommentQuestion(question1);
 		comMang.inputDataToComment(comment);
-		click(comMang.ELEMENT_COMMENT_FORM_SAVE_BUTTON);
+		//click(comMang.ELEMENT_COMMENT_FORM_SAVE_BUTTON);
+		clickByJavascript(comMang.ELEMENT_COMMENT_FORM_SAVE_BUTTON, 2);
 		waitForAndGetElement(comMang.ELEMENT_COMMENT_AUTHOR.replace("$comment", comment).replace("$fullname", fullName));
 
 		info("Test 8: Edit a comment");
@@ -506,7 +521,8 @@ public class Addons_Answers_Answers  extends PlatformBase {
 			- New content of comment is saved*/ 
 		comMang.goToActionOfCommentFromMoreAction(comment,actionCommentOption.EDIT);
 		comMang.inputDataToComment(newcomment);
-		click(comMang.ELEMENT_COMMENT_FORM_SAVE_BUTTON);
+		//click(comMang.ELEMENT_COMMENT_FORM_SAVE_BUTTON);
+		clickByJavascript(comMang.ELEMENT_COMMENT_FORM_SAVE_BUTTON, 2);
 		waitForAndGetElement(comMang.ELEMENT_COMMENT_AUTHOR.replace("$comment", newcomment).replace("$fullname", fullName));
 		waitForElementNotPresent(comMang.ELEMENT_COMMENT_AUTHOR.replace("$comment", comment).replace("$fullname", fullName));
 
@@ -551,7 +567,8 @@ public class Addons_Answers_Answers  extends PlatformBase {
 		hp.goToAnswer();
 		aMang.goToAnswerQuestion(question1);
 		aMang.inputDataToAnswer(answer, null, null, null);
-		click(aMang.ELEMENT_ANSWER_FORM_SAVE_BUTTON);
+		//click(aMang.ELEMENT_ANSWER_FORM_SAVE_BUTTON);
+		clickByJavascript(aMang.ELEMENT_ANSWER_FORM_SAVE_BUTTON, 2);
 		waitForAndGetElement(aMang.ELEMENT_ANSWER_AUTHOR.replace("$answer", answer).replace("$fullname", fullName));
 
 		/*Step number: 2
@@ -567,7 +584,8 @@ public class Addons_Answers_Answers  extends PlatformBase {
 			- Comment successfully*/
 		comMang.goToCommentQuestion(question1);
 		comMang.inputDataToComment(comment);
-		click(comMang.ELEMENT_COMMENT_FORM_SAVE_BUTTON);
+		//click(comMang.ELEMENT_COMMENT_FORM_SAVE_BUTTON);
+		clickByJavascript(comMang.ELEMENT_COMMENT_FORM_SAVE_BUTTON, 2);
 		waitForAndGetElement(comMang.ELEMENT_COMMENT_AUTHOR.replace("$comment", comment).replace("$fullname", fullName));
 
 		/*Step number: 3
@@ -627,7 +645,8 @@ public class Addons_Answers_Answers  extends PlatformBase {
 		click(qMang.ELEMENT_MANAGE_QUESTION_FORM_OPEN_QUESTION_TAB);
 		click(qMang.ELEMENT_MANAGE_QUESTION_ANSWER_QUESTION.replace("$question", question2));
 		aMang.inputDataToAnswer(answer, true, true, null);
-		click(aMang.ELEMENT_ANSWER_FORM_SAVE_BUTTON);
+		//click(aMang.ELEMENT_ANSWER_FORM_SAVE_BUTTON);
+		clickByJavascript(aMang.ELEMENT_ANSWER_FORM_SAVE_BUTTON, 2);
 		waitForElementNotPresent(aMang.ELEMENT_ANSWER_FORM_SAVE_BUTTON);
 		waitForAndGetElement(qMang.ELEMENT_MANAGE_QUESTION_CLOSE_BUTTON).click();
 		click(By.xpath(aHome.ELEMENT_QUESTION_LIST_ITEM.replace("$question", question2)));

@@ -273,6 +273,7 @@ public class MyNotificationsSetting extends NotificationLocator{
 	 * @param notifToEnable
 	 */
 	public void enableNotification(myNotiType notifToEnable, Object... opParams){
+		Utils.pause(3000);
 		String opt = (String) (opParams.length > 0 ? opParams[0]:"");
 		int repeat=0;
 		switch(notifToEnable){

@@ -69,7 +69,7 @@ public class Wiki_Publish_Activity extends Wiki_TestConfig {
 	 *<li> Pre-Condition: the wiki activity is already shared in the activity stream</li>
 	 *<li> Post-Condition: </li>
 	 */
-	@Test
+	@Test 
 	public  void test02_DeleteWikiPage() {
 		info("Test 2: Delete wiki page");
 		String title = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
@@ -120,7 +120,7 @@ public class Wiki_Publish_Activity extends Wiki_TestConfig {
 	 *<li> Pre-Condition: a wiki activity is already shred in the activity stream</li>
 	 *<li> Post-Condition: </li>
 	 */
-	@Test
+	@Test 
 	public  void test03_OpenWikiPageFromWikiActivity() {
 		info("Test 3: Open Wiki page from wiki's activity");
 	
@@ -160,7 +160,7 @@ public class Wiki_Publish_Activity extends Wiki_TestConfig {
 	 *<li> Pre-Condition: the wiki activity is already shared in the activity stream</li>
 	 *<li> Post-Condition: </li>
 	 */
-	@Test
+	@Test 
 	public  void test04_OpenWikiPageFromWikiActivity() {
 		info("Test 04: Update activity - edit wiki page title");
 	
@@ -232,7 +232,7 @@ public class Wiki_Publish_Activity extends Wiki_TestConfig {
 	 *<li> Pre-Condition: the wiki activity is already shared in the activity stream</li>
 	 *<li> Post-Condition: </li>
 	 */
-	@Test
+	@Test 
 	public  void test05_NotAddCommentToActivityWhenEditPageIsNotCheckingPublishActivity() {
 		info("Test 05: No comment is added to the activity when edit page not checking Publish activiy");
 	

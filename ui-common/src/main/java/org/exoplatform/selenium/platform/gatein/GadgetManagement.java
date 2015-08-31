@@ -7,6 +7,7 @@ import org.exoplatform.selenium.Utils;
 import org.exoplatform.selenium.platform.PlatformBase;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 public class GadgetManagement extends PlatformBase {
 
@@ -44,6 +45,7 @@ public class GadgetManagement extends PlatformBase {
 	 */
 	public void addRemoteGadget(String url){
 		info("Click on Gadgets button");
+		Utils.pause(3000);
 		click(ELEMENT_REMOTE_GADGETBTN);
 		waitForAndGetElement(ELEMENT_REMOTE_GADGET_URL);
 		info("input a url");
@@ -90,7 +92,12 @@ public class GadgetManagement extends PlatformBase {
 		type(ELEMENT_CREATE_NEW_GADGET_INPUT_NAME_FIELD,name,true);
 		if(!xmlCode.isEmpty()){
 			info("Input a new source code");
-			type(ELEMENT_CREATE_NEW_GADGET_SOURCE_FIELD,xmlCode,true);
+			WebElement element = driver.findElement(ELEMENT_CREATE_NEW_GADGET_SOURCE_FIELD);
+			element.clear();
+			element.click();
+			System.out.println(xmlCode);
+			element.sendKeys(xmlCode);
+			//type(ELEMENT_CREATE_NEW_GADGET_SOURCE_FIELD,xmlCode,true);
 		}
 		info("Click on save button");
 		click(ELEMENT_CREATE_NEW_GADGET_SAVE_BTN);

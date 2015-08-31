@@ -220,6 +220,12 @@ public class GateIn_TestConfig extends PlatformBase {
     public void afterMethod(){
 		if(waitForAndGetElement(pagCW.ELEMENT_PAGE_ABORT_BUTTON,5000,0)!=null)
 			click(pagCW.ELEMENT_PAGE_ABORT_BUTTON);
+		if (waitForAndGetElement(navMag.ELEMENT_ADD_NODE_FORM, 5000, 0) != null) {
+			click(navMag.ELEMENT_BACK_BUTTON);
+			navMag.saveNode();
+		}
+		if (waitForAndGetElement(portMg.ELEMENT_MANAGEPAGES_ADD_NEW_PAGES_POPUP_FORM, 5000, 0) != null)
+			clickByJavascript(portMg.ELEMENT_MANAGEPAGES_ADD_NEW_PAGES_POPUP_CANCEL_BTN, 2);
     	driver.get(baseUrl);
     }
 	

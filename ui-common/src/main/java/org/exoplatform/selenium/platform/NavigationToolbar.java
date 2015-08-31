@@ -193,7 +193,8 @@ public class NavigationToolbar extends PlatformBase {
 	 */
 	public void goToEditLayout(){
 		info("--Go to Edit Layout--");
-		click(ELEMENT_LINK_EDIT);
+		Utils.pause(3000);
+		clickByJavascript(ELEMENT_LINK_EDIT);
 		mouseOver(ELEMENT_MENU_PAGE_LINK, true);
 		click(ELEMENT_MENU_EDIT_LAYOUT,2,true);
 	}
@@ -203,6 +204,7 @@ public class NavigationToolbar extends PlatformBase {
 	 */
 	public void goToAddPage(){
 		info("Go to add page form");
+		Utils.pause(3000);
 		waitForAndGetElement(ELEMENT_LINK_EDIT);
 		click(ELEMENT_LINK_EDIT);
 		mouseOver(ELEMENT_MENU_PAGE_LINK, true);
@@ -246,13 +248,14 @@ public class NavigationToolbar extends PlatformBase {
 	 */
 	public void goToPotalPages(){
 		info("-- Go to Page Management page --");
-		Utils.pause(500);
+		Utils.pause(2000);
 		for(int repeat=0;; repeat ++){
 			if (repeat > 1){
 				mouseOverAndClick(ELEMENT_LINK_SETUP);
 				break;
 			}
-			mouseOver(ELEMENT_LINK_SETUP, true);
+			//mouseOver(ELEMENT_LINK_SETUP, true);
+			clickByJavascript(ELEMENT_LINK_SETUP, 2);
 			if (waitForAndGetElement(ELEMENT_ADMINISTRATION_PORTAL, 5000, 0) != null){
 				info("Element " + ELEMENT_ADMINISTRATION_PORTAL + "... is displayed");
 				break;
@@ -270,7 +273,14 @@ public class NavigationToolbar extends PlatformBase {
 	 */
 	public void goToUsersAndGroupsManagement() {
 		info("--Go to Users and groups management--");
-		click(ELEMENT_LINK_SETUP);
+		Utils.pause(3000);	
+        if(browser.contains("iexplorer")){
+        	waitForAndGetElement(ELEMENT_TOOLBAR_ADMINISTRATION, DEFAULT_TIMEOUT, 1, 2);
+    		clickByJavascript(ELEMENT_TOOLBAR_ADMINISTRATION, 2);
+    		waitForAndGetElement(ELEMENT_ADMINISTRATION_USERS, DEFAULT_TIMEOUT, 1);
+        }
+        else
+		click(ELEMENT_LINK_SETUP, 2);
 		mouseOver(ELEMENT_ADMINISTRATION_USERS, true);
 		if(waitForAndGetElement(ELEMENT_GROUP_AND_ROLE_LINK,2000,0)!=null)
 			click(ELEMENT_GROUP_AND_ROLE_LINK);
@@ -299,7 +309,6 @@ public class NavigationToolbar extends PlatformBase {
 
 	/**
 	 * List sublink in user menu
-	 * @author quynhpt
 	 */
 	public enum specifUserToolBar{
 		MY_PROFILE,MY_ACTIVITY,MY_CONNECTIONS,MY_WIKI,MY_DASHBOARD,MY_NOTIFICATION,SETTINGS,CHANGE_LANGUAGE;
@@ -354,6 +363,25 @@ public class NavigationToolbar extends PlatformBase {
 	/**
 	 *  Go to Site Explorer page: Administration-->Content->Site Explorer
 	 */
+	/*public void goToSiteExplorer() {
+		info("-- Go to site explorer home page --");
+		Utils.pause(500);
+		for(int repeat=0;; repeat ++){
+			if (repeat > 1){
+				mouseOverAndClick(ELEMENT_LINK_SETUP);
+				break;
+			}
+			click(ELEMENT_LINK_SETUP, 2);
+			if (waitForAndGetElement(ELEMENT_MENU_CONTENT_LINK, 5000, 0) != null){
+				info("Element " + ELEMENT_MENU_CONTENT_LINK + "... is displayed");
+				break;
+			}
+			info("Retry...[" + repeat + "]");
+		}
+		click(ELEMENT_MENU_CONTENT_LINK);
+		Utils.pause(2000);
+		info("Site Explorer is shown successfully");
+	}*/
 	public void goToSiteExplorer() {
 		info("-- Go to site explorer home page --");
 		Utils.pause(500);
@@ -362,17 +390,27 @@ public class NavigationToolbar extends PlatformBase {
 				mouseOverAndClick(ELEMENT_LINK_SETUP);
 				break;
 			}
-			mouseOver(ELEMENT_LINK_SETUP, true);
+           if(browser.contains("iexplorer")){
+        	   waitForAndGetElement(ELEMENT_TOOLBAR_ADMINISTRATION, DEFAULT_TIMEOUT, 1, 2);
+   			clickByJavascript(ELEMENT_TOOLBAR_ADMINISTRATION, 2);
+           }
+           else
+			click(ELEMENT_LINK_SETUP, 2);
 			if (waitForAndGetElement(ELEMENT_MENU_CONTENT_LINK, 5000, 0) != null){
 				info("Element " + ELEMENT_MENU_CONTENT_LINK + "... is displayed");
-				break;
+				mouseOver(ELEMENT_MENU_CONTENT_LINK, true);
+				if (waitForAndGetElement(ELEMENT_MENU_SITE_EXPLORER, 5000, 0)!= null){
+					click(ELEMENT_MENU_SITE_EXPLORER);
+					break;
+				}
 			}
 			info("Retry...[" + repeat + "]");
 		}
-		mouseOverAndClick(ELEMENT_MENU_CONTENT_LINK);
 		Utils.pause(2000);
 		info("Site Explorer is shown successfully");
 	}
+	
+	
 	/**
 	 * Go to Edit-->Page-->SEO
 	 */
@@ -434,7 +472,12 @@ public class NavigationToolbar extends PlatformBase {
 				driver.get(url);
 				break;
 			}
-			mouseOver(ELEMENT_LINK_SETUP, true);
+			if(browser.contains("iexplorer")){
+				waitForAndGetElement(ELEMENT_TOOLBAR_ADMINISTRATION, DEFAULT_TIMEOUT, 1, 2);
+				clickByJavascript(ELEMENT_TOOLBAR_ADMINISTRATION, 2);
+			}
+			else
+			click(ELEMENT_LINK_SETUP, 2);
 			if (waitForAndGetElement(ELEMENT_MENU_CONTENT_LINK, 5000, 0)!= null) {
 				mouseOver(ELEMENT_MENU_CONTENT_LINK, true);
 				if (waitForAndGetElement(ELEMENT_LINK_CONTENT_ADMIN, 5000, 0)!= null){
@@ -478,7 +521,7 @@ public class NavigationToolbar extends PlatformBase {
 				mouseOverAndClick(ELEMENT_LINK_SETUP);
 				break;
 			}
-			mouseOver(ELEMENT_LINK_SETUP, true);
+			clickByJavascript(ELEMENT_LINK_SETUP, 2);
 			if (waitForAndGetElement(ELEMENT_ADMINISTRATION_APPLICATION, 5000, 0) != null){
 				info("Element " +ELEMENT_ADMINISTRATION_APPLICATION + "... is displayed");
 				break;

@@ -79,10 +79,14 @@ public class ForumCategoryManagement extends PlatformBase {
 	 *            the content of description for category
 	 */
 	public void addCategorySimple(String nameCat, String order, String description) {
+		info("Add Category Simple");
+		Utils.pause(2000);
 		waitForAndGetElement(ELEMENT_ACTIONBAR_ADDCATEGORY);
 		info("click on Add Category button");
 		click(ELEMENT_ACTIONBAR_ADDCATEGORY);
 	    info("input the title for the category");
+	    Utils.pause(2000);
+	    waitForAndGetElement(ELEMENT_ADDCATEGORY_POPUP_TITLE, DEFAULT_TIMEOUT, 1);
 	    type(ELEMENT_ADDCATEGORY_POPUP_TITLE,nameCat,true);
 	    info("check and input Oder field");
 	    if(order!=null && order!=""){

@@ -19,6 +19,7 @@ import org.exoplatform.selenium.platform.wiki.RichTextEditor;
 import org.exoplatform.selenium.platform.wiki.SourceTextEditor;
 import org.exoplatform.selenium.platform.wiki.WikiDraftPage;
 import org.exoplatform.selenium.platform.wiki.WikiHomePage;
+import org.exoplatform.selenium.platform.wiki.WikiLocators;
 import org.exoplatform.selenium.platform.wiki.WikiManagement;
 import org.exoplatform.selenium.platform.wiki.WikiPageInformation;
 import org.exoplatform.selenium.platform.wiki.WikiPermission;
@@ -43,6 +44,7 @@ public class Wiki_TestConfig extends PlatformBase {
 	WikiPermission wPermission;
 	WikiPageInformation wPageInfo;
 	SourceTextEditor sourceEditor;
+	WikiLocators wikiLocs;
 	
 	RichTextEditor rtMode;
 	SpaceManagement spaMg;
@@ -68,6 +70,7 @@ public class Wiki_TestConfig extends PlatformBase {
 		hp = new HomePagePlatform(driver);
 		hpAct = new ActivityStream(driver);
 		spaHome = new SpaceHomePage(driver);
+		wikiLocs = new WikiLocators();
 		
 		PlfPerm = new PlatformPermission(driver);
 		
@@ -103,8 +106,18 @@ public class Wiki_TestConfig extends PlatformBase {
 		info("End setUpBeforeClass");
 	}
 	
+	@AfterMethod
+	public void afterMethod(){
+		info ("After Test");
+		if (waitForAndGetElement(wikiLocs.ELEMENT_TEMPLATE_SELECT_FORM, 5000, 0) != null) {
+			info("click Cancel Template button");
+			click(wikiLocs.ELEMENT_TEMPLATE_CANCEL_BTN);
+			waitForElementNotPresent(wikiLocs.ELEMENT_TEMPLATE_SELECT_FORM);
+		}
+	}
+	
 	@AfterClass
-	public void afterTest(){
+	public void afterClass(){
 		info("Start setUpBeforeClass");
 		driver.manage().deleteAllCookies();
 		driver.quit();

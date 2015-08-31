@@ -112,6 +112,8 @@ public class SOC_TestConfig_2 extends PlatformBase {
 		userInfData.setUserInfoData(userInfoFilePath,defaultSheet,isUseFile,jdbcDriver,dbUrl,user,pass,sqlUser);
 		
 		siteExDrive = new SiteExplorerDriveDatabase();
+		siteExDrive.setSiteExpDriveData(siteExpDrivePath,defaultSheet,isUseFile,jdbcDriver,dbUrl,user,pass,sqlAttach);
+		
 		siteExPath = new SiteExplorerPathDatabase();
 		siteExPath.setSiteExpPathData(siteExpPathPath,defaultSheet,isUseFile,jdbcDriver,dbUrl,user,pass,sqlAttach);
 

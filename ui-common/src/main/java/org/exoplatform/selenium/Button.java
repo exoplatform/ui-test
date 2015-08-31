@@ -106,9 +106,9 @@ public class Button extends TestBase{
 	 */
 	public void yes() {		
 		if (waitForAndGetElement(ELEMENT_YES_BUTTON, 3000, 0) != null){
-			click(ELEMENT_YES_BUTTON);
+			clickByJavascript(ELEMENT_YES_BUTTON);
 		}else if (waitForAndGetElement(ELEMENT_YES_BUTTON_AUX, 3000, 0) != null){
-			click(ELEMENT_YES_BUTTON_AUX);
+			clickByJavascript(ELEMENT_YES_BUTTON_AUX);
 		}
 		Utils.pause(500);
 	}

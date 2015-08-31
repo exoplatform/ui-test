@@ -103,7 +103,8 @@ public class Addons_Answers_Search  extends PlatformBase {
 		info("Create question 1");
 		cMang.goToActionOfCategoryFromRightClick(paCat1, actionCategoryOption.SUBMITQUESTION);
 		qMang.inputDataToQuestionForm(question1, content1, null, null);
-		click(qMang.ELEMENT_SUBMIT_QUESTION_FORM_SAVE_BUTTON);
+		//click(qMang.ELEMENT_SUBMIT_QUESTION_FORM_SAVE_BUTTON);
+		clickByJavascript(qMang.ELEMENT_SUBMIT_QUESTION_FORM_SAVE_BUTTON, 2);
 		click(button.ELEMENT_OK_BUTTON_LINK);
 
 		info("Create answer 1");
@@ -112,7 +113,8 @@ public class Addons_Answers_Search  extends PlatformBase {
 		click(cMang.ELEMENT_CATEGORY_LIST_ITEM.replace("$category", paCat1));
 		aMang.goToAnswerQuestion(question1);
 		aMang.inputDataToAnswer(answer1, null, null, null);
-		click(aMang.ELEMENT_ANSWER_FORM_SAVE_BUTTON);
+		//click(aMang.ELEMENT_ANSWER_FORM_SAVE_BUTTON);
+		clickByJavascript(aMang.ELEMENT_ANSWER_FORM_SAVE_BUTTON, 2);
 		waitForAndGetElement(aMang.ELEMENT_ANSWER_AUTHOR.replace("$answer", answer1).replace("$fullname", fullName));
 
 		info("Create comment 1");
@@ -121,7 +123,8 @@ public class Addons_Answers_Search  extends PlatformBase {
 		click(cMang.ELEMENT_CATEGORY_LIST_ITEM.replace("$category", paCat1));
 		comMang.goToCommentQuestion(question1);
 		comMang.inputDataToComment(comment1);
-		click(comMang.ELEMENT_COMMENT_FORM_SAVE_BUTTON);
+		//click(comMang.ELEMENT_COMMENT_FORM_SAVE_BUTTON);
+		clickByJavascript(comMang.ELEMENT_COMMENT_FORM_SAVE_BUTTON, 2);
 		waitForAndGetElement(comMang.ELEMENT_COMMENT_AUTHOR.replace("$comment", comment1).replace("$fullname", fullName));
 
 		info("Create category 2");
@@ -134,7 +137,8 @@ public class Addons_Answers_Search  extends PlatformBase {
 		info("Create question 2");
 		cMang.goToActionOfCategoryFromRightClick(paCat2, actionCategoryOption.SUBMITQUESTION);
 		qMang.inputDataToQuestionForm(question2, content2, null, null);
-		click(qMang.ELEMENT_SUBMIT_QUESTION_FORM_SAVE_BUTTON);
+		//click(qMang.ELEMENT_SUBMIT_QUESTION_FORM_SAVE_BUTTON);
+		clickByJavascript(qMang.ELEMENT_SUBMIT_QUESTION_FORM_SAVE_BUTTON, 2);
 		click(button.ELEMENT_OK_BUTTON_LINK);
 
 		info("Create answer 2");
@@ -143,7 +147,8 @@ public class Addons_Answers_Search  extends PlatformBase {
 		click(cMang.ELEMENT_CATEGORY_LIST_ITEM.replace("$category", paCat2));
 		aMang.goToAnswerQuestion(question2);
 		aMang.inputDataToAnswer(answer2, null, null, null);
-		click(aMang.ELEMENT_ANSWER_FORM_SAVE_BUTTON);
+		//click(aMang.ELEMENT_ANSWER_FORM_SAVE_BUTTON);
+		clickByJavascript(aMang.ELEMENT_ANSWER_FORM_SAVE_BUTTON, 2);
 		waitForAndGetElement(aMang.ELEMENT_ANSWER_AUTHOR.replace("$answer", answer2).replace("$fullname", fullName));
 
 		info("Create comment 2");
@@ -152,7 +157,8 @@ public class Addons_Answers_Search  extends PlatformBase {
 		click(cMang.ELEMENT_CATEGORY_LIST_ITEM.replace("$category", paCat2));
 		comMang.goToCommentQuestion(question2);
 		comMang.inputDataToComment(comment2);
-		click(comMang.ELEMENT_COMMENT_FORM_SAVE_BUTTON);
+		//click(comMang.ELEMENT_COMMENT_FORM_SAVE_BUTTON);
+		clickByJavascript(comMang.ELEMENT_COMMENT_FORM_SAVE_BUTTON, 2);
 		waitForAndGetElement(comMang.ELEMENT_COMMENT_AUTHOR.replace("$comment", comment2).replace("$fullname", fullName));
 
 	}

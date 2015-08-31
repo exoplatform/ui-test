@@ -184,8 +184,8 @@ import org.testng.annotations.*;
 		navToolBar.goToAddPage();
 		info("Create a new page");
 		pagCW.inputPageInfoStep1(title, true, "English",title, null,null);
-		click(pagCW.ELEMENT_ADDNEWPAGE_BTNNEXT);
-		click(pagCW.ELEMENT_ADDNEWPAGE_BTNNEXT);
+		clickByJavascript(pagCW.ELEMENT_ADDNEWPAGE_BTNNEXT, 2);
+		clickByJavascript(pagCW.ELEMENT_ADDNEWPAGE_BTNNEXT, 2);
 		pagCW.saveChangesPageEditor();
 		
 		info("Verify that the page is added successfully");

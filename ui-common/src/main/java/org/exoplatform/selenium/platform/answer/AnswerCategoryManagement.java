@@ -121,30 +121,37 @@ public class AnswerCategoryManagement extends PlatformBase {
 	 */
 	public void goToActionOfCategoryFromActionBar(actionCategoryOption action){
 		info("Select action from menu");
+		Utils.pause(2000);
+		waitForAndGetElement(aHome.ELEMENT_CATEGORY_BUTTON, DEFAULT_TIMEOUT, 1);
 		click(aHome.ELEMENT_CATEGORY_BUTTON);
 		switch(action){
 		case EDIT:
 			info("Edit category");
+			waitForAndGetElement(ELEMENT_CATEGORY_EDIT_BUTTON, DEFAULT_TIMEOUT, 1);
 			click(ELEMENT_CATEGORY_EDIT_BUTTON);
 			waitForAndGetElement(ELEMENT_CATEGORY_EDIT_FORM);
 			break;
 		case ADD:
 			info("ADD category");
+			waitForAndGetElement(ELEMENT_CATEGORY_ADD_BUTTON, DEFAULT_TIMEOUT, 1);
 			click(ELEMENT_CATEGORY_ADD_BUTTON);
 			waitForAndGetElement(ELEMENT_CATEGORY_ADD_FORM);
 			break;
 		case EXPORT:
 			info("EXPORT category");
+			waitForAndGetElement(ELEMENT_CATEGORY_EXPORT_BUTTON, DEFAULT_TIMEOUT, 1);
 			click(ELEMENT_CATEGORY_EXPORT_BUTTON);
 			waitForAndGetElement(ELEMENT_CATEGORY_EXPORT_FORM);
 			break;
 		case IMPORT:
 			info("IMPORT category");
+			waitForAndGetElement(ELEMENT_CATEGORY_IMPORT_BUTTON, DEFAULT_TIMEOUT, 1);
 			click(ELEMENT_CATEGORY_IMPORT_BUTTON);
 			waitForAndGetElement(ELEMENT_CATEGORY_IMPORT_FORM);
 			break;
 		case DELETE:
 			info("DELETE category");
+			waitForAndGetElement(ELEMENT_CATEGORY_DELETE_BUTTON, DEFAULT_TIMEOUT, 1);
 			click(ELEMENT_CATEGORY_DELETE_BUTTON);
 			waitForAndGetElement(ELEMENT_CATEGORY_DELETE_CONFIRM_POPUP);
 			break;

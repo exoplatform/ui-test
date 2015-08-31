@@ -101,6 +101,7 @@ public class CommentManagement extends PlatformBase {
 			break;
 		case DELETE:
 			info("DELETE COMMENT");
+			waitForAndGetElement(ELEMENT_COMMENT_DELETE_BUTTON, DEFAULT_TIMEOUT, 1);
 			click(ELEMENT_COMMENT_DELETE_BUTTON.replace("$comment", comment));
 			waitForAndGetElement(ELEMENT_COMMENT_DELETE_CONFIRM_POPUP);
 			break;

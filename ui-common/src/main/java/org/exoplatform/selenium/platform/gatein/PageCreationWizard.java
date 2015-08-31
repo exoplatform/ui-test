@@ -514,6 +514,7 @@ public class PageCreationWizard extends PlatformBase {
 	 */
 	public void editApplication(String oldTitle,String newTitle,String width,String height) {
 		// TODO Auto-generated method stub
+		Utils.pause(3000);
 		info("Edit application");
 		mouseOver(ELEMENT_APPLICATION_IN_LAYOUT_PAGE.replace("${name}",oldTitle),true);
 		click(ELEMENT_APPLICATION_EDIT_ICON.replace("${name}",oldTitle));

@@ -42,7 +42,7 @@ public class Wiki_Settings extends Wiki_TestConfig{
 	 *<li> Test Case Name: Delete template.</li>
 	 * ERROR : Change this test when " create template " work again. Actually this test use native elements.
 	 */
-	@Test
+	@Test 
 	public  void test02_04_EditTemplate() {
 		info("Test 2: Edit template");
 		String template = wTempData.getWikiTemplateRandom();
@@ -86,7 +86,7 @@ public class Wiki_Settings extends Wiki_TestConfig{
 	 *<li> Test Case Name: Preview new template.</li>
 	 *Jira issue : https://jira.exoplatform.org/browse/WIKI-991
 	 */
-	@Test(groups="pending")
+	@Test
 	public  void test03_PreviewNewTemplate() {
 		info("Test 3: Preview new template");
 		/*Step Number: 1

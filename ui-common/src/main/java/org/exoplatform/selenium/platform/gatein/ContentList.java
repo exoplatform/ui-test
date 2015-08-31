@@ -60,7 +60,8 @@ public class ContentList extends PlatformBase {
 		
 		if (content != "" || content != null) {
 			waitForAndGetElement(ELEMENT_MULTIPLE_CONTENT_POPUP_FILE.replace("${content}", content));
-			click(ELEMENT_MULTIPLE_CONTENT_POPUP_FILE.replace("${content}",content));
+			//click(ELEMENT_MULTIPLE_CONTENT_POPUP_FILE.replace("${content}",content));
+			clickByJavascript(ELEMENT_MULTIPLE_CONTENT_POPUP_FILE.replace("${content}",content), 2);
 		}
 		Utils.pause(2000);
 	}

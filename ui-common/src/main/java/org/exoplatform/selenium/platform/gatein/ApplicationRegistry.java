@@ -8,7 +8,6 @@ import org.exoplatform.selenium.Utils;
 import org.exoplatform.selenium.platform.HomePagePlatform;
 import org.exoplatform.selenium.platform.NavigationToolbar;
 import org.exoplatform.selenium.platform.PlatformBase;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -123,14 +122,14 @@ public class ApplicationRegistry extends PlatformBase {
 	 */
 	public void HideShowImportApplicaion(){
 		info("Show all import application");
-		if ("iexplorer".equals(browser)){
+		/*if ("iexplorer".equals(browser)){
 			navTool.goToPotalPages();
-			pagMag.editPage("registry","");
+			pagMag.editPage("registry","group");
 		}
-		else{
+		else{*/
 			navTool.goToApplication();
 			navTool.goToEditLayout();
-		}
+		//}
 		pagEditor.goToEditPortlet(pagEditor.ELEMENT_FRAME_CONTAIN_PORTLET);
 		showImportApplication(false);
 		click(pagEditor.ELEMENT_EDIT_PORTLET_FORM_SAVE_BUTTON);
@@ -155,7 +154,8 @@ public class ApplicationRegistry extends PlatformBase {
 	 */
 	public void goToGadgetPage(){
 		info("Show Gadget page");
-		click(ELEMENT_APPLICATION_GADGETBTN);
+		Utils.pause(3000);
+		clickByJavascript(ELEMENT_APPLICATION_GADGETBTN);
 		Utils.pause(2000);
 	}
 
@@ -256,8 +256,14 @@ public class ApplicationRegistry extends PlatformBase {
 			type(ELEMENT_ADD_CATEGORY_DESCRIPTION, des, true);
 		}
 		click(ELEMENT_ADD_CATEGORY_PERMISSION_TAB);
-		check(ELEMENT_ADD_CATEGORY_PERMISSION_PUBLIC_CHECKBOX,2);
-		click(ELEMENT_ADD_CATEGORY_SAVE_BTN);
+        if(browser.contains("iexplorer")){
+        	clickByJavascript(ELEMENT_ADD_CATEGORY_PERMISSION_PUBLIC_CHECKBOX, 2);
+    		clickByJavascript(ELEMENT_ADD_CATEGORY_SAVE_BTN, 2);
+        }
+        else{
+        	check(ELEMENT_ADD_CATEGORY_PERMISSION_PUBLIC_CHECKBOX,2);
+    		click(ELEMENT_ADD_CATEGORY_SAVE_BTN);
+        }
 		info("Verify that the new category is added successfully");
 		waitForAndGetElement( ELEMENT_LEFT_PANEL_APPLICATION_CATEGORY_TAB.replace("${category}", categoryName),2000,0);
 	}

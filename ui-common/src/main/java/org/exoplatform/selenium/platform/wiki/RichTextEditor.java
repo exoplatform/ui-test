@@ -9,7 +9,6 @@ import java.io.File;
 
 import org.exoplatform.selenium.Button;
 import org.exoplatform.selenium.Utils;
-//import org.exoplatform.selenium.platform.objectdatabase.wiki.WikiMacroDatabase;
 import org.openqa.selenium.By;
 import org.openqa.selenium.ElementNotVisibleException;
 import org.openqa.selenium.Keys;
@@ -535,6 +534,7 @@ public class RichTextEditor extends WikiLocators{
 	 *            updated content of the wiki page. Can not be <code>null</code>
 	 */
 	public void addSimplePage(String title, String content){
+		Utils.pause(2000);
 		info("Input a title for the page");
 		if(!title.isEmpty())
 			type(ELEMENT_TITLE_WIKI_INPUT, title, true);

@@ -1,5 +1,6 @@
 package org.exoplatform.selenium;
 
+import org.testng.Assert;
 import static org.exoplatform.selenium.TestLogger.debug;
 import static org.exoplatform.selenium.TestLogger.error;
 import static org.exoplatform.selenium.TestLogger.info;
@@ -49,9 +50,11 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.Select;
-import org.testng.Assert;
+
 
 public class TestBase {
+	
+	
 	private static Scanner scanner;
 	public WebDriver driver;
 	public WebDriver newDriver;
@@ -296,6 +299,10 @@ public class TestBase {
 	/*======= Welcome Screen (Term and Conditions)   =====*/
 	public final By ELEMENT_REGISTER_SKIP_BUTTON=By.xpath(".//*[@id='UIPortalLoginFormAction']/input[contains(@value,'Skip')]");
 	public final By ELEMENT_REGISTER_YOUR_SOFTWARE_BUTTON=By.xpath(".//*[@id='UIPortalLoginFormAction']/a");
+	/*======= Register Screen =====*/
+	public final By ELEMENT_REGISTER_SKIP_BTN = By.xpath(".//*[@id='UIPortalLoginFormAction']//*[@name='btnSkip']");
+	
+	/*======= Welcome Screen (Term and Conditions) =====*/
 	public final By ELEMENT_FIRSTNAME_ACCOUNT = By.name("firstNameAccount");
 	public final By ELEMENT_LASTNAME_ACCOUNT = By.name("lastNameAccount");
 	public final By ELEMENT_EMAIL_ACCOUNT = By.name("emailAccount");
@@ -342,6 +349,8 @@ public class TestBase {
 	public final String ELEMENT_UPLOAD_POPUP_NAMEFILE = "//*[@class='fileNameLabel' and contains(text(),'${fileName}')]";
 
 	public final By ELEMENT_SAVE_BTN = By.xpath("//*[text()='Save']");
+	
+	
 	/*======== End of Term and conditions =====*/	
 	
 	public final By ELEMENT_SKIP_REGISTER_BTN = By.xpath(".//*[@id='UIPortalLoginFormAction']//*[@value = 'Skip']");
@@ -798,6 +807,11 @@ public class TestBase {
 		ManageLogInOut acc = new ManageLogInOut(driver);
 		driver.get(baseUrl);
 		info("Agreement page");
+		if (waitForAndGetElement(ELEMENT_REGISTER_SKIP_BTN, DEFAULT_TIMEOUT, 2) != null) {
+			info("Skipp register");
+			clickByJavascript(ELEMENT_REGISTER_SKIP_BTN, 2);
+			Utils.pause(5000);
+			}
 		if (waitForAndGetElement(ELEMENT_AGREEMENT_CHECKBOX, 3000, 0, 2) != null) {
 			info("-- Checking the terms and conditions agreement... --");
 			click(ELEMENT_AGREEMENT_CHECKBOX, 2);
@@ -847,7 +861,8 @@ public class TestBase {
 		type(ELEMENT_CONFIRM_PASS_ACCOUNT, "gtngtn", true);	
 		type(ELEMENT_ROOT_PASS_ACCOUNT, "gtngtn", true);
 		type(ELEMENT_ROOT_CONFIRM_PASS_ACCOUNT, "gtngtn", true);
-		click(ELEMENT_SUBMIT_BUTTON);
+		//click(ELEMENT_SUBMIT_BUTTON);
+		clickByJavascript(ELEMENT_SUBMIT_BUTTON, 2);
 		waitForTextNotPresent("Create your account");
 	}
 
@@ -1179,18 +1194,11 @@ public class TestBase {
 	 * @param opParams
 	 */
 	public void typeByJavascript(Object locatorById, String value,Object... opParams){
-	//	int notDisplay = (Integer) (opParams.length > 0 ? opParams[0]: 0);	
-		/*WebElement e = null;
-		if(locator instanceof WebElement){
-			e=(WebElement) locator;
-		}
-		else{
-			info("wait and get element");
-			e = waitForAndGetElement(locator,3000, 1,2);
-		}*/
 		Utils.pause(3000);
 		((JavascriptExecutor)driver).executeScript("document.getElementById('"+locatorById+"').value='"+value+"'");
 	}
+	
+	
 
 	/**
 	 * click action
@@ -1277,6 +1285,7 @@ public class TestBase {
 					if (!element.isSelected()) {
 						info("check by javascript");
 						waitForAndGetElement(locator, DEFAULT_TIMEOUT, 1, notDisplayE);
+						//mouseOver(locator, true);
 						clickByJavascript(locator, notDisplayE);
 					}
 				}
@@ -1448,6 +1457,7 @@ public class TestBase {
 				WebElement element = waitForAndGetElement(locator, DEFAULT_TIMEOUT, 1, notDisplay);		
 				if (element != null){
 					if (validate) element.clear();
+					element.click();
 					element.sendKeys(value);
 					if (!validate || value.equals(getValue(locator))) {
 						break;
@@ -1512,6 +1522,11 @@ public class TestBase {
 
 			if (element.isSelected()) {
 				actions.click(element).perform();
+				if (element.isSelected()) {
+					info("uncheck by javascript");
+					waitForAndGetElement(locator, DEFAULT_TIMEOUT, 1, notDisplayE);
+					clickByJavascript(locator, notDisplayE);
+				}
 			} else {
 				info("Element " + locator + " is already unchecked.");
 			}
@@ -2076,6 +2091,7 @@ public class TestBase {
 	 */
 	public void inputDataToCKEditor(By framelocator, String data){
 		info("input data to ckeditor");
+		Utils.pause(2000);
 		try {
 			WebElement inputsummary = null;
 			WebElement e = waitForAndGetElement(framelocator,DEFAULT_TIMEOUT,1,2);
@@ -2090,7 +2106,8 @@ public class TestBase {
 				}
 				else{
 					info("Set nativeEvent is FALSE");
-					inputsummary.sendKeys(data);
+					//inputsummary.sendKeys(data);
+					((JavascriptExecutor) driver).executeScript("document.body.innerHTML='" + data + "' + document.body.innerHTML;");
 				}
 			} else {
 				((JavascriptExecutor) driver).executeScript("document.body.innerHTML='" + data + "' + document.body.innerHTML;");
@@ -2388,9 +2405,63 @@ public class TestBase {
 	 * @param fileLocation
 	 */
 	public void uploadFileUsingRobot(String fileLocation) {
+		Utils.pause(3000);
 		info("Upload file using Robot");
 		String fs = File.separator;
 		String path=getAbsoluteFilePath(fileLocation.replace("/", fs));
+		info("path in uploadRobot:"+path);
+		try {
+			Robot robot = new Robot();
+			robot.delay(1000);
+			robot.keyPress(KeyEvent.VK_DOWN);
+			robot.keyRelease(KeyEvent.VK_DOWN);
+			robot.keyPress(KeyEvent.VK_CONTROL);
+			robot.keyPress(KeyEvent.VK_A);
+			robot.keyRelease(KeyEvent.VK_CONTROL);
+			robot.keyRelease(KeyEvent.VK_A);
+			robot.keyPress(KeyEvent.VK_CONTROL);
+			robot.keyPress(KeyEvent.VK_X);
+			robot.keyRelease(KeyEvent.VK_CONTROL);
+			robot.keyRelease(KeyEvent.VK_X);
+			//Setting clipboard with file location
+			setClipboardData(path);
+			//native key strokes for CTRL, V and ENTER keys
+
+			robot.keyPress(KeyEvent.VK_CONTROL);
+			robot.keyPress(KeyEvent.VK_V);
+			robot.keyRelease(KeyEvent.VK_V);
+			robot.keyRelease(KeyEvent.VK_CONTROL);
+			robot.delay(1000);
+			robot.keyPress(KeyEvent.VK_ENTER);
+			robot.keyRelease(KeyEvent.VK_ENTER);
+			Utils.pause(1000);
+		} catch (Exception exp) {
+			exp.printStackTrace();
+		}
+	}
+	
+	/**
+	 *  This function returns a absolute path from a relative path that get from excel file
+	 * @param relativeFilePath
+	 * @return absolutePath
+	 */
+	public static String getAbsoluteFilePathFromFile(String relativeFilePath) {
+		String curDir = System.getProperty("user.home");
+		String absolutePath = curDir + relativeFilePath;
+		info("absolutePath:" + absolutePath);
+		return absolutePath;
+	}
+	
+	/**
+	 * uploadFileUsingRobot using for Document preview
+	 * @param fileLocation
+	 */
+	public void uploadFileUsingRobotDocumentPreview(String fileLocation) {
+		Utils.pause(3000);
+		info("Upload file using Robot");
+		String fs = File.separator;
+		//String path=getAbsoluteFilePath(fileLocation.replace("/", fs));
+		String path=getAbsoluteFilePathFromFile(fileLocation.replace("/", fs));
 		info("path in uploadRobot:"+path);
 		try {
 			Robot robot = new Robot();
