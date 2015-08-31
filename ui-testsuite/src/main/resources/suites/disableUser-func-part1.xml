@@ -11,6 +11,7 @@
 			<class name="org.exoplatform.selenium.platform.disableUser.functional.Disable_User_ActivityStream" />
 			<class name="org.exoplatform.selenium.platform.disableUser.functional.Disable_User_Answers" />
 		    <class name="org.exoplatform.selenium.platform.disableUser.functional.Disable_User_Calendar" />
+		    <class name="org.exoplatform.selenium.platform.disableUser.functional.Disable_User_CommunityManagement" />
 		</classes>
 	</test>
 	<listeners>

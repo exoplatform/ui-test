@@ -8,9 +8,7 @@ import org.testng.annotations.*;
 
 
 	public class Disable_User_Calendar extends Disable_User_TestConfig{
-		String searchUserName ;
-		String username;
-		String password;
+		
 		public void disableUser(){
 			searchUserName = userSearchOptionData.getUserSearchOptionByIndex(0);
 			info("Disable user");

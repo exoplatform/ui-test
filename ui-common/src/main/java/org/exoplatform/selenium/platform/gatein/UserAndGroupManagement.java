@@ -107,11 +107,19 @@ public class UserAndGroupManagement extends PlatformBase {
 	public final By ELEMENT_UP_LEVEL=By.xpath("//*[@data-original-title='Up Level']");
 	
 	//Disable Users
-	public By ELEMENT_DISABLE_USER_DROP_BOX=By.id("UIListUsers-userStatusFilter");
-	public String ELEMENT_DISABLE_USER_HANDLE_BTN=".//*[@id='UIListUsersGird']//*[contains(text(),'$userName')]/../..//*[contains(@class,'switchBtnHandle')]";
-    public String ELEMENT_DISBALE_USER_ENABLED=".//*[@id='UIListUsersGird']//*[contains(text(),'$userName')]/../..//*[@checked='checked']";
-	
-	ManageAlert alert;
+	public final By ELEMENT_DISABLE_USER_DROP_BOX=By.id("UIListUsers-userStatusFilter");
+	public final String ELEMENT_DISABLE_USER_HANDLE_BTN=".//*[@id='UIListUsersGird']//*[contains(text(),'$userName')]/../..//*[contains(@class,'switchBtnHandle')]";
+    public final String ELEMENT_DISBALE_USER_ENABLED=".//*[@id='UIListUsersGird']//*[contains(text(),'$userName')]/../..//*[@data-original-title='Disable User']/*[@checked='checked']";
+    public final String ELEMENT_DISBALE_USER_DISABLED=".//*[@id='UIListUsersGird']//*[contains(text(),'$userName')]/../..//*[@data-original-title='Enable User']";
+    public final By ELEMENT_DISABLE_USER_COLUMN = By.xpath(".//th[@id='DisableEnableUser'][contains(.,'Enabled')]");
+    public final By ELEMENT_DISABLE_USER_STATUS_DISABLED= By.xpath("//*[@id='UIListUsers-userStatusFilter']/*[contains(.,'Disabled')]");
+    public final By ELEMENT_DISABLE_USER_STATUS_ALL= By.xpath("//*[@id='UIListUsers-userStatusFilter']/*[contains(.,'All')]");
+    public final By ELEMENT_DISABLE_USER_STATUS_ENABLED= By.xpath("//*[@id='UIListUsers-userStatusFilter']/*[contains(.,'Enabled')]");
+    public final String ELEMENT_DISABLE_USER_STATUS_SELECTED ="//*[@id='UIListUsers-userStatusFilter']/*[contains(.,'$status')][@selected='selected']";
+    public final String ELEMENT_DISABLE_USER_TOGGLE_NO = "//*[@id='UIListUsersGird']//*[contains(text(),'$userName')]/../..//*[contains(@class,'switchBtnLabelOff')]/*[contains(.,'No')]";
+    public final String ELEMENT_DISABLE_USER_TOGGLE_YES = "//*[@id='UIListUsersGird']//*[contains(text(),'$userName')]/../..//*[contains(@class,'switchBtnLabelOn')]/*[contains(.,'Yes')]";
+    
+    ManageAlert alert;
 	Dialog dialog;
 
 	public UserAndGroupManagement(WebDriver dr) {
@@ -735,6 +743,7 @@ public class UserAndGroupManagement extends PlatformBase {
 		info("User is removed from the group successfully");
 	}
 	/**
+<<<<<<< HEAD
 	 * Delete many users at the same time
 	 * @param arrayUsers
 	 */
@@ -745,4 +754,57 @@ public class UserAndGroupManagement extends PlatformBase {
 			info("Delete user:"+arrayUsers.get(i)+" successfully");
 		}
 	}
+=======
+	 * Check status drop box
+	 */
+	public void checkStatusDropBox(){
+		info("check status drop box");
+		waitForAndGetElement(ELEMENT_DISABLE_USER_STATUS_SELECTED.replace("$status", "Enabled"));
+		waitForAndGetElement(ELEMENT_DISABLE_USER_DROP_BOX);
+		waitForAndGetElement(ELEMENT_DISABLE_USER_STATUS_ALL);
+		waitForAndGetElement(ELEMENT_DISABLE_USER_STATUS_DISABLED);
+	}
+	/**
+	 * Check display of all enable and disable user
+	 * @param users
+	 */
+	public void checkDisplayAllUsers(String...users){
+		info("check display of all users");
+		selectDisableStatus("All");
+ 	 	waitForAndGetElement(ELEMENT_INPUT_SEARCH_USER_NAME).clear();
+ 	 	click(ELEMENT_SEARCH_ICON_USERS_MANAGEMENT);
+ 	 	for (String user : users) {
+ 	 		verifyUserPresent(user);
+		}
+	}
+	/**
+	 * Check display of enable user
+	 * @param users
+	 */
+	public void checkDisplayEnableUser(String...users){
+		info("check display of enable users");
+		waitForAndGetElement(ELEMENT_DISABLE_USER_COLUMN);
+		
+ 	 	for (String user : users) {
+ 	 		waitForAndGetElement(ELEMENT_DISBALE_USER_ENABLED.replace("$userName", user),2000,0);
+ 	 		waitForAndGetElement(ELEMENT_DISABLE_USER_TOGGLE_NO.replace("$userName", user),2000,0);
+ 			waitForAndGetElement(ELEMENT_DISABLE_USER_TOGGLE_YES.replace("$userName", user),2000,0);
+		}
+	}
+	/**
+	 * Check display of disable user
+	 * @param users
+	 */
+	public void checkDisplayDisableUser(String...users){
+		info("check display of disable users");
+		waitForAndGetElement(ELEMENT_DISABLE_USER_COLUMN);
+		
+ 	 	for (String user : users) {
+ 	 		waitForAndGetElement(ELEMENT_DISBALE_USER_DISABLED.replace("$userName", user),2000,0);
+ 	 		waitForAndGetElement(ELEMENT_DISABLE_USER_TOGGLE_NO.replace("$userName", user),2000,0);
+ 			waitForAndGetElement(ELEMENT_DISABLE_USER_TOGGLE_YES.replace("$userName", user),2000,0);
+		}
+	}
+	
+>>>>>>> FQA-2579:PLF 4.3 - Write High Fnc/Disable User/Community Management
 }

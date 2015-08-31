@@ -96,6 +96,8 @@ public class Disable_User_TestConfig extends PlatformBase {
 	String lastName;
 	String email;
 	String membership;
+	String searchUserName ;
+	
 	@BeforeClass
 	public void setUpBeforeClass() throws Exception{
 		info("Start setUpBeforeClass");
