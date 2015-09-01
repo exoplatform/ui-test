@@ -1,19 +1,22 @@
 package org.exoplatform.selenium.platform.disableUser.functional;
 
 import static org.exoplatform.selenium.TestLogger.info;
+
 import org.exoplatform.selenium.platform.ActivityStream.optionMenuActivity;
+
 import org.testng.annotations.*;
 
 
 	public class Disable_User_ActivityStream extends Disable_User_TestConfig{
 		
 		public void createUser() {
-			username = userInfoData.getUserNameByIndex(5)+getRandomString();
+            membership = portMemPermisData.getContentByIndex(0);
+            username = userInfoData.getUserNameByIndex(5)+getRandomString();
 			password = userInfoData.getPassWordByIndex(5)+getRandomString();
 			lastName = userInfoData.getLastNameByIndex(5)+getRandomString();
 			email = userInfoData.getEmailByIndex(5)+getRandomString()+mailSuffixData.getMailSuffixByIndex(2);
-            membership = portMemPermisData.getContentByIndex(0);
-
+			searchUserName = userSearchOptionData.getUserSearchOptionByIndex(0);
+			
 			info("Create new user");
 			navToolBar.goToAddUser();
 			addUserPage.addUser(username, password, email, username, lastName);
@@ -42,7 +45,6 @@ import org.testng.annotations.*;
 		info("Test 1: Check All Activities stream of disabled user after re-enable active user in case less than 20 activities");
 		String activity1 = txData.getContentByArrayTypeRandom(1) + getRandomNumber();
 		String activity2 = txData.getContentByArrayTypeRandom(1) + getRandomNumber();
-		String searchUserName = userSearchOptionData.getUserSearchOptionByIndex(0);
 		createUser();
 		
 		/*Step Number: 1
@@ -132,7 +134,6 @@ import org.testng.annotations.*;
 		String activity1 = txData.getContentByArrayTypeRandom(1) + getRandomNumber();
 		String activity2 = txData.getContentByArrayTypeRandom(1) + getRandomNumber();
 		String activity3 = txData.getContentByArrayTypeRandom(1) + getRandomNumber();
-		String searchUserName = userSearchOptionData.getUserSearchOptionByIndex(0);
 		createUser();
 		info("add many activities");
 		hp.goToHomePage();
@@ -678,7 +679,6 @@ import org.testng.annotations.*;
 		info("Test 10 Check Connections stream of disabled user after re-enable active user in case less than 20 activities");
 		String activity1 = txData.getContentByArrayTypeRandom(1) + getRandomNumber();
 		String activity2 = txData.getContentByArrayTypeRandom(1) + getRandomNumber();
-		String searchUserName = userSearchOptionData.getUserSearchOptionByIndex(0);
 		createUser();
 		/*Step Number: 1
 		*Step Name: Step 1: Share activity on All activities stream
@@ -766,7 +766,6 @@ import org.testng.annotations.*;
 		String activity1 = txData.getContentByArrayTypeRandom(1) + getRandomNumber();
 		String activity2 = txData.getContentByArrayTypeRandom(1) + getRandomNumber();
 		String activity3 = txData.getContentByArrayTypeRandom(1) + getRandomNumber();
-		String searchUserName = userSearchOptionData.getUserSearchOptionByIndex(0);
 		createUser();
 		info("add many activities");
 		hp.goToHomePage();
@@ -1313,7 +1312,6 @@ import org.testng.annotations.*;
 	public  void test18_CheckDisabledUserInMentionList() {
 		info("Test 18 Check disabled user in Mention list");
 		String activity1 = txData.getContentByArrayTypeRandom(1) + getRandomNumber();
-		String searchUserName = userSearchOptionData.getUserSearchOptionByIndex(0);
 		createUser();
 		magAc.signOut();
 		magAc.signIn(DATA_USER1,DATA_PASS);
@@ -1354,7 +1352,6 @@ import org.testng.annotations.*;
 		String activity3 = txData.getContentByArrayTypeRandom(1) + getRandomNumber();
 		String comment1 = txData.getContentByArrayTypeRandom(1) + getRandomNumber();
 		String comment2 = txData.getContentByArrayTypeRandom(1) + getRandomNumber();
-		String searchUserName = userSearchOptionData.getUserSearchOptionByIndex(0);
 		createUser();
 		info("add an activity");
 		hp.goToHomePage();

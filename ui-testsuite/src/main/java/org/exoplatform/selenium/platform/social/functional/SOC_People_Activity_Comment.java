@@ -148,7 +148,7 @@ public class SOC_People_Activity_Comment extends SOC_TestConfig{
 		magAc.signIn(username1, password1);
 		hp.goToConnections();
 		connMag.goToConnectionTab(selectTabOption.ALL);
-		connMag.goToUser(DATA_NAME_USER1);
+		connMag.goToUserByFullName(DATA_NAME_USER1);
 		uBase.goToActivityTab();
 		String comment=txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		hpAct.addComment(activity1, comment);

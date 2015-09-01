@@ -1,0 +1,18 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="Disable User Func Test" verbose="1" preserve-order="true">
+	<test name="disableUser-func-part2" enabled="true">
+		<groups>
+			<run>
+				<exclude name="pending" />
+			</run>
+		</groups>
+		<classes>
+			<class name="org.exoplatform.selenium.platform.disableUser.functional.Disable_User_TestConfig" />
+			<class name="org.exoplatform.selenium.platform.disableUser.functional.Disable_User_People" />
+			
+		</classes>
+	</test>
+	<listeners>
+		<listener class-name="org.exoplatform.selenium.TestReportListener" />
+	</listeners>
+</suite>

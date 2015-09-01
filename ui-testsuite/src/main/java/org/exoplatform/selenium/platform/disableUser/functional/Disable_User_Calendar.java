@@ -1,9 +1,11 @@
 package org.exoplatform.selenium.platform.disableUser.functional;
 
 import static org.exoplatform.selenium.TestLogger.info;
+
 import org.exoplatform.selenium.Utils;
 import org.exoplatform.selenium.platform.calendar.CalendarHomePage.selectViewOption;
 import org.exoplatform.selenium.platform.calendar.CalendarManagement.menuOfMainCalendar;
+
 import org.testng.annotations.*;
 
 
@@ -26,15 +28,15 @@ import org.testng.annotations.*;
 		}
 		public void createNewUser(){
 			info("Add new a user");
-			int index = userInfoData.getRandomIndexByType(3);
-			username = userInfoData.newUserName.get(index)+getRandomNumber();
-			String firstname = userInfoData.newFirstName.get(index);
-			String lastname = userInfoData.newLastName.get(index);
-			password = userInfoData.newPassword.get(index);
-			String email = EMAIL_ADDRESS1;
+			username = userInfoData.getUserNameByIndex(5)+getRandomString();
+			password = userInfoData.getPassWordByIndex(5)+getRandomString();
+			lastName = userInfoData.getLastNameByIndex(5)+getRandomString();
+			email = userInfoData.getEmailByIndex(5)+getRandomString()+mailSuffixData.getMailSuffixByIndex(2);
+			searchUserName = userSearchOptionData.getUserSearchOptionByIndex(0);
 			
+			info("Create new user");
 			navToolBar.goToAddUser();
-			addUserPage.addUser(username, password, email,firstname,lastname);
+			addUserPage.addUser(username, password, email, username, lastName);
 		}
 	/**
 	*<li> Case ID:127978.</li>

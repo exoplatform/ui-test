@@ -10,6 +10,7 @@ import org.exoplatform.selenium.platform.calendar.CalendarHomePage;
 import org.exoplatform.selenium.platform.forum.ForumHomePage;
 import org.exoplatform.selenium.platform.social.SpaceManagement;
 import org.exoplatform.selenium.platform.wiki.WikiHomePage;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -406,7 +407,32 @@ public class HomePagePlatform extends TestBase{
 			click(ELEMENT_HOMEPAGE_DROP_MENU_CONNECTIONS);
 			break;
 		}
+	}
 		
+	 /** Check display of user in Invitation gadget
+	 * @param user
+	 * @param isPresent
+	 */
+	public void checkDisplayInInvitationGadget(String user,boolean isPresent){
+		info("check display of user in Invitation");
+		goToHomePage();
+		if(isPresent)
+			waitForAndGetElement(ELEMENT_INVITATIONS_PEOPLE_AVATAR .replace("${name}",user));
+		else
+			waitForElementNotPresent(ELEMENT_INVITATIONS_PEOPLE_AVATAR .replace("${name}",user));
+	}
+	/**
+	 * Check display of user in Suggestion gadget
+	 * @param user
+	 * @param isPresent
+	 */
+	public void checkDisplayInSuggestionGadget(String user,boolean isPresent){
+		info("check display of user in Suggestion");
+		goToHomePage();
+		if(isPresent)
+			waitForAndGetElement(ELEMENT_SUGGESTION_NAME.replace("${name}",user));
+		else
+			waitForElementNotPresent(ELEMENT_SUGGESTION_NAME.replace("${name}",user));
 	}
 }
 

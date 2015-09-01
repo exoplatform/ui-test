@@ -7,14 +7,14 @@ import org.testng.annotations.*;
 
 	public class Disable_User_Answers extends Disable_User_TestConfig{
 	public void disableUser(){
-		String searchUserName = userSearchOptionData.getUserSearchOptionByIndex(0);
+		searchUserName = userSearchOptionData.getUserSearchOptionByIndex(0);
 		info("Disable user");
  	 	navToolBar.goToUsersAndGroupsManagement();
  	 	userAndGroup.searchUser(DATA_USER2, searchUserName);
  	 	userAndGroup.enableDisableUser(DATA_USER2, false);
 	}
 	public void enableUser(){
-		String searchUserName = userSearchOptionData.getUserSearchOptionByIndex(0);
+		searchUserName = userSearchOptionData.getUserSearchOptionByIndex(0);
 		info("enable user");
  	 	navToolBar.goToUsersAndGroupsManagement();
  	 	userAndGroup.selectDisableStatus("All");

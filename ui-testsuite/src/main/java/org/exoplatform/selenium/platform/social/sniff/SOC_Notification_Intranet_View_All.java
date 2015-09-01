@@ -119,7 +119,7 @@ public class SOC_Notification_Intranet_View_All extends SOC_TestConfig_3{
 		
 		info("user 2 posts activity in user1's activity stream");
 		hp.goToConnections();
-		connMag.goToUser(username1);
+		connMag.goToUserByUserName(username1);
 		navTool.goToMyActivities();
 		hpAct.addActivity(activity2,"");
 		hpAct.checkActivity(activity2);

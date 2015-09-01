@@ -175,7 +175,7 @@ public class SOC_People_Activity_Add extends SOC_TestConfig{
 		magAc.signIn(DATA_USER1, DATA_PASS);
 		hp.goToConnections();
 		connMag.goToConnectionTab(selectTabOption.ALL);
-		connMag.goToUser(username1);
+		connMag.goToUserByUserName(username1);
 		uBase.goToActivityTab();
 		String activity1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		hpAct.addActivity(activity1, "");

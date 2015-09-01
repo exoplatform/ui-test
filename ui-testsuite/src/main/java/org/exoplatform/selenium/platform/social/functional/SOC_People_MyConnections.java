@@ -292,7 +292,7 @@ public class SOC_People_MyConnections extends SOC_TestConfig{
 			- Connections: show all users which have relations with usera*/ 
 		connMag.goToConnectionTab(selectTabOption.PENDING);
 		waitForAndGetElement(connMag.ELEMENT_CONNECTION_CANCEL_BTN.replace("${user}",username1),2000,1);
-		connMag.goToUser(username1);
+		connMag.goToUserByUserName(username1);
 		uBase.goToActivityTab();
 		waitForAndGetElement(By.xpath(hpAct.ELEMENT_ACTIVITY_AUTHOR_ACTIVITY.replace("${activityText}", activity1)));
 		uBase.goToProfileTab();
@@ -368,7 +368,7 @@ public class SOC_People_MyConnections extends SOC_TestConfig{
 		hp.goToConnections();
 		connMag.goToConnectionTab(selectTabOption.RECEIVE);
 		waitForAndGetElement(connMag.ELEMENT_CONNECTION_CONFIRM_BTN.replace("${user}",username1),2000,1);
-		connMag.goToUser(username1);
+		connMag.goToUserByUserName(username1);
 		uBase.goToActivityTab();
 		waitForAndGetElement(By.xpath(hpAct.ELEMENT_ACTIVITY_AUTHOR_ACTIVITY.replace("${activityText}", activity1)));
 		uBase.goToProfileTab();

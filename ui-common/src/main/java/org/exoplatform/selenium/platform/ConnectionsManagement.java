@@ -2,6 +2,7 @@ package org.exoplatform.selenium.platform;
 
 import org.exoplatform.selenium.Utils;
 import org.exoplatform.selenium.platform.social.UserProfilePage;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -54,23 +55,23 @@ public class ConnectionsManagement extends PlatformBase {
 		switch(option){
 		case ALL:
 			info("Go to all tab");
-			click(ELEMENT_ALL_CONNECTIONS_TAB);
+			click(ELEMENT_ALL_CONNECTIONS_TAB,0,true);
 			break;
 		case MYCONNECTION:
 			info("Go to my connection tab");
-			click(ELEMENT_MY_CONNECTIONS_TAB);
+			clickByJavascript(ELEMENT_MY_CONNECTIONS_TAB,0,true);
 			break;
 		case RECEIVE:
 			info("Go to receive tab");
-			click(ELEMENT_REQUEST_RECEIVE_CONNECTIONS_TAB);
+			click(ELEMENT_REQUEST_RECEIVE_CONNECTIONS_TAB,0,true);
 			break;
 		case PENDING:
 			info("Go to pending tab");
-			click(ELEMENT_REQUEST_PENDING_CONNECTIONS_TAB);
+			click(ELEMENT_REQUEST_PENDING_CONNECTIONS_TAB,0,true);
 			break;
 		default:
 			info("Go to all tab");
-			click(ELEMENT_ALL_CONNECTIONS_TAB);
+			click(ELEMENT_ALL_CONNECTIONS_TAB,0,true);
 			break;
 		}
 		Utils.pause(1000);
@@ -231,10 +232,56 @@ public class ConnectionsManagement extends PlatformBase {
 	 * Go to User
 	 * @param userName
 	 */
-	public void goToUser(String fullName){
+	public void goToUserByFullName(String fullName){
 		info("Go to User profile page");
 		searchPeople(fullName, "", "", "");
 		click(ELEMENT_USER_AVATAR.replace("${fullname}", fullName));
 		waitForAndGetElement(myProf.ELEMENT_NAME_OF_PROFILE_TOP_LEFT.replace("${name}", fullName));
+	}
+	
+	/**
+	 * Go to User
+	 * @param userName
+	 */
+	public void goToUserByUserName(String userName){
+		info("Go to User profile page");
+		searchPeople(userName, "", "", "");
+		click(ELEMENT_USER_LINK.replace(""
+				+ "${userName}", userName));
+		waitForAndGetElement(myProf.ELEMENT_NAME_OF_PROFILE_TOP_LEFT.replace("${name}", userName));
+	}
+	
+	/**
+	 * Check display of user in Connection
+	 * @param user
+	 * @param isPresent
+	 * @param opt
+	 * 			all, my connections, request pending,...
+	 */
+	public void checkDisplayInConnection(String user,boolean isPresent,selectTabOption opt){
+		goToConnectionTab(opt);
+		info("check display of user in Connection");
+		if(isPresent)
+			waitForAndGetElement(ELEMENT_USER_LINK.replace("${userName}", user),2000,0);
+		else
+			waitForElementNotPresent(ELEMENT_USER_LINK.replace("${userName}", user));
+	}
+	/**
+	 * Check search result in Connection
+	 * @param user
+	 * @param isPresent
+	 * @param opt
+	 *  			all, my connections, request pending,...
+	 */
+	public void checkSearchResultInConnection(String user,boolean isPresent,selectTabOption opt){
+		goToConnectionTab(opt);
+		info("check display of search result");
+		if(isPresent){
+			searchPeople(user, "", "", "");
+			waitForAndGetElement(ELEMENT_USER_LINK.replace("${userName}", user),2000,0);
+		}else {
+			searchPeople(user, "", "", "");
+			waitForElementNotPresent(ELEMENT_USER_LINK.replace("${userName}", user));
+		}
 	}
 }

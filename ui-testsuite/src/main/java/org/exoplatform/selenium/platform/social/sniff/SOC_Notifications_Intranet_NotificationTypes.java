@@ -1176,7 +1176,7 @@ public class SOC_Notifications_Intranet_NotificationTypes extends SOC_TestConfig
 		magAc.signIn(username1, password1);
 		hp.goToConnections();
 		connMag.acceptAConnection(userName);
-		connMag.goToUser(fullName);
+		connMag.goToUserByFullName(fullName);
 		//navTool.goToMyActivities();
 		userPage.goToActivityTab();
 		hpAct.addActivity(activity, "");

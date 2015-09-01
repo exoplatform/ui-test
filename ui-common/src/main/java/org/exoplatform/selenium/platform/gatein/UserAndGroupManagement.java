@@ -5,13 +5,14 @@ import java.util.ArrayList;
 import junit.framework.Assert;
 import org.exoplatform.selenium.Dialog;
 import org.exoplatform.selenium.platform.PlatformBase;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+
 import org.exoplatform.selenium.Utils;
 import org.exoplatform.selenium.ManageAlert;
 
 public class UserAndGroupManagement extends PlatformBase {
-
 	
 	public final String ELEMENT_LINK_SETUP = ".//*[@id='UISetupPlatformToolBarPortlet']/a";
 	public final String ELEMENT_MANAGE_USER = ".//*[@id='UISetupPlatformToolBarPortlet']//a[text()='Users']";	
@@ -78,6 +79,7 @@ public class UserAndGroupManagement extends PlatformBase {
 	public final String ELEMENT_MSG_UPDATE_USER_PROFILE = "The user profile has been updated.";
 	public final By ELEMENT_OK_BUTTON = By.xpath("//*[contains(text(),'OK')]");
 	public final String ELEMENT_MSG_CANNOT_DELETE = "You cannot delete this membership because it is mandatory.";
+	public final By ELEMENT_OK_BTN = By.xpath("//*[@class='btn'][contains(.,'OK')]");
 	//Account tab
 	public final By ELEMENT_USER_ACCOUNT_INFO_TAB = By.xpath("//*[@data-target='#UIAccountEditInputSet-tab']");
 	public By ELEMENT_EMAIL = By.id("email");
@@ -118,6 +120,7 @@ public class UserAndGroupManagement extends PlatformBase {
     public final String ELEMENT_DISABLE_USER_STATUS_SELECTED ="//*[@id='UIListUsers-userStatusFilter']/*[contains(.,'$status')][@selected='selected']";
     public final String ELEMENT_DISABLE_USER_TOGGLE_NO = "//*[@id='UIListUsersGird']//*[contains(text(),'$userName')]/../..//*[contains(@class,'switchBtnLabelOff')]/*[contains(.,'No')]";
     public final String ELEMENT_DISABLE_USER_TOGGLE_YES = "//*[@id='UIListUsersGird']//*[contains(text(),'$userName')]/../..//*[contains(@class,'switchBtnLabelOn')]/*[contains(.,'Yes')]";
+    
     
     ManageAlert alert;
 	Dialog dialog;
@@ -715,12 +718,13 @@ public class UserAndGroupManagement extends PlatformBase {
 			dialog.closeMessageDialog();
 			searchUser("", ELEMENT_MSG_SEARCH_USER_NAME);
 			Utils.pause(2000);
+			
 		}
 	}
 	
 	/**
 	 * function: Delete user
-	 */
+	 *//*
 	public void deleteUser() {
 		info("--Deleting user ");
 		if (waitForAndGetElement( ELEMENT_USER_DELETE_ICON1, 2000, 0) != null) {
@@ -730,7 +734,7 @@ public class UserAndGroupManagement extends PlatformBase {
 			Utils.pause(1000);
 			waitForElementNotPresent(ELEMENT_USER_DELETE_ICON1);
 		}
-	}
+	}*/
 	/**
 	 * Remove a user from a group
 	 * @param username
@@ -743,7 +747,6 @@ public class UserAndGroupManagement extends PlatformBase {
 		info("User is removed from the group successfully");
 	}
 	/**
-<<<<<<< HEAD
 	 * Delete many users at the same time
 	 * @param arrayUsers
 	 */
@@ -754,7 +757,7 @@ public class UserAndGroupManagement extends PlatformBase {
 			info("Delete user:"+arrayUsers.get(i)+" successfully");
 		}
 	}
-=======
+	 /**
 	 * Check status drop box
 	 */
 	public void checkStatusDropBox(){
@@ -805,6 +808,17 @@ public class UserAndGroupManagement extends PlatformBase {
  			waitForAndGetElement(ELEMENT_DISABLE_USER_TOGGLE_YES.replace("$userName", user),2000,0);
 		}
 	}
-	
->>>>>>> FQA-2579:PLF 4.3 - Write High Fnc/Disable User/Community Management
+	/**
+	* function: Delete user
+	*/
+		public void deleteUser() {
+			info("--Deleting user ");
+			if (waitForAndGetElement( ELEMENT_USER_DELETE_ICON1, 2000, 0) != null) {
+				Utils.pause(2000);
+				click( ELEMENT_USER_DELETE_ICON1);
+				alert.waitForConfirmation(ELEMENT_MSG_CONFIRM_DELETE1);
+				Utils.pause(1000);
+				waitForElementNotPresent(ELEMENT_USER_DELETE_ICON1);
+		}
+	}
 }

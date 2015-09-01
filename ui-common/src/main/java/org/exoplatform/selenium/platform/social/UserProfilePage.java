@@ -369,4 +369,27 @@ public class UserProfilePage extends PlatformBase {
 		click(ELEMETN_ACTIVITY_TAB);
 		Utils.pause(3000);
     }
+	/**
+	 * Connect in profile page
+	 * @param user
+	 */
+	public void connectToUserInProfilePage(String user){
+		info("connect to: "+user);
+		driver.get(baseUrl+"/intranet/profile/"+user);
+		click(ELEMENT_UIMINICONNECTIONS_PORLET_CONNECT_STATUS,0,true);
+		waitForAndGetElement(ELEMENT_UIMINICONNECTIONS_PORLET_CANCEL_STATUS);
+		waitForElementNotPresent(ELEMENT_UIMINICONNECTIONS_PORLET_CONNECT_STATUS);
+	}
+	/**
+	 * Disconnect in profile page
+	 * @param user
+	 */
+	public void disconnectInProfilePage(String user){
+		info("disconnect: "+user);
+		driver.get(baseUrl+"/intranet/profile/"+user);
+		mouseOver(ELEMENT_UIMINICONNECTIONS_PORLET_CONNECTED_STATUS,true);
+		waitForAndGetElement(ELEMENT_UIMINICONNECTIONS_PORLET_DISCONNECTED_STATUS).click();
+		waitForAndGetElement(ELEMENT_UIMINICONNECTIONS_PORLET_CONNECT_STATUS);
+		waitForElementNotPresent(ELEMENT_UIMINICONNECTIONS_PORLET_CONNECTED_STATUS);
+	}
 }

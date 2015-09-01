@@ -1,6 +1,6 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
-<suite name="Platform Sniff Test" verbose="1" preserve-order="true">
-	<test name="social-sniff-part2" enabled="true">
+<suite name="Disable User Func Test" verbose="1" preserve-order="true">
+	<test name="disableUser-func-part1" enabled="true">
 		<groups>
 			<run>
 				<exclude name="pending" />
