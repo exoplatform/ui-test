@@ -13,12 +13,19 @@ public class PlatformPermission extends PlatformBase {
 
 	//Option select permission button
 	public final By ELEMENT_SELECT_USER_ICON = By.xpath("//*[@class='uiIconUser uiIconLightGray']");
+	public final By ELEMENT_SELECT_USER_ICON1 = By.xpath("//*[contains(@class,'uiIconSelectUser')]");
 	public final By ELEMENT_SELECT_GROUP_ICON = By.xpath("//*[@class='uiIconGroup uiIconLightGray']");
 	public final By ELEMENT_SELECT_MEMBERSHIP_ICON = By.xpath("//*[@class='uiIconMembership uiIconLightGray']");
 
 	//User permission
+<<<<<<< HEAD
 	public final String ELEMENT_USER_CHECKBOX = "//*[@id='${user}' and @type='checkbox']";
 	public final By ELEMENT_ADD_USERS_BUTTON = By.xpath("//*[contains(@class,'addButton')]");
+=======
+	public final String ELEMENT_USER_CHECKBOX = "//*[text()='${user}']/../..//*[@type='checkbox']";
+	public final String ELEMENT_USER_LIST="//*[@id='UIListUsers']//*[contains(.,'${user}')]";
+	public final By ELEMENT_ADD_USERS_BUTTON = By.xpath("//*[@id='UIUserSelector']//*[text()='Add']");
+>>>>>>> FQA-2584:PLF 4.3 - Write High Fnc/Disable User/Space
 	public final By ELEMENT_SEARCH_USER_INPUT = By.id("Quick Search");
 	public final By ELEMENT_QUICK_SEARCH_BUTTON = By.xpath("//a[@data-original-title='Quick Search']");
 	public final By ELEMENT_SELECT_SEARCH = By.name("filter");
@@ -101,9 +108,9 @@ public class PlatformPermission extends PlatformBase {
 	 */
 	public void checkUserSelector(String user,boolean isPresent){
 		if(isPresent)
-			waitForAndGetElement(ELEMENT_USER_CHECKBOX.replace("${user}", user));
+			waitForAndGetElement(ELEMENT_USER_LIST.replace("${user}", user));
 		else
-			waitForElementNotPresent(ELEMENT_USER_CHECKBOX.replace("${user}", user));
+			waitForElementNotPresent(ELEMENT_USER_LIST.replace("${user}", user));
 	}
 	/**
 	 * Select group permission
@@ -141,5 +148,20 @@ public class PlatformPermission extends PlatformBase {
 		click(ELEMENT_SELECT_RIGHT_PARENT_GROUP.replace("$group", membership));
 		waitForElementNotPresent(ELEMENT_SELECT_MEMBERSHIP_POPUP);
 	}
-
+	/**
+	 * Check search result
+	 * @param keySearch
+	 * @param isPresent
+	 * 					true if it has result
+	 * 					false if it doesn't have result
+	 */
+	public void searchUser(String keySearch, boolean isPresent){
+		type(ELEMENT_SEARCH_USER_INPUT, keySearch, true);
+		Utils.pause(500);
+		click(ELEMENT_QUICK_SEARCH_BUTTON);
+		if(isPresent)
+				waitForAndGetElement((ELEMENT_USER_CHECKBOX.replace("${user}", keySearch)),5000,1,2);
+		else
+				waitForElementNotPresent((ELEMENT_USER_CHECKBOX.replace("${user}", keySearch)),5000,1,2);
+	}
 }

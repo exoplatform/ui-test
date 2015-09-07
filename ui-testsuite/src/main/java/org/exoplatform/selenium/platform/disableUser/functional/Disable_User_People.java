@@ -1,25 +1,12 @@
 package org.exoplatform.selenium.platform.disableUser.functional;
 
 import static org.exoplatform.selenium.TestLogger.info;
-
 import org.exoplatform.selenium.platform.ConnectionsManagement.selectTabOption;
-
 import org.testng.annotations.*;
 
 
 	public class Disable_User_People extends Disable_User_TestConfig{
-		public void createNewUser(){
-			info("Add new a user");
-			username = userInfoData.getUserNameByIndex(5)+getRandomString();
-			password = userInfoData.getPassWordByIndex(5)+getRandomString();
-			lastName = userInfoData.getLastNameByIndex(5)+getRandomString();
-			email = userInfoData.getEmailByIndex(5)+getRandomString()+mailSuffixData.getMailSuffixByIndex(2);
-			searchUserName = userSearchOptionData.getUserSearchOptionByIndex(0);
-			
-			info("Create new user");
-			navToolBar.goToAddUser();
-			addUserPage.addUser(username, password, email, username, lastName);
-		}
+		
 	/**
 	*<li> Case ID:128015.</li>
 	*<li> Test Case Name: Check disable user in Invitation gadget.</li>
@@ -64,19 +51,13 @@ import org.testng.annotations.*;
 			- User A is not displayed in the Invitation gadget*/ 
 		magAc.signOut();
 		magAc.signIn(DATA_USER1,DATA_PASS);
-		info("disable user");
-		navToolBar.goToUsersAndGroupsManagement();
- 	 	userAndGroup.searchUser(username, searchUserName);
- 	 	userAndGroup.enableDisableUser(username, false);
+		disableUser();
  	 	hp.checkDisplayInInvitationGadget(user, false);
  	 	
  	 	hp.goToConnections();
  	 	connMag.checkDisplayInConnection(user, false, selectTabOption.RECEIVE);
  	 	
- 	 	info("delete data");
- 	 	navToolBar.goToUsersAndGroupsManagement();
-		userAndGroup.selectDisableStatus("All");
-		userAndGroup.deleteUser(username);
+ 	 	deleteUser();
  	}
 
 	/**
@@ -114,10 +95,7 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- User A is not displayed in the "Requests Pending" page*/
-		info("disable user");
-		navToolBar.goToUsersAndGroupsManagement();
- 	 	userAndGroup.searchUser(username, searchUserName);
- 	 	userAndGroup.enableDisableUser(username, false);
+		disableUser();
  	 	
  	 	hp.goToConnections();
  	 	connMag.checkDisplayInConnection(username, false, selectTabOption.PENDING);
@@ -131,19 +109,12 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- The User A is displayed in the "Requests Pending" page*/ 
- 	 	info("enable user");
-		navToolBar.goToUsersAndGroupsManagement();
-		userAndGroup.selectDisableStatus("All");
- 	 	userAndGroup.searchUser(username, searchUserName);
- 	 	userAndGroup.enableDisableUser(username, true);
+ 	 	enableUser();
  	 	
  	 	hp.goToConnections();
  	 	connMag.checkDisplayInConnection(username, true, selectTabOption.PENDING);
  	 	
- 	 	info("delete data");
- 	 	navToolBar.goToUsersAndGroupsManagement();
-		userAndGroup.selectDisableStatus("All");
-		userAndGroup.deleteUser(username);
+ 	 	deleteUser();
  	}
 
 	/**
@@ -176,16 +147,10 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- User A is not displayed in the Gadget "Suggestion"*/ 
-		info("disable user");
-		navToolBar.goToUsersAndGroupsManagement();
- 	 	userAndGroup.searchUser(username, searchUserName);
- 	 	userAndGroup.enableDisableUser(username, false);
+		disableUser();
  	 	hp.checkDisplayInSuggestionGadget(username,false);
  	 	
- 	 	info("delete data");
- 	 	navToolBar.goToUsersAndGroupsManagement();
-		userAndGroup.selectDisableStatus("All");
-		userAndGroup.deleteUser(username);
+ 	 	deleteUser();
  	}
 	/**
 	*<li> Case ID:127967.</li>
@@ -234,18 +199,12 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- User A is not displayed in the list of All people user*/ 
-		info("disable user");
-		navToolBar.goToUsersAndGroupsManagement();
- 	 	userAndGroup.searchUser(username, searchUserName);
- 	 	userAndGroup.enableDisableUser(username, false);
+		disableUser();
  	 	hp.goToConnections();
 		connMag.checkDisplayInConnection(username, false, selectTabOption.MYCONNECTION);
  	 	connMag.checkDisplayInConnection(username, false, selectTabOption.ALL);
 		
-		info("delete data");
- 	 	navToolBar.goToUsersAndGroupsManagement();
-		userAndGroup.selectDisableStatus("All");
-		userAndGroup.deleteUser(username);
+		deleteUser();
  	}
 
 	/**
@@ -273,10 +232,7 @@ import org.testng.annotations.*;
 		
 		magAc.signOut();
 		magAc.signIn(DATA_USER1,DATA_PASS);
-		info("disable user");
-		navToolBar.goToUsersAndGroupsManagement();
- 	 	userAndGroup.searchUser(username, searchUserName);
- 	 	userAndGroup.enableDisableUser(username, false);
+		disableUser();
 		/*Step Number: 1
 		*Step Name: Step 1: NOT display disabled user on "My Connections" page
 		*Step Description: 
@@ -302,20 +258,13 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- User B is displayed in the list of connection users*/ 
- 	 	info("enable user");
-		navToolBar.goToUsersAndGroupsManagement();
-		userAndGroup.selectDisableStatus("All");
- 	 	userAndGroup.searchUser(username, searchUserName);
- 	 	userAndGroup.enableDisableUser(username, true);
+ 	 	enableUser();
  	 	
  	 	hp.goToConnections();
 		connMag.checkDisplayInConnection(username, true, selectTabOption.MYCONNECTION);
  	 	connMag.checkDisplayInConnection(username, true, selectTabOption.ALL);
  	 	
- 	 	info("delete data");
- 	 	navToolBar.goToUsersAndGroupsManagement();
-		userAndGroup.selectDisableStatus("All");
-		userAndGroup.deleteUser(username);
+ 	 	deleteUser();
  	}
 
 	/**
@@ -341,10 +290,7 @@ import org.testng.annotations.*;
 		
 		magAc.signOut();
 		magAc.signIn(DATA_USER1,DATA_PASS);
-		info("disable user");
-		navToolBar.goToUsersAndGroupsManagement();
- 	 	userAndGroup.searchUser(username, searchUserName);
- 	 	userAndGroup.enableDisableUser(username, false);
+		disableUser();
 		/*Step Number: 1
 		*Step Name: Step 1: NOT display disable user on Invitation gadget
 		*Step Description: 
@@ -368,20 +314,13 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- User B is displayed on the Invitation gadget*/ 
-		info("enable user");
-		navToolBar.goToUsersAndGroupsManagement();
-		userAndGroup.selectDisableStatus("All");
- 	 	userAndGroup.searchUser(username, searchUserName);
- 	 	userAndGroup.enableDisableUser(username, true);
+		enableUser();
  	 	
  	 	hp.checkDisplayInInvitationGadget(username, true);
  	 	hp.goToConnections();
 		connMag.checkDisplayInConnection(username, true, selectTabOption.RECEIVE);
 		
-		info("delete data");
- 	 	navToolBar.goToUsersAndGroupsManagement();
-		userAndGroup.selectDisableStatus("All");
-		userAndGroup.deleteUser(username);
+		deleteUser();
  	}
 
 	/**
@@ -394,10 +333,7 @@ import org.testng.annotations.*;
 	public  void test10_CheckTheDisplayOfUserInRequestPendingPageAfterReenabling() {
 		info("Test 10 Check the display of user in Request Pending page after re-enabling");
 		createNewUser();
-		info("disable user");
-		navToolBar.goToUsersAndGroupsManagement();
- 	 	userAndGroup.searchUser(username, searchUserName);
- 	 	userAndGroup.enableDisableUser(username, false);
+		disableUser();
 		/*Step Number: 1
 		*Step Name: Step 1: Send Connection Invitation to disabled user
 		*Step Description: 
@@ -422,19 +358,12 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- User B is displayed in the Request Pending page*/ 
- 	 	info("enable user");
-		navToolBar.goToUsersAndGroupsManagement();
-		userAndGroup.selectDisableStatus("All");
- 	 	userAndGroup.searchUser(username, searchUserName);
- 	 	userAndGroup.enableDisableUser(username, true);
+ 	 	enableUser();
  	 	
  	 	hp.goToConnections();
 		connMag.checkDisplayInConnection(username, true, selectTabOption.PENDING);
 		
-		info("delete data");
- 	 	navToolBar.goToUsersAndGroupsManagement();
-		userAndGroup.selectDisableStatus("All");
-		userAndGroup.deleteUser(username);
+		deleteUser();
  	}
 
 	/**
@@ -447,10 +376,7 @@ import org.testng.annotations.*;
 	public  void test12_CheckTheDisplayOfUserInSuggestionGadgetAfterReenabling() {
 		info("Test 12 Check the display of user in Suggestion gadget after re-enabling");
 		createNewUser();
-		info("disable user");
-		navToolBar.goToUsersAndGroupsManagement();
- 	 	userAndGroup.searchUser(username, searchUserName);
- 	 	userAndGroup.enableDisableUser(username, false);
+		disableUser();
 		/*Step Number: 1
 		*Step Name: Step 1: NOT display disabled user in "Suggestions" gadget
 		*Step Description: 
@@ -470,17 +396,10 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- User B is displayed in the "Suggestions" gadget*/ 
- 	 	info("enable user");
-		navToolBar.goToUsersAndGroupsManagement();
-		userAndGroup.selectDisableStatus("All");
- 	 	userAndGroup.searchUser(username, searchUserName);
- 	 	userAndGroup.enableDisableUser(username, true);
+ 	 	enableUser();
  	 	hp.checkDisplayInSuggestionGadget(username, true);
  	 	
- 	 	info("delete data");
- 	 	navToolBar.goToUsersAndGroupsManagement();
-		userAndGroup.selectDisableStatus("All");
-		userAndGroup.deleteUser(username);
+ 	 	deleteUser();
  	}
 
 	/**
@@ -502,10 +421,7 @@ import org.testng.annotations.*;
 		
 		magAc.signOut();
 		magAc.signIn(DATA_USER1,DATA_PASS);
-		info("disable user");
-		navToolBar.goToUsersAndGroupsManagement();
- 	 	userAndGroup.searchUser(username, searchUserName);
- 	 	userAndGroup.enableDisableUser(username, false);
+		disableUser();
 		/*Step Number: 1
 		*Step Name: Step 1: Connect to Intranet
 		*Step Description: 
@@ -525,10 +441,7 @@ import org.testng.annotations.*;
 			- The Profile of User A is accessible and it actions: Connect, Cancel Request, Connect/Disconnect are displayed as usual.*/ 
  	 	myProfile.disconnectInProfilePage(username);
  	 	
- 	 	info("delete data");
- 	 	navToolBar.goToUsersAndGroupsManagement();
-		userAndGroup.selectDisableStatus("All");
-		userAndGroup.deleteUser(username);
+ 	 	deleteUser();
  	}
 
 	/**
@@ -581,18 +494,12 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- User A is not displayed the search page*/ 
-		info("disable user");
-		navToolBar.goToUsersAndGroupsManagement();
- 	 	userAndGroup.searchUser(username, searchUserName);
- 	 	userAndGroup.enableDisableUser(username, false);
+		disableUser();
  	 	
  	 	hp.goToConnections();
  	 	connMag.checkSearchResultInConnection(username, false,selectTabOption.MYCONNECTION);
  	 	connMag.checkSearchResultInConnection(username, false,selectTabOption.ALL);
  	 	
- 	 	info("delete data");
- 	 	navToolBar.goToUsersAndGroupsManagement();
-		userAndGroup.selectDisableStatus("All");
-		userAndGroup.deleteUser(username);
+ 	 	deleteUser();
  	}
 }

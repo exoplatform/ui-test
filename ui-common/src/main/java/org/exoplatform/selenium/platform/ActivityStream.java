@@ -657,7 +657,7 @@ public class ActivityStream extends PlatformBase {
 			addLink(link);
 		}
 		shareActivity();
-		Utils.pause(1000);
+		Utils.pause(3000);
 		info("-- Verify that an activity has been added --");
 		if (text!="" && text!=null){
 			waitForAndGetElement(By.xpath(ELEMENT_ACTIVITY_AUTHOR_ACTIVITY.replace("${activityText}", text)));

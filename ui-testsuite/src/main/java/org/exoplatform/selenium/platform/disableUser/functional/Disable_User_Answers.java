@@ -6,21 +6,25 @@ import org.testng.annotations.*;
 
 
 	public class Disable_User_Answers extends Disable_User_TestConfig{
-	public void disableUser(){
-		searchUserName = userSearchOptionData.getUserSearchOptionByIndex(0);
-		info("Disable user");
- 	 	navToolBar.goToUsersAndGroupsManagement();
- 	 	userAndGroup.searchUser(DATA_USER2, searchUserName);
- 	 	userAndGroup.enableDisableUser(DATA_USER2, false);
-	}
-	public void enableUser(){
-		searchUserName = userSearchOptionData.getUserSearchOptionByIndex(0);
-		info("enable user");
- 	 	navToolBar.goToUsersAndGroupsManagement();
- 	 	userAndGroup.selectDisableStatus("All");
- 	 	userAndGroup.searchUser(DATA_USER2, searchUserName);
- 	 	userAndGroup.enableDisableUser(DATA_USER2, true);
-	}
+		public void createUser(){
+			searchEmail = userSearchOptionData.getUserSearchOptionByIndex(3);
+			membership = portMemPermisData.getContentByIndex(0);
+            username = userInfoData.getUserNameByIndex(5)+getRandomString();
+			password = userInfoData.getPassWordByIndex(5)+getRandomString();
+			lastName = userInfoData.getLastNameByIndex(5)+getRandomString();
+			email = EMAIL_ADDRESS1;
+			searchUserName = userSearchOptionData.getUserSearchOptionByIndex(0);
+			info("remove existed user with EMAIL_ADDRESS1");
+			navToolBar.goToUsersAndGroupsManagement();
+			userAndGroup.searchUser(EMAIL_ADDRESS1, searchEmail);
+			if(isTextPresent(EMAIL_ADDRESS1))
+			userAndGroup.deleteUser();
+			
+			info("Create new user");
+			navToolBar.goToAddUser();
+			addUserPage.addUser(username, password, email, username, lastName);
+		}
+		
 	/**
 	*<li> Case ID:128003.</li>
 	*<li> Test Case Name: Check disabled user in Permission of Answers.</li>
@@ -30,6 +34,7 @@ import org.testng.annotations.*;
 	@Test
 	public  void test01_CheckDisabledUserInPermissionOfAnswers() {
 		info("Test 1: Check disabled user in Permission of Answers");
+		createUser();
 		disableUser();
 		/*Step Number: 1
 		*Step Name: Step 1: Select User
@@ -41,8 +46,8 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- User A is not displayed*/ 
 		hp.goToAnswer();
-		aCatMg.checkPermUserList(DATA_USER2,false);
-		enableUser();
+		aCatMg.checkPermUserList(username,false);
+		deleteUser();
  	}
 
 	/**
@@ -60,6 +65,7 @@ import org.testng.annotations.*;
 		String ques1 = txData.getContentByArrayTypeRandom(1) + getRandomNumber();
 		String contentMail = "A new question has been posted "+cat1+" "+ques1;
 		
+		createUser();
 		info("Create category 1");
 		hp.goToAnswer();
 		aCatMg.goToActionOfCategoryFromActionBar(actionCategoryOption.ADD);
@@ -67,13 +73,7 @@ import org.testng.annotations.*;
 		click(aCatMg.ELEMENT_CATEGORY_ADD_FORM_SAVE_BUTTON);
 		waitForAndGetElement(aCatMg.ELEMENT_CATEGORY_LIST_ITEM.replace("$category", cat1));
 		magAc.signOut();
-		magAc.signIn(DATA_USER2, DATA_PASS);
-		
-		info("edit email");
-		navToolBar.goToMyProfile();
-		click(myProfile.ELEMENT_EDIT_MY_PROFILE_LINK);
-		myProfile.updateBasicInformation(null, null, EMAIL_ADDRESS2);
-		myProfile.saveCancelUpdateInfo(true);
+		magAc.signIn(username,password);
 		
 		info("watch category");
 		hp.goToAnswer();
@@ -108,7 +108,7 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- answer watch email is not received*/ 
 		info("check mail");
-		goToMail(EMAIL_ADDRESS2, EMAIL_PASS);
+		goToMail(EMAIL_ADDRESS1, EMAIL_PASS);
 		checkEmailNotification(contentMail,false,false);
 		switchToParentWindow();
 		
@@ -116,5 +116,5 @@ import org.testng.annotations.*;
 		aHome.goToHomeCategory();
 		click(aCatMg.ELEMENT_CATEGORY_LIST_ITEM.replace("$category", cat1));
 		aCatMg.deleteCategory(cat1);
-		enableUser();
+		deleteUser();
  	}}

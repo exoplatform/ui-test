@@ -75,7 +75,7 @@ public class UserAddManagement extends PlatformBase {
 		type(ELEMENT_FIRSTNAME,Firstname,true);
 		type(ELEMENT_LASTNAME,lastName,true);
 		click(ELEMENT_SAVE_ADD_USER);
-		Utils.pause(2500);
+		Utils.pause(3000);
 		waitForMessage(ELEMENT_MSG_CREATE_ACCOUNT);
 		click(ELEMENT_CLOSE_MESSAGE);
 		info("Finish adding an user");

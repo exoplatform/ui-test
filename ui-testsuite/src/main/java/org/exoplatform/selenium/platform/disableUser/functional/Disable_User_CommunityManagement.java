@@ -1,39 +1,11 @@
 package org.exoplatform.selenium.platform.disableUser.functional;
 
 import static org.exoplatform.selenium.TestLogger.info;
-
 import org.testng.annotations.*;
 
 
 	public class Disable_User_CommunityManagement extends Disable_User_TestConfig{
 		
-		public void disableUser(){
-			searchUserName = userSearchOptionData.getUserSearchOptionByIndex(0);
-			info("Disable user");
-	 	 	navToolBar.goToUsersAndGroupsManagement();
-	 	 	userAndGroup.searchUser(DATA_USER2, searchUserName);
-	 	 	userAndGroup.enableDisableUser(DATA_USER2, false);
-		}
-		public void enableUser(){
-			searchUserName = userSearchOptionData.getUserSearchOptionByIndex(0);
-			info("enable user");
-	 	 	navToolBar.goToUsersAndGroupsManagement();
-	 	 	userAndGroup.selectDisableStatus("All");
-	 	 	userAndGroup.searchUser(DATA_USER2, searchUserName);
-	 	 	userAndGroup.enableDisableUser(DATA_USER2, true);
-		}
-		public void createNewUser(){
-			info("Add new a user");
-			username = userInfoData.getUserNameByIndex(5)+getRandomString();
-			password = userInfoData.getPassWordByIndex(5)+getRandomString();
-			lastName = userInfoData.getLastNameByIndex(5)+getRandomString();
-			email = userInfoData.getEmailByIndex(5)+getRandomString()+mailSuffixData.getMailSuffixByIndex(2);
-			searchUserName = userSearchOptionData.getUserSearchOptionByIndex(0);
-			
-			info("Create new user");
-			navToolBar.goToAddUser();
-			addUserPage.addUser(username, password, email, username, lastName);
-		}
 	/**
 	*<li> Case ID:127955.</li>
 	*<li> Test Case Name: Check rows look for enable/disable users.</li>
@@ -49,7 +21,8 @@ import org.testng.annotations.*;
 	@Test
 	public  void test01_02_CheckRowsLookForEnabledisableUsers() {
 		info("Test 1: Check rows look for enable/disable users");
-		String[] users={DATA_USER2,DATA_USER3};
+		createNewUser();
+		String[] users={username,DATA_USER3};
 		/*Step Number: 1
 		*Step Name: Step 1: Open User Management
 		*Step Description: 
@@ -80,7 +53,7 @@ import org.testng.annotations.*;
 			- Both enabled/disabled users are displayed in the list.
 			- Rows of disabled userslook visually different to rows of enabled users.*/ 
  	 	userAndGroup.checkDisplayAllUsers(users);
- 	 	enableUser();
+ 	 	deleteUser();
  	}
 
 	/**
@@ -92,7 +65,8 @@ import org.testng.annotations.*;
 	@Test
 	public  void test03_CheckTogglesAndTheirTooltipsForEnableddisabledUsers() {
 		info("Test 3: Check toggles and their tooltips for enabled/disabled users");
-		String[] users={DATA_USER2,DATA_USER3};
+		createNewUser();
+		String[] users={username,DATA_USER3};
 		navToolBar.goToUsersAndGroupsManagement();
  	 	userAndGroup.checkStatusDropBox();
  	 	disableUser();
@@ -114,7 +88,7 @@ import org.testng.annotations.*;
 			- Toggles are displayed in the column: + For enabled users: toggle displays Yes.+ For disabled user: toggle displays No.*/
  	 	userAndGroup.checkDisplayAllUsers(users);
  	 	userAndGroup.checkDisplayEnableUser(DATA_USER3);
- 	 	userAndGroup.checkDisplayDisableUser(DATA_USER2);
+ 	 	userAndGroup.checkDisplayDisableUser(username);
  	 	
 		/*Step number: 2
 		*Step Name: Step 2: Check tooltip of No button.
@@ -133,7 +107,7 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- The tooltip is Disable User*/ 
- 	 	enableUser();
+ 	 	deleteUser();
  	}
 
 	/**
@@ -153,10 +127,7 @@ import org.testng.annotations.*;
 		info("Test 4: Delete a disabled user by administrator");
 		String name=txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		createNewUser();
-		info("disable user");
-		navToolBar.goToUsersAndGroupsManagement();
- 	 	userAndGroup.searchUser(username, searchUserName);
- 	 	userAndGroup.enableDisableUser(username, false);
+		disableUser();
 		/*Step Number: 1
 		*Step Name: Step 1: Open User Management
 		*Step Description: 

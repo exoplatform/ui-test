@@ -12,6 +12,7 @@ public class ManageLogInOut extends PlatformBase {
 	
 	public final By ELEMENT_SIGN_IN_BUTTON = By.xpath("//*[@class='loginButton']/*");
 	public final By ELEMENT_SIGN_OUT_LINK = By.className("uiIconPLFLogout");
+	public final By ELEMENT_DISABLE_USER_ERROR_MES = By.xpath("//*[@class='signinFail'][contains(.,'This user account has been disabled. If you think this is an error, please contact the administrator.')]");
 	
 	ManageAlert magAlert;
 	public ManageLogInOut(WebDriver dr){
@@ -53,8 +54,8 @@ public class ManageLogInOut extends PlatformBase {
 			if(verify)
 				waitForElementNotPresent(ELEMENT_SIGN_IN_BUTTON);
 		}
-		Utils.pause(3000);
-		driver.navigate().refresh();
+		//Utils.pause(3000);
+		//driver.navigate().refresh();
 	}
 	/**
 	 * Log in via OpenAM
@@ -109,5 +110,16 @@ public class ManageLogInOut extends PlatformBase {
 			magAlert.acceptAlert();
 		}
 	}
-	
+	/**
+	 * Sign in as disable user
+	 * @param user
+	 * @param pass
+	 */
+	public void signInAsDisableUser(String user,String pass){
+		type(ELEMENT_INPUT_USERNAME, user, true);
+		type(ELEMENT_INPUT_PASSWORD, pass, true);
+		click(ELEMENT_SIGN_IN_BUTTON,0,true);
+		waitForAndGetElement(ELEMENT_DISABLE_USER_ERROR_MES,2000,1);
+		waitForAndGetElement(ELEMENT_SIGN_IN_BUTTON);
+	}
 }

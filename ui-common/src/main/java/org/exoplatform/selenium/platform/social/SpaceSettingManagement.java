@@ -3,7 +3,9 @@ package org.exoplatform.selenium.platform.social;
 import org.exoplatform.selenium.Button;
 import org.exoplatform.selenium.ManageAlert;
 import org.exoplatform.selenium.Utils;
+import org.exoplatform.selenium.platform.PlatformPermission;
 import org.exoplatform.selenium.platform.gatein.NavigationManagement;
+
 import static org.exoplatform.selenium.TestLogger.info;
 
 import org.openqa.selenium.WebDriver;
@@ -14,6 +16,7 @@ public class SpaceSettingManagement extends SpaceLocator{
     ManageAlert alert;
 	NavigationManagement naviManage;
 	Button button;
+	PlatformPermission plfPerm;
 	/**
 	 * constructor
 	 * @param dr
@@ -23,6 +26,7 @@ public class SpaceSettingManagement extends SpaceLocator{
 		alert = new ManageAlert(dr); 
 		naviManage = new NavigationManagement(driver);
 		button = new Button(driver, this.plfVersion);
+		plfPerm = new PlatformPermission(driver);
 	}
 
 	/**
@@ -580,6 +584,7 @@ public class SpaceSettingManagement extends SpaceLocator{
 		Utils.pause(2000);
 	}
 	/**
+<<<<<<< HEAD
 	 * Verify member of space
 	 * @param fullname
 	 * @param isDisplay
@@ -608,4 +613,57 @@ public class SpaceSettingManagement extends SpaceLocator{
 			waitForElementNotPresent(ELEMENT_SPACE_REMOVE_USER_BTN_MEMBER_TABLE.replace("${fullName}", fullname));
 		}
 	}
+=======
+	 * Check user in Invited Space
+	 * @param user
+	 * @param space
+	 * @param isPresent
+	 */
+    public void checkUserInInvitedSpace(String user,String space,boolean isPresent){
+    	 goToSpaceSettingTab();
+		 goToMemberTab();
+		 if(isPresent)
+			 waitForAndGetElement(ELEMENT_SPACE_INVITED_USER_TABLE.replace("${user}",user));
+		 else
+			 waitForElementNotPresent(ELEMENT_SPACE_INVITED_USER_TABLE.replace("${user}",user));
+    }
+    /**
+	 * Check user in Member Space
+	 * @param user
+	 * @param space
+	 * @param isPresent
+	 */
+    public void checkUserInMemberSpace(String user,String space,boolean isPresent){
+    	goToSpaceSettingTab();
+		goToMemberTab();
+		if(isPresent)
+			waitForAndGetElement(ELEMENT_USER_IN_MEMBER_TABLE.replace("${fullName}",user));
+		else
+			waitForElementNotPresent(ELEMENT_USER_IN_MEMBER_TABLE.replace("${fullName}",user));
+    }
+	/**
+	 * Check user selector of Invite Space
+	 * @param user
+	 * @param space
+	 * @param isPresent
+	 */
+    public void checkUserSelectorInviteSpace(String user,boolean isPresent){
+    	goToSpaceSettingTab();
+		goToMemberTab();
+		click(ELEMENT_SPACE_MEMBERS_SELECT_USER,0,true);
+		plfPerm.checkUserSelector(user, isPresent);
+    }
+    /**
+	 * Check search user of Invite Space
+	 * @param user
+	 * @param space
+	 * @param isPresent
+	 */
+    public void checkSearchUserInviteSpace(String user,boolean isPresent){
+    	goToSpaceSettingTab();
+		goToMemberTab();
+		click(ELEMENT_SPACE_MEMBERS_SELECT_USER,0,true);
+		plfPerm.searchUser(user,isPresent);
+    }
+>>>>>>> FQA-2584:PLF 4.3 - Write High Fnc/Disable User/Space
 }

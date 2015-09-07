@@ -1,38 +1,26 @@
 package org.exoplatform.selenium.platform.disableUser.functional;
 
 import static org.exoplatform.selenium.TestLogger.info;
-
 import org.exoplatform.selenium.Utils;
 import org.exoplatform.selenium.platform.calendar.CalendarHomePage.selectViewOption;
 import org.exoplatform.selenium.platform.calendar.CalendarManagement.menuOfMainCalendar;
-
 import org.testng.annotations.*;
 
 
 	public class Disable_User_Calendar extends Disable_User_TestConfig{
-		
-		public void disableUser(){
-			searchUserName = userSearchOptionData.getUserSearchOptionByIndex(0);
-			info("Disable user");
-	 	 	navToolBar.goToUsersAndGroupsManagement();
-	 	 	userAndGroup.searchUser(DATA_USER2, searchUserName);
-	 	 	userAndGroup.enableDisableUser(DATA_USER2, false);
-		}
-		public void enableUser(){
-			searchUserName = userSearchOptionData.getUserSearchOptionByIndex(0);
-			info("enable user");
-	 	 	navToolBar.goToUsersAndGroupsManagement();
-	 	 	userAndGroup.selectDisableStatus("All");
-	 	 	userAndGroup.searchUser(DATA_USER2, searchUserName);
-	 	 	userAndGroup.enableDisableUser(DATA_USER2, true);
-		}
-		public void createNewUser(){
-			info("Add new a user");
-			username = userInfoData.getUserNameByIndex(5)+getRandomString();
+		public void createUser(){
+			searchEmail = userSearchOptionData.getUserSearchOptionByIndex(3);
+			membership = portMemPermisData.getContentByIndex(0);
+            username = userInfoData.getUserNameByIndex(5)+getRandomString();
 			password = userInfoData.getPassWordByIndex(5)+getRandomString();
 			lastName = userInfoData.getLastNameByIndex(5)+getRandomString();
-			email = userInfoData.getEmailByIndex(5)+getRandomString()+mailSuffixData.getMailSuffixByIndex(2);
+			email = EMAIL_ADDRESS2;
 			searchUserName = userSearchOptionData.getUserSearchOptionByIndex(0);
+			info("remove existed user with EMAIL_ADDRESS2");
+			navToolBar.goToUsersAndGroupsManagement();
+			userAndGroup.searchUser(EMAIL_ADDRESS2, searchEmail);
+			if(isTextPresent(EMAIL_ADDRESS2))
+			userAndGroup.deleteUser();
 			
 			info("Create new user");
 			navToolBar.goToAddUser();
@@ -51,8 +39,9 @@ import org.testng.annotations.*;
 		String[] userGroup={DATA_USER1};
 		boolean[] canEdit={true};
 		
+		createNewUser();
 		magAc.signOut();
-		magAc.signIn(DATA_USER2, DATA_PASS);
+		magAc.signIn(username,password);
 		info("Create a new calendar and share it");
 		hp.goToCalendarPage();
         cMang.goToMenuFromMainCalendar(menuOfMainCalendar.ADDCAL);
@@ -89,7 +78,7 @@ import org.testng.annotations.*;
 		
 		info("delete data");
 		cMang.deleteCalendar(calendar, true);
-		enableUser();
+		deleteUser();
  	}
 
 	/**
@@ -101,6 +90,7 @@ import org.testng.annotations.*;
 	@Test
 	public  void test02_CheckDisabledUserInGroupCalendar() {
 		info("Test 2: Check disabled user in Group Calendar");
+		createNewUser();
 		disableUser();
 		/*Step Number: 1
 		*Step Name: Step 1: Check the display of disabled user when editing group calendar
@@ -112,8 +102,9 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- User A is not displayed*/ 
 		hp.goToCalendarPage();
-		cMang.checkUserSelectorOfGroupCalendar("Users",DATA_USER2,false);
-		enableUser();
+		cMang.checkUserSelectorOfGroupCalendar("Users",username,false);
+		
+		deleteUser();
  	}
 
 	/**
@@ -137,6 +128,7 @@ import org.testng.annotations.*;
 	@Test
 	public  void test03_05_06_CheckDisabledUserInParticipantsScreenOfAnEvent() {
 		info("Test 3: Check disabled user in Participants screen of an event");
+		createNewUser();
 		disableUser();
 		/*Step Number: 1
 		*Step Name: Step 1: Add Participant
@@ -158,8 +150,9 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- User A is not displayed*/ 
 		hp.goToCalendarPage();
-		evMg.checkUserSelectorOfEvent(DATA_NAME_USER2, false);
-		enableUser();
+		evMg.checkUserSelectorOfEvent(username+" "+lastName, false);
+		
+		deleteUser();
  	}
 
 	/**
@@ -177,6 +170,7 @@ import org.testng.annotations.*;
 	@Test
 	public  void test04_08_CheckDisabledUserInRemindersScreenOfATask() {
 		info("Test 4: Check disabled user in Reminders screen of a task");
+		createNewUser();
 		disableUser();
 		/*Step Number: 1
 		*Step Name: Step 1: Add more reminder
@@ -196,8 +190,9 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- User A is not displayed*/ 
 		hp.goToCalendarPage();
-		tasMg.checkUserSelectorOfTask(DATA_NAME_USER2, false);
-		enableUser();
+		tasMg.checkUserSelectorOfTask(username+" "+lastName, false);
+		
+		deleteUser();
  	}
 
 	/**
@@ -210,6 +205,7 @@ import org.testng.annotations.*;
 	public  void test07_CheckDisabledUserInShareCalendar() {
 		info("Test 7: Check disabled user in Share Calendar");
 		String calendar = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+		createNewUser();
 		disableUser();
 		
 		info("Create a new calendar");
@@ -227,8 +223,9 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- User A is not displayed*/ 
-		cMang.checkUserSelectorOfShareCalendar(calendar,DATA_NAME_USER2, false);
-		enableUser();
+		cMang.checkUserSelectorOfShareCalendar(calendar,username+" "+lastName, false);
+		
+		deleteUser();
  	}
 
 	/**
@@ -240,12 +237,11 @@ import org.testng.annotations.*;
 	@Test
 	public  void test09_CheckEmailInvitationFromEditEventForDisabledUser() {
 		info("Test 9: Check email invitation from edit event for disabled user");
-		createNewUser();
 		String event1=txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		String event2=txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		String content=txData.getContentByArrayTypeRandom(1)+getRandomNumber();
-		searchUserName = userSearchOptionData.getUserSearchOptionByIndex(0);
 		
+		createUser();
 		info("Add a event and participant");
 		hp.goToCalendarPage();		
 		evMg.goToAddEventFromActionBar();
@@ -261,11 +257,7 @@ import org.testng.annotations.*;
 		cHome.goToView(selectViewOption.WEEK);
 		waitForAndGetElement(cMang.ELEMENT_EVENT_TASK_TITLE.replace("${name}",event1));
 		
-		info("disable user");
-		navToolBar.goToUsersAndGroupsManagement();
- 	 	userAndGroup.searchUser(username, searchUserName);
- 	 	userAndGroup.enableDisableUser(username, false);
- 	 	
+		disableUser();
 		/*Step Number: 1
 		*Step Name: Step 1: Edit event
 		*Step Description: 
@@ -292,7 +284,7 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- Email invitation is not received*/ 
-		goToMail(EMAIL_ADDRESS1, EMAIL_PASS);
+		goToMail(EMAIL_ADDRESS2, EMAIL_PASS);
 		Utils.pause(20000);
 		cMang.checkEmailNotificationCalendar(event2,"icalendar.ics","","",false);
         switchToParentWindow();
@@ -300,8 +292,7 @@ import org.testng.annotations.*;
 		info("delete data");
 		hp.goToCalendarPage();
 		cMang.deleteTaskEvent(event2);
-		navToolBar.goToUsersAndGroupsManagement();
-		userAndGroup.deleteUser(username);
+		deleteUser();
  	}
 
 	/**
@@ -321,7 +312,6 @@ import org.testng.annotations.*;
 		info("Test 10 Check event reminders email for disabled user");
 		String event1=txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		String task1=txData.getContentByArrayTypeRandom(1)+getRandomNumber();
-		searchUserName = userSearchOptionData.getUserSearchOptionByIndex(0);
 		String defaultFormatTime = "24 Hours";
 		String defaultFormatDate = "MM/dd/yyyy";
 		String defaultTimeZone = "(GMT +07:00) Asia/Ho_Chi_Minh";
@@ -358,10 +348,7 @@ import org.testng.annotations.*;
 			- The User A is disabled*/
 		magAc.signOut();
 		magAc.signIn(DATA_USER1, DATA_PASS);
-		info("disable user");
-		navToolBar.goToUsersAndGroupsManagement();
- 	 	userAndGroup.searchUser(username, searchUserName);
- 	 	userAndGroup.enableDisableUser(username, false);
+		disableUser();
  	 	
 		/*Step number: 2
 		*Step Name: Step 2: Check inbox email
@@ -371,7 +358,7 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- Event reminders email is not received*/ 
- 	 	goToMail(EMAIL_ADDRESS1, EMAIL_PASS);
+ 	 	goToMail(EMAIL_ADDRESS2, EMAIL_PASS);
 		Utils.pause(300000);
 		evMg.checkEmailNotificationReminderEvent(event1,false);
 		tasMg.checkEmailNotificationReminderTask(task1,false);
@@ -381,9 +368,7 @@ import org.testng.annotations.*;
 		hp.goToCalendarPage();
 		cHome.goToView(selectViewOption.LIST);
 		cMang.deleteAllTaskEvent();
-		navToolBar.goToUsersAndGroupsManagement();
-		userAndGroup.selectDisableStatus("All");
-		userAndGroup.deleteUser(username);
+		deleteUser();
  	}
 
 	/**
@@ -400,8 +385,9 @@ import org.testng.annotations.*;
 		String[] userGroup={DATA_USER1};
 		boolean[] canEdit={true};
 		
+		createNewUser();
 		magAc.signOut();
-		magAc.signIn(DATA_USER2, DATA_PASS);
+		magAc.signIn(username,password);
 		info("Create a new calendar and share it");
 		hp.goToCalendarPage();
         cMang.goToMenuFromMainCalendar(menuOfMainCalendar.ADDCAL);
@@ -425,7 +411,7 @@ import org.testng.annotations.*;
 		
 		info("add event to calendar");
 		hp.goToCalendarPage();
-		
+		evMg.goToAddEventFromActionBar();
 		evMg.inputDataEventInQuickForm(event,"",getDate(0,"MM/dd/yyyy HH")+":00",getDate(0,"MM/dd/yyyy HH")+":30",false,calendar);
 		evMg.saveQuickAddEvent();
 		evMg.checkDisplayOfEvent(event,true);
@@ -450,10 +436,13 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- User A CAN see the added event/task at Step 1*/ 
 		magAc.signOut();
-		magAc.signIn(DATA_USER2, DATA_PASS);
+		magAc.signIn(username,password);
 		hp.goToCalendarPage();
 		evMg.checkDisplayOfEvent(event,true);
 		
 		info("delete data");
 		cMang.deleteCalendar(calendar, true);
+		magAc.signOut();
+		magAc.signIn(DATA_USER1,DATA_PASS);
+		deleteUser();
  	}}

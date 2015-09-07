@@ -1,21 +1,25 @@
 package org.exoplatform.selenium.platform.disableUser.functional;
 
 import static org.exoplatform.selenium.TestLogger.info;
-
 import org.exoplatform.selenium.platform.ActivityStream.optionMenuActivity;
-
 import org.testng.annotations.*;
 
 
 	public class Disable_User_ActivityStream extends Disable_User_TestConfig{
 		
 		public void createUser() {
-            membership = portMemPermisData.getContentByIndex(0);
+			searchEmail = userSearchOptionData.getUserSearchOptionByIndex(3);
+			membership = portMemPermisData.getContentByIndex(0);
             username = userInfoData.getUserNameByIndex(5)+getRandomString();
 			password = userInfoData.getPassWordByIndex(5)+getRandomString();
 			lastName = userInfoData.getLastNameByIndex(5)+getRandomString();
-			email = userInfoData.getEmailByIndex(5)+getRandomString()+mailSuffixData.getMailSuffixByIndex(2);
+			email = EMAIL_ADDRESS1;
 			searchUserName = userSearchOptionData.getUserSearchOptionByIndex(0);
+			info("remove existed user with EMAIL_ADDRESS1");
+			navToolBar.goToUsersAndGroupsManagement();
+			userAndGroup.searchUser(EMAIL_ADDRESS1, searchEmail);
+			if(isTextPresent(EMAIL_ADDRESS1))
+			userAndGroup.deleteUser();
 			
 			info("Create new user");
 			navToolBar.goToAddUser();
@@ -116,10 +120,7 @@ import org.testng.annotations.*;
 		hpAct.checkNoActivity(activity2);
 		hpAct.checkActivity(activity1);
 		
-		info("delete data");
-		navToolBar.goToUsersAndGroupsManagement();
-		userAndGroup.deleteUser(username);
-		
+		deleteUser();
  	}
 
 	/**
@@ -179,10 +180,7 @@ import org.testng.annotations.*;
 			- The activity is shared on All activities stream*/
 		magAc.signOut();
 		magAc.signIn(DATA_USER1,DATA_PASS);
-		info("Disable user");
- 	 	navToolBar.goToUsersAndGroupsManagement();
- 	 	userAndGroup.searchUser(username, searchUserName);
- 	 	userAndGroup.enableDisableUser(username, false);
+		disableUser();
  	 	
  	 	hp.goToHomePage();
  	 	hpAct.addActivity(activity3, "");
@@ -198,11 +196,7 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- User A CANNOT see the activity (2) shared by the User B on All activities stream
 			- User A only can see the activity (1) that is shared before User A is disabled on All activities stream*/ 
-		info("enable user");
- 	 	navToolBar.goToUsersAndGroupsManagement();
- 	 	userAndGroup.selectDisableStatus("All");
- 	 	userAndGroup.searchUser(username, searchUserName);
- 	 	userAndGroup.enableDisableUser(username, true);
+		enableUser();
  	 	
  	 	magAc.signOut();
 		magAc.signIn(username, password);
@@ -212,8 +206,7 @@ import org.testng.annotations.*;
  	 	info("delete data");
  	 	magAc.signOut();
 		magAc.signIn(DATA_USER1, DATA_PASS);
- 	 	navToolBar.goToUsersAndGroupsManagement();
-		userAndGroup.deleteUser(username);
+ 	 	deleteUser();
  	}
 
 	/**
@@ -749,9 +742,7 @@ import org.testng.annotations.*;
  	 	hpAct.checkActivity(activity1);
  	 	hpAct.checkNoActivity(activity2);
  	 	
- 	 	info("delete data");
- 	 	navToolBar.goToUsersAndGroupsManagement();
-		userAndGroup.deleteUser(username);
+ 	 	deleteUser();
  	}
 
 	/**
@@ -811,10 +802,7 @@ import org.testng.annotations.*;
 			- The activity is shared on All activities stream*/
  	 	magAc.signOut();
 		magAc.signIn(DATA_USER1,DATA_PASS);
-		info("Disable user");
- 	 	navToolBar.goToUsersAndGroupsManagement();
- 	 	userAndGroup.searchUser(username, searchUserName);
- 	 	userAndGroup.enableDisableUser(username, false);
+		disableUser();
  	 	
  	 	hp.goToHomePage();
  	 	hpAct.addActivity(activity3, "");
@@ -831,11 +819,7 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- User A CANNOT see the activity (2) shared by the User B on Connections stream
 			- User A only can see the activity (1) that is shared before User A is disabled on Connections stream*/ 
-		info("enable user");
- 	 	navToolBar.goToUsersAndGroupsManagement();
- 	 	userAndGroup.selectDisableStatus("All");
- 	 	userAndGroup.searchUser(username, searchUserName);
- 	 	userAndGroup.enableDisableUser(username, true);
+		enableUser();
  	 	
  	 	magAc.signOut();
 		magAc.signIn(username, password);
@@ -846,8 +830,7 @@ import org.testng.annotations.*;
  	 	info("delete data");
  	 	magAc.signOut();
 		magAc.signIn(DATA_USER1, DATA_PASS);
- 	 	navToolBar.goToUsersAndGroupsManagement();
-		userAndGroup.deleteUser(username);
+ 	 	deleteUser();
  	}
 
 	/**
@@ -1315,10 +1298,7 @@ import org.testng.annotations.*;
 		createUser();
 		magAc.signOut();
 		magAc.signIn(DATA_USER1,DATA_PASS);
-		info("Disable user");
- 	 	navToolBar.goToUsersAndGroupsManagement();
- 	 	userAndGroup.searchUser(username, searchUserName);
- 	 	userAndGroup.enableDisableUser(username, false);
+		disableUser();
 		/*Step Number: 1
 		*Step Name: Step 1: Post an activity include mentioning
 		*Step Description: 
@@ -1332,10 +1312,7 @@ import org.testng.annotations.*;
  	 	hp.goToHomePage();
 		hpAct.checkMentionListUser(username, activity1, false);
 		
-		info("delete data");
- 	 	navToolBar.goToUsersAndGroupsManagement();
- 	 	userAndGroup.selectDisableStatus("All");
-		userAndGroup.deleteUser(username);
+		deleteUser();
  	}
 
 	/**
@@ -1416,10 +1393,7 @@ import org.testng.annotations.*;
 			- Past activities of User A (activity (3)), comments and likes of User A for activity (1) and activity (2) still remains.*/ 
 		magAc.signOut();
 		magAc.signIn(DATA_USER1,DATA_PASS);
-		info("Disable user");
- 	 	navToolBar.goToUsersAndGroupsManagement();
- 	 	userAndGroup.searchUser(username, searchUserName);
- 	 	userAndGroup.enableDisableUser(username, false);
+		disableUser();
  	 	
  	 	hp.goToHomePage();
 		hpAct.checkActivity(activity3);
@@ -1428,8 +1402,5 @@ import org.testng.annotations.*;
 		hpAct.checkNumLikeOfActivity (activity1,1);
 		hpAct.checkNumLikeOfActivity (activity2,1);
 		
-		info("delete data");
- 	 	navToolBar.goToUsersAndGroupsManagement();
- 	 	userAndGroup.selectDisableStatus("All");
-		userAndGroup.deleteUser(username);
+		deleteUser();
  	}}

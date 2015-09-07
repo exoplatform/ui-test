@@ -599,6 +599,18 @@
 			</properties>
 		</profile>
 		<profile>
+			<id>disableUser-func-part2</id>
+			<properties>
+				<testSuite>disableUser-func-part2.xml</testSuite>
+			</properties>
+		</profile>
+		<profile>
+			<id>disableUser-func-part3</id>
+			<properties>
+				<testSuite>disableUser-func-part3.xml</testSuite>
+			</properties>
+		</profile>
+		<profile>
 			<id>testng-failed</id>
 			<properties>
 				<testSuite>testng-failed.xml</testSuite>

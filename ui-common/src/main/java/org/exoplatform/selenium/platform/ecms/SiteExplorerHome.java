@@ -8,6 +8,8 @@ import static org.exoplatform.selenium.TestLogger.info;
 
 import org.exoplatform.selenium.Utils;
 import org.exoplatform.selenium.platform.PlatformBase;
+import org.exoplatform.selenium.platform.PlatformPermission;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
@@ -52,7 +54,11 @@ public class SiteExplorerHome extends PlatformBase{
 	public final By ELEMENT_ACTIONBAR_DELETE=By.xpath(".//*[@id='ECMContextMenu']//*[@class='uiIconEcmsDelete']");
 	public final By ELEMENT_SITE_EXPLORER_ALL_CHECKBOX= By.xpath("//input[@type='checkbox' and @name= 'UIFileViewCheckBox']");
 	public final By ELEMENT_DELETE_ALL_BUTTON = By.xpath(".//*[@id='JCRContextMenu']//i[@class='uiIconEcmsDelete']");
-
+	public final By ELEMENT_ACTIONBAR_WATCH = By.xpath(".//*[contains(@class,'uiIconEcmsWatchDocument')]");
+	public final By ELEMENT_ACTIONBAR_WATCH_RADIO = By.xpath("//*[@class='uiRadio']/*[@id='notificationType']/../*[contains(.,'Email')]");
+	public final By ELEMENT_ACTIONBAR_WATCH_BUTTON = By.xpath("//*[@class='btn'][contains(.,'Watch')]");
+	public final By ELEMENT_ACTIONBAR_WATCH_NOTICE = By.xpath("//*[@id='wcm-notice'][contains(.,'You are watching this document.')]");
+	
 	//Add Category popup
 	public final By ELEMENT_ADD_CATEGORY_POPUP_SELECT_CATEGORY_TAB = By.xpath(".//*[@id='UICategoryManager']//a[text()='Select Category']");
 	public final By ELEMENT_ADD_CATEGORY_POPUP_MENU = By.name("taxonomyTree");
@@ -120,7 +126,7 @@ public class SiteExplorerHome extends PlatformBase{
 	//add translation popup
 	public final By ELEMENT_ACTIONBAR_ADDTAG = By.xpath("//*[@class='uiIconEcmsTaggingDocument uiIconEcmsLightGray']");
 	public final By ELEMENT_ADDTRANSLATION_SELECTDOC = By.xpath("//*[@title='Select Document']");
-	public final String ELEMENT_FOLDERSELECTOR_PATH = "//*[@class='nodeName' and text()=' ${path}' ]";
+	public final String ELEMENT_FOLDERSELECTOR_PATH = "//*[@class='nodeName'][contains(.,'${path}')]";
 	public final String ELEMENT_FOLDERSELECTOR_CONTENTDETAIL_FINALPATH = "//*[@class='OddItem']//*[text()='${name}']";
 	public final By ELEMENT_SAVE_BTN = By.xpath("//*[text()='Save']");
 	public final By ELEMENT_ADD_BTN = By.xpath("//*[text()='Add']");
@@ -151,7 +157,7 @@ public class SiteExplorerHome extends PlatformBase{
 	public final By ELEMENT_THUMBNAIL_VIEW_ADMIN_VIEW = By.xpath(".//*[contains(@class,'uiThumbnailsView ')]");
 	public final By ELEMENT_CONTEXT_MENU_ADD_DOCUMENT =By.xpath(".//*[contains(@id,'JCRContextMenu')]//*[contains(@class,'uiIconEcmsAddDocument')]");
 	public final By ELEMENT_WORKING_AREA_TEMPLATE_DOCUMENTS=By.xpath(".//*[@id='UIWorkingArea']");
-
+	
 	//Add folder
 	public final By ELEMENT_ADDFOLDERBOX = By.xpath("//*[@class='PopupTitle popupTitle']");
 	public final By ELEMENT_ADDFOLDER_NAME = By.xpath("//*[@id='titleTextBox']");
@@ -296,7 +302,7 @@ public class SiteExplorerHome extends PlatformBase{
 	//SEO folder
 	public final By ELEMENT_SEO_FOLDER_FILE = By.xpath("//*[@class='text']//*[@data-original-title='sitemaps']");
 	//Personal document
-	public final String ELEMENT_PERSONAL_DOCUMENT_FILE = ".//*[@id='UIDocumentNodeList']//span[text()='${file}']";
+	public final String ELEMENT_PERSONAL_DOCUMENT_FILE = ".//*[@id='UIDocumentNodeList']//*[contains(.,'${file}')]";
 
 	//Grid list
 	public final String ELEMENT_GRID_LIST_CONTENT = ".//*[@class='uiListGrid']//*[text()='${file}']";
@@ -332,13 +338,15 @@ public class SiteExplorerHome extends PlatformBase{
 	Button button;
 	CreateNewDocument CreNewDoc;
 	Dialog dialog;
-
+	PlatformPermission plfPerm;
+	
 	public SiteExplorerHome(WebDriver dr){
 		this.driver=dr;
 		alert = new ManageAlert(dr);
 		CreNewDoc = new CreateNewDocument(dr);
 		button = new Button(dr);
 		dialog= new Dialog(driver);
+		plfPerm = new PlatformPermission(driver);
 	}
 	/**
 	 * Go to a folder by a path in SE
@@ -359,9 +367,13 @@ public class SiteExplorerHome extends PlatformBase{
 		String[] arrayPath = path.split("/");
 		for (String arrayElement : arrayPath){
 			selectNode(arrayElement);
+<<<<<<< HEAD
 		}}
+=======
+		}
+		}
+>>>>>>> FQA-2584:PLF 4.3 - Write High Fnc/Disable User/Space
 	}
-
 	/**
 	 * Open Add a new folder popup
 	 */
@@ -454,7 +466,7 @@ public class SiteExplorerHome extends PlatformBase{
 	public void openListDocumentTemplateByRightClick(){
 		rightClickOnElement(ELEMENT_THUMBNAIL_VIEW_ADMIN_VIEW);
 		click(ELEMENT_CONTEXT_MENU_ADD_DOCUMENT);
-		waitForAndGetElement(ELEMENT_WORKING_AREA_TEMPLATE_DOCUMENTS,2000,0);
+		waitForAndGetElement(ELEMENT_WORKING_AREA_TEMPLATE_DOCUMENTS,2000,1);
 	}
 
 	/**
@@ -499,7 +511,7 @@ public class SiteExplorerHome extends PlatformBase{
 		click(ELEMENT_UPLOAD_LINK);
 		uploadFileUsingRobot(link);
 		info("Upload file " + getAbsoluteFilePath(link));
-		waitForElementNotPresent(ELEMENT_UPLOAD_PROGRESS_BAR,120000,0);
+		waitForElementNotPresent(ELEMENT_UPLOAD_PROGRESS_BAR,120000,1);
 
 		info("verify:"+verify);
 		if (verify) {
@@ -544,7 +556,7 @@ public class SiteExplorerHome extends PlatformBase{
 			String links[] = link.split("/");
 			int length = links.length;
 			Utils.pause(2000);
-			waitForAndGetElement(By.xpath("//*[contains(text(),'"+ links[length - 1] + "')]"));
+			waitForAndGetElement(By.xpath("//*[contains(text(),'"+ links[length - 1] + "')]"),3000,1);
 		}
 
 		info("Upload file successfully");
@@ -628,7 +640,7 @@ public class SiteExplorerHome extends PlatformBase{
 	 * @param content
 	 */
 	public void editDocument(String newTitle,String content) {
-		if(waitForAndGetElement(ELEMENT_ACTIONBAR_EDIT,5000,0)==null){
+		if(waitForAndGetElement(ELEMENT_ACTIONBAR_MORE,5000,0)!=null){
 			info("Click on More menu");
 			click(ELEMENT_ACTIONBAR_MORE);
 		}
@@ -1284,6 +1296,15 @@ public class SiteExplorerHome extends PlatformBase{
 		click(ELEMENT_ADMIN_VIEW_ICON);
 		Utils.pause(2000);
 	}
+	/**
+	 * Open List view type
+	 */
+	public void clickListView() {
+		info("Select a view type");
+		waitForAndGetElement(ELEMENT_LIST_VIEW_ICON);
+		click(ELEMENT_LIST_VIEW_ICON);
+		Utils.pause(2000);
+	}
 
 	/**
 	 * Select File Explorer tree on left panel
@@ -1316,7 +1337,7 @@ public class SiteExplorerHome extends PlatformBase{
 	 */
 	public void selectAFile(String filename){
 		info("Waiting the file:"+filename+" is shown");
-		waitForAndGetElement(ELEMENT_FILE_TITLE_RIGHT_PANEL.replace("${fileName}", filename),3000,1);
+		waitForAndGetElement(ELEMENT_FILE_TITLE_RIGHT_PANEL.replace("${fileName}", filename),5000,1);
 		info("Select the file");
 		click(ELEMENT_FILE_TITLE_RIGHT_PANEL.replace("${fileName}", filename));
 		Utils.pause(3000);
@@ -1361,6 +1382,7 @@ public class SiteExplorerHome extends PlatformBase{
 		selectAllFiles();
 	}
 	/**
+<<<<<<< HEAD
 	 * Check display of drive
 	 * @param drive
 	 * @param isDisplay
@@ -1399,5 +1421,55 @@ public class SiteExplorerHome extends PlatformBase{
 		for (String query : queries) {
 			waitForAndGetElement(ELEMENT_SITEEXPLORER_ADVANCEDSEARCH_EXECUTEQUERY.replace("${name}",query));
 		}
+=======
+	 * Check user selector of Documents/Permission
+	 * @param user
+	 * @param isPresent
+	 * 					true if user is displayed
+	 * 					false if user is NOT displayed
+	 * @param isDoc
+	 * 				true if it's personal document
+	 * 				false if it is not personal document
+	 */
+	public void checkUserSelectorECM(String user,boolean isPresent){
+		if (waitForAndGetElement(ELEMENT_ACTIONBAR_PERMISSION, DEFAULT_TIMEOUT, 0) == null) {
+			click(ELEMENT_MORE_LINK_WITHOUT_BLOCK);
+		}
+		click(ELEMENT_ACTIONBAR_PERMISSION,0,true);
+		Utils.pause(1000);
+		info("check user selector");
+		click(plfPerm.ELEMENT_SELECT_USER_ICON1,0,true);
+		plfPerm.checkUserSelector(user, isPresent);
+	}
+	/**
+	 * Check personal file
+	 * @param file
+	 * @param isPresent
+	 */
+	public void checkFileInPersonal(String file,boolean isPresent){
+		info("check file in personal document");
+		waitForAndGetElement(ELEMENT_FOLDERSELECTOR_PATH.replace("${path}", file),3000,1);
+	}
+	/**
+	 * Check SE file
+	 * @param file
+	 * @param isPresent
+	 */
+	public void checkFileInSE(String file,boolean isPresent){
+		info("check file in SE");
+		waitForAndGetElement((ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME).replace("${title}", file),3000,1);
+	}
+	/**
+	 * Watch a document
+	 */
+	public void watchDocument(){
+		info("watch a document");
+		click(ELEMENT_ACTIONBAR_WATCH,0,true);
+		Utils.pause(500);
+		click(ELEMENT_ACTIONBAR_WATCH_RADIO,0,true);
+		click(ELEMENT_ACTIONBAR_WATCH_BUTTON,0,true);
+		waitForAndGetElement(ELEMENT_ACTIONBAR_WATCH_NOTICE);
+		Utils.pause(2000);
+>>>>>>> FQA-2584:PLF 4.3 - Write High Fnc/Disable User/Space
 	}
 }

@@ -10,6 +10,7 @@ import org.exoplatform.selenium.platform.ManageLogInOut;
 import org.exoplatform.selenium.platform.NavigationToolbar;
 import org.exoplatform.selenium.platform.PlatformBase;
 import org.exoplatform.selenium.platform.PlatformPermission;
+import org.exoplatform.selenium.platform.administration.ContentAdministration;
 import org.exoplatform.selenium.platform.answer.AnswerCategoryManagement;
 import org.exoplatform.selenium.platform.answer.AnswerHomePage;
 import org.exoplatform.selenium.platform.answer.QuestionManagement;
@@ -17,9 +18,12 @@ import org.exoplatform.selenium.platform.calendar.CalendarHomePage;
 import org.exoplatform.selenium.platform.calendar.CalendarManagement;
 import org.exoplatform.selenium.platform.calendar.EventManagement;
 import org.exoplatform.selenium.platform.calendar.TaskManagement;
+import org.exoplatform.selenium.platform.ecms.CreateNewDocument;
+import org.exoplatform.selenium.platform.ecms.SiteExplorerHome;
 import org.exoplatform.selenium.platform.gatein.UserAddManagement;
 import org.exoplatform.selenium.platform.gatein.UserAndGroupManagement;
 import org.exoplatform.selenium.platform.objectdatabase.common.AttachmentFileDatabase;
+import org.exoplatform.selenium.platform.objectdatabase.common.DataTestPathDatabase;
 import org.exoplatform.selenium.platform.objectdatabase.common.MailSuffixDatabase;
 import org.exoplatform.selenium.platform.objectdatabase.common.TextBoxDatabase;
 import org.exoplatform.selenium.platform.objectdatabase.common.UserInfoDatabase;
@@ -28,6 +32,9 @@ import org.exoplatform.selenium.platform.objectdatabase.gatein.UserSearchOptionD
 import org.exoplatform.selenium.platform.objectdatabase.wiki.WikiMessageDatabase;
 import org.exoplatform.selenium.platform.objectdatabase.wiki.WikiRichTextDatabase;
 import org.exoplatform.selenium.platform.objectdatabase.wiki.WikiTemplateDatabase;
+import org.exoplatform.selenium.platform.social.EmailNotifications;
+import org.exoplatform.selenium.platform.social.IntranetNotification;
+import org.exoplatform.selenium.platform.social.MyNotificationsSetting;
 import org.exoplatform.selenium.platform.social.SpaceSettingManagement;
 import org.exoplatform.selenium.platform.social.SpaceHomePage;
 import org.exoplatform.selenium.platform.social.SpaceManagement;
@@ -90,6 +97,15 @@ public class Disable_User_TestConfig extends PlatformBase {
 	EventManagement evMg;
 	TaskManagement tasMg;
 	
+	MyNotificationsSetting myNotifPage;
+	EmailNotifications notiEmail;
+	IntranetNotification intraNot;
+	
+	ContentAdministration caPage;
+	SiteExplorerHome seHome;
+	CreateNewDocument CreNewDoc;
+	DataTestPathDatabase dataTestPath;
+	AttachmentFileDatabase attachFile;
 	String username;
 	String firstName;
 	String password;
@@ -97,7 +113,9 @@ public class Disable_User_TestConfig extends PlatformBase {
 	String email;
 	String membership;
 	String searchUserName ;
-	
+	String space;
+	String folderDataTestPath;
+	String searchEmail;
 	@BeforeClass
 	public void setUpBeforeClass() throws Exception{
 		info("Start setUpBeforeClass");
@@ -136,6 +154,15 @@ public class Disable_User_TestConfig extends PlatformBase {
 		cMang = new CalendarManagement(driver);
 		cHome = new CalendarHomePage(driver);
 		
+		myNotifPage = new MyNotificationsSetting(driver);
+		notiEmail = new EmailNotifications(driver);
+		intraNot = new IntranetNotification(driver);
+		
+		caPage = new ContentAdministration(driver);
+		seHome = new SiteExplorerHome(driver);
+		CreNewDoc = new CreateNewDocument(driver);
+		
+
 		txData = new TextBoxDatabase();
 		txData.setContentData(texboxFilePath,defaultSheet,isUseFile,jdbcDriver,dbUrl,user,pass,sqlAttach);
 		
@@ -167,6 +194,12 @@ public class Disable_User_TestConfig extends PlatformBase {
 		portMemPermisData = new GateinPortalMemberShipsPermissionDatabase();
 		portMemPermisData.setData(portalPermisMemFilePath,defaultSheet,isUseFile,jdbcDriver,dbUrl,user,pass,sqlUser);
 		
+		dataTestPath = new DataTestPathDatabase();
+		dataTestPath.setDataTestPathData(dataTestFilePath,defaultSheet,isUseFile,jdbcDriver,dbUrl,user,pass,sqlAttach);
+		folderDataTestPath = dataTestPath.getDataTestPathByIndex(1);
+		
+		attachFile = new AttachmentFileDatabase();
+		attachFile.setAttachFileData(attachmentFilePath,defaultSheet,isUseFile,jdbcDriver,dbUrl,user,pass,sqlAttach);
 		info("End setUpBeforeClass");
 	}
 	
@@ -177,6 +210,42 @@ public class Disable_User_TestConfig extends PlatformBase {
 		driver.quit();
 		info("End setUpBeforeClass");
 	}
-
+	public void createNewUser(){
+		username = userInfoData.getUserNameByIndex(5)+getRandomString();
+		password = userInfoData.getPassWordByIndex(5)+getRandomString();
+		lastName = userInfoData.getLastNameByIndex(5)+getRandomString();
+		email = userInfoData.getEmailByIndex(5)+getRandomString()+mailSuffixData.getMailSuffixByIndex(2);
+		searchUserName = userSearchOptionData.getUserSearchOptionByIndex(0);
+		
+		info("Create new user");
+		navToolBar.goToAddUser();
+		addUserPage.addUser(username, password, email, username, lastName);
+	}
 	
+	public void disableUser(){
+		info("disable user");
+		navToolBar.goToUsersAndGroupsManagement();
+ 	 	userAndGroup.searchUser(username, searchUserName);
+ 	 	userAndGroup.enableDisableUser(username, false);
+	}
+	public void enableUser(){
+		info("enable user");
+		navToolBar.goToUsersAndGroupsManagement();
+		userAndGroup.selectDisableStatus("All");
+ 	 	userAndGroup.searchUser(username, searchUserName);
+ 	 	userAndGroup.enableDisableUser(username, true);
+	}
+	public void deleteUser(){
+		info("delete data");
+ 	 	navToolBar.goToUsersAndGroupsManagement();
+		userAndGroup.selectDisableStatus("All");
+		userAndGroup.deleteUser(username);
+	}
+	public void createSpace(){
+		space = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+		
+		info("Create a space");
+		hp.goToAllSpace();
+		spaMg.addNewSpaceSimple(space,space);
+	}
 }

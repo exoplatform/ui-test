@@ -821,4 +821,12 @@ public class UserAndGroupManagement extends PlatformBase {
 				waitForElementNotPresent(ELEMENT_USER_DELETE_ICON1);
 		}
 	}
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> FQA-2583:PLF 4.3 - Write High Fnc/Disable User/People
+=======
+	
+>>>>>>> FQA-2584:PLF 4.3 - Write High Fnc/Disable User/Space
+>>>>>>> FQA-2584:PLF 4.3 - Write High Fnc/Disable User/Space
 }

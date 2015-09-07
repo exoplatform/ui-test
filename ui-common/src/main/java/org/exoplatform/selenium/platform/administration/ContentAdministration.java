@@ -3,7 +3,11 @@ package org.exoplatform.selenium.platform.administration;
 import org.exoplatform.selenium.ManageAlert;
 import org.exoplatform.selenium.Utils;
 import org.exoplatform.selenium.platform.PlatformBase;
+<<<<<<< HEAD
 import org.exoplatform.selenium.platform.ecms.ECMS_Permission;
+=======
+import org.exoplatform.selenium.platform.PlatformPermission;
+>>>>>>> FQA-2584:PLF 4.3 - Write High Fnc/Disable User/Space
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -190,7 +194,7 @@ public class ContentAdministration extends PlatformBase{
 	public String ELEMENT_ECM_EXPLORER_TAGS_EDIT_LIST = "//*[@id='UITagManager']//*[contains(text(),'{$name}')]/../..//*[@class='uiIconEdit uiIconLightGray']";
 	public String ELEMENT_ECM_EXPLORER_TAGS_DELETE_LIST = "//*[@id='UITagManager']//*[contains(text(),'{$name}')]/../..//*[@class='uiIconRemove uiIconLightGray']";
 	public String ELEMENT_ECM_EXPLORER_TAGS_LIST_CHECK_HTML_CONTENT = "//*[@id='UITagManager']//*[contains(text(),'{$name}')]/../..//*[contains(text(),'{$html}')]";
-
+    public final By ELEMENT_ECM_EXPLORER_TAGS_PERM_TAB = By.xpath(".//*[contains(@data-target,'TagPermissionManager')]");
 	//common element
 	public By ELEMENT_ECM_COMMON_ADD_PERMISSION_BUTTON = By.xpath(".//*[@class='uiIconAddPermission uiIconLightGray']");
 	public By ELEMENT_ECM_COMMON_ANY_PERMISSION = By.xpath("//*[@class='uiIconAddAnyPermission uiIconLightGray']");
@@ -264,12 +268,20 @@ public class ContentAdministration extends PlatformBase{
 	public String ELEMENT_ECM_TEMPLATES_METADATA_FORM_DELETE = "//*[@id='UIMetadataList']//*[contains(text(),'{$name}')]/..//*[@class='uiIconDelete uiIconLightGray']";
 	public By ELEMENT_ECM_TEMPLATES_METADATA_FORM_OK_FORM = By.xpath("//*[@class='uiAction uiActionBorder']//*[contains(text(),'OK')]");
 
+<<<<<<< HEAD
 	ECMS_Permission ecmsPerm;
+=======
+	PlatformPermission plfPerm;
+>>>>>>> FQA-2584:PLF 4.3 - Write High Fnc/Disable User/Space
 	ManageAlert alert ;
 	public ContentAdministration(WebDriver dr){
 		driver = dr;
 		alert= new ManageAlert(dr);
+<<<<<<< HEAD
 		ecmsPerm = new ECMS_Permission(driver);
+=======
+		plfPerm = new PlatformPermission(driver);
+>>>>>>> FQA-2584:PLF 4.3 - Write High Fnc/Disable User/Space
 	}
 
 	/**
@@ -1285,6 +1297,7 @@ public class ContentAdministration extends PlatformBase{
 		Utils.pause(1000);
 		info("Finished Adding action for a view");
 	}
+<<<<<<< HEAD
 	/**
 	 * Add group permission to drive
 	 * @param drive
@@ -1345,4 +1358,59 @@ public class ContentAdministration extends PlatformBase{
 		Utils.pause(1000);
 		click(ecmsPerm.ELEMENT_PERMISSION_CLOSE,0,true);
 	}
+=======
+  /**
+   * Check select user in Advance/Category
+   * @param cat: name of new category
+   * @param user
+   * @param isPresent
+   * 				true if user is displayed
+   * 				false if user is NOT displayed
+   */
+	public void checkUserSelectorOfCategory(String cat,String user,boolean isPresent){
+		goToSpecificMainFunctions(mainEcmFunctions.ADVANCED);
+		goToSpecificFunctions(specificEcmFunctions.CATEGORIES);
+		info("Add a category");
+		click(ELEMENT_ECM_ADVANCED_CATEGORIES_ADD_CATEGORIES);
+		info("Type a name for the category");
+		type(ELEMENT_ECM_ADVANCED_CATEGORIES_NAME_FORM,cat,true);
+		info("Click on Next button of the step 1");
+		click(ELEMENT_ECM_ADVANCED_CATEGORIES_NEXT_1STPAGE_FORM,0,true);
+		info("check user selector");
+		click(plfPerm.ELEMENT_SELECT_USER_ICON1,0,true);
+		plfPerm.checkUserSelector(user, isPresent);
+	}
+		/**
+	   * Check select user in Explorer/Tag
+	   * @param user
+	   * @param isPresent
+	   * 				true if user is displayed
+	   * 				false if user is NOT displayed
+	   */
+		public void checkUserSelectorOfTags(String user,boolean isPresent){
+			goToSpecificMainFunctions(mainEcmFunctions.EXPLORER);
+			goToSpecificFunctions(specificEcmFunctions.TAGS);
+			click(ELEMENT_ECM_EXPLORER_TAGS_PERM_TAB,0,true);
+			info("check user selector");
+			click(plfPerm.ELEMENT_SELECT_USER_ICON1,0,true);
+			plfPerm.checkUserSelector(user, isPresent);
+		}
+		/**
+	   * Check select user in Explorer/View
+	   * @param cat: name of view
+	   * @param user
+	   * @param isPresent
+	   * 				true if user is displayed
+	   * 				false if user is NOT displayed
+	   */
+		public void checkUserSelectorOfView(String view,String user,boolean isPresent){
+			goToSpecificMainFunctions(mainEcmFunctions.EXPLORER);
+			goToSpecificFunctions(specificEcmFunctions.VIEW);
+			click(By.xpath(ELEMENT_ECM_EXPLORER_VIEW_EDIT_LIST.replace("{$name}",view)));
+			click(ELEMENT_ECM_EXPLORER_GO_TO_PERMISSION_FORM);
+			info("check user selector");
+			click(plfPerm.ELEMENT_SELECT_USER_ICON1,0,true);
+			plfPerm.checkUserSelector(user, isPresent);
+		}
+>>>>>>> FQA-2584:PLF 4.3 - Write High Fnc/Disable User/Space
 }
