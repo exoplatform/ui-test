@@ -12,7 +12,7 @@ public class PrivateMessageManagement extends PlatformBase{
 	PlatformPermission per;
 	ManageAlert alert;
 	Button button;
-	
+	ForumPermission forumPerm;
 	// tab elements
 	public By ELEMENT_TABS_SENT_MESSAGES = By.xpath("//*[@id='UIPrivateMessageForm']//*[@class='nav nav-tabs']//*[contains(text(),'Sent Messages')]");
 	public By ELEMENT_TABS_INBOX = By.xpath("//*[@id='UIPrivateMessageForm']//*[@class='nav nav-tabs']//*[contains(text(),'Inbox')]");
@@ -44,6 +44,7 @@ public class PrivateMessageManagement extends PlatformBase{
 		this.driver=dr;
 		alert = new ManageAlert(driver);
 		button = new Button(driver);
+		forumPerm = new ForumPermission(driver);
 	}
 	
 	/**
@@ -80,7 +81,21 @@ public class PrivateMessageManagement extends PlatformBase{
 		button.ok();
 		Utils.pause(2000);
 	}
-	
+	/**
+	 * Write message to group
+	 * @param groupPath
+	 * @param member
+	 * @param title
+	 * @param content
+	 */
+	public void writeMessageToGroup(String groupPath,String member, String title, String content){
+		forumPerm.selectPermGroupMemberMes(groupPath, member);
+		type(ELEMENT_TITLE_MESSAGE,title,true);
+		inputFrame(ELEMENT_MESSAGE_CONTENT, content);
+		click(ELEMENT_SEND_BUTTON);
+		button.ok();
+		Utils.pause(2000);
+	}
 	/**
 	 * Check inbox message
 	 * @param contact
@@ -91,7 +106,19 @@ public class PrivateMessageManagement extends PlatformBase{
 		click(By.xpath(ELEMENT_TITLE_AUTHORS_INBOX.replace("{$title}",title).replace("{$author}",contact)));
 		waitForAndGetElement(By.xpath(ELEMENT_CONTENT_INBOX.replace("{$content}",content)));
 	}
-	
+	/**
+	 * Check display of message
+	 * @param title
+	 * @param author
+	 * @param isDisplay
+	 */
+	public void checkDisplayOfMessage(String title,String author,boolean isDisplay){
+		if(isDisplay){
+			waitForAndGetElement(ELEMENT_TITLE_AUTHORS_INBOX.replace("{$title}",title).replace("{$author}",author));
+		}else{
+			waitForElementNotPresent(ELEMENT_TITLE_AUTHORS_INBOX.replace("{$title}",title).replace("{$author}",author));
+		}
+	}
 	/**
 	 * Reply a message
 	 * @param contact

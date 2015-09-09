@@ -7,7 +7,6 @@ import org.exoplatform.selenium.platform.PlatformBase;
 import org.exoplatform.selenium.platform.PlatformPermission;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-
 import static org.exoplatform.selenium.TestLogger.info;
 
 public class ForumTopicManagement extends PlatformBase {
@@ -30,6 +29,7 @@ public class ForumTopicManagement extends PlatformBase {
 	
 	//More Action menu
 	public final By ELEMENT_MORE_ACTION = By.xpath("//*[@data-toggle='dropdown']/*[@class='uiIconSettings uiIconLightGray']");
+	public final By ELEMENT_MODERATOR=By.xpath("//*[contains(@class,'uiIconForumModerator')]");
 	public final By ELEMENT_EDIT_TOPIC = By.xpath(".//*[@id='UITopicDetail']//a[contains(text(),'Edit')]");
 	public final By ELEMENT_DELETE_TOPIC = By.xpath(".//*[@id='UITopicDetail']//a[contains(text(),'Delete')]");
 	public final By ELEMENT_MOVE_TOPIC = By.xpath(".//*[@id='UITopicDetail']//a[contains(text(),'Move')]");
@@ -47,14 +47,14 @@ public class ForumTopicManagement extends PlatformBase {
 	public final By ELEMENT_FORUM_POST_TITLE = By.xpath("//*[@id='PostTitle']");
 	public final By ELEMENT_FORUM_MESSAGE = By.xpath("//iframe[@class='cke_wysiwyg_frame cke_reset']");
 	public final By ELEMENT_FORUM_SETTINGS_SUBMIT = By.xpath("//*[text()='Submit']");
-	public final By ELEMENT_FORUM_ADDTOPIC = By.xpath("(.//*[@id='UITopicContainer']//*[contains(@class,'uiIconForumCreateTopic ')])[1]");
+	public final By ELEMENT_FORUM_ADDTOPIC = By.xpath("(.//*[@id='UITopicContainer']//*[contains(@class,'uiIconForumCreateTopic ')][1]");
 	public final By ELEMENT_FORUM_TOPIC_TITLE = By.xpath("//*[@id='ThreadTitle']");
 	public final String ELEMENT_FORUM_TOPIC_LINK = ".//*[contains(text(),'${name}')]";
 	
 	//Start Topic popup
 	public final By ELEMENT_START_TOPIC_POPUP_TITLE = By.xpath(".//*[@id='UIForumPopupWindow']//span[@class='PopupTitle popupTitle']");
 	public final By ELEMENT_START_TOPIC_POPUP_TITLE_FILED = By.id("ThreadTitle");
-   
+	public final By ELEMENT_START_TOPIC_BTN = By.xpath(".//*[contains(@class,'uiIconForumCreateTopic')]");
 	// reply post form 
     public final By ELEMENT_TITLE_POST = By.id("PostTitle");
     public final By ELEMENT_POST_CONTENT = By.xpath("//iframe[@class='cke_wysiwyg_frame cke_reset']");
@@ -105,6 +105,7 @@ public class ForumTopicManagement extends PlatformBase {
 	PlatformPermission per;
 	ManageAlert alert;
 	Button button;
+	ForumPermission forumPerm;
 	/**
 	 * constructor
 	 * @param dr
@@ -113,6 +114,7 @@ public class ForumTopicManagement extends PlatformBase {
 		this.driver=dr;
 		alert = new ManageAlert(driver);
 		button = new Button(driver);
+		forumPerm = new ForumPermission(driver);
 	}
 	/**
 	 * Move a topic to a forum
@@ -577,5 +579,68 @@ public class ForumTopicManagement extends PlatformBase {
 		info("Click on Submit button");
 		click(ELEMENT_SUBMIT_BUTTON);
 		info("All changes are saved");
+	}
+	/**
+	 * Check display of manage topic
+	 * @param forum
+	 * @param topic
+	 * @param isDisplay
+	 */
+	public void checkDisplayOfTopicManage(String forum,String topic,boolean isDisplay){
+		info("check display of manage topic");
+		click(ELEMENT_FORUM_TOPIC_LINK.replace("${name}",topic),0,true);
+		if(isDisplay){
+			waitForAndGetElement(ELEMENT_MORE_ACTION);
+			waitForAndGetElement(ELEMENT_MODERATOR);
+		}else{
+			waitForElementNotPresent(ELEMENT_MORE_ACTION);
+			waitForElementNotPresent(ELEMENT_MODERATOR);
+		}
+	}
+	/**
+	 * Check enable of post reply 
+	 * @param topic
+	 * @param isEnable
+	 */
+	public void checkEnableOfPostReply(String topic,boolean isEnable){
+		info("check enable of post reply");
+		click(ELEMENT_FORUM_TOPIC_LINK.replace("${name}",topic),0,true);
+		if(isEnable){
+			waitForAndGetElement(ELEMENT_TOPIC_POST_REPLY_BOTTOM);
+		}else{
+			waitForAndGetElement(ELEMENT_TOPIC_POST_REPLY_BUTTON_DISABLE);
+		}
+	}
+	/**
+	 * Check enable of view post
+	 * @param forum
+	 * @param topic
+	 * @param isEnable
+	 */
+	public void checkEnableOfViewPost(String forum,String topic,boolean isEnable){
+		info("check enable of view post");
+		click(ELEMENT_FORUM_TOPIC_LINK.replace("${name}",forum),0,true);
+		if(isEnable){
+			waitForElementNotPresent(ELEMENT_START_TOPIC_BTN);
+			click(ELEMENT_FORUM_TOPIC_LINK.replace("${name}",topic),0,true);
+			waitForElementNotPresent(ELEMENT_TOPIC_POST_REPLY_BOTTOM);
+		}else{
+			waitForElementNotPresent(ELEMENT_FORUM_TOPIC_LINK.replace("${name}",topic));
+		}
+	}
+	/**
+	 * Edit permission of topic
+	 * @param topic
+	 * @param groupPath
+	 * @param member
+	 * @param isView
+	 * @param isPost
+	 */
+	public void editPermOfTopic(String topic,String groupPath,String member,boolean isView,boolean isPost){
+		info("edit permission of topic:"+topic);
+		click(ELEMENT_FORUM_TOPIC_LINK.replace("${name}",topic),0,true);
+		selectItemMoreActionMenuTopic(specifMoreActionMenuTopic.EDIT);
+		forumPerm.selectPermGroupMemberInTopic(groupPath, member, isView,isPost);
+		click(ELEMENT_SUBMIT_BUTTON);
 	}
 }

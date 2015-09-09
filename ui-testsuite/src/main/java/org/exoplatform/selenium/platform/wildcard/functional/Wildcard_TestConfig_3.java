@@ -3,50 +3,34 @@ package org.exoplatform.selenium.platform.wildcard.functional;
 import static org.exoplatform.selenium.TestLogger.info;
 
 import java.util.ArrayList;
-
-import org.exoplatform.selenium.ManageAlert;
-import org.exoplatform.selenium.Utils;
-import org.exoplatform.selenium.platform.ActivityStream;
+import org.exoplatform.selenium.Button;
 import org.exoplatform.selenium.platform.HomePagePlatform;
 import org.exoplatform.selenium.platform.ManageLogInOut;
 import org.exoplatform.selenium.platform.NavigationToolbar;
 import org.exoplatform.selenium.platform.PlatformBase;
-import org.exoplatform.selenium.platform.administration.ContentAdministration;
-import org.exoplatform.selenium.platform.administration.ContentAdministration.mainEcmFunctions;
-import org.exoplatform.selenium.platform.administration.ContentAdministration.specificEcmFunctions;
-import org.exoplatform.selenium.platform.ecms.CreateNewDocument;
-import org.exoplatform.selenium.platform.ecms.ECMS_Permission;
-import org.exoplatform.selenium.platform.ecms.SiteExplorerHome;
-import org.exoplatform.selenium.platform.ecms.CreateNewDocument.selectDocumentType;
+import org.exoplatform.selenium.platform.forum.ForumCategoryManagement;
+import org.exoplatform.selenium.platform.forum.ForumForumManagement;
+import org.exoplatform.selenium.platform.forum.ForumHomePage;
+import org.exoplatform.selenium.platform.forum.ForumTopicManagement;
+import org.exoplatform.selenium.platform.forum.PrivateMessageManagement;
 import org.exoplatform.selenium.platform.gatein.UserAddManagement;
 import org.exoplatform.selenium.platform.gatein.UserAndGroupManagement;
-import org.exoplatform.selenium.platform.objectdatabase.common.AttachmentFileDatabase;
 import org.exoplatform.selenium.platform.objectdatabase.common.TextBoxDatabase;
-import org.exoplatform.selenium.platform.objectdatabase.user.UserDatabase;
-import org.exoplatform.selenium.platform.social.SpaceManagement;
-
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
-public class Wildcard_TestConfig_2 extends PlatformBase {
+public class Wildcard_TestConfig_3 extends PlatformBase {
 	
 	HomePagePlatform hp;
 	ManageLogInOut magAc;
-	SpaceManagement spManag;
 	NavigationToolbar navTool;
 
-	ContentAdministration caPage;
-	SiteExplorerHome SEHome;
-	CreateNewDocument CreNewDoc;
-	
-	ECMS_Permission EcmsPerm;
-	ActivityStream aHome;
-	
-	ManageAlert alert;
+	ForumCategoryManagement forumCatMag;
+	ForumHomePage forumHP;
+	ForumForumManagement forumMag;
+	PrivateMessageManagement msgManage;
+	ForumTopicManagement foTopic;
 	TextBoxDatabase txData;
-	UserDatabase userData;
-	AttachmentFileDatabase fData;
-	
 	
 	ArrayList<String> arrayUsers;
 	UserAddManagement addUserPage;
@@ -54,37 +38,25 @@ public class Wildcard_TestConfig_2 extends PlatformBase {
 	
 	String groupA;
 	String password;
-	
+	Button button;
 	@BeforeMethod
 	public void setUpBeforeMethod() throws Exception{
 		info("Start setUpBeforeClass");
 		initSeleniumTest();
 		getDefaultUserPass(userDataFilePath,defaultSheet,isUseFile,jdbcDriver,dbUrl,user,pass,sqlUser);
 		magAc = new ManageLogInOut(driver);
-		hp = new HomePagePlatform(driver);
-		SEHome = new SiteExplorerHome(driver);
-		CreNewDoc = new CreateNewDocument(driver);
-		spManag = new SpaceManagement(driver);
-		caPage = new ContentAdministration(driver);
 		navTool = new NavigationToolbar(driver);
-		EcmsPerm = new ECMS_Permission(driver);
-		aHome = new ActivityStream(driver);
-		alert = new ManageAlert(driver, this.plfVersion);
-		SEHome = new SiteExplorerHome(driver);
-		CreNewDoc = new CreateNewDocument(driver);
-		caPage = new ContentAdministration(driver);
-		navTool = new NavigationToolbar(driver);
-		EcmsPerm = new ECMS_Permission(driver);
 		hp = new HomePagePlatform(driver);
-		
+		button = new Button(driver);
 		addUserPage = new UserAddManagement(driver);
 		userAndGroup = new UserAndGroupManagement(driver);
 		
+		msgManage = new PrivateMessageManagement(driver);
+		forumCatMag = new ForumCategoryManagement(driver);
+		forumMag = new ForumForumManagement(driver);
+		forumHP = new ForumHomePage(driver);
+		foTopic = new ForumTopicManagement(driver);
 		txData = new TextBoxDatabase();
-		fData = new AttachmentFileDatabase();
-		userData = new UserDatabase();
-		//fData.setAttachFileData(attachmentFilePath,defaultSheet,isUseFile,jdbcDriver,dbUrl,user,pass,sqlUser);
-		userData.setUserData(userDataFilePath,defaultSheet,isUseFile,jdbcDriver,dbUrl,user,pass,sqlUser);
 		txData.setContentData(texboxFilePath,defaultSheet,isUseFile,jdbcDriver,dbUrl,user,pass,sqlContent);
 		
 		magAc.signIn(DATA_USER1, DATA_PASS);
@@ -133,26 +105,21 @@ public class Wildcard_TestConfig_2 extends PlatformBase {
 		}
 	}
 	/**
-	 * Create new file
-	 * @param title
-	 * @param content
+	 * Add category forum,topic
 	 */
-	public void createNewFile(String title,String content){
-		SEHome.goToAddNewContent();
-		info("Create new file document");
-		Utils.pause(1000);
-		CreNewDoc.createNewDoc(selectDocumentType.WEBCONTENT);
-		CreNewDoc.addNewWebContent(title, content);
-		CreNewDoc.saveAndClose();
-		Utils.pause(3000);
+	public void addCatForumTopic(String cat,String forum,String topic){
+		info("Add a category");
+		forumCatMag.addCategorySimple(cat,"",cat);
+		forumMag.addForumSimple(forum,"",forum);
+		forumMag.goToStartTopic();
+		foTopic.startTopic(topic, topic,"","");
 	}
 	/**
-	 * delete category
+	 * Delete category
 	 */
-	public void deleteCategory(String name){
-		navTool.goToContentAdministration();
-		caPage.goToSpecificMainFunctions(mainEcmFunctions.ADVANCED);
-		caPage.goToSpecificFunctions(specificEcmFunctions.CATEGORIES);
-		caPage.deleteCategories(name);
+	public void deleteCategory(String cat){
+		info("Delete category");
+		forumHP.goToHomeCategory();
+		forumCatMag.deleteCategory(cat);
 	}
 }

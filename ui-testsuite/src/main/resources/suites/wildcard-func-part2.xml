@@ -1,0 +1,17 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="Wildcard Func Test" verbose="1" preserve-order="true">
+	<test name="wildcard-func-part2" enabled="true">
+		<groups>
+			<run>
+				<exclude name="pending" />
+			</run>
+		</groups>
+		<classes>
+			<class name="org.exoplatform.selenium.platform.wildcard.functional.Wildcard_TestConfig_3" />
+			<class name="org.exoplatform.selenium.platform.wildcard.functional.Wildcard_Forum" />
+		</classes>
+	</test>
+	<listeners>
+		<listener class-name="org.exoplatform.selenium.TestReportListener" />
+	</listeners>
+</suite>

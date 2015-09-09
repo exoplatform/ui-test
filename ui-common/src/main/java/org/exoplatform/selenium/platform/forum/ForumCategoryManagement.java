@@ -4,6 +4,7 @@ import org.exoplatform.selenium.Button;
 import org.exoplatform.selenium.ManageAlert;
 import org.exoplatform.selenium.Utils;
 import org.exoplatform.selenium.platform.PlatformBase;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -24,6 +25,9 @@ public class ForumCategoryManagement extends PlatformBase {
 	public final By ELEMENT_IMPORT_FORUM = By.xpath("//*[@class='dropdown-menu uiCategoryPopupMenu']/li[3]/a");
 	public final By ELEMENT_DELETE_CATEGORY = By.xpath("//*[@id='UICategoryConfirm0' and contains(text(),'Delete')]");
 	
+	//Edit category
+	public final By ELEMENT_PERM_TAB = By.xpath("//*[contains(@data-toggle,'tab')][contains(.,'Permissions')]");
+	public final By ELEMENT_EDITCATEGORY_PERM_ADD_BTN=By.xpath("//*[contains(@id,'Permission')]//*[contains(@class,'addButton')]");
 	
 	//Add category popup
 	public final By ELEMENT_ADDCATEGORY_POPUP_TITLE= By.id("CategoryTitle");
@@ -44,6 +48,7 @@ public class ForumCategoryManagement extends PlatformBase {
 	
 	ManageAlert alert;
 	Button button;
+	ForumPermission forumPerm;
 	/**
 	 * constructor
 	 * @param dr
@@ -52,6 +57,7 @@ public class ForumCategoryManagement extends PlatformBase {
 		this.driver=dr;
 		alert = new ManageAlert(dr);
 		button = new Button(driver);
+		forumPerm = new ForumPermission(driver);
 	}
 	
 	
@@ -108,7 +114,7 @@ public class ForumCategoryManagement extends PlatformBase {
 		info("Waiting manage menu is shown");
 		waitForAndGetElement(ELEMENT_MENU_MANAGE_CATEGORY);
 		info("Click on Manage menu");
-		click(ELEMENT_MENU_MANAGE_CATEGORY);
+		click(ELEMENT_MENU_MANAGE_CATEGORY,0,true);
 		Utils.pause(1000);
 		switch (item) {
 		case EDIT_CATEGORY:
@@ -223,5 +229,46 @@ public class ForumCategoryManagement extends PlatformBase {
 		selectItemManageCategoryMenu(specifManageCategoryMenu.IMPORT_FORUM);
 		importFile(folderDowloadFile, nameFile);
 		button.ok();
+	}
+	/**
+	 * Edit permission of category
+	 * @param cat
+	 * @param groupPath
+	 * @param member
+	 */
+	public void editPermOfCategory(String cat,String groupPath,String member,boolean isMod,boolean isStartTop,boolean isPostReply,boolean isViewPost){
+		info("edit permission of category:"+cat);
+		click(ELEMENT_FORUM_CATEGORY_HOME_TITLE_LINK.replace("${name}", cat));
+		selectItemManageCategoryMenu(specifManageCategoryMenu.EDIT_CATEGORY);
+		click(ELEMENT_PERM_TAB,0,true);
+		forumPerm.selectPermGroupMember(groupPath, member, isMod, isStartTop, isPostReply, isViewPost);
+		click(ELEMENT_ADDCATEGORY_POPUP_SAVE_BUTTON);
+	}
+	/**
+	 * Edit permission of category
+	 * @param cat
+	 * @param groupPath
+	 * @param member
+	 */
+	public void editRestrictedAudience(String cat,String groupPath,String member){
+		info("edit permission of category:"+cat);
+		click(ELEMENT_FORUM_CATEGORY_HOME_TITLE_LINK.replace("${name}", cat));
+		selectItemManageCategoryMenu(specifManageCategoryMenu.EDIT_CATEGORY);
+		forumPerm.selectPermGroupMemberRestricted(groupPath, member);
+		click(ELEMENT_ADDCATEGORY_POPUP_SAVE_BUTTON);
+	}
+	/**
+	 * Check display of category
+	 * @param cat
+	 * @param isDisplay
+	 */
+	public void checkDisplayOfCat(String cat,boolean isDisplay){
+		info("check display of category:"+cat);
+		if(isDisplay){
+			waitForAndGetElement(ELEMENT_FORUM_CATEGORY_HOME_TITLE_LINK.replace("${name}", cat));
+			click(ELEMENT_FORUM_CATEGORY_HOME_TITLE_LINK.replace("${name}", cat),0,true);
+		}else{
+			waitForElementNotPresent(ELEMENT_FORUM_CATEGORY_HOME_TITLE_LINK.replace("${name}", cat));
+		}
 	}
 }

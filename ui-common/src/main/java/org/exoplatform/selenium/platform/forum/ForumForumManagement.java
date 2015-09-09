@@ -3,6 +3,7 @@ package org.exoplatform.selenium.platform.forum;
 import org.exoplatform.selenium.ManageAlert;
 import org.exoplatform.selenium.Utils;
 import org.exoplatform.selenium.platform.PlatformBase;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -28,11 +29,13 @@ public class ForumForumManagement extends PlatformBase {
 	public final By ELEMENT_ADDFORUM_POPUP_CANCEL_BUTTON= By.xpath(".//*[@id='UIForumForm']//button[text()='Cancel']");
 	
 	//More Action menu
-	public final By ELEMENT_MORE_ACTION_FORUM = By.xpath("//*[@class='uiIconSettings uiIconLightGray']");
+	public final By ELEMENT_MORE_ACTION = By.xpath("//*[@class='uiIconSettings uiIconLightGray']");
+	public final By ELEMENT_MODERATOR=By.xpath("//*[contains(@class,'uiIconForumModerator')]");
 	public final By ELEMENT_EDIT_FORUM = By.xpath("//*[contains(@href, 'EditForum')]");
 	public final By ELEMENT_DELETE_FORUM = By.xpath("//*[contains(@data-action, 'RemoveForum')]");
 	public final By ELEMENT_MOVE_FORUM = By.xpath("//*[contains(@href, 'MoveForum')]");
 	public final By ELEMENT_START_TOPIC_BUTTON = By.xpath("//*[contains(@href, 'AddTopic')]");
+	public final By ELEMENT_START_TOPIC_BTN = By.xpath(".//*[contains(@class,'uiIconForumCreateTopic')]");
 	public final By ELEMENT_LOCK_FORUM = By.className("uiIconLockMedium");
 	public final By ELEMENT_UNLOCK_FORUM = By.className("uiIconUnlockMedium");
 	public final By ELEMENT_CLOSE_FORUM = By.xpath("//a[contains(@href,'SetCloseForum')]");
@@ -49,6 +52,7 @@ public class ForumForumManagement extends PlatformBase {
 	
 	ManageAlert alert;
 	ForumHomePage forumHP;
+	ForumPermission forumPerm;
 	/**
 	 * constructor
 	 * @param dr
@@ -57,6 +61,7 @@ public class ForumForumManagement extends PlatformBase {
 		this.driver=dr;
 		alert = new ManageAlert(dr);
 		forumHP = new ForumHomePage(dr);
+		forumPerm = new ForumPermission(driver);
 	}
 
 	/**
@@ -118,9 +123,9 @@ public class ForumForumManagement extends PlatformBase {
 	 */
     public void selectItemMoreActionMenu(specifMoreActionMenu item){
     	info("Wait More link is shown");
-		waitForAndGetElement(ELEMENT_MORE_ACTION_FORUM);
+		waitForAndGetElement(ELEMENT_MORE_ACTION);
 		info("Click on More link");
-		click(ELEMENT_MORE_ACTION_FORUM);
+		click(ELEMENT_MORE_ACTION);
     	info("Select a link on More menu");
     	switch(item) {
 		case START_TOPIC:
@@ -277,5 +282,51 @@ public class ForumForumManagement extends PlatformBase {
 			waitForAndGetElement(ELEMENT_FORUM_START_TOPIC_BUTTON);
 		}
 	}
-	
+	/**
+	 * Check display of manage forum
+	 * @param forum
+	 * @param isDisplay
+	 */
+	public void checkDisplayOfForumManage(String forum,boolean isDisplay){
+		info("check display of manage forum");
+		click(ELEMENT_FORUM_FORUM_NAME_LINK.replace("${name}",forum));
+		if(isDisplay){
+			waitForAndGetElement(ELEMENT_MORE_ACTION);
+			waitForAndGetElement(ELEMENT_MODERATOR);
+		}else{
+			waitForElementNotPresent(ELEMENT_MORE_ACTION);
+			waitForElementNotPresent(ELEMENT_MODERATOR);
+		}
+	}
+	/**
+	 * Edit permission of forum
+	 * @param cat
+	 * @param groupPath
+	 * @param member
+	 * @param isMod
+	 * @param isStartTop
+	 * @param isPostReply
+	 * @param isViewPost
+	 */
+	public void editPermOfForum(String forum,String groupPath,String member,boolean isMod,boolean isStartTop,boolean isPostReply,boolean isViewPost){
+		info("edit permission of forum:"+forum);
+		click(ELEMENT_FORUM_FORUM_NAME_LINK.replace("${name}",forum),0,true);
+		selectItemMoreActionMenu(specifMoreActionMenu.EDIT);
+		forumPerm.selectPermGroupMember(groupPath, member, isMod, isStartTop, isPostReply, isViewPost);
+		click(ELEMENT_ADDFORUM_POPUP_SAVE_BUTTON);
+	}
+	/**
+	 * Check enable of start topic
+	 * @param forum
+	 * @param isEnable
+	 */
+	public void checkEnableOfStartTopic(String forum,boolean isEnable){
+		info("check enable of start topic");
+		click(ELEMENT_FORUM_FORUM_NAME_LINK.replace("${name}",forum),0,true);
+		if(isEnable){
+			waitForAndGetElement(ELEMENT_START_TOPIC_BTN);
+		}else{
+			waitForElementNotPresent(ELEMENT_START_TOPIC_BTN);
+		}
+	}
 }
