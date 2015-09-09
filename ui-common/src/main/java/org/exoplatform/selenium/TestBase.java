@@ -294,6 +294,8 @@ public class TestBase {
 	public final String DEFAULT_PERMISSION_MEMBERSHIP_FILE_URL="DataDriven/"+"permission_memberships.xls";
 	
 	/*======= Welcome Screen (Term and Conditions) =====*/
+	public final By ELEMENT_REGISTER_SKIP_BUTTON=By.xpath(".//*[@id='UIPortalLoginFormAction']/input[contains(@value,'Skip')]");
+	public final By ELEMENT_REGISTER_YOUR_SOFTWARE_BUTTON=By.xpath(".//*[@id='UIPortalLoginFormAction']/a");
 	public final By ELEMENT_FIRSTNAME_ACCOUNT = By.name("firstNameAccount");
 	public final By ELEMENT_LASTNAME_ACCOUNT = By.name("lastNameAccount");
 	public final By ELEMENT_EMAIL_ACCOUNT = By.name("emailAccount");
@@ -301,8 +303,6 @@ public class TestBase {
 	public final By ELEMENT_ROOT_PASS_ACCOUNT = By.name("adminPassword");
 	public final By ELEMENT_ROOT_CONFIRM_PASS_ACCOUNT = By.name("confirmAdminPassword");
 	public final By ELEMENT_AGREEMENT_CHECKBOX = By.xpath("//*[@id = 'agreement']");
-	public final By ELEMENT_REGISTER_SKIP_BUTTON=By.xpath(".//*[@id='UIPortalLoginFormAction']/input[contains(@value,'Skip')]");
-	public final By ELEMENT_REGISTER_YOUR_SOFTWARE_BUTTON=By.xpath(".//*[@id='UIPortalLoginFormAction']/a");
 	public final By ELEMENT_INPUT_USERNAME = By.name("username"); 
 	public final By ELEMENT_CONTINUE_BUTTON = By.xpath("//button[text()='Continue' and @class='btn active']");
 	public final By ELEMENT_START_BUTTON = By.xpath("//button[text()='Start']");
@@ -783,7 +783,7 @@ public class TestBase {
 
 	/**
 	 * Check term and conditions
-	 * 
+	 * @param opParams
 	 */
 	public void termsAndConditions(Object... opParams){
 		info("Term and conditions");

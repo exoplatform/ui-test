@@ -621,9 +621,9 @@ public class ForumTopicManagement extends PlatformBase {
 		info("check enable of view post");
 		click(ELEMENT_FORUM_TOPIC_LINK.replace("${name}",forum),0,true);
 		if(isEnable){
-			waitForElementNotPresent(ELEMENT_START_TOPIC_BTN);
+			waitForAndGetElement(ELEMENT_START_TOPIC_BTN);
 			click(ELEMENT_FORUM_TOPIC_LINK.replace("${name}",topic),0,true);
-			waitForElementNotPresent(ELEMENT_TOPIC_POST_REPLY_BOTTOM);
+			waitForAndGetElement(ELEMENT_TOPIC_POST_REPLY_BOTTOM);
 		}else{
 			waitForElementNotPresent(ELEMENT_FORUM_TOPIC_LINK.replace("${name}",topic));
 		}

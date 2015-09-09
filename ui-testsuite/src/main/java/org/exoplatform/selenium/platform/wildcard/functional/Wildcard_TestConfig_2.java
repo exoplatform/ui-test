@@ -4,9 +4,7 @@ import static org.exoplatform.selenium.TestLogger.info;
 
 import java.util.ArrayList;
 
-import org.exoplatform.selenium.ManageAlert;
 import org.exoplatform.selenium.Utils;
-import org.exoplatform.selenium.platform.ActivityStream;
 import org.exoplatform.selenium.platform.HomePagePlatform;
 import org.exoplatform.selenium.platform.ManageLogInOut;
 import org.exoplatform.selenium.platform.NavigationToolbar;
@@ -20,9 +18,7 @@ import org.exoplatform.selenium.platform.ecms.SiteExplorerHome;
 import org.exoplatform.selenium.platform.ecms.CreateNewDocument.selectDocumentType;
 import org.exoplatform.selenium.platform.gatein.UserAddManagement;
 import org.exoplatform.selenium.platform.gatein.UserAndGroupManagement;
-import org.exoplatform.selenium.platform.objectdatabase.common.AttachmentFileDatabase;
 import org.exoplatform.selenium.platform.objectdatabase.common.TextBoxDatabase;
-import org.exoplatform.selenium.platform.objectdatabase.user.UserDatabase;
 import org.exoplatform.selenium.platform.social.SpaceManagement;
 
 import org.testng.annotations.AfterMethod;
@@ -38,14 +34,10 @@ public class Wildcard_TestConfig_2 extends PlatformBase {
 	ContentAdministration caPage;
 	SiteExplorerHome SEHome;
 	CreateNewDocument CreNewDoc;
-	
 	ECMS_Permission EcmsPerm;
-	ActivityStream aHome;
 	
-	ManageAlert alert;
 	TextBoxDatabase txData;
-	UserDatabase userData;
-	AttachmentFileDatabase fData;
+	
 	ArrayList<String> arrayUsers;
 	UserAddManagement addUserPage;
 	UserAndGroupManagement userAndGroup;
@@ -59,15 +51,6 @@ public class Wildcard_TestConfig_2 extends PlatformBase {
 		initSeleniumTest();
 		getDefaultUserPass(userDataFilePath,defaultSheet,isUseFile,jdbcDriver,dbUrl,user,pass,sqlUser);
 		magAc = new ManageLogInOut(driver);
-		hp = new HomePagePlatform(driver);
-		SEHome = new SiteExplorerHome(driver);
-		CreNewDoc = new CreateNewDocument(driver);
-		spManag = new SpaceManagement(driver);
-		caPage = new ContentAdministration(driver);
-		navTool = new NavigationToolbar(driver);
-		EcmsPerm = new ECMS_Permission(driver);
-		aHome = new ActivityStream(driver);
-		alert = new ManageAlert(driver, this.plfVersion);
 		SEHome = new SiteExplorerHome(driver);
 		CreNewDoc = new CreateNewDocument(driver);
 		caPage = new ContentAdministration(driver);
@@ -79,10 +62,6 @@ public class Wildcard_TestConfig_2 extends PlatformBase {
 		userAndGroup = new UserAndGroupManagement(driver);
 		
 		txData = new TextBoxDatabase();
-		fData = new AttachmentFileDatabase();
-		userData = new UserDatabase();
-		//fData.setAttachFileData(attachmentFilePath,defaultSheet,isUseFile,jdbcDriver,dbUrl,user,pass,sqlUser);
-		userData.setUserData(userDataFilePath,defaultSheet,isUseFile,jdbcDriver,dbUrl,user,pass,sqlUser);
 		txData.setContentData(texboxFilePath,defaultSheet,isUseFile,jdbcDriver,dbUrl,user,pass,sqlContent);
 		
 		magAc.signIn(DATA_USER1, DATA_PASS);
@@ -123,10 +102,10 @@ public class Wildcard_TestConfig_2 extends PlatformBase {
 	 * Delete all users that are created in testing process
 	 */
 	public void deleteAllUsers(){
+		magAc.signOut();
+		magAc.signIn(DATA_USER1,DATA_PASS);
+		navTool.goToUsersAndGroupsManagement();
 		if(arrayUsers.size()>0){
-			magAc.signOut();
-			magAc.signIn(DATA_USER1,DATA_PASS);
-			navTool.goToUsersAndGroupsManagement();
 			userAndGroup.deleteAllUsers(arrayUsers);
 		}
 	}

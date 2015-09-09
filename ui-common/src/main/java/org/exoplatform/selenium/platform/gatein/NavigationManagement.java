@@ -485,4 +485,15 @@ public class NavigationManagement extends PlatformBase {
 		click(ELEMENT_NODE_PAGE_SELECTOR_SELECT_PAGES_BTN);
 		Utils.pause(2000);
 	}
+	/**
+	 * verify Add Navigation permission
+	 * @param isEnable
+	 */
+	public void verifyAddNavigationPerm(String title,boolean isEnable){
+		info("verify Add Navigation permission");
+		
+		if(isEnable){
+			
+		}
+	}
 }

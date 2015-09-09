@@ -34,7 +34,7 @@ public class QuestionManagement extends AnswerLocator {
 	 */
 	public void goToSubmitQuestion(){
 		info("Open submin question form");
-		click(ELEMENT_SUBMIT_QUESTION);
+		click(ELEMENT_SUBMIT_QUESTION,0,true);
 		waitForAndGetElement(ELEMENT_SUBMIT_QUESTION_FORM);
 	}
 

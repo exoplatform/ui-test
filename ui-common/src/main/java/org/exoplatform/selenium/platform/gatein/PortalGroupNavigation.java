@@ -26,10 +26,11 @@ public class PortalGroupNavigation extends PlatformBase {
 	public final String ELEMENT_TITLE_NAVIGATION_MANAGEMENT = "//*[text()='Navigation Management']";
 
 	ManageAlert alert;
-	
+	PortalManagePages portMg;
 	public PortalGroupNavigation(WebDriver dr){
 		this.driver = dr;
 		alert = new ManageAlert(driver);
+		portMg = new PortalManagePages(driver);
 	} 
 	
 	
@@ -80,5 +81,37 @@ public class PortalGroupNavigation extends PlatformBase {
 				currentNavigation);
 		click(navigation);
 		waitForAndGetElement(ELEMENT_TITLE_NAVIGATION_MANAGEMENT);
+	}
+	/**
+	 * Verify Add Navigation permission
+	 * @param title
+	 * 				page's title
+	 * @param isEnable
+	 * @param groupName
+	 */
+	public void verifyAddNavigationPerm(String title,boolean isEnable,String groupName){
+		info("verify Add Navigation permission");
+		portMg.openPage(baseUrl+"/intranet/home/"+title);
+		if(isEnable && groupName.length()>0){
+			waitForAndGetElement(ELEMENT_ADD_NAVIGATION_BUTTON);
+			click(ELEMENT_ADD_NAVIGATION_BUTTON);
+			click(ELEMENT_GROUP_SELECT_ADD_NAVIGATION.replace("${groupName}", groupName));
+			waitForElementNotPresent(ELEMENT_GROUP_SELECT_ADD_NAVIGATION.replace("${groupName}", groupName));
+			click(ELEMENT_CANCEL_BUTON);
+			waitForAndGetElement(ELEMENT_GROUP_NAME.replace("${groupName}", groupName));	
+		}
+	}
+	/**
+	 * Verify Manage Group Site
+	 * @param group
+	 * @param isEnable
+	 */
+	public void verifyManageGroupSitePerm(String group,boolean isEnable){
+		info("Verify Manage Group Site");
+		if(isEnable){
+			waitForAndGetElement(ELEMENT_EDIT_NAVIGATION.replace("${groupName}", group));
+			waitForAndGetElement(ELEMENT_EDIT_PROPERTIES_ICON.replace("${groupName}", group));
+			waitForAndGetElement(ELEMENT_DELETE_NAVIGATION_ICON.replace("${groupName}", group));
+		}
 	}
 }

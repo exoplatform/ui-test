@@ -59,7 +59,7 @@ public class PortalManageSites extends PlatformBase {
 	
 	public final String ELEMENT_PERMISSION_SETTING_TAB = "//a[@data-target='#PermissionSetting-tab']";
 	public final By ELEMENT_CHECKBOX_PUBLIC_MODE = By.id("publicMode");
-	public final By ELEMENT_ADD_PERMISSION_BUTTON = By.className("uiIconAddUser uiIconWhite");
+	public final By ELEMENT_ADD_PERMISSION_BUTTON = By.xpath("//*[contains(@class,'uiIconAddUser')]");
 	public final String ELEMENT_EDIT_PERMISSION_SETTING = "//*[@href='#TabContentUIPermissionSelector']";
 	public final String ELEMENT_PORTAL_TEMPLATE_TAB = "//a[contains(text(),'Portal Templates')]";
 	
@@ -69,13 +69,13 @@ public class PortalManageSites extends PlatformBase {
 	public final String ELEMENT_SELECT_ACCESS_MEMBERSHIP_ITEM = "//a[contains(@title,'${membership}')]";
 	public final String ELEMENT_SELECTED_ACCESS_PERMISSION_MEMBERSHIP = ".//*[@id='PermissionGrid']//span[contains(text(),'${membership}')]";
 	public final String ELEMENT_SELECT_PERMISSION_BUTTON = "//a[@class='btn' and contains(text(),'Select Permission')]";
-	public final String ELEMENT_SELECTED_EDIT_PERMISSION_MEMBERSHIP = "//*[@class='controls' and contains(text(),'${membership}')]";		
+	public final String ELEMENT_SELECT_EDIT_PERMISSION_MEMBERSHIP = ".//*[@id='PermissionSelector']//a[contains(.,'${membership}')]";	
 	public final By ELEMENT_POPUP_ADD_PORTAL = By.id("UIMaskWorkspace");
 	public final String ELEMENT_PORTAL_DELETE_ICON = "//*[contains(text(),'${portalName}')]/../..//i[@class='uiIconTrash uiIconLightGray']";
 	
 	public final String ELEMENT_NEW_PORTAL_ADD = "//*[@class='siteName' and text()='${portalName}']";
 	public final String ELEMENT_NEW_PORTAL_SWITCH = "//img[contains(@src, 'sites/${portalName}')]";
-	
+	public final By ELEMENT_NEW_PORTAL_LOGOUT= By.xpath("//*[@id='AcmeWebSiteLogInLogOut']");
 	ManageAlert alert;
 	public PortalManageSites(WebDriver dr){
 		driver = dr;
@@ -335,7 +335,7 @@ public class PortalManageSites extends PlatformBase {
 				+ "--");
 		String[] groups = groupId.split("/");
 		Utils.pause(500);
-		click(ELEMENT_ADD_PERMISSION_BUTTON);
+		click(ELEMENT_ADD_PERMISSION_BUTTON,0,true);
 		for (String group : groups) {
 			String groupToSelect = ELEMENT_SELECT_ACCESS_GROUP_ITEM.replace(
 					"${group}", group);
@@ -354,9 +354,7 @@ public class PortalManageSites extends PlatformBase {
 	 * @param membership
 	 */
 	public void setEditPermissions(String groupId, String membership) {
-		String membershipToSelect = ELEMENT_SELECT_ACCESS_MEMBERSHIP_ITEM
-				.replace("${membership}", membership);
-		String selectedMembership = ELEMENT_SELECTED_EDIT_PERMISSION_MEMBERSHIP
+		String membershipToSelect = ELEMENT_SELECT_EDIT_PERMISSION_MEMBERSHIP
 				.replace("${membership}", membership);
 
 		info("--Setting edit permission to " + groupId + ", " + membership
@@ -366,13 +364,12 @@ public class PortalManageSites extends PlatformBase {
 		Utils.pause(500);
 		waitForTextPresent("Permission Selector");
 		for (String group : groups) {
-			String groupToSelect = ELEMENT_SELECT_ACCESS_GROUP_ITEM.replace(
-					"${group}", group);
+			String groupToSelect = ELEMENT_SELECT_EDIT_PERMISSION_MEMBERSHIP.replace(
+					"${membership}", group);
 			click(groupToSelect);
 		}
 		click(membershipToSelect);
 		waitForTextNotPresent("Permission Selector");
-		waitForAndGetElement(selectedMembership, DEFAULT_TIMEOUT, 1, 2);
 	}
 
 	/**
@@ -388,5 +385,16 @@ public class PortalManageSites extends PlatformBase {
 		waitForElementNotPresent(
 				ELEMENT_PORTAL_DELETE_ICON.replace("${portalName}", portalName),2000);
 	}
-	
+	/**
+	 * Verify permission on site
+	 * @param isEnable
+	 */
+	public void verifyPermOnSite(String portal,boolean isEnable){
+		info("check permission to access site: "+portal);
+		driver.get(baseUrl + "/" + portal);
+		if(isEnable)
+			waitForAndGetElement(ELEMENT_NEW_PORTAL_LOGOUT,3000,0);
+		else
+			waitForElementNotPresent(ELEMENT_NEW_PORTAL_LOGOUT,3000,0);
+	}
 }

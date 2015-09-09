@@ -4,8 +4,10 @@ import static org.exoplatform.selenium.TestLogger.info;
 
 import org.exoplatform.selenium.Utils;
 import org.exoplatform.selenium.platform.gatein.PageCreationWizard;
+import org.exoplatform.selenium.platform.gatein.PortalManagePages;
 import org.exoplatform.selenium.platform.gatein.PortalManageSites;
 import org.exoplatform.selenium.platform.social.UserProfilePage;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -109,7 +111,9 @@ public class NavigationToolbar extends PlatformBase {
 	//Edit menu
 	public final By ELEMENT_LINK_EDIT=By.xpath("//*[@class='uiIconPLF24x24Edit']");
 	public final By ELEMENT_MENU_PAGE_LINK = By.xpath("//*[@tabindex='-1' and contains(text(),'Page')]");
+	public final By ELEMENT_MENU_SITE_LINK = By.xpath("//*[@tabindex='-1' and contains(text(),'Site')]");
 	public final By ELEMENT_MENU_EDIT_LAYOUT = By.xpath("//*[contains(text(),'Edit Layout')]");
+	public final By ELEMENT_MENU_LAYOUT = By.xpath("//*[@tabindex='-1' and contains(text(),'Site')]/..//*[contains(text(),'Layout')]");
 	public final By ELEMENT_MENU_SEO_LINK = By.xpath("//span[contains(text(), 'SEO')]");
 	public final By ELEMENT_MENU_ADD_PAGE_LINK = By.xpath("//*[contains(text(), 'Add Page')]");
 	public final By ELEMENT_EDIT_PAGE = By.xpath("//*[@id='UIAdminToolbarContainer']//*[@class='dropdown-submenu']//*[@href='#' and contains(text(), 'Page')]");
@@ -169,12 +173,13 @@ public class NavigationToolbar extends PlatformBase {
 	PageCreationWizard paWin;
 	UserProfilePage myPro;
 	PortalManageSites magSites;
-
+	PortalManagePages portMg;
 	public NavigationToolbar(WebDriver dr){
 		this.driver = dr;
 		paWin = new PageCreationWizard(dr);
 		myPro = new UserProfilePage(dr);
 		magSites = new PortalManageSites(dr);		
+		portMg = new PortalManagePages(dr);
 	} 
 
 	/**
@@ -743,4 +748,37 @@ public class NavigationToolbar extends PlatformBase {
 		Utils.pause(1000);
 	}
 
+    /**
+     * verify edit page
+     * @param title
+     * @param isEnable
+     */
+	public void verifyEditPagePerm(String title,boolean isEnable){
+		info("verify edit page permission");
+		portMg.openPage(baseUrl+"/intranet/home/"+title);
+		if(isEnable){
+			click(ELEMENT_LINK_EDIT,0,true);
+			mouseOver(ELEMENT_MENU_PAGE_LINK, true);
+			waitForAndGetElement(ELEMENT_MENU_EDIT_LAYOUT);
+		}else{
+			waitForElementNotPresent(ELEMENT_LINK_EDIT);
+			waitForElementNotPresent(ELEMENT_MENU_EDIT_LAYOUT);
+		}
+	}
+	/**
+     * verify edit site
+     * @param title
+     * @param isEnable
+     */
+	public void verifyEditSitePerm(String title,boolean isEnable){
+		info("verify edit stie permission");
+		driver.get(baseUrl + "/" + title);
+		if(isEnable){
+			click(ELEMENT_LINK_EDIT,0,true);
+			mouseOver(ELEMENT_MENU_SITE_LINK, true);
+			waitForAndGetElement(ELEMENT_MENU_LAYOUT);
+		}else{
+			waitForElementNotPresent(ELEMENT_MENU_LAYOUT);
+		}
+	}
 }

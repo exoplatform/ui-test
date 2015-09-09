@@ -1,6 +1,5 @@
 package org.exoplatform.selenium.platform.gatein;
 import static org.exoplatform.selenium.TestLogger.info;
-
 import org.openqa.selenium.By;
 import org.exoplatform.selenium.platform.PlatformBase;
 import org.openqa.selenium.WebDriver;
@@ -9,6 +8,8 @@ public class PageEditor extends PlatformBase {
 	//Common
 	public final By ELEMENT_EDIT_PORTLET_ICON = By.xpath("//*[@data-original-title='Edit Portlet']");
 	public final By ELEMENT_DELETE_PORTLET_ICON = By.xpath("//*[@data-original-title='Delete Portlet']");
+	public final String ELEMENT_EDIT_PORTLET = "//*[@data-original-title='Edit Portlet']/../*[contains(.,'${portlet}')]";
+	public final String ELEMENT_DELETE_PORTLET = "//*[@data-original-title='Edit Portlet']/../*[contains(.,'${portlet}')]";
 	public final String ELEMENT_EDITOR_PAGE_APPLICATION_PORTLET =".//*[@class='portletLayoutDecorator'][contains(text(),'${name}')]";
 	public final By ELEMENT_CONTAINER_TAB=By.xpath(".//*[@id='UIPortalComposerTab']//*[@data-target='#contList']");
 	public final By ELEMENT_APPLICATION_TAB=By.xpath(".//*[@id='UIPortalComposerTab']//*[@data-target='#appList']");
@@ -21,11 +22,17 @@ public class PageEditor extends PlatformBase {
 	public final By ELEMENT_EDIT_PORTLET_FORM_SAVE_AND_CLOSE_BUTTON=By.xpath("//*[@id='tab-UIPortletForm']//*[text()='Save And Close']");
 	public final By ELEMENT_EDIT_PORTLET_FORM_CANCEL_BUTTON=By.xpath("//*[@id='tab-UIPortletForm']//*[text()='Cancel']");
 	public final By ELEMENT_EDIT_PORTLET_FORM_RESULTPERPAGE = By.xpath("//*[@id='resultsPerPage']");
+	public final By ELEMENT_EDIT_PORTLET_FORM_ACCESS_PERM = By.xpath("//*[contains(@data-target,'PortletPermission')]");
+	public final By ELEMENT_EDIT_PORTLET_FORM_ADD_PERM_BTN = By.xpath("//*[contains(@class,'uiIconAddUser')]");
+	public final By ELEMENT_SELECT_MEMBERSHIP_POPUP = By.xpath("//*[contains(@id,'UIListPermissionSelectorPopup')]");
+	public final String ELEMENT_SELECT_RIGHT_PARENT_GROUP = "//*[contains(@id,'ListPermissionSelector')]//a[contains(@title,'$group')]";
 	
 	//Application
 	public final String ELEMENT_EDIT_PORTLET_CATEGORY_APPLICATION_ARROW_RIGHT="//*[@title='$category']/*[contains(@class,'uiIconArrowRight')]";
 	public final String ELEMENT_EDIT_PORTLET_CATEGORY_APPLICATION_ARROW_DOWN="//*[@title='$category']/*[contains(@class,'uiIconArrowDown')]";
 	public final String ELEMENT_EDIT_PORTLET_APPLICATION_ID="//*[contains(@id,'$portlet')]";
+	public final String ELEMENT_APPLICATION_SUB_TAB = ".//*[@id='UIApplicationList']//*[contains(@title,'${tabName}')]";
+	public final String ELEMENT_APPLICATION_NAME = "//*[@class='txtLeft'][contains(.,'$app')]";
 	
 	//Finish and Abort button
 	public final By ELEMENT_EDIT_PORTLET_FINISH = By.xpath("//*[@data-original-title='Finish']");
@@ -99,5 +106,50 @@ public class PageEditor extends PlatformBase {
 			}
 		}
 		dragAndDropToObject(ELEMENT_EDIT_PORTLET_APPLICATION_ID.replace("$portlet",portlets[portlets.length-1]), targetLocator);
+	}
+	/**
+	 * Verify application permission
+	 * @param cat
+	 * @param app
+	 * @param isEnable
+	 */
+	public void verifyAppPermission(String cat,String app,boolean isEnable){
+		info("verify application permission");
+		scrollBarToGetElement(By.xpath(ELEMENT_APPLICATION_SUB_TAB.replace("${tabName}", cat)));
+		click(ELEMENT_APPLICATION_SUB_TAB.replace("${tabName}", cat),0,true);
+	    if(isEnable){
+	    	waitForAndGetElement(ELEMENT_APPLICATION_NAME.replace("$app", app));
+	    }else{
+	    	waitForElementNotPresent(ELEMENT_APPLICATION_NAME.replace("$app", app));
+	    }
+	    
+	}
+	/**
+	 * Verify category permission
+	 * @param cat
+	 * @param isEnable
+	 */
+	public void verifyCatPermission(String cat,boolean isEnable){
+		info("verify category permission");
+	    if(isEnable){
+	    	scrollBarToGetElement(By.xpath(ELEMENT_APPLICATION_SUB_TAB.replace("${tabName}", cat)));
+	    }else{
+	    	waitForElementNotPresent(ELEMENT_APPLICATION_SUB_TAB.replace("${tabName}", cat));
+	    }
+	}
+	/**
+	 * Verify permission edit delete application
+	 * @param app
+	 * @param isEnable
+	 */
+	public void verifyEditDeleteAppPerm(String app,boolean isEnable){
+		mouseOver(ELEMENT_EDITOR_PAGE_APPLICATION_PORTLET.replace("${name}", app), true);
+		if(isEnable){
+			waitForAndGetElement(ELEMENT_EDIT_PORTLET.replace("${portlet}", app));
+			waitForAndGetElement(ELEMENT_DELETE_PORTLET.replace("${portlet}", app));
+		}else{
+			waitForElementNotPresent(ELEMENT_EDIT_PORTLET.replace("${portlet}", app));
+			waitForElementNotPresent(ELEMENT_DELETE_PORTLET.replace("${portlet}", app));
+		}
 	}
 }

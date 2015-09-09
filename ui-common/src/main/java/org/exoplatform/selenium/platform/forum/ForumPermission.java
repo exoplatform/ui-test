@@ -78,6 +78,7 @@ public class ForumPermission extends PlatformBase{
 	public void selectPermGroupMember(String groupPath,String member,boolean isMod,boolean isStartTop,boolean isPostReply,boolean isViewPost){
 		String[] temp;	
 		info("select group membership");
+		click(ELEMENT_PERM_TAB,0,true);
 		click(ELEMENT_PERM_ROLE_ICON,0,true);
 		waitForAndGetElement(ELEMENT_SELECT_MEMBERSHIP_POPUP);
 		temp = groupPath.split("/");

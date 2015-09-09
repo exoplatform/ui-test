@@ -375,9 +375,8 @@ import org.testng.annotations.*;
 	*<li> Pre-Condition: - UserA is member of GROUP A. UserB is NOT member of GROUP A.
 	- Category Cat A already existed with forums.</li>
 	*<li> Post-Condition: </li>
-	* BUG: https://jira.exoplatform.org/browse/FORUM-1185
 	*/
-	@Test (groups="pending")
+	@Test 
 	public  void test07_CheckPermissionToViewPostsInACategoryWithWildcardMembershipType() {
 		info("Test 7: Check Permission to view posts in a category with wildcard membership type");
 		String cat = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
@@ -408,7 +407,7 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- UserA can see the posts in each topics.
-			- The buttons "Start a topic" and "Post Reply" are disable*/
+			- The buttons "Start a topic" and "Post Reply" are enable*/
 		magAc.signOut();
 		magAc.signIn(arrayUsers.get(0), password);
 		hp.goToForum();
@@ -441,9 +440,8 @@ import org.testng.annotations.*;
 	*<li> Pre-Condition: - UserA is member of GROUP A.
 	- FORUM A already existed.</li>
 	*<li> Post-Condition: </li>
-	* BUG: https://jira.exoplatform.org/browse/FORUM-1185
 	*/
-	@Test (groups="pending")
+	@Test 
 	public  void test08_CheckPermissionToViewPostsInAForumWithWildcardMembershipType() {
 		info("Test 8: Check Permission to view posts in a forum with wildcard membership type");
 		String cat = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
@@ -474,8 +472,8 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- UserA can see the posts in each topics.
-			- The buttons "Start a Topic" and "Post Reply" are disable.
-			- User A cannot Start a topic in FORUM A; and can not post a reply in topics of FORUM A.*/ 
+			- The buttons "Start a Topic" and "Post Reply" are enable.
+			- User A can Start a topic in FORUM A; and can not post a reply in topics of FORUM A.*/ 
 		magAc.signOut();
 		magAc.signIn(arrayUsers.get(0), password);
 		hp.goToForum();

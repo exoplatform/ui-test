@@ -85,6 +85,9 @@ public class AnswerCategoryManagement extends PlatformBase {
 	public By ELEMENT_CATEGORY_EDIT_PERM_TAB = By.xpath("//*[contains(@data-target,'PermissionTab')]");
 	public final String ELEMENT_MANAGE_QUESTION_PERM_RESTRICTED = "//*[contains(.,'$group')]/../td[2]/*[@class='uiCheckbox']/input[@type='checkbox']";
 	public final String ELEMENT_MANAGE_QUESTION_PERM_MODERATOR = "//*[contains(.,'$group')]/../td[3]/*[@class='uiCheckbox']/input[@type='checkbox']";
+	public final By ELEMENT_SELECT_MEMBERSHIP_ICON = By.xpath("//*[@class='uiIconMembership uiIconLightGray']");
+	public final String ELEMENT_SELECT_RIGHT_PARENT_GROUP = "//*[contains(@id,'UIMemberShipSelector')]//a[contains(.,'$group')]";
+	public final By ELEMENT_SELECT_MEMBERSHIP_POPUP = By.xpath("//*[contains(@id,'UIPopupWindow')]");
 	/**
 	 * constructor
 	 * @param dr
@@ -332,13 +335,28 @@ public class AnswerCategoryManagement extends PlatformBase {
 	public void setPermission(String cat,String group,boolean isRestricted,boolean isMod){
  	 	goToActionOfCategoryFromActionBar(actionCategoryOption.EDIT);
  	 	click(ELEMENT_CATEGORY_EDIT_PERM_TAB,0,true);
- 	 	plfPerm.selectGroupMembership(group,"*");
+ 	 	selectGroupMembership(group,"*");
  	 	click(plfPerm.ELEMENT_ADD_USERS_BUTTON);
  	 	if(isRestricted)
  	 		check(By.xpath(ELEMENT_MANAGE_QUESTION_PERM_RESTRICTED.replace("$group",group)),2);
  	 	if(isMod)
  	 		check(By.xpath(ELEMENT_MANAGE_QUESTION_PERM_MODERATOR.replace("$group", group)),2);
 		click(ELEMENT_CATEGORY_ADD_FORM_SAVE_BUTTON);
+	}
+	/**
+	 * Select group membership
+	 */
+	public void selectGroupMembership(String groupPath,String mem){
+		info("select group membership");
+		String[] temp;	
+		click(ELEMENT_SELECT_MEMBERSHIP_ICON);
+		waitForAndGetElement(ELEMENT_SELECT_MEMBERSHIP_POPUP);
+		temp = groupPath.split("/");
+		for (int i = 0; i < temp.length; i ++){
+			click(ELEMENT_SELECT_RIGHT_PARENT_GROUP.replace("$group", temp[i]));
+		}
+		click(ELEMENT_SELECT_RIGHT_PARENT_GROUP.replace("$group", mem));
+		waitForElementNotPresent(ELEMENT_SELECT_MEMBERSHIP_POPUP);
 	}
 	/**
 	 * create category

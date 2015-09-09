@@ -36,6 +36,9 @@ public class UserAndGroupManagement extends PlatformBase {
 	public final String ELEMENT_GROUP_SEARCH_USER_OPTION = "//*[@class='selectbox' and @name='filter']";
 	public final String ELEMENT_GROUP_SEARCH_USER_SEARCH_ICON = ".//*[@data-original-title='Quick Search']/i";
 	public final String ELEMENT_ADDED_GROUP_USER_IN_TABLE = "//*[@id='UIGridUser']//span[contains(text(),'${username}')]";
+	public final String ELEMENT_ADDED_GROUP_USER_IN_TABLE1 = "//*[@id='UIGridUser']//span[contains(text(),'$mem')]/../../*[@headers='userName']/*[contains(.,'$user')]";
+	public final String ELEMENT_EDIT_USER_MEM_IN_TABLE_ICON ="//*[@headers='userName']/*[contains(.,'$user')]/../..//*[contains(@class,'uiIconEdit')]";
+	public final String ELEMENT_EDIT_USER_MEM_FORM = "//*[contains(@class,'UIGroupEditMembershipForm')][contains(.,'$mem')]";
 	public final String ELEMENT_SEARCH_GROUP_USER_IN_TABLE = "//*[@id='UIListUsers']//span[contains(text(),'${username}')]";
 	public final String ELEMENT_ADD_BUTTON = "//*[@class='uiAction uiActionBorder']//a[contains(@class,'btn') and contains(text(),'Add')]";
 	public final String ELEMENT_SELECT_MEMBERSHIP = "//*[@class='selectbox' and @name='membership']";
@@ -51,6 +54,7 @@ public class UserAndGroupManagement extends PlatformBase {
 	public final String ELEMENT_USER_NOT_FOUND = "User ${user}not found in group";
 	public final String ELEMENT_GROUP_NODE = "//a[@title='${groupName}']";
 	public final String ELEMENT_MEMBERSHIHP = "//*[@id='UIGrid']//span[text()='${membershipName}']";
+	public final String ELEMENT_MEMBERSHIP_DESCRIPTION ="//*[@id='UIGrid']//span[text()='$des']/../../*[@headers='name']/*[contains(.,'$mem')]";
 	public final String ELEMENT_MEMBERSHIP_INPUT = "//input[@value='${membershipName}']";
 	public final String ELEMENT_USER_EDIT_ICON = ".//*[contains(text(),'${username}')]/../..//*[@data-original-title='Edit User Info']/i";
 
@@ -71,6 +75,7 @@ public class UserAndGroupManagement extends PlatformBase {
 	public final String ELEMENT_MSG_RESULT = "No result found.";
 	public final String ELEMENT_MSG_UPDATE_USER_PROFILE = "The user profile has been updated.";
 	public final By ELEMENT_OK_BUTTON = By.xpath("//*[contains(text(),'OK')]");
+	public final String ELEMENT_MSG_CANNOT_DELETE = "You cannot delete this membership because it is mandatory.";
 	//Account tab
 	public final By ELEMENT_USER_ACCOUNT_INFO_TAB = By.xpath("//*[@data-target='#UIAccountEditInputSet-tab']");
 	public By ELEMENT_EMAIL = By.id("email");
@@ -290,7 +295,18 @@ public class UserAndGroupManagement extends PlatformBase {
 			}
 		}
 	}
-
+    /**
+     * Verify user-membership
+     * @param user
+     * @param member
+     * @param isDisplay
+     */
+	public void verifyUserMemInTable(String user,String member,boolean isDisplay){
+		info("verify user -membership");
+		if(isDisplay){
+			waitForAndGetElement(ELEMENT_ADDED_GROUP_USER_IN_TABLE1.replace("$mem", member).replace("$user", user));
+		}
+	}
 	/**
 	 * function: Search user In Group Management (To add to group)
 	 * 
@@ -401,7 +417,32 @@ public class UserAndGroupManagement extends PlatformBase {
 		}
 		waitForTextPresent(newDesc);
 	}
-
+    /**
+     * Verify membership
+     * @param mem
+     * @param des
+     * @param isDisplay
+     */
+	public void verifyMembership(String mem,String des,boolean isDisplay){
+		info("verify display of membership");
+		click(ELEMENT_TAB_MEMBERSHIP_MANAGEMENT);
+		if(isDisplay){
+			waitForAndGetElement(ELEMENT_MEMBERSHIP_DESCRIPTION.replace("$mem", mem).replace("$des", des));
+		}
+	}
+	 /**
+     * Verify membership in edit form
+     * @param mem
+     * @param des
+     * @param isDisplay
+     */
+	public void verifyMembershipInEditForm(String user,String mem,boolean isDisplay){
+		info("verify display of membership");
+		click(ELEMENT_EDIT_USER_MEM_IN_TABLE_ICON.replace("$user", user),0,true);
+		if(isDisplay){
+			waitForAndGetElement(ELEMENT_EDIT_USER_MEM_FORM.replace("$mem", mem));
+		}
+	}
 	/**
 	 * function: Delete Membership
 	 * 
@@ -430,9 +471,12 @@ public class UserAndGroupManagement extends PlatformBase {
 				click(ELEMENT_NEXT_PAGE);
 				waitForTextNotPresent(membershipName);
 			}
+		}else{
+			waitForTextPresent(ELEMENT_MSG_CANNOT_DELETE);
+			click(ELEMENT_OK_BUTTON,0,true);
 		}
 	}
-
+	
 	/**
 	 * function: Go to edit user's information
 	 * 

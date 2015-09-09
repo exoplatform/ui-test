@@ -30,6 +30,7 @@ public class ApplicationRegistry extends PlatformBase {
     public final By ELEMENT_ADD_CATEGORY_PERMISSION_PUBLIC_CHECKBOX= By.xpath(".//*[@id='publicMode']");
     public final By ELEMENT_ADD_CATEGORY_ADD_PERMISSION_BTN = By.xpath("//*[contains(text(),'Add Permission')]");
     
+    public final String ELEMENT_EDIT_PORTLET_DELETE_PERMISSION_ICON = "//*[@id='PermissionGrid']//*[contains(@onclick,'$group')]/*[contains(@class,'uiIconDelete')]";
     //Application registry page
 	public final By ELEMENT_SHOW_IMPORT_APPLICATION = By.id("showImport");
 	public final By ELEMENT_IMPORT_ALL_APPLICATION=By.xpath("//*[@class='uiIconImport uiIconLightGray']");
@@ -282,6 +283,7 @@ public class ApplicationRegistry extends PlatformBase {
 		if(!group.isEmpty() && !member.isEmpty()){
 			info("input permission");
 			click(ELEMENT_ADD_CATEGORY_PERMISSION_TAB);
+			uncheck(ELEMENT_ADD_CATEGORY_PERMISSION_PUBLIC_CHECKBOX,2);
 			click(ELEMENT_ADD_CATEGORY_ADD_PERMISSION_BTN);
 			selectGroupMembership(group,member);
 		}
@@ -361,6 +363,17 @@ public class ApplicationRegistry extends PlatformBase {
 		click(ELEMENT_ADD_CATEGORY_ADD_PERMISSION_BTN);
 		selectGroupMembership(group,member);
 		Utils.pause(2000);
-		assert isTextPresent(group.toLowerCase());
+		assert isTextPresent(group) || isTextPresent(group.toLowerCase());
+	}
+	
+	/**
+	 * Delete permission
+	 * @param group
+	 */
+	public void deletePortletPermission(String group){
+		info("Delete permission of group");
+		click(ELEMENT_EDIT_PORTLET_DELETE_PERMISSION_ICON.replace("$group", group),0,true);
+		alert.acceptAlert();
+		Utils.pause(1000);
 	}
 }

@@ -172,6 +172,14 @@ public class PortalManagePages extends PlatformBase {
 		click(ELEMENT_MANAGEPAGES_ADD_NEW_PAGES_POPUP_SAVE_BTN);
 		Utils.pause(2000);
 	}
-
+    /**
+     * Open page
+     * @param url
+     */
+	public void openPage(String url){
+		info("open page:"+url);
+		driver.get(url);
+		Utils.pause(1000);
+	}
 
 }

@@ -331,6 +331,7 @@ public class CalendarManagement extends CalendarLocatorObject{
 		mouseHoverByJavaScript(ELEMENT_CALENDAR_LIST_ITEM.replace("$calendar", calendar),2);
 		clickByJavascript(ELEMENT_CALENDAR_SETTING_ICON.replace("$calendar", calendar),2);
 		waitForAndGetElement(ELEMENT_CALENDAR_RIGHT_MENU);
+		Utils.pause(1000);
 	}
 
 	/**

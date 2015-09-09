@@ -150,7 +150,7 @@ import org.testng.annotations.*;
 		magAc.signOut();
 		magAc.signIn(DATA_USER2,DATA_PASS);
 		navTool.goToSiteExplorer();
-		SEHome.goToPath("documents", "Collaboration");
+		SEHome.goToPath("sites/intranet/documents/", "Collaboration");
 		createNewFile(title, content);
 		info("lock document");
 		SEHome.lockNode(title);
@@ -167,7 +167,7 @@ import org.testng.annotations.*;
 		magAc.signOut();
 		magAc.signIn(arrayUsers.get(0), password);
 		navTool.goToSiteExplorer();
-		SEHome.goToPath("documents", "Collaboration");
+		SEHome.goToPath("sites/intranet/documents/", "Collaboration");
 		SEHome.unlockNode(title);
 		SEHome.deleteData(title);
 		
@@ -266,8 +266,6 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- Users in group are grant permission to modify the node.*/
 		info("add permission to node");
-		navTool.goToSiteExplorer();
-		SEHome.goToPath("sites/"+title, "Collaboration");
 		SEHome.goToPermission();
 		caPage.addGroupPermToNode(groupA, "*",true,true,false);
 		
@@ -313,7 +311,7 @@ import org.testng.annotations.*;
 		click (userAndGroup.ELEMENT_GROUP_MANAGEMENT_SELECT_GROUP.replace("${name}", "Platform"));
 		addUserToGroup(arrayUsers.get(0),"Content Management");
 		navTool.goToSiteExplorer();
-		SEHome.goToPath("documents", "Collaboration");
+		SEHome.goToPath("sites/intranet/documents/", "Collaboration");
 		createNewFile(title, content);
 		/*Step Number: 1
 		*Step Name: Step 1:Set "Read Right" permission on a node for a group with wildcard membership.
@@ -327,8 +325,6 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- Users in group are grant permission to view the node.*/
 		info("add permission to node");
-		/*navTool.goToSiteExplorer();
-		SEHome.goToPath("documents/"+title, "Collaboration");*/
 		SEHome.goToPermission();
 		EcmsPerm.deletePermissionNode("any");
 		caPage.addGroupPermToNode(groupA, "*",true,false,false);
@@ -345,7 +341,7 @@ import org.testng.annotations.*;
 		magAc.signOut();
 		magAc.signIn(arrayUsers.get(0), password);
 		navTool.goToSiteExplorer();
-		SEHome.goToPath("documents", "Collaboration");
+		SEHome.goToPath("sites/intranet/documents/", "Collaboration");
 		waitForAndGetElement(SEHome.ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME.replace("${title}", title));
 		
 		info("delete data");
@@ -353,6 +349,7 @@ import org.testng.annotations.*;
 		deleteGroup(groupA);
 		navTool.goToSiteExplorer();
 		SEHome.goToPath("documents/"+title, "Collaboration");
+		SEHome.goToPath("sites/intranet/documents/"+title, "Collaboration");
 		SEHome.deleteData(title);
  	}
 
@@ -445,8 +442,6 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- Users in group are grant permission to remove the node.*/
 		info("add permission to node");
-		/*navTool.goToSiteExplorer();
-		SEHome.goToPath("sites/"+title, "Collaboration");*/
 		SEHome.goToPermission();
 		caPage.addGroupPermToNode(groupA, "*",true,false,true);
 		

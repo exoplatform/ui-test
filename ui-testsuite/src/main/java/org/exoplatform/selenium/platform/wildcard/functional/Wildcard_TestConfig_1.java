@@ -105,10 +105,10 @@ public class Wildcard_TestConfig_1 extends PlatformBase {
 	 * Delete all users that are created in testing process
 	 */
 	public void deleteAllUsers(){
+		magAc.signOut();
+		magAc.signIn(DATA_USER1,DATA_PASS);
+		navTool.goToUsersAndGroupsManagement();
 		if(arrayUsers.size()>0){
-			magAc.signOut();
-			magAc.signIn(DATA_USER1,DATA_PASS);
-			navTool.goToUsersAndGroupsManagement();
 			userAndGroup.deleteAllUsers(arrayUsers);
 		}
 	}

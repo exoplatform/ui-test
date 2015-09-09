@@ -638,9 +638,9 @@ public class ContentAdministration extends PlatformBase{
 		Utils.pause(500);
 		info("select permission");
 		if(params.length>2){
-			boolean read = (boolean)params[2];
-			boolean modify = (boolean)params[3];
-			boolean remove = (boolean)params[4];
+			Boolean read = (Boolean)params[2];
+			Boolean modify = (Boolean)params[3];
+			Boolean remove = (Boolean)params[4];
 			String group = (String)params[5];
 			String mem = (String)params[6];
 			click(ecmsPerm.ELEMENT_PERMISSION_SELECTMEMBERSHIP);
