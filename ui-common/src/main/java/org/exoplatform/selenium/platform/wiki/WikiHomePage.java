@@ -157,7 +157,13 @@ public class WikiHomePage extends WikiLocators{
 		click(ELEMENT_SEARCH_BROWSERS_WIKI_SETTINGS);
 		Utils.pause(2000);
 	}
-	
+	/**
+	 * Open permission tab
+	 */
+	public void openPermTab(){
+		info("Open Permission tab");
+		click(ELEMENT_WIKI_SETTING_PERM_TAB,0,true);
+	}
 	/**
 	 * Open permissions for the wiki
 	 */

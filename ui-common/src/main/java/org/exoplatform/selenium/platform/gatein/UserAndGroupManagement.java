@@ -1,11 +1,8 @@
 package org.exoplatform.selenium.platform.gatein;
 
 import static org.exoplatform.selenium.TestLogger.info;
-
 import java.util.ArrayList;
-
 import junit.framework.Assert;
-
 import org.exoplatform.selenium.Dialog;
 import org.exoplatform.selenium.platform.PlatformBase;
 import org.openqa.selenium.By;
@@ -110,7 +107,16 @@ public class UserAndGroupManagement extends PlatformBase {
 		alert = new ManageAlert(dr);
 		dialog = new Dialog(dr);
 	}
-
+	/**
+	 * Select users tab
+	 * function: Choose Users Tab
+	 */
+	public void goToUsersTab() {
+		info("-- Choose Users Management tab--");
+		click(ELEMENT_USER_MANAGEMENT_TAB,0,true);
+		waitForAndGetElement(ELEMENT_SEARCH_ICON_USERS_MANAGEMENT);
+		Utils.pause(2000);
+	}
 	/**
 	 * Select group management tab
 	 * function: Choose Group Tab
@@ -578,7 +584,7 @@ public class UserAndGroupManagement extends PlatformBase {
 			select(ELEMENT_SELECT_SEARCH_OPTION, ELEMENT_MSG_SEARCH_USER_NAME);
 		}
 	
-		click(ELEMENT_SEARCH_ICON_USERS_MANAGEMENT);
+		click(ELEMENT_SEARCH_ICON_USERS_MANAGEMENT,0,true);
 		if (waitForAndGetElement( ELEMENT_USER_DELETE_ICON.replace("${username}",
 				username), 2000, 0) != null) {
 			Utils.pause(2000);

@@ -327,8 +327,8 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- Users in group are grant permission to view the node.*/
 		info("add permission to node");
-		navTool.goToSiteExplorer();
-		SEHome.goToPath("documents/"+title, "Collaboration");
+		/*navTool.goToSiteExplorer();
+		SEHome.goToPath("documents/"+title, "Collaboration");*/
 		SEHome.goToPermission();
 		EcmsPerm.deletePermissionNode("any");
 		caPage.addGroupPermToNode(groupA, "*",true,false,false);
@@ -445,8 +445,8 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- Users in group are grant permission to remove the node.*/
 		info("add permission to node");
-		navTool.goToSiteExplorer();
-		SEHome.goToPath("sites/"+title, "Collaboration");
+		/*navTool.goToSiteExplorer();
+		SEHome.goToPath("sites/"+title, "Collaboration");*/
 		SEHome.goToPermission();
 		caPage.addGroupPermToNode(groupA, "*",true,false,true);
 		

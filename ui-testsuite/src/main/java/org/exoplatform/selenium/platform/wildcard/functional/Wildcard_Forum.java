@@ -63,11 +63,10 @@ import org.testng.annotations.*;
 		forumMag.checkDisplayOfForumManage(forum, false);
 		
 		info("delete data");
-		magAc.signOut();
-		magAc.signIn(DATA_USER1, DATA_PASS);
+		deleteAllUsers();
+		deleteGroup(groupA);
 		hp.goToForum();
 		deleteCategory(cat);
-		deleteGroup(groupA);
  	}
 
 	/**
@@ -127,11 +126,10 @@ import org.testng.annotations.*;
 		foTopic.checkDisplayOfTopicManage(forum,topic, false);
 		
 		info("delete data");
-		magAc.signOut();
-		magAc.signIn(DATA_USER1, DATA_PASS);
+		deleteAllUsers();
+		deleteGroup(groupA);
 		hp.goToForum();
 		deleteCategory(cat);
-		deleteGroup(groupA);
  	}
 
 	/**
@@ -195,11 +193,10 @@ import org.testng.annotations.*;
 		foTopic.checkEnableOfPostReply(topic, false);
 		
 		info("delete data");
-		magAc.signOut();
-		magAc.signIn(DATA_USER1, DATA_PASS);
+		deleteAllUsers();
+		deleteGroup(groupA);
 		hp.goToForum();
 		deleteCategory(cat);
-		deleteGroup(groupA);
  	}
 
 	/**
@@ -249,11 +246,10 @@ import org.testng.annotations.*;
 		foTopic.checkEnableOfPostReply(topic, true);
 		
 		info("delete data");
-		magAc.signOut();
-		magAc.signIn(DATA_USER1, DATA_PASS);
+		deleteAllUsers();
+		deleteGroup(groupA);
 		hp.goToForum();
 		deleteCategory(cat);
-		deleteGroup(groupA);
  	}
 
 	/**
@@ -317,11 +313,10 @@ import org.testng.annotations.*;
 		forumMag.checkEnableOfStartTopic(forum, false);
 		
 		info("delete data");
-		magAc.signOut();
-		magAc.signIn(DATA_USER1, DATA_PASS);
+		deleteAllUsers();
+		deleteGroup(groupA);
 		hp.goToForum();
 		deleteCategory(cat);
-		deleteGroup(groupA);
  	}
 
 	/**
@@ -368,11 +363,10 @@ import org.testng.annotations.*;
 		forumMag.checkEnableOfStartTopic(forum, true);
 		
 		info("delete data");
-		magAc.signOut();
-		magAc.signIn(DATA_USER1, DATA_PASS);
+		deleteAllUsers();
+		deleteGroup(groupA);
 		hp.goToForum();
 		deleteCategory(cat);
-		deleteGroup(groupA);
  	}
 
 	/**
@@ -435,11 +429,10 @@ import org.testng.annotations.*;
 		foTopic.checkEnableOfViewPost(forum, topic, false);
 		
 		info("delete data");
-		magAc.signOut();
-		magAc.signIn(DATA_USER1, DATA_PASS);
+		deleteAllUsers();
+		deleteGroup(groupA);
 		hp.goToForum();
 		deleteCategory(cat);
-		deleteGroup(groupA);
  	}
 
 	/**
@@ -489,11 +482,10 @@ import org.testng.annotations.*;
 		foTopic.checkEnableOfViewPost(forum, topic, true);
 		
 		info("delete data");
-		magAc.signOut();
-		magAc.signIn(DATA_USER1, DATA_PASS);
+		deleteAllUsers();
+		deleteGroup(groupA);
 		hp.goToForum();
 		deleteCategory(cat);
-		deleteGroup(groupA);
  	}
 
 	/**
@@ -541,11 +533,10 @@ import org.testng.annotations.*;
 		foTopic.checkEnableOfPostReply(topic, true);
 		
 		info("delete data");
-		magAc.signOut();
-		magAc.signIn(DATA_USER1, DATA_PASS);
+		deleteAllUsers();
+		deleteGroup(groupA);
 		hp.goToForum();
 		deleteCategory(cat);
-		deleteGroup(groupA);
  	}
 
 	/**
@@ -596,11 +587,10 @@ import org.testng.annotations.*;
 		foTopic.checkEnableOfPostReply(topic, false);
 		
 		info("delete data");
-		magAc.signOut();
-		magAc.signIn(DATA_USER1, DATA_PASS);
+		deleteAllUsers();
+		deleteGroup(groupA);
 		hp.goToForum();
 		deleteCategory(cat);
-		deleteGroup(groupA);
  	}
 
 	/**
@@ -660,11 +650,10 @@ import org.testng.annotations.*;
 		forumCatMag.checkDisplayOfCat(cat, false);
 		
 		info("delete data");
-		magAc.signOut();
-		magAc.signIn(DATA_USER1, DATA_PASS);
+		deleteAllUsers();
+		deleteGroup(groupA);
 		hp.goToForum();
 		deleteCategory(cat);
-		deleteGroup(groupA);
  	}
 
 	/**

@@ -16,8 +16,10 @@ public class WikiValidattions extends WikiLocators{
 	 * constructor
 	 * @param dr
 	 */
+	WikiHomePage wHome;
 	public WikiValidattions(WebDriver dr){
 		this.driver=dr;
+		wHome = new WikiHomePage(driver);
 	}
 	
 	/**
@@ -178,7 +180,69 @@ public class WikiValidattions extends WikiLocators{
 		waitForElementNotPresent(ELEMENT_ADD_PAGE_LINK);
 		info("The button is not shown");
 	}
-
+    /**
+     * Check display of Admin Pages permission
+     * @param isDisplay
+     */
+	public void checkDisplayOfAdmPage(boolean isDisplay){
+		info("check display of admin pages");
+		waitForAndGetElement(ELEMENT_ADD_PAGE_LINK);
+		click(ELEMENT_MORE_LINK,0,true);
+		if(isDisplay){
+			waitForAndGetElement(ELEMENT_PERMISSION_LINK);
+		}else{
+			waitForElementNotPresent(ELEMENT_PERMISSION_LINK);
+		}
+	}
+	/**
+     * Check display of Admin Wiki permission
+     * @param isDisplay
+     */
+	public void checkDisplayOfAdmWiki(boolean isDisplay){
+		info("check display of admin wiki");
+		waitForAndGetElement(ELEMENT_ADD_PAGE_LINK);
+		click(ELEMENT_MORE_LINK,0,true);
+		waitForAndGetElement(ELEMENT_PERMISSION_LINK);
+		click(ELEMENT_SEARCH_BROWSERS_DROPDOWN);
+		if(isDisplay){
+			waitForAndGetElement(ELEMENT_SEARCH_BROWSERS_WIKI_SETTINGS);
+		}else{
+			waitForElementNotPresent(ELEMENT_SEARCH_BROWSERS_WIKI_SETTINGS);
+		}
+	}
+	/**
+	 * Check display of edit page permission
+	 * @param title
+	 * @param isDisplay
+	 */
+	public void checkDisplayOfEditPage(String title,boolean isDisplay){
+		info("check display of edit page");
+		wHome.selectAPage(title);
+		if(isDisplay){
+			waitForAndGetElement(ELEMENT_ADD_PAGE_LINK);
+			waitForAndGetElement(ELEMENT_EDIT_PAGE_LINK);
+			click(ELEMENT_MORE_LINK,0,true);
+			waitForElementNotPresent(ELEMENT_PERMISSION_LINK);
+		}else{
+			waitForElementNotPresent(ELEMENT_EDIT_PAGE_LINK);
+		}
+	}
+	/**
+	 * Check display of view page permission
+	 * @param title
+	 * @param isDisplay
+	 */
+	public void checkDisplayOfViewPage(String title,boolean isDisplay){
+		info("check display of view page");
+		if(isDisplay){
+			wHome.selectAPage(title);
+			waitForElementNotPresent(ELEMENT_EDIT_PAGE_LINK);
+			click(ELEMENT_MORE_LINK,0,true);
+			waitForElementNotPresent(ELEMENT_PERMISSION_LINK);
+		}else{
+			waitForElementNotPresent(ELEMENT_TREE_WIKI_NAME.replace("${name}",title));
+		}
+	}
 	/**
 	 * Verify the page isnot created and shown in the list
 	 * @param title

@@ -9,6 +9,8 @@
 		<classes>
 			<class name="org.exoplatform.selenium.platform.wildcard.functional.Wildcard_TestConfig_3" />
 			<class name="org.exoplatform.selenium.platform.wildcard.functional.Wildcard_Forum" />
+			<class name="org.exoplatform.selenium.platform.wildcard.functional.Wildcard_TestConfig_4" />
+			<class name="org.exoplatform.selenium.platform.wildcard.functional.Wildcard_Wiki" />
 		</classes>
 	</test>
 	<listeners>

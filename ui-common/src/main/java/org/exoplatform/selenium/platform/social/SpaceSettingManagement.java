@@ -579,6 +579,33 @@ public class SpaceSettingManagement extends SpaceLocator{
 		}
 		Utils.pause(2000);
 	}
-	
-	
+	/**
+	 * Verify member of space
+	 * @param fullname
+	 * @param isDisplay
+	 */
+	public void verifyMember(String fullname,boolean isDisplay){
+		info("OPen members tab");
+		click(ELEMENT_SPACE_SETTINGS_MEMBERS_TAB,0,true);
+		if(isDisplay){
+			waitForAndGetElement(ELEMENT_SPACE_MEMBERS_USER_TABLE.replace("${user}", fullname));
+		}else{
+			waitForElementNotPresent(ELEMENT_SPACE_MEMBERS_USER_TABLE.replace("${user}", fullname));
+		}
+	}
+	/**
+	 * Verify permission of member
+	 * @param fullname
+	 * @param isDisplay
+	 */
+	public void verifyPermOfMember(String fullname,boolean isDisplay){
+		info("verify permission of member space");
+		if(isDisplay){
+			waitForElementNotPresent(ELEMENT_SPACE_CHANGE_ROLE_USER_MEMBER_DISABLE.replace("${user}", fullname));
+			waitForAndGetElement(ELEMENT_SPACE_REMOVE_USER_BTN_MEMBER_TABLE.replace("${fullName}", fullname));
+		}else{
+			waitForAndGetElement(ELEMENT_SPACE_CHANGE_ROLE_USER_MEMBER_DISABLE.replace("${user}", fullname));
+			waitForElementNotPresent(ELEMENT_SPACE_REMOVE_USER_BTN_MEMBER_TABLE.replace("${fullName}", fullname));
+		}
+	}
 }

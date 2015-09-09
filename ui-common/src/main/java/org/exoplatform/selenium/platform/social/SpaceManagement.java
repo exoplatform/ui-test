@@ -466,5 +466,24 @@ public class SpaceManagement extends SpaceLocator {
     	}
     	
 	}
+    /**
+	 * Verify that a user is a manager of the space or not
+	 * @param fullName
+	 *              is full name of the user
+	 * @param isDisplay
+	 *               =true if user is a manager of the space
+	 *               =false if user is not a manager of the space
+	 */
+    public void verifyManager(String fullName,Boolean isDisplay){
+    	goToMemberTab();
+    	if(isDisplay){
+    		info("Verify that manager is shown in list");
+        	waitForAndGetElement(ELEMENT_MANAGER_USER_NAME.replace("${fullName}",fullName));
+    	}else{
+    		info("Verify that manager isnot shown in list");
+    		waitForElementNotPresent(ELEMENT_MANAGER_USER_NAME.replace("${fullName}",fullName));
+    	}
+    	
+	}
 	
 }

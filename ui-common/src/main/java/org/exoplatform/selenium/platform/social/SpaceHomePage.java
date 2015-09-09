@@ -38,6 +38,7 @@ public class SpaceHomePage extends SpaceLocator{
 		waitForAndGetElement(ELEMENT_SPACE_WIKI_TAB,3000,0).click();
 		info("wiki page is shown");
 	}
+
 	/**
 	 * Open a space from left menu
 	 * @param name
@@ -57,5 +58,17 @@ public class SpaceHomePage extends SpaceLocator{
 		info("Verify that the space is shown");
 		waitForAndGetElement(ELEMENT_SPACE_NAME.replace("${name}",name));
 		
+	}
+	/**
+	 * Open space in All spaces
+	 * @param name
+	 */
+	public void openSpace(String name,boolean hasPerm){
+		info("open space in All spaces");
+		waitForAndGetElement(ELEMENT_SPACE_TITLE.replace("${space}", name)).click();
+		if(hasPerm)
+			waitForAndGetElement(ELEMENT_SPACE_NAME.replace("${name}",name));
+		else
+			waitForElementNotPresent(ELEMENT_SPACE_NAME.replace("${name}",name));
 	}
 }

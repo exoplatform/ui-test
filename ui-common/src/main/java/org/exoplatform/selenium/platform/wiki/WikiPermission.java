@@ -7,7 +7,6 @@ import org.exoplatform.selenium.Dialog;
 import org.exoplatform.selenium.Utils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 
 public class WikiPermission extends WikiLocators{
 	
@@ -77,13 +76,13 @@ public class WikiPermission extends WikiLocators{
 					.replace("$userGroup",userGroup),2);
 			break;
 		case Admin_Pages:
-			info("Select Admin pages permission");
-			check(ELEMENT_PERMISSION_ADMIN_PAGE_CHECKBOX
+			info("Select View pages permission");
+			check(ELEMENT_PERMISSION_ADMPAGE_CHECKBOX
 					.replace("$userGroup",userGroup),2);
 			break;
 		case Admin_Wiki:
-			info("Select Admin wiki permission");
-			check(ELEMENT_PERMISSION_ADMIN_WIKI_CHECKBOX
+			info("Select View pages permission");
+			check(ELEMENT_PERMISSION_ADMWIKI_CHECKBOX
 					.replace("$userGroup",userGroup),2);
 			break;
 		}
@@ -106,13 +105,13 @@ public class WikiPermission extends WikiLocators{
 					.replace("$userGroup",userGroup),2);
 			break;
 		case Admin_Pages:
-			info("un Select Admin pages permission");
-			uncheck(ELEMENT_PERMISSION_ADMIN_PAGE_CHECKBOX
+			info("Select View pages permission");
+			uncheck(ELEMENT_PERMISSION_ADMPAGE_CHECKBOX
 					.replace("$userGroup",userGroup),2);
 			break;
 		case Admin_Wiki:
-			info("un Select Admin wiki permission");
-			uncheck(ELEMENT_PERMISSION_ADMIN_WIKI_CHECKBOX
+			info("Select View pages permission");
+			uncheck(ELEMENT_PERMISSION_ADMWIKI_CHECKBOX
 					.replace("$userGroup",userGroup),2);
 			break;
 		}
@@ -198,15 +197,19 @@ public class WikiPermission extends WikiLocators{
 	}
 	
 	/**
-	 * Click on Save button
+	 * Click on Save button in More/Permission
 	 */
 	public void savePermisison(){
 		info("Click on Save button");
-		WebElement el = waitForAndGetElement(ELEMENT_PERMISSION_BUTTON_SAVE,2000,0);
-		scrollToElement( el , driver);
-		click(ELEMENT_PERMISSION_BUTTON_SAVE);
-		Utils.pause(2000);
+		click(ELEMENT_PERMISSION_BUTTON_SAVE,0,true);
+		waitForElementNotPresent(ELEMENT_PERMISSION_BUTTON_SAVE);
 	}
-	
-	
+	/**
+	 * Save permission in wiki setting
+	 */
+	public void savePermWikiSetting(){
+		info("Click on Save button");
+		click(ELEMENT_PERMISSION_BUTTON_SAVE,0,true);
+		click(ELEMENT_PERMISSION_BUTTON_OK,0,true);
+	}
 }

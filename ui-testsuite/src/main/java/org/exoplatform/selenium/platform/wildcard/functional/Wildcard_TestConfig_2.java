@@ -46,8 +46,6 @@ public class Wildcard_TestConfig_2 extends PlatformBase {
 	TextBoxDatabase txData;
 	UserDatabase userData;
 	AttachmentFileDatabase fData;
-	
-	
 	ArrayList<String> arrayUsers;
 	UserAddManagement addUserPage;
 	UserAndGroupManagement userAndGroup;

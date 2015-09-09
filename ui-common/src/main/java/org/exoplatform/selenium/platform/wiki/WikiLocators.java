@@ -86,7 +86,11 @@ public class WikiLocators extends PlatformBase{
 	public final String ELEMENT_PERMISSION_VIEW_CHECKBOX="//*[contains(text(),'$userGroup')]/../..//*[contains(@name,'VIEWPAGE')]";
 	public final String ELEMENT_PERMISSION_ADMIN_PAGE_CHECKBOX="//*[contains(text(),'$userGroup')]/../..//*[contains(@name,'ADMINPAGE')]";
 	public final String ELEMENT_PERMISSION_ADMIN_WIKI_CHECKBOX="//*[contains(text(),'$userGroup')]/../..//*[contains(@name,'ADMINSPACE')]";
+	public final String ELEMENT_PERMISSION_ADMPAGE_CHECKBOX="//*[contains(text(),'$userGroup')]/../..//*[contains(@name,'ADMINPAGE')]";
+	public final String ELEMENT_PERMISSION_ADMWIKI_CHECKBOX="//*[contains(text(),'$userGroup')]/../..//*[contains(@name,'ADMINSPACE')]";
+	
 	public final By ELEMENT_PERMISSION_BUTTON_SAVE = By.xpath("//*[text()='Save']");
+	public final By ELEMENT_PERMISSION_BUTTON_OK = By.xpath("//*[text()='OK']");
 	public final By ELEMENT_PERMISSION_VIEW_ANY = By.xpath("//*[@id='VIEWPAGEany']");
 	public final String ELEMENT_PERMISSION_REMOVE_USER_GROUP = ".//*[@id='UIPermissionGrid']//*[contains(text(),'${name}')]/../..//*[@class='uiIconDelete uiIconLightGray']";
 	public final By ELEMENT_PAGE_PERMISSION_POPUP=By.id("UIWikiPagePermissionForm");
@@ -593,4 +597,5 @@ public class WikiLocators extends PlatformBase{
 	public final By ELEMENT_WIKI_LEFT_TREE_RESTRICTED_PAGE_TITLE=By.xpath(".//*[@id='iconTreeExplorer']//em[contains(text(),'restricted')]");
 	public final By ELEMENT_WIKI_TOOLTIP_RESTRICTED_PAGE_TITLE=By.xpath(".//*[@id='iconTreeExplorer']//em[contains(@data-original-title,'This page is restricted, you do not have permission to view it.')]");
 	public final By ELEMENT_WIKI_PARENT_PAGE_UN_LINK=By.xpath(".//*[@id='iconTreeExplorer']//em[contains(@onclick,'')]");
+	public final By ELEMENT_WIKI_SETTING_PERM_TAB=By.xpath("//*[contains(@href,'PermissionSetting')]");
 }

@@ -593,6 +593,24 @@
 			</properties>
 		</profile>
 		<profile>
+			<id>wildcard-func-part1</id>
+			<properties>
+				<testSuite>wildcard-func-part1.xml</testSuite>
+			</properties>
+		</profile>
+		<profile>
+			<id>wildcard-func-part2</id>
+			<properties>
+				<testSuite>wildcard-func-part2.xml</testSuite>
+			</properties>
+		</profile>
+		<profile>
+			<id>wildcard-func-part3</id>
+			<properties>
+				<testSuite>wildcard-func-part3.xml</testSuite>
+			</properties>
+		</profile>
+		<profile>
 			<id>testng-failed</id>
 			<properties>
 				<testSuite>testng-failed.xml</testSuite>
