@@ -3,8 +3,10 @@ package org.exoplatform.selenium.platform.ecms;
 import org.exoplatform.selenium.ManageAlert;
 import org.exoplatform.selenium.Utils;
 import org.exoplatform.selenium.platform.PlatformBase;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+
 import static org.exoplatform.selenium.TestLogger.info;
 
 
@@ -24,7 +26,18 @@ public class ECMS_Permission extends PlatformBase {
 	public final By ELEMENT_PERMISSION_CLOSE = By.xpath("//*[text()='Close']");
 	public final String ELEMENT_PERMISSION_DELETE = "//*[text()='${name}']/../..//*[@class='actionIcon']";
     public final String ELEMENT_PERMISSION_USER_OR_GROUP_NAME = ".//*[@id='PermissionInfo']//*[text()='${name}']";
-	
+    public final By ELEMENT_PERMISSION_ADD = By.xpath("//*[@id='UIQueriesForm']//*[contains(@class,'uiIconAddPermission')]");
+    
+  	public final By ELEMENT_DRIVE_SELECT_MEMBERSHIP_POPUP = By.xpath(".//*[contains(@id,'UIDrivePermissionSelector')]");
+  	public final String ELEMENT_DRIVE_SELECT_RIGHT_PARENT_GROUP = "//*[contains(@id,'UIDrivePermissionSelector')]//a[contains(.,'$group')]";
+  	public final By ELEMENT_CAT_SELECT_MEMBERSHIP_POPUP = By.xpath(".//*[contains(@id,'SelectUserOrGroup')]");
+  	public final String ELEMENT_CAT_SELECT_RIGHT_PARENT_GROUP = "//*[contains(@id,'SelectUserOrGroup')]//a[contains(.,'$group')]";
+  	public final By ELEMENT_LOCK_SELECT_MEMBERSHIP_POPUP = By.xpath(".//*[contains(@id,'UIPermissionSelector')]");
+  	public final String ELEMENT_LOCK_SELECT_RIGHT_PARENT_GROUP = "//*[contains(@id,'UIPermissionSelector')]//a[contains(.,'$group')]";
+  	public final By ELEMENT_TAG_SELECT_MEMBERSHIP_POPUP = By.xpath(".//*[contains(@id,'UIGroupMemberSelector')]");
+  	public final String ELEMENT_TAG_SELECT_RIGHT_PARENT_GROUP = "//*[contains(@id,'UIGroupMemberSelector')]//a[contains(.,'$group')]";
+  	public final By ELEMENT_TAG_SELECT_MEMBERSHIP_ADD_BTN = By.xpath("//*[@id='UITagPermissionForm']//*[contains(.,'Add')][contains(@class,'btn-primary')]");
+  	
 	public ECMS_Permission(WebDriver driver) {
 		this.driver = driver;
 		mngAlert = new ManageAlert(driver);
@@ -125,4 +138,96 @@ public class ECMS_Permission extends PlatformBase {
 		info("Close permission form");
 		click(ELEMENT_PERMISSION_CLOSE);
 	}
+	/**
+	 * Select group membership
+	 * @param groupPath
+	 * 					path group: (Ex: Organization/Employees)
+	 * @param membership
+	 * 					membership: (Ex:  author)
+	 */
+	public void selectGroupMembershipOfDrive(String groupPath, String membership){
+		String[] temp;	
+		info("select permission for drive");
+		waitForAndGetElement(ELEMENT_DRIVE_SELECT_MEMBERSHIP_POPUP);
+		temp = groupPath.split("/");
+		for (int i = 0; i < temp.length; i ++){
+			click(ELEMENT_DRIVE_SELECT_RIGHT_PARENT_GROUP.replace("$group", temp[i]));
+		}
+		click(ELEMENT_DRIVE_SELECT_RIGHT_PARENT_GROUP.replace("$group", membership));
+		waitForElementNotPresent(ELEMENT_DRIVE_SELECT_MEMBERSHIP_POPUP);
+	}
+	/**
+	 * Select group membership
+	 * @param groupPath
+	 * 					path group: (Ex: Organization/Employees)
+	 * @param membership
+	 * 					membership: (Ex:  author)
+	 */
+	public void selectGroupMembershipOfCat(String groupPath, String membership){
+		String[] temp;	
+		info("select permission for category");
+		waitForAndGetElement(ELEMENT_CAT_SELECT_MEMBERSHIP_POPUP);
+		temp = groupPath.split("/");
+		for (int i = 0; i < temp.length; i ++){
+			click(ELEMENT_CAT_SELECT_RIGHT_PARENT_GROUP.replace("$group", temp[i]));
+		}
+		click(ELEMENT_CAT_SELECT_RIGHT_PARENT_GROUP.replace("$group", membership));
+		waitForElementNotPresent(ELEMENT_CAT_SELECT_MEMBERSHIP_POPUP);
+	}
+	/**
+	 * Select group membership
+	 * @param groupPath
+	 * 					path group: (Ex: Organization/Employees)
+	 * @param membership
+	 * 					membership: (Ex:  author)
+	 */
+	public void selectGroupMembershipOfLock(String groupPath, String membership){
+		String[] temp;	
+		info("select permission for lock");
+		waitForAndGetElement(ELEMENT_LOCK_SELECT_MEMBERSHIP_POPUP);
+		temp = groupPath.split("/");
+		for (int i = 0; i < temp.length; i ++){
+			click(ELEMENT_LOCK_SELECT_RIGHT_PARENT_GROUP.replace("$group", temp[i]));
+		}
+		click(ELEMENT_LOCK_SELECT_RIGHT_PARENT_GROUP.replace("$group", membership));
+	}
+	/**
+	 * Select group membership
+	 * @param groupPath
+	 * 					path group: (Ex: Organization/Employees)
+	 * @param membership
+	 * 					membership: (Ex:  author)
+	 */
+	public void selectGroupMembershipOfTag(String groupPath, String membership){
+		String[] temp;	
+		info("select permission for tag");
+		click(ELEMENT_PERMISSION_SELECTMEMBERSHIP,0,true);
+		waitForAndGetElement(ELEMENT_TAG_SELECT_MEMBERSHIP_POPUP);
+		temp = groupPath.split("/");
+		for (int i = 0; i < temp.length; i ++){
+			click(ELEMENT_TAG_SELECT_RIGHT_PARENT_GROUP.replace("$group", temp[i]));
+		}
+		click(ELEMENT_TAG_SELECT_RIGHT_PARENT_GROUP.replace("$group", membership));
+		Utils.pause(1000);
+	}	
+	/**
+	 * Select group membership
+	 * @param groupPath
+	 * 					path group: (Ex: Organization/Employees)
+	 * @param membership
+	 * 					membership: (Ex:  author)
+	 */
+	public void selectGroupMembershipOfQuery(String groupPath, String membership){
+		String[] temp;	
+		info("select permission for query");
+		click(ELEMENT_PERMISSION_ADD,0,true);
+		waitForAndGetElement(ELEMENT_TAG_SELECT_MEMBERSHIP_POPUP);
+		temp = groupPath.split("/");
+		for (int i = 0; i < temp.length; i ++){
+			click(ELEMENT_TAG_SELECT_RIGHT_PARENT_GROUP.replace("$group", temp[i]));
+		}
+		click(ELEMENT_TAG_SELECT_RIGHT_PARENT_GROUP.replace("$group", membership));
+		Utils.pause(1000);
+	}
+	
 }

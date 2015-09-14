@@ -216,7 +216,7 @@ public class CreateNewDocument extends PlatformBase{
 	 */
 
 	public void saveAndClose() {
-		click(ELEMENT_FILEFORM_BUTTON_SAVEANDCLOSE);
+		click(ELEMENT_FILEFORM_BUTTON_SAVEANDCLOSE,0,true);
 		Utils.pause(2000);
 	}
 

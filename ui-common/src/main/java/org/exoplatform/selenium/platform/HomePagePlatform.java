@@ -22,6 +22,7 @@ public class HomePagePlatform extends TestBase{
 	public final By ELEMENT_FORUM_LINK_PLF=By.xpath("//*[@data-original-title='Forums']");
 	public final By ELEMENT_ANSWER_LINK_PLF=By.xpath("//*[@data-original-title='Answers']");
 	public final By ELEMENT_WIKI_LINK_PLF=By.xpath("//*[@data-original-title='Wiki']");
+	public final By ELEMENT_DOCUMENTS_LINK_PLF=By.xpath("//*[@data-original-title='Documents']");
 	public final By ELEMENT_HOME_LINK_PLF=By.xpath("//*[@data-original-title='Home']");
 	public final By ELEMENT_CALENDAR_LINK_PLF=By.xpath("//*[@data-original-title='Calendar']");
 	public final By ELEMENT_CONNECTION_LINK_PLF =By.xpath("//*[@data-original-title='Connections']");
@@ -256,7 +257,14 @@ public class HomePagePlatform extends TestBase{
 		click(ELEMENT_WIKI_LINK_PLF);
 		Utils.pause(2000);
 	}
-
+	/**
+	 * Go to Documents
+	 */
+	public void goToDocuments(){
+		info("--Go to Documents--");
+		click(ELEMENT_DOCUMENTS_LINK_PLF);
+		Utils.pause(2000);
+	}
 	/**
 	 * Go to Home page
 	 */

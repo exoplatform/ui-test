@@ -47,6 +47,7 @@ public class SiteExplorerHome extends PlatformBase{
 	public final By ELEMENT_ACTIONBAR_MANAGER_PUBLISHTATION =By.xpath(".//i[@class='uiIconEcmsManagePublications uiIconEcmsLightGray']");
 	public final By ELEMENT_ACTIONBAR_CATEGORY = By.xpath("//*[@class='uiIconEcmsManageCategories uiIconEcmsLightGray']");
 	public final By ELEMENT_ACTIONBAR_TAG = By.xpath("//*[@class='uiIconEcmsTaggingDocument uiIconEcmsLightGray']");
+	public final String ELEMENT_ACTIONBAR_ACTION ="//*[@class='actionIcon'][contains(.,'$action')]";
 	public final By ELEMENT_ACTIONBAR_SHOWDRIVES = By.id("driveAction");
 	public final By ELEMENT_ACTIONBAR_DELETE=By.xpath(".//*[@id='ECMContextMenu']//*[@class='uiIconEcmsDelete']");
 	public final By ELEMENT_SITE_EXPLORER_ALL_CHECKBOX= By.xpath("//input[@type='checkbox' and @name= 'UIFileViewCheckBox']");
@@ -172,6 +173,7 @@ public class SiteExplorerHome extends PlatformBase{
 	public final String ELEMENT_SITEEXPLORER_LEFTBOX_TITLE_TRANSLATION="//*[text()='fr (${title})']";
 	public final By ELEMENT_SITEEXPLORER_LIST_LOCK_NODE = By.xpath("//*[@id='ECMContextMenu']//*[@class='uiIconEcmsLock']");
 	public final By ELEMENT_SITEEXPLORER_LIST_UNLOCK_NODE = By.xpath("//*[@id='ECMContextMenu']//*[@class='uiIconEcmsUnlock']");
+	public final String ELEMENT_SITEEXPLORER_LOCK_ICON= "//*[contains(@class,'iconLockedsmall')]/../../*[contains(.,'$node')]";
 
 	//Left panel of SE
 	public final By ELEMENT_FILE_EXPLORER = By.xpath("//*[@data-original-title = 'File Explorer']");
@@ -191,10 +193,12 @@ public class SiteExplorerHome extends PlatformBase{
 	public final By ELEMENT_SITEEXPLORER_ADVANCEDSEARCH_NAME = By.xpath("//*[@id='keyword']");
 	public final By ELEMENT_SITEEXPLORER_ADVANCEDSEARCH_SEARCHBTN = By.xpath("//*[@id='tab-UIContentNameSearch']//*[@class='btn' and text()='Search']");
 	public final By ELEMENT_SITEXPLORER_ADVANCEDSEARCH_CREATEQUERYTAB = By.xpath("//*[text()='New Query']");
+	public final By ELEMENT_SITEXPLORER_ADVANCEDSEARCH_SAVEDQUERYTAB = By.xpath("//*[text()='Saved Query']");
 	public final By ELEMENT_SITEEXPLORER_ADVANCEDSEARCH_NAMEQUERY = By.xpath("//*[@id='name']");
 	public final By ELEMENT_SITEEXPLORER_ADVANCEDSEARCH_SAVEQUERYBTN = By.xpath("//*[@id='UIJCRAdvancedSearch']//*[@class='btn' and text()='Save']");
 	public final String ELEMENT_SITEEXPLORER_ADVANCEDSEARCH_DELETEQUERYBTN = "//*[text()='${name}']/../..//*[@class='uiIconDelete uiIconLightGray']";
 	public final By ELEMENT_SITEEXPLORER_ADVANCEDSEARCH_EXECUTEQUERYBTN = By.xpath("//*[@class='uiIconEcmsExecute']");
+	public final String ELEMENT_SITEEXPLORER_ADVANCEDSEARCH_EXECUTEQUERY = "//*[text()='${name}']/../..//*[@class='uiIconEcmsExecute']";
 	public final String ELEMENT_SITEEXPLORER_ADVANCEDSEARCH_EDITQUERYBTN = "//*[text()='${name}']/../..//*[@class='uiIconEdit uiIconLightGray']";
 	public final By ELEMENT_SITEEXPLORER_ADVANCEDSEARCH_QUERYTYPE = By.xpath("//*[@class='uiForm EditQueryForm']/..//*[@class='selectbox']");
 	public final By ELEMENT_SITEEXPLORER_ADVANCEDSEARCH_SAVEEDITQUERYBTN = By.xpath("//*[@id='EditQueryForm']//*[@class='btn' and text()='Save']");
@@ -319,6 +323,7 @@ public class SiteExplorerHome extends PlatformBase{
 	public final By ELEMENT_ICONS_VIEW = By.xpath("//*[@data-original-title = 'Icons']");
 	public final By ELEMENT_WEB_VIEW = By.xpath("//*[@data-original-title = 'Web']");
 	public final By ELEMENT_CATEGORIES_VIEW = By.xpath("//*[@data-original-title = 'Categories']");
+	public final String ELEMENT_ITEM_VIEW = "//*[@data-original-title = '$view']";
 
 	//Add new content
 	public String ELEMENT_SITE_EXPLORER_CONTENT_NAME= ".//*[@id='UISelectDocumentForm']//i[@data-original-title='${nameContent}']";
@@ -350,10 +355,11 @@ public class SiteExplorerHome extends PlatformBase{
 		waitForAndGetElement(ELEMENT_SIDE_BAR_MAINTAB);
 		click(ELEMENT_SIDE_BAR_FILE_EXPLORER_ICON);
 		info("Go to folder");
+		if(!path.isEmpty()){
 		String[] arrayPath = path.split("/");
 		for (String arrayElement : arrayPath){
 			selectNode(arrayElement);
-		}
+		}}
 	}
 
 	/**
@@ -751,8 +757,10 @@ public class SiteExplorerHome extends PlatformBase{
 	 * @param name
 	 */
 	public void lockNode(String name){
+		info("lock node:"+name);
 		rightClickOnElement(By.xpath(ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME.replace("${title}",name)));
 		click(ELEMENT_SITEEXPLORER_LIST_LOCK_NODE);
+		waitForAndGetElement(ELEMENT_SITEEXPLORER_LOCK_ICON.replace("$node", name));
 	}
 
 	/**
@@ -760,8 +768,10 @@ public class SiteExplorerHome extends PlatformBase{
 	 * @param name
 	 */
 	public void unlockNode(String name){
+		info("unlock node:"+name);
 		rightClickOnElement(By.xpath(ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME.replace("${title}",name)));
 		click(ELEMENT_SITEEXPLORER_LIST_UNLOCK_NODE);
+		waitForElementNotPresent(ELEMENT_SITEEXPLORER_LOCK_ICON.replace("$node", name));
 	}
 
 
@@ -1349,5 +1359,45 @@ public class SiteExplorerHome extends PlatformBase{
 		clickAdminView();
 		info("Select All checkbox");
 		selectAllFiles();
+	}
+	/**
+	 * Check display of drive
+	 * @param drive
+	 * @param isDisplay
+	 */
+	public void checkDisplayOfDrive(String drive,boolean isDisplay){
+		info("check display of drive:"+drive);
+		click(ELEMENT_ACTIONBAR_SHOWDRIVES,0,true);
+		if(isDisplay)
+			waitForAndGetElement(ELEMENT_ACTIONBAR_SELECTED_DRIVE.replace("${drive}",drive));
+		else
+			waitForElementNotPresent(ELEMENT_ACTIONBAR_SELECTED_DRIVE.replace("${drive}",drive));
+	}
+	/**
+	 * Check action in view
+	 * @param view
+	 * @param action
+	 */
+	public void checkActionInView(String view,String[] actions){
+		info("check action:"+action+" in view"+view);
+		waitForAndGetElement(ELEMENT_ITEM_VIEW.replace("$view", view));
+		click(ELEMENT_ITEM_VIEW.replace("$view", view),0,true);
+		for (String action : actions) {
+			waitForAndGetElement(ELEMENT_ACTIONBAR_ACTION.replace("$action", action));
+		}
+		
+	}
+	/**
+	 * Check query in saved query
+	 * @param queries
+	 * 				list of queries
+	 */
+	public void checkQueryInSavedQuery(String...queries){
+		info("check display of query");
+		goToAdvancedSearch();
+		click(ELEMENT_SITEXPLORER_ADVANCEDSEARCH_SAVEDQUERYTAB,0,true);
+		for (String query : queries) {
+			waitForAndGetElement(ELEMENT_SITEEXPLORER_ADVANCEDSEARCH_EXECUTEQUERY.replace("${name}",query));
+		}
 	}
 }

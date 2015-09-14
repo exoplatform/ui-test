@@ -3,6 +3,8 @@ package org.exoplatform.selenium.platform.administration;
 import org.exoplatform.selenium.ManageAlert;
 import org.exoplatform.selenium.Utils;
 import org.exoplatform.selenium.platform.PlatformBase;
+import org.exoplatform.selenium.platform.ecms.ECMS_Permission;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -63,6 +65,10 @@ public class ContentAdministration extends PlatformBase{
 	public By ELEMENT_ECM_ADVANCED_CATEGORIES_NEXT_3RDPAGE_FORM = By.xpath(".//*[@id='UIActionTaxonomyManager']//*[contains(text(),'Next')]");
 
 	public By ELEMENT_ECM_ADVANCED_CATEGORIES_PREVIOUS_2NDPAGE = By.xpath("//*[@id='UIPermissionTreeForm']//*[contains(text(),'Previous')]");
+	public By ELEMENT_ECM_ADVANCED_CATEGORIES_PREVIOUS_2NDPAGE_SAVE = By.xpath("//*[@id='UIPermissionTreeForm']//*[contains(text(),'Save')]");
+	public By ELEMENT_ECM_ADVANCED_CATEGORIES_PREVIOUS_2NDPAGE_READ=By.xpath("//*[@id='read']");
+	public By ELEMENT_ECM_ADVANCED_CATEGORIES_PREVIOUS_2NDPAGE_ADD=By.xpath("//*[@id='add_node']");
+	public By ELEMENT_ECM_ADVANCED_CATEGORIES_PREVIOUS_2NDPAGE_REMOVE=By.xpath("//*[@id='remove']");
 	public By ELEMENT_ECM_ADVANCED_CATEGORIES_PREVIOUS_3RDPAGE = By.xpath("//*[@id='UIActionTaxonomyManager']//*[contains(text(),'Previous')]");
 	public By ELEMENT_ECM_ADVANCED_CATEGORIES_PREVIOUS_4THPAGE = By.xpath("//*[@id='UITaxonomyTreeCreateChild']//*[contains(text(),'Previous')]");
 
@@ -103,6 +109,7 @@ public class ContentAdministration extends PlatformBase{
 	public By ELEMENT_ECM_EXPLORER_APPLY_VIEWS_CHECKBOX_ICONS = By.xpath("//*[@class='UIFormInputSet']//*[@id='Icons']");
 	public By ELEMENT_ECM_EXPLORER_APPLY_VIEWS_CHECKBOX_LIST = By.xpath("//*[@class='UIFormInputSet']//*[@id='List']");
 	public By ELEMENT_ECM_EXPLORER_APPLY_VIEWS_CHECKBOX_WEB = By.xpath("//*[@class='UIFormInputSet']//*[@id='Web']");
+	public String ELEMENT_ECM_EXPLORER_APPLY_VIEWS_CHECKBOX_ITEM = "//*[@class='UIFormInputSet']//*[@id='$item']";
 	public By ELEMENT_ECM_EXPLORER_DRIVES_SAVE_FORM = By.xpath("//*[@id='UIDriveForm']//*[contains(text(),'Save')]");
 	public String ELEMENT_ECM_EXPLORER_DRIVES_EDIT_LIST = "//*[@id='UIDriveList']//*[contains(text(),'{$name}')]/../..//*[@class='uiIconEditInfo uiIconLightGray']";
 	public String ELEMENT_ECM_EXPLORER_DRIVES_DELETE_LIST = "//*[@id='UIDriveList']//*[contains(text(),'{$name}')]/../..//*[@class='uiIconDelete uiIconLightGray']";
@@ -118,6 +125,8 @@ public class ContentAdministration extends PlatformBase{
 	public By ELEMENT_ECM_EXPLORER_GO_TO_PERMISSION_FORM = By.xpath("//*[@id='UIViewFormTabPane']//*[contains(text(),'Permission')]");
 	public By ELEMENT_ECM_EXPLORER_ADD_PERMISSION_FORM = By.xpath("//*[@class='permission']//*[contains(text(),'Add')]");
 	public By ELEMENT_ECM_EXPLORER_USER_PERMISSION_ADD = By.xpath("//*[@id='UIViewPermissionForm']//*[@class='uiIconSelectUser uiIconLightGray']");
+	public By ELEMENT_ECM_EXPLORER_GROUP_PERMISSION_ADD = By.xpath("//*[@id='UIViewPermissionForm']//*[contains(@class,'uiIconSelectMember')]");
+	
 	public String ELEMENT_ECM_EXPLORER_SELECT_USER_LIST_PERMISSION = "//*[@id='UIListUsers']//*[@class='text' and contains(text(),'{$user}')]/../../td[5]/a";
 	public By ELEMENT_ECM_EXPLORER_SAVE_FORM_ADD_VIEW = By.xpath("//*[@id='UIViewFormTabPane']//*[contains(text(),'Save')]");
 	public String ELEMENT_ECM_EXPLORER_DELETE_PERMISSION_USER ="//*[@id='UIViewPermissionList']//*[contains(text(),'{$name}')]/../..//*[@class='uiIconDelete uiIconLightGray']";
@@ -172,6 +181,7 @@ public class ContentAdministration extends PlatformBase{
 	public By ELEMENT_ECM_EXPORER_ACTIONS_POPUP_SAVE_BUTTON=By.xpath(".//*[@id='UITabForm']//button[text()='Save']");
 
 	// explorer, tags
+	public By ELEMENT_ECM_EXPLORER_TAGS_TAG_PERM_TAB = By.xpath("//*[contains(@data-target,'UITagPermissionManager')]");
 	public By ELEMENT_ECM_EXPLORER_TAGS_ADD_STYLE_BUTTON = By.xpath("//*[@id='UITagManager']//*[contains(text(),'Add Style')]");
 	public By ELEMENT_ECM_EXPLORER_TAGS_ADD_NAME_FORM = By.xpath("//*[@id='styleName']");
 	public By ELEMENT_ECM_EXPLORER_TAGS_NUMBER_OCCURENCE_FORM = By.xpath("//*[@id='documentRange']");
@@ -221,7 +231,17 @@ public class ContentAdministration extends PlatformBase{
 	public String ELEMENT_ECM_TEMPLATES_DOCUMENTS_LIST_EDIT = "//*[@id='UITemplateList']//*[contains(text(),'{$name}')]/../..//*[@class='uiIconEdit uiIconLightGray']";
 	public By ELEMENT_ECM_TEMPLATES_DOCUMENTS_SAVE_EDIT_FORM = By.xpath("//*[@id='UITemplateEditForm']//*[contains(text(),'Save')]");
 	public String ELEMENT_ECM_TEMPLATES_DOCUMENTS_LIST_DELETE = "//*[@id='UITemplateList']//*[contains(text(),'{$name}')]/../..//*[@class='uiIconDelete uiIconLightGray']";
-
+	public By ELEMENT_ECM_TEMPLATES_DOCUMENTS_DIALOG_TAB= By.xpath("//*[@data-toggle='tab'][contains(.,'Dialog')]");
+	public By ELEMENT_ECM_TEMPLATES_DOCUMENTS_DIALOG_EDIT=By.xpath("//*[@id='DialogList']//*[contains(@class,'uiIconEdit')]");
+	public By ELEMENT_ECM_TEMPLATES_DOCUMENTS_DIALOG_REMOVE_PERM=By.xpath(".//*[@id='DialogForm']//*[contains(@class,'uiIconRemovePermission')]");
+	public By ELEMENT_ECM_TEMPLATES_DOCUMENTS_DIALOG_ADD_PERM=By.xpath(".//*[@id='DialogForm']//*[contains(@class,'uiIconAddPermission')]");
+	public By ELEMENT_ECM_TEMPLATES_DOCUMENTS_DIALOG_SAVE=By.xpath(".//*[@id='DialogForm']//*[contains(.,'Save')][@class='btn']");
+	public By ELEMENT_ECM_TEMPLATES_DOCUMENTS_VIEW_TAB= By.xpath("//*[@data-toggle='tab'][contains(.,'View')]");
+	public By ELEMENT_ECM_TEMPLATES_DOCUMENTS_VIEW_EDIT=By.xpath("//*[@id='VewList']//*[contains(@class,'uiIconEdit')]");
+	public By ELEMENT_ECM_TEMPLATES_DOCUMENTS_VIEW_REMOVE_PERM=By.xpath("//*[@id='ViewForm']//*[contains(@class,'uiIconRemovePermission')]");
+	public By ELEMENT_ECM_TEMPLATES_DOCUMENTS_VIEW_ADD_PERM=By.xpath("//*[@id='ViewForm']//*[contains(@class,'uiIconAddPermission')]");
+	public By ELEMENT_ECM_TEMPLATES_DOCUMENTS_VIEW_SAVE=By.xpath("//*[@id='ViewForm']//*[contains(.,'Save')][@class='btn']");
+	
 	// templates, List
 	public By ELEMENT_ECM_TEMPLATES_LIST_ADD_LIST = By.xpath("//*[@id='ContentTemplateContainer']//*[contains(text(),'Add Template')]");
 	public By ELEMENT_ECM_TEMPLATES_LIST_TEMPLATE_NAME_FORM = By.xpath("//*[@id='template']");
@@ -244,10 +264,12 @@ public class ContentAdministration extends PlatformBase{
 	public String ELEMENT_ECM_TEMPLATES_METADATA_FORM_DELETE = "//*[@id='UIMetadataList']//*[contains(text(),'{$name}')]/..//*[@class='uiIconDelete uiIconLightGray']";
 	public By ELEMENT_ECM_TEMPLATES_METADATA_FORM_OK_FORM = By.xpath("//*[@class='uiAction uiActionBorder']//*[contains(text(),'OK')]");
 
+	ECMS_Permission ecmsPerm;
 	ManageAlert alert ;
 	public ContentAdministration(WebDriver dr){
 		driver = dr;
 		alert= new ManageAlert(dr);
+		ecmsPerm = new ECMS_Permission(driver);
 	}
 
 	/**
@@ -273,7 +295,7 @@ public class ContentAdministration extends PlatformBase{
 	 *
 	 */
 	public enum specificView{
-		ADMIN, CATEGORY, LIST, ICON, WEB
+		ADMIN, CATEGORY, LIST, ICON, WEB,ITEM
 	}
 
 	/**
@@ -387,7 +409,7 @@ public class ContentAdministration extends PlatformBase{
 	 * @param tab
 	 * @param userNamePermission
 	 */
-	public void addView(String name,String tabName,String[] tab, String userNamePermission){
+	public void addView(String name,String tabName,String[] tab, String... perm){
 		click(ELEMENT_ECM_EXPLORER_VIEWS_ADD_VIEWS);
 		type(ELEMENT_ECM_EXPLORER_NAME_VIEW_FORM,name,true);
 		click(ELEMENT_ECM_EXPLORER_GO_TO_ACTION_FORM);
@@ -398,8 +420,12 @@ public class ContentAdministration extends PlatformBase{
 		}
 		click(ELEMENT_ECM_EXPLORE_SAVE_TAB_VIEW_FORM);
 		click(ELEMENT_ECM_EXPLORER_GO_TO_PERMISSION_FORM);
-		click(ELEMENT_ECM_EXPLORER_USER_PERMISSION_ADD);
-		click(By.xpath(ELEMENT_ECM_EXPLORER_SELECT_USER_LIST_PERMISSION.replace("{$user}",userNamePermission)));
+		if(perm.length<2){
+			click(ELEMENT_ECM_EXPLORER_USER_PERMISSION_ADD);
+			click(By.xpath(ELEMENT_ECM_EXPLORER_SELECT_USER_LIST_PERMISSION.replace("{$user}",perm[0])));
+		}else{
+			ecmsPerm.selectGroupMembershipOfTag(perm[0],perm[1]);
+		}
 		click(ELEMENT_ECM_EXPLORER_ADD_PERMISSION_FORM);
 		click(ELEMENT_ECM_EXPLORER_SAVE_FORM_ADD_VIEW);
 	}
@@ -486,7 +512,7 @@ public class ContentAdministration extends PlatformBase{
 	 * @param name
 	 * @param applyViews (All the view want to be check have to be specified, the other will be uncheck) 
 	 */
-	public void editDrives(String name,specificView[] applyViews){
+	public void editDrives(String name,specificView[] applyViews,String...views){
 		click(By.xpath(ELEMENT_ECM_EXPLORER_DRIVES_EDIT_LIST.replace("{$name}", name)));
 		click(ELEMENT_ECM_EXPLORER_APPLY_VIEWS_FORM);
 		uncheck(ELEMENT_ECM_EXPLORER_APPLY_VIEWS_CHECKBOX_ADMIN,2);
@@ -510,6 +536,9 @@ public class ContentAdministration extends PlatformBase{
 				break;
 			case WEB :
 				check(ELEMENT_ECM_EXPLORER_APPLY_VIEWS_CHECKBOX_WEB,2);
+				break;
+			case ITEM :
+				check(ELEMENT_ECM_EXPLORER_APPLY_VIEWS_CHECKBOX_ITEM.replace("$item", views[0]),2);
 				break;
 			default:
 				check(ELEMENT_ECM_EXPLORER_APPLY_VIEWS_CHECKBOX_WEB,2);
@@ -587,13 +616,41 @@ public class ContentAdministration extends PlatformBase{
 	 * @param lifeCycle
 	 * @param targetPath
 	 */
-	public void addCategories(String name,String nameAction,String lifeCycle, String targetPath){
+	public void addCategories(String name,String nameAction,String lifeCycle, String targetPath,Object...params){
 		info("Add a category");
 		click(ELEMENT_ECM_ADVANCED_CATEGORIES_ADD_CATEGORIES);
 		info("Type a name for the category");
 		type(ELEMENT_ECM_ADVANCED_CATEGORIES_NAME_FORM,name,true);
+		if(params.length>0){
+			String workspace = (String)params[0];
+			String pathWorkspace = (String)params[1];
+			info("Select the workspace:"+workspace+" for the category");
+			select(ELEMENT_ECM_ADVANCED_CATEGORIES_WORKSPACE_SELECT_FORM,workspace);
+			info("Click on Add button of home path form");
+			click(ELEMENT_ECM_ADVANCED_CATEGORIES_ADD_HOME_PATH_FORM);
+			if(pathWorkspace=="root"){
+				info("if workspace is root, click on ROOT node");
+				click(ELEMENT_ECM_ADVANCED_CATEGORIES_ROOT_NODE_ACTION_FORM);
+			}
+		}
 		info("Click on Next button of the step 1");
 		click(ELEMENT_ECM_ADVANCED_CATEGORIES_NEXT_1STPAGE_FORM);
+		Utils.pause(500);
+		info("select permission");
+		if(params.length>2){
+			boolean read = (boolean)params[2];
+			boolean modify = (boolean)params[3];
+			boolean remove = (boolean)params[4];
+			String group = (String)params[5];
+			String mem = (String)params[6];
+			click(ecmsPerm.ELEMENT_PERMISSION_SELECTMEMBERSHIP);
+			ecmsPerm.selectGroupMembershipOfCat(group,mem);
+			ecmsPerm.selectCheckBoxRight(read, modify, remove);
+			info("Click on Save button");
+			click(ecmsPerm.ELEMENT_PERMISSION_SAVE);
+			ecmsPerm.deletePermissionNode("any");
+			ecmsPerm.deletePermissionNode("*:/platform/users");
+		}
 		info("Click on Next button of the step 2");
 		click(ELEMENT_ECM_ADVANCED_CATEGORIES_NEXT_2NDPAGE_FORM);
 		info("Type a name for the action of the category");
@@ -612,7 +669,7 @@ public class ContentAdministration extends PlatformBase{
 		click(ELEMENT_ECM_ADVANCED_CATEGORIES_CLOSE_FORM);
 		info("Finish adding the category");
 	}
-
+	
 	/**
 	 * Edit a category
 	 * @param name
@@ -674,6 +731,22 @@ public class ContentAdministration extends PlatformBase{
 		click(ELEMENT_ADD_SUB_CAT_BUTTON);
 		type(ELEMENT_NAME_CAT_TEXTBOX,name,true);
 		click(ELEMENT_ADD_CAT_SAVE_BUTTON);
+	}
+	/**
+	 * edit with sub category
+	 * @param name
+	 * 				name of category
+	 * @param sub
+	 * 				name of sub category
+	 */
+	public void addSubCat(String name,String sub){
+		info("add sub category");
+		click(By.xpath(ELEMENT_ECM_ADVANCED_CATEGORIES_EDIT_FORM.replace("{$name}",name)));
+		click(ELEMENT_ADD_SUB_CAT_BUTTON);
+		type(ELEMENT_NAME_CAT_TEXTBOX,sub,true);
+		click(ELEMENT_ADD_CAT_SAVE_BUTTON);
+		Utils.pause(1000);
+		click(ELEMENT_ECM_ADVANCED_CATEGORIES_CLOSE_FORM);
 	}
 	/**
 	 * Add a new action type
@@ -753,6 +826,7 @@ public class ContentAdministration extends PlatformBase{
 		info("Save all changes");
 		click(ELEMENT_ECM_ADVANCED_SCRIPT_SAVE_FORM);
 		info("Finish adding the script");
+		waitForAndGetElement(ELEMENT_ECM_ADVANCED_SCRIPT_LIST.replace("{$name}",name));
 	}
 	/**
 	 * Edit a Script
@@ -803,7 +877,7 @@ public class ContentAdministration extends PlatformBase{
 	 * @param statement
 	 * @param permission
 	 */
-	public void addQueries(String name,String queryType, String statement,String permission){
+	public void addQueries(String name,String queryType, String statement,String...permissions){
 		info("Add a query");
 		info("Click on Add button");
 		click(ELEMENT_ECM_ADVANCED_QUERIES_ADD_QUERIES);
@@ -819,9 +893,12 @@ public class ContentAdministration extends PlatformBase{
 		}
 		info("Select permission form of the query");
 		click(ELEMENT_ECM_ADVANCED_QUERIES_PERMISSION_FORM);
-		if(permission=="any"){
-			info("Set permission of the query is:"+permission);
+		if(permissions.length<2){
+			info("Set permission of the query is:"+permissions[0]);
 			click(ELEMENT_PERMISSION_ANY);
+		}else{
+			info("select permission");
+			ecmsPerm.selectGroupMembershipOfQuery(permissions[0],permissions[1]);
 		}
 		info("Save all changes");
 		click(ELEMENT_ECM_ADVANCED_QUERIES_SAVE_FORM);
@@ -913,12 +990,17 @@ public class ContentAdministration extends PlatformBase{
 	 * @param label
 	 * @param permission
 	 */
-	public void addDocumentInTemplates(String label, String permission){
+	public void addDocumentInTemplates(String label, String...permission){
 		click(ELEMENT_ECM_TEMPLATES_DOCUMENTS_ADD_DOCUMENT);
 		type(ELEMENT_ECM_TEMPLATES_DOCUMENTS_LABEL_FORM, label, true);
 		click(ELEMENT_ECM_COMMON_ADD_PERMISSION_BUTTON);
-		if(permission=="any")
+		if(permission[0]=="any")
 			click(ELEMENT_PERMISSION_ANY);
+		else{
+			ecmsPerm.selectGroupMembershipOfLock(permission[0],permission[1]);
+			
+		}
+		Utils.pause(1000);
 		click(ELEMENT_ECM_TEMPLATES_DOCUMENTS_SAVE_FORM);
 	}
 	/**
@@ -931,6 +1013,48 @@ public class ContentAdministration extends PlatformBase{
 		type(ELEMENT_ECM_TEMPLATES_DOCUMENTS_LABEL_FORM, newName, true);
 		click(ELEMENT_ECM_TEMPLATES_DOCUMENTS_SAVE_EDIT_FORM);
 		waitForAndGetElement(By.xpath(ELEMENT_ECM_TEMPLATES_DOCUMENTS_LIST.replace("{$name}",newName)));
+	}
+	/**
+	 * Edit permission of template dialog
+	 * @param label
+	 * @param group
+	 * @param member
+	 */
+	public void editPermOfTemplateDialog(String label,String group,String member){
+		info("edit permission");
+		goToSpecificMainFunctions(mainEcmFunctions.TEMPLATES);
+		goToSpecificFunctions(specificEcmFunctions.DOCUMENTS);
+		click(By.xpath(ELEMENT_ECM_TEMPLATES_DOCUMENTS_LIST_EDIT.replace("{$name}",label)));
+		Utils.pause(500);
+		click(ELEMENT_ECM_TEMPLATES_DOCUMENTS_DIALOG_TAB,0,true);
+		click(ELEMENT_ECM_TEMPLATES_DOCUMENTS_DIALOG_EDIT,0,true);
+		Utils.pause(500);
+		click(ELEMENT_ECM_TEMPLATES_DOCUMENTS_DIALOG_REMOVE_PERM,0,true);
+		click(ELEMENT_ECM_TEMPLATES_DOCUMENTS_DIALOG_ADD_PERM,0,true);
+		ecmsPerm.selectGroupMembershipOfLock(group,member);
+		click(ELEMENT_ECM_TEMPLATES_DOCUMENTS_DIALOG_SAVE,0,true);
+		Utils.pause(500);
+	}
+	/**
+	 * Edit permission of template view
+	 * @param label
+	 * @param group
+	 * @param member
+	 */
+	public void editPermOfTemplateView(String label,String group,String member){
+		info("edit permission");
+		goToSpecificMainFunctions(mainEcmFunctions.TEMPLATES);
+		goToSpecificFunctions(specificEcmFunctions.DOCUMENTS);
+		click(By.xpath(ELEMENT_ECM_TEMPLATES_DOCUMENTS_LIST_EDIT.replace("{$name}",label)));
+		Utils.pause(500);
+		click(ELEMENT_ECM_TEMPLATES_DOCUMENTS_VIEW_TAB,0,true);
+		click(ELEMENT_ECM_TEMPLATES_DOCUMENTS_VIEW_EDIT,0,true);
+		Utils.pause(500);
+		click(ELEMENT_ECM_TEMPLATES_DOCUMENTS_VIEW_REMOVE_PERM,0,true);
+		click(ELEMENT_ECM_TEMPLATES_DOCUMENTS_VIEW_ADD_PERM,0,true);
+		ecmsPerm.selectGroupMembershipOfLock(group,member);
+		click(ELEMENT_ECM_TEMPLATES_DOCUMENTS_VIEW_SAVE,0,true);
+		Utils.pause(500);
 	}
 	/**
 	 * Delete a Document in Template
@@ -1161,5 +1285,64 @@ public class ContentAdministration extends PlatformBase{
 		Utils.pause(1000);
 		info("Finished Adding action for a view");
 	}
-
+	/**
+	 * Add group permission to drive
+	 * @param drive
+	 * @param group
+	 * @param membership
+	 */
+	public void addGroupPermToDrive(String drive,String group,String membership){
+		info("add group permission to drive:"+drive);
+		goToSpecificMainFunctions(mainEcmFunctions.EXPLORER);
+		goToSpecificFunctions(specificEcmFunctions.DRIVES);
+		click(By.xpath(ELEMENT_ECM_EXPLORER_DRIVES_EDIT_LIST.replace("{$name}", drive)),0,true);
+		Utils.pause(500);
+		click(ELEMENT_ECM_COMMON_ADD_PERMISSION_BUTTON,0,true);
+		ecmsPerm.selectGroupMembershipOfDrive(group, membership);
+		click(ELEMENT_ECM_EXPLORER_DRIVES_SAVE_FORM,0,true);
+		Utils.pause(1000);
+	}
+	/**
+	 * Add group permission to lock
+	 * @param drive
+	 * @param group
+	 * @param membership
+	 */
+	public void addGroupPermToLock(String group,String membership){
+		info("add group permission to lock manager");
+		goToSpecificMainFunctions(mainEcmFunctions.REPOSITORY);
+		goToSpecificFunctions(specificEcmFunctions.LOCKS);
+		click(ELEMENT_ECM_REPOSITORY_MANAGE_LOCK);
+		ecmsPerm.selectGroupMembershipOfLock(group,membership);
+		Utils.pause(1000);
+	}
+	/**
+	 * Add group permission to tag
+	 * @param drive
+	 * @param group
+	 * @param membership
+	 */
+	public void addGroupPermToTag(String group,String membership){
+		info("add group permission to tag");
+		goToSpecificMainFunctions(mainEcmFunctions.EXPLORER);
+		goToSpecificFunctions(specificEcmFunctions.TAGS);
+		click(ELEMENT_ECM_EXPLORER_TAGS_TAG_PERM_TAB);
+		ecmsPerm.selectGroupMembershipOfTag(group,membership);
+		Utils.pause(1000);
+		click(ecmsPerm.ELEMENT_TAG_SELECT_MEMBERSHIP_ADD_BTN,0,true);
+	}
+	/**
+	 * Add group permission to node
+	 * @param drive
+	 * @param group
+	 * @param membership
+	 */
+	public void addGroupPermToNode(String group,String membership,boolean read,boolean modify,boolean remove){
+		info("add group permission to node document");
+		ecmsPerm.selectGroupMembershipOfTag(group,membership);
+		ecmsPerm.selectCheckBoxRight(read, modify, remove);
+		click(ecmsPerm.ELEMENT_PERMISSION_SAVE,0,true);
+		Utils.pause(1000);
+		click(ecmsPerm.ELEMENT_PERMISSION_CLOSE,0,true);
+	}
 }
