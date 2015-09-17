@@ -1,6 +1,7 @@
 package org.exoplatform.selenium.platform.task.functional;
 
 import static org.exoplatform.selenium.TestLogger.info;
+
 import org.testng.annotations.*;
 
 	public class TASK_Projects_CreateProject extends TASK_TestConfig_1{
@@ -845,4 +846,156 @@ import org.testng.annotations.*;
 		
 		info("delete data");
 		mgProject.deleteProject(prj1, true);
- 	}}
+ 	}
+	/**
+	*<li> Case ID:131525.</li>
+	*<li> Test Case Name: Check all created tasks in the project will be synchronized in calendar.</li>
+	*<li> Pre-Condition: exo-tasks add-on is installed</li>
+	*<li> Post-Condition: </li>
+	*/
+	@Test
+	public  void test22_CheckAllCreatedTasksInTheProjectWillBeSynchronizedInCalendar() {
+		info("Test 22: Check all created tasks in the project will be synchronized in calendar");
+		String task1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+		String prj1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+		/*Step Number: 1
+		*Step Name: Step 1: Open Tasks page
+		*Step Description: 
+			- Click on Tasks on the left navigation.
+		*Input Data: 
+			
+		*Expected Outcome: 
+			- Tasks page is opened*/
+		hp.goToTasks();
+	
+		/*Step number: 2
+		*Step Name: Step 2: Add projectA with Enable Calendar Integration
+		*Step Description: 
+			- Add projectA from contextual menu of Projects with Enable Calendar Integration
+		*Input Data: 
+			
+		*Expected Outcome: 
+			- projectA is created
+			- calendar is automatically created: projectA Tasks*/
+		mgProject.addProject(prj1,"", true);
+		
+		/*Step number: 3
+		*Step Name: Step 3: Add taskA
+		*Step Description: 
+			- Add taskA to projectA with workplan
+		*Input Data: 
+			
+		*Expected Outcome: 
+			- taskA is created*/
+		mgTask.addTask(prj1, task1);
+		mgTask.editTaskWorkPlan(task1, getDate(0,"dd"), 0, getDate(2,"dd"), 0, "", "",true);
+		
+		/*Step number: 4
+		*Step Name: Step 4: Open Calendar apps
+		*Step Description: 
+			- Click on Calendar on the left navigation
+		*Input Data: 
+			
+		*Expected Outcome: 
+			- projectA Tasks calendar opens with taskA inside*/ 
+		hp.goToCalendarPage();
+		cMang.checkDisplayOfTaskCal(prj1+" Tasks", true);
+		tasMg.checkDisplayOfTask(task1,getDate(0,"dd"),true);
+		
+		info("delete data");
+		hp.goToTasks();
+		mgProject.deleteProject(prj1, false);
+ 	}
+
+	/**
+	*<li> Case ID:131519.</li>
+	*<li> Test Case Name: Check calendar name when Enable Calendar Integration is ticked.</li>
+	*<li> Pre-Condition: exo-tasks add-on is installed</li>
+	*<li> Post-Condition: </li>
+	*/
+	@Test 
+	public  void test23_CheckCalendarNameWhenEnableCalendarIntegrationIsTicked() {
+		info("Test 23: Check calendar name when Enable Calendar Integration is ticked");
+		String prj1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+		/*Step Number: 1
+		*Step Name: Step 1: Open Tasks page
+		*Step Description: 
+			- Click on Tasks on the left navigation.
+		*Input Data: 
+			
+		*Expected Outcome: 
+			- Tasks page is opened*/
+		hp.goToTasks();
+		
+		/*Step number: 2
+		*Step Name: Step 2: Add projectA with Enable Calendar Integration
+		*Step Description: 
+			- Add projectA from contextual menu of Projects with Enable Calendar Integration
+		*Input Data: 
+			
+		*Expected Outcome: 
+			- projectA is created
+			- calendar is automatically created: projectA Tasks*/
+		mgProject.addProject(prj1,"", true);
+		
+		/*Step number: 3
+		*Step Name: Step 3: Check calendar
+		*Step Description: 
+			- projectA Tasks is in list calendar
+		*Input Data: 
+			
+		*Expected Outcome: 
+			- projectA Tasks is in list calendar*/ 
+		hp.goToCalendarPage();
+		cMang.checkDisplayOfTaskCal(prj1+" Tasks", true);
+		
+		info("delete data");
+		hp.goToTasks();
+		mgProject.deleteProject(prj1, false);
+ 	}
+
+	/**
+	*<li> Case ID:131520.</li>
+	*<li> Test Case Name: Check Enable Calendar Integration can not be editable.</li>
+	*<li> Pre-Condition: exo-tasks add-on is installed</li>
+	*<li> Post-Condition: </li>
+	*/
+	@Test
+	public  void test24_CheckEnableCalendarIntegrationCanNotBeEditable() {
+		info("Test 24: Check Enable Calendar Integration can not be editable");
+		String prj1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+		/*Step Number: 1
+		*Step Name: Step 1: Open Tasks page
+		*Step Description: 
+			- Click on Tasks on the left navigation.
+		*Input Data: 
+			
+		*Expected Outcome: 
+			- Tasks page is opened*/
+		hp.goToTasks();
+		
+		/*Step number: 2
+		*Step Name: Step 2: Add projectA with Enable Calendar Integration
+		*Step Description: 
+			- Add projectA from contextual menu of Projects with Enable Calendar Integration
+		*Input Data: 
+			
+		*Expected Outcome: 
+			- projectA is created
+			- calendar is automatically created: projectA Tasks*/
+		mgProject.addProject(prj1,"", true);
+		
+		/*Step number: 3
+		*Step Name: Step 3: Check Enable Calendar Integration can not be editable
+		*Step Description: 
+			- Click on field Enable Calendar Integration
+		*Input Data: 
+			
+		*Expected Outcome: 
+			- cannot edit this field*/ 
+		mgProject.checkEditableOfCalIntegrationField();
+		
+		info("delete data");
+		mgProject.deleteProject(prj1, false);
+ 	}
+	}

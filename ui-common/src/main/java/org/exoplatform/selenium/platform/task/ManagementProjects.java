@@ -221,8 +221,8 @@ public class ManagementProjects extends TaskManagementLocatorObject {
 		info("Create project:" + title);
 		if(!des.isEmpty()){
 			info("Input description");
-			waitForAndGetElement(ELEMENT_ADD_PROJECT_DES_INPUT,DEFAULT_TIMEOUT,0);
-			type(ELEMENT_ADD_PROJECT_DES_INPUT,des,true);
+			waitForAndGetElement(ELEMENT_CKEDITOR_IFRAME);
+			inputFrame(ELEMENT_CKEDITOR_IFRAME, des);
 		}
 		if(!title.isEmpty()){
 			info("Input title");
@@ -271,7 +271,8 @@ public class ManagementProjects extends TaskManagementLocatorObject {
 		info("Create project:" + child);
 		if(des!=null && !des.isEmpty()){
 			info("Input description");
-			type(ELEMENT_ADD_PROJECT_DES_INPUT,des,true);
+			waitForAndGetElement(ELEMENT_CKEDITOR_IFRAME);
+			inputFrame(ELEMENT_CKEDITOR_IFRAME, des);
 		}
 		if(child!=null && !child.isEmpty()){
 			info("Input title");
@@ -293,7 +294,21 @@ public class ManagementProjects extends TaskManagementLocatorObject {
 		waitForAndGetElement(ELEMENT_ADD_PROJECT_DES_TEXT.replace("$des", des));
 		waitForAndGetElement(ELEMENT_RIGHT_PANE_PARENT_PATH_TEXT.replace("$project", parent));
 	}
-	
+	/**
+	 * Enable calendar integration
+	 * @param project
+	 * @param isEnable
+	 */
+	public void enableCalendar(String project,boolean isEnable){
+		openProject(project);
+		if(isEnable){
+			info("Enable Calendar intergration");
+			check(ELEMENT_ADD_PROJECT_ENABLE_CALENDAR_CHECKBOX,2);
+		}else{
+			info("Disable Calendar intergration");
+			uncheck(ELEMENT_ADD_PROJECT_ENABLE_CALENDAR_CHECKBOX,2);
+		}
+	}
 	/**
 	 * Save all changes for adding project
 	 */
@@ -350,11 +365,14 @@ public class ManagementProjects extends TaskManagementLocatorObject {
 		}
 		if(des!=null || des!=""){
 			info("Input description");
-			if(opt.length>0 && opt[0]==true)
-				type(ELEMENT_ADD_PROJECT_DES_INPUT,des,false);//Input a new description with keeping old description
-			else 
-				type(ELEMENT_ADD_PROJECT_DES_INPUT,des,true);//Input a new description with clearing all old description
-		}
+			if(opt.length>0 && opt[0]==true){
+				waitForAndGetElement(ELEMENT_CKEDITOR_IFRAME);
+				inputFrame(ELEMENT_CKEDITOR_IFRAME, des);//Input a new description with keeping old description
+			}else{
+				waitForAndGetElement(ELEMENT_CKEDITOR_IFRAME);
+				inputFrame(ELEMENT_CKEDITOR_IFRAME, des);//Input a new description with clearing all old description
+			}
+			}
 		
 		if(opt.length>1 && opt[1]==true){
 			info("Enable Calendar intergration");
@@ -1123,5 +1141,29 @@ public class ManagementProjects extends TaskManagementLocatorObject {
 		openProject(project);
 		Utils.pause(500);
 		waitForAndGetElement(ELEMENT_TEXT_NOTASK_DEFAULT);
+	}
+	/**
+	 * Show left menu
+	 */
+	public void showLeftMenu(){
+		info("show left menu");
+		click(ELEMENT_LEFT_PANE_SHOWHIDE_RIGHT,0,true);
+		waitForAndGetElement(ELEMENT_LEFT_PANE_PROJECTS);
+	}
+	/**
+	 * Hide left menu
+	 */
+	public void hideLeftMenu(){
+		info("hide left menu");
+		click(ELEMENT_LEFT_PANE_SHOWHIDE_LEFT,0,true);
+		waitForElementNotPresent(ELEMENT_LEFT_PANE_PROJECTS);
+	}
+	/**
+	 * Check editable of Calendar Integration field
+	 */
+	public void checkEditableOfCalIntegrationField(){
+		info("Check editable of Calendar Integration field");
+		click(ELEMENT_ADD_PROJECT_ENABLE_CALENDAR_TEXT);
+		waitForAndGetElement(ELEMENT_ADD_PROJECT_ENABLE_CALENDAR_TEXT);
 	}
 }

@@ -53,6 +53,7 @@ public class CalendarLocatorObject extends PlatformBase{
 	public String ELEMENT_SHARED_CALENDAR_LIST_ITEM="//*[@id='UICalendars']//*[text()='Shared Calendars']/..//*[text()='$calendar']";
 	public String ELEMENT_GROUP_CALENDAR_LIST_ITEM="//*[@id='UICalendars']//*[text()='Group Calendars']/..//*[text()='$calendar']";
 	public String ELEMENT_PERSONAL_CALENDAR_LIST_ITEM="//*[@id='UICalendars']//*[text()='Personal Calendars']/..//*[text()='$calendar']";
+	public String ELEMENT_TASK_CALENDAR_LIST_ITEM="//*[@id='UICalendars']//*[text()='Task Calendars']/..//*[text()='$calendar']";
 	public By ELEMENT_PERSONAL_CALENDAR_LIST=By.xpath("//*[@id='UICalendars']//*[text()='Personal Calendars']");
 	public By ELEMENT_GROUP_CALENDAR_LIST=By.xpath("//*[@id='UICalendars']//*[text()='Group Calendars']");
 	public String ELEMENT_CALENDAR_LIST_ITEM="//*[@id='UICalendars']//*[contains(text(),'$calendar')]";
@@ -67,7 +68,15 @@ public class CalendarLocatorObject extends PlatformBase{
 	//Preview popup
 	public By ELEMENT_EVENT_TASK_PREVIEW_POPUP=By.xpath(".//*[@id='UIPreviewPopup']");
 	public By ELEMENT_EVENT_TASK_PREVIEW_POPOP_CLOSE_BTN=By.xpath(".//*[@id='UIPreviewPopup']//button");
-
+	public By ELEMENT_EVENT_TASK_PREVIEW_EDIT = By.xpath("//*[@id='UIPreview']//*[contains(@class,'uiIconEdit')]");
+	public By ELEMENT_EVENT_TASK_PREVIEW_DELETE = By.xpath("//*[@id='UIPreview']//*[contains(@class,'uiIconDelete')]");
+	public String ELEMENT_EVENT_TASK_PREVIEW_STATUS = "//*[@id='RowContainerDay']/tbody/tr/*[contains(.,'Status')]/../*[contains(.,'$status')]";
+	public String ELEMENT_EVENT_TASK_PREVIEW_START_DATE = "//*[@id='RowContainerDay']/tbody/tr/*[contains(.,'Start Date')]/../*[contains(.,'$start')]";
+	public String ELEMENT_EVENT_TASK_PREVIEW_END_DATE = "//*[@id='RowContainerDay']/tbody/tr/*[contains(.,'Due Date')]/../*[contains(.,'$end')]";
+	public String ELEMENT_EVENT_TASK_PREVIEW_PRIORITY = "//*[@id='RowContainerDay']/tbody/tr/*[contains(.,'Priority')]/../*[contains(.,'$priority')]";
+	public String ELEMENT_EVENT_TASK_PREVIEW_NOTE = "//*[@id='RowContainerDay']/tbody/tr/*[contains(.,'Note')]/../*[contains(.,'$note')]";
+	public String ELEMENT_EVENT_TASK_PREVIEW_DELEGATED = "//*[@id='RowContainerDay']/tbody/tr/*[contains(.,'Delegated')]/../*[contains(.,'$delegated')]";
+	
 	//VIEW GENERAL-->Header bar
 	public final By ELEMENT_NEXT_BUTTON_ANY_VIEW=By.xpath("//*[@class='title']//*[contains(@class,'uiIconMiniArrowRight')]");
 	public final By ELEMENT_PREVIOUS_BUTTON_ANY_VIEW=By.xpath("//*[@class='title']//*[contains(@class,'uiIconMiniArrowLeft')]");
@@ -391,7 +400,7 @@ public class CalendarLocatorObject extends PlatformBase{
 	public String ELEMENT_BUTTON_OPEN_ADVANCE_SEARCH_FORM = "//*[@id='UIListView']//button[contains(text(),'Advanced Search')]";
 	public String ELEMENT_INPUT_TEXT_ADVANCE_SEARCH = "//*[@id='UIAdvancedSearchForm']//*[@id='text']";
 	public String ELEMENT_BUTTON_SEARCH_ADVANCE_SEARCH = "//*[@id='UIAdvancedSearchForm']//button[contains(text(),'Search')]";
-
+	public By ELEMENT_QUICK_SEARCH_NO_RESULT = By.xpath(".//*[@id='UIListUsers']/*[contains(.,'No event or task to show')]");
 	//*----------------------------------------------------EVENT MANAGEMANT------------------------------------------------------------------------*\\
 	//Upload form
 	public By ELEMENT_ADD_EVENT_UPLOAD_FILE = By.xpath("//*[@name='file']");

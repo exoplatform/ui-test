@@ -72,9 +72,8 @@ import org.testng.annotations.*;
 	*<li> Pre-Condition: - exo-tasks add-on is installed
 	- projectA is created</li>
 	*<li> Post-Condition: </li>
-	*https://jira.exoplatform.org/browse/TA-205
 	*/
-	@Test (groups="pending")
+	@Test 
 	public  void test02_CheckCaseStatusIsTheLastWhenWorkflowStatusIsDeteted() {
 		info("Test 2: Check case status is the last when workflow status is deteted");
 		String prj1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();

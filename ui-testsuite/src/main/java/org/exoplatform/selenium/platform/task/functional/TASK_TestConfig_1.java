@@ -3,9 +3,17 @@ package org.exoplatform.selenium.platform.task.functional;
 import static org.exoplatform.selenium.TestLogger.info;
 
 import org.exoplatform.selenium.Button;
+import org.exoplatform.selenium.platform.ActivityStream;
 import org.exoplatform.selenium.platform.HomePagePlatform;
 import org.exoplatform.selenium.platform.ManageLogInOut;
+import org.exoplatform.selenium.platform.NavigationToolbar;
 import org.exoplatform.selenium.platform.PlatformBase;
+import org.exoplatform.selenium.platform.QuickSearchResult;
+import org.exoplatform.selenium.platform.administration.ContentSearchAdministration;
+import org.exoplatform.selenium.platform.calendar.CalendarHomePage;
+import org.exoplatform.selenium.platform.calendar.CalendarManagement;
+import org.exoplatform.selenium.platform.calendar.TaskManagement;
+import org.exoplatform.selenium.platform.gatein.PageEditor;
 import org.exoplatform.selenium.platform.objectdatabase.common.TextBoxDatabase;
 import org.exoplatform.selenium.platform.objectdatabase.task.ColorDatabase;
 import org.exoplatform.selenium.platform.objectdatabase.task.GroupByDatabase;
@@ -28,6 +36,7 @@ public class TASK_TestConfig_1 extends PlatformBase {
 	HomePagePlatform hp;
 	ManageLogInOut magAc;
 	Button button;
+	ActivityStream hpAct;
 	
 	SpaceManagement spaMg;
 	SpaceHomePage spaHome;
@@ -45,6 +54,15 @@ public class TASK_TestConfig_1 extends PlatformBase {
 	WorkflowDatabase flowData;
 	PriorityDatabase priorityData;
 	
+	CalendarManagement cMang;
+	CalendarHomePage cHome;
+	TaskManagement tasMg;
+	
+	NavigationToolbar navToolBar;
+	QuickSearchResult quickSearch;
+	ContentSearchAdministration seaAdmin;
+	
+	PageEditor pagEditor;
 	@BeforeMethod
 	public void setUpBeforeMethod() throws Exception{
 		info("Start setUpBeforeMethod");
@@ -58,11 +76,22 @@ public class TASK_TestConfig_1 extends PlatformBase {
 		spaMg = new SpaceManagement(driver);
 		spaHome = new SpaceHomePage(driver);
 		setSpaceMg = new SpaceSettingManagement(driver);
+		hpAct = new ActivityStream(driver);
 		
 		taskMgHome = new TaskManagementHome(driver);
 		mgLabel = new ManagementLabels(driver);
 		mgProject = new ManagementProjects(driver);
 		mgTask = new ManagementTasks(driver);
+		tasMg = new TaskManagement(driver);
+		
+		cMang = new CalendarManagement(driver);
+		cHome = new CalendarHomePage(driver);
+		
+		navToolBar = new NavigationToolbar(driver);
+		quickSearch = new QuickSearchResult(driver);
+		seaAdmin = new ContentSearchAdministration(driver);
+		
+		pagEditor = new PageEditor(driver);
 		
 		txData = new TextBoxDatabase();
 		txData.setContentData(texboxFilePath,defaultSheet,isUseFile,jdbcDriver,dbUrl,user,pass,sqlAttach);

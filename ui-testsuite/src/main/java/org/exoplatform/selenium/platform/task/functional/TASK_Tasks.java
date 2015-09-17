@@ -12,9 +12,8 @@ import org.testng.annotations.*;
 	*<li> Test Case Name: Check List view is default view of all filter.</li>
 	*<li> Pre-Condition: exo-tasks add-on is installed</li>
 	*<li> Post-Condition: </li>
-	*https://jira.exoplatform.org/browse/UI-3912
 	*/
-	@Test (groups="pending")
+	@Test 
 	public  void test01_CheckListViewIsDefaultViewOfAllFilter() {
 		info("Test 1: Check List view is default view of all filter");
 		String prj1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
@@ -62,9 +61,8 @@ import org.testng.annotations.*;
 	*<li> Test Case Name: Check no task screen with each view filter.</li>
 	*<li> Pre-Condition: exo-tasks add-on is installedsome tasks are added but removed afterthat , so no task left in the menu</li>
 	*<li> Post-Condition: </li>
-	*https://jira.exoplatform.org/browse/UI-3913
 	*/
-	@Test (groups="pending")
+	@Test 
 	public  void test02_CheckNoTaskScreenWithEachViewFilter() {
 		info("Test 2: Check no task screen with each view filter");
 		/*Step Number: 1
@@ -143,9 +141,8 @@ import org.testng.annotations.*;
 	*<li> Test Case Name: Check tasks filtered.</li>
 	*<li> Pre-Condition: exo-tasks add-on is installedsome tasks are added with due date: today,tomorrow, in the future, incoming...</li>
 	*<li> Post-Condition: </li>
-	* https://jira.exoplatform.org/browse/TA-202
 	*/
-	@Test (groups="pending")
+	@Test 
 	public  void test03_CheckTasksFiltered() {
 		info("Test 3: Check tasks filtered");
 		String task1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();

@@ -8,16 +8,18 @@ import java.util.Date;
 import java.text.ParseException;
 
 import org.exoplatform.selenium.Utils;
+import org.exoplatform.selenium.platform.calendar.CalendarHomePage.selectViewOption;
+
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 public class TaskManagement extends CalendarLocatorObject {
 
-	//CalendarHomePage cHome;
+	CalendarHomePage cHome;
 	public TaskManagement(WebDriver dr){
 		driver = dr;
-		//cHome = new CalendarHomePage(driver);
+		cHome = new CalendarHomePage(driver);
 	}
 
 
@@ -514,5 +516,61 @@ public class TaskManagement extends CalendarLocatorObject {
 		waitForAndGetElement(ELEMENT_ADD_EVENT_FILE_ATTACHED.replace("${file}", links[links.length - 1]));
 
 	}
-
+	/**
+	 * Check detail of task
+	 * @param task
+	 * @param note
+	 * @param Start date
+	 * @param End date
+	 * @param status
+	 * @param priority
+	 * @param delegated to
+	 */
+	public void checkDetailTask(String task, String note,String startDate,String endDate,String status,String priority,String delegated){
+		cHome.goToView(selectViewOption.LIST);
+		click(ELEMENT_EVENT_TASK_LIST_VIEW.replace("$name", task));
+		if(!status.isEmpty())
+			waitForAndGetElement(ELEMENT_EVENT_TASK_PREVIEW_STATUS.replace("$status", status));
+		if(!note.isEmpty())
+			waitForAndGetElement(ELEMENT_EVENT_TASK_PREVIEW_NOTE.replace("$note", note));
+		if(!priority.isEmpty())
+			waitForAndGetElement(ELEMENT_EVENT_TASK_PREVIEW_PRIORITY.replace("$priority", priority));
+		if(!delegated.isEmpty())
+			waitForAndGetElement(ELEMENT_EVENT_TASK_PREVIEW_DELEGATED.replace("$delegated", delegated));
+		if(!startDate.isEmpty())
+			waitForAndGetElement(ELEMENT_EVENT_TASK_PREVIEW_START_DATE.replace("$start", startDate));
+		if(!endDate.isEmpty())
+			waitForAndGetElement(ELEMENT_EVENT_TASK_PREVIEW_END_DATE.replace("$end", endDate));
+	}
+	/**
+	 * Check permission of task
+	 * @param hasEdit
+	 * @param task
+	 */
+	public void checkPermissionOfTask(String task,boolean hasEdit){
+		cHome.goToView(selectViewOption.LIST);
+		click(ELEMENT_EVENT_TASK_LIST_VIEW.replace("$name", task));
+		if(hasEdit){
+			waitForAndGetElement(ELEMENT_EVENT_TASK_PREVIEW_EDIT);
+			waitForAndGetElement(ELEMENT_EVENT_TASK_PREVIEW_DELETE);
+		}else{
+			waitForElementNotPresent(ELEMENT_EVENT_TASK_PREVIEW_EDIT);
+			waitForElementNotPresent(ELEMENT_EVENT_TASK_PREVIEW_DELETE);
+		}
+	}
+	/**
+	 * Check display of Task
+	 * @param task
+	 * @param isDisplay
+	 */
+	public void checkDisplayOfTask(String task,String date,boolean isDisplay){
+		cHome.goToView(selectViewOption.WEEK);
+		if(isDisplay){
+			info("display task:"+task);
+			waitForAndGetElement(ELEMENT_EVENT_TASK_DETAIL_DATE_WEEK_VIEW_ALL_DAY.replace("$name", task).replace("$date", date));
+		}else{
+			info("NOT display task:"+task);
+			waitForElementNotPresent(ELEMENT_EVENT_TASK_DETAIL_DATE_WEEK_VIEW_ALL_DAY.replace("$name", task).replace("$date", date));
+		}
+	}
 }

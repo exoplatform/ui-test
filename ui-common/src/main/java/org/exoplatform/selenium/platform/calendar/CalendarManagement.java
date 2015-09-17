@@ -1314,8 +1314,25 @@ public class CalendarManagement extends CalendarLocatorObject{
 		}
 		
 	}
-	
-	
+	/**
+	 * Check display of task calendar
+	 * @param calendar
+	 * @param isDisplay
+	 */
+	public void checkDisplayOfTaskCal(String cal,boolean isDisplay){
+		if(isDisplay)
+			waitForAndGetElement(ELEMENT_TASK_CALENDAR_LIST_ITEM.replace("$calendar",cal));
+		else
+			waitForElementNotPresent(ELEMENT_TASK_CALENDAR_LIST_ITEM.replace("$calendar",cal));
+	}
+	/**
+	 * Check display of task calendar color
+	 * @param calendar
+	 * @param color
+	 */
+	public void checkDisplayOfColorTaskCal(String cal,String color){
+		waitForAndGetElement(ELEMENT_CALENDAR_LIST_ITEM_COLOR.replace("$calendar",cal).replace("$color",color));
+	}
 	
 
 }

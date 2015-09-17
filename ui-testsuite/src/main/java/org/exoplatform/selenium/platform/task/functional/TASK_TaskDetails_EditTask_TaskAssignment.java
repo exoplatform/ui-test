@@ -1,6 +1,9 @@
 package org.exoplatform.selenium.platform.task.functional;
 
 import static org.exoplatform.selenium.TestLogger.info;
+
+import org.exoplatform.selenium.platform.task.ManagementTasks.optionTask;
+
 import org.testng.annotations.*;
 
 
@@ -354,5 +357,105 @@ import org.testng.annotations.*;
 		
 		info("delete data");
 		mgTask.deleteTask(task1);
+ 	}
+	/**
+	*<li> Case ID:140738.</li>
+	*<li> Test Case Name: Check case assigned user does not have edit permission.</li>
+	*<li> Pre-Condition: - exo-tasks add-on is installed</li>
+	*<li> Post-Condition: </li>
+	*https://jira.exoplatform.org/browse/TA-223
+	*/
+	@Test (groups="pending")
+	public  void test10_CheckCaseAssignedUserDoesNotHaveEditPermission() {
+		info("Test 10: Check case assigned user does not have edit permission");
+		String prj1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+		String task1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+		/*Step Number: 1
+		*Step Name: Step 1: Open Tasks page
+		*Step Description: 
+			- Click on Tasks on the left navigation.
+		*Input Data: 
+			
+		*Expected Outcome: 
+			- Tasks page is opened*/
+		hp.goToTasks();
+		
+		/*Step number: 2
+		*Step Name: Step 2: Create projectA
+		*Step Description: 
+			- from context menu of Projects, add projectA
+		*Input Data: 
+			
+		*Expected Outcome: 
+			- projectA is created*/
+		mgProject.addProject(prj1,"", false);
+		
+		/*Step number: 3
+		*Step Name: Step 3: Create taskA in projectA
+		*Step Description: 
+			- add taskA to projectA
+		*Input Data: 
+			
+		*Expected Outcome: 
+			- taskA is created*/
+		mgTask.addTask(prj1, task1);
+		
+		/*Step number: 4
+		*Step Name: Step 4: Assign taskA to userA
+		*Step Description: 
+			- assign taskA to userA
+		*Input Data: 
+			
+		*Expected Outcome: 
+			- taskA is assigned*/
+		mgTask.editTaskAssignee(task1, DATA_USER3);
+		
+		/*Step number: 5
+		*Step Name: Step 5: Login as userA
+		*Step Description: 
+			- login as userA
+		*Input Data: 
+			
+		*Expected Outcome: 
+			- userA logins successfully*/
+		magAc.signOut();
+		magAc.signIn(DATA_USER3, DATA_PASS);
+		
+		/*Step number: 6
+		*Step Name: Step 6: Open Tasks page
+		*Step Description: 
+			- Click on Tasks on the left navigation.
+		*Input Data: 
+			
+		*Expected Outcome: 
+			- Tasks page is opened*/
+		hp.goToTasks();
+		
+		/*Step number: 7
+		*Step Name: Step 7: Open All Tasks
+		*Step Description: 
+			- Click on All Tasks on left pane
+		*Input Data: 
+			
+		*Expected Outcome: 
+			- All Tasks is opened*/
+		mgTask.selectOptionTask(optionTask.All_Tasks);
+		
+		/*Step number: 8
+		*Step Name: Step 8: Click on taskA title
+		*Step Description: 
+			- open taskA
+			- click on taskA title
+		*Input Data: 
+			
+		*Expected Outcome: 
+			- cannot click on taskA title*/ 
+		mgTask.checkEditableOfTaskTitle(task1,false);
+		
+		info("delete data");
+		magAc.signOut();
+		magAc.signIn(DATA_USER1, DATA_PASS);
+		hp.goToTasks();
+		mgProject.deleteProject(prj1,false);
  	}
 }

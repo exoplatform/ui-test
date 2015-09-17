@@ -1,8 +1,10 @@
 package org.exoplatform.selenium.platform.task.functional;
 
 import static org.exoplatform.selenium.TestLogger.info;
+
 import org.exoplatform.selenium.platform.task.ManagementTasks.optionGroupBy;
 import org.exoplatform.selenium.platform.task.ManagementTasks.optionSortBy;
+
 import org.testng.annotations.*;
 
 
@@ -269,4 +271,78 @@ import org.testng.annotations.*;
 		
 		info("delete data");
 		mgProject.deleteProject(prj1, false);
- 	}}
+ 	}
+	/**
+	*<li> Case ID:140385.</li>
+	*<li> Test Case Name: Check user can drag and drop of cards across swimlanes.</li>
+	*<li> Pre-Condition: - exo-tasks add-on is installed
+	- projectA is created
+	- taskA,taskB are added to projectA
+	- taskA is assigned to userA
+	- taskB is assigned to userB</li>
+	*<li> Post-Condition: </li>
+	*https://jira.exoplatform.org/browse/TA-253
+	*/
+	@Test (groups="pending")
+	public  void test05_CheckUserCanDragAndDropOfCardsAcrossSwimlanes() {
+		info("Test 5: Check user can drag and drop of cards across swimlanes");
+		String prj1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+		String task1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+		String task2 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+		/*Step Number: 1
+		*Step Name: Step 1: Open Tasks page
+		*Step Description: 
+			- Click on Tasks on the left navigation.
+		*Input Data: 
+			
+		*Expected Outcome: 
+			- Tasks page is opened*/
+		hp.goToTasks();
+		
+		/*Step number: 2
+		*Step Name: Step 2: Open projectA
+		*Step Description: 
+			- Click on projectA on left pane
+		*Input Data: 
+			
+		*Expected Outcome: 
+			- projectA is opened*/
+		mgProject.addProject(prj1, "", false);
+		mgTask.addTask(prj1, task1);
+		mgTask.editTaskAssignee(task1, DATA_USER1);
+		mgTask.addTask(prj1, task2);
+		mgTask.editTaskAssignee(task2, DATA_USER2);
+		/*Step number: 3
+		*Step Name: Step 3: Open Board view
+		*Step Description: 
+			- Click on Board on central pane
+		*Input Data: 
+			
+		*Expected Outcome: 
+			- Board view is opened*/
+		mgProject.openBoard();
+		
+		/*Step number: 4
+		*Step Name: Step 4: Select group by assignee
+		*Step Description: 
+			- Click on Assignee
+		*Input Data: 
+			
+		*Expected Outcome: 
+			- tasks are grouped into userA,userB*/
+		mgTask.selectOptGroupBy(optionGroupBy.Assignee);
+		
+		/*Step number: 5
+		*Step Name: Step 5: Check user can drag and drop of cards across swimlanes
+		*Step Description: 
+			- Drag and drop taskA from userA to userB
+		*Input Data: 
+			
+		*Expected Outcome: 
+			- taskA is now assigned to userB*/ 
+		mgTask.checkDragDropTaskAcrossSwimlanes(task1,1,DATA_USER2);
+		
+		info("delete data");
+		mgProject.deleteProject(prj1, false);
+ 	}
+	}

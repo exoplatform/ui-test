@@ -344,4 +344,36 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			label A1 can be expanded/collapsed*/ 
 
- 	}}
+ 	}
+	/**
+	*<li> Case ID:139861.</li>
+	*<li> Test Case Name: Check left menu can be hidden.</li>
+	*<li> Pre-Condition: - exo-tasks add-on is installed</li>
+	*<li> Post-Condition: </li>
+	*https://jira.exoplatform.org/browse/TA-214
+	*/
+	@Test (groups="pending")
+	public  void test14_CheckLeftMenuCanBeHidden() {
+		info("Test 14: Check left menu can be hidden");
+		/*Step Number: 1
+		*Step Name: Step 1: Open Tasks page
+		*Step Description: 
+			- Click on Tasks on the left navigation.
+		*Input Data: 
+			
+		*Expected Outcome: 
+			- Tasks page is opened*/
+		hp.goToTasks();
+		
+		/*Step number: 2
+		*Step Name: Step 2: Check left menu can be hidden
+		*Step Description: 
+			- Click on the show/hide icon to close left menu
+		*Input Data: 
+			
+		*Expected Outcome: 
+			- Left menu is closed, only display central pane*/ 
+		mgProject.hideLeftMenu();
+		mgProject.showLeftMenu();
+ 	}
+	}

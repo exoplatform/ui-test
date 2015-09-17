@@ -1,7 +1,6 @@
 package org.exoplatform.selenium.platform.task.functional;
 
 import static org.exoplatform.selenium.TestLogger.info;
-
 import org.exoplatform.selenium.platform.task.ManagementTasks.optionSortBy;
 import org.exoplatform.selenium.platform.task.ManagementTasks.optionTask;
 
@@ -306,6 +305,283 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- The arrow menu on the top of task detail pane to display other actions: Clone, Watch, Delete.*/ 
+		info("delete data");
+		mgTask.deleteTask(task1);
+ 	}
+	/**
+	*<li> Case ID:139867.</li>
+	*<li> Test Case Name: Check when a task is created in AllTasks,Today,Tomorrow,Upcoming.</li>
+	*<li> Pre-Condition: - exo-tasks add-on is installed</li>
+	*<li> Post-Condition: </li>
+	*/
+	@Test
+	public  void test10_CheckWhenATaskIsCreatedInAllTasksTodayTomorrowUpcoming() {
+		info("Test 10: Check when a task is created in AllTasks,Today,Tomorrow,Upcoming");
+		String task1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+		String task2 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+		String task3 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+		String task4 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+		/*Step Number: 1
+		*Step Name: Step 1: Open Tasks page
+		*Step Description: 
+			- Click on Tasks on the left navigation.
+		*Input Data: 
+			
+		*Expected Outcome: 
+			- Tasks page is opened*/
+		hp.goToTasks();
+		
+		/*Step number: 2
+		*Step Name: Step 2: Open All Tasks
+		*Step Description: 
+			- Click on All Tasks on left pane
+		*Input Data: 
+			
+		*Expected Outcome: 
+			- All Tasks is opened*/
+		mgTask.selectOptionTask(optionTask.All_Tasks);
+		
+		/*Step number: 3
+		*Step Name: Step 3: Create new task
+		*Step Description: 
+			- Add taskA
+		*Input Data: 
+			
+		*Expected Outcome: 
+			- taskA is created and assigned to current logged user*/
+		mgTask.addTaskDirectly(task1, true);
+		mgTask.checkTaskAssignee(DATA_NAME_USER1);
+		
+		/*Step number: 4
+		*Step Name: Step 4: Open Today
+		*Step Description: 
+			- Click on Today on left pane
+		*Input Data: 
+			
+		*Expected Outcome: 
+			- Today is opened*/
+		mgTask.selectOptionTask(optionTask.Today);
+		
+		/*Step number: 5
+		*Step Name: Step 5: Create new task
+		*Step Description: 
+			- Add taskB
+		*Input Data: 
+			
+		*Expected Outcome: 
+			- taskB is created and assigned to current logged user*/
+		mgTask.addTaskDirectly(task2, true);
+		mgTask.checkTaskAssignee(DATA_NAME_USER1);
+		
+		/*Step number: 6
+		*Step Name: Step 6: Open Tomorrow
+		*Step Description: 
+			- Click on Tomorrow on left pane
+		*Input Data: 
+			
+		*Expected Outcome: 
+			- Tomorrow is opened*/
+		mgTask.selectOptionTask(optionTask.Tommorrow);
+		
+		/*Step number: 7
+		*Step Name: Step 7: Create new task
+		*Step Description: 
+			- Add taskC
+		*Input Data: 
+			
+		*Expected Outcome: 
+			- taskC is created and assigned to current logged user*/
+		mgTask.addTaskDirectly(task3, true);
+		mgTask.checkTaskAssignee(DATA_NAME_USER1);
+		
+		/*Step number: 8
+		*Step Name: Step 8: Open Upcoming
+		*Step Description: 
+			- Click onUpcoming on left pane
+		*Input Data: 
+			
+		*Expected Outcome: 
+			-Upcoming is opened*/
+		mgTask.selectOptionTask(optionTask.Upcoming);
+		
+		/*Step number: 9
+		*Step Name: Step 9: Create new task
+		*Step Description: 
+			- Add taskD
+		*Input Data: 
+			
+		*Expected Outcome: 
+			- taskD is created and assigned to current logged user*/ 
+		mgTask.addTaskDirectly(task4, true);
+		mgTask.checkTaskAssignee(DATA_NAME_USER1);
+		
+		info("delete data");
+		mgTask.selectOptionTask(optionTask.All_Tasks);
+		mgTask.deleteTask(task1);
+		mgTask.deleteTask(task2);
+		mgTask.deleteTask(task3);
+		mgTask.deleteTask(task4);
+
+ 	}
+
+	/**
+	*<li> Case ID:139868.</li>
+	*<li> Test Case Name: Check when a task is created in Today.</li>
+	*<li> Pre-Condition: - exo-tasks add-on is installed</li>
+	*<li> Post-Condition: </li>
+	*/
+	@Test
+	public  void test11_CheckWhenATaskIsCreatedInToday() {
+		info("Test 11: Check when a task is created in Today");
+		String task1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+		/*Step Number: 1
+		*Step Name: Step 1: Open Tasks page
+		*Step Description: 
+			- Click on Tasks on the left navigation.
+		*Input Data: 
+			
+		*Expected Outcome: 
+			- Tasks page is opened*/
+		hp.goToTasks();
+		
+		/*Step number: 2
+		*Step Name: Step 2: Open Today
+		*Step Description: 
+			- Click on Today on left pane
+		*Input Data: 
+			
+		*Expected Outcome: 
+			- Today is opened*/
+		mgTask.selectOptionTask(optionTask.Today);
+		
+		/*Step number: 3
+		*Step Name: Step 3: Create new task
+		*Step Description: 
+			- Add taskB
+		*Input Data: 
+			
+		*Expected Outcome: 
+			- taskB is created and duedate of taskB is today*/
+		mgTask.addTaskDirectly(task1, true);
+		
+		/*Step number: 4
+		*Step Name: Step 4: Open taskB
+		*Step Description: 
+			- Click on taskB
+		*Input Data: 
+			
+		*Expected Outcome: 
+			- duedate of taskB is today date*/ 
+		mgTask.checkDisplayOfDueDate(getDate(0, "dd MMM yyyy"));
+		
+		info("delete data");
+		mgTask.deleteTask(task1);
+ 	}
+
+	/**
+	*<li> Case ID:139869.</li>
+	*<li> Test Case Name: Check when a task is created in Tomorrow.</li>
+	*<li> Pre-Condition: - exo-tasks add-on is installed</li>
+	*<li> Post-Condition: </li>
+	*/
+	@Test
+	public  void test12_CheckWhenATaskIsCreatedInTomorrow() {
+		info("Test 12: Check when a task is created in Tomorrow");
+		String task1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+		/*Step Number: 1
+		*Step Name: Step 1: Open Tasks page
+		*Step Description: 
+			- Click on Tasks on the left navigation.
+		*Input Data: 
+			
+		*Expected Outcome: 
+			- Tasks page is opened*/
+		hp.goToTasks();
+		
+		/*Step number: 2
+		*Step Name: Step 2: Open Tomorrow
+		*Step Description: 
+			- Click on Tomorrow on left pane
+		*Input Data: 
+			
+		*Expected Outcome: 
+			- Tomorrow is opened*/
+		mgTask.selectOptionTask(optionTask.Tommorrow);
+		
+		/*Step number: 3
+		*Step Name: Step 3: Create new task
+		*Step Description: 
+			- Add taskB
+		*Input Data: 
+			
+		*Expected Outcome: 
+			- taskB is created and duedate of taskB is tomorrow*/
+		mgTask.addTaskDirectly(task1, true);
+		
+		/*Step number: 4
+		*Step Name: Step 4: Open taskB
+		*Step Description: 
+			- Click on taskB
+		*Input Data: 
+			
+		*Expected Outcome: 
+			- duedate of taskB is tomorrow date*/ 
+		mgTask.checkDisplayOfDueDate(getDate(1, "dd MMM yyyy"));
+		
+		info("delete data");
+		mgTask.deleteTask(task1);
+ 	}
+
+	/**
+	*<li> Case ID:139870.</li>
+	*<li> Test Case Name: Check when a task is created in Upcoming.</li>
+	*<li> Pre-Condition: - exo-tasks add-on is installed</li>
+	*<li> Post-Condition: </li>
+	*/
+	@Test
+	public  void test13_CheckWhenATaskIsCreatedInUpcoming() {
+		info("Test 13: Check when a task is created in Upcoming");
+		String task1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+		/*Step Number: 1
+		*Step Name: Step 1: Open Tasks page
+		*Step Description: 
+			- Click on Tasks on the left navigation.
+		*Input Data: 
+			
+		*Expected Outcome: 
+			- Tasks page is opened*/
+		hp.goToTasks();
+		
+		/*Step number: 2
+		*Step Name: Step 2: Open Upcoming
+		*Step Description: 
+			- Click on Upcoming on left pane
+		*Input Data: 
+			
+		*Expected Outcome: 
+			- Upcoming is opened*/
+		mgTask.selectOptionTask(optionTask.Upcoming);
+		
+		/*Step number: 3
+		*Step Name: Step 3: Create new task
+		*Step Description: 
+			- Add taskB
+		*Input Data: 
+			
+		*Expected Outcome: 
+			- taskB is created and duedate of taskB is nextweek date*/
+		mgTask.addTaskDirectly(task1, true);
+		
+		/*Step number: 4
+		*Step Name: Step 4: Open taskB
+		*Step Description: 
+			- Click on taskB
+		*Input Data: 
+			
+		*Expected Outcome: 
+			- duedate of taskB is nextweek date*/ 
+		mgTask.checkDisplayOfDueDate(getDate(7, "dd MMM yyyy"));
+		
 		info("delete data");
 		mgTask.deleteTask(task1);
  	}

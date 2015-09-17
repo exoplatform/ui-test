@@ -78,4 +78,128 @@ import org.testng.annotations.*;
 		mgProject.deleteProject(prj1, false);
 		mgProject.deleteProject(prj2, false);
  	}
+	/**
+	*<li> Case ID:139865.</li>
+	*<li> Test Case Name: Check drop down lists that user have permission.</li>
+	*<li> Pre-Condition: - exo-tasks add-on is installed
+	- taskA is created in Incoming
+	- user is shared projectA</li>
+	*<li> Post-Condition: </li>
+	*/
+	@Test
+	public  void test03_CheckDropDownListsThatUserHavePermission() {
+		info("Test 3: Check drop down lists that user have permission");
+		String task1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+		String prj1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+		String[] users={DATA_USER2};
+		hp.goToTasks();
+		mgProject.addProject(prj1,"", false);
+		mgProject.shareProject(prj1, users, true);
+		/*Step Number: 1
+		*Step Name: Step 1: Open Tasks page
+		*Step Description: 
+			- Click on Tasks on the left navigation.
+		*Input Data: 
+			
+		*Expected Outcome: 
+			- Tasks page is opened*/
+		magAc.signOut();
+		magAc.signIn(DATA_USER2, DATA_PASS);
+		hp.goToTasks();
+		
+		/*Step number: 2
+		*Step Name: Step 2: Open taskA
+		*Step Description: 
+			- Click on taskA
+		*Input Data: 
+			
+		*Expected Outcome: 
+			- taskA is opened*/
+		mgTask.addTaskDirectly(task1, true);
+		
+		/*Step number: 3
+		*Step Name: Step 3: Check drop down lists that user have permission
+		*Step Description: 
+			- Click on No Project in task detail
+		*Input Data: 
+			
+		*Expected Outcome: 
+			- from drop down list, projectA is displayed*/ 
+		mgTask.checkDisplayOfProjectList(true, prj1);
+		
+		info("delete data");
+		mgTask.deleteTask(task1);
+		mgProject.deleteProject(prj1, false);
+ 	}
+
+	/**
+	*<li> Case ID:139866.</li>
+	*<li> Test Case Name: Check drop down when user does not have permission on parent project.</li>
+	*<li> Pre-Condition: - exo-tasks add-on is installed
+	- taskA is created in Incoming
+	- user is shared projectA1 butnot projectA which is parent of projectA1</li>
+	*<li> Post-Condition: </li>
+	*BUG: https://jira.exoplatform.org/browse/TA-249
+	*/
+	@Test (groups="pending")
+	public  void test04_CheckDropDownWhenUserDoesNotHavePermissionOnParentProject() {
+		info("Test 4: Check drop down when user does not have permission on parent project");
+		String task1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+		String prj1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+		String prj11 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+		String[] users={DATA_USER2};
+		String[] prjs={prj1,prj11};
+		hp.goToTasks();
+		mgProject.addProject(prj1,"", false);
+		mgProject.addSubProject(prj1, prj11, "", false);
+		mgProject.shareProject(prj11, users, true);
+		/*Step Number: 1
+		*Step Name: Step 1: Open Tasks page
+		*Step Description: 
+			- Click on Tasks on the left navigation.
+		*Input Data: 
+			
+		*Expected Outcome: 
+			- Tasks page is opened*/
+		magAc.signOut();
+		magAc.signIn(DATA_USER2, DATA_PASS);
+		hp.goToTasks();
+		
+		/*Step number: 2
+		*Step Name: Step 2: Open taskA
+		*Step Description: 
+			- Click on taskA
+		*Input Data: 
+			
+		*Expected Outcome: 
+			- taskA is opened*/
+		mgTask.addTaskDirectly(task1, true);
+		
+		/*Step number: 3
+		*Step Name: Step 3: Edit project path
+		*Step Description: 
+			- Click on No Project in task detail
+		*Input Data: 
+			
+		*Expected Outcome: 
+			- from drop down list, projectA and projectA1 are displayed*/
+		mgTask.checkDisplayOfProjectList(true, prjs);
+		
+		/*Step number: 4
+		*Step Name: Step 4: Check drop down when user does not have permission on parent project
+		*Step Description: 
+			- Select projectA
+		*Input Data: 
+			
+		*Expected Outcome: 
+			- user cannot select projectA*/
+		mgTask.checkEditPermOfProjectList(prj1, false);
+		
+		info("delete data");
+		mgTask.deleteTask(task1);
+		magAc.signOut();
+		magAc.signIn(DATA_USER2, DATA_PASS);
+		hp.goToTasks();
+		mgProject.deleteProject(prj1, true,prj11);
+ 	}
 }

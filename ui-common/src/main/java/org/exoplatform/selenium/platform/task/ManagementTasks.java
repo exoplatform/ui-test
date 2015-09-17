@@ -628,6 +628,23 @@ public class ManagementTasks extends TaskManagementLocatorObject {
 		}
 	}
 	/**
+	 * Check editable of task title
+	 * @param task
+	 * @param isEditable
+	 */
+	public void checkEditableOfTaskTitle(String task,boolean isEditable){
+		openTask(task);
+		if(isEditable){
+			info("user can edit title");
+			click(ELEMENT_RIGHT_PANE_TASK_TITLE_TEXT.replace("$task", task));
+			waitForAndGetElement(ELEMENT_EDIT_PROJECT_TITLE_INPUT);
+		}else{
+			info("user cannot edit title");
+			click(ELEMENT_RIGHT_PANE_TASK_TITLE_TEXT.replace("$task", task));
+			waitForElementNotPresent(ELEMENT_EDIT_PROJECT_TITLE_INPUT);
+		}
+	}
+	/**
 	 * Edit task description
 	 * @param task
 	 * @param des
@@ -720,6 +737,40 @@ public class ManagementTasks extends TaskManagementLocatorObject {
 		waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_PROJECT_TEXT.replace("$project", project));
 	}
 	/**
+	 * Check project list
+	 * @param project
+	 * @param isDisplay
+	 */
+	public void checkDisplayOfProjectList(boolean isDisplay,String...projects){
+		click(ELEMENT_RIGHT_PANE_TASK_PROJECT_LINK);
+		info("check project in dropdown list");
+		if(isDisplay){
+			for (String project : projects) {
+				waitForAndGetElement(ELEMENT_RIGHT_PANE_PARENT_PATH_DROPDOWN_MENU.replace("$project",project));
+			}
+			
+		}else{
+			for (String project : projects) {
+				waitForElementNotPresent(ELEMENT_RIGHT_PANE_PARENT_PATH_DROPDOWN_MENU.replace("$project",project));
+			}
+		}
+	}
+	/**
+	 * Check edit permission on project list
+	 * @param project
+	 * @param hasEdit
+	 */
+	public void checkEditPermOfProjectList(String project,boolean hasEdit){
+		click(waitForAndGetElement(ELEMENT_RIGHT_PANE_PARENT_PATH_DROPDOWN_MENU.replace("$project",project)));
+		if(hasEdit){
+			info("select:"+project);
+			waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_PROJECT_TEXT.replace("$project", project));
+		}else{
+			info("cannot select:"+project);
+			waitForElementNotPresent(ELEMENT_RIGHT_PANE_TASK_PROJECT_TEXT.replace("$project", project));
+		}
+	}
+	/**
 	 * Search project in Projects - for task already has project
 	 * @param task
 	 * @param project: search key
@@ -735,9 +786,6 @@ public class ManagementTasks extends TaskManagementLocatorObject {
 		Utils.pause(500);
 		waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_PROJECT_TEXT.replace("$project", newProject));
 	}
-	/**
-	 * Edit task Project
-	 */
 	/**
 	 * Edit assignee
 	 * @param task
@@ -827,7 +875,7 @@ public class ManagementTasks extends TaskManagementLocatorObject {
 	 */
 	public void checkTaskAssignee(String assignee,String...coworkers){
 		info("check assignee");
-		click(ELEMENT_RIGHT_PANE_TASK_ASSIGN_LINK);
+		click(ELEMENT_RIGHT_PANE_TASK_ASSIGN_LINK_USER);
 		Utils.pause(500);
 		if(!assignee.isEmpty()){
 			waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_ASSIGN_TEXT.replace("$user",assignee));
@@ -947,24 +995,13 @@ public class ManagementTasks extends TaskManagementLocatorObject {
 		info("edit tag");
 		if(tags.length>0){
 			for (String tag : tags) {
-				type(ELEMENT_RIGHT_PANE_TASK_TAG_INPUT,tag,false);
-				waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_TAG_SELECT_NEW.replace("$tag", tag));
-				Robot robot;
-				try {
-					robot = new Robot();
-					robot.delay(1000);
-					robot.keyPress(KeyEvent.VK_ENTER);
-					robot.keyRelease(KeyEvent.VK_ENTER);
-					Utils.pause(2000);
-				} catch (AWTException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_TAG_INPUT).sendKeys(tag);
+		        driver.findElement(ELEMENT_RIGHT_PANE_TASK_TAG_INPUT).sendKeys(Keys.ENTER);
 				waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_TAG_TEXT.replace("$tag",tag));
 				waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_TAG_REMOVE_ICON.replace("$tag",tag));
 			}
+			mouseOverAndClick(ELEMENT_RIGHT_PANE_TASK_TITLE_TEXT.replace("$task", task));
 		}
-		openTask(task);
 	}
 	/**
 	 * Add existed tag
@@ -1012,6 +1049,16 @@ public class ManagementTasks extends TaskManagementLocatorObject {
 		}else{
 			waitForElementNotPresent(ELEMENT_RIGHT_PANE_TASK_TAG_DEFAULT_ICON);
 			waitForElementNotPresent(ELEMENT_RIGHT_PANE_TASK_TAG_DEFAULT_LABEL);
+		}
+	}
+	/**
+	 * Check display of tag in task detail
+	 * @param tags
+	 * 			list of tags
+	 */
+	public void checkDisplayOfTag(String...tags){
+		for (String tag : tags) {
+			waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_TAG_TEXT1.replace("$tag",tag));
 		}
 	}
 	/**
@@ -1172,9 +1219,10 @@ public class ManagementTasks extends TaskManagementLocatorObject {
 		click(ELEMENT_RIGHT_PANE_TASK_PRIORITY_LINK);
 		info("check priority combobox");
 		Utils.pause(500);
+		if(priorities.length>0){
 		for (String priority : priorities) {
 			waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_PRIORITY_SELECT.replace("$opt",priority));
-		}
+		}}
 	}
 	/**
 	 * Check menu of task detail
@@ -1314,6 +1362,14 @@ public class ManagementTasks extends TaskManagementLocatorObject {
 		info("check selected day");
 		Utils.pause(500);
 		waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_DUEDATE_DAY_SELECTED.replace("$day", day));
+	}
+	/**
+	 * Check display of Due Date in task detail
+	 * @param date
+	 */
+	public void checkDisplayOfDueDate(String date){
+		info("check display of due date in task:");
+		waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_DUEDATE_TEXT.replace("$date", date));
 	}
 	/**
 	 * check display of List View 
@@ -1499,12 +1555,71 @@ public class ManagementTasks extends TaskManagementLocatorObject {
 		}
 	}
 	/**
+	 * Check drag drop task across swimlanes 
+	 * @param task
+	 * @param to
+	 * 				to assignee
+	 * @param col
+	 * 				number of column
+	 */
+	public void checkDragDropTaskAcrossSwimlanes(String task,int col,String to){
+		info("drag task");
+		mouseOverAndClick(ELEMENT_BOARD_TASK_BOX.replace("$task", task));
+		dragAndDropToObject(ELEMENT_BOARD_TASK_DRAG_ICON.replace("$task", task).replace("$num", String.valueOf(col)), ELEMENT_BOARD_COL_ASSIGNEE.replace("$num", String.valueOf(col)).replace("$user", String.valueOf(to)));
+		Utils.pause(2000);
+		waitForAndGetElement(ELEMENT_BOARD_COL_ASSIGNEE_TASK.replace("$task", task).replace("$num", String.valueOf(col)).replace("$user",to),DEFAULT_TIMEOUT,0);
+	}
+	/**
 	 * Check task location
 	 * @param task
 	 * @param col
 	 */
 	public void checkTaskLocation(String task,int col){
+		info("check task location");
 		Utils.pause(500);
 		waitForAndGetElement(ELEMENT_BOARD_TASK_TITLE.replace("$num", String.valueOf(col)).replace("$task", task));
+	}
+	/**
+	 * show in calendar
+	 * @param task
+	 * @param isShow
+	 * view week, all day task
+	 */
+	public void showInCalendar(String task,boolean isShow){
+		openTask(task);
+		if(isShow){
+			info("show task in calendar");
+			click(ELEMENT_RIGHT_PANE_TASK_WORKPLAN_SHOW_CAL,0,true);
+		}else{
+			info("remove task from calendar");
+			click(ELEMENT_RIGHT_PANE_TASK_WORKPLAN_REMOVE_CAL,0,true);
+		}
+	}
+	/**
+	 * Check editable of Calendar icon
+	 * @param task
+	 * @param isEditable
+	 */
+	public void checkEditableOfCalIcon(String task,boolean isEditable){
+		openTask(task);
+		if(isEditable){
+			info("can click on calendar icon");
+			mouseHoverByJavaScript(ELEMENT_RIGHT_PANE_TASK_WORKPLAN_CAL_ICON);
+			waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_WORKPLAN_REMOVE_CAL);
+		}else{
+			info("cannot click on calendar icon");
+			mouseHoverByJavaScript(ELEMENT_RIGHT_PANE_TASK_WORKPLAN_CAL_ICON);
+			waitForElementNotPresent(ELEMENT_RIGHT_PANE_TASK_WORKPLAN_REMOVE_CAL);
+		}
+	}
+	/**
+	 * Check display of task in project
+	 * @param task
+	 * @param project
+	 */
+	public void checkDisplayOfTaskInProject(String project,String task){
+		info("task:"+task+"is opened in:"+project);
+		waitForAndGetElement(ELEMENT_LEFT_PANE_PROJECT_ACTIVE.replace("$project", project));
+		waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_TITLE_TEXT.replace("$task", task));
 	}
 }

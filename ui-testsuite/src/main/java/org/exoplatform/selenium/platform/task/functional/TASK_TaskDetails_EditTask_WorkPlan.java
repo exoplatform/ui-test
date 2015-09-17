@@ -1,7 +1,6 @@
 package org.exoplatform.selenium.platform.task.functional;
 
 import static org.exoplatform.selenium.TestLogger.info;
-
 import org.testng.annotations.*;
 
 
@@ -374,14 +373,15 @@ import org.testng.annotations.*;
 	/**
 	*<li> Case ID:130962.</li>
 	*<li> Test Case Name: Check when the work plan date time is updated.</li>
-	*<li> Pre-Condition: exo-tasks add-on is installedtask A is created with work plan</li>
+	*<li> Pre-Condition: exo-tasks add-on is installed -projectA has calendar integration-task A is created with work plan in projectA</li>
 	*<li> Post-Condition: </li>
-	* NOT IMPLEMENT YET
+	*https://jira.exoplatform.org/browse/TA-251
 	*/
 	@Test (groups="pending")
 	public  void test08_CheckWhenTheWorkPlanDateTimeIsUpdated() {
 		info("Test 8: Check when the work plan date time is updated");
 		String task1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+		String prj1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		/*Step Number: 1
 		*Step Name: Step 1: Open Tasks page
 		*Step Description: 
@@ -391,30 +391,33 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			Tasks page is opened*/
 		hp.goToTasks();
+		mgProject.addProject(prj1,"", true);
+		mgTask.addTask(prj1, task1);
+		mgTask.editTaskWorkPlan(task1, getDate(0,"dd"), 0, getDate(0,"dd"), 0, "00:00", "02:00",false);
 		
 		/*Step number: 2
-		*Step Name: Step 2: Open task A
+		*Step Name: Step 2: Uncheck Calendar Integration of projectA
 		*Step Description: 
-			- Click on task A to open task details
+			- Open projectA
+			- uncheck Calendar Integration
 		*Input Data: 
 			
 		*Expected Outcome: 
-			Task details is opened*/
-		mgTask.addTaskDirectly(task1,true);
-		mgTask.editTaskWorkPlan(task1, getDate(0,"dd"), 0, getDate(1,"dd"), 0, "", "", true);
+			- projectA has not calendar*/
+		mgProject.enableCalendar(prj1,false);
 		
 		/*Step number: 3
-		*Step Name: Step 3: Check when the work plan date time is updated
+		*Step Name: Step 3: Check taskA
 		*Step Description: 
-			- Click on work plan on task details to update
+			- Open taskA
 		*Input Data: 
 			
 		*Expected Outcome: 
-			It is updated automatically in Calendar app*/ 
-		mgTask.editTaskWorkPlan(task1, getDate(2,"dd"), 0, getDate(4,"dd"), 0, "00:00", "02:30", false);
+			- in task detail, icon calendar before workplan cannot be clicked*/ 
+		mgTask.checkEditableOfCalIcon(task1,false);
 		
 		info("delete data");
-		mgTask.deleteTask(task1);
+		mgProject.deleteProject(prj1, false);
  	}
 
 	/**

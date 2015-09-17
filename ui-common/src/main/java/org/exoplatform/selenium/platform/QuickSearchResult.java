@@ -4,6 +4,7 @@ import org.exoplatform.selenium.Utils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
+import static org.exoplatform.selenium.TestLogger.info;
 
 public class QuickSearchResult extends PlatformBase{
 	
@@ -13,6 +14,10 @@ public class QuickSearchResult extends PlatformBase{
 	public final String ELEMENT_QUICKSEARCHRESULT_ICONDOC = "//*[@class='uiIcon64x64TemplateFolderDefault uiIcon64x64Templateacme_product']/../..//*[text()='${title}']";
 	public final By ELEMENT_QUICKSEARCHRESULT_SEE_ALL_SEARCH=By.xpath(".//*[@class='message']/*[contains(text(),'See All Search Results')]");
 	
+	public final String ELEMENT_QUICKSEARCH_TASKS_TITLE = ".//th[contains(.,'Tasks in Tasks')]/..//*[contains(@class,'tasksInTasks')]//strong[contains(.,'$task')]";
+	public final String ELEMENT_QUICKSEARCH_TASKS_LINK = "//*[contains(@class,'tasksInTasks')]//strong[contains(.,'$task')]/..";
+	public final By ELEMENT_QUICKSEARCH_TASKS_ICON = By.xpath("//*[contains(@class,'tasksInTasks')]//*[contains(@class,'uiIconTick')]");
+	public final By ELEMENT_QUICKSEARCH_TASKS_COMPLETED_ICON = By.xpath("//*[contains(@class,'tasksInTasks')]//*[contains(@class,'uiIconBlue')]");
 	
 	//filter box
 	public final By ELEMENT_SEARCHRESULT_ALLTYPECHECK = By.xpath("//*[@value='all' and @name='contentType' and @checked='checked']");
@@ -93,8 +98,17 @@ public class QuickSearchResult extends PlatformBase{
 	public final String ELEMENT_SEARCHRESULT_CONTENT_ANSWER_NUMBER_COMMENTS = ".//h6//*[contains(text(),'${name}')]/../../..//*[contains(text(),'${comment}')]";
 	public final String ELEMENT_SEARCHRESULT_CONTENT_ANSWER_RATING = ".//h6//*[contains(text(),'${name}')]/../../..//*[@class='avgRatingImages clearfix']";
 	
+	//Searched result page --> Tasks
+	public final String ELEMENT_SEARCHRESULT_CONTENT_TASKS_TITLE = ".//h6[contains(.,'$task')]";
+	public final String ELEMENT_SEARCHRESULT_CONTENT_TASKS_DES = ".//h6[contains(.,'$task')]/../..//*[@class='excerpt'][contains(.,'$des')]";
+	public final String ELEMENT_SEARCHRESULT_CONTENT_TASKS_DUEDATE = "//h6//*[contains(text(),'$task')]/../../../*[contains(@class,'detail')]/*[contains(.,'$duedate')]";
+	public final String ELEMENT_SEARCHRESULT_CONTENT_TASKS_PRIORITY = "//h6//*[contains(text(),'$task')]/../../../*[contains(@class,'detail')]/*[contains(@class,'uiIconColorPriority$priority')]";
+	public final String ELEMENT_SEARCHRESULT_CONTENT_TASKS_ICON = ".//h6//*[contains(text(),'$task')]/../../../..//*[contains(@class,'TickGray')]";
+	public final String ELEMENT_SEARCHRESULT_CONTENT_TASKS_COMPLETED_ICON = "//h6//*[contains(text(),'$task')]/../../../..//*[contains(@class,'TickBlue')]";
+	
 	public QuickSearchResult(WebDriver dr){
 		driver = dr;
+		
 	} 
 	
 	/**
@@ -103,11 +117,59 @@ public class QuickSearchResult extends PlatformBase{
 	 */
 	public void search(String textSearch) {
 		if (!textSearch.isEmpty()) {
+			waitForAndGetElement(ELEMENT_TOOLBAR_QUICKSEARCH_TEXTBOX).clear();
 	        waitForAndGetElement(ELEMENT_TOOLBAR_QUICKSEARCH_TEXTBOX).sendKeys(textSearch);
 	        Utils.pause(5000);
 	        driver.findElement(ELEMENT_TOOLBAR_QUICKSEARCH_TEXTBOX).sendKeys(Keys.ENTER);
 		}else assert false:"Not input a text to search";
 	}
-
+	/**
+	 * Check autosuggestion of task in quick search
+	 * @param task
+	 * @param isComplete
+	 * @param isDisplay
+	 */
+	public void checkDislayAutoSuggestionOfTask(String task,boolean isComplete,boolean isDisplay){
+		type(ELEMENT_TOOLBAR_QUICKSEARCH_TEXTBOX,task,true);
+		if(isDisplay){
+			info("can view search result");
+			waitForAndGetElement(ELEMENT_QUICKSEARCH_TASKS_TITLE.replace("$task", task));
+			if(isComplete)
+				waitForAndGetElement(ELEMENT_QUICKSEARCH_TASKS_COMPLETED_ICON);
+			else
+				waitForAndGetElement(ELEMENT_QUICKSEARCH_TASKS_ICON);
+		}else{
+			info("can not view search result");
+			waitForElementNotPresent(ELEMENT_QUICKSEARCH_TASKS_TITLE.replace("$task", task));
+		}
+	}
+	/**
+	 * Check display of task result
+	 * @param task
+	 * @param priority
+	 * @param project
+	 * @param tag
+	 * @param duedate
+	 * @param description
+	 * @param isComplete
+	 */
+	public void checkDisplayOfTaskResult (String task,String project,String priority,String tag,String description,String duedate,boolean isComplete){
+		type(ELEMENT_TOOLBAR_QUICKSEARCH_TEXTBOX,task,true);
+		click(ELEMENT_QUICKSEARCHRESULT_SEE_ALL_SEARCH);
+		if(!project.isEmpty())
+			waitForAndGetElement(ELEMENT_SEARCHRESULT_CONTENT_TASKS_DUEDATE.replace("$duedate", project).replace("$task", task));
+		if(!priority.isEmpty())
+			waitForAndGetElement(ELEMENT_SEARCHRESULT_CONTENT_TASKS_PRIORITY.replace("$priority", priority).replace("$task", task));
+		if(!tag.isEmpty())
+			waitForAndGetElement(ELEMENT_SEARCHRESULT_CONTENT_TASKS_DUEDATE.replace("$duedate", tag).replace("$task", task));
+		if(!description.isEmpty())
+			waitForAndGetElement(ELEMENT_SEARCHRESULT_CONTENT_TASKS_DES.replace("$des", description).replace("$task", task));
+		if(!duedate.isEmpty())
+			waitForAndGetElement(ELEMENT_SEARCHRESULT_CONTENT_TASKS_DUEDATE.replace("$duedate", duedate).replace("$task", task));
+		if(isComplete)
+			waitForAndGetElement(ELEMENT_SEARCHRESULT_CONTENT_TASKS_COMPLETED_ICON.replace("$task",task));
+		else
+			waitForAndGetElement(ELEMENT_SEARCHRESULT_CONTENT_TASKS_ICON.replace("$task", task));
+	}
 }
 

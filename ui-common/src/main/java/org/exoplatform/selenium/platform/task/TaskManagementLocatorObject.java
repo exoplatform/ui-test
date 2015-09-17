@@ -21,6 +21,8 @@ public class TaskManagementLocatorObject extends PlatformBase {
 	public final By ELEMENT_LEFT_PANE_TOOLTIP_PROJECT = By.xpath("//*[@class='popover-content'][contains(.,\"No Project. Click here to create your first project.\")]");
 	public final By ELEMENT_TASK_APP_ICON = By.xpath("//*[contains(@class,'TaskManagementApplication')]");
 	public final String ELEMENT_PROFILE_PORTLET = ".//*[@id='UIStatusProfilePortlet']/*[contains(.,'$user')]";
+	public final By ELEMENT_LEFT_PANE_SHOWHIDE_LEFT = By.xpath(".//*[@id='ShowHideLeft']/*[contains(@class,'ArrowLeft')]");
+	public final By ELEMENT_LEFT_PANE_SHOWHIDE_RIGHT = By.xpath(".//*[@id='ShowHideLeft']/*[contains(@class,'ArrowRight')]");
 	//Project area-->General
 	public final String ELEMENT_LEFT_PANE_PROJECT_NAME="//*[contains(@class,'project-name')][contains(.,'$project')]";
 	public final By ELEMENT_LEFT_PANE_PROJECTS=By.xpath("//*[contains(@class,'project-name')][contains(.,'Projects')]");
@@ -91,6 +93,7 @@ public class TaskManagementLocatorObject extends PlatformBase {
 	
 	//Task area-->Incoming
 	public final By ELEMENT_LEFT_PANE_INCOMING_ACTIVE=By.xpath("//*[contains(@class,'active')]//*[contains(@class,'project-name')][contains(.,'Incoming')]");
+	public final String ELEMENT_LEFT_PANE_PROJECT_ACTIVE="//*[contains(@class,'active')]//*[contains(@class,'project-name')][contains(.,'$project')]";
 	
 	//Task area-->All tasks
 	
@@ -244,7 +247,8 @@ public class TaskManagementLocatorObject extends PlatformBase {
 	public final String ELEMENT_BOARD_TASK_BOX = "//*[contains(@class,'taskName')][contains(.,'$task')]/../..";
 	public final String ELEMENT_BOARD_COL_ITEM="//*[contains(@class,'col$num1')]//*[contains(@class,'taskItem')][$num2]";
 	public final String ELEMENT_BOARD_COL_ITEM_TASK ="//*[contains(@class,'col$num1')]//*[contains(@class,'taskItem')][$num2]//*[contains(@class,'taskName')][contains(.,'$task')]";
-	
+	public final String ELEMENT_BOARD_COL_ASSIGNEE = "//*[contains(@class,'col$num')][contains(@data-connected,'$user')]";
+	public final String ELEMENT_BOARD_COL_ASSIGNEE_TASK = "//*[contains(@class,'col$num')][contains(@data-connected,'$user')]//*[contains(@class,'taskName')][contains(.,'$task')]";
 	/***********************************************************RIGHT PANE******************************************************/
 	// Project Overview
 	public final By ELEMENT_RIGHT_PANE_ARROW_MENU= By.xpath("//*[contains(@class,'addProject')]//*[contains(@class,'ArrowDown')]");
@@ -269,7 +273,8 @@ public class TaskManagementLocatorObject extends PlatformBase {
     public final String ELEMENT_ADD_PROJECT_DES_CKEDITOR="//*[contains(@class,'addProject')]//*[contains(@data-name,'description')]//strong[contains(.,'$des')]";
     public final By ELEMENT_ADD_PROJECT_ENABLE_CALENDAR_CHECKBOX=By.xpath(".//*[contains(@class,'addProject')]//*[contains(@class,'checkbox')]");
     public final By ELEMENT_ADD_PROJECT_ENABLE_CALENDAR=By.xpath(".//*[@class='checkbox']/../*[contains(.,'Enable Calendar Integration')]");
- 
+    public final By ELEMENT_ADD_PROJECT_ENABLE_CALENDAR_TEXT=By.xpath("//*[contains(@class,'uiGroupBoundCheckBox')]/*[contains(.,'Enable Calendar integration')]");
+    
 	//Edit project form
     public final String ELEMENT_RIGHT_PANE_PARENT_PATH_MATCH_VALUE="//*[contains(@class,'dropdown-menu')]//strong[contains(.,'$text')]";
     public final String ELEMENT_RIGHT_PANE_PARENT_PATH_DROPDOWN_MENU="//*[contains(@class,'dropdown-menu')]//a[contains(.,'$project')][@data-matched='true']";
@@ -298,7 +303,8 @@ public class TaskManagementLocatorObject extends PlatformBase {
 	public final By ELEMENT_RIGHT_PANE_TASK_DESCRIPTION_EMPTY = By.xpath("//*[contains(@class,'taskDescription')]/*[@data-name='description']/*[contains(.,'Empty')]");
 	public final By ELEMENT_RIGHT_PANE_TASK_DESCRIPTION_INPUT = By.xpath("//*[contains(@class,'addTask')]//*[@data-name='description']");
 	//assign
-	public final By ELEMENT_RIGHT_PANE_TASK_ASSIGN_LINK = By.xpath("//*[contains(@class,'unassigned')]//*[@data-original-title='Click to edit']");
+	public final By ELEMENT_RIGHT_PANE_TASK_ASSIGN_LINK = By.xpath("//*[contains(@class,'assigned')]//*[@data-original-title='Click to edit']");
+	public final By ELEMENT_RIGHT_PANE_TASK_ASSIGN_LINK_USER=By.xpath("//*[contains(@class,'assigned')]/*[contains(@class,'avatar')]/../*[@data-original-title='Click to edit']");
 	public final By ELEMENT_RIGHT_PANE_TASK_ASSIGN_INPUT = By.xpath("//*[@class='contBlock']//*[contains(@class,'TextArea')]/*[@type='text']");
 	public final By ELEMENT_RIGHT_PANE_TASK_ASSIGN_INPUT_DISABLED = By.xpath("//*[@class='contBlock']//*[contains(@class,'TextArea')]/*[@type='text'][@disabled='']");
 	public final String ELEMENT_RIGHT_PANE_TASK_ASSIGN_AUTOCOMPLETE = "//*[contains(@class,'dropdown')]/*[@data-value='$user']";
@@ -335,6 +341,10 @@ public class TaskManagementLocatorObject extends PlatformBase {
 	public final String ELEMENT_RIGHT_PANE_TASK_WORKPLAN_FROMTIME_SELECTED = "//*[@class='date-work-plan']//*[@name='fromTime'][@value='$time']";
 	public final String ELEMENT_RIGHT_PANE_TASK_WORKPLAN_TO_SELECTED = "//*[@id='BlockCalendar2']//*[@class='weekDays']//a[.='$day'][@class='selected']";
 	public final String ELEMENT_RIGHT_PANE_TASK_WORKPLAN_FROM_SELECTED = "//*[@id='BlockCalendar1']//*[@class='weekDays']//a[.='$day'][@class='selected']";
+	public final By ELEMENT_RIGHT_PANE_TASK_WORKPLAN_SHOW_CAL = By.xpath("//*[@class='date-work-plan']/*[contains(@data-original-title,'Click to show in Calendar')]");
+	public final By ELEMENT_RIGHT_PANE_TASK_WORKPLAN_REMOVE_CAL = By.xpath("//*[@class='date-work-plan']/*[contains(@data-original-title,'Click to remove from Calendar')]");
+	public final By ELEMENT_RIGHT_PANE_TASK_WORKPLAN_CAL_ICON=By.xpath("//*[@class='date-work-plan']/i");
+	
 	//status
 	public final String ELEMENT_RIGHT_PANE_TASK_STATUS_TEXT = "//*[@class='toDo']/*[contains(@class,'uiEditableInline')]/*[contains(.,'$flow')]";
 	public final By ELEMENT_RIGHT_PANE_TASK_STATUS_LINK = By.xpath("//*[@class='toDo']/*[contains(@class,'uiEditableInline')]/*[@data-name='status'][@data-original-title='Click to edit']");
@@ -365,6 +375,7 @@ public class TaskManagementLocatorObject extends PlatformBase {
 	public final By ELEMENT_RIGHT_PANE_TASK_TAG_LINK=By.xpath("//*[@data-name='tags'][@data-original-title='Click to edit']");
 	public final By ELEMENT_RIGHT_PANE_TASK_TAG_INPUT = By.xpath("//*[contains(@class,'tags uiEditableInline')]//*[contains(@class,'TextArea')]/*[@type='text']");
 	public final String ELEMENT_RIGHT_PANE_TASK_TAG_TEXT="//*[contains(@class,'tags')]//*[contains(@class,'TextArea')]/*[contains(.,'$tag')]";
+	public final String ELEMENT_RIGHT_PANE_TASK_TAG_TEXT1="//*[contains(@class,'tags')]//*[contains(@class,'label')][contains(.,'$tag')]";
 	public final String ELEMENT_RIGHT_PANE_TASK_TAG_SELECT_NEW ="//*[contains(@class,'dropdown')]/*[contains(@class,'create')]/*[contains(.,'$tag')]";
 	public final String ELEMENT_RIGHT_PANE_TASK_TAG_REMOVE_ICON="//*[contains(@class,'tags')]//*[contains(@class,'TextArea')]/*[contains(.,'$tag')]/*[contains(@class,'remove')]";
 	public final By ELEMENT_RIGHT_PANE_TASK_TAG_DEFAULT_ICON = By.xpath("//*[contains(@class,'Hag')]");
@@ -394,4 +405,8 @@ public class TaskManagementLocatorObject extends PlatformBase {
 	public final String ELEMENT_RIGHT_PANE_CHANGE_TEXT = "//*[@id='tab-changes']//a[contains(.,'$user')]/../*[contains(.,'$text')]";
 	public final String ELEMENT_RIGHT_PANE_CHANGE_TEXT1 = "//*[@id='tab-changes']//a[contains(.,'$user')]/../*[contains(.,'$text')][contains(.,'$opt')]";
 	public final String ELEMENT_RIGHT_PANE_CHANGE_TIME = "//*[@id='tab-changes']//a[contains(.,'$user')]/../*[contains(.,'$text')]/../../*[contains(@class,'date')][contains(.,'$time')]";
+	
+	
+	/***********************************************************ACTIVITY STREAM******************************************************/
+	public final String ELEMENT_AS_TASK_LINK = "//*[@class='description']/*[contains(.,'$task')]";
 }
