@@ -2,10 +2,12 @@ package org.exoplatform.selenium.platform.wiki;
 
 import static org.exoplatform.selenium.TestLogger.info;
 
+import java.awt.event.KeyEvent;
 import java.io.File;
 
 import org.exoplatform.selenium.Button;
 import org.exoplatform.selenium.Utils;
+//import org.exoplatform.selenium.platform.objectdatabase.wiki.WikiMacroDatabase;
 import org.openqa.selenium.By;
 import org.openqa.selenium.ElementNotVisibleException;
 import org.openqa.selenium.Keys;
@@ -17,12 +19,12 @@ import org.openqa.selenium.interactions.Actions;
 
 public class RichTextEditor extends WikiLocators{
 	Button but;
-	
 	/**
 	 * constructor
 	 * @param dr
+	 * @throws Exception 
 	 */
-	public RichTextEditor(WebDriver dr){
+	public RichTextEditor(WebDriver dr) throws Exception{
 		this.driver=dr;
 		but = new Button(driver);
 	}
@@ -173,10 +175,9 @@ public class RichTextEditor extends WikiLocators{
 	 * 			message setting of macro
 	 */
 	public void insertMacroColor(String color, String message){
-		goToMacro("Formatting", "Color");
 		type(ELEMENT_COLOR_TEXTBOX, color, true);
 		type(ELEMENT_COLOR_MESSAGE, message, true);
-		click(but.ELEMENT_CREATE_MACRO_BUTTON);
+		goToMacroCreateBtn();
 	}
 	/**
 	 * InsertMacroBox
@@ -1535,5 +1536,152 @@ public class RichTextEditor extends WikiLocators{
 		}
 		clickInsertMacroBtn();
 	}
+	
+	/**
+	 * Insert macro: "JIRA" into a Wiki page
+	 * 
+	 * @param URL
+	 * 			URL setting of macro
+	 * @param Content
+	 * 			Content setting of macro
+	 */
+	public void insertMacroJIRA(String URL, String Content){
+		info("Go to insert a macro Jira");
+		if (URL != null && URL != ""){
+			info("Insert URL");
+			waitForAndGetElement(ELEMENT_JIRA_URL);
+			type(ELEMENT_JIRA_URL, URL, true);
+		}
+		
+		if (Content != null && Content != ""){
+			info("Insert Content");
+			waitForAndGetElement(ELEMENT_JIRA_CONTENT);
+			type(ELEMENT_JIRA_CONTENT, Content, true);
+		}
+	 Utils.pause(1000);
+	}
+	/**
+	 * Click on Create button of Insert Macro form
+	 */
+	public void goToMacroCreateBtn(){
+		info("Click on Create button");
+		click(but.ELEMENT_CREATE_MACRO_BUTTON);
+		waitForElementNotPresent(but.ELEMENT_CREATE_MACRO_BUTTON);
+		Utils.pause(3000);
+	}
+	
+	/**
+	 * Open Edit Macro form
+	 */
+	public void goToEditMacro(){
+		info("Click on Macro link");
+		mouseOverAndClick(ELEMENT_MACRO_LINK);
+		info("Click on Edit Macro link");
+		mouseOverAndClick(ELEMENT_EDIT_MACRO_LINK);
+		Utils.pause(500);
+	}
+	/**
+	 * Collapse all macro
+	 * @param control
+	 * 				true if use key 				
+	 */
+	public void CollapseAllMacro(boolean control){
+			info("Collapse all macro");
+			Utils.pause(2000);
+			if (control){
+				info("Using Ctrl + Shift + C");
+				Utils.javaSimulateKeyPress(KeyEvent.VK_CONTROL, KeyEvent.VK_SHIFT,KeyEvent.VK_C);
+				driver.switchTo().frame(waitForAndGetElement(ELEMENT_CONTENT_WIKI_FRAME));
+			}
+			else{
+				info("Click on collapse link");
+				waitForAndGetElement(ELEMENT_MACRO_LINK);
+				mouseOverAndClick(ELEMENT_MACRO_LINK);
+				waitForAndGetElement(ELEMENT_MACRO_COLLAPSE_LINK);
+				mouseOverAndClick(ELEMENT_MACRO_COLLAPSE_LINK);
+				driver.switchTo().frame(waitForAndGetElement(ELEMENT_CONTENT_WIKI_FRAME));
+			}
+	}
+	
+	/**
+	 * Expand all macro
+	 * @param control
+	 * 				true if use key 				
+	 */
+	public void ExpandAllMacro(boolean control){
+			info("Expand all macro");
+			if (control){
+				info("Using Ctrl + Shift + E");
+				Utils.javaSimulateKeyPress(KeyEvent.VK_CONTROL, KeyEvent.VK_SHIFT,KeyEvent.VK_E);
+				driver.switchTo().frame(waitForAndGetElement(ELEMENT_CONTENT_WIKI_FRAME));
+			}
+			else{
+				info("Click on expand link");
+				waitForAndGetElement(ELEMENT_MACRO_LINK);
+				mouseOverAndClick(ELEMENT_MACRO_LINK);
+				waitForAndGetElement(ELEMENT_MACRO_EXPAND_LINK);
+				mouseOverAndClick(ELEMENT_MACRO_EXPAND_LINK);
+				driver.switchTo().frame(waitForAndGetElement(ELEMENT_CONTENT_WIKI_FRAME));
+			}
+	}
+	
+	/**
+	 * Verify after collapse macro
+	 * @param control
+	 * 				true if use key 				
+	 */
+	public void verifyCollapsemacro(String macro){
+		info("Verify collapse macro");
+		waitForAndGetElement(ELEMENT_MACRO_COLLAPSED_LINK.replace("${macro}", macro));
+	}
+	
+	public enum macroCategories{
+		JIRA,COLOR;
+	}
+	
+	/**
+	 * Verify after expand macro
+	 * @param control
+	 * 				true if use key 				
+	 */
+	public void verifyExpandmacro(macroCategories macroCate, String ...Content ){
+		String content = (Content.length > 0 ? Content[0]: null);
+		String color = (Content.length > 1 ? Content[1]: null);
+		info("Verify collapse macro");
+		switch(macroCate){
+		case COLOR :
+			info ("Verify Color macro when expanding");
+			waitForAndGetElement(ELEMENT_MACRO_TEXT.replace("${text}", content).replace("${color}", color));
+			break;
+		case JIRA :
+			info ("Verify Jira macro when expanding");
+			waitForAndGetElement(ELEMENT_JIRA_MACRO_LINK.replace("${content}", content));
+			break;
+		}
+	}
+	
+	/**
+	 * Select the JIRA Macro
+	 */
+	public void selectJIRAMacro(){
+		info("Focus on the frame");
+		switchFrame(ELEMENT_CONTENT_WIKI_FRAME,1);
+		Utils.pause(2000);
+		WebElement element = driver.findElement(ELEMENT_JIRA_TABLE);
+		selectItems(element);
+		element.click();
+		switchToParentWindow();
+	}
+	/**
+	 * Click on Apply button of Macro Edit form
+	 */
+	public void goToMacroEditFormApplyBtn(){
+		info("click on Apply button");
+		click(ELMENET_MACRO_JIRA_EDIT_FORM_APPLY_BTN);
+		waitForElementNotPresent(ELMENET_MACRO_JIRA_EDIT_FORM_APPLY_BTN);
+		Utils.pause(5000);
+	}
 }
+	
+
 

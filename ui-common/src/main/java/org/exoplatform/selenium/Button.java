@@ -48,6 +48,7 @@ public class Button extends TestBase{
 	public final By ELEMENT_PREVIOUS_BUTTON = By.xpath("//*[text()='Previous']");
 	public final By ELEMENT_CREATE_LINK_BUTTON = By.xpath("//*[text()='Create Link']");
 	public final By ELEMENT_CREATE_MACRO_BUTTON = By.xpath("//button[text()='Insert Macro']");
+	public final By ELEMENT_APPLY_MACRO_BUTTON = By.xpath("//button[text()='Apply']");
 	public final By ELEMENT_INSERT_TABLE = By.xpath("//button[text()='Insert Table']");
 	public final By ELEMENT_SETTING_LINK_BUTTON = By.xpath("//*[text()='Link Settings']");
 

@@ -174,6 +174,7 @@ public class TestBase {
 	protected String wikiRichTextFilePath;
 	protected String wikiWarningsFilePath;
 	protected String sourceTextEffectFilePath;
+	protected String wikiMacroFilePath;
 	
 	//Permission
 	protected String permisGroupFilePath;
@@ -287,7 +288,7 @@ public class TestBase {
 	public final String DEFAULT_WIKI_IMAGE_LINKS_FILE_URL="DataDriven/"+"wiki_image_links.xls";
 	public final String DEFAULT_WIKI_WARNING_FILE_URL="DataDriven/"+"wiki_warnings.xls";
 	public final String DEFAULT_SOURCE_TEXT_EFFECT ="DataDriven/"+"wiki_sourceEditor_effects.xls";
-	
+	public final String DEFAULT_WIKI_MACRO_FILE_URL="DataDriven/"+"wiki_macro.xls";
 	//Permission
 	public final String DEFAULT_PERMISSION_GROUP_FILE_URL="DataDriven/"+"permission_groups.xls";
 	public final String DEFAULT_PERMISSION_MEMBERSHIP_FILE_URL="DataDriven/"+"permission_memberships.xls";
@@ -433,6 +434,7 @@ public class TestBase {
 		imageLinksFilePath = System.getProperty("imageLinksFilePath");
 		wikiWarningsFilePath= System.getProperty("wikiWarningsFilePath");
 		sourceTextEffectFilePath = System.getProperty("sourceTextEffectFilePath");
+		wikiMacroFilePath = System.getProperty("wikiMacroFilePath");
 		
 		//Permission
 		permisGroupFilePath = System.getProperty("permisGroupFilePath");
@@ -538,7 +540,7 @@ public class TestBase {
 		if (imageLinksFilePath==null) imageLinksFilePath=DEFAULT_WIKI_IMAGE_LINKS_FILE_URL;
 		if (wikiWarningsFilePath==null) wikiWarningsFilePath=DEFAULT_WIKI_WARNING_FILE_URL;
 		if (sourceTextEffectFilePath==null) sourceTextEffectFilePath=DEFAULT_SOURCE_TEXT_EFFECT;
-		
+		if (wikiMacroFilePath==null) wikiMacroFilePath=DEFAULT_WIKI_MACRO_FILE_URL;
 		//Permission
 		if (permisGroupFilePath==null) permisGroupFilePath=DEFAULT_PERMISSION_GROUP_FILE_URL;
 		if (permisMemFilePath==null) permisMemFilePath=DEFAULT_PERMISSION_MEMBERSHIP_FILE_URL;
@@ -621,7 +623,7 @@ public class TestBase {
 		imageLinksFilePath = getAbsoluteFilePath(imageLinksFilePath);
 		wikiWarningsFilePath = getAbsoluteFilePath(wikiWarningsFilePath);
 		sourceTextEffectFilePath = getAbsoluteFilePath(sourceTextEffectFilePath);
-		
+		wikiMacroFilePath = getAbsoluteFilePath(wikiMacroFilePath);
 		//Permission
 		permisGroupFilePath = getAbsoluteFilePath(permisGroupFilePath);
 		permisMemFilePath = getAbsoluteFilePath(permisMemFilePath);

@@ -13,14 +13,17 @@ import org.exoplatform.selenium.platform.PlatformBase;
 import org.exoplatform.selenium.platform.administration.ManageLayout;
 import org.exoplatform.selenium.platform.gatein.UserAddManagement;
 import org.exoplatform.selenium.platform.gatein.UserAndGroupManagement;
+import org.exoplatform.selenium.platform.objectdatabase.TaskManagement.ColorDatabase;
 import org.exoplatform.selenium.platform.objectdatabase.common.AttachmentFileDatabase;
 import org.exoplatform.selenium.platform.objectdatabase.common.DataTestPathDatabase;
+import org.exoplatform.selenium.platform.objectdatabase.common.LinksDatabase;
 import org.exoplatform.selenium.platform.objectdatabase.common.TextBoxDatabase;
 import org.exoplatform.selenium.platform.objectdatabase.common.UserInfoDatabase;
 import org.exoplatform.selenium.platform.objectdatabase.gatein.UserSearchOptionDatabase;
 import org.exoplatform.selenium.platform.objectdatabase.social.ActivityCommentDatabase;
 import org.exoplatform.selenium.platform.objectdatabase.wiki.ReadThreeColDatabase;
 import org.exoplatform.selenium.platform.objectdatabase.wiki.ReadTwoColDatabase;
+import org.exoplatform.selenium.platform.objectdatabase.wiki.WikiMacroDatabase;
 import org.exoplatform.selenium.platform.objectdatabase.wiki.WikiTemplateDatabase;
 import org.exoplatform.selenium.platform.social.SpaceHomePage;
 import org.exoplatform.selenium.platform.social.SpaceManagement;
@@ -81,6 +84,9 @@ public class WIKI_TestConfig extends PlatformBase {
 	ReadTwoColDatabase permisMem;
 	ReadThreeColDatabase sourceTextEffect;
 	UserSearchOptionDatabase userSearchOptionData;
+	WikiMacroDatabase wikiMacroData;
+	LinksDatabase lnkData;
+	ColorDatabase colorData;
 	
 	AttachmentFileDatabase attFileData;
 	DataTestPathDatabase dataTestForlderPath;
@@ -156,6 +162,15 @@ public class WIKI_TestConfig extends PlatformBase {
 		userSearchOptionData = new UserSearchOptionDatabase();
 		userSearchOptionData.setUserSearchOptionData(userSearchOptionFilePath,defaultSheet,isUseFile,jdbcDriver,dbUrl,user,pass,sqlUser);
 
+		wikiMacroData = new WikiMacroDatabase();
+		wikiMacroData.setWikiMacroData(wikiMacroFilePath,defaultSheet,isUseFile,jdbcDriver,dbUrl,user,pass,sqlAttach);
+		
+		lnkData = new LinksDatabase();
+		lnkData.setLinkData(linkPath,defaultSheet,isUseFile,jdbcDriver,dbUrl,user,pass,sqlUser);
+
+		colorData = new ColorDatabase();
+		colorData.setData(colorNamefilePath,defaultSheet,isUseFile,jdbcDriver,dbUrl,user,pass,sqlAttach);
+		
 		arrayPage  = new ArrayList<String>();
 		arrayUsers = new ArrayList<String>();
 		arraySpace = new ArrayList<String>();

@@ -375,6 +375,7 @@ public class WikiLocators extends PlatformBase{
     //Macro
 	public By ELEMENT_MACRO_LINK = By.xpath("//*[text()='Macro']");
 	public By ELEMENT_INSERT_MACRO_LINK = By.xpath("//*[text()='Insert Macro...']");
+	public By ELEMENT_EDIT_MACRO_LINK = By.xpath("//*[text()='Edit Macro Properties...']");
 	public By ELEMENT_MACRO_CATEGORY_SELECT = By.xpath("//select[@title='Select a macro category']");
 	public By ELEMENT_MACRO_TYPE_FILTER = By.xpath("//input[@title='Type to filter']");
 	public String ELEMENT_MACRO_LABEL = "//*[text()='${macro}']";
@@ -392,7 +393,8 @@ public class WikiLocators extends PlatformBase{
 	public By ELEMENT_MACRO_RSS_TITLE = By.xpath("//p[@class='rssitemtitle']");
 	public By ELEMENT_MACRO_COLLAPSE_LINK = By.xpath("//div[@class='gwt-MenuItemLabel' and text()='Collapse All']");
 	public By ELEMENT_MACRO_EXPAND_LINK = By.xpath("//div[@class='gwt-MenuItemLabel' and text()='Expand All']");
-
+	public String ELEMENT_MACRO_COLLAPSED_LINK = "//span[@class='macro-placeholder' and text()='${macro}']";
+	
 	//Link menu
 	public By ELEMENT_LINK = By.xpath("//*[text()='Link']");
 	public By ELEMENT_WIKI_PAGE_LINK_MENU = By.xpath("//*[text()='Wiki Page...']");
@@ -554,6 +556,16 @@ public class WikiLocators extends PlatformBase{
 	
 	
 	
+	//Macro JIRA
+	public By ELEMENT_JIRA_URL= By.id("pd-URL-input");
+	public By ELEMENT_JIRA_CONTENT= By.id("pd-content-input");
+	//public String ELEMENT_JIRA_MACRO_LINK = ".//*[@id='body']//*[contains(@href,'${content}')]//*[@class='wikimodel-verbatim' and text()='${content}'] ";
+	//public String ELEMENT_JIRA_MACRO_LINK = "//*[text()='${content}']";
+	public String ELEMENT_JIRA_MACRO_LINK = ".//*[@id='body']//*[@class='macro-output']";
+	//public String ELEMENT_JIRA_MACRO_LINK = ".//*[@id='body']//table";
+	public By ELEMENT_JIRA_TABLE =By.xpath("//*[@class='wikimodel-verbatim'][contains(text(),'Type')]");
+	public By ELMENET_MACRO_JIRA_EDIT_FORM_APPLY_BTN=By.xpath("//button[contains(text(),'Apply')]");
+	//public String ELEMENT_JIRA_TABLE = "//table";
 	//*=============================================================SOURCE EDITOR==========================================================*\\
 	public final String ELEMENT_EFFECT_BOLD="//strong[contains(text(),'$content')]";
 	public final String ELEMENT_EFFECT_BULLET_LIST="//ul/li[contains(text(),'$content')]";

@@ -155,7 +155,7 @@ public class PlatformBase extends TestBase {
 	 * Switch into the frame
 	 * @param frameLocator
 	 */
-	public void switchFrame(By frameLocator){
+	public void switchFrame(By frameLocator,Object... param){
 		info("Finding the frameLocator:"+frameLocator);
 		WebElement e = waitForAndGetElement(frameLocator,DEFAULT_TIMEOUT,1,2);
 		info("Switch to the frame:"+frameLocator);
@@ -163,6 +163,8 @@ public class PlatformBase extends TestBase {
 		WebElement inputsummary = driver.switchTo().activeElement();
 		info("focus on the text area");
 		inputsummary.click();
+		if(param.length>0)
+			inputsummary.sendKeys("\n");
 	}
 	
 	/**
