@@ -32,6 +32,7 @@ public class SpaceManagement extends SpaceLocator {
 	public void goToCreateSpace(){
 		info("Open create space form");
 		click(ELEMENT_ADD_NEW_SPACE_BUTTON);
+		Utils.pause(3000);
 		waitForAndGetElement(ELEMENT_ADD_SPACE_FORM);
 	}
 
@@ -324,6 +325,7 @@ public class SpaceManagement extends SpaceLocator {
 		goToInvitationsReceivedTab();
 		info("Click on Accept button of the space");
 		click(ELEMENT_MY_SPACE_INVITATION_RECEIVED_ACCEPT_BTN.replace("${space}",space));
+		Utils.pause(3000);
 		info("Verify that the user joijed to the space");
 		waitForAndGetElement( ELEMENT_SPACE_NAME.replace("${name}",space),3000,1);
 	}

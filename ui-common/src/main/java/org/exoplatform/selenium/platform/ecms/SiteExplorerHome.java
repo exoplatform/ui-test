@@ -58,6 +58,7 @@ public class SiteExplorerHome extends PlatformBase{
 	public final By ELEMENT_ACTIONBAR_WATCH_RADIO = By.xpath("//*[@class='uiRadio']/*[@id='notificationType']/../*[contains(.,'Email')]");
 	public final By ELEMENT_ACTIONBAR_WATCH_BUTTON = By.xpath("//*[@class='btn'][contains(.,'Watch')]");
 	public final By ELEMENT_ACTIONBAR_WATCH_NOTICE = By.xpath("//*[@id='wcm-notice'][contains(.,'You are watching this document.')]");
+	public final By ELEMENT_ACTIONBAR_SHARE = By.xpath("//*[@class='uiIconEcmsShareDocuments uiIconEcmsLightGray']");
 	
 	//Add Category popup
 	public final By ELEMENT_ADD_CATEGORY_POPUP_SELECT_CATEGORY_TAB = By.xpath(".//*[@id='UICategoryManager']//a[text()='Select Category']");
@@ -334,6 +335,40 @@ public class SiteExplorerHome extends PlatformBase{
 	//Add new content
 	public String ELEMENT_SITE_EXPLORER_CONTENT_NAME= ".//*[@id='UISelectDocumentForm']//i[@data-original-title='${nameContent}']";
 
+	//Share document to space
+	public final By ELEMENT_SPACE_LIST = By.xpath("//*[@id='DisplayModesDropDown']");
+	public final String ELEMENT_SELECTED_SPACE = "//*[@class='spaceList']//*[contains(text(),'${spaceName}')]";
+	public final String ELEMENT_SHARE_DOCUMENT_ACTION_BUTTON = "//*[@class='uiActionBorder']//*[text()='${name}']";
+	public final String ELEMENT_SHARE_DOCUMENT_CONTENT = "//*[@class='author']//a[contains(text(),'${author}')]/..//*[contains(text(),'shared a document')]/../..//*[@class='dataInfor']//a[contains(text(),'${spaceName}')]";
+	public final String ELEMENT_SHARE_DOCUMENT_CONTENT_IN_SPACE = "//*[@class='author']//a[contains(text(),'${author}')]/..//*[contains(text(),'shared a document')]";
+	public final String ELEMENT_SHARE_DOCUMENT_AUTHOR = "//*[@class='author']//a[contains(text(),'${author}')]";
+	public final String ELEMENT_SHARE_DOCUMENT_POPUP = "//*[@id='tipName']//a[contains(text(),'${author}')]";
+	public final String ELEMENT_PROFILE_NAME = "//*[@id='UIStatusProfilePortlet']//span[contains(text(),'${author}')]";
+	
+	public final By ELEMENT_SHARE_DOCUMENT_COMMENT = By.xpath("//*[@id='DisplaytextAreaInput']");
+	public final String ELEMENT_SHARE_DOCUMENT_CONTENT_WITH_COMMENT = "//*[@class='author']//a[contains(text(),'${author}')]"+
+													"/..//*[contains(text(),'shared a document')]"+
+													"/../..//*[@class='dataInfor']//a[contains(text(),'${spaceName}')]"+
+													"/../../..//*[@class='description'][contains(text(),'${comment}')]";
+	public final String ELEMENT_SHARE_DOCUMENT_CONTENT_WITH_COMMENT_IN_SPACE = "//*[@class='author']//a[contains(text(),'${author}')]"+
+																"/..//*[contains(text(),'shared a document')]"+
+																"/../../..//*[@class='description'][contains(text(),'${comment}')]";
+	public final String ELEMENT_SHARE_DOCUMENT_CONTENT_WITH_FILE_NAME = "//*[@class='author']//a[contains(text(),'${author}')]" +
+																"/..//*[contains(text(),'shared a document')]" +
+																"/../../..//a[contains(text(),'${fileName}')]";
+	public final By ELEMENT_SHARE_DOCUMENT_FILE_PREVIEW = By.xpath(".//*[@id='UIDocumentPreview']//*[@class='title']");
+	
+	public final String ELEMENT_SHARE_DOCUMENT_CONTENT_WITH_ICON = "//*[@class='author']//a[contains(text(),'${author}')]" + 
+																"/..//*[contains(text(),'shared a document')]/../../..//" + 
+																"img[contains(@src,'thumbnailImage') and contains(@src,'${fileName}')]";
+	
+	public final By ELEMENT_SPACE_DOCUMENTS_SHARED_FOLDER = By.xpath(".//*[@id='UIDocumentInfo']//*[contains(text(),'Shared')]");
+	public final String ELEMENT_SPACE_DOCUMENTS_SHARED_FOLDER_FILE_SYMLINK = 
+										"//*[@id='UIDocumentInfo']//*[contains(@symlink,'${spaceName}')]"+
+										"/../../..//*[@class='uiThumbnailsView UIDocumentInfo']//*[contains(text(),'${fileName}')]";
+	public final By ELEMENT_SPACE_DOCUMENTS_SHARED_FOLDER_SYMLINK_MENU_DELETE = By.xpath(".//*[@id='ECMContextMenu']/div/ul/li[7]/a");
+	public final String ELEMENT_SPACE_DOCUMENTS_SHARED_FOLDER_SYMLINK_MENU_DELETE_OPTION = "//*[@class='uiAction uiActionBorder']//*[contains(text(),'${action}')]";
+	
 	ManageAlert alert;
 	Button button;
 	CreateNewDocument CreNewDoc;
@@ -1378,7 +1413,6 @@ public class SiteExplorerHome extends PlatformBase{
 		selectAllFiles();
 	}
 	/**
-<<<<<<< HEAD
 	 * Check display of drive
 	 * @param drive
 	 * @param isDisplay
@@ -1463,4 +1497,14 @@ public class SiteExplorerHome extends PlatformBase{
 		waitForAndGetElement(ELEMENT_ACTIONBAR_WATCH_NOTICE);
 		Utils.pause(2000);
 	}
+	
+	/**
+	 * Share document
+	 */
+	public void shareDocument() {
+		info("Click to share document");
+		if(waitForAndGetElement(ELEMENT_ACTIONBAR_SHARE, 5000, 0)==null)
+			click(ELEMENT_ACTIONBAR_MORE);
+		click(ELEMENT_ACTIONBAR_SHARE);
+	}	
 }
