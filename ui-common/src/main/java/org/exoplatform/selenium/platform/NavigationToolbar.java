@@ -169,6 +169,12 @@ public class NavigationToolbar extends PlatformBase {
 	public final  String ELEMENT_CHECK_NAME_UPLOADED_FILE= "//*[@id='ListRecords']//*[contains(text(),'{$name}')]";
 	//Quick search
 	public final By ELEMENT_TOOLBAR_QUICKSEARCH = By.xpath("//*[@class='uiIconPLF24x24Search']");
+	
+	
+	//Notifications
+	//Get the content of the first notification
+	public final String ELEMENT_SPACE_DOCUMENTS_SHARED_NOTIFICATION = "//*[@id='NotificationPopup']/li[4]/ul//*[contains(text(),'${author}')]"+
+			"/../..//*[contains(text(),'has posted an activity in the')]/../..//*[contains(text(),'${spaceName}')]";
 
 	PageCreationWizard paWin;
 	UserProfilePage myPro;

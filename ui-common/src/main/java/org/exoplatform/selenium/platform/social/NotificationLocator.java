@@ -68,7 +68,6 @@ public class NotificationLocator extends PlatformBase{
 	public final By ELEMENT_ACTIVITY_ICON_COMMENT=By.xpath(".//*[@id='UIUserActivityStreamPortlet']//*[contains(@class,'uiIconComment')]");
 	public final By ELEMENT_ACTIVITY_ICON_LIKE=By.xpath(".//*[@id='UIUserActivityStreamPortlet']//*[contains(@class,'uiIconThumbUp ')]");
 	public final By ELEMENT_ACTIVITY_COMMENT_BOX=By.xpath(".//*[contains(@class,'commentList ')]");
-	
 	public final String ELEMENT_ACTIVITY_COMMENT_HIGHLIGHT=".//*[@class='contentComment'][contains(.,'$comment')]/../../..[contains(@style,'rgb(240, 240, 240)')]";
 	public final String ELEMENT_ACTIVITY_COMMENT_CONTENT=".//*[@class='contentComment'][contains(.,'$comment')]";
 	

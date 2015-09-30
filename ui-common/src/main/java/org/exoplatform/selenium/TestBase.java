@@ -2480,7 +2480,7 @@ public class TestBase {
 	 *The function will refresh the page and find the element again.
 	 * @param element
 	 */
-	public void waitElementAndTryGetElement(Object element){
+	public void waitElementAndTryGetElement(Object element,Boolean... isClicked){
 		info("-- Starting finding element --");
 		Utils.pause(500);
 		for(int repeat=0;; repeat ++){
@@ -2490,6 +2490,8 @@ public class TestBase {
 			}
 			if (waitForAndGetElement(element, 5000, 0) != null){
 				info("Element "+element+" is displayed");
+				if(isClicked.length>0 & isClicked[0]==true)
+					click(element);
 				break;
 			}
 			info("Retry...[" + repeat + "]");

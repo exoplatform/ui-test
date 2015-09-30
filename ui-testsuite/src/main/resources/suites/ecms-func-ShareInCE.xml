@@ -8,7 +8,8 @@
 		</groups>
 		<classes>
 			<class name="org.exoplatform.selenium.platform.ecms.functional.ECMS_TestConfig" />
-			<class name="org.exoplatform.selenium.platform.ecms.functional.ShareInContentExplorer_ActivityStream" />		
+			<class name="org.exoplatform.selenium.platform.ecms.functional.ShareInContentExplorer_ActivityStream" />
+			<class name="org.exoplatform.selenium.platform.ecms.functional.ShareInContentExplorer_Notifications" />			
 		</classes>
 	</test>
 	<listeners>

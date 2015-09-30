@@ -339,13 +339,9 @@ public class SiteExplorerHome extends PlatformBase{
 	public final By ELEMENT_SPACE_LIST = By.xpath("//*[@id='DisplayModesDropDown']");
 	public final String ELEMENT_SELECTED_SPACE = "//*[@class='spaceList']//*[contains(text(),'${spaceName}')]";
 	public final String ELEMENT_SHARE_DOCUMENT_ACTION_BUTTON = "//*[@class='uiActionBorder']//*[text()='${name}']";
-	public final String ELEMENT_SHARE_DOCUMENT_CONTENT = "//*[@class='author']//a[contains(text(),'${author}')]/..//*[contains(text(),'shared a document')]/../..//*[@class='dataInfor']//a[contains(text(),'${spaceName}')]";
-	public final String ELEMENT_SHARE_DOCUMENT_CONTENT_IN_SPACE = "//*[@class='author']//a[contains(text(),'${author}')]/..//*[contains(text(),'shared a document')]";
-	public final String ELEMENT_SHARE_DOCUMENT_AUTHOR = "//*[@class='author']//a[contains(text(),'${author}')]";
 	public final String ELEMENT_SHARE_DOCUMENT_POPUP = "//*[@id='tipName']//a[contains(text(),'${author}')]";
 	public final String ELEMENT_PROFILE_NAME = "//*[@id='UIStatusProfilePortlet']//span[contains(text(),'${author}')]";
 	
-	public final By ELEMENT_SHARE_DOCUMENT_COMMENT = By.xpath("//*[@id='DisplaytextAreaInput']");
 	public final String ELEMENT_SHARE_DOCUMENT_CONTENT_WITH_COMMENT = "//*[@class='author']//a[contains(text(),'${author}')]"+
 													"/..//*[contains(text(),'shared a document')]"+
 													"/../..//*[@class='dataInfor']//a[contains(text(),'${spaceName}')]"+
@@ -353,21 +349,29 @@ public class SiteExplorerHome extends PlatformBase{
 	public final String ELEMENT_SHARE_DOCUMENT_CONTENT_WITH_COMMENT_IN_SPACE = "//*[@class='author']//a[contains(text(),'${author}')]"+
 																"/..//*[contains(text(),'shared a document')]"+
 																"/../../..//*[@class='description'][contains(text(),'${comment}')]";
-	public final String ELEMENT_SHARE_DOCUMENT_CONTENT_WITH_FILE_NAME = "//*[@class='author']//a[contains(text(),'${author}')]" +
-																"/..//*[contains(text(),'shared a document')]" +
-																"/../../..//a[contains(text(),'${fileName}')]";
 	public final By ELEMENT_SHARE_DOCUMENT_FILE_PREVIEW = By.xpath(".//*[@id='UIDocumentPreview']//*[@class='title']");
 	
 	public final String ELEMENT_SHARE_DOCUMENT_CONTENT_WITH_ICON = "//*[@class='author']//a[contains(text(),'${author}')]" + 
 																"/..//*[contains(text(),'shared a document')]/../../..//" + 
 																"img[contains(@src,'thumbnailImage') and contains(@src,'${fileName}')]";
 	
+	public final String ELEMENT_SHARE_DOCUMENT_CONTENT_IN_SPACE = "//*[@class='author']//a[contains(text(),'${author}')]/..//*[contains(text(),'shared a document')]";
+	public final String ELEMENT_SHARE_DOCUMENT_AUTHOR = "//*[@class='author']//a[contains(text(),'${author}')]";
+	
+	public final By ELEMENT_SHARE_DOCUMENT_COMMENT = By.xpath("//*[@id='DisplaytextAreaInput']");
+	public final String ELEMENT_SHARE_DOCUMENT_CONTENT_WITH_FILE_NAME = "//*[@class='author']//a[contains(text(),'${author}')]" +
+																"/..//*[contains(text(),'shared a document')]" +
+																"/../../..//a[contains(text(),'${fileName}')]";
 	public final By ELEMENT_SPACE_DOCUMENTS_SHARED_FOLDER = By.xpath(".//*[@id='UIDocumentInfo']//*[contains(text(),'Shared')]");
 	public final String ELEMENT_SPACE_DOCUMENTS_SHARED_FOLDER_FILE_SYMLINK = 
 										"//*[@id='UIDocumentInfo']//*[contains(@symlink,'${spaceName}')]"+
 										"/../../..//*[@class='uiThumbnailsView UIDocumentInfo']//*[contains(text(),'${fileName}')]";
 	public final By ELEMENT_SPACE_DOCUMENTS_SHARED_FOLDER_SYMLINK_MENU_DELETE = By.xpath(".//*[@id='ECMContextMenu']/div/ul/li[7]/a");
 	public final String ELEMENT_SPACE_DOCUMENTS_SHARED_FOLDER_SYMLINK_MENU_DELETE_OPTION = "//*[@class='uiAction uiActionBorder']//*[contains(text(),'${action}')]";
+		
+	//Notifications
+	public final String ELEMENT_SHARE_DOCUMENT_CONTENT = "//*[@class='author']//a[contains(text(),'${author}')]/..//*[contains(text(),'shared a document')]/../..//*[@class='dataInfor']//a[contains(text(),'${spaceName}')]";
+	public final By ELEMENT_SHARE_DOCUMENT_ACTIVITY_NOT_FOUND =By.xpath(".//*[@id='UIUserActivityStreamPortlet']//*[contains(text(),'Activity not found')]");
 	
 	ManageAlert alert;
 	Button button;

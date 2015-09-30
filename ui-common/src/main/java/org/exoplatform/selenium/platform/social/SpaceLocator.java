@@ -31,7 +31,7 @@ public class SpaceLocator extends PlatformBase{
 	public final By ELEMENT_MEMBER_TAB = By.xpath(".//*[contains(@class,'uiIconAppMembersPortlet')]");
 	public final By ELEMENT_NAVIGATION_SPACE_SETTING_TAB = By.xpath(".//*[contains(@class,'uiIconAppSpaceSettingPortlet')]");
 	
-	public By ELEMENT_SPACE_SPACE_SETTINGS=By.xpath("//*[@class='uiIconAppSpaceSettingPortlet uiIconDefaultApp']/..");
+	public By ELEMENT_SPACE_SPACE_SETTINGS=By.xpath(".//*[@id='settings']");
 	public By ELEMENT_SPACE_WIKI_TAB=By.xpath(".//*[@id='spaceMenuTab']//*[contains(text(),'Wiki')]");
 	public By ELEMENT_SPACE_MEMBERS_TAB=By.xpath(".//*[@id='spaceMenuTab']//*[contains(text(),'Members')]");
 	public By ELEMENT_SPACE_WIKI_TAB_CONTENT=By.xpath("//*[@id='UIWikiPortlet']");
