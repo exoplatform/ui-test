@@ -1,0 +1,20 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="Platform Sniff Test" verbose="1" preserve-order="true">
+	<test name="social-func-part01" enabled="true">
+		<groups>
+			<run>
+				<exclude name="pending" />
+			</run>
+		</groups>
+		<classes>
+			<class name="org.exoplatform.selenium.platform.social.functional.SOC_TestConfig" />
+			<class name="org.exoplatform.selenium.platform.social.functional.SOC_Dashboard" />
+			<class name="org.exoplatform.selenium.platform.social.functional.SOC_Notification_Like_Activities" />
+			<class name="org.exoplatform.selenium.platform.social.functional.SOC_People_Activity_Delete" />
+			<class name="org.exoplatform.selenium.platform.social.functional.SOC_Notification_Notification_Settings" />
+		</classes>
+	</test>
+	<listeners>
+		<listener class-name="org.exoplatform.selenium.TestReportListener" />
+	</listeners>
+</suite>

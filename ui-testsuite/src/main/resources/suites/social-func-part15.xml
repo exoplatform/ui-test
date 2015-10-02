@@ -1,0 +1,17 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="Platform Func Test" verbose="1" preserve-order="true">
+	<test name="social-func-part15" enabled="true">
+		<groups>
+			<run>
+				<exclude name="pending" />
+			</run>
+		</groups>
+		<classes>
+			<class name="org.exoplatform.selenium.platform.social.functional.SOC_TestConfig3" />
+			<class name="org.exoplatform.selenium.platform.social.functional.SOC_Notification_Email_Like_Activity" />
+		</classes>
+	</test>
+	<listeners>
+		<listener class-name="org.exoplatform.selenium.TestReportListener" />
+	</listeners>
+</suite>

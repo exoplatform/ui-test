@@ -1,0 +1,21 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="Platform Sniff Test">
+	<test name="answer-sniff">
+		<groups>
+			<run>
+				<exclude name="pending" />
+			</run>
+		</groups>
+		<classes>
+			<class name="org.exoplatform.selenium.platform.answers.sniff.Addons_Answers_PublishActivity" />
+			<class name="org.exoplatform.selenium.platform.answers.sniff.Addons_Answers_Question" />
+			<class name="org.exoplatform.selenium.platform.answers.sniff.Addons_Answers_Search" />
+			<class name="org.exoplatform.selenium.platform.answers.sniff.Addons_Faq" />
+			<class name="org.exoplatform.selenium.platform.answers.sniff.Addons_Answers_Setting" />
+		</classes>
+	</test>
+	<listeners>
+		<listener class-name="org.exoplatform.selenium.TestReportListener" />
+	</listeners>
+</suite>

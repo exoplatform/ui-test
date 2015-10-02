@@ -1,0 +1,25 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="Platform Sniff Test" verbose="1" preserve-order="true">
+	<test name="social-sniff-part3" enabled="true">
+		<groups>
+			<run>
+				<exclude name="pending" />
+			</run>
+		</groups>
+		<classes>
+		<class name="org.exoplatform.selenium.platform.social.sniff.SOC_TestConfig_1" />
+			<class name="org.exoplatform.selenium.platform.social.sniff.SOC_Space_List_Invitation" />
+			<class name="org.exoplatform.selenium.platform.social.sniff.SOC_Space_List_Pending" />
+			<class name="org.exoplatform.selenium.platform.social.sniff.SOC_Space_Search" />
+		    <class name="org.exoplatform.selenium.platform.social.sniff.SOC_TestConfig_2" />
+			<class name="org.exoplatform.selenium.platform.social.sniff.SOC_People" />
+			<class name="org.exoplatform.selenium.platform.social.sniff.SOC_People_Profile_AboutMe" />
+			<class name="org.exoplatform.selenium.platform.social.sniff.SOC_People_Profile_Activities" />
+			<class name="org.exoplatform.selenium.platform.social.sniff.SOC_People_Profile_ConnectionStatus" />
+			<class name="org.exoplatform.selenium.platform.social.sniff.SOC_People_Profile_Connection" />
+		</classes>
+	</test>
+	<listeners>
+		<listener class-name="org.exoplatform.selenium.TestReportListener" />
+	</listeners>
+</suite>

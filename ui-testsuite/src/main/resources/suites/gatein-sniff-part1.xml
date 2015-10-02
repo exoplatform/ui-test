@@ -9,8 +9,6 @@
 		<classes>
 			<class name="org.exoplatform.selenium.platform.gatein.sniff.GateIn_TestConfig" />
 			<class name="org.exoplatform.selenium.platform.gatein.sniff.Gatein_Manage_Pages" />
-			<class name="org.exoplatform.selenium.platform.gatein.sniff.Gatein_Manage_Application" />
-			<class name="org.exoplatform.selenium.platform.gatein.sniff.Gatein_Manage_Manage_Portal" />
 		    <class name="org.exoplatform.selenium.platform.gatein.sniff.Gatein_Dashboard" />
 		    <class name="org.exoplatform.selenium.platform.gatein.sniff.Gatein_Authentification" />
 		</classes>

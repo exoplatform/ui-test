@@ -1,0 +1,20 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="Platform Sniff Test" verbose="1" preserve-order="true">
+	<test name="forum-sniff" enabled="true">
+		<groups>
+			<run>
+				<exclude name="pending" />
+			</run>
+		</groups>
+		<classes>
+		    <class name="org.exoplatform.selenium.platform.forum.sniff.Forum_TestConfig" />
+			<class name="org.exoplatform.selenium.platform.forum.sniff.Forum_PublishActivity"/>
+			<class name="org.exoplatform.selenium.platform.forum.sniff.Forum_Topic"/>
+			<class name="org.exoplatform.selenium.platform.forum.sniff.Forum_PrivateMessage"/>
+			<class name="org.exoplatform.selenium.platform.forum.sniff.Forum_Settings"/>
+		</classes>
+	</test>
+	<listeners>
+		<listener class-name="org.exoplatform.selenium.TestReportListener" />
+	</listeners>
+</suite>

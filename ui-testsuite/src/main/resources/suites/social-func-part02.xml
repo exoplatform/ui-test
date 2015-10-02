@@ -1,0 +1,22 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="Platform Sniff Test" verbose="1" preserve-order="true">
+	<test name="social-func-part02" enabled="true">
+		<groups>
+			<run>
+				<exclude name="pending" />
+			</run>
+		</groups>
+		<classes>
+			<class name="org.exoplatform.selenium.platform.social.functional.SOC_TestConfig" />
+			<class name="org.exoplatform.selenium.platform.social.functional.SOC_People_Activity_Add" />
+			<class name="org.exoplatform.selenium.platform.social.functional.SOC_People_Activity_Edit" />
+			<class name="org.exoplatform.selenium.platform.social.functional.SOC_People_Activity_Comment" />
+		    <class name="org.exoplatform.selenium.platform.social.functional.SOC_People_Activity_RelationActivity" />
+		    <class name="org.exoplatform.selenium.platform.social.functional.SOC_People_Activity_UserProfileActivities" />
+		    <class name="org.exoplatform.selenium.platform.social.functional.SOC_People_Activity_View" />
+		</classes>
+	</test>
+	<listeners>
+		<listener class-name="org.exoplatform.selenium.TestReportListener" />
+	</listeners>
+</suite>

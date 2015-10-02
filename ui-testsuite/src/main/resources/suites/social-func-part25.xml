@@ -1,0 +1,19 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="Platform Func Test" verbose="1" preserve-order="true">
+	<test name="social-func-part25" enabled="true">
+		<groups>
+			<run>
+				<exclude name="pending" />
+			</run>
+		</groups>
+		<classes>
+			<class name="org.exoplatform.selenium.platform.social.functional.SOC_TestConfig2" />
+			<class name="org.exoplatform.selenium.platform.social.functional.SOC_Notification_Intranet_Post_In_Space" />
+			<class name="org.exoplatform.selenium.platform.social.functional.SOC_Notification_Intranet_Post_In_Stream" />
+			<class name="org.exoplatform.selenium.platform.social.functional.SOC_Notification_Intranet_View_All_Notifications" />
+		</classes>
+	</test>
+	<listeners>
+		<listener class-name="org.exoplatform.selenium.TestReportListener" />
+	</listeners>
+</suite>

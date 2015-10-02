@@ -1,0 +1,19 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="Platform Sniff Test" verbose="1" preserve-order="true">
+	<test name="wiki-sniff-part02" enabled="true">
+		<groups>
+			<run>
+				<exclude name="pending" />
+			</run>
+		</groups>
+		<classes>
+			<class name="org.exoplatform.selenium.platform.wiki.sniff.Wiki_TestConfig" />
+			<class name="org.exoplatform.selenium.platform.wiki.sniff.Wiki_Basic_Action_Manage_Page_Rename" /> 
+			<class name="org.exoplatform.selenium.platform.wiki.sniff.Wiki_Information" />
+			<class name="org.exoplatform.selenium.platform.wiki.sniff.Wiki_Search" /> 
+		</classes>
+	</test>
+	<listeners>
+		<listener class-name="org.exoplatform.selenium.TestReportListener" />
+	</listeners>
+</suite>

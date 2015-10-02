@@ -8,12 +8,9 @@
 			</run>
 		</groups>
 		<classes>
-			<class
-				name="org.exoplatform.selenium.platform.cloud.Cloud_Config" />
-			<class
-				name="org.exoplatform.selenium.platform.cloud.Cloud_CreateUsers" />
-			<class
-				name="org.exoplatform.selenium.platform.cloud.Cloud_CreateData" />
+			<class name="org.exoplatform.selenium.platform.cloud.Cloud_Config" />
+			<class name="org.exoplatform.selenium.platform.cloud.Cloud_CreateUsers" />
+			<class name="org.exoplatform.selenium.platform.cloud.Cloud_CreateData" />
 		</classes>
 	</test>
 	<listeners>

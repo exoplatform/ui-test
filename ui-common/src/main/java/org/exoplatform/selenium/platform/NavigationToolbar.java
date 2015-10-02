@@ -15,7 +15,7 @@ public class NavigationToolbar extends PlatformBase {
 
 
 	//Tool bar
-	public final By ELEMENT_TOOLBAR_ADMINISTRATION = By.xpath("//*[@class='uiIconPLF24x24Setup']");
+	public final By ELEMENT_TOOLBAR_ADMINISTRATION = By.xpath(".//*[@id='UISetupPlatformToolBarPortlet']//i");
 	public final By ELEMENT_TOOLBAR_THEMELIGHT = By.xpath("//*[@class='UIContainer UIToolbarContainer UIToolbarContainerLight']");
 	public final By ELEMENT_UPLOAD_FILE_FRAME_XPATH = By.xpath("//iframe[contains(@id,'uploadFrame')]");
 	public final By ELEMENT_HELP_TOOLBAR = By.className("uiIconPLF24x24Help");
@@ -206,7 +206,7 @@ public class NavigationToolbar extends PlatformBase {
 	 */
 	public void goToPotalSites(){
 		info("--Go to Portal-->Sites--");
-		waitForAndGetElement(ELEMENT_TOOLBAR_ADMINISTRATION,3000,0);
+		waitElementAndTryGetElement(ELEMENT_TOOLBAR_ADMINISTRATION);
 		click(ELEMENT_TOOLBAR_ADMINISTRATION);
 		waitForAndGetElement(ELEMENT_ADMINISTRATION_PORTAL, 6000, 0);
 		mouseOver(ELEMENT_ADMINISTRATION_PORTAL,true);
@@ -221,7 +221,7 @@ public class NavigationToolbar extends PlatformBase {
 	 */
 	public void goToGroupSites(){
 		info("--Go to Portal-->Sites--");
-		waitForAndGetElement(ELEMENT_TOOLBAR_ADMINISTRATION,3000,0);
+		waitElementAndTryGetElement(ELEMENT_TOOLBAR_ADMINISTRATION);
 		click(ELEMENT_TOOLBAR_ADMINISTRATION);
 		mouseOver(ELEMENT_ADMINISTRATION_PORTAL,true);
 		waitForAndGetElement(ELEMENT_ADMINISTRATION_PORTAL_GROUP_SITES,3000,0);
@@ -467,7 +467,7 @@ public class NavigationToolbar extends PlatformBase {
 	 */
 	public void goToBanding() {
 		info("-- Go to Banding page --");
-		waitForAndGetElement(ELEMENT_TOOLBAR_ADMINISTRATION,5000,0);
+		waitElementAndTryGetElement(ELEMENT_TOOLBAR_ADMINISTRATION);
 		click(ELEMENT_TOOLBAR_ADMINISTRATION);
 		mouseOver(ELEMENT_ADMINISTRATION_PORTAL, true);
 		waitForAndGetElement(ELEMENT_ADMINISTRATION_PORTAL_BRANDING,5000,0);
@@ -596,6 +596,7 @@ public class NavigationToolbar extends PlatformBase {
 	 * Open search administration
 	 */
 	public void goToAdminSearch() {
+		waitElementAndTryGetElement(ELEMENT_TOOLBAR_ADMINISTRATION);
 		click(ELEMENT_TOOLBAR_ADMINISTRATION);
 		mouseOver( ELEMENT_MENU_CONTENT_LINK , true);
 		click(ELEMENT_SEARCH_LINK);
@@ -660,10 +661,10 @@ public class NavigationToolbar extends PlatformBase {
 	 */
 	public void goToAdminNotifications(){
 		info("Go to email notifications");
-		waitForAndGetElement(ELEMENT_TOOLBAR_ADMINISTRATION, DEFAULT_TIMEOUT, 0);
+		waitElementAndTryGetElement(ELEMENT_TOOLBAR_ADMINISTRATION);
 		click(ELEMENT_TOOLBAR_ADMINISTRATION);
 		mouseOver(ELEMENT_ADMINISTRATION_PORTAL,true);
-		waitForAndGetElement(ELEMENT_ADMINISTRATION_PORTAL_EMAIL_NOTIFICATIONS,3000,0);
+		waitForAndGetElement(ELEMENT_ADMINISTRATION_PORTAL_EMAIL_NOTIFICATIONS,3000,1);
 		click(ELEMENT_ADMINISTRATION_PORTAL_EMAIL_NOTIFICATIONS);
 		Utils.pause(2000);
 	}
@@ -673,9 +674,9 @@ public class NavigationToolbar extends PlatformBase {
 	 */
 	public void goToAddUser(){
 		info("Go to add user page");
-		waitForAndGetElement(ELEMENT_TOOLBAR_ADMINISTRATION,3000,0);
+		waitElementAndTryGetElement(ELEMENT_TOOLBAR_ADMINISTRATION);
 		click(ELEMENT_TOOLBAR_ADMINISTRATION);
-		waitForAndGetElement(ELEMENT_ADMINISTRATION_USERS, DEFAULT_TIMEOUT, 0);
+		waitForAndGetElement(ELEMENT_ADMINISTRATION_USERS, DEFAULT_TIMEOUT, 1);
 		mouseOver(ELEMENT_ADMINISTRATION_USERS,true);
 		if(waitForAndGetElement(ELEMENT_ADMINISTRATION_PORTAL_ADD_USERS,3000,0)!=null)
 			click(ELEMENT_ADMINISTRATION_PORTAL_ADD_USERS);

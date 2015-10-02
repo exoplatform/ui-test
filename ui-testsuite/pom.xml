@@ -35,165 +35,459 @@
 			</properties>
 		</profile>
 		<profile>
-			<id>answer-sniff</id>
+			<id>answer-sniff-part1</id>
 			<properties>
-				<testSuite>answer-sniff.xml</testSuite>
+				<testSuite>answer-sniff-part1.xml</testSuite>
 			</properties>
 		</profile>
 		<profile>
-			<id>calendar-sniff</id>
+			<id>answer-sniff-part2</id>
 			<properties>
-				<testSuite>calendar-sniff.xml</testSuite>
+				<testSuite>answer-sniff-part2.xml</testSuite>
+			</properties>
+		</profile>
+		<profile>
+			<id>calendar-sniff-part1</id>
+			<properties>
+				<testSuite>calendar-sniff-part1.xml</testSuite>
+			</properties>
+		</profile>
+		<profile>
+			<id>calendar-sniff-part2</id>
+			<properties>
+				<testSuite>calendar-sniff-part2.xml</testSuite>
+			</properties>
+		</profile>
+		<profile>
+			<id>calendar-sniff-part3</id>
+			<properties>
+				<testSuite>calendar-sniff-part3.xml</testSuite>
+			</properties>
+		</profile>
+		<profile>
+			<id>calendar-sniff-part4</id>
+			<properties>
+				<testSuite>calendar-sniff-part4.xml</testSuite>
 			</properties>
 		</profile>
 		<profile>
 			<id>cal-func-part1</id>
 			<properties>
-				<testSuite>cal-func-part1.xml</testSuite>
+				<testSuite>cal-func-part01.xml</testSuite>
 			</properties>
 		</profile>
 		<profile>
 			<id>cal-func-part2</id>
 			<properties>
-				<testSuite>cal-func-part2.xml</testSuite>
+				<testSuite>cal-func-part02.xml</testSuite>
 			</properties>
 		</profile>
 		<profile>
 			<id>cal-func-part3</id>
 			<properties>
-				<testSuite>cal-func-part3.xml</testSuite>
+				<testSuite>cal-func-part03.xml</testSuite>
 			</properties>
 		</profile>
 		<profile>
 			<id>cal-func-part4</id>
 			<properties>
-				<testSuite>cal-func-part4.xml</testSuite>
+				<testSuite>cal-func-part04.xml</testSuite>
 			</properties>
 		</profile>
 		<profile>
 			<id>cal-func-part5</id>
 			<properties>
-				<testSuite>cal-func-part5.xml</testSuite>
+				<testSuite>cal-func-part05.xml</testSuite>
 			</properties>
 		</profile>
 		<profile>
-			<id>calendar-func-6</id>
+			<id>calendar-func-part6</id>
 			<properties>
-				<testSuite>cal-func-part6.xml</testSuite>
+				<testSuite>cal-func-part06.xml</testSuite>
 			</properties>
 		</profile>
 		<profile>
-			<id>wiki-sniff</id>
+			<id>calendar-func-part7</id>
 			<properties>
-				<testSuite>wiki-sniff.xml</testSuite>
+				<testSuite>cal-func-part07.xml</testSuite>
 			</properties>
 		</profile>
 		<profile>
-			<id>wiki-func-1</id>
+			<id>calendar-func-part8</id>
 			<properties>
-				<testSuite>wiki-func-part1.xml</testSuite>
+				<testSuite>cal-func-part08.xml</testSuite>
 			</properties>
 		</profile>
 		<profile>
-			<id>wiki-func-2</id>
+			<id>calendar-func-part9</id>
 			<properties>
-				<testSuite>wiki-func-part2.xml</testSuite>
+				<testSuite>cal-func-part09.xml</testSuite>
 			</properties>
 		</profile>
 		<profile>
-			<id>wiki-func-3</id>
+			<id>calendar-func-part10</id>
 			<properties>
-				<testSuite>wiki-func-part3.xml</testSuite>
+				<testSuite>cal-func-part10.xml</testSuite>
 			</properties>
 		</profile>
 		<profile>
-			<id>wiki-func-4</id>
+			<id>calendar-func-part11</id>
 			<properties>
-				<testSuite>wiki-func-part4.xml</testSuite>
+				<testSuite>cal-func-part11.xml</testSuite>
 			</properties>
 		</profile>
 		<profile>
-			<id>wiki-func-5</id>
+			<id>calendar-func-part12</id>
 			<properties>
-				<testSuite>wiki-func-part5.xml</testSuite>
+				<testSuite>cal-func-part12.xml</testSuite>
 			</properties>
 		</profile>
 		<profile>
-			<id>wiki-func-6</id>
+			<id>calendar-func-part13</id>
 			<properties>
-				<testSuite>wiki-func-part6.xml</testSuite>
+				<testSuite>cal-func-part13.xml</testSuite>
+			</properties>
+		</profile>
+		<profile>
+			<id>calendar-func-part14</id>
+			<properties>
+				<testSuite>cal-func-part14.xml</testSuite>
+			</properties>
+		</profile>
+		<profile>
+			<id>calendar-func-part15</id>
+			<properties>
+				<testSuite>cal-func-part15.xml</testSuite>
+			</properties>
+		</profile>
+		<profile>
+			<id>calendar-func-part16</id>
+			<properties>
+				<testSuite>cal-func-part16.xml</testSuite>
+			</properties>
+		</profile>
+		<profile>
+			<id>calendar-func-part17</id>
+			<properties>
+				<testSuite>cal-func-part17.xml</testSuite>
+			</properties>
+		</profile>
+		<profile>
+			<id>wiki-sniff-part1</id>
+			<properties>
+				<testSuite>wiki-sniff-part01.xml</testSuite>
+			</properties>
+		</profile>
+		<profile>
+			<id>wiki-sniff-part2</id>
+			<properties>
+				<testSuite>wiki-sniff-part02.xml</testSuite>
+			</properties>
+		</profile>
+		<profile>
+			<id>wiki-sniff-part3</id>
+			<properties>
+				<testSuite>wiki-sniff-part03.xml</testSuite>
+			</properties>
+		</profile>
+		<profile>
+			<id>wiki-sniff-part4</id>
+			<properties>
+				<testSuite>wiki-sniff-part04.xml</testSuite>
+			</properties>
+		</profile>
+		<profile>
+			<id>wiki-func-part1</id>
+			<properties>
+				<testSuite>wiki-func-part01.xml</testSuite>
+			</properties>
+		</profile>
+		<profile>
+			<id>wiki-func-part2</id>
+			<properties>
+				<testSuite>wiki-func-part02.xml</testSuite>
+			</properties>
+		</profile>
+		<profile>
+			<id>wiki-func-part3</id>
+			<properties>
+				<testSuite>wiki-func-part03.xml</testSuite>
+			</properties>
+		</profile>
+		<profile>
+			<id>wiki-func-part4</id>
+			<properties>
+				<testSuite>wiki-func-part04.xml</testSuite>
+			</properties>
+		</profile>
+		<profile>
+			<id>wiki-func-part5</id>
+			<properties>
+				<testSuite>wiki-func-part05.xml</testSuite>
+			</properties>
+		</profile>
+		<profile>
+			<id>wiki-func-part6</id>
+			<properties>
+				<testSuite>wiki-func-part06.xml</testSuite>
+			</properties>
+		</profile>
+		<profile>
+			<id>wiki-func-part7</id>
+			<properties>
+				<testSuite>wiki-func-part07.xml</testSuite>
+			</properties>
+		</profile>
+		<profile>
+			<id>wiki-func-part8</id>
+			<properties>
+				<testSuite>wiki-func-part08.xml</testSuite>
+			</properties>
+		</profile>
+		<profile>
+			<id>wiki-func-part9</id>
+			<properties>
+				<testSuite>wiki-func-part09.xml</testSuite>
+			</properties>
+		</profile>
+		<profile>
+			<id>wiki-func-part10</id>
+			<properties>
+				<testSuite>wiki-func-part10.xml</testSuite>
+			</properties>
+		</profile>
+		<profile>
+			<id>wiki-func-part11</id>
+			<properties>
+				<testSuite>wiki-func-part11.xml</testSuite>
+			</properties>
+		</profile>
+		<profile>
+			<id>wiki-func-part12</id>
+			<properties>
+				<testSuite>wiki-func-part12.xml</testSuite>
+			</properties>
+		</profile>
+		<profile>
+			<id>wiki-func-part13</id>
+			<properties>
+				<testSuite>wiki-func-part13.xml</testSuite>
+			</properties>
+		</profile>
+		<profile>
+			<id>wiki-func-part14</id>
+			<properties>
+				<testSuite>wiki-func-part14.xml</testSuite>
+			</properties>
+		</profile>
+		<profile>
+			<id>wiki-func-part15</id>
+			<properties>
+				<testSuite>wiki-func-part15.xml</testSuite>
+			</properties>
+		</profile>
+		<profile>
+			<id>wiki-func-part16</id>
+			<properties>
+				<testSuite>wiki-func-part16.xml</testSuite>
 			</properties>
 		</profile>
 		<profile>
 			<id>social-sniff-part1</id>
 			<properties>
-				<testSuite>social-sniff-part1.xml</testSuite>
+				<testSuite>social-sniff-part01.xml</testSuite>
 			</properties>
 		</profile>
 		<profile>
 			<id>social-sniff-part2</id>
 			<properties>
-				<testSuite>social-sniff-part2.xml</testSuite>
+				<testSuite>social-sniff-part02.xml</testSuite>
 			</properties>
 		</profile>
 		<profile>
 			<id>social-sniff-part3</id>
 			<properties>
-				<testSuite>social-sniff-part3.xml</testSuite>
+				<testSuite>social-sniff-part03.xml</testSuite>
+			</properties>
+		</profile>
+		<profile>
+			<id>social-sniff-part4</id>
+			<properties>
+				<testSuite>social-sniff-part04.xml</testSuite>
+			</properties>
+		</profile>
+		<profile>
+			<id>social-sniff-part5</id>
+			<properties>
+				<testSuite>social-sniff-part05.xml</testSuite>
+			</properties>
+		</profile>
+		<profile>
+			<id>social-sniff-part6</id>
+			<properties>
+				<testSuite>social-sniff-part06.xml</testSuite>
 			</properties>
 		</profile>
 		<profile>
 			<id>social-func-part1</id>
 			<properties>
-				<testSuite>social-func-part1.xml</testSuite>
+				<testSuite>social-func-part01.xml</testSuite>
 			</properties>
 		</profile>
 		<profile>
 			<id>social-func-part2</id>
 			<properties>
-				<testSuite>social-func-part2.xml</testSuite>
+				<testSuite>social-func-part02.xml</testSuite>
 			</properties>
 		</profile>
 		<profile>
 			<id>social-func-part3</id>
 			<properties>
-				<testSuite>social-func-part3.xml</testSuite>
+				<testSuite>social-func-part03.xml</testSuite>
 			</properties>
 		</profile>
 		<profile>
 			<id>social-func-part4</id>
 			<properties>
-				<testSuite>social-func-part4.xml</testSuite>
+				<testSuite>social-func-part04.xml</testSuite>
 			</properties>
 		</profile>
 		<profile>
 			<id>social-func-part5</id>
 			<properties>
-				<testSuite>social-func-part5.xml</testSuite>
+				<testSuite>social-func-part05.xml</testSuite>
 			</properties>
 		</profile>
 		<profile>
 			<id>social-func-part6</id>
 			<properties>
-				<testSuite>social-func-part6.xml</testSuite>
+				<testSuite>social-func-part06.xml</testSuite>
 			</properties>
 		</profile>
 		<profile>
 			<id>social-func-part7</id>
 			<properties>
-				<testSuite>social-func-part7.xml</testSuite>
+				<testSuite>social-func-part07.xml</testSuite>
 			</properties>
 		</profile>
 		<profile>
 			<id>social-func-part8</id>
 			<properties>
-				<testSuite>social-func-part8.xml</testSuite>
+				<testSuite>social-func-part08.xml</testSuite>
 			</properties>
 		</profile>
 		<profile>
 			<id>social-func-part9</id>
 			<properties>
-				<testSuite>social-func-part9.xml</testSuite>
+				<testSuite>social-func-part09.xml</testSuite>
+			</properties>
+		</profile>
+		<profile>
+			<id>social-func-part10</id>
+			<properties>
+				<testSuite>social-func-part10.xml</testSuite>
+			</properties>
+		</profile>
+		<profile>
+			<id>social-func-part10</id>
+			<properties>
+				<testSuite>social-func-part10.xml</testSuite>
+			</properties>
+		</profile>
+		<profile>
+			<id>social-func-part11</id>
+			<properties>
+				<testSuite>social-func-part11.xml</testSuite>
+			</properties>
+		</profile>
+		<profile>
+			<id>social-func-part12</id>
+			<properties>
+				<testSuite>social-func-part12.xml</testSuite>
+			</properties>
+		</profile>
+		<profile>
+			<id>social-func-part13</id>
+			<properties>
+				<testSuite>social-func-part13.xml</testSuite>
+			</properties>
+		</profile>
+		<profile>
+			<id>social-func-part14</id>
+			<properties>
+				<testSuite>social-func-part14.xml</testSuite>
+			</properties>
+		</profile>
+		<profile>
+			<id>social-func-part15</id>
+			<properties>
+				<testSuite>social-func-part15.xml</testSuite>
+			</properties>
+		</profile>
+		<profile>
+			<id>social-func-part16</id>
+			<properties>
+				<testSuite>social-func-part16.xml</testSuite>
+			</properties>
+		</profile>
+		<profile>
+			<id>social-func-part17</id>
+			<properties>
+				<testSuite>social-func-part17.xml</testSuite>
+			</properties>
+		</profile>
+		<profile>
+			<id>social-func-part18</id>
+			<properties>
+				<testSuite>social-func-part18.xml</testSuite>
+			</properties>
+		</profile>
+		<profile>
+			<id>social-func-part19</id>
+			<properties>
+				<testSuite>social-func-part19.xml</testSuite>
+			</properties>
+		</profile>
+		<profile>
+			<id>social-func-part20</id>
+			<properties>
+				<testSuite>social-func-part20.xml</testSuite>
+			</properties>
+		</profile>
+		<profile>
+			<id>social-func-part21</id>
+			<properties>
+				<testSuite>social-func-part21.xml</testSuite>
+			</properties>
+		</profile>
+		<profile>
+			<id>social-func-part22</id>
+			<properties>
+				<testSuite>social-func-part22.xml</testSuite>
+			</properties>
+		</profile>
+		<profile>
+			<id>social-func-part23</id>
+			<properties>
+				<testSuite>social-func-part23.xml</testSuite>
+			</properties>
+		</profile>
+		<profile>
+			<id>social-func-part24</id>
+			<properties>
+				<testSuite>social-func-part24.xml</testSuite>
+			</properties>
+		</profile>
+		<profile>
+			<id>social-func-part25</id>
+			<properties>
+				<testSuite>social-func-part25.xml</testSuite>
+			</properties>
+		</profile>
+		<profile>
+			<id>social-func-part26</id>
+			<properties>
+				<testSuite>social-func-part26.xml</testSuite>
 			</properties>
 		</profile>
 		<profile>
@@ -209,6 +503,18 @@
 			</properties>
 		</profile>
 		<profile>
+			<id>gatein-sniff-part3</id>
+			<properties>
+				<testSuite>gatein-sniff-part3.xml</testSuite>
+			</properties>
+		</profile>
+		<profile>
+			<id>gatein-sniff-part4</id>
+			<properties>
+				<testSuite>gatein-sniff-part4.xml</testSuite>
+			</properties>
+		</profile>
+		<profile>
 			<id>ecms-sniff-part1</id>
 			<properties>
 				<testSuite>ecms-sniff-part1.xml</testSuite>
@@ -221,15 +527,57 @@
 			</properties>
 		</profile>
 		<profile>
-			<id>forum-sniff</id>
+			<id>ecms-sniff-part3</id>
 			<properties>
-				<testSuite>forum-sniff.xml</testSuite>
+				<testSuite>ecms-sniff-part3.xml</testSuite>
 			</properties>
 		</profile>
 		<profile>
-			<id>plf-sniff</id>
+			<id>ecms-sniff-part4</id>
 			<properties>
-				<testSuite>plf-sniff.xml</testSuite>
+				<testSuite>ecms-sniff-part4.xml</testSuite>
+			</properties>
+		</profile>
+		<profile>
+			<id>ecms-sniff-part5</id>
+			<properties>
+				<testSuite>ecms-sniff-part5.xml</testSuite>
+			</properties>
+		</profile>
+		<profile>
+			<id>ecms-sniff-part6</id>
+			<properties>
+				<testSuite>ecms-sniff-part6.xml</testSuite>
+			</properties>
+		</profile>
+		<profile>
+			<id>forum-sniff-part1</id>
+			<properties>
+				<testSuite>forum-sniff-part1.xml</testSuite>
+			</properties>
+		</profile>
+		<profile>
+			<id>forum-sniff-part2</id>
+			<properties>
+				<testSuite>forum-sniff-part2.xml</testSuite>
+			</properties>
+		</profile>
+		<profile>
+			<id>plf-sniff-part1</id>
+			<properties>
+				<testSuite>plf-sniff-part1.xml</testSuite>
+			</properties>
+		</profile>
+		<profile>
+			<id>plf-sniff-part2</id>
+			<properties>
+				<testSuite>plf-sniff-part2.xml</testSuite>
+			</properties>
+		</profile>
+		<profile>
+			<id>plf-sniff-part3</id>
+			<properties>
+				<testSuite>plf-sniff-part3.xml</testSuite>
 			</properties>
 		</profile>
 		<profile>
