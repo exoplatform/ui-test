@@ -71,31 +71,31 @@
 			</properties>
 		</profile>
 		<profile>
-			<id>cal-func-part1</id>
+			<id>calendar-func-part1</id>
 			<properties>
 				<testSuite>cal-func-part01.xml</testSuite>
 			</properties>
 		</profile>
 		<profile>
-			<id>cal-func-part2</id>
+			<id>calendar-func-part2</id>
 			<properties>
 				<testSuite>cal-func-part02.xml</testSuite>
 			</properties>
 		</profile>
 		<profile>
-			<id>cal-func-part3</id>
+			<id>calendar-func-part3</id>
 			<properties>
 				<testSuite>cal-func-part03.xml</testSuite>
 			</properties>
 		</profile>
 		<profile>
-			<id>cal-func-part4</id>
+			<id>calendar-func-part4</id>
 			<properties>
 				<testSuite>cal-func-part04.xml</testSuite>
 			</properties>
 		</profile>
 		<profile>
-			<id>cal-func-part5</id>
+			<id>calendar-func-part5</id>
 			<properties>
 				<testSuite>cal-func-part05.xml</testSuite>
 			</properties>
@@ -380,12 +380,6 @@
 			<id>social-func-part9</id>
 			<properties>
 				<testSuite>social-func-part09.xml</testSuite>
-			</properties>
-		</profile>
-		<profile>
-			<id>social-func-part10</id>
-			<properties>
-				<testSuite>social-func-part10.xml</testSuite>
 			</properties>
 		</profile>
 		<profile>
