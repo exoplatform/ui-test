@@ -5,6 +5,8 @@ import static org.exoplatform.selenium.TestLogger.info;
 import org.exoplatform.selenium.Button;
 import org.exoplatform.selenium.ManageAlert;
 import org.exoplatform.selenium.platform.PlatformBase;
+import org.exoplatform.selenium.platform.PlatformPermission;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -15,7 +17,8 @@ public class AnswerCategoryManagement extends PlatformBase {
 	QuestionManagement qMang;
 	ManageAlert alert;
 	Button button;
-
+	PlatformPermission plfPerm;
+	
 	//Action of category from action bar
 	public By ELEMENT_CATEGORY_EDIT_BUTTON=By.xpath("//*[@class='uiIconEditCategory']");
 	public By ELEMENT_CATEGORY_ADD_BUTTON=By.xpath("//*[@class='uiIconAddCategory']");
@@ -78,6 +81,10 @@ public class AnswerCategoryManagement extends PlatformBase {
 	public By ELEMENT_CATEGORY_MOVE_FORM=By.id("MoveCategoryForm");
 	public String ELEMENT_CATEGORY_MOVE_TARGET_ITEM="//*[@class='uiIconCategory uiIconLightGray']/../..//*[contains(.,'$category')]";
 
+	//Permission tab
+	public By ELEMENT_CATEGORY_EDIT_PERM_TAB = By.xpath("//*[contains(@data-target,'PermissionTab')]");
+	public final String ELEMENT_MANAGE_QUESTION_PERM_RESTRICTED = "//*[contains(.,'$group')]/../td[2]/*[@class='uiCheckbox']/input[@type='checkbox']";
+	public final String ELEMENT_MANAGE_QUESTION_PERM_MODERATOR = "//*[contains(.,'$group')]/../td[3]/*[@class='uiCheckbox']/input[@type='checkbox']";
 	/**
 	 * constructor
 	 * @param dr
@@ -88,6 +95,7 @@ public class AnswerCategoryManagement extends PlatformBase {
 		alert = new ManageAlert(driver);
 		button = new Button(driver);
 		qMang = new QuestionManagement(driver);
+		plfPerm =  new PlatformPermission(driver);
 	}
 	
 	/**
@@ -313,5 +321,48 @@ public class AnswerCategoryManagement extends PlatformBase {
 		click(ELEMENT_ATTACHMENT_SAVE_BUTTON);
 		alert.verifyAlertMessage(ELEMENT_IMPORT_SUCCESS_MESSAGE);
 		click(ELEMENT_CATEGORY_OK_BUTTON);
+	}
+	/**
+	 * Set permission
+	 * @param cat
+	 * @param group
+	 * @param isRestriected
+	 * @param isMod
+	 */
+	public void setPermission(String cat,String group,boolean isRestricted,boolean isMod){
+ 	 	goToActionOfCategoryFromActionBar(actionCategoryOption.EDIT);
+ 	 	click(ELEMENT_CATEGORY_EDIT_PERM_TAB,0,true);
+ 	 	plfPerm.selectGroupMembership(group,"*");
+ 	 	click(plfPerm.ELEMENT_ADD_USERS_BUTTON);
+ 	 	if(isRestricted)
+ 	 		check(By.xpath(ELEMENT_MANAGE_QUESTION_PERM_RESTRICTED.replace("$group",group)),2);
+ 	 	if(isMod)
+ 	 		check(By.xpath(ELEMENT_MANAGE_QUESTION_PERM_MODERATOR.replace("$group", group)),2);
+		click(ELEMENT_CATEGORY_ADD_FORM_SAVE_BUTTON);
+	}
+	/**
+	 * create category
+	 * @param cat
+	 */
+	public void createCategory(String cat){
+		goToActionOfCategoryFromActionBar(actionCategoryOption.ADD);
+ 	 	inputDataToSettingTab(cat, null, cat, null, null, null);
+ 	 	click(ELEMENT_CATEGORY_ADD_FORM_SAVE_BUTTON);
+ 	 	waitForAndGetElement(ELEMENT_CATEGORY_LIST_ITEM.replace("$category", cat));
+	}
+	/**
+	 * check accessibility of category
+	 * @param cat
+	 * @param isAccess
+	 * @param ques
+	 */
+	public void checkAccessibilityOfCat(String cat,boolean isAccess,String...ques){
+		if(isAccess){
+			click(ELEMENT_CATEGORY_LIST_ITEM.replace("$category", cat),0,true);
+			for (String q : ques) {
+				waitForAndGetElement(By.xpath(aHome.ELEMENT_QUESTION_LIST_ITEM.replace("$question", q)));
+			}
+		}else
+			waitForElementNotPresent(ELEMENT_CATEGORY_LIST_ITEM.replace("$category", cat));
 	}
 }

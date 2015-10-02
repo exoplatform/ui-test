@@ -1,9 +1,7 @@
 package org.exoplatform.selenium.platform.social.sniff;
 
 import static org.exoplatform.selenium.TestLogger.info;
-
 import java.awt.AWTException;
-
 import org.exoplatform.selenium.Utils;
 import org.exoplatform.selenium.platform.ecms.CreateNewDocument.selectDocumentType;
 import org.openqa.selenium.JavascriptExecutor;
@@ -1212,6 +1210,4 @@ public class SOC_HomePage extends SOC_TestConfig_1 {
 		waitForAndGetElement(hpAct.ELEMENT_ACTIVITY_SPACE_CHANGE_NAME.replace("${space}",newSpace));
 	
 	}
-
-
 }

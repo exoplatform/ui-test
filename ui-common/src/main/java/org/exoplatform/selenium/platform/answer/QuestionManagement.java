@@ -364,4 +364,22 @@ public class QuestionManagement extends AnswerLocator {
 	    	info("Answer form is shown successfully");
 	    }
 	}
+	/**
+	 * Check manage question form
+	 * @param isDisplay
+	 * @param ques
+	 * 			  list of question
+	 */
+	public void checkMngQuesForm(boolean isDisplay,String...ques){
+		if(isDisplay){
+			waitForAndGetElement(ELEMENT_MANAGE_QUESTION_BUTTON);
+			click(ELEMENT_MANAGE_QUESTION_BUTTON,0,true);
+			for (String q : ques) {
+				waitForAndGetElement(ELEMENT_MANAGE_QUESTION_EDIT_QUESTION.replace("$question", q));
+				waitForAndGetElement(ELEMENT_MANAGE_QUESTION_DELETE_QUESTION.replace("$question", q));
+			}
+		}else
+			waitForElementNotPresent(ELEMENT_MANAGE_QUESTION_BUTTON);
+	}
+	
 }

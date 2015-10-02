@@ -50,7 +50,7 @@ public class AnswerLocator extends PlatformBase {
 	public String ELEMENT_MANAGE_QUESTION_APPROVE_QUESTION_CHECKBOX="//*[text()='$question']/..//*[@data-original-title='Approve' or @data-original-title='Disapprove']//*[@id='allDay']";
 	public String ELEMENT_MANAGE_QUESTION_ACTIVE_QUESTION_CHECKBOX="//*[text()='$question']/..//*[@data-original-title='Deactivate' or @data-original-title='Activate']//*[@id='allDay']";
 	public By ELEMENT_MANAGE_QUESTION_CLOSE_BUTTON=By.xpath("//*[@id='UIAnswersPopupAction']//*[text()='Close']");
-
+	
 	//Submit Question form
 	public By ELEMENT_SUBMIT_QUESTION_FORM = By.id("UIQuestionForm");
 	public By ELEMENT_SUBMIT_QUESTION_FORM_TITLE_INPUT=By.id("QuestionTitle");

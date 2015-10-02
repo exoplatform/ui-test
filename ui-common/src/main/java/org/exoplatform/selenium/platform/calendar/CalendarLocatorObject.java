@@ -218,7 +218,7 @@ public class CalendarLocatorObject extends PlatformBase{
 	public By ELEMENT_CALENDAR_SELECT_USER_ICON = By.xpath("//*[@class='uiIconUser uiIconLightGray']");
 	public By ELEMENT_CALENDAR_SELECT_MEMBERSHIP_ICON = By.xpath("//*[@class='uiIconMembership uiIconLightGray']");
 	public By ELEMENT_CALENDAR_SELECT_GROUP_ICON = By.xpath("//*[@class='uiIconGroup uiIconLightGray']");
-	public String ELEMENT_CALENDAR_SHARE_EDIT_PERMISSION = "//div[@title='${user}']/../..//input[@class='checkbox']";
+	public String ELEMENT_CALENDAR_SHARE_EDIT_PERMISSION = "//div[contains(@title,'${user}')]/../..//input[@class='checkbox']";
 	public By ELEMENT_CALENDAR_SHARE_ADD_BUTTON = By.xpath("//form[@id='UISharedForm']//*[text()='Add']");
 	public By ELEMENT_CALENDAR_SHARE_SAVE_BUTTON = By.xpath("//form[@id='UISharedForm']//*[text()='Save']");
 	public String ELEMENT_DELETE_SHARE_USER = "//*[@id='UISharedForm']//*[contains(text(),'{$user}')]/../..//*[@class='uiIconDelete uiIconLightGray']";
@@ -319,6 +319,8 @@ public class CalendarLocatorObject extends PlatformBase{
 	public By ELEMENT_CALENDAR_GROUP_INPUT_USER=By.xpath(".//*[contains(@class,'inputLarge')]//input");
 	public By ELEMENT_CALENDAR_GROUP_SELECT_USER_BTN=By.xpath(".//*[@id='public']//*[contains(@class,'uiIconUser')]");
 	public String ELEMENT_CALENDAR_GROUP_USER_IN_SELECT_FORM=".//*[@id='UIGroupSelector']//*[contains(text(),'$user')]";
+	public By ELEMENT_CALENDAR_GROUP_SELECT_FORM=By.xpath(".//*[@id='UIGroupSelector']//*[@class='uiContentBox']");
+	public String ELEMENT_CALENDAR_GROUP_SELECT_LIST="//*[@id='UIGroupSelector']//a[contains(.,'$group')]";
 	public By ELEMENT_CALENDAR_GROUP_SELECT_ROLE_BTN=By.xpath(".//*[@id='public']//*[contains(@class,'uiIconMembership')]");
 	public String ELEMENT_CALENDAR_GROUP_REMOVE_BTN=".//*[contains(text(),'$group')]/..//*[contains(@class,'uiIconDelete')]";
 	public String ELEMENT_CALENDAR_GROUP_TOOLTIP_ONLY_PERMISSION=".//*[contains(text(),'$group')]/..//*[contains(@title,'Only 1 permission, cannot delete')]";

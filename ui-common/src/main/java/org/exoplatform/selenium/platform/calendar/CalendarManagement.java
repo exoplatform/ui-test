@@ -232,7 +232,26 @@ public class CalendarManagement extends CalendarLocatorObject{
 			}
 		}
 	}
-
+	/**
+	 * Select group permission
+	 * @param group
+	 * @param membership
+	 */
+	public void selectGroupPermission(String group,String membership){
+		info("select group:"+group);
+		click(ELEMENT_CALENDAR_SELECT_GROUP_ICON,0,true);
+		waitForAndGetElement(ELEMENT_CALENDAR_GROUP_SELECT_FORM);
+		click(ELEMENT_CALENDAR_GROUP_SELECT_LIST.replace("$group", group));
+		waitForElementNotPresent(ELEMENT_CALENDAR_GROUP_SELECT_FORM);
+		click(ELEMENT_CALENDAR_ADD_GROUP_BUTTON,0,true);
+		Utils.pause(1000);
+		click(ELEMENT_CALENDAR_GROUP_SELECT_ROLE_BTN);
+		waitForAndGetElement(ELEMENT_CALENDAR_GROUP_SELECT_FORM);
+		click(ELEMENT_CALENDAR_GROUP_SELECT_LIST.replace("$group", membership));
+		waitForElementNotPresent(ELEMENT_CALENDAR_GROUP_SELECT_FORM);
+		Utils.pause(1000);
+		
+	}
 	/**
 	 * Save add calendar
 	 */
@@ -1319,7 +1338,74 @@ public class CalendarManagement extends CalendarLocatorObject{
 		
 	}
 	
-	
-	
-
+	/**
+	 * Check accessibility of share calendar
+	 * @param isAccess
+	 * 				true if user can view calendar
+	 * @param isEdit
+	 * 				true if user can edit calendar
+	 * @param cal
+	 */
+	public void checkAccessibilityOfShareCalendar(boolean isAccess,boolean isEdit,String cal){
+		if(isAccess){
+			waitForAndGetElement(ELEMENT_CALENDAR_LIST_ITEM.replace("$calendar",cal));
+			openMenuOfCalendar(cal);
+			waitForAndGetElement(ELEMENT_CALENDAR_REMOVE_SHARE_CALENDAR);
+			waitForAndGetElement(ELEMENT_CALENDAR_REFRESH_MENU);
+			if(isEdit){
+				waitForAndGetElement(ELEMENT_CALENDAR_EDIT_MENU,DEFAULT_TIMEOUT,1,2);
+				waitForAndGetElement(ELEMENT_CALENDAR_EXPORT_MENU);
+				waitForAndGetElement(ELEMENT_CALENDAR_IMPORT_MENU);
+				waitForAndGetElement(ELEMENT_CALENDAR_ADD_EVENT_MENU,DEFAULT_TIMEOUT,1,2);
+				}
+		}else{
+			waitForElementNotPresent(ELEMENT_CALENDAR_LIST_ITEM.replace("$calendar",cal));
+		}
+	}
+	/**
+	 * Check accessibility of calendar
+	 * @param isAccess
+	 * 				true if user can view calendar
+	 * @param isEdit
+	 * 				true if user can edit calendar
+	 * @param cal
+	 */
+	public void checkAccessibilityOfCalendar(boolean isAccess,boolean isEdit,String cal){
+		if(isAccess){
+			waitForAndGetElement(ELEMENT_CALENDAR_LIST_ITEM.replace("$calendar",cal));
+			openMenuOfCalendar(cal);
+			waitForAndGetElement(ELEMENT_CALENDAR_REMOVE_MENU);
+			waitForAndGetElement(ELEMENT_CALENDAR_REFRESH_MENU);
+			if(isEdit){
+				waitForAndGetElement(ELEMENT_CALENDAR_EDIT_MENU,DEFAULT_TIMEOUT,1,2);
+				waitForAndGetElement(ELEMENT_CALENDAR_EXPORT_MENU);
+				waitForAndGetElement(ELEMENT_CALENDAR_IMPORT_MENU);
+				waitForAndGetElement(ELEMENT_CALENDAR_ADD_EVENT_MENU,DEFAULT_TIMEOUT,1,2);
+				}
+		}else{
+			waitForElementNotPresent(ELEMENT_CALENDAR_LIST_ITEM.replace("$calendar",cal));
+		}
+	}
+	/**
+	 * Share calendar to group
+	 * @param calendar
+	 * @param group
+	 * @param membership
+	 * @param canEdit
+	 */
+	public void shareCalendarToGroup(String calendar, String group, String membership,boolean canEdit){
+		info("Share calendar to group user");
+		executeActionCalendar(calendar, menuOfCalendarOption.SHARE);
+		click(ELEMENT_CALENDAR_SELECT_MEMBERSHIP_ICON,0,true);
+		pPer.selectGroupMembership(group,membership);
+		click(ELEMENT_CALENDAR_SHARE_ADD_BUTTON,0,true);
+		if(canEdit){
+			check(ELEMENT_CALENDAR_SHARE_EDIT_PERMISSION.replace("${user}", group),2);
+		}
+		else{
+			uncheck(ELEMENT_CALENDAR_SHARE_EDIT_PERMISSION.replace("${user}", group),2);
+		}
+		click(ELEMENT_CALENDAR_SHARE_SAVE_BUTTON);
+		waitForElementNotPresent(ELEMENT_CALENDAR_SHARE_SAVE_BUTTON);
+	}
 }

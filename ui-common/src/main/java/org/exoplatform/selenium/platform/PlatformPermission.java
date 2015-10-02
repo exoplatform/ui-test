@@ -18,7 +18,7 @@ public class PlatformPermission extends PlatformBase {
 
 	//User permission
 	public final String ELEMENT_USER_CHECKBOX = "//*[@id='${user}' and @type='checkbox']";
-	public final By ELEMENT_ADD_USERS_BUTTON = By.xpath("//*[@id='UIUserSelector']//*[text()='Add']");
+	public final By ELEMENT_ADD_USERS_BUTTON = By.xpath("//*[contains(@class,'addButton')]");
 	public final By ELEMENT_SEARCH_USER_INPUT = By.id("Quick Search");
 	public final By ELEMENT_QUICK_SEARCH_BUTTON = By.xpath("//a[@data-original-title='Quick Search']");
 	public final By ELEMENT_SELECT_SEARCH = By.name("filter");
@@ -26,10 +26,10 @@ public class PlatformPermission extends PlatformBase {
 	//Group permission
 	public final By ELEMENT_SELECT_GROUP_POPUP = By.id("UIPopupGroupMembershipSelector");
 	public final By ELEMENT_SELECT_THIS_GROUP = By.linkText("Select this Group");
-	public final String ELEMENT_SELECT_RIGHT_PARENT_GROUP = "//*[@title='$group']";
+	public final String ELEMENT_SELECT_RIGHT_PARENT_GROUP = "//*[contains(@id,'UIGroupMember')]//a[contains(.,'$group')]";
 
 	//Membership permission
-	public final By ELEMENT_SELECT_MEMBERSHIP_POPUP = By.id("UIPopupGroupMembershipSelector");
+	public final By ELEMENT_SELECT_MEMBERSHIP_POPUP = By.xpath("//*[contains(@id,'UIGroupMember')]");
 
 
 	/**
