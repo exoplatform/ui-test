@@ -11,6 +11,7 @@
 			<class name="org.exoplatform.selenium.platform.task.functional.TASK_TaskCapture" />
 			<class name="org.exoplatform.selenium.platform.task.functional.TASK_CalendarIntegration" />
 			<class name="org.exoplatform.selenium.platform.task.functional.TASK_UnifiedSearch" />
+			<class name="org.exoplatform.selenium.platform.task.functional.TASK_Labels_LabelOverview" />
 		</classes>
 	</test>
 	<listeners>

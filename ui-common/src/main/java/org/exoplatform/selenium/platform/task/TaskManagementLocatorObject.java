@@ -16,9 +16,9 @@ public class TaskManagementLocatorObject extends PlatformBase {
 	
 	/***********************************************************LEFT PANE******************************************************/
 	//General
-	public final By ELEMENT_LEFT_PANE_NO_PROJECT = By.xpath("//*[contains(@class,'list-projects')]/*[contains(.,'No Project')]");
+	public final By ELEMENT_LEFT_PANE_NO_PROJECT = By.xpath("//*[contains(@class,'list-projects')]/*[contains(.,'No project')]");
 	public final By ELEMENT_LEFT_PANE_TOOLTIP_TASK = By.xpath("//*[@class='popover-content'][contains(.,\"Let's create your first task.\")]");
-	public final By ELEMENT_LEFT_PANE_TOOLTIP_PROJECT = By.xpath("//*[@class='popover-content'][contains(.,\"No Project. Click here to create your first project.\")]");
+	public final By ELEMENT_LEFT_PANE_TOOLTIP_PROJECT = By.xpath("//*[@class='popover-content'][contains(.,'No Project. Click here to create your first project.')]");
 	public final By ELEMENT_TASK_APP_ICON = By.xpath("//*[contains(@class,'TaskManagementApplication')]");
 	public final String ELEMENT_PROFILE_PORTLET = ".//*[@id='UIStatusProfilePortlet']/*[contains(.,'$user')]";
 	public final By ELEMENT_LEFT_PANE_SHOWHIDE_LEFT = By.xpath(".//*[@id='ShowHideLeft']/*[contains(@class,'ArrowLeft')]");
@@ -26,7 +26,6 @@ public class TaskManagementLocatorObject extends PlatformBase {
 	//Project area-->General
 	public final String ELEMENT_LEFT_PANE_PROJECT_NAME="//*[contains(@class,'project-name')][contains(.,'$project')]";
 	public final By ELEMENT_LEFT_PANE_PROJECTS=By.xpath("//*[contains(@class,'project-name')][contains(.,'Projects')]");
-	public final By ELEMENT_LEFT_PANE_LABELS=By.xpath("//*[contains(@class,'project-name')][contains(.,'Label')]");
 	public final By ELEMENT_LEFT_PANE_TASKS=By.xpath("//*[contains(@class,'project-name')][contains(.,'Tasks')]");
 	public final By ELEMENT_LEFT_PANE_INCOMING=By.xpath("//*[contains(@class,'project-name')][contains(.,'Incoming')]");
 	public final By ELEMENT_LEFT_PANE_ALLTASKS=By.xpath("//*[contains(@class,'project-name')][contains(.,'All Tasks')]");
@@ -60,11 +59,6 @@ public class TaskManagementLocatorObject extends PlatformBase {
 	
 	//Color
 	public final String ELEMENT_LEFT_PANE_COLOR_TABLE_ITEM="//*[contains(@class,'project-name')][contains(.,'$project')]/../..//*[contains(@class,'$color')]";
-	
-	//Labels area
-	
-	
-	
 	
 	
 	/**********************************************************CENTRAL PANE******************************************************/
@@ -162,24 +156,46 @@ public class TaskManagementLocatorObject extends PlatformBase {
 	
 	//*************************************Labels Management*****************************************//
 	
-	//Labels-->General
-	public final By ELEMENT_LEFT_PANE_LABELS_ARROW_MENU=By.xpath("//*[contains(@class,'project-name')][contains(.,'Label')]/../*[contains(@class,'collapseTree')]/*[contains(@class,'ArrowDownMini')]");
+	//Labels area-->General
+	public final By ELEMENT_LEFT_PANE_LABELS_ARROW_MENU=By.xpath("//*[contains(@class,'label-name')][contains(.,'Labels')]/../*[contains(@class,'collapseTree')]/*[contains(@class,'ArrowDownMini')]");
+	public final By ELEMENT_LEFT_PANE_NO_LABEL = By.xpath("//*[contains(@class,'list-labels')]/*[contains(.,'No Label')]");
+	public final By ELEMENT_LEFT_PANE_TOOLTIP_LABEL = By.xpath("//*[@class='popover-content'][contains(.,'No Label. Click here to create your first label')]");
+	public final By ELEMENT_LEFT_PANE_LABELS_PLUS_MENU=By.xpath("//*[contains(@class,'label-name')][contains(.,'Labels')]/../*[contains(@class,'add-new-label')]/*[contains(@class,'PlusMini')]");
+	public final String ELEMENT_LEFT_PANE_LABEL_NAME="//*[contains(@class,'label-name')][contains(.,'$label')]";
+	public final By ELEMENT_LEFT_PANE_LABELS=By.xpath("//*[contains(@class,'label-name')][contains(.,'Labels')]");
+	public final By ELEMENT_LEFT_PANE_LABELS_ADD=By.xpath("//*[contains(@class,'label-name')][contains(.,'Labels')]/../*[contains(@class,'uiDropdownWithIcon')]//*[contains(@class,'AddLabel')]");
+	public final String ELEMENT_LABEL_NAME = "//*[contains(@class,'label-title')][contains(.,'$label')]";
+	public final By ELEMENT_WELCOME_TEXT_LABEL_DEFAULT= By.xpath("//*[@class='empty-content']/*[contains(.,'No Label')]");
 	
-	//Add labels form
+	//Labels area-->Context menu
+	public final String ELEMENT_LEFT_PANE_LABEL_MENU="//*[contains(@class,'label-name')][contains(.,'$label')]/../..//*[contains(@class,'RightMenu')]";
+	public final String ELEMENT_LEFT_PANE_LABEL_ADD="//*[contains(@class,'label-name')][contains(.,'$label')]/../..//*[contains(@class,'AddLabel')]";
+	public final String ELEMENT_LEFT_PANE_LABEL_EDIT="//*[contains(@class,'label-name')][contains(.,'$label')]/../..//*[contains(@class,'Edit')]";
+	public final String ELEMENT_LEFT_PANE_LABEL_DELETE="//*[contains(@class,'label-name')][contains(.,'$label')]/../..//*[contains(@class,'Trash')]";
 	
+    //Add labels form
+	public final By ELEMENT_ADD_LABEL_NAME_INPUT=By.xpath("//*[@class='list-labels']//input");
 	
-	//Edit labels form
-	
+    //Edit labels form
+	public final By ELEMENT_EDIT_LABEL_PARENT_SELECT=By.xpath(".//*[@id='lblParent']");
+	public final By ELEMENT_EDIT_LABEL_DIALOG=By.xpath(".//*[contains(@class,'edit-label-dialog')]");
+	public final By ELEMENT_EDIT_LABEL_CLOSE_BTN=By.xpath("//*[contains(@class,'edit-label-dialog')]//button[contains(.,'Close')]");
+	public final By ELEMENT_EDIT_LABEL_SAVE_BTN=By.xpath("//*[contains(@class,'edit-label-dialog')]//button[contains(.,'Save')]");
 	
 	//Delete label
-	
+	public final By ELEMENT_DELETE_LABEL_POPUP_DELETE_BTN=By.xpath("//*[contains(@class,'btn-primary')][contains(.,'Delete')]");
+	public final By ELEMENT_DELETE_LABEL_POPUP_CANCEL_BTN=By.xpath("//*[@class='btn'][contains(.,'Cancel')]");
+	public final String ELEMENT_DELETE_LABEL_POPUP_MESSAGE="//*[contains(@class,'msg')]/../*[contains(.,'Are you sure you want to delete $label label')]";
 	
 	//Show and Hide labels
-	
+	public final By ELEMENT_LEFT_PANE_LABELS_SHOWHIDDEN=By.xpath("//*[contains(@class,'ShowLabel')]/../*[contains(.,'Show Hidden Labels')]");
+	public final By ELEMENT_LEFT_PANE_LABELS_HIDEHIDDEN=By.xpath("//*[contains(@class,'ShowLabel')]/../*[contains(.,'Hide Hidden Labels')]");
+	public final String ELEMENT_LEFT_PANE_LABEL_HIDE="//*[contains(@class,'label-name')][contains(.,'$label')]/../..//*[contains(@class,'uiIconHide')]/../*[contains(.,'Hide')]";
+	public final String ELEMENT_LEFT_PANE_LABEL_SHOW="//*[contains(@class,'label-name')][contains(.,'$label')]/../..//*[contains(@class,'uiIconHide')]/../*[contains(.,'Show')]";
 	
 	//Change color
-	
-	
+	public final String ELEMENT_LEFT_PANE_LABEL_COLOR = "//*[contains(@class,'label-name')][contains(.,'$label')]/../../*[contains(@class,'$color')][contains(@class,'colorPie')]";
+	public final String ELEMENT_LEFT_PANE_LABEL_NO_COLOR = "//*[contains(@class,'label-name')][contains(.,'$label')]/../../*[@class=' colorPie']";
 	
 	//*************************************List View*****************************************//
 	public final By ELEMENT_LIST_VIEW = By.xpath("//*[contains(@class,'btn-group')]/*[contains(@class,'btn')]/*[contains(.,'List')]");
