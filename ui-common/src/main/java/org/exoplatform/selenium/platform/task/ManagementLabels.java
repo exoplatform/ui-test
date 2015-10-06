@@ -162,6 +162,7 @@ public class ManagementLabels extends TaskManagementLocatorObject {
 	/**
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 	 * get value attribute
 	 * @param locator
@@ -179,6 +180,8 @@ public class ManagementLabels extends TaskManagementLocatorObject {
 		}
 	}
 	/**
+=======
+>>>>>>> FQA-2694: [Task Management]- Write scripts for Labels - Label Overview
 	 * Add a new label
 	 * @param name
 	 *              is label's name

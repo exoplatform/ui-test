@@ -221,12 +221,15 @@
 			</properties>
 		</profile>
 		<profile>
+<<<<<<< HEAD
 			<id>task-func-part11</id>
 			<properties>
 				<testSuite>task-func-part11.xml</testSuite>
 			</properties>
 		</profile>
 		<profile>
+=======
+>>>>>>> FQA-2694: [Task Management]- Write scripts for Labels - Label Overview
 			<id>testng-failed</id>
 			<properties>
 				<testSuite>testng-failed.xml</testSuite>
