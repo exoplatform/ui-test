@@ -34,7 +34,7 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- Tasks page is opened*/
 		hp.goToTasks();
-		mgProject.addProject(prj1, "", false);
+		mgProject.addProject(prj1, "","",false);
 		mgTask.addTask(prj1, task1);
 		mgTask.addTask(prj1, task2);
 		mgTask.editTaskStatus(task2, waitingOn);
@@ -84,7 +84,7 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- Tasks page is opened*/
 		hp.goToTasks();
-		mgProject.addProject(prj1, "", false);
+		mgProject.addProject(prj1, "","", false);
 		
 		/*Step number: 2
 		*Step Name: Step 2: Open projectA
@@ -144,7 +144,7 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- Tasks page is opened*/
 		hp.goToTasks();
-		mgProject.addProject(prj1, "", false);
+		mgProject.addProject(prj1, "","", false);
 		
 		/*Step number: 2
 		*Step Name: Step 2: Open projectA
@@ -189,8 +189,9 @@ import org.testng.annotations.*;
 	- taskB is In Progress
 	- taskC is Waiting On</li>
 	*<li> Post-Condition: </li>
+	* BUG: https://jira.exoplatform.org/browse/TA-343
 	*/
-	@Test
+	@Test (groups="pending")
 	public  void test04_CheckTasksWhenDeletingStatusColumns() {
 		info("Test 4: Check tasks when deleting status columns");
 		String prj1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
@@ -209,7 +210,7 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- Tasks page is opened*/
 		hp.goToTasks();
-		mgProject.addProject(prj1, "", false);
+		mgProject.addProject(prj1, "","", false);
 		
 		/*Step number: 2
 		*Step Name: Step 2: Open projectA
@@ -286,7 +287,7 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- Tasks page is opened*/
 		hp.goToTasks();
-		mgProject.addProject(prj1, "", false);
+		mgProject.addProject(prj1, "","", false);
 		
 		/*Step number: 2
 		*Step Name: Step 2: Open projectA

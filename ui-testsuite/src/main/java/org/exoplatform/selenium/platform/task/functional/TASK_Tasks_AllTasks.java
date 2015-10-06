@@ -29,8 +29,6 @@ import org.testng.annotations.*;
 		hp.goToTasks();
 		mgTask.addTaskDirectly(task1,true);
 		mgTask.addTaskDirectly(task2,true);
-		mgTask.editTaskAssignee(task1, DATA_USER1);
-		mgTask.editTaskAssignee(task2, DATA_USER1);
 		
 		/*Step number: 2
 		*Step Name: Step 2: Check All Tasks
@@ -74,8 +72,6 @@ import org.testng.annotations.*;
 		hp.goToTasks();
 		mgTask.addTaskDirectly(task1,true);
 		mgTask.addTaskDirectly(task2,true);
-		mgTask.editTaskAssignee(task1, DATA_USER1);
-		mgTask.editTaskAssignee(task2, DATA_USER1);
 		
 		/*Step number: 2
 		*Step Name: Step 2: Open All Tasks
@@ -129,8 +125,6 @@ import org.testng.annotations.*;
 		hp.goToTasks();
 		mgTask.addTaskDirectly(task1,true);
 		mgTask.addTaskDirectly(task2,true);
-		mgTask.editTaskAssignee(task1, DATA_USER1);
-		mgTask.editTaskAssignee(task2, DATA_USER1);
 		
 		/*Step number: 2
 		*Step Name: Step 2: Open All Tasks
@@ -180,8 +174,6 @@ import org.testng.annotations.*;
 		hp.goToTasks();
 		mgTask.addTaskDirectly(task1,true);
 		mgTask.addTaskDirectly(task2,true);
-		mgTask.editTaskAssignee(task1, DATA_USER1);
-		mgTask.editTaskAssignee(task2, DATA_USER1);
 		
 		/*Step number: 2
 		*Step Name: Step 2: Check All Tasks view default settings

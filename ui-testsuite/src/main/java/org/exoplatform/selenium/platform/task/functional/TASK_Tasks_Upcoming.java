@@ -30,9 +30,7 @@ import org.testng.annotations.*;
 		hp.goToTasks();
 		mgTask.addTaskDirectly(task1,true);
 		mgTask.addTaskDirectly(task2,true);
-		mgTask.editTaskAssignee(task1, DATA_USER1);
 		mgTask.selectDueDate(task1, optDueDate.NextWeek);
-		mgTask.editTaskAssignee(task2, DATA_USER1);
 		mgTask.selectDueDate(task2, optDueDate.NextWeek);
 		
 		/*Step number: 2
@@ -76,9 +74,7 @@ import org.testng.annotations.*;
 		hp.goToTasks();
 		mgTask.addTaskDirectly(task1,true);
 		mgTask.addTaskDirectly(task2,true);
-		mgTask.editTaskAssignee(task1, DATA_USER1);
 		mgTask.selectDueDate(task1, optDueDate.NextWeek);
-		mgTask.editTaskAssignee(task2, DATA_USER1);
 		mgTask.selectDueDate(task2, optDueDate.NextWeek);
 		
 		/*Step number: 2
@@ -132,9 +128,7 @@ import org.testng.annotations.*;
 		hp.goToTasks();
 		mgTask.addTaskDirectly(task1,true);
 		mgTask.addTaskDirectly(task2,true);
-		mgTask.editTaskAssignee(task1, DATA_USER1);
 		mgTask.selectDueDate(task1, optDueDate.NextWeek);
-		mgTask.editTaskAssignee(task2, DATA_USER1);
 		mgTask.selectDueDate(task2, optDueDate.NextWeek);
 		
 		/*Step number: 2
@@ -185,9 +179,7 @@ import org.testng.annotations.*;
 		hp.goToTasks();
 		mgTask.addTaskDirectly(task1,true);
 		mgTask.addTaskDirectly(task2,true);
-		mgTask.editTaskAssignee(task1, DATA_USER1);
 		mgTask.selectDueDate(task1, optDueDate.NextWeek);
-		mgTask.editTaskAssignee(task2, DATA_USER1);
 		mgTask.selectDueDate(task2, optDueDate.NextWeek);
 		
 		/*Step number: 2

@@ -38,7 +38,7 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- Tasks page is opened*/
 		hp.goToTasks();
-		mgProject.addProject(project,"", false);
+		mgProject.addProject(project,"","", false);
 		
 		/*Step number: 2
 		*Step Name: Step 2: Open project A

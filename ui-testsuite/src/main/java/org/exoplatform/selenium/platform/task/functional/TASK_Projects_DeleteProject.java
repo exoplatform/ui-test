@@ -37,7 +37,7 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- Tasks page is opened*/
 		hp.goToTasks();
-		mgProject.addProject(prj1,"", false);
+		mgProject.addProject(prj1,"","", false);
 		
 		/*Step number: 2
 		*Step Name: Step 2: Check a project can be deleted from Arrow menu > Delete
@@ -84,7 +84,7 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- Tasks page is opened*/
 		hp.goToTasks();
-		mgProject.addProject(prj1,"", false);
+		mgProject.addProject(prj1,"","", false);
 		
 		/*Step number: 2
 		*Step Name: Step 2: Check cancel action when deleting project
@@ -107,82 +107,11 @@ import org.testng.annotations.*;
 	*<li> Test Case Name: Check Delete action is not available to the main space project.</li>
 	*<li> Pre-Condition: exo-tasks add-on is installedspaceA,spaceB is createdTask application is added to spaceA,spaceB</li>
 	*<li> Post-Condition: </li>
-	* BUG: https://jira.exoplatform.org/browse/TA-176
+	* TESTCASE IS REMOVED
 	*/
 	@Test (groups="pending")
 	public  void test04_CheckDeleteActionIsNotAvailableToTheMainSpaceProject() {
-		info("Test 4: Check Delete action is not available to the main space project");
-		String space1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
-		/*Step Number: 1
-		*Step Name: Step 1: Open Tasks page
-		*Step Description: 
-			- Click on Tasks on the left navigation.
-		*Input Data: 
-			
-		*Expected Outcome: 
-			- Tasks page is opened*/
-		info("Create a space");
-		hp.goToMySpaces();
-		spaMg.addNewSpaceSimple(space1,space1);
-		hp.goToTasks();
-		waitForAndGetElement(mgProject.ELEMENT_LEFT_PANE_PROJECT_NAME
-				.replace("$project", space1));
 		
-		/*Step number: 2
-		*Step Name: Step 2: Check Delete action is not available to the main space project
-		*Step Description: 
-			- on left pane, check Delete action from contextual menu of spaceA project
-		*Input Data: 
-			
-		*Expected Outcome: 
-			- Delete action is not available to the main space project*/
-		info("cannot delete space project");
-		mgProject.goToContMenuGivenProject(space1);
-		waitForElementNotPresent(mgProject.ELEMENT_LEFT_PANE_PROJECT_DELETE
-				.replace("$project", space1));
-		
-		/*Step number: 3
-		*Step Name: Step 3: Delete space
-		*Step Description: 
-			- Goto My space to delete spaceA
-		*Input Data: 
-			
-		*Expected Outcome: 
-			- spaceA is deleted*/
-		info("Delete space");
-		hp.goToMySpaces();
-		spaMg.deleteSpace(space1,false);
-		
-		/*Step number: 4
-		*Step Name: Step 4: Check spaceA project
-		*Step Description: 
-			- Click on Tasks on the left navigation to check project list
-		*Input Data: 
-			
-		*Expected Outcome: 
-			- spaceA project is deleted from project list*/
-		hp.goToTasks();
-		waitForElementNotPresent(mgProject.ELEMENT_LEFT_PANE_PROJECT_NAME
-				.replace("$project", space1));
-		
-		/*Step number: 5
-		*Step Name: Step 5: Remove Task application in space
-		*Step Description: 
-			- Open Application of spaceB to remove Task application
-		*Input Data: 
-			
-		*Expected Outcome: 
-			- Task application is removed from project B*/
-
-		/*Step number: 6
-		*Step Name: Step 6: Check spaceB project
-		*Step Description: 
-			- Click on Tasks on the left navigation to check project list
-		*Input Data: 
-			
-		*Expected Outcome: 
-			- spaceB project is deleted from project list*/ 
-
  	}
 
 	/**
@@ -207,9 +136,9 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- Tasks page is opened*/
 		hp.goToTasks();
-		mgProject.addProject(prj1,"", false);
-		mgProject.addSubProject(prj1,prj11,"", false);
-		mgProject.addSubProject(prj1,prj12,"", false);
+		mgProject.addProject(prj1,"","", false);
+		mgProject.addSubProject(prj1,prj11,"","", false);
+		mgProject.addSubProject(prj1,prj12,"","", false);
 		
 		/*Step number: 2
 		*Step Name: Step 2: Check when option to delete all sub
@@ -248,8 +177,8 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- Tasks page is opened*/
 		hp.goToTasks();
-		mgProject.addProject(prj1,"", false);
-		mgProject.addSubProject(prj1,prj11,"", false);
+		mgProject.addProject(prj1,"","", false);
+		mgProject.addSubProject(prj1,prj11,"","", false);
 		
 		/*Step number: 2
 		*Step Name: Step 2: Check when option to delete all sub

@@ -12,8 +12,9 @@ import org.testng.annotations.*;
 	*<li> Pre-Condition: - exo-tasks add-on is installed
 	- taskA is added to projectA</li>
 	*<li> Post-Condition: </li>
+	*https://jira.exoplatform.org/browse/TA-343
 	*/
-	@Test
+	@Test (groups="pending")
 	public  void test01_CheckCaseStatusIsTheFirstOfTheListWhenWorkflowStatusIsDeteted() {
 		info("Test 1: Check case status is the first of the list when workflow status is deteted");
 		String prj1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
@@ -28,7 +29,7 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- Tasks page is opened*/
 		hp.goToTasks();
-		mgProject.addProject(prj1, "", false);
+		mgProject.addProject(prj1, "","", false);
 		mgTask.addTask(prj1, task1);
 		
 		/*Step number: 2
@@ -90,7 +91,7 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- Tasks page is opened*/
 		hp.goToTasks();
-		mgProject.addProject(prj1, "", false);
+		mgProject.addProject(prj1, "","", false);
 		
 		/*Step number: 2
 		*Step Name: Step 2: Open projectA
@@ -134,8 +135,9 @@ import org.testng.annotations.*;
 	*<li> Pre-Condition: - exo-tasks add-on is installed
 	- taskA is added to projectA</li>
 	*<li> Post-Condition: </li>
+	*https://jira.exoplatform.org/browse/TA-343
 	*/
-	@Test
+	@Test (groups="pending")
 	public  void test03_CheckWhenAWorkflowStatusIsDeleted() {
 		info("Test 3: Check when a workflow status is deleted");
 		String prj1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
@@ -150,7 +152,7 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- Tasks page is opened*/
 		hp.goToTasks();
-		mgProject.addProject(prj1, "", false);
+		mgProject.addProject(prj1, "","", false);
 		mgTask.addTask(prj1, task1);
 		mgTask.editTaskStatus(task1, waitingOn);
 		

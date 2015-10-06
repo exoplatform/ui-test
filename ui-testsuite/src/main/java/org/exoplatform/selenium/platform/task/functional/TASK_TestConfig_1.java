@@ -7,7 +7,6 @@ import org.exoplatform.selenium.platform.ActivityStream;
 import org.exoplatform.selenium.platform.HomePagePlatform;
 import org.exoplatform.selenium.platform.ManageLogInOut;
 import org.exoplatform.selenium.platform.NavigationToolbar;
-import org.exoplatform.selenium.platform.PlatformBase;
 import org.exoplatform.selenium.platform.QuickSearchResult;
 import org.exoplatform.selenium.platform.administration.ContentSearchAdministration;
 import org.exoplatform.selenium.platform.calendar.CalendarHomePage;
@@ -28,11 +27,12 @@ import org.exoplatform.selenium.platform.task.ManagementLabels;
 import org.exoplatform.selenium.platform.task.ManagementProjects;
 import org.exoplatform.selenium.platform.task.ManagementTasks;
 import org.exoplatform.selenium.platform.task.TaskManagementHome;
+import org.exoplatform.selenium.platform.task.TaskManagementLocatorObject;
 
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
-public class TASK_TestConfig_1 extends PlatformBase {
+public class TASK_TestConfig_1 extends TaskManagementLocatorObject {
 	HomePagePlatform hp;
 	ManageLogInOut magAc;
 	Button button;

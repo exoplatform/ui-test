@@ -4,6 +4,8 @@ import static org.exoplatform.selenium.TestLogger.info;
 import org.exoplatform.selenium.Utils;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
 
 /**
  * This class will define actions about management tasks
@@ -62,7 +64,9 @@ public class ManagementLabels extends TaskManagementLocatorObject {
 		default:
 			info("No option in the list. Please select correct option.");
 			break;
+		
 		}
+		Utils.pause(1000);
 	}
 	
 	/**
@@ -163,12 +167,28 @@ public class ManagementLabels extends TaskManagementLocatorObject {
 		selectOpContMenuLabel(optionContMenuLabel.Add_Label);
 		info("create label:"+name);
 		if(!name.isEmpty()){
-			waitForAndGetElement(ELEMENT_ADD_LABEL_NAME_INPUT).sendKeys(name);
+			WebElement e= waitForAndGetElement(ELEMENT_ADD_LABEL_NAME_INPUT);
+			e.sendKeys(name);
 	        driver.findElement(ELEMENT_ADD_LABEL_NAME_INPUT).sendKeys(Keys.ENTER);
 		}
 		Utils.pause(1000);
 		waitForAndGetElement(ELEMENT_LEFT_PANE_LABEL_NAME.replace("$label", name));
-		
+		click(ELEMENT_LEFT_PANE_LABEL_NAME.replace("$label", name),0,true);
+	}
+	/**
+	 * Add sub label
+	 * @param parent
+	 * @param sub
+	 */
+	public void addSubLabel(String parent,String sub){
+		selectOpContMenuGivenLabel(parent, optionContMenuGivenLabel.Add_Label);
+		info("create label:"+sub);
+		if(!sub.isEmpty()){
+			waitForAndGetElement(ELEMENT_ADD_LABEL_NAME_INPUT).sendKeys(sub);
+	        driver.findElement(ELEMENT_ADD_LABEL_NAME_INPUT).sendKeys(Keys.ENTER);
+		}
+		Utils.pause(1000);
+		waitForAndGetElement(ELEMENT_LEFT_PANE_LABEL_NAME.replace("$label", sub));
 	}
 	/**
 	 * Check default label

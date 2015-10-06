@@ -4,6 +4,7 @@ import java.awt.AWTException;
 import java.awt.Robot;
 import java.awt.event.KeyEvent;
 import org.exoplatform.selenium.Utils;
+import org.exoplatform.selenium.platform.HomePagePlatform;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
@@ -18,10 +19,11 @@ import static org.exoplatform.selenium.TestLogger.info;
 public class ManagementTasks extends TaskManagementLocatorObject {
 	
 	TaskManagementHome tasHome;
-	
+	HomePagePlatform hp;
 	public ManagementTasks(WebDriver dr){
 		this.driver=dr;
 		tasHome=new TaskManagementHome(dr);
+		hp = new HomePagePlatform(dr);
 	}
 	/**
 	 * Open task
@@ -44,7 +46,7 @@ public class ManagementTasks extends TaskManagementLocatorObject {
 	 */
 	public void hideTaskDetail(){
 		info("hide detail of task on right pane");
-		click(ELEMENT_RIGHT_PANE_HIDE_ICON);
+		click(ELEMENT_PROJECT_HIDE_ICON);
 		waitForElementNotPresent(ELEMENT_RIGHT_PANE_TASK_CLOSE_ICON);
 	}
     /**
@@ -184,7 +186,7 @@ public class ManagementTasks extends TaskManagementLocatorObject {
 	 * 					true if has project parent
 	 * 					false if has no project
 	 */
-	public void checkTaskDetail(String task,boolean isProject,String project,String defaultStatus){
+	public void checkTaskDetail(String task,boolean isProject,String project,String defaultStatus,String...opts){
 		openTask(task);
 		Utils.pause(1000);
 		waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_TITLE_TEXT.replace("$task", task));
@@ -194,6 +196,19 @@ public class ManagementTasks extends TaskManagementLocatorObject {
 			waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_PROJECT_TEXT.replace("$project",project));
 		}else{
 			waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_NOPROJECT_TEXT);
+		}
+		if(opts.length>0 && !opts[0].isEmpty()){
+			waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_DUEDATE_TEXT.replace("$date",opts[0]));
+		}
+		if(opts.length>1 && !opts[1].isEmpty()){
+			waitForAndGetElement(ELEMENT_RIGHT_PANE_LABEL_TEXT.replace("$label", opts[1]));
+		}
+		if(opts.length>2){
+			if(opts[2].isEmpty()){
+				waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_ASSIGN.replace("$user", "Unassigned"));
+			}else{
+				waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_ASSIGN.replace("$user", opts[2]));
+			}
 		}
 	}
 	/**
@@ -225,6 +240,7 @@ public class ManagementTasks extends TaskManagementLocatorObject {
 		click(ELEMENT_TASK_TITLE.replace("$task", task));
 		click(ELEMENT_RIGHT_PANE_TASK_ARROW_MENU);
 		mouseOverAndClick(ELEMENT_RIGHT_PANE_TASK_ARROW_MENU_DELETE);
+		click(ELEMENT_DELETE_TASK_OK_BTN,0,true);
 		Utils.pause(500);
 		waitForElementNotPresent(ELEMENT_TASK_TITLE.replace("$task",task));
 	}
@@ -237,6 +253,7 @@ public class ManagementTasks extends TaskManagementLocatorObject {
 		click(ELEMENT_TASK_ID.replace("$id",String.valueOf(id)));
 		click(ELEMENT_RIGHT_PANE_TASK_ARROW_MENU);
 		mouseOverAndClick(ELEMENT_RIGHT_PANE_TASK_ARROW_MENU_DELETE);
+		click(ELEMENT_DELETE_TASK_OK_BTN,0,true);
 		Utils.pause(500);
 		waitForElementNotPresent(ELEMENT_TASK_ID.replace("$id",String.valueOf(id)));
 	}
@@ -288,6 +305,8 @@ public class ManagementTasks extends TaskManagementLocatorObject {
 			Utils.pause(2000);
 			waitForAndGetElement(ELEMENT_RIGHT_PANE_COMMENT_TEXT.replace("$user", user).replace("$comment", comment+i));
 		}
+		driver.navigate().refresh();
+		openTask(task);
 	}
 	/**
 	 * Check View All Comment
@@ -297,7 +316,6 @@ public class ManagementTasks extends TaskManagementLocatorObject {
 	 * 			number of comments
 	 */
 	public void checkViewAllComments(String user,String comment,int num){
-		driver.navigate().refresh();
 		info("check display of View all comment");
 		Utils.pause(1000);
 		waitForAndGetElement(ELEMENT_RIGHT_PANE_COMMENT_TEXT.replace("$user", user).replace("$comment", comment+num));
@@ -570,7 +588,7 @@ public class ManagementTasks extends TaskManagementLocatorObject {
 	 * 			number of tasks 
 	 */
 	public void checkGroupBy(boolean isGroup,String header,int num){
-		Utils.pause(500);
+		Utils.pause(1000);
 		if(isGroup){
 			waitForAndGetElement(ELEMENT_GROUPBY_HEADER_NUM.replace("$header", header).replace("$num", String.valueOf(num)));
 		}else{
@@ -584,7 +602,7 @@ public class ManagementTasks extends TaskManagementLocatorObject {
 	 * 			number of order
 	 */
 	public void checkSortOfGroupBy(String header,int num){
-		Utils.pause(500);
+		Utils.pause(1000);
 		waitForAndGetElement(ELEMENT_GROUPBY_HEADER_SORT.replace("$header", header).replace("$num", String.valueOf(num)));
 	}
 	/**
@@ -595,7 +613,7 @@ public class ManagementTasks extends TaskManagementLocatorObject {
 	 * 				false if symbol is red
 	 */
 	public void checkTaskSymbol(String task,boolean isBlue){
-		Utils.pause(500);
+		Utils.pause(1000);
 		if(isBlue){
 			waitForAndGetElement(ELEMENT_TASK_SYMBOL_BLUE.replace("$task", task));
 		}else{
@@ -614,16 +632,18 @@ public class ManagementTasks extends TaskManagementLocatorObject {
 		Utils.pause(1000);
 		if(!title.isEmpty()){
 			info("Input title");
-			waitForAndGetElement(ELEMENT_EDIT_PROJECT_TITLE_INPUT).clear();
-			waitForAndGetElement(ELEMENT_EDIT_PROJECT_TITLE_INPUT).sendKeys(title);
+			waitForAndGetElement(ELEMENT_EDIT_TASK_TITLE_INPUT_LINK).clear();
+			waitForAndGetElement(ELEMENT_EDIT_TASK_TITLE_INPUT_LINK).sendKeys(title);
+			Utils.pause(500);
+	        driver.findElement(ELEMENT_EDIT_TASK_TITLE_INPUT_LINK).sendKeys(Keys.ENTER);
 	        Utils.pause(500);
-	        driver.findElement(ELEMENT_EDIT_PROJECT_TITLE_INPUT).sendKeys(Keys.ENTER);
 	        waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_TITLE_TEXT.replace("$task", title));
 		}else{
 			info("left title blank");
-			waitForAndGetElement(ELEMENT_EDIT_PROJECT_TITLE_INPUT).clear();
+			waitForAndGetElement(ELEMENT_EDIT_TASK_TITLE_INPUT_LINK).clear();
 	        Utils.pause(500);
-	        driver.findElement(ELEMENT_EDIT_PROJECT_TITLE_INPUT).sendKeys(Keys.ENTER);
+	        driver.findElement(ELEMENT_EDIT_TASK_TITLE_INPUT_LINK).sendKeys(Keys.ENTER);
+	        Utils.pause(500);
 	        waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_UNTITLED);
 		}
 	}
@@ -732,7 +752,7 @@ public class ManagementTasks extends TaskManagementLocatorObject {
 		click(ELEMENT_RIGHT_PANE_TASK_PROJECT_LINK);
 		info("change project");
 		type(ELEMENT_EDIT_PROJECT_PATH_INPUT,project,true);
-		click(ELEMENT_RIGHT_PANE_PARENT_PATH_DROPDOWN_MENU.replace("$project",project),0,true);
+		click(ELEMENT_PARENT_PATH_DROPDOWN_MENU.replace("$project",project),0,true);
 		Utils.pause(500);
 		waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_PROJECT_TEXT.replace("$project", project));
 	}
@@ -778,22 +798,30 @@ public class ManagementTasks extends TaskManagementLocatorObject {
 	public void searchTaskProject(String task,String newProject){
 		openTask(task);
 		info("remove old project first");
-		click(ELEMENT_RIGHT_PANE_TASK_PROJECT_REMOVE_ICON);
+		mouseHoverByJavaScript(ELEMENT_RIGHT_PANE_TASK_PROJECT_LINK,2);
+		clickByJavascript(ELEMENT_RIGHT_PANE_TASK_PROJECT_REMOVE_ICON,2);
 		click(ELEMENT_RIGHT_PANE_TASK_PROJECT_LINK);
 		type(ELEMENT_EDIT_PROJECT_PATH_INPUT,newProject,true);
-		waitForAndGetElement(ELEMENT_RIGHT_PANE_PARENT_PATH_MATCH_VALUE.replace("$text",newProject));
-		click(ELEMENT_RIGHT_PANE_PARENT_PATH_MATCH_VALUE.replace("$text",newProject));
+		waitForAndGetElement(ELEMENT_PARENT_PATH_MATCH_VALUE.replace("$text",newProject));
+		click(ELEMENT_PARENT_PATH_MATCH_VALUE.replace("$text",newProject));
 		Utils.pause(500);
 		waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_PROJECT_TEXT.replace("$project", newProject));
 	}
 	/**
+<<<<<<< HEAD
 	 * Edit assignee
+=======
+	 * Edit task Project
+	 */
+	/**
+	 * Edit unassigned task
+>>>>>>> FQA-2695:[Task Management]- Write scripts for Labels - Create a label
 	 * @param task
 	 * @param assignee
 	 * @param coworkers
 	 * 					list of coworkers
 	 */
-	public void editTaskAssignee(String task,String assignee,String...coworkers){
+	public void editTaskUnAssignee(String task,String assignee,String...coworkers){
 		openTask(task);
 		click(ELEMENT_RIGHT_PANE_TASK_ASSIGN_LINK);
 		Utils.pause(1000);
@@ -831,6 +859,57 @@ public class ManagementTasks extends TaskManagementLocatorObject {
 				waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_COWORKER_REMOVE_ICON.replace("$user",coworker));
 			}
 		}
+		openTask(task);
+	}
+	/**
+	 * Edit assignee task
+	 * @param task
+	 * @param df
+	 * 			default assignee
+	 * @param assignee
+	 * @param coworkers
+	 * 					list of coworkers
+	 */
+	public void editTaskAssignee(String task,String df,String assignee,String...coworkers){
+		openTask(task);
+		click(ELEMENT_RIGHT_PANE_TASK_ASSIGN.replace("$user", df));
+		click(ELEMENT_RIGHT_PANE_TASK_ASSIGN_REMOVE_ICON1.replace("$username", df));
+		Utils.pause(1000);
+		info("edit assignee");
+		if(!assignee.isEmpty()){
+			type(ELEMENT_RIGHT_PANE_TASK_ASSIGN_INPUT,assignee,false);
+			Robot robot;
+			try {
+				robot = new Robot();
+				robot.delay(1000);
+				robot.keyPress(KeyEvent.VK_ENTER);
+				robot.keyRelease(KeyEvent.VK_ENTER);
+				Utils.pause(3000);
+			} catch (AWTException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_ASSIGN_INPUT_DISABLED,DEFAULT_TIMEOUT,0);
+			waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_ASSIGN_REMOVE_ICON.replace("$user",assignee),DEFAULT_TIMEOUT,0);
+		}
+		if(coworkers.length>0){
+			for (String coworker : coworkers) {
+				type(ELEMENT_RIGHT_PANE_TASK_COWORKER_INPUT,coworker,false);
+				Robot robot;
+				try {
+					robot = new Robot();
+					robot.delay(1000);
+					robot.keyPress(KeyEvent.VK_ENTER);
+					robot.keyRelease(KeyEvent.VK_ENTER);
+					Utils.pause(3000);
+				} catch (AWTException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_COWORKER_REMOVE_ICON.replace("$user",coworker));
+			}
+		}
+		driver.navigate().refresh();
 		openTask(task);
 	}
 	/**
@@ -1106,8 +1185,9 @@ public class ManagementTasks extends TaskManagementLocatorObject {
 			clickByJavascript(ELEMENT_RIGHT_PANE_TASK_WORKPLAN_TO_DAY.replace("$day", toDay),2);
 		}
 		if(checkAllDay){
-			check(ELEMENT_RIGHT_PANE_TASK_WORKPLAN_ALLDAY_CHECKBOX,2);
+			
 		}else{
+			uncheck(ELEMENT_RIGHT_PANE_TASK_WORKPLAN_ALLDAY_CHECKBOX,2);
 			click(ELEMENT_RIGHT_PANE_TASK_WORKPLAN_FROMTIME_LINK);
 			click(ELEMENT_RIGHT_PANE_TASK_WORKPLAN_FROMTIME.replace("$time",fromTime));
 			Utils.pause(1000);
@@ -1144,8 +1224,22 @@ public class ManagementTasks extends TaskManagementLocatorObject {
 		click(ELEMENT_RIGHT_PANE_TASK_WORKPLAN_LINK);
 		waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_WORKPLAN_TO_CALENDAR);
 		waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_WORKPLAN_FROM_CALENDAR);
-		waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_WORKPLAN_TOTIME_LINK);
-		waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_WORKPLAN_FROMTIME_LINK);
+	}
+	/**
+	 * Check clickable of calendar icon
+	 * @param task
+	 * @param isEnable
+	 */
+	public void checkClickableOfCalIcon(String task,boolean isEnable){
+		info("check clickable of calendar icon");
+		openTask(task);
+		if(isEnable){
+			click(ELEMENT_RIGHT_PANE_TASK_WORKPLAN_SHOW_CAL,0,true);
+			waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_WORKPLAN_REMOVE_CAL);
+		}else{
+			click(ELEMENT_RIGHT_PANE_TASK_WORKPLAN_SHOW_CAL,0,true);
+			waitForElementNotPresent(ELEMENT_RIGHT_PANE_TASK_WORKPLAN_REMOVE_CAL);
+		}
 	}
 	/**
 	 * Check popup contains calendar and time of edited work plan
@@ -1203,7 +1297,7 @@ public class ManagementTasks extends TaskManagementLocatorObject {
 		selectQuick(ELEMENT_RIGHT_PANE_TASK_PRIORITY_SELECT_LINK,priority);
 		Utils.pause(500);
 		waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_PRIORITY_TEXT.replace("$priority",priority));
-		waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_PRIORITY_ICON.replace("$priority",priority));
+		waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_PRIORITY_ICON.replace("$priority",priority.toUpperCase()));
 	}
 	/**
 	 * Check default value of priority
@@ -1259,7 +1353,6 @@ public class ManagementTasks extends TaskManagementLocatorObject {
 		}
 		mouseHoverByJavaScript(ELEMENT_RIGHT_PANE_TASK_DUEDATE_DAY.replace("$day", day),2);
 		clickByJavascript(ELEMENT_RIGHT_PANE_TASK_DUEDATE_DAY.replace("$day", day),2);
-		waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_DUEDATE_TEXT.replace("$date",date));
 	}
 	/**
      * Define options of duedate
@@ -1379,7 +1472,6 @@ public class ManagementTasks extends TaskManagementLocatorObject {
 		info("check display of tasks in List View");
 		Utils.pause(500);
 		for (String task : tasks) {
-			waitForAndGetElement(ELEMENT_TASK_DUEDATE.replace("$task", task).replace("$day",getDate(0,"MMM dd")));
 			waitForAndGetElement(ELEMENT_TASK_TITLE.replace("$task", task));
 			mouseOverAndClick(ELEMENT_TASK_TITLE.replace("$task", task));
 			waitForAndGetElement(ELEMENT_TASK_COMPLETE_ICON.replace("$task", task));
@@ -1421,18 +1513,18 @@ public class ManagementTasks extends TaskManagementLocatorObject {
 	 * @param opt
 	 * 			 date, year, today, tomorrow, yesterday
 	 */
-	public void checkDueDateInListView(optDueDateLV opt,String...tasks){
+	public void checkDueDateInListView(optDueDateLV opt,String date,String...tasks){
 		switch(opt){
 		case Date:
 			info("check for same year");
 			for (String task : tasks) {
-				waitForAndGetElement(ELEMENT_TASK_DUEDATE.replace("$task", task).replace("$day",getDate(0,"MMM dd")));
+				waitForAndGetElement(ELEMENT_TASK_DUEDATE.replace("$task", task).replace("$day",date));
 			}
 			break;
 		case Year:
 			info("check for different year");
 			for (String task : tasks) {
-				waitForAndGetElement(ELEMENT_TASK_DUEDATE.replace("$task", task).replace("$day",getDateOfNextYear("MMM dd, yyyy", 1)));
+				waitForAndGetElement(ELEMENT_TASK_DUEDATE.replace("$task", task).replace("$day",date));
 			}
 			break;
 		case Today:
@@ -1520,14 +1612,14 @@ public class ManagementTasks extends TaskManagementLocatorObject {
 			    mouseOverAndClick(ELEMENT_BOARD_TASK_CONTAINER.replace("$num", String.valueOf(colId)));
 			    waitForAndGetElement(ELEMENT_BOARD_TASK_TITLE_INPUT.replace("$num", String.valueOf(colId))).sendKeys(task);
 		        click(ELEMENT_PROJECT_TITLE.replace("$project", project));
-		        Utils.pause(500);
+		        Utils.pause(1000);
 		        waitForAndGetElement(ELEMENT_BOARD_TASK_TITLE.replace("$task", task).replace("$num", String.valueOf(colId)));
 		}else{
 			info("group by assignee");
 				mouseOverAndClick(ELEMENT_BOARD_TASK_CONTAINER_GROUPBY_ASSIGNEE.replace("$num", String.valueOf(colId)).replace("$user", user));
 				waitForAndGetElement(ELEMENT_BOARD_TASK_TITLE_GROUPBY_ASSIGNEE_INPUT.replace("$num", String.valueOf(colId)).replace("$user", user)).sendKeys(task);
 				click(ELEMENT_PROJECT_TITLE.replace("$project", project));
-				Utils.pause(500);
+				Utils.pause(1000);
 		        waitForAndGetElement(ELEMENT_BOARD_TASK_TITLE.replace("$task", task).replace("$num", String.valueOf(colId)));
 		   
 		}
@@ -1621,5 +1713,57 @@ public class ManagementTasks extends TaskManagementLocatorObject {
 		info("task:"+task+"is opened in:"+project);
 		waitForAndGetElement(ELEMENT_LEFT_PANE_PROJECT_ACTIVE.replace("$project", project));
 		waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_TITLE_TEXT.replace("$task", task));
+	}
+	/**
+	 * Check number task on badge
+	 * @param num
+	 */
+	public void checkNumTaskOnBadge(String num){
+		info("check number task on badge Incoming");
+		Utils.pause(1000);
+		waitForAndGetElement(ELEMENT_LEFT_PANE_INCOMING_BADGE.replace("$num", num));
+	}
+	/**
+	 * get value attribute
+	 * @param locator
+	 * @return value of element
+	 */
+	public String getValue(Object locator) {
+		try {
+			return waitForAndGetElement(locator).getAttribute("value");
+		} catch (StaleElementReferenceException e) {
+			checkCycling(e, DEFAULT_TIMEOUT/WAIT_INTERVAL);			
+			Utils.pause(WAIT_INTERVAL);
+			return getValue(locator);
+		} finally {
+			loopCount = 0;
+		}
+	}
+	/**
+	 * Check task permalink
+	 * @param task
+	 */
+	public void checkTaskPermalink(String task){
+		info("check task permalink");
+		click(ELEMENT_RIGHT_PANE_TASK_PERMALINK.replace("$task", task),0,true);
+		String perm = getValue(ELEMENT_RIGHT_PANE_TASK_PERMALINK_VALUE);
+		hp.goToHomePage();
+		driver.navigate().to(perm);
+		Utils.pause(2000);
+		waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_TITLE_TEXT.replace("$task", task));
+	}
+	/**
+	 * Check list of clock icon
+	 * @param task
+	 */
+	public void checkClockIcon(String task){
+		info("check clock icon");
+		mouseHoverByJavaScript(ELEMENT_TASK_TITLE.replace("$task", task),2);
+		clickByJavascript(ELEMENT_TASK_CLOCK_ICON.replace("$task",task));
+		Utils.pause(1000);
+		waitForAndGetElement(ELEMENT_TASK_CLOCK_ICON_TODAY.replace("$task", task));
+		waitForAndGetElement(ELEMENT_TASK_CLOCK_ICON_TOMORROW_MOR.replace("$task", task));
+		waitForAndGetElement(ELEMENT_TASK_CLOCK_ICON_TOMORROW_AFT.replace("$task", task));
+		waitForAndGetElement(ELEMENT_TASK_CLOCK_ICON_NEXTWEEK.replace("$task", task));
 	}
 }

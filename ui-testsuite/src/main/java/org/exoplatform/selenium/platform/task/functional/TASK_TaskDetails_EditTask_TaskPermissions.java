@@ -20,7 +20,7 @@ import org.testng.annotations.*;
 		String[] users={DATA_USER2};
 		info("pre-condition");
 		hp.goToTasks();
-		mgProject.addProject(prj1, "", false);
+		mgProject.addProject(prj1, "","", false);
 		mgTask.addTask(prj1, task1);
 		mgProject.shareProject(prj1, users,true);
 		
@@ -83,7 +83,7 @@ import org.testng.annotations.*;
 		info("pre-condition");
 		hp.goToTasks();
 		mgTask.addTaskDirectly(task1,true);
-		mgTask.editTaskAssignee(task1, DATA_USER2, DATA_USER3);
+		mgTask.editTaskAssignee(task1, DATA_NAME_USER1, DATA_USER2,DATA_USER3);
 		
 		/*Step Number: 1
 		*Step Name: Step 1: Login as user B
@@ -165,7 +165,7 @@ import org.testng.annotations.*;
 		String[] users={DATA_USER2,DATA_USER3};
 		info("pre-condition");
 		hp.goToTasks();
-		mgProject.addProject(prj1, "", false);
+		mgProject.addProject(prj1, "", "",false);
 		mgProject.shareProject(prj1, users,false);
 		
 		magAc.signOut();
@@ -324,7 +324,7 @@ import org.testng.annotations.*;
 		String[] users={DATA_USER3};
 		info("pre-condition");
 		hp.goToTasks();
-		mgProject.addProject(prj1, "", false);
+		mgProject.addProject(prj1, "","", false);
 		mgProject.shareProject(prj1, users,false);
 		mgTask.addTask(prj1, task1);
 		

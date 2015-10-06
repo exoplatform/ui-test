@@ -30,7 +30,7 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			Tasks page is opened*/
 		hp.goToTasks();
-		mgProject.addProject(name,"", false);
+		mgProject.addProject(name,"","", false);
 		mgProject.goToProjects();
 		
 		/*Step number: 2
@@ -142,7 +142,7 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- Tasks page is opened*/
 		hp.goToTasks();
-		mgProject.addProject(name,"", false);
+		mgProject.addProject(name,"","", false);
 		mgProject.goToProjects();
 		mgProject.hideProject(name);
 		
@@ -190,7 +190,7 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			Tasks page is opened*/
 		hp.goToTasks();
-		mgProject.addProject(name,"", false);
+		mgProject.addProject(name,"","", false);
 		mgProject.goToProjects();
 		mgProject.shareProject(name,user1, true);
 		
@@ -263,9 +263,9 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			Tasks page is opened*/
 		hp.goToTasks();
-		mgProject.addProject(prj1,"", false);
-		mgProject.addSubProject(prj1,prj11,"", false);
-		mgProject.addSubProject(prj1,prj12,"", false);
+		mgProject.addProject(prj1,"","", false);
+		mgProject.addSubProject(prj1,prj11,"","", false);
+		mgProject.addSubProject(prj1,prj12,"","", false);
 		mgProject.goToProjects();
 		
 		/*Step number: 2

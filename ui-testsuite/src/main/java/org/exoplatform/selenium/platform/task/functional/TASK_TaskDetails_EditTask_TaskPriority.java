@@ -17,9 +17,8 @@ import org.testng.annotations.*;
 	*<li> Test Case Name: Check the default value of task priority.</li>
 	*<li> Pre-Condition: exo-tasks add-on is installed</li>
 	*<li> Post-Condition: </li>
-	*BUG: https://jira.exoplatform.org/browse/TA-154
 	*/
-	@Test (groups="pending")
+	@Test 
 	public  void test01_03_CheckComboBoxToSelectPriority() {
 		info("Test 1: Check combo box to select priority");
 		String task1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();

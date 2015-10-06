@@ -24,7 +24,7 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- Tasks page is opened*/
 		hp.goToTasks();
-		mgProject.addProject(name,"", false);
+		mgProject.addProject(name,"", "",false);
 		
 		/*Step number: 2
 		*Step Name: Step 2: Check set color from contextual menu
@@ -63,7 +63,7 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- Tasks page is opened*/
 		hp.goToTasks();
-		mgProject.addProject(project,"", false);
+		mgProject.addProject(project,"", "",false);
 		mgTask.addTask(project, task);
 		
 		/*Step number: 2
@@ -104,7 +104,7 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- Tasks page is opened*/
 		hp.goToTasks();
-		mgProject.addProject(project,"", false);
+		mgProject.addProject(project,"","", false);
 		mgTask.addTask(project, task);
 		
 		/*Step number: 2

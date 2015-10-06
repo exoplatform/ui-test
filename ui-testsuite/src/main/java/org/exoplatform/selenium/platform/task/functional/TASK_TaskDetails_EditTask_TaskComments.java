@@ -151,9 +151,8 @@ import org.testng.annotations.*;
 	*<li> Test Case Name: Check when clicking View all $CommentNumber comments.</li>
 	*<li> Pre-Condition: exo-tasks add-on is installed</li>
 	*<li> Post-Condition: </li>
-	* BUG: https://jira.exoplatform.org/browse/TA-149
 	*/
-	@Test (groups="pending")
+	@Test 
 	public  void test05_06_09_CheckLinkViewAllNumberComments() {
 		info("Test 5: Check link View all $CommentNumber comments");
 		String task1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
@@ -264,9 +263,8 @@ import org.testng.annotations.*;
 	*<li> Test Case Name: Check trash icon to delete the comment.</li>
 	*<li> Pre-Condition: exo-tasks add-on is installedtask A is added to project Auser A create comment A, user B is participant of project A, user C is manager of project A</li>
 	*<li> Post-Condition: </li>
-	* BUG: https://jira.exoplatform.org/browse/TA-150
 	*/
-	@Test (groups="pending")
+	@Test
 	public  void test08_CheckTrashIconToDeleteTheComment() {
 		info("Test 8: Check trash icon to delete the comment");
 		String task1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
@@ -275,7 +273,7 @@ import org.testng.annotations.*;
 		String[] manager = {DATA_USER2};
 		String[] participant = {DATA_USER3};
 		hp.goToTasks();
-		mgProject.addProject(prj1, "", false);
+		mgProject.addProject(prj1, "","", false);
 		mgTask.addTask(prj1, task1);
 		mgTask.addTaskComment(task1, DATA_NAME_USER1, comment);
 		mgProject.shareProject(prj1, manager, true);

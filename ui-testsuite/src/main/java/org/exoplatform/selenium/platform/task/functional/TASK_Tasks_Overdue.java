@@ -29,9 +29,7 @@ import org.testng.annotations.*;
 		hp.goToTasks();
 		mgTask.addTaskDirectly(task1,true);
 		mgTask.addTaskDirectly(task2,true);
-		mgTask.editTaskAssignee(task1, DATA_USER1);
 		mgTask.setDueDate(task1, getDate(-2, "dd MMM yyyy"), getDate(-2, "dd"), 0);
-		mgTask.editTaskAssignee(task2, DATA_USER1);
 		mgTask.setDueDate(task2, getDate(-3, "dd MMM yyyy"), getDate(-3, "dd"), 0);
 		
 		/*Step number: 2
@@ -75,9 +73,7 @@ import org.testng.annotations.*;
 		hp.goToTasks();
 		mgTask.addTaskDirectly(task1,true);
 		mgTask.addTaskDirectly(task2,true);
-		mgTask.editTaskAssignee(task1, DATA_USER1);
 		mgTask.setDueDate(task1, getDate(-2, "dd MMM yyyy"), getDate(-2, "dd"), 0);
-		mgTask.editTaskAssignee(task2, DATA_USER1);
 		mgTask.setDueDate(task2, getDate(-3, "dd MMM yyyy"), getDate(-3, "dd"), 0);
 		
 		/*Step number: 2
@@ -130,9 +126,7 @@ import org.testng.annotations.*;
 		hp.goToTasks();
 		mgTask.addTaskDirectly(task1,true);
 		mgTask.addTaskDirectly(task2,true);
-		mgTask.editTaskAssignee(task1, DATA_USER1);
 		mgTask.setDueDate(task1, getDate(-2, "dd MMM yyyy"), getDate(-2, "dd"), 0);
-		mgTask.editTaskAssignee(task2, DATA_USER1);
 		mgTask.setDueDate(task2, getDate(-3, "dd MMM yyyy"), getDate(-3, "dd"), 0);
 		
 		/*Step number: 2
@@ -183,9 +177,7 @@ import org.testng.annotations.*;
 		hp.goToTasks();
 		mgTask.addTaskDirectly(task1,true);
 		mgTask.addTaskDirectly(task2,true);
-		mgTask.editTaskAssignee(task1, DATA_USER1);
 		mgTask.setDueDate(task1, getDate(-2, "dd MMM yyyy"), getDate(-2, "dd"), 0);
-		mgTask.editTaskAssignee(task2, DATA_USER1);
 		mgTask.setDueDate(task2, getDate(-3, "dd MMM yyyy"), getDate(-3, "dd"), 0);
 		
 		/*Step number: 2

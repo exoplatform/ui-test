@@ -30,9 +30,9 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			Tasks page is opened*/
 		hp.goToTasks();
-		mgProject.addProject(prj1,"", false);
+		mgProject.addProject(prj1,"","", false);
 		mgTask.addTask(prj1, task1);
-		mgProject.addProject(prj2,"", false);
+		mgProject.addProject(prj2,"","", false);
 		mgTask.addTask(prj2, task2);
 		
 		/*Step number: 2
@@ -81,7 +81,7 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			Tasks page is opened*/
 		hp.goToTasks();
-		mgProject.addProject(prj1,"", false);
+		mgProject.addProject(prj1,"","", false);
 		
 		/*Step number: 3
 		*Step Name: Step 3: Check contextual menu of one project
@@ -140,9 +140,8 @@ import org.testng.annotations.*;
 	*<li> Test Case Name: Check contextual menu of Projects.</li>
 	*<li> Pre-Condition: exo-tasks add-on is installed</li>
 	*<li> Post-Condition: </li>
-	* BUG : normal user can Add Project
 	*/
-	@Test (groups = "pending")
+	@Test
 	public  void test03_CheckContextualMenuOfProjects() {
 		info("Test 3: Check contextual menu of Projects");
 		/*Step Number: 1
@@ -203,8 +202,8 @@ import org.testng.annotations.*;
 		*Input Data: 
 			
 		*Expected Outcome: 
-			Projects has a contextual menu :Show Hidden Projects*/ 
-		mgProject.checkMenuProjectsOfUser(false);
+			Projects has a contextual menu :Add Project,Show Hidden Projects*/ 
+		mgProject.checkMenuProjectsOfUser(true);
  	}
 
 	/**
@@ -212,9 +211,8 @@ import org.testng.annotations.*;
 	*<li> Test Case Name: Check group by of tasks in each project in Projects.</li>
 	*<li> Pre-Condition: exo-tasks add-on is installedadd project A,Badd some tasks to project A,B</li>
 	*<li> Post-Condition: </li>
-	*https://jira.exoplatform.org/browse/TA-215
 	*/
-	@Test (groups="pending")
+	@Test 
 	public  void test04_CheckGroupByOfTasksInEachProjectInProjects() {
 		info("Test 4: Check group by of tasks in each project in Projects");
 		String project1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
@@ -226,11 +224,11 @@ import org.testng.annotations.*;
 		
 		String none = groupByData.getGroupBy(0);
 		String duedate = groupByData.getGroupBy(1);
-		//String label = groupByData.getGroupBy(2);
+		String label = groupByData.getGroupBy(2);
 		String status = groupByData.getGroupBy(3);
 		String assignee = groupByData.getGroupBy(4);
 		String project = groupByData.getGroupBy(5);
-		String[] groups = {none,duedate,status,assignee,project};
+		String[] groups = {none,duedate,status,assignee,project,label};
 		/*Step Number: 1
 		*Step Name: Step 1: Open Tasks page
 		*Step Description: 
@@ -240,10 +238,10 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- Tasks page is opened*/
 		hp.goToTasks();
-		mgProject.addProject(project1,"", false);
+		mgProject.addProject(project1,"","", false);
 		mgTask.addTask(project1, task1);
 		mgTask.addTask(project1, task2);
-		mgProject.addProject(project2,"", false);
+		mgProject.addProject(project2,"","", false);
 		mgTask.addTask(project2, task3);
 		mgTask.addTask(project2, task4);
 		
@@ -367,7 +365,7 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			Tasks page is opened*/
 		hp.goToTasks();
-		mgProject.addProject(project,"", false);
+		mgProject.addProject(project,"","", false);
 		mgTask.addTask(project, task1);
 		mgTask.addTask(project, task2);
 		mgTask.addTask(project, task3);
@@ -416,10 +414,10 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- Tasks page is opened*/
 		hp.goToTasks();
-		mgProject.addProject(project1,"", false);
+		mgProject.addProject(project1,"","", false);
 		mgTask.addTask(project1, task1);
 		mgTask.addTask(project1, task2);
-		mgProject.addProject(project2,"", false);
+		mgProject.addProject(project2,"","", false);
 		mgTask.addTask(project2, task3);
 		mgTask.addTask(project2, task4);
 		
@@ -444,13 +442,12 @@ import org.testng.annotations.*;
 	*<li> Test Case Name: Check welcome messages of first access.</li>
 	*<li> Pre-Condition: exo-tasks add-on is installedone personal project and one share project are created</li>
 	*<li> Post-Condition: </li>
-	*BUG: https://jira.exoplatform.org/browse/TA-168
+	* BUG
 	*/
-	@Test (groups = "pending")
+	@Test (groups="pending")
 	public  void test10_CheckWelcomeMessagesOfFirstAccess() {
 		info("Test 10 Check welcome messages of first access");
 		String project = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
-		String[] users= {DATA_USER2};
 		/*Step Number: 1
 		*Step Name: Step 1: Open Tasks page
 		*Step Description: 
@@ -461,7 +458,7 @@ import org.testng.annotations.*;
 			Tasks page is opened*/
 		info("login as root");
 		magAc.signOut();
-		magAc.signIn(USER_ROOT, DATA_PASS);
+		magAc.signIn(DATA_USER4, DATA_PASS);
 		hp.goToTasks();
 		
 		/*Step number: 2
@@ -483,31 +480,8 @@ import org.testng.annotations.*;
 		*Input Data: 
 			
 		*Expected Outcome: 
-			- It displays: This your personal project. You can share it for work collaboration.
-			- Share it is a link to open Share popup*/
-		mgProject.addProject(project,"", false);
-		
-		/*Step number: 4
-		*Step Name: Step 4: Check case of viewing shared project
-		*Step Description: 
-			- Click on shared project on left pane
-			- Check central pane
-		*Input Data: 
-			
-		*Expected Outcome: 
-			- It displays: This is $FullName's project. There is no task to do.*/ 
-		mgProject.shareProject(project,users, false);
-
-		info("login as mary");
-		magAc.signOut();
-		magAc.signIn(DATA_USER2, DATA_PASS);
-		hp.goToTasks();
-		mgProject.checkDefaultSharedProject(project);
-		
-		info("login as root");
-		magAc.signOut();
-		magAc.signIn(USER_ROOT, DATA_PASS);
-		hp.goToTasks();
+			- It displays: No Task*/
+		mgProject.addProject(project,"","", false);
 		
 		info("delete data");
 		mgProject.deleteProject(project, false);
@@ -543,8 +517,8 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- New project is created
 			- The message Click here to create your first project. and No Project screen are disappeared when there is a project added.*/ 
-		mgProject.addProject(project,"", false);
-		mgProject.checkProjectDetail(project);
+		mgProject.addProject(project,"","", false);
+		mgProject.checkProjectDetailByDefault(project);
 		
 		info("delete data");
 		mgProject.deleteProject(project, false);
@@ -571,7 +545,7 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			Tasks page is opened*/
 		hp.goToTasks();
-		mgProject.addProject(project,"", false);
+		mgProject.addProject(project,"","", false);
 		
 		/*Step number: 2
 		*Step Name: Step 2: Add task to one project

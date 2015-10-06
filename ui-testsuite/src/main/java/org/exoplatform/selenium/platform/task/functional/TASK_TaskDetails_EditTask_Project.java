@@ -44,8 +44,8 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- list tasks is opened
 			- task A is opened*/
-		mgProject.addProject(prj2, "", false);
-		mgProject.addProject(prj1, "", false);
+		mgProject.addProject(prj2, "","", false);
+		mgProject.addProject(prj1, "","", false);
 		mgTask.addTask(prj1, task1);
 		
 		/*Step number: 3
@@ -111,7 +111,7 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- new task is created
 			- project value is project A*/ 
-		mgProject.addProject(prj1, "", false);
+		mgProject.addProject(prj1, "","", false);
 		mgTask.addTask(prj1, task2);
 		mgTask.checkTaskDetail(task2,true,prj1,defaultStatus);
 		

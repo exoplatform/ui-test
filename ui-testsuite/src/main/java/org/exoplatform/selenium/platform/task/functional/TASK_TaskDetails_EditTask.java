@@ -35,8 +35,8 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- Tasks page is opened*/
 		hp.goToTasks();
-		mgProject.addProject(prj2, "", false);
-		mgProject.addProject(prj1, "", false);
+		mgProject.addProject(prj2, "","", false);
+		mgProject.addProject(prj1, "","", false);
 		mgTask.addTask(prj1, task1);
 		
 		/*Step number: 2
@@ -70,7 +70,7 @@ import org.testng.annotations.*;
 		mgTask.editTaskTitle(task1, newTask);
 		mgTask.editTaskDescription(newTask, task1);
 		mgTask.editTaskStatus(newTask, inProgress);
-		mgTask.editTaskAssignee(newTask, DATA_USER2, DATA_USER3);
+		mgTask.editTaskUnAssignee(newTask,DATA_USER3);
 		mgTask.editTaskTag(newTask, tag);
 		mgTask.editTaskWorkPlan(newTask,getDate(0,"dd"),0, getDate(1,"dd"),2, "01:00", "02:30",false);
 		
@@ -93,7 +93,7 @@ import org.testng.annotations.*;
 		String prj1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		String[] users={DATA_USER2};
 		hp.goToTasks();
-		mgProject.addProject(prj1,"", false);
+		mgProject.addProject(prj1,"","", false);
 		mgProject.shareProject(prj1, users, true);
 		/*Step Number: 1
 		*Step Name: Step 1: Open Tasks page
@@ -150,8 +150,8 @@ import org.testng.annotations.*;
 		String[] users={DATA_USER2};
 		String[] prjs={prj1,prj11};
 		hp.goToTasks();
-		mgProject.addProject(prj1,"", false);
-		mgProject.addSubProject(prj1, prj11, "", false);
+		mgProject.addProject(prj1,"","", false);
+		mgProject.addSubProject(prj1, prj11, "","", false);
 		mgProject.shareProject(prj11, users, true);
 		/*Step Number: 1
 		*Step Name: Step 1: Open Tasks page

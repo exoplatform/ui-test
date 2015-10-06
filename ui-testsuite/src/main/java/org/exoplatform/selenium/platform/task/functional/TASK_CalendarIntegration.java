@@ -45,7 +45,7 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- projectA is created*/
-		mgProject.addProject(prj1,"", true);
+		mgProject.addProject(prj1,"","", true);
 		
 		/*Step number: 3
 		*Step Name: Step 3: Open Calendar
@@ -107,7 +107,7 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- projectA is created*/
-		mgProject.addProject(prj1,"", true);
+		mgProject.addProject(prj1,"","", true);
 		
 		/*Step number: 3
 		*Step Name: Step 3: Share projectA with userA
@@ -174,7 +174,7 @@ import org.testng.annotations.*;
 		String prj1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		String color = colorData.getClassNameByArrayTypeRandom(1);
 		hp.goToTasks();
-		mgProject.addProject(prj1,"", true);
+		mgProject.addProject(prj1,"","", true);
 		mgProject.selectColor(prj1, color);
 		/*Step Number: 1
 		*Step Name: Step 1: Check Color of the calendar in Calendar app
@@ -227,7 +227,7 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- projectA is created*/
-		mgProject.addProject(prj1,"", true);
+		mgProject.addProject(prj1,"","", true);
 		
 		/*Step number: 3
 		*Step Name: Step 3: Add taskA
@@ -242,7 +242,7 @@ import org.testng.annotations.*;
 		mgTask.editTaskDescription(task1, des);
 		mgTask.editTaskPriority(task1, priority);
 		mgTask.editTaskStatus(task1, status);
-		mgTask.editTaskAssignee(task1, DATA_USER1);
+		mgTask.editTaskUnAssignee(task1, DATA_USER1);
 		
 		/*Step number: 4
 		*Step Name: Step 5: Open Calendar
@@ -313,7 +313,7 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- projectA is created*/
-		mgProject.addProject(prj1,"", true);
+		mgProject.addProject(prj1,"","", true);
 		
 		/*Step number: 3
 		*Step Name: Step 3: Add spaceB
@@ -454,7 +454,7 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- projectA is created*/
-		mgProject.addProject(prj1,"", true);
+		mgProject.addProject(prj1,"","", true);
 		
 		/*Step number: 3
 		*Step Name: Step 3: Add taskA
@@ -525,7 +525,7 @@ import org.testng.annotations.*;
 		String prj1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		setTimezone();
 		hp.goToTasks();
-		mgProject.addProject(prj1,"", true);
+		mgProject.addProject(prj1,"","", true);
 		mgTask.addTask(prj1, task1);
 		mgTask.editTaskWorkPlan(task1, getDate(0,"dd"), 0, getDate(1,"dd"), 0, "00:00", "01:00",false);
 		/*Step Number: 1
@@ -567,7 +567,7 @@ import org.testng.annotations.*;
 		String task1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		String prj1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		hp.goToTasks();
-		mgProject.addProject(prj1,"", true);
+		mgProject.addProject(prj1,"","", true);
 		mgTask.addTask(prj1, task1);
 		mgTask.editTaskWorkPlan(task1, getDate(0,"dd"), 0, getDate(1,"dd"), 0, "00:00", "01:00",false);
 		/*Step Number: 1
@@ -625,7 +625,7 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- projectA is opened*/
-		mgProject.addProject(prj1,"", false);
+		mgProject.addProject(prj1,"","", false);
 		
 		/*Step number: 3
 		*Step Name: Step 3: Uncheck Calendar Integration

@@ -12,7 +12,7 @@ import org.testng.annotations.*;
 	*<li> Pre-Condition: exo-tasks add-on is installedtask A is created</li>
 	*<li> Post-Condition: </li>
 	*/
-	@Test
+	//@Test
 	public  void test01_CheckATaskCanBeSavedWithTheDuplicatedTitle() {
 		info("Test 1: Check a task can be saved with the duplicated title");
 		String task1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
@@ -54,8 +54,9 @@ import org.testng.annotations.*;
 	*<li> Test Case Name: Check task title in task details pane.</li>
 	*<li> Pre-Condition: exo-tasks add-on is installed</li>
 	*<li> Post-Condition: </li>
+	*https://jira.exoplatform.org/browse/TA-224
 	*/
-	@Test
+	@Test (groups="pending")
 	public  void test02_03_CheckTaskTitleInCentralPane() {
 		info("Test 2: Check task title in central pane");
 		String title = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
@@ -101,7 +102,7 @@ import org.testng.annotations.*;
 	*<li> Pre-Condition: exo-tasks add-on is installed</li>
 	*<li> Post-Condition: </li>
 	*/
-	@Test
+	//@Test
 	public  void test04_CheckTheCheckBoxInFrontOfATaskTitle() {
 		info("Test 4: Check the check box in front of a task title");
 		String task1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
@@ -137,9 +138,8 @@ import org.testng.annotations.*;
 	*<li> Test Case Name: Check Untitled Task is default value of a task title.</li>
 	*<li> Pre-Condition: exo-tasks add-on is installedproject A is created</li>
 	*<li> Post-Condition: </li>
-	* BUG: https://jira.exoplatform.org/browse/TA-147
 	*/
-	@Test (groups="pending")
+	@Test 
 	public  void test05_CheckUntitledTaskIsDefaultValueOfATaskTitle() {
 		info("Test 5: Check Untitled Task is default value of a task title");
 		String task1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();

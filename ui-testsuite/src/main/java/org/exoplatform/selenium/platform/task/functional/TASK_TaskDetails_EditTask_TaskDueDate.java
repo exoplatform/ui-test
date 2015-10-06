@@ -113,7 +113,7 @@ import org.testng.annotations.*;
 	*<li> Pre-Condition: exo-tasks add-on is installed</li>
 	*<li> Post-Condition: </li>
 	*/
-	@Test
+	//@Test
 	public  void test03_CheckDisplayOfCalendarInCaseASpecificDueDateIsDefined() {
 		info("Test 3: Check display of calendar in case a specific due date is defined");
 		String task1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();

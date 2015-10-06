@@ -1,6 +1,9 @@
 package org.exoplatform.selenium.platform.task.functional;
 
 import static org.exoplatform.selenium.TestLogger.info;
+
+import org.exoplatform.selenium.platform.task.ManagementProjects.optionContMenuGivenProject;
+
 import org.testng.annotations.*;
 
 	public class TASK_Projects_Subproject extends TASK_TestConfig_1{
@@ -28,7 +31,7 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- Tasks page is opened*/
 		hp.goToTasks();
-		mgProject.addProject(prj1,"", false);
+		mgProject.addProject(prj1,"","", false);
 	
 		/*Step number: 2
 		*Step Name: Step 2: Add some sub
@@ -39,11 +42,14 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- project A1, project A2, project A3 are added to parent project A*/ 
-		mgProject.addSubProject(prj1,prj11,"", false);
+		mgProject.addSubProject(prj1,prj11,"","", false);
+		mgProject.selectOpContMenuGivenProject(prj11, optionContMenuGivenProject.Edit);
 		mgProject.checkChildrenProject(prj1, "");
-		mgProject.addSubProject(prj1,prj12,"", false);
+		mgProject.addSubProject(prj1,prj12,"","", false);
+		mgProject.selectOpContMenuGivenProject(prj12, optionContMenuGivenProject.Edit);
 		mgProject.checkChildrenProject(prj1, "");
-		mgProject.addSubProject(prj1,prj13,"", false);
+		mgProject.addSubProject(prj1,prj13,"", "",false);
+		mgProject.selectOpContMenuGivenProject(prj13, optionContMenuGivenProject.Edit);
 		mgProject.checkChildrenProject(prj1, "");
 		
 		info("delete data");
@@ -74,8 +80,8 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- Tasks page is opened*/
 		hp.goToTasks();
-		mgProject.addProject(prj1,"", false);
-		mgProject.addSubProject(prj1,prj11,"", false);
+		mgProject.addProject(prj1,"","", false);
+		mgProject.addSubProject(prj1,prj11,"","", false);
 		
 		/*Step number: 2
 		*Step Name: Step 2: Create some sub-projects in a sub-project
@@ -85,11 +91,14 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- project A11, project A12, project A13 are added to parent: project A1*/ 
-		mgProject.addSubProject(prj11,prj111,"", false);
+		mgProject.addSubProject(prj11,prj111,"","", false);
+		mgProject.selectOpContMenuGivenProject(prj111, optionContMenuGivenProject.Edit);
 		mgProject.checkChildrenProject(prj1, prj11);
-		mgProject.addSubProject(prj11,prj112,"", false);
+		mgProject.addSubProject(prj11,prj112,"", "",false);
+		mgProject.selectOpContMenuGivenProject(prj112, optionContMenuGivenProject.Edit);
 		mgProject.checkChildrenProject(prj1, prj11);
-		mgProject.addSubProject(prj11,prj113,"", false);
+		mgProject.addSubProject(prj11,prj113,"", "",false);
+		mgProject.selectOpContMenuGivenProject(prj113, optionContMenuGivenProject.Edit);
 		mgProject.checkChildrenProject(prj1, prj11);
 		
 		info("delete data");
@@ -117,7 +126,7 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- Tasks page is opened*/
 		hp.goToTasks();
-		mgProject.addProject(prj1,"", false);
+		mgProject.addProject(prj1,"","", false);
 		mgTask.addTask(prj1, task1);
 		
 		/*Step number: 2
@@ -130,7 +139,7 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- project A1 is added to parent project A
 			- project A1 is empty. It is not inherit tasks from project A*/ 
-		mgProject.addSubProject(prj1,prj11,"", false);
+		mgProject.addSubProject(prj1,prj11,"","", false);
 		waitForElementNotPresent(mgProject.ELEMENT_TASK_TITLE.replace("$task", task1));
 		
 		info("delete data");
@@ -161,7 +170,7 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- Tasks page is opened*/
 		hp.goToTasks();
-		mgProject.addProject(prj1,"", false);
+		mgProject.addProject(prj1,"","", false);
 		mgProject.shareProject(prj1,user1, false);
 		
 		/*Step number: 2
@@ -173,7 +182,7 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- project A1 is added to parent project A
 			- in Project Overview, manager is creator, paticipant is user A (permission is inherit from parent)*/
-		mgProject.addSubProject(prj1,prj11,"", false);
+		mgProject.addSubProject(prj1,prj11,"","", false);
 		mgProject.checkShareUsers(prj11, user3, user4);
 	
 		/*Step number: 3
@@ -214,7 +223,7 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			Tasks page is opened*/
 		hp.goToTasks();
-		mgProject.addProject(prj1,"", false);
+		mgProject.addProject(prj1,"", "",false);
 		mgTask.addTask(prj1, task1);
 		
 		/*Step number: 2
@@ -225,7 +234,7 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			Sub-projects inherit workflow from their parent at creation time. They can evolve separately afterwards.*/ 
-		mgProject.addSubProject(prj1,prj11,"", false);
+		mgProject.addSubProject(prj1,prj11,"","", false);
 		mgTask.addTask(prj11, task11);
 		mgTask.checkTaskDetail(task11,true,prj11,defaultStatus);
 		

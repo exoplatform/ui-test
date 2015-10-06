@@ -1,10 +1,12 @@
 package org.exoplatform.selenium.platform.task.functional;
 
 import static org.exoplatform.selenium.TestLogger.info;
+
 import org.exoplatform.selenium.platform.task.ManagementTasks.optDueDate;
 import org.exoplatform.selenium.platform.task.ManagementTasks.optionGroupBy;
 import org.exoplatform.selenium.platform.task.ManagementTasks.optionSortBy;
 import org.exoplatform.selenium.platform.task.ManagementTasks.optionTask;
+
 import org.testng.annotations.*;
 
 
@@ -16,7 +18,6 @@ import org.testng.annotations.*;
 	*<li> Pre-Condition: - exo-tasks add-on is installed
 	*- add some tasks with different : Assignee, Label, Due Date</li>
 	*<li> Post-Condition: </li>
-	* NOT FULL IMPLEMENT
 	*/
 	@Test
 	public  void test01_CheckDisplayOfIncomingGroupBy() {
@@ -46,9 +47,8 @@ import org.testng.annotations.*;
 		mgTask.addTaskDirectly(task1,true);
 		mgTask.addTaskDirectly(task2,true);
 		mgTask.addTaskDirectly(task3,true);
-		mgTask.editTaskAssignee(task1, DATA_USER1);
-		mgTask.editTaskAssignee(task2, DATA_USER2);
-		mgTask.editTaskAssignee(task3, DATA_USER2);
+		mgTask.editTaskAssignee(task2, DATA_NAME_USER1,DATA_USER2);
+		mgTask.editTaskAssignee(task3, DATA_NAME_USER1,DATA_USER2);
 		mgTask.selectDueDate(task1, optDueDate.Today);
 		mgTask.selectDueDate(task2, optDueDate.Today);
 		mgTask.selectDueDate(task3, optDueDate.Tomorrow);
@@ -109,9 +109,8 @@ import org.testng.annotations.*;
 	*<li> Pre-Condition: - exo-tasks add-on is installed
 	- add some tasks with different :Title, Created Date, Due Date, Priority</li>
 	*<li> Post-Condition: </li>
-	*BUG:https://jira.exoplatform.org/browse/TA-211
 	*/
-	@Test (groups="pending")
+	@Test 
 	public  void test02_CheckDisplayOfIncomingSortBy() {
 		info("Test 2: Check display of Incoming sort by");
 		String task1 = "a"+txData.getContentByArrayTypeRandom(1);
@@ -139,6 +138,7 @@ import org.testng.annotations.*;
 		mgTask.editTaskPriority(task1, low);
 		mgTask.editTaskPriority(task2, normal);
 		mgTask.editTaskPriority(task3, high);
+		driver.navigate().refresh();
 		
 		/*Step number: 2
 		*Step Name: Step 2: Open Incoming overview
@@ -367,4 +367,71 @@ import org.testng.annotations.*;
 			Task is changed to completed so it's hidden from the list*/ 
 		mgTask.completeTask(task1);
 	}
+	/**
+	*<li> Case ID:131514.</li>
+	*<li> Test Case Name: Check display of notification badge.</li>
+	*<li> Pre-Condition: exo-tasks add-on is installed</li>
+	*<li> Post-Condition: </li>
+	*/
+	@Test
+	public  void test07_CheckDisplayOfNotificationBadge() {
+		info("Test 07: Check display of notification badge");
+		String task1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+		/*Step Number: 1
+		*Step Name: Step 1: Open Tasks page
+		*Step Description: 
+			- Click on Tasks on the left navigation.
+		*Input Data: 
+			
+		*Expected Outcome: 
+			- Tasks page is opened*/
+		hp.goToTasks();
+		
+		/*Step number: 2
+		*Step Name: Step 2: Create new task
+		*Step Description: 
+			- Click on Incoming on left pane
+			- Add new task
+		*Input Data: 
+			
+		*Expected Outcome: 
+			- New task is created*/
+		mgTask.addTaskDirectly(task1,true);
+		
+		/*Step number: 3
+		*Step Name: Step 3: Assign task for user A
+		*Step Description: 
+			- Assign task for user A
+		*Input Data: 
+			
+		*Expected Outcome: 
+			- Task is assigned to user A*/
+		mgTask.editTaskAssignee(task1,DATA_NAME_USER1, DATA_USER3);
+		
+		/*Step number: 4
+		*Step Name: Step 4: Login as user A
+		*Step Description: 
+			- Login to PLF
+		*Input Data: 
+			
+		*Expected Outcome: 
+			- Login successfully*/
+		magAc.signOut();
+		magAc.signIn(DATA_USER3, DATA_PASS);
+		hp.goToTasks();
+		
+		/*Step number: 5
+		*Step Name: Step 5: Check display of notification badge
+		*Step Description: 
+			- Check display of notification badge on PLF home page
+		*Input Data: 
+			
+		*Expected Outcome: 
+			- There are notification badge to inform the number of new tasks arrival.*/ 
+		mgTask.checkNumTaskOnBadge("1");
+		
+		info("delete data");
+		mgTask.deleteTask(task1);
+		
+ 	}
 }

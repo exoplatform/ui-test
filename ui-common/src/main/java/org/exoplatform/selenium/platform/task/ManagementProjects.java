@@ -26,7 +26,7 @@ public class ManagementProjects extends TaskManagementLocatorObject {
 	public void goToProjects(){
 		info("open Projects");
 		click(ELEMENT_LEFT_PANE_PROJECTS,0,true);
-		Utils.pause(500);
+		Utils.pause(1000);
 	}
 	/**
 	 * Open Labels
@@ -34,7 +34,7 @@ public class ManagementProjects extends TaskManagementLocatorObject {
 	public void goToLabels(){
 		info("open Labels");
 		click(ELEMENT_LEFT_PANE_LABELS,0,true);
-		Utils.pause(500);
+		Utils.pause(1000);
 	}
 	/**
 	 * Open project
@@ -42,15 +42,15 @@ public class ManagementProjects extends TaskManagementLocatorObject {
 	public void openProject(String project){
 		info("open project: "+project);
 		click(ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project", project),0,true);
-		Utils.pause(500);
+		Utils.pause(1000);
 	}
 	/**
 	 * Close right pane
 	 */
 	public void closeProject(){
 		info("close project detail");
-		click(ELEMENT_RIGHT_PANE_CLOSE_ICON);
-		waitForElementNotPresent(ELEMENT_RIGHT_PANE_CLOSE_ICON);
+		click(ELEMENT_PROJECT_CLOSE_ICON);
+		waitForElementNotPresent(ELEMENT_PROJECT_CLOSE_ICON);
 	}
 	/**
 	 * Open Board view
@@ -65,8 +65,8 @@ public class ManagementProjects extends TaskManagementLocatorObject {
 	 */
 	public void hideProjectDetail(){
 		info("hide detail of project on right pane");
-		click(ELEMENT_RIGHT_PANE_HIDE_ICON);
-		waitForElementNotPresent(ELEMENT_RIGHT_PANE_CLOSE_ICON);
+		click(ELEMENT_PROJECT_HIDE_ICON);
+		waitForElementNotPresent(ELEMENT_PROJECT_CLOSE_ICON);
 	}
 	/**
 	 * Open Context Menu of Projects by clicking on "+" icon
@@ -117,8 +117,8 @@ public class ManagementProjects extends TaskManagementLocatorObject {
 	 */
 	public void goToContMenuGivenProject(String project){
 		info("Right click on a project in the list");
-		Utils.pause(1000);
 		mouseHoverByJavaScript(ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project",project),2);
+		Utils.pause(1000);
 		clickByJavascript(ELEMENT_LEFT_PANE_PROJECT_MENU.replace("$project", project),2);
 	}
 	
@@ -141,6 +141,7 @@ public class ManagementProjects extends TaskManagementLocatorObject {
 		switch(op){
 	    case Edit:
 	    	info("Select Edit option");
+	    	clickByJavascript(ELEMENT_LEFT_PANE_PROJECT_EDIT.replace("$project", project),2);
 	    	break;
 	    case Share:
 	    	info("Select Share option");
@@ -201,10 +202,37 @@ public class ManagementProjects extends TaskManagementLocatorObject {
 		info("check Add Project popup");
 		selectOpContMenuProject(optionContMenuProject.Add_Project);
 		waitForAndGetElement(ELEMENT_ADD_PROJECT_HEADER);
-		waitForAndGetElement(ELEMENT_RIGHT_PANE_PARENT_PATH_TEXT.replace("$project", "Projects"));
-		waitForAndGetElement(ELEMENT_ADD_PROJECT_DES_INPUT);
+		waitForAndGetElement(ELEMENT_PROJECT_PARENT_PATH_TEXT.replace("$project", "Projects"));
+		waitForAndGetElement(ELEMENT_ADD_PROJECT_DES_CKEDITOR_INPUT);
 		waitForAndGetElement(ELEMENT_ADD_PROJECT_TITLE_INPUT);
 		waitForAndGetElement(ELEMENT_ADD_PROJECT_ENABLE_CALENDAR);
+		waitForAndGetElement(ELEMENT_EDIT_PROJECT_SAVE_BTN);
+		waitForAndGetElement(ELEMENT_EDIT_PROJECT_CANCEL_BTN);
+	}
+	/**
+	 * Check edit project popup
+	 */
+	public void checkEditProjectPopup(String project){
+		info("check edit Project popup");
+		selectOpContMenuGivenProject(project, optionContMenuGivenProject.Edit);
+		waitForAndGetElement(ELEMENT_EDIT_PROJECT_HEADER);
+		waitForAndGetElement(ELEMENT_PROJECT_PARENT_PATH_LINK);
+		waitForAndGetElement(ELEMENT_EDIT_PROJECT_TITLE_INPUT_LINK);
+		waitForAndGetElement(ELEMENT_EDIT_PROJECT_DES_INPUT_LINK);
+		waitForAndGetElement(ELEMENT_ADD_PROJECT_ENABLE_CALENDAR);
+		waitForAndGetElement(ELEMENT_EDIT_PROJECT_SAVE_BTN);
+		waitForAndGetElement(ELEMENT_EDIT_PROJECT_CANCEL_BTN);
+	}
+	/**
+	 * Check cancel action when adding new project
+	 * @param project
+	 */
+	public void checkCancelAction(String project){
+		info("Check cancel action");
+		type(ELEMENT_ADD_PROJECT_TITLE_INPUT,project,true);
+		waitForElementNotPresent(ELEMENT_EDIT_PROJECT_SAVE_BTN_DISABLED);
+		cancelAddProject();
+		waitForElementNotPresent(ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project", project));
 	}
 	/**
 	 * Add a new project
@@ -216,20 +244,21 @@ public class ManagementProjects extends TaskManagementLocatorObject {
 	 *              = true if want to create a task calendar for the project in Calendar application
 	 *              = false if don't want.
 	 */
-	public void addProject(String title,String des,boolean enableCalendar){
+	public void addProject(String title,String des,String projectPath,boolean enableCalendar){
 		selectOpContMenuProject(optionContMenuProject.Add_Project);
 		info("Create project:" + title);
 		if(!des.isEmpty()){
 			info("Input description");
-			waitForAndGetElement(ELEMENT_CKEDITOR_IFRAME);
 			inputFrame(ELEMENT_CKEDITOR_IFRAME, des);
 		}
 		if(!title.isEmpty()){
 			info("Input title");
-			waitForAndGetElement(ELEMENT_ADD_PROJECT_TITLE_INPUT).sendKeys(title);
-	        driver.findElement(ELEMENT_ADD_PROJECT_TITLE_INPUT).sendKeys(Keys.ENTER);
+			type(ELEMENT_ADD_PROJECT_TITLE_INPUT,title,true);
 		}
-		
+		if(!projectPath.isEmpty()){
+			info("Input project path");
+			searchProjectPath(projectPath);
+		}
 		if(enableCalendar){
 			info("Enable Calendar intergration");
 			check(ELEMENT_ADD_PROJECT_ENABLE_CALENDAR_CHECKBOX,2);
@@ -237,22 +266,48 @@ public class ManagementProjects extends TaskManagementLocatorObject {
 			info("Disable Calendar intergration");
 			uncheck(ELEMENT_ADD_PROJECT_ENABLE_CALENDAR_CHECKBOX,2);
 		}
+		saveAddProject();
 		Utils.pause(1000);
-		waitForAndGetElement(ELEMENT_ADD_PROJECT_DES_TEXT.replace("$des", des));
 		waitForAndGetElement(ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project", title));
 		waitForElementNotPresent(ELEMENT_LEFT_PANE_TOOLTIP_PROJECT);
+		//waitForAndGetElement(ELEMENT_TEXT_NOTASK_DEFAULT);
+	}
+	/**
+	 * Check project detail
+	 * @param title
+	 * @param des
+	 * @param projectPath
+	 */
+	public void checkProjectDetail(String title,String des,String projectPath){
+		selectOpContMenuGivenProject(title, optionContMenuGivenProject.Edit);
+		info("Check project detail" + title);
+		if(!title.isEmpty()){
+			info("check title");
+			waitForAndGetElement(ELEMENT_ADD_PROJECT_TITLE_TEXT.replace("$title", title));
+		}
+		if(!des.isEmpty()){
+			info("check description");
+			waitForAndGetElement(ELEMENT_ADD_PROJECT_DES_TEXT.replace("$des", des));
+		}
+		if(!projectPath.isEmpty()){
+			info("check project path");
+			waitForAndGetElement(ELEMENT_ADD_PROJECT_PARENT_PROJECT_TEXT.replace("$path", projectPath));
+		}
 	}
 	/**
 	 * Check project detail by default
 	 * @param project
 	 */
-	public void checkProjectDetail(String project){
-		waitForAndGetElement(ELEMENT_RIGHT_PANE_PARENT_PATH_TEXT.replace("$project", "Projects"));
+	public void checkProjectDetailByDefault(String project){
+		selectOpContMenuGivenProject(project, optionContMenuGivenProject.Edit);
+		waitForAndGetElement(ELEMENT_PROJECT_PARENT_PATH_TEXT.replace("$project", "Projects"));
 		waitForAndGetElement(ELEMENT_WELCOME_TEXT_PROJECT1);
 		waitForAndGetElement(ELEMENT_WELCOME_TEXT_PROJECT2);
 		mouseOver(ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project", project),false);
 		waitForAndGetElement(ELEMENT_LEFT_PANE_PROJECT_MENU.replace("$project",project));
+		cancelEditProject();
 	}
+	
 	/**
 	 * Add sub-project
 	 * @param parent
@@ -265,23 +320,21 @@ public class ManagementProjects extends TaskManagementLocatorObject {
 	 *              = true if want to create a task calendar for the project in Calendar application
 	 *              = false if don't want.
 	 */
-	public void addSubProject(String parent, String child, String des,boolean enableCalendar){
+	public void addSubProject(String parent, String child, String des,String path,boolean enableCalendar){
 		selectOpContMenuGivenProject(parent, optionContMenuGivenProject.Add_Project);
-		Utils.pause(2000);
 		info("Create project:" + child);
-		if(des!=null && !des.isEmpty()){
+		if(!des.isEmpty()){
 			info("Input description");
-			waitForAndGetElement(ELEMENT_CKEDITOR_IFRAME);
 			inputFrame(ELEMENT_CKEDITOR_IFRAME, des);
 		}
-		if(child!=null && !child.isEmpty()){
+		if(!child.isEmpty()){
 			info("Input title");
-			//type(ELEMENT_ADD_PROJECT_TITLE,title,true);
-			waitForAndGetElement(ELEMENT_ADD_PROJECT_TITLE_INPUT).sendKeys(child);
-	        Utils.pause(500);
-	        driver.findElement(ELEMENT_ADD_PROJECT_TITLE_INPUT).sendKeys(Keys.ENTER);
+			type(ELEMENT_ADD_PROJECT_TITLE_INPUT,child,true);
 		}
-		
+		if(!path.isEmpty()){
+			info("Input project path");
+			searchProjectPath(path);
+		}
 		if(enableCalendar){
 			info("Enable Calendar intergration");
 			check(ELEMENT_ADD_PROJECT_ENABLE_CALENDAR_CHECKBOX,2);
@@ -289,10 +342,8 @@ public class ManagementProjects extends TaskManagementLocatorObject {
 			info("Disable Calendar intergration");
 			uncheck(ELEMENT_ADD_PROJECT_ENABLE_CALENDAR_CHECKBOX,2);
 		}
-		Utils.pause(1000);
+		saveAddProject();
 		waitForAndGetElement(ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project", child));
-		waitForAndGetElement(ELEMENT_ADD_PROJECT_DES_TEXT.replace("$des", des));
-		waitForAndGetElement(ELEMENT_RIGHT_PANE_PARENT_PATH_TEXT.replace("$project", parent));
 	}
 	/**
 	 * Enable calendar integration
@@ -314,7 +365,8 @@ public class ManagementProjects extends TaskManagementLocatorObject {
 	 */
 	public void saveAddProject(){
 		info("Click on Save button");
-		
+		click(ELEMENT_EDIT_PROJECT_SAVE_BTN,0,true);
+		Utils.pause(2000);
 	}
 	
 	/**
@@ -322,7 +374,8 @@ public class ManagementProjects extends TaskManagementLocatorObject {
 	 */
 	public void cancelAddProject(){
 		info("Click on Cancel button");
-		
+		click(ELEMENT_EDIT_PROJECT_CANCEL_BTN,0,true);
+		Utils.pause(1000);
 	}
 	
 	/**
@@ -354,33 +407,30 @@ public class ManagementProjects extends TaskManagementLocatorObject {
 	 *                   >1 and opt[1]==true if want to enable calendar integration
 	 *                   >0 and <1 if want to disable or uncheck calendar integration
 	 */
-	public void editProject(String projectPath,String title,String des,boolean... opt){
-		selectProject(projectPath);
-		if(title!=null || title!=""){
+	public void editProject(String projectPath,String title,String des,String path,boolean... opt){
+		selectOpContMenuGivenProject(projectPath, optionContMenuGivenProject.Edit);
+		if(!title.isEmpty()){
 			info("Input title");
-			if(opt.length>0 && opt[0]==true)
-				type(ELEMENT_ADD_PROJECT_TITLE_INPUT,title,false);//Input a new title with keeping old title
-			else
-				type(ELEMENT_ADD_PROJECT_TITLE_INPUT,title,true);//Input a new title with clearing all old title
+			click(ELEMENT_ADD_PROJECT_TITLE_TEXT.replace("$title", projectPath),0,true);
+			type(ELEMENT_EDIT_PROJECT_TITLE_INPUT,title,true);
 		}
-		if(des!=null || des!=""){
+		if(!des.isEmpty()){
 			info("Input description");
-			if(opt.length>0 && opt[0]==true){
-				waitForAndGetElement(ELEMENT_CKEDITOR_IFRAME);
-				inputFrame(ELEMENT_CKEDITOR_IFRAME, des);//Input a new description with keeping old description
-			}else{
-				waitForAndGetElement(ELEMENT_CKEDITOR_IFRAME);
-				inputFrame(ELEMENT_CKEDITOR_IFRAME, des);//Input a new description with clearing all old description
-			}
-			}
-		
-		if(opt.length>1 && opt[1]==true){
+			click (ELEMENT_EDIT_PROJECT_DES_INPUT_LINK,0,true);
+			inputFrame(ELEMENT_CKEDITOR_IFRAME, des);
+		}
+		if(!path.isEmpty()){
+			info("Input project path");
+			searchProjectPath(path);
+		}
+		if(opt.length>0 && opt[0]==true){
 			info("Enable Calendar intergration");
 			check(ELEMENT_ADD_PROJECT_ENABLE_CALENDAR_CHECKBOX,2);
 		}else{
 			info("Disable Calendar intergration");
 			uncheck(ELEMENT_ADD_PROJECT_ENABLE_CALENDAR_CHECKBOX,2);
 		}
+		saveEditProject();
 	}
 	
 	/**
@@ -388,6 +438,8 @@ public class ManagementProjects extends TaskManagementLocatorObject {
 	 */
 	public void saveEditProject(){
 		info("Click on Save button");
+		click(ELEMENT_EDIT_PROJECT_SAVE_BTN,0,true);
+		Utils.pause(2000);
 	}
 	
 	/**
@@ -395,17 +447,21 @@ public class ManagementProjects extends TaskManagementLocatorObject {
 	 */
 	public void cancelEditProject(){
 		info("Click on Cancel button");
+		click(ELEMENT_EDIT_PROJECT_CANCEL_BTN,0,true);
+		Utils.pause(1000);
 	}
 	/**
 	 * Change Project Parent
+	 * @param project
 	 * @param parentPrj
 	 */
-	public void changeParentProject(String parentPrj){
+	public void changeParentProject(String project,String parentPrj){
 		info("Click on Parent project field");
-		click(ELEMENT_RIGHT_PANE_PARENT_PATH_LINK);
-		click(ELEMENT_RIGHT_PANE_PARENT_PATH_DROPDOWN_MENU.replace("$project",parentPrj));
+		selectOpContMenuGivenProject(project, optionContMenuGivenProject.Edit);
+		click(ELEMENT_PROJECT_PARENT_PATH_LINK,0,true);
+		click(ELEMENT_PARENT_PATH_DROPDOWN_MENU.replace("$project",parentPrj),0,true);
 		Utils.pause(1000);
-		waitForAndGetElement(ELEMENT_RIGHT_PANE_PARENT_PATH_TEXT.replace("$project", parentPrj));
+		waitForAndGetElement(ELEMENT_PROJECT_PARENT_PATH_TEXT.replace("$project", parentPrj));
 	}
 	
 	/**
@@ -505,7 +561,8 @@ public class ManagementProjects extends TaskManagementLocatorObject {
 	public void deleteProjectByDataId(String project,String id,boolean subPrj,String...subs){
 		info("delete project:" + project);
 		clickByJavascript(ELEMENT_LEFT_PANE_PROJECTID_MENU.replace("$project", project).replace("$id", id),2);
-		click(ELEMENT_LEFT_PANE_PROJECT_DELETE.replace("$project", project),0,true);
+		Utils.pause(1000);
+		click(ELEMENT_LEFT_PANE_PROJECTID_DELETE.replace("$project", project).replace("$id", id),0,true);
 		if(subPrj){
 			info("also delete all sub-projects");
 			check(ELEMENT_DELETE_PROJECT_DELETE_SUBPRJ_CHECKBOX,2);
@@ -624,10 +681,10 @@ public class ManagementProjects extends TaskManagementLocatorObject {
 		String color = (String)(opParams.length > 2 ? opParams[2]: "");
 		String des = (String)(opParams.length > 3 ? opParams[3]: "");
 		if (parent !=null && !parent.isEmpty() ){
-			waitForAndGetElement(ELEMENT_RIGHT_PANE_PARENT_PATH_TEXT.replace("$project",parent));
+			waitForAndGetElement(ELEMENT_PROJECT_PARENT_PATH_TEXT.replace("$project",parent));
 		}
 		if (manager !=null && !manager.isEmpty() ){
-			waitForAndGetElement(ELEMENT_RIGHT_PANE_MANAGER_NAME.replace("$user", manager));
+			waitForAndGetElement(ELEMENT_PROJECT_MANAGER_NAME.replace("$user", manager));
 		}
 		if (color !=null && !color.isEmpty() ){
 			waitForAndGetElement(ELEMENT_LEFT_PANE_PROJECT_COLOR.replace("$project", "Copy of "+project).replace("$color", color));
@@ -738,6 +795,7 @@ public class ManagementProjects extends TaskManagementLocatorObject {
 	 */
 	public void checkGroupByInProjects(String project,String[] groups,boolean isBoard){
 		info("check group by list of project");
+		driver.navigate().refresh();
 		openProject(project);
 		if(isBoard){
 			openBoard();
@@ -762,6 +820,7 @@ public class ManagementProjects extends TaskManagementLocatorObject {
 	 */
 	public void checkSortByInProjects(String project,String[] sorts,boolean isBoard){
 		info("check sort by list of project");
+		driver.navigate().refresh();
 		openProject(project);
 		if(isBoard){
 			openBoard();
@@ -809,6 +868,7 @@ public class ManagementProjects extends TaskManagementLocatorObject {
 	 * @param project
 	 */
 	public void checkDefaultGroupSort(String project,String group,String sort,boolean isBoard){
+		driver.navigate().refresh();
 		openProject(project);
 		if(isBoard){
 			openBoard();
@@ -839,12 +899,12 @@ public class ManagementProjects extends TaskManagementLocatorObject {
 		Utils.pause(1000);
 		if(participants.length>0 && !participants[0].isEmpty()){
 		for (String participant : participants) {
-			waitForAndGetElement(ELEMENT_SHARE_PROJECT_DISPLAY_PARTICIPANT.replace("$user",participant));
+			waitForAndGetElement(ELEMENT_SHARE_PROJECT_DISPLAY_PARTICIPANT.replace("$user",participant),DEFAULT_TIMEOUT,1);
 			}
 		}
 		if(managers.length>0 && managers[0].isEmpty()){
 		for (String manager : managers) {
-			waitForAndGetElement(ELEMENT_SHARE_PROJECT_DISPLAY_MANAGER.replace("$user",manager));
+			waitForAndGetElement(ELEMENT_SHARE_PROJECT_DISPLAY_MANAGER.replace("$user",manager),DEFAULT_TIMEOUT,1);
 			}
 		}
 		Utils.pause(1000);
@@ -885,32 +945,42 @@ public class ManagementProjects extends TaskManagementLocatorObject {
 	 * 			 description of project
 	 */
 	public void decorateDescription(String project, String des){
-		//openProject(project);
-		Utils.pause(1000);
-		clickByJavascript(ELEMENT_RIGHT_PANE_EDIT_PROJECT_DES_INPUT,2);
+		selectOpContMenuGivenProject(project, optionContMenuGivenProject.Edit);
+		click(ELEMENT_EDIT_PROJECT_DES_INPUT_LINK,0,true);
 		if(des.isEmpty()){
 			info("left description blank");
 			inputFrame(ELEMENT_CKEDITOR_IFRAME, "");
-			mouseOverAndClick(ELEMENT_RIGHT_PANE_PARENT_PATH_LINK);
-			waitForAndGetElement(ELEMENT_ADD_PROJECT_DES_EMPTY);
+			
 		}else{
 			info("decorate description");
 			inputFrame(ELEMENT_CKEDITOR_IFRAME, des);
-			cke_NumberList();
 			cke_Bold();
-			mouseOverAndClick(ELEMENT_RIGHT_PANE_PARENT_PATH_LINK);
-			waitForAndGetElement(ELEMENT_ADD_PROJECT_DES_CKEDITOR.replace("$des", des));
 		}
+		saveEditProject();
+	}
+	/**
+	 * Check decorate description
+	 * @param project
+	 * @param des
+	 */
+	public void checkDecorateDescription(String project,String des){
+		info("check decorate description");
+		selectOpContMenuGivenProject(project, optionContMenuGivenProject.Edit);
+		if(!des.isEmpty())
+			waitForAndGetElement(ELEMENT_ADD_PROJECT_DES_CKEDITOR.replace("$des", des));
+		else
+			waitForAndGetElement(ELEMENT_ADD_PROJECT_DES_EMPTY);	
+		cancelEditProject();
 	}
 	/**
 	 * Search project in Project Path
-	 * @param project: search key
+	 * @param key: search key
 	 */
-	public void searchProjectPath(String project){
+	public void searchProjectPath(String key){
 		info("search project");
-		click(ELEMENT_RIGHT_PANE_PARENT_PATH_LINK);
-		type(ELEMENT_EDIT_PROJECT_PATH_INPUT,project,true);
-		waitForAndGetElement(ELEMENT_RIGHT_PANE_PARENT_PATH_MATCH_VALUE.replace("$text",project));
+		click(ELEMENT_PROJECT_PARENT_PATH_LINK);
+		type(ELEMENT_EDIT_PROJECT_PATH_INPUT,key,true);
+		waitForAndGetElement(ELEMENT_PARENT_PATH_MATCH_VALUE.replace("$text",key));
 	}
 	/**
 	 * Left project title blank
@@ -918,12 +988,13 @@ public class ManagementProjects extends TaskManagementLocatorObject {
 	 */
 	public void leftProjectTitleBlank(String project){
 		info("left title blank");
-		click(ELEMENT_ADD_PROJECT_TITLE_TEXT.replace("$title",project));
+		selectOpContMenuGivenProject(project, optionContMenuGivenProject.Edit);
 		Utils.pause(500);
+		click(ELEMENT_EDIT_PROJECT_TITLE_INPUT_LINK,0,true);
 		waitForAndGetElement(ELEMENT_EDIT_PROJECT_TITLE_INPUT).clear();
         Utils.pause(500);
         driver.findElement(ELEMENT_EDIT_PROJECT_TITLE_INPUT).sendKeys(Keys.ENTER);
-        waitForAndGetElement(ELEMENT_ADD_PROJECT_UNTITLED);
+        waitForAndGetElement(ELEMENT_EDIT_PROJECT_UNTITLED);
 	}
 	/**
 	 * Hide project
@@ -967,9 +1038,9 @@ public class ManagementProjects extends TaskManagementLocatorObject {
 	 * @param sub: sub-project
 	 */
 	public void checkChildrenProject(String prj,String sub){
-		click(ELEMENT_RIGHT_PANE_PARENT_PATH_LINK);
+		click(ELEMENT_PROJECT_PARENT_PATH_LINK);
 		Utils.pause(500);
-		waitForAndGetElement(ELEMENT_RIGHT_PANE_PARENT_PATH_FULL.replace("$parent", prj).replace("$child",sub));
+		waitForAndGetElement(ELEMENT_PARENT_PATH_FULL.replace("$parent", prj).replace("$child",sub));
 	}
 	/**
 	 * Check display of List, Board
@@ -1165,5 +1236,50 @@ public class ManagementProjects extends TaskManagementLocatorObject {
 		info("Check editable of Calendar Integration field");
 		click(ELEMENT_ADD_PROJECT_ENABLE_CALENDAR_TEXT);
 		waitForAndGetElement(ELEMENT_ADD_PROJECT_ENABLE_CALENDAR_TEXT);
+	}
+	 /** 
+	  * check permission open project
+	 * @param project
+	 * @param isEnable
+	 */
+	public void checkPermOpenProject(String project,boolean isEnable){
+		info("Check permission open project");
+		mouseHoverByJavaScript(ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project",project),2);
+		if(isEnable){
+			waitForAndGetElement(ELEMENT_LEFT_PANE_PROJECT_MENU.replace("$project", project));
+		}else{
+			waitForElementNotPresent(ELEMENT_LEFT_PANE_PROJECT_MENU.replace("$project", project));
+		}
+	}
+	/**
+	 * Check expanded/collapsed
+	 * @param exp
+	 * 			element to expand
+	 * @param col
+	 * 			element to collapse
+	 */
+	public void checkExpandCollapse(Object exp,Object col){
+		info("check expaned/collapsed");
+		click(exp,0,true);
+		waitForAndGetElement(col);
+	}
+	/**
+	 * Check list view permalink
+	 * @param project
+	 */
+	public void checkPermalinkListView(String project){
+		info("check permalink in list view");
+		click(ELEMENT_PROJECT_PERMALINK.replace("$project", project),0,true);
+		//todo
+	}
+	/**
+	 * Check manager field
+	 * @param project
+	 * @param user
+	 */
+	public void checkManagerField(String project,String user){
+		info("check manager field");
+		selectOpContMenuGivenProject(project, optionContMenuGivenProject.Edit);
+		waitForAndGetElement(ELEMENT_PROJECT_MANAGER_NAME.replace("$user",user));
 	}
 }

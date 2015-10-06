@@ -12,9 +12,9 @@ import org.testng.annotations.*;
 	*<li> Test Case Name: Check display of add label in task change.</li>
 	*<li> Pre-Condition: exo-tasks add-on is installed</li>
 	*<li> Post-Condition: </li>
-	*NOT IMPLEMENT YET
+	*https://jira.exoplatform.org/browse/TA-322
 	*/
-	@Test
+	@Test (groups="pending")
 	public  void test01_CheckDisplayOfAddLabelInTaskChange() {
 		info("Test 1: Check display of add label in task change");
 		/*Step Number: 1
@@ -94,7 +94,7 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			task A is assign to user A*/
-		mgTask.editTaskAssignee(task1, DATA_USER2);
+		mgTask.editTaskAssignee(task1, DATA_NAME_USER1,DATA_USER2);
 		
 		/*Step number: 4
 		*Step Name: Step 4: Check display of assign task in task change
@@ -132,7 +132,7 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			Tasks page is opened*/
 		hp.goToTasks();
-		mgProject.addProject(prj1, "", false);
+		mgProject.addProject(prj1, "","", false);
 		
 		/*Step number: 2
 		*Step Name: Step 2: Create task A
@@ -201,7 +201,7 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			task A is created*/
-		mgProject.addProject(prj1, "", false);
+		mgProject.addProject(prj1, "","", false);
 		mgTask.addTask(prj1, task1);
 		
 		/*Step number: 3
@@ -543,7 +543,7 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			task A is created*/
-		mgProject.addProject(prj1, "", false);
+		mgProject.addProject(prj1, "","", false);
 		mgTask.addTask(prj1, task1);
 		
 		/*Step number: 3
@@ -601,7 +601,7 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			Task details is opened*/
 		mgTask.addTaskDirectly(task1,true);
-		mgTask.editTaskAssignee(task1, DATA_USER2);
+		mgTask.editTaskAssignee(task1, DATA_USER1,DATA_USER2);
 		
 		/*Step number: 3
 		*Step Name: Step 3: Edit task A

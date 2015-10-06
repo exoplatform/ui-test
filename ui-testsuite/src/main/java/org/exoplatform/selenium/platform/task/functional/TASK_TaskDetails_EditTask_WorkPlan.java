@@ -11,9 +11,8 @@ import org.testng.annotations.*;
 	*<li> Test Case Name: Check All Day checkbox.</li>
 	*<li> Pre-Condition: exo-tasks add-on is installed</li>
 	*<li> Post-Condition: </li>
-	* BUG: https://jira.exoplatform.org/browse/TA-161
 	*/
-	@Test (groups="pending")
+	@Test 
 	public  void test01_CheckAllDayCheckbox() {
 		info("Test 1: Check All Day checkbox");
 		String task1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
@@ -373,15 +372,23 @@ import org.testng.annotations.*;
 	/**
 	*<li> Case ID:130962.</li>
 	*<li> Test Case Name: Check when the work plan date time is updated.</li>
+<<<<<<< HEAD
 	*<li> Pre-Condition: exo-tasks add-on is installed -projectA has calendar integration-task A is created with work plan in projectA</li>
 	*<li> Post-Condition: </li>
 	*https://jira.exoplatform.org/browse/TA-251
+=======
+	*<li> Pre-Condition: exo-tasks add-on is installed
+    *<li>      projectA has calendar integration
+    *<li>      task A is created with work plan in projectA</li>
+	*<li> Post-Condition: </li>
+	*https://jira.exoplatform.org/browse/TA-334
+>>>>>>> FQA-2695:[Task Management]- Write scripts for Labels - Create a label
 	*/
 	@Test (groups="pending")
 	public  void test08_CheckWhenTheWorkPlanDateTimeIsUpdated() {
 		info("Test 8: Check when the work plan date time is updated");
-		String task1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		String prj1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+		String task1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		/*Step Number: 1
 		*Step Name: Step 1: Open Tasks page
 		*Step Description: 
@@ -391,9 +398,9 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			Tasks page is opened*/
 		hp.goToTasks();
-		mgProject.addProject(prj1,"", true);
+		mgProject.addProject(prj1, "","", true);
 		mgTask.addTask(prj1, task1);
-		mgTask.editTaskWorkPlan(task1, getDate(0,"dd"), 0, getDate(0,"dd"), 0, "00:00", "02:00",false);
+		mgTask.editTaskWorkPlan(task1, getDate(0,"dd"), 0, getDate(1,"dd"), 0, "", "", true);
 		
 		/*Step number: 2
 		*Step Name: Step 2: Uncheck Calendar Integration of projectA
@@ -404,7 +411,7 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- projectA has not calendar*/
-		mgProject.enableCalendar(prj1,false);
+		mgProject.editProject(prj1, "", "", "", false);
 		
 		/*Step number: 3
 		*Step Name: Step 3: Check taskA
@@ -414,7 +421,7 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- in task detail, icon calendar before workplan cannot be clicked*/ 
-		mgTask.checkEditableOfCalIcon(task1,false);
+		mgTask.checkClickableOfCalIcon(task1, false);
 		
 		info("delete data");
 		mgProject.deleteProject(prj1, false);

@@ -36,11 +36,11 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- Tasks page is opened*/
 		hp.goToTasks();
-		mgProject.addProject(prj1, "", false);
+		mgProject.addProject(prj1, "","", false);
 		mgTask.addTask(prj1, task1);
 		mgTask.addTask(prj1, task2);
-		mgTask.editTaskAssignee(task1, DATA_USER1);
-		mgTask.editTaskAssignee(task2, DATA_USER2);
+		mgTask.editTaskUnAssignee(task1, DATA_USER1);
+		mgTask.editTaskUnAssignee(task2, DATA_USER2);
 		
 		/*Step number: 2
 		*Step Name: Step 2: Open projectA
@@ -117,7 +117,7 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- Tasks page is opened*/
 		hp.goToTasks();
-		mgProject.addProject(prj1, "", false);
+		mgProject.addProject(prj1, "", "",false);
 		mgTask.addTask(prj1, task1);
 		mgTask.setDueDate(task1, getDate(-3, "dd MMM yyyy"), getDate(-3, "dd"), 0);
 		
@@ -176,7 +176,7 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- projectA is opened*/
 		hp.goToTasks();
-		mgProject.addProject(prj1, "", false);
+		mgProject.addProject(prj1, "","", false);
 		mgTask.addTask(prj1, task1);
 		
 		/*Step number: 3
@@ -226,7 +226,7 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- Tasks page is opened*/
 		hp.goToTasks();
-		mgProject.addProject(prj1, "", false);
+		mgProject.addProject(prj1, "","", false);
 		mgTask.addTask(prj1, task1);
 		mgTask.addTask(prj1, task2);
 		
@@ -307,11 +307,11 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- projectA is opened*/
-		mgProject.addProject(prj1, "", false);
+		mgProject.addProject(prj1, "","", false);
 		mgTask.addTask(prj1, task1);
-		mgTask.editTaskAssignee(task1, DATA_USER1);
+		mgTask.editTaskUnAssignee(task1, DATA_USER1);
 		mgTask.addTask(prj1, task2);
-		mgTask.editTaskAssignee(task2, DATA_USER2);
+		mgTask.editTaskUnAssignee(task2, DATA_USER2);
 		/*Step number: 3
 		*Step Name: Step 3: Open Board view
 		*Step Description: 

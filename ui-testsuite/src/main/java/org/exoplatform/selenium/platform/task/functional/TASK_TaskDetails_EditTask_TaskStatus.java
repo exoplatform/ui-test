@@ -34,8 +34,8 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			Tasks page is opened*/
 		hp.goToTasks();
-		mgProject.addProject(prj2, "", false);
-		mgProject.addProject(prj1, "", false);
+		mgProject.addProject(prj2, "","", false);
+		mgProject.addProject(prj1, "","", false);
 		
 		/*Step number: 2
 		*Step Name: Step 2: Check status of task when a task is added to a project

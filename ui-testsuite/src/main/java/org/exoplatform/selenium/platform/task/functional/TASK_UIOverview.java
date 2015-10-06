@@ -82,6 +82,7 @@ import org.testng.annotations.*;
 		String task1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		String task2 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		String task3 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+		String prj1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		/*Step Number: 1
 		*Step Name: Step 1: Open Tasks page
 		*Step Description: 
@@ -91,6 +92,7 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			Tasks page is opened*/
 		hp.goToTasks();
+		mgProject.addProject(prj1, "", "", false);
 		
 		/*Step number: 2
 		*Step Name: Step 2: Check first access of sort by and group by
@@ -104,6 +106,8 @@ import org.testng.annotations.*;
 		mgTask.addTaskDirectly(task1,true);
 		mgTask.addTaskDirectly(task2,true);
 		mgTask.addTaskDirectly(task3,true);
+		driver.navigate().refresh();
+		mgProject.openProject(prj1);
 		
 		/*Step number: 3
 		*Step Name: Step 3: Create 2 tasks
@@ -116,9 +120,7 @@ import org.testng.annotations.*;
 		mgProject.checkFirstAccessGroupSort(true);
 		
 		info("delete data");
-		mgTask.deleteTask(task1);
-		mgTask.deleteTask(task2);
-		mgTask.deleteTask(task3);
+		mgProject.deleteProject(prj1, false);
  	}
 
 	/**
@@ -152,7 +154,7 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			Tasks page is opened*/
 		hp.goToTasks();
-		mgProject.addProject(prj1, "", false);
+		mgProject.addProject(prj1, "","", false);
 		
 		/*Step number: 2
 		*Step Name: Step 2: Check Left Pane
@@ -196,7 +198,6 @@ import org.testng.annotations.*;
 	@Test
 	public  void test07_08_CheckCloseRightPane() {
 		info("Test 7: Check close Right Pane");
-		String prj1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		String task1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		/*Step Number: 1
 		*Step Name: Step 1: Open Tasks page
@@ -207,22 +208,7 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			Tasks page is opened*/
 		hp.goToTasks();
-		mgProject.addProject(prj1, "", false);
-		mgTask.addTask(prj1, task1);
-		
-		/*Step number: 2
-		*Step Name: Step 2: Open Right Pane
-		*Step Description: 
-			Right pane can be opened by:
-			- Click on a task in the task list.
-			- Click on a project in the project list.
-			- Click on filter icon to show filter detail, click on it again to hide it.
-		*Input Data: 
-			
-		*Expected Outcome: 
-			Right Pane is opened*/ 
-		mgProject.openProject(prj1);
-		mgProject.closeProject();
+		mgTask.addTaskDirectly(task1,true);
 		
 		/*Step number: 2
 		*Step Name: Step 2: Close Right Pane
@@ -233,11 +219,10 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			Right Pane is closed*/ 
-		mgTask.openTask(task1);
 		mgTask.closeTask();
 		
 		info("delete data");
-		mgProject.deleteProject(prj1, false);
+		mgTask.deleteTask(task1);
  	}
 
 	/**
@@ -249,7 +234,6 @@ import org.testng.annotations.*;
 	@Test
 	public  void test09_CheckHiddenRightPane() {
 		info("Test 9: Check hidden Right Pane");
-		String prj1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		String task1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		/*Step Number: 1
 		*Step Name: Step 1: Open Tasks page
@@ -260,14 +244,12 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			Tasks page is opened*/
 		hp.goToTasks();
-		mgProject.addProject(prj1, "", false);
-		mgProject.hideProjectDetail();
-		mgTask.addTask(prj1, task1);
+		mgTask.addTaskDirectly(task1, true);
 		
 		/*Step number: 2
 		*Step Name: Step 2: Hide Right Pane
 		*Step Description: 
-			- Click on one task/project to open Right Pane
+			- Click on one task to open Right Pane
 			- Clicking on the show/hide icon
 		*Input Data: 
 			
@@ -277,7 +259,7 @@ import org.testng.annotations.*;
 		mgTask.hideTaskDetail();
 		
 		info("delete data");
-		mgProject.deleteProject(prj1, false);
+		mgTask.deleteTask(task1);
  	}
 
 	/**
@@ -291,11 +273,20 @@ import org.testng.annotations.*;
 	*<li> Test Case Name: Check project list can be expanded/collapsed.</li>
 	*<li> Pre-Condition: exo-tasks add-on is installedadd sub-project A1 to project A</li>
 	*<li> Post-Condition: </li>
-	* NOT IMPLEMENT YET
 	*/
-	@Test (groups="pending")
-	public  void test11_12_CheckMainHeaderCanBeExpandedcollapsed() {
+	/**
+	*<li> Case ID:130875.</li>
+	*<li> Test Case Name: Check label list can be expanded/collapsed.</li>
+	*<li> Pre-Condition: exo-tasks add-on is installedadd sub-label A1 to label A</li>
+	*<li> Post-Condition: </li>
+	*/
+	@Test 
+	public  void test11_12_13_CheckMainHeaderCanBeExpandedcollapsed() {
 		info("Test 11 Check main header can be expanded/collapsed");
+		String prj1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+		String prj11 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+		String lbl1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+		String lbl11 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		/*Step Number: 1
 		*Step Name: Step 1: Open Tasks page
 		*Step Description: 
@@ -304,7 +295,13 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			Tasks page is opened*/
-
+		hp.goToTasks();
+		mgLabel.addLabel(lbl1);
+		mgLabel.addSubLabel(lbl1,lbl11);
+		mgProject.addProject(prj1, "","", false);
+		mgProject.addSubProject(prj1, prj11, "", "", false);
+		
+		
 		/*Step number: 2
 		*Step Name: Step 2: Check main header can be expanded/collapsed
 		*Step Description: 
@@ -313,46 +310,23 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			Tasks/Projects/Labels can be expanded/collapsed*/ 
-
- 	}
-
-	/**
-	*<li> Case ID:130875.</li>
-	*<li> Test Case Name: Check label list can be expanded/collapsed.</li>
-	*<li> Pre-Condition: exo-tasks add-on is installedadd sub-label A1 to label A</li>
-	*<li> Post-Condition: </li>
-	* NOT IMPLEMENT YET
-	*/
-	@Test (groups="pending")
-	public  void test13_CheckLabelListCanBeExpandedcollapsed() {
-		info("Test 13 Check label list can be expanded/collapsed");
-		/*Step Number: 1
-		*Step Name: Step 1: Open Tasks page
-		*Step Description: 
-			- Click on Tasks on the left navigation.
-		*Input Data: 
-			
-		*Expected Outcome: 
-			Tasks page is opened*/
-
-		/*Step number: 2
-		*Step Name: Step 2: Check label list can be expanded/collapsed
-		*Step Description: 
-			- Click on the show/hide icon area of label A1
-		*Input Data: 
-			
-		*Expected Outcome: 
-			label A1 can be expanded/collapsed*/ 
-
+		mgProject.checkExpandCollapse(ELEMENT_LEFT_PANE_LABEL_ARROW_MENU_DOWN.replace("$label", lbl1),ELEMENT_LEFT_PANE_LABEL_ARROW_MENU_RIGHT.replace("$label", lbl1));
+		mgProject.checkExpandCollapse(ELEMENT_LEFT_PANE_PROJECT_ARROW_MENU_DOWN.replace("$project", prj1),ELEMENT_LEFT_PANE_PROJECT_ARROW_MENU_RIGHT.replace("$project", prj1));
+		mgProject.checkExpandCollapse(ELEMENT_LEFT_PANE_LABELS_ARROW_MENU_DOWN,ELEMENT_LEFT_PANE_LABELS_ARROW_MENU_RIGHT);
+		mgProject.checkExpandCollapse(ELEMENT_LEFT_PANE_PROJECTS_ARROW_MENU_DOWN,ELEMENT_LEFT_PANE_PROJECTS_ARROW_MENU_RIGHT);
+		mgProject.checkExpandCollapse(ELEMENT_LEFT_PANE_TASKS_ARROW_MENU_DOWN,ELEMENT_LEFT_PANE_TASKS_ARROW_MENU_RIGHT);
+		
+		info("delete data");
+		mgLabel.deleteLabel(lbl1);
+		mgProject.deleteProject(prj1, true, prj11);
  	}
 	/**
 	*<li> Case ID:139861.</li>
 	*<li> Test Case Name: Check left menu can be hidden.</li>
 	*<li> Pre-Condition: - exo-tasks add-on is installed</li>
 	*<li> Post-Condition: </li>
-	*https://jira.exoplatform.org/browse/TA-214
 	*/
-	@Test (groups="pending")
+	@Test
 	public  void test14_CheckLeftMenuCanBeHidden() {
 		info("Test 14: Check left menu can be hidden");
 		/*Step Number: 1
@@ -373,7 +347,6 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- Left menu is closed, only display central pane*/ 
-		mgProject.hideLeftMenu();
-		mgProject.showLeftMenu();
- 	}
+		mgProject.checkExpandCollapse(ELEMENT_HIDE_LEFT,ELEMENT_SHOW_LEFT);
 	}
+}

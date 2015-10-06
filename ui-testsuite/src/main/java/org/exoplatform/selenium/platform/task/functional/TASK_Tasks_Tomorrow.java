@@ -12,9 +12,8 @@ import org.testng.annotations.*;
 	*<li> Test Case Name: Check Tomorrow.</li>
 	*<li> Pre-Condition: exo-tasks add-on is installedsome tasks are added,assign to me and due date is tomorrow</li>
 	*<li> Post-Condition: </li>
-	* https://jira.exoplatform.org/browse/TA-202
 	*/
-	@Test (groups="pending")
+	@Test 
 	public  void test01_CheckTomorrow() {
 		info("Test 1: Check Tomorrow");
 		String task1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
@@ -31,9 +30,7 @@ import org.testng.annotations.*;
 		hp.goToTasks();
 		mgTask.addTaskDirectly(task1,true);
 		mgTask.addTaskDirectly(task2,true);
-		mgTask.editTaskAssignee(task1, DATA_USER1);
 		mgTask.selectDueDate(task1, optDueDate.Tomorrow);
-		mgTask.editTaskAssignee(task2, DATA_USER1);
 		mgTask.selectDueDate(task2, optDueDate.Tomorrow);
 		
 		/*Step number: 2
@@ -56,9 +53,8 @@ import org.testng.annotations.*;
 	*<li> Test Case Name: Check Tomorrow group by.</li>
 	*<li> Pre-Condition: exo-tasks add-on is installedsome tasks are added,assign to me and due date is tomorrow</li>
 	*<li> Post-Condition: </li>
-	*https://jira.exoplatform.org/browse/TA-202
 	*/
-	@Test (groups="pending")
+	@Test 
 	public  void test02_CheckTomorrowGroupBy() {
 		info("Test 2: Check Tomorrow group by");
 		String task1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
@@ -78,9 +74,7 @@ import org.testng.annotations.*;
 		hp.goToTasks();
 		mgTask.addTaskDirectly(task1,true);
 		mgTask.addTaskDirectly(task2,true);
-		mgTask.editTaskAssignee(task1, DATA_USER1);
 		mgTask.selectDueDate(task1, optDueDate.Tomorrow);
-		mgTask.editTaskAssignee(task2, DATA_USER1);
 		mgTask.selectDueDate(task2, optDueDate.Tomorrow);
 		
 		/*Step number: 2
@@ -112,9 +106,8 @@ import org.testng.annotations.*;
 	*<li> Test Case Name: Check Tomorrow sort by.</li>
 	*<li> Pre-Condition: exo-tasks add-on is installedsome tasks are added,assign to me and due date is tomorrow</li>
 	*<li> Post-Condition: </li>
-	*https://jira.exoplatform.org/browse/TA-202
 	*/
-	@Test (groups="pending")
+	//@Test
 	public  void test03_CheckTomorrowSortBy() {
 		info("Test 3: Check Tomorrow sort by");
 		String task1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
@@ -134,9 +127,7 @@ import org.testng.annotations.*;
 		hp.goToTasks();
 		mgTask.addTaskDirectly(task1,true);
 		mgTask.addTaskDirectly(task2,true);
-		mgTask.editTaskAssignee(task1, DATA_USER1);
 		mgTask.selectDueDate(task1, optDueDate.Tomorrow);
-		mgTask.editTaskAssignee(task2, DATA_USER1);
 		mgTask.selectDueDate(task2, optDueDate.Tomorrow);
 		
 		/*Step number: 2
@@ -168,9 +159,8 @@ import org.testng.annotations.*;
 	*<li> Test Case Name: Check Tomorrow view default settings.</li>
 	*<li> Pre-Condition: exo-tasks add-on is installedsome tasks are added,assign to me and due date is tomorrow</li>
 	*<li> Post-Condition: </li>
-	*https://jira.exoplatform.org/browse/TA-202
 	*/
-	@Test (groups="pending")
+	@Test 
 	public  void test04_CheckTomorrowViewDefaultSettings() {
 		info("Test 4: Check Tomorrow view default settings");
 		String task1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
@@ -188,9 +178,7 @@ import org.testng.annotations.*;
 		hp.goToTasks();
 		mgTask.addTaskDirectly(task1,true);
 		mgTask.addTaskDirectly(task2,true);
-		mgTask.editTaskAssignee(task1, DATA_USER1);
-		mgTask.selectDueDate(task2, optDueDate.Tomorrow);
-		mgTask.editTaskAssignee(task1, DATA_USER1);
+		mgTask.selectDueDate(task1, optDueDate.Tomorrow);
 		mgTask.selectDueDate(task2, optDueDate.Tomorrow);
 		
 		/*Step number: 2

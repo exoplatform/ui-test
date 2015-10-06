@@ -32,8 +32,8 @@ import org.testng.annotations.*;
 		String[] user1 = {DATA_USER2};
 		
 		hp.goToTasks();
-		mgProject.addProject(parent,parent, false);
-		mgProject.addSubProject(parent,child, "",false);
+		mgProject.addProject(parent,parent,"", false);
+		mgProject.addSubProject(parent,child, "","",false);
 		mgTask.addTask(child, task);
 		mgTask.addTaskComment(task,DATA_NAME_USER1,comment1);
 		
@@ -73,9 +73,7 @@ import org.testng.annotations.*;
 			- The project A is still visible on the project list in the left menu but it is impossible see in details.*/ 
 		waitForAndGetElement(mgProject.ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project", parent));
 		waitForAndGetElement(mgProject.ELEMENT_LEFT_PANE_PROJECT_NAME.replace("$project", child));
-		info("click on parent project");
-		mgProject.openProject(parent);
-		waitForElementNotPresent(mgProject.ELEMENT_ADD_PROJECT_DES_TEXT.replace("$des", parent));
+		mgProject.checkPermOpenProject(parent,false);
 		
 		/*Step number: 4
 		*Step Name: Step 4: Check member permission
@@ -120,7 +118,7 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- Tasks page is opened*/
 		hp.goToTasks();
-		mgProject.addProject(project,"", false);
+		mgProject.addProject(project,"", "",false);
 		mgTask.addTask(project, task);
 		mgTask.addTaskComment(task,DATA_NAME_USER1,comment1);
 		
@@ -169,13 +167,22 @@ import org.testng.annotations.*;
 	/**
 	*<li> Case ID:128239.</li>
 	*<li> Test Case Name: Check Message pop up in case of no permission access.</li>
-	*<li> Pre-Condition: exo-tasks add-on is installedproject A is created but not share to user Aproject A1 is child of project A, and share to user A</li>
+	*<li> Pre-Condition: exo-tasks add-on is installed
+	*project A is created but not share to user Aproject A1 is child of project A, and share to user A</li>
 	*<li> Post-Condition: </li>
-	* NOT IMPLEMENT YET
+	*https://jira.exoplatform.org/browse/TA-330
 	*/
 	@Test (groups="pending")
 	public  void test04_CheckMessagePopUpInCaseOfNoPermissionAccess() {
 		info("Test 4: Check Message pop up in case of no permission access");
+		String prj1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+		String prj11 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+		String [] users={DATA_USER3};
+		hp.goToTasks();
+		mgProject.addProject(prj1,"", "",false);
+		mgProject.addSubProject(prj1, prj11, "", "",false);
+		mgProject.shareProject(prj11, users, false);
+		
 		/*Step Number: 1
 		*Step Name: Step 1: Login as user A
 		*Step Description: 
@@ -184,7 +191,9 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- Login successfully*/
-
+		magAc.signOut();
+		magAc.signIn(DATA_USER3, DATA_PASS);
+		
 		/*Step number: 2
 		*Step Name: Step 2: Open Tasks page
 		*Step Description: 
@@ -193,7 +202,8 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- Tasks page is opened*/
-
+		hp.goToTasks();
+		
 		/*Step number: 3
 		*Step Name: Step 3: Check case user has share permission on sub
 		-project but don't have permission on the parent
@@ -204,7 +214,13 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- pop-up is opened+ Pop up title: Project Permission+ Content: You don't have permission to access $Project project.+ Action button: OK 
 			- to close the pop up.*/ 
-
+		mgProject.checkPermOpenProject(prj1, false);
+		
+		info("delete data");
+		magAc.signOut();
+		magAc.signIn(DATA_USER1, DATA_PASS);
+		hp.goToTasks();
+		mgProject.deleteProject(prj1, true);
  	}
 
 	/**
@@ -297,7 +313,7 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- Tasks page is opened*/
 		hp.goToTasks();
-		mgProject.addProject(prj1,"", false);
+		mgProject.addProject(prj1,"","", false);
 		mgProject.shareProject(prj1,user1, false);
 		
 		/*Step number: 2
@@ -310,7 +326,7 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- project A1 is added to parent project A
 			- in Project Overview, manager is creator, paticipant is user A (permission is inherit from parent)*/ 
-		mgProject.addSubProject(prj1,prj11,"", false);
+		mgProject.addSubProject(prj1,prj11,"","", false);
 		mgProject.checkShareUsers(prj11, user0, user1);
 		
 		info("delete data");
@@ -336,7 +352,7 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- Tasks page is opened*/
 		hp.goToTasks();
-		mgProject.addProject(prj1,"", false);
+		mgProject.addProject(prj1,"","", false);
 		
 		/*Step number: 2
 		*Step Name: Step 2: Open Share pop

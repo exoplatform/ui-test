@@ -29,8 +29,9 @@ import org.testng.annotations.*;
 	*<li> Test Case Name: Check name of cloned project.</li>
 	*<li> Pre-Condition: exo-tasks add-on is installedproject A is created</li>
 	*<li> Post-Condition: </li>
+	* https://jira.exoplatform.org/browse/TA-321
 	*/
-	@Test
+	@Test  (groups="pending")
 	public  void test01_03_05_06_CheckAProjectCanBeClonedFromArrowMenuClone() {
 		info("Test 1: Check a project can be cloned from Arrow menu > Clone");
 		String name = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
@@ -43,7 +44,7 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- Tasks page is opened*/
 		hp.goToTasks();
-		mgProject.addProject(name,"", false);
+		mgProject.addProject(name,"","", false);
 		
 		/*Step number: 2
 		*Step Name: Step 2: Check confirm dialog when cloning project
@@ -91,7 +92,7 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			Tasks page is opened*/
 		hp.goToTasks();
-		mgProject.addProject(name,"", false);
+		mgProject.addProject(name,"","", false);
 		
 		/*Step number: 2
 		*Step Name: Step 2: Clone project
@@ -137,8 +138,8 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			Tasks page is opened*/
 		hp.goToTasks();
-		mgProject.addProject(parent,"", false);
-		mgProject.addSubProject(parent,child,child, false);
+		mgProject.addProject(parent,"","", false);
+		mgProject.addSubProject(parent,child,child,"", false);
 		mgProject.selectColor(child, color1);
 		
 		/*Step number: 2
@@ -161,8 +162,9 @@ import org.testng.annotations.*;
 	*<li> Test Case Name: Check when option to clone task is checked.</li>
 	*<li> Pre-Condition: exo-tasks add-on is installedproject A is createdadd some uncompleted tasks to project A</li>
 	*<li> Post-Condition: </li>
+	*https://jira.exoplatform.org/browse/TA-321
 	*/
-	@Test
+	@Test (groups="pending")
 	public  void test07_CheckWhenOptionToCloneTaskIsChecked() {
 		info("Test 7: Check when option to clone task is checked");
 		String prj1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
@@ -178,9 +180,9 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			Tasks page is opened*/
 		hp.goToTasks();
-		mgProject.addProject(prj1,"", false);
+		mgProject.addProject(prj1,"","", false);
 		mgTask.addTask(prj1, task1);
-		mgProject.addProject(prj2,"", false);
+		mgProject.addProject(prj2,"","", false);
 		mgTask.addTask(prj2, task2);
 		
 		/*Step number: 2

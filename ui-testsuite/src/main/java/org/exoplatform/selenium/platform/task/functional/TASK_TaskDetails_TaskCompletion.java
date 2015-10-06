@@ -48,7 +48,7 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- task list of project A is opened*/
-		mgProject.addProject(prj1, "", false);
+		mgProject.addProject(prj1, "","", false);
 		mgTask.addTask(prj1, task1);
 		
 		/*Step number: 3
@@ -117,7 +117,7 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- task list of project A is opened*/
-		mgProject.addProject(prj1, "", false);
+		mgProject.addProject(prj1, "", "",false);
 		mgTask.addTask(prj1, task1);
 		
 		/*Step number: 3

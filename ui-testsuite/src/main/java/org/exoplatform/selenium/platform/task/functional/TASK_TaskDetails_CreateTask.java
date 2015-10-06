@@ -30,7 +30,7 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- Tasks page is opened*/
 		hp.goToTasks();
-		mgProject.addProject(project,"", false);
+		mgProject.addProject(project,"","", false);
 		
 		/*Step number: 2
 		*Step Name: Step 2: Create task by clicking on New Task button
@@ -83,7 +83,7 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- Tasks page is opened*/
 		hp.goToTasks();
-		mgProject.addProject(project,"", false);
+		mgProject.addProject(project,"","", false);
 		
 		/*Step number: 2
 		*Step Name: Step 2: Check display of new task
@@ -204,7 +204,7 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- new task í created*/
-		mgProject.addProject(prj1,"", false);
+		mgProject.addProject(prj1,"","", false);
 		mgTask.addTask(prj1, task2);
 		
 		/*Step number: 4
@@ -216,6 +216,8 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- new task í created*/ 
+		mgTask.checkTaskDetail(task2, true, prj1,"To Do","","","");
+		
 		info("delete data");
 		mgTask.selectOptionTask(optionTask.Incoming);
 		mgTask.deleteTask(task1);
@@ -309,18 +311,55 @@ import org.testng.annotations.*;
 		mgTask.deleteTask(task1);
  	}
 	/**
-	*<li> Case ID:139867.</li>
-	*<li> Test Case Name: Check when a task is created in AllTasks,Today,Tomorrow,Upcoming.</li>
-	*<li> Pre-Condition: - exo-tasks add-on is installed</li>
+	*<li> Case ID:128273.</li>
+	*<li> Test Case Name: Check when a task is created in a label.</li>
+	*<li> Pre-Condition: - exo-tasks add-on is installed
+	- labelA is created</li>
 	*<li> Post-Condition: </li>
 	*/
 	@Test
-	public  void test10_CheckWhenATaskIsCreatedInAllTasksTodayTomorrowUpcoming() {
-		info("Test 10: Check when a task is created in AllTasks,Today,Tomorrow,Upcoming");
+	public  void test10_CheckWhenATaskIsCreatedInALabel() {
+		info("Test 10: Check when a task is created in a label");
+		String label1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		String task1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
-		String task2 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
-		String task3 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
-		String task4 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+		/*Step Number: 1
+		*Step Name: Step 1: Open Tasks page
+		*Step Description: 
+			- Click on Tasks on the left navigation.
+		*Input Data: 
+			
+		*Expected Outcome: 
+			- Tasks page is opened*/
+		hp.goToTasks();
+		mgLabel.addLabel(label1);
+		
+		/*Step number: 2
+		*Step Name: Step 2: Check when a task is created in a label
+		*Step Description: 
+			- Click on labelA
+			- Input new task on central pane> Enter
+		*Input Data: 
+			
+		*Expected Outcome: 
+			- New task is created, unassigned and has labelA*/ 
+		mgTask.addTaskDirectly(task1, true);
+		mgTask.checkTaskDetail(task1, false, "", "","", label1,"");
+		
+		info("delete data");
+		mgLabel.deleteLabel(label1);
+ 	}
+
+	/**
+	*<li> Case ID:139867.</li>
+	*<li> Test Case Name: Check when a task is created in AllTasks.</li>
+	*<li> Pre-Condition: - exo-tasks add-on is installed
+	- projectA is created</li>
+	*<li> Post-Condition: </li>
+	*/
+	@Test 
+	public  void test11_CheckWhenATaskIsCreatedInAllTasks() {
+		info("Test 11: Check when a task is created in AllTasks");
+		String task1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		/*Step Number: 1
 		*Step Name: Step 1: Open Tasks page
 		*Step Description: 
@@ -348,80 +387,12 @@ import org.testng.annotations.*;
 		*Input Data: 
 			
 		*Expected Outcome: 
-			- taskA is created and assigned to current logged user*/
+			- taskA is created and assigned to current logged user*/ 
 		mgTask.addTaskDirectly(task1, true);
-		mgTask.checkTaskAssignee(DATA_NAME_USER1);
-		
-		/*Step number: 4
-		*Step Name: Step 4: Open Today
-		*Step Description: 
-			- Click on Today on left pane
-		*Input Data: 
-			
-		*Expected Outcome: 
-			- Today is opened*/
-		mgTask.selectOptionTask(optionTask.Today);
-		
-		/*Step number: 5
-		*Step Name: Step 5: Create new task
-		*Step Description: 
-			- Add taskB
-		*Input Data: 
-			
-		*Expected Outcome: 
-			- taskB is created and assigned to current logged user*/
-		mgTask.addTaskDirectly(task2, true);
-		mgTask.checkTaskAssignee(DATA_NAME_USER1);
-		
-		/*Step number: 6
-		*Step Name: Step 6: Open Tomorrow
-		*Step Description: 
-			- Click on Tomorrow on left pane
-		*Input Data: 
-			
-		*Expected Outcome: 
-			- Tomorrow is opened*/
-		mgTask.selectOptionTask(optionTask.Tommorrow);
-		
-		/*Step number: 7
-		*Step Name: Step 7: Create new task
-		*Step Description: 
-			- Add taskC
-		*Input Data: 
-			
-		*Expected Outcome: 
-			- taskC is created and assigned to current logged user*/
-		mgTask.addTaskDirectly(task3, true);
-		mgTask.checkTaskAssignee(DATA_NAME_USER1);
-		
-		/*Step number: 8
-		*Step Name: Step 8: Open Upcoming
-		*Step Description: 
-			- Click onUpcoming on left pane
-		*Input Data: 
-			
-		*Expected Outcome: 
-			-Upcoming is opened*/
-		mgTask.selectOptionTask(optionTask.Upcoming);
-		
-		/*Step number: 9
-		*Step Name: Step 9: Create new task
-		*Step Description: 
-			- Add taskD
-		*Input Data: 
-			
-		*Expected Outcome: 
-			- taskD is created and assigned to current logged user*/ 
-		mgTask.addTaskDirectly(task4, true);
-		mgTask.checkTaskAssignee(DATA_NAME_USER1);
+		mgTask.checkTaskDetail(task1, false, "", "","", "",DATA_NAME_USER1);
 		
 		info("delete data");
-		mgTask.selectOptionTask(optionTask.All_Tasks);
 		mgTask.deleteTask(task1);
-		mgTask.deleteTask(task2);
-		mgTask.deleteTask(task3);
-		mgTask.deleteTask(task4);
-
  	}
 
 	/**
@@ -431,8 +402,8 @@ import org.testng.annotations.*;
 	*<li> Post-Condition: </li>
 	*/
 	@Test
-	public  void test11_CheckWhenATaskIsCreatedInToday() {
-		info("Test 11: Check when a task is created in Today");
+	public  void test12_CheckWhenATaskIsCreatedInToday() {
+		info("Test 12: Check when a task is created in Today");
 		String task1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		/*Step Number: 1
 		*Step Name: Step 1: Open Tasks page
@@ -471,8 +442,8 @@ import org.testng.annotations.*;
 		*Input Data: 
 			
 		*Expected Outcome: 
-			- duedate of taskB is today date*/ 
-		mgTask.checkDisplayOfDueDate(getDate(0, "dd MMM yyyy"));
+			- duedate of taskB is today date, assigned to the current logged user*/ 
+		mgTask.checkTaskDetail(task1, false, "", "",getDate(0,"dd MMM yyyy"), "",DATA_NAME_USER1);
 		
 		info("delete data");
 		mgTask.deleteTask(task1);
@@ -485,8 +456,8 @@ import org.testng.annotations.*;
 	*<li> Post-Condition: </li>
 	*/
 	@Test
-	public  void test12_CheckWhenATaskIsCreatedInTomorrow() {
-		info("Test 12: Check when a task is created in Tomorrow");
+	public  void test13_CheckWhenATaskIsCreatedInTomorrow() {
+		info("Test 13: Check when a task is created in Tomorrow");
 		String task1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		/*Step Number: 1
 		*Step Name: Step 1: Open Tasks page
@@ -525,8 +496,8 @@ import org.testng.annotations.*;
 		*Input Data: 
 			
 		*Expected Outcome: 
-			- duedate of taskB is tomorrow date*/ 
-		mgTask.checkDisplayOfDueDate(getDate(1, "dd MMM yyyy"));
+			- duedate of taskB is tomorrow date,assigned to the current logged user*/ 
+		mgTask.checkTaskDetail(task1, false, "", "",getDate(1,"dd MMM yyyy"), "",DATA_NAME_USER1);
 		
 		info("delete data");
 		mgTask.deleteTask(task1);
@@ -539,8 +510,8 @@ import org.testng.annotations.*;
 	*<li> Post-Condition: </li>
 	*/
 	@Test
-	public  void test13_CheckWhenATaskIsCreatedInUpcoming() {
-		info("Test 13: Check when a task is created in Upcoming");
+	public  void test14_CheckWhenATaskIsCreatedInUpcoming() {
+		info("Test 14: Check when a task is created in Upcoming");
 		String task1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		/*Step Number: 1
 		*Step Name: Step 1: Open Tasks page
@@ -579,8 +550,8 @@ import org.testng.annotations.*;
 		*Input Data: 
 			
 		*Expected Outcome: 
-			- duedate of taskB is nextweek date*/ 
-		mgTask.checkDisplayOfDueDate(getDate(7, "dd MMM yyyy"));
+			- duedate of taskB is nextweek date,assigned to the current logged user*/ 
+		mgTask.checkTaskDetail(task1, false, "", "",getDate(7,"dd MMM yyyy"), "",DATA_NAME_USER1);
 		
 		info("delete data");
 		mgTask.deleteTask(task1);

@@ -49,7 +49,7 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- A task can be assigned to only one person
 			- new assignee is added*/ 
-		mgTask.editTaskAssignee(task1, DATA_USER2);
+		mgTask.editTaskAssignee(task1,DATA_NAME_USER1, DATA_USER2);
 		
 		info("delete data");
 		mgTask.deleteTask(task1);
@@ -65,6 +65,7 @@ import org.testng.annotations.*;
 	public  void test02_CheckAutocompleteListDisplayingAllUsers() {
 		info("Test 2: Check autocomplete list displaying all users");
 		String task1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+		String prj1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		String[] users={DATA_USER2,DATA_USER3};
 		/*Step Number: 1
 		*Step Name: Step 1: Open Tasks page
@@ -84,7 +85,8 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			New task is created*/
-		mgTask.addTaskDirectly(task1,true);
+		mgProject.addProject(prj1, "", "",false);
+		mgTask.addTask(prj1, task1);
 		
 		/*Step number: 3
 		*Step Name: Step 3: Check autocomplete list displaying all users
@@ -97,7 +99,7 @@ import org.testng.annotations.*;
 		mgTask.checkAutoCompleteUser(task1,"a",users);
 		
 		info("delete data");
-		mgTask.deleteTask(task1);
+		mgProject.deleteProject(prj1, false);
  	}
 
 	/**
@@ -139,8 +141,8 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			the assignment field is displayed with the avatar of the assignee + the number of coworkers. E.g: [Jack Avatar] + 2 coworkers*/ 
-		mgTask.editTaskAssignee(task1, DATA_USER2, coworkers);
-		mgTask.checkDisplayOfAssigneeCoworker("+2 Coworkers");
+		mgTask.editTaskAssignee(task1,DATA_NAME_USER1,DATA_USER2, coworkers);
+		mgTask.checkDisplayOfAssigneeCoworker("+2  Coworkers");
 		
 		info("delete data");
 		mgTask.deleteTask(task1);
@@ -186,7 +188,7 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			Assign field displays number of coworker and the default avatar.*/ 
-		mgTask.editTaskAssignee(task1, "", coworkers);
+		mgTask.editTaskAssignee(task1,DATA_NAME_USER1, "", coworkers);
 		mgTask.checkDisplayOfOnlyCoworker("+1 Coworkers");
 		
 		info("delete data");
@@ -231,7 +233,7 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			the assignment field is displayed with the avatar of the assignee and his/her full name*/ 
-		mgTask.editTaskAssignee(task1, DATA_USER2);
+		mgTask.editTaskAssignee(task1,DATA_NAME_USER1, DATA_USER2);
 		mgTask.checkDisplayOfAssigneeCoworker(DATA_NAME_USER2);
 		
 		info("delete data");
@@ -254,6 +256,7 @@ import org.testng.annotations.*;
 	public  void test06_07_CheckDisplayOfPopoverWhenTheAssignmentFieldIsEdited() {
 		info("Test 6: Check display of popover when the assignment field is edited");
 		String task1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+		String prj1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		/*Step Number: 1
 		*Step Name: Step 1: Open Tasks page
 		*Step Description: 
@@ -272,6 +275,7 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			New task is created*/
+		mgProject.addProject(prj1, "", "", false);
 		mgTask.addTaskDirectly(task1,true);
 		
 		/*Step number: 3
@@ -293,7 +297,7 @@ import org.testng.annotations.*;
 		mgTask.checkTaskAssigneePopup(task1, DATA_USER3, DATA_NAME_USER3);
 		
 		info("delete data");
-		mgTask.deleteTask(task1);
+		mgProject.deleteProject(prj1, false);
  	}
 
 	/**
@@ -312,6 +316,7 @@ import org.testng.annotations.*;
 	public  void test08_09_CheckTheCoworkersCanBeAssignedToMultipleUsers() {
 		info("Test 8: Check the coworkers can be assigned to multiple users");
 		String task1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+		String prj1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		String[] users = {DATA_USER2,DATA_USER3};
 		/*Step Number: 1
 		*Step Name: Step 1: Open Tasks page
@@ -331,6 +336,7 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			New task is created*/
+		mgProject.addProject(prj1,"","",false);
 		mgTask.addTaskDirectly(task1,true);
 		
 		/*Step number: 2
@@ -353,7 +359,194 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			the coworkers can be assigned to multiple users*/ 
-		mgTask.editTaskAssignee(task1, "", users);
+		mgTask.editTaskUnAssignee(task1, "", users);
+		
+		info("delete data");
+		mgProject.deleteProject(prj1, false);
+ 	}
+	/**
+	*<li> Case ID:140738.</li>
+	*<li> Test Case Name: Check case assigned user are not shared project.</li>
+	*<li> Pre-Condition: - exo-tasks add-on is installed</li>
+	*<li> Post-Condition: </li>
+	*/
+	@Test
+	public  void test10_CheckCaseAssignedUserAreNotSharedProject() {
+		info("Test 10: Check case assigned user are not shared project");
+		String task1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+		String prj1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+		/*Step Number: 1
+		*Step Name: Step 1: Open Tasks page
+		*Step Description: 
+			- Click on Tasks on the left navigation.
+		*Input Data: 
+			
+		*Expected Outcome: 
+			- Tasks page is opened*/
+		hp.goToTasks();
+		
+		/*Step number: 2
+		*Step Name: Step 2: Create projectA
+		*Step Description: 
+			- from context menu of Projects, add projectA
+		*Input Data: 
+			
+		*Expected Outcome: 
+			- projectA is created*/
+		mgProject.addProject(prj1,"","",false);
+		
+		/*Step number: 3
+		*Step Name: Step 3: Create taskA in projectA
+		*Step Description: 
+			- add taskA to projectA
+		*Input Data: 
+			
+		*Expected Outcome: 
+			- taskA is created*/
+		mgTask.addTask(prj1, task1);
+		
+		/*Step number: 4
+		*Step Name: Step 4: Assign taskA to userA
+		*Step Description: 
+			- assign taskA to userA
+		*Input Data: 
+			
+		*Expected Outcome: 
+			- taskA is assigned*/
+		mgTask.editTaskUnAssignee(task1, DATA_USER3);
+		
+		/*Step number: 5
+		*Step Name: Step 5: Login as userA
+		*Step Description: 
+			- login as userA
+		*Input Data: 
+			
+		*Expected Outcome: 
+			- userA logins successfully*/
+		magAc.signOut();
+		magAc.signIn(DATA_USER3, DATA_PASS);
+		
+		/*Step number: 6
+		*Step Name: Step 6: Open Tasks page
+		*Step Description: 
+			- Click on Tasks on the left navigation.
+		*Input Data: 
+			
+		*Expected Outcome: 
+			- Tasks page is opened*/
+		hp.goToTasks();
+		
+		/*Step number: 7
+		*Step Name: Step 7: Open All Tasks
+		*Step Description: 
+			- Click on All Tasks on left pane
+		*Input Data: 
+			
+		*Expected Outcome: 
+			- All Tasks is opened*/
+		mgTask.selectOptionTask(optionTask.All_Tasks);
+		
+		/*Step number: 8
+		*Step Name: Step 8: Click on taskA title
+		*Step Description: 
+			- open taskA
+			- click on taskA title
+		*Input Data: 
+			
+		*Expected Outcome: 
+			- userA can edit taskA*/ 
+		mgTask.openTask(task1);
+		mgTask.checkMenuOfTask();
+		
+		info("delete data");
+		magAc.signOut();
+		magAc.signIn(DATA_USER1, DATA_PASS);
+		hp.goToTasks();
+		mgProject.deleteProject(prj1, false);
+ 	}
+
+	/**
+	*<li> Case ID:141665.</li>
+	*<li> Test Case Name: Check case assigned user without project.</li>
+	*<li> Pre-Condition: - exo-tasks add-on is installed</li>
+	*<li> Post-Condition: </li>
+	*/
+	@Test
+	public  void test11_CheckCaseAssignedUserWithoutProject() {
+		info("Test 11: Check case assigned user without project");
+		String task1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+		/*Step Number: 1
+		*Step Name: Step 1: Open Tasks page
+		*Step Description: 
+			- Click on Tasks on the left navigation.
+		*Input Data: 
+			
+		*Expected Outcome: 
+			- Tasks page is opened*/
+		hp.goToTasks();
+		
+		/*Step number: 2
+		*Step Name: Step 2: Create taskA
+		*Step Description: 
+			- add taskA
+		*Input Data: 
+			
+		*Expected Outcome: 
+			- taskA is created*/
+		mgTask.addTaskDirectly(task1,true);
+		
+		/*Step number: 3
+		*Step Name: Step 3: Assign taskA to userA
+		*Step Description: 
+			- assign taskA to userA
+		*Input Data: 
+			
+		*Expected Outcome: 
+			- taskA is assigned*/
+		mgTask.editTaskAssignee(task1, DATA_NAME_USER1, DATA_USER3);
+		
+		/*Step number: 4
+		*Step Name: Step 4: Login as userA
+		*Step Description: 
+			- login as userA
+		*Input Data: 
+			
+		*Expected Outcome: 
+			- userA logins successfully*/
+		magAc.signOut();
+		magAc.signIn(DATA_USER3, DATA_PASS);
+		
+		/*Step number: 5
+		*Step Name: Step 5: Open Tasks page
+		*Step Description: 
+			- Click on Tasks on the left navigation.
+		*Input Data: 
+			
+		*Expected Outcome: 
+			- Tasks page is opened*/
+		hp.goToTasks();
+		
+		/*Step number: 6
+		*Step Name: Step 6: Open All Tasks
+		*Step Description: 
+			- Click on All Tasks on left pane
+		*Input Data: 
+			
+		*Expected Outcome: 
+			- All Tasks is opened*/
+		mgTask.selectOptionTask(optionTask.All_Tasks);
+		
+		/*Step number: 7
+		*Step Name: Step 7: Click on taskA title
+		*Step Description: 
+			- open taskA
+			- click on taskA title
+		*Input Data: 
+			
+		*Expected Outcome: 
+			- userA can edit taskA*/ 
+		mgTask.openTask(task1);
+		mgTask.checkMenuOfTask();
 		
 		info("delete data");
 		mgTask.deleteTask(task1);
@@ -388,7 +581,7 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- projectA is created*/
-		mgProject.addProject(prj1,"", false);
+		mgProject.addProject(prj1,"","", false);
 		
 		/*Step number: 3
 		*Step Name: Step 3: Create taskA in projectA
@@ -408,7 +601,7 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- taskA is assigned*/
-		mgTask.editTaskAssignee(task1, DATA_USER3);
+		mgTask.editTaskUnAssignee(task1, DATA_USER3);
 		
 		/*Step number: 5
 		*Step Name: Step 5: Login as userA

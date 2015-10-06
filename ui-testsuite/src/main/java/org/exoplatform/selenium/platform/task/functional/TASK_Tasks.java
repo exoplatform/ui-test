@@ -27,7 +27,7 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			Tasks page is opened*/
 		hp.goToTasks();
-		mgProject.addProject(prj1, "", false);
+		mgProject.addProject(prj1, "","", false);
 		mgTask.addTask(prj1, task1);
 		mgTask.setDueDate(task1, getDate(0, "dd MMM yyyy"), getDate(0, "dd"), 0);
 
@@ -59,12 +59,14 @@ import org.testng.annotations.*;
 	/**
 	*<li> Case ID:130879.</li>
 	*<li> Test Case Name: Check no task screen with each view filter.</li>
-	*<li> Pre-Condition: exo-tasks add-on is installedsome tasks are added but removed afterthat , so no task left in the menu</li>
+	*<li> Pre-Condition: exo-tasks add-on is installedsome tasks are added but removed afterthat , s
+	*o no task left in the menu</li>
 	*<li> Post-Condition: </li>
 	*/
 	@Test 
 	public  void test02_CheckNoTaskScreenWithEachViewFilter() {
 		info("Test 2: Check no task screen with each view filter");
+		String task1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		/*Step Number: 1
 		*Step Name: Step 1: Open Tasks page
 		*Step Description: 
@@ -73,67 +75,21 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			Tasks page is opened*/
+		magAc.signOut();
+		magAc.signIn(DATA_USER4, DATA_PASS);
 		hp.goToTasks();
-		
+		mgTask.addTaskDirectly(task1, true);
+		mgTask.deleteTask(task1);
 		/*Step number: 2
 		*Step Name: Step 2: Check no task screen with Incoming
-		*Step Description: 
-			- Click on Incoming on left pane
-		*Input Data: 
-			
-		*Expected Outcome: 
-			No Task screen is displayed*/
-		mgProject.checkNoTask("Incoming");
-		
-		/*Step number: 3
-		*Step Name: Step 3: Check no task screen with All Tasks
 		*Step Description: 
 			- Click on All Tasks on left pane
 		*Input Data: 
 			
 		*Expected Outcome: 
 			No Task screen is displayed*/
-		mgProject.checkNoTask("All Tasks");
+		mgProject.checkNoTask("Incoming");
 		
-		/*Step number: 4
-		*Step Name: Step 4: Check no task screen with Overdue
-		*Step Description: 
-			- Click on Overdue on left pane
-		*Input Data: 
-			
-		*Expected Outcome: 
-			No Task screen is displayed*/
-		mgProject.checkNoTask("Overdue");
-		
-		/*Step number: 5
-		*Step Name: Step 5: Check no task screen with Today
-		*Step Description: 
-			- Click on Today on left pane
-		*Input Data: 
-			
-		*Expected Outcome: 
-			No Task screen is displayed*/
-		mgProject.checkNoTask("Today");
-		
-		/*Step number: 6
-		*Step Name: Step 6: Check no task screen with Tomorrow
-		*Step Description: 
-			- Click on Tomorrow on left pane
-		*Input Data: 
-			
-		*Expected Outcome: 
-			No Task screen is displayed*/
-		mgProject.checkNoTask("Tomorrow");
-		
-		/*Step number: 7
-		*Step Name: Step 7: Check no task screen with Upcoming
-		*Step Description: 
-			- Click on Upcoming on left pane
-		*Input Data: 
-			
-		*Expected Outcome: 
-			No Task screen is displayed*/ 
-		mgProject.checkNoTask("Upcoming");
  	}
 
 	/**
@@ -142,7 +98,7 @@ import org.testng.annotations.*;
 	*<li> Pre-Condition: exo-tasks add-on is installedsome tasks are added with due date: today,tomorrow, in the future, incoming...</li>
 	*<li> Post-Condition: </li>
 	*/
-	@Test 
+	@Test
 	public  void test03_CheckTasksFiltered() {
 		info("Test 3: Check tasks filtered");
 		String task1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
@@ -173,15 +129,11 @@ import org.testng.annotations.*;
 		mgTask.addTaskDirectly(task3, true);
 		mgTask.addTaskDirectly(task4, true);
 		mgTask.addTaskDirectly(task5, true);
-		mgTask.editTaskAssignee(task1, DATA_USER1);
-		mgTask.editTaskAssignee(task2, DATA_USER1);
 		mgTask.setDueDate(task2, getDate(-2, "dd MMM yyyy"), getDate(-2, "dd"), 0);
-		mgTask.editTaskAssignee(task3, DATA_USER1);
 		mgTask.selectDueDate(task3, optDueDate.Today);
-		mgTask.editTaskAssignee(task4, DATA_USER1);
 		mgTask.selectDueDate(task4, optDueDate.Tomorrow);
-		mgTask.editTaskAssignee(task5, DATA_USER1);
 		mgTask.selectDueDate(task5, optDueDate.NextWeek);
+		
 		/*Step number: 3
 		*Step Name: Step 3: Check tasks filtered: All Tasks
 		*Step Description: 
