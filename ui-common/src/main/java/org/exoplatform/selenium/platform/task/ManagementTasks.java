@@ -883,8 +883,8 @@ public class ManagementTasks extends TaskManagementLocatorObject {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_ASSIGN_INPUT_DISABLED,DEFAULT_TIMEOUT,1);
-			waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_ASSIGN_REMOVE_ICON.replace("$user",assignee),DEFAULT_TIMEOUT,1);
+			waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_ASSIGN_INPUT_DISABLED,DEFAULT_TIMEOUT,0);
+			waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_ASSIGN_REMOVE_ICON.replace("$user",assignee),DEFAULT_TIMEOUT,0);
 		}
 		if(coworkers.length>0){
 			for (String coworker : coworkers) {

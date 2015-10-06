@@ -65,7 +65,6 @@ public class ManagementLabels extends TaskManagementLocatorObject {
 		default:
 			info("No option in the list. Please select correct option.");
 			break;
-		
 		}
 		Utils.pause(1000);
 	}
@@ -162,6 +161,7 @@ public class ManagementLabels extends TaskManagementLocatorObject {
 	}
 	/**
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 	 * get value attribute
 	 * @param locator
@@ -179,7 +179,6 @@ public class ManagementLabels extends TaskManagementLocatorObject {
 		}
 	}
 	/**
->>>>>>> FQA-2696:[Task Management]- Write scripts for Labels - Edit a label
 	 * Add a new label
 	 * @param name
 	 *              is label's name
@@ -331,6 +330,30 @@ public class ManagementLabels extends TaskManagementLocatorObject {
 		Utils.pause(1000);
 		waitForAndGetElement(ELEMENT_SORTBY_ITEM_DEFAULT.replace("$sort",sort));
 		waitForAndGetElement(ELEMENT_GROUPBY_ITEM_DEFAULT.replace("$group", group));
+	}
+	/**
+	 * Check cancel action
+	 * @param name
+	 */
+	public void checkCancelDeleteLabel(String name){
+		selectOpContMenuGivenLabel(name,optionContMenuGivenLabel.Delete);
+		waitForAndGetElement(ELEMENT_DELETE_LABEL_POPUP);
+		info("check cancel delele action");
+		click(ELEMENT_DELETE_LABEL_POPUP_CANCEL_BTN);
+		Utils.pause(2000);
+		waitForAndGetElement(ELEMENT_LEFT_PANE_LABEL_NAME.replace("$label", name));
+	}
+	/**
+	 * Check Delete Label popup
+	 * @param label
+	 */
+	public void checkDeleteLabelPopup(String label){
+		info("check delete popup");
+		selectOpContMenuGivenLabel(label,optionContMenuGivenLabel.Delete);
+		waitForAndGetElement(ELEMENT_DELETE_LABEL_POPUP_TITLE);
+		waitForAndGetElement(ELEMENT_DELETE_LABEL_POPUP_MESSAGE.replace("$label", label));
+		waitForAndGetElement(ELEMENT_DELETE_LABEL_POPUP_CANCEL_BTN);
+		waitForAndGetElement(ELEMENT_DELETE_LABEL_POPUP_DELETE_BTN);
 	}
 	/**
 	 * Check GroupBy list in Labels

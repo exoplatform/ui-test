@@ -63,9 +63,13 @@ import org.testng.annotations.*;
 	*o no task left in the menu</li>
 	*<li> Post-Condition: </li>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 	* BUG
 >>>>>>> FQA-2696:[Task Management]- Write scripts for Labels - Edit a label
+=======
+	* BUG
+>>>>>>> FQA-2697:[Task Management]- Write scripts for Labels - Delete label
 	*/
 	@Test 
 	public  void test02_CheckNoTaskScreenWithEachViewFilter() {

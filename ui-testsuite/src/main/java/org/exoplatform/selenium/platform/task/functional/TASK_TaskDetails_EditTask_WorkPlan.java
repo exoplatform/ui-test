@@ -374,6 +374,7 @@ import org.testng.annotations.*;
 	*<li> Test Case Name: Check when the work plan date time is updated.</li>
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 	*<li> Pre-Condition: exo-tasks add-on is installed -projectA has calendar integration-task A is created with work plan in projectA</li>
 	*<li> Post-Condition: </li>
 	*https://jira.exoplatform.org/browse/TA-251
@@ -391,6 +392,13 @@ import org.testng.annotations.*;
 	*<li> Post-Condition: </li>
 	*https://jira.exoplatform.org/browse/TA-334
 >>>>>>> FQA-2696:[Task Management]- Write scripts for Labels - Edit a label
+=======
+	*<li> Pre-Condition: exo-tasks add-on is installed
+    *<li>      projectA has calendar integration
+    *<li>      task A is created with work plan in projectA</li>
+	*<li> Post-Condition: </li>
+	*https://jira.exoplatform.org/browse/TA-334
+>>>>>>> FQA-2697:[Task Management]- Write scripts for Labels - Delete label
 	*/
 	@Test (groups="pending")
 	public  void test08_CheckWhenTheWorkPlanDateTimeIsUpdated() {

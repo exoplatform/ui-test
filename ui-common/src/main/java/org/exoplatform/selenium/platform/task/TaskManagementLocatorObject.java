@@ -240,6 +240,8 @@ public class TaskManagementLocatorObject extends PlatformBase {
 	public final By ELEMENT_DELETE_LABEL_POPUP_DELETE_BTN=By.xpath("//*[contains(@class,'btn-primary')][contains(.,'Delete')]");
 	public final By ELEMENT_DELETE_LABEL_POPUP_CANCEL_BTN=By.xpath("//*[@class='btn'][contains(.,'Cancel')]");
 	public final String ELEMENT_DELETE_LABEL_POPUP_MESSAGE="//*[contains(@class,'msg')]/../*[contains(.,'Are you sure you want to delete $label label')]";
+	public final By ELEMENT_DELETE_LABEL_POPUP = By.xpath("//*[@id='taskManagement']//*[contains(@class,'confirmDeleteLabel')]");
+	public final By ELEMENT_DELETE_LABEL_POPUP_TITLE = By.xpath(".//*[@id='confirmLabel'][contains(.,'Confirmation')]");
 	
 	//Show and Hide labels
 	public final By ELEMENT_LEFT_PANE_LABELS_SHOWHIDDEN=By.xpath("//*[contains(@class,'ShowLabel')]/../*[contains(.,'Show Hidden Labels')]");
