@@ -67,7 +67,6 @@ public class ManagementLabels extends TaskManagementLocatorObject {
 		default:
 			info("No option in the list. Please select correct option.");
 			break;
-		
 		}
 		Utils.pause(1000);
 	}
@@ -353,10 +352,6 @@ public class ManagementLabels extends TaskManagementLocatorObject {
 		waitForElementNotPresent(ELEMENT_LEFT_PANE_LABEL_NAME.replace("$label", name));
 	}
 	/**
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> FQA-2697:[Task Management]- Write scripts for Labels - Delete label
 	 * Check cancel action
 	 * @param name
 	 */
@@ -381,11 +376,6 @@ public class ManagementLabels extends TaskManagementLocatorObject {
 		waitForAndGetElement(ELEMENT_DELETE_LABEL_POPUP_DELETE_BTN);
 	}
 	/**
-<<<<<<< HEAD
-=======
->>>>>>> FQA-2694: [Task Management]- Write scripts for Labels - Label Overview
-=======
->>>>>>> FQA-2697:[Task Management]- Write scripts for Labels - Delete label
 	 * Check default setting groupBy,sortBy
 	 * @param project
 	 * @param group
