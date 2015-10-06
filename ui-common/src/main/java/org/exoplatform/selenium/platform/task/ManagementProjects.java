@@ -1214,6 +1214,7 @@ public class ManagementProjects extends TaskManagementLocatorObject {
 		waitForAndGetElement(ELEMENT_TEXT_NOTASK_DEFAULT);
 	}
 	/**
+<<<<<<< HEAD
 	 * Show left menu
 	 */
 	public void showLeftMenu(){
@@ -1239,6 +1240,9 @@ public class ManagementProjects extends TaskManagementLocatorObject {
 	}
 	 /** 
 	  * check permission open project
+=======
+	 * check permission open project
+>>>>>>> FQA-2696:[Task Management]- Write scripts for Labels - Edit a label
 	 * @param project
 	 * @param isEnable
 	 */

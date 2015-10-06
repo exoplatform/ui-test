@@ -807,15 +807,9 @@ public class ManagementTasks extends TaskManagementLocatorObject {
 		Utils.pause(500);
 		waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_PROJECT_TEXT.replace("$project", newProject));
 	}
-	/**
-<<<<<<< HEAD
-	 * Edit assignee
-=======
-	 * Edit task Project
-	 */
+	
 	/**
 	 * Edit unassigned task
->>>>>>> FQA-2695:[Task Management]- Write scripts for Labels - Create a label
 	 * @param task
 	 * @param assignee
 	 * @param coworkers
@@ -889,8 +883,8 @@ public class ManagementTasks extends TaskManagementLocatorObject {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_ASSIGN_INPUT_DISABLED,DEFAULT_TIMEOUT,0);
-			waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_ASSIGN_REMOVE_ICON.replace("$user",assignee),DEFAULT_TIMEOUT,0);
+			waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_ASSIGN_INPUT_DISABLED,DEFAULT_TIMEOUT,1);
+			waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_ASSIGN_REMOVE_ICON.replace("$user",assignee),DEFAULT_TIMEOUT,1);
 		}
 		if(coworkers.length>0){
 			for (String coworker : coworkers) {

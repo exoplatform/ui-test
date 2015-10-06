@@ -3,6 +3,7 @@ package org.exoplatform.selenium.platform.task;
 import static org.exoplatform.selenium.TestLogger.info;
 import org.exoplatform.selenium.Utils;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -100,6 +101,7 @@ public class ManagementLabels extends TaskManagementLocatorObject {
 		switch(op){
 	    case Edit:
 	    	info("Select Edit option");
+	    	clickByJavascript(ELEMENT_LEFT_PANE_LABEL_EDIT.replace("$label", label),2);
 	    	break;
 	    case Hide:
 	    	info("Select Hide option");
@@ -159,6 +161,25 @@ public class ManagementLabels extends TaskManagementLocatorObject {
 		}
 	}
 	/**
+<<<<<<< HEAD
+=======
+	 * get value attribute
+	 * @param locator
+	 * @return data-id of element
+	 */
+	public Integer getDataId(Object locator) {
+		try {
+			return Integer.parseInt(waitForAndGetElement(locator).getAttribute("data-labelid"));
+		} catch (StaleElementReferenceException e) {
+			checkCycling(e, DEFAULT_TIMEOUT/WAIT_INTERVAL);			
+			Utils.pause(WAIT_INTERVAL);
+			return Integer.parseInt(getValue(locator));
+		} finally {
+			loopCount = 0;
+		}
+	}
+	/**
+>>>>>>> FQA-2696:[Task Management]- Write scripts for Labels - Edit a label
 	 * Add a new label
 	 * @param name
 	 *              is label's name
@@ -215,12 +236,77 @@ public class ManagementLabels extends TaskManagementLocatorObject {
 	 * 				new parent label
 	 */
 	public void editLabel(String label,String name,String parent){
-		openLabel(label);
-		if(name!=null || name!=""){
+		selectOpContMenuGivenLabel(label, optionContMenuGivenLabel.Edit);
+		Utils.pause(500);
+		waitForAndGetElement(ELEMENT_EDIT_LABEL_DIALOG);
+		waitForAndGetElement(ELEMENT_EDIT_PROJECT_SAVE_BTN_DISABLED);
+		if(!name.isEmpty()){
 			info("Input new name");
+			type(ELEMENT_EDIT_LABEL_NAME,name,true);
+		}else{
+			info("left blank");
+			waitForAndGetElement(ELEMENT_EDIT_LABEL_NAME).clear();
 		}
-		if(name!=null || name!=""){
+		Utils.pause(500);
+		if(!parent.isEmpty()){
 			info("select new parent");
+			mouseOverAndClick(ELEMENT_EDIT_LABEL_PARENT_SELECT);
+			selectQuick(ELEMENT_EDIT_LABEL_PARENT_SELECT,parent);
+		}
+		saveEditLabel();
+		waitForElementNotPresent(ELEMENT_EDIT_LABEL_DIALOG);
+	}
+	/**
+	 * Save all changes when editing a label
+	 */
+	public void saveEditLabel(){
+		info("Click on Save button");
+		click(ELEMENT_EDIT_PROJECT_SAVE_BTN,0,true);
+		Utils.pause(2000);
+	}
+	
+	/**
+	 * Cancel all changes when editing a label
+	 */
+	public void cancelEditLabel(){
+		info("Click on Cancel button");
+		click(ELEMENT_EDIT_PROJECT_CANCEL_BTN,0,true);
+		Utils.pause(1000);
+	}
+	/**
+	 * Check edit popup
+	 * @param label
+	 * @param parent
+	 */
+	public void checkEditLabelPopup(String label,String parent){
+		info("check edit label popup");
+		selectOpContMenuGivenLabel(label, optionContMenuGivenLabel.Edit);
+		waitForAndGetElement(ELEMENT_EDIT_LABEL_PARENT_TEXT.replace("$parent", parent));
+		waitForAndGetElement(ELEMENT_EDIT_LABEL_NAME_TEXT.replace("$label", label));
+		waitForAndGetElement(ELEMENT_EDIT_PROJECT_CANCEL_BTN);
+		waitForAndGetElement(ELEMENT_EDIT_PROJECT_SAVE_BTN);
+	}
+	/**
+	 * Check list label in parent
+	 * @param name
+	 * 				name of label
+	 * @parent isDisplay
+	 * @parent labels
+	 * 				list of label with id
+	 */
+	public void checkListLabelInParent(String name,boolean isDisplay,String...labels){
+		selectOpContMenuGivenLabel(name, optionContMenuGivenLabel.Edit);
+		mouseOverAndClick(ELEMENT_EDIT_LABEL_PARENT_SELECT);
+		if(isDisplay){
+			info("labels are in list");
+			for (String label : labels) {
+				waitForAndGetElement(ELEMENT_EDIT_LABEL_NAME_TEXT.replace("$id", label));
+			}
+		}else{
+			info("labels are not in list");
+			for (String label : labels) {
+				waitForElementNotPresent(ELEMENT_EDIT_LABEL_NAME_TEXT.replace("$id", label));
+			}
 		}
 	}
 	/**

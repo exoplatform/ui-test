@@ -62,6 +62,10 @@ import org.testng.annotations.*;
 	*<li> Pre-Condition: exo-tasks add-on is installedsome tasks are added but removed afterthat , s
 	*o no task left in the menu</li>
 	*<li> Post-Condition: </li>
+<<<<<<< HEAD
+=======
+	* BUG
+>>>>>>> FQA-2696:[Task Management]- Write scripts for Labels - Edit a label
 	*/
 	@Test 
 	public  void test02_CheckNoTaskScreenWithEachViewFilter() {

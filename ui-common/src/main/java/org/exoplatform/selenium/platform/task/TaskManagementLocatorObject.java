@@ -228,10 +228,13 @@ public class TaskManagementLocatorObject extends PlatformBase {
 	public final By ELEMENT_ADD_LABEL_NAME_INPUT=By.xpath("//*[@class='list-labels']//input");
 	
     //Edit labels form
-	public final By ELEMENT_EDIT_LABEL_PARENT_SELECT=By.xpath(".//*[@id='lblParent']");
+	public final By ELEMENT_EDIT_LABEL_PARENT_SELECT=By.xpath(".//*[@class='lblParent']");
+	public final String ELEMENT_EDIT_LABEL_PARENT_TEXT="//*[@id='lblParent']//*[contains(.,'$parent')]";
 	public final By ELEMENT_EDIT_LABEL_DIALOG=By.xpath(".//*[contains(@class,'edit-label-dialog')]");
 	public final By ELEMENT_EDIT_LABEL_CLOSE_BTN=By.xpath("//*[contains(@class,'edit-label-dialog')]//button[contains(.,'Close')]");
 	public final By ELEMENT_EDIT_LABEL_SAVE_BTN=By.xpath("//*[contains(@class,'edit-label-dialog')]//button[contains(.,'Save')]");
+	public final By ELEMENT_EDIT_LABEL_NAME = By.xpath(".//*[@id='lblName']");
+	public final String ELEMENT_EDIT_LABEL_NAME_TEXT = ".//*[@id='lblParent']/*[@value='$id']";
 	
 	//Delete label
 	public final By ELEMENT_DELETE_LABEL_POPUP_DELETE_BTN=By.xpath("//*[contains(@class,'btn-primary')][contains(.,'Delete')]");

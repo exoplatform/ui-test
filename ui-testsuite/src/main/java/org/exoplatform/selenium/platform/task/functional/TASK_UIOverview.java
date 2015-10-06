@@ -348,5 +348,5 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- Left menu is closed, only display central pane*/ 
 		mgProject.checkExpandCollapse(ELEMENT_HIDE_LEFT,ELEMENT_SHOW_LEFT);
-	}
+ 	}
 }
