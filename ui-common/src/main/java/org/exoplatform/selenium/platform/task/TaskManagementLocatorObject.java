@@ -67,6 +67,7 @@ public class TaskManagementLocatorObject extends PlatformBase {
 	
 	//Color
 	public final String ELEMENT_LEFT_PANE_PROJECT_COLOR_TABLE_ITEM="//*[contains(@class,'project-name')][contains(.,'$project')]/../..//*[contains(@class,'$color')]";
+	public final String ELEMENT_LEFT_PANE_COLOR_TABLE_ITEM="//*[contains(@class,'project-name')][contains(.,'$project')]/../..//*[contains(@class,'$color')]";
 	
 	
 	/**********************************************************CENTRAL PANE******************************************************/
@@ -219,8 +220,6 @@ public class TaskManagementLocatorObject extends PlatformBase {
 	public final By ELEMENT_LEFT_PANE_LABELS_ADD=By.xpath("//*[contains(@class,'label-name')][contains(.,'Labels')]/../*[contains(@class,'uiDropdownWithIcon')]//*[contains(@class,'AddLabel')]");
 	public final String ELEMENT_LABEL_NAME = "//*[contains(@class,'label-title')][contains(.,'$label')]";
 	public final By ELEMENT_WELCOME_TEXT_LABEL_DEFAULT= By.xpath("//*[@class='empty-content']/*[contains(.,'No Label')]");
-	
-	
 	//Labels area-->Context menu
 	public final String ELEMENT_LEFT_PANE_LABEL_MENU="//*[contains(@class,'label-name')][contains(.,'$label')]/../..//*[contains(@class,'RightMenu')]";
 	public final String ELEMENT_LEFT_PANE_LABEL_ADD="//*[contains(@class,'label-name')][contains(.,'$label')]/../..//*[contains(@class,'AddLabel')]";

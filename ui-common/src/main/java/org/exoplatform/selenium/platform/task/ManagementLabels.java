@@ -67,7 +67,6 @@ public class ManagementLabels extends TaskManagementLocatorObject {
 		default:
 			info("No option in the list. Please select correct option.");
 			break;
-		
 		}
 		Utils.pause(1000);
 	}
@@ -193,13 +192,6 @@ public class ManagementLabels extends TaskManagementLocatorObject {
 		goToContMenuGivenLabel(label);
 	}
 	/**
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> FQA-2696:[Task Management]- Write scripts for Labels - Edit a label
 	 * get value attribute
 	 * @param locator
 	 * @return data-id of element
@@ -221,6 +213,20 @@ public class ManagementLabels extends TaskManagementLocatorObject {
 >>>>>>> FQA-2694: [Task Management]- Write scripts for Labels - Label Overview
 =======
 >>>>>>> FQA-2696:[Task Management]- Write scripts for Labels - Edit a label
+=======
+		click(ELEMENT_LEFT_PANE_COLOR_TABLE_ITEM.replace("$label",label).replace("$color",color));
+		Utils.pause(2000);
+		waitForAndGetElement(ELEMENT_LEFT_PANE_PROJECT_COLOR.replace("$label", label).replace("$color", color));
+		if(tasks.length>0){
+			for (String task : tasks) {
+				openLabel(label);
+				Utils.pause(1000);
+				waitForAndGetElement(ELEMENT_TASK_COLOR.replace("$task", task).replace("$color", color));
+			}
+		}
+	}
+	/**
+>>>>>>> FQA-2694: [Task Management]- Write scripts for Labels - Label Overview
 	 * Add a new label
 	 * @param name
 	 *              is label's name
@@ -363,6 +369,7 @@ public class ManagementLabels extends TaskManagementLocatorObject {
 		waitForElementNotPresent(ELEMENT_LEFT_PANE_LABEL_NAME.replace("$label", name));
 	}
 	/**
+<<<<<<< HEAD
 	 * Check cancel action
 	 * @param name
 	 */
@@ -387,6 +394,8 @@ public class ManagementLabels extends TaskManagementLocatorObject {
 		waitForAndGetElement(ELEMENT_DELETE_LABEL_POPUP_DELETE_BTN);
 	}
 	/**
+=======
+>>>>>>> FQA-2694: [Task Management]- Write scripts for Labels - Label Overview
 	 * Check default setting groupBy,sortBy
 	 * @param project
 	 * @param group
@@ -467,6 +476,4 @@ public class ManagementLabels extends TaskManagementLocatorObject {
 			waitForElementNotPresent(ELEMENT_LEFT_PANE_TOOLTIP_LABEL);
 		}
 	}
-	
-	
 }
