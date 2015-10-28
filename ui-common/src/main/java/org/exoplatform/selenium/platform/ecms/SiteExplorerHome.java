@@ -1,15 +1,23 @@
 package org.exoplatform.selenium.platform.ecms;
 
+import static org.exoplatform.selenium.TestLogger.info;
+
+import java.util.ArrayList;
+
 import org.exoplatform.selenium.Button;
 import org.exoplatform.selenium.Dialog;
 import org.exoplatform.selenium.ManageAlert;
-
-import static org.exoplatform.selenium.TestLogger.info;
-
 import org.exoplatform.selenium.Utils;
+import org.exoplatform.selenium.platform.HomePagePlatform;
+import org.exoplatform.selenium.platform.ManageLogInOut;
+import org.exoplatform.selenium.platform.NavigationToolbar;
 import org.exoplatform.selenium.platform.PlatformBase;
 import org.exoplatform.selenium.platform.PlatformPermission;
 
+import org.exoplatform.selenium.platform.social.SpaceHomePage;
+import org.exoplatform.selenium.platform.social.SpaceLocator;
+import org.exoplatform.selenium.platform.social.SpaceManagement;
+import org.exoplatform.selenium.platform.social.SpaceSettingManagement;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
@@ -27,6 +35,7 @@ public class SiteExplorerHome extends PlatformBase{
 
 	//Address Bar
 	public final By ELEMENT_ADDRESS_BAR_ICON_VIEW = By.xpath(".//*[@id='UIAddressBar']//*[@class='uiIconEcmsViewDefault uiIconEcmsViewIcons uiIconEcmsLightGray']");
+	public final By ELEMENT_ADDRESS_BAR_LIST_VIEW = By.xpath(".//*[@id='UIAddressBar']//*[@class='uiIconEcmsViewDefault uiIconEcmsViewList uiIconEcmsLightGray']");
 	public final By ELEMENT_SITE_PATH= By.cssSelector("#address");
 
 	//Action Bar
@@ -337,8 +346,6 @@ public class SiteExplorerHome extends PlatformBase{
 
 	//Share document to space
 	public final By ELEMENT_SPACE_LIST = By.xpath("//*[@id='DisplayModesDropDown']");
-	public final String ELEMENT_SELECTED_SPACE = "//*[@class='spaceList']//*[contains(text(),'${spaceName}')]";
-	public final String ELEMENT_SHARE_DOCUMENT_ACTION_BUTTON = "//*[@class='uiActionBorder']//*[text()='${name}']";
 	public final String ELEMENT_SHARE_DOCUMENT_POPUP = "//*[@id='tipName']//a[contains(text(),'${author}')]";
 	public final String ELEMENT_PROFILE_NAME = "//*[@id='UIStatusProfilePortlet']//span[contains(text(),'${author}')]";
 	
@@ -355,6 +362,8 @@ public class SiteExplorerHome extends PlatformBase{
 																"/..//*[contains(text(),'shared a document')]/../../..//" + 
 																"img[contains(@src,'thumbnailImage') and contains(@src,'${fileName}')]";
 	
+	public final String ELEMENT_SELECTED_SPACE = "//*[@class='spaceList']//*[text()='${spaceName}']";
+	public final String ELEMENT_SHARE_DOCUMENT_ACTION_BUTTON = "//*[@class='uiActionBorder']//*[text()='${name}']";
 	public final String ELEMENT_SHARE_DOCUMENT_CONTENT_IN_SPACE = "//*[@class='author']//a[contains(text(),'${author}')]/..//*[contains(text(),'shared a document')]";
 	public final String ELEMENT_SHARE_DOCUMENT_AUTHOR = "//*[@class='author']//a[contains(text(),'${author}')]";
 	
@@ -372,6 +381,33 @@ public class SiteExplorerHome extends PlatformBase{
 	//Notifications
 	public final String ELEMENT_SHARE_DOCUMENT_CONTENT = "//*[@class='author']//a[contains(text(),'${author}')]/..//*[contains(text(),'shared a document')]/../..//*[@class='dataInfor']//a[contains(text(),'${spaceName}')]";
 	public final By ELEMENT_SHARE_DOCUMENT_ACTIVITY_NOT_FOUND =By.xpath(".//*[@id='UIUserActivityStreamPortlet']//*[contains(text(),'Activity not found')]");
+	
+	public final By ELEMENT_DOCUMENT_SHARE = By.xpath("//*[@class='uiIconEcmsShareDocuments']");
+	public final String ELEMENT_DOCUMENT_SELECTED_FOLDER = "//*[@id='UIDocumentNodeList']//*[contains(text(),'${folderName}')]";
+	public final String ELEMENT_DOCUMENT_SELECTED_FILE_CHECKBOX = "//*[@id='UIDocumentNodeList']//*[@data-original-title='${fileName}']/../..//*[@class='uiCheckbox']";
+	public final String ELEMENT_DOCUMENT_FILE_CHECKBOX = ".//*[@id='FileViewBreadcrumb']//*[@class='uiCheckbox']";
+	public final String ELEMENT_DOCUMENT_SELECTED_FILE = "//*[@id='UIDocumentNodeList']//*[@data-original-title='${fileName}']";
+	public final String ELEMENT_DOCUMENT_PARENT_FOLDER = ".//*[@id='UIDocumentNodeList']//*[contains(text(),'${folderName}')]";
+	public final String ELEMENT_DOCUMENT_FILE_NAME = ".//*[@class='nodeName' and text()='${fileName}']";
+	
+	public final String ELEMENT_SELECTED_SPACE_TO_SHARE = "//*[@class='uiMention' and text()= '${spaceName}']//*[contains(@onclick, 'RemoveSpace')]";
+	public final String ELEMENT_SELECTED_SPACE_TO_REMOVE = "//*[@class='uiIconClose uiIconLightGray' and contains(@onclick,'objectId=/spaces/${spaceName}')]";
+	public final By ELEMENT_DOCUMENT_SHARE_DIALOG_TITLE = By.xpath("//*[@class='PopupTitle popupTitle' and contains(text(), 'Share')]");
+	public final By ELEMENT_DOCUMENT_SHARE_SPACE_DROPDOWN = By.xpath("//*[@id='UIShareDocumentSpaceMention']//*[contains(text(), 'Share with:')]/..//*[@data-toggle='dropdown']//*[contains(text(),'Select a Space')]");
+	public final By ELEMENT_DOCUMENT_SHARE_COMMENT_BOX = By.xpath("//*[@id='DisplaytextAreaInput']/..//*[@class='placeholder' and contains(text(), 'Add a comment about to this file...')]");
+	public final String ELEMENT_DOCUMENT_SHARE_ACCESS_OPTION = "//*[@class='accessSpaceMember clearfix']//*[contains(text(), 'Access:')]/..[contains(text(), 'Space Members')]/..//*[@id='permissionDropDown']//option[contains(text(), '${option}')]";
+	public final By ELEMENT_DOCUMENT_SHARE_CLOSE_BUTTON = By.xpath("//*[@class='uiIconClose pull-right']");
+	public final By ELEMENT_DOCUMENT_SHARE_SPACE_FILTER = By.xpath("//input[@placeholder='Filter Spaces']");
+	public final By ELEMENT_DOCUMENT_SHARE_EDIT_FORM = By.xpath("//*[@id='EditFormController']");
+	public final String ELEMENT_DOCUMENT_SHARE_UPDATED_USER = "//*[@class='nodeName' and text() = '${fileName}']/../..//*[@class='fileInfoBottom' and contains(text(), 'Updated') and contains(text(), 'by ${user}')]";
+	public final String ELEMENT_DOCUMENT_SHARE_UPDATED_TITLE = "//*[@id='title0'][@value='${title}']";
+	public final String ELEMENT_DOCUMENT_SHARE_UPDATED_CONTENT = "//*[@id='content' and contains(text(), '${content}')]";
+	public final By ELEMENT_DOCUMENT_PERMISSION_DIALOG_TITLE = By.xpath("//*[@class='PopupTitle popupTitle' and contains(text(), 'Permission Management')]");
+	public final String ELEMENT_DOCUMENT_PERMISSION = "//*[@id='*:/spaces/${spaceName}${permission}' and @checked='']";
+	public final By ELEMENT_DOCUMENT_CONTENT = By.xpath("//*[@id='content']");
+	
+	public final String SHARE_ACCESS_CAN_VIEW = "Can View";
+	public final String SHARE_ACCESS_CAN_EDIT = "Can Edit";
 	
 	ManageAlert alert;
 	Button button;
@@ -1510,5 +1546,274 @@ public class SiteExplorerHome extends PlatformBase{
 		if(waitForAndGetElement(ELEMENT_ACTIONBAR_SHARE, 5000, 0)==null)
 			click(ELEMENT_ACTIONBAR_MORE);
 		click(ELEMENT_ACTIONBAR_SHARE);
+	}
+	
+	/**
+	 * Upload file/files to a specific folder
+	 * @param folderName
+	 * @param uploadFiles
+	 * @throws Exception
+	 */
+	public void uploadFileToFolder(String folderName, ArrayList<String> uploadFiles) throws Exception{
+		info("Upload file to folder");
+		click(ELEMENT_DOCUMENT_SELECTED_FOLDER.replace("${folderName}",folderName));
+		
+		for(String fileName:uploadFiles){			
+			uploadFile("TestData/"+fileName);
+		}		
+	}
+	
+	/**
+	 * Share one document to many spaces
+	 * @param fileName
+	 * @param spaceList
+	 * @param comment
+	 */
+	public void shareDocumentToManySpaces(String fileName, ArrayList<String> spaceList, String comment){
+		info("Share document to space");
+		for(String spaceElement:spaceList){
+			//Click space list
+			click(ELEMENT_SPACE_LIST);
+			//Select a space
+			click(ELEMENT_SELECTED_SPACE.replace("${spaceName}", spaceElement));	
+		}
+		//Comment
+		if(comment!= null && !comment.isEmpty()){
+			type(ELEMENT_SHARE_DOCUMENT_COMMENT, comment, false);
+		}
+		
+		//Click Share button
+		click(ELEMENT_SHARE_DOCUMENT_ACTION_BUTTON.replace("${name}", "Share"));
+	}	
+	
+	/**
+	 * Activity about shared document is displayed in Intranet Activity Stream & Space Activity Stream
+	 * @param shareOwner
+	 * @param fileName
+	 * @param spaceName
+	 */
+	public void checkDisplayOfSharedDocument(String shareOwner, String fileName, String spaceName){
+		SpaceLocator spaceLocator  = new SpaceLocator();
+		//Check Shared content in Intranet AS
+		waitForAndGetElement(ELEMENT_SHARE_DOCUMENT_CONTENT
+							.replace("${author}", shareOwner)
+							.replace("${spaceName}", spaceName));
+		
+		//Open space displayed in shared document
+		click(ELEMENT_SHARE_DOCUMENT_CONTENT.replace("${author}", shareOwner).replace("${spaceName}", spaceName));
+		waitForAndGetElement(spaceLocator.ELEMENT_SPACE_NAME.replace("${name}", spaceName));
+		//Check Shared content in Space AS
+		waitForAndGetElement(ELEMENT_SHARE_DOCUMENT_CONTENT_IN_SPACE.replace("${author}", shareOwner));		
+	} 	
+	
+	/**
+	 * Symlink of shared file is displayed in shared folder
+	 * @param fileName
+	 * @param spaceName
+	 */
+	public void checkSharedFileSymlink( String fileName, String spaceName){
+		SpaceManagement spaceManage = new SpaceManagement(driver);
+		//Go to Documents of Space
+		spaceManage.goToDocumentTab();
+		waitForAndGetElement(ELEMENT_SPACE_DOCUMENTS_SHARED_FOLDER);
+		//Open shared folder
+		doubleClickOnElement(ELEMENT_SPACE_DOCUMENTS_SHARED_FOLDER);
+		//Find the shared file
+		waitForAndGetElement(ELEMENT_SPACE_DOCUMENTS_SHARED_FOLDER_FILE_SYMLINK
+												.replace("${spaceName}", spaceName)
+												.replace("${fileName}", fileName));				
+	}	
+	
+	/**
+	 * Create a space with 2 users
+	 * @param spaceName
+	 * @param user1
+	 * @param user2
+	 * @param user2FullName
+	 * @param password
+	 */
+	public void initSpaceWithUsers(String spaceName, String user1, String user2,String user2FullName, String password){
+		ManageLogInOut manageLoginOut = new ManageLogInOut(driver);
+		HomePagePlatform homepage = new HomePagePlatform(driver);
+		SpaceManagement spaceManage = new SpaceManagement(driver);
+		SpaceHomePage spaceHome = new SpaceHomePage(driver);
+		SpaceSettingManagement spaceSetting = new SpaceSettingManagement(driver);
+		
+		info("User A login");
+		manageLoginOut.signIn(user1, password);
+		Utils.pause(3000);
+		
+		info("User A creates a space");
+		homepage.goToAllSpace();
+		Utils.pause(3000);
+		spaceManage.goToCreateSpace();
+		spaceManage.addNewSpaceSimple(spaceName, "");
+		
+		info("User A invites UserB to the space");
+		homepage.goToSpecificSpace(spaceName);
+		spaceHome.goToSpaceSettingTab();
+		spaceSetting.goToMemberTab();
+		spaceSetting.inviteUser(user2,true,user2FullName);
+		
+		info("User B login");
+		manageLoginOut.signOut();
+		manageLoginOut.signIn(user2, password);
+		Utils.pause(3000);
+		
+		info("User B accepted to join the space");
+		homepage.goToAllSpace();
+		Utils.pause(3000);
+		spaceManage.acceptAInvitation(spaceName);
+		
+		manageLoginOut.signOut();
+	}
+	
+	/**
+	 * Upload and Share a document to a space
+	 * @param fileName
+	 * @param spaceName
+	 * @param comment
+	 */
+	public void uploadAndShareDocumentToSpace(String fileName, String spaceName, String comment){
+		NavigationToolbar navTool = new NavigationToolbar(driver);
+		
+		info("Share document to space");
+		navTool.goToSiteExplorer();
+		Utils.pause(3000);
+		
+		uploadFile("TestData/"+fileName);
+		Utils.pause(3000);
+		waitForAndGetElement(ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME.replace("${title}", fileName));		
+		//Share file to space
+		click(ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME.replace("${title}", fileName));		
+		shareDocument();
+		//Click space list
+		click(ELEMENT_SPACE_LIST);
+		//Select a space
+		click(ELEMENT_SELECTED_SPACE.replace("${spaceName}", spaceName));	
+		
+		//Comment
+		if(comment!= null && !comment.isEmpty()){
+			type(ELEMENT_SHARE_DOCUMENT_COMMENT, comment, false);
+		}
+		
+		//Click Share button
+		click(ELEMENT_SHARE_DOCUMENT_ACTION_BUTTON.replace("${name}", "Share"));
+	}
+	
+	/**
+	 * 
+	 * Date: Oct 7, 2015
+	 * Delete symlink of shared document in space documents
+	 */
+	public void deleteSymlink(String spaceName, String fileName){
+		HomePagePlatform homepage = new HomePagePlatform(driver);
+		SpaceManagement spaceManage = new SpaceManagement(driver);
+		
+		homepage.goToSpecificSpace(spaceName);
+		
+		spaceManage.goToDocumentTab();
+		waitForAndGetElement(ELEMENT_SPACE_DOCUMENTS_SHARED_FOLDER);
+		//Open shared folder
+		doubleClickOnElement(ELEMENT_SPACE_DOCUMENTS_SHARED_FOLDER);
+		//Find the shared file
+		waitForAndGetElement(ELEMENT_SPACE_DOCUMENTS_SHARED_FOLDER_FILE_SYMLINK
+																.replace("${spaceName}", spaceName)
+																.replace("${fileName}", fileName));
+		//Delete symlink
+		rightClickOnElement(ELEMENT_SPACE_DOCUMENTS_SHARED_FOLDER_FILE_SYMLINK
+																.replace("${spaceName}", spaceName)
+																.replace("${fileName}", fileName));
+		waitForAndGetElement(ELEMENT_SPACE_DOCUMENTS_SHARED_FOLDER_SYMLINK_MENU_DELETE);
+		click(ELEMENT_SPACE_DOCUMENTS_SHARED_FOLDER_SYMLINK_MENU_DELETE);
+		//confirm
+		waitForAndGetElement(ELEMENT_SPACE_DOCUMENTS_SHARED_FOLDER_SYMLINK_MENU_DELETE_OPTION.replace("${action}", "Delete"));
+		click(ELEMENT_SPACE_DOCUMENTS_SHARED_FOLDER_SYMLINK_MENU_DELETE_OPTION.replace("${action}", "Delete"));		
+		waitForElementNotPresent(ELEMENT_SPACE_DOCUMENTS_SHARED_FOLDER_FILE_SYMLINK
+																.replace("${spaceName}", spaceName)
+																.replace("${fileName}", fileName));				
+	}
+	
+	
+	public void checkShareActivityAfterDeleted(String spaceName, boolean verifyInSpace){	
+		HomePagePlatform homepage = new HomePagePlatform(driver);
+		SpaceManagement spaceManage = new SpaceManagement(driver);
+		
+		waitForElementNotPresent(ELEMENT_SHARE_DOCUMENT_CONTENT
+														.replace("${author}", DATA_NAME_USER1)
+														.replace("${spaceName}", spaceName));
+		if(verifyInSpace){
+			homepage.goToSpecificSpace(spaceName);
+			spaceManage.goToActivityStreamTab();
+			waitForElementNotPresent(ELEMENT_SHARE_DOCUMENT_CONTENT_IN_SPACE.replace("${author}", DATA_NAME_USER1));
+		}	
+	}	
+	
+	/**
+	 * 
+	 * Date: Oct 8, 2015
+	 * Documents -> Icons button
+	 */
+	public void clickIconView() {
+		info("Select a view type");
+		waitForAndGetElement(ELEMENT_ADDRESS_BAR_ICON_VIEW);
+		click(ELEMENT_ADDRESS_BAR_ICON_VIEW);
+		Utils.pause(2000);
+	}
+	
+	
+	/**
+	 * The symlink does not exist in Shared folder
+	 * Date: Oct 21, 2015
+	 */
+	public void checkSharedFileSymlinkAfterDeleted( String fileName, String spaceName){
+		SpaceManagement spaceManage = new SpaceManagement(driver);
+		//Go to Documents of Space
+		spaceManage.goToDocumentTab();
+		waitForAndGetElement(ELEMENT_SPACE_DOCUMENTS_SHARED_FOLDER);
+		//Open shared folder
+		doubleClickOnElement(ELEMENT_SPACE_DOCUMENTS_SHARED_FOLDER);
+		//Find the shared file
+		waitForElementNotPresent(ELEMENT_SPACE_DOCUMENTS_SHARED_FOLDER_FILE_SYMLINK
+												.replace("${spaceName}", spaceName)
+												.replace("${fileName}", fileName));				
+	}	
+
+
+	/**
+	 * Share document with access rights: Can view/Can edit
+	 * Date: Oct 22, 2015
+	 */
+	public void shareDocumentToSpaceWithAccessRight(String spaceName, String accessRight, String comment){
+		shareDocument();
+		click(ELEMENT_DOCUMENT_SHARE_ACCESS_OPTION.replace("${option}", accessRight));
+		//Click space list
+		click(ELEMENT_SPACE_LIST);
+		//Select a space
+		click(ELEMENT_SELECTED_SPACE.replace("${spaceName}", spaceName));	
+		
+		//Comment
+		if(comment!= null && !comment.isEmpty()){
+			type(ELEMENT_SHARE_DOCUMENT_COMMENT, comment, false);
+		}		
+		//Click Share button
+		click(ELEMENT_SHARE_DOCUMENT_ACTION_BUTTON.replace("${name}", "Share"));		
+	}
+
+	/**
+	 * Go to drive -> folder
+	 * Date: Oct 27, 2015
+	 */
+	public void goToPathOfDrive(String path, String drive){
+		info("Go to selected Drive");
+		waitForAndGetElement(ELEMENT_ACTIONBAR_SHOWDRIVES);
+		click(ELEMENT_ACTIONBAR_SHOWDRIVES);
+		waitForAndGetElement(ELEMENT_ACTIONBAR_SELECTED_DRIVE.replace("${drive}",drive));
+		click(ELEMENT_ACTIONBAR_SELECTED_DRIVE.replace("${drive}",drive));
+		info("Go to folder");
+		String[] arrayPath = path.split("/");
+		for (String arrayElement : arrayPath){
+			selectNode(arrayElement);
+		}
 	}	
 }

@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>org.exoplatform.selenium</groupId>
 		<artifactId>ui-test</artifactId>
-		<version>4.2.x-SNAPSHOT</version>
+		<version>4.3.x-SNAPSHOT</version>
 	</parent>
 
 	<artifactId>ui-testsuite</artifactId>
@@ -545,6 +545,37 @@
 			</properties>
 		</profile>
 		<profile>
+			<id>shareInContent-func-part1</id>
+			<properties>
+				<testSuite>shareInContent-func-part1.xml</testSuite>
+			</properties>
+		</profile>
+		<profile>
+			<id>shareInContent-func-part2</id>
+			<properties>
+				<testSuite>shareInContent-func-part2.xml</testSuite>
+			</properties>
+		</profile>
+		<profile>
+			<id>shareInContent-func-part3</id>
+			<properties>
+				<testSuite>shareInContent-func-part3.xml</testSuite>
+			</properties>
+		</profile>
+		<profile>
+			<id>forum-sniff-part1</id>
+			<properties>
+				<testSuite>forum-sniff-part1.xml</testSuite>
+			</properties>
+		</profile>
+		<profile>
+			<id>forum-sniff-part2</id>
+			<properties>
+				<testSuite>forum-sniff-part2.xml</testSuite>
+			</properties>
+		</profile>
+		<profile>
+>>>>>>> FQA-2762:PLF43 - Write High Fnc/ECMS/Share in ContentExplorer/ECMS
 			<id>plf-sniff-part1</id>
 			<properties>
 				<testSuite>plf-sniff-part1.xml</testSuite>

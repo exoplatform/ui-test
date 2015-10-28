@@ -122,4 +122,39 @@ public class ManageLogInOut extends PlatformBase {
 		waitForAndGetElement(ELEMENT_DISABLE_USER_ERROR_MES,2000,1);
 		waitForAndGetElement(ELEMENT_SIGN_IN_BUTTON);
 	}
+	
+	/**
+	 * Log in to intranet
+	 * @param username
+	 * @param password
+	 * @param opParams
+	 */
+	public void signInWithoutRefresh(String username, String password,Boolean...opParams) {
+		Boolean verify = (Boolean) (opParams.length > 0 ? opParams[0]: false);
+		if(waitForAndGetElement(ELEMENT_ACCOUNT_NAME_LINK,5000,0)!=null){
+			signOut();
+		}
+		if(ssoType != "" && ssoType != null){
+			SSO sso = SSO.valueOf(ssoType.toUpperCase());
+			switch(sso){
+			case OPENAM:
+				info("login by openam with user " + username + " and pass " + password);
+				signInOpenam(username, password);
+				break;
+			case CAS:
+			    info("Login by cas with user " + username + " and pass " + password);
+			    signInCas(username,password);
+			    break;
+			}
+		}
+		else{
+			info("login normally if not use SSO with user " + username + " and pass " + password);
+			type(ELEMENT_INPUT_USERNAME, username, true);
+			type(ELEMENT_INPUT_PASSWORD, password, true);
+			click(ELEMENT_SIGN_IN_BUTTON);
+			if(verify)
+				waitForElementNotPresent(ELEMENT_SIGN_IN_BUTTON);
+		}
+		Utils.pause(3000);
+	}	
 }

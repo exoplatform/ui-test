@@ -780,13 +780,16 @@ public class TestBase {
 		newDriver.navigate().refresh();
 		newDriver.navigate().to(baseUrl);
 	}
-
+	
 	/**
 <<<<<<< HEAD
 	 * Check term and conditions
+<<<<<<< HEAD
 =======
 	 *  Check term and conditions
 >>>>>>> FQA-2581: PLF 4.3 - Write High Fnc/Disable User/Forum
+=======
+>>>>>>> FQA-2762:PLF43 - Write High Fnc/ECMS/Share in ContentExplorer/ECMS
 	 * @param opParams
 	 */
 	public void termsAndConditions(Object... opParams){

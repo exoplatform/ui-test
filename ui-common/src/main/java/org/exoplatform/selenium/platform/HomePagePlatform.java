@@ -35,6 +35,7 @@ public class HomePagePlatform extends TestBase{
 	public final String ELEMENT_LEFT_PANEL = "//*[@class='uiCompanyNavigations']//*[contains(text(),'{$name}')]";
 	public final String ELEMENT_SPECIFIC_PANEL = "//*[@id='UISpaceNavigationPortlet']//*[contains(text(),'{$space}')]";
 	
+	
 	// right panel
 	public final String ELEMENT_SUGGESTIONS_USER = "//*[@class='uiBox uiSuggestions']//*[contains(text(),'{$user}')]";
 	public final String ELEMENT_SPACE_BYNAME = "//*[@data-original-title='${name}']";
@@ -434,5 +435,6 @@ public class HomePagePlatform extends TestBase{
 		else
 			waitForElementNotPresent(ELEMENT_SUGGESTION_NAME.replace("${name}",user));
 	}
+	
 }
 

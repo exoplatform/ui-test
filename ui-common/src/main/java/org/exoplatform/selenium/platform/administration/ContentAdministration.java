@@ -1,7 +1,10 @@
 package org.exoplatform.selenium.platform.administration;
 
+import static org.exoplatform.selenium.TestLogger.info;
+
 import org.exoplatform.selenium.ManageAlert;
 import org.exoplatform.selenium.Utils;
+import org.exoplatform.selenium.platform.NavigationToolbar;
 import org.exoplatform.selenium.platform.PlatformBase;
 import org.exoplatform.selenium.platform.ecms.ECMS_Permission;
 import org.exoplatform.selenium.platform.PlatformPermission;
@@ -9,8 +12,7 @@ import org.exoplatform.selenium.platform.PlatformPermission;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
-
-import static org.exoplatform.selenium.TestLogger.info;
+import org.openqa.selenium.WebElement;
 
 public class ContentAdministration extends PlatformBase{
 
@@ -267,6 +269,11 @@ public class ContentAdministration extends PlatformBase{
 
 	ECMS_Permission ecmsPerm;
 	PlatformPermission plfPerm;
+	
+	//Permission
+	public By ELEMENT_ECM_WEB_VIEW_PERMISSION = By.xpath("//a[@href='#tab-UIViewPermissionContainer']");
+	public By ELEMENT_ECM_DRIVE_PERMISSION = By.xpath("//*[@id='permissions']");
+		
 	ManageAlert alert ;
 	public ContentAdministration(WebDriver dr){
 		driver = dr;
@@ -1401,4 +1408,61 @@ public class ContentAdministration extends PlatformBase{
 			click(plfPerm.ELEMENT_SELECT_USER_ICON1,0,true);
 			plfPerm.checkUserSelector(user, isPresent);
 		}
+	
+	/**
+	 * Add WebView type to drive
+	 * @Author: QuyenNT
+	 * Date: Oct 20, 2015
+	 */
+	public void addViewTypeToDrive(String driveName, specificView[] applyViews){
+		NavigationToolbar navTool = new NavigationToolbar(driver);	
+				
+		Utils.pause(3000);		
+		
+		info("Go to Explorer tab");
+		navTool.goToContentAdministration();
+		
+		info("Go to Explorer tab");
+		goToSpecificMainFunctions(mainEcmFunctions.EXPLORER);
+		
+		info("Go to Drives link");
+		goToSpecificFunctions(specificEcmFunctions.DRIVES);
+		
+		editDrives(driveName,applyViews);
+		Utils.pause(3000);
+	}	
+	
+	/**
+	 * Add permission to Drive
+	 * @Author: QuyenNT
+	 * Date: Oct 23, 2015
+	 */
+	public void addPermissionToDrive(String driveName, String permissionToAdd){
+		NavigationToolbar navTool = new NavigationToolbar(driver);	
+				
+		Utils.pause(3000);		
+		
+		info("Go to Explorer tab");
+		navTool.goToContentAdministration();
+		
+		info("Go to Explorer tab");
+		goToSpecificMainFunctions(mainEcmFunctions.EXPLORER);
+		
+		info("Go to Drives link");
+		goToSpecificFunctions(specificEcmFunctions.DRIVES);
+		
+		info("Open Drive");
+		click(By.xpath(ELEMENT_ECM_EXPLORER_DRIVES_EDIT_LIST.replace("{$name}", driveName)));
+		info("Go to Drive tab");
+		click(ELEMENT_ECM_COMMON_ADD_PERMISSION_BUTTON);
+		
+		WebElement permissionElement = getElement(ELEMENT_ECM_DRIVE_PERMISSION);
+		String permissionValue = permissionElement.getAttribute("value");
+		permissionValue += "," + permissionToAdd;
+		
+		type(ELEMENT_ECM_DRIVE_PERMISSION, permissionValue, true);
+		
+		Utils.pause(3000);
+		click(ELEMENT_ECM_EXPLORER_DRIVES_SAVE_FORM);
+	}		
 }

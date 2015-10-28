@@ -8,6 +8,11 @@ import org.exoplatform.selenium.platform.objectdatabase.common.DatabaseResource;
 public class UserSearchOptionDatabase {
 	public ArrayList<Integer> type;
 	public ArrayList<String> userSearchOption;
+	
+	public final int USER_SEARCH_OPTION_BY_USER_NAME = 0;
+	public final int USER_SEARCH_OPTION_BY_LAST_NAME = 1;
+	public final int USER_SEARCH_OPTION_BY_FIRST_NAME = 2;
+	public final int USER_SEARCH_OPTION_BY_EMAIL = 3;
 
 	public UserSearchOptionDatabase(ArrayList<Integer> type, ArrayList<String> userSearchOption){
 		this.type = type;
