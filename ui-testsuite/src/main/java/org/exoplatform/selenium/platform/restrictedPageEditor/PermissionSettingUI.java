@@ -33,7 +33,6 @@ import org.testng.annotations.Test;
 			
 		*Expected Outcome: 
 			- The Intranet Homepage is displayed*/
-	
 		Utils.pause(3000);	
 		waitForAndGetElement(homepage.ELEMENT_PLF_HOMEPAGE_DISPLAY);
 		/*Step number: 2
@@ -238,19 +237,31 @@ import org.testng.annotations.Test;
 		manageLayout.goToPagePermissionTab();
 		
 		info("Go to Access tab");
-		manageLayout.gotoPermissionSelector(manageLayout.PERMISSION_SELECTOR_ACCESS);
-		waitForAndGetElement(manageLayout.ELEMENT_PERMISSION_PUBLIC_MODE.
-										replace("${tabName}", manageLayout.ELEMENT_PERMISSION_ACCESS_TAB_ID));
+		manageLayout.gotoPermissionSelectorContains(manageLayout.PERMISSION_SELECTOR_ACCESS);
+		waitForAndGetElement(manageLayout.ELEMENT_PERMISSION_PUBLIC_MODE
+										.replace("${tabName}", manageLayout.ELEMENT_PERMISSION_ACCESS_TAB_ID));
 		
-		boolean isSelected = checkCheckBoxAttribute(manageLayout.ELEMENT_PERMISSION_PUBLIC_MODE_CHECKBOX
-									.replace("${tabName}", manageLayout.ELEMENT_PERMISSION_ACCESS_TAB_ID));		
-		if(isSelected){
-			assert false;
-		} else {
-			assert true;
-		}
-		check(manageLayout.ELEMENT_PERMISSION_PUBLIC_MODE_CHECKBOX
-						.replace("${tabName}", manageLayout.ELEMENT_PERMISSION_ACCESS_TAB_ID), 2000, 0,1);
+		//If public mode is check, the permission table will be displayed
+		waitForAndGetElement(manageLayout.ELEMENT_PERMISSION_TABLE_BY_TAB
+											.replace("${tabName}", manageLayout.ELEMENT_PERMISSION_ACCESS_TAB_ID));	
+		
+		info("Go to Move apps tab");
+		manageLayout.gotoPermissionSelector(manageLayout.PERMISSION_SELECTOR_MOVE_APPS);
+		waitForAndGetElement(manageLayout.ELEMENT_PERMISSION_PUBLIC_MODE
+										.replace("${tabName}", manageLayout.ELEMENT_PERMISSION_MOVE_APPS_TAB_ID));
+		waitForElementNotPresent(manageLayout.ELEMENT_PERMISSION_TABLE_BY_TAB
+										.replace("${tabName}", manageLayout.ELEMENT_PERMISSION_MOVE_APPS_TAB_ID));
+		
+		info("Go to Move containers tab");
+		manageLayout.gotoPermissionSelector(manageLayout.PERMISSION_SELECTOR_MOVE_CONTAINERS);
+		waitForAndGetElement(manageLayout.ELEMENT_PERMISSION_PUBLIC_MODE
+									.replace("${tabName}", manageLayout.ELEMENT_PERMISSION_MOVE_CONTAINERS_TAB_ID));
+		waitForElementNotPresent(manageLayout.ELEMENT_PERMISSION_TABLE_BY_TAB
+									.replace("${tabName}", manageLayout.ELEMENT_PERMISSION_MOVE_CONTAINERS_TAB_ID));		
+	
+		
+		button.cancel();
+		click(manageLayout.ELEMENT_EDIT_PORTLET_ABORT);
 		
 		/*Step number: 3
 		*Step Name: Step3: Open Page Properties
@@ -263,7 +274,37 @@ import org.testng.annotations.Test;
 			-checked
 			- In "Move Apps" tab: default value of "Everyone" checkbox is checked
 			- In "Move Containers" tab: default value of "Everyone" checkbox is checked*/ 
-
+		info("Go to Page Layout form");
+		navigationToolbar.goToEditLayout();
+		manageLayout.goToPagePropertiesPopup();
+		manageLayout.goToPagePermissionTab();
+		
+		info("Go to Access tab");
+		manageLayout.gotoPermissionSelectorContains(manageLayout.PERMISSION_SELECTOR_ACCESS);
+		waitForAndGetElement(manageLayout.ELEMENT_PERMISSION_PUBLIC_MODE
+										.replace("${tabName}", manageLayout.ELEMENT_PERMISSION_ACCESS_TAB_ID));
+		
+		//If public mode is check, the permission table will be displayed
+		waitForAndGetElement(manageLayout.ELEMENT_PERMISSION_TABLE_BY_TAB
+											.replace("${tabName}", manageLayout.ELEMENT_PERMISSION_ACCESS_TAB_ID));	
+		
+		info("Go to Move apps tab");
+		manageLayout.gotoPermissionSelector(manageLayout.PERMISSION_SELECTOR_MOVE_APPS);
+		waitForAndGetElement(manageLayout.ELEMENT_PERMISSION_PUBLIC_MODE
+										.replace("${tabName}", manageLayout.ELEMENT_PERMISSION_MOVE_APPS_TAB_ID));
+		waitForElementNotPresent(manageLayout.ELEMENT_PERMISSION_TABLE_BY_TAB
+										.replace("${tabName}", manageLayout.ELEMENT_PERMISSION_MOVE_APPS_TAB_ID));
+		
+		info("Go to Move containers tab");
+		manageLayout.gotoPermissionSelector(manageLayout.PERMISSION_SELECTOR_MOVE_CONTAINERS);
+		waitForAndGetElement(manageLayout.ELEMENT_PERMISSION_PUBLIC_MODE
+									.replace("${tabName}", manageLayout.ELEMENT_PERMISSION_MOVE_CONTAINERS_TAB_ID));
+		waitForElementNotPresent(manageLayout.ELEMENT_PERMISSION_TABLE_BY_TAB
+									.replace("${tabName}", manageLayout.ELEMENT_PERMISSION_MOVE_CONTAINERS_TAB_ID));		
+	
+		
+		button.cancel();
+		click(manageLayout.ELEMENT_EDIT_PORTLET_ABORT);		
  	}
 
 	/**
@@ -896,7 +937,7 @@ import org.testng.annotations.Test;
 		info("Add permisstion to table");
 		manageLayout.gotoPermissionSelector(manageLayout.PERMISSION_SELECTOR_MOVE_APPS);
 		manageLayout.addPremission(groupPath, "*",addedGroup, 
-							manageLayout.ELEMENT_PERMISSION_MOVE_APPS_TAB_ID, manageLayout.ELEMENT_PERMISSION_MOVE_APPS_POPUP_TAB_ID);
+		manageLayout.ELEMENT_PERMISSION_MOVE_APPS_TAB_ID, manageLayout.ELEMENT_PERMISSION_MOVE_APPS_POPUP_TAB_ID);
 		
 		manageLayout.gotoPermissionSelector(manageLayout.PERMISSION_SELECTOR_MOVE_CONTAINERS);
 		manageLayout.addPremission(groupPath, "*",addedGroup, 
@@ -1630,7 +1671,6 @@ import org.testng.annotations.Test;
 			
 		*Expected Outcome: 
 			- Access tab is displayed*/
-
 		Utils.pause(3000);	
 		waitForAndGetElement(homepage.ELEMENT_PLF_HOMEPAGE_DISPLAY);
 		

@@ -1,0 +1,19 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="Platform Functional Test" verbose="1" preserve-order="true">
+	<test name="restrictedPage-func-part01" enabled="true">
+		<groups>
+			<run>
+				<exclude name="pending" />
+			</run>
+		</groups>
+		<classes>
+			<class name="org.exoplatform.selenium.platform.restrictedPageEditor.testConfig" />
+			<class name="org.exoplatform.selenium.platform.restrictedPageEditor.PermissionSettingUI" />
+			<class name="org.exoplatform.selenium.platform.restrictedPageEditor.PagePermissions" />
+			<class name="org.exoplatform.selenium.platform.restrictedPageEditor.ContainerPermissions" />
+		</classes>
+	</test>
+	<listeners>
+		<listener class-name="org.exoplatform.selenium.TestReportListener" />
+	</listeners>
+</suite>

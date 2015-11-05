@@ -688,8 +688,18 @@
 				<testSuite>restrictedPage-func-part03.xml</testSuite>
 			</properties>
 		</profile>
+<<<<<<< HEAD
 		
 		<!-- Testing failed-->
+=======
+		<profile>
+			<id>restrictedPage-func-part01</id>
+			<properties>
+				<testSuite>restrictedPage-func-part01.xml</testSuite>
+			</properties>
+		</profile>
+				
+>>>>>>> FQA-2758:PLF 4.3 - Write High Fnc/PLF/Restricted Page Editor/Permission Setting UI
 		<profile>
 			<id>testng-failed</id>
 			<properties>

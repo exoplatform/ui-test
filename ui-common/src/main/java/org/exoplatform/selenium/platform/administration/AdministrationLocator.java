@@ -376,4 +376,7 @@ public class AdministrationLocator extends PlatformBase{
 	public final String PERMISSION_SELECTOR_MOVE_CONTAINERS = "Move Containers";	
 	public final String PERMISSION_SELECTOR_EDIT = "Edit";
 	
+	//Site permission
+	public final String ELEMENT_PERMISSION_SELECTOR_CONTAINS = "//*[@id='PermissionSetting']//*[contains(text(), '${tabName}')]";
+	public final String ELEMENT_PERMISSION_TABLE_BY_TAB = "//*[contains(@id,'${tabName}')]//*[@id='PermissionGrid']";
 }

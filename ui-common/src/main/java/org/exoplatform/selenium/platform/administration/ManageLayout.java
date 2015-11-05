@@ -10,6 +10,7 @@ import static org.exoplatform.selenium.TestLogger.info;
 
 
 public class ManageLayout extends AdministrationLocator{
+
 	
 	ManageAlert alert;
 	
@@ -224,6 +225,16 @@ public class ManageLayout extends AdministrationLocator{
      * Check the present of Permission table
      * @param tabName
      */
+	public void gotoPermissionSelectorContains(String tabName){
+		info("Go to Permission selector");
+		waitForAndGetElement(ELEMENT_PERMISSION_SELECTOR_CONTAINS.replace("${tabName}", tabName));
+		click(ELEMENT_PERMISSION_SELECTOR_CONTAINS.replace("${tabName}", tabName));	
+	}		
+	
+	/**
+	 * Check the present of Permission table
+	 * @param tabName
+	 */
 	public void checkPermissionTable(String tabName){		
 		waitForAndGetElement(ELEMENT_PERMISSION_TABLE_COLUMN
 				.replace("${tabName}", tabName)
@@ -237,12 +248,14 @@ public class ManageLayout extends AdministrationLocator{
 	}
 	
 	/**
-	 * If public mode is checked: hide add button
-	 * If public mode is unchecked: show add button
+	 * If public mode is checked 
+	 * 							hide add button
+	 * If public mode is unchecked
+	 * 							show add button
 	 * @param isPublicMode
-	 *                     Everyone checkbox is checked or not
+	 * 					 Everyone checkbox is checked or not
 	 * @param tabName
-	 *                      Access/Move Apps/Move Containers  
+	 * 				 Access/Move Apps/Move Containers  
 	 */
 	public void checkPresentOfActionButtons(boolean isPublicMode, String tabName){
 		if(isPublicMode){
@@ -304,6 +317,7 @@ public class ManageLayout extends AdministrationLocator{
 	
 	
 	/**
+<<<<<<< HEAD
 	 * 
 	 * Add permission for a portlet
 	 * @param groupPath
@@ -348,11 +362,6 @@ public class ManageLayout extends AdministrationLocator{
 	 * Delete a access permission group
 	 * @param group
 	 *              is group path as: /platform/users,...
-<<<<<<< HEAD
-=======
-	 * By: QuyenNT
-	 * Date: Nov 2, 2015
->>>>>>> FQA-2756:PLF43 - Write High Fnc/PLF/Restricted Page Editor/Container Permissions
 	 */
 	public void deleteGroupPermission(String group, String permissionSelector){
 		if(waitForAndGetElement(ELEMENT_DELETE_BUTTON.replace("${tabName}", permissionSelector).replace("$group",group),3000,0)!=null){
@@ -366,23 +375,15 @@ public class ManageLayout extends AdministrationLocator{
 	}
 
 	/**
-<<<<<<< HEAD
 	 * @param tab: category
 	 * @param element
 	 *                name of application
 	 * @param container
 	 *                the place to put application			
-=======
-	 * 
-	 * By: QuyenNT
-	 * Date: Nov 5, 2015	
-	 * @param tab
-	 * 				category
 	 * @param element
 	 * 				name of application
 	 * @param container
 	 * 				the place to put application			
->>>>>>> FQA-2756:PLF43 - Write High Fnc/PLF/Restricted Page Editor/Container Permissions
 	 */
 	public void addApplication(Object tab, Object element, By container) {
 		click(ELEMENT_APPLICATION_TAB_ACTIVE);
@@ -393,9 +394,7 @@ public class ManageLayout extends AdministrationLocator{
 	
 	/**
 	 * Container permission -> Access/Move apps/Move containers
-	 * By: QuyenNT
-	 * Date: Nov 11, 2015	
-	 * @param:
+	 * @param tabName
 	 */
 	public void gotoContainerPermissionSelector(String tabName){
 		info("Go to Container Permission selector");
@@ -443,10 +442,10 @@ public class ManageLayout extends AdministrationLocator{
 	}
 	
 	/**
-	 *  Select a container -> Set permission for Move Containers 
-	 * By: QuyenNT
-	 * Date: Nov 17, 2015	
-	 * @param:
+	 * Select a container -> Set permission for Move Containers 
+	 * @param groupPath
+	 * @param membership
+	 * @param addedGroup
 	 */
 	public void setMoveContainersPermission(String groupPath, String membership, String addedGroup){
 		
@@ -474,9 +473,6 @@ public class ManageLayout extends AdministrationLocator{
 	
 	/**
 	 * Select a container -> Set move container permission to No-one
-	 * By: QuyenNT
-	 * Date: Nov 19, 2015	
-	 * @param:
 	 */
 	public void uncheckMoveContainerPublicMode(){
 			WebElement permissionTable = waitForAndGetElement(ELEMENT_PERMISSION_TABLE
@@ -497,9 +493,6 @@ public class ManageLayout extends AdministrationLocator{
 	
 	/**
 	 * Check Everyone checkbox of Move Container
-	 * By: QuyenNT
-	 * Date: Nov 20, 2015	
-	 * @param:
 	 */
 	public void checkMoveContainerPublicMode(){
 		//Check permission table
@@ -514,10 +507,7 @@ public class ManageLayout extends AdministrationLocator{
 	}	
 
 	/**
-	 *  * Select a container -> Set move apps permission to No-one
-	 * By: QuyenNT
-	 * Date: Nov 19, 2015	
-	 * @param:
+	 * Select a container -> Set move apps permission to No-one
 	 */
 	public void uncheckMoveAppsPublicMode(){
 		WebElement permissionTable = waitForAndGetElement(ELEMENT_PERMISSION_TABLE
