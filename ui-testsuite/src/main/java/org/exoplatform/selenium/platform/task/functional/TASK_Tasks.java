@@ -66,12 +66,16 @@ import org.testng.annotations.*;
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 	* BUG
 >>>>>>> FQA-2696:[Task Management]- Write scripts for Labels - Edit a label
 =======
 	* BUG
 >>>>>>> FQA-2697:[Task Management]- Write scripts for Labels - Delete label
+=======
+	* BUG
+>>>>>>> FQA-2692:[Task Management]- Write scripts for RC1: Projects - Create a project
 =======
 	* BUG
 >>>>>>> FQA-2692:[Task Management]- Write scripts for RC1: Projects - Create a project

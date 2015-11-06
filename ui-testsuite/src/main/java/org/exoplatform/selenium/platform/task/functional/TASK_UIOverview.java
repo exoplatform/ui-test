@@ -315,7 +315,6 @@ import org.testng.annotations.*;
 		mgProject.checkExpandCollapse(ELEMENT_LEFT_PANE_LABELS_ARROW_MENU_DOWN,ELEMENT_LEFT_PANE_LABELS_ARROW_MENU_RIGHT);
 		mgProject.checkExpandCollapse(ELEMENT_LEFT_PANE_PROJECTS_ARROW_MENU_DOWN,ELEMENT_LEFT_PANE_PROJECTS_ARROW_MENU_RIGHT);
 		mgProject.checkExpandCollapse(ELEMENT_LEFT_PANE_TASKS_ARROW_MENU_DOWN,ELEMENT_LEFT_PANE_TASKS_ARROW_MENU_RIGHT);
-		
 		info("delete data");
 		mgLabel.deleteLabel(lbl1);
 		mgProject.deleteProject(prj1, true, prj11);

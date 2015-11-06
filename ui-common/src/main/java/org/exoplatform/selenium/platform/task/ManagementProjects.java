@@ -1218,6 +1218,7 @@ public class ManagementProjects extends TaskManagementLocatorObject {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * Show left menu
 	 */
 	public void showLeftMenu(){
@@ -1249,6 +1250,9 @@ public class ManagementProjects extends TaskManagementLocatorObject {
 =======
 	 * check permission open project
 >>>>>>> FQA-2697:[Task Management]- Write scripts for Labels - Delete label
+=======
+	 * check permission open project
+>>>>>>> FQA-2692:[Task Management]- Write scripts for RC1: Projects - Create a project
 =======
 	 * check permission open project
 >>>>>>> FQA-2692:[Task Management]- Write scripts for RC1: Projects - Create a project
