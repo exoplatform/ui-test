@@ -376,6 +376,7 @@ import org.testng.annotations.*;
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 	*<li> Pre-Condition: exo-tasks add-on is installed -projectA has calendar integration-task A is created with work plan in projectA</li>
 	*<li> Post-Condition: </li>
 	*https://jira.exoplatform.org/browse/TA-251
@@ -400,6 +401,13 @@ import org.testng.annotations.*;
 	*<li> Post-Condition: </li>
 	*https://jira.exoplatform.org/browse/TA-334
 >>>>>>> FQA-2697:[Task Management]- Write scripts for Labels - Delete label
+=======
+	*<li> Pre-Condition: exo-tasks add-on is installed
+    *<li>      projectA has calendar integration
+    *<li>      task A is created with work plan in projectA</li>
+	*<li> Post-Condition: </li>
+	*https://jira.exoplatform.org/browse/TA-334
+>>>>>>> FQA-2692:[Task Management]- Write scripts for RC1: Projects - Create a project
 =======
 	*<li> Pre-Condition: exo-tasks add-on is installed
     *<li>      projectA has calendar integration

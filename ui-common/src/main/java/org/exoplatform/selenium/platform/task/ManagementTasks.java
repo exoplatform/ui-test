@@ -1709,6 +1709,12 @@ public class ManagementTasks extends TaskManagementLocatorObject {
 		waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_TITLE_TEXT.replace("$task", task));
 	}
 	/**
+=======
+		Utils.pause(1000);
+		waitForAndGetElement(ELEMENT_BOARD_TASK_TITLE.replace("$num", String.valueOf(col)).replace("$task", task));
+	}
+	/**
+>>>>>>> FQA-2692:[Task Management]- Write scripts for RC1: Projects - Create a project
 	 * Check number task on badge
 	 * @param num
 	 */

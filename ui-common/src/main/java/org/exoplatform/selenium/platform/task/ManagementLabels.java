@@ -67,6 +67,7 @@ public class ManagementLabels extends TaskManagementLocatorObject {
 		default:
 			info("No option in the list. Please select correct option.");
 			break;
+		
 		}
 		Utils.pause(1000);
 	}
