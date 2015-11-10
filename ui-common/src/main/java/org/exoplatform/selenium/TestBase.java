@@ -57,6 +57,7 @@ public class TestBase {
 	public WebDriver newDriver;
 
 	public static String baseUrl;
+	public static String platformUrl;
 	public static String browser;
 	public static String server;
 	protected String nativeEvent;
@@ -122,6 +123,7 @@ public class TestBase {
 	public final String DEFAULT_BROWSER="firefox";//iexplorer, firefox, chrome
 	public final String DEFAULT_SERVER="ubuntu"; //win, ubuntu
 	public final String DEFAULT_BASEURL="http://localhost:8080/portal";
+
 	//public final String DEFAULT_BASEURL="http://192.168.3.28:8080/portal";
 
 	/**
@@ -132,10 +134,12 @@ public class TestBase {
 		browser = System.getProperty("browser");
 		server = System.getProperty("server");
 		baseUrl = System.getProperty("baseUrl");
+		platformUrl = System.getProperty("platformUrl");
 
 		if (nativeEvent==null) nativeEvent = DEFAULT_NATIVE_EVENT;
 		if (browser==null) browser = DEFAULT_BROWSER;
 		if (baseUrl==null) baseUrl = DEFAULT_BASEURL;
+		if (platformUrl==null) platformUrl = DEFAULT_BASEURL;
 		if (server==null) server = DEFAULT_SERVER;
 	}
 
@@ -284,7 +288,7 @@ public class TestBase {
 		}
 		action = new Actions(driver);
 		driver.manage().window().maximize();
-		driver.get(baseUrl);
+		driver.get(platformUrl);
 	}
 
 	/**
