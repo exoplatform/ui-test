@@ -103,7 +103,7 @@ public class ECMS_SE_Friendly extends PlatformBase {
 	//				/* Step 2: Add new page with CLV portlet*/
 	//				//Go to Edit --> Add Page
 	//				//Add new page with folder path to "documents" folder at step 1
-	//				driver.get(DEFAULT_BASEURL);
+	//				driver.get(DEFAULT_PLF_URL);
 	//				pEditor.addCLVPageAndCLVpath(pCLVName, pCLVPath, folder);
 	//				//Page is added successfully
 	//				//Content created at step 1 is shown on content list viewer
@@ -167,7 +167,7 @@ public class ECMS_SE_Friendly extends PlatformBase {
 	//				/* Step 2: Add new page with CLV portlet*/
 	//				//Go to Edit --> Add Page
 	//				//Add new page with folder path to "documents" folder at step 1
-	//				driver.get(DEFAULT_BASEURL);
+	//				driver.get(DEFAULT_PLF_URL);
 	//				pEditor.addCLVPageAndCLVpath(pCLVName, pCLVPath, folder);
 	//				//Page is added successfully
 	//				//Content created at step 1 is shown on content list viewer
@@ -229,7 +229,7 @@ public class ECMS_SE_Friendly extends PlatformBase {
 	//				/* Step 2: Add new page with CLV portlet*/
 	//				//Go to Edit --> Add Page
 	//				//Add new page with folder path to "documents" folder at step 1
-	//				driver.get(DEFAULT_BASEURL);
+	//				driver.get(DEFAULT_PLF_URL);
 	//				pEditor.addCLVPageAndCLVpath(pCLVName, pCLVPath, folder);
 	//				//Page is added successfully
 	//				//Content created at step 1 is shown on content list viewer

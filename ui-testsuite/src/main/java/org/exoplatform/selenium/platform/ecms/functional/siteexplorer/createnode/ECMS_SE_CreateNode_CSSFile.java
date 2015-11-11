@@ -89,7 +89,7 @@ public class ECMS_SE_CreateNode_CSSFile extends Activity{
 		cTemplate.createNewCssFile(FILE_TITLE, "1", data, true);
 
 		//Switch to ACME Site
-		driver.get(DEFAULT_BASEURL + "/intranet");
+		driver.get(DEFAULT_PLF_URL + "/intranet");
 		driver.navigate().refresh();
 		Utils.pause(3000);
 
@@ -141,7 +141,7 @@ public class ECMS_SE_CreateNode_CSSFile extends Activity{
 		cTemplate.createNewCssFile(FILE_TITLE_BLUE, "11", data0, true);
 
 		//Switch to ACME Site
-		driver.get(DEFAULT_BASEURL + "/intranet");
+		driver.get(DEFAULT_PLF_URL + "/intranet");
 		driver.navigate().refresh();
 		Utils.pause(3000);
 
@@ -196,7 +196,7 @@ public class ECMS_SE_CreateNode_CSSFile extends Activity{
 		cTemplate.createNewCssFile(FILE_TITLE_GREEN, "11", data0, true);
 
 		//Switch to ACME Site
-		driver.get(DEFAULT_BASEURL + "/intranet");
+		driver.get(DEFAULT_PLF_URL + "/intranet");
 		driver.navigate().refresh();
 		Utils.pause(3000);
 
@@ -246,7 +246,7 @@ public class ECMS_SE_CreateNode_CSSFile extends Activity{
 		assert iValue.equals("rgba(255, 0, 0, 1)"): "Error: could set the text color to red...";
 
 		//Switch to ACME Site
-		driver.get(DEFAULT_BASEURL + "/acme");
+		driver.get(DEFAULT_PLF_URL + "/acme");
 		driver.navigate().refresh();
 		Utils.pause(3000);
 

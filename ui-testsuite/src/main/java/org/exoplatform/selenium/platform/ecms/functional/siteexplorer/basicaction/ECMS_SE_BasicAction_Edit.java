@@ -95,7 +95,7 @@ public class ECMS_SE_BasicAction_Edit extends PlatformBase {
 		String data_0 = Utils.getFileContent(filePath0);
 
 		//Switch to ACME Site
-		driver.get(DEFAULT_BASEURL + "/acme");
+		driver.get(DEFAULT_PLF_URL + "/acme");
 
 		info("Edit a css file");
 		//choose  site management drive, and create a css file 	

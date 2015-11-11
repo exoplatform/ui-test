@@ -204,7 +204,7 @@ public class ECMS_SE_CreateNode_JSFile extends PlatformBase{
 		assert message.equals("Hello!"): "Failed to create JS file...";
 		magAlt.acceptAlert();
 		
-		driver.get(DEFAULT_BASEURL + "/acme");
+		driver.get(DEFAULT_PLF_URL + "/acme");
 		Utils.pause(3000);
 		String acmeMessage = magAlt.getTextFromAlert();
 		assert acmeMessage.equals("Hello!"): "Failed to create JS file...";

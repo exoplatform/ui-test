@@ -248,7 +248,7 @@ import org.testng.annotations.*;
 		waitForAndGetElement(ELEMENT_GOOGLE_PAGE_LOGO);
 		
 		info("Reset data");
-		driver.get(DEFAULT_BASEURL+"/intranet");
+		driver.get(DEFAULT_PLF_URL +"/intranet");
 		navToolBar.goToSiteExplorer();
 		cMenu.deleteDocument(By.linkText(name));
  	}

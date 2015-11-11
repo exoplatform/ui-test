@@ -61,7 +61,7 @@ public class Gatein_Authentication extends PlatformBase {
 		FirefoxProfile firefoxProfile = new ProfilesIni().getProfile("default"); 
 		FirefoxDriver driver = new FirefoxDriver(firefoxProfile); 
 		
-		driver.get(DEFAULT_BASEURL);
+		driver.get(DEFAULT_PLF_URL);
 		magAc = new ManageAccount(driver);
 
 		magAc.signIn(DATA_USER1, DATA_PASS);
@@ -73,7 +73,7 @@ public class Gatein_Authentication extends PlatformBase {
 		//driver.close();
 
 		FirefoxDriver driver1 = new FirefoxDriver(firefoxProfile1); 
-		driver1.get(DEFAULT_BASEURL);
+		driver1.get(DEFAULT_PLF_URL);
 		//driver.get(baseUrl);		
 	}
 	

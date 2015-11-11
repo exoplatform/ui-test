@@ -97,7 +97,7 @@ public class PLF_UnifiedSearch_SearchResults extends Template {
 		//Step 2: Go to homepage / In browser location bar, type : /portal/intranet/search after the host:port (ex: http://localhost:8080/portal/intranet/search)
 		click(ELEMENT_HOME_PAGE);
 		Utils.pause(1000);
-		driver.get(DEFAULT_BASEURL+"/intranet/search");
+		driver.get(DEFAULT_PLF_URL +"/intranet/search");
 		info("go to the URL /intranet/search");
 
 		//check result

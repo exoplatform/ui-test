@@ -33,28 +33,38 @@ import org.exoplatform.selenium.platform.ecms.wcm.SEO;
  */
 public class ECMS_WCM_Others extends PlatformBase{
 	//Platform
-	Button button;
-	ManageAccount magAcc;
+	Button            button;
+
+	ManageAccount     magAcc;
+
 	NavigationToolbar navToolBar;
-	ActionBar actBar;
-	PageManagement pages;
+
+	ActionBar         actBar;
+
+	PageManagement    pages;
 
 	//Ecms
-	EcmsBase ecms;
+	EcmsBase        ecms;
+
 	ContentTemplate cTemplate;
-	ContextMenu cMenu;
-	SitesExplorer siteExp;
-	PageEditor pEditor;
-	SEO seo;
-	String acmeURL = DEFAULT_BASEURL + "/acme/"; 
+
+	ContextMenu     cMenu;
+
+	SitesExplorer   siteExp;
+
+	PageEditor      pEditor;
+
+	SEO             seo;
+
+	String acmeURL = DEFAULT_PLF_URL + "/acme/";
 
 	/**
 	 * CaseID 65874 Show draft/public content from page
 	 * Step 1: Show draft/public content from page
-	 * 
+	 *
 	 */
 	@Test
-	public void test01_ShowDraftPublicContentFromPage(){
+	public void test01_ShowDraftPublicContentFromPage() {
 		String node1 = "ShowDraftPublicContentFromPage65874";
 		String page = "page65874";
 		By bNode = By.xpath(siteExp.ELEMENT_SE_NODE.replace("{$node}", node1));
@@ -65,19 +75,19 @@ public class ECMS_WCM_Others extends PlatformBase{
 		//Create node
 		actBar.goToAddNewContent();
 		cTemplate.createNewFile(node1, node1, node1, node1);
-			
+
 		//Go to overview page, add a SCV page
 		click(ecms.ELEMENT_OVERVIEW_LINK);
 		Utils.pause(3000);
-		pEditor.addSCVPageAndContentFolderPaths(page, contentPath,true);
-				
+		pEditor.addSCVPageAndContentFolderPaths(page, contentPath, true);
+
 		//Switch to Edit mode
 		ecms.enableEditMode(true);
 		Utils.pause(3000);
 		mouseOver(ecms.ELEMENT_ACME_TITLE.replace("${content}", node1), true);
 		Utils.pause(3000);
 		waitForAndGetElement(ecms.ELEMENT_DRAFT_ACME.replace("${content}", node1));
-		
+
 		//Publish node1
 		navToolBar.goToSiteExplorer();
 		Utils.pause(3000);
@@ -85,9 +95,9 @@ public class ECMS_WCM_Others extends PlatformBase{
 		Utils.pause(3000);
 		actBar.publishDocument();
 		Utils.pause(3000);
-		
+
 		//Verify this content is published
-		driver.get(acmeURL +"overview/" +page);
+		driver.get(acmeURL + "overview/" + page);
 		Utils.pause(3000);
 		mouseOver(ecms.ELEMENT_ACME_TITLE.replace("${content}", node1), true);
 		Utils.pause(3000);

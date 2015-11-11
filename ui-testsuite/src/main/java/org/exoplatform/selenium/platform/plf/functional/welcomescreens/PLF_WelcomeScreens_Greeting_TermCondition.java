@@ -14,7 +14,7 @@ public class PLF_WelcomeScreens_Greeting_TermCondition extends PlatformBase{
 	public void beforeMethods() {
 		info("Open browser and get base url");
 		initSeleniumTestWithOutTermAndCondition();
-		driver.get(DEFAULT_BASEURL);
+		driver.get(DEFAULT_PLF_URL);
 	}
 
 	@AfterMethod(groups="terms")
@@ -48,7 +48,7 @@ public class PLF_WelcomeScreens_Greeting_TermCondition extends PlatformBase{
 		String SPECIFIC_URL = baseUrl+"/intranet";
 
 		info("Open Base URL");
-		driver.get(DEFAULT_BASEURL);
+		driver.get(DEFAULT_PLF_URL);
 		waitForAndGetElement(By.xpath(ELEMENT_TERM_CONDITION_BOX));
 
 		info("Get new url");

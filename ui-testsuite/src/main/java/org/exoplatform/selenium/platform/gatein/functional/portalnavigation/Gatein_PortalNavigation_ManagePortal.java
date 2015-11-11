@@ -63,7 +63,7 @@ public class Gatein_PortalNavigation_ManagePortal extends PortalManagement{
 		waitForAndGetElement(ELEMENT_PORTAL_EDIT_CONFIGURATION.replace("${siteName}", portalName));
 
 		info("Switch to new portal");
-		driver.get(DEFAULT_BASEURL+"/" + portalName);
+		driver.get(DEFAULT_PLF_URL +"/" + portalName);
 		waitForAndGetElement(ELEMENT_PORTAL_NAME_SITE_ACCESS.replace("${portalName}", portalName));
 
 		info("Delete portal");
@@ -138,7 +138,7 @@ public class Gatein_PortalNavigation_ManagePortal extends PortalManagement{
 		waitForAndGetElement(ELEMENT_PORTAL_EDIT_CONFIGURATION.replace("${siteName}", portalName));
 
 		info("Switch to new portal");
-		driver.get(DEFAULT_BASEURL+"/" + portalName);
+		driver.get(DEFAULT_PLF_URL +"/" + portalName);
 		waitForAndGetElement(ELEMENT_PORTAL_NAME_SITE_ACCESS.replace("${portalName}", portalName));
 
 		info("Delete portal");

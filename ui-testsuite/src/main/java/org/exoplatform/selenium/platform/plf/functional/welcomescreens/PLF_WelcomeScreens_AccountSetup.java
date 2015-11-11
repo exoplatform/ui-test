@@ -20,7 +20,7 @@ public class PLF_WelcomeScreens_AccountSetup extends PlatformBase{
 	public void beforeMethod(){
 		info("Get Browser");
 		initSeleniumTestWithOutTermAndCondition(driver);
-		driver.get(DEFAULT_BASEURL);
+		driver.get(DEFAULT_PLF_URL);
 		acc = new ManageAccount(driver, this.plfVersion);
 	}
 	@AfterMethod

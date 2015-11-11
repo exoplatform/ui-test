@@ -52,7 +52,7 @@ public class NavigationToolbar extends PlatformBase {
 	 */
 	public void goToPortalBranding() {
 		info("--Go to Portal Branding Management--");
-		if (baseUrl==null) baseUrl = DEFAULT_BASEURL;
+		if (baseUrl==null) baseUrl = DEFAULT_PLF_URL;
 		info("Base url is " + baseUrl);
 		String url = baseUrl + "/g/:platform:administrators/branding";
 		for(int repeat=0;; repeat ++){
@@ -83,7 +83,7 @@ public class NavigationToolbar extends PlatformBase {
 	 */
 	public void goToPortalSites() {
 		info("--Go to Portal Site Management--");
-		if (baseUrl==null) baseUrl = DEFAULT_BASEURL;
+		if (baseUrl==null) baseUrl = DEFAULT_PLF_URL;
 		info("Base url is " + baseUrl);
 		String url = baseUrl + "/g/:platform:administrators/portalnavigation";
 		for(int repeat=0;; repeat ++){
@@ -112,7 +112,7 @@ public class NavigationToolbar extends PlatformBase {
 	 */
 	public void goToManagePages() {
 		info("--Go to Page Management--");
-		if (baseUrl==null) baseUrl = DEFAULT_BASEURL;
+		if (baseUrl==null) baseUrl = DEFAULT_PLF_URL;
 		info("Base url is " + baseUrl);
 		String url = baseUrl + "/g/:platform:administrators/administration/pageManagement";
 		for(int repeat=0;; repeat ++){
@@ -165,7 +165,7 @@ public class NavigationToolbar extends PlatformBase {
 	 */
 	public void goToNewStaff() {
 		info("Go to New Staff");
-		if (baseUrl==null) baseUrl = DEFAULT_BASEURL;
+		if (baseUrl==null) baseUrl = DEFAULT_PLF_URL;
 		info("Base url is " + baseUrl);
 		String url = baseUrl + "/g/:platform:administrators/administration/newStaff";
 		for(int repeat=0;; repeat ++){
@@ -207,7 +207,7 @@ public class NavigationToolbar extends PlatformBase {
 	 */
 	public void goToGroupSites(){
 		info("--Go to Group Site Management--");
-		if (baseUrl==null) baseUrl = DEFAULT_BASEURL;
+		if (baseUrl==null) baseUrl = DEFAULT_PLF_URL;
 		info("Base url is " + baseUrl);
 		String url = baseUrl + "/g/:platform:administrators/groupnavigation";
 		//driver.get(url);
@@ -236,7 +236,7 @@ public class NavigationToolbar extends PlatformBase {
 	 * Go to Portal/Sites
 	 */
 	public void goToSites(){
-		if (baseUrl==null) baseUrl = DEFAULT_BASEURL;
+		if (baseUrl==null) baseUrl = DEFAULT_PLF_URL;
 		info("Base url is " + baseUrl);
 		info("--Go to Sites --");
 		String url = baseUrl + "/g/:platform:administrators/portalnavigation";
@@ -283,7 +283,7 @@ public class NavigationToolbar extends PlatformBase {
 	 */
 	public void goToApplicationRegistry() {
 		info("--Go to Portal Application Registry--");
-		if (baseUrl==null) baseUrl = DEFAULT_BASEURL;
+		if (baseUrl==null) baseUrl = DEFAULT_PLF_URL;
 		info("Base url is " + baseUrl);
 		String url = baseUrl + "/g/:platform:administrators/administration/registry";
 		//driver.get(url);
@@ -367,7 +367,7 @@ public class NavigationToolbar extends PlatformBase {
 	 */
 	public void goToContentAdministration()
 	{
-		if (baseUrl==null) baseUrl = DEFAULT_BASEURL;
+		if (baseUrl==null) baseUrl = DEFAULT_PLF_URL;
 		info("Base url is " + baseUrl);
 		String url = baseUrl + "/g/:platform:web-contributors/wcmAdmin";
 		info("base url of content admin is " + baseUrl);
@@ -393,7 +393,7 @@ public class NavigationToolbar extends PlatformBase {
 	 * Go to site explorer
 	 */
 	public void goToSiteExplorer(){
-		if (baseUrl==null) baseUrl = DEFAULT_BASEURL;
+		if (baseUrl==null) baseUrl = DEFAULT_PLF_URL;
 		info("Base url is " + baseUrl);
 		String url = baseUrl + "/g/:platform:web-contributors/siteExplorer";
 		for(int repeat=0;; repeat ++){
@@ -417,7 +417,7 @@ public class NavigationToolbar extends PlatformBase {
 	 */
 	public void goToSearch()
 	{
-		if (baseUrl==null) baseUrl = DEFAULT_BASEURL;
+		if (baseUrl==null) baseUrl = DEFAULT_PLF_URL;
 		info("Base url is " + baseUrl);
 		String url = baseUrl + "/g/:platform:administrators/search";
 		for(int repeat=0;; repeat ++){

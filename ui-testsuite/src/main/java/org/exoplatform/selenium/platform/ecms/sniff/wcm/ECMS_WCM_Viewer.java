@@ -27,19 +27,29 @@ import org.testng.annotations.Test;
  */
 public class ECMS_WCM_Viewer extends PlatformBase{
 
-	Button button;
-	PageEditor pEditor;
-	PageManagement pMag;
-	NavigationToolbar navToolBar;
-	UserGroupManagement userGroup;
-	ManageAccount magAcc;
-	EcmsBase ecms;
-	ActionBar actBar;
-	ContentTemplate cTemplate;
-	ContextMenu cMenu;
+	Button                button;
+
+	PageEditor            pEditor;
+
+	PageManagement        pMag;
+
+	NavigationToolbar     navToolBar;
+
+	UserGroupManagement   userGroup;
+
+	ManageAccount         magAcc;
+
+	EcmsBase              ecms;
+
+	ActionBar             actBar;
+
+	ContentTemplate       cTemplate;
+
+	ContextMenu           cMenu;
+
 	ContentListPreference cList;
 
-	String acmeURL = DEFAULT_BASEURL + "/acme";
+	String acmeURL = DEFAULT_PLF_URL + "/acme";
 
 	@BeforeMethod
 	public void beforeMethod() {
@@ -69,6 +79,7 @@ public class ECMS_WCM_Viewer extends PlatformBase{
 	}
 
 	/*===== Single Content Viewer =====*/
+
 	/**
 	 * Qmetry ID: 65833
 	 * Create Single Content Viewer page 

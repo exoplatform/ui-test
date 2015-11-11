@@ -630,7 +630,7 @@ public class EcmsBase extends ManageAccount {
 		if (waitForAndGetElement(ELEMENT_OVERVIEW_PAGE, 3000, 0) != null){
 			click(ELEMENT_OVERVIEW_PAGE);
 		}else {
-			driver.get(DEFAULT_BASEURL + "/acme/overview");
+			driver.get(DEFAULT_PLF_URL + "/acme/overview");
 		}
 		Utils.pause(1000);
 	}

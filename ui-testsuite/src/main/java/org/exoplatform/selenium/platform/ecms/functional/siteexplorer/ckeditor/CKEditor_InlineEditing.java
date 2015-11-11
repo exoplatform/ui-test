@@ -115,7 +115,7 @@ import org.testng.annotations.*;
 		info("Test 2: Save inline editing by clicking Accept icon");
 		
 		String title ="Ice";
-		driver.get(DEFAULT_BASEURL+"/acme");
+		driver.get(DEFAULT_PLF_URL +"/acme");
 		
 		navToolBar.changeEditModeEnable();
 		acme.editContentByTitle(title);
@@ -173,7 +173,7 @@ import org.testng.annotations.*;
 		info("Test 3: Save inline editing by clicking outside of content");
 		
 		String title ="Ice";
-		driver.get(DEFAULT_BASEURL+"/acme");
+		driver.get(DEFAULT_PLF_URL +"/acme");
 		
 		navToolBar.changeEditModeEnable();
 		acme.editContentByTitle(title);
