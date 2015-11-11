@@ -1,6 +1,7 @@
 package org.exoplatform.selenium;
 
 import static org.exoplatform.selenium.TestLogger.debug;
+import static org.exoplatform.selenium.TestLogger.error;
 import static org.exoplatform.selenium.TestLogger.info;
 
 import java.awt.AWTException;
@@ -15,6 +16,7 @@ import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -45,28 +47,34 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
-import org.exoplatform.selenium.Utils;
-
-import com.thoughtworks.selenium.webdriven.commands.Click;
 
 public class TestBase {
 
 	public WebDriver driver;
+
 	public WebDriver newDriver;
 
-	public static String baseUrl;
-	public static String platformUrl;
+	public static String hubURL;
+
+	public static String plfURL;
+
 	public static String browser;
-	public static String server;
+
+	public static String platform;
+
 	protected String nativeEvent;
 
 	protected int DEFAULT_TIMEOUT = 40000; //milliseconds = 30 seconds
-	protected int WAIT_INTERVAL = 50; //milliseconds  
 
-	public int loopCount = 0;	
-	public boolean ieFlag;	 
+	protected int WAIT_INTERVAL = 50; //milliseconds
+
+	public int loopCount = 0;
+
+	public boolean ieFlag;
+
 	public boolean chromeFlag;
 
 	/**
@@ -76,78 +84,118 @@ public class TestBase {
 	 * ect...
 	 */
 	protected String plfVersion = "";
+
 	public final int ACTION_REPEAT = 5;
+
 	public static boolean firstTimeLogin = false;
+
 	public Actions action;
 
 	/*======= Welcome Screen (Term and Conditions) =====*/
 	public final By ELEMENT_FIRSTNAME_ACCOUNT = By.name("firstNameAccount");
+
 	public final By ELEMENT_LASTNAME_ACCOUNT = By.name("lastNameAccount");
+
 	public final By ELEMENT_EMAIL_ACCOUNT = By.name("emailAccount");
+
 	public final By ELEMENT_CONFIRM_PASS_ACCOUNT = By.name("confirmUserPasswordAccount");
+
 	public final By ELEMENT_ROOT_PASS_ACCOUNT = By.name("adminPassword");
+
 	public final By ELEMENT_ROOT_CONFIRM_PASS_ACCOUNT = By.name("confirmAdminPassword");
+
 	public final By ELEMENT_AGREEMENT_CHECKBOX = By.xpath("//*[@id = 'agreement']");
-	public final By ELEMENT_INPUT_USERNAME = By.name("username"); 
+
+	public final By ELEMENT_INPUT_USERNAME = By.name("username");
+
 	public final By ELEMENT_CONTINUE_BUTTON = By.xpath("//button[text()='Continue' and @class='btn active']");
+
 	public final By ELEMENT_START_BUTTON = By.xpath("//button[text()='Start']");
+
 	public final By ELEMENT_SUBMIT_BUTTON = By.xpath("//*[text()='Submit']");
 
 	public final By ELEMENT_INPUT_PASSWORD = By.name("password");
+
 	public final By ELEMENT_ACCOUNT_NAME_LINK = By.xpath("//*[@id='UIUserPlatformToolBarPortlet']/a");
+
 	public final By ELEMENT_PLF_INFORMATION = By.id("platformInfoDiv");
 
 	public final String ELEMENT_TERM_CONDITION_BOX = "//div[@class='header' and text()='Terms and Conditions Agreement']/..";
+
 	public final By ELEMENT_CONTINUE_BUTTON_DISABLE = By.xpath("//button[text()='Continue' and @class='btn inactive']");
+
 	public final By ELEMENT_TERM_CONDITION_CONTENT = By.xpath("//div[@id='AccountSetup' and @class='content']");
 
 	public final By ELEMENT_ACCOUNT_SETUP = By.xpath("//div[@class='header' and text()='Account Setup']");
+
 	public final By ELEMENT_USER_ADMIN = By.id("adminFirstName");
+
 	public final By ELEMENT_SKIP_BUTTON = By.xpath("//button[text()='Skip']");
+
 	public final By ELEMENT_YOUR_ACCOUNT_LABEL = By.xpath("//h5[contains(text(), 'Create your account')]");
+
 	public final By ELEMENT_ADMIN_PASS_LABEL = By.xpath("//h5[contains(text(), 'Admin Password')]");
+
 	public final By ELEMENT_ACCOUNT_ERROR2 = By.xpath("//div[2][@class='createAccountError']/*[@class='accountSetupError']");
+
 	public final By ELEMENT_ACCOUNT_ERROR1 = By.xpath("//div[1][@class='createAccountError']/*[@class='accountSetupError']");
 
 	public final By ELEMENT_GOOGLE_PAGE_LOGO = By.id("hplogo");
+
 	public final By ELEMENT_SIGN_OUT_LINK = By.className("uiIconPLFLogout");
+
 	//Driver path
-	public String uploadfile= Utils.getAbsoluteFilePath("TestData\\attachFile.exe");
-	public String downloadfile=Utils.getAbsoluteFilePath("TestData\\downloadIE9.exe");
-	public String ieDriver=Utils.getAbsoluteFilePath("TestData\\IEDriverServer.exe");
-	public String chromeDriver= Utils.getAbsoluteFilePath("TestData\\chromedriver.exe");
-	public String chromeDriverUbuntu= Utils.getAbsoluteFilePath("TestData\\chromedriver");
+	public String uploadfile = Utils.getAbsoluteFilePath("TestData\\attachFile.exe");
+
+	public String downloadfile = Utils.getAbsoluteFilePath("TestData\\downloadIE9.exe");
+
+	public String ieDriver = Utils.getAbsoluteFilePath("TestData\\IEDriverServer.exe");
+
+	public String chromeDriver = Utils.getAbsoluteFilePath("TestData\\chromedriver.exe");
+
+	public String chromeDriverUbuntu = Utils.getAbsoluteFilePath("TestData\\chromedriver");
 
 	/*========Default System Property=============*/
 	public final String DEFAULT_NATIVE_EVENT = "true";
-	public final String DEFAULT_BROWSER="firefox";//iexplorer, firefox, chrome
-	public final String DEFAULT_SERVER="ubuntu"; //win, ubuntu
-	public final String DEFAULT_BASEURL="http://localhost:8080/portal";
 
-	//public final String DEFAULT_BASEURL="http://192.168.3.28:8080/portal";
+	public final String DEFAULT_BROWSER = "firefox";//iexplorer, firefox, chrome
+
+	public final String DEFAULT_PLATFORM = "LINUX"; //win, ubuntu
+
+	public final String DEFAULT_PLF_URL = "http://localhost:8080/portal";
+
+	public final String DEFAULT_HUB_URL = "http://localhost:4444/wd/hub";
+
+	//public final String DEFAULT_PLF_URL="http://192.168.3.28:8080/portal";
 
 	/**
 	 * Get System Property
 	 */
-	public void getSystemProperty(){
+	public void getSystemProperty() {
 		nativeEvent = System.getProperty("nativeEvent");
 		browser = System.getProperty("browser");
-		server = System.getProperty("server");
-		baseUrl = System.getProperty("baseUrl");
-		platformUrl = System.getProperty("platformUrl");
+		platform = System.getProperty("platform");
+		hubURL = System.getProperty("hubURL");
+		plfURL = System.getProperty("plfURL");
 
-		if (nativeEvent==null) nativeEvent = DEFAULT_NATIVE_EVENT;
-		if (browser==null) browser = DEFAULT_BROWSER;
-		if (baseUrl==null) baseUrl = DEFAULT_BASEURL;
-		if (platformUrl==null) platformUrl = DEFAULT_BASEURL;
-		if (server==null) server = DEFAULT_SERVER;
+		if (nativeEvent == null)
+			nativeEvent = DEFAULT_NATIVE_EVENT;
+		if (browser == null)
+			browser = DEFAULT_BROWSER;
+		if (hubURL == null)
+			hubURL = DEFAULT_HUB_URL;
+		if (plfURL == null)
+			plfURL = DEFAULT_PLF_URL;
+		if (platform == null)
+			platform = DEFAULT_PLATFORM;
 	}
 
-	public TestBase(){
+	public TestBase() {
 	}
 
 	Actions actions;
-	public TestBase(WebDriver dr){
+
+	public TestBase(WebDriver dr) {
 		driver = dr;
 		actions = new Actions(driver);
 	}
@@ -155,27 +203,26 @@ public class TestBase {
 	/**
 	 * Init Chrome driver
 	 */
-	public ChromeDriver initChromeDriver(){
+	public WebDriver initChromeDriver() throws Exception {
 		info("Init chrome driver");
 		getSystemProperty();
-		String pathFile="";
+		String pathFile = "";
 		String fs = File.separator;
-		String temp=System.getProperty("user.dir") + "/src/main/resources/TestData/TestOutput";;
-		pathFile=temp.replace("/", fs).replace("\\", fs);
+		String temp = System.getProperty("user.dir") + "/src/main/resources/TestData/TestOutput";
+		;
+		pathFile = temp.replace("/", fs).replace("\\", fs);
 
-		if(server.contains("ubuntu")){
-			System.setProperty("webdriver.chrome.driver",chromeDriverUbuntu) ;
-		}
-		else if(server.contains("win")){
-			System.setProperty("webdriver.chrome.driver",chromeDriver) ;
-		}
-		else{
-			System.setProperty("webdriver.chrome.driver",chromeDriverUbuntu) ;
+		if (platform.contains("ubuntu")) {
+			System.setProperty("webdriver.chrome.driver", chromeDriverUbuntu);
+		} else if (platform.contains("win")) {
+			System.setProperty("webdriver.chrome.driver", chromeDriver);
+		} else {
+			System.setProperty("webdriver.chrome.driver", chromeDriverUbuntu);
 		}
 
 		// Add the WebDriver proxy capability.
 		DesiredCapabilities capabilities = DesiredCapabilities.chrome();
-		String[] switches = {"start-maximized","remote-debugging-port=9222"};
+		String[] switches = { "start-maximized", "remote-debugging-port=9222" };
 		capabilities.setCapability("chrome.switches", switches);
 		HashMap<String, Object> chromePrefs = new HashMap<String, Object>();
 		chromePrefs.put("profile.default_content_settings.popups", 0);
@@ -185,13 +232,14 @@ public class TestBase {
 		capabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
 		capabilities.setCapability(ChromeOptions.CAPABILITY, options);
 		//capabilities.setCapability("nativeEvents", true);
-		return new ChromeDriver(capabilities);
+		//return new ChromeDriver(capabilities);
+		return new RemoteWebDriver(new URL(hubURL), capabilities);
 	}
 
 	/**
 	 * Init IE driver
 	 */
-	public WebDriver initIEDriver(){
+	public WebDriver initIEDriver() throws Exception{
 		info("Init IE driver");
 		System.setProperty("webdriver.ie.driver",ieDriver) ;
 		DesiredCapabilities  capabilitiesIE = DesiredCapabilities.internetExplorer();
@@ -209,14 +257,15 @@ public class TestBase {
 		capabilitiesIE.setCapability("enablePersistentHover", false);
 		capabilitiesIE.setCapability("ignoreZoomSetting", true);
 		capabilitiesIE.setCapability(InternetExplorerDriver.IE_ENSURE_CLEAN_SESSION, true);
-		capabilitiesIE.setCapability("initialBrowserUrl", baseUrl);
-		return new InternetExplorerDriver(capabilitiesIE);
+		capabilitiesIE.setCapability("initialBrowserUrl", plfURL);
+		//return new InternetExplorerDriver(capabilitiesIE);
+		return new RemoteWebDriver(new URL(hubURL), capabilitiesIE);
 	}
 
 	/**
 	 * Init FF driver
 	 */
-	public FirefoxDriver initFFDriver(){
+	public WebDriver initFFDriver() throws Exception{
 		String pathFile="";
 		String fs = File.separator;
 		String temp=System.getProperty("user.dir") + "/src/main/resources/TestData/TestOutput";;
@@ -245,7 +294,7 @@ public class TestBase {
 		profile.setPreference("pref.downloads.disable_button.edit_actions", true);
 		profile.setPreference("pdfjs.disabled", true); 
 		profile.setPreference("browser.helperApps.alwaysAsk.force", false);
-		return new FirefoxDriver(profile);
+		return new RemoteWebDriver(new URL(hubURL), capabilities);
 	}
 	/**
 	 * typeUsingRobot
@@ -269,17 +318,17 @@ public class TestBase {
 			robot.keyRelease(keycode);
 		}
 	}
-	public void initSeleniumTestWithOutTermAndCondition(Object... opParams){
+	public void initSeleniumTestWithOutTermAndCondition(Object... opParams) throws Exception{
 		info("init selenium test");
 		getSystemProperty();
 		if(browser.contains("chrome")){
 			driver = initChromeDriver();
 			chromeFlag = true;
 		}
-		else if(server.contains("firefox")){
+		else if(platform.contains("firefox")){
 			driver = initFFDriver();
 		}
-		else if(server.contains("iexplorer")){
+		else if(platform.contains("iexplorer")){
 			driver = initIEDriver();
 			ieFlag = true;
 		}
@@ -288,13 +337,13 @@ public class TestBase {
 		}
 		action = new Actions(driver);
 		driver.manage().window().maximize();
-		driver.get(platformUrl);
+		driver.get(plfURL);
 	}
 
 	/**
 	 * init newDriver
 	 */
-	public void initNewDriver(){
+	public void initNewDriver() throws Exception{
 		getSystemProperty();
 		if("chrome".equals(browser)){
 			newDriver = new ChromeDriver();
@@ -307,7 +356,11 @@ public class TestBase {
 		}
 	}
 	public void initSeleniumTest(Object... opParams){
-		initSeleniumTestWithOutTermAndCondition();
+		try {
+			initSeleniumTestWithOutTermAndCondition();
+		} catch (Exception e) {
+			error("Can't initialize Selenium configuration.");
+		}
 		termsAndConditions(opParams);
 		checkPLFVersion();
 	}
@@ -318,7 +371,7 @@ public class TestBase {
 	 */
 	public void termsAndConditions(Object... opParams){
 		Boolean isCreateAccount = (Boolean)(opParams.length>0 ? opParams[0]:true);
-		driver.navigate().to(baseUrl);
+		driver.navigate().to(plfURL);
 		info("Agreement page");
 		if (waitForAndGetElement(ELEMENT_AGREEMENT_CHECKBOX, 3000, 0, 2) != null) {
 			info("-- Checking the terms and conditions agreement... --");
@@ -1108,8 +1161,8 @@ public class TestBase {
 		FirefoxProfile fp = new FirefoxProfile();		
 		fp.setPreference("browser.link.open_newwindow.restriction", 2);
 		driver = new FirefoxDriver(fp);
-		baseUrl = System.getProperty("baseUrl");
-		if (baseUrl==null) baseUrl = DEFAULT_BASEURL;
+		hubURL = System.getProperty("hubURL");
+		if (hubURL==null) hubURL = DEFAULT_PLF_URL;
 		action = new Actions(driver);
 		termsAndConditions();
 		checkPLFVersion();
@@ -1197,8 +1250,8 @@ public class TestBase {
 		FirefoxProfile profile = new FirefoxProfile();
 		profile.setPreference("intl.accept_languages", locale);
 		driver = new FirefoxDriver(profile);
-		baseUrl = System.getProperty("baseUrl");
-		if (baseUrl==null) baseUrl = DEFAULT_BASEURL;
+		hubURL = System.getProperty("hubURL");
+		if (hubURL==null) hubURL = DEFAULT_PLF_URL;
 		action = new Actions(driver);
 		termsAndConditions();
 	}
@@ -1324,8 +1377,8 @@ public class TestBase {
 		FirefoxProfile profile = new FirefoxProfile();
 		profile.setPreference("intl.accept_languages",language);   
 		driver = new FirefoxDriver(profile);
-		baseUrl = System.getProperty("baseUrl");
-		if (baseUrl==null) baseUrl = DEFAULT_BASEURL;
+		hubURL = System.getProperty("hubURL");
+		if (hubURL==null) hubURL = DEFAULT_PLF_URL;
 		action = new Actions(driver);
 	}
 
