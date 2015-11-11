@@ -44,7 +44,7 @@ public class PLF_HomepageGadgets_WhoIsOnline extends Activity {
 	@BeforeMethod
 	public void setUpBeforeTest(){
 		initSeleniumTest();
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		acc = new ManageAccount(driver, this.plfVersion);
 		hg = new HomePageGadget(driver, this.plfVersion);
 		peopleC = new PeopleConnection(driver, this.plfVersion);
@@ -70,7 +70,7 @@ public class PLF_HomepageGadgets_WhoIsOnline extends Activity {
 		info("Test 01: Automatic refresh of the Gadget Who's online?");
 		//loginWithAnotherAccOnThesameBrowser(DATA_USER2, DATA_PASS);
 		newDriver = new FirefoxDriver();
-		newDriver.get(baseUrl);
+		newDriver.get(plfURL);
 		driver.manage().window().maximize();
 		ManageAccount  acc1 = new ManageAccount(newDriver);
 		//HomePageGadget hg1 =new HomePageGadget(newDriver, this.plfVersion);
@@ -130,7 +130,7 @@ public class PLF_HomepageGadgets_WhoIsOnline extends Activity {
 		WebDriver[] nDriver = new WebDriver[19];
 		for(int i = 0; i<19; i++){
 			nDriver[i] = new FirefoxDriver();
-			nDriver[i] .get(baseUrl);
+			nDriver[i] .get(plfURL);
 			driver.manage().window().maximize();
 			ManageAccount  acc1 = new ManageAccount(nDriver[i]);
 			acc1.signIn(username[i], password);

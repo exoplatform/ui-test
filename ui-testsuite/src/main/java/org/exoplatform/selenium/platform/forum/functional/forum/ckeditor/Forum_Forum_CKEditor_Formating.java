@@ -47,7 +47,7 @@ public class Forum_Forum_CKEditor_Formating extends ForumBase {
 	@BeforeTest
 	public void setBeforeTest() {
 		initSeleniumTest();
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		info("Login with " + DATA_USER1);
 		mngFru = new ForumManageForum(driver, this.plfVersion);
 		mngTopic = new ForumManageTopic(driver, this.plfVersion);
@@ -210,7 +210,7 @@ public class Forum_Forum_CKEditor_Formating extends ForumBase {
 	@Test(enabled = true)
 	public void test03_PasteOptionOnly() {
 		// back to intranet
-		driver.get(baseUrl);
+		driver.get(plfURL);
 
 		// go to acme page
 		info("Go to acme");
@@ -224,7 +224,7 @@ public class Forum_Forum_CKEditor_Formating extends ForumBase {
 		pressGroupKeysUsingRobot(KeyEvent.VK_CONTROL, KeyEvent.VK_C);
 
 		info("Go to the forum portlet");
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		mngFru.goToForums();
 
 		info("Create a new category, forum, topic");

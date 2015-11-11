@@ -29,7 +29,7 @@ public class PLF_UnifiedSearch_SpaceSearch extends Template {
 	@BeforeTest
 	public void setBeforeTest() {
 		initSeleniumTest();
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		info("Login with " + DATA_USER1);
 
 		magAcc = new ManageAccount(driver, this.plfVersion);

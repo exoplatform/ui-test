@@ -33,7 +33,7 @@ public class Forum_Answers_PublishActivites_Update extends AnswerBase{
 	public void setUpBeforeTest(){
 
 		initSeleniumTest();
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		acc = new ManageAccount(driver);
 		mQuest = new AnswerManageQuestion(driver);
 		mAns = new AnswerManageAnwser(driver);

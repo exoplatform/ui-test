@@ -34,7 +34,7 @@ public class Gatein_Others_SiteMap extends DashBoard {
 	@BeforeMethod
 	public void setUpBeforeTest(){
 		initSeleniumTest();
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		magAc = new ManageAccount(driver);
 		navTool = new NavigationToolbar(driver);
 		pageMag = new PageManagement(driver);

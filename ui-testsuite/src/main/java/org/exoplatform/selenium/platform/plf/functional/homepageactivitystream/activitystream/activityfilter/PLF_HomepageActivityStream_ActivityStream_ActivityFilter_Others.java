@@ -30,7 +30,7 @@ public class PLF_HomepageActivityStream_ActivityStream_ActivityFilter_Others ext
 	@BeforeMethod
 	public void beforeMethods(){	
 		initSeleniumTest();
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		acc = new ManageAccount(driver, this.plfVersion);
 		home = new HomePageActivity(driver, this.plfVersion);
 		nav = new NavigationToolbar(driver, this.plfVersion);	

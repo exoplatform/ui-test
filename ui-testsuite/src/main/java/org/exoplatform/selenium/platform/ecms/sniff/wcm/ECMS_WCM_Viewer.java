@@ -54,7 +54,7 @@ public class ECMS_WCM_Viewer extends PlatformBase{
 	@BeforeMethod
 	public void beforeMethod() {
 		initSeleniumTest();
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		button = new Button(driver, this.plfVersion);
 		userGroup = new UserGroupManagement(driver, this.plfVersion);
 		navToolBar = new NavigationToolbar(driver, this.plfVersion);

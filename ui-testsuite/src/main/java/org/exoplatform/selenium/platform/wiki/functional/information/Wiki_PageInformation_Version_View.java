@@ -28,7 +28,7 @@ public class Wiki_PageInformation_Version_View extends Version{
 	@BeforeMethod
 	public void beforeMethods(){
 		initSeleniumTest();
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		magAcc = new ManageAccount(driver);
 		button = new Button(driver);
 		magAcc.signIn(admin, pass);

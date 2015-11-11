@@ -28,7 +28,7 @@ public class Gatein_Dashboard_ManageGadget extends DashBoard{
 	@BeforeMethod
 	public void setUpBeforeTest(){
 		initSeleniumTest();
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		magAc = new ManageAccount(driver);
 		navTool = new NavigationToolbar(driver);
 		magPage = new PageManagement(driver);

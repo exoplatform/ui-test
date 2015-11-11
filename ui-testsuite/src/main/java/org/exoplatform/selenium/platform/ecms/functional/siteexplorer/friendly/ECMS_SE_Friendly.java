@@ -39,7 +39,7 @@ public class ECMS_SE_Friendly extends PlatformBase {
 	@BeforeMethod
 	public void beforeMethods() {
 		initSeleniumTest();
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		info("Login ECMS with " + DATA_USER1);
 		magAcc = new ManageAccount(driver);
 		navToolBar = new NavigationToolbar(driver);

@@ -27,7 +27,7 @@ public class PLF_HomepageGadgets_CalendarGadget_Tasks extends CalendarBase{
 	@BeforeMethod
 	public void beforeMethods(){	
 		initSeleniumTest();
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		acc = new ManageAccount(driver, this.plfVersion);
 		nav = new NavigationToolbar(driver, this.plfVersion);	
 		task = new Task(driver, this.plfVersion);

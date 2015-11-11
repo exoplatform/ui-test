@@ -33,7 +33,7 @@ public class ECMS_Admin_Template extends PlatformBase{
 	@BeforeMethod
 	public void beforeMethod(){
 		initSeleniumTest();
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		info("LogIn to Intranet with User..." + DATA_USER1);
 		alt = new ManageAlert(driver);
 		magAcc = new ManageAccount(driver);

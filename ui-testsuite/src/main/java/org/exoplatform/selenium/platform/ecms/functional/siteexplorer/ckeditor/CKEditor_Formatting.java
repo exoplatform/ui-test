@@ -54,7 +54,7 @@ public class CKEditor_Formatting extends PlatformBase {
 	public void beforeTest() throws AWTException
 	{
 		initSeleniumTest();
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		navToolBar = new NavigationToolbar(driver,this.plfVersion);
 		magAcc = new ManageAccount(driver,this.plfVersion);
 		actBar = new ActionBar(driver,this.plfVersion);
@@ -228,7 +228,7 @@ public class CKEditor_Formatting extends PlatformBase {
 		String title ="Wind";
 		String name="node_"+getRandomNumber();
 
-		driver.get(baseUrl+"/acme");
+		driver.get(plfURL+"/acme");
 		waitElementAndTryGetElement(acme.ELEMENT_CONTENT_BY_DATA_TITLE.replace("${title}",title));
 		String text_cp=waitForAndGetElement(acme.ELEMENT_CONTENT_BY_DATA_TITLE.replace("${title}",title)).getText();
 		info("Copy the text from acme site");
@@ -257,7 +257,7 @@ public class CKEditor_Formatting extends PlatformBase {
 		 *Expected Outcome: 
 			Template is chosen*/
 
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		info("-- Open Sites Explorer --");
 		navToolBar.goToSiteExplorer();
 
@@ -342,7 +342,7 @@ public class CKEditor_Formatting extends PlatformBase {
 		 *Expected Outcome: 
 			Template is chosen*/
 
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		info("-- Open Sites Explorer --");
 		navToolBar.goToSiteExplorer();
 
@@ -420,7 +420,7 @@ public class CKEditor_Formatting extends PlatformBase {
 		String title ="Wind";
 		String name="node_"+getRandomNumber();
 
-		driver.get(baseUrl+"/acme");
+		driver.get(plfURL+"/acme");
 		waitElementAndTryGetElement(acme.ELEMENT_CONTENT_BY_DATA_TITLE.replace("${title}",title));
 		String text_cp=waitForAndGetElement(acme.ELEMENT_CONTENT_BY_DATA_TITLE.replace("${title}",title)).getText();
 		info("Copy the text from acme site");
@@ -446,7 +446,7 @@ public class CKEditor_Formatting extends PlatformBase {
 		 *Expected Outcome: 
 			Template is chosen*/
 
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		info("-- Open Sites Explorer --");
 		navToolBar.goToSiteExplorer();
 

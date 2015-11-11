@@ -36,7 +36,7 @@ public class Wiki_BasicAction_Other extends Permalink {
 	@BeforeMethod
 	public void setUpBeforeTest(){
 		initSeleniumTest();
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		magAc = new ManageAccount(driver);
 		dialog = new Dialog(driver);
 		button = new Button(driver,this.plfVersion);

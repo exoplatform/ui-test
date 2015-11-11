@@ -57,7 +57,7 @@ public class ECMS_SE_BasicAction_Edit extends PlatformBase {
 	@BeforeMethod
 	public void beforeMethod() {
 		initSeleniumTest();
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		dialog = new Dialog(driver);
 		button = new Button(driver, this.plfVersion);
 		magAlert = new ManageAlert(driver);

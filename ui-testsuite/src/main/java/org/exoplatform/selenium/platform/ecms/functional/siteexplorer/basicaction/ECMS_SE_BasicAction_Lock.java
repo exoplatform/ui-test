@@ -35,7 +35,7 @@ public class ECMS_SE_BasicAction_Lock extends PlatformBase {
 	@BeforeMethod
 	public void beforeMethods() {
 		initSeleniumTest();
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		driver.manage().window().maximize();
 		button = new Button(driver,this.plfVersion);
 		magAcc = new ManageAccount(driver,this.plfVersion);
@@ -158,7 +158,7 @@ public class ECMS_SE_BasicAction_Lock extends PlatformBase {
 
 		//login with mary
 		initSeleniumTest();
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		magAcc = new ManageAccount(driver);
 		navToolBar = new NavigationToolbar(driver);
 		cMenu = new ContextMenu(driver);

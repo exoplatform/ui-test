@@ -34,7 +34,7 @@ public class Gatein_Navigation_PortalNavigation_EditLayout extends PortalManagem
 	@BeforeMethod
 	public void setUpBeforeTest(){
 		initSeleniumTest();
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		magAc = new ManageAccount(driver, this.plfVersion);
 		navTool = new NavigationToolbar(driver, this.plfVersion);
 		pageMag = new PageManagement(driver, this.plfVersion);

@@ -25,7 +25,7 @@ public class PLF_Navigation_LeftNavigation_GroupList extends GroupNavigation{
 	@BeforeMethod
 	public void beforeMethods(){	
 		initSeleniumTest();
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		acc = new ManageAccount(driver);
 		nav = new NavigationToolbar(driver);
 		mNav = new NavigationManagement(driver, this.plfVersion);

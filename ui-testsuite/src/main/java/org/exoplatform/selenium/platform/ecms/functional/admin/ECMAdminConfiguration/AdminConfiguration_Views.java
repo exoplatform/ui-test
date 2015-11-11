@@ -45,7 +45,7 @@ public class AdminConfiguration_Views extends PlatformBase{
 	@BeforeMethod
 	public void beforeMethods() {
 		initSeleniumTest();
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		info("Login ECMS with " + DATA_USER1);
 		navBar = new NavigationToolbar(driver, this.plfVersion);
 		magAcc = new ManageAccount(driver, this.plfVersion);

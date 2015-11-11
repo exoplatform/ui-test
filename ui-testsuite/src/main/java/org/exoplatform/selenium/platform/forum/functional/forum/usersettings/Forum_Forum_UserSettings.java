@@ -29,7 +29,7 @@ public class Forum_Forum_UserSettings extends ForumBase {
 	@BeforeMethod
 	public void setUpBeforeTest() {
 		initSeleniumTest();
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		fmCat = new ForumManageCategory(driver);
 		fmForum = new ForumManageForum(driver);
 		fmTopic = new ForumManageTopic(driver,this.plfVersion);
@@ -228,7 +228,7 @@ public class Forum_Forum_UserSettings extends ForumBase {
 		assert getText("//*[@id='feedContent']").contains(topic2): "Fail! The topic is not shown";
 
 		//Delete data
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		goToForums();
 		click(fmForum.ELEMENT_CATEGORY_BREAD.replace("${category}", category));
 		fmCat.deleteCategoryInForum(category);

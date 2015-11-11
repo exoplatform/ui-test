@@ -44,7 +44,7 @@ public class Gatein_PortalNavigation_Edit_EditNavigation_ManageNode extends Plat
 	@BeforeMethod
 	public void setUpBeforeTest(){
 		initSeleniumTest();
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		button = new Button(driver, this.plfVersion);
 		alert = new ManageAlert(driver, this.plfVersion);
 		magAc = new ManageAccount(driver, this.plfVersion);

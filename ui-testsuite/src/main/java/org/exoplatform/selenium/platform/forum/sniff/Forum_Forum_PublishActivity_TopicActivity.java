@@ -33,7 +33,7 @@ public class Forum_Forum_PublishActivity_TopicActivity extends ForumBase{
 	@BeforeMethod
 	public void setUpBeforeTest(){
 		initSeleniumTest();
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		magAc = new ManageAccount(driver);
 		mngFru = new ForumManageForum(driver,this.plfVersion);
 		mngCat = new ForumManageCategory(driver);

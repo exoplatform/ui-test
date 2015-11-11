@@ -46,7 +46,7 @@ public class ECMS_SE_BasicAction_CutPaste extends PlatformBase {
 	@BeforeMethod
 	public void beforeMethod() {
 		initSeleniumTest();
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		driver.manage().window().maximize();
 		button = new Button(driver, this.plfVersion);
 		alt = new ManageAlert(driver, this.plfVersion);

@@ -30,7 +30,7 @@ public class Social_Space_SpaceManagement_WikiPageAccess extends Permalink{
 	@BeforeMethod
 	public void beforeMethods() {
 		initSeleniumTest();
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		info("Login with " + DATA_USER1);
 		magAcc = new ManageAccount(driver,this.plfVersion);
 		magMember = new ManageMember(driver,this.plfVersion);

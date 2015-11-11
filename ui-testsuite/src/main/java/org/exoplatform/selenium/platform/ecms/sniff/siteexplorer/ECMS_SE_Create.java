@@ -43,7 +43,7 @@ public class ECMS_SE_Create extends PlatformBase {
 	@BeforeMethod
 	public void beforeMethods() {
 		initSeleniumTest();
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		template = new ContentTemplate(driver,this.plfVersion);
 		actBar = new ActionBar(driver);
 		magAcc = new ManageAccount(driver,this.plfVersion);

@@ -37,7 +37,7 @@ public class PLF_HomePageActivityStream_Activity_Likes extends Activity {
 	@BeforeMethod
 	public void beforeMethods() {
 		initSeleniumTest();
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		info("Login with " + DATA_USER1);
 		magAcc = new ManageAccount(driver);
 		navToolBar = new NavigationToolbar(driver);

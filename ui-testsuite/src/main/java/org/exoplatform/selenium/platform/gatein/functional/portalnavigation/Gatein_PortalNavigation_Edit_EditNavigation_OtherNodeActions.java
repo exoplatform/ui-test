@@ -53,7 +53,7 @@ public class Gatein_PortalNavigation_Edit_EditNavigation_OtherNodeActions extend
 	@BeforeMethod
 	public void setUpBeforeTest(){
 		initSeleniumTest();
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		button = new Button(driver);
 		dialog = new Dialog(driver);
 		alert = new ManageAlert(driver);

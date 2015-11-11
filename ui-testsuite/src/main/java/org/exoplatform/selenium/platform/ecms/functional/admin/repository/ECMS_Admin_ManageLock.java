@@ -52,7 +52,7 @@ public class ECMS_Admin_ManageLock extends PlatformBase{
 	@BeforeMethod
 	public void beforeMethods() {
 		initSeleniumTest();
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		info("Login ECMS with " + DATA_USER1);
 		userGroup = new UserGroupManagement(driver);
 		nav = new NavigationToolbar(driver);
@@ -594,7 +594,7 @@ public class ECMS_Admin_ManageLock extends PlatformBase{
 	/*----- Auxiliary function -----*/
 	public void initNewDriverSeleniumTest(){
 		driver = new FirefoxDriver();
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		//return driver;
 	}
 

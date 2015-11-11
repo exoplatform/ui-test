@@ -26,7 +26,7 @@ public class Gatein_Manage_UserAndGroup extends PlatformBase{
 	@BeforeMethod
 	public void setUpBeforeTest(){
 		initSeleniumTest();
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		magAc = new ManageAccount(driver, this.plfVersion);
 		navTool = new NavigationToolbar(driver, this.plfVersion);
 		user = new UserGroupManagement(driver, this.plfVersion);

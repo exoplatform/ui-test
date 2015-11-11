@@ -32,7 +32,7 @@ public class Forum_Answers_PublishActivities_Others extends AnswerBase{
 	@BeforeMethod
 	public void setUpBeforeTest(){
 		initSeleniumTest();
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		acc = new ManageAccount(driver);
 		mQuest = new AnswerManageQuestion(driver);
 		acc.signIn(DATA_USER1, DATA_PASS);

@@ -35,7 +35,7 @@ public class GateIn_BasicPortlets_Administration_ApplicationRegistry extends Das
 	@BeforeMethod
 	public void setUpBeforeTest(){
 		initSeleniumTest();
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		magAc = new ManageAccount(driver);
 		navTool = new NavigationToolbar(driver);
 		pageMag = new PageManagement(driver);

@@ -30,7 +30,7 @@ public class PLF_HomepageGadget_CalendarGadget extends CalendarBase{
 	@BeforeMethod
 	public void beforeMethods() {
 		initSeleniumTest();
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		info("Login with " + DATA_USER1);
 		naviToolbar = new NavigationToolbar(driver);
 		magAcc = new ManageAccount(driver);

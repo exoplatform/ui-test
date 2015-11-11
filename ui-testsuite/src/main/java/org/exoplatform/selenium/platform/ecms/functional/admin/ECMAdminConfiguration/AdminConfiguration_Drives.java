@@ -46,7 +46,7 @@ public class AdminConfiguration_Drives extends PlatformBase{
 	@BeforeMethod
 	public void beforeMethods() {
 		initSeleniumTest();
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		info("Login ECMS with " + DATA_USER1);
 		nav = new NavigationToolbar(driver, this.plfVersion);
 		ecmMain = new ECMainFunction(driver, this.plfVersion);

@@ -33,7 +33,7 @@ public class Gatein_Navigation_GroupNavigation_EditLayout extends GroupNavigatio
 	@BeforeMethod
 	public void setUpBeforeTest(){
 		initSeleniumTest();
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		magAc = new ManageAccount(driver, this.plfVersion);
 		navTool = new NavigationToolbar(driver, this.plfVersion);
 		pageMag = new PageManagement(driver, this.plfVersion);

@@ -44,7 +44,7 @@ public class AdminConfiguration_CLVTemplates extends PlatformBase {
 	@BeforeMethod
 	public void beforeMethods() {
 		initSeleniumTest();
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		info("Login ECMS with " + DATA_USER1);
 		nav = new NavigationToolbar(driver, this.plfVersion);
 		magAcc = new ManageAccount(driver, this.plfVersion);

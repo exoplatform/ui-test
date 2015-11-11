@@ -27,7 +27,7 @@ public class ECMS_Admin_Template_List_Edit  extends PlatformBase{
 	@BeforeMethod
 	public void beforeMethod(){
 		initSeleniumTest();
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		info("Login ECMS with " + DATA_USER1);
 		button = new Button(driver);
 		alt = new ManageAlert(driver);

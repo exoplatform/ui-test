@@ -56,7 +56,7 @@ public class ECMS_SE_BasicAction_CopyPaste extends PlatformBase {
 	@BeforeMethod
 	public void beforeMethods() {
 		initSeleniumTest();
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		driver.manage().window().maximize();
 		button = new Button(driver, this.plfVersion);
 		alt = new ManageAlert(driver, this.plfVersion);
@@ -340,7 +340,7 @@ public class ECMS_SE_BasicAction_CopyPaste extends PlatformBase {
 		//login with mary
 		info("login with mary");
 		initSeleniumTest();
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		alt = new ManageAlert(driver);
 		ecms = new EcmsBase(driver);
 		navToolBar = new NavigationToolbar(driver);

@@ -421,7 +421,7 @@ public class ForumManageCategory extends ForumBase {
 		//By Khanhnt
 		ManageAccount acc;
 		WebDriver tmpDriver = new FirefoxDriver();
-		String tmpbaseUrl = System.getProperty("hubURL");
+		String tmpbaseUrl = System.getProperty("plfURL");
 		if (tmpbaseUrl==null) tmpbaseUrl = DEFAULT_PLF_URL;
 		tmpDriver.get(tmpbaseUrl);
 

@@ -48,7 +48,7 @@ public class Forum_Forum_Poll_Activities extends ForumBase{
 	@BeforeMethod
 	public void setUpBeforeTest(){//String platform,String browser,String url,String version){
 		initSeleniumTest();//true,platform,browser,url,version);
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		acc = new ManageAccount(driver, this.plfVersion);
 		acc.signIn(DATA_USER1, DATA_PASS);
 		cat = new ForumManageCategory(driver, this.plfVersion);

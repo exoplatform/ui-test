@@ -208,7 +208,7 @@ public class ECMS_SE_Info extends PlatformBase {
 		initSeleniumTest();
 		driver.close();
 		getDriverAutoOpenWindow();
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		navToolBar = new NavigationToolbar(driver);
 		magAcc = new ManageAccount(driver);
 		magAcc.signIn(DATA_USER1, DATA_PASS);

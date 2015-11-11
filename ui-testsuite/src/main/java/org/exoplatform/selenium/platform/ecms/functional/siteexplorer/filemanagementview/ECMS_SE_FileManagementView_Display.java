@@ -39,7 +39,7 @@ public class ECMS_SE_FileManagementView_Display extends PlatformBase{
 	@BeforeMethod
 	public void setUpBeforeTest(){
 		initSeleniumTest();
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		navToolBar = new NavigationToolbar(driver,this.plfVersion);
 		magAc = new ManageAccount(driver);
 		action = new ActionBar(driver);

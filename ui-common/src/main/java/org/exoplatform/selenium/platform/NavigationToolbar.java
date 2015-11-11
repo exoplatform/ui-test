@@ -52,9 +52,9 @@ public class NavigationToolbar extends PlatformBase {
 	 */
 	public void goToPortalBranding() {
 		info("--Go to Portal Branding Management--");
-		if (baseUrl==null) baseUrl = DEFAULT_PLF_URL;
-		info("Base url is " + baseUrl);
-		String url = baseUrl + "/g/:platform:administrators/branding";
+		if (plfURL==null) plfURL = DEFAULT_PLF_URL;
+		info("Base url is " + plfURL);
+		String url = plfURL + "/g/:platform:administrators/branding";
 		for(int repeat=0;; repeat ++){
 			if (repeat > 1){
 				driver.get(url);
@@ -83,9 +83,9 @@ public class NavigationToolbar extends PlatformBase {
 	 */
 	public void goToPortalSites() {
 		info("--Go to Portal Site Management--");
-		if (baseUrl==null) baseUrl = DEFAULT_PLF_URL;
-		info("Base url is " + baseUrl);
-		String url = baseUrl + "/g/:platform:administrators/portalnavigation";
+		if (plfURL==null) plfURL = DEFAULT_PLF_URL;
+		info("Base url is " + plfURL);
+		String url = plfURL + "/g/:platform:administrators/portalnavigation";
 		for(int repeat=0;; repeat ++){
 			if (repeat > 1){
 				driver.get(url);
@@ -112,9 +112,9 @@ public class NavigationToolbar extends PlatformBase {
 	 */
 	public void goToManagePages() {
 		info("--Go to Page Management--");
-		if (baseUrl==null) baseUrl = DEFAULT_PLF_URL;
-		info("Base url is " + baseUrl);
-		String url = baseUrl + "/g/:platform:administrators/administration/pageManagement";
+		if (plfURL==null) plfURL = DEFAULT_PLF_URL;
+		info("Base url is " + plfURL);
+		String url = plfURL + "/g/:platform:administrators/administration/pageManagement";
 		for(int repeat=0;; repeat ++){
 			if (repeat > 1){
 				driver.get(url);
@@ -165,9 +165,9 @@ public class NavigationToolbar extends PlatformBase {
 	 */
 	public void goToNewStaff() {
 		info("Go to New Staff");
-		if (baseUrl==null) baseUrl = DEFAULT_PLF_URL;
-		info("Base url is " + baseUrl);
-		String url = baseUrl + "/g/:platform:administrators/administration/newStaff";
+		if (plfURL==null) plfURL = DEFAULT_PLF_URL;
+		info("Base url is " + plfURL);
+		String url = plfURL + "/g/:platform:administrators/administration/newStaff";
 		for(int repeat=0;; repeat ++){
 			if (repeat > 1){
 				driver.get(url);
@@ -207,9 +207,9 @@ public class NavigationToolbar extends PlatformBase {
 	 */
 	public void goToGroupSites(){
 		info("--Go to Group Site Management--");
-		if (baseUrl==null) baseUrl = DEFAULT_PLF_URL;
-		info("Base url is " + baseUrl);
-		String url = baseUrl + "/g/:platform:administrators/groupnavigation";
+		if (plfURL==null) plfURL = DEFAULT_PLF_URL;
+		info("Base url is " + plfURL);
+		String url = plfURL + "/g/:platform:administrators/groupnavigation";
 		//driver.get(url);
 		Utils.pause(1000);
 		for(int repeat=0;; repeat ++){
@@ -236,10 +236,10 @@ public class NavigationToolbar extends PlatformBase {
 	 * Go to Portal/Sites
 	 */
 	public void goToSites(){
-		if (baseUrl==null) baseUrl = DEFAULT_PLF_URL;
-		info("Base url is " + baseUrl);
+		if (plfURL==null) plfURL = DEFAULT_PLF_URL;
+		info("Base url is " + plfURL);
 		info("--Go to Sites --");
-		String url = baseUrl + "/g/:platform:administrators/portalnavigation";
+		String url = plfURL + "/g/:platform:administrators/portalnavigation";
 		//driver.get(url);
 		Utils.pause(1000);
 		for(int repeat=0;; repeat ++){
@@ -264,7 +264,7 @@ public class NavigationToolbar extends PlatformBase {
 	 * Go to community
 	 */
 	public void goToCommunity() {
-		String url = baseUrl + "/g/:platform:administrators/administration/management";
+		String url = plfURL + "/g/:platform:administrators/administration/management";
 		driver.get(url);
 	}
     /**
@@ -283,9 +283,9 @@ public class NavigationToolbar extends PlatformBase {
 	 */
 	public void goToApplicationRegistry() {
 		info("--Go to Portal Application Registry--");
-		if (baseUrl==null) baseUrl = DEFAULT_PLF_URL;
-		info("Base url is " + baseUrl);
-		String url = baseUrl + "/g/:platform:administrators/administration/registry";
+		if (plfURL==null) plfURL = DEFAULT_PLF_URL;
+		info("Base url is " + plfURL);
+		String url = plfURL + "/g/:platform:administrators/administration/registry";
 		//driver.get(url);
 		Utils.pause(1000);
 		for(int repeat=0;; repeat ++){
@@ -357,7 +357,7 @@ public class NavigationToolbar extends PlatformBase {
 	 * @param driverTest
 	 */
 	public void goToRegisterPageInPublicMode(WebDriver driverTest){
-		String registerPageLink = baseUrl.concat("/portal/intranet/Register");
+		String registerPageLink = plfURL.concat("/portal/intranet/Register");
 		driverTest.get(registerPageLink);
 		waitForTextPresent("Create a New Account");
 	}
@@ -367,10 +367,10 @@ public class NavigationToolbar extends PlatformBase {
 	 */
 	public void goToContentAdministration()
 	{
-		if (baseUrl==null) baseUrl = DEFAULT_PLF_URL;
-		info("Base url is " + baseUrl);
-		String url = baseUrl + "/g/:platform:web-contributors/wcmAdmin";
-		info("base url of content admin is " + baseUrl);
+		if (plfURL==null) plfURL = DEFAULT_PLF_URL;
+		info("Base url is " + plfURL);
+		String url = plfURL + "/g/:platform:web-contributors/wcmAdmin";
+		info("base url of content admin is " + plfURL);
 		for(int repeat=0;; repeat ++){
 			if (repeat > 1){
 					driver.get(url);
@@ -393,9 +393,9 @@ public class NavigationToolbar extends PlatformBase {
 	 * Go to site explorer
 	 */
 	public void goToSiteExplorer(){
-		if (baseUrl==null) baseUrl = DEFAULT_PLF_URL;
-		info("Base url is " + baseUrl);
-		String url = baseUrl + "/g/:platform:web-contributors/siteExplorer";
+		if (plfURL==null) plfURL = DEFAULT_PLF_URL;
+		info("Base url is " + plfURL);
+		String url = plfURL + "/g/:platform:web-contributors/siteExplorer";
 		for(int repeat=0;; repeat ++){
 			if (repeat > 1){
 				driver.get(url);
@@ -417,9 +417,9 @@ public class NavigationToolbar extends PlatformBase {
 	 */
 	public void goToSearch()
 	{
-		if (baseUrl==null) baseUrl = DEFAULT_PLF_URL;
-		info("Base url is " + baseUrl);
-		String url = baseUrl + "/g/:platform:administrators/search";
+		if (plfURL==null) plfURL = DEFAULT_PLF_URL;
+		info("Base url is " + plfURL);
+		String url = plfURL + "/g/:platform:administrators/search";
 		for(int repeat=0;; repeat ++){
 			if (repeat > 1){
 				driver.get(url);
@@ -681,7 +681,7 @@ public class NavigationToolbar extends PlatformBase {
 	 */
 	public void goToIDEPage(){
 		info("--Go to IDE Page--");
-		String url = baseUrl + "/g/:developers/ide";
+		String url = plfURL + "/g/:developers/ide";
 		for(int repeat=0;; repeat ++){
 			if (repeat > 1){
 				driver.get(url);
@@ -800,7 +800,7 @@ public class NavigationToolbar extends PlatformBase {
 	 * Go to Email notification administration page
 	 */
 	public void goToNotificationAdministration(){
-		String url = baseUrl + "/g/:platform:administrators/notification";
+		String url = plfURL + "/g/:platform:administrators/notification";
 		for(int repeat=0;; repeat ++){
 			if (repeat > 1){
 				driver.get(url);

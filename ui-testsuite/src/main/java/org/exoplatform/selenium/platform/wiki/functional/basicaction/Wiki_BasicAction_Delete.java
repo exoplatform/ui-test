@@ -28,7 +28,7 @@ public class Wiki_BasicAction_Delete extends ManageDraft {
 	@BeforeMethod
 	public void setUpBeforeTest(){
 		initSeleniumTest();
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		magAcc = new ManageAccount(driver);
 		button = new Button(driver, this.plfVersion);	
 		mAlert = new ManageAlert(driver, this.plfVersion);

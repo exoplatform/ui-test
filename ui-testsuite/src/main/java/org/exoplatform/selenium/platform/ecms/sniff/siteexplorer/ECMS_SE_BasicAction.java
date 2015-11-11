@@ -363,7 +363,7 @@ public class ECMS_SE_BasicAction extends PlatformBase {
 	@BeforeMethod
 	public void beforeMethod() {
 		getDriverAutoOpenWindow();
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		dialog = new Dialog(driver);
 		navToolBar = new NavigationToolbar(driver,this.plfVersion);
 		magAcc = new ManageAccount(driver,this.plfVersion);

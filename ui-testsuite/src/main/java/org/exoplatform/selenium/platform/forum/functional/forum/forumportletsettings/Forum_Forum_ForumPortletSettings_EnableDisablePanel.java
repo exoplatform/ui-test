@@ -32,7 +32,7 @@ public class Forum_Forum_ForumPortletSettings_EnableDisablePanel extends ForumBa
 	@BeforeMethod
 	public void setUpBeforeTest() {
 		initSeleniumTest();
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		fmCat = new ForumManageCategory(driver);
 		fmForum = new ForumManageForum(driver);
 		fmTopic = new ForumManageTopic(driver);

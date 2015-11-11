@@ -16,7 +16,7 @@ public class Wiki_PagePermission_CheckPermission extends Permalink{
 	@BeforeMethod
 	public void beforeTest(){
 		initSeleniumTest();
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		magAc = new ManageAccount(driver);
 		magAc.signIn(DATA_USER1, DATA_PASS);
 		dialog = new Dialog(driver);

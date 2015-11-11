@@ -23,7 +23,7 @@ public class Wiki_Template_Delete extends Template{
 	@BeforeMethod
 	public void setUpBeforeTest(){
 		initSeleniumTest();
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		magAc = new ManageAccount(driver);
 		magAlert = new ManageAlert(driver);
 

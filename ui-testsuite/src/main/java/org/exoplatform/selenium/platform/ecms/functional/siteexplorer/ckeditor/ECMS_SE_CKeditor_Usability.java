@@ -37,7 +37,7 @@ public class ECMS_SE_CKeditor_Usability extends PlatformBase {
 	@BeforeMethod
 	public void beforeMethod(){
 		initSeleniumTest();
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		button = new Button(driver, this.plfVersion);
 		magAcc = new ManageAccount(driver, this.plfVersion);
 		navToolBar = new NavigationToolbar(driver, this.plfVersion);
@@ -150,7 +150,7 @@ public class ECMS_SE_CKeditor_Usability extends PlatformBase {
 
 		 *Expected Outcome: 
 			Template is chosen*/
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		info("-- Open Sites Explorer --");
 		navToolBar.goToSiteExplorer();
 
@@ -204,7 +204,7 @@ public class ECMS_SE_CKeditor_Usability extends PlatformBase {
 
 		 *Expected Outcome: 
 			Template is chosen*/
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		info("-- Open Sites Explorer --");
 		navToolBar.goToSiteExplorer();
 
@@ -262,7 +262,7 @@ public class ECMS_SE_CKeditor_Usability extends PlatformBase {
 
 		 *Expected Outcome: 
 			New content form is appeared*/
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		info("-- Open Sites Explorer --");
 		navToolBar.goToSiteExplorer();
 
@@ -314,7 +314,7 @@ public class ECMS_SE_CKeditor_Usability extends PlatformBase {
 
 		 *Expected Outcome: 
 			New content form is appeared*/
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		info("-- Open Sites Explorer --");
 		navToolBar.goToSiteExplorer();
 
@@ -365,7 +365,7 @@ public class ECMS_SE_CKeditor_Usability extends PlatformBase {
 
 		 *Expected Outcome: 
 			New content form is appeared*/
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		info("-- Open Sites Explorer --");
 		navToolBar.goToSiteExplorer();
 
@@ -412,7 +412,7 @@ public class ECMS_SE_CKeditor_Usability extends PlatformBase {
 
 		 *Expected Outcome: 
 			New content form is appeared*/
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		info("-- Open Sites Explorer --");
 		navToolBar.goToSiteExplorer();
 
@@ -483,7 +483,7 @@ public class ECMS_SE_CKeditor_Usability extends PlatformBase {
 
 		 *Expected Outcome: 
 			New content form is appeared*/
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		info("-- Open Sites Explorer --");
 		navToolBar.goToSiteExplorer();
 
@@ -555,7 +555,7 @@ public class ECMS_SE_CKeditor_Usability extends PlatformBase {
 
 		 *Expected Outcome: 
 			New content form is appeared*/
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		info("-- Open Sites Explorer --");
 		navToolBar.goToSiteExplorer();
 
@@ -619,7 +619,7 @@ public class ECMS_SE_CKeditor_Usability extends PlatformBase {
 
 		 *Expected Outcome: 
 			New content form is appeared*/
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		info("-- Open Sites Explorer --");
 		navToolBar.goToSiteExplorer();
 

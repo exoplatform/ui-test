@@ -29,7 +29,7 @@ public class Wiki_PageInformation_RelatedPage_Add extends BasicAction{
 	@BeforeMethod
 	public void beforeMethods(){
 		initSeleniumTest();
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		magAc = new ManageAccount(driver);
 		button = new Button(driver);
 		mMember = new ManageMember(driver, this.plfVersion);

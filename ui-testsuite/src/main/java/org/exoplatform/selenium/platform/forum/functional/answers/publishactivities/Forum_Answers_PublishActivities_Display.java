@@ -35,7 +35,7 @@ public class Forum_Answers_PublishActivities_Display extends AnswerBase{
 	@BeforeMethod
 	public void setUpBeforeTest(){
 		initSeleniumTest();
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		acc = new ManageAccount(driver);
 		mCat = new AnswerManageCategory(driver);
 		mQuest = new AnswerManageQuestion(driver);

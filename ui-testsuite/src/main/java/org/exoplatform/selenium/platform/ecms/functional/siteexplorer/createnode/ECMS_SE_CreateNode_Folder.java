@@ -46,7 +46,7 @@ public class ECMS_SE_CreateNode_Folder extends PlatformBase{
 	@BeforeMethod
 	public void beforeMethod(){
 		initSeleniumTest();
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		button = new Button(driver);
 		magAcc = new ManageAccount(driver);
 		navToolBar = new NavigationToolbar(driver);
@@ -87,7 +87,7 @@ public class ECMS_SE_CreateNode_Folder extends PlatformBase{
 		info("Step 2: Add folder into locked node by another user");
 		info("Init new session");
 		initSeleniumTest();
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		magAcc = new ManageAccount(driver);
 		navToolBar = new NavigationToolbar(driver);
 		ecms = new EcmsBase(driver);
@@ -139,7 +139,7 @@ public class ECMS_SE_CreateNode_Folder extends PlatformBase{
 		info("Login by another user");
 		info("Init new session");
 		initSeleniumTest();
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		magAcc = new ManageAccount(driver);
 		navToolBar = new NavigationToolbar(driver);
 		ecms = new EcmsBase(driver);
@@ -741,7 +741,7 @@ public class ECMS_SE_CreateNode_Folder extends PlatformBase{
 		driver.close();
 		
 		initSeleniumTest();
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		magAcc = new ManageAccount(driver);
 		navToolBar = new NavigationToolbar(driver);
 		ecms = new EcmsBase(driver);

@@ -40,7 +40,7 @@ public class ECMS_SE_BasicAction_DragDrop extends PlatformBase {
 	public void beforeTest()
 	{
 		initSeleniumTest();
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		navToolBar = new NavigationToolbar(driver,this.plfVersion);
 		magAcc = new ManageAccount(driver,this.plfVersion);
 		actBar = new ActionBar(driver,this.plfVersion);

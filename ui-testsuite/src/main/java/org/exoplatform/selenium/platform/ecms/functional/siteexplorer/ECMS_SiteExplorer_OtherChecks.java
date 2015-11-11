@@ -37,7 +37,7 @@ public class ECMS_SiteExplorer_OtherChecks extends PlatformBase {
 	@BeforeMethod
 	public void setUpBeforeTest(){
 		initSeleniumTest();
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		magAc = new ManageAccount(driver, this.plfVersion);
 		magAlert = new ManageAlert(driver, this.plfVersion);
 		navToolbar = new NavigationToolbar(driver, this.plfVersion);

@@ -45,7 +45,7 @@ public class ECMS_SE_CreateNode_Upload_Action_FileExisting extends PlatformBase{
 	@BeforeMethod
 	public void beforeMethod(){
 		initSeleniumTest();
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		magAcc = new ManageAccount(driver);
 		navToolBar = new NavigationToolbar(driver);
 		ecms = new EcmsBase(driver);

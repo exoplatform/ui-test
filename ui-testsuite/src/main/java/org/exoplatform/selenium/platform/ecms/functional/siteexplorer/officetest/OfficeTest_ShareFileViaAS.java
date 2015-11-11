@@ -39,7 +39,7 @@ import org.testng.annotations.*;
 		@BeforeMethod
 		public void beforeMethods() {
 			initSeleniumTest();			
-			driver.get(baseUrl);
+			driver.get(plfURL);
 			info("Login ECMS with " + DATA_USER1);
 			magAcc = new ManageAccount(driver);
 			actBar = new ActionBar(driver);

@@ -30,7 +30,7 @@ public class Forum_Forum_PortletSettings extends ForumBase {
 	@BeforeMethod
 	public void setUpBeforeTest() {
 		initSeleniumTest();
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		fmCat = new ForumManageCategory(driver);
 		fmForum = new ForumManageForum(driver);
 		fmTopic = new ForumManageTopic(driver);

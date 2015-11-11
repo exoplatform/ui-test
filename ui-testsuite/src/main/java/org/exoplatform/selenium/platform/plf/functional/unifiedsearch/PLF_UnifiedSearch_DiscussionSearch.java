@@ -66,7 +66,7 @@ public class PLF_UnifiedSearch_DiscussionSearch extends PlatformBase {
 	@BeforeMethod
 	public void setBeforeTest() throws Exception {
 		initSeleniumTest();
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		info("Login with " + DATA_USER1);
 		frumPer = new ForumPermission(driver,this.plfVersion);
 		magAcc = new ManageAccount(driver, this.plfVersion);

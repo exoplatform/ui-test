@@ -27,7 +27,7 @@ public class ECMS_Admin_Template_Metadata extends PlatformBase{
 	@BeforeMethod
 	public void beforeMethod(){
 		initSeleniumTest();
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		info("LogIn to Intranet with User..." + DATA_USER1);
 		alt = new ManageAlert(driver);
 		magAcc = new ManageAccount(driver);

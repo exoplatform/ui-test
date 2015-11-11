@@ -25,7 +25,7 @@ public class Wiki_Space_Switcher extends BasicAction{
 	@BeforeMethod
 	public void setUpBeforeTest(){
 		initSeleniumTest();//true,platform,browser,version,url);
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		magAc = new ManageAccount(driver, this.plfVersion);
 		magMember = new ManageMember(driver, this.plfVersion);
 		magAc.signIn(DATA_USER1,DATA_PASS);;

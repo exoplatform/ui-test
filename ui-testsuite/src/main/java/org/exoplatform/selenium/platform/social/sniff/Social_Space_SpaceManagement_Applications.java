@@ -26,7 +26,7 @@ public class Social_Space_SpaceManagement_Applications extends SocialBase{
 	@BeforeMethod
 	public void beforeMethods() {
 		initSeleniumTest();
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		info("Login with " + DATA_USER1);
 		magAcc = new ManageAccount(driver);
 		magMember = new ManageMember(driver);

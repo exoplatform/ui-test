@@ -33,7 +33,7 @@ public class Wiki_Activity_Update extends Permalink{
 	@BeforeMethod
 	public void beforeMethod(){
 		initSeleniumTest();
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		driver.manage().window().maximize();
 		per = new Permalink();
 		mMember = new ManageMember(driver, this.plfVersion);

@@ -1,5 +1,6 @@
 package org.exoplatform.selenium.platform.plf.functional.welcomescreens;
 
+import static org.exoplatform.selenium.TestLogger.error;
 import static org.exoplatform.selenium.TestLogger.info;
 
 import org.exoplatform.selenium.Utils;
@@ -19,7 +20,11 @@ public class PLF_WelcomeScreens_AccountSetup extends PlatformBase{
 	@BeforeMethod
 	public void beforeMethod(){
 		info("Get Browser");
-		initSeleniumTestWithOutTermAndCondition(driver);
+		try {
+			initSeleniumTestWithOutTermAndCondition(driver);
+		} catch (Exception e) {
+			error("Error while init tests");
+		}
 		driver.get(DEFAULT_PLF_URL);
 		acc = new ManageAccount(driver, this.plfVersion);
 	}

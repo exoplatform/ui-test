@@ -25,7 +25,7 @@ public class Gatein_Authentication_SignIn extends PlatformBase {
 	@BeforeMethod
 	public void setUpBeforeTest(){
 		initSeleniumTest();
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		magAc = new ManageAccount(driver);
 		navTool = new NavigationToolbar(driver);
 		user = new UserGroupManagement(driver);

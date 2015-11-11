@@ -38,7 +38,7 @@ public class ECMS_Admin_Explorer extends PlatformBase{
 	@BeforeMethod
 	public void beforeMethods(){
 		initSeleniumTest();
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		info("LogIn to Intranet, User... " + DATA_USER1);
 		magAcc = new ManageAccount(driver);
 		nav = new NavigationToolbar(driver);

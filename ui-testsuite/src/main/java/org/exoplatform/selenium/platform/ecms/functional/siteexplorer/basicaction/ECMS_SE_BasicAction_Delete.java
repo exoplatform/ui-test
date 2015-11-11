@@ -62,7 +62,7 @@ public class ECMS_SE_BasicAction_Delete extends PlatformBase {
 	public void beforeTest()
 	{
 		initSeleniumTest();
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		driver.manage().window().maximize();
 		dialog = new Dialog(driver); 
 		magAlert = new ManageAlert(driver, this.plfVersion);
@@ -286,7 +286,7 @@ public class ECMS_SE_BasicAction_Delete extends PlatformBase {
 
 		//login with mary
 		initSeleniumTest();
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		ecms = new EcmsBase(driver);
 		navToolBar = new NavigationToolbar(driver);
 		magAcc = new ManageAccount(driver);

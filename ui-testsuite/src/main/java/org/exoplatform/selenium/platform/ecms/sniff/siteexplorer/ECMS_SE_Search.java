@@ -129,7 +129,7 @@ public class ECMS_SE_Search extends PlatformBase {
 	@BeforeMethod
 	public void beforeMethod() {
 		initSeleniumTest();
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		navToolBar = new NavigationToolbar(driver);
 		magAcc = new ManageAccount(driver);
 		magAcc.signIn(DATA_USER1, DATA_PASS);

@@ -31,7 +31,7 @@ public class ECMS_SE_Admin_Import_IllustratedWebContent extends PlatformBase {
 	@BeforeMethod
 	public void beforeMethods() {
 		initSeleniumTest();
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		magAcc = new ManageAccount(driver);
 		navToolBar = new NavigationToolbar(driver);
 		actBar = new ActionBar(driver,this.plfVersion);

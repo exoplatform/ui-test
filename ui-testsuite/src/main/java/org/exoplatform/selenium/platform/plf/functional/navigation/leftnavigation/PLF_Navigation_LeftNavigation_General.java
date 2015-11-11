@@ -18,7 +18,7 @@ public class PLF_Navigation_LeftNavigation_General extends PlatformBase{
 	@BeforeMethod
 	public void beforeMethods(){	
 		initSeleniumTest();
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		acc = new ManageAccount(driver);
 		nav = new NavigationToolbar(driver);	
 		acc.signIn(DATA_USER1, DATA_PASS);		
@@ -42,7 +42,7 @@ public class PLF_Navigation_LeftNavigation_General extends PlatformBase{
 	@Test
 	public  void test01_DisplayLeftNavigationForSocialIntranet() {
 		info("Test 1: Display Left Navigation for Social Intranet");
-		String url = baseUrl+"/acme/";
+		String url = plfURL+"/acme/";
 		/*
 		- Connect to Intranet
 		 *Input Data: 

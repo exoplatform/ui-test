@@ -33,7 +33,7 @@ public class Forum_Answers_PublishActivity extends AnswerBase{
 	@BeforeMethod
 	public void setUpBeforeTest(){
 		initSeleniumTest();
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		Acc = new ManageAccount(driver);
 		mCat = new AnswerManageCategory(driver);
 		mQuest = new AnswerManageQuestion(driver, this.plfVersion);

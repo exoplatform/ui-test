@@ -34,7 +34,7 @@ public class PLF_HomepageActivityStream_Refresh extends Activity{
 	@BeforeMethod
 	public void setUpBeforeTest(){
 		initSeleniumTest();
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		acc = new ManageAccount(driver);
 		hpActivity = new HomePageActivity(driver);
 		navToolBar = new NavigationToolbar(driver);

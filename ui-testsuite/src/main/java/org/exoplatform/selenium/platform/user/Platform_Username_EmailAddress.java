@@ -22,7 +22,7 @@ public class Platform_Username_EmailAddress extends PlatformBase{
 	@BeforeMethod
 	public void beforeMethods() {
 		initSeleniumTest();
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		driver.manage().window().maximize();
 		magAccount = new ManageAccount(driver);
 		navBar = new NavigationToolbar(driver);

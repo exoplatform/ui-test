@@ -1290,7 +1290,7 @@ public class PlatformBase extends TestBase {
 		}
 		driver.manage().window().maximize();
 		driver.navigate().refresh();
-		driver.navigate().to(baseUrl);
+		driver.navigate().to(plfURL);
 	}
 
 	/**
@@ -1714,7 +1714,7 @@ public class PlatformBase extends TestBase {
 	 */
 	public void loginWithAnotherAccOnThesameBrowser(String User2, String Pass2){
 		newDriver = new FirefoxDriver();
-		newDriver.get(baseUrl);
+		newDriver.get(plfURL);
 		driver.manage().window().maximize();
 		ManageAccount  acc = new ManageAccount(newDriver);
 		acc.signIn(User2, Pass2);

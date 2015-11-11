@@ -26,7 +26,7 @@ public class PLF_UserNavigation extends PlatformBase {
 	@BeforeMethod
 	public void beforeMethods() {
 		initSeleniumTest();
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		info("Login with " + DATA_USER1);
 		peoConn = new PeopleConnection(driver);
 		magAcc = new ManageAccount(driver, this.plfVersion);

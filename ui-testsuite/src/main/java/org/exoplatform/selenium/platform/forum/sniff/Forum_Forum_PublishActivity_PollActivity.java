@@ -34,7 +34,7 @@ public class Forum_Forum_PublishActivity_PollActivity extends ForumBase{
 	@BeforeMethod
 	public void setUpBeforeTest(){
 		initSeleniumTest();
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		magAc = new ManageAccount(driver);
 		mngFru = new ForumManageForum(driver);
 		mngCat = new ForumManageCategory(driver);

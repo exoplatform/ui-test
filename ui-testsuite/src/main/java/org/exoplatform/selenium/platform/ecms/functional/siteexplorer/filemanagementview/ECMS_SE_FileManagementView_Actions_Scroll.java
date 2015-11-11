@@ -39,7 +39,7 @@ public class ECMS_SE_FileManagementView_Actions_Scroll extends PlatformBase {
 	@BeforeMethod
 	public void beforeMethod(){
 		initSeleniumTest();
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		actBar = new ActionBar(driver);
 		magAcc = new ManageAccount(driver);		
 		magAcc.signIn(DATA_USER, DATA_PASS);

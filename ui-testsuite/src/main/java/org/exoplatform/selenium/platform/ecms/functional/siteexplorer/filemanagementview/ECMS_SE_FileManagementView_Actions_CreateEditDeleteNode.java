@@ -30,7 +30,7 @@ public class ECMS_SE_FileManagementView_Actions_CreateEditDeleteNode extends Pla
 	@BeforeMethod
 	public void setUpBeforeTest(){
 		initSeleniumTest();
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		navToolBar = new NavigationToolbar(driver,this.plfVersion);
 		magAcc = new ManageAccount(driver,this.plfVersion);
 		magAcc.signIn(DATA_USER1, DATA_PASS); 

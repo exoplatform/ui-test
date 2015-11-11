@@ -28,7 +28,7 @@ public class Wiki_Information extends Version {
 	@BeforeMethod
 	public void setUpBeforeTest(){
 		initSeleniumTest();
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		magAc = new ManageAccount(driver);
 		but = new Button(driver);
 		magMem = new ManageMember(driver);

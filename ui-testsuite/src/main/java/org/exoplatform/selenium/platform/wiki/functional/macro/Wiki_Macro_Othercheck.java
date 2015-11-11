@@ -31,7 +31,7 @@ public class Wiki_Macro_Othercheck extends ManageDraft{
 	@BeforeMethod
 	public void setUpBeforeTest(){
 		initSeleniumTest();
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		magAc = new ManageAccount(driver);
 		button = new Button(driver);
 		magWiki = new WikiBase();

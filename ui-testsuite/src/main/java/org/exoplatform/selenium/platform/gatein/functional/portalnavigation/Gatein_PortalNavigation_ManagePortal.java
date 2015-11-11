@@ -31,7 +31,7 @@ public class Gatein_PortalNavigation_ManagePortal extends PortalManagement{
 	@BeforeMethod
 	public void setUpBeforeTest(){
 		initSeleniumTest();
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		button = new Button(driver);
 		magAc = new ManageAccount(driver);
 		navToolbar = new NavigationToolbar(driver);
@@ -67,7 +67,7 @@ public class Gatein_PortalNavigation_ManagePortal extends PortalManagement{
 		waitForAndGetElement(ELEMENT_PORTAL_NAME_SITE_ACCESS.replace("${portalName}", portalName));
 
 		info("Delete portal");
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		navToolbar.goToPortalSites();
 		deletePortal(portalName);
 	}
@@ -106,7 +106,7 @@ public class Gatein_PortalNavigation_ManagePortal extends PortalManagement{
 		button.cancel();
 
 		info("Delete portal");
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		navToolbar.goToPortalSites();
 		deletePortal(portalName);
 		deletePortal(portalName1);
@@ -142,7 +142,7 @@ public class Gatein_PortalNavigation_ManagePortal extends PortalManagement{
 		waitForAndGetElement(ELEMENT_PORTAL_NAME_SITE_ACCESS.replace("${portalName}", portalName));
 
 		info("Delete portal");
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		navToolbar.goToPortalSites();
 		deletePortal(portalName);
 	}

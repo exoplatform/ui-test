@@ -36,7 +36,7 @@ public class Forum_Forum_Category_Add extends ForumBase {
 	@BeforeMethod
 	public void setUpBeforeTest() {
 		initSeleniumTest();
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		fmCat = new ForumManageCategory(driver);
 		acc = new ManageAccount(driver);
 		frumPer = new ForumPermission(driver);

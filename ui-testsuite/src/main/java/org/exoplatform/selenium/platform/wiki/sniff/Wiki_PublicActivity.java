@@ -23,7 +23,7 @@ public class Wiki_PublicActivity extends BasicAction {
 	@BeforeMethod
 	public void setUpBeforeTest(){
 		initSeleniumTest();
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		magAc = new ManageAccount(driver,this.plfVersion);
 		naTool = new NavigationToolbar(driver,this.plfVersion);
 		activity = new HomePageActivity(driver,this.plfVersion);

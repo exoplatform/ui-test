@@ -52,7 +52,7 @@ public class ECMS_SE_PublishActivities_ContentActivities_Add extends PlatformBas
 	@BeforeTest
 	public void beforeTest() {
 		initSeleniumTest();
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		info("Login ECMS with " + DATA_USER1);
 		magAcc = new ManageAccount(driver,this.plfVersion);
 		actBar = new ActionBar(driver,this.plfVersion);

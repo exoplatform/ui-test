@@ -25,7 +25,7 @@ public class Gatein_Authentication extends PlatformBase {
 	@BeforeMethod
 	public void setUpBeforeTest(){
 		initSeleniumTest();
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		magAc = new ManageAccount(driver);
 		navTool = new NavigationToolbar(driver);
 		user = new UserGroupManagement(driver);
@@ -74,7 +74,7 @@ public class Gatein_Authentication extends PlatformBase {
 
 		FirefoxDriver driver1 = new FirefoxDriver(firefoxProfile1); 
 		driver1.get(DEFAULT_PLF_URL);
-		//driver.get(baseUrl);		
+		//driver.get(plfURL);
 	}
 	
 	/**CaseId: 68899

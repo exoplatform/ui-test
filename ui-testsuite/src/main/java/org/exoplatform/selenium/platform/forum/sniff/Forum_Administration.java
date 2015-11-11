@@ -108,7 +108,7 @@ public class Forum_Administration extends ForumBase {
 		waitForTextPresent(MSG_BLOCK_EDIT_YOUR_POST);
 		magAc.signOut();
 		
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		magAc.signIn(DATA_USER1, DATA_PASS);
 		goToForums();
 		deleteBanIp(ip);

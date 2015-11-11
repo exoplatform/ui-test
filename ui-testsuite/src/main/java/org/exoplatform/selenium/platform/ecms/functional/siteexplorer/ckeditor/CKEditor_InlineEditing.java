@@ -39,7 +39,7 @@ import org.testng.annotations.*;
 		@BeforeMethod
 		public void beforeMethod(){
 			initSeleniumTest();
-			driver.get(baseUrl);
+			driver.get(plfURL);
 			button = new Button(driver, this.plfVersion);
 			magAcc = new ManageAccount(driver, this.plfVersion);
 			navToolBar = new NavigationToolbar(driver, this.plfVersion);
@@ -67,7 +67,7 @@ import org.testng.annotations.*;
 	public  void test01_CancelInlineEditingByClickingCancelIcon() {
 		info("Test 1: Cancel inline editing by clicking Cancel icon");
 		String title ="Ice";
-		driver.get(baseUrl+"/acme");
+		driver.get(plfURL+"/acme");
 		
 		navToolBar.changeEditModeEnable();
 		acme.editContentByTitle(title);

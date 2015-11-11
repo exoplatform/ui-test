@@ -27,7 +27,7 @@ public class ECMS_Admin_ManageNodeType_Add extends PlatformBase {
 	@BeforeMethod
 	public void beforeMethods() {
 		initSeleniumTest();
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		info("Login ECMS with " + DATA_USER1);
 		button = new Button(driver);
 		magAcc = new ManageAccount(driver);

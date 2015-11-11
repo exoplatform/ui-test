@@ -57,7 +57,7 @@ public class PLF_UnifiedSearch_QuickSearchSettings extends Activity {
 	@BeforeMethod
 	public void setUpBeforeTest(){
 		initSeleniumTest();
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		magAcc = new ManageAccount(driver, this.plfVersion);
 		magAcc.signIn(DATA_USER1, DATA_PASS);
 		hGadget = new HomePageGadget(driver);

@@ -28,7 +28,7 @@ public class Wiki_BasicAction_Edit extends ManageDraft {
 	@BeforeMethod
 	public void setUpBeforeMethod(){
 		initSeleniumTest();
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		acc = new ManageAccount(driver);
 		acc.signIn(DATA_USER1, DATA_PASS);
 		button = new Button(driver, this.plfVersion);	

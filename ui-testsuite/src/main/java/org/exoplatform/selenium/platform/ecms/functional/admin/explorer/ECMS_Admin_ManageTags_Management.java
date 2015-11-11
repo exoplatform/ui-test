@@ -69,7 +69,7 @@ public class ECMS_Admin_ManageTags_Management extends PlatformBase {
 	@BeforeMethod
 	public void beforeMethod(){
 		initSeleniumTest();
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		info("Login ECMS with "+ DATA_USER1);
 		nav = new NavigationToolbar(driver);
 		magAcc = new ManageAccount(driver);

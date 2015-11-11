@@ -45,7 +45,7 @@ public class Wiki_BasicAction_Add extends ManageDraft{
 	@BeforeMethod
 	public void beforeMethod(){
 		initSeleniumTest();
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		driver.manage().window().maximize();
 		magAcc = new ManageAccount(driver);
 		dialog = new Dialog(driver);	

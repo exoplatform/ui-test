@@ -64,7 +64,7 @@ public class PLF_UnifiedSearch_DocumentSearch extends PlatformBase {
 	@BeforeTest
 	public void setBeforeTest() throws Exception {
 		initSeleniumTest();
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		info("Login with " + DATA_USER1);
 
 		magAcc = new ManageAccount(driver, this.plfVersion);

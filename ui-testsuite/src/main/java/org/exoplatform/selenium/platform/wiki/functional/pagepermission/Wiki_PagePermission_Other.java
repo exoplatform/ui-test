@@ -27,7 +27,7 @@ public class Wiki_PagePermission_Other extends BasicAction{
 	@BeforeMethod
 	public void beforeTest(){
 		initSeleniumTest();
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		magAc = new ManageAccount(driver);
 		magMember = new ManageMember(driver);
 		magAc.signIn(DATA_USER_ADMIN, DATA_PASS_ADMIN);	

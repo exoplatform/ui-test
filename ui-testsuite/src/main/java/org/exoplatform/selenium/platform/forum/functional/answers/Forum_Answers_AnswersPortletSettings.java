@@ -27,7 +27,7 @@ public class Forum_Answers_AnswersPortletSettings extends AnswerBase{
 	@BeforeMethod
 	public void setUpBeforeTest(){
 		initSeleniumTest();
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		acc = new ManageAccount(driver);
 		mCat = new AnswerManageCategory(driver);
 		mQuest = new AnswerManageQuestion(driver);

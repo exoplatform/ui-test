@@ -36,7 +36,7 @@ public class ECMS_SE_Collaboration_Manage_Tag extends PlatformBase{
 	@BeforeMethod
 	public void setUpBeforeTest(){
 		initSeleniumTest();
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		magAc = new ManageAccount(driver);
 		navToolbar = new NavigationToolbar(driver);
 		actBar = new ActionBar(driver);

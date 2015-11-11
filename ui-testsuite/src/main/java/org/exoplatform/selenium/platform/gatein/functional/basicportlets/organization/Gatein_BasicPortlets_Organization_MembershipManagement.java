@@ -23,7 +23,7 @@ public class Gatein_BasicPortlets_Organization_MembershipManagement extends Plat
 	@BeforeMethod
 	public void setUpBeforeTest(){
 		initSeleniumTest();
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		magAc = new ManageAccount(driver, this.plfVersion);
 		navTool = new NavigationToolbar(driver, this.plfVersion);
 		user = new UserGroupManagement(driver, this.plfVersion);

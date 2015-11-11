@@ -39,7 +39,7 @@ public class PLF_HomepageGadgets_FeaturePoll extends BasicAction{
 	@BeforeMethod
 	public void beforeMethods(){	
 		initSeleniumTest();
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		magAcc = new ManageAccount(driver, this.plfVersion);
 		naviToolbar = new NavigationToolbar(driver, this.plfVersion);
 		mngTopic = new ForumManageTopic(driver, this.plfVersion);

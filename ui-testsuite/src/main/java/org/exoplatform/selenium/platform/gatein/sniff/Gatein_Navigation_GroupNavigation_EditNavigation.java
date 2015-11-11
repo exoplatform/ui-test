@@ -41,7 +41,7 @@ public class Gatein_Navigation_GroupNavigation_EditNavigation extends GroupNavig
 	@BeforeMethod
 	public void setUpBeforeTest(){
 		initSeleniumTest();
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		button = new Button(driver, this.plfVersion);
 		magAlert = new ManageAlert(driver, this.plfVersion);
 		magAc = new ManageAccount(driver, this.plfVersion);

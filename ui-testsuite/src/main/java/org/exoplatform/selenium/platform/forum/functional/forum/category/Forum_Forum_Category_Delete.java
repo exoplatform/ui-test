@@ -23,7 +23,7 @@ public class Forum_Forum_Category_Delete extends ForumBase{
 	@BeforeMethod
 	public void setUpBeforeTest() {
 		initSeleniumTest();
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		fmCat = new ForumManageCategory(driver);
 		acc = new ManageAccount(driver);
 		acc.signIn(DATA_USER1, DATA_PASS);

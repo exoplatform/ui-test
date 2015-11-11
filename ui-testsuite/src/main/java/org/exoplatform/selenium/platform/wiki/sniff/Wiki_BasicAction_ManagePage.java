@@ -30,7 +30,7 @@ public class Wiki_BasicAction_ManagePage extends ManageDraft{
 	@BeforeMethod
 	public void setUpBeforeTest(){
 		initSeleniumTest();
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		magAc = new ManageAccount(driver);
 		but = new Button(driver);
 		naTool = new NavigationToolbar(driver);

@@ -35,7 +35,7 @@ public class Social_EmailNotifications_Settings extends Notification {
 	@BeforeMethod
 	public void beforeMethods() {
 		initSeleniumTest();
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		magAcc = new ManageAccount(driver,this.plfVersion);
 		navToolBar = new NavigationToolbar(driver,this.plfVersion);
 		magAcc.signIn(DATA_USER1, DATA_PASS);

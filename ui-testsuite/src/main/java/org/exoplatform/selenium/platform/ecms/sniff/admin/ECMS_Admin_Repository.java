@@ -51,7 +51,7 @@ public class ECMS_Admin_Repository extends PlatformBase{
 	@BeforeMethod
 	public void beforeMethods() {
 		initSeleniumTest();
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		info("LogIn to Intranet with User..." + DATA_USER1);
 		userGroup = new UserGroupManagement(driver);
 		nav = new NavigationToolbar(driver);
@@ -160,7 +160,7 @@ public class ECMS_Admin_Repository extends PlatformBase{
 		//Login with user in the selected group and un lock that node
 		driver.close();
 		driver = new FirefoxDriver();
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		nav = new NavigationToolbar(driver);
 		magAcc = new ManageAccount(driver);
 		ecMain = new ECMainFunction(driver);

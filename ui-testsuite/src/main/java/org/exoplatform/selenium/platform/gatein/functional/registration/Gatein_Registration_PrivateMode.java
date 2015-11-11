@@ -30,7 +30,7 @@ public class Gatein_Registration_PrivateMode extends PlatformBase {
 	@BeforeMethod
 	public void setUpBeforeTest(){
 		initSeleniumTest();
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		magAc = new ManageAccount(driver);
 		navTool = new NavigationToolbar(driver);
 		button = new Button(driver);

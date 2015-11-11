@@ -20,7 +20,7 @@ public class Wiki_BasicAction_Move extends BasicAction {
 	@BeforeMethod
 	public void setUpBeforeTest(){
 		initSeleniumTest();
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		driver.manage().window().maximize();
 		magAcc = new ManageAccount(driver);
 		button = new Button(driver);

@@ -35,7 +35,7 @@ public class ECMS_SE_BasicAction_SortAndRevert extends PlatformBase{
 	@BeforeMethod
 	public void beforeMethod(){
 		initSeleniumTest();
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		magAcc = new ManageAccount(driver);
 		navToolBar = new NavigationToolbar(driver);
 		actBar = new ActionBar(driver);

@@ -28,7 +28,7 @@ public class Forum_Forum_Post extends ForumBase{
 	@BeforeMethod
 	public void setUpBeforeTest(){
 		initSeleniumTest();
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		acc = new ManageAccount(driver);
 		mngFru = new ForumManageForum(driver,this.plfVersion);
 		mngCat = new ForumManageCategory(driver,this.plfVersion);

@@ -34,7 +34,7 @@ public class ECMS_SiteExplorer_Publication extends PlatformBase {
 	@BeforeMethod
 	public void setUpBeforeTest(){
 		initSeleniumTest();
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		info("Login with " + DATA_USER1);
 		magAcc = new ManageAccount(driver, this.plfVersion);
 		naviToolbar = new NavigationToolbar(driver, this.plfVersion);

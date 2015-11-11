@@ -34,7 +34,7 @@ public class ECMS_SE_Admin_Export extends PlatformBase{
 		//initSeleniumTest();
 		//getDriverAutoSave();
 		initSeleniumTest();
-		driver.get(baseUrl);
+		driver.get(plfURL);
 
 		magAcc = new ManageAccount(driver);
 		navToolBar = new NavigationToolbar(driver);

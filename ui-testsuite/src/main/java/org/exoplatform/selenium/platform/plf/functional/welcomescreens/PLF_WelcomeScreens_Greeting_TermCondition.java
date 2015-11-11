@@ -1,6 +1,8 @@
 package org.exoplatform.selenium.platform.plf.functional.welcomescreens;
 
 import org.exoplatform.selenium.platform.PlatformBase;
+
+import static org.exoplatform.selenium.TestLogger.error;
 import static org.exoplatform.selenium.TestLogger.info;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -13,7 +15,11 @@ public class PLF_WelcomeScreens_Greeting_TermCondition extends PlatformBase{
 	@BeforeMethod(groups="terms")
 	public void beforeMethods() {
 		info("Open browser and get base url");
-		initSeleniumTestWithOutTermAndCondition();
+		try {
+			initSeleniumTestWithOutTermAndCondition();
+		} catch (Exception e) {
+			error("Error while initializing tests.");
+		}
 		driver.get(DEFAULT_PLF_URL);
 	}
 
@@ -45,7 +51,7 @@ public class PLF_WelcomeScreens_Greeting_TermCondition extends PlatformBase{
 	 */
 	@Test
 	public void test02_NotRemoveTermsConditionsScreenByChangeURL (){
-		String SPECIFIC_URL = baseUrl+"/intranet";
+		String SPECIFIC_URL = plfURL+"/intranet";
 
 		info("Open Base URL");
 		driver.get(DEFAULT_PLF_URL);

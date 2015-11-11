@@ -31,7 +31,7 @@ public class ECMS_SE_BasicAction_ResizeAndCollapse extends PlatformBase {
 	@BeforeMethod
 	public void beforeMethods() {
 		initSeleniumTest();
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		magAcc = new ManageAccount(driver);
 		resize = new ResizeAndCollapse(driver);
 		nav = new NavigationToolbar(driver);

@@ -50,7 +50,7 @@ public class Gatein_ManagePages_Create extends DashBoard{
 	@BeforeMethod
 	public void setUpBeforeTest(){
 		initSeleniumTest();
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		magAc = new ManageAccount(driver);
 		navTool = new NavigationToolbar(driver);
 		pageMag = new PageManagement(driver);
@@ -137,7 +137,7 @@ public class Gatein_ManagePages_Create extends DashBoard{
 		String category = "Administration";
 		String portletId = "Administration/RegisterPortlet";
 		String portletTitle = "Register New Account";
-		String url = baseUrl + "/intranet/home/" + pageName;
+		String url = plfURL + "/intranet/home/" + pageName;
 		String username1 = DATA_USER2;
 		String password1 = DATA_PASS;
 
@@ -304,7 +304,7 @@ public class Gatein_ManagePages_Create extends DashBoard{
 		String groupPath1 = "Platform /Content Management ";
 		String groupPath2 = "Platform /Development ";
 		String membership = "*";
-		String url = baseUrl + "/acme";
+		String url = plfURL + "/acme";
 
 		/*Step Number: 1
 		 *Step Name: -

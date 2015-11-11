@@ -28,7 +28,7 @@ import org.testng.annotations.*;
 		@BeforeMethod
 		public void setUpBeforeTest() {
 			initSeleniumTest();
-			driver.get(baseUrl);
+			driver.get(plfURL);
 			fmCat = new ForumManageCategory(driver,this.plfVersion);
 			fmForum = new ForumManageForum(driver,this.plfVersion);
 			fmTopic = new ForumManageTopic(driver,this.plfVersion);

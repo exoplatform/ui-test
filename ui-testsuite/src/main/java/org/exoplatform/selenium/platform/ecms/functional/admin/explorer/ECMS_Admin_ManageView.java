@@ -46,7 +46,7 @@ public class ECMS_Admin_ManageView extends PlatformBase{
 	@BeforeMethod
 	public void beforeMethods(){
 		initSeleniumTest();
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		info("Login ECMS with "+ DATA_USER1);
 		dialog = new Dialog(driver);
 		magAcc = new ManageAccount(driver);

@@ -48,7 +48,7 @@ public class Forum_Forum_CKEditor_Usability extends ForumBase {
 	@BeforeTest
 	public void setBeforeTest() {
 		initSeleniumTest();
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		info("Login with " + DATA_USER1);
 		mngFru = new ForumManageForum(driver, this.plfVersion);
 		mngTopic = new ForumManageTopic(driver, this.plfVersion);

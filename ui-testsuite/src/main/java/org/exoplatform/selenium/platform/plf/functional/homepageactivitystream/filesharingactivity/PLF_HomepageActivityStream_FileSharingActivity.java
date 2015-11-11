@@ -30,7 +30,7 @@ public class PLF_HomepageActivityStream_FileSharingActivity extends Activity{
 	@BeforeMethod
 	public void setUpBeforeTest(){
 		initSeleniumTest();
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		acc = new ManageAccount(driver, this.plfVersion);
 		home = new HomePageActivity(driver, this.plfVersion); 
 		acc.signIn(DATA_USER1, DATA_PASS);

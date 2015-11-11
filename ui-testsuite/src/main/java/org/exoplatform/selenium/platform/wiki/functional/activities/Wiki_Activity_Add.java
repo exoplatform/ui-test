@@ -34,7 +34,7 @@ public class Wiki_Activity_Add extends Permalink{
 	@BeforeMethod
 	public void beforeMethod(){
 		initSeleniumTest();
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		driver.manage().window().maximize();
 		per = new Permalink();
 		mMember = new ManageMember(driver, this.plfVersion);
@@ -105,7 +105,7 @@ public class Wiki_Activity_Add extends Permalink{
 		String spaceName = "space"+random;
 		String title = "Title"+random;
 		String content = "Content"+random;
-		String url = baseUrl+"/intranet/wiki/group/spaces/"+spaceName+"/"+title;
+		String url = plfURL+"/intranet/wiki/group/spaces/"+spaceName+"/"+title;
 		String newcontent = "Content case"+random;
 		/*
 		- Connect to Intranet

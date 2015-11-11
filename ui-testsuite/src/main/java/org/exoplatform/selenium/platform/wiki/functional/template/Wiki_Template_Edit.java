@@ -22,7 +22,7 @@ public class Wiki_Template_Edit extends Template{
 	@BeforeMethod
 	public void setUpBeforeTest(){
 		initSeleniumTest();
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		magAc = new ManageAccount(driver);
 		button = new Button(driver);
 

@@ -25,7 +25,7 @@ public class Wiki_Attachment_Delete extends BasicAction{
 	@BeforeMethod
 	public void setUpBeforeMethod(){
 		initSeleniumTest();
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		magAcc = new ManageAccount(driver);
 		button = new Button(driver);
 

@@ -32,7 +32,7 @@ public class PLF_HomepageGadgets_MyProfile extends Activity{
 	@BeforeMethod
 	public void beforeMethods(){	
 		initSeleniumTest();
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		naviToolbar = new NavigationToolbar(driver, this.plfVersion);
 		peoPro = new PeopleProfile (driver, this.plfVersion);
 		app = new ManageApplications(driver, this.plfVersion);

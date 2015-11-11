@@ -30,7 +30,7 @@ public class Gatein_GroupNavigation_ManageNavigation extends GroupNavigation {
 	@BeforeMethod
 	public void setUpBeforeTest(){
 		initSeleniumTest();
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		magAc = new ManageAccount(driver);
 		navTool = new NavigationToolbar(driver);
 		group = new UserGroupManagement(driver);

@@ -45,7 +45,7 @@ public class Social_EmailNotifications_NotificationType extends Notification {
 	@BeforeMethod
 	public void beforeMethods() {
 		initSeleniumTest();
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		magAcc = new ManageAccount(driver,this.plfVersion);
 		navToolBar = new NavigationToolbar(driver,this.plfVersion);
 		magAcc.signIn(DATA_USER1, DATA_PASS);
@@ -948,7 +948,7 @@ public class Social_EmailNotifications_NotificationType extends Notification {
 		click(By.linkText("eXo"));
 		switchToNewWindow();
 		waitForAndGetElement(hpact.ELEMENT_ACTIVITY_TEXTBOX);
-		assert driver.getCurrentUrl().equalsIgnoreCase(baseUrl + "/intranet") : "Wrong page!";
+		assert driver.getCurrentUrl().equalsIgnoreCase(plfURL + "/intranet") : "Wrong page!";
 		
 		info("Check user link: username (case ID 109845)");
 		driver.switchTo().window(handle);

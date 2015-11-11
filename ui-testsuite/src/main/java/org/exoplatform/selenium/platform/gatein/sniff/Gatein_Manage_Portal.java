@@ -26,7 +26,7 @@ public class Gatein_Manage_Portal extends PortalManagement{
 	@BeforeMethod
 	public void setUpBeforeTest(){
 		initSeleniumTest();
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		magAc = new ManageAccount(driver);
 		navTool = new NavigationToolbar(driver);
 		user = new UserGroupManagement(driver);
@@ -62,7 +62,7 @@ public class Gatein_Manage_Portal extends PortalManagement{
 		waitForAndGetElement("//img[contains(@src, 'sites/" + portalName + "')]");
 		
 		info("Delete portal");
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		navTool.goToPortalSites();
 		deletePortal(portalName);
 	}

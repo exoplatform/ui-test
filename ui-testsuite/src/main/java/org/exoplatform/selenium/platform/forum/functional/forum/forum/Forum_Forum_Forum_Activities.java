@@ -35,7 +35,7 @@ public class Forum_Forum_Forum_Activities extends ForumBase{
 	@BeforeMethod
 	public void setUpBeforeTest() {
 		initSeleniumTest();
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		fmCat = new ForumManageCategory(driver, this.plfVersion);
 		fmForum = new ForumManageForum(driver, this.plfVersion);
 		fmTopic = new ForumManageTopic(driver, this.plfVersion);

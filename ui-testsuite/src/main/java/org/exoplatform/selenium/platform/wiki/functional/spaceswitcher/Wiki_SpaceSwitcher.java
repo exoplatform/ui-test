@@ -35,7 +35,7 @@ public class Wiki_SpaceSwitcher extends WikiBase{
 	@BeforeMethod
 	public void beforeMethod(){
 		initSeleniumTest();
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		driver.manage().window().maximize();
 		acc = new ManageAccount(driver,this.plfVersion);
 		dialog = new Dialog(driver);

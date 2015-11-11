@@ -44,7 +44,7 @@ public class ECMS_SE_CreateNode_Upload_Action_Other extends PlatformBase{
 	@BeforeMethod
 	public void beforeMethod(){
 		initSeleniumTest();
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		magAcc = new ManageAccount(driver);
 		navToolBar = new NavigationToolbar(driver);
 		ecms = new EcmsBase(driver);
@@ -84,7 +84,7 @@ public class ECMS_SE_CreateNode_Upload_Action_Other extends PlatformBase{
 
 		info("Login by user is not locker");
 		initSeleniumTest();
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		ecms = new EcmsBase(driver);
 		navToolBar = new NavigationToolbar(driver);
 		magAcc = new ManageAccount(driver);

@@ -26,7 +26,7 @@ public class Forum_Answers_Category extends AnswerBase {
 	@BeforeMethod
 	public void setUpBeforeTest(){
 		initSeleniumTest();
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		magAc = new ManageAccount(driver);
 		magCat = new AnswerManageCategory(driver);
 		magQuest = new AnswerManageQuestion(driver, this.plfVersion);

@@ -26,7 +26,7 @@ public class Wiki_Permissions_WikiPermissions_Add extends BasicAction {
 	@BeforeMethod
 	public void setUpBeforeTest(){
 		initSeleniumTest();
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		magAcc = new ManageAccount(driver);
 		button = new Button(driver);
 		per = new PlatformPermission(driver);

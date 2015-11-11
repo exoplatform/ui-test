@@ -31,7 +31,7 @@ public class PLF_Integration extends PlatformBase {
 	@BeforeMethod
 	public void beforeMethods() {
 		initSeleniumTest();
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		info("Login with " + DATA_USER1);
 		magAcc = new ManageAccount(driver);
 		naviToolbar = new NavigationToolbar(driver);

@@ -47,7 +47,7 @@ public class Gatein_ManagePages_Edit extends DashBoard{
 	@BeforeMethod
 	public void setUpBeforeTest(){
 		initSeleniumTest();
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		magAc = new ManageAccount(driver);
 		navTool = new NavigationToolbar(driver);
 		pageMag = new PageManagement(driver);
@@ -213,7 +213,7 @@ public class Gatein_ManagePages_Edit extends DashBoard{
 		String pageTitle = "FuncManagePageTitle11";
 		String groupPath = "Platform /Content Management ";
 		String membership = "*";
-		String url = baseUrl + "/intranet/home/" + pageName;
+		String url = plfURL + "/intranet/home/" + pageName;
 		/*Step Number: 1
 		 *Step Name: -
 		 *Step Description: 

@@ -22,7 +22,7 @@ public class Wiki_PageInformation_Version_Compare extends Version{
 	@BeforeMethod
 	public void beforeMethods(){
 		initSeleniumTest();
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		magAcc = new ManageAccount(driver);
 		magAcc.signIn(admin, pass);
 	}

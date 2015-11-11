@@ -42,7 +42,7 @@ public class Gatein_Navigation_PortalNavigation_EditNavigation extends PortalMan
 	@BeforeMethod
 	public void setUpBeforeTest(){
 		initSeleniumTest();
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		button = new Button(driver);
 		magAlert = new ManageAlert(driver);
 		magAc = new ManageAccount(driver);

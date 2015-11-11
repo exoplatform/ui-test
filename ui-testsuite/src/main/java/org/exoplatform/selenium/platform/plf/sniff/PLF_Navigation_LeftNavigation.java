@@ -35,7 +35,7 @@ public class PLF_Navigation_LeftNavigation extends GroupNavigation {
 	@BeforeMethod
 	public void beforeMethods() {
 		initSeleniumTest();
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		info("Login with " + DATA_USER1);
 		magAcc = new ManageAccount(driver, this.plfVersion);
 		spaceMag = new SpaceManagement(driver, this.plfVersion);
@@ -397,7 +397,7 @@ public class PLF_Navigation_LeftNavigation extends GroupNavigation {
 
 		/*Step 2: Check Left navigation on other portal*/
 		//- Connect to other sites. Go to via url: host:port/portal/acme/.
-		String url = baseUrl+"/acme/";
+		String url = plfURL+"/acme/";
 		driver.get(url);
 
 		//- The Left Navigation isn't displayed

@@ -43,7 +43,7 @@ public class ECMS_SE_BasicAction_OtherActionsSymlink extends PlatformBase{
 	@BeforeMethod
 	public void beforeMethods() {
 		initSeleniumTest();
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		dialog = new Dialog(driver);
 		button = new Button(driver);
 		magAlert = new ManageAlert(driver);

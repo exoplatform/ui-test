@@ -32,7 +32,7 @@ public class PLF_HomePageActivityStream_Activity_Comment extends Activity{
 	@BeforeMethod
 	public void setUpBeforeTest(){
 		initSeleniumTest();
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		acc = new ManageAccount(driver);
 		home = new HomePageActivity(driver); 
 		acc.signIn(DATA_USER1, DATA_PASS);

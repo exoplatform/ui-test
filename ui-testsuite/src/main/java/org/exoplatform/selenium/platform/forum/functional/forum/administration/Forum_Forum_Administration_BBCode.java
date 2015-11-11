@@ -30,7 +30,7 @@ public class Forum_Forum_Administration_BBCode extends ForumManageAdministration
 	@BeforeMethod
 	public void setUpBeforeTest(){
 		initSeleniumTest();
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		acc = new ManageAccount(driver, this.plfVersion);
 		acc.signIn(DATA_USER1, DATA_PASS);
 		button = new Button(driver);

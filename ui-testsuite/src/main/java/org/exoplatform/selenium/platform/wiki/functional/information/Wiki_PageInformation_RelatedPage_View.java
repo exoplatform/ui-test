@@ -26,7 +26,7 @@ public class Wiki_PageInformation_RelatedPage_View extends BasicAction{
 	@BeforeMethod
 	public void beforeMethod(){
 		initSeleniumTest();
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		driver.manage().window().maximize();
 		acc = new ManageAccount(driver,this.plfVersion);
 		dialog = new Dialog(driver);

@@ -37,7 +37,7 @@ public class PLF_HomepageGadgets_FavoritesDocuments extends PlatformBase {
 	@BeforeMethod
 	public void beforeMethods() {
 		initSeleniumTest();
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		actBar = new ActionBar(driver, this.plfVersion);
 		navToolBar = new NavigationToolbar(driver, this.plfVersion);
 		cTemp = new ContentTemplate(driver, this.plfVersion);

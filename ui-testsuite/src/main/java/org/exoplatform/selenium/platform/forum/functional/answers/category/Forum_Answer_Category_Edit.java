@@ -28,7 +28,7 @@ public class Forum_Answer_Category_Edit extends AnswerBase{
 	@BeforeMethod
 	public void setUpBeforeTest(){
 		initSeleniumTest();
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		Acc = new ManageAccount(driver);
 		mCat = new AnswerManageCategory(driver);
 		mQuest = new AnswerManageQuestion(driver);

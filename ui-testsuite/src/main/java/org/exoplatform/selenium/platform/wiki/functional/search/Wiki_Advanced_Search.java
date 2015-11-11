@@ -21,7 +21,7 @@ public class Wiki_Advanced_Search extends BasicAction {
 	@BeforeMethod
 	public void setUpBeforeTest(){
 		initSeleniumTest();
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		magAc = new ManageAccount(driver);
 
 		magAc.signIn(DATA_USER1, DATA_PASS);

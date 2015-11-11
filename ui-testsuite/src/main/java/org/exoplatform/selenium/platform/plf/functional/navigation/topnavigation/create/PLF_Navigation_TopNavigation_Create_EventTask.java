@@ -29,7 +29,7 @@ public class PLF_Navigation_TopNavigation_Create_EventTask extends CalendarBase{
 	@BeforeMethod
 	public void beforeMethods(){	
 		initSeleniumTest();
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		acc = new ManageAccount(driver, this.plfVersion);
 		nav = new NavigationToolbar(driver, this.plfVersion);				
 		acc.signIn(DATA_USER1, DATA_PASS);	

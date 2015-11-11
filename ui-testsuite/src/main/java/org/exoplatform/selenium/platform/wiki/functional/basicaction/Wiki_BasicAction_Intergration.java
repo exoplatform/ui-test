@@ -21,7 +21,7 @@ public class Wiki_BasicAction_Intergration extends BasicAction {
 	@BeforeMethod
 	public void setUpBeforeTest(){
 		initSeleniumTest();
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		magAcc = new ManageAccount(driver);
 		magMember = new ManageMember(driver);
 

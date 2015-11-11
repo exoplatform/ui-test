@@ -43,7 +43,7 @@ public class ECMS_SE_PublishActivities_ContentActivities_Action extends Platform
 	@BeforeTest
 	public void beforeTest(){
 		initSeleniumTest();
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		magAcc = new ManageAccount(driver);
 		navToolBar = new NavigationToolbar(driver);
 		actBar = new ActionBar(driver);

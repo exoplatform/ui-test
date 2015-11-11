@@ -47,7 +47,7 @@ public class ECMS_SE_CreateNode_Category extends PlatformBase{
 	@BeforeMethod
 	public void beforeMethod(){
 		initSeleniumTest();
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		button = new Button(driver);
 		magAcc = new ManageAccount(driver);
 		navToolBar = new NavigationToolbar(driver);

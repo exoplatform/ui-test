@@ -72,7 +72,7 @@ public class PLF_UnifiedSearch_FileSearch extends Template {
 	@BeforeMethod
 	public void beforeMethods() {
 		initSeleniumTest();
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		info("Login with " + DATA_USER1);
 		magAcc = new ManageAccount(driver, this.plfVersion);
 		naviToolbar = new NavigationToolbar(driver, this.plfVersion);

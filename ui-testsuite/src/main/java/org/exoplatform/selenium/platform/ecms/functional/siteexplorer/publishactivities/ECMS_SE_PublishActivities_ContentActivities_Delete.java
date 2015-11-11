@@ -41,7 +41,7 @@ public class ECMS_SE_PublishActivities_ContentActivities_Delete extends Platform
 	@BeforeMethod
 	public void beforeMethod(){
 		initSeleniumTest();
-		driver.get(baseUrl);
+		driver.get(plfURL);
 		magAcc = new ManageAccount(driver, this.plfVersion);
 		navToolBar = new NavigationToolbar(driver, this.plfVersion);
 		actBar = new ActionBar(driver,this.plfVersion);
