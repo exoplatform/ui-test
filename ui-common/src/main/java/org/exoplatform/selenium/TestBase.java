@@ -250,6 +250,8 @@ public class TestBase {
 		capabilitiesIE.setCapability(InternetExplorerDriver.IE_ENSURE_CLEAN_SESSION, true);
 		capabilitiesIE.setCapability("initialBrowserUrl", plfURL);
 		//return new InternetExplorerDriver(capabilitiesIE);
+		capabilitiesIE.setBrowserName("internet explorer");
+		capabilitiesIE.setPlatform(Platform.LINUX);
 		return new RemoteWebDriver(new URL(hubURL), capabilitiesIE);
 	}
 
@@ -285,6 +287,8 @@ public class TestBase {
 		profile.setPreference("pref.downloads.disable_button.edit_actions", true);
 		profile.setPreference("pdfjs.disabled", true); 
 		profile.setPreference("browser.helperApps.alwaysAsk.force", false);
+		capabilities.setBrowserName("firefox");
+		capabilities.setPlatform(Platform.LINUX);
 		return new RemoteWebDriver(new URL(hubURL), capabilities);
 	}
 	/**
