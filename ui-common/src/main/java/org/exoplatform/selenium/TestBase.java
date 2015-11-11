@@ -27,18 +27,7 @@ import java.util.Random;
 import java.util.Set;
 
 import org.apache.commons.io.FileUtils;
-import org.openqa.selenium.Alert;
-import org.openqa.selenium.By;
-import org.openqa.selenium.ElementNotVisibleException;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.NoAlertPresentException;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.StaleElementReferenceException;
-import org.openqa.selenium.UnhandledAlertException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebDriverException;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -204,7 +193,7 @@ public class TestBase {
 	 * Init Chrome driver
 	 */
 	public WebDriver initChromeDriver() throws Exception {
-		info("Init chrome driver");
+		info("Init chrome driver with HUB");
 		getSystemProperty();
 		String pathFile = "";
 		String fs = File.separator;
@@ -233,6 +222,8 @@ public class TestBase {
 		capabilities.setCapability(ChromeOptions.CAPABILITY, options);
 		//capabilities.setCapability("nativeEvents", true);
 		//return new ChromeDriver(capabilities);
+		capabilities.setBrowserName("chrome");
+		capabilities.setPlatform(Platform.LINUX);
 		return new RemoteWebDriver(new URL(hubURL), capabilities);
 	}
 
