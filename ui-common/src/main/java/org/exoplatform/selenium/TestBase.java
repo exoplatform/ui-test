@@ -54,6 +54,8 @@ public class TestBase {
 
 	public static String platform;
 
+	public static String screenshotsPath;
+
 	protected String nativeEvent;
 
 	protected int DEFAULT_TIMEOUT = 40000; //milliseconds = 30 seconds
@@ -166,6 +168,8 @@ public class TestBase {
 		platform = System.getProperty("platform");
 		hubURL = System.getProperty("hubURL");
 		plfURL = System.getProperty("plfURL");
+
+		screenshotsPath = System.getProperty("screenshotsPath");
 
 		if (nativeEvent == null)
 			nativeEvent = DEFAULT_NATIVE_EVENT;
@@ -333,6 +337,25 @@ public class TestBase {
 		action = new Actions(driver);
 		driver.manage().window().maximize();
 		driver.get(plfURL);
+    takeScreenshots(driver, "Home");
+	}
+
+	public void takeScreenshots(WebDriver driver, String action){
+
+		try {
+			if (screenshotsPath != null) {
+				info("Take screenshot for " + action);
+				TakesScreenshot ts = (TakesScreenshot) driver;
+				File source = ts.getScreenshotAs(OutputType.FILE);
+				final String imgPath = screenshotsPath + "/" + action + "-" + System.currentTimeMillis() + ".png";
+				debug(imgPath);
+				FileUtils.copyFile(source, new File(imgPath));
+			}else
+				error("Screenshots path not set!");
+		} catch (IOException e) {
+			error("Unable to take screenshot.", e);
+		}
+
 	}
 
 	/**
@@ -681,6 +704,7 @@ public class TestBase {
 	public void click(Object locator, Object... opParams) {
 		int notDisplay = (Integer) (opParams.length > 0 ? opParams[0]: 0);		
 		Actions actions = new Actions(driver);
+		takeScreenshots(driver, "Click");
 		try {
 			WebElement element = waitForAndGetElement(locator, DEFAULT_TIMEOUT, 1, notDisplay);
 			if (browser.contains("chrome")) {

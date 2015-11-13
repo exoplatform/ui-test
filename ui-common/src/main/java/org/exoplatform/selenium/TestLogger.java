@@ -19,6 +19,18 @@ public class TestLogger {
 		logger.log(level, logMessage);
 	}
 
+	public static void log(String message, Level level, Exception ex) {
+		Throwable t = new Throwable();
+		String logMessage = message;
+		StackTraceElement[] elements = t.getStackTrace();
+		Logger logger = Logger.getLogger(TestBase.class);
+		String Filename = elements[2].getFileName();
+		String sClassName = Filename.substring(0, Filename.length() - 5);//remove .java
+		String sMethodName = elements[2].getMethodName();
+		logMessage = String.format("[%-10s][%s] %s", sClassName, sMethodName, message);
+		logger.log(level, logMessage, ex);
+	}
+
 	public static void trace(String message) {
 		log(message, Level.TRACE);
 	}
@@ -37,5 +49,9 @@ public class TestLogger {
 
 	public static void error(String message) {
 		log(message, Level.ERROR);
+	}
+
+	public static void error(String message, Exception ex) {
+		log(message, Level.ERROR, ex);
 	}
 }
