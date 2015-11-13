@@ -12,12 +12,8 @@
 			<class name="org.exoplatform.selenium.platform.task.functional.TASK_CalendarIntegration" />
 			<class name="org.exoplatform.selenium.platform.task.functional.TASK_UnifiedSearch" />
 			<class name="org.exoplatform.selenium.platform.task.functional.TASK_Labels_LabelOverview" />
-			<class name="org.exoplatform.selenium.platform.task.functional.TASK_Labels_LabelOverview" />
-			<class name="org.exoplatform.selenium.platform.task.functional.TASK_Projects_EditProject" />
 			<class name="org.exoplatform.selenium.platform.task.functional.TASK_Labels_CreateLabel" />
-			<class name="org.exoplatform.selenium.platform.task.functional.TASK_Labels_LabelOverview" />
 			<class name="org.exoplatform.selenium.platform.task.functional.TASK_Projects_EditProject" />
-			<class name="org.exoplatform.selenium.platform.task.functional.TASK_Labels_CreateLabel" />
 			<class name="org.exoplatform.selenium.platform.task.functional.TASK_Labels_EditLabel" />
 		</classes>
 	</test>
