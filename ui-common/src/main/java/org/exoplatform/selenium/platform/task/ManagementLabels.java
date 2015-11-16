@@ -209,25 +209,6 @@ public class ManagementLabels extends TaskManagementLocatorObject {
 		}
 	}
 	/**
-<<<<<<< HEAD
-=======
->>>>>>> FQA-2694: [Task Management]- Write scripts for Labels - Label Overview
-=======
->>>>>>> FQA-2696:[Task Management]- Write scripts for Labels - Edit a label
-=======
-		click(ELEMENT_LEFT_PANE_COLOR_TABLE_ITEM.replace("$label",label).replace("$color",color));
-		Utils.pause(2000);
-		waitForAndGetElement(ELEMENT_LEFT_PANE_PROJECT_COLOR.replace("$label", label).replace("$color", color));
-		if(tasks.length>0){
-			for (String task : tasks) {
-				openLabel(label);
-				Utils.pause(1000);
-				waitForAndGetElement(ELEMENT_TASK_COLOR.replace("$task", task).replace("$color", color));
-			}
-		}
-	}
-	/**
->>>>>>> FQA-2694: [Task Management]- Write scripts for Labels - Label Overview
 	 * Add a new label
 	 * @param name
 	 *              is label's name
