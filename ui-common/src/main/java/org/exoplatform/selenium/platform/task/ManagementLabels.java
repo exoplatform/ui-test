@@ -1,9 +1,7 @@
 package org.exoplatform.selenium.platform.task;
 
 import static org.exoplatform.selenium.TestLogger.info;
-
 import org.exoplatform.selenium.Utils;
-
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
@@ -326,10 +324,35 @@ public class ManagementLabels extends TaskManagementLocatorObject {
 	 */
 	public void deleteLabel(String name){
 		selectOpContMenuGivenLabel(name,optionContMenuGivenLabel.Delete);
+		waitForAndGetElement(ELEMENT_DELETE_LABEL_POPUP);
 		info("delete label:"+name);
 		click(ELEMENT_DELETE_LABEL_POPUP_DELETE_BTN);
 		Utils.pause(2000);
 		waitForElementNotPresent(ELEMENT_LEFT_PANE_LABEL_NAME.replace("$label", name));
+	}
+	/**
+	 * Check cancel action
+	 * @param name
+	 */
+	public void checkCancelDeleteLabel(String name){
+		selectOpContMenuGivenLabel(name,optionContMenuGivenLabel.Delete);
+		waitForAndGetElement(ELEMENT_DELETE_LABEL_POPUP);
+		info("check cancel delele action");
+		click(ELEMENT_DELETE_LABEL_POPUP_CANCEL_BTN);
+		Utils.pause(2000);
+		waitForAndGetElement(ELEMENT_LEFT_PANE_LABEL_NAME.replace("$label", name));
+	}
+	/**
+	 * Check Delete Label popup
+	 * @param label
+	 */
+	public void checkDeleteLabelPopup(String label){
+		info("check delete popup");
+		selectOpContMenuGivenLabel(label,optionContMenuGivenLabel.Delete);
+		waitForAndGetElement(ELEMENT_DELETE_LABEL_POPUP_TITLE);
+		waitForAndGetElement(ELEMENT_DELETE_LABEL_POPUP_MESSAGE.replace("$label", label));
+		waitForAndGetElement(ELEMENT_DELETE_LABEL_POPUP_CANCEL_BTN);
+		waitForAndGetElement(ELEMENT_DELETE_LABEL_POPUP_DELETE_BTN);
 	}
 	/**
 	 * Check default setting groupBy,sortBy
