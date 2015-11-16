@@ -1,9 +1,7 @@
 package org.exoplatform.selenium.platform.task;
 
 import static org.exoplatform.selenium.TestLogger.info;
-
 import org.exoplatform.selenium.Utils;
-
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
@@ -352,6 +350,9 @@ public class ManagementLabels extends TaskManagementLocatorObject {
 	}
 	/**
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> FQA-2697:[Task Management]- Write scripts for Labels - Delete label
 	 * Check cancel action
 	 * @param name
 	 */
@@ -376,8 +377,11 @@ public class ManagementLabels extends TaskManagementLocatorObject {
 		waitForAndGetElement(ELEMENT_DELETE_LABEL_POPUP_DELETE_BTN);
 	}
 	/**
+<<<<<<< HEAD
 =======
 >>>>>>> FQA-2694: [Task Management]- Write scripts for Labels - Label Overview
+=======
+>>>>>>> FQA-2697:[Task Management]- Write scripts for Labels - Delete label
 	 * Check default setting groupBy,sortBy
 	 * @param project
 	 * @param group
