@@ -1,7 +1,9 @@
 package org.exoplatform.selenium.platform.task;
 
 import static org.exoplatform.selenium.TestLogger.info;
+
 import org.exoplatform.selenium.Utils;
+
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
@@ -164,7 +166,10 @@ public class ManagementLabels extends TaskManagementLocatorObject {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> FQA-2696:[Task Management]- Write scripts for Labels - Edit a label
 	 * get value attribute
 	 * @param locator
 	 * @return data-id of element
@@ -181,8 +186,11 @@ public class ManagementLabels extends TaskManagementLocatorObject {
 		}
 	}
 	/**
+<<<<<<< HEAD
 =======
 >>>>>>> FQA-2694: [Task Management]- Write scripts for Labels - Label Overview
+=======
+>>>>>>> FQA-2696:[Task Management]- Write scripts for Labels - Edit a label
 	 * Add a new label
 	 * @param name
 	 *              is label's name
