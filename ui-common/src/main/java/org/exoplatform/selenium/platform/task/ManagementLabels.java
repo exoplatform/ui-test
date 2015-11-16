@@ -466,6 +466,22 @@ public class ManagementLabels extends TaskManagementLocatorObject {
 			waitForElementNotPresent(ELEMENT_LEFT_PANE_TOOLTIP_LABEL);
 		}
 	}
-	
-	
+	/**
+	 * Check display of label
+	 * @param isDisplay
+	 * @param label
+	 */
+	public void checkDisplayOfLabel(boolean isDisplay,String...labels){
+		info("check display of label");
+		if(isDisplay){
+			for (String label : labels) {
+				waitForAndGetElement(ELEMENT_LEFT_PANE_LABEL_NAME.replace("$label", label));
+			}
+			
+		}else{
+			for (String label : labels) {
+				waitForElementNotPresent(ELEMENT_LEFT_PANE_LABEL_NAME.replace("$label", label));
+			}
+		}
+	}
 }

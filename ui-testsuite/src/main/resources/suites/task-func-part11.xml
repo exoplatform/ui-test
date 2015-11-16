@@ -10,6 +10,7 @@
 			<class name="org.exoplatform.selenium.platform.task.functional.TASK_TestConfig_1" />
 			<class name="org.exoplatform.selenium.platform.task.functional.TASK_Labels_DeleteLabel" />
 			<class name="org.exoplatform.selenium.platform.task.functional.TASK_Labels_ChangeLabelColor" />
+			<class name="org.exoplatform.selenium.platform.task.functional.TASK_Labels_LabelPermissions" />
 		</classes>
 	</test>
 	<listeners>
