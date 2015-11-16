@@ -1,7 +1,9 @@
 package org.exoplatform.selenium.platform.task;
 
 import static org.exoplatform.selenium.TestLogger.info;
+
 import org.exoplatform.selenium.Utils;
+
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
@@ -149,16 +151,46 @@ public class ManagementLabels extends TaskManagementLocatorObject {
 	public void selectColor(String label,String color,String...tasks){
 		goToContMenuGivenLabel(label);
 		info("Select "+color+" in color list");
-		click(ELEMENT_LEFT_PANE_COLOR_TABLE_ITEM.replace("$label",label).replace("$color",color));
+		click(ELEMENT_LEFT_PANE_LABEL_COLOR_TABLE_ITEM.replace("$label",label).replace("$color",color));
 		Utils.pause(2000);
-		waitForAndGetElement(ELEMENT_LEFT_PANE_PROJECT_COLOR.replace("$label", label).replace("$color", color));
+		waitForAndGetElement(ELEMENT_LEFT_PANE_LABEL_COLOR.replace("$label", label).replace("$color", color));
 		if(tasks.length>0){
 			for (String task : tasks) {
-				openLabel(label);
-				Utils.pause(1000);
-				waitForAndGetElement(ELEMENT_TASK_COLOR.replace("$task", task).replace("$color", color));
+				mouseOverAndClick(ELEMENT_TASK_TITLE.replace("$task", task));
+				waitForAndGetElement(ELEMENT_TASK_LABEL_COLOR.replace("$task", task).replace("$color", color).replace("$label", label));
 			}
 		}
+	}
+	/**
+	 * select no color
+	 * @param label
+	 * @param tasks
+	 * 				list of tasks
+	 */
+	public void selectNoColor(String label, String...tasks){
+		goToContMenuGivenLabel(label);
+		info("Select no color");
+		click(ELEMENT_LEFT_PANE_LABEL_COLOR_TABLE_ITEM.replace("$label", label).replace("$color", "noColor"));
+		Utils.pause(2000);
+		waitForAndGetElement(ELEMENT_LEFT_PANE_LABEL_NO_COLOR.replace("$label", label));
+		if(tasks.length>0){
+			for (String task : tasks) {
+				mouseOverAndClick(ELEMENT_TASK_TITLE.replace("$task", task));
+				waitForAndGetElement(ELEMENT_TASK_LABEL_NOCOLOR.replace("$task", task).replace("$label", label));
+			}
+		}
+		
+	}
+	/**
+	 * Check color table of label
+	 * @param label
+	 */
+	public void checkColorTable(String label){
+		goToContMenuGivenLabel(label);
+		Utils.pause(1000);
+		waitForAndGetElement(ELEMENT_LEFT_PANE_LABEL_COLOR_TABLE_ITEM.replace("$label", label).replace("$color", "noColor"));
+		waitForAndGetElement(ELEMENT_LEFT_PANE_LABEL_COLOR_TABLE_ITEM.replace("$label", label).replace("$color", "red"));
+		goToContMenuGivenLabel(label);
 	}
 	/**
 <<<<<<< HEAD
@@ -367,30 +399,6 @@ public class ManagementLabels extends TaskManagementLocatorObject {
 		waitForAndGetElement(ELEMENT_GROUPBY_ITEM_DEFAULT.replace("$group", group));
 	}
 	/**
-	 * Check cancel action
-	 * @param name
-	 */
-	public void checkCancelDeleteLabel(String name){
-		selectOpContMenuGivenLabel(name,optionContMenuGivenLabel.Delete);
-		waitForAndGetElement(ELEMENT_DELETE_LABEL_POPUP);
-		info("check cancel delele action");
-		click(ELEMENT_DELETE_LABEL_POPUP_CANCEL_BTN);
-		Utils.pause(2000);
-		waitForAndGetElement(ELEMENT_LEFT_PANE_LABEL_NAME.replace("$label", name));
-	}
-	/**
-	 * Check Delete Label popup
-	 * @param label
-	 */
-	public void checkDeleteLabelPopup(String label){
-		info("check delete popup");
-		selectOpContMenuGivenLabel(label,optionContMenuGivenLabel.Delete);
-		waitForAndGetElement(ELEMENT_DELETE_LABEL_POPUP_TITLE);
-		waitForAndGetElement(ELEMENT_DELETE_LABEL_POPUP_MESSAGE.replace("$label", label));
-		waitForAndGetElement(ELEMENT_DELETE_LABEL_POPUP_CANCEL_BTN);
-		waitForAndGetElement(ELEMENT_DELETE_LABEL_POPUP_DELETE_BTN);
-	}
-	/**
 	 * Check GroupBy list in Labels
 	 * @param project
 	 * @param groups
@@ -459,4 +467,6 @@ public class ManagementLabels extends TaskManagementLocatorObject {
 			waitForElementNotPresent(ELEMENT_LEFT_PANE_TOOLTIP_LABEL);
 		}
 	}
+	
+	
 }

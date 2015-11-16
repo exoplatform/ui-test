@@ -183,7 +183,7 @@ public class ManagementProjects extends TaskManagementLocatorObject {
 	public void selectColor(String project,String color,String...tasks){
 		goToContMenuGivenProject(project);
 		info("Select "+color+" in color list");
-		click(ELEMENT_LEFT_PANE_COLOR_TABLE_ITEM.replace("$project",project).replace("$color",color));
+		click(ELEMENT_LEFT_PANE_PROJECT_COLOR_TABLE_ITEM.replace("$project",project).replace("$color",color));
 		Utils.pause(2000);
 		waitForAndGetElement(ELEMENT_LEFT_PANE_PROJECT_COLOR.replace("$project", project).replace("$color", color));
 		if(tasks.length>0){
@@ -934,8 +934,8 @@ public class ManagementProjects extends TaskManagementLocatorObject {
 	public void checkColorTable(String project){
 		goToContMenuGivenProject(project);
 		Utils.pause(1000);
-		waitForAndGetElement(ELEMENT_LEFT_PANE_COLOR_TABLE_ITEM.replace("$project", project).replace("$color", "noColor"));
-		waitForAndGetElement(ELEMENT_LEFT_PANE_COLOR_TABLE_ITEM.replace("$project", project).replace("$color", "red"));
+		waitForAndGetElement(ELEMENT_LEFT_PANE_PROJECT_COLOR_TABLE_ITEM.replace("$project", project).replace("$color", "noColor"));
+		waitForAndGetElement(ELEMENT_LEFT_PANE_PROJECT_COLOR_TABLE_ITEM.replace("$project", project).replace("$color", "red"));
 		goToContMenuGivenProject(project);
 	}
 	/**
