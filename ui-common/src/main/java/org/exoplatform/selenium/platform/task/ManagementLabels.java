@@ -1,7 +1,9 @@
 package org.exoplatform.selenium.platform.task;
 
 import static org.exoplatform.selenium.TestLogger.info;
+
 import org.exoplatform.selenium.Utils;
+
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
@@ -145,6 +147,7 @@ public class ManagementLabels extends TaskManagementLocatorObject {
 	 * @param color
 	 *                is a color in color list as pink, red,sky_blue,...
 	 *                these colors will be read from ColorDatabase.java file
+	 * @param tasks
 	 */
 	public void selectColor(String label,String color,String...tasks){
 		goToContMenuGivenLabel(label);
@@ -159,6 +162,7 @@ public class ManagementLabels extends TaskManagementLocatorObject {
 			}
 		}
 	}
+	
 	/**
 	 * select no color
 	 * @param label
@@ -462,4 +466,6 @@ public class ManagementLabels extends TaskManagementLocatorObject {
 			waitForElementNotPresent(ELEMENT_LEFT_PANE_TOOLTIP_LABEL);
 		}
 	}
+	
+	
 }
