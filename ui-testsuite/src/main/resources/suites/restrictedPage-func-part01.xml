@@ -10,7 +10,6 @@
 			<class name="org.exoplatform.selenium.platform.restrictedPageEditor.testConfig" />
 			<class name="org.exoplatform.selenium.platform.restrictedPageEditor.PermissionSettingUI" />
 			<class name="org.exoplatform.selenium.platform.restrictedPageEditor.PagePermissions" />
-			<class name="org.exoplatform.selenium.platform.restrictedPageEditor.ContainerPermissions" />
 		</classes>
 	</test>
 	<listeners>

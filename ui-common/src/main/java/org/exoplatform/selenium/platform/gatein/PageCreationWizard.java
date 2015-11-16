@@ -872,8 +872,18 @@ public class PageCreationWizard extends GateinLocator {
 	
 	/**
 	 * Select a container and open Edit form
+<<<<<<< HEAD
 	 * @param containerLocation
 	 * @param containerEditLocation
+=======
+<<<<<<< HEAD
+	 * By: QuyenNT
+=======
+	 * @Author: QuyenNT
+>>>>>>> FQA-2756:PLF43 - Write High Fnc/PLF/Restricted Page Editor/Container Permissions
+	 * Date: Nov 11, 2015	
+	 * @param:
+>>>>>>> FQA-2756:PLF43 - Write High Fnc/PLF/Restricted Page Editor/Container Permissions
 	 */
 	public void openContainerEditForm(String containerLocation, String containerEditLocation){
 		info("Select Container tab");
@@ -885,9 +895,20 @@ public class PageCreationWizard extends GateinLocator {
 	}
 	
 	/**
+<<<<<<< HEAD
 	 *  Delete a container without permission
 	 * @param containerId
 	 * @param containerDeleteId
+=======
+	 * Delete a container without permission
+<<<<<<< HEAD
+	 * By: QuyenNT
+=======
+	 * @Author: QuyenNT
+>>>>>>> FQA-2756:PLF43 - Write High Fnc/PLF/Restricted Page Editor/Container Permissions
+	 * Date: Nov 11, 2015	
+	 * @param:
+>>>>>>> FQA-2756:PLF43 - Write High Fnc/PLF/Restricted Page Editor/Container Permissions
 	 */
 	public void deleteContainerWithoutPermission(String containerId, String containerDeleteId){
 		info("Delete the container");

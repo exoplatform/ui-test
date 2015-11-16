@@ -318,6 +318,9 @@ public class ManageLayout extends AdministrationLocator{
 	
 	/**
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> FQA-2756:PLF43 - Write High Fnc/PLF/Restricted Page Editor/Container Permissions
 	 * 
 	 * Add permission for a portlet
 	 * @param groupPath
@@ -330,6 +333,15 @@ public class ManageLayout extends AdministrationLocator{
 	 *  				is tab name: Access/Move Apps/Move Containers   
 	 * @param popupName
 	 *  				is tab name: Access/Move Apps/Move Containers    
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+	 * By: QuyenNT
+=======
+	 * @Author: QuyenNT
+>>>>>>> FQA-2756:PLF43 - Write High Fnc/PLF/Restricted Page Editor/Container Permissions
+	 * Date: Oct 30, 2015            
+>>>>>>> FQA-2756:PLF43 - Write High Fnc/PLF/Restricted Page Editor/Container Permissions
 	 */
 	public void addPremission(String groupPath,String membership,String addedGroup, String permissionSelector, 
 								String popupName, String popupTitle){
@@ -414,9 +426,9 @@ public class ManageLayout extends AdministrationLocator{
 	
 	/**
 	 * Set permission for Move Apps 
-	 * By: QuyenNT
-	 * Date: Nov 17, 2015	
-	 * @param:
+	 * @param groupPath
+	 * @param membership
+	 * @param addedGroup
 	 */
 	public void setMoveAppsPermission(String groupPath, String membership, String addedGroup){
 	
@@ -442,7 +454,11 @@ public class ManageLayout extends AdministrationLocator{
 	}
 	
 	/**
+<<<<<<< HEAD
 	 * Select a container -> Set permission for Move Containers 
+=======
+	 *  Select a container -> Set permission for Move Containers 
+>>>>>>> FQA-2756:PLF43 - Write High Fnc/PLF/Restricted Page Editor/Container Permissions
 	 * @param groupPath
 	 * @param membership
 	 * @param addedGroup
