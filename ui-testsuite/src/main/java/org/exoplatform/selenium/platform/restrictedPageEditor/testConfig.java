@@ -42,7 +42,7 @@ import org.testng.annotations.BeforeMethod;
 		GateinPortalMemberShipsPermissionDatabase portMemPermisData;
 		ContainersDatabase contaiData;
 		PortalManageSites portalManageSites;
-						
+		
 		@BeforeMethod
 		public void setUpBeforeMethod() throws Exception{
 			info("Start setUpBeforeMethod");

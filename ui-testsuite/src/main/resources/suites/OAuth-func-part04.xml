@@ -1,15 +1,14 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="Platform Functional Test" verbose="1" preserve-order="true">
-	<test name="restrictedPage-func-part03" enabled="true">
+	<test name="OAuth-func-part05" enabled="true">
 		<groups>
 			<run>
 				<exclude name="pending" />
 			</run>
 		</groups>
 		<classes>			
-			<class name="org.exoplatform.selenium.platform.restrictedPageEditor.testConfig" />
-			<class name="org.exoplatform.selenium.platform.restrictedPageEditor.PermissionSettingUI" />
-			<class name="org.exoplatform.selenium.platform.restrictedPageEditor.SitePermissions" />
+			<class name="org.exoplatform.selenium.platform.plf.functional.OAuthAuthentication.LoginScreens" />
+			<class name="org.exoplatform.selenium.platform.plf.functional.OAuthAuthentication.LoginScreens2" />
 		</classes>
 	</test>
 	<listeners>

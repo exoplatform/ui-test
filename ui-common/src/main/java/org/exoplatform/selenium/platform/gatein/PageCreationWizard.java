@@ -851,7 +851,6 @@ public class PageCreationWizard extends GateinLocator {
 	
 	/**
 	 * Delete a contain in the layout by an user have no permission
-	 * @param name
 	 */
 	public void deleteContainerWithoutPermission(String id){
 		info("Delete the container");
@@ -873,17 +872,26 @@ public class PageCreationWizard extends GateinLocator {
 	/**
 	 * Select a container and open Edit form
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * @param containerLocation
 	 * @param containerEditLocation
 =======
+=======
+>>>>>>> FQA-2759:PLF43 - Write High Fnc/PLF/Restricted Page Editor/Site Permissions
 <<<<<<< HEAD
 	 * By: QuyenNT
 =======
 	 * @Author: QuyenNT
 >>>>>>> FQA-2756:PLF43 - Write High Fnc/PLF/Restricted Page Editor/Container Permissions
+=======
+	 * By: QuyenNT
+>>>>>>> FQA-2759:PLF43 - Write High Fnc/PLF/Restricted Page Editor/Site Permissions
 	 * Date: Nov 11, 2015	
+<<<<<<< HEAD
 	 * @param:
 >>>>>>> FQA-2756:PLF43 - Write High Fnc/PLF/Restricted Page Editor/Container Permissions
+=======
+>>>>>>> FQA-2759:PLF43 - Write High Fnc/PLF/Restricted Page Editor/Site Permissions
 	 */
 	public void openContainerEditForm(String containerLocation, String containerEditLocation){
 		info("Select Container tab");
@@ -902,13 +910,20 @@ public class PageCreationWizard extends GateinLocator {
 =======
 	 * Delete a container without permission
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * By: QuyenNT
 =======
 	 * @Author: QuyenNT
 >>>>>>> FQA-2756:PLF43 - Write High Fnc/PLF/Restricted Page Editor/Container Permissions
+=======
+	 * By: QuyenNT
+>>>>>>> FQA-2759:PLF43 - Write High Fnc/PLF/Restricted Page Editor/Site Permissions
 	 * Date: Nov 11, 2015	
+<<<<<<< HEAD
 	 * @param:
 >>>>>>> FQA-2756:PLF43 - Write High Fnc/PLF/Restricted Page Editor/Container Permissions
+=======
+>>>>>>> FQA-2759:PLF43 - Write High Fnc/PLF/Restricted Page Editor/Site Permissions
 	 */
 	public void deleteContainerWithoutPermission(String containerId, String containerDeleteId){
 		info("Delete the container");

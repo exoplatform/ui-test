@@ -696,7 +696,6 @@
 			</properties>
 		</profile>
 		<!-- Testing failed-->
-		
 		<profile>
 			<id>testng-failed</id>
 			<properties>
