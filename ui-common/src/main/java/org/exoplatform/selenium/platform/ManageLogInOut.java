@@ -95,7 +95,7 @@ public class ManageLogInOut extends PlatformBase {
 				mouseOverAndClick(ELEMENT_ACCOUNT_NAME_LINK);
 				break;
 			}
-			click(ELEMENT_ACCOUNT_NAME_LINK);
+			clickByJavascript(ELEMENT_ACCOUNT_NAME_LINK);
 			if (waitForAndGetElement(ELEMENT_SIGN_OUT_LINK, 5000, 0) != null){
 				info("Element " + ELEMENT_SIGN_OUT_LINK + "... is displayed");
 				break;

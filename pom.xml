@@ -17,11 +17,7 @@
 	<properties>
 		<maven.test.skip>true</maven.test.skip>
 		<maven-surefire-plugin.version>2.12.1</maven-surefire-plugin.version>
-<<<<<<< HEAD
 		<selenium-java.version>2.48.2</selenium-java.version>
-=======
-		<selenium-java.version>2.48.0</selenium-java.version>
->>>>>>> FQA-2763:PLF43-Write High Fnc/ECMS/Share in ContentExplorer/Notifications
 		<testng.version>6.3.1</testng.version>
 		<cargo-maven2-plugin.version>1.1.1</cargo-maven2-plugin.version>
 		<maven-dependency-plugin.version>2.1</maven-dependency-plugin.version>

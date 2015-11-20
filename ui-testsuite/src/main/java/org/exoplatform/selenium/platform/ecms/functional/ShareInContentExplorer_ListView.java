@@ -288,7 +288,7 @@ import org.testng.annotations.Test;
 		*Expected Outcome: 
 			- The folder is added.*/
 
-		String folderName = "Folder130815-"+getRandomNumber();
+		String folderName = "Folder"+getRandomNumber();
 		info("Add folder.");
 		manageLoginOut.signIn(DATA_USER1,DATA_PASS);
 		
