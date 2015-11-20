@@ -174,9 +174,9 @@ public class SpaceManagement extends SpaceLocator {
 	public void editSpaceSimple(String space,String newName,String newDes,boolean isChangeAvatar,String filepath){
 		info("Click on Edit button of the space");
 		if (waitForAndGetElement(
-				ELEMENT_SPACE_EDIT_BTN.replace("${space}", space), 3000, 0) != null)
+				ELEMENT_SPACE_EDIT_BTN.replace("${space}", space),DEFAULT_TIMEOUT, 0) != null)
 			click(ELEMENT_SPACE_EDIT_BTN.replace("${space}", space));
-		if (waitForAndGetElement(ELEMENT_SPACE_NAME_INPUT, 3000, 0) == null)
+		if (waitForAndGetElement(ELEMENT_SPACE_NAME_INPUT,DEFAULT_TIMEOUT, 0) == null)
 			click(ELEMENT_SPACE_EDIT_SETTING_TAB);
 		if (!newName.isEmpty()) {
 			info("Input new name");

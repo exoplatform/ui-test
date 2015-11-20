@@ -96,7 +96,7 @@ public class SiteExplorerHome extends PlatformBase{
 	public final String ELEMENT_SELECTED_DRIVE= ".//*[@data-original-title='${nameDrive}']";
 
 	//Drive area
-	public final String ELEMENT_ACTIONBAR_SELECTED_DRIVE= ".//*[@id='UIDrivesArea']//*[@data-original-title='${drive}']";
+	public final String ELEMENT_ACTIONBAR_SELECTED_DRIVE= ".//*[@id='UIDrivesArea']//*[contains(@data-original-title,'${driver}')]";
 
 	// View Properties form
 	public final By ELEMENT_VIEWPROPERTIES_PROPERTIES_TAB = By.linkText("Properties");

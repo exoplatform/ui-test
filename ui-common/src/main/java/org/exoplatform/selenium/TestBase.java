@@ -301,12 +301,14 @@ public class TestBase {
 	public final By ELEMENT_ROOT_PASS_ACCOUNT = By.name("adminPassword");
 	public final By ELEMENT_ROOT_CONFIRM_PASS_ACCOUNT = By.name("confirmAdminPassword");
 	public final By ELEMENT_AGREEMENT_CHECKBOX = By.xpath("//*[@id = 'agreement']");
+	public final By ELEMENT_REGISTER_SKIP_BUTTON=By.xpath(".//*[@id='UIPortalLoginFormAction']/input[contains(@value,'Skip')]");
+	public final By ELEMENT_REGISTER_YOUR_SOFTWARE_BUTTON=By.xpath(".//*[@id='UIPortalLoginFormAction']/a");
 	public final By ELEMENT_INPUT_USERNAME = By.name("username"); 
 	public final By ELEMENT_CONTINUE_BUTTON = By.xpath("//button[text()='Continue' and @class='btn active']");
 	public final By ELEMENT_START_BUTTON = By.xpath("//button[text()='Start']");
 	public final By ELEMENT_SUBMIT_BUTTON = By.xpath("//*[text()='Submit']");
 	public final By ELEMENT_INPUT_PASSWORD = By.name("password");
-	public final By ELEMENT_ACCOUNT_NAME_LINK = By.xpath("//*[@id='UIUserPlatformToolBarPortlet']/a/img");
+	public final By ELEMENT_ACCOUNT_NAME_LINK = By.xpath("//*[@id='UIUserPlatformToolBarPortlet']/a");
 	public final By ELEMENT_PLF_INFORMATION = By.id("platformInfoDiv");
 
 	public final String ELEMENT_TERM_CONDITION_BOX = "//div[@class='header' and text()='Terms and Conditions Agreement']/..";
@@ -794,6 +796,13 @@ public class TestBase {
 			click(ELEMENT_AGREEMENT_CHECKBOX, 2);
 			click(ELEMENT_CONTINUE_BUTTON);
 			waitForTextNotPresent("terms and conditions agreement");
+			
+			if(waitForAndGetElement(ELEMENT_REGISTER_SKIP_BUTTON,3000,0,2)!=null){
+				info("-- Skipping register account--");
+				click(ELEMENT_REGISTER_SKIP_BUTTON);
+				waitForElementNotPresent(ELEMENT_REGISTER_SKIP_BUTTON);
+			}
+			
 			info("-- Creating an Admin account: FQA... --");
 			if(isCreateAccount==true){
 				accountSetup();
@@ -801,6 +810,16 @@ public class TestBase {
 				driver.navigate().refresh();
 				acc.signOut();
 			}
+		}else if(waitForAndGetElement(ELEMENT_REGISTER_SKIP_BUTTON,3000,0,2)!=null){
+			info("-- Skipping register account--");
+			click(ELEMENT_REGISTER_SKIP_BUTTON);
+			waitForElementNotPresent(ELEMENT_REGISTER_SKIP_BUTTON);
+			
+			info("-- Creating an Admin account: FQA... --");
+			accountSetup();
+			info("-- Administrator account (FQA) has been created successfully... --");
+			driver.navigate().refresh();
+			acc.signOut();
 		}else if (waitForAndGetElement(ELEMENT_ROOT_PASS_ACCOUNT, 3000, 0, 2) != null){
 			info("-- Creating an Admin account: FQA... --");
 			if(isCreateAccount==true){

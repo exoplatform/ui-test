@@ -374,7 +374,7 @@ public class SOC_Notification_Like_Activities extends SOC_TestConfig{
 		hp.goToConnections();
 		connMag.connectToAUser(username1);
 		navTool.goToSiteExplorer();
-		SEHome.goToPath("intranet/documents", "Sites Management");
+		SEHome.goToPath("intranet/documents", "Site Management");
 		SEHome.goToAddNewContent();
 		info("Create new file document");
 		creatDoc.createNewDoc(selectDocumentType.WEBCONTENT);

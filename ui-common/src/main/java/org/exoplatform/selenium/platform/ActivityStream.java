@@ -423,7 +423,7 @@ public class ActivityStream extends PlatformBase {
 	 * @param textContent
 	 */
 	public void addComment(String filename, String textContent){
-		waitForAndGetElement(By.xpath(ELEMENT_ICON_COMMENT.replace("${title}", filename))).click();
+		/*waitForAndGetElement(By.xpath(ELEMENT_ICON_COMMENT.replace("${title}", filename))).click();
 		switchToParentWindow();
 		WebElement input= waitForAndGetElement(By.xpath(ELEMENT_COMMENTBOX.replace("${title}",filename)));
 		Actions action =new Actions(driver);
@@ -431,6 +431,31 @@ public class ActivityStream extends PlatformBase {
 		waitForAndGetElement(By.xpath(ELEMENT_COMMENT_BUTTON.replace("${activityText}", filename))).click();
 		Utils.pause(2000);
 		waitForAndGetElement(ELEMENT_PUBLICATION_COMMENTPOSTED.replace("${content}",textContent),2000,1);
+		info("The comment is added successfully");*/
+		info("Click on icon comment");
+		int repeat = 0;
+		while (waitForAndGetElement(ELEMENT_COMMENTBOX.replace("${title}", filename), 3000, 0,2) == null) {
+			if (repeat > 5)
+				break;
+			info("Click on icon comment");
+			click(ELEMENT_ICON_COMMENT.replace("${title}", filename));
+			repeat++;
+		}
+		info("Put a comment to comment box");
+		int repeat1 = 0;
+		while(waitForAndGetElement(ELEMENT_PUBLICATION_COMMENTPOSTED.replace(
+				"${content}", textContent),2000,0,2)==null){
+			if (repeat1 > 5)
+				break;
+			switchToParentWindow();
+			WebElement input = waitForAndGetElement(ELEMENT_COMMENTBOX.replace(
+					"${title}", filename));
+			Actions action = new Actions(driver);
+			action.moveToElement(input).sendKeys(textContent).build().perform();
+			click(ELEMENT_COMMENT_BUTTON.replace("${activityText}",filename));
+			Utils.pause(2000);
+			repeat++;
+		}
 		info("The comment is added successfully");
 	}
 

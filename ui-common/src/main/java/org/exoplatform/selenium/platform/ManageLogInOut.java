@@ -100,6 +100,7 @@ public class ManageLogInOut extends PlatformBase {
 				break;
 			}
 			info("Retry...[" + repeat + "]");
+			driver.navigate().refresh();
 		}
 		click(ELEMENT_SIGN_OUT_LINK);
 		Utils.pause(3000);

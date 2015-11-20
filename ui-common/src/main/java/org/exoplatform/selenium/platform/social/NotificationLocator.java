@@ -186,7 +186,7 @@ public class NotificationLocator extends PlatformBase{
 	//Request to join space 
 	public final String ELEMENT_REQUEST_JOIN_SPACE_JUST_NOW = "//*[contains(@alt,'${userName}')]/../..//*[contains(text(),'has requested access to')]//*[contains(text(),'${space}')]/../..//*[@class='lastUpdatedTime' and contains(text(),'Just Now')]";
 	public final String ELEMENT_REQUEST_JOIN_SPACE_NO_TIME = "//*[contains(@alt,'${userName}')]/../..//*[contains(text(),'has requested access to')]//*[contains(text(),'${space}')]";
-	public final String ELEMENT_LIKE_IN_ACTIVITY_VIEWER = "//*[@class='uiIconThumbUp uiIconLightGray']/..";
+	public final String ELEMENT_LIKE_IN_ACTIVITY_VIEWER = "//*[contains(@id,'LikeLink')]";
 	
 	//All notification list
 	public final By ELEMENT_ALL_NOTIFICATIONS = By.xpath(".//*[@id='UIIntranetNotificationsPortlet']//*[text()='All Notifications']");

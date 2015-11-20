@@ -103,7 +103,7 @@ public class NavigationToolbar extends PlatformBase {
 	public final By ELEMENT_CONTENT_TOPBAR_ADMINISTRATION = By.xpath("//*[@id='UISetupPlatformToolBarPortlet']//a[contains(text(),'Content Administration')]");
 
 	//Setup icon
-	public final By ELEMENT_LINK_SETUP=By.xpath("//*[@class='uiIconPLF24x24Setup']");
+	public final By ELEMENT_LINK_SETUP=By.xpath(".//*[@id='UISetupPlatformToolBarPortlet']//*[@class='uiIconPLF24x24Setup']");
 	public final By ELEENT_LINK_APPLICATION=By.xpath("//*[contains(@href,'/portal/g/:platform:administrators/administration/registry')]");
 
 	//Edit menu
