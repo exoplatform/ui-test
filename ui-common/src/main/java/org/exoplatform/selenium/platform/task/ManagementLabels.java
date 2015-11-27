@@ -2,7 +2,12 @@ package org.exoplatform.selenium.platform.task;
 
 import static org.exoplatform.selenium.TestLogger.info;
 
+import java.awt.AWTException;
+import java.awt.Robot;
+import java.awt.event.KeyEvent;
+
 import org.exoplatform.selenium.Utils;
+import org.exoplatform.selenium.platform.task.ManagementTasks.optionGroupBy;
 
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.StaleElementReferenceException;
@@ -16,9 +21,10 @@ import org.openqa.selenium.WebElement;
  */
 
 public class ManagementLabels extends TaskManagementLocatorObject {
-
+	ManagementTasks mgTask;
 	public ManagementLabels(WebDriver dr){
 		this.driver=dr;
+		mgTask = new ManagementTasks(dr);
 	}
 	/**
 	 * Open label
@@ -376,6 +382,7 @@ public class ManagementLabels extends TaskManagementLocatorObject {
 		waitForAndGetElement(ELEMENT_DELETE_LABEL_POPUP_CANCEL_BTN);
 		waitForAndGetElement(ELEMENT_DELETE_LABEL_POPUP_DELETE_BTN);
 	}
+	
 	/**
 	 * Check default setting groupBy,sortBy
 	 * @param project
@@ -460,7 +467,8 @@ public class ManagementLabels extends TaskManagementLocatorObject {
 	/**
 	 * Check display of label
 	 * @param isDisplay
-	 * @param label
+	 * @param labels
+	 * 			list of labels
 	 */
 	public void checkDisplayOfLabel(boolean isDisplay,String...labels){
 		info("check display of label");
@@ -474,5 +482,117 @@ public class ManagementLabels extends TaskManagementLocatorObject {
 				waitForElementNotPresent(ELEMENT_LEFT_PANE_LABEL_NAME.replace("$label", label));
 			}
 		}
+	}
+	/**
+	 * Check label in task
+	 * @param task
+	 */
+	public void checkLabelInTask(String task){
+		info("check label in task");
+		mgTask.openTask(task);
+		waitForAndGetElement(ELEMENT_RIGHT_PANE_LABEL_DEFAULT);
+		waitForAndGetElement(ELEMENT_RIGHT_PANE_LABEL_ICON);
+	}
+	/**
+	 * Add label to task
+	 * @param task
+	 * @param labels
+	 * 			list of labels
+	 */
+	public void addLabelToTask(String task,String... labels){
+		info("add label to task");
+		mgTask.openTask(task);
+		click(ELEMENT_RIGHT_PANE_LABEL_DEFAULT,0,true);
+		Utils.pause(1000);
+		if(labels.length>0){
+			for (String label : labels) {
+				type(ELEMENT_RIGHT_PANE_LABEL_INPUT,label,false);
+				Robot robot;
+				try {
+					robot = new Robot();
+					robot.delay(1000);
+					robot.keyPress(KeyEvent.VK_ENTER);
+					robot.keyRelease(KeyEvent.VK_ENTER);
+					Utils.pause(3000);
+				} catch (AWTException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_LABEL_REMOVE_ICON.replace("$label", label));
+			}
+		}
+		Utils.pause(1000);
+		mgTask.openTask(task);
+	}
+	/**
+	 * Check auto complete
+	 * @param task
+	 * @param key   keyword to search
+	 * @param labels
+	 * 					values which match to keyword
+	 */
+	public void checkAutoCompleteLabel(String task,String key,String...labels){
+		mgTask.openTask(task);
+		click(ELEMENT_RIGHT_PANE_LABEL_DEFAULT,0,true);
+		info("check auto complete");
+		type(ELEMENT_RIGHT_PANE_LABEL_INPUT,key,false);
+		Utils.pause(1000);
+		if(labels.length>0){
+			for (String label : labels) {
+				waitForAndGetElement(ELEMENT_RIGHT_PANE_LABEL_AUTOCOMPLETE.replace("$label", label));
+			}
+		}
+	}
+	/**
+	 * Check group by label
+	 * @param label
+	 * @param tasks
+	 * 				list of tasks
+	 */
+	public void checkGroupByLabel(String label,String...tasks){
+		info("check group by label");
+		mgTask.selectOptGroupBy(optionGroupBy.Label);
+		for (String task : tasks) {
+			waitForElementNotPresent(ELEMENT_TASK_LABEL.replace("$task",task).replace("$label", label));
+		}
+	}
+	/**
+	 * Check label in Label view
+	 * @param label
+	 * @param task
+	 */
+	public void checkLabelInLabelView(String label,String...tasks){
+		info("check label in label view");
+		openLabel(label);
+		for (String task : tasks) {
+			waitForElementNotPresent(ELEMENT_TASK_LABEL.replace("$task",task).replace("$label", label));
+		}
+	}
+	/**
+	 * Check color of task label
+	 * @param task
+	 * @param label
+	 */
+	public void checkColorTaskLabel(String task,String label,String color){
+		info("check color of task label");
+		mgTask.openTask(task);
+		if(!color.isEmpty())
+			waitForAndGetElement(ELEMENT_RIGHT_PANE_LABEL_COLOR.replace("$label", label).replace("$color", color));
+		else
+			waitForAndGetElement(ELEMENT_RIGHT_PANE_LABEL_TEXT.replace("$label", label));
+	}
+	/**
+	 * Check display of task label
+	 * @param task
+	 * @param label
+	 */
+	public void checkDisplayOfTaskLabel(String task,String label){
+		mgTask.openTask(task);
+		info("check display of label in task detail");
+		waitForAndGetElement(ELEMENT_RIGHT_PANE_LABEL_TEXT.replace("$label", label));
+		info("check display of label in list view");
+		driver.navigate().refresh();
+		waitForAndGetElement(ELEMENT_TASK_LABEL.replace("$label", label).replace("$task", task));
+		
 	}
 }

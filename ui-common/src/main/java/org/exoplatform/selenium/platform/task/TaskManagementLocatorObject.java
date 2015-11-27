@@ -218,7 +218,6 @@ public class TaskManagementLocatorObject extends PlatformBase {
 	public final String ELEMENT_LEFT_PANE_LABEL_NAME="//*[contains(@class,'label-name')][contains(.,'$label')]";
 	public final By ELEMENT_LEFT_PANE_LABELS=By.xpath("//*[contains(@class,'label-name')][contains(.,'Labels')]");
 	public final By ELEMENT_LEFT_PANE_LABELS_ADD=By.xpath("//*[contains(@class,'label-name')][contains(.,'Labels')]/../*[contains(@class,'uiDropdownWithIcon')]//*[contains(@class,'AddLabel')]");
-	public final String ELEMENT_LABEL_NAME = "//*[contains(@class,'label-title')][contains(.,'$label')]";
 	public final By ELEMENT_WELCOME_TEXT_LABEL_DEFAULT= By.xpath("//*[@class='empty-content']/*[contains(.,'No Label')]");
 	//Labels area-->Context menu
 	public final String ELEMENT_LEFT_PANE_LABEL_MENU="//*[contains(@class,'label-name')][contains(.,'$label')]/../..//*[contains(@class,'RightMenu')]";
@@ -275,6 +274,7 @@ public class TaskManagementLocatorObject extends PlatformBase {
 	public final String ELEMENT_TASK_DUEDATE_TOMORROW = "//*[contains(@class,'taskName')][contains(.,'$task')]/../*[contains(.,'Tomorrow')]";
 	public final String ELEMENT_TASK_DUEDATE_YESTERDAY = "//*[contains(@class,'taskName')][contains(.,'$task')]/../*[contains(.,'Yesterday')]";
 	public final String ELEMENT_TASK_COMPLETE_ICON = "//*[contains(@class,'taskName')][contains(.,'$task')]/..//*[contains(@class,'Validate')]";
+	public final String ELEMENT_TASK_LABEL = "//*[contains(@class,'row-item')]/*[contains(@class,'taskName')][.='$task']/..//*[contains(@class,'undefined')][contains(.,'$label')]";
 	
 	//List View-->Group by Status
 	public final By ELEMENT_GROUPBY_STATUS = By.xpath("//*[@data-groupby='status']");
@@ -483,4 +483,10 @@ public class TaskManagementLocatorObject extends PlatformBase {
 	public final String ELEMENT_AS_TASK_LINK = "//*[@class='description']/*[contains(.,'$task')]";
 	//Label
 	public final String ELEMENT_RIGHT_PANE_LABEL_TEXT = "//*[contains(@class,'rightPanelContent')]//*[contains(@class,'label')][contains(.,'$label')]";
+	public final String ELEMENT_RIGHT_PANE_LABEL_COLOR = "//*[contains(@class,'rightPanelContent')]//*[contains(@class,'$color')][contains(.,'$label')]";
+	public final String ELEMENT_RIGHT_PANE_LABEL_DEFAULT = ".//*[@data-name='labels'][contains(.,'Labels')]";
+	public final String ELEMENT_RIGHT_PANE_LABEL_ICON = ".//*[contains(@class,'rightPanelContent')]//*[@class='uiIconTag']";
+	public final String ELEMENT_RIGHT_PANE_LABEL_INPUT = "//*[@data-name='labels']/..//*[contains(@class,'TextArea')]/*[@type='text']";
+	public final String ELEMENT_RIGHT_PANE_LABEL_AUTOCOMPLETE = "//*[contains(@class,'selectize')]/*[@class='data']/*[contains(.,'$label')]";
+	public final String ELEMENT_RIGHT_PANE_TASK_LABEL_REMOVE_ICON = "//*[@data-name='labels']/..//*[contains(@class,'TextArea')]/*[contains(.,'$label')]/*[contains(@class,'removeValue')]";
 }

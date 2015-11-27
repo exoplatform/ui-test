@@ -559,11 +559,11 @@ public class ManagementTasks extends TaskManagementLocatorObject {
 			break;
 		case Label:
 			info("Select Label");
-			click(ELEMENT_GROUPBY_LABEL,0,true);
+			clickByJavascript(ELEMENT_GROUPBY_LABEL,2);
 			break;
 		case Status:
 			info("Select Status");
-			click(ELEMENT_GROUPBY_STATUS,0,true);
+			clickByJavascript(ELEMENT_GROUPBY_STATUS,2);
 			break;
 		case Assignee:
 			info("Select Assignee");
@@ -571,7 +571,7 @@ public class ManagementTasks extends TaskManagementLocatorObject {
 			break;
 		case Project:
 			info("Select Project");
-			click(ELEMENT_GROUPBY_PROJECT,0,true);
+			clickByJavascript(ELEMENT_GROUPBY_PROJECT,2);
 			break;
 		default:
 			info("No option in the list. Please select correct option.");
