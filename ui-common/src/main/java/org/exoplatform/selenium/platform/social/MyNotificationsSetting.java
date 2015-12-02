@@ -28,12 +28,17 @@ public class MyNotificationsSetting extends NotificationLocator{
 	 * @param notifToDisable
 	 */
 	public void disableNotification(myNotiType notifToDisable){
+		int repeat=0;
 		switch(notifToDisable){
 		case NewUser_email:
 			info("Click on Edit button");
-			click(ELEMENT_EDIT_NEWUSER_ICON,0,true);
-			if(isElementPresent(ELEMENT_EDIT_NEWUSER_MAIL_CHECKBOX_CHECKED))
+			click(ELEMENT_EDIT_NEWUSER_ICON);
+			while(waitForAndGetElement(ELEMENT_EDIT_NEWUSER_MAIL_CHECKBOX_CHECKED,2000,0,2)!=null){
+				if(repeat>5)break;
+				info("Click on checkbox");
 				click(ELEMENT_EDIT_NEWUSER_MAIL_CHECKBOX);
+				repeat++;
+			}
 			info("Click on Save button");
 			click(ELEMENT_EDIT_NEWUSER_SAVE_BTN);
 			info("Verify that email notification is hidded");
@@ -41,9 +46,13 @@ public class MyNotificationsSetting extends NotificationLocator{
 			break;
 		case NewUser_intranet:
 			info("Click on Edit button");
-			click(ELEMENT_EDIT_NEWUSER_ICON,0,true);
-			if(isElementPresent(ELEMENT_EDIT_NEWUSER_WEB_CHECKBOX_CHECKED))
+			click(ELEMENT_EDIT_NEWUSER_ICON);
+			while(waitForAndGetElement(ELEMENT_EDIT_NEWUSER_WEB_CHECKBOX_CHECKED,2000,0,2)!=null){
+				if(repeat>5)break;
+				info("Click on checkbox");
 				click(ELEMENT_EDIT_NEWUSER_WEB_CHECKBOX);
+				repeat++;
+			}
 			info("Click on Save button");
 			click(ELEMENT_EDIT_NEWUSER_SAVE_BTN);
 			info("Verify that intranet notification is hidded");
@@ -51,8 +60,12 @@ public class MyNotificationsSetting extends NotificationLocator{
 			break;
 		case ConnectionRequest_email:
 			click(ELEMENT_EDIT_RECREQ_ICON);
-			if(isElementPresent(ELEMENT_EDIT_RECREQ_MAIL_CHECKBOX_CHECKED))
+			while(waitForAndGetElement(ELEMENT_EDIT_RECREQ_MAIL_CHECKBOX_CHECKED,2000,0,2)!=null){
+				if(repeat>5)break;
+				info("Click on checkbox");
 				click(ELEMENT_EDIT_RECREQ_MAIL_CHECKBOX);
+				repeat++;
+			}
 			info("Click on Save button");
 			click(ELEMENT_EDIT_RECREQ_SAVE_BTN);
 			info("Verify that email notification is hidded");
@@ -60,8 +73,12 @@ public class MyNotificationsSetting extends NotificationLocator{
 			break;
 		case ConnectionRequest_intranet:
 			click(ELEMENT_EDIT_RECREQ_ICON);
-			if(isElementPresent(ELEMENT_EDIT_RECREQ_WEB_CHECKBOX_CHECKED))
+			while(waitForAndGetElement(ELEMENT_EDIT_RECREQ_WEB_CHECKBOX_CHECKED,2000,0,2)!=null){
+				if(repeat>5)break;
+				info("Click on checkbox");
 				click(ELEMENT_EDIT_RECREQ_WEB_CHECKBOX);
+				repeat++;
+			}
 			info("Click on Save button");
 			click(ELEMENT_EDIT_RECREQ_SAVE_BTN);
 			info("Verify that Intranet notification is hidded");
@@ -69,8 +86,12 @@ public class MyNotificationsSetting extends NotificationLocator{
 			break;
 		case AS_Comment_email:
 			click(ELEMENT_EDIT_COMMENT_ICON);
-			if(isElementPresent(ELEMENT_EDIT_COMMENT_MAIL_CHECKBOX_CHECKED))
+			while(waitForAndGetElement(ELEMENT_EDIT_COMMENT_MAIL_CHECKBOX_CHECKED,2000,0,2)!=null){
+				if(repeat>5)break;
+				info("Click on checkbox");
 				click(ELEMENT_EDIT_COMMENT_MAIL_CHECKBOX);
+				repeat++;
+			}
 			info("Click on Save button");
 			click(ELEMENT_EDIT_COMMENT_SAVE_BTN);
 			info("Verify that email notification is hidded");
@@ -78,8 +99,12 @@ public class MyNotificationsSetting extends NotificationLocator{
 			break;
 		case AS_Comment_intranet:
 			click(ELEMENT_EDIT_COMMENT_ICON);
-			if(isElementPresent(ELEMENT_EDIT_COMMENT_WEB_CHECKBOX_CHECKED))
+			while(waitForAndGetElement(ELEMENT_EDIT_COMMENT_WEB_CHECKBOX_CHECKED,2000,0,2)!=null){
+				if(repeat>5)break;
+				info("Click on checkbox");
 				click(ELEMENT_EDIT_COMMENT_WEB_CHECKBOX);
+				repeat++;
+			}
 			info("Click on Save button");
 			click(ELEMENT_EDIT_COMMENT_SAVE_BTN);
 			info("Verify that Intranet notification is hidded");
@@ -87,8 +112,12 @@ public class MyNotificationsSetting extends NotificationLocator{
 			break;
 		case AS_Like_email:
 			click(ELEMENT_EDIT_LIKE_ICON);
-			if(isElementPresent(ELEMENT_EDIT_LIKE_MAIL_CHECKBOX_CHECKED))
+			while(waitForAndGetElement(ELEMENT_EDIT_LIKE_MAIL_CHECKBOX_CHECKED,2000,0,2)!=null){
+				if(repeat>5)break;
+				info("Click on checkbox");
 				click(ELEMENT_EDIT_LIKE_MAIL_CHECKBOX);
+				repeat++;
+			}
 			info("Click on Save button");
 			click(ELEMENT_EDIT_LIKE_SAVE_BTN);
 			info("Verify that email notification is hidded");
@@ -96,8 +125,12 @@ public class MyNotificationsSetting extends NotificationLocator{
 			break;
 		case AS_Like_intranet:
 			click(ELEMENT_EDIT_LIKE_ICON);
-			if(isElementPresent(ELEMENT_EDIT_LIKE_WEB_CHECKBOX_CHECKED))
+			while(waitForAndGetElement(ELEMENT_EDIT_LIKE_WEB_CHECKBOX_CHECKED,2000,0,2)!=null){
+				if(repeat>5)break;
+				info("Click on checkbox");
 				click(ELEMENT_EDIT_LIKE_WEB_CHECKBOX);
+				repeat++;
+			}
 			info("Click on Save button");
 			click(ELEMENT_EDIT_LIKE_SAVE_BTN);
 			info("Verify that email notification is hidded");
@@ -105,8 +138,12 @@ public class MyNotificationsSetting extends NotificationLocator{
 			break;
 		case AS_Post_email:
 			click(ELEMENT_EDIT_POST_ICON);
-			if(isElementPresent(ELEMENT_EDIT_POST_MAIL_CHECKBOX_CHECKED))
+			while(waitForAndGetElement(ELEMENT_EDIT_POST_MAIL_CHECKBOX_CHECKED,2000,0,2)!=null){
+				if(repeat>5)break;
+				info("Click on checkbox");
 				click(ELEMENT_EDIT_POST_MAIL_CHECKBOX);
+				repeat++;
+			}
 			info("Click on Save button");
 			click(ELEMENT_EDIT_POST_SAVE_BTN);
 			info("Verify that email notification is hidded");
@@ -114,8 +151,12 @@ public class MyNotificationsSetting extends NotificationLocator{
 			break;
 		case AS_Post_intranet:
 			click(ELEMENT_EDIT_POST_ICON);
-			if(isElementPresent(ELEMENT_EDIT_POST_WEB_CHECKBOX_CHECKED))
+			while(waitForAndGetElement(ELEMENT_EDIT_POST_WEB_CHECKBOX_CHECKED,2000,0,2)!=null){
+				if(repeat>5)break;
+				info("Click on checkbox");
 				click(ELEMENT_EDIT_POST_WEB_CHECKBOX);
+				repeat++;
+			}
 			info("Click on Save button");
 			click(ELEMENT_EDIT_POST_SAVE_BTN);
 			info("Verify that email notification is hidded");
@@ -123,8 +164,12 @@ public class MyNotificationsSetting extends NotificationLocator{
 			break;
 		case AS_Mention_email:
 			click(ELEMENT_EDIT_MENTION_ICON);
-			if(isElementPresent(ELEMENT_EDIT_MENTION_MAIL_CHECKBOX_CHECKED))
+			while(waitForAndGetElement(ELEMENT_EDIT_MENTION_MAIL_CHECKBOX_CHECKED,2000,0,2)!=null){
+				if(repeat>5)break;
+				info("Click on checkbox");
 				click(ELEMENT_EDIT_MENTION_MAIL_CHECKBOX);
+				repeat++;
+			}
 			info("Click on Save button");
 			click(ELEMENT_EDIT_MENTION_SAVE_BTN);
 			info("Verify that email notification is hidded");
@@ -132,8 +177,12 @@ public class MyNotificationsSetting extends NotificationLocator{
 			break;
 		case AS_Mention_intranet:
 			click(ELEMENT_EDIT_MENTION_ICON);
-			if(isElementPresent(ELEMENT_EDIT_MENTION_WEB_CHECKBOX_CHECKED))
+			while(waitForAndGetElement(ELEMENT_EDIT_MENTION_WEB_CHECKBOX_CHECKED,2000,0,2)!=null){
+				if(repeat>5)break;
+				info("Click on checkbox");
 				click(ELEMENT_EDIT_MENTION_WEB_CHECKBOX);
+				repeat++;
+			}
 			info("Click on Save button");
 			click(ELEMENT_EDIT_MENTION_SAVE_BTN);
 			info("Verify that email notification is hidded");
@@ -141,8 +190,12 @@ public class MyNotificationsSetting extends NotificationLocator{
 			break;
 		case Space_Post_email:
 			click(ELEMENT_EDIT_POST_SPACE_ICON);
-			if(isElementPresent(ELEMENT_EDIT_POST_SPACE_MAIL_CHECKBOX_CHECKED))
+			while(waitForAndGetElement(ELEMENT_EDIT_POST_SPACE_MAIL_CHECKBOX_CHECKED,2000,0,2)!=null){
+				if(repeat>5)break;
+				info("Click on checkbox");
 				click(ELEMENT_EDIT_POST_SPACE_MAIL_CHECKBOX);
+				repeat++;
+			}
 			info("Click on Save button");
 			click(ELEMENT_EDIT_POST_SPACE_SAVE_BTN);
 			info("Verify that email notification is hidded");
@@ -150,8 +203,12 @@ public class MyNotificationsSetting extends NotificationLocator{
 			break;
 		case Space_Post_intranet:
 			click(ELEMENT_EDIT_POST_SPACE_ICON);
-			if(isElementPresent(ELEMENT_EDIT_POST_SPACE_WEB_CHECKBOX_CHECKED))
+			while(waitForAndGetElement(ELEMENT_EDIT_POST_SPACE_WEB_CHECKBOX_CHECKED,2000,0,2)!=null){
+				if(repeat>5)break;
+				info("Click on checkbox");
 				click(ELEMENT_EDIT_POST_SPACE_WEB_CHECKBOX);
+				repeat++;
+			}
 			info("Click on Save button");
 			click(ELEMENT_EDIT_POST_SPACE_SAVE_BTN);
 			info("Verify that email notification is hidded");
@@ -159,8 +216,12 @@ public class MyNotificationsSetting extends NotificationLocator{
 			break;
 		case Space_Join_Req_email:
 			click(ELEMENT_EDIT_REQJOIN_SPACE_ICON);
-			if(isElementPresent(ELEMENT_EDIT_REQJOIN_SPACE_MAIL_CHECKBOX_CHECKED))
+			while(waitForAndGetElement(ELEMENT_EDIT_REQJOIN_SPACE_MAIL_CHECKBOX_CHECKED,2000,0,2)!=null){
+				if(repeat>5)break;
+				info("Click on checkbox");
 				click(ELEMENT_EDIT_REQJOIN_SPACE_MAIL_CHECKBOX);
+				repeat++;
+			}
 			info("Click on Save button");
 			click(ELEMENT_EDIT_REQJOIN_SPACE_SAVE_BTN);
 			info("Verify that email notification is hidded");
@@ -168,8 +229,12 @@ public class MyNotificationsSetting extends NotificationLocator{
 			break;
 		case Space_Join_Req_intranet:
 			click(ELEMENT_EDIT_REQJOIN_SPACE_ICON);
-			if(isElementPresent(ELEMENT_EDIT_REQJOIN_SPACE_WEB_CHECKBOX_CHECKED))
+			while(waitForAndGetElement(ELEMENT_EDIT_REQJOIN_SPACE_WEB_CHECKBOX_CHECKED,2000,0,2)!=null){
+				if(repeat>5)break;
+				info("Click on checkbox");
 				click(ELEMENT_EDIT_REQJOIN_SPACE_WEB_CHECKBOX);
+				repeat++;
+			}
 			info("Click on Save button");
 			click(ELEMENT_EDIT_REQJOIN_SPACE_SAVE_BTN);
 			info("Verify that email notification is hidded");
@@ -177,8 +242,12 @@ public class MyNotificationsSetting extends NotificationLocator{
 			break;
 		case Space_Invitation_email:
 			click(ELEMENT_EDIT_INVI_SPACE_ICON);
-			if(isElementPresent(ELEMENT_EDIT_INVI_SPACE_MAIL_CHECKBOX_CHECKED))
+			while(waitForAndGetElement(ELEMENT_EDIT_INVI_SPACE_MAIL_CHECKBOX_CHECKED,2000,0,2)!=null){
+				if(repeat>5)break;
+				info("Click on checkbox");
 				click(ELEMENT_EDIT_INVI_SPACE_MAIL_CHECKBOX);
+				repeat++;
+			}
 			info("Click on Save button");
 			click(ELEMENT_EDIT_INVI_SPACE_SAVE_BTN);
 			info("Verify that email notification is hidded");
@@ -186,8 +255,12 @@ public class MyNotificationsSetting extends NotificationLocator{
 			break;
 		case Space_Invitation_Intranet:
 			click(ELEMENT_EDIT_INVI_SPACE_ICON);
-			if(isElementPresent(ELEMENT_EDIT_INVI_SPACE_WEB_CHECKBOX_CHECKED))
+			while(waitForAndGetElement(ELEMENT_EDIT_INVI_SPACE_WEB_CHECKBOX_CHECKED,2000,0,2)!=null){
+				if(repeat>5)break;
+				info("Click on checkbox");
 				click(ELEMENT_EDIT_INVI_SPACE_WEB_CHECKBOX);
+				repeat++;
+			}
 			info("Click on Save button");
 			click(ELEMENT_EDIT_INVI_SPACE_SAVE_BTN);
 			info("Verify that email notification is hidded");
@@ -201,13 +274,17 @@ public class MyNotificationsSetting extends NotificationLocator{
 	 */
 	public void enableNotification(myNotiType notifToEnable, Object... opParams){
 		String opt = (String) (opParams.length > 0 ? opParams[0]:"");
-
+		int repeat=0;
 		switch(notifToEnable){
 		case NewUser_email:
 			info("Click on Edit button");
 			click(ELEMENT_EDIT_NEWUSER_ICON);
-			if(isElementNotPresent(ELEMENT_EDIT_NEWUSER_MAIL_CHECKBOX_CHECKED))
+			while(waitForAndGetElement(ELEMENT_EDIT_NEWUSER_MAIL_CHECKBOX_CHECKED,2000,0)==null){
+				if(repeat>5)break;
+				info("Check on the checkbox");
 				check(ELEMENT_EDIT_NEWUSER_MAIL_CHECKBOX,2);
+				repeat++;
+			}
 			if(!opt.isEmpty())
 			select(ELEMENT_EDIT_NEWUSER_LIST,opt);
 			info("Click on Save button");
@@ -218,8 +295,12 @@ public class MyNotificationsSetting extends NotificationLocator{
 		case NewUser_intranet:
 			info("Click on Edit button");
 			click(ELEMENT_EDIT_NEWUSER_ICON);
-			if(isElementNotPresent(ELEMENT_EDIT_NEWUSER_WEB_CHECKBOX_CHECKED))
+			while(waitForAndGetElement(ELEMENT_EDIT_NEWUSER_WEB_CHECKBOX_CHECKED,2000,0)==null){
+				if(repeat>5)break;
+				info("Check on the checkbox");
 				check(ELEMENT_EDIT_NEWUSER_WEB_CHECKBOX,2);
+				repeat++;
+			}
 			info("Click on Save button");
 			click(ELEMENT_EDIT_NEWUSER_SAVE_BTN);
 			info("Verify that intranet notification is shown");
@@ -227,8 +308,12 @@ public class MyNotificationsSetting extends NotificationLocator{
 			break;
 		case ConnectionRequest_email:
 			click(ELEMENT_EDIT_RECREQ_ICON);
-			if(isElementNotPresent(ELEMENT_EDIT_RECREQ_MAIL_CHECKBOX_CHECKED))
+			while(waitForAndGetElement(ELEMENT_EDIT_RECREQ_MAIL_CHECKBOX_CHECKED,2000,0)==null){
+				if(repeat>5)break;
+				info("Check on the checkbox");
 				check(ELEMENT_EDIT_RECREQ_MAIL_CHECKBOX,2);
+				repeat++;
+			}
 			if(!opt.isEmpty())
 			select(ELEMENT_EDIT_RECREQ_LIST,opt);
 			info("Click on Save button");
@@ -238,8 +323,12 @@ public class MyNotificationsSetting extends NotificationLocator{
 			break;
 		case ConnectionRequest_intranet:
 			click(ELEMENT_EDIT_RECREQ_ICON);
-			if(isElementNotPresent(ELEMENT_EDIT_RECREQ_WEB_CHECKBOX_CHECKED))
+			while(waitForAndGetElement(ELEMENT_EDIT_RECREQ_WEB_CHECKBOX_CHECKED,2000,0)==null){
+				if(repeat>5)break;
+				info("Check on the checkbox");
 				check(ELEMENT_EDIT_RECREQ_WEB_CHECKBOX,2);
+				repeat++;
+			}
 			info("Click on Save button");
 			click(ELEMENT_EDIT_RECREQ_SAVE_BTN);
 			info("Verify that Intranet notification is shown");
@@ -247,8 +336,12 @@ public class MyNotificationsSetting extends NotificationLocator{
 			break;
 		case AS_Comment_email:
 			click(ELEMENT_EDIT_COMMENT_ICON);
-			if(isElementNotPresent(ELEMENT_EDIT_COMMENT_MAIL_CHECKBOX_CHECKED))
+			while(waitForAndGetElement(ELEMENT_EDIT_COMMENT_MAIL_CHECKBOX_CHECKED,2000,0)==null){
+				if(repeat>5)break;
+				info("Check on the checkbox");
 				check(ELEMENT_EDIT_COMMENT_MAIL_CHECKBOX,2);
+				repeat++;
+			}
 			if(!opt.isEmpty())
 			select(ELEMENT_EDIT_COMMENT_LIST,opt);
 			info("Click on Save button");
@@ -258,8 +351,12 @@ public class MyNotificationsSetting extends NotificationLocator{
 			break;
 		case AS_Comment_intranet:
 			click(ELEMENT_EDIT_COMMENT_ICON);
-			if(isElementNotPresent(ELEMENT_EDIT_COMMENT_WEB_CHECKBOX_CHECKED))
+			while(waitForAndGetElement(ELEMENT_EDIT_COMMENT_WEB_CHECKBOX_CHECKED,2000,0)==null){
+				if(repeat>5)break;
+				info("Check on the checkbox");
 				check(ELEMENT_EDIT_COMMENT_WEB_CHECKBOX,2);
+				repeat++;
+			}
 			info("Click on Save button");
 			click(ELEMENT_EDIT_COMMENT_SAVE_BTN);
 			info("Verify that Intranet notification is shown");
@@ -267,19 +364,27 @@ public class MyNotificationsSetting extends NotificationLocator{
 			break;
 		case AS_Like_email:
 			click(ELEMENT_EDIT_LIKE_ICON);
-			if(isElementNotPresent(ELEMENT_EDIT_LIKE_MAIL_CHECKBOX_CHECKED))
+			while(waitForAndGetElement(ELEMENT_EDIT_LIKE_MAIL_CHECKBOX_CHECKED,2000,0)==null){
+				if(repeat>5)break;
+				info("Check on the checkbox");
 				check(ELEMENT_EDIT_LIKE_MAIL_CHECKBOX,2);
+				repeat++;
+			}
 			if(!opt.isEmpty())
 			select(ELEMENT_EDIT_LIKE_LIST,opt);
 			info("Click on Save button");
 			click(ELEMENT_EDIT_LIKE_SAVE_BTN);
-			info("Verify that email notification is shown");
+			info("Verify that like notification is shown");
 			waitForAndGetElement(ELEMENT_LIKE_MAIL_ICON,3000,1);
 			break;
 		case AS_Like_intranet:
 			click(ELEMENT_EDIT_LIKE_ICON);
-			if(isElementNotPresent(ELEMENT_EDIT_LIKE_WEB_CHECKBOX_CHECKED))
+			while(waitForAndGetElement(ELEMENT_EDIT_LIKE_WEB_CHECKBOX_CHECKED,2000,0)==null){
+				if(repeat>5)break;
+				info("Check on the checkbox");
 				check(ELEMENT_EDIT_LIKE_WEB_CHECKBOX,2);
+				repeat++;
+			}
 			info("Click on Save button");
 			click(ELEMENT_EDIT_LIKE_SAVE_BTN);
 			info("Verify that email notification is shown");
@@ -287,8 +392,12 @@ public class MyNotificationsSetting extends NotificationLocator{
 			break;
 		case AS_Post_email:
 			click(ELEMENT_EDIT_POST_ICON);
-			if(isElementNotPresent(ELEMENT_EDIT_POST_MAIL_CHECKBOX_CHECKED))
+			while(waitForAndGetElement(ELEMENT_EDIT_POST_MAIL_CHECKBOX_CHECKED,2000,0)==null){
+				if(repeat>5)break;
+				info("Check on the checkbox");
 				check(ELEMENT_EDIT_POST_MAIL_CHECKBOX,2);
+				repeat++;
+			}
 			if(!opt.isEmpty())
 			select(ELEMENT_EDIT_POST_LIST,opt);
 			info("Click on Save button");
@@ -298,8 +407,12 @@ public class MyNotificationsSetting extends NotificationLocator{
 			break;
 		case AS_Post_intranet:
 			click(ELEMENT_EDIT_POST_ICON);
-			if(isElementNotPresent(ELEMENT_EDIT_POST_WEB_CHECKBOX_CHECKED))
+			while(waitForAndGetElement(ELEMENT_EDIT_POST_WEB_CHECKBOX_CHECKED,2000,0)==null){
+				if(repeat>5)break;
+				info("Check on the checkbox");
 				check(ELEMENT_EDIT_POST_WEB_CHECKBOX,2);
+				repeat++;
+			}
 			info("Click on Save button");
 			click(ELEMENT_EDIT_POST_SAVE_BTN);
 			info("Verify that email notification is shown");
@@ -307,8 +420,12 @@ public class MyNotificationsSetting extends NotificationLocator{
 			break;
 		case AS_Mention_email:
 			click(ELEMENT_EDIT_MENTION_ICON);
-			if(isElementNotPresent(ELEMENT_EDIT_MENTION_MAIL_CHECKBOX_CHECKED))
+			while(waitForAndGetElement(ELEMENT_EDIT_MENTION_MAIL_CHECKBOX_CHECKED,2000,0)==null){
+				if(repeat>5)break;
+				info("Check on the checkbox");
 				check(ELEMENT_EDIT_MENTION_MAIL_CHECKBOX,2);
+				repeat++;
+			}
 			if(!opt.isEmpty())
 			select(ELEMENT_EDIT_MENTION_LIST,opt);
 			info("Click on Save button");
@@ -318,8 +435,12 @@ public class MyNotificationsSetting extends NotificationLocator{
 			break;
 		case AS_Mention_intranet:
 			click(ELEMENT_EDIT_MENTION_ICON);
-			if(isElementNotPresent(ELEMENT_EDIT_MENTION_WEB_CHECKBOX_CHECKED))
+			while(waitForAndGetElement(ELEMENT_EDIT_MENTION_WEB_CHECKBOX_CHECKED,2000,0)==null){
+				if(repeat>5)break;
+				info("Check on the checkbox");
 				check(ELEMENT_EDIT_MENTION_WEB_CHECKBOX,2);
+				repeat++;
+			}
 			info("Click on Save button");
 			click(ELEMENT_EDIT_MENTION_SAVE_BTN);
 			info("Verify that email notification is shown");
@@ -327,8 +448,12 @@ public class MyNotificationsSetting extends NotificationLocator{
 			break;
 		case Space_Post_email:
 			click(ELEMENT_EDIT_POST_SPACE_ICON);
-			if(isElementNotPresent(ELEMENT_EDIT_POST_SPACE_MAIL_CHECKBOX_CHECKED))
+			while(waitForAndGetElement(ELEMENT_EDIT_POST_SPACE_MAIL_CHECKBOX_CHECKED,2000,0)==null){
+				if(repeat>5)break;
+				info("Check on the checkbox");
 				check(ELEMENT_EDIT_POST_SPACE_MAIL_CHECKBOX,2);
+				repeat++;
+			}
 			if(!opt.isEmpty())
 			select(ELEMENT_EDIT_POST_SPACE_LIST,opt);
 			info("Click on Save button");
@@ -338,8 +463,12 @@ public class MyNotificationsSetting extends NotificationLocator{
 			break;
 		case Space_Post_intranet:
 			click(ELEMENT_EDIT_POST_SPACE_ICON);
-			if(isElementNotPresent(ELEMENT_EDIT_POST_SPACE_WEB_CHECKBOX_CHECKED))
+			while(waitForAndGetElement(ELEMENT_EDIT_POST_SPACE_WEB_CHECKBOX_CHECKED,2000,0)==null){
+				if(repeat>5)break;
+				info("Check on the checkbox");
 				check(ELEMENT_EDIT_POST_SPACE_WEB_CHECKBOX,2);
+				repeat++;
+			}
 			info("Click on Save button");
 			click(ELEMENT_EDIT_POST_SPACE_SAVE_BTN);
 			info("Verify that email notification is shown");
@@ -347,8 +476,12 @@ public class MyNotificationsSetting extends NotificationLocator{
 			break;
 		case Space_Join_Req_email:
 			click(ELEMENT_EDIT_REQJOIN_SPACE_ICON);
-			if(isElementNotPresent(ELEMENT_EDIT_REQJOIN_SPACE_MAIL_CHECKBOX_CHECKED))
+			while(waitForAndGetElement(ELEMENT_EDIT_REQJOIN_SPACE_MAIL_CHECKBOX_CHECKED,2000,0)==null){
+				if(repeat>5)break;
+				info("Check on the checkbox");
 				check(ELEMENT_EDIT_REQJOIN_SPACE_MAIL_CHECKBOX,2);
+				repeat++;
+			}
 			if(!opt.isEmpty())
 			select(ELEMENT_EDIT_REQJOIN_SPACE_LIST,opt);
 			info("Click on Save button");
@@ -358,8 +491,12 @@ public class MyNotificationsSetting extends NotificationLocator{
 			break;
 		case Space_Join_Req_intranet:
 			click(ELEMENT_EDIT_REQJOIN_SPACE_ICON);
-			if(isElementNotPresent(ELEMENT_EDIT_REQJOIN_SPACE_WEB_CHECKBOX_CHECKED))
+			while(waitForAndGetElement(ELEMENT_EDIT_REQJOIN_SPACE_WEB_CHECKBOX_CHECKED,2000,0)==null){
+				if(repeat>5)break;
+				info("Check on the checkbox");
 				check(ELEMENT_EDIT_REQJOIN_SPACE_WEB_CHECKBOX,2);
+				repeat++;
+			}
 			info("Click on Save button");
 			click(ELEMENT_EDIT_REQJOIN_SPACE_SAVE_BTN);
 			info("Verify that email notification is shown");
@@ -367,8 +504,12 @@ public class MyNotificationsSetting extends NotificationLocator{
 			break;
 		case Space_Invitation_email:
 			click(ELEMENT_EDIT_INVI_SPACE_ICON);
-			if(isElementNotPresent(ELEMENT_EDIT_INVI_SPACE_MAIL_CHECKBOX_CHECKED))
+			while(waitForAndGetElement(ELEMENT_EDIT_INVI_SPACE_MAIL_CHECKBOX_CHECKED,2000,0)==null){
+				if(repeat>5)break;
+				info("Check on the checkbox");
 				check(ELEMENT_EDIT_INVI_SPACE_MAIL_CHECKBOX,2);
+				repeat++;
+			}
 			if(!opt.isEmpty())
 			select(ELEMENT_EDIT_INVI_SPACE_LIST,opt);
 			info("Click on Save button");
@@ -378,8 +519,12 @@ public class MyNotificationsSetting extends NotificationLocator{
 			break;
 		case Space_Invitation_Intranet:
 			click(ELEMENT_EDIT_INVI_SPACE_ICON);
-			if(isElementNotPresent(ELEMENT_EDIT_INVI_SPACE_WEB_CHECKBOX_CHECKED))
+			while(waitForAndGetElement(ELEMENT_EDIT_INVI_SPACE_WEB_CHECKBOX_CHECKED,2000,0)==null){
+				if(repeat>5)break;
+				info("Check on the checkbox");
 				check(ELEMENT_EDIT_INVI_SPACE_WEB_CHECKBOX,2);
+				repeat++;
+			}
 			info("Click on Save button");
 			click(ELEMENT_EDIT_INVI_SPACE_SAVE_BTN);
 			info("Verify that email notification is shown");

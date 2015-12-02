@@ -221,9 +221,10 @@ public class SpaceSettingManagement extends SpaceLocator{
 	 */
 	public void goToApplicationTab(){
 		info("Select Application tab");
-		waitForAndGetElement(ELEMENT_SETTINGS_APP_TAB,3000,0).click();
+		waitForAndGetElement(ELEMENT_SETTINGS_APP_TAB,3000,1);
+		click(ELEMENT_SETTINGS_APP_TAB);
 		info("The tab is opened succcessfully");
-		waitForAndGetElement(ELEMENT_SPACE_NAVIGATION_ADD_NODE_BUTTON,3000,0);
+		waitForAndGetElement(ELEMENT_SPACE_APPLICATION_TAB_ADD_BTN,3000,1);
 	}
 	/**
 	 * Open Access and Edit tab
@@ -286,7 +287,7 @@ public class SpaceSettingManagement extends SpaceLocator{
 		info("Click on Add application button");
 		click(ELEMENT_APPLICATION_TAB_ADD_APPLICATION_BTN);
 		info("the popup is shown");
-		waitForAndGetElement(ELEMENT_ADD_APPLICATION_POPUP_TITLE,2000,0);
+		waitForAndGetElement(ELEMENT_ADD_APPLICATION_POPUP_TITLE,2000,1);
 		info("Select a category");
 		if(!category.isEmpty())
 			click(ELEMENT_ADD_APPLICATION_POPUP_CATEGOGY.replace("${category}",category));
@@ -305,13 +306,13 @@ public class SpaceSettingManagement extends SpaceLocator{
 		info("Right click on the node");
 		rightClickOnElement(ELEMENT_SPACE_NAVIGATION_ADD_NODE_LIST.replace("${name}", nodeName));
 		info("Select edit link");
-		waitForAndGetElement(ELEMENT_SPACE_NAVIGATION_CONTEXT_MENU_EDIT,2000,0).click();
+		click(ELEMENT_SPACE_NAVIGATION_CONTEXT_MENU_EDIT);
 		info("Input a new name for lable field");
 		type(ELEMENT_SPACE_NAVIGATION_ADD_EDIT_POPUP_LABEL,label,true);
 		info("Save all changes");
-		waitForAndGetElement(ELEMENT_SPACE_NAVIGATION_ADD_EDIT_POPUP_SAVE,2000,0).click();
+		click(ELEMENT_SPACE_NAVIGATION_ADD_EDIT_POPUP_SAVE);
 		info("Verify that the node is edited successfully");
-		waitForAndGetElement(ELEMENT_SPACE_NAVIGATION_ADD_NODE_LIST.replace("${name}", label),3000,0);
+		waitForAndGetElement(ELEMENT_SPACE_NAVIGATION_ADD_NODE_LIST.replace("${name}", label),3000,1);
 	}
 	/**
 	 * Set permissions for a space

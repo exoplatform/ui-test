@@ -28,8 +28,9 @@ public class SpaceLocator extends PlatformBase{
 	public final By ELEMENT_WIKI_TAB = By.xpath(".//*[contains(@class,'uiIconAppWikiPortlet')]");
 	public final By ELEMENT_DOCUMENT_TAB = By.xpath(".//*[contains(@class,'uiIconAppFileExplorerPortlet')]");
 	public final By ELEMENT_AGENDA_TAB = By.xpath(".//*[contains(@class,'uiIconAppCalendarPortlet')]");
-	public final By ELEMENT_MEMBER_TAB = By.xpath(".//*[contains(@class,'uiIconAppMembersPortlet')]");
+	public final By ELEMENT_MEMBER_TAB = By.xpath("..//*[@id='spaceMenuTab']//*[contains(@class,'uiIconAppMembersPortlet ')]");
 	public final By ELEMENT_NAVIGATION_SPACE_SETTING_TAB = By.xpath(".//*[contains(@class,'uiIconAppSpaceSettingPortlet')]");
+	public final By ELEMENT_MYDASH_BTN_ADDGADGET = By.xpath(".//*[@id='GadgetContainer']//*[contains(text(),'Add Gadgets')]");
 	
 	public By ELEMENT_SPACE_SPACE_SETTINGS=By.xpath(".//*[@id='settings']");
 	public By ELEMENT_SPACE_WIKI_TAB=By.xpath(".//*[@id='spaceMenuTab']//*[contains(text(),'Wiki')]");
@@ -38,8 +39,8 @@ public class SpaceLocator extends PlatformBase{
 	public By ELEMENT_SPACE_WIKI_TAB_ACTIVE=By.xpath("//*[@class='active item']/*[@data-toggle='tab']/*[contains(text(),'Wiki')]");
 	public By ELEMENT_SPACE_ACTIVITY_TAB_ACTIVE=By.xpath("//*[@class='active item']/*[@data-toggle='tab']/*[contains(text(),'Activity')]");
 	public String ELEMENT_SPACE_MENU_TAB=".//*[@id='spaceMenuTab']//*[@id='${tab}']";
-	public By ELEMENT_SPACE_MENU_MORE = By.xpath(".//*[@id='spaceMenuTab']//*[contains(text(),'More')]");
-	public By ELEMENT_SPACE_MENU_DASHBOARD = By.xpath(".//*[@id='spaceMenuTab']//*[@id='DashboardPortlet']");
+	public By ELEMENT_SPACE_MENU_MORE = By.xpath(".//*[@id='spaceMenuTab']//*[contains(@class,'uiIconAppMoreButton')]");
+	public By ELEMENT_SPACE_MENU_DASHBOARD = By.xpath(".//*[@id='spaceMenuTab']//*[contains(@class,'uiIconAppDashboardPortlet')]");
 	
 	
 	//left menu
@@ -249,7 +250,7 @@ public class SpaceLocator extends PlatformBase{
 	public final String ELEMENT_SPACE_NAVIGAION_ADD_NODE_CHILDREN_UNDER_PARENT = ".//*[@id='UISpaceNavigationNodeSelector']//*[contains(text(),'${childrenNode}')]/../../..//*[contains(text(),'${parentNode}')]";
 	public final By ELEMENT_SPACE_NAVIGATION_UP_LEVEL_BUTTON = By.xpath(".//*[@id='UISpaceNavigationNodeSelector']//*[@class='uiIconUpLevel uiIconLightGray']");
 	public final By ELEMENT_SPACE_NAVIGATION_NODE_LIST =By.xpath(".//*[@id='UISpaceNavigationNodeSelector']");
-
+    public final By ELEMENT_SPACE_APPLICATION_TAB_ADD_BTN=By.xpath(".//*[@id='UISpaceApplication-tab']//button");
 	//Add/Edit page node popup
 	public final By ELEMENT_SPACE_NAVIGATION_ADD_EDIT_NODE_TITLE = By.xpath(".//*[@id='AddNode']//*[contains(.,'Add/ Edit Page Node')]");
 	public final By ELEMENT_SPACE_NAVIGATION_ADD_EDIT_POPUP_NAME = By.xpath(".//*[@id='name']");

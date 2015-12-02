@@ -75,11 +75,11 @@ public class SpaceManagement extends SpaceLocator {
 	public void addNewSpaceSimple(String name, String desc, int... params) {
 		int iTimeout = params.length > 0 ? params[0] : DEFAULT_TIMEOUT; 
 		if (waitForAndGetElement(ELEMENT_ADDNEWSPACE_BUTTON, 3000, 0, 2) != null){
-			click(ELEMENT_ADDNEWSPACE_BUTTON);
+			click(ELEMENT_ADDNEWSPACE_BUTTON,0,true);
 		}else {
 			click(By.xpath("//*[contains(@class, 'uiIconSocSimplePlus')]"));
 		}
-		waitForAndGetElement(ELEMENT_ADDNEWSPACE_FORM,3000,0);
+		waitForAndGetElement(ELEMENT_ADDNEWSPACE_FORM,3000,1);
 		type(ELEMENT_SPACE_NAME_INPUT, name, true);
 		type(ELEMENT_SPACE_DESCRIPTION_INPUT, desc, true);
 		info("Save all changes");

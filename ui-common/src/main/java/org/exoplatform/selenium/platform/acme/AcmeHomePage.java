@@ -32,7 +32,6 @@ public class AcmeHomePage extends PlatformBase {
 	public final By ELEMENT_NAVIGATION_MENU_OVERVIEW_FRENCH = By.xpath(".//*[@id='navigation-generator']//a[@title='Présentation']");
 	public final By ELEMENT_NAVIGATION_MENU_OVERVIEW_ENGLISH= By.xpath(".//*[@id='navigation-generator']//a[@title='Overview']");
 	
-	
 	ContentList contList;
 	public AcmeHomePage(WebDriver driver) {
 		this.driver= driver;

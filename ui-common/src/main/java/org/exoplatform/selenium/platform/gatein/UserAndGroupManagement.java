@@ -4,13 +4,13 @@ import static org.exoplatform.selenium.TestLogger.info;
 import java.util.ArrayList;
 import junit.framework.Assert;
 import org.exoplatform.selenium.Dialog;
+import org.exoplatform.selenium.ManageAlert;
+import org.exoplatform.selenium.Utils;
 import org.exoplatform.selenium.platform.PlatformBase;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import org.exoplatform.selenium.Utils;
-import org.exoplatform.selenium.ManageAlert;
 
 public class UserAndGroupManagement extends PlatformBase {
 	
@@ -130,6 +130,11 @@ public class UserAndGroupManagement extends PlatformBase {
     
     
     ManageAlert alert;
+	//Social networks tab
+	public final By ELEMENT_USER_SOCIAL_NETWORKS_TAB = By.xpath("//*[@data-target='#UIAccountSocial-tab']");
+	public final String ELEMENT_USER_SOCIAL_NETWORKS_TAB_GOOGLE_ACCOUNT =".//*[@id='user.social-info.google.userName' and @value= '${account}']";
+	
+	public final By ELEMENT_USER_ACCOUNT_PROFILE_TAB = By.xpath("//*[@data-target='#UIAccountProfiles-tab']");
 	Dialog dialog;
 
 	public UserAndGroupManagement(WebDriver dr) {
@@ -552,6 +557,7 @@ public class UserAndGroupManagement extends PlatformBase {
 			type(ELEMENT_EMAIL, email, true);
 		}
 		click(ELEMENT_SAVE_BUTTON);
+		Utils.pause(3000);
 		waitForElementNotPresent(ELEMENT_SAVE_BUTTON);
 		waitForMessage("The user profile has been updated.");
 		click(ELEMENT_CLOSE_MESSAGE);
@@ -864,5 +870,27 @@ public class UserAndGroupManagement extends PlatformBase {
 		info("Open Users tab");
 		click(ELEMENT_USER_TAB);
 		Utils.pause(2000);
+	}	
+	/**
+	 * Check A link is established between the eXo Platform user account and the social network account.
+	 * By: QuyenNT
+	 * Date: Dec 1, 2015
+	 */
+	public void checkLinkedSocialAccount(String element, String placeHolder, String accountValue){
+		waitForAndGetElement(ELEMENT_USER_SOCIAL_NETWORKS_TAB);
+		click(ELEMENT_USER_SOCIAL_NETWORKS_TAB);
+		waitForAndGetElement(element.replace(placeHolder, accountValue));
 	}
+	
+	/**
+	 * Unlink social network account
+	 * By: QuyenNT
+	 * Date: Dec 3, 2015
+	 */
+	public void unLinkedSocialAccount(Object unlinkElement){
+		waitForAndGetElement(ELEMENT_USER_SOCIAL_NETWORKS_TAB);
+		click(ELEMENT_USER_SOCIAL_NETWORKS_TAB);
+		waitForAndGetElement(unlinkElement);
+		click(unlinkElement);
+	}	
 }

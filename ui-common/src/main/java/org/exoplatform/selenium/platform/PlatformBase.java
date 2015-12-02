@@ -93,6 +93,16 @@ public class PlatformBase extends TestBase {
     public final By ELEMENT_SELECT_THIS_GROUP=By.xpath(".//*[@id='UIGroupSelector']//*[contains(text(),'Select this Group')]");
     public final By ELEMENT_SELECT_GROUP_POPUP=By.xpath(".//*[@id='UIGroupSelector']");
 		
+    //Social NETWORK account
+    public final String SOCIAL_NETWORKS_ACCOUNT_FACEBOOK = "exomailtest01@gmail.com";
+    public final String SOCIAL_NETWORKS_ACCOUNT_TWITTER = "exofqatwitter@gmail.com";
+    public final String SOCIAL_NETWORKS_ACCOUNT_LINKEDIN = "exofqalinkedin@gmail.com";
+    public final String SOCIAL_NETWORKS_ACCOUNT_GOOGLE = "exofqagplus@gmail.com";
+    public final String SOCIAL_NETWORKS_ACCOUNT_SUSPENDED = "exosuspend@gmail.com";
+    
+    public final String SOCIAL_NETWORKS_PASSWORD = "exoadmin1";
+    
+    
 	/**
 	 * Available option
 	 */

@@ -4,7 +4,6 @@ import static org.exoplatform.selenium.TestLogger.info;
 
 import org.exoplatform.selenium.Utils;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 
 public class SpaceHomePage extends SpaceLocator{
 	
@@ -24,10 +23,10 @@ public class SpaceHomePage extends SpaceLocator{
 	public void goToSpaceSettingTab(){
 		info("--Open Setting tab of the space");
 		info("Click on the tab");
-		WebElement el = this.driver.findElement(ELEMENT_SPACE_SPACE_SETTINGS);
-		el.click();
+		waitForAndGetElement(ELEMENT_SPACE_SPACE_SETTINGS,3000,1);
+		click(ELEMENT_SPACE_SPACE_SETTINGS);
 		Utils.pause(3000);
-		waitForAndGetElement(ELEMENT_SPACE_SPACE_SETTINGS_TITLE);
+		waitForAndGetElement(ELEMENT_SPACE_SPACE_SETTINGS_TITLE,3000,1);
 		info("Space setting page is shown");
 	}
 	/**
@@ -71,5 +70,28 @@ public class SpaceHomePage extends SpaceLocator{
 			waitForAndGetElement(ELEMENT_SPACE_NAME.replace("${name}",name));
 		else
 			waitForElementNotPresent(ELEMENT_SPACE_NAME.replace("${name}",name));
+	}
+	/**
+	 * Open more mentu
+	 */
+	public void goToMore(){
+		info("Click more link on the navigation");
+		if(waitForAndGetElement(ELEMENT_SPACE_MENU_MORE,2000,0)!=null){
+			click(ELEMENT_SPACE_MENU_MORE);
+			waitForAndGetElement(ELEMENT_MEMBER_TAB,3000,1);
+			info("List menu is shown");
+		}
+	}
+	/**
+	 * Open Dashboard portlet
+	 */
+	public void goToDashBoard(){
+		if(waitForAndGetElement(ELEMENT_SPACE_MENU_DASHBOARD,2000,0)==null){
+			goToMore();
+		}
+		info("Click on Dash board link");
+		click(ELEMENT_SPACE_MENU_DASHBOARD);
+		waitForAndGetElement(ELEMENT_MYDASH_BTN_ADDGADGET,3000,1);
+		info("Dashboard is shown");
 	}
 }

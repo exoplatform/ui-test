@@ -304,7 +304,7 @@ public class HomePagePlatform extends TestBase{
 	 */
 	public void goToAllSpace(){
 		info("Click on Join a space link");
-		click(ELEMENT_ALL_SPACE_JOIN_LINK);
+		click(ELEMENT_ALL_SPACE_JOIN_LINK,0,true);
 		Utils.pause(2000);
 	}
 
@@ -315,7 +315,7 @@ public class HomePagePlatform extends TestBase{
 		info("-- Go to answer page --");
 		Utils.pause(2000);
 		waitForAndGetElement(ELEMENT_ANSWER_LINK_PLF);
-		click(ELEMENT_ANSWER_LINK_PLF);
+		click(ELEMENT_ANSWER_LINK_PLF,0,true);
 		if(waitForAndGetElement(aHome.ELEMENT_ANSWER_PORTLET,5000,0)==null)
 			driver.navigate().refresh();
 		waitForAndGetElement(aHome.ELEMENT_ANSWER_PORTLET);
@@ -327,7 +327,7 @@ public class HomePagePlatform extends TestBase{
 	public void goToForum(){
 		info("-- Go to forum page --");
 		info("Click on Forum link");
-		click(ELEMENT_FORUM_LINK_PLF);
+		click(ELEMENT_FORUM_LINK_PLF,0,true);
 		info("Verify that the forum portlet is shown");
 		waitForAndGetElement(fHome.ELEMENT_FORUM_PORTLET);
 		info("The forum portlet is shown successfully");
@@ -350,7 +350,7 @@ public class HomePagePlatform extends TestBase{
 	public void goToConnections(){
 		info("--Go to Connections page---");
 		info("Click on Connection link");
-		click(ELEMENT_CONNECTIONS_LINK_PLF);
+		click(ELEMENT_CONNECTIONS_LINK_PLF,0,true);
 		info("Verify that the connections portlet is shown");
 		waitForAndGetElement(connMg.ELEMENT_CONNECTION_EVERYONE_TITLE,2000,0);
 		info("The connections portlet is shown successfully");

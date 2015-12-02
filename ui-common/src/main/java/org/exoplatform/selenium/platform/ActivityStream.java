@@ -11,6 +11,7 @@ import org.exoplatform.selenium.Utils;
 import org.exoplatform.selenium.platform.PlatformBase;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -45,7 +46,7 @@ public class ActivityStream extends PlatformBase {
 	public final By ELEMENT_COMPOSER_INPUT_LINK_FIELD = By.xpath(".//*[@id='InputLink']");
 	public final By ELEMENT_COMPOSER_ATTACH_LINK_BUTTON = By.xpath(".//*[@id='AttachButton']");
 	public final By ELEMENT_COMPOSER_CLOSE_SHARE_LINK_BUTTON=By.xpath("//*[@id='UIActivityComposerContainer']//*[@class='uiIconClose uiIconLightGray']");
-	public final By ELEMENT_COMPOSER_SHARE_BUTTON = By.xpath(".//*[@id='ShareButton']");
+	public final By ELEMENT_COMPOSER_SHARE_BUTTON = By.id("ShareButton");
 	public final By ELEMENT_ACTIVITY_WHAT_ARE_YOU_WORKING_LABEL = By.xpath("//div[@id='DisplaycomposerInput']/../div[@class='placeholder']");
 	public final String ELEMENT_ACTIVITY_AUTHOR_ACTIVITY = "//*[contains(text(), '${activityText}')]/../../../../..//*[@class='author']";
 	public final By ELEMENT_ACTIVITY_UPLOAD_POPUP_UPLOAD_BUTTON = By.xpath(".//input[@type='file']");	
@@ -637,7 +638,11 @@ public class ActivityStream extends PlatformBase {
 	public void shareActivity(){
 		waitForAndGetElement(ELEMENT_COMPOSER_SHARE_BUTTON);
 		info("----Click share button----");
-		click(ELEMENT_COMPOSER_SHARE_BUTTON);
+		if(browser.contains("iexplorer")){
+			info("mouse over and click");
+			waitForAndGetElement(ELEMENT_COMPOSER_SHARE_BUTTON,2000,1,2).sendKeys(Keys.ENTER);
+		}
+		else click(ELEMENT_COMPOSER_SHARE_BUTTON);
 		Utils.pause(1000);
 	}
 	/**
@@ -663,8 +668,15 @@ public class ActivityStream extends PlatformBase {
 		shareActivity();
 		Utils.pause(3000);
 		info("-- Verify that an activity has been added --");
+		int repeat=0;
 		if (text!="" && text!=null){
+			while(waitForAndGetElement(ELEMENT_ACTIVITY_AUTHOR_ACTIVITY.replace("${activityText}", text),3000,0)==null){
+				if(repeat>5)break;
+				shareActivity();
+				repeat++;
+			}
 			waitForAndGetElement(ELEMENT_ACTIVITY_AUTHOR_ACTIVITY.replace("${activityText}", text),3000,1);
+			info("The activity is shared success");
 		}
 	}
 	/**

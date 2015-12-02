@@ -32,7 +32,6 @@ public class SOC_Notification_Like_Activities extends SOC_TestConfig{
 
 		/*Create data test*/
 		info("Add new user");
-		magAc.signIn(DATA_USER1, DATA_PASS);
 		navTool.goToAddUser();
 		addUserPage.addUser(username1, password1, email1, username1, username1);
 		info("goto My notification");
@@ -112,7 +111,6 @@ public class SOC_Notification_Like_Activities extends SOC_TestConfig{
 	@Test
 	public  void test02_CheckLikeNotification2Like() {
 		info("Test 2: Check Like Notification (2 like)");
-		magAc.signIn(DATA_USER1, DATA_PASS);
 		//Setup data test
 		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
 		String password1 = username1;
@@ -363,7 +361,6 @@ public class SOC_Notification_Like_Activities extends SOC_TestConfig{
 	
 		/*Create data test*/
 		info("Add new user");
-		magAc.signIn(DATA_USER1, DATA_PASS);
 		navTool.goToAddUser();
 		addUserPage.addUser(username1, password1, email1, username1, username1);
 		info("goto My notification");
@@ -451,7 +448,6 @@ public class SOC_Notification_Like_Activities extends SOC_TestConfig{
 
 		/*Create data test*/
 		info("Add new user");
-		magAc.signIn(DATA_USER1, DATA_PASS);
 		navTool.goToAddUser();
 		addUserPage.addUser(username1, password1, email1, username1, username1);
 		info("goto My notification");
@@ -536,7 +532,6 @@ public class SOC_Notification_Like_Activities extends SOC_TestConfig{
 		String content = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		/*Create data test*/
 		info("Add new user");
-		magAc.signIn(DATA_USER1, DATA_PASS);
 		navTool.goToAddUser();
 		addUserPage.addUser(username1, password1, email1, username1, username1);
 		info("goto My notification");
@@ -622,7 +617,6 @@ public class SOC_Notification_Like_Activities extends SOC_TestConfig{
 		String content = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		/*Create data test*/
 		info("Add new user");
-		magAc.signIn(DATA_USER1, DATA_PASS);
 		navTool.goToAddUser();
 		addUserPage.addUser(username1, password1, email1, username1, username1);
 		info("goto My notification");
@@ -711,7 +705,6 @@ public class SOC_Notification_Like_Activities extends SOC_TestConfig{
 
 		/*Create data test*/
 		info("Add new user");
-		magAc.signIn(DATA_USER1, DATA_PASS);
 		navTool.goToAddUser();
 		addUserPage.addUser(username1, password1, email1, username1, username1);
 		addUserPage.addUser(username2, password2, email2, username2, username2);
@@ -830,7 +823,6 @@ public class SOC_Notification_Like_Activities extends SOC_TestConfig{
 
 		/*Create data test*/
 		info("Add new user");
-		magAc.signIn(DATA_USER1, DATA_PASS);
 		navTool.goToAddUser();
 		addUserPage.addUser(username1, password1, email1, username1, username1);
 		info("goto My notification");
@@ -952,7 +944,6 @@ public class SOC_Notification_Like_Activities extends SOC_TestConfig{
 	@Test
 	public  void test13_CheckViewAllPageAfterReceivingALikeNotification2Like() {
 		info("Test 13 Check View All page after receiving a Like notification (2 like)");
-		magAc.signIn(DATA_USER1, DATA_PASS);
 		//Setup data test
 		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
 		String password1 = username1;
@@ -1050,7 +1041,6 @@ public class SOC_Notification_Like_Activities extends SOC_TestConfig{
 
 		/*Create data test*/
 		info("Add new user");
-		magAc.signIn(DATA_USER1, DATA_PASS);
 		navTool.goToAddUser();
 		addUserPage.addUser(username1, password1, email1, username1, username1);
 		addUserPage.addUser(username2, password2, email2, username2, username2);

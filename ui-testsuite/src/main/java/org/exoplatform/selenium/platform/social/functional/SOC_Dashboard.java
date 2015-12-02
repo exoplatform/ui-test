@@ -16,14 +16,16 @@ import org.testng.annotations.*;
 	public  void test01_AddNewGadgetIntoDashboardWithValidValue() {
 		info("Test 1: Add new gadget into dashboard with valid value");
 		int index = remoteGadData.getRandomIndexByType(1);
-		String url = remoteGadData.newLinks.get(index);//"http://www.labpixies.com/campaigns/finance/finance.xml";
+		String url = remoteGadData.newLinks.get(index);
         String name = remoteGadData.newTitle.get(index);
+        info("url:"+url);
+        info("name:"+name);
     
         String space = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
         String contentSpace=txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		hp.goToMySpaces();
 		info("create new space");
-		spaMg.addNewSpaceSimple(space,contentSpace);
+		spaMg.addNewSpaceSimple(space,contentSpace,6000);
 		
 		info("goto Space Setting>Application");
 		spaHome.goToSpaceSettingTab();
@@ -49,8 +51,8 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			Dashboard page is displayed with all gadget default*/
 		info("open dashboard");
-		mouseOverAndClick(spaHome.ELEMENT_SPACE_MENU_MORE);
-		click(spaHome.ELEMENT_SPACE_MENU_DASHBOARD);
+		//spaHome.goToMore();
+		spaHome.goToDashBoard();
 		
 		/*Step number: 3
 		*Step Name: -
@@ -73,9 +75,5 @@ import org.testng.annotations.*;
 			- New gadget is added successfully into dashboard*/ 
 		info("add gadget");
 		myDash.addRemoteGadget(url, name);
-		/*info("Delete created space");
-		hp.goToMySpaces();
-		spaMg.deleteSpace(space,false);*/
-		
  	}
 }

@@ -9,11 +9,11 @@ import java.awt.Robot;
 import java.awt.Toolkit;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.KeyEvent;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.InputStream;
-import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -303,11 +303,13 @@ public class TestBase {
 	public final By ELEMENT_ROOT_PASS_ACCOUNT = By.name("adminPassword");
 	public final By ELEMENT_ROOT_CONFIRM_PASS_ACCOUNT = By.name("confirmAdminPassword");
 	public final By ELEMENT_AGREEMENT_CHECKBOX = By.xpath("//*[@id = 'agreement']");
-	public final By ELEMENT_INPUT_USERNAME = By.name("username"); 
+	public final By ELEMENT_INPUT_USERNAME = By.name("username");
+	public final String ELEMENT_INPUT_USERNAME_ID = "username";
 	public final By ELEMENT_CONTINUE_BUTTON = By.xpath("//button[text()='Continue' and @class='btn active']");
 	public final By ELEMENT_START_BUTTON = By.xpath("//button[text()='Start']");
 	public final By ELEMENT_SUBMIT_BUTTON = By.xpath("//*[text()='Submit']");
 	public final By ELEMENT_INPUT_PASSWORD = By.name("password");
+	public final String ELEMENT_INPUT_PASSWORD_ID="UIPortalLoginFormControl";
 	public final By ELEMENT_ACCOUNT_NAME_LINK = By.xpath("//*[@id='UIUserPlatformToolBarPortlet']/a/img");
 	public final By ELEMENT_PLF_INFORMATION = By.id("platformInfoDiv");
 
@@ -341,6 +343,10 @@ public class TestBase {
 
 	public final By ELEMENT_SAVE_BTN = By.xpath("//*[text()='Save']");
 	/*======== End of Term and conditions =====*/	
+	
+	public final By ELEMENT_SKIP_REGISTER_BTN = By.xpath(".//*[@id='UIPortalLoginFormAction']//*[@value = 'Skip']");
+	public final By ELEMENT_CONTINUE_BTN = By.xpath(".//*[@id='UIPortalLoginFormAction']//*[@value = 'Continue']");
+	
 	/**
 	 * Get System Property
 	 */
@@ -690,6 +696,7 @@ public class TestBase {
 		capabilitiesIE.setCapability("enablePersistentHover", false);
 		capabilitiesIE.setCapability("ignoreZoomSetting", true);
 		capabilitiesIE.setCapability(InternetExplorerDriver.IE_ENSURE_CLEAN_SESSION, true);
+		capabilitiesIE.setCapability(InternetExplorerDriver.ENABLE_ELEMENT_CACHE_CLEANUP, true);
 		capabilitiesIE.setCapability("initialBrowserUrl", baseUrl);
 		return new InternetExplorerDriver(capabilitiesIE);
 	}
@@ -782,20 +789,20 @@ public class TestBase {
 	}
 	
 	/**
-<<<<<<< HEAD
 	 * Check term and conditions
-<<<<<<< HEAD
-=======
-	 *  Check term and conditions
->>>>>>> FQA-2581: PLF 4.3 - Write High Fnc/Disable User/Forum
-=======
->>>>>>> FQA-2762:PLF43 - Write High Fnc/ECMS/Share in ContentExplorer/ECMS
 	 * @param opParams
 	 */
 	public void termsAndConditions(Object... opParams){
 		info("Term and conditions");
 		Boolean isCreateAccount = (Boolean)(opParams.length>0 ? opParams[0]:true);
 		driver.get(baseUrl);
+
+		//Skip register software button
+		WebElement skipButton= waitForAndGetElement(ELEMENT_SKIP_REGISTER_BTN, 2000, 0);
+		if(skipButton!= null){
+			click(ELEMENT_SKIP_REGISTER_BTN);
+		}
+		
 		ManageLogInOut acc = new ManageLogInOut(driver);
 		info("Agreement page");
 		if (waitForAndGetElement(ELEMENT_AGREEMENT_CHECKBOX, 3000, 0, 2) != null) {
@@ -810,24 +817,19 @@ public class TestBase {
 				waitForElementNotPresent(ELEMENT_REGISTER_SKIP_BUTTON);
 			}
 			
-			info("-- Creating an Admin account: FQA... --");
-			if(isCreateAccount==true){
-				accountSetup();
-				info("-- Administrator account (FQA) has been created successfully... --");
-				driver.navigate().refresh();
-				acc.signOut();
-			}
 		}else if(waitForAndGetElement(ELEMENT_REGISTER_SKIP_BUTTON,3000,0,2)!=null){
 			info("-- Skipping register account--");
-			click(ELEMENT_REGISTER_SKIP_BUTTON);
-			waitForElementNotPresent(ELEMENT_REGISTER_SKIP_BUTTON);
+			info("Click on Continue button");
+			if(waitForAndGetElement(ELEMENT_CONTINUE_BTN,3000,0,2)!=null){
+				click(ELEMENT_CONTINUE_BTN);
+				waitForElementNotPresent(ELEMENT_CONTINUE_BTN);
+			}else{
+				click(ELEMENT_REGISTER_SKIP_BUTTON);
+				waitForElementNotPresent(ELEMENT_REGISTER_SKIP_BUTTON);
+			}
 			
-			info("-- Creating an Admin account: FQA... --");
-			accountSetup();
-			info("-- Administrator account (FQA) has been created successfully... --");
-			driver.navigate().refresh();
-			acc.signOut();
-		}else if (waitForAndGetElement(ELEMENT_ROOT_PASS_ACCOUNT, 3000, 0, 2) != null){
+		}
+		if (waitForAndGetElement(ELEMENT_ROOT_PASS_ACCOUNT, 3000, 0, 2) != null){
 			info("-- Creating an Admin account: FQA... --");
 			if(isCreateAccount==true){
 				accountSetup();
@@ -1177,6 +1179,25 @@ public class TestBase {
 		}
 		((JavascriptExecutor)driver).executeScript("arguments[0].click();", e);
 	}
+	/**
+	 * Type by java script
+	 * @param locator
+	 * @param value
+	 * @param opParams
+	 */
+	public void typeByJavascript(Object locatorById, String value,Object... opParams){
+	//	int notDisplay = (Integer) (opParams.length > 0 ? opParams[0]: 0);	
+		/*WebElement e = null;
+		if(locator instanceof WebElement){
+			e=(WebElement) locator;
+		}
+		else{
+			info("wait and get element");
+			e = waitForAndGetElement(locator,3000, 1,2);
+		}*/
+		Utils.pause(3000);
+		((JavascriptExecutor)driver).executeScript("document.getElementById('"+locatorById+"').value='"+value+"'");
+	}
 
 	/**
 	 * click action
@@ -1185,11 +1206,11 @@ public class TestBase {
 	 */
 	public void click(Object locator, Object... opParams) {
 		int notDisplay = (Integer) (opParams.length > 0 ? opParams[0]: 0);	
-		Boolean isUseJavascript =  (Boolean) (opParams.length > 1 ? opParams[1]: false);	
+		//Boolean isUseJavascript =  (Boolean) (opParams.length > 1 ? opParams[1]: false);	
 		WebElement element = null;
 		Actions actions = new Actions(driver);
 		try {
-			if(isUseJavascript){
+			if(browser.contains("iexplorer")){
 				info("use javasript to click");
 				clickByJavascript(locator, notDisplay);
 			}
@@ -1434,7 +1455,6 @@ public class TestBase {
 				WebElement element = waitForAndGetElement(locator, DEFAULT_TIMEOUT, 1, notDisplay);		
 				if (element != null){
 					if (validate) element.clear();
-					//element.click();
 					element.sendKeys(value);
 					if (!validate || value.equals(getValue(locator))) {
 						break;

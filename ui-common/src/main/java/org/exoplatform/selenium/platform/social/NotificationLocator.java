@@ -442,7 +442,7 @@ public class NotificationLocator extends PlatformBase{
 	public final By ELEMENT_EDIT_NEWUSER_MAIL_CHECKBOX = By.xpath("//*[@for='MAIL_CHANNELNewUserPlugin']");
 	
 	public final By ELEMENT_EDIT_NEWUSER_MAIL_CHECKBOX_CHECKED = By.xpath("//*[@id='MAIL_CHANNELNewUserPlugin'][contains(@checked,'checked')]");
-	public final By ELEMENT_EDIT_NEWUSER_WEB_CHECKBOX = By.xpath("//*[@for='WEB_CHANNELNewUserPlugin']");
+	public final By ELEMENT_EDIT_NEWUSER_WEB_CHECKBOX = By.xpath("//*[@id='WEB_CHANNELNewUserPlugin']");
 	public final By ELEMENT_EDIT_NEWUSER_WEB_CHECKBOX_CHECKED = By.xpath("//*[@id='WEB_CHANNELNewUserPlugin'][contains(@checked,'checked')]");
 	public final By ELEMENT_EDIT_NEWUSER_LIST = By.id("MAIL_CHANNELNewUserPluginSelectBox");
 	public final By ELEMENT_EDIT_NEWUSER_SAVE_BTN = By.xpath("//button[@id='NewUserPlugin']");
@@ -452,9 +452,9 @@ public class NotificationLocator extends PlatformBase{
 	
     //Connections
 	public final By ELEMENT_EDIT_RECREQ_ICON = By.xpath("//*[@id='RelationshipReceivedRequestPlugin']/..//*[@class='uiIconEdit uiIconLightGray']");
-	public final By ELEMENT_EDIT_RECREQ_MAIL_CHECKBOX = By.xpath("//*[@for='MAIL_CHANNELRelationshipReceivedRequestPlugin']");
+	public final By ELEMENT_EDIT_RECREQ_MAIL_CHECKBOX = By.xpath("//*[@id='MAIL_CHANNELRelationshipReceivedRequestPlugin']");
 	public final By ELEMENT_EDIT_RECREQ_MAIL_CHECKBOX_CHECKED = By.xpath("//*[@id='MAIL_CHANNELRelationshipReceivedRequestPlugin'][contains(@checked,'checked')]");
-	public final By ELEMENT_EDIT_RECREQ_WEB_CHECKBOX = By.xpath("//*[@for='WEB_CHANNELRelationshipReceivedRequestPlugin']");
+	public final By ELEMENT_EDIT_RECREQ_WEB_CHECKBOX = By.xpath("//*[@id='WEB_CHANNELRelationshipReceivedRequestPlugin']");
 	public final By ELEMENT_EDIT_RECREQ_WEB_CHECKBOX_CHECKED = By.xpath("//*[@id='WEB_CHANNELRelationshipReceivedRequestPlugin'][contains(@checked,'checked')]");
 	public final By ELEMENT_EDIT_RECREQ_LIST = By.id("MAIL_CHANNELRelationshipReceivedRequestPluginSelectBox");
 	public final By ELEMENT_EDIT_RECREQ_SAVE_BTN = By.xpath("//button[@id='RelationshipReceivedRequestPlugin']");
@@ -462,62 +462,62 @@ public class NotificationLocator extends PlatformBase{
     //Spaces
 	public final By ELEMENT_MY_NOTIFICATION_SPACE_REQJOIN_PLUGIN=By.xpath(".//*[@for='RequestJoinSpacePlugin']");
 	public final By ELEMENT_EDIT_REQJOIN_SPACE_ICON = By.xpath("//*[@id='RequestJoinSpacePlugin']/..//*[@class='uiIconEdit uiIconLightGray']");
-	public final By ELEMENT_EDIT_REQJOIN_SPACE_MAIL_CHECKBOX = By.xpath("//*[@for='MAIL_CHANNELRequestJoinSpacePlugin']");
+	public final By ELEMENT_EDIT_REQJOIN_SPACE_MAIL_CHECKBOX = By.xpath("//*[@id='MAIL_CHANNELRequestJoinSpacePlugin']");
 	public final By ELEMENT_EDIT_REQJOIN_SPACE_MAIL_CHECKBOX_CHECKED = By.xpath("//*[@id='MAIL_CHANNELRequestJoinSpacePlugin'][contains(@checked,'checked')]");
-	public final By ELEMENT_EDIT_REQJOIN_SPACE_WEB_CHECKBOX = By.xpath("//*[@for='WEB_CHANNELRequestJoinSpacePlugin']");
+	public final By ELEMENT_EDIT_REQJOIN_SPACE_WEB_CHECKBOX = By.xpath("//*[@id='WEB_CHANNELRequestJoinSpacePlugin']");
 	public final By ELEMENT_EDIT_REQJOIN_SPACE_WEB_CHECKBOX_CHECKED = By.xpath("//*[@id='WEB_CHANNELRequestJoinSpacePlugin'][contains(@checked,'checked')]");
 	public final By ELEMENT_EDIT_REQJOIN_SPACE_LIST = By.id("MAIL_CHANNELRequestJoinSpacePluginSelectBox");
 	public final By ELEMENT_EDIT_REQJOIN_SPACE_SAVE_BTN = By.xpath("//button[@id='RequestJoinSpacePlugin']");
 	public final By ELEMENT_EDIT_INVI_SPACE_ICON = By.xpath("//*[@id='SpaceInvitationPlugin']/..//*[@class='uiIconEdit uiIconLightGray']");
-	public final By ELEMENT_EDIT_INVI_SPACE_MAIL_CHECKBOX = By.xpath("//*[@for='MAIL_CHANNELSpaceInvitationPlugin']");
+	public final By ELEMENT_EDIT_INVI_SPACE_MAIL_CHECKBOX = By.xpath("//*[@id='MAIL_CHANNELSpaceInvitationPlugin']");
 	public final By ELEMENT_EDIT_INVI_SPACE_MAIL_CHECKBOX_CHECKED = By.xpath("//*[@id='MAIL_CHANNELSpaceInvitationPlugin'][contains(@checked,'checked')]");
-	public final By ELEMENT_EDIT_INVI_SPACE_WEB_CHECKBOX = By.xpath("//*[@for='WEB_CHANNELSpaceInvitationPlugin']");
+	public final By ELEMENT_EDIT_INVI_SPACE_WEB_CHECKBOX = By.xpath("//*[@id='WEB_CHANNELSpaceInvitationPlugin']");
 	public final By ELEMENT_EDIT_INVI_SPACE_WEB_CHECKBOX_CHECKED = By.xpath("//*[@id='WEB_CHANNELSpaceInvitationPlugin'][contains(@checked,'checked')]");
 	public final By ELEMENT_EDIT_INVI_SPACE_LIST = By.id("MAIL_CHANNELSpaceInvitationPluginSelectBox");
 	public final By ELEMENT_EDIT_INVI_SPACE_SAVE_BTN = By.xpath("//button[@id='SpaceInvitationPlugin']");
-	public final By ELEMENT_MY_NOTIFICATION_SPACE_POST_PLUGIN=By.xpath(".//*[@for='PostActivitySpaceStreamPlugin']");
+	public final By ELEMENT_MY_NOTIFICATION_SPACE_POST_PLUGIN=By.xpath(".//*[@id='PostActivitySpaceStreamPlugin']");
 	//Post on my Space
 	public final By ELEMENT_EDIT_POST_SPACE_ICON = By.xpath("//*[@id='PostActivitySpaceStreamPlugin']/..//*[@class='uiIconEdit uiIconLightGray']");
-	public final By ELEMENT_EDIT_POST_SPACE_MAIL_CHECKBOX = By.xpath("//*[@for='MAIL_CHANNELPostActivitySpaceStreamPlugin']");
+	public final By ELEMENT_EDIT_POST_SPACE_MAIL_CHECKBOX = By.xpath("//*[@id='MAIL_CHANNELPostActivitySpaceStreamPlugin']");
 	public final By ELEMENT_EDIT_POST_SPACE_MAIL_CHECKBOX_CHECKED = By.xpath("//*[@id='MAIL_CHANNELPostActivitySpaceStreamPlugin'][contains(@checked,'checked')]");
-	public final By ELEMENT_EDIT_POST_SPACE_WEB_CHECKBOX = By.xpath("//*[@for='WEB_CHANNELPostActivitySpaceStreamPlugin']");
+	public final By ELEMENT_EDIT_POST_SPACE_WEB_CHECKBOX = By.xpath("//*[@id='WEB_CHANNELPostActivitySpaceStreamPlugin']");
 	public final By ELEMENT_EDIT_POST_SPACE_WEB_CHECKBOX_CHECKED = By.xpath("//*[@id='WEB_CHANNELPostActivitySpaceStreamPlugin'][contains(@checked,'checked')]");
 	public final By ELEMENT_EDIT_POST_SPACE_LIST = By.id("MAIL_CHANNELPostActivitySpaceStreamPluginSelectBox");
 	public final By ELEMENT_EDIT_POST_SPACE_SAVE_BTN = By.xpath("//button[@id='PostActivitySpaceStreamPlugin']");
 
 	//Activity Stream
-	public final By ELEMENT_MY_NOTIFICATION_ACTIVITY_LIKE_PLUGIN=By.xpath(".//*[@for='LikePlugin']");
+	public final By ELEMENT_MY_NOTIFICATION_ACTIVITY_LIKE_PLUGIN=By.xpath(".//*[@id='LikePlugin']");
 	public final By ELEMENT_EDIT_LIKE_ICON = By.xpath("//*[@id='LikePlugin']/..//*[@class='uiIconEdit uiIconLightGray']");
-	public final By ELEMENT_EDIT_LIKE_MAIL_CHECKBOX = By.xpath("//*[@for='MAIL_CHANNELLikePlugin']");
+	public final By ELEMENT_EDIT_LIKE_MAIL_CHECKBOX = By.xpath("//*[@id='MAIL_CHANNELLikePlugin']");
 	public final By ELEMENT_EDIT_LIKE_MAIL_CHECKBOX_CHECKED = By.xpath("//*[@id='MAIL_CHANNELLikePlugin'][contains(@checked,'checked')]");
-	public final By ELEMENT_EDIT_LIKE_WEB_CHECKBOX = By.xpath("//*[@for='WEB_CHANNELLikePlugin']");
+	public final By ELEMENT_EDIT_LIKE_WEB_CHECKBOX = By.xpath("//*[@id='WEB_CHANNELLikePlugin']");
 	public final By ELEMENT_EDIT_LIKE_WEB_CHECKBOX_CHECKED = By.xpath("//*[@id='WEB_CHANNELLikePlugin'][contains(@checked,'checked')]");
 	public final By ELEMENT_EDIT_LIKE_LIST = By.id("MAIL_CHANNELLikePluginSelectBox");
 	public final By ELEMENT_EDIT_LIKE_SAVE_BTN = By.xpath("//button[@id='LikePlugin']");
-	public final By ELEMENT_MY_NOTIFICATION_ACTIVITY_POST_PLUGIN=By.xpath(".//*[@for='PostActivityPlugin']");
+	public final By ELEMENT_MY_NOTIFICATION_ACTIVITY_POST_PLUGIN=By.xpath(".//*[@id='PostActivityPlugin']");
 	
 	//Post on Activity stream
 	public final By ELEMENT_EDIT_POST_ICON = By.xpath("//*[@id='PostActivityPlugin']/..//*[@class='uiIconEdit uiIconLightGray']");
-	public final By ELEMENT_EDIT_POST_MAIL_CHECKBOX = By.xpath("//*[@for='MAIL_CHANNELPostActivityPlugin']");
+	public final By ELEMENT_EDIT_POST_MAIL_CHECKBOX = By.xpath("//*[@id='MAIL_CHANNELPostActivityPlugin']");
 	public final By ELEMENT_EDIT_POST_MAIL_CHECKBOX_CHECKED = By.xpath("//*[@id='MAIL_CHANNELPostActivityPlugin'][contains(@checked,'checked')]");
-	public final By ELEMENT_EDIT_POST_WEB_CHECKBOX = By.xpath("//*[@for='WEB_CHANNELPostActivityPlugin']");
+	public final By ELEMENT_EDIT_POST_WEB_CHECKBOX = By.xpath("//*[@id='WEB_CHANNELPostActivityPlugin']");
 	public final By ELEMENT_EDIT_POST_WEB_CHECKBOX_CHECKED = By.xpath("//*[@id='WEB_CHANNELPostActivityPlugin'][contains(@checked,'checked')]");
 	public final By ELEMENT_EDIT_POST_LIST = By.id("MAIL_CHANNELPostActivityPluginSelectBox");
 	public final By ELEMENT_EDIT_POST_SAVE_BTN = By.xpath("//button[@id='PostActivityPlugin']");
 
 	public final By ELEMENT_EDIT_COMMENT_ICON = By.xpath("//*[@id='ActivityCommentPlugin']/..//*[@class='uiIconEdit uiIconLightGray']");
-	public final By ELEMENT_EDIT_COMMENT_MAIL_CHECKBOX = By.xpath("//*[@for='MAIL_CHANNELActivityCommentPlugin']");
+	public final By ELEMENT_EDIT_COMMENT_MAIL_CHECKBOX = By.xpath("//*[@id='MAIL_CHANNELActivityCommentPlugin']");
 	public final By ELEMENT_EDIT_COMMENT_MAIL_CHECKBOX_CHECKED = By.xpath("//*[@id='MAIL_CHANNELActivityCommentPlugin'][contains(@checked,'checked')]");
-	public final By ELEMENT_EDIT_COMMENT_WEB_CHECKBOX = By.xpath("//*[@for='WEB_CHANNELActivityCommentPlugin']");
+	public final By ELEMENT_EDIT_COMMENT_WEB_CHECKBOX = By.xpath("//*[@id='WEB_CHANNELActivityCommentPlugin']");
 	public final By ELEMENT_EDIT_COMMENT_WEB_CHECKBOX_CHECKED = By.xpath("//*[@id='WEB_CHANNELActivityCommentPlugin'][contains(@checked,'checked')]");
 	public final By ELEMENT_EDIT_COMMENT_LIST = By.id("MAIL_CHANNELActivityCommentPluginSelectBox");
 	public final By ELEMENT_EDIT_COMMENT_SAVE_BTN =  By.xpath("//button[@id='ActivityCommentPlugin']");
-	public final By ELEMENT_MY_NOTIFICATION_MENTION_PLUGIN=By.xpath(".//*[@for='ActivityMentionPlugin']");
+	public final By ELEMENT_MY_NOTIFICATION_MENTION_PLUGIN=By.xpath(".//*[@id='ActivityMentionPlugin']");
 	//Mention
 	public final By ELEMENT_EDIT_MENTION_ICON = By.xpath("//*[@id='ActivityMentionPlugin']/..//*[@class='uiIconEdit uiIconLightGray']");
-	public final By ELEMENT_EDIT_MENTION_MAIL_CHECKBOX = By.xpath("//*[@for='MAIL_CHANNELActivityMentionPlugin']");
+	public final By ELEMENT_EDIT_MENTION_MAIL_CHECKBOX = By.xpath("//*[@id='MAIL_CHANNELActivityMentionPlugin']");
 	public final By ELEMENT_EDIT_MENTION_MAIL_CHECKBOX_CHECKED = By.xpath("//*[@id='MAIL_CHANNELActivityMentionPlugin'][contains(@checked,'checked')]");
-	public final By ELEMENT_EDIT_MENTION_WEB_CHECKBOX = By.xpath("//*[@for='WEB_CHANNELActivityMentionPlugin']");
+	public final By ELEMENT_EDIT_MENTION_WEB_CHECKBOX = By.xpath("//*[@id='WEB_CHANNELActivityMentionPlugin']");
 	public final By ELEMENT_EDIT_MENTION_WEB_CHECKBOX_CHECKED = By.xpath("//*[@id='WEB_CHANNELActivityMentionPlugin'][contains(@checked,'checked')]");
 	public final By ELEMENT_EDIT_MENTION_LIST = By.id("MAIL_CHANNELActivityMentionPluginSelectBox");
 	public final By ELEMENT_EDIT_MENTION_SAVE_BTN =  By.xpath("//button[@id='ActivityMentionPlugin']");

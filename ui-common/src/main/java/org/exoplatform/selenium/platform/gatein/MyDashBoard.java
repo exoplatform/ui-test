@@ -20,7 +20,7 @@ public class MyDashBoard extends PlatformBase {
 	public final String ELEMENT_MYDASH_BTN_NAMETAB = "//*[@value='${name}']";
 	public final String ELEMENT_MYDASH_BTN_DELETETAB = "//*[@id='${name}']/../../..//*[contains(@class,'uiIconClose')]";
 
-	public final By ELEMENT_MYDASH_BTN_ADDGADGET = By.xpath("//*[text()='Add Gadgets']");
+	public final By ELEMENT_MYDASH_BTN_ADDGADGET = By.xpath(".//*[@id='GadgetContainer']//*[contains(text(),'Add Gadgets')]");
 	public final String  ELEMENT_MYDASH_GADGET_NAME = "//*[@class='GadgetTitle' and @title='${name}']";
 	public final String ELEMENT_MYDASH_ADDED_GADGET_IN_DASHBOARD=".//*[@class='gadgetTitle'][contains(text(),'${name}')]";
 	public final String ELEMENT_MYDASH_DELETE_GADGET = ".//*[@class='gadgetTitle'][contains(text(),'${name}')]/..//*[contains(@class,'uiIconClose')][1]";
@@ -93,13 +93,15 @@ public class MyDashBoard extends PlatformBase {
 		info("Open add gadget popup");
 		click(ELEMENT_MYDASH_BTN_ADDGADGET);
 		info("Input a url link");
-		type(ELEMENT_MYDASH_GADGET_BYURL, url, true);
+		if(browser.contains("iexplorer"))
+		typeByJavascript("url", url);
+		else type(ELEMENT_MYDASH_GADGET_BYURL, url, true);
 		info("Click on add button");
 		click(ELEMENT_MYDASH_GADGET_ADDBTN);
 		info("Close the popup");
 		click(ELEMENT_DASHBOARD_WORKSPACE_POPUP_CLOSE);
 		info("Verify that the remote gadget is shown on the page");
-		waitForAndGetElement(ELEMENT_MYDASH_ADDED_GADGET_IN_DASHBOARD.replace("${name}",name),2000,0);
+		waitForAndGetElement(ELEMENT_MYDASH_ADDED_GADGET_IN_DASHBOARD.replace("${name}",name),2000,1);
 		Utils.pause(2000);
 	}
 	/**

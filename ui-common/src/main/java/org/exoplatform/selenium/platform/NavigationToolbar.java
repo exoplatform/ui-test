@@ -280,6 +280,22 @@ public class NavigationToolbar extends PlatformBase {
 		Utils.pause(3000);
 	}
 	
+	
+	/**
+	 * function: Go to Users and Group management (Administration --> Community --> Manage Community)
+	 */
+	public void goToCommunityManagement() {
+		info("--Go to Users and groups management--");
+		click(ELEMENT_TOOLBAR_ADMINISTRATION);
+		mouseOver(ELEMENT_ADMINISTRATION_USERS, true);
+		if(waitForAndGetElement(ELEMENT_GROUP_AND_ROLE_LINK,2000,0)!=null)
+			click(ELEMENT_GROUP_AND_ROLE_LINK);
+		else {
+			driver.get(baseUrl+"/g/:platform:administrators/administration/management");
+		}
+		Utils.pause(2000);
+	}	
+	
 
 	/**
 	 * List sublink in user menu
@@ -685,14 +701,23 @@ public class NavigationToolbar extends PlatformBase {
 	 */
 	public void goToAddUser(){
 		info("Go to add user page");
-		waitElementAndTryGetElement(ELEMENT_TOOLBAR_ADMINISTRATION);
-		click(ELEMENT_TOOLBAR_ADMINISTRATION);
-		waitForAndGetElement(ELEMENT_ADMINISTRATION_USERS, DEFAULT_TIMEOUT, 1);
+		int repeat =0;
+		while(waitForAndGetElement(ELEMENT_ADMINISTRATION_USERS, 3000,0)==null){
+			if(repeat>5)break;
+			info("Click on Administration icon");
+			click(ELEMENT_TOOLBAR_ADMINISTRATION);
+			repeat++;
+		}
+		info("add user page is shown");
+		info("mouse over on community link");
 		mouseOver(ELEMENT_ADMINISTRATION_USERS,true);
-		if(waitForAndGetElement(ELEMENT_ADMINISTRATION_PORTAL_ADD_USERS,3000,0)!=null)
-			click(ELEMENT_ADMINISTRATION_PORTAL_ADD_USERS,0,true);
-		else
+		if(waitForAndGetElement(ELEMENT_ADMINISTRATION_PORTAL_ADD_USERS,3000,0)!=null){
+			info("click on Add user link");
+			click(ELEMENT_ADMINISTRATION_PORTAL_ADD_USERS);
+		}else{
+			info("Cannot click on add user link. Go to this page by link");
 			driver.get(baseUrl+"/g/:platform:administrators/administration/newStaff");
+		}
 	}
 	/**
 	 * Open Notification list

@@ -29,7 +29,6 @@ public class SOC_Notification_Notification_Settings extends SOC_TestConfig{
 			- Notification Settings page is appeared.
 			- The entry is placed in the menu after My Dashboard.
 			-It opens the Notifications Settings page in the user navigation.*/ 
-		magAc.signIn(DATA_USER1, DATA_PASS);
 		navTool.goToMyNotifications();
 		waitForAndGetElement(myNotifPage.ELEMENT_MY_NOTIFICATION_SETTING_FORM);
 	}
@@ -52,7 +51,6 @@ public class SOC_Notification_Notification_Settings extends SOC_TestConfig{
 
 		 *Expected Outcome: 
 			- Notification Settings page is appeared*/
-		magAc.signIn(DATA_USER1, DATA_PASS);
 		navTool.goToMyNotifications();
 		waitForAndGetElement(myNotifPage.ELEMENT_MY_NOTIFICATION_SETTING_FORM);
 
@@ -98,7 +96,6 @@ public class SOC_Notification_Notification_Settings extends SOC_TestConfig{
 		String email1 = txData.getContentByArrayTypeRandom(1) + getRandomNumber() + mailSuffixData.getMailSuffixRandom();
 
 		info("Add new user");
-		magAc.signIn(DATA_USER1, DATA_PASS);
 		navTool.goToAddUser();
 		addUserPage.addUser(username1, password1, email1, username1, username1);
 		/*Step Number: 1
@@ -157,7 +154,6 @@ public class SOC_Notification_Notification_Settings extends SOC_TestConfig{
 		String email1 = txData.getContentByArrayTypeRandom(1) + getRandomNumber() + mailSuffixData.getMailSuffixRandom();
 
 		info("Add new user");
-		magAc.signIn(DATA_USER1, DATA_PASS);
 		navTool.goToAddUser();
 		addUserPage.addUser(username1, password1, email1, username1, username1);
 
