@@ -133,7 +133,6 @@ public class UserAndGroupManagement extends PlatformBase {
 	//Social networks tab
 	public final By ELEMENT_USER_SOCIAL_NETWORKS_TAB = By.xpath("//*[@data-target='#UIAccountSocial-tab']");
 	public final String ELEMENT_USER_SOCIAL_NETWORKS_TAB_GOOGLE_ACCOUNT =".//*[@id='user.social-info.google.userName' and @value= '${account}']";
-	
 	public final By ELEMENT_USER_ACCOUNT_PROFILE_TAB = By.xpath("//*[@data-target='#UIAccountProfiles-tab']");
 	Dialog dialog;
 

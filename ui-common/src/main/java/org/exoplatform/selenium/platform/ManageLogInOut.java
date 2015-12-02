@@ -37,7 +37,6 @@ public class ManageLogInOut extends PlatformBase {
 	public final By ELEMENT_USER_SOCIAL_NETWORKS_TAB_UNLINK_FACEBOOK = By.xpath("//*[contains(text(), 'Facebook User Name')]/..//*[contains(text(), 'Unlink social account')]");
 	public final By ELEMENT_USER_SOCIAL_NETWORKS_TAB_UNLINK_LINKEDIN = By.xpath("//*[contains(text(), 'LinkedIn User Name')]/..//*[contains(text(), 'Unlink social account')]");
 
-	
 	//Facebook login form
 	public final By ELEMENT_FACEBOOK_LOGIN_FORM_LOGO = By.xpath(".//*[@href='https://www.facebook.com/']");
 	public final By ELEMENT_FACEBOOK_LOGIN_FORM_USERNAME = By.xpath(".//*[@id='email']");
@@ -334,7 +333,6 @@ public class ManageLogInOut extends PlatformBase {
 		type(ELEMENT_FACEBOOK_LOGIN_FORM_USERNAME, userName, true);
 		type(ELEMENT_FACEBOOK_LOGIN_FORM_PASSWORD, password, true);
 		Utils.pause(3000);
-		
 		click(ELEMENT_FACEBOOK_LOGIN_FORM_LOGIN_BUTTON);
 	}
 	
