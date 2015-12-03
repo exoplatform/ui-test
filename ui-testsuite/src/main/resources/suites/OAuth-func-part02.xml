@@ -1,6 +1,6 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="Platform Functional Test" verbose="1" preserve-order="true">
-	<test name="OAuth-func-part02" enabled="true">
+	<test name="OAuth-func-part04" enabled="true">
 		<groups>
 			<run>
 				<exclude name="pending" />

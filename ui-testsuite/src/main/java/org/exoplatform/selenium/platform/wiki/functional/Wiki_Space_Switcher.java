@@ -106,7 +106,7 @@ import org.testng.annotations.*;
 			- Wiki is selected on the left sidebar navigation*/ 
 		hp.goToSpecificSpace(space2);
 		spaMg.goToWikiTab();
-		wHome.goToWikiHomeOfSpaceFromBreadcrumb(space1);
+		wHome.goToWikiHomeOfSpaceFromBreadcrumb(space1, null);
 		wValidate.verifyBreadCrumbePath(space1,"Wiki Home");
 		waitForAndGetElement(spaHome.ELEMENT_WIKI_TAB);
 
@@ -197,7 +197,7 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- Wiki of Space 2 is opened on "Wiki Home" page*/ 
 		hp.goToWiki();
-		wHome.goToWikiHomeOfSpaceFromBreadcrumb(space1);
+		wHome.goToWikiHomeOfSpaceFromBreadcrumb(space1, null);
 		wValidate.verifyBreadCrumbePath(space1,"Wiki Home");
 		waitForAndGetElement(spaHome.ELEMENT_WIKI_TAB);
 
@@ -289,7 +289,7 @@ import org.testng.annotations.*;
 			- Wiki of Space 2 is opened on "Wiki Home" page*/ 
 		hp.goToSpecificSpace(space1);
 		spaMg.goToWikiTab();
-		wHome.goToWikiHomeOfSpaceFromBreadcrumb(space1);
+		wHome.goToWikiHomeOfSpaceFromBreadcrumb(space1, null);
 		wValidate.verifyBreadCrumbePath(space1,"Wiki Home");
 		waitForAndGetElement(spaHome.ELEMENT_WIKI_TAB);
 
@@ -358,7 +358,7 @@ import org.testng.annotations.*;
 		wValidate.verifyPresentSpaceSwitcher("My Wiki");
 		wValidate.verifyPresentSpaceSwitcher(space1);
 		wHome.closeSpaceWitcher();
-		wHome.goToWikiHomeOfSpaceFromBreadcrumb("Intranet");
+		wHome.goToWikiHomeOfSpaceFromBreadcrumb("Intranet", null);
 		wValidate.verifyBreadCrumbePath("Intranet","Wiki Home");
 		waitForElementNotPresent(spaHome.ELEMENT_WIKI_TAB);
 
@@ -419,7 +419,7 @@ import org.testng.annotations.*;
 		wValidate.verifyPresentSpaceSwitcher("My Wiki");
 		wValidate.verifyNoAnySpaces();
 		wHome.closeSpaceWitcher();
-		wHome.goToWikiHomeOfSpaceFromBreadcrumb("My Wiki");
+		wHome.goToWikiHomeOfSpaceFromBreadcrumb("My Wiki", arrayUsers.get(0));
 		wValidate.verifyBreadCrumbePath("My Wiki","Wiki Home");
         waitForAndGetElement(userPageBase.ELEMENT_HORIZONTAL_TOOLBAR_FORTH_APP_WIKI);
  	}
@@ -484,7 +484,7 @@ import org.testng.annotations.*;
 		wValidate.verifyPresentSpaceSwitcher("My Wiki");
 		wValidate.verifyPresentSpaceSwitcher(space1);
 		wHome.closeSpaceWitcher();
-		wHome.goToWikiHomeOfSpaceFromBreadcrumb(space1);
+		wHome.goToWikiHomeOfSpaceFromBreadcrumb(space1, null);
 		wValidate.verifyBreadCrumbePath(space1,"Wiki Home");
 		waitForAndGetElement(spaHome.ELEMENT_WIKI_TAB);
 

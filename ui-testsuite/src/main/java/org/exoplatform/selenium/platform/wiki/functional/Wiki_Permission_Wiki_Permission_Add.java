@@ -80,7 +80,7 @@ import org.testng.annotations.*;
 			Users of the selected group have permission to view/edit/ admin .. with this page*/ 
 		wPermission.selectPermission(groupUsers, permissionType.Edit_Pages);
 		wPermission.selectPermission(groupUsers, permissionType.Admin_Pages);
-		wPermission.savePermisison();
+		wPermission.savePermisison(true);
 		wHome.confirmWaringMessage(true);
 		arrayGroupsPath.add(groupUsers);
 		info("Mermbers of the selected group has view/edit permission");
@@ -164,7 +164,7 @@ import org.testng.annotations.*;
 			Users of this group have permission to view/edit this page*/ 
 		wPermission.selectPermission(groupUsers, permissionType.Edit_Pages);
 		wPermission.selectPermission(groupUsers, permissionType.Admin_Pages);
-		wPermission.savePermisison();
+		wPermission.savePermisison(true);
 		wHome.confirmWaringMessage(true);
 		arrayGroupsPath.add(groupUsers);
 		info("Mermbers of the selected group has view/edit permission");
@@ -246,7 +246,7 @@ import org.testng.annotations.*;
 			Users with the selected membership have permissions to view/edit/ admin .. with this page*/ 
 		wPermission.selectPermission(groupUsers, permissionType.Edit_Pages);
 		wPermission.selectPermission(groupUsers, permissionType.Admin_Pages);
-		wPermission.savePermisison();
+		wPermission.savePermisison(true);
 		wHome.confirmWaringMessage(true);
 		arrayGroupsPath.add(groupUsers);
 		info("Mermbers of the selected group has view/edit permission");
@@ -328,7 +328,7 @@ import org.testng.annotations.*;
 			Usershaving the selected memberships have permission to view/edit this page*/ 
 		wPermission.selectPermission(group, permissionType.Edit_Pages);
 		wPermission.selectPermission(group, permissionType.Admin_Pages);
-		wPermission.savePermisison();
+		wPermission.savePermisison(true);
 		wHome.confirmWaringMessage(true);
 		arrayGroupsPath.add(group);
 		info("Mermbers of the selected group has view/edit permission");
@@ -403,7 +403,7 @@ import org.testng.annotations.*;
 		wPermission.selectPermission(arrayUsers.get(1), permissionType.Admin_Pages);
 		wPermission.selectPermission(arrayUsers.get(2), permissionType.Edit_Pages);
 		wPermission.selectPermission(arrayUsers.get(2), permissionType.Admin_Pages);
-		wPermission.savePermisison();
+		wPermission.savePermisison(true);
 		wHome.confirmWaringMessage(true);
 		arrayGroupsPath.add(arrayUsers.get(0));
 		arrayGroupsPath.add(arrayUsers.get(1));
@@ -488,7 +488,7 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			user has view permission only*/ 
-		wPermission.savePermisison();
+		wPermission.savePermisison(true);
 		wHome.confirmWaringMessage(true);
 		arrayGroupsPath.add(arrayUsers.get(0));
 		
@@ -575,7 +575,7 @@ import org.testng.annotations.*;
 			User has permission to view/edit/ admin*/
 		wPermission.selectPermission(arrayUsers.get(0), permissionType.Edit_Pages);
 		wPermission.selectPermission(arrayUsers.get(0), permissionType.Admin_Pages);
-		wPermission.savePermisison();
+		wPermission.savePermisison(true);
 		wHome.confirmWaringMessage(true);
 		arrayGroupsPath.add(arrayUsers.get(0));
 		info("Mermbers of the selected group has view/edit permission");
@@ -656,7 +656,7 @@ import org.testng.annotations.*;
 			User has permission to view/edit/ admin .. with this page*/ 
 		wPermission.selectPermission(arrayUsers.get(0), permissionType.Edit_Pages);
 		wPermission.selectPermission(arrayUsers.get(0), permissionType.Admin_Pages);
-		wPermission.savePermisison();
+		wPermission.savePermisison(true);
 		wHome.confirmWaringMessage(true);
 		arrayGroupsPath.add(arrayUsers.get(0));
 		info("Mermbers of the selected group has view/edit permission");
@@ -737,7 +737,7 @@ import org.testng.annotations.*;
 			User has permission to view/edit/ admin .. with this page*/ 
 		wPermission.selectPermission(arrayUsers.get(0), permissionType.Edit_Pages);
 		wPermission.selectPermission(arrayUsers.get(0), permissionType.Admin_Pages);
-		wPermission.savePermisison();
+		wPermission.savePermisison(true);
 		wHome.confirmWaringMessage(true);
 		arrayGroupsPath.add(arrayUsers.get(0));
 		info("Mermbers of the selected group has view/edit permission");
@@ -818,7 +818,7 @@ import org.testng.annotations.*;
 			User has permission to view/edit/ admin .. with this page*/ 
 		wPermission.selectPermission(arrayUsers.get(0), permissionType.Edit_Pages);
 		wPermission.selectPermission(arrayUsers.get(0), permissionType.Admin_Pages);
-		wPermission.savePermisison();
+		wPermission.savePermisison(true);
 		wHome.confirmWaringMessage(true);
 		arrayGroupsPath.add(arrayUsers.get(0));
 		info("Mermbers of the selected group has view/edit permission");
@@ -886,7 +886,7 @@ import org.testng.annotations.*;
 			User has permission to view/edit/ admin .. with this page*/ 
 		wPermission.selectPermission(arrayUsers.get(0), permissionType.Edit_Pages);
 		wPermission.selectPermission(arrayUsers.get(0), permissionType.Admin_Pages);
-		wPermission.savePermisison();
+		wPermission.savePermisison(true);
 		wHome.confirmWaringMessage(true);
 		arrayGroupsPath.add(arrayUsers.get(0));
 		info("Mermbers of the selected group has view/edit permission");

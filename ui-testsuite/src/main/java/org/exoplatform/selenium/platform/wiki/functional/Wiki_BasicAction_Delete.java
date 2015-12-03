@@ -37,6 +37,7 @@ import org.testng.annotations.*;
 		String content = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		hp.goToWiki();
 		wHome.goToAddBlankPage();
+		wikiMg.goToSourceEditor();
 		sourceEditor.addSimplePage(title, content);
 		wikiMg.saveAddPage();
 		Utils.pause(2000);
@@ -89,6 +90,7 @@ import org.testng.annotations.*;
 		String content = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		hp.goToWiki();
 		wHome.goToAddBlankPage();
+		wikiMg.goToSourceEditor();
 		sourceEditor.addSimplePage(title, content);
 		wikiMg.saveAddPage();
 		Utils.pause(2000);
@@ -137,6 +139,7 @@ import org.testng.annotations.*;
 		String content = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		hp.goToWiki();
 		wHome.goToAddBlankPage();
+		wikiMg.goToSourceEditor();
 		sourceEditor.addSimplePage(title, content);
 		wikiMg.saveAddPage();
 		Utils.pause(2000);
@@ -148,6 +151,7 @@ import org.testng.annotations.*;
 		String newContent = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		wHome.goToAPage(title);
 		wHome.goToEditPage();
+		wikiMg.goToSourceEditor();
 		sourceEditor.editSimplePageWithAutoSave(newTitle, newContent);
 
 		/*Step number: 2
@@ -213,6 +217,7 @@ import org.testng.annotations.*;
 		String content = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		hp.goToWiki();
 		wHome.goToAddBlankPage();
+		wikiMg.goToSourceEditor();
 		sourceEditor.addSimplePageHasAutoSaveWithoutSave(title, content);
 		
 		info("The draft is shown from the list of draft");
@@ -271,6 +276,7 @@ import org.testng.annotations.*;
 		String content = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		hp.goToWiki();
 		wHome.goToAddBlankPage();
+		wikiMg.goToSourceEditor();
 		sourceEditor.addSimplePageHasAutoSaveWithoutSave(title, content);
 		
 		info("The draft is shown from the list of draft");
@@ -324,6 +330,7 @@ import org.testng.annotations.*;
 		String content = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		hp.goToWiki();
 		wHome.goToAddBlankPage();
+		wikiMg.goToSourceEditor();
 		sourceEditor.addSimplePageHasAutoSaveWithoutSave(title, content);
 
 		/*Step number: 2

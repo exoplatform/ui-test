@@ -6,6 +6,7 @@ import java.io.File;
 
 import org.exoplatform.selenium.Utils;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -202,13 +203,25 @@ public class SourceTextEditor extends WikiLocators {
 	 *            optional parameter of this method.
 	 */
 	public void attachFile(String link) {
+		//String fs = File.separator;
+		//WebElement elem = waitForAndGetElement(ELEMENT_UPLOAD_NAME, 5000, 1, 2);
 		String fs = File.separator;
-		WebElement elem = waitForAndGetElement(ELEMENT_UPLOAD_NAME, 5000, 1, 2);
-		scrollToElement(elem, driver);
+		String path=getAbsoluteFilePath(link.replace("/", fs));
+		info("path in uploadRobot:"+path);
+		//doubleClickOnElement(ELEMENT_UPLOAD_NAME);
+		
+		Utils.pause(2000);
+		((JavascriptExecutor) driver)
+				.executeScript("document.getElementsByTagName('input')[0].style.display = 'block';");
+		Utils.pause(2000);
+		driver.findElement(ELEMENT_UPLOAD_NAME)
+					.sendKeys(path);
+		/*scrollToElement(elem, driver);
 		click(elem, 2, true);
 		uploadFileUsingRobot(link);
 		waitForAndGetElement(By
-				.linkText(link.substring(link.lastIndexOf(fs) + 1)));
+				.linkText(link.substring(link.lastIndexOf(fs) + 1)));*/
+		Utils.pause(3000);
 	}
 
 	/**

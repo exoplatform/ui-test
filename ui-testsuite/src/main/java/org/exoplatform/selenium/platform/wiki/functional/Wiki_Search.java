@@ -788,7 +788,7 @@ import org.testng.annotations.*;
 			- Breadcrumb is displaying Space Switcher*/
 		info("Go to space switcher");
 		hp.goToWiki();
-		wHome.goToWikiHomeOfSpaceFromBreadcrumb("My Wiki");
+		wHome.goToWikiHomeOfSpaceFromBreadcrumb("My Wiki", "John");
 
 		/*Step number: 2
 		*Step Name: 

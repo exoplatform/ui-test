@@ -44,7 +44,8 @@ import org.testng.annotations.*;
 		arrayPage.add(title);
 		
 		info("Make public the page");
-		wHome.restrictedPage(true);
+		//wHome.restrictedPage(true);
+		wHome.publicPage(true);
 		
 		info("Verify that the page is published");
 		wValidate.verifyPublishedPage();
@@ -159,7 +160,8 @@ import org.testng.annotations.*;
 		arrayPage.add(title);
 		
 		info("Make public the page");
-		wHome.restrictedPage(true);
+		//wHome.restrictedPage(true);
+		wHome.publicPage(true);
 		
 		info("Verify that the page is published");
 		wValidate.verifyPublishedPage();
@@ -266,7 +268,8 @@ import org.testng.annotations.*;
 		arrayPage.add(title);
 		
 		info("Make public the page");
-		wHome.restrictedPage(true);
+		//wHome.restrictedPage(true);
+		wHome.publicPage(true);
 		
 		info("Verify that the page is published");
 		wValidate.verifyPublishedPage();

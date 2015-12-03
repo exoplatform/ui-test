@@ -84,7 +84,8 @@ public class SpaceManagement extends SpaceLocator {
 		type(ELEMENT_SPACE_DESCRIPTION_INPUT, desc, true);
 		info("Save all changes");
 		click(ELEMENET_SPACE_CREATE_BUTTON);
-		waitForAndGetElement(By.linkText(name), iTimeout);
+		Utils.pause(3000);
+		waitForAndGetElement(".//*[@id='UISpaceNavigationPortlet']//*[@data-original-title='${nameSpace}']".replace("${nameSpace}", name), iTimeout);
 	}
 	
 	/**

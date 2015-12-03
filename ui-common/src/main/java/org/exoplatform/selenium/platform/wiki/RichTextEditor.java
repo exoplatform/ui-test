@@ -2,6 +2,8 @@ package org.exoplatform.selenium.platform.wiki;
 
 import static org.exoplatform.selenium.TestLogger.info;
 
+import org.openqa.selenium.JavascriptExecutor;
+
 import java.awt.event.KeyEvent;
 import java.io.File;
 
@@ -1084,9 +1086,14 @@ public class RichTextEditor extends WikiLocators{
 	 */
 	public void removeLink(String content){
 		info("Click on link");
-		mouseOverAndClick(ELEMENT_LINK);
+		//mouseOverAndClick(ELEMENT_LINK);
+		//click(By.linkText(content));
+		click(ELEMENT_LINK);
 		info("Click on Remove link");
-		mouseOverAndClick(ELEMENT_REMOVE_LINK_MENU);
+		//mouseOverAndClick(ELEMENT_REMOVE_LINK_MENU);
+		Utils.pause(2000);
+		waitForAndGetElement(ELEMENT_REMOVE_LINK_MENU, DEFAULT_TIMEOUT, 1);
+		click(ELEMENT_REMOVE_LINK_MENU);
 		info("Switch to the frame");
 		driver.switchTo().frame(waitForAndGetElement(ELEMENT_CONTENT_WIKI_FRAME));
 		info("Verify that the link is removed");
@@ -1156,11 +1163,21 @@ public class RichTextEditor extends WikiLocators{
 	 */
 	public void uploadAttachedFile(String link){
 		info("Double Click on Upload New file button");
+		String fs = File.separator;
+		String path=getAbsoluteFilePath(link.replace("/", fs));
+		info("path in uploadRobot:"+path);
 		doubleClickOnElement(ELEMENT_CURRENT_PAGE_TAB_UPLOAD_NEW_FILE_BTN);
-		WebElement elem = waitForAndGetElement(ELEMENT_CURRENT_PAGE_TAB_UPLOAD_NAME,5000,1,2);
+		
+		Utils.pause(3000);
+		((JavascriptExecutor) driver)
+				.executeScript("document.getElementsByTagName('input')[0].style.display = 'block';");
+		Utils.pause(2000);
+		driver.findElement( By.xpath("//*[@name='filepath']"))
+					.sendKeys(path);
+		/*WebElement elem = waitForAndGetElement(ELEMENT_CURRENT_PAGE_TAB_UPLOAD_NAME,5000,1,2);
 		scrollToElement(elem, driver);
 		click(elem,2,true);
-		uploadFileUsingRobot(link);
+		uploadFileUsingRobot(link);*/
 		Utils.pause(3000);
 	}
 
@@ -1219,11 +1236,22 @@ public class RichTextEditor extends WikiLocators{
 	 */
 	public void uploadImageFile(String link){
 		info("Double Click on Upload New file button");
+		String fs = File.separator;
+		String path=getAbsoluteFilePath(link.replace("/", fs));
+		info("path in uploadRobot:"+path);
 		doubleClickOnElement(ELEMENT_CURRENT_PAGE_TAB_UPLOAD_IMAGE_BTN);
-		WebElement elem = waitForAndGetElement(ELEMENT_CURRENT_PAGE_TAB_UPLOAD_NAME,5000,1,2);
+		
+		Utils.pause(2000);
+		((JavascriptExecutor) driver)
+				.executeScript("document.getElementsByTagName('input')[0].style.display = 'block';");
+		Utils.pause(2000);
+		driver.findElement(By.xpath("//*[@name='filepath']"))
+					.sendKeys(path);
+		
+		/*WebElement elem = waitForAndGetElement(ELEMENT_CURRENT_PAGE_TAB_UPLOAD_NAME,5000,1,2);
 		scrollToElement(elem, driver);
 		click(elem,2,true);
-		uploadFileUsingRobot(link);
+		uploadFileUsingRobot(link);*/
 		Utils.pause(3000);
 	}
 

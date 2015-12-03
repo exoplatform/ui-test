@@ -18,7 +18,8 @@ public class HomePagePlatform extends TestBase{
 
 	public final By ELEMENT_PLF_HOMEPAGE_DISPLAY = By.xpath("//*[@class='navItemSelected']//*[@href='/portal/intranet/home']");
 	public final By ELEMENT_PLF_HOMEPAGE_ACTIVITY_PORTLET = By.xpath(".//*[@id='UIUserActivityStreamPortlet']//div[@class='uiUserActivitiesContainer']");
-    public final By ELEMENT_PLF_HOMEPAGE_GADGET_PORTLET = By.xpath(".//*[@id='OfficeRightMiddle']");	
+    public final By ELEMENT_PLF_HOMEPAGE_GADGET_PORTLET = By.xpath(".//*[@id='OfficeRightMiddle']");
+    public final By ELEMENT_ADDNEWSPACE_BUTTON = By.xpath("//button[contains(.,'Add New Space')]");
 	//Left panel
 	public final By ELEMENT_FORUM_LINK_PLF=By.xpath("//*[@data-original-title='Forums']");
 	public final By ELEMENT_ANSWER_LINK_PLF=By.xpath("//*[@data-original-title='Answers']");
@@ -108,6 +109,7 @@ public class HomePagePlatform extends TestBase{
 	public final By ELEMENT_ADD_PAGE_DROP_LIST = By.xpath(".//*[@id='UIAdminToolbarContainer']/ul/li[3]/ul[@class='dropdown-menu']/li[4]/a");
 	public final By ELEMENT_EDITSITE_SAVEBTN = By.xpath("//*[@class='btn' and text()='Save']");
 	public final By ELEMENT_HP_ACTIVITY_SHAREBTN = By.xpath("//*[@id='ShareButton']");
+	
 	
 	
 	//SEO Management
@@ -296,8 +298,14 @@ public class HomePagePlatform extends TestBase{
 	 */
 	public void goToMySpaces(){
 		info("-- Go to my spaces --");
-		click(ELEMENT_MY_SPACE_LINK_PLF);
-		Utils.pause(2000);
+		int repeat=0;
+		while(waitForAndGetElement(ELEMENT_ADDNEWSPACE_BUTTON, 3000, 0) == null){
+			if(repeat>5)break;
+			click(ELEMENT_MY_SPACE_LINK_PLF);
+			Utils.pause(2000);
+			repeat++;
+		}
+		waitForAndGetElement(ELEMENT_ADDNEWSPACE_BUTTON, 3000,1);
 	}
 	/**
 	 * Go to All space list

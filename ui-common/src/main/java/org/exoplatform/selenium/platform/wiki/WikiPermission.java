@@ -199,10 +199,13 @@ public class WikiPermission extends WikiLocators{
 	/**
 	 * Click on Save button in More/Permission
 	 */
-	public void savePermisison(){
+	public void savePermisison(Boolean...booleans ){
+		boolean savePresent = (booleans.length > 0 ? booleans[0]: true);
 		info("Click on Save button");
 		click(ELEMENT_PERMISSION_BUTTON_SAVE,0,true);
-		waitForElementNotPresent(ELEMENT_PERMISSION_BUTTON_SAVE);
+		if (savePresent = false)
+			waitForElementNotPresent(ELEMENT_PERMISSION_BUTTON_SAVE);
+		Utils.pause(3000);
 	}
 	/**
 	 * Save permission in wiki setting

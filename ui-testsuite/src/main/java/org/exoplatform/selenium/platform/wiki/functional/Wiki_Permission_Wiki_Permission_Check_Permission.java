@@ -80,7 +80,7 @@ import org.testng.annotations.*;
 			- The user can not see Wiki Settings from Browse menu*/ 
 		info("Select user to add permission");
 		wPermission.addPermisisonByType(arrayUsers.get(0));
-		wPermission.savePermisison();
+		wPermission.savePermisison(true);
 		wHome.confirmWaringMessage(true);
 		arrayGroupsPath.add(arrayUsers.get(0));
 		
@@ -177,7 +177,7 @@ import org.testng.annotations.*;
 		info("Select user to add permission");
 		wPermission.addPermisisonByType(arrayUsers.get(0));
 		wPermission.selectPermission(arrayUsers.get(0), permissionType.Edit_Pages);
-		wPermission.savePermisison();
+		wPermission.savePermisison(true);
 		wHome.confirmWaringMessage(true);
 		arrayGroupsPath.add(arrayUsers.get(0));
 		
@@ -369,7 +369,7 @@ import org.testng.annotations.*;
 		wPermission.selectPermission(arrayUsers.get(0), permissionType.Edit_Pages);
 		wPermission.selectPermission(arrayUsers.get(0), permissionType.Admin_Pages);
 		wPermission.selectPermission(arrayUsers.get(0), permissionType.Admin_Wiki);
-		wPermission.savePermisison();
+		wPermission.savePermisison(true);
 		wHome.confirmWaringMessage(true);
 		arrayGroupsPath.add(arrayUsers.get(0));
 		

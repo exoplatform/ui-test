@@ -137,6 +137,11 @@ public class ManageLogInOut extends PlatformBase {
 			    signInCas(username,password);
 			    break;
 			}
+			if(waitForAndGetElement(ELEMENT_REGISTER_SKIP_BUTTON,3000,0,2)!=null){
+				info("-- Skipping register account--");
+				click(ELEMENT_REGISTER_SKIP_BUTTON);
+				waitForElementNotPresent(ELEMENT_REGISTER_SKIP_BUTTON);
+			}
 		}
 		else{
 			info("login normally if not use SSO with user " + username + " and pass " + password);

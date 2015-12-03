@@ -77,6 +77,7 @@ public class WikiLocators extends PlatformBase{
 	public final By ELEMENT_PERMALINK_TEXT = By.id("PermalinkText");
 	public final By ELEMENT_PERMALINK_POPUP=By.id("UIWikiPermalinkForm");
 	public final By ELEMENT_PUBLIC_WIKI_ICON = By.xpath("//*[@id='UIWikiPageInfoArea']//*[contains(@class,'uiIconUnlockMini')]");
+	public final By ELEMENT_RESTICT_WIKI_ICON = By.xpath(".//*[@id='UIWikiPageInfoArea']//*[contains(@data-original-title,'This page is restricted. Click to share.')]");
 	
 	//permission page
 	public final By ELEMENT_PERMISSION_EDIT_ANY = By.xpath("//*[@id='EDITPAGEany']");

@@ -76,6 +76,7 @@ public class WikiManagement extends WikiLocators{
 	 */
 	public void saveAddPage(){
 		info("Save all changes");
+		Utils.pause(2000);
 		click(ELEMENT_SAVE_BUTTON_ADD_PAGE);
 		waitForElementNotPresent(ELEMENT_SAVE_BUTTON_ADD_PAGE);
 		info("Wiki page simple is created successfully");

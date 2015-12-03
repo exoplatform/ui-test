@@ -342,6 +342,26 @@ public class WikiHomePage extends WikiLocators{
 	}
 	
 	/**
+	 * Public a page from infor bar or More menu
+	 * @param opParams
+	 */
+	public void publicPage(Boolean...opParams){
+		info("Make Public page");
+		Boolean useRestrictLink = (Boolean)(opParams.length>0 ? opParams[0]:false);
+		if(useRestrictLink){
+			waitForAndGetElement(ELEMENT_RESTICT_WIKI_ICON );
+			click(ELEMENT_RESTICT_WIKI_ICON );
+		}
+		else{
+			goToPermalink();
+		}
+		click(ELEMENT_MAKE_PUBLIC_BUTTON);
+		waitForAndGetElement(ELEMENT_MAKE_RESTRICT_BUTTON);
+		dialog.closeMessageDialog();
+		Utils.pause(2000);
+	}
+	
+	/**
 	 * Gets a permanent link by a given value.
 	 * 
 	 * @return The value.
@@ -392,15 +412,21 @@ public class WikiHomePage extends WikiLocators{
 	 * Go to Wiki Home of the space
 	 * @param space
 	 */
-	public void goToWikiHomeOfSpaceFromBreadcrumb(String space){
+	public void goToWikiHomeOfSpaceFromBreadcrumb(String space, String userWiki){
 		goToSpaceSwitcher();
 		if(!space.isEmpty()){
 			info("Select the space");
 			click(ELEMENT_SPACE_SWITCHER_SELECTED_SPACE
 					.replace("$space",space));
-			waitForAndGetElement(ELEMENT_WIKI_HOME_BREADCRUMB_PATH_HOME
-					.replace("$locator1",space)
-					.replace("$locator2","Wiki Home"));
+			Utils.pause(3000);
+				if (userWiki == null || userWiki == "")
+					waitForAndGetElement(ELEMENT_WIKI_HOME_BREADCRUMB_PATH_HOME
+							.replace("$locator1",space)
+							.replace("$locator2","Wiki Home"));
+				else
+					waitForAndGetElement(ELEMENT_WIKI_HOME_BREADCRUMB_PATH_HOME
+							.replace("$locator1",userWiki)
+							.replace("$locator2","Wiki Home"));
 		}
 	}
 	/**

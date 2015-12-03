@@ -293,7 +293,7 @@ public class TestBase {
 	public final String DEFAULT_PERMISSION_GROUP_FILE_URL="DataDriven/"+"permission_groups.xls";
 	public final String DEFAULT_PERMISSION_MEMBERSHIP_FILE_URL="DataDriven/"+"permission_memberships.xls";
 	
-	/*======= Welcome Screen (Term and Conditions) =====*/
+	/*======= Welcome Screen (Term and Conditions)   =====*/
 	public final By ELEMENT_REGISTER_SKIP_BUTTON=By.xpath(".//*[@id='UIPortalLoginFormAction']/input[contains(@value,'Skip')]");
 	public final By ELEMENT_REGISTER_YOUR_SOFTWARE_BUTTON=By.xpath(".//*[@id='UIPortalLoginFormAction']/a");
 	public final By ELEMENT_FIRSTNAME_ACCOUNT = By.name("firstNameAccount");
@@ -795,15 +795,8 @@ public class TestBase {
 	public void termsAndConditions(Object... opParams){
 		info("Term and conditions");
 		Boolean isCreateAccount = (Boolean)(opParams.length>0 ? opParams[0]:true);
-		driver.get(baseUrl);
-
-		//Skip register software button
-		WebElement skipButton= waitForAndGetElement(ELEMENT_SKIP_REGISTER_BTN, 2000, 0);
-		if(skipButton!= null){
-			click(ELEMENT_SKIP_REGISTER_BTN);
-		}
-		
 		ManageLogInOut acc = new ManageLogInOut(driver);
+		driver.get(baseUrl);
 		info("Agreement page");
 		if (waitForAndGetElement(ELEMENT_AGREEMENT_CHECKBOX, 3000, 0, 2) != null) {
 			info("-- Checking the terms and conditions agreement... --");
@@ -1206,11 +1199,10 @@ public class TestBase {
 	 */
 	public void click(Object locator, Object... opParams) {
 		int notDisplay = (Integer) (opParams.length > 0 ? opParams[0]: 0);	
-		//Boolean isUseJavascript =  (Boolean) (opParams.length > 1 ? opParams[1]: false);	
 		WebElement element = null;
 		Actions actions = new Actions(driver);
 		try {
-			if(browser.contains("iexplorer")){
+			if(browser.contains("iexplorer")||browser.contains("chrome")){
 				info("use javasript to click");
 				clickByJavascript(locator, notDisplay);
 			}
@@ -1250,6 +1242,7 @@ public class TestBase {
 		}
 		Utils.pause(1000);
 	}
+
 
 	/**
 	 * clear cache
