@@ -27,27 +27,30 @@ public class SOC_Notification_Like_Activities extends SOC_TestConfig{
 	public  void test01_04CheckLikeNotification1Like() {
 		info("Test 1: Check Like Notification (1 like)");
 		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
-		String password1 = txData.getContentByArrayTypeRandom(1) + getRandomNumber();
-		String email1 = txData.getContentByArrayTypeRandom(1) + getRandomNumber() + mailSuffixData.getMailSuffixRandom();
-
-		/*Create data test*/
+		String email1 = username1+"@gmail.com";
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+"@gmail.com";
 		info("Add new user");
 		navTool.goToAddUser();
-		addUserPage.addUser(username1, password1, email1, username1, username1);
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		magAc.signIn(username1,password);
+		Utils.pause(3000);
+		
 		info("goto My notification");
 		navTool.goToMyNotifications();
 		myNotifPage.enableNotification(myNotiType.AS_Like_intranet);
 		Utils.pause(3000);
 		info ("Connect with user");
 		hp.goToConnections();
-		connMag.connectToAUser(username1);
+		connMag.connectToAUser(username2);
 		hp.goToHomePage();
 		String activity1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		hpAct.addActivity(activity1, "");
 		
-		magAc.signIn(username1, password1);
+		magAc.signIn(username2, password);
 		hp.goToConnections();
-		connMag.acceptAConnection(DATA_USER1);
+		connMag.acceptAConnection(username1);
 		hp.goToHomePage();
 		hpAct.likeActivity(activity1);
 		
@@ -61,7 +64,7 @@ public class SOC_Notification_Like_Activities extends SOC_TestConfig{
 
 		 *Expected Outcome: 
 			- A Like notification is displayed in the list*/
-		magAc.signIn(DATA_USER1, DATA_PASS);
+		magAc.signIn(username1,password);
 		navTool.goToIntranetNotification();
 		
 		/*Step number: 2
@@ -77,10 +80,10 @@ public class SOC_Notification_Like_Activities extends SOC_TestConfig{
 			- $ACTIVITY is the activity title/message
 			- $DATE is the date of the activity*/
 		ArrayList<String> users = new ArrayList<String>();
-		users.add(username1);
+		users.add(username2);
 		String status = notiIntranetData.getContentByArrayTypeRandom(6);
 		intraNot.checkAvatarInStatus(users,true);
-		intraNot.checkStatus(status, username1);
+		intraNot.checkStatus(status, username2);
 		intraNot.checkActivityTitleInStatus(activity1, true);
 		
 		info("Test 4: Check Like Notification after reading the notification");
@@ -92,7 +95,7 @@ public class SOC_Notification_Like_Activities extends SOC_TestConfig{
 
 		 *Expected Outcome: 
 			- The activity is displayed in the activity viewer with all comment expanded.*/
-		intraNot.goToDetailLikeNotification(username1, true);
+		intraNot.goToDetailLikeNotification(username2, true);
 		notActivity.checkLikeInActivityViewer("1");
 	}
 
@@ -111,29 +114,32 @@ public class SOC_Notification_Like_Activities extends SOC_TestConfig{
 	@Test
 	public  void test02_CheckLikeNotification2Like() {
 		info("Test 2: Check Like Notification (2 like)");
+		String activity = txData.getContentByArrayTypeRandom(4) + getRandomString();
 		//Setup data test
 		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
-		String password1 = username1;
-		String email1 = username1 + mailSuffixData.getMailSuffixRandom();
-
+		String email1 = username1+"@gmail.com";
 		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
-		String password2 = username2;
-		String email2 = username2 + mailSuffixData.getMailSuffixRandom();
-
-		String activity = txData.getContentByArrayTypeRandom(1) + getRandomNumber();
+		String email2 = username2+"@gmail.com";
 		
-		info("Add 2 users");
+		String username3 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email3 = username3+"@gmail.com";
+		
+		info("Add new user");
 		navTool.goToAddUser();
-		addUserPage.addUser(username1, password1, email1, username1, username1);
-		addUserPage.addUser(username2, password2, email2, username2, username2);
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		addUserPage.addUser(username3, password, email3, username3, username3);
+		magAc.signIn(username1,password);
+		Utils.pause(3000);
+		
 		info("goto My notification");
 		navTool.goToMyNotifications();
 		myNotifPage.enableNotification(myNotiType.AS_Like_intranet);
 		Utils.pause(3000);
 		info ("Connect with 2 users");
 		hp.goToConnections();
-		connMag.connectToAUser(username1);
 		connMag.connectToAUser(username2);
+		connMag.connectToAUser(username3);
 		
 		info("Add a activity");
 		hp.goToHomePage();
@@ -141,15 +147,15 @@ public class SOC_Notification_Like_Activities extends SOC_TestConfig{
 		hpAct.checkActivity(activity);
 		
 		info("user1 comments in John's activity");
-		magAc.signIn(username1, password1);
+		magAc.signIn(username2, password);
 		hp.goToConnections();
-		connMag.acceptAConnection(DATA_USER1);
+		connMag.acceptAConnection(username1);
 		hp.goToHomePage();
 		hpAct.likeActivity(activity);
 
-		magAc.signIn(username2, password2);
+		magAc.signIn(username3, password);
 		hp.goToConnections();
-		connMag.acceptAConnection(DATA_USER1);
+		connMag.acceptAConnection(username1);
 		hp.goToHomePage();
 		hpAct.likeActivity(activity);
 
@@ -176,14 +182,14 @@ public class SOC_Notification_Like_Activities extends SOC_TestConfig{
 			- $USER_LISTis User B, User C
 			- $ACTIVITY is the activity title/message
 			- $DATE is the date of the activity*/
-		magAc.signIn(DATA_USER1, DATA_PASS);
+		magAc.signIn(username1,password);
 		navTool.goToIntranetNotification();
 		ArrayList<String> users = new ArrayList<String>();
-		users.add(username1);
 		users.add(username2);
+		users.add(username3);
 		String status = notiIntranetData.getContentByArrayTypeRandom(6);
 		intraNot.checkAvatarInStatus(users,true);
-		intraNot.checkStatus(status, username2);
+		intraNot.checkStatus(status, username3);
 		intraNot.checkActivityTitleInStatus(activity, true);
 
 		/*Step number: 3
@@ -194,7 +200,7 @@ public class SOC_Notification_Like_Activities extends SOC_TestConfig{
 
 		 *Expected Outcome: 
 			- The activity is displayed in the activity viewer with all comment expanded.*/
-		intraNot.goToDetailLikeNotification(username2, true);
+		intraNot.goToDetailLikeNotification(username3, true);
 		notActivity.checkLikeInActivityViewer("2");
 	}
 
@@ -212,22 +218,6 @@ public class SOC_Notification_Like_Activities extends SOC_TestConfig{
 	 */
 	@Test
 	public  void test03_CheckLikeNotification4Like() {
-		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
-		String password1 = txData.getContentByArrayTypeRandom(1) + getRandomNumber();
-		String email1 = txData.getContentByArrayTypeRandom(1) + getRandomNumber() + mailSuffixData.getMailSuffixRandom();
-
-		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
-		String password2 = txData.getContentByArrayTypeRandom(1) + getRandomNumber();
-		String email2 = txData.getContentByArrayTypeRandom(1) + getRandomNumber() + mailSuffixData.getMailSuffixRandom();
-
-		String username3 = txData.getContentByArrayTypeRandom(4) + getRandomString();
-		String password3 = txData.getContentByArrayTypeRandom(1) + getRandomNumber();
-		String email3 = txData.getContentByArrayTypeRandom(1) + getRandomNumber() + mailSuffixData.getMailSuffixRandom();
-
-		String username4 = txData.getContentByArrayTypeRandom(4) + getRandomString();
-		String password4 = txData.getContentByArrayTypeRandom(1) + getRandomNumber();
-		String email4 = txData.getContentByArrayTypeRandom(1) + getRandomNumber() + mailSuffixData.getMailSuffixRandom();
-
 		String activity = txData.getContentByArrayTypeRandom(1) + getRandomNumber();
 
 		/*Precondition:
@@ -238,13 +228,30 @@ public class SOC_Notification_Like_Activities extends SOC_TestConfig{
 			- User D has liked User A activity
 			- User E has liked User A activity
 			- The notification "Someone likes one of my activities" is activated in the user settings*/
-		info("Add 4 users");
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+"@gmail.com";
+		
+		String username3 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email3 = username3+"@gmail.com";
+		
+		String username4 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email4 = username4+"@gmail.com";
+		
+		String username5 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email5 = username5+"@gmail.com";
+		
+		info("Add new user");
 		navTool.goToAddUser();
-		addUserPage.addUser(username1, password1, email1, username1, username1);
-		addUserPage.addUser(username2, password2, email2, username2, username2);
-		addUserPage.addUser(username3, password3, email3, username3, username3);
-		addUserPage.addUser(username4, password4, email4, username4, username4);
-
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		addUserPage.addUser(username3, password, email3, username3, username3);
+		addUserPage.addUser(username4, password, email4, username4, username4);
+		addUserPage.addUser(username5, password, email5, username5, username5);
+		magAc.signIn(username1,password);
+		Utils.pause(3000);
+		
 		info("goto My notification");
 		navTool.goToMyNotifications();
 		myNotifPage.enableNotification(myNotiType.AS_Like_intranet);
@@ -252,10 +259,10 @@ public class SOC_Notification_Like_Activities extends SOC_TestConfig{
 		
 		info ("Connect with 4 users");
 		hp.goToConnections();
-		connMag.connectToAUser(username1);
 		connMag.connectToAUser(username2);
 		connMag.connectToAUser(username3);
 		connMag.connectToAUser(username4);
+		connMag.connectToAUser(username5);
 
 		info("Add a activity");
 		hp.goToHomePage();
@@ -263,30 +270,30 @@ public class SOC_Notification_Like_Activities extends SOC_TestConfig{
 		hpAct.checkActivity(activity);
 
 		info("user 1 likes John's activity");
-		magAc.signIn(username1, password1);
+		magAc.signIn(username2, password);
 		hp.goToConnections();
-		connMag.acceptAConnection(DATA_USER1);
+		connMag.acceptAConnection(username1);
 		hp.goToHomePage();
 		hpAct.likeActivity(activity);
 
 		info("user 2 likes John's activity");
-		magAc.signIn(username2, password2);
+		magAc.signIn(username3, password);
 		hp.goToConnections();
-		connMag.acceptAConnection(DATA_USER1);
+		connMag.acceptAConnection(username1);
 		hp.goToHomePage();
 		hpAct.likeActivity(activity);
 
 		info("user 3 likes John's activity");
-		magAc.signIn(username3, password3);
+		magAc.signIn(username4, password);
 		hp.goToConnections();
-		connMag.acceptAConnection(DATA_USER1);
+		connMag.acceptAConnection(username1);
 		hp.goToHomePage();
 		hpAct.likeActivity(activity);
 
 		info("user 4 likes John's activity");
-		magAc.signIn(username4, password4);
+		magAc.signIn(username5, password);
 		hp.goToConnections();
-		connMag.acceptAConnection(DATA_USER1);
+		connMag.acceptAConnection(username1);
 		hp.goToHomePage();
 		hpAct.likeActivity(activity);
 		info("Test 3: Check Like Notification (4 like)");
@@ -315,16 +322,16 @@ public class SOC_Notification_Like_Activities extends SOC_TestConfig{
 			- $ACTIVITY is the activity title/message
 			- $DATE is the date of the activity*/
 		info("Check Like notification in intranet notification");
-		magAc.signIn(DATA_USER1, DATA_PASS);
+		magAc.signIn(username1,password);
 		navTool.goToIntranetNotification();
 		ArrayList<String> users = new ArrayList<String>();
-		users.add(username1);
 		users.add(username2);
 		users.add(username3);
 		users.add(username4);
+		users.add(username5);
 		String status = notiIntranetData.getContentByArrayTypeRandom(6);
 		intraNot.checkAvatarInStatus(users,true);
-		intraNot.checkStatus(status, username4);
+		intraNot.checkStatus(status, username5);
 		intraNot.checkActivityTitleInStatus(activity, true);
 
 		/*Step number: 3
@@ -336,7 +343,7 @@ public class SOC_Notification_Like_Activities extends SOC_TestConfig{
 		 *Expected Outcome: 
 			- The activity is displayed in the activity viewer with all comment expanded.*/ 
 		info("Check comment notification in activity Viewer");
-		intraNot.goToDetailLikeNotification(username4, true);
+		intraNot.goToDetailLikeNotification(username5, true);
 		notActivity.checkLikeInActivityViewer("4");
 
 	}
@@ -353,23 +360,31 @@ public class SOC_Notification_Like_Activities extends SOC_TestConfig{
 	@Test
 	public  void test05_CheckLikeNotificationOnActivityWithAContent() {
 		info("Test 5: Check Like Notification on activity with a content");
-		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
-		String password1 = txData.getContentByArrayTypeRandom(1) + getRandomNumber();
-		String email1 = txData.getContentByArrayTypeRandom(1) + getRandomNumber() + mailSuffixData.getMailSuffixRandom();
 		String name = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		String content = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 	
 		/*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+"@gmail.com";
+		
 		info("Add new user");
 		navTool.goToAddUser();
-		addUserPage.addUser(username1, password1, email1, username1, username1);
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		navTool.goToUsersAndGroupsManagement();
+		userGroupMg.addUserAdmin(username1);
+		magAc.signIn(username1,password);
+		Utils.pause(3000);
+		
 		info("goto My notification");
 		navTool.goToMyNotifications();
 		myNotifPage.enableNotification(myNotiType.AS_Like_intranet);
 		Utils.pause(3000);
 		info ("Connect with user");
 		hp.goToConnections();
-		connMag.connectToAUser(username1);
+		connMag.connectToAUser(username2);
 		navTool.goToSiteExplorer();
 		SEHome.goToPath("intranet/documents", "Site Management");
 		SEHome.goToAddNewContent();
@@ -379,9 +394,9 @@ public class SOC_Notification_Like_Activities extends SOC_TestConfig{
 		creatDoc.saveAndClose();
 		Utils.pause(5000);
 		
-		magAc.signIn(username1, password1);
+		magAc.signIn(username2, password);
 		hp.goToConnections();
-		connMag.acceptAConnection(DATA_USER1);
+		connMag.acceptAConnection(username1);
 		hp.goToHomePage();
 		hpAct.likeActivity(name);
 		
@@ -395,7 +410,7 @@ public class SOC_Notification_Like_Activities extends SOC_TestConfig{
 
 		 *Expected Outcome: 
 			- A Like notification is displayed in the list*/
-		magAc.signIn(DATA_USER1, DATA_PASS);
+		magAc.signIn(username1,password);
 		navTool.goToIntranetNotification();
 		
 		/*Step number: 2
@@ -411,10 +426,10 @@ public class SOC_Notification_Like_Activities extends SOC_TestConfig{
 			- $ACTIVITY is the activity title/message : the name of the content is displayed
 			- $DATE is the date of the activity*/
 		ArrayList<String> users = new ArrayList<String>();
-		users.add(username1);
+		users.add(username2);
 		String status = notiIntranetData.getContentByArrayTypeRandom(6);
 		intraNot.checkAvatarInStatus(users,true);
-		intraNot.checkStatus(status, username1);
+		intraNot.checkStatus(status, username2);
 		intraNot.checkActivityTitleInStatus(name, true);
 		
 		//intraNot.checkUnreadLikeNotification(username1, name, intraNot.ELEMET_JUST_NOW_STRING);
@@ -426,7 +441,7 @@ public class SOC_Notification_Like_Activities extends SOC_TestConfig{
 
 		 *Expected Outcome: 
 			- The activity is displayed in the activity viewer with all comment expanded.*/ 
-		intraNot.goToDetailLikeNotification(username1, true);
+		intraNot.goToDetailLikeNotification(username2, true);
 		notActivity.checkLikeInActivityViewer("1");
 
 	}
@@ -442,30 +457,36 @@ public class SOC_Notification_Like_Activities extends SOC_TestConfig{
 	 */
 	@Test
 	public  void test06_CheckLikeNotificationOnActivityWithALink() {
-		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
-		String password1 = txData.getContentByArrayTypeRandom(1) + getRandomNumber();
-		String email1 = txData.getContentByArrayTypeRandom(1) + getRandomNumber() + mailSuffixData.getMailSuffixRandom();
 
 		/*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+"@gmail.com";
+		
 		info("Add new user");
 		navTool.goToAddUser();
-		addUserPage.addUser(username1, password1, email1, username1, username1);
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		magAc.signIn(username1,password);
+		Utils.pause(3000);
+		
 		info("goto My notification");
 		navTool.goToMyNotifications();
 		myNotifPage.enableNotification(myNotiType.AS_Like_intranet);
 		Utils.pause(3000);
 		info ("Connect with user");
 		hp.goToConnections();
-		connMag.connectToAUser(username1);
+		connMag.connectToAUser(username2);
 		hp.goToHomePage();
 		String textDes = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		String link = lnkData.getLinkByArrayTypeRandom(1);
 		hpAct.addActivity(textDes, link);
 		waitForAndGetElement(hpAct.ELEMENT_ACTIVITY_TITLE.replace("${text}",textDes).replace("${file}",link));
 		String title=waitForAndGetElement(hpAct.ELEMENT_TITLE_BOX.replace("${title}",textDes)).getText();
-		magAc.signIn(username1, password1);
+		magAc.signIn(username2, password);
 		hp.goToConnections();
-		connMag.acceptAConnection(DATA_USER1);
+		connMag.acceptAConnection(username1);
 		hp.goToHomePage();
 		hpAct.likeActivity(textDes);
 		
@@ -493,13 +514,13 @@ public class SOC_Notification_Like_Activities extends SOC_TestConfig{
 			- $USER is User B
 			- $ACTIVITY is the activity title/message : the link is displayed
 			- $DATE is the date of the activity*/
-		magAc.signIn(DATA_USER1, DATA_PASS);
+		magAc.signIn(username1,password);
 		navTool.goToIntranetNotification();
 		ArrayList<String> users = new ArrayList<String>();
-		users.add(username1);
+		users.add(username2);
 		String status = notiIntranetData.getContentByArrayTypeRandom(6);
 		intraNot.checkAvatarInStatus(users,true);
-		intraNot.checkStatus(status, username1);
+		intraNot.checkStatus(status, username2);
 		intraNot.checkActivityTitleInStatus(title, true);
 		/*Step number: 3
 		 *Step Name: Step 3 : Read the notification
@@ -509,7 +530,7 @@ public class SOC_Notification_Like_Activities extends SOC_TestConfig{
 
 		 *Expected Outcome: 
 			- The activity is displayed in the activity viewer with all comment expanded.*/ 
-		intraNot.goToDetailLikeNotification(username1, true);
+		intraNot.goToDetailLikeNotification(username2, true);
 		notActivity.checkLikeInActivityViewer("1");
 
 	}
@@ -525,22 +546,30 @@ public class SOC_Notification_Like_Activities extends SOC_TestConfig{
 	 */
 	@Test
 	public  void test07_CheckLikeNotificationOnActivityWithAWikiPage() {
-		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
-		String password1 = txData.getContentByArrayTypeRandom(1) + getRandomNumber();
-		String email1 = txData.getContentByArrayTypeRandom(1) + getRandomNumber() + mailSuffixData.getMailSuffixRandom();
 		String name = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		String content = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		/*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+"@gmail.com";
+		
 		info("Add new user");
 		navTool.goToAddUser();
-		addUserPage.addUser(username1, password1, email1, username1, username1);
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		navTool.goToUsersAndGroupsManagement();
+		userGroupMg.addUserAdmin(username1);
+		magAc.signIn(username1,password);
+		Utils.pause(3000);
+		
 		info("goto My notification");
 		navTool.goToMyNotifications();
 		myNotifPage.enableNotification(myNotiType.AS_Like_intranet);
 		Utils.pause(3000);
 		info ("Connect with user");
 		hp.goToConnections();
-		connMag.connectToAUser(username1);
+		connMag.connectToAUser(username2);
 		hp.goToWiki();
 		wHome.goToAddBlankPage();
 		wikiMg.goToSourceEditor();
@@ -548,9 +577,9 @@ public class SOC_Notification_Like_Activities extends SOC_TestConfig{
 		wikiMg.saveAddPage();
 		waitForAndGetElement(wHome.ELEMENT_TREE_WIKI_NAME.replace("${name}",name));
 
-		magAc.signIn(username1, password1);
+		magAc.signIn(username2, password);
 		hp.goToConnections();
-		connMag.acceptAConnection(DATA_USER1);
+		connMag.acceptAConnection(username1);
 		hp.goToHomePage();
 		hpAct.likeActivity(name);
 		info("Test 7: Check Like Notification on activity with a wiki page");
@@ -577,13 +606,13 @@ public class SOC_Notification_Like_Activities extends SOC_TestConfig{
 			- $USER is User B
 			- $ACTIVITY is the activity title/message : the name of the wiki page
 			- $DATE is the date of the activity*/
-		magAc.signIn(DATA_USER1, DATA_PASS);
+		magAc.signIn(username1,password);
 		navTool.goToIntranetNotification();
 		ArrayList<String> users = new ArrayList<String>();
-		users.add(username1);
+		users.add(username2);
 		String status = notiIntranetData.getContentByArrayTypeRandom(6);
 		intraNot.checkAvatarInStatus(users,true);
-		intraNot.checkStatus(status, username1);
+		intraNot.checkStatus(status, username2);
 		intraNot.checkActivityTitleInStatus(name, true);
 
 		/*Step number: 3
@@ -594,7 +623,7 @@ public class SOC_Notification_Like_Activities extends SOC_TestConfig{
 
 		 *Expected Outcome: 
 			- The activity is displayed in the activity viewer with all comment expanded.*/
-		intraNot.goToDetailLikeNotification(username1, true);
+		intraNot.goToDetailLikeNotification(username2, true);
 		notActivity.checkLikeInActivityViewer("1");
 	}
 
@@ -697,31 +726,35 @@ public class SOC_Notification_Like_Activities extends SOC_TestConfig{
 	@Test
 	public  void test09_CheckLikeNotificationWhenANewLikeIsPushed() {
 		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
-		String password1 = txData.getContentByArrayTypeRandom(1) + getRandomNumber();
-		String email1 = txData.getContentByArrayTypeRandom(1) + getRandomNumber() + mailSuffixData.getMailSuffixRandom();
+		String email1 = username1+"@gmail.com";
 		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
-		String password2 = txData.getContentByArrayTypeRandom(1) + getRandomNumber();
-		String email2 = txData.getContentByArrayTypeRandom(1) + getRandomNumber() + mailSuffixData.getMailSuffixRandom();
-
-		/*Create data test*/
+		String email2 = username2+"@gmail.com";
+		
+		String username3 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email3 = username3+"@gmail.com";
+		
 		info("Add new user");
 		navTool.goToAddUser();
-		addUserPage.addUser(username1, password1, email1, username1, username1);
-		addUserPage.addUser(username2, password2, email2, username2, username2);
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		addUserPage.addUser(username3, password, email3, username3, username3);
+		magAc.signIn(username1,password);
+		Utils.pause(3000);
+		
 		info("goto My notification");
 		navTool.goToMyNotifications();
 		myNotifPage.enableNotification(myNotiType.AS_Like_intranet);
 		Utils.pause(3000);
 		info ("Connect with user");
 		hp.goToConnections();
-		connMag.connectToAUser(username1);
+		connMag.connectToAUser(username2);
 		hp.goToHomePage();
 		String activity1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		hpAct.addActivity(activity1, "");
 		
-		magAc.signIn(username1, password1);
+		magAc.signIn(username2, password);
 		hp.goToConnections();
-		connMag.acceptAConnection(DATA_USER1);
+		connMag.acceptAConnection(username1);
 		hp.goToHomePage();
 		hpAct.likeActivity(activity1);
 		
@@ -736,13 +769,13 @@ public class SOC_Notification_Like_Activities extends SOC_TestConfig{
 
 		 *Expected Outcome: 
 			- A Like notification is displayed in the list*/
-		magAc.signIn(DATA_USER1, DATA_PASS);
+		magAc.signIn(username1,password);
 		navTool.goToIntranetNotification();
 		ArrayList<String> users = new ArrayList<String>();
-		users.add(username1);
+		users.add(username2);
 		String status = notiIntranetData.getContentByArrayTypeRandom(6);
 		intraNot.checkAvatarInStatus(users,true);
-		intraNot.checkStatus(status, username1);
+		intraNot.checkStatus(status, username2);
 		intraNot.checkActivityTitleInStatus(activity1, true);
 		
 		/*Step number: 2
@@ -756,7 +789,7 @@ public class SOC_Notification_Like_Activities extends SOC_TestConfig{
 			- The Connect Request is displayed in the notification list of User A*/
 		info ("Connect with user");
 		hp.goToConnections();
-		connMag.connectToAUser(username2);
+		connMag.connectToAUser(username3);
 		/*Step number: 3
 		 *Step Name: Step 3 : Accept connection request
 		 *Step Description: 
@@ -765,9 +798,9 @@ public class SOC_Notification_Like_Activities extends SOC_TestConfig{
 
 		 *Expected Outcome: 
 			- User A and User C are connected*/
-		magAc.signIn(username2, password2);
+		magAc.signIn(username3, password);
 		hp.goToConnections();
-		connMag.acceptAConnection(DATA_USER1);
+		connMag.acceptAConnection(username1);
 
 		/*Step number: 4
 		 *Step Name: Step 4 : Push a new like notification
@@ -794,14 +827,14 @@ public class SOC_Notification_Like_Activities extends SOC_TestConfig{
 			- $USER_LIST is User B, User C
 			- $ACTIVITY is the activity message/title
 			- $DATE is the date of the last notification of User C*/ 
-		magAc.signIn(DATA_USER1, DATA_PASS);
+		magAc.signIn(username1,password);
 		navTool.goToIntranetNotification();
 		ArrayList<String> users1 = new ArrayList<String>();
-		users1.add(username1);
 		users1.add(username2);
+		users1.add(username3);
 		String status1 = notiIntranetData.getContentByArrayTypeRandom(6);
 		intraNot.checkAvatarInStatus(users1,true);
-		intraNot.checkStatus(status1, username2);
+		intraNot.checkStatus(status1, username3);
 		intraNot.checkActivityTitleInStatus(activity1, true);
 	}
 
@@ -818,27 +851,31 @@ public class SOC_Notification_Like_Activities extends SOC_TestConfig{
 	@Test
 	public  void test10_11_CheckViewAllAfterReceivingALikeNotification1Like() {
 		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
-		String password1 = txData.getContentByArrayTypeRandom(1) + getRandomNumber();
-		String email1 = txData.getContentByArrayTypeRandom(1) + getRandomNumber() + mailSuffixData.getMailSuffixRandom();
-
-		/*Create data test*/
+		String email1 = username1+"@gmail.com";
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+"@gmail.com";
+		
 		info("Add new user");
 		navTool.goToAddUser();
-		addUserPage.addUser(username1, password1, email1, username1, username1);
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		magAc.signIn(username1,password);
+		Utils.pause(3000);
+		
 		info("goto My notification");
 		navTool.goToMyNotifications();
 		myNotifPage.enableNotification(myNotiType.AS_Like_intranet);
 		Utils.pause(3000);
 		info ("Connect with user");
 		hp.goToConnections();
-		connMag.connectToAUser(username1);
+		connMag.connectToAUser(username2);
 		hp.goToHomePage();
 		String activity1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		hpAct.addActivity(activity1, "");
 		
-		magAc.signIn(username1, password1);
+		magAc.signIn(username2, password);
 		hp.goToConnections();
-		connMag.acceptAConnection(DATA_USER1);
+		connMag.acceptAConnection(username1);
 		hp.goToHomePage();
 		hpAct.likeActivity(activity1);
 		info("Test 10 Check View All after receiving a Like notification (1 like)");
@@ -852,7 +889,7 @@ public class SOC_Notification_Like_Activities extends SOC_TestConfig{
 
 		 *Expected Outcome: 
 			- A Like notification is displayed in the list*/
-		magAc.signIn(DATA_USER1, DATA_PASS);
+		magAc.signIn(username1,password);
 		navTool.goToIntranetNotification();
 		
 		/*Step number: 2
@@ -869,21 +906,21 @@ public class SOC_Notification_Like_Activities extends SOC_TestConfig{
 			- $DATE is the date of the activity*/ 
 		intraNot.goToAllNotification();
 		ArrayList<String> users = new ArrayList<String>();
-		users.add(username1);
+		users.add(username2);
 		String status = notiIntranetData.getContentByArrayTypeRandom(6);
 		intraNot.checkAvatarInStatus(users,false);
-		intraNot.checkStatus(status, username1);
+		intraNot.checkStatus(status, username2);
 		intraNot.checkActivityTitleInStatus(activity1, false);
 
 		info("Test 11 Check View All page after reading a Like notification");
 		navTool.goToIntranetNotification();
 		intraNot.checkAvatarInStatus(users,true);
-		intraNot.checkStatus(status, username1);
+		intraNot.checkStatus(status, username2);
 		intraNot.checkActivityTitleInStatus(activity1, true);
 		navTool.goToIntranetNotification();
 		intraNot.goToAllNotification();
 		intraNot.checkAvatarInStatus(users,false);
-		intraNot.checkStatus(status, username1);
+		intraNot.checkStatus(status, username2);
 		intraNot.checkActivityTitleInStatus(activity1,false);
 	}
 
@@ -944,29 +981,32 @@ public class SOC_Notification_Like_Activities extends SOC_TestConfig{
 	@Test
 	public  void test13_CheckViewAllPageAfterReceivingALikeNotification2Like() {
 		info("Test 13 Check View All page after receiving a Like notification (2 like)");
+		String activity =txData.getContentByArrayTypeRandom(4) + getRandomString();
 		//Setup data test
 		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
-		String password1 = username1;
-		String email1 = username1 + mailSuffixData.getMailSuffixRandom();
-
+		String email1 = username1+"@gmail.com";
 		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
-		String password2 = username2;
-		String email2 = username2 + mailSuffixData.getMailSuffixRandom();
-
-		String activity = txData.getContentByArrayTypeRandom(1) + getRandomNumber();
+		String email2 = username2+"@gmail.com";
 		
-		info("Add 2 users");
+		String username3 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email3 = username3+"@gmail.com";
+		
+		info("Add new user");
 		navTool.goToAddUser();
-		addUserPage.addUser(username1, password1, email1, username1, username1);
-		addUserPage.addUser(username2, password2, email2, username2, username2);
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		addUserPage.addUser(username3, password, email3, username3, username3);
+		magAc.signIn(username1,password);
+		Utils.pause(3000);
+		
 		info("goto My notification");
 		navTool.goToMyNotifications();
 		myNotifPage.enableNotification(myNotiType.AS_Like_intranet);
 		Utils.pause(3000);
 		info ("Connect with 2 users");
 		hp.goToConnections();
-		connMag.connectToAUser(username1);
 		connMag.connectToAUser(username2);
+		connMag.connectToAUser(username3);
 		
 		info("Add a activity");
 		hp.goToHomePage();
@@ -974,15 +1014,15 @@ public class SOC_Notification_Like_Activities extends SOC_TestConfig{
 		hpAct.checkActivity(activity);
 		
 		info("user1 comments in John's activity");
-		magAc.signIn(username1, password1);
+		magAc.signIn(username2, password);
 		hp.goToConnections();
-		connMag.acceptAConnection(DATA_USER1);
+		connMag.acceptAConnection(username1);
 		hp.goToHomePage();
 		hpAct.likeActivity(activity);
 
-		magAc.signIn(username2, password2);
+		magAc.signIn(username3, password);
 		hp.goToConnections();
-		connMag.acceptAConnection(DATA_USER1);
+		connMag.acceptAConnection(username1);
 		hp.goToHomePage();
 		hpAct.likeActivity(activity);
 
@@ -996,7 +1036,7 @@ public class SOC_Notification_Like_Activities extends SOC_TestConfig{
 
 		 *Expected Outcome: 
 			- A Like notification is displayed in the list*/
-		magAc.signIn(DATA_USER1, DATA_PASS);
+		magAc.signIn(username1,password);
 		navTool.goToIntranetNotification();
 
 		/*Step number: 2
@@ -1013,11 +1053,11 @@ public class SOC_Notification_Like_Activities extends SOC_TestConfig{
 			- $DATE is the date of the activity*/ 
 		intraNot.goToAllNotification();
 		ArrayList<String> users = new ArrayList<String>();
-		users.add(username1);
 		users.add(username2);
+		users.add(username3);
 		String status = notiIntranetData.getContentByArrayTypeRandom(6);
 		intraNot.checkAvatarInStatus(users,false);
-		intraNot.checkStatus(status, username2);
+		intraNot.checkStatus(status, username3);
 		intraNot.checkActivityTitleInStatus(activity,false);
 	}
 
@@ -1033,31 +1073,35 @@ public class SOC_Notification_Like_Activities extends SOC_TestConfig{
 	@Test
 	public  void test14_CheckViewAllPageRightAfterANewLikeIsPushed() {
 		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
-		String password1 = txData.getContentByArrayTypeRandom(1) + getRandomNumber();
-		String email1 = txData.getContentByArrayTypeRandom(1) + getRandomNumber() + mailSuffixData.getMailSuffixRandom();
+		String email1 = username1+"@gmail.com";
 		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
-		String password2 = txData.getContentByArrayTypeRandom(1) + getRandomNumber();
-		String email2 = txData.getContentByArrayTypeRandom(1) + getRandomNumber() + mailSuffixData.getMailSuffixRandom();
-
-		/*Create data test*/
+		String email2 = username2+"@gmail.com";
+		
+		String username3 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email3 = username3+"@gmail.com";
+		
 		info("Add new user");
 		navTool.goToAddUser();
-		addUserPage.addUser(username1, password1, email1, username1, username1);
-		addUserPage.addUser(username2, password2, email2, username2, username2);
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		addUserPage.addUser(username3, password, email3, username3, username3);
+		magAc.signIn(username1,password);
+		Utils.pause(3000);
+		
 		info("goto My notification");
 		navTool.goToMyNotifications();
 		myNotifPage.enableNotification(myNotiType.AS_Like_intranet);
 		Utils.pause(3000);
 		info ("Connect with user");
 		hp.goToConnections();
-		connMag.connectToAUser(username1);
+		connMag.connectToAUser(username2);
 		hp.goToHomePage();
 		String activity1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		hpAct.addActivity(activity1, "");
 		
-		magAc.signIn(username1, password1);
+		magAc.signIn(username2, password);
 		hp.goToConnections();
-		connMag.acceptAConnection(DATA_USER1);
+		connMag.acceptAConnection(username1);
 		hp.goToHomePage();
 		hpAct.likeActivity(activity1);
 		info("Test 14 Check View All page right after a new Like is pushed");
@@ -1071,7 +1115,7 @@ public class SOC_Notification_Like_Activities extends SOC_TestConfig{
 
 		 *Expected Outcome: 
 			- A Like notification is displayed in the list*/
-		magAc.signIn(DATA_USER1, DATA_PASS);
+		magAc.signIn(username1,password);
 		navTool.goToIntranetNotification();
 
 		/*Step number: 2
@@ -1085,7 +1129,7 @@ public class SOC_Notification_Like_Activities extends SOC_TestConfig{
 			- The Connection Request is displayed in the notiication list of User A*/
 		info ("Connect with user");
 		hp.goToConnections();
-		connMag.connectToAUser(username2);
+		connMag.connectToAUser(username3);
 
 		/*Step number: 3
 		 *Step Name: Step 3 : Accept the notification request
@@ -1095,9 +1139,9 @@ public class SOC_Notification_Like_Activities extends SOC_TestConfig{
 
 		 *Expected Outcome: 
 			- User A and User C are connected*/
-		magAc.signIn(username2, password2);
+		magAc.signIn(username3, password);
 		hp.goToConnections();
-		connMag.acceptAConnection(DATA_USER1);
+		connMag.acceptAConnection(username1);
 
 		/*Step number: 4
 		 *Step Name: Step 4 : Add a new like to the activity
@@ -1124,15 +1168,15 @@ public class SOC_Notification_Like_Activities extends SOC_TestConfig{
 			- $USER_LIST is User B, User C
 			- $ACTIVITY is the activity message/title
 			- $DATE is the date of the last notification of User C*/ 
-		magAc.signIn(DATA_USER1, DATA_PASS);
+		magAc.signIn(username1,password);
 		navTool.goToIntranetNotification();
 		intraNot.goToAllNotification();
 		ArrayList<String> users = new ArrayList<String>();
-		users.add(username1);
 		users.add(username2);
+		users.add(username3);
 		String status = notiIntranetData.getContentByArrayTypeRandom(6);
 		intraNot.checkAvatarInStatus(users,false);
-		intraNot.checkStatus(status, username2);
+		intraNot.checkStatus(status, username3);
 		intraNot.checkActivityTitleInStatus(activity1, false);
 
 	}}

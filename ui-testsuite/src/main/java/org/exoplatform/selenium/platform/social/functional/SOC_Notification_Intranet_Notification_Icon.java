@@ -18,6 +18,14 @@ import org.testng.annotations.*;
 	@Test
 	public  void test01_CheckNotificationsIconInTheTopNavigation() {
 		info("Test 1: Check Notifications icon in the top navigation");
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		magAc.signIn(username1,password);
+		Utils.pause(3000);
 		/*Step Number: 1
 		*Step Name: 
 		*Step Description: 
@@ -58,26 +66,30 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- The number of new notifications (3 notifications) is displayed above the icon with a blue badge.*/ 
-		info("Create 1 users for testing");
-		createNewUser(1);
-		
-		info("John add UserA to administration group");
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+"@gmail.com";
+		String username3 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email3 = username3+"@gmail.com";
+		String username4 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email4 = username4+"@gmail.com";
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
 		navTool.goToUsersAndGroupsManagement();
-		userAndGroup.goToGroupTab();
-		userAndGroup.selectGroup("Platform/Administration");
-		userAndGroup.addUsersToGroup(arrayUser.get(0),"*",false,false);
-		
-		info("User A login");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(0), password);
-		Utils.pause(3000);
+		userAndGroup.addUserAdmin(username1);
+		magAc.signIn(username1,password);
 		
 		info("goto My notification");
 		navTool.goToMyNotifications();
 		myNoti.enableNotification(myNotiType.NewUser_intranet);
 		
-		info("Create 3 users for testing");
-		createNewUser(3);
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		addUserPage.addUser(username3, password, email3, username3, username3);
+		addUserPage.addUser(username4, password, email4, username4, username4);
 		
 		info("Verify that The number of new notifications (3 notifications) is displayed above the icon");
 		waitForAndGetElement(navTool.ELEMENT_BADGE_NUMBER_DISPLAY.replace("${number}", "3"));
@@ -102,26 +114,30 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- The number of new notifications (3 notifications) is displayed above the icon with a blue badge.*/
-		info("Create 1 users for testing");
-		createNewUser(1);
-		
-		info("John add UserA to administration group");
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+"@gmail.com";
+		String username3 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email3 = username3+"@gmail.com";
+		String username4 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email4 = username4+"@gmail.com";
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
 		navTool.goToUsersAndGroupsManagement();
-		userAndGroup.goToGroupTab();
-		userAndGroup.selectGroup("Platform/Administration");
-		userAndGroup.addUsersToGroup(arrayUser.get(0),"*",false,false);
-		
-		info("User A login");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(0), password);
-		Utils.pause(3000);
+		userAndGroup.addUserAdmin(username1);
+		magAc.signIn(username1,password);
 		
 		info("goto My notification");
 		navTool.goToMyNotifications();
 		myNoti.enableNotification(myNotiType.NewUser_intranet);
 		
-		info("Create 3 users for testing");
-		createNewUser(3);
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		addUserPage.addUser(username3, password, email3, username3, username3);
+		addUserPage.addUser(username4, password, email4, username4, username4);
 		
 		info("Verify that The number of new notifications (3 notifications) is displayed above the icon");
 		waitForAndGetElement(navTool.ELEMENT_BADGE_NUMBER_DISPLAY.replace("${number}", "3"));

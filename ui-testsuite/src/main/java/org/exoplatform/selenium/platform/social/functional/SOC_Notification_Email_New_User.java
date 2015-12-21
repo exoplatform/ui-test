@@ -34,7 +34,6 @@ import org.testng.annotations.*;
 		createNewUser(1);
 		
 		info("User A login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		Utils.pause(3000);
 		
@@ -76,7 +75,6 @@ import org.testng.annotations.*;
 		createNewUser(1);
 		
 		info("User A login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		Utils.pause(3000);
 		
@@ -299,7 +297,6 @@ import org.testng.annotations.*;
 		createNewUser(1);
 		
 		info("User A login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		Utils.pause(3000);
 		
@@ -353,7 +350,6 @@ import org.testng.annotations.*;
 		userAndGroup.addUsersToGroup(arrayUser.get(0),"*",false, true);
 		
 		info("User A login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		Utils.pause(3000);
 		
@@ -387,6 +383,8 @@ import org.testng.annotations.*;
 		emailNot.getAllChildWindows();
 		emailNot.verifyFormatEmailNotifcation(emailTitle,firstName,arrayUser.get(1), emailContent,true);
         emailNot.closeChildBrowsers(parentWindow);
+        if(arrayUser.size()>0)
+			deleteUsers(arrayUser);
 
  	}
 
@@ -462,7 +460,6 @@ import org.testng.annotations.*;
 		userAndGroup.addUsersToGroup(arrayUser.get(0),"*",false, true);
 		
 		info("User A login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		Utils.pause(3000);
 		
@@ -500,6 +497,8 @@ import org.testng.annotations.*;
 		emailNot.getAllChildWindows();
 		emailNot.verifyPresentEmailActivityNotifications(titleEmail,fullName,"");
         emailNot.closeChildBrowsers(parentWindow);
+        if(arrayUser.size()>0)
+			deleteUsers(arrayUser);
 
  	}
 
@@ -563,7 +562,6 @@ import org.testng.annotations.*;
 		userAndGroup.addUsersToGroup(arrayUser.get(0),"*",false, true);
 		
 		info("User A login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		Utils.pause(3000);
 		
@@ -591,6 +589,8 @@ import org.testng.annotations.*;
 		emailNot.getAllChildWindows();
 		emailNot.verifyPresentEmailActivityNotifications(titleEmail,fullName,"");
         emailNot.closeChildBrowsers(parentWindow);
+        if(arrayUser.size()>0)
+			deleteUsers(arrayUser);
 
  	}
 
@@ -625,7 +625,6 @@ import org.testng.annotations.*;
 		userAndGroup.addUsersToGroup(arrayUser.get(0),"*",false, true);
 		
 		info("User A login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		Utils.pause(3000);
 		
@@ -662,6 +661,8 @@ import org.testng.annotations.*;
         hp.goToConnections();
         connMag.goToConnectionTab(selectTabOption.PENDING);
         connMag.verifyRequestPending(arrayUser.get(1),true);
+        if(arrayUser.size()>0)
+			deleteUsers(arrayUser);
         
  	}
 

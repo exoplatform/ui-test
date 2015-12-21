@@ -18,6 +18,19 @@ import org.testng.annotations.*;
 		@Test
 		public  void test01_AddUserIntoSpaceGroup() {
 			info("Test 1: Add user into Space group");
+			String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+			String email1 = username1+"@gmail.com";
+			String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+			String email2 = username2+"@gmail.com";
+			info("Add new user");
+			navTool.goToAddUser();
+			addUserPage.addUser(username1, password, email1, username1, username1);
+			addUserPage.addUser(username2, password, email2, username2, username2);
+			navTool.goToUsersAndGroupsManagement();
+			userGroupMg.addUserAdmin(username1);
+			magAc.signIn(username1,password);
+			Utils.pause(3000);
+
 			/*Step Number: 1
 			*Step Name: Step 1: Create a new Space
 			*Step Description: 
@@ -55,12 +68,7 @@ import org.testng.annotations.*;
 	 		 String[] arrayGroupPath ={groups.get(0),space};
 	 		 String membership = membershipData.getContentByIndex(4);
 	 		 userGroupMg.selectGroup(arrayGroupPath);
-	 		 userGroupMg.addUsersToGroup(DATA_USER2,membership,false,true);
-	 		 
-	 		/*info("Delete created space");
-			hp.goToMySpaces();
-			spaMg.deleteSpace(space,false);
-			info("The space is deleted successfully");*/
+	 		 userGroupMg.addUsersToGroup(username2,membership,false,true);
 	 	}
 
 	/**
@@ -72,6 +80,18 @@ import org.testng.annotations.*;
 		@Test
 		public  void test02_InvitedUserAcceptInvitation() {
 			info("Test 2: Invited user accept invitation");
+			String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+			String email1 = username1+"@gmail.com";
+			String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+			String email2 = username2+"@gmail.com";
+			String fullName2=username2+" "+username2;
+			info("Add new user");
+			navTool.goToAddUser();
+			addUserPage.addUser(username1, password, email1, username1, username1);
+			addUserPage.addUser(username2, password, email2, username2, username2);
+			magAc.signIn(username1,password);
+			Utils.pause(3000);
+
 			/*Step Number: 1
 			*Step Name: Step 1: Create a new Space
 			*Step Description: 
@@ -104,7 +124,7 @@ import org.testng.annotations.*;
 				Send invitation successfully:*/
 			spaHome.goToSpaceSettingTab();
 			setSpaceMg.goToMemberTab();
-			setSpaceMg.inviteUser(DATA_USER2,true,DATA_NAME_USER2);
+			setSpaceMg.inviteUser(username2,true,fullName2);
 			
 			/*Step number: 3
 			*Step Name: Step 3: Invited user accepts invitation
@@ -124,8 +144,7 @@ import org.testng.annotations.*;
 				- On screen of user who sends invitation: 
 				  user name of invited user is removed from invited user list but it has been added in member list.
 				- When user accesses the User list portlet, user will see profile of new member.*/ 
-			magAc.signOut();
-		    magAc.signIn(DATA_USER2, DATA_PASS);
+		    magAc.signIn(username2,password);
 		    info("On the screen of invited user: [Accept] & [Ignore] button are changed by button [leave]");
 		    hp.goToAllSpace();
 		    spaMg.goToInvitationsReceivedTab();
@@ -141,25 +160,19 @@ import org.testng.annotations.*;
 		    info("Member can access the Space by click on displaying name of the space.");
 		    hp.goToSpecificSpace(space);
 		    
-		    magAc.signOut();
-		    magAc.signIn(DATA_USER1, DATA_PASS);
+		    magAc.signIn(username1,password);
 		    info("user name of invited user is removed from invited user list but it has been added in member list");
 		    hp.goToSpecificSpace(space);
 		    spaHome.goToSpaceSettingTab();
 		    setSpaceMg.goToMemberTab();
-		    waitForAndGetElement(setSpaceMg.ELEMENT_USER_IN_MEMBER_TABLE.replace("${fullName}",DATA_NAME_USER2));
-		    waitForElementNotPresent(setSpaceMg.ELEMENT_SPACE_INVITED_USER_TABLE.replace("${user}",DATA_NAME_USER2));
+		    waitForAndGetElement(setSpaceMg.ELEMENT_USER_IN_MEMBER_TABLE.replace("${fullName}",fullName2));
+		    waitForElementNotPresent(setSpaceMg.ELEMENT_SPACE_INVITED_USER_TABLE.replace("${user}",fullName2));
 		    
 		    info("When user accesses the User list portlet, user will see profile of new member.");
 		    spaMg.goToMemberTab();
-		    waitForAndGetElement(spaMg.ELEMENT_MEMBER_USER_NAME.replace("${fullName}",DATA_NAME_USER2),2000,1);
-		    spaMg.goToUserProfilePage(DATA_NAME_USER2);
-		    waitForAndGetElement(myProfile.ELEMENT_PROFILE_TITLE.replace("${fullName}",DATA_NAME_USER2),2000,1);
-		    
-		   /* info("Delete created space");
-			hp.goToMySpaces();
-			spaMg.deleteSpace(space,false);
-			info("The space is deleted successfully");*/
+		    waitForAndGetElement(spaMg.ELEMENT_MEMBER_USER_NAME.replace("${fullName}",fullName2),2000,1);
+		    spaMg.goToUserProfilePage(fullName2);
+		    waitForAndGetElement(myProfile.ELEMENT_PROFILE_TITLE.replace("${fullName}",fullName2),2000,1);
 	 	}
 
 	/**
@@ -171,6 +184,18 @@ import org.testng.annotations.*;
 		@Test
 		public  void test03_SendInvitationToUserWhoIsNotMemberOfSpace() {
 			info("Test 3: Send invitation to user who is not member of space");
+			String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+			String email1 = username1+"@gmail.com";
+			
+			String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+			String email2 = username2+"@gmail.com";
+			String fullName2=username2+" "+username2;
+			
+			info("Add new user");
+			navTool.goToAddUser();
+			addUserPage.addUser(username1, password, email1, username1, username1);
+			addUserPage.addUser(username2, password, email2, username2, username2);
+			magAc.signIn(username1,password);
 			/*Step Number: 1
 			*Step Name: Step 1: Create a new Space
 			*Step Description: 
@@ -205,7 +230,7 @@ import org.testng.annotations.*;
 				 display list invited user, else add name of user was invited into list.*/
 			spaHome.goToSpaceSettingTab();
 			setSpaceMg.goToMemberTab();
-			setSpaceMg.inviteUser(DATA_USER2,true,DATA_NAME_USER2);
+			setSpaceMg.inviteUser(username2,true,fullName2);
 			
 			/*Step number: 3
 			*Step Name: Step 3: Check invitation sending successfully
@@ -219,21 +244,13 @@ import org.testng.annotations.*;
 				By the default: Name of space which has sent invitation to user, 
 				are list on invited space. If user accept this invitation, 
 				Click on [Accept] button else click on [Ignore] button*/ 
-			magAc.signOut();
-		    magAc.signIn(DATA_USER2, DATA_PASS);
+			 magAc.signIn(username2,password);
 		    info("On the screen of invited user: [Accept] & [Ignore] button are changed by button [leave]");
 		    hp.goToAllSpace();
 		    spaMg.goToInvitationsReceivedTab();
 		    waitForAndGetElement(spaMg.ELEMENT_MY_SPACE_INVITATION_RECEIVED_ACCEPT_BTN.replace("${space}",space),2000,1);
 		    waitForAndGetElement(spaMg.ELEMENT_MY_SPACE_INVITATION_RECEIVED_CANCEL_BTN.replace("${space}",space));
 		    spaMg.ignoreAInvitation(space);
-		    
-		   /* magAc.signOut();
-		    magAc.signIn(DATA_USER1, DATA_PASS);*/
-		   /* info("Delete created space");
-		  	hp.goToMySpaces();
-		  	spaMg.deleteSpace(space,false);
-		  	info("The space is deleted successfully");*/
 	 	}
 
 	/**
@@ -245,6 +262,18 @@ import org.testng.annotations.*;
 		@Test
 		public  void test04_SendInvitationToUsersWhoAreExistingInInvitingList() {
 			info("Test 4: Send invitation to users who are existing in inviting list");
+			String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+			String email1 = username1+"@gmail.com";
+			
+			String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+			String email2 = username2+"@gmail.com";
+			String fullName2=username2+" "+username2;
+			
+			info("Add new user");
+			navTool.goToAddUser();
+			addUserPage.addUser(username1, password, email1, username1, username1);
+			addUserPage.addUser(username2, password, email2, username2, username2);
+			magAc.signIn(username1,password);
 			/*Step Number: 1
 			*Step Name: -
 			*Step Description: 
@@ -277,7 +306,7 @@ import org.testng.annotations.*;
 				Invited user successfully*/
 			spaHome.goToSpaceSettingTab();
 			setSpaceMg.goToMemberTab();
-			setSpaceMg.inviteUser(DATA_USER2,true,DATA_NAME_USER2);
+			setSpaceMg.inviteUser(username2,true,fullName2);
 			
 			/*Step number: 3
 			*Step Name: -
@@ -289,14 +318,9 @@ import org.testng.annotations.*;
 				Show warning message: â€ Some users have already existed in the inviting list, including: usernameâ€*/ 
 			ArrayList<String> warningTextArray=spWarnMessg.getArrayContentByType(1);
 			String warningText=warningTextArray.get(0);
-			setSpaceMg.inviteUser(DATA_USER2,false,"");
-			waitForAndGetElement(setSpaceMg.ELEMENT_SPACE_WARNING_MESSAGE.replace("${warningText}",warningText).replace("${username}",DATA_USER2),2000,1);
+			setSpaceMg.inviteUser(username2,false,"");
+			waitForAndGetElement(setSpaceMg.ELEMENT_SPACE_WARNING_MESSAGE.replace("${warningText}",warningText).replace("${username}",username2),2000,1);
 			button.ok();
-			
-			/*info("Delete created space");
-			hp.goToMySpaces();
-			spaMg.deleteSpace(space,false);
-			info("The space is deleted successfully");*/
 	 	}
 
 	/**
@@ -308,6 +332,18 @@ import org.testng.annotations.*;
 		@Test
 		public  void test05_RemoveANormalMemberFromTheSpace() {
 			info("Test 5: Remove a normal member from the space");
+			String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+			String email1 = username1+"@gmail.com";
+			
+			String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+			String email2 = username2+"@gmail.com";
+			String fullName2=username2+" "+username2;
+			
+			info("Add new user");
+			navTool.goToAddUser();
+			addUserPage.addUser(username1, password, email1, username1, username1);
+			addUserPage.addUser(username2, password, email2, username2, username2);
+			magAc.signIn(username1,password);
 			/*Step Number: 1
 			*Step Name: -
 			*Step Description: 
@@ -341,7 +377,7 @@ import org.testng.annotations.*;
 				display list invited user, else add name of user was invited into list.*/
 			 spaHome.goToSpaceSettingTab();
 			 setSpaceMg.goToMemberTab();
-			 setSpaceMg.inviteUser(DATA_USER2,true,DATA_NAME_USER2);
+			 setSpaceMg.inviteUser(username2,true,fullName2);
 			 
 			/*Step number: 3
 			*Step Name: -
@@ -354,8 +390,7 @@ import org.testng.annotations.*;
 			*Expected Outcome: 
 				- Login in successfully
 				- In my spaces of invited user: display space which added at step 1*/
-			 magAc.signOut();
-		     magAc.signIn(DATA_USER2, DATA_PASS);
+			 magAc.signIn(username2,password);
 		     hp.goToAllSpace();
 		     spaMg.goToInvitationsReceivedTab();
 		     spaMg.acceptAInvitation(space);
@@ -370,16 +405,10 @@ import org.testng.annotations.*;
 				- Select normal memberand click on [remove] icon
 			*Expected Outcome: 
 				User has been removed from list member of the space and space group. User can't access this space but user can send request to join back. The space is removed from my space list and added into Public spaces list. [Leave] button is changed to [Request to join] button.*/ 
-		     magAc.signOut();
-		     magAc.signIn(DATA_USER1, DATA_PASS);
+		     magAc.signIn(username1,password);
 		     hp.goToSpecificSpace(space);
 		     spaHome.goToSpaceSettingTab();
-		     setSpaceMg.removeUserFromMemberlist(DATA_NAME_USER2);
-		     
-		 /*	info("Delete created space");
-			hp.goToMySpaces();
-			spaMg.deleteSpace(space,false);
-			info("The space is deleted successfully");*/
+		     setSpaceMg.removeUserFromMemberlist(username2);
 	 	}
 
 	/**
@@ -391,6 +420,17 @@ import org.testng.annotations.*;
 		@Test
 		public  void test06_SendRequestToSpaceAtHiddenModeAndOpenForRegistration() {
 			info("Test 6: Send request to Space at hidden mode and open for registration");
+			String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+			String email1 = username1+"@gmail.com";
+			
+			String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+			String email2 = username2+"@gmail.com";
+			
+			info("Add new user");
+			navTool.goToAddUser();
+			addUserPage.addUser(username1, password, email1, username1, username1);
+			addUserPage.addUser(username2, password, email2, username2, username2);
+			magAc.signIn(username1,password);
 			/*Step Number: 1
 			*Step Name: -
 			*Step Description: 
@@ -427,18 +467,11 @@ import org.testng.annotations.*;
 				- Select All spaces list
 			*Expected Outcome: 
 				User can't see the space which has created at step 1. So user can't send request*/ 
-			 magAc.signOut();
-		     magAc.signIn(DATA_USER2, DATA_PASS);
+			 magAc.signIn(username2,password);
 		     hp.goToAllSpace();
 		     spaMg.searchSpace(space,"");
 		     waitForElementNotPresent(spaMg.ELEMENT_SPACE_TITLE.replace("${space}",space),2000,1);
 		     
-		   /*  magAc.signOut();
-		     magAc.signIn(DATA_USER1, DATA_PASS);*/
-		 	 /*info("Delete created space");
-			 hp.goToMySpaces();
-			 spaMg.deleteSpace(space,false);
-			 info("The space is deleted successfully");*/
 	 	}
 	/**
 	*<li> Case ID:122474.</li>
@@ -449,6 +482,17 @@ import org.testng.annotations.*;
 		@Test
 		public  void test07_SendRequestToSpaceAtHiddenModeAndValidationForRegistration() {
 			info("Test 7: Send request to Space at hidden mode and validation for registration");
+			String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+			String email1 = username1+"@gmail.com";
+			
+			String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+			String email2 = username2+"@gmail.com";
+			
+			info("Add new user");
+			navTool.goToAddUser();
+			addUserPage.addUser(username1, password, email1, username1, username1);
+			addUserPage.addUser(username2, password, email2, username2, username2);
+			magAc.signIn(username1,password);
 			/*Step Number: 1
 			*Step Name: -
 			*Step Description: 
@@ -485,18 +529,11 @@ import org.testng.annotations.*;
 				- Select All space list
 			*Expected Outcome: 
 				User can't see the space which has created at step 1. So user can't send request*/ 
-			 magAc.signOut();
-		     magAc.signIn(DATA_USER2, DATA_PASS);
+			 magAc.signIn(username1,password);
 		     hp.goToAllSpace();
 		     spaMg.searchSpace(space,"");
 		     waitForElementNotPresent(spaMg.ELEMENT_SPACE_TITLE.replace("${space}",space),2000,1);
 		     
-		     /*magAc.signOut();
-		     magAc.signIn(DATA_USER1, DATA_PASS);*/
-		 	 /*info("Delete created space");
-			 hp.goToMySpaces();
-			 spaMg.deleteSpace(space,false);
-			 info("The space is deleted successfully");*/
 	 	}
 
 	/**
@@ -508,6 +545,17 @@ import org.testng.annotations.*;
 		@Test
 		public  void test08_SendRequestToSpaceAtHiddenModeAndCloseForRegistration() {
 			info("Test 8: Send request to Space at hidden mode and close for registration");
+			String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+			String email1 = username1+"@gmail.com";
+			
+			String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+			String email2 = username2+"@gmail.com";
+			
+			info("Add new user");
+			navTool.goToAddUser();
+			addUserPage.addUser(username1, password, email1, username1, username1);
+			addUserPage.addUser(username2, password, email2, username2, username2);
+			magAc.signIn(username1,password);
 			/*Step Number: 1
 			*Step Name: -
 			*Step Description: 
@@ -544,18 +592,11 @@ import org.testng.annotations.*;
 				- Select All space list
 			*Expected Outcome: 
 				User can't see the space which has created at step 1. So user can't send request*/ 
-			 magAc.signOut();
-		     magAc.signIn(DATA_USER2, DATA_PASS);
+			magAc.signIn(username2,password);
 		     hp.goToAllSpace();
 		     spaMg.searchSpace(space,"");
 		     waitForElementNotPresent(spaMg.ELEMENT_SPACE_TITLE.replace("${space}",space),2000,1);
 		     
-		     /*magAc.signOut();
-		     magAc.signIn(DATA_USER1, DATA_PASS);*/
-		 	 /*info("Delete created space");
-			 hp.goToMySpaces();
-			 spaMg.deleteSpace(space,false);
-			 info("The space is deleted successfully");*/
 	 	}
 
 
@@ -568,6 +609,12 @@ import org.testng.annotations.*;
 		@Test
 		public  void test09_AddMemberWithMembershipIsManagerIntoSpaceGroup() {
 			info("Test 09: Add member with membership is manager into space group");
+			String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+			String email1 = username1+"@gmail.com";
+			
+			info("Add new user");
+			navTool.goToAddUser();
+			addUserPage.addUser(username1, password, email1, username1, username1);
 			/*Step Number: 1
 			*Step Name: -
 			*Step Description: 
@@ -605,12 +652,8 @@ import org.testng.annotations.*;
 			 String membership = membershipData.getContentByIndex(4);
 			 userGroupMg.selectGroup(arrayGroupPath);
 			 Utils.pause(2000);
-			 userGroupMg.addUsersToGroup(DATA_USER2,membership,false,true);
+			 userGroupMg.addUsersToGroup(username1,membership,false,true);
 			 
-			/*info("Delete created space");
-			hp.goToMySpaces();
-			spaMg.deleteSpace(space,false);
-			info("The space is deleted successfully");*/
 	 	}
 
 
@@ -623,6 +666,17 @@ import org.testng.annotations.*;
 	@Test
 	public  void test10_UserCancelRequest() {
 		info("Test 10 User cancel request");
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+"@gmail.com";
+		
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		magAc.signIn(username1,password);
 		/*Step Number: 1
 		*Step Name: -
 		*Step Description: 
@@ -650,8 +704,7 @@ import org.testng.annotations.*;
 			- Select All space list and selects this space and click Request to join
 		*Expected Outcome: 
 			Send request successfully*/
-		 magAc.signOut();
-	     magAc.signIn(DATA_USER2, DATA_PASS);
+		 magAc.signIn(username2,password);
 	     hp.goToAllSpace();
 	     spaMg.requestToJoinSpace(space);
 	     
@@ -671,12 +724,6 @@ import org.testng.annotations.*;
         hp.goToAllSpace();
         spaMg.searchSpace(space, "");
         waitForAndGetElement(spaMg.ELEMENT_SPACE_TITLE.replace("${space}",space),2000,1);
-        /*magAc.signOut();
-	    magAc.signIn(DATA_USER1, DATA_PASS);*/
-	   /* info("Delete created space");
-		hp.goToMySpaces();
-		spaMg.deleteSpace(space,false);
-		info("The space is deleted successfully");*/
  	}
 
 	/**
@@ -688,6 +735,18 @@ import org.testng.annotations.*;
 	@Test
 	public  void test11_SendRequestToSpaceAtVisibleModeAndOpenForRegistration() {
 		info("Test 11 Send request to Space at Visible mode and open for registration");
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+"@gmail.com";
+		String fullName2=username2+" "+username2;
+		
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		magAc.signIn(username1,password);
 		/*Step Number: 1
 		*Step Name: -
 		*Step Description: 
@@ -725,8 +784,7 @@ import org.testng.annotations.*;
 			- Select the space which has created and click on [Request to Join] button
 		*Expected Outcome: 
 			User becomes member of the space*/
-		 magAc.signOut();
-	     magAc.signIn(DATA_USER2, DATA_PASS);
+		magAc.signIn(username2,password);
 	     hp.goToAllSpace();
 	     spaMg.joinToSpace(space);
 		
@@ -743,17 +801,12 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			Name of user at step 2, is displayed in member list of the space*/ 
 	     
-	     magAc.signOut();
-	     magAc.signIn(DATA_USER1, DATA_PASS);
+	     magAc.signIn(username1,password);
 	     hp.goToSpecificSpace(space);
 	     spaHome.goToSpaceSettingTab();
 	     spaMg.goToMemberTab();
-	     waitForAndGetElement(spaMg.ELEMENT_MEMBER_USER_NAME.replace("${fullName}",DATA_NAME_USER2),2000,1);
+	     waitForAndGetElement(spaMg.ELEMENT_MEMBER_USER_NAME.replace("${fullName}",fullName2),2000,1);
 
-	    /* info("Delete created space");
-		 hp.goToMySpaces();
-		 spaMg.deleteSpace(space,false);
-		 info("The space is deleted successfully");*/
  	}
 
 	/**
@@ -765,6 +818,17 @@ import org.testng.annotations.*;
 	@Test
 	public  void test12_SendRequestToSpaceAtVisibleModeAndValidationForRegistration() {
 		info("Test 12 Send request to Space at Visible mode and Validation for registration");
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+"@gmail.com";
+		
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		magAc.signIn(username1,password);
 		/*Step Number: 1
 		*Step Name: -
 		*Step Description: 
@@ -802,8 +866,7 @@ import org.testng.annotations.*;
 			- Select the space which has created and click on [Request to Join] button
 		*Expected Outcome: 
 			Send request successfully: The space is move out Public space and added into pending space*/
-		 magAc.signOut();
-	     magAc.signIn(DATA_USER2, DATA_PASS);
+		 magAc.signIn(username2,password);
 	     hp.goToAllSpace();
 	     spaMg.requestToJoinSpace(space,true);
 	     spaMg.goToRequestPendingTab();
@@ -821,17 +884,12 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			Name of user at step 3, is in pending list of the space.
 			Click on [validate] if manager accept the request else click on [decline] button*/ 
-	     magAc.signOut();
-	     magAc.signIn(DATA_USER1, DATA_PASS);
+	     magAc.signIn(username1,password);
 	     hp.goToSpecificSpace(space);
 	     spaHome.goToSpaceSettingTab();
 	     setSpaceMg.goToMemberTab();
-	     setSpaceMg.acceptRequest(DATA_NAME_USER2);
+	     setSpaceMg.acceptRequest(username2);
 
-	     /*info("Delete created space");
-		 hp.goToMySpaces();
-		 spaMg.deleteSpace(space,false);
-		 info("The space is deleted successfully");*/
  	}
 
 	/**
@@ -843,6 +901,17 @@ import org.testng.annotations.*;
 	@Test
 	public  void test13_SendRequestToSpaceAtVisibleModeAndCloseForRegistration() {
 		info("Test 13 Send request to Space at Visible mode and Close for registration");
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+"@gmail.com";
+		
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		magAc.signIn(username1,password);
 		/*Step Number: 1
 		*Step Name: -
 		*Step Description: 
@@ -880,19 +949,12 @@ import org.testng.annotations.*;
 			- Select the space which has created
 		*Expected Outcome: 
 			Don't see any button to send request. Only manager of space can send invitation to user*/ 
-		 magAc.signOut();
-	     magAc.signIn(DATA_USER2, DATA_PASS);
+		 magAc.signIn(username2,password);
 	     hp.goToAllSpace();
 	     spaMg.searchSpace(space, "");
 	     waitForAndGetElement(spaMg.ELEMENT_SPACE_TITLE.replace("${space}",space),2000,1);
 	     waitForElementNotPresent(spaMg.ELEMENT_REQUEST_TO_JOIN_SPACE_BTN.replace("${space}", space));
 	     
-	     /*magAc.signOut();
-	     magAc.signIn(DATA_USER1, DATA_PASS);*/
-	     /*info("Delete created space");
-		 hp.goToMySpaces();
-		 spaMg.deleteSpace(space,false);
-		 info("The space is deleted successfully");*/
  	}
 
 	/**
@@ -904,6 +966,17 @@ import org.testng.annotations.*;
 	@Test
 	public  void test14_UserWhoIsNotMemberOfTheSpaceSendsRequest() {
 		info("Test 14 User, who is not member of the space, sends request");
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+"@gmail.com";
+		
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		magAc.signIn(username1,password);
 		/*Step Number: 1
 		*Step Name: -
 		*Step Description: 
@@ -934,8 +1007,7 @@ import org.testng.annotations.*;
 			- On screen of sender request: 
 			The space is moved from Public space and added into Pending space list and user can using 
 			Cancel button to Cancel the request*/
-		 magAc.signOut();
-	     magAc.signIn(DATA_USER2, DATA_PASS);
+		 magAc.signIn(username2,password);
 	     hp.goToAllSpace();
 	     spaMg.requestToJoinSpace(space,true);
 	     spaMg.goToRequestPendingTab();
@@ -954,17 +1026,12 @@ import org.testng.annotations.*;
 			- Select [members] tab
 		*Expected Outcome: 
 			Display list pending user, name of user was sent request, is added into list.*/ 
-	     magAc.signOut();
-	     magAc.signIn(DATA_USER1, DATA_PASS);
+	     magAc.signIn(username1,password);
 	     hp.goToSpecificSpace(space);
 	     spaHome.goToSpaceSettingTab();
 	     setSpaceMg.goToMemberTab();
-	     waitForAndGetElement(setSpaceMg.ELEMENT_SPACE_MEMBERS_TAB_VALIDATE_REQUEST_jOINT.replace("${user}",DATA_NAME_USER2),2000,1);
+	     waitForAndGetElement(setSpaceMg.ELEMENT_SPACE_MEMBERS_TAB_VALIDATE_REQUEST_jOINT.replace("${user}",username2),2000,1);
 
-	     /*info("Delete created space");
-		 hp.goToMySpaces();
-		 spaMg.deleteSpace(space,false);
-		 info("The space is deleted successfully");*/
  	}
 
 	/**
@@ -976,6 +1043,18 @@ import org.testng.annotations.*;
 	@Test
 	public  void test15_TheManagerOfSpaceDeclinesTheRequest() {
 		info("Test 15 The Manager of Space declines the request");
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+"@gmail.com";
+		String fullName2=username2+" "+username2;
+		
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		magAc.signIn(username1,password);
 		/*Step Number: 1
 		*Step Name: -
 		*Step Description: 
@@ -1003,8 +1082,7 @@ import org.testng.annotations.*;
 			- Select All space list andselects this space and click Request to join
 		*Expected Outcome: 
 			Send request successfully*/
-		 magAc.signOut();
-	     magAc.signIn(DATA_USER2, DATA_PASS);
+		 magAc.signIn(username2,password);
 	     hp.goToAllSpace();
 	     spaMg.requestToJoinSpace(space,true);
 	     
@@ -1020,27 +1098,19 @@ import org.testng.annotations.*;
 			- User has been declined, and be removed from list pending user. 
 			- On Screen of sender request, 
 			when user select this Space, user see[Cancel] button be changed to [Request to Join] button*/ 
-	     magAc.signOut();
-	     magAc.signIn(DATA_USER1, DATA_PASS);
+	     magAc.signIn(username1,password);
 	     hp.goToSpecificSpace(space);
 	     spaHome.goToSpaceSettingTab();
 	     setSpaceMg.goToMemberTab();
-	     setSpaceMg.declineRequest(DATA_NAME_USER2);
+	     setSpaceMg.declineRequest(fullName2);
 
-	     magAc.signOut();
-	     magAc.signIn(DATA_USER2, DATA_PASS);
+	     magAc.signIn(username2,password);
 	     hp.goToAllSpace();
 	     spaMg.searchSpace(space, "");
 	     waitForAndGetElement(spaMg.ELEMENT_SPACE_TITLE.replace("${space}",space),2000,1);
 	     waitForElementNotPresent(spaMg.ELEMENT_SPACE_CANCEL_BUTTON.replace("${space}",space));
 	     waitForAndGetElement(spaMg.ELEMENT_REQUEST_TO_JOIN_SPACE_BTN.replace("${space}", space));
 	     
-	     /*magAc.signOut();
-	     magAc.signIn(DATA_USER1, DATA_PASS);*/
-	     /*info("Delete created space");
-		 hp.goToMySpaces();
-		 spaMg.deleteSpace(space,false);
-		 info("The space is deleted successfully");*/
  	}
 
 	/**
@@ -1052,6 +1122,17 @@ import org.testng.annotations.*;
 	@Test
 	public  void test16_TheManagerOfSpaceValidatesTheRequest() {
 		info("Test 16 The Manager of Space validates the request");
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+"@gmail.com";
+		
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		magAc.signIn(username1,password);
 		/*Step Number: 1
 		*Step Name: -
 		*Step Description: 
@@ -1079,8 +1160,7 @@ import org.testng.annotations.*;
 			- Select All space list andselects this space and click Request to join
 		*Expected Outcome: 
 			Send request successfully*/
-		 magAc.signOut();
-	     magAc.signIn(DATA_USER2, DATA_PASS);
+		 magAc.signIn(username2,password);
 	     hp.goToAllSpace();
 	     spaMg.requestToJoinSpace(space,true);
 	    
@@ -1094,12 +1174,11 @@ import org.testng.annotations.*;
 			- Select [Members] tab, at list pending user, select user who sent request at step 2 and click on [Validate] icon
 		*Expected Outcome: 
 			- Invited user is removed from list pending user and added into list of member*/
-	     magAc.signOut();
-	     magAc.signIn(DATA_USER1, DATA_PASS);
+	     magAc.signIn(username1,password);
 	     hp.goToSpecificSpace(space);
 	     spaHome.goToSpaceSettingTab();
 	     setSpaceMg.goToMemberTab();
-	     setSpaceMg.acceptRequest(DATA_NAME_USER2);
+	     setSpaceMg.acceptRequest(username2);
 
 		/*Step number: 4
 		*Step Name: -
@@ -1112,18 +1191,11 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			The space is added into my space list of user and by the name of space, 
 			there is a Leave button to allow user leave out space*/ 
-	     magAc.signOut();
-	     magAc.signIn(DATA_USER2, DATA_PASS);
+	     magAc.signIn(username2,password);
 	     hp.goToMySpaces();
 	     waitForAndGetElement(spaMg.ELEMENT_SPACE_TITLE.replace("${space}",space),2000,1);
 	     waitForAndGetElement(spaMg.ELEMENT_SPACE_LEAVE_BTN.replace("${space}",space),2000,1);
 	     
-	    /* magAc.signOut();
-	     magAc.signIn(DATA_USER1, DATA_PASS);*/
-	    /* info("Delete created space");
-		 hp.goToMySpaces();
-		 spaMg.deleteSpace(space,false);
-		 info("The space is deleted successfully");*/
  	}
 
 	/**
@@ -1135,6 +1207,13 @@ import org.testng.annotations.*;
 	@Test
 	public  void test17_SendInvitationToMemberOfSpace() {
 		info("Test 17 Send invitation to member of space");
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		magAc.signIn(username1,password);
 		/*Step Number: 1
 		*Step Name: -
 		*Step Description: 
@@ -1168,13 +1247,9 @@ import org.testng.annotations.*;
 		 String warningText=warningTextArray.get(0);
 		spaHome.goToSpaceSettingTab();
 		setSpaceMg.goToMemberTab();
-		setSpaceMg.inviteUser(DATA_USER1,false,"");
-		waitForAndGetElement(setSpaceMg.ELEMENT_SPACE_WARNING_MESSAGE.replace("${warningText}",warningText).replace("${username}",DATA_USER1),2000,1);
+		setSpaceMg.inviteUser(username1,false,"");
+		waitForAndGetElement(setSpaceMg.ELEMENT_SPACE_WARNING_MESSAGE.replace("${warningText}",warningText).replace("${username}",username1),2000,1);
 		button.ok();
-		/*info("Delete created space");
-		hp.goToMySpaces();
-		spaMg.deleteSpace(space,false);
-		info("The space is deleted successfully");*/
  	}
 
 	/**
@@ -1186,6 +1261,18 @@ import org.testng.annotations.*;
 	@Test
 	public  void test18_SendInvitationFromSpaceAtHiddenModeAndCloseForRegistration() {
 		info("Test 18 Send invitation from Space at hidden mode and close for registration");
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+"@gmail.com";
+		String fullName2=username2+" "+username2;
+		
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		magAc.signIn(username1,password);
 		/*Step Number: 1
 		*Step Name: -
 		*Step Description: 
@@ -1225,7 +1312,7 @@ import org.testng.annotations.*;
 			- Send invitation successfully:name of user are existing on the invited list.*/
 		spaHome.goToSpaceSettingTab();
 		setSpaceMg.goToMemberTab();
-		setSpaceMg.inviteUser(DATA_USER2,true,DATA_NAME_USER2);
+		setSpaceMg.inviteUser(username2,true,fullName2);
 		
 		/*Step number: 3
 		*Step Name: -
@@ -1238,20 +1325,13 @@ import org.testng.annotations.*;
 			By the default: On the list of invitations space: 
 			name of space which has sent invitation to user, are list on invited space. 
 			If user accept this invitation, Click on [Accept] button else click on [Ignore] button*/ 
-		 magAc.signOut();
-	     magAc.signIn(DATA_USER2, DATA_PASS);
+		 magAc.signIn(username2,password);
 	     hp.goToAllSpace();
 	     spaMg.goToInvitationsReceivedTab();
 	     waitForAndGetElement(spaMg.ELEMENT_SPACE_TITLE.replace("${space}",space),2000,1);
 	     waitForAndGetElement(spaMg.ELEMENT_MY_SPACE_INVITATION_RECEIVED_ACCEPT_BTN .replace("${space}",space));
 	     waitForAndGetElement(spaMg.ELEMENT_MY_SPACE_INVITATION_RECEIVED_CANCEL_BTN.replace("${space}",space));
 	     
-	    /* magAc.signOut();
-	     magAc.signIn(DATA_USER1, DATA_PASS);*/
-	     /*info("Delete created space");
-		 hp.goToMySpaces();
-		 spaMg.deleteSpace(space,false);
-		 info("The space is deleted successfully");*/
  	}
 
 	/**
@@ -1263,6 +1343,14 @@ import org.testng.annotations.*;
 	@Test
 	public  void test19_SendInvitationToRoot() {
 		info("Test 19 send invitation to Root");
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		String fullName1=username1+" "+username1;
+		
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		magAc.signIn(username1,password);
 		/*Step Number: 1
 		*Step Name: -
 		*Step Description: 
@@ -1294,7 +1382,6 @@ import org.testng.annotations.*;
 			Sending the invitation successfully. Root automatic become a member of space*/
 		spaHome.goToSpaceSettingTab();
 		setSpaceMg.inviteUser(USER_ROOT,false,"");
-		waitForAndGetElement(spaHome.ELEMENT_SPACE_MENU_WIKI,2000,1);
 
 		/*Step number: 3
 		*Step Name: -
@@ -1307,11 +1394,7 @@ import org.testng.annotations.*;
 			- Administrators of space: include all users are manager of space
 			- Members of space: include all users are member of space. Root is a member of space*/ 
         waitForAndGetElement(spaMg.ELEMENT_SPACE_MEMBER_USER_MEMBER.replace("${fullName}",DATA_NAME_ROOT),2000,1);
-        waitForAndGetElement(spaMg.ELEMENT_SPACE_MEMBER_USER_MANAGER.replace("${fullName}",DATA_NAME_USER1),2000,1);
-        /* info("Delete created space");
-		 hp.goToMySpaces();
-		 spaMg.deleteSpace(space,false);
-		 info("The space is deleted successfully");*/
+        waitForAndGetElement(spaMg.ELEMENT_SPACE_MEMBER_USER_MANAGER.replace("${fullName}",fullName1),2000,1);
 	}
 
 	/**
@@ -1323,6 +1406,18 @@ import org.testng.annotations.*;
 	@Test
 	public  void test20_SendInvitationFromSpaceAtHiddenModeAndOpenForRegistration() {
 		info("Test 20 Send invitation from Space at hidden mode and open for registration");
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+"@gmail.com";
+		String fullName2=username2+" "+username2;
+		
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		magAc.signIn(username1,password);
 		/*Step Number: 1
 		*Step Name: -
 		*Step Description: 
@@ -1363,7 +1458,7 @@ import org.testng.annotations.*;
 			name of user are existing on the invited list.*/
 		spaHome.goToSpaceSettingTab();
 		setSpaceMg.goToMemberTab();
-		setSpaceMg.inviteUser(DATA_USER2,true,DATA_NAME_USER2);
+		setSpaceMg.inviteUser(username2,true,fullName2);
 
 		/*Step number: 3
 		*Step Name: -
@@ -1377,20 +1472,13 @@ import org.testng.annotations.*;
 			On the list of invitations space: name of space which has sent invitation to user, 
 			are list on invited space. If user accept this invitation, 
 			Click on [Accept] button else click on [Ignore] button*/ 
-		 magAc.signOut();
-	     magAc.signIn(DATA_USER2, DATA_PASS);
+		 magAc.signIn(username2,password);
 	     hp.goToAllSpace();
 	     spaMg.goToInvitationsReceivedTab();
 	     waitForAndGetElement(spaMg.ELEMENT_SPACE_TITLE.replace("${space}",space),2000,1);
 	     waitForAndGetElement(spaMg.ELEMENT_MY_SPACE_INVITATION_RECEIVED_ACCEPT_BTN .replace("${space}",space));
 	     waitForAndGetElement(spaMg.ELEMENT_MY_SPACE_INVITATION_RECEIVED_CANCEL_BTN.replace("${space}",space));
 	     
-	    /* magAc.signOut();
-	     magAc.signIn(DATA_USER1, DATA_PASS);*/
-	     /*info("Delete created space");
-		 hp.goToMySpaces();
-		 spaMg.deleteSpace(space,false);
-		 info("The space is deleted successfully");*/
  	}
 
 	/**
@@ -1402,6 +1490,18 @@ import org.testng.annotations.*;
 	@Test
 	public  void test21_SendInvitationFromSpaceAtHiddenModeAndValidationForRegistration() {
 		info("Test 21 Send invitation from Space at hidden mode and Validation for registration");
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+"@gmail.com";
+		String fullName2=username2+" "+username2;
+		
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		magAc.signIn(username1,password);
 		/*Step Number: 1
 		*Step Name: -
 		*Step Description: 
@@ -1441,7 +1541,7 @@ import org.testng.annotations.*;
 			- Send invitation successfully:name of user are existing on the invited list.*/
 		spaHome.goToSpaceSettingTab();
 		setSpaceMg.goToMemberTab();
-		setSpaceMg.inviteUser(DATA_USER2,true,DATA_NAME_USER2);
+		setSpaceMg.inviteUser(username2,true,fullName2);
 		
 		/*Step number: 3
 		*Step Name: -
@@ -1456,20 +1556,13 @@ import org.testng.annotations.*;
 			are list on invited space. 
 			If user accept this invitation, 
 			Click on [Accept] button else click on [Ignore] button*/ 
-		 magAc.signOut();
-	     magAc.signIn(DATA_USER2, DATA_PASS);
+		 magAc.signIn(username2,password);
 	     hp.goToAllSpace();
 	     spaMg.goToInvitationsReceivedTab();
 	     waitForAndGetElement(spaMg.ELEMENT_SPACE_TITLE.replace("${space}",space),2000,1);
 	     waitForAndGetElement(spaMg.ELEMENT_MY_SPACE_INVITATION_RECEIVED_ACCEPT_BTN .replace("${space}",space));
 	     waitForAndGetElement(spaMg.ELEMENT_MY_SPACE_INVITATION_RECEIVED_CANCEL_BTN.replace("${space}",space));
 	     
-	   /*  magAc.signOut();
-	     magAc.signIn(DATA_USER1, DATA_PASS);
-	     info("Delete created space");
-		 hp.goToMySpaces();
-		 spaMg.deleteSpace(space,false);
-		 info("The space is deleted successfully");*/
  	}
 
 	/**
@@ -1481,6 +1574,18 @@ import org.testng.annotations.*;
 	@Test
 	public  void test22_SendInvitationFromSpaceAtVisibleModeAndValidationForRegistration() {
 		info("Test 22 Send invitation from Space at Visible mode and validation for registration");
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+"@gmail.com";
+		String fullName2=username2+" "+username2;
+		
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		magAc.signIn(username1,password);
 		/*Step Number: 1
 		*Step Name: -
 		*Step Description: 
@@ -1520,7 +1625,7 @@ import org.testng.annotations.*;
 			- Send invitation successfully:name of user are existing on the invited list.*/
 		spaHome.goToSpaceSettingTab();
 		setSpaceMg.goToMemberTab();
-		setSpaceMg.inviteUser(DATA_USER2,true,DATA_NAME_USER2);
+		setSpaceMg.inviteUser(username2,true,fullName2);
 		
 		/*Step number: 3
 		*Step Name: -
@@ -1533,20 +1638,13 @@ import org.testng.annotations.*;
 			By the default: On the list of invitations space: 
 			name of space which has sent invitation to user, are list on invited space. 
 			If user accept this invitation, Click on [Accept] button else click on [Ignore] button*/ 
-		 magAc.signOut();
-	     magAc.signIn(DATA_USER2, DATA_PASS);
+		 magAc.signIn(username2,password);
 	     hp.goToAllSpace();
 	     spaMg.goToInvitationsReceivedTab();
 	     waitForAndGetElement(spaMg.ELEMENT_SPACE_TITLE.replace("${space}",space),2000,1);
 	     waitForAndGetElement(spaMg.ELEMENT_MY_SPACE_INVITATION_RECEIVED_ACCEPT_BTN .replace("${space}",space));
 	     waitForAndGetElement(spaMg.ELEMENT_MY_SPACE_INVITATION_RECEIVED_CANCEL_BTN.replace("${space}",space));
 	     
-	    /* magAc.signOut();
-	     magAc.signIn(DATA_USER1, DATA_PASS);
-	     info("Delete created space");
-		 hp.goToMySpaces();
-		 spaMg.deleteSpace(space,false);
-		 info("The space is deleted successfully");*/
  	}
 
 	/**
@@ -1558,6 +1656,18 @@ import org.testng.annotations.*;
 	@Test
 	public  void test23_SendInvitationFromSpaceAtVisibleModeAndCloseForRegistration() {
 		info("Test 23 Send invitation from Space at Visible mode and close for registration");
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+"@gmail.com";
+		String fullName2=username2+" "+username2;
+		
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		magAc.signIn(username1,password);
 		/*Step Number: 1
 		*Step Name: -
 		*Step Description: 
@@ -1596,7 +1706,7 @@ import org.testng.annotations.*;
 			- Send invitation successfully:name of user are existing on the invited list.*/
 		spaHome.goToSpaceSettingTab();
 		setSpaceMg.goToMemberTab();
-		setSpaceMg.inviteUser(DATA_USER2,true,DATA_NAME_USER2);
+		setSpaceMg.inviteUser(username2,true,fullName2);
 		
 		/*Step number: 3
 		*Step Name: -
@@ -1610,20 +1720,13 @@ import org.testng.annotations.*;
 			name of space which has sent invitation to user, are list on invited space. 
 			If user accept this invitation, 
 			Click on [Accept] button else click on [Ignore] button*/ 
-		 magAc.signOut();
-	     magAc.signIn(DATA_USER2, DATA_PASS);
+		 magAc.signIn(username2,password);
 	     hp.goToAllSpace();
 	     spaMg.goToInvitationsReceivedTab();
 	     waitForAndGetElement(spaMg.ELEMENT_SPACE_TITLE.replace("${space}",space),2000,1);
 	     waitForAndGetElement(spaMg.ELEMENT_MY_SPACE_INVITATION_RECEIVED_ACCEPT_BTN .replace("${space}",space));
 	     waitForAndGetElement(spaMg.ELEMENT_MY_SPACE_INVITATION_RECEIVED_CANCEL_BTN.replace("${space}",space));
 	     
-	    /* magAc.signOut();
-	     magAc.signIn(DATA_USER1, DATA_PASS);
-	     info("Delete created space");
-		 hp.goToMySpaces();
-		 spaMg.deleteSpace(space,false);
-		 info("The space is deleted successfully");*/
  	}
 
 	/**
@@ -1635,6 +1738,18 @@ import org.testng.annotations.*;
 	@Test
 	public  void test24_SendInvitationFromSpaceAtVisibleModeAndOpenForRegistration() {
 		info("Test 24 Send invitation from Space at Visible mode and open for registration");
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+"@gmail.com";
+		String fullName2=username2+" "+username2;
+		
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		magAc.signIn(username1,password);
 		/*Step Number: 1
 		*Step Name: -
 		*Step Description: 
@@ -1673,7 +1788,7 @@ import org.testng.annotations.*;
 			- Send invitation successfully:name of user are existing on the invited list.*/
 		spaHome.goToSpaceSettingTab();
 		setSpaceMg.goToMemberTab();
-		setSpaceMg.inviteUser(DATA_USER2,true,DATA_NAME_USER2);
+		setSpaceMg.inviteUser(username2,true,fullName2);
 		
 		/*Step number: 3
 		*Step Name: -
@@ -1687,20 +1802,13 @@ import org.testng.annotations.*;
 			On the list of invitations space: name of space which has sent invitation to user, 
 			are list on invited space. 
 			If user accept this invitation, Click on [Accept] button else click on [Ignore] button*/ 
-		 magAc.signOut();
-	     magAc.signIn(DATA_USER2, DATA_PASS);
+		 magAc.signIn(username2,password);
 	     hp.goToAllSpace();
 	     spaMg.goToInvitationsReceivedTab();
 	     waitForAndGetElement(spaMg.ELEMENT_SPACE_TITLE.replace("${space}",space),2000,1);
 	     waitForAndGetElement(spaMg.ELEMENT_MY_SPACE_INVITATION_RECEIVED_ACCEPT_BTN .replace("${space}",space));
 	     waitForAndGetElement(spaMg.ELEMENT_MY_SPACE_INVITATION_RECEIVED_CANCEL_BTN.replace("${space}",space));
 	     
-	     /*magAc.signOut();
-	     magAc.signIn(DATA_USER1, DATA_PASS);
-	     info("Delete created space");
-		 hp.goToMySpaces();
-		 spaMg.deleteSpace(space,false);
-		 info("The space is deleted successfully");*/
  	}
 
 	/**
@@ -1712,6 +1820,18 @@ import org.testng.annotations.*;
 	@Test
 	public  void test25_InvitedUserDeniesInvitation() {
 		info("Test 25 Invited user denies invitation");
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+"@gmail.com";
+		String fullName2=username2+" "+username2;
+		
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		magAc.signIn(username1,password);
 		/*Step Number: 1
 		*Step Name: -
 		*Step Description: 
@@ -1743,7 +1863,7 @@ import org.testng.annotations.*;
 			Send invitation successfully:*/
 		spaHome.goToSpaceSettingTab();
 		setSpaceMg.goToMemberTab();
-		setSpaceMg.inviteUser(DATA_USER2,true,DATA_NAME_USER2);
+		setSpaceMg.inviteUser(username2,true,fullName2);
 		
 		/*Step number: 3
 		*Step Name: -
@@ -1759,8 +1879,7 @@ import org.testng.annotations.*;
 			- On the screen of invited user: The space is moved from invitations space list to Public space list.
 			  [Accept] & [Ignore] button are changed by button [Request to join]
 			- On screen of user invitation sender: user name of invited user is removed from list invited user.*/ 
-		 magAc.signOut();
-	     magAc.signIn(DATA_USER2, DATA_PASS);
+		 magAc.signIn(username2,password);
 	     hp.goToAllSpace();
 	     spaMg.goToInvitationsReceivedTab();
 	     spaMg.ignoreAInvitation(space);
@@ -1771,16 +1890,11 @@ import org.testng.annotations.*;
 	     spaMg.searchSpace(space, "");
 	     waitForAndGetElement(spaMg.ELEMENT_MY_SPACE_ALL_SPACES_REQUEST_TO_JOIN_BTN.replace("${space}", space));
 	    
-	     magAc.signOut();
-	     magAc.signIn(DATA_USER1, DATA_PASS);
+	     magAc.signIn(username1,password);
 	     hp.goToSpecificSpace(space);
 	     spaHome.goToSpaceSettingTab();
 	     setSpaceMg.goToMemberTab();
-	     waitForElementNotPresent(setSpaceMg.ELEMENT_SPACE_INVITED_USER_TABLE.replace("${user}",DATA_NAME_USER2),2000,1);
+	     waitForElementNotPresent(setSpaceMg.ELEMENT_SPACE_INVITED_USER_TABLE.replace("${user}",username2),2000,1);
 	     
-	     /*info("Delete created space");
-		 hp.goToMySpaces();
-		 spaMg.deleteSpace(space,false);
-		 info("The space is deleted successfully");*/
  	}
 }

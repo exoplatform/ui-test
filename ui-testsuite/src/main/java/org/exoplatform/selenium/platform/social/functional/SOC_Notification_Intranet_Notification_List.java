@@ -56,13 +56,18 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- Unread notifications are displayed in the list*/
 
-		info("Create 3 users for testing");
-		createNewUser(3);
-		
-		info("User A login");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(0), password);
-		Utils.pause(3000);
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+"@gmail.com";
+		String username3 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email3 = username3+"@gmail.com";
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		addUserPage.addUser(username3, password, email3, username3, username3);
+		magAc.signIn(username1,password);
 		
 		info("goto My notification");
 		navTool.goToMyNotifications();
@@ -72,7 +77,7 @@ import org.testng.annotations.*;
 		info("User A sent a connection request to User B");
 		Utils.pause(3000);
 		hp.goToConnections();
-		connMag.connectToAUser(arrayUser.get(1));
+		connMag.connectToAUser(username2);
 		
 		info("User A add an activity");
 		String activity = txData.getContentByArrayTypeRandom(1) + getRandomNumber();
@@ -82,13 +87,12 @@ import org.testng.annotations.*;
 		hpAct.checkActivity(activity);
 		
 		info("User B login");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(1), password);
+		magAc.signIn(username2, password);
 		
 		info("User A and User B are connected");
 		Utils.pause(3000);
 		hp.goToConnections();
-		connMag.acceptAConnection(arrayUser.get(0));
+		connMag.acceptAConnection(username1);
 		
 		info("UserB comments in UserA's activity");
 		String comment = txData.getContentByArrayTypeRandom(1) + getRandomNumber();
@@ -102,26 +106,24 @@ import org.testng.annotations.*;
 		comments.add(comment);
 		
 		info("User C login");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(2), password);
+		magAc.signIn(username3, password);
 		
 		info("User C sent a connection request to User A");
 		Utils.pause(3000);
 		hp.goToConnections();
-		connMag.connectToAUser(arrayUser.get(0));
+		connMag.connectToAUser(username1);
 		
 		String statusSendRq=notiIntranetData.getContentByArrayTypeRandom(2);
 		String statusLikeAc=notiIntranetData.getContentByArrayTypeRandom(6);
 		String statusCommAc=notiIntranetData.getNotiContent(0);
 		
 		info("Log in with User A");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(0), password);
+		magAc.signIn(username1, password);
 		Utils.pause(3000);
 		navTool.goToIntranetNotification();
-		intraNot.checkStatus(statusSendRq,arrayUser.get(2));
-		intraNot.checkStatus(statusCommAc,arrayUser.get(1));
-		intraNot.checkStatus(statusLikeAc,arrayUser.get(1));
+		intraNot.checkStatus(statusSendRq,username3);
+		intraNot.checkStatus(statusCommAc,username2);
+		intraNot.checkStatus(statusLikeAc,username2);
 		
 		/*Step number: 2
 		*Step Name: 
@@ -135,7 +137,7 @@ import org.testng.annotations.*;
 		navTool.goToIntranetNotification();
 		
 		info("Click 1 notification area of a like notification");
-		intraNot.goToDetailLikeNotification(arrayUser.get(1), true);
+		intraNot.goToDetailLikeNotification(username2, true);
 		waitForAndGetElement(intraNot.ELEMENT_INTRANET_NOTIFICATION_DETAIL_ACTIVITY_DES.replace("$des",activity));
 		
 		/*Step number: 3
@@ -149,7 +151,7 @@ import org.testng.annotations.*;
 			- The previously clicked notifications is displayed as read (different layout)*/
 		Utils.pause(3000);
 		navTool.goToIntranetNotification();
-		intraNot.checkReadNotification(statusLikeAc,arrayUser.get(1));
+		intraNot.checkReadNotification(statusLikeAc,username2);
 		
 		/*Step number: 4
 		*Step Name: 
@@ -160,8 +162,8 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- The notification message is updated accordingly
 			- The notification become unread (different layout)*/ 
-		intraNot.acceptRqConnection(arrayUser.get(2));
-		intraNot.checkReadNotification(statusSendRq, arrayUser.get(2));
+		intraNot.acceptRqConnection(username3);
+		intraNot.checkReadNotification(statusSendRq,username3);
 
  	}
 
@@ -184,22 +186,24 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- The notifications list is revealed
 			- [Mark as read] is displayed at the top of the notification popover.*/
-		info("Create 2 users for testing");
-		createNewUser(2);
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+"@gmail.com";
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		magAc.signIn(username1,password);
 		
-		info("User A login");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(0), password);
-		Utils.pause(3000);
 		
 		info("User A sent a connection request to User B");
 		Utils.pause(3000);
 		hp.goToConnections();
-		connMag.connectToAUser(arrayUser.get(1));
+		connMag.connectToAUser(username2);
 		
 		info("User B login");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(1), password);
+		magAc.signIn(username2, password);
 		
 		Utils.pause(3000);
 		navTool.goToIntranetNotification();
@@ -218,7 +222,7 @@ import org.testng.annotations.*;
         intraNot.markAllAsRead();
        
         info("All unread notifications are changed to read");
-        intraNot.checkReadNotification(statusSendRq,arrayUser.get(0));
+        intraNot.checkReadNotification(statusSendRq,username1);
         
 		/*Step number: 3
 		*Step Name: Step 3 : Check View All page
@@ -231,7 +235,7 @@ import org.testng.annotations.*;
        intraNot.goToAllNotification();
      
        info("All unread notifications have been changed to read");
-       intraNot.checkReadNotification(statusSendRq,arrayUser.get(0));
+       intraNot.checkReadNotification(statusSendRq,username1);
 
  	}
 
@@ -254,13 +258,19 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- The notifications list is revealed
 			- For each notification, a cross icon is available on the right top corner*/
-		info("Create 3 users for testing");
-		createNewUser(3);
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+"@gmail.com";
+		String username3 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email3 = username3+"@gmail.com";
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		addUserPage.addUser(username3, password, email3, username3, username3);
+		magAc.signIn(username1,password);
 		
-		info("User A login");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(0), password);
-		Utils.pause(3000);
 		
 		info("goto My notification");
 		navTool.goToMyNotifications();
@@ -270,7 +280,7 @@ import org.testng.annotations.*;
 		info("User A sent a connection request to User B");
 		Utils.pause(3000);
 		hp.goToConnections();
-		connMag.connectToAUser(arrayUser.get(1));
+		connMag.connectToAUser(username2);
 		
 		info("User A add an activity");
 		String activity = txData.getContentByArrayTypeRandom(1) + getRandomNumber();
@@ -280,13 +290,12 @@ import org.testng.annotations.*;
 		hpAct.checkActivity(activity);
 		
 		info("User B login");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(1), password);
+		magAc.signIn(username2, password);
 		
 		info("User A and User B are connected");
 		Utils.pause(3000);
 		hp.goToConnections();
-		connMag.acceptAConnection(arrayUser.get(0));
+		connMag.acceptAConnection(username1);
 		
 		info("UserB comments in UserA's activity");
 		String comment = txData.getContentByArrayTypeRandom(1) + getRandomNumber();
@@ -300,30 +309,28 @@ import org.testng.annotations.*;
 		comments.add(comment);
 		
 		info("User C login");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(2), password);
+		magAc.signIn(username3, password);
 		
 		info("User C sent a connection request to User A");
 		Utils.pause(3000);
 		hp.goToConnections();
-		connMag.connectToAUser(arrayUser.get(0));
+		connMag.connectToAUser(username1);
 		
 		String statusSendRq=notiIntranetData.getContentByArrayTypeRandom(2);
 		String statusLikeAc=notiIntranetData.getContentByArrayTypeRandom(6);
 		String statusCommAc=notiIntranetData.getNotiContent(0);
 		
 		info("Log in with User A");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(0), password);
+		magAc.signIn(username1, password);
 		Utils.pause(3000);
 		navTool.goToIntranetNotification();
-		intraNot.checkStatus(statusSendRq,arrayUser.get(2));
-		intraNot.checkStatus(statusCommAc,arrayUser.get(1));
-		intraNot.checkStatus(statusLikeAc,arrayUser.get(1));
+		intraNot.checkStatus(statusSendRq,username3);
+		intraNot.checkStatus(statusCommAc,username2);
+		intraNot.checkStatus(statusLikeAc,username2);
 		
 		Utils.pause(3000);
 		info("Click 1 notification area of a like notification");
-		intraNot.goToDetailLikeNotification(arrayUser.get(1),true);
+		intraNot.goToDetailLikeNotification(username2,true);
 		waitForAndGetElement(intraNot.ELEMENT_INTRANET_NOTIFICATION_DETAIL_ACTIVITY_DES.replace("$des",activity));
 
 		/*Step number: 2
@@ -338,7 +345,7 @@ import org.testng.annotations.*;
 		Utils.pause(3000);
 		navTool.goToIntranetNotification();
 		intraNot.removeNotificationByIndex(3);
-		intraNot.checkNotPresentStatus(statusLikeAc,arrayUser.get(1));
+		intraNot.checkNotPresentStatus(statusLikeAc,username2);
 
 		/*Step number: 3
 		*Step Name: 
@@ -350,7 +357,7 @@ import org.testng.annotations.*;
 			- The read notification is displayed in the view all page*/
 		info("The read notification is displayed in the view all page");
 		intraNot.goToAllNotification();
-		intraNot.checkStatus(statusLikeAc,arrayUser.get(1));
+		intraNot.checkStatus(statusLikeAc,username2);
 
 		/*Step number: 4
 		*Step Name: 
@@ -365,7 +372,7 @@ import org.testng.annotations.*;
 		Utils.pause(3000);
 		navTool.goToIntranetNotification();
 		intraNot.removeNotificationByIndex(2);
-		intraNot.checkStatus(statusCommAc,arrayUser.get(1));
+		intraNot.checkStatus(statusCommAc,username2);
 		
 		/*Step number: 5
 		*Step Name: 
@@ -377,7 +384,7 @@ import org.testng.annotations.*;
 			- The unread notification is displayed in the View All page*/ 
 		info("The unread notification is displayed in the View All page");
 		intraNot.goToAllNotification();
-		intraNot.checkStatus(statusCommAc,arrayUser.get(1));
+		intraNot.checkStatus(statusCommAc,username2);
  	}
 
 	/**
@@ -401,13 +408,18 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- The list is revealed 
 			- The notifications are ordered from the newest at the top to the latest at the bottom (connection request, comment, like)*/ 
-		info("Create 3 users for testing");
-		createNewUser(3);
-		
-		info("User A login");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(0), password);
-		Utils.pause(3000);
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+"@gmail.com";
+		String username3 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email3 = username3+"@gmail.com";
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		addUserPage.addUser(username3, password, email3, username3, username3);
+		magAc.signIn(username1,password);
 		
 		info("goto My notification");
 		navTool.goToMyNotifications();
@@ -417,7 +429,7 @@ import org.testng.annotations.*;
 		info("User A sent a connection request to User B");
 		Utils.pause(3000);
 		hp.goToConnections();
-		connMag.connectToAUser(arrayUser.get(1));
+		connMag.connectToAUser(username2);
 		
 		info("User A add an activity");
 		String activity = txData.getContentByArrayTypeRandom(1) + getRandomNumber();
@@ -427,13 +439,12 @@ import org.testng.annotations.*;
 		hpAct.checkActivity(activity);
 		
 		info("User B login");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(1), password);
+		magAc.signIn(username2, password);
 		
 		info("User A and User B are connected");
 		Utils.pause(3000);
 		hp.goToConnections();
-		connMag.acceptAConnection(arrayUser.get(0));
+		connMag.acceptAConnection(username1);
 		
 		info("UserB comments in UserA's activity");
 		String comment = txData.getContentByArrayTypeRandom(1) + getRandomNumber();
@@ -447,28 +458,26 @@ import org.testng.annotations.*;
 		comments.add(comment);
 		
 		info("User C login");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(2), password);
+		magAc.signIn(username3, password);
 		
 		info("User C sent a connection request to User A");
 		Utils.pause(3000);
 		hp.goToConnections();
-		connMag.connectToAUser(arrayUser.get(0));
+		connMag.connectToAUser(username1);
 		
 		String statusSendRq=notiIntranetData.getContentByArrayTypeRandom(2);
 		String statusLikeAc=notiIntranetData.getContentByArrayTypeRandom(6);
 		String statusCommAc=notiIntranetData.getNotiContent(0);
 		
 		info("Log in with User A");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(0), password);
+		magAc.signIn(username1, password);
 		Utils.pause(3000);
 		
 		info("The notifications are ordered from the newest at the top to the latest at the bottom (connection request, comment, like)");
 		navTool.goToIntranetNotification();
-		intraNot.checkOrderNotifications(1,statusSendRq,arrayUser.get(2));
-		intraNot.checkOrderNotifications(2,statusCommAc,arrayUser.get(1));
-		intraNot.checkOrderNotifications(3,statusLikeAc,arrayUser.get(1));
+		intraNot.checkOrderNotifications(1,statusSendRq,username3);
+		intraNot.checkOrderNotifications(2,statusCommAc,username2);
+		intraNot.checkOrderNotifications(3,statusLikeAc,username2);
 		
 		
  	}
@@ -493,20 +502,17 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- User A is doing some actions on wiki*/
-		info("Create 1 users for testing");
-		createNewUser(2);
-		
-		info("Set User A to admin");
-		String[] arrayGroupPath={"Platform","Administration"};
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+"@gmail.com";
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
 		navTool.goToUsersAndGroupsManagement();
-		userAndGroup.goToGroupTab();
-		userAndGroup.selectGroup(arrayGroupPath);
-		userAndGroup.addUsersToGroup(arrayUser.get(0),"*", false,true);
-		
-		info("Sign in with UserA");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(0), password);
-		Utils.pause(3000);
+		userAndGroup.addUserAdmin(username1);
+		magAc.signIn(username1,password);
 		
 		info("UserA created a new wiki page");
 		String wiki = txData.getContentByArrayTypeRandom(1) + getRandomNumber();
@@ -539,12 +545,12 @@ import org.testng.annotations.*;
         ActivityStream hpAct2 = new ActivityStream(newDriver);
         
         info("User B login on drifferent browser");
-		magAc2.signIn(arrayUser.get(1), password);
+		magAc2.signIn(username2, password);
 		
 		info("User B sent a connection request to userA");
 		Utils.pause(3000);
 		hp2.goToConnections();
-		connMag2.connectToAUser(arrayUser.get(0));
+		connMag2.connectToAUser(username1);
 		
 		info("Switch to user1 and check intranet notification");
 		isDriver = true;
@@ -563,7 +569,7 @@ import org.testng.annotations.*;
 		info("The connection request notifications is displayed");
 		String statusSendRq=notiIntranetData.getContentByArrayTypeRandom(2);
 		navTool.goToIntranetNotification();
-		intraNot.checkStatus(statusSendRq,arrayUser.get(1));
+		intraNot.checkStatus(statusSendRq,username2);
 		
 		/*Step number: 4
 		*Step Name: 
@@ -582,14 +588,14 @@ import org.testng.annotations.*;
 		info("Go to the actiivty stream and mention User A");
 		isDriver = false;
         hp2.goToHomePage();
-        hpAct2.mentionUserActivity(arrayUser.get(0), text);
+        hpAct2.mentionUserActivity(username1, text);
         newDriver.close();
         
         info("Check badge and content notification of User A");
         isDriver = true;
         intraNot.checkBadgeNoti(1);
         navTool.goToIntranetNotification();
-		intraNot.checkStatus(statusMention,arrayUser.get(1));
+		intraNot.checkStatus(statusMention,username2);
 		
  	}
 
@@ -616,13 +622,19 @@ import org.testng.annotations.*;
 			- The number in the badge is still 2
 			- User A has still 3 unread notifications*/
 		
-		info("Create 3 users for testing");
-		createNewUser(3);
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+"@gmail.com";
+		String username3 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email3 = username3+"@gmail.com";
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		addUserPage.addUser(username3, password, email3, username3, username3);
+		magAc.signIn(username1,password);
 		
-		info("User A login");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(0), password);
-		Utils.pause(3000);
 		
 		info("goto My notification");
 		navTool.goToMyNotifications();
@@ -632,7 +644,7 @@ import org.testng.annotations.*;
 		info("User A sent a connection request to User B");
 		Utils.pause(3000);
 		hp.goToConnections();
-		connMag.connectToAUser(arrayUser.get(1));
+		connMag.connectToAUser(username2);
 		
 		info("User A add an activity");
 		String activity = txData.getContentByArrayTypeRandom(1) + getRandomNumber();
@@ -642,13 +654,12 @@ import org.testng.annotations.*;
 		hpAct.checkActivity(activity);
 		
 		info("User B login");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(1), password);
+		magAc.signIn(username2, password);
 		
 		info("User A and User B are connected");
 		Utils.pause(3000);
 		navTool.goToIntranetNotification();
-		intraNot.acceptRqConnection(arrayUser.get(0));
+		intraNot.acceptRqConnection(username1);
 		
 		info("UserB comments in UserA's activity");
 		String comment = txData.getContentByArrayTypeRandom(1) + getRandomNumber();
@@ -662,8 +673,7 @@ import org.testng.annotations.*;
 		comments.add(comment);
 		
 		info("User A login");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(0), password);
+		magAc.signIn(username1, password);
 		
 		String statusLikeAc=notiIntranetData.getContentByArrayTypeRandom(6);
 		String statusCommAc=notiIntranetData.getNotiContent(0);
@@ -673,11 +683,10 @@ import org.testng.annotations.*;
 		
 		info("View comment notification of User A");
 		navTool.goToIntranetNotification();
-		intraNot.checkStatus(statusCommAc,arrayUser.get(1));
+		intraNot.checkStatus(statusCommAc,username2);
 		
 		info("User B login");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(1), password);
+		magAc.signIn(username2, password);
 		
 		info("User B likes User A's activity");
 		hp.goToHomePage();
@@ -685,11 +694,10 @@ import org.testng.annotations.*;
 		hpAct.likeActivity(activity);
 		
 		info("User B mention User A in a activity");
-		hpAct.mentionUserActivity(arrayUser.get(0),textMention);
+		hpAct.mentionUserActivity(username1,textMention);
 		
 		info("User A login");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(0), password);
+		magAc.signIn(username1, password);
 		Utils.pause(3000);
 		
 		info("The number in the badge is still 2");
@@ -708,23 +716,21 @@ import org.testng.annotations.*;
 			- The number in the badge is updated to 4
 			- User A has 5 unread notifications*/ 
 		info("User C login");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(2), password);
+		magAc.signIn(username3, password);
 		
 		info("User C sent a connection request to User A");
 		Utils.pause(3000);
 		hp.goToConnections();
-		connMag.connectToAUser(arrayUser.get(0));
+		connMag.connectToAUser(username1);
 		
 		info("User C mention to User A");
 		String textMention1=txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		hp.goToHomePage();
 		Utils.pause(3000);
-		hpAct.mentionUserActivity(arrayUser.get(0),textMention1);
+		hpAct.mentionUserActivity(username1,textMention1);
 		
 		info("User A login");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(0), password);
+		magAc.signIn(username1, password);
 		
         Utils.pause(3000);
 		
@@ -734,11 +740,11 @@ import org.testng.annotations.*;
 		info("User A has still 5 unread notifications");
 		String statusSendRq=notiIntranetData.getContentByArrayTypeRandom(2);
         navTool.goToIntranetNotification();
-        intraNot.checkUnreadNotification(statusLikeAc,arrayUser.get(1));
-		intraNot.checkUnreadNotification(statusMention,arrayUser.get(1));
-		intraNot.checkUnreadNotification(statusCommAc,arrayUser.get(1));
-		intraNot.checkUnreadNotification(statusSendRq,arrayUser.get(2));
-		intraNot.checkUnreadNotification(statusMention,arrayUser.get(2));
+        intraNot.checkUnreadNotification(statusLikeAc,username2);
+		intraNot.checkUnreadNotification(statusMention,username2);
+		intraNot.checkUnreadNotification(statusCommAc,username2);
+		intraNot.checkUnreadNotification(statusSendRq,username3);
+		intraNot.checkUnreadNotification(statusMention,username3);
 		
 
  	}
@@ -763,13 +769,16 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- A [View All] button is displayed at the end of the popover*/
-		info("Create 2 users for testing");
-		createNewUser(2);
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+"@gmail.com";
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		magAc.signIn(username1,password);
 		
-		info("User A login");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(0), password);
-		Utils.pause(3000);
 		
 		info("goto My notification");
 		navTool.goToMyNotifications();
@@ -779,7 +788,7 @@ import org.testng.annotations.*;
 		info("User A sent a connection request to User B");
 		Utils.pause(3000);
 		hp.goToConnections();
-		connMag.connectToAUser(arrayUser.get(1));
+		connMag.connectToAUser(username2);
 		
 		info("User A add an activity");
 		String activity = txData.getContentByArrayTypeRandom(1) + getRandomNumber();
@@ -789,13 +798,12 @@ import org.testng.annotations.*;
 		hpAct.checkActivity(activity);
 		
 		info("User B login");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(1), password);
+		magAc.signIn(username2, password);
 		
 		info("User A and User B are connected");
 		Utils.pause(3000);
 		navTool.goToIntranetNotification();
-		intraNot.acceptRqConnection(arrayUser.get(0));
+		intraNot.acceptRqConnection(username1);
 		
 		info("UserB comments in UserA's activity");
 		String comment = txData.getContentByArrayTypeRandom(1) + getRandomNumber();
@@ -809,8 +817,7 @@ import org.testng.annotations.*;
 		comments.add(comment);
 		
 		info("User A login");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(0), password);
+		magAc.signIn(username1, password);
 		Utils.pause(3000);
 		
 		info("View comment notification of User A");
@@ -818,8 +825,7 @@ import org.testng.annotations.*;
 		intraNot.goToDetailCommentNotification(activity, true);
 		
 		info("User B login");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(1), password);
+		magAc.signIn(username2, password);
 		
 		info("User B likes User A's activity");
 		hp.goToHomePage();
@@ -828,11 +834,10 @@ import org.testng.annotations.*;
 		
 		info("User B mention User A in a activity");
 		String textMention=txData.getContentByArrayTypeRandom(1)+getRandomNumber();
-		hpAct.mentionUserActivity(arrayUser.get(0),textMention);
+		hpAct.mentionUserActivity(username1,textMention);
 		
 		info("User A login");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(0), password);
+		magAc.signIn(username1, password);
 		Utils.pause(3000);
 		
 		/*Step number: 2
@@ -887,13 +892,13 @@ import org.testng.annotations.*;
 			The list is revealed and is empty :
 			- The link Mark as read is hidden 
 			- The UI of the list must indicate there is no notification to display*/ 
-		info("Create 1 user for testing");
-		createNewUser(1);
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		magAc.signIn(username1,password);
 		
-		info("User A login");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(0), password);
-		Utils.pause(3000);
 		
 		navTool.goToIntranetNotification();
 		info("The link Mark as read is hidden");
@@ -922,13 +927,16 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- [Mark as read] is displayed at the top of the popover*/
-		info("Create 2 users for testing");
-		createNewUser(2);
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+"@gmail.com";
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		magAc.signIn(username1,password);
 		
-		info("User A login");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(0), password);
-		Utils.pause(3000);
 		
 		info("goto My notification");
 		navTool.goToMyNotifications();
@@ -938,7 +946,7 @@ import org.testng.annotations.*;
 		info("User A sent a connection request to User B");
 		Utils.pause(3000);
 		hp.goToConnections();
-		connMag.connectToAUser(arrayUser.get(1));
+		connMag.connectToAUser(username2);
 		
 		info("User A add an activity");
 		String activity = txData.getContentByArrayTypeRandom(1) + getRandomNumber();
@@ -948,13 +956,12 @@ import org.testng.annotations.*;
 		hpAct.checkActivity(activity);
 		
 		info("User B login");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(1), password);
+		magAc.signIn(username2, password);
 		
 		info("User A and User B are connected");
 		Utils.pause(3000);
 		navTool.goToIntranetNotification();
-		intraNot.acceptRqConnection(arrayUser.get(0));
+		intraNot.acceptRqConnection(username1);
 		
 		info("UserB comments in UserA's activity");
 		String comment = txData.getContentByArrayTypeRandom(1) + getRandomNumber();
@@ -969,8 +976,7 @@ import org.testng.annotations.*;
 		comments.add(comment);
 		
 		info("User A login");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(0), password);
+		magAc.signIn(username1, password);
 		Utils.pause(3000);
 
 		/*Step number: 2
@@ -989,8 +995,8 @@ import org.testng.annotations.*;
 		intraNot.markAllAsRead();
 		
 		info("There is no new notification to read");
-		intraNot.checkReadNotification(statusLikeAc,arrayUser.get(1));
-		intraNot.checkReadNotification(statusCommAc,arrayUser.get(1));
+		intraNot.checkReadNotification(statusLikeAc,username2);
+		intraNot.checkReadNotification(statusCommAc,username2);
 		
 		info("[Mark as read] is hidden");
 		waitForElementNotPresent(intraNot.ELEMENT_INTRANET_NOTIFICATION_MARK_ALL_AS_READ);
@@ -1018,13 +1024,13 @@ import org.testng.annotations.*;
 			- The button View All is not displayed
 			- [Mark as read] is hidden
 			- The UI indicates there is no notification to display*/ 
-		info("Create 1 user for testing");
-		createNewUser(1);
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		magAc.signIn(username1,password);
 		
-		info("User A login");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(0), password);
-		Utils.pause(3000);
 		
 		navTool.goToIntranetNotification();
 		info("The link Mark as read is hidden");
@@ -1106,13 +1112,19 @@ import org.testng.annotations.*;
 			* The label "No Notifications" is displayed* 
 			* The link [Mark all as read] is not displayed anymore* 
 			* [View All] is displayed*/ 
-		info("Create 2 users for testing");
-		createNewUser(3);
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+"@gmail.com";
+		String username3 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email3 = username3+"@gmail.com";
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		addUserPage.addUser(username3, password, email3, username3, username3);
+		magAc.signIn(username1,password);
 		
-		info("User A login");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(0), password);
-		Utils.pause(3000);
 		
 		info("goto My notification");
 		navTool.goToMyNotifications();
@@ -1122,7 +1134,7 @@ import org.testng.annotations.*;
 		info("User A sent a connection request to User B");
 		Utils.pause(3000);
 		hp.goToConnections();
-		connMag.connectToAUser(arrayUser.get(1));
+		connMag.connectToAUser(username2);
 		
 		info("User A add an activity");
 		String activity = txData.getContentByArrayTypeRandom(1) + getRandomNumber();
@@ -1132,13 +1144,12 @@ import org.testng.annotations.*;
 		hpAct.checkActivity(activity);
 		
 		info("User B login");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(1), password);
+		magAc.signIn(username2, password);
 		
 		info("User A and User B are connected");
 		Utils.pause(3000);
 		navTool.goToIntranetNotification();
-		intraNot.acceptRqConnection(arrayUser.get(0));
+		intraNot.acceptRqConnection(username1);
 		
 		info("UserB comments in UserA's activity");
 		String comment = txData.getContentByArrayTypeRandom(1) + getRandomNumber();
@@ -1153,18 +1164,16 @@ import org.testng.annotations.*;
 		comments.add(comment);
 		
 		info("User C login");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(2), password);
+		magAc.signIn(username3, password);
 		Utils.pause(3000);
 		
 		info("User C sent a connection request to User A");
 		Utils.pause(3000);
 		hp.goToConnections();
-		connMag.connectToAUser(arrayUser.get(0));
+		connMag.connectToAUser(username1);
 		
 		info("User A login");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(0), password);
+		magAc.signIn(username1, password);
 		Utils.pause(3000);
 		
 		info("User A removed some notificaitons form User B");
@@ -1175,7 +1184,7 @@ import org.testng.annotations.*;
 		info("User A refuse connection with User C");
 		Utils.pause(3000);
 		navTool.goToIntranetNotification();
-		intraNot.refuseRqConnection(arrayUser.get(0));
+		intraNot.refuseRqConnection(username1);
 		
 		info("The link Mark as read is hidden");
 		waitForElementNotPresent(intraNot.ELEMENT_INTRANET_NOTIFICATION_MARK_ALL_AS_READ);
@@ -1214,27 +1223,29 @@ import org.testng.annotations.*;
 			* The label "No Notifications" is displayed*
 			*  The link [Mark all as read] is not displayed anymore* 
 			*  [View All] is not displayed*/ 
-		info("Create 1 user for testing");
-		createNewUser(2);
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+"@gmail.com";
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		magAc.signIn(username1,password);
 		
-		info("User A login");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(0), password);
-		Utils.pause(3000);
 		
 		info("User A sent a connection request to User B");
 		Utils.pause(3000);
 		hp.goToConnections();
-		connMag.connectToAUser(arrayUser.get(1));
+		connMag.connectToAUser(username2);
 		
 		info("User B login");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(1), password);
+		magAc.signIn(username2, password);
 		
 		info("User B refuse connection with User A");
 		Utils.pause(3000);
 		navTool.goToIntranetNotification();
-		intraNot.refuseRqConnection(arrayUser.get(0));
+		intraNot.refuseRqConnection(username1);
 		
 		info("The link Mark as read is hidden");
 		navTool.goToIntranetNotification();

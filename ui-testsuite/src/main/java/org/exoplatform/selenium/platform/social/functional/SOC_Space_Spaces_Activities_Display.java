@@ -18,6 +18,14 @@ import org.testng.annotations.*;
 		String regist =spRegisData.getSpaceRegistration(2);
 		String[] arrayRight ={regist};
 		
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		magAc.signIn(username1,password);
+		
 		info("create new space");
 		String space = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		hp.goToMySpaces();
@@ -63,6 +71,16 @@ import org.testng.annotations.*;
 	@Test
 	public  void test02_03_NotDisplaySpaceActivityAfterRemovingASpaceMember() {
 		info("Test 02: Not display Space activity after invite other user to a space");
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+"@gmail.com";
+		
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		magAc.signIn(username1,password);
 		/*Step Number: 1
 		*Step Name: Invite an user
 		*Step Description: 
@@ -84,15 +102,14 @@ import org.testng.annotations.*;
 		
 		spaHome.goToSpaceSettingTab();
 		setSpaceMg.goToMemberTab();
-		setSpaceMg.inviteUser(DATA_USER2,false,"");
+		setSpaceMg.inviteUser(username2,false,"");
 		
 		info("back to home page");
 		hp.goToHomePage();
 		info("last comment is still Join space");
 		waitForAndGetElement(hpAct.ELEMENT_ACTIVITY_SPACE_SPACE_LAST_COMMENT_JOINSPACE.replace("${space}", space));
 		
-		magAc.signOut();
-		magAc.signIn(DATA_USER2, DATA_PASS);
+		magAc.signIn(username2,password);
 		hp.goToMySpaces();
 		spaMg.acceptAInvitation(space);
 		
@@ -113,11 +130,10 @@ import org.testng.annotations.*;
 			- The number of members of the space activity is updated 
 			-1*/ 
 		info("remove space member");
-		magAc.signOut();
-		magAc.signIn(DATA_USER1, DATA_PASS);
+		magAc.signIn(username1,password);
 		driver.get(urlSpace);
 		spaHome.goToSpaceSettingTab();
-		setSpaceMg.deleteMember(DATA_USER2);
+		setSpaceMg.deleteMember(username2);
 		
 		info("space member is 1 now");
 		hp.goToHomePage();
@@ -137,6 +153,14 @@ import org.testng.annotations.*;
 		String space = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		String visib = spVisiData.getSpaceVisible(1);
 		String[] arrayRight ={visib};
+		
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		magAc.signIn(username1,password);
 		
 		/*Step Number: 1
 		*Step Name: Check activity create a hidden space

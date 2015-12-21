@@ -15,11 +15,6 @@ import org.testng.annotations.*;
 	*/
 	public class Plf_Navigation_TopNavigation extends Plf_TestConfig{
 		
-		@AfterMethod
-		public void setAfterMethod(){
-			magAc.signOut();
-			magAc.signIn(DATA_USER1, DATA_PASS);
-		}
 
 	/**
 	*<li> Case ID:120889.</li>

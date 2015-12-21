@@ -12,7 +12,7 @@ import org.openqa.selenium.By;
  *
  */
 
-public class TaskManagementLocatorObject extends PlatformBase {
+public class TaskManagementLocator extends PlatformBase {
 
 	/***********************************************************LEFT PANEL******************************************************/
 	//General

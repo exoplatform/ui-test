@@ -31,13 +31,15 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- A Post on my Space notifications is displayed in the list*/
 		
-		info("Create 2 users for testing");
-		createNewUser(2);
-		
-		info("User A login");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(0), password);
-		Utils.pause(3000);
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+"@gmail.com";
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		magAc.signIn(username1,password);
 		
 		info("goto My notification");
 		navTool.goToMyNotifications();
@@ -54,11 +56,10 @@ import org.testng.annotations.*;
 		hp.goToSpecificSpace(spaceName);
 		spaHome.goToSpaceSettingTab();
 		setSpaceMg.goToMemberTab();
-		setSpaceMg.inviteUser(arrayUser.get(1),true,arrayUser.get(1));
+		setSpaceMg.inviteUser(username2,true,username2+" "+username2);
 		
 		info("User B login");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(1), password);
+		magAc.signIn(username2, password);
 		Utils.pause(3000);
 		
 		info("User B accepted to join the space");
@@ -87,13 +88,12 @@ import org.testng.annotations.*;
 			- $DATE is the date of the notification*/ 
 		
 		info("User A login");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(0), password);
+		magAc.signIn(username1, password);
 		Utils.pause(3000);
 		
 		String status = notiIntranetData.getContentByArrayTypeRandom(10);
 		navTool.goToIntranetNotification();
-		intraNot.checkAvatarInStatus(arrayUser.get(1), true);
+		intraNot.checkAvatarInStatus(username2, true);
 		intraNot.checkStatusSpace(status,spaceName);
 		intraNot.checkActivityTitleInStatus(activity, true);
  	}
@@ -119,13 +119,15 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- A Post on my Space notifications is displayed in the list*/
-		info("Create 2 users for testing");
-		createNewUser(2);
-		
-		info("User A login");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(0), password);
-		Utils.pause(3000);
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+"@gmail.com";
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		magAc.signIn(username1,password);
 		
 		info("goto My notification");
 		navTool.goToMyNotifications();
@@ -142,11 +144,10 @@ import org.testng.annotations.*;
 		hp.goToSpecificSpace(spaceName);
 		spaHome.goToSpaceSettingTab();
 		setSpaceMg.goToMemberTab();
-		setSpaceMg.inviteUser(arrayUser.get(1),true,arrayUser.get(1));
+		setSpaceMg.inviteUser(username2,true,username2+" "+username2);
 		
 		info("User B login");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(1), password);
+		magAc.signIn(username2, password);
 		Utils.pause(3000);
 		
 		info("User B accepted to join the space");
@@ -169,8 +170,7 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			The activity is displayedin the activity viewer with all comments expanded*/ 
 		info("User A login");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(0), password);
+		magAc.signIn(username1, password);
 		Utils.pause(3000);
 		
 		navTool.goToIntranetNotification();
@@ -200,13 +200,15 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- A Post on my Space notifications is displayed in the list*/
-		info("Create 2 users for testing");
-		createNewUser(2);
-		
-		info("User A login");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(0), password);
-		Utils.pause(3000);
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+"@gmail.com";
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		magAc.signIn(username1,password);
 		
 		info("goto My notification");
 		navTool.goToMyNotifications();
@@ -223,11 +225,10 @@ import org.testng.annotations.*;
 		hp.goToSpecificSpace(spaceName);
 		spaHome.goToSpaceSettingTab();
 		setSpaceMg.goToMemberTab();
-		setSpaceMg.inviteUser(arrayUser.get(1),true,arrayUser.get(1));
+		setSpaceMg.inviteUser(username2,true,username2+" "+username2);
 		
 		info("User B login");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(1), password);
+		magAc.signIn(username2, password);
 		Utils.pause(3000);
 		
 		info("User B accepted to join the space");
@@ -250,8 +251,7 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- Post of my Space notification is displayed / available in the page*/
 		info("User A login");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(0), password);
+		magAc.signIn(username1, password);
 		Utils.pause(3000);
 		
 		String status = notiIntranetData.getContentByArrayTypeRandom(10);

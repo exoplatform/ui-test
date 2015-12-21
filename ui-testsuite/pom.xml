@@ -683,6 +683,14 @@
 		
 		<!-- Testing failed-->
 		<profile>
+			<id>restrictedPage-func-part03</id>
+			<properties>
+				<testSuite>restrictedPage-func-part03.xml</testSuite>
+			</properties>
+		</profile>
+		
+		<!-- Testing failed-->
+		<profile>
 			<id>testng-failed</id>
 			<properties>
 				<testSuite>testng-failed.xml</testSuite>
@@ -702,6 +710,7 @@
 					<target>1.8</target>
 				</configuration>
 			</plugin>
+					
 			<!-- Execute integration tests -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>

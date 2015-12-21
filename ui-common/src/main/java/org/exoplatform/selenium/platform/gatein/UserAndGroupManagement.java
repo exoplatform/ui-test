@@ -1,141 +1,22 @@
 package org.exoplatform.selenium.platform.gatein;
 
 import static org.exoplatform.selenium.TestLogger.info;
+
 import java.util.ArrayList;
+
 import junit.framework.Assert;
+
 import org.exoplatform.selenium.Dialog;
 import org.exoplatform.selenium.ManageAlert;
 import org.exoplatform.selenium.Utils;
-import org.exoplatform.selenium.platform.PlatformBase;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 
-public class UserAndGroupManagement extends PlatformBase {
+public class UserAndGroupManagement extends GateinLocator {
 	
-	public final String ELEMENT_LINK_SETUP = ".//*[@id='UISetupPlatformToolBarPortlet']/a";
-	public final String ELEMENT_MANAGE_USER = ".//*[@id='UISetupPlatformToolBarPortlet']//a[text()='Users']";	
-	public final String ELEMENT_GROUP_AND_ROLE_LINK = ".//*[@id='UISetupPlatformToolBarPortlet']//a[contains(text(),'Groups and Roles')]";
-	public final String ELEMENT_USER_MANAGEMENT_ACTIVE_TAB = "//a[contains(@class,'actionIcon userButton active')]/i";
-	public final String ELEMENT_USER_MANAGEMENT_TAB = "//a[contains(@class,'actionIcon userButton')]/i";
-	public final String ELEMENT_LINK_USERS = ".//*[@id='UISetupPlatformToolBarPortlet']//a[contains(text(),'Add Users')]";
-	public final String ELEMENT_GROUP_MANAGEMENT_TAB = "//a[contains(@class,'actionIcon groupButton')]/i";
-	public final String ELEMENT_GROUP_MANAGEMENT_INFO = ".//*[contains(text(),'Group Info')]";
-	public final String ELEMENT_GROUP_MANAGEMENT_SELECT_GROUP=".//*[@class='groupNavigationContainer']//*[contains(@title,'${name}')]";
-	
-	public final String ELEMENT_TAB_MEMBERSHIP_MANAGEMENT = "//a[contains(@class,'actionIcon membershipButton')]/i";
-	public final String ELEMENT_MEMBERSHIP_MANAGEMENT_GRID = "//*[contains(text(), 'Add/Edit Membership')]";
-	public final String ELEMENT_GROUP_ADD_NEW_ICON = "//*[@data-original-title='Add New Group']/i";
-	public final By ELEMENT_INPUT_GROUP_NAME = By.id("groupName");
-	public final By ELEMENT_INPUT_LABEL = By.id("label");
-	public final By ELEMENT_TEXTAREA_DESCRIPTION = By.name("description");
-	public final String ELEMENT_GROUP_EDIT_ICON = "//*[@data-original-title='Edit Selected Group']/i";
-	public final By ELEMENT_GROUP_SEARCH_USER_ICON = By.className("uiIconSelectUser uiIconLightGray");
-	public final String ELEMENT_GROUP_SEARCH_USER_ICON_2 = "//*[contains(@class, 'uiIconSelectUser')]";
-	public final By ELEMENT_GROUP_SEARCH_USER_SEARCH_INPUT = By.id("Quick Search");
-	public final String ELEMENT_GROUP_SEARCH_USER_OPTION = "//*[@class='selectbox' and @name='filter']";
-	public final String ELEMENT_GROUP_SEARCH_USER_SEARCH_ICON = ".//*[@data-original-title='Quick Search']/i";
-	public final String ELEMENT_ADDED_GROUP_USER_IN_TABLE = "//*[@id='UIGridUser']//span[contains(text(),'${username}')]";
-	public final String ELEMENT_ADDED_GROUP_USER_IN_TABLE1 = "//*[@id='UIGridUser']//span[contains(text(),'$mem')]/../../*[@headers='userName']/*[contains(.,'$user')]";
-	public final String ELEMENT_EDIT_USER_MEM_IN_TABLE_ICON ="//*[@headers='userName']/*[contains(.,'$user')]/../..//*[contains(@class,'uiIconEdit')]";
-	public final String ELEMENT_EDIT_USER_MEM_FORM = "//*[contains(@class,'UIGroupEditMembershipForm')][contains(.,'$mem')]";
-	public final String ELEMENT_SEARCH_GROUP_USER_IN_TABLE = "//*[@id='UIListUsers']//span[contains(text(),'${username}')]";
-	public final String ELEMENT_ADD_BUTTON = "//*[@class='uiAction uiActionBorder']//a[contains(@class,'btn') and contains(text(),'Add')]";
-	public final String ELEMENT_SELECT_MEMBERSHIP = "//*[@class='selectbox' and @name='membership']";
-	public final String ELEMENT_GROUP_REMOVE_ICON = "//*[@data-original-title='Delete Selected Group']/i";
-	public final String ELEMENT_SAVE_BUTTON = "//button[contains(text(),'Save')]";
-	public final String ELEMENT_SAVE_BUTTON_2 = "//a[contains(@class,'btn') and contains(text(),'Save')]";
-	public final By ELEMENT_INPUT_NAME = By.name("name");
-	public final String ELEMENT_MEMBERSHIP_EDIT_ICON = "//span[contains(text(),'${membership}')]/../..//*[contains(@data-original-title,'Edit Membership')]/i";
-	public final String ELEMENT_MEMBERSHIP_DELETE_ICON = "//span[contains(text(),'${membership}')]/../..//*[contains(@data-original-title,'Delete Membership')]/i";
-	public final String ELEMENT_GROUP_ADDED = "//a[@title='${groupLabel}']";
-	public final String ELEMENT_USER_NAME = "User Name";
-	public final String ELEMENT_CHECK = "//input[@name='${user}']";
-	public final String ELEMENT_USER_NOT_FOUND = "User ${user}not found in group";
-	public final String ELEMENT_GROUP_NODE = "//a[@title='${groupName}']";
-	public final String ELEMENT_MEMBERSHIHP = "//*[@id='UIGrid']//span[text()='${membershipName}']";
-	public final String ELEMENT_MEMBERSHIP_DESCRIPTION ="//*[@id='UIGrid']//span[text()='$des']/../../*[@headers='name']/*[contains(.,'$mem')]";
-	public final String ELEMENT_MEMBERSHIP_INPUT = "//input[@value='${membershipName}']";
-	public final String ELEMENT_USER_EDIT_ICON = ".//*[contains(text(),'${username}')]/../..//*[@data-original-title='Edit User Info']/i";
-
-	//Paging control
-	public final By ELEMENT_PAGINATION_CONTROL=By.xpath(".//*[contains(@class,'pagination')]");
-	public final By ELMEMENT_PAGINATION_CONTROL_DISBALED_NEXT_ARROW=By.xpath(".//*[@class='disabled']//*[contains(@class,'uiIconNextArrow')]");
-	public final By ELEMENT_PAGINATION_TOTAL_PAGE=By.xpath("//*[contains(@class,'pagesTotalNumber')]");
-	public final By ELEMENT_PAGINATION_ENABLED_NEXT_ARROW=By.xpath(".//*[@ data-original-title='Next Page']//*[@class='uiIconNextArrow']");
-	
-	//User tab
-	public final String ELEMENT_USER_TAB=".//*[@id='UIOrganizationPortlet']//*[contains(@class,'uiIconUser uiIconLightGray')]";
-	public final String ELEMENT_CLOSE_MESSAGE = "//*[contains(@title,'Close Window')]";
-	public final By ELEMENT_INPUT_SEARCH_USER_NAME = By.id("searchTerm");
-	public final String ELEMENT_SELECT_SEARCH_OPTION = "//*[contains(@name,'searchOption')]";
-	public final String ELEMENT_SEARCH_ICON_USERS_MANAGEMENT = "//*[contains(@title,'Quick Search')]";
-	public final String ELEMENT_USER_DELETE_ICON = ".//*[contains(text(),'${username}')]/../..//*[@data-original-title='Delete User']/i";
-	public final String ELEMENT_USER_DELETE_ICON1 = "//*[@data-original-title='Delete User']/i";
-	public final String ELEMENT_USER_NAME_IN_USER_LIST=".//*[@id='UIListUsersGird']//*[contains(text(),'$userName')]";
-	//message
-	public final String ELEMENT_MSG_SELECT_USER = "Select User";
-	public final String ELEMENT_MSG_TOTAL_PAGES = "Total pages";
-	public final String ELEMENT_MSG_CONFIRM_DELETE_GROUP = "Are you sure you want to delete this group?";
-	public final String ELEMENT_MSG_CONFIRM_DELETE_MEMBERSHIP = "Are you sure you want to delete this membership?";
-	public final String ELEMENT_MSG_SEARCH_USER_NAME = "User Name";
-	public final String ELEMENT_MSG_CONFIRM_DELETE1 = "Are you sure you want to delete";
-	public final String ELEMENT_MSG_CONFIRM_DELETE = "Are you sure you want to delete ${userName} user account?";
-	public final String ELEMENT_MSG_RESULT = "No result found.";
-	public final String ELEMENT_MSG_UPDATE_USER_PROFILE = "The user profile has been updated.";
-	public final By ELEMENT_OK_BUTTON = By.xpath("//*[contains(text(),'OK')]");
-	public final String ELEMENT_MSG_CANNOT_DELETE = "You cannot delete this membership because it is mandatory.";
-	public final By ELEMENT_OK_BTN = By.xpath("//*[@class='btn'][contains(.,'OK')]");
-	//Account tab
-	public final By ELEMENT_USER_ACCOUNT_INFO_TAB = By.xpath("//*[@data-target='#UIAccountEditInputSet-tab']");
-	public By ELEMENT_EMAIL = By.id("email");
-	public By ELEMENT_FIRSTNAME = By.id("firstName");
-	public By ELEMENT_LASTNAME = By.id("lastName");
-	public By ELEMENT_DISPLAY_NAME = By.id("displayName");
-
-	//Edit user profile Tab
-	public final By ELEMENT_USER_PROFILE_TAB = By.xpath("//*[@data-target='#UIUserProfileInputSet-tab']");
-	public final By ELEMENT_GIVEN_NAME = By.id("user.name.given");
-	public final By ELEMENT_FAMILY_NAME = By.id("user.name.family");
-	public final By ELEMENT_NICK_NAME = By.id("user.name.nickName");
-	public final By ELEMENT_BIRTHDAY = By.id("user.bdate");
-	public final By ELEMENT_GENDER = By.xpath("//*[@name='user.gender']");
-	public final By ELEMENT_EMPLOYER = By.id("user.employer");
-	public final By ELEMENT_DEPARTMENT = By.id("user.department");
-	public final By ELEMENT_JOB_TITLE = By.id("user.jobtitle");
-	public final By ELEMENT_LANGUAGE = By.name("user.language");
-	
-	//User membership tab
-	public final By ELEMENT_USER_MEMBERSHIP_TAB = By.xpath("//*[@data-target='#UIUserMembershipSelector-tab']");
-
-	//Group management
-	public final String ELEMENT_USER_REMOVE_MEMBER_ICON = ".//*[contains(text(),'${userName}')]/../..//*[contains(@class,'uiIconDeleteUser')]";
-
-	//Up level
-	public final By ELEMENT_UP_LEVEL=By.xpath("//*[@data-original-title='Up Level']");
-	
-	//Disable Users
-	public final By ELEMENT_DISABLE_USER_DROP_BOX=By.id("UIListUsers-userStatusFilter");
-	public final String ELEMENT_DISABLE_USER_HANDLE_BTN=".//*[@id='UIListUsersGird']//*[contains(text(),'$userName')]/../..//*[contains(@class,'switchBtnHandle')]";
-    public final String ELEMENT_DISBALE_USER_ENABLED=".//*[@id='UIListUsersGird']//*[contains(text(),'$userName')]/../..//*[@data-original-title='Disable User']";
-    public final String ELEMENT_DISBALE_USER_DISABLED=".//*[@id='UIListUsersGird']//*[contains(text(),'$userName')]/../..//*[@data-original-title='Enable User']";
-    public final By ELEMENT_DISABLE_USER_COLUMN = By.xpath(".//th[@id='DisableEnableUser'][contains(.,'Enabled')]");
-    public final By ELEMENT_DISABLE_USER_STATUS_DISABLED= By.xpath("//*[@id='UIListUsers-userStatusFilter']/*[contains(.,'Disabled')]");
-    public final By ELEMENT_DISABLE_USER_STATUS_ALL= By.xpath("//*[@id='UIListUsers-userStatusFilter']/*[contains(.,'All')]");
-    public final By ELEMENT_DISABLE_USER_STATUS_ENABLED= By.xpath("//*[@id='UIListUsers-userStatusFilter']/*[contains(.,'Enabled')]");
-    public final String ELEMENT_DISABLE_USER_STATUS_SELECTED ="//*[@id='UIListUsers-userStatusFilter']/*[contains(.,'$status')][@selected='selected']";
-    public final String ELEMENT_DISABLE_USER_TOGGLE_NO = "//*[@id='UIListUsersGird']//*[contains(text(),'$userName')]/../..//*[contains(@class,'switchBtnLabelOff')]//*[contains(text(),'No')]";
-    public final String ELEMENT_DISABLE_USER_TOGGLE_YES = "//*[@id='UIListUsersGird']//*[contains(text(),'$userName')]/../..//*[contains(@class,'switchBtnLabelOn')]//*[contains(text(),'Yes')]";
-    
-    
-    ManageAlert alert;
-	//Social networks tab
-	public final By ELEMENT_USER_SOCIAL_NETWORKS_TAB = By.xpath("//*[@data-target='#UIAccountSocial-tab']");
-	public final String ELEMENT_USER_SOCIAL_NETWORKS_TAB_GOOGLE_ACCOUNT =".//*[@id='user.social-info.google.userName' and @value= '${account}']";
-	public final By ELEMENT_USER_ACCOUNT_PROFILE_TAB = By.xpath("//*[@data-target='#UIAccountProfiles-tab']");
 	Dialog dialog;
-
+	ManageAlert alert;
 	public UserAndGroupManagement(WebDriver dr) {
 		this.driver = dr;
 		alert = new ManageAlert(dr);
@@ -222,6 +103,62 @@ public class UserAndGroupManagement extends PlatformBase {
 			waitForAndGetElement(ELEMENT_GROUP_ADDED.replace("${groupLabel}",
 					groupLabel));
 		}
+	}
+	/**
+	 * Add a user to Administration group
+	 * @param user
+	 * @param membership
+	 */
+	public void addUserAdmin(String user,String... membership){
+		info("Go to Group tab");
+		goToGroupTab();
+		scrollToBottomPage(this.driver);
+		info("Select Platform/Administration group");
+		selectGroup("Platform/Administration");
+		info("Add user to Administration group by type");
+		type(ELEMENT_INPUT_USERNAME,user, true);
+		if(membership.length>0)
+		  select(ELEMENT_SELECT_MEMBERSHIP, membership[0]);
+		scrollToElement(waitForAndGetElement(ELEMENT_SAVE_BUTTON_2),this.driver);
+		click(ELEMENT_SAVE_BUTTON_2);
+		String addedUser = ELEMENT_ADDED_GROUP_USER_IN_TABLE.replace(
+				"${username}", user);
+		if (isTextPresent(ELEMENT_MSG_TOTAL_PAGES)) {
+			usePaginator(addedUser,
+					ELEMENT_USER_NOT_FOUND.replace("${user}", user));
+		} else {
+			waitForAndGetElement(addedUser);
+		}
+		info("User is added to Administration group");
+	}
+	
+	/**
+	 * Add a user to content management group
+	 * @param user
+	 * @param membership
+	 */
+	public void addUserContentManagement(String user,String... membership){
+		info("Go to Group tab");
+		goToGroupTab();
+		scrollToBottomPage(this.driver);
+		info("Select Platform/Content Management group");
+		selectGroup("Platform/Content Management");
+		info("Add user to Content Management group by type");
+		scrollToBottomPage(this.driver);
+		type(ELEMENT_INPUT_USERNAME,user, true);
+		if(membership.length>0)
+		  select(ELEMENT_SELECT_MEMBERSHIP, membership[0]);
+		scrollToBottomPage(this.driver);
+		click(ELEMENT_SAVE_BUTTON_2);
+		String addedUser = ELEMENT_ADDED_GROUP_USER_IN_TABLE.replace(
+				"${username}", user);
+		if (isTextPresent(ELEMENT_MSG_TOTAL_PAGES)) {
+			usePaginator(addedUser,
+					ELEMENT_USER_NOT_FOUND.replace("${user}", user));
+		} else {
+			waitForAndGetElement(addedUser);
+		}
+		info("User is added to Content Managment group");
 	}
 
 	/**

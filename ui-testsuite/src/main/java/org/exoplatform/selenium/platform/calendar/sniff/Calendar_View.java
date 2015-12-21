@@ -63,8 +63,8 @@ public class Calendar_View extends PlatformBase {
 	String titleTaskHoliday;
 	String titleTaskAnni;
 
-	@BeforeClass
-	public void setUpBeforeTest() throws Exception{
+	@BeforeMethod
+	public void setUpBeforeMethod() throws Exception{
 		initSeleniumTest();
 		getDefaultUserPass(userDataFilePath,defaultSheet,isUseFile,jdbcDriver,dbUrl,user,pass,sqlUser);
 		driver.get(baseUrl);
@@ -227,8 +227,8 @@ public class Calendar_View extends PlatformBase {
 		task.saveQuickAddTask();
 	}
 
-	@AfterClass
-	public void afterClass(){
+	@AfterMethod
+	public void afterMethod(){
 		hp.goToCalendarPage();
 		click(cHome.ELEMENT_TODAY_ACTION_BAR);
 		cHome.goToView(selectViewOption.WEEK);
@@ -278,7 +278,6 @@ public class Calendar_View extends PlatformBase {
 		cHome.deleteEventTask( titleEventPreMonth, selectViewOption.MONTH, selectDayOption.ALLDAY,null);
 		cHome.deleteEventTask( titleTaskPreMonth, selectViewOption.MONTH, selectDayOption.ALLDAY,null);
 
-		magAc.signOut();
 		driver.manage().deleteAllCookies();
 		driver.quit();
 	}

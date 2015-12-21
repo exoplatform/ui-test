@@ -18,17 +18,19 @@ public class SOC_People extends SOC_TestConfig_2{
 		info("test01_06_AcceptDenyRecievedInvitation");
 		/*Create data test*/
 		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
-		String password1 = username1;
-		String email1 = txData.getContentByArrayTypeRandom(1) + getRandomNumber() + mailSuffixData.getMailSuffixRandom();
-		
+		String email1 = username1+ mailSuffixData.getMailSuffixRandom();
 		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
-		String password2 = username2;
-		String email2 = txData.getContentByArrayTypeRandom(1) + getRandomNumber() + mailSuffixData.getMailSuffixRandom();
-
-		info("Add new user");
+		String email2 = username2+ mailSuffixData.getMailSuffixRandom();
+		String username3 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email3 = username3+ mailSuffixData.getMailSuffixRandom();
+		
+		
+		info("Add user");
 		navTool.goToAddUser();
-		addUserPage.addUser(username1, password1, email1, username1, username1);
-		addUserPage.addUser(username2, password2, email2, username2, username2);
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		addUserPage.addUser(username3, password, email3, username3, username3);
+		magAc.signIn(username1, password);
 		
 		/*Step Number: 1
 		 *Step Name: Step 1: Send invitation
@@ -49,32 +51,28 @@ public class SOC_People extends SOC_TestConfig_2{
 		hp.goToConnections();
 
 		info("Click on Connect button to invite about 2 users");
-		connMag.connectToAUser(username1);
 		connMag.connectToAUser(username2);
+		connMag.connectToAUser(username3);
 
 		info("Test Case 01 + Test Case 06: User can accept or deny invitaions");
 		info("Login by invited users, go to My Connections/Requests Received and accept invitation");
-		magAc.signIn(username1, password1);
+		magAc.signIn(username2, password);
 		hp.goToConnections();	
-		connMag.acceptAConnection(DATA_USER1);
+		connMag.acceptAConnection(username1);
 
 		info("Login by invited users, go to My Connections/Requests Received and ignore invitation");
-		magAc.signIn(username2, password2);
+		magAc.signIn(username3, password);
 		hp.goToConnections();	
-		connMag.ignoreConnection(DATA_USER1);
+		connMag.acceptAConnection(username1);
 
 		info("Verify after invitation");
-		magAc.signIn(DATA_USER1, DATA_PASS);
+		magAc.signIn(username1, password);
 		hp.goToConnections();
 		info("With user confirmed the invitation, user  becomes friend and user's name is displayed on user's network list ");
-		connMag.verifyConnection(username1, true);
+		connMag.verifyConnection(username2, true);
 		info("With user ignored the invitation, User isn't displayed on user's network list");
-		connMag.verifyConnection(username2, false);
+		connMag.verifyConnection(username3, false);
 
-		info("Clear Data");
-		navTool.goToUsersAndGroupsManagement();
-		userAndGroup.deleteUser(username1);
-		userAndGroup.deleteUser(username2);
 	}
 	
 	/**
@@ -84,15 +82,17 @@ public class SOC_People extends SOC_TestConfig_2{
 	@Test
 	public void test02_Network(){
 		info("test02_Network");
-		/*Create data test*/
 		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
-		String password1 = txData.getContentByArrayTypeRandom(1) + getRandomNumber();
-		String email1 = txData.getContentByArrayTypeRandom(1) + getRandomNumber() + mailSuffixData.getMailSuffixRandom();
+		String email1 = username1+ mailSuffixData.getMailSuffixRandom();
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+ mailSuffixData.getMailSuffixRandom();
 		
-		info("Add new user");
-		magAc.signIn(DATA_USER1, DATA_PASS);
+		
+		info("Add user");
 		navTool.goToAddUser();
-		addUserPage.addUser(username1, password1, email1, username1, username1);
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		magAc.signIn(username1, password);
 		
 		/*Step Number: 1
 		 *Step Name: Step 1: Open Network list
@@ -113,29 +113,26 @@ public class SOC_People extends SOC_TestConfig_2{
 		hp.goToConnections();
 
 		info("Access people list, invite an user");
-		connMag.connectToAUser(username1);
+		connMag.connectToAUser(username2);
 
 		info("Invited user accept invitation");
-		magAc.signIn(username1, password1);
+		magAc.signIn(username2, password);
 		hp.goToConnections();	
-		connMag.acceptAConnection(DATA_USER1);
+		connMag.acceptAConnection(username1);
 		info("Verify after accept");
-		connMag.verifyConnection(DATA_USER1, true);
+		connMag.verifyConnection(username1, true);
 		
 		info("Go to My Connections and Click Remove Connection button");
 		hp.goToConnections();
-		connMag.removeConnection(DATA_USER1);
+		connMag.removeConnection(username1);
 		info("Verify after remove invitation");
-		connMag.verifyConnection(DATA_USER1, false);
+		connMag.verifyConnection(username1, false);
 		
 		info("User can re-add friend");
-		magAc.signIn(DATA_USER1, DATA_PASS);
+		magAc.signIn(username1, password);
 		hp.goToConnections();
-		connMag.connectToAUser(username1);
+		connMag.connectToAUser(username2);
 
-		info("Clear Data");
-		navTool.goToUsersAndGroupsManagement();
-		userAndGroup.deleteUser(username1);
 	}
 	
 	/**
@@ -147,18 +144,19 @@ public class SOC_People extends SOC_TestConfig_2{
 		info("test03_ViewConnectionsListOfOtherUser");
 		/*Create data test*/
 		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
-		String password1 = txData.getContentByArrayTypeRandom(1) + getRandomNumber();
-		String email1 = txData.getContentByArrayTypeRandom(1) + getRandomNumber() + mailSuffixData.getMailSuffixRandom();
-		
+		String email1 = username1+ mailSuffixData.getMailSuffixRandom();
 		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
-		String password2 = txData.getContentByArrayTypeRandom(1) + getRandomNumber();
-		String email2 = txData.getContentByArrayTypeRandom(1) + getRandomNumber() + mailSuffixData.getMailSuffixRandom();
-
-		info("Add new user");
-		magAc.signIn(DATA_USER1, DATA_PASS);
+		String email2 = username2+ mailSuffixData.getMailSuffixRandom();
+		String username3 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email3 = username3+ mailSuffixData.getMailSuffixRandom();
+		
+		
+		info("Add user");
 		navTool.goToAddUser();
-		addUserPage.addUser(username1, password1, email1, username1, username1);
-		addUserPage.addUser(username2, password2, email2, username2, username2);
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		addUserPage.addUser(username3, password, email3, username3, username3);
+		magAc.signIn(username1, password);
 		/*Step Number: 1
 		 *Step Name: Step 1: View Connections list
 		 *Step Description: 
@@ -172,36 +170,32 @@ public class SOC_People extends SOC_TestConfig_2{
 		hp.goToConnections();
 
 		info("Click on Connect button to invite about 2 users");
-		connMag.connectToAUser(username1);
 		connMag.connectToAUser(username2);
+		connMag.connectToAUser(username3);
 
 		info("Login by invited users, go to My Connections from avatar and accept invitation");
 		info("Verify before accept John's invitaion");
-		magAc.signIn(username2, password2);
+		magAc.signIn(username2, password);
 		navTool.goToMyConnection();
-		connMag.verifyConnection(DATA_USER1, false);
+		connMag.verifyConnection(username1, false);
 		info("Accept John'sinvitaion");
 		hp.goToConnections();	
-		connMag.acceptAConnection(DATA_USER1);
+		connMag.acceptAConnection(username1);
 		info("Verify after accept John's invitaion");
 		navTool.goToMyConnection();
-		connMag.verifyConnection(DATA_USER1, true);
+		connMag.verifyConnection(username1, true);
 		
 		info("Login by invited users, go to My Connections/Requests Received and accept invitations");
-		magAc.signIn(username1, password1);
+		magAc.signIn(username3, password);
 		hp.goToConnections();	
-		connMag.acceptAConnection(DATA_USER1);
+		connMag.acceptAConnection(username1);
 		
 		info("Login by John and check Connections by click on My Connections in Avartar");
-		magAc.signIn(DATA_USER1, DATA_PASS);
+		magAc.signIn(username1, password);
 		navTool.goToMyConnection();
-		connMag.verifyConnection(username1, true);
 		connMag.verifyConnection(username2, true);
+		connMag.verifyConnection(username3, true);
 
-		info("Clear Data");
-		navTool.goToUsersAndGroupsManagement();
-		userAndGroup.deleteUser(username1);
-		userAndGroup.deleteUser(username2);
 	}
 	
 	/**
@@ -212,28 +206,25 @@ public class SOC_People extends SOC_TestConfig_2{
 	public void test04_CheckPeopleListing(){
 		info("test04_CheckPeopleListing");
 		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
-		String password1 = txData.getContentByArrayTypeRandom(1) + getRandomNumber();
-		String email1 = txData.getContentByArrayTypeRandom(1) + getRandomNumber() + mailSuffixData.getMailSuffixRandom();
-		
+		String email1 = username1+ mailSuffixData.getMailSuffixRandom();
 		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
-		String password2 = txData.getContentByArrayTypeRandom(1) + getRandomNumber();
-		String email2 = txData.getContentByArrayTypeRandom(1) + getRandomNumber() + mailSuffixData.getMailSuffixRandom();
-
+		String email2 = username2+ mailSuffixData.getMailSuffixRandom();
 		String username3 = txData.getContentByArrayTypeRandom(4) + getRandomString();
-		String password3 = txData.getContentByArrayTypeRandom(1) + getRandomNumber();
-		String email3 = txData.getContentByArrayTypeRandom(1) + getRandomNumber() + mailSuffixData.getMailSuffixRandom();
-		
+		String email3 = username3+ mailSuffixData.getMailSuffixRandom();
 		String username4 = txData.getContentByArrayTypeRandom(4) + getRandomString();
-		String password4 = txData.getContentByArrayTypeRandom(1) + getRandomNumber();
-		String email4 = txData.getContentByArrayTypeRandom(1) + getRandomNumber() + mailSuffixData.getMailSuffixRandom();
-
-		info("Add new user");
-		magAc.signIn(DATA_USER1, DATA_PASS);
+		String email4 = username4+ mailSuffixData.getMailSuffixRandom();
+		String username5 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email5 = username5+ mailSuffixData.getMailSuffixRandom();
+		
+		
+		info("Add user");
 		navTool.goToAddUser();
-		addUserPage.addUser(username1, password1, email1, username1, username1);
-		addUserPage.addUser(username2, password2, email2, username2, username2);
-		addUserPage.addUser(username3, password3, email3, username3, username3);
-		addUserPage.addUser(username4, password4, email4, username4, username4);
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		addUserPage.addUser(username3, password, email3, username3, username3);
+		addUserPage.addUser(username4, password, email4, username4, username4);
+		addUserPage.addUser(username5, password, email5, username5, username5);
+		magAc.signIn(username1, password);
 
 		/*Step Number: 1
 		 *Step Name: Step 1: People listing
@@ -247,16 +238,10 @@ public class SOC_People extends SOC_TestConfig_2{
 		hp.goToConnections();
 
 		info("Show all users on Social and user can send friend request to connect with other users");
-		waitForAndGetElement(connMag.ELEMENT_CONNECTION_CONNECT_BTN.replace("${user}", username1));
 		waitForAndGetElement(connMag.ELEMENT_CONNECTION_CONNECT_BTN.replace("${user}", username2));
 		waitForAndGetElement(connMag.ELEMENT_CONNECTION_CONNECT_BTN.replace("${user}", username3));
 		waitForAndGetElement(connMag.ELEMENT_CONNECTION_CONNECT_BTN.replace("${user}", username4));
-		info("Clear Data");
-		navTool.goToUsersAndGroupsManagement();
-		userAndGroup.deleteUser(username1);
-		userAndGroup.deleteUser(username2);
-		userAndGroup.deleteUser(username3);
-		userAndGroup.deleteUser(username4);
+		waitForAndGetElement(connMag.ELEMENT_CONNECTION_CONNECT_BTN.replace("${user}", username5));
 	}
 	
 	/**
@@ -268,15 +253,17 @@ public class SOC_People extends SOC_TestConfig_2{
 	@Test
 	public void test05_06_PendingRequestsList(){	
 		info("test05_PendingRequestsList");
-		/*Create data test*/
 		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
-		String password1 = txData.getContentByArrayTypeRandom(1) + getRandomNumber();
-		String email1 = txData.getContentByArrayTypeRandom(1) + getRandomNumber() + mailSuffixData.getMailSuffixRandom();
+		String email1 = username1+ mailSuffixData.getMailSuffixRandom();
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+ mailSuffixData.getMailSuffixRandom();
 		
-		info("Add new user");
-		magAc.signIn(DATA_USER1, DATA_PASS);
+		
+		info("Add user");
 		navTool.goToAddUser();
-		addUserPage.addUser(username1, password1, email1, username1, username1);
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		magAc.signIn(username1, password);
 		
 		/*Step Number: 1
 		 *Step Name: Step 1:  Open Pending Requests list
@@ -292,29 +279,25 @@ public class SOC_People extends SOC_TestConfig_2{
 		info("Click on Connections on the left panel");
 		hp.goToConnections();
 		info("Click on Connect button to invite an user");
-		connMag.connectToAUser(username1);
-		waitForAndGetElement(connMag.ELEMENT_CONNECTION_CANCEL_BTN.replace("${user}", username1));
+		connMag.connectToAUser(username2);
+		waitForAndGetElement(connMag.ELEMENT_CONNECTION_CANCEL_BTN.replace("${user}", username2));
 		connMag.goToConnectionTab(selectTabOption.PENDING);
-		waitForAndGetElement(connMag.ELEMENT_CONNECTION_CANCEL_BTN.replace("${user}", username1));
+		waitForAndGetElement(connMag.ELEMENT_CONNECTION_CANCEL_BTN.replace("${user}", username2));
 
 		info("Cancel request");
-		connMag.cancelConnection(username1);	
+		connMag.cancelConnection(username2);	
 		
 		info("test06_ReceivedInvitations");
 		hp.goToConnections();
 		connMag.goToConnectionTab(selectTabOption.ALL);
-		connMag.connectToAUser(username1);
-		waitForAndGetElement(connMag.ELEMENT_CONNECTION_CANCEL_BTN.replace("${user}", username1));
+		connMag.connectToAUser(username2);
+		waitForAndGetElement(connMag.ELEMENT_CONNECTION_CANCEL_BTN.replace("${user}", username2));
 		
-		magAc.signIn(username1, password1);
+		magAc.signIn(username2, password);
 		hp.goToConnections();	
 		connMag.goToConnectionTab(selectTabOption.RECEIVE);
-		waitForAndGetElement(connMag.ELEMENT_CONNECTION_CONFIRM_BTN.replace("${user}",DATA_USER1));
-		waitForAndGetElement(connMag.ELEMENT_CONNECTION_IGNORE_BTN.replace("${user}",DATA_USER1));
+		waitForAndGetElement(connMag.ELEMENT_CONNECTION_CONFIRM_BTN.replace("${user}",username1));
+		waitForAndGetElement(connMag.ELEMENT_CONNECTION_IGNORE_BTN.replace("${user}",username1));
 		
-		info("Clear Data");
-		magAc.signIn(DATA_USER1, DATA_PASS);
-		navTool.goToUsersAndGroupsManagement();
-		userAndGroup.deleteUser(username1);
 	}
 }

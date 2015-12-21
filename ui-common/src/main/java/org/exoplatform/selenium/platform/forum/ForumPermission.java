@@ -2,16 +2,10 @@ package org.exoplatform.selenium.platform.forum;
 
 import static org.exoplatform.selenium.TestLogger.info;
 import org.exoplatform.selenium.ManageAlert;
-import org.exoplatform.selenium.platform.PlatformBase;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-/**
- * @date Oct 20, 2015
- * @author anhpp
- */
 
-public class ForumPermission extends PlatformBase{
+public class ForumPermission extends ForumLocator{
     
 	/**
 	 * constructor
@@ -21,21 +15,7 @@ public class ForumPermission extends PlatformBase{
 		this.driver=dr;
 		alert = new ManageAlert(dr);
 	}
-	public final By ELEMENT_PERM_MOD_CHECKBOX=By.xpath("//*[@id='UIPermissionGrid']//tr[1]/td[2]//input");
-	public final By ELEMENT_PERM_STARTTOP_CHECKBOX=By.xpath("//*[@id='UIPermissionGrid']//tr[1]/td[3]//input");
-	public final By ELEMENT_PERM_POSTREPLY_CHECKBOX=By.xpath("//*[@id='UIPermissionGrid']//tr[1]/td[4]//input");
-	public final By ELEMENT_PERM_VIEWPOST_CHECKBOX=By.xpath("//*[@id='UIPermissionGrid']//tr[1]/td[5]//input");
-	public final By ELEMENT_PERM_TAB = By.xpath("//*[contains(@data-toggle,'tab')][contains(.,'Permissions')]");
-	public final By ELEMENT_PERM_ROLE_ICON= By.xpath(".//*[contains(@id,'Permission')]//*[contains(@class,'uiIconMembership')]");
-	public final By ELEMENT_RESTRICTED_ROLE_ICON= By.xpath(".//*[@id='DetailTab']//*[contains(@class,'uiIconMembership')]");
-	public final By ELEMENT_MESSAGE_ROLE_ICON= By.xpath(".//*[@id='MessageTab']//*[contains(@class,'uiIconMembership')]");
-	public final By ELEMENT_SELECT_MEMBERSHIP_POPUP = By.xpath(".//*[@id='UIPopupActionChildPopupWindow']");
-	public final By ELEMENT_RESTRICTED_SELECT_MEMBERSHIP_POPUP = By.xpath("//*[@id='UIForumChildPopupWindow']//*[contains(@class,'PopupContent')]");
-	public final By ELEMENT_MESSAGE_SELECT_MEMBERSHIP_POPUP = By.xpath(".//*[@id='UIPopupWindow']");
-	public final String ELEMENT_SELECT_RIGHT_PARENT_GROUP = "//*[contains(@id,'UIPopupActionChildPopupWindow')]//a[contains(.,'$group')]";
-	public final String ELEMENT_RESTRICTED_SELECT_RIGHT_PARENT_GROUP = "//*[@id='UIForumChildPopupWindow']//*[contains(@class,'PopupContent')]//a[contains(.,'$group')]";
-	public final String ELEMENT_MESSAGE_SELECT_RIGHT_PARENT_GROUP = ".//*[@id='UIPopupWindow']//a[contains(.,'$group')]";
-	public final By ELEMENT_PERM_ADD_BTN=By.xpath("//*[contains(@id,'Permission')]//*[contains(@class,'addButton')]");
+	
 	/**
 	 * select permission in category
 	 * @param isMod

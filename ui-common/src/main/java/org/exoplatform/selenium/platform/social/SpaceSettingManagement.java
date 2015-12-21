@@ -10,7 +10,7 @@ import static org.exoplatform.selenium.TestLogger.info;
 
 import org.openqa.selenium.WebDriver;
 
-public class SpaceSettingManagement extends SpaceLocator{
+public class SpaceSettingManagement extends SocialLocator{
 
 	
     ManageAlert alert;
@@ -65,18 +65,17 @@ public class SpaceSettingManagement extends SpaceLocator{
 	public void inviteUser(String userName,boolean verify,String fullName){
 		goToMemberTab();
 		info("Click on select user button");
-		clickByJavascript(ELEMENT_SPACE_MEMBERS_SELECT_USER, 2);
+		click(ELEMENT_SPACE_MEMBERS_SELECT_USER, 2);
 		info("--Search user " + user + "--");
 		type(ELEMENT_SEARCH_INPUT_USER_NAME,userName, true);
-		clickByJavascript(ELEMENT_SEARCH_USERS_ICON, 2);
+		click(ELEMENT_SEARCH_USERS_ICON, 2);
 		Utils.pause(2000);
 		info("Select a user");
-		//check(ELEMENT_SPACE_SELECT_USER_IN_FORM.replace("{$name}",userName),2);
-		clickByJavascript(ELEMENT_SPACE_SELECT_USER_IN_FORM.replace("{$name}",userName),2);
+		click(ELEMENT_SPACE_SELECT_USER_IN_FORM.replace("{$name}",userName),2);
 		info("click on Add button");
-		clickByJavascript(ELEMENT_ADD, 2);
+		click(ELEMENT_ADD, 2);
 		info("click on Invite button");
-		clickByJavascript(ELEMENT_SPACE_MEMBERS_INVITE, 2);
+		click(ELEMENT_SPACE_MEMBERS_INVITE, 2);
 		if (verify) {
 			info("Verify that user is shown in invitation table");
 			if(fullName!="" && fullName!=null)
@@ -90,10 +89,10 @@ public class SpaceSettingManagement extends SpaceLocator{
 	 * if role's status is YES, this will change to NO
 	 */
 	public void changeRole(String user){
-		info("OPen members tab");
+		info("Open members tab");
 		click(ELEMENT_SPACE_SETTINGS_MEMBERS_TAB);
 		info("Click on change role button of manager column");
-		clickByJavascript(ELEMENT_SPACE_CHANGE_ROLE_USER_MEMBER.replace("${user}",user));
+		click(ELEMENT_SPACE_CHANGE_ROLE_USER_MEMBER.replace("${user}",user),2);
 		Utils.pause(2000);
 
 	}

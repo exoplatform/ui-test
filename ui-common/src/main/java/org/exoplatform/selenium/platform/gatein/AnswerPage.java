@@ -6,11 +6,9 @@ import org.exoplatform.selenium.ManageAlert;
 import org.exoplatform.selenium.Utils;
 import org.exoplatform.selenium.platform.HomePagePlatform;
 import org.exoplatform.selenium.platform.NavigationToolbar;
-import org.exoplatform.selenium.platform.PlatformBase;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class AnswerPage extends PlatformBase {
+public class AnswerPage extends GateinLocator {
 	NavigationToolbar navTool;
 	PageCreationWizard pagMang;
 	PageEditor pagEditor;
@@ -18,51 +16,6 @@ public class AnswerPage extends PlatformBase {
 	ManageAlert alert;
 	ApplicationRegistry arPage;
 
-	//Answer page
-	public final String ELEMENT_ANSWER_EDIT_PORTLET_TAB="//*[text()='$name']";
-
-	//Permission tab
-	public final By ELEMENT_ANSWER_PERMISSION_TAB=By.xpath("//*[@data-target='#PortletPermission-tab']");
-	public final By ELEMENT_ANSWER_PERMISSION_TAB_PUBLIC_MODE=By.id("publicMode");
-
-	//Display mode tab
-	public final By ELEMENT_DISPLAY_MODE_TAB = By.xpath("//button[text()='Display Mode']");
-	public final By ELEMENT_SELECT_DISPLAY_MODE = By.name("display-mode");
-	public final By ELEMENT_SELECT_ORDER_BY_MODE = By.name("order-by");
-	public final By ELEMENT_SELECT_DIRECTION_MODE = By.name("order-type");
-	public final By ELEMENT_ENABLE_VOTE_COMMENT = By.id("enableVotComment");
-	public final By ELEMENT_ENABLE_SUBMIT_QUESTION = By.id("enableAnonymousSubmitQuestion");
-	public final By ELEMENT_ENABLE_RSS = By.id("enableRSS");
-	public final By ELEMENT_VIEW_AVATAR = By.id("enableViewAvatar");
-	public final By ELEMENT_POST_QUESTION_IN_ROOT = By.id("isPostQuestionInRootCategory");
-
-	//Category scoping tab
-	public final By ELEMENT_CATEGORY_SCOPING_TAB = By.xpath("//button[text()='Category Scoping']");
-	public final String ELEMENT_CATEGORY_IN_SCOPE_TAB = "//*[contains(text(),'${catName}')]/..//input[@type='checkbox']";
-
-	//Discussion tab
-	public final By ELEMENT_DISCUSSION_TAB = By.xpath("//button[text()='Discussion']");
-	public final By ELEMENT_ENABLE_DISCUSSION_CHECKBOX = By.id("EnableDiscuss");
-	public final By ELEMENT_ADD_FORUM = By.xpath("//*[@data-original-title='Select Forum']");
-	public final String ELEMENT_CATEGORY_EXPAND_ITEM="//*[@class='uiIconNode expandIcon nodeSelected']/*[text()='$name']";
-	public final String ELEMENT_CATEGORY_COLLAPSE_ITEM="//*[@class='uiIconNode collapseIcon']/*[text()='$name']";
-	public final String ELEMENT_CATEGORY_NODE_ITEM="//*[@class='uiIconNode uiIconEmpty']/*[text()='$name']";
-
-	//Email tab
-	public final By ELEMENT_MAIL_NOTIFICATION_TEMPLATE_TAB = By.xpath("//button[text()='Email Notifications']");
-	public final By ELEMENT_MAIL_NEW_QUESTION_TAB = By.xpath("//button[text()='New Question']");
-	public final By ELEMENT_MAIL_EDIT_ANSWER_TAB = By.xpath("//button[text()='Edit/Answer']");
-	public final By ELEMENT_MAIL_MOVE_QUESTION_TAB = By.xpath("//button[text()='Move Question']");
-	public final By ELEMENT_MAIL_CONTENT_FRAME1 = By.id("EmailMoveQuestion___Frame");
-	public final By ELEMENT_MAIL_CONTENT_FRAME2 = By.xpath("//*[@id='xEditingArea']/iframe");
-	public final By ELEMENT_MAIL_MOVE_QUESTION_FRAME = By.xpath("//div[@id='cke_EmailMoveQuestion']//iframe");
-	public final By ELEMENT_MAIL_EDIT_ANSWER_FRAME = By.xpath("//div[@id='cke_EmailEditQuestion']//iframe");
-	public final By ELEMENT_MAIL_NEW_QUESTION_FRAME = By.xpath("//div[@id='cke_EmailAddNewQuestion']//iframe");
-	public final By ELEMENT_CLOSE_SETTING_BUTTON = By.id("Close");
-	public final By ELEMENT_EDIT_ANSWER_RELOAD_DEFAULT_EMAIL = By.xpath("//*[@for='EmailEditQuestion']/..//*[@class='uiIconRefresh uiIconLightGray']");
-	public final By ELEMENT_NEW_QUESTION_RELOAD_DEFAULT_EMAIL = By.xpath("//*[@for='EmailAddNewQuestion']/..//*[@class='uiIconRefresh uiIconLightGray']");
-	public final By ELEMENT_MOVE_QUESTION_RELOAD_DEFAULT_EMAIL = By.xpath("//*[@for='EmailMoveQuestion']/..//*[@class='uiIconRefresh uiIconLightGray']");
-	
 	public AnswerPage(WebDriver dr){
 		driver = dr;
 		navTool = new NavigationToolbar(dr);

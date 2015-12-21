@@ -6,7 +6,7 @@ import org.exoplatform.selenium.Utils;
 import org.exoplatform.selenium.platform.ManageLogInOut;
 import org.openqa.selenium.WebDriver;
 
-public class SpaceHomePage extends SpaceLocator{
+public class SpaceHomePage extends SocialLocator{
 	
 	SpaceSettingManagement setSpaceMg;
 	ManageLogInOut magAc;
@@ -26,7 +26,12 @@ public class SpaceHomePage extends SpaceLocator{
 		info("--Open Setting tab of the space");
 		info("Click on the tab");
 		Utils.pause(2000);
-		clickByJavascript(ELEMENT_SPACE_SPACE_SETTINGS);
+		if (waitForAndGetElement(ELEMENT_SPACE_SPACE_SETTINGS, 5000, 0) == null){
+			click(ELEMENT_SPACE_MENU_MORE, 2);
+			clickByJavascript(ELEMENT_SPACE_SPACE_SETTINGS);
+		}
+		else
+			clickByJavascript(ELEMENT_SPACE_SPACE_SETTINGS);
 		Utils.pause(3000);
 		waitForAndGetElement(ELEMENT_SPACE_SPACE_SETTINGS_TITLE,3000,1);
 		info("Space setting page is shown");

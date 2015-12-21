@@ -59,9 +59,9 @@ public class Wiki_TestConfig extends PlatformBase {
 	WikiMessageDatabase  wMessage;
 	
 	
-	@BeforeClass
-	public void setUpBeforeClass() throws Exception{
-		info("Start setUpBeforeClass");
+	@BeforeMethod
+	public void setUpBeforeMethod() throws Exception{
+		info("Start setUpBeforeMethod");
 		initSeleniumTest();
 		getDefaultUserPass(userDataFilePath,defaultSheet,isUseFile,jdbcDriver,dbUrl,user,pass,sqlUser);
 		magAc = new ManageLogInOut(driver);
@@ -103,25 +103,21 @@ public class Wiki_TestConfig extends PlatformBase {
 		wMessage.setWikiMessageData(wikiMessageFilePath,defaultSheet,isUseFile,jdbcDriver,dbUrl,user,pass,sqlAttach);
 		
 		
-		info("End setUpBeforeClass");
+		info("End setUpBeforeMethod");
 	}
 	
 	@AfterMethod
 	public void afterMethod(){
-		info ("After Test");
+		info("Start AfterMethod");
+		/*info ("After Test");
 		if (waitForAndGetElement(wikiLocs.ELEMENT_TEMPLATE_SELECT_FORM, 5000, 0) != null) {
 			info("click Cancel Template button");
 			click(wikiLocs.ELEMENT_TEMPLATE_CANCEL_BTN);
 			waitForElementNotPresent(wikiLocs.ELEMENT_TEMPLATE_SELECT_FORM);
-		}
-	}
-	
-	@AfterClass
-	public void afterClass(){
-		info("Start setUpBeforeClass");
+		}*/
 		driver.manage().deleteAllCookies();
 		driver.quit();
-		info("End setUpBeforeClass");
+		info("End AfterMethod");
 	}
 
 	

@@ -4,6 +4,84 @@ import org.exoplatform.selenium.platform.PlatformBase;
 import org.openqa.selenium.By;
 
 public class AnswerLocator extends PlatformBase {
+	
+	/*******************************ANSWER CATEGORY MANAGEMENT **********************************************************/
+	//Action of category from action bar
+	public By ELEMENT_CATEGORY_EDIT_BUTTON=By.xpath("//*[@class='uiIconEditCategory']");
+	public By ELEMENT_CATEGORY_ADD_BUTTON=By.xpath("//*[@class='uiIconAddCategory']");
+	public By ELEMENT_CATEGORY_IMPORT_BUTTON=By.xpath("//*[@class='uiIconImport']");
+	public By ELEMENT_CATEGORY_EXPORT_BUTTON=By.xpath("//*[@class='uiIconExport']");
+	public By ELEMENT_CATEGORY_DELETE_BUTTON=By.xpath("//*[@class='uiIconDeleteCategory']");
+
+	//Action of category from right click
+	public By ELEMENT_CATEGORY_RIGHT_EDIT_BUTTON=By.xpath("//*[contains(@class,'faqCategory oncontextmenu') and contains(@style,'display: block')]//*[@class='uiIconLightGray uiIconEditCategory']");
+	public By ELEMENT_CATEGORY_RIGHT_ADD_BUTTON=By.xpath("//*[contains(@class,'faqCategory oncontextmenu') and contains(@style,'display: block')]//*[@class='uiIconLightGray uiIconAddCategory']");
+	public By ELEMENT_CATEGORY_RIGHT_IMPORT_BUTTON=By.xpath("//*[contains(@class,'faqCategory oncontextmenu') and contains(@style,'display: block')]//*[contains(@class,'faqCategory oncontextmenu') and not (contains(@style,'display: block'))]//*[@class='uiIconLightGray uiIconImport']");
+	public By ELEMENT_CATEGORY_RIGHT_EXPORT_BUTTON=By.xpath("//*[contains(@class,'faqCategory oncontextmenu') and contains(@style,'display: block')]//*[@class='uiIconLightGray uiIconExport']");
+	public By ELEMENT_CATEGORY_RIGHT_DELETE_BUTTON=By.xpath("//*[contains(@class,'faqCategory oncontextmenu') and contains(@style,'display: block')]//*[@class='uiIconLightGray uiIconDeleteCategory']");
+	public By ELEMENT_CATEGORY_RIGHT_MOVE_BUTTON=By.xpath("//*[contains(@class,'faqCategory oncontextmenu') and contains(@style,'display: block')]//*[@class='uiIconLightGray uiIconMoveCategory']");
+	public By ELEMENT_CATEGORY_RIGHT_WATCH_BUTTON=By.xpath("//*[contains(@class,'faqCategory oncontextmenu') and contains(@style,'display: block')]//*[@class='uiIconLightGray uiIconWatch']");
+	public By ELEMENT_CATEGORY_WATCH_OK_BUTTON=By.xpath("//*[contains(text(),'OK') and contains(@onclick,'answers')]");
+	public By ELEMENT_CATEGORY_RIGHT_UNWATCH_BUTTON=By.xpath("//*[contains(@class,'faqCategory oncontextmenu') and contains(@style,'display: block')]//*[@class='uiIconLightGray uiIconUnWatch']");
+	public By ELEMENT_CATEGORY_RIGHT_RSS_BUTTON=By.xpath("//*[contains(@class,'faqCategory oncontextmenu') and contains(@style,'display: block')]//*[@class='uiIconRss uiIconLightGray']");
+	public By ELEMENT_CATEGORY_RIGHT_SUBMIT_QUESTION_BUTTON=By.xpath("//*[contains(@class,'faqCategory oncontextmenu') and contains(@style,'display: block')]//*[@class='uiIconAnsLightGray uiIconAnsAddNewQuestion']");
+
+	//Category list
+	public String ELEMENT_CATEGORY_LIST_ITEM="//*[contains(@class,'faqCategory oncontextmenu')]//*[contains(.,'$category')]";
+	public By ELEMENT_CATEGORY_UP_LEVEL=By.xpath("//*[@class='uiIconUpLevel uiIconLightGray']");
+
+	//Edit category form
+	public By ELEMENT_CATEGORY_EDIT_FORM=By.id("EditCategoryForm");
+
+	//Add category form
+	public By ELEMENT_CATEGORY_ADD_FORM=By.id("SubCategoryForm");
+	public By ELEMENT_CATEGORY_ADD_CATEGORY_INPUT=By.id("eventCategoryName");
+	public By ELEMENT_CATEGORY_ADD_ORDER_INPUT=By.id("index");
+	public By ELEMENT_CATEGORY_ADD_DESCRIPTION_INPUT=By.id("description");
+	public By ELEMENT_CATEGORY_ADD_MOD_QUES_CHECKBOX=By.id("moderatequestions");
+	public By ELEMENT_CATEGORY_ADD_MOD_VIEW_CHECKBOX=By.id("ViewAuthorInfor");
+	public By ELEMENT_CATEGORY_ADD_MOD_ANS_CHECKBOX=By.id("moderateAnswers");	
+	public By ELEMENT_CATEGORY_ADD_FORM_SAVE_BUTTON=By.xpath("//*[@id='UICategoryForm']//*[text()='Save']");
+	public By ELEMENT_CATEGORY_ADD_FORM_CANCEL_BUTTON=By.xpath("//*[@id='UICategoryForm']//*[text()='Save']");
+
+	//Export category form
+	public By ELEMENT_CATEGORY_EXPORT_FORM=By.id("FAQExportForm");
+	public final By ELEMENT_FILE_NAME_EXPORT = By.id("FileName");
+
+	//Import category form
+	public By ELEMENT_CATEGORY_IMPORT_FORM=By.id("FAQImportForm");
+	public By ELEMENT_IMPORT_CATEGORY_INPUT = By.name("file");
+	public String ELEMENT_ATTACHMENT_FORM_FILE_NAME = "//*[text()='$fileName']";
+	public String ELEMENT_EVENT_ATTACHMENT = "//*[@id='UIEventForm']/..//a[@data-original-title='${file}']";
+	public By ELEMENT_ATTACHMENT_SAVE_BUTTON = By.xpath("//*[@id='FAQImportForm']//*[text()='Save']");
+	public String ELEMENT_IMPORT_SUCCESS_MESSAGE = "The file has been imported";
+	public By ELEMENT_CATEGORY_OK_BUTTON=By.xpath("//*[contains(@class,'UIPopupWindow')]//a[text()='OK']");
+
+	//Delete category
+	public By ELEMENT_CATEGORY_DELETE_CONFIRM_POPUP=By.id("UIForumPopupConfirmation");
+	public String ELEMENT_CATEGORY_DELETE_CONFIRM_MSG="Are you sure you want to delete this category ?";
+	public By ELEMENT_CATEGORY_DELETE_CONFIRM=By.xpath("//*[@id='UIForumPopupConfirmation']//*[contains(@class, 'confirmationIcon')]");
+	public By ELEMENT_CATEGORY_DELETE_OK_BUTTON=By.xpath("//*[@id='UIForumPopupConfirmation']//*[text()='OK']");
+	public By ELEMENT_CATEGORY_DELETE_CANCEL_BUTTON=By.xpath("//*[@id='UIForumPopupConfirmation']//*[text()='Cancel']");
+
+	//Move category
+	public By ELEMENT_CATEGORY_MOVE_FORM=By.id("MoveCategoryForm");
+	public String ELEMENT_CATEGORY_MOVE_TARGET_ITEM="//*[@class='uiIconCategory uiIconLightGray']/../..//*[contains(.,'$category')]";
+
+	//Permission tab
+	public By ELEMENT_CATEGORY_EDIT_PERM_TAB = By.xpath("//*[contains(@data-target,'PermissionTab')]");
+	public final String ELEMENT_MANAGE_QUESTION_PERM_RESTRICTED = "//*[contains(.,'$group')]/../td[2]/*[@class='uiCheckbox']/input[@type='checkbox']";
+	public final String ELEMENT_MANAGE_QUESTION_PERM_MODERATOR = "//*[contains(.,'$group')]/../td[3]/*[@class='uiCheckbox']/input[@type='checkbox']";
+	public final By ELEMENT_SELECT_MEMBERSHIP_ICON = By.xpath("//*[@class='uiIconMembership uiIconLightGray']");
+	public final String ELEMENT_SELECT_RIGHT_PARENT_GROUP = "//*[contains(@id,'UIMemberShipSelector')]//a[contains(.,'$group')]";
+	public final By ELEMENT_SELECT_MEMBERSHIP_POPUP = By.xpath("//*[contains(@id,'UIPopupWindow')]");
+	
+	//Permission
+	public By ELEMENT_CATEGORY_TAB_PERMISSIONS = By.xpath("//*[contains(@data-toggle,'tab')][contains(.,'Permissions')]");
+	public By ELEMENT_CATEGORY_USER_ICON_SELECTOR = By.xpath("//*[contains(@class,'uiIconUser')]");
+	public String ELEMENT_CATEGORY_LIST_USER = ".//*[@id='UIListUsers']/*[contains(.,'$user')]";
+		
+	/*******************************************************************************************************************/
 
 	//Answer portlets
 	public By ELEMENT_ANSWER_PORTLET = By.id("UIAnswersContainer");
@@ -69,7 +147,6 @@ public class AnswerLocator extends PlatformBase {
 
 	//Attach file form
 	public By ELEMENT_ATTACH_SAVE_BUTTON = By.xpath("//form[@id='UIAttachmentForm']//*[text()='Save']");
-	public String ELEMENT_ATTACHMENT_FORM_FILE_NAME = "//*[text()='$fileName']";
 	public String ELEMENT_ATTACH_FILE_NAME = "//*[@data-original-title='$fileName']";
 
 	//More actions
@@ -152,7 +229,33 @@ public class AnswerLocator extends PlatformBase {
 	public final By ELEMENT_SORT_BY_RATE = By.xpath("//a[@data-original-title='Sort Answers by Rate']");
 	public final String ELEMENT_ANSWER_POSITION_IN_LIST = "//*[@class='responseContainer']//*[contains(@id,'Answer')][${no}]//*[text()='${answer}']";
 	
-	
-	
-	
+	/***********************COMMENT MANANGEMENT****************************************************/
+	//Comment form
+	public By ELEMENT_COMMENT_BUTTON=By.xpath("//*[@class='questionAction']//*[text()='Comment']");
+	public By ELEMENT_COMMENT_FORM=By.id("UICommentForm");
+	public By ELEMENT_COMMENT_FORM_DATA_FRAME_INPUT=By.xpath("//*[@class='cke_wysiwyg_frame cke_reset']");
+	public By ELEMENT_COMMENT_FORM_SAVE_BUTTON=By.xpath("//*[@id='UICommentForm']//*[text()='Save']");
+	public By ELEMENT_COMMENT_FORM_CANCEL_BUTTON=By.xpath("//*[@id='UICommentForm']//*[text()='Cancel']");
+
+	//More actions
+	public String ELEMENT_COMMENT_MORE_ACTION_BUTTON="//*[@class='responseContainer']//*[contains(@id,'Comment')]//*[text()='$comment']/../../../../..//*[@class='uiIconSettings uiIconLightGray']";
+	public String ELEMENT_COMMENT_EDIT_BUTTON="//*[@class='responseContainer']//*[contains(@id,'Comment')]//*[text()='$comment']/../../../../..//*[@class='uiIconEdit uiIconLightGray']";
+	public String ELEMENT_COMMENT_PROMOTE_TO_ANSWER_BUTTON="//*[@class='responseContainer']//*[contains(@id,'Comment')]//*[text()='$comment']/../../../../..//*[@class='uiIconAnsPromte uiIconAnsLightGray']";
+	public String ELEMENT_COMMENT_DELETE_BUTTON="//*[@class='responseContainer']//*[contains(@id,'Comment')]//*[text()='$comment']/../../../../..//*[@class='uiIconTrash uiIconLightGray']";
+
+	//COMMENT container
+	public String ELEMENT_COMMENT_AUTHOR="//*[@class='responseContainer']//*[contains(@id,'Comment')]//*[text()='$comment']/../..//*[@class='userName' and contains(text(),'$fullname')]";
+	public String ELEMENT_COMMENT_CONTENT="//*[@class='responseContainer']//*[contains(@id,'Comment')]//*[text()='$comment']";
+
+	//Delete 
+	public By ELEMENT_COMMENT_DELETE_CONFIRM_POPUP=By.id("UIForumPopupConfirmation");
+	public By ELEMENT_COMMENT_CONFIRM_DELETE=By.xpath("//*[@id='UIForumPopupConfirmation']//*[contains(text(),'Are you sure you want to delete this comment ?')]");
+	public By ELEMENT_COMMENT_DELETE_FORM_OK_BUTTON=By.xpath("//*[@id='UIForumPopupConfirmation']//*[text()='OK']");
+	public By ELEMENT_COMMENT_DELETE_FORM_CANCEL_BUTTON=By.xpath("//*[@id='UIForumPopupConfirmation']//*[text()='Cancel']");
+
+	/*****************************************FQA HOME PAGE **********************************************/
+	public final By ELEMENT_FAQ_QUESTION_LIST=By.xpath("//*[@class='questionList']");
+	public final String ELEMENT_FAQ_CATEGORY = "//*[@class='questionList']//*[@data-original-title='$category']";
+	public final String ELEMENT_FAQ_QUESTION = "//*[@class='viewerQuestion']//a[text()='$question']";
+	public final String ELEMENT_FAQ_ANSWER = "//*[@class='viewerAnswer']//*[text()='$answer']";
 }

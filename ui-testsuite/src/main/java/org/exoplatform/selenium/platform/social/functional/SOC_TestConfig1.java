@@ -40,7 +40,7 @@ public class SOC_TestConfig1 extends PlatformBase {
 		getDefaultUserPass(userDataFilePath,defaultSheet,isUseFile,jdbcDriver,dbUrl,user,pass,sqlUser);
 		magAc = new ManageLogInOut(driver);
 		button = new Button(driver);
-		magAc.signIn(DATA_USER1, DATA_PASS);
+		magAc.signIn(USER_ROOT,PASS_ROOT);
 		
 		navTool = new NavigationToolbar(driver);
 		notiAdmin = new NotificationsAdminSeting(driver);
@@ -60,13 +60,11 @@ public class SOC_TestConfig1 extends PlatformBase {
 	@AfterMethod
 	public void afterMethod(){
 		info("Start afterMethod");
-		if(resetNotifitcaiton==true){
-			magAc.signOut();
-	        magAc.signIn(DATA_USER1,DATA_PASS);
+		if(resetNotifitcaiton){
+			magAc.signIn(USER_ROOT,PASS_ROOT);
 			navTool.goToAdminNotifications();
 			notiAdmin.resetAllChangedNotifications();
 		}
-		userAndGroup.deleteUser(username);
 		driver.manage().deleteAllCookies();
 		driver.quit();
 		info("End afterMethod");

@@ -7,7 +7,7 @@ import org.exoplatform.selenium.Utils;
 import org.exoplatform.selenium.platform.social.NotificationsAdminSeting.notificationType;
 import org.openqa.selenium.WebDriver;
 
-public class MyNotificationsSetting extends NotificationLocator{
+public class MyNotificationsSetting extends SocialLocator{
 	
 	/**
 	 * constructor

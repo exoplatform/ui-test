@@ -5,98 +5,11 @@ import static org.exoplatform.selenium.TestLogger.info;
 
 import org.exoplatform.selenium.ManageAlert;
 import org.exoplatform.selenium.Utils;
-import org.exoplatform.selenium.platform.PlatformBase;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 /**
  * Path: Navigation Management popup
  */
-public class NavigationManagement extends PlatformBase {
-	
-	public final By ELEMENT_MANAGESITES_TITLE=By.xpath(".//*[@id='UIPortalNavigationPortlet']//h5[text()='Manage Sites']");
-	public final String ELEMENT_MANAGESITES_EDIT_NAVIGATION_ICON=".//*[@class='managementBlock']//div[text()='${site}']/../..//*[@class='uiIconNavigation uiIconLightGray']";
-
-	public final String ELEMENT_MANAGESITES_EDIT_LAYOUT_ICON=".//*[@class='managementBlock']//div[text()='${site}']/../..//*[contains(@class,'uiIconEditLayout')]";
-	public final String ELEMENT_MANAGESITES_EDIT_CONFIG_ICON=".//*[@class='managementBlock']//div[text()='${site}']/../..//*[contains(@class,'uiIconEditPortalConfig')]";
-	
-	public final By ELEMENT_MANAGESITES_ADD_NEW_BTN=By.cssSelector("#UISiteManagement .btn");
-	public final By ELEMENT_MANAGESITES_EDIT_LAYOUT_SITE_CONFIG_BTN = By.cssSelector(".PageProfileIcon");
-	public final String ELEMENT_MANAGESITES_PORTAL_LABEL =".//*[contains(@class,'siteName')][contains(text(),'${portal}')]/..//*[contains(@class,'siteLabel')][contains(text(),'${label}')]";
-	public final String ELEMENT_MANAGESITES_PORTAL_DESC =".//*[contains(@class,'siteName')][contains(text(),'${portal}')]/..//*[contains(@class,'siteDescription')][contains(text(),'${desc}')]";
-
-	public final String ELEMENT_ADD_NAVIGATION_BUTTON = "//*[contains(text(),'Add Navigation')]";
-
-	//Navigation Management popup
-	public final By ELEMENT_NAVIGATION_MANAGEMENT_POPUP_TITLE=By.xpath(".//*[@class='PopupTitle popupTitle'][text()='Navigation Management']");
-	public final String ELEMENT_NAVIGATION_MANAGEMENT_NODE_NAME=".//*[@title='${name}']";
-	public final By ELEMENT_NAVIGATION_MANAGEMENT_SAVE = By.xpath(".//*[text()='Save']");
-	public final String ELEMENT_NAVIGATION_SPECIFIC_NODE ="//*[@id='UINavigationNodeSelector']//*[@class='uiIconFileMini uiIconLightGray' ]/../..//*[contains(text(),'${name}')]";
-	public final String ELEMENT_NAVIGATION_SUB_NODE_CHECK = "//*[@id='UINavigationNodeSelector']//*[@class='uiIconNode collapseIcon' and contains(text(),'{$node}')]";
-	public final String ELEMENT_NAVIGATION_PARENT_CHILD_NODE =".//*[contains(@class,'uiIconNode')][@title='${parent}']/..//*[contains(@class,'childrenContainer')]//*[contains(@title,'${child}')]";
-	public final String ELEMENT_NAVIGATION_NUMBER_CHILD_NODES=".//*[contains(@class,'uiIconNode')][@title='${parent}']/..//*[contains(@class,'childrenContainer')][count(*)=${numberChild}]";
-	public final String ELEMENT_NAVIGATION_PARENT_NODE =".//*[contains(@class,'treeContainer')]//*[contains(@class,'nodeGroup')]//*[contains(@title,'${parent}')]";
-	public final String ELEMENT_NAVIGATION_PREVIOUS_NODE=".//*[contains(@class,'node')]/*[contains(@title,'${currentNode}')]/..//preceding-sibling::*[contains(@class,'node')]/*[contains(@title,'${previousNode}')]";
-	public final String ELEMENT_NAVIGATION_NEXT_NODE=".//*[contains(@class,'node')]/*[contains(@title,'${currentNode}')]/..//following-sibling::*[contains(@class,'node')]/*[contains(@title,'${nextNode}')]";
-	//Add new portal popup
-	public final By ELEMENT_ADD_NEW_PORTAL_POPUP_NAME=By.cssSelector("#name");
-	public final By ELEMENT_ADD_NEW_PORTAL_POPUP_LABEL=By.cssSelector("#label");
-	public final By ELEMENT_ADD_NEW_PORTAL_POPUP_DESC=By.cssSelector("#description");
-	public final By ELEMENT_ADD_NEW_PORTAL_POPUP_LOCALE=By.cssSelector("#PortalSetting-tab .selectbox[name~='locale']");
-	public final By ELEMENT_ADD_NEW_PORTAL_POPUP_SITE=By.cssSelector("#PortalSetting-tab .selectbox[name~='skin']");
-	public final By ELEMENT_ADD_NEW_PORTAL_POPUP_SAVE_BTN=By.xpath(".//*[@id='UIPortalForm']//button[text()='Save']");
-	public final By ELEMENT_ADD_NEW_PORTAL_POPUP_PUBLIC_PERMISSION=By.cssSelector("#publicMode");
-	public final By ELEMENT_ADD_NEW_PORTAL_POPUP_PERMISSION_TAB = By.xpath(".//*[contains(@data-target,'#PermissionSetting-tab')]");
-	public final By ELEMENT_ADD_NEW_PORTAL_POPUP_EDIT_PERMISSITION_SETTINGS= By.xpath(".//*[contains(text(),'Edit Permission Settings')]");
-	public final By ELEMENT_ADD_NEW_PORTAL_POPUP_SELECT_PERMISSION_BTN= By.xpath(".//*[contains(text(),'Select Permission')]");
-	
-	//Permission selector
-	public final String ELEMENT_PERMISSION_SELECTOR_POPUP_GROUP = ".//*[contains(@class,'uiIconNode')][contains(@title,'${group}')]";
-	public final String ELEMENT_PERMISSION_SELECTOR_POPUP_MEMEBRSHIP = ".//*[@id='PermissionSelector']//*[contains(@title,'${member}')]";
-
-	//Contextmenu
-	public final By ELEMENT_MANAGESITES_CONTEXTMENU_DELETE_ICON= By.xpath(".//*[@id='NavigationNodePopupMenu']//*[@class='uiIconDeleteNode']");
-	public final By ELEMENT_MANAGESITES_CONTEXTMENU_EDIT_ICON= By.cssSelector(".ContainerConfigOptions .uiIconEditSelectedNode");
-	public final By ELEMENT_MANAGESITES_CONTEXTMENU_EDIT_NODE_PAGE_ICON= By.cssSelector(".ContainerConfigOptions .uiIconEditPageNode");
-	public final By ELEMENT_MANAGESITES_CONTEXTMENU_COPY_ICON= By.cssSelector(".ContainerConfigOptions .uiIconCopyNode");
-	public final By ELEMENT_MANAGESITES_CONTEXTMENU_PASTE_ICON= By.cssSelector(".ContainerConfigOptions .uiIconPasteNode");
-	public final By ELEMENT_MANAGESITES_CONTEXTMENU_CUT_ICON= By.cssSelector(".ContainerConfigOptions .uiIconCutNode");
-	public final By ELEMENT_MANAGESITES_CONTEXTMENU_CLONE_ICON= By.cssSelector(".ContainerConfigOptions .uiIconCloneNode");
-	public final By ELEMENT_MANAGESITES_CONTEXTMENU_MOVE_UP_ICON= By.cssSelector(".ContainerConfigOptions .uiIconMoveUp");
-	public final By ELEMENT_MANAGESITES_CONTEXTMENU_MOVE_DOWN_ICON= By.cssSelector(".ContainerConfigOptions .uiIconMoveDown");
-	
-	// new node
-	public final By ELEMENT_ADD_NODE_FORM = By.id("UIPageNodeForm");
-	public final By ELEMENT_BACK_BUTTON = By.xpath("//*[text()='Back']");
-	public final By ELEMENT_UP_LEVEL_PATH_NODE = By.xpath("//*[@id='UINavigationNodeSelector']//*[@class='uiIconUpLevel uiIconLightGray']");
-	public final By ELEMENT_ADD_NODE = By.xpath("//*[@id='UINavigationManagement']/..//*[contains(text(),'Add Node')]");
-	public final By ELEMENT_SAVE_NODE = By.xpath("//*[@id='UINavigationManagement']/..//*[contains(text(),'Save')]");
-	public final By ELEMENT_NODE_NAME = By.id("name");
-	public final By ELEMENT_NODE_PAGE_SELECTOR_TAB=By.cssSelector("a[data-target='#UIPageSelector-tab']");
-	public final By ELEMENT_NODE_PAGE_SELECTOR_SELECT_PAGES_BTN = By.cssSelector("#SelectPage .uiIconSelectPage");
-	
-	//new node-->Page Node Setting
-	public final By ELEMENT_NODE_SETTING_SWITCH_MODE=By.cssSelector("#switchmode");
-	public final By ELEMENT_NODE_SETTING_LANGUAGE_BOX=By.cssSelector(".selectbox");
-	public final By ELEMENT_NODE_SETTING_LABEL_FIELD_1=By.cssSelector("#i18nizedLabel");
-	public final By ELEMENT_NODE_SETTING_LABEL_FIELD_2=By.cssSelector("#label");
-	public final By ELEMENT_NODE_SETTING_VISIBLE=By.cssSelector("#visible");
-	public final By ELEMENT_NODE_SETTING_PUBLISH_DATE_TIME=By.cssSelector("#showPublicationDate");
-	public final By ELEMENT_NODE_SETTING_VISIBLE_CHECKED=By.cssSelector("#visible[checked='']");
-	public final By ELEMENT_NODE_SETTING_SWITCH_MODE_CHECKED=By.cssSelector("#switchmode[checked='']");
-	
-	//new node-->Page selector
-	public final By ELEMENT_NODE_PAGE_SELECTOR_PAGE_NAME=By.cssSelector("#pageName");
-	public final By ELEMENT_NODE_PAGE_SELECTOR_PAGE_TITLE=By.cssSelector("#pageTitle");
-	public final By ELEMENT_NODE_PAGE_SELECTOR_CREATE_PAGE_BTN=By.xpath(".//*[@id='UIPageSelector']//button[1]");
-	public final By ELEMENT_NODE_PAGE_SELECTOR_SELECT_PAGE_BTN=By.xpath(".//*[@id='UIPageSelector']//button[2]");
-	public final By ELEMENT_NODE_PAGE_SELECTOR_CLEAR_PAGE_BTN=By.xpath(".//*[@id='UIPageSelector']//button[3]");
-	
-	public final By ELEMENT_NODE_PAGE_SELECTOR_TITLE_FIELD=By.cssSelector("#UIPageSearchForm #pageTitle");
-	public final By ELEMENT_NODE_PAGE_SELECTOR_SITES_NAME_FIELD=By.cssSelector("#UIPageSearchForm #siteName");
-	public final By ELEMENT_NODE_PAGE_SELECTOR_TYPE_DROPBOX=By.cssSelector("#UIPageSearchForm .selectbox");
-	public final String ELEMENT_NODE_PAGE_SELECTOR_SELECT_TYPE=".//*[@name='searchOption']//*[contains(@value,'${type}')]";
-	public final By ELEMENT_NODE_PAGE_SELECTOR_SEARCH_BUTTON = By.cssSelector("#UIPageSearchForm .uiIconSearch");
-	
+public class NavigationManagement extends GateinLocator{
 	
 	ManageAlert alert;
 	public NavigationManagement(WebDriver dr){

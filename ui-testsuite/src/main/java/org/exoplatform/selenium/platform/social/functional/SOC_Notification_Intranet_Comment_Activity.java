@@ -31,16 +31,20 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- A comment notification is displayed in the list*/
-		//isDelete=true;
-		info("Create 2 users test");
-		createNewUser(2);
-		info("User A login");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(0), password);
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+"@gmail.com";
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		magAc.signIn(username1,password);
+		
 		info("User A sent a connection request to User B");
 		Utils.pause(3000);
 		hp.goToConnections();
-		connMag.connectToAUser(arrayUser.get(1));
+		connMag.connectToAUser(username2);
 		
 		info("User A add an activity");
 		String activity = txData.getContentByArrayTypeRandom(1) + getRandomNumber();
@@ -50,12 +54,11 @@ import org.testng.annotations.*;
 		hpAct.checkActivity(activity);
 		
 		info("User B login");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(1), password);
+		magAc.signIn(username2, password);
 		info("User A and User B are connected");
 		Utils.pause(3000);
 		hp.goToConnections();
-		connMag.acceptAConnection(arrayUser.get(0));
+		connMag.acceptAConnection(username1);
 		info("UserB comments in UserA's activity");
 		String comment = txData.getContentByArrayTypeRandom(1) + getRandomNumber();
 		
@@ -78,11 +81,12 @@ import org.testng.annotations.*;
 			- $DATE is the date of the activity*/
 		String status=notiIntranetData.getNotiContent(0);
 		info("Log in with User A");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(0), password);
+		magAc.signIn(username1, password);
 		info("Check format notification in the notification list");
 		Utils.pause(3000);
 		navTool.goToIntranetNotification();
+		arrayUser.add(username1);
+		arrayUser.add(username2);
 		intraNot.checkFormatStatusCommentNotification(arrayUser,status,activity,true);
 		
 		/*Step number: 3
@@ -126,17 +130,25 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- A comment notification is displayed in the list
 			- The badge includes only 1 notification in the total number*/
-		//isDelete=true;
-		createNewUser(3);
-		info("Log in with User A");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(0), password);
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+"@gmail.com";
+		String username3 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email3= username3+"@gmail.com";
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		addUserPage.addUser(username3, password, email3, username3, username3);
+		magAc.signIn(username1,password);
+		
 		Utils.pause(3000);
 		info("User A sent a connection request to UserB");
 		hp.goToConnections();
-		connMag.connectToAUser(arrayUser.get(1));
+		connMag.connectToAUser(username2);
 		info("User A sent a connection request to UserC");
-		connMag.connectToAUser(arrayUser.get(2));
+		connMag.connectToAUser(username3);
 		
 		info("User A add an activity");
 		String activity = txData.getContentByArrayTypeRandom(1) + getRandomNumber();
@@ -146,11 +158,10 @@ import org.testng.annotations.*;
 		hpAct.checkActivity(activity);
 		
 		info("UserA and User B are connected");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(1), password);
+		magAc.signIn(username2, password);
 		Utils.pause(3000);
 		hp.goToConnections();
-		connMag.acceptAConnection(arrayUser.get(0));
+		connMag.acceptAConnection(username1);
 		
 		info("UserB comments in UserA's activity");
 		String comment = txData.getContentByArrayTypeRandom(1) + getRandomNumber();
@@ -160,11 +171,10 @@ import org.testng.annotations.*;
 		hpAct.addCommentUsingJavascript(activity, comment);
 		
 		info("User A and User C are connected");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(2), password);
+		magAc.signIn(username3, password);
 		Utils.pause(3000);
 		hp.goToConnections();
-		connMag.acceptAConnection(arrayUser.get(0));
+		connMag.acceptAConnection(username1);
 		
 		info("User C comment on UserA's activity");
 		String comment1 = txData.getContentByArrayTypeRandom(1) + getRandomNumber();
@@ -190,11 +200,13 @@ import org.testng.annotations.*;
 			- $DATE is the date of the activity*/
 		String status=notiIntranetData.getNotiContent(1);
 		info("Log in with User A");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(0), password);
+		magAc.signIn(username1, password);
 		info("Check format notification in the notification list");
 		Utils.pause(3000);
 		navTool.goToIntranetNotification();
+		arrayUser.add(username1);
+		arrayUser.add(username2);
+		arrayUser.add(username3);
 		intraNot.checkFormatStatusCommentNotification(arrayUser,status,activity,true);
 		/*Step number: 3
 		*Step Name: 
@@ -234,23 +246,34 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- A comment notification is displayed in the list*/
-		//isDelete=true;
-		createNewUser(4);
-		info("Log in with User A");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(0), password);
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+"@gmail.com";
+		String username3 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email3= username3+"@gmail.com";
+		String username4 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email4= username4+"@gmail.com";
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		addUserPage.addUser(username3, password, email3, username3, username3);
+		addUserPage.addUser(username4, password, email4, username4, username4);
+		magAc.signIn(username1,password);
 		Utils.pause(3000);
+		
 		info("goto My notification");
 		navTool.goToMyNotifications();
 		myNoti.enableNotification(myNotiType.AS_Comment_intranet);
 		Utils.pause(3000);
 		info("User A sent a connection request to UserB");
 		hp.goToConnections();
-		connMag.connectToAUser(arrayUser.get(1));
+		connMag.connectToAUser(username2);
 		info("User A sent a connection request to UserC");
-		connMag.connectToAUser(arrayUser.get(2));
+		connMag.connectToAUser(username3);
 		info("User A sent a connection request to UserD");
-		connMag.connectToAUser(arrayUser.get(3));
+		connMag.connectToAUser(username4);
 		
 		
 		info("User A add an activity");
@@ -261,11 +284,10 @@ import org.testng.annotations.*;
 		hpAct.checkActivity(activity);
 		
 		info("UserA and User B are connected");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(1), password);
+		magAc.signIn(username2, password);
 		Utils.pause(3000);
 		hp.goToConnections();
-		connMag.acceptAConnection(arrayUser.get(0));
+		connMag.acceptAConnection(username1);
 		
 		info("UserB comments in UserA's activity");
 		String comment = txData.getContentByArrayTypeRandom(1) + getRandomNumber();
@@ -275,11 +297,10 @@ import org.testng.annotations.*;
 		hpAct.addCommentUsingJavascript(activity, comment);
 		
 		info("User A and User C are connected");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(2), password);
+		magAc.signIn(username3, password);
 		Utils.pause(3000);
 		hp.goToConnections();
-		connMag.acceptAConnection(arrayUser.get(0));
+		connMag.acceptAConnection(username1);
 		
 		info("User C comment on UserA's activity");
 		String comment1 = txData.getContentByArrayTypeRandom(1) + getRandomNumber();
@@ -288,11 +309,10 @@ import org.testng.annotations.*;
 		hpAct.addCommentUsingJavascript(activity, comment1);
 		
 		info("User A and User D are connected");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(3), password);
+		magAc.signIn(username4, password);
 		Utils.pause(3000);
 		hp.goToConnections();
-		connMag.acceptAConnection(arrayUser.get(0));
+		connMag.acceptAConnection(username1);
 		
 		info("User D comment on UserA's activity");
 		String comment2 = txData.getContentByArrayTypeRandom(1) + getRandomNumber();
@@ -320,11 +340,14 @@ import org.testng.annotations.*;
 			- $DATE is the date of the activity*/
 		String status=notiIntranetData.getNotiContent(2);
 		info("Log in with User A");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(0), password);
+		magAc.signIn(username1, password);
 		info("Check format notification in the notification list");
 		Utils.pause(3000);
 		navTool.goToIntranetNotification();
+		arrayUser.add(username1);
+		arrayUser.add(username2);
+		arrayUser.add(username3);
+		arrayUser.add(username4);
 		intraNot.checkFormatStatusCommentNotification(arrayUser,status,activity,true);
 		/*Step number: 3
 		*Step Name: 
@@ -362,20 +385,27 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- A comment notification is displayed in the list*/
-        //isDelete=true;
-		info("Create users test");
-		createNewUser(3);
-		info("Log in with User A");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(0), password);
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+"@gmail.com";
+		String username3 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email3= username3+"@gmail.com";
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		addUserPage.addUser(username3, password, email3, username3, username3);
+		magAc.signIn(username1,password);
 		Utils.pause(3000);
+		
 		info("goto My notification");
 		navTool.goToMyNotifications();
 		myNoti.enableNotification(myNotiType.AS_Comment_intranet);
 		
 		info("User A sent a connection request to User B");
 		hp.goToConnections();
-		connMag.connectToAUser(arrayUser.get(1));
+		connMag.connectToAUser(username2);
 		
 		info("Add a activity");
 		String activity = txData.getContentByArrayTypeRandom(1) + getRandomNumber();
@@ -385,11 +415,10 @@ import org.testng.annotations.*;
 		hpAct.checkActivity(activity);
 		
 		info("User A and User B are connected");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(1), password);
+		magAc.signIn(username2, password);
 		Utils.pause(3000);
 		hp.goToConnections();
-		connMag.acceptAConnection(arrayUser.get(0));
+		connMag.acceptAConnection(username1);
 		
 		info("UserB comments in UserA's activity");
 		String comment = txData.getContentByArrayTypeRandom(1) + getRandomNumber();
@@ -408,12 +437,11 @@ import org.testng.annotations.*;
 			- The Connect Request notification is displayed in the list of User A*/
 
 		info("User C login");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(2), password);
+		magAc.signIn(username3, password);
 		Utils.pause(3000);
 		info("User C sent a connection request to User A");
 		hp.goToConnections();
-		connMag.connectToAUser(arrayUser.get(0));
+		connMag.connectToAUser(username1);
 		
 		/*Step number: 3
 		*Step Name: 
@@ -425,12 +453,11 @@ import org.testng.annotations.*;
 			- User A and User C are connected*/
 		
 		info("User A login");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(0), password);
+		magAc.signIn(username1, password);
 		Utils.pause(3000);
 		info("User A and User C are connected");
 		hp.goToConnections();
-		connMag.acceptAConnection(arrayUser.get(2));
+		connMag.acceptAConnection(username3);
 
 		/*Step number: 4
 		*Step Name: 
@@ -443,8 +470,7 @@ import org.testng.annotations.*;
 			- The Comment notification is listed/merged in the same previous notification (step 1)
 			- The notification is displayed at the top of the list*/
         info("Log in with User C");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(2), password);
+		magAc.signIn(username3, password);
 		Utils.pause(3000);
 		info("UserC comments in UserA's activity");
 		String comment1 = txData.getContentByArrayTypeRandom(1) + getRandomNumber();
@@ -471,11 +497,13 @@ import org.testng.annotations.*;
 
 		String status=notiIntranetData.getNotiContent(1);
 		info("Log in with user A");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(0), password);
+		magAc.signIn(username1, password);
 		Utils.pause(3000);
 		info("Check format notification in the notification list");
 		navTool.goToIntranetNotification();
+		arrayUser.add(username1);
+		arrayUser.add(username2);
+		arrayUser.add(username3);
 		intraNot.checkFormatStatusCommentNotification(arrayUser,status,activity,true);
 
  	}
@@ -502,20 +530,28 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- A comment notification is displayed in the list*/
-		//isDelete=true;
-		info("Create users test");
-		createNewUser(3);
-		info("User A log in");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(0), password);
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+"@gmail.com";
+		String username3 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email3= username3+"@gmail.com";
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		addUserPage.addUser(username3, password, email3, username3, username3);
+		magAc.signIn(username1,password);
 		Utils.pause(3000);
+		
+		
 		info("goto My notification");
 		navTool.goToMyNotifications();
 		myNoti.enableNotification(myNotiType.AS_Comment_intranet);
 		
 		info("User A sent a connection request to User B");
 		hp.goToConnections();
-		connMag.connectToAUser(arrayUser.get(1));
+		connMag.connectToAUser(username2);
 		
 		info("User A add an activity");
 		String activity = txData.getContentByArrayTypeRandom(1) + getRandomNumber();
@@ -525,12 +561,11 @@ import org.testng.annotations.*;
 		hpAct.checkActivity(activity);
 		
 		info("User B login");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(1), password);
+		magAc.signIn(username2, password);
 		Utils.pause(3000);
 		info("User A and User B are connected");
 		hp.goToConnections();
-		connMag.acceptAConnection(arrayUser.get(0));
+		connMag.acceptAConnection(username1);
 		info("UserB comments in UserA's activity");
 		String comment = txData.getContentByArrayTypeRandom(1) + getRandomNumber();
 		hp.goToHomePage();
@@ -548,20 +583,18 @@ import org.testng.annotations.*;
 			- The comment that this notification is about is highlighted.
 			- The notification is read*/
 		info("User A login");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(0), password);
+		magAc.signIn(username1, password);
 		Utils.pause(3000);
 	    info("Verify that badge notification is shown. The notification still is not read");
-	    waitForAndGetElement(intraNot.ELEMENT_INTRANET_NOTIFICATION_BADGE_NUMBER.replace("$num","1"),2000,2);
+	    waitForAndGetElement(intraNot.ELEMENT_INTRANET_NOTIFICATION_BADGE_NUMBER.replace("$num","1"),2000,1);
 	   
 	    info("Open Notification list");
 	    navTool.goToIntranetNotification();
 	    info("Read detail notification");
 	    intraNot.goToDetailCommentNotification(activity,true);
 		notiAct.checkCommentExpand(comment, true);
-		//intraNot.checkDetailActivityNotifications(activity,comments,true);
 		info("Verify that badge notification is not shown. The notification is read.");
-		waitForAndGetElement(intraNot.ELEMENT_INTRANET_NOTIFICATION_BADGE_NUMBER.replace("$num","0"),2000,2);
+		waitForAndGetElement(intraNot.ELEMENT_INTRANET_NOTIFICATION_BADGE_NUMBER.replace("$num","0"),2000,1);
 
 		/*Step number: 3
 		*Step Name: 
@@ -573,12 +606,11 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- The Connection Request is displayed in the notiication list of User A*/
         info("Login with User C");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(2), password);
+		magAc.signIn(username3, password);
 		Utils.pause(3000);
 		info("User sent a connnection request to User A");
 		hp.goToConnections();
-		connMag.connectToAUser(arrayUser.get(0));
+		connMag.connectToAUser(username1);
 		
 		/*Step number: 4
 		*Step Name: 
@@ -589,12 +621,11 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- User A and User C are connected*/
 		info("Login with User A");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(0), password);
+		magAc.signIn(username1, password);
 		info("User A and User C are connected");
 		Utils.pause(3000);
 		navTool.goToIntranetNotification();
-		intraNot.acceptRqConnection(arrayUser.get(2));
+		intraNot.acceptRqConnection(username3);
 
 		/*Step number: 5
 		*Step Name: 
@@ -607,8 +638,7 @@ import org.testng.annotations.*;
 			- A new notification entry is created in the list*/
 		
 		info("Login with User C");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(2), password);
+		magAc.signIn(username3, password);
 		info("UserC comments in UserA's activity");
 		String comment1 = txData.getContentByArrayTypeRandom(1) + getRandomNumber();
 		hp.goToHomePage();
@@ -631,12 +661,14 @@ import org.testng.annotations.*;
 			- $ACTIVITY is the activity message/title
 			- $DATE is the date of the notification of User C*/ 
 		info("Login with User A");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(0), password);
+		magAc.signIn(username1, password);
 		info("Check format notification in the notification list");
 		String status=notiIntranetData.getNotiContent(0);
 		Utils.pause(3000);
 		navTool.goToIntranetNotification();
+		arrayUser.add(username1);
+		arrayUser.add(username2);
+		arrayUser.add(username3);
 		intraNot.checkFormatStatusCommentNotification(arrayUser,status,activity,true);
 
  	}
@@ -663,20 +695,27 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- A comment notification is displayed in the list*/
-		//isDelete=true;
-		info("Create users test");
-		createNewUser(3);
-		info("Log in with User A");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(0), password);
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+"@gmail.com";
+		String username3 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email3= username3+"@gmail.com";
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		addUserPage.addUser(username3, password, email3, username3, username3);
+		magAc.signIn(username1,password);
 		Utils.pause(3000);
+		
 		info("goto My notification");
 		navTool.goToMyNotifications();
 		myNoti.enableNotification(myNotiType.AS_Comment_intranet);
 		
 		info("User A sent a connection request to User B");
 		hp.goToConnections();
-		connMag.connectToAUser(arrayUser.get(1));
+		connMag.connectToAUser(username2);
 		
 		info("User A add an activity");
 		String activity = txData.getContentByArrayTypeRandom(1) + getRandomNumber();
@@ -686,12 +725,11 @@ import org.testng.annotations.*;
 		hpAct.checkActivity(activity);
 		
 		info("Login with User B");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(1), password);
+		magAc.signIn(username2, password);
 		Utils.pause(3000);
 		info("User A and User B are connected");
 		hp.goToConnections();
-		connMag.acceptAConnection(arrayUser.get(0));
+		connMag.acceptAConnection(username1);
 		info("UserB comments in UserA's activity");
 		String comment = txData.getContentByArrayTypeRandom(1) + getRandomNumber();
 		hp.goToHomePage();
@@ -711,13 +749,15 @@ import org.testng.annotations.*;
 			- $ACTIVITY is the activity title/message
 			- $DATE is the date of the activity*/ 
 		info("Log in with user A");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(0), password);
+		magAc.signIn(username1, password);
 	    info("Check format notification in the notification list page");
 		String status=notiIntranetData.getNotiContent(0);
 		Utils.pause(3000);
 		navTool.goToIntranetNotification();
 		intraNot.goToAllNotification();
+		arrayUser.add(username1);
+		arrayUser.add(username2);
+		arrayUser.add(username3);
 		intraNot.checkFormatStatusCommentNotification(arrayUser,status,activity,false);
  	}
 
@@ -745,13 +785,20 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- A comment notification is displayed in the list*/
-		//isDelete=true;
-		info("Create users test");
-		createNewUser(3);
-		info("Login with User A");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(0), password);
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+"@gmail.com";
+		String username3 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email3= username3+"@gmail.com";
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		addUserPage.addUser(username3, password, email3, username3, username3);
+		magAc.signIn(username1,password);
 		Utils.pause(3000);
+		
 		info("goto My notification");
 		navTool.goToMyNotifications();
 		myNoti.enableNotification(myNotiType.AS_Comment_intranet);
@@ -759,9 +806,9 @@ import org.testng.annotations.*;
 		hp.goToConnections();
 		Utils.pause(3000);
 		info("User A sent a connection request to User B");
-		connMag.connectToAUser(arrayUser.get(1));
+		connMag.connectToAUser(username2);
 		info("User A sent a connection request to User C");
-		connMag.connectToAUser(arrayUser.get(2));
+		connMag.connectToAUser(username3);
 		
 		info("User A add an activity");
 		String activity = txData.getContentByArrayTypeRandom(1) + getRandomNumber();
@@ -771,13 +818,12 @@ import org.testng.annotations.*;
 		hpAct.checkActivity(activity);
 		
 		info("Log in with User B");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(1), password);
+		magAc.signIn(username2, password);
 		Utils.pause(3000);
 		info("User A and User B are connected");
 		hp.goToConnections();
 		Utils.pause(3000);
-		connMag.acceptAConnection(arrayUser.get(0));
+		connMag.acceptAConnection(username1);
 		
 		info("UserB comments in UserA's activity");
 		String comment = txData.getContentByArrayTypeRandom(1) + getRandomNumber();
@@ -786,12 +832,11 @@ import org.testng.annotations.*;
 		hpAct.addCommentUsingJavascript(activity, comment);
 		
 		info("Log in with User C");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(2), password);
+		magAc.signIn(username3, password);
 		info("User A and User C are connected");
 		hp.goToConnections();
 		Utils.pause(3000);
-		connMag.acceptAConnection(arrayUser.get(0));
+		connMag.acceptAConnection(username1);
 		
 		info("UserC comments in UserA's activity");
 		String comment1 = txData.getContentByArrayTypeRandom(1) + getRandomNumber();
@@ -813,13 +858,15 @@ import org.testng.annotations.*;
 			- $ACTIVITY is the activity title/message
 			- $DATE is the date of the activity*/
 		
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(0), password);
+		magAc.signIn(username1, password);
 	    info("Check format notification in the notification list page");
 		String status=notiIntranetData.getNotiContent(1);
 		Utils.pause(3000);
 		navTool.goToIntranetNotification();
 		intraNot.goToAllNotification();
+		arrayUser.add(username1);
+		arrayUser.add(username2);
+		arrayUser.add(username3);
 		intraNot.checkFormatStatusCommentNotification(arrayUser,status,activity,false);
 
  	}
@@ -849,13 +896,23 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- A comment notification is displayed in the list*/
-		//isDelete=true;
-		info("Create users test");
-		createNewUser(4);
-		info("Log in with User A");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(0), password);
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+"@gmail.com";
+		String username3 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email3= username3+"@gmail.com";
+		String username4 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email4= username4+"@gmail.com";
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		addUserPage.addUser(username3, password, email3, username3, username3);
+		addUserPage.addUser(username4, password, email4, username4, username4);
+		magAc.signIn(username1,password);
 		Utils.pause(3000);
+		
 		info("goto My notification");
 		navTool.goToMyNotifications();
 		myNoti.enableNotification(myNotiType.AS_Comment_intranet);
@@ -863,13 +920,13 @@ import org.testng.annotations.*;
 		hp.goToConnections();
 		Utils.pause(3000);
 		info("User A sent a connection request to User B");
-		connMag.connectToAUser(arrayUser.get(1));
+		connMag.connectToAUser(username2);
 		info("User A sent a connection request to User C");
 		Utils.pause(3000);
-		connMag.connectToAUser(arrayUser.get(2));
+		connMag.connectToAUser(username3);
 		info("User A sent a connection request to User D");
 		Utils.pause(3000);
-		connMag.connectToAUser(arrayUser.get(3));
+		connMag.connectToAUser(username4);
 		
 		info("User A add an activity");
 		String activity = txData.getContentByArrayTypeRandom(1) + getRandomNumber();
@@ -879,12 +936,11 @@ import org.testng.annotations.*;
 		hpAct.checkActivity(activity);
 		
 		info("Log in with User B");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(1), password);
+		magAc.signIn(username2, password);
 		info("User A and User B are connected");
 		Utils.pause(3000);
 		hp.goToConnections();
-		connMag.acceptAConnection(arrayUser.get(0));
+		connMag.acceptAConnection(username1);
 		
 		info("UserB comments in UserA's activity");
 		String comment = txData.getContentByArrayTypeRandom(1) + getRandomNumber();
@@ -893,12 +949,11 @@ import org.testng.annotations.*;
 		hpAct.addCommentUsingJavascript(activity, comment);
 		
 		info("Log in with User C");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(2), password);
+		magAc.signIn(username3, password);
 		Utils.pause(3000);
 		info("User A and User C are connected");
 		hp.goToConnections();
-		connMag.acceptAConnection(arrayUser.get(0));
+		connMag.acceptAConnection(username1);
 		
 		info("UserC comments in UserA's activity");
 		String comment1 = txData.getContentByArrayTypeRandom(1) + getRandomNumber();
@@ -907,12 +962,11 @@ import org.testng.annotations.*;
 		hpAct.addCommentUsingJavascript(activity, comment1);
 		
 		info("Log in with User D");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(3), password);
+		magAc.signIn(username4, password);
 		info("User A and User D are connected");
 		Utils.pause(3000);
 		hp.goToConnections();
-		connMag.acceptAConnection(arrayUser.get(0));
+		connMag.acceptAConnection(username1);
 		
 		info("UserD comments in UserA's activity");
 		String comment2 = txData.getContentByArrayTypeRandom(1) + getRandomNumber();
@@ -933,13 +987,16 @@ import org.testng.annotations.*;
 			- $COUNT is 2
 			- $ACTIVITY is the activity title/message
 			- $DATE is the date of the activity*/ 
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(0), password);
+		magAc.signIn(username1, password);
 	    info("Check format notification in the notification list page");
 		String status=notiIntranetData.getNotiContent(2);
 		Utils.pause(3000);
 		navTool.goToIntranetNotification();
 		intraNot.goToAllNotification();
+		arrayUser.add(username1);
+		arrayUser.add(username2);
+		arrayUser.add(username3);
+		arrayUser.add(username4);
 		intraNot.checkFormatStatusCommentNotification(arrayUser,status,activity,false);
 
  	}
@@ -966,20 +1023,27 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- A comment notification is displayed in the list*/
-		//isDelete=true;
-		info("Create users test");
-		createNewUser(3);
-		info("Log in with User A");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(0), password);
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+"@gmail.com";
+		String username3 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email3= username3+"@gmail.com";
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		addUserPage.addUser(username3, password, email3, username3, username3);
+		magAc.signIn(username1,password);
 		Utils.pause(3000);
+		
 		info("goto My notification");
 		navTool.goToMyNotifications();
 		myNoti.enableNotification(myNotiType.AS_Comment_intranet);
 		
 		info("User A sent a connection request to User B");
 		hp.goToConnections();
-		connMag.connectToAUser(arrayUser.get(1));
+		connMag.connectToAUser(username2);
 		
 		
 		info("User A add an activity");
@@ -990,12 +1054,11 @@ import org.testng.annotations.*;
 		hpAct.checkActivity(activity);
 		
 		info("Log in with User B");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(1), password);
+		magAc.signIn(username2, password);
 		Utils.pause(3000);
 		info("User A and User B are connected");
 		hp.goToConnections();
-		connMag.acceptAConnection(arrayUser.get(0));
+		connMag.acceptAConnection(username1);
 		
 		info("UserB comments in UserA's activity");
 		String comment = txData.getContentByArrayTypeRandom(1) + getRandomNumber();
@@ -1014,12 +1077,11 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- The Connection Request is displayed in the notiication list of User A*/
 		info("Log in with User C");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(2), password);
+		magAc.signIn(username3, password);
 		Utils.pause(3000);
 		info("User C sent a connection request to User A");
 		hp.goToConnections();
-		connMag.connectToAUser(arrayUser.get(0));
+		connMag.connectToAUser(username1);
 		
 		/*Step number: 3
 		*Step Name: 
@@ -1030,11 +1092,10 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- User A and User C are connected*/
 		info("Log in with User A");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(0), password);
+		magAc.signIn(username1, password);
 		Utils.pause(3000);
 		navTool.goToIntranetNotification();
-		intraNot.acceptRqConnection(arrayUser.get(2));
+		intraNot.acceptRqConnection(username3);
 		
 		/*Step number: 4
 		*Step Name: 
@@ -1048,8 +1109,7 @@ import org.testng.annotations.*;
 			- The notification is displayed at the top of the list*/
 
 		info("Log in with User C");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(2), password);
+		magAc.signIn(username3, password);
 		info("UserB comments in UserA's activity");
 		String comment1 = txData.getContentByArrayTypeRandom(1) + getRandomNumber();
 		hp.goToHomePage();
@@ -1069,13 +1129,15 @@ import org.testng.annotations.*;
 			- $ACTIVITY is the activity message/title
 			- $DATE is the date of the last notification of User C*/ 
 		info("Log in with User A");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(0), password);
+		magAc.signIn(username1, password);
 		info("Check format notification in the notification list page");
 		String status=notiIntranetData.getNotiContent(1);
 		Utils.pause(3000);
 		navTool.goToIntranetNotification();
 		intraNot.goToAllNotification();
+		arrayUser.add(username1);
+		arrayUser.add(username2);
+		arrayUser.add(username3);
 		intraNot.checkFormatStatusCommentNotification(arrayUser,status,activity,false);
 
  	}
@@ -1102,20 +1164,27 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- A comment notification is displayed in the list*/
-		//isDelete=true;
-		info("Create users test");
-		createNewUser(3);
-		info("Log in with User A");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(0), password);
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+"@gmail.com";
+		String username3 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email3= username3+"@gmail.com";
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		addUserPage.addUser(username3, password, email3, username3, username3);
+		magAc.signIn(username1,password);
 		Utils.pause(3000);
+		
 		info("goto My notification");
 		navTool.goToMyNotifications();
 		myNoti.enableNotification(myNotiType.AS_Comment_intranet);
 		
 		info("User A sent a connection request to User B");
 		hp.goToConnections();
-		connMag.connectToAUser(arrayUser.get(1));
+		connMag.connectToAUser(username2);
 		
 		
 		info("User A add an activity");
@@ -1126,12 +1195,11 @@ import org.testng.annotations.*;
 		hpAct.checkActivity(activity);
 		
 		info("Log in with User B");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(1), password);
+		magAc.signIn(username2, password);
 		info("User A and User B are connected");
 		Utils.pause(3000);
 		hp.goToConnections();
-		connMag.acceptAConnection(arrayUser.get(0));
+		connMag.acceptAConnection(username1);
 		
 		info("UserB comments in UserA's activity");
 		String comment = txData.getContentByArrayTypeRandom(1) + getRandomNumber();
@@ -1149,8 +1217,7 @@ import org.testng.annotations.*;
 			- The comment that this notification is about is highlighted.
 			- The notification is read*/
 		info("Log in with User A");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(0), password);
+		magAc.signIn(username1, password);
 		Utils.pause(3000);
 		
 		info("Verify that badge notification is shown. The notification still is not read");
@@ -1174,12 +1241,11 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- The Connection Request is displayed in the notiication list of User A*/
 		info("Log in with User C");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(2), password);
+		magAc.signIn(username3, password);
 		Utils.pause(3000);
 		info("User C sent a connection request to User A");
 		hp.goToConnections();
-		connMag.connectToAUser(arrayUser.get(0));
+		connMag.connectToAUser(username1);
 
 		/*Step number: 4
 		*Step Name: 
@@ -1191,11 +1257,10 @@ import org.testng.annotations.*;
 			- User A and User C are connected*/
 		
 		info("Log in with User A");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(0), password);
+		magAc.signIn(username1, password);
 		Utils.pause(3000);
 		navTool.goToIntranetNotification();
-		intraNot.acceptRqConnection(arrayUser.get(2));
+		intraNot.acceptRqConnection(username3);
 
 		/*Step number: 5
 		*Step Name: 
@@ -1208,8 +1273,7 @@ import org.testng.annotations.*;
 			- A new notification entry is created in the list*/
 		
 		info("Log in with User C");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(2), password);
+		magAc.signIn(username3, password);
 		Utils.pause(3000);
 		info("UserB comments in UserA's activity");
 		String comment1 = txData.getContentByArrayTypeRandom(1) + getRandomNumber();
@@ -1230,13 +1294,15 @@ import org.testng.annotations.*;
 			- $ACTIVITY is the activity message/title
 			- $DATE is the date of the notification of User C*/ 
 		info("Log in with User A");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(0), password);
+		magAc.signIn(username1, password);
 		info("Check format notification in the notification list page");
 		String status=notiIntranetData.getNotiContent(0);
 		Utils.pause(3000);
 		navTool.goToIntranetNotification();
 		intraNot.goToAllNotification();
+		arrayUser.add(username1);
+		arrayUser.add(username2);
+		arrayUser.add(username3);
 		intraNot.checkFormatStatusCommentNotification(arrayUser,status,activity,false);
 
  	}
@@ -1263,20 +1329,24 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- A comment notification is displayed in the list*/
-		//isDelete=true;
-		info("Create users test");
-		createNewUser(2);
-		info("Log in with User A");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(0), password);
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+"@gmail.com";
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		magAc.signIn(username1,password);
 		Utils.pause(3000);
+		
 		info("goto My notification");
 		navTool.goToMyNotifications();
 		myNoti.enableNotification(myNotiType.AS_Comment_intranet);
 		Utils.pause(3000);
 		info("User A sent a connection request to User B");
 		hp.goToConnections();
-		connMag.connectToAUser(arrayUser.get(1));
+		connMag.connectToAUser(username2);
 		Utils.pause(3000);
 		
 		info("User A add an activity with a link");
@@ -1288,12 +1358,11 @@ import org.testng.annotations.*;
 		hpAct.checkActivity(activity);
 		
 		info("Log in with User B");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(1), password);
+		magAc.signIn(username2, password);
 		Utils.pause(3000);
 		info("User A and User B are connected");
 		hp.goToConnections();
-		connMag.acceptAConnection(arrayUser.get(0));
+		connMag.acceptAConnection(username1);
 		
 		info("UserB comments in UserA's activity");
 		String comment = txData.getContentByArrayTypeRandom(1) + getRandomNumber();
@@ -1314,12 +1383,13 @@ import org.testng.annotations.*;
 			- $ACTIVITY is the activity title/message : the link is displayed
 			- $DATE is the date of the activity*/
 		info("Log in with User A");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(0), password);
+		magAc.signIn(username1, password);
 		info("Check format notification in the notification list page");
 		String status=notiIntranetData.getNotiContent(0);
 		Utils.pause(3000);
 		navTool.goToIntranetNotification();
+		arrayUser.add(username1);
+		arrayUser.add(username2);
 		intraNot.checkFormatStatusCommentNotification(arrayUser,status,link,true);
 
 		/*Step number: 3
@@ -1359,20 +1429,24 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- A comment notification is displayed in the list*/
 		
-		//isDelete=true;
-		info("Create users test");
-		createNewUser(2);
-		info("Log in with User A");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(0), password);
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+"@gmail.com";
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		magAc.signIn(username1,password);
 		Utils.pause(3000);
+		
 		info("goto My notification");
 		navTool.goToMyNotifications();
 		myNoti.enableNotification(myNotiType.AS_Comment_intranet);
 		Utils.pause(3000);
 		info("User A sent a connection request to User B");
 		hp.goToConnections();
-		connMag.connectToAUser(arrayUser.get(1));
+		connMag.connectToAUser(username2);
 		
 		Utils.pause(3000);
 		info("User A add an activity with attachment file");
@@ -1383,17 +1457,15 @@ import org.testng.annotations.*;
 		
 		hp.goToHomePage();
 		Utils.pause(3000);
-		//hpAct.addActivity(drive,folderPath,"TestData/", attachedFile, true, activity);
 		hpAct.uploadAndShareFileActivity(drive,folderPath, "TestData/", attachedFile,activity);
 		hpAct.checkActivity(activity);
 		
 		info("Log in with User B");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(1), password);
+		magAc.signIn(username2, password);
 		Utils.pause(3000);
 		info("User A and User B are connected");
 		hp.goToConnections();
-		connMag.acceptAConnection(arrayUser.get(0));
+		connMag.acceptAConnection(username1);
 		Utils.pause(3000);
 		info("UserB comments in UserA's activity");
 		String comment = txData.getContentByArrayTypeRandom(1) + getRandomNumber();
@@ -1415,12 +1487,13 @@ import org.testng.annotations.*;
 			- $DATE is the date of the activity*/
 		
 		info("Log in with User A");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(0), password);
+		magAc.signIn(username1, password);
 		info("Check format notification in the notification list page");
 		String status=notiIntranetData.getNotiContent(0);
 		Utils.pause(3000);
 		navTool.goToIntranetNotification();
+		arrayUser.add(username1);
+		arrayUser.add(username2);
 		intraNot.checkFormatStatusCommentNotification(arrayUser,status,attachedFile,true);
 
 		/*Step number: 3
@@ -1432,7 +1505,6 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- The activity is displayed in the activity viewer with all comment expanded.
 			- The comment that this notification is about is highlighted.*/ 
-		//intraNot.checkDetailActivityNotifications(activity, comments,true);
 		intraNot.goToDetailCommentNotification(activity,true);
 		notiAct.checkCommentExpand(comment, true);
 
@@ -1460,17 +1532,26 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- A comment notification is displayed in the list*/
-		//isDelete=true;
-		info("Create users test");
-		createNewUser(1);
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+"@gmail.com";
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		navTool.goToUsersAndGroupsManagement();
+		userAndGroup.addUserAdmin(username1);
+		magAc.signIn(username1,password);
 		Utils.pause(3000);
+		
 		info("goto My notification");
 		navTool.goToMyNotifications();
 		myNoti.enableNotification(myNotiType.AS_Comment_intranet);
 		Utils.pause(3000);
 		info("John sent a connection request to User A");
 		hp.goToConnections();
-		connMag.connectToAUser(arrayUser.get(0));
+		connMag.connectToAUser(username2);
 		
 		info("John add an activity with wiki page");
 		String wiki = txData.getContentByArrayTypeRandom(1) + getRandomNumber();
@@ -1485,12 +1566,11 @@ import org.testng.annotations.*;
 				replace("${name}",wiki),2000,1);
 		
 		info("Log in with User A");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(0), password);
+		magAc.signIn(username2, password);
 		Utils.pause(3000);
 		info("John and User A are connected");
 		hp.goToConnections();
-		connMag.acceptAConnection(DATA_USER1);
+		connMag.acceptAConnection(username1);
 		Utils.pause(3000);
 		info("UserA comments in John's activity");
 		String comment = txData.getContentByArrayTypeRandom(1) + getRandomNumber();
@@ -1511,13 +1591,14 @@ import org.testng.annotations.*;
 			- $ACTIVITY is the activity title/message : the name of the wiki page
 			- $DATE is the date of the activity*/
 		
-		info("Log in with John account");
-		magAc.signOut();
-		magAc.signIn(DATA_USER1,DATA_PASS);
+		info("Log in with admin account");
+		magAc.signIn(username1,password);
 		info("Check format notification in the notification list page");
 		String status=notiIntranetData.getNotiContent(0);
 		Utils.pause(3000);
 		navTool.goToIntranetNotification();
+		arrayUser.add(username1);
+		arrayUser.add(username2);
 		intraNot.checkFormatStatusCommentNotification(arrayUser,status,wiki,true);
 
 		/*Step number: 3
@@ -1529,7 +1610,6 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- The activity is displayed in the activity viewer with all comment expanded.
 			- The comment that this notification is about is highlighted.*/ 
-		//intraNot.checkDetailActivityNotifications(wiki, comments,true);
 		intraNot.goToDetailCommentNotification(wiki,true);
 		notiAct.checkCommentExpand(comment, true);
 
@@ -1559,20 +1639,24 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- A comment notification is displayed in the list*/
-		//isDelete=true;
-		info("Create users test");
-		createNewUser(2);
-		info("Log in with User A");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(0), password);
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+"@gmail.com";
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		magAc.signIn(username1,password);
 		Utils.pause(3000);
+		
 		info("goto My notification");
 		navTool.goToMyNotifications();
 		myNoti.enableNotification(myNotiType.AS_Comment_intranet);
 		Utils.pause(3000);
 		info("User A sent a connection request to User B");
 		hp.goToConnections();
-		connMag.connectToAUser(arrayUser.get(1));
+		connMag.connectToAUser(username2);
 		Utils.pause(3000);
 		
 		info("User A create a new space");
@@ -1585,7 +1669,7 @@ import org.testng.annotations.*;
 		Utils.pause(3000);
 		setSpaceMg.goToMemberTab();
 		Utils.pause(3000);
-		setSpaceMg.inviteUser(arrayUser.get(1),true,arrayUser.get(1));
+		setSpaceMg.inviteUser(username2,true,username2+" "+username2);
 		
 		
 		info("User A create a new event");
@@ -1600,12 +1684,8 @@ import org.testng.annotations.*;
 		
 		
 		info("Log in with User B");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(1), password);
+		magAc.signIn(username2, password);
 		Utils.pause(3000);
-		/*info("User A and User B are connected");
-		hp.goToConnections();
-		connMag.acceptAConnection(arrayUser.get(0));*/
 		info("User B accepted invitation from space of User A");
 		hp.goToAllSpace();
 		spaMg.goToInvitationsReceivedTab();
@@ -1631,12 +1711,13 @@ import org.testng.annotations.*;
 			- $ACTIVITY is the activity title/message : the name of event
 			- $DATE is the date of the activity*/
 		info("Log in with User A");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(0), password);
+		magAc.signIn(username1, password);
 		info("Check format notification in the notification list page");
 		String status=notiIntranetData.getNotiContent(0);
 		Utils.pause(3000);
 		navTool.goToIntranetNotification();
+		arrayUser.add(username1);
+		arrayUser.add(username2);
 		intraNot.checkFormatStatusCommentNotification(arrayUser,status,newEvent,true);
 
 		/*Step number: 3

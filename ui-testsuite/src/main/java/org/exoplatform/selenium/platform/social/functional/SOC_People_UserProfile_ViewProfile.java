@@ -2,6 +2,7 @@ package org.exoplatform.selenium.platform.social.functional;
 
 import static org.exoplatform.selenium.TestLogger.info;
 
+import org.exoplatform.selenium.Utils;
 import org.exoplatform.selenium.platform.ConnectionsManagement.selectTabOption;
 import org.openqa.selenium.Dimension;
 import org.testng.annotations.*;
@@ -30,21 +31,22 @@ public class SOC_People_UserProfile_ViewProfile extends SOC_TestConfig{
 			While viewing a user profile, the title of the page (displayed in the browser tab) is the display name of the user. If the display name is not set, the full name (first name + last name) is used.*/
 		/*Create data test*/
 		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
-		String password1 = username1;
-		String email1 = username1 + mailSuffixData.getMailSuffixRandom();
-		String fullname = username1+" "+username1;
-
+		String email1 = username1+"@gmail.com";
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+"@gmail.com";
 		info("Add new user");
-		magAc.signIn(DATA_USER1, DATA_PASS);
 		navTool.goToAddUser();
-		addUserPage.addUser(username1, password1, email1, username1, username1);
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		magAc.signIn(username1,password);
+		Utils.pause(3000);
 
 		info("Click on Connections on the left panel");
 		hp.goToConnections();
-		connMag.searchPeople(username1,"","","");
-		click(connMag.ELEMENT_USER_LINK.replace("${userName}", username1));
+		connMag.searchPeople(username2,"","","");
+		click(connMag.ELEMENT_USER_LINK.replace("${userName}", username2));
 		String title = driver.getTitle();
-		assert(title.contentEquals(fullname));
+		assert(title.contentEquals(username2+" "+username2));
 
 		/*Step number: 2
 		 *Step Name: Step 2: Go to your profile.
@@ -77,6 +79,13 @@ public class SOC_People_UserProfile_ViewProfile extends SOC_TestConfig{
 
 		 *Expected Outcome: 
 			The My Profile page is shown.*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		magAc.signIn(username1,password);
+		Utils.pause(3000);
 		navTool.goToMyProfile();
 
 		/*Step number: 2
@@ -125,14 +134,15 @@ public class SOC_People_UserProfile_ViewProfile extends SOC_TestConfig{
 
 		/*Create data test*/
 		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
-		String password1 = txData.getContentByArrayTypeRandom(1) + getRandomNumber();
-		String email1 = txData.getContentByArrayTypeRandom(1) + getRandomNumber() + mailSuffixData.getMailSuffixRandom();
-
+		String email1 = username1+"@gmail.com";
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+"@gmail.com";
 		info("Add new user");
-		magAc.signIn(DATA_USER1, DATA_PASS);
 		navTool.goToAddUser();
-		addUserPage.addUser(username1, password1, email1, username1, username1);
-		magAc.signIn(username1, password1);
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		magAc.signIn(username1,password);
+		Utils.pause(3000);
 
 		navTool.goToMyProfile();
 
@@ -226,7 +236,7 @@ public class SOC_People_UserProfile_ViewProfile extends SOC_TestConfig{
 
 		 *Expected Outcome: 
 			- The Connections page is shown.*/
-		magAc.signIn(DATA_USER1, DATA_PASS);
+		magAc.signIn(username2,password);
 
 		info("Click on Connections on the left panel");
 		hp.goToConnections();
@@ -301,19 +311,15 @@ public class SOC_People_UserProfile_ViewProfile extends SOC_TestConfig{
 
 		/*Create data test*/
 		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
-		String password1 = username1;
-		String email1 = username1 + mailSuffixData.getMailSuffixRandom();
-
+		String email1 = username1+"@gmail.com";
 		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
-		String password2 = username2;
-		String email2 = username2 + mailSuffixData.getMailSuffixRandom();
-
+		String email2 = username2+"@gmail.com";
 		info("Add new user");
-		magAc.signIn(DATA_USER1, DATA_PASS);
 		navTool.goToAddUser();
-		addUserPage.addUser(username1, password1, email1, username1, username1);
-		addUserPage.addUser(username2, password2, email2, username2, username2);
-		magAc.signIn(username1, password1);
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		magAc.signIn(username1,password);
+		Utils.pause(3000);
 		/*Step Number: 1
 		 *Step Name: Step 1: Sign in system
 		 *Step Description: 
@@ -401,14 +407,15 @@ public class SOC_People_UserProfile_ViewProfile extends SOC_TestConfig{
 
 		/*Create data test*/
 		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
-		String password1 = txData.getContentByArrayTypeRandom(1) + getRandomNumber();
-		String email1 = txData.getContentByArrayTypeRandom(1) + getRandomNumber() + mailSuffixData.getMailSuffixRandom();
-
+		String email1 = username1+"@gmail.com";
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+"@gmail.com";
 		info("Add new user");
-		magAc.signIn(DATA_USER1, DATA_PASS);
 		navTool.goToAddUser();
-		addUserPage.addUser(username1, password1, email1, username1, username1);
-		magAc.signIn(username1, password1);
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		magAc.signIn(username1,password);
+		Utils.pause(3000);
 
 		navTool.goToMyProfile();
 
@@ -435,7 +442,6 @@ public class SOC_People_UserProfile_ViewProfile extends SOC_TestConfig{
 
 		 *Expected Outcome: 
 			- The Connections page is shown.*/
-		magAc.signIn(DATA_USER1, DATA_PASS);
 		info("Click on Connections on the left panel");
 		hp.goToConnections();
 		/*Step number: 2
@@ -448,7 +454,7 @@ public class SOC_People_UserProfile_ViewProfile extends SOC_TestConfig{
 			- Connection request is sent to user2.
 			- The button [Connect] is changed to [Cancel Request] button respectively.*/
 		info("Click on Connect button to invite about 2 users");
-		connMag.connectToAUser(username1);
+		connMag.connectToAUser(username2);
 
 		/*Step number: 3
 		 *Step Name: Step 3: Accept the friend
@@ -462,10 +468,10 @@ public class SOC_People_UserProfile_ViewProfile extends SOC_TestConfig{
 			- A connection between two users is created. 
 			- The buttons [Confirm], [Ignore] disappear from user1.
 			- The button [Remove Connection] is shown on user1.*/
-		magAc.signIn(username1, password1);
+		magAc.signIn(username2, password);
 		hp.goToConnections();	
 		connMag.goToConnectionTab(selectTabOption.RECEIVE);
-		connMag.acceptAConnection(DATA_USER1);
+		connMag.acceptAConnection(username1);
 		
 		/*Step number: 4
 		 *Step Name: Step 4: View profile page of user's contact
@@ -479,7 +485,7 @@ public class SOC_People_UserProfile_ViewProfile extends SOC_TestConfig{
 			- Activities: show text box, allowing user to add new activity and display activities of user's contact.
 			- Connections: 4 tab+ Everyone: list all users+ My Connections: list users which have connections with user1.+ Request received: show users that sent connection request touser1.+ Request pending: show users that user1 sent connection request.
 			- Wiki: wiki page of user1.*/
-		navTool.goToMyProfile();
+		click(connMag.ELEMENT_USER_LINK.replace("${userName}", username1));
 		waitForAndGetElement(myProfile.ELEMENT_UIEXPERIENCE_PROFILE_PORTLET.replace("${content}", aboutMe));
 		waitForAndGetElement(myProfile.ELEMENT_COMPANY_INFO.replace("${company}",organization));
 		waitForAndGetElement(myProfile.ELEMENT_POSITION_INFO.replace("${position}",expJobTitle));
@@ -513,11 +519,11 @@ public class SOC_People_UserProfile_ViewProfile extends SOC_TestConfig{
 			- Recent activities: activities of user1.
 			- Connected status: Show the "Connected" status between user1 and user2.
 			- Connections: list of user1's connections.*/ 
-		magAc.signIn(DATA_USER1, DATA_PASS);
+		magAc.signIn(username1,password);
 		info("Click on Connections on the left panel");
 		hp.goToConnections();
-		connMag.searchPeople(username1,"","","");
-		click(connMag.ELEMENT_USER_LINK.replace("${userName}", username1));
+		connMag.searchPeople(username2,"","","");
+		click(connMag.ELEMENT_USER_LINK.replace("${userName}", username2));
 		info("Profile: Show all information about user2.");
 		waitForAndGetElement(myProfile.ELEMENT_UIEXPERIENCE_PROFILE_PORTLET.replace("${content}", aboutMe));
 		waitForAndGetElement(myProfile.ELEMENT_COMPANY_INFO.replace("${company}",organization));

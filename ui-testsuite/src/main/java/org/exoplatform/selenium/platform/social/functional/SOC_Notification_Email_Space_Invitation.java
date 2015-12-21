@@ -33,7 +33,6 @@ import org.testng.annotations.*;
 		createNewUser(1);
 		
 		info("User A login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		Utils.pause(3000);
 		
@@ -74,7 +73,6 @@ import org.testng.annotations.*;
 		createNewUser(1);
 		
 		info("User A login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		Utils.pause(3000);
 		
@@ -195,7 +193,6 @@ import org.testng.annotations.*;
 		createNewUser(1);
 		
 		info("User A login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		Utils.pause(3000);
 		
@@ -279,7 +276,6 @@ import org.testng.annotations.*;
 		createNewUser(2);
 		
 		info("User A login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		Utils.pause(3000);
 		
@@ -294,7 +290,6 @@ import org.testng.annotations.*;
 		userProPage.saveCancelUpdateInfo(true);
 		
 		info("User B login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(1), password);
 		Utils.pause(3000);
 		
@@ -324,7 +319,6 @@ import org.testng.annotations.*;
 			Interested to join the space and access its documents and applications ?
 			Accept | Refuse*/
 		info("Log in with User A");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		
 		String parentWindow = driver.getWindowHandle();
@@ -344,7 +338,8 @@ import org.testng.annotations.*;
 		emailNot.getAllChildWindows();
 		emailNot.verifyFormatEmailNotifcationForSpace(emailTitle,firstName, fullName, emailContent,spaceName);
 		emailNot.closeChildBrowsers(parentWindow);
-
+		if(arrayUser.size()>0)
+			deleteUsers(arrayUser);
  	}
 
 	/**
@@ -373,7 +368,6 @@ import org.testng.annotations.*;
 		createNewUser(2);
 		
 		info("User A login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		Utils.pause(3000);
 		
@@ -388,7 +382,6 @@ import org.testng.annotations.*;
 		userProPage.saveCancelUpdateInfo(true);
 		
 		info("User B login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(1), password);
 		Utils.pause(3000);
 		
@@ -414,7 +407,6 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- The notification mail subject is: You're invited to join Space 1 space*/
 		info("Log in with User A");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		
 		String parentWindow = driver.getWindowHandle();
@@ -428,6 +420,8 @@ import org.testng.annotations.*;
 		emailNot.getAllChildWindows();
 		emailNot.verifyPresentEmailActivityNotifications(titleEmail,fullName,spaceName);
 		emailNot.closeChildBrowsers(parentWindow);
+		if(arrayUser.size()>0)
+			deleteUsers(arrayUser);
 
  	}
 
@@ -456,7 +450,6 @@ import org.testng.annotations.*;
 		createNewUser(2);
 		
 		info("User A login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		Utils.pause(3000);
 		
@@ -471,7 +464,6 @@ import org.testng.annotations.*;
 		userProPage.saveCancelUpdateInfo(true);
 		
 		info("User B login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(1), password);
 		Utils.pause(3000);
 		
@@ -497,7 +489,6 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- There is a notification mail about new connection request is sent to user2*/ 
 		info("Log in with User A");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		
 		String parentWindow = driver.getWindowHandle();
@@ -511,6 +502,8 @@ import org.testng.annotations.*;
 		emailNot.getAllChildWindows();
 		emailNot.verifyPresentEmailActivityNotifications(titleEmail,fullName,spaceName);
 		emailNot.closeChildBrowsers(parentWindow);
+		if(arrayUser.size()>0)
+			deleteUsers(arrayUser);
 
  	}
 
@@ -660,7 +653,6 @@ import org.testng.annotations.*;
 		createNewUser(2);
 		
 		info("User A login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		Utils.pause(3000);
 		
@@ -675,7 +667,6 @@ import org.testng.annotations.*;
 		userProPage.saveCancelUpdateInfo(true);
 		
 		info("User B login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(1), password);
 		Utils.pause(3000);
 		
@@ -693,7 +684,6 @@ import org.testng.annotations.*;
 		setSpaceMg.inviteUser(arrayUser.get(0),false,arrayUser.get(0));
 		
 		info("Log in with User A");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		
 		String parentWindow = driver.getWindowHandle();
@@ -712,6 +702,8 @@ import org.testng.annotations.*;
 		emailNot.getAllChildWindows();
 		spaHome.verifyTitleSpace(spaceName);
 		emailNot.closeChildBrowsers(parentWindow);
+		if(arrayUser.size()>0)
+			deleteUsers(arrayUser);
 
  	}
 
@@ -792,7 +784,6 @@ import org.testng.annotations.*;
 		createNewUser(2);
 		
 		info("User A login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		Utils.pause(3000);
 		
@@ -807,7 +798,6 @@ import org.testng.annotations.*;
 		userProPage.saveCancelUpdateInfo(true);
 		
 		info("User B login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(1), password);
 		Utils.pause(3000);
 		
@@ -825,7 +815,6 @@ import org.testng.annotations.*;
 		setSpaceMg.inviteUser(arrayUser.get(0),true,arrayUser.get(0));
 		
 		info("Log in with User A");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		
 		String parentWindow = driver.getWindowHandle();
@@ -845,5 +834,6 @@ import org.testng.annotations.*;
 		emailNot.getAllChildWindows();
 		emailNot.verifyFeedBackMessageRefuseConnection(message, fullName);
 		emailNot.closeChildBrowsers(parentWindow);
-
+		if(arrayUser.size()>0)
+			deleteUsers(arrayUser);
  	}}

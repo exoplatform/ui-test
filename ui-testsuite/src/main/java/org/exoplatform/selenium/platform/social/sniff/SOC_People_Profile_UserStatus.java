@@ -28,6 +28,18 @@ public class SOC_People_Profile_UserStatus extends SOC_TestConfig_2{
 		String iconOffline = chatStatus.getIcon(0);
 		String statusOffline = chatStatus.getStatus(0);
 		String tooltipOffline = chatStatus.getTooltip(0);
+		//Create data test
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+ mailSuffixData.getMailSuffixRandom();
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+ mailSuffixData.getMailSuffixRandom();
+		
+		
+		info("Add user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		magAc.signIn(username1, password);
 		/*Step Number: 1
 		 *Step Name: Step 1 : Go to user profile
 		 *Step Description: 
@@ -64,8 +76,8 @@ public class SOC_People_Profile_UserStatus extends SOC_TestConfig_2{
 		info("goto profile of user 2");
 		hp.goToConnections();
 		click(connMag.ELEMENT_ALL_CONNECTIONS_TAB);
-		connMag.searchPeople(DATA_USER2,null,null,null);
-		click(connMag.ELEMENT_CONNECTION_USER_NAME.replace("${user}", DATA_USER2));
+		connMag.searchPeople(username2,null,null,null);
+		click(connMag.ELEMENT_CONNECTION_USER_NAME.replace("${user}",username2));
 
 		waitForAndGetElement(chat.ELEMENT_CHAT_UISTATUSPROFILEPORTLET.replace("${icon}", iconOffline).replace("${status}", statusOffline));
 		mouseOver(chat.ELEMENT_CHAT_TOOLTIP.replace("${tooltip}", tooltipOffline),true);
@@ -97,6 +109,16 @@ public class SOC_People_Profile_UserStatus extends SOC_TestConfig_2{
 		String statusInvi = chatStatus.getStatus(4);
 		String tooltipInvi = chatStatus.getTooltip(4);
 		String statusOnline = chatStatus.getStatus(1);
+		
+		//Create data test
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+ mailSuffixData.getMailSuffixRandom();
+		
+		
+		info("Add user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		magAc.signIn(username1, password);
 
 		/*Step Number: 1
 		 *Step Name: Step 1 : Go to user profile

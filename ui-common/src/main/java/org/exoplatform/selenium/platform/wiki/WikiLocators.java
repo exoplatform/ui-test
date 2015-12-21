@@ -616,4 +616,14 @@ public class WikiLocators extends PlatformBase{
 	public final By ELEMENT_WIKI_TOOLTIP_RESTRICTED_PAGE_TITLE=By.xpath(".//*[@id='iconTreeExplorer']//em[contains(@data-original-title,'This page is restricted, you do not have permission to view it.')]");
 	public final By ELEMENT_WIKI_PARENT_PAGE_UN_LINK=By.xpath(".//*[@id='iconTreeExplorer']//em[contains(@onclick,'')]");
 	public final By ELEMENT_WIKI_SETTING_PERM_TAB=By.xpath("//*[contains(@href,'PermissionSetting')]");
+	
+	//*============================================================= WIKI SETTING MANAGEMENT =======================================================*\\
+	public final By ELEMENT_WIKI_SETTINGS_PERMISSION = By.xpath(".//*[@id='myTab']//*[contains(text(),'Permission')]");
+	public final By ELEMENT_WIKI_SETTINGS_PERMISSION_SELECT_USER_ICON = By.xpath("//*[@class='uiIconUser uiIconLightGray']");
+	public final By ELEMENT_WIKI_SETTINGS_PERMISSION_INPUT_SEARCH_USER_NAME = By.xpath(".//input[@id='Quick Search']");
+	public final String ELEMENT_WIKI_SETTINGS_PERMISSION_SELECT_SEARCH_OPTION = "//*[contains(@name,'filter')]";
+	public final String ELEMENT_WIKI_SETTINGS_PERMISSION_SEARCH_ICON = ".//*[@id='UIUserSelector']//*[contains(@class,'uiIconSearch uiIconLightGray')]";
+	public final String ELEMENT_WIKI_SETTINGS_PERMISSION_USER_NAME_IN_USER_LIST=".//*[@id='UIListUsers']//*[contains(text(),'$userName')]";
+	public final By ELEMENT_WIKI_SETTINGS_CLOSE_USER_SELETOR = By.xpath(".//*[@id='UIUserSelector']//*[contains(text(),'Close')]");
+	public final String ELEMENT_WIKI_SETTING_PERMISSION_SEARCH_GROUP_USER_IN_TABLE = "//*[@id='UIListUsers']//span[contains(text(),'${username}')]";
 }

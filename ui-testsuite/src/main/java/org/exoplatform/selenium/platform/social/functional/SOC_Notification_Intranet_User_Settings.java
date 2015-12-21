@@ -27,13 +27,12 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- The user settings page is displayed*/
-		info("Create 1 users for testing");
-		createNewUser(1);
-		
-		info("User A login");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(0), password);
-		Utils.pause(3000);
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		magAc.signIn(username1,password);
 		
 		navTool.goToMyNotifications();
 		myNoti.verifyTilePage();
@@ -65,8 +64,7 @@ import org.testng.annotations.*;
         
         info("the settings of the user are remembered");
         info("User A login");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(0), password);
+		magAc.signIn(username1, password);
 		Utils.pause(3000);
 		navTool.goToMyNotifications();
 		myNoti.verifyTilePage();
@@ -103,13 +101,12 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- The user settings page is displayed*/
-		info("Create 1 users for testing");
-		createNewUser(1);
-		
-		info("User A login");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(0), password);
-		Utils.pause(3000);
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		magAc.signIn(username1,password);
 		
 		navTool.goToMyNotifications();
 		myNoti.verifyTilePage();
@@ -139,8 +136,7 @@ import org.testng.annotations.*;
         
         info("the settings of the user are remembered");
         info("User A login");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(0), password);
+		magAc.signIn(username1, password);
 		Utils.pause(3000);
 		navTool.goToMyNotifications();
 		myNoti.verifyTilePage();
@@ -187,13 +183,12 @@ import org.testng.annotations.*;
 			* * Like : No notifications
 			* * Post on my Steam : Intranet Notification
 			* * Post on my Space : Intranet Notification*/ 
-		info("Create 1 users for testing");
-		createNewUser(1);
-		
-		info("User A login");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(0), password);
-		Utils.pause(3000);
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		magAc.signIn(username1,password);
 		
 		navTool.goToMyNotifications();
 		myNoti.verifyTilePage();

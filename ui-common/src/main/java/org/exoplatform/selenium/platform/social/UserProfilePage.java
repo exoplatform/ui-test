@@ -2,136 +2,13 @@ package org.exoplatform.selenium.platform.social;
 
 import static org.exoplatform.selenium.TestLogger.info;
 
-import org.exoplatform.selenium.platform.PlatformBase;
 import org.exoplatform.selenium.Utils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
-public class UserProfilePage extends PlatformBase {
-
-	public final String ELEMENT_USER_NAME_PAGE=".//*[@id='UIBreadCrumbsNavigationPortlet']//*[contains(text(),'$fullName')]";
-	public final By ELEMENT_EDIT_MY_PROFILE_LINK = By.xpath(".//*[@id='UIBreadCrumbsNavigationPortlet']//*[@class='uiIconEdit uiIconLightGray']");
-	public final By ELEMENT_EDIT_MY_PROFILE_BUTTON = By.xpath("//*[@id='UIExperienceProfilePortlet']//*[@class='uiIconEdit uiIconLightGray']");
-	public final By ELEMENT_EDIT_PROFILE_FORM = By.id("UIEditUserProfileForm");
-	public final String ELEMENT_NAME_OF_PROFILE_TOP_LEFT = "//*[@id='UIBreadCrumbsNavigationPortlet']//*[contains(text(),'${name}')]";
-	public final String ELEMENT_NAME_OF_USER_TOP_LEFT = "//*[@id='UIBreadCrumbsNavigationPortlet']//*[contains(text(),'{$name}')]";
-	public final String ELEMENT_NAME_OF_USER_TOP_RIGHT = ".//*[@id='UIUserPlatformToolBarPortlet']//*[contains(normalize-space(),'${firstName} ${lastName}')]";
-	public final String ELEMENT_PROFILE_TITLE = ".//*[@id='UIStatusProfilePortlet']//*[contains(text(),'${fullName}')]";
-
-	//Left contact information
-	public final By ELEMENT_UIBASICPROFILEPORTLET = By.xpath(".//*[@id='UIBasicProfilePortlet']/h4[contains(text(),'Contact Information')]");
-	public final String ELEMENT_FULLNAME_INFO=".//*[@id='UIStatusProfilePortlet']//span[text()='${fullname}']";
-	public final String ELEMENT_EMAIL_INFO=".//*[@class='uiEmail ellipsis' and @data-original-title='${email}']";
-	public final String ELEMENT_JOB_TITLE_INFO=".//*[@class='uiPosition ellipsis' and @data-original-title='${job}']";
-	public final String ELEMENT_GENDER_INFO=".//*[@class='uiGender ellipsis' and @data-original-title='${gender}']";
-	public final String ELEMENT_USER_AVATAR="//*[@class='userAvt pull-left']/img";
-	public final String ELEMENT_PHONE_INFO="//div[contains(text(),'${type}:')]/../*[@data-original-title='${phone}']";
-	public final String ELEMENT_IM_INFO="//div[contains(text(),'${type}:')]/../*[@data-original-title='${im}']";
-	public final String ELEMENT_URL_INFO="//*[@class='uiUrls']/*[@data-original-title='${url}']";
+public class UserProfilePage extends SocialLocator {
 	
-	//Middle experience information
-	public final String ELEMENT_COMPANY_INFO="//*[@class='company clearfix']//*[@data-original-title='${company}']";
-	public final String ELEMENT_POSITION_INFO="//*[@class='position clearfix']//*[@data-original-title='${position}']";
-	public final String ELEMENT_JOB_DETAIL_INFO="//*[@class='description clearfix']//*[@data-original-title='${description}']";
-	public final String ELEMENT_SKILL_INFO="//*[@class='skills clearfix']//*[@data-original-title='${skill}']";
-	public final String ELEMENT_STARTDATE_INFO="//*[@class='startDate clearfix']//*[@data-original-title='${date}']";
-	public final String ELEMENT_ENDDATE_INFO="//*[@class='endDate clearfix']//*[@data-original-title='${date}']";
-	
-	//Navigation tabs
-	public final By ELEMENT_MY_PROFILE_TAB = By.xpath("//*[@class='nav nav-tabs userNavigation']//*[@class='uiIconAppprofile uiIconDefaultApp']");
-    public final By ELEMETN_ACTIVITY_TAB=By.xpath(".//*[contains(@class,'uiIconAppactivities')]");
-	//Current position
-	public final By ELEMENT_EDIT_POSITION = By.xpath("//*[@id='UIHeaderSection']//*[@class='uiIconEdit']");
-	
-	public final By ELEMENT_POSITION_TEXTBOX_EDIT = By.id("position");
-	public final By ELEMENT_EDIT_POSITION_SAVE_BUTTON = By.id("savePosition");
-
-	//About me
-	public final By ELEMENT_ABOUTME_TEXTAREA_EDIT = By.id("aboutMe");
-	public final String ELEMENT_UIEXPERIENCE_PROFILE_PORTLET = "//*[@id='UIExperienceProfilePortlet']//*[contains(text(),'${content}')]";
-	public final By ELEMENT_UIEXPERIENCE_PORLET=By.xpath("//*[@id='UIExperienceProfilePortlet']/*[text()='About me']");
-	
-	//Basic information
-	public final By ELEMENT_EDIT_BASIC_INFORMATION = By.xpath("//*[@id='UIBasicInfoSection']//*[@class='uiIconEdit']");
-	public final By ELEMENT_FIRST_NAME_TEXTBOX_EDIT = By.id("firstName");
-	public final By ELEMENT_LAST_NAME_TEXTBOX_EDIT = By.id("lastName");
-	public final By ELEMENT_EMAIL_TEXTBOX_EDIT = By.id("email");
-	public final By ELEMENT_EDIT_BASIC_INFO_SAVE_BUTTON = By.xpath(".//*[@id='UIEditUserProfileForm']//*[contains(@class,'btn-save')]");
-
-	//Contact
-	public final By ELEMENT_CONTACT_EDIT_ICON = By.xpath(".//*[@id='UIContactSection']//*[contains(text(),'Contact')]/..//*[@class='uiIconEdit']");
-	public final By ELEMENT_CONTACT_GENDER_SELECTION=By.name("gender");
-	public final By ELEMENT_CONTACT_JOB_TITLE=By.name("position");
-	public final String ELEMENT_CONTACT_IMS_OPTION="//*[@id='ims']/div[${index}]//*[contains(@name,'selectKey_ims')]";
-	public final String ELEMENT_CONTACT_IMS_INPUT="//*[@id='ims']/div[${index}]//*[contains(@name,'inputKey_ims')]";
-	public final String ELEMENT_CONTACT_IMS_INPUT_LIST="//*[@id='ims']/div";
-	public final By ELEMENT_CONTACT_IMS_ADD_ICON = By.xpath("//*[@id='ims']//*[@data-original-title='Add Item']");
-	public final String ELEMENT_CONTACT_IMS_REMOVE_ICON = "/*[@id='ims']/div[${index}]//*[@data-original-title='Remove Item']";
-	public final String ELEMENT_CONTACT_PHONE_OPTION="//*[@id='phones']/div[${index}]//*[contains(@name,'selectKey_phones')]";
-	public final String ELEMENT_CONTACT_PHONE_INPUT="//*[@id='phones']/div[${index}]//*[contains(@name,'inputKey_phones')]";
-	public final String ELEMENT_CONTACT_PHONE_INPUT_LIST="//*[@id='phones']/div";
-	public final By ELEMENT_CONTACT_PHONE_ADD_ICON = By.xpath("//*[@id='phones']//*[@data-original-title='Add Item']");
-	public final String ELEMENT_CONTACT_PHONE_REMOVE_ICON = "/*[@id='phones']/div[${index}]//*[@data-original-title='Remove Item']";
-	public final String ELEMENT_CONTACT_URL_INPUT="//*[@class='multiValueContainer']/li[${index}]//*[contains(@name,'urls')]";
-	public final String ELEMENT_CONTACT_URL_INPUT_LIST="//*[@class='multiValueContainer']/li";
-	public final By ELEMENT_CONTACT_URL_ADD_ICON = By.xpath("//*[@class='multiValueContainer']//*[@data-original-title='Add Item']");
-	public final String ELEMENT_CONTACT_URL_REMOVE_ICON = "/*[@class='multiValueContainer']/div[${index}]//*[@data-original-title='Remove Item']";
-
-	//Avatar
-	public final By	ELEMENT_CHANGE_AVATAR_LINK = By.className("changeAvatar");
-	public final By ELEMENT_CHOOSE_AVATAR_IMAGE = By.className("fileNameLabel");
-	public final By ELEMENT_SELECT_AVATAR = By.xpath(".//*[@id='Uploader']//*[text()='Select File']");
-	public final By ELEMENT_UPLOAD_NAME = By.name("file");
-	public final By ELEMENT_CONFIRM = By.xpath(".//*[@id='UIAvatarUploader']//*[text()='Confirm']");
-	public final By ELEMENT_CANCEL = By.xpath(".//*[@id='UIAvatarUploader']//*[text()='Cancel']");
-	public final By ELEMENT_SAVE_AVATAR = By.xpath(".//*[@id='UIAvatarUploadContent']//*[text()='Save']");
-	public final By ELEMENT_CANCEL_AVATAR = By.xpath(".//*[@id='UIAvatarUploadContent']//*[text()='Cancel']");
-
-	//Experience
-	public final By ELEMENT_NO_EXPERIENCE=By.id("infoExperien");
-	public final By ELEMENT_ADD_MORE_EXP_ICON = By.xpath("//*[@data-original-title='Add more experience' or @title='Add more experience']");
-	public final String ELEMENT_EXPERIENCE_LIST=".//*[starts-with(@id,'ExperienceSection')]";
-	public final String ELEMENT_EXPERIENCE_COMPANY_INPUT="//*[@id='companyExperienceSection${index}']";
-	public final String ELEMENT_EXPERIENCE_POSITION_INPUT = "//*[@id='positionExperienceSection${index}']";
-	public final String ELEMENT_EXPERIENCE_DESCRIPTION_INPUT = "//*[@id='descriptionExperienceSection${index}']";
-	public final String ELEMENT_EXPERIENCE_SKILL_INPUT = "//*[@id='skillsExperienceSection${index}']";
-	public final String ELEMENT_EXPERIENCE_START_DATE_INPUT = "//*[@name='startDateExperienceSection${index}']";
-	public final String ELEMENT_EXPERIENCE_END_DATE_INPUT = "//*[@name='endDateExperienceSection${index}']";
-	public final String ELEMENT_EXPERIENCE_CURRENT_CHECKBOX = "//*[@id='isCurrentExperienceSection${index}']";
-	public final String ELEMENT_EXPERIENCE_CLOSE = "//*[@id='ExperienceSection${index}']//../*[@title='Remove this experience']";
-
-	//Save - Cancel button
-	public final By ELEMENT_CONTACT_SAVE_BUTTON = By.xpath(".//*[@id='UIEditUserProfileForm']//button[text()='Save']");
-	public final By ELEMENT_CONTACT_SAVE_BUTTON_DISABLE = By.xpath(".//*[@id='UIEditUserProfileForm']//button[text()='Save' and @disabled='disabled']");
-	public final By ELEMENT_CONTACT_CANCEL_BUTTON = By.xpath(".//*[@id='UIEditUserProfileForm']//button[text()='Cancel']");
-	public final By ELEMENT_SAVE_UPDATE_INFO = By.xpath("//*[@id='UIProfile']//../*[contains(text(), 'Save')]");
-	public final By ELEMENT_CANCEL_UPDATE_INFO = By.xpath("//*[@id='UIProfile']//../*[contains(text(), 'Cancel')]");
-	
-	//Recent activity
-	public final String ELEMENT_RECENT_ACTIVITY_CONTENT="//*[@id='UIRecentActivitiesPortlet']//*[@class='activityCont']/div[${index}]//*[@class='status' and contains(text(),'${content}')]";
-	public final String ELEMENT_RECENT_ACTIVITY_NO_CONTENT = "//*[@id='UIRecentActivitiesPortlet']//*[contains(text(),'${content}')]";
-	public final String ELEMENT_RECENT_ACTIVITY_ALL_CONTENT = "//*[@id='UIRecentActivitiesPortlet']//*[@class='activityCont']//*[@class='content']/*[contains(normalize-space(),'${content}')]";
-	public final By ELEMENT_RECENT_ACTIVITY_VIEWALL_BTN = By.xpath(".//*[@id='UIRecentActivitiesPortlet']//button[contains(text(),'View All')]");
-	
-	//Connection part
-	public final String ELEMENT_UIMINICONNECTIONS_PORTLET_TEXT = "//*[@id='UIMiniConnectionsPortlet']/*[contains(text(),'${content}')]";
-	public final By ELEMENT_UIMINICONNECTIONS_PORTLET_FIND = By.xpath("//*[@id='UIMiniConnectionsPortlet']/..//*[contains(text(),'Find connections')]");
-	public final String ELEMENT_UIMINICONNECTIONS_PORTLET_VIEWALL = "//*[@id='UIMiniConnectionsPortlet']/..//*[contains(text(),'View all') and contains(text(),'${num}')]";
-	public final String ELEMENT_UIMINICONNECTIONS_PORLET_NUMBER_CONNECTION=".//*[@id='UIMiniConnectionsPortlet']//*[@class='borderContainer']/*[@class='avatarXSmall']";
-	public final String ELEMENT_UIMINICONNECTIONS_PORLET_AVATAR=".//*[@id='UIMiniConnectionsPortlet']//*[@class='borderContainer']/*[@class='avatarXSmall' and contains(@href,'${username}')]";
-	public final String ELEMENT_UIMINICONNECTIONS_PORLET_HOVER_POPUP_AVATAR="//*[@id='tipName']//*[contains(@href,'${username}')]/img";
-	public final String ELEMENT_UIMINICONNECTIONS_PORLET_HOVER_POPUP_USERNAME="//*[@id='tipName']//*[contains(@href,'${username}') and contains(text(),'${fullname}')]";
-	
-	//Connection status
-	public final By ELEMENT_UIMINICONNECTIONS_PORLET_CONNECT_STATUS=By.xpath(".//*[@id='UIRelationshipAction']//*[@class='uiIconStatusConnect']/..");
-	public final By ELEMENT_UIMINICONNECTIONS_PORLET_CANCEL_STATUS=By.xpath(".//*[@id='UIRelationshipAction']//*[text()='Cancel Request']");
-	public final By ELEMENT_UIMINICONNECTIONS_PORLET_ACCEPT_STATUS=By.xpath(".//*[@id='UIRelationshipAction']//*[@class='uiIconStatusAccept']/..");
-	public final By ELEMENT_UIMINICONNECTIONS_PORLET_CONNECTED_STATUS=By.xpath(".//*[@id='UIActionProfilePortlet']//*[@class='btn show-default']/*[@class='uiIconStatusConnected']");
-	public final By ELEMENT_UIMINICONNECTIONS_PORLET_DISCONNECTED_STATUS=By.xpath(".//*[@id='UIActionProfilePortlet']//*[@class='btn hide-default']/*[@class='uiIconStatusDisconnect']");
-	public final By ELEMENT_UIMINICONNECTIONS_PORTLET_DENY_STATUS=By.xpath(".//*[@id='UIRelationshipAction']//*[@class='uiIconStatusDeny']/..");
-	public final By ELEMENT_UIMINICONNECTIONS_PORTLET_TITLE = By.xpath(".//*[@id='UIMiniConnectionsPortlet']/h4[contains(text(),'Connections')]");
-	//public final String ELEMENT_ACTIVITIES_TAB =".//*[text() = 'Activities']";
 	/**
 	 * constructor
 	 * @param dr
@@ -186,6 +63,7 @@ public class UserProfilePage extends PlatformBase {
 	 */
 	public void updateBasicInformation(String firstName,String lastName,String email){
 		info("Update basic information");
+		scrollToBottomPage(this.driver);
 		if(waitForAndGetElement(ELEMENT_EDIT_BASIC_INFORMATION,5000,0)!=null){
 			click(ELEMENT_EDIT_BASIC_INFORMATION);
 		}
@@ -228,6 +106,7 @@ public class UserProfilePage extends PlatformBase {
 	 * @param job
 	 */
 	public void updateGenderJob(String gender, String job) {
+		scrollToBottomPage(this.driver);
 		if(waitForAndGetElement(ELEMENT_CONTACT_EDIT_ICON,5000,0)!=null)
 			click(ELEMENT_CONTACT_EDIT_ICON);
 		if(gender !="" && gender!=null){
@@ -249,6 +128,7 @@ public class UserProfilePage extends PlatformBase {
 	 */
 	public void updateIms(String type, String ims, Object... opParams){
 		info("Update ims");
+		scrollToBottomPage(this.driver);
 		String index = (String) (opParams.length > 0 ? opParams[0]: "0");
 		Integer xpathCount= getElements(ELEMENT_CONTACT_IMS_INPUT_LIST).size();
 		if(Integer.valueOf(index)>=xpathCount){
@@ -270,6 +150,7 @@ public class UserProfilePage extends PlatformBase {
 	 * @param opParams
 	 */
 	public void updateUrl(String url, Object... opParams){
+		scrollToBottomPage(this.driver);
 		String index = (String) (opParams.length > 0 ? opParams[0]: "0");
 		Integer xpathCount= getElements(ELEMENT_CONTACT_URL_INPUT_LIST).size();
 		if(Integer.valueOf(index)>=xpathCount){
@@ -294,6 +175,7 @@ public class UserProfilePage extends PlatformBase {
 	 */
 	public void updatePhone(String type,String phone, Object... opParams){
 		info("Update phone");
+		scrollToBottomPage(this.driver);
 		String index = (String) (opParams.length > 0 ? opParams[0]: "1");
 		Integer xpathCount= getElements(ELEMENT_CONTACT_PHONE_INPUT_LIST).size();
 		if(Integer.valueOf(index)>=xpathCount){
@@ -361,17 +243,16 @@ public class UserProfilePage extends PlatformBase {
 	 * 				false: cancel
 	 */
 	public void saveCancelUpdateInfo(Boolean isSave){
+		scrollToBottomPage(this.driver);
 		if(isSave==null || isSave){
 			info("Save updating information");
 			Utils.pause(2000);
-			//click(ELEMENT_CONTACT_SAVE_BUTTON);
 			clickByJavascript(ELEMENT_CONTACT_SAVE_BUTTON, 2);
 			Utils.pause(2000);	
 		}
 		else{
 			info("Cancel updating information");
 			Utils.pause(2000);
-			//click(ELEMENT_CONTACT_CANCEL_BUTTON);
 			clickByJavascript(ELEMENT_CONTACT_CANCEL_BUTTON, 2);
 			Utils.pause(2000);	
 		}	

@@ -1,39 +1,15 @@
 package org.exoplatform.selenium.platform;
 
 import org.exoplatform.selenium.Utils;
+import org.exoplatform.selenium.locator.ConnectionsLocator;
 import org.exoplatform.selenium.platform.social.UserProfilePage;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import static org.exoplatform.selenium.TestLogger.info;
 
-public class ConnectionsManagement extends PlatformBase {
-
-	public final By ELEMENT_CONNECTION_EVERYONE_TITLE=By.xpath(".//*[@id='UIAllPeople']//*[contains(text(),'Contacts Directory')]");
-	public final String ELEMENT_CONNECTION_CONNECT_BTN = "//a[contains(@href,'${user}')]/../..//*[text()='Connect']";
-	public final String ELEMENT_CONNECTION_CANCEL_BTN = "//a[contains(@href,'${user}')]/../..//*[text()='Cancel Request']";
-	public final String ELEMENT_CONNECTION_REVOVE_BTN = "//a[contains(@href,'${user}')]/../..//*[text()='Remove Connection']";
-
-	public final String ELEMENT_CONNECTION_IGNORE_BTN =" //a[contains(@href,'${user}')]/../..//*[text()='Ignore']";
-    public final String ELEMENT_CONNECTION_CONFIRM_BTN =" //a[contains(@href,'${user}')]/../..//*[text()='Confirm']";
-    public final String ELEMENT_CONNECTION_USER_AVARTAR="//a[contains(@href,'${user}')]/img";
-    public final String ELEMENT_CONNECTION_USER_NAME="//a[contains(@href,'${user}') and @data-key='title']";
-    
-    public final By ELEMENT_ALL_CONNECTIONS_TAB=By.xpath("//*[@id='UIConnectionsPortlet' or @id='UIAllPeoplePortlet']//*[contains(@href,'all-people')]");
-    public final By ELEMENT_MY_CONNECTIONS_TAB = By.xpath("//*[@id='UIConnectionsPortlet' or @id='UIAllPeoplePortlet']//*[contains(@href,'network')]");
-    public final By ELEMENT_REQUEST_RECEIVE_CONNECTIONS_TAB = By.xpath("//*[@id='UIConnectionsPortlet' or @id='UIAllPeoplePortlet']//*[contains(@href,'receivedInvitations')]");
-    public final By ELEMENT_REQUEST_PENDING_CONNECTIONS_TAB = By.xpath("//*[@id='UIConnectionsPortlet' or @id='UIAllPeoplePortlet']//*[contains(@href,'pendingRequests')]");
-    
-    public final By ELEMENT_ALL_RESULTS = By.id("searchAll");
-    public final By ELEMENT_NAME_OF_PEOPLE = By.id("name");
-    public final By ELEMENT_POSITIONS_OF_PEOPLE = By.id("position");
-    public final By ELEMENT_SKILL_OF_PEOPLE = By.id("skills");
-    public final By ELEMENT_SEARCH_BUTTON = By.id("SearchButton");
-    public final String ELEMENT_USER_LINK = "//*[@class='spaceTitle']//*[contains(@href,'${userName}')]";
-    public final String ELEMENT_USER_AVATAR =".//*[@alt='${fullname}']";
-    
-    UserProfilePage myProf;
+public class ConnectionsManagement extends ConnectionsLocator {
+	UserProfilePage myProf;
     
     public ConnectionsManagement(WebDriver dr){
 		this.driver = dr;
@@ -82,10 +58,12 @@ public class ConnectionsManagement extends PlatformBase {
 	 * Connect to a user
 	 * @param username
 	 */
-	public void connectToAUser(String username){
+	public void connectToAUser(String username,String... name){
 		info("--Connect to a user--");
 		info("Click on connect button");
-		searchPeople(username,null,null,null);
+		if(name.length>0)
+		searchPeople(name[0],null,null,null);
+		else searchPeople(username,null,null,null);
 		clickByJavascript(ELEMENT_CONNECTION_CONNECT_BTN.replace("${user}",username));
 		waitForAndGetElement(ELEMENT_CONNECTION_CANCEL_BTN.replace("${user}",username),2000,1);
 		info("Connected to the user");
@@ -144,10 +122,12 @@ public class ConnectionsManagement extends PlatformBase {
 	 * Accept a connection from a user in Connection page
 	 * @param username
 	 */
-	public void acceptAConnection(String username){
+	public void acceptAConnection(String username,String... fullName){
 		info("--Accept a connection of a user--");
 		info("Click on Confirm button");
-		searchPeople(username,null,null,null);
+		if(fullName.length>0)
+		    searchPeople(fullName[0],null,null,null);
+		else searchPeople(username,null,null,null);
 		waitForAndGetElement(ELEMENT_CONNECTION_CONFIRM_BTN.replace("${user}",username));
 		clickByJavascript(ELEMENT_CONNECTION_CONFIRM_BTN.replace("${user}",username));
 		waitForElementNotPresent(ELEMENT_CONNECTION_CONFIRM_BTN.replace("${user}",username));

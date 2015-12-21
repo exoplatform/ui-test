@@ -6,7 +6,7 @@ import org.exoplatform.selenium.platform.HomePagePlatform;
 import org.exoplatform.selenium.platform.ActivityStream;
 import org.exoplatform.selenium.platform.ManageLogInOut;
 import org.exoplatform.selenium.platform.PlatformBase;
-import org.exoplatform.selenium.platform.calendar.CalendarLocatorObject;
+import org.exoplatform.selenium.platform.calendar.CalendarLocator;
 import org.exoplatform.selenium.platform.calendar.EventManagement;
 import org.exoplatform.selenium.platform.calendar.TaskManagement;
 import org.exoplatform.selenium.platform.calendar.TaskManagement.statusTask;
@@ -42,10 +42,10 @@ public class Calendar_Publish_Activity  extends PlatformBase {
 	String fullName;
 	String spaceName;
 	String spaceDes;
-	CalendarLocatorObject calLocOb;
+	CalendarLocator calLocOb;
 	
-	@BeforeClass
-	public void setUpBeforeTest() throws Exception{
+	@BeforeMethod
+	public void setUpBeforeMethod() throws Exception{
 		initSeleniumTest();
 		getDefaultUserPass(userDataFilePath,defaultSheet,isUseFile,jdbcDriver,dbUrl,user,pass,sqlUser);
 		driver.get(baseUrl);
@@ -61,7 +61,7 @@ public class Calendar_Publish_Activity  extends PlatformBase {
 		txData = new TextBoxDatabase();
 		fData = new AttachmentFileDatabase();
 		userData = new UserDatabase();
-		calLocOb = new CalendarLocatorObject();
+		calLocOb = new CalendarLocator();
 		userData.setUserData(userDataFilePath,defaultSheet,isUseFile,jdbcDriver,dbUrl,user,pass,sqlUser);
 		txData.setContentData(texboxFilePath,defaultSheet,isUseFile,jdbcDriver,dbUrl,user,pass,sqlContent);
 		fData.setAttachFileData(attachmentFilePath,defaultSheet,isUseFile,jdbcDriver,dbUrl,user,pass,sqlAttach);
@@ -71,15 +71,14 @@ public class Calendar_Publish_Activity  extends PlatformBase {
 		createDataTest();
 	}
 
-	@AfterClass
+	@AfterMethod
 	public void afterTest(){
 		//deleteDataTest();
-		magAc.signOut();
 		driver.manage().deleteAllCookies();
 		driver.quit();
 	}
 	
-	@AfterMethod
+/*	@AfterMethod
 	public void afterMethod(){
 		if (waitForAndGetElement(calLocOb.ELEMENT_ADD_EDIT_TASK_POPUP, 5000, 0) != null){
 			click(calLocOb.ELEMENT_BUTTON_EVENT_CANCEL_DETAILS);
@@ -87,7 +86,7 @@ public class Calendar_Publish_Activity  extends PlatformBase {
 		}
 		
 			
-	}
+	}*/
 
 	/**
 	 * Create data test

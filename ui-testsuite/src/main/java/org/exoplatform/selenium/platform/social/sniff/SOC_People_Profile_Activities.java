@@ -31,14 +31,12 @@ public class SOC_People_Profile_Activities extends SOC_TestConfig_2{
 
 		/*Create data test*/
 		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
-		String password1 = txData.getContentByArrayTypeRandom(4) + getRandomNumber();
-		String email1 = txData.getContentByArrayTypeRandom(4) + getRandomNumber() + mailSuffixData.getMailSuffixRandom();
-
-		info("Add new user");
-		magAc.signIn(DATA_USER1, DATA_PASS);
+		String email1 = username1+ mailSuffixData.getMailSuffixRandom();
+		
+		info("Add user");
 		navTool.goToAddUser();
-		addUserPage.addUser(username1, password1, email1, username1, username1);
-		magAc.signIn(username1, password1);
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		magAc.signIn(username1, password);
 		/*Step Number: 1
 		 *Step Name: Step 1: Go to my profile page
 		 *Step Description: 
@@ -131,9 +129,5 @@ public class SOC_People_Profile_Activities extends SOC_TestConfig_2{
 		waitForAndGetElement(myProfile.ELEMENT_UIEXPERIENCE_PROFILE_PORTLET.replace("${content}", aboutMe));
 		waitForAndGetElement(myProfile.ELEMENT_RECENT_ACTIVITY_CONTENT.replace("${index}", "1").replace("${content}", actAboutMe));
 		
-		info("Clear Data");
-		magAc.signIn(DATA_USER1, DATA_PASS);
-		navTool.goToUsersAndGroupsManagement();
-		userAndGroup.deleteUser(username1);
 	}
 }

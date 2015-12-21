@@ -77,7 +77,7 @@ public class ShareInContentExplorer_ActivityStream extends ECMS_TestConfig {
 		click(siteExplorerHome.ELEMENT_SHARE_DOCUMENT_CONTENT.replace(
 				"${author}", DATA_NAME_USER1)
 				.replace("${spaceName}", spaceName));
-		waitForAndGetElement(spaceLocator.ELEMENT_SPACE_NAME.replace("${name}",
+		waitForAndGetElement(socLocator.ELEMENT_SPACE_NAME.replace("${name}",
 				spaceName));
 
 		info("End test01_CheckTheDisplayOfAuthorInASWhenSharingAFileInCE");
@@ -139,7 +139,7 @@ public class ShareInContentExplorer_ActivityStream extends ECMS_TestConfig {
 		click(siteExplorerHome.ELEMENT_SHARE_DOCUMENT_CONTENT.replace(
 				"${author}", DATA_NAME_USER1)
 				.replace("${spaceName}", spaceName));
-		waitForAndGetElement(spaceLocator.ELEMENT_SPACE_NAME.replace("${name}",
+		waitForAndGetElement(socLocator.ELEMENT_SPACE_NAME.replace("${name}",
 				spaceName));
 		// Check Shared content in Space AS
 		waitForAndGetElement(siteExplorerHome.ELEMENT_SHARE_DOCUMENT_CONTENT_WITH_COMMENT_IN_SPACE
@@ -502,7 +502,7 @@ public class ShareInContentExplorer_ActivityStream extends ECMS_TestConfig {
 		// Open space displayed in shared document
 		click(siteExplorerHome.ELEMENT_SHARE_DOCUMENT_CONTENT.replace(
 				"${author}", shareOwner).replace("${spaceName}", spaceName));
-		waitForAndGetElement(spaceLocator.ELEMENT_SPACE_NAME.replace("${name}",
+		waitForAndGetElement(socLocator.ELEMENT_SPACE_NAME.replace("${name}",
 				spaceName));
 		// Check Shared content in Space AS
 		waitForAndGetElement(siteExplorerHome.ELEMENT_SHARE_DOCUMENT_CONTENT_IN_SPACE

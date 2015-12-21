@@ -2,6 +2,7 @@ package org.exoplatform.selenium.platform.social.functional;
 
 import static org.exoplatform.selenium.TestLogger.info;
 
+import org.exoplatform.selenium.Utils;
 import org.testng.annotations.*;
 
 
@@ -20,14 +21,15 @@ public class SOC_People_UserProfile_AboutMe extends SOC_TestConfig{
 
 		/*Create data test*/
 		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
-		String password1 = txData.getContentByArrayTypeRandom(1) + getRandomNumber();
-		String email1 = txData.getContentByArrayTypeRandom(1) + getRandomNumber() + mailSuffixData.getMailSuffixRandom();
-
+		String email1 = username1+"@gmail.com";
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+"@gmail.com";
 		info("Add new user");
-		magAc.signIn(DATA_USER1, DATA_PASS);
 		navTool.goToAddUser();
-		addUserPage.addUser(username1, password1, email1, username1, username1);
-		magAc.signIn(username1, password1);
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		magAc.signIn(username1,password);
+		Utils.pause(3000);
 		navTool.goToMyProfile();
 		info("edit about me");
 		click(myProfile.ELEMENT_EDIT_MY_PROFILE_LINK);
@@ -47,7 +49,7 @@ public class SOC_People_UserProfile_AboutMe extends SOC_TestConfig{
 			- The section About me is displayed at the top of mid
 			-column of the page
 			- The section is composed of 1 text area allowing the user to introduce about himself.*/ 
-		magAc.signIn(DATA_USER1, DATA_PASS);
+		magAc.signIn(username2,password);
 
 		info("goto profile of user 1");
 		hp.goToConnections();
@@ -67,15 +69,16 @@ public class SOC_People_UserProfile_AboutMe extends SOC_TestConfig{
 	@Test
 	public  void test02_CheckDisplayOfAboutMeSectionWhenNotInformed() {
 
-		/*Create data test*/
 		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
-		String password1 = txData.getContentByArrayTypeRandom(1) + getRandomNumber();
-		String email1 = txData.getContentByArrayTypeRandom(1) + getRandomNumber() + mailSuffixData.getMailSuffixRandom();
-
+		String email1 = username1+"@gmail.com";
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+"@gmail.com";
 		info("Add new user");
-		magAc.signIn(DATA_USER1, DATA_PASS);
 		navTool.goToAddUser();
-		addUserPage.addUser(username1, password1, email1, username1, username1);
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		magAc.signIn(username1,password);
+		Utils.pause(3000);
 		
 		info("Test 2: Check display of About me section when not informed");
 		/*Step Number: 1
@@ -90,8 +93,8 @@ public class SOC_People_UserProfile_AboutMe extends SOC_TestConfig{
 		info("goto profile of user 1");
 		hp.goToConnections();
 		click(connMag.ELEMENT_ALL_CONNECTIONS_TAB);
-		connMag.searchPeople(username1,null,null,null);
-		click(connMag.ELEMENT_CONNECTION_USER_NAME.replace("${user}", username1));
+		connMag.searchPeople(username2,null,null,null);
+		click(connMag.ELEMENT_CONNECTION_USER_NAME.replace("${user}", username2));
 		waitForElementNotPresent(myProfile.ELEMENT_UIEXPERIENCE_PORLET);
 	}
 }

@@ -31,7 +31,6 @@ import org.testng.annotations.*;
 		createNewUser(2);
 		
 		info("User A login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		Utils.pause(3000);
 		
@@ -51,7 +50,6 @@ import org.testng.annotations.*;
 		connMag.connectToAUser(arrayUser.get(1));
 		
 		info("User B login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(1), password);
 		Utils.pause(3000);
 		
@@ -96,7 +94,6 @@ import org.testng.annotations.*;
 			*  the like section
 			*  * the comment section*/
 		info("User A login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		Utils.pause(3000);
 		
@@ -133,7 +130,6 @@ import org.testng.annotations.*;
 		createNewUser(2);
 		
 		info("User A login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		Utils.pause(3000);
 		
@@ -153,7 +149,6 @@ import org.testng.annotations.*;
 		connMag.connectToAUser(arrayUser.get(1));
 		
 		info("User B login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(1), password);
 		Utils.pause(3000);
 		
@@ -208,7 +203,6 @@ import org.testng.annotations.*;
 			* * the like section
 			* * the comment section and comment text box*/ 
 		info("User A login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		Utils.pause(3000);
 		
@@ -257,7 +251,6 @@ import org.testng.annotations.*;
 		createNewUser(2);
 		
 		info("User A login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		Utils.pause(3000);
 		
@@ -284,7 +277,6 @@ import org.testng.annotations.*;
 		hpAct.checkActivity(activity);
 		
 		info("User B login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(1), password);
 		Utils.pause(3000);
 		
@@ -300,7 +292,6 @@ import org.testng.annotations.*;
 		hpAct.addCommentUsingJavascript(activity, comment);
 		
 		info("Log in with User A");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		
 		/*Step number: 2
@@ -355,7 +346,6 @@ import org.testng.annotations.*;
 		createNewUser(2);
 		
 		info("User A login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		Utils.pause(3000);
 		
@@ -375,7 +365,6 @@ import org.testng.annotations.*;
 		connMag.connectToAUser(arrayUser.get(1));
 		
 		info("User B login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(1), password);
 		Utils.pause(3000);
 		
@@ -393,7 +382,6 @@ import org.testng.annotations.*;
 		hpAct.checkActivity(activity);
 		
 		info("Log in with User A");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		
 		info("The portlet displays the message : Activity not found");
@@ -439,7 +427,6 @@ import org.testng.annotations.*;
 		createNewUser(2);
 		
 		info("User A login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		Utils.pause(3000);
 		
@@ -466,7 +453,6 @@ import org.testng.annotations.*;
 		hpAct.checkActivity(activity);
 		
 		info("User B login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(1), password);
 		Utils.pause(3000);
 		
@@ -481,7 +467,6 @@ import org.testng.annotations.*;
 		hpAct.likeActivity(activity);
 		
 		info("Log in with User A");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 
 		/*Step number: 2
@@ -495,8 +480,6 @@ import org.testng.annotations.*;
 			- The format is : Activity : $ACTIVITY_TITLE where $ACTIVITY_TITLE is : "I like Platform 4.0!"*/ 
 		String parentWindow = driver.getWindowHandle();
 		info("parentWindow:"+parentWindow);
-		
-		//emailNot.checkLikeOfAnActivityEmailNoti(parentWindow,titleNoti,fullName,activity,true,true,false,true);
 		
 		String fullName=arrayUser.get(1)+" "+arrayUser.get(1);
 		String titleEmail=notiEmailData.getContentByArrayTypeRandom(3);
@@ -550,7 +533,6 @@ import org.testng.annotations.*;
 		userAndGroup.addUsersToGroup(arrayUser.get(0),"*",false, true);
 		
 		info("User A login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		Utils.pause(3000);
 		
@@ -577,7 +559,6 @@ import org.testng.annotations.*;
 		hpAct.checkActivity(activity);
 		
 		info("User B login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(1), password);
 		Utils.pause(3000);
 		
@@ -593,7 +574,6 @@ import org.testng.annotations.*;
 		
 		
 		info("Log in with User A");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		
 		String parentWindow = driver.getWindowHandle();
@@ -633,7 +613,6 @@ import org.testng.annotations.*;
 		
 		info("User C login");
 		switchToParentWindow();
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(2), password);
 		Utils.pause(3000);
 		
@@ -675,7 +654,6 @@ import org.testng.annotations.*;
 		createNewUser(2);
 		
 		info("User A login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		Utils.pause(3000);
 		
@@ -695,7 +673,6 @@ import org.testng.annotations.*;
 		connMag.connectToAUser(arrayUser.get(1));
 		
 		info("User B login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(1), password);
 		Utils.pause(3000);
 		
@@ -713,7 +690,6 @@ import org.testng.annotations.*;
 		hpAct.checkActivity(activity);
 		
 		info("User A login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		Utils.pause(3000);
 		
@@ -737,6 +713,7 @@ import org.testng.annotations.*;
         switchToParentWindow();
         driver.get(getUrl);
 		String actualUrl=driver.getCurrentUrl();
+		
 		info("Activity url:"+actualUrl);
         
         String[] splitUrl=actualUrl.split("=");
@@ -786,7 +763,6 @@ import org.testng.annotations.*;
 		createNewUser(2);
 		
 		info("User A login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		Utils.pause(3000);
 		
@@ -806,7 +782,6 @@ import org.testng.annotations.*;
 		connMag.connectToAUser(arrayUser.get(1));
 		
 		info("User B login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(1), password);
 		Utils.pause(3000);
 		
@@ -824,7 +799,6 @@ import org.testng.annotations.*;
 		hpAct.checkActivity(activity);
 		
 		info("User A login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		Utils.pause(3000);
 		
@@ -845,7 +819,6 @@ import org.testng.annotations.*;
 		emailNot.getAllChildWindows();
         notAct.reply(inputComment);
         emailNot.closeChildBrowsers(parentWindow);
-
  	}
 
 	/**
@@ -893,7 +866,6 @@ import org.testng.annotations.*;
 		createNewUser(2);
 		
 		info("User A login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		Utils.pause(3000);
 		
@@ -921,7 +893,6 @@ import org.testng.annotations.*;
 		connMag.connectToAUser(arrayUser.get(1));
 		
 		info("User B login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(1), password);
 		Utils.pause(3000);
 		
@@ -940,7 +911,6 @@ import org.testng.annotations.*;
 		answerMg.verifyAnswerAdded(answerContent);
 		
 		info("User A login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		Utils.pause(3000);
 		
@@ -1031,7 +1001,6 @@ import org.testng.annotations.*;
 		createNewUser(2);
 		
 		info("User A login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		Utils.pause(3000);
 		
@@ -1063,7 +1032,6 @@ import org.testng.annotations.*;
 		hpAct.checkActivity(activity);
 		
 		info("User B login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(1), password);
 		Utils.pause(3000);
 		
@@ -1078,7 +1046,6 @@ import org.testng.annotations.*;
 		hpAct.likeActivity(activity);
 		
 		info("Log in with User A");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		
 		String parentWindow = driver.getWindowHandle();
@@ -1137,8 +1104,6 @@ import org.testng.annotations.*;
         String downloadUrl=notAct.getDownloadFileUrl();
         downloadControl.downloadFile(downloadUrl);
         emailNot.closeChildBrowsers(parentWindow);
-        switchToParentWindow();
-        
  	}
 	
 	/**
@@ -1177,7 +1142,6 @@ import org.testng.annotations.*;
 		createNewUser(2);
 		
 		info("User A login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		Utils.pause(3000);
 		
@@ -1209,7 +1173,6 @@ import org.testng.annotations.*;
 		hpAct.checkActivity(activity);
 		
 		info("User B login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(1), password);
 		Utils.pause(3000);
 		
@@ -1224,7 +1187,6 @@ import org.testng.annotations.*;
 		hpAct.likeActivity(activity);
 		
 		info("Log in with User A");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		
 		String parentWindow = driver.getWindowHandle();
@@ -1280,8 +1242,6 @@ import org.testng.annotations.*;
         String downloadUrl=notAct.getDownloadFileUrl();
         downloadControl.downloadFile(downloadUrl);
         emailNot.closeChildBrowsers(parentWindow);
-        switchToParentWindow();
-
  	}
 
 	/**
@@ -1314,7 +1274,6 @@ import org.testng.annotations.*;
 		createNewUser(2);
 		
 		info("User A login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		Utils.pause(3000);
 		
@@ -1346,7 +1305,6 @@ import org.testng.annotations.*;
 		hpAct.checkActivity(activity);
 		
 		info("User B login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(1), password);
 		Utils.pause(3000);
 		
@@ -1361,7 +1319,6 @@ import org.testng.annotations.*;
 		hpAct.likeActivity(activity);
 		
 		info("Log in with User A");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		
 		String parentWindow = driver.getWindowHandle();
@@ -1417,8 +1374,6 @@ import org.testng.annotations.*;
         String downloadUrl=notAct.getDownloadFileUrl();
         downloadControl.downloadFile(downloadUrl);
         emailNot.closeChildBrowsers(parentWindow);
-        switchToParentWindow();
-
  	}
 	
 	/**
@@ -1459,7 +1414,6 @@ import org.testng.annotations.*;
 		createNewUser(2);
 		
 		info("User A login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		Utils.pause(3000);
 		
@@ -1491,7 +1445,6 @@ import org.testng.annotations.*;
 		hpAct.checkActivity(activity);
 		
 		info("User B login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(1), password);
 		Utils.pause(3000);
 		
@@ -1506,7 +1459,6 @@ import org.testng.annotations.*;
 		hpAct.likeActivity(activity);
 		
 		info("Log in with User A");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		
 		String parentWindow = driver.getWindowHandle();
@@ -1555,8 +1507,6 @@ import org.testng.annotations.*;
         String downloadUrl=notAct.getDownloadFileUrl();
         downloadControl.downloadFile(downloadUrl);
         emailNot.closeChildBrowsers(parentWindow);
-        switchToParentWindow();
-
  	}
 
 	/**
@@ -1589,7 +1539,6 @@ import org.testng.annotations.*;
 		createNewUser(2);
 		
 		info("User A login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		Utils.pause(3000);
 		
@@ -1621,7 +1570,6 @@ import org.testng.annotations.*;
 		hpAct.checkActivity(activity);
 		
 		info("User B login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(1), password);
 		Utils.pause(3000);
 		
@@ -1636,7 +1584,6 @@ import org.testng.annotations.*;
 		hpAct.likeActivity(activity);
 		
 		info("Log in with User A");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		
 		String parentWindow = driver.getWindowHandle();
@@ -1692,8 +1639,6 @@ import org.testng.annotations.*;
         String downloadUrl=notAct.getDownloadFileUrl();
         downloadControl.downloadFile(downloadUrl);
         emailNot.closeChildBrowsers(parentWindow);
-        switchToParentWindow();
-
  	}
 	
 	/**
@@ -1724,7 +1669,6 @@ import org.testng.annotations.*;
 		createNewUser(2);
 		
 		info("User A login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		Utils.pause(3000);
 		
@@ -1756,7 +1700,6 @@ import org.testng.annotations.*;
 		hpAct.checkActivity(activity);
 		
 		info("User B login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(1), password);
 		Utils.pause(3000);
 		
@@ -1771,7 +1714,6 @@ import org.testng.annotations.*;
 		hpAct.likeActivity(activity);
 		
 		info("Log in with User A");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		
 		String parentWindow = driver.getWindowHandle();
@@ -1829,7 +1771,6 @@ import org.testng.annotations.*;
         String downloadUrl=notAct.getDownloadFileUrl();
         downloadControl.downloadFile(downloadUrl);
         emailNot.closeChildBrowsers(parentWindow);
-        switchToParentWindow();
  	}
 
 
@@ -1874,7 +1815,6 @@ import org.testng.annotations.*;
 		userAndGroup.addUsersToGroup(arrayUser.get(0),"*",false, true);
 		
 		info("User A login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		Utils.pause(3000);
 		
@@ -1910,7 +1850,6 @@ import org.testng.annotations.*;
 		foTopic.startTopic(titleTopic, desTopic, "", "");
 		
 		info("User B login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(1), password);
 		Utils.pause(3000);
 		
@@ -1925,7 +1864,6 @@ import org.testng.annotations.*;
 		hpAct.likeActivity(titleTopic);
 		
 		info("Log in with User A");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		
 		String parentWindow = driver.getWindowHandle();
@@ -1972,8 +1910,6 @@ import org.testng.annotations.*;
         notAct.goToViewLastReplyBtnTopicActivity();
         notAct.verifyActivityTopic(replyTitleTopic, replyDesTopic);
         emailNot.closeChildBrowsers(parentWindow);
-        switchToParentWindow();
-
  	}
 
 	/**
@@ -2019,7 +1955,6 @@ import org.testng.annotations.*;
 		userAndGroup.addUsersToGroup(arrayUser.get(0),"*",false, true);
 		
 		info("User A login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		Utils.pause(3000);
 		
@@ -2055,7 +1990,6 @@ import org.testng.annotations.*;
 		foTopic.startTopic(titleTopic, desTopic, "", "");
 		
 		info("User B login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(1), password);
 		Utils.pause(3000);
 		
@@ -2070,7 +2004,6 @@ import org.testng.annotations.*;
 		hpAct.likeActivity(titleTopic);
 		
 		info("Log in with User A");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		
 		String parentWindow = driver.getWindowHandle();
@@ -2117,8 +2050,6 @@ import org.testng.annotations.*;
         notAct.goToViewLastReplyBtnTopicActivity();
         notAct.verifyActivityTopic(replyTitleTopic, replyDesTopic);
         emailNot.closeChildBrowsers(parentWindow);
-        switchToParentWindow();
-
  	}
 	/**
 	*<li> Case ID:117598.</li>
@@ -2161,7 +2092,6 @@ import org.testng.annotations.*;
 		userAndGroup.addUsersToGroup(arrayUser.get(0),"*",false, true);
 		
 		info("User A login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		Utils.pause(3000);
 		
@@ -2194,7 +2124,6 @@ import org.testng.annotations.*;
 				replace("${name}",wiki),2000,1);
 		
 		info("User B login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(1), password);
 		Utils.pause(3000);
 		
@@ -2209,7 +2138,6 @@ import org.testng.annotations.*;
 		hpAct.likeActivity(wiki);
 		
 		info("Log in with User A");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		
 		String parentWindow = driver.getWindowHandle();
@@ -2239,7 +2167,6 @@ import org.testng.annotations.*;
 			The browser navigates to the corresponding wiki page in wiki portlet*/
 		notAct.goToDetailWikiPage(wiki);
         emailNot.closeChildBrowsers(parentWindow);
-        switchToParentWindow();
  	}
 	/**
 	*<li> Case ID:117598.</li>
@@ -2282,7 +2209,6 @@ import org.testng.annotations.*;
 		userAndGroup.addUsersToGroup(arrayUser.get(0),"*",false, true);
 		
 		info("User A login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		Utils.pause(3000);
 		
@@ -2315,7 +2241,6 @@ import org.testng.annotations.*;
 				replace("${name}",wiki),2000,1);
 		
 		info("User B login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(1), password);
 		Utils.pause(3000);
 		
@@ -2360,7 +2285,6 @@ import org.testng.annotations.*;
 			The browser navigates to the corresponding wiki page in wiki portlet*/
 		notAct.goToDetailWikiPage(wiki);
         emailNot.closeChildBrowsers(parentWindow);
-        switchToParentWindow();
  	}
 
 	/**
@@ -2388,7 +2312,6 @@ import org.testng.annotations.*;
 		createNewUser(2);
 		
 		info("User A login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		Utils.pause(3000);
 		
@@ -2415,7 +2338,6 @@ import org.testng.annotations.*;
 		hpAct.checkActivity(activity);
 		
 		info("User B login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(1), password);
 		Utils.pause(3000);
 		
@@ -2431,7 +2353,6 @@ import org.testng.annotations.*;
 		hpAct.addCommentUsingJavascript(activity, comment);
 		
 		info("Log in with User A");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		
 		String parentWindow = driver.getWindowHandle();
@@ -2461,6 +2382,4 @@ import org.testng.annotations.*;
 		
 		notAct.checkCommentExpand(comment, true);
 		emailNot.closeChildBrowsers(parentWindow);
-	    switchToParentWindow();
-
  	}}

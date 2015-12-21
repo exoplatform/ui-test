@@ -4,14 +4,11 @@ import org.exoplatform.selenium.ManageAlert;
 import org.exoplatform.selenium.Utils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.interactions.Actions;
 
 import static org.exoplatform.selenium.TestLogger.info;
-/**
- * update : quynhpt
- * date: 0601/2014
- *
- */
-public class SpaceManagement extends SpaceLocator {
+
+public class SpaceManagement extends SocialLocator {
 
 	
 
@@ -485,6 +482,48 @@ public class SpaceManagement extends SpaceLocator {
     		waitForElementNotPresent(ELEMENT_MANAGER_USER_NAME.replace("${fullName}",fullName));
     	}
     	
+	}
+    /**
+     * Add a new forlder in Document tab
+     */
+    public void goToAddNewFolder(){
+		info("Click on New folder on Action Bar");
+		click(ELEMENT_ACTIONBAR_ADDFOLDER);
+		info("Verify that Add folder popup is shown");
+		waitForAndGetElement(ELEMENT_ADDFOLDERBOX);
+		info("The folder is shown successfully");
+    }
+    
+    /**
+	 * Create a new folder in Document Tab
+	 * @param title
+	 * @param folderType
+	 */
+	public void createFolder(String title, String folderType) {
+		info("Type a title:" + title + " for the folder");
+		type(ELEMENT_ADDFOLDER_NAME, title, true);
+		if (!folderType.isEmpty()) {
+			info("Select folder type:" + folderType);
+			select(ELEMENT_ADDFOLDER_FOLDERTYPE, folderType);
+		}
+		info("Click on Create folder button");
+		click(ELEMENT_ADDFOLDER_CREATEFOLDERBUTTON);
+		info("Verify that the folder is created");
+		waitForAndGetElement(ELEMENT_DOCUMENT_FOLDER_NAME.replace("$name", title));
+		info("The folder is created successfully");
+	}
+    /**
+     * Open a folder in Document tab
+     * @param name
+     */
+	public void openFolder(String name){
+		info("Click on the folder's name");
+		Actions action = new Actions(this.driver);
+		action.moveToElement(waitForAndGetElement(ELEMENT_DOCUMENT_FOLDER_NAME.replace("$name",name)))
+		.doubleClick().perform();
+		info("Verify that folder is opened");
+		waitForAndGetElement(ELMENT_DOCUMENT_FOLDER_ADDRESS.replace("$name",name.toLowerCase()));
+		info("the folder is opened");
 	}
 	
 }

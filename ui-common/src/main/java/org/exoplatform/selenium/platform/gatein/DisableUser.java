@@ -1,13 +1,8 @@
 package org.exoplatform.selenium.platform.gatein;
 
-import org.exoplatform.selenium.platform.PlatformBase;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class DisableUser extends PlatformBase {
-
-	//Drop box
-	public By ELEMENT_DISABLE_USER_DROP_BOX=By.id("UIListUsers-userStatusFilter");
+public class DisableUser extends GateinLocator {
 
 	public DisableUser(WebDriver dr) {
 		this.driver = dr;

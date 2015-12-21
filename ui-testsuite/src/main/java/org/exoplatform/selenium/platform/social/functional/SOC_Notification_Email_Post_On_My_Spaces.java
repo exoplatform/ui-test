@@ -36,7 +36,6 @@ import org.testng.annotations.*;
 		createNewUser(2);
 		
 		info("User A login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		Utils.pause(3000);
 		
@@ -64,7 +63,6 @@ import org.testng.annotations.*;
 		setSpaceMg.inviteUser(arrayUser.get(1),true,arrayUser.get(1));
 		
 		info("User B login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(1), password);
 		Utils.pause(3000);
 		
@@ -89,7 +87,6 @@ import org.testng.annotations.*;
 			- Notification mail content is:New post in $SPACEHi UserA,
 			[Full name of UserB] has posted an activity in the Space1 space. See the post below: [Activity]Reply | View the full discussion*/ 
 		info("User A login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		Utils.pause(3000);
 		
@@ -111,6 +108,8 @@ import org.testng.annotations.*;
 		emailNot.getAllChildWindows();
 		emailNot.verifyFormatEmailNotifcationForSpace(emailTitle,firstName,arrayUser.get(1), emailContent,spaceName,false);
 		emailNot.closeChildBrowsers(parentWindow);
+		if(arrayUser.size()>0)
+			deleteUsers(arrayUser);
  	}
 
 	/**
@@ -137,7 +136,6 @@ import org.testng.annotations.*;
 		createNewUser(2);
 		
 		info("User A login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		Utils.pause(3000);
 		
@@ -165,7 +163,6 @@ import org.testng.annotations.*;
 		setSpaceMg.inviteUser(arrayUser.get(1),true,arrayUser.get(1));
 		
 		info("User B login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(1), password);
 		Utils.pause(3000);
 		
@@ -189,7 +186,6 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- Notification mail subject is:[Full name of UserB] has posted an activity in the Space1 space: [Activity title]*/ 
 		info("User A login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		Utils.pause(3000);
 		
@@ -204,6 +200,8 @@ import org.testng.annotations.*;
 		emailNot.getAllChildWindows();
 		emailNot.verifyPresentEmailActivityNotifications(titleEmail,fullName,spaceName);
 		emailNot.closeChildBrowsers(parentWindow);
+		if(arrayUser.size()>0)
+			deleteUsers(arrayUser);
  	}
 
 	/**
@@ -228,7 +226,6 @@ import org.testng.annotations.*;
 		createNewUser(1);
 		
 		info("User A login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		Utils.pause(3000);
 		
@@ -271,7 +268,6 @@ import org.testng.annotations.*;
 		createNewUser(1);
 		
 		info("User A login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		Utils.pause(3000);
 		
@@ -390,7 +386,6 @@ import org.testng.annotations.*;
 		createNewUser(1);
 		
 		info("User A login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		Utils.pause(3000);
 		
@@ -472,7 +467,6 @@ import org.testng.annotations.*;
 		createNewUser(2);
 		
 		info("User A login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		Utils.pause(3000);
 		
@@ -500,7 +494,6 @@ import org.testng.annotations.*;
 		setSpaceMg.inviteUser(arrayUser.get(1),true,arrayUser.get(1));
 		
 		info("User B login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(1), password);
 		Utils.pause(3000);
 		
@@ -524,7 +517,6 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- Notification mail is sent to UserA about new post on space's stream*/
 		info("User A login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		Utils.pause(3000);
 		
@@ -539,6 +531,8 @@ import org.testng.annotations.*;
 		emailNot.getAllChildWindows();
 		emailNot.verifyPresentEmailActivityNotifications(titleEmail,fullName,spaceName);
 		emailNot.closeChildBrowsers(parentWindow);
+		if(arrayUser.size()>0)
+			deleteUsers(arrayUser);
 		 
 	}
 
@@ -755,7 +749,6 @@ import org.testng.annotations.*;
 		createNewUser(2);
 		
 		info("User A login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		Utils.pause(3000);
 		
@@ -783,7 +776,6 @@ import org.testng.annotations.*;
 		setSpaceMg.inviteUser(arrayUser.get(1),true,arrayUser.get(1));
 		
 		info("User B login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(1), password);
 		Utils.pause(3000);
 		
@@ -807,7 +799,6 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- Reply link will take the user to the portal and displays the activity stream on the position of the activity with the comment box opened, ready for reply*/ 
 		info("User A login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		Utils.pause(3000);
 		
@@ -827,6 +818,8 @@ import org.testng.annotations.*;
 		emailNot.getAllChildWindows();
 		notAct.checkFormatDetailActivity(true,activity);
 		emailNot.closeChildBrowsers(parentWindow);
+		if(arrayUser.size()>0)
+			deleteUsers(arrayUser);
  	}
 
 	/**
@@ -854,7 +847,6 @@ import org.testng.annotations.*;
 		createNewUser(2);
 		
 		info("User A login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		Utils.pause(3000);
 		
@@ -882,7 +874,6 @@ import org.testng.annotations.*;
 		setSpaceMg.inviteUser(arrayUser.get(1),true,arrayUser.get(1));
 		
 		info("User B login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(1), password);
 		Utils.pause(3000);
 		
@@ -906,7 +897,6 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- View full discussion link will take the user to the portal and displays the activity stream on the position of the activity with all comments expanded.*/ 
 		info("User A login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		Utils.pause(3000);
 		
@@ -926,4 +916,6 @@ import org.testng.annotations.*;
 		emailNot.getAllChildWindows();
 		notAct.checkFormatDetailActivity(false,activity);
 		emailNot.closeChildBrowsers(parentWindow);
+		if(arrayUser.size()>0)
+			deleteUsers(arrayUser);
  	}}

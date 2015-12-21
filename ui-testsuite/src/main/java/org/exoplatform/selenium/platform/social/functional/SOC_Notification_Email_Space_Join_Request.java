@@ -33,7 +33,6 @@ import org.testng.annotations.*;
 		createNewUser(1);
 		
 		info("User A login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		Utils.pause(3000);
 		
@@ -75,7 +74,6 @@ import org.testng.annotations.*;
 		createNewUser(1);
 		
 		info("User A login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		Utils.pause(3000);
 		
@@ -357,7 +355,6 @@ import org.testng.annotations.*;
 		createNewUser(2);
 		
 		info("User A login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		Utils.pause(3000);
 		
@@ -379,7 +376,6 @@ import org.testng.annotations.*;
 		spaMg.addNewSpaceSimple(spaceName,spaceDes);
 		
 		info("User B login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(1), password);
 		Utils.pause(3000);
 		
@@ -400,7 +396,6 @@ import org.testng.annotations.*;
 			where you are a manager. Would you like to authorize Mary Williams to join ?
 			Validate | Refuse*/ 
 		info("Log in with User A");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		
 		String parentWindow = driver.getWindowHandle();
@@ -420,7 +415,8 @@ import org.testng.annotations.*;
 		emailNot.getAllChildWindows();
 		emailNot.verifyFormatEmailNotifcationForSpace(emailTitle,firstName,arrayUser.get(1), emailContent,spaceName,true);
 		emailNot.closeChildBrowsers(parentWindow);
-
+		if(arrayUser.size()>0)
+			deleteUsers(arrayUser);
  	}
 
 	/**
@@ -457,7 +453,6 @@ import org.testng.annotations.*;
 		createNewUser(2);
 		
 		info("User A login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		Utils.pause(3000);
 		
@@ -479,7 +474,6 @@ import org.testng.annotations.*;
 		spaMg.addNewSpaceSimple(spaceName,spaceDes);
 		
 		info("User B login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(1), password);
 		Utils.pause(3000);
 		
@@ -496,7 +490,6 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- Notification mail subject is: $USER has requested access to $SPACE space.*/
 		info("Log in with User A");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		
 		String parentWindow = driver.getWindowHandle();
@@ -510,6 +503,8 @@ import org.testng.annotations.*;
 		emailNot.getAllChildWindows();
 		emailNot.verifyPresentEmailActivityNotifications(titleEmail,fullName,spaceName);
 		emailNot.closeChildBrowsers(parentWindow);
+		if(arrayUser.size()>0)
+			deleteUsers(arrayUser);
 
  	}
 
@@ -575,7 +570,6 @@ import org.testng.annotations.*;
 		createNewUser(1);
 		
 		info("User A login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		Utils.pause(3000);
 		
@@ -628,7 +622,6 @@ import org.testng.annotations.*;
 		createNewUser(2);
 		
 		info("User A login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		Utils.pause(3000);
 		
@@ -650,7 +643,6 @@ import org.testng.annotations.*;
 		spaMg.addNewSpaceSimple(spaceName,spaceDes);
 		
 		info("User B login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(1), password);
 		Utils.pause(3000);
 		
@@ -659,7 +651,6 @@ import org.testng.annotations.*;
 		spaMg.sendARequestToASpace(spaceName, true);
 		
 		info("Log in with User A");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		
 		String parentWindow = driver.getWindowHandle();
@@ -673,7 +664,8 @@ import org.testng.annotations.*;
 		emailNot.getAllChildWindows();
 		emailNot.verifyPresentEmailActivityNotifications(titleEmail,fullName,spaceName);
 		emailNot.closeChildBrowsers(parentWindow);
-
+		if(arrayUser.size()>0)
+			deleteUsers(arrayUser);
  	}
 
 	/**
@@ -734,7 +726,6 @@ import org.testng.annotations.*;
 		createNewUser(2);
 		
 		info("User A login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		Utils.pause(3000);
 		
@@ -756,7 +747,6 @@ import org.testng.annotations.*;
 		spaMg.addNewSpaceSimple(spaceName,spaceDes);
 		
 		info("User B login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(1), password);
 		Utils.pause(3000);
 		
@@ -765,7 +755,6 @@ import org.testng.annotations.*;
 		spaMg.sendARequestToASpace(spaceName, true);
 		
 		info("Log in with User A");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		
 		String parentWindow = driver.getWindowHandle();
@@ -785,7 +774,8 @@ import org.testng.annotations.*;
 		emailNot.getAllChildWindows();
 		emailNot.verifyFeedBackMessageRefuseConnection(message, fullName);
 		emailNot.closeChildBrowsers(parentWindow);
-		
+		if(arrayUser.size()>0)
+			deleteUsers(arrayUser);
 		
  	}
 
@@ -817,7 +807,6 @@ import org.testng.annotations.*;
 		createNewUser(2);
 		
 		info("User A login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		Utils.pause(3000);
 		
@@ -839,7 +828,6 @@ import org.testng.annotations.*;
 		spaMg.addNewSpaceSimple(spaceName,spaceDes);
 		
 		info("User B login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(1), password);
 		Utils.pause(3000);
 		
@@ -848,7 +836,6 @@ import org.testng.annotations.*;
 		spaMg.sendARequestToASpace(spaceName, true);
 		
 		info("Log in with User A");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		
 		String parentWindow = driver.getWindowHandle();
@@ -890,7 +877,8 @@ import org.testng.annotations.*;
 		emailNot.getAllChildWindows();
 		emailNot.verifyFeedBackMessageRefuseConnection(message, fullName);
 		emailNot.closeChildBrowsers(parentWindow);
-
+		if(arrayUser.size()>0)
+			deleteUsers(arrayUser);
  	}
 
 	/**
@@ -922,7 +910,6 @@ import org.testng.annotations.*;
 		createNewUser(2);
 		
 		info("User A login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		Utils.pause(3000);
 		
@@ -944,7 +931,6 @@ import org.testng.annotations.*;
 		spaMg.addNewSpaceSimple(spaceName,spaceDes);
 		
 		info("User B login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(1), password);
 		Utils.pause(3000);
 		
@@ -953,7 +939,6 @@ import org.testng.annotations.*;
 		spaMg.sendARequestToASpace(spaceName, true);
 		
 		info("Log in with User A");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		
 		String parentWindow = driver.getWindowHandle();
@@ -993,7 +978,8 @@ import org.testng.annotations.*;
 		emailNot.getAllChildWindows();
 		emailNot.verifyFeedBackMessageRefuseConnection(message1, fullName,spaceName);
 		emailNot.closeChildBrowsers(parentWindow);
-
+		if(arrayUser.size()>0)
+			deleteUsers(arrayUser);
  	}
 
 	/**
@@ -1024,7 +1010,6 @@ import org.testng.annotations.*;
 		createNewUser(2);
 		
 		info("User A login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		Utils.pause(3000);
 		
@@ -1046,7 +1031,6 @@ import org.testng.annotations.*;
 		spaMg.addNewSpaceSimple(spaceName,spaceDes);
 		
 		info("User B login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(1), password);
 		Utils.pause(3000);
 		
@@ -1055,7 +1039,6 @@ import org.testng.annotations.*;
 		spaMg.sendARequestToASpace(spaceName, true);
 		
 		info("Log in with User A");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		
 		String parentWindow = driver.getWindowHandle();
@@ -1075,6 +1058,8 @@ import org.testng.annotations.*;
 		emailNot.getAllChildWindows();
 		emailNot.verifyFeedBackMessageRefuseConnection(message, fullName);
 		emailNot.closeChildBrowsers(parentWindow);
+		if(arrayUser.size()>0)
+			deleteUsers(arrayUser);
  	}
 
 	/**
@@ -1105,7 +1090,6 @@ import org.testng.annotations.*;
 		createNewUser(2);
 		
 		info("User A login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		Utils.pause(3000);
 		
@@ -1127,7 +1111,6 @@ import org.testng.annotations.*;
 		spaMg.addNewSpaceSimple(spaceName,spaceDes);
 		
 		info("User B login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(1), password);
 		Utils.pause(3000);
 		
@@ -1136,7 +1119,6 @@ import org.testng.annotations.*;
 		spaMg.sendARequestToASpace(spaceName, true);
 		
 		info("Log in with User A");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		
 		String parentWindow = driver.getWindowHandle();
@@ -1176,6 +1158,8 @@ import org.testng.annotations.*;
 		emailNot.getAllChildWindows();
 		emailNot.verifyFeedBackMessageRefuseConnection(message1, fullName);
 		emailNot.closeChildBrowsers(parentWindow);
+		if(arrayUser.size()>0)
+			deleteUsers(arrayUser);
  	}
 
 	/**
@@ -1206,7 +1190,6 @@ import org.testng.annotations.*;
 		createNewUser(2);
 		
 		info("User A login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		Utils.pause(3000);
 		
@@ -1228,7 +1211,6 @@ import org.testng.annotations.*;
 		spaMg.addNewSpaceSimple(spaceName,spaceDes);
 		
 		info("User B login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(1), password);
 		Utils.pause(3000);
 		
@@ -1237,7 +1219,6 @@ import org.testng.annotations.*;
 		spaMg.sendARequestToASpace(spaceName, true);
 		
 		info("Log in with User A");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		
 		String parentWindow = driver.getWindowHandle();
@@ -1277,4 +1258,6 @@ import org.testng.annotations.*;
 		emailNot.getAllChildWindows();
 		emailNot.verifyFeedBackMessageRefuseConnection(message1, fullName,spaceName);
 		emailNot.closeChildBrowsers(parentWindow);
+		if(arrayUser.size()>0)
+			deleteUsers(arrayUser);
  	}}

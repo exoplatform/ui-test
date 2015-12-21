@@ -1,15 +1,12 @@
 package org.exoplatform.selenium.platform;
 
-import org.openqa.selenium.By;
+import org.exoplatform.selenium.locator.IDELocator;
 import org.openqa.selenium.WebDriver;
 
-public class IDEManagement extends PlatformBase {
+public class IDEManagement extends IDELocator {
 	
 	public IDEManagement(WebDriver driver) {
 	this.driver = driver;	
 	}
 
-	public final By ELEMENT_PLF_IDE_DISPLAY = By.xpath("//*[@class='navItemSelected' and text()='IDE']");
-	public final By ELEMENT_PLF_IDE_FOLDER = By.xpath("//*[@class='treeCellSelected']//*[contains(text(),'dev-monit')]");
-	public final By ELEMENT_PLF_IDE_WORKSPACE = By.xpath("//*[contains(text(),'Workspace')]");
 }

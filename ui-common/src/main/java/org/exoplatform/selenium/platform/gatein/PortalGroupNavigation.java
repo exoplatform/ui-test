@@ -3,27 +3,9 @@ package org.exoplatform.selenium.platform.gatein;
 import static org.exoplatform.selenium.TestLogger.info;
 
 import org.exoplatform.selenium.ManageAlert;
-
-
-import org.exoplatform.selenium.platform.PlatformBase;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class PortalGroupNavigation extends PlatformBase {
-
-	public final String ELEMENT_ADD_NAVIGATION_BUTTON = "//*[@class='btn' and contains(text(),'Add Navigation')]";
-	public final String ELEMENT_GROUP_SELECT_ADD_NAVIGATION = "//*[contains(text(),'${groupName}')]/..//a[contains(text(),'Add Navigation')]";
-	public final By ELEMENT_CANCEL_BUTON = By.linkText("Cancel");
-	public final String ELEMENT_GROUP_NAME = ".//*[@id='UIGroupNavigationGrid']//*[contains(text(),'${groupName}')]";
-	public final String ELEMENT_DELETE_NAVIGATION_ICON = "//*[contains(text(),'${groupName}')]/../..//i[@class='uiIconTrash uiIconLightGray']";
-	
-	
-	public final String ELEMENT_GROUP_NAVIGATION_POSITION = ".//*[@id='UIGroupNavigationGrid']//tr[${index}]//*[contains(text(),'${groupTitle}')]";
-	public final String ELEMENT_EDIT_PROPERTIES_ICON = "//*[text()='${groupName}']/../..//*[@class='uiIconEditPortalConfig uiIconLightGray']";
-	public final String ELEMENT_GROUP_NAVIGATION_PRIORITY = "//*[@name='priority']";
-	public final String ELEMENT_SAVE_BTN = "//*[text()='Save']";
-	public final String ELEMENT_EDIT_NAVIGATION = "//*[text()='${groupName}']/../..//i[@class='uiIconNavigation uiIconLightGray']";
-	public final String ELEMENT_TITLE_NAVIGATION_MANAGEMENT = "//*[text()='Navigation Management']";
+public class PortalGroupNavigation extends GateinLocator {
 
 	ManageAlert alert;
 	PortalManagePages portMg;

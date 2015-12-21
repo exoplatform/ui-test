@@ -3,45 +3,15 @@ package org.exoplatform.selenium.platform.forum;
 import org.exoplatform.selenium.Button;
 import org.exoplatform.selenium.ManageAlert;
 import org.exoplatform.selenium.Utils;
-import org.exoplatform.selenium.platform.PlatformBase;
 import org.exoplatform.selenium.platform.PlatformPermission;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class PrivateMessageManagement extends PlatformBase{
+public class PrivateMessageManagement extends ForumLocator{
 	PlatformPermission per;
 	ManageAlert alert;
 	Button button;
 	ForumPermission forumPerm;
-	// tab elements
-	public By ELEMENT_TABS_SENT_MESSAGES = By.xpath("//*[@id='UIPrivateMessageForm']//*[@class='nav nav-tabs']//*[contains(text(),'Sent Messages')]");
-	public By ELEMENT_TABS_INBOX = By.xpath("//*[@id='UIPrivateMessageForm']//*[@class='nav nav-tabs']//*[contains(text(),'Inbox')]");
-	public By ELEMENT_TABS_COMPOSE_MESSAGE = By.xpath("//*[@id='UIPrivateMessageForm']//*[@class='nav nav-tabs']//*[contains(text(),'Compose New Message')]");
-	public By ELEMENT_PRIVATE_MESSAGE_CANCEL_BUTTON = By.xpath("//*[@id='UIPrivateMessageForm']//*[contains(text(),'Cancel')]");
-	
-	//send messages
-	public By ELEMENT_SEND_TO_MESSAGE = By.id("SendTo");
-	public By ELEMENT_TITLE_MESSAGE = By.id("MailTitle");
-	public By ELEMENT_MESSAGE_CONTENT = By.xpath("//iframe[@class='cke_wysiwyg_frame cke_reset']");
-	public By ELEMENT_SEND_BUTTON = By.xpath("//*[@id='UIPrivateMessageForm']//*[@class='uiAction']//*[contains(text(),'Send')]");
-	public final By ELEMENT_COMPOSE_NEW_MESSAGE_GROUP_SELECTOR = By.xpath(".//*[@id='MessageTab']//*[contains(@class,'uiIconGroup')]");
-	public final String ELEMENT_PRIVATE_MESSAGE_SELECT_GROUP=".//*[contains(@title,'${name}')]";
-	public final String ELEMENT_PRIVATE_MESSAGE_SELECT_A_GROUP=".//*[@id='UIGroupSelector']//*[contains(text(),'Select this Group')]";
-	public final String ELEMENT_PRIVATE_MESSAGE_SEND_SUCCESSFULLY = "Your message was sent successfully.";
-	public final By ELEMENT_COMPOSE_NEW_MESSAGE_MEMBERSHIP_SELECTOR = By.xpath(".//*[@id='MessageTab']//*[contains(@class,'uiIconMembership uiIconLightGray')]");
-	public final String ELEMENT_PRIVATE_MESSAGE_SELECT_A_MEMBERSHIP=".//*[@id='UIMemberShipSelector']//*[contains(text(),'${membership}')]";
-	
-	//inbox
-	public String ELEMENT_TITLE_AUTHORS_INBOX = "//*[@id='UIListInBoxPrivateMessage']//*[contains(text(),'{$author}')]/../..//*[contains(text(),'{$title}')]";
-	public String ELEMENT_CONTACT_INBOX = "//*[@id='PermissionInfo']//*[contains(text(),'{$contact}')]";
-	public String ELEMENT_CONTENT_INBOX = "//*[@id='uiViewPrivateMessage']//*[contains(text(),'{$content}')]";
-	public By ELEMENT_REPLY = By.xpath("//*[@id='uiViewPrivateMessage']//*[@class='uiIconReply uiIconLightGray']");
-	public String ELEMENT_DELETE_MESSAGE = "//*[@id='UIListInBoxPrivateMessage']//*[contains(text(),'{$title}')]/../../..//*[contains(text(),'{$contact}')]/../..//*[@class='uiIconDelete uiIconLightGray']";
-	
-	// outbox
-	public String ELEMENT_FORWARD_MESSAGE = "//*[@id='UIListSentPrivateMessage']//*[contains(text(),'{$title}')]/../../..//*[contains(text(),'{$contact}')]/../..//*[@class='uiIconForumForward uiIconForumLightGray']";
-	
-	public By ELEMENT_CONFIRM = By.xpath("//*[@id='UIForumPopupConfirmation']//*[contains(text(),'OK')]");
 	
 	/**
 	 * constructor

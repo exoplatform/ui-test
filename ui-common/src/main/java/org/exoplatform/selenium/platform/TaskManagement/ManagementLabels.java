@@ -7,7 +7,7 @@ import org.openqa.selenium.WebDriver;
  *
  */
 
-public class ManagementLabels extends TaskManagementLocatorObject {
+public class ManagementLabels extends TaskManagementLocator {
 
 	public ManagementLabels(WebDriver dr){
 		this.driver=dr;

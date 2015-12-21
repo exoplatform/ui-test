@@ -29,7 +29,7 @@ public class SOC_People_Profile_DynContainers extends SOC_TestConfig_2{
 
 		 *Expected Outcome: 
 			Show content of my profile page*/
-		magAc.signIn(DATA_USER1, DATA_PASS);
+		magAc.signIn(USER_ROOT,PASS_ROOT);
 		navTool.goToMyProfile();
 
 		/*Step number: 2

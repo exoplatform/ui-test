@@ -19,11 +19,16 @@ public class SOC_Notification_Intranet_Connection_Request extends SOC_TestConfig
 		- Click the notifications icon
 		- Check the notification list
 		*/
-		info("Create users test");
-		createNewUser(2);
-		info("Log in with User A");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(0), password);
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+"@gmail.com";
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		magAc.signIn(username1,password);
+		
 		Utils.pause(3000);
 		info("goto My notification");
 		navTool.goToMyNotifications();
@@ -31,7 +36,7 @@ public class SOC_Notification_Intranet_Connection_Request extends SOC_TestConfig
 		Utils.pause(3000);
 		info("User A sent a connection request to User B");
 		hp.goToConnections();
-		connMag.connectToAUser(arrayUser.get(1));
+		connMag.connectToAUser(username2);
 		Utils.pause(3000);
 		
 		
@@ -51,15 +56,15 @@ public class SOC_Notification_Intranet_Connection_Request extends SOC_TestConfig
 				- $DATE is the date of the notification
 		 */
 		info("Log in with User B");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(1), password);
+		magAc.signIn(username2, password);
 		String status=notiIntranetData.getContentByArrayTypeRandom(2);
 		Utils.pause(3000);
 		navTool.goToIntranetNotification();
+        arrayUser.add(username2);
 		intraNot.checkAvatarInStatus(arrayUser,true);
 		intraNot.checkUsers(arrayUser,true);
-		intraNot.checkStatus(status, arrayUser.get(0));
-		intraNot.checkBtnConnectJoinRequest(arrayUser.get(0));
+		intraNot.checkStatus(status,username1);
+		intraNot.checkBtnConnectJoinRequest(username1);
 		
 		
 		/*
@@ -67,9 +72,9 @@ public class SOC_Notification_Intranet_Connection_Request extends SOC_TestConfig
 		- Click the notification area
 		--> Expected: User B is redirected to the profile of User A
 		 */
-		intraNot.goToDetailRequestConnectionUser(arrayUser.get(0),true);
+		intraNot.goToDetailRequestConnectionUser(username1,true);
 		info("Verify that User B is redirected to the profile of User A");
-		waitForAndGetElement(userProPage.ELEMENT_PROFILE_TITLE.replace("${fullName}",arrayUser.get(0)));
+		waitForAndGetElement(userProPage.ELEMENT_PROFILE_TITLE.replace("${fullName}",username1));
 		
 	}
 	
@@ -87,11 +92,16 @@ public class SOC_Notification_Intranet_Connection_Request extends SOC_TestConfig
 			Click on Accept
 			--> Expected: - The connection is approved, the 2 users are connected
 			*/
-		info("Create users test");
-		createNewUser(2);
-		info("Log in with User A");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(0), password);
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+"@gmail.com";
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		magAc.signIn(username1,password);
+		
 		Utils.pause(3000);
 		info("goto My notification");
 		navTool.goToMyNotifications();
@@ -99,7 +109,7 @@ public class SOC_Notification_Intranet_Connection_Request extends SOC_TestConfig
 		Utils.pause(3000);
 		info("User A sent a connection request to User B");
 		hp.goToConnections();
-		connMag.connectToAUser(arrayUser.get(1));
+		connMag.connectToAUser(username2);
 		Utils.pause(3000);
 		
 		
@@ -117,17 +127,16 @@ public class SOC_Notification_Intranet_Connection_Request extends SOC_TestConfig
 				- $DATE is the date of the notification
 		 */
 		info("Log in with User B");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(1), password);
+		magAc.signIn(username2, password);
 		Utils.pause(3000);
 		String status=notiIntranetData.getContentByArrayTypeRandom(5);
 		navTool.goToIntranetNotification();
-		intraNot.acceptRqConnection(arrayUser.get(0));
-		intraNot.checkStatus(status, arrayUser.get(0));
+		intraNot.acceptRqConnection(username1);
+		intraNot.checkStatus(status,username1);
 		
 		info("Verify that User A and User B are friend");
 		hp.goToConnections();
-		connMag.verifyConnection(arrayUser.get(0),true);
+		connMag.verifyConnection(username1,true);
 		
 		/*
 		 * Step 4: 
@@ -135,10 +144,9 @@ public class SOC_Notification_Intranet_Connection_Request extends SOC_TestConfig
 			--> Expected:- User B is redirected to the profile of User A
 		 */
 		navTool.goToIntranetNotification();
-		intraNot.goToDetailAcceptRequestConnectionUser(arrayUser.get(0),true);
-		//intraNot.goToDetailNotificationOnPopup();
+		intraNot.goToDetailAcceptRequestConnectionUser(username1,true);
 		info("Verify that User B is redirected to the profile of User A");
-		waitForAndGetElement(userProPage.ELEMENT_PROFILE_TITLE.replace("${fullName}",arrayUser.get(0)));
+		waitForAndGetElement(userProPage.ELEMENT_PROFILE_TITLE.replace("${fullName}",username1+" "+username1));
 	}
 	
 	
@@ -160,11 +168,15 @@ public class SOC_Notification_Intranet_Connection_Request extends SOC_TestConfig
 		- Go to View All page
 				--> Expected: - The notification is not available / displayed in the View All page*/
 		
-		info("Create users test");
-		createNewUser(2);
-		info("Log in with User A");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(0), password);
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+"@gmail.com";
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		magAc.signIn(username1,password);
 		Utils.pause(3000);
 		info("goto My notification");
 		navTool.goToMyNotifications();
@@ -172,26 +184,25 @@ public class SOC_Notification_Intranet_Connection_Request extends SOC_TestConfig
 		Utils.pause(3000);
 		info("User A sent a connection request to User B");
 		hp.goToConnections();
-		connMag.connectToAUser(arrayUser.get(1));
+		connMag.connectToAUser(username2);
 		Utils.pause(3000);
 		
 		info("Log in with User B");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(1), password);
+		magAc.signIn(username2, password);
 		Utils.pause(3000);
 		String status=notiIntranetData.getContentByArrayTypeRandom(5);
 		navTool.goToIntranetNotification();
-		intraNot.refuseRqConnection(arrayUser.get(0));
-		intraNot.checkStatus(status, arrayUser.get(0));
+		intraNot.refuseRqConnection(username1);
+		intraNot.checkStatus(status,username1);
 		
 		info("Verify that User A and User B are not friend");
 		hp.goToConnections();
-		connMag.verifyConnection(arrayUser.get(0), false);
+		connMag.verifyConnection(username1, false);
 		
 		info("The notification is not available / displayed in the View All page");
 		navTool.goToIntranetNotification();
 		intraNot.goToAllNotification();
-		intraNot.checkStatus(status, arrayUser.get(0));
+		intraNot.checkStatus(status,username1);
 	}
 	
 	
@@ -211,11 +222,15 @@ public class SOC_Notification_Intranet_Connection_Request extends SOC_TestConfig
 		--> Expected: - The connection is approved, the 2 users are connected
 					- The notification message is updated accordingly
 		*/			
-		info("Create users test");
-		createNewUser(2);
-		info("Log in with User A");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(0), password);
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+"@gmail.com";
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		magAc.signIn(username1,password);
 		Utils.pause(3000);
 		info("goto My notification");
 		navTool.goToMyNotifications();
@@ -223,17 +238,16 @@ public class SOC_Notification_Intranet_Connection_Request extends SOC_TestConfig
 		Utils.pause(3000);
 		info("User A sent a connection request to User B");
 		hp.goToConnections();
-		connMag.connectToAUser(arrayUser.get(1));
+		connMag.connectToAUser(username2);
 		Utils.pause(3000);
 		
 		info("Log in with User B");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(1), password);
+		magAc.signIn(username2, password);
 		Utils.pause(3000);
 		String status=notiIntranetData.getContentByArrayTypeRandom(5);
 		navTool.goToIntranetNotification();
-		intraNot.acceptRqConnection(arrayUser.get(0));
-		intraNot.checkStatus(status, arrayUser.get(0));
+		intraNot.acceptRqConnection(username1);
+		intraNot.checkStatus(status,username1);
 		
 	    /*
 	     * Step 2:
@@ -243,7 +257,7 @@ public class SOC_Notification_Intranet_Connection_Request extends SOC_TestConfig
 	     */
 		info("The notification is not available / displayed in the View All page");
 		intraNot.goToAllNotification();
-		intraNot.checkStatus(status, arrayUser.get(0));
+		intraNot.checkStatus(status,username1);
 	}
 	
 	@Test 
@@ -262,11 +276,15 @@ public class SOC_Notification_Intranet_Connection_Request extends SOC_TestConfig
 			--> Expected: - The notifications message is not displayed in the page
 		 */
 		
-		info("Create users test");
-		createNewUser(2);
-		info("Log in with User A");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(0), password);
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+"@gmail.com";
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		magAc.signIn(username1,password);
 		Utils.pause(3000);
 		info("goto My notification");
 		navTool.goToMyNotifications();
@@ -274,19 +292,18 @@ public class SOC_Notification_Intranet_Connection_Request extends SOC_TestConfig
 		Utils.pause(3000);
 		info("User A sent a connection request to User B");
 		hp.goToConnections();
-		connMag.connectToAUser(arrayUser.get(1));
+		connMag.connectToAUser(username2);
 		Utils.pause(3000);
 		
 		info("Log in with User B");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(1), password);
+		magAc.signIn(username2, password);
 		Utils.pause(3000);
 		String status=notiIntranetData.getContentByArrayTypeRandom(5);
 		navTool.goToIntranetNotification();
-		intraNot.refuseRqConnection(arrayUser.get(0));
+		intraNot.refuseRqConnection(username1);
 		
 		info("The notification is not available / displayed in the View All page");
-		intraNot.checkStatus(status, arrayUser.get(0));
+		intraNot.checkStatus(status,username1);
 	}
 	
 	

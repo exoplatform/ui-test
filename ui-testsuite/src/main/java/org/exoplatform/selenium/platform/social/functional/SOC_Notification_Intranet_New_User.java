@@ -2,7 +2,6 @@ package org.exoplatform.selenium.platform.social.functional;
 
 import static org.exoplatform.selenium.TestLogger.info;
 
-import org.exoplatform.selenium.Utils;
 import org.exoplatform.selenium.platform.social.MyNotificationsSetting.myNotiType;
 import org.testng.annotations.*;
 
@@ -29,27 +28,24 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			A New User notification is displayed in the list*/
-		info("Create 1 users for testing");
-		createNewUser(1);
-		
-		info("John add UserA to administration group");
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+"@gmail.com";
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
 		navTool.goToUsersAndGroupsManagement();
-		userAndGroup.goToGroupTab();
-		userAndGroup.selectGroup("Platform/Administration");
-		userAndGroup.addUsersToGroup(arrayUser.get(0),"*",false,false);
-		
-		info("User A login");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(0), password);
-		Utils.pause(3000);
+		userAndGroup.addUserAdmin(username1);
+		magAc.signIn(username1,password);
 		
 		info("goto My notification");
 		navTool.goToMyNotifications();
 		myNoti.enableNotification(myNotiType.NewUser_intranet);
 		
-		
-		info("Create 1 users for testing");
-		createNewUser(1);
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username2, password, email2, username2, username2);
 
 		/*Step number: 2
 		*Step Name: Step 2 : Check notification message
@@ -65,8 +61,8 @@ import org.testng.annotations.*;
 		info("Check intranet notification");
 		String status = notiIntranetData.getContentByArrayTypeRandom(11);
 		navTool.goToIntranetNotification();
-		intraNot.checkAvatarInStatus(arrayUser.get(1),true);
-		intraNot.checkStatus(status, arrayUser.get(1));
+		intraNot.checkAvatarInStatus(username2,true);
+		intraNot.checkStatus(status,username2);
 
  	}
 
@@ -89,32 +85,30 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- A New User notification is displayed in the list*/
-		info("Create 1 users for testing");
-		createNewUser(1);
-		
-		info("John add UserA to administration group");
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+"@gmail.com";
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
 		navTool.goToUsersAndGroupsManagement();
-		userAndGroup.goToGroupTab();
-		userAndGroup.selectGroup("Platform/Administration");
-		userAndGroup.addUsersToGroup(arrayUser.get(0),"*",false,false);
-		
-		info("User A login");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(0), password);
-		Utils.pause(3000);
+		userAndGroup.addUserAdmin(username1);
+		magAc.signIn(username1,password);
 		
 		info("goto My notification");
 		navTool.goToMyNotifications();
 		myNoti.enableNotification(myNotiType.NewUser_intranet);
 		
 		
-		info("Create 1 users for testing");
-		createNewUser(1);
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username2, password, email2, username2, username2);
 		
 		info("Check intranet notification");
 		String status = notiIntranetData.getContentByArrayTypeRandom(11);
 		navTool.goToIntranetNotification();
-		intraNot.checkStatus(status, arrayUser.get(1));
+		intraNot.checkStatus(status,username2);
 
 		/*Step number: 2
 		*Step Name: Step 2 : Click the notification area
@@ -125,8 +119,8 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- The user is redirected to the profile of the new user*/
 		info("The user is redirected to the profile of the new user");
-		intraNot.goToDetailNewUserJoinIntranet(arrayUser.get(1),true);
-		waitForAndGetElement(userProPage.ELEMENT_USER_NAME_PAGE.replace("$fullName",arrayUser.get(1)));
+		intraNot.goToDetailNewUserJoinIntranet(username2,true);
+		waitForAndGetElement(userProPage.ELEMENT_USER_NAME_PAGE.replace("$fullName",username2+" "+username2));
 
  	}
 
@@ -149,27 +143,26 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- A New User notification is displayed in the list*/
-		info("Create 1 users for testing");
-		createNewUser(1);
-		
-		info("John add UserA to administration group");
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+"@gmail.com";
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
 		navTool.goToUsersAndGroupsManagement();
-		userAndGroup.goToGroupTab();
-		userAndGroup.selectGroup("Platform/Administration");
-		userAndGroup.addUsersToGroup(arrayUser.get(0),"*",false,false);
+		userAndGroup.addUserAdmin(username1);
+		magAc.signIn(username1,password);
 		
-		info("User A login");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(0), password);
-		Utils.pause(3000);
 		
 		info("goto My notification");
 		navTool.goToMyNotifications();
 		myNoti.enableNotification(myNotiType.NewUser_intranet);
 		
 		
-		info("Create 1 users for testing");
-		createNewUser(1);
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username2, password, email2, username2, username2);
 		
 		/*Step number: 2
 		*Step Name: Step 2 : Check View All page
@@ -183,6 +176,6 @@ import org.testng.annotations.*;
 		String status = notiIntranetData.getContentByArrayTypeRandom(11);
 		navTool.goToIntranetNotification();
 		intraNot.goToAllNotification();
-		intraNot.checkStatus(status, arrayUser.get(1));
+		intraNot.checkStatus(status,username2);
 
  	}}

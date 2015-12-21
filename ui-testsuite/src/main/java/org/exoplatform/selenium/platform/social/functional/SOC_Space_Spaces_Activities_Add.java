@@ -16,6 +16,18 @@ import org.testng.annotations.*;
 	@Test
 	public  void test01_AddActivityAfterAnUserJoinsAPublicSpace() {
 		info("Test 1: Add activity after an user joins a public space");
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+"@gmail.com";
+		String fullName2=username2+" "+username2;
+		
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		magAc.signIn(username1,password);
 		/*Step Number: 1
 		*Step Name: 
 		*Step Description: 
@@ -25,13 +37,6 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- User joins a public space. A comment is added to the space creation activity.*/ 
-		info("Create 2 users for testing");
-		createNewUser(2);
-		
-		info("User A login");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(0), password);
-		Utils.pause(3000);
 		
 		info("User A create a new space");
 		String spaceName= txData.getContentByArrayTypeRandom(1)+getRandomNumber();
@@ -44,11 +49,10 @@ import org.testng.annotations.*;
 		hp.goToSpecificSpace(spaceName);
 		spaHome.goToSpaceSettingTab();
 		setSpaceMg.goToMemberTab();
-		setSpaceMg.inviteUser(arrayUser.get(1),true,arrayUser.get(1));
+		setSpaceMg.inviteUser(username2,true,fullName2);
 		
 		info("User B login");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(1), password);
+		magAc.signIn(username1, password);
 		Utils.pause(3000);
 		
 		info("User B accept invitation from User A");
@@ -58,11 +62,11 @@ import org.testng.annotations.*;
 		
 		info("A comment is added to the space creation activity");
 		hp.goToSpecificSpace(spaceName);
-		waitForAndGetElement(hpAct.ELEMENT_ACTIVITY_USERJOIN_SPACE.replace("${user}",arrayUser.get(1)));
+		waitForAndGetElement(hpAct.ELEMENT_ACTIVITY_USERJOIN_SPACE.replace("${user}",username2));
 		
 		info("A comment is added to Home page activity");
 		hp.goToHomePage();
-		waitForAndGetElement(hpAct.ELEMENT_ACTIVITY_USERJOIN_SPACE.replace("${user}",arrayUser.get(1)));
+		waitForAndGetElement(hpAct.ELEMENT_ACTIVITY_USERJOIN_SPACE.replace("${user}",username2));
 		
  	}
 
@@ -75,6 +79,13 @@ import org.testng.annotations.*;
 	@Test
 	public  void test02_AddASpaceActivityOnIntranetHomePageAfterCreateASpace() {
 		info("Test 02: Add a Space activity on Intranet home page after create a space");
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		magAc.signIn(username1,password);
 		/*Step Number: 1
 		*Step Name: Step 1: Add space
 		*Step Description: 
@@ -98,7 +109,7 @@ import org.testng.annotations.*;
 		hp.goToMySpaces();
 		spaMg.addNewSpaceSimple(space,space,60000);
 		hp.goToHomePage();
-		waitForAndGetElement(hpAct.ELEMENT_ACTIVITY_USERJOIN_SPACE.replace("${user}", DATA_NAME_USER1));
+		waitForAndGetElement(hpAct.ELEMENT_ACTIVITY_USERJOIN_SPACE.replace("${user}",username1));
 		mouseOver(hpAct.ELEMENT_ACTIVITY_SPACE_HEADING.replace("${space}", space),false);
 	}
 
@@ -112,7 +123,14 @@ import org.testng.annotations.*;
 	@Test
 	public  void test03_AddNewYourActivity() {
 		info("Test 03: Add new your activity");
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
 		
+		
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		magAc.signIn(username1,password);
 		/*Step Number: 1
 		*Step Name: Step 1: Create new space
 		*Step Description: 
@@ -156,6 +174,13 @@ import org.testng.annotations.*;
 	@Test
 	public  void test04_AddAShareLink() {
 		info("Test 17 Add a share link");
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		magAc.signIn(username1,password);
 		/*Step Number: 1
 		*Step Name: Step 1: Create new space
 		*Step Description: 

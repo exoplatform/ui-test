@@ -2,38 +2,13 @@ package org.exoplatform.selenium.platform.answer;
 
 import static org.exoplatform.selenium.TestLogger.info;
 
-import org.exoplatform.selenium.platform.PlatformBase;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class CommentManagement extends PlatformBase {
+public class CommentManagement extends AnswerLocator {
 
 	AnswerHomePage aHome;
 	AnswerManagement aMang;
-
-	//Comment form
-	public By ELEMENT_COMMENT_BUTTON=By.xpath("//*[@class='questionAction']//*[text()='Comment']");
-	public By ELEMENT_COMMENT_FORM=By.id("UICommentForm");
-	public By ELEMENT_COMMENT_FORM_DATA_FRAME_INPUT=By.xpath("//*[@class='cke_wysiwyg_frame cke_reset']");
-	public By ELEMENT_COMMENT_FORM_SAVE_BUTTON=By.xpath("//*[@id='UICommentForm']//*[text()='Save']");
-	public By ELEMENT_COMMENT_FORM_CANCEL_BUTTON=By.xpath("//*[@id='UICommentForm']//*[text()='Cancel']");
-
-	//More actions
-	public String ELEMENT_COMMENT_MORE_ACTION_BUTTON="//*[@class='responseContainer']//*[contains(@id,'Comment')]//*[text()='$comment']/../../../../..//*[@class='uiIconSettings uiIconLightGray']";
-	public String ELEMENT_COMMENT_EDIT_BUTTON="//*[@class='responseContainer']//*[contains(@id,'Comment')]//*[text()='$comment']/../../../../..//*[@class='uiIconEdit uiIconLightGray']";
-	public String ELEMENT_COMMENT_PROMOTE_TO_ANSWER_BUTTON="//*[@class='responseContainer']//*[contains(@id,'Comment')]//*[text()='$comment']/../../../../..//*[@class='uiIconAnsPromte uiIconAnsLightGray']";
-	public String ELEMENT_COMMENT_DELETE_BUTTON="//*[@class='responseContainer']//*[contains(@id,'Comment')]//*[text()='$comment']/../../../../..//*[@class='uiIconTrash uiIconLightGray']";
-
-	//COMMENT container
-	public String ELEMENT_COMMENT_AUTHOR="//*[@class='responseContainer']//*[contains(@id,'Comment')]//*[text()='$comment']/../..//*[@class='userName' and contains(text(),'$fullname')]";
-	public String ELEMENT_COMMENT_CONTENT="//*[@class='responseContainer']//*[contains(@id,'Comment')]//*[text()='$comment']";
-
-	//Delete 
-	public By ELEMENT_COMMENT_DELETE_CONFIRM_POPUP=By.id("UIForumPopupConfirmation");
-	public By ELEMENT_COMMENT_CONFIRM_DELETE=By.xpath("//*[@id='UIForumPopupConfirmation']//*[contains(text(),'Are you sure you want to delete this comment ?')]");
-	public By ELEMENT_COMMENT_DELETE_FORM_OK_BUTTON=By.xpath("//*[@id='UIForumPopupConfirmation']//*[text()='OK']");
-	public By ELEMENT_COMMENT_DELETE_FORM_CANCEL_BUTTON=By.xpath("//*[@id='UIForumPopupConfirmation']//*[text()='Cancel']");
-
 
 	/**
 	 * constructor

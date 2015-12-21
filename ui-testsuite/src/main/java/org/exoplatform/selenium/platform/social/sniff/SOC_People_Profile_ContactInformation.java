@@ -53,13 +53,13 @@ public class SOC_People_Profile_ContactInformation extends SOC_TestConfig_2 {
 
 		/*Create data test*/
 		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
-		String email1 = username1 + mailSuffixData.getMailSuffixRandom();
-		info("Add new user");
-		magAc.signIn(DATA_USER1, DATA_PASS);
+		String email1 = username1+ mailSuffixData.getMailSuffixRandom();
+		
+		
+		info("Add user");
 		navTool.goToAddUser();
-
-		info("Add user " + username1);
-		addUserPage.addUser(username1, username1, email1, username1, username1);
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		magAc.signIn(username1, password);
 
 		/*Step Number: 1
 		 *Step Name: Step 1: User login
@@ -70,7 +70,6 @@ public class SOC_People_Profile_ContactInformation extends SOC_TestConfig_2 {
 
 		 *Expected Outcome: 
 			- My profile is displayed*/
-		magAc.signIn(username1, username1);
 		navTool.goToMyProfile();
 		info("goto edit profile page");
 		click(myProfile.ELEMENT_EDIT_MY_PROFILE_LINK);
@@ -126,7 +125,7 @@ public class SOC_People_Profile_ContactInformation extends SOC_TestConfig_2 {
 		waitForAndGetElement(myProfile.ELEMENT_URL_INFO.replace("${url}",url2));
 
 		info("login as user 2");
-		magAc.signIn(DATA_USER1, DATA_PASS);
+		magAc.signIn(USER_ROOT,PASS_ROOT);
 		info("goto profile of user 1");
 		hp.goToConnections();
 		click(connMag.ELEMENT_ALL_CONNECTIONS_TAB);
@@ -148,9 +147,5 @@ public class SOC_People_Profile_ContactInformation extends SOC_TestConfig_2 {
 		waitForAndGetElement(myProfile.ELEMENT_URL_INFO.replace("${url}",url1));
 		waitForAndGetElement(myProfile.ELEMENT_URL_INFO.replace("${url}",url2));
 
-		info("Clear Data");
-		magAc.signIn(DATA_USER1, DATA_PASS);
-		navTool.goToUsersAndGroupsManagement();
-		userAndGroup.deleteUser(username1);
 	}
 }

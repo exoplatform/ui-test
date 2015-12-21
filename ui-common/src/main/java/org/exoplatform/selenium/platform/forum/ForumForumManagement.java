@@ -2,60 +2,13 @@ package org.exoplatform.selenium.platform.forum;
 
 import org.exoplatform.selenium.ManageAlert;
 import org.exoplatform.selenium.Utils;
-import org.exoplatform.selenium.platform.PlatformBase;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import static org.exoplatform.selenium.TestLogger.info;
 
-public class ForumForumManagement extends PlatformBase {
-	
-	//Home page of forum
-	public final String ELEMENT_FORUM_FORUM_NAME_LINK=".//*[text()='${name}']";
-	public final String ELEMENT_FORUM_CATEGORY_TITLE= ".//*[@id='UIForumDescription']//strong[text()='${title}']";
-	public final By ELEMENT_FORUM_START_TOPIC_DISABLE = By.xpath("//*[@id='UITopicContainer']//*[@data-original-title='Forum is closed for posting.']");
-	public final By ELEMENT_FORUM_START_TOPIC_BUTTON = By.xpath("//*[@class='btn btn-primary pull-left']");
-	
-	//Action bar
-	public final By ELEMENT_ACTIONBAR_ADDFORUM = By.xpath("//*[@class='uiIconForumCreateForum uiIconForumLightGray']");
-	
-	//Add/Edit forum popup
-	public final By ELEMENT_EDITFORUM_POPUP_TITLE = By.xpath("//span[@class='PopupTitle popupTitle' and text()='Forum']");
-	public final By ELEMENT_ADDFORUM_POPUP_TITLE= By.id("ForumTitle");
-	public final By ELEMENT_ADDFORUM_POPUP_ORDER= By.id("ForumOrder");
-	public final By ELEMENT_ADDFORUM_POPUP_DESCRIPTION= By.id("Description");
-	public final By ELEMENT_ADDFORUM_POPUP_SAVE_BUTTON= By.xpath(".//*[@id='UIForumForm']//button[text()='Save']");
-	public final By ELEMENT_ADDFORUM_POPUP_CANCEL_BUTTON= By.xpath(".//*[@id='UIForumForm']//button[text()='Cancel']");
-	public final By ELEMENT_FORUM_PERMISSION_TAB = By.xpath(".//*[@id='UIForumForm']//*[contains(text(),'Permissions')]");
-	public final By ELEMENT_FORUM_PERMISSION_TAB_USER_SELECTOR = By.xpath(".//*[@id='forumPermission']//*[@class='uiIconUser uiIconLightGray']");
-	public final By ELEMENT_FORUM_CANCEL = By.xpath(".//*[@id='UIForumForm']//*[contains(text(),'Cancel')]");
-	public final By ELEMENT_FORUM_PERMISSION_CLOSE_USER_SELETOR = By.xpath(".//*[@id='UIUserSelector']//*[contains(text(),'Close')]");
-	public final By ELEMENT_FORUM_PERMISSION_INPUT_SEARCH_USER_NAME = By.xpath(".//*[@id='QuickSearch']");
-	public final String ELEMENT_FORUM_PERMISSION_SELECT_SEARCH_OPTION = "//*[contains(@name,'filter')]";
-	public final String ELEMENT_FORUM_PERMISSION_SEARCH_ICON = ".//*[@id='UIUserSelector']//*[contains(@class,'uiIconSearch uiIconLightGray')]";
-	
-	//More Action menu
-	public final By ELEMENT_MORE_ACTION = By.xpath("//*[@class='uiIconSettings uiIconLightGray']");
-	public final By ELEMENT_MODERATOR=By.xpath("//*[contains(@class,'uiIconForumModerator')]");
-	public final By ELEMENT_EDIT_FORUM = By.xpath("//*[contains(@href, 'EditForum')]");
-	public final By ELEMENT_DELETE_FORUM = By.xpath("//*[contains(@data-action, 'RemoveForum')]");
-	public final By ELEMENT_MOVE_FORUM = By.xpath("//*[contains(@href, 'MoveForum')]");
-	public final By ELEMENT_START_TOPIC_BUTTON = By.xpath("//*[contains(@href, 'AddTopic')]");
-	public final By ELEMENT_START_TOPIC_BTN = By.xpath(".//*[contains(@class,'uiIconForumCreateTopic')]");
-	public final By ELEMENT_LOCK_FORUM = By.className("uiIconLockMedium");
-	public final By ELEMENT_UNLOCK_FORUM = By.className("uiIconUnlockMedium");
-	public final By ELEMENT_CLOSE_FORUM = By.xpath("//a[contains(@href,'SetCloseForum')]");
-	public final By ELEMENT_OPEN_FORUM = By.xpath("//a[contains(@href,'SetOpenForum')]");
-	
-	//Start topic popup
-	public final By ELEMENT_START_TOPIC_POPUP_TITLE = By.xpath(".//*[@id='UIForumPopupWindow']//span[@class='PopupTitle popupTitle']");
-	
-	//Popup confirmation
-	public By ELEMENT_OK_DELETE = By.xpath("//*[@id='UIForumPopupConfirmation']//*[text()='OK']");
-	
-	//Move forum popup
-	public final By ELEMENT_POPUP_MOVE_FORUM = By.xpath("//span[@class='PopupTitle popupTitle' and text()='Move Forum']");
+public class ForumForumManagement extends ForumLocator {
 	
 	ManageAlert alert;
 	ForumHomePage forumHP;

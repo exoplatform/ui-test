@@ -8,7 +8,7 @@ import org.openqa.selenium.WebDriver;
  * This class will define all actions on Home page of the feature
  *
  */
-public class TaskManagementHome extends TaskManagementLocatorObject {
+public class TaskManagementHome extends TaskManagementLocator {
 
 	public TaskManagementHome(WebDriver dr){
 		this.driver=dr;

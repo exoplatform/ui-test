@@ -2558,8 +2558,9 @@ public class TestBase {
 	 */
 	public static void scrollToBottomPage(WebDriver driver){
 		info("Scroll to the bottom of the page");
-		JavascriptExecutor jse = (JavascriptExecutor) driver;
-		jse.executeScript("window.scrollTo(0, document.body.scrollHeight)");
+		JavascriptExecutor js = (JavascriptExecutor)driver;
+        js.executeScript("window.scrollTo(0,Math.max(document.documentElement.scrollHeight," +
+        "document.body.scrollHeight,document.documentElement.clientHeight));");
 	}
 
 	/**
@@ -2577,7 +2578,7 @@ public class TestBase {
 			}
 			if (waitForAndGetElement(element, 5000, 0) != null){
 				info("Element "+element+" is displayed");
-				if(isClicked.length>0 & isClicked[0]==true)
+				if(isClicked.length>0 && isClicked[0]==true)
 					click(element);
 				break;
 			}
@@ -2586,5 +2587,24 @@ public class TestBase {
 		}
 		Utils.pause(2000);
 		info("The elemnt is shown successfully");
+	}
+	
+	/**
+	 * Check if a checkbox is checked or not
+	 * @Author: QuyenNT
+	 * Date: Oct 30, 2015
+	 */
+	public boolean checkCheckBoxAttribute(String checkedElement){
+		info("Check checkbox attribute");
+		WebElement checkBox= waitForAndGetElement(checkedElement,2000,2,1);
+		if (checkBox != null && !checkBox.isSelected()) {
+			info("Checkbox is NOT selected");
+			return false;
+		} else if (checkBox != null && checkBox.isSelected()){
+			info("Checkbox IS SELECTED");
+			return true;
+		}
+		
+		return false;
 	}
 }

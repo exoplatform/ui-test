@@ -30,19 +30,16 @@ public class SOC_People_Profile_ViewProfile extends SOC_TestConfig_2{
 
 		/*Create data test*/
 		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
-		String password1 = username1;
-		String email1 = username1 + mailSuffixData.getMailSuffixRandom();
-
+		String email1 = username1+ mailSuffixData.getMailSuffixRandom();
 		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
-		String password2 = username2;
-		String email2 = username2 + mailSuffixData.getMailSuffixRandom();
-
-		info("Add new user");
-		magAc.signIn(DATA_USER1, DATA_PASS);
+		String email2 = username2+ mailSuffixData.getMailSuffixRandom();
+		
+		
+		info("Add user");
 		navTool.goToAddUser();
-		addUserPage.addUser(username1, password1, email1, username1, username1);
-		addUserPage.addUser(username2, password2, email2, username2, username2);
-		magAc.signIn(username1, password1);
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		magAc.signIn(username1, password);
 		
 		/*Step Number: 1
 		 *Step Name: Step 1: Sign in system
@@ -116,12 +113,6 @@ public class SOC_People_Profile_ViewProfile extends SOC_TestConfig_2{
 
 		info("check right-column");
 		waitForAndGetElement(myProfile.ELEMENT_UIMINICONNECTIONS_PORTLET_TEXT.replace("${content}", msg_other));
-		
-		info("Clear Data");
-		magAc.signIn(DATA_USER1, DATA_PASS);
-		navTool.goToUsersAndGroupsManagement();
-		userAndGroup.deleteUser(username1);
-		userAndGroup.deleteUser(username2);
 	}
 
 	/**
@@ -155,14 +146,13 @@ public class SOC_People_Profile_ViewProfile extends SOC_TestConfig_2{
 
 		/*Create data test*/
 		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
-		String password1 = txData.getContentByArrayTypeRandom(1) + getRandomNumber();
-		String email1 = txData.getContentByArrayTypeRandom(1) + getRandomNumber() + mailSuffixData.getMailSuffixRandom();
-
-		info("Add new user");
-		magAc.signIn(DATA_USER1, DATA_PASS);
+		String email1 = username1+ mailSuffixData.getMailSuffixRandom();
+		
+		
+		info("Add user");
 		navTool.goToAddUser();
-		addUserPage.addUser(username1, password1, email1, username1, username1);
-		magAc.signIn(username1, password1);
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		magAc.signIn(username1, password);
 
 		info("Test 2: Check My Profile page after all information is filled");
 		/*Step Number: 1
@@ -246,9 +236,5 @@ public class SOC_People_Profile_ViewProfile extends SOC_TestConfig_2{
 			- The section is named "Connections" and display the last connections of the user*/ 
 		waitForAndGetElement(myProfile.ELEMENT_UIMINICONNECTIONS_PORTLET_TITLE);
 
-		info("Clear Data");
-		magAc.signIn(DATA_USER1, DATA_PASS);
-		navTool.goToUsersAndGroupsManagement();
-		userAndGroup.deleteUser(username1);
 	}
 }

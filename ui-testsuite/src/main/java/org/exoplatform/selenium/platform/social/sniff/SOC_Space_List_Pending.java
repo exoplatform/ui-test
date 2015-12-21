@@ -16,6 +16,16 @@ public class SOC_Space_List_Pending extends SOC_TestConfig_1 {
 	public  void test01_CheckPendingSpaceList() {
 		info("Test 01: Check Pending space list");
 		String space = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+ "@gmail.com";
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+ "@gmail.com";
+		
+		info("Add user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		magAc.signIn(username1, password);
 		/*Step Number: 1
 		 *Step Name: Step 1: Check displaying on Requests Pending list
 		 *Step Description: 
@@ -31,8 +41,7 @@ public class SOC_Space_List_Pending extends SOC_TestConfig_1 {
 		hp.goToMySpaces();
 		spaMg.addNewSpaceSimple(space,space);
 		
-		magAc.signOut();
-		magAc.signIn(DATA_USER2,DATA_PASS);
+		magAc.signIn(username2, password);
 		
 		hp.goToMySpaces();
 		spaMg.goToAllSpacesTab();
@@ -40,21 +49,9 @@ public class SOC_Space_List_Pending extends SOC_TestConfig_1 {
 		
 		spaMg.goToRequestPendingTab();
 		info("Verify that request to join button is hidden and request pending status is shown");
-		waitForAndGetElement(spaMg.ELEMENT_MY_SPACE_ALL_SPACES_REQUEST_PENDING.replace("${space}", space),3000,0);
+		waitForAndGetElement(spaMg.ELEMENT_MY_SPACE_ALL_SPACES_REQUEST_PENDING.replace("${space}", space),3000,1);
 		
 		
-		magAc.signOut();
-		magAc.signIn(DATA_USER1,DATA_PASS);
-		
-		info("Delete a Space");
-		hp.goToMySpaces();
-		spaMg.deleteSpace(space,false);
-	}
-
-	@AfterMethod
-	public void setAfterMethod(){
-		magAc.signOut();
-		magAc.signIn(DATA_USER1, DATA_PASS);
 	}
 	
 }

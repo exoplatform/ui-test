@@ -23,8 +23,8 @@ public class Calendar_Category extends PlatformBase {
 	CalendarManagement cMang;
 	UserDatabase userData;
 
-	@BeforeClass
-	public void setUpBeforeTest() throws Exception{
+	@BeforeMethod
+	public void setUpBeforeMethod() throws Exception{
 		initSeleniumTest();
 		getDefaultUserPass(userDataFilePath,defaultSheet,isUseFile,jdbcDriver,dbUrl,user,pass,sqlUser);
 		driver.get(baseUrl);
@@ -40,9 +40,8 @@ public class Calendar_Category extends PlatformBase {
 		txData.setContentData(texboxFilePath,defaultSheet,isUseFile,jdbcDriver,dbUrl,user,pass,sqlContent);
 	}
 
-	@AfterClass
-	public void afterTest(){
-		magAc.signOut();
+	@AfterMethod
+	public void afterMethod(){
 		driver.manage().deleteAllCookies();
 		driver.quit();
 	}

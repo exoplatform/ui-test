@@ -1,23 +1,23 @@
 package org.exoplatform.selenium.platform.administration;
 
+import org.exoplatform.selenium.ManageAlert;
 import org.exoplatform.selenium.Utils;
-import org.exoplatform.selenium.platform.PlatformBase;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 import static org.exoplatform.selenium.TestLogger.info;
 
 
-public class ManageLayout extends PlatformBase{
+public class ManageLayout extends AdministrationLocator{
 	
-	public final By ELEMENT_PERMISSION_PUBLIC_CHECKBOX=By.xpath(".//*[contains(@id,'UIListPermissionSelector')]//input[@id='publicMode']");
-	public final By ELEMENT_PERMISSION_GRID=By.xpath(".//*[@id='PermissionGrid']");
+	ManageAlert alert;
 	
-	//*================================================================================*\\
 	public ManageLayout(WebDriver dr) {
 		this.driver=dr;
+		alert = new ManageAlert(dr);
 	}
-	
+		
 	/**
 	 * Public mode of a Site
 	 */
@@ -27,33 +27,6 @@ public class ManageLayout extends PlatformBase{
 		waitForElementNotPresent(ELEMENT_PERMISSION_GRID);
 		info("The public mode is checked");
 	}
-	
-	//*=========================================================EDIT/SITE/LAYOUT==============================================*\
-	public final By ELEMENT_EDIT_SITE_LAYOUT_SITE_CONFIG_BTN=By.xpath(".//*[@id='UIPortalComposer']//*[contains(@class,'PageProfileIcon')]");
-	public final By ELEMENT_EDIT_SITE_LAYOUT_SAVE_BTN=By.xpath(".//*[@id='UIPortalComposer']//*[contains(@class,'uiIconSave')]");
-	
-	//SITE CONFIG POPUP
-	public final By ELEMENT_SITE_CONFIG_POPUP_PERMISSION_TAB=By.xpath(".//*[@id='UIMaskWorkspace']//*[contains(@data-target,'#PermissionSetting-tab')]");
-	public final By ELEMENET_SITE_CONFIG_POPUP_SAVE_BTN=By.xpath(".//*[@id='UIPortalForm']//button[1]");
-	
-	
-	//Edit Portlet popup
-	public final By ELEMENT_PORTLET_POPUP_PERMISSION_TAB=By.xpath(".//*[@data-target='#PortletPermission-tab']");
-	public final By ELEMETN_PORTLET_POPUP_SAVE_BTN=By.xpath(".//*[@id='Save']");
-	
-	//HOME PAGE LAYOUT
-	public final By ELEMENT_HOME_PAGE_LEFT_PORTLET_BREADCRUM_NAVIGATION=By.xpath(".//*[contains(@id,'LeftBreadCrumbNavigationPortlet')]//*[contains(@class,'LAYOUT-CONTAINER')]");
-	public final By ELEMENT_HOME_PAGE_LEFT_PORTLET_BREADCRUM_NAVIGATION_EDIT_BTN=By.xpath(".//*[contains(@id,'LeftBreadCrumbNavigationPortlet')]//*[contains(@class,'EDITION-PORTLET')]//*[contains(@class,'uiIconEdit')]");
-	
-	public final By ELEMENT_HOME_PAGE_LEFT_PORTLET_COMPANY_NAVIGATION=By.xpath(".//*[contains(@id,'LeftNavigationPortlet')]//*[contains(@class,'LAYOUT-CONTAINER')]");
-	public final By ELEMENT_HOME_PAGE_LEFT_PORTLET_COMPANY_NAVIGATION_EDIT_BTN=By.xpath(".//*[contains(@id,'LeftNavigationPortlet')]//*[contains(@class,'EDITION-PORTLET')]//*[contains(@class,'uiIconEdit')]");
-	
-	public final By ELEMENT_HOME_PAGE_LEFT_PORTLET_GROUPS_NAVIGATION=By.xpath(".//*[contains(@id,'GroupsNavigationPortlet')]//*[contains(@class,'LAYOUT-CONTAINER')]");
-	public final By ELEMENT_HOME_PAGE_LEFT_PORTLET_GROUPS_NAVIGATION_EDIT_BTN=By.xpath(".//*[contains(@id,'GroupsNavigationPortlet')]//*[contains(@class,'EDITION-PORTLET')]//*[contains(@class,'uiIconEdit')]");
-	
-	public final By ELEMENT_HOME_PAGE_LEFT_PORTLET_SPACES_NAVIGATION=By.xpath(".//*[contains(@id,'SpaceNavigationPortlet')]//*[contains(@class,'LAYOUT-CONTAINER')]");
-	public final By ELEMENT_HOME_PAGE_LEFT_PORTLET_SPACES_NAVIGATION_EDIT_BTN=By.xpath(".//*[contains(@id,'SpaceNavigationPortlet')]//*[contains(@class,'EDITION-PORTLET')]//*[contains(@class,'uiIconEdit')]");
-	//*=============================================================*\\
 	
 	/**
 	 * Open Site config popup
@@ -154,25 +127,6 @@ public class ManageLayout extends PlatformBase{
 		info("All changes are saved");
 	}
 	
-	//*=============================================================EDIT/PAGE/EDIT LAYOUT===========================================*\
-
-	public final By ELEMENT_PAGE_EDIT_LAYOUT_PROPERITES_BTN =By.xpath(".//*[@id='UIPageEditor']//*[contains(@class,'PageProfileIcon')]");
-	public final By ELEMENT_PAGE_EDIT_LAYOUT_SAVE_BTN=By.xpath(".//*[@id='UIPageEditor']//*[contains(@class,'uiIconSave')]");
-	public final By ELEMENT_PAGE_EDIT_LAYOUT_CONTAINER_TAB=By.xpath(".//*[@data-target='#contList']");
-	
-	//WIKI CONTAINER
-	public final By ELEMENT_PAGE_EDIT_LAYOUT_WIKI_CONTAINER=By.xpath(".//*[@id='myWikiPortlet']//*[contains(@class,'LAYOUT-CONTAINER')]");
-	public final By ELEMENT_PAGE_EDIT_LAYOUT_WIKI_CONTAINER_EDIT_BTN=By.xpath(".//*[@id='myWikiPortlet']//*[contains(@class,'EDITION-CONTAINER')]//*[contains(@class,'uiIconEdit')]");
-	
-	//EDIT CONTAINER POPUP
-	public final By ELEMENT_CONTAINER_POPUP_PERMISSION_TAB=By.xpath(".//*[@data-target='#UIContainerPermission-tab']");
-	public final By ELEMENT_CONTAINER_POPUP_SAVE_BTN=By.xpath(".//*[@id='UIContainerForm']//button[1]");
-	
-	//PROPERTIES POPUP
-	public final By ELEMENT_PROPERTIES_POPUP_PERMISSION_TAB=By.xpath(".//*[@data-target='#PermissionSetting-tab']");
-	public final By ELEMENT_PROPERTIES_POPUP_SAVE_BTN=By.xpath(".//*[@id='UIPageForm']//button[1]");
-	
-	//*===================================================================*\\
 	/**
      * Open Page properties popup
      */
@@ -246,6 +200,339 @@ public class ManageLayout extends PlatformBase{
 		info("The container popup is shown");
 		goToPermissionContainer();
 		publicMode();
+	}
+	
+	/**
+	 * Close the page editing form
+	 */
+	public void abortPageUpdate(){
+		waitForAndGetElement(ELEMENT_EDIT_PORTLET_ABORT);
+		click(ELEMENT_EDIT_PORTLET_ABORT);
+	}
+	
+	/**
+	 * Permission -> Access/Move apps/Edit...
+	 * @param tabName
+	 */
+	public void gotoPermissionSelector(String tabName){
+		info("Go to Permission selector");
+		waitForAndGetElement(ELEMENT_PERMISSION_SELECTOR.replace("${tabName}", tabName));
+		click(ELEMENT_PERMISSION_SELECTOR.replace("${tabName}", tabName));	
+	}	
+	
+    /**
+     * Check the present of Permission table
+     * @param tabName
+     */
+	public void checkPermissionTable(String tabName){		
+		waitForAndGetElement(ELEMENT_PERMISSION_TABLE_COLUMN
+				.replace("${tabName}", tabName)
+				.replace("${columnId}", "groupId").replace("${columnLabel}", "Group ID"));
+		waitForAndGetElement(ELEMENT_PERMISSION_TABLE_COLUMN
+				.replace("${tabName}", tabName)
+				.replace("${columnId}", "membership").replace("${columnLabel}", "Membership"));
+		waitForAndGetElement(ELEMENT_PERMISSION_TABLE_COLUMN
+				.replace("${tabName}", tabName)
+				.replace("${columnId}", "actions").replace("${columnLabel}", "Action"));			
+	}
+	
+	/**
+	 * If public mode is checked: hide add button
+	 * If public mode is unchecked: show add button
+	 * @param isPublicMode
+	 *                     Everyone checkbox is checked or not
+	 * @param tabName
+	 *                      Access/Move Apps/Move Containers  
+	 */
+	public void checkPresentOfActionButtons(boolean isPublicMode, String tabName){
+		if(isPublicMode){
+			waitForElementNotPresent(ELEMENT_PERMISSION_ADD_USER_BUTTON.replace("${tabName}", tabName));					
+		} else {
+			waitForAndGetElement(ELEMENT_PERMISSION_ADD_USER_BUTTON.replace("${tabName}", tabName));					
+		}
+		waitForAndGetElement(ELEMENT_ACTION_BUTTON.replace("$action", "Save"));
+		waitForAndGetElement(ELEMENT_ACTION_BUTTON.replace("$action", "Cancel"));	
+	} 
+	
+	/**
+	 * Uncheck Everyone checkbox
+	 */
+	public void uncheckPublicMode(){
+		info("Uncheck on Public mode checkbox");
+		uncheck(ELEMENT_PERMISSION_PUBLIC_CHECKBOX,2);
+		waitForAndGetElement(ELEMENT_PERMISSION_GRID);
+		info("The public mode is unchecked");
+	}
+	
+	/**
+	 * 
+	 * Add permission for a portlet
+	 * @param groupPath
+	 *                  is group's path as: Platform/Administration,..
+	 * @param membership
+	 *                  is membership's name
+	 * @param addedGroup
+	 *                  is group's name that is added after added permission in list
+	 * @param permissionSelector
+	 *  				is tab name: Access/Move Apps/Move Containers   
+	 * @param popupName
+	 *  				is tab name: Access/Move Apps/Move Containers    
+	 */
+	public void addPremission(String groupPath,String membership,String addedGroup, String permissionSelector, String popupName){
+		info("Click on Add Premission button");
+		click(ELEMENT_PERMISSION_ADD_USER_BTN.replace("${tabName}", permissionSelector));
+		waitForAndGetElement(ELEMENT_PORTLET_SELECT_PERMISSION_POPUP.replace("${tabName}", popupName));
+		String[] groups=groupPath.split("/");
+		for(String group:groups){
+			click(ELEMENT_PORTLET_SELECT_PERMISSION_GROUP_MEMBERSHIP_NAME
+														.replace("${tabName}", popupName)
+														.replace("${name}",group));
+			Utils.pause(2000);
+		}
+		if(!membership.isEmpty()){
+			info("Select membership");
+			click(ELEMENT_PORTLET_SELECT_PERMISSION_GROUP_MEMBERSHIP_NAME
+												.replace("${tabName}", popupName)
+												.replace("${name}",membership));
+			Utils.pause(2000);
+		}
+		waitForAndGetElement(ELEMENT_PORTLET_ACCESS_PERMISSION_GROUP_NAME
+											.replace("${tabName}", permissionSelector)
+											.replace("${group}",addedGroup));
+		info("Access group is added successfully");
+	}	
+	
+	
+	/**
+	 * 
+	 * Add permission for a portlet
+	 * @param groupPath
+	 *                  is group's path as: Platform/Administration,..
+	 * @param membership
+	 *                  is membership's name
+	 * @param addedGroup
+	 *                  is group's name that is added after added permission in list
+	 * @param permissionSelector
+	 *  				is tab name: Access/Move Apps/Move Containers   
+	 * @param popupName
+	 *  				is tab name: Access/Move Apps/Move Containers    
+	 */
+	public void addPremission(String groupPath,String membership,String addedGroup, String permissionSelector, 
+								String popupName, String popupTitle){
+		info("Click on Add Premission button");
+		click(ELEMENT_PERMISSION_ADD_USER_BTN.replace("${tabName}", permissionSelector));
+		waitForAndGetElement(ELEMENT_PORTLET_SELECT_PERMISSION_POPUP_TITLE.replace("${tabName}", popupName)
+													.replace("${popupTitle}", popupTitle));
+		String[] groups=groupPath.split("/");
+		for(String group:groups){
+			click(ELEMENT_PORTLET_SELECT_PERMISSION_GROUP_MEMBERSHIP_NAME
+														.replace("${tabName}", popupName)
+														.replace("${name}",group));
+			Utils.pause(2000);
+		}
+		if(!membership.isEmpty()){
+			info("Select membership");
+			click(ELEMENT_PORTLET_SELECT_PERMISSION_GROUP_MEMBERSHIP_NAME
+												.replace("${tabName}", popupName)
+												.replace("${name}",membership));
+			Utils.pause(2000);
+		}
+		waitForAndGetElement(ELEMENT_PORTLET_ACCESS_PERMISSION_GROUP_NAME
+											.replace("${tabName}", permissionSelector)
+											.replace("${group}",addedGroup));
+		info("Access group is added successfully");
+	}		
+	
+	
+	/**
+	 * Delete a access permission group
+	 * @param group
+	 *              is group path as: /platform/users,...
+<<<<<<< HEAD
+=======
+	 * By: QuyenNT
+	 * Date: Nov 2, 2015
+>>>>>>> FQA-2756:PLF43 - Write High Fnc/PLF/Restricted Page Editor/Container Permissions
+	 */
+	public void deleteGroupPermission(String group, String permissionSelector){
+		if(waitForAndGetElement(ELEMENT_DELETE_BUTTON.replace("${tabName}", permissionSelector).replace("$group",group),3000,0)!=null){
+			info("Click on delete button");
+			click(ELEMENT_DELETE_BUTTON.replace("${tabName}", permissionSelector).replace("$group",group));
+			alert.waitForConfirmation(ELEMENT_CONFIRM_DELETE_MESSAGE);
+			alert.acceptAlert();
+			waitForElementNotPresent(ELEMENT_DELETE_BUTTON.replace("${tabName}", permissionSelector).replace("$group",group));
+			info("Group is deleted successfully");
+		}
+	}
+
+	/**
+<<<<<<< HEAD
+	 * @param tab: category
+	 * @param element
+	 *                name of application
+	 * @param container
+	 *                the place to put application			
+=======
+	 * 
+	 * By: QuyenNT
+	 * Date: Nov 5, 2015	
+	 * @param tab
+	 * 				category
+	 * @param element
+	 * 				name of application
+	 * @param container
+	 * 				the place to put application			
+>>>>>>> FQA-2756:PLF43 - Write High Fnc/PLF/Restricted Page Editor/Container Permissions
+	 */
+	public void addApplication(Object tab, Object element, By container) {
+		click(ELEMENT_APPLICATION_TAB_ACTIVE);
+		click(tab);
+		Utils.pause(1000);
+		dragAndDropToObject(element,container);
+	}	
+	
+	/**
+	 * Container permission -> Access/Move apps/Move containers
+	 * By: QuyenNT
+	 * Date: Nov 11, 2015	
+	 * @param:
+	 */
+	public void gotoContainerPermissionSelector(String tabName){
+		info("Go to Container Permission selector");
+		waitForAndGetElement(ELEMENT_CONTAINER_PERMISSION_SELECTOR.replace("${tabName}", tabName));
+		click(ELEMENT_CONTAINER_PERMISSION_SELECTOR.replace("${tabName}", tabName));	
+	}
+	
+	
+	/**
+	 * Open permission tab of a edit container popup
+	 */
+	public void goToPermissionContainer(Object verifiedElement ){
+		info("Click on Permission tab");
+		click(ELEMENT_CONTAINER_POPUP_PERMISSION_TAB);
+		waitForAndGetElement(verifiedElement);
+	}	
+	
+	/**
+	 * Set permission for Move Apps 
+	 * By: QuyenNT
+	 * Date: Nov 17, 2015	
+	 * @param:
+	 */
+	public void setMoveAppsPermission(String groupPath, String membership, String addedGroup){
+	
+		WebElement permissionTable = waitForAndGetElement(ELEMENT_PERMISSION_TABLE
+				.replace("${tabName}", ELEMENT_PERMISSION_MOVE_APPS_TAB_ID), 2000,0);
+	
+		info("Set PERMISSION");
+		if(permissionTable == null){//public mode is check
+			info("Uncheck public mode");
+			uncheck(ELEMENT_PERMISSION_PUBLIC_MODE_CHECKBOX
+								.replace("${tabName}", ELEMENT_PERMISSION_MOVE_APPS_TAB_ID), 2);
+		} else {//check then uncheck to remove rows in permission table
+			check(ELEMENT_PERMISSION_PUBLIC_MODE_CHECKBOX
+								.replace("${tabName}", ELEMENT_PERMISSION_MOVE_APPS_TAB_ID), 2);
+			uncheck(ELEMENT_PERMISSION_PUBLIC_MODE_CHECKBOX
+								.replace("${tabName}", ELEMENT_PERMISSION_MOVE_APPS_TAB_ID), 2);
+		}
+				
+		info("Add permission");
+		addPremission(groupPath, membership,addedGroup, 
+							ELEMENT_PERMISSION_MOVE_APPS_TAB_ID, 
+							ELEMENT_PERMISSION_MOVE_APPS_POPUP_TAB_ID, "Permission Selector");		
+	}
+	
+	/**
+	 *  Select a container -> Set permission for Move Containers 
+	 * By: QuyenNT
+	 * Date: Nov 17, 2015	
+	 * @param:
+	 */
+	public void setMoveContainersPermission(String groupPath, String membership, String addedGroup){
+		
+		WebElement permissionTable = waitForAndGetElement(ELEMENT_PERMISSION_TABLE
+				.replace("${tabName}", ELEMENT_PERMISSION_MOVE_CONTAINERS_TAB_ID), 2000,0);
+	
+		info("Set PERMISSION");
+		if(permissionTable == null){//public mode is check
+			info("Uncheck public mode");
+			uncheck(ELEMENT_PERMISSION_PUBLIC_MODE_CHECKBOX
+								.replace("${tabName}", ELEMENT_PERMISSION_MOVE_CONTAINERS_TAB_ID), 2);
+		} else {//check then uncheck to remove rows in permission table
+			check(ELEMENT_PERMISSION_PUBLIC_MODE_CHECKBOX
+								.replace("${tabName}", ELEMENT_PERMISSION_MOVE_CONTAINERS_TAB_ID), 2);
+			uncheck(ELEMENT_PERMISSION_PUBLIC_MODE_CHECKBOX
+								.replace("${tabName}", ELEMENT_PERMISSION_MOVE_CONTAINERS_TAB_ID), 2);
+		}
+				
+		info("Add permission");
+		addPremission(groupPath, membership,addedGroup, 
+							ELEMENT_PERMISSION_MOVE_CONTAINERS_TAB_ID, 
+							ELEMENT_PERMISSION_MOVE_CONTAINERS_POPUP_TAB_ID, "Permission Selector");		
+	}
+	
+	
+	/**
+	 * Select a container -> Set move container permission to No-one
+	 * By: QuyenNT
+	 * Date: Nov 19, 2015	
+	 * @param:
+	 */
+	public void uncheckMoveContainerPublicMode(){
+			WebElement permissionTable = waitForAndGetElement(ELEMENT_PERMISSION_TABLE
+					.replace("${tabName}", ELEMENT_PERMISSION_MOVE_CONTAINERS_TAB_ID), 2000,0);
+		
+			info("Set PERMISSION");
+			if(permissionTable == null){//public mode is check
+				info("Uncheck public mode");
+				uncheck(ELEMENT_PERMISSION_PUBLIC_MODE_CHECKBOX
+									.replace("${tabName}", ELEMENT_PERMISSION_MOVE_CONTAINERS_TAB_ID), 2);
+			} else {//check then uncheck to remove rows in permission table
+				check(ELEMENT_PERMISSION_PUBLIC_MODE_CHECKBOX
+									.replace("${tabName}", ELEMENT_PERMISSION_MOVE_CONTAINERS_TAB_ID), 2);
+				uncheck(ELEMENT_PERMISSION_PUBLIC_MODE_CHECKBOX
+									.replace("${tabName}", ELEMENT_PERMISSION_MOVE_CONTAINERS_TAB_ID), 2);
+			}
+	}
+	
+	/**
+	 * Check Everyone checkbox of Move Container
+	 * By: QuyenNT
+	 * Date: Nov 20, 2015	
+	 * @param:
+	 */
+	public void checkMoveContainerPublicMode(){
+		//Check permission table
+		WebElement permissionTable = waitForAndGetElement(ELEMENT_PERMISSION_TABLE
+				.replace("${tabName}", ELEMENT_PERMISSION_MOVE_CONTAINERS_TAB_ID), 2000,0);
+	
+		info("Set PERMISSION");
+		if(permissionTable != null){//public mode is unchecked			
+			check(ELEMENT_PERMISSION_PUBLIC_MODE_CHECKBOX
+								.replace("${tabName}", ELEMENT_PERMISSION_MOVE_CONTAINERS_TAB_ID), 2);			
+		}
+	}	
+
+	/**
+	 *  * Select a container -> Set move apps permission to No-one
+	 * By: QuyenNT
+	 * Date: Nov 19, 2015	
+	 * @param:
+	 */
+	public void uncheckMoveAppsPublicMode(){
+		WebElement permissionTable = waitForAndGetElement(ELEMENT_PERMISSION_TABLE
+				.replace("${tabName}", ELEMENT_PERMISSION_MOVE_APPS_TAB_ID), 2000,0);
+		info("Set no one can move app");
+		if(permissionTable == null){//public mode is check
+		info("Uncheck public mode");
+		uncheck(ELEMENT_PERMISSION_PUBLIC_MODE_CHECKBOX
+				.replace("${tabName}", ELEMENT_PERMISSION_MOVE_APPS_TAB_ID), 2);
+		} else {//check then uncheck to remove rows in permission table
+		check(ELEMENT_PERMISSION_PUBLIC_MODE_CHECKBOX
+				.replace("${tabName}", ELEMENT_PERMISSION_MOVE_APPS_TAB_ID), 2);
+		uncheck(ELEMENT_PERMISSION_PUBLIC_MODE_CHECKBOX
+				.replace("${tabName}", ELEMENT_PERMISSION_MOVE_APPS_TAB_ID), 2);
+		}
 	}
 	
 }
