@@ -13,7 +13,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 public class NavigationToolbar extends NavigationToolBarLocator {
-
 	PageCreationWizard paWin;
 	UserProfilePage myPro;
 	PortalManageSites magSites;

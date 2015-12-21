@@ -114,7 +114,6 @@ public class NavigationToolBarLocator extends PlatformBase {
 	public final By ELEMENT_MENU_EDIT_CONTENT_TEXT = By.linkText("Content");
 	public final By ELEMENT_NAVIGATION_MANAGE_POPUP=By.xpath(".//*[@id='UINavigationManagement']");
 	public final By ELEMENT_ADDSITE_MANAGE_POPUP=By.xpath(".//*[@id='UIMaskWorkspace']//*[contains(@class,'MaskContainer')]");
-		
 	//User Menu
 	public final By ELEMENT_MY_PROFILE_LINK = By.xpath("//i[@class='uiIconPLFProfile']/..");
 	public final By ELEMENT_MY_DASHBOARD_LINK = By.xpath("//i[@class='uiIconPLFDashboard']/..");

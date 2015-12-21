@@ -15,7 +15,6 @@ import org.openqa.selenium.interactions.Actions;
  */
 public class PageCreationWizard extends GateinLocator {
 
-
 	ContentList contList;
 	ContentDetail contDetail;
 	ManageAlert magAlert;

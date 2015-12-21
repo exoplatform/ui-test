@@ -10,10 +10,7 @@ import static org.exoplatform.selenium.TestLogger.info;
 
 
 public class ManageLayout extends AdministrationLocator{
-
-	
 	ManageAlert alert;
-	
 	public ManageLayout(WebDriver dr) {
 		this.driver=dr;
 		alert = new ManageAlert(dr);

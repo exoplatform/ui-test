@@ -438,7 +438,6 @@ public class GateinLocator extends PlatformBase {
 	public final String ELEMENT_APPLICATION_FOLLOWING_PORTLET= "//*[contains(@class,'LAYOUT-PORTLET')]//*[contains(text(),'${app1}')]/../../../following-sibling::*//*[contains(@class,'LAYOUT-PORTLET')]//*[contains(text(),'${app2}')]";
 	public final String ELEMENT_DELETE_CONTAINER_ICON_BY_ID ="//*[@id='${id}']//*[@data-original-title='Delete Container']";
 	public final String ELEMENT_DROP_SOURCE_HAS_LAYOUT_BY_ID =".//*[@class='UIRowContainer']//*[@id='${id}']";
-	
 	//Application popup
 	public final By ELEMENT_APPLICATION_EDIT_POPUP_PORTLET_TAB = By.xpath(".//*[@id='tab-UIPortletForm']//*[contains(@data-target,'PortletSetting')]");
 	public final By ELEMENT_APPLICATION_EDIT_POPUP_PORTLET_TITLE = By.id("title");
@@ -775,7 +774,6 @@ public class GateinLocator extends PlatformBase {
     public final String ELEMENT_DISABLE_USER_STATUS_SELECTED ="//*[@id='UIListUsers-userStatusFilter']/*[contains(.,'$status')][@selected='selected']";
     public final String ELEMENT_DISABLE_USER_TOGGLE_NO = "//*[@id='UIListUsersGird']//*[contains(text(),'$userName')]/../..//*[contains(@class,'switchBtnLabelOff')]//*[contains(text(),'No')]";
     public final String ELEMENT_DISABLE_USER_TOGGLE_YES = "//*[@id='UIListUsersGird']//*[contains(text(),'$userName')]/../..//*[contains(@class,'switchBtnLabelOn')]//*[contains(text(),'Yes')]";
-    
 	//Social networks tab
 	public final By ELEMENT_USER_SOCIAL_NETWORKS_TAB = By.xpath("//*[@data-target='#UIAccountSocial-tab']");
 	public final String ELEMENT_USER_SOCIAL_NETWORKS_TAB_GOOGLE_ACCOUNT =".//*[@id='user.social-info.google.userName' and @value= '${account}']";
