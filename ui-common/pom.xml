@@ -38,6 +38,7 @@
 							<goal>jar</goal>
 						</goals>
 						<configuration>
+						    <additionalparam>-Xdoclint:none</additionalparam>
 							<skip>${javadoc.skip}</skip>
 							<sourcepath>${source.folder}</sourcepath>
 							<doctitle>eXo Platform - Java Selenium Test Framework
