@@ -77,9 +77,6 @@ import org.testng.annotations.*;
 		navTool.goToMyNotifications();
 		waitForElementNotPresent(myNotifPage.ELEMENT_NEWUSER_ICON_EMAIL_NOTIFICATION,2000,1);
 		
-		
-		magAc.signOut();
-		magAc.signIn(DATA_USER1, DATA_PASS);
 		/*Step number: 3
 		*Step Name: Step 3: Test the disable option
 		*Step Description: 
@@ -90,26 +87,29 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- No email notifications is sent*/ 
-		int index = userInfoData.getRandomIndexByType(3);
+		/*int index = userInfoData.getRandomIndexByType(3);
 		String username = userInfoData.newUserName.get(index);
 		String firstname = userInfoData.newFirstName.get(index);
 		String lastname = userInfoData.newLastName.get(index);
 		String password = userInfoData.newPassword.get(index);
-		String email = userInfoData.newEmail.get(index);
+		String email = userInfoData.newEmail.get(index);*/
 		
+		String username = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email = username+"@gmail.com";
+		String fullName=username+" "+username;
+		
+		info("Add new user");
 		navTool.goToAddUser();
-		addUserPage.addUser(username, password, email,firstname,lastname);
+		addUserPage.addUser(username, password, email, username, username);
+		
 		addUserPage.goToMail(EMAIL_ADDRESS2, EMAIL_PASS);
 		Utils.pause(20000);
-		checkEmailNotification(firstname+" "+lastname+" has joined eXo",false,true);
+		checkEmailNotification(fullName+" has joined eXo",false,true);
         switchToParentWindow();
         
         info("Reset changed data");
         navTool.goToAdminNotifications();
 		emailNotif.enableNotification(notificationType.NewUser_email);
-		info("restore data");
-		navTool.goToUsersAndGroupsManagement();
-		userAndGroup.deleteUser(username);
  	}
 
 	/**
@@ -158,14 +158,19 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- An email notification is sent to User A*/ 
-		magAc.signOut();
-		magAc.signIn(DATA_USER2, DATA_PASS);
+		String username = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email = username+"@gmail.com";
+		String fullName=username+" "+username;
+		
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username, password, email, username, username);
+		magAc.signIn(username,password);
 		
 		hp.goToConnections();
-		connMag.connectToAUser(DATA_USER1);
+		connMag.connectToAUser(USER_ROOT,DATA_NAME_ROOT);
 		
-		magAc.signOut();
-		magAc.signIn(DATA_USER1, DATA_PASS);
+		magAc.signIn(USER_ROOT,PASS_ROOT);
 		
 		int index= notiIntranetData.getRandomIndexByType(2);
 		String des= notiIntranetData.newContent.get(index);
@@ -174,11 +179,8 @@ import org.testng.annotations.*;
 		navTool.goToNotificationList();
 		info("Verify that the notification is listed in the list");
 		String actualText=waitForAndGetElement(navTool.ELEMENT_NOTIFICATION_LIST_CONNECT_USER_STATUS).getText().trim();
-		String expectedText = DATA_NAME_USER2+" "+des;
+		String expectedText = fullName+" "+des;
 		click(navTool.ELEMENT_NOTIFICATION_REMOVE_ICON);
-		info("Reset connections");
-		hp.goToConnections();
-		connMag.resetConnection(DATA_USER2);
 		
 		if(expectedText.contentEquals(actualText)==true)
 			assert true;
@@ -237,17 +239,21 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- An intranet notification is displayed in the list*/ 
-		magAc.signOut();
-		magAc.signIn(DATA_USER2, DATA_PASS);
+		String username = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email = username+"@gmail.com";
+		
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username, password, email, username, username);
+		magAc.signIn(username,password);
 		hp.goToMySpaces();
 		spaMg.goToCreateSpace();
 		spaMg.addNewSpaceSimple(spaceName,"");
 		
 		spaHome.goToSpaceSettingTab();
-		setSpaceMg.inviteUser(DATA_USER1,true,DATA_NAME_USER1);
+		setSpaceMg.inviteUser(USER_ROOT,true,DATA_NAME_ROOT);
 		
-		magAc.signOut();
-		magAc.signIn(DATA_USER1, DATA_PASS);
+		magAc.signIn(USER_ROOT,PASS_ROOT);
 		
 		int index= notiIntranetData.getRandomIndexByType(3);
 		String des= notiIntranetData.newContent.get(index);
@@ -318,35 +324,35 @@ import org.testng.annotations.*;
 		int index= notiIntranetData.getRandomIndexByType(1);
 		String des= notiIntranetData.newContent.get(index);
 		
+		String username = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email = username+"@gmail.com";
+		
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username, password, email, username, username);
+		
+		
 		hp.goToConnections();
-		connMag.connectToAUser(DATA_USER2);
+		connMag.connectToAUser(username);
 		
-		magAc.signOut();
-		magAc.signIn(DATA_USER2, DATA_PASS);
+		magAc.signIn(username,password);
 		
 		hp.goToConnections();
-		connMag.acceptAConnection(DATA_USER1);
+		connMag.acceptAConnection(USER_ROOT,DATA_NAME_ROOT);
 		
-		magAc.signOut();
-		magAc.signIn(DATA_USER1, DATA_PASS);
+		magAc.signIn(USER_ROOT,PASS_ROOT);
 		
 		hp.goToHomePage();
 		hpAct.addActivity(text,"");
 		
-		magAc.signOut();
-		magAc.signIn(DATA_USER2, DATA_PASS);
+		magAc.signIn(username,password);
 		hpAct.addComment(text,comment);
 		
-		magAc.signOut();
-		magAc.signIn(DATA_USER1, DATA_PASS);
+		magAc.signIn(USER_ROOT,PASS_ROOT);
 		navTool.goToNotificationList();
 		info("Verify that the notification isnot listed in the list");
-		waitForTextNotPresent(navTool.ELEMENT_NOTIFICATION_LIST_COMMENT_ACTIVITY.replace("${user}",DATA_USER2).
+		waitForTextNotPresent(navTool.ELEMENT_NOTIFICATION_LIST_COMMENT_ACTIVITY.replace("${user}",username).
 				replace("${des}",des).replace("${act}",text),2000,1);
-		
-		info("Reset connections");
-		hp.goToConnections();
-		connMag.resetConnection(DATA_USER2);
 		
 		 info("Reset changed data");
 		 navTool.goToAdminNotifications();

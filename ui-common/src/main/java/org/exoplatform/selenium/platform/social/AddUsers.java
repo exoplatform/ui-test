@@ -2,25 +2,14 @@ package org.exoplatform.selenium.platform.social;
 import static org.exoplatform.selenium.TestLogger.info;
 
 import org.exoplatform.selenium.Utils;
-import org.exoplatform.selenium.platform.PlatformBase;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class AddUsers extends PlatformBase{
+public class AddUsers extends SocialLocator{
 
 	public AddUsers(WebDriver dr){
 		driver = dr;
 	}
 	
-	public By ELEMENT_USERNAME = By.id("username");
-	public By ELEMENT_PASSWORD = By.id("password");
-	public By ELEMENT_CONFIRM_PASSWORD = By.id("Confirmpassword");
-	public By ELEMENT_EMAIL = By.id("email");
-	public By ELEMENT_FIRSTNAME = By.id("firstName");
-	public By ELEMENT_LASTNAME = By.id("lastName");
-
-	public By ELEMENT_SAVE = By.xpath("//*[@id='UIAccountForm']//*[contains(text(),'Save')]");
-	public By ELEMENT_CONFIRM_INFORMATION = By.xpath(".//*[text() = 'OK']");
 	/**
 	 * Add en user on the plf
 	 * @param userName

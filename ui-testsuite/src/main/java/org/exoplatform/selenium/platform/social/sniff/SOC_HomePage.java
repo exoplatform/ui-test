@@ -1,7 +1,9 @@
 package org.exoplatform.selenium.platform.social.sniff;
 
 import static org.exoplatform.selenium.TestLogger.info;
+
 import java.awt.AWTException;
+
 import org.exoplatform.selenium.Utils;
 import org.exoplatform.selenium.platform.ecms.CreateNewDocument.selectDocumentType;
 import org.openqa.selenium.By;
@@ -10,13 +12,6 @@ import org.testng.annotations.*;
 
 
 public class SOC_HomePage extends SOC_TestConfig_1 {
-	@AfterMethod
-	public void setAfterMethod(){
-		magAc.signOut();
-		magAc.signIn(DATA_USER1, DATA_PASS);
-		hp.goToConnections();
-		connMag.resetConnection(DATA_USER2);
-	}
 	/**
 	 *<li> Case ID:121888.</li>
 	 *<li> Test Case Name: Like Activity.</li>
@@ -161,10 +156,10 @@ public class SOC_HomePage extends SOC_TestConfig_1 {
 			clickByJavascript((hp.ELEMENT_PUBLICATION_DELETE).replace("${title}", name), 2);
 			
 			info("clik OK button");
-			waitForAndGetElement(button.ELEMENT_OK_BUTTON, DEFAULT_TIMEOUT, 1);
+			waitForAndGetElement(hp.ELEMENT_DELETE_POPUP_OK, DEFAULT_TIMEOUT, 1);
 			Utils.pause(2000);
 			
-			click(button.ELEMENT_OK_BUTTON, 2);
+			click(hp.ELEMENT_DELETE_POPUP_OK, 2);
 			waitForElementNotPresent(hp.ELEMENT_PUBLICATION_AUTHOR.replace("${title}", name));
 		}
 		else{
@@ -172,7 +167,7 @@ public class SOC_HomePage extends SOC_TestConfig_1 {
 			mouseOver((hp.ELEMENT_PUBLICATION_AUTHOR).replace("${title}", name), true);
 			waitForAndGetElement(hp.ELEMENT_PUBLICATION_DELETE.replace("${title}", name), 5000, 1);
 			click((hp.ELEMENT_PUBLICATION_DELETE).replace("${title}", name));
-			click(button.ELEMENT_OK_BUTTON);
+			click(hp.ELEMENT_DELETE_POPUP_OK);
 			waitForElementNotPresent(hp.ELEMENT_PUBLICATION_TITLE.replace("${title}", name));
 		}
 	}
@@ -188,6 +183,14 @@ public class SOC_HomePage extends SOC_TestConfig_1 {
 	public  void test04_MentionAUserInActivityComposer() throws AWTException {
 		info("Test 4: Mention a user in activity composer");
 		String text = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+		
+		String username = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email = username+"@gmail.com";
+
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username, password, email, username, username);
+		
 		/*Step Number: 1
 		 *Step Name: Step 1: Mentions on User Activity Stream
 		 *Step Description: 
@@ -203,7 +206,7 @@ public class SOC_HomePage extends SOC_TestConfig_1 {
 			- The suggestion list is hidden
 			- In the activity stream, mentions are displayed as a link on "Firstname Lastname" to the user's activities page*/ 
 		hp.goToHomePage();
-		hpAct.mentionUserActivity(DATA_USER2,text);
+		hpAct.mentionUserActivity(username,text);
 		waitForAndGetElement(By.xpath(hpAct.ELEMENT_ACTIVITY_AUTHOR_ACTIVITY.replace("${activityText}", text)));
 		
 	}
@@ -306,7 +309,6 @@ public class SOC_HomePage extends SOC_TestConfig_1 {
 
 		String uploadFileName = fData.getAttachFileByArrayTypeRandom(9);
 		String textDes = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
-		//String folderPath=siteExPath.getSiteExpPathByIndex(6);
 		String folderPath=siteExPath.getSiteExpPathByIndex(5);
 		String nameDrive=siteExDrive.getSiteExpDriveByIndex(2);
 
@@ -357,11 +359,8 @@ public class SOC_HomePage extends SOC_TestConfig_1 {
 			- Activity is added into activity stream*/ 
 		hp.goToHomePage();
 		Utils.pause(3000);
-		//hpAct.openUploadPopup("",folderPath);
-		hpAct.openUploadPopup(nameDrive,folderPath);
-		hpAct.uploadFileFromAS("TestData/",uploadFileName);
-		magAc.signOut();
-		magAc.signIn(DATA_USER1, DATA_PASS);
+		//hpAct.openUploadPopup(nameDrive,folderPath);
+		//hpAct.uploadFileFromAS("TestData/",uploadFileName);
 		hpAct.shareFileActivity(nameDrive,folderPath, uploadFileName, textDes);
 		waitForAndGetElement(hpAct.ELEMENT_ACTIVITY_TITLE.replace("${text}",textDes).replace("${file}",uploadFileName));
 
@@ -460,8 +459,7 @@ public class SOC_HomePage extends SOC_TestConfig_1 {
 		 *Expected Outcome: 
 			-the first page of last activities is displayed
 			- previous activities' pages are load automatically*/ 
-		magAc.signOut();
-		magAc.signIn(DATA_USER1, DATA_PASS);
+		magAc.signIn(USER_ROOT,PASS_ROOT);
 		
 		JavascriptExecutor jse = (JavascriptExecutor)driver;
 		jse.executeScript("window.scrollBy(0,5500)", "");
@@ -489,9 +487,10 @@ public class SOC_HomePage extends SOC_TestConfig_1 {
 
 		 *Expected Outcome: 
 			- Home page is displayed*/
-
+        String text=getRandomString();
 		driver.navigate().refresh();
 		hp.goToHomePage();
+		hpAct.addActivity(text,"");
 
 		/*Step number: 2
 		 *Step Name: - Check [All activity] filter
@@ -701,7 +700,7 @@ public class SOC_HomePage extends SOC_TestConfig_1 {
 		hp.goToHomePage();
 		hpAct.addActivity(name, "");
 
-		waitForAndGetElement(hpAct.ELEMENT_PUBLICATION_FIRSTPOST_AUTHOR.replace("${name}", "John Smith"));
+		waitForAndGetElement(hpAct.ELEMENT_PUBLICATION_FIRSTPOST_AUTHOR.replace("${name}",DATA_NAME_ROOT));
 		waitForAndGetElement(hpAct.ELEMENT_PUBLICATION_FIRSTPOST_AUTHORAVATAR);
 		waitForAndGetElement(hpAct.ELEMENT_PUBLICATION_FIRSTPOST_ACTIVITYTEXT);
 		waitForAndGetElement(hpAct.ELEMENT_ICON_COMMENT.replace("${title}",name));
@@ -773,13 +772,20 @@ public class SOC_HomePage extends SOC_TestConfig_1 {
 	 *<li> Test Case Name: Mention a user in comment.</li>
 	 *<li> Pre-Condition: </li>
 	 *<li> Post-Condition: </li>
+	 * @throws AWTException 
 	 */
 	@Test(priority=14)
-	public  void test18_MentionAUserInComment() {
+	public  void test18_MentionAUserInComment() throws AWTException {
 		info("Test 18 Mention a user in comment");
-
 		String name = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
-		String content = "@"+DATA_USER2;
+		String text = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+		
+		String username = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email = username+"@gmail.com";
+		
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username, password, email, username, username);
 
 		/*Step Number: 1
 		 *Step Name: Add comment with mention
@@ -792,9 +798,8 @@ public class SOC_HomePage extends SOC_TestConfig_1 {
 			- Input text field is displayed in activity, click comment button to show comment textbox
 			- Comment will be added into comment section of activity*/ 
 		hp.goToHomePage();
-		hpAct.addActivity(name, "");
-		hpAct.addComment(name, content);
-		waitForAndGetElement(hpAct.ELEMENT_COMMENT_TEXT.replace("${activityText}",name).replace("${commentText}","Mary"));
+		hpAct.addActivity(name,null);
+		hpAct.addCommentWithMentionUser(name,username,text);
 	}
 
 	/**
@@ -806,6 +811,17 @@ public class SOC_HomePage extends SOC_TestConfig_1 {
 	@Test(priority=15)
 	public  void test19_RelationActivity() {
 		info("Test 19 Relation Activity");
+		String username = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email = username+"@gmail.com";
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username, password, email, username, username);
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		
+		magAc.signIn(username,password);
 		/*Step Number: 1
 		 *Step Name: - Invite another user
 		 *Step Description: 
@@ -817,7 +833,7 @@ public class SOC_HomePage extends SOC_TestConfig_1 {
 		 *Expected Outcome: 
 			- Request is sent to the user B*/
 		hp.goToConnections();
-		connMag.connectToAUser(DATA_USER2);
+		connMag.connectToAUser(username1);
 
 		/*Step number: 2
 		 *Step Name: - Accept request
@@ -829,11 +845,11 @@ public class SOC_HomePage extends SOC_TestConfig_1 {
 		 *Expected Outcome: 
 			- A Relation activity is displayed to the activity stream*/ 
 		
-		magAc.signIn(DATA_USER2, DATA_PASS);
+		magAc.signIn(username1,password);
 		hp.goToConnections();
-		connMag.acceptAConnection(DATA_USER1);
+		connMag.acceptAConnection(username);
 		hp.goToHomePage();
-		waitForAndGetElement(hpAct.ELEMENT_PUBLICATION_ACTIVITYTEXT_CONNECTED.replace("${user}","John Smith"), DEFAULT_TIMEOUT, 1);
+		waitForAndGetElement(hpAct.ELEMENT_PUBLICATION_ACTIVITYTEXT_CONNECTED.replace("${user}",username+" "+username), DEFAULT_TIMEOUT, 1);
 	    
 	}
 
@@ -888,8 +904,15 @@ public class SOC_HomePage extends SOC_TestConfig_1 {
 	@Test(priority=25)
 	public  void test24_UpdateProfileChangeOfAvatar() {
 		info("Test 24: Update Profile - change of avatar");
-
 		String newAvatar = fData.getAttachFileByArrayTypeRandom(26);
+		String username = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email = username+"@gmail.com";
+		
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username, password, email, username, username);
+		
+		magAc.signIn(username,password);
 
 		/*Step Number: 1
 		 *Step Name: - Change Avatar
@@ -909,7 +932,7 @@ public class SOC_HomePage extends SOC_TestConfig_1 {
 		myProfile.changeAvatar("TestData/"+newAvatar);
 		
 		hp.goToHomePage();
-		waitForAndGetElement(hpAct.ELEMENT_COMMENT_TEXT.replace("${activityText}","John Smith").replace("${commentText}","Avatar has been updated."));
+		waitForAndGetElement(hpAct.ELEMENT_COMMENT_TEXT.replace("${activityText}",username+" "+username).replace("${commentText}","Avatar has been updated."));
 	}
 
 	/**
@@ -921,6 +944,15 @@ public class SOC_HomePage extends SOC_TestConfig_1 {
 	@Test(priority=20)
 	public  void test25_UpdateProfileUpdateBasicInformation() {
 		info("Test 25 Update Profile - Update Basic information");
+		String username = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email = username+"@gmail.com";
+		String email1 = getRandomString()+"@gmail.com";
+		
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username, password, email, username, username);
+		
+		magAc.signIn(username,password);
 		/*Step Number: 1
 		 *Step Name: - Change Avatar
 		 *Step Description: 
@@ -934,12 +966,14 @@ public class SOC_HomePage extends SOC_TestConfig_1 {
 		 *Expected Outcome: 
 			- A user profile activity is updated in the activity stream
 			- A comment is added: 	Basic informations has been updated.*/ 
+		magAc.signIn(username,password);
 		navTool.goToMyProfile();
 		myProfile.goToEditProfile();
-		myProfile.updateBasicInformation("","","fqa@acme.exoplatform.com");
+		myProfile.updateBasicInformation("","",email1);
 		myProfile.saveCancelUpdateInfo(true);
 		hp.goToHomePage();
-		waitForAndGetElement(hpAct.ELEMENT_COMMENT_TEXT.replace("${activityText}","John Smith").replace("${commentText}","Contact information has been updated"));
+		waitForAndGetElement(hpAct.ELEMENT_COMMENT_TEXT.replace("${activityText}",username+" "+username)
+				.replace("${commentText}","Contact information has been updated"));
 	}
 
 	/**
@@ -998,91 +1032,6 @@ public class SOC_HomePage extends SOC_TestConfig_1 {
 	}
 
 	/**
-	 * Select a file to post on activity
-	 * @param driveName
-	 * @param upload
-	 * @param folderPath
-	 * @param selectFileName
-	 * @param uploadFileLink
-	 * @param uploadFileName
-	 * @param option: newFolder
-	 *//*
-	public void selectFile(String driveName, boolean upload, String folderPath, String selectFileName, String uploadFileName, Object...params) {
-		String newFolder = (String) (params.length > 0 ? params[0] : "");
-		Boolean shareActivity = (Boolean)(params.length > 1 ? params[1] : true);
-		alert = new ManageAlert(driver);
-		info("-- Selecting a file to post on activity --");
-		for(int repeat=0;; repeat ++){
-			if (repeat > 3){
-				waitForAndGetElement(ELEMENT_SELECT_FILE_POPUP);
-				break;
-			}
-			click(ELEMENT_FILE_LINK);
-			if(waitForAndGetElement(ELEMENT_SELECT_FILE_POPUP,5000,0)!=null)
-				break;
-			info("Retry...[" + repeat + "]");
-		}
-		info("----Select drive----");
-		if(waitForAndGetElement(ELEMENT_DRIVER_CURRENT.replace("${driveName}", driveName), DEFAULT_TIMEOUT, 0)==null){
-			click(ELEMENT_DRIVER_BOX,2);
-			click(ELEMENT_DRIVER_OPTION.replace("${driveName}", driveName));
-		}
-		info("---Select folder path----");
-		String [] paths = folderPath.split("/");
-		for (String path : paths)
-			click(By.linkText(path));
-		if(newFolder!=""){
-			if(plfVersion.equalsIgnoreCase("4.0")){
-				click(ELEMENT_CREATE_FOLDER_BUTTON);
-				alert.inputAlertText(newFolder);
-				click(By.linkText(newFolder));
-			}
-			if(plfVersion.equalsIgnoreCase("4.1")){
-				click(ELEMENT_CREATE_FOLDER_BUTTON_PLF41);
-				alert.inputAlertText(newFolder);
-				click(By.linkText(newFolder));
-			}
-		}
-		if (upload && uploadFileName!="")
-		{
-			info("-- Upload file --");
-			WebElement frame = waitForAndGetElement(ELEMENT_UPLOAD_FILE_FRAME_XPATH);
-			driver.switchTo().frame(frame);
-			WebElement upload2 = waitForAndGetElement(ELEMENT_UPLOAD_IMG_ID, DEFAULT_TIMEOUT,1,2);
-			((JavascriptExecutor)driver).executeScript("arguments[0].style.display = 'block';", upload2);
-			upload2.sendKeys(getAbsoluteFilePath("TestData/" +uploadFileName));
-			info("Upload file " + getAbsoluteFilePath("TestData/" +uploadFileName));
-			switchToParentWindow();
-			waitForAndGetElement(By.linkText(uploadFileName));
-			Utils.pause(1000);
-			click(By.linkText(uploadFileName));
-			// waitForAndGetElement(ecms.ELEMENT_BREADCUMBSCONTAINER.replace("${fileName}", uploadFileName));
-		}
-		else
-		{
-			info("error");
-		}
-		if(shareActivity){
-			click(ELEMENT_SELECT_BUTTON);
-			Utils.pause(1000);
-			if(upload && uploadFileName!="")
-				if (plfVersion.equalsIgnoreCase("4.0")) assert waitForAndGetElement(ELEMENT_FILE_INPUT_DOC).getText().contains(uploadFileName);
-			if(plfVersion.equalsIgnoreCase("4.1")) waitForAndGetElement(ELEMENT_FILE_INPUT_DOC);
-			else{
-				if(selectFileName!=""){
-					assert waitForAndGetElement(ELEMENT_FILE_INPUT_DOC).getText().contains(selectFileName);
-				}
-			}
-			waitForElementNotPresent(ELEMENT_SELECT_BUTTON);
-			click(ELEMENT_SHARE_BUTTON);
-			if(upload)
-				waitForAndGetElement(By.linkText(uploadFileName));
-			else
-				waitForAndGetElement(By.linkText(selectFileName));
-		}
-	}*/
-
-	/**
 	 *<li> Case ID:121941.</li>
 	 *<li> Test Case Name: Promote a member as manager.</li>
 	 *<li> Pre-Condition: a space activity is shared in the activity stream</li>
@@ -1094,7 +1043,18 @@ public class SOC_HomePage extends SOC_TestConfig_1 {
 	
 		String space = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		String contentSpace = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
-	
+		
+		String username = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email = username+"@gmail.com";
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		String fullName1=username1+" "+username1;
+		
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username, password, email, username, username);
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		magAc.signIn(username,password);
 		/*Step Number: 1
 		 *Step Name: - Promote a member as manager
 		 *Step Description: 
@@ -1115,22 +1075,21 @@ public class SOC_HomePage extends SOC_TestConfig_1 {
 		
 		
 		spaHome.goToSpaceSettingTab();
-		setSpaceMg.inviteUser(DATA_USER2,false,"");
+		setSpaceMg.inviteUser(username1,false,"");
 		
-		magAc.signOut();
-		magAc.signIn(DATA_USER2, DATA_PASS);
+		magAc.signIn(username1,password);
 		hp.goToMySpaces();
 		spaMg.acceptAInvitation(space);
 		
-		magAc.signOut();
-		magAc.signIn(DATA_USER1, DATA_PASS);
+		magAc.signIn(username,password);
 		hp.goToSpecificSpace(space);
 		spaHome.goToSpaceSettingTab();
-		setSpaceMg.changeRole(DATA_NAME_USER2);
+		setSpaceMg.changeRole(fullName1);
 		
 		hp.goToHomePage();
 		waitForAndGetElement(hpAct.ELEMENT_ACTIVITY_SPACE_DESCRIPTION.replace("${space}",space).replace("${des}",contentSpace));
-		waitForAndGetElement(hpAct.ELEMENT_ACTIVITY_SPACE_SPACE_LAST_COMMENT.replace("${space}",space)).getText().contains("John Smith has been promoted as the space's manager.");
+		waitForAndGetElement(hpAct.ELEMENT_ACTIVITY_SPACE_SPACE_LAST_COMMENT.replace("${space}",space)).getText()
+		.contains("$name has been promoted as the space's manager.".replace("$name",fullName1));
 	
 	}
 
@@ -1147,6 +1106,18 @@ public class SOC_HomePage extends SOC_TestConfig_1 {
 	
 		String space = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		String contentSpace = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+
+		String username = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email = username+"@gmail.com";
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		String fullName1=username1+" "+username1;
+		
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username, password, email, username, username);
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		magAc.signIn(username,password);
 	
 		/*Step Number: 1
 		 *Step Name: - Create a new Space
@@ -1182,7 +1153,7 @@ public class SOC_HomePage extends SOC_TestConfig_1 {
 			- User is added into the table below and status in [Actions] column is [Cancel request]*/ 
 		
 		spaHome.goToSpaceSettingTab();
-		setSpaceMg.inviteUser(DATA_USER2,true,DATA_NAME_USER2);
+		setSpaceMg.inviteUser(username1,true,fullName1);
 		
 		/*Step Number: 3
 		 *Step Name: - User B join space
@@ -1197,12 +1168,11 @@ public class SOC_HomePage extends SOC_TestConfig_1 {
 			- A comment is added into activity
 			- Message: "Has joined the space." is shown*/ 
 		
-		magAc.signOut();
-		magAc.signIn(DATA_USER2, DATA_PASS);
+		magAc.signIn(username1,password);
 		hp.goToMySpaces();
 		spaMg.acceptAInvitation(space);
 		hp.goToHomePage();
-		waitForAndGetElement(hpAct.ELEMENT_ACTIVITY_USERJOIN_SPACE.replace("${user}","Mary Williams"));
+		waitForAndGetElement(hpAct.ELEMENT_ACTIVITY_USERJOIN_SPACE.replace("${user}",fullName1));
 	}
 
 	/**

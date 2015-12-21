@@ -32,14 +32,12 @@ public class SOC_People_UserProfile_RecentActivities extends SOC_TestConfig{
 
 		/*Create data test*/
 		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
-		String password1 = username1;
-		String email1 = username1 + mailSuffixData.getMailSuffixRandom();
-
+		String email1 = username1+"@gmail.com";
 		info("Add new user");
-		magAc.signIn(DATA_USER1, DATA_PASS);
 		navTool.goToAddUser();
-		addUserPage.addUser(username1, password1, email1, username1, username1);
-		magAc.signIn(username1, password1);
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		magAc.signIn(username1,password);
+		Utils.pause(3000);
 
 		info("share a document and comment");
 		driver.navigate().refresh();
@@ -109,16 +107,17 @@ public class SOC_People_UserProfile_RecentActivities extends SOC_TestConfig{
 
 		/*Create data test*/
 		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
-		String password1 = username1;
-		String email1 = username1 + mailSuffixData.getMailSuffixRandom();
-
+		String email1 = username1+"@gmail.com";
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+"@gmail.com";
 		info("Add new user");
-		magAc.signIn(DATA_USER1, DATA_PASS);
 		navTool.goToAddUser();
-		addUserPage.addUser(username1, password1, email1, username1, username1);
-		magAc.signIn(username1, password1);
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		magAc.signIn(username1,password);
+		Utils.pause(3000);
 		info("add mention");
-		hpAct.mentionUserActivity(DATA_USER1,mention);
+		hpAct.mentionUserActivity(username2,mention);
 
 		info("add activity");
 		driver.navigate().refresh();
@@ -137,7 +136,7 @@ public class SOC_People_UserProfile_RecentActivities extends SOC_TestConfig{
 			- The User A profile page is displayed
 			- The section "Recent activities" is displayed at the bottom of the mid
 			-column*/
-		magAc.signIn(DATA_USER1, DATA_PASS);
+		magAc.signIn(username2,password);
 		info("Click on Connections on the left panel");
 		hp.goToConnections();
 		connMag.searchPeople(username1,"","","");
@@ -206,14 +205,15 @@ public class SOC_People_UserProfile_RecentActivities extends SOC_TestConfig{
 
 		/*Create data test*/
 		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
-		String password1 = username1;
-		String email1 = username1 + mailSuffixData.getMailSuffixRandom();
-
+		String email1 = username1+"@gmail.com";
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+"@gmail.com";
 		info("Add new user");
-		magAc.signIn(DATA_USER1, DATA_PASS);
 		navTool.goToAddUser();
-		addUserPage.addUser(username1, password1, email1, username1, username1);
-		magAc.signIn(username1, password1);
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		magAc.signIn(username1,password);
+		Utils.pause(3000);
 
 		info("add activity");
 		driver.navigate().refresh();
@@ -242,7 +242,7 @@ public class SOC_People_UserProfile_RecentActivities extends SOC_TestConfig{
 			- The User B profile page is displayed
 			- A section "Recent activities" is added at the bottom of mid
 			-column the page*/
-		magAc.signIn(DATA_USER1, DATA_PASS);
+		magAc.signIn(username2,password);
 		info("Click on Connections on the left panel");
 		hp.goToConnections();
 		connMag.searchPeople(username1,"","","");
@@ -280,19 +280,15 @@ public class SOC_People_UserProfile_RecentActivities extends SOC_TestConfig{
 
 		/*Create data test*/
 		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
-		String password1 = username1;
-		String email1 = username1 + mailSuffixData.getMailSuffixRandom();
-
+		String email1 = username1+"@gmail.com";
 		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
-		String password2 = username2;
-		String email2 = username1 + mailSuffixData.getMailSuffixRandom();
-
+		String email2 = username2+"@gmail.com";
 		info("Add new user");
-		magAc.signIn(DATA_USER1, DATA_PASS);
 		navTool.goToAddUser();
-		addUserPage.addUser(username1, password1, email1, username1, username1);
-		addUserPage.addUser(username2, password2, email2, username2, username2);
-		magAc.signIn(username1, password1);
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		magAc.signIn(username1,password);
+		Utils.pause(3000);
 
 		/*Step Number: 1
 		 *Step Name: Step 1 : Go to user profile
@@ -346,22 +342,18 @@ public class SOC_People_UserProfile_RecentActivities extends SOC_TestConfig{
 		info("Test 5: Check Recent activities when the user doesn't have activity");
 		/*Create data test*/
 		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
-		String password1 = username1;
-		String email1 = username1 + mailSuffixData.getMailSuffixRandom();
-
+		String email1 = username1+"@gmail.com";
 		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
-		String password2 = username2;
-		String email2 = username2 + mailSuffixData.getMailSuffixRandom();
-
+		String email2 = username2+"@gmail.com";
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		magAc.signIn(username1,password);
+		Utils.pause(3000);
 		String msgRecent_me = activityMes.getActivityMessage(5);
 		String msgRecent_other = activityMes.getActivityMessage(6);
 
-		info("Add new user");
-		magAc.signIn(DATA_USER1, DATA_PASS);
-		navTool.goToAddUser();
-		addUserPage.addUser(username1, password1, email1, username1, username1);
-		addUserPage.addUser(username2, password2, email2, username2, username2);
-		magAc.signIn(username1, password1);
 
 		/*Step Number: 1
 		 *Step Name: Step 1 : Go to user profile
@@ -410,14 +402,15 @@ public class SOC_People_UserProfile_RecentActivities extends SOC_TestConfig{
 
 		/*Create data test*/
 		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
-		String password1 = username1;
-		String email1 = username1 + mailSuffixData.getMailSuffixRandom();
-
+		String email1 = username1+"@gmail.com";
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+"@gmail.com";
 		info("Add new user");
-		magAc.signIn(DATA_USER1, DATA_PASS);
 		navTool.goToAddUser();
-		addUserPage.addUser(username1, password1, email1, username1, username1);
-		magAc.signIn(username1, password1);
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		magAc.signIn(username1,password);
+		Utils.pause(3000);
 
 		info("add activity");
 		driver.navigate().refresh();
@@ -437,7 +430,7 @@ public class SOC_People_UserProfile_RecentActivities extends SOC_TestConfig{
 			- The User B profile page is displayed
 			- The section "Recent activities" is displayed at the bottom of the mid
 			-column*/
-		magAc.signIn(DATA_USER1, DATA_PASS);
+		magAc.signIn(username2,password);
 		info("Click on Connections on the left panel");
 		hp.goToConnections();
 		connMag.searchPeople(username1,"","","");

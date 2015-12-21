@@ -25,7 +25,7 @@ public class PlatformBase extends TestBase {
 	public static String DATA_USER3 = "james";
 	public static String DATA_USER4 = "demo";
 	public static String USER_ROOT = "root";
-	public static String PASS_ROOT = "gtngtn";
+	public static String PASS_ROOT = "gtn";
 	public static String DATA_PASS = "gtn";
 	public static String DATA_NAME_USER1 = "John Smith";
 	public static String DATA_NAME_USER2 = "Mary Williams";
@@ -34,6 +34,7 @@ public class PlatformBase extends TestBase {
 	public static String DATA_NAME_ROOT = "Root Root";
 	public static String ADMINISTRATION_GROUP = "Administration";
 	public static String PLATFORM_GROUP = "Platform";
+	public static String password="123456";
 	
 	//Gmail
 	public final String GMAIL_URL = "https://mail.google.com";

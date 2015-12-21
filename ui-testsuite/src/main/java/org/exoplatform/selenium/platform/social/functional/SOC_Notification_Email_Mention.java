@@ -35,7 +35,6 @@ import org.testng.annotations.*;
 		createNewUser(1);
 		
 		info("User A login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		Utils.pause(3000);
 		
@@ -76,7 +75,6 @@ import org.testng.annotations.*;
 		createNewUser(1);
 		
 		info("User A login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		Utils.pause(3000);
 		
@@ -341,7 +339,6 @@ import org.testng.annotations.*;
 		createNewUser(1);
 		
 		info("User A login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		Utils.pause(3000);
 		
@@ -382,7 +379,6 @@ import org.testng.annotations.*;
 		createNewUser(2);
 		
 		info("User A login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		Utils.pause(3000);
 		
@@ -398,7 +394,6 @@ import org.testng.annotations.*;
 		
 		
 		info("User B login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(1), password);
 		Utils.pause(3000);
 		
@@ -410,7 +405,6 @@ import org.testng.annotations.*;
 		hpAct.checkActivity(activity);
 		
 		info("User A login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		Utils.pause(3000);
 		
@@ -442,6 +436,8 @@ import org.testng.annotations.*;
 		emailNot.getAllChildWindows();
 		emailNot.verifyFormatEmailNotifcation(emailTitle,firstName, fullName, emailContent,activity);
         emailNot.closeChildBrowsers(parentWindow);
+        if(arrayUser.size()>0)
+			deleteUsers(arrayUser);
  	}
 
 	/**
@@ -467,7 +463,6 @@ import org.testng.annotations.*;
 		createNewUser(2);
 		
 		info("User A login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		Utils.pause(3000);
 		
@@ -483,7 +478,6 @@ import org.testng.annotations.*;
 		
 		
 		info("User B login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(1), password);
 		Utils.pause(3000);
 		
@@ -495,7 +489,6 @@ import org.testng.annotations.*;
 		hpAct.checkActivity(activity);
 		
 		info("User A login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		Utils.pause(3000);
 
@@ -518,6 +511,8 @@ import org.testng.annotations.*;
 		emailNot.getAllChildWindows();
 		emailNot.verifyPresentEmailActivityNotifications(titleEmail,fullName,"");
         emailNot.closeChildBrowsers(parentWindow);
+        if(arrayUser.size()>0)
+			deleteUsers(arrayUser);
 
  	}
 
@@ -526,9 +521,10 @@ import org.testng.annotations.*;
 	*<li> Test Case Name: Check Mention notification mail when someone mentions the user somewhere (activity or comment) in any activity stream.</li>
 	*<li> Pre-Condition: </li>
 	*<li> Post-Condition: </li>
+	 * @throws AWTException 
 	*/
 	@Test
-	public  void test12_CheckMentionNotificationMailWhenSomeoneMentionsTheUserSomewhereActivityOrCommentInAnyActivityStream() {
+	public  void test12_CheckMentionNotificationMailWhenSomeoneMentionsTheUserSomewhereActivityOrCommentInAnyActivityStream() throws AWTException {
 		info("Test 12 Check Mention notification mail when someone mentions the user somewhere (activity or comment) in any activity stream");
 		/*Step Number: 1
 		*Step Name: Step 1: Mention user
@@ -543,7 +539,6 @@ import org.testng.annotations.*;
 		createNewUser(2);
 		
 		info("User A login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		Utils.pause(3000);
 		
@@ -570,7 +565,6 @@ import org.testng.annotations.*;
 		hpAct.checkActivity(activity);
 		
 		info("User B login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(1), password);
 		Utils.pause(3000);
 		
@@ -586,7 +580,6 @@ import org.testng.annotations.*;
 		hpAct.addCommentWithMentionUser(activity,arrayUser.get(0),comment);
 		
 		info("Log in with User A");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 
 		/*Step number: 2
@@ -608,6 +601,8 @@ import org.testng.annotations.*;
 		emailNot.getAllChildWindows();
 		emailNot.verifyPresentEmailActivityNotifications(titleEmail,fullName,"");
         emailNot.closeChildBrowsers(parentWindow);
+        if(arrayUser.size()>0)
+			deleteUsers(arrayUser);
 
  	}
 
@@ -738,7 +733,6 @@ import org.testng.annotations.*;
 		createNewUser(2);
 		
 		info("User A login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		Utils.pause(3000);
 		
@@ -754,7 +748,6 @@ import org.testng.annotations.*;
 		
 		
 		info("User B login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(1), password);
 		Utils.pause(3000);
 		
@@ -766,7 +759,6 @@ import org.testng.annotations.*;
 		hpAct.checkActivity(activity);
 		
 		info("User A login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		Utils.pause(3000);
 
@@ -795,6 +787,8 @@ import org.testng.annotations.*;
 		emailNot.getAllChildWindows();
 		notAct.checkFormatDetailActivity(true,activity);
         emailNot.closeChildBrowsers(parentWindow);
+        if(arrayUser.size()>0)
+			deleteUsers(arrayUser);
  	}
 
 	/**
@@ -821,7 +815,6 @@ import org.testng.annotations.*;
 		createNewUser(2);
 		
 		info("User A login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		Utils.pause(3000);
 		
@@ -837,7 +830,6 @@ import org.testng.annotations.*;
 		
 		
 		info("User B login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(1), password);
 		Utils.pause(3000);
 		
@@ -849,7 +841,6 @@ import org.testng.annotations.*;
 		hpAct.checkActivity(activity);
 		
 		info("User A login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		Utils.pause(3000);
 
@@ -879,5 +870,7 @@ import org.testng.annotations.*;
 		emailNot.getAllChildWindows();
 		notAct.checkFormatDetailActivity(false,activity);
         emailNot.closeChildBrowsers(parentWindow);
+        if(arrayUser.size()>0)
+			deleteUsers(arrayUser);
 
  	}}

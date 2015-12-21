@@ -3,10 +3,9 @@ package org.exoplatform.selenium.platform.calendar;
 import org.exoplatform.selenium.platform.PlatformBase;
 import org.openqa.selenium.By;
 
-public class CalendarLocatorObject extends PlatformBase{
+public class CalendarLocator extends PlatformBase{
 
-	/*-------------------------------------------------------CALENDAR HOME PAGE--------------------------------------------------------------------------------*/
-
+    /**************************************************CALENDAR HOME PAGE**********************************************************************/
 	//GRID
 	public String ELEMENT_EVENT_TASK_TITLE="//*[contains(text(),'${name}')]";
 	public String ELEMENT_EVENT_TASK_TITLE1="//*[@deschtml='${name}']";
@@ -158,8 +157,7 @@ public class CalendarLocatorObject extends PlatformBase{
 	public final String ELEMENT_EVENT_TASK_DETAIL_DATE_WORK_WEEK_VIEW_ALL_DAY = "//*[@id='UIWeekViewGridAllDay']//*[contains(@starttimefull,'$date')]//div[contains(text(),'$name')]";
 	public final String ELEMENT_WORK_WEEK_VIEW_ORDER_DAY="(.//*[@id='UIWeekView']//td[contains(@class,'uiCellBlock')])[$number][contains(@starttimeFull,'$day')]";
    
-
-	/*-------------------------------------------------------CATEGORY MANAGEMENT--------------------------------------------------------------------------------*/
+	/***************************************CATEGORY MANAGEMENT********************************************************************************************/
 
 	//Add event category form
 	public By ELEMENT_ADD_EVENT_CATEGORY_FORM = By.id("UICalendarPopupAction");
@@ -175,7 +173,7 @@ public class CalendarLocatorObject extends PlatformBase{
 	public final By ELEMENT_DELETE_ALL_CATEGORY_OK_BTN=By.xpath(".//*[contains(@class,'UIPopupWindow')]//*[contains(text(),'OK')]");
 
 
-	/*-------------------------------------------------------CALENDAR MANAGEMENT--------------------------------------------------------------------------------*/
+	/***************************************CALENDAR MANAGEMENT********************************************************************************************/
 	//CONTEXT MENU-->CALENDAR ACTIONS
 	public By ELEMENT_CALENDAR_MENU = By.id("tmpMenuElement");
 	public By ELEMENT_CALENDAR_MENU_ACTIONS_ADD = By.xpath("//*[@id='tmpMenuElement']//a[contains(@href,'AddCalendar')]");
@@ -348,8 +346,7 @@ public class CalendarLocatorObject extends PlatformBase{
 	public By ELEMENT_CALENDAR_EDIT_FEED_LINK=By.xpath(".//*[@id='UIFeed']//*[contains(@class,'feedLink')]");
 	public By ELEMENT_CALENDAR_EDIT_FEED_CLOSED_BTN=By.xpath(".//*[@id='UIFeed']//button");
 
-
-	//*-------------------------------------------------------EVENT/TASK MANAGEMENT GENERAL--------------------------------------------------------------------------------*\\
+	/***************************************EVENT/TASK MANAGEMENT GENERAL********************************************************************************************/
 
 	//CONTEXT MENU-->Right Click on Task/Event in Grid
 	public By ELEMENT_CONTEXT_MENU= By.xpath(".//*[@id='tmpMenuElement']");
@@ -397,7 +394,7 @@ public class CalendarLocatorObject extends PlatformBase{
 	public String ELEMENT_INPUT_TEXT_ADVANCE_SEARCH = "//*[@id='UIAdvancedSearchForm']//*[@id='text']";
 	public String ELEMENT_BUTTON_SEARCH_ADVANCE_SEARCH = "//*[@id='UIAdvancedSearchForm']//button[contains(text(),'Search')]";
 
-	//*----------------------------------------------------EVENT MANAGEMANT------------------------------------------------------------------------*\\
+	/***************************************EVENT MANAGEMANT********************************************************************************************/
 	//Upload form
 	public By ELEMENT_ADD_EVENT_UPLOAD_FILE = By.xpath("//*[@name='file']");
 	public String ELEMENT_ATTACH_FILE_LABEL = "//div[@class='fileNameLabel' and contains(text(),'${file}')]";
@@ -598,7 +595,7 @@ public class CalendarLocatorObject extends PlatformBase{
 	public static String ELEMENT_EVENT_POPOVER_TIME_INFO = "//*[contains(@class,'popover-content')]//*[contains(@class,'time')]//*[contains(text(),'$info')]";
 	public static String ELEMENT_EVENT_POPOVER_DESCRIPTION_INFO = "//*[contains(@class,'popover-content')]//*[contains(@class,'description') and contains(text(),'$info')]";
 
-	//*----------------------------------------------------TASK MANAGEMANT------------------------------------------------------------------------*\\
+	/***************************************TASK MANAGEMANT********************************************************************************************/
 	//Add Quick Task Form
 	public By ELEMENT_QUICK_ADD_TASK_POPUP = By.id("UIQuickAddTaskPopupWindow");
 	public By ELEMENT_QUICK_INPUT_TASK_NAME = By.xpath("//*[@id='UIQuickAddTask']//*[@id='eventName']");
@@ -679,7 +676,7 @@ public class CalendarLocatorObject extends PlatformBase{
 	public static String ELEMENT_TASK_POPOVER_DESCRIPTION_INFO = "//*[contains(@class,'popover-content')]//*[contains(@class,'description') and contains(text(),'$info')]";
 	public static String ELEMENT_TASK_POPOVER_LOCATION_INFO = "//*[contains(@class,'popover-content')]//*[contains(@class,'location')]//*[contains(text(),'$info')]";
 
-	/*----------------------------------------------------EMAIL NOTIFICATION-----------------------------------------------------------------------*/
+	/***************************************EMAIL NOTIFICATION********************************************************************************************/
 	//Invitation email
 	public final String ELEMENT_GMAIL_CONTENT_INVITATION_EMAIL = ".//b[contains(text(),'[Invitation] $eventTask')]";
 	public final String ELEMENT_GMAIL_EMAIL_DETAILS=".//h3//*[contains(@name,'$email')]";

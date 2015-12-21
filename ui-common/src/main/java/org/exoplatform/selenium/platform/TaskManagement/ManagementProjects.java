@@ -12,7 +12,7 @@ import org.openqa.selenium.WebDriver;
  */
 
 
-public class ManagementProjects extends TaskManagementLocatorObject {
+public class ManagementProjects extends TaskManagementLocator {
 
 	public ManagementProjects(WebDriver dr){
 		this.driver=dr;

@@ -6,11 +6,6 @@ import static org.exoplatform.selenium.TestLogger.info;
 import org.testng.annotations.*;
 
 public class SOC_Space_navigation_Management extends SOC_TestConfig{
-	@AfterMethod
-	public void setAfterMethod(){
-		magAc.signOut();
-		magAc.signIn(DATA_USER1,DATA_PASS);
-	}
 	/**
 	 *<li> Case ID:122618.</li>
 	 *<li> Test Case Name: Create new node as child of existing node.</li>
@@ -20,6 +15,14 @@ public class SOC_Space_navigation_Management extends SOC_TestConfig{
 		String space = txData.getContentByArrayTypeRandom(1).toLowerCase()+getRandomNumber();
 		String parentNodenode = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		String childrenNode = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		
+		
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		magAc.signIn(username1,password);
 		/*Step Number: 1
 		 *Step Name: Step 1: 
 		 *Step Description: 
@@ -79,6 +82,15 @@ public class SOC_Space_navigation_Management extends SOC_TestConfig{
 		String node1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		String node2 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		
+		
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		magAc.signIn(username1,password);
+		
 		/*Step Number: 1
 		 *Step Name: Step 1: 
 		 *Step Description: 
@@ -122,11 +134,6 @@ public class SOC_Space_navigation_Management extends SOC_TestConfig{
 		info("click to node 2 and make sure node1 is under node2");
 		click(setSpaceMg.ELEMENT_SPACE_NAVIGATION_ADD_NODE_LIST.replace("${name}", node2));
 		waitForAndGetElement(setSpaceMg.ELEMENT_SPACE_NAVIGAION_ADD_NODE_CHILDREN_UNDER_PARENT.replace("${childrenNode}", node1).replace("${parentNode}", node2));
-		
-		info("Reset data");
-		hp.goToAllSpace();
-		spaMg.searchSpace(space, "");
-		spaMg.deleteSpace(space, false);
 	}
 	
 	/**
@@ -140,6 +147,13 @@ public class SOC_Space_navigation_Management extends SOC_TestConfig{
 		String node1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		String node2 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		magAc.signIn(username1,password);
 		/*Step Number: 1
 		 *Step Name: Step 1: 
 		 *Step Description: 
@@ -188,12 +202,6 @@ public class SOC_Space_navigation_Management extends SOC_TestConfig{
 		info("Paste node1 to node2 but Don't see the Paste function");
 		setSpaceMg.pasteANode(false, node2);
 		
-		info("Reset data");
-		hp.goToAllSpace();
-		spaMg.searchSpace(space1, "");
-		spaMg.deleteSpace(space1, false);
-		spaMg.searchSpace(space2, "");
-		spaMg.deleteSpace(space2, false);
 	}
 
 	/**
@@ -204,6 +212,13 @@ public class SOC_Space_navigation_Management extends SOC_TestConfig{
 	public void Test04_CopyOrPasteANodeANodeIntoTheSamePlace(){
 		String space1 = txData.getContentByArrayTypeRandom(1).toLowerCase()+getRandomNumber();
 		String node1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		magAc.signIn(username1,password);
 		
 		/*Step Number: 1
 		 *Step Name: Step 1: 
@@ -244,10 +259,6 @@ public class SOC_Space_navigation_Management extends SOC_TestConfig{
 		waitForMessage(setSpaceMg.ELEMENT_SPACE_NAVIGATION_COPY_AT_SAME_LEVEL);
 		button.ok();
 		
-		info("Reset data");
-		hp.goToAllSpace();
-		spaMg.searchSpace(space1, "");
-		spaMg.deleteSpace(space1, false);
 	}
 	
 	/**
@@ -259,6 +270,15 @@ public class SOC_Space_navigation_Management extends SOC_TestConfig{
 		String space = txData.getContentByArrayTypeRandom(1).toLowerCase()+getRandomNumber();
 		String node1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		String node2 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+		
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		
+		
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		magAc.signIn(username1,password);
 		
 		/*Step Number: 1
 		 *Step Name: Step 1: 
@@ -304,10 +324,6 @@ public class SOC_Space_navigation_Management extends SOC_TestConfig{
 		click(setSpaceMg.ELEMENT_SPACE_NAVIGATION_ADD_NODE_LIST.replace("${name}", node2));
 		waitForAndGetElement(setSpaceMg.ELEMENT_SPACE_NAVIGAION_ADD_NODE_CHILDREN_UNDER_PARENT.replace("${childrenNode}", node1).replace("${parentNode}", node2));
 		
-		info("Reset data");
-		hp.goToAllSpace();
-		spaMg.searchSpace(space, "");
-		spaMg.deleteSpace(space, false);
 	}
 	
 	/**
@@ -320,6 +336,14 @@ public class SOC_Space_navigation_Management extends SOC_TestConfig{
 		String space2 = txData.getContentByArrayTypeRandom(1).toLowerCase()+getRandomNumber();
 		String node1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		String node2 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+		
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		magAc.signIn(username1,password);
 		
 		/*Step Number: 1
 		 *Step Name: Step 1: 
@@ -368,12 +392,6 @@ public class SOC_Space_navigation_Management extends SOC_TestConfig{
 		info("Paste node1 to node2 but Don't see the Paste function");
 		setSpaceMg.pasteANode(false, node2);
 		
-		info("Reset data");
-		hp.goToAllSpace();
-		spaMg.searchSpace(space1, "");
-		spaMg.deleteSpace(space1, false);
-		spaMg.searchSpace(space2, "");
-		spaMg.deleteSpace(space2, false);
 	}
 	
 	/**
@@ -384,6 +402,15 @@ public class SOC_Space_navigation_Management extends SOC_TestConfig{
 	public void Test07_CutOrPasteNodeToTHeSamePlace(){
 		String space1 = txData.getContentByArrayTypeRandom(1).toLowerCase()+getRandomNumber();
 		String node1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+		
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		
+		
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		magAc.signIn(username1,password);
 		
 		/*Step Number: 1
 		 *Step Name: Step 1: 
@@ -421,10 +448,6 @@ public class SOC_Space_navigation_Management extends SOC_TestConfig{
 		waitForMessage(setSpaceMg.ELEMENT_SPACE_NAVIGATION_COPY_AT_SAME_LEVEL);
 		button.ok();
 		
-		info("Reset data");
-		hp.goToAllSpace();
-		spaMg.searchSpace(space1, "");
-		spaMg.deleteSpace(space1, false);
 	}
 	
 	/**
@@ -436,6 +459,15 @@ public class SOC_Space_navigation_Management extends SOC_TestConfig{
 		String space1 = txData.getContentByArrayTypeRandom(1).toLowerCase()+getRandomNumber();
 		String node1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		String pageName = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+		
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		
+		
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		magAc.signIn(username1,password);
 		
 		/*Step Number: 1
 		 *Step Name: Step 1: Show Edit Navigation form
@@ -481,11 +513,6 @@ public class SOC_Space_navigation_Management extends SOC_TestConfig{
 		navTool.goToPotalPages();
 		portManagePage.searchPage(pageName, "", "group", true);
 			
-		info("Reset data");
-		portManagePage.deletePage(pageName, "group");
-		hp.goToAllSpace();
-		spaMg.searchSpace(space1, "");
-		spaMg.deleteSpace(space1, false);
 	}
 	
 	/**
@@ -504,6 +531,7 @@ public class SOC_Space_navigation_Management extends SOC_TestConfig{
 		String engLang = langData.getLanguageByIndex(1);
 		String width = txData.getContentByArrayTypeRandom(3);
 		String height = txData.getContentByArrayTypeRandom(3);
+		
 		
 		/*Step Number: 1
 		 *Step Name: Step 1: Add page
@@ -570,12 +598,6 @@ public class SOC_Space_navigation_Management extends SOC_TestConfig{
 		waitForTextPresent(newContainerTitle);
 		pgCreateWiz.saveChangesPageEditor();
 		
-		info("Reset data");
-		navTool.goToPotalPages();
-		portManagePage.deletePage(pageName, "portal");
-		hp.goToAllSpace();
-		spaMg.searchSpace(space1, "");
-		spaMg.deleteSpace(space1, false);
 	}
 	
 	/**
@@ -642,12 +664,6 @@ public class SOC_Space_navigation_Management extends SOC_TestConfig{
 		setSpaceMg.goToEditNodePage(node1);
 		pgCreateWiz.addContainer(oneRowContainer, false);
 		
-		info("Reset data");
-		navTool.goToPotalPages();
-		portManagePage.deletePage(pageName, "portal");
-		hp.goToAllSpace();
-		spaMg.searchSpace(space1, "");
-		spaMg.deleteSpace(space1, false);
 	}
 	
 	
@@ -737,12 +753,6 @@ public class SOC_Space_navigation_Management extends SOC_TestConfig{
 		waitForAndGetElement(userGroupMg.ELEMENT_TAB_MEMBERSHIP_MANAGEMENT);
 		pgCreateWiz.saveChangesPageEditor();
 		
-		info("Reset data");
-		navTool.goToPotalPages();
-		portManagePage.deletePage(pageName, "portal");
-		hp.goToAllSpace();
-		spaMg.searchSpace(space1, "");
-		spaMg.deleteSpace(space1, false);
 	}
 	
 	/**
@@ -846,13 +856,6 @@ public class SOC_Space_navigation_Management extends SOC_TestConfig{
 		waitForTextPresent(newAppTitle);
 		pgCreateWiz.saveChangesPageEditor();
 		
-		info("Reset data");
-		navTool.goToPotalPages();
-		portManagePage.deletePage(pageName, "portal");
-		
-		hp.goToAllSpace();
-		spaMg.searchSpace(space1, "");
-		spaMg.deleteSpace(space1, false);
 	}
 	
 	/**
@@ -867,6 +870,14 @@ public class SOC_Space_navigation_Management extends SOC_TestConfig{
 		String defaultNodeWiki = spaceDefaultNodesData.getNodesByIndex(1);
 		String defaultNodeSettings = spaceDefaultNodesData.getNodesByIndex(4);
 		String defaultNodeMembers = spaceDefaultNodesData.getNodesByIndex(5);
+		
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		magAc.signIn(username1,password);
 		
 		/*Step Number: 1
 		 *Step Name: Step 1: 
@@ -928,9 +939,5 @@ public class SOC_Space_navigation_Management extends SOC_TestConfig{
 			- That node and the node beLow is exchanged*/
 		setSpaceMg.moveDownANode(false, defaultNodeForum, defaultNodeWiki, "1", "2");
 		
-		info("Reset data");
-		hp.goToAllSpace();
-		spaMg.searchSpace(space, "");
-		spaMg.deleteSpace(space, false);
 	}
 }

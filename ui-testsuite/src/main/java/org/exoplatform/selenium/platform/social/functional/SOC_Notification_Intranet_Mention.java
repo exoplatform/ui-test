@@ -3,8 +3,6 @@ package org.exoplatform.selenium.platform.social.functional;
 import static org.exoplatform.selenium.TestLogger.info;
 
 import java.awt.AWTException;
-import java.util.ArrayList;
-
 import org.testng.annotations.*;
 
 
@@ -23,17 +21,19 @@ public class SOC_Notification_Intranet_Mention extends SOC_TestConfig2{
 	public  void test01_04_CheckMentionNotificationInActivityMessage() throws AWTException{
 		info("Test 1: Check Mention notifications (in activity message)");
 		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
-		String password1 = txData.getContentByArrayTypeRandom(1) + getRandomNumber();
-		String email1 = txData.getContentByArrayTypeRandom(1) + getRandomNumber() + mailSuffixData.getMailSuffixRandom();
-
-		/*Create data test*/
+		String email1 = username1+"@gmail.com";
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+"@gmail.com";
 		info("Add new user");
-		magAc.signIn(DATA_USER1, DATA_PASS);
 		navTool.goToAddUser();
-		addUserPage.addUser(username1, password1, email1, username1, username1);
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		magAc.signIn(username1,password);
+		
+		
 		hp.goToHomePage();
 		String activity1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
-		hpAct.mentionUserActivity(username1, activity1);
+		hpAct.mentionUserActivity(username2, activity1);
 		
 		/*Step Number: 1
 		 *Step Name: 
@@ -45,7 +45,7 @@ public class SOC_Notification_Intranet_Mention extends SOC_TestConfig2{
 
 		 *Expected Outcome: 
 			- The Mention notification is displayed in the list*/
-		magAc.signIn(username1, password1);
+		magAc.signIn(username2, password);
 		navTool.goToIntranetNotification();
 		
 		/*Step number: 2
@@ -60,11 +60,10 @@ public class SOC_Notification_Intranet_Mention extends SOC_TestConfig2{
 			- $USER is User A
 			- $ACTIVITY is the activity title/message
 			- $DATE is the date of the notification*/ 
-		 ArrayList<String> users = new ArrayList<String>();
-		 users.add(DATA_USER1);
+		 arrayUser.add(username2);
 		 String status = notiIntranetData.getContentByArrayTypeRandom(7);
-		 intraNot.checkAvatarInStatus(users,true);
-		 intraNot.checkStatus(status,DATA_USER1);
+		 intraNot.checkAvatarInStatus(arrayUser,true);
+		 intraNot.checkStatus(status,username1);
 		 intraNot.checkActivityTitleInStatus(activity1, true);
 		
 		info("Test 4: Click the Mention notifications (in activity message)");
@@ -87,10 +86,10 @@ public class SOC_Notification_Intranet_Mention extends SOC_TestConfig2{
 
 		 *Expected Outcome: 
 			- The user is redirected to the activity viewer with all comment expanded.*/ 
-		 intraNot.checkAvatarInStatus(users,true);
-		 intraNot.checkStatus(status,DATA_USER1);
+		 intraNot.checkAvatarInStatus(arrayUser,true);
+		 intraNot.checkStatus(status,username1);
 		 intraNot.checkActivityTitleInStatus(activity1, true);
-		waitForAndGetElement(hpAct.ELEMENT_ACTIVITY_MENTION_USER.replace("${content}", activity1).replace("${user}",username1));
+		waitForAndGetElement(hpAct.ELEMENT_ACTIVITY_MENTION_USER.replace("${content}", activity1).replace("${user}",username2));
 	}
 
 	/**
@@ -107,19 +106,20 @@ public class SOC_Notification_Intranet_Mention extends SOC_TestConfig2{
 	public  void test02_05_CheckMentionNotificationsInComment() throws AWTException {
 		info("Test 1: Check Mention notifications (in activity message)");
 		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
-		String password1 = txData.getContentByArrayTypeRandom(1) + getRandomNumber();
-		String email1 = txData.getContentByArrayTypeRandom(1) + getRandomNumber() + mailSuffixData.getMailSuffixRandom();
-
-		/*Create data test*/
+		String email1 = username1+"@gmail.com";
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+"@gmail.com";
 		info("Add new user");
-		magAc.signIn(DATA_USER1, DATA_PASS);
 		navTool.goToAddUser();
-		addUserPage.addUser(username1, password1, email1, username1, username1);
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		magAc.signIn(username1,password);
+		
 		hp.goToHomePage();
 		String activity1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		hpAct.addActivity(activity1, "");
 		String comment=txData.getContentByArrayTypeRandom(1)+getRandomNumber();
-		hpAct.addCommentWithMentionUser(activity1,username1, comment);
+		hpAct.addCommentWithMentionUser(activity1,username2, comment);
 	
 		info("Test 2: Check Mention notifications (in comment)");
 		/*Step Number: 1
@@ -132,7 +132,7 @@ public class SOC_Notification_Intranet_Mention extends SOC_TestConfig2{
 
 		 *Expected Outcome: 
 			- The Mention notification is displayed in the list*/
-		magAc.signIn(username1, password1);
+		magAc.signIn(username2, password);
 		navTool.goToIntranetNotification();
 		
 		/*Step number: 2
@@ -147,13 +147,11 @@ public class SOC_Notification_Intranet_Mention extends SOC_TestConfig2{
 			- $USER is User A
 			- $ACTIVITY is the name of the wiki page
 			- $DATE is the date of the notification*/ 
-		 ArrayList<String> users = new ArrayList<String>();
-		 users.add(DATA_USER1);
+		 arrayUser.add(username2);
 		 String status = notiIntranetData.getContentByArrayTypeRandom(7);
-		 intraNot.checkAvatarInStatus(users,true);
-		 intraNot.checkStatus(status,DATA_USER1);
+		 intraNot.checkAvatarInStatus(arrayUser,true);
+		 intraNot.checkStatus(status,username1);
 		 intraNot.checkActivityTitleInStatus(activity1, true);
-		//intraNot.checkUnreadMentionNotification(DATA_NAME_USER1, activity1, intraNot.ELEMET_JUST_NOW_STRING);
 		
 		info("Test 5: Click the Mention notifications (in comment)");
 		/*Step Number: 1
@@ -176,7 +174,7 @@ public class SOC_Notification_Intranet_Mention extends SOC_TestConfig2{
 		 *Expected Outcome: 
 			- The user is redirected to the activity viewer with all comment expanded. 
 			- The comment where the mention has been done is highlighted*/ 
-		 intraNot.goToDetailMentionNotification(DATA_NAME_USER1, true);
+		 intraNot.goToDetailMentionNotification(username1+" "+username1, true);
 		 notiAct.checkCommentExpand(comment,true);
 
 	}
@@ -192,17 +190,19 @@ public class SOC_Notification_Intranet_Mention extends SOC_TestConfig2{
 	public  void test03_CheckViewAllAfterReceivingAMentionNotification() throws AWTException {
 		info("Test 3: Check View All after receiving a Mention notification");
 		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
-		String password1 = txData.getContentByArrayTypeRandom(1) + getRandomNumber();
-		String email1 = txData.getContentByArrayTypeRandom(1) + getRandomNumber() + mailSuffixData.getMailSuffixRandom();
-
-		/*Create data test*/
+		String email1 = username1+"@gmail.com";
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+"@gmail.com";
 		info("Add new user");
-		magAc.signIn(DATA_USER1, DATA_PASS);
 		navTool.goToAddUser();
-		addUserPage.addUser(username1, password1, email1, username1, username1);
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		magAc.signIn(username1,password);
+		
+		
 		hp.goToHomePage();
 		String activity1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
-		hpAct.mentionUserActivity(username1, activity1);
+		hpAct.mentionUserActivity(username2, activity1);
 
 		/*Step Number: 1
 		 *Step Name: 
@@ -214,10 +214,10 @@ public class SOC_Notification_Intranet_Mention extends SOC_TestConfig2{
 
 		 *Expected Outcome: 
 			- The Mention notification is displayed in the list*/
-		magAc.signIn(username1, password1);
+		magAc.signIn(username2, password);
 		navTool.goToIntranetNotification();
 		String status = notiIntranetData.getContentByArrayTypeRandom(7);
-		intraNot.checkStatus(status,DATA_NAME_USER1);
+		intraNot.checkStatus(status,username1+" "+username1);
 		
 		/*Step number: 2
 		 *Step Name: 
@@ -228,6 +228,6 @@ public class SOC_Notification_Intranet_Mention extends SOC_TestConfig2{
 		 *Expected Outcome: 
 			- The Mention notification is displayed / available in the page*/ 
 		intraNot.goToAllNotification();
-		intraNot.checkStatus(status,DATA_NAME_USER1);
+		intraNot.checkStatus(status,username1+" "+username1);
 	}
 }

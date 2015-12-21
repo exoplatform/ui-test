@@ -156,7 +156,7 @@ public class SOC_TestConfig extends PlatformBase {
 		getDefaultUserPass(userDataFilePath,defaultSheet,isUseFile,jdbcDriver,dbUrl,user,pass,sqlUser);
 		magAc = new ManageLogInOut(driver);
 		button = new Button(driver);
-		magAc.signIn(DATA_USER1, DATA_PASS);
+		magAc.signIn(USER_ROOT,PASS_ROOT);
 		myProfile = new UserProfilePage(driver);
 		uBase = new UserPageBase(driver);
 		navTool = new NavigationToolbar(driver);

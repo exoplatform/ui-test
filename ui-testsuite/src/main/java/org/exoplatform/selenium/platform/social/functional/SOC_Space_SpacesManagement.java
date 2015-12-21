@@ -3,7 +3,6 @@ package org.exoplatform.selenium.platform.social.functional;
 import static org.exoplatform.selenium.TestLogger.info;
 
 import java.util.ArrayList;
-
 import org.exoplatform.selenium.Utils;
 import org.exoplatform.selenium.platform.ecms.CreateNewDocument.selectDocumentType;
 import org.openqa.selenium.By;
@@ -20,6 +19,12 @@ import org.testng.annotations.*;
 	@Test
 	public  void test01_EditNameOfSpaceInVisibleAndOpenMode() {
 		info("Test 1: Edit name of space in visible and open mode");
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		magAc.signIn(username1,password);
 		/*Step Number: 1
 		*Step Name: Step 1: Create space with visible and open mode
 		*Step Description: 
@@ -159,10 +164,6 @@ import org.testng.annotations.*;
 		hp.goToMySpaces();
 		waitForAndGetElement(spaMg.ELEMENT_SPACE_TITLE.replace("${space}", newName),2000,1);
 		
-		/*info("Delete created space");
-		hp.goToMySpaces();
-		spaMg.deleteSpace(newName,false);
-		info("The space is deleted successfully");*/
  	}
 
 	/**
@@ -174,6 +175,13 @@ import org.testng.annotations.*;
 	@Test
 	public  void test02_EditNameOfSpaceInVisibleAndCloseMode() {
 		info("Test 2: Edit name of space in visible and close mode");
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		magAc.signIn(username1,password);
 		/*Step Number: 1
 		*Step Name: Step 1: Create space with visible and closed mode
 		*Step Description: 
@@ -306,11 +314,6 @@ import org.testng.annotations.*;
 			- New space's name is displayed correctly*/ 
 		hp.goToMySpaces();
 		waitForAndGetElement(spaMg.ELEMENT_SPACE_TITLE.replace("${space}", newName),2000,1);
-		
-		/*info("Delete created space");
-		hp.goToMySpaces();
-		spaMg.deleteSpace(newName,false);
-		info("The space is deleted successfully");*/
  	}
 
 	/**
@@ -322,6 +325,13 @@ import org.testng.annotations.*;
 	@Test
 	public  void test03_EditNameOfSpaceInHiddenAndOpenMode() {
 		info("Test 3: Edit name of space in hidden and open mode");
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		magAc.signIn(username1,password);
 		/*Step Number: 1
 		*Step Name: Step 1: Create space with hidden and open mode
 		*Step Description: 
@@ -456,10 +466,6 @@ import org.testng.annotations.*;
 		hp.goToMySpaces();
 		waitForAndGetElement(spaMg.ELEMENT_SPACE_TITLE.replace("${space}", newName),2000,1);
 		
-		/*info("Delete created space");
-		hp.goToMySpaces();
-		spaMg.deleteSpace(newName,false);
-		info("The space is deleted successfully");*/
  	}
 
 	/**
@@ -471,6 +477,13 @@ import org.testng.annotations.*;
 	@Test
 	public  void test04_EditNameOfSpaceInHiddenAndCloseMode() {
 		info("Test 4: Edit name of space in hidden and close mode");
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		magAc.signIn(username1,password);
 		/*Step Number: 1
 		*Step Name: Step 1: Create space with hidden and close mode
 		*Step Description: 
@@ -605,10 +618,6 @@ import org.testng.annotations.*;
 		hp.goToMySpaces();
 		waitForAndGetElement(spaMg.ELEMENT_SPACE_TITLE.replace("${space}", newName),2000,1);
 		
-		/*info("Delete created space");
-		hp.goToMySpaces();
-		spaMg.deleteSpace(newName,false);
-		info("The space is deleted successfully");*/
  	}
 
 	/**
@@ -620,6 +629,13 @@ import org.testng.annotations.*;
 	@Test
 	public  void test05_EditNameOfSpaceInHiddenAndValidationMode() {
 		info("Test 5: Edit name of space in hidden and validation mode");
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		magAc.signIn(username1,password);
 		/*Step Number: 1
 		*Step Name: Step 1: Create space with hidden and validation mode
 		*Step Description: 
@@ -754,10 +770,6 @@ import org.testng.annotations.*;
 		hp.goToMySpaces();
 		waitForAndGetElement(spaMg.ELEMENT_SPACE_TITLE.replace("${space}", newName),2000,1);
 		
-		/*info("Delete created space");
-		hp.goToMySpaces();
-		spaMg.deleteSpace(newName,false);
-		info("The space is deleted successfully");*/
  	}
 
 	/**
@@ -779,6 +791,17 @@ import org.testng.annotations.*;
 	@Test
 	public  void test06_CheckingTheAccessOfAllApplicationsAfterRenamingSpaceInHiddenAndCloseMode() {
 		info("Test 6: Checking the access of all applications after renaming space in hidden and close mode");
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+"@gmail.com";
+		String fullName2=username2+" "+username2;
+		
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		magAc.signIn(username1,password);
 		/*Step Number: 1
 		*Step Name: Step 1: Edit name of space
 		*Step Description: 
@@ -1107,22 +1130,20 @@ import org.testng.annotations.*;
 		    spaHome.goToSpaceSettingTab();
 		    setSpaceMg.goToMemberTab();
 		    info("Invite a user");
-		    setSpaceMg.inviteUser(DATA_USER2,true,DATA_NAME_USER2);
+		    setSpaceMg.inviteUser(username2,true,fullName2);
 			
-			magAc.signOut();
-			magAc.signIn(DATA_USER2, DATA_PASS);
+			magAc.signIn(username2,password);
 			spaMg.goToAllSpacesTab();
 			spaMg.acceptAInvitation(newName);
 			
-			magAc.signOut();
-			magAc.signIn(DATA_USER1, DATA_PASS);
+			magAc.signIn(username1,password);
 			
 			spaHome.goToSpace(newName);
 		    spaMg.goToMemberTab();
 		    waitForAndGetElement(spaMg.ELEMENT_MEMBER_USER_INFOR,2000,1);
 		    waitForAndGetElement(spaMg.ELEMENT_MEMBER_USER_SEARCH);
 		    waitForAndGetElement(spaMg.ELEMENT_MEMBER_USER_CONTACT_LIST);
-		    waitForAndGetElement(spaMg.ELEMENT_MEMBER_USER_NAME.replace("${fullName}",DATA_NAME_USER2));
+		    waitForAndGetElement(spaMg.ELEMENT_MEMBER_USER_NAME.replace("${fullName}",fullName2));
 		    
 		    String currentUrl6=driver.getCurrentUrl();
 			info("currentUrl6:"+currentUrl6);
@@ -1131,10 +1152,6 @@ import org.testng.annotations.*;
 			if(currentUrl6.equalsIgnoreCase(expectUrl6)==false)
 			assert false:"The URL is displayed incorrectly";
 			
-		/*	info("Delete created space");
-			hp.goToMySpaces();
-			spaMg.deleteSpace(newName,false);
-			info("The space is deleted successfully");*/
  	}
 
 	/**
@@ -1156,6 +1173,17 @@ import org.testng.annotations.*;
 	@Test
 	public  void test07_CheckingTheAccessOfAllApplicationsAfterRenamingSpaceInHiddenAndOpenMode() {
 		info("Test 7: Checking the access of all applications after renaming space in hidden and open mode");
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+"@gmail.com";
+		String fullName2=username2+" "+username2;
+		
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		magAc.signIn(username1,password);
 		/*Step Number: 1
 		*Step Name: Step 1: Edit name of space
 		*Step Description: 
@@ -1483,22 +1511,20 @@ import org.testng.annotations.*;
 		spaHome.goToSpaceSettingTab();
 		setSpaceMg.goToMemberTab();
 	    info("Invite a user");
-	    setSpaceMg.inviteUser(DATA_USER2,true,DATA_NAME_USER2);
+	    setSpaceMg.inviteUser(username2,true,fullName2);
 		
-		magAc.signOut();
-		magAc.signIn(DATA_USER2, DATA_PASS);
+		magAc.signIn(username2,password);
 		spaMg.goToAllSpacesTab();
 		spaMg.acceptAInvitation(newName);
 		
-		magAc.signOut();
-		magAc.signIn(DATA_USER1, DATA_PASS);
+		magAc.signIn(username1,password);
 		
 		spaHome.goToSpace(newName);
 	    spaMg.goToMemberTab();
 	    waitForAndGetElement(spaMg.ELEMENT_MEMBER_USER_INFOR,2000,1);
 	    waitForAndGetElement(spaMg.ELEMENT_MEMBER_USER_SEARCH);
 	    waitForAndGetElement(spaMg.ELEMENT_MEMBER_USER_CONTACT_LIST);
-	    waitForAndGetElement(spaMg.ELEMENT_MEMBER_USER_NAME.replace("${fullName}",DATA_NAME_USER2));
+	    waitForAndGetElement(spaMg.ELEMENT_MEMBER_USER_NAME.replace("${fullName}",fullName2));
 	    
 	    String currentUrl6=driver.getCurrentUrl();
 		info("currentUrl6:"+currentUrl6);
@@ -1506,11 +1532,6 @@ import org.testng.annotations.*;
 	    info("expectUrl6:"+expectUrl6);
 		if(currentUrl6.equalsIgnoreCase(expectUrl6)==false)
 		assert false:"The URL is displayed incorrectly";
-		
-		/*info("Delete created space");
-		hp.goToMySpaces();
-		spaMg.deleteSpace(newName,false);
-		info("The space is deleted successfully");*/
  	}
 
 	/**
@@ -1532,6 +1553,17 @@ import org.testng.annotations.*;
 	@Test
 	public  void test08_CheckingTheAccessOfAllApplicationsAfterRenamingSpaceInHiddenAndValidationMode() {
 		info("Test 8: Checking the access of all applications after renaming space in hidden and validation mode");
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+"@gmail.com";
+		String fullName2=username2+" "+username2;
+		
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		magAc.signIn(username1,password);
 		/*Step Number: 1
 		*Step Name: Step 1: Edit name of space
 		*Step Description: 
@@ -1860,22 +1892,20 @@ import org.testng.annotations.*;
 		spaHome.goToSpaceSettingTab();
 	    info("Invite a user");
 	    setSpaceMg.goToMemberTab();
-	    setSpaceMg.inviteUser(DATA_USER2,true,DATA_NAME_USER2);
+	    setSpaceMg.inviteUser(username2,true,fullName2);
 		
-		magAc.signOut();
-		magAc.signIn(DATA_USER2, DATA_PASS);
+		magAc.signIn(username2,password);
 		spaMg.goToAllSpacesTab();
 		spaMg.acceptAInvitation(newName);
 		
-		magAc.signOut();
-		magAc.signIn(DATA_USER1, DATA_PASS);
+		magAc.signIn(username1,password);
 		
 		spaHome.goToSpace(newName);
 	    spaMg.goToMemberTab();
 	    waitForAndGetElement(spaMg.ELEMENT_MEMBER_USER_INFOR,2000,1);
 	    waitForAndGetElement(spaMg.ELEMENT_MEMBER_USER_SEARCH);
 	    waitForAndGetElement(spaMg.ELEMENT_MEMBER_USER_CONTACT_LIST);
-	    waitForAndGetElement(spaMg.ELEMENT_MEMBER_USER_NAME.replace("${fullName}",DATA_NAME_USER2));
+	    waitForAndGetElement(spaMg.ELEMENT_MEMBER_USER_NAME.replace("${fullName}",fullName2));
 	    
 	    String currentUrl6=driver.getCurrentUrl();
 		info("currentUrl6:"+currentUrl6);
@@ -1884,10 +1914,6 @@ import org.testng.annotations.*;
 		if(currentUrl6.equalsIgnoreCase(expectUrl6)==false)
 		assert false:"The URL is displayed incorrectly";
 		
-		/*info("Delete created space");
-		hp.goToMySpaces();
-		spaMg.deleteSpace(newName,false);
-		info("The space is deleted successfully");*/
  	}
 
 	/**
@@ -1909,6 +1935,17 @@ import org.testng.annotations.*;
 	@Test
 	public  void test09_CheckingTheAccessOfAllApplicationsAfterRenamingSpaceInVisibleAndCloseMode() {
 		info("Test 9: Checking the access of all applications after renaming space in visible and close mode");
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+"@gmail.com";
+		String fullName2=username2+" "+username2;
+		
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		magAc.signIn(username1,password);
 		/*Step Number: 1
 		*Step Name: Step 1: Edit name of space
 		*Step Description: 
@@ -2236,22 +2273,20 @@ import org.testng.annotations.*;
 		spaHome.goToSpaceSettingTab();
 	    info("Invite a user");
 	    setSpaceMg.goToMemberTab();
-	    setSpaceMg.inviteUser(DATA_USER2,true,DATA_NAME_USER2);
+	    setSpaceMg.inviteUser(username2,true,fullName2);
 		
-		magAc.signOut();
-		magAc.signIn(DATA_USER2, DATA_PASS);
+		magAc.signIn(username2,password);
 		spaMg.goToAllSpacesTab();
 		spaMg.acceptAInvitation(newName);
 		
-		magAc.signOut();
-		magAc.signIn(DATA_USER1, DATA_PASS);
+		magAc.signIn(username1,password);
 		
 		spaHome.goToSpace(newName);
 	    spaMg.goToMemberTab();
 	    waitForAndGetElement(spaMg.ELEMENT_MEMBER_USER_INFOR,2000,1);
 	    waitForAndGetElement(spaMg.ELEMENT_MEMBER_USER_SEARCH);
 	    waitForAndGetElement(spaMg.ELEMENT_MEMBER_USER_CONTACT_LIST);
-	    waitForAndGetElement(spaMg.ELEMENT_MEMBER_USER_NAME.replace("${fullName}",DATA_NAME_USER2));
+	    waitForAndGetElement(spaMg.ELEMENT_MEMBER_USER_NAME.replace("${fullName}",fullName2));
 	    
 	    String currentUrl6=driver.getCurrentUrl();
 		info("currentUrl6:"+currentUrl6);
@@ -2260,10 +2295,6 @@ import org.testng.annotations.*;
 		if(currentUrl6.equalsIgnoreCase(expectUrl6)==false)
 		assert false:"The URL is displayed incorrectly";
 		
-		/*info("Delete created space");
-		hp.goToMySpaces();
-		spaMg.deleteSpace(newName,false);
-		info("The space is deleted successfully");*/
  	}
 
 	/**
@@ -2285,6 +2316,17 @@ import org.testng.annotations.*;
 	@Test
 	public  void test10_CheckingTheAccessOfAllApplicationsAfterRenamingSpaceInVisibleAndOpenMode() {
 		info("Test 10 Checking the access of all applications after renaming space in visible and open mode");
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+"@gmail.com";
+		String fullName2=username2+" "+username2;
+		
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		magAc.signIn(username1,password);
 		/*Step Number: 1
 		*Step Name: Step 1: Edit name of space
 		*Step Description: 
@@ -2612,22 +2654,20 @@ import org.testng.annotations.*;
 		spaHome.goToSpaceSettingTab();
 	    info("Invite a user");
 	    setSpaceMg.goToMemberTab();
-	    setSpaceMg.inviteUser(DATA_USER2,true,DATA_NAME_USER2);
+	    setSpaceMg.inviteUser(username2,true,fullName2);
 		
-		magAc.signOut();
-		magAc.signIn(DATA_USER2, DATA_PASS);
+		magAc.signIn(username2,password);
 		spaMg.goToAllSpacesTab();
 		spaMg.acceptAInvitation(newName);
 		
-		magAc.signOut();
-		magAc.signIn(DATA_USER1, DATA_PASS);
+		magAc.signIn(username1,password);
 		
 		spaHome.goToSpace(newName);
 	    spaMg.goToMemberTab();
 	    waitForAndGetElement(spaMg.ELEMENT_MEMBER_USER_INFOR,2000,1);
 	    waitForAndGetElement(spaMg.ELEMENT_MEMBER_USER_SEARCH);
 	    waitForAndGetElement(spaMg.ELEMENT_MEMBER_USER_CONTACT_LIST);
-	    waitForAndGetElement(spaMg.ELEMENT_MEMBER_USER_NAME.replace("${fullName}",DATA_NAME_USER2));
+	    waitForAndGetElement(spaMg.ELEMENT_MEMBER_USER_NAME.replace("${fullName}",fullName2));
 	    
 	    String currentUrl6=driver.getCurrentUrl();
 		info("currentUrl6:"+currentUrl6);
@@ -2636,10 +2676,6 @@ import org.testng.annotations.*;
 		if(currentUrl6.equalsIgnoreCase(expectUrl6)==false)
 		assert false:"The URL is displayed incorrectly";
 		
-		/*info("Delete created space");
-		hp.goToMySpaces();
-		spaMg.deleteSpace(newName,false);
-		info("The space is deleted successfully");*/
  	}
 
 	/**
@@ -2661,6 +2697,17 @@ import org.testng.annotations.*;
 	@Test
 	public  void test11_CheckingTheAccessOfAllApplicationsAfterRenamingSpaceInVisibleAndValidationMode() {
 		info("Test 11 Checking the access of all applications after renaming space in visible and validation mode");
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+"@gmail.com";
+		String fullName2=username2+" "+username2;
+		
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		magAc.signIn(username1,password);
 		/*Step Number: 1
 		*Step Name: Step 1: Edit name of space
 		*Step Description: 
@@ -2987,22 +3034,20 @@ import org.testng.annotations.*;
 		spaHome.goToSpaceSettingTab();
 	    info("Invite a user");
 	    setSpaceMg.goToMemberTab();
-	    setSpaceMg.inviteUser(DATA_USER2,true,DATA_NAME_USER2);
+	    setSpaceMg.inviteUser(username2,true,fullName2);
 		
-		magAc.signOut();
-		magAc.signIn(DATA_USER2, DATA_PASS);
+		magAc.signIn(username2,password);
 		spaMg.goToAllSpacesTab();
 		spaMg.acceptAInvitation(newName);
 		
-		magAc.signOut();
-		magAc.signIn(DATA_USER1, DATA_PASS);
+		magAc.signIn(username1,password);
 		
 		spaHome.goToSpace(newName);
 	    spaMg.goToMemberTab();
 	    waitForAndGetElement(spaMg.ELEMENT_MEMBER_USER_INFOR,2000,1);
 	    waitForAndGetElement(spaMg.ELEMENT_MEMBER_USER_SEARCH);
 	    waitForAndGetElement(spaMg.ELEMENT_MEMBER_USER_CONTACT_LIST);
-	    waitForAndGetElement(spaMg.ELEMENT_MEMBER_USER_NAME.replace("${fullName}",DATA_NAME_USER2));
+	    waitForAndGetElement(spaMg.ELEMENT_MEMBER_USER_NAME.replace("${fullName}",fullName2));
 	    
 	    String currentUrl6=driver.getCurrentUrl();
 		info("currentUrl6:"+currentUrl6);
@@ -3011,10 +3056,6 @@ import org.testng.annotations.*;
 		if(currentUrl6.equalsIgnoreCase(expectUrl6)==false)
 		assert false:"The URL is displayed incorrectly";
 		
-		/*info("Delete created space");
-		hp.goToMySpaces();
-		spaMg.deleteSpace(newName,false);
-		info("The space is deleted successfully");*/
  	}
 
 	/**
@@ -3026,6 +3067,16 @@ import org.testng.annotations.*;
 	@Test
 	public  void test12_CreateANewSpaceByDefault() {
 		info("Test 12 Create a new Space by default");
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+"@gmail.com";
+		
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		magAc.signIn(username1,password);
 		/*Step Number: 1
 		*Step Name: Step 1: Go to space page
 		*Step Description: 
@@ -3092,20 +3143,14 @@ import org.testng.annotations.*;
 		waitForAndGetElement(setSpaceMg.ELEMENT_ACCESS_ONLY_ONE_MANAGER_NUMBER,2000,2);
 		waitForElementNotPresent(setSpaceMg.ELEMENT_ACCESS_MORE_ONE_MANAGER_NUMBER,2000,2);
 		
-		/*info("Delete created space");
-		hp.goToMySpaces();
-		spaMg.deleteSpace(space,false);
-		info("The space is deleted successfully");*/
 		
-		magAc.signOut();
-		magAc.signIn(DATA_USER2, DATA_PASS);
+		magAc.signIn(username2,password);
 		String space1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		info("Create a space");
 		hp.goToMySpaces();
 		spaMg.addNewSpaceSimple(space1,space1);
 		
-		magAc.signOut();
-		magAc.signIn(DATA_USER1, DATA_PASS);
+		magAc.signIn(username1,password);
 		info("With other user, only see [Request To Join ] button to send request to join in the Space");
 		hp.goToAllSpace();
 		waitForAndGetElement(spaMg.ELEMENT_MY_SPACE_ALL_SPACES_REQUEST_TO_JOIN_BTN.replace("${space}",space1),2000,1);
@@ -3113,12 +3158,6 @@ import org.testng.annotations.*;
 		waitForElementNotPresent(spaMg.ELEMENT_SPACE_LEAVE_BTN.replace("${space}",space1));
 		waitForElementNotPresent(spaMg.ELEMENT_SPACE_EDIT_BTN.replace("${space}",space1));
 		
-		/*magAc.signOut();
-		magAc.signIn(DATA_USER2, DATA_PASS);
-		info("Delete created space");
-		hp.goToMySpaces();
-		spaMg.deleteSpace(space1,false);
-		info("The space is deleted successfully");*/
  	}
 
 	/**
@@ -3130,6 +3169,13 @@ import org.testng.annotations.*;
 	@Test
 	public  void test13_AccessSpacePage() {
 		info("Test 13 Access Space page");
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		magAc.signIn(username1,password);
 		/*Step Number: 1
 		*Step Name: Step 1: Log in
 		*Step Description: 
@@ -3178,6 +3224,14 @@ import org.testng.annotations.*;
 	@Test
 	public  void test14_ShowEditSpaceFormByUserWhoIsManagerOfTheSpaceOrUserRoot() {
 		info("Test 14 Show Edit space form by user who is manager of the space or user Root");
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		String fullName1=username1+" "+username1;
+		
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		magAc.signIn(username1,password);
 		/*Step Number: 1
 		*Step Name: Step 1: Create a space
 		*Step Description: 
@@ -3239,7 +3293,7 @@ import org.testng.annotations.*;
 		waitForAndGetElement(setSpaceMg.ELEMENT_INPUT_USER);
 		waitForAndGetElement(setSpaceMg.ELEMENT_SELECT_USER_FROM_GROUP);
 		waitForAndGetElement(setSpaceMg.ELEMENT_SPACE_MEMBERS_INVITE);
-		waitForAndGetElement(setSpaceMg.ELEMENT_USER_IN_MEMBER_TABLE.replace("${fullName}",DATA_NAME_USER1));
+		waitForAndGetElement(setSpaceMg.ELEMENT_USER_IN_MEMBER_TABLE.replace("${fullName}",fullName1));
 		
 		info(" Applications: manage all applications on the space.");
 		waitForAndGetElement(setSpaceMg.ELEMENT_SETTINGS_APP_TAB,2000,1);
@@ -3253,10 +3307,6 @@ import org.testng.annotations.*;
 		waitForAndGetElement(setSpaceMg.ELEMENT_SPACE_NAVIGATION_ADD_NODE_BUTTON,2000,1);
 		waitForAndGetElement(setSpaceMg.ELEMENT_SPACE_NAVIGATION_NODE_LIST);
 		
-		/*info("Delete created space");
-		hp.goToMySpaces();
-		spaMg.deleteSpace(space,false);
-		info("The space is deleted successfully");*/
  	}
 
 	/**
@@ -3268,6 +3318,17 @@ import org.testng.annotations.*;
 	@Test
 	public  void test15_CreateNewSpaceAtVisibleAndValidationMode() {
 		info("Test 15 Create new space at visible and Validation mode");
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+"@gmail.com";
+		String fullName2=username2+" "+username2;
+		
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		magAc.signIn(username1,password);
 		/*Step Number: 1
 		*Step Name: Step 1: Go to Space page
 		*Step Description: 
@@ -3293,7 +3354,7 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- Show form to create a space. this form contains the name of the space field*/
-		if (waitForAndGetElement(spaMg.ELEMENT_ADDNEWSPACE_BUTTON, 3000, 0, 2) != null)
+		if (waitForAndGetElement(spaMg.ELEMENT_ADDNEWSPACE_BUTTON, 3000, 0) != null)
 			click(spaMg.ELEMENT_ADDNEWSPACE_BUTTON);
 		else click(spaMg.ELEMENT_ADDNEWSPACE_ICON);
 		waitForAndGetElement(spaMg.ELEMENT_ADDNEWSPACE_FORM,3000,1);
@@ -3352,24 +3413,18 @@ import org.testng.annotations.*;
 		info("New space has created");
 		waitForAndGetElement(By.linkText(space),60000);
 		
-		magAc.signOut();
-	    magAc.signIn(DATA_USER2, DATA_PASS);
+	    magAc.signIn(username2,password);
 	    hp.goToAllSpace();
 	    spaMg.acceptAInvitation(space);
 	    
-	    magAc.signOut();
-	    magAc.signIn(DATA_USER1, DATA_PASS);
+	    magAc.signIn(username1,password);
 	    info(" User will become member of the space after user accept invitation from manager");
 	    hp.goToAllSpace();
 	    spaHome.goToSpace(space);
 	    spaHome.goToSpaceSettingTab();
 	    setSpaceMg.goToMemberTab();
-	    waitForAndGetElement(setSpaceMg.ELEMENT_USER_IN_MEMBER_TABLE.replace("${fullName}",DATA_NAME_USER2),2000,1);
+	    waitForAndGetElement(setSpaceMg.ELEMENT_USER_IN_MEMBER_TABLE.replace("${fullName}",fullName2),2000,1);
 	    
-	   /* info("Delete created space");
-		hp.goToMySpaces();
-		spaMg.deleteSpace(space,false);
-		info("The space is deleted successfully");*/
  	}
 
 	/**
@@ -3381,6 +3436,7 @@ import org.testng.annotations.*;
 	@Test
 	public  void test16_CheckTheDisplayingOfDriveAfterCreatingdeletingNewSpace() {
 		info("Test 16 Check the displaying of drive after creating/deleting new space");
+		
 		/*Step Number: 1
 		*Step Name: Step 1: Create new space
 		*Step Description: 
@@ -3451,6 +3507,16 @@ import org.testng.annotations.*;
 	@Test
 	public  void test17_CreateNewSpaceAtVisibleAndCloseMode() {
 		info("Test 17 Create new space at visible and close mode");
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+"@gmail.com";
+		
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		magAc.signIn(username1,password);
 		/*Step Number: 1
 		*Step Name: Step 1: Go to space page
 		*Step Description: 
@@ -3476,7 +3542,7 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- Show form to create a spacethis form contains the name of the space field*/
-		if (waitForAndGetElement(spaMg.ELEMENT_ADDNEWSPACE_BUTTON, 3000, 0, 2) != null)
+		if (waitForAndGetElement(spaMg.ELEMENT_ADDNEWSPACE_BUTTON, 3000, 0) != null)
 			click(spaMg.ELEMENT_ADDNEWSPACE_BUTTON);
 		else click(spaMg.ELEMENT_ADDNEWSPACE_ICON);
 		waitForAndGetElement(spaMg.ELEMENT_ADDNEWSPACE_FORM,3000,1);
@@ -3533,20 +3599,12 @@ import org.testng.annotations.*;
 		info("New space has created");
 		waitForAndGetElement(By.linkText(space), 60000);
 		
-		magAc.signOut();
-	    magAc.signIn(DATA_USER2, DATA_PASS);
+	    magAc.signIn(username2,password);
 	    info(" With visible and close mode: other user can not send request to join space.");
 	    hp.goToAllSpace();
 	    spaMg.searchSpace(space,"");
 	    waitForElementNotPresent(spaMg.ELEMENT_MY_SPACE_ALL_SPACES_REQUEST_TO_JOIN_BTN.replace("${space}",space),2000,1);
 	  
-	    magAc.signOut();
-	    magAc.signIn(DATA_USER1, DATA_PASS);
-	    
-	  /*  info("Delete created space");
-		hp.goToMySpaces();
-		spaMg.deleteSpace(space,false);
-		info("The space is deleted successfully");*/
  	}
 
 	/**
@@ -3558,6 +3616,16 @@ import org.testng.annotations.*;
 	@Test
 	public  void test18_CreateNewSpaceAtHiddenAndOpenMode() {
 		info("Test 18 Create new space at hidden and open mode");
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+"@gmail.com";
+		
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		magAc.signIn(username1,password);
 		/*Step Number: 1
 		*Step Name: -
 		*Step Description: 
@@ -3574,7 +3642,7 @@ import org.testng.annotations.*;
 		ArrayList<String> subgroups=spGroupsData.getArraySubGroupByType(3);
 		String[] arrayGroupPath ={groups.get(0),subgroups.get(0)};
 		hp.goToAllSpace();
-		if (waitForAndGetElement(spaMg.ELEMENT_ADDNEWSPACE_BUTTON, 3000, 0, 2) != null)
+		if (waitForAndGetElement(spaMg.ELEMENT_ADDNEWSPACE_BUTTON, 3000, 0) != null)
 			click(spaMg.ELEMENT_ADDNEWSPACE_BUTTON);
 		else click(spaMg.ELEMENT_ADDNEWSPACE_ICON);
 		waitForAndGetElement(spaMg.ELEMENT_ADDNEWSPACE_FORM,3000,1);
@@ -3631,20 +3699,12 @@ import org.testng.annotations.*;
 		info("New space has created");
 		waitForAndGetElement(By.linkText(space), 60000);
 		
-		magAc.signOut();
-	    magAc.signIn(DATA_USER2, DATA_PASS);
+	    magAc.signIn(username2,password);
 	    info(" With visible and close mode: other user can not send request to join space.");
 	    hp.goToAllSpace();
 	    spaMg.searchSpace(space,"");
 	    waitForElementNotPresent(spaMg.ELEMENT_SPACE_TITLE.replace("${space}",space),2000,1);
 	  
-	    magAc.signOut();
-	    magAc.signIn(DATA_USER1, DATA_PASS);
-	    
-	    /*info("Delete created space");
-		hp.goToMySpaces();
-		spaMg.deleteSpace(space,false);
-		info("The space is deleted successfully");*/
  	}
 
 	/**
@@ -3656,6 +3716,16 @@ import org.testng.annotations.*;
 	@Test
 	public  void test19_CreateNewSpaceWithHiddenAndValidationMode() {
 		info("Test 19 Create new space with hidden and Validation mode");
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+"@gmail.com";
+		
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		magAc.signIn(username1,password);
 		/*Step Number: 1
 		*Step Name: -
 		*Step Description: 
@@ -3681,7 +3751,7 @@ import org.testng.annotations.*;
 			- Click on button Add new space
 		*Expected Outcome: 
 			- Show form to create a spacethis form contains the name of the space field*/
-		if (waitForAndGetElement(spaMg.ELEMENT_ADDNEWSPACE_BUTTON, 3000, 0, 2) != null)
+		if (waitForAndGetElement(spaMg.ELEMENT_ADDNEWSPACE_BUTTON, 3000, 0) != null)
 			click(spaMg.ELEMENT_ADDNEWSPACE_BUTTON);
 		else click(spaMg.ELEMENT_ADDNEWSPACE_ICON);
 		waitForAndGetElement(spaMg.ELEMENT_ADDNEWSPACE_FORM,3000,1);
@@ -3737,20 +3807,12 @@ import org.testng.annotations.*;
         setSpaceMg.saveChanges();
 		Utils.pause(6000);
 		
-		magAc.signOut();
-	    magAc.signIn(DATA_USER2, DATA_PASS);
+	    magAc.signIn(username2,password);
 	    info(" With visible and close mode: other user can not send request to join space.");
 	    hp.goToAllSpace();
 	    spaMg.searchSpace(space,"");
 	    waitForElementNotPresent(spaMg.ELEMENT_SPACE_TITLE.replace("${space}",space),2000,1);
 	  
-	    magAc.signOut();
-	    magAc.signIn(DATA_USER1, DATA_PASS);
-	    
-	  /*  info("Delete created space");
-		hp.goToMySpaces();
-		spaMg.deleteSpace(space,false);
-		info("The space is deleted successfully");*/
  	}
 
 	/**
@@ -3762,6 +3824,16 @@ import org.testng.annotations.*;
 	@Test
 	public  void test20_CreateNewSpaceWithHiddenAndCloseMode() {
 		info("Test 20 Create new space with hidden and close mode");
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+"@gmail.com";
+		
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		magAc.signIn(username1,password);
 		/*Step Number: 1
 		*Step Name: -
 		*Step Description: 
@@ -3788,7 +3860,7 @@ import org.testng.annotations.*;
 			- Click on button [Add new space]
 		*Expected Outcome: 
 			- Show form to create a spacethis form contains the name of the space field*/
-		if (waitForAndGetElement(spaMg.ELEMENT_ADDNEWSPACE_BUTTON, 3000, 0, 2) != null)
+		if (waitForAndGetElement(spaMg.ELEMENT_ADDNEWSPACE_BUTTON, 3000, 0) != null)
 			click(spaMg.ELEMENT_ADDNEWSPACE_BUTTON);
 		else click(spaMg.ELEMENT_ADDNEWSPACE_ICON);
 		waitForAndGetElement(spaMg.ELEMENT_ADDNEWSPACE_FORM,3000,1);
@@ -3846,20 +3918,12 @@ import org.testng.annotations.*;
 		info("New space has created");
 		waitForAndGetElement(By.linkText(space), 60000);
 		
-		magAc.signOut();
-	    magAc.signIn(DATA_USER2, DATA_PASS);
+	    magAc.signIn(username2,password);
 	    info(" With visible and close mode: other user can not send request to join space.");
 	    hp.goToAllSpace();
 	    spaMg.searchSpace(space,"");
 	    waitForElementNotPresent(spaMg.ELEMENT_SPACE_TITLE.replace("${space}",space),2000,1);
 	  
-	    magAc.signOut();
-	    magAc.signIn(DATA_USER1, DATA_PASS);
-	    
-	    /*info("Delete created space");
-		hp.goToMySpaces();
-		spaMg.deleteSpace(space,false);
-		info("The space is deleted successfully");*/
  	}
 
 	/**
@@ -3871,6 +3935,16 @@ import org.testng.annotations.*;
 	@Test
 	public  void test21_CreateNewSpaceAtVisibleAndOpenMode() {
 		info("Test 21 Create new space at visible and open mode");
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+"@gmail.com";
+		String fullName2=username2+" "+username2;
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		magAc.signIn(username1,password);
 		/*Step Number: 1
 		*Step Name: Step 1: Go to space page
 		*Step Description: 
@@ -3896,7 +3970,7 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- Show form to create a spacethis form contains the name of the space field*/
-		if (waitForAndGetElement(spaMg.ELEMENT_ADDNEWSPACE_BUTTON, 3000, 0, 2) != null)
+		if (waitForAndGetElement(spaMg.ELEMENT_ADDNEWSPACE_BUTTON, 3000, 0) != null)
 			click(spaMg.ELEMENT_ADDNEWSPACE_BUTTON);
 		else click(spaMg.ELEMENT_ADDNEWSPACE_ICON);
 		waitForAndGetElement(spaMg.ELEMENT_ADDNEWSPACE_FORM,3000,1);
@@ -3951,26 +4025,19 @@ import org.testng.annotations.*;
 		info("New space has created");
 		waitForAndGetElement(By.linkText(space), 60000);
 		
-		magAc.signOut();
-	    magAc.signIn(DATA_USER2, DATA_PASS);
+	    magAc.signIn(username2,password);
 	    info(" With visible and open mode: other user will automatically became member of the space after send request to join space");
 	    hp.goToAllSpace();
 	    spaMg.searchSpace(space,"");
 	    spaMg.joinToASpace(space);
 	  
-	    magAc.signOut();
-	    magAc.signIn(DATA_USER1, DATA_PASS);
+	    magAc.signIn(username1,password);
 	    info(" User will become member of the space after send request to join space");
 	    hp.goToAllSpace();
 	    spaHome.goToSpace(space);
 	    spaHome.goToSpaceSettingTab();
 	    setSpaceMg.goToMemberTab();
-	    waitForAndGetElement(setSpaceMg.ELEMENT_USER_IN_MEMBER_TABLE.replace("${fullName}",DATA_NAME_USER2),2000,1);
-	    
-	    /*info("Delete created space");
-		hp.goToMySpaces();
-		spaMg.deleteSpace(space,false);
-		info("The space is deleted successfully");*/
+	    waitForAndGetElement(setSpaceMg.ELEMENT_USER_IN_MEMBER_TABLE.replace("${fullName}",fullName2),2000,1);
  	}
 
 	/**
@@ -3982,6 +4049,17 @@ import org.testng.annotations.*;
 	@Test
 	public  void test22_ShowEditSpaceFormByUserWhoIsNotManagerOfTheSpace() {
 		info("Test 22 Show Edit space form by user who is not manager of the space");
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+"@gmail.com";
+		String fullName2=username2+" "+username2;
+		
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		magAc.signIn(username1,password);
 		/*Step Number: 1
 		*Step Name: -
 		*Step Description: 
@@ -4000,7 +4078,7 @@ import org.testng.annotations.*;
 		spaMg.addNewSpaceSimple(space,space,60000);
 		spaHome.goToSpaceSettingTab();
 		setSpaceMg.goToMemberTab();
-		setSpaceMg.inviteUser(DATA_USER2,true,DATA_NAME_USER2);
+		setSpaceMg.inviteUser(username2,true,fullName2);
 		
 		/*Step number: 2
 		*Step Name: -
@@ -4013,8 +4091,7 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			User can not see [Edit] button to edit space. 
 			After user accesses the space successfully user can not see [Space Setting] portlet too*/ 
-		magAc.signOut();
-	    magAc.signIn(DATA_USER2, DATA_PASS);
+	    magAc.signIn(username2,password);
 	    hp.goToAllSpace();
 	    spaMg.goToInvitationsReceivedTab();
 	    spaMg.acceptAInvitation(space);
@@ -4022,13 +4099,6 @@ import org.testng.annotations.*;
 	    waitForElementNotPresent(spaMg.ELEMENT_SPACE_EDIT_BTN.replace("${space}",space),2000,1);
 	    spaHome.goToSpace(space);
 	    waitForElementNotPresent(spaHome.ELEMENT_SPACE_SPACE_SETTINGS,2000,1);
-	    
-	   /* magAc.signOut();
-	    magAc.signIn(DATA_USER1, DATA_PASS);
-	    info("Delete created space");
-		hp.goToMySpaces();
-		spaMg.deleteSpace(space,false);
-		info("The space is deleted successfully");*/
  	}
 
 	/**
@@ -4040,6 +4110,13 @@ import org.testng.annotations.*;
 	@Test
 	public  void test23_DeleteSpace() {
 		info("Test 23 Delete space");
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		magAc.signIn(username1,password);
 		/*Step Number: 1
 		*Step Name: -
 		*Step Description: 

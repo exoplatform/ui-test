@@ -17,7 +17,17 @@ import org.testng.annotations.*;
 	@Test
 	public  void test01_UpdateSpaceActivityAfterAUserLeaveASpace() {
 		info("Test 1:  Update Space activity after a user leave a space");
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+"@gmail.com";
+		String fullName2=username2+" "+username2;
 		
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		magAc.signIn(username1,password);
 		/*Step Number: 1
 		*Step Name: 
 		*Step Description: 
@@ -31,14 +41,6 @@ import org.testng.annotations.*;
 			- The Space activity is updated in the activity stream: the number of members is updated to 
 			-1
 			- No comment is added into activity*/ 
-		info("Create 2 users for testing");
-		createNewUser(2);
-		
-		info("User A login");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(0), password);
-		Utils.pause(3000);
-		
 		info("User A create a new space");
 		String spaceName= txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		String spaceDes= txData.getContentByArrayTypeRandom(1)+getRandomNumber();
@@ -50,11 +52,10 @@ import org.testng.annotations.*;
 		hp.goToSpecificSpace(spaceName);
 		spaHome.goToSpaceSettingTab();
 		setSpaceMg.goToMemberTab();
-		setSpaceMg.inviteUser(arrayUser.get(1),true,arrayUser.get(1));
+		setSpaceMg.inviteUser(username2,true,fullName2);
 		
 		info("User B login");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(1), password);
+		magAc.signIn(username2, password);
 		Utils.pause(3000);
 		
 		info("User B accept invitation from User A");

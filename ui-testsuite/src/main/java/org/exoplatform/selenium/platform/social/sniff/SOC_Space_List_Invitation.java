@@ -16,6 +16,16 @@ public class SOC_Space_List_Invitation extends SOC_TestConfig_1 {
 	public  void test01_CheckInvitaionSpaceList() {
 		info("Test 01: Check Invitation space list");
 		String space = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+ "@gmail.com";
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+ "@gmail.com";
+		
+		info("Add user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		magAc.signIn(username1, password);
 		/*Step Number: 1
 		 *Step Name: Step 1: Check displaying on Invitations Received space list
 		 *Step Description: 
@@ -34,10 +44,9 @@ public class SOC_Space_List_Invitation extends SOC_TestConfig_1 {
 		spaMg.addNewSpaceSimple(space,space);
 		
 		spaHome.goToSpaceSettingTab();
-		setSpaceMg.inviteUser(DATA_USER2,false,"");
+		setSpaceMg.inviteUser(username2,false,"");
 		
-		magAc.signOut();
-		magAc.signIn(DATA_USER2,DATA_PASS);
+		magAc.signIn(username2, password);
 		
 		hp.goToMySpaces();
 		spaMg.goToInvitationsReceivedTab();
@@ -45,12 +54,6 @@ public class SOC_Space_List_Invitation extends SOC_TestConfig_1 {
 		waitForAndGetElement(spaMg.ELEMENT_MY_SPACE_INVITATION_RECEIVED_ACCEPT_BTN.replace("${space}",space));
 		waitForAndGetElement(spaMg.ELEMENT_MY_SPACE_INVITATION_RECEIVED_CANCEL_BTN.replace("${space}",space));
 		
-		magAc.signOut();
-		magAc.signIn(DATA_USER1,DATA_PASS);
-		
-		info("Delete a Space");
-		hp.goToMySpaces();
-		spaMg.deleteSpace(space,false);
 	}
 	
 }

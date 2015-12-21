@@ -33,7 +33,6 @@ import org.testng.annotations.*;
 		createNewUser(1);
 		
 		info("User A login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		Utils.pause(3000);
 		
@@ -79,7 +78,6 @@ import org.testng.annotations.*;
 		createNewUser(2);
 		
 		info("User A login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		Utils.pause(3000);
 		
@@ -106,7 +104,6 @@ import org.testng.annotations.*;
 		hpAct.checkActivity(activity);
 		
 		info("User B login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(1), password);
 		Utils.pause(3000);
 		
@@ -122,7 +119,6 @@ import org.testng.annotations.*;
 		hpAct.addCommentUsingJavascript(activity, comment);
 		
 		info("Log in with User A");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		
 		String parentWindow = driver.getWindowHandle();
@@ -142,6 +138,8 @@ import org.testng.annotations.*;
 		emailNot.getAllChildWindows();
 		emailNot.verifyFormatEmailNotifcation(emailTitle,firstName, fullName, emailContent,activity);
         emailNot.closeChildBrowsers(parentWindow);
+        if(arrayUser.size()>0)
+			deleteUsers(arrayUser);
  	}
 
 	/**
@@ -168,7 +166,6 @@ import org.testng.annotations.*;
 		createNewUser(2);
 		
 		info("User A login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		Utils.pause(3000);
 		
@@ -195,7 +192,6 @@ import org.testng.annotations.*;
 		hpAct.checkActivity(activity);
 		
 		info("User B login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(1), password);
 		Utils.pause(3000);
 		
@@ -211,7 +207,6 @@ import org.testng.annotations.*;
 		hpAct.addCommentUsingJavascript(activity, comment);
 		
 		info("Log in with User A");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		
 		String parentWindow = driver.getWindowHandle();
@@ -227,6 +222,8 @@ import org.testng.annotations.*;
 		emailNot.goToDetailEmailNoti(titleEmail, fullName,"");
 		emailNot.getAllChildWindows();
         emailNot.closeChildBrowsers(parentWindow);
+        if(arrayUser.size()>0)
+			deleteUsers(arrayUser);
 
  	}
 
@@ -252,7 +249,6 @@ import org.testng.annotations.*;
 		createNewUser(1);
 		
 		info("User A login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		Utils.pause(3000);
 		
@@ -466,7 +462,6 @@ import org.testng.annotations.*;
 		createNewUser(1);
 		
 		info("User A login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		Utils.pause(3000);
 		
@@ -507,7 +502,6 @@ import org.testng.annotations.*;
 		createNewUser(3);
 		
 		info("User A login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		Utils.pause(3000);
 		
@@ -533,7 +527,6 @@ import org.testng.annotations.*;
 		hpAct.checkActivity(activity);
 		
 		info("User B login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(1), password);
 		Utils.pause(3000);
 		
@@ -564,7 +557,6 @@ import org.testng.annotations.*;
 			- New comment is added*/
 		
 		info("Log in with User C");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(2), password);
 		
 		info("User A and User C are connected");
@@ -598,6 +590,8 @@ import org.testng.annotations.*;
 		emailNot.getAllChildWindows();
 		emailNot.verifyNOTPresentTitleASEmailNoti(titleEmail,fullName,"");
         emailNot.closeChildBrowsers(parentWindow);
+        if(arrayUser.size()>0)
+			deleteUsers(arrayUser);
 
  	}
 
@@ -623,7 +617,6 @@ import org.testng.annotations.*;
 		createNewUser(2);
 		
 		info("User A login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		Utils.pause(3000);
 		
@@ -650,7 +643,6 @@ import org.testng.annotations.*;
 		hpAct.checkActivity(activity);
 		
 		info("User B login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(1), password);
 		Utils.pause(3000);
 		
@@ -694,6 +686,8 @@ import org.testng.annotations.*;
 		emailNot.getAllChildWindows();
 		emailNot.verifyNOTPresentTitleASEmailNoti(titleEmail,fullName,"");
         emailNot.closeChildBrowsers(parentWindow);
+        if(arrayUser.size()>0)
+			deleteUsers(arrayUser);
 
  	}
 
@@ -839,7 +833,6 @@ import org.testng.annotations.*;
 		createNewUser(2);
 		
 		info("User A login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		Utils.pause(3000);
 		
@@ -866,7 +859,6 @@ import org.testng.annotations.*;
 		hpAct.checkActivity(activity);
 		
 		info("User B login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(1), password);
 		Utils.pause(3000);
 		
@@ -882,7 +874,6 @@ import org.testng.annotations.*;
 		hpAct.addCommentUsingJavascript(activity, comment);
 		
 		info("Log in with User A");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		
 		String parentWindow = driver.getWindowHandle();
@@ -902,7 +893,8 @@ import org.testng.annotations.*;
 		notAct.checkFormatDetailActivity(true,activity);
 		notAct.checkCommentExpand(comment, true);
         emailNot.closeChildBrowsers(parentWindow);
-
+        if(arrayUser.size()>0)
+			deleteUsers(arrayUser);
  	}
 
 	/**
@@ -929,7 +921,6 @@ import org.testng.annotations.*;
 		createNewUser(2);
 		
 		info("User A login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		Utils.pause(3000);
 		
@@ -956,7 +947,6 @@ import org.testng.annotations.*;
 		hpAct.checkActivity(activity);
 		
 		info("User B login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(1), password);
 		Utils.pause(3000);
 		
@@ -972,7 +962,6 @@ import org.testng.annotations.*;
 		hpAct.addCommentUsingJavascript(activity, comment);
 		
 		info("Log in with User A");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		
 		String parentWindow = driver.getWindowHandle();
@@ -991,5 +980,7 @@ import org.testng.annotations.*;
 		emailNot.getAllChildWindows();
 		notAct.checkCommentExpand(comment, true);
         emailNot.closeChildBrowsers(parentWindow);
+        if(arrayUser.size()>0)
+			deleteUsers(arrayUser);
 
  	}}

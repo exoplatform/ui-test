@@ -16,7 +16,7 @@ import org.exoplatform.selenium.platform.calendar.CalendarHomePage.selectViewOpt
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class EventManagement extends CalendarLocatorObject {
+public class EventManagement extends CalendarLocator {
 	PlatformPermission pPer;
 	CalendarHomePage cHome;
 	ManageAlert alert;

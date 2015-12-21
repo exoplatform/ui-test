@@ -5,106 +5,25 @@ import static org.exoplatform.selenium.TestLogger.info;
 import org.exoplatform.selenium.Utils;
 import org.exoplatform.selenium.Button;
 import org.exoplatform.selenium.ManageAlert;
-import org.exoplatform.selenium.platform.PlatformBase;
 import org.exoplatform.selenium.platform.PlatformPermission;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-public class AnswerCategoryManagement extends PlatformBase {
+public class AnswerCategoryManagement extends AnswerLocator {
 	AnswerHomePage aHome;
 	QuestionManagement qMang;
 	ManageAlert alert;
 	Button button;
 	PlatformPermission plfPerm;
-	
-	//Action of category from action bar
-	public By ELEMENT_CATEGORY_EDIT_BUTTON=By.xpath("//*[@class='uiIconEditCategory']");
-	public By ELEMENT_CATEGORY_ADD_BUTTON=By.xpath("//*[@class='uiIconAddCategory']");
-	public By ELEMENT_CATEGORY_IMPORT_BUTTON=By.xpath("//*[@class='uiIconImport']");
-	public By ELEMENT_CATEGORY_EXPORT_BUTTON=By.xpath("//*[@class='uiIconExport']");
-	public By ELEMENT_CATEGORY_DELETE_BUTTON=By.xpath("//*[@class='uiIconDeleteCategory']");
-
-	//Action of category from right click
-	public By ELEMENT_CATEGORY_RIGHT_EDIT_BUTTON=By.xpath("//*[contains(@class,'faqCategory oncontextmenu') and contains(@style,'display: block')]//*[@class='uiIconLightGray uiIconEditCategory']");
-	public By ELEMENT_CATEGORY_RIGHT_ADD_BUTTON=By.xpath("//*[contains(@class,'faqCategory oncontextmenu') and contains(@style,'display: block')]//*[@class='uiIconLightGray uiIconAddCategory']");
-	public By ELEMENT_CATEGORY_RIGHT_IMPORT_BUTTON=By.xpath("//*[contains(@class,'faqCategory oncontextmenu') and contains(@style,'display: block')]//*[contains(@class,'faqCategory oncontextmenu') and not (contains(@style,'display: block'))]//*[@class='uiIconLightGray uiIconImport']");
-	public By ELEMENT_CATEGORY_RIGHT_EXPORT_BUTTON=By.xpath("//*[contains(@class,'faqCategory oncontextmenu') and contains(@style,'display: block')]//*[@class='uiIconLightGray uiIconExport']");
-	public By ELEMENT_CATEGORY_RIGHT_DELETE_BUTTON=By.xpath("//*[contains(@class,'faqCategory oncontextmenu') and contains(@style,'display: block')]//*[@class='uiIconLightGray uiIconDeleteCategory']");
-	public By ELEMENT_CATEGORY_RIGHT_MOVE_BUTTON=By.xpath("//*[contains(@class,'faqCategory oncontextmenu') and contains(@style,'display: block')]//*[@class='uiIconLightGray uiIconMoveCategory']");
-	public By ELEMENT_CATEGORY_RIGHT_WATCH_BUTTON=By.xpath("//*[contains(@class,'faqCategory oncontextmenu') and contains(@style,'display: block')]//*[@class='uiIconLightGray uiIconWatch']");
-	public By ELEMENT_CATEGORY_WATCH_OK_BUTTON=By.xpath("//*[contains(text(),'OK') and contains(@onclick,'answers')]");
-	public By ELEMENT_CATEGORY_RIGHT_UNWATCH_BUTTON=By.xpath("//*[contains(@class,'faqCategory oncontextmenu') and contains(@style,'display: block')]//*[@class='uiIconLightGray uiIconUnWatch']");
-	public By ELEMENT_CATEGORY_RIGHT_RSS_BUTTON=By.xpath("//*[contains(@class,'faqCategory oncontextmenu') and contains(@style,'display: block')]//*[@class='uiIconRss uiIconLightGray']");
-	public By ELEMENT_CATEGORY_RIGHT_SUBMIT_QUESTION_BUTTON=By.xpath("//*[contains(@class,'faqCategory oncontextmenu') and contains(@style,'display: block')]//*[@class='uiIconAnsLightGray uiIconAnsAddNewQuestion']");
-
-	//Category list
-	public String ELEMENT_CATEGORY_LIST_ITEM="//*[contains(@class,'faqCategory oncontextmenu')]//*[contains(.,'$category')]";
-	public By ELEMENT_CATEGORY_UP_LEVEL=By.xpath("//*[@class='uiIconUpLevel uiIconLightGray']");
-
-	//Edit category form
-	public By ELEMENT_CATEGORY_EDIT_FORM=By.id("EditCategoryForm");
-
-	//Add category form
-	public By ELEMENT_CATEGORY_ADD_FORM=By.id("SubCategoryForm");
-	public By ELEMENT_CATEGORY_ADD_CATEGORY_INPUT=By.id("eventCategoryName");
-	public By ELEMENT_CATEGORY_ADD_ORDER_INPUT=By.id("index");
-	public By ELEMENT_CATEGORY_ADD_DESCRIPTION_INPUT=By.id("description");
-	public By ELEMENT_CATEGORY_ADD_MOD_QUES_CHECKBOX=By.id("moderatequestions");
-	public By ELEMENT_CATEGORY_ADD_MOD_VIEW_CHECKBOX=By.id("ViewAuthorInfor");
-	public By ELEMENT_CATEGORY_ADD_MOD_ANS_CHECKBOX=By.id("moderateAnswers");	
-	public By ELEMENT_CATEGORY_ADD_FORM_SAVE_BUTTON=By.xpath("//*[@id='UICategoryForm']//*[text()='Save']");
-	public By ELEMENT_CATEGORY_ADD_FORM_CANCEL_BUTTON=By.xpath("//*[@id='UICategoryForm']//*[text()='Save']");
-
-	//Export category form
-	public By ELEMENT_CATEGORY_EXPORT_FORM=By.id("FAQExportForm");
-	public final By ELEMENT_FILE_NAME_EXPORT = By.id("FileName");
-
-	//Import category form
-	public By ELEMENT_CATEGORY_IMPORT_FORM=By.id("FAQImportForm");
-	public By ELEMENT_IMPORT_CATEGORY_INPUT = By.name("file");
-	public String ELEMENT_ATTACHMENT_FORM_FILE_NAME = "//*[text()='$fileName']";
-	public String ELEMENT_EVENT_ATTACHMENT = "//*[@id='UIEventForm']/..//a[@data-original-title='${file}']";
-	public By ELEMENT_ATTACHMENT_SAVE_BUTTON = By.xpath("//*[@id='FAQImportForm']//*[text()='Save']");
-	public String ELEMENT_IMPORT_SUCCESS_MESSAGE = "The file has been imported";
-	public By ELEMENT_CATEGORY_OK_BUTTON=By.xpath("//*[contains(@class,'UIPopupWindow')]//a[text()='OK']");
-
-	//Delete category
-	public By ELEMENT_CATEGORY_DELETE_CONFIRM_POPUP=By.id("UIForumPopupConfirmation");
-	public String ELEMENT_CATEGORY_DELETE_CONFIRM_MSG="Are you sure you want to delete this category ?";
-	public By ELEMENT_CATEGORY_DELETE_CONFIRM=By.xpath("//*[@id='UIForumPopupConfirmation']//*[contains(@class, 'confirmationIcon')]");
-	public By ELEMENT_CATEGORY_DELETE_OK_BUTTON=By.xpath("//*[@id='UIForumPopupConfirmation']//*[text()='OK']");
-	public By ELEMENT_CATEGORY_DELETE_CANCEL_BUTTON=By.xpath("//*[@id='UIForumPopupConfirmation']//*[text()='Cancel']");
-
-	//Move category
-	public By ELEMENT_CATEGORY_MOVE_FORM=By.id("MoveCategoryForm");
-	public String ELEMENT_CATEGORY_MOVE_TARGET_ITEM="//*[@class='uiIconCategory uiIconLightGray']/../..//*[contains(.,'$category')]";
-
-	//Permission tab
-	public By ELEMENT_CATEGORY_EDIT_PERM_TAB = By.xpath("//*[contains(@data-target,'PermissionTab')]");
-	public final String ELEMENT_MANAGE_QUESTION_PERM_RESTRICTED = "//*[contains(.,'$group')]/../td[2]/*[@class='uiCheckbox']/input[@type='checkbox']";
-	public final String ELEMENT_MANAGE_QUESTION_PERM_MODERATOR = "//*[contains(.,'$group')]/../td[3]/*[@class='uiCheckbox']/input[@type='checkbox']";
-	public final By ELEMENT_SELECT_MEMBERSHIP_ICON = By.xpath("//*[@class='uiIconMembership uiIconLightGray']");
-	public final String ELEMENT_SELECT_RIGHT_PARENT_GROUP = "//*[contains(@id,'UIMemberShipSelector')]//a[contains(.,'$group')]";
-	public final By ELEMENT_SELECT_MEMBERSHIP_POPUP = By.xpath("//*[contains(@id,'UIPopupWindow')]");
-	
-	//Permission
-	public By ELEMENT_CATEGORY_TAB_PERMISSIONS = By.xpath("//*[contains(@data-toggle,'tab')][contains(.,'Permissions')]");
-	public By ELEMENT_CATEGORY_USER_ICON_SELECTOR = By.xpath("//*[contains(@class,'uiIconUser')]");
-	public String ELEMENT_CATEGORY_LIST_USER = ".//*[@id='UIListUsers']/*[contains(.,'$user')]";
-	/**
-	 * constructor
-	 * @param dr
-	 */
 	public AnswerCategoryManagement(WebDriver dr){
 		this.driver=dr;
 		aHome = new AnswerHomePage(dr);
-		alert = new ManageAlert(driver);
-		button = new Button(driver);
-		qMang = new QuestionManagement(driver);
-		plfPerm =  new PlatformPermission(driver);
+		alert = new ManageAlert(dr);
+		button = new Button(dr);
+		qMang = new QuestionManagement(dr);
+		plfPerm =  new PlatformPermission(dr);
 	}
 	
 	/**

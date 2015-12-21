@@ -32,7 +32,6 @@ public class SOC_Notification_Email_Like_Activity extends SOC_TestConfig3{
 		createNewUser(1);
 		
 		info("User A login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		Utils.pause(3000);
 		
@@ -65,7 +64,6 @@ public class SOC_Notification_Email_Like_Activity extends SOC_TestConfig3{
 		createNewUser(2);
 		
 		info("User A login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		Utils.pause(3000);
 		
@@ -100,7 +98,6 @@ public class SOC_Notification_Email_Like_Activity extends SOC_TestConfig3{
 		hpAct.checkActivity(activity);
 		
 		info("User B login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(1), password);
 		Utils.pause(3000);
 		
@@ -124,7 +121,6 @@ public class SOC_Notification_Email_Like_Activity extends SOC_TestConfig3{
 		hpAct.likeActivity(activity);
 		
 		info("Log in with User A");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		
 		String parentWindow = driver.getWindowHandle();
@@ -152,6 +148,8 @@ public class SOC_Notification_Email_Like_Activity extends SOC_TestConfig3{
 		emailNot.getAllChildWindows();
 		emailNot.verifyFormatEmailNotifcation(emailTitle,firstName, fullName, emailContent,activity);
 		emailNot.closeChildBrowsers(parentWindow);
+		if(arrayUser.size()>0)
+			deleteUsers(arrayUser);
  	}
 	
 	/**
@@ -168,7 +166,6 @@ public class SOC_Notification_Email_Like_Activity extends SOC_TestConfig3{
 		createNewUser(2);
 		
 		info("User A login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		Utils.pause(3000);
 		
@@ -204,7 +201,6 @@ public class SOC_Notification_Email_Like_Activity extends SOC_TestConfig3{
 		hpAct.checkActivity(activity);
 		
 		info("User B login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(1), password);
 		Utils.pause(3000);
 		
@@ -230,7 +226,6 @@ public class SOC_Notification_Email_Like_Activity extends SOC_TestConfig3{
 		hpAct.likeActivity(activity);
 		
 		info("Log in with User A");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		
 		String parentWindow = driver.getWindowHandle();
@@ -254,6 +249,8 @@ public class SOC_Notification_Email_Like_Activity extends SOC_TestConfig3{
 		emailNot.goToDetailEmailNoti(titleEmail, fullName,"");
 		emailNot.getAllChildWindows();
         emailNot.closeChildBrowsers(parentWindow);
+        if(arrayUser.size()>0)
+			deleteUsers(arrayUser);
  	}
 	
 	/**
@@ -278,7 +275,6 @@ public class SOC_Notification_Email_Like_Activity extends SOC_TestConfig3{
 		createNewUser(1);
 		
 		info("User A login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		Utils.pause(3000);
 		
@@ -500,7 +496,6 @@ public class SOC_Notification_Email_Like_Activity extends SOC_TestConfig3{
 		createNewUser(1);
 		
 		info("User A login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		Utils.pause(3000);
 		
@@ -532,7 +527,6 @@ public class SOC_Notification_Email_Like_Activity extends SOC_TestConfig3{
 		createNewUser(2);
 		
 		info("User A login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		Utils.pause(3000);
 		
@@ -567,7 +561,6 @@ public class SOC_Notification_Email_Like_Activity extends SOC_TestConfig3{
 		hpAct.checkActivity(activity);
 		
 		info("User B login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(1), password);
 		Utils.pause(3000);
 		
@@ -590,7 +583,6 @@ public class SOC_Notification_Email_Like_Activity extends SOC_TestConfig3{
 		hpAct.likeActivity(activity);
 		
 		info("Log in with User A");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		
 		String parentWindow = driver.getWindowHandle();
@@ -611,6 +603,8 @@ public class SOC_Notification_Email_Like_Activity extends SOC_TestConfig3{
 		emailNot.getAllChildWindows();
 		emailNot.verifyPresentEmailActivityNotifications(titleEmail,fullName,"");
 		emailNot.closeChildBrowsers(parentWindow);
+		if(arrayUser.size()>0)
+			deleteUsers(arrayUser);
  	}
 	
 	/**
@@ -747,7 +741,6 @@ For example:
 		createNewUser(2);
 		
 		info("User A login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		Utils.pause(3000);
 		
@@ -783,7 +776,6 @@ For example:
 		hpAct.checkActivity(activity);
 		
 		info("User B login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(1), password);
 		Utils.pause(3000);
 		
@@ -854,7 +846,6 @@ For example:
 		createNewUser(2);
 		
 		info("User A login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		Utils.pause(3000);
 		
@@ -890,7 +881,6 @@ For example:
 		hpAct.checkActivity(activity);
 		
 		info("User B login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(1), password);
 		Utils.pause(3000);
 		
@@ -915,7 +905,6 @@ For example:
 		hpAct.likeActivity(activity);
 		
 		info("Log in with User A");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		
 		String parentWindow = driver.getWindowHandle();
@@ -945,5 +934,7 @@ For example:
 		notAct.checkFormatDetailActivity(false,activity);
 		notAct.checkLikeInActivityViewer("1");
         emailNot.closeChildBrowsers(parentWindow);
+        if(arrayUser.size()>0)
+			deleteUsers(arrayUser);
  	}
 }

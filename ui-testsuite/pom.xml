@@ -26,7 +26,7 @@
 			<version>${project.version}</version>
 		</dependency>
 	</dependencies>
-
+    <!-- Cloud -->
 	<profiles>
 		<profile>
 			<id>cloud-user</id>
@@ -34,6 +34,7 @@
 				<testSuite>cloud-data.xml</testSuite>
 			</properties>
 		</profile>
+		<!-- Answer sniff -->
 		<profile>
 			<id>answer-sniff-part1</id>
 			<properties>
@@ -46,6 +47,7 @@
 				<testSuite>answer-sniff-part2.xml</testSuite>
 			</properties>
 		</profile>
+		<!-- Calendar sniff -->
 		<profile>
 			<id>calendar-sniff-part1</id>
 			<properties>
@@ -70,30 +72,8 @@
 				<testSuite>calendar-sniff-part4.xml</testSuite>
 			</properties>
 		</profile>
-		<profile>
-			<id>calendar-sniff-part1</id>
-			<properties>
-				<testSuite>calendar-sniff-part1.xml</testSuite>
-			</properties>
-		</profile>
-		<profile>
-			<id>calendar-sniff-part2</id>
-			<properties>
-				<testSuite>calendar-sniff-part2.xml</testSuite>
-			</properties>
-		</profile>
-		<profile>
-			<id>calendar-sniff-part3</id>
-			<properties>
-				<testSuite>calendar-sniff-part3.xml</testSuite>
-			</properties>
-		</profile>
-		<profile>
-			<id>calendar-sniff-part4</id>
-			<properties>
-				<testSuite>calendar-sniff-part4.xml</testSuite>
-			</properties>
-		</profile>
+		
+		<!-- Calendar functional-->
 		<profile>
 			<id>calendar-func-part1</id>
 			<properties>
@@ -120,54 +100,6 @@
 		</profile>
 		<profile>
 			<id>calendar-func-part5</id>
-			<properties>
-				<testSuite>cal-func-part05.xml</testSuite>
-			</properties>
-		</profile>
-		<profile>
-			<id>calendar-func-part6</id>
-			<properties>
-				<testSuite>cal-func-part06.xml</testSuite>
-			</properties>
-		</profile>
-		<profile>
-			<id>calendar-func-part7</id>
-			<properties>
-				<testSuite>cal-func-part07.xml</testSuite>
-			</properties>
-		</profile>
-		<profile>
-			<id>calendar-func-part8</id>
-			<properties>
-				<testSuite>cal-func-part08.xml</testSuite>
-			</properties>
-		</profile>
-		<profile>
-			<id>calendar-func-part9</id>
-			<properties>
-				<testSuite>cal-func-part09.xml</testSuite>
-			</properties>
-		</profile>
-		<profile>
-			<id>calendar-func-part10</id>
-			<properties>
-				<testSuite>cal-func-part10.xml</testSuite>
-			</properties>
-		</profile>
-		<profile>
-			<id>calendar-func-part11</id>
-			<properties>
-				<testSuite>cal-func-part11.xml</testSuite>
-			</properties>
-		</profile>
-		<profile>
-			<id>calendar-func-part12</id>
-			<properties>
-				<testSuite>cal-func-part12.xml</testSuite>
-			</properties>
-		</profile>
-		<profile>
-			<id>calendar-func-part13</id>
 			<properties>
 				<testSuite>cal-func-part05.xml</testSuite>
 			</properties>
@@ -244,6 +176,8 @@
 				<testSuite>cal-func-part17.xml</testSuite>
 			</properties>
 		</profile>
+		
+		<!-- wiki sniff -->
 		<profile>
 			<id>wiki-sniff-part1</id>
 			<properties>
@@ -268,6 +202,8 @@
 				<testSuite>wiki-sniff-part04.xml</testSuite>
 			</properties>
 		</profile>
+		
+		<!-- wiki funcational -->
 		<profile>
 			<id>wiki-func-part1</id>
 			<properties>
@@ -364,6 +300,8 @@
 				<testSuite>wiki-func-part16.xml</testSuite>
 			</properties>
 		</profile>
+		
+		<!-- Social sniff -->
 		<profile>
 			<id>social-sniff-part1</id>
 			<properties>
@@ -400,6 +338,8 @@
 				<testSuite>social-sniff-part06.xml</testSuite>
 			</properties>
 		</profile>
+		
+		<!-- Social functional-->
 		<profile>
 			<id>social-func-part1</id>
 			<properties>
@@ -556,6 +496,8 @@
 				<testSuite>social-func-part26.xml</testSuite>
 			</properties>
 		</profile>
+		
+		<!-- Gatein sniff -->
 		<profile>
 			<id>gatein-sniff-part1</id>
 			<properties>
@@ -580,6 +522,8 @@
 				<testSuite>gatein-sniff-part4.xml</testSuite>
 			</properties>
 		</profile>
+		
+		<!-- ECMS sniff -->
 		<profile>
 			<id>ecms-sniff-part1</id>
 			<properties>
@@ -616,6 +560,8 @@
 				<testSuite>ecms-sniff-part6.xml</testSuite>
 			</properties>
 		</profile>
+		
+		<!-- Forum  sniff -->
 		<profile>
 			<id>forum-sniff-part1</id>
 			<properties>
@@ -628,6 +574,8 @@
 				<testSuite>forum-sniff-part2.xml</testSuite>
 			</properties>
 		</profile>
+		
+		<!-- Wildcard funcational -->
 		<profile>
 			<id>wildcard-func-part1</id>
 			<properties>
@@ -646,6 +594,8 @@
 				<testSuite>wildcard-func-part3.xml</testSuite>
 			</properties>
 		</profile>
+		
+		<!-- Share In Content funcational -->
 		<profile>
 			<id>shareInContent-func-part1</id>
 			<properties>
@@ -664,12 +614,8 @@
 				<testSuite>shareInContent-func-part3.xml</testSuite>
 			</properties>
 		</profile>
-		<profile>
-			<id>ecms-func-ShareInCE</id>
-			<properties>
-				<testSuite>ecms-func-ShareInCE.xml</testSuite>
-			</properties>
-		</profile>
+		
+		<!-- Disable user funcational -->
         <profile>
 			<id>disableUser-func-part1</id>
 			<properties>
@@ -688,6 +634,8 @@
 				<testSuite>disableUser-func-part3.xml</testSuite>
 			</properties>
 		</profile>
+		
+		<!-- OAuth funcational -->
 		<profile>
 			<id>OAuth-func-part1</id>
 			<properties>
@@ -712,12 +660,8 @@
 				<testSuite>OAuth-func-part04.xml</testSuite>
 			</properties>
 		</profile>
-		<profile>
-			<id>forum-sniff-part2</id>
-			<properties>
-				<testSuite>forum-sniff-part2.xml</testSuite>
-			</properties>
-		</profile>
+		
+		<!-- PLF sniff funcational -->
 		<profile>
 			<id>plf-sniff-part1</id>
 			<properties>
@@ -736,6 +680,8 @@
 				<testSuite>plf-sniff-part3.xml</testSuite>
 			</properties>
 		</profile>
+		
+		<!-- Testing failed-->
 		<profile>
 			<id>testng-failed</id>
 			<properties>

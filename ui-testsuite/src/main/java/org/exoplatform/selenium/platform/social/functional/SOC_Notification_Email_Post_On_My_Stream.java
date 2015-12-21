@@ -33,7 +33,6 @@ import org.testng.annotations.*;
 		createNewUser(1);
 		
 		info("User A login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		Utils.pause(3000);
 		
@@ -75,7 +74,6 @@ import org.testng.annotations.*;
 		createNewUser(1);
 		
 		info("User A login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		Utils.pause(3000);
 		
@@ -302,7 +300,6 @@ import org.testng.annotations.*;
 		createNewUser(1);
 		
 		info("User A login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		Utils.pause(3000);
 		
@@ -347,7 +344,6 @@ import org.testng.annotations.*;
 		createNewUser(2);
 		
 		info("User A login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		Utils.pause(3000);
 		
@@ -367,7 +363,6 @@ import org.testng.annotations.*;
 		connMag.connectToAUser(arrayUser.get(1));
 		
 		info("User B login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(1), password);
 		Utils.pause(3000);
 		
@@ -397,7 +392,6 @@ import org.testng.annotations.*;
 			See the post below:[Activity]Reply | View the full discussion*/ 
 		
 		info("Log in with User A");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		
 		String parentWindow = driver.getWindowHandle();
@@ -417,6 +411,8 @@ import org.testng.annotations.*;
 		emailNot.getAllChildWindows();
 		emailNot.verifyFormatEmailNotifcation(emailTitle,firstName, fullName, emailContent,activity);
 		emailNot.closeChildBrowsers(parentWindow);
+		if(arrayUser.size()>0)
+			deleteUsers(arrayUser);
 
  	}
 
@@ -445,7 +441,6 @@ import org.testng.annotations.*;
 		createNewUser(2);
 		
 		info("User A login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		Utils.pause(3000);
 		
@@ -465,7 +460,6 @@ import org.testng.annotations.*;
 		connMag.connectToAUser(arrayUser.get(1));
 		
 		info("User B login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(1), password);
 		Utils.pause(3000);
 		
@@ -492,7 +486,6 @@ import org.testng.annotations.*;
 			- Notification mail subject is:
 			UserA has posted on your activity stream: $ACTIVITY_TITLE*/ 
 		info("Log in with User A");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		
 		String parentWindow = driver.getWindowHandle();
@@ -506,6 +499,8 @@ import org.testng.annotations.*;
 		emailNot.getAllChildWindows();
 		emailNot.verifyPresentEmailActivityNotifications(titleEmail,fullName,activity);
 		emailNot.closeChildBrowsers(parentWindow);
+		if(arrayUser.size()>0)
+			deleteUsers(arrayUser);
 
  	}
 
@@ -571,7 +566,6 @@ import org.testng.annotations.*;
 		createNewUser(2);
 		
 		info("User A login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		Utils.pause(3000);
 		
@@ -591,7 +585,6 @@ import org.testng.annotations.*;
 		connMag.connectToAUser(arrayUser.get(1));
 		
 		info("User B login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(1), password);
 		Utils.pause(3000);
 		
@@ -617,7 +610,6 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- Notification mail is sent to UserB about new post on his stream*/ 
 		info("Log in with User A");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		
 		String parentWindow = driver.getWindowHandle();
@@ -631,6 +623,8 @@ import org.testng.annotations.*;
 		emailNot.getAllChildWindows();
 		emailNot.verifyPresentEmailActivityNotifications(titleEmail,fullName,activity);
 		emailNot.closeChildBrowsers(parentWindow);
+		if(arrayUser.size()>0)
+			deleteUsers(arrayUser);
 
  	}
 
@@ -695,7 +689,6 @@ import org.testng.annotations.*;
 		createNewUser(2);
 		
 		info("User A login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		Utils.pause(3000);
 		
@@ -715,7 +708,6 @@ import org.testng.annotations.*;
 		connMag.connectToAUser(arrayUser.get(1));
 		
 		info("User B login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(1), password);
 		Utils.pause(3000);
 		
@@ -742,7 +734,6 @@ import org.testng.annotations.*;
 			- Replylink will take the user to the portal and displays 
 			the activity stream on the position of the activity with the comment box opened, ready for reply*/ 
 		info("Log in with User A");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		
 		String parentWindow = driver.getWindowHandle();
@@ -761,6 +752,8 @@ import org.testng.annotations.*;
 		emailNot.getAllChildWindows();
 		notAct.checkFormatDetailActivity(true,activity);
         emailNot.closeChildBrowsers(parentWindow);
+        if(arrayUser.size()>0)
+			deleteUsers(arrayUser);
 
  	}
 
@@ -789,7 +782,6 @@ import org.testng.annotations.*;
 		createNewUser(2);
 		
 		info("User A login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		Utils.pause(3000);
 		
@@ -809,7 +801,6 @@ import org.testng.annotations.*;
 		connMag.connectToAUser(arrayUser.get(1));
 		
 		info("User B login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(1), password);
 		Utils.pause(3000);
 		
@@ -836,7 +827,6 @@ import org.testng.annotations.*;
 			- View full discussion link will take the user to the portal 
 			and displays the activity stream on the position of the activity with all comments expanded.*/
 		info("Log in with User A");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		
 		String parentWindow = driver.getWindowHandle();
@@ -855,6 +845,8 @@ import org.testng.annotations.*;
 		emailNot.getAllChildWindows();
 		notAct.checkFormatDetailActivity(false,activity);
         emailNot.closeChildBrowsers(parentWindow);
+        if(arrayUser.size()>0)
+			deleteUsers(arrayUser);
 
  	}
 

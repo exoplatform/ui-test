@@ -2,6 +2,7 @@ package org.exoplatform.selenium.platform.social.functional;
 
 import static org.exoplatform.selenium.TestLogger.info;
 
+import org.exoplatform.selenium.Utils;
 import org.exoplatform.selenium.platform.social.MyNotificationsSetting.myNotiType;
 import org.exoplatform.selenium.platform.social.NotificationsAdminSeting.notificationType;
 import org.testng.annotations.*;
@@ -29,6 +30,13 @@ public class SOC_Notification_Notification_Settings extends SOC_TestConfig{
 			- Notification Settings page is appeared.
 			- The entry is placed in the menu after My Dashboard.
 			-It opens the Notifications Settings page in the user navigation.*/ 
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		magAc.signIn(username1,password);
+		Utils.pause(3000);
 		navTool.goToMyNotifications();
 		waitForAndGetElement(myNotifPage.ELEMENT_MY_NOTIFICATION_SETTING_FORM);
 	}
@@ -51,6 +59,13 @@ public class SOC_Notification_Notification_Settings extends SOC_TestConfig{
 
 		 *Expected Outcome: 
 			- Notification Settings page is appeared*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		magAc.signIn(username1,password);
+		Utils.pause(3000);
 		navTool.goToMyNotifications();
 		waitForAndGetElement(myNotifPage.ELEMENT_MY_NOTIFICATION_SETTING_FORM);
 
@@ -92,12 +107,15 @@ public class SOC_Notification_Notification_Settings extends SOC_TestConfig{
 		info("Test 3: Check settings in notification table are context=user, scope=global.");
 		/*Create data test*/
 		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
-		String password1 = txData.getContentByArrayTypeRandom(1) + getRandomNumber();
-		String email1 = txData.getContentByArrayTypeRandom(1) + getRandomNumber() + mailSuffixData.getMailSuffixRandom();
-
+		String email1 = username1+"@gmail.com";
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+"@gmail.com";
 		info("Add new user");
 		navTool.goToAddUser();
-		addUserPage.addUser(username1, password1, email1, username1, username1);
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		magAc.signIn(username1,password);
+		Utils.pause(3000);
 		/*Step Number: 1
 		 *Step Name: Step 1: Access notification settings
 		 *Step Description: 
@@ -108,7 +126,6 @@ public class SOC_Notification_Notification_Settings extends SOC_TestConfig{
 		 *Expected Outcome: 
 			- Notification Settings page is appeared*/
 
-		magAc.signIn(username1, password1);
 		navTool.goToMyNotifications();
 		myNotifPage.verifyTilePage();
 
@@ -132,7 +149,7 @@ public class SOC_Notification_Notification_Settings extends SOC_TestConfig{
 
 		 *Expected Outcome: 
 			- The change at step 2 is not saved in notification settings of user2*/ 
-		magAc.signIn(DATA_USER1, DATA_PASS);
+		magAc.signIn(username2,password);
 		navTool.goToMyNotifications();
 		myNotifPage.verifyTilePage();
 		myNotifPage.verifyNotificationTypeDisable(notificationType.NewUser_intranet);
@@ -150,12 +167,12 @@ public class SOC_Notification_Notification_Settings extends SOC_TestConfig{
 		info("Test 4: Check [Reset] button");
 		/*Create data test*/
 		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
-		String password1 = txData.getContentByArrayTypeRandom(1) + getRandomNumber();
-		String email1 = txData.getContentByArrayTypeRandom(1) + getRandomNumber() + mailSuffixData.getMailSuffixRandom();
-
+		String email1 = username1+"@gmail.com";
 		info("Add new user");
 		navTool.goToAddUser();
-		addUserPage.addUser(username1, password1, email1, username1, username1);
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		magAc.signIn(username1,password);
+		Utils.pause(3000);
 
 		/*Step Number: 1
 		 *Step Name: Step 1: Access notification settings
@@ -166,7 +183,6 @@ public class SOC_Notification_Notification_Settings extends SOC_TestConfig{
 
 		 *Expected Outcome: 
 			- Notification Settings page is appeared*/
-		magAc.signIn(username1, password1);
 		navTool.goToMyNotifications();
 		myNotifPage.verifyTilePage();
 		myNotifPage.enableNotification(myNotiType.NewUser_intranet);

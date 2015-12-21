@@ -30,11 +30,6 @@ public class Calendar_Task extends PlatformBase {
 
 	@BeforeMethod
 	public void setUpBeforeMethod() throws Exception{
-		magAc.signIn(DATA_USER1, DATA_PASS);
-	}
-
-	@BeforeClass
-	public void setUpBeforeTest() throws Exception{
 		initSeleniumTest();
 		getDefaultUserPass(userDataFilePath,defaultSheet,isUseFile,jdbcDriver,dbUrl,user,pass,sqlUser);
 		driver.get(baseUrl);
@@ -49,15 +44,12 @@ public class Calendar_Task extends PlatformBase {
 		userData.setUserData(userDataFilePath,defaultSheet,isUseFile,jdbcDriver,dbUrl,user,pass,sqlUser);
 		txData.setContentData(texboxFilePath,defaultSheet,isUseFile,jdbcDriver,dbUrl,user,pass,sqlContent);
 		fData.setAttachFileData(attachmentFilePath,defaultSheet,isUseFile,jdbcDriver,dbUrl,user,pass,sqlAttach);
+		magAc.signIn(DATA_USER1, DATA_PASS);
 	}
+
 
 	@AfterMethod
 	public void afterMethod(){
-		magAc.signOut();
-	}
-
-	@AfterClass
-	public void afterTest(){
 		driver.manage().deleteAllCookies();
 		driver.quit();
 	}

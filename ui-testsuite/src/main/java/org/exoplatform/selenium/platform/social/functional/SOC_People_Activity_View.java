@@ -11,7 +11,6 @@ import org.testng.annotations.*;
 
 
 public class SOC_People_Activity_View extends SOC_TestConfig{
-	String password;
 	ArrayList<String> arrayUser;
 	
 	/**
@@ -25,7 +24,6 @@ public class SOC_People_Activity_View extends SOC_TestConfig{
 		for(int i=0;i<number;i++){
 			info("Add new a user");
 			String user=getRandomString();
-			password ="123456" ;
 			String email=user+"@gmail.com";
 			addUserPage.addUser(user,password, email,user,user);
 			info("Add users to user's array");
@@ -83,7 +81,7 @@ public class SOC_People_Activity_View extends SOC_TestConfig{
 		hp.goToFriendProfilePage(arrayUser.get(0));
 		myProfile.goToActivity();
 		waitForElementNotPresent(hpAct.ELEMENT_ACTIVITY_TITLE.replace("${text}",textDes).replace("${file}",link));
-		waitForElementNotPresent(hpAct.ELEMENT_COMPOSER_INPUT_FILED,5000);
+		waitForElementNotPresent(hpAct.ELEMENT_COMPOSER_INPUT_FILED,5000,1);
 	}
 
 	/**
@@ -101,7 +99,6 @@ public class SOC_People_Activity_View extends SOC_TestConfig{
 		createNewUser(3);
 		
 		info("User A login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		Utils.pause(3000);
 		
@@ -114,7 +111,6 @@ public class SOC_People_Activity_View extends SOC_TestConfig{
 		connMag.connectToAUser(arrayUser.get(2));
 		
 		info("User B login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(1), password);
 		Utils.pause(3000);
 		
@@ -123,7 +119,6 @@ public class SOC_People_Activity_View extends SOC_TestConfig{
 		connMag.acceptAConnection(arrayUser.get(0));
 		
 		info("User C login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(2), password);
 		Utils.pause(3000);
 		
@@ -158,7 +153,6 @@ public class SOC_People_Activity_View extends SOC_TestConfig{
 		 *Expected Outcome: 
 			The activity of user C "Hello user A from user B" is shown in Activities Stream of user A.*/
 		info("User A login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		Utils.pause(3000);
 		
@@ -176,7 +170,6 @@ public class SOC_People_Activity_View extends SOC_TestConfig{
 		 *Expected Outcome: 
 			The activity of user C "Hello user A from user C" is shown in Activities Stream of user A.*/ 
 		info("User B login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(1), password);
 		Utils.pause(3000);
 		
@@ -204,7 +197,6 @@ public class SOC_People_Activity_View extends SOC_TestConfig{
 		createNewUser(2);
 		
 		info("User A login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		Utils.pause(3000);
 		
@@ -213,7 +205,6 @@ public class SOC_People_Activity_View extends SOC_TestConfig{
 		connMag.connectToAUser(arrayUser.get(1));
 		
 		info("User B login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(1), password);
 		Utils.pause(3000);
 		
@@ -275,7 +266,6 @@ public class SOC_People_Activity_View extends SOC_TestConfig{
 		*Expected Outcome: 
 			- Shared activity at Step 1 is displayed on "All activities" stream of User A*/
 		info("User A login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		Utils.pause(3000);
 		
@@ -315,7 +305,6 @@ public class SOC_People_Activity_View extends SOC_TestConfig{
 		createNewUser(3);
 		
 		info("User A login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		Utils.pause(3000);
 		
@@ -328,7 +317,6 @@ public class SOC_People_Activity_View extends SOC_TestConfig{
 		connMag.connectToAUser(arrayUser.get(2));
 		
 		info("User B login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(1), password);
 		Utils.pause(3000);
 		
@@ -337,7 +325,6 @@ public class SOC_People_Activity_View extends SOC_TestConfig{
 		connMag.acceptAConnection(arrayUser.get(0));
 		
 		info("User C login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(2), password);
 		Utils.pause(3000);
 		
@@ -370,7 +357,6 @@ public class SOC_People_Activity_View extends SOC_TestConfig{
 		*Expected Outcome: 
 			- Shared activity at Step 1 is displayed on activity stream of User A*/
 		info("User A login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		Utils.pause(3000);
 		
@@ -387,7 +373,6 @@ public class SOC_People_Activity_View extends SOC_TestConfig{
 		*Expected Outcome: 
 			- User B CAN NOT see the shared activity at Step 1*/ 
 		info("User B login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(1), password);
 		Utils.pause(3000);
 		

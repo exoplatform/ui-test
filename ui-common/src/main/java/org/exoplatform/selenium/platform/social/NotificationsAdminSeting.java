@@ -5,7 +5,7 @@ import static org.exoplatform.selenium.TestLogger.info;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class NotificationsAdminSeting extends NotificationLocator {
+public class NotificationsAdminSeting extends SocialLocator {
 	
 	/**
 	 * constructor
@@ -490,6 +490,7 @@ public class NotificationsAdminSeting extends NotificationLocator {
 	 * @param address
 	 */
 	public void changeNotificationSender(String name,String address){
+		scrollToBottomPage(this.driver);
 		if(!name.isEmpty()){
 			info("Input name");
 			type(ELEMENT_ADMIN_NOTIFICATION_SENDER_NAME,name,true);

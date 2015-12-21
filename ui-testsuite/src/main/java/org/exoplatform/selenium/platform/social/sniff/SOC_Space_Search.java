@@ -16,6 +16,13 @@ public class SOC_Space_Search extends SOC_TestConfig_1 {
 	public  void test01_SearchSpace() {
 		info("Test 01: Search Space");
 		String space = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+ "@gmail.com";
+		
+		info("Add user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		magAc.signIn(username1, password);
 		/*Step Number: 1
 		 *Step Name: Step 1: Access the space page
 		 *Step Description: 
@@ -53,9 +60,6 @@ public class SOC_Space_Search extends SOC_TestConfig_1 {
         */ 
 		spaMg.searchByLetterList("C", space);
 		
-		info("Delete a Space");
-		hp.goToMySpaces();
-		spaMg.deleteSpace(space,false);
 	}
 	
 }

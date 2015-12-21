@@ -6,76 +6,11 @@ import java.util.Map;
 
 import org.exoplatform.selenium.ManageAlert;
 import org.exoplatform.selenium.Utils;
-import org.exoplatform.selenium.platform.PlatformBase;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-/**
- * Path: Administration-->Portal-->Sites
- */
-public class PortalManageSites extends PlatformBase {
-	
-	public final By ELEMENT_MANAGESITES_TITLE=By.xpath(".//*[@id='UIPortalNavigationPortlet']//h5[text()='Manage Sites']");
-	public final String ELEMENT_MANAGESITES_EDIT_NAVIGATION_ICON=".//*[@class='managementBlock']//div[text()='${site}']/../..//*[@class='uiIconNavigation uiIconLightGray']";
 
-	public final String ELEMENT_MANAGESITES_EDIT_LAYOUT_ICON=".//*[@class='managementBlock']//div[text()='${site}']/../..//*[contains(@class,'uiIconEditLayout')]";
-	public final String ELEMENT_MANAGESITES_EDIT_CONFIG_ICON=".//*[@class='managementBlock']//div[text()='${site}']/../..//*[contains(@class,'uiIconEditPortalConfig')]";
+public class PortalManageSites extends GateinLocator {
 	
-	public final By ELEMENT_MANAGESITES_ADD_NEW_BTN=By.cssSelector("#UISiteManagement .btn");
-	public final By ELEMENT_MANAGESITES_EDIT_LAYOUT_SITE_CONFIG_BTN = By.cssSelector(".PageProfileIcon");
-	public final String ELEMENT_MANAGESITES_PORTAL_LABEL =".//*[contains(@class,'siteName')][contains(text(),'${portal}')]/..//*[contains(@class,'siteLabel')][contains(text(),'${label}')]";
-	public final String ELEMENT_MANAGESITES_PORTAL_DESC =".//*[contains(@class,'siteName')][contains(text(),'${portal}')]/..//*[contains(@class,'siteDescription')][contains(text(),'${desc}')]";
-
-	public final String ELEMENT_ADD_NAVIGATION_BUTTON = "//*[contains(text(),'Add Navigation')]";
-	public final By ELEMENT_NAVIGATION_MANAGEMENT_POPUP_TITLE=By.xpath(".//*[@class='PopupTitle popupTitle'][text()='Navigation Management']");
-
-	//Add new portal popup
-	public final By ELEMENT_ADD_NEW_PORTAL_POPUP_NAME=By.cssSelector("#name");
-	public final By ELEMENT_ADD_NEW_PORTAL_POPUP_LABEL=By.cssSelector("#label");
-	public final By ELEMENT_ADD_NEW_PORTAL_POPUP_DESC=By.cssSelector("#description");
-	public final By ELEMENT_ADD_NEW_PORTAL_POPUP_LOCALE=By.cssSelector("#PortalSetting-tab .selectbox[name~='locale']");
-	public final By ELEMENT_ADD_NEW_PORTAL_POPUP_SITE=By.cssSelector("#PortalSetting-tab .selectbox[name~='skin']");
-	public final By ELEMENT_ADD_NEW_PORTAL_POPUP_SAVE_BTN=By.xpath(".//*[@id='UIPortalForm']//button[text()='Save']");
-	public final By ELEMENT_ADD_NEW_PORTAL_POPUP_PUBLIC_PERMISSION=By.cssSelector("#publicMode");
-	public final By ELEMENT_ADD_NEW_PORTAL_POPUP_PERMISSION_TAB = By.xpath(".//*[contains(@data-target,'#PermissionSetting-tab')]");
-	public final By ELEMENT_ADD_NEW_PORTAL_POPUP_EDIT_PERMISSITION_SETTINGS= By.xpath(".//*[contains(text(),'Edit Permission Settings')]");
-	public final By ELEMENT_ADD_NEW_PORTAL_POPUP_SELECT_PERMISSION_BTN= By.xpath(".//*[contains(text(),'Select Permission')]");
-	
-	//Permission selector
-	public final String ELEMENT_PERMISSION_SELECTOR_POPUP_GROUP = ".//*[contains(@class,'uiIconNode')][contains(@title,'${group}')]";
-	public final String ELEMENT_PERMISSION_SELECTOR_POPUP_MEMEBRSHIP = ".//*[@id='PermissionSelector']//*[contains(@title,'${member}')]";
-
-	
-	// Add New Portal
-	public final String ELEMENT_ADD_NEW_PORTAL_LINK = ".//*[@id='UISiteManagement']//a[contains(text(),'Add New Site')]";
-	public final By ELEMENT_INPUT_NAME = By.id("name");
-	public final By ELEMENT_PORTAL_LABEL = By.id("label");
-	public final By ELEMENT_PORTAL_DESCRIPTION = By.id("description");
-	public final String ELEMENT_SELECT_LOCALE = "//*[@class='selectbox' and contains(@name,'locale')]";
-	public final String ELEMENT_SELECT_SKIN = "//*[@class='selectbox' and contains(@name,'skin')]";
-	
-	public final String ELEMENT_PROPERTIES_TAB = "//a[contains(text(),'Properties')]";
-	public final String ELEMENT_SELECT_SESSION_ALIVE = "//*[@class='selectbox' and contains(@name,'sessionAlive')]";
-	
-	public final String ELEMENT_PERMISSION_SETTING_TAB = "//a[@data-target='#PermissionSetting-tab']";
-	public final By ELEMENT_CHECKBOX_PUBLIC_MODE = By.id("publicMode");
-	public final By ELEMENT_ADD_PERMISSION_BUTTON = By.xpath("//*[contains(@class,'uiIconAddUser')]");
-	public final String ELEMENT_EDIT_PERMISSION_SETTING = "//*[@href='#TabContentUIPermissionSelector']";
-	public final String ELEMENT_PORTAL_TEMPLATE_TAB = "//a[contains(text(),'Portal Templates')]";
-	
-	public final String ELEMENT_SAVE_BUTTON = "//button[contains(text(),'Save')]";
-	
-	public final String ELEMENT_SELECT_ACCESS_GROUP_ITEM = "//a[contains(@title,'${group}')]/i";
-	public final String ELEMENT_SELECT_ACCESS_MEMBERSHIP_ITEM = "//a[contains(@title,'${membership}')]";
-	public final String ELEMENT_SELECTED_ACCESS_PERMISSION_MEMBERSHIP = ".//*[@id='PermissionGrid']//span[contains(text(),'${membership}')]";
-	public final String ELEMENT_SELECT_PERMISSION_BUTTON = "//a[@class='btn' and contains(text(),'Select Permission')]";
-	public final String ELEMENT_SELECT_EDIT_PERMISSION_MEMBERSHIP = ".//*[@id='PermissionSelector']//a[contains(.,'${membership}')]";	
-	public final By ELEMENT_POPUP_ADD_PORTAL = By.id("UIMaskWorkspace");
-	public final String ELEMENT_PORTAL_DELETE_ICON = "//*[contains(text(),'${portalName}')]/../..//i[@class='uiIconTrash uiIconLightGray']";
-	
-	public final String ELEMENT_NEW_PORTAL_ADD = "//*[@class='siteName' and text()='${portalName}']";
-	public final String ELEMENT_NEW_PORTAL_SWITCH = "//img[contains(@src, 'sites/${portalName}')]";
-	public final By ELEMENT_NEW_PORTAL_LOGOUT= By.xpath("//*[@id='AcmeWebSiteLogInLogOut']");
 	ManageAlert alert;
 	public PortalManageSites(WebDriver dr){
 		driver = dr;

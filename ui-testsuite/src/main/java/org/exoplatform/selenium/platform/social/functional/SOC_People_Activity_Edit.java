@@ -2,6 +2,7 @@ package org.exoplatform.selenium.platform.social.functional;
 
 import static org.exoplatform.selenium.TestLogger.info;
 
+import org.exoplatform.selenium.Utils;
 import org.testng.annotations.*;
 
 
@@ -27,6 +28,14 @@ public class SOC_People_Activity_Edit extends SOC_TestConfig{
 			- Select Activities page on User Toolbar portlet in the upper right corner of the screen
 		 *Expected Outcome: 
 			- User activities page is displayed. It focus on activity list*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		magAc.signIn(username1,password);
+		Utils.pause(3000);
+		
 		navTool.goToMyActivities();
 		String activity1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		hpAct.addActivity(activity1, "");

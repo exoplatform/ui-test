@@ -7,58 +7,9 @@ import org.exoplatform.selenium.ManageAlert;
 import org.exoplatform.selenium.Utils;
 import org.exoplatform.selenium.platform.HomePagePlatform;
 import org.exoplatform.selenium.platform.NavigationToolbar;
-import org.exoplatform.selenium.platform.PlatformBase;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class ApplicationRegistry extends PlatformBase {
-
-	
-	public final By ELEMENT_APPLICATION_REGISTRY_PORTLET=By.id("UIApplicationRegistryPortlet");
-	public final By ELEMENT_MANAGE_APPLICATION_BUTTON=By.xpath("//*[@class='uiIconManageApplication uiIconLightGray']");
-    public final By ELEMENT_APPLICATION_REGISTRY_ADD_CATEGORY_BTN=By.xpath(".//*[contains(@class,'uiIconManageCategory uiIconLightGray')]");
-    
-    public final String ELEMENT_SELECT_RIGHT_PARENT_GROUP = "//*[@title='$group']";
-    //Add category page
-    public final By ELEMENT_ADD_CATEGORY_NAME=By.id("name");
-    public final By ELEMENT_ADD_CATEGORY_DISPLAY_NAME=By.id("displayName");
-    public final By ELEMENT_ADD_CATEGORY_DESCRIPTION=By.id("description");
-    public final By ELEMENT_ADD_CATEGORY_SAVE_BTN=By.xpath(".//*[@id='UICategoryForm']//button[text()='Save']");
-    public final By ELEMENT_ADD_CATEGORY_CANCEL_BTN=By.xpath(".//*[@id='UICategoryForm']//button[text()='Cancel']");
-    public final By ELEMENT_ADD_CATEGORY_PERMISSION_TAB = By.xpath(".//*[contains(@data-target,'#categoryPermission-tab')]");
-    public final By ELEMENT_ADD_CATEGORY_PERMISSION_PUBLIC_CHECKBOX= By.xpath(".//*[@id='publicMode']");
-    public final By ELEMENT_ADD_CATEGORY_ADD_PERMISSION_BTN = By.xpath("//*[contains(text(),'Add Permission')]");
-    
-    public final String ELEMENT_EDIT_PORTLET_DELETE_PERMISSION_ICON = "//*[@id='PermissionGrid']//*[contains(@onclick,'$group')]/*[contains(@class,'uiIconDelete')]";
-    //Application registry page
-	public final By ELEMENT_SHOW_IMPORT_APPLICATION = By.id("showImport");
-	public final By ELEMENT_IMPORT_ALL_APPLICATION=By.xpath("//*[@class='uiIconImport uiIconLightGray']");
-	public final By ELEMENT_APPLICATION_GADGETBTN = By.cssSelector(".uiIconGadgets.uiIconLightGray");
-
-	//Left panel
-	public final String ELEMENT_LEFT_PANEL_ADD_APPLICATION_BTN=".//*[contains(@href,'#${category}')]/../..//*[@class='uiIconPlus uiIconLightGray']";
-	public final String ELEMENT_LEFT_PANEL_APPLICATION_NAME = ".//*[@id='${category}']//*[contains(@data-original-title,'${application}')]";
-	public final String ELEMENT_LEFT_PANEL_APPLICATION_DELETE_BTN =".//*[contains(@data-original-title,'${application}')]/..//*[contains(@class,'uiIconTrashMini uiIconLightGray')]";
-	public final String ELEMENT_LEFT_PANEL_APPLICATION_CATEGORY_TAB=".//*[@id='ApplicationRegistryCategory']//*[@href='#${category}']";
-	public final String ELEMENT_LEFT_PANEL_APPLICATION_CATEGORY_DELETE_BTN=".//*[@href='#${category}']/../..//*[contains(@class,'uiIconDelete uiIconLightGray')]";
-	public final String ELEMENT_LEFT_PANEL_APPLICATION_CATEGORY_EDIT_BTN=".//*[@href='#${category}']/../..//*[contains(@class,'uiIconEdit uiIconLightGray')]";
-	//Right panel Add Application
-	public final By ELEMENT_RIGHT_PANEL_ADD_APPLICATION_DISPLAY_FILED=By.id("displayName");
-	public final By ELEMENT_RIGHT_PANEL_ADD_APPLICATION_SAVE_BTN = By.xpath(".//*[@id='UIAddApplicationForm']//button[text()='Add']");
-	public final By ELEMENT_RIGHT_PANEL_ADD_APPLICATION_SELECTMENU=By.xpath(".//*[@id='UIAddApplicationForm']//*[@class='selectbox']");
-	public final String ELEMENT_RIGHT_PANEL_ADD_APPLICATION_RADIOBTN=".//*[contains(@id,'description')][text()='${des}']/../..//*[contains(@id,'label')][text()='${name}']/../..//input[@type='radio']";
-	public final String ELEMENT_RIGHT_PANEL_ADD_APPLICATION_NAME=".//*[contains(@id,'description')][text()='${des}']/../..//*[contains(@id,'label')][text()='${name}']";
-	
-	//paging control
-	public final String ELEMENT_PAGING_CONTROL_NUMBER = ".//*[@id='UIAddApplicationForm']//a[text()='${number}']";
-	public final By ELEMENT_PAGING_CONTROL_NEXT_PAGE_ENABLED=By.xpath(".//*[@data-original-title='Next Page' and @href='javascript:void(0);']");
-
-	//view detail a porlet
-	public final String ELEMENT_DETAIL_PORTLET_BREADCRUMB = ".//*[contains(@class,'breadcrumb')]//*[contains(text(),'${disName}')]";
-	public final String ELEMENT_DETAIL_PORTLET_DISPLAY_NAME = ".//strong[contains(@title,'${disName}')]";
-	public final String ELEMENT_DETAIL_PORTLET_APPLICATION_NAME =".//*[contains(@title,'${appName}')]";
-	public final String ELEMENT_DETAIL_PORTLET_DESCRIPTION = ".//span[contains(@title,'${des}')]";
-	public final By ELEMENT_PERMISSION_FORM = By.cssSelector(".UIPermissionForm");
+public class ApplicationRegistry extends GateinLocator {
 	
 	NavigationToolbar navTool;
 	PageEditor pagEditor;

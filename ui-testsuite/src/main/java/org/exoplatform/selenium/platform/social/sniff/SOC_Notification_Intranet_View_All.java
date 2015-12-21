@@ -11,17 +11,6 @@ import org.testng.annotations.*;
 public class SOC_Notification_Intranet_View_All extends SOC_TestConfig_3{
 
 	/**
-	 * @author tult
-	 * date 20/04/2015
-	 */
-	@BeforeMethod
-	public void setUpBeforeMethod(){
-		magAc.signOut();
-		magAc.signIn(DATA_USER1,DATA_PASS);
-	}
-	
-	
-	/**
 	 *<li> Case ID:123026.</li>
 	 *<li> Test Case Name: Check the work of links on View All page.</li>
 	 *<li> Case ID:123005.</li>
@@ -32,20 +21,16 @@ public class SOC_Notification_Intranet_View_All extends SOC_TestConfig_3{
 	public void test01_02_CheckTheWorkOfLinksOnViewAllPage_ChecUIOfTheViewAllPage() throws AWTException{
 		//set Data test
 		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
-		String password1 = txData.getContentByArrayTypeRandom(1) + getRandomNumber();
-		String email1 = txData.getContentByArrayTypeRandom(1) + getRandomNumber() + mailSuffixData.getMailSuffixRandom();
+		String email1 = username1+ mailSuffixData.getMailSuffixRandom();
 	
 		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
-		String password2 = txData.getContentByArrayTypeRandom(1) + getRandomNumber();
-		String email2 = txData.getContentByArrayTypeRandom(1) + getRandomNumber() + mailSuffixData.getMailSuffixRandom();
+		String email2 = username2+ mailSuffixData.getMailSuffixRandom();
 
 		String username3 = txData.getContentByArrayTypeRandom(4) + getRandomString();
-		String password3 = txData.getContentByArrayTypeRandom(1) + getRandomNumber();
-		String email3 = txData.getContentByArrayTypeRandom(1) + getRandomNumber() + mailSuffixData.getMailSuffixRandom();
+		String email3 = username3+ mailSuffixData.getMailSuffixRandom();
 		
 		String username4 = txData.getContentByArrayTypeRandom(4) + getRandomString();
-		String password4 = txData.getContentByArrayTypeRandom(1) + getRandomNumber();
-		String email4 = txData.getContentByArrayTypeRandom(1) + getRandomNumber() + mailSuffixData.getMailSuffixRandom();
+		String email4 = username4+ mailSuffixData.getMailSuffixRandom();
 		
 		String activity1 = txData.getContentByArrayTypeRandom(1) + getRandomNumber();
 		String activity2 = txData.getContentByArrayTypeRandom(1) + getRandomNumber();
@@ -55,6 +40,8 @@ public class SOC_Notification_Intranet_View_All extends SOC_TestConfig_3{
 		
 		String space1 = txData.getContentByArrayTypeRandom(1) + getRandomNumber();
 		String space2 = txData.getContentByArrayTypeRandom(1) + getRandomNumber();
+		
+		
 		/*Precondition:
 		 	The user has following notifications 
 				- New User
@@ -69,10 +56,10 @@ public class SOC_Notification_Intranet_View_All extends SOC_TestConfig_3{
 				- Post in My stream (read)*/
 		info("Create user1 and enable new user and like notifications for user1");
 		navTool.goToAddUser();
-		addUserPage.addUser(username1, password1, email1, username1, username1);
+		addUserPage.addUser(username1, password, email1, username1, username1);
 		
 		info("sign in user1 and enable new user and like notifications");
-		magAc.signIn(username1, password1);
+		magAc.signIn(username1, password);
 		navTool.goToMyNotifications();
 		myNotifPage.enableNotification(myNotiType.NewUser_intranet);
 		myNotifPage.enableNotification(myNotiType.AS_Like_intranet);
@@ -80,12 +67,12 @@ public class SOC_Notification_Intranet_View_All extends SOC_TestConfig_3{
 		info("Create notifications for user 1");
 		magAc.signIn(DATA_USER1, DATA_PASS);
 		navTool.goToAddUser();
-		addUserPage.addUser(username2, password2, email2, username2, username2);
-		addUserPage.addUser(username3, password3, email3, username3, username3);
-		addUserPage.addUser(username4, password4, email4, username4, username4);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		addUserPage.addUser(username3, password, email3, username3, username3);
+		addUserPage.addUser(username4, password, email4, username4, username4);
 		
 		info("Sign in as user 1 and connect to user 2");
-		magAc.signIn(username1, password1);
+		magAc.signIn(username1, password);
 		hp.goToConnections();
 		connMag.connectToAUser(username2);
 		
@@ -102,7 +89,7 @@ public class SOC_Notification_Intranet_View_All extends SOC_TestConfig_3{
 		setSpaceMg.inviteUser(username2,false,"");
 		
 		info("User 2 comments to user1's activity");
-		magAc.signIn(username2, password2);
+		magAc.signIn(username2, password);
 		hp.goToConnections();
 		connMag.acceptAConnection(username1);
 		hp.goToHomePage();
@@ -133,7 +120,7 @@ public class SOC_Notification_Intranet_View_All extends SOC_TestConfig_3{
 		hpAct.checkActivity(activity3);
 		
 		info("Sign in as user 3 and create a space, invite user1 to join space and connect to user1");
-		magAc.signIn(username3, password3);
+		magAc.signIn(username3, password);
 		info("User 3 create a space");
 		hp.goToAllSpace();
 		spaMg.goToCreateSpace();
@@ -146,7 +133,7 @@ public class SOC_Notification_Intranet_View_All extends SOC_TestConfig_3{
 		connMag.connectToAUser(username1);
 		
 		info("Sign in as user 4 and request to join user1's space");
-		magAc.signIn(username4, password4);
+		magAc.signIn(username4, password);
 		hp.goToAllSpace();
 		spaMg.requestToJoinSpace(space1);
 		
@@ -159,7 +146,7 @@ public class SOC_Notification_Intranet_View_All extends SOC_TestConfig_3{
 		 *Input Data: 
 		 *Expected Outcome: 
 			- The user is redirected to the View All page*/
-		magAc.signIn(username1, password1);
+		magAc.signIn(username1, password);
 		navTool.goToIntranetNotification();
 		intraNot.goToAllNotification();
 		
@@ -288,15 +275,6 @@ public class SOC_Notification_Intranet_View_All extends SOC_TestConfig_3{
 		navTool.goToIntranetNotification();
 		intraNot.goToAllNotification();
 		intraNot.goToNotificationSettings();
-		
-		info("Reset Data");
-		info("Delete users");
-		magAc.signIn(DATA_USER1, DATA_PASS);
-		navTool.goToUsersAndGroupsManagement();
-		userAndGroup.deleteUser(username1);
-		userAndGroup.deleteUser(username2);
-		userAndGroup.deleteUser(username3);
-		userAndGroup.deleteUser(username4);
 	}
 	
 }

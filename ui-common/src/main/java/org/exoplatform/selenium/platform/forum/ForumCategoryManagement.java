@@ -3,56 +3,12 @@ package org.exoplatform.selenium.platform.forum;
 import org.exoplatform.selenium.Button;
 import org.exoplatform.selenium.ManageAlert;
 import org.exoplatform.selenium.Utils;
-import org.exoplatform.selenium.platform.PlatformBase;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import static org.exoplatform.selenium.TestLogger.info;
 
-public class ForumCategoryManagement extends PlatformBase {
-
-	//Home page
-	public final String ELEMENT_FORUM_CATEGORY_HOME_TITLE_LINK = ".//*[text()='${name}']";
-	
-	//Action bar
-	public final By ELEMENT_ACTIONBAR_ADDCATEGORY = By.xpath("//*[@class='uiIconAddCategory uiIconLightGray']");
-	
-	//Manage menu
-	public final By ELEMENT_MENU_MANAGE_CATEGORY = By.xpath("//*[@class='uiIconForumManageCategory uiIconForumLightGray']");
-	public final By ELEMENT_EDIT_CATEGORY = By.xpath("//*[@class='dropdown-menu uiCategoryPopupMenu']/li[1]/a");
-	public final By ELEMENT_EXPORT_FORUM  = By.xpath("//*[@class='dropdown-menu uiCategoryPopupMenu']/li[2]/a");
-	public final By ELEMENT_IMPORT_FORUM = By.xpath("//*[@class='dropdown-menu uiCategoryPopupMenu']/li[3]/a");
-	public final By ELEMENT_DELETE_CATEGORY = By.xpath("//*[@id='UICategoryConfirm0' and contains(text(),'Delete')]");
-	
-	//Edit category
-	public final By ELEMENT_PERM_TAB = By.xpath("//*[contains(@data-toggle,'tab')][contains(.,'Permissions')]");
-	public final By ELEMENT_EDITCATEGORY_PERM_ADD_BTN=By.xpath("//*[contains(@id,'Permission')]//*[contains(@class,'addButton')]");
-	
-	//Add category popup
-	public final By ELEMENT_ADDCATEGORY_POPUP_TITLE= By.id("CategoryTitle");
-	public final By ELEMENT_ADDCATEGORY_POPUP_ORDER= By.id("CategoryOrder");
-	public final By ELEMENT_ADDCATEGORY_POPUP_DESCRIPTION= By.id("Description");
-	public final By ELEMENT_ADDCATEGORY_POPUP_SAVE_BUTTON= By.xpath(".//*[@id='UICategoryForm']//button[text()='Save']");
-	public final By ELEMENT_ADDCATEGORY_POPUP_CANCEL_BUTTON= By.xpath(".//*[@id='UICategoryForm']//button[text()='Cancel']");
-	public final By ELEMENT_ADDCATEGORY_RESTRICTED_AUDIENCE = By.xpath(".//*[@id='DetailTab']//*[@class='uiIconUser uiIconLightGray']");
-	public final By ELEMENT_RESTRICTED_AUDIENCE_INPUT_SEARCH_USER_NAME = By.xpath(".//*[@id='QuickSearch']");
-	public final String ELEMENT_RESTRICTED_AUDIENCE_SELECT_SEARCH_OPTION = "//*[contains(@name,'filter')]";
-	public final String ELEMENT_RESTRICTED_AUDIENCE_SEARCH_ICON = ".//*[@id='UIUserSelector']//*[contains(@class,'uiIconSearch uiIconLightGray')]";
-	public final By ELEMENT_RESTRICTED_AUDIENCE_CLOSE_USER_SELETOR = By.xpath(".//*[@id='UIUserSelector']//*[contains(text(),'Close')]");
-	public final By ELEMENT_CATEGORY_CANCEL = By.xpath(".//*[@id='UICategoryForm']//*[contains(text(),'Cancel')]");
-	public final By ELEMENT_CATEGORY_PERMISSION_TAB = By.xpath(".//*[@id='UICategoryForm']//*[contains(text(),'Permissions')]");
-	public final By ELEMENT_CATEGORY_PERMISSION_TAB_USER_SELECTOR = By.xpath(".//*[@id='PermissionTab']//*[@class='uiIconUser uiIconLightGray']");
-	
-	//Popup confirmation
-	public final By ELEMENT_OK_DELETE = By.xpath("//*[@id='UIForumPopupConfirmation']//*[text()='OK']");
-	public final String ELEMENT_CATEGORY_DELETE_CONFIRM_MSG="Are you sure you want to delete this category ?";
-	
-	//Export forum popup
-	public final By ELEMENT_FILENAME_INPUT=By.id("FileName");
-	public final By ELEMENT_EXPORT_FORUM_EXPORTALL = By.id("checkAll");
-	public final String ELEMENT_EXPORT_FORUM_EXPORT = "//*[contains(text(),'${title}')]/..//*[@class='uiCheckbox']//*[@class='checkbox']";
-	public final By ELEMENT_SAVE_BTN = By.xpath("//*[text()='Save']");
+public class ForumCategoryManagement extends ForumLocator {
 	
 	ManageAlert alert;
 	Button button;

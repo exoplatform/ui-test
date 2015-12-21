@@ -5,14 +5,8 @@ import static org.exoplatform.selenium.TestLogger.info;
 import org.testng.annotations.*;
 
 
-public class Plf_Branding extends Plf_TestConfig {
+public class Plf_Branding extends Plf_TestConfig{
 	
-	@AfterMethod
-	public void setAfterMethod(){
-		magAc.signOut();
-		info("Sign in with john account");
-		magAc.signIn(DATA_USER1, DATA_PASS);
-	}
 	/**
 	 *<li> Case ID:120887.</li>
 	 *<li> Test Case Name: Select navigation bar style.</li>

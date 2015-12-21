@@ -40,15 +40,16 @@ public class SOC_People_Profile_RecentActivities extends SOC_TestConfig_2{
 
 		//Create data test
 		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
-		String password1 = username1;
-		String email1 = username1 + mailSuffixData.getMailSuffixRandom();
-	
-
-		info("Add new user");
-		magAc.signIn(DATA_USER1, DATA_PASS);
+		String email1 = username1+ mailSuffixData.getMailSuffixRandom();
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+ mailSuffixData.getMailSuffixRandom();
+		
+		
+		info("Add user");
 		navTool.goToAddUser();
-		addUserPage.addUser(username1, password1, email1, username1, username1);
-		magAc.signIn(username1, password1);
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		magAc.signIn(username1, password);
 
 		/*Step Number: 1
 		 *Step Name: Step 1 : go to my profile
@@ -62,7 +63,7 @@ public class SOC_People_Profile_RecentActivities extends SOC_TestConfig_2{
 			-column
 			- Button "View All" at the bottom to redirect to My activities*/
 		info("add mention");
-		hpAct.mentionUserActivity(DATA_USER1,mention);
+		hpAct.mentionUserActivity(username2,mention);
 
 		info("share a document and comment");
 		driver.navigate().refresh();
@@ -104,11 +105,7 @@ public class SOC_People_Profile_RecentActivities extends SOC_TestConfig_2{
 		waitForAndGetElement(hpAct.ELEMENT_ACTIVITY_LINK.replace("${title}", textDes1).replace("${link}", link));
 		waitForAndGetElement(hpAct.ELEMENT_ACTIVITY_LINK_USER_ICON.replace("${user}", username1));
 		waitForAndGetElement(hpAct.ELEMENT_ACTIVITY_ELEMENT_IN_ACTIVITY_STREAM.replace("${title}", textDes2));
-		waitForAndGetElement(hpAct.ELEMENT_ACTIVITY_MENTION_USER.replace("${content}", mention).replace("${user}",DATA_USER1));
+		waitForAndGetElement(hpAct.ELEMENT_ACTIVITY_MENTION_USER.replace("${content}", mention).replace("${user}",username2));
 
-		info("Clear Data");
-		magAc.signIn(DATA_USER1, DATA_PASS);
-		navTool.goToUsersAndGroupsManagement();
-		userAndGroup.deleteUser(username1);
 	}
 }

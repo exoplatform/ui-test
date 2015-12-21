@@ -4,35 +4,11 @@ import static org.exoplatform.selenium.TestLogger.info;
 
 import org.exoplatform.selenium.ManageAlert;
 import org.exoplatform.selenium.Utils;
-import org.exoplatform.selenium.platform.PlatformBase;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-public class GadgetManagement extends PlatformBase {
+public class GadgetManagement extends GateinLocator {
 
-	//Remote gadget on righ panel
-    public final By ELEMENT_REMOTE_GADGETBTN = By.xpath(".//*[@id='UIGadgetManagement']//a[contains(.,'Add a remote gadget')]");
-	public final By ELEMENT_REMOTE_GADGET_URL = By.id("url");
-	public final By ELEMENT_REMOTE_GADGET_ADDBTN = By.xpath(".//*[@id='UIAddGadget']//button[text()='Add']");
-	public final By ELEMENT_REMOTE_GADGET_ADD_INTO_CATEGORY_LINK = By.xpath(".//*[@id='UIGadgetInfo']//a[contains(text(),'Click here to add into categories')]");
-	public final By ELEMENT_REMOTE_GADGET_TABLE_CATEGORIES=By.xpath(".//*[@id='GadgetCategory']//div[@class='controls-full']");
-	public final String ELEMENT_REMOTE_GADGET_TABLE_CATEGORIES_CHECKBOX = ".//*[@id='categoryName'][contains(text(),'${category}')]/../..//input[@type='checkbox']";
-	public final By ELEMENT_REMOTE_GADGET_TABLE_CATEGORIES_SAVEBTN = By.xpath(".//*[@id='GadgetCategory']//button[text()='Save']");
-	public final String ELEMENT_REMOTE_GADGET_INFO_CATEGORY =".//*[text()='Categories:']/..//*[contains(text(),'${category}')]";
-	//left panel
-	public final String ELEMENT_REMOTE_GADGET_LEFT_CONTENT=".//*[contains(text(),'${name}')]";
-	public final String ELEMENT_REMOTE_GADGET_LEFT_DELETE_BTN = ".//*[contains(text(),'${name}')]/../../../..//*[@class='uiIconDelete uiIconLightGray']";
-
-	//Create new gadget
-	public final By ELEMENT_CREATE_NEW_GADGET_BTN = By.cssSelector(".uiIconCreateNewGadget.uiIconLightGray");
-	public final By ELEMENT_CREATE_NEW_GADGET_INPUT_NAME_FIELD= By.id("name");
-	public final By ELEMENT_CREATE_NEW_GADGET_SOURCE_FIELD= By.id("source");
-	public final By ELEMENT_CREATE_NEW_GADGET_SAVE_BTN =By.xpath(".//button[text()='Save']");
-	
-	//View detail of a Gadget
-	public final By ELEMENT_GADGET_EDIT_BTN = By.cssSelector(".uiIconEdit.uiIconLightGray");
-	public final By ELEMENT_PAGING_CONTROL_NEXT_PAGE_ENABLED = By.cssSelector("[href~='javascript:void(0);'] .uiIconNextArrow");
 	
 	ManageAlert alert;
 	public GadgetManagement(WebDriver driver) {

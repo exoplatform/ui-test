@@ -10,7 +10,7 @@ import org.exoplatform.selenium.platform.HomePagePlatform;
 import org.openqa.selenium.WebDriver;
 
 
-public class EmailNotifications extends NotificationLocator{
+public class EmailNotifications extends SocialLocator{
 	
 	UserProfilePage userProPage;
 	HomePagePlatform hpPlat;
@@ -483,7 +483,7 @@ public class EmailNotifications extends NotificationLocator{
 				click(ELEMENT_GMAIL_FORMAT_SPACE_LINK
 						.replace("$space", space));
 				getAllChildWindows();
-				waitForAndGetElement(spaceHome.ELEMENT_SPACE_ACTIVITY_TAB_ACTIVE, DEFAULT_TIMEOUT, 0);
+				waitForAndGetElement(ELEMENT_SPACE_ACTIVITY_TAB_ACTIVE, DEFAULT_TIMEOUT, 0);
 				break;	
 			case Watch_This_Video:
 				info("go To Activity By click watch the video");

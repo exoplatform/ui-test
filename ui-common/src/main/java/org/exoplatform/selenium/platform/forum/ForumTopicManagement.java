@@ -3,112 +3,12 @@ package org.exoplatform.selenium.platform.forum;
 import org.exoplatform.selenium.Button;
 import org.exoplatform.selenium.ManageAlert;
 import org.exoplatform.selenium.Utils;
-import org.exoplatform.selenium.platform.PlatformBase;
 import org.exoplatform.selenium.platform.PlatformPermission;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import static org.exoplatform.selenium.TestLogger.info;
 
-public class ForumTopicManagement extends PlatformBase {
-	
-	public By ELEMENT_POST_REPLY =By.xpath("//*[@id='UITopicDetail']//*[@class='pull-left actionContainer']/a[contains(text(),'Post Reply')]");
-	public final String ELEMENT_TOPIC_POST_TITLE = "//*[@class='postViewTitle']/..//*[contains(text(),'${name}')]";
-	public final String ELEMENT_TOPIC_POST_CONTENT = "//*[@class='postContentContainer']/..//*[contains(text(),'${name}')]";
-	//Action bar
-	public final By ELEMENT_ACTIONBAR_TOPIC_TAG = By.xpath("//*[@class='uiIconTag uiIconLightGray']");
-	public final By ELEMENT_ACTIONBAR_TOPIC_TAGNAME = By.xpath("//*[@id='AddTag']");
-	public final By ELEMENT_ACTIONBAR_TOPIC_RATE = By.xpath("//*[@class='uiIconForumStar uiIconForumLightGray']");
-	public final String ELEMENT_ACTIONBAR_TOPIC_TAGPRESENT = ".//*[@id='UITopicDetail']//a[@data-original-title='${tag}']";
-	
-	//Tag of topic
-    public final By ELEMENT_FORUM_TOPIC_ADD_TAG = By.xpath(".//*[@id='UITopicDetail']//a[contains(text(),'Add Tag')]");
-	
-    //Rate
-    public final String ELEMENT_FORUM_VOTE_MARK = "//*[@data-original-title='${star}']";
-	public String ELEMENT_POST_TITLE =".//*[@class='postViewTitle'][contains(text(),'${title}')]";
-	
-	//More Action menu
-	public final By ELEMENT_MORE_ACTION = By.xpath("//*[@data-toggle='dropdown']/*[@class='uiIconSettings uiIconLightGray']");
-	public final By ELEMENT_MODERATOR=By.xpath("//*[contains(@class,'uiIconForumModerator')]");
-	public final By ELEMENT_EDIT_TOPIC = By.xpath(".//*[@id='UITopicDetail']//a[contains(text(),'Edit')]");
-	public final By ELEMENT_DELETE_TOPIC = By.xpath(".//*[@id='UITopicDetail']//a[contains(text(),'Delete')]");
-	public final By ELEMENT_MOVE_TOPIC = By.xpath(".//*[@id='UITopicDetail']//a[contains(text(),'Move')]");
-	public final By ELEMENT_CLOSE_TOPIC = By.xpath(".//*[@id='UITopicDetail']//a[contains(text(),'Close')]");
-	public final By ELEMENT_OPEN_TOPIC = By.xpath(".//*[@id='UITopicDetail']//a[contains(text(),'Open')]");
-	public final By ELEMENT_LOCK_TOPIC = By.xpath(".//*[@id='UITopicDetail']//a[contains(text(),'Lock')]");
-	public final By ELEMENT_UNLOCK_TOPIC = By.xpath(".//*[@id='UITopicDetail']//a[contains(text(),'Unlock')]");
-	public final By ELEMENT_ADD_POLL = By.xpath(".//*[@id='UITopicDetail']//a[contains(text(),'Add Poll')]");
-	//public final By ELEMENT_FORUM_ICON_CLOSE = By.xpath("//*[@class='uiIconMinus']");
-	
-	// Post on a topic
-	public final By ELEMENT_TOPIC_POST_A_REPLY_TITLE = By.id("PostTitle");
-	public final By ELEMENT_TOPIC_CANCEL_A_POST = By.xpath("//*[@id='UIPostForm']//*[contains(text(),'Cancel')]");
-	public final By ELEMENT_FORUM_ADDPOST = By.xpath("//*[@class='pull-left actionContainer']//*[@class='uiPostReplyIcon btn btn-primary']");
-	public final By ELEMENT_FORUM_POST_TITLE = By.xpath("//*[@id='PostTitle']");
-	public final By ELEMENT_FORUM_MESSAGE = By.xpath("//iframe[@class='cke_wysiwyg_frame cke_reset']");
-	public final By ELEMENT_FORUM_SETTINGS_SUBMIT = By.xpath("//*[text()='Submit']");
-	public final By ELEMENT_FORUM_ADDTOPIC = By.xpath("(.//*[@id='UITopicContainer']//*[contains(@class,'uiIconForumCreateTopic ')][1]");
-	public final By ELEMENT_FORUM_TOPIC_TITLE = By.xpath("//*[@id='ThreadTitle']");
-	public final String ELEMENT_FORUM_TOPIC_LINK = ".//*[contains(text(),'${name}')]";
-	
-	//Start Topic popup
-	public final By ELEMENT_START_TOPIC_POPUP_TITLE = By.xpath(".//*[@id='UIForumPopupWindow']//span[@class='PopupTitle popupTitle']");
-	public final By ELEMENT_START_TOPIC_POPUP_TITLE_FILED = By.id("ThreadTitle");
-	public final By ELEMENT_START_TOPIC_BTN = By.xpath(".//*[contains(@class,'uiIconForumCreateTopic')]");
-	public final By ELEMENT_TOPIC_PERMISSION_TAB = By.xpath(".//*[@id='UITopicForm']//*[contains(text(),'Permissions')]");
-	public final By ELEMENT_TOPIC_PERMISSION_TAB_USER_SELECTOR = By.xpath(".//*[@id='ThreadPermission']//*[@class='uiIconUser uiIconLightGray']");
-	public final By ELEMENT_TOPIC_PERMISSION_INPUT_SEARCH_USER_NAME = By.xpath(".//*[@id='QuickSearch']");
-	public final String ELEMENT_TOPIC_PERMISSION_SELECT_SEARCH_OPTION = "//*[contains(@name,'filter')]";
-	public final String ELEMENT_TOPIC_PERMISSION_SEARCH_ICON = ".//*[@id='UIUserSelector']//*[contains(@class,'uiIconSearch uiIconLightGray')]";
-	public final By ELEMENT_TOPIC_CANCEL = By.xpath(".//*[@id='UITopicForm']//*[contains(text(),'Cancel')]");
-	public final By ELEMENT_TOPIC_PERMISSION_CLOSE_USER_SELETOR = By.xpath(".//*[@id='UIUserSelector']//*[contains(text(),'Close')]");
-	
-	// reply post form 
-    public final By ELEMENT_TITLE_POST = By.id("PostTitle");
-    public final By ELEMENT_POST_CONTENT = By.xpath("//iframe[@class='cke_wysiwyg_frame cke_reset']");
-    public final By ELEMENT_POST_FORM_SUBMIT = By.xpath("//*[@id='UIPostForm']//*[contains(text(),'Submit')]");
-    public final String ELEMENT_POST_IN_TOPIC = "//*[@class='postViewTitle' and contains(text(),'{$title}')]/../..//*[@class='postContent']//*[contains(text(),'{$content}')]";
-    public final String ELEMENT_POST_IN_TOPIC_QUOTE = "//*[@class='postViewTitle' and contains(text(),'{$title}')]/../..//*[@class='contentQuote']//*[contains(text(),'{$content}')]";
-    public final String ELEMENT_POST_IN_TOPIC_PRIVATE = "//*[@class='postViewTitle' and contains(text(),'{$title}')]//*[contains(text(),'Post Private')]/../../..//*[contains(text(),'{$content}')]";
-    public final By ELEMENT_TOPIC_POST_REPLY_BOTTOM= By.xpath(".//*[@id='UITopicDetail']/div[5]//a[text()='Post Reply']");
-    public final By ELEMENT_TOPIC_POST_REPLY_BUTTON_DISABLE=By.xpath(".//*[@id='UITopicDetail']//*[@data-original-title='You cannot reply to this topic.']");
-    //New post popup
-    public final By ELEMENT_TOPIC_NEW_POST_TITLE= By.xpath(".//*[@id='UIForumPopupWindow']//span[text()='New Post']");
-    public final By ELEMENT_TOPIC_NEW_POST_TITLE_FIELD=By.id("PostTitle");
-    public final By ELEMENT_START_TOPIC_MESSAGE_FRAME_CKEDITOR = By.xpath("//iframe[@class='cke_wysiwyg_frame cke_reset']");
-    public final By ELEMENT_START_TOPIC_ATTACH_FILE =By.xpath("//*[@id='ThreadContent']//*[@class='uiIconAttach uiIconLightGray']");
-    public final By ELEMENT_UPLOAD_POPUP_FILE = By.xpath("//span[@class='PopupTitle popupTitle' and text()='Attach File']");
-    public final String ELEMENT_TOPIC_REPPLY_CONTENT=".//*[contains(text(),'${content}')]";
-    
-    // foot page of post
-    public final String ELEMENT_EDIT_POST = "//*[@class='postViewTitle' and contains(text(),'{$title}')]/../..//*[@data-original-title='Edit This Post']";
-	public final String ELEMENT_QUOTE_POST = "//*[@class='postViewTitle' and contains(text(),'{$title}')]/../..//*[@data-original-title='Reply with Quote']";
-    public final String ELEMENT_DELETE_POST = "//*[@class='postViewTitle' and contains(text(),'{$title}')]/../..//*[@data-original-title='Delete This Post']";
-	public final String ELEMENT_PRIVATE_POST = "//*[@class='postViewTitle' and contains(text(),'{$title}')]/../..//*[@data-original-title='Private Reply']";
-
-    public final By ELEMENT_DELETE_BOX_CONFIRMATION = By.xpath("//*[@id='UIForumPopupConfirmation']//*[contains(text(),'OK')]");
-    
-	//  Poll
-    public final By ELEMENT_POLL_QUESTION = By.id("Question");
-    public final By ELEMENT_POLL_OPTIONS0 = By.id("Option0");
-    public final By ELEMENT_POLL_OPTIONS1 = By.id("Option1");
-    public final By ELEMENT_POLL_SUBMIT = By.xpath("//*[@id='UIPollForm']//*[contains(text(),'Submit Poll')]");
-    public final By ELEMENT_MORE_ACTIONS_POLL = By.xpath("//*[@class='uiIconPoll uiIconLightGray']/../..//*[@class='uiIconSettings uiIconLightGray']");
-    public final By ELEMENT_EDIT_POLL = By.xpath("//*[@id='UITopicPoll']//*[contains(text(),'Edit')]");
-    public final By ELEMENT_REMOVE_POLL = By.xpath("//*[@id='UITopicPoll']//*[contains(text(),'Remove')]");
-    public final By ELEMENT_CLOSE_POLL = By.xpath(".//*[@id='UITopicPoll']//a[contains(text(),'Close')]");
-    public final By ELEMENT_OPEN_POLL = By.xpath(".//*[@id='UITopicPoll']//a[contains(text(),'Reopen')]");
-    public final By ELEMENT_POLL_POPUP_TITLE= By.xpath(".//*[@id='UIForumPopupWindow']//span[text()='Poll']");
-    public final String ELEMENT_FORUM_POLL_DISPLAYOPT = "//*[contains(text(),'${opt}')]";
-    public final By ELEMENT_OK_DELETE = By.xpath("//*[@id='UIForumPopupConfirmation']//*[contains(text(),'OK')]");
-	public final By ELEMENT_SUBMIT_BUTTON = By.xpath("//*[text()='Submit']");
-	public final By ELEMENT_FORUM_POLL_GRID = By.xpath("//*[@class='uiGrid table no-border-cell rounded-corners table-striped tableVoting']");
-	public final By ELEMENT_FORUM_POLL_GRIDCLOSE = By.xpath("//*[@class='uiGrid table rounded-corners table-striped tableVoted']");
-	
-	//move a topic
-	public String ELEMENT_UI_POPUP_MOVE_TOPIC ="//*[@id='MoveTopicForm']//*[@class='node']//*[contains(text(),'{$forum}')]";
-	public final String ELEMENT_MOVE_POPUP_COLLASPE_NODE =".//*[@class='uiIconNode collapseIcon'][contains(.,'${category}')]";
-	
+public class ForumTopicManagement extends ForumLocator {
 	
 	PlatformPermission per;
 	ManageAlert alert;

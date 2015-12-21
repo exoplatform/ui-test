@@ -7,11 +7,6 @@ import org.testng.annotations.*;
 
 public class SOC_Space_Management extends SOC_TestConfig_1 {
 
-	@AfterMethod
-	public void setAfterMethod(){
-		magAc.signOut();
-		magAc.signIn(DATA_USER1, DATA_PASS);
-	}
 	/**
 	 *<li> Case ID:121887.</li>
 	 *<li> Test Case Name: Access Space.</li>
@@ -22,6 +17,13 @@ public class SOC_Space_Management extends SOC_TestConfig_1 {
 	public  void test01_AccessSpace() {
 		info("Test 01: Access Space");
 		String space = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+ "@gmail.com";
+		
+		info("Add user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		magAc.signIn(username1, password);
 		/*Step Number: 1
 		 *Step Name: Step 1: Access space
 		 *Step Description: 
@@ -41,15 +43,15 @@ public class SOC_Space_Management extends SOC_TestConfig_1 {
 		spaMg.addNewSpaceSimple(space,space);
 
 		info("Focus on home space page");
-		waitForAndGetElement(hpAct.ELEMENT_COMPOSER_INPUT_FILED,3000,0);
+		waitForAndGetElement(hpAct.ELEMENT_COMPOSER_INPUT_FILED,3000,1);
 		info("All default portlet is displayed");
-		waitForAndGetElement(hpAct.ELEMENT_SPACE_MENU_ACTIVITY_PORTLET,2000,0);
-		waitForAndGetElement(hpAct.ELEMENT_SPACE_MENU_AGENDA_PORTLET,2000,0);
-		waitForAndGetElement(hpAct.ELEMENT_SPACE_MENU_DOCUMENT_PORTLET,2000,0);
-		waitForAndGetElement(hpAct.ELEMENT_SPACE_MENU_FORUM_PORTLET,2000,0);
-		waitForAndGetElement(hpAct.ELEMENT_SPACE_MENU_MEMBER_PORTLET,2000,0);
-		waitForAndGetElement(hpAct.ELEMENT_SPACE_MENU_SPACE_SETTING_PORTLET,2000,0);
-		waitForAndGetElement(hpAct.ELEMENT_SPACE_MENU_WIKI_PORTLET,2000,0);
+		waitForAndGetElement(hpAct.ELEMENT_SPACE_MENU_ACTIVITY_PORTLET,2000,1);
+		waitForAndGetElement(hpAct.ELEMENT_SPACE_MENU_AGENDA_PORTLET,2000,1);
+		waitForAndGetElement(hpAct.ELEMENT_SPACE_MENU_DOCUMENT_PORTLET,2000,1);
+		waitForAndGetElement(hpAct.ELEMENT_SPACE_MENU_FORUM_PORTLET,2000,1);
+		waitForAndGetElement(hpAct.ELEMENT_SPACE_MENU_MEMBER_PORTLET,2000,1);
+		waitForAndGetElement(hpAct.ELEMENT_SPACE_MENU_SPACE_SETTING_PORTLET,2000,1);
+		waitForAndGetElement(hpAct.ELEMENT_SPACE_MENU_WIKI_PORTLET,2000,1);
 
 		/*info("Delete a Space");
 		hp.goToMySpaces();
@@ -91,13 +93,13 @@ public class SOC_Space_Management extends SOC_TestConfig_1 {
 		setSpaceMg.goToApplicationTab();
 		setSpaceMg.addApplication(category,app);
 		info("Verify that Application is added to space");
-		waitForAndGetElement(setSpaceMg.ELEMENT_APPLICATION_TAB_APPLICATION_LIST_CONTENT.replace("${app}",app),3000,0);
+		waitForAndGetElement(setSpaceMg.ELEMENT_APPLICATION_TAB_APPLICATION_LIST_CONTENT.replace("${app}",app),3000,1);
 		info("name of application is shown on right of space menu portlet");
 		if(waitForAndGetElement(hpAct.ELEMENT_SPACE_MENU_APPLICATION_PORTLET.replace("${app}",app),3000,0)==null){
 			hpAct.openMorelist();
-			waitForAndGetElement(hpAct.ELEMENT_SPACE_MENU_APPLICATION_PORTLET.replace("${app}",app),3000,0);
+			waitForAndGetElement(hpAct.ELEMENT_SPACE_MENU_APPLICATION_PORTLET.replace("${app}",app),3000,1);
 		}else
-			waitForAndGetElement(hpAct.ELEMENT_SPACE_MENU_APPLICATION_PORTLET.replace("${app}",app),3000,0);
+			waitForAndGetElement(hpAct.ELEMENT_SPACE_MENU_APPLICATION_PORTLET.replace("${app}",app),3000,1);
 
 
 		/*info("Delete a Space");
@@ -115,6 +117,16 @@ public class SOC_Space_Management extends SOC_TestConfig_1 {
 	public  void test03_SpaceList() {
 		info("Test 03: Spaces list");
 		String space = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+ "@gmail.com";
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+ "@gmail.com";
+		
+		info("Add user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		magAc.signIn(username1, password);
 		/*Step Number: 1
 		 *Step Name: Step 1: Check All Spaces list
 		 *Step Description: 
@@ -131,17 +143,11 @@ public class SOC_Space_Management extends SOC_TestConfig_1 {
 		hp.goToMySpaces();
 		spaMg.addNewSpaceSimple(space,space);
 
-		magAc.signOut();
-		magAc.signIn(DATA_USER2, DATA_PASS);
+		magAc.signIn(username2, password);
 		hp.goToAllSpace();
 		spaMg.searchSpace(space,"");
 		spaMg.sendARequestToASpace(space);
 
-		/*magAc.signOut();
-		magAc.signIn(DATA_USER1, DATA_PASS);
-		info("Delete a Space");
-		hp.goToMySpaces();
-		spaMg.deleteSpace(space,false);*/
 	}
 
 	/**
@@ -154,6 +160,17 @@ public class SOC_Space_Management extends SOC_TestConfig_1 {
 	public  void test04_CreateNewSpace() {
 		info("Test 04: Create a new Space");
 		String space = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+ "@gmail.com";
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+ "@gmail.com";
+		
+		info("Add user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		magAc.signIn(username1, password);
+		
 		/*Step Number: 1
 		 *Step Name: Step 1: Create a new Space
 		 *Step Description: 
@@ -171,21 +188,16 @@ public class SOC_Space_Management extends SOC_TestConfig_1 {
 		hp.goToMySpaces();
 		spaMg.addNewSpaceSimple(space,space);
 		info("Publics space list of other user");
-		magAc.signOut();
-		magAc.signIn(DATA_USER2, DATA_PASS);
+		magAc.signIn(username2,password);
 		hp.goToAllSpace();
 		spaMg.searchSpace(space,"");
-		waitForAndGetElement(spaMg.ELEMENT_MY_SPACE_ALL_SPACES_REQUEST_TO_JOIN_BTN.replace("${space}", space),2000,0);
+		waitForAndGetElement(spaMg.ELEMENT_MY_SPACE_ALL_SPACES_REQUEST_TO_JOIN_BTN.replace("${space}", space),2000,1);
 
-		magAc.signOut();
-		magAc.signIn(DATA_USER1, DATA_PASS);
+		magAc.signIn(username1, password);
 		hp.goToMySpaces();
 		spaMg.searchSpace(space,"");
-		waitForAndGetElement(spaMg.ELEMENT_SPACE_TITLE.replace("${space}",space),2000,0);
+		waitForAndGetElement(spaMg.ELEMENT_SPACE_TITLE.replace("${space}",space),2000,1);
 
-		/*info("Delete a Space");
-		hp.goToMySpaces();
-		spaMg.deleteSpace(space,false);*/
 	}
 
 	/**
@@ -200,6 +212,14 @@ public class SOC_Space_Management extends SOC_TestConfig_1 {
 		String space = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		String newName = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		String filename = fData.getAttachFileByArrayTypeRandom(26);
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+ "@gmail.com";
+		
+		info("Add user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		magAc.signIn(username1, password);
+		
 		/*Step Number: 1
 		 *Step Name: Step 1: Edit a space
 		 *Step Description: 
@@ -221,13 +241,13 @@ public class SOC_Space_Management extends SOC_TestConfig_1 {
 		spaMg.searchSpace(space,"");
 		spaMg.editSpaceSimple(space, newName, newName, true, "TestData/"+filename);
 		spaMg.saveChangesSpace();
-		waitForAndGetElement(hpAct.ELEMENT_SPACE_MENU_ACTIVITY_PORTLET,2000,0);
+		waitForAndGetElement(hpAct.ELEMENT_SPACE_MENU_ACTIVITY_PORTLET,2000,1);
 
 		info("All changes are saved");
 		hp.goToMySpaces();
 		spaMg.searchSpace(newName,"");
-		waitForAndGetElement(spaMg.ELEMENT_SPACE_TITLE.replace("${space}", newName),2000,0);
-		waitForAndGetElement(spaMg.ELEMENT_SPACE_DESCRIPTION.replace("${space}", newName),2000,0);
+		waitForAndGetElement(spaMg.ELEMENT_SPACE_TITLE.replace("${space}", newName),2000,1);
+		waitForAndGetElement(spaMg.ELEMENT_SPACE_DESCRIPTION.replace("${space}", newName),2000,1);
 		waitForElementNotPresent(spaMg.ELEMENT_SPACE_AVATAR_DEFAULT);
 	}
 	/**
@@ -240,6 +260,16 @@ public class SOC_Space_Management extends SOC_TestConfig_1 {
 	public  void test06_DeleteASpace() {
 		info("Test 06:Delete a space");
 		String space = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+ "@gmail.com";
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+ "@gmail.com";
+		
+		info("Add user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		magAc.signIn(username1, password);
 		/*Step Number: 1
 		 *Step Name: Step 1: Delete a space
 		 *Step Description: 
@@ -263,11 +293,10 @@ public class SOC_Space_Management extends SOC_TestConfig_1 {
 		spaMg.searchSpace(space,"");
 		spaMg.deleteSpace(space,false);
 
-		magAc.signOut();
-		magAc.signIn(DATA_USER2, DATA_PASS);
+		magAc.signIn(username2,password);
 		hp.goToAllSpace();
 		spaMg.searchSpace(space,"");
-		waitForElementNotPresent(spaMg.ELEMENT_SPACE_TITLE.replace("${space}",space),2000,0);
+		waitForElementNotPresent(spaMg.ELEMENT_SPACE_TITLE.replace("${space}",space),2000,1);
 
 	}
 	/**
@@ -286,6 +315,13 @@ public class SOC_Space_Management extends SOC_TestConfig_1 {
 		info("app:"+app);
 		String category = spAppData.newCategory.get(index);
 		info("cate:"+category);
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+ "@gmail.com";
+		
+		info("Add user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		magAc.signIn(username1, password);
 		/*Step Number: 1
 		 *Step Name: Step 1: Remove application on space
 		 *Step Description: 
@@ -306,10 +342,10 @@ public class SOC_Space_Management extends SOC_TestConfig_1 {
 		setSpaceMg.goToApplicationTab();
 		setSpaceMg.addApplication(category,app);
 		info("Verify that Application is added to space");
-		waitForAndGetElement(setSpaceMg.ELEMENT_APPLICATION_TAB_APPLICATION_LIST_CONTENT.replace("${app}",app),3000,0);
+		waitForAndGetElement(setSpaceMg.ELEMENT_APPLICATION_TAB_APPLICATION_LIST_CONTENT.replace("${app}",app),3000,1);
 		setSpaceMg.removeApplication(app);
-		waitForElementNotPresent(hpAct.ELEMENT_SPACE_MENU_MORE_BTN,3000,0);
-		waitForElementNotPresent(hpAct.ELEMENT_SPACE_MENU_APPLICATION_PORTLET.replace("${app}",app),3000,0);
+		waitForElementNotPresent(hpAct.ELEMENT_SPACE_MENU_MORE_BTN,3000,1);
+		waitForElementNotPresent(hpAct.ELEMENT_SPACE_MENU_APPLICATION_PORTLET.replace("${app}",app),3000,1);
 
 		/*info("Delete a Space");
 		hp.goToMySpaces();
@@ -329,6 +365,17 @@ public class SOC_Space_Management extends SOC_TestConfig_1 {
 		String urlSpace =baseUrl+"/g/:spaces:"+space.toLowerCase()+"/"+space.toLowerCase();
 		String mess="You must be a member of the space "+space+" to access this page.";
 		info("urlSpace:"+urlSpace);
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+ "@gmail.com";
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+ "@gmail.com";
+		
+		info("Add user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		magAc.signIn(username1, password);
+		
 		/*Step Number: 1
 		 *Step Name: Step 1: Access with visible/open space
 		 *Step Description: 
@@ -355,13 +402,12 @@ public class SOC_Space_Management extends SOC_TestConfig_1 {
 		setSpaceMg.goToAccessEditTab();
 		setSpaceMg.setPermissionForSpace(arrayRight);
 
-		magAc.signOut();
-		magAc.signIn(DATA_USER2, DATA_PASS);
+		magAc.signIn(username2, password);
 		driver.get(urlSpace);
-		waitForAndGetElement(setSpaceMg.ELEMENT_SPACE_ACCESS_RESTRICED_AREA_TITLE,2000,0);
-		waitForAndGetElement(setSpaceMg.ELEMENT_SPACE_ACCESS_INFO,2000,0).getText().contains(mess);
-		waitForAndGetElement(setSpaceMg.ELEMENT_SPACE_ACCESS_JOIN_BTN,2000,0).click();
-		waitForAndGetElement(spaHome.ELEMENT_SPACE_MENU_ACTIVITY_STREAM,3000,0);
+		waitForAndGetElement(setSpaceMg.ELEMENT_SPACE_ACCESS_RESTRICED_AREA_TITLE,2000,1);
+		waitForAndGetElement(setSpaceMg.ELEMENT_SPACE_ACCESS_INFO,2000,1).getText().contains(mess);
+		waitForAndGetElement(setSpaceMg.ELEMENT_SPACE_ACCESS_JOIN_BTN,2000,1).click();
+		waitForAndGetElement(spaHome.ELEMENT_SPACE_MENU_ACTIVITY_STREAM,3000,1);
 
 		/*magAc.signOut();
 		magAc.signIn(DATA_USER1, DATA_PASS);
@@ -382,6 +428,16 @@ public class SOC_Space_Management extends SOC_TestConfig_1 {
 		String space = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		String[] arrayRight ={"hidden"};
 		String urlSpace =baseUrl+"/g/:spaces:"+space.toLowerCase()+"/"+space.toLowerCase();
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+ "@gmail.com";
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+ "@gmail.com";
+		
+		info("Add user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		magAc.signIn(username1, password);
 		/*Step Number: 1
 		 *Step Name: Step 1: Check hidden space
 		 *Step Description: 
@@ -408,13 +464,12 @@ public class SOC_Space_Management extends SOC_TestConfig_1 {
 		setSpaceMg.goToAccessEditTab();
 		setSpaceMg.setPermissionForSpace(arrayRight);
 
-		magAc.signOut();
-		magAc.signIn(DATA_USER2, DATA_PASS);
+		magAc.signIn(username2, password);
 		driver.get(urlSpace);
-		waitForAndGetElement(setSpaceMg.ELEMENT_SPACE_ACCESS_SPACE_NOT_FOUND_TITLE,2000,0);
-		waitForAndGetElement(setSpaceMg.ELEMENT_SPACE_ACCESS_SPACE_NOT_FOUND_INFO,2000,0);
-		waitForAndGetElement(setSpaceMg.ELEMENT_SPACE_ACCESS_SPACE_NOT_FOUND_FIND_BTN,2000,0).click();
-		waitForAndGetElement(spaMg.ELEMENT_MY_SPACE_ALL_SPACES_TAB,3000,0);
+		waitForAndGetElement(setSpaceMg.ELEMENT_SPACE_ACCESS_SPACE_NOT_FOUND_TITLE,2000,1);
+		waitForAndGetElement(setSpaceMg.ELEMENT_SPACE_ACCESS_SPACE_NOT_FOUND_INFO,2000,1);
+		waitForAndGetElement(setSpaceMg.ELEMENT_SPACE_ACCESS_SPACE_NOT_FOUND_FIND_BTN,2000,1).click();
+		waitForAndGetElement(spaMg.ELEMENT_MY_SPACE_ALL_SPACES_TAB,3000,1);
 
 		/*magAc.signOut();
 		magAc.signIn(DATA_USER1, DATA_PASS);
@@ -436,6 +491,16 @@ public class SOC_Space_Management extends SOC_TestConfig_1 {
 		String[] arrayRight ={"close"};
 		String urlSpace =baseUrl+"/g/:spaces:"+space.toLowerCase()+"/"+space.toLowerCase();
 		String mess=" You must be invited by an administrator to the space "+space+" to access this page.";
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+ "@gmail.com";
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+ "@gmail.com";
+		
+		info("Add user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		magAc.signIn(username1, password);
 		/*Step Number: 1
 		 *Step Name: Step 1: Check visible/close space
 		 *Step Description: 
@@ -460,11 +525,11 @@ public class SOC_Space_Management extends SOC_TestConfig_1 {
 		setSpaceMg.goToAccessEditTab();
 		setSpaceMg.setPermissionForSpace(arrayRight);
 
-		magAc.signOut();
-		magAc.signIn(DATA_USER2, DATA_PASS);
+		magAc.signIn(username2, password);
 		driver.get(urlSpace);
-		waitForAndGetElement(setSpaceMg.ELEMENT_SPACE_ACCESS_SPACE_DENIED,2000,0);
-		waitForAndGetElement(setSpaceMg.ELEMENT_SPACE_ACCESS_SPACE_DENIED_INFO,2000,0).getText().contains(mess);
+		waitForAndGetElement(setSpaceMg.ELEMENT_SPACE_ACCESS_SPACE_DENIED,2000,1);
+		waitForAndGetElement(setSpaceMg.ELEMENT_SPACE_ACCESS_SPACE_DENIED_INFO,2000,1).getText()
+		.contains(mess);
 
 		/*magAc.signOut();
 		magAc.signIn(DATA_USER1, DATA_PASS);
@@ -485,6 +550,16 @@ public class SOC_Space_Management extends SOC_TestConfig_1 {
 		String space = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		String urlSpace =baseUrl+"/g/:spaces:"+space.toLowerCase()+"/"+space.toLowerCase();
 		String mess="You must be a member of the space "+space+" to access this page.";
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+ "@gmail.com";
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+ "@gmail.com";
+		
+		info("Add user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		magAc.signIn(username1, password);
 		/*Step Number: 1
 		 *Step Name: Step 1: Access visible/validation space
 		 *Step Description: 
@@ -506,14 +581,13 @@ public class SOC_Space_Management extends SOC_TestConfig_1 {
 		hp.goToMySpaces();
 		spaMg.addNewSpaceSimple(space,space);
 
-		magAc.signOut();
-		magAc.signIn(DATA_USER2, DATA_PASS);
+		magAc.signIn(username2, password);
 		driver.get(urlSpace);
-		waitForAndGetElement(setSpaceMg.ELEMENT_SPACE_ACCESS_RESTRICED_AREA_TITLE,2000,0);
-		waitForAndGetElement(setSpaceMg.ELEMENT_SPACE_ACCESS_INFO,2000,0).getText().contains(mess);
-		waitForAndGetElement(setSpaceMg.ELEMENT_SPACE_ACCESS_REQUEST_JOIN_BTN,2000,0).click();
-		waitForElementNotPresent(setSpaceMg.ELEMENT_SPACE_ACCESS_RESTRICED_AREA_TITLE,2000,0);
-		waitForElementNotPresent(setSpaceMg.ELEMENT_SPACE_ACCESS_INFO,2000,0);
+		waitForAndGetElement(setSpaceMg.ELEMENT_SPACE_ACCESS_RESTRICED_AREA_TITLE,2000,1);
+		waitForAndGetElement(setSpaceMg.ELEMENT_SPACE_ACCESS_INFO,2000,1).getText().contains(mess);
+		waitForAndGetElement(setSpaceMg.ELEMENT_SPACE_ACCESS_REQUEST_JOIN_BTN,2000,1).click();
+		waitForElementNotPresent(setSpaceMg.ELEMENT_SPACE_ACCESS_RESTRICED_AREA_TITLE,2000,1);
+		waitForElementNotPresent(setSpaceMg.ELEMENT_SPACE_ACCESS_INFO,2000,1);
 	}
 	/**
 	 *<li> Case ID:121921.</li>
@@ -526,6 +600,16 @@ public class SOC_Space_Management extends SOC_TestConfig_1 {
 		info("Test 12:Check when user is member of space");
 		String space = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		String wiki = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+ "@gmail.com";
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+ "@gmail.com";
+		
+		info("Add user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		magAc.signIn(username1, password);
 		/*Step Number: 1
 		 *Step Name: Step 1: Check when user is member of space
 		 *Step Description: 
@@ -544,7 +628,7 @@ public class SOC_Space_Management extends SOC_TestConfig_1 {
 		hp.goToMySpaces();
 		spaMg.addNewSpaceSimple(space,space);
 		spaHome.goToSpaceSettingTab();
-		setSpaceMg.inviteUser(DATA_USER2,false,"");
+		setSpaceMg.inviteUser(username2,false,"");
 
 		info("Add new wiki page 1 for space 1");
 		spaHome.goToWikiTab();
@@ -552,12 +636,11 @@ public class SOC_Space_Management extends SOC_TestConfig_1 {
 		wikiMg.goToSourceEditor();
 		sourceEditor.addSimplePage(wiki,wiki);
 		wikiMg.saveAddPage();
-		waitForAndGetElement(wHome.ELEMENT_TREE_WIKI_NAME.replace("${name}",wiki),2000,0);
+		waitForAndGetElement(wHome.ELEMENT_TREE_WIKI_NAME.replace("${name}",wiki),2000,1);
 
 		wHome.goToPermalink();
 		String perLink=wHome.getPermalink();
-		magAc.signOut();
-		magAc.signIn(DATA_USER2, DATA_PASS);
+		magAc.signIn(username2, password);
 		hp.goToMySpaces();
 		spaMg.searchSpace(space,"");
 		spaMg.acceptAInvitation(space);
@@ -575,6 +658,16 @@ public class SOC_Space_Management extends SOC_TestConfig_1 {
 		info("Test 13:Check when user is not member of space");
 		String space = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		String wiki = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+ "@gmail.com";
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+ "@gmail.com";
+		
+		info("Add user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		magAc.signIn(username1, password);
 		/*Step Number: 1
 		 *Step Name: Step 1: Check when user is not member of space
 		 *Step Description: 
@@ -598,12 +691,11 @@ public class SOC_Space_Management extends SOC_TestConfig_1 {
 		wikiMg.goToSourceEditor();
 		sourceEditor.addSimplePage(wiki,wiki);
 		wikiMg.saveAddPage();
-		waitForAndGetElement(wHome.ELEMENT_TREE_WIKI_NAME.replace("${name}",wiki),2000,0);
+		waitForAndGetElement(wHome.ELEMENT_TREE_WIKI_NAME.replace("${name}",wiki),2000,1);
 
 		wHome.goToPermalink();
 		String perLink=wHome.getPermalink();
-		magAc.signOut();
-		magAc.signIn(DATA_USER2, DATA_PASS);
+		magAc.signIn(username2, password);
 		driver.get(perLink);
 		waitForAndGetElement(wHome.ELEMENT_WIKI_HOME_PAGENOTFOUND);
 	}

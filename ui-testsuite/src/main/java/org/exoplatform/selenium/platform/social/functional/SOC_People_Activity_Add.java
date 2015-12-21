@@ -2,8 +2,8 @@ package org.exoplatform.selenium.platform.social.functional;
 
 import static org.exoplatform.selenium.TestLogger.info;
 
+import org.exoplatform.selenium.Utils;
 import org.exoplatform.selenium.platform.ConnectionsManagement.selectTabOption;
-import org.openqa.selenium.By;
 import org.testng.annotations.*;
 
 
@@ -20,26 +20,29 @@ public class SOC_People_Activity_Add extends SOC_TestConfig{
 		info("Test 1: Add a share link");
 		/*Create data test*/
 		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
-		String password1 = username1;
-		String email1 = username1 + mailSuffixData.getMailSuffixRandom();
-
+		String email1 = username1+"@gmail.com";
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+"@gmail.com";
 		info("Add new user");
-		magAc.signIn(DATA_USER1, DATA_PASS);
 		navTool.goToAddUser();
-		addUserPage.addUser(username1, password1, email1, username1, username1);
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		magAc.signIn(username1,password);
+		Utils.pause(3000);
+		
 		
 		info("Click on Connections on the left panel");
 		hp.goToConnections();
 		
 		info("Access people list, invite an user");
-		connMag.connectToAUser(username1);
+		connMag.connectToAUser(username2);
 		
 		info("Invited user accept invitation");
-		magAc.signIn(username1, password1);
+		magAc.signIn(username2, password);
 		hp.goToConnections();	
-		connMag.acceptAConnection(DATA_USER1);
+		connMag.acceptAConnection(username1);
 		info("Verify after accept");
-		connMag.verifyConnection(DATA_USER1, true);
+		connMag.verifyConnection(username1, true);
 		
 		String textDes = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		String link = lnkData.getLinkByArrayTypeRandom(1);
@@ -53,7 +56,7 @@ public class SOC_People_Activity_Add extends SOC_TestConfig{
 			- Select Activities page on User Toolbar portlet in the upper right corner of the screen
 		 *Expected Outcome: 
 			- User activities page is displayed. It focus on activity list*/
-		magAc.signIn(DATA_USER1, DATA_PASS);
+		magAc.signIn(username1,password);
 		navTool.goToMyActivities();
 
 		/*Step number: 2
@@ -85,13 +88,13 @@ public class SOC_People_Activity_Add extends SOC_TestConfig{
 		hpAct.addActivity(textDes, link);
 		waitForAndGetElement(hpAct.ELEMENT_ACTIVITY_TITLE.replace("${text}",textDes).replace("${file}",link));
 		
-		magAc.signIn(username1, password1);
+		magAc.signIn(username2, password);
 		hp.goToConnections();
 		click(connMag.ELEMENT_ALL_CONNECTIONS_TAB);
-		connMag.searchPeople(DATA_USER1,null,null,null);
-		click(connMag.ELEMENT_CONNECTION_USER_NAME.replace("${user}", DATA_USER1));
+		connMag.searchPeople(username1,null,null,null);
+		click(connMag.ELEMENT_CONNECTION_USER_NAME.replace("${user}",username1));
 		uBase.goToActivityTab();
-		click(By.xpath(hpAct.ELEMENT_ACTIVITY_AUTHOR_ACTIVITY.replace("${activityText}", link)));
+		click(hpAct.ELEMENT_ACTIVITY_AUTHOR_ACTIVITY.replace("${activityText}", link));
 	}
 
 	/**
@@ -104,13 +107,16 @@ public class SOC_People_Activity_Add extends SOC_TestConfig{
 	public  void test02_AddNewActivityForUsersContact() {
 		info("Test 2: Add new activity for users contact");
 		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
-		String password1 = username1;
-		String email1 = username1 + mailSuffixData.getMailSuffixRandom();
-
+		String email1 = username1+"@gmail.com";
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+"@gmail.com";
 		info("Add new user");
-		magAc.signIn(DATA_USER1, DATA_PASS);
 		navTool.goToAddUser();
-		addUserPage.addUser(username1, password1, email1, username1, username1);
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		magAc.signIn(username1,password);
+		Utils.pause(3000);
+		
 
 		/*Step Number: 1
 		 *Step Name: -
@@ -135,7 +141,7 @@ public class SOC_People_Activity_Add extends SOC_TestConfig{
 			Invited user successfully*/
 
 		info("Access people list, invite an user");
-		connMag.connectToAUser(username1);
+		connMag.connectToAUser(username2);
 		
 		/*Step number: 3
 		 *Step Name: -
@@ -149,11 +155,11 @@ public class SOC_People_Activity_Add extends SOC_TestConfig{
 			- After the user clicks on [accept], the relation between two users has set. The user will be added into users relations user list. 
 			- By side each the user, has a [remove] button to user can remove from this relation.=> Two user become friend*/
 		info("Invited user accept invitation");
-		magAc.signIn(username1, password1);
+		magAc.signIn(username2, password);
 		hp.goToConnections();	
-		connMag.acceptAConnection(DATA_USER1);
+		connMag.acceptAConnection(username1);
 		info("Verify after accept");
-		connMag.verifyConnection(DATA_USER1, true);
+		connMag.verifyConnection(username1, true);
 		
 		/*Step number: 4
 		 *Step Name: -
@@ -172,10 +178,10 @@ public class SOC_People_Activity_Add extends SOC_TestConfig{
 			On friends activities click on name user AAA
 		 *Expected Outcome: 
 			User can see the text box to add new activity for user AAA and add activity for this user successfully*/
-		magAc.signIn(DATA_USER1, DATA_PASS);
+		magAc.signIn(username1,password);
 		hp.goToConnections();
 		connMag.goToConnectionTab(selectTabOption.ALL);
-		connMag.goToUserByUserName(username1);
+		connMag.goToUserByUserName(username2);
 		uBase.goToActivityTab();
 		String activity1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		hpAct.addActivity(activity1, "");
@@ -191,26 +197,29 @@ public class SOC_People_Activity_Add extends SOC_TestConfig{
 	public  void test03_AddNewYourActivity() {
 		/*Create data test*/
 		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
-		String password1 = username1;
-		String email1 = username1 + mailSuffixData.getMailSuffixRandom();
-
+		String email1 = username1+"@gmail.com";
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+"@gmail.com";
 		info("Add new user");
-		magAc.signIn(DATA_USER1, DATA_PASS);
 		navTool.goToAddUser();
-		addUserPage.addUser(username1, password1, email1, username1, username1);
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		magAc.signIn(username1,password);
+		Utils.pause(3000);
+		
 		
 		info("Click on Connections on the left panel");
 		hp.goToConnections();
 		
 		info("Access people list, invite an user");
-		connMag.connectToAUser(username1);
+		connMag.connectToAUser(username2);
 		
 		info("Invited user accept invitation");
-		magAc.signIn(username1, password1);
+		magAc.signIn(username2, password);
 		hp.goToConnections();	
-		connMag.acceptAConnection(DATA_USER1);
+		connMag.acceptAConnection(username1);
 		info("Verify after accept");
-		connMag.verifyConnection(DATA_USER1, true);
+		connMag.verifyConnection(username1, true);
 		
 		info("Test 3: Add new your activity");
 		/*Step Number: 1
@@ -222,7 +231,7 @@ public class SOC_People_Activity_Add extends SOC_TestConfig{
 			- Select Activities page on User Toolbar portlet in the upper right corner of the screen
 		 *Expected Outcome: 
 			- Show content of People page. It focus on activity list*/
-		magAc.signIn(DATA_USER1, DATA_PASS);
+		magAc.signIn(username1,password);
 		navTool.goToMyActivities();
 		
 		/*Step number: 2
@@ -239,13 +248,13 @@ public class SOC_People_Activity_Add extends SOC_TestConfig{
 		String activity1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		hpAct.addActivity(activity1, "");
 		
-		magAc.signIn(username1, password1);
+		magAc.signIn(username2, password);
 		hp.goToConnections();
 		click(connMag.ELEMENT_ALL_CONNECTIONS_TAB);
-		connMag.searchPeople(DATA_USER1,null,null,null);
-		click(connMag.ELEMENT_CONNECTION_USER_NAME.replace("${user}", DATA_USER1));
+		connMag.searchPeople(username1,null,null,null);
+		click(connMag.ELEMENT_CONNECTION_USER_NAME.replace("${user}",username1));
 		uBase.goToActivityTab();
-		waitForAndGetElement(By.xpath(hpAct.ELEMENT_ACTIVITY_AUTHOR_ACTIVITY.replace("${activityText}", activity1)));
+		waitForAndGetElement(hpAct.ELEMENT_ACTIVITY_AUTHOR_ACTIVITY.replace("${activityText}", activity1));
 	}
 
 	/**
@@ -268,7 +277,14 @@ public class SOC_People_Activity_Add extends SOC_TestConfig{
 			- Select Activities page on User Toolbar portlet in the upper right corner of the screen
 		 *Expected Outcome: 
 			- User activities page is displayed. It focus on activity list*/
-		magAc.signIn(DATA_USER1, DATA_PASS);
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		magAc.signIn(username1,password);
+		Utils.pause(3000);
+		
 		navTool.goToMyActivities();
 		/*Step number: 2
 		 *Step Name: -

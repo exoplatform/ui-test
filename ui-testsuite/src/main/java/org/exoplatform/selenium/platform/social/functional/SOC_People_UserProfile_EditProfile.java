@@ -2,6 +2,7 @@ package org.exoplatform.selenium.platform.social.functional;
 
 import static org.exoplatform.selenium.TestLogger.info;
 
+import org.exoplatform.selenium.Utils;
 import org.testng.annotations.*;
 
 
@@ -16,7 +17,13 @@ public class SOC_People_UserProfile_EditProfile extends SOC_TestConfig{
 	@Test
 	public  void test01_CheckSaveButtonWhileEditingProfile() {
 		info("Test 1: Check Save button while editing profile");
-		magAc.signIn(DATA_USER1, DATA_PASS);
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		magAc.signIn(username1,password);
+		Utils.pause(3000);
 		/*Step Number: 1
 		 *Step Name: Step 1 : Go to my Profile
 		 *Step Description: 
@@ -65,7 +72,13 @@ public class SOC_People_UserProfile_EditProfile extends SOC_TestConfig{
 	@Test
 	public  void test02_EditMyProfileNotDisplayedWhileEditing() {
 		info("Test 2: Edit my Profile not displayed while editing");
-		magAc.signIn(DATA_USER1, DATA_PASS);
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		magAc.signIn(username1,password);
+		Utils.pause(3000);
 		/*Step Number: 1
 		 *Step Name: - Step 1 : Go to Edit Profile
 		 *Step Description: 
@@ -99,7 +112,6 @@ public class SOC_People_UserProfile_EditProfile extends SOC_TestConfig{
 	 */
 	@Test
 	public  void test03_LeaveEmailBlank() {
-		magAc.signIn(DATA_USER1, DATA_PASS);
 		info("Test 3: Leave Email blank");
 		/*Step Number: 1
 		 *Step Name: Step 1: Go to the My Profile page
@@ -110,6 +122,14 @@ public class SOC_People_UserProfile_EditProfile extends SOC_TestConfig{
 
 		 *Expected Outcome: 
 			The My Profile page is shown.*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		magAc.signIn(username1,password);
+		Utils.pause(3000);
+		
 		navTool.goToMyProfile();
 		
 		/*Step number: 2
@@ -145,7 +165,6 @@ public class SOC_People_UserProfile_EditProfile extends SOC_TestConfig{
 	 */
 	@Test
 	public  void test04_LeaveLastNameFieldEmpty() {
-		magAc.signIn(DATA_USER1, DATA_PASS);
 		info("Test 4: Leave Last Name field empty");
 		/*Step Number: 1
 		 *Step Name: Step 1: Go to My Profile page
@@ -156,6 +175,13 @@ public class SOC_People_UserProfile_EditProfile extends SOC_TestConfig{
 
 		 *Expected Outcome: 
 			The My Profile page is shown.*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		magAc.signIn(username1,password);
+		Utils.pause(3000);
 		navTool.goToMyProfile();
 		/*Step number: 2
 		 *Step Name: Step 2: Open the Edit Profile page
@@ -190,7 +216,6 @@ public class SOC_People_UserProfile_EditProfile extends SOC_TestConfig{
 	@Test
 	public  void test05_LeaveTheFirstNameFieldEmpty() {
 		info("Test 5: Leave the First Name field empty");
-		magAc.signIn(DATA_USER1, DATA_PASS);
 		/*Step Number: 1
 		 *Step Name: Step 1: Go to My Profile page
 		 *Step Description: 
@@ -200,6 +225,13 @@ public class SOC_People_UserProfile_EditProfile extends SOC_TestConfig{
 
 		 *Expected Outcome: 
 			The My Profile page is shown.*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		magAc.signIn(username1,password);
+		Utils.pause(3000);
 		navTool.goToMyProfile();
 		/*Step number: 2
 		 *Step Name: Step 2: Open Edit Profile page

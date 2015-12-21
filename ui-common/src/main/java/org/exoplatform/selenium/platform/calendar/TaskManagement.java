@@ -14,7 +14,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-public class TaskManagement extends CalendarLocatorObject {
+public class TaskManagement extends CalendarLocator {
 	PlatformPermission pPer;
 	//CalendarHomePage cHome;
 	public TaskManagement(WebDriver dr){

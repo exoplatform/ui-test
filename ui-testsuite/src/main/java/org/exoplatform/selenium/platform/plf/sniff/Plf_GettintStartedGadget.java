@@ -8,12 +8,6 @@ import org.testng.annotations.*;
 
 
 public class Plf_GettintStartedGadget extends Plf_TestConfig {
-	@AfterMethod
-	public void setAfterMethod(){
-		magAc.signOut();
-		info("Sign in with john account");
-		magAc.signIn(DATA_USER1, DATA_PASS);
-	}
 	/**
 	 *<li> Case ID:120844.</li>
 	 *<li> Test Case Name: Check display of Getting started Gadget.</li>

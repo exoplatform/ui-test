@@ -7,11 +7,6 @@ import org.testng.annotations.*;
 
 public class SOC_Space_Member_Management extends SOC_TestConfig_1 {
 	
-	@AfterMethod
-	public void setAfterMethod(){
-		magAc.signOut();
-		magAc.signIn(DATA_USER1, DATA_PASS);
-	}
 	/**
 	 *<li> Case ID:121890.</li>
 	 *<li> Test Case Name: Change member's role in Space.</li>
@@ -22,6 +17,16 @@ public class SOC_Space_Member_Management extends SOC_TestConfig_1 {
 	public  void test01_ChangeMemberRoleInSpace() {
 		info("Test 01: Change member's role in Space");
 		String space = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+ "@gmail.com";
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+ "@gmail.com";
+		
+		info("Add user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		magAc.signIn(username1, password);
 		/*Step Number: 1
 		 *Step Name: Step 1: Change member's role
 		 *Step Description: 
@@ -39,30 +44,21 @@ public class SOC_Space_Member_Management extends SOC_TestConfig_1 {
 		hp.goToMySpaces();
 		spaMg.addNewSpaceSimple(space,space);
 		spaHome.goToSpaceSettingTab();
-		setSpaceMg.inviteUser(DATA_USER2,false,"");
+		setSpaceMg.inviteUser(username2,false,"");
 		
-		magAc.signOut();
-		magAc.signIn(DATA_USER2, DATA_PASS);
+		magAc.signIn(username2, password);
 		hp.goToMySpaces();
 		spaMg.acceptAInvitation(space);
 		
-		magAc.signOut();
-		magAc.signIn(DATA_USER1, DATA_PASS);
+		magAc.signIn(username1, password);
 		spaHome.goToSpace(space);
 		spaHome.goToSpaceSettingTab();
-		setSpaceMg.changeRole(DATA_NAME_USER2);
+		setSpaceMg.changeRole(username2+" "+username2);
 		
-		magAc.signOut();
-		magAc.signIn(DATA_USER2, DATA_PASS);
+		magAc.signIn(username2, password);
 		spaHome.goToSpace(space);
 		spaHome.goToSpaceSettingTab();
 		
-		/*magAc.signOut();
-		magAc.signIn(DATA_USER1, DATA_PASS);*/
-		
-		/*info("Delete a Space");
-		hp.goToMySpaces();
-		spaMg.deleteSpace(space,false);*/
 	}
 
 	/**
@@ -75,6 +71,19 @@ public class SOC_Space_Member_Management extends SOC_TestConfig_1 {
 	public  void test02_InviteAcceptUserToSpace() {
 		info("Test 02: Invite/Accept user to Space");
 		String space = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+ "@gmail.com";
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+ "@gmail.com";
+		String username3 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email3 = username3+ "@gmail.com";
+		
+		info("Add user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		addUserPage.addUser(username3, password, email3, username3, username3);
+		magAc.signIn(username1, password);
 		/*Step Number: 1
 		 *Step Name: Step 1: Invite/Accept user
 		 *Step Description: 
@@ -101,28 +110,25 @@ public class SOC_Space_Member_Management extends SOC_TestConfig_1 {
 		spaMg.addNewSpaceSimple(space,space);
 		info(" After invited user accept invitation, invited  space will move from invitation space list to my space list of user");
 		spaHome.goToSpaceSettingTab();
-		setSpaceMg.inviteUser(DATA_USER2,false,"");
-		setSpaceMg.inviteUser(DATA_USER4,false,"");
+		setSpaceMg.inviteUser(username2,false,"");
+		setSpaceMg.inviteUser(username3,false,"");
 		
-		magAc.signOut();
-		magAc.signIn(DATA_USER2, DATA_PASS);
+		magAc.signIn(username2, password);
 		hp.goToMySpaces();
 		spaMg.acceptAInvitation(space);
 		
 		
-		magAc.signOut();
-		magAc.signIn(DATA_USER4, DATA_PASS);
+		magAc.signIn(username3, password);
 		hp.goToMySpaces();
 		spaMg.ignoreAInvitation(space);
 		
-		magAc.signOut();
-		magAc.signIn(DATA_USER1, DATA_PASS);
+		magAc.signIn(username1, password);
 		spaHome.goToSpace(space);
 		spaHome.goToSpaceSettingTab();
 		info("Accepted user is displayed on Member List");
 		click(setSpaceMg.ELEMENT_SPACE_SETTINGS_MEMBERS_TAB);
-		waitForAndGetElement(setSpaceMg.ELEMENT_SPACE_MEMBERS_USER_TABLE.replace("${user}",DATA_NAME_USER2),2000,0);
-		waitForElementNotPresent(setSpaceMg.ELEMENT_SPACE_MEMBERS_USER_TABLE.replace("${user}",DATA_NAME_USER4));
+		waitForAndGetElement(setSpaceMg.ELEMENT_SPACE_MEMBERS_USER_TABLE.replace("${user}",username2+" "+username2),2000,1);
+		waitForElementNotPresent(setSpaceMg.ELEMENT_SPACE_MEMBERS_USER_TABLE.replace("${user}",username3+" "+username3));
 		
 		/*info("Delete a Space");
 		hp.goToMySpaces();
@@ -139,6 +145,16 @@ public class SOC_Space_Member_Management extends SOC_TestConfig_1 {
 	public  void test03_LeaveSpace() {
 		info("Test 03: Leave Space");
 		String space = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+ "@gmail.com";
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+ "@gmail.com";
+		
+		info("Add user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		magAc.signIn(username1, password);
 		/*Step Number: 1
 		 *Step Name: Step 1: Leave Space
 		 *Step Description: 
@@ -155,26 +171,21 @@ public class SOC_Space_Member_Management extends SOC_TestConfig_1 {
 		hp.goToMySpaces();
 		spaMg.addNewSpaceSimple(space,space);
 		spaHome.goToSpaceSettingTab();
-		setSpaceMg.inviteUser(DATA_USER2,false,"");
+		setSpaceMg.inviteUser(username2,false,"");
 		
-		magAc.signOut();
-		magAc.signIn(DATA_USER2, DATA_PASS);
+		magAc.signIn(username2, password);
 		hp.goToMySpaces();
 		spaMg.acceptAInvitation(space);
 		hp.goToMySpaces();
 		spaMg.leaveSpace(space);
 		
-		magAc.signOut();
-		magAc.signIn(DATA_USER1, DATA_PASS);
+		magAc.signIn(username1, password);
 		spaHome.goToSpace(space);
 		spaHome.goToSpaceSettingTab();
 		info(" Space is disappeared from list and moved to All spaces list, user is not member of space");
 		click(setSpaceMg.ELEMENT_SPACE_SETTINGS_MEMBERS_TAB);
-		waitForElementNotPresent(setSpaceMg.ELEMENT_SPACE_MEMBERS_USER_TABLE.replace("${user}",DATA_NAME_USER2),2000,1);
+		waitForElementNotPresent(setSpaceMg.ELEMENT_SPACE_MEMBERS_USER_TABLE.replace("${user}",username2+" "+username2),2000,1);
 		
-		/*info("Delete a Space");
-		hp.goToMySpaces();
-		spaMg.deleteSpace(space,false);*/
 	}
 
 	/**
@@ -187,6 +198,16 @@ public class SOC_Space_Member_Management extends SOC_TestConfig_1 {
 	public  void test04_RemoveUSerFromSpace() {
 		info("Test 04: Remove user from space");
 		String space = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+ "@gmail.com";
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+ "@gmail.com";
+		
+		info("Add user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		magAc.signIn(username1, password);
 		/*Step Number: 1
 		 *Step Name: Step 1: Remove user
 		 *Step Description: 
@@ -204,18 +225,16 @@ public class SOC_Space_Member_Management extends SOC_TestConfig_1 {
 		hp.goToMySpaces();
 		spaMg.addNewSpaceSimple(space,space);
 		spaHome.goToSpaceSettingTab();
-		setSpaceMg.inviteUser(DATA_USER2,false,"");
+		setSpaceMg.inviteUser(username2,false,"");
 		
-		magAc.signOut();
-		magAc.signIn(DATA_USER2, DATA_PASS);
+		magAc.signIn(username2, password);
 		hp.goToMySpaces();
 		spaMg.acceptAInvitation(space);
 		
-		magAc.signOut();
-		magAc.signIn(DATA_USER1, DATA_PASS);
+		magAc.signIn(username1, password);
 		spaHome.goToSpace(space);
 		spaHome.goToSpaceSettingTab();
-		setSpaceMg.removeUser(DATA_USER2);
+		setSpaceMg.removeUser(username2);
 		
 		/*info("Delete a Space");
 		hp.goToMySpaces();
@@ -232,6 +251,16 @@ public class SOC_Space_Member_Management extends SOC_TestConfig_1 {
 	public  void test05_RequestAcceptUserToSpace() {
 		info("Test 05:Request/Accept user to Space");
 		String space = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+ "@gmail.com";
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+ "@gmail.com";
+		
+		info("Add user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		magAc.signIn(username1, password);
 		/*Step Number: 1
 		 *Step Name: Step 1: Request/Accept user
 		 *Step Description: 
@@ -254,18 +283,16 @@ public class SOC_Space_Member_Management extends SOC_TestConfig_1 {
 		hp.goToMySpaces();
 		spaMg.addNewSpaceSimple(space,space);
 		
-		magAc.signOut();
-		magAc.signIn(DATA_USER2, DATA_PASS);
+		magAc.signIn(username2, password);
 		hp.goToAllSpace();
 		spaMg.sendARequestToASpace(space);
 		spaMg.goToRequestPendingTab();
-		waitForAndGetElement(spaMg.ELEMENT_MY_SPACE_ALL_SPACES_REQUEST_PENDING.replace("${space}", space),3000,0);
+		waitForAndGetElement(spaMg.ELEMENT_MY_SPACE_ALL_SPACES_REQUEST_PENDING.replace("${space}", space),3000,1);
 		
-		magAc.signOut();
-		magAc.signIn(DATA_USER1, DATA_PASS);
+		magAc.signIn(username1, password);
 		spaHome.goToSpace(space);
 		spaHome.goToSpaceSettingTab();
-		setSpaceMg.acceptRequest(DATA_USER2);
+		setSpaceMg.acceptRequest(username2);
 	}
 	
 }

@@ -2,6 +2,7 @@ package org.exoplatform.selenium.platform.social.functional;
 
 import static org.exoplatform.selenium.TestLogger.info;
 
+import org.exoplatform.selenium.Utils;
 import org.testng.annotations.*;
 
 
@@ -29,6 +30,14 @@ public class SOC_People_Activity_Delete extends SOC_TestConfig{
 		 *Expected Outcome: 
 			Add an activity successfully:
 			- This activity is added into users activities list.User who is in your contact, can view your active on his/her activity list*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		magAc.signIn(username1,password);
+		Utils.pause(3000);
+		
 		navTool.goToMyActivities();
 		String activity1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		hpAct.addActivity(activity1, "");

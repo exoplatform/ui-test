@@ -1,19 +1,13 @@
 package org.exoplatform.selenium.platform.administration;
 
 import org.exoplatform.selenium.Utils;
-import org.exoplatform.selenium.platform.PlatformBase;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import static org.exoplatform.selenium.TestLogger.info;
 
 
-public class ManageLayout extends PlatformBase{
+public class ManageLayout extends AdministrationLocator{
 	
-	public final By ELEMENT_PERMISSION_PUBLIC_CHECKBOX=By.xpath(".//*[contains(@id,'UIListPermissionSelector')]//input[@id='publicMode']");
-	public final By ELEMENT_PERMISSION_GRID=By.xpath(".//*[@id='PermissionGrid']");
-	
-	//*================================================================================*\\
 	public ManageLayout(WebDriver dr) {
 		this.driver=dr;
 	}
@@ -27,33 +21,6 @@ public class ManageLayout extends PlatformBase{
 		waitForElementNotPresent(ELEMENT_PERMISSION_GRID);
 		info("The public mode is checked");
 	}
-	
-	//*=========================================================EDIT/SITE/LAYOUT==============================================*\
-	public final By ELEMENT_EDIT_SITE_LAYOUT_SITE_CONFIG_BTN=By.xpath(".//*[@id='UIPortalComposer']//*[contains(@class,'PageProfileIcon')]");
-	public final By ELEMENT_EDIT_SITE_LAYOUT_SAVE_BTN=By.xpath(".//*[@id='UIPortalComposer']//*[contains(@class,'uiIconSave')]");
-	
-	//SITE CONFIG POPUP
-	public final By ELEMENT_SITE_CONFIG_POPUP_PERMISSION_TAB=By.xpath(".//*[@id='UIMaskWorkspace']//*[contains(@data-target,'#PermissionSetting-tab')]");
-	public final By ELEMENET_SITE_CONFIG_POPUP_SAVE_BTN=By.xpath(".//*[@id='UIPortalForm']//button[1]");
-	
-	
-	//Edit Portlet popup
-	public final By ELEMENT_PORTLET_POPUP_PERMISSION_TAB=By.xpath(".//*[@data-target='#PortletPermission-tab']");
-	public final By ELEMETN_PORTLET_POPUP_SAVE_BTN=By.xpath(".//*[@id='Save']");
-	
-	//HOME PAGE LAYOUT
-	public final By ELEMENT_HOME_PAGE_LEFT_PORTLET_BREADCRUM_NAVIGATION=By.xpath(".//*[contains(@id,'LeftBreadCrumbNavigationPortlet')]//*[contains(@class,'LAYOUT-CONTAINER')]");
-	public final By ELEMENT_HOME_PAGE_LEFT_PORTLET_BREADCRUM_NAVIGATION_EDIT_BTN=By.xpath(".//*[contains(@id,'LeftBreadCrumbNavigationPortlet')]//*[contains(@class,'EDITION-PORTLET')]//*[contains(@class,'uiIconEdit')]");
-	
-	public final By ELEMENT_HOME_PAGE_LEFT_PORTLET_COMPANY_NAVIGATION=By.xpath(".//*[contains(@id,'LeftNavigationPortlet')]//*[contains(@class,'LAYOUT-CONTAINER')]");
-	public final By ELEMENT_HOME_PAGE_LEFT_PORTLET_COMPANY_NAVIGATION_EDIT_BTN=By.xpath(".//*[contains(@id,'LeftNavigationPortlet')]//*[contains(@class,'EDITION-PORTLET')]//*[contains(@class,'uiIconEdit')]");
-	
-	public final By ELEMENT_HOME_PAGE_LEFT_PORTLET_GROUPS_NAVIGATION=By.xpath(".//*[contains(@id,'GroupsNavigationPortlet')]//*[contains(@class,'LAYOUT-CONTAINER')]");
-	public final By ELEMENT_HOME_PAGE_LEFT_PORTLET_GROUPS_NAVIGATION_EDIT_BTN=By.xpath(".//*[contains(@id,'GroupsNavigationPortlet')]//*[contains(@class,'EDITION-PORTLET')]//*[contains(@class,'uiIconEdit')]");
-	
-	public final By ELEMENT_HOME_PAGE_LEFT_PORTLET_SPACES_NAVIGATION=By.xpath(".//*[contains(@id,'SpaceNavigationPortlet')]//*[contains(@class,'LAYOUT-CONTAINER')]");
-	public final By ELEMENT_HOME_PAGE_LEFT_PORTLET_SPACES_NAVIGATION_EDIT_BTN=By.xpath(".//*[contains(@id,'SpaceNavigationPortlet')]//*[contains(@class,'EDITION-PORTLET')]//*[contains(@class,'uiIconEdit')]");
-	//*=============================================================*\\
 	
 	/**
 	 * Open Site config popup
@@ -154,25 +121,6 @@ public class ManageLayout extends PlatformBase{
 		info("All changes are saved");
 	}
 	
-	//*=============================================================EDIT/PAGE/EDIT LAYOUT===========================================*\
-
-	public final By ELEMENT_PAGE_EDIT_LAYOUT_PROPERITES_BTN =By.xpath(".//*[@id='UIPageEditor']//*[contains(@class,'PageProfileIcon')]");
-	public final By ELEMENT_PAGE_EDIT_LAYOUT_SAVE_BTN=By.xpath(".//*[@id='UIPageEditor']//*[contains(@class,'uiIconSave')]");
-	public final By ELEMENT_PAGE_EDIT_LAYOUT_CONTAINER_TAB=By.xpath(".//*[@data-target='#contList']");
-	
-	//WIKI CONTAINER
-	public final By ELEMENT_PAGE_EDIT_LAYOUT_WIKI_CONTAINER=By.xpath(".//*[@id='myWikiPortlet']//*[contains(@class,'LAYOUT-CONTAINER')]");
-	public final By ELEMENT_PAGE_EDIT_LAYOUT_WIKI_CONTAINER_EDIT_BTN=By.xpath(".//*[@id='myWikiPortlet']//*[contains(@class,'EDITION-CONTAINER')]//*[contains(@class,'uiIconEdit')]");
-	
-	//EDIT CONTAINER POPUP
-	public final By ELEMENT_CONTAINER_POPUP_PERMISSION_TAB=By.xpath(".//*[@data-target='#UIContainerPermission-tab']");
-	public final By ELEMENT_CONTAINER_POPUP_SAVE_BTN=By.xpath(".//*[@id='UIContainerForm']//button[1]");
-	
-	//PROPERTIES POPUP
-	public final By ELEMENT_PROPERTIES_POPUP_PERMISSION_TAB=By.xpath(".//*[@data-target='#PermissionSetting-tab']");
-	public final By ELEMENT_PROPERTIES_POPUP_SAVE_BTN=By.xpath(".//*[@id='UIPageForm']//button[1]");
-	
-	//*===================================================================*\\
 	/**
      * Open Page properties popup
      */

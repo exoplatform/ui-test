@@ -2,6 +2,7 @@ package org.exoplatform.selenium.platform.social.functional;
 
 import static org.exoplatform.selenium.TestLogger.info;
 
+import org.exoplatform.selenium.Utils;
 import org.exoplatform.selenium.platform.ConnectionsManagement;
 import org.exoplatform.selenium.platform.HomePagePlatform;
 import org.exoplatform.selenium.platform.ManageLogInOut;
@@ -21,13 +22,15 @@ public class SOC_People_FindConnections extends SOC_TestConfig{
 	public  void test01_CreateConnectionWithUserInYourContact() {
 		/*Create data test*/
 		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
-		String password1 = username1;
-		String email1 = username1 + mailSuffixData.getMailSuffixRandom();
-
+		String email1 = username1+"@gmail.com";
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+"@gmail.com";
 		info("Add new user");
-		magAc.signIn(DATA_USER1, DATA_PASS);
 		navTool.goToAddUser();
-		addUserPage.addUser(username1, password1, email1, username1, username1);
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		magAc.signIn(username1,password);
+		Utils.pause(3000);
 		info("Test 1: Create connection with user in your contact");
 		/*Step Number: 1
 		 *Step Name: Step 1: Go to people page
@@ -52,7 +55,7 @@ public class SOC_People_FindConnections extends SOC_TestConfig{
 			- Connection request is sent to user2
 			- The button [Connect] is changed to [Cancel request] button respectively*/
 		info("Click on Connect button to invite about 2 users");
-		connMag.connectToAUser(username1);
+		connMag.connectToAUser(username2);
 
 		/*Step number: 3
 		 *Step Name: Step 3: Accept the friend
@@ -66,10 +69,10 @@ public class SOC_People_FindConnections extends SOC_TestConfig{
 			- A connection between two users is created. 
 			- The buttons [Confirm], [Ignore] disappear from user1
 			- The button [Remove connection] is shown on user1.*/
-		magAc.signIn(username1, password1);
+		magAc.signIn(username2, password);
 		hp.goToConnections();	
 		connMag.goToConnectionTab(selectTabOption.RECEIVE);
-		connMag.acceptAConnection(DATA_USER1);
+		connMag.acceptAConnection(username1);
 
 		/*Step number: 4
 		 *Step Name: Step 4: Try to re
@@ -81,10 +84,10 @@ public class SOC_People_FindConnections extends SOC_TestConfig{
 		 *Expected Outcome: 
 			- There isn't anymore other buttons except for [Remove connection] on user1. So user2 cannot re
 			-invite user1 again.*/ 
-		magAc.signIn(DATA_USER1, DATA_PASS);
+		magAc.signIn(username1,password);
 		hp.goToConnections();	
-		connMag.searchPeople(username1,null,null,null);
-		waitForAndGetElement(connMag.ELEMENT_CONNECTION_REVOVE_BTN.replace("${user}",username1),2000,1);
+		connMag.searchPeople(username2,null,null,null);
+		waitForAndGetElement(connMag.ELEMENT_CONNECTION_REVOVE_BTN.replace("${user}",username2),2000,1);
 	}
 
 	/**
@@ -97,13 +100,15 @@ public class SOC_People_FindConnections extends SOC_TestConfig{
 	public  void test02_InviteUser() {
 		/*Create data test*/
 		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
-		String password1 = username1;
-		String email1 = username1 + mailSuffixData.getMailSuffixRandom();
-
+		String email1 = username1+"@gmail.com";
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+"@gmail.com";
 		info("Add new user");
-		magAc.signIn(DATA_USER1, DATA_PASS);
 		navTool.goToAddUser();
-		addUserPage.addUser(username1, password1, email1, username1, username1);
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		magAc.signIn(username1,password);
+		Utils.pause(3000);
 		info("Test 2: Invite User");
 		/*Step Number: 1
 		 *Step Name: Step 1: Go to Connections page
@@ -127,7 +132,7 @@ public class SOC_People_FindConnections extends SOC_TestConfig{
 			- Invitation is sent
 			- [Connect] button is changed to [Cancel request]*/
 		info("Click on Connect button to invite about 2 users");
-		connMag.connectToAUser(username1);
+		connMag.connectToAUser(username2);
 
 		/*Step number: 3
 		 *Step Name: Step 3: Check user after invited
@@ -139,11 +144,11 @@ public class SOC_People_FindConnections extends SOC_TestConfig{
 
 		 *Expected Outcome: 
 			- Display: Confirm and Ignore button bellow User1's avatar*/ 
-		magAc.signIn(username1, password1);
+		magAc.signIn(username2, password);
 		hp.goToConnections();	
-		connMag.searchPeople(DATA_USER1,null,null,null);
-		waitForAndGetElement(connMag.ELEMENT_CONNECTION_CONFIRM_BTN.replace("${user}",DATA_USER1),2000,1);
-		waitForAndGetElement(connMag.ELEMENT_CONNECTION_IGNORE_BTN.replace("${user}",DATA_USER1),2000,1);
+		connMag.searchPeople(username1,null,null,null);
+		waitForAndGetElement(connMag.ELEMENT_CONNECTION_CONFIRM_BTN.replace("${user}",username1),2000,1);
+		waitForAndGetElement(connMag.ELEMENT_CONNECTION_IGNORE_BTN.replace("${user}",username1),2000,1);
 	}
 
 	/**
@@ -158,17 +163,20 @@ public class SOC_People_FindConnections extends SOC_TestConfig{
 	public  void test03_09_AcceptRemoveConnection() {
 		/*Create data test*/
 		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
-		String password1 = username1;
-		String email1 = username1 + mailSuffixData.getMailSuffixRandom();
-
+		String email1 = username1+"@gmail.com";
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+"@gmail.com";
 		info("Add new user");
-		magAc.signIn(DATA_USER1, DATA_PASS);
 		navTool.goToAddUser();
-		addUserPage.addUser(username1, password1, email1, username1, username1);
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		magAc.signIn(username1,password);
+		Utils.pause(3000);
+		
 		info("Click on Connections on the left panel");
 		hp.goToConnections();
 		info("Click on Connect button to invite about 2 users");
-		connMag.connectToAUser(username1);
+		connMag.connectToAUser(username2);
 
 		info("Test 9: User accept invitation");
 		/*Step Number: 1
@@ -184,10 +192,10 @@ public class SOC_People_FindConnections extends SOC_TestConfig{
 			- Invitation is accepted
 			- Button is changed to "Remove connection]*/ 
 
-		magAc.signIn(username1, password1);
+		magAc.signIn(username2, password);
 		hp.goToConnections();	
 		connMag.goToConnectionTab(selectTabOption.RECEIVE);
-		connMag.acceptAConnection(DATA_USER1);
+		connMag.acceptAConnection(username1);
 
 		info("Test 3: Remove connection");
 		/*Step Number: 1
@@ -201,10 +209,10 @@ public class SOC_People_FindConnections extends SOC_TestConfig{
 		 *Expected Outcome: 
 			- Connection is removed
 			- Button is changed to [Connect]*/ 
-		magAc.signIn(DATA_USER1, DATA_PASS);
+		magAc.signIn(username1,password);
 		hp.goToConnections();	
 		hp.goToConnections();	
-		connMag.removeConnection(username1);
+		connMag.removeConnection(username2);
 	}
 
 	/**
@@ -225,7 +233,19 @@ public class SOC_People_FindConnections extends SOC_TestConfig{
 
 		 *Expected Outcome: 
 			Show content of people page with a list of users exited in system*/
-		magAc.signIn(DATA_USER1, DATA_PASS);
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+"@gmail.com";
+		String username3 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email3 = username3+"@gmail.com";
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		addUserPage.addUser(username3, password, email3, username3, username3);
+		magAc.signIn(username1,password);
+		Utils.pause(3000);
 		hp.goToConnections();
 
 		/*Step number: 2
@@ -237,10 +257,9 @@ public class SOC_People_FindConnections extends SOC_TestConfig{
 
 		 *Expected Outcome: 
 			- Display all matching results*/ 
-		connMag.searchPeople(DATA_USER2,null,null,null);
-		waitForAndGetElement(connMag.ELEMENT_USER_LINK.replace("${userName}", DATA_USER2));
-		waitForElementNotPresent(connMag.ELEMENT_USER_LINK.replace("${userName}", DATA_USER3));
-		waitForElementNotPresent(connMag.ELEMENT_USER_LINK.replace("${userName}", DATA_USER4));
+		connMag.searchPeople(username2,null,null,null);
+		waitForAndGetElement(connMag.ELEMENT_USER_LINK.replace("${userName}",username2));
+		waitForElementNotPresent(connMag.ELEMENT_USER_LINK.replace("${userName}",username3));
 	}
 
 	/**
@@ -261,7 +280,19 @@ public class SOC_People_FindConnections extends SOC_TestConfig{
 
 		 *Expected Outcome: 
 			Show content of Connections page with a list of users exited in system*/
-		magAc.signIn(DATA_USER1, DATA_PASS);
+		String username1 = "a" + getRandomString();
+		String email1 = username1+"@gmail.com";
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+"@gmail.com";
+		String username3 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email3 = username3+"@gmail.com";
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		addUserPage.addUser(username3, password, email3, username3, username3);
+		magAc.signIn(username1,password);
+		Utils.pause(3000);
 		hp.goToConnections();
 
 		/*Step number: 2
@@ -274,7 +305,7 @@ public class SOC_People_FindConnections extends SOC_TestConfig{
 			Return all existing users in list. Users are ordered by last name.*/ 
 		connMag.clearSearchTextbox();
 		connMag.searchPeople(null,null,null,null);
-		waitForAndGetElement(connMag.ELEMENT_USER_LINK.replace("${userName}", DATA_USER3));
+		waitForAndGetElement(connMag.ELEMENT_USER_LINK.replace("${userName}",username1));
 	}
 
 	/**
@@ -295,7 +326,19 @@ public class SOC_People_FindConnections extends SOC_TestConfig{
 
 		 *Expected Outcome: 
 			Show content of people page with a list of users exited in system*/
-		magAc.signIn(DATA_USER1, DATA_PASS);
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		String username2 = getRandomString()+" William";
+		String email2 = username2+"@gmail.com";
+		String username3 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email3 = username3+"@gmail.com";
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		addUserPage.addUser(username3, password, email3, username3, username3);
+		magAc.signIn(username1,password);
+		Utils.pause(3000);
 		hp.goToConnections();
 		/*Step number: 2
 		 *Step Name: - Step 2: Search user
@@ -307,9 +350,9 @@ public class SOC_People_FindConnections extends SOC_TestConfig{
 			Show all the users which has last name start by the letter or show message: $number Results are displayed in alphabetical order*/ 
 		connMag.clearSearchTextbox();
 		connMag.searchPeople(null,null,null,"W");
-		waitForAndGetElement(connMag.ELEMENT_USER_LINK.replace("${userName}", DATA_USER2));
-		waitForElementNotPresent(connMag.ELEMENT_USER_LINK.replace("${userName}", DATA_USER3));
-		waitForElementNotPresent(connMag.ELEMENT_USER_LINK.replace("${userName}", DATA_USER4));
+		waitForAndGetElement(connMag.ELEMENT_USER_LINK.replace("${userName}",username2));
+		waitForElementNotPresent(connMag.ELEMENT_USER_LINK.replace("${userName}",username1));
+		waitForElementNotPresent(connMag.ELEMENT_USER_LINK.replace("${userName}",username3));
 		connMag.clearSearchTextbox();
 	}
 
@@ -331,7 +374,16 @@ public class SOC_People_FindConnections extends SOC_TestConfig{
 
 		 *Expected Outcome: 
 			Show content of Connections page with a list of users exited in system*/
-		magAc.signIn(DATA_USER1, DATA_PASS);
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		String username2 = "Ab" + getRandomString();
+		String email2 = username2+"@gmail.com";
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		magAc.signIn(username1,password);
+		Utils.pause(3000);
 		hp.goToConnections();
 		/*Step number: 2
 		 *Step Name: Step 2: Search user
@@ -342,7 +394,7 @@ public class SOC_People_FindConnections extends SOC_TestConfig{
 		 *Expected Outcome: 
 			Show all the exited users in system. Users are ordered by last name.*/ 
 		connMag.clearSearchTextbox();
-		waitForAndGetElement(connMag.ELEMENT_USER_LINK.replace("${userName}", DATA_USER3));
+		waitForAndGetElement(connMag.ELEMENT_USER_LINK.replace("${userName}",username2));
 	}
 
 	/**
@@ -356,15 +408,18 @@ public class SOC_People_FindConnections extends SOC_TestConfig{
 		info("Test 8: The both users send friend requests");
 		/*Create data test*/
 		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
-		String password1 = username1;
-		String email1 = username1 + mailSuffixData.getMailSuffixRandom();
-
+		String email1 = username1+"@gmail.com";
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+"@gmail.com";
 		info("Add new user");
-		magAc.signIn(DATA_USER1, DATA_PASS);
 		navTool.goToAddUser();
-		addUserPage.addUser(username1, password1, email1, username1, username1);
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		magAc.signIn(username1,password);
+		Utils.pause(3000);
+		
 		hp.goToConnections();
-		connMag.searchPeople(username1,null,null,null);
+		connMag.searchPeople(username2,null,null,null);
 
 		/*Step Number: 1
 		 *Step Name: Step1: User1 invite User2 to connect
@@ -383,10 +438,10 @@ public class SOC_People_FindConnections extends SOC_TestConfig{
 		ManageLogInOut  acc = new ManageLogInOut(newDriver);
 		HomePagePlatform newhp= new HomePagePlatform(newDriver);
 		ConnectionsManagement conn = new ConnectionsManagement(newDriver);
-		acc.signIn(username1, password1);
+		acc.signIn(username2, password);
 		newhp.goToConnections();	
-		conn.searchPeople(DATA_USER1,null,null,null);
-		conn.connectToAUser(DATA_USER1);
+		conn.searchPeople(username1,null,null,null);
+		conn.connectToAUser(username1);
 
 		/*Step number: 2
 		 *Step Name: Step 2: User 2 invite User1 on other browser
@@ -397,9 +452,9 @@ public class SOC_People_FindConnections extends SOC_TestConfig{
 		 *Expected Outcome: 
 			- Message "Your request has been sent." is displayed
 			- [Connect] button is changed to [Confirm] and [Ignore]*/ 
-		click(connMag.ELEMENT_CONNECTION_CONNECT_BTN.replace("${user}",username1));
+		click(connMag.ELEMENT_CONNECTION_CONNECT_BTN.replace("${user}",username2));
 		alert.verifyAlertMessage("Your request has been sent");
-		waitForAndGetElement(connMag.ELEMENT_CONNECTION_CONFIRM_BTN.replace("${user}",username1),2000,1);
+		waitForAndGetElement(connMag.ELEMENT_CONNECTION_CONFIRM_BTN.replace("${user}",username2),2000,1);
 
 		newDriver.quit();
 	}
@@ -414,17 +469,22 @@ public class SOC_People_FindConnections extends SOC_TestConfig{
 	public  void test10_UserIgnoreInvitation() {
 		/*Create data test*/
 		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
-		String password1 = username1;
-		String email1 = username1 + mailSuffixData.getMailSuffixRandom();
-
+		String email1 = username1+"@gmail.com";
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+"@gmail.com";
+		String username3 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email3 = username3+"@gmail.com";
 		info("Add new user");
-		magAc.signIn(DATA_USER1, DATA_PASS);
 		navTool.goToAddUser();
-		addUserPage.addUser(username1, password1, email1, username1, username1);
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		addUserPage.addUser(username3, password, email3, username3, username3);
+		magAc.signIn(username1,password);
+		Utils.pause(3000);
 		info("Click on Connections on the left panel");
 		hp.goToConnections();
 		info("Click on Connect button to invite about 2 users");
-		connMag.connectToAUser(username1);
+		connMag.connectToAUser(username2);
 
 		info("Test 10 User Ignore invitation");
 		/*Step Number: 1
@@ -439,9 +499,9 @@ public class SOC_People_FindConnections extends SOC_TestConfig{
 			- Connections page is shown
 			- Invitation is rejected
 			- Button is changed to [Connect]*/ 
-		magAc.signIn(username1, password1);
+		magAc.signIn(username2, password);
 		hp.goToConnections();	
 		connMag.goToConnectionTab(selectTabOption.RECEIVE);
-		connMag.ignoreConnection(DATA_USER1);
+		connMag.ignoreConnection(username1);
 	}
 }

@@ -46,9 +46,8 @@ import org.exoplatform.selenium.platform.social.UserProfilePage;
 import org.exoplatform.selenium.platform.social.SpaceHomePage;
 import org.exoplatform.selenium.platform.social.SpaceManagement;
 import org.exoplatform.selenium.platform.social.SpaceSettingManagement;
-import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 
 public class GateIn_TestConfig extends PlatformBase {
 	ManageLogInOut magAc;
@@ -118,9 +117,9 @@ public class GateIn_TestConfig extends PlatformBase {
 		waitForAndGetElement(portSite.ELEMENT_NEW_PORTAL_SWITCH.replace("${portalName}", portalName),3000,0);
 	}
 	
-	@BeforeClass
-	public void setUpBeforeClass() throws Exception{
-		info("Start setUpBeforeClass");
+	@BeforeMethod
+	public void setUpBeforeMethod() throws Exception{
+		info("Start setUpBeforeMethod");
 		initSeleniumTest();
 		getDefaultUserPass(userDataFilePath,defaultSheet,isUseFile,jdbcDriver,dbUrl,user,pass,sqlUser);
 		magAc = new ManageLogInOut(driver);
@@ -213,10 +212,10 @@ public class GateIn_TestConfig extends PlatformBase {
 		
 		gateinNodesData = new GateinNodesDatabase();
 		gateinNodesData.setNodesData(gateinNodesFilePath,defaultSheet,isUseFile,jdbcDriver,dbUrl,user,pass,sqlUser);
-		info("End setUpBeforeClass");
+		info("End setUpBeforeMethod");
 	}
 	
-	@AfterMethod
+	/*@AfterMethod
     public void afterMethod(){
 		if(waitForAndGetElement(pagCW.ELEMENT_PAGE_ABORT_BUTTON,5000,0)!=null)
 			click(pagCW.ELEMENT_PAGE_ABORT_BUTTON);
@@ -227,14 +226,14 @@ public class GateIn_TestConfig extends PlatformBase {
 		if (waitForAndGetElement(portMg.ELEMENT_MANAGEPAGES_ADD_NEW_PAGES_POPUP_FORM, 5000, 0) != null)
 			clickByJavascript(portMg.ELEMENT_MANAGEPAGES_ADD_NEW_PAGES_POPUP_CANCEL_BTN, 2);
     	driver.get(baseUrl);
-    }
+    }*/
 	
-	@AfterClass
-	public void afterTest(){
-		info("Start setUpBeforeClass");
+	@AfterMethod
+	public void afterMethod(){
+		info("Start setUpBeforeMethod");
 		driver.manage().deleteAllCookies();
 		driver.quit();
-		info("End setUpBeforeClass");
+		info("End setUpBeforeMethod");
 	}
 
 }

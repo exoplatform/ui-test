@@ -10,7 +10,7 @@ import static org.exoplatform.selenium.TestLogger.info;
 
 import org.openqa.selenium.WebDriver;
 
-public class SpaceSettingManagement extends SpaceLocator{
+public class SpaceSettingManagement extends SocialLocator{
 
 	
     ManageAlert alert;

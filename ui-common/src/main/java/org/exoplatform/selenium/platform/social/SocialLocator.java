@@ -3,9 +3,9 @@ package org.exoplatform.selenium.platform.social;
 import org.exoplatform.selenium.platform.PlatformBase;
 import org.openqa.selenium.By;
 
-public class NotificationLocator extends PlatformBase{
+public class SocialLocator extends PlatformBase{
    
-	//*****************************************EMAIL NOTIFICATION*******************************************\\
+	/*****************************************EMAIL NOTIFICATION*******************************************/
 	//Email's format
 	public final String ELEMENT_GMAIL_FORMAT_TITLE=".//*[@valign='middle']//*[contains(text(),'$title')]";
 	public final String ELEMENT_GMAIL_FORMAT_OPENNING_SUB=".//*[text()='Hi $firstName,']";
@@ -109,7 +109,7 @@ public class NotificationLocator extends PlatformBase{
     
     
     
-  //*****************************************INTRANET NOTIFICATION*******************************************\\
+  /*****************************************INTRANET NOTIFICATION*******************************************/
     
     public final By ELEMENT_NOTIFICATION_POP_UP = By.id("NotificationPopup");
 	public final String ELEMENT_USER_AVATAR = "//*[contains(@alt,'${userName}')]";
@@ -199,7 +199,7 @@ public class NotificationLocator extends PlatformBase{
 	public final String ELEMENT_INTRANET_NOTIFICATION_DETAIL_ACTIVITY_DES=".//*[@class='description'][contains(text(),'$des')]";
 	
 	
-	//************************************************ADMIN NOTIFICATION****************************************************************************\\
+	/************************************************ADMIN NOTIFICATION****************************************************************************/
     public final String ELEMENT_BELONGS_TO_CATEGORY="//*[contains(text(),'$category')]/following::*//*[@for='$notification']";
 	
 	//Disable notification's type
@@ -339,7 +339,7 @@ public class NotificationLocator extends PlatformBase{
 	public  final By ELEMENT_SPACE_JOIN_EMAIL_NOTIFICATION_TITLE = By.xpath(".//*[@id='RequestJoinSpacePlugin']//*[contains(@class,'MAIL_CHANNEL')]");
 	public  final By ELEMENT_SPACE_JOIN_INTRANET_NOTIFICATION_TITLE=By.xpath(".//*[@id='RequestJoinSpacePlugin']//*[contains(@class,'WEB_CHANNEL')]"); 
 
-	//************************************************MY NOTIFICATION****************************************************************************\\
+	/************************************************MY NOTIFICATION****************************************************************************/
 	
 	
 	public final By ELEMENT_TITLE_NOTIFICATION_SETTING_PAGE=By.xpath(".//*[@id='uiNotificationSetting']//h3");
@@ -512,7 +512,7 @@ public class NotificationLocator extends PlatformBase{
 	public final By ELEMENT_EDIT_COMMENT_WEB_CHECKBOX_CHECKED = By.xpath("//*[@id='WEB_CHANNELActivityCommentPlugin'][contains(@checked,'checked')]");
 	public final By ELEMENT_EDIT_COMMENT_LIST = By.id("MAIL_CHANNELActivityCommentPluginSelectBox");
 	public final By ELEMENT_EDIT_COMMENT_SAVE_BTN =  By.xpath("//button[@id='ActivityCommentPlugin']");
-	public final By ELEMENT_MY_NOTIFICATION_MENTION_PLUGIN=By.xpath(".//*[@id='ActivityMentionPlugin']");
+	public final By ELEMENT_MY_NOTIFICATION_MENTION_PLUGIN=By.xpath(".//*[@id='ActivityMentionPlugin']/..");
 	//Mention
 	public final By ELEMENT_EDIT_MENTION_ICON = By.xpath("//*[@id='ActivityMentionPlugin']/..//*[@class='uiIconEdit uiIconLightGray']");
 	public final By ELEMENT_EDIT_MENTION_MAIL_CHECKBOX = By.xpath("//*[@id='MAIL_CHANNELActivityMentionPlugin']");
@@ -526,4 +526,440 @@ public class NotificationLocator extends PlatformBase{
 	public final String ELEMENT_MYNOTIFICATION_SETTING_GROUP = "(//*[@class='left'])[$number]//*[contains(text(),'$groupName')]";
 	public final String ELEMENT_MYNOTIFICATION_SETTING_TYPE = "(//*[@class='left'])[$number]//*[@for='$id']";
 
+	/************************************************ADD USER****************************************************************************/
+	public By ELEMENT_USERNAME = By.id("username");
+	public By ELEMENT_PASSWORD = By.id("password");
+	public By ELEMENT_CONFIRM_PASSWORD = By.id("Confirmpassword");
+	public By ELEMENT_EMAIL = By.id("email");
+	public By ELEMENT_FIRSTNAME = By.id("firstName");
+	public By ELEMENT_LASTNAME = By.id("lastName");
+
+	public By ELEMENT_SAVE = By.xpath("//*[@id='UIAccountForm']//*[contains(text(),'Save')]");
+	public By ELEMENT_CONFIRM_INFORMATION = By.xpath(".//*[text() = 'OK']");
+	
+	/************************************************USER PAGE BASE****************************************************************************/
+	//Navigation menu
+	public final By ELEMENT_HORIZONTAL_TOOLBAR = By.xpath("//*[@id='UIUserNavigationPortlet']/ul");
+	public final By ELEMENT_HORIZONTAL_TOOLBAR_FIRST_APP_PROFILE = By.xpath("//*[@id='UIUserNavigationPortlet']/ul/li[1]//*[@class='uiIconAppprofile uiIconDefaultApp']");
+	public final By ELEMENT_HORIZONTAL_TOOLBAR_SECOND_APP_ACTIVITIES = By.xpath("//*[@id='UIUserNavigationPortlet']/ul/li[2]//*[@class='uiIconAppactivities uiIconDefaultApp']");
+	public final By ELEMENT_HORIZONTAL_TOOLBAR_THIRD_APP_CONNECTIONS = By.xpath("//*[@id='UIUserNavigationPortlet']/ul/li[3]//*[@class='uiIconAppconnections uiIconDefaultApp']");
+	public final By ELEMENT_HORIZONTAL_TOOLBAR_FORTH_APP_WIKI = By.xpath("//*[@id='UIUserNavigationPortlet']/ul/li[4]//*[@class='uiIconAppwiki uiIconDefaultApp']");
+	public final By ELEMENT_HORIZONTAL_TOOLBAR_FIFTH_APP_DASHBOARD = By.xpath("//*[@id='UIUserNavigationPortlet']/ul/li[5]//*[@class='uiIconAppdashboard uiIconDefaultApp']");
+	public final By ELEMENT_MORE_TAB = By.xpath("//*[@class='nav nav-tabs userNavigation']//*[@class='uiIconAppMoreButton']");
+	
+	/************************************************USER PROFILE****************************************************************************/
+	public final String ELEMENT_USER_NAME_PAGE=".//*[@id='UIBreadCrumbsNavigationPortlet']//*[contains(text(),'$fullName')]";
+	public final By ELEMENT_EDIT_MY_PROFILE_LINK = By.xpath(".//*[@id='UIBreadCrumbsNavigationPortlet']//*[@class='uiIconEdit uiIconLightGray']");
+	public final By ELEMENT_EDIT_MY_PROFILE_BUTTON = By.xpath("//*[@id='UIExperienceProfilePortlet']//*[@class='uiIconEdit uiIconLightGray']");
+	public final By ELEMENT_EDIT_PROFILE_FORM = By.id("UIEditUserProfileForm");
+	public final String ELEMENT_NAME_OF_PROFILE_TOP_LEFT = "//*[@id='UIBreadCrumbsNavigationPortlet']//*[contains(text(),'${name}')]";
+	public final String ELEMENT_NAME_OF_USER_TOP_LEFT = "//*[@id='UIBreadCrumbsNavigationPortlet']//*[contains(text(),'{$name}')]";
+	public final String ELEMENT_NAME_OF_USER_TOP_RIGHT = ".//*[@id='UIUserPlatformToolBarPortlet']//*[contains(normalize-space(),'${firstName} ${lastName}')]";
+	public final String ELEMENT_PROFILE_TITLE = ".//*[@id='UIStatusProfilePortlet']//*[contains(text(),'${fullName}')]";
+
+	//Left contact information
+	public final By ELEMENT_UIBASICPROFILEPORTLET = By.xpath(".//*[@id='UIBasicProfilePortlet']/h4[contains(text(),'Contact Information')]");
+	public final String ELEMENT_FULLNAME_INFO=".//*[@id='UIStatusProfilePortlet']//span[text()='${fullname}']";
+	public final String ELEMENT_EMAIL_INFO=".//*[@class='uiEmail ellipsis' and @data-original-title='${email}']";
+	public final String ELEMENT_JOB_TITLE_INFO=".//*[@class='uiPosition ellipsis' and @data-original-title='${job}']";
+	public final String ELEMENT_GENDER_INFO=".//*[@class='uiGender ellipsis' and @data-original-title='${gender}']";
+	public final String ELEMENT_PHONE_INFO="//div[contains(text(),'${type}:')]/../*[@data-original-title='${phone}']";
+	public final String ELEMENT_IM_INFO="//div[contains(text(),'${type}:')]/../*[@data-original-title='${im}']";
+	public final String ELEMENT_URL_INFO="//*[@class='uiUrls']/*[@data-original-title='${url}']";
+	
+	//Middle experience information
+	public final String ELEMENT_COMPANY_INFO="//*[@class='company clearfix']//*[@data-original-title='${company}']";
+	public final String ELEMENT_POSITION_INFO="//*[@class='position clearfix']//*[@data-original-title='${position}']";
+	public final String ELEMENT_JOB_DETAIL_INFO="//*[@class='description clearfix']//*[@data-original-title='${description}']";
+	public final String ELEMENT_SKILL_INFO="//*[@class='skills clearfix']//*[@data-original-title='${skill}']";
+	public final String ELEMENT_STARTDATE_INFO="//*[@class='startDate clearfix']//*[@data-original-title='${date}']";
+	public final String ELEMENT_ENDDATE_INFO="//*[@class='endDate clearfix']//*[@data-original-title='${date}']";
+	
+	//Navigation tabs
+	public final By ELEMENT_MY_PROFILE_TAB = By.xpath("//*[@class='nav nav-tabs userNavigation']//*[@class='uiIconAppprofile uiIconDefaultApp']");
+    public final By ELEMETN_ACTIVITY_TAB=By.xpath(".//*[contains(@class,'uiIconAppactivities')]");
+	//Current position
+	public final By ELEMENT_EDIT_POSITION = By.xpath("//*[@id='UIHeaderSection']//*[@class='uiIconEdit']");
+	
+	public final By ELEMENT_POSITION_TEXTBOX_EDIT = By.id("position");
+	public final By ELEMENT_EDIT_POSITION_SAVE_BUTTON = By.id("savePosition");
+
+	//About me
+	public final By ELEMENT_ABOUTME_TEXTAREA_EDIT = By.id("aboutMe");
+	public final String ELEMENT_UIEXPERIENCE_PROFILE_PORTLET = "//*[@id='UIExperienceProfilePortlet']//*[contains(text(),'${content}')]";
+	public final By ELEMENT_UIEXPERIENCE_PORLET=By.xpath("//*[@id='UIExperienceProfilePortlet']/*[text()='About me']");
+	
+	//Basic information
+	public final By ELEMENT_EDIT_BASIC_INFORMATION = By.xpath("//*[@id='UIBasicInfoSection']//*[@class='uiIconEdit']");
+	public final By ELEMENT_FIRST_NAME_TEXTBOX_EDIT = By.id("firstName");
+	public final By ELEMENT_LAST_NAME_TEXTBOX_EDIT = By.id("lastName");
+	public final By ELEMENT_EMAIL_TEXTBOX_EDIT = By.id("email");
+	public final By ELEMENT_EDIT_BASIC_INFO_SAVE_BUTTON = By.xpath(".//*[@id='UIEditUserProfileForm']//*[contains(@class,'btn-save')]");
+
+	//Contact
+	public final By ELEMENT_CONTACT_EDIT_ICON = By.xpath(".//*[@id='UIContactSection']//*[contains(text(),'Contact')]/..//*[@class='uiIconEdit']");
+	public final By ELEMENT_CONTACT_GENDER_SELECTION=By.name("gender");
+	public final By ELEMENT_CONTACT_JOB_TITLE=By.name("position");
+	public final String ELEMENT_CONTACT_IMS_OPTION="//*[@id='ims']/div[${index}]//*[contains(@name,'selectKey_ims')]";
+	public final String ELEMENT_CONTACT_IMS_INPUT="//*[@id='ims']/div[${index}]//*[contains(@name,'inputKey_ims')]";
+	public final String ELEMENT_CONTACT_IMS_INPUT_LIST="//*[@id='ims']/div";
+	public final By ELEMENT_CONTACT_IMS_ADD_ICON = By.xpath("//*[@id='ims']//*[@data-original-title='Add Item']");
+	public final String ELEMENT_CONTACT_IMS_REMOVE_ICON = "/*[@id='ims']/div[${index}]//*[@data-original-title='Remove Item']";
+	public final String ELEMENT_CONTACT_PHONE_OPTION="//*[@id='phones']/div[${index}]//*[contains(@name,'selectKey_phones')]";
+	public final String ELEMENT_CONTACT_PHONE_INPUT="//*[@id='phones']/div[${index}]//*[contains(@name,'inputKey_phones')]";
+	public final String ELEMENT_CONTACT_PHONE_INPUT_LIST="//*[@id='phones']/div";
+	public final By ELEMENT_CONTACT_PHONE_ADD_ICON = By.xpath("//*[@id='phones']//*[@data-original-title='Add Item']");
+	public final String ELEMENT_CONTACT_PHONE_REMOVE_ICON = "/*[@id='phones']/div[${index}]//*[@data-original-title='Remove Item']";
+	public final String ELEMENT_CONTACT_URL_INPUT="//*[@class='multiValueContainer']/li[${index}]//*[contains(@name,'urls')]";
+	public final String ELEMENT_CONTACT_URL_INPUT_LIST="//*[@class='multiValueContainer']/li";
+	public final By ELEMENT_CONTACT_URL_ADD_ICON = By.xpath("//*[@class='multiValueContainer']//*[@data-original-title='Add Item']");
+	public final String ELEMENT_CONTACT_URL_REMOVE_ICON = "/*[@class='multiValueContainer']/div[${index}]//*[@data-original-title='Remove Item']";
+
+	//Avatar
+	public final By	ELEMENT_CHANGE_AVATAR_LINK = By.className("changeAvatar");
+	public final By ELEMENT_CHOOSE_AVATAR_IMAGE = By.className("fileNameLabel");
+	public final By ELEMENT_SELECT_AVATAR = By.xpath(".//*[@id='Uploader']//*[text()='Select File']");
+	public final By ELEMENT_UPLOAD_NAME = By.name("file");
+	public final By ELEMENT_CONFIRM = By.xpath(".//*[@id='UIAvatarUploader']//*[text()='Confirm']");
+	public final By ELEMENT_CANCEL = By.xpath(".//*[@id='UIAvatarUploader']//*[text()='Cancel']");
+	public final By ELEMENT_SAVE_AVATAR = By.xpath(".//*[@id='UIAvatarUploadContent']//*[text()='Save']");
+	public final By ELEMENT_CANCEL_AVATAR = By.xpath(".//*[@id='UIAvatarUploadContent']//*[text()='Cancel']");
+
+	//Experience
+	public final By ELEMENT_NO_EXPERIENCE=By.id("infoExperien");
+	public final By ELEMENT_ADD_MORE_EXP_ICON = By.xpath("//*[@data-original-title='Add more experience' or @title='Add more experience']");
+	public final String ELEMENT_EXPERIENCE_LIST=".//*[starts-with(@id,'ExperienceSection')]";
+	public final String ELEMENT_EXPERIENCE_COMPANY_INPUT="//*[@id='companyExperienceSection${index}']";
+	public final String ELEMENT_EXPERIENCE_POSITION_INPUT = "//*[@id='positionExperienceSection${index}']";
+	public final String ELEMENT_EXPERIENCE_DESCRIPTION_INPUT = "//*[@id='descriptionExperienceSection${index}']";
+	public final String ELEMENT_EXPERIENCE_SKILL_INPUT = "//*[@id='skillsExperienceSection${index}']";
+	public final String ELEMENT_EXPERIENCE_START_DATE_INPUT = "//*[@name='startDateExperienceSection${index}']";
+	public final String ELEMENT_EXPERIENCE_END_DATE_INPUT = "//*[@name='endDateExperienceSection${index}']";
+	public final String ELEMENT_EXPERIENCE_CURRENT_CHECKBOX = "//*[@id='isCurrentExperienceSection${index}']";
+	public final String ELEMENT_EXPERIENCE_CLOSE = "//*[@id='ExperienceSection${index}']//../*[@title='Remove this experience']";
+
+	//Save - Cancel button
+	public final By ELEMENT_CONTACT_SAVE_BUTTON = By.xpath(".//*[@id='UIEditUserProfileForm']//button[text()='Save']");
+	public final By ELEMENT_CONTACT_SAVE_BUTTON_DISABLE = By.xpath(".//*[@id='UIEditUserProfileForm']//button[text()='Save' and @disabled='disabled']");
+	public final By ELEMENT_CONTACT_CANCEL_BUTTON = By.xpath(".//*[@id='UIEditUserProfileForm']//button[text()='Cancel']");
+	public final By ELEMENT_SAVE_UPDATE_INFO = By.xpath("//*[@id='UIProfile']//../*[contains(text(), 'Save')]");
+	public final By ELEMENT_CANCEL_UPDATE_INFO = By.xpath("//*[@id='UIProfile']//../*[contains(text(), 'Cancel')]");
+	
+	//Recent activity
+	public final String ELEMENT_RECENT_ACTIVITY_CONTENT="//*[@id='UIRecentActivitiesPortlet']//*[@class='activityCont']/div[${index}]//*[@class='status' and contains(text(),'${content}')]";
+	public final String ELEMENT_RECENT_ACTIVITY_NO_CONTENT = "//*[@id='UIRecentActivitiesPortlet']//*[contains(text(),'${content}')]";
+	public final String ELEMENT_RECENT_ACTIVITY_ALL_CONTENT = "//*[@id='UIRecentActivitiesPortlet']//*[@class='activityCont']//*[@class='content']/*[contains(normalize-space(),'${content}')]";
+	public final By ELEMENT_RECENT_ACTIVITY_VIEWALL_BTN = By.xpath(".//*[@id='UIRecentActivitiesPortlet']//button[contains(text(),'View All')]");
+	
+	//Connection part
+	public final String ELEMENT_UIMINICONNECTIONS_PORTLET_TEXT = "//*[@id='UIMiniConnectionsPortlet']/*[contains(text(),'${content}')]";
+	public final By ELEMENT_UIMINICONNECTIONS_PORTLET_FIND = By.xpath("//*[@id='UIMiniConnectionsPortlet']/..//*[contains(text(),'Find connections')]");
+	public final String ELEMENT_UIMINICONNECTIONS_PORTLET_VIEWALL = "//*[@id='UIMiniConnectionsPortlet']/..//*[contains(text(),'View all') and contains(text(),'${num}')]";
+	public final String ELEMENT_UIMINICONNECTIONS_PORLET_NUMBER_CONNECTION=".//*[@id='UIMiniConnectionsPortlet']//*[@class='borderContainer']/*[@class='avatarXSmall']";
+	public final String ELEMENT_UIMINICONNECTIONS_PORLET_AVATAR=".//*[@id='UIMiniConnectionsPortlet']//*[@class='borderContainer']/*[@class='avatarXSmall' and contains(@href,'${username}')]";
+	public final String ELEMENT_UIMINICONNECTIONS_PORLET_HOVER_POPUP_AVATAR="//*[@id='tipName']//*[contains(@href,'${username}')]/img";
+	public final String ELEMENT_UIMINICONNECTIONS_PORLET_HOVER_POPUP_USERNAME="//*[@id='tipName']//*[contains(@href,'${username}') and contains(text(),'${fullname}')]";
+	
+	//Connection status
+	public final By ELEMENT_UIMINICONNECTIONS_PORLET_CONNECT_STATUS=By.xpath(".//*[@id='UIRelationshipAction']//*[@class='uiIconStatusConnect']/..");
+	public final By ELEMENT_UIMINICONNECTIONS_PORLET_CANCEL_STATUS=By.xpath(".//*[@id='UIRelationshipAction']//*[text()='Cancel Request']");
+	public final By ELEMENT_UIMINICONNECTIONS_PORLET_ACCEPT_STATUS=By.xpath(".//*[@id='UIRelationshipAction']//*[@class='uiIconStatusAccept']/..");
+	public final By ELEMENT_UIMINICONNECTIONS_PORLET_CONNECTED_STATUS=By.xpath(".//*[@id='UIActionProfilePortlet']//*[@class='btn show-default']/*[@class='uiIconStatusConnected']");
+	public final By ELEMENT_UIMINICONNECTIONS_PORLET_DISCONNECTED_STATUS=By.xpath(".//*[@id='UIActionProfilePortlet']//*[@class='btn hide-default']/*[@class='uiIconStatusDisconnect']");
+	public final By ELEMENT_UIMINICONNECTIONS_PORTLET_DENY_STATUS=By.xpath(".//*[@id='UIRelationshipAction']//*[@class='uiIconStatusDeny']/..");
+	public final By ELEMENT_UIMINICONNECTIONS_PORTLET_TITLE = By.xpath(".//*[@id='UIMiniConnectionsPortlet']/h4[contains(text(),'Connections')]");
+	
+	/****************************************************SPACE HOME PAGE ***********************************************************************/
+	public final By ELEMENT_SPACE_PANEL=By.xpath(".//*[@id='UIMySpacesPortlet']");
+	
+	//select menu (actvity stream, forum, agenda etc ..)
+	public final By ELEMENT_SPACE_MENU_ACTIVITY_STREAM = By.xpath(".//*[@class='tabName' and contains(text(),' Activity Stream')]");
+	public final By ELEMENT_SPACE_MENU_AGENDA = By.xpath(".//*[@id='calendar' and contains(text(),'Agenda')]");
+	public final By ELEMENT_SPACE_MENU_FORUMS = By.xpath(".//*[@class='tabName' and contains(text(),'Forums')]");
+	public final By ELEMENT_SPACE_MENU_WIKI = By.xpath(".//*[@class='tabName' and contains(text(),'Wiki')]");
+	public final By ELEMENT_SPACE_MENU_DOCUMENTS = By.xpath(".//*[@class='tabName' and contains(text(),'Documents')]");
+	public final By ELEMENT_SPACE_MENU_SETTINGS = By.xpath(".//*[@class='tabName' and contains(text(),'Space Settings')]");
+	public final By ELEMENT_SPACE_MENU_ANSWER = By.xpath(".//*[@class='tabName' and contains(text(),'Answer')]");
+	public final String ELEMENT_SPACE_NAME = ".//*[@id='UIBreadCrumbsNavigationPortlet']//*[@class='name'][contains(text(),'${name}')]";
+	public final String ELEMENT_SPACE_MENU_DISPLAYORDER_ID = ".//*[@id='spaceMenuTab']/li[${number}]//*[contains(@class,'${tab}')]";
+	public final String ELEMENT_SPACE_MENU_DISPLAYORDER = ".//*[@id='spaceMenuTab']/li[${number}]//*[contains(text(),'${tab}')]";
+	
+	//Navigation menu
+	public final By ELEMENT_HORIZOLTAL_MENU_BAR = By.xpath(".//*[@id='spaceMenuTab']");
+	public final String ELEMENT_SPACE_TAB_NAME=".//*[@id='spaceMenuTab']//*[contains(text(),'${name}')]";
+	public final By ELEMENT_ACTIVITY_STREAM_TAB = By.xpath(".//*[contains(@class,'uiIconAppSpaceActivityStreamPortlet')]");
+	public final By ELEMENT_FORUM_TAB = By.xpath(".//*[contains(@class,'uiIconAppForumPortlet')]");
+	public final By ELEMENT_WIKI_TAB = By.xpath(".//*[contains(@class,'uiIconAppWikiPortlet')]");
+	public final By ELEMENT_DOCUMENT_TAB = By.xpath(".//*[contains(@class,'uiIconAppFileExplorerPortlet')]");
+	public final By ELEMENT_AGENDA_TAB = By.xpath(".//*[contains(@class,'uiIconAppCalendarPortlet')]");
+	public final By ELEMENT_MEMBER_TAB = By.xpath(".//*[@id='spaceMenuTab']//*[contains(@class,'uiIconAppMembersPortlet ')]");
+	public final By ELEMENT_NAVIGATION_SPACE_SETTING_TAB = By.xpath(".//*[contains(@class,'uiIconAppSpaceSettingPortlet')]");
+	public final By ELEMENT_MYDASH_BTN_ADDGADGET = By.xpath(".//*[@id='GadgetContainer']//*[contains(text(),'Add Gadgets')]");
+	
+	public By ELEMENT_SPACE_SPACE_SETTINGS=By.xpath(".//*[@id='settings']");
+	public By ELEMENT_SPACE_WIKI_TAB=By.xpath(".//*[@id='spaceMenuTab']//*[contains(text(),'Wiki')]");
+	public By ELEMENT_SPACE_MEMBERS_TAB=By.xpath(".//*[@id='spaceMenuTab']//*[contains(text(),'Members')]");
+	public By ELEMENT_SPACE_WIKI_TAB_CONTENT=By.xpath("//*[@id='UIWikiPortlet']");
+	public By ELEMENT_SPACE_WIKI_TAB_ACTIVE=By.xpath("//*[@class='active item']/*[@data-toggle='tab']/*[contains(text(),'Wiki')]");
+	public By ELEMENT_SPACE_ACTIVITY_TAB_ACTIVE=By.xpath("//*[@class='active item']/*[@data-toggle='tab']/*[contains(text(),'Activity')]");
+	public String ELEMENT_SPACE_MENU_TAB=".//*[@id='spaceMenuTab']//*[@id='${tab}']";
+	public By ELEMENT_SPACE_MENU_MORE = By.xpath(".//*[@id='spaceMenuTab']//*[contains(@class,'uiIconAppMoreButton')]");
+	public By ELEMENT_SPACE_MENU_DASHBOARD = By.xpath(".//*[@id='spaceMenuTab']//*[contains(@class,'uiIconAppDashboardPortlet')]");
+	
+	
+	//left menu
+	public String ELEMENT_SPACE_LEFT_MENU_SPACE_NAME = ".//*[@id='UISpaceNavigationPortlet']//*[contains(text(),'${name}')]";
+	
+	
+	/****************************************************SPACE MANAGEMENTT***********************************************************************/
+	// Add form space
+	public final By ELEMENT_ADDNEWSPACE_BUTTON = By.xpath("//button[contains(.,'Add New Space')]");
+	public final By ELEMENT_ADDNEWSPACE_FORM = By.xpath("//span[@class='PopupTitle popupTitle' and text()='Add New Space']");
+	public final By ELEMENT_ADDNEWSPACE_ICON = By.xpath("//*[contains(@class, 'uiIconSocSimplePlus')]");
+	
+	//Search panel
+	public final By ELEMENT_MY_SPACE_SEARCH_TEXT_BOX = By.xpath(".//*[@id='SpaceSearch']");
+	public final By ELEMENT_MY_SPACE_SEARCH_BTN = By.xpath(".//*[@id='UISpaceSearch']//i[@class='uiIconSearch uiIconLightGray']");
+	public final String ELEMENT_MY_SPACE_SEARCH_RESULT = ".//*[@id='UIManageMySpaces']//*[contains(text(),'${name}')]";
+	public final String ELEMENT_MY_SPACE_SEARCH_RESULT_NUMBER = ".//*[@id='UIManageMySpaces']//*[@class='number'][text()='${number}']";
+
+	//Letter list 
+	public final String ELEMENT_MY_SPACE_LETTER_LIST= ".//*[@class='letterList']//*[text()='${alpha}']";
+
+	//Space portlets
+	public By ELEMENT_SPACE_MY_SPACE_PORTLET = By.id("UIMySpacesPortlet");
+	public By ELEMENT_SPACE_ALL_SPACE_PORTLET = By.id("UIAllSpacesPortlet");
+	public By ELEMENT_SPACE_INVITATION_SPACE_PORTLET = By.id("UIInvitationSpacesPortlet");
+	public By ELEMENT_SPACE_PENDING_SPACE_PORTLET = By.id("UIPendingSpacesPortlet");
+
+	//Add new space buttons
+	public By ELEMENT_ADD_NEW_SPACE_BUTTON = By.xpath("//*[@class='uiIconSocSimplePlus uiIconSocWhite']");
+	public By ELEMENT_ADD_SPACE_FORM = By.id("UIPopupAddSpace");
+
+	public final By ELEMENT_UPLOAD_POPUP_SELECT_FILE_BTN=By.xpath(".//*[@id='Uploader']//label[text()='Select File']");
+	public final By ELEMENT_SPACE_SAVE_BTN = By.xpath(".//*[@id='UISpaceInfo']//button[text()='Save']");
+	public final By ELEMENT_SPACE_UPLOAD_CONFIRM_BTN=By.xpath(".//*[@id='UIAvatarUploader']//button[text()='Confirm']");
+	public final By ELEMENT_SPACE_UPLOAD_SAVE_BTN=By.xpath(".//*[@id='UIAvatarUploadContent']//button[text()='Save']");
+
+	//Access and Edit tab form
+	public By ELEMENT_SPACE_ACCESS_EDIT_TAB=By.xpath("//*[@data-target='#UISpacePermission-tab']");
+	public By ELEMENT_SPACE_VISIBILITY_VISIBLE_CHECKBOX=By.xpath("//*[@value='private']");
+	public By ELEMENT_SPACE_VISIBILITY_HIDDEN_CHECKBOX=By.xpath("//*[@value='hidden']");
+	public By ELEMENT_SPACE_REGISTRATION_OPEN_CHECKBOX=By.xpath("//*[@value='open']");
+	public By ELEMENT_SPACE_REGISTRATION_CLOSED_CHECKBOX=By.xpath("//*[@value='close']");
+	public By ELEMENT_SPACE_REGISTRATION_VALIDATION_CHECKBOX=By.xpath("//*[@value='validation']");
+
+
+	//Access and Edit tab form
+	public By ELEMENT_SPACE_INVITE_GROUP_USER_TAB=By.xpath("//*[@data-target='#UISpaceGroupBound-tab']");
+	public By ELEMENT_SPACE_SELECT_EXIST_GROUP_CHECKBOX=By.id("UseExistingGroupCheckBox");
+
+	//My space
+	public final By ELEMENT_SPACE_MY_SPACE_TAB=By.xpath(".//*[@id='UIManageAllSpaces']//*[contains(text(),'My Spaces')]");
+	public String ELEMENT_SPACE_TITLE="//*[@class='spaceTitle']//*[text()='${space}']";
+	public final String ELEMENT_SPACE_DESCRIPTION=".//*[@id='UIManageMySpaces']//*[@class='content limitText'][text()='${des}']";
+	public final By ELEMENT_SPACE_AVATAR_DEFAULT=By.xpath(".//*[@id='UISpaceInfo']//*[contains(@src,'SpaceAvtDefault.png')]");
+	public final String ELEMENT_SPACE_DELETE_BUTTON="//*[@class='spaceTitle']//*[text()='${space}']/../../..//*[text()='Delete']";
+	public final String ELEMENT_SPACE_LEAVE_BTN = "//*[@class='spaceTitle']//*[text()='${space}']/../../..//*[text()='Leave']";
+	public final String ELEMENT_SPACE_EDIT_BTN = "	//*[@class='spaceTitle']//*[text()='${space}']/../../..//*[text()='Edit']";
+    public final By ELEMENT_SPACE_EDIT_SETTING_TAB =By.xpath(".//*[contains(@data-target,'#UISpaceInfo-tab')]");
+	public final String ELEMENT_SPACE_MEMBER_INFOR="//*[@class='spaceTitle']//*[text()='${space}']/../..//*[contains(@class,'membersCount')]";
+	public final String ELEMENT_SPACE_DESC_INFOR="//*[@class='spaceTitle']//*[text()='${space}']/../..//*[contains(@class,'content')]";
+	public final String ELEMENT_SPACE_MANAGER_STATUS="//*[@class='spaceTitle']//*[text()='${space}']/../../..//*[contains(@class,'statusLabel') and text()='Manager']";
+	public String ELEMENT_SPACE_CONFIRM_DELETE="Are you sure you want to delete this space? This cannot be undone. All page navigations and this group will also be deleted";
+	public By ELEMENT_SPACE_DELETE_SPACE_OK_BUTTON=By.xpath("//*[text()='OK']");
+
+	public String ELEMENT_SPACE_NAME_BREADCUMB ="//*[@id='UIBreadCrumbsNavigationPortlet']//*[@class='name' and contains(text(),'{$name}')]";
+
+	//Invitations received tab
+	public final By ELEMENT_MY_SPACE_INVITATION_RECEIVED = By.xpath(".//a[text()='Invitations Received']");
+	public final String ELEMENT_MY_SPACE_INVITATION_RECEIVED_ACCEPT_BTN = ".//*[contains(text(),'${space}')]/../../..//button[text()='Accept']";
+	public final String ELEMENT_MY_SPACE_INVITATION_RECEIVED_CANCEL_BTN = ".//*[contains(text(),'${space}')]/../../..//button[text()='Ignore']";
+
+	//All Spaces tab
+	public final By ELEMENT_MY_SPACE_ALL_SPACES_TAB = By.xpath(".//*[@id='UIPage']//*[contains(@href,'all-spaces')]");
+	public final String ELEMENT_MY_SPACE_ALL_SPACES_REQUEST_TO_JOIN_BTN = ".//*[contains(text(),'${space}')]/../../..//button[text()='Request to Join']";
+	public final String ELEMENT_MY_SPACE_ALL_SPACES_JOIN_BTN = ".//*[contains(text(),'${space}')]/../../..//button[text()='Join']";
+	public final String ELEMENT_MY_SPACE_ALL_SPACES_REQUEST_PENDING = ".//*[contains(text(),'${space}')]/../../..//*[contains(text(),'Request Pending')]";
+    public final By ELEMENT_ALL_SPACE_ACTIVE_TAB=By.xpath(".//*[@id='UIManageAllSpaces']//*[contains(@class,'active')]//*[contains(@href,'all-spaces')]");
+	public final String ELEMENT_ALL_SPACE_SPACE_NAME=".//*[contains(@class,'spaceBox')]//*[contains(@href,'$space')]";
+    
+    //Request pending tab
+	public final By ELEMENT_MY_SPACE_REQUEST_PENDING_TAB = By.xpath("//*[contains(@href,'pendingSpace')]");
+	public final String ELEMENT_SPACE_CANCEL_BUTTON="//*[@class='spaceTitle']//*[text()='${space}']/../../..//*[text()='Cancel']";
+	
+	//Members
+	public final By ELEMENT_SPACE_GOWIKI = By.xpath("//*[@class='uiIconAppWikiPortlet uiIconDefaultApp']/..//*[@id='wiki']");
+	public final By ELEMENT_SPACE_MEMBERS = By.xpath("//*[@data-toggle='tab' and text()='Members']");
+	public final By ELEMENT_SPACE_GOSETTINGS = By.xpath("//*[@id='settings']");
+	public final By ELEMENT_SPACE_TEXTBOX_USER = By.xpath("//*[@id='user']");
+	public final By ELEMENT_SPACE_TEXTBOX_USER_SUGGEST = By.xpath("//*[@class='text' and text()='Mary Williams']");
+	public final By ELEMENT_SPACE_BTN_INVITE = By.xpath("//*[text()='Invite']");
+	public final String ELEMENT_SPACE_BTN_MANAGER = "//*[text()='${name}']/..//*[@class='switchBtnLabelOff']";
+	public final String ELEMENT_SPACE_MEMBER_USER_MANAGER=".//*[@id='existingUsersTable']//*[contains(text(),'${fullName}')]/..//*[@class='switchBtnHandle' and contains(@style,'left: 41px;')]";
+	public final String ELEMENT_SPACE_MEMBER_USER_MEMBER=".//*[@id='existingUsersTable']//*[contains(text(),'${fullName}')]/..//*[@class='switchBtnHandle' and not(contains(@style,'left: 41px;'))]";
+	
+	public final By ELEMENT_SPACE_BTN_ACCEPT_INVITE = By.xpath("//*[text()='Accept']");
+	public final By ELEMENT_SPACE_ALLSPACES = By.xpath("//*[text()='All Spaces']");
+
+	//Request to join a space
+	public final String ELEMENT_REQUEST_TO_JOIN_SPACE_BTN = "//*[contains(text(),'${space}')]/../../..//button[text()='Request to Join']";
+	public final String ELEMENT_REQUEST_PENDING = "//*[contains(text(),'${space}')]/../../..//*[text()='Request Pending']";
+	
+	//Forum tab
+	public final By ELEMENT_FORUM_START_BUTTON_UP = By.xpath("(.//*[@id='UITopicContainer']//*[contains(@class,'uiIconForumCreateTopic ')])[1]");
+
+	//Wiki tab
+	public final By ELEMENT_WIKI_HOME_TITLE =By.xpath(".//*[@id='titleInfo']");
+	//Document tab
+	public final By ELEMENT_DOCUMENT_FOLDER_ADD_BTN = By.xpath(".//*[contains(@class,'uiIconEcmsAddFolder ')]");	
+	
+	//Agenda tab
+    public final By ELEMENT_AGENDA_EVENT_ADD_BTN =By.xpath(".//*[@id='UIActionBarQuickAddEvent']");
+	
+    //Member tab
+	public final By ELEMENT_MEMBER_USER_INFOR = By.xpath(".//*[@id='spaceManagerListBox']");
+	public final By ELEMENT_MEMBER_USER_SEARCH= By.xpath(".//*[@id='UIProfileUserSearch']");
+	public final By ELEMENT_MEMBER_USER_CONTACT_LIST=By.xpath(".//*[@id='spaceMemberListBox']");
+	public final String ELEMENT_MEMBER_USER_NAME = ".//*[@id='spaceMemberListBox']//*[contains(@data-text,'${fullName}')]";
+	public final String ELEMENT_MANAGER_USER_NAME = ".//*[@id='spaceManagerListBox']//*[contains(@data-text,'${fullName}')]";
+	
+	/**************************************************************SPACE SETTING MANAGEMENT ********************************************************/
+	public By ELEMENT_SPACE_SPACE_SETTINGS_TITLE = By.xpath(".//*[@id='UISpaceSettingPortlet']/h3[text()='Space Configuration']");
+
+	// Members tab
+	public By ELEMENT_SPACE_SETTINGS_MEMBERS_TAB = By.xpath(".//*[contains(@data-target,'#UISpaceMember-tab')]");
+	public By ELEMENT_SPACE_MEMBERS_SELECT_USER = By.xpath("//*[@id='UISpaceMember']//*[@class='uiIconUser uiIconLightGray']");
+	public String ELEMENT_SPACE_SELECT_USER_IN_FORM = "//*[@id='UIListUsers']//*[contains(text(),'{$name}')]/../..//*[@class='uiCheckbox']//input";
+	public By ELEMENT_ADD = By.xpath("//*[@id='UIUserSelector']//*[contains(text(),'Add')]");
+	public By ELEMENT_SPACE_MEMBERS_INVITE = By.xpath("//*[@id='UISpaceMember']//*[contains(text(),'Invite')]");
+	public final By ELEMENT_SEARCH_INPUT_USER_NAME = By.xpath(".//*[@id='Quick Search']");
+	public final By ELEMENT_SEARCH_USERS_ICON=By.xpath(".//*[@id='UIUserSelector']//*[contains(@class,'uiIconSearch')]");
+	public final By ELEMENT_INPUT_USER=By.xpath(".//*[@id='user']");
+	public final By ELEMENT_SELECT_USER_FROM_GROUP=By.xpath(".//*[@id='UISpaceMember']//*[contains(@class,'uiIconGroup')]");
+	public final By ELEMENT_ACCESS_ONLY_ONE_MANAGER_NUMBER = By.xpath("(.//*[@id='existingUsersTable']//*[contains(@class,'uiSwitchBtn')]//input[@checked='checked'])[1]");
+	public final By ELEMENT_ACCESS_MORE_ONE_MANAGER_NUMBER = By.xpath("(.//*[@id='existingUsersTable']//*[contains(@class,'uiSwitchBtn')]//input[@checked='checked'])[2]");
+	public final By ELEMENT_MEMBER_TABLE = By.xpath("(.//*[@id='existingUsersTable']");
+
+	//Search user
+	public final String ELEMENT_CLOSE_MESSAGE = "//*[contains(@title,'Close Window')]";
+	public final By ELEMENT_INPUT_SEARCH_USER_NAME = By.id("Quick Search");
+	public final String ELEMENT_SELECT_SEARCH_OPTION = "//*[contains(@name,'filter')]";
+	public final String ELEMENT_SEARCH_ICON_USERS_MANAGEMENT = "//*[contains(@class,'uiIconSearch uiIconLightGray')]";
+	public String ELEMENT_MSG_SEARCH_USER_NAME = "User Name";
+
+	//Application tab
+	public By ELEMENT_SETTINGS_APP_TAB = By.xpath(".//*[contains(@data-target,'#UISpaceApplication-tab')]");
+	public String ELEMENT_DELETE_APP_FROM_TOPBAR = ".//*[@id='UISpaceApplication']//*[contains(text(),'{$application}')]/../..//*[@class='uiIconClose pull-right']";
+	public final By ELEMENT_APPLICATION_TAB_ADD_APPLICATION_BTN=By.xpath(".//*[@id='UISpaceApplication-tab']//button[text()='Add Application']");
+	public final String ELEMENT_APPLICATION_TAB_APPLICATION_LIST_CONTENT=".//*[@id='UISpaceApplication']//strong[contains(text(),'${app}')]";
+	public final String ELEMENT_APPLICATION_TAB_APPLICATION_DELETE_BTN=".//*[@id='UISpaceApplication']//strong[contains(text(),'${app}')]/../..//*[@class='uiIconClose pull-right']";
+	public final By ELEMENT_APPLICATION_TAB_LIST_APPLICATIONS=By.xpath(".//*[@id='UISpaceApplication']");
+
+	//Access and Edit tab
+	public final By ELEMENT_ACCESS_AND_EDIT_TAB = By.xpath(".//*[contains(@data-target,'#UISpacePermission-tab')]"); 
+	public final By ELEMENT_ACCESS_AND_EDIT_TAB_OF_POPUP=By.xpath(".//*[contains(@data-target,'#UISpaceVisibility-tab')]");
+	public final By ELEMENT_ACCESS_HIDDEN_RADIO=By.xpath("//input[@value='hidden']");
+	public final String ELEMENT_ACCESS_PERMISSION_RADIO="//input[@value='${right}']";
+	public final By ELEMENT_ACCESS_PERMISSION_SAVE_BTN=By.xpath(".//*[@id='UISpacePermission']//button[text()='Save']");
+	public final By ELEMENT_ACCESS_AND_EDIT_TAB_OF_POPUP_CREATE_BTN=By.xpath(".//button[text()='Create']");
+	public final By ELEMENT_ACCESS_ALERTS_POPUP_OK_BTN= By.xpath(".//*[@class='PopupTitle popupTitle'][contains(text(),'Alerts')]/../..//*[@class='btn']");
+	public final By ELEMENT_ACCESS_INFO_OK_BTN = By.xpath("//*[@class='PopupContent popupContent']//*[contains(text(),'OK')]");
+	public final By ELEMENT_ACCESS_VISIBILITY_RADIO_CHECKED=By.xpath(".//*[@id='UISpacePermission']//input[@value='private' and @checked='checked']");
+	public final By ELEMENT_ACCESS_VALIDATION_RADIO_CHECKED=By.xpath(".//*[@id='UISpacePermission']//input[@value='validation' and @checked='checked']']");
+
+
+	//Add application popup
+	public final By ELEMENT_ADD_APPLICATION_POPUP_TITLE=By.xpath("//*[contains(text(),'Space Application Installer')]");
+	public final String ELEMENT_ADD_APPLICATION_POPUP_CATEGOGY=".//*[@id='${category}']";
+	public final String ELEMENT_ADD_APPLICATION_POPUP_APPLICATION_ADD_BTN =".//*[@id='UIApplicationListSelector']//*[contains(text(),'${app}')]/../..//*[contains(text(),'Add')]";
+	public final By ELEMENT_ADD_APPLICATION_POPUP_CLOSE_BTN=By.xpath(".//*[@id='UIAddApplication']//*[@class='uiIconClose pull-right']");
+
+
+	//Settings tab
+	public final By ELEMENT_SPACE_NAME_INPUT = By.xpath("//input[contains(@name,'displayName')]");
+	public final By ELEMENT_SPACE_DESCRIPTION_INPUT = By.xpath("//textarea[contains(@name,'description')]");
+	public final String ELEMENT_SPACE_CHANGE_ROLE_USER_MEMBER= ".//*[contains(text(),'${user}')]/..//*[@class='uiSwitchBtn']";
+	public final String ELEMENT_SPACE_CHANGE_ROLE_USER_MEMBER_DISABLE ="//*[contains(text(),'${user}')]/..//*[contains(@class,'switchBtnDisabled')]";
+	public final String ELEMENT_SPACE_DELETE_USER_BTN = ".//*[contains(@onclick,'${user}')]/..//*[@class='uiIconDelete uiIconLightGray']";
+	public final String ELEMENT_SPACE_REMOVE_USER_BTN_MEMBER_TABLE = ".//*[contains(@class,'uiIconDelete')]/../../../*[contains(text(),'${fullName}')]";
+	public final String ELEMENT_SPACE_MEMBERS_TAB_VALIDATE_REQUEST_jOINT=".//*[contains(@onclick,'${user}')]/..//*[@class='uiIconValidate uiIconLightGray']";
+	public final String ELEMENT_SPACE_MEMBERS_TAB_DECLINE_REQUEST_jOINT =".//*[contains(text(),'${user}')]/..//*[contains(@class,'uiIconRemove')]";
+	public final By ELEMENT_SPACE_SETTING_TAB = By.xpath(".//*[contains(@data-target,'#UISpaceInfo-tab')]");
+	public final By ELEMENT_SPACE_CHANGE_AVATAR_BTN = By.xpath(".//*[@id='UISpaceInfo']//button[text()='Change Picture']");
+    public final By ELEMENET_SPACE_UPDATE_SAVE_BTN=By.xpath(".//*[@id='UISpaceInfo']//button[contains(@onclick,'Save')]");
+	
+	//invitation member
+	public final String ELEMENT_SPACE_INVITED_USER_TABLE = ".//*[@id='UISpaceMember']//th[contains(text(),'Invited')]/../../..//*[contains(text(),'${user}')]";
+	public final String ELEMENT_SPACE_MEMBERS_USER_TABLE = ".//*[@id='UISpaceMember']//th[contains(text(),'Members')]/../../..//*[contains(text(),'${user}')]";
+	public final String ELEMENT_USER_IN_MEMBER_TABLE =".//*[@id='existingUsersTable']//*[contains(text(),'${fullName}')]";
+	
+	//Invitation a group
+	public final By ELEMENT_SPACE_INVITE_USERS_FROM_GROUP_TAB=By.xpath(".//*[contains(@data-target,'#UISpaceGroupBound-tab')]");
+	public final By ELEMENT_SPACE_INVITE_USERS_FROM_GROUP_CHECKBOX=By.xpath(".//*[@id='UseExistingGroupCheckBox']");
+	public final String ELEMENT_SPACE_INVITE_USERS_FROM_GROUP_SELECT_GROUP=".//*[@id='UISocialGroupSelector']//*[contains(@title,'${name}')]";
+	public final By ELEMENT_SPACE_INVITE_USERS_FROM_GROUP_SELECTED_LINK=By.xpath(".//*[@id='UISocialGroupSelector']//*[contains(@data-placement,'bottom')]");
+	public final By ELEMENT_SPACE_INVITE_USERS_FROM_GROU_SELECTED_GROUP_INFO=By.xpath(".//*[@id='groupId']");
+	public final By ELEMENT_SPACE_INVITED_GROUP_BTN=By.xpath(".//*[@id='UISpaceMember']//*[contains(@class,'uiIconGroup')]");
+	public final String ELEMENT_SPACE_INVITED_GROUP_NAME="//*[contains(@title,'$name')]";
+	public final By ELEMENT_SPACE_INVITED_SELECT_GROUP=By.xpath(".//*[@id='UIUsersInGroupSelector']//*[contains(@data-placement,'bottom')]");
+
+	//Button create
+	public By ELEMENET_SPACE_CREATE_BUTTON=By.xpath("//*[@class='uiAction']/*[text()='Create']");
+
+	//Navigation tab
+	public final By ELEMENT_SPACE_SETTING_NAVIGATION_TAB = By.xpath(".//*[contains(@data-target,'#UISpaceNavigationManagement-tab')]");
+	public final By ELEMENT_SPACE_NAVIGATION_ADD_NODE_BUTTON = By.xpath(".//*[@id='UISpaceNavigationManagement']//button[text()='Add Node']");
+	public final String ELEMENT_SPACE_NAVIGATION_ADD_NODE_LIST =".//*[@id='UISpaceNavigationNodeSelector']//*[contains(text(),'${name}')]";
+	public final String ELEMENT_SPACE_NAVIGAION_ADD_NODE_CHILDREN_UNDER_PARENT = ".//*[@id='UISpaceNavigationNodeSelector']//*[contains(text(),'${childrenNode}')]/../../..//*[contains(text(),'${parentNode}')]";
+	public final By ELEMENT_SPACE_NAVIGATION_UP_LEVEL_BUTTON = By.xpath(".//*[@id='UISpaceNavigationNodeSelector']//*[@class='uiIconUpLevel uiIconLightGray']");
+	public final By ELEMENT_SPACE_NAVIGATION_NODE_LIST =By.xpath(".//*[@id='UISpaceNavigationNodeSelector']");
+    public final By ELEMENT_SPACE_APPLICATION_TAB_ADD_BTN=By.xpath(".//*[@id='UISpaceApplication-tab']//button");
+	//Add/Edit page node popup
+	public final By ELEMENT_SPACE_NAVIGATION_ADD_EDIT_NODE_TITLE = By.xpath(".//*[@id='AddNode']//*[contains(.,'Add/ Edit Page Node')]");
+	public final By ELEMENT_SPACE_NAVIGATION_ADD_EDIT_POPUP_NAME = By.xpath(".//*[@id='name']");
+	public final By ELEMENT_SPACE_NAVIGATION_ADD_EDIT_POPUP_SAVE = By.xpath(".//*[@id='UIPageNodeForm']//button[text()='Save']");
+	public final By ELEMENT_SPACE_NAVIGATION_ADD_EDIT_POPUP_LABEL = By.xpath(".//*[@id='UIPageNodeForm']//*[contains(text(),'Label')]/..//input");
+	public final By ELEMENT_SPACE_NAVIGATION_ADD_EDIT_POPUP_LANGUAGE = By.xpath(".//*[@id='PageNodeSetting-tab']//*[@class='selectbox' and @name='languages']");
+	public final By ELEMENT_CHECKBOX_EXTENDED_LABEL_MODE = By.id("switchmode");
+	public final By ELEMENT_INPUT_LABEL = By.id("i18nizedLabel");
+	public final By ELEMENT_PAGE_SELECTOR_TAB = By.xpath(".//*[@id='AddNode']//a[text()='Page Selector']");
+	public final By ELEMENT_INPUT_PAGE_NAME = By.id("pageName");
+	public final By ELEMENT_INPUT_PAGE_TITLE = By.id("pageTitle");
+	public final By ELEMENT_CREATE_PAGE_LINK = By.xpath(".//*[@id='UIPageSelector']//*[@class='uiIconAddPage uiIconWhite']");
+	public final By ELEMENT_SEARCH_SELECTOR_PAGE_LINK = By.xpath(".//*[@id='UIPageSelector']//*[@class='uiIconSelectPage']");
+
+	//Context menu
+	public final By ELEMENT_SPACE_NAVIGATION_CONTEXT_MENU_EDIT = By.xpath(".//*[@id='SpaceNavigationNodePopupMenu']//a[contains(.,'Edit this Node')]");
+	public final By ELEMENT_SPACE_NAVIGATION_CONTEXT_MENU_DELETE= By.xpath(".//*[@id='SpaceNavigationNodePopupMenu']//a[contains(.,'Delete Node')]");
+	public final By ELEMENT_SPACE_NAVIGATION_CONTEXT_MENU_ADD_NEW_NODE = By.xpath(".//*[@id='SpaceNavigationNodePopupMenu']//a[contains(.,'Add new Node')]");
+	public final By ELEMENT_SPACE_NAVIGATION_CONTEXT_MENU_EDIT_NODE_PAGE = By.xpath(".//*[@id='SpaceNavigationNodePopupMenu']//*[@class='uiIconEditPageNode']");
+	public final By ELEMENT_SPACE_NAVIGATION_CONTEXT_MENU_COPY_NODE = By.xpath(".//*[@id='SpaceNavigationNodePopupMenu']//a[contains(.,'Copy Node')]");
+	public final By ELEMENT_SPACE_NAVIGATION_CONTEXT_MENU_PASTE_NODE = By.xpath(".//*[@id='SpaceNavigationNodePopupMenu']//a[contains(.,'Paste Node')]");
+	public final By ELEMENT_SPACE_NAVIGATION_CONTEXT_MENU_CLONE_NODE = By.xpath(".//*[@id='SpaceNavigationNodePopupMenu']//a[contains(.,'Clone Node')]");
+	public final By ELEMENT_SPACE_NAVIGATION_CONTEXT_MENU_CUT_NODE = By.xpath(".//*[@id='SpaceNavigationNodePopupMenu']//a[contains(.,'Cut Node')]");
+	public final By ELEMENT_SPACE_NAVIGATION_CONTEXT_MENU_MOVE_UP = By.xpath(".//*[@id='SpaceNavigationNodePopupMenu']//a[contains(.,'Move Up')]");
+	public final By ELEMENT_SPACE_NAVIGATION_CONTEXT_MENU_MOVE_DOWN = By.xpath(".//*[@id='SpaceNavigationNodePopupMenu']//a[contains(.,'Move Down')]");
+
+	public final String ELEMENT_SPACE_NAVIGATION_NODE_POSITION = "//*[@class='childrenContainer nodeGroup']/li[${position}]//a[contains(text(),'${nodeName}')]";
+
+	//Access space information
+	public final By ELEMENT_SPACE_ACCESS_RESTRICED_AREA_TITLE=By.xpath(".//*[@id='UISpaceAccessPortlet']//h3[text()='Restricted Area']");
+	public final By ELEMENT_SPACE_ACCESS_INFO=By.xpath(".//*[@class='spaceAccessInfo']");
+	public final By ELEMENT_SPACE_ACCESS_JOIN_BTN=By.xpath(".//*[@title='Join']");
+	public final By ELEMENT_SPACE_ACCESS_REQUEST_JOIN_BTN=By.xpath(".//*[@title='Request to Join']");
+
+	public final By ELEMENT_SPACE_ACCESS_SPACE_NOT_FOUND_TITLE=By.xpath(".//*[@id='UISpaceAccessPortlet']//h3[text()='Space not found']");
+	public final By ELEMENT_SPACE_ACCESS_SPACE_NOT_FOUND_INFO=By.xpath(".//*[@id='UISpaceAccessPortlet']//*[contains(text(),'No space is available at this URL.')]");
+	public final By ELEMENT_SPACE_ACCESS_SPACE_NOT_FOUND_FIND_BTN=By.xpath(".//*[@id='UISpaceAccessPortlet']//a[text()='Find Spaces']");
+	public final By ELEMENT_SPACE_ACCESS_SPACE_DENIED = By.xpath(".//*[@id='UISpaceAccessPortlet']//h3[text()='Access Denied']");
+	public final By ELEMENT_SPACE_ACCESS_SPACE_DENIED_INFO=By.xpath(".//*[@class='spaceAccessInfo']");
+	public final String ELEMENT_SPACE_ACCESS_SPACE_REQUEST_JOIN_MESSAGE=".//*[contains(text(),'You must be a member of the space')]//b[contains(text(),'$space')]/../..//*[contains(.,'to view this page')]";
+
+	//message
+	public final String ELEMENT_SPACE_NAVIGATION_COPY_AT_SAME_LEVEL = "This node name already exists.";
+
+	//Warining popup
+    public final String ELEMENT_SPACE_WARNING_MESSAGE=".//*[contains(@class,'UIPopupWindow')]//*[contains(text(),'${warningText}')]";	
+	
 }

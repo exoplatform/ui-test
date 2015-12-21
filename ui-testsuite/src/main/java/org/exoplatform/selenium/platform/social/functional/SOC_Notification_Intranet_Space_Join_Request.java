@@ -30,13 +30,15 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- The Space Join Request notification is displayed in the list*/
-		info("Create 2 users for testing");
-		createNewUser(2);
-		
-		info("User A login");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(0), password);
-		Utils.pause(3000);
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+"@gmail.com";
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		magAc.signIn(username1,password);
 		
 		info("goto My notification");
 		navTool.goToMyNotifications();
@@ -50,8 +52,7 @@ import org.testng.annotations.*;
 		spaMg.addNewSpaceSimple(spaceName,spaceDes);
 		
 		info("User B login");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(1), password);
+		magAc.signIn(username2, password);
 		Utils.pause(3000);
 		
 		info("User B send a join request to UserA's space");
@@ -74,8 +75,7 @@ import org.testng.annotations.*;
 			- $USER is User A
 			- $DATE is the date of the notification*/
 		info("User A login");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(0), password);
+		magAc.signIn(username1, password);
 		Utils.pause(3000);
 		
 		info("Check intranet notification format");
@@ -119,13 +119,15 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- The Space Join Request notification is displayed in the list*/
-		info("Create 2 users for testing");
-		createNewUser(2);
-		
-		info("User A login");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(0), password);
-		Utils.pause(3000);
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+"@gmail.com";
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		magAc.signIn(username1,password);
 		
 		info("goto My notification");
 		navTool.goToMyNotifications();
@@ -139,8 +141,7 @@ import org.testng.annotations.*;
 		spaMg.addNewSpaceSimple(spaceName,spaceDes);
 		
 		info("User B login");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(1), password);
+		magAc.signIn(username2, password);
 		Utils.pause(3000);
 		
 		info("User B send a join request to UserA's space");
@@ -148,8 +149,7 @@ import org.testng.annotations.*;
 		spaMg.sendARequestToASpace(spaceName, true);
 		
 		info("User A login");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(0), password);
+		magAc.signIn(username1, password);
 		Utils.pause(3000);
 		
 		info("Check intranet notification format");
@@ -224,13 +224,15 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- The Space Join Request notification is displayed in the list*/
-		info("Create 2 users for testing");
-		createNewUser(2);
-		
-		info("User A login");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(0), password);
-		Utils.pause(3000);
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+"@gmail.com";
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		magAc.signIn(username1,password);
 		
 		info("goto My notification");
 		navTool.goToMyNotifications();
@@ -244,8 +246,7 @@ import org.testng.annotations.*;
 		spaMg.addNewSpaceSimple(spaceName,spaceDes);
 		
 		info("User B login");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(1), password);
+		magAc.signIn(username2, password);
 		Utils.pause(3000);
 		
 		info("User B send a join request to UserA's space");
@@ -253,8 +254,7 @@ import org.testng.annotations.*;
 		spaMg.sendARequestToASpace(spaceName, true);
 		
 		info("User A login");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(0), password);
+		magAc.signIn(username1, password);
 		Utils.pause(3000);
 		
 		info("Check intranet notification format");
@@ -271,7 +271,7 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- User A is not member of the space*/
 		info("User A is accepted and member of the space");
-		intraNot.refuseRqConnection(arrayUser.get(1));
+		intraNot.refuseRqConnection(username2);
 
 		/*Step number: 3
 		*Step Name: Step 3 : check notification list
@@ -306,13 +306,15 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- The Space Join Request notification is displayed in the list*/
-		info("Create 2 users for testing");
-		createNewUser(2);
-		
-		info("User A login");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(0), password);
-		Utils.pause(3000);
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+"@gmail.com";
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		magAc.signIn(username1,password);
 		
 		info("goto My notification");
 		navTool.goToMyNotifications();
@@ -326,8 +328,7 @@ import org.testng.annotations.*;
 		spaMg.addNewSpaceSimple(spaceName,spaceDes);
 		
 		info("User B login");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(1), password);
+		magAc.signIn(username2, password);
 		Utils.pause(3000);
 		
 		info("User B send a join request to UserA's space");
@@ -335,8 +336,7 @@ import org.testng.annotations.*;
 		spaMg.sendARequestToASpace(spaceName, true);
 		
 		info("User A login");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(0), password);
+		magAc.signIn(username1, password);
 		Utils.pause(3000);
 		
 		info("Check intranet notification format");
@@ -354,7 +354,7 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- The notification is not displayed / available in the page*/ 
 		info("User A is accepted and member of the space");
-		intraNot.refuseRqConnection(arrayUser.get(1));
+		intraNot.refuseRqConnection(username2);
 		
 		intraNot.goToAllNotification();
 		intraNot.checkNotStatusSpace(status,spaceName);
@@ -382,13 +382,15 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- The Space Join Request notification is displayed in the list*/
-		info("Create 2 users for testing");
-		createNewUser(2);
-		
-		info("User A login");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(0), password);
-		Utils.pause(3000);
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+"@gmail.com";
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		magAc.signIn(username1,password);
 		
 		info("goto My notification");
 		navTool.goToMyNotifications();
@@ -402,8 +404,7 @@ import org.testng.annotations.*;
 		spaMg.addNewSpaceSimple(spaceName,spaceDes);
 		
 		info("User B login");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(1), password);
+		magAc.signIn(username2, password);
 		Utils.pause(3000);
 		
 		info("User B send a join request to UserA's space");
@@ -411,8 +412,7 @@ import org.testng.annotations.*;
 		spaMg.sendARequestToASpace(spaceName, true);
 		
 		info("User A login");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(0), password);
+		magAc.signIn(username1, password);
 		Utils.pause(3000);
 		
 		info("Check intranet notification format");
@@ -429,7 +429,7 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- User A is accepted and member of the space*/
 		info("User A is accepted and member of the space");
-		intraNot.acceptRqConnection(arrayUser.get(1));
+		intraNot.acceptRqConnection(username2);
 		hp.goToHomePage();
 	    hp.goToSpecificSpace(spaceName);
 	    waitForAndGetElement(hpAct.ELEMENT_SPACE_MENU_ACTIVITY_PORTLET);

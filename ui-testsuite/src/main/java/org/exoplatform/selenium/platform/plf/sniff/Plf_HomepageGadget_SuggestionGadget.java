@@ -8,54 +8,13 @@ import org.openqa.selenium.WebElement;
 import org.testng.annotations.*;
 
 
-	/**
-	* @author eXo
-	*
-	*/
-	public class Plf_HomepageGadget_SuggestionGadget extends Plf_TestConfig{
+	public class Plf_HomepageGadget_SuggestionGadget extends Plf_TestConfig_1{
 		
 		String space1;
 		String space2;
 		String space3;
 		String space4;
 		String space5;
-
-		@AfterMethod
-		public void setAfterMethod(){
-			info("Sign out");
-			magAc.signOut();
-			info("Sign in with mary account");
-			magAc.signIn(DATA_USER2, DATA_PASS);
-			hp.goToConnections();
-			connMg.resetConnection(DATA_USER1);
-			
-			info("Sign out");
-			magAc.signOut();
-			info("Sign in with james account");
-			magAc.signIn(DATA_USER3, DATA_PASS);
-			hp.goToConnections();
-			connMg.resetConnection(DATA_USER1);
-			
-			info("Sign out");
-			magAc.signOut();
-			info("Sign in with demo account");
-			magAc.signIn(DATA_USER4, DATA_PASS);
-			hp.goToConnections();
-			connMg.resetConnection(DATA_USER1);
-			
-			info("Sign out");
-			magAc.signOut();
-			info("Sign in with FQAVN account");
-			magAc.signIn("fqa","gtngtn");
-			hp.goToConnections();
-			connMg.resetConnection(DATA_USER1);
-			
-			
-			magAc.signOut();
-			info("Sign in with john account");
-			magAc.signIn(DATA_USER1, DATA_PASS);
-		}
-		
 		/**
 		 * Create 3 spaces
 		 */

@@ -29,21 +29,23 @@ public class SOC_People_Search extends SOC_TestConfig_2{
 		String skill2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
 		
 		/*Create data test*/
-		String username1 = "a"+txData.getContentByArrayTypeRandom(4) + getRandomString();
-		String email1 = username1 + mailSuffixData.getMailSuffixRandom();
-		String username2 = "b"+txData.getContentByArrayTypeRandom(4) + getRandomString();
-		String email2 = username2 + mailSuffixData.getMailSuffixRandom();
-		info("Add new user");
-		magAc.signIn(DATA_USER1, DATA_PASS);
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+ mailSuffixData.getMailSuffixRandom();
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+ mailSuffixData.getMailSuffixRandom();
+		String username3 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email3 = username3+ mailSuffixData.getMailSuffixRandom();
+		
+		
+		info("Add user");
 		navTool.goToAddUser();
-
-		info("Add user " + username1);
-		addUserPage.addUser(username1, username1, email1, username1, username1);
-		addUserPage.addUser(username2, username2, email2, username2, username2);
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		addUserPage.addUser(username3, password, email3, username3, username3);
+		magAc.signIn(username1, password);
 		
 		info("Edit user profile of user 1");
 		info("Click on the name of user, click on My profile");
-		magAc.signIn(username1, username1);
 		navTool.goToMyProfile();
 		info("Click on Edit button to change user's information");
 		myProfile.goToEditProfile();
@@ -53,7 +55,7 @@ public class SOC_People_Search extends SOC_TestConfig_2{
 		
 		info("Edit user profile of user 1");
 		info("Click on the name of user, click on My profile");
-		magAc.signIn(username2, username2);
+		magAc.signIn(username2,password);
 		navTool.goToMyProfile();
 		info("Click on Edit button to change user's information");
 		myProfile.goToEditProfile();
@@ -62,7 +64,7 @@ public class SOC_People_Search extends SOC_TestConfig_2{
 		myProfile.saveCancelUpdateInfo(true);
 				
 		info("Login as John");
-		magAc.signIn(DATA_USER1, DATA_PASS);
+		magAc.signIn(username3,password);
 		info("Click on Connections on the left panel");
 		hp.goToConnections();
 		
@@ -128,9 +130,5 @@ public class SOC_People_Search extends SOC_TestConfig_2{
 		waitForAndGetElement(connMag.ELEMENT_CONNECTION_USER_NAME.replace("${user}", username1));
 		waitForElementNotPresent(connMag.ELEMENT_CONNECTION_USER_NAME.replace("${user}", username2));
 		
-		info("Clear Data");
-		navTool.goToUsersAndGroupsManagement();
-		userAndGroup.deleteUser(username1);
-		userAndGroup.deleteUser(username2);
 	}
 }

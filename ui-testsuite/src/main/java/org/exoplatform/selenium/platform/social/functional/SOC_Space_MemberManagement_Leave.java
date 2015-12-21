@@ -3,6 +3,7 @@ package org.exoplatform.selenium.platform.social.functional;
 import static org.exoplatform.selenium.TestLogger.info;
 
 import java.util.ArrayList;
+
 import org.exoplatform.selenium.platform.HomePagePlatform;
 import org.exoplatform.selenium.platform.ManageLogInOut;
 import org.exoplatform.selenium.platform.social.SpaceManagement;
@@ -22,6 +23,18 @@ import org.testng.annotations.*;
 	@Test
 	public  void test01_SendsInvitationAfterRequest() {
 		info("Test 1: Sends invitation after request");
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+"@gmail.com";
+		String fullName2=username2+" "+username2;
+		
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		magAc.signIn(username1,password);
 		/*Step Number: 1
 		*Step Name: -
 		*Step Description: 
@@ -43,7 +56,7 @@ import org.testng.annotations.*;
         magAc2 = new ManageLogInOut(driver2);
         hp2 = new HomePagePlatform(driver2);
         spaMg2 = new SpaceManagement(driver2);
-		magAc2.signIn(DATA_USER2, DATA_PASS);
+		magAc2.signIn(username2,password);
 		
 		
 		
@@ -107,7 +120,7 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			User B is listed in pending list.*/
          driver.switchTo().window(browser1);
-         setSpaceMg.inviteUser(DATA_USER2, true,DATA_NAME_USER2);
+         setSpaceMg.inviteUser(username2, true,fullName2);
 
  	}
 
@@ -120,6 +133,18 @@ import org.testng.annotations.*;
 	@Test
 	public  void test02_MembersLeaveTheSpace() {
 		info("Test 2: Members leave the space");
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+"@gmail.com";
+		String fullName2=username2+" "+username2;
+		
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		magAc.signIn(username1,password);
 		/*Step Number: 1
 		*Step Name: -
 		*Step Description: 
@@ -148,8 +173,7 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- Login in successfully 
 			- In public space: display space which added at step 1*/
-		 magAc.signOut();
-	     magAc.signIn(DATA_USER2, DATA_PASS);
+		 magAc.signIn(username2,password);
 	     hp.goToAllSpace();
 	     spaMg.requestToJoinSpace(space,true);
 	     
@@ -164,11 +188,10 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- Login in successfully
 			- In my spaces of invited user: display space which added at step 1*/
-	     magAc.signOut();
-	     magAc.signIn(DATA_USER1, DATA_PASS);
+	     magAc.signIn(username1,password);
 	     hp.goToSpecificSpace(space);
 	     spaHome.goToSpaceSettingTab();
-	     setSpaceMg.acceptRequest(DATA_NAME_USER2);
+	     setSpaceMg.acceptRequest(fullName2);
 	     
 		/*Step number: 4
 		*Step Name: -
@@ -179,25 +202,24 @@ import org.testng.annotations.*;
 			- Selects the space and click on [leave] button
 		*Expected Outcome: 
 			User has removed from list member of the space and space group. User can't access this space now.*/ 
-	     magAc.signOut();
-	     magAc.signIn(DATA_USER2, DATA_PASS);
+	     magAc.signIn(username2,password);
 	     hp.goToMySpaces();
 	     spaMg.searchSpace(space, "");
 	     spaMg.leaveSpace(space);
 	     
-	     magAc.signOut();
-	     magAc.signIn(DATA_USER1, DATA_PASS);
+	     magAc.signIn(username1,password);
 	     hp.goToSpecificSpace(space);
 	     spaHome.goToSpaceSettingTab();
 	     setSpaceMg.goToMemberTab();
-	     waitForElementNotPresent(setSpaceMg.ELEMENT_USER_IN_MEMBER_TABLE.replace("${fullName}",DATA_NAME_USER2));
+	     waitForElementNotPresent(setSpaceMg.ELEMENT_USER_IN_MEMBER_TABLE.replace("${fullName}",fullName2));
 	     
+	     magAc.signIn(USER_ROOT,PASS_ROOT);
 	     navTool.goToUsersAndGroupsManagement();
          userGroupMg.goToGroupTab();
          ArrayList<String> groups=spGroupsData.getArrayGroupByType(4);
  		 String[] arrayGroupPath ={groups.get(0),space};
  		 userGroupMg.selectGroup(arrayGroupPath);
- 		 waitForElementNotPresent(userGroupMg.ELEMENT_USER_REMOVE_MEMBER_ICON.replace("${userName}",DATA_USER2));
+ 		 waitForElementNotPresent(userGroupMg.ELEMENT_USER_REMOVE_MEMBER_ICON.replace("${userName}",username2));
  	}
 
 	/**
@@ -209,6 +231,18 @@ import org.testng.annotations.*;
 	@Test
 	public  void test03_SendsRequestAfterInvitation() {
 		info("Test 3: Sends request after invitation");
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+"@gmail.com";
+		String fullName2=username2+" "+username2;
+		
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		magAc.signIn(username1,password);
 		/*Step Number: 1
 		*Step Name: -
 		*Step Description: 
@@ -230,7 +264,7 @@ import org.testng.annotations.*;
         magAc2 = new ManageLogInOut(driver2);
         hp2 = new HomePagePlatform(driver2);
         spaMg2 = new SpaceManagement(driver2);
-		magAc2.signIn(DATA_USER2, DATA_PASS);
+		magAc2.signIn(username2,password);
 		
 		/*Step number: 2
 		*Step Name: -
@@ -270,7 +304,7 @@ import org.testng.annotations.*;
 			Send invitation successfully.*/
 		 driver.switchTo().window(browser1);
 		 spaHome.goToSpaceSettingTab();
-		 setSpaceMg.inviteUser(DATA_USER2, true,DATA_NAME_USER2);
+		 setSpaceMg.inviteUser(username2, true,fullName2);
 		  
 		/*Step number: 5
 		*Step Name: -
@@ -295,6 +329,18 @@ import org.testng.annotations.*;
 	@Test
 	public  void test04_RemoveAManager() {
 		info("Test 4: Remove a manager");
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+"@gmail.com";
+		String fullName2=username2+" "+username2;
+		
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		magAc.signIn(username1,password);
 		/*Step Number: 1
 		*Step Name: -
 		*Step Description: 
@@ -327,7 +373,7 @@ import org.testng.annotations.*;
 			- On screen ofinvitation sender: if no has list Invited user, display list invited user, else add name of user was invited into list.*/
 		 
 		 spaHome.goToSpaceSettingTab();
-		 setSpaceMg.inviteUser(DATA_USER2, true,DATA_NAME_USER2);
+		 setSpaceMg.inviteUser(username2, true,fullName2);
 		 
 		/*Step number: 3
 		*Step Name: -
@@ -340,19 +386,16 @@ import org.testng.annotations.*;
 			- At list members, selects member which has added at step 2 and click on [make leader] icon
 		*Expected Outcome: 
 			- User become manager of spaceUser can edit and access [Space settings] portlet.*/
-		 magAc.signOut();
-		 magAc.signIn(DATA_USER2, DATA_PASS);
+		 magAc.signIn(username2,password);
 		 hp.goToAllSpace();
 		 spaMg.acceptAInvitation(space);
 		 
-		 magAc.signOut();
-		 magAc.signIn(DATA_USER1, DATA_PASS);
+		 magAc.signIn(username1,password);
 		 hp.goToSpecificSpace(space);
 		 spaHome.goToSpaceSettingTab();
-		 setSpaceMg.changeRole(DATA_NAME_USER2);
+		 setSpaceMg.changeRole(fullName2);
 		 
-		 magAc.signOut();
-		 magAc.signIn(DATA_USER2, DATA_PASS);
+		 magAc.signIn(username2,password);
 		 hp.goToSpecificSpace(space);
 		 waitForAndGetElement(spaMg.ELEMENT_NAVIGATION_SPACE_SETTING_TAB,2000,1);
 
@@ -369,7 +412,7 @@ import org.testng.annotations.*;
 			- User becomes normal member, canaccess the space but can't edit and accesses Space settings portlet
 			- Back to focus on home page of space and remove space setting on list applications on space*/ 
 		 spaHome.goToSpaceSettingTab();
-		 setSpaceMg.changeRole(DATA_NAME_USER2);
+		 setSpaceMg.changeRole(fullName2);
 		 spaMg.goToActivityStreamTab();
 		 waitForElementNotPresent(spaMg.ELEMENT_NAVIGATION_SPACE_SETTING_TAB,2000,1);
 
@@ -384,6 +427,18 @@ import org.testng.annotations.*;
 	@Test
 	public  void test05_MakeAUserToBecomeTheManagerOfTheSpace() {
 		info("Test 5: Make a user to become the manager of the space");
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+"@gmail.com";
+		String fullName2=username2+" "+username2;
+		
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		magAc.signIn(username1,password);
 		/*Step Number: 1
 		*Step Name: -
 		*Step Description: 
@@ -415,7 +470,7 @@ import org.testng.annotations.*;
 			Send invitation successfully:
 			- On screen ofinvitation sender: if no has list Invited user, display list invited user, else add name of user was invited into list.*/
 		 spaHome.goToSpaceSettingTab();
-		 setSpaceMg.inviteUser(DATA_USER2, true,DATA_NAME_USER2);
+		 setSpaceMg.inviteUser(username2, true,fullName2);
 		 
 		/*Step number: 3
 		*Step Name: -
@@ -427,8 +482,7 @@ import org.testng.annotations.*;
 			- Accept invited of the space
 		*Expected Outcome: 
 			- User be come member of the space*/
-		 magAc.signOut();
-		 magAc.signIn(DATA_USER2, DATA_PASS);
+		 magAc.signIn(username2,password);
 		 hp.goToAllSpace();
 		 spaMg.acceptAInvitation(space);
 		 
@@ -443,14 +497,12 @@ import org.testng.annotations.*;
 			- At list members, selects member which has added at step 2 and click on [make lesder] icon
 		*Expected Outcome: 
 			- User become manager of spaceUser can edit and access [Space settings] portlet.*/ 
-		 magAc.signOut();
-		 magAc.signIn(DATA_USER1, DATA_PASS);
+		 magAc.signIn(username1,password);
 		 hp.goToSpecificSpace(space);
 		 spaHome.goToSpaceSettingTab();
-		 setSpaceMg.changeRole(DATA_NAME_USER2);
+		 setSpaceMg.changeRole(fullName2);
 		 
-		 magAc.signOut();
-		 magAc.signIn(DATA_USER2, DATA_PASS);
+		 magAc.signIn(username2,password);
 		 hp.goToSpecificSpace(space);
 		 waitForAndGetElement(spaMg.ELEMENT_NAVIGATION_SPACE_SETTING_TAB,2000,1);
 		 
@@ -465,6 +517,18 @@ import org.testng.annotations.*;
 	@Test
 	public  void test06_ManagerOfSpaceLeavesSpaceWhenOnlyHasOneMemberInSpace() {
 		info("Test 6: Manager of space leaves space when only has one member in space");
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+"@gmail.com";
+		String fullName2=username2+" "+username2;
+		
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		magAc.signIn(username1,password);
 		/*Step Number: 1
 		*Step Name: -
 		*Step Description: 
@@ -494,7 +558,7 @@ import org.testng.annotations.*;
 		 ArrayList<String> warningTextArray=spWarnMessg.getArrayContentByType(2);
 		 String warningText=warningTextArray.get(0);
 		 spaHome.goToSpaceSettingTab();
-		 setSpaceMg.changeRole(DATA_NAME_USER2);
+		 setSpaceMg.changeRole(fullName2);
 		 waitForAndGetElement(setSpaceMg.ELEMENT_SPACE_WARNING_MESSAGE.replace("${warningText}", warningText),2000,1);
 		 button.ok();
  	}
@@ -508,6 +572,13 @@ import org.testng.annotations.*;
 	@Test
 	public  void test07_RootLeavesTheSpace() {
 		info("Test 7: Root leaves the space");
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		magAc.signIn(username1,password);
 		/*Step Number: 1
 		*Step Name: -
 		*Step Description: 
@@ -546,7 +617,6 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			User Root has removed from list member of the space and space group. 
 			But Root still has access and edit right on space*/ 
-		 magAc.signOut();
 		 magAc.signIn(USER_ROOT, PASS_ROOT);
 		 hp.goToAllSpace();
 		 spaMg.searchSpace(space, "");
@@ -566,6 +636,18 @@ import org.testng.annotations.*;
 	@Test
 	public  void test08_MembersLeaveTheSpace() {
 		info("Test 8: Members leave the space ( by invited)");
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+"@gmail.com";
+		String fullName2=username2+" "+username2;
+		
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		magAc.signIn(username1,password);
 		/*Step Number: 1
 		*Step Name: -
 		*Step Description: 
@@ -597,7 +679,7 @@ import org.testng.annotations.*;
 			Send invitation successfully:
 			- On screen ofinvitation sender: if no has list Invited user, display list invited user, else add name of user was invited into list.*/
 		 spaHome.goToSpaceSettingTab();
-		 setSpaceMg.inviteUser(DATA_USER2, true,DATA_NAME_USER2);
+		 setSpaceMg.inviteUser(username2, true,fullName2);
 		 
 		/*Step number: 3
 		*Step Name: -
@@ -610,8 +692,7 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- Login in successfully
 			- In my spaces of invited user: display space which added at step 1*/
-		 magAc.signOut();
-		 magAc.signIn(DATA_USER2,DATA_PASS);
+		 magAc.signIn(username2,password);
 		 hp.goToAllSpace();
 		 spaMg.acceptAInvitation(space);
 		 
@@ -630,18 +711,18 @@ import org.testng.annotations.*;
 		 hp.goToMySpaces();
 		 waitForElementNotPresent(spaMg.ELEMENT_SPACE_TITLE.replace("${space}",space));
 		 
-		 magAc.signOut();
-		 magAc.signIn(DATA_USER1,DATA_PASS);
+		 magAc.signIn(username1,password);
 		 hp.goToSpecificSpace(space);
 		 spaHome.goToSpaceSettingTab();
 		 setSpaceMg.goToMemberTab();
-		 waitForElementNotPresent(setSpaceMg.ELEMENT_USER_IN_MEMBER_TABLE.replace("${fullName}",DATA_NAME_USER2));
+		 waitForElementNotPresent(setSpaceMg.ELEMENT_USER_IN_MEMBER_TABLE.replace("${fullName}",fullName2));
 		 
+		 magAc.signIn(USER_ROOT,PASS_ROOT);
 		 navTool.goToUsersAndGroupsManagement();
          userGroupMg.goToGroupTab();
          ArrayList<String> groups=spGroupsData.getArrayGroupByType(4);
  		 String[] arrayGroupPath ={groups.get(0),space};
  		 userGroupMg.selectGroup(arrayGroupPath);
- 		 waitForElementNotPresent(userGroupMg.ELEMENT_USER_REMOVE_MEMBER_ICON.replace("${userName}",DATA_USER2));
+ 		 waitForElementNotPresent(userGroupMg.ELEMENT_USER_REMOVE_MEMBER_ICON.replace("${userName}",username2));
  	}
 }

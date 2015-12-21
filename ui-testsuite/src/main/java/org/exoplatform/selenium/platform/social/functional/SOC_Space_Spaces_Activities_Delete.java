@@ -17,6 +17,14 @@ import org.testng.annotations.*;
 	@Test
 	public  void test01_DeleteASpaceActivityFromActivityStreamByItsUser() {
 		info("Test 01: Delete a Space activity from activity stream by its user");
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		String fullName1=username1+" "+username1;
+		
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		magAc.signIn(username1,password);
 		/*Step Number: 1
 		*Step Name: Step 1: Add space
 		*Step Description: 
@@ -40,7 +48,7 @@ import org.testng.annotations.*;
 		hp.goToMySpaces();
 		spaMg.addNewSpaceSimple(space,space,60000);
 		hp.goToHomePage();
-		waitForAndGetElement(hpAct.ELEMENT_ACTIVITY_USERJOIN_SPACE.replace("${user}", DATA_NAME_USER1));
+		waitForAndGetElement(hpAct.ELEMENT_ACTIVITY_USERJOIN_SPACE.replace("${user}",fullName1));
 		mouseOver(hpAct.ELEMENT_ACTIVITY_SPACE_HEADING.replace("${space}", space),false);
 		
 		/*Step number: 3
@@ -56,7 +64,7 @@ import org.testng.annotations.*;
 		Utils.pause(2000);
 		click(hpAct.ELEMENT_ACTIVITY_SPACE_ACTIVITY_DELETE_BTN.replace("${space}", space));
 		click(button.ELEMENT_OK_BUTTON);
-		waitForElementNotPresent(hpAct.ELEMENT_ACTIVITY_USERJOIN_SPACE.replace("${user}", DATA_NAME_USER1),2000,1);
+		waitForElementNotPresent(hpAct.ELEMENT_ACTIVITY_USERJOIN_SPACE.replace("${user}",fullName1),2000,1);
 	}
 
 	/**
@@ -68,6 +76,13 @@ import org.testng.annotations.*;
 	@Test
 	public  void test02_DeleteAUserActivityForSpaceFromActivityStreamByItsUser() {
 		info("Test 8: Delete a User activity for space from activity stream by its user");
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		magAc.signIn(username1,password);
 		/*Step Number: 1
 		*Step Name: Step 1: Add activity
 		*Step Description: 
@@ -121,6 +136,12 @@ import org.testng.annotations.*;
 	@Test
 	public  void test03_DeleteCommentByManager() {
 		info("Test 9: Delete comment by manager");
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		magAc.signIn(username1,password);
 		/*Step Number: 1
 		*Step Name: Step1: Add new activities
 		*Step Description: 
@@ -183,13 +204,21 @@ import org.testng.annotations.*;
 	@Test
 	public  void test04_DeleteActivityByOtherSpaceMember() {
 		info("Test 04 Delete activity by other space member");
-		info("Create 3 users for testing");
-		createNewUser(3);
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+"@gmail.com";
+		String fullName2=username2+" "+username2;
+		String username3 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email3 = username3+"@gmail.com";
+		String fullName3=username3+" "+username3;
 		
-		info("User A login");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(0), password);
-		Utils.pause(3000);
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		addUserPage.addUser(username3, password, email3, username3, username3);
+		magAc.signIn(username1,password);
 		
 		info("User A create a new space");
 		String spaceName= txData.getContentByArrayTypeRandom(1)+getRandomNumber();
@@ -202,17 +231,16 @@ import org.testng.annotations.*;
 		hp.goToSpecificSpace(spaceName);
 		spaHome.goToSpaceSettingTab();
 		setSpaceMg.goToMemberTab();
-		setSpaceMg.inviteUser(arrayUser.get(1),true,arrayUser.get(1));
+		setSpaceMg.inviteUser(username2,true,fullName2);
 		
 		info("User A invites UserC to the space");
 		hp.goToSpecificSpace(spaceName);
 		spaHome.goToSpaceSettingTab();
 		setSpaceMg.goToMemberTab();
-		setSpaceMg.inviteUser(arrayUser.get(2),true,arrayUser.get(2));
+		setSpaceMg.inviteUser(username3,true,fullName3);
 		
 		info("User B login");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(1), password);
+		magAc.signIn(username2, password);
 		Utils.pause(3000);
 		
 		info("User B accept invitation from User A");
@@ -221,8 +249,7 @@ import org.testng.annotations.*;
 		spaMg.acceptAInvitation(spaceName);
 		
 		info("User C login");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(2), password);
+		magAc.signIn(username3, password);
 		Utils.pause(3000);
 		
 		info("User C accept invitation from User A");
@@ -246,14 +273,13 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- (X) icon is not displayed, so he cannot remove space activity of other member*/ 
 		info("User B login");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(1), password);
+		magAc.signIn(username2, password);
 		Utils.pause(3000);
 		
 		info("Remove space activity of other space member");
 		hp.goToSpecificSpace(spaceName);
 		
-		info("user C doesnt see X icon to remove user C's activity");
+		info("user B doesnt see X icon to remove user C's activity");
 		mouseOver((hpAct.ELEMENT_ACTIVITY_SPACE_AUTHOR).replace("${title}",activity), true);
 		waitForElementNotPresent((hpAct.ELEMENT_ACTIVITY_USER_ACTIVITY_DELETE_BTN).replace("${title}",activity),2000,1);
 		
@@ -268,6 +294,12 @@ import org.testng.annotations.*;
 	@Test
 	public  void test05_DeleteCommentByOwner() {
 		info("Test 05: Delete comment by owner");
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		magAc.signIn(username1,password);
 		/*Step Number: 1
 		*Step Name: Step1: Add new activities
 		*Step Description: 
@@ -328,13 +360,21 @@ import org.testng.annotations.*;
 	@Test
 	public  void test06_DeleteCommentByOtherMember() {
 		info("Test 15 Delete comment by other member");
-		info("Create 3 users for testing");
-		createNewUser(3);
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+"@gmail.com";
+		String fullName2=username2+" "+username2;
+		String username3 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email3 = username3+"@gmail.com";
+		String fullName3=username3+" "+username3;
 		
-		info("User A login");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(0), password);
-		Utils.pause(3000);
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		addUserPage.addUser(username3, password, email3, username3, username3);
+		magAc.signIn(username1,password);
 		
 		info("User A create a new space");
 		String spaceName= txData.getContentByArrayTypeRandom(1)+getRandomNumber();
@@ -347,17 +387,16 @@ import org.testng.annotations.*;
 		hp.goToSpecificSpace(spaceName);
 		spaHome.goToSpaceSettingTab();
 		setSpaceMg.goToMemberTab();
-		setSpaceMg.inviteUser(arrayUser.get(1),true,arrayUser.get(1));
+		setSpaceMg.inviteUser(username2,true,fullName2);
 		
 		info("User A invites UserC to the space");
 		hp.goToSpecificSpace(spaceName);
 		spaHome.goToSpaceSettingTab();
 		setSpaceMg.goToMemberTab();
-		setSpaceMg.inviteUser(arrayUser.get(2),true,arrayUser.get(2));
+		setSpaceMg.inviteUser(username3,true,fullName3);
 		
 		info("User B login");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(1), password);
+		magAc.signIn(username2, password);
 		Utils.pause(3000);
 		
 		info("User B accept invitation from User A");
@@ -366,8 +405,7 @@ import org.testng.annotations.*;
 		spaMg.acceptAInvitation(spaceName);
 		
 		info("User C login");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(2), password);
+		magAc.signIn(username3, password);
 		Utils.pause(3000);
 		
 		info("User C accept invitation from User A");
@@ -381,8 +419,7 @@ import org.testng.annotations.*;
 		hpAct.checkActivity(activity);
 		
 		info("User B login");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(1), password);
+		magAc.signIn(username2, password);
 		Utils.pause(3000);
 		
 		info("Add comment on space activity");
@@ -400,8 +437,7 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- User2 cannot see (X) icon, so he cannot delete comment of other member*/ 
 		info("User C login");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(2), password);
+		magAc.signIn(username3, password);
 		Utils.pause(3000);
 		
 		info("User C cannot remove comment of user B");
@@ -422,13 +458,18 @@ import org.testng.annotations.*;
 	@Test
 	public  void test07_DeleteActivitiesByManagerOfSpace() {
 		info("Test 07: Delete activities by manager of space");
-		info("Create 2 users for testing");
-		createNewUser(2);
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+"@gmail.com";
+		String fullName2=username2+" "+username2;
 		
-		info("User A login");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(0), password);
-		Utils.pause(3000);
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		magAc.signIn(username1,password);
+		
 		
 		info("User A create a new space");
 		String spaceName= txData.getContentByArrayTypeRandom(1)+getRandomNumber();
@@ -441,11 +482,10 @@ import org.testng.annotations.*;
 		hp.goToSpecificSpace(spaceName);
 		spaHome.goToSpaceSettingTab();
 		setSpaceMg.goToMemberTab();
-		setSpaceMg.inviteUser(arrayUser.get(1),true,arrayUser.get(1));
+		setSpaceMg.inviteUser(username2,true,fullName2);
 		
 		info("User B login");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(1), password);
+		magAc.signIn(username2, password);
 		Utils.pause(3000);
 		
 		info("User B accept invitation from User A");
@@ -472,8 +512,7 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- Activity of space member is removed by manager*/ 
 		info("User A login");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(0), password);
+		magAc.signIn(username1, password);
 		Utils.pause(3000);
 		
 		info("User A remove activity of user B");

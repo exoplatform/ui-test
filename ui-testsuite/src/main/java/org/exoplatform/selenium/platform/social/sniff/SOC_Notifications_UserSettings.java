@@ -22,6 +22,14 @@ import org.testng.annotations.*;
 	@Test
 	public  void test01_NotificationSettings() {
 		info("Test 1: Notification Settings");
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+ mailSuffixData.getMailSuffixRandom();
+		
+		info("Add user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		magAc.signIn(username1, password);
+		
 		/*Step Number: 1
 		*Step Name: Step 1: Access notification settings
 		*Step Description: 
@@ -76,12 +84,12 @@ import org.testng.annotations.*;
 		info("Test 04: Update an Email notification option");
 		
 		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
-		String password1 = username1;
-		String email1 = username1 + mailSuffixData.getMailSuffixRandom();
+		String email1 = username1+ mailSuffixData.getMailSuffixRandom();
 		
-		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
-		String password2 = username2;
-		String email2 = username2 + mailSuffixData.getMailSuffixRandom();
+		info("Add user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		magAc.signIn(username1, password);
 		
 		info("Go to My Profile");
 		navTool.goToMyProfile();
@@ -120,15 +128,18 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			An email notification is sent*/
+		magAc.signIn(USER_ROOT,PASS_ROOT);
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+ mailSuffixData.getMailSuffixRandom();
 		info("add new user");
 		navTool.goToAddUser();
-		addUserPage.addUser(username1, password1, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
 		
 		
 		String parentWindow = driver.getWindowHandle();
 		info("parentWindow:"+parentWindow);
 		
-		String fullName=username1+" "+username1;
+		String fullName=username2+" "+username2;
 		String titleEmail=notiEmailData.getContentByArrayTypeRandom(4);
 	    
 		goToMail(EMAIL_ADDRESS1, EMAIL_PASS);
@@ -153,31 +164,33 @@ import org.testng.annotations.*;
 			No notification email is sent.*/ 
 		info("setting not send mail");
 		switchToParentWindow();
+		magAc.signIn(username1, password);
 		navTool.goToMyNotifications();
 		myNotifPage.disableNotification(myNotiType.NewUser_email);
 		
+		magAc.signIn(USER_ROOT,PASS_ROOT);
+		String username3 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email3 = username3+ mailSuffixData.getMailSuffixRandom();
 		info("add new user");
 		navTool.goToAddUser();
-		addUserPage.addUser(username2, password2, email2, username2, username2);
+		addUserPage.addUser(username3, password, email3, username3, username3);
 		
-		String fullName2=username2+" "+username2;
+		String fullName3=username3+" "+username3;
 	    
 		goToMail(EMAIL_ADDRESS1, EMAIL_PASS);
 		Utils.pause(10000);
 		emailNot.getAllChildWindows();
-		emailNot.verifyNOTPresentTitleASEmailNoti(titleEmail,fullName2,"","1");
-		emailNot.goToDetailEmailNoti(titleEmail, fullName,"");
+		emailNot.verifyNOTPresentTitleASEmailNoti(titleEmail,fullName3,"","1");
+		emailNot.goToDetailEmailNoti(titleEmail, fullName3,"");
 		emailNot.getAllChildWindows();
         emailNot.closeChildBrowsers(parentWindow);
 		
-		info("restore data");
 		switchToParentWindow();
 		info("restore data");
 		navTool.goToMyNotifications();
 		myNotifPage.confirmResetNotificationSetting();
 		navTool.goToUsersAndGroupsManagement();
 		userAndGroup.deleteUser(username1);
-		userAndGroup.deleteUser(username2);
  	}
 
 	/**
@@ -333,6 +346,23 @@ import org.testng.annotations.*;
 		info("Test 02: Update an Intranet notification option");
 		String mention = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		String mention2 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+		
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+ mailSuffixData.getMailSuffixRandom();
+		
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+ mailSuffixData.getMailSuffixRandom();
+		
+		String username3 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email3 = username3+ mailSuffixData.getMailSuffixRandom();
+		
+		info("Add user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		addUserPage.addUser(username3, password, email3, username3, username3);
+		magAc.signIn(username1, password);
+		
 		/*Step Number: 1
 		*Step Name: Step 1: Email is sent when option is ticked
 		*Step Description: 
@@ -361,17 +391,17 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			An intranet notification is displayed in the list*/
 		info("login by another user");
-		magAc.signIn(DATA_USER2, DATA_PASS);
+		magAc.signIn(username2, password);
 		
 		info("add mention");
-		hpAct.mentionUserActivity(DATA_USER1,mention);
-		waitForAndGetElement(hpAct.ELEMENT_ACTIVITY_MENTION_USER.replace("${content}", mention).replace("${user}",DATA_USER1));
+		hpAct.mentionUserActivity(username1,mention);
+		waitForAndGetElement(hpAct.ELEMENT_ACTIVITY_MENTION_USER.replace("${content}", mention).replace("${user}",username1));
 		
-		magAc.signIn(DATA_USER1, DATA_PASS);
+		magAc.signIn(username1, password);
 		info("Check intranet notification");
 		navTool.goToNotificationList();
-		String text=waitForAndGetElement(navTool.ELEMENT_NOTIFICATION_LIST_USER.replace("${user}",DATA_NAME_USER2)).getText();
-		assert text.contains(DATA_NAME_USER2+" has mentioned you.");
+		String text=waitForAndGetElement(navTool.ELEMENT_NOTIFICATION_LIST_USER.replace("${user}",username2+" "+username2)).getText();
+		assert text.contains(username2+" "+username2+" has mentioned you.");
 		click(navTool.ELEMENT_NOTIFICATION_REMOVE_ICON);
 		
 		/*Step number: 3
@@ -391,22 +421,16 @@ import org.testng.annotations.*;
 		myNotifPage.disableNotification(myNotiType.AS_Mention_intranet);
 		
 		info("login by another user");
-		magAc.signOut();
-		magAc.signIn(DATA_USER2, DATA_PASS);
+		magAc.signIn(username3, password);
 		
 		info("add mention");
-		hpAct.mentionUserActivity(DATA_USER1,mention2);
-		waitForAndGetElement(hpAct.ELEMENT_ACTIVITY_MENTION_USER.replace("${content}", mention2).replace("${user}",DATA_USER1));
+		hpAct.mentionUserActivity(username1,mention2);
+		waitForAndGetElement(hpAct.ELEMENT_ACTIVITY_MENTION_USER.replace("${content}", mention2).replace("${user}",username1));
 		
-		magAc.signOut();
-		magAc.signIn(DATA_USER1, DATA_PASS);
+		magAc.signIn(username1, password);
 		info("Check intranet notification");
 		navTool.goToNotificationList();
-		waitForElementNotPresent(navTool.ELEMENT_NOTIFICATION_LIST_USER.replace("${user}", DATA_NAME_USER2));
-		info("restore data");
-		navTool.goToMyNotifications();
-		myNotifPage.confirmResetNotificationSetting();
-		
+		waitForElementNotPresent(navTool.ELEMENT_NOTIFICATION_LIST_USER.replace("${user}",username3+" "+username3));
  	}
     
 }

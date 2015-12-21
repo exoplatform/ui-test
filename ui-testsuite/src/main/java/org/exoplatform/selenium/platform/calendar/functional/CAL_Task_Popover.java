@@ -4,7 +4,7 @@ import static org.exoplatform.selenium.TestLogger.info;
 
 import org.exoplatform.selenium.platform.calendar.CalendarHomePage.selectDayOption;
 import org.exoplatform.selenium.platform.calendar.CalendarHomePage.selectViewOption;
-import org.exoplatform.selenium.platform.calendar.CalendarLocatorObject;
+import org.exoplatform.selenium.platform.calendar.CalendarLocator;
 import org.testng.annotations.*;
 
 
@@ -106,9 +106,9 @@ public class CAL_Task_Popover extends CAL_TestConfig{
 		 *Expected Outcome: 
 			A small pop up display correct information of the added event without location information*/ 
 		mouseOver(cHome.getEventTaskElement(titleEvent, selectViewOption.WEEK, selectDayOption.DETAILTIME),true);
-		waitForAndGetElement(CalendarLocatorObject.ELEMENT_EVENT_POPOVER_TITLE_INFO.replace("$info", titleEvent));
-		waitForAndGetElement(CalendarLocatorObject.ELEMENT_EVENT_POPOVER_DESCRIPTION_INFO.replace("$info", contentEvent));
-		waitForElementNotPresent(CalendarLocatorObject.ELEMENT_EVENT_POPOVER_LOCATION_ELEMENT);
+		waitForAndGetElement(CalendarLocator.ELEMENT_EVENT_POPOVER_TITLE_INFO.replace("$info", titleEvent));
+		waitForAndGetElement(CalendarLocator.ELEMENT_EVENT_POPOVER_DESCRIPTION_INFO.replace("$info", contentEvent));
+		waitForElementNotPresent(CalendarLocator.ELEMENT_EVENT_POPOVER_LOCATION_ELEMENT);
 		
 		info("Delete data");
 		cHome.deleteEventTask(titleEvent, selectViewOption.DAY, selectDayOption.DETAILTIME,null);
@@ -154,8 +154,8 @@ public class CAL_Task_Popover extends CAL_TestConfig{
 		 *Expected Outcome: 
 			A small pop up display correct information of the added task without User's availability status*/ 
 		mouseOver(cHome.getEventTaskElement(titleTask, selectViewOption.WEEK, selectDayOption.DETAILTIME),true);
-		waitForAndGetElement(CalendarLocatorObject.ELEMENT_TASK_POPOVER_TITLE_INFO.replace("$info", titleTask));
-		waitForAndGetElement(CalendarLocatorObject.ELEMENT_TASK_POPOVER_DESCRIPTION_INFO.replace("$info", contentTask));
+		waitForAndGetElement(CalendarLocator.ELEMENT_TASK_POPOVER_TITLE_INFO.replace("$info", titleTask));
+		waitForAndGetElement(CalendarLocator.ELEMENT_TASK_POPOVER_DESCRIPTION_INFO.replace("$info", contentTask));
 		
 		info("Delete data");
 		cHome.deleteEventTask(titleTask, selectViewOption.DAY, selectDayOption.DETAILTIME,null);
@@ -198,8 +198,8 @@ public class CAL_Task_Popover extends CAL_TestConfig{
 		 *Expected Outcome: 
 			A small pop up display correct information of the added task with Description*/ 
 		mouseOver(cHome.getEventTaskElement(titleTask, selectViewOption.WEEK, selectDayOption.DETAILTIME),true);
-		waitForAndGetElement(CalendarLocatorObject.ELEMENT_TASK_POPOVER_TITLE_INFO.replace("$info", titleTask));
-		waitForElementNotPresent(CalendarLocatorObject.ELEMENT_TASK_POPOVER_DESCRIPTION_ELEMENT);
+		waitForAndGetElement(CalendarLocator.ELEMENT_TASK_POPOVER_TITLE_INFO.replace("$info", titleTask));
+		waitForElementNotPresent(CalendarLocator.ELEMENT_TASK_POPOVER_DESCRIPTION_ELEMENT);
 		
 		info("Delete data");
 		cHome.deleteEventTask(titleTask, selectViewOption.DAY, selectDayOption.DETAILTIME,null);

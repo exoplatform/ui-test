@@ -33,7 +33,6 @@ import org.testng.annotations.*;
 		createNewUser(1);
 		
 		info("User A login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		Utils.pause(3000);
 		
@@ -80,7 +79,6 @@ import org.testng.annotations.*;
 		createNewUser(2);
 		
 		info("User A login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		Utils.pause(3000);
 		
@@ -95,7 +93,6 @@ import org.testng.annotations.*;
 		userProPage.saveCancelUpdateInfo(true);
 		
 		info("User B login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(1), password);
 		Utils.pause(3000);
 		
@@ -105,7 +102,6 @@ import org.testng.annotations.*;
 		connMag.connectToAUser(arrayUser.get(0));
 		
 		info("Log in with User A");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		
 		String parentWindow = driver.getWindowHandle();
@@ -125,7 +121,8 @@ import org.testng.annotations.*;
 		emailNot.getAllChildWindows();
 		emailNot.verifyFormatEmailNotifcation(emailTitle,firstName,arrayUser.get(1), emailContent);
         emailNot.closeChildBrowsers(parentWindow);
-
+        if(arrayUser.size()>0)
+			deleteUsers(arrayUser);
  	}
 
 	/**
@@ -150,7 +147,6 @@ import org.testng.annotations.*;
 		createNewUser(2);
 		
 		info("User A login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		Utils.pause(3000);
 		
@@ -165,7 +161,6 @@ import org.testng.annotations.*;
 		userProPage.saveCancelUpdateInfo(true);
 		
 		info("User B login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(1), password);
 		Utils.pause(3000);
 		
@@ -183,7 +178,6 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- There is a notification mail about new connection request is sent to user2*/ 
 		info("Log in with User A");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		
 		String parentWindow = driver.getWindowHandle();
@@ -197,7 +191,8 @@ import org.testng.annotations.*;
 		emailNot.getAllChildWindows();
 		emailNot.verifyPresentEmailActivityNotifications(titleEmail,fullName,"");
         emailNot.closeChildBrowsers(parentWindow);
-
+        if(arrayUser.size()>0)
+			deleteUsers(arrayUser);
  	}
 
 	/**
@@ -222,7 +217,6 @@ import org.testng.annotations.*;
 		createNewUser(1);
 		
 		info("User A login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		Utils.pause(3000);
 		
@@ -372,7 +366,6 @@ import org.testng.annotations.*;
 		createNewUser(2);
 		
 		info("User A login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		Utils.pause(3000);
 		
@@ -387,7 +380,6 @@ import org.testng.annotations.*;
 		userProPage.saveCancelUpdateInfo(true);
 		
 		info("User B login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(1), password);
 		Utils.pause(3000);
 		
@@ -397,7 +389,6 @@ import org.testng.annotations.*;
 		connMag.connectToAUser(arrayUser.get(0));
 		
 		info("Log in with User A");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		
 		String parentWindow = driver.getWindowHandle();
@@ -411,6 +402,8 @@ import org.testng.annotations.*;
 		emailNot.getAllChildWindows();
 		emailNot.verifyPresentEmailActivityNotifications(titleEmail,fullName,"");
         emailNot.closeChildBrowsers(parentWindow);
+        if(arrayUser.size()>0)
+			deleteUsers(arrayUser);
 
  	}
 
@@ -580,7 +573,6 @@ import org.testng.annotations.*;
 		createNewUser(2);
 		
 		info("User A login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		Utils.pause(3000);
 		
@@ -595,7 +587,6 @@ import org.testng.annotations.*;
 		userProPage.saveCancelUpdateInfo(true);
 		
 		info("User B login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(1), password);
 		Utils.pause(3000);
 		
@@ -605,7 +596,6 @@ import org.testng.annotations.*;
 		connMag.connectToAUser(arrayUser.get(0));
 		
 		info("Log in with User A");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		
 		String parentWindow = driver.getWindowHandle();
@@ -625,7 +615,8 @@ import org.testng.annotations.*;
 		waitForAndGetElement(userProPage.ELEMETN_ACTIVITY_TAB);
 		waitForAndGetElement(userProPage.ELEMENT_USER_NAME_PAGE.replace("$fullName",fullName));
         emailNot.closeChildBrowsers(parentWindow);
-
+        if(arrayUser.size()>0)
+			deleteUsers(arrayUser);
  	}
 
 	/**
@@ -697,7 +688,6 @@ import org.testng.annotations.*;
 		createNewUser(2);
 		
 		info("User A login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		Utils.pause(3000);
 		
@@ -712,7 +702,6 @@ import org.testng.annotations.*;
 		userProPage.saveCancelUpdateInfo(true);
 		
 		info("User B login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(1), password);
 		Utils.pause(3000);
 		
@@ -722,7 +711,6 @@ import org.testng.annotations.*;
 		connMag.connectToAUser(arrayUser.get(0));
 		
 		info("Log in with User A");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		
 		String parentWindow = driver.getWindowHandle();
@@ -742,5 +730,6 @@ import org.testng.annotations.*;
 		emailNot.getAllChildWindows();
 		emailNot.verifyFeedBackMessageRefuseConnection(refuseMessage, fullName);
         emailNot.closeChildBrowsers(parentWindow);
-
+        if(arrayUser.size()>0)
+			deleteUsers(arrayUser);
  	}}

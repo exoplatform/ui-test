@@ -7,7 +7,7 @@ import static org.exoplatform.selenium.TestLogger.info;
  * This class will define actions about management project
  *
  */
-public class ManagementTasks extends TaskManagementLocatorObject {
+public class ManagementTasks extends TaskManagementLocator {
 	
 	TaskManagementHome tasHome;
 	

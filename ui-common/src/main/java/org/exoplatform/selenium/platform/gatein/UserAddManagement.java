@@ -6,50 +6,16 @@ import org.exoplatform.selenium.Button;
 import org.exoplatform.selenium.Dialog;
 import org.exoplatform.selenium.ManageAlert;
 import org.exoplatform.selenium.Utils;
-import org.exoplatform.selenium.platform.PlatformBase;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import java.util.ArrayList;
 
-public class UserAddManagement extends PlatformBase {
+public class UserAddManagement extends GateinLocator {
 	
 	UserAndGroupManagement userAndGroupManage;
 	Dialog dialog;
 	ManageAlert alert;
 	Button button;
-	
-	public By ELEMENT_USERNAME = By.id("username");
-	public By ELEMENT_PASSWORD = By.id("password");
-	public By ELEMENT_CONFIRM_PASSWORD = By.id("Confirmpassword");
-	public By ELEMENT_EMAIL = By.id("email");
-	public By ELEMENT_FIRSTNAME = By.id("firstName");
-	public By ELEMENT_LASTNAME = By.id("lastName");
-	public By ELEMENT_DISPLAY_NAME = By.id("displayName");
-	public final String ELEMENT_USER_EDIT_ICON = ".//*[contains(text(),'${username}')]/../..//*[@data-original-title='Edit User Info']/i";
-	public final String ELEMENT_USER_DELETE_ICON = ".//*[contains(text(),'${username}')]/../..//*[@data-original-title='Delete User']/i";
-	public final By ELEMENT_SAVE_UPDATE_USER = By.xpath("//*[@id='UIUserManagement']//*[text()='Save']");
-	public final By ELEMENT_SAVE_ADD_USER = By.xpath("//*[@id='UIAccountForm']//*[text()='Save']");
-	public final By ELEMENT_SAVE_PASSWORD = By.xpath(".//*[@id='UIAccountChangePass']//*[text()='Save']");
-	public final By ELEMENT_INPUT_SEARCH_USER_NAME = By.id("searchTerm");
-	public final String ELEMENT_SELECT_SEARCH_OPTION = "//*[contains(@name,'searchOption')]";
-	public final String ELEMENT_SEARCH_ICON_USERS_MANAGEMENT = "//*[contains(@title,'Quick Search')]";
-	public final String ELEMENT_CLOSE_MESSAGE = "//*[contains(@title,'Close Window')]";
-	
-	//message
-	public final String ELEMENT_MSG_CREATE_ACCOUNT = "You have registered a new account.";
-	public final String ELEMENT_MSG_UPDATE_PROFILE = "The user profile has been updated.";
-	public final String ELEMENT_MSG_SEARCH_USER_NAME = "User Name";
-	public final String ELEMENT_MSG_CONFIRM_DELETE = "Are you sure you want to delete ${userName} user?";
-	public final String ELEMENT_MSG_RESULT = "No result found.";
-	public final String ELEMENT_MSG_CHANGE_PASS_WORD = "The password has been changed.";
-	
-	//change passWord
-	public final By ELEMENT_CHANGE_PASSWORD_LINK = By.linkText("Change Password");
-	public final By ELEMENT_CURRENT_PASSWOR = By.id("currentpass");
-	public final By ELEMENT_NEW_PASSWORD = By.id("newpass");
-	public final By ELEMENT_CONFIRM_NEW_PASSWORD = By.id("confirmnewpass");
-	
 	public UserAddManagement(WebDriver dr){
 		driver = dr;
 		button = new Button(driver, this.plfVersion);

@@ -3,73 +3,10 @@ package org.exoplatform.selenium.platform.plf.sniff;
 import static org.exoplatform.selenium.TestLogger.info;
 
 import org.exoplatform.selenium.Utils;
-import org.exoplatform.selenium.platform.ManageLogInOut;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.*;
 
-
-	/**
-	* @author eXo
-	*
-	*/
-	public class Plf_HomepageGadget_WhoIsOnlineGadget extends Plf_TestConfig{
-		WebDriver driver2 ;
-		WebDriver driver3;
-		ManageLogInOut magAc2;
-		ManageLogInOut magAc3;
+	public class Plf_HomepageGadget_WhoIsOnlineGadget extends Plf_TestConfig_2{
 		
-		@BeforeMethod
-		public void setBeforeMethod(){
-			initBrowsers();
-		}
-		
-		@AfterMethod
-		public void setAfterMethod(){
-			closeBrowsers();
-		}
-		
-		/**
-		 * Log in as Mary and Demo on 2 browsers
-		 */
-		public void initBrowsers(){
-			info("driver 2 as Mary");
-			getSystemProperty();
-			if("chrome".equals(browser)){
-				driver2 = new ChromeDriver();
-				chromeFlag = true;
-			} else if ("iexplorer".equals(browser)){
-				driver2 = initIEDriver();
-				ieFlag = true;
-			} else {
-				driver2 = initFFDriver();
-			}
-			driver2.get(baseUrl);
-			magAc2 = new ManageLogInOut(driver2);
-			magAc2.signIn(DATA_USER2, DATA_PASS);
-			
-			info("driver 3 as demo");
-			getSystemProperty();
-			if("chrome".equals(browser)){
-				driver3 = new ChromeDriver();
-				chromeFlag = true;
-			} else if ("iexplorer".equals(browser)){
-				driver3 = initIEDriver();
-				ieFlag = true;
-			} else {
-				driver3 = initFFDriver();
-			}
-			driver3.get(baseUrl);
-			magAc3 = new ManageLogInOut(driver3);
-			magAc3.signIn(DATA_USER4, DATA_PASS);
-		}
-		/**
-		 * Close all browsers
-		 */
-		public void closeBrowsers(){
-			driver2.quit();
-			driver3.quit();
-		}
 	/**
 	*<li> Case ID:120864.</li>
 	*<li> Test Case Name: Check display of Who's online gadget.</li>

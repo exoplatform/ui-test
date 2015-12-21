@@ -29,8 +29,8 @@ public class Calendar_Search extends PlatformBase {
 	String fullName;
 	ManageAlert alert;
 
-	@BeforeClass
-	public void setUpBeforeTest() throws Exception{
+	@BeforeMethod
+	public void setUpBeforeMethod() throws Exception{
 		initSeleniumTest();
 		getDefaultUserPass(userDataFilePath,defaultSheet,isUseFile,jdbcDriver,dbUrl,user,pass,sqlUser);
 		driver.get(baseUrl);
@@ -49,9 +49,8 @@ public class Calendar_Search extends PlatformBase {
 		fullName = userData.fullName.get(0);
 	}
 
-	@AfterClass
-	public void afterTest(){
-		magAc.signOut();
+	@AfterMethod
+	public void afterMethod(){
 		driver.manage().deleteAllCookies();
 		driver.quit();
 	}

@@ -25,14 +25,12 @@ public class SOC_People_Profile_Connection extends SOC_TestConfig_2 {
 	public  void test01_02_CheckMyConnectionsSectionWhenNoConnection() {
 		/*Create data test*/
 		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
-		String password1 = username1;
-		String email1 = username1 + mailSuffixData.getMailSuffixRandom();
-
-		info("Add new user");
-		magAc.signIn(DATA_USER1, DATA_PASS);
+		String email1 = username1+ mailSuffixData.getMailSuffixRandom();
+		
+		info("Add user");
 		navTool.goToAddUser();
-		addUserPage.addUser(username1, password1, email1, username1, username1);
-		magAc.signIn(username1, password1);
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		magAc.signIn(username1, password);
 
 		info("Test 1: Check my Connections section when no connection");
 		String msg_me = conStatus.getConStatus(6);
@@ -69,17 +67,12 @@ public class SOC_People_Profile_Connection extends SOC_TestConfig_2 {
 		 *Expected Outcome: 
 			- A new section Connections is added in the right column of the page.
 			- a message is displayed in the section : "This user does not have connections yet."*/ 
-		magAc.signIn(DATA_USER1, DATA_PASS);
+		magAc.signIn(USER_ROOT,PASS_ROOT);
 		hp.goToConnections();
 		click(connMag.ELEMENT_ALL_CONNECTIONS_TAB);
 		connMag.searchPeople(username1,null,null,null);
 		click(connMag.ELEMENT_CONNECTION_USER_NAME.replace("${user}", username1));
 		waitForAndGetElement(myProfile.ELEMENT_UIMINICONNECTIONS_PORTLET_TEXT.replace("${content}", msg_other));
-
-		info("Clear Data");
-		magAc.signIn(DATA_USER1, DATA_PASS);
-		navTool.goToUsersAndGroupsManagement();
-		userAndGroup.deleteUser(username1);
 	}
 
 	/**
@@ -99,7 +92,8 @@ public class SOC_People_Profile_Connection extends SOC_TestConfig_2 {
 	public  void test03_04_CheckMyConnectionsSection() {
 		/*Create data test*/
 		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
-		String email1 = username1 + mailSuffixData.getMailSuffixRandom();
+		String email1 = username1+ mailSuffixData.getMailSuffixRandom();
+		
 		String numberAllConnection = "13";
 		
 		ArrayList<String> userList = new ArrayList<String>();
@@ -118,19 +112,18 @@ public class SOC_People_Profile_Connection extends SOC_TestConfig_2 {
 		userList.add(getRandomString()+"l");
 		userList.add(getRandomString()+"m");
 
-		info("Add new user");
-		magAc.signIn(DATA_USER1, DATA_PASS);
+		
+		info("Add user");
 		navTool.goToAddUser();
-
-		info("Add user " + username1);
-		addUserPage.addUser(username1, username1, email1, username1, username1);
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		
 		for(int i = 0; i<13; i++){
 			String userName=userList.get(i);
 			String email=userName+ mailSuffixData.getMailSuffixRandom();
 			info("Add user " + userName);
 			addUserPage.addUser(userName, userName, email, userName, userName);
 		}
-		magAc.signIn(username1, username1);
+		magAc.signIn(username1, password);
 
 		info("Create pre-condition");
 		info("Click on Connections on the left panel");
@@ -165,7 +158,7 @@ public class SOC_People_Profile_Connection extends SOC_TestConfig_2 {
 			- The section displays the last 12 connections of a user, with a maximum of 4 users' avatar per row
 			- A link View all (13) displayed at the bottom of the section*/
 		info("login as user");
-		magAc.signIn(username1, username1);
+		magAc.signIn(username1, password);
 		navTool.goToMyProfile();
 		info("Number of last 12 connections: " + String.valueOf(getElements(myProfile.ELEMENT_UIMINICONNECTIONS_PORLET_NUMBER_CONNECTION).size()));
 		for(int i = 12; i>0; i--){
@@ -200,7 +193,7 @@ public class SOC_People_Profile_Connection extends SOC_TestConfig_2 {
 		waitForAndGetElement(connMag.ELEMENT_MY_CONNECTIONS_TAB);
 		
 		info("Test 4: Check the Connections section of another user.");
-		magAc.signIn(DATA_USER1, DATA_PASS);
+		magAc.signIn(USER_ROOT,PASS_ROOT);
 		info("goto profile of user 1");
 		hp.goToConnections();
 		click(connMag.ELEMENT_ALL_CONNECTIONS_TAB);
@@ -222,14 +215,5 @@ public class SOC_People_Profile_Connection extends SOC_TestConfig_2 {
 		click(myProfile.ELEMENT_UIMINICONNECTIONS_PORTLET_VIEWALL.replace("${num}",numberAllConnection));
 		waitForAndGetElement(connMag.ELEMENT_MY_CONNECTIONS_TAB);
 
-		info("Clear Data");
-		magAc.signIn(DATA_USER1, DATA_PASS);
-		navTool.goToUsersAndGroupsManagement();
-		userAndGroup.deleteUser(username1);
-		for(int i = 0; i<13; i++){
-			String userName=userList.get(i);
-			info("Delete use " + userName);
-			userAndGroup.deleteUser(username1);
-		}
 	}
 }

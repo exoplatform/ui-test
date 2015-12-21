@@ -21,12 +21,13 @@ import org.exoplatform.selenium.platform.wiki.WikiHomePage;
 import org.exoplatform.selenium.platform.wiki.WikiManagement;
 import org.exoplatform.selenium.platform.ecms.CreateNewDocument;
 import org.exoplatform.selenium.platform.ecms.SiteExplorerHome;
+import org.exoplatform.selenium.platform.gatein.UserAddManagement;
 import org.exoplatform.selenium.platform.objectdatabase.common.LinksDatabase;
 import org.exoplatform.selenium.platform.objectdatabase.ecms.SiteExplorerDriveDatabase;
 import org.exoplatform.selenium.platform.objectdatabase.ecms.SiteExplorerPathDatabase;
 import org.exoplatform.selenium.platform.social.UserProfilePage;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 
 public class SOC_TestConfig_1 extends PlatformBase {
 	HomePagePlatform hp;
@@ -41,6 +42,7 @@ public class SOC_TestConfig_1 extends PlatformBase {
 
 	NavigationToolbar navTool;
 	SiteExplorerHome SEHome;
+	UserAddManagement addUserPage;
 
 	SpaceManagement spaMg;
 	SpaceHomePage spaHome;
@@ -58,14 +60,15 @@ public class SOC_TestConfig_1 extends PlatformBase {
 	SpaceSettingManagement setSpaceMg;
 	
 	EmailNotifications notiEmail;
+	String password;
 	
-	@BeforeClass
-	public void setUpBeforeClass() throws Exception{
-		info("Start setUpBeforeClass");
+	@BeforeMethod
+	public void setUpBeforeMethod() throws Exception{
+		info("Start setUpBeforeMethod");
 		initSeleniumTest();
 		getDefaultUserPass(userDataFilePath,defaultSheet,isUseFile,jdbcDriver,dbUrl,user,pass,sqlUser);
 		magAc = new ManageLogInOut(driver);
-		magAc.signIn(DATA_USER1, DATA_PASS);
+		magAc.signIn(USER_ROOT, PASS_ROOT);
 		myProfile = new UserProfilePage(driver);
 		navTool = new NavigationToolbar(driver);
 		SEHome = new SiteExplorerHome(driver);
@@ -93,6 +96,7 @@ public class SOC_TestConfig_1 extends PlatformBase {
 
 		spaMg = new SpaceManagement(driver);
 		spaHome = new SpaceHomePage(driver);
+		addUserPage = new UserAddManagement(driver);
 
 		lnkData = new LinksDatabase();
 		lnkData.setLinkData(linkPath,defaultSheet,isUseFile,jdbcDriver,dbUrl,user,pass,sqlUser);
@@ -105,12 +109,13 @@ public class SOC_TestConfig_1 extends PlatformBase {
 		siteExPath.setSiteExpPathData(siteExpPathPath,defaultSheet,isUseFile,jdbcDriver,dbUrl,user,pass,sqlAttach);
 
 		button = new Button(driver);
-		info("End setUpBeforeClass");
+		password= "123456";
+		info("End setUpBeforeMethod");
 	}
 
-	@AfterClass
-	public void afterTest(){
-		info("Start setUpBeforeClass");
+	@AfterMethod
+	public void afterMethod(){
+		info("Start afterMethod");
 		driver.manage().deleteAllCookies();
 		driver.quit();
 		info("End setUpBeforeClass");

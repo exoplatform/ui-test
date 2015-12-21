@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import org.openqa.selenium.WebDriver;
 import org.exoplatform.selenium.Utils;
 
-public class IntranetNotification extends NotificationLocator{
+public class IntranetNotification extends SocialLocator{
 	SpaceHomePage spaceHome;
 	UserProfilePage userPro;
 
@@ -149,11 +149,11 @@ public class IntranetNotification extends NotificationLocator{
 		Utils.pause(500);
 		for (int repeat = 0;; repeat++) {
 			if (repeat > 1) {
-				if (waitForAndGetElement(spaceHome.ELEMENT_SPACE_MENU_ACTIVITY_STREAM,3000, 0) != null);
+				if (waitForAndGetElement(ELEMENT_SPACE_MENU_ACTIVITY_STREAM,3000, 0) != null);
 				break;
 			}
-			if (waitForAndGetElement(spaceHome.ELEMENT_SPACE_MENU_ACTIVITY_STREAM,5000, 0) != null) {
-				info("Element " + spaceHome.ELEMENT_SPACE_MENU_ACTIVITY_STREAM+ " is displayed");
+			if (waitForAndGetElement(ELEMENT_SPACE_MENU_ACTIVITY_STREAM,5000, 0) != null) {
+				info("Element " + ELEMENT_SPACE_MENU_ACTIVITY_STREAM+ " is displayed");
 				break;
 			}
 			info("Retry...[" + repeat + "]");
@@ -334,11 +334,11 @@ public class IntranetNotification extends NotificationLocator{
 		Utils.pause(500);
 		for (int repeat = 0;; repeat++) {
 			if (repeat > 1) {
-				if (waitForAndGetElement(spaceHome.ELEMENT_SPACE_MENU_ACTIVITY_STREAM,3000, 0) != null);
+				if (waitForAndGetElement(ELEMENT_SPACE_MENU_ACTIVITY_STREAM,3000, 0) != null);
 				break;
 			}
-			if (waitForAndGetElement(spaceHome.ELEMENT_SPACE_MENU_ACTIVITY_STREAM,5000, 0) != null) {
-				info("Element " + spaceHome.ELEMENT_SPACE_MENU_ACTIVITY_STREAM+ " is displayed");
+			if (waitForAndGetElement(ELEMENT_SPACE_MENU_ACTIVITY_STREAM,5000, 0) != null) {
+				info("Element " + ELEMENT_SPACE_MENU_ACTIVITY_STREAM+ " is displayed");
 				break;
 			}
 			info("Retry...[" + repeat + "]");
@@ -364,11 +364,11 @@ public class IntranetNotification extends NotificationLocator{
 		Utils.pause(500);
 		for (int repeat = 0;; repeat++) {
 			if (repeat > 1) {
-				if (waitForAndGetElement(spaceHome.ELEMENT_SPACE_MENU_ACTIVITY_STREAM,3000, 0) != null);
+				if (waitForAndGetElement(ELEMENT_SPACE_MENU_ACTIVITY_STREAM,3000, 0) != null);
 				break;
 			}
-			if (waitForAndGetElement(spaceHome.ELEMENT_SPACE_MENU_ACTIVITY_STREAM,5000, 0) != null) {
-				info("Element " + spaceHome.ELEMENT_SPACE_MENU_ACTIVITY_STREAM+ " is displayed");
+			if (waitForAndGetElement(ELEMENT_SPACE_MENU_ACTIVITY_STREAM,5000, 0) != null) {
+				info("Element " + ELEMENT_SPACE_MENU_ACTIVITY_STREAM+ " is displayed");
 				break;
 			}
 			info("Retry...[" + repeat + "]");

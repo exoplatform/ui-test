@@ -4,10 +4,6 @@ import static org.exoplatform.selenium.TestLogger.info;
 
 import org.testng.annotations.*;
 
-/**
- * @author anhpp
- * 26/3/2015
- */
 public class SOC_People_Profile_AboutMe extends SOC_TestConfig_2{
 
 	/**
@@ -24,14 +20,15 @@ public class SOC_People_Profile_AboutMe extends SOC_TestConfig_2{
 
 		/*Create data test*/
 		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
-		String password1 = txData.getContentByArrayTypeRandom(1) + getRandomNumber();
-		String email1 = txData.getContentByArrayTypeRandom(1) + getRandomNumber() + mailSuffixData.getMailSuffixRandom();
-
-		info("Add new user");
-		magAc.signIn(DATA_USER1, DATA_PASS);
+		String email1 = username1+ mailSuffixData.getMailSuffixRandom();
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+ mailSuffixData.getMailSuffixRandom();
+		
+		info("Add user");
 		navTool.goToAddUser();
-		addUserPage.addUser(username1, password1, email1, username1, username1);
-		magAc.signIn(username1, password1);
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		magAc.signIn(username1, password);
 
 		info("Test 1: Check my About Me section");
 
@@ -69,18 +66,12 @@ public class SOC_People_Profile_AboutMe extends SOC_TestConfig_2{
 			- The section is composed of 1 text area allowing the user to introduce about himself.
 			- The content of the section must fit in the area*/ 
 		info("Test 1: Check my About Me section");
-		magAc.signIn(DATA_USER1, DATA_PASS);
-
+		magAc.signIn(username2, password);
 		info("goto profile of user 1");
 		hp.goToConnections();
 		click(connMag.ELEMENT_ALL_CONNECTIONS_TAB);
 		connMag.searchPeople(username1,null,null,null);
 		click(connMag.ELEMENT_CONNECTION_USER_NAME.replace("${user}", username1));
 		waitForAndGetElement(myProfile.ELEMENT_UIEXPERIENCE_PROFILE_PORTLET.replace("${content}", aboutMe));
-
-		info("Clear Data");
-		magAc.signIn(DATA_USER1, DATA_PASS);
-		navTool.goToUsersAndGroupsManagement();
-		userAndGroup.deleteUser(username1);
 	}
 }

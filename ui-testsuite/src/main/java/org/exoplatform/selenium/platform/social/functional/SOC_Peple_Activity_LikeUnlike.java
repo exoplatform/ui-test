@@ -2,6 +2,7 @@ package org.exoplatform.selenium.platform.social.functional;
 
 import static org.exoplatform.selenium.TestLogger.info;
 
+import org.exoplatform.selenium.Utils;
 import org.testng.annotations.*;
 
 
@@ -17,13 +18,16 @@ public class SOC_Peple_Activity_LikeUnlike extends SOC_TestConfig{
 	public  void test01_LikesunlikeFriendsActivities() {
 		info("Test 1: Likes/unlike friends activities");
 		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
-		String password1 = username1;
-		String email1 = username1 + mailSuffixData.getMailSuffixRandom();
-
+		String email1 = username1+"@gmail.com";
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+"@gmail.com";
 		info("Add new user");
-		magAc.signIn(DATA_USER1, DATA_PASS);
 		navTool.goToAddUser();
-		addUserPage.addUser(username1, password1, email1, username1, username1);
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		magAc.signIn(username1,password);
+		Utils.pause(3000);
+
 		
 		/*Step Number: 1
 		 *Step Name: -
@@ -35,7 +39,6 @@ public class SOC_Peple_Activity_LikeUnlike extends SOC_TestConfig{
 			- Create new activities
 		 *Expected Outcome: 
 			Activity is added successfully*/
-		magAc.signIn(DATA_USER1, DATA_PASS);
 		navTool.goToMyActivities();
 		String activity1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		hpAct.addActivity(activity1, "");
@@ -62,7 +65,7 @@ public class SOC_Peple_Activity_LikeUnlike extends SOC_TestConfig{
 		info("Click on Connections on the left panel");
 		hp.goToConnections();
 		info("Access people list, invite an user");
-		connMag.connectToAUser(username1);
+		connMag.connectToAUser(username2);
 		
 		/*Step number: 4
 		 *Step Name: -
@@ -76,11 +79,11 @@ public class SOC_Peple_Activity_LikeUnlike extends SOC_TestConfig{
 			- After the user clicks on [accept], the relation between two users has set. The user will be added into users relations user list. 
 			- By side each the user, has a [remove] button to user can remove from this relation.=> Two user become friend*/
 		info("Invited user accept invitation");
-		magAc.signIn(username1, password1);
+		magAc.signIn(username2, password);
 		hp.goToConnections();	
-		connMag.acceptAConnection(DATA_USER1);
+		connMag.acceptAConnection(username1);
 		info("Verify after accept");
-		connMag.verifyConnection(DATA_USER1, true);
+		connMag.verifyConnection(username1, true);
 		
 		/*Step number: 5
 		 *Step Name: -
@@ -140,6 +143,14 @@ public class SOC_Peple_Activity_LikeUnlike extends SOC_TestConfig{
 		 *Expected Outcome: 
 			Add an activity successfully:
 			- This activity is added into users activities list.User who is in your contact, can view your active on his/her activity list*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		magAc.signIn(username1,password);
+		Utils.pause(3000);
+
 		navTool.goToMyActivities();
 		String activity1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		hpAct.addActivity(activity1, "");

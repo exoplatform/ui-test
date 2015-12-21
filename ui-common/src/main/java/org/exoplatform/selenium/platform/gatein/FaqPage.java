@@ -5,11 +5,9 @@ import static org.exoplatform.selenium.TestLogger.info;
 import org.exoplatform.selenium.ManageAlert;
 import org.exoplatform.selenium.platform.HomePagePlatform;
 import org.exoplatform.selenium.platform.NavigationToolbar;
-import org.exoplatform.selenium.platform.PlatformBase;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class FaqPage  extends PlatformBase {
+public class FaqPage  extends GateinLocator {
 	NavigationToolbar navTool;
 	PageCreationWizard pagMang;
 	PageEditor pagEditor;
@@ -17,12 +15,6 @@ public class FaqPage  extends PlatformBase {
 	ManageAlert alert;
 	ApplicationRegistry arPage;
 
-	//Template tab
-	public final By ELEMENT_FAQ_EDIT_TEMPLATE_TAB = By.xpath("//button[contains(text(), 'Edit Template')]");
-	public final By ELEMENT_FAQ_EDIT_TEMP_INPUT = By.id("ContentTemplate");
-	
-	public final By ELEMENT_EDIT_SAVE_BUTTON=By.xpath("//*[text()='Save']");
-	public final By ELEMENT_EDIT_CLOSE_BUTTON=By.xpath("//*[text()='Close']");
 	public FaqPage(WebDriver dr){
 		driver = dr;
 		navTool = new NavigationToolbar(dr);

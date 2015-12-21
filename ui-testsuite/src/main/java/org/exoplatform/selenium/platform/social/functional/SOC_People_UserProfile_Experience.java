@@ -2,6 +2,7 @@ package org.exoplatform.selenium.platform.social.functional;
 
 import static org.exoplatform.selenium.TestLogger.info;
 
+import org.exoplatform.selenium.Utils;
 import org.testng.annotations.*;
 
 
@@ -30,14 +31,12 @@ public class SOC_People_UserProfile_Experience extends SOC_TestConfig{
 
 		/*Create data test*/
 		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
-		String password1 = username1;
-		String email1 = username1 + mailSuffixData.getMailSuffixRandom();
-
+		String email1 = username1+"@gmail.com";
 		info("Add new user");
-		magAc.signIn(DATA_USER1, DATA_PASS);
 		navTool.goToAddUser();
-		addUserPage.addUser(username1, password1, email1, username1, username1);
-		magAc.signIn(username1, password1);
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		magAc.signIn(username1,password);
+		Utils.pause(3000);
 
 		/*Step Number: 1
 		 *Step Name: Step1 : Edit my Profile
@@ -124,14 +123,12 @@ public class SOC_People_UserProfile_Experience extends SOC_TestConfig{
 		
 		/*Create data test*/
 		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
-		String password1 = username1;
-		String email1 = username1 + mailSuffixData.getMailSuffixRandom();
-
+		String email1 = username1+"@gmail.com";
 		info("Add new user");
-		magAc.signIn(DATA_USER1, DATA_PASS);
 		navTool.goToAddUser();
-		addUserPage.addUser(username1, password1, email1, username1, username1);
-		magAc.signIn(username1, password1);
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		magAc.signIn(username1,password);
+		Utils.pause(3000);
 		navTool.goToMyProfile();
 
 		info("goto edit profile page");
@@ -180,13 +177,15 @@ public class SOC_People_UserProfile_Experience extends SOC_TestConfig{
 		info("Test 4: Check display of Experience section when not informed");
 		/*Create data test*/
 		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
-		String password1 = username1;
-		String email1 = username1 + mailSuffixData.getMailSuffixRandom();
-
+		String email1 = username1+"@gmail.com";
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+"@gmail.com";
 		info("Add new user");
-		magAc.signIn(DATA_USER1, DATA_PASS);
 		navTool.goToAddUser();
-		addUserPage.addUser(username1, password1, email1, username1, username1);
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		magAc.signIn(username1,password);
+		Utils.pause(3000);
 
 		/*Step Number: 1
 		 *Step Name: Step 1 : Go to other's profile page
@@ -197,11 +196,10 @@ public class SOC_People_UserProfile_Experience extends SOC_TestConfig{
 
 		 *Expected Outcome: 
 			The section Experience is not displayed in the page.*/ 
-		magAc.signIn(DATA_USER1, DATA_PASS);
 		info("Click on Connections on the left panel");
 		hp.goToConnections();
-		connMag.searchPeople(username1,"","","");
-		click(connMag.ELEMENT_USER_LINK.replace("${userName}", username1));
+		connMag.searchPeople(username2,"","","");
+		click(connMag.ELEMENT_USER_LINK.replace("${userName}", username2));
 		waitForElementNotPresent(myProfile.ELEMENT_UIEXPERIENCE_PORLET);
 	}
 }

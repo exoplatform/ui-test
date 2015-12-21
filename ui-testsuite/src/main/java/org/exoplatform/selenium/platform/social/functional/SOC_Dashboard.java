@@ -23,6 +23,15 @@ import org.testng.annotations.*;
     
         String space = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
         String contentSpace=txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+        
+        String username = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email = username+"@gmail.com";
+		
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username, password, email, username, username);
+		magAc.signIn(username,password);
+		
 		hp.goToMySpaces();
 		info("create new space");
 		spaMg.addNewSpaceSimple(space,contentSpace,6000);
@@ -51,7 +60,6 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			Dashboard page is displayed with all gadget default*/
 		info("open dashboard");
-		//spaHome.goToMore();
 		spaHome.goToDashBoard();
 		
 		/*Step number: 3

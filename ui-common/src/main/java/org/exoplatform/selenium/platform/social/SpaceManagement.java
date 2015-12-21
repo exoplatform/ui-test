@@ -6,12 +6,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import static org.exoplatform.selenium.TestLogger.info;
-/**
- * update : quynhpt
- * date: 0601/2014
- *
- */
-public class SpaceManagement extends SpaceLocator {
+
+public class SpaceManagement extends SocialLocator {
 
 	
 

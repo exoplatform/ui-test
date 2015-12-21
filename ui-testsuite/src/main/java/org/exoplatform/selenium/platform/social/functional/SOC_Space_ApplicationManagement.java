@@ -20,6 +20,14 @@ import org.testng.annotations.*;
 		info("Test 2: Remove space settings portlet");
 		String space = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		String contentSpace=txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		magAc.signIn(username1,password);
+		Utils.pause(3000);
+
 		hp.goToMySpaces();
 		info("create new space");
 		spaMg.addNewSpaceSimple(space,contentSpace,60000);
@@ -51,6 +59,14 @@ import org.testng.annotations.*;
 		info("Test 1: Display order of space's applications on tool bar");
 		String space = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		String contentSpace=txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		magAc.signIn(username1,password);
+		Utils.pause(3000);
+
 		hp.goToMySpaces();
 		info("create new space");
 		spaMg.addNewSpaceSimple(space,contentSpace,60000);
@@ -74,6 +90,7 @@ import org.testng.annotations.*;
 		String agenda = listApp.get(4);
 		String space_setting = listApp.get(5);
 		String member = listApp.get(6);
+
 		spaHome.goToSpace(space);
 		info("Verify that list of applications of the space is shown with correct order");
 		waitForAndGetElement(spaHome.ELEMENT_SPACE_MENU_DISPLAYORDER_ID.replace("${number}","1").replace("${tab}",activity_Stream),3000,1);
@@ -83,9 +100,6 @@ import org.testng.annotations.*;
 		waitForAndGetElement(spaHome.ELEMENT_SPACE_MENU_DISPLAYORDER_ID.replace("${number}","5").replace("${tab}",agenda));
 		waitForAndGetElement(spaHome.ELEMENT_SPACE_MENU_DISPLAYORDER_ID.replace("${number}","6").replace("${tab}",space_setting));
 		waitForAndGetElement(spaHome.ELEMENT_SPACE_MENU_DISPLAYORDER_ID.replace("${number}","7").replace("${tab}",member));
-		/*info("Delete created space");
-		hp.goToMySpaces();
-		spaMg.deleteSpace(space,false);*/
 	}
 
 	/**
@@ -116,6 +130,16 @@ import org.testng.annotations.*;
 		
 		String space = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		String contentSpace=txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+		
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		magAc.signIn(username1,password);
+		Utils.pause(3000);
+
+		
 		hp.goToMySpaces();
 		info("create new space");
 		spaMg.addNewSpaceSimple(space,contentSpace,60000);
@@ -170,9 +194,6 @@ import org.testng.annotations.*;
 		setSpaceMg.deleteApplications(app);
 		waitForElementNotPresent(spaHome.ELEMENT_SPACE_MENU_TAB.replace("${tab}", tab));
 		waitForElementNotPresent(setSpaceMg.ELEMENT_APPLICATION_TAB_APPLICATION_LIST_CONTENT.replace("${app}", app));
-		/*info("Delete created space");
-		hp.goToMySpaces();
-		spaMg.deleteSpace(space,false);*/
 	}
 
 	/**
@@ -191,6 +212,16 @@ import org.testng.annotations.*;
 		String space = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		String contentSpace=txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		String urlSpace=baseUrl+"/g/:spaces:"+space.toLowerCase()+"/"+space.toLowerCase();
+		
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		magAc.signIn(username1,password);
+		Utils.pause(3000);
+
+		
 		hp.goToMySpaces();
 		info("create new space");
 		spaMg.addNewSpaceSimple(space,contentSpace,60000);
@@ -237,9 +268,6 @@ import org.testng.annotations.*;
 		info("click on new added category");
 		click(setSpaceMg.ELEMENT_ADD_APPLICATION_POPUP_CATEGOGY.replace("${category}",category));
 		waitForAndGetElement(setSpaceMg.ELEMENT_ADD_APPLICATION_POPUP_APPLICATION_ADD_BTN.replace("${app}",portlet));
-		/*info("Delete created space");
-		hp.goToMySpaces();
-		spaMg.deleteSpace(space,false);*/
 	}
 
 	/**
@@ -283,6 +311,15 @@ import org.testng.annotations.*;
 		info("Test 8: Display a style of selected item in space's tool bar");
 		String space = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		String contentSpace=txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		magAc.signIn(username1,password);
+		Utils.pause(3000);
+
+		
 		hp.goToMySpaces();
 		info("create new space");
 		spaMg.addNewSpaceSimple(space,contentSpace,60000);
@@ -319,9 +356,6 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- An UI hover is displayed under the item*/ 
 		waitForAndGetElement(spaHome.ELEMENT_SPACE_WIKI_TAB_CONTENT,2000,1);
-		/*info("Delete created space");
-		hp.goToMySpaces();
-		spaMg.deleteSpace(space,false);*/
 	}
 
 	/**
@@ -344,6 +378,16 @@ import org.testng.annotations.*;
 		
 		String space = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		String contentSpace=txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+		
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		magAc.signIn(username1,password);
+		Utils.pause(3000);
+
+		
 		hp.goToMySpaces();
 		info("create new space");
 		spaMg.addNewSpaceSimple(space,contentSpace,60000);
@@ -395,7 +439,4 @@ import org.testng.annotations.*;
 		click(spaHome.ELEMENT_SPACE_MENU_TAB.replace("${tab}", tab1));
 		waitForAndGetElement(spaHome.ELEMENT_SPACE_MENU_DISPLAYORDER_ID.replace("${number}","6").replace("${tab}",tab1));
 		waitForAndGetElement(spaHome.ELEMENT_SPACE_MENU_DISPLAYORDER.replace("${number}","7").replace("${tab}","More"));
-		/*info("Delete created space");
-		hp.goToMySpaces();
-		spaMg.deleteSpace(space,false);*/
  	}}

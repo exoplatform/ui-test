@@ -4,6 +4,7 @@ import static org.exoplatform.selenium.TestLogger.info;
 
 import java.util.ArrayList;
 
+import org.exoplatform.selenium.Utils;
 import org.exoplatform.selenium.platform.ConnectionsManagement.selectTabOption;
 import org.testng.annotations.*;
 
@@ -25,6 +26,11 @@ public class SOC_People_UserProfile_Connections extends SOC_TestConfig{
 		/*Create data test*/
 		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
 		String email1 = username1 + mailSuffixData.getMailSuffixRandom();
+		
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+"@gmail.com";
+		Utils.pause(3000);
+		
 		String numberAllConnection = "13";
 
 		ArrayList<String> userList = new ArrayList<String>();
@@ -44,11 +50,11 @@ public class SOC_People_UserProfile_Connections extends SOC_TestConfig{
 		userList.add(getRandomString()+"m");
 
 		info("Add new user");
-		magAc.signIn(DATA_USER1, DATA_PASS);
 		navTool.goToAddUser();
 
 		info("Add user " + username1);
-		addUserPage.addUser(username1, username1, email1, username1, username1);
+		addUserPage.addUser(username1,password, email1, username1, username1);
+		addUserPage.addUser(username2,password, email2, username2, username2);
 		for(int i = 0; i<13; i++){
 			String userName=userList.get(i);
 			String email=userName+ mailSuffixData.getMailSuffixRandom();
@@ -97,7 +103,7 @@ public class SOC_People_UserProfile_Connections extends SOC_TestConfig{
 		 *Expected Outcome: 
 			- The section displays the last 12 connections of User A
 			- Connections displays a maximum of 4 users' avatar per row.*/ 
-		magAc.signIn(DATA_USER1, DATA_PASS);
+		magAc.signIn(username2,password);
 		info("goto profile of user 1");
 		hp.goToConnections();
 		click(connMag.ELEMENT_ALL_CONNECTIONS_TAB);
@@ -178,6 +184,13 @@ public class SOC_People_UserProfile_Connections extends SOC_TestConfig{
 
 		 *Expected Outcome: 
 			- A new section Connections is added on the right column of the page.*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		magAc.signIn(username1,password);
+		Utils.pause(3000);
 		navTool.goToMyProfile();
 
 		/*Step number: 2
@@ -210,15 +223,17 @@ public class SOC_People_UserProfile_Connections extends SOC_TestConfig{
 		String msg_other = conStatus.getConStatus(7);
 
 		/*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
 		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
-		String password2 = username2;
-		String email2 = username2 + mailSuffixData.getMailSuffixRandom();
-
+		String email2 = username2+"@gmail.com";
 		info("Add new user");
-		magAc.signIn(DATA_USER1, DATA_PASS);
 		navTool.goToAddUser();
-		addUserPage.addUser(username2, password2, email2, username2, username2);
-
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		magAc.signIn(username1,password);
+		Utils.pause(3000);
+		
 		info("Test 3: Check display of Connections section when no connection");
 		/*Step Number: 1
 		 *Step Name: Step 1 : check Connections in profile page

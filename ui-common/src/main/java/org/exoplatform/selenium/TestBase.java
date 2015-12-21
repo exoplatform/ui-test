@@ -2577,7 +2577,7 @@ public class TestBase {
 			}
 			if (waitForAndGetElement(element, 5000, 0) != null){
 				info("Element "+element+" is displayed");
-				if(isClicked.length>0 & isClicked[0]==true)
+				if(isClicked.length>0 && isClicked[0]==true)
 					click(element);
 				break;
 			}

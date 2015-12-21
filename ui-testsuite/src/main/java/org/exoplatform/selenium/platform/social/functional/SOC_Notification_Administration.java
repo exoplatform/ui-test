@@ -19,6 +19,14 @@ import org.testng.annotations.*;
 	public  void test01_CheckGlobalSettingsOfTheSecondSectionNotificationTypes() {
 		info("Test 1: Check global settings of the second section Notification Types");
 		resetNotifitcaiton=true;
+		String username = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email = username+"@gmail.com";
+		
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username, password, email, username, username);
+		
+		
 		/*Step Number: 1
 		*Step Name: Step 1: Access notification Administration
 		*Step Description: 
@@ -61,16 +69,14 @@ import org.testng.annotations.*;
 			- The change in Notification admin at step 2 is applied for other user
 			- Notification type "Someone joins the social intranet" is not displayed, 
 			"Someone @mention me" is displayed*/ 
-        magAc.signOut();
-        magAc.signIn(DATA_USER4,DATA_PASS);
+        magAc.signIn(username,password);
         info("Go to My notification");
         navTool.goToMyNotifications();
         info("Verify that new user and mention plugin is not displayed");
         waitForElementNotPresent(myNoti.ELEMENT_MY_NOTIFICATION_NEW_USER_PLUGIN);
         waitForElementNotPresent(myNoti.ELEMENT_MY_NOTIFICATION_MENTION_PLUGIN);
         
-        magAc.signOut();
-        magAc.signIn(DATA_USER1,DATA_PASS);
+        magAc.signIn(USER_ROOT,PASS_ROOT);
         info("Go to Admin notification");
         navTool.goToAdminNotifications();
         info("Change setting.Enable New User intranet");
@@ -80,13 +86,13 @@ import org.testng.annotations.*;
         notiAdmin.enableNotification(notificationType.AS_Mention_intranet);
         notiAdmin.enableNotification(notificationType.AS_Mention_email);
         
-        magAc.signOut();
-        magAc.signIn(DATA_USER4,DATA_PASS);
+        magAc.signIn(username,password);
         info("Go to My notification");
         navTool.goToMyNotifications();
         info("Verify that New user and Mention plugin is shown");
         waitForAndGetElement(myNoti.ELEMENT_MY_NOTIFICATION_NEW_USER_PLUGIN);
-        waitForAndGetElement(myNoti.ELEMENT_MY_NOTIFICATION_MENTION_PLUGIN);
+        waitForAndGetElement(myNoti.ELEMENT_MY_NOTIFICATION_MENTION_PLUGIN,2000,1);
+        
         
  	}
 
@@ -182,6 +188,12 @@ import org.testng.annotations.*;
 	public  void test04_UncheckOneNotificationType() {
 		info("Test 4: Uncheck one notification type");
 		resetNotifitcaiton=true;
+		String username = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email = username+"@gmail.com";
+		
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username, password, email, username, username);
 		/*Step Number: 1
 		*Step Name: Step 1: Access notification Administration
 		*Step Description: 
@@ -229,8 +241,7 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- The correspondingrow disappears from all users'Notification Settings screen.*/ 
-        magAc.signOut();
-        magAc.signIn(DATA_USER4,DATA_PASS);
+        magAc.signIn(username,password);
         info("Go to My notification");
         navTool.goToMyNotifications();
         info("Verify that new user and mention plugin is not displayed");
@@ -238,8 +249,7 @@ import org.testng.annotations.*;
         waitForElementNotPresent(myNoti.ELEMENT_MY_NOTIFICATION_ACTIVITY_COMMENT_PLUGIN);
         
         
-        magAc.signOut();
-        magAc.signIn(DATA_USER1,DATA_PASS);
+        magAc.signIn(USER_ROOT,PASS_ROOT);
         info("Go to Admin notification");
         navTool.goToAdminNotifications();
         info("Change setting.Enable Space join intranet");
@@ -249,8 +259,7 @@ import org.testng.annotations.*;
         notiAdmin.enableNotification(notificationType.Space_Join_email);
         notiAdmin.enableNotification(notificationType.Space_Join_intranet);
         
-        magAc.signOut();
-        magAc.signIn(DATA_USER4,DATA_PASS);
+        magAc.signIn(username,password);
         info("Go to My notification");
         navTool.goToMyNotifications();
         info("Verify that Space join and Activity comment plugin is shown");

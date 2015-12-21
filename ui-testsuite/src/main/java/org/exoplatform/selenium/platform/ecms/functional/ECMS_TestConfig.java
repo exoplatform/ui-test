@@ -13,8 +13,8 @@ import org.exoplatform.selenium.platform.PlatformBase;
 import org.exoplatform.selenium.platform.ecms.SiteExplorerHome;
 import org.exoplatform.selenium.platform.gatein.UserAddManagement;
 import org.exoplatform.selenium.platform.objectdatabase.common.AttachmentFileDatabase;
+import org.exoplatform.selenium.platform.social.SocialLocator;
 import org.exoplatform.selenium.platform.social.SpaceHomePage;
-import org.exoplatform.selenium.platform.social.SpaceLocator;
 import org.exoplatform.selenium.platform.social.SpaceManagement;
 import org.exoplatform.selenium.platform.social.SpaceSettingManagement;
 import org.exoplatform.selenium.platform.social.UserPageBase;
@@ -30,7 +30,7 @@ public class ECMS_TestConfig extends PlatformBase {
 	Button button;
 	UserAddManagement addUserPage;
 	UserPageBase userPageBase;
-	SpaceLocator spaceLocator;
+	SocialLocator socLocator;
 
 	String password;
 	ArrayList<String> arrayUser;
@@ -58,7 +58,7 @@ public class ECMS_TestConfig extends PlatformBase {
 		manageLoginOut = new ManageLogInOut(driver);
 		button = new Button(driver);
 		spaceManage = new SpaceManagement(driver);
-		spaceLocator = new SpaceLocator();
+		socLocator = new SocialLocator();
 
 		addUserPage = new UserAddManagement(driver);
 		userPageBase = new UserPageBase(driver);

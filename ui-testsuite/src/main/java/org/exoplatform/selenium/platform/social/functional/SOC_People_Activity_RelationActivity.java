@@ -2,6 +2,7 @@ package org.exoplatform.selenium.platform.social.functional;
 
 import static org.exoplatform.selenium.TestLogger.info;
 
+import org.exoplatform.selenium.Utils;
 import org.testng.annotations.*;
 
 
@@ -18,17 +19,22 @@ public class SOC_People_Activity_RelationActivity extends SOC_TestConfig{
 	@Test
 	public  void test01_04_AddRelationActivityForBothConnectedUser() {
 		info("Test 1: Add Relation Activity for both connected user");
-		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
-		String password1 = username1;
-		String email1 = username1 + mailSuffixData.getMailSuffixRandom();
 		String activity1 = "I'm now connected with";
-		String comment1 = "I'm now connected with "+ DATA_NAME_USER1;
-		String comment2 = "I'm now connected with "+ username1+" "+username1;
+		
 
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+"@gmail.com";
 		info("Add new user");
-		magAc.signIn(DATA_USER1, DATA_PASS);
 		navTool.goToAddUser();
-		addUserPage.addUser(username1, password1, email1, username1, username1);
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		magAc.signIn(username1,password);
+		Utils.pause(3000);
+		
+		String comment1 = "I'm now connected with "+ username1+" "+username1;
+		String comment2 = "I'm now connected with "+ username2+" "+username2;
 
 		/*Step Number: 1
 		 *Step Name: Send request
@@ -42,7 +48,7 @@ public class SOC_People_Activity_RelationActivity extends SOC_TestConfig{
 		info("Click on Connections on the left panel");
 		hp.goToConnections();
 		info("Access people list, invite an user");
-		connMag.connectToAUser(username1);
+		connMag.connectToAUser(username2);
 		
 		info("Test 4: Update Add Relation Activity after connecting to another user");
 		/*Step Number: 1
@@ -66,11 +72,11 @@ public class SOC_People_Activity_RelationActivity extends SOC_TestConfig{
 		 *Expected Outcome: 
 			- A Relation activity is added to the activity stream with comment"I'm now connected with User A"*/
 		info("Invited user accept invitation");
-		magAc.signIn(username1, password1);
+		magAc.signIn(username2, password);
 		hp.goToConnections();	
-		connMag.acceptAConnection(DATA_USER1);
+		connMag.acceptAConnection(username1);
 		info("Verify after accept");
-		connMag.verifyConnection(DATA_USER1, true);
+		connMag.verifyConnection(username1, true);
 		navTool.goToMyActivities();
 		waitForAndGetElement(hpAct.ELEMENT_COMMENT_TEXT.replace("${activityText}",activity1).replace("${commentText}",comment1));
 
@@ -82,9 +88,10 @@ public class SOC_People_Activity_RelationActivity extends SOC_TestConfig{
 
 		 *Expected Outcome: 
 			- A Relation activity is added to the activity stream with comment"I'm now connected with User B"*/ 
-		magAc.signIn(DATA_USER1, DATA_PASS);
+		magAc.signIn(username1,password);
 		navTool.goToMyActivities();
-		waitForAndGetElement(hpAct.ELEMENT_COMMENT_TEXT.replace("${activityText}",activity1).replace("${commentText}",comment2));
+		waitForAndGetElement(hpAct.ELEMENT_COMMENT_TEXT.replace("${activityText}",activity1)
+				.replace("${commentText}",comment2));
 	}
 
 	/**
@@ -96,26 +103,30 @@ public class SOC_People_Activity_RelationActivity extends SOC_TestConfig{
 	@Test
 	public  void test02_DeleteARelationActivityFromActivityStreamByItsUser() {
 		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
-		String password1 = username1;
-		String email1 = username1 + mailSuffixData.getMailSuffixRandom();
-		String activity1 = "I'm now connected with";
-		String comment1 = "I'm now connected with "+ DATA_NAME_USER1;
-
+		String email1 = username1+"@gmail.com";
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+"@gmail.com";
 		info("Add new user");
-		magAc.signIn(DATA_USER1, DATA_PASS);
 		navTool.goToAddUser();
-		addUserPage.addUser(username1, password1, email1, username1, username1);
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		magAc.signIn(username1,password);
+		Utils.pause(3000);
+		String activity1 = "I'm now connected with";
+		String comment1 = "I'm now connected with "+ username1+" "+username1;
+		
 		
 		info("Click on Connections on the left panel");
 		hp.goToConnections();
 		info("Access people list, invite an user");
-		connMag.connectToAUser(username1);
+		connMag.connectToAUser(username2);
 		info("Invited user accept invitation");
-		magAc.signIn(username1, password1);
+		magAc.signIn(username2, password);
 		hp.goToConnections();	
-		connMag.acceptAConnection(DATA_USER1);
+		connMag.acceptAConnection(username1);
 		info("Verify after accept");
-		connMag.verifyConnection(DATA_USER1, true);
+		connMag.verifyConnection(username1, true);
+		Utils.pause(2000);
 		navTool.goToMyActivities();
 		
 		info("Test 2: Delete a Relation activity from activity stream by its user");
@@ -160,27 +171,31 @@ public class SOC_People_Activity_RelationActivity extends SOC_TestConfig{
 	 */
 	@Test
 	public  void test03_DislikeARelationActivityFromLikeIcon() {
-		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
-		String password1 = username1;
-		String email1 = username1 + mailSuffixData.getMailSuffixRandom();
-		String activity1 = "I'm now connected with";
-		String comment1 = "I'm now connected with "+ DATA_NAME_USER1;
+		
 
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+"@gmail.com";
 		info("Add new user");
-		magAc.signIn(DATA_USER1, DATA_PASS);
 		navTool.goToAddUser();
-		addUserPage.addUser(username1, password1, email1, username1, username1);
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		magAc.signIn(username1,password);
+		Utils.pause(3000);
+		String activity1 = "I'm now connected with";
+		String comment1 = "I'm now connected with "+ username1+" "+username1;
 		
 		info("Click on Connections on the left panel");
 		hp.goToConnections();
 		info("Access people list, invite an user");
-		connMag.connectToAUser(username1);
+		connMag.connectToAUser(username2);
 		info("Invited user accept invitation");
-		magAc.signIn(username1, password1);
+		magAc.signIn(username2, password);
 		hp.goToConnections();	
-		connMag.acceptAConnection(DATA_USER1);
+		connMag.acceptAConnection(username1);
 		info("Verify after accept");
-		connMag.verifyConnection(DATA_USER1, true);
+		connMag.verifyConnection(username1, true);
 		hp.goToHomePage();
 		waitForAndGetElement(hpAct.ELEMENT_COMMENT_TEXT.replace("${activityText}",activity1).replace("${commentText}",comment1));
 		navTool.goToMyActivities();

@@ -2,6 +2,7 @@ package org.exoplatform.selenium.platform.social.functional;
 
 import static org.exoplatform.selenium.TestLogger.info;
 
+import org.exoplatform.selenium.Utils;
 import org.exoplatform.selenium.platform.ConnectionsManagement.selectTabOption;
 import org.testng.annotations.*;
 
@@ -18,22 +19,25 @@ public class SOC_People_UserProfile_ConnectionStatus extends SOC_TestConfig{
 	public  void test01_CheckConnectionButtonWhen2UsersAreConnected() {
 		/*Create data test*/
 		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
-		String password1 = txData.getContentByArrayTypeRandom(1) + getRandomNumber();
-		String email1 = txData.getContentByArrayTypeRandom(1) + getRandomNumber() + mailSuffixData.getMailSuffixRandom();
-
+		String email1 = username1+"@gmail.com";
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+"@gmail.com";
 		info("Add new user");
-		magAc.signIn(DATA_USER1, DATA_PASS);
 		navTool.goToAddUser();
-		addUserPage.addUser(username1, password1, email1, username1, username1);
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		magAc.signIn(username1,password);
+		Utils.pause(3000);
+		
 		info("Click on Connections on the left panel");
 		hp.goToConnections();
 		info("Click on Connect button to invite about 2 users");
-		connMag.connectToAUser(username1);
-		magAc.signIn(username1, password1);
+		connMag.connectToAUser(username2);
+		magAc.signIn(username2, password);
 		hp.goToConnections();	
 		connMag.goToConnectionTab(selectTabOption.RECEIVE);
-		connMag.acceptAConnection(DATA_USER1);
-		magAc.signIn(DATA_USER1, DATA_PASS);
+		connMag.acceptAConnection(username1);
+		magAc.signIn(username2,password);
 
 		info("Test 1: Check connection button when 2 users are connected");
 		/*Step Number: 1
@@ -83,13 +87,15 @@ public class SOC_People_UserProfile_ConnectionStatus extends SOC_TestConfig{
 	public  void test02_CheckConnectionButtonWhen2UsersAreNotConnected() {
 		/*Create data test*/
 		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
-		String password1 = txData.getContentByArrayTypeRandom(1) + getRandomNumber();
-		String email1 = txData.getContentByArrayTypeRandom(1) + getRandomNumber() + mailSuffixData.getMailSuffixRandom();
-
+		String email1 = username1+"@gmail.com";
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+"@gmail.com";
 		info("Add new user");
-		magAc.signIn(DATA_USER1, DATA_PASS);
 		navTool.goToAddUser();
-		addUserPage.addUser(username1, password1, email1, username1, username1);
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		magAc.signIn(username1,password);
+		Utils.pause(3000);
 
 		info("Test 2: Check connection button when 2 users are not connected");
 		/*Step Number: 1
@@ -103,8 +109,8 @@ public class SOC_People_UserProfile_ConnectionStatus extends SOC_TestConfig{
 			- The profile page of test2 is displayed*/
 		info("Click on Connections on the left panel");
 		hp.goToConnections();
-		connMag.searchPeople(username1,"","","");
-		click(connMag.ELEMENT_USER_LINK.replace("${userName}", username1));
+		connMag.searchPeople(username2,"","","");
+		click(connMag.ELEMENT_USER_LINK.replace("${userName}", username2));
 
 		/*Step number: 2
 		 *Step Name: Step 2 : Check connection buttons
@@ -127,17 +133,20 @@ public class SOC_People_UserProfile_ConnectionStatus extends SOC_TestConfig{
 	public  void test03_CheckConnectionButtonWhenARequestIsDenied() {
 		/*Create data test*/
 		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
-		String password1 = txData.getContentByArrayTypeRandom(1) + getRandomNumber();
-		String email1 = txData.getContentByArrayTypeRandom(1) + getRandomNumber() + mailSuffixData.getMailSuffixRandom();
-
+		String email1 = username1+"@gmail.com";
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+"@gmail.com";
 		info("Add new user");
-		magAc.signIn(DATA_USER1, DATA_PASS);
 		navTool.goToAddUser();
-		addUserPage.addUser(username1, password1, email1, username1, username1);
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		magAc.signIn(username1,password);
+		Utils.pause(3000);
+		
 		info("Click on Connections on the left panel");
 		hp.goToConnections();
 		info("Click on Connect button to invite about 2 users");
-		connMag.connectToAUser(username1);
+		connMag.connectToAUser(username2);
 
 		info("Test 3: Check connection button when a request is denied");
 		/*Step Number: 1
@@ -150,11 +159,11 @@ public class SOC_People_UserProfile_ConnectionStatus extends SOC_TestConfig{
 
 		 *Expected Outcome: 
 			- The portlet shows two buttons : * Accept Request * Deny*/
-		magAc.signIn(username1, password1);
+		magAc.signIn(username2, password);
 		info("Click on Connections on the left panel");
 		hp.goToConnections();
-		connMag.searchPeople(DATA_USER1,"","","");
-		click(connMag.ELEMENT_USER_LINK.replace("${userName}", DATA_USER1));
+		connMag.searchPeople(username1,"","","");
+		click(connMag.ELEMENT_USER_LINK.replace("${userName}",username1));
 		waitForAndGetElement(myProfile.ELEMENT_UIMINICONNECTIONS_PORLET_ACCEPT_STATUS);
 		waitForAndGetElement(myProfile.ELEMENT_UIMINICONNECTIONS_PORTLET_DENY_STATUS);
 
@@ -180,11 +189,11 @@ public class SOC_People_UserProfile_ConnectionStatus extends SOC_TestConfig{
 
 		 *Expected Outcome: 
 			- The portlet shows a button Connect*/ 
-		magAc.signIn(DATA_USER1, DATA_PASS);
+		magAc.signIn(username1,password);
 		info("Click on Connections on the left panel");
 		hp.goToConnections();
-		connMag.searchPeople(username1,"","","");
-		click(connMag.ELEMENT_USER_LINK.replace("${userName}", username1));
+		connMag.searchPeople(username2,"","","");
+		click(connMag.ELEMENT_USER_LINK.replace("${userName}", username2));
 		waitForAndGetElement(myProfile.ELEMENT_UIMINICONNECTIONS_PORLET_CONNECT_STATUS);
 	}
 
@@ -198,17 +207,20 @@ public class SOC_People_UserProfile_ConnectionStatus extends SOC_TestConfig{
 	public  void test04_CheckConnectionButtonsWhenARequestIsSentAndPending() {
 		/*Create data test*/
 		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
-		String password1 = txData.getContentByArrayTypeRandom(1) + getRandomNumber();
-		String email1 = txData.getContentByArrayTypeRandom(1) + getRandomNumber() + mailSuffixData.getMailSuffixRandom();
-
+		String email1 = username1+"@gmail.com";
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+"@gmail.com";
 		info("Add new user");
-		magAc.signIn(DATA_USER1, DATA_PASS);
 		navTool.goToAddUser();
-		addUserPage.addUser(username1, password1, email1, username1, username1);
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		magAc.signIn(username1,password);
+		Utils.pause(3000);
+		
 		info("Click on Connections on the left panel");
 		hp.goToConnections();
 		info("Click on Connect button to invite about 2 users");
-		connMag.connectToAUser(username1);
+		connMag.connectToAUser(username2);
 
 		info("Test 4: Check connection buttons when a request is sent and pending");
 		/*Step Number: 1
@@ -222,8 +234,8 @@ public class SOC_People_UserProfile_ConnectionStatus extends SOC_TestConfig{
 		 *Expected Outcome: 
 			- The portlet shows a button "Cancel Request"*/
 		hp.goToConnections();
-		connMag.searchPeople(username1,"","","");
-		click(connMag.ELEMENT_USER_LINK.replace("${userName}", username1));
+		connMag.searchPeople(username2,"","","");
+		click(connMag.ELEMENT_USER_LINK.replace("${userName}", username2));
 		waitForAndGetElement(myProfile.ELEMENT_UIMINICONNECTIONS_PORLET_CANCEL_STATUS);
 
 		/*Step number: 2
@@ -236,11 +248,11 @@ public class SOC_People_UserProfile_ConnectionStatus extends SOC_TestConfig{
 
 		 *Expected Outcome: 
 			- The portlet shows two buttons : * Accept Request * Deny*/ 
-		magAc.signIn(username1, password1);
+		magAc.signIn(username2, password);
 		info("Click on Connections on the left panel");
 		hp.goToConnections();
-		connMag.searchPeople(DATA_USER1,"","","");
-		click(connMag.ELEMENT_USER_LINK.replace("${userName}", DATA_USER1));
+		connMag.searchPeople(username1,"","","");
+		click(connMag.ELEMENT_USER_LINK.replace("${userName}",username1));
 		waitForAndGetElement(myProfile.ELEMENT_UIMINICONNECTIONS_PORLET_ACCEPT_STATUS);
 		waitForAndGetElement(myProfile.ELEMENT_UIMINICONNECTIONS_PORTLET_DENY_STATUS);
 	}

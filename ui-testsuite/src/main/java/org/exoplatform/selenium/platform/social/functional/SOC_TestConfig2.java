@@ -74,7 +74,6 @@ public class SOC_TestConfig2 extends PlatformBase {
 	MailSuffixDatabase mailSuffixData;
 	
 	
-	String password;
 	ArrayList<String> arrayUser;
 	ArrayList<String> comments;
 	
@@ -86,7 +85,7 @@ public class SOC_TestConfig2 extends PlatformBase {
 		getDefaultUserPass(userDataFilePath,defaultSheet,isUseFile,jdbcDriver,dbUrl,user,pass,sqlUser);
 		magAc = new ManageLogInOut(driver);
 		button = new Button(driver);
-		magAc.signIn(DATA_USER1, DATA_PASS);
+		magAc.signIn(USER_ROOT,PASS_ROOT);
 		
 		navTool = new NavigationToolbar(driver);
 		notiAdmin = new NotificationsAdminSeting(driver);
@@ -152,7 +151,7 @@ public class SOC_TestConfig2 extends PlatformBase {
 	 * Create many users
 	 * @param number
 	 *               is the number of users that want to create
-	 */
+	 *//*
 	public void createNewUser(int number){
 		navTool.goToAddUser();
 		for(int i=0;i<number;i++){
@@ -165,13 +164,13 @@ public class SOC_TestConfig2 extends PlatformBase {
 			arrayUser.add(user);
 			info("User"+i+": "+user);
 		}
-	}
+	}*/
 	
 	/**
 	 * Delete many users
 	 * @param users
 	 *             is array of users
-	 */
+	 *//*
 	public void deleteUsers(ArrayList<String> users){
 		info("Delete all new users");
 		switchToParentWindow();
@@ -184,5 +183,5 @@ public class SOC_TestConfig2 extends PlatformBase {
 			info("Delete user:"+users.get(i)+" successfully");
 		}
 	}
-
+*/
 }

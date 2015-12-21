@@ -19,6 +19,13 @@ import org.testng.annotations.*;
 	@Test
 	public  void test01_VerifyTheSizeOfTheSpacesInformationsToolbar() {
 		info("Test 1: Verify the size of the space's informations toolbar");
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		magAc.signIn(username1,password);
 		/*Step Number: 1
 		*Step Name: 
 		*Step Description: 
@@ -71,6 +78,12 @@ import org.testng.annotations.*;
 	@Test
 	public  void test02_VerifyTheSizeOfTheSpacesIcon() {
 		info("Test 2: Verify the size of the space's icon");
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		magAc.signIn(username1,password);
 		/*Step Number: 1
 		*Step Name: 
 		*Step Description: 

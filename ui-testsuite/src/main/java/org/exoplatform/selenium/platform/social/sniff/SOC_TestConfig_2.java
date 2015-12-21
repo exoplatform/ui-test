@@ -31,10 +31,9 @@ import org.exoplatform.selenium.platform.objectdatabase.common.LinksDatabase;
 import org.exoplatform.selenium.platform.objectdatabase.ecms.SiteExplorerDriveDatabase;
 import org.exoplatform.selenium.platform.objectdatabase.ecms.SiteExplorerPathDatabase;
 import org.exoplatform.selenium.platform.social.UserProfilePage;
-import org.exoplatform.selenium.platform.social.MyNotificationsSetting.myNotiType;
 import org.exoplatform.selenium.platform.chat.ChatStatus;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 
 public class SOC_TestConfig_2 extends PlatformBase {
 	HomePagePlatform hp;
@@ -74,14 +73,15 @@ public class SOC_TestConfig_2 extends PlatformBase {
 	Button button;
 
 	EmailNotifications notiEmail;
+	String password;
 	
-	@BeforeClass
-	public void setUpBeforeClass() throws Exception{
-		info("Start setUpBeforeClass");
+	@BeforeMethod
+	public void setUpBeforeMethod() throws Exception{
+		info("Start setUpBeforeMethod");
 		initSeleniumTest();
 		getDefaultUserPass(userDataFilePath,defaultSheet,isUseFile,jdbcDriver,dbUrl,user,pass,sqlUser);
 		magAc = new ManageLogInOut(driver);
-		magAc.signIn(DATA_USER1, DATA_PASS);
+		magAc.signIn(USER_ROOT, PASS_ROOT);
 		myProfile = new UserProfilePage(driver);
 		uBase = new UserPageBase(driver);
 		navTool = new NavigationToolbar(driver);
@@ -142,20 +142,21 @@ public class SOC_TestConfig_2 extends PlatformBase {
 		siteExPath = new SiteExplorerPathDatabase();
 		siteExPath.setSiteExpPathData(siteExpPathPath,defaultSheet,isUseFile,jdbcDriver,dbUrl,user,pass,sqlAttach);
 		
-		info("Enable like and new user notifications");
+		password="123456";
+		/*info("Enable like and new user notifications");
 		navTool.goToMyNotifications();
 		myNotifPage.enableNotification(myNotiType.NewUser_intranet);
-		myNotifPage.enableNotification(myNotiType.AS_Like_intranet);
+		myNotifPage.enableNotification(myNotiType.AS_Like_intranet);*/
 		
-		info("End setUpBeforeClass");
+		info("End setUpBeforeMethod");
 	}
 
-	@AfterClass
-	public void afterTest(){
-		info("Start setUpBeforeClass");
+	@AfterMethod
+	public void afterMethod(){
+		info("Start setUpBeforeMethod");
 		driver.manage().deleteAllCookies();
 		driver.quit();
-		info("End setUpBeforeClass");
+		info("End setUpBeforeMethod");
 	}
 
 }

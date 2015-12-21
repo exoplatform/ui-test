@@ -29,12 +29,15 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- A Post on my Stream notifications is displayed in the list*/
-		info("Create 2 users test");
-		createNewUser(2);
-		
-		info("User A login");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(0), password);
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+"@gmail.com";
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		magAc.signIn(username1,password);
 		
 		info("goto My notification");
 		navTool.goToMyNotifications();
@@ -44,21 +47,20 @@ import org.testng.annotations.*;
 		info("User A sent a connection request to User B");
 		Utils.pause(3000);
 		hp.goToConnections();
-		connMag.connectToAUser(arrayUser.get(1));
+		connMag.connectToAUser(username2);
 		
 		info("User B login");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(1), password);
+		magAc.signIn(username2, password);
 		Utils.pause(3000);
 		
 		info("User A and User B are connected");
 		Utils.pause(3000);
 		hp.goToConnections();
-		connMag.acceptAConnection(arrayUser.get(0));
+		connMag.acceptAConnection(username1);
 		
 		info("User B add an activity on User A's stream");
 		String activity = txData.getContentByArrayTypeRandom(1) + getRandomNumber();
-		hp.goToFriendProfilePage(arrayUser.get(0));
+		hp.goToFriendProfilePage(username1);
 		userProPage.goToActivity();
 		Utils.pause(3000);
 		hpAct.addActivity(activity,null);
@@ -66,8 +68,7 @@ import org.testng.annotations.*;
 		
 		
 		info("Log in with User A");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(0), password);
+		magAc.signIn(username1, password);
 		Utils.pause(3000);
 		
 		
@@ -87,8 +88,8 @@ import org.testng.annotations.*;
 		info(" Go to Intranet Notification");
 		navTool.goToIntranetNotification();
 		String status=notiIntranetData.getContentByArrayTypeRandom(8);
-		intraNot.checkStatus(status, arrayUser.get(1));
-		intraNot.checkAvatarInStatus(arrayUser.get(1), true);
+		intraNot.checkStatus(status,username2);
+		intraNot.checkAvatarInStatus(username2, true);
 		intraNot.checkActivityTitleInStatus(activity, true);
 
  	}
@@ -113,12 +114,15 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- A Post on my Stream notifications is displayed in the list*/
-		info("Create 2 users test");
-		createNewUser(2);
-		
-		info("User A login");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(0), password);
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+"@gmail.com";
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		magAc.signIn(username1,password);
 		
 		info("goto My notification");
 		navTool.goToMyNotifications();
@@ -128,21 +132,20 @@ import org.testng.annotations.*;
 		info("User A sent a connection request to User B");
 		Utils.pause(3000);
 		hp.goToConnections();
-		connMag.connectToAUser(arrayUser.get(1));
+		connMag.connectToAUser(username2);
 		
 		info("User B login");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(1), password);
+		magAc.signIn(username2, password);
 		Utils.pause(3000);
 		
 		info("User A and User B are connected");
 		Utils.pause(3000);
 		hp.goToConnections();
-		connMag.acceptAConnection(arrayUser.get(0));
+		connMag.acceptAConnection(username1);
 		
 		info("User B add an activity on User A's stream");
 		String activity = txData.getContentByArrayTypeRandom(1) + getRandomNumber();
-		hp.goToFriendProfilePage(arrayUser.get(0));
+		hp.goToFriendProfilePage(username1);
 		userProPage.goToActivity();
 		Utils.pause(3000);
 		hpAct.addActivity(activity,null);
@@ -159,15 +162,14 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			The activity is displayedin the activity viewer with all comments expanded*/ 
 		info("Log in with User A");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(0), password);
+		magAc.signIn(username1, password);
 		Utils.pause(3000);
 		
 		info(" Go to Intranet Notification");
 		navTool.goToIntranetNotification();
 		String status=notiIntranetData.getContentByArrayTypeRandom(8);
-		intraNot.checkStatus(status, arrayUser.get(1));
-		intraNot.goToDetailPostInMyActivity(arrayUser.get(1),true);
+		intraNot.checkStatus(status,username2);
+		intraNot.goToDetailPostInMyActivity(username2,true);
 		notiAct.checkTitleActivityExpand(activity);
 
  	}
@@ -192,12 +194,15 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- A Post on my Stream notifications is displayed in the list*/
-		info("Create 2 users test");
-		createNewUser(2);
-		
-		info("User A login");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(0), password);
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+"@gmail.com";
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		magAc.signIn(username1,password);
 		
 		info("goto My notification");
 		navTool.goToMyNotifications();
@@ -207,21 +212,20 @@ import org.testng.annotations.*;
 		info("User A sent a connection request to User B");
 		Utils.pause(3000);
 		hp.goToConnections();
-		connMag.connectToAUser(arrayUser.get(1));
+		connMag.connectToAUser(username2);
 		
 		info("User B login");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(1), password);
+		magAc.signIn(username2, password);
 		Utils.pause(3000);
 		
 		info("User A and User B are connected");
 		Utils.pause(3000);
 		hp.goToConnections();
-		connMag.acceptAConnection(arrayUser.get(0));
+		connMag.acceptAConnection(username1);
 		
 		info("User B add an activity on User A's stream");
 		String activity = txData.getContentByArrayTypeRandom(1) + getRandomNumber();
-		hp.goToFriendProfilePage(arrayUser.get(0));
+		hp.goToFriendProfilePage(username1);
 		userProPage.goToActivity();
 		Utils.pause(3000);
 		hpAct.addActivity(activity,null);
@@ -236,14 +240,13 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- Post of my Stream notification is displayed / available in the page*/ 
 		info("Log in with User A");
-		magAc.signOut();
-		magAc.signIn(arrayUser.get(0), password);
+		magAc.signIn(username1, password);
 		Utils.pause(3000);
 		
 		info(" Go to Intranet Notification");
 		navTool.goToIntranetNotification();
 		String status=notiIntranetData.getContentByArrayTypeRandom(8);
 		intraNot.goToAllNotification();
-		intraNot.checkStatus(status, arrayUser.get(1));
+		intraNot.checkStatus(status,username2);
 
  	}}

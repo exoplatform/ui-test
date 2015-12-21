@@ -27,7 +27,6 @@ public class SOC_notification_Email_Notification_Email extends SOC_TestConfig3{
 		createNewUser(2);
 		
 		info("User A login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		Utils.pause(3000);
 		
@@ -47,11 +46,6 @@ public class SOC_notification_Email_Notification_Email extends SOC_TestConfig3{
 		connMag.connectToAUser(arrayUser.get(1));
 		
 		info("User B login");
-
-		
-		
-		
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(1), password);
 		Utils.pause(3000);
 		
@@ -59,7 +53,6 @@ public class SOC_notification_Email_Notification_Email extends SOC_TestConfig3{
 		Utils.pause(3000);
 		hp.goToConnections();
 		connMag.acceptAConnection(arrayUser.get(0));
-		
 		
 		
 		info("User B shares a file in activity stream of User A");
@@ -85,7 +78,6 @@ public class SOC_notification_Email_Notification_Email extends SOC_TestConfig3{
 			Hi UserA,UserB has posted on your activity stream. See the post below:[activity message]
 			[the featured content] [File icon]Reply | View the full discussion*/ 
 		info("Log in with User A");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		
 		String parentWindow = driver.getWindowHandle();
@@ -105,6 +97,8 @@ public class SOC_notification_Email_Notification_Email extends SOC_TestConfig3{
 		emailNot.getAllChildWindows();
 		emailNot.verifyFormatEmailNotifcation(emailTitle,firstName, fullName, emailContent,nameFile);
         emailNot.closeChildBrowsers(parentWindow);
+        if(arrayUser.size()>0)
+			deleteUsers(arrayUser);
  	}
 	
 	/**
@@ -123,7 +117,6 @@ public class SOC_notification_Email_Notification_Email extends SOC_TestConfig3{
 		createNewUser(2);
 		
 		info("User A login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		Utils.pause(3000);
 		
@@ -138,7 +131,6 @@ public class SOC_notification_Email_Notification_Email extends SOC_TestConfig3{
 		userProPage.saveCancelUpdateInfo(true);
 		
 		info("User B login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(1), password);
 		Utils.pause(3000);
 		
@@ -156,7 +148,6 @@ public class SOC_notification_Email_Notification_Email extends SOC_TestConfig3{
 		*Expected Outcome: 
 			- Avatar of user who is sent request is default avatar, see attachment.*/ 
 		info("Log in with User A");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		
 		String parentWindow = driver.getWindowHandle();
@@ -176,6 +167,8 @@ public class SOC_notification_Email_Notification_Email extends SOC_TestConfig3{
 		emailNot.getAllChildWindows();
 		emailNot.verifyFormatEmailNotifcation(emailTitle,firstName, arrayUser.get(0), emailContent);
         emailNot.closeChildBrowsers(parentWindow);
+        if(arrayUser.size()>0)
+			deleteUsers(arrayUser);
  	}
 	
 	/**
@@ -195,7 +188,6 @@ public class SOC_notification_Email_Notification_Email extends SOC_TestConfig3{
 		createNewUser(2);
 		
 		info("User A login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		Utils.pause(3000);
 		
@@ -215,7 +207,6 @@ public class SOC_notification_Email_Notification_Email extends SOC_TestConfig3{
 		connMag.connectToAUser(arrayUser.get(1));
 		
 		info("User B login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(1), password);
 		Utils.pause(3000);
 		
@@ -240,7 +231,6 @@ public class SOC_notification_Email_Notification_Email extends SOC_TestConfig3{
 		*Expected Outcome: 
 			- Avatar of user1 in notification mail is default avatar, see attachment*/ 
 		info("Log in with User A");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		
 		String parentWindow = driver.getWindowHandle();
@@ -260,6 +250,8 @@ public class SOC_notification_Email_Notification_Email extends SOC_TestConfig3{
 		emailNot.getAllChildWindows();
 		emailNot.verifyFormatEmailNotifcation(emailTitle,firstName, fullName, emailContent, activity);
         emailNot.closeChildBrowsers(parentWindow);
+        if(arrayUser.size()>0)
+			deleteUsers(arrayUser);
  	}
 	
 	/**
@@ -278,7 +270,6 @@ public class SOC_notification_Email_Notification_Email extends SOC_TestConfig3{
 		createNewUser(1);
 		
 		info("User A login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		Utils.pause(3000);
 		
@@ -293,7 +284,6 @@ public class SOC_notification_Email_Notification_Email extends SOC_TestConfig3{
 		userProPage.saveCancelUpdateInfo(true);
 		
 		info("Login By John");
-		magAc.signOut();
 		magAc.signIn(DATA_USER1, DATA_PASS);
 		Utils.pause(3000);
 		
@@ -310,7 +300,6 @@ public class SOC_notification_Email_Notification_Email extends SOC_TestConfig3{
 		*Expected Outcome: 
 			- Avatar of user who is sign up is default avatar, see attachment*/ 
 		info("Log in with User A");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		
 		String parentWindow = driver.getWindowHandle();
@@ -330,6 +319,8 @@ public class SOC_notification_Email_Notification_Email extends SOC_TestConfig3{
 		emailNot.getAllChildWindows();
 		emailNot.verifyFormatEmailNotifcation(emailTitle,firstName, arrayUser.get(0), emailContent, true);
         emailNot.closeChildBrowsers(parentWindow);
+        if(arrayUser.size()>0)
+			deleteUsers(arrayUser);
  	}
 	
 	/**
@@ -349,7 +340,6 @@ public class SOC_notification_Email_Notification_Email extends SOC_TestConfig3{
 		createNewUser(2);
 		
 		info("User A login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		Utils.pause(3000);
 		
@@ -370,7 +360,6 @@ public class SOC_notification_Email_Notification_Email extends SOC_TestConfig3{
 		spaMg.addNewSpaceSimple(space, space);
 		
 		info("Login By user B");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(1), password);
 		Utils.pause(3000);
 		
@@ -387,7 +376,6 @@ public class SOC_notification_Email_Notification_Email extends SOC_TestConfig3{
 		*Expected Outcome: 
 			- Avatar of user 2 in notification mail is default avatar*/ 
 		info("Log in with User A");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		
 		String parentWindow = driver.getWindowHandle();
@@ -407,6 +395,8 @@ public class SOC_notification_Email_Notification_Email extends SOC_TestConfig3{
 		emailNot.getAllChildWindows();
 		emailNot.verifyFormatEmailNotifcationForSpace(emailTitle,firstName, arrayUser.get(1), emailContent, space, true);
         emailNot.closeChildBrowsers(parentWindow);
+        if(arrayUser.size()>0)
+			deleteUsers(arrayUser);
  	}
 	
 	/**
@@ -426,7 +416,6 @@ public class SOC_notification_Email_Notification_Email extends SOC_TestConfig3{
 		createNewUser(2);
 		
 		info("User A login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		Utils.pause(3000);
 		
@@ -441,7 +430,6 @@ public class SOC_notification_Email_Notification_Email extends SOC_TestConfig3{
 		userProPage.saveCancelUpdateInfo(true);
 		
 		info("Login By user B");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(1), password);
 		Utils.pause(3000);
 		
@@ -465,7 +453,6 @@ public class SOC_notification_Email_Notification_Email extends SOC_TestConfig3{
 		*Expected Outcome: 
 			- Avatar of space is default avatar, see attachment*/ 
 		info("Log in with User A");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		
 		String parentWindow = driver.getWindowHandle();
@@ -485,6 +472,8 @@ public class SOC_notification_Email_Notification_Email extends SOC_TestConfig3{
 		emailNot.getAllChildWindows();
 		emailNot.verifyFormatEmailNotifcationForSpace(emailTitle,firstName, "", emailContent, space, false);
         emailNot.closeChildBrowsers(parentWindow);
+        if(arrayUser.size()>0)
+			deleteUsers(arrayUser);
  	}
 	
 	/**
@@ -526,7 +515,6 @@ public class SOC_notification_Email_Notification_Email extends SOC_TestConfig3{
 		createNewUser(2);
 		
 		info("User A login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		Utils.pause(3000);
 		
@@ -546,7 +534,6 @@ public class SOC_notification_Email_Notification_Email extends SOC_TestConfig3{
 		connMag.connectToAUser(arrayUser.get(1));
 		
 		info("User B login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(1), password);
 		Utils.pause(3000);
 		
@@ -581,7 +568,6 @@ public class SOC_notification_Email_Notification_Email extends SOC_TestConfig3{
 			[activity message][the featured content] (as it is displayed in the activity stream)
 			Reply | View the full discussion*/ 
 		info("Log in with User A");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		
 		String parentWindow = driver.getWindowHandle();
@@ -601,6 +587,8 @@ public class SOC_notification_Email_Notification_Email extends SOC_TestConfig3{
 		emailNot.getAllChildWindows();
 		emailNot.verifyFormatEmailNotifcation(emailTitle,firstName, fullName, emailContent,nameFile);
         emailNot.closeChildBrowsers(parentWindow);
+        if(arrayUser.size()>0)
+			deleteUsers(arrayUser);
  	}
 	
 	/**
@@ -619,7 +607,6 @@ public class SOC_notification_Email_Notification_Email extends SOC_TestConfig3{
 		createNewUser(2);
 		
 		info("User A login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		Utils.pause(3000);
 		
@@ -639,7 +626,6 @@ public class SOC_notification_Email_Notification_Email extends SOC_TestConfig3{
 		connMag.connectToAUser(arrayUser.get(1));
 		
 		info("User B login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(1), password);
 		Utils.pause(3000);
 		
@@ -671,7 +657,6 @@ public class SOC_notification_Email_Notification_Email extends SOC_TestConfig3{
 			[activity message][the featured content] (as it is displayed in the activity stream)
 			Reply | View the full discussion*/ 
 		info("Log in with User A");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		
 		String parentWindow = driver.getWindowHandle();
@@ -691,6 +676,8 @@ public class SOC_notification_Email_Notification_Email extends SOC_TestConfig3{
 		emailNot.getAllChildWindows();
 		emailNot.verifyFormatEmailNotifcation(emailTitle,firstName, fullName, emailContent,textDes, link);
         emailNot.closeChildBrowsers(parentWindow);
+        if(arrayUser.size()>0)
+			deleteUsers(arrayUser);
  	}
 	
 	/**
@@ -708,7 +695,6 @@ public class SOC_notification_Email_Notification_Email extends SOC_TestConfig3{
 		createNewUser(2);
 		
 		info("User A login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		Utils.pause(3000);
 		
@@ -723,7 +709,6 @@ public class SOC_notification_Email_Notification_Email extends SOC_TestConfig3{
 		userProPage.saveCancelUpdateInfo(true);
 		
 		info("User B login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(1), password);
 		Utils.pause(3000);
 		
@@ -742,7 +727,6 @@ public class SOC_notification_Email_Notification_Email extends SOC_TestConfig3{
 			- The recipient field contains the user full name and email
 			For ex: John Smith <john.smith@exoplatform.com>.*/ 
 		info("Log in with User A");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		
 		String parentWindow = driver.getWindowHandle();
@@ -759,6 +743,8 @@ public class SOC_notification_Email_Notification_Email extends SOC_TestConfig3{
 		emailNot.getAllChildWindows();
 		emailNot.verifyRecipientAndSenderEmailNotifcation(true, arrayUser.get(0), EMAIL_ADDRESS1);
         emailNot.closeChildBrowsers(parentWindow);
+        if(arrayUser.size()>0)
+			deleteUsers(arrayUser);
  	}
 	
 	/**
@@ -777,7 +763,6 @@ public class SOC_notification_Email_Notification_Email extends SOC_TestConfig3{
 		createNewUser(2);
 		
 		info("User A login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		Utils.pause(3000);
 		
@@ -792,7 +777,6 @@ public class SOC_notification_Email_Notification_Email extends SOC_TestConfig3{
 		userProPage.saveCancelUpdateInfo(true);
 		
 		info("User B login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(1), password);
 		Utils.pause(3000);
 		
@@ -811,7 +795,6 @@ public class SOC_notification_Email_Notification_Email extends SOC_TestConfig3{
 			- The sender used for all emails should be: eXo (noreply@exoplatform.com)
 			- These fields are configurable in notification administration.*/ 
 		info("Log in with User A");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		
 		String parentWindow = driver.getWindowHandle();
@@ -828,6 +811,8 @@ public class SOC_notification_Email_Notification_Email extends SOC_TestConfig3{
 		emailNot.getAllChildWindows();
 		emailNot.verifyRecipientAndSenderEmailNotifcation(false, "eXo", "noreply@exoplatform.com");
         emailNot.closeChildBrowsers(parentWindow);
+        if(arrayUser.size()>0)
+			deleteUsers(arrayUser);
  	}
 	
 	/**
@@ -845,7 +830,6 @@ public class SOC_notification_Email_Notification_Email extends SOC_TestConfig3{
 		createNewUser(2);
 		
 		info("User A login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		Utils.pause(3000);
 		
@@ -860,7 +844,6 @@ public class SOC_notification_Email_Notification_Email extends SOC_TestConfig3{
 		userProPage.saveCancelUpdateInfo(true);
 		
 		info("User B login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(1), password);
 		Utils.pause(3000);
 		
@@ -879,7 +862,6 @@ public class SOC_notification_Email_Notification_Email extends SOC_TestConfig3{
 			- The bottom content of notification mail is: 
 			"If you do not want to receive such notifications, click here to change your notification settings"..*/ 
 		info("Log in with User A");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		
 		String parentWindow = driver.getWindowHandle();
@@ -908,6 +890,8 @@ public class SOC_notification_Email_Notification_Email extends SOC_TestConfig3{
 			- The click here takes the user to the portal and displays his notification settings screen.*/ 
 		emailNot.checkLinkInEmailNotification(linkEmailNotification.Click_Here_Link, "", "", "", "", "");
         emailNot.closeChildBrowsers(parentWindow);
+        if(arrayUser.size()>0)
+			deleteUsers(arrayUser);
  	}
 	
 	/**
@@ -925,7 +909,6 @@ public class SOC_notification_Email_Notification_Email extends SOC_TestConfig3{
 		createNewUser(2);
 		
 		info("User A login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		Utils.pause(3000);
 		
@@ -950,7 +933,6 @@ public class SOC_notification_Email_Notification_Email extends SOC_TestConfig3{
 		setSpaceMg.inviteUser(arrayUser.get(1),true,arrayUser.get(1));
 		
 		info("User B login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(1), password);
 		Utils.pause(3000);
 		
@@ -977,7 +959,6 @@ public class SOC_notification_Email_Notification_Email extends SOC_TestConfig3{
 		*Expected Outcome: 
 			- Space should link to the space home */
 		info("Log in with User A");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		
 		String parentWindow = driver.getWindowHandle();
@@ -994,6 +975,8 @@ public class SOC_notification_Email_Notification_Email extends SOC_TestConfig3{
 		emailNot.getAllChildWindows();
 		emailNot.checkLinkInEmailNotification(linkEmailNotification.Space_Link, "", "", space, "", "");
 		emailNot.closeChildBrowsers(parentWindow);
+		if(arrayUser.size()>0)
+			deleteUsers(arrayUser);
  	}
 	
 	/**
@@ -1012,7 +995,6 @@ public class SOC_notification_Email_Notification_Email extends SOC_TestConfig3{
 		createNewUser(1);
 		
 		info("User A login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		Utils.pause(3000);
 		
@@ -1027,8 +1009,7 @@ public class SOC_notification_Email_Notification_Email extends SOC_TestConfig3{
 		userProPage.saveCancelUpdateInfo(true);
 		
 		info("Login By John");
-		magAc.signOut();
-		magAc.signIn(DATA_USER1, DATA_PASS);
+		magAc.signIn(USER_ROOT,PASS_ROOT);
 		Utils.pause(3000);
 		
 		info("John added a new user B");
@@ -1044,7 +1025,6 @@ public class SOC_notification_Email_Notification_Email extends SOC_TestConfig3{
 		*Expected Outcome: 
 			- portal should link to the portal home.*/ 
 		info("Log in with User A");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		
 		String parentWindow = driver.getWindowHandle();
@@ -1061,6 +1041,8 @@ public class SOC_notification_Email_Notification_Email extends SOC_TestConfig3{
 		emailNot.getAllChildWindows();
 		emailNot.checkLinkInEmailNotification(linkEmailNotification.Portal_Link, "", "", "", "", "");
 		emailNot.closeChildBrowsers(parentWindow);
+		if(arrayUser.size()>0)
+			deleteUsers(arrayUser);
  	}
 	
 	/**
@@ -1079,7 +1061,6 @@ public class SOC_notification_Email_Notification_Email extends SOC_TestConfig3{
 		createNewUser(1);
 		
 		info("User A login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		Utils.pause(3000);
 		
@@ -1094,7 +1075,6 @@ public class SOC_notification_Email_Notification_Email extends SOC_TestConfig3{
 		userProPage.saveCancelUpdateInfo(true);
 		
 		info("Login By John");
-		magAc.signOut();
 		magAc.signIn(DATA_USER1, DATA_PASS);
 		Utils.pause(3000);
 		
@@ -1111,7 +1091,6 @@ public class SOC_notification_Email_Notification_Email extends SOC_TestConfig3{
 		*Expected Outcome: 
 			- user name should link to the user profile page. */
 		info("Log in with User A");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		
 		String parentWindow = driver.getWindowHandle();
@@ -1129,6 +1108,8 @@ public class SOC_notification_Email_Notification_Email extends SOC_TestConfig3{
 		emailNot.getAllChildWindows();
 		emailNot.checkLinkInEmailNotification(linkEmailNotification.NewUser_Link, userName, fullName, "", "", "");
 		emailNot.closeChildBrowsers(parentWindow);
+		if(arrayUser.size()>0)
+			deleteUsers(arrayUser);
  	}
 	
 	/**
@@ -1231,7 +1212,6 @@ public class SOC_notification_Email_Notification_Email extends SOC_TestConfig3{
 		createNewUser(2);
 		
 		info("User A login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		Utils.pause(3000);
 		
@@ -1251,7 +1231,6 @@ public class SOC_notification_Email_Notification_Email extends SOC_TestConfig3{
 		connMag.connectToAUser(arrayUser.get(1));
 		
 		info("User B login");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(1), password);
 		Utils.pause(3000);
 		
@@ -1283,7 +1262,6 @@ public class SOC_notification_Email_Notification_Email extends SOC_TestConfig3{
 		 	* a thumbnail image of the embedded
 		 	* a link "Watch the video"*/ 
 		info("Log in with User A");
-		magAc.signOut();
 		magAc.signIn(arrayUser.get(0), password);
 		
 		String parentWindow = driver.getWindowHandle();
@@ -1305,6 +1283,8 @@ public class SOC_notification_Email_Notification_Email extends SOC_TestConfig3{
 		emailNot.getAllChildWindows();
 		emailNot.checkLinkInEmailNotification(linkEmailNotification.Watch_This_Video, "", "", "", textDes, link);
 		emailNot.closeChildBrowsers(parentWindow);
+		if(arrayUser.size()>0)
+			deleteUsers(arrayUser);
  	}
 	
 }

@@ -22,14 +22,13 @@ public class SOC_People_Profile_EditProfile extends SOC_TestConfig_2{
 
 		/*Create data test*/
 		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
-		String password1 = username1;
-		String email1 = username1 + mailSuffixData.getMailSuffixRandom();
-
-		info("Add new user");
-		magAc.signIn(DATA_USER1, DATA_PASS);
+		String email1 = username1+ mailSuffixData.getMailSuffixRandom();
+		
+		
+		info("Add user");
 		navTool.goToAddUser();
-		addUserPage.addUser(username1, password1, email1, username1, username1);
-		magAc.signIn(username1, password1);
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		magAc.signIn(username1, password);
 
 		/*Step Number: 1
 		 *Step Name: Step 1: Go to my profile page
@@ -86,11 +85,6 @@ public class SOC_People_Profile_EditProfile extends SOC_TestConfig_2{
 		myProfile.updateAboutMe(aboutMe1);
 		myProfile.saveCancelUpdateInfo(false);
 		waitForElementNotPresent(myProfile.ELEMENT_UIEXPERIENCE_PROFILE_PORTLET.replace("${content}", aboutMe1));
-
-		info("Clear Data");
-		magAc.signIn(DATA_USER1, DATA_PASS);
-		navTool.goToUsersAndGroupsManagement();
-		userAndGroup.deleteUser(username1);
 	}
 
 	/**
@@ -123,14 +117,13 @@ public class SOC_People_Profile_EditProfile extends SOC_TestConfig_2{
 		String actContactInfo= activityMes.getActivityMessage(0);
 		/*Create data test*/
 		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
-		String password1 = username1;
-		String email1 = username1 + mailSuffixData.getMailSuffixRandom();
-
-		info("Add new user");
-		magAc.signIn(DATA_USER1, DATA_PASS);
+		String email1 = username1+ mailSuffixData.getMailSuffixRandom();
+		
+		
+		info("Add user");
 		navTool.goToAddUser();
-		addUserPage.addUser(username1, password1, email1, username1, username1);
-		magAc.signIn(username1, password1);
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		magAc.signIn(username1, password);
 
 		/*Step Number: 1
 		 *Step Name: Step 1: Go to my profile page
@@ -203,10 +196,6 @@ public class SOC_People_Profile_EditProfile extends SOC_TestConfig_2{
 		waitForAndGetElement(myProfile.ELEMENT_URL_INFO.replace("${url}",url2));
 		waitForAndGetElement(myProfile.ELEMENT_RECENT_ACTIVITY_CONTENT.replace("${index}", "1").replace("${content}", actContactInfo));
 
-		info("Clear Data");
-		magAc.signIn(DATA_USER1, DATA_PASS);
-		navTool.goToUsersAndGroupsManagement();
-		userAndGroup.deleteUser(username1);
 	}
 
 	/**
@@ -230,14 +219,13 @@ public class SOC_People_Profile_EditProfile extends SOC_TestConfig_2{
 
 		/*Create data test*/
 		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
-		String password1 = username1;
-		String email1 = username1 + mailSuffixData.getMailSuffixRandom();
-
-		info("Add new user");
-		magAc.signIn(DATA_USER1, DATA_PASS);
+		String email1 = username1+ mailSuffixData.getMailSuffixRandom();
+		
+		
+		info("Add user");
 		navTool.goToAddUser();
-		addUserPage.addUser(username1, password1, email1, username1, username1);
-		magAc.signIn(username1, password1);
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		magAc.signIn(username1, password);
 		/*Step Number: 1
 		 *Step Name: Step 1: Go to my profile page
 		 *Step Description: 
@@ -276,10 +264,6 @@ public class SOC_People_Profile_EditProfile extends SOC_TestConfig_2{
 		waitForAndGetElement(myProfile.ELEMENT_ENDDATE_INFO.replace("${date}",actdEnd));
 		waitForAndGetElement(myProfile.ELEMENT_RECENT_ACTIVITY_CONTENT.replace("${index}", "1").replace("${content}", actExperience));
 		
-		info("Clear Data");
-		magAc.signIn(DATA_USER1, DATA_PASS);
-		navTool.goToUsersAndGroupsManagement();
-		userAndGroup.deleteUser(username1);
 	}
 
 	/**
@@ -296,14 +280,13 @@ public class SOC_People_Profile_EditProfile extends SOC_TestConfig_2{
 
 		/*Create data test*/
 		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
-		String password1 = username1;
-		String email1 = username1 + mailSuffixData.getMailSuffixRandom();
-
-		info("Add new user");
-		magAc.signIn(DATA_USER1, DATA_PASS);
+		String email1 = username1+ mailSuffixData.getMailSuffixRandom();
+		
+		
+		info("Add user");
 		navTool.goToAddUser();
-		addUserPage.addUser(username1, password1, email1, username1, username1);
-		magAc.signIn(username1, password1);
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		magAc.signIn(username1, password);
 		/*Step Number: 1
 		 *Step Name: Step 1: Go to my profile page
 		 *Step Description: 
@@ -365,9 +348,5 @@ public class SOC_People_Profile_EditProfile extends SOC_TestConfig_2{
 		assert !oldUrl.equals(newUrl);
 		waitForAndGetElement(myProfile.ELEMENT_RECENT_ACTIVITY_CONTENT.replace("${index}", "1").replace("${content}", actAvatar));
 
-		info("Clear Data");
-		magAc.signIn(DATA_USER1, DATA_PASS);
-		navTool.goToUsersAndGroupsManagement();
-		userAndGroup.deleteUser(username1);
 	}
 }

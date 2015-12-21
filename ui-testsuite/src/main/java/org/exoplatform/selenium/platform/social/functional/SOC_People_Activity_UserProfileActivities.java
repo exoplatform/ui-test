@@ -2,6 +2,7 @@ package org.exoplatform.selenium.platform.social.functional;
 
 import static org.exoplatform.selenium.TestLogger.info;
 
+import org.exoplatform.selenium.Utils;
 import org.testng.annotations.*;
 
 
@@ -24,16 +25,15 @@ public class SOC_People_Activity_UserProfileActivities extends SOC_TestConfig{
 
 		/*Create data test*/
 		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
-		String password1 = username1;
-		String email1 = username1 + mailSuffixData.getMailSuffixRandom();
+		String email1 = username1+"@gmail.com";
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		magAc.signIn(username1,password);
+		Utils.pause(3000);
+		
 		String activity1 = username1 + " "+username1;
 		String comment1= activityMes.getActivityMessage(2);
-
-		info("Add new user");
-		magAc.signIn(DATA_USER1, DATA_PASS);
-		navTool.goToAddUser();
-		addUserPage.addUser(username1, password1, email1, username1, username1);
-		magAc.signIn(username1, password1);
 
 		/*Step Number: 1
 		 *Step Name: Step 1: Go to my profile page
@@ -54,7 +54,7 @@ public class SOC_People_Activity_UserProfileActivities extends SOC_TestConfig{
 		 *Expected Outcome: 
 			Edit Profile page is displayed*/
 		info("edit avatar");
-		String oldUrl=waitForAndGetElement(myProfile.ELEMENT_USER_AVATAR).getAttribute("src");
+		String oldUrl=waitForAndGetElement(myProfile.ELEMENT_USER_AVATAR.replace("${userName}",username1)).getAttribute("src");
 		info("edit profile");
 		click(myProfile.ELEMENT_EDIT_MY_PROFILE_LINK);
 		/*Step number: 3
@@ -70,7 +70,7 @@ public class SOC_People_Activity_UserProfileActivities extends SOC_TestConfig{
 			- Activity content is updated with new avatar*/ 
 		myProfile.changeAvatar("TestData/"+link);
 		myProfile.saveCancelUpdateInfo(false);
-		String newUrl=waitForAndGetElement(myProfile.ELEMENT_USER_AVATAR).getAttribute("src");
+		String newUrl=waitForAndGetElement(myProfile.ELEMENT_USER_AVATAR.replace("${userName}",username1)).getAttribute("src");
 		assert !oldUrl.equals(newUrl);
 		waitForAndGetElement(myProfile.ELEMENT_RECENT_ACTIVITY_CONTENT.replace("${index}", "1").replace("${content}", comment1));
 		navTool.goToMyActivities();
@@ -138,17 +138,16 @@ public class SOC_People_Activity_UserProfileActivities extends SOC_TestConfig{
 
 		/*Create data test*/
 		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
-		String password1 = username1;
-		String email1 = username1 + getRandomNumber() + mailSuffixData.getMailSuffixRandom();
+		String email1 = username1+"@gmail.com";
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		magAc.signIn(username1,password);
+		Utils.pause(3000);
+		
 		String comment1 = activityMes.getActivityMessage(3);
 		String comment2 = "\"About me\" has been updated.";
 		String activity1 = username1 + " "+username1;
-
-		info("Add new user");
-		magAc.signIn(DATA_USER1, DATA_PASS);
-		navTool.goToAddUser();
-		addUserPage.addUser(username1, password1, email1, username1, username1);
-		magAc.signIn(username1, password1);
 
 		/*Step Number: 1
 		 *Step Name: Step 1: Go to my profile page
@@ -224,16 +223,16 @@ public class SOC_People_Activity_UserProfileActivities extends SOC_TestConfig{
 
 		/*Create data test*/
 		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
-		String email1 = username1 + mailSuffixData.getMailSuffixRandom();
-		String activity1 = username1 + " "+username1;
+		String email1 = username1+"@gmail.com";
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		magAc.signIn(username1,password);
+		Utils.pause(3000);
+		
 		String comment1= activityMes.getActivityMessage(0);
 		String comment2 = activityMes.getActivityMessage(7);
-		info("Add new user");
-		magAc.signIn(DATA_USER1, DATA_PASS);
-		navTool.goToAddUser();
-
-		info("Add user " + username1);
-		addUserPage.addUser(username1, username1, email1, username1, username1);
+		String activity1 = username1 + " "+username1;
 
 		/*Step Number: 1
 		 *Step Name: Step 1: Go to my profile page
@@ -244,7 +243,6 @@ public class SOC_People_Activity_UserProfileActivities extends SOC_TestConfig{
 
 		 *Expected Outcome: 
 			Show content of my profile page*/
-		magAc.signIn(username1, username1);
 		navTool.goToMyProfile();
 		info("goto edit profile page");
 
@@ -334,16 +332,14 @@ public class SOC_People_Activity_UserProfileActivities extends SOC_TestConfig{
 
 		/*Create data test*/
 		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
-		String password1 = username1;
 		String email1 = username1 + mailSuffixData.getMailSuffixRandom();
 		String activity1= username1 + " "+username1;
 		String comment1 = activityMes.getActivityMessage(1);
 		String comment2 = activityMes.getActivityMessage(8);
 		info("Add new user");
-		magAc.signIn(DATA_USER1, DATA_PASS);
 		navTool.goToAddUser();
-		addUserPage.addUser(username1, password1, email1, username1, username1);
-		magAc.signIn(username1, password1);
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		magAc.signIn(username1, password);
 
 		/*Step Number: 1
 		 *Step Name: Step 1: Go to my profile page

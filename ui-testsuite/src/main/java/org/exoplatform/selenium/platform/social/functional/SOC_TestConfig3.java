@@ -114,7 +114,6 @@ public class SOC_TestConfig3 extends PlatformBase {
 	ForumTopicManagement foTopic;
 	UserPageBase uBase;
 	
-	String password;
 	ArrayList<String> arrayUser;
 	ArrayList<String> comments;
 	
@@ -126,7 +125,7 @@ public class SOC_TestConfig3 extends PlatformBase {
 		getDefaultUserPass(userDataFilePath,defaultSheet,isUseFile,jdbcDriver,dbUrl,user,pass,sqlUser);
 		magAc = new ManageLogInOut(driver);
 		button = new Button(driver);
-		magAc.signIn(DATA_USER1, DATA_PASS);
+		magAc.signIn(USER_ROOT,PASS_ROOT);
 		
 		navTool = new NavigationToolbar(driver);
 		notiAdmin = new NotificationsAdminSeting(driver);
@@ -240,7 +239,6 @@ public class SOC_TestConfig3 extends PlatformBase {
 		for(int i=0;i<number;i++){
 			info("Add new a user");
 			String user=getRandomString();
-			password ="123456" ;
 			String email=user+"@gmail.com";
 			addUserPage.addUser(user,password, email,user,user);
 			info("Add users to user's array");
@@ -257,8 +255,7 @@ public class SOC_TestConfig3 extends PlatformBase {
 	public void deleteUsers(ArrayList<String> users){
 		info("Delete all new users");
 		switchToParentWindow();
-		magAc.signOut();
-		magAc.signIn(DATA_USER1, DATA_PASS);
+		magAc.signIn(USER_ROOT,PASS_ROOT);
 		navTool.goToUsersAndGroupsManagement();
 		for(int i=0;i<users.size();i++){
 			info("Delete user:"+users.get(i));
