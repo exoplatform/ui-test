@@ -3,13 +3,16 @@ package org.exoplatform.selenium.platform.task;
 import java.awt.AWTException;
 import java.awt.Robot;
 import java.awt.event.KeyEvent;
+
 import org.exoplatform.selenium.Utils;
 import org.exoplatform.selenium.platform.HomePagePlatform;
+
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+
 import static org.exoplatform.selenium.TestLogger.info;
 
 /**
@@ -1471,6 +1474,17 @@ public class ManagementTasks extends TaskManagementLocatorObject {
 			waitForAndGetElement(ELEMENT_TASK_COMPLETE_ICON.replace("$task", task));
 		}
 	}
+	/**
+	 * check not display of List View 
+	 * @param list of tasks
+	 */
+	public void checkNotDisplayOfListView(String...tasks){
+		info("check display of tasks in List View");
+		Utils.pause(500);
+		for (String task : tasks) {
+			waitForElementNotPresent(ELEMENT_TASK_TITLE.replace("$task", task));
+		}
+	}
 	/*
 	 * complete task
 	 * @param task
@@ -1708,19 +1722,7 @@ public class ManagementTasks extends TaskManagementLocatorObject {
 		waitForAndGetElement(ELEMENT_LEFT_PANE_PROJECT_ACTIVE.replace("$project", project));
 		waitForAndGetElement(ELEMENT_RIGHT_PANE_TASK_TITLE_TEXT.replace("$task", task));
 	}
-	/**
-=======
-		Utils.pause(1000);
-		waitForAndGetElement(ELEMENT_BOARD_TASK_TITLE.replace("$num", String.valueOf(col)).replace("$task", task));
-	}
-	/**
->>>>>>> FQA-2692:[Task Management]- Write scripts for RC1: Projects - Create a project
-=======
-		Utils.pause(1000);
-		waitForAndGetElement(ELEMENT_BOARD_TASK_TITLE.replace("$num", String.valueOf(col)).replace("$task", task));
-	}
-	/**
->>>>>>> FQA-2692:[Task Management]- Write scripts for RC1: Projects - Create a project
+    /**
 	 * Check number task on badge
 	 * @param num
 	 */
@@ -1771,5 +1773,29 @@ public class ManagementTasks extends TaskManagementLocatorObject {
 		waitForAndGetElement(ELEMENT_TASK_CLOCK_ICON_TOMORROW_MOR.replace("$task", task));
 		waitForAndGetElement(ELEMENT_TASK_CLOCK_ICON_TOMORROW_AFT.replace("$task", task));
 		waitForAndGetElement(ELEMENT_TASK_CLOCK_ICON_NEXTWEEK.replace("$task", task));
+	}
+	/**
+	 * filter assignee
+	 * @param assignees
+	 * 				list of assignees
+	 */
+	public void filterWithAssignee(String...assignees){
+		info("fliter assignee");
+		click(ELEMENT_FILTER_ICON,0,true);
+		for (String assignee : assignees) {
+			type(ELEMENT_RIGHT_PANE_FILTER_ASSIGNEE_INPUT,assignee,false);
+			Robot robot;
+			try {
+				robot = new Robot();
+				robot.delay(1000);
+				robot.keyPress(KeyEvent.VK_ENTER);
+				robot.keyRelease(KeyEvent.VK_ENTER);
+				Utils.pause(3000);
+			} catch (AWTException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
 	}
 }

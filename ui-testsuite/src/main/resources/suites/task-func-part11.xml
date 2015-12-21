@@ -12,6 +12,7 @@
 			<class name="org.exoplatform.selenium.platform.task.functional.TASK_Labels_ChangeLabelColor" />
 			<class name="org.exoplatform.selenium.platform.task.functional.TASK_Labels_LabelPermissions" />
 			<class name="org.exoplatform.selenium.platform.task.functional.TASK_TaskDetails_EditTask_TaskLabel" />
+			<class name="org.exoplatform.selenium.platform.task.functional.TASK_Filters" />
 		</classes>
 	</test>
 	<listeners>

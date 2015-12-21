@@ -595,4 +595,5 @@ public class ManagementLabels extends TaskManagementLocatorObject {
 		waitForAndGetElement(ELEMENT_TASK_LABEL.replace("$label", label).replace("$task", task));
 		
 	}
+
 }

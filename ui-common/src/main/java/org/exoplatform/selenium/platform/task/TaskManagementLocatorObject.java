@@ -309,6 +309,10 @@ public class TaskManagementLocatorObject extends PlatformBase {
 	//List View - Sort by Title
 	public final By ELEMENT_SORTBY_TITLE = By.xpath("//*[@data-orderby='title']");
 	
+	//Filter
+	public final By ELEMENT_FILTER_ICON = By.xpath(".//*[contains(@class,'uiIconFilter')]");
+	
+	
 	//*************************************Board View*****************************************//
 	public final By ELEMENT_BOARD_VIEW = By.xpath("//*[contains(@class,'btn-group')]/*[contains(@class,'btn')]/*[contains(.,'Board')]");
 	public final String ELEMENT_BOARD_STATUS = "//*[contains(@class,'col')]/*[@data-name='name'][contains(.,'$flow')]";
@@ -376,7 +380,7 @@ public class TaskManagementLocatorObject extends PlatformBase {
 	public final By ELEMENT_RIGHT_PANE_TASK_DESCRIPTION_EMPTY = By.xpath("//*[contains(@class,'taskDescription')]/*[@data-name='description']/*[contains(.,'Empty')]");
 	public final By ELEMENT_RIGHT_PANE_TASK_DESCRIPTION_INPUT = By.xpath("//*[contains(@class,'addTask')]//*[@data-name='description']");
 	//assign
-	public final By ELEMENT_RIGHT_PANE_TASK_ASSIGN_LINK = By.xpath("//*[contains(@class,'assigned')]//*[@data-original-title='Click to edit']");
+	public final By ELEMENT_RIGHT_PANE_TASK_ASSIGN_LINK = By.xpath("//*[contains(@class,'editAssignee')][@data-original-title='Click to edit']");
 	public final By ELEMENT_RIGHT_PANE_TASK_ASSIGN_LINK_USER=By.xpath("//*[contains(@class,'assigned')]/*[contains(@class,'avatar')]/../*[@data-original-title='Click to edit']");
 	public final String ELEMENT_RIGHT_PANE_TASK_ASSIGN = "//*[contains(@class,'assigned')]/*[contains(.,'$user')]";
 	public final By ELEMENT_RIGHT_PANE_TASK_ASSIGN_INPUT = By.xpath("//*[@class='contBlock']//*[contains(@class,'TextArea')]/*[@type='text']");
@@ -489,4 +493,16 @@ public class TaskManagementLocatorObject extends PlatformBase {
 	public final String ELEMENT_RIGHT_PANE_LABEL_INPUT = "//*[@data-name='labels']/..//*[contains(@class,'TextArea')]/*[@type='text']";
 	public final String ELEMENT_RIGHT_PANE_LABEL_AUTOCOMPLETE = "//*[contains(@class,'selectize')]/*[@class='data']/*[contains(.,'$label')]";
 	public final String ELEMENT_RIGHT_PANE_TASK_LABEL_REMOVE_ICON = "//*[@data-name='labels']/..//*[contains(@class,'TextArea')]/*[contains(.,'$label')]/*[contains(@class,'removeValue')]";
+	
+	//Filters
+	public final String ELEMENT_RIGHT_PANE_FILTER_ASSIGNEE_INPUT=".//*[contains(@class,'taskFilter')]//*[@id='assignee']/..//*[contains(@class,'TextArea')]/*[@type='text']";
+	public final By ELEMENT_RIGHT_PANE_FILTER_CONTAINS_INPUT = By.id("keyword");
+	public final String ELEMENT_RIGHT_PANE_FILTER_LABELS_INPUT=".//*[contains(@class,'taskFilter')]//*[@id='label']/..//*[contains(@class,'TextArea')]/*[@type='text']";
+	public final String ELEMENT_RIGHT_PANE_FILTER_TAGS_INPUT=".//*[contains(@class,'taskFilter')]//*[@id='tag']/..//*[contains(@class,'TextArea')]/*[@type='text']";
+	public final By ELEMENT_RIGHT_PANE_FILTER_STATUS = By.xpath("//*[contains(@class,'taskFilter')]//*[@name='status']");
+	public final String ELEMENT_RIGHT_PANE_FILTER_STATUS_SELECT = "//*[contains(@class,'taskFilter')]//*[@name='status']/*[contains(.,'$status')]";
+	public final By ELEMENT_RIGHT_PANE_FILTER_DUEDATE = By.xpath(".//*[contains(@class,'taskFilter')]//*[@name='due']");
+	public final String ELEMENT_RIGHT_PANE_FILTER_DUEDATE_SELECT = ".//*[contains(@class,'taskFilter')]//*[@name='due']/*[contains(.,'$due')]";
+	public final String ELEMENT_RIGHT_PANE_FILTER_PRIORITY_SELECT = ".//*[contains(@class,'taskFilter')]//*[@name='priority']/*[contains(.,'$priority')]";
+	public final By ELEMENT_RIGHT_PANE_FILTER_COMPLETED_TASK = By.xpath(".//*[@id='completed']");
 }
