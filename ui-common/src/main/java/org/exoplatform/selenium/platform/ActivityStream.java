@@ -318,8 +318,8 @@ public class ActivityStream extends ActivityStreamLocator {
 			click(ELEMENT_COMMENT_BUTTON.replace("${activityText}",filename));
 			}
 			Utils.pause(2000);
-			info("Repeat "+repeat);
-			repeat++;
+			info("Repeat "+repeat1);
+			repeat1++;
 		}
 		info("The comment is added successfully");
 	}
