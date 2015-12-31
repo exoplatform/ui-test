@@ -1378,13 +1378,13 @@ import org.testng.annotations.*;
 				assert false:"The URL is displayed incorrectly";
 		  
 		  info("Create a new folder");
-		  SEHome.goToAddNewFolder();
+		  spaMg.goToAddNewFolder();
 		  String folderTitle = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
-		  SEHome.createFolder(folderTitle,"");
+		  spaMg.createFolder(folderTitle,"");
 		  
 		  info("Create a new documents in the folder");
 		  String docTitle = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
-		  SEHome.openAFolder(folderTitle);
+		  spaMg.openFolder(folderTitle);
 		  SEHome.openListDocumentTemplateByRightClick();
 		  creatDoc.createNewDoc(selectDocumentType.WEBCONTENT);
 		  creatDoc.addNewWebContent(docTitle,docTitle);

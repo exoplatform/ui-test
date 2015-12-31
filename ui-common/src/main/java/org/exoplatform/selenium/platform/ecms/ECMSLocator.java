@@ -224,9 +224,9 @@ public class ECMSLocator extends PlatformBase{
 
 	//Add document
 	public final By ELEMENT_ADDDOCUMENT_CHOICETYPE = By.xpath("//*[@class='templateTitle']");
-	public final By ELEMENT_THUMBNAIL_VIEW_ADMIN_VIEW = By.xpath(".//*[contains(@class,'uiThumbnailsView ')]");
-	public final By ELEMENT_CONTEXT_MENU_ADD_DOCUMENT =By.xpath(".//*[contains(@id,'JCRContextMenu')]//*[contains(@class,'uiIconEcmsAddDocument')]");
-	public final By ELEMENT_WORKING_AREA_TEMPLATE_DOCUMENTS=By.xpath(".//*[@id='UIWorkingArea']");
+	public final By ELEMENT_THUMBNAIL_VIEW_ADMIN_VIEW = By.xpath(".//*[contains(@class,'uiThumbnailsView')]");
+	public final By ELEMENT_CONTEXT_MENU_ADD_DOCUMENT =By.xpath(".//*[@id='JCRContextMenu']//*[contains(@class,'uiIconEcmsAddDocument')]");
+	public final By ELEMENT_WORKING_AREA_TEMPLATE_DOCUMENTS=By.xpath(".//*[@id='UIDocumentFormController']");
 	
 	//Add folder
 	public final By ELEMENT_ADDFOLDERBOX = By.xpath("//*[@class='PopupTitle popupTitle']");

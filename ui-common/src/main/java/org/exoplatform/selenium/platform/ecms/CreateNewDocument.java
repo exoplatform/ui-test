@@ -42,13 +42,14 @@ public class CreateNewDocument extends ECMSLocator{
 			break;
 		case WEBCONTENT:
 			info("Select WebContent type");
-			if((waitForAndGetElement(ELEMENT_ADDDOCUMENT_WEBCONTENT, 3000, 0) == null) && (waitForAndGetElement(ELEMENT_ADDDOCUMENT_NEXT_PAGE, 3000, 0) != null)) {
-				clickByJavascript(ELEMENT_ADDDOCUMENT_NEXT_PAGE, 2);
+			if((waitForAndGetElement(ELEMENT_ADDDOCUMENT_WEBCONTENT, 3000, 0) == null) 
+					&& (waitForAndGetElement(ELEMENT_ADDDOCUMENT_NEXT_PAGE, 3000, 0) != null)) {
+				click(ELEMENT_ADDDOCUMENT_NEXT_PAGE, 2);
 				waitForAndGetElement(ELEMENT_ADDDOCUMENT_WEBCONTENT, DEFAULT_TIMEOUT, 1);
-				clickByJavascript(ELEMENT_ADDDOCUMENT_WEBCONTENT, 2);
+				click(ELEMENT_ADDDOCUMENT_WEBCONTENT, 2);
 			}
 			else
-				clickByJavascript(ELEMENT_ADDDOCUMENT_WEBCONTENT, 2);
+				click(ELEMENT_ADDDOCUMENT_WEBCONTENT, 2);
 			break;
 		case ACCESSIBLEMEDIA:
 			info("Select Accessiblemedia type");
@@ -76,10 +77,11 @@ public class CreateNewDocument extends ECMSLocator{
 			break;
 		case WEBLINK:
 			info("Select Weblink type");
-			if((waitForAndGetElement(ELEMENT_ADDDOCUMENT_WEBLINK, 3000, 0) == null) && (waitForAndGetElement(ELEMENT_ADDDOCUMENT_NEXT_PAGE, 3000, 0) != null)) {
-				clickByJavascript(ELEMENT_ADDDOCUMENT_NEXT_PAGE, 2);
+			if((waitForAndGetElement(ELEMENT_ADDDOCUMENT_WEBLINK, 3000, 0) == null) 
+					&& (waitForAndGetElement(ELEMENT_ADDDOCUMENT_NEXT_PAGE, 3000, 0) != null)) {
+				click(ELEMENT_ADDDOCUMENT_NEXT_PAGE, 2);
 				waitForAndGetElement(ELEMENT_ADDDOCUMENT_WEBLINK, DEFAULT_TIMEOUT, 1);
-				clickByJavascript(ELEMENT_ADDDOCUMENT_WEBLINK, 2);
+				click(ELEMENT_ADDDOCUMENT_WEBLINK, 2);
 			}
 			else
 				click(ELEMENT_ADDDOCUMENT_WEBLINK);
@@ -97,8 +99,6 @@ public class CreateNewDocument extends ECMSLocator{
 	
 	/**
 	 * Define Folder types
-	 * By  quynhpt
-	 * Date 16/01/2015
 	 */
 	public enum folderType {
 		None, Content, Document, Css;

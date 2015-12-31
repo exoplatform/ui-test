@@ -90,7 +90,7 @@ public class SiteExplorerHome extends ECMSLocator{
 	 * @param title
 	 * @param folderType
 	 */
-	public void createFolder(String title, String folderType,Boolean... verify) {
+	public void createFolder(String title, String folderType) {
 		info("Type a title:" + title + " for the folder");
 		type(ELEMENT_ADDFOLDER_NAME, title, true);
 		if (!folderType.isEmpty()) {
@@ -99,10 +99,8 @@ public class SiteExplorerHome extends ECMSLocator{
 		}
 		info("Click on Create folder button");
 		click(ELEMENT_ADDFOLDER_CREATEFOLDERBUTTON);
-		if(verify.length>0){
-			info("Verify that the folder is created");
-			waitForAndGetElement(ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME.replace("${title}", title));
-		}
+		info("Verify that the folder is created");
+		waitForAndGetElement(ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME.replace("${title}", title));
 		info("The folder is created successfully");
 	}
 
@@ -167,9 +165,19 @@ public class SiteExplorerHome extends ECMSLocator{
 	 * Open list document's templates
 	 */
 	public void openListDocumentTemplateByRightClick(){
-		rightClickOnElement(ELEMENT_THUMBNAIL_VIEW_ADMIN_VIEW);
-		click(ELEMENT_CONTEXT_MENU_ADD_DOCUMENT);
+		info("Select Document type");
+		int repeat =0;
+		while(waitForAndGetElement(ELEMENT_WORKING_AREA_TEMPLATE_DOCUMENTS,2000,0)==null){
+			if(repeat>5)break;
+			if(waitForAndGetElement(ELEMENT_WORKING_AREA_TEMPLATE_DOCUMENTS,2000,0)!=null)
+				break;
+			rightClickOnElement(ELEMENT_THUMBNAIL_VIEW_ADMIN_VIEW);
+			Utils.pause(2000);
+			click(ELEMENT_CONTEXT_MENU_ADD_DOCUMENT,2);
+			repeat++;
+		}
 		waitForAndGetElement(ELEMENT_WORKING_AREA_TEMPLATE_DOCUMENTS,2000,1);
+		info("Document type is created");
 	}
 
 	/**

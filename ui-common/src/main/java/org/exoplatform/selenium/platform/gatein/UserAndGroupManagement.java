@@ -119,7 +119,6 @@ public class UserAndGroupManagement extends GateinLocator {
 		  select(ELEMENT_SELECT_MEMBERSHIP, membership[0]);
 		scrollToElement(waitForAndGetElement(ELEMENT_SAVE_BUTTON_2),this.driver);
 		click(ELEMENT_SAVE_BUTTON_2);
-		
 		String addedUser = ELEMENT_ADDED_GROUP_USER_IN_TABLE.replace(
 				"${username}", user);
 		if (isTextPresent(ELEMENT_MSG_TOTAL_PAGES)) {

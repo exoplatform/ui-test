@@ -812,7 +812,15 @@ public class SocialLocator extends PlatformBase{
 	//Wiki tab
 	public final By ELEMENT_WIKI_HOME_TITLE =By.xpath(".//*[@id='titleInfo']");
 	//Document tab
-	public final By ELEMENT_DOCUMENT_FOLDER_ADD_BTN = By.xpath(".//*[contains(@class,'uiIconEcmsAddFolder ')]");	
+	public final By ELEMENT_DOCUMENT_FOLDER_ADD_BTN = By.xpath(".//*[contains(@class,'uiIconEcmsAddFolder ')]");
+	public final By ELEMENT_ACTIONBAR_ADDFOLDER = By.xpath("//*[contains(@id,'uiActionsBarContainer')]//*[contains(@class,'uiIconEcmsAddFolder')]");
+	public final By ELEMENT_ACTIONBAR_MORE = By.xpath("//*[contains(@class,'listHiddenActionsContainer')]/..//*[text()='More ']");
+	public final By ELEMENT_ADDFOLDERBOX = By.xpath("//*[contains(@id,'UIPopupContainer')]//*[contains(@class,'PopupTitle')]");
+	public final By ELEMENT_ADDFOLDER_NAME = By.xpath("//*[@id='titleTextBox']");
+	public final By ELEMENT_ADDFOLDER_FOLDERTYPE = By.xpath("//*[@class='selectbox']");
+	public final By ELEMENT_ADDFOLDER_CREATEFOLDERBUTTON = By.xpath("//*[contains(@class,'addFolderButton')]");
+	public final String ELEMENT_DOCUMENT_FOLDER_NAME=".//*[contains(@id,'UIDocumentInfo')]//*[contains(@data-original-title,'$name')]";
+	public final String ELMENT_DOCUMENT_FOLDER_ADDRESS=".//*[@id='address'][contains(@value,'/$name')]";
 	
 	//Agenda tab
     public final By ELEMENT_AGENDA_EVENT_ADD_BTN =By.xpath(".//*[@id='UIActionBarQuickAddEvent']");
