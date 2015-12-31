@@ -90,7 +90,7 @@ public class SiteExplorerHome extends ECMSLocator{
 	 * @param title
 	 * @param folderType
 	 */
-	public void createFolder(String title, String folderType) {
+	public void createFolder(String title, String folderType,Boolean... verify) {
 		info("Type a title:" + title + " for the folder");
 		type(ELEMENT_ADDFOLDER_NAME, title, true);
 		if (!folderType.isEmpty()) {
@@ -99,9 +99,10 @@ public class SiteExplorerHome extends ECMSLocator{
 		}
 		info("Click on Create folder button");
 		click(ELEMENT_ADDFOLDER_CREATEFOLDERBUTTON);
-		info("Verify that the folder is created");
-		waitForAndGetElement(By.xpath((ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME)
-				.replace("${title}", title)));
+		if(verify.length>0){
+			info("Verify that the folder is created");
+			waitForAndGetElement(ELEMENT_SITEEXPLORER_LEFTBOX_NODENAME.replace("${title}", title));
+		}
 		info("The folder is created successfully");
 	}
 

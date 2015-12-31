@@ -183,7 +183,7 @@ public class HomePagePlatform extends HomePageLocator{
      */
 	public void goToSpecificSpace(String space){
 		info("Go to space "+space);
-		clickByJavascript(ELEMENT_SPECIFIC_PANEL.replace("{$space}",space));
+		click(ELEMENT_SPECIFIC_PANEL.replace("{$space}",space),2);
 		Utils.pause(3000);
 	}
 	/**

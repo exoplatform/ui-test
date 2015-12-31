@@ -36,7 +36,7 @@ import org.testng.annotations.*;
 			*like icon + number of likes to 1*/
 		
 		info("Add new space");
-		String space = txData.getContentByArrayTypeRandom(1).toLowerCase()+getRandomNumber();
+		String space = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		hp.goToMySpaces();
 		spaMg.addNewSpaceSimple(space,space);
 		
@@ -86,12 +86,12 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- The User activity is displayed in the activity stream*like icon + number of likes to 1*/
 		info("Add new space");
-		String space = txData.getContentByArrayTypeRandom(1).toLowerCase()+getRandomNumber();
+		String space = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		hp.goToMySpaces();
 		spaMg.addNewSpaceSimple(space,space);
 		
 		info("Add new activity on the space");
-		String activity = txData.getContentByArrayTypeRandom(1).toLowerCase()+getRandomNumber();
+		String activity = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		hp.goToSpecificSpace(space);
 		hpAct.addActivity(activity,"");
 		hpAct.checkActivity(activity);
@@ -140,7 +140,7 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			Show a text box allow user add comment for activity*/
 		info("Add new space");
-		String space = txData.getContentByArrayTypeRandom(1).toLowerCase()+getRandomNumber();
+		String space = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		hp.goToMySpaces();
 		spaMg.addNewSpaceSimple(space,space);
 		
@@ -180,10 +180,14 @@ import org.testng.annotations.*;
 		String email2 = username2+"@gmail.com";
 		String fullName2=username2+" "+username2;
 		
+		String username3 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email3 = username3+"@gmail.com";
+		
 		info("Add new user");
 		navTool.goToAddUser();
 		addUserPage.addUser(username1, password, email1, username1, username1);
 		addUserPage.addUser(username2, password, email2, username2, username2);
+		addUserPage.addUser(username3, password, email3, username3, username3);
 		magAc.signIn(username1,password);
 		/*Step Number: 1
 		*Step Name: Step 1: Start PLF
@@ -204,16 +208,18 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- Space is created successfully.*/
 		String regist =spRegisData.getSpaceRegistration(0);
+		String visib = spVisiData.getSpaceVisible(0);
+		String[] arrayRight ={regist,visib};
 		
 		info(" Create a Visible and Open space");
 		String space = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		hp.goToMySpaces();
 		spaMg.addNewSpace(space, space, regist,"",6000);
 		
-		/*info("change access to close");
+		info("change access to close");
 		spaHome.goToSpaceSettingTab();
 		setSpaceMg.goToAccessEditTab();
-		setSpaceMg.setPermissionForSpace(arrayRight);*/
+		setSpaceMg.setPermissionForSpace(arrayRight);
 
 		/*Step number: 3
 		*Step Name: Step 3: Create two new users
@@ -233,7 +239,6 @@ import org.testng.annotations.*;
 		info("Invites UserA to the space");
 		hp.goToSpecificSpace(space);
 		spaHome.goToSpaceSettingTab();
-		setSpaceMg.goToMemberTab();
 		setSpaceMg.inviteUser(username2,true,fullName2);
 		
 		/*Step number: 4
@@ -289,11 +294,11 @@ import org.testng.annotations.*;
 			- User A and User B are connected*/
 		info("User A and User B are connected");
 		hp.goToConnections();
-		connMag.connectToAUser(username1);
+		connMag.connectToAUser(username3);
 		Utils.pause(3000);
 		
 		info("User B login");
-		magAc.signIn(username1, password);
+		magAc.signIn(username3, password);
 		Utils.pause(3000);
 		
 		info("User B accepts the connections with User A");
@@ -339,7 +344,7 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- User B do not see any shared activities in Step 5 and Step 7 on activity stream*/ 
         info("User B login");
-		magAc.signIn(username1, password);
+		magAc.signIn(username3, password);
 		Utils.pause(3000);
 		
 		info("User B do not see any shared activities in Step 5 and Step 7 on activity stream");
@@ -368,10 +373,14 @@ import org.testng.annotations.*;
 		String email2 = username2+"@gmail.com";
 		String fullName2=username2+" "+username2;
 		
+		String username3 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email3 = username3+"@gmail.com";
+		
 		info("Add new user");
 		navTool.goToAddUser();
 		addUserPage.addUser(username1, password, email1, username1, username1);
 		addUserPage.addUser(username2, password, email2, username2, username2);
+		addUserPage.addUser(username3, password, email3, username3, username3);
 		magAc.signIn(username1,password);
 		/*Step Number: 1
 		*Step Name: Step 1: Start PLF
@@ -392,9 +401,18 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- Space is created successfully.*/
 		info("Create a Visible and Validation space");
+		String regist =spRegisData.getSpaceRegistration(1);
+		String visib = spVisiData.getSpaceVisible(0);
+		String[] arrayRight ={regist,visib};
+		
 		String space = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		hp.goToMySpaces();
 		spaMg.addNewSpaceSimple(space, space,6000);
+		
+		info("change access to close");
+		spaHome.goToSpaceSettingTab();
+		setSpaceMg.goToAccessEditTab();
+		setSpaceMg.setPermissionForSpace(arrayRight);
 
 		/*Step number: 3
 		*Step Name: Step 3: Create two new users
@@ -414,7 +432,6 @@ import org.testng.annotations.*;
 		info("Invites UserA to the space");
 		hp.goToSpecificSpace(space);
 		spaHome.goToSpaceSettingTab();
-		setSpaceMg.goToMemberTab();
 		setSpaceMg.inviteUser(username2,true,fullName2);
 
 		/*Step number: 4
@@ -473,11 +490,11 @@ import org.testng.annotations.*;
 			- User A and User B are connected*/
         info("User A and User B are connected");
 		hp.goToConnections();
-		connMag.connectToAUser(username1);
+		connMag.connectToAUser(username3);
 		Utils.pause(3000);
 		
 		info("User B login");
-		magAc.signIn(username1, password);
+		magAc.signIn(username3, password);
 		Utils.pause(3000);
 		
 		info("User B accepts the connections with User A");
@@ -522,7 +539,7 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- User B do not see any shared activities in Step 5 and Step 7 on activity stream*/ 
         info("User B login");
-		magAc.signIn(username1, password);
+		magAc.signIn(username3, password);
 		Utils.pause(3000);
 		
 		info("User B do not see any shared activities in Step 5 and Step 7 on activity stream");
@@ -551,10 +568,14 @@ import org.testng.annotations.*;
 		String email2 = username2+"@gmail.com";
 		String fullName2=username2+" "+username2;
 		
+		String username3 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email3 = username3+"@gmail.com";
+		
 		info("Add new user");
 		navTool.goToAddUser();
 		addUserPage.addUser(username1, password, email1, username1, username1);
 		addUserPage.addUser(username2, password, email2, username2, username2);
+		addUserPage.addUser(username3, password, email3, username3, username3);
 		magAc.signIn(username1,password);
 		/*Step Number: 1
 		*Step Name: Step 1: Start PLF
@@ -574,12 +595,19 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- Space is created successfully.*/
-        String regist =spRegisData.getSpaceRegistration(2);
+		info("Create a Visible and Validation space");
+		String regist =spRegisData.getSpaceRegistration(2);
+		String visib = spVisiData.getSpaceVisible(0);
+		String[] arrayRight ={regist,visib};
 		
-		info("Create a Visible and Closed space");
 		String space = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		hp.goToMySpaces();
-		spaMg.addNewSpace(space, space, regist,"",6000);
+		spaMg.addNewSpaceSimple(space, space,6000);
+		
+		info("change access to close");
+		spaHome.goToSpaceSettingTab();
+		setSpaceMg.goToAccessEditTab();
+		setSpaceMg.setPermissionForSpace(arrayRight);
 
 		/*Step number: 3
 		*Step Name: Step 3: Create two new users
@@ -599,7 +627,6 @@ import org.testng.annotations.*;
 		info("Invites UserA to the space");
 		hp.goToSpecificSpace(space);
 		spaHome.goToSpaceSettingTab();
-		setSpaceMg.goToMemberTab();
 		setSpaceMg.inviteUser(username2,true,fullName2);
 
 		/*Step number: 4
@@ -657,11 +684,11 @@ import org.testng.annotations.*;
 			- User A and User B are connected*/
         info("User A and User B are connected");
 		hp.goToConnections();
-		connMag.connectToAUser(username1);
+		connMag.connectToAUser(username3);
 		Utils.pause(3000);
 		
 		info("User B login");
-		magAc.signIn(username1, password);
+		magAc.signIn(username3, password);
 		Utils.pause(3000);
 		
 		info("User B accepts the connections with User A");
@@ -706,7 +733,7 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- User B do not see any shared activities in Step 5 and Step 7 on activity stream*/ 
         info("User B login");
-  		magAc.signIn(username1, password);
+  		magAc.signIn(username3, password);
   		Utils.pause(3000);
   		
   		info("User B do not see any shared activities in Step 5 and Step 7 on activity stream");
@@ -735,10 +762,14 @@ import org.testng.annotations.*;
 		String email2 = username2+"@gmail.com";
 		String fullName2=username2+" "+username2;
 		
+		String username3 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email3 = username3+"@gmail.com";
+		
 		info("Add new user");
 		navTool.goToAddUser();
 		addUserPage.addUser(username1, password, email1, username1, username1);
 		addUserPage.addUser(username2, password, email2, username2, username2);
+		addUserPage.addUser(username3, password, email3, username3, username3);
 		magAc.signIn(username1,password);
 		/*Step Number: 1
 		*Step Name: Step 1: Start PLF
@@ -758,14 +789,19 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- Space is created successfully.*/
-	    String regist =spRegisData.getSpaceRegistration(2);
-	    String visible=spVisiData.getSpaceVisible(1);
-	    String access = regist+"/"+visible;
+		info("Create a Visible and Validation space");
+		String regist =spRegisData.getSpaceRegistration(2);
+		String visib = spVisiData.getSpaceVisible(1);
+		String[] arrayRight ={regist,visib};
 		
-		info("Create a Hidden and Closed space");
 		String space = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		hp.goToMySpaces();
-		spaMg.addNewSpace(space, space,access,"",6000);
+		spaMg.addNewSpaceSimple(space, space,6000);
+		
+		info("change access to close");
+		spaHome.goToSpaceSettingTab();
+		setSpaceMg.goToAccessEditTab();
+		setSpaceMg.setPermissionForSpace(arrayRight);
 
 		/*Step number: 3
 		*Step Name: Step 3: Create two new users
@@ -785,7 +821,6 @@ import org.testng.annotations.*;
 		info("Invites UserA to the space");
 		hp.goToSpecificSpace(space);
 		spaHome.goToSpaceSettingTab();
-		setSpaceMg.goToMemberTab();
 		setSpaceMg.inviteUser(username2,true,fullName2);
 
 		/*Step number: 4
@@ -842,11 +877,11 @@ import org.testng.annotations.*;
 			- User A and User B are connected*/
         info("User A and User B are connected");
 		hp.goToConnections();
-		connMag.connectToAUser(username1);
+		connMag.connectToAUser(username3);
 		Utils.pause(3000);
 		
 		info("User B login");
-		magAc.signIn(username1, password);
+		magAc.signIn(username3, password);
 		Utils.pause(3000);
 		
 		info("User B accepts the connections with User A");
@@ -891,7 +926,7 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- User B do not see any shared activities in Step 5 and Step 7 on activity stream*/
         info("User B login");
-  		magAc.signIn(username1, password);
+  		magAc.signIn(username3, password);
   		Utils.pause(3000);
   		
   		info("User B do not see any shared activities in Step 5 and Step 7 on activity stream");
@@ -920,10 +955,14 @@ import org.testng.annotations.*;
 		String email2 = username2+"@gmail.com";
 		String fullName2=username2+" "+username2;
 		
+		String username3 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email3 = username3+"@gmail.com";
+		
 		info("Add new user");
 		navTool.goToAddUser();
 		addUserPage.addUser(username1, password, email1, username1, username1);
 		addUserPage.addUser(username2, password, email2, username2, username2);
+		addUserPage.addUser(username3, password, email3, username3, username3);
 		magAc.signIn(username1,password);
 		/*Step Number: 1
 		*Step Name: Step 1: Start PLF
@@ -943,14 +982,19 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- Space is created successfully.*/
-		String regist =spRegisData.getSpaceRegistration(0);
-	    String visible=spVisiData.getSpaceVisible(1);
-	    String access = regist+"/"+visible;
-		
 		info("Create a Hidden and Open space");
+		String regist =spRegisData.getSpaceRegistration(0);
+		String visib = spVisiData.getSpaceVisible(1);
+		String[] arrayRight ={regist,visib};
+		
 		String space = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		hp.goToMySpaces();
-		spaMg.addNewSpace(space, space,access,"",6000);
+		spaMg.addNewSpaceSimple(space, space,6000);
+		
+		info("change access to close");
+		spaHome.goToSpaceSettingTab();
+		setSpaceMg.goToAccessEditTab();
+		setSpaceMg.setPermissionForSpace(arrayRight);
 
 		/*Step number: 3
 		*Step Name: Step 3: Create two new users
@@ -971,7 +1015,6 @@ import org.testng.annotations.*;
 		info("Invites UserA to the space");
 		hp.goToSpecificSpace(space);
 		spaHome.goToSpaceSettingTab();
-		setSpaceMg.goToMemberTab();
 		setSpaceMg.inviteUser(username2,true,fullName2);
 
 		/*Step number: 4
@@ -1028,11 +1071,11 @@ import org.testng.annotations.*;
 			- User A and User B are connected*/
         info("User A and User B are connected");
 		hp.goToConnections();
-		connMag.connectToAUser(username1);
+		connMag.connectToAUser(username3);
 		Utils.pause(3000);
 		
 		info("User B login");
-		magAc.signIn(username1, password);
+		magAc.signIn(username3, password);
 		Utils.pause(3000);
 		
 		info("User B accepts the connections with User A");
@@ -1077,7 +1120,7 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- User B do not see any shared activities in Step 5 and Step 7 on activity stream*/ 
         info("User B login");
-  		magAc.signIn(username1, password);
+  		magAc.signIn(username3, password);
   		Utils.pause(3000);
   		
   		info("User B do not see any shared activities in Step 5 and Step 7 on activity stream");
@@ -1106,10 +1149,14 @@ import org.testng.annotations.*;
 		String email2 = username2+"@gmail.com";
 		String fullName2=username2+" "+username2;
 		
+		String username3 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email3 = username3+"@gmail.com";
+		
 		info("Add new user");
 		navTool.goToAddUser();
 		addUserPage.addUser(username1, password, email1, username1, username1);
 		addUserPage.addUser(username2, password, email2, username2, username2);
+		addUserPage.addUser(username3, password, email3, username3, username3);
 		magAc.signIn(username1,password);
 		/*Step Number: 1
 		*Step Name: Step 1: Start PLF
@@ -1129,14 +1176,19 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- Space is created successfully.*/
-		String regist =spRegisData.getSpaceRegistration(1);
-	    String visible=spVisiData.getSpaceVisible(1);
-	    String access = regist+"/"+visible;
-		
 		info("Create a Hidden and Validation space");
+		String regist =spRegisData.getSpaceRegistration(1);
+		String visib = spVisiData.getSpaceVisible(1);
+		String[] arrayRight ={regist,visib};
+		
 		String space = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		hp.goToMySpaces();
-		spaMg.addNewSpace(space, space,access,"",6000);
+		spaMg.addNewSpaceSimple(space, space,6000);
+		
+		info("change access to close");
+		spaHome.goToSpaceSettingTab();
+		setSpaceMg.goToAccessEditTab();
+		setSpaceMg.setPermissionForSpace(arrayRight);
 
 		/*Step number: 3
 		*Step Name: Step 3: Create two new users
@@ -1156,7 +1208,6 @@ import org.testng.annotations.*;
 		info("Invites UserA to the space");
 		hp.goToSpecificSpace(space);
 		spaHome.goToSpaceSettingTab();
-		setSpaceMg.goToMemberTab();
 		setSpaceMg.inviteUser(username2,true,fullName2);
 
 		/*Step number: 4
@@ -1213,11 +1264,11 @@ import org.testng.annotations.*;
 			- User A and User B are connected*/
 		info("User A and User B are connected");
 		hp.goToConnections();
-		connMag.connectToAUser(username1);
+		connMag.connectToAUser(username3);
 		Utils.pause(3000);
 		
 		info("User B login");
-		magAc.signIn(username1, password);
+		magAc.signIn(username3, password);
 		Utils.pause(3000);
 		
 		info("User B accepts the connections with User A");
@@ -1262,7 +1313,7 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- User B do not see any shared activities in Step 5 and Step 7 on activity stream*/ 
 		info("User B login");
-  		magAc.signIn(username1, password);
+  		magAc.signIn(username3, password);
   		Utils.pause(3000);
   		
   		info("User B do not see any shared activities in Step 5 and Step 7 on activity stream");

@@ -97,6 +97,7 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			All spaces are shown*/
          driver2.switchTo().window(browser2);
+         driver2.manage().window().maximize();
          hp2.goToAllSpace();
          
 		/*Step number: 5
@@ -109,7 +110,7 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			Send request successfully*/
          spaMg2.requestToJoinSpace(space,true);
-        
+         driver2.close();
 		/*Step number: 6
 		*Step Name: -
 		*Step Description: 
@@ -120,6 +121,7 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			User B is listed in pending list.*/
          driver.switchTo().window(browser1);
+         spaHome.goToSpaceSettingTab();
          setSpaceMg.inviteUser(username2, true,fullName2);
 
  	}
@@ -138,7 +140,6 @@ import org.testng.annotations.*;
 		
 		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
 		String email2 = username2+"@gmail.com";
-		String fullName2=username2+" "+username2;
 		
 		info("Add new user");
 		navTool.goToAddUser();
@@ -191,7 +192,7 @@ import org.testng.annotations.*;
 	     magAc.signIn(username1,password);
 	     hp.goToSpecificSpace(space);
 	     spaHome.goToSpaceSettingTab();
-	     setSpaceMg.acceptRequest(fullName2);
+	     setSpaceMg.acceptRequest(username2);
 	     
 		/*Step number: 4
 		*Step Name: -
@@ -211,7 +212,7 @@ import org.testng.annotations.*;
 	     hp.goToSpecificSpace(space);
 	     spaHome.goToSpaceSettingTab();
 	     setSpaceMg.goToMemberTab();
-	     waitForElementNotPresent(setSpaceMg.ELEMENT_USER_IN_MEMBER_TABLE.replace("${fullName}",fullName2));
+	     waitForElementNotPresent(setSpaceMg.ELEMENT_USER_IN_MEMBER_TABLE.replace("${fullName}",username2));
 	     
 	     magAc.signIn(USER_ROOT,PASS_ROOT);
 	     navTool.goToUsersAndGroupsManagement();
@@ -290,6 +291,7 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			Show all spaces*/
 		 driver2.switchTo().window(browser2);
+		 driver2.manage().window().maximize();
 		 hp2.goToAllSpace();
 		/*Step number: 4
 		*Step Name: -
@@ -318,6 +320,7 @@ import org.testng.annotations.*;
 		 spaMg2.searchSpace(space, "");
 		 spaMg2.waitForAndGetElement(spaMg2.ELEMENT_MY_SPACE_INVITATION_RECEIVED_ACCEPT_BTN.replace("${space}",space),2000,1);
 		 spaMg2.waitForAndGetElement(spaMg2.ELEMENT_MY_SPACE_INVITATION_RECEIVED_CANCEL_BTN.replace("${space}",space));
+		 driver2.close();
  	}
 
 	/**
@@ -519,15 +522,11 @@ import org.testng.annotations.*;
 		info("Test 6: Manager of space leaves space when only has one member in space");
 		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
 		String email1 = username1+"@gmail.com";
-		
-		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
-		String email2 = username2+"@gmail.com";
-		String fullName2=username2+" "+username2;
+		String fullName1=username1+" "+username1;
 		
 		info("Add new user");
 		navTool.goToAddUser();
 		addUserPage.addUser(username1, password, email1, username1, username1);
-		addUserPage.addUser(username2, password, email2, username2, username2);
 		magAc.signIn(username1,password);
 		/*Step Number: 1
 		*Step Name: -
@@ -558,7 +557,7 @@ import org.testng.annotations.*;
 		 ArrayList<String> warningTextArray=spWarnMessg.getArrayContentByType(2);
 		 String warningText=warningTextArray.get(0);
 		 spaHome.goToSpaceSettingTab();
-		 setSpaceMg.changeRole(fullName2);
+		 setSpaceMg.changeRole(fullName1);
 		 waitForAndGetElement(setSpaceMg.ELEMENT_SPACE_WARNING_MESSAGE.replace("${warningText}", warningText),2000,1);
 		 button.ok();
  	}
@@ -605,7 +604,7 @@ import org.testng.annotations.*;
 		*Expected Outcome: 
 			- Add member successfully*/
 		 spaHome.goToSpaceSettingTab();
-		 setSpaceMg.inviteUser(USER_ROOT, true,DATA_NAME_ROOT);
+		 setSpaceMg.inviteUser(USER_ROOT,false,"");
 		 
 		/*Step number: 3
 		*Step Name: -
@@ -621,7 +620,7 @@ import org.testng.annotations.*;
 		 hp.goToAllSpace();
 		 spaMg.searchSpace(space, "");
 		 spaMg.leaveSpace(space);
-		 hp.goToSpecificSpace(space);
+		 spaMg.goToSpace(space);
 		 spaHome.goToSpaceSettingTab();
 		 setSpaceMg.goToMemberTab();
 		 waitForElementNotPresent(setSpaceMg.ELEMENT_USER_IN_MEMBER_TABLE.replace("${fullName}",DATA_NAME_ROOT));

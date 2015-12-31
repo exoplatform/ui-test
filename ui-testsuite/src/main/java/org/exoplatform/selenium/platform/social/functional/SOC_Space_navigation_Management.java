@@ -467,6 +467,8 @@ public class SOC_Space_navigation_Management extends SOC_TestConfig{
 		info("Add new user");
 		navTool.goToAddUser();
 		addUserPage.addUser(username1, password, email1, username1, username1);
+		navTool.goToUsersAndGroupsManagement();
+		userGroupMg.addUserAdmin(username1);
 		magAc.signIn(username1,password);
 		
 		/*Step Number: 1
@@ -595,7 +597,7 @@ public class SOC_Space_navigation_Management extends SOC_TestConfig{
 		System.out.println(assert1);
 		assert waitForAndGetElement(pgCreateWiz.ELEMENT_EDITED_COTAINER).getAttribute("style").equals("width: 150px; height: 150px;");
 		mouseOver(pgCreateWiz.ELEMENT_DROP_SOURCE_HAS_LAYOUT, true);
-		waitForTextPresent(newContainerTitle);
+		//waitForTextPresent(newContainerTitle);
 		pgCreateWiz.saveChangesPageEditor();
 		
 	}
@@ -680,6 +682,17 @@ public class SOC_Space_navigation_Management extends SOC_TestConfig{
 		
 		String appNewUser = appGateData.getnameByIndex(3);
 		String appOrganization = appGateData.getnameByIndex(4);
+
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		
+		
+		info("Add new user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		navTool.goToUsersAndGroupsManagement();
+		userGroupMg.addUserAdmin(username1);
+		magAc.signIn(username1,password);
 		
 		/*Step Number: 1
 		 *Step Name: Step 1: Add page
@@ -749,10 +762,7 @@ public class SOC_Space_navigation_Management extends SOC_TestConfig{
 			- Navigation management is closed
 			- Changes on Portlet layout was saved*/
 		pgCreateWiz.switchViewMode(false);
-		waitForAndGetElement(userGroupMg.ELEMENT_GROUP_MANAGEMENT_TAB);
-		waitForAndGetElement(userGroupMg.ELEMENT_TAB_MEMBERSHIP_MANAGEMENT);
 		pgCreateWiz.saveChangesPageEditor();
-		
 	}
 	
 	/**

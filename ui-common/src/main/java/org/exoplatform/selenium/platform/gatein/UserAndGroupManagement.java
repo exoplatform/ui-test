@@ -110,13 +110,16 @@ public class UserAndGroupManagement extends GateinLocator {
 	public void addUserAdmin(String user,String... membership){
 		info("Go to Group tab");
 		goToGroupTab();
+		scrollToBottomPage(this.driver);
 		info("Select Platform/Administration group");
 		selectGroup("Platform/Administration");
 		info("Add user to Administration group by type");
 		type(ELEMENT_INPUT_USERNAME,user, true);
 		if(membership.length>0)
 		  select(ELEMENT_SELECT_MEMBERSHIP, membership[0]);
+		scrollToElement(waitForAndGetElement(ELEMENT_SAVE_BUTTON_2),this.driver);
 		click(ELEMENT_SAVE_BUTTON_2);
+		
 		String addedUser = ELEMENT_ADDED_GROUP_USER_IN_TABLE.replace(
 				"${username}", user);
 		if (isTextPresent(ELEMENT_MSG_TOTAL_PAGES)) {

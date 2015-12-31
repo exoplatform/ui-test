@@ -70,9 +70,7 @@ import org.testng.annotations.*;
 		
 		info("User B back to Home page");
 		hp.goToHomePage();
-		waitForAndGetElement(hpAct.ELEMENT_ACTIVITY_SPACE_MEMBER_NUMBER.replace("${space}",spaceName).replace("${num}", "1"));
+		waitForElementNotPresent(hpAct.ELEMENT_ACTIVITY_SPACE_MEMBER_NUMBER.replace("${space}",spaceName).replace("${num}", "1"));
 		
-		info("last comment is still Join space");
-		waitForAndGetElement(hpAct.ELEMENT_ACTIVITY_SPACE_SPACE_LAST_COMMENT_JOINSPACE.replace("${space}", spaceName));
  	}
 }

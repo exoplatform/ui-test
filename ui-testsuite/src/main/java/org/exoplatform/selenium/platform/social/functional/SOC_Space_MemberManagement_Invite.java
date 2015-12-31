@@ -408,7 +408,7 @@ import org.testng.annotations.*;
 		     magAc.signIn(username1,password);
 		     hp.goToSpecificSpace(space);
 		     spaHome.goToSpaceSettingTab();
-		     setSpaceMg.removeUserFromMemberlist(fullName2);
+		     setSpaceMg.removeUserFromMemberlist(username2);
 	 	}
 
 	/**
@@ -823,7 +823,6 @@ import org.testng.annotations.*;
 		
 		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
 		String email2 = username2+"@gmail.com";
-		String fullName2=username2+" "+username2;
 		
 		info("Add new user");
 		navTool.goToAddUser();
@@ -889,7 +888,7 @@ import org.testng.annotations.*;
 	     hp.goToSpecificSpace(space);
 	     spaHome.goToSpaceSettingTab();
 	     setSpaceMg.goToMemberTab();
-	     setSpaceMg.acceptRequest(fullName2);
+	     setSpaceMg.acceptRequest(username2);
 
  	}
 
@@ -972,7 +971,6 @@ import org.testng.annotations.*;
 		
 		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
 		String email2 = username2+"@gmail.com";
-		String fullName2=username2+" "+username2;
 		
 		info("Add new user");
 		navTool.goToAddUser();
@@ -1032,7 +1030,7 @@ import org.testng.annotations.*;
 	     hp.goToSpecificSpace(space);
 	     spaHome.goToSpaceSettingTab();
 	     setSpaceMg.goToMemberTab();
-	     waitForAndGetElement(setSpaceMg.ELEMENT_SPACE_MEMBERS_TAB_VALIDATE_REQUEST_jOINT.replace("${user}",fullName2),2000,1);
+	     waitForAndGetElement(setSpaceMg.ELEMENT_SPACE_MEMBERS_TAB_VALIDATE_REQUEST_jOINT.replace("${user}",username2),2000,1);
 
  	}
 
@@ -1129,7 +1127,6 @@ import org.testng.annotations.*;
 		
 		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
 		String email2 = username2+"@gmail.com";
-		String fullName2=username2+" "+username2;
 		
 		info("Add new user");
 		navTool.goToAddUser();
@@ -1181,7 +1178,7 @@ import org.testng.annotations.*;
 	     hp.goToSpecificSpace(space);
 	     spaHome.goToSpaceSettingTab();
 	     setSpaceMg.goToMemberTab();
-	     setSpaceMg.acceptRequest(fullName2);
+	     setSpaceMg.acceptRequest(username2);
 
 		/*Step number: 4
 		*Step Name: -
@@ -1216,6 +1213,7 @@ import org.testng.annotations.*;
 		info("Add new user");
 		navTool.goToAddUser();
 		addUserPage.addUser(username1, password, email1, username1, username1);
+		magAc.signIn(username1,password);
 		/*Step Number: 1
 		*Step Name: -
 		*Step Description: 
@@ -1384,7 +1382,6 @@ import org.testng.annotations.*;
 			Sending the invitation successfully. Root automatic become a member of space*/
 		spaHome.goToSpaceSettingTab();
 		setSpaceMg.inviteUser(USER_ROOT,false,"");
-		waitForAndGetElement(spaHome.ELEMENT_SPACE_MENU_WIKI,2000,1);
 
 		/*Step number: 3
 		*Step Name: -
@@ -1897,7 +1894,7 @@ import org.testng.annotations.*;
 	     hp.goToSpecificSpace(space);
 	     spaHome.goToSpaceSettingTab();
 	     setSpaceMg.goToMemberTab();
-	     waitForElementNotPresent(setSpaceMg.ELEMENT_SPACE_INVITED_USER_TABLE.replace("${user}",fullName2),2000,1);
+	     waitForElementNotPresent(setSpaceMg.ELEMENT_SPACE_INVITED_USER_TABLE.replace("${user}",username2),2000,1);
 	     
  	}
 }

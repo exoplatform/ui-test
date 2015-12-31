@@ -801,6 +801,8 @@ import org.testng.annotations.*;
 		navTool.goToAddUser();
 		addUserPage.addUser(username1, password, email1, username1, username1);
 		addUserPage.addUser(username2, password, email2, username2, username2);
+		navTool.goToUsersAndGroupsManagement();
+		userGroupMg.addUserAdmin(username1);
 		magAc.signIn(username1,password);
 		/*Step Number: 1
 		*Step Name: Step 1: Edit name of space

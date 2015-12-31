@@ -168,8 +168,9 @@ public class ActivityStreamLocator extends PlatformBase {
 	public final String ELEMENT_COMMENT_TEXT_QUOTES = "//*[contains(text(),\"${activityText}\")]/../../../..//p[@class='contentComment'  and contains(.,'${commentText}')]";
 	public final String ELEMENT_ACTIVITY_LIKE_ICON_BLUE = ".//*[contains(text(),'${nameFile}')]/../../../..//*[@class='uiIconThumbUp uiIconBlue']";
 	public final String ELEMENT_ACTIVITY_COMMENT_VIEW_HOVEROVER = ".//*[contains(text(),'${comment}')]/../..//*[@class='uiIconWatch uiIconLightGray']";
-	public final String ELEMENT_PUBLICATION_COMMENTPOSTED = ".//*[contains(text(),'$activity')]/..//*[@class='commentList']//*[contains(text(),'${content}')]";
-	public final String ELEMENT_PUBLICATION_COMMENTPOSTED_MENTION = ".//*[contains(text(),'$activity')]/..//*[@class='commentList']//*[contains(@href,'$username')]";
+	
+	public final String ELEMENT_PUBLICATION_COMMENTPOSTED = ".//*[contains(text(),'$activity')]/../../..//*[contains(text(),'${content}')]";
+	public final String ELEMENT_PUBLICATION_COMMENTPOSTED_MENTION = ".//*[contains(text(),'$activity')]/../../..//*[contains(@href,'$username')]";
 	public final String ELEMENT_PUBLICATION_SEEALLCOMMENTBTN = "//*[contains(text(),'${activity}')]/../..//*[contains(@class,'commentListInfo')]//a[@href and contains(text(),'View')]";
 	public final String ELEMENT_PUBLICATION_HIDEALLCOMMENTBTN = "//*[contains(text(),'${activity}')]/../..//*[contains(@class,'commentListInfo')]//a[@href and contains(text(),'Hide')]";
 	public final String ELEMENT_SUGGEST_USER_IN_COMMENT = ".//*[contains(@class,'autocomplete-menu')]//*[contains(@data-ref-id,'${userName}')]";
