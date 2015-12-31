@@ -706,7 +706,7 @@ public class GateinLocator extends PlatformBase {
 	public final String ELEMENT_ADD_BUTTON = "//*[@class='uiAction uiActionBorder']//a[contains(@class,'btn') and contains(text(),'Add')]";
 	public final String ELEMENT_SELECT_MEMBERSHIP = "//*[@class='selectbox' and @name='membership']";
 	public final String ELEMENT_GROUP_REMOVE_ICON = "//*[@data-original-title='Delete Selected Group']/i";
-	public final String ELEMENT_SAVE_BUTTON_2 = "//a[contains(@class,'btn') and contains(text(),'Save')]";
+	public final String ELEMENT_SAVE_BUTTON_2 = ".//*[@id='UIGroupMembershipForm']//*[contains(@class,'btn')]";
 	public final String ELEMENT_MEMBERSHIP_EDIT_ICON = "//span[contains(text(),'${membership}')]/../..//*[contains(@data-original-title,'Edit Membership')]/i";
 	public final String ELEMENT_MEMBERSHIP_DELETE_ICON = "//span[contains(text(),'${membership}')]/../..//*[contains(@data-original-title,'Delete Membership')]/i";
 	public final String ELEMENT_GROUP_ADDED = "//a[@title='${groupLabel}']";
