@@ -126,7 +126,7 @@ public class Plf_TestConfig_1 extends PlatformBase {
 		initSeleniumTest();
 		getDefaultUserPass(userDataFilePath,defaultSheet,isUseFile,jdbcDriver,dbUrl,user,pass,sqlUser);
 		magAc = new ManageLogInOut(driver);
-		magAc.signIn(DATA_USER1, DATA_PASS);
+		magAc.signIn(USER_ROOT,PASS_ROOT);
 		
 		hp = new HomePagePlatform(driver);
 		navToolBar = new NavigationToolbar(driver);
@@ -202,7 +202,7 @@ public class Plf_TestConfig_1 extends PlatformBase {
 	
 	@AfterMethod
 	public void setAfterMethod(){
-		info("Sign out");
+		/*info("Sign out");
 		magAc.signOut();
 		info("Sign in with mary account");
 		magAc.signIn(DATA_USER2, DATA_PASS);
@@ -230,7 +230,7 @@ public class Plf_TestConfig_1 extends PlatformBase {
 		hp.goToConnections();
 		connMg.resetConnection(DATA_USER1);
 		
-		
+		*/
 		info("Start setUpBeforeClass");
 		driver.manage().deleteAllCookies();
 		driver.quit();

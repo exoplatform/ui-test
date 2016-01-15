@@ -28,6 +28,17 @@ public class Plf_GettintStartedGadget extends Plf_TestConfig {
 		info("task4:"+task4);
 		String task5 = tasks.get(4);
 		info("task5:"+task5);
+		/*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+ mailSuffixData.getMailSuffixRandom();
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+ mailSuffixData.getMailSuffixRandom();
+		
+		info("Add user");
+		navToolBar.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		magAc.signIn(username1, password);
 		/*Step Number: 1
 		 *Step Name: Check display of Getting Started Gadget
 		 *Step Description: 
@@ -56,6 +67,17 @@ public class Plf_GettintStartedGadget extends Plf_TestConfig {
 	@Test
 	public  void test02_PerformAnActionOnGettingStartedGadget() {
 		info("Test 2: Perform an action on Getting started Gadget");
+		/*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+ mailSuffixData.getMailSuffixRandom();
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+ mailSuffixData.getMailSuffixRandom();
+		
+		info("Add user");
+		navToolBar.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		magAc.signIn(username1, password);
 		/*Step Number: 1
 		 *Step Name: Connect to intranet home page
 		 *Step Description: 
@@ -81,7 +103,6 @@ public class Plf_GettintStartedGadget extends Plf_TestConfig {
 		click(hp.ELEMENT_HP_GETTINGSTARTED_CONNETTOCOWORKERS);
 		info("Connect to a coworker");
 		click((hp.ELEMENT_HP_GETTINGSTARTED_CONNETTOCOWORKERSBTN).replace("${name}", "James Davis"));
-		magAc.signOut();
 		magAc.signIn(DATA_USER3, DATA_PASS);
 		info("Accept an requested connection");
 		hp.goToConnections();
@@ -101,6 +122,17 @@ public class Plf_GettintStartedGadget extends Plf_TestConfig {
 	@Test
 	public  void test03_CheckDirectionWhenPerformingAnAction() {
 		info("Test 3: Check direction when performing an action");
+		/*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+ mailSuffixData.getMailSuffixRandom();
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+ mailSuffixData.getMailSuffixRandom();
+		
+		info("Add user");
+		navToolBar.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		magAc.signIn(username1, password);
 		/*Step Number: 1
 		 *Step Name: Connect to intranet home page
 		 *Step Description: 
@@ -191,6 +223,17 @@ public class Plf_GettintStartedGadget extends Plf_TestConfig {
 		String path = "Winter.jpg";
 		String text = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		String spacename = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+		/*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+ mailSuffixData.getMailSuffixRandom();
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+ mailSuffixData.getMailSuffixRandom();
+		
+		info("Add user");
+		navToolBar.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		magAc.signIn(username1, password);
 		
 		/*Step Number: 1
 		 *Step Name: Connect to intranet home page
@@ -238,6 +281,17 @@ public class Plf_GettintStartedGadget extends Plf_TestConfig {
 	@Test
 	public  void test05_RemoveGettingStartedGadget() {
 		info("Test 05: Remove Getting Started gadget");
+		/*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+ mailSuffixData.getMailSuffixRandom();
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+ mailSuffixData.getMailSuffixRandom();
+		
+		info("Add user");
+		navToolBar.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		magAc.signIn(username1, password);
 		/*Step Number: 1
 		 *Step Name: Connect to intranet home page
 		 *Step Description: 

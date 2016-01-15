@@ -17,6 +17,14 @@ public class Plf_Integration extends Plf_TestConfig  {
 	@Test
 	public  void test01_CheckHomePage() {
 		info("Test 1: Check Home page");
+		/*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+ mailSuffixData.getMailSuffixRandom();
+		
+		info("Add user");
+		navToolBar.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		magAc.signIn(username1, password);
 		/*Step Number: 1
 		 *Step Name: Step 1: Show Intranet Home page
 		 *Step Description: 
@@ -26,11 +34,11 @@ public class Plf_Integration extends Plf_TestConfig  {
 		 *Expected Outcome: 
 			Home page is show properly, inlcuding activity stream at the center, gadgets that are well displayed at the right*/ 
 		info("Verify that Home page is shown");
-		waitForAndGetElement(hp.ELEMENT_PLF_HOMEPAGE_DISPLAY,3000,0);
+		waitForAndGetElement(hp.ELEMENT_PLF_HOMEPAGE_DISPLAY,3000,1);
 		info("Verify that Activity stream is shown on the home page");
-		waitForAndGetElement(hp.ELEMENT_PLF_HOMEPAGE_ACTIVITY_PORTLET,3000,0);
+		waitForAndGetElement(hp.ELEMENT_PLF_HOMEPAGE_ACTIVITY_PORTLET,3000,1);
 		info("Verify that Gadgets is shown on right of the page");
-		waitForAndGetElement(hp.ELEMENT_PLF_HOMEPAGE_GADGET_PORTLET,3000,0);
+		waitForAndGetElement(hp.ELEMENT_PLF_HOMEPAGE_GADGET_PORTLET,3000,1);
 	}
 
 	/**
@@ -42,6 +50,16 @@ public class Plf_Integration extends Plf_TestConfig  {
 	@Test
 	public  void test02_CheckIDE() {
 		info("Test 2: Check IDE");
+		/*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+ mailSuffixData.getMailSuffixRandom();
+		
+		info("Add user");
+		navToolBar.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		userAndGroup.addUserAdmin(username1,"");
+		userAndGroup.addUserContentManagement(username1, "");
+		magAc.signIn(username1, password);
 		/*Step Number: 1
 		 *Step Name: Step 1: Check IDE page
 		 *Step Description: 
@@ -56,7 +74,7 @@ public class Plf_Integration extends Plf_TestConfig  {
 		navToolBar.goToIDE();
 		info("Verify that IDE page is shown");
 		waitForAndGetElement(ide.ELEMENT_PLF_IDE_DISPLAY);
-		waitForAndGetElement(ide.ELEMENT_PLF_IDE_WORKSPACE,3000,0);
+		waitForAndGetElement(ide.ELEMENT_PLF_IDE_WORKSPACE,3000,1);
 		/*Step number: 2
 		 *Step Name: Step 2: Check showing IDE page
 		 *Step Description: 
@@ -66,7 +84,7 @@ public class Plf_Integration extends Plf_TestConfig  {
 		 *Expected Outcome: 
 			IDE page is shown correctly, dev-monit workspace is selected as default*/ 
 		info("Verify that dev-monit workspace is shown as default");
-		waitForAndGetElement(ide.ELEMENT_PLF_IDE_FOLDER,3000,0);
+		waitForAndGetElement(ide.ELEMENT_PLF_IDE_FOLDER,3000,1);
 		
 	}
 
@@ -88,6 +106,16 @@ public class Plf_Integration extends Plf_TestConfig  {
 		int index1 = appGateData.getRandomIndexByType(3);
 		String titleApp = appGateData.newTitle.get(index1);
 		String nameGatein = appGateData.newName.get(index1);
+		/*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+ mailSuffixData.getMailSuffixRandom();
+		
+		info("Add user");
+		navToolBar.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		userAndGroup.addUserAdmin(username1,"");
+		userAndGroup.addUserContentManagement(username1, "");
+		magAc.signIn(username1, password);
 		
 		/*Step Number: 1
 		 *Step Name: Step 1: Open applications page
@@ -172,22 +200,5 @@ public class Plf_Integration extends Plf_TestConfig  {
  		 waitForAndGetElement(pagCW.ELEMENT_PAGEEDITOR_CONTENT.replace("${name}", titleApp));
  		 click(pagCW.ELEMENT_PAGE_ABORT_BTN);
  		 
- 		 info("Delete node on navigation");
- 		 navToolBar.goToPotalSites();
-		 magSite.goToEditNavigation("intranet");
-		 navMag.deleteNode(page);
-		 
-		 info("Delete created page");
-		 navToolBar.goToPotalPages();
-		 pagMang.deletePage(page,"");
-			
- 		 info("Delete Gadget");
-		 navToolBar.goToApplication();
-		 appHP.goToGadgetPage();
-		 gadMag.deleteGadget(title);
-		 
-		 info("Delete application");
-		 appHP.goToManageApplication();
-		 appHP.deleteApplication(titleApp);
 	  }
 	}

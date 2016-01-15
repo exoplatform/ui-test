@@ -20,6 +20,17 @@ public class Plf_HomepageGadget_InvitationGadget extends Plf_TestConfig{
 	@Test
 	public void test01_NotShowInvitationGadget(){
 		info("Test 01: Not show Invitation gadget");
+		/*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+ mailSuffixData.getMailSuffixRandom();
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+ mailSuffixData.getMailSuffixRandom();
+		
+		info("Add user");
+		navToolBar.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		magAc.signIn(username1, password);
 		/*Step Number: 1
 		 *Step Name: - Check if no invitation
 		 *Step Description: 
@@ -41,6 +52,7 @@ public class Plf_HomepageGadget_InvitationGadget extends Plf_TestConfig{
 	 */
 	@Test
 	public void test02_CheckDisplayInvitationGadget(){
+		
 		info("prepare data");
 		/*Step Number: 1
 		 *Step Name: Check display gadget
@@ -61,54 +73,54 @@ public class Plf_HomepageGadget_InvitationGadget extends Plf_TestConfig{
 		String space2=txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		String space3=txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
-		String password1 = username1;
 		String email1 = username1 + mailSuffixData.getMailSuffixRandom();
 
 		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
-		String password2 = username2;
 		String email2= username2 + mailSuffixData.getMailSuffixRandom();
 
 		String username3 = txData.getContentByArrayTypeRandom(4) + getRandomString();
-		String password3 = username3;
 		String email3= username3 + mailSuffixData.getMailSuffixRandom();
+		
+		String username4 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email4= username4 + mailSuffixData.getMailSuffixRandom();
 
 		/*Create data test*/
 		info("Add new user");
-		magAc.signIn(DATA_USER1, DATA_PASS);
 		navToolBar.goToAddUser();
-		addUserPage.addUser(username1, password1, email1, username1, username1);
-		addUserPage.addUser(username2, password2, email2, username2, username2);
-		addUserPage.addUser(username3, password3, email3, username3, username3);
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		addUserPage.addUser(username3, password, email3, username3, username3);
+		addUserPage.addUser(username4, password, email4, username4, username4);
 
 		info("--Send request 2 to John");
 		info("Sign in with username1 account");
-		magAc.signIn(username1, password1);
+		magAc.signIn(username1, password);
 		hp.goToConnections();
-		connMg.connectToAUser(DATA_USER1);
+		connMg.connectToAUser(username4);
 		hp.goToMySpaces();
 		spaceMg.addNewSpaceSimple(space1,space1);
 		spaceHome.goToSpaceSettingTab();
 		setMag.inviteUser(DATA_USER1,false,"");
 
 		info("Sign in with username2 account");
-		magAc.signIn(username2, password2);
+		magAc.signIn(username2, password);
 		hp.goToConnections();
-		connMg.connectToAUser(DATA_USER1);
+		connMg.connectToAUser(username4);
 		hp.goToMySpaces();
 		spaceMg.addNewSpaceSimple(space2,space2);
 		spaceHome.goToSpaceSettingTab();
 		setMag.inviteUser(DATA_USER1,false,"");
 
 		info("Sign in with username3 account");
-		magAc.signIn(username3, password3);
+		magAc.signIn(username3, password);
 		hp.goToConnections();
-		connMg.connectToAUser(DATA_USER1);
+		connMg.connectToAUser(username4);
 		hp.goToMySpaces();
 		spaceMg.addNewSpaceSimple(space3,space3);
 		spaceHome.goToSpaceSettingTab();
-		setMag.inviteUser(DATA_USER1,false,"");
+		setMag.inviteUser(username4,false,"");
 
-		magAc.signIn(DATA_USER1, DATA_PASS);
+		magAc.signIn(username4,password);
 		info("Verify that the maximum number of displayed requests is 4");
 		info("Verify that for user request, the portlet will displayes the profile picture of the user, his name");
 		waitForAndGetElement(hp.ELEMENT_INVITATIONS_PEOPLE_AVATAR .replace("${name}",username3));
@@ -123,27 +135,22 @@ public class Plf_HomepageGadget_InvitationGadget extends Plf_TestConfig{
 		waitForAndGetElement(hp.ELEMENT_INVITAITONS_SPACE_STATUS_MEMBERS.replace("${name}",space3).replace("${statusMember}","Private Space - 1 Members"));
 
 		info("Verify that The title of the gadget will show the total number of requests received which is 5");
-		waitForAndGetElement(By.xpath(hp.ELEMENT_INVITATIONS_NUMBER.replace("${number}", "6")),2000,0);
+		waitForAndGetElement(By.xpath(hp.ELEMENT_INVITATIONS_NUMBER.replace("${number}", "6")),2000,1);
 
 		info("Delete DATA for the last test");
 		info("Signin with james account");
-		magAc.signIn(username1, password1);
+		magAc.signIn(username1, password);
 		hp.goToMySpaces();
 		spaceMg.deleteSpace(space1, false);
 
-		magAc.signIn(username2, password2);
+		magAc.signIn(username2, password);
 		hp.goToMySpaces();
 		spaceMg.deleteSpace(space2, false);
 
-		magAc.signIn(username3, password3);
+		magAc.signIn(username3, password);
 		hp.goToMySpaces();
 		spaceMg.deleteSpace(space3, false);
 
-		magAc.signIn(DATA_USER1, DATA_PASS);
-		navToolBar.goToUsersAndGroupsManagement();
-		userAndGroup.deleteUser(username1);
-		userAndGroup.deleteUser(username2);
-		userAndGroup.deleteUser(username3);
 	}
 	/**
 	 *<li> Case ID:120855.</li>
@@ -158,18 +165,19 @@ public class Plf_HomepageGadget_InvitationGadget extends Plf_TestConfig{
 		info("prepare data");
 		/*Create data test*/
 		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
-		String password1 = username1;
 		String email1 = username1 + mailSuffixData.getMailSuffixRandom();
 
 		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
-		String password2 = username2;
 		String email2= username2 + mailSuffixData.getMailSuffixRandom();
+		
+		String username3 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email3= username2 + mailSuffixData.getMailSuffixRandom();
 
 		info("Add new user");
-		magAc.signIn(DATA_USER1, DATA_PASS);
 		navToolBar.goToAddUser();
-		addUserPage.addUser(username1, password1, email1, username1, username1);
-		addUserPage.addUser(username2, password2, email2, username2, username2);
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		addUserPage.addUser(username3, password, email3, username3, username3);
 
 		/*Step Number: 1
 		 *Step Name: Accept a request
@@ -185,26 +193,21 @@ public class Plf_HomepageGadget_InvitationGadget extends Plf_TestConfig{
 			- John is connected to mary and the invitation fades out and is permanently removed from the list
 			- Request of root are moving to the top of the gadget if needed*/ 
 		info("Sign in with mary account");
-		magAc.signIn(username1, password1);
+		magAc.signIn(username1, password);
 		hp.goToConnections();
-		connMg.connectToAUser(DATA_USER1);
+		connMg.connectToAUser(username3);
 
 		info("--Send request 2 to John");
-		magAc.signIn(username2, password2);
+		magAc.signIn(username2, password);
 		hp.goToConnections();
-		connMg.connectToAUser(DATA_USER1);
+		connMg.connectToAUser(username3);
 
-		magAc.signIn(DATA_USER1, DATA_PASS);
+		magAc.signIn(username3,password);
 		mouseOver(hp.ELEMENT_INVITATIONS_PEOPLE_AVATAR .replace("${name}",username2),true);
 		click(hp.ELEMENT_INVITATIONS_PEOPLE_ACCEPT_BTN.replace("${name}",username2), 2,true);
 		waitForElementNotPresent(hp.ELEMENT_INVITATIONS_PEOPLE_AVATAR .replace("${name}",username2));
 		waitForAndGetElement(hp.ELEMENT_INVITATIONS_PEOPLE_AVATAR .replace("${name}",username1));
 
-		info("Clear Data");
-		magAc.signIn(DATA_USER1, DATA_PASS);
-		navToolBar.goToUsersAndGroupsManagement();
-		userAndGroup.deleteUser(username1);
-		userAndGroup.deleteUser(username2);
 	}
 
 	/**
@@ -219,19 +222,20 @@ public class Plf_HomepageGadget_InvitationGadget extends Plf_TestConfig{
 		info("prepare data");
 		/*Create data test*/
 		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
-		String password1 = username1;
 		String email1 = username1 + mailSuffixData.getMailSuffixRandom();
 
 		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
-		String password2 = username2;
 		String email2= username2 + mailSuffixData.getMailSuffixRandom();
+		
+		String username3 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email3= username3 + mailSuffixData.getMailSuffixRandom();
 
 		info("Add new user");
-		magAc.signIn(DATA_USER1, DATA_PASS);
 		navToolBar.goToAddUser();
-		addUserPage.addUser(username1, password1, email1, username1, username1);
-		addUserPage.addUser(username2, password2, email2, username2, username2);
-
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		addUserPage.addUser(username3, password, email3, username3, username3);
+		magAc.signIn(username1, password);
 		//createRequestsConnections();
 		/*Step Number: 1
 		 *Step Name: Refuse a request
@@ -248,27 +252,20 @@ public class Plf_HomepageGadget_InvitationGadget extends Plf_TestConfig{
 			- The invitation of jack fades out and is permanently removed from the list
 			- Requests of James is moved to the top of the gadget*/
 		info("Sign in with mary account");
-		magAc.signIn(username1, password1);
+		magAc.signIn(username1, password);
 		hp.goToConnections();
-		connMg.connectToAUser(DATA_USER1);
+		connMg.connectToAUser(username3);
 
 		info("--Send request 2 to John");
-		magAc.signIn(username2, password2);
+		magAc.signIn(username2, password);
 		hp.goToConnections();
-		connMg.connectToAUser(DATA_USER1);
+		connMg.connectToAUser(username3);
 
 		info("Sign in with john account");
-		magAc.signIn(DATA_USER1, DATA_PASS);
 		mouseOver(hp.ELEMENT_INVITATIONS_PEOPLE_AVATAR .replace("${name}",username2),true);
 		Utils.pause(2000);
 		click(hp.ELEMENT_INVITATIONS_PEOPLE_REFUSE_BTN.replace("${name}",username2), 2,true);
 		waitForElementNotPresent(hp.ELEMENT_INVITATIONS_PEOPLE_AVATAR .replace("${name}",username2));
 		waitForAndGetElement(hp.ELEMENT_INVITATIONS_PEOPLE_AVATAR .replace("${name}",username1));
-
-		info("Clear Data");
-		magAc.signIn(DATA_USER1, DATA_PASS);
-		navToolBar.goToUsersAndGroupsManagement();
-		userAndGroup.deleteUser(username1);
-		userAndGroup.deleteUser(username2);
 	}
 }

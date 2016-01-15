@@ -15,6 +15,17 @@ public class Plf_CalendarGadget extends Plf_TestConfig {
 	@Test
 	public  void test01_SwitchBetweenDays() {
 		info("Test 1: Switch between days");
+		/*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+ mailSuffixData.getMailSuffixRandom();
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+ mailSuffixData.getMailSuffixRandom();
+		
+		info("Add user");
+		navToolBar.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		magAc.signIn(username1, password);
 		/*Step Number: 1
 		 *Step Name: Connect to intranet home page
 		 *Step Description: 
@@ -62,6 +73,17 @@ public class Plf_CalendarGadget extends Plf_TestConfig {
 	@Test
 	public  void test02_ConfigureCalendarGadget() {
 		info("Test 2: Configure calendar gadget");
+		/*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+ mailSuffixData.getMailSuffixRandom();
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+ mailSuffixData.getMailSuffixRandom();
+		
+		info("Add user");
+		navToolBar.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		magAc.signIn(username1, password);
 		/*Step Number: 1
 		 *Step Name: -Go into gadget's settings
 		 *Step Description: 
@@ -99,6 +121,17 @@ public class Plf_CalendarGadget extends Plf_TestConfig {
 	@Test
 	public  void test03_04_DeleteAddACalendarToTheListOfFollowedCalendars() {
 		info("Test 3: Add a calendar to the list of followed calendars");
+		/*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+ mailSuffixData.getMailSuffixRandom();
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+ mailSuffixData.getMailSuffixRandom();
+		
+		info("Add user");
+		navToolBar.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		magAc.signIn(username1, password);
 		/*Step Number: 1
 		 *Step Name: -Go into gadget's settings
 		 *Step Description: 
@@ -160,6 +193,17 @@ public class Plf_CalendarGadget extends Plf_TestConfig {
 	@Test
 	public  void test05_FilterCalendarsInSettings() {
 		info("Test 5: Filter calendars in settings");
+		/*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+ mailSuffixData.getMailSuffixRandom();
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+ mailSuffixData.getMailSuffixRandom();
+		
+		info("Add user");
+		navToolBar.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		magAc.signIn(username1, password);
 		/*Step Number: 1
 		 *Step Name: -Go into gadget's settings
 		 *Step Description: 

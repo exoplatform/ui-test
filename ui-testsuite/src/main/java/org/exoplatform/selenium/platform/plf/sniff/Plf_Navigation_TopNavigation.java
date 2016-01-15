@@ -23,6 +23,16 @@ import org.testng.annotations.*;
 	@Test
 	public  void test01_CreateANewWikiPageViaTheTopNavigation() {
 		info("Test 1: Create a new Wiki page via the top navigation");
+		/*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+ mailSuffixData.getMailSuffixRandom();
+		
+		info("Add user");
+		navToolBar.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		userAndGroup.addUserAdmin(username1,"");
+		userAndGroup.addUserContentManagement(username1, "");
+		magAc.signIn(username1, password);
 		/*Step Number: 1
 		*Step Name: Connect to intranet
 		*Step Description: 
@@ -63,6 +73,21 @@ import org.testng.annotations.*;
 		String num = getRandomNumber();
 		String category = txData.getContentByArrayTypeRandom(1)+num ;
 		String forum = txData.getContentByArrayTypeRandom(1)+num ;
+		/*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+ mailSuffixData.getMailSuffixRandom();
+		
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+ mailSuffixData.getMailSuffixRandom();
+		
+		info("Add user");
+		navToolBar.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		userAndGroup.addUserAdmin(username1,"");
+		userAndGroup.addUserContentManagement(username1, "");
+		userAndGroup.addUserContentManagement(username2, "");
+		magAc.signIn(username1, password);
 		
 		hp.goToForum();
 		info("Add a category");
@@ -79,15 +104,10 @@ import org.testng.annotations.*;
 			- Connect to Intranet
 		*Input Data: 
 			- The Top Navigation bar is displayed*/
-		magAc.signIn(DATA_USER2, DATA_PASS);
+		magAc.signIn(username2,password);
 		navToolBar.goToAddPoll("",forum);
 		info("Verify that the poll popup is shown");
-		waitForAndGetElement(foTopic.ELEMENT_POLL_SUBMIT,3000,0);
-		info("Delete data");
-		magAc.signOut();
-		magAc.signIn(DATA_USER1, DATA_PASS);
-		hp.goToForum();
-		forumCatMag.deleteCategory(category);
+		waitForAndGetElement(foTopic.ELEMENT_POLL_SUBMIT,3000,1);
 		/*Step number: 2
 		*Step Name: Open poll application
 		*Step Description: 
@@ -113,10 +133,25 @@ import org.testng.annotations.*;
 		String num = getRandomNumber();
 		String category = txData.getContentByArrayTypeRandom(1)+num ;
 		String forum = txData.getContentByArrayTypeRandom(1)+num ;
+		/*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+ mailSuffixData.getMailSuffixRandom();
+		
+		String username2 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email2 = username2+ mailSuffixData.getMailSuffixRandom();
+		
+		info("Add user");
+		navToolBar.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		addUserPage.addUser(username2, password, email2, username2, username2);
+		userAndGroup.addUserAdmin(username1,"");
+		userAndGroup.addUserContentManagement(username1, "");
+		userAndGroup.addUserContentManagement(username2, "");
+		magAc.signIn(username1, password);
 		
 		hp.goToForum();
 		info("Verify that the forum home page is shown full");
-		waitForAndGetElement(forumHP.ELEMENT_FORUM_WHAT_GOING_ON,3000,0);
+		waitForAndGetElement(forumHP.ELEMENT_FORUM_WHAT_GOING_ON,3000,1);
 		
 		info("Add a category");
 		forumCatMag.addCategorySimple(category,"",category);
@@ -132,8 +167,7 @@ import org.testng.annotations.*;
 			
 		*Expected Outcome: 
 			- The Top Navigation bar is displayed*/
-		magAc.signOut();
-		magAc.signIn(DATA_USER3, DATA_PASS);
+		magAc.signIn(username2,password);
 		
 		/*Step number: 2
 		*Step Name: - Open Topic application
@@ -148,13 +182,7 @@ import org.testng.annotations.*;
 			- A new Post editor is opened*/ 
 		navToolBar.goToAddTopic("",forum);
 		info("Verify that the topic is shown");
-		waitForAndGetElement(forumMg.ELEMENT_START_TOPIC_POPUP_TITLE,3000,0);
-		info("Delete data");
-		magAc.signOut();
-		magAc.signIn(DATA_USER1, DATA_PASS);
-		hp.goToForum();
-		forumCatMag.deleteCategory(category);
-		
+		waitForAndGetElement(forumMg.ELEMENT_START_TOPIC_POPUP_TITLE,3000,1);
  	}
 
 	/**
@@ -165,6 +193,16 @@ import org.testng.annotations.*;
 	public  void test04_CreateANewEventViaTheTopNavigation() {
 		info("Test 4: Create a new Event via the top navigation");
 		String name = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+		/*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+ mailSuffixData.getMailSuffixRandom();
+		
+		info("Add user");
+		navToolBar.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		userAndGroup.addUserAdmin(username1,"");
+		userAndGroup.addUserContentManagement(username1, "");
+		magAc.signIn(username1, password);
 		/*Step Number: 1
 		*Step Name: - Connect to intranet
 		*Step Description: 
@@ -212,6 +250,16 @@ import org.testng.annotations.*;
 	public  void test05_CreateANewTaskViaTheTopNavigation() {
 		info("Test 5: Create a new Task via the top navigation");
 		String name = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+		/*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+ mailSuffixData.getMailSuffixRandom();
+		
+		info("Add user");
+		navToolBar.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		userAndGroup.addUserAdmin(username1,"");
+		userAndGroup.addUserContentManagement(username1, "");
+		magAc.signIn(username1, password);
 		/*Step Number: 1
 		*Step Name: - Connect to intranet
 		*Step Description: 
@@ -257,6 +305,16 @@ import org.testng.annotations.*;
 	@Test
 	public  void test06_UploadANewFileViaTheTopNavigation() {
 		info("Test 6: Upload a new file via the top navigation");
+		/*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+ mailSuffixData.getMailSuffixRandom();
+		
+		info("Add user");
+		navToolBar.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		userAndGroup.addUserAdmin(username1,"");
+		userAndGroup.addUserContentManagement(username1, "");
+		magAc.signIn(username1, password);
 		// -------------------------------------------------- voir SITE EXPLORER HOME LINE 854 ---------------------------------------------------------
 		/*Step Number: 1
 		*Step Name: Connect to intranet
@@ -292,6 +350,16 @@ import org.testng.annotations.*;
 	@Test
 	public  void test07_OpenUserGuide() {
 		info("Test 7: Open user guide");
+		/*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+ mailSuffixData.getMailSuffixRandom();
+		
+		info("Add user");
+		navToolBar.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		userAndGroup.addUserAdmin(username1,"");
+		userAndGroup.addUserContentManagement(username1, "");
+		magAc.signIn(username1, password);
 		/*Step Number: 1
 		*Step Name: Connect to intranet
 		*Step Description: 

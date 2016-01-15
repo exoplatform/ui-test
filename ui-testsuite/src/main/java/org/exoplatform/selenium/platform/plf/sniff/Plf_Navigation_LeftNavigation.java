@@ -18,6 +18,14 @@ public class Plf_Navigation_LeftNavigation extends Plf_TestConfig{
 	@Test
 	public  void test01_ShowApplicationsInCOMPANYList() {
 		info("Test 1: Show applications in COMPANY list");
+		/*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+ mailSuffixData.getMailSuffixRandom();
+		
+		info("Add user");
+		navToolBar.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		magAc.signIn(username1, password);
 		/*Step Number: 1
 		 *Step Name: - Connect to Intranet
 		 *Step Description: 
@@ -29,11 +37,11 @@ public class Plf_Navigation_LeftNavigation extends Plf_TestConfig{
 			- The left Navigation is displayed
 			- The "COMPANY" list is displayed with applications in the following order:* Home* Connections* Wiki* Documents* Forums* Calendar* Other personal pages*/ 
 		info("Verify expected outcome");
-		waitForAndGetElement(hp.ELEMENT_FORUM_LINK_PLF,3000,0);
-		waitForAndGetElement(hp.ELEMENT_WIKI_LINK_PLF,3000,0);
-		waitForAndGetElement(hp.ELEMENT_HOME_LINK_PLF,3000,0);
-		waitForAndGetElement(hp.ELEMENT_CALENDAR_LINK_PLF,3000,0);
-		waitForAndGetElement(hp.ELEMENT_CONNECTIONS_LINK_PLF,3000,0);
+		waitForAndGetElement(hp.ELEMENT_FORUM_LINK_PLF,3000,1);
+		waitForAndGetElement(hp.ELEMENT_WIKI_LINK_PLF,3000,1);
+		waitForAndGetElement(hp.ELEMENT_HOME_LINK_PLF,3000,1);
+		waitForAndGetElement(hp.ELEMENT_CALENDAR_LINK_PLF,3000,1);
+		waitForAndGetElement(hp.ELEMENT_CONNECTIONS_LINK_PLF,3000,1);
 
 	}
 
@@ -46,6 +54,16 @@ public class Plf_Navigation_LeftNavigation extends Plf_TestConfig{
 		info("Test 2: Display Subnavigations in Group Navigation panel");
 		String title= txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		String title2= txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+		/*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+ mailSuffixData.getMailSuffixRandom();
+		
+		info("Add user");
+		navToolBar.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		userAndGroup.addUserAdmin(username1,"");
+		userAndGroup.addUserContentManagement(username1, "");
+		magAc.signIn(username1, password);
 		/*Step Number: 1
 		 *Step Name: Add a node to group navigation
 		 *Step Description: 
@@ -65,7 +83,7 @@ public class Plf_Navigation_LeftNavigation extends Plf_TestConfig{
 		navMag.addNode(title,"");
 		navMag.saveNode();
 		info("Verify that the node is added");
-		waitForAndGetElement(hp.ELEMENT_LEFT_PANEL.replace("{$name}",title),3000,0);
+		waitForAndGetElement(hp.ELEMENT_LEFT_PANEL.replace("{$name}",title),3000,1);
 
 		/*Step number: 2
 		 *Step Name: Add sub
@@ -82,7 +100,7 @@ public class Plf_Navigation_LeftNavigation extends Plf_TestConfig{
 		navMag.saveNode();
 		magSite.goToEditNavigation("intranet");
 		click(navMag.ELEMENT_NAVIGATION_SUB_NODE_CHECK.replace("{$node}",title));
-		waitForAndGetElement(navMag.ELEMENT_NAVIGATION_SUB_NODE_CHECK.replace("{$node}",title2),3000,0);
+		waitForAndGetElement(navMag.ELEMENT_NAVIGATION_SUB_NODE_CHECK.replace("{$node}",title2),3000,1);
 		navMag.closeNavigationManagementPopup();
 
 	}
@@ -94,6 +112,14 @@ public class Plf_Navigation_LeftNavigation extends Plf_TestConfig{
 	@Test
 	public  void test03_OpenASpace() {
 		info("Test 3: Open a Space");
+		/*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+ mailSuffixData.getMailSuffixRandom();
+		
+		info("Add user");
+		navToolBar.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		magAc.signIn(username1, password);
 		/*Step Number: 1
 		 *Step Name: Connect to intranet
 		 *Step Description: 
@@ -133,6 +159,16 @@ public class Plf_Navigation_LeftNavigation extends Plf_TestConfig{
 		info("Test 4: Display list of spaces ordered by the last browsed");
 		String space1= txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		String space2= txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+		
+		/*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+ mailSuffixData.getMailSuffixRandom();
+		
+		info("Add user");
+		navToolBar.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		magAc.signIn(username1, password);
+		
 		info("Create space 1");
 		hp.goToMySpaces();
 		spaceMg.addNewSpaceSimple(space1, space1);
@@ -191,7 +227,14 @@ public class Plf_Navigation_LeftNavigation extends Plf_TestConfig{
 		String space1= "abc"+getRandomNumber();
 		String space2= "ahd"+getRandomNumber();
 
-
+		/*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+ mailSuffixData.getMailSuffixRandom();
+		
+		info("Add user");
+		navToolBar.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		magAc.signIn(username1, password);
 		hp.goToMySpaces();
 		spaceMg.addNewSpaceSimple(space1, space1);
 
@@ -219,14 +262,14 @@ public class Plf_Navigation_LeftNavigation extends Plf_TestConfig{
 		 *Expected Outcome: 
 			- All spaces having a word containing with the inputed letter are displayed*/
 		type(hp.ELEMENT_SEARCH_SPACE,"a",false);
-		waitForAndGetElement(hp.ELEMENT_RESULT_SEARCH_SPACE.replace("{$space}", space1),3000,0);
-		waitForAndGetElement(hp.ELEMENT_RESULT_SEARCH_SPACE.replace("{$space}", space2),3000,0);
+		waitForAndGetElement(hp.ELEMENT_RESULT_SEARCH_SPACE.replace("{$space}", space1),3000,1);
+		waitForAndGetElement(hp.ELEMENT_RESULT_SEARCH_SPACE.replace("{$space}", space2),3000,1);
 
 		hp.goToHomePage();
 
 		type(hp.ELEMENT_SEARCH_SPACE,"ah",false);
-		waitForAndGetElement(hp.ELEMENT_RESULT_SEARCH_SPACE.replace("{$space}", space2),3000,0);
-		waitForElementNotPresent(hp.ELEMENT_RESULT_SEARCH_SPACE.replace("{$space}", space1),3000,0);
+		waitForAndGetElement(hp.ELEMENT_RESULT_SEARCH_SPACE.replace("{$space}", space2),3000,1);
+		waitForElementNotPresent(hp.ELEMENT_RESULT_SEARCH_SPACE.replace("{$space}", space1),3000,1);
 		/*Step number: 3
 		 *Step Name: Search by inputting two letters
 		 *Step Description: 
@@ -235,10 +278,6 @@ public class Plf_Navigation_LeftNavigation extends Plf_TestConfig{
 
 		 *Expected Outcome: 
 			- Only spaces containing "ab" are displayed*/ 
-		info("Delete spaces");
-		hp.goToMySpaces();
-		spaceMg.deleteSpace(space1, false);
-		spaceMg.deleteSpace(space2, false);
 	}
 
 	/**
@@ -252,6 +291,16 @@ public class Plf_Navigation_LeftNavigation extends Plf_TestConfig{
 	@Test
 	public  void test06_DisplayLeftNavigationForSocialIntranet() {
 		info("Test 6: Display Left Navigation for Social Intranet");
+		/*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+ mailSuffixData.getMailSuffixRandom();
+		
+		info("Add user");
+		navToolBar.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		userAndGroup.addUserAdmin(username1,"");
+		userAndGroup.addUserContentManagement(username1, "");
+		magAc.signIn(username1, password);
 		/*Step Number: 1
 		 *Step Name: Step 1: Check Left navigation
 		 *Step Description: 

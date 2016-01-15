@@ -133,7 +133,7 @@ public class Plf_TestConfig_2 extends PlatformBase {
 		initSeleniumTest();
 		getDefaultUserPass(userDataFilePath,defaultSheet,isUseFile,jdbcDriver,dbUrl,user,pass,sqlUser);
 		magAc = new ManageLogInOut(driver);
-		magAc.signIn(DATA_USER1, DATA_PASS);
+		magAc.signIn(USER_ROOT,PASS_ROOT);
 		
 		hp = new HomePagePlatform(driver);
 		navToolBar = new NavigationToolbar(driver);

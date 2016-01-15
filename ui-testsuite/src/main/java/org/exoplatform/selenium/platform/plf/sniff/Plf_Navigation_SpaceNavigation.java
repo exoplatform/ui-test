@@ -21,6 +21,14 @@ import org.testng.annotations.*;
 	@Test
 	public  void test01_ShowTheSpaceMenu(){
 		info("Test 1: Show the space menu");
+		/*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+ mailSuffixData.getMailSuffixRandom();
+		
+		info("Add user");
+		navToolBar.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		magAc.signIn(username1, password);
 		String space1= txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		hp.goToMySpaces();
 		spaceMg.addNewSpaceSimple(space1, space1);
@@ -38,17 +46,13 @@ import org.testng.annotations.*;
 			- All applications dedicated to the space are shown on space menu
 			- Click on each applications, the application will show up in the main page*/ 
 		info("Verify the expected outcome");
-		waitForAndGetElement(spaceHome.ELEMENT_SPACE_MENU_ACTIVITY_STREAM,3000,0);
-		waitForAndGetElement(spaceHome.ELEMENT_SPACE_MENU_AGENDA,3000,0);
-		waitForAndGetElement(spaceHome.ELEMENT_SPACE_MENU_WIKI,3000,0);
-		waitForAndGetElement(spaceHome.ELEMENT_SPACE_MENU_DOCUMENTS,3000,0);
-		waitForAndGetElement(spaceHome.ELEMENT_SPACE_MENU_SETTINGS,3000,0);
-		waitForAndGetElement(spaceHome.ELEMENT_SPACE_MENU_ANSWER,3000,0);
-		waitForAndGetElement(spaceHome.ELEMENT_SPACE_MENU_FORUMS,3000);
-		
-		info("Delete the space");
-		hp.goToMySpaces();
-		spaceMg.deleteSpace(space1, false);
+		waitForAndGetElement(spaceHome.ELEMENT_SPACE_MENU_ACTIVITY_STREAM,3000,1);
+		waitForAndGetElement(spaceHome.ELEMENT_SPACE_MENU_AGENDA,3000,1);
+		waitForAndGetElement(spaceHome.ELEMENT_SPACE_MENU_WIKI,3000,1);
+		waitForAndGetElement(spaceHome.ELEMENT_SPACE_MENU_DOCUMENTS,3000,1);
+		waitForAndGetElement(spaceHome.ELEMENT_SPACE_MENU_SETTINGS,3000,1);
+		waitForAndGetElement(spaceHome.ELEMENT_SPACE_MENU_ANSWER,3000,1);
+		waitForAndGetElement(spaceHome.ELEMENT_SPACE_MENU_FORUMS,3000,1);
 		
  	}
 	
@@ -62,6 +66,16 @@ import org.testng.annotations.*;
 		info("app:"+app);
 		String category = spAppData.newCategory.get(index);
 		info("cate:"+category);
+		
+		/*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+ mailSuffixData.getMailSuffixRandom();
+		
+		info("Add user");
+		navToolBar.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		magAc.signIn(username1, password);
+		
 		hp.goToMySpaces();
 		spaceMg.addNewSpaceSimple(space1, space1);
 		
@@ -80,14 +94,11 @@ import org.testng.annotations.*;
 		setMag.addApplication(category,app);
 		
 		info("Verify that Application is added to space");
-		waitForAndGetElement(setMag.ELEMENT_APPLICATION_TAB_APPLICATION_LIST_CONTENT.replace("${app}",app),3000,0);
+		waitForAndGetElement(setMag.ELEMENT_APPLICATION_TAB_APPLICATION_LIST_CONTENT.replace("${app}",app),3000,1);
 		setMag.removeApplication(app);
-		waitForElementNotPresent(hpAct.ELEMENT_SPACE_MENU_MORE_BTN,3000,0);
-		waitForElementNotPresent(hpAct.ELEMENT_SPACE_MENU_APPLICATION_PORTLET.replace("${app}",app),3000,0);
+		waitForElementNotPresent(hpAct.ELEMENT_SPACE_MENU_MORE_BTN,3000,1);
+		waitForElementNotPresent(hpAct.ELEMENT_SPACE_MENU_APPLICATION_PORTLET.replace("${app}",app),3000,1);
 		
-		info("Delete the space");
-		hp.goToMySpaces();
-		spaceMg.deleteSpace(space1, false);
 	}
 
 }

@@ -44,8 +44,8 @@ public class Plf_Branding extends Plf_TestConfig{
 			- The select box is opened with two choices:* Dark* Light*/
 
 		click(branding.ELEMENT_PLF_BRANDING_SELECTTHEME);
-		waitForAndGetElement(branding.ELEMENT_PLF_BRANDING_THEMELIGHT,2000,0);
-		waitForAndGetElement(branding.ELEMENT_PLF_BRANDING_THEMEDARK,2000,0);
+		waitForAndGetElement(branding.ELEMENT_PLF_BRANDING_THEMELIGHT,2000,1);
+		waitForAndGetElement(branding.ELEMENT_PLF_BRANDING_THEMEDARK,2000,1);
 
 		/*Step number: 3
 		 *Step Name: Select one theme
@@ -57,7 +57,7 @@ public class Plf_Branding extends Plf_TestConfig{
 			- The full navigation bar preview is displaying the selected style navigation barover the navigation bar*/
 
 		click(branding.ELEMENT_PLF_BRANDING_THEMELIGHT);
-		waitForAndGetElement(branding.ELEMENT_PLF_BRANDING_TOPBAR_THEMELIGHT,2000,0);
+		waitForAndGetElement(branding.ELEMENT_PLF_BRANDING_TOPBAR_THEMELIGHT,2000,1);
 
 		/*Step number: 4
 		 *Step Name: Save
@@ -69,7 +69,7 @@ public class Plf_Branding extends Plf_TestConfig{
 			- The navigation bar of the intranet is displayed as preview*/ 
 		
 		click(branding.ELEMENT_BUTTON_SAVE);
-		waitForAndGetElement(navToolBar.ELEMENT_TOOLBAR_THEMELIGHT,2000,0);
+		waitForAndGetElement(navToolBar.ELEMENT_TOOLBAR_THEMELIGHT,2000,1);
 	}
 
 	/**
@@ -96,10 +96,8 @@ public class Plf_Branding extends Plf_TestConfig{
 
 		 *Expected Outcome: 
 			- Branding portlet is displayed*/
-		magAc.signOut();
-		magAc.signIn(DATA_USER1, DATA_PASS);
 		navToolBar.goToBanding();
-		waitForAndGetElement(branding.ELEMENT_PLF_BRANDINGPAGE,2000,0);
+		waitForAndGetElement(branding.ELEMENT_PLF_BRANDINGPAGE,2000,1);
 		
 		/*Step number: 2
 		 *Step Name: Upload a logo
@@ -132,7 +130,7 @@ public class Plf_Branding extends Plf_TestConfig{
 		 *Expected Outcome: 
 			New Logo is shown as preview*/ 
 		click(branding.ELEMENT_BUTTON_SAVE);
-		waitForAndGetElement(branding.ELEMENT_PLF_BRANDING_TOPBAR_LOGO,2000,0);
+		waitForAndGetElement(branding.ELEMENT_PLF_BRANDING_TOPBAR_LOGO,2000,1);
 		waitForAndGetElement(branding.ELEMENT_BANDING_PAGE_SELECT_LOGO);
 		
 	}
@@ -160,10 +158,8 @@ public class Plf_Branding extends Plf_TestConfig{
 			- Intranet home page is opened
 			- The Branding page is shown. There is 4 parts on the layout :  + Select Logo + Select Navigation Bar Style + Preview + Validation buttons
 			- See attachment.*/ 
-		magAc.signOut();
-		magAc.signIn(DATA_USER1, DATA_PASS);
 		navToolBar.goToBanding();
-		waitForAndGetElement(branding.ELEMENT_PLF_BRANDINGPAGE,2000,0);
+		waitForAndGetElement(branding.ELEMENT_PLF_BRANDINGPAGE,2000,1);
 		waitForAndGetElement(branding.ELEMENT_BANDING_PAGE_SELECT_LOGO);
 		waitForAndGetElement(branding.ELEMENT_BANDING_PAGE_SELECT_NAVIGATION_BAR_STYLE);
 		waitForAndGetElement(branding.ELEMENT_BUTTON_SAVE);

@@ -18,6 +18,14 @@ import org.testng.annotations.*;
 	@Test
 	public  void test01_UserNavigateAnotherUsersPersonalPages() {
 		info("Test 1: User navigate another user's personal pages");
+		/*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+ mailSuffixData.getMailSuffixRandom();
+		
+		info("Add user");
+		navToolBar.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		magAc.signIn(username1, password);
 		/*Step Number: 1
 		*Step Name: Show a list of applications of another user
 		*Step Description: 
@@ -30,8 +38,6 @@ import org.testng.annotations.*;
 			- The Horizontal toolbar is displayed
 			- The list of applications of space are displayed in the following order:* Profile* Activity Stream* Connections* Wiki
 			- Click on each applications, the application will show up in the main page*/ 
-		click(hp.ELEMENT_SUGGESTIONS_USER.replace("{$user}","FQA VN"));
-		waitForAndGetElement(myProfile.ELEMENT_NAME_OF_USER_TOP_LEFT.replace("{$name}","FQA VN"));
 		waitForAndGetElement(uBase.ELEMENT_HORIZONTAL_TOOLBAR);
 		waitForAndGetElement(uBase.ELEMENT_HORIZONTAL_TOOLBAR_FIRST_APP_PROFILE);
 		waitForAndGetElement(uBase.ELEMENT_HORIZONTAL_TOOLBAR_SECOND_APP_ACTIVITIES);
@@ -46,6 +52,14 @@ import org.testng.annotations.*;
 	@Test
 	public  void test02_UserNavigatesInHisOwnPersonalPages() {
 		info("Test 2: User navigates in his own personal pages");
+		/*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+ mailSuffixData.getMailSuffixRandom();
+		
+		info("Add user");
+		navToolBar.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		magAc.signIn(username1, password);
 		/*Step Number: 1
 		*Step Name: Show personal applications
 		*Step Description: 
@@ -60,7 +74,7 @@ import org.testng.annotations.*;
 			- Click on each applications, the application will show up in the main page*/ 
 		click(navToolBar.ELEMENT_TOPBAR_AVATAR);
 		click(navToolBar.ELEMENT_MY_PROFILE_LINK);
-		waitForAndGetElement(myProfile.ELEMENT_NAME_OF_USER_TOP_LEFT.replace("{$name}","John Smith"));
+		waitForAndGetElement(myProfile.ELEMENT_NAME_OF_USER_TOP_LEFT.replace("{$name}",username1+" "+username1));
 		waitForAndGetElement(uBase.ELEMENT_HORIZONTAL_TOOLBAR);
 		waitForAndGetElement(uBase.ELEMENT_HORIZONTAL_TOOLBAR_FIRST_APP_PROFILE);
 		waitForAndGetElement(uBase.ELEMENT_HORIZONTAL_TOOLBAR_SECOND_APP_ACTIVITIES);

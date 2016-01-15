@@ -23,6 +23,16 @@ public class Plf_UnifiedSearch extends Plf_TestConfig{
 	@Test
 	public  void test01_QuickSearch() {
 		info("Test 1: Quick Search");
+		/*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+ mailSuffixData.getMailSuffixRandom();
+		
+		info("Add user");
+		navToolBar.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		userAndGroup.addUserAdmin(username1,"");
+		userAndGroup.addUserContentManagement(username1, "");
+		magAc.signIn(username1, password);
 		/*Step Number: 1
 		 *Step Name: Quick search
 		 *Step Description: 
@@ -48,6 +58,16 @@ public class Plf_UnifiedSearch extends Plf_TestConfig{
 	@Test
 	public  void test02_ConfigureQuickSearch() {
 		info("Test 2: Configure quick search");
+		/*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+ mailSuffixData.getMailSuffixRandom();
+		
+		info("Add user");
+		navToolBar.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		userAndGroup.addUserAdmin(username1,"");
+		userAndGroup.addUserContentManagement(username1, "");
+		magAc.signIn(username1, password);
 		/*Step Number: 1
 		 *Step Name: Configure Quick search
 		 *Step Description: 
@@ -71,7 +91,7 @@ public class Plf_UnifiedSearch extends Plf_TestConfig{
 		alert.acceptAlert();
 		click(pagEditor.ELEMENT_EDIT_PORTLET_FORM_CLOSE_BUTTON);
 		click(pagEditor.ELEMENT_EDIT_PORTLET_FINISH);
-		waitForAndGetElement(quickSearch.ELEMENT_QUICKSEARCHRESULT_NUMBEROFRESULT,5000,0);
+		waitForAndGetElement(quickSearch.ELEMENT_QUICKSEARCHRESULT_NUMBEROFRESULT,5000,1);
 	}
 
 	/**
@@ -83,6 +103,15 @@ public class Plf_UnifiedSearch extends Plf_TestConfig{
 	@Test
 	public  void test03_SortSearchResult() {
 		info("Test 3: Sort search result");
+		/*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+ mailSuffixData.getMailSuffixRandom();
+		info("Add user");
+		navToolBar.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		userAndGroup.addUserAdmin(username1,"");
+		userAndGroup.addUserContentManagement(username1, "");
+		magAc.signIn(username1, password);
 		/*Step Number: 1
 		 *Step Name: Quick search
 		 *Step Description: 
@@ -110,7 +139,7 @@ public class Plf_UnifiedSearch extends Plf_TestConfig{
 		click(quickSearch.ELEMENT_QUICKSEARCHRESULT_SORTBY);
 		Utils.pause(2000);
 		click(quickSearch.ELEMENT_QUICKSEARCHRESULT_SORTBY_DATE);
-		waitForAndGetElement((quickSearch.ELEMENT_SEARCHRESULT_CONTENT_FILE_TITLE).replace("${name}", "Immunity"),5000,0);
+		waitForAndGetElement((quickSearch.ELEMENT_SEARCHRESULT_CONTENT_FILE_TITLE).replace("${name}", "Immunity"),5000,1);
 	}
 
 	/**
@@ -122,6 +151,16 @@ public class Plf_UnifiedSearch extends Plf_TestConfig{
 	@Test
 	public  void test04_FilterSearch() {
 		info("Test 4: Filter search");
+		/*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+ mailSuffixData.getMailSuffixRandom();
+		
+		info("Add user");
+		navToolBar.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		userAndGroup.addUserAdmin(username1,"");
+		userAndGroup.addUserContentManagement(username1, "");
+		magAc.signIn(username1, password);
 		/*Step Number: 1
 		 *Step Name: Quick search
 		 *Step Description: 
@@ -144,7 +183,7 @@ public class Plf_UnifiedSearch extends Plf_TestConfig{
 			The page will search only selected fields for results*/ 
 		uncheck(quickSearch.ELEMENT_SEARCHRESULT_ALLTYPECHECK, 2);
 		check(quickSearch.ELEMENT_SEARCHRESULT_FILESTYPECHECK, 2);
-		waitForAndGetElement((quickSearch.ELEMENT_SEARCHRESULT_CONTENT_FILE_TITLE).replace("${name}", "metro.pdf"),5000,0);
+		waitForAndGetElement((quickSearch.ELEMENT_SEARCHRESULT_CONTENT_FILE_TITLE).replace("${name}", "metro.pdf"),5000,1);
 	}
 
 	/**
@@ -156,6 +195,16 @@ public class Plf_UnifiedSearch extends Plf_TestConfig{
 	@Test
 	public  void test05_ConfigureSearchPage() {
 		info("Test 5: Configure Search page");
+		/*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+ mailSuffixData.getMailSuffixRandom();
+		
+		info("Add user");
+		navToolBar.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		userAndGroup.addUserAdmin(username1,"");
+		userAndGroup.addUserContentManagement(username1, "");
+		magAc.signIn(username1, password);
 		/*Step Number: 1
 		 *Step Name: Go to search page
 		 *Step Description: 
@@ -189,7 +238,7 @@ public class Plf_UnifiedSearch extends Plf_TestConfig{
 		alert.acceptAlert();
 		click(pagEditor.ELEMENT_EDIT_PORTLET_FORM_CLOSE_BUTTON);
 		click(pagEditor.ELEMENT_EDIT_PORTLET_FINISH);
-		waitForAndGetElement(quickSearch.ELEMENT_QUICKSEARCHRESULT_NUMBEROFRESULT,5000,0);
+		waitForAndGetElement(quickSearch.ELEMENT_QUICKSEARCHRESULT_NUMBEROFRESULT,5000,1);
 	}
 
 	/**
@@ -201,6 +250,16 @@ public class Plf_UnifiedSearch extends Plf_TestConfig{
 	@Test
 	public  void test06_AdministrateTheUnifiedSearchEngine() {
 		info("Test 6: Administrate the unified search engine");
+		/*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+ mailSuffixData.getMailSuffixRandom();
+		
+		info("Add user");
+		navToolBar.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		userAndGroup.addUserAdmin(username1,"");
+		userAndGroup.addUserContentManagement(username1, "");
+		magAc.signIn(username1, password);
 		/*Step Number: 1
 		 *Step Name: Open Search Administration
 		 *Step Description: 
@@ -212,11 +271,11 @@ public class Plf_UnifiedSearch extends Plf_TestConfig{
 			The search admin has a table with 3 columns : Content Type, Description, and Actions, as attachment searchAdmin.png*/
 		navToolBar.goToAdminSearch();
 		info("Content type is shown");
-		waitForAndGetElement(seaAdmin.ELEMENT_SEARCH_ADMINISTRATION_COLUMMN_TYPE_TITLE,2000,0);
+		waitForAndGetElement(seaAdmin.ELEMENT_SEARCH_ADMINISTRATION_COLUMMN_TYPE_TITLE,2000,1);
 		info("Description is shown");
-		waitForAndGetElement(seaAdmin.ELEMENT_SEARCH_ADMINISTRATION_COLUMMN_TYPE_DESCRIPTION,2000,0);
+		waitForAndGetElement(seaAdmin.ELEMENT_SEARCH_ADMINISTRATION_COLUMMN_TYPE_DESCRIPTION,2000,1);
 		info("Action is shown");
-		waitForAndGetElement(seaAdmin.ELEMENT_SEARCH_ADMINISTRATION_COLUMMN_TYPE_ACTION,2000,0);
+		waitForAndGetElement(seaAdmin.ELEMENT_SEARCH_ADMINISTRATION_COLUMMN_TYPE_ACTION,2000,1);
 		/*Step number: 2
 		 *Step Name: Enable a content type
 		 *Step Description: 
@@ -249,7 +308,7 @@ public class Plf_UnifiedSearch extends Plf_TestConfig{
 		info("Open Search page");
 		navToolBar.goToQuickSearch();
 		quickSearch.search("cloud");
-		waitForAndGetElement(quickSearch.ELEMENT_SEARCHRESULT_FILESTYPECHECK,2000,0);
+		waitForAndGetElement(quickSearch.ELEMENT_SEARCHRESULT_FILESTYPECHECK,2000,1);
 	}
 
 	/**
@@ -347,6 +406,17 @@ public class Plf_UnifiedSearch extends Plf_TestConfig{
 		String nameCat = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		String nameForum = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 
+		/*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+ mailSuffixData.getMailSuffixRandom();
+		
+		info("Add user");
+		navToolBar.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		userAndGroup.addUserAdmin(username1,"");
+		userAndGroup.addUserContentManagement(username1, "");
+		magAc.signIn(username1, password);
+		
 		hp.goToForum();
 		forumCatMag.addCategorySimple(nameCat, "", content);
 		forumMg.addForumSimple(nameForum, "", content);
@@ -379,22 +449,22 @@ public class Plf_UnifiedSearch extends Plf_TestConfig{
 		
 		
 		info("Verify that discussion icon is shown");
-		waitForAndGetElement(quickSearch.ELEMENT_SEARCHRESULT_CONTENT_DISCUSSIONS_ICON.replace("${name}",topic),2000,0);
+		waitForAndGetElement(quickSearch.ELEMENT_SEARCHRESULT_CONTENT_DISCUSSIONS_ICON.replace("${name}",topic),2000,1);
 		info("Verify that post's title is shown");
-		waitForAndGetElement(quickSearch.ELEMENT_SEARCHRESULT_CONTENT_DISCUSSIONS_POST_TITLE.replace("${name}",topic),2000,0);
+		waitForAndGetElement(quickSearch.ELEMENT_SEARCHRESULT_CONTENT_DISCUSSIONS_POST_TITLE.replace("${name}",topic),2000,1);
 		info("Verify that excerpt is shown");
-		waitForAndGetElement(quickSearch.ELEMENT_SEARCHRESULT_CONTENT_DISCUSSIONS_EXCERPT.replace("${name}",topic),2000,0);
+		waitForAndGetElement(quickSearch.ELEMENT_SEARCHRESULT_CONTENT_DISCUSSIONS_EXCERPT.replace("${name}",topic),2000,1);
 		info("Verify that forum name is shown");
-		waitForAndGetElement(quickSearch.ELEMENT_SEARCHRESULT_CONTENT_DISCUSSIONS_FORUM_NAME.replace("${topic}",topic).replace("${forum}",nameForum),2000,0);
+		waitForAndGetElement(quickSearch.ELEMENT_SEARCHRESULT_CONTENT_DISCUSSIONS_FORUM_NAME.replace("${topic}",topic).replace("${forum}",nameForum),2000,1);
 		info("Verify that post date is shown");
-		waitForAndGetElement(quickSearch.ELEMENT_SEARCHRESULT_CONTENT_DISCUSSIONS_POST_DATE.replace("${topic}",topic).replace("${date}",date),2000,0);
+		waitForAndGetElement(quickSearch.ELEMENT_SEARCHRESULT_CONTENT_DISCUSSIONS_POST_DATE.replace("${topic}",topic).replace("${date}",date),2000,1);
 		info("Verify that rating is shown");
-		waitForAndGetElement(quickSearch.ELEMENT_SEARCHRESULT_CONTENT_DISCUSSIONS_RATING.replace("${topic}",topic),2000,0);
+		waitForAndGetElement(quickSearch.ELEMENT_SEARCHRESULT_CONTENT_DISCUSSIONS_RATING.replace("${topic}",topic),2000,1);
 		info("Verify that number reply is shown");
-		waitForAndGetElement(quickSearch.ELEMENT_SEARCHRESULT_CONTENT_DISCUSSIONS_NUMBER_REPLY.replace("${topic}",topic).replace("${number}","0 replies"),2000,0);
+		waitForAndGetElement(quickSearch.ELEMENT_SEARCHRESULT_CONTENT_DISCUSSIONS_NUMBER_REPLY.replace("${topic}",topic).replace("${number}","0 replies"),2000,1);
 		info("Verify that Item in search result is clickable and open it when user click ");
 		click(quickSearch.ELEMENT_SEARCHRESULT_CONTENT_DISCUSSIONS_POST_TITLE.replace("${name}",topic));
-		waitForAndGetElement(foTopic.ELEMENT_POST_TITLE.replace("${title}", topic),5000,0);
+		waitForAndGetElement(foTopic.ELEMENT_POST_TITLE.replace("${title}", topic),5000,1);
 	}
 
 	/**
@@ -409,6 +479,18 @@ public class Plf_UnifiedSearch extends Plf_TestConfig{
 
 		String name = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		String note = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+		
+		/*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+ mailSuffixData.getMailSuffixRandom();
+		
+		info("Add user");
+		navToolBar.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		userAndGroup.addUserAdmin(username1,"");
+		userAndGroup.addUserContentManagement(username1, "");
+		magAc.signIn(username1, password);
+		
 		hp.goToCalendarPage();
 		taskMag.goToAddTaskFromActionBar();
 		taskMag.inputBasicQuickTask(name,note);
@@ -435,16 +517,16 @@ public class Plf_UnifiedSearch extends Plf_TestConfig{
 		check(quickSearch.ELEMENT_SEARCHRESULT_TASKTYPECHECK, 2);
 		
 		info("Verify that task icon is shown");
-		waitForAndGetElement(quickSearch.ELEMENT_SEARCHRESULT_CONTENT_TASK_ICON.replace("${name}",name),2000,0);
+		waitForAndGetElement(quickSearch.ELEMENT_SEARCHRESULT_CONTENT_TASK_ICON.replace("${name}",name),2000,1);
 		info("Verify that task name is shown");
-		waitForAndGetElement(quickSearch.ELEMENT_SEARCHRESULT_CONTENT_TASK_NAME_NOTE.replace("${name}",name),2000,0);
+		waitForAndGetElement(quickSearch.ELEMENT_SEARCHRESULT_CONTENT_TASK_NAME_NOTE.replace("${name}",name),2000,1);
 		info("Verify that task note is shown");
-		waitForAndGetElement(quickSearch.ELEMENT_SEARCHRESULT_CONTENT_TASK_NAME_NOTE.replace("${name}",note),2000,0);
+		waitForAndGetElement(quickSearch.ELEMENT_SEARCHRESULT_CONTENT_TASK_NAME_NOTE.replace("${name}",note),2000,1);
 		info("Verify that due date is shown");
-		waitForAndGetElement(quickSearch.ELEMENT_SEARCHRESULT_CONTENT_TASK_DUEDATE.replace("${name}",name),2000,0);
+		waitForAndGetElement(quickSearch.ELEMENT_SEARCHRESULT_CONTENT_TASK_DUEDATE.replace("${name}",name),2000,1);
 		info("Verify that Item in search result is clickable and open it when user click ");
 		click(quickSearch.ELEMENT_SEARCHRESULT_CONTENT_TASK_NAME_NOTE.replace("${name}",name));
-		waitForAndGetElement(calMg.ELEMENT_CALENDAR_PREVIEW_TASK_EVENT.replace("${name}",name),5000,0);
+		waitForAndGetElement(calMg.ELEMENT_CALENDAR_PREVIEW_TASK_EVENT.replace("${name}",name),5000,1);
 	}
 
 	/**
@@ -466,6 +548,17 @@ public class Plf_UnifiedSearch extends Plf_TestConfig{
 		Calendar cal = Calendar.getInstance();
 		String date = dateFormat.format(cal.getTime());
 		info(date);
+		
+		/*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+ mailSuffixData.getMailSuffixRandom();
+		
+		info("Add user");
+		navToolBar.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		userAndGroup.addUserAdmin(username1,"");
+		userAndGroup.addUserContentManagement(username1, "");
+		magAc.signIn(username1, password);
 
 		hp.goToCalendarPage();
 		eventMag.goToAddEventFromActionBar();
@@ -641,18 +734,18 @@ public class Plf_UnifiedSearch extends Plf_TestConfig{
 		check(quickSearch.ELEMENT_SEARCHRESULT_SPACETYPECHECK, 2);
 		
 		info("Verify that the avatar is shown");
-		waitForAndGetElement(quickSearch.ELEMENT_SEARCHRESULT_CONTENT_SPACE_AVATAR.replace("${name}",title),2000,0);
+		waitForAndGetElement(quickSearch.ELEMENT_SEARCHRESULT_CONTENT_SPACE_AVATAR.replace("${name}",title),2000,1);
 		info("Verify that title is shown");
-		waitForAndGetElement(quickSearch.ELEMENT_SEARCHRESULT_CONTENT_SPACE_TITLE.replace("${name}",title),2000,0);
+		waitForAndGetElement(quickSearch.ELEMENT_SEARCHRESULT_CONTENT_SPACE_TITLE.replace("${name}",title),2000,1);
 		info("Verify that desctiption is shown");
-		waitForAndGetElement(quickSearch.ELEMENT_SEARCHRESULT_CONTENT_SPACE_DESCRIPTION.replace("${des}",title),2000,0);
+		waitForAndGetElement(quickSearch.ELEMENT_SEARCHRESULT_CONTENT_SPACE_DESCRIPTION.replace("${des}",title),2000,1);
 		info("Verify that member count is shown");
-		waitForAndGetElement(quickSearch.ELEMENT_SEARCHRESULT_CONTENT_SPACE_MEMBER_COUNT.replace("${name}",title).replace("${number}","1 Member(s)"),2000,0);
+		waitForAndGetElement(quickSearch.ELEMENT_SEARCHRESULT_CONTENT_SPACE_MEMBER_COUNT.replace("${name}",title).replace("${number}","1 Member(s)"),2000,1);
 		info("Verify that the status is shown");
-		waitForAndGetElement(quickSearch.ELEMENT_SEARCHRESULT_CONTENT_SPACE_STATUS.replace("${name}",title).replace("${status}","Register"),2000,0);
+		waitForAndGetElement(quickSearch.ELEMENT_SEARCHRESULT_CONTENT_SPACE_STATUS.replace("${name}",title).replace("${status}","Register"),2000,1);
 		info("Verify that Item in search result is clickable and open it when user click ");
         click(quickSearch.ELEMENT_SEARCHRESULT_CONTENT_SPACE_TITLE.replace("${name}",title));
-        waitForAndGetElement(spaceHome.ELEMENT_SPACE_NAME.replace("${name}", title),5000,0);
+        waitForAndGetElement(spaceHome.ELEMENT_SPACE_NAME.replace("${name}", title),5000,1);
 
 	}
 
@@ -665,6 +758,16 @@ public class Plf_UnifiedSearch extends Plf_TestConfig{
 	@Test
 	public  void test15_SearchPeople() {
 		info("Test 15 Search people");
+		/*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+ mailSuffixData.getMailSuffixRandom();
+		
+		info("Add user");
+		navToolBar.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		userAndGroup.addUserAdmin(username1,"");
+		userAndGroup.addUserContentManagement(username1, "");
+		magAc.signIn(username1, password);
 		/*Step Number: 1
 		 *Step Name: Search people
 		 *Step Description: 
@@ -684,25 +787,25 @@ public class Plf_UnifiedSearch extends Plf_TestConfig{
 		myProfile.updatePhone("",phone);
 		myProfile.saveCancelUpdateInfo(true);
 		navToolBar.goToQuickSearch();
-		type(quickSearch.ELEMENT_TOOLBAR_QUICKSEARCH_TEXTBOX,"John Smith",true);
+		type(quickSearch.ELEMENT_TOOLBAR_QUICKSEARCH_TEXTBOX,username1+" "+username1,true);
 		click(quickSearch.ELEMENT_QUICKSEARCHRESULT_SEE_ALL_SEARCH);
 		uncheck(quickSearch.ELEMENT_SEARCHRESULT_ALLTYPECHECK, 2);
 		check(quickSearch.ELEMENT_SEARCHRESULT_PEOPLETYPECHECK, 2);
 		
 		info("Verify that the avatar is shown");
-		waitForAndGetElement(quickSearch.ELEMENT_SEARCHRESULT_CONTENT_USER_AVATAR.replace("${fullname}","John Smith"),2000,0);
+		waitForAndGetElement(quickSearch.ELEMENT_SEARCHRESULT_CONTENT_USER_AVATAR.replace("${fullname}",username1+" "+username1),2000,1);
 		info("Verify that full name is shown");
-		waitForAndGetElement(quickSearch.ELEMENT_SEARCHRESULT_CONTENT_USER_FULL_NAME.replace("${fullname}","John Smith"),2000,0);
+		waitForAndGetElement(quickSearch.ELEMENT_SEARCHRESULT_CONTENT_USER_FULL_NAME.replace("${fullname}",username1+" "+username1),2000,1);
 		info("Verify that title is shown");
-		waitForAndGetElement(quickSearch.ELEMENT_SEARCHRESULT_CONTENT_USER_TITLE.replace("${fullname}","John Smith"),2000,0);
+		waitForAndGetElement(quickSearch.ELEMENT_SEARCHRESULT_CONTENT_USER_TITLE.replace("${fullname}",username1+" "+username1),2000,1);
 		info("Verify that email is shown");
-		waitForAndGetElement(quickSearch.ELEMENT_SEARCHRESULT_CONTENT_USER_EMAIL.replace("${fullname}","John Smith").replace("${email}","john.smith@acme.exoplatform.com"),2000,0);
+		waitForAndGetElement(quickSearch.ELEMENT_SEARCHRESULT_CONTENT_USER_EMAIL.replace("${fullname}",username1+" "+username1).replace("${email}",email1),2000,1);
 		info("Verify that the phone is shown");
-		waitForAndGetElement(quickSearch.ELEMENT_SEARCHRESULT_CONTENT_USER_PHONE.replace("${fullname}","John Smith").replace("${phone}",phone),2000,0);
+		waitForAndGetElement(quickSearch.ELEMENT_SEARCHRESULT_CONTENT_USER_PHONE.replace("${fullname}",username1+" "+username1).replace("${phone}",phone),2000,1);
 		info("Verify that the gender is shown");
-		waitForAndGetElement(quickSearch.ELEMENT_SEARCHRESULT_CONTENT_USER_GENDER.replace("${fullname}","John Smith").replace("${gender}","male"),2000,0);
+		waitForAndGetElement(quickSearch.ELEMENT_SEARCHRESULT_CONTENT_USER_GENDER.replace("${fullname}",username1+" "+username1).replace("${gender}","male"),2000,1);
 		info("Verify that Item in search result is clickable and open it when user click ");
-        click(quickSearch.ELEMENT_SEARCHRESULT_CONTENT_USER_FULL_NAME.replace("${fullname}","John Smith"));
+        click(quickSearch.ELEMENT_SEARCHRESULT_CONTENT_USER_FULL_NAME.replace("${fullname}",username1+" "+username1));
 
 	}
 
@@ -718,7 +821,17 @@ public class Plf_UnifiedSearch extends Plf_TestConfig{
 
 		String question = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		String content = txData.getContentByArrayTypeRandom(1)+getRandomNumber()+"des";
-
+		/*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+ mailSuffixData.getMailSuffixRandom();
+		
+		info("Add user");
+		navToolBar.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		userAndGroup.addUserAdmin(username1,"");
+		userAndGroup.addUserContentManagement(username1, "");
+		magAc.signIn(username1, password);
+		
 		hp.goToAnswer();
 		qMang.goToSubmitQuestion();
 		qMang.inputDataToQuestionForm(question, content, null, null);
