@@ -18,7 +18,16 @@ public class Wiki_Information extends Wiki_TestConfig {
 		String title = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		String content = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		String newTitle = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+		/*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
 		
+		info("Add user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		userAndGroup.addUserAdmin(username1, "");
+		userAndGroup.addUserContentManagement(username1, "");
+		magAc.signIn(username1, password);
 		/*Step Number: 1
 		 *Step Name: Step 1:  Check Page info
 		 *Step Description: 
@@ -68,10 +77,6 @@ public class Wiki_Information extends Wiki_TestConfig {
 		
 		info("The total number of attachments as a link to open the attachments");
 		waitForAndGetElement(wikiMg.ELEMENT_WIKI_PAGE_INFORMATION_AREA_TOTAL_ATTACHEDFILES.replace("${number}","0"),2000,0);
-		
-		info("Delete the page");
-		hp.goToWiki();
-		wHome.deleteWiki(newTitle);
 	}
 
 	/**
@@ -88,7 +93,16 @@ public class Wiki_Information extends Wiki_TestConfig {
 		String newTitle = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		String newTitle1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		String newTitle2 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+		/*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
 		
+		info("Add user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		userAndGroup.addUserAdmin(username1, "");
+		userAndGroup.addUserContentManagement(username1, "");
+		magAc.signIn(username1, password);
 		/*Step Number: 1
 		 *Step Name: Step 1: Check page history
 		 *Step Description: 
@@ -156,9 +170,6 @@ public class Wiki_Information extends Wiki_TestConfig {
 						newTitle2),2000,0).getCssValue("background-color").contains(
 				"rgb(219,245,209)");
 		
-		info("Delete the page");
-		hp.goToWiki();
-		wHome.deleteWiki(newTitle2);
 	}
 	
 	/**
@@ -173,7 +184,16 @@ public class Wiki_Information extends Wiki_TestConfig {
 		String title = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		String child1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		String child2 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+		/*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
 		
+		info("Add user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		userAndGroup.addUserAdmin(username1, "");
+		userAndGroup.addUserContentManagement(username1, "");
+		magAc.signIn(username1, password);
 		/*Step Number: 1
 		 *Step Name: Step 1: Check page history
 		 *Step Description: 
@@ -233,10 +253,6 @@ public class Wiki_Information extends Wiki_TestConfig {
 		
 		info("Recent changes: list all revisions and a button [View Page History]");
 		waitForAndGetElement(wikiMg.ELEMENT_PAGE_INFOR_RECENT_CHANES,2000,0);
-		
-		info("Delete the page");
-		hp.goToWiki();
-		wHome.deleteWiki(title);
 	}
 
 	/**
@@ -252,7 +268,16 @@ public class Wiki_Information extends Wiki_TestConfig {
 		String space2 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		String title1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		String title2 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+		/*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
 		
+		info("Add user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		userAndGroup.addUserAdmin(username1, "");
+		userAndGroup.addUserContentManagement(username1, "");
+		magAc.signIn(username1, password);
 		/*Step Number: 1
 		 *Step Name: Step 1: Add new space 
 		 *Step Description: 
@@ -353,10 +378,6 @@ public class Wiki_Information extends Wiki_TestConfig {
 		info("intranet's portal is added as a related pages on page info layout");
 		waitForAndGetElement(wikiMg.ELEMENT_PAGE_INFO_RELATED_TABLE_CONTENT.replace("${col1}","portal").replace("${col2}","Wiki Home"),2000,0);
 		
-		/*info("Delete data test");
-		hp.goToMySpaces();
-		spaMg.deleteSpace(space1,false);
-		spaMg.deleteSpace(space2,false);*/
 	    
 	}	
 	
@@ -375,7 +396,16 @@ public class Wiki_Information extends Wiki_TestConfig {
 		String space2 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		String title1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		String title2 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+		/*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
 		
+		info("Add user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		userAndGroup.addUserAdmin(username1, "");
+		userAndGroup.addUserContentManagement(username1, "");
+		magAc.signIn(username1, password);
 		/*Step Number: 1
 		 *Step Name: Step 1: Add new space 
 		 *Step Description: 
@@ -476,11 +506,6 @@ public class Wiki_Information extends Wiki_TestConfig {
 		info("intranet's portal is added as a related pages on page info layout");
 		waitForAndGetElement(wikiMg.ELEMENT_PAGE_INFO_RELATED_TABLE_CONTENT.replace("${col1}",space2).replace("${col2}",title2),2000,0);
 		
-		/*info("Delete data test");
-		hp.goToMySpaces();
-		spaMg.deleteSpace(space1,false);
-		spaMg.deleteSpace(space2,false);*/
-	    
 	}	
 	
 	/**
@@ -493,7 +518,16 @@ public class Wiki_Information extends Wiki_TestConfig {
 	public void test05_AddRelationInCaseThereIsNoSpace() {
 		info("Test 05: Add relation in the case there is no space");
 		String title1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+		/*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
 		
+		info("Add user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		userAndGroup.addUserAdmin(username1, "");
+		userAndGroup.addUserContentManagement(username1, "");
+		magAc.signIn(username1, password);
 		/*Step Number: 1
 		 *Step Name: Step 1:  Add new page for wiki
 		 *Step Description: 
@@ -545,9 +579,6 @@ public class Wiki_Information extends Wiki_TestConfig {
 		info("Verify that The list of space switcher options is displayed and space list are not displayed in the space switcher list");
 		waitForAndGetElement(wikiMg.ELEMENT_ADD_RELATED_POPUP_DROPDOWN_NOSPACE,2000,0);
 		waitForAndGetElement(wikiMg.ELEMENT_ADD_RELATED_POPUP_CLOSE_BTN,2000,0).click();
-		
-		info("Delete the page");
-		wHome.deleteWiki(title1);
 	    
 	}	
 	
@@ -563,7 +594,16 @@ public class Wiki_Information extends Wiki_TestConfig {
 		String space1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		String title1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		String title2 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+		/*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
 		
+		info("Add user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		userAndGroup.addUserAdmin(username1, "");
+		userAndGroup.addUserContentManagement(username1, "");
+		magAc.signIn(username1, password);
 		/*Step Number: 1
 		 *Step Name: Step 1: Add new space 
 		 *Step Description: 
@@ -657,9 +697,6 @@ public class Wiki_Information extends Wiki_TestConfig {
 		info("Page 2 is added as a related pages on page info layout");
 		waitForAndGetElement(wikiMg.ELEMENT_PAGE_INFO_RELATED_TABLE_CONTENT.replace("${col1}",space1).replace("${col2}",title2),2000,0);
 		
-		/*info("Delete data test");
-		hp.goToMySpaces();
-		spaMg.deleteSpace(space1,false);*/
 	    
 	}
 	/**
@@ -674,7 +711,16 @@ public class Wiki_Information extends Wiki_TestConfig {
 		String space1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		String title1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		String title2 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+		/*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
 		
+		info("Add user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		userAndGroup.addUserAdmin(username1, "");
+		userAndGroup.addUserContentManagement(username1, "");
+		magAc.signIn(username1, password);
 		/*Step Number: 1
 		 *Step Name: Step 1: Add new space 
 		 *Step Description: 
@@ -795,12 +841,7 @@ public class Wiki_Information extends Wiki_TestConfig {
 			- The relation is deleted and don't show in Related Page form*/ 
 		info("The relation is deleted and don't show in Related Page form");
 		wPageInfo.deleteRelation(title2);
-		
-		/*info("Delete data test");
-		hp.goToMySpaces();
-		spaMg.deleteSpace(space1,false);*/ 
 	}	
-	
 	/**
 	 *<li> Case ID:122872.</li>
 	 *<li> Test Case Name: Version creation</li>
@@ -813,7 +854,16 @@ public class Wiki_Information extends Wiki_TestConfig {
 		String title = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		String newTitle = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		String link = fData.getAttachFileByArrayTypeRandom(1);
+		/*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
 		
+		info("Add user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		userAndGroup.addUserAdmin(username1, "");
+		userAndGroup.addUserContentManagement(username1, "");
+		magAc.signIn(username1, password);
 		/*Step Number: 1
 		 *Step Name: Step 1:  Create new wiki page
 		 *Step Description: 
@@ -875,9 +925,5 @@ public class Wiki_Information extends Wiki_TestConfig {
 		
 		info("Verify that New wiki page is created with version still is V2. No version is created");
 		wHome.viewInformationTable(newTitle, "V2");
-		
-		info("Delete the page");
-		hp.goToWiki();
-		wHome.deleteWiki(newTitle);
 	}
 }

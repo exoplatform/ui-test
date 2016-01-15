@@ -31,6 +31,16 @@ public class Ecms_SE_Info extends ECMS_TestConfig_Part2{
 		String node1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		String folderType = "Content Folder";
 		info("Finished getting data test");
+		/*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		
+		info("Add user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		userAndGroup.addUserAdmin(username1, "");
+		userAndGroup.addUserContentManagement(username1, "");
+		magAc.signIn(username1, password);
 
 		navTool.goToSiteExplorer();
 		SEHome.goToAddNewFolder();
@@ -45,14 +55,12 @@ public class Ecms_SE_Info extends ECMS_TestConfig_Part2{
 		EcmsPerm.changeRight("user", "Mary", true, true, false, "");
 		EcmsPerm.closePermission();
 		
-		magAc.signOut();
 		magAc.signIn(DATA_USER2, DATA_PASS);
 		navTool.goToSiteExplorer();
 		//Check if mary has edit, read on node1
 		SEHome.selectNode(node1);
 		//Delete data
-		magAc.signOut();
-		magAc.signIn(DATA_USER1, DATA_PASS);
+		magAc.signIn(username1,password);
 		navTool.goToSiteExplorer();
 
 
@@ -94,6 +102,16 @@ public class Ecms_SE_Info extends ECMS_TestConfig_Part2{
 		info("Get data test");
 		String path = fData.getAttachFileByArrayTypeRandom(1);
 		info("Finished getting data test");
+		/*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		
+		info("Add user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		userAndGroup.addUserAdmin(username1, "");
+		userAndGroup.addUserContentManagement(username1, "");
+		magAc.signIn(username1, password);
 		/*Step Number: 1
 		 *Step Name: -
 		 *Step Description: 

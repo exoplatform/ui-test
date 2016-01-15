@@ -25,7 +25,16 @@ public class Ecms_SE_Create extends ECMS_TestConfig_Part2{
 		String title = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		String folderType = "Content Folder";
 		info("Finished creating data test");
-
+		/*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		
+		info("Add user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		userAndGroup.addUserAdmin(username1, "");
+		userAndGroup.addUserContentManagement(username1, "");
+		magAc.signIn(username1, password);
 		/*Step Number: 1
 		 *Step Name: -
 		 *Step Description: 
@@ -68,7 +77,16 @@ public class Ecms_SE_Create extends ECMS_TestConfig_Part2{
 		String content = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		String content2 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		info("Finished creating data test");
-
+		/*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		
+		info("Add user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		userAndGroup.addUserAdmin(username1, "");
+		userAndGroup.addUserContentManagement(username1, "");
+		magAc.signIn(username1, password);
 		/*Step Number: 1
 		 *Step Name: -
 		 *Step Description: 
@@ -121,6 +139,16 @@ public class Ecms_SE_Create extends ECMS_TestConfig_Part2{
 		String content = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		String content2 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		info("Finished creating data test");
+		/*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		
+		info("Add user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		userAndGroup.addUserAdmin(username1, "");
+		userAndGroup.addUserContentManagement(username1, "");
+		magAc.signIn(username1, password);
 		/*Step Number: 1
 		 *Step Name: Step 1: Edit Web Content document
 		 *Step Description: 
@@ -165,6 +193,16 @@ public class Ecms_SE_Create extends ECMS_TestConfig_Part2{
 		String content = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		String link = "exoplatform.com";
 		info("Finished creating data test");
+		/*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		
+		info("Add user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		userAndGroup.addUserAdmin(username1, "");
+		userAndGroup.addUserContentManagement(username1, "");
+		magAc.signIn(username1, password);
 		/*Step Number: 1
 		 *Step Name: Step 1: Insert documents/medias in a web content by FCK Content Selector
 		 *Step Description: 
@@ -199,10 +237,6 @@ public class Ecms_SE_Create extends ECMS_TestConfig_Part2{
 		info(url);
 		driver.get(url);
 
-		info("Delete file document");
-		navTool.goToSiteExplorer();
-		SEHome.goToPath("acme/documents", "Site Management");
-		SEHome.deleteData(title);
 	}
 
 	/**
@@ -220,6 +254,16 @@ public class Ecms_SE_Create extends ECMS_TestConfig_Part2{
 		info("Create data test");
 		String file = fData.getAttachFileByArrayTypeRandom(1);
 		info("Finished creating data test");
+		/*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		
+		info("Add user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		userAndGroup.addUserAdmin(username1, "");
+		userAndGroup.addUserContentManagement(username1, "");
+		magAc.signIn(username1, password);
 		/*Step Number: 1
 		 *Step Name: -
 		 *Step Description: 
@@ -265,6 +309,16 @@ public class Ecms_SE_Create extends ECMS_TestConfig_Part2{
 		info("Create data test");
 		String fileName = fData.getAttachFileByArrayTypeRandom(1);
 		info("Finished creating data test");
+		/*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		
+		info("Add user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		userAndGroup.addUserAdmin(username1, "");
+		userAndGroup.addUserContentManagement(username1, "");
+		magAc.signIn(username1, password);
 		/*Step Number: 1
 		 *Step Name: -
 		 *Step Description: 
@@ -316,6 +370,16 @@ public class Ecms_SE_Create extends ECMS_TestConfig_Part2{
 		info("Finished creating data test");
 		hp.goToMySpaces();
 		spManag.addNewSpaceSimple(spaceName, content);
+		/*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		
+		info("Add user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		userAndGroup.addUserAdmin(username1, "");
+		userAndGroup.addUserContentManagement(username1, "");
+		magAc.signIn(username1, password);
 		/*Step Number: 1
 		 *Step Name: -
 		 *Step Description: 

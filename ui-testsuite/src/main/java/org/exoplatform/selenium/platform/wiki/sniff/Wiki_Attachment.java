@@ -29,6 +29,17 @@ public class Wiki_Attachment extends Wiki_TestConfig {
 		String title = txData.getContentByArrayTypeRandom(1)+rand;
 		String content =  txData.getContentByArrayTypeRandom(1)+ rand;
 		String link = fData.getAttachFileByArrayTypeRandom(1);
+		
+		/*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		
+		info("Add user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		userAndGroup.addUserAdmin(username1, "");
+		userAndGroup.addUserContentManagement(username1, "");
+		magAc.signIn(username1, password);
 
 		/*Step Number: 1
 		 *Step Name: Step 1: Upload Attachment in Page
@@ -44,8 +55,6 @@ public class Wiki_Attachment extends Wiki_TestConfig {
 		wikiMg.goToSourceEditor();
 		sourceEditor.addSimplePage(title, content);
 		sourceEditor.attachFile("TestData/"+link);
-		/*rtMode.addSimplePage(title, content);
-		rtMode.attachFile("TestData/"+link);*/
 		wikiMg.saveAddPage();
 		
 		waitForAndGetElement(wHome.ELEMENT_PAGE_ATTACHFILE,3000,1);
@@ -57,8 +66,5 @@ public class Wiki_Attachment extends Wiki_TestConfig {
 		click(wHome.ELEMENT_PAGE_DELETEATTACHFILE);
 		waitForElementNotPresent(wHome.ELEMENT_PAGE_DOWNLOADATTACHFILE);
 		
-		info("Delete the page");
-		hp.goToWiki();
-		wHome.deleteWiki(title);
 	}
 }

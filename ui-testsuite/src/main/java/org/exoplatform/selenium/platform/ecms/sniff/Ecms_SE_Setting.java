@@ -2,6 +2,7 @@ package org.exoplatform.selenium.platform.ecms.sniff;
 
 import static org.exoplatform.selenium.TestLogger.info;
 
+
 //import org.exoplatform.selenium.platform.HomePagePlatform;
 //import org.exoplatform.selenium.platform.ManageLogInOut;
 //import org.exoplatform.selenium.platform.NavigationToolbar;
@@ -25,6 +26,16 @@ import org.testng.annotations.*;
 	@Test
 	public  void test01_SetUpBrowsingPreferences() {
 		info("Test 1: Set up browsing Preferences");
+		/*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		
+		info("Add user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		userAndGroup.addUserAdmin(username1, "");
+		userAndGroup.addUserContentManagement(username1, "");
+		magAc.signIn(username1, password);
 		/*Step Number: 1
 		*Step Name: -
 		*Step Description: 

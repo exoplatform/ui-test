@@ -215,7 +215,16 @@ public class Ecms_WCM extends ECMS_TestConfig_Part1 {
 		info("Test 4: Edit Preference of Content List Viewer (Documents, Last news ...)");
 		String content = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		String newContent = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+		/*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
 		
+		info("Add user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		userAndGroup.addUserAdmin(username1, "");
+		userAndGroup.addUserContentManagement(username1, "");
+		magAc.signIn(username1, password);
 		navTool.goToSiteExplorer();
 		SEHome.goToPath("acme", "Site Management");
         //Create node
@@ -252,17 +261,6 @@ public class Ecms_WCM extends ECMS_TestConfig_Part1 {
 		acmeHP.editPreferenceContentList(newContent);
 		waitForAndGetElement(By.xpath((contList. ELEMENT_CONTENT_LIST_CONTENT_BOX_CONTENT_TITLE).replace("${title}",newContent)));
 		
-		info("Delete Data test");
-		info("Delete created file");
-		navTool.goToSiteExplorer();
-		SEHome.deleteData(content, true);
-		info("Delete created page");
-		navTool.goToPotalPages();
-		paMang.deletePage(content,"");
-		info("Delete a node on navigation menu");
-		navTool.goToPotalSites();
-		maSite.goToEditNavigation("acme");
-		navMag.deleteNode(content);
 	}
 
 	/**
@@ -275,7 +273,16 @@ public class Ecms_WCM extends ECMS_TestConfig_Part1 {
 	public  void test05_SearchContentOfDocumentpage() {
 		info("Test 5: Search content of document/page");
 		String content = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+		/*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
 		
+		info("Add user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		userAndGroup.addUserAdmin(username1, "");
+		userAndGroup.addUserContentManagement(username1, "");
+		magAc.signIn(username1, password);
 		/*Step Number: 1
 		 *Step Name: Step 1: Search content of document/page
 		 *Step Description: 
@@ -317,9 +324,6 @@ public class Ecms_WCM extends ECMS_TestConfig_Part1 {
 		acmeHP.searchQuickSearchBox(content);
 		waitForAndGetElement((acmeHP.ELEMENT_SEARCHRESULT_TITLE).replace("${title}",content));
 		
-		info("Delete created file");
-		navTool.goToSiteExplorer();
-		SEHome.deleteData(content, true);
 
 	}
 
@@ -333,7 +337,16 @@ public class Ecms_WCM extends ECMS_TestConfig_Part1 {
 	public  void test06_ShowCategoriesAndDocuments() {
 		info("Test 6: Show categories and documents");
 		 String content = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
-		
+		 /*Create data test*/
+			String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+			String email1 = username1+"@gmail.com";
+			
+			info("Add user");
+			navTool.goToAddUser();
+			addUserPage.addUser(username1, password, email1, username1, username1);
+			userAndGroup.addUserAdmin(username1, "");
+			userAndGroup.addUserContentManagement(username1, "");
+			magAc.signIn(username1, password);
 		/*Step Number: 1
 		 *Step Name: Step 1: Show categories and documents
 		 *Step Description: 
@@ -366,10 +379,6 @@ public class Ecms_WCM extends ECMS_TestConfig_Part1 {
 		click(acmeHP.ELEMENT_TOPIC_DEFENSE);
 		waitForAndGetElement(acmeHP.ELEMENT_NEWS_DEFENSE_CONTENT.replace("${title}",content));
 		
-		info("Delete created file");
-		navTool.goToSiteExplorer();
-		SEHome.goToPath("acme/categories/powers/Defense", "Site Management");
-		SEHome.deleteData(content, true);
 		
 	}
 	
@@ -383,6 +392,17 @@ public class Ecms_WCM extends ECMS_TestConfig_Part1 {
 	public  void test07_ShowDraftpublicContentFromPage() {
 		info("Test 7: Show draft/public content from page");
 		String content = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+		/*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		
+		info("Add user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		userAndGroup.addUserAdmin(username1, "");
+		userAndGroup.addUserContentManagement(username1, "");
+		magAc.signIn(username1, password);
+		
 		this.driver.get(baseUrl+"/acme");
 		navTool.goToSiteExplorer();
 		SEHome.goToPath("acme", "Site Management");
@@ -434,17 +454,6 @@ public class Ecms_WCM extends ECMS_TestConfig_Part1 {
 		//Verify that Selected document/web content is published into this page with published status
 		waitForAndGetElement(acmeHP.ELEMENT_OVERVIEWS_CONTENT.replace("${title}",content));
 		
-		info("Delete Data test");
-		info("Delete created file");
-		navTool.goToSiteExplorer();
-		SEHome.deleteData(content, true);
-		info("Delete created page");
-		navTool.goToPotalPages();
-		paMang.deletePage(content,"");
-		info("Delete a node on navigation menu");
-		navTool.goToPotalSites();
-		maSite.goToEditNavigation("acme");
-		navMag.deleteNode(content);
 	}
 
 	/**
@@ -459,6 +468,16 @@ public class Ecms_WCM extends ECMS_TestConfig_Part1 {
 		String title = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		String content1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		String content2 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+		/*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		
+		info("Add user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		userAndGroup.addUserAdmin(username1, "");
+		userAndGroup.addUserContentManagement(username1, "");
+		magAc.signIn(username1, password);
 		/*Step Number: 1
 		 *Step Name: -
 		 *Step Description: 
@@ -538,18 +557,6 @@ public class Ecms_WCM extends ECMS_TestConfig_Part1 {
 		waitForAndGetElement(contList.ELEMENT_CONTENT_LIST_CONTENT_TITLE.replace("${title}",content1));
 		waitForElementNotPresent(contList.ELEMENT_CONTENT_LIST_CONTENT_TITLE.replace("${title}",content2));
 		
-		info("Delete create files");
-		this.driver.get(baseUrl+"/intranet");
-		navTool.goToSiteExplorer();
-		SEHome.deleteData(content1, true);
-		SEHome.deleteData(content2, true);
-	    info("Delete created page");
-		navTool.goToPotalPages();
-		paMang.deletePage(title,"");
-		info("Delete a node on navigation menu");
-		navTool.goToPotalSites();
-		maSite.goToEditNavigation("acme");
-		navMag.deleteNode(title);
 	}
 
 	/**
@@ -564,6 +571,17 @@ public class Ecms_WCM extends ECMS_TestConfig_Part1 {
 		String title = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		String content1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		String content2 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+		/*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		
+		info("Add user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		userAndGroup.addUserAdmin(username1, "");
+		userAndGroup.addUserContentManagement(username1, "");
+		magAc.signIn(username1, password);
+		
 		this.driver.get(baseUrl+"/acme");
 		/*Step Number: 1
 		 *Step Name: -
@@ -627,18 +645,6 @@ public class Ecms_WCM extends ECMS_TestConfig_Part1 {
 		waitForAndGetElement(contList.ELEMENT_CONTENT_LIST_CONTENT_TITLE.replace("${title}",content1));
 		waitForAndGetElement(contList.ELEMENT_CONTENT_LIST_CONTENT_TITLE.replace("${title}",content2));
 		
-		info("Delete created files");
-		this.driver.get(baseUrl+"/intranet");
-		navTool.goToSiteExplorer();
-		SEHome.deleteData(content1, true);
-		SEHome.deleteData(content2, true);
-		info("Delete created page");
-		navTool.goToPotalPages();
-		paMang.deletePage(title,"");
-		info("Delete created node on navigation menu");
-		navTool.goToPotalSites();
-		maSite.goToEditNavigation("acme");
-		navMag.deleteNode(title);
 	}
 
 	/**
@@ -653,6 +659,17 @@ public class Ecms_WCM extends ECMS_TestConfig_Part1 {
 		String title = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		String content1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		String content2 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+		/*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		
+		info("Add user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		userAndGroup.addUserAdmin(username1, "");
+		userAndGroup.addUserContentManagement(username1, "");
+		magAc.signIn(username1, password);
+		
 		/*Step Number: 1
 		 *Step Name: Step 1: Create Single Content Viewer page
 		 *Step Description: 
@@ -711,18 +728,6 @@ public class Ecms_WCM extends ECMS_TestConfig_Part1 {
 		click(contDetail.ELEMENT_CONTENT_DETAIL_SAVE_BTN);
 		waitForAndGetElement(contDetail.ELEMENT_CONTENT_DETAIL_VIEW_CONTENT.replace("${title}",content2));
 		
-		info("Delete created files");
-		this.driver.get(baseUrl+"/intranet");
-		navTool.goToSiteExplorer();
-		SEHome.deleteData(content1, true);
-		SEHome.deleteData(content2, true);
-		info("Delete create page");
-		navTool.goToPotalPages();
-		paMang.deletePage(title,"");
-		info("Delete created node on navigation");
-		navTool.goToPotalSites();
-		maSite.goToEditNavigation("acme");
-		navMag.deleteNode(title);
 	}
 
 	/**
@@ -736,6 +741,16 @@ public class Ecms_WCM extends ECMS_TestConfig_Part1 {
 		info("Test 15 Manage the title");
 		String random = getRandomNumber();
 		String title = txData.getContentByArrayTypeRandom(1)+random;
+		/*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		
+		info("Add user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		userAndGroup.addUserAdmin(username1, "");
+		userAndGroup.addUserContentManagement(username1, "");
+		magAc.signIn(username1, password);
 		
 		/*Step Number: 1
 		 *Step Name: Step 1: Manage the title
@@ -771,6 +786,16 @@ public class Ecms_WCM extends ECMS_TestConfig_Part1 {
 	@Test
 	public  void test12_CheckSEOToolTips() {
 		info("Test 11 Check SEO tool tips");
+		/*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		
+		info("Add user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		userAndGroup.addUserAdmin(username1, "");
+		userAndGroup.addUserContentManagement(username1, "");
+		magAc.signIn(username1, password);
 		/*Step Number: 1
 		 *Step Name: Step 1: Check SEO tool tips
 		 *Step Description: 
@@ -813,6 +838,17 @@ public class Ecms_WCM extends ECMS_TestConfig_Part1 {
 		String language2=changLangData.language.get(index2);
 		info("language2 is:"+language2);
 	    String apply2 = changLangData.applyBtn.get(index2);
+	    
+	    /*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		
+		info("Add user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		userAndGroup.addUserAdmin(username1, "");
+		userAndGroup.addUserContentManagement(username1, "");
+		magAc.signIn(username1, password);
 
 		
 		/*Step Number: 1
@@ -857,15 +893,6 @@ public class Ecms_WCM extends ECMS_TestConfig_Part1 {
 		//Verify that sitemaps is created in SEO folder
 		waitForAndGetElement(SEHome.ELEMENT_SE_NODE.replace("${node}", "sitemaps"));
 		
-		
-		info("Delete SEO folder");
-		navTool.goToSiteExplorer();
-		SEHome.goToPath("acme/SEO", "Sites Management");
-		SEHome.deleteData("SEO");
-		info("Detete added language on SEO management");
-		this.driver.get(baseUrl+"/acme");
-		navTool.goToSEO();
-		seoMang.deleteLanguage(language1);
 	}
 
 	/**
@@ -897,6 +924,17 @@ public class Ecms_WCM extends ECMS_TestConfig_Part1 {
 		String language2=changLangData.language.get(index2);
 		info("language2 is:"+language2);
 	    String apply2 = changLangData.applyBtn.get(index2);
+	    
+	    /*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		
+		info("Add user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		userAndGroup.addUserAdmin(username1, "");
+		userAndGroup.addUserContentManagement(username1, "");
+		magAc.signIn(username1, password);
 		
 		/*Step Number: 1
 		 *Step Name: Step 1: Edit SEO metadata with localization
@@ -940,13 +978,5 @@ public class Ecms_WCM extends ECMS_TestConfig_Part1 {
 		waitForAndGetElement(hp.ELEMENT_SITEMAPS_ACTIVITY);
 	
 		
-		info("Delete SEO folder");
-		navTool.goToSiteExplorer();
-		SEHome.goToPath("acme/SEO", "Sites Management");
-		SEHome.deleteData("SEO");
-		info("Detete added language on SEO management");
-		this.driver.get(baseUrl+"/acme");
-		navTool.goToSEO();
-		seoMang.deleteLanguage(language1);
 	}
 }

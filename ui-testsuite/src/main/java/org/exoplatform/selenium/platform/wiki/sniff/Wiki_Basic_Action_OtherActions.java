@@ -18,10 +18,18 @@ public class Wiki_Basic_Action_OtherActions extends Wiki_TestConfig {
 	@Test
 	public  void test01_MovePage() {
 		info("Test 1: Move Page");
-		magAc.signIn(DATA_USER1, DATA_PASS);
 		String title1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		String title2 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
-
+		/*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		
+		info("Add user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		userAndGroup.addUserAdmin(username1, "");
+		userAndGroup.addUserContentManagement(username1, "");
+		magAc.signIn(username1, password);
 		/*Step Number: 1
 		 *Step Name: Step 1: Move Page
 		 *Step Description: 
@@ -50,8 +58,6 @@ public class Wiki_Basic_Action_OtherActions extends Wiki_TestConfig {
 		info("Move page 1 to page 2");
 		wikiMg.movePage(title1, title2);
 		
-		hp.goToWiki();
-		wHome.deleteWiki(title2);
 		
 	}
 
@@ -65,12 +71,20 @@ public class Wiki_Basic_Action_OtherActions extends Wiki_TestConfig {
 	@Test
 	public  void test17_WatchAWikiPageOfIntranet() {
 		info("Test 17: Watch a wiki page of intranet");
-		magAc.signIn(DATA_USER1, DATA_PASS);
 		String title = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		String update = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
         String mess = wMessage.getWikiMessage(3);
         info("mess:"+mess);
+        /*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
 		
+		info("Add user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		userAndGroup.addUserAdmin(username1, "");
+		userAndGroup.addUserContentManagement(username1, "");
+		magAc.signIn(username1, password);
 		/*Step Number: 1
 		 *Step Name: Step 1: Watch Page
 		 *Step Description: 
@@ -88,7 +102,6 @@ public class Wiki_Basic_Action_OtherActions extends Wiki_TestConfig {
 		waitForAndGetElement(wHome.ELEMENT_TREE_WIKI_NAME.replace("${name}",title),2000,0);
 		
 		info("Watch the wiki");
-		magAc.signOut();
 		magAc.signIn(DATA_USER2, DATA_PASS);
 		hp.goToWiki();
 		wHome.goToAPage(title);
@@ -108,8 +121,7 @@ public class Wiki_Basic_Action_OtherActions extends Wiki_TestConfig {
 			- Page is saved successfully
 			- An email notification will send to email of watcher about changed content*/
         info("Edit the page");
-		magAc.signOut();
-		magAc.signIn(DATA_USER1, DATA_PASS);
+		magAc.signIn(username1,password);
 		hp.goToWiki();
 		wHome.goToAPage(title);
 		wHome.goToEditPage();
@@ -132,9 +144,6 @@ public class Wiki_Basic_Action_OtherActions extends Wiki_TestConfig {
 		goToMail(EMAIL_ADDRESS2, EMAIL_PASS);
 		wikiMg.checkEmailNotification(title);
         
-        info("Delete page");
-        hp.goToWiki();
-        wHome.deleteWiki(title);
 	}
 
 	/**
@@ -146,7 +155,6 @@ public class Wiki_Basic_Action_OtherActions extends Wiki_TestConfig {
 	@Test(groups="pending")
 	public  void test03_ExportPageAsPDF() {
 		info("Test 3: Export page as PDF");
-		magAc.signIn(DATA_USER1, DATA_PASS);
 		String title = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		
 		/*Step Number: 1
@@ -181,9 +189,17 @@ public class Wiki_Basic_Action_OtherActions extends Wiki_TestConfig {
 	@Test
 	public  void test04_CheckPermalinkWhenUserIsMemberOfPage() {
 		info("Test 4: Check permalink when user is member of page");
-		magAc.signIn(DATA_USER1, DATA_PASS);
 		String title = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+		/*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
 		
+		info("Add user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		userAndGroup.addUserAdmin(username1, "");
+		userAndGroup.addUserContentManagement(username1, "");
+		magAc.signIn(username1, password);
 		/*Step Number: 1
 		 *Step Name: Step 1: Check permalink when user is member of page
 		 *Step Description: 
@@ -207,16 +223,10 @@ public class Wiki_Basic_Action_OtherActions extends Wiki_TestConfig {
 		waitForAndGetElement(wHome.ELEMENT_TREE_WIKI_NAME.replace("${name}",title),2000,0);
 		wHome.goToPermalink();
 		String perLink=wHome.getPermalink();
-		magAc.signOut();
 		magAc.signIn(DATA_USER2, DATA_PASS);
 		driver.get(perLink);
 		waitForAndGetElement(wHome.ELEMENT_WIKI_PAGE_LINK.replace("${pageTitle}", title));
 		
-		info("Delete page");
-		magAc.signOut();
-		magAc.signIn(DATA_USER1, DATA_PASS);
-	    hp.goToWiki();
-	    wHome.deleteWiki(title);
 	}
 
 	/**
@@ -228,9 +238,17 @@ public class Wiki_Basic_Action_OtherActions extends Wiki_TestConfig {
 	@Test
 	public  void test05_CheckPermalinkWhenUserIsNotMemberOfPage() {
 		info("Test 5: Check permalink when user is not member of page");
-		magAc.signIn(DATA_USER1, DATA_PASS);
 		String title = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+		/*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
 		
+		info("Add user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		userAndGroup.addUserAdmin(username1, "");
+		userAndGroup.addUserContentManagement(username1, "");
+		magAc.signIn(username1, password);
 		/*Step Number: 1
 		 *Step Name: Step 1: Add new page when set permission for page
 		 *Step Description: 
@@ -269,16 +287,9 @@ public class Wiki_Basic_Action_OtherActions extends Wiki_TestConfig {
 
 		 *Expected Outcome: 
 			The "Page Not found" is displayed, the user B cannot view the page*/ 
-		magAc.signOut();
 		magAc.signIn(DATA_USER2, DATA_PASS);
 		driver.get(perLink);
 		waitForAndGetElement(wHome.ELEMENT_WIKI_HOME_PAGENOTFOUND);
-		
-		info("Delete page");
-		magAc.signOut();
-		magAc.signIn(DATA_USER1, DATA_PASS);
-	    hp.goToWiki();
-	    wHome.deleteWiki(title);
 	}
 
 	/**
@@ -290,10 +301,18 @@ public class Wiki_Basic_Action_OtherActions extends Wiki_TestConfig {
 	@Test
 	public  void test06_CheckPermalinkWhenUserIsMemberOfSpace() {
 		info("Test 6: Check permalink when user is member of space");
-		magAc.signIn(DATA_USER1, DATA_PASS);
 		String space = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		String wiki = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+		/*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
 		
+		info("Add user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		userAndGroup.addUserAdmin(username1, "");
+		userAndGroup.addUserContentManagement(username1, "");
+		magAc.signIn(username1, password);
 		/*Step Number: 1
 		 *Step Name: Step 1: Add wiki page for space
 		 *Step Description: 
@@ -331,18 +350,12 @@ public class Wiki_Basic_Action_OtherActions extends Wiki_TestConfig {
 			The member of space can view the page created by the manager*/ 
 		wHome.goToPermalink();
 		String perLink=wHome.getPermalink();
-		magAc.signOut();
 		magAc.signIn(DATA_USER2, DATA_PASS);
 		hp.goToMySpaces();
 		spaMg.acceptAInvitation(space);
 		driver.get(perLink);
 		waitForAndGetElement(wHome.ELEMENT_WIKI_PAGE_LEFTBOX.replace("${title}",wiki));
 		
-		/*info("Delete page");
-		magAc.signOut();
-		magAc.signIn(DATA_USER1, DATA_PASS);
-		hp.goToMySpaces();
-		spaMg.deleteSpace(space,false);*/
 
 	}
 
@@ -355,10 +368,18 @@ public class Wiki_Basic_Action_OtherActions extends Wiki_TestConfig {
 	@Test
 	public  void test07_CheckPermalinkWhenUserIsNotMemberOfSpace() {
 		info("Test 7: Check permalink when user is not member of space");
-		magAc.signIn(DATA_USER1, DATA_PASS);
 		String space = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		String wiki = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+		/*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
 		
+		info("Add user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		userAndGroup.addUserAdmin(username1, "");
+		userAndGroup.addUserContentManagement(username1, "");
+		magAc.signIn(username1, password);
 		/*Step Number: 1
 		 *Step Name: Step 1: Add new page for space when set permission for page
 		 *Step Description: 
@@ -400,17 +421,11 @@ public class Wiki_Basic_Action_OtherActions extends Wiki_TestConfig {
 
 		 *Expected Outcome: 
 			The "Page Not found" is displayed, the user B cannot view the page*/
-		magAc.signOut();
 		magAc.signIn(DATA_USER2, DATA_PASS);
 		driver.get(perLink);
 		waitForAndGetElement(wHome.ELEMENT_WIKI_HOME_PAGENOTFOUND);
 		
 		
-		/*info("Delete page");
-		magAc.signOut();
-		magAc.signIn(DATA_USER1, DATA_PASS);
-		hp.goToMySpaces();
-		spaMg.deleteSpace(space,false);*/
 	}
 
 	/**
@@ -422,13 +437,21 @@ public class Wiki_Basic_Action_OtherActions extends Wiki_TestConfig {
 	@Test
 	public  void test08_UnwatchPage() {
 		info("Test 8: Unwatch Page");
-		magAc.signIn(DATA_USER1, DATA_PASS);
 		String wiki = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		String mess1 = wMessage.getWikiMessage(3);
 	    info("mess1:"+mess1);
 		String mess = wMessage.getWikiMessage(4);
 	    info("mess:"+mess);
-	        
+	    /*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		
+		info("Add user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		userAndGroup.addUserAdmin(username1, "");
+		userAndGroup.addUserContentManagement(username1, "");
+		magAc.signIn(username1, password);   
 		/*Step Number: 1
 		 *Step Name: Step 1: Unwatch Page
 		 *Step Description: 
@@ -446,19 +469,11 @@ public class Wiki_Basic_Action_OtherActions extends Wiki_TestConfig {
 		waitForAndGetElement(wHome.ELEMENT_TREE_WIKI_NAME.replace("${name}",wiki),2000,0);
 		
 		info("Watch the wiki");
-		magAc.signOut();
 		magAc.signIn(DATA_USER2, DATA_PASS);
 		hp.goToWiki();
 		wHome.goToAPage(wiki);
 		wikiMg.watchAPage(mess1);
         wikiMg.unWatchAPage(mess);
-        
-        info("Delete page");
-        magAc.signOut();
-		magAc.signIn(DATA_USER1, DATA_PASS);
-        hp.goToWiki();
-        wHome.deleteWiki(wiki);
-		
 	}
 
 	/**
@@ -470,9 +485,17 @@ public class Wiki_Basic_Action_OtherActions extends Wiki_TestConfig {
 	@Test
 	public  void test09_CheckWhenChangeLinkIsRestricted() {
 		info("Test 9: Check when change link is restricted");
-		magAc.signIn(DATA_USER1, DATA_PASS);
 		String title = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+		/*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
 		
+		info("Add user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		userAndGroup.addUserAdmin(username1, "");
+		userAndGroup.addUserContentManagement(username1, "");
+		magAc.signIn(username1, password);
 		/*Step Number: 1
 		 *Step Name: Step 1: Add new page is public
 		 *Step Description: 
@@ -489,7 +512,6 @@ public class Wiki_Basic_Action_OtherActions extends Wiki_TestConfig {
 		wikiMg.saveAddPage();
 		waitForAndGetElement(wHome.ELEMENT_TREE_WIKI_NAME.replace("${name}",title),2000,0);
 		
-		magAc.signOut();
 		magAc.signIn(DATA_USER2, DATA_PASS);
 		hp.goToWiki();
 		waitForAndGetElement(wHome.ELEMENT_TREE_WIKI_NAME.replace("${name}",title),2000,0);
@@ -505,8 +527,7 @@ public class Wiki_Basic_Action_OtherActions extends Wiki_TestConfig {
 
 		 *Expected Outcome: 
 			The form will show that the page is changed into the restricted status and just the authorized users can view and edit it.*/
-		magAc.signOut();
-		magAc.signIn(DATA_USER1, DATA_PASS);
+		magAc.signIn(username1,password);
 		hp.goToWiki();
 		wHome.goToAPage(title);
 		
@@ -532,16 +553,10 @@ public class Wiki_Basic_Action_OtherActions extends Wiki_TestConfig {
 		String perLink=wHome.getPermalink();
 		click(wHome.ELEMENT_PERMALINK_CLOSE);
 		Utils.pause(2000);
-		magAc.signOut();
 		magAc.signIn(DATA_USER2, DATA_PASS);
 		driver.get(perLink);
 		waitForAndGetElement(wHome.ELEMENT_WIKI_HOME_PAGENOTFOUND);
 		
-		 info("Delete page");
-	     magAc.signOut();
-	     magAc.signIn(DATA_USER1, DATA_PASS);
-	     hp.goToWiki();
-	     wHome.deleteWiki(title);
 	}
 
 	/**
@@ -553,9 +568,17 @@ public class Wiki_Basic_Action_OtherActions extends Wiki_TestConfig {
 	@Test
 	public  void test10_CheckWhenChangeLinkIsPublic() {
 		info("Test 10 Check when change link is public");
-		magAc.signIn(DATA_USER1, DATA_PASS);
 		String title = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+		/*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
 		
+		info("Add user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		userAndGroup.addUserAdmin(username1, "");
+		userAndGroup.addUserContentManagement(username1, "");
+		magAc.signIn(username1, password);
 		/*Step Number: 1
 		 *Step Name: Step 1: Add new page is public
 		 *Step Description: 
@@ -607,16 +630,10 @@ public class Wiki_Basic_Action_OtherActions extends Wiki_TestConfig {
 		click(wHome.ELEMENT_PERMALINK_CLOSE);
 		Utils.pause(2000);
 
-		magAc.signOut();
 		magAc.signIn(DATA_USER2, DATA_PASS);
 		driver.get(perLink);
 		waitForAndGetElement(wHome.ELEMENT_WIKI_PAGE_LINK.replace("${pageTitle}", title));
 		
-		info("Delete page");
-	    magAc.signOut();
-	    magAc.signIn(DATA_USER1, DATA_PASS);
-	    hp.goToWiki();
-	    wHome.deleteWiki(title);
 	}
 
 	/**
@@ -628,9 +645,17 @@ public class Wiki_Basic_Action_OtherActions extends Wiki_TestConfig {
 	@Test
 	public  void test11_ChangePermissionForPageInPermalinkPage() {
 		info("Test 11 Change permission for page in Permalink page");
-		magAc.signIn(DATA_USER1, DATA_PASS);
 		String title = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+		/*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
 		
+		info("Add user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		userAndGroup.addUserAdmin(username1, "");
+		userAndGroup.addUserContentManagement(username1, "");
+		magAc.signIn(username1, password);
 		/*Step Number: 1
 		 *Step Name: Step 1: Change permission for page in Permalink page
 		 *Step Description: 
@@ -659,16 +684,9 @@ public class Wiki_Basic_Action_OtherActions extends Wiki_TestConfig {
 		wikiMg.unCheckViewAUserOfPage(wHome.ELEMENT_PERMISSION_VIEW_ANY);
 		
 		
-		magAc.signOut();
 		magAc.signIn(DATA_USER2, DATA_PASS);
 		driver.get(perLink);
 		waitForAndGetElement(wHome.ELEMENT_WIKI_HOME_PAGENOTFOUND);
-		
-		info("Delete page");
-	    magAc.signOut();
-	    magAc.signIn(DATA_USER1, DATA_PASS);
-	    hp.goToWiki();
-	    wHome.deleteWiki(title);
 	}
 
 	/**
@@ -685,8 +703,16 @@ public class Wiki_Basic_Action_OtherActions extends Wiki_TestConfig {
 		
 		String wiki1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		String wiki2 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+		/*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
 		
-		magAc.signIn(DATA_USER1, DATA_PASS);
+		info("Add user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		userAndGroup.addUserAdmin(username1, "");
+		userAndGroup.addUserContentManagement(username1, "");
+		magAc.signIn(username1, password);
 		/*Step Number: 1
 		 *Step Name: Step 1: Add new space
 		 *Step Description: 
@@ -801,11 +827,6 @@ public class Wiki_Basic_Action_OtherActions extends Wiki_TestConfig {
 		wHome.goToAPage(wiki2);
 		waitForAndGetElement((wHome.ELEMENT_WIKI_PAGE_LEFTBOX).replace("${title}", wiki1));
 		
-        
-		/*info("Delete data test");
-		hp.goToMySpaces();
-		spaMg.deleteSpace(space1,false);
-		spaMg.deleteSpace(space2,false);*/
 	}
 
 	/**
@@ -821,7 +842,16 @@ public class Wiki_Basic_Action_OtherActions extends Wiki_TestConfig {
 		
 		String wiki1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		String wiki2 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
-		magAc.signIn(DATA_USER1, DATA_PASS);
+		/*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		
+		info("Add user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		userAndGroup.addUserAdmin(username1, "");
+		userAndGroup.addUserContentManagement(username1, "");
+		magAc.signIn(username1, password);
 		/*Step Number: 1
 		 *Step Name: Step 1: Add new space
 		 *Step Description: 
@@ -907,11 +937,6 @@ public class Wiki_Basic_Action_OtherActions extends Wiki_TestConfig {
 		wHome.goToAPage(wiki2);
 		waitForAndGetElement((wHome.ELEMENT_WIKI_PAGE_LEFTBOX).replace("${title}", wiki1));
 		
-        
-		/*info("Delete data test");
-		hp.goToMySpaces();
-		spaMg.deleteSpace(space,false);*/
-		
 	}
 
 	/**
@@ -928,7 +953,17 @@ public class Wiki_Basic_Action_OtherActions extends Wiki_TestConfig {
 			
 		String wiki1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		String wiki2 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
-		magAc.signIn(DATA_USER1, DATA_PASS);
+		/*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		
+		info("Add user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		userAndGroup.addUserAdmin(username1, "");
+		userAndGroup.addUserContentManagement(username1, "");
+		magAc.signIn(username1, password);
+		
 		/*Step Number: 1
 		 *Step Name: Step 1: Add new space
 		 *Step Description: 
@@ -1008,9 +1043,6 @@ public class Wiki_Basic_Action_OtherActions extends Wiki_TestConfig {
 			- "Page 1" is moved to "Page 2" in Space 1*/ 
 
 		wikiMg.movePage(wiki1, wiki2);
-		/*info("Delete data test");
-		hp.goToMySpaces();
-		spaMg.deleteSpace(space,false);*/
 	}
 
 	/**
@@ -1022,12 +1054,20 @@ public class Wiki_Basic_Action_OtherActions extends Wiki_TestConfig {
 	@Test
 	public  void test15_MoveWikisPageOfPortalToSpace() {
 		info("Test 15 Move wiki's page of Portal to Space");
-		magAc.signIn(DATA_USER1, DATA_PASS);
         String space = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		
 		String wiki1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		String wiki2 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+		/*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
 		
+		info("Add user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		userAndGroup.addUserAdmin(username1, "");
+		userAndGroup.addUserContentManagement(username1, "");
+		magAc.signIn(username1, password);
 		/*Step Number: 1
 		 *Step Name: Step 1: Add new space
 		 *Step Description: 
@@ -1116,10 +1156,6 @@ public class Wiki_Basic_Action_OtherActions extends Wiki_TestConfig {
 		
 		hp.goToWiki();
 		waitForElementNotPresent((wHome.ELEMENT_WIKI_PAGE_LEFTBOX).replace("${title}",wiki1));
-		
-		/*info("Delete data test");
-		hp.goToMySpaces();
-		spaMg.deleteSpace(space,false);*/
 	}
 
 	/**
@@ -1131,7 +1167,6 @@ public class Wiki_Basic_Action_OtherActions extends Wiki_TestConfig {
 	@Test
 	public  void test16_MovePageHasTheSameNameWithPageInTargetSpace() {
 		info("Test 16 Move page has the same name with page in target space");
-		magAc.signIn(DATA_USER1, DATA_PASS);
         String space1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
         String space2 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		
@@ -1141,6 +1176,17 @@ public class Wiki_Basic_Action_OtherActions extends Wiki_TestConfig {
 		
 		String mess = wMessage.getWikiMessage(5);
 		info("mess:"+mess);
+		
+		/*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		
+		info("Add user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		userAndGroup.addUserAdmin(username1, "");
+		userAndGroup.addUserContentManagement(username1, "");
+		magAc.signIn(username1, password);
 		/*Step Number: 1
 		 *Step Name: Step 1: Add new space
 		 *Step Description: 
@@ -1233,11 +1279,6 @@ public class Wiki_Basic_Action_OtherActions extends Wiki_TestConfig {
 		rtMode.editSimplePage(newTitle, "");
 		wikiMg.saveAddPage();
 		waitForAndGetElement((wHome.ELEMENT_WIKI_PAGE_LEFTBOX).replace("${title}",newTitle));
-		
-		/*info("Delete data test");
-		hp.goToMySpaces();
-		spaMg.deleteSpace(space1,false);
-		spaMg.deleteSpace(space2,false);*/
 	}
 
 	/**
@@ -1250,13 +1291,23 @@ public class Wiki_Basic_Action_OtherActions extends Wiki_TestConfig {
 	@Test(groups="pending")
 	public  void test02_MovePageWhenUserHasNoEditPermissionAtDestinationPage() {
 		info("Test 02: Move page when user has no edit permission at destination page");
-		magAc.signIn(DATA_USER1, DATA_PASS);
 		String space = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		
 		String wiki1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		String wiki2 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		String mess = wMessage.getWikiMessage(6);
 		info("mess:"+mess);
+		
+		/*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		
+		info("Add user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		userAndGroup.addUserAdmin(username1, "");
+		userAndGroup.addUserContentManagement(username1, "");
+		magAc.signIn(username1, password);
 		/*Step Number: 1
 		 *Step Name: Step 1: Add new space
 		 *Step Description: 
@@ -1332,7 +1383,6 @@ public class Wiki_Basic_Action_OtherActions extends Wiki_TestConfig {
 		 *Expected Outcome: 
 			- Move Page form appear*/
 
-		magAc.signOut();
 		magAc.signIn(DATA_USER2, DATA_PASS);
 		hp.goToMySpaces();
 		spaMg.acceptAInvitation(space);
@@ -1372,7 +1422,16 @@ public class Wiki_Basic_Action_OtherActions extends Wiki_TestConfig {
         String mess = wMessage.getWikiMessage(3);
         info("mess:"+mess);
 
-        magAc.signIn(DATA_USER1, DATA_PASS);
+        /*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		
+		info("Add user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		userAndGroup.addUserAdmin(username1, "");
+		userAndGroup.addUserContentManagement(username1, "");
+		magAc.signIn(username1, password);
 		/*Step Number: 1
 		 *Step Name: Step 1: Watch Page
 		 *Step Description: 
@@ -1396,7 +1455,6 @@ public class Wiki_Basic_Action_OtherActions extends Wiki_TestConfig {
 		rtMode.addSimplePage(wiki1,wiki1);
 		wikiMg.saveAddPage();
 		
-		magAc.signOut();
 		magAc.signIn(DATA_USER2, DATA_PASS);
 		hp.goToMySpaces();
 		spaMg.acceptAInvitation(space);
@@ -1417,8 +1475,7 @@ public class Wiki_Basic_Action_OtherActions extends Wiki_TestConfig {
 			- Page is saved successfully
 			- An email notification will send to email of watcher about changed content*/
 
-		magAc.signOut();
-		magAc.signIn(DATA_USER1, DATA_PASS);
+		magAc.signIn(username1,password);
 		spaHome.goToSpace(space);
 		spaHome.goToWikiTab();
 		wHome.goToAPage(wiki1);

@@ -16,7 +16,16 @@ public class Wiki_Search extends Wiki_TestConfig {
 	public  void test01_QuickSearch() {
 		info("Test 1: Quick search");
 		String wiki = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+		/*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
 		
+		info("Add user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		userAndGroup.addUserAdmin(username1, "");
+		userAndGroup.addUserContentManagement(username1, "");
+		magAc.signIn(username1, password);
 		/*Step Number: 1
 		 *Step Name: Step 1: Quick Search
 		 *Step Description: 
@@ -34,9 +43,6 @@ public class Wiki_Search extends Wiki_TestConfig {
 		wHome.goTosearchPage(wiki);
 		info("Verify that search page is shown with the text");
 		waitForAndGetElement(wSearchMg.ELEMENT_SEARCH_RESULT.replace("${title}",wiki),3000,0);
-		info("Delete the page");
-		hp.goToWiki();
-		wHome.deleteWiki(wiki);
 	}
 
 	/**
@@ -49,7 +55,16 @@ public class Wiki_Search extends Wiki_TestConfig {
 	public  void test02_AdvancedSearch() {
 		info("Test 2: Advanced search");
 		String wiki = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+		/*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
 		
+		info("Add user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		userAndGroup.addUserAdmin(username1, "");
+		userAndGroup.addUserContentManagement(username1, "");
+		magAc.signIn(username1, password);
 		/*Step Number: 1
 		 *Step Name: Step 1: Do quick search
 		 *Step Description: 
@@ -79,9 +94,6 @@ public class Wiki_Search extends Wiki_TestConfig {
 		wSearchMg.advancedSearch("","My Wiki");
 		info("Verify that the searched results is listed that matches with keyword and selected location");
 		waitForAndGetElement(wSearchMg.ELEMENT_SEARCH_NORESULT,3000,0);
-		info("Delete the page");
-		hp.goToWiki();
-		wHome.deleteWiki(wiki);
 	}
 
 	/**
@@ -95,7 +107,16 @@ public class Wiki_Search extends Wiki_TestConfig {
 		info("Test 3: Search template");
 	
 		String template = wTempData.getWikiTemplateRandom();
+		/*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
 		
+		info("Add user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		userAndGroup.addUserAdmin(username1, "");
+		userAndGroup.addUserContentManagement(username1, "");
+		magAc.signIn(username1, password);
 		/*Step Number: 1
 		 *Step Name: Step 1: Search Template
 		 *Step Description: 

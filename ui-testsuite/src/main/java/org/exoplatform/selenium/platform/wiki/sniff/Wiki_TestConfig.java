@@ -5,8 +5,11 @@ import static org.exoplatform.selenium.TestLogger.info;
 import org.exoplatform.selenium.platform.HomePagePlatform;
 import org.exoplatform.selenium.platform.ActivityStream;
 import org.exoplatform.selenium.platform.ManageLogInOut;
+import org.exoplatform.selenium.platform.NavigationToolbar;
 import org.exoplatform.selenium.platform.PlatformBase;
 import org.exoplatform.selenium.platform.PlatformPermission;
+import org.exoplatform.selenium.platform.gatein.UserAddManagement;
+import org.exoplatform.selenium.platform.gatein.UserAndGroupManagement;
 import org.exoplatform.selenium.platform.objectdatabase.common.AttachmentFileDatabase;
 import org.exoplatform.selenium.platform.objectdatabase.common.TextBoxDatabase;
 import org.exoplatform.selenium.platform.objectdatabase.wiki.WikiMessageDatabase;
@@ -49,8 +52,11 @@ public class Wiki_TestConfig extends PlatformBase {
 	RichTextEditor rtMode;
 	SpaceManagement spaMg;
 	SpaceHomePage spaHome;
+	NavigationToolbar navTool;
 	
 	SpaceSettingManagement setSpaceMg;
+	UserAddManagement addUserPage;
+	UserAndGroupManagement userAndGroup;
 	
 	TextBoxDatabase txData;
 	AttachmentFileDatabase fData;
@@ -65,13 +71,13 @@ public class Wiki_TestConfig extends PlatformBase {
 		initSeleniumTest();
 		getDefaultUserPass(userDataFilePath,defaultSheet,isUseFile,jdbcDriver,dbUrl,user,pass,sqlUser);
 		magAc = new ManageLogInOut(driver);
-		magAc.signIn(DATA_USER1, DATA_PASS);
+		magAc.signIn(USER_ROOT,PASS_ROOT);
 		
 		hp = new HomePagePlatform(driver);
 		hpAct = new ActivityStream(driver);
 		spaHome = new SpaceHomePage(driver);
 		wikiLocs = new WikiLocators();
-		
+		navTool = new NavigationToolbar(driver);
 		PlfPerm = new PlatformPermission(driver);
 		
 		wikiMg = new WikiManagement(driver);
@@ -82,6 +88,8 @@ public class Wiki_TestConfig extends PlatformBase {
 		wPermission = new WikiPermission(driver);
 		wPageInfo = new WikiPageInformation(driver);
 		sourceEditor = new SourceTextEditor(driver);
+		addUserPage = new UserAddManagement(driver);
+		userAndGroup = new UserAndGroupManagement(driver);
 		
 		rtMode = new RichTextEditor(driver);
 		spaMg = new SpaceManagement(driver);
@@ -109,12 +117,6 @@ public class Wiki_TestConfig extends PlatformBase {
 	@AfterMethod
 	public void afterMethod(){
 		info("Start AfterMethod");
-		/*info ("After Test");
-		if (waitForAndGetElement(wikiLocs.ELEMENT_TEMPLATE_SELECT_FORM, 5000, 0) != null) {
-			info("click Cancel Template button");
-			click(wikiLocs.ELEMENT_TEMPLATE_CANCEL_BTN);
-			waitForElementNotPresent(wikiLocs.ELEMENT_TEMPLATE_SELECT_FORM);
-		}*/
 		driver.manage().deleteAllCookies();
 		driver.quit();
 		info("End AfterMethod");

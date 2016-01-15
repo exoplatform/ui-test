@@ -22,6 +22,16 @@ public class Ecms_SE_BasicAction extends ECMS_TestConfig_Part2{
 	@Test
 	public  void test01_AddSymlinkForANode() {
 		info("Test 1: Add symlink for a node");
+		/*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		
+		info("Add user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		userAndGroup.addUserAdmin(username1, "");
+		userAndGroup.addUserContentManagement(username1, "");
+		magAc.signIn(username1, password);
 		/*Step Number: 1
 		 *Step Name: -
 		 *Step Description: 
@@ -88,6 +98,16 @@ public class Ecms_SE_BasicAction extends ECMS_TestConfig_Part2{
 
 		String destination="intranet";
 		String secondDestination="acme";
+		/*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		
+		info("Add user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		userAndGroup.addUserAdmin(username1, "");
+		userAndGroup.addUserContentManagement(username1, "");
+		magAc.signIn(username1, password);
 		
 		String titleCommonNode= txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		
@@ -158,6 +178,16 @@ public class Ecms_SE_BasicAction extends ECMS_TestConfig_Part2{
 	@Test
 	public  void test06_07_LockANode_UnlockANode() {
 		info("Test 6: Lock a node");
+		/*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		
+		info("Add user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		userAndGroup.addUserAdmin(username1, "");
+		userAndGroup.addUserContentManagement(username1, "");
+		magAc.signIn(username1, password);
 		/*Step Number: 1
 		 *Step Name: Step 1: Lock a node
 		 *Step Description: 
@@ -233,6 +263,16 @@ public class Ecms_SE_BasicAction extends ECMS_TestConfig_Part2{
 	 */
 	@Test
 	public  void test09_10_DeleteClipboard_PasteClipboard() {
+		/*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		
+		info("Add user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		userAndGroup.addUserAdmin(username1, "");
+		userAndGroup.addUserContentManagement(username1, "");
+		magAc.signIn(username1, password);
 		/*Step Number: 1
 		 *Step Name: -
 		 *Step Description: 
@@ -299,6 +339,16 @@ public class Ecms_SE_BasicAction extends ECMS_TestConfig_Part2{
 	@Test
 	public  void test11_RenameANode() {
 		info("Test 11: Rename a node");
+		/*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		
+		info("Add user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		userAndGroup.addUserAdmin(username1, "");
+		userAndGroup.addUserContentManagement(username1, "");
+		magAc.signIn(username1, password);
 		
 		/*Step Number: 1
 		 *Step Name: -

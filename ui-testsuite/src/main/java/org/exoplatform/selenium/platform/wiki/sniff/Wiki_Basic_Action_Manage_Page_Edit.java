@@ -18,7 +18,16 @@ public class Wiki_Basic_Action_Manage_Page_Edit extends Wiki_TestConfig {
 		info("Test 02: Edit page with Source Editor");
 		String wiki = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		String wiki2 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+		/*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
 		
+		info("Add user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		userAndGroup.addUserAdmin(username1, "");
+		userAndGroup.addUserContentManagement(username1, "");
+		magAc.signIn(username1, password);
 		/*Step Number: 1
 		 *Step Name: Step 1: Edit page with Source Editor
 		 *Step Description: 
@@ -40,10 +49,6 @@ public class Wiki_Basic_Action_Manage_Page_Edit extends Wiki_TestConfig {
 		rtMode.editSimplePage(wiki2,wiki2);
 		wikiMg.saveAddPage();
 		waitForAndGetElement(wHome.ELEMENT_TREE_WIKI_NAME.replace("${name}",wiki2),2000,0);
-		
-		info("Delete the page");
-		hp.goToWiki();
-		wHome.deleteWiki(wiki2);
 	}
 
 	/**
@@ -58,7 +63,16 @@ public class Wiki_Basic_Action_Manage_Page_Edit extends Wiki_TestConfig {
 		info("Test 1: Edit Page with Rich Text Editor");
 		String wiki = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		String wiki2 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+		/*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
 		
+		info("Add user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		userAndGroup.addUserAdmin(username1, "");
+		userAndGroup.addUserContentManagement(username1, "");
+		magAc.signIn(username1, password);
 		/*Step Number: 1
 		 *Step Name: Step 1: Edit Page with Rich Text Editor
 		 *Step Description: 
@@ -82,9 +96,6 @@ public class Wiki_Basic_Action_Manage_Page_Edit extends Wiki_TestConfig {
 		wikiMg.saveAddPage();
 		waitForAndGetElement(wHome.ELEMENT_TREE_WIKI_NAME.replace("${name}",wiki2),2000,0);
 		
-		info("Delete the page");
-		hp.goToWiki();
-		wHome.deleteWiki(wiki2);
 	}
 
 	/**
@@ -99,7 +110,16 @@ public class Wiki_Basic_Action_Manage_Page_Edit extends Wiki_TestConfig {
 	
 		String wiki = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		String wiki2 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+		/*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
 		
+		info("Add user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		userAndGroup.addUserAdmin(username1, "");
+		userAndGroup.addUserContentManagement(username1, "");
+		magAc.signIn(username1, password);
 		/*Step Number: 1
 		 *Step Name: Step 1: Check auto save when editing page
 		 *Step Description: 
@@ -122,9 +142,6 @@ public class Wiki_Basic_Action_Manage_Page_Edit extends Wiki_TestConfig {
 		info("The page in edit mode is displayed");
 		rtMode.editSimplePageWithAutoSave(wiki2, wiki2);
 		
-		info("Delete draf");
-		wHome.goToMyDraft();
-		wDraft.deleteDraft(wiki2);
 	}
 	
 	/**
@@ -139,6 +156,16 @@ public class Wiki_Basic_Action_Manage_Page_Edit extends Wiki_TestConfig {
 		String template = wTempData.getWikiTemplateRandom();
 		String title = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		String title2 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+		/*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		
+		info("Add user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		userAndGroup.addUserAdmin(username1, "");
+		userAndGroup.addUserContentManagement(username1, "");
+		magAc.signIn(username1, password);
 		/*Step Number: 1
 		 *Step Name: Step 1: Edit Page with template layout
 		 *Step Description: 
@@ -160,10 +187,6 @@ public class Wiki_Basic_Action_Manage_Page_Edit extends Wiki_TestConfig {
 		rtMode.editSimplePage(title2, title2);
 		wikiMg.saveAddPage();
 		waitForAndGetElement(wHome.ELEMENT_TREE_WIKI_NAME.replace("${name}",title2),2000,0);
-		
-		info("Delete the page");
-		hp.goToWiki();
-		wHome.deleteWiki(title2);
 	}
 	
 	/**
@@ -178,8 +201,16 @@ public class Wiki_Basic_Action_Manage_Page_Edit extends Wiki_TestConfig {
 		
 		String title = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		String content = "== "+title+" ==";
-		String title2 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
-		String content2 = "=== "+title2+" ===";
+		/*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		
+		info("Add user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		userAndGroup.addUserAdmin(username1, "");
+		userAndGroup.addUserContentManagement(username1, "");
+		magAc.signIn(username1, password);
 		
 		/*Step Number: 1
 		 *Step Name: Step 1: Edit Paragraph
@@ -201,9 +232,6 @@ public class Wiki_Basic_Action_Manage_Page_Edit extends Wiki_TestConfig {
 		wikiMg.saveAddPage();
 		waitForAndGetElement(wHome.ELEMENT_TREE_WIKI_NAME.replace("${name}",title),2000,0);
 		
-		wikiMg.editParagraph(title, content2);
-		wikiMg.saveAddPage();
-		wHome.deleteWiki(title);
 	}
 	
 	/**
@@ -219,6 +247,16 @@ public class Wiki_Basic_Action_Manage_Page_Edit extends Wiki_TestConfig {
 		String newTitle = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		String comment = wMessage.getWikiMessage(0)+ " "+newTitle;
 		String comment1 = wMessage.getWikiMessage(1);
+		/*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		
+		info("Add user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		userAndGroup.addUserAdmin(username1, "");
+		userAndGroup.addUserContentManagement(username1, "");
+		magAc.signIn(username1, password);
 		
 		/*Step Number: 1
 		 *Step Name: Step 1: Add new page
@@ -311,9 +349,6 @@ public class Wiki_Basic_Action_Manage_Page_Edit extends Wiki_TestConfig {
 		hpAct.checkActivity(newTitle);
 		hpAct.checkCommentOfActivity(newTitle,comment1);
 		
-		info("Delete the page");
-		hp.goToWiki();
-		wHome.deleteWiki(newTitle);
 	}
 	
 	/**
@@ -327,7 +362,16 @@ public class Wiki_Basic_Action_Manage_Page_Edit extends Wiki_TestConfig {
 		info("Test 07: Edit page when publish activity is not checked");
 		String title = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		String newTitle = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+		/*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
 		
+		info("Add user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		userAndGroup.addUserAdmin(username1, "");
+		userAndGroup.addUserContentManagement(username1, "");
+		magAc.signIn(username1, password);
 		/*Step Number: 1
 		 *Step Name: Step 1: Add new page
 		 *Step Description: 
@@ -411,10 +455,5 @@ public class Wiki_Basic_Action_Manage_Page_Edit extends Wiki_TestConfig {
          */
 		hp.goToHomePage();
 		waitForElementNotPresent(hpAct.ELEMENT_ACTIVITY_ELEMENT_IN_ACTIVITY_STREAM.replace("{$name}",newTitle),3000,0);
-		
-		info("Delete the page");
-		hp.goToWiki();
-		wHome.deleteWiki(newTitle);
-	}
-	
+	}	
 }

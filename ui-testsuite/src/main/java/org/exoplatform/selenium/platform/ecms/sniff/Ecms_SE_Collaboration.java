@@ -31,6 +31,17 @@ import org.testng.annotations.*;
 		String title2 = txData.getContentByArrayTypeRandom(1)+number2+"_FR";
 		String content2 = txData.getContentByArrayTypeRandom(1)+number2+"_FR";
 		
+		/*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		
+		info("Add user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		userAndGroup.addUserAdmin(username1, "");
+		userAndGroup.addUserContentManagement(username1, "");
+		magAc.signIn(username1, password);
+		
 		/*Step Number: 1
 		*Step Name: -
 		*Step Description: 
@@ -69,11 +80,6 @@ import org.testng.annotations.*;
 		click(SEHome.ELEMENT_SITEEXPLORER_LEFTBOX_RELATION);
 		waitForAndGetElement(SEHome.ELEMENT_SITEEXPLORER_LEFTBOX_TITLE_TRANSLATION.replace("${title}", title2));
 		
-		info("Delete all data test");
-		navTool.goToSiteExplorer();
-		SEHome.goToPath("acme/documents", "Site Management");
-		SEHome.deleteData(title);
-		SEHome.deleteData(title2);
  	}
 
 	/**
@@ -92,6 +98,17 @@ import org.testng.annotations.*;
 		String content = txData.getContentByArrayTypeRandom(1)+number1;
 		String content2 = txData.getContentByArrayTypeRandom(1)+number2;
 		info("Fnishing Getting data test");
+		
+		/*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		
+		info("Add user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		userAndGroup.addUserAdmin(username1, "");
+		userAndGroup.addUserContentManagement(username1, "");
+		magAc.signIn(username1, password);
 		
 		/*Step Number: 1
 		*Step Name: -
@@ -146,7 +163,16 @@ import org.testng.annotations.*;
 		String content = txData.getContentByArrayTypeRandom(1)+number1;
 		String content2 = txData.getContentByArrayTypeRandom(1)+number2;
 		String content3 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+		/*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
 		
+		info("Add user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		userAndGroup.addUserAdmin(username1, "");
+		userAndGroup.addUserContentManagement(username1, "");
+		magAc.signIn(username1, password);
 		/*Step Number: 1
 		*Step Name: Step 1: Add a tag
 		*Step Description: 
@@ -193,7 +219,16 @@ import org.testng.annotations.*;
 		info("Test 08: Vote for document/uploaded file");
 		
 		String fileName = fData.getAttachFileByArrayTypeRandom(1);
+		/*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
 		
+		info("Add user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		userAndGroup.addUserAdmin(username1, "");
+		userAndGroup.addUserContentManagement(username1, "");
+		magAc.signIn(username1, password);
 		/*Step Number: 1
 		*Step Name: -
 		*Step Description: 
@@ -233,7 +268,16 @@ import org.testng.annotations.*;
 		String content2 = txData.getContentByArrayTypeRandom(1)+number2;
 		String content3 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		info("Finished getting data test");
+		/*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
 		
+		info("Add user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		userAndGroup.addUserAdmin(username1, "");
+		userAndGroup.addUserContentManagement(username1, "");
+		magAc.signIn(username1, password);
 		/*Step Number: 1
 		*Step Name: -
 		*Step Description: 
@@ -289,7 +333,16 @@ import org.testng.annotations.*;
 		String title = txData.getContentByArrayTypeRandom(1)+number1;
 		String content = txData.getContentByArrayTypeRandom(1)+number1;
 		String content2 = txData.getContentByArrayTypeRandom(1)+number2;
+		/*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
 		
+		info("Add user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		userAndGroup.addUserAdmin(username1, "");
+		userAndGroup.addUserContentManagement(username1, "");
+		magAc.signIn(username1, password);
 		/*Step Number: 1
 		*Step Name: -
 		*Step Description: 

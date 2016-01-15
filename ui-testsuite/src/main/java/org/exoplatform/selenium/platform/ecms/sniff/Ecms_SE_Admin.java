@@ -20,8 +20,6 @@ public class Ecms_SE_Admin extends ECMS_TestConfig_Part2{
 		info("Go to Explorer tab");
 		navTool.goToContentAdministration();
 		caPage.addAllActions();
-		magAc.signOut();
-		magAc.signIn(DATA_USER1, DATA_PASS);
 	}
 	/**
 	 * By QuynhPT
@@ -32,6 +30,17 @@ public class Ecms_SE_Admin extends ECMS_TestConfig_Part2{
 	@Test(priority=1)
 	public  void test01_AddRelation() {
 		info("Test 1: Add Relation");
+		addActions();
+		/*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		
+		info("Add user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		userAndGroup.addUserAdmin(username1, "");
+		userAndGroup.addUserContentManagement(username1, "");
+		magAc.signIn(username1, password);
 		/*
 		 * Precondition: If Relations is not available on action bar, 
 		 * go to Content Administration/ Manage View and edit your current view in use with Relation option ticked
@@ -93,11 +102,6 @@ public class Ecms_SE_Admin extends ECMS_TestConfig_Part2{
 		info("Verify the file in reference section");
 		waitForAndGetElement(SEHome.ELEMENT_SIDE_BAR_RELATION_TAB_FILE_TITLE.replace("${nameContent}",node2));
 		
-		info("Delete all data test");
-		navTool.goToSiteExplorer();
-		SEHome.goToPath("acme/documents", "Site Management");
-		SEHome.deleteData(node1);
-		SEHome.deleteData(node2);
 	}
 
 	/**
@@ -109,6 +113,16 @@ public class Ecms_SE_Admin extends ECMS_TestConfig_Part2{
 	@Test(priority=2) 
 	public  void test02_DeleteRelation() {
 		info("Test 02: Delete Relation");
+		/*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		
+		info("Add user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		userAndGroup.addUserAdmin(username1, "");
+		userAndGroup.addUserContentManagement(username1, "");
+		magAc.signIn(username1, password);
 		
 		 /* Precondition: If Relations is not available on action bar, 
 		 * go to Content Administration/ Manage View and edit your current view in use with Relation option ticked
@@ -167,11 +181,6 @@ public class Ecms_SE_Admin extends ECMS_TestConfig_Part2{
 		SEHome.goToRelationSideBar();
 		waitForElementNotPresent(SEHome.ELEMENT_SIDE_BAR_RELATION_TAB_FILE_TITLE.replace("${nameContent}",node1));
 		
-		info("Delete all data test");
-		navTool.goToSiteExplorer();
-		SEHome.goToPath("acme/documents", "Site Management");
-		SEHome.deleteData(node1);
-		SEHome.deleteData(node2);
 		
 	 }
 	/**
@@ -181,6 +190,17 @@ public class Ecms_SE_Admin extends ECMS_TestConfig_Part2{
 	@Test(priority=3)
 	public  void test03_ShowHideRelation() {
 		info("Test 3: Show/Hide Relation");
+		/*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		
+		info("Add user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		userAndGroup.addUserAdmin(username1, "");
+		userAndGroup.addUserContentManagement(username1, "");
+		magAc.signIn(username1, password);
+		
 		info("Create data test");
 		String node1 = txData.getContentByArrayTypeRandom(1)+ getRandomNumber();
 		String node2 = txData.getContentByArrayTypeRandom(1)+ getRandomNumber();
@@ -223,11 +243,6 @@ public class Ecms_SE_Admin extends ECMS_TestConfig_Part2{
 		click(SEHome.ELEMENT_SIDE_BAR_FILE_EXPLORER_ICON);
 		waitForAndGetElement(SEHome.ELEMENT_SIDEBAR_SITES_MANAGEMENT);
 		
-		info("Delete all data test");
-		navTool.goToSiteExplorer();
-		SEHome.goToPath("acme/documents", "Site Management");
-		SEHome.deleteData(node1);
-		SEHome.deleteData(node2);
 	}
 
 	/**
@@ -239,6 +254,16 @@ public class Ecms_SE_Admin extends ECMS_TestConfig_Part2{
 	@Test(priority=8)
 	public  void test04_05_ImportExportANode() {
 		info("Test 4: Export a Node");
+		/*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		
+		info("Add user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		userAndGroup.addUserAdmin(username1, "");
+		userAndGroup.addUserContentManagement(username1, "");
+		magAc.signIn(username1, password);
 
 		/*Step Number: 1
 		 *Step Name: Export a node
@@ -297,11 +322,6 @@ public class Ecms_SE_Admin extends ECMS_TestConfig_Part2{
 		SEHome.goToImportNode();
 		SEHome.importNode("TestData/"+filePath,"Create New",false, "");
 		
-		info("Delete all data test");
-		navTool.goToSiteExplorer();
-		SEHome.goToPath("intranet/documents", "Site Management");
-		SEHome.deleteData(node2);
-		deleteFile("TestOutput/sysview.xml");
 	}
 
 	/**
@@ -312,6 +332,16 @@ public class Ecms_SE_Admin extends ECMS_TestConfig_Part2{
 	@Test(priority=4)
 	public  void test06_Add_Delete_Category() {
 		info("Test 6: Add a category");
+		/*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		
+		info("Add user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		userAndGroup.addUserAdmin(username1, "");
+		userAndGroup.addUserContentManagement(username1, "");
+		magAc.signIn(username1, password);
 
 		/*Step Number: 1
 		 *Step Name:Add Category
@@ -346,10 +376,6 @@ public class Ecms_SE_Admin extends ECMS_TestConfig_Part2{
 		waitForAndGetElement(SEHome.ELEMENT_ADD_CATEGORY_POPUP_DELETE_CATEGORY.replace("${nameCategory}",nameSelectedCategory));
 		SEHome.closeAddCategoryPopup();
 		
-		info("Delete all data test");
-		navTool.goToSiteExplorer();
-		SEHome.goToPath("acme/documents", "Site Management");
-		SEHome.deleteData(node1);
 	}
 	
 	/**<li> Case ID:116654.</li>
@@ -362,6 +388,16 @@ public class Ecms_SE_Admin extends ECMS_TestConfig_Part2{
     @Test(priority=5)
 	public void test07_Delete_Category() {
 		info("Test 7: Delete a category");
+		/*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		
+		info("Add user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		userAndGroup.addUserAdmin(username1, "");
+		userAndGroup.addUserContentManagement(username1, "");
+		magAc.signIn(username1, password);
 		/*Step Number: 1
 		 *Step Name:Delete a category
 		 *Step Description: 
@@ -397,10 +433,6 @@ public class Ecms_SE_Admin extends ECMS_TestConfig_Part2{
 		SEHome.deleteCategory(nameSelectedCategory);
 		SEHome.closeAddCategoryPopup();
 		
-		info("Delete all data test");
-		navTool.goToSiteExplorer();
-		SEHome.goToPath("acme/documents", "Site Management");
-		SEHome.deleteData(node1);
 		
 	}
 	/**
@@ -410,6 +442,16 @@ public class Ecms_SE_Admin extends ECMS_TestConfig_Part2{
 	@Test(priority=6)
 	public  void test08_ViewNodeProperties() {
 		info("Test 08: View Node Properties");
+		/*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		
+		info("Add user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		userAndGroup.addUserAdmin(username1, "");
+		userAndGroup.addUserContentManagement(username1, "");
+		magAc.signIn(username1, password);
 		
 		/*Step Number: 1
 		 *Step Name: -
@@ -445,11 +487,6 @@ public class Ecms_SE_Admin extends ECMS_TestConfig_Part2{
 		SEHome.goToProperties();
 		SEHome.addProperty(property, property);
 		
-		info("Delete all data test");
-		navTool.goToSiteExplorer();
-		SEHome.goToPath("acme/documents", "Site Management");
-		SEHome.deleteData(node1);
-		
 	}
 
 	/**
@@ -459,6 +496,16 @@ public class Ecms_SE_Admin extends ECMS_TestConfig_Part2{
 	@Test(priority=7)
 	public  void test09_ManagePublication() {
 		info("Test 09: Manage Publication");
+		/*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		
+		info("Add user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		userAndGroup.addUserAdmin(username1, "");
+		userAndGroup.addUserContentManagement(username1, "");
+		magAc.signIn(username1, password);
 		/*Step Number: 1
 		 *Step Name: -
 		 *Step Description: 
@@ -489,11 +536,6 @@ public class Ecms_SE_Admin extends ECMS_TestConfig_Part2{
 		click(SEHome.ELEMENT_ACTIONBAR_MORE);
 		SEHome.goToManagePublishtation();
 		SEHome.managePublication("Staged", dateFormat.format(date.getTime()),dateFormat.format(date.getTime()));
-		
-		info("Delete all data test");
-		navTool.goToSiteExplorer();
-		SEHome.goToPath("acme/documents", "Site Management");
-		SEHome.deleteData(node1);
 		
 	}
 }

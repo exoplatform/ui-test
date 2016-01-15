@@ -22,7 +22,16 @@ public class Wiki_Publish_Activity extends Wiki_TestConfig {
 		String line4 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		String line5 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		String content =line1+"</br>"+line2+"</br>"+line3+"</br>"+line4+"</br>"+line5;
+		/*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
 		
+		info("Add user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		userAndGroup.addUserAdmin(username1, "");
+		userAndGroup.addUserContentManagement(username1, "");
+		magAc.signIn(username1, password);
 		/*Step Number: 1
 		 *Step Name: Step 1:  Add new wiki page
 		 *Step Description: 
@@ -57,10 +66,6 @@ public class Wiki_Publish_Activity extends Wiki_TestConfig {
 		  */ 
 		hp.goToHomePage();
 		hpAct.checkActivityAddWikiPage(title,content,null);
-	
-		info("Delete the page");
-		hp.goToWiki();
-		wHome.deleteWiki(title);
 	}
 
 	/**
@@ -74,7 +79,16 @@ public class Wiki_Publish_Activity extends Wiki_TestConfig {
 		info("Test 2: Delete wiki page");
 		String title = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		String content = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+		/*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
 		
+		info("Add user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		userAndGroup.addUserAdmin(username1, "");
+		userAndGroup.addUserContentManagement(username1, "");
+		magAc.signIn(username1, password);
 		/*Step Number: 1
 		 *Step Name: Step 1: Add new wiki page
 		 *Step Description: 
@@ -126,7 +140,16 @@ public class Wiki_Publish_Activity extends Wiki_TestConfig {
 	
 		String title = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		String content = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+		/*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
 		
+		info("Add user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		userAndGroup.addUserAdmin(username1, "");
+		userAndGroup.addUserContentManagement(username1, "");
+		magAc.signIn(username1, password);
 		/*Step Number: 1
 		 *Step Name: 
 		 *Step Description: 
@@ -149,9 +172,6 @@ public class Wiki_Publish_Activity extends Wiki_TestConfig {
 		info("Verify that The wiki application is opened in the correspond page ");
 		waitForAndGetElement(wHome.ELEMENT_PAGE_TITLE.replace("${title}",title),2000,0);
 		
-		info("Delete the page");
-		hp.goToWiki();
-		wHome.deleteWiki(title);
 	}
 	
 	/**
@@ -168,7 +188,16 @@ public class Wiki_Publish_Activity extends Wiki_TestConfig {
 		String content = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		
 		String newTitle = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+		/*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
 		
+		info("Add user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		userAndGroup.addUserAdmin(username1, "");
+		userAndGroup.addUserContentManagement(username1, "");
+		magAc.signIn(username1, password);
 		/*Step Number: 1
 		 *Step Name: Add new wiki page
 		 *Step Description: 
@@ -220,10 +249,6 @@ public class Wiki_Publish_Activity extends Wiki_TestConfig {
 		hpAct.checkActivity(newTitle);
 		info("Verify that  A comment is added in the activity: Page's title has been updated to: "+newTitle);
 		hpAct.checkCommentOfActivity(newTitle, comment);
-		
-		info("Delete the page");
-		hp.goToWiki();
-		wHome.deleteWiki(newTitle);
 	}
 	
 	/**
@@ -240,7 +265,16 @@ public class Wiki_Publish_Activity extends Wiki_TestConfig {
 		String content = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		
 		String newTitle = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+		/*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
 		
+		info("Add user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		userAndGroup.addUserAdmin(username1, "");
+		userAndGroup.addUserContentManagement(username1, "");
+		magAc.signIn(username1, password);
 		/*Step Number: 1
 		 *Step Name: Add new wiki page
 		 *Step Description: 
@@ -294,9 +328,6 @@ public class Wiki_Publish_Activity extends Wiki_TestConfig {
 				.replace("${title}", newTitle)
 				.replace("${comment}", comment));
 		
-		info("Delete the page");
-		hp.goToWiki();
-		wHome.deleteWiki(newTitle);
 	}
 	
 	/**
@@ -315,7 +346,16 @@ public class Wiki_Publish_Activity extends Wiki_TestConfig {
 		
 		String newContent = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		String newContent1 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+		/*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
 		
+		info("Add user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		userAndGroup.addUserAdmin(username1, "");
+		userAndGroup.addUserContentManagement(username1, "");
+		magAc.signIn(username1, password);
 		/*Step Number: 1
 		 *Step Name: Add new wiki page
 		 *Step Description: 
@@ -401,10 +441,6 @@ public class Wiki_Publish_Activity extends Wiki_TestConfig {
 		
 		info("Verify that only message is added in the activity");
 		hpAct.checkCommentOfActivity(title,comment1);
-		
-		info("Delete the page");
-		hp.goToWiki();
-		wHome.deleteWiki(title);
 	}
 	
 	/**
@@ -423,6 +459,17 @@ public class Wiki_Publish_Activity extends Wiki_TestConfig {
 		String title2 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		String content2 = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		String message = wMessage.getWikiMessage(2)+" intranet > Wiki Home > "+title2+" > "+title1+"";
+		
+		/*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		
+		info("Add user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		userAndGroup.addUserAdmin(username1, "");
+		userAndGroup.addUserContentManagement(username1, "");
+		magAc.signIn(username1, password);
 		/*Step Number: 1
 		 *Step Name: 
 		 *Step Description: 
@@ -460,9 +507,6 @@ public class Wiki_Publish_Activity extends Wiki_TestConfig {
 		hpAct.checkActivity(content1);
 		hpAct.checkCommentOfActivity(title1, message);
 		
-		info("Delete the page");
-		hp.goToWiki();
-		wHome.deleteWiki(title2);
 	}
 	
 }

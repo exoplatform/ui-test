@@ -13,6 +13,8 @@ import org.exoplatform.selenium.platform.ecms.CreateNewDocument;
 import org.exoplatform.selenium.platform.ecms.ECMS_Permission;
 import org.exoplatform.selenium.platform.objectdatabase.common.AttachmentFileDatabase;
 import org.exoplatform.selenium.platform.ecms.SiteExplorerHome;
+import org.exoplatform.selenium.platform.gatein.UserAddManagement;
+import org.exoplatform.selenium.platform.gatein.UserAndGroupManagement;
 import org.exoplatform.selenium.platform.objectdatabase.common.TextBoxDatabase;
 import org.exoplatform.selenium.platform.objectdatabase.user.UserDatabase;
 import org.exoplatform.selenium.platform.social.SpaceManagement;
@@ -25,6 +27,8 @@ public class ECMS_TestConfig_Part2 extends PlatformBase{
 	ManageLogInOut magAc;
 	SpaceManagement spManag;
 	NavigationToolbar navTool;
+	UserAddManagement addUserPage;
+	UserAndGroupManagement userAndGroup;
 
 	ContentAdministration caPage;
 	SiteExplorerHome SEHome;
@@ -45,7 +49,7 @@ public class ECMS_TestConfig_Part2 extends PlatformBase{
 		caPage = new ContentAdministration(driver);
 		navTool = new NavigationToolbar(driver);
 		magAc = new ManageLogInOut(driver);
-		magAc.signIn(DATA_USER1, DATA_PASS);
+		magAc.signIn(USER_ROOT,PASS_ROOT);
 		addActions();
 		afterMethod();
 		info("End setUpBeforeSuite");
@@ -66,7 +70,8 @@ public class ECMS_TestConfig_Part2 extends PlatformBase{
 		EcmsPerm = new ECMS_Permission(driver);
 		aHome = new ActivityStream(driver);
 		alert = new ManageAlert(driver, this.plfVersion);
-		
+		addUserPage = new UserAddManagement(driver);
+		userAndGroup = new UserAndGroupManagement(driver);
 		txData = new TextBoxDatabase();
 		fData = new AttachmentFileDatabase();
 		userData = new UserDatabase();
@@ -74,7 +79,7 @@ public class ECMS_TestConfig_Part2 extends PlatformBase{
 		userData.setUserData(userDataFilePath,defaultSheet,isUseFile,jdbcDriver,dbUrl,user,pass,sqlUser);
 		txData.setContentData(texboxFilePath,defaultSheet,isUseFile,jdbcDriver,dbUrl,user,pass,sqlContent);
 		
-		magAc.signIn(DATA_USER1, DATA_PASS);
+		magAc.signIn(USER_ROOT,PASS_ROOT);
 		info("End setUpBeforeClass");
 	}
 
@@ -93,8 +98,7 @@ public class ECMS_TestConfig_Part2 extends PlatformBase{
 		info("Go to Explorer tab");
 		navTool.goToContentAdministration();
 		caPage.addAllActions();
-		magAc.signOut();
-		magAc.signIn(DATA_USER1, DATA_PASS);
+		magAc.signIn(USER_ROOT,PASS_ROOT);
 	}
 	
 }

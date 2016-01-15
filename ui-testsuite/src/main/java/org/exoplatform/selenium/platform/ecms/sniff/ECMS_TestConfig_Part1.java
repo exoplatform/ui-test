@@ -24,6 +24,8 @@ import org.exoplatform.selenium.platform.gatein.NavigationManagement;
 import org.exoplatform.selenium.platform.gatein.PortalManageSites;
 import org.exoplatform.selenium.platform.gatein.PageCreationWizard;
 import org.exoplatform.selenium.platform.gatein.PortalManagePages;
+import org.exoplatform.selenium.platform.gatein.UserAddManagement;
+import org.exoplatform.selenium.platform.gatein.UserAndGroupManagement;
 import org.exoplatform.selenium.platform.objectdatabase.common.TextBoxDatabase;
 import org.exoplatform.selenium.platform.objectdatabase.ecms.SiteExplorerContentTypesDatabase;
 import org.exoplatform.selenium.platform.objectdatabase.ecms.SiteExplorerDriveDatabase;
@@ -44,7 +46,8 @@ public class ECMS_TestConfig_Part1 extends PlatformBase{
 	CreateNewDocument CreNewDoc;
 	DocumentPreview docPrev;
 	ActivityStream acStream;
-	
+	UserAddManagement addUserPage;
+	UserAndGroupManagement userAndGroup;
 	
 	AcmeHomePage acmeHP;
 	PortalManagePages paMang;
@@ -77,7 +80,7 @@ public class ECMS_TestConfig_Part1 extends PlatformBase{
 		getDefaultUserPass(userDataFilePath,defaultSheet,isUseFile,jdbcDriver,dbUrl,user,pass,sqlUser);
 		magAc = new ManageLogInOut(driver);
 		hp = new HomePagePlatform(driver);
-		magAc.signIn(DATA_USER1, DATA_PASS);
+		magAc.signIn(USER_ROOT,PASS_ROOT);
 		
 		SEHome = new SiteExplorerHome(driver);
 		CreNewDoc = new CreateNewDocument(driver);
@@ -92,6 +95,8 @@ public class ECMS_TestConfig_Part1 extends PlatformBase{
 		maSite = new PortalManageSites(driver);
 		acmeHP = new AcmeHomePage(driver);
 		acStream = new ActivityStream(driver);
+		addUserPage = new UserAddManagement(driver);
+		userAndGroup = new UserAndGroupManagement(driver);
 		
 		docPrev = new DocumentPreview(driver);
 		navMag = new NavigationManagement(driver);

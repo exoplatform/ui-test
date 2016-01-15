@@ -25,6 +25,17 @@ public class Ecms_SE_PublishActivities extends ECMS_TestConfig_Part2 {
 		String title =  txData.getContentByArrayTypeRandom(1)+random;
 		String content =  txData.getContentByArrayTypeRandom(1)+random;
 		info("Fnishing Getting data test");
+		/*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		
+		info("Add user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		userAndGroup.addUserAdmin(username1, "");
+		userAndGroup.addUserContentManagement(username1, "");
+		magAc.signIn(username1, password);
+		
 		/*Step Number: 1
 		 *Step Name: - Add a File Content
 		 *Step Description: 
@@ -61,6 +72,16 @@ public class Ecms_SE_PublishActivities extends ECMS_TestConfig_Part2 {
 		String random=getRandomNumber();
 		String title =  txData.getContentByArrayTypeRandom(1)+random;
 		String content =  txData.getContentByArrayTypeRandom(1)+random;
+		/*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		
+		info("Add user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		userAndGroup.addUserAdmin(username1, "");
+		userAndGroup.addUserContentManagement(username1, "");
+		magAc.signIn(username1, password);
 		/*Step Number: 1
 		 *Step Name: - Add a FreeLayout Web Content
 		 *Step Description: 
@@ -110,9 +131,6 @@ public class Ecms_SE_PublishActivities extends ECMS_TestConfig_Part2 {
 		aHome.checkActivityAddWebContent(title, "1", "Published");
 		waitForAndGetElement(By.xpath(aHome.ELEMENT_ACTIVITY_COMMENT.replace("${title}",title).replace("${comment}",comment)));
 
-		// delete data
-		navTool.goToSiteExplorer();
-		SEHome.deleteData(title);
 	}
 
 	/**
@@ -125,7 +143,16 @@ public class Ecms_SE_PublishActivities extends ECMS_TestConfig_Part2 {
 		String random=getRandomNumber();
 		String title =  txData.getContentByArrayTypeRandom(1)+random;
 		String summary =  txData.getContentByArrayTypeRandom(1)+random;
-
+		/*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		
+		info("Add user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		userAndGroup.addUserAdmin(username1, "");
+		userAndGroup.addUserContentManagement(username1, "");
+		magAc.signIn(username1, password);
 		/*Step Number: 1
 		 *Step Name: - Add a Product Content
 		 *Step Description: 
@@ -150,9 +177,6 @@ public class Ecms_SE_PublishActivities extends ECMS_TestConfig_Part2 {
 		hp.goToHomePage();
 		aHome.checkActivityAddProduct(title, null, null);
 
-		// delete data
-		navTool.goToSiteExplorer();
-		SEHome.deleteData(title);	
 	}
 
 	/**
@@ -168,6 +192,16 @@ public class Ecms_SE_PublishActivities extends ECMS_TestConfig_Part2 {
 		String random1=getRandomNumber();
 		String newContent=txData.getContentByArrayTypeRandom(1)+random1;
 		String comment ="File has been updated.";
+		/*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		
+		info("Add user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		userAndGroup.addUserAdmin(username1, "");
+		userAndGroup.addUserContentManagement(username1, "");
+		magAc.signIn(username1, password);
 		/*Step Number: 1
 		 *Step Name: - Add Content
 		 *Step Description: 
@@ -214,9 +248,6 @@ public class Ecms_SE_PublishActivities extends ECMS_TestConfig_Part2 {
 		hp.goToHomePage();
 		waitForAndGetElement(By.xpath(aHome.ELEMENT_ACTIVITY_COMMENT.replace("${title}",title).replace("${comment}",comment)));
 
-		// delete data
-		navTool.goToSiteExplorer();
-		SEHome.deleteData(title);
 	}
 
 	/**
@@ -233,6 +264,16 @@ public class Ecms_SE_PublishActivities extends ECMS_TestConfig_Part2 {
 		String tag =txData.getContentByArrayTypeRandom(22);
 		String secondTags=txData.getContentByArrayTypeRandom(23);
 		info("Fnishing Getting data test");
+		/*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		
+		info("Add user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		userAndGroup.addUserAdmin(username1, "");
+		userAndGroup.addUserContentManagement(username1, "");
+		magAc.signIn(username1, password);
 		/*Step Number: 1
 		 *Step Name: - Add a Content
 		 *Step Description: 
@@ -293,9 +334,6 @@ public class Ecms_SE_PublishActivities extends ECMS_TestConfig_Part2 {
 		hp.goToHomePage();
 		waitForAndGetElement(By.xpath(aHome.ELEMENT_ACTIVITY_COMMENT.replace("${title}",title).replace("${comment}","Tags: "+secondTags+" have been added.")));
 
-		// delete data
-		navTool.goToSiteExplorer();
-		SEHome.deleteData(title);
 	}
 
 	/**
@@ -310,6 +348,16 @@ public class Ecms_SE_PublishActivities extends ECMS_TestConfig_Part2 {
 		String title =  txData.getContentByArrayTypeRandom(1)+random;
 		String content =  txData.getContentByArrayTypeRandom(1)+random;
 		info("Fnishing Getting data test");
+		/*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		
+		info("Add user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		userAndGroup.addUserAdmin(username1, "");
+		userAndGroup.addUserContentManagement(username1, "");
+		magAc.signIn(username1, password);
 		/*Step Number: 1
 		 *Step Name: - Add a Content
 		 *Step Description: 
@@ -357,6 +405,16 @@ public class Ecms_SE_PublishActivities extends ECMS_TestConfig_Part2 {
 	@Test
 	public  void test09_CheckIntranetHomepageAfterUploadingAFile(){
 		info("Test 9: Check intranet homepage after Uploading a file");
+		/*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		
+		info("Add user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		userAndGroup.addUserAdmin(username1, "");
+		userAndGroup.addUserContentManagement(username1, "");
+		magAc.signIn(username1, password);
 		/*Step Number: 1
 		 *Step Name: 
 		 *Step Description: 
@@ -384,10 +442,6 @@ public class Ecms_SE_PublishActivities extends ECMS_TestConfig_Part2 {
 		hp.goToHomePage();
 		waitForAndGetElement(By.xpath(aHome.ELEMENT_ACTIVITY_FILE_UPLOAD_TITLE.replace("{$title}",file)));
 
-		info("Delete the file");
-		navTool.goToSiteExplorer();
-		SEHome.goToPath("intranet/documents","Site Management");
-		SEHome.deleteData(file);
 
 	}
 
@@ -402,7 +456,17 @@ public class Ecms_SE_PublishActivities extends ECMS_TestConfig_Part2 {
 		String file = fData.getAttachFileByArrayTypeRandom(1);
 		String newTitle =  txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		info("Finish creating data test");
-
+		/*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		
+		info("Add user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		userAndGroup.addUserAdmin(username1, "");
+		userAndGroup.addUserContentManagement(username1, "");
+		magAc.signIn(username1, password);
+		
 		info("Upload a file");
 		navTool.goToSiteExplorer();
 		SEHome.goToPath("intranet/documents","Site Management");
@@ -413,10 +477,6 @@ public class Ecms_SE_PublishActivities extends ECMS_TestConfig_Part2 {
 		SEHome.editDocument(newTitle,"");
 		CreNewDoc.saveAndClose();
 
-		info("Delete the file");
-		navTool.goToSiteExplorer();
-		SEHome.goToPath("intranet/documents","Site Management");
-		SEHome.deleteData(file);
 	}
 	/**
 	 *<li> Case ID:116673.</li>
@@ -425,6 +485,16 @@ public class Ecms_SE_PublishActivities extends ECMS_TestConfig_Part2 {
 	@Test
 	public void test11_CheckIntranetHomepageAfterAddingACategoryforUploadFile(){
 		info("Test 11: Check intranet homepage after adding a category to an uploaded file");
+		/*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		
+		info("Add user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		userAndGroup.addUserAdmin(username1, "");
+		userAndGroup.addUserContentManagement(username1, "");
+		magAc.signIn(username1, password);
 		/*Step number: 2
 		 *Step Name: - Add a Category to the uploaded file
 		 *Step Description: 
@@ -459,10 +529,6 @@ public class Ecms_SE_PublishActivities extends ECMS_TestConfig_Part2 {
 		hp.goToHomePage();
 		waitForAndGetElement(By.xpath(aHome.ELEMENT_ACTIVITY_COMMENT.replace("${title}",file).replace("${comment}","Category: intranet has been added.")));
 
-		info("Delete the file");
-		navTool.goToSiteExplorer();
-		SEHome.goToPath("intranet/documents","Site Management");
-		SEHome.deleteData(file);
 
 	}
 
@@ -476,7 +542,17 @@ public class Ecms_SE_PublishActivities extends ECMS_TestConfig_Part2 {
 		info("Create data test");
 		String file = fData.getAttachFileByArrayTypeRandom(1);
 		info("Finish creating data test");
-
+		/*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		
+		info("Add user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		userAndGroup.addUserAdmin(username1, "");
+		userAndGroup.addUserContentManagement(username1, "");
+		magAc.signIn(username1, password);
+		
 		info("Upload a file");
 		navTool.goToSiteExplorer();
 		SEHome.goToPath("intranet/documents","Site Management");
@@ -499,6 +575,16 @@ public class Ecms_SE_PublishActivities extends ECMS_TestConfig_Part2 {
 	@Test
 	public  void test13_EditAContentFromTheContentActivity(){
 		info("Test 13: Edit a content from the Content activity");
+		/*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		
+		info("Add user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		userAndGroup.addUserAdmin(username1, "");
+		userAndGroup.addUserContentManagement(username1, "");
+		magAc.signIn(username1, password);
 		/*Step Number: 1
 		 *Step Name: 
 		 *Step Description: ;
@@ -530,10 +616,6 @@ public class Ecms_SE_PublishActivities extends ECMS_TestConfig_Part2 {
 		inputFrame(CreNewDoc.ELEMENT_FILEFORM_BLANK_CONTENT2,newContent);
 		CreNewDoc.saveAndClose();
 
-		info("Delete the file");
-		navTool.goToSiteExplorer();
-		SEHome.goToPath("intranet/documents","Site Management");
-		SEHome.deleteData(title);
 
 	}
 	/**
@@ -548,6 +630,16 @@ public class Ecms_SE_PublishActivities extends ECMS_TestConfig_Part2 {
 		String title =  txData.getContentByArrayTypeRandom(1)+random;
 		String content =  txData.getContentByArrayTypeRandom(1)+random;
 		info("Finish creating data test");
+		/*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		
+		info("Add user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		userAndGroup.addUserAdmin(username1, "");
+		userAndGroup.addUserContentManagement(username1, "");
+		magAc.signIn(username1, password);
 
 		info("Create a new Content");
 		navTool.goToSiteExplorer();
@@ -562,10 +654,6 @@ public class Ecms_SE_PublishActivities extends ECMS_TestConfig_Part2 {
 		click(aHome.ELEMENT_ACTIVITY_VIEW_A_NODE.replace("{$title}", title));
 		waitForAndGetElement(SEHome.ELEMENT_DOCUMENT_VIEW.replace("{$content}", content));
 
-		info("Delete the file");
-		navTool.goToSiteExplorer();
-		SEHome.goToPath("intranet/documents","Site Management");
-		SEHome.deleteData(title);
 	}
 
 	/**
@@ -611,6 +699,16 @@ public class Ecms_SE_PublishActivities extends ECMS_TestConfig_Part2 {
 	@Test
 	public  void test16_UpdateTheFileActivityAfterMovingAFile() {
 		info("Test 16 Update the File activity after moving a file");
+		/*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		
+		info("Add user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		userAndGroup.addUserAdmin(username1, "");
+		userAndGroup.addUserContentManagement(username1, "");
+		magAc.signIn(username1, password);
 		/*Step Number: 1
 		 *Step Name: 
 		 *Step Description: 
@@ -643,10 +741,6 @@ public class Ecms_SE_PublishActivities extends ECMS_TestConfig_Part2 {
 		hp.goToHomePage();
 		waitForAndGetElement(aHome.ELEMENT_ACTIVITY_COMMENT.replace("${title}",file).replace("${comment}","File has been moved to: /sites/intranet/"+file.toLowerCase()));
 
-		info("Delete the file");
-		navTool.goToSiteExplorer();
-		SEHome.goToPath(fileRecept,"Site Management");
-		SEHome.deleteData(file);
 	}
 
 	/**
@@ -674,6 +768,17 @@ public class Ecms_SE_PublishActivities extends ECMS_TestConfig_Part2 {
 		String content =  txData.getContentByArrayTypeRandom(1)+random;
 		String fileRecept="intranet";
 		info("Finish creating data test");
+		/*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		
+		info("Add user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		userAndGroup.addUserAdmin(username1, "");
+		userAndGroup.addUserContentManagement(username1, "");
+		magAc.signIn(username1, password);
+		
 
 		info("Create a new Content");
 		navTool.goToSiteExplorer();
@@ -693,11 +798,6 @@ public class Ecms_SE_PublishActivities extends ECMS_TestConfig_Part2 {
 		info("Check the comment on the activity");
 		hp.goToHomePage();
 		waitForAndGetElement(aHome.ELEMENT_ACTIVITY_COMMENT.replace("${title}",title).replace("${comment}","Publication has been moved to: /sites/intranet/"+title.toLowerCase()));
-
-		info("Delete the file");
-		navTool.goToSiteExplorer();
-		SEHome.goToPath(fileRecept,"Site Management");
-		SEHome.deleteData(title);
 
 	}
 }

@@ -47,7 +47,16 @@ public class Wiki_Settings extends Wiki_TestConfig{
 		info("Test 2: Edit template");
 		String template = wTempData.getWikiTemplateRandom();
 		String newTitle=txData.getContentByArrayTypeRandom(1)+getRandomNumber();
-
+		/*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		
+		info("Add user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		userAndGroup.addUserAdmin(username1, "");
+		userAndGroup.addUserContentManagement(username1, "");
+		magAc.signIn(username1, password);
 		hp.goToWiki();
 		wHome.goToWikiSettingPage();
 		wSettingMg.editTemplate(template, newTitle, "", "");
@@ -89,6 +98,16 @@ public class Wiki_Settings extends Wiki_TestConfig{
 	@Test
 	public  void test03_PreviewNewTemplate() {
 		info("Test 3: Preview new template");
+		/*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		
+		info("Add user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		userAndGroup.addUserAdmin(username1, "");
+		userAndGroup.addUserContentManagement(username1, "");
+		magAc.signIn(username1, password);
 		/*Step Number: 1
 		 *Step Name: Step 1: Preview new template
 		 *Step Description: 
@@ -117,7 +136,16 @@ public class Wiki_Settings extends Wiki_TestConfig{
 	public  void test05_06_07_AddEditDeletePermissionForWiki() {
 		info("Test 5: Add Permission for Wiki");
 		String wiki = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
-
+		/*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		
+		info("Add user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		userAndGroup.addUserAdmin(username1, "");
+		userAndGroup.addUserContentManagement(username1, "");
+		magAc.signIn(username1, password);
 		hp.goToWiki();
 		wHome.goToAddBlankPage();
 		rtMode.addSimplePage(wiki,wiki);
@@ -150,7 +178,6 @@ public class Wiki_Settings extends Wiki_TestConfig{
 
 		 *Expected Outcome: 
 			- This user can do actions as permission set in step 1.*/ 
-		magAc.signOut();
 		magAc.signIn(DATA_USER2, DATA_PASS);
 		info("Check if mary can see the page");
 		hp.goToWiki();
@@ -158,15 +185,13 @@ public class Wiki_Settings extends Wiki_TestConfig{
 
 		info("Test 6: Edit permission for Wiki");
 		// Give the edit permission for mary
-		magAc.signOut();
-		magAc.signIn(DATA_USER1, DATA_PASS);
+		magAc.signIn(username1,password);
 		hp.goToWiki();
 		wHome.selectAPage(wiki);
 		wHome.goToPermissions();
 		check(By.xpath(wHome.ELEMENT_CHECK_PERMISSION_EDIT_PAGE.replace("{$name}", "mary")),2);
 		click(wHome.ELEMENT_SAVE_PERMISSION);
 
-		magAc.signOut();
 		magAc.signIn(DATA_USER2, DATA_PASS);
 		hp.goToWiki();
 		wHome.selectAPage(wiki);
@@ -175,25 +200,17 @@ public class Wiki_Settings extends Wiki_TestConfig{
 
 		info("Test 7: Delete permission for Wiki");
 		// remove the permission for mary
-		magAc.signOut();
-		magAc.signIn(DATA_USER1, DATA_PASS);
+		magAc.signIn(username1,password);
 		hp.goToWiki();
 		wHome.selectAPage(wiki);
 		wHome.goToPermissions();
 		click(wHome.ELEMENT_REMOVE_PERMISSION.replace("{$name}", "mary"));
 		click(wHome.ELEMENT_SAVE_PERMISSION);
 
-		magAc.signOut();
 		magAc.signIn(DATA_USER2, DATA_PASS);
 		hp.goToWiki();
 		waitForElementNotPresent(wHome.ELEMENT_TREE_WIKI_NAME.replace("${name}",wiki),2000,0);
 
-		// delete data
-		magAc.signOut();
-		magAc.signIn(DATA_USER1, DATA_PASS);
-		hp.goToWiki();
-		wHome.selectAPage(wiki);
-		wHome.deleteWiki(wiki);
 	}
 
 	/**
@@ -210,6 +227,17 @@ public class Wiki_Settings extends Wiki_TestConfig{
 		String space =txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		String link="";
 		String wiki = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
+		/*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		
+		info("Add user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		userAndGroup.addUserAdmin(username1, "");
+		userAndGroup.addUserContentManagement(username1, "");
+		magAc.signIn(username1, password);
+		
 		hp.goToMySpaces();
 		spaMg.addNewSpaceSimple(space, "");
 		spaHome.goToWikiTab();
@@ -244,15 +272,13 @@ public class Wiki_Settings extends Wiki_TestConfig{
 
 		 *Expected Outcome: 
 			- This user can do actions as permission set in step 1.*/ 
-		magAc.signOut();
 		magAc.signIn(DATA_USER2, DATA_PASS);
 		driver.get(link);
 		waitForAndGetElement(By.xpath(wHome.ELEMENT_WIKI_HOME_PAGE_TITLE.replace("${title}", wiki)));
 
 		info("Test 10 Edit permission for space wiki");
 
-		magAc.signOut();
-		magAc.signIn(DATA_USER1, DATA_PASS);
+		magAc.signIn(username1,password);
 
 		hp.goToSpecificSpace(space);
 		spaHome.goToWikiTab();
@@ -262,14 +288,13 @@ public class Wiki_Settings extends Wiki_TestConfig{
 		check(wHome.ELEMENT_CHECK_PERMISSION_EDIT_PAGE.replace("{$name}", "mary"),2);
 		click(wHome.ELEMENT_SAVE_PERMISSION);
 
-		magAc.signOut();
 		magAc.signIn(DATA_USER2, DATA_PASS);
 		driver.get(link);
 		wHome.goToEditPage();
 		magAc.signOut();
 
 		info("Test 9: Delete permission for space wiki");
-		magAc.signIn(DATA_USER1, DATA_PASS);
+		magAc.signIn(username1,password);
 
 		hp.goToSpecificSpace(space);
 		spaHome.goToWikiTab();
@@ -278,16 +303,9 @@ public class Wiki_Settings extends Wiki_TestConfig{
 		click(wHome.ELEMENT_REMOVE_PERMISSION.replace("{$name}", "mary"));
 		click(wHome.ELEMENT_SAVE_PERMISSION);
 
-		magAc.signOut();
 		magAc.signIn(DATA_USER2, DATA_PASS);
 		driver.get(link);
 		waitForAndGetElement(wHome.ELEMENT_WIKI_PAGE_NOT_FOUND);
 
-		/*// delete data
-
-		magAc.signOut();
-		magAc.signIn(DATA_USER1, DATA_PASS);
-		hp.goToMySpaces();
-		spaMg.deleteSpace(space, false);*/
 	}
 }

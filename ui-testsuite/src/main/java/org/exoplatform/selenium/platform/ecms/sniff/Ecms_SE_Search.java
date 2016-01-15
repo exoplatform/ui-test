@@ -2,6 +2,11 @@ package org.exoplatform.selenium.platform.ecms.sniff;
 
 import static org.exoplatform.selenium.TestLogger.info;
 
+
+
+
+
+
 //import org.exoplatform.selenium.Button;
 //import org.exoplatform.selenium.ManageAlert;
 import org.exoplatform.selenium.Utils;
@@ -30,7 +35,16 @@ public class Ecms_SE_Search extends ECMS_TestConfig_Part2 {
 		info("Test 1: Advanced search");
 
 		String name = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
-
+		/*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		
+		info("Add user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		userAndGroup.addUserAdmin(username1, "");
+		userAndGroup.addUserContentManagement(username1, "");
+		magAc.signIn(username1, password);
 		navTool.goToSiteExplorer();
 		/*Step Number: 1
 		 *Step Name: Step 1: Advanced search
@@ -68,7 +82,16 @@ public class Ecms_SE_Search extends ECMS_TestConfig_Part2 {
 		info("Test 2: Create query in Advanced search");
 
 		String name = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
-
+		/*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		
+		info("Add user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		userAndGroup.addUserAdmin(username1, "");
+		userAndGroup.addUserContentManagement(username1, "");
+		magAc.signIn(username1, password);
 		navTool.goToSiteExplorer();
 		/*Step Number: 1
 		 *Step Name: -
@@ -102,6 +125,16 @@ public class Ecms_SE_Search extends ECMS_TestConfig_Part2 {
 	@Test
 	public  void test03_SimpleSearch() {
 		info("Test 3: Simple Search");
+		/*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		
+		info("Add user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		userAndGroup.addUserAdmin(username1, "");
+		userAndGroup.addUserContentManagement(username1, "");
+		magAc.signIn(username1, password);
 		/*Step Number: 1
 		 *Step Name: -
 		 *Step Description: 
@@ -129,7 +162,16 @@ public class Ecms_SE_Search extends ECMS_TestConfig_Part2 {
 		info("Test 5: Execute query in Advanced search");
 
 		String name = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
-
+		/*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		
+		info("Add user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		userAndGroup.addUserAdmin(username1, "");
+		userAndGroup.addUserContentManagement(username1, "");
+		magAc.signIn(username1, password);
 		navTool.goToSiteExplorer();
 		/*Step Number: 1
 		 *Step Name: -
@@ -165,7 +207,16 @@ public class Ecms_SE_Search extends ECMS_TestConfig_Part2 {
 		info("Test 6: Edit query in Advanced search");
 		
 		String name = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
-
+		/*Create data test*/
+		String username1 = txData.getContentByArrayTypeRandom(4) + getRandomString();
+		String email1 = username1+"@gmail.com";
+		
+		info("Add user");
+		navTool.goToAddUser();
+		addUserPage.addUser(username1, password, email1, username1, username1);
+		userAndGroup.addUserAdmin(username1, "");
+		userAndGroup.addUserContentManagement(username1, "");
+		magAc.signIn(username1, password);
 		navTool.goToSiteExplorer();
 		
 		/*Step Number: 1
