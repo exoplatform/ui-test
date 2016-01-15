@@ -78,7 +78,7 @@ public class Forum_TestConfig extends PlatformBase{
 		fData = new AttachmentFileDatabase();
 		fData.setAttachFileData(attachmentFilePath,defaultSheet,isUseFile,jdbcDriver,dbUrl,user,pass,sqlUser);
 
-		magAc.signIn(DATA_USER1, DATA_PASS);
+		magAc.signIn(USER_ROOT,PASS_ROOT);
 		info("End setUpBeforeClass");
 	}
 

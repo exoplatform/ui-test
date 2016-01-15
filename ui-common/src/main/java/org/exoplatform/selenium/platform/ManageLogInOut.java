@@ -55,6 +55,10 @@ public class ManageLogInOut extends ManageLogInOutLocator {
 			clickByJavascript(ELEMENT_SIGN_IN_BUTTON, 2);
 			if(verify)
 				waitForElementNotPresent(ELEMENT_SIGN_IN_BUTTON);
+			if(waitForAndGetElement(ELEMENT_SETUP_PROFILE_CLOUD,3000,0)!=null){
+				clickByJavascript(ELEMENT_SETUP_PROFILE_CLOUD, 2);
+				waitForElementNotPresent(ELEMENT_SETUP_PROFILE_CLOUD);
+			}
 		}
 	}
 	/**

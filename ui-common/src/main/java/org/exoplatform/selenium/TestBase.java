@@ -330,6 +330,8 @@ public class TestBase {
 	public final By ELEMENT_YOUR_ACCOUNT_LABEL = By.xpath("//h5[contains(text(), 'Create your account')]");
 	public final By ELEMENT_ADMIN_PASS_LABEL = By.xpath("//h5[contains(text(), 'Admin Password')]");
 	public final By ELEMENT_ACCOUNT_ERROR = By.xpath("//*[@class='accountSetupError']");
+	
+	public final By ELEMENT_SETUP_PROFILE_CLOUD=By.xpath(".//*[@id='StepProfile']//*[contains(@onclick,'CloudLogin.exit();')]");
 
 	//SSO Login with OpenAM
 	public final By ELEMENT_INPUT_PASSWORD_OPENAM = By.name("IDToken2");
