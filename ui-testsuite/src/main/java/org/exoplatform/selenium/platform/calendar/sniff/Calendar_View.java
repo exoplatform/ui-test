@@ -77,11 +77,196 @@ public class Calendar_View extends PlatformBase {
 		cMang = new CalendarManagement(driver);
 		txData = new TextBoxDatabase();
 		userData = new UserDatabase();
-		magAc.signIn(DATA_USER1, DATA_PASS);
+		magAc.signIn(USER_ROOT,PASS_ROOT);
 		userData.setUserData(userDataFilePath,defaultSheet,isUseFile,jdbcDriver,dbUrl,user,pass,sqlUser);
 		txData.setContentData(texboxFilePath,defaultSheet,isUseFile,jdbcDriver,dbUrl,user,pass,sqlContent);
 		fullName = userData.fullName.get(0);
 
+		
+	}
+	
+	
+
+	@AfterMethod
+	public void afterMethod(){
+		/*hp.goToCalendarPage();
+		click(cHome.ELEMENT_TODAY_ACTION_BAR);
+		cHome.goToView(selectViewOption.WEEK);
+
+		cHome.deleteEventTask( titleEventMeeting, selectViewOption.WEEK, selectDayOption.ALLDAY,getDate(0,"MMM dd yyyy"));
+		cHome.deleteEventTask( titleEventCall, selectViewOption.WEEK, selectDayOption.ALLDAY,getDate(0,"MMM dd yyyy"));
+		cHome.deleteEventTask( titleEventClient, selectViewOption.WEEK, selectDayOption.ALLDAY,getDate(0,"MMM dd yyyy"));
+		cHome.deleteEventTask( titleEventHoliday, selectViewOption.WEEK, selectDayOption.ALLDAY,getDate(0,"MMM dd yyyy"));
+		cHome.deleteEventTask( titleEventAnni, selectViewOption.WEEK, selectDayOption.ALLDAY,getDate(0,"MMM dd yyyy"));
+		cHome.deleteEventTask( titleTaskMeeting, selectViewOption.WEEK, selectDayOption.ALLDAY,getDate(0,"MMM dd yyyy"));
+		cHome.deleteEventTask( titleTaskCall, selectViewOption.WEEK, selectDayOption.ALLDAY,getDate(0,"MMM dd yyyy"));
+		cHome.deleteEventTask( titleTaskClient, selectViewOption.WEEK, selectDayOption.ALLDAY,getDate(0,"MMM dd yyyy"));
+		cHome.deleteEventTask( titleTaskHoliday, selectViewOption.WEEK, selectDayOption.ALLDAY,getDate(0,"MMM dd yyyy"));
+		cHome.deleteEventTask( titleTaskAnni, selectViewOption.WEEK, selectDayOption.ALLDAY,getDate(0,"MMM dd yyyy"));
+		cHome.deleteEventTask( titleTaskCur, selectViewOption.WEEK, selectDayOption.ALLDAY,getDate(0,"MMM dd yyyy"));
+		cHome.deleteEventTask( titleEventCur, selectViewOption.WEEK, selectDayOption.ALLDAY,getDate(0,"MMM dd yyyy"));
+
+		cHome.deleteEventTask( titleTaskNext, selectViewOption.MONTH, selectDayOption.ALLDAY,getDate(1,"MMM dd yyyy"));
+		cHome.deleteEventTask( titleEventNext, selectViewOption.MONTH, selectDayOption.ALLDAY,getDate(1,"MMM dd yyyy"));
+
+		cHome.deleteEventTask( titleTaskPre, selectViewOption.MONTH, selectDayOption.ALLDAY,getDate(-1,"MMM dd yyyy"));
+		cHome.deleteEventTask( titleEventPre, selectViewOption.MONTH, selectDayOption.ALLDAY,getDate(-1,"MMM dd yyyy"));
+
+		hp.goToCalendarPage();
+		click(cHome.ELEMENT_TODAY_ACTION_BAR);
+		cHome.goToView(selectViewOption.WEEK);
+		click(cHome.ELEMENT_NEXT_BUTTON_ANY_VIEW);
+		cHome.deleteEventTask( titleEventNextWeek, selectViewOption.WEEK, selectDayOption.ALLDAY,getDate(7,"MMM dd yyyy"));
+		cHome.deleteEventTask( titleTaskNextWeek, selectViewOption.WEEK, selectDayOption.ALLDAY,getDate(7,"MMM dd yyyy"));
+
+		hp.goToCalendarPage();
+		click(cHome.ELEMENT_TODAY_ACTION_BAR);
+		cHome.goToView(selectViewOption.WEEK);
+		click(cHome.ELEMENT_PREVIOUS_BUTTON_ANY_VIEW);
+		cHome.deleteEventTask( titleTaskPreWeek, selectViewOption.WEEK, selectDayOption.ALLDAY,getDate(-7,"MMM dd yyyy"));
+		cHome.deleteEventTask( titleEventPreWeek, selectViewOption.WEEK, selectDayOption.ALLDAY,getDate(-7,"MMM dd yyyy"));
+
+		cHome.goToView(selectViewOption.MONTH);
+		click(cHome.ELEMENT_TODAY_ACTION_BAR);
+		click(cHome.ELEMENT_NEXT_BUTTON_ANY_VIEW);
+		cHome.deleteEventTask( titleEventNextMonth, selectViewOption.MONTH, selectDayOption.ALLDAY,null);
+		cHome.deleteEventTask( titleTaskNextMonth, selectViewOption.MONTH, selectDayOption.ALLDAY,null);
+
+		cHome.goToView(selectViewOption.MONTH);
+		click(cHome.ELEMENT_TODAY_ACTION_BAR);
+		click(cHome.ELEMENT_PREVIOUS_BUTTON_ANY_VIEW);
+		cHome.deleteEventTask( titleEventPreMonth, selectViewOption.MONTH, selectDayOption.ALLDAY,null);
+		cHome.deleteEventTask( titleTaskPreMonth, selectViewOption.MONTH, selectDayOption.ALLDAY,null);
+*/
+		driver.manage().deleteAllCookies();
+		driver.quit();
+	}
+
+	/**
+	 * Case ID:115595.
+	 * Test Case Name: Check Today view.
+	 * Pre-Condition: 
+	 * Post-Condition: 
+	 */
+	@Test
+	public  void test01_CheckTodayView() {
+		info("Test 1: Check Today view");
+		calendarDataTest();
+		/*Step Number: 1
+		 *Step Name: Step 1: Add task/ event
+		 *Step Description: 
+			- Go to calendar
+			- Add new task/event
+		 *Input Data: 
+
+		 *Expected Outcome: 
+			Task/ event are created*/
+
+		/*Step number: 2
+		 *Step Name: Step 2: Select view
+		 *Step Description: 
+			- Select view (day/week/month/list/work week) which has not the current day
+		 *Input Data: 
+
+		 *Expected Outcome: 
+			- Calendar is displayed with the selected view(day/week/month/list/work week)*/
+
+		/*Step number: 3
+		 *Step Name: Step 3: Check displaying of task and event.
+		 *Step Description: 
+			- Click on Today on the main bar
+		 *Input Data: 
+
+		 *Expected Outcome: 
+			- Go to the current view which has the current day (today view). Mini calendar is updated to the week has current day*/
+		hp.goToCalendarPage();
+		cHome.goToView(selectViewOption.DAY);
+		click(cHome.ELEMENT_TODAY_ACTION_BAR);
+		cHome.verifyIsPresentEventTask(titleEventCur, selectViewOption.DAY, selectDayOption.ALLDAY);
+		cHome.verifyIsPresentEventTask(titleTaskCur, selectViewOption.DAY, selectDayOption.ALLDAY);
+
+		cHome.verifyIsNotPresentEventTask(titleEventNext, selectViewOption.DAY, selectDayOption.ALLDAY);
+		cHome.verifyIsNotPresentEventTask(titleTaskNext, selectViewOption.DAY, selectDayOption.ALLDAY);
+
+		cHome.verifyIsNotPresentEventTask(titleEventPre, selectViewOption.DAY, selectDayOption.ALLDAY);
+		cHome.verifyIsNotPresentEventTask(titleTaskPre, selectViewOption.DAY, selectDayOption.ALLDAY);
+	}
+
+	/**
+	 * Case ID:115596.
+	 * Test Case Name: Check displaying added task/event in work week view.
+	 * Pre-Condition: 
+	 * Post-Condition: 
+	 */
+	@Test
+	public  void test02_CheckDisplayingAddedTaskeventInWorkWeekView() {
+		info("Test 2: Check displaying added task/event in work week view");
+		calendarDataTest();
+		/*Step Number: 1
+		 *Step Name: Step 1: Add task/ event
+		 *Step Description: 
+			- Go to calendar
+			- Add new task/event
+		 *Input Data: 
+
+		 *Expected Outcome: 
+			Task/ event are created*/
+
+		/*Step number: 2
+		 *Step Name: Step 2: Check displaying of task and event.
+		 *Step Description: 
+			- Click on Work Week on the main bar
+		 *Input Data: 
+
+		 *Expected Outcome: 
+			Event/ task is displayed in Work Week view*/
+
+		/*Step number: 3
+		 *Step Name: Step 3: Check next week/previous week
+		 *Step Description: 
+			- Click next week/previous week icon
+		 *Input Data: 
+
+		 *Expected Outcome: 
+			- Next week/previous week is displayed correctly
+			- Mini calendar is updated also*/ 
+		hp.goToCalendarPage();
+		click(cHome.ELEMENT_TODAY_ACTION_BAR);
+		Utils.pause(500);
+		cHome.goToView(selectViewOption.WORKWEEK);
+		click(cHome.ELEMENT_TODAY_ACTION_BAR);
+		cHome.verifyIsPresentEventTask(titleEventCur, selectViewOption.WORKWEEK, selectDayOption.ALLDAY);
+		cHome.verifyIsPresentEventTask(titleTaskCur, selectViewOption.WORKWEEK, selectDayOption.ALLDAY);
+
+		cHome.verifyIsNotPresentEventTask(titleEventNextWeek, selectViewOption.WORKWEEK, selectDayOption.ALLDAY);
+		cHome.verifyIsNotPresentEventTask(titleTaskNextWeek, selectViewOption.WORKWEEK, selectDayOption.ALLDAY);
+
+		cHome.verifyIsNotPresentEventTask(titleEventPreWeek, selectViewOption.WORKWEEK, selectDayOption.ALLDAY);
+		cHome.verifyIsNotPresentEventTask(titleTaskPreWeek, selectViewOption.WORKWEEK, selectDayOption.ALLDAY);
+
+		click(cHome.ELEMENT_NEXT_BUTTON_ANY_VIEW);
+		cHome.verifyIsNotPresentEventTask(titleEventCur, selectViewOption.WORKWEEK, selectDayOption.ALLDAY);
+		cHome.verifyIsNotPresentEventTask(titleTaskCur, selectViewOption.WORKWEEK, selectDayOption.ALLDAY);
+
+		cHome.verifyIsPresentEventTask(titleEventNextWeek, selectViewOption.WORKWEEK, selectDayOption.ALLDAY);
+		cHome.verifyIsPresentEventTask(titleTaskNextWeek, selectViewOption.WORKWEEK, selectDayOption.ALLDAY);
+
+		cHome.verifyIsNotPresentEventTask(titleEventPreWeek, selectViewOption.WORKWEEK, selectDayOption.ALLDAY);
+		cHome.verifyIsNotPresentEventTask(titleTaskPreWeek, selectViewOption.WORKWEEK, selectDayOption.ALLDAY);
+
+		click(cHome.ELEMENT_TODAY_ACTION_BAR);
+		click(cHome.ELEMENT_PREVIOUS_BUTTON_ANY_VIEW);
+		cHome.verifyIsNotPresentEventTask(titleEventCur, selectViewOption.WORKWEEK, selectDayOption.ALLDAY);
+		cHome.verifyIsNotPresentEventTask(titleTaskCur, selectViewOption.WORKWEEK, selectDayOption.ALLDAY);
+
+		cHome.verifyIsNotPresentEventTask(titleEventNextWeek, selectViewOption.WORKWEEK, selectDayOption.ALLDAY);
+		cHome.verifyIsNotPresentEventTask(titleTaskNextWeek, selectViewOption.WORKWEEK, selectDayOption.ALLDAY);
+
+		cHome.verifyIsPresentEventTask(titleEventPreWeek, selectViewOption.WORKWEEK, selectDayOption.ALLDAY);
+		cHome.verifyIsPresentEventTask(titleTaskPreWeek, selectViewOption.WORKWEEK, selectDayOption.ALLDAY);
+	}
+	
+	public void calendarDataTest(){
 		info("Create data test");
 		hp.goToCalendarPage();
 		titleEvent = txData.getContentByArrayTypeRandom(1)+"e115595";
@@ -227,183 +412,6 @@ public class Calendar_View extends PlatformBase {
 		task.saveQuickAddTask();
 	}
 
-	@AfterMethod
-	public void afterMethod(){
-		hp.goToCalendarPage();
-		click(cHome.ELEMENT_TODAY_ACTION_BAR);
-		cHome.goToView(selectViewOption.WEEK);
-
-		cHome.deleteEventTask( titleEventMeeting, selectViewOption.WEEK, selectDayOption.ALLDAY,getDate(0,"MMM dd yyyy"));
-		cHome.deleteEventTask( titleEventCall, selectViewOption.WEEK, selectDayOption.ALLDAY,getDate(0,"MMM dd yyyy"));
-		cHome.deleteEventTask( titleEventClient, selectViewOption.WEEK, selectDayOption.ALLDAY,getDate(0,"MMM dd yyyy"));
-		cHome.deleteEventTask( titleEventHoliday, selectViewOption.WEEK, selectDayOption.ALLDAY,getDate(0,"MMM dd yyyy"));
-		cHome.deleteEventTask( titleEventAnni, selectViewOption.WEEK, selectDayOption.ALLDAY,getDate(0,"MMM dd yyyy"));
-		cHome.deleteEventTask( titleTaskMeeting, selectViewOption.WEEK, selectDayOption.ALLDAY,getDate(0,"MMM dd yyyy"));
-		cHome.deleteEventTask( titleTaskCall, selectViewOption.WEEK, selectDayOption.ALLDAY,getDate(0,"MMM dd yyyy"));
-		cHome.deleteEventTask( titleTaskClient, selectViewOption.WEEK, selectDayOption.ALLDAY,getDate(0,"MMM dd yyyy"));
-		cHome.deleteEventTask( titleTaskHoliday, selectViewOption.WEEK, selectDayOption.ALLDAY,getDate(0,"MMM dd yyyy"));
-		cHome.deleteEventTask( titleTaskAnni, selectViewOption.WEEK, selectDayOption.ALLDAY,getDate(0,"MMM dd yyyy"));
-		cHome.deleteEventTask( titleTaskCur, selectViewOption.WEEK, selectDayOption.ALLDAY,getDate(0,"MMM dd yyyy"));
-		cHome.deleteEventTask( titleEventCur, selectViewOption.WEEK, selectDayOption.ALLDAY,getDate(0,"MMM dd yyyy"));
-
-		cHome.deleteEventTask( titleTaskNext, selectViewOption.MONTH, selectDayOption.ALLDAY,getDate(1,"MMM dd yyyy"));
-		cHome.deleteEventTask( titleEventNext, selectViewOption.MONTH, selectDayOption.ALLDAY,getDate(1,"MMM dd yyyy"));
-
-		cHome.deleteEventTask( titleTaskPre, selectViewOption.MONTH, selectDayOption.ALLDAY,getDate(-1,"MMM dd yyyy"));
-		cHome.deleteEventTask( titleEventPre, selectViewOption.MONTH, selectDayOption.ALLDAY,getDate(-1,"MMM dd yyyy"));
-
-		hp.goToCalendarPage();
-		click(cHome.ELEMENT_TODAY_ACTION_BAR);
-		cHome.goToView(selectViewOption.WEEK);
-		click(cHome.ELEMENT_NEXT_BUTTON_ANY_VIEW);
-		cHome.deleteEventTask( titleEventNextWeek, selectViewOption.WEEK, selectDayOption.ALLDAY,getDate(7,"MMM dd yyyy"));
-		cHome.deleteEventTask( titleTaskNextWeek, selectViewOption.WEEK, selectDayOption.ALLDAY,getDate(7,"MMM dd yyyy"));
-
-		hp.goToCalendarPage();
-		click(cHome.ELEMENT_TODAY_ACTION_BAR);
-		cHome.goToView(selectViewOption.WEEK);
-		click(cHome.ELEMENT_PREVIOUS_BUTTON_ANY_VIEW);
-		cHome.deleteEventTask( titleTaskPreWeek, selectViewOption.WEEK, selectDayOption.ALLDAY,getDate(-7,"MMM dd yyyy"));
-		cHome.deleteEventTask( titleEventPreWeek, selectViewOption.WEEK, selectDayOption.ALLDAY,getDate(-7,"MMM dd yyyy"));
-
-		cHome.goToView(selectViewOption.MONTH);
-		click(cHome.ELEMENT_TODAY_ACTION_BAR);
-		click(cHome.ELEMENT_NEXT_BUTTON_ANY_VIEW);
-		cHome.deleteEventTask( titleEventNextMonth, selectViewOption.MONTH, selectDayOption.ALLDAY,null);
-		cHome.deleteEventTask( titleTaskNextMonth, selectViewOption.MONTH, selectDayOption.ALLDAY,null);
-
-		cHome.goToView(selectViewOption.MONTH);
-		click(cHome.ELEMENT_TODAY_ACTION_BAR);
-		click(cHome.ELEMENT_PREVIOUS_BUTTON_ANY_VIEW);
-		cHome.deleteEventTask( titleEventPreMonth, selectViewOption.MONTH, selectDayOption.ALLDAY,null);
-		cHome.deleteEventTask( titleTaskPreMonth, selectViewOption.MONTH, selectDayOption.ALLDAY,null);
-
-		driver.manage().deleteAllCookies();
-		driver.quit();
-	}
-
-	/**
-	 * Case ID:115595.
-	 * Test Case Name: Check Today view.
-	 * Pre-Condition: 
-	 * Post-Condition: 
-	 */
-	@Test
-	public  void test01_CheckTodayView() {
-		info("Test 1: Check Today view");
-		/*Step Number: 1
-		 *Step Name: Step 1: Add task/ event
-		 *Step Description: 
-			- Go to calendar
-			- Add new task/event
-		 *Input Data: 
-
-		 *Expected Outcome: 
-			Task/ event are created*/
-
-		/*Step number: 2
-		 *Step Name: Step 2: Select view
-		 *Step Description: 
-			- Select view (day/week/month/list/work week) which has not the current day
-		 *Input Data: 
-
-		 *Expected Outcome: 
-			- Calendar is displayed with the selected view(day/week/month/list/work week)*/
-
-		/*Step number: 3
-		 *Step Name: Step 3: Check displaying of task and event.
-		 *Step Description: 
-			- Click on Today on the main bar
-		 *Input Data: 
-
-		 *Expected Outcome: 
-			- Go to the current view which has the current day (today view). Mini calendar is updated to the week has current day*/
-		hp.goToCalendarPage();
-		cHome.goToView(selectViewOption.DAY);
-		click(cHome.ELEMENT_TODAY_ACTION_BAR);
-		cHome.verifyIsPresentEventTask(titleEventCur, selectViewOption.DAY, selectDayOption.ALLDAY);
-		cHome.verifyIsPresentEventTask(titleTaskCur, selectViewOption.DAY, selectDayOption.ALLDAY);
-
-		cHome.verifyIsNotPresentEventTask(titleEventNext, selectViewOption.DAY, selectDayOption.ALLDAY);
-		cHome.verifyIsNotPresentEventTask(titleTaskNext, selectViewOption.DAY, selectDayOption.ALLDAY);
-
-		cHome.verifyIsNotPresentEventTask(titleEventPre, selectViewOption.DAY, selectDayOption.ALLDAY);
-		cHome.verifyIsNotPresentEventTask(titleTaskPre, selectViewOption.DAY, selectDayOption.ALLDAY);
-	}
-
-	/**
-	 * Case ID:115596.
-	 * Test Case Name: Check displaying added task/event in work week view.
-	 * Pre-Condition: 
-	 * Post-Condition: 
-	 */
-	@Test
-	public  void test02_CheckDisplayingAddedTaskeventInWorkWeekView() {
-		info("Test 2: Check displaying added task/event in work week view");
-		/*Step Number: 1
-		 *Step Name: Step 1: Add task/ event
-		 *Step Description: 
-			- Go to calendar
-			- Add new task/event
-		 *Input Data: 
-
-		 *Expected Outcome: 
-			Task/ event are created*/
-
-		/*Step number: 2
-		 *Step Name: Step 2: Check displaying of task and event.
-		 *Step Description: 
-			- Click on Work Week on the main bar
-		 *Input Data: 
-
-		 *Expected Outcome: 
-			Event/ task is displayed in Work Week view*/
-
-		/*Step number: 3
-		 *Step Name: Step 3: Check next week/previous week
-		 *Step Description: 
-			- Click next week/previous week icon
-		 *Input Data: 
-
-		 *Expected Outcome: 
-			- Next week/previous week is displayed correctly
-			- Mini calendar is updated also*/ 
-		hp.goToCalendarPage();
-		click(cHome.ELEMENT_TODAY_ACTION_BAR);
-		Utils.pause(500);
-		cHome.goToView(selectViewOption.WORKWEEK);
-		click(cHome.ELEMENT_TODAY_ACTION_BAR);
-		cHome.verifyIsPresentEventTask(titleEventCur, selectViewOption.WORKWEEK, selectDayOption.ALLDAY);
-		cHome.verifyIsPresentEventTask(titleTaskCur, selectViewOption.WORKWEEK, selectDayOption.ALLDAY);
-
-		cHome.verifyIsNotPresentEventTask(titleEventNextWeek, selectViewOption.WORKWEEK, selectDayOption.ALLDAY);
-		cHome.verifyIsNotPresentEventTask(titleTaskNextWeek, selectViewOption.WORKWEEK, selectDayOption.ALLDAY);
-
-		cHome.verifyIsNotPresentEventTask(titleEventPreWeek, selectViewOption.WORKWEEK, selectDayOption.ALLDAY);
-		cHome.verifyIsNotPresentEventTask(titleTaskPreWeek, selectViewOption.WORKWEEK, selectDayOption.ALLDAY);
-
-		click(cHome.ELEMENT_NEXT_BUTTON_ANY_VIEW);
-		cHome.verifyIsNotPresentEventTask(titleEventCur, selectViewOption.WORKWEEK, selectDayOption.ALLDAY);
-		cHome.verifyIsNotPresentEventTask(titleTaskCur, selectViewOption.WORKWEEK, selectDayOption.ALLDAY);
-
-		cHome.verifyIsPresentEventTask(titleEventNextWeek, selectViewOption.WORKWEEK, selectDayOption.ALLDAY);
-		cHome.verifyIsPresentEventTask(titleTaskNextWeek, selectViewOption.WORKWEEK, selectDayOption.ALLDAY);
-
-		cHome.verifyIsNotPresentEventTask(titleEventPreWeek, selectViewOption.WORKWEEK, selectDayOption.ALLDAY);
-		cHome.verifyIsNotPresentEventTask(titleTaskPreWeek, selectViewOption.WORKWEEK, selectDayOption.ALLDAY);
-
-		click(cHome.ELEMENT_TODAY_ACTION_BAR);
-		click(cHome.ELEMENT_PREVIOUS_BUTTON_ANY_VIEW);
-		cHome.verifyIsNotPresentEventTask(titleEventCur, selectViewOption.WORKWEEK, selectDayOption.ALLDAY);
-		cHome.verifyIsNotPresentEventTask(titleTaskCur, selectViewOption.WORKWEEK, selectDayOption.ALLDAY);
-
-		cHome.verifyIsNotPresentEventTask(titleEventNextWeek, selectViewOption.WORKWEEK, selectDayOption.ALLDAY);
-		cHome.verifyIsNotPresentEventTask(titleTaskNextWeek, selectViewOption.WORKWEEK, selectDayOption.ALLDAY);
-
-		cHome.verifyIsPresentEventTask(titleEventPreWeek, selectViewOption.WORKWEEK, selectDayOption.ALLDAY);
-		cHome.verifyIsPresentEventTask(titleTaskPreWeek, selectViewOption.WORKWEEK, selectDayOption.ALLDAY);
-	}
-
 	/**
 	 * Case ID:115597.
 	 * Test Case Name: Check displaying added task/event in list view.
@@ -413,6 +421,7 @@ public class Calendar_View extends PlatformBase {
 	@Test
 	public  void test03_CheckDisplayingAddedTaskeventInListView() {
 		info("Test 3: Check displaying added task/event in list view");
+		calendarDataTest();
 		/*Step Number: 1
 		 *Step Name: Step 1: Add task/ event
 		 *Step Description: 
@@ -484,6 +493,7 @@ public class Calendar_View extends PlatformBase {
 	@Test
 	public  void test04_CheckDisplayingAddedTaskeventInMonthView() {
 		info("Test 4: Check displaying added task/event in month view");
+		calendarDataTest();
 		/*Step Number: 1
 		 *Step Name: Step 1: Add task/ event
 		 *Step Description: 
@@ -558,6 +568,7 @@ public class Calendar_View extends PlatformBase {
 	@Test
 	public  void test05_CheckDisplayingAddedTaskeventInWeekView() {
 		info("Test 5: Check displaying added task/event in week view");
+		calendarDataTest();
 		/*Step Number: 1
 		 *Step Name: Step 1: Add task/ event
 		 *Step Description: 
@@ -629,6 +640,7 @@ public class Calendar_View extends PlatformBase {
 	@Test
 	public  void test06_CheckDisplayingAddedTaskeventInDayView() {
 		info("Test 6: Check displaying added task/event in day view");
+		calendarDataTest();
 		/*Step Number: 1
 		 *Step Name: Step 1: Add task/ event
 		 *Step Description: 
@@ -701,6 +713,7 @@ public class Calendar_View extends PlatformBase {
 	@Test
 	public  void test07_CheckCategoryFilterInWeekView() {
 		info("Test 7: Check category filter in Week view");
+		calendarDataTest();
 		/*Step Number: 1
 		 *Step Name: Create some event/task
 		 *Step Description: 
@@ -805,6 +818,7 @@ public class Calendar_View extends PlatformBase {
 	@Test
 	public  void test08_CheckCategoryFilterInListView() {
 		info("Test 8: Check category filter in List view");
+		calendarDataTest();
 		/*Step Number: 1
 		 *Step Name: Create some events/tasks
 		 *Step Description: 

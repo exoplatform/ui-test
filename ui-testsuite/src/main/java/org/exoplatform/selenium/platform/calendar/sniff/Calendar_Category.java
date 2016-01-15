@@ -29,7 +29,7 @@ public class Calendar_Category extends PlatformBase {
 		getDefaultUserPass(userDataFilePath,defaultSheet,isUseFile,jdbcDriver,dbUrl,user,pass,sqlUser);
 		driver.get(baseUrl);
 		magAc = new ManageLogInOut(driver);
-		magAc.signIn(DATA_USER1, DATA_PASS);
+		magAc.signIn(USER_ROOT,PASS_ROOT);
 		hp = new HomePagePlatform(driver);
 		cHome= new CalendarHomePage(driver);
 		event= new EventManagement(driver);

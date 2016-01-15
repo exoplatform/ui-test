@@ -43,7 +43,7 @@ public class Calendar_Search extends PlatformBase {
 		cMang = new CalendarManagement(driver);
 		txData = new TextBoxDatabase();
 		userData = new UserDatabase();
-		magAc.signIn(DATA_USER1, DATA_PASS);
+		magAc.signIn(USER_ROOT,PASS_ROOT);
 		userData.setUserData(userDataFilePath,defaultSheet,isUseFile,jdbcDriver,dbUrl,user,pass,sqlUser);
 		txData.setContentData(texboxFilePath,defaultSheet,isUseFile,jdbcDriver,dbUrl,user,pass,sqlContent);
 		fullName = userData.fullName.get(0);

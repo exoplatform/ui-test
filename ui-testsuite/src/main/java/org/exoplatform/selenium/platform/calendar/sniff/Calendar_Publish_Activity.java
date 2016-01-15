@@ -50,7 +50,7 @@ public class Calendar_Publish_Activity  extends PlatformBase {
 		getDefaultUserPass(userDataFilePath,defaultSheet,isUseFile,jdbcDriver,dbUrl,user,pass,sqlUser);
 		driver.get(baseUrl);
 		magAc = new ManageLogInOut(driver);
-		magAc.signIn(DATA_USER1, DATA_PASS);
+		magAc.signIn(USER_ROOT,PASS_ROOT);
 		hp = new HomePagePlatform(driver);
 		cHome= new CalendarHomePage(driver);
 		event= new EventManagement(driver);
@@ -68,7 +68,6 @@ public class Calendar_Publish_Activity  extends PlatformBase {
 		fullName = userData.fullName.get(0);
 		spaceName = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		spaceDes = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
-		createDataTest();
 	}
 
 	@AfterMethod
@@ -78,15 +77,6 @@ public class Calendar_Publish_Activity  extends PlatformBase {
 		driver.quit();
 	}
 	
-/*	@AfterMethod
-	public void afterMethod(){
-		if (waitForAndGetElement(calLocOb.ELEMENT_ADD_EDIT_TASK_POPUP, 5000, 0) != null){
-			click(calLocOb.ELEMENT_BUTTON_EVENT_CANCEL_DETAILS);
-			waitForElementNotPresent(calLocOb.ELEMENT_ADD_EDIT_TASK_POPUP);
-		}
-		
-			
-	}*/
 
 	/**
 	 * Create data test
@@ -122,6 +112,7 @@ public class Calendar_Publish_Activity  extends PlatformBase {
 		String titleEvent = txData.getContentByArrayTypeRandom(1)+"r115635";
 		String content = txData.getContentByArrayTypeRandom(1)+"r115635";
 		info("Test 8: Activities should be updated after deleting of an edited recurring event");
+		createDataTest();
 		/*Step Number: 1
 		 *Step Name: <p>Step 1: Open calendar application<br data
 		-mce
@@ -191,7 +182,7 @@ public class Calendar_Publish_Activity  extends PlatformBase {
 	public  void test09_AnActivityShouldDisplayedAfterDragAndDropARecurringEvent() {
 		String titleEvent = txData.getContentByArrayTypeRandom(1)+"115636";
 		String content = txData.getContentByArrayTypeRandom(1)+"115636";
-
+		createDataTest();
 		info("Test 9: An activity should displayed after drag and drop a recurring event");
 		/*Step Number: 1
 		 *Step Name: <p>Step 1: Open calendar application<br data
@@ -262,7 +253,7 @@ public class Calendar_Publish_Activity  extends PlatformBase {
 	public  void test10_ActivityOfRecurringEventShouldBeDeletedAfterDeletingAllEvents() {
 		String titleEvent = txData.getContentByArrayTypeRandom(1)+"115637";
 		String content = txData.getContentByArrayTypeRandom(1)+"115637";
-
+		createDataTest();
 		info("Test 10: Activity of recurring event should be deleted after deleting all events");
 		/*Step Number: 1
 		 *Step Name: <p>Step 1: Open calendar application<br data
@@ -348,7 +339,7 @@ public class Calendar_Publish_Activity  extends PlatformBase {
 		String titleEvent = txData.getContentByArrayTypeRandom(1)+"115638";
 		String content = txData.getContentByArrayTypeRandom(1)+"115638";
 		String comment = hpAct.ELEMENT_ACTIVITY_EVENT_COMMENT_REPEAT_DAY.replace("$number", "5");
-		
+		createDataTest();
 		info("Test 11: A comment to event activity should be added after adding a repeat event");
 		/*Step Number: 1
 		 *Step Name: <p>Step 1: Show application calendar<br data
@@ -418,7 +409,7 @@ public class Calendar_Publish_Activity  extends PlatformBase {
 		String titleEvent = txData.getContentByArrayTypeRandom(1)+"115661";
 		String content = txData.getContentByArrayTypeRandom(1)+"115661";
 		String comment = hpAct.ELEMENT_ACTIVITY_EVENT_COMMENT_CHECK_ALL_DAY;
-		
+		createDataTest();
 		info("Test 12: Update activity for event of Space Calendar- event is updated as all day eventa space");
 		/*Step Number: 1
 		 *Step Name: - Create an event
@@ -470,7 +461,7 @@ public class Calendar_Publish_Activity  extends PlatformBase {
 		String newTitleEvent = txData.getContentByArrayTypeRandom(1)+"n115662";
 		String content = txData.getContentByArrayTypeRandom(1)+"115662";
 		String comment = hpAct.ELEMENT_ACTIVITY_EVENT_COMMENT_UPDATE_TITLE.replace("$title", newTitleEvent);
-		
+		createDataTest();
 		info("Test 13 Update activity for event of Space Calendar - event title");
 		/*Step Number: 1
 		 *Step Name: - Create an event
@@ -522,7 +513,7 @@ public class Calendar_Publish_Activity  extends PlatformBase {
 		String newContent = txData.getContentByArrayTypeRandom(1)+"n115662";
 		String content = txData.getContentByArrayTypeRandom(1)+"115662";
 		String comment = hpAct.ELEMENT_ACTIVITY_EVENT_COMMENT_UPDATE_DES.replace("$description", newContent);
-		
+		createDataTest();
 		info("Test 14 Update activity for event of Space Calendar - event description");
 		/*Step Number: 1
 		 *Step Name: - Create an event
@@ -574,7 +565,7 @@ public class Calendar_Publish_Activity  extends PlatformBase {
 		String location = txData.getContentByArrayTypeRandom(1)+"n115662";
 		String content = txData.getContentByArrayTypeRandom(1)+"115662";
 		String comment = hpAct.ELEMENT_ACTIVITY_EVENT_COMMENT_UPDATE_LOC.replace("$location", location);
-		
+		createDataTest();
 		info("Test 15 Update activity for event of Space Calendar - event location");
 		/*Step Number: 1
 		 *Step Name: - Create an event
@@ -626,6 +617,7 @@ public class Calendar_Publish_Activity  extends PlatformBase {
 		String content = txData.getContentByArrayTypeRandom(1)+"115667";
 		String link = fData.getAttachFileByArrayTypeRandom(1);
 		String comment = hpAct.ELEMENT_ACTIVITY_TASK_COMMENT_ATTACHMENT;
+		createDataTest();
 		info("Test 16 Update Task for a Space Calendar - add attachment");
 		/*Step Number: 1
 		 *Step Name: - create a task
@@ -679,7 +671,7 @@ public class Calendar_Publish_Activity  extends PlatformBase {
 		String content = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		String newContent = txData.getContentByArrayTypeRandom(1)+getRandomNumber();
 		String comment = hpAct.ELEMENT_ACTIVITY_TASK_COMMENT_UPDATE_NOTE.replace("$note", newContent);
-		
+		createDataTest();
 		info("Test 17 Update Task for a Space Calendar - edit note");
 		/*Step Number: 1
 		 *Step Name: - create a task
@@ -732,7 +724,7 @@ public class Calendar_Publish_Activity  extends PlatformBase {
 		String titleTask = txData.getContentByArrayTypeRandom(1)+"115669";
 		String content = txData.getContentByArrayTypeRandom(1)+"115669";
 		String comment = hpAct.ELEMENT_ACTIVITY_TASK_COMMENT_UPDATE_STATUS_CANCEL;
-		
+		createDataTest();
 		info("Test 18 Update Task for a space Calendar - task status");
 		/*Step Number: 1
 		 *Step Name: - Create a task
@@ -811,7 +803,7 @@ public class Calendar_Publish_Activity  extends PlatformBase {
 		String calendarColor = "purple";
 		String[] groupShare = {DATA_USER2};
 		boolean[] edit = {true};
-
+		createDataTest();
 		info("Create datatest");
 		hp.goToCalendarPage();
 		cMang.goToMenuFromMainCalendar(menuOfMainCalendar.ADDCAL);
