@@ -25,7 +25,7 @@ public class PlatformBase extends TestBase {
 	public static String DATA_USER3 = "james";
 	public static String DATA_USER4 = "demo";
 	public static String USER_ROOT = "root";
-	public static String PASS_ROOT = "gtn";
+	public static String PASS_ROOT = "12345";
 	public static String DATA_PASS = "gtn";
 	public static String DATA_NAME_USER1 = "John Smith";
 	public static String DATA_NAME_USER2 = "Mary Williams";
