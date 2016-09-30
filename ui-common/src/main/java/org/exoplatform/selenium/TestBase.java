@@ -377,7 +377,7 @@ public class TestBase {
 		try {
 			initSeleniumTestWithOutTermAndCondition();
 		} catch (Exception e) {
-			error("Can't initialize Selenium configuration.");
+			error("Can't initialize Selenium configuration.", e);
 		}
 		termsAndConditions(opParams);
 		checkPLFVersion();
@@ -390,24 +390,24 @@ public class TestBase {
 	public void termsAndConditions(Object... opParams){
 		Boolean isCreateAccount = (Boolean)(opParams.length>0 ? opParams[0]:true);
 		driver.navigate().to(plfURL);
-		info("Agreement page");
-		if (waitForAndGetElement(ELEMENT_AGREEMENT_CHECKBOX, 3000, 0, 2) != null) {
-			info("-- Checking the terms and conditions agreement... --");
-			click(ELEMENT_AGREEMENT_CHECKBOX, 2);
-			click(ELEMENT_CONTINUE_BUTTON);
-			waitForTextNotPresent("terms and conditions agreement");
-
-			info("-- Creating an Admin account: FQA... --");
-			if(isCreateAccount==true)
-				accountSetup();
+		info("NO Agreement page");
+//		if (waitForAndGetElement(ELEMENT_AGREEMENT_CHECKBOX, 3000, 0, 2) != null) {
+//			info("-- Checking the terms and conditions agreement... --");
+//			click(ELEMENT_AGREEMENT_CHECKBOX, 2);
+//			click(ELEMENT_CONTINUE_BUTTON);
+//			waitForTextNotPresent("terms and conditions agreement");
+//
+//			info("-- Creating an Admin account: FQA... --");
+//			if(isCreateAccount==true)
+//				accountSetup();
+//			firstTimeLogin = true;
+//			info("-- Administrator account (FQA) has been created successfully... --");
+//		}else if (waitForAndGetElement(ELEMENT_ROOT_PASS_ACCOUNT, 3000, 0, 2) != null){
+			//info("-- Creating an Admin account: FQA... --");
+			//accountSetup();
 			firstTimeLogin = true;
-			info("-- Administrator account (FQA) has been created successfully... --");
-		}else if (waitForAndGetElement(ELEMENT_ROOT_PASS_ACCOUNT, 3000, 0, 2) != null){
-			info("-- Creating an Admin account: FQA... --");
-			accountSetup();
-			firstTimeLogin = true;
-			info("-- Administrator account (FQA) has been created successfully... --");
-		} 
+			//info("-- Administrator account (FQA) has been created successfully... --");
+		//}
 		Utils.pause(3000);     
 	}
 

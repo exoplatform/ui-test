@@ -27,11 +27,11 @@ public class PlatformBase extends TestBase {
 	ManageAlert magAlt;
 
 	public final String DATA_USER1 = "john";
-	public final String DATA_PASS = "gtn";
+	public final String DATA_PASS = "gtngtn";
 	public final String DATA_USER2 = "mary";
 
 	public final String USER_ROOT = "root";
-	public final String PASS_ROOT = "gtngtn";
+	public final String PASS_ROOT = "gtn";
 
 	public final String DATA_USER3 = "james";
 	public final String DATA_USER4 = "demo";

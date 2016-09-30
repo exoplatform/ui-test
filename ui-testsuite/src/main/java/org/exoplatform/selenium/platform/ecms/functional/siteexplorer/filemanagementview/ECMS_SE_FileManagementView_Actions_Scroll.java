@@ -34,7 +34,7 @@ public class ECMS_SE_FileManagementView_Actions_Scroll extends PlatformBase {
 	ContextMenu cMenu;
 
 	public String DATA_USER = "john";
-	public String DATA_PASS = "gtn";
+	public String DATA_PASS = "gtngtn";
 
 	@BeforeMethod
 	public void beforeMethod(){
