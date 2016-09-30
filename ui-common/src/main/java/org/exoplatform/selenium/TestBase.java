@@ -228,7 +228,10 @@ public class TestBase {
 		//return new ChromeDriver(capabilities);
 		capabilities.setBrowserName("chrome");
 		capabilities.setPlatform(Platform.LINUX);
-		return new RemoteWebDriver(new URL(hubURL), capabilities);
+		WebDriver wd = new RemoteWebDriver(new URL(hubURL), capabilities);
+		wd.manage().window().setSize(new Dimension(1280,1024));
+		return wd;
+
 	}
 
 	/**
@@ -256,7 +259,10 @@ public class TestBase {
 		//return new InternetExplorerDriver(capabilitiesIE);
 		capabilitiesIE.setBrowserName("internet explorer");
 		capabilitiesIE.setPlatform(Platform.LINUX);
-		return new RemoteWebDriver(new URL(hubURL), capabilitiesIE);
+
+		WebDriver wd = new RemoteWebDriver(new URL(hubURL), capabilitiesIE);
+		wd.manage().window().setSize(new Dimension(1280,1024));
+		return wd;
 	}
 
 	/**
@@ -293,7 +299,9 @@ public class TestBase {
 		profile.setPreference("browser.helperApps.alwaysAsk.force", false);
 		capabilities.setBrowserName("firefox");
 		capabilities.setPlatform(Platform.LINUX);
-		return new RemoteWebDriver(new URL(hubURL), capabilities);
+		WebDriver wd = new RemoteWebDriver(new URL(hubURL), capabilities);
+		wd.manage().window().setSize(new Dimension(1280,1024));
+		return wd;
 	}
 	/**
 	 * typeUsingRobot
